@@ -1,6 +1,6 @@
 ﻿class net.wargaming.ingame.PlayerListItemRenderer extends gfx.core.UIComponent
 {
-    var iconLoader, voice_waves, hit, __get__speaking, dispatchEvent, __get__selected, _parent, vehicleLevel, gotoAndPlay, bg, __set__visible, __set__speaking, vehicleActionMarker, __set__selected;
+    var iconLoader, voice_waves, hit, dispatchEvent, _parent, vehicleLevel, gotoAndPlay, bg, vehicleActionMarker;
     function PlayerListItemRenderer()
     {
         super();
@@ -33,7 +33,7 @@
             voice_waves.setSpeaking(_speaking);
         } // end if
         //return (this.speaking());
-        null;
+        //null;
     } // End of the function
     function completeLoad(event)
     {
@@ -56,7 +56,7 @@
             this.dispatchEvent({type: "select", selected: _selected});
         } // end if
         //return (this.selected());
-        null;
+        //null;
     } // End of the function
     function __getColorTransform(schemeName)
     {

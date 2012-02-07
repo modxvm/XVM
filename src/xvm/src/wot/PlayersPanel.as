@@ -13,18 +13,35 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     Config.LoadConfigAndStat();
   }
 
+  function completeLoad(event)
+  {
+    if (Config.value("battle/disableMirroredVehicleIcons/data") != "true")
+      return;
+
+    if (m_type == "left")
+      return;
+
+    event.target._xscale = -event.target._xscale;
+    event.target._x -= event.target.__width;
+  }
+
+  // override
+  function setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount)
+  {
+    for (var i = 0; i < m_list.renderers.length; ++i)
+      m_list.renderers[i].iconLoader.addEventListener("complete", this, "completeLoad");
+
+    super.setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount);
+  }
+
   // override
   function _setNamesStr(data, sel, isColorBlind, knownPlayersCount)
   {
-/*    if (Config.value("battle/showPlayerStatictics/data") != "true")
+    if (Config.value("battle/showPlayerStatictics/data") != "true")
     {
       super._setNamesStr(data, sel, isColorBlind, knownPlayersCount);
       return;
-    }*/
-/*    var p = "";
-    for (var pp in this.m_list)
-      p += pp + ", ";
-    Logger.add(p);*/
+    }
 
     var _loc7 = "";
     var _loc5 = "";
