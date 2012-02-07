@@ -4,8 +4,6 @@
  */
 
 import wot.utils.Config;
-import wot.utils.Defines;
-import wot.utils.Stat;
 
 class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
 {
@@ -14,15 +12,13 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     super();
     col3.html = true;
     col3._width += 20;
-    Config.LoadConfig();
-    //Stat.LoadUserNames();
-    Stat.LoadStatData(Defines.COMMAND_GET_LAST_STAT);
+    Config.LoadConfigAndStat();
     iconLoader.addEventListener("complete", this, "completeLoad");
   }
 
   function completeLoad(event)
   {
-    if (Config.s_config.battle.disableMirroredVehicleIcons.data == "true")
+    if (Config.value("battle/disableMirroredVehicleIcons/data") == "true")
     {
       if (this.owner._name == "team2List")
       {

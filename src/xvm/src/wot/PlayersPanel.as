@@ -4,32 +4,27 @@
  */
 import wot.utils.Config;
 import wot.utils.Stat;
-import wot.utils.Defines;
-import wot.utils.Logger;
 
 class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 {
   function PlayersPanel()
   {
     super();
-    Config.LoadConfig();
-    //Stat.LoadUserNames();
-    Stat.LoadStatData(Defines.COMMAND_GET_LAST_STAT);
-  }
-
-  // override
-  function setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount)
-  {
-    super.setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount);
+    Config.LoadConfigAndStat();
   }
 
   // override
   function _setNamesStr(data, sel, isColorBlind, knownPlayersCount)
   {
-    var p = "";
+/*    if (Config.value("battle/showPlayerStatictics/data") != "true")
+    {
+      super._setNamesStr(data, sel, isColorBlind, knownPlayersCount);
+      return;
+    }*/
+/*    var p = "";
     for (var pp in this.m_list)
       p += pp + ", ";
-    Logger.add(p);
+    Logger.add(p);*/
 
     var _loc7 = "";
     var _loc5 = "";
@@ -53,7 +48,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         }
         else
         {
-          if (Config.s_config.battle.statColorizePanelUserNames == "true" && rating)
+          if (Config.value("battle/statColorizePanelPlayerNames/data") == "true" && rating)
           {
             var color = (rating < 49) ? 0xFF0000 : ((rating < 51) ? 0xFFFF00 : 0x00FF00);
             _loc5 = "<font color=\'#" + color.toString(16) + "\'>" + _loc5 + "</font>";

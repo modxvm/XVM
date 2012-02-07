@@ -1,7 +1,7 @@
 package helpers
 {
 	import flash.utils.ByteArray;
-	
+
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.SchemaLoadEvent;
 	import mx.rpc.xml.Schema;
@@ -11,7 +11,7 @@ package helpers
 	import mx.rpc.xml.XMLDecoder;
 	import mx.rpc.xml.XMLEncoder;
 	import mx.utils.ObjectUtil;
-	
+
 	import utils.PatchedXMLDecoder;
 
 	public final class ConfigHelper
@@ -26,7 +26,7 @@ package helpers
 			if (v == null || v == "")
 			{
 				// Convert OTMData.xml => XVM 1.0.0
-				xml = instance.EncodeXML(new OTMConfigConverter((new PatchedXMLDecoder().decode(xml))).config); 
+				xml = instance.EncodeXML(new OTMConfigConverter((new PatchedXMLDecoder().decode(xml))).config);
 				//throw new Error(xml.toXMLString());
 				v = "1.0.0";
 			}
@@ -97,7 +97,7 @@ package helpers
 
 			for each (var e:String in p)
 			{
-				// Create shild if not exist
+				// Create child if not exist
 				if (!root.hasOwnProperty(e))
 					return undefined;
 				// Shift root to next child

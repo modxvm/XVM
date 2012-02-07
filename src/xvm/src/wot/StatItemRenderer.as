@@ -18,7 +18,7 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
 
   function completeLoad(event)
   {
-    if (Config.s_config.battle.disableMirroredVehicleIcons.data == "true")
+    if (Config.value("battle/disableMirroredVehicleIcons/data") == "true")
     {
       if (this.owner._name == "team2List")
       {
@@ -32,8 +32,11 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   function update()
   {
     super.update();
-    if (data)
-      vehicleField.htmlText = Stat.DecorateField(data.label, data.vehicle);
+    if (Config.value("battle/showPlayerStatictics/data") == "true")
+    {
+      if (data)
+        vehicleField.htmlText = Stat.DecorateField(data.label, data.vehicle);
+    }
   }
 
   // override
@@ -41,7 +44,8 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   {
     if (this.owner._name == "team1List")
       vehicleField._x -= 20;
-    Stat.AddPlayerData(this, data.label, data.vehicle);
+    if (Config.value("battle/showPlayerStatictics/data") == "true")
+      Stat.AddPlayerData(this, data.label, data.vehicle);
     super.setData(data);
   }
   
