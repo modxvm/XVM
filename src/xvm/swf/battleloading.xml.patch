@@ -1,0 +1,20 @@
+--- battleloading-0.7.1.xml	2012-02-07 12:12:09.119315900 +0200
++++ battleloading.xml	2012-02-07 13:35:22.578335600 +0200
+@@ -42916,7 +42916,7 @@
+         <actions>
+           <PushData>
+             <items>
+-              <StackString value="net.wargaming.controls.LobbyPlayerListItemRenderer"/>
++              <StackString value="wot.StatItemRenderer"/>
+             </items>
+           </PushData>
+           <GetVariable/>
+@@ -42942,7 +42942,7 @@
+         <actions>
+           <PushData>
+             <items>
+-              <StackString value="net.wargaming.controls.LobbyPlayerListItemRenderer"/>
++              <StackString value="wot.StatItemRenderer"/>
+             </items>
+           </PushData>
+           <GetVariable/>

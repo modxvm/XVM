@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:ComboBox xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			 xmlns:s="library://ns.adobe.com/flex/spark" 
+			 xmlns:mx="library://ns.adobe.com/flex/mx"
+			 selectedIndex="1" change="onChange(event)">
+	<fx:Script>
+		<![CDATA[
+			protected function onChange(event:Event):void
+			{
+				dispatchEvent(new Event(Event.CHANGE));
+			}
+		]]>
+	</fx:Script>
+	<fx:Metadata>
+		[Event(name="change", type="Event")]
+	</fx:Metadata>
+	<mx:dataProvider>
+		<mx:ArrayList>
+			<fx:String>влево</fx:String>
+			<fx:String>по центру</fx:String>
+			<fx:String>вправо</fx:String>
+		</mx:ArrayList>
+	</mx:dataProvider>
+</mx:ComboBox>

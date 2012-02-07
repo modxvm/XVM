@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:HGroup xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 xmlns:validators="validators.*"
+		 xmlns:utils="utils.*"
+		 gap="0">
+	<fx:Script>
+		<![CDATA[
+			import utils.StringUtils;
+
+			public function get colorStr():String
+			{
+				return StringUtils.toHexColor(cp.selectedColor);
+			}
+			
+			public function set colorStr(value:String):void
+			{
+				c.text = value;
+				c.validateNow();
+			}
+			
+			protected function onChange(event:Event):void
+			{
+				if (event.target == cp)
+					c.text = StringUtils.toHexColor(cp.selectedColor);
+				else
+					cp.selectedColor = parseInt(c.text.substr(1), 16);
+
+				dispatchEvent(new Event(Event.CHANGE));
+			}
+		]]>
+	</fx:Script>
+	<fx:Metadata>
+		[Event(name="change", type="Event")]
+	</fx:Metadata>
+	<fx:Declarations>
+		<validators:TextColorValidator required="true" id="v" source="{c}" property="text" valid="onChange(event)"/>
+	</fx:Declarations>
+	<s:TextInput x="72" y="72" id="c" width="100%" restrict="#0-9A-Fa-f" change="c.validateNow()"/>
+	<mx:ColorPicker x="132" y="72" id="cp" change="onChange(event)"/>
+</s:HGroup>
