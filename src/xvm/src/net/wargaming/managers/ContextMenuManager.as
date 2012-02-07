@@ -1,10 +1,9 @@
 ﻿// fix decompiler errors (sirmax2)
-import gfx.managers.PopUpManager;
+//import gfx.managers.PopUpManager;
 
 class net.wargaming.managers.ContextMenuManager
 {
     var hitTest;
-    static var __get__instance;
     function ContextMenuManager()
     {
         _global.gfxExtensions = true;
@@ -35,7 +34,7 @@ class net.wargaming.managers.ContextMenuManager
         _menu = gfx.managers.PopUpManager.createPopUp(_root, "ContextMenu", {});
         if (_menu)
         {
-            _menu.show(_xmouse, _ymouse, menuGroupName, noAnim, data);
+            _menu.show(_root._xmouse, _root._ymouse, menuGroupName, noAnim, data); // was: _menu.show(_xmouse, _ymouse, menuGroupName, noAnim, data); (sirmax2)
             _menu.onMouseDown = function (args)
             {
                 if (this.hitTest(_root._xmouse, _root._ymouse, true))

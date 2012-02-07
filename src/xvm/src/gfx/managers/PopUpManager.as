@@ -1,5 +1,5 @@
 ﻿// fix decompiler errors (sirmax2)
-import gfx.core.UIComponent;
+//import gfx.core.UIComponent;
 
 class gfx.managers.PopUpManager
 {

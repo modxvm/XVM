@@ -24,15 +24,16 @@
     } // End of the function
     function indexOf(value, scope, callBack)
     {
-        var _loc2 = 0;
+        var _loc = 0;
         for (var _loc2 = 0; _loc2 < length; ++_loc2)
         {
             if (this[_loc2] == value)
             {
                 break;
             } // end if
+            ++_loc;
         } // end of for
-        var _loc4 = _loc2 == length ? (-1) : (_loc2);
+        var _loc4 = _loc == length ? (-1) : (_loc);
         if (callBack)
         {
             scope[callBack].call(scope, _loc4);

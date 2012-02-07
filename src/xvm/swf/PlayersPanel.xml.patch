@@ -1,0 +1,11 @@
+--- PlayersPanel-0.7.1.xml	2012-02-07 12:12:06.045315900 +0200
++++ PlayersPanel.xml	2012-02-07 16:56:29.701613500 +0200
+@@ -51181,7 +51181,7 @@
+         <actions>
+           <PushData>
+             <items>
+-              <StackString value="net.wargaming.ingame.PlayersPanel"/>
++              <StackString value="wot.PlayersPanel"/>
+             </items>
+           </PushData>
+           <GetVariable/>

@@ -1,6 +1,6 @@
 ﻿class gfx.controls.CoreList extends gfx.core.UIComponent
 {
-    var renderers, __set__dataProvider, createEmptyMovieClip, container, focusEnabled, tabEnabled, invalidate, __get__itemRenderer, _dataProvider, __get__dataProvider, dispatchEvent, __get__selectedIndex, __get__labelField, _labelFunction, __get__labelFunction, __width, __height, _parent, owner, __get__rendererInstanceName, _name, inspectableRendererInstanceName, __set__rendererInstanceName, __set__selectedIndex, __get__availableHeight, __get__availableWidth, __set__itemRenderer, __set__labelField, __set__labelFunction;
+    var renderers, createEmptyMovieClip, container, focusEnabled, tabEnabled, invalidate, _dataProvider, dispatchEvent, _labelFunction, __width, __height, _parent, owner, _name, inspectableRendererInstanceName;
     function CoreList()
     {
         super();
@@ -24,7 +24,7 @@
         this.resetRenderers();
         this.invalidate();
         //return (this.itemRenderer());
-        null;
+        //null;
     } // End of the function
     function get dataProvider()
     {
@@ -56,7 +56,7 @@
         _dataProvider.addEventListener("change", this, "onDataChange");
         this.invalidate();
         //return (this.dataProvider());
-        null;
+        //null;
     } // End of the function
     function get selectedIndex()
     {
@@ -68,7 +68,7 @@
         _selectedIndex = value;
         this.dispatchEvent({type: "change", index: _selectedIndex, lastIndex: _loc3});
         //return (this.selectedIndex());
-        null;
+        //null;
     } // End of the function
     function scrollToIndex(index)
     {
@@ -82,7 +82,7 @@
         _labelField = value;
         this.invalidateData();
         //return (this.labelField());
-        null;
+        //null;
     } // End of the function
     function get labelFunction()
     {
@@ -93,7 +93,7 @@
         _labelFunction = value;
         this.invalidateData();
         //return (this.labelFunction());
-        null;
+        //null;
     } // End of the function
     function itemToLabel(item)
     {
@@ -177,7 +177,7 @@
             Mouse.addListener(_loc2);
             _loc2.scrollWheel = function (delta)
             {
-                owner.scrollWheel(delta);
+                _loc2.owner.scrollWheel(delta); // was: owner.scrollWheel(delta);  is fixed correctly? (sirmax2)
             };
             _loc4.push(_loc2);
         } // end while
@@ -187,7 +187,7 @@
         } // end if
         this.setRendererList(_loc4);
         //return (this.rendererInstanceName());
-        null;
+        //null;
     } // End of the function
     function toString()
     {

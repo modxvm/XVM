@@ -11,6 +11,7 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   {
     super();
     vehicleField.html = true;
+    vehicleField._width += 20;
     Config.LoadConfig();
     iconLoader.addEventListener("complete", this, "completeLoad");
   }
@@ -38,6 +39,8 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   // override
   function setData(data)
   {
+    if (this.owner._name == "team1List")
+      vehicleField._x -= 20;
     Stat.AddPlayerData(this, data.label, data.vehicle);
     super.setData(data);
   }

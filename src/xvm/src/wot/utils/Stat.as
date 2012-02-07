@@ -17,7 +17,7 @@ class wot.utils.Stat
 
   // Misc functions
   
-  public static function log(str)
+  private static function log(str)
   {
     Logger.add(str);
   }
@@ -29,13 +29,20 @@ class wot.utils.Stat
     return pos === -1 ? str : str.slice(0, pos);
   }
 
+  public static function GetColorHtmlText(percent, txt)
+  {
+    if (!percent)
+      return txt;
+
+    var color = (percent < 49) ? 0xFF0000 : ((percent < 51) ? 0xFFFF00 : 0x00FF00);
+    return ("<font color=\'#" + color.toString(16) + "\'>" + txt + "</font>");
+  }
+
   public static function GetPercentHtmlText(percent)
   {
     if (!percent)
       return "--%";
-
-    var color = (percent < 49) ? 0xFF0000 : ((percent < 51) ? 0xFFFF00 : 0x00FF00);
-    return ("<font color=\'#" + color.toString(16) + "\'>" + percent + "%</font>");
+    return GetColorHtmlText(percent, String(percent) + "%");
   }
 
   // Logic functions
@@ -45,10 +52,19 @@ class wot.utils.Stat
     if (!s_player_ratings)
       return txt;
     var pname = CleanPlayerName(playerName);
+    // FIXIT: не будет работать с "туманом войны";
+    return Decorate(playerName, txt, Utils.indexOf(s_player_names, pname) < 15 ? "right" : "left");
+  }
+
+  public static function Decorate(playerName, txt, ratingPosition)
+  {
+    if (!s_player_ratings)
+      return txt;
+    var pname = CleanPlayerName(playerName);
     var rating = s_player_ratings[pname.toUpperCase()].rating;
-    return (Utils.indexOf(s_player_names, pname) < 15) // FIXIT: не будет работать с "туманом войны";
-      ? txt + " " + GetPercentHtmlText(rating)
-      : GetPercentHtmlText(rating) + " " + txt;
+    return (ratingPosition == "left")
+      ? GetPercentHtmlText(rating) + " " + txt
+      : txt + " " + GetPercentHtmlText(rating);
   }
 
   public static function AddPlayerData(reference, original_name, original_fieldtext)
@@ -73,12 +89,13 @@ class wot.utils.Stat
       LoadData();
   }
 
-  public static function LoadData()
+  private static var _s_is_new = true;
+  private static function LoadData()
   {
     //log("Stat.LoadData()");
 
-    var is_new = !s_loaded;
-    s_loaded = true;
+    var is_new = _s_is_new;
+    _s_is_new = false;
 
     var players_to_load = [];
     var len = 0;
@@ -107,12 +124,16 @@ class wot.utils.Stat
     }
     else
     {
-      LoadData2();
+      LoadStatData(Defines.COMMAND_RUN);
     }
   }
 
-  private static function LoadData2()
+  public static function LoadStatData(command)
   {
+    if (s_loaded)
+      return;
+    s_loaded = true;
+          
     var xml = new XML();
     xml.ignoreWhite = true;
     xml.onLoad = function(success)
@@ -140,15 +161,24 @@ class wot.utils.Stat
 
       Stat.UpdateAll();
     };
-    xml.load("stat/@RUN");
+    xml.load(command);
   }
 
-  public static function UpdateAll()
+  public static function LoadUserNames()
+  {
+    var lv= new LoadVars();
+    lv.onLoad = function(success)
+    {
+      if (!success)
+        return;
+      Stat.s_player_names = this.split(",");
+    };
+    lv.load(Defines.COMMAND_GET_USERS);
+  }
+
+  private static function UpdateAll()
   {
     //log("Stat.UpdateAll()");
-
-    if (s_player_names.length !== 30) // FIXIT: Не будет работать с "туманом войны".
-      return;
 
     for (var pname in s_player_data)
     {

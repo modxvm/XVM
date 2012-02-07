@@ -51181,7 +51181,7 @@
         <actions>
           <PushData>
             <items>
-              <StackString value="net.wargaming.ingame.PlayersPanel"/>
+              <StackString value="wot.PlayersPanel"/>
             </items>
           </PushData>
           <GetVariable/>

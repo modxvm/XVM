@@ -1,6 +1,6 @@
 ﻿class net.wargaming.ingame.PlayersPanel extends gfx.core.UIComponent
 {
-    var __set__state, m_list, m_frags, m_names, m_vehicles, players_bg, __get__type, m_state, gotoAndPlay, __get__state, panel_width, _x, gotoAndStop, __set__type;
+    var m_list, m_frags, m_names, m_vehicles, players_bg, m_state, gotoAndPlay, panel_width, _x, gotoAndStop;
     function PlayersPanel()
     {
         super();
@@ -55,7 +55,7 @@
         } // end if
         m_type = type;
         //return (this.type());
-        null;
+        //null;
     } // End of the function
     function __getStateName(state)
     {
@@ -71,7 +71,7 @@
         this.gotoAndPlay(this.__getStateName(state));
         this.update();
         //return (this.state());
-        null;
+        //null;
     } // End of the function
     function update()
     {
@@ -90,9 +90,9 @@
         this.gotoAndStop(m_type);
         panel_width = m_list._width;
         m_list.__set__itemRenderer(m_type == "left" ? ("LeftItemRendererIcon") : ("RightItemRendererIcon"));
-        function onMouseDown(button, target)
+        /* fix decompiler error (sirmax2)
+         function onMouseDown(button, target)
         {
-			/* fix decompiler errors (sirmax2)
 			if (Mouse.RIGHT == button)
             {
                 for (var _loc2 = Mouse.getTopMostEntity(); _loc2; _loc2 = _loc2._parent)
@@ -105,8 +105,8 @@
                     } // end if
                 } // end of for
             } // end if
-			*/
         } // End of the function
+        */
     } // End of the function
     function getHeight()
     {

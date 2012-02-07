@@ -1,6 +1,6 @@
 ﻿class gfx.controls.ScrollingList extends gfx.controls.CoreList
 {
-    var _scrollBar, initialized, inspectableScrollBar, _parent, container, invalidate, __get__scrollBar, _rowHeight, __get__rowHeight, _dataProvider, __get__scrollPosition, _selectedIndex, __get__selectedIndex, _disabled, __get__disabled, __set__scrollPosition, renderers, createItemRenderer, __set__height, __get__rowCount, __set__selectedIndex, __width, _name, __set__scrollBar, sizeIsInvalid, _width, __height, _height, externalRenderers, _xscale, _yscale, drawRenderers, __get__availableWidth, itemToLabel, __get__dataProvider, focusEnabled, tabEnabled, _focused, gotoAndPlay, __set__disabled, __set__rowCount, __set__rowHeight;
+    var _scrollBar, initialized, inspectableScrollBar, _parent, container, invalidate, _rowHeight, _dataProvider, _selectedIndex, _disabled, renderers, createItemRenderer, __width, _name, sizeIsInvalid, _width, __height, _height, externalRenderers, _xscale, _yscale, drawRenderers, itemToLabel, focusEnabled, tabEnabled, _focused, gotoAndPlay;
     function ScrollingList()
     {
         super();
@@ -138,7 +138,7 @@
             this.setState();
         } // end if
         //return (this.disabled());
-        null;
+        //null;
     } // End of the function
     function scrollToIndex(index)
     {
@@ -190,7 +190,7 @@
         } // end if
         this.__set__height(_loc3 * value + margin * 2 + paddingTop + paddingBottom);
         //return (this.rowCount());
-        null;
+        //null;
     } // End of the function
     function invalidateData()
     {

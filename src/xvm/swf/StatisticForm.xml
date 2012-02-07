@@ -37987,7 +37987,7 @@
         <actions>
           <PushData>
             <items>
-              <StackString value="net.wargaming.BattleStatItemRenderer"/>
+              <StackString value="wot.BattleStatItemRenderer"/>
             </items>
           </PushData>
           <GetVariable/>
@@ -38013,7 +38013,7 @@
         <actions>
           <PushData>
             <items>
-              <StackString value="net.wargaming.BattleStatItemRenderer"/>
+              <StackString value="wot.BattleStatItemRenderer"/>
             </items>
           </PushData>
           <GetVariable/>
