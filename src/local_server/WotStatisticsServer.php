@@ -3,8 +3,8 @@
 require_once("HTTP/WebDAV/Server.php");
 
 class WotStatisticsServer extends HTTP_WebDAV_Server {
-  const MAX_STATISTICS_SERVER_WAIT_TIME = 10;
-  const TIMEOUT_WAIT_TIME = 20;
+  const MAX_STATISTICS_SERVER_WAIT_TIME = 5;
+  const TIMEOUT_WAIT_TIME = 60;
 
   const COMMAND_LOG = "@LOG";
   const COMMAND_SET_USERS = "@SET_USERS";
