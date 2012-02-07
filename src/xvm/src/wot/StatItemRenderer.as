@@ -18,6 +18,8 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
 
   function completeLoad(event)
   {
+    if (this.owner._name == "team1List")
+      vehicleField._x -= 40; // why this value? (sirmax2)
     if (Config.value("battle/disableMirroredVehicleIcons/data") == "true")
     {
       if (this.owner._name == "team2List")
@@ -42,8 +44,6 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   // override
   function setData(data)
   {
-    if (this.owner._name == "team1List")
-      vehicleField._x -= 20;
     if (Config.value("battle/showPlayerStatictics/data") == "true")
       Stat.AddPlayerData(this, data.label, data.vehicle);
     super.setData(data);

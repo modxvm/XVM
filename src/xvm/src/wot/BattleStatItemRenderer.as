@@ -4,6 +4,7 @@
  */
 
 import wot.utils.Config;
+import wot.utils.Stat;
 
 class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
 {
@@ -18,9 +19,11 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
 
   function completeLoad(event)
   {
+    if (this.owner._name == "team1")
+      col3._x -= 20;
     if (Config.value("battle/disableMirroredVehicleIcons/data") == "true")
     {
-      if (this.owner._name == "team2List")
+      if (this.owner._name == "team2")
       {
         event.target._xscale = -event.target._xscale;
         event.target._x -= event.target.__width;
@@ -29,10 +32,9 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
   }
     
   // override
-  function setData(data)
+  function updateData()
   {
-    if (this.owner._name == "team1List")
-      col3._x -= 20;
-    super.setData(data);
+    super.updateData();
+    col3.htmlText = Stat.Decorate(data.label, data.vehicle, this.owner._name == "team1" ? "right" : "left");
   }
 }
