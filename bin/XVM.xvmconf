@@ -1,15 +1,17 @@
 ﻿<xvmconfig configVersion="1.0.0" editorVersion="0.0.1.a1">
   <definition>
-    <author>Nicolas Siver</author>
-    <description>Default color theme. Default components positions.</description>
-    <url>http://games.nicolasprof.com/wot-mods/overtargetmarkers</url>
-    <date>1899-11-29T22:00:20Z</date>
-    <gameVersion>0.6.6</gameVersion>
-    <modVersion>2.0.4</modVersion>
+    <author>sirmax2</author>
+    <description>Default settings.</description>
+    <url></url>
+    <date></date>
+    <gameVersion>0.7.1</gameVersion>
+    <modVersion>3.0.0</modVersion>
   </definition>
   <battle>
     <showPostmortemTips>false</showPostmortemTips>
     <disableMirroredVehicleIcons>true</disableMirroredVehicleIcons>
+    <showPlayerStatictics>true</showPlayerStatictics>
+    <statColorizePanelPlayerNames>true</statColorizePanelPlayerNames>
   </battle>
   <behaviors>
     <ally>

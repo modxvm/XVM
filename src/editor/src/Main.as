@@ -16,9 +16,9 @@ private function RefreshConfigData():void
 	try
 	{
 		d.text += ObjectUtil.toString(config) + "\n";
-		
+
 		var section:Object;
-		
+
 		section = config.definition || {};
 		this.c_definition_author.text = section.author;
 		this.c_definition_description.text = section.description;
@@ -26,10 +26,13 @@ private function RefreshConfigData():void
 		this.c_definition_date.selectedDate = section.date;
 		this.c_definition_gameVersion.text = section.gameVersion;
 		this.c_definition_modVersion.text = section.modVersion;
-		
+
 		section = config.battle || {};
 		this.c_battle_showPostmortemTips.selected = section.showPostmortemTips || true;
-		
+		this.c_battle_disableMirroredVehicleIcons.selected = section.disableMirroredVehicleIcons || false;
+		this.c_battle_showPlayerStatictics.selected = section.showPlayerStatictics || false;
+		this.c_battle_statColorizePanelPlayerNames.selected = section.statColorizePanelPlayerNames || false;
+
 		RefreshMarkers();
 	}
 	catch (ex:Error)
@@ -43,7 +46,7 @@ private function PopulateValue(path:String):*
 {
 	var paths:Array = activeBehaviors.map(
 		function(o:*, i:int, a:Array):String { return String(o) + "/" + path; });
-	var activeValues:Array = []; 
+	var activeValues:Array = [];
 	for each (var path:String in paths)
 		activeValues.push(ConfigHelper.GetConfigValue(config, path));
 
@@ -69,12 +72,12 @@ private function RefreshMarkers():void
 	try
 	{
 		var activeElements:uint = gElements.getActiveElements();
-		
+
 		dp = Mapping.filterData(activeElements);
 		adg.dataProvider = new HierarchicalData(dp);
 		adg.validateNow();
 		adg.expandAll();
-		
+
 		activeBehaviors = getActiveBehaviors();
 
 		for each (var o1:Object in dp)
@@ -129,18 +132,18 @@ private function getActiveBehaviors(comps:Array = null):Array
 		comps = [null, gPlayer, gStatus, gView, gElements];
 
 	var comp:GroupComponent = comps.pop() as GroupComponent;
-	
+
 	if (comp == null)
-		return [ "behaviors" ]; 
-	
+		return [ "behaviors" ];
+
 	var active:Array = comp.getActivePaths();
-	
+
 	var res:Array = [];
 	for each (var r:String in getActiveBehaviors(comps))
 	{
 		for each (var a:String in active)
 		  res.push(r + "/" + a);
 	}
-	
+
 	return res;
 }

@@ -28,6 +28,8 @@
 						<xs:sequence>
 							<xs:element name="showPostmortemTips" type="xs:boolean" minOccurs="0"/>
 							<xs:element name="disableMirroredVehicleIcons" type="xs:boolean" minOccurs="0"/>
+							<xs:element name="showPlayerStatistics" type="xs:boolean" minOccurs="0"/>
+							<xs:element name="statColorizePanelPlayerNames" type="xs:boolean" minOccurs="0"/>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>

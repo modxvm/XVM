@@ -28,7 +28,9 @@ package
 
 			// battle
 			c_battle_showPostmortemTips: "battle/showPostmortemTips",
-			c_battle_disableMirroredVehicleIcons: "battle/disableMirroredVehicleIcons"
+			c_battle_disableMirroredVehicleIcons: "battle/disableMirroredVehicleIcons",
+			c_battle_showPlayerStatictics: "battle/showPlayerStatictics",
+			c_battle_statColorizePanelPlayerNames: "battle/statColorizePanelPlayerNames"
 
 			// ... behaviors is not required here ...
 		};

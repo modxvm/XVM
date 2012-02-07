@@ -4,7 +4,7 @@
  */
 import net.produxion.util.XML2Object;
 import wot.utils.Defines;
-import wot.utils.Logger;
+//import wot.utils.Logger;
 import wot.utils.Utils;
 
 class wot.utils.Stat
@@ -17,11 +17,6 @@ class wot.utils.Stat
 
   // Misc functions
   
-  private static function log(str)
-  {
-    Logger.add(str);
-  }
-
   public static function CleanPlayerName(str)
   {
     str = str.toLowerCase();
@@ -92,7 +87,7 @@ class wot.utils.Stat
   private static var _s_is_new = true;
   private static function LoadData()
   {
-    //log("Stat.LoadData()");
+    //Logger.add("Stat.LoadData()");
 
     var is_new = _s_is_new;
     _s_is_new = false;
@@ -178,7 +173,7 @@ class wot.utils.Stat
 
   private static function UpdateAll()
   {
-    //log("Stat.UpdateAll()");
+    //Logger.add("Stat.UpdateAll()");
 
     for (var pname in s_player_data)
     {
