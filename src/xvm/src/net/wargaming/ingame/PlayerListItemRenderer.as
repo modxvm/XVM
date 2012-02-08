@@ -60,7 +60,7 @@
     } // End of the function
     function __getColorTransform(schemeName)
     {
-        //return (net.wargaming.managers.ColorSchemeManager.instance().getScheme(schemeName).transform);
+        return (net.wargaming.managers.ColorSchemeManager.instance().getScheme(schemeName).transform);
     } // End of the function
     function setState()
     {

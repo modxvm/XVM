@@ -90,10 +90,10 @@
         this.gotoAndStop(m_type);
         panel_width = m_list._width;
         m_list.__set__itemRenderer(m_type == "left" ? ("LeftItemRendererIcon") : ("RightItemRendererIcon"));
-        /* fix decompiler error (sirmax2)
-         function onMouseDown(button, target)
+        // fix decompiler error (sirmax2)
+        this.onMouseDown = function(button, target)
         {
-			if (Mouse.RIGHT == button)
+            if (Mouse.RIGHT == button)
             {
                 for (var _loc2 = Mouse.getTopMostEntity(); _loc2; _loc2 = _loc2._parent)
                 {
@@ -106,7 +106,6 @@
                 } // end of for
             } // end if
         } // End of the function
-        */
     } // End of the function
     function getHeight()
     {

@@ -52,6 +52,7 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   // update delegate (function name is fixed and cannot be changed)
   function updateCallback(pdata)
   {
-    vehicleField.htmlText = Stat.DecorateField(pdata.original_name, pdata.original_fieldtext);
+    vehicleField.htmlText = Stat.Decorate(pdata.original_name, pdata.original_fieldtext, 
+      this.owner._name == "team1List" ? "right" : "left");
   }
 }
