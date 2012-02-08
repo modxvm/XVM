@@ -18,6 +18,7 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
 
   function completeLoad(event)
   {
+    event.target.removeEventListener("complete", this, "completeLoad");
     if (this.owner._name == "team1List")
       vehicleField._x -= 40; // why this value? (sirmax2)
     if (Config.value("battle/disableMirroredVehicleIcons/data") == "true")

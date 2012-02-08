@@ -15,6 +15,8 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 
   function completeLoad(event)
   {
+    event.target.removeEventListener("complete", this, "completeLoad");
+          
     if (Config.value("battle/disableMirroredVehicleIcons/data") != "true")
       return;
 
@@ -26,11 +28,15 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   }
 
   // override
+  private var _iconLoaderProcessed = false;
   function setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount)
   {
-    for (var i = 0; i < m_list.renderers.length; ++i)
-      m_list.renderers[i].iconLoader.addEventListener("complete", this, "completeLoad");
-
+    if (!_iconLoaderProcessed)
+    {
+      _iconLoaderProcessed = true;
+      for (var i = 0; i < m_list.renderers.length; ++i)
+        m_list.renderers[i].iconLoader.addEventListener("complete", this, "completeLoad");
+    }
     super.setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount);
   }
 
