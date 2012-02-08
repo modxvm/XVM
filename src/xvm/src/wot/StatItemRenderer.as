@@ -46,7 +46,7 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   function setData(data)
   {
     if (Config.value("battle/showPlayerStatictics/data") == "true")
-      Stat.AddPlayerData(this, data.label, data.vehicle);
+      Stat.AddPlayerData(this, data.label, data.vehicle, data.team == "team1" ? "ally" : "enemy");
     super.setData(data);
   }
   
@@ -54,6 +54,6 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   function updateCallback(pdata)
   {
     vehicleField.htmlText = Stat.Decorate(pdata.original_name, pdata.original_fieldtext, 
-      this.owner._name == "team1List" ? "right" : "left");
+      pdata.team == "ally" ? "right" : "left");
   }
 }

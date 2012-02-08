@@ -62,7 +62,7 @@ class wot.utils.Stat
       : txt + " " + GetPercentHtmlText(rating);
   }
 
-  public static function AddPlayerData(reference, original_name, original_fieldtext)
+  public static function AddPlayerData(reference, original_name, original_fieldtext, team)
   {
     if (!original_name)
       return;
@@ -76,6 +76,7 @@ class wot.utils.Stat
         reference: reference,
         original_name: original_name,
         original_fieldtext: original_fieldtext,
+        team: team,
         loaded: false
       };
     }
