@@ -25,6 +25,7 @@
   function init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt);
   function updateState(newState, isImmediate);
   function configUI();
+  function draw();
   function populateData();
   function updateMarkerLabel();
 }

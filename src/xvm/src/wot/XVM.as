@@ -105,11 +105,18 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     m_currentHealth = m_curHealth;
 
     super.configUI();
-
+    
     if (Config.value("battle/drawGrid/data") == "true")
       GraphicsUtil.drawGrid(grid, -50, -50, 100, 100, 0xFFFF00, 30);
 
     updateStyle();
+  }
+
+  function draw()
+  {
+    super.draw();
+    if (iconLoader != null && iconLoader.initialized)
+      iconLoader.addEventListener("complete", this, "XVMIconCompleteLoad");
   }
 
   // override
@@ -305,6 +312,31 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     GraphicsUtil.setColor(this.hbBar, hb.currColor); //colorizing health bar
   }
 
+  function XVMIconCompleteLoad(event)
+  {
+    // Vehicle Icon
+    var playerStatus = (m_entityName == "enemy") ? "enemy" : "friend";
+    var p_contourIcon = "components/" + playerStatus + "/contourIcon/";
+    var iconColor: Color = new Color(iconLoader);
+    var tintColor: Number = Number(Config.value(p_contourIcon + "tint/attributes/color"));
+    var tintAmount: Number = Number(Config.value(p_contourIcon + "tint/attributes/amount")) * 0.01;
+    var tintRatio: Number;
+
+    var iconTransform: Object = iconColor.getTransform();
+    iconTransform.rb = (Number(tintColor) >> 16);
+    iconTransform.gb = (Number(tintColor) >> 8) & 0xff;
+    iconTransform.bb = (Number(tintColor) & 0xff);
+    iconTransform.ra = 0;
+    iconTransform.ga = 0;
+    iconTransform.ba = 0;
+    tintRatio = tintAmount / (1 - ((iconTransform.ra + iconTransform.ga + iconTransform.ba) / 300));
+    iconTransform.rb *= tintRatio;
+    iconTransform.gb *= tintRatio;
+    iconTransform.bb *= tintRatio;
+    iconTransform.ra = iconTransform.ga = iconTransform.ba = (1 - tintAmount) * 100;
+    iconColor.setTransform(iconTransform);
+  }
+
   function XVMPopulateData()
   {
     var playerStatus = (m_entityName == "enemy") ? "enemy" : "friend";
@@ -345,25 +377,12 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     // Level Icon
     levelIcon.gotoAndStop(m_level);
 
-    // Vehicle Icon
-    var iconColor: Color = new Color(iconLoader);
-    var tintColor: Number = Number(Config.value(p_contourIcon + "tint/attributes/color"));
-    var tintAmount: Number = Number(Config.value(p_contourIcon + "tint/attributes/amount")) * 0.01;
-    var tintRatio: Number;
-
-    var iconTransform: Object = iconColor.getTransform();
-    iconTransform.rb = (Number(tintColor) >> 16);
-    iconTransform.gb = (Number(tintColor) >> 8) & 0xff;
-    iconTransform.bb = (Number(tintColor) & 0xff);
-    iconTransform.ra = 0;
-    iconTransform.ga = 0;
-    iconTransform.ba = 0;
-    tintRatio = tintAmount / (1 - ((iconTransform.ra + iconTransform.ga + iconTransform.ba) / 300));
-    iconTransform.rb *= tintRatio;
-    iconTransform.gb *= tintRatio;
-    iconTransform.bb *= tintRatio;
-    iconTransform.ra = iconTransform.ga = iconTransform.ba = (1 - tintAmount) * 100;
-    iconColor.setTransform(iconTransform);
+    // Vehicle Type Icon
+    if (iconLoader != null && iconLoader.initialized)
+    {
+      iconLoader.addEventListener("complete", this, "XVMIconCompleteLoad");
+      XVMIconCompleteLoad(null);
+    }
 
     // Combat Scroll Text
     cst = {
@@ -465,8 +484,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     actionMarker._y = Number(Config.value(b_path + "actionMarker/attributes/y"));
 
     // Vehicle Icon
-    iconLoader._x = Number(Config.value(b_path + "contourIcon/attributes/x")) - (iconLoader._width / 2);
-    iconLoader._y = Number(Config.value(b_path + "contourIcon/attributes/y")) - (iconLoader._heigth / 2);
+    iconLoader._x = Number(Config.value(b_path + "contourIcon/attributes/x")) - iconLoader.content._width / 2;
+    iconLoader._y = Number(Config.value(b_path + "contourIcon/attributes/y")) - iconLoader.content._heigth / 2;
     iconLoader._alpha = Number(Config.value(b_path + "contourIcon/attributes/alpha"));
     iconLoader._visible = Config.value(b_path + "contourIcon/attributes/visible") == "true";
 
