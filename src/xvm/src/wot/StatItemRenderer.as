@@ -32,25 +32,28 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   }
 
   // override
+  function setData(data)
+  {
+    //wot.utils.Logger.addObject(data, "data");
+    if (data)
+    {
+      if (Config.value("battle/showPlayerStatictics/data") == "true")
+        Stat.AddPlayerData(this, data.label, data.vehicle, this.owner._name == "team1List" ? "ally" : "enemy");
+    }
+    super.setData(data);
+  }
+
+  // override
   function update()
   {
     super.update();
     if (Config.value("battle/showPlayerStatictics/data") == "true")
     {
       if (data)
-        vehicleField.htmlText = Stat.Decorate(data.label, data.vehicle, data.team == "team1" ? "ally" : "enemy");
+        vehicleField.htmlText = Stat.Decorate(data.label, data.vehicle, this.owner._name == "team1List" ? "right" : "left");
     }
   }
 
-  // override
-  function setData(data)
-  {
-    //wot.utils.Logger.addObject(data, "data");
-    if (Config.value("battle/showPlayerStatictics/data") == "true")
-      Stat.AddPlayerData(this, data.label, data.vehicle, data.team == "team1" ? "ally" : "enemy");
-    super.setData(data);
-  }
-  
   // update delegate (function name is fixed and cannot be changed)
   function updateCallback(pdata)
   {
