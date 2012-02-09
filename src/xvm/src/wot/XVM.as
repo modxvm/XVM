@@ -484,8 +484,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     actionMarker._y = Number(Config.value(b_path + "actionMarker/attributes/y"));
 
     // Vehicle Icon
-    iconLoader._x = Number(Config.value(b_path + "contourIcon/attributes/x")) - iconLoader.content._width / 2;
-    iconLoader._y = Number(Config.value(b_path + "contourIcon/attributes/y")) - iconLoader.content._heigth / 2;
+    iconLoader._x = Number(Config.value(b_path + "contourIcon/attributes/x")) - iconLoader._width / 2;
+    iconLoader._y = Number(Config.value(b_path + "contourIcon/attributes/y")) - iconLoader._height / 2;
     iconLoader._alpha = Number(Config.value(b_path + "contourIcon/attributes/alpha"));
     iconLoader._visible = Config.value(b_path + "contourIcon/attributes/visible") == "true";
 
