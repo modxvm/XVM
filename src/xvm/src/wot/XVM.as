@@ -329,13 +329,17 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     vNameField.text = m_vname;
 
     // Vehicle Type Marker
-    var scaleattr = Config.value(p_vehicleIcon + "scale/attributes");
+    var scale = {
+      x: Config.value(p_vehicleIcon + "scale/attributes/x"),
+      y: Config.value(p_vehicleIcon + "scale/attributes/y"),
+      maxScale: Config.value(p_vehicleIcon + "scale/attributes/maxScale")
+    }
     for (var childName in marker.marker)
     {
       var child = marker.marker[childName];
-      child._x += scaleattr.x * scaleattr.maxScale / 100;
-      child._y += scaleattr.y * scaleattr.maxScale / 100;
-      child._xscale = child._yscale = scaleattr.maxScale;
+      child._x += scale.x * scale.maxScale / 100;
+      child._y += scale.y * scale.maxScale / 100;
+      child._xscale = child._yscale = scale.maxScale;
     };
 
     // Level Icon
