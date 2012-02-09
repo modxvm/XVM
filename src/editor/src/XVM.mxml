@@ -199,9 +199,10 @@
 			</s:Panel>
 			<s:Panel x="0" y="107" width="800" height="348" title="Общие настройки" enabled="true" skinClass="skins.MyPanelSkin" dropShadowVisible="false">
 				<s:CheckBox x="10" y="10" label="Показывать всплывающую панель после смерти" selected="true" id="c_battle_showPostmortemTips" change="valueChanged(event)"/>
-				<s:CheckBox x="10" y="30" label="Отключить зеркалирование иконок танков" selected="false" id="c_battle_disableMirroredVehicleIcons" change="valueChanged(event)"/>
-				<s:CheckBox x="10" y="50" label="Включить статистику игроков (Оленемер)" selected="false" id="c_battle_showPlayerStatictics" change="valueChanged(event)"/>
-				<s:CheckBox x="10" y="70" label="Подсветка игроков в ушах в зависимости от статистики" selected="false" id="c_battle_statColorizePanelPlayerNames" change="valueChanged(event)"/>
+				<s:CheckBox x="10" y="30" label="Показывать сетку координат" selected="true" id="c_battle_drawGrid" change="valueChanged(event)"/>
+				<s:CheckBox x="10" y="50" label="Отключить зеркалирование иконок танков" selected="false" id="c_battle_disableMirroredVehicleIcons" change="valueChanged(event)"/>
+				<s:CheckBox x="10" y="70" label="Включить статистику игроков (Оленемер)" selected="false" id="c_battle_showPlayerStatictics" change="valueChanged(event)"/>
+				<s:CheckBox x="10" y="90" label="Подсветка игроков в ушах в зависимости от статистики" selected="false" id="c_battle_statColorizePanelPlayerNames" change="valueChanged(event)"/>
 			</s:Panel>
 		</s:NavigatorContent>
 		<s:NavigatorContent label="Информация" width="100%" height="100%" id="pgInformation">

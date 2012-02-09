@@ -13,6 +13,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   var healthField: TextField;
   var healthRatio: TextField;
   var xvmHealthBar: MovieClip;
+  var grid: MovieClip;
 
   // Private members
   var m_showExInfo: Boolean = false;
@@ -49,6 +50,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     xvmHealthBar = createEmptyMovieClip("xvmHealthBar", getNextHighestDepth());
     healthField = createTextField("HealthField", getNextHighestDepth(), 0, 0, 78, 20);
     healthRatio = createTextField("HealthRatio", getNextHighestDepth(), 0, 0, 78, 20);
+    
+    grid = createEmptyMovieClip("grid", getNextHighestDepth());
   }
 
   // override
@@ -70,7 +73,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   // override
   function updateHealth(curHealth)
   {
-    m_curHealth = curHealth;// TODO: check >= 0 ? curHealth : 0;
+    m_curHealth = curHealth >= 0 ? curHealth : 0;
     setupNewHealth(curHealth, m_maxHealth);
     updateHealthUI(curHealth, m_maxHealth);
   }
@@ -100,7 +103,12 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   function configUI()
   {
     m_currentHealth = m_curHealth;
+
     super.configUI();
+
+    if (Config.value("battle/drawGrid/data") == "true")
+      GraphicsUtil.drawGrid(grid, -50, -50, 100, 100, 0xFFFF00, 30);
+
     updateStyle();
   }
 
@@ -471,14 +479,14 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     // Health Field
     healthField.textColor = XVMColorWithFallback(Config.value(b_path + "currentHealth/attributes/color"));
     healthField._x = Number(Config.value(b_path + "currentHealth/attributes/x"));
-    healthField._y = Number(Config.value(b_path + "currentHealth/attributes/y")) + 3; // sirmax: why +3?
+    healthField._y = Number(Config.value(b_path + "currentHealth/attributes/y")) + 2; // sirmax: why this value?
     healthField._alpha = Number(Config.value(b_path + "currentHealth/attributes/alpha"));
     healthField._visible = Config.value(b_path + "currentHealth/attributes/visible") == "true";
 
     // Health Ratio
     healthRatio.textColor = XVMColorWithFallback(Config.value(b_path + "healthRatio/attributes/color"));
     healthRatio._x = Number(Config.value(b_path + "healthRatio/attributes/x"));
-    healthRatio._y = Number(Config.value(b_path + "healthRatio/attributes/y")) + 3; // sirmax: why +3?
+    healthRatio._y = Number(Config.value(b_path + "healthRatio/attributes/y")) + 2; // sirmax: why this value?
     healthRatio._alpha = Number(Config.value(b_path + "healthRatio/attributes/alpha"));
     healthRatio._visible = Config.value(b_path + "healthRatio/attributes/visible") == "true";
 

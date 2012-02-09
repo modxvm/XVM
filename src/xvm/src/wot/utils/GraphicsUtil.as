@@ -35,6 +35,36 @@ class wot.utils.GraphicsUtil
     target.endFill();
   }
 
+  public static function drawGrid(target:MovieClip, x:Number, y:Number,
+    width: Number, height: Number, color: Number, alpha: Number)
+  {
+    with (target)
+    {
+      clear();
+      beginFill(0, 0);
+      lineStyle(1, color, alpha);
+      moveTo(0, y);
+      lineTo(0, y + height);
+      moveTo(x, 0);
+      lineTo(x + width, 0);
+      for (var i = x + x % 10; i <= x + width; i += 10)
+      {
+        moveTo(i, y + height / 2 - 2);
+        lineTo(i, y + height / 2 + 2);
+      }
+      for (var i = y + y % 10; i <= y + width; i += 10)
+      {
+        moveTo(x + width / 2 - 2, i);
+        lineTo(x + width / 2 + 2, i);
+      }
+      endFill();
+      _x = 0;
+      _y = 0;
+      _alpha = 100;
+      _visible = true;
+    }
+  }
+  
   public static function colorByRatio($value:Number, $start:Number, $end:Number):Number
   {
     var r: Number = $start >> 16;

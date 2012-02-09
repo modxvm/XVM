@@ -25,6 +25,7 @@ package helpers
 			Copy("definition/game-version", "definition/gameVersion");
 			Copy("definition/mod-version-min", "definition/modVersion");
 			Copy("battle/showPostmortemTips", "battle/showPostmortemTips");
+			Copy("battle/drawGrid", "battle/drawGrid");
 
 			xvm["behaviors"] = {};
 			ConvertComponents();
@@ -45,7 +46,7 @@ package helpers
 		{
 			var value:* = ConfigHelper.GetConfigValue(otm, otmpath);
 			//dbg.push(otmpath + "=" + ObjectUtil.toString(value));
-			
+
 			if (value != null)
 				ConfigHelper.SetConfigValue(xvm, xvmpath, value);
 		}
@@ -159,7 +160,7 @@ package helpers
 					damageMessage += cstPostfix;
 
 				var blowupMessage:String = ConfigHelper.GetConfigValue(otm, op + "combatScrollText/message");
-				
+
 				for each (var xvmpath:String in xp)
 				{
 					ConfigHelper.SetConfigValue(xvm, xvmpath + "/combatScrollText/damageMessage", damageMessage);

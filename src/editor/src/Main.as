@@ -29,6 +29,7 @@ private function RefreshConfigData():void
 
 		section = config.battle || {};
 		this.c_battle_showPostmortemTips.selected = section.showPostmortemTips || true;
+		this.c_battle_drawGrid.selected = section.drawGrid || true;
 		this.c_battle_disableMirroredVehicleIcons.selected = section.disableMirroredVehicleIcons || false;
 		this.c_battle_showPlayerStatictics.selected = section.showPlayerStatictics || false;
 		this.c_battle_statColorizePanelPlayerNames.selected = section.statColorizePanelPlayerNames || false;

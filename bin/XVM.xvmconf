@@ -11,5 +11,7 @@
     <disableMirroredVehicleIcons>true</disableMirroredVehicleIcons>
     <showPlayerStatictics>false</showPlayerStatictics>
     <statColorizePanelPlayerNames>true</statColorizePanelPlayerNames>
+    <showPostmortemTips>true</showPostmortemTips>
+    <drawGrid>false</drawGrid>
   </battle>
 </xvmconfig>
