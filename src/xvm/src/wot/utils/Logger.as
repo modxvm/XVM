@@ -6,7 +6,7 @@ import wot.utils.Defines;
  
 class wot.utils.Logger
 {
-  public static function add(str) 
+  public static function add(str: String)
   {
     str = str.split(":").join(".");
     str = str.split("/").join("_");
@@ -24,5 +24,12 @@ class wot.utils.Logger
     }
 
     p.load(Defines.COMMAND_LOG + " " + str);
+  }
+  
+  public static function addObject(obj: Object, name: String)
+  {
+    add((name || "[obj]") + ".");
+    for (var i in obj)
+      add("  " + i + " = " + obj[i]);
   }
 }

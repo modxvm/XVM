@@ -9,29 +9,28 @@ import wot.utils.Stat;
 class wot.utils.Config
 {
   // Private vars
-  private static var s_config = null;
-  private static var s_loaded = false;
+  private static var s_config: Object = null;
+  private static var s_loaded: String = "";
+  private static var s_load_last_stat: Boolean = false;
 
   // Load OTM mod config; config data is shared between all marker instances, so
   // it should be loaded only once per session. _ConfigLoaded flag indicates that
   // we've already initialized config loading process.
-  public static function LoadConfig()
+  public static function LoadConfig(filename: String)
   {
-    if (s_loaded)
+    var fn = filename || Defines.DEFAULT_CONFIG_NAME;
+    if (s_loaded == fn)
       return;
-
-    s_loaded = true;
-
-    ReloadConfig(Defines.DEFAULT_CONFIG_NAME);
+    s_loaded = fn;
+    ReloadConfig(fn);
   }
 
-  private static var s_load_last_stat = false;
-  public static function LoadConfigAndStat()
+  public static function LoadConfigAndStat(filename: String)
   {
     s_load_last_stat = true;
-    LoadConfig();
+    LoadConfig(filename);
   }
-  
+
   public static function ReloadConfig(filename)
   {
     var xml:XML = new XML();
@@ -41,9 +40,19 @@ class wot.utils.Config
       if (!success)
         return;
 
-      Config.s_config = XML2Object.deserialize(this).xvmconfig;
-      if (Config.s_load_last_stat && Config.value("battle/showPlayerStatictics/data") == "true")
-        Stat.LoadStatData(Defines.COMMAND_GET_LAST_STAT);
+      Config.s_config = XML2Object.deserialize(this);
+      if (Config.s_config.hasOwnProperty("xvmconfig"))
+      {
+        // new config
+        Config.s_config = Config.s_config["xvmconfig"];
+        if (Config.s_load_last_stat && Config.value("battle/showPlayerStatictics/data") == "true")
+          Stat.LoadStatData(Defines.COMMAND_GET_LAST_STAT);
+      }
+      else
+      {
+        // legacy config
+        Config.s_config = Config.s_config["overTargetMarkers"];
+      }
     };
     xml.load(filename);
   }

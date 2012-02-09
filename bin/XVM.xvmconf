@@ -9,7 +9,7 @@
   </definition>
   <battle>
     <disableMirroredVehicleIcons>true</disableMirroredVehicleIcons>
-    <showPlayerStatictics>true</showPlayerStatictics>
+    <showPlayerStatictics>false</showPlayerStatictics>
     <statColorizePanelPlayerNames>true</statColorizePanelPlayerNames>
   </battle>
 </xvmconfig>

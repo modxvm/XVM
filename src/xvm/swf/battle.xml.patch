@@ -1,0 +1,20 @@
+--- battle-0.7.1.xml	2012-02-08 16:24:31.643102900 +0200
++++ battle.xml	2012-02-08 23:02:48.846573500 +0200
+@@ -170307,7 +170307,7 @@
+         <actions>
+           <PushData>
+             <items>
+-              <StackString value="net.wargaming.ingame.VehicleMarkerEnemy"/>
++              <StackString value="wot.ingame.VehicleMarkerEnemy"/>
+             </items>
+           </PushData>
+           <GetVariable/>
+@@ -170333,7 +170333,7 @@
+         <actions>
+           <PushData>
+             <items>
+-              <StackString value="net.wargaming.ingame.VehicleMarkerAlly"/>
++              <StackString value="wot.ingame.VehicleMarkerAlly"/>
+             </items>
+           </PushData>
+           <GetVariable/>

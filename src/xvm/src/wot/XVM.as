@@ -4,112 +4,73 @@ import com.greensock.easing.Linear;
 import com.greensock.easing.Cubic;
 import wot.utils.Config;
 import wot.utils.GraphicsUtil;
-import wot.utils.Stat;
+//import wot.utils.Stat;
 
 class wot.XVM extends net.wargaming.ingame.VehicleMarker
 {
-  // static members
-  static var s_userNames:Array = [];
-
   // UI Elements
-  var actionMarker:MovieClip;
-  var damageHolder:MovieClip;
-  var contourIcon:MovieClip;
-  var levelIcon:MovieClip;
-  var pNameField:TextField;
-  var vNameField:TextField;
-  var healthField:TextField;
-  var healthRatio:TextField;
-  var healthBar:MovieClip;
-  var marker:MovieClip;
+  var damageHolder: MovieClip;
+  var healthField: TextField;
+  var healthRatio: TextField;
+  var xvmHealthBar: MovieClip;
 
   // Private members
-  var m_showExInfo:Boolean = false;
-  var m_currentHealth:Number;
+  var m_showExInfo: Boolean = false;
+  var m_currentHealth: Number;
   var m_damageFieldNumber: Number = 0;
-  var m_showMaxHealth:Boolean;
+  var m_showMaxHealth: Boolean;
 
-  //TextFields
+  // TextFields
   var textFields: Array;
   var textFieldConfig;
 
-  // Icon Loader
-  var loader : MovieClipLoader;
-  var iconHolder : MovieClip;
-
-  //CST Settings
+  // CST Settings
   static var HIT_KIND_ABSOLUTE = 1;
   static var HIT_KIND_RELATIVE = 2;
-  var cst:Object = {};
+  var cst: Object = {};
 
-  //Healthbar Settings
-  var hbBar : MovieClip;
-  var hbDamageBar : MovieClip;
-  var hbBorder : Number;
-  var hbWidth : Number;
-  var hbDamageTime : Number;
-  var hbCurrColor : Number;
-  var hbColor : Number;
-  var hbLColor : Number;
+  // Healthbar Settings
+  var hbBar: MovieClip;
+  var hbDamageBar: MovieClip;
+  var hb: Object = {};
 
-  /**
-   * OVERRIDES
-   */
-
-  // ctor
   function XVM()
   {
     super();
-    Config.LoadConfig();
-    this.actionMarker = this.attachMovie("ActionMarkers", "actionMarkers", 1, {_x: 0, _y: 0});
+
+    //wot.utils.Logger.add("XVM::ctor()");
+
+    Config.LoadConfigAndStat("OTMData.xml");
+
+    pNameField._width += 20;
+    vNameField._width += 20;
+    
+    damageHolder = createEmptyMovieClip("damageHolder", getNextHighestDepth());
+    xvmHealthBar = createEmptyMovieClip("xvmHealthBar", getNextHighestDepth());
+    healthField = createTextField("HealthField", getNextHighestDepth(), 0, 0, 78, 20);
+    healthRatio = createTextField("HealthRatio", getNextHighestDepth(), 0, 0, 78, 20);
   }
 
-  // override initialization
+  // override
   function init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt)
   {
-	var pname = pFullName.toUpperCase().split("[")[0];
-    var found:Boolean = false;
-	for (var i = 0; i < s_userNames.length; i++)
-	{
-		if (s_userNames[i] == pname)
-		{
-			found == true;
-			break;
-		}
-	}
-	if (!found)
-		s_userNames.push(pname);
-
     // Use currently remembered extended / normal status for new markers
     m_showExInfo = s_showExInfo;
-	//gfx.io.GameDelegate.addCallBack("XVM.configChanged", this, "updateMarkerLabel");
-	//gfx.io.GameDelegate.addCallBack("XVM.configChanged", this, "test");
-    //Config.listeners.push([this, "test"]);
 
     super.init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt);
   }
 
-  function test()
+  // override
+  function showHealthBar(show)
   {
-	  showDamage("TEST");
+    healthBar.stop();
+    healthBar._visible = false;
   }
-
-  // system colors support (fix decompiler error)
-  function get colorsManager()
-  {
-    return (net.wargaming.managers.ColorSchemeManager.instance);
-  }
-
-  // system colors support (fix decompiler error)
-  function get colorSchemeName()
-  {
-    return ((this.vehicleDestroyed() ? ("vm_dead_") : ("vm_")) + m_entityName);
-  }
-
-  // override health changing
+  
+  // override
   function updateHealth(curHealth)
   {
-    m_curHealth = curHealth >= 0 ? (curHealth) : (0);
+    m_curHealth = curHealth;// TODO: check >= 0 ? curHealth : 0;
     setupNewHealth(curHealth, m_maxHealth);
     updateHealthUI(curHealth, m_maxHealth);
   }
@@ -118,8 +79,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   function updateState(newState, isImmediate)
   {
     super.updateState(newState, isImmediate);
-
-    this.updateStyle();
+    updateStyle();
   }
 
   // override
@@ -133,29 +93,26 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     // new markers can refer to it when rendered initially
     s_showExInfo = show;
 
-    this.updateStyle();
+    updateStyle();
   }
 
   // override
   function configUI()
   {
     m_currentHealth = m_curHealth;
-
     super.configUI();
-
-    this.updateStyle();
+    updateStyle();
   }
 
   // override
   function populateData()
   {
-	//Stat.ReloadStat("stat/@log populateData " + m_playerFullName.toUpperCase() + ".xml");
     // FIXIT: it's clear, but may be not optimal
     if (!super.populateData())
       return false;
 
     updateCurrentColor(m_currentHealth, m_maxHealth);
-    OTMPopulateData();
+    XVMPopulateData();
     setupNewHealth(m_curHealth, m_maxHealth);
 
     return true;
@@ -176,26 +133,27 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   //  this.gotoAndStop(this.colorsManager.getAliasColor(this.colorSchemeName));
   //}
 
+  // override
   function updateMarkerLabel()
   {
-	// FIXIT: it's clear, but may be not optimal
+    // FIXIT: it's clear, but may be not optimal
     super.updateMarkerLabel();
 
-    // Update OTM layout for the current marker state
-    this.OTMPopulateData();
-    this.updateStyle();
+    // Update layout for the current marker state
+    XVMPopulateData();
+    updateStyle();
   }
 
   /**
    * MAIN
    */
 
-  function OTMColorWithFallback(value)
+  function XVMColorWithFallback(value)
   {
     return Number(value || this.colorsManager.getRGB(this.colorSchemeName));
   }
 
-  function OTMFormatText(format, curHealth, maxHealth)
+  function XVMFormatText(format, curHealth, maxHealth)
   {
     // AS 2 doesn't have String.replace? Shame on them. Let's use our own square wheel.
     format = format.split("{{hp}}").join(curHealth);
@@ -207,13 +165,57 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     return format;
   }
 
+  function XVMCreateNewTextFormat(format_config_path: String)
+  {
+    if (!format_config_path)
+      return null;
+
+    if (format_config_path.charAt(format_config_path.length - 1) != "/")
+      format_config_path += "/";
+
+    format_config_path += "attributes/";
+
+    return new TextFormat(
+      Config.value(format_config_path + "font") || "$FieldFont",
+      Number(Config.value(format_config_path + "size")),
+      0x000000,
+      Config.value(format_config_path + "bold") == "true",
+      false, false, null, null,
+      String(Config.value(format_config_path + "align")));
+  }
+  
+  function XVMCreateTextField(data)
+  {
+    var textField = createTextField("vehicleText", getNextHighestDepth(), 0, 0, 140, 31);
+    var textFormat: TextFormat = XVMCreateNewTextFormat(textFieldConfig + "format");
+    if (data.attributes.bold)
+      textFormat.bold = true;
+    textField.setNewTextFormat(textFormat);
+    textField.filters = [GraphicsUtil.createShadowFilter(Config.value(textFieldConfig + "filter"))];
+
+    textField.textColor = XVMColorWithFallback(data.attributes.color);
+    textField._x = Number(data.attributes.x) - textField._width / 2;
+    textField._y = Number(data.attributes.y) - textField._height / 2;
+    textField._alpha = Number(data.attributes.alpha);
+    textField._visible = data.attributes.visible == "true";
+
+    return { field: textField, format: String(data.attributes.format) };
+  }
+
+  function XVMRemoveTextFields()
+  {
+    for (var i in this.textFields)
+      this.textFields[i].field.removeTextField();
+    this.textFields = [];
+  }
+
   // Damage Visualization
-  function removeTextField(f:TextField)
+  function removeTextField(f: TextField)
   {
     f.removeTextField();
   }
 
-  function showDamage(damageValue:String)
+  function showDamage(damageValue: String)
   {
     if (!cst.enabled)
       return;
@@ -221,8 +223,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     m_damageFieldNumber += 1;
 
     var format: TextFormat = new TextFormat();
-    var damageField = damageHolder.createTextField("field" + m_damageFieldNumber,
-      damageHolder.getNextHighestDepth(), 0, 0, 140, 20);
+    var damageField = damageHolder.createTextField("field" + m_damageFieldNumber, damageHolder.getNextHighestDepth(), 0, 0, 140, 20);
     var animation: TimelineLite = new TimelineLite({
       onComplete:this.removeTextField, onCompleteParams:[damageField]});
 
@@ -268,9 +269,9 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
       //Flow bar animation
       TweenLite.killTweensOf(this.hbDamageBar);
-      this.hbDamageBar._x = hbBorder + hbWidth * (curHealth / maxHealth);
+      this.hbDamageBar._x = hb.border + hb.width * (curHealth / maxHealth);
       this.hbDamageBar._xscale = this.hbDamageBar._xscale + 100 * (-delta / maxHealth);
-      TweenLite.to(this.hbDamageBar, hbDamageTime, {_xscale:0, ease:Cubic.easeIn});
+      TweenLite.to(this.hbDamageBar, hb.damageTime, {_xscale:0, ease:Cubic.easeIn});
     }
   }
 
@@ -282,267 +283,221 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     this.hbBar._xscale = ratio;
 
     for (var i in this.textFields)
-      this.textFields[i].field.text = this.OTMFormatText(this.textFields[i].format, curHealth, maxHealth);
+      this.textFields[i].field.text = this.XVMFormatText(this.textFields[i].format, curHealth, maxHealth);
   }
 
   function updateCurrentColor(curHealth, maxHealth)
   {
-    var fullColor:Number = OTMColorWithFallback(hbColor);
-    var lowColor:Number = OTMColorWithFallback(hbLColor || hbColor);
-    var percent:Number = curHealth / maxHealth;
+    var fullColor: Number = XVMColorWithFallback(hb.color);
+    var lowColor: Number = XVMColorWithFallback(hb.lcolor || hb.color);
+    var percent: Number = curHealth / maxHealth;
 
     //determ current (real-time) color
-    hbCurrColor = GraphicsUtil.colorByRatio(percent, lowColor, fullColor);
-    GraphicsUtil.setColor(this.hbBar, hbCurrColor); //colorizing health bar
+    hb.currColor = GraphicsUtil.colorByRatio(percent, lowColor, fullColor);
+    GraphicsUtil.setColor(this.hbBar, hb.currColor); //colorizing health bar
   }
 
-  function OTMPopulateData()
+  function XVMPopulateData()
   {
     var playerStatus = (m_entityName == "enemy") ? "enemy" : "friend";
-    var data = Config.config.overTargetMarkers.components[playerStatus];
-    var cstCurrentSettings = data.combatScrollText;
-    var hbSettings = data.healthBar;
-    var vehicleIconSettings = data.vehicleIcon;
-    var contourIconSettings = data.contourIcon;
-    var currentHealthSettings = data.currentHealth;
-    var healthRatioSettings = data.healthRatio;
-    var playerNameSettings = data.playerName;
-    var vehicleNameSettings = data.vehicleName;
+    var comp_path = "components/" + playerStatus + "/";
+    var p_cstCurrent = comp_path + "combatScrollText/";
+    var p_hb = comp_path + "healthBar/";
+    var p_vehicleIcon = comp_path + "vehicleIcon/";
+    var p_contourIcon = comp_path + "contourIcon/";
+    var p_currentHealth = comp_path + "currentHealth/";
+    var p_healthRatio = comp_path + "healthRatio/";
+    var p_playerName = comp_path + "playerName/";
+    var p_vehicleName = comp_path + "vehicleName/";
 
-	var scaleattr = vehicleIconSettings.scale.attributes;
+    // Player Name
+    pNameField.setNewTextFormat(XVMCreateNewTextFormat(p_playerName + "format"));
+    pNameField.filters = [GraphicsUtil.createShadowFilter(Config.value(p_playerName + "filter"))];
+    pNameField.text = m_playerFullName;
+
+    // Vehicle Name
+    vNameField.setNewTextFormat(XVMCreateNewTextFormat(p_vehicleName + "format"));
+    vNameField.filters = [GraphicsUtil.createShadowFilter(Config.value(p_vehicleName + "filter"))];
+    vNameField.text = m_vname;
+
+    // Vehicle Type Marker
+    var scaleattr = Config.value(p_vehicleIcon + "scale/attributes");
     for (var childName in marker.marker)
-	{
+    {
       var child = marker.marker[childName];
       child._x += scaleattr.x * scaleattr.maxScale / 100;
       child._y += scaleattr.y * scaleattr.maxScale / 100;
       child._xscale = child._yscale = scaleattr.maxScale;
     };
 
-    //Contour Icons
-    var contourColor:Color = new Color(contourIcon);
-    var tintColor:Number = Number(contourIconSettings.tint.attributes.color);
-    var tintAmount:Number = Number(contourIconSettings.tint.attributes.amount) * 0.01;
-    var tintRatio:Number;
-
-    var contourTransform:Object = contourColor.getTransform();
-    contourTransform.rb = (Number(tintColor) >> 16);
-    contourTransform.gb = (Number(tintColor) >> 8) & 0xff;
-    contourTransform.bb = (Number(tintColor) & 0xff);
-    contourTransform.ra = 0;
-    contourTransform.ga = 0;
-    contourTransform.ba = 0;
-    tintRatio = tintAmount/ (1 - ((contourTransform.ra + contourTransform.ga + contourTransform.ba) / 300));
-    contourTransform.rb *= tintRatio;
-    contourTransform.gb *= tintRatio;
-    contourTransform.bb *= tintRatio;
-    contourTransform.ra = contourTransform.ga = contourTransform.ba = (1 - tintAmount) * 100;
-    contourColor.setTransform(contourTransform);
-
-    var me = this;
-    iconHolder = contourIcon.createEmptyMovieClip("holder", 0);
-    loader = new MovieClipLoader();
-    loader.addListener({
-      onLoadInit: function(content) {
-        content._x = - content._width / 2;
-        content._y = - content._height / 2;
-        me.updateStyle();
-      }
-    });
-    loader.loadClip(m_source, iconHolder);
-
-    //Extract CST Settings
-	cst = {
-      enabled: cstCurrentSettings.enabled.attributes.value == "true",
-      speed: Number(cstCurrentSettings.speed.attributes.value),
-      range: Number(cstCurrentSettings.maxRange.attributes.value),
-      color: OTMColorWithFallback(cstCurrentSettings.color.attributes.value),
-      fontName: cstCurrentSettings.font.data || "$TextFont",
-      textSize: Number(cstCurrentSettings.textSize.attributes.value),
-      text: cstCurrentSettings.message.data,
-      prefix: cstCurrentSettings.prefix.data || "",
-      postfix: cstCurrentSettings.postfix.data || "",
-      hitKind: cstCurrentSettings.hitKind.data == "Relative" ? HIT_KIND_RELATIVE : HIT_KIND_ABSOLUTE,
-      filters: [GraphicsUtil.createShadowFilter(cstCurrentSettings.filter)]
-	}
-
-    //Text Formats and TextFields
-    pNameField.setNewTextFormat(new TextFormat(playerNameSettings.format.attributes.font || "$FieldFont",
-      Number(playerNameSettings.format.attributes.size), 0x000000, false, false, false, null, null,
-	  String(playerNameSettings.format.attributes.align)));
-    vNameField.setNewTextFormat(new TextFormat(vehicleNameSettings.format.attributes.font || "$FieldFont",
-      Number(vehicleNameSettings.format.attributes.size), 0x000000, false, false, false, null, null,
-	  String(vehicleNameSettings.format.attributes.align)));
-    healthField.setNewTextFormat(new TextFormat(currentHealthSettings.format.attributes.font || "$FieldFont",
-      Number(currentHealthSettings.format.attributes.size), 0x000000, true, false, false, null, null,
-	  String(currentHealthSettings.format.attributes.align)));
-    healthRatio.setNewTextFormat(new TextFormat(healthRatioSettings.format.attributes.font || "$FieldFont",
-      Number(healthRatioSettings.format.attributes.size), 0x000000, true, false, false, null, null,
-	  String(healthRatioSettings.format.attributes.align)));
-    pNameField.filters = [GraphicsUtil.createShadowFilter(playerNameSettings.filter)];
-    vNameField.filters = [GraphicsUtil.createShadowFilter(vehicleNameSettings.filter)];
-    healthField.filters = [GraphicsUtil.createShadowFilter(currentHealthSettings.filter)];
-    healthRatio.filters = [GraphicsUtil.createShadowFilter(healthRatioSettings.filter)];
-
-    //Current Health
-    m_showMaxHealth = currentHealthSettings.maxValue.attributes.enabled == "true";
-
-    pNameField.text = m_playerFullName;
-    vNameField.text = m_vname;
-
-    //Level Icon
+    // Level Icon
     levelIcon.gotoAndStop(m_level);
 
-    //Create Health bar
-    this.healthBar.clear();
+    // Vehicle Icon
+    var iconColor: Color = new Color(iconLoader);
+    var tintColor: Number = Number(Config.value(p_contourIcon + "tint/attributes/color"));
+    var tintAmount: Number = Number(Config.value(p_contourIcon + "tint/attributes/amount")) * 0.01;
+    var tintRatio: Number;
 
+    var iconTransform: Object = iconColor.getTransform();
+    iconTransform.rb = (Number(tintColor) >> 16);
+    iconTransform.gb = (Number(tintColor) >> 8) & 0xff;
+    iconTransform.bb = (Number(tintColor) & 0xff);
+    iconTransform.ra = 0;
+    iconTransform.ga = 0;
+    iconTransform.ba = 0;
+    tintRatio = tintAmount / (1 - ((iconTransform.ra + iconTransform.ga + iconTransform.ba) / 300));
+    iconTransform.rb *= tintRatio;
+    iconTransform.gb *= tintRatio;
+    iconTransform.bb *= tintRatio;
+    iconTransform.ra = iconTransform.ga = iconTransform.ba = (1 - tintAmount) * 100;
+    iconColor.setTransform(iconTransform);
+
+    // Combat Scroll Text
+    cst = {
+      enabled: Config.value(p_cstCurrent + "enabled/attributes/value") == "true",
+      speed: Number(Config.value(p_cstCurrent + "speed/attributes/value")),
+      range: Number(Config.value(p_cstCurrent + "maxRange/attributes/value")),
+      color: XVMColorWithFallback(Config.value(p_cstCurrent + "color/attributes/value")),
+      fontName: Config.value(p_cstCurrent + "font/data") || "$TextFont",
+      textSize: Number(Config.value(p_cstCurrent + "textSize/attributes/value")),
+      text: Config.value(p_cstCurrent + "message/data"),
+      prefix: Config.value(p_cstCurrent + "prefix/data") || "",
+      postfix: Config.value(p_cstCurrent + "postfix/data") || "",
+      hitKind: Config.value(p_cstCurrent + "hitKind/data") == "Relative" ? HIT_KIND_RELATIVE : HIT_KIND_ABSOLUTE,
+      filters: [GraphicsUtil.createShadowFilter(Config.value(p_cstCurrent + "filter"))]
+    }
+
+    // Health Bar
+    xvmHealthBar.clear();
+    
     if (this.hbBar)
       this.hbBar.clear();
     else
-      this.hbBar = this.healthBar.createEmptyMovieClip("barMC", this.healthBar.getNextHighestDepth());
-
+      this.hbBar = xvmHealthBar.createEmptyMovieClip("barMC", xvmHealthBar.getNextHighestDepth());
+      
     if (this.hbDamageBar)
       this.hbDamageBar.clear();
     else
-      this.hbDamageBar = this.healthBar.createEmptyMovieClip("damageMC", this.healthBar.getNextHighestDepth());
+      this.hbDamageBar = xvmHealthBar.createEmptyMovieClip("damageMC", xvmHealthBar.getNextHighestDepth());
 
-    OTMRemoveTextFields();
-    this.textFieldConfig = data.infoText;
+    hb.border = Number(Config.value(p_hb + "border/attributes/size"));
+    hb.width = Number(Config.value(p_hb + "fill/attributes/width"));
+    hb.damageTime = Number(Config.value(p_hb + "damage/attributes/fade"));
+    hb.color = Number(Config.value(p_hb + "fill/attributes/color"));
+    hb.lcolor = Number(Config.value(p_hb + "fill/attributes/lcolor"));
 
-    hbBorder = Number(hbSettings.border.attributes.size);
-    hbWidth = Number(hbSettings.fill.attributes.width);
-    hbDamageTime = Number(hbSettings.damage.attributes.fade);
-    hbColor = Number(hbSettings.fill.attributes.color);
-    hbLColor = Number(hbSettings.fill.attributes.lcolor);
+    var hbFillHeight: Number = Number(Config.value(p_hb + "fill/attributes/height"));
 
-    var hbFillHeight:Number = Number(hbSettings.fill.attributes.height);
+    GraphicsUtil.fillRect(xvmHealthBar, 0, 0, hb.width + 2 * hb.border, hbFillHeight + 2 * hb.border,
+      Number(Config.value(p_hb + "border/attributes/color")), Number(Config.value(p_hb + "border/attributes/alpha")));
+    GraphicsUtil.fillRect(this.hbBar, 0, 0, hb.width, hbFillHeight,
+      hb.currColor, Number(Config.value(p_hb + "fill/attributes/alpha")));
+    GraphicsUtil.fillRect(this.hb.damageBar, 0, 0, hb.width, hbFillHeight,
+      XVMColorWithFallback(Config.value(p_hb + "damage/attributes/color")), Number(Config.value(p_hb + "damage/attributes/alpha")));
 
-    GraphicsUtil.fillRect(this.healthBar, 0, 0, hbWidth + 2*hbBorder, hbFillHeight + 2*hbBorder,
-        Number(hbSettings.border.attributes.color), Number(hbSettings.border.attributes.alpha));
-    GraphicsUtil.fillRect(this.hbBar, 0, 0, hbWidth, hbFillHeight,
-        hbCurrColor, Number(hbSettings.fill.attributes.alpha));
-    GraphicsUtil.fillRect(this.hbDamageBar, 0, 0, hbWidth, hbFillHeight,
-        OTMColorWithFallback(hbSettings.damage.attributes.color), Number(hbSettings.damage.attributes.alpha));
-
-    this.hbBar._x = this.hbBar._y = hbBorder;
-    this.hbDamageBar._x = hbBorder + hbWidth;
-    this.hbDamageBar._y = hbBorder;
+    this.hbBar._x = this.hbBar._y = hb.border;
+    this.hbDamageBar._x = hb.border + hb.width;
+    this.hbDamageBar._y = hb.border;
     this.hbDamageBar._xscale = 0;
+    
+    // Health Field
+    m_showMaxHealth = Config.value(p_currentHealth + "maxValue/attributes/enabled") == "true";
+    healthField.setNewTextFormat(XVMCreateNewTextFormat(p_currentHealth + "format"));
+    healthField.filters = [GraphicsUtil.createShadowFilter(Config.value(p_currentHealth + "filter"))];
+
+    // Health Ratio
+    healthRatio.setNewTextFormat(XVMCreateNewTextFormat(p_healthRatio + "format"));
+    healthRatio.filters = [GraphicsUtil.createShadowFilter(Config.value(p_healthRatio + "filter"))];
+
+    // Info Text
+    XVMRemoveTextFields();
+    this.textFieldConfig = comp_path + "infoText/";
   }
 
   function updateStyle()
   {
-	Stat.ReloadStat("stat/@log " + String(s_userNames.length) + ":" + s_userNames.join(","));
-    //vNameField.text = String(Stat.count);
-	vNameField.text = String(s_userNames.length) + ":" + s_userNames.join(",");
-	if (Stat.stat && stat.stat.users && stat.stat.users.user)
-	{
-		vNameField.text += ":ok";
-        for (var i = 0; i < Stat.stat.users.user.length; i++) {
-          var stat = Stat.stat.users.user[i];
-		  if (stat.attributes.nick == m_playerFullName.toUpperCase())
-		  {
-			var p = stat.attributes.battles > 0 ? Math.round(stat.attributes.wins / stat.attributes.battles * 100) : 0;
-            vNameField.text += ":" + String(p);
-            break;
-		  }
-        };
-	}
+    var playerStatus = m_entityName == "enemy" ? "enemy" : "friend";
+    var vehicleStatus = this.vehicleDestroyed ? "dead" : "alive";
+    var uiStatus = m_showExInfo ? "extended" : "normal";
+    var b_path = "behavior/" + playerStatus + "/" + vehicleStatus + "/" + uiStatus + "/";
 
-	var playerStatus = m_entityName == "enemy" ? "enemy" : "friend";
-    var vehicleStatus = (this.vehicleDestroyed) ? "dead" : "alive";
-    var uiStatus = (m_showExInfo) ? "extended" : "normal";
-    var workStyle = Config.config.overTargetMarkers.behavior[playerStatus][vehicleStatus][uiStatus];
+    // Player Name
+    pNameField.textColor = XVMColorWithFallback(Config.value(b_path + "playerName/attributes/color"));
+    pNameField._x = Number(Config.value(b_path + "playerName/attributes/x"));
+    pNameField._y = Number(Config.value(b_path + "playerName/attributes/y"));
+    pNameField._alpha = Number(Config.value(b_path + "playerName/attributes/alpha"));
+    pNameField._visible = Config.value(b_path + "playerName/attributes/visible") == "true";
 
-    actionMarker._x = Number(workStyle.actionMarker.attributes.x);
-    actionMarker._y = Number(workStyle.actionMarker.attributes.y);
+    // Vehicle Name
+    vNameField.textColor = XVMColorWithFallback(Config.value(b_path + "vehicleName/attributes/color"));
+    vNameField._x = Number(Config.value(b_path + "vehicleName/attributes/x"));
+    vNameField._y = Number(Config.value(b_path + "vehicleName/attributes/y"));
+    vNameField._alpha = Number(Config.value(b_path + "vehicleName/attributes/alpha"));
+    vNameField._visible = Config.value(b_path + "vehicleName/attributes/visible") == "true";
 
-    damageHolder._x = Number(workStyle.combatScrollText.attributes.x);
-    damageHolder._y = Number(workStyle.combatScrollText.attributes.y);
+    // Vehicle Type Marker
+    marker._x = Number(Config.value(b_path + "vehicleIcon/attributes/x"));
+    marker._y = Number(Config.value(b_path + "vehicleIcon/attributes/y"));
+    marker._alpha = Number(Config.value(b_path + "vehicleIcon/attributes/alpha"));
+    marker._visible = Config.value(b_path + "vehicleIcon/attributes/visible") == "true";
 
-    pNameField.textColor = OTMColorWithFallback(workStyle.playerName.attributes.color);
-    pNameField._x = Number(workStyle.playerName.attributes.x);
-    pNameField._y = Number(workStyle.playerName.attributes.y);
-    pNameField._alpha = Number(workStyle.playerName.attributes.alpha);
-    pNameField._visible = workStyle.playerName.attributes.visible == "true";
+    // Level Icon
+    levelIcon._x = Config.value(b_path + "levelIcon/attributes/x");
+    levelIcon._y = Number(Config.value(b_path + "levelIcon/attributes/y"));
+    levelIcon._alpha = Number(Config.value(b_path + "levelIcon/attributes/alpha"));
+    levelIcon._visible = Config.value(b_path + "levelIcon/attributes/visible") == "true";
 
-    vNameField.textColor = OTMColorWithFallback(workStyle.vehicleName.attributes.color);
-    vNameField._x = Number(workStyle.vehicleName.attributes.x);
-    vNameField._y = Number(workStyle.vehicleName.attributes.y);
-    vNameField._alpha = Number(workStyle.vehicleName.attributes.alpha);
-    vNameField._visible = workStyle.vehicleName.attributes.visible == "true";
+    // Action Marker
+    actionMarker._x = Number(Config.value(b_path + "actionMarker/attributes/x"));
+    actionMarker._y = Number(Config.value(b_path + "actionMarker/attributes/y"));
 
-    healthField.textColor = OTMColorWithFallback(workStyle.currentHealth.attributes.color);
-    healthField._x = Number(workStyle.currentHealth.attributes.x);
-    healthField._y = Number(workStyle.currentHealth.attributes.y) + 3; // sirmax: why +3?
-    healthField._alpha = Number(workStyle.currentHealth.attributes.alpha);
-    healthField._visible = workStyle.currentHealth.attributes.visible == "true";
+    // Vehicle Icon
+    iconLoader._x = Number(Config.value(b_path + "contourIcon/attributes/x")) - (iconLoader._width / 2);
+    iconLoader._y = Number(Config.value(b_path + "contourIcon/attributes/y")) - (iconLoader._heigth / 2);
+    iconLoader._alpha = Number(Config.value(b_path + "contourIcon/attributes/alpha"));
+    iconLoader._visible = Config.value(b_path + "contourIcon/attributes/visible") == "true";
 
-    healthRatio.textColor = OTMColorWithFallback(workStyle.healthRatio.attributes.color);
-    healthRatio._x = Number(workStyle.healthRatio.attributes.x);
-    healthRatio._y = Number(workStyle.healthRatio.attributes.y) + 3; // sirmax: why +3?
-    healthRatio._alpha = Number(workStyle.healthRatio.attributes.alpha);
-    healthRatio._visible = workStyle.healthRatio.attributes.visible == "true";
+    // Combat Scroll Text
+    damageHolder._x = Number(Config.value(b_path + "combatScrollText/attributes/x"));
+    damageHolder._y = Number(Config.value(b_path + "combatScrollText/attributes/y"));
 
-    healthBar._x = Number(workStyle.healthBar.attributes.x);
-    healthBar._y = Number(workStyle.healthBar.attributes.y);
-    healthBar._alpha = Number(workStyle.healthBar.attributes.alpha);
-    healthBar._visible = workStyle.healthBar.attributes.visible == "true";
+    // Health Bar
+    xvmHealthBar._x = Number(Config.value(b_path + "healthBar/attributes/x"));
+    xvmHealthBar._y = Number(Config.value(b_path + "healthBar/attributes/y"));
+    xvmHealthBar._alpha = Number(Config.value(b_path + "healthBar/attributes/alpha"));
+    xvmHealthBar._visible = Config.value(b_path + "healthBar/attributes/visible") == "true";
 
-    marker._x = Number(workStyle.vehicleIcon.attributes.x);
-    marker._y = Number(workStyle.vehicleIcon.attributes.y);
-    marker._alpha = Number(workStyle.vehicleIcon.attributes.alpha);
-    marker._visible = workStyle.vehicleIcon.attributes.visible == "true";
+    // Health Field
+    healthField.textColor = XVMColorWithFallback(Config.value(b_path + "currentHealth/attributes/color"));
+    healthField._x = Number(Config.value(b_path + "currentHealth/attributes/x"));
+    healthField._y = Number(Config.value(b_path + "currentHealth/attributes/y")) + 3; // sirmax: why +3?
+    healthField._alpha = Number(Config.value(b_path + "currentHealth/attributes/alpha"));
+    healthField._visible = Config.value(b_path + "currentHealth/attributes/visible") == "true";
 
-    levelIcon._x = Number(workStyle.levelIcon.attributes.x);
-    levelIcon._y = Number(workStyle.levelIcon.attributes.y);
-    levelIcon._alpha = Number(workStyle.levelIcon.attributes.alpha);
-    levelIcon._visible = workStyle.levelIcon.attributes.visible == "true";
+    // Health Ratio
+    healthRatio.textColor = XVMColorWithFallback(Config.value(b_path + "healthRatio/attributes/color"));
+    healthRatio._x = Number(Config.value(b_path + "healthRatio/attributes/x"));
+    healthRatio._y = Number(Config.value(b_path + "healthRatio/attributes/y")) + 3; // sirmax: why +3?
+    healthRatio._alpha = Number(Config.value(b_path + "healthRatio/attributes/alpha"));
+    healthRatio._visible = Config.value(b_path + "healthRatio/attributes/visible") == "true";
 
-    contourIcon._x = Number(workStyle.contourIcon.attributes.x);
-    contourIcon._y = Number(workStyle.contourIcon.attributes.y);
-    contourIcon._alpha = Number(workStyle.contourIcon.attributes.alpha);
-    contourIcon._visible = workStyle.contourIcon.attributes.visible == "true";
-
-    this.OTMRemoveTextFields();
-    if (workStyle.infoText instanceof Array)
+    // Info Text
+    this.XVMRemoveTextFields();
+    var infoText = Config.value(b_path + "infoText");
+    if (infoText instanceof Array)
     {
       this.textFields = [];
-      for (var i in workStyle.infoText)
-        this.textFields.push(OTMCreateTextField(workStyle.infoText[i]));
+      for (var i in infoText)
+        this.textFields.push(XVMCreateTextField(infoText[i]));
     }
     else
     {
-      this.textFields = [OTMCreateTextField(workStyle.infoText)];
+      this.textFields = [XVMCreateTextField(infoText)];
     };
 
+    // Update Colors
     this.updateCurrentColor(m_curHealth, m_maxHealth);
     this.updateHealthUI(m_curHealth, m_maxHealth);
-  }
-
-  function OTMCreateTextField(data)
-  {
-    var textField = createTextField("vehicleText", getNextHighestDepth(), 0, 0, 140, 31);
-    textField.setNewTextFormat(new TextFormat(this.textFieldConfig.format.attributes.font || "$FieldFont",
-      Number(this.textFieldConfig.format.attributes.size),
-      0x000000,
-      (data.attributes.bold || this.textFieldConfig.format.attributes.bold) == "true",
-      false, false, null, null,
-      String(this.textFieldConfig.format.attributes.align)));
-    textField.filters = [GraphicsUtil.createShadowFilter(this.textFieldConfig.filter)];
-
-    textField.textColor = OTMColorWithFallback(data.attributes.color);
-    textField._x = Number(data.attributes.x) - textField._width / 2;
-    textField._y = Number(data.attributes.y) - textField._height / 2;
-    textField._alpha = Number(data.attributes.alpha);
-    textField._visible = data.attributes.visible == "true";
-
-    return { field: textField, format: String(data.attributes.format) };
-  }
-
-  function OTMRemoveTextFields()
-  {
-    for (var i in this.textFields)
-      this.textFields[i].field.removeTextField();
-    this.textFields = [];
   }
 }

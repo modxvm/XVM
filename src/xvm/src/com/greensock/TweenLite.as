@@ -5,7 +5,7 @@
  * UPDATES AND DOCS AT: http://www.greensock.com
  **/
 import com.greensock.core.*;
-import com.greensock.plugins.*;
+//import com.greensock.plugins.*;
 
 /**
  * 	TweenLite is an extremely fast, lightweight, and flexible tweening engine that serves as the foundation of 

@@ -53,11 +53,4 @@ class wot.utils.GraphicsUtil
     myColorTransform.rgb = Number(col);
     item.transform.colorTransform = myColorTransform;
   }
-
-  public static function reflectX(item)
-  {
-    var myColorTransform: ColorTransform = new ColorTransform();
-    myColorTransform.rgb = Number(col);
-    item.transform.colorTransform = myColorTransform;
-  }
 }
