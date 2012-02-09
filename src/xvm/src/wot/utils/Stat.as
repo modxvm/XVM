@@ -4,8 +4,6 @@
  */
 import net.produxion.util.XML2Object;
 import wot.utils.Defines;
-//import wot.utils.Logger;
-import wot.utils.Utils;
 
 class wot.utils.Stat
 {
@@ -41,15 +39,6 @@ class wot.utils.Stat
   }
 
   // Logic functions
-
-  public static function DecorateField(playerName, txt)
-  {
-    if (!s_player_ratings)
-      return txt;
-    var pname = CleanPlayerName(playerName);
-    // FIXIT: не будет работать с "туманом войны";
-    return Decorate(playerName, txt, Utils.indexOf(s_player_names, pname) < 15 ? "right" : "left");
-  }
 
   public static function Decorate(playerName, txt, ratingPosition)
   {

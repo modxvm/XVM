@@ -171,7 +171,7 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
     if (substr($path, 0, 2) == '/@')
     {
       $p = substr($path, 1);
-      $this->log("CMD: " . $p . "\n");
+      //$this->log("CMD: " . $p . "\n");
 
       if ($this->is_command($p, self::COMMAND_SET_USERS))
       {
@@ -193,6 +193,7 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
       {
         $users = $this->load_cached_statistics(self::COMMAND_SET_USERS);
         $content = $this->get_statistics_contents_batch(split(',', strtoupper($users)));
+        //$content = file_get_contents("C:\\Web\\www\\stats\\local_server\\xml.xml");
         $this->save_cached_statistics(self::COMMAND_GET_LAST_STAT, $content);
         return $content;
       }

@@ -9,7 +9,7 @@
   </definition>
   <battle>
     <disableMirroredVehicleIcons>true</disableMirroredVehicleIcons>
-    <showPlayerStatictics>false</showPlayerStatictics>
+    <showPlayerStatictics>true</showPlayerStatictics>
     <statColorizePanelPlayerNames>true</statColorizePanelPlayerNames>
     <showPostmortemTips>true</showPostmortemTips>
     <drawGrid>false</drawGrid>

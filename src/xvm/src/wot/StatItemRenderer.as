@@ -38,13 +38,14 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
     if (Config.value("battle/showPlayerStatictics/data") == "true")
     {
       if (data)
-        vehicleField.htmlText = Stat.DecorateField(data.label, data.vehicle);
+        vehicleField.htmlText = Stat.Decorate(data.label, data.vehicle, data.team == "team1" ? "ally" : "enemy");
     }
   }
 
   // override
   function setData(data)
   {
+    //wot.utils.Logger.addObject(data, "data");
     if (Config.value("battle/showPlayerStatictics/data") == "true")
       Stat.AddPlayerData(this, data.label, data.vehicle, data.team == "team1" ? "ally" : "enemy");
     super.setData(data);
