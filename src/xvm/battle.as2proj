@@ -23,7 +23,7 @@
     <option verbose="False" />
     <option strict="False" />
     <option infer="True" />
-    <option useMain="False" />
+    <option useMain="True" />
     <option useMX="False" />
     <option warnUnusedImports="True" />
     <option traceMode="Disable" />
@@ -39,6 +39,8 @@
     <compile path="src\wot\XVM.as" />
     <compile path="src\wot\ingame\VehicleMarkerAlly.as" />
     <compile path="src\wot\ingame\VehicleMarkerEnemy.as" />
+    <compile path="src\wot\MainTimeline.as" />
+    <compile path="src\wot\Main.as" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>

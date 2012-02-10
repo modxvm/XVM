@@ -1,4 +1,11 @@
-﻿import com.greensock.TimelineLite;
+﻿/**
+ * ...
+ * @author Nikolas Siver
+ * @author bkon
+ * @author sirmax2
+ * @author STL1te
+ */
+import com.greensock.TimelineLite;
 import com.greensock.TweenLite;
 import com.greensock.easing.Linear;
 import com.greensock.easing.Cubic;
@@ -37,23 +44,21 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
   static var pNameFieldWidth;
   static var vNameFieldWidth;
-  
+
   function XVM()
   {
     super();
-
-    //wot.utils.Logger.add("XVM::ctor()");
 
     Config.LoadConfigAndStat("OTMData.xml");
 
     pNameFieldWidth = vNameField._width + 20;
     vNameFieldWidth = vNameField._width + 20;
-    
+
     damageHolder = createEmptyMovieClip("damageHolder", getNextHighestDepth());
     xvmHealthBar = createEmptyMovieClip("xvmHealthBar", getNextHighestDepth());
     healthField = createTextField("HealthField", getNextHighestDepth(), 0, 0, 78, 20);
     healthRatio = createTextField("HealthRatio", getNextHighestDepth(), 0, 0, 78, 20);
-    
+
     grid = createEmptyMovieClip("grid", getNextHighestDepth());
   }
 
@@ -72,7 +77,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     healthBar.stop();
     healthBar._visible = false;
   }
-  
+
   // override
   function updateHealth(curHealth)
   {
@@ -108,7 +113,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     m_currentHealth = m_curHealth;
 
     super.configUI();
-    
+
     if (Config.value("battle/drawGrid/data") == "true")
       GraphicsUtil.drawGrid(grid, -50, -50, 100, 100, 0xFFFF00, 30);
 
@@ -201,7 +206,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       false, false, null, null,
       String(Config.value(format_config_path + "align")));
   }
-  
+
   function XVMCreateTextField(data)
   {
     var textField = createTextField("vehicleText", getNextHighestDepth(), 0, 0, 140, 31);
@@ -404,12 +409,12 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
     // Health Bar
     xvmHealthBar.clear();
-    
+
     if (this.hbBar)
       this.hbBar.clear();
     else
       this.hbBar = xvmHealthBar.createEmptyMovieClip("barMC", xvmHealthBar.getNextHighestDepth());
-      
+
     if (this.hbDamageBar)
       this.hbDamageBar.clear();
     else
@@ -434,7 +439,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     this.hbDamageBar._x = hb.border + hb.width;
     this.hbDamageBar._y = hb.border;
     this.hbDamageBar._xscale = 0;
-    
+
     // Health Field
     m_showMaxHealth = Config.value(p_currentHealth + "maxValue/attributes/enabled") == "true";
     healthField.setNewTextFormat(XVMCreateNewTextFormat(p_currentHealth + "format"));
