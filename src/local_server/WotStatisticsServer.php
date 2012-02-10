@@ -7,10 +7,14 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
   const TIMEOUT_WAIT_TIME = 60;
 
   const COMMAND_LOG = "@LOG";
-  const COMMAND_SET_USERS = "@SET_USERS";
-  const COMMAND_ADD_USERS = "@ADD_USERS";
-  const COMMAND_RUN = "@RUN";
-  const COMMAND_GET_USERS = "@GET_USERS";
+  const COMMAND_SET_IDS = "@SET_IDS ";
+  const COMMAND_ADD_IDS = "@ADD_IDS ";
+  const COMMAND_GET_IDS = "@GET_IDS ";
+  const COMMAND_RUN_IDS = "@RUN_IDS";
+  const COMMAND_SET_NAMES = "@SET_NAMES ";
+  const COMMAND_ADD_NAMES = "@ADD_NAMES ";
+  const COMMAND_GET_NAMES = "@GET_NAMES ";
+  const COMMAND_RUN_NAMES = "@RUN_NAMES";
   const COMMAND_GET_LAST_STAT = "@GET_LAST_STAT";
 
   function ServeRequest() {
@@ -173,33 +177,71 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
       $p = substr($path, 1);
       //$this->log("CMD: " . $p . "\n");
 
-      if ($this->is_command($p, self::COMMAND_SET_USERS))
+      if ($this->is_command($p, self::COMMAND_SET_IDS))
       {
-        $users = substr($p, strlen(self::COMMAND_SET_USERS) + 1);
-        $this->save_cached_statistics(self::COMMAND_SET_USERS, $users);
+        $users = substr($p, strlen(self::COMMAND_SET_IDS) + 1);
+        if ($users == null || $users == "")
+          return null;
+        $this->save_cached_statistics(self::COMMAND_SET_IDS, $users);
         return "";
       }
 
-      if ($this->is_command($p, self::COMMAND_ADD_USERS))
+      if ($this->is_command($p, self::COMMAND_ADD_IDS))
       {
-        $users = $this->load_cached_statistics(self::COMMAND_SET_USERS);
-        $new_users = substr($p, strlen(self::COMMAND_ADD_USERS) + 1);
+        $users = $this->load_cached_statistics(self::COMMAND_SET_IDS);
+        $new_users = substr($p, strlen(self::COMMAND_ADD_IDS) + 1);
         $users = $users ? $users . "," : "";
-        $this->save_cached_statistics(self::COMMAND_SET_USERS, $users . $new_users);
+        if ($users == null || $users == "")
+          return null;
+        $this->save_cached_statistics(self::COMMAND_SET_IDS, $users . $new_users);
         return "";
       }
 
-      if ($this->is_command($p, self::COMMAND_RUN))
+      if ($this->is_command($p, self::COMMAND_GET_IDS))
+        return $this->load_cached_statistics(self::COMMAND_SET_IDS);
+
+      if ($this->is_command($p, self::COMMAND_RUN_IDS))
       {
-        $users = $this->load_cached_statistics(self::COMMAND_SET_USERS);
+        $users = $this->load_cached_statistics(self::COMMAND_SET_IDS);
+        if ($users == null || $users == "")
+          return null;
         $content = $this->get_statistics_contents_batch(split(',', strtoupper($users)));
-        //$content = file_get_contents("C:\\Web\\www\\stats\\local_server\\xml.xml");
         $this->save_cached_statistics(self::COMMAND_GET_LAST_STAT, $content);
         return $content;
       }
 
-      if ($this->is_command($p, self::COMMAND_GET_USERS))
-        return $this->load_cached_statistics(self::COMMAND_SET_USERS);
+      if ($this->is_command($p, self::COMMAND_SET_NAMES))
+      {
+        $users = substr($p, strlen(self::COMMAND_SET_NAMES) + 1);
+        if ($users == null || $users == "")
+          return null;
+        $this->save_cached_statistics(self::COMMAND_SET_NAMES, $users);
+        return "";
+      }
+
+      if ($this->is_command($p, self::COMMAND_ADD_NAMES))
+      {
+        $users = $this->load_cached_statistics(self::COMMAND_SET_NAMES);
+        $new_users = substr($p, strlen(self::COMMAND_ADD_NAMES) + 1);
+        $users = $users ? $users . "," : "";
+        if ($users == null || $users == "")
+          return null;
+        $this->save_cached_statistics(self::COMMAND_SET_NAMES, $users . $new_users);
+        return "";
+      }
+
+      if ($this->is_command($p, self::COMMAND_GET_NAMES))
+        return $this->load_cached_statistics(self::COMMAND_SET_NAMES);
+
+      if ($this->is_command($p, self::COMMAND_RUN_NAMES))
+      {
+        $users = $this->load_cached_statistics(self::COMMAND_SET_NAMES);
+        if ($users == null || $users == "")
+          return null;
+        $content = $this->get_statistics_contents_batch(split(',', strtoupper($users)));
+        $this->save_cached_statistics(self::COMMAND_GET_LAST_STAT, $content);
+        return $content;
+      }
 
       if ($this->is_command($p, self::COMMAND_GET_LAST_STAT))
         return $this->load_cached_statistics(self::COMMAND_GET_LAST_STAT);
@@ -269,9 +311,10 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
   }
 
   final private function get_cache_file_name($username) {
-    $path = $username[0] == "@"
+    $n = "$username";
+    $path = $n[0] == "@"
       ? 'cache/@'
-      : sprintf('cache/%s/%s/%s', $username[0], $username[1], $username[2]);
+      : sprintf('cache/%s/%s/%s', $n[0], $n[1], $n[2]);
 
     if (!file_exists($path)) {
       if (!mkdir($path, 777, true))

@@ -36,13 +36,12 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   function setData(data)
   {
     //wot.utils.Logger.addObject(data, "data");
-    if (data)
+    if (data && Config.value("battle/showPlayerStatictics/data") == "true")
     {
-      if (Config.value("battle/showPlayerStatictics/data") == "true")
-      {
-        Stat.AddPlayerData(this, data.id, data.vehicle,
-          this.owner._name == "team1List" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
-      }
+      Stat.AddPlayerData(this, data.id, data.label, data.vehicle,
+        this.owner._name == "team1List" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
+      if (Stat.s_player_ids.length === 30 && !Stat.s_loaded) // FIXIT: Не будет работать с "туманом войны".
+        Stat.LoadData(Config.value("battle/usePlayerId/data") == "false");
     }
     super.setData(data);
   }
@@ -55,7 +54,7 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
     {
       if (data)
       {
-        vehicleField.htmlText = Stat.Decorate(data.id, data.vehicle,
+        vehicleField.htmlText = Stat.Decorate(data.label, data.vehicle,
           this.owner._name == "team1List" ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
       }
     }
@@ -64,7 +63,7 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   // update delegate (function name is fixed and cannot be changed)
   function updateCallback(pdata)
   {
-    vehicleField.htmlText = Stat.Decorate(pdata.original_name, pdata.original_fieldtext, 
+    vehicleField.htmlText = Stat.Decorate(pdata.playerName, pdata.originalText, 
       pdata.team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
   }
 }

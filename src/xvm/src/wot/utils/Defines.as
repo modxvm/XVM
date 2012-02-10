@@ -11,10 +11,14 @@ class wot.utils.Defines
 
   // WebDav commands
   public static var COMMAND_LOG = "stat/@LOG";
-  public static var COMMAND_SET_USERS = "stat/@SET_USERS";
-  public static var COMMAND_ADD_USERS = "stat/@ADD_USERS";
-  public static var COMMAND_RUN = "stat/@RUN";
-  public static var COMMAND_GET_USERS = "stat/@GET_USERS";
+  public static var COMMAND_SET_IDS = "stat/@SET_IDS";
+  public static var COMMAND_ADD_IDS = "stat/@ADD_IDS";
+  public static var COMMAND_GET_IDS = "stat/@GET_IDS";
+  public static var COMMAND_RUN_IDS = "stat/@RUN_IDS";
+  public static var COMMAND_SET_NAMES = "stat/@SET_NAMES";
+  public static var COMMAND_ADD_NAMES = "stat/@ADD_NAMES";
+  public static var COMMAND_GET_NAMES = "stat/@GET_NAMES";
+  public static var COMMAND_RUN_NAMES = "stat/@RUN_NAMES";
   public static var COMMAND_GET_LAST_STAT = "stat/@GET_LAST_STAT";
 
   // Position
