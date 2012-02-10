@@ -1,5 +1,10 @@
+#!/bin/sh
+
+cd $(dirname $(realpath $0))
+
 ./deploy.sh
-WOT_DIRECTORY=/cygdrive/d/home/games/WoT
+
+[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/home/games/WoT
 CURRENT_DIRECTORY=`pwd`
 #SAMPLE_REPLAY=1.wotreplay
 #SAMPLE_REPLAY=blowup.wotreplay
