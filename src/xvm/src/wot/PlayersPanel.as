@@ -58,28 +58,24 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     {
       _loc5 = data[_loc2].label.slice(0, net.wargaming.ingame.PlayersPanel.PLAYER_NAME_LENGTH[m_state]);
 
-      // FIXIT: Why Stat.Decorate return 'undefined'?
-      _loc5 = Stat.Decorate(data[_loc2].label, data[_loc2].label,
-        m_type == "left" ? Defines.POSITION_LEFT : Defines.POSITION_RIGHT);
-/*      if (Stat.s_player_ratings)
+      if (Stat.s_player_ratings)
       {
-        var pname = Stat.CleanPlayerName(data[_loc2].label);
-        var rating = Stat.s_player_ratings[pname.toUpperCase()].rating;
         if (m_state == "large")
         {
-          _loc5 = m_type == "left"
-            ? Stat.GetPercentHtmlText(rating) + " " + _loc5
-            : _loc5 + " " + Stat.GetPercentHtmlText(rating);
+          _loc5 = Stat.Decorate(data[_loc2].label, data[_loc2].label,
+            m_type == "left" ? Defines.POSITION_LEFT : Defines.POSITION_RIGHT);
         }
         else
         {
+          var pname = Stat.CleanPlayerName(data[_loc2].label);
+          var rating = Stat.s_player_ratings[pname.toUpperCase()].rating;
           if (Config.value("battle/statColorizePanelPlayerNames/data") == "true" && rating)
           {
             var color = (rating < 49) ? 0xFF0000 : ((rating < 51) ? 0xFFFF00 : 0x00FF00);
             _loc5 = "<font color=\'#" + color.toString(16) + "\'>" + _loc5 + "</font>";
           }
         }
-      }*/
+      }
               
       _loc8 = data[_loc2].vehicleState;
       var _loc3 = (_loc8 & net.wargaming.ingame.VehicleStateInBattle.IS_AVATAR_READY) != 0;

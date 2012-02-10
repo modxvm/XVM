@@ -49,7 +49,7 @@
       </playerName>
       <vehicleIcon>
         <fill/>
-        <scale maxScale="50" x="0" y="16"/>
+        <scale maxScale="100" x="0" y="16"/>
       </vehicleIcon>
       <vehicleName>
         <format size="13" align="center" font="$FieldFont"/>
@@ -125,7 +125,7 @@
           <healthBar x="-41" y="-34" alpha="100" visible="true"/>
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-21" alpha="100" visible="false"/>
-          <contourIcon x="6" y="-65" alpha="100" visible="false"/>
+          <contourIcon x="6" y="-65" alpha="100" visible="true"/>
         </extended>
       </alive>
       <dead>

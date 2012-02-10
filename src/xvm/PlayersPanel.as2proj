@@ -55,7 +55,7 @@
   <options>
     <option showHiddenPaths="False" />
     <option testMovie="Custom" />
-    <option testMovieCommand="" />
+    <option testMovieCommand="..\..\utils\test.sh" />
   </options>
   <!-- Plugin storage -->
   <storage />
