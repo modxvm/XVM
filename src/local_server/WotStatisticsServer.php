@@ -9,11 +9,11 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
   const COMMAND_LOG = "@LOG";
   const COMMAND_SET_IDS = "@SET_IDS ";
   const COMMAND_ADD_IDS = "@ADD_IDS ";
-  const COMMAND_GET_IDS = "@GET_IDS ";
+  const COMMAND_GET_IDS = "@GET_IDS";
   const COMMAND_RUN_IDS = "@RUN_IDS";
   const COMMAND_SET_NAMES = "@SET_NAMES ";
   const COMMAND_ADD_NAMES = "@ADD_NAMES ";
-  const COMMAND_GET_NAMES = "@GET_NAMES ";
+  const COMMAND_GET_NAMES = "@GET_NAMES";
   const COMMAND_RUN_NAMES = "@RUN_NAMES";
   const COMMAND_GET_LAST_STAT = "@GET_LAST_STAT";
 
@@ -179,7 +179,7 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
 
       if ($this->is_command($p, self::COMMAND_SET_IDS))
       {
-        $users = substr($p, strlen(self::COMMAND_SET_IDS) + 1);
+        $users = substr($p, strlen(self::COMMAND_SET_IDS));
         if ($users == null || $users == "")
           return null;
         $this->save_cached_statistics(self::COMMAND_SET_IDS, $users);
@@ -189,7 +189,7 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
       if ($this->is_command($p, self::COMMAND_ADD_IDS))
       {
         $users = $this->load_cached_statistics(self::COMMAND_SET_IDS);
-        $new_users = substr($p, strlen(self::COMMAND_ADD_IDS) + 1);
+        $new_users = substr($p, strlen(self::COMMAND_ADD_IDS));
         $users = $users ? $users . "," : "";
         if ($users == null || $users == "")
           return null;
@@ -212,7 +212,7 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
 
       if ($this->is_command($p, self::COMMAND_SET_NAMES))
       {
-        $users = substr($p, strlen(self::COMMAND_SET_NAMES) + 1);
+        $users = substr($p, strlen(self::COMMAND_SET_NAMES));
         if ($users == null || $users == "")
           return null;
         $this->save_cached_statistics(self::COMMAND_SET_NAMES, $users);
@@ -222,7 +222,7 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
       if ($this->is_command($p, self::COMMAND_ADD_NAMES))
       {
         $users = $this->load_cached_statistics(self::COMMAND_SET_NAMES);
-        $new_users = substr($p, strlen(self::COMMAND_ADD_NAMES) + 1);
+        $new_users = substr($p, strlen(self::COMMAND_ADD_NAMES));
         $users = $users ? $users . "," : "";
         if ($users == null || $users == "")
           return null;
