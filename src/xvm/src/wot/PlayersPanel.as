@@ -17,7 +17,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   function completeLoad(event)
   {
     event.target.removeEventListener("complete", this, "completeLoad");
-          
+
     if (Config.value("battle/disableMirroredVehicleIcons/data") != "true")
       return;
 
@@ -44,7 +44,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   // override
   function _setNamesStr(data, sel, isColorBlind, knownPlayersCount)
   {
-    if (Config.value("battle/showPlayerStatictics/data") != "true")
+    if (Config.value("rating/showPlayersStatistics/data") != "true")
     {
       super._setNamesStr(data, sel, isColorBlind, knownPlayersCount);
       return;
@@ -62,21 +62,24 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
       {
         if (m_state == "large")
         {
-          _loc5 = Stat.Decorate(data[_loc2].label, data[_loc2].label,
-            m_type == "left" ? Defines.POSITION_LEFT : Defines.POSITION_RIGHT);
+          if (Config.value("rating/showAtLargePlayersPanel/data") != "false")
+          {
+            _loc5 = Stat.Decorate(data[_loc2].label, data[_loc2].label,
+              m_type == "left" ? Defines.POSITION_LEFT : Defines.POSITION_RIGHT);
+          }
         }
         else
         {
           var pname = Stat.CleanPlayerName(data[_loc2].label);
           var rating = Stat.s_player_ratings[pname.toUpperCase()].rating;
-          if (Config.value("battle/statColorizePanelPlayerNames/data") == "true" && rating)
+          if (Config.value("rating/colorizeMiddlePlayersPanel/data") != "false" && rating)
           {
             var color = (rating < 49) ? 0xFF0000 : ((rating < 51) ? 0xFFFF00 : 0x00FF00);
             _loc5 = "<font color=\'#" + color.toString(16) + "\'>" + _loc5 + "</font>";
           }
         }
       }
-              
+
       _loc8 = data[_loc2].vehicleState;
       var _loc3 = (_loc8 & net.wargaming.ingame.VehicleStateInBattle.IS_AVATAR_READY) != 0;
       var _loc4 = (_loc8 & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0;

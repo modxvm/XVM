@@ -15,7 +15,6 @@ class wot.Main
 
     instance = new Main();
     
-    //gfx.io.GameDelegate.addCallBack("battle.showPostmortemTips", this, "showPostmortemTips");
     gfx.io.GameDelegate.addCallBack("battle.showPostmortemTips", instance, "showPostmortemTips");
   }
   

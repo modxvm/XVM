@@ -36,7 +36,7 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   function setData(data)
   {
     //wot.utils.Logger.addObject(data, "data");
-    if (data && Config.value("battle/showPlayerStatictics/data") == "true")
+    if (data && Config.value("rating/showPlayersStatistics/data") == "true")
     {
       Stat.AddPlayerData(this, data.id, data.label, data.vehicle,
         this.owner._name == "team1List" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
@@ -50,7 +50,7 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   function update()
   {
     super.update();
-    if (Config.value("battle/showPlayerStatictics/data") == "true")
+    if (Config.value("rating/showPlayersStatistics/data") == "true" && Config.value("rating/showAtBattleLoading/data") != "false")
     {
       if (data)
       {
@@ -63,7 +63,10 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   // update delegate (function name is fixed and cannot be changed)
   function updateCallback(pdata)
   {
-    vehicleField.htmlText = Stat.Decorate(pdata.playerName, pdata.originalText, 
-      pdata.team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
+    if (Config.value("rating/showAtBattleLoading/data") != "false")
+    {
+      vehicleField.htmlText = Stat.Decorate(pdata.playerName, pdata.originalText,
+        pdata.team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
+    }
   }
 }

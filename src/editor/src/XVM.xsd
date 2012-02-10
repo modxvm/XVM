@@ -29,8 +29,17 @@
 							<xs:element name="showPostmortemTips" type="xs:boolean" minOccurs="0"/>
 							<xs:element name="drawGrid" type="xs:boolean" minOccurs="0"/>
 							<xs:element name="disableMirroredVehicleIcons" type="xs:boolean" minOccurs="0"/>
-							<xs:element name="showPlayerStatistics" type="xs:boolean" minOccurs="0"/>
-							<xs:element name="statColorizePanelPlayerNames" type="xs:boolean" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="rating" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="showPlayersStatistics" type="xs:boolean" minOccurs="0"/>
+							<xs:element name="showAtBattleLoading" type="xs:boolean" minOccurs="0"/>
+							<xs:element name="showAtLargePlayersPanel" type="xs:boolean" minOccurs="0"/>
+							<xs:element name="colorizeMiddlePlayersPanel" type="xs:boolean" minOccurs="0"/>
+							<xs:element name="showAtStatisticForm" type="xs:boolean" minOccurs="0"/>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>

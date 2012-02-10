@@ -45,7 +45,7 @@ class wot.utils.Config
       {
         // new config
         Config.s_config = Config.s_config["xvmconfig"];
-        if (Config.s_load_last_stat && Config.value("battle/showPlayerStatictics/data") == "true")
+        if (Config.s_load_last_stat && Config.value("rating/showPlayersStatistics/data") == "true")
           Stat.LoadStatData(Defines.COMMAND_GET_LAST_STAT);
       }
       else
@@ -56,7 +56,7 @@ class wot.utils.Config
     };
     xml.load(filename);
   }
-  
+
   public static function value(path: String)
   {
     var p: Array = path.split("/"); // "path/to/value"

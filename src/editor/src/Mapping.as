@@ -30,8 +30,13 @@ package
 			c_battle_showPostmortemTips: "battle/showPostmortemTips",
 			c_battle_drawGrid: "battle/drawGrid",
 			c_battle_disableMirroredVehicleIcons: "battle/disableMirroredVehicleIcons",
-			c_battle_showPlayerStatictics: "battle/showPlayerStatictics",
-			c_battle_statColorizePanelPlayerNames: "battle/statColorizePanelPlayerNames"
+
+			// rating
+			c_rating_showPlayersStatistics: "rating/showPlayersStatistics",
+			c_rating_showAtBattleLoading: "rating/showAtBattleLoading",
+			c_rating_showAtLargePlayersPanel: "rating/showAtLargePlayersPanel",
+			c_rating_colorizeMiddlePlayersPanel: "rating/colorizeMiddlePlayersPanel",
+			c_rating_showAtStatisticForm: "rating/showAtStatisticForm"
 
 			// ... behaviors is not required here ...
 		};

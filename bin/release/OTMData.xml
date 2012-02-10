@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <overTargetMarkers>
   <definition>
-    <author>Nicolas Siver</author>
-    <description>Default color theme. Default components positions.</description>
-    <date>Thu Feb 9 11:22:43 GMT+0200 2012</date>
+    <author>sirmax2</author>
+    <description>Default legacy settings for XVM</description>
+    <date>2012-02-11</date>
     <mod-version-min>2.0.5</mod-version-min>
-    <game-version>0.7.1</game-version>
-    <mod-page>http://forum.worldoftanks.ru/index.php?/topic/278620-xvm/</mod-page>
+    <game-version>1.0</game-version>
+    <mod-page>http://code.google.com/p/wot-xvm/</mod-page>
   </definition>
   <battle>
     <showPostmortemTips>true</showPostmortemTips>

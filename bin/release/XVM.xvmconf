@@ -2,17 +2,22 @@
   <definition>
     <author>sirmax2</author>
     <description>Default settings for XVM</description>
-    <url></url>
-    <date>2012-02-07</date>
+    <url>http://code.google.com/p/wot-xvm/</url>
+    <date>2012-02-11</date>
     <gameVersion>0.7.1</gameVersion>
-    <modVersion>0.4</modVersion>
+    <modVersion>1.0</modVersion>
   </definition>
   <battle>
     <disableMirroredVehicleIcons>true</disableMirroredVehicleIcons>
-    <showPlayerStatictics>true</showPlayerStatictics>
-    <statColorizePanelPlayerNames>true</statColorizePanelPlayerNames>
     <showPostmortemTips>false</showPostmortemTips>
     <drawGrid>false</drawGrid>
     <usePlayerId>false</usePlayerId>
   </battle>
+  <rating>
+    <showPlayersStatistics>false</showPlayersStatistics>
+    <showAtBattleLoading>true</showAtBattleLoading>
+    <showAtLargePlayersPanel>true</showAtLargePlayersPanel>
+    <colorizeMiddlePlayersPanel>true</colorizeMiddlePlayersPlayer>
+    <showAtStatisticForm>true</showAtStatisticForm>
+  </rating>
 </xvmconfig>

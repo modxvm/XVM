@@ -37,7 +37,10 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
   function updateData()
   {
     super.updateData();
-    col3.htmlText = Stat.Decorate(data.label, data.vehicle,
-      this.owner._name == "team1" ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
+    if (Config.value("rating/showAtStatisticForm/data") != "true")
+    {
+      col3.htmlText = Stat.Decorate(data.label, data.vehicle,
+        this.owner._name == "team1" ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
+    }
   }
 }

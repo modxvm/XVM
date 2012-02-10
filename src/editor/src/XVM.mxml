@@ -13,21 +13,21 @@
 	<fx:Script>
 		<![CDATA[
 			import events.XVMValueEvent;
-
+			
 			import helpers.ConfigHelper;
-
+			
 			import mx.core.UIComponent;
 			import mx.events.FlexEvent;
 			import mx.messaging.channels.StreamingAMFChannel;
 			import mx.utils.ObjectUtil;
-
+			
 			import spark.components.CheckBox;
 			import spark.components.NumericStepper;
 			import spark.components.Panel;
 			import spark.components.RadioButton;
 			import spark.components.RadioButtonGroup;
 			import spark.components.SkinnableContainer;
-
+			
 			import utils.Const;
 			import utils.UIUtils;
 
@@ -88,14 +88,19 @@
 
 			protected function onCreateNewConfigClick():void
 			{
+				// TODO: remove after implementing markers editing
+				tabs.removeChild(pgMarkers);
+				/////////////////////
+
+				lastFileName = "XVM.xvmconf";
 				ParseConfigXml(ConfigHelper.ConfigToXml(new Object()));
-				this.c_definition_url.text = "http://forum.worldoftanks.ru/index.php?/topic/217949-otm-070"; // TODO: use default value (from schema?)
+				this.c_definition_url.text = "http://code.google.com/p/wot-xvm/"; // TODO: use default value (from schema?)
 				valueChanged_p(this.c_definition_url);
 				this.c_definition_date.selectedDate = new Date();
 				valueChanged_p(this.c_definition_date);
 				this.c_definition_gameVersion.text = "0.7.1"; // TODO: use default value (from schema?)
 				valueChanged_p(this.c_definition_gameVersion);
-				this.c_definition_modVersion.text = "2.0.0"; // TODO: use default value (from schema?)
+				this.c_definition_modVersion.text = "1.0"; // TODO: use default value (from schema?)
 				valueChanged_p(this.c_definition_modVersion);
 			}
 
@@ -123,6 +128,12 @@
 					d2.text = "";
 			}
 
+
+			protected function linkbutton1_clickHandler(event:MouseEvent):void
+			{
+				navigateToURL(new URLRequest("http://code.google.com/p/wot-xvm/"), "_blank");
+			}
+
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -146,7 +157,7 @@
 			<s:Button label="Ru" width="40" enabled="false"/>
 		</s:HGroup>
 	</s:BorderContainer>
-	<mx:TabNavigator creationPolicy="ContainerCreationPolicy.ALL" creationComplete="onCreateNewConfigClick()" height="488" y="31" width="800" x="0">
+	<mx:TabNavigator id="tabs" creationPolicy="ContainerCreationPolicy.ALL" creationComplete="onCreateNewConfigClick()" height="488" y="31" width="800" x="0">
 		<s:NavigatorContent label="Маркеры" width="100%" height="100%" id="pgMarkers">
 			<s:CheckBox label="Режим" x="5" y="2" id="cbMulti" change="cbMulti_changeHandler(event)" fontWeight="bold" fontSize="12" textAlign="left" width="122"/>
 			<c:GroupPlayer x="0" y="20" id="gPlayer" xvmvalue="groupChanged(event)"/>
@@ -197,17 +208,23 @@
 				<s:Label text="Версия мода" x="537" y="58" height="22" width="113" verticalAlign="middle" textAlign="right"/>
 				<s:TextInput width="134" x="658" y="58" id="c_definition_modVersion" change="valueChanged(event)"/>
 			</s:Panel>
-			<s:Panel x="0" y="107" width="800" height="348" title="Общие настройки" enabled="true" skinClass="skins.MyPanelSkin" dropShadowVisible="false">
+			<s:Panel x="0" y="107" width="400" height="348" title="Общие настройки" enabled="true" skinClass="skins.MyPanelSkin" dropShadowVisible="false">
 				<s:CheckBox x="10" y="10" label="Показывать всплывающую панель после смерти" selected="true" id="c_battle_showPostmortemTips" change="valueChanged(event)"/>
 				<s:CheckBox x="10" y="30" label="Показывать сетку координат" selected="true" id="c_battle_drawGrid" change="valueChanged(event)"/>
 				<s:CheckBox x="10" y="50" label="Отключить зеркалирование иконок танков" selected="false" id="c_battle_disableMirroredVehicleIcons" change="valueChanged(event)"/>
-				<s:CheckBox x="10" y="70" label="Включить статистику игроков (Оленемер)" selected="false" id="c_battle_showPlayerStatictics" change="valueChanged(event)"/>
-				<s:CheckBox x="10" y="90" label="Подсветка игроков в ушах в зависимости от статистики" selected="false" id="c_battle_statColorizePanelPlayerNames" change="valueChanged(event)"/>
+			</s:Panel>
+			<s:Panel x="400" y="107" width="400" height="348" title="Статистика" enabled="true" skinClass="skins.MyPanelSkin" dropShadowVisible="false">
+				<s:CheckBox x="10" y="10" label="Включить статистику игроков" selected="false" id="c_rating_showPlayersStatistics" change="valueChanged(event)"/>
+				<s:CheckBox x="10" y="30" label="Отображать во время загрузки боя" selected="false" id="c_rating_showAtBattleLoading" change="valueChanged(event)"/>
+				<s:CheckBox x="10" y="50" label="Отображать в широком режиме ушей" selected="false" id="c_rating_showAtLargePlayersPanel" change="valueChanged(event)"/>
+				<s:CheckBox x="10" y="70" label="Подсветка игроков в ушах в зависимости от рейтинга" selected="false" id="c_rating_colorizeMiddlePlayersPanel" change="valueChanged(event)"/>
+				<s:CheckBox x="10" y="90" label="Отображать в форме статистики (при нажатии Tab)" selected="false" id="c_rating_showAtStatisticForm" change="valueChanged(event)"/>
 			</s:Panel>
 		</s:NavigatorContent>
 		<s:NavigatorContent label="Информация" width="100%" height="100%" id="pgInformation">
 			<s:Label x="10" y="10" text="Сюда навставлять ссылок на страничку мода, на последнюю версию мода, и т.д." fontWeight="bold"/>
 			<s:Label x="10" y="30" text="А так же тут должен быть FAQ, инструкция и т.п." fontWeight="bold"/>
+			<mx:LinkButton x="10" y="49" label="Страница мода" click="linkbutton1_clickHandler(event)"/>
 		</s:NavigatorContent>
 	</mx:TabNavigator>
 </s:Application>

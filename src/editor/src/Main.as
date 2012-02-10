@@ -31,8 +31,13 @@ private function RefreshConfigData():void
 		this.c_battle_showPostmortemTips.selected = section.showPostmortemTips || true;
 		this.c_battle_drawGrid.selected = section.drawGrid || true;
 		this.c_battle_disableMirroredVehicleIcons.selected = section.disableMirroredVehicleIcons || false;
-		this.c_battle_showPlayerStatictics.selected = section.showPlayerStatictics || false;
-		this.c_battle_statColorizePanelPlayerNames.selected = section.statColorizePanelPlayerNames || false;
+
+		section = config.rating || {};
+		this.c_rating_showPlayersStatistics.selected = section.showPlayersStatistics || false;
+		this.c_rating_showAtBattleLoading.selected = section.showAtBattleLoading || true;
+		this.c_rating_showAtLargePlayersPanel.selected = section.showAtLargePlayersPanel || true;
+		this.c_rating_colorizeMiddlePlayersPanel.selected = section.colorizeMiddlePlayersPanel || true;
+		this.c_rating_showAtStatisticForm.selected = section.showAtStatisticForm || true;
 
 		RefreshMarkers();
 	}
@@ -69,6 +74,9 @@ private function PopulateValue(path:String):*
 
 private function RefreshMarkers():void
 {
+	// FIXIT: remove after eneble marker editing
+	return;
+	
 	d.text += "RefreshMarkers()\n";
 	try
 	{
