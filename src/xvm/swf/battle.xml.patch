@@ -1,5 +1,5 @@
 --- battle-0.7.1.xml	2012-02-08 16:24:31.643102900 +0200
-+++ battle.xml	2012-02-09 16:59:25.017222700 +0200
++++ battle.xml	2012-02-10 17:19:59.257154300 +0200
 @@ -2279,7 +2279,7 @@
        </DefineBitsLossless2>
        <DefineShape objectID="32">
@@ -2037,6 +2037,51 @@
              </transform>
            </PlaceObject2>
            <ShowFrame/>
+@@ -16531,7 +16531,7 @@
+       </DefineScalingGrid>
+       <DefineEditText objectID="304" wordWrap="1" multiLine="1" password="0" readOnly="1" autoSize="0" hasLayout="1" notSelectable="1" hasBorder="0" isHTML="1" useOutlines="1" fontRef="76" fontHeight="300" align="1" leftMargin="0" rightMargin="0" indent="0" leading="40" variableName="" initialText="&lt;p align=&quot;right&quot;&gt;&lt;font face=&quot;$FieldFont&quot; size=&quot;15&quot; color=&quot;#ff8516&quot; letterSpacing=&quot;0.000000&quot; kerning=&quot;0&quot;&gt;textField&lt;/font&gt;&lt;/p&gt;">
+         <size>
+-          <Rectangle left="-40" right="6560" top="-40" bottom="400"/>
++          <Rectangle left="-2040" right="6560" top="-40" bottom="400"/>
+         </size>
+         <color>
+           <Color red="255" green="133" blue="22" alpha="255"/>
+@@ -16692,7 +16692,7 @@
+       </Export>
+       <DefineEditText objectID="306" wordWrap="1" multiLine="1" password="0" readOnly="1" autoSize="0" hasLayout="1" notSelectable="1" hasBorder="0" isHTML="1" useOutlines="1" fontRef="76" fontHeight="300" align="1" leftMargin="0" rightMargin="0" indent="0" leading="40" variableName="" initialText="&lt;p align=&quot;right&quot;&gt;&lt;font face=&quot;$FieldFont&quot; size=&quot;15&quot; color=&quot;#ff9a36&quot; letterSpacing=&quot;0.000000&quot; kerning=&quot;0&quot;&gt;textField&lt;/font&gt;&lt;/p&gt;">
+         <size>
+-          <Rectangle left="-40" right="6560" top="-40" bottom="400"/>
++          <Rectangle left="-2040" right="6560" top="-40" bottom="400"/>
+         </size>
+         <color>
+           <Color red="255" green="154" blue="54" alpha="255"/>
+@@ -16908,7 +16908,7 @@
+       </DefineScalingGrid>
+       <DefineEditText objectID="311" wordWrap="1" multiLine="1" password="0" readOnly="1" autoSize="0" hasLayout="1" notSelectable="1" hasBorder="0" isHTML="1" useOutlines="1" fontRef="76" fontHeight="300" align="1" leftMargin="0" rightMargin="0" indent="0" leading="40" variableName="" initialText="&lt;p align=&quot;right&quot;&gt;&lt;font face=&quot;$FieldFont&quot; size=&quot;15&quot; color=&quot;#e11f11&quot; letterSpacing=&quot;0.000000&quot; kerning=&quot;0&quot;&gt;textField&lt;/font&gt;&lt;/p&gt;">
+         <size>
+-          <Rectangle left="-40" right="6560" top="-40" bottom="400"/>
++          <Rectangle left="-2040" right="6560" top="-40" bottom="400"/>
+         </size>
+         <color>
+           <Color red="225" green="31" blue="17" alpha="255"/>
+@@ -17069,7 +17069,7 @@
+       </Export>
+       <DefineEditText objectID="313" wordWrap="1" multiLine="1" password="0" readOnly="1" autoSize="0" hasLayout="1" notSelectable="1" hasBorder="0" isHTML="1" useOutlines="1" fontRef="76" fontHeight="300" align="1" leftMargin="0" rightMargin="0" indent="0" leading="40" variableName="" initialText="&lt;p align=&quot;right&quot;&gt;&lt;font face=&quot;$FieldFont&quot; size=&quot;15&quot; color=&quot;#8799fb&quot; letterSpacing=&quot;0.000000&quot; kerning=&quot;0&quot;&gt;textField&lt;/font&gt;&lt;/p&gt;">
+         <size>
+-          <Rectangle left="-40" right="6560" top="-40" bottom="400"/>
++          <Rectangle left="-2040" right="6560" top="-40" bottom="400"/>
+         </size>
+         <color>
+           <Color red="135" green="153" blue="251" alpha="255"/>
+@@ -17249,7 +17249,7 @@
+       </DefineScalingGrid>
+       <DefineEditText objectID="316" wordWrap="1" multiLine="1" password="0" readOnly="1" autoSize="0" hasLayout="1" notSelectable="1" hasBorder="0" isHTML="1" useOutlines="1" fontRef="76" fontHeight="300" align="1" leftMargin="0" rightMargin="0" indent="0" leading="40" variableName="" initialText="&lt;p align=&quot;right&quot;&gt;&lt;font face=&quot;$FieldFont&quot; size=&quot;15&quot; color=&quot;#74c730&quot; letterSpacing=&quot;0.000000&quot; kerning=&quot;0&quot;&gt;textField&lt;/font&gt;&lt;/p&gt;">
+         <size>
+-          <Rectangle left="-40" right="6560" top="-40" bottom="400"/>
++          <Rectangle left="-2040" right="6560" top="-40" bottom="400"/>
+         </size>
+         <color>
+           <Color red="116" green="199" blue="48" alpha="255"/>
 @@ -170307,7 +170307,7 @@
          <actions>
            <PushData>
