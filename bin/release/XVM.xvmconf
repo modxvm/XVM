@@ -5,11 +5,12 @@
     <url></url>
     <date>2012-02-07</date>
     <gameVersion>0.7.1</gameVersion>
-    <modVersion>3.0.0</modVersion>
+    <modVersion>0.4</modVersion>
   </definition>
   <battle>
     <disableMirroredVehicleIcons>true</disableMirroredVehicleIcons>
     <showPlayerStatictics>true</showPlayerStatictics>
     <statColorizePanelPlayerNames>true</statColorizePanelPlayerNames>
+    <usePlayerId>false</usePlayerId>
   </battle>
 </xvmconfig>
