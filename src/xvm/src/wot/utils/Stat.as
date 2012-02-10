@@ -8,7 +8,7 @@ import wot.utils.Defines;
 class wot.utils.Stat
 {
   // Config
-  public static var s_player_names = [];
+  public static var s_player_ids = [];
   public static var s_player_data = {};
   public static var s_player_ratings = null;
   public static var s_loaded = false;
@@ -22,7 +22,7 @@ class wot.utils.Stat
     return pos === -1 ? str : str.slice(0, pos);
   }
 
-  public static function GetColorHtmlText(percent, txt)
+  public static function GetColorHtmlText(percent: Number, txt: String)
   {
     if (!percent)
       return txt;
@@ -31,7 +31,7 @@ class wot.utils.Stat
     return ("<font color=\'#" + color.toString(16) + "\'>" + txt + "</font>");
   }
 
-  public static function GetPercentHtmlText(percent)
+  public static function GetPercentHtmlText(percent: Number)
   {
     if (!percent)
       return "--%";
@@ -40,60 +40,59 @@ class wot.utils.Stat
 
   // Logic functions
 
-  public static function Decorate(playerName, txt, ratingPosition)
+  public static function Decorate(playerId: Number, txt: String, ratingPosition: Number)
   {
     if (!s_player_ratings)
       return txt;
-    var pname = CleanPlayerName(playerName);
-    var rating = s_player_ratings[pname.toUpperCase()].rating;
-    return (ratingPosition == "left")
+    var rating = s_player_ratings[String(playerId)].rating;
+    return (ratingPosition == Defines.POSITION_LEFT)
       ? GetPercentHtmlText(rating) + " " + txt
       : txt + " " + GetPercentHtmlText(rating);
   }
 
-  public static function AddPlayerData(reference, original_name, original_fieldtext, team)
+  public static function AddPlayerData(reference: Object, playerId: Number, originalText: String, team: Number)
   {
-    if (!original_name)
+    if (playerId <= 0)
       return;
 
-    var pname = CleanPlayerName(original_name);
+    var id: String = String(playerId);
 
-    if (!s_player_data[pname])
+    if (!s_player_data[id])
     {
-      s_player_names.push(pname);
-      s_player_data[pname] = {
+      s_player_ids.push(playerId);
+      s_player_data[id] = {
         reference: reference,
-        original_name: original_name,
-        original_fieldtext: original_fieldtext,
+        playerId: playerId,
+        originalText: originalText,
         team: team,
         loaded: false
       };
     }
 
-    if (s_player_names.length === 30 && !s_loaded) // FIXIT: Не будет работать с "туманом войны".
+    if (s_player_ids.length === 30 && !s_loaded) // FIXIT: Не будет работать с "туманом войны".
       LoadData();
   }
 
-  private static var _s_is_new = true;
+  private static var _s_isNew = true;
   private static function LoadData()
   {
     //Logger.add("Stat.LoadData()");
 
-    var is_new = _s_is_new;
-    _s_is_new = false;
+    var is_new = _s_isNew;
+    _s_isNew = false;
 
     var players_to_load = [];
     var len = 0;
-    for (var pname in s_player_data)
+    for (var id in s_player_data)
     {
-      var pdata = s_player_data[pname];
+      var pdata = s_player_data[id];
       if (!pdata.loaded)
       {
-        if (len + pname.length > Defines.MAX_PATH)
+        if (len + id.length > Defines.MAX_PATH)
           break;
         pdata.loaded = true;
-        players_to_load.push(pname);
-        len += pname.length + 1;
+        players_to_load.push(id);
+        len += id.length + 1;
       }
     }
 
@@ -105,7 +104,7 @@ class wot.utils.Stat
         Stat.LoadData();
       }
       var fn = is_new ? Defines.COMMAND_SET_USERS: Defines.COMMAND_ADD_USERS;
-      lv.load(fn + " " + players_to_load.join(",").toUpperCase());
+      lv.load(fn + " #" + players_to_load.join(","));
     }
     else
     {
@@ -149,25 +148,26 @@ class wot.utils.Stat
     xml.load(command);
   }
 
-  public static function LoadUserNames()
+  /* TODO
+  public static function LoadUserIds()
   {
     var lv= new LoadVars();
     lv.onLoad = function(success)
     {
       if (!success)
         return;
-      Stat.s_player_names = this.split(",");
+      Stat.s_player_ids = this.split(",");
     };
     lv.load(Defines.COMMAND_GET_USERS);
-  }
+  }*/
 
   private static function UpdateAll()
   {
     //Logger.add("Stat.UpdateAll()");
 
-    for (var pname in s_player_data)
+    for (var id in s_player_data)
     {
-      var pdata = s_player_data[pname];
+      var pdata = s_player_data[id];
       pdata.reference.updateCallback(pdata);
     }
   }

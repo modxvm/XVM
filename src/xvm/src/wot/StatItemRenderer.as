@@ -3,6 +3,7 @@
  * @author sirmax2
  */
 import wot.utils.Config;
+import wot.utils.Defines;
 import wot.utils.Stat;
 
 class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRenderer
@@ -38,7 +39,10 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
     if (data)
     {
       if (Config.value("battle/showPlayerStatictics/data") == "true")
-        Stat.AddPlayerData(this, data.label, data.vehicle, this.owner._name == "team1List" ? "ally" : "enemy");
+      {
+        Stat.AddPlayerData(this, data.id, data.vehicle,
+          this.owner._name == "team1List" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
+      }
     }
     super.setData(data);
   }
@@ -50,7 +54,10 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
     if (Config.value("battle/showPlayerStatictics/data") == "true")
     {
       if (data)
-        vehicleField.htmlText = Stat.Decorate(data.label, data.vehicle, this.owner._name == "team1List" ? "right" : "left");
+      {
+        vehicleField.htmlText = Stat.Decorate(data.id, data.vehicle,
+          this.owner._name == "team1List" ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
+      }
     }
   }
 
@@ -58,6 +65,6 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   function updateCallback(pdata)
   {
     vehicleField.htmlText = Stat.Decorate(pdata.original_name, pdata.original_fieldtext, 
-      pdata.team == "ally" ? "right" : "left");
+      pdata.team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
   }
 }

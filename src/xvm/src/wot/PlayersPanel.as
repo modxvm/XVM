@@ -3,6 +3,7 @@
  * @author sirmax2
  */
 import wot.utils.Config;
+import wot.utils.Defines;
 import wot.utils.Stat;
 
 class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
@@ -58,8 +59,9 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
       _loc5 = data[_loc2].label.slice(0, net.wargaming.ingame.PlayersPanel.PLAYER_NAME_LENGTH[m_state]);
 
       // FIXIT: Why Stat.Decorate return 'undefined'?
-      //_loc5 = Stat.Decorate(data[_loc2].label, data[_loc2].label, m_type);
-      if (Stat.s_player_ratings)
+      _loc5 = Stat.Decorate(data[_loc2].label, data[_loc2].label,
+        m_type == "left" ? Defines.POSITION_LEFT : Defines.POSITION_RIGHT);
+/*      if (Stat.s_player_ratings)
       {
         var pname = Stat.CleanPlayerName(data[_loc2].label);
         var rating = Stat.s_player_ratings[pname.toUpperCase()].rating;
@@ -77,7 +79,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
             _loc5 = "<font color=\'#" + color.toString(16) + "\'>" + _loc5 + "</font>";
           }
         }
-      }
+      }*/
               
       _loc8 = data[_loc2].vehicleState;
       var _loc3 = (_loc8 & net.wargaming.ingame.VehicleStateInBattle.IS_AVATAR_READY) != 0;

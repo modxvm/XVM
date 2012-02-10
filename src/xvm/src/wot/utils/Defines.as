@@ -16,4 +16,12 @@ class wot.utils.Defines
   public static var COMMAND_RUN = "stat/@RUN";
   public static var COMMAND_GET_USERS = "stat/@GET_USERS";
   public static var COMMAND_GET_LAST_STAT = "stat/@GET_LAST_STAT";
+
+  // Position
+  public static var POSITION_LEFT = 0;
+  public static var POSITION_RIGHT = 1;
+
+  // Team
+  public static var TEAM_ALLY = 0;
+  public static var TEAM_ENEMY = 1;
 }
