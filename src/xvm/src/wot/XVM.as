@@ -35,6 +35,9 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   var hbDamageBar: MovieClip;
   var hb: Object = {};
 
+  static var pNameFieldWidth;
+  static var vNameFieldWidth;
+  
   function XVM()
   {
     super();
@@ -43,8 +46,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
     Config.LoadConfigAndStat("OTMData.xml");
 
-    pNameField._width += 20;
-    vNameField._width += 20;
+    pNameFieldWidth = vNameField._width + 20;
+    vNameFieldWidth = vNameField._width + 20;
     
     damageHolder = createEmptyMovieClip("damageHolder", getNextHighestDepth());
     xvmHealthBar = createEmptyMovieClip("xvmHealthBar", getNextHighestDepth());
@@ -459,6 +462,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     pNameField._y = Number(Config.value(b_path + "playerName/attributes/y"));
     pNameField._alpha = Number(Config.value(b_path + "playerName/attributes/alpha"));
     pNameField._visible = Config.value(b_path + "playerName/attributes/visible") == "true";
+    pNameField._width = pNameFieldWidth;
 
     // Vehicle Name
     vNameField.textColor = XVMColorWithFallback(Config.value(b_path + "vehicleName/attributes/color"));
@@ -466,6 +470,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     vNameField._y = Number(Config.value(b_path + "vehicleName/attributes/y"));
     vNameField._alpha = Number(Config.value(b_path + "vehicleName/attributes/alpha"));
     vNameField._visible = Config.value(b_path + "vehicleName/attributes/visible") == "true";
+    vNameField._width = vNameFieldWidth;
 
     // Vehicle Type Marker
     marker._x = Number(Config.value(b_path + "vehicleIcon/attributes/x"));
