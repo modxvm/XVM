@@ -65,6 +65,9 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   // override
   function init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt)
   {
+    if (entityName != null)
+      m_entityName = entityName;
+
     // Use currently remembered extended / normal status for new markers
     m_showExInfo = s_showExInfo;
 
@@ -134,7 +137,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     if (!super.populateData())
       return false;
 
-    updateCurrentColor(m_currentHealth, m_maxHealth);
     XVMPopulateData();
     setupNewHealth(m_curHealth, m_maxHealth);
 
@@ -324,8 +326,14 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
   function updateCurrentColor(curHealth, maxHealth)
   {
-    var fullColor: Number = XVMColorWithFallback(hb.color);
-    var lowColor: Number = XVMColorWithFallback(hb.lcolor || hb.color);
+    var playerStatus = (m_entityName == "enemy") ? "enemy" : "friend";
+    var p_hb = "components/" + playerStatus + "/healthBar/";
+    var color = Config.value(p_hb + "fill/attributes/color");
+    var lcolor = Config.value(p_hb + "fill/attributes/lcolor");
+    
+    var fullColor: Number = XVMColorWithFallback(color);
+    var lowColor: Number = XVMColorWithFallback(lcolor || color);
+
     var percent: Number = curHealth / maxHealth;
 
     //determ current (real-time) color
@@ -436,8 +444,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     hb.border = Number(Config.value(p_hb + "border/attributes/size"));
     hb.width = Number(Config.value(p_hb + "fill/attributes/width"));
     hb.damageTime = Number(Config.value(p_hb + "damage/attributes/fade"));
-    hb.color = Number(Config.value(p_hb + "fill/attributes/color"));
-    hb.lcolor = Number(Config.value(p_hb + "fill/attributes/lcolor"));
 
     var hbFillHeight: Number = Number(Config.value(p_hb + "fill/attributes/height"));
 
@@ -469,89 +475,108 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
   function updateStyle()
   {
-    var playerStatus = m_entityName == "enemy" ? "enemy" : "friend";
-    var vehicleStatus = this.vehicleDestroyed ? "dead" : "alive";
-    var uiStatus = m_showExInfo ? "extended" : "normal";
-    var b_path = "behavior/" + playerStatus + "/" + vehicleStatus + "/" + uiStatus + "/";
-
-    // Player Name
-    pNameField.textColor = XVMColorWithFallback(Config.value(b_path + "playerName/attributes/color"));
-    pNameField._x = Number(Config.value(b_path + "playerName/attributes/x"));
-    pNameField._y = Number(Config.value(b_path + "playerName/attributes/y"));
-    pNameField._alpha = Number(Config.value(b_path + "playerName/attributes/alpha"));
-    pNameField._visible = Config.value(b_path + "playerName/attributes/visible") == "true";
-    pNameField._width = pNameFieldWidth;
-
-    // Vehicle Name
-    vNameField.textColor = XVMColorWithFallback(Config.value(b_path + "vehicleName/attributes/color"));
-    vNameField._x = Number(Config.value(b_path + "vehicleName/attributes/x"));
-    vNameField._y = Number(Config.value(b_path + "vehicleName/attributes/y"));
-    vNameField._alpha = Number(Config.value(b_path + "vehicleName/attributes/alpha"));
-    vNameField._visible = Config.value(b_path + "vehicleName/attributes/visible") == "true";
-    vNameField._width = vNameFieldWidth;
-
-    // Vehicle Type Marker
-    marker._x = Number(Config.value(b_path + "vehicleIcon/attributes/x"));
-    marker._y = Number(Config.value(b_path + "vehicleIcon/attributes/y"));
-    marker._alpha = Number(Config.value(b_path + "vehicleIcon/attributes/alpha"));
-    marker._visible = Config.value(b_path + "vehicleIcon/attributes/visible") == "true";
-
-    // Level Icon
-    levelIcon._x = Config.value(b_path + "levelIcon/attributes/x");
-    levelIcon._y = Number(Config.value(b_path + "levelIcon/attributes/y"));
-    levelIcon._alpha = Number(Config.value(b_path + "levelIcon/attributes/alpha"));
-    levelIcon._visible = Config.value(b_path + "levelIcon/attributes/visible") == "true";
-
-    // Action Marker
-    actionMarker._x = Number(Config.value(b_path + "actionMarker/attributes/x"));
-    actionMarker._y = Number(Config.value(b_path + "actionMarker/attributes/y"));
-
-    // Vehicle Icon
-    iconLoader._x = Number(Config.value(b_path + "contourIcon/attributes/x")) - iconLoader._width / 2;
-    iconLoader._y = Number(Config.value(b_path + "contourIcon/attributes/y")) - iconLoader._height / 2;
-    iconLoader._alpha = Number(Config.value(b_path + "contourIcon/attributes/alpha"));
-    iconLoader._visible = Config.value(b_path + "contourIcon/attributes/visible") == "true";
-
-    // Combat Scroll Text
-    damageHolder._x = Number(Config.value(b_path + "combatScrollText/attributes/x"));
-    damageHolder._y = Number(Config.value(b_path + "combatScrollText/attributes/y"));
-
-    // Health Bar
-    xvmHealthBar._x = Number(Config.value(b_path + "healthBar/attributes/x"));
-    xvmHealthBar._y = Number(Config.value(b_path + "healthBar/attributes/y"));
-    xvmHealthBar._alpha = Number(Config.value(b_path + "healthBar/attributes/alpha"));
-    xvmHealthBar._visible = Config.value(b_path + "healthBar/attributes/visible") == "true";
-
-    // Health Field
-    healthField.textColor = XVMColorWithFallback(Config.value(b_path + "currentHealth/attributes/color"));
-    healthField._x = Number(Config.value(b_path + "currentHealth/attributes/x"));
-    healthField._y = Number(Config.value(b_path + "currentHealth/attributes/y")) + 2; // sirmax: why this value?
-    healthField._alpha = Number(Config.value(b_path + "currentHealth/attributes/alpha"));
-    healthField._visible = Config.value(b_path + "currentHealth/attributes/visible") == "true";
-
-    // Health Ratio
-    healthRatio.textColor = XVMColorWithFallback(Config.value(b_path + "healthRatio/attributes/color"));
-    healthRatio._x = Number(Config.value(b_path + "healthRatio/attributes/x"));
-    healthRatio._y = Number(Config.value(b_path + "healthRatio/attributes/y")) + 2; // sirmax: why this value?
-    healthRatio._alpha = Number(Config.value(b_path + "healthRatio/attributes/alpha"));
-    healthRatio._visible = Config.value(b_path + "healthRatio/attributes/visible") == "true";
-
-    // Info Text
-    this.XVMRemoveTextFields();
-    var infoText = Config.value(b_path + "infoText");
-    if (infoText instanceof Array)
+    try
     {
-      this.textFields = [];
-      for (var i in infoText)
-        this.textFields.push(XVMCreateTextField(infoText[i]));
+      var playerStatus = m_entityName == "enemy" ? "enemy" : "friend";
+      var vehicleStatus = this.vehicleDestroyed ? "dead" : "alive";
+      var uiStatus = m_showExInfo ? "extended" : "normal";
+      var b_path = "behavior/" + playerStatus + "/" + vehicleStatus + "/" + uiStatus + "/";
+
+      // Player Name
+      pNameField.textColor = XVMColorWithFallback(Config.value(b_path + "playerName/attributes/color"));
+      pNameField._x = Number(Config.value(b_path + "playerName/attributes/x"));
+      pNameField._y = Number(Config.value(b_path + "playerName/attributes/y"));
+      pNameField._alpha = Number(Config.value(b_path + "playerName/attributes/alpha"));
+      pNameField._visible = Config.value(b_path + "playerName/attributes/visible") == "true";
+      pNameField._width = pNameFieldWidth;
+
+      // Vehicle Name
+      vNameField.textColor = XVMColorWithFallback(Config.value(b_path + "vehicleName/attributes/color"));
+      vNameField._x = Number(Config.value(b_path + "vehicleName/attributes/x"));
+      vNameField._y = Number(Config.value(b_path + "vehicleName/attributes/y"));
+      vNameField._alpha = Number(Config.value(b_path + "vehicleName/attributes/alpha"));
+      vNameField._visible = Config.value(b_path + "vehicleName/attributes/visible") == "true";
+      vNameField._width = vNameFieldWidth;
+
+      // Vehicle Type Marker
+      marker._x = Number(Config.value(b_path + "vehicleIcon/attributes/x"));
+      marker._y = Number(Config.value(b_path + "vehicleIcon/attributes/y"));
+      marker._alpha = Number(Config.value(b_path + "vehicleIcon/attributes/alpha"));
+      marker._visible = Config.value(b_path + "vehicleIcon/attributes/visible") == "true";
+
+      // Level Icon
+      levelIcon._x = Config.value(b_path + "levelIcon/attributes/x");
+      levelIcon._y = Number(Config.value(b_path + "levelIcon/attributes/y"));
+      levelIcon._alpha = Number(Config.value(b_path + "levelIcon/attributes/alpha"));
+      levelIcon._visible = Config.value(b_path + "levelIcon/attributes/visible") == "true";
+
+      // Action Marker
+      actionMarker._x = Number(Config.value(b_path + "actionMarker/attributes/x"));
+      actionMarker._y = Number(Config.value(b_path + "actionMarker/attributes/y"));
+
+      // Vehicle Icon
+      iconLoader._x = Number(Config.value(b_path + "contourIcon/attributes/x")) - iconLoader._width / 2;
+      iconLoader._y = Number(Config.value(b_path + "contourIcon/attributes/y")) - iconLoader._height / 2;
+      iconLoader._alpha = Number(Config.value(b_path + "contourIcon/attributes/alpha"));
+      iconLoader._visible = Config.value(b_path + "contourIcon/attributes/visible") == "true";
+
+      // Combat Scroll Text
+      damageHolder._x = Number(Config.value(b_path + "combatScrollText/attributes/x"));
+      damageHolder._y = Number(Config.value(b_path + "combatScrollText/attributes/y"));
+
+      // Health Bar
+      xvmHealthBar._x = Number(Config.value(b_path + "healthBar/attributes/x"));
+      xvmHealthBar._y = Number(Config.value(b_path + "healthBar/attributes/y"));
+      xvmHealthBar._alpha = Number(Config.value(b_path + "healthBar/attributes/alpha"));
+      xvmHealthBar._visible = Config.value(b_path + "healthBar/attributes/visible") == "true";
+
+      // Health Field
+      healthField.textColor = XVMColorWithFallback(Config.value(b_path + "currentHealth/attributes/color"));
+      healthField._x = Number(Config.value(b_path + "currentHealth/attributes/x"));
+      healthField._y = Number(Config.value(b_path + "currentHealth/attributes/y")) + 2; // sirmax: why this value?
+      healthField._alpha = Number(Config.value(b_path + "currentHealth/attributes/alpha"));
+      healthField._visible = Config.value(b_path + "currentHealth/attributes/visible") == "true";
+
+      // Health Ratio
+      healthRatio.textColor = XVMColorWithFallback(Config.value(b_path + "healthRatio/attributes/color"));
+      healthRatio._x = Number(Config.value(b_path + "healthRatio/attributes/x"));
+      healthRatio._y = Number(Config.value(b_path + "healthRatio/attributes/y")) + 2; // sirmax: why this value?
+      healthRatio._alpha = Number(Config.value(b_path + "healthRatio/attributes/alpha"));
+      healthRatio._visible = Config.value(b_path + "healthRatio/attributes/visible") == "true";
+
+      // Info Text
+      this.XVMRemoveTextFields();
+      var infoText = Config.value(b_path + "infoText");
+      if (infoText instanceof Array)
+      {
+        this.textFields = [];
+        for (var i in infoText)
+          this.textFields.push(XVMCreateTextField(infoText[i]));
+      }
+      else
+      {
+        this.textFields = [XVMCreateTextField(infoText)];
+      };
+      
+      // Update Colors
+      this.updateCurrentColor(m_curHealth, m_maxHealth);
+      this.updateHealthUI(m_curHealth, m_maxHealth);
     }
-    else
+    catch (e)
     {
-      this.textFields = [XVMCreateTextField(infoText)];
-    };
-
-    // Update Colors
-    this.updateCurrentColor(m_curHealth, m_maxHealth);
-    this.updateHealthUI(m_curHealth, m_maxHealth);
+      XVMSetErrorText("ERR:us:" + String(e));
+    }
+  }
+  
+  function XVMSetErrorText(str)
+  {
+      pNameField.setNewTextFormat(new TextFormat("$FieldFont", 13, 0xFF0000, true, false, true, null, null, "center"));
+      pNameField.text = str;
+      pNameField._width = 150;
+      pNameField._height = 20;
+      pNameField._x = -75;
+      pNameField._y = 5;
+      pNameField._alpha = 100;
+      pNameField._visible = true;
   }
 }
