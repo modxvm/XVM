@@ -10,14 +10,14 @@
   <battle>
     <disableMirroredVehicleIcons>true</disableMirroredVehicleIcons>
     <showPostmortemTips>false</showPostmortemTips>
-    <drawGrid>false</drawGrid>
+    <drawGrid>true</drawGrid>
     <usePlayerId>false</usePlayerId>
   </battle>
   <rating>
     <showPlayersStatistics>true</showPlayersStatistics>
     <showAtBattleLoading>true</showAtBattleLoading>
     <showAtLargePlayersPanel>true</showAtLargePlayersPanel>
-    <colorizeMiddlePlayersPanel>true</colorizeMiddlePlayersPlayer>
+    <colorizeMiddlePlayersPanel>true</colorizeMiddlePlayersPanel>
     <showAtStatisticForm>true</showAtStatisticForm>
   </rating>
 </xvmconfig>

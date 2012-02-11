@@ -9,7 +9,7 @@ import wot.utils.Stat;
 class wot.utils.Config
 {
   // Private vars
-  private static var s_config: Object = null;
+  public static var s_config: Object = null;
   private static var s_loaded: String = "";
   private static var s_load_last_stat: Boolean = false;
 
@@ -45,14 +45,15 @@ class wot.utils.Config
       {
         // new config
         Config.s_config = Config.s_config["xvmconfig"];
-        if (Config.s_load_last_stat && Config.value("rating/showPlayersStatistics/data") == "true")
-          Stat.LoadStatData(Defines.COMMAND_GET_LAST_STAT);
       }
       else
       {
         // legacy config
         Config.s_config = Config.s_config["overTargetMarkers"];
       }
+
+      if (Config.s_load_last_stat && Config.value("rating/showPlayersStatistics/data") == "true")
+        Stat.LoadStatData(Defines.COMMAND_GET_LAST_STAT);
     };
     xml.load(filename);
   }

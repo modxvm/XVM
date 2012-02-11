@@ -11,7 +11,7 @@ import com.greensock.easing.Linear;
 import com.greensock.easing.Cubic;
 import wot.utils.Config;
 import wot.utils.GraphicsUtil;
-//import wot.utils.Stat;
+import wot.utils.Stat;
 
 class wot.XVM extends net.wargaming.ingame.VehicleMarker
 {
@@ -185,6 +185,18 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     format = format.split("{{nick}}").join(m_playerFullName);
     format = format.split("{{vehicle}}").join(m_vname);
 
+    if (format.split("{{rating}}").length > 1)
+    {
+      var strRating = "";
+      if (Stat.s_player_ratings)
+      {
+        var pname = Stat.CleanPlayerName(m_playerFullName);
+        var rating = Stat.s_player_ratings[pname.toUpperCase()].rating;
+        strRating = rating ? String(rating) + "%" : "";
+      }
+      format = format.split("{{rating}}").join(strRating);
+    }
+  
     return format;
   }
 
@@ -209,7 +221,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
   function XVMCreateTextField(data)
   {
-    var textField = createTextField("vehicleText", getNextHighestDepth(), 0, 0, 140, 31);
+    var textField = createTextField("infoText", getNextHighestDepth(), 0, 0, 140, 31);
+    // textField.html = true; // FIXIT: in html mode Font and Position are wrong.
     var textFormat: TextFormat = XVMCreateNewTextFormat(textFieldConfig + "format");
     if (data.attributes.bold)
       textFormat.bold = true;

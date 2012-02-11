@@ -11,7 +11,7 @@ class wot.Main
   
   static function main()
   {
-    Config.LoadConfig("OTMData.xml");
+    Config.LoadConfigAndStat("OTMData.xml");
 
     instance = new Main();
     

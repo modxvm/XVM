@@ -50,7 +50,7 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
       // plain file (WebDAV resource)
       $info["props"][] = $this->mkprop("resourcetype", "");
       $info["props"][] = $this->mkprop("getcontenttype", "text/xml");
-      $info["props"][] = $this->mkprop("getcontentlength", strlen($this->get_statistics_contents($path)));
+      $info["props"][] = $this->mkprop("getcontentlength", strlen($this->get_statistics_contents($path, 'fileinfo')));
     };
 
     return $info;
@@ -72,7 +72,7 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
   function HEAD(&$options) {
     $this->log("HEAD\n");
 
-    if (!$statistics_data = $this->get_statistics_contents($options['path'])) {
+    if (!$statistics_data = $this->get_statistics_contents($options['path'], 'HEAD')) {
       return false;
     };
 
@@ -95,7 +95,7 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
 
     // the header output is the same as for HEAD
     // do not call HEAD for avoiding unnecessary call
-    if (!$statistics_data = $this->get_statistics_contents($options['path'])) {
+    if (!$statistics_data = $this->get_statistics_contents($options['path'], 'GET')) {
       return false;
     };
 
@@ -169,16 +169,19 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
     return (substr($path, 0, strlen($cmd)) == $cmd);
   }
 
-  final private function get_statistics_contents($path)
+  final private function get_statistics_contents($path, $sender)
   {
     // Process service commands (starts with '@').
     if (substr($path, 0, 2) == '/@')
     {
       $p = substr($path, 1);
-      //$this->log("CMD: " . $p . "\n");
+      if ($sender != "GET" && !$this->is_command($p, self::COMMAND_LOG))
+        $this->log(" CMD: " . $p . "\n");
 
       if ($this->is_command($p, self::COMMAND_SET_IDS))
       {
+        if ($sender == "GET")
+          return "";
         $users = substr($p, strlen(self::COMMAND_SET_IDS));
         if ($users == null || $users == "")
           return null;
@@ -188,6 +191,8 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
 
       if ($this->is_command($p, self::COMMAND_ADD_IDS))
       {
+        if ($sender == "GET")
+          return "";
         $users = $this->load_cached_statistics(self::COMMAND_SET_IDS);
         $new_users = substr($p, strlen(self::COMMAND_ADD_IDS));
         $users = $users ? $users . "," : "";
@@ -202,6 +207,8 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
 
       if ($this->is_command($p, self::COMMAND_RUN_IDS))
       {
+        if ($sender == "GET")
+          return $this->load_cached_statistics(self::COMMAND_GET_LAST_STAT);
         $users = $this->load_cached_statistics(self::COMMAND_SET_IDS);
         if ($users == null || $users == "")
           return null;
@@ -212,6 +219,8 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
 
       if ($this->is_command($p, self::COMMAND_SET_NAMES))
       {
+        if ($sender == "GET")
+          return "";
         $users = substr($p, strlen(self::COMMAND_SET_NAMES));
         if ($users == null || $users == "")
           return null;
@@ -221,6 +230,8 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
 
       if ($this->is_command($p, self::COMMAND_ADD_NAMES))
       {
+        if ($sender == "GET")
+          return "";
         $users = $this->load_cached_statistics(self::COMMAND_SET_NAMES);
         $new_users = substr($p, strlen(self::COMMAND_ADD_NAMES));
         $users = $users ? $users . "," : "";
@@ -235,6 +246,8 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
 
       if ($this->is_command($p, self::COMMAND_RUN_NAMES))
       {
+        if ($sender == "GET")
+          return $this->load_cached_statistics(self::COMMAND_GET_LAST_STAT);
         $users = $this->load_cached_statistics(self::COMMAND_SET_NAMES);
         if ($users == null || $users == "")
           return null;
@@ -248,7 +261,8 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
 
       if ($this->is_command($p, self::COMMAND_LOG))
       {
-        $this->log(sprintf("LOG:%s\n", substr($p, 4)));
+        if ($sender != "GET")
+          $this->log(sprintf("LOG:%s\n", substr($p, 4)));
         return "";
       }
 
@@ -311,8 +325,8 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
   }
 
   final private function get_cache_file_name($username) {
-    $n = "$username";
-    $path = $n[0] == "@"
+     $n = "$username";
+     $path = $n[0] == "@"
       ? 'cache/@'
       : sprintf('cache/%s/%s/%s', $n[0], $n[1], $n[2]);
 
