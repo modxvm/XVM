@@ -13,7 +13,7 @@
     <drawGrid>false</drawGrid>
   </battle>
   <rating>
-    <showPlayersStatistics>true</showPlayersStatistics>
+    <showPlayersStatistics>false</showPlayersStatistics>
   </rating>
   <components>
     <friend>
