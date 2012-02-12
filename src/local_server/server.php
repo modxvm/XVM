@@ -1,6 +1,7 @@
 <?php 
 
 define('LOG_ENABLED', true);
+//define('ALT_PROXY_STAT_ENABLED', true);
 
 $start = microtime(true);
 set_include_path('.' . DIRECTORY_SEPARATOR . './lib');
