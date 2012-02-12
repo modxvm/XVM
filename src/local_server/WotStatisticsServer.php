@@ -161,7 +161,7 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
     if (!defined('LOG_ENABLED') || !LOG_ENABLED)
       return;
 
-    error_log(time() . ': ' . $data, 3, 'log/dav.log');
+    error_log(date("d-m-Y H:i:s") . '  ' . $data, 3, 'log/dav.log');
   }
 
   private function is_command($path, $cmd)
@@ -325,10 +325,11 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
   }
 
   final private function get_cache_file_name($username) {
-     $n = "$username";
-     $path = $n[0] == "@"
+    settype($username, "string");
+    $path = $username[0] == "@"
       ? 'cache/@'
-      : sprintf('cache/%s/%s/%s', $n[0], $n[1], $n[2]);
+      : sprintf('cache' . DIRECTORY_SEPARATOR . '%s' . DIRECTORY_SEPARATOR . '%s' . DIRECTORY_SEPARATOR . '%s',
+                $username[0], $username[1], $username[2]);
 
     if (!file_exists($path)) {
       if (!mkdir($path, 777, true))
@@ -344,21 +345,15 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
     return sprintf('%s.timeout.flag', $this->get_cache_file_name($username));
   }
 
-  final private function ensure_path_exists($path) {
-    if (!file_exists($path)) {
-      mkdir($path);
-    } else if (!is_dir($path)) {
-      $this->log(sprintf("WARNING: %s exists, but is not a directory\n", $path));
-    };
-  }
-
   final private function has_timed_out_recently($username) {
     $flag_file = $this->get_timeout_flag_file_name($username);
     if (!file_exists($flag_file)) {
       return false;
     };
-
-    return time() - filemtime($flag_file) < TIMEOUT_WAIT_TIME;
+    $res = (time() - filemtime($flag_file)) < self::TIMEOUT_WAIT_TIME;
+    if (!$res)
+      unlink($flag_file);
+    return $res;
   }
 
   final private function load_cached_statistics($username) {
@@ -384,33 +379,6 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
 
   final private function remove_cached_statistics($username) {
     unlink($this->get_cache_file_name($username));
-  }
-
-  final private function load_statistics($username) {
-    $content = $this->load_cached_statistics($username);
-    if ($content) {
-      return $content;
-    };
-
-    $content = $this->do_load_statistics($username);
-    $this->save_cached_statistics($username, $content);
-
-    return $content;
-  }
-
-  final private function do_load_statistics($username) {
-    if ($this->has_timed_out_recently($username)) {
-      $this->log(sprintf("Skipping timed out statistics for: %s\n", $username));
-      return null;
-    };
-
-    $this->log(sprintf("Loading statistics for: %s\n", $username));
-
-    $ch = $this->prepare_request_handle($username);
-    $response = curl_exec($ch);
-    curl_close($ch);
-
-    return $response;
   }
 
   final private function prepare_request_handle($username) {
@@ -466,8 +434,8 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
     //$this->log(microtime(true) . "\n");
 
     while ($active && $mrc == CURLM_OK) {
-      // Connection error or timeout (1 sec)
-      if (curl_multi_select($mh, 1) == -1) {
+      // Connection error or timeout
+      if (curl_multi_select($mh, self::MAX_STATISTICS_SERVER_WAIT_TIME) == -1) {
         break;
       };
 
