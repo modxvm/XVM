@@ -21,7 +21,6 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
   private $_cached_statistics = array();
   private $set_timeout_enabled = true;
 
-
   function ServeRequest() {
     // special treatment for litmus compliance test
     // reply on its identifier header
@@ -54,7 +53,7 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
     } else {
       // plain file (WebDAV resource)
       $info["props"][] = $this->mkprop("resourcetype", "");
-      $info["props"][] = $this->mkprop("getcontenttype", "text/xml");
+      $info["props"][] = $this->mkprop("getcontenttype", "text/plain");
       $info["props"][] = $this->mkprop("getcontentlength", strlen($this->get_statistics_contents($path, 'fileinfo')));
     };
 
@@ -81,7 +80,7 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
       return false;
     };
 
-    $options['mimetype'] = 'text/xml';
+    $options['mimetype'] = 'text/plain';
     $options['mtime'] = time();
     $options['size'] = strlen($statistics_data);
 
@@ -104,7 +103,7 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
       return false;
     };
 
-    $options['mimetype'] = 'text/xml';
+    $options['mimetype'] = 'text/plain';
     $options['mtime'] = time();
     $options['size'] = strlen($statistics_data);
     $options['data'] = $statistics_data;
@@ -176,6 +175,8 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
 
   final private function get_statistics_contents($path, $sender)
   {
+    $path = strtoupper($path);
+
     // Process service commands (starts with '@').
     if (substr($path, 0, 2) == '/@')
     {
@@ -217,7 +218,7 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
         $users = $this->load_cached_statistics(self::COMMAND_SET_IDS);
         if ($users == null || $users == "")
           return null;
-        $content = $this->get_statistics_contents_batch(split(',', strtoupper($users)));
+        $content = $this->get_statistics_contents_batch(split(',', $users));
         $this->save_cached_statistics(self::COMMAND_GET_LAST_STAT, $content);
         return $content;
       }
@@ -256,7 +257,7 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
         $users = $this->load_cached_statistics(self::COMMAND_SET_NAMES);
         if ($users == null || $users == "")
           return null;
-        $content = $this->get_statistics_contents_batch(split(',', strtoupper($users)));
+        $content = $this->get_statistics_contents_batch(split(',', $users));
         $this->save_cached_statistics(self::COMMAND_GET_LAST_STAT, $content);
         return $content;
       }
@@ -276,22 +277,21 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
     }
 
     $this->log(sprintf("Загрузка файла статистики: %s\n", $path));
-    $username = $this->extract_username($path);
-    if ($username == null)
+    if (!preg_match('/\/(.*)/i', $path, $matches))
       return null;
-    $username = strtoupper($username);
-
-    $content = $this->get_statistics_contents_batch(split(',', $username));
+    $usernames = $matches[1];
+    $content = $this->get_statistics_contents_batch(split(',', $usernames));
     return $content;
   }
 
-  final private function get_statistics_contents_batch($usernames) {
-    $batch_doc = new DOMDocument();
-    $batch_users_node = $batch_doc->appendChild($batch_doc->createElement("users"));
+  final private function get_statistics_contents_batch($usernames)
+  {
+    $result = array("players" => array());
 
     // Pre-fetch elements which are not yet cached cached locally
-    $request_handles = array();
-    foreach ($usernames as $username) {
+    $request_users = array();
+    foreach ($usernames as $username)
+    {
       if (array_key_exists($username, $this->_cached_statistics)) {
         $this->log(sprintf("Загрузка статистики из памяти для: %s\n", $username));
       } else {
@@ -305,54 +305,21 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
           };
         };
         if (!$res && !$this->has_timed_out_recently($username))
-          $request_handles[$username] = $this->prepare_request_handle($username);
+          $request_users[] = $username;
       };
     };
-    if (defined('ALT_PROXY_STAT_ENABLED') && ALT_PROXY_STAT_ENABLED)
-      $this->set_timeout_enabled = false;
 
-    $this->execute_requests($request_handles);
-
-    if (defined('ALT_PROXY_STAT_ENABLED') && ALT_PROXY_STAT_ENABLED) {
-      $request_handles = array();
-      foreach ($usernames as $username) {
-        if (!array_key_exists($username, $this->_cached_statistics) && !$this->has_timed_out_recently($username))
-          $request_handles[$username] = $this->prepare_request_handle($username, true);
-      };
-      $this->set_timeout_enabled = true;
-      $this->execute_requests($request_handles);
-    };
+    $this->execute_requests($request_users);
 
     // Generate batch response
     foreach ($usernames as $username)
-    {
-      $user_node = $batch_users_node->appendChild($batch_doc->createElement("user"));
-      $user_node->setAttribute("nick", $username);
+      $result["players"][] = json_decode($this->load_cached_statistics($username));
 
-      if (array_key_exists($username, $this->_cached_statistics))
-      {
-        $user_statistics = $this->_cached_statistics[$username];
-        $doc = new DOMDocument();
-        $doc->loadXML($user_statistics);
-        $user_node->setAttribute("battles", $doc->documentElement->getAttribute("battles"));
-        $user_node->setAttribute("wins", $doc->documentElement->getAttribute("wins"));
-      }
-    };
-
-    return "\xEF\xBB\xBF" . $batch_doc->saveXML();
+    return "\xEF\xBB\xBF" . json_encode($result);
   }
 
-  final private function extract_username($path) {
-    //$this->log(sprintf("Поиск имени игрока в: %s\n", $path));
-
-    if (!preg_match('/\/(.*).xml/i', $path, $matches)) {
-      return null;
-    };
-
-    return $matches[1];
-  }
-
-  final private function get_cache_file_name($username) {
+  final private function get_cache_file_name($username)
+  {
     settype($username, "string");
     $path = $username[0] == "@"
       ? 'cache/@'
@@ -366,14 +333,16 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
     else if (!is_dir($path))
       $this->log(sprintf("ВНИМАНИЕ: %s существует, но не директория\n", $path));
 
-    return sprintf('%s/%s.xml', $path, $username);
+    return sprintf('%s/%s.json', $path, $username);
   }
 
-  final private function get_timeout_flag_file_name($username) {
+  final private function get_timeout_flag_file_name($username)
+  {
     return sprintf('%s.timeout.flag', $this->get_cache_file_name($username));
   }
 
-  final private function has_timed_out_recently($username) {
+  final private function has_timed_out_recently($username)
+  {
     $flag_file = $this->get_timeout_flag_file_name($username);
     if (!file_exists($flag_file))
       return false;
@@ -403,7 +372,7 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
       else {
         $this->log(sprintf("Таймаут при запросе статистики для: %s\n", $username));
         if ($this->set_timeout_enabled)
-          touch($this->get_timeout_flag_file_name($username));
+        touch($this->get_timeout_flag_file_name($username));
       }
       return;
     };
@@ -417,80 +386,76 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
     unlink($this->get_cache_file_name($username));
   }
 
-  final private function prepare_request_handle($username, $altproxy = false) {
-    // Client-side "load balancing"
-
-    if (!$altproxy) {
-      $PROXY_SERVERS = array('http://stat-proxy-1.wot.bkon.ru/%s.xml',
-                             'http://stat-proxy-2.wot.bkon.ru/%s.xml',
-                             'http://stat-proxy-3.wot.bkon.ru/%s.xml',
-                             'http://stat-proxy-4.wot.bkon.ru/%s.xml',
-                             'http://stat-proxy-5.wot.bkon.ru/%s.xml',
-                             'http://stat-proxy-6.wot.bkon.ru/%s.xml',
-                             'http://stat-proxy-7.wot.bkon.ru/%s.xml',
-                             'http://stat-proxy-8.wot.bkon.ru/%s.xml',
-                             'http://stat-proxy-9.wot.bkon.ru/%s.xml',
-                             'http://stat-proxy-10.wot.bkon.ru/%s.xml');
-    } else {
-      $PROXY_SERVERS = array('http://localhost/stat-proxy/stat.php?name=%s');
-    };
-
-    $proxy_server=$PROXY_SERVERS[rand(0, count($PROXY_SERVERS) - 1)];
-
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_HEADER, 0);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT, self::MAX_STATISTICS_SERVER_WAIT_TIME);
-    curl_setopt($ch,
-                CURLOPT_URL,
-                sprintf($proxy_server,
-                        strtoupper($username)));
-    curl_setopt($ch, CURLOPT_HTTPGET, true);
-    return $ch;
-  }
-
-  final private function execute_requests($request_handles) {
-    if (count($request_handles) == 0) {
+  final private function execute_requests($request_users)
+  {
+    if (count($request_users) == 0)
       return;
-    };
 
-    $this->log(sprintf("Отправка пакетного запроса статистики для: %s\n",
-                       join(', ', array_keys($request_handles))));
+    // Client-side "load balancing"
+    $PROXY_SERVERS = array(
+      array("proto" => 1, "addr" => "http://proxy.bulychev.net/polzamer-mod/1/2/%1")
+    );
+    $proxy_server = $PROXY_SERVERS[rand(0, count($PROXY_SERVERS) - 1)];
+    $url = str_replace("%1", join(",", $request_users), $proxy_server["addr"]);
+
+    $this->log(sprintf("Отправка запроса: %s\n", $url));
 
     $this->timer();
 
     // Initialize batch request
-    $mh = curl_multi_init();
-    foreach ($request_handles as $username => $handle) {
-      curl_multi_add_handle($mh, $handle);
-    };
+    $u = parse_url($url);
+    $content = "";
+    $fp = fsockopen($u["host"], $u["port"] ? $u["port"] : 80, $errno, $errstr,
+      self::MAX_STATISTICS_SERVER_WAIT_TIME);
+    if (!$fp)
+      $this->log("$errstr ($errno)\n");
+    else
+    {
+      fputs ($fp, sprintf("GET %s%s HTTP/1.0\r\nHost: %s\r\n\r\n",
+        $u["path"], $u["query"], $u["host"]));
+      $body = false;
+      while ($line = @fgets($fp, 1024))
+      {
+        if (!$body && preg_match("/^[\r]?\n$/i", $line))
+          $body = true;
+        else if ($body)
+          $content .= $line;
+      }
+      while (!feof($fp))
+        $content .= fgets($fp, 4096);
+      //$this->log("Обработка ответа\n");
+      $this->parse_content($request_users, $content, $proxy_server["proto"]);
+    }
+    fclose ($fp);
+  }
 
-    // Execute
-    do {
-      $mrc = curl_multi_exec($mh, $active);
-    } while ($mrc == CURLM_CALL_MULTI_PERFORM);
-
-    while ($active && $mrc == CURLM_OK) {
-      // Connection error or timeout
-      if (curl_multi_select($mh, self::MAX_STATISTICS_SERVER_WAIT_TIME) == -1) {
+  final private function parse_content($users, $content, $proto)
+  {
+    $data = array();
+    switch ($proto)
+    {
+      // eff-rating,eff-rating,...
+      case 1:
+        $content_array = split(",", $content);
+        for ($i = 0; $i < count($users); $i++)
+        {
+          $user_data = array("nick" => $users[$i]);
+          $content_data = split("-", $content_array[$i]);
+          if ($content_data[1] != "0")
+          {
+            $user_data["eff"] = $content_data[0];
+            $user_data["rating"] = $content_data[1];
+          }
+          $data[$users[$i]] = $user_data;
+        }
         break;
-      };
+    }
 
-      do {
-        $mrc = curl_multi_exec($mh, $active);
-      } while ($mrc == CURLM_CALL_MULTI_PERFORM);
-    };
-    $this->log(sprintf("  ответ получен за: %s\n", $this->timer(1)));
-
-    // Finalize batch request
-    foreach ($request_handles as $username => $handle) {
-      $this->save_cached_statistics($username,
-                                    curl_multi_getcontent($handle));
-
-      curl_multi_remove_handle($mh, $handle);
-      curl_close($handle);
-    };
-    curl_multi_close($mh);
+    foreach ($users as $username)
+    {
+      if ($data[$username])
+        $this->save_cached_statistics($username, json_encode($data[$username]));
+    }
   }
 
   function timer($shift = false) {
@@ -502,7 +467,7 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
     $res = $shift ? $now - $last : $now - $first;
     $last = $now;
     return $res;
-  } 
+  }
 }
 
 ?>
