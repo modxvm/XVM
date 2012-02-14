@@ -334,7 +334,7 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
     else if (!is_dir($path))
       $this->log(sprintf("ВНИМАНИЕ: %s существует, но не директория\n", $path));
 
-    return sprintf('%s/%s%s', $path, $username, $username[0] == "@" ? "" : ".json");
+    return trim(sprintf('%s/%s%s', $path, $username, $username[0] == "@" ? "" : ".json"));
   }
 
   final private function get_timeout_flag_file_name($username)
@@ -454,8 +454,8 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
           $content_data = split("-", $content_array[$i]);
           if ($content_data[1] != "0" && $content_data[1] != "X")
           {
-            $user_data["eff"] = $content_data[0];
-            $user_data["rating"] = $content_data[1];
+            $user_data["eff"] = trim($content_data[0]);
+            $user_data["rating"] = trim($content_data[1]);
           }
           $data[$users[$i]] = $user_data;
         }
