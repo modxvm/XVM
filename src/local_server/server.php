@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 define('LOG_ENABLED', true);
 //define('ALT_PROXY_STAT_ENABLED', true);
@@ -13,11 +13,9 @@ $server->ServeRequest($_SERVER["DOCUMENT_ROOT"]);
 
 $end = microtime(true);
 if (defined('LOG_ENABLED') && LOG_ENABLED) {
-  error_log(sprintf("%s: %f\n", 
-                    date('Y-m-d H:i:s'),
-                    $end - $start),
-            3, 
-            'log/time.log');
+  error_log(
+    sprintf("%s: %f %s\n", date('Y-m-d H:i:s'), $end - $start, $_SERVER["PATH_INFO"]),
+    3, 'log/time.log');
 };
 
 ?>
