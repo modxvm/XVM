@@ -394,7 +394,7 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
 
     // Client-side "load balancing"
     $PROXY_SERVERS = array(
-      array("proto" => 1, "addr" => "http://proxy.bulychev.net/polzamer-mod/1/2/%1")
+      array("proto" => 1, "addr" => base64_decode("aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC9wb2x6YW1lci1tb2QvMS8yLyUx"))
     );
     $proxy_server = $PROXY_SERVERS[rand(0, count($PROXY_SERVERS) - 1)];
     $url = str_replace("%1", join(",", $request_users), $proxy_server["addr"]);
