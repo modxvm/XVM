@@ -442,7 +442,7 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
         {
           $user_data = array("nick" => $users[$i]);
           $content_data = split("-", $content_array[$i]);
-          if ($content_data[1] != "0")
+          if ($content_data[1] != "0" && $content_data[1] != "X")
           {
             $user_data["eff"] = $content_data[0];
             $user_data["rating"] = $content_data[1];
