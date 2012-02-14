@@ -1,3 +1,8 @@
+XVM-1.2:
+  * Comments was added to config file XVM.xvmconf
+  * Proxy server and protocol are changed
+  * XML was changed to JSON (except legacy OTMData.xml)
+
 XVM-1.1:
   * fixed ally health bar color with system colors
 

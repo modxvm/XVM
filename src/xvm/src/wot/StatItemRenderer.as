@@ -22,7 +22,7 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
     event.target.removeEventListener("complete", this, "completeLoad");
     if (this.owner._name == "team1List")
       vehicleField._x -= 40; // why this value? (sirmax2)
-    if (Config.value("battle/disableMirroredVehicleIcons/data") == "true")
+    if (Config.bool("battle/disableMirroredVehicleIcons"))
     {
       if (this.owner._name == "team2List")
       {
@@ -36,12 +36,12 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   function setData(data)
   {
     //wot.utils.Logger.addObject(data, "data");
-    if (data && Config.value("rating/showPlayersStatistics/data") == "true")
+    if (data && Config.bool("rating/showPlayersStatistics"))
     {
       Stat.AddPlayerData(this, data.id, data.label, data.vehicle,
         this.owner._name == "team1List" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
       if (Stat.s_player_ids.length === 30 && !Stat.s_loaded) // FIXIT: Не будет работать с "туманом войны".
-        Stat.LoadData(Config.value("battle/usePlayerId/data") == "false");
+        Stat.LoadData(!Config.bool("battle/usePlayerId"));
     }
     super.setData(data);
   }
@@ -50,7 +50,7 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   function update()
   {
     super.update();
-    if (Config.value("rating/showPlayersStatistics/data") == "true" && Config.value("rating/showAtBattleLoading/data") != "false")
+    if (Config.bool("rating/showPlayersStatistics") && Config.bool("rating/showAtBattleLoading", true))
     {
       if (data)
       {
@@ -63,7 +63,7 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   // update delegate (function name is fixed and cannot be changed)
   function updateCallback(pdata)
   {
-    if (Config.value("rating/showAtBattleLoading/data") != "false")
+    if (Config.bool("rating/showAtBattleLoading", true))
     {
       vehicleField.htmlText = Stat.Decorate(pdata.playerName, pdata.originalText,
         pdata.team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);

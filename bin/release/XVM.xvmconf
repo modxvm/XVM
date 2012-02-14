@@ -1,32 +1,34 @@
-﻿<xvmconfig configVersion="1.0.0" editorVersion="0.0.1.a1">
-  <definition>
-    <author>sirmax2</author>
-    <description>Default settings for XVM</description>
-    <url>http://code.google.com/p/wot-xvm/</url>
-    <date>2012-02-11</date>
-    <gameVersion>0.7.1</gameVersion>
-    <modVersion>1.0</modVersion>
-  </definition>
-  <battle>
-    <!-- true - отключить зеркалирование иконок танков (полезно для альтернативных иконок) -->
-    <disableMirroredVehicleIcons>true</disableMirroredVehicleIcons>
-    <!-- false - отключить всплывающую внизу панель после смерти -->
-    <showPostmortemTips>false</showPostmortemTips>
-    <!-- true - включить отображение сетки координат (может быть полезным для настройки) -->
-    <drawGrid>false</drawGrid>
-    <!-- false - использовать ники игроков для статистики. true - использовать userId. Пока работает только по никам -->
-    <usePlayerId>false</usePlayerId>
-  </battle>
-  <rating>
-    <!-- true - включить отображение статистики. Глобальный переключатель - без него модль статистики будет везде отключен. -->
-    <showPlayersStatistics>false</showPlayersStatistics>
-    <!-- false - отключить отображение статистики в окне загрузки боя -->
-    <showAtBattleLoading>true</showAtBattleLoading>
-    <!-- false - отключить отображение статистики в широких ушах -->
-    <showAtLargePlayersPanel>true</showAtLargePlayersPanel>
-    <!-- false - отключить подсветку ников в зависимости от рейтинга в средних ушах -->
-    <colorizeMiddlePlayersPanel>true</colorizeMiddlePlayersPanel>
-    <!-- false - отключить отображение статистики в окне статистики боя (по клавише Tab) -->
-    <showAtStatisticForm>true</showAtStatisticForm>
-  </rating>
-</xvmconfig>
+﻿{
+  "configVersion": "1.0.0",
+  "editorVersion": "0.0.1.a1",
+  "definition": {
+    "author": "sirmax2",
+    "description": "Default settings for XVM",
+    "url": "http://code.google.com/p/wot-xvm/",
+    "date": "2012-02-11",
+    "gameVersion": "0.7.1",
+    "modVersion": "1.2"
+  },
+  "battle": {
+    /* true - отключить зеркалирование иконок танков (полезно для альтернативных иконок) */
+    "disableMirroredVehicleIcons": "true",
+    /* false - отключить всплывающую внизу панель после смерти */
+    "showPostmortemTips": "false",
+    /* true - включить отображение сетки координат (может быть полезным для настройки) */
+    "drawGrid": "false",
+    /* false - использовать ники игроков для статистики. true - использовать userId. Пока работает только по никам */
+    "usePlayerId": "false"
+  },
+  "rating": {
+    /* true - включить отображение статистики. Глобальный переключатель - без него модуль статистики будет везде отключен. */
+    "showPlayersStatistics": "false",
+    /* false - отключить отображение статистики в окне загрузки боя */
+    "showAtBattleLoading": "true",
+    /* false - отключить отображение статистики в широких ушах */
+    "showAtLargePlayersPanel": "true",
+    /* false - отключить подсветку ников в зависимости от рейтинга в средних ушах */
+    "colorizeMiddlePlayersPanel": "true",
+    /* false - отключить отображение статистики в окне статистики боя (по клавише Tab) */
+    "showAtStatisticForm": "true"
+  }
+}

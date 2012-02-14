@@ -2,7 +2,6 @@
  * ...
  * @author sirmax2
  */
-import net.produxion.util.XML2Object;
 import wot.utils.Defines;
 
 class wot.utils.Stat
@@ -15,7 +14,7 @@ class wot.utils.Stat
   public static var s_loaded = false;
 
   // Misc functions
-  
+
   public static function CleanPlayerName(str)
   {
     str = str.toLowerCase();
@@ -100,7 +99,7 @@ class wot.utils.Stat
 
     if (players_to_load.length > 0)
     {
-      var lv = new LoadVars();
+      var lv:LoadVars = new LoadVars();
       lv.onLoad = function(success)
       {
         Stat.LoadData(useNames);
@@ -121,35 +120,22 @@ class wot.utils.Stat
     if (s_loaded)
       return;
     s_loaded = true;
-          
-    var xml = new XML();
-    xml.ignoreWhite = true;
-    xml.onLoad = function(success)
+
+    var lv:LoadVars = new LoadVars();
+    lv.onData = function(str)
     {
-      if (!success)
-        return;
-
-      var stats = XML2Object.deserialize(this);
-
-      for (var i = 0; i < stats.users.user.length; i++) {
-        var stat = stats.users.user[i];
-
-        var rating = stat.attributes.battles > 0
-          ? Math.round(stat.attributes.wins / stat.attributes.battles * 100) : 0;
-
+      var stats = net.wargaming.io.JSON.parse(str);
+      for (var i = 0; i < stats.players.length; i++)
+      {
         if (!Stat.s_player_ratings)
           Stat.s_player_ratings = {};
-
-        Stat.s_player_ratings[stat.attributes.nick.toUpperCase()] = {
-          rating: rating,
-          battles: stat.attributes.battles,
-          wins: stat.attributes.wins
-        };
+        var stat = stats.players[i];
+        Stat.s_player_ratings[stat.nick.toUpperCase()] = stat;
       };
 
       Stat.UpdateAll();
     };
-    xml.load(command);
+    lv.load(command);
   }
 
   public static function LoadIds()
@@ -186,5 +172,5 @@ class wot.utils.Stat
       pdata.reference.updateCallback(pdata);
     }
   }
-  
+
 }

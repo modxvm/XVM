@@ -23,7 +23,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     event.target.removeEventListener("complete", this, "completeLoad");
     if (this.owner._name == "team1")
       col3._x -= 20;
-    if (Config.value("battle/disableMirroredVehicleIcons/data") == "true")
+    if (Config.bool("battle/disableMirroredVehicleIcons"))
     {
       if (this.owner._name == "team2")
       {
@@ -37,7 +37,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
   function updateData()
   {
     super.updateData();
-    if (Config.value("rating/showAtStatisticForm/data") != "false")
+    if (Config.bool("rating/showAtStatisticForm", true))
     {
       col3.htmlText = Stat.Decorate(data.label, data.vehicle,
         this.owner._name == "team1" ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);

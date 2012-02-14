@@ -18,7 +18,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   {
     event.target.removeEventListener("complete", this, "completeLoad");
 
-    if (Config.value("battle/disableMirroredVehicleIcons/data") != "true")
+    if (!Config.bool("battle/disableMirroredVehicleIcons"))
       return;
 
     if (m_type == "left")
@@ -44,7 +44,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   // override
   function _setNamesStr(data, sel, isColorBlind, knownPlayersCount)
   {
-    if (Config.value("rating/showPlayersStatistics/data") != "true")
+    if (!Config.bool("rating/showPlayersStatistics"))
     {
       super._setNamesStr(data, sel, isColorBlind, knownPlayersCount);
       return;
@@ -62,7 +62,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
       {
         if (m_state == "large")
         {
-          if (Config.value("rating/showAtLargePlayersPanel/data") != "false")
+          if (Config.bool("rating/showAtLargePlayersPanel", true))
           {
             _loc5 = Stat.Decorate(data[_loc2].label, data[_loc2].label,
               m_type == "left" ? Defines.POSITION_LEFT : Defines.POSITION_RIGHT);
@@ -70,7 +70,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         }
         else
         {
-          if (Config.value("rating/colorizeMiddlePlayersPanel/data") != "false")
+          if (Config.bool("rating/colorizeMiddlePlayersPanel", true))
           {
             var pname = Stat.CleanPlayerName(data[_loc2].label);
             var rating = Stat.s_player_ratings[pname.toUpperCase()].rating;

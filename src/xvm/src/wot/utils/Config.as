@@ -2,7 +2,6 @@
  * ...
  * @author sirmax2
  */
-import net.produxion.util.XML2Object;
 import wot.utils.Defines;
 import wot.utils.Stat;
 
@@ -33,31 +32,49 @@ class wot.utils.Config
 
   public static function ReloadConfig(filename)
   {
-    var xml:XML = new XML();
-    xml.ignoreWhite = true;
-    xml.onLoad = function(success)
+    if (filename.toLowerCase() != "otmdata.xml")
     {
-      if (!success)
-        return;
+      // new config
+      var lv:LoadVars = new LoadVars();
+      lv.onData = function(str)
+      {
+        Config.s_config = net.wargaming.io.JSON.parse(str);
+        if (Config.s_load_last_stat && Config.value("rating/showPlayersStatistics") == "true")
+          Stat.LoadStatData(Defines.COMMAND_GET_LAST_STAT);
+      };
+      lv.load(filename);
+    }
+    else
+    {
+      // legacy config
+      var xml:XML = new XML();
+      xml.ignoreWhite = true;
+      xml.onLoad = function(success)
+      {
+        if (!success)
+          return;
 
-      Config.s_config = XML2Object.deserialize(this);
-      if (Config.s_config.hasOwnProperty("xvmconfig"))
-      {
-        // new config
-        Config.s_config = Config.s_config["xvmconfig"];
-      }
-      else
-      {
-        // legacy config
+        Config.s_config = net.produxion.util.XML2Object.deserialize(this);
         Config.s_config = Config.s_config["overTargetMarkers"];
-      }
 
-      if (Config.s_load_last_stat && Config.value("rating/showPlayersStatistics/data") == "true")
-        Stat.LoadStatData(Defines.COMMAND_GET_LAST_STAT);
-    };
-    xml.load(filename);
+        if (Config.s_load_last_stat && Config.value("rating/showPlayersStatistics/data") == "true")
+          Stat.LoadStatData(Defines.COMMAND_GET_LAST_STAT);
+      };
+      xml.load(filename);
+    }
   }
 
+  public static function int(path: String)
+  {
+    return parseInt(value(path));
+  }
+  
+  public static function bool(path: String, trueIsDefault: Boolean)
+  {
+    var v = value(path).toLowerCase();
+    return trueIsDefault ? v != "false" : v == "true";
+  }
+  
   public static function value(path: String)
   {
     var p: Array = path.split("/"); // "path/to/value"
