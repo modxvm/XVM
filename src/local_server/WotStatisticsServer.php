@@ -315,7 +315,8 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
     foreach ($usernames as $username)
       $result["players"][] = json_decode($this->load_cached_statistics($username));
 
-    return "\xEF\xBB\xBF" . json_encode($result);
+    //$this->log("response: " . json_encode($result));
+    return json_encode($result);
   }
 
   final private function get_cache_file_name($username)
