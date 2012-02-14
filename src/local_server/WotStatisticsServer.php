@@ -414,20 +414,30 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
     {
       fputs ($fp, sprintf("GET %s%s HTTP/1.0\r\nHost: %s\r\n\r\n",
         $u["path"], $u["query"], $u["host"]));
-      $body = false;
-      while ($line = @fgets($fp, 1024))
+
+      stream_set_timeout($fp, self::MAX_STATISTICS_SERVER_WAIT_TIME);
+      $res = fread($fp, 65535);
+
+      $info = stream_get_meta_data($fp);
+      fclose($fp);
+
+      if ($info['timed_out'])
+        $this->log("Истекло время соединения!\n");
+      else
       {
-        if (!$body && preg_match("/^[\r]?\n$/i", $line))
-          $body = true;
-        else if ($body)
-          $content .= $line;
+        $body = false;
+        $lines = split("\n", $res);
+        foreach ($lines as $line)
+        {
+          if (!$body && preg_match("/^[\r]?$/i", $line))
+            $body = true;
+          else if ($body)
+            $content .= "$line\n";
+        }
       }
-      while (!feof($fp))
-        $content .= fgets($fp, 4096);
       //$this->log("Обработка ответа\n");
       $this->parse_content($request_users, $content, $proxy_server["proto"]);
     }
-    fclose ($fp);
   }
 
   final private function parse_content($users, $content, $proto)
