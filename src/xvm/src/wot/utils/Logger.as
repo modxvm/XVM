@@ -14,6 +14,7 @@ class wot.utils.Logger
     str = str.split(";").join(".");
     str = str.split("<").join("{");
     str = str.split(">").join("}");
+    str = str.split("\"").join("'");
 
     var p = new LoadVars();
 

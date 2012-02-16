@@ -64,7 +64,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         {
           if (Config.bool("rating/showAtLargePlayersPanel", true))
           {
-            _loc5 = Stat.Decorate(data[_loc2].label, data[_loc2].label,
+            _loc5 = Stat.DecorateRating(data[_loc2].label, data[_loc2].label,
               m_type == "left" ? Defines.POSITION_LEFT : Defines.POSITION_RIGHT);
           }
         }

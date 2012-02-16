@@ -32,14 +32,14 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
       }
     }
   }
-    
+
   // override
   function updateData()
   {
     super.updateData();
     if (Config.bool("rating/showAtStatisticForm", true))
     {
-      col3.htmlText = Stat.Decorate(data.label, data.vehicle,
+      col3.htmlText = Stat.DecorateRating(data.label, data.vehicle,
         this.owner._name == "team1" ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
     }
   }

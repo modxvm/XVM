@@ -8,18 +8,15 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
   const CACHE_FILE_LIVE_TIME = 1209600;  //=14*24*60*60 - 14 days
 
   const COMMAND_LOG = "@LOG";
-  const COMMAND_SET_IDS = "@SET_IDS ";
-  const COMMAND_ADD_IDS = "@ADD_IDS ";
-  const COMMAND_GET_IDS = "@GET_IDS";
-  const COMMAND_RUN_IDS = "@RUN_IDS";
-  const COMMAND_SET_NAMES = "@SET_NAMES ";
-  const COMMAND_ADD_NAMES = "@ADD_NAMES ";
-  const COMMAND_GET_NAMES = "@GET_NAMES";
-  const COMMAND_RUN_NAMES = "@RUN_NAMES";
+  const COMMAND_SET = "@SET";
+  const COMMAND_ADD = "@ADD";
+  const COMMAND_GET = "@GET";
+  const COMMAND_RUN = "@RUN";
   const COMMAND_GET_LAST_STAT = "@GET_LAST_STAT";
 
   private $_cached_statistics = array();
   private $set_timeout_enabled = true;
+  private $use_names = false;
 
   function ServeRequest() {
     // special treatment for litmus compliance test
@@ -184,92 +181,50 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
       if ($sender != "GET" && !$this->is_command($p, self::COMMAND_LOG))
         $this->log(" CMD: " . $p . "\n");
 
-      if ($this->is_command($p, self::COMMAND_SET_IDS))
-      {
-        if ($sender == "GET")
-          return "";
-        $users = substr($p, strlen(self::COMMAND_SET_IDS));
-        if ($users == null || $users == "")
-          return null;
-        $this->save_cached_statistics(self::COMMAND_SET_IDS, $users);
-        return "";
-      }
-
-      if ($this->is_command($p, self::COMMAND_ADD_IDS))
-      {
-        if ($sender == "GET")
-          return "";
-        $users = $this->load_cached_statistics(self::COMMAND_SET_IDS);
-        $new_users = substr($p, strlen(self::COMMAND_ADD_IDS));
-        $users = $users ? $users . "," : "";
-        if ($users == null || $users == "")
-          return null;
-        $this->save_cached_statistics(self::COMMAND_SET_IDS, $users . $new_users);
-        return "";
-      }
-
-      if ($this->is_command($p, self::COMMAND_GET_IDS))
-        return $this->load_cached_statistics(self::COMMAND_SET_IDS);
-
-      if ($this->is_command($p, self::COMMAND_RUN_IDS))
-      {
-        if ($sender == "GET")
-          return $this->load_cached_statistics(self::COMMAND_GET_LAST_STAT);
-        $users = $this->load_cached_statistics(self::COMMAND_SET_IDS);
-        if ($users == null || $users == "")
-          return null;
-        $content = $this->get_statistics_contents_batch(split(',', $users));
-        $this->save_cached_statistics(self::COMMAND_GET_LAST_STAT, $content);
-        return $content;
-      }
-
-      if ($this->is_command($p, self::COMMAND_SET_NAMES))
-      {
-        if ($sender == "GET")
-          return "";
-        $users = substr($p, strlen(self::COMMAND_SET_NAMES));
-        if ($users == null || $users == "")
-          return null;
-        $this->save_cached_statistics(self::COMMAND_SET_NAMES, $users);
-        return "";
-      }
-
-      if ($this->is_command($p, self::COMMAND_ADD_NAMES))
-      {
-        if ($sender == "GET")
-          return "";
-        $users = $this->load_cached_statistics(self::COMMAND_SET_NAMES);
-        $new_users = substr($p, strlen(self::COMMAND_ADD_NAMES));
-        $users = $users ? $users . "," : "";
-        if ($users == null || $users == "")
-          return null;
-        $this->save_cached_statistics(self::COMMAND_SET_NAMES, $users . $new_users);
-        return "";
-      }
-
-      if ($this->is_command($p, self::COMMAND_GET_NAMES))
-        return $this->load_cached_statistics(self::COMMAND_SET_NAMES);
-
-      if ($this->is_command($p, self::COMMAND_RUN_NAMES))
-      {
-        if ($sender == "GET")
-          return $this->load_cached_statistics(self::COMMAND_GET_LAST_STAT);
-        $users = $this->load_cached_statistics(self::COMMAND_SET_NAMES);
-        if ($users == null || $users == "")
-          return null;
-        $content = $this->get_statistics_contents_batch(split(',', $users));
-        $this->save_cached_statistics(self::COMMAND_GET_LAST_STAT, $content);
-        return $content;
-      }
-
-      if ($this->is_command($p, self::COMMAND_GET_LAST_STAT))
-        return $this->load_cached_statistics(self::COMMAND_GET_LAST_STAT);
-
       if ($this->is_command($p, self::COMMAND_LOG))
       {
         if ($sender != "GET")
           $this->log(sprintf("LOG:%s\n", substr($p, 4)));
         return "";
+      }
+
+      if ($this->is_command($p, self::COMMAND_SET . " "))
+      {
+        if ($sender == "GET")
+          return "";
+        $params = substr($p, strlen(self::COMMAND_SET . " "));
+        if ($params == null || $params == "")
+          return null;
+        $this->save_cached_statistics(self::COMMAND_SET, $params);
+        return "";
+      }
+
+      if ($this->is_command($p, self::COMMAND_ADD))
+      {
+        if ($sender == "GET")
+          return "";
+        $params = $this->load_cached_statistics(self::COMMAND_SET);
+        $new_params = substr($p, strlen(self::COMMAND_ADD . " "));
+        $params = $params ? $params . "," : "";
+        if ($params == null || $params == "")
+          return null;
+        $this->save_cached_statistics(self::COMMAND_SET, $params . $new_params);
+        return "";
+      }
+
+      if ($this->is_command($p, self::COMMAND_GET))
+        return $this->load_cached_statistics(self::COMMAND_SET);
+
+      if ($this->is_command($p, self::COMMAND_RUN))
+      {
+        if ($sender == "GET")
+          return $this->load_cached_statistics(self::COMMAND_GET_LAST_STAT);
+        $params = $this->load_cached_statistics(self::COMMAND_SET);
+        if ($params == null || $params == "")
+          return null;
+        $content = $this->get_statistics_contents_batch($params);
+        $this->save_cached_statistics(self::COMMAND_GET_LAST_STAT, $content);
+        return $content;
       }
 
       $this->log(sprintf("ВНИМАНИЕ: Неизвестная управляющая команда: %s\n", $p));
@@ -279,53 +234,65 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
     $this->log(sprintf("Загрузка файла статистики: %s\n", $path));
     if (!preg_match('/\/(.*)/i', $path, $matches))
       return null;
-    $usernames = $matches[1];
-    $content = $this->get_statistics_contents_batch(split(',', $usernames));
+    $content = $this->get_statistics_contents_batch($matches[1]);
     return $content;
   }
 
-  final private function get_statistics_contents_batch($usernames)
+  // nick-id,nick-id,... or nick,nick,nick...
+  final private function get_statistics_contents_batch($params)
   {
+    $request = split(',', $params);
     $result = array("players" => array());
 
     // Pre-fetch elements which are not yet cached cached locally
-    $request_users = array();
-    foreach ($usernames as $username)
+    $request_ids = array();
+    foreach ($request as $chunk)
     {
-      if (array_key_exists($username, $this->_cached_statistics)) {
-        $this->log(sprintf("Загрузка статистики из памяти для: %s\n", $username));
-      } else {
-        $res = file_exists($this->get_cache_file_name($username));
-        if ($res) {
-          $this->log(sprintf("Загрузка статистики из кэша для: %s\n", $username));
-          $this->_cached_statistics[$username] = file_get_contents($this->get_cache_file_name($username));
-          if (time() - filemtime($this->get_cache_file_name($username)) > self::CACHE_FILE_LIVE_TIME) {
-            $this->log(sprintf("Просроченный файл статистики в кэше для: %s\n", $username));
+      $uinfo = split('-', $chunk);
+      $nick = $uinfo[0];
+      $id = $uinfo[count($uinfo) - 1];
+      $use_names = count($uinfo) == 1;
+      if (array_key_exists($id, $this->_cached_statistics))
+        $this->log(sprintf("Загрузка статистики из памяти для: %s\n", $chunk));
+      else
+      {
+        $cacheFileName = $this->get_cache_file_name($nick);
+        $res = file_exists($cacheFileName);
+        if ($res)
+        {
+          $this->log(sprintf("Загрузка статистики из кэша для: %s\n", $chunk));
+          $this->_cached_statistics[$id] = file_get_contents($cacheFileName);
+          if (time() - filemtime($cacheFileName) > self::CACHE_FILE_LIVE_TIME)
+          {
+            $this->log(sprintf("Просроченный файл статистики в кэше для: %s\n", $chunk));
             $res = false;
           };
         };
-        if (!$res && !$this->has_timed_out_recently($username))
-          $request_users[] = $username;
+        if (!$res && !$this->has_timed_out_recently($nick))
+          $request_ids[$id] = $nick;
       };
     };
 
-    $this->execute_requests($request_users);
+    $this->execute_request($request_ids);
 
     // Generate batch response
-    foreach ($usernames as $username)
-      $result["players"][] = json_decode($this->load_cached_statistics($username));
+    foreach ($request as $chunk)
+    {
+      $uinfo = split('-', $chunk);
+      $nick = $uinfo[0];
+      $result["players"][] = json_decode($this->load_cached_statistics($nick));
+    }
 
     //$this->log("response: " . json_encode($result));
     return json_encode($result);
   }
 
-  final private function get_cache_file_name($username)
+  final private function get_cache_file_name($nick)
   {
-    settype($username, "string");
-    $path = $username[0] == "@"
-      ? 'cache/@'
-      : sprintf('cache' . DIRECTORY_SEPARATOR . '%s' . DIRECTORY_SEPARATOR . '%s' . DIRECTORY_SEPARATOR . '%s',
-                $username[0], $username[1], $username[2]);
+    settype($nick, "string");
+    $path = 'cache' . DIRECTORY_SEPARATOR . ($nick[0] == "@" ? '@'
+      : sprintf('%s' . DIRECTORY_SEPARATOR . '%s' . DIRECTORY_SEPARATOR . '%s',
+          $nick[0], $nick[1], $nick[2]));
 
     if (!file_exists($path)) {
       if (!mkdir($path, 777, true))
@@ -334,17 +301,17 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
     else if (!is_dir($path))
       $this->log(sprintf("ВНИМАНИЕ: %s существует, но не директория\n", $path));
 
-    return trim(sprintf('%s/%s%s', $path, $username, $username[0] == "@" ? "" : ".json"));
+    return trim(sprintf('%s/%s%s', $path, $nick, $nick[0] == "@" ? "" : ".json"));
   }
 
-  final private function get_timeout_flag_file_name($username)
+  final private function get_timeout_flag_file_name($nick)
   {
-    return sprintf('%s.timeout.flag', $this->get_cache_file_name($username));
+    return sprintf('%s.timeout.flag', $this->get_cache_file_name($nick));
   }
 
-  final private function has_timed_out_recently($username)
+  final private function has_timed_out_recently($nick)
   {
-    $flag_file = $this->get_timeout_flag_file_name($username);
+    $flag_file = $this->get_timeout_flag_file_name($nick);
     if (!file_exists($flag_file))
       return false;
     $res = (time() - filemtime($flag_file)) < self::TIMEOUT_WAIT_TIME;
@@ -353,43 +320,49 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
     return $res;
   }
 
-  final private function load_cached_statistics($username) {
-    if (!file_exists($this->get_cache_file_name($username)))
+  final private function load_cached_statistics($nick)
+  {
+    $cacheFileName = $this->get_cache_file_name($nick);
+    if (!file_exists($cacheFileName))
       return null;
 
-    if (time() - filemtime($this->get_cache_file_name($username)) > self::CACHE_FILE_LIVE_TIME) {
-      $this->log(sprintf("Просроченный файл статистики в кэше для: %s\n", $username));
+    if (time() - filemtime($cacheFileName) > self::CACHE_FILE_LIVE_TIME)
+    {
+      $this->log(sprintf("Просроченный файл статистики в кэше для: %s\n", $nick));
       return null;
     };
 
-    $this->log(sprintf("Загрузка статистики из кэша для: %s\n", $username));
-    return file_get_contents($this->get_cache_file_name($username));
+    $this->log(sprintf("Загрузка статистики из кэша для: %s\n", $nick));
+    return file_get_contents($cacheFileName);
   }
 
-  final private function save_cached_statistics($username, $content) {
-    if (!$content) {
-      if ($username[0] == "@")
-        $this->remove_cached_statistics($username);
-      else {
-        $this->log(sprintf("Таймаут при запросе статистики для: %s\n", $username));
+  final private function save_cached_statistics($nick, $content) {
+    if (!$content)
+    {
+      if ($nick[0] == "@")
+        $this->remove_cached_statistics($nick);
+      else
+      {
+        $this->log(sprintf("Таймаут при запросе статистики для: %s\n", $nick));
         if ($this->set_timeout_enabled)
-        touch($this->get_timeout_flag_file_name($username));
+          touch($this->get_timeout_flag_file_name($nick));
       }
       return;
     };
 
-    $this->_cached_statistics[$username] = $content;
-    $this->log(sprintf("Сохранение статистики в кэш для: %s > сохранено %s байт\n", $username,
-                       file_put_contents($this->get_cache_file_name($username), $content)));
+    $this->_cached_statistics[$nick] = $content;
+    $this->log(sprintf("Сохранение статистики в кэш для: %s > сохранено %s байт\n", $nick,
+      file_put_contents($this->get_cache_file_name($nick), $content)));
   }
 
-  final private function remove_cached_statistics($username) {
-    unlink($this->get_cache_file_name($username));
-  }
-
-  final private function execute_requests($request_users)
+  final private function remove_cached_statistics($nick)
   {
-    if (count($request_users) == 0)
+    unlink($this->get_cache_file_name($nick));
+  }
+
+  final private function execute_request($request_ids)
+  {
+    if (count($request_ids) == 0)
       return;
 
     // Client-side "load balancing"
@@ -397,7 +370,7 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
       array("proto" => 1, "addr" => base64_decode("aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC9wb2x6YW1lci1tb2QvMS8yLyUx"))
     );
     $proxy_server = $PROXY_SERVERS[rand(0, count($PROXY_SERVERS) - 1)];
-    $url = str_replace("%1", join(",", $request_users), $proxy_server["addr"]);
+    $url = str_replace("%1", join(",", array_keys($request_ids)), $proxy_server["addr"]);
 
     $this->log(sprintf("Отправка запроса: %s\n", $url));
 
@@ -436,11 +409,11 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
         }
       }
       //$this->log("Обработка ответа\n");
-      $this->parse_content($request_users, $content, $proxy_server["proto"]);
+      $this->parse_content($request_ids, $content, $proxy_server["proto"]);
     }
   }
 
-  final private function parse_content($users, $content, $proto)
+  final private function parse_content($ids, $content, $proto)
   {
     $data = array();
     switch ($proto)
@@ -448,28 +421,36 @@ class WotStatisticsServer extends HTTP_WebDAV_Server {
       // eff-rating,eff-rating,...
       case 1:
         $content_array = split(",", $content);
-        for ($i = 0; $i < count($users); $i++)
+        $keys = array_keys($ids);
+        for ($i = 0; $i < count($keys); $i++)
         {
-          $user_data = array("nick" => $users[$i]);
+          $id = $keys[$i];
+          $nick = $ids[$id];
+          $user_data = array("nick" => $nick);
+          if (!$use_names)
+            $user_data["id"] = $id;
           $content_data = split("-", $content_array[$i]);
-          if ($content_data[1] != "0" && $content_data[1] != "X")
+          $eff = trim($content_data[0]);
+          $rating = trim($content_data[1]);
+          if ($rating != "0" && $rating != "X")
           {
-            $user_data["eff"] = trim($content_data[0]);
-            $user_data["rating"] = trim($content_data[1]);
+            $user_data["eff"] = $eff;
+            $user_data["rating"] = $rating;
           }
-          $data[$users[$i]] = $user_data;
+          $data[$id] = $user_data;
         }
         break;
     }
 
-    foreach ($users as $username)
+    foreach (array_keys($ids) as $id)
     {
-      if ($data[$username])
-        $this->save_cached_statistics($username, json_encode($data[$username]));
+      if ($data[$id])
+        $this->save_cached_statistics($data[$id]["nick"], json_encode($data[$id]));
     }
   }
 
-  function timer($shift = false) {
+  function timer($shift = false)
+  {
     static $first = 0;
     static $last;
 

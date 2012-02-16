@@ -38,12 +38,12 @@ class wot.utils.Stat
     return GetColorHtmlText(percent, String(percent) + "%");
   }
 
-  public static function Decorate(playerName: String, txt: String, ratingPosition: Number)
+  public static function DecorateRating(playerName: String, txt: String, ratingPosition: Number)
   {
     if (!s_player_ratings)
       return txt;
-    var pname = CleanPlayerName(playerName);
-    var rating = s_player_ratings[pname.toUpperCase()].rating;
+    var pname = CleanPlayerName(playerName).toUpperCase();
+    var rating = s_player_ratings[pname].rating;
     return (ratingPosition == Defines.POSITION_LEFT)
       ? GetPercentHtmlText(rating) + " " + txt
       : txt + " " + GetPercentHtmlText(rating);
@@ -65,7 +65,7 @@ class wot.utils.Stat
       s_player_data[pname] = {
         reference: reference,
         playerId: playerId,
-        playerName: pname,
+        name: pname,
         originalText: originalText,
         team: team,
         loaded: false
@@ -74,9 +74,9 @@ class wot.utils.Stat
   }
 
   private static var _s_isNew = true;
-  public static function LoadData(useNames: Boolean)
+  public static function LoadData()
   {
-    //Logger.add("Stat.LoadData(" + useNames + ")");
+    //Logger.add("Stat.LoadData()");
 
     var is_new = _s_isNew;
     _s_isNew = false;
@@ -88,7 +88,7 @@ class wot.utils.Stat
       var pdata = s_player_data[pname];
       if (!pdata.loaded)
       {
-        var str: String = useNames ? pname : String(pdata.playerId);
+        var str: String = pname + "-" + String(pdata.playerId);
         if (len + str.length > Defines.MAX_PATH)
           break;
         pdata.loaded = true;
@@ -102,16 +102,14 @@ class wot.utils.Stat
       var lv:LoadVars = new LoadVars();
       lv.onLoad = function(success)
       {
-        Stat.LoadData(useNames);
+        Stat.LoadData();
       }
-      var fn = useNames
-        ? (is_new ? Defines.COMMAND_SET_NAMES: Defines.COMMAND_ADD_NAMES)
-        : (is_new ? Defines.COMMAND_SET_IDS: Defines.COMMAND_ADD_IDS);
+      var fn = is_new ? Defines.COMMAND_SET : Defines.COMMAND_ADD;
       lv.load(fn + " " + players_to_load.join(","));
     }
     else
     {
-      LoadStatData(useNames ? Defines.COMMAND_RUN_NAMES : Defines.COMMAND_RUN_IDS);
+      LoadStatData(Defines.COMMAND_RUN);
     }
   }
 
@@ -124,13 +122,16 @@ class wot.utils.Stat
     var lv:LoadVars = new LoadVars();
     lv.onData = function(str)
     {
+      //wot.utils.Logger.add(str);
       var stats = net.wargaming.io.JSON.parse(str);
       for (var i = 0; i < stats.players.length; i++)
       {
         if (!Stat.s_player_ratings)
           Stat.s_player_ratings = {};
         var stat = stats.players[i];
-        Stat.s_player_ratings[stat.nick.toUpperCase()] = stat;
+        
+        stat.rating = stat.battles > 0 ? Math.round(stat.wins / stat.battles * 100) : 0;
+        Stat.s_player_ratings[stat.name.toUpperCase()] = stat;
       };
 
       Stat.UpdateAll();
@@ -138,28 +139,24 @@ class wot.utils.Stat
     lv.load(command);
   }
 
-  public static function LoadIds()
+  public static function LoadPlayerInfo()
   {
     var lv= new LoadVars();
     lv.onLoad = function(success)
     {
       if (!success)
         return;
-      Stat.s_player_ids = this.split(",");
+      Stat.s_player_ids = [];
+      Stat.s_player_names = [];
+      var playerInfo = this.split(",");
+      for (var pi in playerInfo)
+      {
+        var info = (playerInfo[pi]).split("-");
+        Stat.s_player_names.push(info[0]);
+        Stat.s_player_ids.push(info[1]);
+      }
     };
-    lv.load(Defines.COMMAND_GET_IDS);
-  }
-
-  public static function LoadNames()
-  {
-    var lv= new LoadVars();
-    lv.onLoad = function(success)
-    {
-      if (!success)
-        return;
-      Stat.s_player_names = this.split(",");
-    };
-    lv.load(Defines.COMMAND_GET_NAMES);
+    lv.load(Defines.COMMAND_GET);
   }
 
   private static function UpdateAll()

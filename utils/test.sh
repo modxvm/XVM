@@ -1,15 +1,15 @@
 #!/bin/sh
 
-cd $(dirname $(realpath $0))
+cd $(dirname $(realpath $(cygpath --unix $0)))
 
 ./deploy.sh
 
 [ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/home/games/WoT
 CURRENT_DIRECTORY=`pwd`
 #SAMPLE_REPLAY=1.wotreplay
-SAMPLE_REPLAY=blowup.wotreplay
-#SAMPLE_REPLAY=tk.wotreplay
+#SAMPLE_REPLAY=blowup.wotreplay
+SAMPLE_REPLAY=tk.wotreplay
 #SAMPLE_REPLAY=squad.wotreplay
 cd ${WOT_DIRECTORY}
-# Мне что, в жизни извращённого секса уже не хватает?
-cmd /c start ./WorldOfTanks.exe `cygpath --windows ${CURRENT_DIRECTORY}/../test/replays/${SAMPLE_REPLAY}`
+#cmd /c start ./WorldOfTanks.exe `cygpath --windows ${CURRENT_DIRECTORY}/../test/replays/${SAMPLE_REPLAY}`
+cmd /c start ./wot-xvm-proxy.exe `cygpath --windows ${CURRENT_DIRECTORY}/../test/replays/${SAMPLE_REPLAY}`

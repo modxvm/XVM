@@ -1,4 +1,5 @@
 ﻿/**
+/**
  * ...
  * @author Nikolas Siver
  * @author bkon
@@ -187,18 +188,28 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     format = format.split("{{nick}}").join(m_playerFullName);
     format = format.split("{{vehicle}}").join(m_vname);
 
-    if (format.split("{{rating}}").length > 1)
+    var wins = "";
+    var battles = "";
+    var kb = "";
+    var strRating = "";
+    var eff = "";
+    if (Stat.s_player_ratings)
     {
-      var strRating = "";
-      if (Stat.s_player_ratings)
-      {
-        var pname = Stat.CleanPlayerName(m_playerFullName);
-        var rating = Stat.s_player_ratings[pname.toUpperCase()].rating;
-        strRating = rating ? String(rating) + "%" : "";
-      }
-      format = format.split("{{rating}}").join(strRating);
+      var pname = Stat.CleanPlayerName(m_playerFullName).toUpperCase();
+      var bn = Stat.s_player_ratings[pname].battles;
+      kb = Math.round(bn / 1000) + "k";
+      battles = String(bn);
+      wins = Stat.s_player_ratings[pname].wins;
+      var rating = Stat.s_player_ratings[pname].rating;
+      strRating = rating ? String(rating) + "%" : "";
+      eff = Stat.s_player_ratings[pname].eff;
     }
-  
+    format = format.split("{{kb}}").join(kb);
+    format = format.split("{{battles}}").join(battles);
+    format = format.split("{{wins}}").join(wins);
+    format = format.split("{{rating}}").join(strRating);
+    format = format.split("{{eff}}").join(eff);
+
     return format;
   }
 
@@ -330,7 +341,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     var p_hb = "components/" + playerStatus + "/healthBar/";
     var color = Config.value(p_hb + "fill/attributes/color");
     var lcolor = Config.value(p_hb + "fill/attributes/lcolor");
-    
+
     var fullColor: Number = XVMColorWithFallback(color);
     var lowColor: Number = XVMColorWithFallback(lcolor || color);
 
@@ -557,7 +568,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       {
         this.textFields = [XVMCreateTextField(infoText)];
       };
-      
+
       // Update Colors
       this.updateCurrentColor(m_curHealth, m_maxHealth);
       this.updateHealthUI(m_curHealth, m_maxHealth);
@@ -567,7 +578,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       XVMSetErrorText("ERR:us:" + String(e));
     }
   }
-  
+
   function XVMSetErrorText(str)
   {
       pNameField.setNewTextFormat(new TextFormat("$FieldFont", 13, 0xFF0000, true, false, true, null, null, "center"));

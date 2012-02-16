@@ -7,19 +7,18 @@ class wot.utils.Defines
   public static var DEFAULT_CONFIG_NAME = "XVM.xvmconf";
         
   // file name limit is ~ 220 chars
-  public static var MAX_PATH = 170;
+  public static var MAX_PATH = 180;
+
+  // Path to Dokan MountPoint
+  public static var DOKAN_MP = "../../../.stat/";
 
   // WebDav commands
-  public static var COMMAND_LOG = "stat/@LOG";
-  public static var COMMAND_SET_IDS = "stat/@SET_IDS";
-  public static var COMMAND_ADD_IDS = "stat/@ADD_IDS";
-  public static var COMMAND_GET_IDS = "stat/@GET_IDS";
-  public static var COMMAND_RUN_IDS = "stat/@RUN_IDS";
-  public static var COMMAND_SET_NAMES = "stat/@SET_NAMES";
-  public static var COMMAND_ADD_NAMES = "stat/@ADD_NAMES";
-  public static var COMMAND_GET_NAMES = "stat/@GET_NAMES";
-  public static var COMMAND_RUN_NAMES = "stat/@RUN_NAMES";
-  public static var COMMAND_GET_LAST_STAT = "stat/@GET_LAST_STAT";
+  public static var COMMAND_LOG = DOKAN_MP + "@LOG";
+  public static var COMMAND_SET = DOKAN_MP + "@SET";
+  public static var COMMAND_ADD = DOKAN_MP + "@ADD";
+  public static var COMMAND_GET = DOKAN_MP + "@GET";
+  public static var COMMAND_RUN = DOKAN_MP + "@RUN";
+  public static var COMMAND_GET_LAST_STAT = DOKAN_MP + "@GET_LAST_STAT";
 
   // Position
   public static var POSITION_LEFT = 0;

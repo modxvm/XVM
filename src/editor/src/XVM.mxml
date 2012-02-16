@@ -93,7 +93,10 @@
 				/////////////////////
 
 				lastFileName = "XVM.xvmconf";
-				ParseConfigXml(ConfigHelper.ConfigToXml(new Object()));
+
+				
+				
+				//ParseConfig(ConfigHelper.ConfigToJson(new Object()));
 				this.c_definition_url.text = "http://code.google.com/p/wot-xvm/"; // TODO: use default value (from schema?)
 				valueChanged_p(this.c_definition_url);
 				this.c_definition_date.selectedDate = new Date();
