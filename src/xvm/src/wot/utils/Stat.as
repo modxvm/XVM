@@ -31,7 +31,7 @@ class wot.utils.Stat
     return ("<font color=\'#" + color.toString(16) + "\'>" + txt + "</font>");
   }
 
-  public static function FormatText(playerName, format)
+  public static function FormatText(playerName: String, format: String)
   {
     // AS 2 doesn't have String.replace? Shame on them. Let's use our own square wheel.
     var wins = "";
@@ -43,12 +43,12 @@ class wot.utils.Stat
     {
       var pname = Stat.CleanPlayerName(playerName).toUpperCase();
       var bn = Stat.s_player_ratings[pname].battles;
-      kb = Math.round(bn / 1000) + "k";
-      battles = String(bn);
-      wins = Stat.s_player_ratings[pname].wins;
+      kb = bn != 0 ? Math.round(bn / 1000) + "k" : "";
+      battles = bn != 0 ? String(bn) : "";
+      wins = bn != 0 ? Stat.s_player_ratings[pname].wins : "";
       var rating = Stat.s_player_ratings[pname].rating;
       strRating = rating ? String(rating) + "%" : "";
-      eff = Stat.s_player_ratings[pname].eff;
+      eff = Stat.s_player_ratings[pname].eff != 0 ? Stat.s_player_ratings[pname].eff : "";
     }
     format = format.split("{{kb}}").join(kb);
     format = format.split("{{battles}}").join(battles);
@@ -56,6 +56,8 @@ class wot.utils.Stat
     format = format.split("{{rating}}").join(strRating);
     format = format.split("{{eff}}").join(eff);
 
+    format = wot.utils.Utils.trim(format);
+    
     return format;
   }
   

@@ -189,6 +189,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     format = format.split("{{vehicle}}").join(m_vname);
 
     format = Stat.FormatText(m_playerFullName, format);
+    format = wot.utils.Utils.trim(format);
 
     return format;
   }

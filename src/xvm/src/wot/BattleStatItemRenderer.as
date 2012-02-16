@@ -13,7 +13,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
   {
     super();
     col3.html = true;
-    col3._width += 40;
+    col3._width += 60;
     Config.LoadConfigAndStat();
     iconLoader.addEventListener("complete", this, "completeLoad");
   }
@@ -22,7 +22,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
   {
     event.target.removeEventListener("complete", this, "completeLoad");
     if (this.owner._name == "team1")
-      col3._x -= 40;
+      col3._x -= 60;
     if (Config.bool("battle/disableMirroredVehicleIcons"))
     {
       if (this.owner._name == "team2")

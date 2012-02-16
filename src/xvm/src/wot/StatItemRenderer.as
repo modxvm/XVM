@@ -12,7 +12,7 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   {
     super();
     vehicleField.html = true;
-    vehicleField._width += 40;
+    vehicleField._width += 60;
     Config.LoadConfig();
     iconLoader.addEventListener("complete", this, "completeLoad");
   }
@@ -21,7 +21,7 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   {
     event.target.removeEventListener("complete", this, "completeLoad");
     if (this.owner._name == "team1List")
-      vehicleField._x -= 80; // why this value? (sirmax2)
+      vehicleField._x -= 120; // why this value? (sirmax2)
     if (Config.bool("battle/disableMirroredVehicleIcons"))
     {
       if (this.owner._name == "team2List")
