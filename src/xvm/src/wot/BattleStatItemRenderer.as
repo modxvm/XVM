@@ -13,7 +13,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
   {
     super();
     col3.html = true;
-    col3._width += 20;
+    col3._width += 40;
     Config.LoadConfigAndStat();
     iconLoader.addEventListener("complete", this, "completeLoad");
   }
@@ -22,7 +22,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
   {
     event.target.removeEventListener("complete", this, "completeLoad");
     if (this.owner._name == "team1")
-      col3._x -= 20;
+      col3._x -= 40;
     if (Config.bool("battle/disableMirroredVehicleIcons"))
     {
       if (this.owner._name == "team2")
@@ -37,9 +37,10 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
   function updateData()
   {
     super.updateData();
-    if (Config.bool("rating/showAtStatisticForm", true))
+    if (Config.bool("rating/statisticForm/show", true))
     {
-      col3.htmlText = Stat.DecorateRating(data.label, data.vehicle,
+      col3.htmlText = Stat.DecorateField(data.label, data.vehicle,
+        Config.value("rating/statisticForm/format"),
         this.owner._name == "team1" ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
     }
   }

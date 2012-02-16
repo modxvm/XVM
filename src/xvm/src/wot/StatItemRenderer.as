@@ -12,7 +12,7 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   {
     super();
     vehicleField.html = true;
-    vehicleField._width += 20;
+    vehicleField._width += 40;
     Config.LoadConfig();
     iconLoader.addEventListener("complete", this, "completeLoad");
   }
@@ -21,7 +21,7 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   {
     event.target.removeEventListener("complete", this, "completeLoad");
     if (this.owner._name == "team1List")
-      vehicleField._x -= 40; // why this value? (sirmax2)
+      vehicleField._x -= 80; // why this value? (sirmax2)
     if (Config.bool("battle/disableMirroredVehicleIcons"))
     {
       if (this.owner._name == "team2List")
@@ -50,11 +50,12 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   function update()
   {
     super.update();
-    if (Config.bool("rating/showPlayersStatistics") && Config.bool("rating/showAtBattleLoading", true))
+    if (Config.bool("rating/showPlayersStatistics") && Config.bool("rating/battleLoading/show", true))
     {
       if (data)
       {
-        vehicleField.htmlText = Stat.DecorateRating(data.label, data.vehicle,
+        vehicleField.htmlText = Stat.DecorateField(data.label, data.vehicle,
+          Config.value("rating/battleLoading/format"),
           this.owner._name == "team1List" ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
       }
     }
@@ -63,9 +64,10 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   // update delegate (function name is fixed and cannot be changed)
   function updateCallback(pdata)
   {
-    if (Config.bool("rating/showAtBattleLoading", true))
+    if (Config.bool("rating/battleLoading/show", true))
     {
-      vehicleField.htmlText = Stat.DecorateRating(pdata.name, pdata.originalText,
+      vehicleField.htmlText = Stat.DecorateField(pdata.name, pdata.originalText,
+        Config.value("rating/battleLoading/format"),
         pdata.team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
     }
   }

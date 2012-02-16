@@ -31,22 +31,44 @@ class wot.utils.Stat
     return ("<font color=\'#" + color.toString(16) + "\'>" + txt + "</font>");
   }
 
-  public static function GetPercentHtmlText(percent: Number)
+  public static function FormatText(playerName, format)
   {
-    if (!percent)
-      return "--%";
-    return GetColorHtmlText(percent, String(percent) + "%");
-  }
+    // AS 2 doesn't have String.replace? Shame on them. Let's use our own square wheel.
+    var wins = "";
+    var battles = "";
+    var kb = "";
+    var strRating = "";
+    var eff = "";
+    if (Stat.s_player_ratings)
+    {
+      var pname = Stat.CleanPlayerName(playerName).toUpperCase();
+      var bn = Stat.s_player_ratings[pname].battles;
+      kb = Math.round(bn / 1000) + "k";
+      battles = String(bn);
+      wins = Stat.s_player_ratings[pname].wins;
+      var rating = Stat.s_player_ratings[pname].rating;
+      strRating = rating ? String(rating) + "%" : "";
+      eff = Stat.s_player_ratings[pname].eff;
+    }
+    format = format.split("{{kb}}").join(kb);
+    format = format.split("{{battles}}").join(battles);
+    format = format.split("{{wins}}").join(wins);
+    format = format.split("{{rating}}").join(strRating);
+    format = format.split("{{eff}}").join(eff);
 
-  public static function DecorateRating(playerName: String, txt: String, ratingPosition: Number)
+    return format;
+  }
+  
+  public static function DecorateField(playerName: String, txt: String, format: String, ratingPosition: Number)
   {
     if (!s_player_ratings)
       return txt;
     var pname = CleanPlayerName(playerName).toUpperCase();
-    var rating = s_player_ratings[pname].rating;
+    var rating = Stat.s_player_ratings[pname].rating;
+    var ratingText = Stat.FormatText(playerName, format);
     return (ratingPosition == Defines.POSITION_LEFT)
-      ? GetPercentHtmlText(rating) + " " + txt
-      : txt + " " + GetPercentHtmlText(rating);
+      ? GetColorHtmlText(rating, ratingText) + " " + txt
+      : txt + " " + GetColorHtmlText(rating, ratingText);
   }
 
   // Logic functions

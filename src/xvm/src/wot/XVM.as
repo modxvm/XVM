@@ -188,27 +188,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     format = format.split("{{nick}}").join(m_playerFullName);
     format = format.split("{{vehicle}}").join(m_vname);
 
-    var wins = "";
-    var battles = "";
-    var kb = "";
-    var strRating = "";
-    var eff = "";
-    if (Stat.s_player_ratings)
-    {
-      var pname = Stat.CleanPlayerName(m_playerFullName).toUpperCase();
-      var bn = Stat.s_player_ratings[pname].battles;
-      kb = Math.round(bn / 1000) + "k";
-      battles = String(bn);
-      wins = Stat.s_player_ratings[pname].wins;
-      var rating = Stat.s_player_ratings[pname].rating;
-      strRating = rating ? String(rating) + "%" : "";
-      eff = Stat.s_player_ratings[pname].eff;
-    }
-    format = format.split("{{kb}}").join(kb);
-    format = format.split("{{battles}}").join(battles);
-    format = format.split("{{wins}}").join(wins);
-    format = format.split("{{rating}}").join(strRating);
-    format = format.split("{{eff}}").join(eff);
+    format = Stat.FormatText(m_playerFullName, format);
 
     return format;
   }

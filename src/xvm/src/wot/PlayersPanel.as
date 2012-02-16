@@ -62,15 +62,16 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
       {
         if (m_state == "large")
         {
-          if (Config.bool("rating/showAtLargePlayersPanel", true))
+          if (Config.bool("rating/playersPanel/show", true))
           {
-            _loc5 = Stat.DecorateRating(data[_loc2].label, data[_loc2].label,
+            _loc5 = Stat.DecorateField(data[_loc2].label, data[_loc2].label,
+              Config.value("rating/playersPanel/format"),
               m_type == "left" ? Defines.POSITION_LEFT : Defines.POSITION_RIGHT);
           }
         }
         else
         {
-          if (Config.bool("rating/colorizeMiddlePlayersPanel", true))
+          if (Config.bool("rating/playersPanel/colorizeMiddle", true))
           {
             var pname = Stat.CleanPlayerName(data[_loc2].label);
             var rating = Stat.s_player_ratings[pname.toUpperCase()].rating;
