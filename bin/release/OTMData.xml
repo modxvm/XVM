@@ -47,7 +47,7 @@
         <filter type="DropShadowFilter" size="1" angle="45" distance="1" color="0x000000" alpha="100" strength="60"/>
       </healthRatio>
       <infoText>
-        <format size="11" align="center" font="$FieldFont"/>
+        <format size="12" align="center" font="$FieldFont"/>
         <filter type="DropShadowFilter" size="3" angle="0" distance="1" color="0x000000" alpha="100" strength="120"/>
         <maxValue enabled="true"/>
       </infoText>
@@ -95,7 +95,7 @@
         <filter type="DropShadowFilter" size="1" angle="45" distance="1" color="0x000000" alpha="100" strength="60"/>
       </healthRatio>
       <infoText>
-        <format size="11" align="center" font="$FieldFont"/>
+        <format size="12" align="center" font="$FieldFont"/>
         <filter type="DropShadowFilter" size="3" angle="0" distance="1" color="0x000000" alpha="100" strength="120"/>
         <maxValue enabled="true"/>
       </infoText>
@@ -127,7 +127,7 @@
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-21" alpha="100" visible="false"/>
           <contourIcon x="6" y="-65" alpha="100" visible="false"/>
-          <infoText x="0" y="-50" color="0xFFFFFF" alpha="75" visible="false" format="{{rating}}" bold="true"/>
+          <infoText x="0" y="-50" color="0xCCFFCC" alpha="75" visible="false" format="{{kb}} {{eff}} {{rating}}" bold="true"/>
         </normal>
         <extended>
           <actionMarker x="0" y="-67"/>
@@ -140,7 +140,7 @@
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-21" alpha="100" visible="false"/>
           <contourIcon x="6" y="-65" alpha="100" visible="false"/>
-          <infoText x="0" y="-50" color="0xFFFFFF" alpha="75" visible="true" format="{{rating}}" bold="true"/>
+          <infoText x="0" y="-50" color="0xCCFFCC" alpha="75" visible="true" format="{{kb}} {{eff}} {{rating}}" bold="true"/>
         </extended>
       </alive>
       <dead>
@@ -155,7 +155,7 @@
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-21" alpha="100" visible="false"/>
           <contourIcon x="6" y="-65" alpha="100" visible="false"/>
-          <infoText x="0" y="-50" color="0xFFFFFF" alpha="75" visible="false" format="{{rating}}" bold="true"/>
+          <infoText x="0" y="-50" color="0xCCFFCC" alpha="75" visible="false" format="{{kb}} {{eff}} {{rating}}" bold="true"/>
         </normal>
         <extended>
           <actionMarker x="0" y="-67"/>
@@ -168,7 +168,7 @@
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-21" alpha="100" visible="false"/>
           <contourIcon x="6" y="-65" alpha="100" visible="false"/>
-          <infoText x="0" y="-50" color="0xFFFFFF" alpha="75" visible="false" format="{{rating}}" bold="true"/>
+          <infoText x="0" y="-50" color="0xCCFFCC" alpha="75" visible="false" format="{{kb}} {{eff}} {{rating}}" bold="true"/>
         </extended>
       </dead>
     </friend>
@@ -185,7 +185,7 @@
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-21" alpha="100" visible="false"/>
           <contourIcon x="6" y="-65" alpha="100" visible="false"/>
-          <infoText x="0" y="-50" color="0xFFFFFF" alpha="75" visible="false" format="{{rating}}" bold="true"/>
+          <infoText x="0" y="-50" color="0xFFCCCC" alpha="75" visible="false" format="{{kb}} {{eff}} {{rating}}" bold="true"/>
         </normal>
         <extended>
           <actionMarker x="0" y="-67"/>
@@ -198,7 +198,7 @@
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-21" alpha="100" visible="false"/>
           <contourIcon x="6" y="-65" alpha="100" visible="false"/>
-          <infoText x="0" y="-50" color="0xFFFFFF" alpha="75" visible="true" format="{{rating}}" bold="true"/>
+          <infoText x="0" y="-50" color="0xFFCCCC" alpha="75" visible="true" format="{{kb}} {{eff}} {{rating}}" bold="true"/>
         </extended>
       </alive>
       <dead>
@@ -213,7 +213,7 @@
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-21" alpha="100" visible="false"/>
           <contourIcon x="6" y="-65" alpha="100" visible="false"/>
-          <infoText x="0" y="-50" color="0xFFFFFF" alpha="75" visible="false" format="{{rating}}" bold="true"/>
+          <infoText x="0" y="-50" color="0xFFCCCC" alpha="75" visible="false" format="{{kb}} {{eff}} {{rating}}" bold="true"/>
         </normal>
         <extended>
           <actionMarker x="0" y="-67"/>
@@ -226,7 +226,7 @@
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-21" alpha="100" visible="false"/>
           <contourIcon x="6" y="-65" alpha="100" visible="false"/>
-          <infoText x="0" y="-50" color="0xFFFFFF" alpha="75" visible="false" format="{{rating}}" bold="true"/>
+          <infoText x="0" y="-50" color="0xFFCCCC" alpha="75" visible="false" format="{{kb}} {{eff}} {{rating}}" bold="true"/>
         </extended>
       </dead>
     </enemy>
