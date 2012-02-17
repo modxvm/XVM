@@ -47,7 +47,7 @@
         <filter type="DropShadowFilter" size="1" angle="45" distance="1" color="0x000000" alpha="100" strength="60"/>
       </healthRatio>
       <infoText>
-        <format size="12" align="center" font="$FieldFont"/>
+        <format size="11" align="center" font="$FieldFont"/>
         <filter type="DropShadowFilter" size="3" angle="0" distance="1" color="0x000000" alpha="100" strength="120"/>
         <maxValue enabled="true"/>
       </infoText>
@@ -95,7 +95,7 @@
         <filter type="DropShadowFilter" size="1" angle="45" distance="1" color="0x000000" alpha="100" strength="60"/>
       </healthRatio>
       <infoText>
-        <format size="12" align="center" font="$FieldFont"/>
+        <format size="11" align="center" font="$FieldFont"/>
         <filter type="DropShadowFilter" size="3" angle="0" distance="1" color="0x000000" alpha="100" strength="120"/>
         <maxValue enabled="true"/>
       </infoText>
