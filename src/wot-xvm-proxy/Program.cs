@@ -15,6 +15,7 @@ namespace wot
 
     private static string wotExeFileName = WOT_EXE_FILE_NAME;
     private static bool isLauncher = false;
+    public static bool isDebug = false;
 
     static Program()
     {
@@ -41,14 +42,24 @@ namespace wot
         Console.Title = "WoT XVM Proxy v" + Assembly.GetExecutingAssembly().GetName().Version;
 
         // Check args
-        if (args.Length > 0)
+        for (int i = 0; i < args.Length; i++)
         {
-          if (String.Compare(args[0], "/launcher", true) == 0)
+          if (String.Compare(args[i], "/launcher", true) == 0)
           {
             wotExeFileName = "WOTLauncher.exe";
-            args[0] = "";
+            args[i] = "";
             isLauncher = true;
+            continue;
           }
+
+          if (String.Compare(args[i], "/debug", true) == 0)
+          {
+            args[i] = "";
+            isDebug = true;
+            continue;
+          }
+
+          break;
         }
 
         Directory.SetCurrentDirectory(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location));

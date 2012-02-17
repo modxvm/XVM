@@ -7,6 +7,7 @@ using System.Text;
 using Dokan;
 using LitJson;
 using wot.Properties;
+using System.Diagnostics;
 
 namespace wot
 {
@@ -71,6 +72,12 @@ namespace wot
     {
       if (level >= Settings.Default.LogLevel)
         Console.WriteLine(message);
+    }
+
+    private static void Debug(string message)
+    {
+      if (Program.isDebug)
+        Console.WriteLine("DEBUG: " + message);
     }
 
     private bool ServiceUnavailable()
@@ -428,6 +435,9 @@ namespace wot
 
         Log(1, String.Format("HTTP - {0}", reqMembers));
 
+        Stopwatch sw = new Stopwatch();
+        sw.Start();
+
         WebRequest request = WebRequest.Create(url);
         request.Credentials = CredentialCache.DefaultCredentials;
         request.Timeout = Settings.Default.Timeout;
@@ -441,6 +451,13 @@ namespace wot
         reader.Close();
         dataStream.Close();
         response.Close();
+
+        sw.Stop();
+
+        Log(1, String.Format("  Time: {0} ms, Size: {1} bytes",
+          sw.ElapsedMilliseconds, responseFromServer.Length));
+
+        Debug("responseFromServer: " + responseFromServer);
 
         Response res = JsonMapper.ToObject<Response>(responseFromServer);
         if (res == null || res.players == null)
