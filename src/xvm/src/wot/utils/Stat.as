@@ -43,8 +43,8 @@ class wot.utils.Stat
     {
       var pname = Stat.CleanPlayerName(playerName).toUpperCase();
       var bn = Stat.s_player_ratings[pname].battles;
-      kb = bn != 0 ? Math.round(bn / 1000) + "k" : "";
-      battles = bn != 0 ? String(bn) : "";
+      kb = bn > 0 ? Math.round(bn / 1000) + "k" : "";
+      battles = bn > 0 ? String(bn) : "";
       wins = bn != 0 ? Stat.s_player_ratings[pname].wins : "";
       var rating = Stat.s_player_ratings[pname].rating;
       strRating = rating ? String(rating) + "%" : "";
