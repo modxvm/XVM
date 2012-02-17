@@ -37,7 +37,7 @@ namespace wot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("7000")]
         public int Timeout {
             get {
                 return ((int)(this["Timeout"]));

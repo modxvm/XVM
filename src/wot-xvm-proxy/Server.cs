@@ -459,7 +459,7 @@ namespace wot
 
         Debug("responseFromServer: " + responseFromServer);
 
-        Response res = JsonMapper.ToObject<Response>(responseFromServer);
+        Response res = JsonDataToResponse(JsonMapper.ToObject(responseFromServer));
         if (res == null || res.players == null)
         {
           Log(2, "WARNING: empty response or parsing error");
@@ -494,6 +494,33 @@ namespace wot
           };
         }
       }
+    }
+
+    private static Response JsonDataToResponse(JsonData jd)
+    {
+      if (jd == null)
+        return null;
+
+      Response res = new Response();
+
+      if (jd["players"] == null || !jd["players"].IsArray)
+        return res;
+
+      res.players = new Stat[jd["players"].Count];
+      int pos = 0;
+      foreach (JsonData data in jd["players"])
+      {
+        res.players[pos++] = new Stat()
+        {
+          id = data["id"].IsInt ? int.Parse(data["id"].ToString()) : 0,
+          name = data["name"].ToString(),
+          eff = data["eff"].IsInt ? int.Parse(data["eff"].ToString()) : 0,
+          battles = data["battles"].IsInt ? int.Parse(data["battles"].ToString()) : 0,
+          wins = data["wins"].IsInt ? int.Parse(data["wins"].ToString()) : 0,
+        };
+      }
+
+      return res;
     }
 
     #endregion
