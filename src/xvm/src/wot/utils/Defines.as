@@ -27,4 +27,9 @@ class wot.utils.Defines
   // Team
   public static var TEAM_ALLY = 0;
   public static var TEAM_ENEMY = 1;
+  
+  // Dynamic color types
+  public static var DYNAMIC_COLOR_EFF = 1;
+  public static var DYNAMIC_COLOR_RATING = 2;
+  public static var DYNAMIC_COLOR_KB = 3;
 }

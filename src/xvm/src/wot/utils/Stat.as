@@ -22,42 +22,120 @@ class wot.utils.Stat
     return pos === -1 ? str : str.slice(0, pos);
   }
 
-  public static function GetColorHtmlText(percent: Number, txt: String)
+  public static function GetDynamicColorValue(type: Number, value: Number)
   {
-    if (!percent)
+    if (!value || value == 0)
+      return "#FFFFFF";
+
+    var color: Number = 0xFFFFFF;
+    switch (type)
+    {
+      case Defines.DYNAMIC_COLOR_EFF:
+        color =
+          (value < 600) ? 0x990000 :
+          (value < 900) ? 0xCC0000 :
+          (value < 1200) ? 0xFF6633 :
+          (value < 1500) ? 0x99FF33 :
+          (value < 1800) ? 0x33FF33 :
+          0x660066;
+        break;
+        
+      case Defines.DYNAMIC_COLOR_RATING:
+        color =
+          (value < 49) ? 0xFF0000 :
+          (value < 51) ? 0xFFFF00 :
+          0x00FF00;
+        break;
+      
+      case Defines.DYNAMIC_COLOR_KB:
+        color =
+          (value < 1) ? 0x33FF33 :
+          (value < 3) ? 0x99FF33 :
+          (value < 5) ? 0xFF6633 :
+          (value < 8) ? 0xCC0000 :
+          (value < 12) ? 0x990000 :
+          0x660066;
+        break;
+    }
+    
+    return "#" + color.toString(16);
+  }
+
+  public static function GetDynamicColorFormat(format: String, value: Number)
+  {
+  }
+  
+  /*public static function GetColorHtmlText(num: Number, txt: String)
+  {
+    if (!num)
       return txt;
 
-    var color = (percent < 49) ? 0xFF0000 : ((percent < 51) ? 0xFFFF00 : 0x00FF00);
+    if (Config.value("rating/playersPanel/colorizeType") == "{{c:rating}}") {
+      var rating = Stat.s_player_ratings[pname.toUpperCase()].rating;
+      if (rating) {
+        var color = (rating < 49) ? 0xFF0000 : ((rating < 51) ? 0xFFFF00 : 0x00FF00);
+      }
+    } else if (Config.value("rating/playersPanel/colorizeType") == "{{c:eff}}") {
+      var eff = Stat.s_player_ratings[pname.toUpperCase()].eff;
+      if (eff) {
+         var color = (eff < 1800) ? 0x33FF33  : (eff < 1500) ? 0x99FF33  : (eff < 1200) ? 
+                      0xFF6633 : (eff < 900) ? 0xCC0000) : (eff < 600) ? 0x990000 : 0x660066;
+      }
+    } else if (Config.value("rating/playersPanel/colorizeType") == "{{c:kb}}") {
+      var kb = Stat.s_player_ratings[pname.toUpperCase()].kb;
+      if (kb) {
+        var color = (kb < 1) ? 0x33FF33  : (kb < 3) ? 0x99FF33  : (kb < 5) ? 
+                      0xFF6633 : (kb < 8) ? 0xCC0000) : (kb < 12) ? 0x990000 : 0x660066;
+      }
+    } else {
+      var color = 0xFFFFFF;
+    }
+    
     return ("<font color=\'#" + color.toString(16) + "\'>" + txt + "</font>");
-  }
+  }*/
 
   public static function FormatText(playerName: String, format: String)
   {
     // AS 2 doesn't have String.replace? Shame on them. Let's use our own square wheel.
-    var wins = "";
-    var battles = "";
-    var kb = "";
-    var strRating = "";
-    var eff = "";
+    var sWins: String = "";
+    var sBattles: String = "";
+    var sKb: String = "";
+    var sRating: String = "";
+    var sEff: String = "";
+
+    var eff: Number = 0;
+    var rating: Number = 0;
+    var kb: Number = 0;
+    
     if (Stat.s_player_ratings)
     {
-      var pname = Stat.CleanPlayerName(playerName).toUpperCase();
-      var bn = Stat.s_player_ratings[pname].battles;
-      kb = bn > 0 ? Math.round(bn / 1000) + "k" : "";
-      battles = bn > 0 ? String(bn) : "";
-      wins = bn != 0 ? Stat.s_player_ratings[pname].wins : "";
-      var rating = Stat.s_player_ratings[pname].rating;
-      strRating = rating ? String(rating) + "%" : "";
-      eff = Stat.s_player_ratings[pname].eff != 0 ? Stat.s_player_ratings[pname].eff : "";
+      var pname: String = Stat.CleanPlayerName(playerName).toUpperCase();
+      
+      var bn: Number = Number(Stat.s_player_ratings[pname].battles);
+      kb = bn > 0 ? Math.round(bn / 1000) : 0;
+      sKb = kb > 0 ? String(kb) + "k" : "";
+      sBattles = bn > 0 ? String(bn) : "";
+      sWins = bn > 0 ? String(Number(Stat.s_player_ratings[pname].wins)) : "";
+
+      rating = Number(Stat.s_player_ratings[pname].rating);
+      sRating = rating ? String(rating) + "%" : "";
+
+      eff = Number(Stat.s_player_ratings[pname].eff);
+      sEff = eff != 0 ? String(eff) : "";
     }
-    format = format.split("{{kb}}").join(kb);
-    format = format.split("{{battles}}").join(battles);
-    format = format.split("{{wins}}").join(wins);
-    format = format.split("{{rating}}").join(strRating);
-    format = format.split("{{eff}}").join(eff);
+
+    format = format.split("{{kb}}").join(sKb);
+    format = format.split("{{battles}}").join(sBattles);
+    format = format.split("{{wins}}").join(sWins);
+    format = format.split("{{rating}}").join(sRating);
+    format = format.split("{{eff}}").join(sEff);
+
+    format = format.split("{{c:eff}}").join(GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff));
+    format = format.split("{{c:rating}}").join(GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, rating));
+    format = format.split("{{c:kb}}").join(GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, kb));
 
     format = wot.utils.Utils.trim(format);
-    
+
     return format;
   }
   
@@ -69,8 +147,8 @@ class wot.utils.Stat
     var rating = Stat.s_player_ratings[pname].rating;
     var ratingText = Stat.FormatText(playerName, format);
     return (ratingPosition == Defines.POSITION_LEFT)
-      ? GetColorHtmlText(rating, ratingText) + " " + txt
-      : txt + " " + GetColorHtmlText(rating, ratingText);
+      ? ratingText + " " + txt
+      : txt + " " + ratingText;
   }
 
   // Logic functions

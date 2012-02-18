@@ -71,16 +71,9 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         }
         else
         {
-          if (Config.bool("rating/playersPanel/colorizeMiddle", true))
-          {
-            var pname = Stat.CleanPlayerName(data[_loc2].label);
-            var rating = Stat.s_player_ratings[pname.toUpperCase()].rating;
-            if (rating)
-            {
-              var color = (rating < 49) ? 0xFF0000 : ((rating < 51) ? 0xFFFF00 : 0x00FF00);
-              _loc5 = "<font color=\'#" + color.toString(16) + "\'>" + _loc5 + "</font>";
-            }
-          }
+          var middleColor: String = Config.value("rating/playersPanel/middleColor");
+          if (middleColor)
+            _loc5 = Stat.FormatText(data[_loc2].label, "<font color='" + middleColor + "'>" + _loc5 + "</font>");
         }
       }
 
