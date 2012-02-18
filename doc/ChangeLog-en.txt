@@ -2,6 +2,12 @@ XVM-1.4:
   * Working only with player id
   * Macroses was added in markers: {{kb}}, {{battles}}, {{wins}}, {{eff}}, {{rating}}
   * Statistics formatting added
+  * Added macroses for dynamic colors: {{c:eff}}, {{c:rating}}, {{c:kb}}
+  * Config parameter changed:
+      rating/playersPanel/colorizeMiddle -> rating/playersPanel/middleColor
+  * Added section 'rating/colors' into config for setting up border values
+    and color values for dynamic colors
+  * fixed PostmortemTips hiding
 
 XVM-1.3:
   * Simple installation. Added wot-xvm-proxy.exe.
