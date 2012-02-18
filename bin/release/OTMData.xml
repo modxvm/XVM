@@ -9,7 +9,6 @@
     <mod-page>http://code.google.com/p/wot-xvm/</mod-page>
   </definition>
   <battle>
-    <showPostmortemTips>true</showPostmortemTips>
     <drawGrid>false</drawGrid>
   </battle>
   <rating>
