@@ -5,14 +5,15 @@
 import wot.utils.Defines;
 import wot.utils.Stat;
 
-class wot.utils.Config
+// Class for legacy config OTMData.xml
+class wot.utils.ConfigOld
 {
   // Private vars
   public static var s_config: Object = null;
   private static var s_loaded: String = "";
   private static var s_load_last_stat: Boolean = false;
 
-  // Load XVM mod config; config data is shared between all marker instances, so
+  // Load mod config; config data is shared between all marker instances, so
   // it should be loaded only once per session. s_loaded flag indicates that
   // we've already initialized config loading process.
   public static function LoadConfig(filename: String)
@@ -32,14 +33,20 @@ class wot.utils.Config
 
   public static function ReloadConfig(filename)
   {
-    var lv:LoadVars = new LoadVars();
-    lv.onData = function(str)
+    var xml:XML = new XML();
+    xml.ignoreWhite = true;
+    xml.onLoad = function(success)
     {
-      Config.s_config = net.wargaming.io.JSON.parse(str);
-      if (Config.s_load_last_stat && Config.value("rating/showPlayersStatistics") == "true")
+      if (!success)
+        return;
+
+      ConfigOld.s_config = net.produxion.util.XML2Object.deserialize(this);
+      ConfigOld.s_config = ConfigOld.s_config["overTargetMarkers"];
+
+      if (ConfigOld.s_load_last_stat && ConfigOld.value("rating/showPlayersStatistics/data") == "true")
         Stat.LoadStatData(Defines.COMMAND_GET_LAST_STAT);
     };
-    lv.load(filename);
+    xml.load(filename);
   }
 
   public static function int(path: String)

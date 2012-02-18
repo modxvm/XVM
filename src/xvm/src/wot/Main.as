@@ -11,7 +11,7 @@ class wot.Main
   
   static function main()
   {
-    Config.LoadConfigAndStat("OTMData.xml");
+    Config.LoadConfigAndStat("XVM.xvmconf");
 
     instance = new Main();
     
@@ -20,7 +20,7 @@ class wot.Main
   
   function showPostmortemTips(movingUpTime, showTime, movingDownTime)
   {
-    if (Config.value("battle/showPostmortemTips/data") != "false")
+    if (Config.value("battle/showPostmortemTips") != "false")
       _root.showPostmortemTips(movingUpTime, showTime, movingDownTime);
   }
 }

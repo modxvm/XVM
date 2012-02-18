@@ -39,6 +39,34 @@
       "show": "true",
       /* формат отображения */
       "format": "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>"
+    },
+    "colors": {
+      /* values - from min to max, colors are for values 'lesser then ...' */
+      "eff": [
+        { "value": 600, "color": "0x990000" },
+        { "value": 900, "color": "0xDD0000" },
+        { "value": 1200, "color": "0xFFAA33" },
+        { "value": 1500, "color": "0x99FF33" },
+        { "value": 1800, "color": "0x33FF33" },
+        { "value": 9999, "color": "0x660066" }
+      ],
+      "rating": [
+        { "value": 42, "color": "0x990000" },
+        { "value": 46, "color": "0xDD0000" },
+        { "value": 49, "color": "0xFFAA33" },
+        { "value": 51, "color": "0xFFFF33" },
+        { "value": 53, "color": "0x99FF33" },
+        { "value": 57, "color": "0x33FF33" },
+        { "value": 100, "color": "0x660066" }
+      ],
+      "kb": [
+        { "value": 1, "color": "0x990000" },
+        { "value": 3, "color": "0xDD0000" },
+        { "value": 5, "color": "0xFFAA33" },
+        { "value": 8, "color": "0x99FF33" },
+        { "value": 12, "color": "0x33FF33" },
+        { "value": 9999, "color": "0x660066" }
+      ]
     }
   }
 }

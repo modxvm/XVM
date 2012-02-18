@@ -2,6 +2,7 @@
  * ...
  * @author sirmax2
  */
+import wot.utils.Config;
 import wot.utils.Defines;
 
 class wot.utils.Stat
@@ -27,76 +28,40 @@ class wot.utils.Stat
     if (!value || value == 0)
       return "#FFFFFF";
 
-    var color: Number = 0xFFFFFF;
+    var path: String = "rating/colors/";
     switch (type)
     {
       case Defines.DYNAMIC_COLOR_EFF:
-        color =
-          (value < 600) ? 0x990000 :
-          (value < 900) ? 0xCC0000 :
-          (value < 1200) ? 0xFF6633 :
-          (value < 1500) ? 0x99FF33 :
-          (value < 1800) ? 0x33FF33 :
-          0x660066;
+        path += "eff";
         break;
-        
       case Defines.DYNAMIC_COLOR_RATING:
-        color =
-          (value < 49) ? 0xFF0000 :
-          (value < 51) ? 0xFFFF00 :
-          0x00FF00;
+        path += "rating";
         break;
-      
       case Defines.DYNAMIC_COLOR_KB:
-        color =
-          (value < 1) ? 0x33FF33 :
-          (value < 3) ? 0x99FF33 :
-          (value < 5) ? 0xFF6633 :
-          (value < 8) ? 0xCC0000 :
-          (value < 12) ? 0x990000 :
-          0x660066;
+        path += "kb";
         break;
+      default:
+        return "#FFFFFF";
     }
-    
-    return "#" + color.toString(16);
-  }
 
-  public static function GetDynamicColorFormat(format: String, value: Number)
-  {
-  }
-  
-  /*public static function GetColorHtmlText(num: Number, txt: String)
-  {
-    if (!num)
-      return txt;
-
-    if (Config.value("rating/playersPanel/colorizeType") == "{{c:rating}}") {
-      var rating = Stat.s_player_ratings[pname.toUpperCase()].rating;
-      if (rating) {
-        var color = (rating < 49) ? 0xFF0000 : ((rating < 51) ? 0xFFFF00 : 0x00FF00);
-      }
-    } else if (Config.value("rating/playersPanel/colorizeType") == "{{c:eff}}") {
-      var eff = Stat.s_player_ratings[pname.toUpperCase()].eff;
-      if (eff) {
-         var color = (eff < 1800) ? 0x33FF33  : (eff < 1500) ? 0x99FF33  : (eff < 1200) ? 
-                      0xFF6633 : (eff < 900) ? 0xCC0000) : (eff < 600) ? 0x990000 : 0x660066;
-      }
-    } else if (Config.value("rating/playersPanel/colorizeType") == "{{c:kb}}") {
-      var kb = Stat.s_player_ratings[pname.toUpperCase()].kb;
-      if (kb) {
-        var color = (kb < 1) ? 0x33FF33  : (kb < 3) ? 0x99FF33  : (kb < 5) ? 
-                      0xFF6633 : (kb < 8) ? 0xCC0000) : (kb < 12) ? 0x990000 : 0x660066;
-      }
-    } else {
-      var color = 0xFFFFFF;
+    var cfg: Array = Config.value(path);
+    if (!cfg)
+      return "#FFFFFF";
+    for (var i = 0; i < cfg.length; i++)
+    {
+      var cvalue: Number = Number(cfg[i]["value"]);
+      var color: Number = Number(String(cfg[i]["color"]));
+      if (!cvalue || !color)
+        return "#FFFFFF";
+      if (value < cvalue)
+        return "#" + color.toString(16);
     }
-    
-    return ("<font color=\'#" + color.toString(16) + "\'>" + txt + "</font>");
-  }*/
+      
+    return "#FFFFFF";
+  }
 
   public static function FormatText(playerName: String, format: String)
   {
-    // AS 2 doesn't have String.replace? Shame on them. Let's use our own square wheel.
     var sWins: String = "";
     var sBattles: String = "";
     var sKb: String = "";
@@ -124,6 +89,7 @@ class wot.utils.Stat
       sEff = eff != 0 ? String(eff) : "";
     }
 
+    // AS 2 doesn't have String.replace? Shame on them. Let's use our own square wheel.
     format = format.split("{{kb}}").join(sKb);
     format = format.split("{{battles}}").join(sBattles);
     format = format.split("{{wins}}").join(sWins);
