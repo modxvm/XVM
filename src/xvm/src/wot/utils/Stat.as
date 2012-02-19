@@ -25,7 +25,7 @@ class wot.utils.Stat
 
   public static function GetDynamicColorValue(type: Number, value: Number)
   {
-    if (!value || value == 0)
+    if (value == undefined || value == null)
       return "#FFFFFF";
 
     var path: String = "rating/colors/";
@@ -76,17 +76,20 @@ class wot.utils.Stat
     {
       var pname: String = Stat.CleanPlayerName(playerName).toUpperCase();
       
-      var bn: Number = Number(Stat.s_player_ratings[pname].battles);
-      kb = bn > 0 ? Math.round(bn / 1000) : 0;
-      sKb = kb > 0 ? String(kb) + "k" : "";
-      sBattles = bn > 0 ? String(bn) : "";
-      sWins = bn > 0 ? String(Number(Stat.s_player_ratings[pname].wins)) : "";
-
       rating = Number(Stat.s_player_ratings[pname].rating);
       sRating = rating ? String(rating) + "%" : "";
 
       eff = Number(Stat.s_player_ratings[pname].eff);
       sEff = eff != 0 ? String(eff) : "";
+
+      if (!(sRating == "") && !(sEff == ""))
+      {
+	var bn: Number = Number(Stat.s_player_ratings[pname].battles);
+        kb = bn > 0 ? Math.round(bn / 1000) : 0;
+        sKb = kb >= 0 ? String(kb) + "k" : "";
+        sBattles = bn >= 0 ? String(bn) : "";
+        sWins = bn >= 0 ? String(Number(Stat.s_player_ratings[pname].wins)) : "";
+      }
     }
 
     // AS 2 doesn't have String.replace? Shame on them. Let's use our own square wheel.
