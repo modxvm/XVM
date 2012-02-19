@@ -99,8 +99,8 @@ class wot.utils.Stat
     format = format.split("{{rating}}").join(sRating);
     format = format.split("{{eff}}").join(sEff);
 
-    format = format.split("{{c:eff}}").join(GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff));
-    format = format.split("{{c:rating}}").join(GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, rating));
+    format = format.split("{{c:eff}}").join(eff > 0 ? GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff) : "");
+    format = format.split("{{c:rating}}").join(rating > 0 ? GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, rating) : "");
     format = format.split("{{c:kb}}").join(GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, kb));
 
     format = wot.utils.Utils.trim(format);
