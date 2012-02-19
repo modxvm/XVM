@@ -60,6 +60,16 @@ class wot.utils.Stat
     return "#FFFFFF";
   }
 
+  public static function ToNumber(value)
+  {
+    return isNaN(value) ? 0 : Number(value);
+  }
+  
+  public static function ToString(value: Number)
+  {
+    return value ? String(value) : "";
+  }
+
   public static function FormatText(playerName: String, format: String)
   {
     var sWins: String = "";
@@ -75,20 +85,23 @@ class wot.utils.Stat
     if (Stat.s_player_ratings)
     {
       var pname: String = Stat.CleanPlayerName(playerName).toUpperCase();
-      
-      rating = Number(Stat.s_player_ratings[pname].rating);
-      sRating = rating ? String(rating) + "%" : "";
-
-      eff = Number(Stat.s_player_ratings[pname].eff);
-      sEff = eff != 0 ? String(eff) : "";
-
-      if (!(sRating == "") && !(sEff == ""))
+      var stat = Stat.s_player_ratings[pname];
+      if (stat)
       {
-	var bn: Number = Number(Stat.s_player_ratings[pname].battles);
-        kb = bn > 0 ? Math.round(bn / 1000) : 0;
-        sKb = kb >= 0 ? String(kb) + "k" : "";
-        sBattles = bn >= 0 ? String(bn) : "";
-        sWins = bn >= 0 ? String(Number(Stat.s_player_ratings[pname].wins)) : "";
+        rating = ToNumber(stat.rating);
+        sRating = rating ? String(rating) + "%" : "";
+
+        eff = ToNumber(stat.eff);
+        sEff = ToString(eff);
+
+        if (rating && eff)
+        {
+          var bn: Number = ToNumber(stat.battles);
+          kb = bn > 0 ? Math.round(bn / 1000) : 0;
+          sKb = kb >= 0 ? String(kb) + "k" : "";
+          sBattles = ToString(bn);
+          sWins = bn >= 0 ? String(ToNumber(stat.wins)) : "";
+        }
       }
     }
 
@@ -113,7 +126,6 @@ class wot.utils.Stat
     if (!s_player_ratings)
       return txt;
     var pname = CleanPlayerName(playerName).toUpperCase();
-    var rating = Stat.s_player_ratings[pname].rating;
     var ratingText = Stat.FormatText(playerName, format);
     return (ratingPosition == Defines.POSITION_LEFT)
       ? ratingText + " " + txt
