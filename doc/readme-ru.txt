@@ -33,6 +33,9 @@ rating
 
 - атрибут lcolor тега fill задаёт цветовой переход для полоски здоровья;
 
+- все цвета, за исключением фильтра тени могут быть заменены на динамические с помощью
+  макроподстановок (см. ниже);
+
 - тэг battle/showPostMortemTips позволяет отключить панель, всплывающую при уничтожении танка.
   <battle>
     <showPostmortemTips>false</showPostmortemTips>
@@ -78,4 +81,8 @@ rating
 3. Отобразить процент побед, подкрашенный в зависимости от рейтинга эффективности:
   "<font color='{{c:eff}}'>{{rating}}</font>",
 
-Пример поля "middleColor": "{{c:eff}}"
+Примеры использования динамического цвета:
+В XVM.xvmconf:
+  "middleColor": "{{c:eff}}"
+В OTMData.xml:
+   <infoText x="0" y="-50" color="{{c:eff}}" alpha="75" visible="true" format="{{kb}} {{eff}} {{rating}}" bold="true"/>

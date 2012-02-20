@@ -43,23 +43,29 @@ class wot.utils.ConfigOld
       ConfigOld.s_config = net.produxion.util.XML2Object.deserialize(this);
       ConfigOld.s_config = ConfigOld.s_config["overTargetMarkers"];
 
-      if (ConfigOld.s_load_last_stat && ConfigOld.value("rating/showPlayersStatistics/data") == "true")
+      if (ConfigOld.s_load_last_stat && ConfigOld.bool("rating/showPlayersStatistics/data"))
         Stat.LoadStatData(Defines.COMMAND_GET_LAST_STAT);
     };
     xml.load(filename);
   }
 
-  public static function int(path: String)
+  public static function int(path: String): Number
   {
-    return parseInt(value(path));
+    return parseInt(string(path));
   }
-  
-  public static function bool(path: String, trueIsDefault: Boolean)
+
+  public static function bool(path: String, trueIsDefault: Boolean): Boolean
   {
     var v = value(path).toLowerCase();
     return trueIsDefault ? v != "false" : v == "true";
   }
-  
+
+  public static function string(path: String, defaultValue: String): String
+  {
+    var value = value(path);
+    return value ? String(value) : defaultValue;
+  }
+
   public static function value(path: String)
   {
     var p: Array = path.split("/"); // "path/to/value"

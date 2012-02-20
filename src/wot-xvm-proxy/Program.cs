@@ -56,6 +56,8 @@ namespace wot
           {
             args[i] = "";
             isDebug = true;
+            Console.Title += " (DEBUG MODE)";
+            Console.WriteLine("DEBUG MODE: ON");
             continue;
           }
 

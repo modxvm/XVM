@@ -36,23 +36,29 @@ class wot.utils.Config
     lv.onData = function(str)
     {
       Config.s_config = net.wargaming.io.JSON.parse(str);
-      if (Config.s_load_last_stat && Config.value("rating/showPlayersStatistics") == "true")
+      if (Config.s_load_last_stat && Config.bool("rating/showPlayersStatistics"))
         Stat.LoadStatData(Defines.COMMAND_GET_LAST_STAT);
     };
     lv.load(filename);
   }
 
-  public static function int(path: String)
+  public static function int(path: String): Number
   {
-    return parseInt(value(path));
+    return parseInt(string(path));
   }
-  
-  public static function bool(path: String, trueIsDefault: Boolean)
+
+  public static function bool(path: String, trueIsDefault: Boolean): Boolean
   {
     var v = value(path).toLowerCase();
     return trueIsDefault ? v != "false" : v == "true";
   }
-  
+
+  public static function string(path: String, defaultValue: String): String
+  {
+    var value = value(path);
+    return value ? String(value) : defaultValue;
+  }
+
   public static function value(path: String)
   {
     var p: Array = path.split("/"); // "path/to/value"

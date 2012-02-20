@@ -26,7 +26,7 @@ class wot.utils.Stat
   public static function GetDynamicColorValue(type: Number, value: Number)
   {
     if (value == undefined || value == null)
-      return "#FFFFFF";
+      return "#FFFBFB";
 
     var path: String = "rating/colors/";
     switch (type)
@@ -41,18 +41,18 @@ class wot.utils.Stat
         path += "kb";
         break;
       default:
-        return "#FFFFFF";
+        return "#FFFEFE";
     }
 
     var cfg: Array = Config.value(path);
     if (!cfg)
-      return "#FFFFFF";
+      return "#FFFDFD";
     for (var i = 0; i < cfg.length; i++)
     {
       var cvalue: Number = Number(cfg[i]["value"]);
       var color: Number = Number(String(cfg[i]["color"]));
       if (!cvalue || !color)
-        return "#FFFFFF";
+        return "#FFFCFC";
       if (value < cvalue)
         return "#" + color.toString(16);
     }

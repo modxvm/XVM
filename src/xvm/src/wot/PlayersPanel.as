@@ -65,13 +65,13 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
           if (Config.bool("rating/playersPanel/show", true))
           {
             _loc5 = Stat.DecorateField(data[_loc2].label, data[_loc2].label,
-              Config.value("rating/playersPanel/format"),
+              Config.string("rating/playersPanel/format"),
               m_type == "left" ? Defines.POSITION_LEFT : Defines.POSITION_RIGHT);
           }
         }
         else
         {
-          var middleColor: String = Config.value("rating/playersPanel/middleColor");
+          var middleColor: String = Config.string("rating/playersPanel/middleColor");
           if (middleColor)
             _loc5 = Stat.FormatText(data[_loc2].label, "<font color='" + middleColor + "'>" + _loc5 + "</font>");
         }

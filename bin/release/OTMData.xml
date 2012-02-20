@@ -103,7 +103,6 @@
         <filter type="DropShadowFilter" size="1" angle="45" distance="1" color="0x000000" alpha="100" strength="120"/>
       </playerName>
       <vehicleIcon>
-        <fill color="0xFF1D0C"/>
         <scale maxScale="100" x="0" y="16"/>
       </vehicleIcon>
       <vehicleName>
@@ -126,7 +125,7 @@
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-21" alpha="100" visible="false"/>
           <contourIcon x="6" y="-65" alpha="100" visible="false"/>
-          <infoText x="0" y="-50" color="0xCCFFCC" alpha="75" visible="false" format="{{kb}} {{eff}} {{rating}}" bold="true"/>
+          <infoText x="0" y="-50" color="{{c:eff}}" alpha="75" visible="false" format="{{rating}}" bold="true"/>
         </normal>
         <extended>
           <actionMarker x="0" y="-67"/>
@@ -139,7 +138,7 @@
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-21" alpha="100" visible="false"/>
           <contourIcon x="6" y="-65" alpha="100" visible="false"/>
-          <infoText x="0" y="-50" color="0xCCFFCC" alpha="75" visible="true" format="{{kb}} {{eff}} {{rating}}" bold="true"/>
+          <infoText x="0" y="-50" color="{{c:eff}}" alpha="75" visible="true" format="{{rating}}" bold="true"/>
         </extended>
       </alive>
       <dead>
@@ -154,7 +153,7 @@
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-21" alpha="100" visible="false"/>
           <contourIcon x="6" y="-65" alpha="100" visible="false"/>
-          <infoText x="0" y="-50" color="0xCCFFCC" alpha="75" visible="false" format="{{kb}} {{eff}} {{rating}}" bold="true"/>
+          <infoText x="0" y="-50" color="{{c:eff}}" alpha="75" visible="false" format="{{rating}}" bold="true"/>
         </normal>
         <extended>
           <actionMarker x="0" y="-67"/>
@@ -167,7 +166,7 @@
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-21" alpha="100" visible="false"/>
           <contourIcon x="6" y="-65" alpha="100" visible="false"/>
-          <infoText x="0" y="-50" color="0xCCFFCC" alpha="75" visible="false" format="{{kb}} {{eff}} {{rating}}" bold="true"/>
+          <infoText x="0" y="-50" color="{{c:eff}}" alpha="75" visible="false" format="{{rating}}" bold="true"/>
         </extended>
       </dead>
     </friend>
@@ -184,7 +183,7 @@
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-21" alpha="100" visible="false"/>
           <contourIcon x="6" y="-65" alpha="100" visible="false"/>
-          <infoText x="0" y="-50" color="0xFFCCCC" alpha="75" visible="false" format="{{kb}} {{eff}} {{rating}}" bold="true"/>
+          <infoText x="0" y="-50" color="{{c:eff}}" alpha="75" visible="false" format="{{rating}}" bold="true"/>
         </normal>
         <extended>
           <actionMarker x="0" y="-67"/>
@@ -197,7 +196,7 @@
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-21" alpha="100" visible="false"/>
           <contourIcon x="6" y="-65" alpha="100" visible="false"/>
-          <infoText x="0" y="-50" color="0xFFCCCC" alpha="75" visible="true" format="{{kb}} {{eff}} {{rating}}" bold="true"/>
+          <infoText x="0" y="-50" color="{{c:eff}}" alpha="75" visible="true" format="{{rating}}" bold="true"/>
         </extended>
       </alive>
       <dead>
@@ -212,7 +211,7 @@
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-21" alpha="100" visible="false"/>
           <contourIcon x="6" y="-65" alpha="100" visible="false"/>
-          <infoText x="0" y="-50" color="0xFFCCCC" alpha="75" visible="false" format="{{kb}} {{eff}} {{rating}}" bold="true"/>
+          <infoText x="0" y="-50" color="{{c:eff}}" alpha="75" visible="false" format="{{rating}}" bold="true"/>
         </normal>
         <extended>
           <actionMarker x="0" y="-67"/>
@@ -225,7 +224,7 @@
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-21" alpha="100" visible="false"/>
           <contourIcon x="6" y="-65" alpha="100" visible="false"/>
-          <infoText x="0" y="-50" color="0xFFCCCC" alpha="75" visible="false" format="{{kb}} {{eff}} {{rating}}" bold="true"/>
+          <infoText x="0" y="-50" color="{{c:eff}}" alpha="75" visible="false" format="{{rating}}" bold="true"/>
         </extended>
       </dead>
     </enemy>

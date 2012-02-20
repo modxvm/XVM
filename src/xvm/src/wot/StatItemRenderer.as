@@ -55,7 +55,7 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
       if (data)
       {
         vehicleField.htmlText = Stat.DecorateField(data.label, data.vehicle,
-          Config.value("rating/battleLoading/format"),
+          Config.string("rating/battleLoading/format"),
           this.owner._name == "team1List" ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
       }
     }
@@ -67,7 +67,7 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
     if (Config.bool("rating/battleLoading/show", true))
     {
       vehicleField.htmlText = Stat.DecorateField(pdata.name, pdata.originalText,
-        Config.value("rating/battleLoading/format"),
+        Config.string("rating/battleLoading/format"),
         pdata.team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
     }
   }
