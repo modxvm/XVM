@@ -14,7 +14,7 @@
     <Setting Name="proxy_servers" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC9wb2x6YW1lci10c3QvMS8yLyUx&lt;/string&gt;
+  &lt;string&gt;aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC9ydS8/JTE=&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="MountPoint" Type="System.String" Scope="User">

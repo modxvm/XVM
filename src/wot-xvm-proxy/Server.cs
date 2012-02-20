@@ -16,7 +16,7 @@ namespace wot
     #region Private Members
 
     [Serializable]
-    private class Stat
+    public class Stat
     {
       public int id;
       public String name;
@@ -26,7 +26,27 @@ namespace wot
     }
 
     [Serializable]
-    private class PlayerInfo
+    public class XVMInfo
+    {
+      public String ver;
+      public String message;
+    }
+
+    [Serializable]
+    public class Info
+    {
+      public XVMInfo xvm;
+    }
+
+    [Serializable]
+    public class Response
+    {
+      public Stat[] players;
+      public Info info;
+    }
+
+    [Serializable]
+    public class PlayerInfo
     {
       public Stat stat;
       [NonSerialized]
@@ -35,17 +55,12 @@ namespace wot
       public DateTime errorTime;
     }
 
-    [Serializable]
-    private class Response
-    {
-      public Stat[] players;
-    }
-
     // local cache
     private readonly Dictionary<string, PlayerInfo> cache = new Dictionary<string, PlayerInfo>();
 
     private readonly Dictionary<string, Stat> pendingPlayers = new Dictionary<string, Stat>();
 
+    private Info _modInfo = null;
     private bool _firstError = true;
     private bool _unavailable = false;
     private DateTime _unavailableFrom;
@@ -325,6 +340,7 @@ namespace wot
 
             case "@RUN":
               _lastResult = GetStat(); // only this will start network operations
+              Debug("_lastResult: " + _lastResult);
               _prevResult = _lastResult;
               break;
 
@@ -380,7 +396,8 @@ namespace wot
 
       Response res = new Response()
       {
-        players = new Stat[pendingPlayers.Keys.Count]
+        players = new Stat[pendingPlayers.Keys.Count],
+        info = _modInfo,
       };
 
       int pos = 0;
@@ -474,7 +491,8 @@ namespace wot
             stat = stat,
             httpError = false
           };
-        }
+        };
+        _modInfo = res.info;
       }
       catch (Exception ex)
       {
@@ -503,21 +521,49 @@ namespace wot
 
       Response res = new Response();
 
-      if (jd["players"] == null || !jd["players"].IsArray)
-        return res;
-
-      res.players = new Stat[jd["players"].Count];
-      int pos = 0;
-      foreach (JsonData data in jd["players"])
+      try
       {
-        res.players[pos++] = new Stat()
+        if (jd["players"] != null && jd["players"].IsArray)
         {
-          id = data["id"].IsInt ? int.Parse(data["id"].ToString()) : 0,
-          name = data["name"].ToString(),
-          eff = data["eff"].IsInt ? int.Parse(data["eff"].ToString()) : 0,
-          battles = data["battles"].IsInt ? int.Parse(data["battles"].ToString()) : 0,
-          wins = data["wins"].IsInt ? int.Parse(data["wins"].ToString()) : 0,
-        };
+          res.players = new Stat[jd["players"].Count];
+          int pos = 0;
+          foreach (JsonData data in jd["players"])
+          {
+            res.players[pos++] = new Stat()
+            {
+              id = data["id"].IsInt ? int.Parse(data["id"].ToString()) : 0,
+              name = data["name"].ToString(),
+              eff = data["eff"].IsInt ? int.Parse(data["eff"].ToString()) : 0,
+              battles = data["battles"].IsInt ? int.Parse(data["battles"].ToString()) : 0,
+              wins = data["wins"].IsInt ? int.Parse(data["wins"].ToString()) : 0,
+            };
+          }
+        }
+      }
+      catch (Exception ex)
+      {
+        Log(2, "Parse error: players: " + ex);
+      }
+
+      try
+      {
+        if (jd["info"] != null)
+        {
+          res.info = new Info();
+          if (jd["info"]["xvm"] != null)
+          {
+            JsonData data = jd["info"]["xvm"];
+            res.info.xvm = new XVMInfo()
+            {
+              ver = data["ver"].ToString(),
+              message = data["message"].ToString(),
+            };
+          }
+        }
+      }
+      catch (Exception ex)
+      {
+        Log(2, "Parse error: info: " + ex);
       }
 
       return res;

@@ -12,4 +12,4 @@ SAMPLE_REPLAY=blowup.wotreplay
 #SAMPLE_REPLAY=squad.wotreplay
 cd ${WOT_DIRECTORY}
 #cmd /c start ./WorldOfTanks.exe `cygpath --windows ${CURRENT_DIRECTORY}/../test/replays/${SAMPLE_REPLAY}`
-cmd /c start ./wot-xvm-proxy.exe `cygpath --windows ${CURRENT_DIRECTORY}/../test/replays/${SAMPLE_REPLAY}`
+cmd /c start ./wot-xvm-proxy.exe /debug `cygpath --windows ${CURRENT_DIRECTORY}/../test/replays/${SAMPLE_REPLAY}`
