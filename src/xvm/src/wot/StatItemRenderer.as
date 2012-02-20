@@ -22,7 +22,7 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
     event.target.removeEventListener("complete", this, "completeLoad");
     if (this.owner._name == "team1List")
       vehicleField._x -= 120; // why this value? (sirmax2)
-    if (Config.bool("battle/disableMirroredVehicleIcons"))
+    if (!Config.bool("battle/mirroredVehicleIcons", true))
     {
       if (this.owner._name == "team2List")
       {

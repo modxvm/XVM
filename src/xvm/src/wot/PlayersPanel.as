@@ -18,7 +18,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   {
     event.target.removeEventListener("complete", this, "completeLoad");
 
-    if (!Config.bool("battle/disableMirroredVehicleIcons"))
+    if (Config.bool("battle/mirroredVehicleIcons", true))
       return;
 
     if (m_type == "left")

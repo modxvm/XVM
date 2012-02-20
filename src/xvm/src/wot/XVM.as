@@ -442,7 +442,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     var hbFillHeight: Number = ConfigOld.int(p_hb + "fill/attributes/height");
 
     GraphicsUtil.fillRect(xvmHealthBar, 0, 0, hb.width + 2 * hb.border, hbFillHeight + 2 * hb.border,
-      XVMColorWithFallback(ConfigOld.string(p_hb + "border/attributes/color")), ConfigOld.int(p_hb + "border/attributes/alpha"));
+      ConfigOld.int(p_hb + "border/attributes/color"), ConfigOld.int(p_hb + "border/attributes/alpha"));
     GraphicsUtil.fillRect(this.hbBar, 0, 0, hb.width, hbFillHeight,
       hb.currColor, ConfigOld.int(p_hb + "fill/attributes/alpha"));
     GraphicsUtil.fillRect(this.hb.damageBar, 0, 0, hb.width, hbFillHeight,

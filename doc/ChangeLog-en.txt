@@ -9,6 +9,8 @@ XVM-1.4:
     and color values for dynamic colors
   * fixed PostmortemTips hiding
   * added new version notification at battle loading screen
+  * Config parameter renamed and behavoir inverted to avoid mistakes:
+      battle/disableMirroredVehicleIcons -> battle/mirroredVehicleIcons
 
 XVM-1.3:
   * Simple installation. Added wot-xvm-proxy.exe.
@@ -27,7 +29,7 @@ XVM-1.0:
 
 This mod is a successor of the next mods:
   * Deer-o-meter
-  * Disable Vehicle Icons Mirroring
+  * Vehicle Icons Mirroring Controlling
   * OverTargetMarkers
   * Disable Postmortem Panel
 

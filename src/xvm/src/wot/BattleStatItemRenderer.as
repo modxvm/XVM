@@ -23,7 +23,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     event.target.removeEventListener("complete", this, "completeLoad");
     if (this.owner._name == "team1")
       col3._x -= 60;
-    if (Config.bool("battle/disableMirroredVehicleIcons"))
+    if (!Config.bool("battle/mirroredVehicleIcons", true))
     {
       if (this.owner._name == "team2")
       {

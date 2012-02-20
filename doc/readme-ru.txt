@@ -1,7 +1,7 @@
 Параметры конфига XVM.xvmconf:
 
 battle
-  disableMirroredVehicleIcons: true  - отключить зеркалирование иконок танков (полезно
+  mirroredVehicleIcons:        false - отключить зеркалирование иконок танков (полезно
                                        для альтернативных иконок)
   showPostmortemTips:          false - отключить всплывающую внизу панель после смерти
   drawGrid:                    true  - включить отображение сетки координат (может быть
