@@ -5,7 +5,7 @@
 class wot.utils.Defines
 {
   // Global mod versiob
-  public static var XVM_VERSION = "1.4";
+  public static var XVM_VERSION = "1.4-test8";
 
   public static var DEFAULT_CONFIG_NAME = "XVM.xvmconf";
         

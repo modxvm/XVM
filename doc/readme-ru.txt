@@ -36,11 +36,6 @@ rating
 - все цвета, за исключением фильтра тени могут быть заменены на динамические с помощью
   макроподстановок (см. ниже);
 
-- тэг battle/showPostMortemTips позволяет отключить панель, всплывающую при уничтожении танка.
-  <battle>
-    <showPostmortemTips>false</showPostmortemTips>
-  </battle>
-
 - тэг rating/showPlayersStatistics позволяет включить отображение статистики в infoText (см. ниже).
   <rating>
     <showPlayersStatistics>true</showPlayersStatistics>
