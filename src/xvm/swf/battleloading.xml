@@ -42994,7 +42994,7 @@
         <actions>
           <PushData>
             <items>
-              <StackString value="net.wargaming.BattleLoading"/>
+              <StackString value="wot.BattleLoading"/>
             </items>
           </PushData>
           <GetVariable/>

@@ -217,6 +217,9 @@ class wot.utils.Stat
         Stat.s_player_ratings[stat.name.toUpperCase()] = stat;
       };
 
+      if (stats.info && stats.info.xvm)
+        wot.BattleLoading.setInfoFieldData(stats.info.xvm);
+
       Stat.UpdateAll();
     };
     lv.load(command);
