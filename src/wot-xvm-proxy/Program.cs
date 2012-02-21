@@ -80,6 +80,16 @@ namespace wot
           ThreadCount = 5
         };
 
+        // Unmount MountPoint if left from previous start.
+        try
+        {
+          DokanNet.DokanRemoveMountPoint(opt.MountPoint);
+        }
+        catch
+        {
+          // nothing
+        }
+
         // Create MountPoint directory.
         DirectoryInfo di = new DirectoryInfo(opt.MountPoint);
         if (di.Exists)
