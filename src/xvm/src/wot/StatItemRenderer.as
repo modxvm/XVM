@@ -40,8 +40,8 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
     {
       Stat.AddPlayerData(this, data.id, data.label, data.vehicle,
         this.owner._name == "team1List" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
-      if (Stat.s_player_ids.length === 30 && !Stat.s_loaded) // FIXIT: Не будет работать с "туманом войны".
-        Stat.LoadData();
+      if (Stat.s_player_ids.length === 30)
+        Stat.StartLoadData();
     }
     super.setData(data);
   }

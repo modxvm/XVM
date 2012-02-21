@@ -12,6 +12,7 @@ class wot.utils.Stat
   public static var s_player_names = [];
   public static var s_player_data = {};
   public static var s_player_ratings = null;
+  public static var s_loadDataStarted = false;
   public static var s_loaded = false;
 
   // Misc functions
@@ -156,8 +157,16 @@ class wot.utils.Stat
     }
   }
 
+  public static function StartLoadData()
+  {
+    if (s_loadDataStarted)
+      return;
+    s_loadDataStarted = true;
+    LoadData();
+  }
+  
   private static var _s_isNew = true;
-  public static function LoadData()
+  private static function LoadData()
   {
     //Logger.add("Stat.LoadData()");
 

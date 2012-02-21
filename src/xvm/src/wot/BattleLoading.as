@@ -2,8 +2,11 @@
  * ...
  * @author sirmax2
  */
-import wot.utils.Config;
 import flash.filters.DropShadowFilter;
+import com.greensock.TimelineLite;
+import com.greensock.TweenLite;
+import wot.utils.Config;
+import wot.utils.Stat;
 
 class wot.BattleLoading extends net.wargaming.BattleLoading
 {
@@ -20,7 +23,7 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
       infoField.wordWrap = true;
       var textFormat: TextFormat = new TextFormat("$FieldFont", 12, 0x000000, true, false, false, null, null, "left");
       infoField.setNewTextFormat(textFormat);
-      
+
       var shadow: DropShadowFilter = new DropShadowFilter();
       shadow.blurX = shadow.blurY = 3;
       shadow.angle = 0;
@@ -38,6 +41,15 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
       infoField._alpha = 100;
       infoField._visible = true;
     }
+
+    // Force stats loading after 1 sec (for 12x12 battles or FogOfWar)
+    var timer: TimelineLite = new TimelineLite({onComplete:Stat.StartLoadData, onCompleteParams:[]});
+    timer.insert(new TweenLite(null, 1));
+  }
+
+  public function configUI()
+  {
+    super.configUI();
   }
 
   public static function setInfoFieldData(data)
