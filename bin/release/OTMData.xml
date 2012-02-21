@@ -216,7 +216,7 @@
         <extended>
           <actionMarker x="0" y="-67"/>
           <combatScrollText x="0" y="-67"/>
-          <playerName x="-70" y="-55" alpha="80" visible="true"/>
+          <playerName x="-70" y="-73" alpha="80" visible="true"/>
           <vehicleName x="-70" y="-55" alpha="80" visible="true"/>
           <currentHealth x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="false"/>
           <healthRatio x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="false"/>
