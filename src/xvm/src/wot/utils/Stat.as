@@ -4,6 +4,7 @@
  */
 import wot.utils.Config;
 import wot.utils.Defines;
+import wot.utils.Utils;
 
 class wot.utils.Stat
 {
@@ -113,6 +114,12 @@ class wot.utils.Stat
     format = format.split("{{rating}}").join(sRating);
     format = format.split("{{eff}}").join(sEff);
 
+    // This code is stupid, and need to be rewritten
+    format = format.split("{{kb:3}}").join(Utils.padLeft(sKb, 3));
+    format = format.split("{{rating:3}}").join(Utils.padLeft(sRating, 3));
+    format = format.split("{{eff:4}}").join(Utils.padLeft(sEff, 4));
+
+    // Dynamic colors
     format = format.split("{{c:eff}}").join(eff > 0 ? GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff) : "");
     format = format.split("{{c:rating}}").join(rating > 0 ? GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, rating) : "");
     format = format.split("{{c:kb}}").join(GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, kb));
