@@ -358,6 +358,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     iconTransform.bb *= tintRatio;
     iconTransform.ra = iconTransform.ga = iconTransform.ba = (1 - tintAmount) * 100;
     iconColor.setTransform(iconTransform);
+
+    updateStyle();
   }
 
   function XVMPopulateData()
@@ -509,8 +511,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       actionMarker._y = ConfigOld.int(b_path + "actionMarker/attributes/y");
 
       // Vehicle Icon
-      iconLoader._x = ConfigOld.int(b_path + "contourIcon/attributes/x") - iconLoader._width / 2;
-      iconLoader._y = ConfigOld.int(b_path + "contourIcon/attributes/y") - iconLoader._height / 2;
+      iconLoader._x = ConfigOld.int(b_path + "contourIcon/attributes/x") - iconLoader.__width / 2;
+      iconLoader._y = ConfigOld.int(b_path + "contourIcon/attributes/y") - iconLoader.__height / 2;
       iconLoader._alpha = ConfigOld.int(b_path + "contourIcon/attributes/alpha");
       iconLoader._visible = ConfigOld.bool(b_path + "contourIcon/attributes/visible");
 
