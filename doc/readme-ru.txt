@@ -36,7 +36,7 @@ rating
 - все цвета, за исключением фильтра тени и рамки полосы здоровья могут быть заменены на
   динамические с помощью макроподстановок (см. ниже);
 
-- тэг rating/showPlayersStatistics позволяет включить отображение статистики в infoText (см. ниже).
+- тэг rating/showPlayersStatistics позволяет включить отображение статистики в infoText (см. ниже)
   <rating>
     <showPlayersStatistics>true</showPlayersStatistics>
   </rating>
@@ -79,7 +79,7 @@ rating
 3. То же, что и 2, но с выравниванием колонок:
    "<font face='Consolas' size='10' color='{{c:kb}}'>{{kb:3}}</font> <font face='Consolas' size='10' color='{{c:eff}}'>{{eff:4}}</font> <font face='Consolas' size='10' color='{{c:rating}}'>{{rating:3}}</font>"
 4. Отобразить процент побед, подкрашенный в зависимости от рейтинга эффективности:
-  "<font color='{{c:eff}}'>{{rating}}</font>",
+  "<font color='{{c:eff}}'>{{rating}}</font>"
 
 Примеры использования динамического цвета:
 В XVM.xvmconf:

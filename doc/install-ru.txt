@@ -1,6 +1,7 @@
 1. Установить DokanLibrary: http://dokan-dev.net/en/download/#dokan
 2. Разархивировать архив в папку с игрой
-3. Настроить конфиг \res\gui\flash\XVM.xvmconf
+3. Настроить конфиг \res\gui\flash\XVM.xvmconf (используйте Блокнот (notepad),
+   НЕ используйте word, wordpad и подобные редакторы)
 4. Для игры запускать файл wot-xvm-proxy.exe.
    Если необходимо запускать игру через лаунчер, необходимо запускать с ключом /launcher:
      wot-xvm-proxy.exe /launcher

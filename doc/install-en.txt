@@ -2,7 +2,7 @@
 2. Unzip archive to game folder
    After installing open wot-xvm-proxy.exe.config and edit proxy_servers section to use a single
    string of aHR0cDovL3dvdC1yYXRpbmdzLmFwcHNwb3QuY29tL3JhdGluZ3MvMi8yLyUx
-3. Setup config \res\gui\flash\XVM.xvmconf
+3. Setup config \res\gui\flash\XVM.xvmconf (use Notepad, DO NOT use word, wordpad and such editors)
 4. Run game with wot-xvm-proxy.exe.
    Run launcher with command:
      wot-xvm-proxy.exe /launcher

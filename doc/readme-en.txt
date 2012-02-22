@@ -83,7 +83,7 @@ Enhancements not available from OTM Editor (OTMData.xml):
 3. Same as 2, but with aligned columns:
    "<font face='Consolas' size='10' color='{{c:kb}}'>{{kb:3}}</font> <font face='Consolas' size='10' color='{{c:eff}}'>{{eff:4}}</font> <font face='Consolas' size='10' color='{{c:rating}}'>{{rating:3}}</font>"
 4. Show GWR colored by efficiency:
-  "<font color='{{c:eff}}'>{{rating}}</font>",
+  "<font color='{{c:eff}}'>{{rating}}</font>"
 
 Dynamic color usage examples:
 In XVM.xvmconf:
