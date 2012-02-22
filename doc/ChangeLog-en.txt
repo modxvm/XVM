@@ -12,6 +12,8 @@ XVM-1.4:
   * Config parameter renamed and behavoir inverted to avoid mistakes:
       battle/disableMirroredVehicleIcons -> battle/mirroredVehicleIcons
   * Force stats loading after 1 sec (for 12x12 battles or FogOfWar)
+  * Added stat macros: {kb:3}}, {{rating:3}}, {{eff:4}} - useful for aligning columns
+    using monospace fonts
 
 XVM-1.3:
   * Simple installation. Added wot-xvm-proxy.exe.
