@@ -64,7 +64,7 @@ namespace wot
     private bool _firstError = true;
     private bool _unavailable = false;
     private DateTime _unavailableFrom;
-    private String _lastResult = null;
+    private String _lastResult = "";
 
     #endregion
 
@@ -359,6 +359,9 @@ namespace wot
 
           _firstError = false;
 
+          if (_prevResult == null)
+            _prevResult = "";
+            
           fileinfo.Length = _prevResult.Length;
         }
         catch (Exception ex)
