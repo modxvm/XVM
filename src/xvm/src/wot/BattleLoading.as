@@ -43,8 +43,14 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
     }
 
     // Force stats loading after 1 sec (for 12x12 battles or FogOfWar)
-    var timer: TimelineLite = new TimelineLite({onComplete:Stat.StartLoadData, onCompleteParams:[]});
+    var timer: TimelineLite = new TimelineLite({onComplete:StartLoadData, onCompleteParams:[]});
     timer.insert(new TweenLite(null, 1));
+  }
+
+  public function StartLoadData()
+  {
+    if (Config.bool("rating/showPlayersStatistics"))
+      Stat.StartLoadData();
   }
 
   public function configUI()
