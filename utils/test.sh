@@ -10,8 +10,8 @@ CURRENT_DIRECTORY=`pwd`
 #SAMPLE_REPLAY=15.wotreplay
 #SAMPLE_REPLAY=fogofwar.wotreplay
 #SAMPLE_REPLAY=markers.wotreplay
-#SAMPLE_REPLAY=squad.wotreplay
-SAMPLE_REPLAY=tk,blowup.wotreplay
+SAMPLE_REPLAY=squad.wotreplay
+#SAMPLE_REPLAY=tk,blowup.wotreplay
 
 cd ${WOT_DIRECTORY}
 #cmd /c start ./WorldOfTanks.exe `cygpath --windows ${CURRENT_DIRECTORY}/../test/replays/${SAMPLE_REPLAY}`

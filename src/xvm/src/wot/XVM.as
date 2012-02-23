@@ -447,7 +447,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       ConfigOld.int(p_hb + "border/attributes/color"), ConfigOld.int(p_hb + "border/attributes/alpha"));
     GraphicsUtil.fillRect(this.hbBar, 0, 0, hb.width, hbFillHeight,
       hb.currColor, ConfigOld.int(p_hb + "fill/attributes/alpha"));
-    GraphicsUtil.fillRect(this.hb.damageBar, 0, 0, hb.width, hbFillHeight,
+    GraphicsUtil.fillRect(this.hbDamageBar, 0, 0, hb.width, hbFillHeight,
       XVMColorWithFallback(ConfigOld.string(p_hb + "damage/attributes/color")), ConfigOld.int(p_hb + "damage/attributes/alpha"));
 
     this.hbBar._x = this.hbBar._y = hb.border;
