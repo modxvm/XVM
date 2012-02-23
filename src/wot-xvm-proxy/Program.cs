@@ -61,7 +61,8 @@ namespace wot
             continue;
           }
 
-          break;
+          if (File.Exists(args[i]))
+            args[i] = String.Format(@"""{0}""", args[i]);
         }
 
         Directory.SetCurrentDirectory(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location));
@@ -119,7 +120,9 @@ namespace wot
 
           if (thread.IsAlive)
           {
-            using (Process wotProc = Process.Start(wotExeFileName, string.Join(" ", args)))
+            string arg = String.Join(" ", args);
+            Console.WriteLine(String.Format("Starting game process: {0} {1}", wotExeFileName, arg));
+            using (Process wotProc = Process.Start(wotExeFileName, arg))
             {
               if (wotProc == null)
                 throw new Exception("Cannot start game: " + wotExeFileName);
