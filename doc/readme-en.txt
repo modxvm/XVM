@@ -1,31 +1,43 @@
+This mod is a successor of the next mods:
+  * In-game players rating
+  * Vehicle Icons Mirroring Controlling
+  * OverTargetMarkers
+  * Disable Postmortem Panel
+
+Project site: http://code.google.com/p/wot-xvm/
+Discussion:   http://forum.bulychev.net/viewforum.php?f=4
+
 XVM.xvmconf parameters:
 
 battle
-  mirroredVehicleIcons:  false - disable vehicle icons mirroring (useful for
-                                 alternative icons)
-  showPostmortemTips:    false - disable sliding postmortem panel
-  drawGrid:              true  - draw coordinates grid (may be usefil for
-                                 aligning marker elements)
+  mirroredVehicleIcons:   false - disable vehicle icons mirroring (useful for
+                                  alternative icons)
+  showPostmortemTips:     false - disable sliding postmortem panel
+  playersPanelAlpha:      0..100 - players panel transparentness. 0 - transparent,
+                                  100 - not transparent
+  playersPanelLargeWidth: 0..300 - set players panel width in large mode. Default: 187
+  drawGrid:               true  - draw coordinates grid (may be usefil for
+                                  aligning marker elements)
 
 rating
-  showPlayersStatistics: true  - enable player statistics. Global switch,
-                                 statistics module will be disabled
-                                 everywhere without it.
+  showPlayersStatistics:  true  - enable player statistics. Global switch,
+                                  statistics module will be disabled
+                                  everywhere without it.
   battleLoading
-    show:                false - disable showing statistics at battle loading
-                                 screen
-    format:              "text" - format of field (statistics macros can be
-                                 used - see below)
+    show:                 false - disable showing statistics at battle loading
+                                  screen
+    format:               "text" - format of field (statistics macros can be
+                                  used - see below)
   playersPanel
-    show:                false - disable showing statistics at players panels
-    format:              "text" - format of field
-    middleColor:         "{{c:...}}" - color of player names in the middle
-                                 mode of players panels (statistics macros can
-                                 be used)
+    show:                 false - disable showing statistics at players panels
+    format:               "text" - format of field
+    middleColor:          "{{c:...}}" - color of player names in the middle
+                                  mode of players panels (statistics macros can
+                                  be used)
   statisticForm
-    show:                false - disable showing statistics at battle
-                                 statistics window (when Tab pressed)
-    format:              "text" - format of field
+    show:                 false - disable showing statistics at battle
+                                  statistics window (when Tab pressed)
+    format:               "text" - format of field
 
 Enhancements not available from OTM Editor (OTMData.xml):
 
@@ -90,7 +102,6 @@ In XVM.xvmconf:
   "middleColor": "{{c:eff}}"
 In OTMData.xml:
    <infoText x="0" y="-50" color="{{c:eff}}" alpha="75" visible="true" format="{{kb}} {{eff}} {{rating}}" bold="true"/>
-
 
 
 ---
