@@ -10,7 +10,8 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 {
   private var m_largePanelWidth: Number = -1;
   private var m_largePanelOffset: Number = NaN;
-
+  private var m_widthTester: TextField = null;
+  
   function PlayersPanel()
   {
     super();
@@ -59,7 +60,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
       if (m_largePanelOffset == NaN)
         m_largePanelOffset = m_names._width - m_largePanelWidth;
 
-        m_names._width = m_largePanelWidth;
+      m_names._width = m_largePanelWidth;
 
       if (m_type == "left")
           m_names._x += m_largePanelOffset;
@@ -108,9 +109,28 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         {
           if (Config.bool("rating/playersPanel/show", true))
           {
-            _loc5 = Stat.DecorateField(data[_loc2].label, data[_loc2].label,
-              Config.string("rating/playersPanel/format"),
-              m_type == "left" ? Defines.POSITION_LEFT : Defines.POSITION_RIGHT);
+            // What is the better way to cut player names?
+            if (!m_widthTester)
+            {
+              m_widthTester = _root.createTextField("widthTester", _root.getNextHighestDepth(), 0, 0, m_names._width, m_names._height);
+              m_widthTester.setTextFormat(m_names.getTextFormat());
+              m_widthTester.autoSize = true;
+              m_widthTester.html = true;
+              m_widthTester._visible = false;
+            }
+            
+            var pname: String = data[_loc2].label;
+            while (pname.length >= 0)
+            {
+              _loc5 = Stat.DecorateField(data[_loc2].label,
+                (pname == data[_loc2].label || pname.length == 0) ? pname : pname + "...",
+                Config.string("rating/playersPanel/format"),
+                m_type == "left" ? Defines.POSITION_LEFT : Defines.POSITION_RIGHT);
+              m_widthTester.htmlText = _loc5;
+              if (m_widthTester._width <= m_names._width + 3)
+                break;
+              pname = pname.substr(0, pname.length - 1);
+            }
           }
         }
         else
@@ -128,25 +148,25 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
       {
           _loc7 = _loc7 + this._getHTMLText(_loc4 && _loc3 ? ("selected") : ("selected_dead"), _loc5);
           continue;
-      } // end if
+      }
       if (data[_loc2].VIP)
       {
           _loc7 = _loc7 + this._getHTMLText(_loc4 && _loc3 ? ("VIP") : ("VIP_dead"), _loc5);
           continue;
-      } // end if
+      }
       if (data[_loc2].squad > 10)
       {
           _loc7 = _loc7 + this._getHTMLText(_loc4 && _loc3 ? ("squad") : ("squad_dead"), _loc5);
           continue;
-      } // end if
+      }
       if (data[_loc2].teamKiller)
       {
           _loc7 = _loc7 + this._getHTMLText(_loc4 && _loc3 ? ("teamkiller") : ("teamkiller_dead"), _loc5);
           continue;
-      } // end if
+      }
       _loc7 = _loc7 + this._getHTMLText(_loc4 && _loc3 ? ("normal") : ("normal_dead"), _loc5);
-    } // end of for
+    }
 
     m_names.htmlText = _loc7;
-  } // End of the function
+  }
 }

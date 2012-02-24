@@ -2,13 +2,13 @@
 {
   static var PLAYER_NAME_LENGTH;
 
-  var m_list;
-  var m_names;
-  var m_frags;
-  var m_vehicles;
-  var m_state;
-  var m_type;
-  var players_bg;
+  var m_state: String;
+  var m_type: String;
+  var m_names: TextField;
+  var m_frags: TextField;
+  var m_vehicles: TextField;
+  var m_list: MovieClip;
+  var players_bg: MovieClip;
 
   function setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount);
   function update();
