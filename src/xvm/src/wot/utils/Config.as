@@ -46,7 +46,7 @@ class wot.utils.Config
   {
     if (!defaultValue)
       defaultValue = 0;
-    var value = parseInt(string(path));
+    var value: Number = parseInt(string(path));
     return isNaN(value) ? defaultValue : value;
   }
 

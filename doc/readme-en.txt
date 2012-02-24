@@ -15,7 +15,8 @@ battle
   showPostmortemTips:     false - disable sliding postmortem panel
   playersPanelAlpha:      0..100 - players panel transparentness. 0 - transparent,
                                   100 - not transparent
-  playersPanelLargeWidth: 0..300 - set players panel width in large mode. Default: 187
+  playersPanelLargeWidth: 0..170 - set players names width in panels in large mode.
+                                  Default: 170
   drawGrid:               true  - draw coordinates grid (may be usefil for
                                   aligning marker elements)
 

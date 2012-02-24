@@ -6,6 +6,8 @@ import wot.utils.Defines;
  
 class wot.utils.Logger
 {
+  public static var counter: Number = 0;
+        
   public static function add(str: String)
   {
     str = str.split(":").join(".");
@@ -24,7 +26,8 @@ class wot.utils.Logger
       str = "..." + str.slice(Defines.MAX_PATH);
     }
 
-    p.load(Defines.COMMAND_LOG + " " + str);
+    p.load(Defines.COMMAND_LOG + " [" + counter + "] " + str);
+    counter++;
   }
   
   public static function addObject(obj: Object, name: String)

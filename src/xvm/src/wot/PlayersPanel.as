@@ -8,6 +8,9 @@ import wot.utils.Stat;
 
 class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 {
+  private var m_largePanelWidth: Number = -1;
+  private var m_largePanelOffset: Number = NaN;
+
   function PlayersPanel()
   {
     super();
@@ -18,8 +21,6 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   {
     event.target.removeEventListener("complete", this, "completeLoad");
 
-    players_bg._alpha = Config.int("battle/playersPanelAlpha", 100);
-    
     if (Config.bool("battle/mirroredVehicleIcons", true))
       return;
 
@@ -31,18 +32,59 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   }
 
   // override
-  private var _iconLoaderProcessed = false;
+  private var _initialized = false;
   function setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount)
   {
-    if (!_iconLoaderProcessed)
+    if (!_initialized)
     {
-      _iconLoaderProcessed = true;
+      _initialized = true;
       for (var i = 0; i < m_list.renderers.length; ++i)
         m_list.renderers[i].iconLoader.addEventListener("complete", this, "completeLoad");
+
+      players_bg.players_bg._alpha = Config.int("battle/playersPanelAlpha", 100);
+
+      m_largePanelWidth = Math.min(Config.int("battle/playersPanelLargeWidth", -1), 170);
     }
     super.setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount);
   }
 
+  // override
+  private var _lastModeWasLarge = false;
+  function update()
+  {
+    super.update();
+
+    if (m_state == "large" && m_largePanelWidth >= 0)
+    {
+      if (m_largePanelOffset == NaN)
+        m_largePanelOffset = m_names._width - m_largePanelWidth;
+
+        m_names._width = m_largePanelWidth;
+
+      if (m_type == "left")
+          m_names._x += m_largePanelOffset;
+
+      if (!_lastModeWasLarge)
+        this._x = (m_type == "left") ? this._x - m_largePanelOffset : this._x + m_largePanelOffset;
+      _lastModeWasLarge = true;
+    }
+    else
+    {
+      if (_lastModeWasLarge)
+        this._x = (m_type == "left") ? this._x + m_largePanelOffset : this._x - m_largePanelOffset;
+      _lastModeWasLarge = false;
+    }
+  }
+
+  // override
+  function onRecreateDevice(width, height)
+  {
+    super.onRecreateDevice(width, height);
+    
+    if (m_state == "large" && m_largePanelWidth >= 0)
+      this._x = (m_type == "left") ? this._x - m_largePanelOffset : this._x + m_largePanelOffset;
+  }
+  
   // override
   function _setNamesStr(data, sel, isColorBlind, knownPlayersCount)
   {
@@ -104,6 +146,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
       } // end if
       _loc7 = _loc7 + this._getHTMLText(_loc4 && _loc3 ? ("normal") : ("normal_dead"), _loc5);
     } // end of for
+
     m_names.htmlText = _loc7;
   } // End of the function
 }
