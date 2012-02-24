@@ -33,12 +33,17 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   }
 
   // override
+  private static var _logShown = false;
   function setData(data)
   {
     //wot.utils.Logger.addObject(data, "data");
     if (data && Config.bool("rating/showPlayersStatistics"))
     {
-      wot.utils.Logger.add("[BattleLoading] Show Players Statistics = TRUE"); // Just to check config is loaded correctly
+      if (!_logShown)
+      {
+        _logShown = true;
+        wot.utils.Logger.add("[BattleLoading] Show Players Statistics = TRUE"); // Just to check config is loaded correctly
+      }
       Stat.AddPlayerData(this, data.id, data.label, data.vehicle,
         this.owner._name == "team1List" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
       if (Stat.s_player_ids.length === 30)
