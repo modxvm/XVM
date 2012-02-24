@@ -65,9 +65,9 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
 
     var txt: String = "XVM v" + wot.utils.Defines.XVM_VERSION;
 
-    if (data.ver && (String(data.ver) != wot.utils.Defines.XVM_VERSION))
+    if (data.ver && wot.utils.Utils.compareVersions(String(data.ver), wot.utils.Defines.XVM_VERSION) == 1)
     {
-      txt = "New version available: v" + String(data.ver) + " (current is v" + wot.utils.Defines.XVM_VERSION + ")\n";
+      txt = "XVM: New version available: v" + String(data.ver) + " (current is v" + wot.utils.Defines.XVM_VERSION + ")\n";
       if (data.message)
         txt += data.message + "\n";
       infoField.textColor = 0xAAFFAA;

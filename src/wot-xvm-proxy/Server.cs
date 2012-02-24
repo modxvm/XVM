@@ -532,13 +532,63 @@ namespace wot
           int pos = 0;
           foreach (JsonData data in jd["players"])
           {
+            int id;
+            try
+            {
+              id = data["id"].IsInt ? int.Parse(data["id"].ToString()) : 0;
+            }
+            catch
+            {
+              id = 0;
+            }
+
+            string name;
+            try
+            {
+              name = data["name"].IsString ? data["name"].ToString() : "";
+            }
+            catch
+            {
+              name = "";
+            }
+
+            int eff;
+            try
+            {
+              eff = data["eff"].IsInt ? int.Parse(data["eff"].ToString()) : 0;
+            }
+            catch
+            {
+              eff = 0;
+            }
+
+            int battles;
+            try
+            {
+              battles = data["battles"].IsInt ? int.Parse(data["battles"].ToString()) : 0;
+            }
+            catch
+            {
+              battles = 0;
+            }
+
+            int wins;
+            try
+            {
+              wins = data["wins"].IsInt ? int.Parse(data["wins"].ToString()) : 0;
+            }
+            catch
+            {
+              wins = 0;
+            }
+
             res.players[pos++] = new Stat()
             {
-              id = data["id"].IsInt ? int.Parse(data["id"].ToString()) : 0,
-              name = data["name"].ToString(),
-              eff = data["eff"].IsInt ? int.Parse(data["eff"].ToString()) : 0,
-              battles = data["battles"].IsInt ? int.Parse(data["battles"].ToString()) : 0,
-              wins = data["wins"].IsInt ? int.Parse(data["wins"].ToString()) : 0,
+              id = id,
+              name = name,
+              eff = eff,
+              battles = battles,
+              wins = wins,
             };
           }
         }
