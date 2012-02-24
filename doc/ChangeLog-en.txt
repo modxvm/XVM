@@ -1,3 +1,10 @@
+XVM-1.5:
+  * Fixed playing replays with spaces in the file name
+  * Fixed damage fading in health bar
+  * Configurable players panel transparentness
+  * Set players names width in panels in large mode
+  * Some other bugs fixed
+
 XVM-1.4:
   * Working only with player id
   * Macroses was added in markers: {{kb}}, {{battles}}, {{wins}}, {{eff}}, {{rating}}
