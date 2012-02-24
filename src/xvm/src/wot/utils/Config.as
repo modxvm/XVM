@@ -42,9 +42,12 @@ class wot.utils.Config
     lv.load(filename);
   }
 
-  public static function int(path: String): Number
+  public static function int(path: String, defaultValue: Number): Number
   {
-    return parseInt(string(path));
+    if (!defaultValue)
+      defaultValue = 0;
+    var value = parseInt(string(path));
+    return isNaN(value) ? defaultValue : value;
   }
 
   public static function bool(path: String, trueIsDefault: Boolean): Boolean

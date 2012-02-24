@@ -6,6 +6,7 @@
   var m_names;
   var m_state;
   var m_type;
+  var players_bg;
 
   function setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount);
   function _setNamesStr(data, sel, isColorBlind, knownPlayersCount);

@@ -208,7 +208,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
     return new TextFormat(
       ConfigOld.string(format_config_path + "font", "$FieldFont"),
-      ConfigOld.int(format_config_path + "size"),
+      ConfigOld.int(format_config_path + "size", 12),
       0x000000,
       ConfigOld.bool(format_config_path + "bold"),
       false, false, null, null,
@@ -389,7 +389,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     var scale = {
       x: ConfigOld.int(p_vehicleIcon + "scale/attributes/x"),
       y: ConfigOld.int(p_vehicleIcon + "scale/attributes/y"),
-      maxScale: ConfigOld.int(p_vehicleIcon + "scale/attributes/maxScale")
+      maxScale: ConfigOld.int(p_vehicleIcon + "scale/attributes/maxScale", 100)
     }
     for (var childName in marker.marker)
     {
@@ -412,11 +412,11 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     // Combat Scroll Text
     cst = {
       enabled: ConfigOld.bool(p_cstCurrent + "enabled/attributes/value"),
-      speed: ConfigOld.int(p_cstCurrent + "speed/attributes/value"),
-      range: ConfigOld.int(p_cstCurrent + "maxRange/attributes/value"),
+      speed: ConfigOld.int(p_cstCurrent + "speed/attributes/value", 2),
+      range: ConfigOld.int(p_cstCurrent + "maxRange/attributes/value", 40),
       color: XVMColorWithFallback(ConfigOld.string(p_cstCurrent + "color/attributes/value")),
       fontName: ConfigOld.string(p_cstCurrent + "font/data", "$TextFont"),
-      textSize: ConfigOld.int(p_cstCurrent + "textSize/attributes/value"),
+      textSize: ConfigOld.int(p_cstCurrent + "textSize/attributes/value", 12),
       text: ConfigOld.string(p_cstCurrent + "message/data"),
       prefix: ConfigOld.string(p_cstCurrent + "prefix/data", ""),
       postfix: ConfigOld.string(p_cstCurrent + "postfix/data", ""),
@@ -437,18 +437,18 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     else
       this.hbDamageBar = xvmHealthBar.createEmptyMovieClip("damageMC", xvmHealthBar.getNextHighestDepth());
 
-    hb.border = ConfigOld.int(p_hb + "border/attributes/size");
-    hb.width = ConfigOld.int(p_hb + "fill/attributes/width");
-    hb.damageTime = ConfigOld.int(p_hb + "damage/attributes/fade");
+    hb.border = ConfigOld.int(p_hb + "border/attributes/size", 1);
+    hb.width = ConfigOld.int(p_hb + "fill/attributes/width", 80);
+    hb.damageTime = ConfigOld.int(p_hb + "damage/attributes/fade", 1);
 
-    var hbFillHeight: Number = ConfigOld.int(p_hb + "fill/attributes/height");
+    var hbFillHeight: Number = ConfigOld.int(p_hb + "fill/attributes/height", 12);
 
     GraphicsUtil.fillRect(xvmHealthBar, 0, 0, hb.width + 2 * hb.border, hbFillHeight + 2 * hb.border,
-      ConfigOld.int(p_hb + "border/attributes/color"), ConfigOld.int(p_hb + "border/attributes/alpha"));
+      ConfigOld.int(p_hb + "border/attributes/color", 0x000000), ConfigOld.int(p_hb + "border/attributes/alpha", 30));
     GraphicsUtil.fillRect(this.hbBar, 0, 0, hb.width, hbFillHeight,
-      hb.currColor, ConfigOld.int(p_hb + "fill/attributes/alpha"));
+      hb.currColor, ConfigOld.int(p_hb + "fill/attributes/alpha", 30));
     GraphicsUtil.fillRect(this.hbDamageBar, 0, 0, hb.width, hbFillHeight,
-      XVMColorWithFallback(ConfigOld.string(p_hb + "damage/attributes/color")), ConfigOld.int(p_hb + "damage/attributes/alpha"));
+      XVMColorWithFallback(ConfigOld.string(p_hb + "damage/attributes/color")), ConfigOld.int(p_hb + "damage/attributes/alpha", 80));
 
     this.hbBar._x = this.hbBar._y = hb.border;
     this.hbDamageBar._x = hb.border + hb.width;
@@ -482,7 +482,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       pNameField.textColor = XVMColorWithFallback(ConfigOld.string(b_path + "playerName/attributes/color"));
       pNameField._x = ConfigOld.int(b_path + "playerName/attributes/x");
       pNameField._y = ConfigOld.int(b_path + "playerName/attributes/y");
-      pNameField._alpha = ConfigOld.int(b_path + "playerName/attributes/alpha");
+      pNameField._alpha = ConfigOld.int(b_path + "playerName/attributes/alpha", 100);
       pNameField._visible = ConfigOld.bool(b_path + "playerName/attributes/visible");
       pNameField._width = pNameFieldWidth;
 
@@ -490,20 +490,20 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       vNameField.textColor = XVMColorWithFallback(ConfigOld.string(b_path + "vehicleName/attributes/color"));
       vNameField._x = ConfigOld.int(b_path + "vehicleName/attributes/x");
       vNameField._y = ConfigOld.int(b_path + "vehicleName/attributes/y");
-      vNameField._alpha = ConfigOld.int(b_path + "vehicleName/attributes/alpha");
+      vNameField._alpha = ConfigOld.int(b_path + "vehicleName/attributes/alpha", 100);
       vNameField._visible = ConfigOld.bool(b_path + "vehicleName/attributes/visible");
       vNameField._width = vNameFieldWidth;
 
       // Vehicle Type Marker
       marker._x = ConfigOld.int(b_path + "vehicleIcon/attributes/x");
       marker._y = ConfigOld.int(b_path + "vehicleIcon/attributes/y");
-      marker._alpha = ConfigOld.int(b_path + "vehicleIcon/attributes/alpha");
+      marker._alpha = ConfigOld.int(b_path + "vehicleIcon/attributes/alpha", 100);
       marker._visible = ConfigOld.bool(b_path + "vehicleIcon/attributes/visible");
 
       // Level Icon
       levelIcon._x = ConfigOld.int(b_path + "levelIcon/attributes/x");
       levelIcon._y = ConfigOld.int(b_path + "levelIcon/attributes/y");
-      levelIcon._alpha = ConfigOld.int(b_path + "levelIcon/attributes/alpha");
+      levelIcon._alpha = ConfigOld.int(b_path + "levelIcon/attributes/alpha", 100);
       levelIcon._visible = ConfigOld.bool(b_path + "levelIcon/attributes/visible");
 
       // Action Marker
@@ -513,7 +513,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       // Vehicle Icon
       iconLoader._x = ConfigOld.int(b_path + "contourIcon/attributes/x") - iconLoader.__width / 2;
       iconLoader._y = ConfigOld.int(b_path + "contourIcon/attributes/y") - iconLoader.__height / 2;
-      iconLoader._alpha = ConfigOld.int(b_path + "contourIcon/attributes/alpha");
+      iconLoader._alpha = ConfigOld.int(b_path + "contourIcon/attributes/alpha", 100);
       iconLoader._visible = ConfigOld.bool(b_path + "contourIcon/attributes/visible");
 
       // Combat Scroll Text
@@ -523,21 +523,21 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       // Health Bar
       xvmHealthBar._x = ConfigOld.int(b_path + "healthBar/attributes/x");
       xvmHealthBar._y = ConfigOld.int(b_path + "healthBar/attributes/y");
-      xvmHealthBar._alpha = ConfigOld.int(b_path + "healthBar/attributes/alpha");
+      xvmHealthBar._alpha = ConfigOld.int(b_path + "healthBar/attributes/alpha", 100);
       xvmHealthBar._visible = ConfigOld.bool(b_path + "healthBar/attributes/visible");
 
       // Health Field
       healthField.textColor = XVMColorWithFallback(ConfigOld.string(b_path + "currentHealth/attributes/color"));
       healthField._x = ConfigOld.int(b_path + "currentHealth/attributes/x");
       healthField._y = ConfigOld.int(b_path + "currentHealth/attributes/y") + 2; // sirmax: why this value?
-      healthField._alpha = ConfigOld.int(b_path + "currentHealth/attributes/alpha");
+      healthField._alpha = ConfigOld.int(b_path + "currentHealth/attributes/alpha", 100);
       healthField._visible = ConfigOld.bool(b_path + "currentHealth/attributes/visible");
 
       // Health Ratio
       healthRatio.textColor = XVMColorWithFallback(ConfigOld.string(b_path + "healthRatio/attributes/color"));
       healthRatio._x = ConfigOld.int(b_path + "healthRatio/attributes/x");
       healthRatio._y = ConfigOld.int(b_path + "healthRatio/attributes/y") + 2; // sirmax: why this value?
-      healthRatio._alpha = ConfigOld.int(b_path + "healthRatio/attributes/alpha");
+      healthRatio._alpha = ConfigOld.int(b_path + "healthRatio/attributes/alpha", 100);
       healthRatio._visible = ConfigOld.bool(b_path + "healthRatio/attributes/visible");
 
       // Info Text

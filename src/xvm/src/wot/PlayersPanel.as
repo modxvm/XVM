@@ -18,6 +18,8 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   {
     event.target.removeEventListener("complete", this, "completeLoad");
 
+    players_bg._alpha = Config.int("battle/playersPanelAlpha", 100);
+    
     if (Config.bool("battle/mirroredVehicleIcons", true))
       return;
 
