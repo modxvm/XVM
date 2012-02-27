@@ -7,7 +7,7 @@
     "url": "http://code.google.com/p/wot-xvm/",
     "date": "2012-02-17",
     "gameVersion": "0.7.1",
-    "modVersion": "1.4"
+    "modVersion": "1.6+"
   },
   "battle": {
     /* false - отключить зеркалирование иконок танков (полезно для альтернативных иконок) */

@@ -52,25 +52,42 @@ class wot.utils.ConfigOld
 
   public static function int(path: String, defaultValue: Number): Number
   {
+    if (!ConfigOld.s_config)
+      return undefined;
+    if (s_config_cache.hasOwnProperty(path))
+      return s_config_cache[path];
+
     if (!defaultValue)
       defaultValue = 0;
     var v = value(path);
-    if (!isNaN(v))
-      return v;
     var n: Number = parseInt(v);
-    return isNaN(n) ? defaultValue : n;
+    n = isNaN(n) ? defaultValue : n;
+    s_config_cache[path] = n;
+    return n;
   }
 
   public static function bool(path: String, trueIsDefault: Boolean): Boolean
   {
+    if (!ConfigOld.s_config)
+      return undefined;
+    if (s_config_cache.hasOwnProperty(path))
+      return s_config_cache[path];
     var v = value(path).toLowerCase();
-    return trueIsDefault ? v != "false" : v == "true";
+    var b = trueIsDefault ? v != "false" : v == "true";
+    s_config_cache[path] = b;
+    return b;
   }
 
   public static function string(path: String, defaultValue: String): String
   {
-    var value = value(path);
-    return value ? String(value) : defaultValue;
+    if (!ConfigOld.s_config)
+      return undefined;
+    if (s_config_cache.hasOwnProperty(path))
+      return s_config_cache[path];
+    var v = value(path);
+    v = v ? String(v) : defaultValue;
+    s_config_cache[path] = v;
+    return v;
   }
 
   public static function value(path: String)

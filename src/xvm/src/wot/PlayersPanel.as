@@ -90,12 +90,6 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   // override
   function _setNamesStr(data, sel, isColorBlind, knownPlayersCount)
   {
-    if (!Config.bool("rating/showPlayersStatistics"))
-    {
-      super._setNamesStr(data, sel, isColorBlind, knownPlayersCount);
-      return;
-    }
-
     var _loc7 = "";
     var _loc5 = "";
     var _loc8 = 0;
@@ -104,37 +98,37 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     {
       _loc5 = data[_loc2].label.slice(0, net.wargaming.ingame.PlayersPanel.PLAYER_NAME_LENGTH[m_state]);
 
-      if (Stat.s_player_ratings)
+      if (m_state == "large")
       {
-        if (m_state == "large")
+        // What is the better way to cut player names?
+        if (!m_widthTester)
         {
-          if (Config.bool("rating/playersPanel/show", true))
-          {
-            // What is the better way to cut player names?
-            if (!m_widthTester)
-            {
-              m_widthTester = _root.createTextField("widthTester", _root.getNextHighestDepth(), 0, 0, m_names._width, m_names._height);
-              m_widthTester.setTextFormat(m_names.getTextFormat());
-              m_widthTester.autoSize = true;
-              m_widthTester.html = true;
-              m_widthTester._visible = false;
-            }
-            
-            var pname: String = data[_loc2].label;
-            while (pname.length >= 0)
-            {
-              _loc5 = Stat.DecorateField(data[_loc2].label,
-                (pname == data[_loc2].label || pname.length == 0) ? pname : pname + "...",
-                Config.string("rating/playersPanel/format"),
-                m_type == "left" ? Defines.POSITION_LEFT : Defines.POSITION_RIGHT);
-              m_widthTester.htmlText = _loc5;
-              if (m_widthTester._width <= m_names._width + 3)
-                break;
-              pname = pname.substr(0, pname.length - 1);
-            }
-          }
+          m_widthTester = _root.createTextField("widthTester", _root.getNextHighestDepth(), 0, 0, m_names._width, m_names._height);
+          m_widthTester.setTextFormat(m_names.getTextFormat());
+          m_widthTester.autoSize = true;
+          m_widthTester.html = true;
+          m_widthTester._visible = false;
         }
-        else
+        
+        var pname: String = data[_loc2].label;
+        while (pname.length >= 0)
+        {
+          _loc5 = (pname == data[_loc2].label || pname.length == 0) ? pname : pname + "...";
+          if (Stat.s_player_ratings && Config.bool("rating/playersPanel/show", true))
+          {
+            _loc5 = Stat.DecorateField(data[_loc2].label, _loc5,
+              Config.string("rating/playersPanel/format"),
+              m_type == "left" ? Defines.POSITION_LEFT : Defines.POSITION_RIGHT);
+          }
+          m_widthTester.htmlText = _loc5;
+          if (m_widthTester._width <= m_names._width + 3)
+            break;
+          pname = pname.substr(0, pname.length - 1);
+        }
+      }
+      else
+      {
+        if (Stat.s_player_ratings)
         {
           var middleColor: String = Config.string("rating/playersPanel/middleColor");
           if (middleColor)
