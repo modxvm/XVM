@@ -293,6 +293,9 @@ namespace wot
       {
         try
         {
+          // XP send filename in lowercase, W7 in uppercase. Make them both the same.
+          filename = filename.ToUpper();
+
           fileinfo.Attributes = FileAttributes.Archive;
           fileinfo.CreationTime = DateTime.Now;
           fileinfo.LastAccessTime = DateTime.Now;
@@ -311,7 +314,7 @@ namespace wot
 
           if (!filename.StartsWith("\\@LOG"))
             Log(1, String.Format("=> GetFileInformation({0})", filename));
-          String command = Path.GetFileName(filename).ToUpper();
+          String command = Path.GetFileName(filename);
           if (String.IsNullOrEmpty(command) || command[0] != '@')
             return 0;
 
