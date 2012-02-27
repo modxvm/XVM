@@ -95,8 +95,34 @@ namespace wot
         DirectoryInfo di = new DirectoryInfo(opt.MountPoint);
         if (di.Exists)
         {
-          if (di.GetFileSystemInfos().Length != 0)
-            throw new Exception("MountPoint directory exists and is not empty: " + opt.MountPoint);
+          // try to delete old Dokan link.
+          FileAttributes fa = File.GetAttributes(opt.MountPoint);
+          if ((fa & FileAttributes.ReparsePoint) != 0)
+          {
+            try
+            {
+              Directory.Delete(opt.MountPoint, false);
+            }
+            catch (Exception ex)
+            {
+              throw new Exception(String.Format("Cannot delete MountPoint file: {0}{1}{2}",
+                opt.MountPoint, Environment.NewLine, ex));
+            }
+            try
+            {
+              Directory.CreateDirectory(opt.MountPoint);
+            }
+            catch (Exception ex)
+            {
+              throw new Exception(String.Format("Cannot create MountPoint directory: {0}{1}{2}",
+                opt.MountPoint, Environment.NewLine, ex));
+            }
+          }
+          else
+          {
+            if (di.GetFileSystemInfos().Length != 0)
+              throw new Exception("MountPoint directory exists and is not empty: " + opt.MountPoint);
+          }
         }
         else
         {
@@ -154,7 +180,7 @@ namespace wot
       catch (Exception ex)
       {
         Console.WriteLine(String.Format("{0}{1}{1}Press any key to exit.",
-          ex.Message, Environment.NewLine));
+          ex.ToString(), Environment.NewLine));
         Console.ReadKey(true);
         return;
       }
