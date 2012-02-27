@@ -11,6 +11,7 @@ class wot.utils.Config
   public static var s_config: Object = null;
   private static var s_loaded: String = "";
   private static var s_load_last_stat: Boolean = false;
+  private static var s_config_cache: Object = { };
 
   // Load XVM mod config; config data is shared between all marker instances, so
   // it should be loaded only once per session. s_loaded flag indicates that
@@ -64,6 +65,12 @@ class wot.utils.Config
 
   public static function value(path: String)
   {
+    if (!Config.s_config)
+      return undefined;
+
+    if (s_config_cache.hasOwnProperty(path))
+      return s_config_cache[path];
+
     var p: Array = path.split("/"); // "path/to/value"
 
     // Start from root element
@@ -73,12 +80,16 @@ class wot.utils.Config
     {
       // Create child if not exist
       if (!root.hasOwnProperty(p[i]))
+      {
+        s_config_cache[path] = undefined;
         return undefined;
+      }
       // Shift root to next child
       root = root[p[i]];
     }
 
     // Return value
+    s_config_cache[path] = root;
     return root;
   }
 }
