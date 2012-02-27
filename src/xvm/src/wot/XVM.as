@@ -53,8 +53,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     Config.LoadConfigAndStat("XVM.xvmconf");
     ConfigOld.LoadConfigAndStat("OTMData.xml");
 
-    pNameFieldWidth = vNameField._width + 20;
-    vNameFieldWidth = vNameField._width + 20;
+    pNameFieldWidth = pNameField._width + 18; // ?
+    vNameFieldWidth = vNameField._width + 18; // ?
 
     damageHolder = createEmptyMovieClip("damageHolder", getNextHighestDepth());
     xvmHealthBar = createEmptyMovieClip("xvmHealthBar", getNextHighestDepth());

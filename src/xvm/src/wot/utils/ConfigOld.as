@@ -54,8 +54,11 @@ class wot.utils.ConfigOld
   {
     if (!defaultValue)
       defaultValue = 0;
-    var value = parseInt(string(path));
-    return isNaN(value) ? defaultValue : value;
+    var v = value(path);
+    if (!isNaN(v))
+      return v;
+    var n: Number = parseInt(v);
+    return isNaN(n) ? defaultValue : n;
   }
 
   public static function bool(path: String, trueIsDefault: Boolean): Boolean
