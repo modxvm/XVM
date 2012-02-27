@@ -62,11 +62,12 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 
       m_names._width = m_largePanelWidth;
 
-      if (m_type == "left")
-          m_names._x += m_largePanelOffset;
-
       if (!_lastModeWasLarge)
+      {
+        if (m_type == "left")
+          m_names._x += m_largePanelOffset;
         this._x = (m_type == "left") ? this._x - m_largePanelOffset : this._x + m_largePanelOffset;
+      }
       _lastModeWasLarge = true;
     }
     else
