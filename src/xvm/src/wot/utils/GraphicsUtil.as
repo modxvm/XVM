@@ -57,6 +57,18 @@ class wot.utils.GraphicsUtil
         moveTo(x + width / 2 - 2, i);
         lineTo(x + width / 2 + 2, i);
       }
+
+      moveTo(0, 0);
+      for (var i = x + x % 10; i <= x + width; i += 10)
+      {
+        for (var j = y + y % 10; j <= y + width; j += 10)
+        {
+          moveTo(i, j - 2);
+          lineTo(i, j + 2);
+          moveTo(i - 2, j);
+          lineTo(i + 2, j);
+        }
+      }
       endFill();
       _x = 0;
       _y = 0;
