@@ -58,8 +58,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
     damageHolder = createEmptyMovieClip("damageHolder", getNextHighestDepth());
     xvmHealthBar = createEmptyMovieClip("xvmHealthBar", getNextHighestDepth());
-    healthField = createTextField("HealthField", getNextHighestDepth(), 0, 0, 78, 20);
-    healthRatio = createTextField("HealthRatio", getNextHighestDepth(), 0, 0, 78, 20);
+    healthField = createTextField("HealthField", getNextHighestDepth(), 0, 0, 82, 20);
+    healthRatio = createTextField("HealthRatio", getNextHighestDepth(), 0, 0, 82, 20);
 
     grid = createEmptyMovieClip("grid", getNextHighestDepth());
   }
