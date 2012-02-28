@@ -81,11 +81,15 @@ class wot.utils.Stat
   private static var retrieved: Boolean = true;
   private static var runningIngame: Boolean = false;
   private static var added: Boolean = false;
-  // so we don't have to create it at function execution
-  private static var timer: TimelineLite = new TimelineLite( { onComplete:Stat.retrieveStatsIngame, onCompleteParams:[] } );
+  // so we don't have to create it at function execution:
+  // try to retrieve stats after 0.3, 0.5, 1 and 3 seconds
+  private static var timer: TimelineLite = new TimelineLite( { tweens: [
+                                                    new TweenLite(null, .3), new TweenLite(null, .5), 
+                                                    new TweenLite(null, 1), new TweenLite(null, 3) ],
+                                                    onComplete:Stat.retrieveStatsIngame, onCompleteParams:[],
+                                                    paused: true});
   public static function FormatText(data, format: String)
   {
-    //wot.utils.Logger.add("FormatText(): " + data.label + " " + data.name);
     var sWins: String = "";
     var sBattles: String = "";
     var sKb: String = "";
@@ -104,22 +108,22 @@ class wot.utils.Stat
       var stat = Stat.s_player_ratings[pname];
       if (stat)
       {
-        //wot.utils.Logger.add("stats available");
-        //if (stat.notInDb)
-        //  wot.utils.Logger.add(pname+" is not in Database.");;
-        rating = ToNumber(stat.rating);
-        sRating = rating ? String(rating) + "%" : "--%";
-
-        eff = ToNumber(stat.eff);
-        sEff = eff ? String(eff) : "--";
-
-        if (rating)
+        if (!stat.notInDb)
         {
-          var bn: Number = ToNumber(stat.battles);
-          kb = bn > 0 ? Math.round(bn / 1000) : -1;
-          sKb = kb >= 0 ? String(kb) + "k" : "";
-          sBattles = bn > 0 ? ToString(bn) : "";
-          sWins = bn > 0 ? String(ToNumber(stat.wins)) : "";
+          rating = ToNumber(stat.rating);
+          sRating = rating ? String(rating) + "%" : "--%";
+
+          eff = ToNumber(stat.eff);
+          sEff = eff ? String(eff) : "--";
+
+          if (rating)
+          {
+            var bn: Number = ToNumber(stat.battles);
+            kb = bn > 0 ? Math.round(bn / 1000) : -1;
+            sKb = kb >= 0 ? String(kb) + "k" : "";
+            sBattles = bn > 0 ? ToString(bn) : "";
+            sWins = bn > 0 ? String(ToNumber(stat.wins)) : "";
+          }
         }
       }
       else if (Config.bool("rating/loadEnemyStatsInFogOfWar"))
@@ -133,7 +137,7 @@ class wot.utils.Stat
     format = format.split("{{rating}}").join(sRating);
     format = format.split("{{eff}}").join(sEff);
 
-    // This code is stupid, and need to be rewritten
+    // This code is stupid, and needs to be rewritten
     format = format.split("{{kb:3}}").join(Utils.padLeft(sKb, 3));
     format = format.split("{{rating:3}}").join(Utils.padLeft(sRating, 3));
     format = format.split("{{eff:4}}").join(Utils.padLeft(sEff, 4));
@@ -150,14 +154,9 @@ class wot.utils.Stat
 
   public static function processForFogOfWar(data)
   {
-    //wot.utils.Logger.add("processFogOfWar");
-
     var pname: String = Stat.CleanPlayerName(data.label || data.name).toUpperCase();
-    if (data.uid && s_player_names[pname] == undefined && !s_player_names[pname] &&
-      s_player_data[pname] == undefined && !s_player_data[pname] &&
-      !s_player_data.contains(pname))
+    if (data.uid && !s_player_names[pname] && !s_player_data[pname])
     {
-      //wot.utils.Logger.add("fix: "+data.uid);
       try
       {
         parseInt(data.uid);
@@ -165,14 +164,13 @@ class wot.utils.Stat
         // add player data
         s_player_ids.push(data.uid);
         s_player_names.push(pname);
-        var team = (data.team == "team1") ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
         s_player_data[pname] =
         {
           reference: null,
           playerId: data.uid,
           name: pname,
-          originalText: (data.vehicle != undefined) ? data.vehicle : data.originalText,
-          team: team,
+          originalText: data.vehicle || data.originalText,
+          team: data.team == "team1" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY,
           loaded: false
         };
 
@@ -180,24 +178,17 @@ class wot.utils.Stat
         var lv:LoadVars = new LoadVars();
         lv.onData = function(success)
         {
-          //wot.utils.Logger.addObject(success, "lv add");
-          if (!Stat.retrieved)
-          {
-            //wot.utils.Logger.add("not retrieved !");
-            return;
-          }
-          if (Stat.runningIngame)
+          if (!Stat.retrieved || Stat.runningIngame)
             return;
           Stat.runningIngame = true;
           var lv_run = new LoadVars();
           lv_run.onData = function(res)
           {
-            //wot.utils.Logger.addObject(res, "lv_run add");
             Stat._is_new = true;
             Stat.retrieved = false;
             Stat.added = true;
-            // Load Stats after 1 sec
-            Stat.timer.insert(new TweenLite(null, 1));
+            // try to retrieve stats
+            Stat.timer.gotoAndPlay(null);
           }
           lv_run.load(Defines.COMMAND_RUNINGAME);
         }
@@ -210,48 +201,10 @@ class wot.utils.Stat
         //wot.utils.Logger.add(data.uid + " is not a uid!");
       }
     }
-    else if (data.uid && s_player_names[pname] != undefined && s_player_data[pname] != undefined)
-    {
-      // didn't get ratings for them, but not notInDb -> try to load again
-      var str: String = pname + "-" + data.uid;
-      var lv:LoadVars = new LoadVars();
-      lv.onData = function(success)
-      {
-        //wot.utils.Logger.addObject(success, "lv add");
-        if (!Stat.retrieved)
-        {
-          //wot.utils.Logger.add("not retrieved yet!");
-          return;
-        }
-        if (Stat.runningIngame)
-        {
-          //wot.utils.Logger.add("already running!");
-          return;
-        }
-        Stat.runningIngame = true;
-        var lv_run = new LoadVars();
-        lv_run.onData = function(res)
-        {
-          //wot.utils.Logger.addObject(res, "lv_run add");
-          Stat._is_new = true;
-          Stat.retrieved = false;
-          // Load Stats after 1 sec
-          //var timer: TimelineLite = new TimelineLite({onComplete:Stat.retrieveStatsIngame, onCompleteParams:[]});
-          Stat.timer.insert(new TweenLite(null, 1));
-        }
-        lv_run.load(Defines.COMMAND_RUNINGAME);
-      }
-      var cmd = _is_new ? Defines.COMMAND_SET : Defines.COMMAND_ADD;
-      _is_new = false;
-      lv.load(cmd + " " + str);
-    }
     else
     {
+      // just try to load
       retrieveStatsIngame();
-      //wot.utils.Logger.add("DEBUG: "+pname+" - "+data.uid);
-      //wot.utils.er.add("retrieving: "+retrieving);
-      //wot.utils.Logger.add("retrieved: "+retrieved);
-      //wot.utils.Logger.add("runningIngame: "+runningIngame);
     }
   }
 
@@ -259,7 +212,7 @@ class wot.utils.Stat
   {
     if (!s_player_ratings)
       return txt;
-    var pname = CleanPlayerName((data.label != undefined) ? data.label : data.name).toUpperCase();
+    var pname = CleanPlayerName(data.label || data.name).toUpperCase();
     var ratingText = Stat.FormatText(data, format);
     return (ratingPosition == Defines.POSITION_LEFT)
       ? ratingText + " " + txt
@@ -280,28 +233,25 @@ class wot.utils.Stat
       var lv_check:LoadVars = new LoadVars();
       lv_check.onData = function(check)
       {
-        //wot.utils.Logger.add("check: "+check)
+        wot.utils.Logger.add("check: "+check)
         if (check == "FINISHED")
         {
-          // not running, but catching before getting would be a fail
-          //Stat.runningIngame = false;
-
+          Stat.retrieving = true;
           // retrieve stats from proxy
           var lv_ret:LoadVars = new LoadVars();
           lv_ret.onData = function(str)
           {
+            if (!str || str == undefined)
+              return;
             var _is_str_new = false;
             Stat.retrieving = false;
             Stat.added = false;
-            if (!str || str == undefined)
-              return;
             var stats = net.wargaming.io.JSON.parse(str);
-            //wot.utils.Logger.add("lv retrieve");
             for (var i = 0; i < stats.players.length; i++)
             {
               var p_stat = stats.players[i];
               var p_name = Stat.CleanPlayerName(p_stat.name).toUpperCase();
-              if (Stat.s_player_ratings[p_name] != undefined)
+              if (Stat.s_player_ratings[p_name])
               {
                 //wot.utils.Logger.add(p_name + " already in ratings");
                 continue;
@@ -311,9 +261,9 @@ class wot.utils.Stat
               p_stat.rating = p_stat.battles > 0 ? Math.round(p_stat.wins / p_stat.battles * 100) : 0;
               Stat.s_player_ratings[p_name] = p_stat;
               Stat.s_player_data[p_name].loaded = true;
+              // TODO: Add callback to update GUI
             };
-
-            // If there's no new data submitted, try with @GET_LAST_STAT
+            // If there's no new data submitted, try with @GET_LAST_STAT (FIXME)
             if (!_is_str_new)
             {
               //wot.utils.Logger.add("Nothing new");
@@ -323,12 +273,11 @@ class wot.utils.Stat
                 if (!str_new || str_new == undefined)
                   return;
                 var stats_new = net.wargaming.io.JSON.parse(str_new);
-                //wot.utils.Logger.add("lv retrieve_new");
                 for (var i = 0; i < stats_new.players.length; i++)
                 {
                   var p_stat_new = stats_new.players[i];
                   var p_name_new = Stat.CleanPlayerName(p_stat_new.name).toUpperCase();
-                  if (Stat.s_player_ratings[p_name_new] != undefined)
+                  if (Stat.s_player_ratings[p_name_new])
                   {
                     //wot.utils.Logger.add(p_name_new + " already in ratings");
                     continue;
@@ -337,6 +286,7 @@ class wot.utils.Stat
                   p_stat_new.rating = p_stat_new.battles > 0 ? Math.round(p_stat_new.wins / p_stat_new.battles * 100) : 0;
                   Stat.s_player_ratings[p_name_new] = p_stat_new;
                   Stat.s_player_data[p_name_new].loaded = true;
+                  // TODO: Add callback to update GUI
                 };
               }
               lv_ret_new.load(Defines.COMMAND_GET_LAST_STAT);
@@ -345,12 +295,10 @@ class wot.utils.Stat
             Stat.retrieving = false;
             if (!Stat.added)
               Stat.retrieved = true;
-            // TODO: Add callback to update GUI
-            //Stat.UpdateAll();
           }
           lv_ret.load(Defines.COMMAND_RETRIEVE);
         }
-        else
+        else if (check == "FINISHED")
         {
           Stat.retrieving = false;
         }

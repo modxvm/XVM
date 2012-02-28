@@ -316,6 +316,7 @@ namespace wot
 
     private string _prevCommand = null;
     private string _prevResult = null;
+    private string _temp = null;
 
     private readonly object _lock = new object();
 
@@ -342,7 +343,10 @@ namespace wot
           }
 
           _prevCommand = filename;
-          _prevResult = "";
+          if (_prevResult == "FINISHED")
+            _prevResult = _temp;
+          else
+            _prevResult = "";
 
           if (!filename.StartsWith("\\@LOG"))
             Log(1, String.Format("=> GetFileInformation({0})", filename));
@@ -396,7 +400,10 @@ namespace wot
 
             case "@READY":
               if (runningIngameThread != null && !runningIngameThread.IsAlive)
+              {
+                _temp = _prevResult;
                 _prevResult = "FINISHED";
+              }
               break;
 
             case "@GET_LAST_STAT":
@@ -432,13 +439,6 @@ namespace wot
     {
       lock (_lock)
       {
-        //string _toRead = _prevResult;
-        if (String.Compare(filename, "\\@READY", true) == 0 && 
-          (runningIngameThread != null && !runningIngameThread.IsAlive))
-        {
-          _prevResult = "FINISHED";
-          Debug("ReadyCheck");
-        }
         if (String.Compare(filename, "\\@RETRIEVE", true) == 0 &&
           (String.IsNullOrEmpty(_prevResult) || _prevResult == "FINISHED")) {
           _prevResult = _lastResult;
