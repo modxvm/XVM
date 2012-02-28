@@ -177,7 +177,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
   function XVMColorWithFallback(value)
   {
-    var color = value ? Number(Stat.FormatText(m_playerFullName, value).split("#").join("0x")) : null;
+    var color = value ? Number(Stat.FormatText({ label: m_playerFullName }, value).split("#").join("0x")) : null;
     return (color && !isNaN(color)) ? color : this.colorsManager.getRGB(this.colorSchemeName);
   }
 
@@ -190,7 +190,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     format = format.split("{{nick}}").join(m_playerFullName);
     format = format.split("{{vehicle}}").join(m_vname);
 
-    format = Stat.FormatText(m_playerFullName, format);
+    format = Stat.FormatText({ label: m_playerFullName }, format);
     format = wot.utils.Utils.trim(format);
 
     return format;

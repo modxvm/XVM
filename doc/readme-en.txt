@@ -24,6 +24,8 @@ rating
   showPlayersStatistics:  true  - enable player statistics. Global switch,
                                   statistics module will be disabled
                                   everywhere without it.
+  loadEnemyStatsInFogOfWar: true - enable loading enemy stats in Fog of War (experimental).
+
   battleLoading
     show:                 false - disable showing statistics at battle loading
                                   screen
@@ -71,12 +73,10 @@ Enhancements not available from OTM Editor (OTMData.xml):
 - 'components/*/infoText' element set default format for text fields (like
   'components/*/currentHealth')
   'behavior/*/*/*/infoText' set position and content of text fields
-  Macros available:
-    {{hp}}         - current health points
-    {{hp-ratio}}   - current health ratio (without '%' sign)
-    {{hp-max}}     - maximum health points
-    {{nick}}       - player name
-    {{vehicle}}    - vehicle name
+
+Macros available:
+
+Используемые макросы:
   Statistics macros ('rating/showPlayersStatistics' must be anabled):
     {{rating}}     - GWR (Global Win Ratio)
     {{eff}}        - player efficiency (http://wot-news.com/index.php/stat/calc/en/)
@@ -86,6 +86,17 @@ Enhancements not available from OTM Editor (OTMData.xml):
     {{rating:3}}   - GWR aligned from left to 3 chars
     {{eff:4}}      - player efficiency aligned from left to 4 chars
     {{kb:3}}       - number of kilo-battles aligned from left to 3 chars
+
+  In battleLoading, playersPanel, statisticForm (not implemented yet):
+    {{nick}}       - player name
+    {{vehicle}}    - vehicle name
+
+  In tank markers:
+    {{hp}}         - current health points
+    {{hp-ratio}}   - current health ratio (without '%' sign)
+    {{hp-max}}     - maximum health points
+    {{nick}}       - player name
+    {{vehicle}}    - vehicle name
 
 "format" field examples:
 

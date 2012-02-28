@@ -89,11 +89,11 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   function onRecreateDevice(width, height)
   {
     super.onRecreateDevice(width, height);
-    
+
     if (m_state == "large" && m_largePanelWidth >= 0)
       this._x = (m_type == "left") ? this._x - m_largePanelOffset : this._x + m_largePanelOffset;
   }
-  
+
   // override
   function _setNamesStr(data, sel, isColorBlind, knownPlayersCount)
   {
@@ -123,7 +123,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
           _loc5 = (pname == data[_loc2].label || pname.length == 0) ? pname : pname + "...";
           if (Stat.s_player_ratings && Config.bool("rating/playersPanel/show", true))
           {
-            _loc5 = Stat.DecorateField(data[_loc2].label, _loc5,
+            _loc5 = Stat.DecorateField(data[_loc2], _loc5,
               Config.string("rating/playersPanel/format"),
               m_type == "left" ? Defines.POSITION_LEFT : Defines.POSITION_RIGHT);
           }
@@ -139,7 +139,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         {
           var middleColor: String = Config.string("rating/playersPanel/middleColor");
           if (middleColor)
-            _loc5 = Stat.FormatText(data[_loc2].label, "<font color='" + middleColor + "'>" + _loc5 + "</font>");
+            _loc5 = Stat.FormatText(data[_loc2], "<font color='" + middleColor + "'>" + _loc5 + "</font>");
         }
       }
 

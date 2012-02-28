@@ -39,7 +39,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     super.updateData();
     if (Config.bool("rating/statisticForm/show", true))
     {
-      col3.htmlText = Stat.DecorateField(data.label, data.vehicle,
+      col3.htmlText = Stat.DecorateField(data, data.vehicle,
         Config.string("rating/statisticForm/format"),
         this.owner._name == "team1" ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
     }

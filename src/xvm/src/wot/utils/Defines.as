@@ -8,7 +8,7 @@ class wot.utils.Defines
   public static var XVM_VERSION = "1.6";
 
   public static var DEFAULT_CONFIG_NAME = "XVM.xvmconf";
-        
+
   // file name limit is ~ 220 chars
   public static var MAX_PATH = 180;
 
@@ -21,6 +21,9 @@ class wot.utils.Defines
   public static var COMMAND_ADD = DOKAN_MP + "@ADD";
   public static var COMMAND_GET = DOKAN_MP + "@GET";
   public static var COMMAND_RUN = DOKAN_MP + "@RUN";
+  public static var COMMAND_RUNINGAME = DOKAN_MP + "@RUNINGAME";
+  public static var COMMAND_RETRIEVE = DOKAN_MP + "@RETRIEVE";
+  public static var COMMAND_READY = DOKAN_MP + "@READY";
   public static var COMMAND_GET_LAST_STAT = DOKAN_MP + "@GET_LAST_STAT";
 
   // Position
@@ -30,7 +33,7 @@ class wot.utils.Defines
   // Team
   public static var TEAM_ALLY = 0;
   public static var TEAM_ENEMY = 1;
-  
+
   // Dynamic color types
   public static var DYNAMIC_COLOR_EFF = 1;
   public static var DYNAMIC_COLOR_RATING = 2;

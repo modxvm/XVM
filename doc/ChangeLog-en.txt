@@ -7,6 +7,7 @@ XVM-1.6:
   * Cut nick with disabled statistics in large mode
   * Fixed 'null' when data is not available
   * Fixed vehicle level position with disabled mirroring
+  * Added option to load enemy stats in Fog of War (experimental).
   * Some other bugs fixed
 
 XVM-1.5:
