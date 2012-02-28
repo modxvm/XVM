@@ -64,7 +64,8 @@ class wot.utils.Stat
 
   public static function ToNumber(value)
   {
-    return isNaN(value) ? 0 : Number(value);
+    var n: Number = parseInt(value);
+    return isNaN(n) ? 0 : n;
   }
   
   public static function ToString(value: Number)
@@ -82,7 +83,7 @@ class wot.utils.Stat
 
     var eff: Number = 0;
     var rating: Number = 0;
-    var kb: Number = 0;
+    var kb: Number = -1;
     
     if (Stat.s_player_ratings)
     {
@@ -91,18 +92,18 @@ class wot.utils.Stat
       if (stat)
       {
         rating = ToNumber(stat.rating);
-        sRating = rating ? String(rating) + "%" : "";
+        sRating = rating ? String(rating) + "%" : "--%";
 
         eff = ToNumber(stat.eff);
-        sEff = ToString(eff);
+        sEff = eff ? String(eff) : "--";
 
-        if (rating && eff)
+        if (rating)
         {
           var bn: Number = ToNumber(stat.battles);
-          kb = bn > 0 ? Math.round(bn / 1000) : 0;
+          kb = bn > 0 ? Math.round(bn / 1000) : -1;
           sKb = kb >= 0 ? String(kb) + "k" : "";
-          sBattles = ToString(bn);
-          sWins = bn >= 0 ? String(ToNumber(stat.wins)) : "";
+          sBattles = bn > 0 ? ToString(bn) : "";
+          sWins = bn > 0 ? String(ToNumber(stat.wins)) : "";
         }
       }
     }

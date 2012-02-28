@@ -29,7 +29,7 @@ class wot.utils.Utils
   public static function padLeft(str: String, len: Number)
   {
     if (!str)
-      return null;
+      str = "";
     while (str.length < len)
       str = " " + str;
     return str;
