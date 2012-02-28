@@ -1,3 +1,13 @@
+XVM-1.6:
+  * Speed optimization
+  * Grid modified
+  * Fixed .stat link check at startup
+  * Fixed players names shifting in large panels
+  * Fixed transaprency error (playersPanelAlpha = 0)
+  * Cut nick with disabled statistics in large mode
+  * Fixed 'null' when data is not available
+  * Some other bugs fixed
+
 XVM-1.5:
   * Fixed playing replays with spaces in the file name
   * Fixed damage fading in health bar
