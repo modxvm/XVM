@@ -128,7 +128,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
               m_type == "left" ? Defines.POSITION_LEFT : Defines.POSITION_RIGHT);
           }
           m_widthTester.htmlText = _loc5;
-          if (m_widthTester._width <= m_names._width + 3)
+          if (m_widthTester._width <= m_names._width)
             break;
           pname = pname.substr(0, pname.length - 1);
         }
