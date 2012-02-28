@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading;
 using Dokan;
 using LitJson;
 using wot.Properties;
-using System.Diagnostics;
 
 namespace wot
 {
@@ -52,6 +53,8 @@ namespace wot
       [NonSerialized]
       public bool httpError;
       [NonSerialized]
+      public bool notInDb = false;
+      [NonSerialized]
       public DateTime errorTime;
     }
 
@@ -65,6 +68,10 @@ namespace wot
     private bool _unavailable = false;
     private DateTime _unavailableFrom;
     private String _lastResult = "";
+    private bool added = false;
+    private Thread runningIngameThread;
+
+    private readonly object _lockIngame = new object();
 
     #endregion
 
@@ -125,20 +132,33 @@ namespace wot
     // name-id,name-id,... or name,name,...
     private void AddPendingPlayers(String parameters)
     {
-      String[] chunks = parameters.Split(',');
-      foreach (String chunk in chunks)
+      lock (_lockIngame)
       {
-        String[] param = chunk.Split('-');
-        string name = param[0].ToUpper();
-        int id = (param.Length > 1) ? int.Parse(param[1]) : 0;
-        if (!pendingPlayers.ContainsKey(name))
+        String[] chunks = parameters.Split(',');
+        foreach (String chunk in chunks)
         {
-          pendingPlayers[name] = new Stat()
+          String[] param = chunk.Split('-');
+          string name = param[0].ToUpper();
+          int id = (param.Length > 1) ? int.Parse(param[1]) : 0;
+          if (!pendingPlayers.ContainsKey(name))
           {
-            id = id,
-            name = name
-          };
+            pendingPlayers[name] = new Stat()
+            {
+              id = id,
+              name = name
+            };
+          }
         }
+        added = true;
+      }
+    }
+
+    private void SetPendingPlayers(String parameters)
+    {
+      lock (_lockIngame)
+      {
+        pendingPlayers.Clear();
+        AddPendingPlayers(parameters);
       }
     }
 
@@ -153,6 +173,18 @@ namespace wot
       }
       return result;
     }
+
+    private void retrieveStats()
+    {
+      lock (_lockIngame)
+      {
+        added = false;
+        Log(1, "retrieveStats()");
+        _prevResult = _lastResult = GetStat();
+        Debug("_lastResult: " + _lastResult);
+      }
+    }
+
     #endregion
 
     #region Dokan default implementations
@@ -326,6 +358,7 @@ namespace wot
             parameters = cmd[1];
           }
 
+          Thread t;
           switch (command)
           {
             case "@LOG":
@@ -333,18 +366,37 @@ namespace wot
               break;
 
             case "@SET":
-              pendingPlayers.Clear();
-              AddPendingPlayers(parameters);
+              t = new Thread(() => SetPendingPlayers(parameters));
+              t.Start();
               break;
 
             case "@ADD":
-              AddPendingPlayers(parameters);
+              t = new Thread(() => AddPendingPlayers(parameters));
+              t.Start();
               break;
 
             case "@RUN":
-              _lastResult = GetStat(); // only this will start network operations
+              _lastResult = GetStat(); // this will start network operations
               Debug("_lastResult: " + _lastResult);
               _prevResult = _lastResult;
+              break;
+
+            case "@RUNINGAME":
+              if (added)
+              {
+                runningIngameThread = new Thread(() => retrieveStats());
+                runningIngameThread.Start(); // this too
+              }
+              break;
+
+            case "@RETRIEVE":
+              Debug("_prevResult: " + _prevResult);
+              Debug("_lastResult: " + _lastResult);
+              break;
+
+            case "@READY":
+              if (runningIngameThread != null && !runningIngameThread.IsAlive)
+                _prevResult = "FINISHED";
               break;
 
             case "@GET_LAST_STAT":
@@ -380,6 +432,18 @@ namespace wot
     {
       lock (_lock)
       {
+        //string _toRead = _prevResult;
+        if (String.Compare(filename, "\\@READY", true) == 0 && 
+          (runningIngameThread != null && !runningIngameThread.IsAlive))
+        {
+          _prevResult = "FINISHED";
+          Debug("ReadyCheck");
+        }
+        if (String.Compare(filename, "\\@RETRIEVE", true) == 0 &&
+          (String.IsNullOrEmpty(_prevResult) || _prevResult == "FINISHED")) {
+          _prevResult = _lastResult;
+          Debug("Retrieving");
+        }
         if (!String.IsNullOrEmpty(_prevResult))
         {
           using (MemoryStream ms = new MemoryStream(Encoding.ASCII.GetBytes(_prevResult)))
@@ -429,6 +493,8 @@ namespace wot
         if (cache.ContainsKey(uname))
         {
           PlayerInfo currentMember = cache[uname];
+          if (currentMember.notInDb)
+            continue;
           if (!currentMember.httpError)
           {
             Log(1, string.Format("CACHE - {0}: eff={1} battles={2} wins={3}", name,
@@ -488,6 +554,7 @@ namespace wot
           Log(2, "WARNING: empty response or parsing error");
           return;
         }
+
         foreach (Stat stat in res.players)
         {
           if (String.IsNullOrEmpty(stat.name))
@@ -497,6 +564,26 @@ namespace wot
             stat = stat,
             httpError = false
           };
+        };
+
+        // disable stat retrieving for people in cache, but not in server db
+        foreach (string uname in forUpdateNames)
+        {
+          if (cache.ContainsKey(uname))
+            continue;
+
+          cache[uname] = new PlayerInfo()
+          {
+            stat = new Stat()
+            {
+              id = pendingPlayers[uname].id,
+              name = uname
+            },
+            httpError = false,
+            notInDb = true
+          };
+
+          Debug(String.Format("Player {0} not in Database", uname));
         };
         _modInfo = res.info;
       }
@@ -603,18 +690,18 @@ namespace wot
 
       try
       {
-        if (jd["info"] != null)
+        if (jd["info"] == null)
+          return res;
+
+        res.info = new Info();
+        if (jd["info"]["xvm"] != null)
         {
-          res.info = new Info();
-          if (jd["info"]["xvm"] != null)
+          JsonData data = jd["info"]["xvm"];
+          res.info.xvm = new XVMInfo()
           {
-            JsonData data = jd["info"]["xvm"];
-            res.info.xvm = new XVMInfo()
-            {
-              ver = data["ver"].ToString(),
-              message = data["message"].ToString(),
-            };
-          }
+            ver = data["ver"].ToString(),
+            message = data["message"].ToString(),
+          };
         }
       }
       catch (Exception ex)
