@@ -6,6 +6,7 @@ XVM-1.6:
   * Fixed transaprency error (playersPanelAlpha = 0)
   * Cut nick with disabled statistics in large mode
   * Fixed 'null' when data is not available
+  * Fixed vehicle level position with disabled mirroring
   * Some other bugs fixed
 
 XVM-1.5:

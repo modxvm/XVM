@@ -30,6 +30,9 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 
     event.target._xscale = -event.target._xscale;
     event.target._x -= event.target.__width;
+
+    if (!Config.bool("battle/mirroredVehicleIcons", true) && m_type == "right")
+      event.target["renderer"].vehicleLevel._x = event.target._x + 15;
   }
 
   // override
@@ -40,7 +43,11 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     {
       _initialized = true;
       for (var i = 0; i < m_list.renderers.length; ++i)
-        m_list.renderers[i].iconLoader.addEventListener("complete", this, "completeLoad");
+      {
+        var renderer = m_list.renderers[i];
+        renderer.iconLoader.addEventListener("complete", this, "completeLoad");
+        renderer.iconLoader["renderer"] = renderer;
+      }
 
       players_bg.players_bg._alpha = Config.int("battle/playersPanelAlpha", 100);
 
