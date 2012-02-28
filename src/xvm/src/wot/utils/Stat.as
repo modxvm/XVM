@@ -298,7 +298,7 @@ class wot.utils.Stat
           }
           lv_ret.load(Defines.COMMAND_RETRIEVE);
         }
-        else if (check == "FINISHED")
+        else
         {
           Stat.retrieving = false;
         }
