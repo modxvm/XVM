@@ -5,7 +5,7 @@ This mod is a successor of the next mods:
   * Disable Postmortem Panel
 
 Project site: http://code.google.com/p/wot-xvm/
-Discussion:   http://forum.bulychev.net/viewforum.php?f=4
+Support:      http://forum.bulychev.net/viewforum.php?f=6
 
 XVM.xvmconf parameters:
 

@@ -5,7 +5,7 @@
   - Отключение посмертной панели
 
 Сайт проекта: http://code.google.com/p/wot-xvm/
-Обсуждение:   http://forum.bulychev.net/viewforum.php?f=4
+Поддержка:    http://forum.bulychev.net/viewforum.php?f=6
 
 Параметры конфига XVM.xvmconf:
 
