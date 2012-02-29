@@ -1,8 +1,9 @@
 This mod is a successor of the next mods:
-  * In-game players rating
-  * Vehicle Icons Mirroring Controlling
   * OverTargetMarkers
   * Disable Postmortem Panel
+  * Vehicle Icons Mirroring Controlling
+  * Players Panel Controlling (width and transparency)
+  * In-game players rating
 
 Project site: http://code.google.com/p/wot-xvm/
 Support:      http://forum.bulychev.net/viewforum.php?f=6

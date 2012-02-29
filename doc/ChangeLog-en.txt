@@ -13,7 +13,7 @@ XVM-1.6:
 XVM-1.5:
   * Fixed playing replays with spaces in the file name
   * Fixed damage fading in health bar
-  * Configurable players panel transparentness
+  * Configurable players panel transparency
   * Set players names width in panels in large mode
   * Some other bugs fixed
 
