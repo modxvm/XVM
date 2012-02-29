@@ -177,7 +177,7 @@
           <combatScrollText x="0" y="-67"/>
           <playerName x="-70" y="-55" alpha="100" visible="false"/>
           <vehicleName x="-70" y="-55" alpha="100" visible="true"/>
-          <currentHealth x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="true"/>
+          <currentHealth x="-41" y="-38" color="{{c:hp}}" alpha="{{a:hp}}" visible="true"/>
           <healthRatio x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="false"/>
           <healthBar x="-41" y="-34" alpha="100" visible="true"/>
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
@@ -191,7 +191,7 @@
           <playerName x="-70" y="-55" alpha="100" visible="true"/>
           <vehicleName x="-70" y="-55" alpha="100" visible="false"/>
           <currentHealth x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="false"/>
-          <healthRatio x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="true"/>
+          <healthRatio x="-41" y="-38" color="{{c:hp-ratio}}" alpha="{{a:hp-ratio}}" visible="true"/>
           <healthBar x="-41" y="-34" alpha="100" visible="true"/>
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-21" alpha="100" visible="false"/>
