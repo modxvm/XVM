@@ -11,3 +11,6 @@
 5. Run game with wot-xvm-proxy.exe.
    Run launcher with command:
      wot-xvm-proxy.exe /launcher
+
+If you use Skype, in Tools -> Options -> Advanced -> Connection
+REMOVE CHECK "Use port 80 and 443 as alternatives for incoming connections".

@@ -99,6 +99,20 @@ Macros available:
     {{nick}}       - player name
     {{vehicle}}    - vehicle name
 
+  Dynamic colors macros:
+    {{c:eff}}      - color depended from player efficiency
+    {{c:rating}}   - color depended from GWR
+    {{c:kb}}       - color depended from kilo-battles
+    {{c:hp}}       - color depended from current health points
+    {{c:hp-ratio}} - color depended from current health ratio
+
+  Dynamic transparency macros:
+    {{a:eff}}      - transparency depended from player efficiency
+    {{a:rating}}   - transparency depended from GWR
+    {{a:kb}}       - transparency depended from kilo-battles
+    {{a:hp}}       - transparency depended from current health points
+    {{a:hp-ratio}} - transparency depended from current health ratio
+
 "format" field examples:
 
 1. Show number of kilo-battles, efficiency and GWR without changing a color:
@@ -110,11 +124,12 @@ Macros available:
 4. Show GWR colored by efficiency:
   "<font color='{{c:eff}}'>{{rating}}</font>"
 
-Dynamic color usage examples:
+Dynamic color and transparency usage examples:
 In XVM.xvmconf:
   "middleColor": "{{c:eff}}"
 In OTMData.xml:
-   <infoText x="0" y="-50" color="{{c:eff}}" alpha="75" visible="true" format="{{kb}} {{eff}} {{rating}}" bold="true"/>
+  <infoText x="0" y="-50" color="{{c:eff}}" alpha="75" visible="true" format="{{kb}} {{eff}} {{rating}}" bold="true"/>
+  <currentHealth x="-41" y="-38" color="{{c:hp}}" alpha="{{a:hp}}" visible="true"/>
 
 
 ---
