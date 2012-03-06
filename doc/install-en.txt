@@ -1,10 +1,6 @@
 1. Microsoft .NET Framework 2.0 is required.
 2. Install DokanLibrary: http://dokan-dev.net/en/download/#dokan
 3. Unzip archive to game folder
-   After installing open wot-xvm-proxy.exe.config and edit proxy_servers section to use a single
-   string of:
-    for EU: aHR0cDovL3dvdC1yYXRpbmdzLmFwcHNwb3QuY29tL3JhdGluZ3MvMi8yLyUx
-    for NA: aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC9uYS8/JTE=
 4. Setup config \res\gui\flash\XVM.xvmconf
    Note: use Notepad, DO NOT use MS Word, WordPad and such editors.
    Note: configs must be saved in UTF-8 charset with signature (BOM).

@@ -1,3 +1,25 @@
+XVM-1.7.test1:
+  * fixed player names cutting
+  * merge ñonfigs in XVM.xvmconf (with legacy support of OTMData.xml)
+  * integrate default config in code
+  * config usage optimization (avoid freezes)
+  * extended config parsing error reporting at battle loading
+  * increased width of vehicle fields in BattleLoading and StatisticForm
+  * fixed bug with endless loop when PlayersPanel width is too small
+  * check UTF-8 BOM when loading OTMData.xml
+  * config version increased: 1.1.0
+  * created method for configs backward compatibility
+  * added new macros for dynamic colors in vehicle markers: {{c:hp}}, {{c:hp-
+  ratio}}
+  * added macros of dynamic transparency: {{a:eff}}, {{a:rating}}, {{a:kb}},
+  {{a:hp}}, {{a:hp-ratio}}
+  * changed JSON parser to fixed version, than is 10x faster that present in game
+  * wot-xvm-proxy: added autodetection of game version: RU, EN, NA, CN1
+  * wot-xvm-proxy: added command line options /? and /help for displaying usage information
+  * wot-xvm-proxy: added command line option /server=(RU|EN|NA|CN1|CN2) for overriding
+    autodetection
+  * wot-xvm-proxy: added china servers support
+
 XVM-1.6:
   * Speed optimization
   * Grid modified
