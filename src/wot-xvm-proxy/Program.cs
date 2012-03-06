@@ -17,6 +17,8 @@ namespace wot
     private static bool isLauncher = false;
     public static bool isDebug = false;
 
+    public static string serverVersion = null;
+
     static Program()
     {
       AppDomain.CurrentDomain.AssemblyResolve += Resolver;
@@ -35,6 +37,17 @@ namespace wot
       return a2;
     }
 
+    private static void Usage()
+    {
+      Console.WriteLine("Usage: wot-xvm-proxy.exe [/launcher] [/debug] [/server=(RU|EU|NA|CN1|CN2)] [file.wotreplay]");
+      Console.WriteLine("  /launcher - run launcher instead of game");
+      Console.WriteLine("  /debug - run in debug mode (extended log)");
+      Console.WriteLine("  /server=(RU|EU|NA|CN1|CN2) - select server (disable autodetection)");
+      Console.WriteLine("  file.wotreplay - play replay");
+      Console.WriteLine("Press any key to exit.");
+      Console.ReadKey(true);
+    }
+
     private static void Main(string[] args)
     {
       try
@@ -44,6 +57,12 @@ namespace wot
         // Check args
         for (int i = 0; i < args.Length; i++)
         {
+          if (String.Compare(args[i], "/?", true) == 0 || String.Compare(args[i], "/help", true) == 0)
+          {
+            Usage();
+            return;
+          }
+
           if (String.Compare(args[i], "/launcher", true) == 0)
           {
             wotExeFileName = "WOTLauncher.exe";
@@ -58,6 +77,13 @@ namespace wot
             isDebug = true;
             Console.Title += " (DEBUG MODE)";
             Console.WriteLine("DEBUG MODE: ON");
+            continue;
+          }
+
+          if (args[i].StartsWith("/server=", StringComparison.InvariantCultureIgnoreCase))
+          {
+            serverVersion = args[i].Substring(8);
+            args[i] = "";
             continue;
           }
 
@@ -171,16 +197,13 @@ namespace wot
           // Unmount and clean.
           DokanNet.DokanRemoveMountPoint(opt.MountPoint);
           if (thread.IsAlive)
-          {
             thread.Join();
-          }
           Directory.Delete(opt.MountPoint);
         }
       }
       catch (Exception ex)
       {
-        Console.WriteLine(String.Format("{0}{1}{1}Press any key to exit.",
-          ex.ToString(), Environment.NewLine));
+        Console.WriteLine(String.Format("{0}{1}{1}Press any key to exit.", ex, Environment.NewLine));
         Console.ReadKey(true);
         return;
       }
@@ -189,7 +212,7 @@ namespace wot
     static void StartDokan(object opt)
     {
       // Start dokan
-      int status = DokanNet.DokanMain(opt as DokanOptions, new Server());
+      int status = DokanNet.DokanMain(opt as DokanOptions, new Server(serverVersion));
 
       switch (status)
       {

@@ -9,20 +9,20 @@
 //------------------------------------------------------------------------------
 
 namespace wot.Properties {
-
-
+    
+    
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "10.0.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
-
+        
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-
+        
         public static Settings Default {
             get {
                 return defaultInstance;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
@@ -34,7 +34,7 @@ namespace wot.Properties {
                 this["LogLevel"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("7000")]
@@ -46,7 +46,7 @@ namespace wot.Properties {
                 this["Timeout"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("5")]
@@ -58,13 +58,17 @@ namespace wot.Properties {
                 this["ServerUnavailableTimeout"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
-            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC9ydS8/JTE=</string>\r\n</A" +
-            "rrayOfString>")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>RU	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC9ydS8/JTE=</string>
+  <string>EU	aHR0cDovL3dvdC1yYXRpbmdzLmFwcHNwb3QuY29tL3JhdGluZ3MvMi8yLyUx</string>
+  <string>NA	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC9uYS8/JTE=</string>
+  <string>CN1	...</string>
+  <string>CN2	...</string>
+</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection proxy_servers {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["proxy_servers"]));
@@ -73,7 +77,7 @@ namespace wot.Properties {
                 this["proxy_servers"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(".stat")]
