@@ -220,7 +220,6 @@
               "y": -20,
               "alpha": 100,
               "color": "0xFFFFFF",
-              "showMaxValue": true,
               "font": {
                 "name": "$FieldFont",
                 "size": 11,
@@ -742,7 +741,6 @@
               "y": -20,
               "alpha": 100,
               "color": "0xFFFFFF",
-              "showMaxValue": true,
               "font": {
                 "name": "$FieldFont",
                 "size": 11,
