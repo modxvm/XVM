@@ -7,6 +7,7 @@ import com.greensock.TimelineLite;
 import com.greensock.TweenLite;
 import wot.utils.Config;
 import wot.utils.Defines;
+import wot.utils.GraphicsUtil;
 import wot.utils.Utils;
 
 class wot.utils.Stat
@@ -28,43 +29,6 @@ class wot.utils.Stat
     return pos === -1 ? str : str.slice(0, pos);
   }
 
-  public static function GetDynamicColorValue(type: Number, value: Number)
-  {
-    if (value == undefined || value == null)
-      return "#FFFBFB";
-
-    var path: String = "rating/colors/";
-    switch (type)
-    {
-      case Defines.DYNAMIC_COLOR_EFF:
-        path += "eff";
-        break;
-      case Defines.DYNAMIC_COLOR_RATING:
-        path += "rating";
-        break;
-      case Defines.DYNAMIC_COLOR_KB:
-        path += "kb";
-        break;
-      default:
-        return "#FFFEFE";
-    }
-
-    var cfg: Array = Config.value(path);
-    if (!cfg)
-      return "#FFFDFD";
-    for (var i = 0; i < cfg.length; i++)
-    {
-      var cvalue: Number = Number(cfg[i]["value"]);
-      var color: Number = Number(String(cfg[i]["color"]));
-      if (!cvalue || !color)
-        return "#FFFCFC";
-      if (value < cvalue)
-        return "#" + color.toString(16);
-    }
-
-    return "#FFFFFF";
-  }
-
   public static function ToNumber(value)
   {
     var n: Number = parseInt(value);
@@ -84,10 +48,10 @@ class wot.utils.Stat
   // so we don't have to create it at function execution:
   // try to retrieve stats after 0.3, 0.5, 1 and 3 seconds
   private static var timer: TimelineLite = new TimelineLite( { tweens: [
-                                                    new TweenLite(null, .3), new TweenLite(null, .5), 
-                                                    new TweenLite(null, 1), new TweenLite(null, 3) ],
-                                                    onComplete:Stat.retrieveStatsIngame, onCompleteParams:[],
-                                                    paused: true});
+    new TweenLite(null, .3), new TweenLite(null, .5), 
+    new TweenLite(null, 1), new TweenLite(null, 3) ],
+    onComplete:Stat.retrieveStatsIngame, onCompleteParams:[],
+    paused: true});
   public static function FormatText(data, format: String)
   {
     var sWins: String = "";
@@ -126,7 +90,7 @@ class wot.utils.Stat
           }
         }
       }
-      else if (Config.bool("rating/loadEnemyStatsInFogOfWar"))
+      else if (Config.s_config.rating.loadEnemyStatsInFogOfWar)
         processForFogOfWar(data);
     }
 
@@ -143,9 +107,9 @@ class wot.utils.Stat
     format = format.split("{{eff:4}}").join(Utils.padLeft(sEff, 4));
 
     // Dynamic colors
-    format = format.split("{{c:eff}}").join(eff > 0 ? GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff) : "");
-    format = format.split("{{c:rating}}").join(rating > 0 ? GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, rating) : "");
-    format = format.split("{{c:kb}}").join(GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, kb));
+    format = format.split("{{c:eff}}").join(eff > 0 ? GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff) : "");
+    format = format.split("{{c:rating}}").join(rating > 0 ? GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, rating) : "");
+    format = format.split("{{c:kb}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, kb));
 
     format = wot.utils.Utils.trim(format);
 
@@ -246,7 +210,7 @@ class wot.utils.Stat
             var _is_str_new = false;
             Stat.retrieving = false;
             Stat.added = false;
-            var stats = net.wargaming.io.JSON.parse(str);
+            var stats = wot.utils.JSON.parse(str);
             for (var i = 0; i < stats.players.length; i++)
             {
               var p_stat = stats.players[i];
@@ -272,7 +236,7 @@ class wot.utils.Stat
               {
                 if (!str_new || str_new == undefined)
                   return;
-                var stats_new = net.wargaming.io.JSON.parse(str_new);
+                var stats_new = wot.utils.JSON.parse(str_new);
                 for (var i = 0; i < stats_new.players.length; i++)
                 {
                   var p_stat_new = stats_new.players[i];
@@ -389,7 +353,7 @@ class wot.utils.Stat
     lv.onData = function(str)
     {
       //wot.utils.Logger.add("lv: "+str);
-      var stats = net.wargaming.io.JSON.parse(str);
+      var stats = wot.utils.JSON.parse(str);
       for (var i = 0; i < stats.players.length; i++)
       {
         if (!Stat.s_player_ratings)

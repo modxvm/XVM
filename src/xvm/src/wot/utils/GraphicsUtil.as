@@ -4,21 +4,23 @@
  */
 import flash.geom.ColorTransform;
 import flash.filters.DropShadowFilter;
+import wot.utils.Config;
+import wot.utils.Defines;
 
 class wot.utils.GraphicsUtil
 {
   public static function createShadowFilter(data:Object):Object
   {
-    if (Number(data.attributes.alpha) == 0 || Number(data.attributes.strength) == 0)
+    if (Number(data.alpha) == 0 || Number(data.strength) == 0)
       return null;
 
     var shadow: DropShadowFilter = new DropShadowFilter();
-    shadow.blurX = shadow.blurY = Number(data.attributes.size);
-    shadow.angle = Number(data.attributes.angle);
-    shadow.distance = Number(data.attributes.distance);
-    shadow.color = Number(data.attributes.color);
-    shadow.alpha = Number(data.attributes.alpha) * 0.01;
-    shadow.strength = Number(data.attributes.strength) * 0.01;
+    shadow.blurX = shadow.blurY = Number(data.size);
+    shadow.angle = Number(data.angle);
+    shadow.distance = Number(data.distance);
+    shadow.color = Number(data.color);
+    shadow.alpha = Number(data.alpha) * 0.01;
+    shadow.strength = Number(data.strength) * 0.01;
 
     return shadow;
   }
@@ -94,5 +96,83 @@ class wot.utils.GraphicsUtil
     var myColorTransform: ColorTransform = new ColorTransform();
     myColorTransform.rgb = Number(col);
     item.transform.colorTransform = myColorTransform;
+  }
+  
+  public static function GetDynamicColorValue(type: Number, value: Number)
+  {
+    if (value == undefined || value == null)
+      return "#FFFBFB";
+
+    var cfg_root = Config.s_config.colors;
+    var cfg: Array;
+    switch (type)
+    {
+      case Defines.DYNAMIC_COLOR_EFF:
+        cfg = cfg_root.eff;
+        break;
+      case Defines.DYNAMIC_COLOR_RATING:
+        cfg = cfg_root.rating;
+        break;
+      case Defines.DYNAMIC_COLOR_KB:
+        cfg = cfg_root.kb;
+        break;
+      case Defines.DYNAMIC_COLOR_HP:
+        cfg = cfg_root.hp;
+        break;
+      case Defines.DYNAMIC_COLOR_HP_RATIO:
+        cfg = cfg_root.hp_ratio;
+        break;
+      default:
+        return "#FFFEFE";
+    }
+
+    for (var i = 0; i < cfg.length; i++)
+    {
+      var cvalue: Number = cfg[i].value;
+      var color: Number = cfg[i].color;
+      if (value < cvalue)
+        return "#" + color.toString(16);
+    }
+
+    return "#FFFFFF";
+  }
+
+  public static function GetDynamicAlphaValue(type: Number, value: Number)
+  {
+    if (value == undefined || value == null)
+      return 101;
+
+    var cfg_root = Config.s_config.alpha;
+    var cfg: Array;
+    switch (type)
+    {
+      case Defines.DYNAMIC_ALPHA_EFF:
+        cfg = cfg_root.eff;
+        break;
+      case Defines.DYNAMIC_ALPHA_RATING:
+        cfg = cfg_root.rating;
+        break;
+      case Defines.DYNAMIC_ALPHA_KB:
+        cfg = cfg_root.kb;
+        break;
+      case Defines.DYNAMIC_ALPHA_HP:
+        cfg = cfg_root.hp;
+        break;
+      case Defines.DYNAMIC_ALPHA_HP_RATIO:
+        cfg = cfg_root.hp_ratio;
+        break;
+      default:
+        return 102;
+    }
+
+    for (var i = 0; i < cfg.length; i++)
+    {
+      var avalue: Number = cfg[i].value;
+      var alpha: Number = cfg[i].alpha;
+      if (value < avalue)
+        return alpha;
+    }
+
+    return 100;
   }
 }

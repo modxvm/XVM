@@ -26,12 +26,14 @@ class wot.utils.Utils
     return str;
   }
   
-  public static function padLeft(str: String, len: Number)
+  public static function padLeft(str: String, len: Number, char: String)
   {
     if (!str)
       str = "";
+    if (!char)
+      char = ' ';
     while (str.length < len)
-      str = " " + str;
+      str = char + str;
     return str;
   }
 
@@ -72,4 +74,33 @@ class wot.utils.Utils
       return -2;
     }
   }
+  
+  public static function toInt(value: Object, defaultValue: Number): Number
+  {
+    if (!defaultValue)
+      defaultValue = 0;
+    if (!value)
+      return defaultValue;
+    var n: Number = parseInt(value.toString());
+    return isNaN(n) ? defaultValue : n;
+  }
+
+  public static function toBool(value: Object, defaultValue: Boolean): Boolean
+  {
+    if (!value)
+      return defaultValue ? true : false;
+    value = String(value).toLowerCase();
+    return defaultValue ? value != "false" : value == "true";
+  }
+
+  public static function toString(value: Object, defaultValue: String): String
+  {
+    return value ? String(value) : defaultValue;
+  }
+  
+  public static function elapsedMSec(date1, date2): Number
+  {
+    return date2 - date1;
+  }
+  
 }

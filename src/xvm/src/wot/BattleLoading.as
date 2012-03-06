@@ -42,6 +42,8 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
       infoField._visible = true;
     }
 
+    setInfoFieldData({ });
+    
     // Force stats loading after 1 sec (for 12x12 battles or FogOfWar)
     var timer: TimelineLite = new TimelineLite({onComplete:StartLoadData, onCompleteParams:[]});
     timer.insert(new TweenLite(null, 1));
@@ -49,7 +51,7 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
 
   public function StartLoadData()
   {
-    if (Config.bool("rating/showPlayersStatistics"))
+    if (Config.s_config.rating.showPlayersStatistics)
       Stat.StartLoadData();
   }
 
@@ -63,7 +65,7 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
     if (!infoField)
       return;
 
-    var txt: String = "XVM v" + wot.utils.Defines.XVM_VERSION;
+    var txt: String = "XVM v" + wot.utils.Defines.XVM_VERSION + "\n";
 
     if (data.ver && wot.utils.Utils.compareVersions(String(data.ver), wot.utils.Defines.XVM_VERSION) == 1)
     {
@@ -71,6 +73,12 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
       if (data.message)
         txt += data.message + "\n";
       infoField.textColor = 0xAAFFAA;
+    }
+
+    if (data.error)
+    {
+      txt += data.error + "\n";
+      infoField.textColor = 0xFF8080;
     }
 
     infoField.text = txt;

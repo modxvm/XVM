@@ -15,14 +15,14 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   function PlayersPanel()
   {
     super();
-    Config.LoadConfigAndStat();
+    Config.LoadConfigAndStat("XVM.xvmconf");
   }
 
   function completeLoad(event)
   {
     event.target.removeEventListener("complete", this, "completeLoad");
 
-    if (Config.bool("battle/mirroredVehicleIcons", true))
+    if (Config.s_config.battle.mirroredVehicleIcons)
       return;
 
     if (m_type == "left")
@@ -31,7 +31,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     event.target._xscale = -event.target._xscale;
     event.target._x -= event.target.__width;
 
-    if (!Config.bool("battle/mirroredVehicleIcons", true) && m_type == "right")
+    if (!Config.s_config.battle.mirroredVehicleIcons && m_type == "right")
       event.target["renderer"].vehicleLevel._x = event.target._x + 15;
   }
 
@@ -49,9 +49,9 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         renderer.iconLoader["renderer"] = renderer;
       }
 
-      players_bg.players_bg._alpha = Config.int("battle/playersPanelAlpha", 100);
+      players_bg.players_bg._alpha = Config.s_config.battle.playersPanelAlpha;
 
-      m_largePanelWidth = Math.min(Config.int("battle/playersPanelLargeWidth", -1), 170);
+      m_largePanelWidth = Math.min(Config.s_config.battle.playersPanelLargeWidth, 170);
     }
     super.setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount);
   }
@@ -121,12 +121,14 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         while (pname.length >= 0)
         {
           _loc5 = (pname == data[_loc2].label || pname.length == 0) ? pname : pname + "...";
-          if (Stat.s_player_ratings && Config.bool("rating/playersPanel/show", true))
+          if (Stat.s_player_ratings && Config.s_config.rating.playersPanel.show)
           {
             _loc5 = Stat.DecorateField(data[_loc2], _loc5,
-              Config.string("rating/playersPanel/format"),
+              Config.s_config.rating.playersPanel.format,
               m_type == "left" ? Defines.POSITION_LEFT : Defines.POSITION_RIGHT);
           }
+          if (pname.length == 0)
+            break;
           m_widthTester.htmlText = _loc5;
           if (m_widthTester._width <= m_names._width)
             break;
@@ -137,7 +139,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
       {
         if (Stat.s_player_ratings)
         {
-          var middleColor: String = Config.string("rating/playersPanel/middleColor");
+          var middleColor: String = Config.s_config.rating.playersPanel.middleColor;
           if (middleColor)
             _loc5 = Stat.FormatText(data[_loc2], "<font color='" + middleColor + "'>" + _loc5 + "</font>");
         }

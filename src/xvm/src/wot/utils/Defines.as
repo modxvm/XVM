@@ -4,8 +4,11 @@
  */
 class wot.utils.Defines
 {
-  // Global mod versiob
-  public static var XVM_VERSION = "1.6";
+  // Global versions
+  public static var XVM_VERSION = "1.7.test1";
+  public static var WOT_VERSION = "0.7.1";
+  public static var CONFIG_VERSION = "1.1.0";
+  public static var EDITOR_VERSION = "0.0.0";
 
   public static var DEFAULT_CONFIG_NAME = "XVM.xvmconf";
 
@@ -38,4 +41,13 @@ class wot.utils.Defines
   public static var DYNAMIC_COLOR_EFF = 1;
   public static var DYNAMIC_COLOR_RATING = 2;
   public static var DYNAMIC_COLOR_KB = 3;
+  public static var DYNAMIC_COLOR_HP = 4;
+  public static var DYNAMIC_COLOR_HP_RATIO = 5;
+
+  // Dynamic alpha types
+  public static var DYNAMIC_ALPHA_EFF = 1;
+  public static var DYNAMIC_ALPHA_RATING = 2;
+  public static var DYNAMIC_ALPHA_KB = 3;
+  public static var DYNAMIC_ALPHA_HP = 4;
+  public static var DYNAMIC_ALPHA_HP_RATIO = 5;
 }

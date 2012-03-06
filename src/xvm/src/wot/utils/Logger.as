@@ -26,7 +26,7 @@ class wot.utils.Logger
       str = "..." + str.slice(Defines.MAX_PATH);
     }
 
-    p.load(Defines.COMMAND_LOG + " [" + counter + "] " + str);
+    p.load(Defines.COMMAND_LOG + " [" + wot.utils.Utils.padLeft(String(counter), 3, '0') + "] " + str);
     counter++;
   }
   

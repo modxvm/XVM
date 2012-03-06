@@ -12,8 +12,8 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   {
     super();
     vehicleField.html = true;
-    vehicleField._width += 60;
-    Config.LoadConfig();
+    vehicleField._width += 80;
+    Config.LoadConfig("XVM.xvmconf");
     iconLoader.addEventListener("complete", this, "completeLoad");
   }
 
@@ -21,8 +21,8 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   {
     event.target.removeEventListener("complete", this, "completeLoad");
     if (this.owner._name == "team1List")
-      vehicleField._x -= 90; // why this value? (sirmax2)
-    if (!Config.bool("battle/mirroredVehicleIcons", true))
+      vehicleField._x -= 120; // why this value? (sirmax2)
+    if (!Config.s_config.battle.mirroredVehicleIcons)
     {
       if (this.owner._name == "team2List")
       {
@@ -36,7 +36,7 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   private static var _logShown = false;
   function setData(data)
   {
-    if (data && Config.bool("rating/showPlayersStatistics"))
+    if (data && Config.s_config.rating.showPlayersStatistics)
     {
       if (!_logShown)
       {
@@ -55,12 +55,12 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   function update()
   {
     super.update();
-    if (Config.bool("rating/showPlayersStatistics") && Config.bool("rating/battleLoading/show", true))
+    if (Config.s_config.rating.showPlayersStatistics && Config.s_config.rating.battleLoading.show)
     {
       if (data)
       {
         vehicleField.htmlText = Stat.DecorateField(data, data.vehicle,
-          Config.string("rating/battleLoading/format"),
+          Config.s_config.rating.battleLoading.format,
           this.owner._name == "team1List" ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
       }
     }
@@ -69,10 +69,10 @@ class wot.StatItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRen
   // update delegate (function name is fixed and cannot be changed)
   function updateCallback(pdata)
   {
-    if (Config.bool("rating/battleLoading/show", true))
+    if (Config.s_config.rating.battleLoading.show)
     {
       vehicleField.htmlText = Stat.DecorateField(pdata, pdata.originalText,
-        Config.string("rating/battleLoading/format"),
+        Config.s_config.rating.battleLoading.format,
         pdata.team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
     }
   }

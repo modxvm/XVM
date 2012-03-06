@@ -1,4 +1,4 @@
-﻿intrinsic class net.wargaming.ingame.VehicleMarker extends MovieClip // extends gfx.core.UIComponent
+﻿intrinsic class net.wargaming.ingame.VehicleMarker extends gfx.core.UIComponent
 {
   static var s_showExInfo;
 
@@ -9,6 +9,10 @@
   var m_entityName;
   var m_level;
   var m_source;
+  var m_isPopulated;
+  var m_vehicleClass;
+  var m_markerState;
+  var m_markerLabel;
 
   var marker;
   var pNameField;
@@ -27,5 +31,10 @@
   function configUI();
   function draw();
   function populateData();
+  function initMarkerLabel();
   function updateMarkerLabel();
+  function invalidate();
+  function setVehicleClass();
+  function _onErrorLoad(event);
+  function _onCompleteLoad(event);
 }

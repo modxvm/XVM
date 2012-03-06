@@ -11,7 +11,7 @@ class wot.Main
 
   static function main()
   {
-    Config.LoadConfigAndStat("XVM.xvmconf");
+    Config.LoadConfigAndStatLegacy("XVM.xvmconf");
 
     instance = new Main();
 
@@ -21,7 +21,7 @@ class wot.Main
 
   function showPostmortemTips(movingUpTime, showTime, movingDownTime)
   {
-    if (Config.bool("battle/showPostmortemTips", true))
+    if (Config.s_config.battle.showPostmortemTips)
       _root.showPostmortemTips(movingUpTime, showTime, movingDownTime);
   }
   
@@ -30,6 +30,7 @@ class wot.Main
     //wot.utils.Logger.add("onUpdateStage");
     _root.onUpdateStage(width, height);
     //_root.minimap.foreground._alpha = 30;
+    //_root.minimap.foregroundHR._alpha = 30;
     //wot.utils.Logger.addObject(_root);
   }
 }
