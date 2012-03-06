@@ -44,7 +44,7 @@
       /* false - отключить отображение статистики в окне статистики боя (по клавише Tab) */
       "show": "true",
       /* формат отображения */
-      "format": "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>"
+      "format": "<font face='Consolas' size='10' color='{{c:kb}}'>{{kb:3}}</font> <font face='Consolas' size='10' color='{{c:eff}}'>{{eff:4}}</font> <font face='Consolas' size='10' color='{{c:rating}}'>{{rating:3}}</font>"
     }
   },
   "colors": {
@@ -105,15 +105,13 @@
       { "value": 999, "alpha": 100 }
     ],
     "hp": [
-      { "value": 200,  "alpha": 100 },
-      { "value": 400,  "alpha": 50 },
-      { "value": 1000, "alpha": 0 },
+      { "value": 300,  "alpha": 80 },
+      { "value": 500,  "alpha": 50 },
       { "value": 9999, "alpha": 0 }
     ],
     "hp-ratio": [
-      { "value": 10,  "alpha": 100 },
-      { "value": 25,  "alpha": 70 },
-      { "value": 50,  "alpha": 0 },
+      { "value": 10,  "alpha": 80 },
+      { "value": 25,  "alpha": 50 },
       { "value": 101, "alpha": 0 }
     ]
   }
