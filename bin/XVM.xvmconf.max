@@ -1,118 +1,12 @@
 ﻿{
-  "configVersion": "1.0.1",
-  "editorVersion": "0.0.1.a1",
-  "definition": {
-    "author": "sirmax2",
-    "description": "Default settings for XVM",
-    "url": "http://code.google.com/p/wot-xvm/",
-    "date": "2012-02-29",
-    "gameVersion": "0.7.1",
-    "modMinVersion": "1.7"
-  },
+  "configVersion": "1.1.0",
   "battle": {
-    /* false - отключить зеркалирование иконок танков (полезно для альтернативных иконок) */
-    "mirroredVehicleIcons": "false",
-    /* false - отключить всплывающую внизу панель после смерти */
-    "showPostmortemTips": "false",
-    /* 0..100 - задает прозрачность "ушей". 0 - прозрачные, 100 - не прозрачные */
-    "playersPanelAlpha": 40,
-    /* 0..170 - задает ширину поля имени игрока в "ушах" в широком режиме. По умолчанию: 170 */
-    "playersPanelLargeWidth": 100,
-    /* true - включить отображение сетки координат (может быть полезным для настройки) */
-    "drawGrid": "false"
+    "mirroredVehicleIcons": false,
+    "showPostmortemTips": false,
+    "playersPanelAlpha": 50,
+    "playersPanelLargeWidth": 90
   },
   "rating": {
-    /* true - включить отображение статистики. Глобальный переключатель - без него модуль статистики будет везде отключен. */
-    "showPlayersStatistics": "true",
-    /* true - включить загрузку данных по противникам в "тумане войны" */
-    "loadEnemyStatsInFogOfWar": "true",
-    "battleLoading": {
-      /* false - отключить отображение статистики в окне загрузки боя */
-      "show": "true",
-      /* формат отображения (допускаются макроподстановки) */
-      "format": "<font face='Consolas' size='10' color='{{c:kb}}'>{{kb:3}}</font> <font face='Consolas' size='10' color='{{c:eff}}'>{{eff:4}}</font> <font face='Consolas' size='10' color='{{c:rating}}'>{{rating:3}}</font>"
-    },
-    "playersPanel": {
-      /* false - отключить отображение статистики в широких ушах */
-      "show": "true",
-      /* формат отображения */
-      "format": "<font color='{{c:eff}}'>{{rating}}</font>",
-      /* цвет в средних ушах. Чтобы оставить стандартный, необходимо удалить значение */
-      "middleColor": "{{c:eff}}"
-    },
-    "statisticForm": {
-      /* false - отключить отображение статистики в окне статистики боя (по клавише Tab) */
-      "show": "true",
-      /* формат отображения */
-      "format": "<font face='Consolas' size='10' color='{{c:kb}}'>{{kb:3}}</font> <font face='Consolas' size='10' color='{{c:eff}}'>{{eff:4}}</font> <font face='Consolas' size='10' color='{{c:rating}}'>{{rating:3}}</font>"
-    }
-  },
-  "colors": {
-    /* values - from min to max, colors are for values 'lesser then ...' */
-    "eff": [
-      { "value": 600, "color": "0xDD0000" },
-      { "value": 900, "color": "0xDD3333" },
-      { "value": 1200, "color": "0xFFCC33" },
-      { "value": 1500, "color": "0x99FF33" },
-      { "value": 1800, "color": "0x33FF33" },
-      { "value": 9999, "color": "0xCC66CC" }
-    ],
-    "rating": [
-      { "value": 42, "color": "0xDD0000" },
-      { "value": 46, "color": "0xDD3333" },
-      { "value": 49, "color": "0xDDDD33" },
-      { "value": 51, "color": "0xFFCC33" },
-      { "value": 53, "color": "0x99FF33" },
-      { "value": 57, "color": "0x33FF33" },
-      { "value": 101, "color": "0xCC66CC" }
-    ],
-    "kb": [
-      { "value": 1, "color": "0xDD0000" },
-      { "value": 3, "color": "0xDD3333" },
-      { "value": 5, "color": "0xFFCC33" },
-      { "value": 8, "color": "0x99FF33" },
-      { "value": 12, "color": "0x33FF33" },
-      { "value": 9999, "color": "0xCC66CC" }
-    ],
-    "hp": [
-      { "value": 200,  "color": "0xDD0000" },
-      { "value": 400,  "color": "0xDD3333" },
-      { "value": 1000, "color": "0xFFCC33" },
-      { "value": 9999, "color": "0xFFFFFF" }
-    ],
-    "hp-ratio": [
-      { "value": 10,  "color": "0xDD0000" },
-      { "value": 25,  "color": "0xDD3333" },
-      { "value": 50,  "color": "0xFFCC33" },
-      { "value": 101, "color": "0xFFFFFF" }
-    ]
-  },
-  "alpha": {
-    /* values - from min to max, transparency are for values 'lesser then ...' */
-    "eff": [
-      { "value": 900,  "alpha": 100 },
-      { "value": 1200, "alpha": 100 },
-      { "value": 9999, "alpha": 100 }
-    ],
-    "rating": [
-      { "value": 49,  "alpha": 100 },
-      { "value": 53,  "alpha": 100 },
-      { "value": 101, "alpha": 100 }
-    ],
-    "kb": [
-      { "value": 2,   "alpha": 100 },
-      { "value": 10,  "alpha": 100 },
-      { "value": 999, "alpha": 100 }
-    ],
-    "hp": [
-      { "value": 300,  "alpha": 80 },
-      { "value": 500,  "alpha": 50 },
-      { "value": 9999, "alpha": 0 }
-    ],
-    "hp-ratio": [
-      { "value": 10,  "alpha": 80 },
-      { "value": 25,  "alpha": 50 },
-      { "value": 101, "alpha": 0 }
-    ]
+    "showPlayersStatistics": true
   }
 }
