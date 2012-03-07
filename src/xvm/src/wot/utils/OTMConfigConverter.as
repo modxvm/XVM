@@ -252,7 +252,7 @@ class wot.utils.OTMConfigConverter
         dy = -16;
         break;
       case "currentHealth":
-        fieldText = "{{hp}} / {{hp-max}}";
+        fieldText = bool(ocp + "maxValue/attributes/enabled", true) ? "{{hp}} / {{hp-max}}" : "{{hp}}";
         dx = -41;
         dy = -18;
         bold = true;
