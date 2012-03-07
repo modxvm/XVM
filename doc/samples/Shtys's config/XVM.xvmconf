@@ -1,0 +1,52 @@
+﻿{
+  "configVersion": "1.0.0",
+  "editorVersion": "0.0.1.a1",
+  "definition": {
+    "author": "Shtys",
+    "description": "Shtys's settings for XVM",
+    "url": "http://code.google.com/p/wot-xvm/",
+    "date": "2012-02-17",
+    "gameVersion": "0.7.1",
+    "modVersion": "1.6"
+  },
+  "battle": {
+    "mirroredVehicleIcons": "false",
+    "showPostmortemTips": "false",
+    "playersPanelAlpha": 80,
+    "playersPanelLargeWidth": 100,
+    "drawGrid": "false"
+  },
+  "rating": {
+    "showPlayersStatistics": "true",
+    "battleLoading": {
+      "show": "false",
+      "format": "<font color='{{c:eff}}'>{{eff:4}}</font>"
+    },
+    "playersPanel": {
+      "show": "true",
+      "format": "<font color='{{c:eff}}'>{{eff:4}}</font>",
+      "middleColor": ""
+    },
+    "statisticForm": {
+      "show": "true",
+      "format": "<font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{kb:3}}</font>"
+    },
+    "colors": {
+      "eff": [
+        { "value": 900, "color": "0xFF0000" },
+        { "value": 1200, "color": "0xFFD800" },
+        { "value": 9999, "color": "0x00ff00" }
+      ],
+      "rating": [
+	{ "value": 49, "color": "0xFF0000" },
+        { "value": 52, "color": "0xFFD800" },
+        { "value": 100, "color": "0x00ff00" }
+      ],
+      "kb": [
+        { "value": 5, "color": "0xFF0000" },
+        { "value": 8, "color": "0xFFD800" },
+        { "value": 9999, "color": "0x00ff00" }
+      ]
+    }
+  }
+}
