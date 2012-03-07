@@ -353,6 +353,8 @@ class wot.utils.Stat
     lv.onData = function(str)
     {
       //wot.utils.Logger.add("lv: "+str);
+      if (!str || str == undefined)
+        return;
       var stats = wot.utils.JSON.parse(str);
       for (var i = 0; i < stats.players.length; i++)
       {

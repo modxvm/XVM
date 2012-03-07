@@ -8,5 +8,59 @@
   },
   "rating": {
     "showPlayersStatistics": true
+  },
+  "markers": {
+    "ally": {
+      "alive": {
+        "normal": {
+          "damageText": {
+            "blowupMessage": "Готов"
+          }
+        },
+        "extended": {
+          "damageText": {
+            "blowupMessage": "Готов"
+          }
+        }
+      },
+      "dead": {
+        "normal": {
+          "damageText": {
+            "color": "0x33FF33"
+          }
+        },
+        "extended": {
+          "damageText": {
+            "color": "0x33FF33"
+          }
+        }
+      }
+    },
+    "enemy": {
+      "alive": {
+        "normal": {
+          "damageText": {
+            "blowupMessage": "Готов"
+          }
+        },
+        "extended": {
+          "damageText": {
+            "blowupMessage": "Готов"
+          }
+        }
+      },
+      "dead": {
+        "normal": {
+          "damageText": {
+            "color": "0xFF3333"
+          }
+        },
+        "extended": {
+          "damageText": {
+            "color": "0xFF3333"
+          }
+        }
+      }
+    }
   }
 }
