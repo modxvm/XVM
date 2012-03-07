@@ -1,11 +1,11 @@
-﻿/**
+/**
  * ...
  * @author sirmax2
  */
 class wot.utils.Defines
 {
   // Global versions
-  public static var XVM_VERSION = "1.7.test4";
+  public static var XVM_VERSION = "1.7.test5";
   public static var WOT_VERSION = "0.7.1";
   public static var CONFIG_VERSION = "1.1.0";
   public static var EDITOR_VERSION = "0.0.0";
