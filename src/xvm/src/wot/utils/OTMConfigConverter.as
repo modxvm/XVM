@@ -39,7 +39,7 @@ class wot.utils.OTMConfigConverter
     ConvertComponents();
     ConvertBehavior();
     ConvertTextFields();
-    
+
     return xvm;
   }
 
@@ -317,7 +317,7 @@ class wot.utils.OTMConfigConverter
       format: String(infoText.attributes.format) || ""
     };
   }
-  
+
   private static function GetInfoTextFields(team, mode)
   {
     var ocp: String = "components/" + team + "/infoText/";
@@ -339,8 +339,8 @@ class wot.utils.OTMConfigConverter
       var f = GetInfoTextField(infoText, ocp);
       if (f)
         textFields.push(f);
-    };    
-    
+    };
+
     return textFields;
   }
 

@@ -48,7 +48,7 @@ class wot.utils.Stat
   // so we don't have to create it at function execution:
   // try to retrieve stats after 0.3, 0.5, 1 and 3 seconds
   private static var timer: TimelineLite = new TimelineLite( { tweens: [
-    new TweenLite(null, .3), new TweenLite(null, .5), 
+    new TweenLite(null, .3), new TweenLite(null, .5),
     new TweenLite(null, 1), new TweenLite(null, 3) ],
     onComplete:Stat.retrieveStatsIngame, onCompleteParams:[],
     paused: true});

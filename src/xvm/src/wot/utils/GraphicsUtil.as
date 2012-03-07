@@ -78,7 +78,7 @@ class wot.utils.GraphicsUtil
       _visible = true;
     }
   }
-  
+
   public static function colorByRatio($value:Number, $start:Number, $end:Number):Number
   {
     var r: Number = $start >> 16;
@@ -97,7 +97,7 @@ class wot.utils.GraphicsUtil
     myColorTransform.rgb = Number(col);
     item.transform.colorTransform = myColorTransform;
   }
-  
+
   public static function GetDynamicColorValue(type: Number, value: Number)
   {
     if (value == undefined || value == null)

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ...
  * @author sirmax2
  */
@@ -16,7 +16,7 @@ class wot.utils.Utils
     }
     return -1;
   }
-  
+
   public static function trim(str: String): String
   {
     while (str.charAt(0) == " ")
@@ -25,7 +25,7 @@ class wot.utils.Utils
       str = str.substring(0, str.length-1);
     return str;
   }
-  
+
   public static function padLeft(str: String, len: Number, char: String)
   {
     if (!str)
@@ -74,7 +74,7 @@ class wot.utils.Utils
       return -2;
     }
   }
-  
+
   public static function toInt(value: Object, defaultValue: Number): Number
   {
     if (!defaultValue)
@@ -97,10 +97,10 @@ class wot.utils.Utils
   {
     return value ? String(value) : defaultValue;
   }
-  
+
   public static function elapsedMSec(date1, date2): Number
   {
     return date2 - date1;
   }
-  
+
 }
