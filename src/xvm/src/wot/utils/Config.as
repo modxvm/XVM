@@ -229,11 +229,29 @@ class wot.utils.Config
     if (v == "1.0.0")
     {
       // Convert XVM 1.0.0 => 1.1.0
-      if (config.rating && config.rating.colors)
+      if (config.battle)
       {
-        config.colors = config.rating.colors;
-        delete config.rating.colors;
+        config.battle.mirroredVehicleIcons = Utils.toBool(config.battle.mirroredVehicleIcons, true);
+        config.battle.showPostmortemTips = Utils.toBool(config.battle.showPostmortemTips, true);
+        config.battle.drawGrid = Utils.toBool(config.battle.drawGrid, false);
       }
+
+      if (config.rating)
+      {
+        config.rating.showPlayersStatistics = Utils.toBool(config.rating.showPlayersStatistics, false);
+        if (config.rating.battleLoading)
+          config.rating.battleLoading.show = Utils.toBool(config.rating.battleLoading.show, true);
+        if (config.rating.playersPanel)
+          config.rating.playersPanel.show = Utils.toBool(config.rating.playersPanel.show, true);
+        if (config.rating.statisticForm)
+          config.rating.statisticForm.show = Utils.toBool(config.rating.statisticForm.show, true);
+        if (config.rating.colors)
+        {
+          config.colors = config.rating.colors;
+          delete config.rating.colors;
+        }
+      }
+
       v = "1.1.0";
     }
 
