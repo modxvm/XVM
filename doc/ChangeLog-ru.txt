@@ -1,4 +1,8 @@
-﻿XVM-1.7.test1:
+﻿XVM-1.7.test2:
+  * added sample configs
+  * China servers addresses updated
+
+XVM-1.7.test1:
   * fixed player names cutting
   * merge сonfigs in XVM.xvmconf (with legacy support of OTMData.xml)
   * integrate default config in code

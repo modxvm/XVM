@@ -1,0 +1,12 @@
+{
+  "configVersion": "1.1.0",
+  "battle": {
+    "mirroredVehicleIcons": false,
+    "showPostmortemTips": false,
+    "playersPanelAlpha": 50,
+    "playersPanelLargeWidth": 90
+  },
+  "rating": {
+    "showPlayersStatistics": true
+  }
+}

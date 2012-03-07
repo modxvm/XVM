@@ -1,0 +1,7 @@
+{
+  "configVersion": "1.1.0",
+  "rating": {
+    "showPlayersStatistics": true,
+    "loadEnemyStatsInFogOfWar": true
+  }
+}

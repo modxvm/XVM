@@ -1,9 +1,11 @@
 1. Microsoft .NET Framework 2.0 is required.
 2. Install DokanLibrary: http://dokan-dev.net/en/download/#dokan
 3. Unzip archive to game folder
-4. Setup config \res\gui\flash\XVM.xvmconf
-   Note: use Notepad, DO NOT use MS Word, WordPad and such editors.
-   Note: configs must be saved in UTF-8 charset with signature (BOM).
+4. Setup config \res_mods\<game version>\gui\flash\XVM.xvmconf
+   You can choose ready config from \xvm-doc\samples\ folder, or use
+   generator: http://bulychev.net/generator/
+   Note: If you changing config manually, use Notepad, DO NOT use MS Word,
+   WordPad and such editors.
 5. Run game with wot-xvm-proxy.exe.
    Run launcher with command:
      wot-xvm-proxy.exe /launcher
