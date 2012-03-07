@@ -1,5 +1,8 @@
+XVM-1.7.test4:
+  * fixed currentHealth/maxValue conversion
+
 XVM-1.7.test3:
-  * Fixed config convertor
+  * fixed config convertor
   * added Shtys's sample config
 
 XVM-1.7.test2:
