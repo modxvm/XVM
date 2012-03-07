@@ -15,12 +15,12 @@
   var m_markerLabel;
 
   var marker;
-  var pNameField;
-  var vNameField;
+  var pNameField: TextField;
+  var vNameField: TextField;
   var iconLoader;
   var levelIcon;
   var actionMarker;
-  var healthBar;
+  var healthBar: MovieClip;
 
   function get colorsManager();
   function get colorSchemeName();

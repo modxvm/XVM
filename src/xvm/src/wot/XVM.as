@@ -52,14 +52,20 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     xvmHealthBar = createEmptyMovieClip("xvmHealthBar", getNextHighestDepth());
 
     grid = createEmptyMovieClip("grid", getNextHighestDepth());
-  }
 
-  function hideOriginalUI()
-  {
+    pNameField._visible = false;
+    pNameField.removeTextField();
+    delete pNameField;
+    pNameField = undefined;
+    vNameField._visible = false;
+    vNameField.removeTextField();
+    delete vNameField;
+    vNameField = undefined;
     healthBar.stop();
     healthBar._visible = false;
-    pNameField._visible = false;
-    vNameField._visible = false;
+    healthBar.removeMovieClip();
+    delete healthBar;
+    healthBar = undefined;
   }
   
   // override
@@ -77,7 +83,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   // override
   function showHealthBar(show)
   {
-    hideOriginalUI();
+    // do nothing
   }
 
   // override
@@ -117,8 +123,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
     super.configUI();
     
-    hideOriginalUI();
-
     if (Config.s_config.battle.drawGrid)
       GraphicsUtil.drawGrid(grid, -50, -50, 100, 100, 0xFFFF00, 30);
 
@@ -163,8 +167,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     if (m_markerState != null)
       marker.gotoAndPlay(m_markerState);
 
-    hideOriginalUI();
-
     XVMPopulateData();
     setupNewHealth(m_curHealth);
 
@@ -206,8 +208,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     var trans = new flash.geom.Transform(iconLoader);
     trans.colorTransform = color.transform;
 
-    hideOriginalUI();
-    
     // Update layout for the current marker state
     XVMPopulateData();
     XVMUpdateStyle();

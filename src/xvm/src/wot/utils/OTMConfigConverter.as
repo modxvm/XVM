@@ -203,13 +203,13 @@ class wot.utils.OTMConfigConverter
     var xp_ally: Array = [ "markers/ally"/*, "markers/squad", "markers/teamKiller"*/ ];
     var xp_enemy: Array = [ "markers/enemy" ];
     // behavior/friend/alive/normal/actionMarker/attributes
-    for (var i1:String in otm["behavior"])
+    for (var i1: String in otm["behavior"])
     {
-      for (var i2:String in otm["behavior"][i1])
+      for (var i2: String in otm["behavior"][i1])
       {
-        for (var i3:String in otm["behavior"][i1][i2])
+        for (var i3: String in otm["behavior"][i1][i2])
         {
-          for (var i4:String in otm["behavior"][i1][i2][i3])
+          for (var i4: String in otm["behavior"][i1][i2][i3])
           {
             if (i4 == "playerName" || i4 == "vehicleName" || i4 == "currentHealth" || i4 == "healthRatio" || i4 == "infoText")
               continue;
@@ -361,9 +361,11 @@ class wot.utils.OTMConfigConverter
         for (var fid in farr)
         {
           var fname = farr[fid];
+          //wot.utils.Logger.add("ConvertTextFields: " + cname + ", " + bname + ", " + fname);
           var field = GetTextField(cname, bname, fname);
           if (field)
             fields.push(field);
+          //wot.utils.Logger.add("ConvertTextFields: " + cname + ", " + bname + ", " + fname + " - done");
         }
         var infoTextFields = GetInfoTextFields(cname, bname);
         for (var i in infoTextFields)

@@ -54,8 +54,9 @@ class wot.utils.Config
   public static function ReloadLegacyConfig()
   {
     var start = new Date();
-    var lv:LoadVars = new LoadVars();
-    lv.onData = function(str: String)
+    var xml:XML = new XML();
+    xml.ignoreWhite = true;
+    xml.onLoad = function(success: Boolean)
     {
       try
       {
@@ -67,15 +68,9 @@ class wot.utils.Config
           diff = curr;
         }
 
-        if (!str)
+        if (!success)
           return;
 
-        // check BOM
-        if (str.substring(0, 3) != "\xEF\xBB\xBF")
-          str = "\xEF\xBB\xBF" + str;
-        
-        var xml:XML = new XML(str);
-        xml.ignoreWhite = true;
         var config = net.produxion.util.XML2Object.deserialize(xml);
         config = config["overTargetMarkers"];
         if (!config)
@@ -102,7 +97,7 @@ class wot.utils.Config
         Config.ReloadXvmConfig();
       }
     };
-    lv.load("OTMData.xml");
+    xml.load("OTMData.xml");
   }
 
 
