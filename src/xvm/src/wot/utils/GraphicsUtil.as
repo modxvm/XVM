@@ -129,7 +129,7 @@ class wot.utils.GraphicsUtil
     for (var i = 0; i < cfg.length; i++)
     {
       var cvalue: Number = cfg[i].value;
-      var color: Number = cfg[i].color;
+      var color: Number = wot.utils.Utils.toInt(cfg[i].color, 0xFFFFFF);
       if (value < cvalue)
         return "#" + color.toString(16);
     }

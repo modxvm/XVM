@@ -6,6 +6,6 @@ cd $(dirname $(realpath $(cygpath --unix $0)))
 
 [ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/home/games/WoT
 SWF_DIR=$WOT_DIRECTORY/res_mods/$GAME_VER/gui/flash
-[ -f "../bin/*.swf" ] && cp ../bin/*.swf $SWF_DIR
+cp ../bin/*.swf $SWF_DIR 2>/dev/null
 [ -f "../bin/XVM.xvmconf" ] && cp ../bin/XVM.xvmconf $SWF_DIR/XVM.xvmconf
 [ -f "../bin/OTMData.xml" ] && cp ../bin/OTMData.xml $SWF_DIR/OTMData.xml
