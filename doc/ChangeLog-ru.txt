@@ -1,8 +1,12 @@
-﻿XVM-1.7.test4:
+﻿XVM-1.7.test5:
+  * fixed OTMData.xml loading
+  * fixed bug with parsing empty stat data
+
+XVM-1.7.test4:
   * fixed currentHealth/maxValue conversion
 
 XVM-1.7.test3:
-  * Fixed config convertor
+  * fixed config convertor
   * added Shtys's sample config
 
 XVM-1.7.test2:

@@ -1,5 +1,4 @@
 ﻿/**
-/**
  * ...
  * @author Nikolas Siver
  * @author bkon
@@ -98,7 +97,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   function updateState(newState, isImmediate)
   {
     super.updateState(newState, isImmediate);
-
     XVMUpdateStyle();
   }
 
@@ -127,13 +125,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       GraphicsUtil.drawGrid(grid, -50, -50, 100, 100, 0xFFFF00, 30);
 
     XVMUpdateStyle();
-  }
-
-  function draw()
-  {
-    super.draw();
-    if (iconLoader != null && iconLoader.initialized)
-      iconLoader.addEventListener("complete", this, "XVMIconCompleteLoad");
   }
 
   // override
@@ -222,7 +213,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   // override
   function _onCompleteLoad(event)
   {
-    super._onCompleteLoad(event);
+    XVMIconCompleteLoad(event);
   }
   
   /**
@@ -450,10 +441,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
     // Vehicle Type Icon
     if (iconLoader != null && iconLoader.initialized)
-    {
       iconLoader.addEventListener("complete", this, "XVMIconCompleteLoad");
-      XVMIconCompleteLoad(null);
-    }
 
     // Damage Text
     damageCfg = cfg.damageText;
@@ -532,14 +520,17 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       actionMarker._visible = visible;
 
       // Vehicle Icon
-      visible = cfg.contourIcon.visible;
-      if (visible)
+      if (iconLoader != null && iconLoader.initialized)
       {
-        iconLoader._x = cfg.contourIcon.x - iconLoader.__width / 2;
-        iconLoader._y = cfg.contourIcon.y - iconLoader.__height / 2;
-        iconLoader._alpha = XVMFormatAlpha(cfg.contourIcon.alpha, m_curHealth);
+        visible = cfg.contourIcon.visible;
+        if (visible)
+        {
+          iconLoader._x = cfg.contourIcon.x - iconLoader.__width / 2;
+          iconLoader._y = cfg.contourIcon.y - iconLoader.__height / 2;
+          iconLoader._alpha = XVMFormatAlpha(cfg.contourIcon.alpha, m_curHealth);
+        }
+        iconLoader._visible = visible;
       }
-      iconLoader._visible = visible;
 
       // Damage Text
       visible = cfg.damageText.visible;

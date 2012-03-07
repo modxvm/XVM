@@ -190,7 +190,11 @@ class wot.utils.Config
 
       case 'boolean':
         //Logger.add(prefix + " = boolean " + config + " = " + def);
-        return (typeof config == 'boolean') ? config : def;
+        if (typeof config == 'boolean')
+          return config;
+        if (typeof config == 'string')
+          return config.toLowerCase() == "true";
+        return def;
 
       case 'string':
         //Logger.add(prefix + " = string " + config + " = " + def);

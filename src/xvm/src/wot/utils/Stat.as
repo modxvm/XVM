@@ -197,74 +197,81 @@ class wot.utils.Stat
       var lv_check:LoadVars = new LoadVars();
       lv_check.onData = function(check)
       {
-        wot.utils.Logger.add("check: "+check)
-        if (check == "FINISHED")
+        try
         {
-          Stat.retrieving = true;
-          // retrieve stats from proxy
-          var lv_ret:LoadVars = new LoadVars();
-          lv_ret.onData = function(str)
+          //wot.utils.Logger.add("check: "+check)
+          if (check == "FINISHED")
           {
-            if (!str || str == undefined)
-              return;
-            var _is_str_new = false;
-            Stat.retrieving = false;
-            Stat.added = false;
-            var stats = wot.utils.JSON.parse(str);
-            for (var i = 0; i < stats.players.length; i++)
+            Stat.retrieving = true;
+            // retrieve stats from proxy
+            var lv_ret:LoadVars = new LoadVars();
+            lv_ret.onData = function(str)
             {
-              var p_stat = stats.players[i];
-              var p_name = Stat.CleanPlayerName(p_stat.name).toUpperCase();
-              if (Stat.s_player_ratings[p_name])
+              if (!str || str == undefined)
+                return;
+              var _is_str_new = false;
+              Stat.retrieving = false;
+              Stat.added = false;
+              var stats = wot.utils.JSON.parse(str);
+              for (var i = 0; i < stats.players.length; i++)
               {
-                //wot.utils.Logger.add(p_name + " already in ratings");
-                continue;
-              }
-              _is_str_new = true;
-              //wot.utils.Logger.addObject(p_stat, "Adding to "+p_name+" :");
-              p_stat.rating = p_stat.battles > 0 ? Math.round(p_stat.wins / p_stat.battles * 100) : 0;
-              Stat.s_player_ratings[p_name] = p_stat;
-              Stat.s_player_data[p_name].loaded = true;
-              // TODO: Add callback to update GUI
-            };
-            // If there's no new data submitted, try with @GET_LAST_STAT (FIXME)
-            if (!_is_str_new)
-            {
-              //wot.utils.Logger.add("Nothing new");
-              var lv_ret_new:LoadVars = new LoadVars();
-              lv_ret_new.onData = function(str_new)
-              {
-                if (!str_new || str_new == undefined)
-                  return;
-                var stats_new = wot.utils.JSON.parse(str_new);
-                for (var i = 0; i < stats_new.players.length; i++)
+                var p_stat = stats.players[i];
+                var p_name = Stat.CleanPlayerName(p_stat.name).toUpperCase();
+                if (Stat.s_player_ratings[p_name])
                 {
-                  var p_stat_new = stats_new.players[i];
-                  var p_name_new = Stat.CleanPlayerName(p_stat_new.name).toUpperCase();
-                  if (Stat.s_player_ratings[p_name_new])
+                  //wot.utils.Logger.add(p_name + " already in ratings");
+                  continue;
+                }
+                _is_str_new = true;
+                //wot.utils.Logger.addObject(p_stat, "Adding to "+p_name+" :");
+                p_stat.rating = p_stat.battles > 0 ? Math.round(p_stat.wins / p_stat.battles * 100) : 0;
+                Stat.s_player_ratings[p_name] = p_stat;
+                Stat.s_player_data[p_name].loaded = true;
+                // TODO: Add callback to update GUI
+              };
+              // If there's no new data submitted, try with @GET_LAST_STAT (FIXME)
+              if (!_is_str_new)
+              {
+                //wot.utils.Logger.add("Nothing new");
+                var lv_ret_new:LoadVars = new LoadVars();
+                lv_ret_new.onData = function(str_new)
+                {
+                  if (!str_new || str_new == undefined)
+                    return;
+                  var stats_new = wot.utils.JSON.parse(str_new);
+                  for (var i = 0; i < stats_new.players.length; i++)
                   {
-                    //wot.utils.Logger.add(p_name_new + " already in ratings");
-                    continue;
-                  }
-                  //wot.utils.Logger.addObject(p_stat_new, "Adding to "+p_name_new+" :");
-                  p_stat_new.rating = p_stat_new.battles > 0 ? Math.round(p_stat_new.wins / p_stat_new.battles * 100) : 0;
-                  Stat.s_player_ratings[p_name_new] = p_stat_new;
-                  Stat.s_player_data[p_name_new].loaded = true;
-                  // TODO: Add callback to update GUI
-                };
+                    var p_stat_new = stats_new.players[i];
+                    var p_name_new = Stat.CleanPlayerName(p_stat_new.name).toUpperCase();
+                    if (Stat.s_player_ratings[p_name_new])
+                    {
+                      //wot.utils.Logger.add(p_name_new + " already in ratings");
+                      continue;
+                    }
+                    //wot.utils.Logger.addObject(p_stat_new, "Adding to "+p_name_new+" :");
+                    p_stat_new.rating = p_stat_new.battles > 0 ? Math.round(p_stat_new.wins / p_stat_new.battles * 100) : 0;
+                    Stat.s_player_ratings[p_name_new] = p_stat_new;
+                    Stat.s_player_data[p_name_new].loaded = true;
+                    // TODO: Add callback to update GUI
+                  };
+                }
+                lv_ret_new.load(Defines.COMMAND_GET_LAST_STAT);
               }
-              lv_ret_new.load(Defines.COMMAND_GET_LAST_STAT);
+              Stat.runningIngame = false;
+              Stat.retrieving = false;
+              if (!Stat.added)
+                Stat.retrieved = true;
             }
-            Stat.runningIngame = false;
-            Stat.retrieving = false;
-            if (!Stat.added)
-              Stat.retrieved = true;
+            lv_ret.load(Defines.COMMAND_RETRIEVE);
           }
-          lv_ret.load(Defines.COMMAND_RETRIEVE);
+          else
+          {
+            Stat.retrieving = false;
+          }
         }
-        else
+        catch (ex)
         {
-          Stat.retrieving = false;
+          // do nothing
         }
       }
       lv_check.load(Defines.COMMAND_READY);
@@ -352,24 +359,31 @@ class wot.utils.Stat
     var lv:LoadVars = new LoadVars();
     lv.onData = function(str)
     {
-      //wot.utils.Logger.add("lv: "+str);
-      if (!str || str == undefined)
-        return;
-      var stats = wot.utils.JSON.parse(str);
-      for (var i = 0; i < stats.players.length; i++)
+      try
       {
-        if (!Stat.s_player_ratings)
-          Stat.s_player_ratings = {};
-        var stat = stats.players[i];
+        //wot.utils.Logger.add("lv: "+str);
+        if (!str || str == undefined)
+          return;
+        var stats = wot.utils.JSON.parse(str);
+        for (var i = 0; i < stats.players.length; i++)
+        {
+          if (!Stat.s_player_ratings)
+            Stat.s_player_ratings = {};
+          var stat = stats.players[i];
 
-        stat.rating = stat.battles > 0 ? Math.round(stat.wins / stat.battles * 100) : 0;
-        Stat.s_player_ratings[stat.name.toUpperCase()] = stat;
-      };
+          stat.rating = stat.battles > 0 ? Math.round(stat.wins / stat.battles * 100) : 0;
+          Stat.s_player_ratings[stat.name.toUpperCase()] = stat;
+        };
 
-      if (stats.info && stats.info.xvm)
-        wot.BattleLoading.setInfoFieldData(stats.info.xvm);
+        if (stats.info && stats.info.xvm)
+          wot.BattleLoading.setInfoFieldData(stats.info.xvm);
 
-      Stat.UpdateAll();
+        Stat.UpdateAll();
+      }
+      catch (ex)
+      {
+        // do nothing
+      }
     };
     lv.load(command);
   }
