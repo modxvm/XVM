@@ -54,17 +54,11 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
     pNameField._visible = false;
     pNameField.removeTextField();
-    delete pNameField;
-    pNameField = undefined;
     vNameField._visible = false;
     vNameField.removeTextField();
-    delete vNameField;
-    vNameField = undefined;
     healthBar.stop();
     healthBar._visible = false;
     healthBar.removeMovieClip();
-    delete healthBar;
-    healthBar = undefined;
   }
   
   // override
@@ -164,8 +158,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     return true;
   }
 
-  // Comment below is not useful for now, but it's very beauty, so I can't delete it :) (sirmax2)
-  //
   // The name is a LIE! We're actually selecting marker color scheme here.
   // VehicleMarkerAlly should contain 4 named frames:
   // - green - normal ally
@@ -175,9 +167,15 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   // VehicleMarkerEnemy should contain 2 named frames:
   // - red - normal enemy
   // - purple - enemy in "alternate colors" mode
-  //function initMarkerLabel() {
-  //  this.gotoAndStop(this.colorsManager.getAliasColor(this.colorSchemeName));
-  //}
+  function initMarkerLabel()
+  {
+    this.gotoAndStop(this.colorsManager.getAliasColor(this.colorSchemeName));
+    if (pNameField != null)
+    {
+      pNameField._visible = false;
+      pNameField.removeTextField();
+    }
+  }
 
   // override
   function updateMarkerLabel()
