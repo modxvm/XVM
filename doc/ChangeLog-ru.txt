@@ -1,4 +1,8 @@
-﻿XVM-1.7.test5:
+﻿XVM-1.7.test6:
+  * fixed boolean value reading
+  * fixed initial icon positioning
+
+XVM-1.7.test5:
   * fixed OTMData.xml loading
   * fixed bug with parsing empty stat data
 
