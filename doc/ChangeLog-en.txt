@@ -1,6 +1,9 @@
 XVM-1.7.test6:
   * fixed boolean value reading
   * fixed initial icon positioning
+  * fixed fields size and position in battle loading screen
+  * fixed infoText "visible" field conversion
+  * fixed health bar size if created with Alt pressed
 
 XVM-1.7.test5:
   * fixed OTMData.xml loading
