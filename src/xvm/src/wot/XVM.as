@@ -105,6 +105,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     // new markers can refer to it when rendered initially
     s_showExInfo = show;
 
+    //Logger.add("showExInfo");
+    //XVMPopulateData();
     XVMUpdateStyle();
   }
 
@@ -225,6 +227,14 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     result = this.vehicleDestroyed ? result.dead : result.alive;
     result = m_showExInfo ? result.extended : result.normal;
     return result;
+  }
+   
+  function GetCurrentStateConfigRootNormal()
+  {
+    var result = Config.s_config.markers;
+    result = m_entityName == "enemy" ? result.enemy : result.ally;
+    result = this.vehicleDestroyed ? result.dead : result.alive;
+    return result.normal;
   }
    
   function XVMColorWithFallback(value)
@@ -380,7 +390,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
   function updateCurrentColor(curHealth)
   {
-    var cfg = GetCurrentStateConfigRoot().healthBar;
+    var cfg = GetCurrentStateConfigRootNormal().healthBar;
 
     var fullColor: Number = XVMColorWithFallback(cfg.color);
     var lowColor: Number = XVMColorWithFallback(cfg.lcolor || cfg.color);
@@ -395,7 +405,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   function XVMIconCompleteLoad(event)
   {
     // Vehicle Icon
-    var cfg = GetCurrentStateConfigRoot().contourIcon;
+    var cfg = GetCurrentStateConfigRootNormal().contourIcon;
 
     if (cfg.amount > 0)
     {
@@ -426,14 +436,14 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   {
     var start = new Date();
 
-    var cfg = GetCurrentStateConfigRoot();
+    var cfg = GetCurrentStateConfigRootNormal();
 
     // Vehicle Type Marker
     for (var childName in marker.marker)
     {
       var child = marker.marker[childName];
-      child._x += cfg.vehicleIcon.scaleX * cfg.vehicleIcon.maxScale / 100;
-      child._y += cfg.vehicleIcon.scaleY * cfg.vehicleIcon.maxScale / 100;
+      child._x = cfg.vehicleIcon.scaleX * cfg.vehicleIcon.maxScale / 100;
+      child._y = cfg.vehicleIcon.scaleY * cfg.vehicleIcon.maxScale / 100;
       child._xscale = child._yscale = cfg.vehicleIcon.maxScale;
     };
 

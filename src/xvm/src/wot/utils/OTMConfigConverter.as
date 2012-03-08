@@ -2,7 +2,8 @@
  * ...
  * @author sirmax2
  */
-
+import wot.utils.Utils; 
+ 
 // Convert OTMData.xml => XVM 1.1.0
 class wot.utils.OTMConfigConverter
 {
@@ -291,7 +292,7 @@ class wot.utils.OTMConfigConverter
 
   private static function GetInfoTextField(infoText, ocp)
   {
-    if (!infoText || !infoText.attributes || !infoText.attributes.visible)
+    if (!infoText || !infoText.attributes || !infoText.attributes.visible || !Utils.toBool(infoText.attributes.visible, false))
       return null;
 
     return {
