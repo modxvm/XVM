@@ -1,4 +1,8 @@
-﻿XVM-1.7.test6:
+﻿XVM-1.7.test7:
+  * fixed dynamic colors for {{hp}} and {{hp-ratio}}
+  * fixed dynamic alpha
+
+XVM-1.7.test6:
   * fixed boolean value reading
   * fixed initial icon positioning
   * fixed fields size and position in battle loading screen

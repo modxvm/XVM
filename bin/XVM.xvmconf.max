@@ -1,5 +1,13 @@
 ﻿{
   "configVersion": "1.1.0",
+  "definition": {
+    "author": "sirmax2",
+    "description": "Sirmax's settings for XVM",
+    "url": "http://code.google.com/p/wot-xvm/",
+    "date": "07.03.2012",
+    "gameVersion": "0.7.1.1",
+    "modMinVersion": "1.7"
+  },
   "battle": {
     "mirroredVehicleIcons": false,
     "showPostmortemTips": false,
@@ -8,6 +16,13 @@
   },
   "rating": {
     "showPlayersStatistics": true
+  },
+  "alpha": {
+    "hp": [
+      { "value": 350,  "alpha": 100 },
+      { "value": 500,  "alpha": 50 },
+      { "value": 9999, "alpha": 0 }
+    ]
   },
   "markers": {
     "ally": {

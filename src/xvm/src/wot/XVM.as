@@ -274,13 +274,11 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     if (!isNaN(format))
       return Number(format);
 
-    //wot.utils.Logger.add("format=" + net.wargaming.io.JSON.stringify(format));
-    format = format.split("{{a:hp}}").join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, curHealth));
+    format = format.split("{{a:hp}}").join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, curHealth).toString());
     var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
-    format = format.split("{{a:hp-ratio}}").join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hpRatio));
+    format = format.split("{{a:hp-ratio}}").join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hpRatio).toString());
 
     var n: Number = parseInt(format);
-    //wot.utils.Logger.add("format=" + format + " value=" + n + " curHealth=" + curHealth);
     n = isNaN(n) ? 100 : n;
     return n;
   }
@@ -308,12 +306,13 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     textField.setNewTextFormat(textFormat);
     textField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
 
-    textField.textColor = XVMColorWithFallback(cfg.color);
+    textField.textColor = XVMColorWithFallback(XVMFormatText(cfg.color, m_curHealth));
+    textField._alpha = XVMFormatAlpha(cfg.alpha, m_curHealth);
     textField._x = cfg.x - textField._width / 2;
     textField._y = cfg.y - textField._height / 2;
     textField._visible = cfg.visible;
 
-    return { field: textField, format: cfg.format, alpha: cfg.alpha };
+    return { field: textField, format: cfg.format, alpha: cfg.alpha, color: cfg.color };
   }
 
   function XVMRemoveTextFields()
@@ -384,6 +383,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     for (var i in this.textFields)
     {
       this.textFields[i].field.text = XVMFormatText(this.textFields[i].format, curHealth);
+      this.textFields[i].field.textColor = XVMColorWithFallback(XVMFormatText(this.textFields[i].color, curHealth));
       this.textFields[i].field._alpha = XVMFormatAlpha(this.textFields[i].alpha, curHealth);
     }
   }

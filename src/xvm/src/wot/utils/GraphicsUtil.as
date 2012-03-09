@@ -6,6 +6,7 @@ import flash.geom.ColorTransform;
 import flash.filters.DropShadowFilter;
 import wot.utils.Config;
 import wot.utils.Defines;
+import wot.utils.Utils;
 
 class wot.utils.GraphicsUtil
 {
@@ -98,7 +99,7 @@ class wot.utils.GraphicsUtil
     item.transform.colorTransform = myColorTransform;
   }
 
-  public static function GetDynamicColorValue(type: Number, value: Number)
+  public static function GetDynamicColorValue(type: Number, value: Number): String
   {
     if (value == undefined || value == null)
       return "#FFFBFB";
@@ -129,7 +130,7 @@ class wot.utils.GraphicsUtil
     for (var i = 0; i < cfg.length; i++)
     {
       var cvalue: Number = cfg[i].value;
-      var color: Number = wot.utils.Utils.toInt(cfg[i].color, 0xFFFFFF);
+      var color: Number = Utils.toInt(cfg[i].color, 0xFFFFFF);
       if (value < cvalue)
         return "#" + color.toString(16);
     }
@@ -137,7 +138,7 @@ class wot.utils.GraphicsUtil
     return "#FFFFFF";
   }
 
-  public static function GetDynamicAlphaValue(type: Number, value: Number)
+  public static function GetDynamicAlphaValue(type: Number, value: Number): Number
   {
     if (value == undefined || value == null)
       return 101;

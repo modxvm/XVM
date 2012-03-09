@@ -1,4 +1,4 @@
-{
+﻿{
   "configVersion": "1.1.0",
   "definition": {
     "author": "sirmax2",
@@ -16,5 +16,66 @@
   },
   "rating": {
     "showPlayersStatistics": true
+  },
+  "alpha": {
+    "hp": [
+      { "value": 350,  "alpha": 100 },
+      { "value": 500,  "alpha": 50 },
+      { "value": 9999, "alpha": 0 }
+    ]
+  },
+  "markers": {
+    "ally": {
+      "alive": {
+        "normal": {
+          "damageText": {
+            "blowupMessage": "Готов"
+          }
+        },
+        "extended": {
+          "damageText": {
+            "blowupMessage": "Готов"
+          }
+        }
+      },
+      "dead": {
+        "normal": {
+          "damageText": {
+            "color": "0x33FF33"
+          }
+        },
+        "extended": {
+          "damageText": {
+            "color": "0x33FF33"
+          }
+        }
+      }
+    },
+    "enemy": {
+      "alive": {
+        "normal": {
+          "damageText": {
+            "blowupMessage": "Готов"
+          }
+        },
+        "extended": {
+          "damageText": {
+            "blowupMessage": "Готов"
+          }
+        }
+      },
+      "dead": {
+        "normal": {
+          "damageText": {
+            "color": "0xFF3333"
+          }
+        },
+        "extended": {
+          "damageText": {
+            "color": "0xFF3333"
+          }
+        }
+      }
+    }
   }
 }

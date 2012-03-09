@@ -119,15 +119,15 @@ class wot.utils.DefaultConfig
         ],
         hp: [
           { value: 200,  alpha: 100 },
-          { value: 400,  alpha: 90 },
-          { value: 1000, alpha: 80 },
-          { value: 9999, alpha: 70 }
+          { value: 400,  alpha: 80 },
+          { value: 1000, alpha: 60 },
+          { value: 9999, alpha: 40 }
         ],
         hp_ratio: [
           { value: 10,  alpha: 100 },
-          { value: 25,  alpha: 90 },
-          { value: 50,  alpha: 80 },
-          { value: 101, alpha: 70 }
+          { value: 25,  alpha: 80 },
+          { value: 50,  alpha: 60 },
+          { value: 101, alpha: 40 }
         ]
       },
       markers: {
