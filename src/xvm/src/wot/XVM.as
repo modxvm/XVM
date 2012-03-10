@@ -267,7 +267,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     return (color && !isNaN(color)) ? color : this.colorsManager.getRGB(this.colorSchemeName);
   }
 
-  function XVMFormatText(format: String, curHealth: Number, delta: Number)
+  function XVMFormatText(format: String, curHealth: Number, delta: Number): String
   {
     // AS 2 doesn't have String.replace? Shame on them. Let's use our own square wheel.
     format = format.split("{{hp}}").join(String(curHealth));
@@ -289,20 +289,18 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     return format;
   }
 
-  function XVMFormatAlpha(format: String, curHealth: Number)
+  function XVMFormatAlpha(format: String, curHealth: Number): Number
   {
     if (!format)
       return 100;
     if (!isNaN(format))
       return Number(format);
-
     format = format.split("{{a:hp}}").join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, curHealth).toString());
     var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
     format = format.split("{{a:hp-ratio}}").join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hpRatio).toString());
 
-    var n: Number = parseInt(format);
-    n = isNaN(n) ? 100 : n;
-    return n;
+    var n = isFinite(format) ? Number(format) : 100;
+    return (n <= 0) ? 1 : (n > 100) ? 100 : n;
   }
 
   function XVMCreateNewTextFormat(config_font: Object)

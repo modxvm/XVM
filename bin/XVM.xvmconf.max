@@ -56,7 +56,53 @@
         "normal": {
           "damageText": {
             "blowupMessage": "Готов"
-          }
+          },
+          "textFields": [
+            {
+              "visible": true,
+              "x": 0,
+              "y": -26,
+              "alpha": 100,
+              "color": null,
+              "font": {
+                "name": "$FieldFont",
+                "size": 13,
+                "align": "center",
+                "bold": false
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "0x000000",
+                "angle": 0,
+                "strength": 200,
+                "distance": 0,
+                "size": 3
+              },
+              "format": "{{vehicle}}"
+            },
+            {
+              "visible": true,
+              "x": 0,
+              "y": -39,
+              "alpha": "{{a:hp}}",
+              "color": "{{c:hp}}",
+              "font": {
+                "name": "$FieldFont",
+                "size": 11,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "0x000000",
+                "angle": 45,
+                "strength": 60,
+                "distance": 1,
+                "size": 1
+              },
+              "format": "{{hp}}"
+            }
+          ]
         },
         "extended": {
           "damageText": {
