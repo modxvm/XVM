@@ -26,9 +26,6 @@
         <postfix/>
         <filter type="DropShadowFilter" size="1" angle="45" distance="1" color="0x000000" alpha="100" strength="200"/>
       </combatScrollText>
-      <contourIcon>
-        <tint amount="0"/>
-      </contourIcon>
       <currentHealth>
         <format size="11" align="center" bold="true"/>
         <filter type="DropShadowFilter" size="1" angle="45" distance="1" color="0x000000" alpha="100" strength="60"/>
@@ -72,9 +69,6 @@
         <postfix/>
         <filter type="DropShadowFilter" size="1" angle="45" distance="1" color="0x000000" alpha="100" strength="200"/>
       </combatScrollText>
-      <contourIcon>
-        <tint amount="0"/>
-      </contourIcon>
       <currentHealth>
         <format size="11" align="center" bold="true"/>
         <filter type="DropShadowFilter" size="1" angle="45" distance="1" color="0x000000" alpha="100" strength="60"/>

@@ -145,9 +145,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     {
       iconLoader.addEventListener("ioError", this, "_onErrorLoad");
       iconLoader.addEventListener("complete", this, "_onCompleteLoad");
-      var color = this.colorsManager.getAliasColor(this.colorSchemeName);
-      var trans = new flash.geom.Transform(iconLoader);
-      trans.colorTransform = color.transform;
     }
     else
     {
@@ -205,8 +202,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
         m_markerState = "immediate_dead";
       marker.gotoAndPlay(m_markerState);
     }
-    var trans = new flash.geom.Transform(iconLoader);
-    trans.colorTransform = color.transform;
 
     // Update layout for the current marker state
     XVMPopulateData();
@@ -420,7 +415,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     // Vehicle Icon
     var cfg = GetCurrentStateConfigRootNormal().contourIcon;
 
-    if (cfg.amount > 0)
+    if (cfg.amount >= 0)
     {
       var iconColor: Color = new Color(iconLoader);
       var tintColor: Number = XVMColorWithFallback(cfg.color);

@@ -1,4 +1,7 @@
-XVM-1.7.test9:
+XVM-1.7.pre2:
+  * fixed contour icon color
+
+XVM-1.7.pre1:
   * fixed config loading
 
 XVM-1.7.test8:
