@@ -11,7 +11,7 @@ class wot.Main
 
   static function main()
   {
-    Config.LoadConfigAndStatLegacy("XVM.xvmconf");
+    Config.LoadConfigAndStatLegacy("XVM.xvmconf", "Main.as");
 
     instance = new Main();
 

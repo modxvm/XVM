@@ -1,3 +1,9 @@
+XVM-1.7.test9:
+  * fixed config loading
+
+XVM-1.7.test8:
+  * optimized text fields creation and usage
+
 XVM-1.7.test7:
   * fixed dynamic colors for {{hp}} and {{hp-ratio}}
   * fixed dynamic alpha

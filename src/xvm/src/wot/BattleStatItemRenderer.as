@@ -14,7 +14,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     super();
     col3.html = true;
     col3._width += 80;
-    Config.LoadConfigAndStat("XVM.xvmconf");
+    Config.LoadConfigAndStatLegacy("XVM.xvmconf", "BattleStatItemRenderer.as");
     iconLoader.addEventListener("complete", this, "completeLoad");
   }
 

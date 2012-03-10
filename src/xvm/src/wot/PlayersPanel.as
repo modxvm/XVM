@@ -15,7 +15,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   function PlayersPanel()
   {
     super();
-    Config.LoadConfigAndStat("XVM.xvmconf");
+    Config.LoadConfigAndStatLegacy("XVM.xvmconf", "PlayersPanel.as");
   }
 
   function completeLoad(event)

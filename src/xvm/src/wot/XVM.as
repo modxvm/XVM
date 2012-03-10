@@ -31,7 +31,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   var m_showMaxHealth: Boolean;
 
   // TextFields
-  var textFields: Array;
+  var textFields: Object = null;
 
   // Damage Text Settings
   var damageCfg: Object;
@@ -41,11 +41,20 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   var hbDamageBar: MovieClip;
   var hb: Object = { };
 
+  // All stated
+  var allStatesAlly: Array = [
+    "ally/alive/normal", "ally/alive/extended", "ally/dead/normal", "ally/dead/extended"
+  ]
+  var allStatesEnemy: Array = [
+    "enemy/alive/normal", "enemy/alive/extended", "enemy/dead/normal", "enemy/dead/extended"
+  ]
+
+  
   function XVM()
   {
     super();
 
-    Config.LoadConfigAndStatLegacy("XVM.xvmconf");
+    Config.LoadConfigAndStatLegacy("XVM.xvmconf", "XVM.as");
 
     damageHolder = createEmptyMovieClip("damageHolder", getNextHighestDepth());
     xvmHealthBar = createEmptyMovieClip("xvmHealthBar", getNextHighestDepth());
@@ -84,7 +93,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   {
     m_curHealth = curHealth >= 0 ? curHealth : 0;
     setupNewHealth(curHealth);
-    updateHealthUI(curHealth);
+    XVMUpdateUI(curHealth);
   }
 
   // override
@@ -220,23 +229,36 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
    * MAIN
    */
 
-  function GetCurrentStateConfigRoot()
+  function GetCurrentStateString(): String
   {
-    var result = Config.s_config.markers;
-    result = m_entityName == "enemy" ? result.enemy : result.ally;
-    result = this.vehicleDestroyed ? result.dead : result.alive;
-    result = m_showExInfo ? result.extended : result.normal;
+    var result = m_entityName == "enemy" ? "enemy/" : "ally/";
+    result += this.vehicleDestroyed ? "dead/" : "alive/";
+    result += m_showExInfo ? "extended" : "normal";
     return result;
   }
-   
+
+  function GetStateConfigRoot(stateString: String)
+  {
+    var path: Array = stateString.split("/");
+    if (path.length != 3)
+      return null;
+    var result = Config.s_config.markers;
+    result = path[0] == "ally" ? result.ally : result.enemy;
+    result = path[1] == "alive" ? result.alive : result.dead;
+    result = path[2] == "normal" ? result.normal : result.extended;
+    return result;
+  }
+
+  function GetCurrentStateConfigRoot()
+  {
+    return GetStateConfigRoot(GetCurrentStateString());
+  }
+
   function GetCurrentStateConfigRootNormal()
   {
-    var result = Config.s_config.markers;
-    result = m_entityName == "enemy" ? result.enemy : result.ally;
-    result = this.vehicleDestroyed ? result.dead : result.alive;
-    return result.normal;
+    return GetStateConfigRoot(GetCurrentStateString().split("extended").join("normal"));
   }
-   
+
   function XVMColorWithFallback(value)
   {
     if (!isNaN(value))
@@ -300,7 +322,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   function XVMCreateTextField(cfg)
   {
     //Logger.addObject(cfg);
-    var textField = createTextField("infoText", getNextHighestDepth(), 0, 0, 140, 31);
+    var n = getNextHighestDepth();
+    var textField = createTextField("textField" + n, n, 0, 0, 140, 31);
     //textField.html = false; // FIXIT: in html mode Font and Position are wrong.
     var textFormat: TextFormat = XVMCreateNewTextFormat(cfg.font);
     textField.setNewTextFormat(textFormat);
@@ -314,16 +337,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
     return { field: textField, format: cfg.format, alpha: cfg.alpha, color: cfg.color };
   }
-
-  function XVMRemoveTextFields()
-  {
-    for (var i in this.textFields)
-    {
-      this.textFields[i].field.removeTextField();
-      delete this.textFields[i].field;
-    }
-    this.textFields = [];
-  } 
 
   // Damage Visualization
   function removeTextField(f: TextField)
@@ -373,18 +386,20 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     }
   }
 
-  function updateHealthUI(curHealth)
+  function XVMUpdateUI(curHealth)
   {
-    var ratio: Number = curHealth / m_maxHealth * 100;
-    //healthField.text = m_showMaxHealth ? curHealth + " / " + m_maxHealth : curHealth;
-    //healthRatio.text = Math.ceil(ratio) + "%";
-    this.hbBar._xscale = ratio;
+    this.hbBar._xscale = curHealth / m_maxHealth * 100;
 
-    for (var i in this.textFields)
+    if (textFields)
     {
-      this.textFields[i].field.text = XVMFormatText(this.textFields[i].format, curHealth);
-      this.textFields[i].field.textColor = XVMColorWithFallback(XVMFormatText(this.textFields[i].color, curHealth));
-      this.textFields[i].field._alpha = XVMFormatAlpha(this.textFields[i].alpha, curHealth);
+      var st = GetCurrentStateString();
+      for (var i in textFields[st])
+      {
+        var tf = textFields[st][i];
+        tf.field.text = XVMFormatText(tf.format, curHealth);
+        tf.field.textColor = XVMColorWithFallback(XVMFormatText(tf.color, curHealth));
+        tf.field._alpha = XVMFormatAlpha(tf.alpha, curHealth);
+      }
     }
   }
 
@@ -432,8 +447,38 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     XVMUpdateStyle();
   }
 
+  function XVMInitializeTextFields()
+  {
+    if (!m_vname || !m_playerFullName)
+      return;
+
+    if (textFields)
+      return;
+
+    textFields = { };
+    var allStates = (m_entityName == "enemy") ? allStatesEnemy : allStatesAlly;
+    for (var stid in allStates)
+    {
+      var st = allStates[stid];
+      var cfg = GetStateConfigRoot(st);
+      var fields = [];
+      for (var i in cfg.textFields)
+      {
+        if (cfg.textFields[i].visible)
+        {
+          //if (m_entityName == "enemy")
+          //  Logger.addObject(cfg.textFields[i], m_vname + " " + m_playerFullName + " " + st);
+          fields.push(XVMCreateTextField(cfg.textFields[i]));
+        }
+      }
+      textFields[st] = fields;
+    }
+  }
+  
   function XVMPopulateData()
   {
+    //Logger.add("XVMPopulateData: " + m_vname + " " + m_playerFullName);
+
     var start = new Date();
 
     var cfg = GetCurrentStateConfigRootNormal();
@@ -484,12 +529,17 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     this.hbDamageBar._y = hb.border;
     this.hbDamageBar._xscale = 0;
 
+    // Creating text fields
+    XVMInitializeTextFields();
+
     if (DEBUG_TIMES)
       Logger.add("DEBUG TIME: XVMPopulateData(): " + Utils.elapsedMSec(start, new Date()) + " ms");
   }
 
   function XVMUpdateStyle()
   {
+    //Logger.add("XVMUpdateStyle: " + m_vname + " " + m_playerFullName);
+
     var start = new Date();
 
     try
@@ -559,15 +609,20 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       }
       xvmHealthBar._visible = visible;
 
-      // Info Text (must be optimized - it is not good to recreate objects each time)
-      XVMRemoveTextFields();
-      this.textFields = [];
-      for (var i in cfg.textFields)
-        this.textFields.push(XVMCreateTextField(cfg.textFields[i]));
+      // Text fields
+      if (textFields)
+      {
+        var st = GetCurrentStateString();
+        for (var i in textFields)
+        {
+          for (var j in textFields[i])
+            textFields[i][j].field._visible = (i == st);
+        }
+      }
 
-      // Update Colors
-      this.updateCurrentColor(m_curHealth);
-      this.updateHealthUI(m_curHealth);
+      // Update Colors and Values
+      updateCurrentColor(m_curHealth);
+      XVMUpdateUI(m_curHealth);
     }
     catch (e)
     {

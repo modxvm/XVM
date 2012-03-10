@@ -331,7 +331,7 @@ class wot.utils.OTMConfigConverter
       for (var i in infoText)
       {
         var f = GetInfoTextField(infoText[i], ocp);
-        if (f && f.format != "")
+        if (f && f.format && f.format != "")
           textFields.push(f);
       }
     }

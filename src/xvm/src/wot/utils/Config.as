@@ -17,29 +17,31 @@ class wot.utils.Config
   private static var s_load_last_stat: Boolean = false;
   private static var s_load_legacy_config: Boolean = false;
   private static var s_config_filename: String = "";
+  private static var s_src;
 
   // Load XVM mod config; config data is shared between all marker instances, so
   // it should be loaded only once per session. s_loaded flag indicates that
   // we've already initialized config loading process.
-  public static function LoadConfig(filename: String)
+  public static function LoadConfig(filename: String, src: String)
   {
     if (s_loaded)
       return;
     s_loaded = true;
     s_config_filename = filename || Defines.DEFAULT_CONFIG_NAME;
+    s_src = src || "";
     ReloadConfig();
   }
 
-  public static function LoadConfigAndStat(filename: String)
+  public static function LoadConfigAndStat(filename: String, src: String)
   {
     s_load_last_stat = true;
-    LoadConfig(filename);
+    LoadConfig(filename, src);
   }
 
-  public static function LoadConfigAndStatLegacy(filename: String)
+  public static function LoadConfigAndStatLegacy(filename: String, src: String)
   {
     s_load_legacy_config = true;
-    LoadConfigAndStat(filename);
+    LoadConfigAndStat(filename, src);
   }
 
   public static function ReloadConfig()
@@ -54,6 +56,8 @@ class wot.utils.Config
   public static function ReloadLegacyConfig()
   {
     var start = new Date();
+    if (Config.DEBUG_TIMES)
+      Logger.add("DEBUG TIME: ReloadLegacyConfig(): Start " + s_src);
     var xml:XML = new XML();
     xml.ignoreWhite = true;
     xml.onLoad = function(success: Boolean)
@@ -100,10 +104,15 @@ class wot.utils.Config
     xml.load("OTMData.xml");
   }
 
-
+  private static var _ReloadXvmConfigStarted: Boolean = false;
   private static function ReloadXvmConfig()
   {
+    if (_ReloadXvmConfigStarted)
+      return;
+    _ReloadXvmConfigStarted = true;
     var start = new Date();
+    if (Config.DEBUG_TIMES)
+      Logger.add("DEBUG TIME: ReloadXvmConfig(): Start " + s_src);
     var lv:LoadVars = new LoadVars();
     lv.onData = function(str: String)
     {
