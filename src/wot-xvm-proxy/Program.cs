@@ -178,6 +178,7 @@ namespace wot
             {
               if (wotProc == null)
                 throw new Exception("Cannot start game: " + wotExeFileName);
+              Thread.Sleep(5000);
               wotProc.WaitForExit();
               if (isLauncher && wotProc.ExitCode == 0)
               {
