@@ -15,7 +15,16 @@
     "playersPanelLargeWidth": 90
   },
   "rating": {
-    "showPlayersStatistics": true
+    "showPlayersStatistics": "true",
+    "battleLoading": {
+      "format": "<font face='Consolas' size='10' color='{{c:kb}}'>{{kb:3}}</font> <font face='Consolas' size='10' color='{{c:eff}}'>{{eff:4}}</font> <font face='Consolas' size='10' color='{{c:rating}}'>{{rating:3}}</font>"
+    },
+    "playersPanel": {
+      "format": "<font color='{{c:eff}}'>{{rating}}</font>"
+    },
+    "statisticForm": {
+      "format": "<font face='Consolas' size='10' color='{{c:kb}}'>{{kb:3}}</font> <font face='Consolas' size='10' color='{{c:eff}}'>{{eff:4}}</font> <font face='Consolas' size='10' color='{{c:rating}}'>{{rating:3}}</font>"
+    }
   },
   "alpha": {
     "hp": [
