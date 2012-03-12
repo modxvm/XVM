@@ -223,6 +223,8 @@ namespace wot
             wotVersion = "NA";
           else if (s.LastIndexOf("http://update.worldoftanks.eu") > -1)
             wotVersion = "EU";
+          else if (s.LastIndexOf("http://update-ct.worldoftanks.net") > -1)
+            wotVersion = "CT";
         }
       }
       catch (Exception ex)
@@ -237,7 +239,7 @@ namespace wot
           reader.Close();
 
       }
-      Log(2, string.Format("WoT language is: {0}", wotVersion));
+      Log(2, string.Format("WoT version is: {0}", wotVersion));
 
       return (wotVersion);
     }
@@ -543,7 +545,12 @@ namespace wot
       foreach (string server in Settings.Default.proxy_servers)
       {
         string[] s = server.Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+
         if (s.Length >= 2 && String.Compare(s[0], version, true) == 0)
+          ps.Add(s[1]);
+
+        // Added support for Common Test - currently only RU server for easiness
+        if (s.Length >= 2 && version == "CT" && String.Compare(s[0], "RU", true) == 0)
           ps.Add(s[1]);
       }
 
@@ -639,11 +646,18 @@ namespace wot
         {
           if (String.IsNullOrEmpty(stat.name))
             continue;
-          cache[stat.name.ToUpper()] = new PlayerInfo()
+          string name = forUpdateNames[forUpdate.FindIndex(x =>
+            {
+              if (!version.StartsWith("CN"))
+                return x == stat.id.ToString();
+              return x.EndsWith("-" + stat.id);
+            })];
+          cache[name.ToUpper()] = new PlayerInfo()
           {
             stat = stat,
             httpError = false
           };
+          cache[name.ToUpper()].stat.name = name;
         };
 
         // disable stat retrieving for people in cache, but not in server db

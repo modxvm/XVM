@@ -39,10 +39,10 @@ namespace wot
 
     private static void Usage()
     {
-      Console.WriteLine("Usage: wot-xvm-proxy.exe [/launcher] [/debug] [/server=(RU|EU|NA|CN1|CN2)] [file.wotreplay]");
+      Console.WriteLine("Usage: wot-xvm-proxy.exe [/launcher] [/debug] [/server=(RU|EU|NA|CN1|CN2|CT)] [file.wotreplay]");
       Console.WriteLine("  /launcher - run launcher instead of game");
       Console.WriteLine("  /debug - run in debug mode (extended log)");
-      Console.WriteLine("  /server=(RU|EU|NA|CN1|CN2) - select server (disable autodetection)");
+      Console.WriteLine("  /server=(RU|EU|NA|CN1|CN2|CT) - select server (disable autodetection)");
       Console.WriteLine("  file.wotreplay - play replay");
       Console.WriteLine("Press any key to exit.");
       Console.ReadKey(true);
