@@ -48,15 +48,24 @@ namespace wot
       Console.ReadKey(true);
     }
 
+    private static void Debug(string message)
+    {
+      if (isDebug)
+        Console.WriteLine("DEBUG: " + message);
+    }
+
     private static void Main(string[] args)
     {
       try
       {
         Console.Title = "WoT XVM Proxy v" + Assembly.GetExecutingAssembly().GetName().Version;
+        Console.WriteLine(Console.Title);
 
         // Check args
+        Debug("Processing command line arguments: " + String.Join(" ", args));
         for (int i = 0; i < args.Length; i++)
         {
+          Debug(String.Format("  {0}: {1}", i, args[i]));
           if (String.Compare(args[i], "/?", true) == 0 || String.Compare(args[i], "/help", true) == 0)
           {
             Usage();
@@ -91,9 +100,13 @@ namespace wot
             args[i] = String.Format(@"""{0}""", args[i]);
         }
 
-        Directory.SetCurrentDirectory(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location));
+        // CD to game dir
+        string game_dir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+        Debug("Change dir: " + game_dir);
+        Directory.SetCurrentDirectory(game_dir);
 
         // Check game start file exists
+        Debug("Check start file exists: " + wotExeFileName);
         if (!File.Exists(wotExeFileName))
           throw new Exception("Game start file not found: " + wotExeFileName);
 
@@ -106,8 +119,10 @@ namespace wot
           MountPoint = Path.GetFullPath(mp),
           ThreadCount = 5
         };
+        Debug("MountPoint: " + opt.MountPoint);
 
         // Unmount MountPoint if left from previous start.
+        Debug("Unmount previous mount");
         try
         {
           DokanNet.DokanRemoveMountPoint(opt.MountPoint);
@@ -118,10 +133,12 @@ namespace wot
         }
 
         // Create MountPoint directory.
+        Debug("Create MountPoint directory");
         DirectoryInfo di = new DirectoryInfo(opt.MountPoint);
         if (di.Exists)
         {
           // try to delete old Dokan link.
+          Debug("try to delete old Dokan link");
           FileAttributes fa = File.GetAttributes(opt.MountPoint);
           if ((fa & FileAttributes.ReparsePoint) != 0)
           {
@@ -163,30 +180,41 @@ namespace wot
           }
         }
 
+        Debug("Creating server thread");
         Thread thread = new Thread(StartDokan);
         try
         {
+          Debug("Starting server thread");
           thread.Start(opt);
 
           Thread.Sleep(1000);
 
-          if (thread.IsAlive)
+          if (!thread.IsAlive)
+            Debug("Dokan thread is not alive. Exiting.");
+          else
           {
+            Debug("Dokan thread is alive");
             string arg = String.Join(" ", args);
             Console.WriteLine(String.Format("Starting game process: {0} {1}", wotExeFileName, arg));
             using (Process wotProc = Process.Start(wotExeFileName, arg))
             {
+              Debug("Check game process");
               if (wotProc == null)
                 throw new Exception("Cannot start game: " + wotExeFileName);
               Thread.Sleep(5000);
+              Debug("Wait for process to exit");
               wotProc.WaitForExit();
               if (isLauncher && wotProc.ExitCode == 0)
               {
                 Console.WriteLine("Searching game process: " + WOT_PROCESS_NAME);
                 Thread.Sleep(5000);
                 Process[] wotProcesses = Process.GetProcessesByName(WOT_PROCESS_NAME);
+                Debug(String.Format("Found {0} process", wotProcesses.Length));
                 if (wotProcesses.Length > 0)
+                {
+                  Debug("Wait for process to exit");
                   wotProcesses[0].WaitForExit();
+                }
               }
             }
           }
@@ -201,19 +229,26 @@ namespace wot
             thread.Join();
           Directory.Delete(opt.MountPoint);
         }
+
+        if (isDebug)
+        {
+          Console.WriteLine("Press any key to exit.");
+          Console.ReadKey(true);
+        }
       }
       catch (Exception ex)
       {
         Console.WriteLine(String.Format("{0}{1}{1}Press any key to exit.", ex, Environment.NewLine));
         Console.ReadKey(true);
-        return;
       }
     }
 
     static void StartDokan(object opt)
     {
       // Start dokan
+      Debug("Dokan thread: Starting main loop");
       int status = DokanNet.DokanMain(opt as DokanOptions, new Server(serverVersion));
+      Debug("Dokan thread: Main loop ended");
 
       switch (status)
       {
