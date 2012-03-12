@@ -1,59 +1,32 @@
-﻿XVM-1.7.pre2:
-  * fixed contour icon color
-
-XVM-1.7.pre1:
-  * fixed config loading
-
-XVM-1.7.test8:
-  * optimized text fields creation and usage
-
-XVM-1.7.test7:
-  * fixed dynamic colors for {{hp}} and {{hp-ratio}}
-  * fixed dynamic alpha
-
-XVM-1.7.test6:
-  * fixed boolean value reading
-  * fixed initial icon positioning
-  * fixed fields size and position in battle loading screen
-  * fixed infoText "visible" field conversion
-  * fixed health bar size if created with Alt pressed
-
-XVM-1.7.test5:
-  * fixed OTMData.xml loading
-  * fixed bug with parsing empty stat data
-
-XVM-1.7.test4:
-  * fixed currentHealth/maxValue conversion
-
-XVM-1.7.test3:
-  * fixed config convertor
-  * added Shtys's sample config
-
-XVM-1.7.test2:
-  * added sample configs
-  * China servers addresses updated
-
-XVM-1.7.test1:
-  * fixed player names cutting
-  * merge сonfigs in XVM.xvmconf (with legacy support of OTMData.xml)
-  * integrate default config in code
-  * config usage optimization (avoid freezes)
-  * extended config parsing error reporting at battle loading
-  * increased width of vehicle fields in BattleLoading and StatisticForm
-  * fixed bug with endless loop when PlayersPanel width is too small
-  * check UTF-8 BOM when loading OTMData.xml
-  * config version increased: 1.1.0
-  * created method for configs backward compatibility
-  * added new macros for dynamic colors in vehicle markers: {{c:hp}}, {{c:hp-
-  ratio}}
-  * added macros of dynamic transparency: {{a:eff}}, {{a:rating}}, {{a:kb}},
-  {{a:hp}}, {{a:hp-ratio}}
-  * changed JSON parser to fixed version, than is 10x faster that present in game
-  * wot-xvm-proxy: added autodetection of game version: RU, EN, NA, CN1
-  * wot-xvm-proxy: added command line options /? and /help for displaying usage information
-  * wot-xvm-proxy: added command line option /server=(RU|EN|NA|CN1|CN2) for overriding
-    autodetection
-  * wot-xvm-proxy: added china servers support
+﻿XVM-1.7:
+  * Объединены конфиги в XVM.xvmconf (с поддержкой OTMData.xml)
+  * Увеличена версия конфига до 1.1.0 (с обратной совместимостью)
+  * Конфиг по умолчанию зашит в код
+  * Добавлена папка с примерами конфигов: \xvm-doc\samples
+  * Оптимизировано испольование конфига (предотвращение фризов)
+  * Оптимизирована работа с текстовыми полями
+  * Расширенное оповещение об ошибках в конфиге на экране загрузки боя
+  * Увеличена ширина полей в BattleLoading и StatisticForm
+  * Исправлена ошибка с бесконечным циклом в случае слишком маленьких ушей
+  * Исправлена обрезка имен игроков в ушах
+  * Добавлены новые макросы для динамического цвета в маркерах над танком:
+    {{c:hp}}, {{c:hp-ratio}}
+  * Добавлены макросы для динамической прозрачности:
+    {{a:eff}}, {{a:rating}}, {{a:kb}}, {{a:hp}}, {{a:hp-ratio}}
+  * Исправлен JSON парсер. Теперь в 10 раз бвстрее чем встроенный в игру
+  * wot-xvm-proxy: добавлено автоматическое определение версии игры:
+    RU, EN, NA, CN1
+  * wot-xvm-proxy: добавлены аргументы командной строки /? и /help для
+    отображения информации по использованию
+  * wot-xvm-proxy: добавлен аргумент командной строки
+    /server=(RU|EN|NA|CN1|CN2) для принудительного указания версии игры
+  * wot-xvm-proxy: добавлена поддержка китайских серверов
+  * wot-xvm-proxy: добавлена расширенная информация при запуске с /debug
+  * Исправлена ошибка обработки пустых данных статистики
+  * Исправлено начальное положение иконки танка
+  * Исправлены ширина и положение полей на экране загрузки боя
+  * Исправлен цвет иконок танков
+  * Много других ошибок исправлено
 
 XVM-1.6:
   * Оптимизация скорости работы
@@ -101,7 +74,7 @@ XVM-1.2:
   * Переход с XML на JSON (За исключением устаревшего OTMData.xml)
 
 XVM-1.1:
-  * исправлен цвет строки жизни союзника при использовании системного цвета
+  * Исправлен цвет строки жизни союзника при использовании системного цвета
 
 XVM-1.0:
   Первый релиз.

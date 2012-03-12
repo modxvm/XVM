@@ -1,59 +1,31 @@
-XVM-1.7.pre2:
-  * fixed contour icon color
-
-XVM-1.7.pre1:
-  * fixed config loading
-
-XVM-1.7.test8:
-  * optimized text fields creation and usage
-
-XVM-1.7.test7:
-  * fixed dynamic colors for {{hp}} and {{hp-ratio}}
-  * fixed dynamic alpha
-
-XVM-1.7.test6:
-  * fixed boolean value reading
-  * fixed initial icon positioning
-  * fixed fields size and position in battle loading screen
-  * fixed infoText "visible" field conversion
-  * fixed health bar size if created with Alt pressed
-
-XVM-1.7.test5:
-  * fixed OTMData.xml loading
-  * fixed bug with parsing empty stat data
-
-XVM-1.7.test4:
-  * fixed currentHealth/maxValue conversion
-
-XVM-1.7.test3:
-  * fixed config convertor
-  * added Shtys's sample config
-
-XVM-1.7.test2:
-  * added sample configs
-  * China servers addresses updated
-
-XVM-1.7.test1:
-  * fixed player names cutting
-  * merge ñonfigs in XVM.xvmconf (with legacy support of OTMData.xml)
+XVM-1.7:
+  * merge configs in XVM.xvmconf (with legacy support of OTMData.xml)
+  * config version increased to 1.1.0 (with backward compatibility)
   * integrate default config in code
+  * added samples configs: \xvm-doc\samples
   * config usage optimization (avoid freezes)
+  * optimized text fields creation and usage
   * extended config parsing error reporting at battle loading
   * increased width of vehicle fields in BattleLoading and StatisticForm
   * fixed bug with endless loop when PlayersPanel width is too small
-  * check UTF-8 BOM when loading OTMData.xml
-  * config version increased: 1.1.0
-  * created method for configs backward compatibility
-  * added new macros for dynamic colors in vehicle markers: {{c:hp}}, {{c:hp-
-  ratio}}
-  * added macros of dynamic transparency: {{a:eff}}, {{a:rating}}, {{a:kb}},
-  {{a:hp}}, {{a:hp-ratio}}
-  * changed JSON parser to fixed version, than is 10x faster that present in game
+  * fixed player names cutting
+  * added new macros for dynamic colors in vehicle markers:
+    {{c:hp}}, {{c:hp-ratio}}
+  * added macros of dynamic transparency:
+    {{a:eff}}, {{a:rating}}, {{a:kb}}, {{a:hp}}, {{a:hp-ratio}}
+  * changed JSON parser to fixed version, than is 10x faster that internal
   * wot-xvm-proxy: added autodetection of game version: RU, EN, NA, CN1
-  * wot-xvm-proxy: added command line options /? and /help for displaying usage information
-  * wot-xvm-proxy: added command line option /server=(RU|EN|NA|CN1|CN2) for overriding
-    autodetection
+  * wot-xvm-proxy: added command line options /? and /help for displaying
+    usage information
+  * wot-xvm-proxy: added command line option /server=(RU|EN|NA|CN1|CN2) for
+    overriding autodetection
   * wot-xvm-proxy: added china servers support
+  * wot-xvm-proxy: added extended debug information with /debug option
+  * fixed bug with parsing empty stat data
+  * fixed initial icon positioning
+  * fixed fields size and position in battle loading screen
+  * fixed contour icon color
+  * many other bugs fixed
 
 XVM-1.6:
   * Speed optimization

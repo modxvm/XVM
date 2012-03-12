@@ -6,7 +6,14 @@ This mod is a successor of the next mods:
   * In-game players rating
 
 Project site: http://code.google.com/p/wot-xvm/
-Support:      http://forum.bulychev.net/viewforum.php?f=6
+Support:      http://forum.bulychev.net/viewforum.php?f=7
+
+Mod config files:
+  \res_mods\<game version>\gui\flash\XVM.xvmconf (main config file)
+  \res_mods\<game version>\gui\flash\OTMData.xml (in legacy mode)
+You can select ready config file from \xvm-doc\samples\ directory
+You can create new config or edit existing using online editor:
+  http://bulychev.net/generator/
 
 XVM.xvmconf parameters:
 
@@ -43,6 +50,45 @@ rating
                                   statistics window (when Tab pressed)
     format:               "text" - format of field
 
+colors
+  eff: [ ]              array of values for dynamic colors by efficiency
+  rating: [ ]           array of values for dynamic colors by GWR
+  kb: [ ]               array of values for dynamic colors by kilo-battles
+  hp: [ ]               array of values for dynamic colors by health points (only in markers)
+  hp_ratio: [ ]         array of values for dynamic colors by health ratio (only in markers)
+
+alpha
+  eff: [ ]              array of values for dynamic transparency by efficiency
+  rating: [ ]           array of values for dynamic transparency by GWR
+  kb: [ ]               array of values for dynamic transparency by kilo-battles
+  hp: [ ]               array of values for dynamic transparency by health points (only in markers)
+  hp_ratio: [ ]         array of values for dynamic transparency by health ratio (only in markers)
+
+markers
+  ally
+    alive
+      normal
+        vehicleIcon:    vehicle icon settings for current state of marker
+        healthBar:      health bar settings for current state of marker
+        damageText:     floating damage text settings for current state of marker
+        contourIcon:    vehicle icon settings for current state of marker
+        levelIcon:      level icon settings for current state of marker
+        actionMarker:   action marker settings for current state of marker
+        textFields: [ ] array of text fields for current state of marker
+      extended: ...
+    dead
+      normal: ...
+      extended: ...
+  enemy
+    alive
+      normal: ...
+      extended: ...
+    dead
+      normal: ...
+      extended: ...
+
+
+(Obsolete, new config file XVM.xvmconf usage is recommended)
 Enhancements not available from OTM Editor (OTMData.xml):
 
 - If 'color' attribute is absent, mod will use defaulr client color for this
@@ -103,15 +149,15 @@ Macros available:
     {{c:eff}}      - color depended from player efficiency
     {{c:rating}}   - color depended from GWR
     {{c:kb}}       - color depended from kilo-battles
-    {{c:hp}}       - color depended from current health points
-    {{c:hp-ratio}} - color depended from current health ratio
+    {{c:hp}}       - color depended from current health points (only in vehicle markers)
+    {{c:hp-ratio}} - color depended from current health ratio (only in vehicle markers)
 
   Dynamic transparency macros:
     {{a:eff}}      - transparency depended from player efficiency
     {{a:rating}}   - transparency depended from GWR
     {{a:kb}}       - transparency depended from kilo-battles
-    {{a:hp}}       - transparency depended from current health points
-    {{a:hp-ratio}} - transparency depended from current health ratio
+    {{a:hp}}       - transparency depended from current health points (only in vehicle markers)
+    {{a:hp-ratio}} - transparency depended from current health ratio (only in vehicle markers)
 
 "format" field examples:
 

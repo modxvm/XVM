@@ -1,14 +1,30 @@
 1. Microsoft .NET Framework 2.0 is required.
+   You can check your installed .NET versions using this utility:
+     http://www.tmgdevelopment.co.uk/versioncheck.htm
 2. Install DokanLibrary: http://dokan-dev.net/en/download/#dokan
-3. Unzip archive to game folder
-4. Setup config \res_mods\<game version>\gui\flash\XVM.xvmconf
-   You can choose ready config from \xvm-doc\samples\ folder, or use
-   generator: http://bulychev.net/generator/
+3. Unzip archive to game folder:
+   Right click to archive -> "Exctract all..." -> select game folder -> "Extract"
+4. You can setup config file if you need:
+     \res_mods\<game version>\gui\flash\XVM.xvmconf
+   You can select ready config file from \xvm-doc\samples\ directory, or use
+   online editor: http://bulychev.net/generator/
+   Old OTMData.xml configs are also supported in legacy mode, you can use if if
+   you do not need new features.
+   All possible config options you can see in this file:
+     \xvm-doc\samples\Full config\XVM.xvmconf
+   Note: Statistics is turned off by default, and if you want it, you need to
+   enable it in editor, or you can get ready config.
    Note: If you changing config manually, use Notepad, DO NOT use MS Word,
    WordPad and such editors.
-5. Run game with wot-xvm-proxy.exe.
-   Run launcher with command:
-     wot-xvm-proxy.exe /launcher
-
-If you use Skype, in Tools -> Options -> Advanced -> Connection
-REMOVE CHECK "Use port 80 and 443 as alternatives for incoming connections".
+5. If you do not want statistics, run game as usual.
+   If you want statistics, run wot-xvm-proxy.exe (game will be started
+   automatically).
+   If you want statistics and game launcher, start with /launcher argument:
+     Create shortcut wot-xvm-proxy.exe
+     Open Properties
+     Write 'wot-xvm-proxy.exe /launcher' (without quotas) in Object field
+     Press OK
+6. If you use Skype, in Tools -> Options -> Advanced -> Connection ->
+   REMOVE CHECK "Use port 80 and 443 as alternatives for incoming connections".
+7. If you want to send bug report, run wot-xvm-proxy.exe with /debug argument
+   and add console output to report.
