@@ -17,6 +17,16 @@ class wot.utils.Utils
     return -1;
   }
 
+  public static function startsWith(substr: String, str: String): Boolean
+  {
+    return str.indexOf(substr, 0) == 0;
+  }
+
+  public static function endsWith(substr: String, str: String): Boolean
+  {
+    return str.lastIndexOf(substr) == (str.length - substr.length);
+  }
+
   public static function trim(str: String): String
   {
     while (str.charAt(0) == " ")

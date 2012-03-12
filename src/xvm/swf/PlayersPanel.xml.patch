@@ -1,6 +1,17 @@
---- PlayersPanel-0.7.1.xml	2012-02-07 12:12:06.045315900 +0200
-+++ PlayersPanel.xml	2012-02-07 23:14:58.018155400 +0200
-@@ -51181,7 +51181,7 @@
+--- PlayersPanel-0.7.2-test1.xml	2012-03-12 15:30:03.091364600 +0200
++++ PlayersPanel.xml	2012-03-12 15:30:01.425198000 +0200
+@@ -55258,8 +55258,8 @@
+               <String value="charAt"/>
+               <String value=" "/>
+               <String value="\"/>
+-              <String value=""/>
+-              <String value=""/>
++<!--              <String value="&#08;"/>-->
++<!--              <String value="&#12;"/>-->
+               <String value="&#10;"/>
+               <String value="&#13;"/>
+               <String value="&#9;"/>
+@@ -59423,7 +59423,7 @@
          <actions>
            <PushData>
              <items>

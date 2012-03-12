@@ -44,7 +44,7 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
 
     setInfoFieldData({ });
     
-    // Force stats loading after 1 sec (for 12x12 battles or FogOfWar)
+    // Force stats loading after 1 sec (for 12x12 battles, FogOfWar, ...)
     var timer: TimelineLite = new TimelineLite({onComplete:StartLoadData, onCompleteParams:[]});
     timer.insert(new TweenLite(null, 1));
   }

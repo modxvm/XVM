@@ -22,11 +22,14 @@ class wot.utils.Stat
 
   // Misc functions
 
-  public static function CleanPlayerName(str)
+  public static function CleanPlayerName(str: String)
   {
     str = str.toLowerCase();
     var pos = str.indexOf("[");
-    return pos === -1 ? str : str.slice(0, pos);
+    if (pos >= 0)
+      str = str.slice(0, pos);
+
+    return str;
   }
 
   public static function ToNumber(value)
@@ -416,7 +419,7 @@ class wot.utils.Stat
     {
       var pdata = s_player_data[pname];
       if (pdata.reference)
-        pdata.reference.updateCallback(pdata);
+        pdata.reference.XVMStatUpdateCallback(pdata);
     }
   }
 
