@@ -21,20 +21,24 @@
   var levelIcon;
   var actionMarker;
   var healthBar: MovieClip;
+  var bgShadow: MovieClip;
 
   function get colorsManager();
   function get colorSchemeName();
   function get vehicleDestroyed();
 
   function init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt);
+  function updateMarkerSettings();
+  function updateHealth(curHealth);
   function updateState(newState, isImmediate);
+  function showExInfo(show);
   function configUI();
-  function draw();
   function populateData();
   function initMarkerLabel();
   function updateMarkerLabel();
-  function invalidate();
-  function setVehicleClass();
   function _onErrorLoad(event);
   function _onCompleteLoad(event);
+
+  function invalidate();
+  function setVehicleClass();
 }

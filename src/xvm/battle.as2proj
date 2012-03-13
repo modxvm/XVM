@@ -36,9 +36,6 @@
   </build>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="src\wot\ingame\VehicleMarkerAlly.as" />
-    <compile path="src\wot\ingame\VehicleMarkerEnemy.as" />
-    <compile path="src\wot\Main.as" />
     <compile path="src\wot\BattleMain.as" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->

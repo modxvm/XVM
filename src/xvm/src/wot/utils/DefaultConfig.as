@@ -23,6 +23,8 @@ class wot.utils.DefaultConfig
         modMinVersion: Defines.XVM_VERSION
       },
       battle: {
+        /* true - включить режим цветовой слепоты */
+//        isColorBlind: false,
         /* false - отключить зеркалирование иконок танков (полезно для альтернативных иконок) */
         mirroredVehicleIcons: true,
         /* false - отключить всплывающую внизу панель после смерти */
@@ -62,6 +64,18 @@ class wot.utils.DefaultConfig
       },
       colors: {
         /* values - from min to max, colors are for values 'lesser then ...' */
+        hp: [
+          { value: 200,  color: 0xDD0000 },
+          { value: 400,  color: 0xDD3333 },
+          { value: 1000, color: 0xFFCC33 },
+          { value: 9999, color: 0xFFFFFF }
+        ],
+        hp_ratio: [
+          { value: 10,  color: 0xDD0000 },
+          { value: 25,  color: 0xDD3333 },
+          { value: 50,  color: 0xFFCC33 },
+          { value: 101, color: 0xFFFFFF }
+        ],
         eff: [
           { value: 600,  color: 0xDD0000 },
           { value: 900,  color: 0xDD3333 },
@@ -86,18 +100,6 @@ class wot.utils.DefaultConfig
           { value: 8,   color: 0x99FF33 },
           { value: 12,  color: 0x33FF33 },
           { value: 999, color: 0xCC66CC }
-        ],
-        hp: [
-          { value: 200,  color: 0xDD0000 },
-          { value: 400,  color: 0xDD3333 },
-          { value: 1000, color: 0xFFCC33 },
-          { value: 9999, color: 0xFFFFFF }
-        ],
-        hp_ratio: [
-          { value: 10,  color: 0xDD0000 },
-          { value: 25,  color: 0xDD3333 },
-          { value: 50,  color: 0xFFCC33 },
-          { value: 101, color: 0xFFFFFF }
         ]
       },
       alpha: {

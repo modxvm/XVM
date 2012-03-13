@@ -38,7 +38,6 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
   {
     if (data && Config.s_config.rating.showPlayersStatistics)
     {
-      wot.utils.Logger.add("BattleLoadingItemRenderer.setData():" + data.label + " = " + Stat.CleanPlayerName(data.label));
       if (!_logShown)
       {
         _logShown = true;

@@ -15,4 +15,5 @@
   function onRecreateDevice(width, height);
   function _setNamesStr(data, sel, isColorBlind, knownPlayersCount);
   function _getHTMLText(colorScheme, text);
+  function updateWidthOfLongestName();
 }

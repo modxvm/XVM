@@ -98,79 +98,92 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   function _setNamesStr(data, sel, isColorBlind, knownPlayersCount)
   {
     var _loc7 = "";
-    var _loc5 = "";
+    var _loc9 = "";
+    var _loc3 = "";
     var _loc8 = 0;
 
     for (var _loc2 = 0; _loc2 < data.length; ++_loc2)
     {
-      _loc5 = data[_loc2].label.slice(0, net.wargaming.ingame.PlayersPanel.PLAYER_NAME_LENGTH[m_state]);
+      _loc3 = data[_loc2].label.slice(0, net.wargaming.ingame.PlayersPanel.PLAYER_NAME_LENGTH[m_state]);
 
-      if (m_state == "large")
-      {
-        // What is the better way to cut player names?
-        if (!m_widthTester)
-        {
-          m_widthTester = _root.createTextField("widthTester", _root.getNextHighestDepth(), 0, 0, m_names._width, m_names._height);
-          m_widthTester.setTextFormat(m_names.getTextFormat());
-          m_widthTester.autoSize = true;
-          m_widthTester.html = true;
-          m_widthTester._visible = false;
-        }
-        
-        var pname: String = data[_loc2].label;
-        while (pname.length >= 0)
-        {
-          _loc5 = (pname == data[_loc2].label || pname.length == 0) ? pname : pname + "...";
-          if (Stat.s_player_ratings && Config.s_config.rating.playersPanel.show)
-          {
-            _loc5 = Stat.DecorateField(data[_loc2], _loc5,
-              Config.s_config.rating.playersPanel.format,
-              m_type == "left" ? Defines.POSITION_LEFT : Defines.POSITION_RIGHT);
-          }
-          if (pname.length == 0)
-            break;
-          m_widthTester.htmlText = _loc5;
-          if (m_widthTester._width <= m_names._width)
-            break;
-          pname = pname.substr(0, pname.length - 1);
-        }
-      }
-      else
-      {
-        if (Stat.s_player_ratings)
-        {
-          var middleColor: String = Config.s_config.rating.playersPanel.middleColor;
-          if (middleColor)
-            _loc5 = Stat.FormatText(data[_loc2], "<font color='" + middleColor + "'>" + _loc5 + "</font>");
-        }
-      }
+      _loc3 = XVMSetNamesStr(data[_loc2], _loc3);
 
+      _loc9 = data[_loc2].clanAbbrev;
       _loc8 = data[_loc2].vehicleState;
-      var _loc3 = (_loc8 & net.wargaming.ingame.VehicleStateInBattle.IS_AVATAR_READY) != 0;
-      var _loc4 = (_loc8 & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0;
+      var _loc4 = (_loc8 & net.wargaming.ingame.VehicleStateInBattle.IS_AVATAR_READY) != 0;
+      var _loc6 = (_loc8 & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0;
+      if (_loc9 != "")
+      {
+        _loc3 = _loc3 + ("[" + _loc9 + "]");
+      }
       if (_loc2 == sel)
       {
-          _loc7 = _loc7 + this._getHTMLText(_loc4 && _loc3 ? ("selected") : ("selected_dead"), _loc5);
-          continue;
+        _loc7 = _loc7 + this._getHTMLText(_loc4 ? ("selected") : ("selected_dead"), _loc3);
+        continue;
       }
       if (data[_loc2].VIP)
       {
-          _loc7 = _loc7 + this._getHTMLText(_loc4 && _loc3 ? ("VIP") : ("VIP_dead"), _loc5);
-          continue;
+        _loc7 = _loc7 + this._getHTMLText(_loc6 && _loc4 ? ("VIP") : ("VIP_dead"), _loc3);
+        continue;
       }
       if (data[_loc2].squad > 10)
       {
-          _loc7 = _loc7 + this._getHTMLText(_loc4 && _loc3 ? ("squad") : ("squad_dead"), _loc5);
-          continue;
+        _loc7 = _loc7 + this._getHTMLText(_loc6 && _loc4 ? ("squad") : ("squad_dead"), _loc3);
+        continue;
       }
       if (data[_loc2].teamKiller)
       {
-          _loc7 = _loc7 + this._getHTMLText(_loc4 && _loc3 ? ("teamkiller") : ("teamkiller_dead"), _loc5);
-          continue;
+        _loc7 = _loc7 + this._getHTMLText(_loc6 && _loc4 ? ("teamkiller") : ("teamkiller_dead"), _loc3);
+        continue;
       }
-      _loc7 = _loc7 + this._getHTMLText(_loc4 && _loc3 ? ("normal") : ("normal_dead"), _loc5);
+      _loc7 = _loc7 + this._getHTMLText(_loc6 && _loc4 ? ("normal") : ("normal_dead"), _loc3);
     }
 
     m_names.htmlText = _loc7;
+    this.updateWidthOfLongestName();
+  }
+
+  function XVMSetNamesStr(data, str)
+  {
+    if (m_state == "large")
+    {
+      // What is the better way to cut player names?
+      if (!m_widthTester)
+      {
+        m_widthTester = _root.createTextField("widthTester", _root.getNextHighestDepth(), 0, 0, m_names._width, m_names._height);
+        m_widthTester.setTextFormat(m_names.getTextFormat());
+        m_widthTester.autoSize = true;
+        m_widthTester.html = true;
+        m_widthTester._visible = false;
+      }
+
+      var pname: String = data.label;
+      while (pname.length >= 0)
+      {
+        str = (pname == data.label || pname.length == 0) ? pname : pname + "...";
+        if (Stat.s_player_ratings && Config.s_config.rating.playersPanel.show)
+        {
+          str = Stat.DecorateField(data, str,
+            Config.s_config.rating.playersPanel.format,
+            m_type == "left" ? Defines.POSITION_LEFT : Defines.POSITION_RIGHT);
+        }
+        if (pname.length == 0)
+          break;
+        m_widthTester.htmlText = str;
+        if (m_widthTester._width <= m_names._width)
+          break;
+        pname = pname.substr(0, pname.length - 1);
+      }
+    }
+    else
+    {
+      if (Stat.s_player_ratings)
+      {
+        var middleColor: String = Config.s_config.rating.playersPanel.middleColor;
+        if (middleColor)
+          str = Stat.FormatText(data, "<font color='" + middleColor + "'>" + str + "</font>");
+      }
+    }
+    return str;
   }
 }

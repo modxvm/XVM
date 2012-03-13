@@ -85,6 +85,16 @@ class wot.utils.Utils
     }
   }
 
+  public static function CleanPlayerName(str: String)
+  {
+    str = str.toLowerCase();
+    var pos = str.indexOf("[");
+    if (pos >= 0)
+      str = str.slice(0, pos);
+
+    return str;
+  }
+
   public static function toInt(value: Object, defaultValue: Number): Number
   {
     if (!defaultValue)

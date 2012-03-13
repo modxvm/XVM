@@ -23,7 +23,7 @@
     <option verbose="False" />
     <option strict="False" />
     <option infer="True" />
-    <option useMain="True" />
+    <option useMain="False" />
     <option useMX="False" />
     <option warnUnusedImports="True" />
     <option traceMode="Disable" />

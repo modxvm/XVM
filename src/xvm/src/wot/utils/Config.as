@@ -13,7 +13,8 @@ class wot.utils.Config
 
   // Private vars
   public static var s_config: Object;
-  private static var s_loaded: Boolean = false;
+  public static var s_loaded: Boolean = false;
+  private static var s_loading: Boolean = false;
   private static var s_load_last_stat: Boolean = false;
   private static var s_load_legacy_config: Boolean = false;
   private static var s_config_filename: String = "";
@@ -24,9 +25,9 @@ class wot.utils.Config
   // we've already initialized config loading process.
   public static function LoadConfig(filename: String, src: String)
   {
-    if (s_loaded)
+    if (s_loading || s_loaded)
       return;
-    s_loaded = true;
+    s_loading = true;
     s_config_filename = filename || Defines.DEFAULT_CONFIG_NAME;
     s_src = src || "";
     ReloadConfig();
@@ -116,54 +117,61 @@ class wot.utils.Config
     var lv:LoadVars = new LoadVars();
     lv.onData = function(str: String)
     {
-      if (str)
+      try
       {
-        var diff = 0;
-        if (Config.DEBUG_TIMES)
+        if (str)
         {
-          var curr = Utils.elapsedMSec(start, new Date());
-          Logger.add("DEBUG TIME: ReloadXvmConfig(): Load:  " + (curr - diff) + " ms");
-          diff = curr;
-        }
-        try
-        {
-          var config = wot.utils.JSON.parse(str);
-          
+          var diff = 0;
           if (Config.DEBUG_TIMES)
           {
             var curr = Utils.elapsedMSec(start, new Date());
-            Logger.add("DEBUG TIME: ReloadXvmConfig(): Parse: " + (curr - diff) + " ms");
+            Logger.add("DEBUG TIME: ReloadXvmConfig(): Load:  " + (curr - diff) + " ms");
             diff = curr;
           }
-          if (!config)
-            wot.BattleLoading.setInfoFieldData( { error: "Error parsing config file. Using default settings." } );
-          else
+          try
           {
-            Config.s_config = Config.MergeConfigs(Config.FixConfig(config), Config.s_config);
-            //Logger.addObject(Config.s_config);
+            var config = wot.utils.JSON.parse(str);
+            
             if (Config.DEBUG_TIMES)
             {
               var curr = Utils.elapsedMSec(start, new Date());
-              Logger.add("DEBUG TIME: ReloadXvmConfig(): Apply: " + (curr - diff) + " ms");
+              Logger.add("DEBUG TIME: ReloadXvmConfig(): Parse: " + (curr - diff) + " ms");
+              diff = curr;
+            }
+            if (!config)
+              wot.BattleLoading.setInfoFieldData( { error: "Error parsing config file. Using default settings." } );
+            else
+            {
+              Config.s_config = Config.MergeConfigs(Config.FixConfig(config), Config.s_config);
+              //Logger.addObject(Config.s_config);
+              if (Config.DEBUG_TIMES)
+              {
+                var curr = Utils.elapsedMSec(start, new Date());
+                Logger.add("DEBUG TIME: ReloadXvmConfig(): Apply: " + (curr - diff) + " ms");
+              }
             }
           }
+          catch (ex)
+          {
+            var txt = str.substring(ex.at - 50, ex.at - 1) + ">>>" + str.charAt(ex.at) + "<<<" + str.substr(ex.at + 1, 50);
+            txt = txt.split("\r").join("").split("\n").join("");
+            while (txt.indexOf("  ") != -1)
+              txt = txt.split("  ").join(" ");
+            wot.BattleLoading.setInfoFieldData( { error: "Error loading config file. Using default settings.\n" + 
+              "[" + Utils.trim(ex.at) + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " + txt } );
+          }
         }
-        catch (ex)
+        else
         {
-          var txt = str.substring(ex.at - 50, ex.at - 1) + ">>>" + str.charAt(ex.at) + "<<<" + str.substr(ex.at + 1, 50);
-          txt = txt.split("\r").join("").split("\n").join("");
-          while (txt.indexOf("  ") != -1)
-            txt = txt.split("  ").join(" ");
-          wot.BattleLoading.setInfoFieldData( { error: "Error loading config file. Using default settings.\n" + 
-            "[" + Utils.trim(ex.at) + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " + txt } );
+          wot.BattleLoading.setInfoFieldData({ error: "Error loading config file. Using default settings." });
         }
+        if (Config.s_load_last_stat && Config.s_config.rating.showPlayersStatistics)
+          Stat.LoadStatData(Defines.COMMAND_GET_LAST_STAT);
       }
-      else
+      finally
       {
-        wot.BattleLoading.setInfoFieldData({ error: "Error loading config file. Using default settings." });
+        Config.s_loaded = true;
       }
-      if (Config.s_load_last_stat && Config.s_config.rating.showPlayersStatistics)
-        Stat.LoadStatData(Defines.COMMAND_GET_LAST_STAT);
     };
     lv.load(s_config_filename);
   }
