@@ -1,0 +1,31 @@
+--- VehicleMarkersManager-0.7.2-test1.xml	2012-03-12 15:30:06.390694500 +0200
++++ VehicleMarkersManager.xml	2012-03-12 15:30:04.643519800 +0200
+@@ -25696,8 +25696,8 @@
+               <String value="charAt"/>
+               <String value=" "/>
+               <String value="\"/>
+-              <String value=""/>
+-              <String value=""/>
++<!--              <String value="&#08;"/>-->
++<!--              <String value="&#12;"/>-->
+               <String value="&#10;"/>
+               <String value="&#13;"/>
+               <String value="&#9;"/>
+@@ -40026,7 +40026,7 @@
+         <actions>
+           <PushData>
+             <items>
+-              <StackString value="net.wargaming.ingame.VehicleMarkerEnemy"/>
++              <StackString value="wot.ingame.VehicleMarkerEnemy"/>
+             </items>
+           </PushData>
+           <GetVariable/>
+@@ -40052,7 +40052,7 @@
+         <actions>
+           <PushData>
+             <items>
+-              <StackString value="net.wargaming.ingame.VehicleMarkerAlly"/>
++              <StackString value="wot.ingame.VehicleMarkerAlly"/>
+             </items>
+           </PushData>
+           <GetVariable/>
