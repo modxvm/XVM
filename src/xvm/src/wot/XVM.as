@@ -328,7 +328,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     return false;
   }
 
-  function XVMGetCurrentMarkerState()
+  function XVMGetSystemColorName()
   {
     var state: String = m_entityName + "_";
     state += (!vehicleDestroyed) ? "alive_" : m_isBlowedUp ? "blowedup_" : "dead_";
@@ -361,15 +361,10 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     return format;
   }
 
-  function XVMColorWithFallback(value)
-  {
-    return isFinite(value) ? Number(value) : Defines.SYSTEM_COLORS[XVMGetCurrentMarkerState()];
-  }
-
   function XVMFormatColor(format: String, curHealth: Number): Number
   {
     if (!format)
-      return Defines.SYSTEM_COLORS[XVMGetCurrentMarkerState()];
+      return Defines.SYSTEM_COLORS[XVMGetSystemColorName()];
 
     if (isFinite(format))
       return Number(format);
@@ -380,7 +375,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     format = format.split("{{c:hp}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth, "0x"));
     format = format.split("{{c:hp-ratio}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"));
 
-    return isFinite(format) ? Number(format) : Defines.SYSTEM_COLORS[XVMGetCurrentMarkerState()];
+    return isFinite(format) ? Number(format) : Defines.SYSTEM_COLORS[XVMGetSystemColorName()];
   }
 
   function XVMFormatAlpha(format: String, curHealth: Number): Number
@@ -460,7 +455,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     damageField.border = false;
     damageField.embedFonts = true;
     damageField.setTextFormat(XVMCreateNewTextFormat(cfg.font));
-    damageField.textColor = XVMColorWithFallback(cfg.color);
+    damageField.textColor = isFinite(cfg.color) ? Number(cfg.color)
+      : Defines.SYSTEM_COLORS[m_entityName + "_alive_" + (XVMIsColorBlindMode() ? "blind" : "normal")];
     damageField._x = -(damageField._width >> 1);
     damageField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
 
