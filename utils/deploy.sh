@@ -1,13 +1,22 @@
 #!/bin/sh
 
 GAME_VER="0.7.2 Common Test"
+FILES="battle.swf battleloading.swf PlayersPanel.swf VehicleMarkersManager.swf XVM.xvmconf OTMData.xml"
 
 cd $(dirname $(realpath $(cygpath --unix $0)))
 
 [ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/home/games/WoT-test
 SWF_DIR="$WOT_DIRECTORY/res_mods/$GAME_VER/gui/flash"
-cp ../bin/*.swf "$SWF_DIR" 2>/dev/null
-[ -f "$SWF_DIR/XVM.xvmconf" ] && rm -f "$SWF_DIR/XVM.xvmconf"
-[ -f "../bin/XVM.xvmconf" ] && cp ../bin/XVM.xvmconf "$SWF_DIR/XVM.xvmconf"
-[ -f "$SWF_DIR/OTMData.xml" ] && rm -f "$SWF_DIR/OTMData.xml"
-[ -f "../bin/OTMData.xml" ] && cp ../bin/OTMData.xml "$SWF_DIR/OTMData.xml"
+
+copy_file()
+{
+  [ -f "$SWF_DIR/$1" ] && rm -f "$SWF_DIR/$1"
+  [ -f "../bin/$1" ] && {
+    echo "=> $1"
+    cp ../bin/$1 "$SWF_DIR/$1"
+  }
+}
+
+for file in $FILES; do
+  copy_file $file
+done
