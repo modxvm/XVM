@@ -282,9 +282,14 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   // override
   function _onCompleteLoad(event)
   {
-    XVMIconCompleteLoad(event);
+    iconLoader._visible = false;
+    onEnterFrame = function()
+    {
+      this.XVMIconCompleteLoad();
+      delete this.onEnterFrame;
+    };
   }
-  
+
   /**
    * MAIN
    */
@@ -405,8 +410,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
     textField.textColor = XVMColorWithFallback(XVMFormatText(cfg.color, m_curHealth));
     textField._alpha = XVMFormatAlpha(cfg.alpha, m_curHealth);
-    textField._x = cfg.x - textField._width / 2.0;
-    textField._y = cfg.y - textField._height / 2.0;
+    textField._x = cfg.x - (textField._width >> 1);
+    textField._y = cfg.y - (textField._height >> 1);
     textField._visible = cfg.visible;
 
     return { field: textField, format: cfg.format, alpha: cfg.alpha, color: cfg.color };
@@ -679,8 +684,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
         visible = cfg.contourIcon.visible;
         if (visible)
         {
-          iconLoader._x = cfg.contourIcon.x - iconLoader.__width / 2;
-          iconLoader._y = cfg.contourIcon.y - iconLoader.__height / 2;
+          iconLoader._x = cfg.contourIcon.x - (iconLoader.__get__content()._width >> 1);
+          iconLoader._y = cfg.contourIcon.y - (iconLoader.__get__content()._height >> 1);
           iconLoader._alpha = XVMFormatAlpha(cfg.contourIcon.alpha, m_curHealth);
         }
         iconLoader._visible = visible;
