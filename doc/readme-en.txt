@@ -122,8 +122,19 @@ Enhancements not available from OTM Editor (OTMData.xml):
   'behavior/*/*/*/infoText' set position and content of text fields
 
 Macros available:
+  In battleLoading, playersPanel, statisticForm (not implemented yet):
+    {{nick}}       - player name
+    {{vehicle}}    - vehicle name
+    {{level}}      - vehicle level
 
-Используемые макросы:
+  In tank markers:
+    {{hp}}         - current health points
+    {{hp-ratio}}   - current health ratio (without '%' sign)
+    {{hp-max}}     - maximum health points
+    {{nick}}       - player name
+    {{vehicle}}    - vehicle name
+    {{level}}      - vehicle level
+
   Statistics macros ('rating/showPlayersStatistics' must be anabled):
     {{rating}}     - GWR (Global Win Ratio)
     {{eff}}        - player efficiency (http://wot-news.com/index.php/stat/calc/en/)
@@ -134,30 +145,19 @@ Macros available:
     {{eff:4}}      - player efficiency aligned from left to 4 chars
     {{kb:3}}       - number of kilo-battles aligned from left to 3 chars
 
-  In battleLoading, playersPanel, statisticForm (not implemented yet):
-    {{nick}}       - player name
-    {{vehicle}}    - vehicle name
-
-  In tank markers:
-    {{hp}}         - current health points
-    {{hp-ratio}}   - current health ratio (without '%' sign)
-    {{hp-max}}     - maximum health points
-    {{nick}}       - player name
-    {{vehicle}}    - vehicle name
-
   Dynamic colors macros:
+    {{c:hp}}       - color depended from current health points (only in vehicle markers)
+    {{c:hp-ratio}} - color depended from current health ratio (only in vehicle markers)
     {{c:eff}}      - color depended from player efficiency
     {{c:rating}}   - color depended from GWR
     {{c:kb}}       - color depended from kilo-battles
-    {{c:hp}}       - color depended from current health points (only in vehicle markers)
-    {{c:hp-ratio}} - color depended from current health ratio (only in vehicle markers)
 
   Dynamic transparency macros:
+    {{a:hp}}       - transparency depended from current health points (only in vehicle markers)
+    {{a:hp-ratio}} - transparency depended from current health ratio (only in vehicle markers)
     {{a:eff}}      - transparency depended from player efficiency
     {{a:rating}}   - transparency depended from GWR
     {{a:kb}}       - transparency depended from kilo-battles
-    {{a:hp}}       - transparency depended from current health points (only in vehicle markers)
-    {{a:hp-ratio}} - transparency depended from current health ratio (only in vehicle markers)
 
 "format" field examples:
 

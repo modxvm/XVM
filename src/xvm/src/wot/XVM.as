@@ -345,6 +345,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     format = format.split("{{hp-ratio}}").join(String(hpRatio));
     format = format.split("{{nick}}").join(m_playerFullName);
     format = format.split("{{vehicle}}").join(m_vname);
+    format = format.split("{{level}}").join(m_level);
 
     var dmgRatio: Number = delta ? Math.ceil(delta / m_maxHealth * 100) : 0;
     format = format.split("{{dmg}}").join(delta ? String(delta) : "");

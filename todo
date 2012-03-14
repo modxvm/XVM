@@ -30,7 +30,6 @@ battle.swf:
   - eval()
   - различные профили в одном файле конфигурации
   - добавить к Vehicle Icon, Contour Icon эфекты тени так, как к примеру у Player Name?
-  - уровень танка арабскими цифрами
   - динамически создавать элементы маркера по типам (text/image/healthBar/...).
   - добавить по аналогии с тегом lcolor тег lalpha
 
@@ -41,3 +40,8 @@ PlayersPanel.swf:
   в конфиг файле хранить имена пользователей/кланов, статистику которых запрашивать не стоит.
   собственную к примеру и своих друзей. это не отвлекает и возможно привлечет внимание,
   если в рандоме соклановцы.
+
+  When players die their nicknames in PlayerPanel do not change colour, I would like dead
+  players to have alpha = 30 on their nicknames or something similar, this way they would be
+  much more extinguishable from alive players, right now it is hard to see how many players
+  are left without having to focus in the playerpanel completly.
