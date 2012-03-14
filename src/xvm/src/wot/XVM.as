@@ -34,9 +34,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   // TextFields
   var textFields: Object = null;
 
-  // Damage Text Settings
-  var damageCfg: Object;
-
   // Healthbar Settings
   var hbBar: MovieClip;
   var hbDamageBar: MovieClip;
@@ -423,8 +420,15 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     f.removeTextField();
   }
 
-  function showDamage(text: String)
+  function showDamage(curHealth, delta)
   {
+    var cfg = GetCurrentStateConfigRoot().damageText;
+    
+    if (!cfg.visible)
+      return;
+
+    var text = XVMFormatText((curHealth < 0) ? cfg.blowupMessage : cfg.damageMessage, curHealth, -delta);
+    
     var n = damageHolder.getNextHighestDepth();
     var damageField = damageHolder.createTextField("damageField" + n, n, 0, 0, 140, 20);
     var animation: TimelineLite = new TimelineLite({ onComplete:this.removeTextField, onCompleteParams:[damageField] });
@@ -436,12 +440,12 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     damageField.autoSize = "left";
     damageField.border = false;
     damageField.embedFonts = true;
-    damageField.setTextFormat(XVMCreateNewTextFormat(damageCfg.font));
-    damageField.textColor = XVMColorWithFallback(damageCfg.color);
+    damageField.setTextFormat(XVMCreateNewTextFormat(cfg.font));
+    damageField.textColor = XVMColorWithFallback(cfg.color);
     damageField._x = -(damageField._width >> 1);
-    damageField.filters = [ GraphicsUtil.createShadowFilter(damageCfg.shadow) ];
+    damageField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
 
-    animation.insert(new TweenLite(damageField, damageCfg.speed, { _y: -damageCfg.maxRange, ease: Linear.easeOut }), 0);
+    animation.insert(new TweenLite(damageField, cfg.speed, { _y: -cfg.maxRange, ease: Linear.easeOut }), 0);
   }
 
   // Health Visualization
@@ -452,8 +456,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     {
       updateCurrentColor(curHealth, m_maxHealth); //colorizing health bar after taking damage
 
-      if (damageCfg.visible)
-        this.showDamage(XVMFormatText((curHealth < 0) ? damageCfg.blowupMessage : damageCfg.damageMessage, curHealth, -delta));
+      this.showDamage(curHealth, -delta);
 
       m_currentHealth = curHealth;
 
@@ -592,9 +595,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     // Vehicle Type Icon
     if (iconLoader != null && iconLoader.initialized)
       iconLoader.addEventListener("complete", this, "XVMIconCompleteLoad");
-
-    // Damage Text
-    damageCfg = cfg.damageText;
 
     // Health Bar
     xvmHealthBar.clear();

@@ -90,7 +90,7 @@ class wot.utils.Config
 
         config = wot.utils.OTMConfigConverter.convert(config);
         Config.s_config = Config.MergeConfigs(Config.FixConfig(config), Config.s_config);
-        //Logger.addObject(Config.s_config);
+        //Logger.addObject(Config.s_config.markers.enemy.dead);
         if (Config.DEBUG_TIMES)
         {
           var curr = Utils.elapsedMSec(start, new Date());
@@ -179,11 +179,14 @@ class wot.utils.Config
   /**
    * Recursive walt default config and merge with loaded values.
    */
-  private static function MergeConfigs(config, def, prefix)
+  private static function MergeConfigs(config, def, prefix: String)
   {
     if (!prefix)
       prefix = "def";
 
+    //if (prefix.indexOf("damageText.color") >= 0)
+    //  Logger.add(prefix + " def=" + def + " config=" + config);
+      
     switch (typeof def)
     {
       case 'object':
@@ -196,7 +199,11 @@ class wot.utils.Config
         var result = { };
         for (var name in def)
         {
-          //Logger.add(prefix + "." + name);
+          /*if (prefix.indexOf("damageText") >= 0 && name == "color")
+          {
+            Logger.add(prefix + " " + name + " def=" + def + " config=" + config + " c[n]=" + config[name]);
+            Logger.addObject(config, "config");
+          }*/
           result[name] = config.hasOwnProperty(name) ? MergeConfigs(config[name], def[name], prefix + "." + name) : def[name];
         }
         return result;
@@ -216,12 +223,16 @@ class wot.utils.Config
       case 'string':
         //Logger.add(prefix + " = string " + config + " = " + def);
         return (typeof config == 'string') ? config : def;
-        return def;
+
+      case 'null':
+        //if (prefix.indexOf("damageText") >= 0)
+        //  Logger.add(prefix + " t(def)=" + (typeof def) + " def=" + def + " t(config)=" + (typeof config) + " config=" + config);
+        return (typeof config == 'string') ? config : def;
 
       default:
-        //Logger.add(prefix + " = default " + (typeof def) + " = " + config + " = " + def);
-        return (typeof config == 'string') ? config : def;
-    }
+        //Logger.add("unknown type = " + (typeof def));
+        return def;
+      }
   }
    
   /**

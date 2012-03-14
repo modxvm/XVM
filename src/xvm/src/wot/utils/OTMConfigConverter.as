@@ -120,6 +120,7 @@ class wot.utils.OTMConfigConverter
   private static var otmComponentsMap: Object = [
     [ "combatScrollText/enabled/attributes/value", "damageText/visible" ],
     [ "combatScrollText/speed/attributes/value", "damageText/speed" ],
+    [ "combatScrollText/color/attributes/value", "damageText/color" ],
     [ "combatScrollText/maxRange/attributes/value", "damageText/maxRange" ],
     [ "combatScrollText/textSize/attributes/value", "damageText/font/size" ],
     [ "combatScrollText/font/data", "damageText/font/name" ],
@@ -134,6 +135,7 @@ class wot.utils.OTMConfigConverter
     [ "combatScrollText/filter/attributes/alpha", "damageText/shadow/alpha" ],
     [ "combatScrollText/filter/attributes/strength", "damageText/shadow/strength" ],
     [ "contourIcon/tint/attributes/amount", "contourIcon/amount" ],
+    [ "contourIcon/tint/attributes/color", "contourIcon/color" ],
     [ "healthBar/border/attributes/size", "healthBar/border/size" ],
     [ "healthBar/border/attributes/color", "healthBar/border/color" ],
     [ "healthBar/border/attributes/alpha", "healthBar/border/alpha" ],
