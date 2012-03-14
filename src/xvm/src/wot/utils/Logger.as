@@ -3,6 +3,7 @@
  * @author sirmax2
  */
 import wot.utils.Defines;
+import wot.utils.Utils;
 
 class wot.utils.Logger
 {
@@ -10,30 +11,26 @@ class wot.utils.Logger
 
   public static function add(str: String)
   {
-    str = str.split(":").join(".");
-    str = str.split("/").join("_");
-    str = str.split("\\").join("_");
-    str = str.split(";").join(".");
-    str = str.split("<").join("{");
-    str = str.split(">").join("}");
-    str = str.split("\"").join("'");
+    var a: Array = ("[" + Utils.padLeft(String(counter++), 3, '0') + "] " + str).split("");
+    var s: String = "";
+    for (var i = 0; i < a.length; i++)
+      s += Utils.padLeft(a[i].charCodeAt(0).toString(16), 2, '0');
+    s = s.length.toString(16) + "," + s;
 
     var p = new LoadVars();
-
-    while (str.length > Defines.MAX_PATH)
+    while (s.length > Defines.MAX_PATH)
     {
-      p.load(Defines.COMMAND_LOG + " " + str.slice(0, Defines.MAX_PATH) + "... (continued)");
-      str = "..." + str.slice(Defines.MAX_PATH);
+      p.load(Defines.COMMAND_LOG + " " + s.slice(0, Defines.MAX_PATH));
+      s = s.slice(Defines.MAX_PATH);
     }
-
-    p.load(Defines.COMMAND_LOG + " [" + wot.utils.Utils.padLeft(String(counter), 3, '0') + "] " + str);
-    counter++;
+    p.load(Defines.COMMAND_LOG + " " + s);
   }
 
   public static function addObject(obj: Object, name: String)
   {
-    add((name || "[obj]") + ".");
+    var s: String = (name || "[obj]") + "\n";
     for (var i in obj)
-      add("  " + i + " = " + obj[i]);
+      s += "  " + i + " = " + obj[i] + "\n";
+    add(s);
   }
 }

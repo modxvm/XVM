@@ -12,14 +12,15 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
 {
   public static var infoField = null;
 
-  function BattleLoading()
+  public function BattleLoading()
   {
     super();
+
     Config.LoadConfig();
 
     if (!infoField)
     {
-      infoField = this.createTextField("info", getNextHighestDepth(), 0, 0, 140, 31);
+      infoField = createTextField("info", getNextHighestDepth(), 0, 0, 140, 31);
       infoField.wordWrap = true;
       var textFormat: TextFormat = new TextFormat("$FieldFont", 12, 0x000000, true, false, false, null, null, "left");
       infoField.setNewTextFormat(textFormat);
@@ -43,7 +44,7 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
     }
 
     setInfoFieldData({ });
-    
+
     // Force stats loading after 1 sec (for 12x12 battles, FogOfWar, ...)
     var timer: TimelineLite = new TimelineLite({onComplete:StartLoadData, onCompleteParams:[]});
     timer.insert(new TweenLite(null, 1));
@@ -53,11 +54,6 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
   {
     if (Config.s_config.rating.showPlayersStatistics)
       Stat.StartLoadData();
-  }
-
-  public function configUI()
-  {
-    super.configUI();
   }
 
   public static function setInfoFieldData(data)

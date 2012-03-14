@@ -422,7 +422,7 @@ namespace wot
           switch (command)
           {
             case "@LOG":
-              Log(1, parameters);
+              ProcessLog(parameters);
               break;
 
             case "@SET":
@@ -514,7 +514,7 @@ namespace wot
     }
     #endregion
 
-      #region Network operations
+    #region Network operations
 
     private string GetStat()
     {
@@ -806,6 +806,63 @@ namespace wot
       return res;
     }
 
+    #endregion
+
+    #region Log processing
+
+    private int logLength = 0;
+    private string logString = "";
+
+    private void ProcessLog(string parameters)
+    {
+      if (parameters.Contains(","))
+      {
+        if (!String.IsNullOrEmpty(logString))
+        {
+          Log(1, "Warning: incomplete @LOG string");
+          DecodeAndPrintLogString();
+        }
+        logString = "";
+        try
+        {
+          string[] strArray = parameters.Split(',');
+          logLength = int.Parse(strArray[0], System.Globalization.NumberStyles.HexNumber);
+          parameters = strArray[1];
+        }
+        catch
+        {
+          logLength = 0;
+          Log(1, "Error parsing @LOG command parameters");
+        }
+      }
+
+      if (logLength == 0)
+        return;
+
+      logString += parameters;
+      if (logLength <= logString.Length)
+        DecodeAndPrintLogString();
+    }
+
+    private void DecodeAndPrintLogString()
+    {
+      string s = "";
+      try
+      {
+        for (int i = 0; i < logString.Length; i += 2)
+          s += Convert.ToChar(Convert.ToByte(logString.Substring(i, 2), 16));
+        Log(1, s);
+      }
+      catch
+      {
+        Log(1, "Error decoding @LOG string: " + s);
+      }
+      finally
+      {
+        logLength = 0;
+        logString = "";
+      }
+    }
     #endregion
 
   }
