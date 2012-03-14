@@ -336,44 +336,62 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     return state;
   }
   
-  function XVMColorWithFallback(value)
-  {
-    if (!isNaN(value))
-      return Number(value);
-    var color = value ? Number(Stat.FormatText( { label: m_playerFullName }, value).split("#").join("0x")) : null;
-    return isFinite(color) ? Number(color) : Defines.SYSTEM_COLORS[XVMGetCurrentMarkerState()];
-  }
-
   function XVMFormatText(format: String, curHealth: Number, delta: Number): String
   {
     // AS 2 doesn't have String.replace? Shame on them. Let's use our own square wheel.
+    var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
     format = format.split("{{hp}}").join(String(curHealth));
     format = format.split("{{hp-max}}").join(String(m_maxHealth));
-    var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
     format = format.split("{{hp-ratio}}").join(String(hpRatio));
     format = format.split("{{nick}}").join(m_playerFullName);
     format = format.split("{{vehicle}}").join(m_vname);
-    format = format.split("{{dmg}}").join(delta != 0 ? String(delta) : "");
-    var dmgRatio: Number = Math.ceil(delta / m_maxHealth * 100);
-    format = format.split("{{dmg-ratio}}").join(delta != 0 ? String(dmgRatio) : "");
+
+    var dmgRatio: Number = delta ? Math.ceil(delta / m_maxHealth * 100) : 0;
+    format = format.split("{{dmg}}").join(delta ? String(delta) : "");
+    format = format.split("{{dmg-ratio}}").join(delta ? String(dmgRatio) : "");
 
     format = format.split("{{c:hp}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth));
     format = format.split("{{c:hp-ratio}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio));
 
     format = Stat.FormatText({ label: m_playerFullName }, format);
+
     format = Utils.trim(format);
 
     return format;
+  }
+
+  function XVMColorWithFallback(value)
+  {
+    return isFinite(value) ? Number(value) : Defines.SYSTEM_COLORS[XVMGetCurrentMarkerState()];
+  }
+
+  function XVMFormatColor(format: String, curHealth: Number): Number
+  {
+    if (!format)
+      return Defines.SYSTEM_COLORS[XVMGetCurrentMarkerState()];
+
+    if (isFinite(format))
+      return Number(format);
+
+    format = Stat.FormatText({ label: m_playerFullName }, format).split("#").join("0x");
+
+    var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
+    format = format.split("{{c:hp}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth, "0x"));
+    format = format.split("{{c:hp-ratio}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"));
+
+    return isFinite(format) ? Number(format) : Defines.SYSTEM_COLORS[XVMGetCurrentMarkerState()];
   }
 
   function XVMFormatAlpha(format: String, curHealth: Number): Number
   {
     if (!format)
       return 100;
-    if (!isNaN(format))
+
+    if (isFinite(format))
       return Number(format);
-    format = format.split("{{a:hp}}").join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, curHealth).toString());
+
     var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
+    format = format.split("{{a:hp}}").join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, curHealth).toString());
     format = format.split("{{a:hp-ratio}}").join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hpRatio).toString());
 
     var n = isFinite(format) ? Number(format) : 100;
@@ -405,7 +423,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     textField.setNewTextFormat(textFormat);
     textField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
 
-    textField.textColor = XVMColorWithFallback(XVMFormatText(cfg.color, m_curHealth));
+    textField.textColor = XVMFormatColor(cfg.color, m_curHealth);
     textField._alpha = XVMFormatAlpha(cfg.alpha, m_curHealth);
     textField._x = cfg.x - (textField._width >> 1);
     textField._y = cfg.y - (textField._height >> 1);
@@ -479,7 +497,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       {
         var tf = textFields[st][i];
         tf.field.text = XVMFormatText(tf.format, curHealth);
-        tf.field.textColor = XVMColorWithFallback(XVMFormatText(tf.color, curHealth));
+        tf.field.textColor = XVMFormatColor(tf.color, curHealth);
         tf.field._alpha = XVMFormatAlpha(tf.alpha, curHealth);
       }
     }
@@ -492,8 +510,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
     var cfg = GetCurrentStateConfigRootNormal().healthBar;
 
-    var fullColor: Number = XVMColorWithFallback(XVMFormatText(cfg.color, curHealth));
-    var lowColor: Number = XVMColorWithFallback(XVMFormatText(cfg.lcolor || cfg.color, curHealth));
+    var fullColor: Number = XVMFormatColor(cfg.color, curHealth);
+    var lowColor: Number = XVMFormatColor(cfg.lcolor || cfg.color, curHealth);
 
     var percent: Number = curHealth / m_maxHealth;
 
@@ -513,7 +531,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     if (cfg.amount >= 0)
     {
       var iconColor: Color = new Color(iconLoader);
-      var tintColor: Number = XVMColorWithFallback(XVMFormatText(cfg.color, m_curHealth));
+      var tintColor: Number = XVMFormatColor(cfg.color, m_curHealth);
       var tintAmount: Number = cfg.amount * 0.01;
       var tintRatio: Number;
 
@@ -619,8 +637,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     GraphicsUtil.fillRect(this.hbBar, 0, 0, hb.width, hb.height,
       hb.currColor, cfg.healthBar.fill.alpha);
     GraphicsUtil.fillRect(this.hbDamageBar, 0, 0, hb.width, hb.height,
-      XVMColorWithFallback(XVMFormatText(cfg.healthBar.damage.color, m_curHealth)),
-      XVMFormatAlpha(cfg.healthBar.damage.alpha, m_curHealth));
+      XVMFormatColor(cfg.healthBar.damage.color, m_curHealth), XVMFormatAlpha(cfg.healthBar.damage.alpha, m_curHealth));
 
     this.hbBar._x = this.hbBar._y = hb.border;
     this.hbDamageBar._x = hb.border + hb.width;

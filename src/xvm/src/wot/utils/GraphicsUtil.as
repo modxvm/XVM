@@ -99,10 +99,13 @@ class wot.utils.GraphicsUtil
     item.transform.colorTransform = myColorTransform;
   }
 
-  public static function GetDynamicColorValue(type: Number, value: Number): String
+  public static function GetDynamicColorValue(type: Number, value: Number, prefix: String): String
   {
+    if (!prefix)
+      prefix = "#";
+
     if (value == undefined || value == null)
-      return "#FFFBFB";
+      return prefix + "FFFBFB";
 
     var cfg_root = Config.s_config.colors;
     var cfg: Array;
@@ -124,7 +127,7 @@ class wot.utils.GraphicsUtil
         cfg = cfg_root.hp_ratio;
         break;
       default:
-        return "#FFFEFE";
+        return prefix + "FFFEFE";
     }
 
     for (var i = 0; i < cfg.length; i++)
@@ -132,10 +135,10 @@ class wot.utils.GraphicsUtil
       var cvalue: Number = cfg[i].value;
       var color: Number = Utils.toInt(cfg[i].color, 0xFFFFFF);
       if (value < cvalue)
-        return "#" + color.toString(16);
+        return prefix + color.toString(16);
     }
 
-    return "#FFFFFF";
+    return prefix + "FFFFFF";
   }
 
   public static function GetDynamicAlphaValue(type: Number, value: Number): Number
