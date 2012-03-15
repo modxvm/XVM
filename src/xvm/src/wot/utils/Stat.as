@@ -8,6 +8,7 @@ import com.greensock.TweenLite;
 import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.GraphicsUtil;
+import wot.utils.JSON;
 import wot.utils.Utils;
 
 class wot.utils.Stat
@@ -93,7 +94,7 @@ class wot.utils.Stat
     format = format.split("{{c:rating}}").join(rating > 0 ? GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, rating) : "");
     format = format.split("{{c:kb}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, kb));
 
-    format = wot.utils.Utils.trim(format);
+    format = Utils.trim(format);
 
     return format;
   }
@@ -121,7 +122,7 @@ class wot.utils.Stat
         };
 
         var str: String = pname + "-" + data.uid;
-        var lv:LoadVars = new LoadVars();
+        var lv: LoadVars = new LoadVars();
         lv.onData = function(success)
         {
           if (!Stat.retrieved || Stat.runningIngame)
@@ -194,7 +195,7 @@ class wot.utils.Stat
               var _is_str_new = false;
               Stat.retrieving = false;
               Stat.added = false;
-              var stats = wot.utils.JSON.parse(str);
+              var stats = JSON.parse(str);
               for (var i = 0; i < stats.players.length; i++)
               {
                 var p_stat = stats.players[i];
@@ -220,7 +221,7 @@ class wot.utils.Stat
                 {
                   if (!str_new || str_new == undefined)
                     return;
-                  var stats_new = wot.utils.JSON.parse(str_new);
+                  var stats_new = JSON.parse(str_new);
                   for (var i = 0; i < stats_new.players.length; i++)
                   {
                     var p_stat_new = stats_new.players[i];
@@ -346,7 +347,7 @@ class wot.utils.Stat
         //wot.utils.Logger.add("lv: "+str);
         if (!str || str == undefined)
           return;
-        var stats = wot.utils.JSON.parse(str);
+        var stats = JSON.parse(str);
         for (var i = 0; i < stats.players.length; i++)
         {
           if (!Stat.s_player_ratings)
@@ -358,7 +359,10 @@ class wot.utils.Stat
         };
 
         if (stats.info && stats.info.xvm)
-          wot.BattleLoading.setInfoFieldData(stats.info.xvm);
+        {
+          if (_global.hasOwnProperty("xvm_battleloading"))
+            _global.xvm_battleloading.setInfoFieldData(stats.info.xvm);
+        }
 
         Stat.UpdateAll();
       }

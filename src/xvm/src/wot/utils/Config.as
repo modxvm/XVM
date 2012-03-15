@@ -139,7 +139,10 @@ class wot.utils.Config
               diff = curr;
             }
             if (!config)
-              wot.BattleLoading.setInfoFieldData( { error: "Error parsing config file. Using default settings." } );
+            {
+              if (_global.hasOwnProperty("xvm_battleloading"))
+                _global.xvm_battleloading.setInfoFieldData( { error: "Error parsing config file. Using default settings." } );
+            }
             else
             {
               Config.s_config = Config.MergeConfigs(Config.FixConfig(config), Config.s_config);
@@ -157,13 +160,17 @@ class wot.utils.Config
             txt = txt.split("\r").join("").split("\n").join("");
             while (txt.indexOf("  ") != -1)
               txt = txt.split("  ").join(" ");
-            wot.BattleLoading.setInfoFieldData( { error: "Error loading config file. Using default settings.\n" + 
-              "[" + Utils.trim(ex.at) + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " + txt } );
+            if (_global.hasOwnProperty("xvm_battleloading"))
+            {
+              _global.xvm_battleloading.setInfoFieldData( { error: "Error loading config file. Using default settings.\n" + 
+                "[" + Utils.trim(ex.at) + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " + txt } );
+            }
           }
         }
         else
         {
-          wot.BattleLoading.setInfoFieldData({ error: "Error loading config file. Using default settings." });
+          if (_global.hasOwnProperty("xvm_battleloading"))
+            _global.xvm_battleloading.setInfoFieldData({ error: "Error loading config file. Using default settings." });
         }
         if (Config.s_load_last_stat && Config.s_config.rating.showPlayersStatistics)
           Stat.LoadStatData(Defines.COMMAND_GET_LAST_STAT);

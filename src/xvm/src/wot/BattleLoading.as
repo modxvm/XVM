@@ -6,15 +6,19 @@ import flash.filters.DropShadowFilter;
 import com.greensock.TimelineLite;
 import com.greensock.TweenLite;
 import wot.utils.Config;
+import wot.utils.Defines;
 import wot.utils.Stat;
+import wot.utils.Utils;
 
 class wot.BattleLoading extends net.wargaming.BattleLoading
 {
-  public static var infoField = null;
+  public static var infoField: TextField = null;
 
   public function BattleLoading()
   {
     super();
+
+    _global.xvm_battleloading = this;
 
     Config.LoadConfig();
 
@@ -22,8 +26,8 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
     {
       infoField = createTextField("info", getNextHighestDepth(), 0, 0, 140, 31);
       infoField.wordWrap = true;
-      var textFormat: TextFormat = new TextFormat("$FieldFont", 12, 0x000000, true, false, false, null, null, "left");
-      infoField.setNewTextFormat(textFormat);
+      infoField.antiAliasType = "advanced";
+      infoField.setNewTextFormat(new TextFormat("$FieldFont", 12, 0x000000, true, false, false, null, null, "left"));
 
       var shadow: DropShadowFilter = new DropShadowFilter();
       shadow.blurX = shadow.blurY = 3;
@@ -45,9 +49,47 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
 
     setInfoFieldData({ });
 
+    BattleLoadingInit();
+  }
+
+  function BattleLoadingInit(obj: Object)
+  {
+    if (!obj)
+      obj = this;
+
+    if (!Config.s_loaded)
+    {
+      // Wait for config loaded
+      var timer: TimelineLite = new TimelineLite({onComplete:BattleLoadingInit, onCompleteParams:[obj]});
+      timer.insert(new TweenLite(obj, 0.1));
+      return;
+    }
+
+    if (Config.s_config.battle.battleLoadingShowClock)
+      obj.ShowClock();
+
     // Force stats loading after 1 sec (for 12x12 battles, FogOfWar, ...)
-    var timer: TimelineLite = new TimelineLite({onComplete:StartLoadData, onCompleteParams:[]});
+    var timer: TimelineLite = new TimelineLite({onComplete:obj.StartLoadData, onCompleteParams:[]});
     timer.insert(new TweenLite(null, 1));
+  }
+
+  public function ShowClock()
+  {
+    var clock = createTextField("clock", getNextHighestDepth(), (_width / 2) - 490, 25, 100, 40);
+    clock.antiAliasType = "advanced";
+    clock.setNewTextFormat(new TextFormat("$TitleFont", 32, 0xFFFFFF, true, false, false, null, null, "center"));
+
+    var shadow: DropShadowFilter = new DropShadowFilter();
+    shadow.blurX = shadow.blurY = 5;
+    shadow.angle = 0;
+    shadow.distance = 0;
+    shadow.color = 0x000000;
+    shadow.alpha = 100;
+    shadow.strength = 5;
+    clock.filters = [shadow];
+    clock._visible = true;
+
+    clock.text = Utils.padLeft(String((new Date()).getHours()), 2, '0') + ":" + Utils.padLeft(String((new Date()).getMinutes()), 2, '0');
   }
 
   public function StartLoadData()
@@ -56,16 +98,27 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
       Stat.StartLoadData();
   }
 
+  // TODO: Clock color depended of win chances
+  public static function calculateChances()
+  {
+/*    for (var pname in Stat.s_player_data)
+    {
+      var pdata = Stat.s_player_data[pname];
+      if (pdata.reference)
+        pdata.reference.XVMStatUpdateCallback(pdata);
+    }*/
+  }
+
   public static function setInfoFieldData(data)
   {
     if (!infoField)
       return;
 
-    var txt: String = "XVM v" + wot.utils.Defines.XVM_VERSION + "\n";
+    var txt: String = "XVM v" + Defines.XVM_VERSION + "\n";
 
-    if (data.ver && wot.utils.Utils.compareVersions(String(data.ver), wot.utils.Defines.XVM_VERSION) == 1)
+    if (data.ver && Utils.compareVersions(String(data.ver), Defines.XVM_VERSION) == 1)
     {
-      txt = "XVM: New version available: v" + String(data.ver) + " (current is v" + wot.utils.Defines.XVM_VERSION + ")\n";
+      txt = "XVM: New version available: v" + String(data.ver) + " (current is v" + Defines.XVM_VERSION + ")\n";
       if (data.message)
         txt += data.message + "\n";
       infoField.textColor = 0xAAFFAA;

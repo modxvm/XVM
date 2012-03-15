@@ -12,6 +12,7 @@
   "battle": {
     "mirroredVehicleIcons": true,
     "showPostmortemTips": true,
+    "battleLoadingShowClock": true,
     "playersPanelAlpha": 100,
     "playersPanelLargeWidth": 170,
     "drawGrid": false

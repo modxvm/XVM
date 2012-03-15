@@ -29,6 +29,8 @@ class wot.utils.DefaultConfig
         mirroredVehicleIcons: true,
         /* false - отключить всплывающую внизу панель после смерти */
         showPostmortemTips: true,
+        /* false - выключить отображение часов на экране загрузки боя */
+        battleLoadingShowClock: true,
         /* 0..100 - задает прозрачность "ушей". 0 - прозрачные, 100 - не прозрачные */
         playersPanelAlpha: 100,
         /* 0..170 - задает ширину поля имени игрока в "ушах" в широком режиме. По умолчанию: 170 */
