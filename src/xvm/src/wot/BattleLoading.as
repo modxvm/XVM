@@ -28,16 +28,7 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
       infoField.wordWrap = true;
       infoField.antiAliasType = "advanced";
       infoField.setNewTextFormat(new TextFormat("$FieldFont", 12, 0x000000, true, false, false, null, null, "left"));
-
-      var shadow: DropShadowFilter = new DropShadowFilter();
-      shadow.blurX = shadow.blurY = 3;
-      shadow.angle = 0;
-      shadow.distance = 0;
-      shadow.color = 0x000000;
-      shadow.alpha = 100;
-      shadow.strength = 1;
-      infoField.filters = [shadow];
-
+      infoField.filters = [ new DropShadowFilter(0, 0, 0, 100, 3, 3, 1, 3) ];
       infoField.textColor = 0xFFFFFF;
       infoField._alpha = 100;
       infoField._visible = true;
@@ -71,18 +62,10 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
 
   public function ShowClock()
   {
-    var clock = createTextField("clock", getNextHighestDepth(), (_width / 2) - 300, 25, 100, 40);
+    var clock = createTextField("clock", getNextHighestDepth(), 330, 25, 100, 40);
     clock.antiAliasType = "advanced";
     clock.setNewTextFormat(new TextFormat("$TitleFont", 32, 0xFFFFFF, false, false, false, null, null, "right"));
-
-    var shadow: DropShadowFilter = new DropShadowFilter();
-    shadow.blurX = shadow.blurY = 5;
-    shadow.angle = 0;
-    shadow.distance = 0;
-    shadow.color = 0x000000;
-    shadow.alpha = 100;
-    shadow.strength = 5;
-    clock.filters = [shadow];
+    clock.filters = [ new DropShadowFilter(0, 0, 0, 100, 5, 5, 5, 3) ];
     clock._visible = true;
 
     clock.text = Utils.padLeft(String((new Date()).getHours()), 2, '0') + ":" + Utils.padLeft(String((new Date()).getMinutes()), 2, '0');
