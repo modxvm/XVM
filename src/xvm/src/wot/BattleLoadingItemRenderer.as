@@ -28,7 +28,7 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
       if (this.owner._name == "team2List")
       {
         event.target._xscale = -event.target._xscale;
-        event.target._x -= event.target.__width;
+        event.target._x -= event.target.__width - 5;
       }
     }
   }

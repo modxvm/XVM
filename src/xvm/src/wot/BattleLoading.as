@@ -24,7 +24,7 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
 
     if (!infoField)
     {
-      infoField = createTextField("info", getNextHighestDepth(), 0, 0, 140, 31);
+      infoField = createTextField("info", getNextHighestDepth(), _width / 2, 0, 500, 100);
       infoField.wordWrap = true;
       infoField.antiAliasType = "advanced";
       infoField.setNewTextFormat(new TextFormat("$FieldFont", 12, 0x000000, true, false, false, null, null, "left"));
@@ -39,10 +39,6 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
       infoField.filters = [shadow];
 
       infoField.textColor = 0xFFFFFF;
-      infoField._x = _width / 2;
-      infoField._y = 0;
-      infoField._height = 100;
-      infoField._width = 500;
       infoField._alpha = 100;
       infoField._visible = true;
     }
@@ -75,9 +71,9 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
 
   public function ShowClock()
   {
-    var clock = createTextField("clock", getNextHighestDepth(), (_width / 2) - 490, 25, 100, 40);
+    var clock = createTextField("clock", getNextHighestDepth(), (_width / 2) - 300, 25, 100, 40);
     clock.antiAliasType = "advanced";
-    clock.setNewTextFormat(new TextFormat("$TitleFont", 32, 0xFFFFFF, true, false, false, null, null, "center"));
+    clock.setNewTextFormat(new TextFormat("$TitleFont", 32, 0xFFFFFF, false, false, false, null, null, "right"));
 
     var shadow: DropShadowFilter = new DropShadowFilter();
     shadow.blurX = shadow.blurY = 5;
