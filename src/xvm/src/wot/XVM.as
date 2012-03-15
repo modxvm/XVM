@@ -410,11 +410,14 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
   function XVMCreateTextField(cfg)
   {
-    //Logger.addObject(cfg);
     var n = getNextHighestDepth();
-    var textField = createTextField("textField" + n, n, 0, 0, 140, 31);
-    //textField.html = false; // FIXIT: in html mode Font and Position are wrong.
-    textField.antiAliasType = "advanced";
+    var textField: TextField = createTextField("textField" + n, n, 0, 0, 140, 31);
+    textField.html = true; // FIXIT: in html mode Font and Position are wrong.
+    textField.antiAliasType = "normal";
+    textField.embedFonts = true;
+    textField.selectable = false;
+    textField.multiline = true;
+    textField.wordWrap = true;
     var textFormat: TextFormat = XVMCreateNewTextFormat(cfg.font);
     textField.setNewTextFormat(textFormat);
     textField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
@@ -564,7 +567,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     {
       var st = allStates[stid];
       var cfg = GetStateConfigRoot(st);
-      var fields = [];
+      var fields: Array = [];
       for (var i in cfg.textFields)
       {
         if (cfg.textFields[i].visible)

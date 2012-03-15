@@ -40,7 +40,6 @@
     <compile path="src\wot\ingame\VehicleMarkerAlly.as" />
     <compile path="src\wot\ingame\VehicleMarkerEnemy.as" />
     <compile path="src\wot\Main.as" />
-    <compile path="src\wot\BattleLoading.as" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>
