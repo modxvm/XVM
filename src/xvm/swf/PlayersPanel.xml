@@ -7,7 +7,7 @@
     <tags>
       <FileAttributes hasMetaData="1" useNetwork="0"/>
       <Metadata>
-        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"> <rdf:Description xmlns:xmp="http://ns.adobe.com/xap/1.0/" rdf:about=""> <xmp:CreatorTool>Adobe Flash CS4 Professional</xmp:CreatorTool> <xmp:CreateDate>2010-02-16T18:38:05+02:00</xmp:CreateDate> <xmp:MetadataDate>2012-02-24T10:15:06+03:00</xmp:MetadataDate> <xmp:ModifyDate>2012-02-24T10:15:06+03:00</xmp:ModifyDate> </rdf:Description> <rdf:Description xmlns:dc="http://purl.org/dc/elements/1.1/" rdf:about=""> <dc:format>application/x-shockwave-flash</dc:format> </rdf:Description> <rdf:Description xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/" xmlns:stRef="http://ns.adobe.com/xap/1.0/sType/ResourceRef#" rdf:about=""> <xmpMM:DerivedFrom rdf:parseType="Resource"> <stRef:instanceID>xmp.iid:E6C51395B65EE111A72E8CCB77301ADE</stRef:instanceID> <stRef:documentID>xmp.did:4AF5E1C6761AE111ADA8889A8171B4A0</stRef:documentID> <stRef:originalDocumentID>xmp.did:ECBF7F2C131BDF11A9439F4B1F8C7348</stRef:originalDocumentID> </xmpMM:DerivedFrom> <xmpMM:DocumentID>xmp.did:E8C51395B65EE111A72E8CCB77301ADE</xmpMM:DocumentID> <xmpMM:InstanceID>xmp.iid:E8C51395B65EE111A72E8CCB77301ADE</xmpMM:InstanceID> <xmpMM:OriginalDocumentID>xmp.did:ECBF7F2C131BDF11A9439F4B1F8C7348</xmpMM:OriginalDocumentID> </rdf:Description> </rdf:RDF>
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"> <rdf:Description xmlns:xmp="http://ns.adobe.com/xap/1.0/" rdf:about=""> <xmp:CreatorTool>Adobe Flash CS4 Professional</xmp:CreatorTool> <xmp:CreateDate>2010-02-16T18:38:05+02:00</xmp:CreateDate> <xmp:MetadataDate>2012-03-12T16:34:02+03:00</xmp:MetadataDate> <xmp:ModifyDate>2012-03-12T16:34:02+03:00</xmp:ModifyDate> </rdf:Description> <rdf:Description xmlns:dc="http://purl.org/dc/elements/1.1/" rdf:about=""> <dc:format>application/x-shockwave-flash</dc:format> </rdf:Description> <rdf:Description xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/" xmlns:stRef="http://ns.adobe.com/xap/1.0/sType/ResourceRef#" rdf:about=""> <xmpMM:DerivedFrom rdf:parseType="Resource"> <stRef:instanceID>xmp.iid:E033E66D376CE111B7EFCFFE4B70483C</stRef:instanceID> <stRef:documentID>xmp.did:4AF5E1C6761AE111ADA8889A8171B4A0</stRef:documentID> <stRef:originalDocumentID>xmp.did:ECBF7F2C131BDF11A9439F4B1F8C7348</stRef:originalDocumentID> </xmpMM:DerivedFrom> <xmpMM:DocumentID>xmp.did:E433E66D376CE111B7EFCFFE4B70483C</xmpMM:DocumentID> <xmpMM:InstanceID>xmp.iid:E433E66D376CE111B7EFCFFE4B70483C</xmpMM:InstanceID> <xmpMM:OriginalDocumentID>xmp.did:ECBF7F2C131BDF11A9439F4B1F8C7348</xmpMM:OriginalDocumentID> </rdf:Description> </rdf:RDF>
       </Metadata>
       <SetBackgroundColor>
         <color>
@@ -66,7 +66,7 @@
       </Export>
       <DefineShape3 objectID="4">
         <bounds>
-          <Rectangle left="0" right="7000" top="0" bottom="500"/>
+          <Rectangle left="0" right="10000" top="0" bottom="500"/>
         </bounds>
         <styles>
           <StyleList>
@@ -83,10 +83,10 @@
         <shapes>
           <Shape>
             <edges>
-              <ShapeSetup x="7000" y="500" fillStyle1="1"/>
-              <LineTo x="-7000" y="0"/>
+              <ShapeSetup x="10000" y="500" fillStyle1="1"/>
+              <LineTo x="-10000" y="0"/>
               <LineTo x="0" y="-500"/>
-              <LineTo x="7000" y="0"/>
+              <LineTo x="10000" y="0"/>
               <LineTo x="0" y="500"/>
               <ShapeSetup/>
             </edges>
@@ -111,7 +111,7 @@
       </DefineBitsLossless2>
       <DefineShape objectID="7">
         <bounds>
-          <Rectangle left="0" right="2800" top="0" bottom="480"/>
+          <Rectangle left="0" right="4000" top="0" bottom="480"/>
         </bounds>
         <styles>
           <StyleList>
@@ -123,7 +123,7 @@
               </ClippedBitmap>
               <ClippedBitmap objectID="6">
                 <matrix>
-                  <Transform scaleX="28.57147216796875" scaleY="19.99908447265625" transX="0" transY="0"/>
+                  <Transform scaleX="40.81604003906250" scaleY="19.99908447265625" transX="0" transY="0"/>
                 </matrix>
               </ClippedBitmap>
             </fillStyles>
@@ -133,10 +133,10 @@
         <shapes>
           <Shape>
             <edges>
-              <ShapeSetup x="2800" y="480" fillStyle1="2"/>
-              <LineTo x="-2800" y="0"/>
+              <ShapeSetup x="4000" y="480" fillStyle1="2"/>
+              <LineTo x="-4000" y="0"/>
               <LineTo x="0" y="-480"/>
-              <LineTo x="2800" y="0"/>
+              <LineTo x="4000" y="0"/>
               <LineTo x="0" y="480"/>
               <ShapeSetup/>
             </edges>
@@ -198,7 +198,7 @@
       </DefineSprite>
       <DefineScalingGrid objectID="8">
         <splitter>
-          <Rectangle left="20" right="1200" top="0" bottom="458"/>
+          <Rectangle left="20" right="1800" top="0" bottom="458"/>
         </splitter>
       </DefineScalingGrid>
       <Export>
@@ -927,7 +927,7 @@
           </FrameLabel>
           <PlaceObject2 replace="0" depth="1" objectID="5" name="hit">
             <transform>
-              <Transform scaleX="1.428573608398438" scaleY="1.000000000000000" transX="0" transY="0"/>
+              <Transform scaleX="0.9999694824218750" scaleY="1.000000000000000" transX="0" transY="0"/>
             </transform>
           </PlaceObject2>
           <PlaceObject2 replace="0" depth="3" objectID="14" name="squadIcon">
