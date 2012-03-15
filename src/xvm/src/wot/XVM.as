@@ -336,40 +336,53 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     return state;
   }
   
-  function XVMFormatText(format: String, curHealth: Number, delta: Number): String
+  function XVMFormatStaticText(format: String): String
   {
     // AS 2 doesn't have String.replace? Shame on them. Let's use our own square wheel.
+    format = format.split("{{nick}}").join(m_playerFullName);
+    format = format.split("{{vehicle}}").join(m_vname);
+    format = format.split("{{level}}").join(m_level);
+    format = Stat.FormatText({ label: m_playerFullName }, format);
+    format = Utils.trim(format);
+    return format;
+  }
+
+  function XVMFormatDynamicText(format: String, curHealth: Number, delta: Number): String
+  {
+    if (format.indexOf("{{") == -1)
+      return format;
+
     var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
     format = format.split("{{hp}}").join(String(curHealth));
     format = format.split("{{hp-max}}").join(String(m_maxHealth));
     format = format.split("{{hp-ratio}}").join(String(hpRatio));
-    format = format.split("{{nick}}").join(m_playerFullName);
-    format = format.split("{{vehicle}}").join(m_vname);
-    format = format.split("{{level}}").join(m_level);
 
     var dmgRatio: Number = delta ? Math.ceil(delta / m_maxHealth * 100) : 0;
     format = format.split("{{dmg}}").join(delta ? String(delta) : "");
     format = format.split("{{dmg-ratio}}").join(delta ? String(dmgRatio) : "");
-
-    format = format.split("{{c:hp}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth));
-    format = format.split("{{c:hp-ratio}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio));
-
-    format = Stat.FormatText({ label: m_playerFullName }, format);
 
     format = Utils.trim(format);
 
     return format;
   }
 
-  function XVMFormatColor(format: String, curHealth: Number): Number
+  function XVMFormatStaticColorText(format: String): String
+  {
+    if (!format || isFinite(format))
+      return format;
+      
+    format = Stat.FormatText( { label: m_playerFullName }, format).split("#").join("0x");
+    
+    return format;
+  }
+
+  function XVMFormatDynamicColor(format: String, curHealth: Number): Number
   {
     if (!format)
       return Defines.SYSTEM_COLORS[XVMGetSystemColorName()];
 
     if (isFinite(format))
       return Number(format);
-
-    format = Stat.FormatText({ label: m_playerFullName }, format).split("#").join("0x");
 
     var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
     format = format.split("{{c:hp}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth, "0x"));
@@ -378,7 +391,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     return isFinite(format) ? Number(format) : Defines.SYSTEM_COLORS[XVMGetSystemColorName()];
   }
 
-  function XVMFormatAlpha(format: String, curHealth: Number): Number
+  function XVMFormatDynamicAlpha(format: String, curHealth: Number): Number
   {
     if (!format)
       return 100;
@@ -422,13 +435,14 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     textField.setNewTextFormat(textFormat);
     textField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
 
-    textField.textColor = XVMFormatColor(cfg.color, m_curHealth);
-    textField._alpha = XVMFormatAlpha(cfg.alpha, m_curHealth);
+    var staticColor = XVMFormatStaticColorText(cfg.color);
+    textField.textColor = XVMFormatDynamicColor(staticColor, m_curHealth);
+    textField._alpha = XVMFormatDynamicAlpha(cfg.alpha, m_curHealth);
     textField._x = cfg.x - (textField._width >> 1);
     textField._y = cfg.y - (textField._height >> 1);
     textField._visible = cfg.visible;
 
-    return { field: textField, format: cfg.format, alpha: cfg.alpha, color: cfg.color };
+    return { field: textField, format: XVMFormatStaticText(cfg.format), alpha: cfg.alpha, color: staticColor };
   }
 
   // Damage Visualization
@@ -444,7 +458,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     if (!cfg.visible)
       return;
 
-    var text = XVMFormatText((curHealth < 0) ? cfg.blowupMessage : cfg.damageMessage, curHealth, -delta);
+    var msg = (curHealth < 0) ? cfg.blowupMessage : cfg.damageMessage;
+    var text = XVMFormatDynamicText(XVMFormatStaticText(msg), curHealth, -delta);
     
     var n = damageHolder.getNextHighestDepth();
     var damageField = damageHolder.createTextField("damageField" + n, n, 0, 0, 140, 20);
@@ -496,9 +511,9 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       for (var i in textFields[st])
       {
         var tf = textFields[st][i];
-        tf.field.text = XVMFormatText(tf.format, curHealth);
-        tf.field.textColor = XVMFormatColor(tf.color, curHealth);
-        tf.field._alpha = XVMFormatAlpha(tf.alpha, curHealth);
+        tf.field.text = XVMFormatDynamicText(tf.format, curHealth);
+        tf.field.textColor = XVMFormatDynamicColor(tf.color, curHealth);
+        tf.field._alpha = XVMFormatDynamicAlpha(tf.alpha, curHealth);
       }
     }
   }
@@ -510,8 +525,10 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
     var cfg = GetCurrentStateConfigRootNormal().healthBar;
 
-    var fullColor: Number = XVMFormatColor(cfg.color, curHealth);
-    var lowColor: Number = XVMFormatColor(cfg.lcolor || cfg.color, curHealth);
+    var ct = XVMFormatStaticColorText(cfg.color);
+    var lct = XVMFormatStaticColorText(cfg.lcolor);
+    var fullColor: Number = XVMFormatDynamicColor(ct, curHealth);
+    var lowColor: Number = XVMFormatDynamicColor(lct || ct, curHealth);
 
     var percent: Number = curHealth / m_maxHealth;
 
@@ -531,7 +548,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     if (cfg.amount >= 0)
     {
       var iconColor: Color = new Color(iconLoader);
-      var tintColor: Number = XVMFormatColor(cfg.color, m_curHealth);
+      var tintColor: Number = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.color), m_curHealth);
       var tintAmount: Number = cfg.amount * 0.01;
       var tintRatio: Number;
 
@@ -553,13 +570,16 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     XVMUpdateStyle();
   }
 
-  function XVMInitializeTextFields()
+  private var _statesInitialized: Boolean = false;
+  function XVMInitializeStates()
   {
     if (!m_vname || !m_playerFullName)
       return;
 
-    if (textFields)
+    if (_statesInitialized)
       return;
+
+    _statesInitialized = true;
 
     textFields = { };
     var allStates = (m_entityName == "enemy") ? allStatesEnemy : allStatesAlly;
@@ -567,6 +587,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     {
       var st = allStates[stid];
       var cfg = GetStateConfigRoot(st);
+      
+      // create text fields
       var fields: Array = [];
       for (var i in cfg.textFields)
       {
@@ -637,15 +659,15 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     GraphicsUtil.fillRect(this.hbBar, 0, 0, hb.width, hb.height,
       hb.currColor, cfg.healthBar.fill.alpha);
     GraphicsUtil.fillRect(this.hbDamageBar, 0, 0, hb.width, hb.height,
-      XVMFormatColor(cfg.healthBar.damage.color, m_curHealth), XVMFormatAlpha(cfg.healthBar.damage.alpha, m_curHealth));
+      XVMFormatDynamicColor(cfg.healthBar.damage.color, m_curHealth), XVMFormatDynamicAlpha(cfg.healthBar.damage.alpha, m_curHealth));
 
     this.hbBar._x = this.hbBar._y = hb.border;
     this.hbDamageBar._x = hb.border + hb.width;
     this.hbDamageBar._y = hb.border;
     this.hbDamageBar._xscale = 0;
 
-    // Creating text fields
-    XVMInitializeTextFields();
+    // Initialize states and creating text fields
+    XVMInitializeStates();
 
     if (DEBUG_TIMES)
       Logger.add("DEBUG TIME: XVMPopulateData(): " + Utils.elapsedMSec(start, new Date()) + " ms");
@@ -672,7 +694,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       {
         marker._x = cfg.vehicleIcon.x;
         marker._y = cfg.vehicleIcon.y;
-        marker._alpha = XVMFormatAlpha(cfg.vehicleIcon.alpha, m_curHealth);
+        marker._alpha = XVMFormatDynamicAlpha(cfg.vehicleIcon.alpha, m_curHealth);
       }
       marker._visible = visible;
 
@@ -682,7 +704,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       {
         levelIcon._x = cfg.levelIcon.x;
         levelIcon._y = cfg.levelIcon.y;
-        levelIcon._alpha = XVMFormatAlpha(cfg.levelIcon.alpha, m_curHealth);
+        levelIcon._alpha = XVMFormatDynamicAlpha(cfg.levelIcon.alpha, m_curHealth);
       }
       levelIcon._visible = visible;
 
@@ -703,7 +725,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
         {
           iconLoader._x = cfg.contourIcon.x - (iconLoader.__get__content()._width >> 1);
           iconLoader._y = cfg.contourIcon.y - (iconLoader.__get__content()._height >> 1);
-          iconLoader._alpha = XVMFormatAlpha(cfg.contourIcon.alpha, m_curHealth);
+          iconLoader._alpha = XVMFormatDynamicAlpha(cfg.contourIcon.alpha, m_curHealth);
         }
         iconLoader._visible = visible;
       }
@@ -723,7 +745,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       {
         xvmHealthBar._x = cfg.healthBar.x;
         xvmHealthBar._y = cfg.healthBar.y;
-        xvmHealthBar._alpha = XVMFormatAlpha(cfg.healthBar.alpha, m_curHealth);
+        xvmHealthBar._alpha = XVMFormatDynamicAlpha(cfg.healthBar.alpha, m_curHealth);
       }
       xvmHealthBar._visible = visible;
 

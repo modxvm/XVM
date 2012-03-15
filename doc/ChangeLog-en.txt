@@ -1,3 +1,17 @@
+XVM-2.0.test2:
+  * adaptation to WoT 0.7.2 Common Test 2
+  * dynamic color optimization
+  * added {{level}} macro for vehicle level
+  * always use 'alive' color for damage text with system colors
+  * added clock to battle loading screen
+  * macros optimization
+
+XVM-2.0.test1:
+  * adaptation to WoT 0.7.2 Common Test 1
+  * distribution model changed:
+      xvm-lite package for mod without players ratio
+      xvm-full package for mod with players ratio
+
 XVM-1.7:
   * merge configs in XVM.xvmconf (with legacy support of OTMData.xml)
   * config version increased to 1.1.0 (with backward compatibility)

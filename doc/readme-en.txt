@@ -3,6 +3,7 @@ This mod is a successor of the next mods:
   * Disable Postmortem Panel
   * Vehicle Icons Mirroring Controlling
   * Players Panel Controlling (width and transparency)
+  * Clock at battle loading screen
   * In-game players rating
 
 Project site: http://code.google.com/p/wot-xvm/
@@ -21,6 +22,7 @@ battle
   mirroredVehicleIcons:   false - disable vehicle icons mirroring (useful for
                                   alternative icons)
   showPostmortemTips:     false - disable sliding postmortem panel
+  battleLoadingShowClock: false - disable clock at battle loading screen
   playersPanelAlpha:      0..100 - players panel transparentness. 0 - transparent,
                                   100 - not transparent
   playersPanelLargeWidth: 0..170 - set players names width in panels in large mode.

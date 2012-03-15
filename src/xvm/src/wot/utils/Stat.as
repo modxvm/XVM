@@ -53,6 +53,7 @@ class wot.utils.Stat
       if (!data.uid || data.uid == undefined)
         data.uid = s_player_data[pname].playerId;
       var stat = Stat.s_player_ratings[pname];
+
       if (stat)
       {
         if (!stat.notInDb)

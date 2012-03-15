@@ -28,7 +28,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
       if (this.owner._name == "team2")
       {
         event.target._xscale = -event.target._xscale;
-        event.target._x -= 80 - 5; // FIXIT: where is image width?
+        event.target._x -= 80 - 5; // FIXIT: where I can get image width?
       }
     }
   }
