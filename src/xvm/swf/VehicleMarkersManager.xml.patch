@@ -1,5 +1,5 @@
 --- orig\VehicleMarkersManager.xml	2012-03-15 17:19:14.848876600 +0200
-+++ VehicleMarkersManager.xml	2012-03-16 18:59:31.737437800 +0200
++++ VehicleMarkersManager.xml	2012-03-16 23:09:27.383774600 +0200
 @@ -3117,7 +3117,7 @@
        </DefineBitsLossless2>
        <DefineShape objectID="81">
@@ -293,7 +293,7 @@
            <Shape>
              <edges>
 -              <ShapeSetup x="-300" y="-180" fillStyle1="2"/>
-+              <ShapeSetup x="490" y="590" fillStyle1="2"/>
++              <ShapeSetup x="-490" y="-590" fillStyle1="2"/>
                <LineTo x="980" y="0"/>
                <LineTo x="0" y="1180"/>
                <LineTo x="-980" y="0"/>
@@ -320,7 +320,7 @@
            <Shape>
              <edges>
 -              <ShapeSetup x="-300" y="-220" fillStyle1="2"/>
-+              <ShapeSetup x="490" y="630" fillStyle1="2"/>
++              <ShapeSetup x="-490" y="-630" fillStyle1="2"/>
                <LineTo x="980" y="0"/>
                <LineTo x="0" y="1180"/>
                <LineTo x="-980" y="0"/>
@@ -347,7 +347,7 @@
            <Shape>
              <edges>
 -              <ShapeSetup x="-300" y="-260" fillStyle1="2"/>
-+              <ShapeSetup x="490" y="700" fillStyle1="2"/>
++              <ShapeSetup x="-490" y="-700" fillStyle1="2"/>
                <LineTo x="980" y="0"/>
                <LineTo x="0" y="1180"/>
                <LineTo x="-980" y="0"/>
@@ -374,7 +374,7 @@
            <Shape>
              <edges>
 -              <ShapeSetup x="-300" y="-200" fillStyle1="2"/>
-+              <ShapeSetup x="490" y="590" fillStyle1="2"/>
++              <ShapeSetup x="-490" y="-590" fillStyle1="2"/>
                <LineTo x="980" y="0"/>
                <LineTo x="0" y="1180"/>
                <LineTo x="-980" y="0"/>
@@ -401,7 +401,7 @@
            <Shape>
              <edges>
 -              <ShapeSetup x="-300" y="-200" fillStyle1="2"/>
-+              <ShapeSetup x="490" y="630" fillStyle1="2"/>
++              <ShapeSetup x="-490" y="-630" fillStyle1="2"/>
                <LineTo x="980" y="0"/>
                <LineTo x="0" y="1180"/>
                <LineTo x="-980" y="0"/>
@@ -428,7 +428,7 @@
            <Shape>
              <edges>
 -              <ShapeSetup x="-300" y="-280" fillStyle1="2"/>
-+              <ShapeSetup x="490" y="700" fillStyle1="2"/>
++              <ShapeSetup x="-490" y="-700" fillStyle1="2"/>
                <LineTo x="980" y="0"/>
                <LineTo x="0" y="1180"/>
                <LineTo x="-980" y="0"/>
@@ -455,7 +455,7 @@
            <Shape>
              <edges>
 -              <ShapeSetup x="-300" y="-120" fillStyle1="2"/>
-+              <ShapeSetup x="490" y="590" fillStyle1="2"/>
++              <ShapeSetup x="-490" y="-590" fillStyle1="2"/>
                <LineTo x="980" y="0"/>
                <LineTo x="0" y="1180"/>
                <LineTo x="-980" y="0"/>
@@ -482,7 +482,7 @@
            <Shape>
              <edges>
 -              <ShapeSetup x="-300" y="-140" fillStyle1="2"/>
-+              <ShapeSetup x="490" y="630" fillStyle1="2"/>
++              <ShapeSetup x="-490" y="-630" fillStyle1="2"/>
                <LineTo x="980" y="0"/>
                <LineTo x="0" y="1180"/>
                <LineTo x="-980" y="0"/>
@@ -509,7 +509,7 @@
            <Shape>
              <edges>
 -              <ShapeSetup x="-300" y="-120" fillStyle1="2"/>
-+              <ShapeSetup x="490" y="700" fillStyle1="2"/>
++              <ShapeSetup x="-490" y="-700" fillStyle1="2"/>
                <LineTo x="980" y="0"/>
                <LineTo x="0" y="1180"/>
                <LineTo x="-980" y="0"/>
@@ -794,7 +794,7 @@
            <Shape>
              <edges>
 -              <ShapeSetup x="-300" y="-180" fillStyle1="2"/>
-+              <ShapeSetup x="490" y="590" fillStyle1="2"/>
++              <ShapeSetup x="-490" y="-590" fillStyle1="2"/>
                <LineTo x="980" y="0"/>
                <LineTo x="0" y="1180"/>
                <LineTo x="-980" y="0"/>
@@ -821,7 +821,7 @@
            <Shape>
              <edges>
 -              <ShapeSetup x="-300" y="-220" fillStyle1="2"/>
-+              <ShapeSetup x="490" y="630" fillStyle1="2"/>
++              <ShapeSetup x="-490" y="-630" fillStyle1="2"/>
                <LineTo x="980" y="0"/>
                <LineTo x="0" y="1180"/>
                <LineTo x="-980" y="0"/>
@@ -848,7 +848,7 @@
            <Shape>
              <edges>
 -              <ShapeSetup x="-300" y="-260" fillStyle1="2"/>
-+              <ShapeSetup x="490" y="700" fillStyle1="2"/>
++              <ShapeSetup x="-490" y="-700" fillStyle1="2"/>
                <LineTo x="980" y="0"/>
                <LineTo x="0" y="1180"/>
                <LineTo x="-980" y="0"/>
@@ -875,7 +875,7 @@
            <Shape>
              <edges>
 -              <ShapeSetup x="-300" y="-180" fillStyle1="2"/>
-+              <ShapeSetup x="490" y="590" fillStyle1="2"/>
++              <ShapeSetup x="-490" y="-590" fillStyle1="2"/>
                <LineTo x="980" y="0"/>
                <LineTo x="0" y="1180"/>
                <LineTo x="-980" y="0"/>
@@ -902,7 +902,7 @@
            <Shape>
              <edges>
 -              <ShapeSetup x="-300" y="-200" fillStyle1="2"/>
-+              <ShapeSetup x="490" y="630" fillStyle1="2"/>
++              <ShapeSetup x="-490" y="-630" fillStyle1="2"/>
                <LineTo x="980" y="0"/>
                <LineTo x="0" y="1180"/>
                <LineTo x="-980" y="0"/>
@@ -929,7 +929,7 @@
            <Shape>
              <edges>
 -              <ShapeSetup x="-300" y="-280" fillStyle1="2"/>
-+              <ShapeSetup x="490" y="700" fillStyle1="2"/>
++              <ShapeSetup x="-490" y="-700" fillStyle1="2"/>
                <LineTo x="980" y="0"/>
                <LineTo x="0" y="1180"/>
                <LineTo x="-980" y="0"/>
@@ -956,7 +956,7 @@
            <Shape>
              <edges>
 -              <ShapeSetup x="-300" y="-140" fillStyle1="2"/>
-+              <ShapeSetup x="490" y="590" fillStyle1="2"/>
++              <ShapeSetup x="-490" y="-590" fillStyle1="2"/>
                <LineTo x="980" y="0"/>
                <LineTo x="0" y="1180"/>
                <LineTo x="-980" y="0"/>
@@ -983,7 +983,7 @@
            <Shape>
              <edges>
 -              <ShapeSetup x="-300" y="-160" fillStyle1="2"/>
-+              <ShapeSetup x="490" y="630" fillStyle1="2"/>
++              <ShapeSetup x="-490" y="-630" fillStyle1="2"/>
                <LineTo x="980" y="0"/>
                <LineTo x="0" y="1180"/>
                <LineTo x="-980" y="0"/>
@@ -1010,7 +1010,7 @@
            <Shape>
              <edges>
 -              <ShapeSetup x="-300" y="-140" fillStyle1="2"/>
-+              <ShapeSetup x="490" y="700" fillStyle1="2"/>
++              <ShapeSetup x="-490" y="-700" fillStyle1="2"/>
                <LineTo x="980" y="0"/>
                <LineTo x="0" y="1180"/>
                <LineTo x="-980" y="0"/>
@@ -1142,7 +1142,7 @@
        <DefineShape objectID="202">
          <bounds>
 -          <Rectangle left="-200" right="580" top="0" bottom="1000"/>
-+          <Rectangle left="-390" right="390" top="-410" bottom="410"/>
++          <Rectangle left="-390" right="390" top="-450" bottom="450"/>
          </bounds>
          <styles>
            <StyleList>
@@ -1151,7 +1151,7 @@
                <ClippedBitmap objectID="201">
                  <matrix>
 -                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-200" transY="0"/>
-+                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-410"/>
++                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-450"/>
                  </matrix>
                </ClippedBitmap>
              </fillStyles>
@@ -1196,7 +1196,7 @@
        <DefineShape objectID="206">
          <bounds>
 -          <Rectangle left="-200" right="580" top="0" bottom="1000"/>
-+          <Rectangle left="-390" right="390" top="-450" bottom="450"/>
++          <Rectangle left="-390" right="390" top="-410" bottom="410"/>
          </bounds>
          <styles>
            <StyleList>
@@ -1205,7 +1205,7 @@
                <ClippedBitmap objectID="205">
                  <matrix>
 -                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-200" transY="0"/>
-+                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-450"/>
++                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-410"/>
                  </matrix>
                </ClippedBitmap>
              </fillStyles>
@@ -1304,7 +1304,7 @@
        <DefineShape objectID="214">
          <bounds>
 -          <Rectangle left="-200" right="580" top="0" bottom="1000"/>
-+          <Rectangle left="-390" right="390" top="-410" bottom="410"/>
++          <Rectangle left="-390" right="390" top="-450" bottom="450"/>
          </bounds>
          <styles>
            <StyleList>
@@ -1313,7 +1313,7 @@
                <ClippedBitmap objectID="213">
                  <matrix>
 -                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-200" transY="0"/>
-+                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-410"/>
++                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-450"/>
                  </matrix>
                </ClippedBitmap>
              </fillStyles>
@@ -1358,7 +1358,7 @@
        <DefineShape objectID="218">
          <bounds>
 -          <Rectangle left="-200" right="580" top="20" bottom="1020"/>
-+          <Rectangle left="-390" right="390" top="-470" bottom="470"/>
++          <Rectangle left="-390" right="390" top="-450" bottom="450"/>
          </bounds>
          <styles>
            <StyleList>
@@ -1367,7 +1367,7 @@
                <ClippedBitmap objectID="217">
                  <matrix>
 -                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-200" transY="20"/>
-+                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-470"/>
++                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-450"/>
                  </matrix>
                </ClippedBitmap>
              </fillStyles>
@@ -1385,7 +1385,7 @@
        <DefineShape objectID="220">
          <bounds>
 -          <Rectangle left="-200" right="580" top="20" bottom="1020"/>
-+          <Rectangle left="-390" right="390" top="-570" bottom="570"/>
++          <Rectangle left="-390" right="390" top="-450" bottom="450"/>
          </bounds>
          <styles>
            <StyleList>
@@ -1394,7 +1394,7 @@
                <ClippedBitmap objectID="219">
                  <matrix>
 -                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-200" transY="20"/>
-+                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-570"/>
++                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-450"/>
                  </matrix>
                </ClippedBitmap>
              </fillStyles>
@@ -1412,7 +1412,7 @@
        <DefineShape objectID="222">
          <bounds>
 -          <Rectangle left="-200" right="580" top="20" bottom="1020"/>
-+          <Rectangle left="-390" right="390" top="-570" bottom="570"/>
++          <Rectangle left="-390" right="390" top="-450" bottom="450"/>
          </bounds>
          <styles>
            <StyleList>
@@ -1421,7 +1421,7 @@
                <ClippedBitmap objectID="221">
                  <matrix>
 -                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-200" transY="20"/>
-+                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-570"/>
++                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-450"/>
                  </matrix>
                </ClippedBitmap>
              </fillStyles>
@@ -1466,7 +1466,7 @@
        <DefineShape objectID="226">
          <bounds>
 -          <Rectangle left="-200" right="580" top="20" bottom="1020"/>
-+          <Rectangle left="-390" right="390" top="-470" bottom="470"/>
++          <Rectangle left="-390" right="390" top="-570" bottom="570"/>
          </bounds>
          <styles>
            <StyleList>
@@ -1475,7 +1475,7 @@
                <ClippedBitmap objectID="225">
                  <matrix>
 -                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-200" transY="20"/>
-+                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-470"/>
++                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-570"/>
                  </matrix>
                </ClippedBitmap>
              </fillStyles>
@@ -1529,7 +1529,7 @@
        <DefineShape objectID="235">
          <bounds>
 -          <Rectangle left="-200" right="580" top="0" bottom="1000"/>
-+          <Rectangle left="-390" right="390" top="-450" bottom="450"/>
++          <Rectangle left="-390" right="390" top="-410" bottom="410"/>
          </bounds>
          <styles>
            <StyleList>
@@ -1538,7 +1538,7 @@
                <ClippedBitmap objectID="234">
                  <matrix>
 -                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-200" transY="0"/>
-+                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-450"/>
++                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-410"/>
                  </matrix>
                </ClippedBitmap>
              </fillStyles>
@@ -1583,7 +1583,7 @@
        <DefineShape objectID="239">
          <bounds>
 -          <Rectangle left="-200" right="580" top="0" bottom="1000"/>
-+          <Rectangle left="-390" right="390" top="-410" bottom="410"/>
++          <Rectangle left="-390" right="390" top="-450" bottom="450"/>
          </bounds>
          <styles>
            <StyleList>
@@ -1592,7 +1592,7 @@
                <ClippedBitmap objectID="238">
                  <matrix>
 -                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-200" transY="0"/>
-+                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-410"/>
++                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-450"/>
                  </matrix>
                </ClippedBitmap>
              </fillStyles>
@@ -1610,7 +1610,7 @@
        <DefineShape objectID="241">
          <bounds>
 -          <Rectangle left="-200" right="580" top="0" bottom="1000"/>
-+          <Rectangle left="-390" right="390" top="-450" bottom="450"/>
++          <Rectangle left="-390" right="390" top="-410" bottom="410"/>
          </bounds>
          <styles>
            <StyleList>
@@ -1619,7 +1619,7 @@
                <ClippedBitmap objectID="240">
                  <matrix>
 -                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-200" transY="0"/>
-+                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-450"/>
++                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-410"/>
                  </matrix>
                </ClippedBitmap>
              </fillStyles>
@@ -1664,7 +1664,7 @@
        <DefineShape objectID="245">
          <bounds>
 -          <Rectangle left="-200" right="580" top="0" bottom="1000"/>
-+          <Rectangle left="-390" right="390" top="-410" bottom="410"/>
++          <Rectangle left="-390" right="390" top="-450" bottom="450"/>
          </bounds>
          <styles>
            <StyleList>
@@ -1673,7 +1673,7 @@
                <ClippedBitmap objectID="244">
                  <matrix>
 -                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-200" transY="0"/>
-+                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-410"/>
++                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-450"/>
                  </matrix>
                </ClippedBitmap>
              </fillStyles>
@@ -1745,7 +1745,7 @@
        <DefineShape objectID="251">
          <bounds>
 -          <Rectangle left="-200" right="580" top="20" bottom="1020"/>
-+          <Rectangle left="-390" right="390" top="-470" bottom="470"/>
++          <Rectangle left="-390" right="390" top="-570" bottom="570"/>
          </bounds>
          <styles>
            <StyleList>
@@ -1754,7 +1754,7 @@
                <ClippedBitmap objectID="250">
                  <matrix>
 -                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-200" transY="20"/>
-+                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-470"/>
++                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-570"/>
                  </matrix>
                </ClippedBitmap>
              </fillStyles>
@@ -2006,7 +2006,7 @@
        <DefineShape objectID="277">
          <bounds>
 -          <Rectangle left="-200" right="580" top="0" bottom="1000"/>
-+          <Rectangle left="-390" right="390" top="-470" bottom="470"/>
++          <Rectangle left="-390" right="390" top="-570" bottom="570"/>
          </bounds>
          <styles>
            <StyleList>
@@ -2015,7 +2015,7 @@
                <ClippedBitmap objectID="276">
                  <matrix>
 -                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-200" transY="0"/>
-+                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-470"/>
++                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-570"/>
                  </matrix>
                </ClippedBitmap>
              </fillStyles>
