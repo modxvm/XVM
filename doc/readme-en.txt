@@ -136,6 +136,8 @@ Macros available:
     {{nick}}       - player name
     {{vehicle}}    - vehicle name
     {{level}}      - vehicle level
+    {{dmg}}        - damage health points
+    {{dmg-ratio}}  - damage health ratio (without '%' sign)
 
   Statistics macros ('rating/showPlayersStatistics' must be anabled):
     {{rating}}     - GWR (Global Win Ratio)

@@ -47,3 +47,7 @@ PlayersPanel.swf:
   players to have alpha = 30 on their nicknames or something similar, this way they would be
   much more extinguishable from alive players, right now it is hard to see how many players
   are left without having to focus in the playerpanel completly.
+
+Proxy:
+
+  проверка файловой системы
