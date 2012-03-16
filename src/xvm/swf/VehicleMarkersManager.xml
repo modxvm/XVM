@@ -4742,7 +4742,7 @@
               </ClippedBitmap>
               <ClippedBitmap objectID="141">
                 <matrix>
-                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-570"/>
+                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-200" transY="0"/>
                 </matrix>
               </ClippedBitmap>
             </fillStyles>
@@ -6453,7 +6453,7 @@
               </ClippedBitmap>
               <ClippedBitmap objectID="193">
                 <matrix>
-                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-200" transY="0"/>
+                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-410"/>
                 </matrix>
               </ClippedBitmap>
             </fillStyles>
