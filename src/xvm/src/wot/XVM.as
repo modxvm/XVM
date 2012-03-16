@@ -58,12 +58,12 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
     // Remove standard fields
     pNameField._visible = false;
-    //pNameField.removeTextField();
+    pNameField.removeTextField();
     //delete pNameField;
     //pNameField = null;
 
     vNameField._visible = false;
-    //vNameField.removeTextField();
+    vNameField.removeTextField();
     //delete vNameField;
     //vNameField = null;
 
@@ -85,33 +85,40 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     if (!obj)
       obj = this;
 
-    if (!Config.s_loaded)
+    try
     {
-      // Wait for config loaded
-      var timer: TimelineLite = new TimelineLite({onComplete:XVMInit, onCompleteParams:[obj]});
-      timer.insert(new TweenLite(obj, 0.1));
-      return;
-    }
+      if (!Config.s_loaded)
+      {
+        // Wait for config loaded
+        var timer: TimelineLite = new TimelineLite({onComplete:XVMInit, onCompleteParams:[obj]});
+        timer.insert(new TweenLite(obj, 0.1));
+        return;
+      }
 
-    // Draw watermark
-    if (!_root.hasOwnProperty("xvmWatermark"))
+      // Draw watermark
+      if (!_root.hasOwnProperty("xvmWatermark"))
+      {
+        var wm = _root.createTextField("xvmWatermark", _root.getNextHighestDepth(), -1, -2, 50, 16);
+        wm.antiAliasType = "advanced";
+        wm.setNewTextFormat(new TextFormat("$FieldFont", 8, 0xCCCCCC, false, false, false, null, null, "left"));
+        wm.filters = [new DropShadowFilter(0, 0, 0, 30, 1, 1, 0.3, 3)];
+        wm.text = "XVM v" + Defines.XVM_VERSION;
+      }
+
+      // Draw grid
+      if (Config.s_config.battle.drawGrid)
+      {
+        obj.grid = obj.createEmptyMovieClip("grid", obj.getNextHighestDepth());
+        GraphicsUtil.drawGrid(obj.grid, -50, -50, 100, 100, 0xFFFF00, 30);
+      }
+
+      obj.XVMPopulateData();
+      obj.updateMarkerLabel();
+    }
+    catch (e)
     {
-      var wm = _root.createTextField("xvmWatermark", _root.getNextHighestDepth(), 0, -2, 50, 16);
-      wm.antiAliasType = "advanced";
-      wm.setNewTextFormat(new TextFormat("$FieldFont", 8, 0xCCCCCC, false, false, false, null, null, "left"));
-      wm.filters = [new DropShadowFilter(0, 0, 0, 30, 1, 1, 0.3, 3)];
-      wm.text = "XVM v" + Defines.XVM_VERSION;
+      XVMSetErrorText("ERROR: XVMInit():" + String(e));
     }
-
-    // Draw grid
-    if (Config.s_config.battle.drawGrid)
-    {
-      obj.grid = obj.createEmptyMovieClip("grid", obj.getNextHighestDepth());
-      GraphicsUtil.drawGrid(obj.grid, -50, -50, 100, 100, 0xFFFF00, 30);
-    }
-
-    obj.XVMPopulateData();
-    obj.updateMarkerLabel();
   }
   
   // override
@@ -205,31 +212,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     return true;
   }
 
-  // VehicleMarkerAlly should contain 4 named frames:
-  // - green - normal ally
-  // - gold - squad mate
-  // - blue - teamkiller
-  // - yellow - squad mate in color blind mode
-  // VehicleMarkerEnemy should contain 2 named frames:
-  // - red - normal enemy
-  // - purple - enemy in color blind mode
-  function XVMGetMarkerColorAlias()
-  {
-    //if (m_entityName != "ally" && m_entityName != "enemy" && m_entityName != "squadman" && m_entityName != "teamKiller")
-    //  Logger.add("m_entityName=" + m_entityName);
-    if (m_entityName == "ally")
-      return "green";
-    if (m_entityName == "squadman")
-      return XVMIsColorBlindMode() ? "yellow" : "gold";
-    if (m_entityName == "teamKiller")
-      return "blue";
-    if (m_entityName == "enemy")
-      return XVMIsColorBlindMode() ? "purple" : "red";
-
-    // if not found (node is not implemented), return inverted enemy color
-    return XVMIsColorBlindMode() ? "red" : "purple";
-  }
-
   // override
   function initMarkerLabel()
   {
@@ -237,14 +219,14 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     if (pNameField != null)
     {
       pNameField._visible = false;
-      //pNameField.removeTextField();
+      pNameField.removeTextField();
       //delete pNameField;
       //pNameField = null;
     }
     if (vNameField != null)
     {
       vNameField._visible = false;
-      //vNameField.removeTextField();
+      vNameField.removeTextField();
     }
   }
 
@@ -259,14 +241,14 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     if (pNameField != null)
     {
       pNameField._visible = false;
-      //pNameField.removeTextField();
+      pNameField.removeTextField();
       //delete pNameField;
       //pNameField = null;
     }
     if (vNameField != null)
     {
       vNameField._visible = false;
-      //vNameField.removeTextField();
+      vNameField.removeTextField();
     }
     if (m_vehicleClass != null)
       this.setVehicleClass();
@@ -302,6 +284,52 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   /**
    * MAIN
    */
+
+  static var errorCounter: Number = 0;
+  static var errorText: String = "";
+  function XVMSetErrorText(str)
+  {
+    var et: TextField;
+    if (!_root.hasOwnProperty("xvmErrorText"))
+    {
+      et = _root.createTextField("xvmErrorText", _root.getNextHighestDepth(), 350, 40, 1000, 300);
+      et.antiAliasType = "advanced";
+      et.wordWrap = true;
+      et.multiline = true;
+      et.setNewTextFormat(new TextFormat("$FieldFont", 12, 0xFF6666, false, false, false, null, null, "left"));
+      et.filters = [new DropShadowFilter(0, 0, 0, 100, 3, 3, 2, 3)];
+    }
+
+    errorText += "[" + Utils.padLeft((errorCounter++).toString(), 3, '0') + "] " + str + "\n";
+    while ((errorText.split("\n")).length > 15)
+      errorText = errorText.slice(errorText.indexOf("\n") + 1, errorText.length - 1);
+    _root.xvmErrorText.text = errorText;
+  }
+   
+  // VehicleMarkerAlly should contain 4 named frames:
+  // - green - normal ally
+  // - gold - squad mate
+  // - blue - teamkiller
+  // - yellow - squad mate in color blind mode
+  // VehicleMarkerEnemy should contain 2 named frames:
+  // - red - normal enemy
+  // - purple - enemy in color blind mode
+  function XVMGetMarkerColorAlias()
+  {
+    //if (m_entityName != "ally" && m_entityName != "enemy" && m_entityName != "squadman" && m_entityName != "teamKiller")
+    //  Logger.add("m_entityName=" + m_entityName);
+    if (m_entityName == "ally")
+      return "green";
+    if (m_entityName == "squadman")
+      return XVMIsColorBlindMode() ? "yellow" : "gold";
+    if (m_entityName == "teamKiller")
+      return "blue";
+    if (m_entityName == "enemy")
+      return XVMIsColorBlindMode() ? "purple" : "red";
+
+    // if not found (node is not implemented), return inverted enemy color
+    return XVMIsColorBlindMode() ? "red" : "purple";
+  }
 
   function GetCurrentStateString(): String
   {
@@ -350,111 +378,168 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   
   function XVMFormatStaticText(format: String): String
   {
-    // AS 2 doesn't have String.replace? Shame on them. Let's use our own square wheel.
-    format = format.split("{{nick}}").join(m_playerFullName);
-    format = format.split("{{vehicle}}").join(m_vname);
-    format = format.split("{{level}}").join(m_level);
-    format = Stat.FormatText({ label: m_playerFullName }, format);
-    format = Utils.trim(format);
+    try
+    {
+      // AS 2 doesn't have String.replace? Shame on them. Let's use our own square wheel.
+      format = format.split("{{nick}}").join(m_playerFullName);
+      format = format.split("{{vehicle}}").join(m_vname);
+      format = format.split("{{level}}").join(m_level);
+      format = Stat.FormatText({ label: m_playerFullName }, format);
+      format = Utils.trim(format);
+    }
+    catch (e)
+    {
+      XVMSetErrorText("ERROR: XVMFormatStaticText(" + format + "):" + String(e));
+    }
     return format;
   }
 
   function XVMFormatDynamicText(format: String, curHealth: Number, delta: Number): String
   {
-    if (format.indexOf("{{") == -1)
-      return format;
+    try
+    {
+      if (format.indexOf("{{") == -1)
+        return format;
 
-    var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
-    format = format.split("{{hp}}").join(String(curHealth));
-    format = format.split("{{hp-max}}").join(String(m_maxHealth));
-    format = format.split("{{hp-ratio}}").join(String(hpRatio));
+      var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
+      format = format.split("{{hp}}").join(String(curHealth));
+      format = format.split("{{hp-max}}").join(String(m_maxHealth));
+      format = format.split("{{hp-ratio}}").join(String(hpRatio));
 
-    var dmgRatio: Number = delta ? Math.ceil(delta / m_maxHealth * 100) : 0;
-    format = format.split("{{dmg}}").join(delta ? String(delta) : "");
-    format = format.split("{{dmg-ratio}}").join(delta ? String(dmgRatio) : "");
+      var dmgRatio: Number = delta ? Math.ceil(delta / m_maxHealth * 100) : 0;
+      format = format.split("{{dmg}}").join(delta ? String(delta) : "");
+      format = format.split("{{dmg-ratio}}").join(delta ? String(dmgRatio) : "");
 
-    format = Utils.trim(format);
+      format = Utils.trim(format);
+    }
+    catch (e)
+    {
+      XVMSetErrorText("ERROR: XVMFormatDynamicText(" + format + "):" + String(e));
+    }
 
     return format;
   }
 
   function XVMFormatStaticColorText(format: String): String
   {
-    if (!format || isFinite(format))
-      return format;
-      
-    format = Stat.FormatText( { label: m_playerFullName }, format).split("#").join("0x");
-    
+    try
+    {
+      if (!format || isFinite(format))
+        return format;
+        
+      format = Stat.FormatText( { label: m_playerFullName }, format).split("#").join("0x");
+    }
+    catch (e)
+    {
+      XVMSetErrorText("ERROR: XVMFormatStaticColorText(" + format + "):" + String(e));
+    }
+
     return format;
   }
 
   function XVMFormatDynamicColor(format: String, curHealth: Number): Number
   {
-    if (!format)
-      return Defines.SYSTEM_COLORS[XVMGetSystemColorName()];
+    try
+    {
+      if (!format)
+        return Defines.SYSTEM_COLORS[XVMGetSystemColorName()];
 
-    if (isFinite(format))
-      return Number(format);
+      if (isFinite(format))
+        return Number(format);
 
-    var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
-    format = format.split("{{c:hp}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth, "0x"));
-    format = format.split("{{c:hp-ratio}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"));
+      var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
+      format = format.split("{{c:hp}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth, "0x"));
+      format = format.split("{{c:hp-ratio}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"));
 
-    return isFinite(format) ? Number(format) : Defines.SYSTEM_COLORS[XVMGetSystemColorName()];
+      return isFinite(format) ? Number(format) : Defines.SYSTEM_COLORS[XVMGetSystemColorName()];
+    }
+    catch (e)
+    {
+      XVMSetErrorText("ERROR: XVMFormatDynamicColor(" + format + "):" + String(e));
+    }
+
+    return Defines.SYSTEM_COLORS[XVMGetSystemColorName()];
   }
 
   function XVMFormatDynamicAlpha(format: String, curHealth: Number): Number
   {
-    if (!format)
-      return 100;
+    try
+    {
+      if (!format)
+        return 100;
 
-    if (isFinite(format))
-      return Number(format);
+      if (isFinite(format))
+        return Number(format);
 
-    var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
-    format = format.split("{{a:hp}}").join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, curHealth).toString());
-    format = format.split("{{a:hp-ratio}}").join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hpRatio).toString());
+      var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
+      format = format.split("{{a:hp}}").join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, curHealth).toString());
+      format = format.split("{{a:hp-ratio}}").join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hpRatio).toString());
 
-    var n = isFinite(format) ? Number(format) : 100;
-    return (n <= 0) ? 1 : (n > 100) ? 100 : n;
+      var n = isFinite(format) ? Number(format) : 100;
+      return (n <= 0) ? 1 : (n > 100) ? 100 : n;
+    }
+    catch (e)
+    {
+      XVMSetErrorText("ERROR: XVMFormatDynamicAlpha(" + format + "):" + String(e));
+    }
+
+    return 100;
   }
 
   function XVMCreateNewTextFormat(config_font: Object)
   {
-    if (!config_font)
-      return null;
+    try
+    {
+      if (!config_font)
+        return null;
 
-    return new TextFormat(
-      config_font.name,
-      config_font.size,
-      0x000000,
-      config_font.bold,
-      false, false, null, null,
-      config_font.align);
+      return new TextFormat(
+        config_font.name,
+        config_font.size,
+        0x000000,
+        config_font.bold,
+        false, false, null, null,
+        config_font.align);
+    }
+    catch (e)
+    {
+      XVMSetErrorText("ERROR: XVMCreateNewTextFormat():" + String(e));
+    }
+
+    return null;
   }
 
   function XVMCreateTextField(cfg)
   {
-    var n = getNextHighestDepth();
-    var textField: TextField = createTextField("textField" + n, n, 0, 0, 140, 31);
-    textField.html = true; // FIXIT: in html mode Font and Position are wrong.
-    textField.antiAliasType = "normal";
-    textField.embedFonts = true;
-    textField.selectable = false;
-    textField.multiline = true;
-    textField.wordWrap = true;
-    var textFormat: TextFormat = XVMCreateNewTextFormat(cfg.font);
-    textField.setNewTextFormat(textFormat);
-    textField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
+    try
+    {
+      var n = getNextHighestDepth();
+      var textField: TextField = createTextField("textField" + n, n, 0, 0, 140, 31);
+      textField.html = true; // FIXIT: in html mode Font and Position are wrong.
+      textField.antiAliasType = "normal";
+      textField.embedFonts = true;
+      textField.selectable = false;
+      textField.multiline = true;
+      textField.wordWrap = true;
+      var textFormat: TextFormat = XVMCreateNewTextFormat(cfg.font);
+      textField.setNewTextFormat(textFormat);
+      textField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
 
-    var staticColor = XVMFormatStaticColorText(cfg.color);
-    textField.textColor = XVMFormatDynamicColor(staticColor, m_curHealth);
-    textField._alpha = XVMFormatDynamicAlpha(cfg.alpha, m_curHealth);
-    textField._x = cfg.x - (textField._width >> 1);
-    textField._y = cfg.y - (textField._height >> 1);
-    textField._visible = cfg.visible;
+      var staticColor = XVMFormatStaticColorText(cfg.color);
+      textField.textColor = XVMFormatDynamicColor(staticColor, m_curHealth);
+      textField._alpha = XVMFormatDynamicAlpha(cfg.alpha, m_curHealth);
+      textField._x = cfg.x - (textField._width >> 1);
+      textField._y = cfg.y - (textField._height >> 1);
+      textField._visible = cfg.visible;
 
-    return { field: textField, format: XVMFormatStaticText(cfg.format), alpha: cfg.alpha, color: staticColor };
+      return { field: textField, format: XVMFormatStaticText(cfg.format), alpha: cfg.alpha, color: staticColor };
+    }
+    catch (e)
+    {
+      XVMSetErrorText("ERROR: XVMCreateTextField():" + String(e));
+    }
+
+    return null;
   }
 
   // Damage Visualization
@@ -465,237 +550,293 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
   function showDamage(curHealth, delta)
   {
-    var cfg = GetCurrentStateConfigRoot().damageText;
-    
-    if (!cfg.visible)
-      return;
+    try
+    {
+      var cfg = GetCurrentStateConfigRoot().damageText;
+      
+      if (!cfg.visible)
+        return;
 
-    var msg = (curHealth < 0) ? cfg.blowupMessage : cfg.damageMessage;
-    var text = XVMFormatDynamicText(XVMFormatStaticText(msg), curHealth, delta);
-    
-    var n = damageHolder.getNextHighestDepth();
-    var damageField = damageHolder.createTextField("damageField" + n, n, 0, 0, 140, 20);
-    var animation: TimelineLite = new TimelineLite({ onComplete:this.removeTextField, onCompleteParams:[damageField] });
+      var msg = (curHealth < 0) ? cfg.blowupMessage : cfg.damageMessage;
+      var text = XVMFormatDynamicText(XVMFormatStaticText(msg), curHealth, delta);
+      
+      var n = damageHolder.getNextHighestDepth();
+      var damageField = damageHolder.createTextField("damageField" + n, n, 0, 0, 140, 20);
+      var animation: TimelineLite = new TimelineLite({ onComplete:this.removeTextField, onCompleteParams:[damageField] });
 
-    // For some reason, DropShadowFilter is not rendered when textfield contains only one character,
-    // so we're appending empty prefix and suffix to bypass this unexpected behavior
-    damageField.text = " " + text + " ";
-    damageField.antiAliasType = "advanced";
-    damageField.autoSize = "left";
-    damageField.border = false;
-    damageField.embedFonts = true;
-    damageField.setTextFormat(XVMCreateNewTextFormat(cfg.font));
-    damageField.textColor = isFinite(cfg.color) ? Number(cfg.color)
-      : Defines.SYSTEM_COLORS[m_entityName + "_alive_" + (XVMIsColorBlindMode() ? "blind" : "normal")];
-    damageField._x = -(damageField._width >> 1);
-    damageField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
+      // For some reason, DropShadowFilter is not rendered when textfield contains only one character,
+      // so we're appending empty prefix and suffix to bypass this unexpected behavior
+      damageField.text = " " + text + " ";
+      damageField.antiAliasType = "advanced";
+      damageField.autoSize = "left";
+      damageField.border = false;
+      damageField.embedFonts = true;
+      damageField.setTextFormat(XVMCreateNewTextFormat(cfg.font));
+      damageField.textColor = isFinite(cfg.color) ? Number(cfg.color)
+        : Defines.SYSTEM_COLORS[m_entityName + "_alive_" + (XVMIsColorBlindMode() ? "blind" : "normal")];
+      damageField._x = -(damageField._width >> 1);
+      damageField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
 
-    animation.insert(new TweenLite(damageField, cfg.speed, { _y: -cfg.maxRange, ease: Linear.easeOut }), 0);
+      animation.insert(new TweenLite(damageField, cfg.speed, { _y: -cfg.maxRange, ease: Linear.easeOut } ), 0);
+    }
+    catch (e)
+    {
+      XVMSetErrorText("ERROR: showDamage():" + String(e));
+    }
   }
 
   // Health Visualization
   function XVMSetupNewHealth(curHealth)
   {
-    var delta: Number = curHealth - m_currentHealth;
-    if (delta < 0)
+    try
     {
-      updateCurrentColor(curHealth, m_maxHealth); //colorizing health bar after taking damage
+      var delta: Number = curHealth - m_currentHealth;
+      if (delta < 0)
+      {
+        updateCurrentColor(curHealth, m_maxHealth); //colorizing health bar after taking damage
 
-      this.showDamage(curHealth, -delta);
+        this.showDamage(curHealth, -delta);
 
-      m_currentHealth = curHealth;
+        m_currentHealth = curHealth;
 
-      //Flow bar animation
-      TweenLite.killTweensOf(this.hbDamageBar);
-      this.hbDamageBar._x = hb.border + hb.width * (curHealth / m_maxHealth);
-      this.hbDamageBar._xscale = this.hbDamageBar._xscale + 100 * (-delta / m_maxHealth);
-      TweenLite.to(this.hbDamageBar, hb.damageTime, {_xscale:0, ease:Cubic.easeIn});
+        //Flow bar animation
+        TweenLite.killTweensOf(this.hbDamageBar);
+        this.hbDamageBar._x = hb.border + hb.width * (curHealth / m_maxHealth);
+        this.hbDamageBar._xscale = this.hbDamageBar._xscale + 100 * (-delta / m_maxHealth);
+        TweenLite.to(this.hbDamageBar, hb.damageTime, {_xscale:0, ease:Cubic.easeIn});
+      }
+    }
+    catch (e)
+    {
+      XVMSetErrorText("ERROR: XVMSetupNewHealth():" + String(e));
     }
   }
 
   function XVMUpdateUI(curHealth)
   {
-    this.hbBar._xscale = curHealth / m_maxHealth * 100;
-
-    if (textFields)
+    try
     {
-      var st = GetCurrentStateString();
-      for (var i in textFields[st])
+      this.hbBar._xscale = curHealth / m_maxHealth * 100;
+
+      if (textFields)
       {
-        var tf = textFields[st][i];
-        tf.field.text = XVMFormatDynamicText(tf.format, curHealth);
-        tf.field.textColor = XVMFormatDynamicColor(tf.color, curHealth);
-        tf.field._alpha = XVMFormatDynamicAlpha(tf.alpha, curHealth);
+        var st = GetCurrentStateString();
+        for (var i in textFields[st])
+        {
+          var tf = textFields[st][i];
+          tf.field.text = XVMFormatDynamicText(tf.format, curHealth);
+          tf.field.textColor = XVMFormatDynamicColor(tf.color, curHealth);
+          tf.field._alpha = XVMFormatDynamicAlpha(tf.alpha, curHealth);
+        }
       }
+    }
+    catch (e)
+    {
+      XVMSetErrorText("ERROR: XVMUpdateUI():" + String(e));
     }
   }
 
   function updateCurrentColor(curHealth)
   {
-    if (!Config.s_loaded)
-      return;
+    try
+    {
+      if (!Config.s_loaded)
+        return;
 
-    var cfg = GetCurrentStateConfigRootNormal().healthBar;
+      var cfg = GetCurrentStateConfigRootNormal().healthBar;
 
-    var ct = XVMFormatStaticColorText(cfg.color);
-    var lct = XVMFormatStaticColorText(cfg.lcolor);
-    var fullColor: Number = XVMFormatDynamicColor(ct, curHealth);
-    var lowColor: Number = XVMFormatDynamicColor(lct || ct, curHealth);
+      var ct = XVMFormatStaticColorText(cfg.color);
+      var lct = XVMFormatStaticColorText(cfg.lcolor);
+      var fullColor: Number = XVMFormatDynamicColor(ct, curHealth);
+      var lowColor: Number = XVMFormatDynamicColor(lct || ct, curHealth);
 
-    var percent: Number = curHealth / m_maxHealth;
+      var percent: Number = curHealth / m_maxHealth;
 
-    //determ current (real-time) color
-    hb.currColor = GraphicsUtil.colorByRatio(percent, lowColor, fullColor);
-    GraphicsUtil.setColor(this.hbBar, hb.currColor); //colorizing health bar
+      //determ current (real-time) color
+      hb.currColor = GraphicsUtil.colorByRatio(percent, lowColor, fullColor);
+      GraphicsUtil.setColor(this.hbBar, hb.currColor); //colorizing health bar
+    }
+    catch (e)
+    {
+      XVMSetErrorText("ERROR: updateCurrentColor():" + String(e));
+    }
   }
 
   function XVMIconCompleteLoad(event)
   {
-    if (!Config.s_loaded)
-      return;
-
-    // Vehicle Icon
-    var cfg = GetCurrentStateConfigRootNormal().contourIcon;
-
-    if (cfg.amount >= 0)
+    try
     {
-      var iconColor: Color = new Color(iconLoader);
-      var tintColor: Number = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.color), m_curHealth);
-      var tintAmount: Number = cfg.amount * 0.01;
-      var tintRatio: Number;
+      if (!Config.s_loaded)
+        return;
 
-      var iconTransform: Object = iconColor.getTransform();
-      iconTransform.rb = (tintColor >> 16);
-      iconTransform.gb = (tintColor >> 8) & 0xff;
-      iconTransform.bb = (tintColor & 0xff);
-      iconTransform.ra = 0;
-      iconTransform.ga = 0;
-      iconTransform.ba = 0;
-      tintRatio = tintAmount / (1 - ((iconTransform.ra + iconTransform.ga + iconTransform.ba) / 300));
-      iconTransform.rb *= tintRatio;
-      iconTransform.gb *= tintRatio;
-      iconTransform.bb *= tintRatio;
-      iconTransform.ra = iconTransform.ga = iconTransform.ba = (1 - tintAmount) * 100;
-      iconColor.setTransform(iconTransform);
+      // Vehicle Icon
+      var cfg = GetCurrentStateConfigRootNormal().contourIcon;
+
+      if (cfg.amount >= 0)
+      {
+        var iconColor: Color = new Color(iconLoader);
+        var tintColor: Number = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.color), m_curHealth);
+        var tintAmount: Number = cfg.amount * 0.01;
+        var tintRatio: Number;
+
+        var iconTransform: Object = iconColor.getTransform();
+        iconTransform.rb = (tintColor >> 16);
+        iconTransform.gb = (tintColor >> 8) & 0xff;
+        iconTransform.bb = (tintColor & 0xff);
+        iconTransform.ra = 0;
+        iconTransform.ga = 0;
+        iconTransform.ba = 0;
+        tintRatio = tintAmount / (1 - ((iconTransform.ra + iconTransform.ga + iconTransform.ba) / 300));
+        iconTransform.rb *= tintRatio;
+        iconTransform.gb *= tintRatio;
+        iconTransform.bb *= tintRatio;
+        iconTransform.ra = iconTransform.ga = iconTransform.ba = (1 - tintAmount) * 100;
+        iconColor.setTransform(iconTransform);
+      }
+
+      XVMUpdateStyle();
     }
-
-    XVMUpdateStyle();
+    catch (e)
+    {
+      XVMSetErrorText("ERROR: XVMIconCompleteLoad():" + String(e));
+    }
   }
 
   private var _statesInitialized: Boolean = false;
   function XVMInitializeStates()
   {
-    if (!m_vname || !m_playerFullName)
-      return;
-
-    if (_statesInitialized)
-      return;
-
-    _statesInitialized = true;
-
-    textFields = { };
-    var allStates = (m_entityName == "enemy") ? allStatesEnemy : allStatesAlly;
-    for (var stid in allStates)
+    try
     {
-      var st = allStates[stid];
-      var cfg = GetStateConfigRoot(st);
-      
-      // create text fields
-      var fields: Array = [];
-      for (var i in cfg.textFields)
+      if (!m_vname || !m_playerFullName)
+        return;
+
+      if (_statesInitialized)
+        return;
+
+      _statesInitialized = true;
+
+      textFields = { };
+      var allStates = (m_entityName == "enemy") ? allStatesEnemy : allStatesAlly;
+      for (var stid in allStates)
       {
-        if (cfg.textFields[i].visible)
+        var st = allStates[stid];
+        var cfg = GetStateConfigRoot(st);
+        
+        // create text fields
+        var fields: Array = [];
+        for (var i in cfg.textFields)
         {
-          //if (m_entityName == "ally")
-            //Logger.addObject(cfg.textFields[i], m_vname + " " + m_playerFullName + " " + st);
-//          if (m_entityName == "enemy")
-//            Logger.addObject(cfg.textFields[i], m_vname + " " + m_playerFullName + " " + st);
-          fields.push(XVMCreateTextField(cfg.textFields[i]));
+          if (cfg.textFields[i].visible)
+          {
+            //if (m_entityName == "ally")
+              //Logger.addObject(cfg.textFields[i], m_vname + " " + m_playerFullName + " " + st);
+  //          if (m_entityName == "enemy")
+  //            Logger.addObject(cfg.textFields[i], m_vname + " " + m_playerFullName + " " + st);
+            fields.push(XVMCreateTextField(cfg.textFields[i]));
+          }
         }
+        textFields[st] = fields;
       }
-      textFields[st] = fields;
+    }
+    catch (e)
+    {
+      XVMSetErrorText("ERROR: XVMInitializeStates():" + String(e));
     }
   }
 
   function XVMPopulateVehicleTypeMarker()
   {
-    var cfg = GetCurrentStateConfigRootNormal();
-
-    // Vehicle Type Marker
-    for (var childName in marker.marker)
+    try
     {
-      var child = marker.marker[childName];
-      child._x = cfg.vehicleIcon.scaleX * cfg.vehicleIcon.maxScale / 100;
-      child._y = cfg.vehicleIcon.scaleY * cfg.vehicleIcon.maxScale / 100;
-      child._xscale = child._yscale = cfg.vehicleIcon.maxScale;
-    };
+      var cfg = GetCurrentStateConfigRootNormal();
+
+      // Vehicle Type Marker
+      for (var childName in marker.marker)
+      {
+        var child = marker.marker[childName];
+        child._x = cfg.vehicleIcon.scaleX * cfg.vehicleIcon.maxScale / 100;
+        child._y = cfg.vehicleIcon.scaleY * cfg.vehicleIcon.maxScale / 100;
+        child._xscale = child._yscale = cfg.vehicleIcon.maxScale;
+      };
+    }
+    catch (e)
+    {
+      XVMSetErrorText("ERROR: XVMPopulateVehicleTypeMarker():" + String(e));
+    }
   }
   
   function XVMPopulateData()
   {
-    //Logger.add("XVMPopulateData: " + m_vname + " " + m_playerFullName);
-    if (!Config.s_loaded)
-      return;
+    try
+    {
+      //Logger.add("XVMPopulateData: " + m_vname + " " + m_playerFullName);
+      if (!Config.s_loaded)
+        return;
 
-    var start = new Date();
+      var start = new Date();
 
-    var cfg = GetCurrentStateConfigRootNormal();
+      var cfg = GetCurrentStateConfigRootNormal();
 
-    // Vehicle Type Marker
-    XVMPopulateVehicleTypeMarker();
+      // Vehicle Type Marker
+      XVMPopulateVehicleTypeMarker();
 
-    // Vehicle Type Icon
-    if (iconLoader != null && iconLoader.initialized)
-      iconLoader.addEventListener("complete", this, "XVMIconCompleteLoad");
+      // Vehicle Type Icon
+      if (iconLoader != null && iconLoader.initialized)
+        iconLoader.addEventListener("complete", this, "XVMIconCompleteLoad");
 
-    // Health Bar
-    xvmHealthBar.clear();
+      // Health Bar
+      xvmHealthBar.clear();
 
-    if (this.hbBar)
-      this.hbBar.clear();
-    else
-      this.hbBar = xvmHealthBar.createEmptyMovieClip("barMC", xvmHealthBar.getNextHighestDepth());
+      if (this.hbBar)
+        this.hbBar.clear();
+      else
+        this.hbBar = xvmHealthBar.createEmptyMovieClip("barMC", xvmHealthBar.getNextHighestDepth());
 
-    if (this.hbDamageBar)
-      this.hbDamageBar.clear();
-    else
-      this.hbDamageBar = xvmHealthBar.createEmptyMovieClip("damageMC", xvmHealthBar.getNextHighestDepth());
+      if (this.hbDamageBar)
+        this.hbDamageBar.clear();
+      else
+        this.hbDamageBar = xvmHealthBar.createEmptyMovieClip("damageMC", xvmHealthBar.getNextHighestDepth());
 
-    hb.border = cfg.healthBar.border.size;
-    hb.width = cfg.healthBar.width;
-    hb.height = cfg.healthBar.height;
-    hb.damageTime = cfg.healthBar.damage.fade;
+      hb.border = cfg.healthBar.border.size;
+      hb.width = cfg.healthBar.width;
+      hb.height = cfg.healthBar.height;
+      hb.damageTime = cfg.healthBar.damage.fade;
 
-    GraphicsUtil.fillRect(xvmHealthBar, 0, 0, hb.width + 2 * hb.border, hb.height + 2 * hb.border,
-      cfg.healthBar.border.color, cfg.healthBar.border.alpha);
-    GraphicsUtil.fillRect(this.hbBar, 0, 0, hb.width, hb.height,
-      hb.currColor, cfg.healthBar.fill.alpha);
-    GraphicsUtil.fillRect(this.hbDamageBar, 0, 0, hb.width, hb.height,
-      XVMFormatDynamicColor(cfg.healthBar.damage.color, m_curHealth), XVMFormatDynamicAlpha(cfg.healthBar.damage.alpha, m_curHealth));
+      GraphicsUtil.fillRect(xvmHealthBar, 0, 0, hb.width + 2 * hb.border, hb.height + 2 * hb.border,
+        cfg.healthBar.border.color, cfg.healthBar.border.alpha);
+      GraphicsUtil.fillRect(this.hbBar, 0, 0, hb.width, hb.height,
+        hb.currColor, cfg.healthBar.fill.alpha);
+      GraphicsUtil.fillRect(this.hbDamageBar, 0, 0, hb.width, hb.height,
+        XVMFormatDynamicColor(cfg.healthBar.damage.color, m_curHealth), XVMFormatDynamicAlpha(cfg.healthBar.damage.alpha, m_curHealth));
 
-    this.hbBar._x = this.hbBar._y = hb.border;
-    this.hbDamageBar._x = hb.border + hb.width;
-    this.hbDamageBar._y = hb.border;
-    this.hbDamageBar._xscale = 0;
+      this.hbBar._x = this.hbBar._y = hb.border;
+      this.hbDamageBar._x = hb.border + hb.width;
+      this.hbDamageBar._y = hb.border;
+      this.hbDamageBar._xscale = 0;
 
-    // Initialize states and creating text fields
-    XVMInitializeStates();
+      // Initialize states and creating text fields
+      XVMInitializeStates();
 
-    if (DEBUG_TIMES)
-      Logger.add("DEBUG TIME: XVMPopulateData(): " + Utils.elapsedMSec(start, new Date()) + " ms");
+      if (DEBUG_TIMES)
+        Logger.add("DEBUG TIME: XVMPopulateData(): " + Utils.elapsedMSec(start, new Date()) + " ms");
+    }
+    catch (e)
+    {
+      XVMSetErrorText("ERROR: XVMPopulateData():" + String(e));
+    }
   }
 
   function XVMUpdateStyle()
   {
-    //Logger.add("XVMUpdateStyle: " + m_vname + " " + m_playerFullName);
-
-    if (!Config.s_loaded)
-      return;
-    
-    var start = new Date();
-
     try
     {
+      //Logger.add("XVMUpdateStyle: " + m_vname + " " + m_playerFullName);
+
+      if (!Config.s_loaded)
+        return;
+      
+      var start = new Date();
+
       var cfg = GetCurrentStateConfigRoot();
 
       var visible: Boolean;
@@ -775,25 +916,13 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       // Update Colors and Values
       updateCurrentColor(m_curHealth);
       XVMUpdateUI(m_curHealth);
+
+      if (DEBUG_TIMES)
+        Logger.add("DEBUG TIME: XVMUpdateStyle(): " + Utils.elapsedMSec(start, new Date()) + " ms");
     }
     catch (e)
     {
-      XVMSetErrorText("ERR:us:" + String(e));
+      XVMSetErrorText("ERROR: XVMUpdateStyle():" + String(e));
     }
-
-    if (DEBUG_TIMES)
-      Logger.add("DEBUG TIME: XVMUpdateStyle(): " + Utils.elapsedMSec(start, new Date()) + " ms");
-  }
-
-  function XVMSetErrorText(str)
-  {
-    pNameField.setNewTextFormat(new TextFormat("$FieldFont", 13, 0xFF0000, true, false, true, null, null, "center"));
-    pNameField.text = str;
-    pNameField._width = 150;
-    pNameField._height = 20;
-    pNameField._x = -75;
-    pNameField._y = 5;
-    pNameField._alpha = 100;
-    pNameField._visible = true;
   }
 }
