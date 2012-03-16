@@ -471,7 +471,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       return;
 
     var msg = (curHealth < 0) ? cfg.blowupMessage : cfg.damageMessage;
-    var text = XVMFormatDynamicText(XVMFormatStaticText(msg), curHealth, -delta);
+    var text = XVMFormatDynamicText(XVMFormatStaticText(msg), curHealth, delta);
     
     var n = damageHolder.getNextHighestDepth();
     var damageField = damageHolder.createTextField("damageField" + n, n, 0, 0, 140, 20);

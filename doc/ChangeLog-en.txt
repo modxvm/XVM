@@ -1,3 +1,6 @@
+XVM-2.0.test3:
+  * fixed extra '-' in damage text
+
 XVM-2.0.test2:
   * adaptation to WoT 0.7.2 Common Test 2
   * dynamic color optimization
@@ -5,6 +8,7 @@ XVM-2.0.test2:
   * always use 'alive' color for damage text with system colors
   * added clock to battle loading screen
   * macros optimization
+  * shadows quality improved
 
 XVM-2.0.test1:
   * adaptation to WoT 0.7.2 Common Test 1
