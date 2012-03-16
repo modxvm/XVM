@@ -1,5 +1,5 @@
 --- orig\VehicleMarkersManager.xml	2012-03-15 17:19:14.848876600 +0200
-+++ VehicleMarkersManager.xml	2012-03-15 17:35:52.528940700 +0200
++++ VehicleMarkersManager.xml	2012-03-16 18:59:31.737437800 +0200
 @@ -3117,7 +3117,7 @@
        </DefineBitsLossless2>
        <DefineShape objectID="81">
@@ -528,15 +528,6 @@
              </transform>
            </PlaceObject2>
            <ShowFrame/>
-@@ -4742,7 +4742,7 @@
-               </ClippedBitmap>
-               <ClippedBitmap objectID="141">
-                 <matrix>
--                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-200" transY="0"/>
-+                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-570"/>
-                 </matrix>
-               </ClippedBitmap>
-             </fillStyles>
 @@ -4975,7 +4975,7 @@
        </DefineBitsLossless2>
        <DefineShape objectID="151">
@@ -1047,6 +1038,15 @@
          </bounds>
          <styles>
            <StyleList>
+@@ -6453,7 +6453,7 @@
+               </ClippedBitmap>
+               <ClippedBitmap objectID="193">
+                 <matrix>
+-                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-200" transY="0"/>
++                  <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-390" transY="-410"/>
+                 </matrix>
+               </ClippedBitmap>
+             </fillStyles>
 @@ -6463,7 +6463,7 @@
          <shapes>
            <Shape>
