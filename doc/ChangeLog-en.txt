@@ -1,5 +1,15 @@
 XVM-2.0.test3:
   * fixed extra '-' in damage text
+  * advanced in-game error reporting
+  * text formats in battleLoading, statisticForm and playersPanel split to left and right
+  * playersPanel.swf modified for 0.7.2 patch (only icon mirroring is working now)
+  * config changed to version 1.2.0. Parameters moved:
+      rating/battleLoading => battleLoading
+      rating/statisticForm => statisticForm
+      rating/playersPanel => playersPanel
+      battle/battleLoadingShowClock => battleLoading/showClock
+      battle/playersPanelAlpha => playersPanel.alpha
+      battle/playersPanelLargeWidth => playersPanel.large.width
 
 XVM-2.0.test2:
   * adaptation to WoT 0.7.2 Common Test 2

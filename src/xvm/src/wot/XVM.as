@@ -101,6 +101,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
         var wm = _root.createTextField("xvmWatermark", _root.getNextHighestDepth(), -1, -2, 50, 16);
         wm.antiAliasType = "advanced";
         wm.setNewTextFormat(new TextFormat("$FieldFont", 8, 0xCCCCCC, false, false, false, null, null, "left"));
+        wm._alpha = 10;
         wm.filters = [new DropShadowFilter(0, 0, 0, 30, 1, 1, 0.3, 3)];
         wm.text = "XVM v" + Defines.XVM_VERSION;
       }
@@ -203,6 +204,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     if (m_vehicleClass != null)
       this.setVehicleClass();
 
+//Logger.add(m_markerState);
     if (m_markerState != null)
       marker.gotoAndPlay(m_markerState);
       
@@ -365,6 +367,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   {
     // TODO: check color blind mode from ingame settings
     //return Config.s_config.battle.isColorBlind;
+//Logger.add(m_markerLabel + " " + m_markerState + " " + m_playerFullName);
     return false;
   }
 

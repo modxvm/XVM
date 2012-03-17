@@ -140,7 +140,7 @@ class wot.utils.Config
             }
             if (!config)
             {
-              if (_global.hasOwnProperty("xvm_battleloading"))
+              if (_global.xvm_battleloading)
                 _global.xvm_battleloading.setInfoFieldData( { error: "Error parsing config file. Using default settings." } );
             }
             else
@@ -156,11 +156,11 @@ class wot.utils.Config
           }
           catch (ex)
           {
-            var txt = str.substring(ex.at - 50, ex.at - 1) + ">>>" + str.charAt(ex.at) + "<<<" + str.substr(ex.at + 1, 50);
+            var txt = str.substring(ex.at - 100, ex.at - 1) + ">>>" + str.charAt(ex.at) + "<<<" + str.substr(ex.at + 1, 100);
             txt = txt.split("\r").join("").split("\n").join("");
             while (txt.indexOf("  ") != -1)
               txt = txt.split("  ").join(" ");
-            if (_global.hasOwnProperty("xvm_battleloading"))
+            if (_global.xvm_battleloading)
             {
               _global.xvm_battleloading.setInfoFieldData( { error: "Error loading config file. Using default settings.\n" + 
                 "[" + Utils.trim(ex.at) + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " + txt } );
@@ -169,7 +169,7 @@ class wot.utils.Config
         }
         else
         {
-          if (_global.hasOwnProperty("xvm_battleloading"))
+          if (_global.xvm_battleloading)
             _global.xvm_battleloading.setInfoFieldData({ error: "Error loading config file. Using default settings." });
         }
         if (Config.s_load_last_stat && Config.s_config.rating.showPlayersStatistics)
@@ -289,10 +289,56 @@ class wot.utils.Config
       v = "1.1.0";
     }
 
-/*
-    if (v == "1.0.x")
+    if (v == "1.1.0")
     {
-      // Convert XVM 1.0.x => 1.0.y
+      // Convert XVM 1.1.0 => 1.2.0
+      config.battleLoading = { };
+      config.statisticForm = { };
+      config.playersPanel = { };
+      config.playersPanel.medium = { };
+      config.playersPanel.large = { };
+      
+      if (config.battle)
+      {
+        config.battleLoading.showClock = Utils.toBool(config.battle.battleLoadingShowClock, true);
+        config.playersPanel.alpha = Utils.toInt(config.battle.playersPanelAlpha, 100);
+        config.playersPanel.large.width = Utils.toInt(config.battle.playersPanelLargeWidth, 170); // TODO: * coef
+      }
+
+      if (config.rating)
+      {
+        if (config.rating.battleLoading && config.rating.battleLoading.format)
+        {
+          config.battleLoading.formatLeft = config.rating.battleLoading.format;
+          config.battleLoading.formatRight = config.rating.battleLoading.format;
+        }
+        if (config.rating.statisticForm && config.rating.statisticForm.format)
+        {
+          config.statisticForm.formatLeft = config.rating.statisticForm.format;
+          config.statisticForm.formatRight = config.rating.statisticForm.format;
+        }
+        if (config.rating.playersPanel)
+        {
+          if (config.rating.playersPanel.format)
+          {
+            config.playersPanel.large.nickFormatLeft = config.rating.playersPanel.format + " {{nick}}";
+            config.playersPanel.large.nickFormatRight = "{{nick}} " + config.rating.playersPanel.format;
+          }
+          if (config.rating.playersPanel.middleColor)
+          {
+            config.playersPanel.medium.formatLeft = "<font color='" + config.rating.playersPanel.middleColor + "'>{{nick}}</font>";
+            config.playersPanel.medium.formatRight = "<font color='" + config.rating.playersPanel.middleColor + "'>{{nick}}</font>";
+          }
+        }
+      }
+
+      v = "1.2.0";
+    }
+    
+/*
+    if (v == "1.x.x")
+    {
+      // Convert XVM 1.x.x => 1.y.y
     }
 */
     return config;

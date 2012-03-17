@@ -24,7 +24,7 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
 
     if (!infoField)
     {
-      infoField = createTextField("info", getNextHighestDepth(), _width / 2, 0, 500, 100);
+      infoField = createTextField("info", getNextHighestDepth(), _width / 2, 0, 400, 100);
       infoField.wordWrap = true;
       infoField.antiAliasType = "advanced";
       infoField.setNewTextFormat(new TextFormat("$FieldFont", 12, 0x000000, true, false, false, null, null, "left"));
@@ -52,7 +52,7 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
       return;
     }
 
-    if (Config.s_config.battle.battleLoadingShowClock)
+    if (Config.s_config.battleLoading.showClock)
       obj.ShowClock();
 
     // Force stats loading after 1 sec (for 12x12 battles, FogOfWar, ...)
@@ -62,7 +62,7 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
 
   public function ShowClock()
   {
-    var clock = createTextField("clock", getNextHighestDepth(), 330, 25, 100, 40);
+    var clock = createTextField("clock", getNextHighestDepth(), 280, 25, 100, 40);
     clock.antiAliasType = "advanced";
     clock.setNewTextFormat(new TextFormat("$TitleFont", 32, 0xFFFFFF, false, false, false, null, null, "right"));
     clock.filters = [ new DropShadowFilter(0, 0, 0, 100, 5, 5, 5, 3) ];
@@ -78,7 +78,7 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
   }
 
   // TODO: Clock color depended of win chances
-  public static function calculateChances()
+  public function calculateChances()
   {
 /*    for (var pname in Stat.s_player_data)
     {
@@ -88,12 +88,12 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
     }*/
   }
 
-  public static function setInfoFieldData(data)
+  public function setInfoFieldData(data)
   {
     if (!infoField)
       return;
 
-    var txt: String = "XVM v" + Defines.XVM_VERSION + "\n";
+    var txt: String = "XVM v" + Defines.XVM_VERSION + " ";
 
     if (data.ver && Utils.compareVersions(String(data.ver), Defines.XVM_VERSION) == 1)
     {

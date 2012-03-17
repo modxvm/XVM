@@ -12,95 +12,40 @@
   "battle": {
     "mirroredVehicleIcons": true,
     "showPostmortemTips": true,
-    "battleLoadingShowClock": true,
-    "playersPanelAlpha": 100,
-    "playersPanelLargeWidth": 170,
     "drawGrid": false
   },
   "rating": {
     "showPlayersStatistics": true,
-    "loadEnemyStatsInFogOfWar": false,
-    "battleLoading": {
-      "show": true,
-      "format": "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>"
+    "loadEnemyStatsInFogOfWar": false
+  },
+  "battleLoading": {
+    "showClock": true,
+    "formatLeft": "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
+  },
+  "statisticForm": {
+    "formatLeft": "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
+  },
+  "playersPanel": {
+    "alpha": 100,
+    "medium": {
+      "width": 50,
+      "formatLeft": "<font color='{{c:eff}}'>{{nick}}</font>",
+      "formatRight": "<font color='{{c:eff}}'>{{nick}}</font>"
     },
-    "playersPanel": {
-      "show": true,
-      "format": "<font color='{{c:eff}}'>{{rating}}</font>",
-      "middleColor": "{{c:eff}}"
+    "medium2": {
+      "width": 50,
+      "formatLeft": "<font color='{{c:eff}}'>{{vehicle}}</font>",
+      "formatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
     },
-    "statisticForm": {
-      "show": true,
-      "format": "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>"
+    "large": {
+      "width": 187,
+      "nickFormatLeft": "<font color='{{c:eff}}'>{{rating}}</font> {{nick}}",
+      "nickFormatRight": "{{nick}} <font color='{{c:eff}}'>{{rating}}</font>",
+      "vehicleFormatLeft": "<font color='{{c:eff}}'>{{rating}}</font> {{vehicle}}",
+      "vehicleFormatRight": "{{vehicle}} <font color='{{c:eff}}'>{{rating}}</font>"
     }
-  },
-  "colors": {
-    "hp": [
-      { "value": 200,  "color": "0xDD0000" },
-      { "value": 400,  "color": "0xDD3333" },
-      { "value": 1000, "color": "0xFFCC33" },
-      { "value": 9999, "color": "0xFFFFFF" }
-    ],
-    "hp_ratio": [
-      { "value": 10,  "color": "0xDD0000" },
-      { "value": 25,  "color": "0xDD3333" },
-      { "value": 50,  "color": "0xFFCC33" },
-      { "value": 101, "color": "0xFFFFFF" }
-    ],
-    "eff": [
-      { "value": 600,  "color": "0xDD0000" },
-      { "value": 900,  "color": "0xDD3333" },
-      { "value": 1200, "color": "0xFFCC33" },
-      { "value": 1500, "color": "0x99FF33" },
-      { "value": 1800, "color": "0x33FF33" },
-      { "value": 9999, "color": "0xCC66CC" }
-    ],
-    "rating": [
-      { "value": 42,  "color": "0xDD0000" },
-      { "value": 46,  "color": "0xDD3333" },
-      { "value": 49,  "color": "0xDDDD33" },
-      { "value": 51,  "color": "0xFFCC33" },
-      { "value": 53,  "color": "0x99FF33" },
-      { "value": 57,  "color": "0x33FF33" },
-      { "value": 101, "color": "0xCC66CC" }
-    ],
-    "kb": [
-      { "value": 1,   "color": "0xDD0000" },
-      { "value": 3,   "color": "0xDD3333" },
-      { "value": 5,   "color": "0xFFCC33" },
-      { "value": 8,   "color": "0x99FF33" },
-      { "value": 12,  "color": "0x33FF33" },
-      { "value": 999, "color": "0xCC66CC" }
-    ]
-  },
-  "alpha": {
-    "hp": [
-      { "value": 200,  "alpha": 100 },
-      { "value": 400,  "alpha": 80 },
-      { "value": 1000, "alpha": 60 },
-      { "value": 9999, "alpha": 40 }
-    ],
-    "hp_ratio": [
-      { "value": 10,  "alpha": 100 },
-      { "value": 25,  "alpha": 80 },
-      { "value": 50,  "alpha": 60 },
-      { "value": 101, "alpha": 40 }
-    ],
-    "eff": [
-      { "value": 900,  "alpha": 100 },
-      { "value": 1200, "alpha": 100 },
-      { "value": 9999, "alpha": 100 }
-    ],
-    "rating": [
-      { "value": 49,  "alpha": 100 },
-      { "value": 53,  "alpha": 100 },
-      { "value": 101, "alpha": 100 }
-    ],
-    "kb": [
-      { "value": 2,   "alpha": 100 },
-      { "value": 10,  "alpha": 100 },
-      { "value": 999, "alpha": 100 }
-    ]
   },
   "markers": {
     "ally": {
@@ -1145,5 +1090,73 @@
         }
       }
     }
+  },
+  "colors": {
+    "hp": [
+      { "value": 200,  "color": "0xDD0000" },
+      { "value": 400,  "color": "0xDD3333" },
+      { "value": 1000, "color": "0xFFCC33" },
+      { "value": 9999, "color": "0xFFFFFF" }
+    ],
+    "hp_ratio": [
+      { "value": 10,  "color": "0xDD0000" },
+      { "value": 25,  "color": "0xDD3333" },
+      { "value": 50,  "color": "0xFFCC33" },
+      { "value": 101, "color": "0xFFFFFF" }
+    ],
+    "eff": [
+      { "value": 600,  "color": "0xDD0000" },
+      { "value": 900,  "color": "0xDD3333" },
+      { "value": 1200, "color": "0xFFCC33" },
+      { "value": 1500, "color": "0x99FF33" },
+      { "value": 1800, "color": "0x33FF33" },
+      { "value": 9999, "color": "0xCC66CC" }
+    ],
+    "rating": [
+      { "value": 42,  "color": "0xDD0000" },
+      { "value": 46,  "color": "0xDD3333" },
+      { "value": 49,  "color": "0xDDDD33" },
+      { "value": 51,  "color": "0xFFCC33" },
+      { "value": 53,  "color": "0x99FF33" },
+      { "value": 57,  "color": "0x33FF33" },
+      { "value": 101, "color": "0xCC66CC" }
+    ],
+    "kb": [
+      { "value": 1,   "color": "0xDD0000" },
+      { "value": 3,   "color": "0xDD3333" },
+      { "value": 5,   "color": "0xFFCC33" },
+      { "value": 8,   "color": "0x99FF33" },
+      { "value": 12,  "color": "0x33FF33" },
+      { "value": 999, "color": "0xCC66CC" }
+    ]
+  },
+  "alpha": {
+    "hp": [
+      { "value": 200,  "alpha": 100 },
+      { "value": 400,  "alpha": 80 },
+      { "value": 1000, "alpha": 60 },
+      { "value": 9999, "alpha": 40 }
+    ],
+    "hp_ratio": [
+      { "value": 10,  "alpha": 100 },
+      { "value": 25,  "alpha": 80 },
+      { "value": 50,  "alpha": 60 },
+      { "value": 101, "alpha": 40 }
+    ],
+    "eff": [
+      { "value": 900,  "alpha": 100 },
+      { "value": 1200, "alpha": 100 },
+      { "value": 9999, "alpha": 100 }
+    ],
+    "rating": [
+      { "value": 49,  "alpha": 100 },
+      { "value": 53,  "alpha": 100 },
+      { "value": 101, "alpha": 100 }
+    ],
+    "kb": [
+      { "value": 2,   "alpha": 100 },
+      { "value": 10,  "alpha": 100 },
+      { "value": 999, "alpha": 100 }
+    ]
   }
 }

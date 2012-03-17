@@ -23,116 +23,60 @@ class wot.utils.DefaultConfig
         modMinVersion: Defines.XVM_VERSION
       },
       battle: {
-        /* true - включить режим цветовой слепоты */
+        // true - включить режим цветовой слепоты
 //        isColorBlind: false,
-        /* false - отключить зеркалирование иконок танков (полезно для альтернативных иконок) */
+        // false - отключить зеркалирование иконок танков (полезно для альтернативных иконок)
         mirroredVehicleIcons: true,
-        /* false - отключить всплывающую внизу панель после смерти */
+        // false - отключить всплывающую внизу панель после смерти
         showPostmortemTips: true,
-        /* false - выключить отображение часов на экране загрузки боя */
-        battleLoadingShowClock: true,
-        /* 0..100 - задает прозрачность "ушей". 0 - прозрачные, 100 - не прозрачные */
-        playersPanelAlpha: 100,
-        /* 0..170 - задает ширину поля имени игрока в "ушах" в широком режиме. По умолчанию: 170 */
-        playersPanelLargeWidth: 170,
-        /* true - включить отображение сетки координат (может быть полезным для настройки) */
+        // true - включить отображение сетки координат (может быть полезным для настройки)
         drawGrid: false
       },
       rating: {
-        /* true - включить отображение статистики. Глобальный переключатель - без него модуль статистики будет везде отключен. */
+        // true - включить отображение статистики. Глобальный переключатель - без него модуль статистики будет везде отключен.
         showPlayersStatistics: false,
-        /* true - включить загрузку данных по противникам в "тумане войны" */
-        loadEnemyStatsInFogOfWar: false,
-        battleLoading: {
-          /* false - отключить отображение статистики в окне загрузки боя */
-          show: true,
-          /* формат отображения (допускаются макроподстановки) */
-          format: "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>"
+        // true - включить загрузку данных по противникам в "тумане войны"
+        loadEnemyStatsInFogOfWar: false
+      },
+      battleLoading: {
+        // false - выключить отображение часов на экране загрузки боя
+        showClock: true,
+        // формат отображения (допускаются макроподстановки)
+        formatLeft: "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+        formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
+      },
+      statisticForm: {
+        // формат отображения
+        formatLeft: "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+        formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
+      },
+      playersPanel: {
+        // 0..100 - задает прозрачность "ушей". 0 - прозрачные, 100 - не прозрачные
+        alpha: 100,
+        // режим medium1
+        medium: {
+          // 0..170 - задает ширину поля имени игрока. По умолчанию: 50
+          width: 50,
+          // формат отображения
+          formatLeft: "<font color='{{c:eff}}'>{{nick}}</font>",
+          formatRight: "<font color='{{c:eff}}'>{{nick}}</font>"
         },
-        playersPanel: {
-          /* false - отключить отображение статистики в широких ушах */
-          show: true,
-          /* формат отображения */
-          format: "<font color='{{c:eff}}'>{{rating}}</font>",
-          /* цвет в средних ушах. Чтобы оставить стандартный, необходимо удалить значение */
-          middleColor: "{{c:eff}}"
+        medium2: {
+          // 0..170 - задает ширину поля имени игрока. По умолчанию: 50
+          width: 50,
+          // формат отображения
+          formatLeft: "<font color='{{c:eff}}'>{{vehicle}}</font>",
+          formatRight: "<font color='{{c:eff}}'>{{vehicle}}</font>"
         },
-        statisticForm: {
-          /* false - отключить отображение статистики в окне статистики боя (по клавише Tab) */
-          show: true,
-          /* формат отображения */
-          format: "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>"
+        large: {
+          // 0..170 - задает ширину поля имени игрока. По умолчанию: 170
+          width: 187,
+          // формат отображения
+          nickFormatLeft: "<font color='{{c:eff}}'>{{rating}}</font> {{nick}}",
+          nickFormatRight: "{{nick}} <font color='{{c:eff}}'>{{rating}}</font>",
+          vehicleFormatLeft: "<font color='{{c:eff}}'>{{rating}}</font> {{vehicle}}",
+          vehicleFormatRight: "{{vehicle}} <font color='{{c:eff}}'>{{rating}}</font>"
         }
-      },
-      colors: {
-        /* values - from min to max, colors are for values 'lesser then ...' */
-        hp: [
-          { value: 200,  color: 0xDD0000 },
-          { value: 400,  color: 0xDD3333 },
-          { value: 1000, color: 0xFFCC33 },
-          { value: 9999, color: 0xFFFFFF }
-        ],
-        hp_ratio: [
-          { value: 10,  color: 0xDD0000 },
-          { value: 25,  color: 0xDD3333 },
-          { value: 50,  color: 0xFFCC33 },
-          { value: 101, color: 0xFFFFFF }
-        ],
-        eff: [
-          { value: 600,  color: 0xDD0000 },
-          { value: 900,  color: 0xDD3333 },
-          { value: 1200, color: 0xFFCC33 },
-          { value: 1500, color: 0x99FF33 },
-          { value: 1800, color: 0x33FF33 },
-          { value: 9999, color: 0xCC66CC }
-        ],
-        rating: [
-          { value: 42,  color: 0xDD0000 },
-          { value: 46,  color: 0xDD3333 },
-          { value: 49,  color: 0xDDDD33 },
-          { value: 51,  color: 0xFFCC33 },
-          { value: 53,  color: 0x99FF33 },
-          { value: 57,  color: 0x33FF33 },
-          { value: 101, color: 0xCC66CC }
-        ],
-        kb: [
-          { value: 1,   color: 0xDD0000 },
-          { value: 3,   color: 0xDD3333 },
-          { value: 5,   color: 0xFFCC33 },
-          { value: 8,   color: 0x99FF33 },
-          { value: 12,  color: 0x33FF33 },
-          { value: 999, color: 0xCC66CC }
-        ]
-      },
-      alpha: {
-        /* values - from min to max, transparency are for values 'lesser then ...' */
-        eff: [
-          { value: 900,  alpha: 100 },
-          { value: 1200, alpha: 100 },
-          { value: 9999, alpha: 100 }
-        ],
-        rating: [
-          { value: 49,  alpha: 100 },
-          { value: 53,  alpha: 100 },
-          { value: 101, alpha: 100 }
-        ],
-        kb: [
-          { value: 2,   alpha: 100 },
-          { value: 10,  alpha: 100 },
-          { value: 999, alpha: 100 }
-        ],
-        hp: [
-          { value: 200,  alpha: 100 },
-          { value: 400,  alpha: 80 },
-          { value: 1000, alpha: 60 },
-          { value: 9999, alpha: 40 }
-        ],
-        hp_ratio: [
-          { value: 10,  alpha: 100 },
-          { value: 25,  alpha: 80 },
-          { value: 50,  alpha: 60 },
-          { value: 101, alpha: 40 }
-        ]
       },
       markers: {
         ally: {
@@ -219,6 +163,76 @@ class wot.utils.DefaultConfig
             }
           }
         }
+      },
+      colors: {
+        // values - from min to max, colors are for values 'lesser then ...'
+        hp: [
+          { value: 200,  color: 0xDD0000 },
+          { value: 400,  color: 0xDD3333 },
+          { value: 1000, color: 0xFFCC33 },
+          { value: 9999, color: 0xFFFFFF }
+        ],
+        hp_ratio: [
+          { value: 10,  color: 0xDD0000 },
+          { value: 25,  color: 0xDD3333 },
+          { value: 50,  color: 0xFFCC33 },
+          { value: 101, color: 0xFFFFFF }
+        ],
+        eff: [
+          { value: 600,  color: 0xDD0000 },
+          { value: 900,  color: 0xDD3333 },
+          { value: 1200, color: 0xFFCC33 },
+          { value: 1500, color: 0x99FF33 },
+          { value: 1800, color: 0x33FF33 },
+          { value: 9999, color: 0xCC66CC }
+        ],
+        rating: [
+          { value: 42,  color: 0xDD0000 },
+          { value: 46,  color: 0xDD3333 },
+          { value: 49,  color: 0xDDDD33 },
+          { value: 51,  color: 0xFFCC33 },
+          { value: 53,  color: 0x99FF33 },
+          { value: 57,  color: 0x33FF33 },
+          { value: 101, color: 0xCC66CC }
+        ],
+        kb: [
+          { value: 1,   color: 0xDD0000 },
+          { value: 3,   color: 0xDD3333 },
+          { value: 5,   color: 0xFFCC33 },
+          { value: 8,   color: 0x99FF33 },
+          { value: 12,  color: 0x33FF33 },
+          { value: 999, color: 0xCC66CC }
+        ]
+      },
+      alpha: {
+        // values - from min to max, transparency are for values 'lesser then ...'
+        eff: [
+          { value: 900,  alpha: 100 },
+          { value: 1200, alpha: 100 },
+          { value: 9999, alpha: 100 }
+        ],
+        rating: [
+          { value: 49,  alpha: 100 },
+          { value: 53,  alpha: 100 },
+          { value: 101, alpha: 100 }
+        ],
+        kb: [
+          { value: 2,   alpha: 100 },
+          { value: 10,  alpha: 100 },
+          { value: 999, alpha: 100 }
+        ],
+        hp: [
+          { value: 200,  alpha: 100 },
+          { value: 400,  alpha: 80 },
+          { value: 1000, alpha: 60 },
+          { value: 9999, alpha: 40 }
+        ],
+        hp_ratio: [
+          { value: 10,  alpha: 100 },
+          { value: 25,  alpha: 80 },
+          { value: 50,  alpha: 60 },
+          { value: 101, alpha: 40 }
+        ]
       }
     };
   }

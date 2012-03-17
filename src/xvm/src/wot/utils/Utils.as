@@ -107,8 +107,10 @@ class wot.utils.Utils
 
   public static function toBool(value: Object, defaultValue: Boolean): Boolean
   {
+    if ((typeof value) == "boolean")
+      return Boolean(value);
     if (!value)
-      return defaultValue ? true : false;
+      return defaultValue;
     value = String(value).toLowerCase();
     return defaultValue ? value != "false" : value == "true";
   }

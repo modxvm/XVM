@@ -162,6 +162,8 @@ class wot.utils.Stat
       return txt;
     var pname = Utils.CleanPlayerName(data.label || data.name).toUpperCase();
     var ratingText = Stat.FormatText(data, format);
+    if (!ratingText || ratingText == "")
+      return txt;
     return (ratingPosition == Defines.POSITION_LEFT)
       ? ratingText + " " + txt
       : txt + " " + ratingText;
@@ -361,7 +363,7 @@ class wot.utils.Stat
 
         if (stats.info && stats.info.xvm)
         {
-          if (_global.hasOwnProperty("xvm_battleloading"))
+          if (_global.xvm_battleloading)
             _global.xvm_battleloading.setInfoFieldData(stats.info.xvm);
         }
 

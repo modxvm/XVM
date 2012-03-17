@@ -124,10 +124,9 @@ Enhancements not available from OTM Editor (OTMData.xml):
   'behavior/*/*/*/infoText' set position and content of text fields
 
 Macros available:
-  In battleLoading, playersPanel, statisticForm (not implemented yet):
+  In players panel:
     {{nick}}       - player name
     {{vehicle}}    - vehicle name
-    {{level}}      - vehicle level
 
   In tank markers:
     {{hp}}         - current health points
@@ -170,7 +169,7 @@ Macros available:
 2. The same, but with each number colored by its value:
   "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>"
 3. Same as 2, but with aligned columns:
-   "<font face='Consolas' size='10' color='{{c:kb}}'>{{kb:3}}</font> <font face='Consolas' size='10' color='{{c:eff}}'>{{eff:4}}</font> <font face='Consolas' size='10' color='{{c:rating}}'>{{rating:3}}</font>"
+   "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>"
 4. Show GWR colored by efficiency:
   "<font color='{{c:eff}}'>{{rating}}</font>"
 

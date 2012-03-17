@@ -56,12 +56,12 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
   function update()
   {
     super.update();
-    if (Config.s_config.rating.showPlayersStatistics && Config.s_config.rating.battleLoading.show)
+    if (Config.s_config.rating.showPlayersStatistics)
     {
       if (data)
       {
         vehicleField.htmlText = Stat.DecorateField(data, data.vehicle,
-          Config.s_config.rating.battleLoading.format,
+          this.owner._name == "team1List" ? Config.s_config.battleLoading.formatLeft : Config.s_config.battleLoading.formatRight,
           this.owner._name == "team1List" ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
       }
     }
@@ -70,11 +70,8 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
   // update delegate (function name is fixed and cannot be changed)
   function XVMStatUpdateCallback(pdata)
   {
-    if (Config.s_config.rating.battleLoading.show)
-    {
-      vehicleField.htmlText = Stat.DecorateField(pdata, pdata.originalText,
-        Config.s_config.rating.battleLoading.format,
-        pdata.team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
-    }
+    vehicleField.htmlText = Stat.DecorateField(pdata, pdata.originalText,
+      pdata.team == Defines.TEAM_ALLY ? Config.s_config.battleLoading.formatLeft : Config.s_config.battleLoading.formatRight,
+      pdata.team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
   }
 }

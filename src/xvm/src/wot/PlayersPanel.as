@@ -11,7 +11,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   private var m_largePanelWidth: Number = -1;
   private var m_largePanelOffset: Number = NaN;
   private var m_widthTester: TextField = null;
-  
+
   function PlayersPanel()
   {
     super();
@@ -31,8 +31,8 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     event.target._xscale = -event.target._xscale;
     event.target._x -= event.target.__width;
 
-    if (!Config.s_config.battle.mirroredVehicleIcons && m_type == "right")
-      event.target["renderer"].vehicleLevel._x = event.target._x + 15;
+    if (!Config.s_config.battle.mirroredVehicleIcons)
+      event.target.renderer.vehicleLevel._x = event.target._x + 15;
   }
 
   // override
@@ -49,20 +49,20 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         renderer.iconLoader["renderer"] = renderer;
       }
 
-      players_bg.players_bg._alpha = Config.s_config.battle.playersPanelAlpha;
+      players_bg.players_bg._alpha = Config.s_config.playersPanel.alpha;
 
-      m_largePanelWidth = Math.min(Config.s_config.battle.playersPanelLargeWidth, 170);
+      //m_largePanelWidth = Math.min(Config.s_config.playersPanel.large.width, 170);
     }
     super.setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount);
   }
 
   // override
-  private var _lastModeWasLarge = false;
+  //private var _lastModeWasLarge = false;
   function update()
   {
     super.update();
 
-    if (m_state == "large" && m_largePanelWidth >= 0)
+    /*if (m_state == "large" && m_largePanelWidth >= 0)
     {
       if (m_largePanelOffset == NaN)
         m_largePanelOffset = m_names._width - m_largePanelWidth;
@@ -82,7 +82,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
       if (_lastModeWasLarge)
         this._x = (m_type == "left") ? this._x + m_largePanelOffset : this._x - m_largePanelOffset;
       _lastModeWasLarge = false;
-    }
+    }*/
   }
 
   // override
@@ -90,14 +90,15 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   {
     super.onRecreateDevice(width, height);
 
-    if (m_state == "large" && m_largePanelWidth >= 0)
-      this._x = (m_type == "left") ? this._x - m_largePanelOffset : this._x + m_largePanelOffset;
+    //if (m_state == "large" && m_largePanelWidth >= 0)
+    //  this._x = (m_type == "left") ? this._x - m_largePanelOffset : this._x + m_largePanelOffset;
   }
 
   // override
   function _setNamesStr(data, sel, isColorBlind, knownPlayersCount)
   {
-    var _loc7 = "";
+    super._setNamesStr(data, sel, isColorBlind, knownPlayersCount);
+    /*var _loc7 = "";
     var _loc9 = "";
     var _loc3 = "";
     var _loc8 = 0;
@@ -140,7 +141,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     }
 
     m_names.htmlText = _loc7;
-    this.updateWidthOfLongestName();
+    this.updateWidthOfLongestName();*/
   }
 
   function XVMSetNamesStr(data, str)
@@ -161,10 +162,10 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
       while (pname.length >= 0)
       {
         str = (pname == data.label || pname.length == 0) ? pname : pname + "...";
-        if (Stat.s_player_ratings && Config.s_config.rating.playersPanel.show)
+        if (Stat.s_player_ratings)
         {
           str = Stat.DecorateField(data, str,
-            Config.s_config.rating.playersPanel.format,
+            m_type == "left" ? Config.s_config.playersPanel.formatLeft : Config.s_config.playersPanel.formatRight,
             m_type == "left" ? Defines.POSITION_LEFT : Defines.POSITION_RIGHT);
         }
         if (pname.length == 0)
@@ -179,7 +180,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     {
       if (Stat.s_player_ratings)
       {
-        var middleColor: String = Config.s_config.rating.playersPanel.middleColor;
+        var middleColor: String = Config.s_config.playersPanel.middleColor;
         if (middleColor)
           str = Stat.FormatText(data, "<font color='" + middleColor + "'>" + str + "</font>");
       }
