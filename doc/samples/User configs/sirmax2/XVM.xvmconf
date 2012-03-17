@@ -1,5 +1,5 @@
 ﻿{
-  "configVersion": "1.1.0",
+  "configVersion": "1.2.0",
   "definition": {
     "author": "sirmax2",
     "description": "Sirmax's settings for XVM",
@@ -10,29 +10,38 @@
   },
   "battle": {
     "mirroredVehicleIcons": false,
-    "showPostmortemTips": false,
-    "battleLoadingShowClock": true,
-    "playersPanelAlpha": 50,
-    "playersPanelLargeWidth": 90
+    "showPostmortemTips": false
   },
   "rating": {
-    "showPlayersStatistics": "true",
-    "battleLoading": {
-      "format": "<font face='Consolas' size='10' color='{{c:kb}}'>{{kb:3}}</font> <font face='Consolas' size='10' color='{{c:eff}}'>{{eff:4}}</font> <font face='Consolas' size='10' color='{{c:rating}}'>{{rating:3}}</font>"
-    },
-    "playersPanel": {
-      "format": "<font color='{{c:eff}}'>{{rating}}</font>"
-    },
-    "statisticForm": {
-      "format": "<font face='Consolas' size='10' color='{{c:kb}}'>{{kb:3}}</font> <font face='Consolas' size='10' color='{{c:eff}}'>{{eff:4}}</font> <font face='Consolas' size='10' color='{{c:rating}}'>{{rating:3}}</font>"
-    }
+    "showPlayersStatistics": true
   },
-  "alpha": {
-    "hp": [
-      { "value": 350,  "alpha": 100 },
-      { "value": 500,  "alpha": 50 },
-      { "value": 9999, "alpha": 0 }
-    ]
+  "battleLoading": {
+    "formatLeft": "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
+    "formatRight": "<font face='Consolas' size='11'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>"
+  },
+  "statisticForm": {
+    "formatLeft": "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
+    "formatRight": "<font face='Consolas' size='11'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>"
+  },
+  "playersPanel": {
+    "alpha": 50,
+    "middle": {
+      "width": 50,
+      "formatLeft": "<font color='{{c:eff}}'>{{nick}}</font>",
+      "formatRight": "<font color='{{c:eff}}'>{{nick}}</font>"
+    },
+    "middle2": {
+      "width": 50,
+      "formatLeft": "<font color='{{c:eff}}'>{{vehicle}}</font>",
+      "formatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
+    },
+    "large": {
+      "width": 90,
+      "nickFormatLeft": "<font color='{{c:eff}}'>{{rating}}</font> {{nick}}",
+      "nickFormatRight": "{{nick}} <font color='{{c:eff}}'>{{rating}}</font>",
+      "vehicleFormatLeft": "<font color='{{c:eff}}'>{{rating}}</font> {{vehicle}}",
+      "vehicleFormatRight": "{{vehicle}} <font color='{{c:eff}}'>{{rating}}</font>"
+    }
   },
   "markers": {
     "ally": {
@@ -133,5 +142,12 @@
         }
       }
     }
+  },
+  "alpha": {
+    "hp": [
+      { "value": 350,  "alpha": 100 },
+      { "value": 500,  "alpha": 50 },
+      { "value": 9999, "alpha": 0 }
+    ]
   }
 }
