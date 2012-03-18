@@ -1,3 +1,6 @@
+XVM-2.0.test4:
+  * fixed config loading
+
 XVM-2.0.test3:
   * fixed extra '-' in damage text
   * advanced in-game error reporting

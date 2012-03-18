@@ -82,43 +82,39 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
   function XVMInit(obj: Object)
   {
-    if (!obj)
-      obj = this;
-
-    try
+    onEnterFrame = function()
     {
-      if (!Config.s_loaded)
+      try
       {
-        // Wait for config loaded
-        var timer: TimelineLite = new TimelineLite({onComplete:XVMInit, onCompleteParams:[obj]});
-        timer.insert(new TweenLite(obj, 0.1));
-        return;
-      }
+        if (!Config.s_loaded)
+          return;
 
-      // Draw watermark
-      if (!_root.hasOwnProperty("xvmWatermark"))
+        delete this.onEnterFrame;
+      
+        // Draw watermark
+        if (!_root.hasOwnProperty("xvmWatermark"))
+        {
+          var wm = _root.createTextField("xvmWatermark", _root.getNextHighestDepth(), -1, -2, 50, 16);
+          wm.antiAliasType = "advanced";
+          wm.setNewTextFormat(new TextFormat("$FieldFont", 8, 0x808080, false, false, false, null, null, "left"));
+          wm._alpha = 10;
+          wm.text = "XVM v" + Defines.XVM_VERSION;
+        }
+
+        // Draw grid
+        if (Config.s_config.battle.drawGrid)
+        {
+          this.grid = this.createEmptyMovieClip("grid", this.getNextHighestDepth());
+          GraphicsUtil.drawGrid(obj.grid, -50, -50, 100, 100, 0xFFFF00, 30);
+        }
+
+        this.XVMPopulateData();
+        this.updateMarkerLabel();
+      }
+      catch (e)
       {
-        var wm = _root.createTextField("xvmWatermark", _root.getNextHighestDepth(), -1, -2, 50, 16);
-        wm.antiAliasType = "advanced";
-        wm.setNewTextFormat(new TextFormat("$FieldFont", 8, 0xCCCCCC, false, false, false, null, null, "left"));
-        wm._alpha = 10;
-        wm.filters = [new DropShadowFilter(0, 0, 0, 30, 1, 1, 0.3, 3)];
-        wm.text = "XVM v" + Defines.XVM_VERSION;
+        this.XVMSetErrorText("ERROR: XVMInit():" + String(e));
       }
-
-      // Draw grid
-      if (Config.s_config.battle.drawGrid)
-      {
-        obj.grid = obj.createEmptyMovieClip("grid", obj.getNextHighestDepth());
-        GraphicsUtil.drawGrid(obj.grid, -50, -50, 100, 100, 0xFFFF00, 30);
-      }
-
-      obj.XVMPopulateData();
-      obj.updateMarkerLabel();
-    }
-    catch (e)
-    {
-      XVMSetErrorText("ERROR: XVMInit():" + String(e));
     }
   }
   

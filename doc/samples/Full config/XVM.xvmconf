@@ -1,13 +1,13 @@
 {
-  "configVersion": "1.1.0",
+  "configVersion": "1.2.0",
   "editorVersion": "0.0.0",
   "definition": {
     "author": "sirmax2",
     "description": "Default settings for XVM",
     "url": "http://code.google.com/p/wot-xvm/",
-    "date": "02.03.2012",
-    "gameVersion": "0.7.1",
-    "modMinVersion": "1.7"
+    "date": "18.03.2012",
+    "gameVersion": "0.7.2",
+    "modMinVersion": "2.0"
   },
   "battle": {
     "mirroredVehicleIcons": true,
