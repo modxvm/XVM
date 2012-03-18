@@ -1,4 +1,35 @@
-﻿XVM-1.7:
+﻿XVM-2.0.test3:
+  * исправлен лишний '-' в отлетающем уроне
+  * добавлена инофрмация об ошибках мода во время игры
+  * отдельные настройки для левой и правой панелей в battleLoading,
+    statisticForm и playersPanel
+  * playersPanel.swf изменен для версии 0.7.2 (пока работает только
+    отключение зеркалирования иконок и прозрачность)
+  * версия конфига изменена на 1.2.0. Перемещены параметры:
+      rating/battleLoading => battleLoading
+      rating/statisticForm => statisticForm
+      rating/playersPanel => playersPanel
+      battle/battleLoadingShowClock => battleLoading/showClock
+      battle/playersPanelAlpha => playersPanel/alpha
+      battle/playersPanelLargeWidth => playersPanel/large/width
+
+XVM-2.0.test2:
+  * мод адаптирован для WoT 0.7.2 Common Test 2
+  * оптимизация динамического цвета
+  * добавлен макрос {{level}} для отображения уровня танка
+  * всегда использовать цвет для 'живых' для урона при использовании системных
+    цветов
+  * добавлены часы на экран загрузки боя (можно отключить в конфиге)
+  * оптимизация макросов
+  * улучшено качество теней
+
+XVM-2.0.test1:
+  * мод адаптирован для WoT 0.7.2 Common Test 1
+  * изменена модель распространения мода:
+      xvm-lite - пакет без статистики игроков
+      xvm-full - пакет со статистикой игроков
+
+XVM-1.7:
   * Объединены конфиги в XVM.xvmconf (с поддержкой OTMData.xml)
   * Увеличена версия конфига до 1.1.0 (с обратной совместимостью)
   * Конфиг по умолчанию зашит в код

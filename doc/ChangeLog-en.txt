@@ -1,28 +1,30 @@
 XVM-2.0.test3:
   * fixed extra '-' in damage text
   * advanced in-game error reporting
-  * text formats in battleLoading, statisticForm and playersPanel split to left and right
-  * playersPanel.swf modified for 0.7.2 patch (only icon mirroring is working now)
+  * text formats in battleLoading, statisticForm and playersPanel split to
+    left and right
+  * playersPanel.swf modified for 0.7.2 patch (only icon mirroring and
+    transparency is working now)
   * config changed to version 1.2.0. Parameters moved:
       rating/battleLoading => battleLoading
       rating/statisticForm => statisticForm
       rating/playersPanel => playersPanel
       battle/battleLoadingShowClock => battleLoading/showClock
-      battle/playersPanelAlpha => playersPanel.alpha
-      battle/playersPanelLargeWidth => playersPanel.large.width
+      battle/playersPanelAlpha => playersPanel/alpha
+      battle/playersPanelLargeWidth => playersPanel/large/width
 
 XVM-2.0.test2:
   * adaptation to WoT 0.7.2 Common Test 2
   * dynamic color optimization
   * added {{level}} macro for vehicle level
   * always use 'alive' color for damage text with system colors
-  * added clock to battle loading screen
+  * added clock to battle loading screen (can be disabled in config)
   * macros optimization
   * shadows quality improved
 
 XVM-2.0.test1:
   * adaptation to WoT 0.7.2 Common Test 1
-  * distribution model changed:
+  * mod distribution model changed:
       xvm-lite package for mod without players ratio
       xvm-full package for mod with players ratio
 
