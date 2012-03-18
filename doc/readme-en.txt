@@ -169,13 +169,13 @@ Macros available:
 2. The same, but with each number colored by its value:
   "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>"
 3. Same as 2, but with aligned columns:
-   "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>"
+  "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>"
 4. Show GWR colored by efficiency:
   "<font color='{{c:eff}}'>{{rating}}</font>"
 
 Dynamic color and transparency usage examples:
 In XVM.xvmconf:
-  "middleColor": "{{c:eff}}"
+  "color": "{{c:eff}}"
 In OTMData.xml:
   <infoText x="0" y="-50" color="{{c:eff}}" alpha="75" visible="true" format="{{kb}} {{eff}} {{rating}}" bold="true"/>
   <currentHealth x="-41" y="-38" color="{{c:hp}}" alpha="{{a:hp}}" visible="true"/>

@@ -166,13 +166,13 @@ markers
 2. То же самое, но раскрасить каждое число в зависимости от его значения:
   "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>"
 3. То же, что и 2, но с выравниванием колонок:
-   "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>"
+  "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>"
 4. Отобразить процент побед, подкрашенный в зависимости от рейтинга эффективности:
   "<font color='{{c:eff}}'>{{rating}}</font>"
 
 Примеры использования динамического цвета и прозрачности:
 В XVM.xvmconf:
-  "middleColor": "{{c:eff}}"
+  "color": "{{c:eff}}"
 В OTMData.xml:
   <infoText x="0" y="-50" color="{{c:eff}}" alpha="75" visible="true" format="{{kb}} {{eff}} {{rating}}" bold="true"/>
   <currentHealth x="-41" y="-38" color="{{c:hp}}" alpha="{{a:hp}}" visible="true"/>
