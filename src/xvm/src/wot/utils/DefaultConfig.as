@@ -165,6 +165,32 @@ class wot.utils.DefaultConfig
         }
       },
       colors: {
+        system: {
+          ally_alive_normal: 0x96FF00,
+          ally_alive_blind: 0x96FF00,
+          ally_dead_normal: 0x009900,
+          ally_dead_blind: 0x009900,
+          ally_blowedup_normal: 0x007700,
+          ally_blowedup_blind: 0x007700,
+          squadman_alive_normal: 0xFFB964,
+          squadman_alive_blind: 0xFFFF00,
+          squadman_dead_normal: 0xCA7000,
+          squadman_dead_blind: 0xAAAA00,
+          squadman_blowedup_normal: 0xA45A00,
+          squadman_blowedup_blind: 0x888800,
+          teamKiller_alive_normal: 0x00EAFF,
+          teamKiller_alive_blind: 0x00EAFF,
+          teamKiller_dead_normal: 0x097783,
+          teamKiller_dead_blind: 0x097783,
+          teamKiller_blowedup_normal: 0x096A75,
+          teamKiller_blowedup_blind: 0x096A75,
+          enemy_alive_normal: 0xF50800,
+          enemy_alive_blind: 0x8379FE,
+          enemy_dead_normal: 0x840500,
+          enemy_dead_blind: 0x47407A,
+          enemy_blowedup_normal: 0x5A0401,
+          enemy_blowedup_blind: 0x3B365F
+        },
         // values - from min to max, colors are for values 'lesser then ...'
         hp: [
           { value: 200,  color: 0xDD0000 },

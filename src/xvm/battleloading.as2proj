@@ -30,7 +30,7 @@
     <option traceFunction="" />
     <option libraryPrefix="" />
     <option excludeFile="" />
-    <option groupClasses="False" />
+    <option groupClasses="True" />
     <option frame="1" />
     <option keep="True" />
   </build>

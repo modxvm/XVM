@@ -64,7 +64,7 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
   {
     var clock = createTextField("clock", getNextHighestDepth(), 280, 25, 100, 40);
     clock.antiAliasType = "advanced";
-    clock.setNewTextFormat(new TextFormat("$TitleFont", 32, 0xFFFFFF, false, false, false, null, null, "right"));
+    clock.setNewTextFormat(new TextFormat("$TitleFont", 32, 0xFFFFFF, false, false, false, null, null, "center"));
     clock.filters = [ new DropShadowFilter(0, 0, 0, 100, 5, 5, 5, 3) ];
     clock._visible = true;
 

@@ -26,11 +26,14 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   var xvmHealthBar: MovieClip;
   var grid: MovieClip = null;
 
+  // Private static members
+  var s_blowedUp: Array = [];
+  var s_isColorBlindMode = false;
+
   // Private members
   var m_showExInfo: Boolean = false;
   var m_currentHealth: Number;
   var m_showMaxHealth: Boolean;
-  var m_isBlowedUp: Boolean = false;
 
   // TextFields
   var textFields: Object = null;
@@ -51,6 +54,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   function XVM()
   {
     super();
+
     Config.LoadConfigAndStatLegacy("XVM.xvmconf", "XVM.as");
 
     damageHolder = createEmptyMovieClip("damageHolder", getNextHighestDepth());
@@ -59,25 +63,17 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     // Remove standard fields
     pNameField._visible = false;
     pNameField.removeTextField();
-    //delete pNameField;
-    //pNameField = null;
 
     vNameField._visible = false;
     vNameField.removeTextField();
-    //delete vNameField;
-    //vNameField = null;
 
     healthBar.stop();
     healthBar._visible = false;
     healthBar.removeMovieClip();
-    //delete healthBar;
-    //healthBar = null;
     
     bgShadow.stop();
     bgShadow._visible = false;
     bgShadow.removeMovieClip();
-    //delete bgShadow;
-    //bgShadow = null;
   }
 
   function XVMInit(obj: Object)
@@ -136,7 +132,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   function updateHealth(curHealth)
   {
     if (curHealth < 0)
-      m_isBlowedUp = true;
+      s_blowedUp.push(m_playerFullName);
     m_curHealth = curHealth >= 0 ? curHealth : 0;
     XVMSetupNewHealth(curHealth);
     XVMUpdateUI(curHealth);
@@ -145,6 +141,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   // override
   function updateState(newState, isImmediate)
   {
+    //Logger.add("updateState(): " + GetCurrentStateString() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
     super.updateState(newState, isImmediate);
     XVMUpdateStyle();
   }
@@ -166,7 +163,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   // override
   function configUI()
   {
-    //Logger.add("configUI(): " + m_playerFullName);
+    //Logger.add("configUI(): " + GetCurrentStateString() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
     m_currentHealth = m_curHealth;
     super.configUI();
     XVMInit();
@@ -176,13 +173,13 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   // override
   function populateData()
   {
-    //Logger.add("populateData(): " + m_playerFullName);
+    //Logger.add("populateData(): " + GetCurrentStateString() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
 
     if (m_isPopulated)
       return false;
     m_isPopulated = true;
 
-    this.initMarkerLabel();
+    initMarkerLabel();
 
     if (iconLoader != null && iconLoader.initialized)
     {
@@ -200,10 +197,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     if (m_vehicleClass != null)
       this.setVehicleClass();
 
-//Logger.add(m_markerState);
-    if (m_markerState != null)
-      marker.gotoAndPlay(m_markerState);
-      
     XVMPopulateData();
     XVMSetupNewHealth(m_curHealth);
 
@@ -213,49 +206,20 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   // override
   function initMarkerLabel()
   {
-    this.gotoAndStop(XVMGetMarkerColorAlias());
-    if (pNameField != null)
-    {
-      pNameField._visible = false;
-      pNameField.removeTextField();
-      //delete pNameField;
-      //pNameField = null;
-    }
-    if (vNameField != null)
-    {
-      vNameField._visible = false;
-      vNameField.removeTextField();
-    }
+    super.initMarkerLabel();
+    XVMUpdateMarkerLabel();
+    XVMUpdateUI(m_curHealth);
   }
 
   // override
   function updateMarkerLabel()
   {
-    var aliasColor = XVMGetMarkerColorAlias();
-    if (m_markerLabel == aliasColor)
-      return;
-    m_markerLabel = aliasColor;
-    this.gotoAndStop(m_markerLabel);
-    if (pNameField != null)
-    {
-      pNameField._visible = false;
-      pNameField.removeTextField();
-      //delete pNameField;
-      //pNameField = null;
-    }
-    if (vNameField != null)
-    {
-      vNameField._visible = false;
-      vNameField.removeTextField();
-    }
-    if (m_vehicleClass != null)
-      this.setVehicleClass();
-    if (m_markerState != null)
-    {
-      if (this.vehicleDestroyed)
-        m_markerState = "immediate_dead";
-      marker.gotoAndPlay(m_markerState);
-    }
+    //Logger.add("updateMarkerLabel(): " + GetCurrentStateString() + " markerLabel=" + m_markerLabel + " pname=" + m_playerFullName);
+    super.updateMarkerLabel();
+
+    XVMUpdateMarkerLabel();
+
+    XVMIconCompleteLoad();
 
     // Update layout for the current marker state
     XVMPopulateVehicleTypeMarker();
@@ -319,14 +283,14 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     if (m_entityName == "ally")
       return "green";
     if (m_entityName == "squadman")
-      return XVMIsColorBlindMode() ? "yellow" : "gold";
+      return s_isColorBlindMode ? "yellow" : "gold";
     if (m_entityName == "teamKiller")
       return "blue";
     if (m_entityName == "enemy")
-      return XVMIsColorBlindMode() ? "purple" : "red";
+      return s_isColorBlindMode ? "purple" : "red";
 
     // if not found (node is not implemented), return inverted enemy color
-    return XVMIsColorBlindMode() ? "red" : "purple";
+    return s_isColorBlindMode ? "red" : "purple";
   }
 
   function GetCurrentStateString(): String
@@ -359,22 +323,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     return GetStateConfigRoot(GetCurrentStateString().split("extended").join("normal"));
   }
 
-  function XVMIsColorBlindMode(): Boolean
-  {
-    // TODO: check color blind mode from ingame settings
-    //return Config.s_config.battle.isColorBlind;
-//Logger.add(m_markerLabel + " " + m_markerState + " " + m_playerFullName);
-    return false;
-  }
-
-  function XVMGetSystemColorName()
-  {
-    var state: String = m_entityName + "_";
-    state += (!vehicleDestroyed) ? "alive_" : m_isBlowedUp ? "blowedup_" : "dead_";
-    state += XVMIsColorBlindMode() ? "blind" : "normal";
-    return state;
-  }
-  
   function XVMFormatStaticText(format: String): String
   {
     try
@@ -438,10 +386,14 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
   function XVMFormatDynamicColor(format: String, curHealth: Number): Number
   {
+    var systemColorName: String = m_entityName + "_";
+    systemColorName += (!vehicleDestroyed) ? "alive_" : (Utils.indexOf(s_blowedUp, m_playerFullName) >= 0) ? "blowedup_" : "dead_";
+    systemColorName += s_isColorBlindMode ? "blind" : "normal";
+
     try
     {
       if (!format)
-        return Defines.SYSTEM_COLORS[XVMGetSystemColorName()];
+        return Config.s_config.colors.system[systemColorName];
 
       if (isFinite(format))
         return Number(format);
@@ -450,14 +402,14 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       format = format.split("{{c:hp}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth, "0x"));
       format = format.split("{{c:hp-ratio}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"));
 
-      return isFinite(format) ? Number(format) : Defines.SYSTEM_COLORS[XVMGetSystemColorName()];
+      return isFinite(format) ? Number(format) : Config.s_config.colors.system[systemColorName];
     }
     catch (e)
     {
       XVMSetErrorText("ERROR: XVMFormatDynamicColor(" + format + "):" + String(e));
     }
 
-    return Defines.SYSTEM_COLORS[XVMGetSystemColorName()];
+    return Config.s_config.colors.system[systemColorName];
   }
 
   function XVMFormatDynamicAlpha(format: String, curHealth: Number): Number
@@ -547,7 +499,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     f.removeTextField();
   }
 
-  function showDamage(curHealth, delta)
+  function XVMShowDamage(curHealth, delta)
   {
     try
     {
@@ -572,7 +524,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       damageField.embedFonts = true;
       damageField.setTextFormat(XVMCreateNewTextFormat(cfg.font));
       damageField.textColor = isFinite(cfg.color) ? Number(cfg.color)
-        : Defines.SYSTEM_COLORS[m_entityName + "_alive_" + (XVMIsColorBlindMode() ? "blind" : "normal")];
+        : Config.s_config.colors.system[m_entityName + "_alive_" + (s_isColorBlindMode ? "blind" : "normal")];
       damageField._x = -(damageField._width >> 1);
       damageField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
 
@@ -592,9 +544,9 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       var delta: Number = curHealth - m_currentHealth;
       if (delta < 0)
       {
-        updateCurrentColor(curHealth, m_maxHealth); //colorizing health bar after taking damage
+        XVMUpdateCurrentColor(curHealth, m_maxHealth); //colorizing health bar after taking damage
 
-        this.showDamage(curHealth, -delta);
+        XVMShowDamage(curHealth, -delta);
 
         m_currentHealth = curHealth;
 
@@ -611,6 +563,31 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     }
   }
 
+  function XVMUpdateMarkerLabel()
+  {
+    // Dead allies marker is green when appear again. This is the fix, but why it is required?
+    if (m_markerState == "immediate_dead")
+      marker.gotoAndStop(m_markerState);
+
+    // Guess color blind mode
+    if (m_markerLabel == "yellow" || m_markerLabel == "purple")
+      s_isColorBlindMode = true;
+    else if (m_markerLabel == "gold" || m_markerLabel == "red")
+      s_isColorBlindMode = false;
+
+    // Hide original fields
+    if (pNameField != null)
+    {
+      pNameField._visible = false;
+      pNameField.removeTextField();
+    }
+    if (vNameField != null)
+    {
+      vNameField._visible = false;
+      vNameField.removeTextField();
+    }
+  }
+  
   function XVMUpdateUI(curHealth)
   {
     try
@@ -635,7 +612,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     }
   }
 
-  function updateCurrentColor(curHealth)
+  function XVMUpdateCurrentColor(curHealth)
   {
     try
     {
@@ -875,8 +852,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
         visible = cfg.contourIcon.visible;
         if (visible)
         {
-          iconLoader._x = cfg.contourIcon.x - (iconLoader.__get__content()._width >> 1);
-          iconLoader._y = cfg.contourIcon.y - (iconLoader.__get__content()._height >> 1);
+          iconLoader._x = cfg.contourIcon.x - (iconLoader.content._width >> 1);
+          iconLoader._y = cfg.contourIcon.y - (iconLoader.content._height >> 1);
           iconLoader._alpha = XVMFormatDynamicAlpha(cfg.contourIcon.alpha, m_curHealth);
         }
         iconLoader._visible = visible;
@@ -913,7 +890,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       }
 
       // Update Colors and Values
-      updateCurrentColor(m_curHealth);
+      XVMUpdateCurrentColor(m_curHealth);
       XVMUpdateUI(m_curHealth);
 
       if (DEBUG_TIMES)

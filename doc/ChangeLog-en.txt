@@ -1,3 +1,9 @@
+XVM-2.0.test5:
+  * fixed marker for dead allies
+  * fixed color blind mode
+  * configurable system colors (section colors/system in XVM.xvmconf)
+    working with all elements except vehicle type markers
+
 XVM-2.0.test4:
   * fixed config loading
 
