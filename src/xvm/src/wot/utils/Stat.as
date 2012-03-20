@@ -35,7 +35,7 @@ class wot.utils.Stat
     new TweenLite(null, 1), new TweenLite(null, 3) ],
     onComplete:Stat.retrieveStatsIngame, onCompleteParams:[],
     paused: true});
-  public static function FormatText(data, format: String)
+  public static function FormatText(data, format: String, isDead: Boolean)
   {
     var sWins: String = "";
     var sBattles: String = "";
@@ -91,9 +91,12 @@ class wot.utils.Stat
     format = format.split("{{eff:4}}").join(Utils.padLeft(sEff, 4));
 
     // Dynamic colors
-    format = format.split("{{c:eff}}").join(eff > 0 ? GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff) : "");
-    format = format.split("{{c:rating}}").join(rating > 0 ? GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, rating) : "");
-    format = format.split("{{c:kb}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, kb));
+    format = format.split("{{c:eff}}").join(eff <= 0 ? ""
+      : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff, "#", isDead));
+    format = format.split("{{c:rating}}").join(rating <= 0 ? ""
+      : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, rating, "#", isDead));
+    format = format.split("{{c:kb}}").join(
+      GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, kb, "#", isDead));
 
     format = Utils.trim(format);
 
@@ -161,7 +164,7 @@ class wot.utils.Stat
     if (!s_player_ratings)
       return txt;
     var pname = Utils.CleanPlayerName(data.label || data.name).toUpperCase();
-    var ratingText = Stat.FormatText(data, format);
+    var ratingText = Stat.FormatText(data, format, false);
     if (!ratingText || ratingText == "")
       return txt;
     return (ratingPosition == Defines.POSITION_LEFT)

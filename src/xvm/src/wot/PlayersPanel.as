@@ -6,6 +6,7 @@ import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.Logger;
 import wot.utils.Stat;
+import wot.utils.Utils;
 
 class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 {
@@ -20,7 +21,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   {
     /*if (!_global.xvm)
       _global.xvm = [];
-    if (wot.utils.Utils.indexOf(_global.xvm, "PlayersPanel") == -1)
+    if (Utils.indexOf(_global.xvm, "PlayersPanel") == -1)
       _global.xvm.push("PlayersPanel");
     wot.utils.Logger.add("--> " + _global.xvm.join(", "));*/
 
@@ -110,6 +111,58 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   }
 
   // override
+/*  function updateWidthOfLongestName()
+  {
+    var _loc3 = 268;
+    m_names._width = net.wargaming.ingame.PlayersPanel.ms_widthOfLongestName + 10;
+    var _loc2 = m_names._width - _loc3;
+    if (m_type == "left")
+    {
+        m_frags._x = m_names._x + m_names._width;
+        m_vehicles._x = m_frags._x + m_frags._width;
+        m_list._x = players_bg._x = _loc2;
+        m_list.updateSquadIconPosition(-m_list._x);
+    }
+    else
+    {
+        m_list._x = players_bg._x = players_bg._width - _loc2;
+        m_names._x = players_bg._width - m_names._width - net.wargaming.ingame.PlayersPanel.SQUAD_SIZE;
+        m_frags._x = m_names._x - m_frags._width;
+        m_vehicles._x = m_frags._x - m_vehicles._width;
+        m_list.updateSquadIconPosition(-net.wargaming.ingame.PlayersPanel.SQUAD_SIZE - _loc2);
+    } // end else if
+  }
+
+  // override
+  /*function updatePanel()
+  {
+    // do nothing
+  }*/
+
+  /*  function updatePanel()
+    {
+        var _loc3 = 268;
+        m_names._width = net.wargaming.ingame.PlayersPanel.ms_widthOfLongestName + 10;
+        var _loc2 = m_names._width - _loc3;
+        if (m_type == "left")
+        {
+            m_frags._x = m_names._x + m_names._width;
+            m_vehicles._x = m_frags._x + m_frags._width;
+            m_list._x = players_bg._x = _loc2;
+            m_list.updateSquadIconPosition(-m_list._x);
+        }
+        else
+        {
+            m_list._x = players_bg._x = players_bg._width - _loc2;
+            m_names._x = players_bg._width - m_names._width - net.wargaming.ingame.PlayersPanel.SQUAD_SIZE;
+            m_frags._x = m_names._x - m_frags._width;
+            m_vehicles._x = m_frags._x - m_vehicles._width;
+            m_list.updateSquadIconPosition(-net.wargaming.ingame.PlayersPanel.SQUAD_SIZE - _loc2);
+        } // end else if
+    } // End of the function
+*/
+  
+  // override
   function _setVehiclesStr(data, sel, isColorBlind, knownPlayersCount)
   {
     try
@@ -150,14 +203,14 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     if (m_currentFieldType != "")
     {
       //Logger.add("before: " + text);
-      text = XVMFormatText(m_currentData[m_currentItem++], m_currentFieldType);
+      text = XVMFormatText(m_currentData[m_currentItem++], m_currentFieldType, Utils.endsWith("dead", colorScheme));
       //Logger.add("after: " + text);
     }
 
     return super._getHTMLText(colorScheme, text);
   }
 
-  function XVMFormatText(data, fieldType)
+  function XVMFormatText(data, fieldType, isDead)
   {
     var format: String = "";
     var name = data.label + ((data.clanAbbrev == "") ? "" : "[" + data.clanAbbrev + "]");
@@ -197,7 +250,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 
     format = format.split("{{nick}}").join(name);
     format = format.split("{{vehicle}}").join(data.vehicle.toString());
-    format = Stat.FormatText(data, format);
+    format = Stat.FormatText(data, format, isDead);
 
       /*if (!m_widthTester)
       {
@@ -237,39 +290,4 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     }*/
     return format;
   }
-
-  // override
-  /*function updateWidthOfLongestName()
-  {
-    // do nothing
-  }
-
-  // override
-  function updatePanel()
-  {
-    // do nothing
-  }*/
-
-  /*  function updatePanel()
-    {
-        var _loc3 = 268;
-        m_names._width = net.wargaming.ingame.PlayersPanel.ms_widthOfLongestName + 10;
-        var _loc2 = m_names._width - _loc3;
-        if (m_type == "left")
-        {
-            m_frags._x = m_names._x + m_names._width;
-            m_vehicles._x = m_frags._x + m_frags._width;
-            m_list._x = players_bg._x = _loc2;
-            m_list.updateSquadIconPosition(-m_list._x);
-        }
-        else
-        {
-            m_list._x = players_bg._x = players_bg._width - _loc2;
-            m_names._x = players_bg._width - m_names._width - net.wargaming.ingame.PlayersPanel.SQUAD_SIZE;
-            m_frags._x = m_names._x - m_frags._width;
-            m_vehicles._x = m_frags._x - m_vehicles._width;
-            m_list.updateSquadIconPosition(-net.wargaming.ingame.PlayersPanel.SQUAD_SIZE - _loc2);
-        } // end else if
-    } // End of the function
-*/
 }

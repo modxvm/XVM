@@ -94,7 +94,12 @@ class wot.utils.GraphicsUtil
     item.transform.colorTransform = myColorTransform;
   }
 
-  public static function GetDynamicColorValue(type: Number, value: Number, prefix: String): String
+  public static function MultiplyColor(color: Number, ratio: Number): Number
+  {
+     return ((((color >> 16) & 0xFF) * ratio) << 16) + ((((color >> 8) & 0xFF) * ratio) << 8) + ((color & 0xFF) * ratio);
+  }
+  
+  public static function GetDynamicColorValue(type: Number, value: Number, prefix: String, darker: Boolean): String
   {
     if (!prefix)
       prefix = "#";
@@ -130,7 +135,11 @@ class wot.utils.GraphicsUtil
       var cvalue: Number = cfg[i].value;
       var color: Number = Utils.toInt(cfg[i].color, 0xFFFFFF);
       if (value < cvalue)
+      {
+        if (darker)
+          color = GraphicsUtil.MultiplyColor(color, 0.5);
         return prefix + color.toString(16);
+      }
     }
 
     return prefix + "FFFFFF";
