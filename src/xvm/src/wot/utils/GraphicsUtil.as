@@ -125,7 +125,7 @@ class wot.utils.GraphicsUtil
         return prefix + "FFFEFE";
     }
 
-    for (var i = 0; i < cfg.length; i++)
+    for (var i = 0; i < cfg.length; ++i)
     {
       var cvalue: Number = cfg[i].value;
       var color: Number = Utils.toInt(cfg[i].color, 0xFFFFFF);
@@ -164,7 +164,7 @@ class wot.utils.GraphicsUtil
         return 102;
     }
 
-    for (var i = 0; i < cfg.length; i++)
+    for (var i = 0; i < cfg.length; ++i)
     {
       var avalue: Number = cfg[i].value;
       var alpha: Number = cfg[i].alpha;

@@ -13,7 +13,7 @@ class wot.utils.Logger
   {
     var a: Array = ("[" + Utils.padLeft(String(counter++), 3, '0') + "] " + str).split("");
     var s: String = "";
-    for (var i = 0; i < a.length; i++)
+    for (var i = 0; i < a.length; ++i)
       s += Utils.padLeft(a[i].charCodeAt(0).toString(16), 2, '0');
     s = s.length.toString(16) + "," + s;
 

@@ -14,7 +14,7 @@
   var m_markerState;
   var m_markerLabel;
 
-  var marker;
+  var marker: MovieClip;
   var pNameField: TextField;
   var vNameField: TextField;
   var iconLoader;

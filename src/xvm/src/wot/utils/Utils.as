@@ -11,8 +11,8 @@ class wot.utils.Utils
     while(i < len)
     {
       if(array[i] === value)
-        return i
-      i++;
+        return i;
+      ++i;
     }
     return -1;
   }
@@ -59,7 +59,7 @@ class wot.utils.Utils
       while (b.length < 4)
         b.push("0");
 
-      for (var i = 0; i < 4; i++)
+      for (var i = 0; i < 4; ++i)
       {
         if (isNaN(parseInt(a[i])) && isNaN(parseInt(b[i])))
           return a[i] == b[i] ? 0 : a[i] < b[i] ? -1 : 1;

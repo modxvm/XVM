@@ -53,6 +53,12 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
   function XVM()
   {
+    /*if (!_global.xvm)
+      _global.xvm = [];
+    if (wot.utils.Utils.indexOf(_global.xvm, "XVM") == -1)
+      _global.xvm.push("XVM");
+    wot.utils.Logger.add("--> " + _global.xvm.join(", "));*/
+
     super();
 
     Config.LoadConfigAndStatLegacy("XVM.xvmconf", "XVM.as");
@@ -293,6 +299,14 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     return s_isColorBlindMode ? "red" : "purple";
   }
 
+  function XVMGetSystemColor()
+  {
+    var systemColorName: String = m_entityName + "_";
+    systemColorName += (!vehicleDestroyed) ? "alive_" : (Utils.indexOf(s_blowedUp, m_playerFullName) >= 0) ? "blowedup_" : "dead_";
+    systemColorName += s_isColorBlindMode ? "blind" : "normal";
+    return Config.s_config.colors.system[systemColorName];
+  }
+  
   function GetCurrentStateString(): String
   {
     var result = m_entityName == "enemy" ? "enemy/" : "ally/";
@@ -386,14 +400,11 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
   function XVMFormatDynamicColor(format: String, curHealth: Number): Number
   {
-    var systemColorName: String = m_entityName + "_";
-    systemColorName += (!vehicleDestroyed) ? "alive_" : (Utils.indexOf(s_blowedUp, m_playerFullName) >= 0) ? "blowedup_" : "dead_";
-    systemColorName += s_isColorBlindMode ? "blind" : "normal";
-
+    var systemColor = XVMGetSystemColor();
     try
     {
       if (!format)
-        return Config.s_config.colors.system[systemColorName];
+        return systemColor;
 
       if (isFinite(format))
         return Number(format);
@@ -402,14 +413,14 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       format = format.split("{{c:hp}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth, "0x"));
       format = format.split("{{c:hp-ratio}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"));
 
-      return isFinite(format) ? Number(format) : Config.s_config.colors.system[systemColorName];
+      return isFinite(format) ? Number(format) : systemColor;
     }
     catch (e)
     {
       XVMSetErrorText("ERROR: XVMFormatDynamicColor(" + format + "):" + String(e));
     }
 
-    return Config.s_config.colors.system[systemColorName];
+    return systemColor;
   }
 
   function XVMFormatDynamicAlpha(format: String, curHealth: Number): Number
@@ -727,12 +738,21 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       var cfg = GetCurrentStateConfigRootNormal();
 
       // Vehicle Type Marker
+      var systemColor = XVMGetSystemColor();
       for (var childName in marker.marker)
       {
-        var child = marker.marker[childName];
-        child._x = cfg.vehicleIcon.scaleX * cfg.vehicleIcon.maxScale / 100;
-        child._y = cfg.vehicleIcon.scaleY * cfg.vehicleIcon.maxScale / 100;
-        child._xscale = child._yscale = cfg.vehicleIcon.maxScale;
+        //if (childName == "marker_shadow")
+        //  return;
+
+        var icon: MovieClip = marker.marker[childName];
+        icon._x = cfg.vehicleIcon.scaleX * cfg.vehicleIcon.maxScale / 100;
+        icon._y = cfg.vehicleIcon.scaleY * cfg.vehicleIcon.maxScale / 100;
+        icon._xscale = icon._yscale = cfg.vehicleIcon.maxScale;
+
+        /*var ms: MovieClip = icon.duplicateMovieClip("marker_shadow", icon.getNextHighestDepth());
+        ms.gotoAndStop(icon._currentframe);
+        ms.filters = [ new DropShadowFilter(0, 0, 0, 1, 1, 1, 10, 1, false, true) ];
+        GraphicsUtil.setColor(icon, systemColor);*/
       };
     }
     catch (e)

@@ -11,6 +11,12 @@ class wot.BattleMain
 
   static function main()
   {
+    /*if (!_global.xvm)
+      _global.xvm = [];
+    if (wot.utils.Utils.indexOf(_global.xvm, "Battle::main") == -1)
+      _global.xvm.push("Battle::main");
+    wot.utils.Logger.add("--> " + _global.xvm.join(", "));*/
+
     Config.LoadConfigAndStatLegacy("XVM.xvmconf", "BattleMain.as");
 
     instance = new BattleMain();

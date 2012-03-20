@@ -11,6 +11,12 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
 {
   function BattleStatItemRenderer()
   {
+    /*if (!_global.xvm)
+      _global.xvm = [];
+    if (wot.utils.Utils.indexOf(_global.xvm, "BattleStatItemRenderer") == -1)
+      _global.xvm.push("BattleStatItemRenderer");
+    wot.utils.Logger.add("--> " + _global.xvm.join(", "));*/
+
     super();
     col3.html = true;
     col3._width += 80;

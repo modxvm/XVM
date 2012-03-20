@@ -1,3 +1,7 @@
+XVM-2.0.test6:
+  * fixed transparency in players panel
+  * configurable formats for name and vehicle text fields in players panel
+
 XVM-2.0.test5:
   * fixed marker for dead allies
   * fixed color blind mode

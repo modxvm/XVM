@@ -2,8 +2,8 @@
  * ...
  * @author sirmax2
  */
-import wot.utils.Utils; 
- 
+import wot.utils.Utils;
+
 // Convert OTMData.xml => XVM 1.1.0
 class wot.utils.OTMConfigConverter
 {
@@ -77,7 +77,7 @@ class wot.utils.OTMConfigConverter
       return undefined;
     var p: Array = path.split("/"); // "path/to/value"
     var root = otm;
-    for (var i = 0; i < p.length; i++)
+    for (var i = 0; i < p.length; ++i)
     {
       if (!root.hasOwnProperty(p[i]))
         return undefined;
@@ -90,7 +90,7 @@ class wot.utils.OTMConfigConverter
   {
     var p: Array = path.split("/"); // "path/to/value"
     var root = xvm;
-    for (var i = 0; i < p.length - 1; i++)
+    for (var i = 0; i < p.length - 1; ++i)
     {
       if (!root.hasOwnProperty(p[i]))
         root[p[i]] = { };

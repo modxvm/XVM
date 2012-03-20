@@ -52,7 +52,7 @@ class wot.utils.DefaultConfig
       },
       playersPanel: {
         // 0..100 - задает прозрачность "ушей". 0 - прозрачные, 100 - не прозрачные
-        alpha: 100,
+        alpha: 60,
         // режим medium1
         medium: {
           // 0..170 - задает ширину поля имени игрока. По умолчанию: 50
@@ -74,8 +74,8 @@ class wot.utils.DefaultConfig
           // формат отображения
           nickFormatLeft: "<font color='{{c:eff}}'>{{rating}}</font> {{nick}}",
           nickFormatRight: "{{nick}} <font color='{{c:eff}}'>{{rating}}</font>",
-          vehicleFormatLeft: "<font color='{{c:eff}}'>{{rating}}</font> {{vehicle}}",
-          vehicleFormatRight: "{{vehicle}} <font color='{{c:eff}}'>{{rating}}</font>"
+          vehicleFormatLeft: "<font color='{{c:rating}}'>{{vehicle}}</font>",
+          vehicleFormatRight: "<font color='{{c:rating}}'>{{vehicle}}</font>"
         }
       },
       markers: {

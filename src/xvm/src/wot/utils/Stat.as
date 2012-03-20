@@ -199,7 +199,7 @@ class wot.utils.Stat
               Stat.retrieving = false;
               Stat.added = false;
               var stats = JSON.parse(str);
-              for (var i = 0; i < stats.players.length; i++)
+              for (var i = 0; i < stats.players.length; ++i)
               {
                 var p_stat = stats.players[i];
                 var p_name = Utils.CleanPlayerName(p_stat.name).toUpperCase();
@@ -225,7 +225,7 @@ class wot.utils.Stat
                   if (!str_new || str_new == undefined)
                     return;
                   var stats_new = JSON.parse(str_new);
-                  for (var i = 0; i < stats_new.players.length; i++)
+                  for (var i = 0; i < stats_new.players.length; ++i)
                   {
                     var p_stat_new = stats_new.players[i];
                     var p_name_new = Utils.CleanPlayerName(p_stat_new.name).toUpperCase();
@@ -351,7 +351,7 @@ class wot.utils.Stat
         if (!str || str == undefined)
           return;
         var stats = JSON.parse(str);
-        for (var i = 0; i < stats.players.length; i++)
+        for (var i = 0; i < stats.players.length; ++i)
         {
           if (!Stat.s_player_ratings)
             Stat.s_player_ratings = {};

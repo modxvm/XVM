@@ -846,16 +846,18 @@ namespace wot
 
     private void DecodeAndPrintLogString()
     {
-      string s = "";
+      List<byte> buf = new List<byte>();
       try
       {
-        for (int i = 0; i < logString.Length; i += 2)
-          s += Convert.ToChar(Convert.ToByte(logString.Substring(i, 2), 16));
-        Log(1, s);
+        for (int i = 0; i < logString.Length - 1; i += 2)
+          buf.Add(Convert.ToByte(logString.Substring(i, 2), 16));
+        Log(1, Encoding.ASCII.GetString(buf.ToArray()));
       }
-      catch
+      catch (Exception ex)
       {
-        Log(1, "Error decoding @LOG string: " + s);
+        Log(1, "Error decoding @LOG string: " + Encoding.ASCII.GetString(buf.ToArray()));
+        Debug(logString);
+        Debug(ex.ToString());
       }
       finally
       {
