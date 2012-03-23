@@ -4,9 +4,9 @@
     "author": "sirmax2",
     "description": "Sirmax's settings for XVM",
     "url": "http://code.google.com/p/wot-xvm/",
-    "date": "07.03.2012",
-    "gameVersion": "0.7.1.1",
-    "modMinVersion": "1.7"
+    "date": "23.03.2012",
+    "gameVersion": "0.7.2",
+    "modMinVersion": "2.0"
   },
   "battle": {
     "mirroredVehicleIcons": false,
@@ -48,12 +48,12 @@
       "alive": {
         "normal": {
           "damageText": {
-            "blowupMessage": "Готов"
+            "blowupMessage": "Blow-up!"
           }
         },
         "extended": {
           "damageText": {
-            "blowupMessage": "Готов"
+            "blowupMessage": "Blow-up!"
           }
         }
       },
@@ -74,7 +74,7 @@
       "alive": {
         "normal": {
           "damageText": {
-            "blowupMessage": "Готов"
+            "blowupMessage": "Blow-up!"
           },
           "textFields": [
             {
@@ -125,7 +125,7 @@
         },
         "extended": {
           "damageText": {
-            "blowupMessage": "Готов"
+            "blowupMessage": "Blow-up!"
           }
         }
       },
