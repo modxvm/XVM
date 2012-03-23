@@ -1,3 +1,6 @@
+XVM-2.0.test8:
+  * fixed grid
+
 XVM-2.0.test7:
   * icons transparency in players panel (parameter playersPanel/iconAlpha)
   * players panel field width changing

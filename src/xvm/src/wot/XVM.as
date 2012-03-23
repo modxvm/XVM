@@ -107,7 +107,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
         if (Config.s_config.battle.drawGrid)
         {
           this.grid = this.createEmptyMovieClip("grid", this.getNextHighestDepth());
-          GraphicsUtil.drawGrid(obj.grid, -50, -50, 100, 100, 0xFFFF00, 30);
+          GraphicsUtil.drawGrid(this.grid, -50, -50, 100, 100, 0xFFFF00, 30);
         }
 
         this.XVMPopulateData();
