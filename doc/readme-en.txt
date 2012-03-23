@@ -4,7 +4,7 @@ This mod is a successor of the next mods:
   * Vehicle Icons Mirroring Controlling
   * Players Panel Controlling (width and transparency)
   * Clock at battle loading screen
-  * In-game players rating
+  * In-game players rating (only in xvm-full package)
 
 Project site: http://code.google.com/p/wot-xvm/
 Support:      http://forum.bulychev.net/viewforum.php?f=7

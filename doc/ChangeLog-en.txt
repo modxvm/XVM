@@ -1,4 +1,5 @@
 XVM-2.0.test6:
+  * adaptation to WoT 0.7.2 Common Test 3
   * fixed transparency in players panel
   * configurable formats for name and vehicle text fields in players panel
   * darker color for dead or not loaded players in players panel
