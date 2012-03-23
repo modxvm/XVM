@@ -3,19 +3,16 @@
  * @author sirmax2
  */
 import wot.utils.Config;
-import wot.utils.Defines;
-import wot.utils.Logger;
 import wot.utils.Stat;
 import wot.utils.Utils;
 
 class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 {
+  static private var s_widthTester: TextField;
+
   private var m_currentFieldType = "";
   private var m_currentData = null;
   private var m_currentItem = 0;
-  //private var m_largePanelWidth: Number = -1;
-  //private var m_largePanelOffset: Number = NaN;
-  //private var m_widthTester: TextField = null;
 
   function PlayersPanel()
   {
@@ -62,106 +59,22 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         renderer.iconLoader.addEventListener("complete", this, "completeLoad");
         renderer.iconLoader["renderer"] = renderer;
       }
-
-      //m_largePanelWidth = Math.min(Config.s_config.playersPanel.large.width, 170);
     }
 
     players_bg._alpha = Config.s_config.playersPanel.alpha;
+    m_list._alpha = Config.s_config.playersPanel.iconAlpha;
 
-    //Logger.add(m_names.htmlText);
+    XVMAdjustPanelSize();
   }
-
-  // override
-  //private var _lastModeWasLarge = false;
-  /*function update()
-  {
-    Logger.add("update()");
-    super.update();
-
-    /*if (m_state == "large" && m_largePanelWidth >= 0)
-    {
-      if (m_largePanelOffset == NaN)
-        m_largePanelOffset = m_names._width - m_largePanelWidth;
-
-      m_names._width = m_largePanelWidth;
-
-      if (!_lastModeWasLarge)
-      {
-        if (m_type == "left")
-          m_names._x += m_largePanelOffset;
-        this._x = (m_type == "left") ? this._x - m_largePanelOffset : this._x + m_largePanelOffset;
-      }
-      _lastModeWasLarge = true;
-    }
-    else
-    {
-      if (_lastModeWasLarge)
-        this._x = (m_type == "left") ? this._x + m_largePanelOffset : this._x - m_largePanelOffset;
-      _lastModeWasLarge = false;
-    }*/
-  //}
 
   // override
   function onRecreateDevice(width, height)
   {
     super.onRecreateDevice(width, height);
 
-    //if (m_state == "large" && m_largePanelWidth >= 0)
-    //  this._x = (m_type == "left") ? this._x - m_largePanelOffset : this._x + m_largePanelOffset;
+    XVMAdjustPanelSize();
   }
 
-  // override
-/*  function updateWidthOfLongestName()
-  {
-    var _loc3 = 268;
-    m_names._width = net.wargaming.ingame.PlayersPanel.ms_widthOfLongestName + 10;
-    var _loc2 = m_names._width - _loc3;
-    if (m_type == "left")
-    {
-        m_frags._x = m_names._x + m_names._width;
-        m_vehicles._x = m_frags._x + m_frags._width;
-        m_list._x = players_bg._x = _loc2;
-        m_list.updateSquadIconPosition(-m_list._x);
-    }
-    else
-    {
-        m_list._x = players_bg._x = players_bg._width - _loc2;
-        m_names._x = players_bg._width - m_names._width - net.wargaming.ingame.PlayersPanel.SQUAD_SIZE;
-        m_frags._x = m_names._x - m_frags._width;
-        m_vehicles._x = m_frags._x - m_vehicles._width;
-        m_list.updateSquadIconPosition(-net.wargaming.ingame.PlayersPanel.SQUAD_SIZE - _loc2);
-    } // end else if
-  }
-
-  // override
-  /*function updatePanel()
-  {
-    // do nothing
-  }*/
-
-  /*  function updatePanel()
-    {
-        var _loc3 = 268;
-        m_names._width = net.wargaming.ingame.PlayersPanel.ms_widthOfLongestName + 10;
-        var _loc2 = m_names._width - _loc3;
-        if (m_type == "left")
-        {
-            m_frags._x = m_names._x + m_names._width;
-            m_vehicles._x = m_frags._x + m_frags._width;
-            m_list._x = players_bg._x = _loc2;
-            m_list.updateSquadIconPosition(-m_list._x);
-        }
-        else
-        {
-            m_list._x = players_bg._x = players_bg._width - _loc2;
-            m_names._x = players_bg._width - m_names._width - net.wargaming.ingame.PlayersPanel.SQUAD_SIZE;
-            m_frags._x = m_names._x - m_frags._width;
-            m_vehicles._x = m_frags._x - m_vehicles._width;
-            m_list.updateSquadIconPosition(-net.wargaming.ingame.PlayersPanel.SQUAD_SIZE - _loc2);
-        } // end else if
-    } // End of the function
-*/
-  
   // override
   function _setVehiclesStr(data, sel, isColorBlind, knownPlayersCount)
   {
@@ -198,6 +111,13 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     }
   }
 
+  // override
+  function updateWidthOfLongestName()
+  {
+    // do nothing
+  }
+  
+  // override
   function _getHTMLText(colorScheme, text)
   {
     if (m_currentFieldType != "")
@@ -210,6 +130,10 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     return super._getHTMLText(colorScheme, text);
   }
 
+  /**
+   * XVM
+   */
+  
   function XVMFormatText(data, fieldType, isDead)
   {
     var format: String = "";
@@ -248,46 +172,106 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         return (fieldType == "name") ? name : data.vehicle.toString();
     }
 
-    format = format.split("{{nick}}").join(name);
     format = format.split("{{vehicle}}").join(data.vehicle.toString());
     format = Stat.FormatText(data, format, isDead);
 
-      /*if (!m_widthTester)
+    // cut player name for field width
+    if (format.indexOf("{{nick}}") > -1)
+    {
+      var str: String = name;
+      var pname: String = name;
+      if (m_state == "medium" || m_state == "medium2" || m_state == "large")
       {
-        m_widthTester = _root.createTextField("widthTester", _root.getNextHighestDepth(), 0, 0, m_names._width, m_names._height);
-        m_widthTester.setTextFormat(m_names.getTextFormat());
-        m_widthTester.autoSize = true;
-        m_widthTester.html = true;
-        m_widthTester._visible = false;
-      }
-
-      var pname: String = data.label;
-      while (pname.length >= 0)
-      {
-        str = (pname == data.label || pname.length == 0) ? pname : pname + "...";
-        if (Stat.s_player_ratings)
+        var configWidth = Config.s_config.playersPanel[m_state].width;
+        if (s_widthTester == null)
         {
-          str = Stat.DecorateField(data, str,
-            m_type == "left" ? Config.s_config.playersPanel.formatLeft : Config.s_config.playersPanel.formatRight,
-            m_type == "left" ? Defines.POSITION_LEFT : Defines.POSITION_RIGHT);
+          s_widthTester = _root.createTextField("widthTester", _root.getNextHighestDepth(), 0, 0, 268, 20);
+          s_widthTester.setTextFormat(m_names.getTextFormat());
+          s_widthTester.autoSize = true;
+          s_widthTester.html = true;
+          s_widthTester._visible = false;
         }
-        if (pname.length == 0)
-          break;
-        //m_widthTester.htmlText = str;
-        //if (m_widthTester._width <= m_names._width)
-          break;
-        //pname = pname.substr(0, pname.length - 1);
+        while (pname.length > 0)
+        {
+          str = (pname == name) ? pname : pname + "...";
+          s_widthTester.htmlText = format.split("{{nick}}").join(str);
+          if (Math.round(s_widthTester._width) <= configWidth)
+          {
+            //wot.utils.Logger.add("configWidth=" + configWidth + " _width=" + s_widthTester._width + " lineWidth=" + Math.round(s_widthTester.getLineMetrics(0).width) + " " + str);
+            break;
+          }
+          pname = pname.substr(0, pname.length - 1);
+        }
       }
+      format = format.split("{{nick}}").join(pname.length == 0 ? "" : str);
+    }
+
+    return Utils.trim(format);
+  }
+
+  function XVMAdjustPanelSize()
+  {
+    var namesWidthDefault = 37;
+    var namesWidth = namesWidthDefault;
+    var vehiclesWidthDefault = 65;
+    var vehiclesWidth = vehiclesWidthDefault;
+    var widthDelta = 0;
+    var squadSize = 0;
+    switch (m_state)
+    {
+      case "medium":
+        namesWidth = XVMGetMaximumFieldWidth(m_names) + 10;
+        //namesWidth = Config.s_config.playersPanel.medium.width;
+        widthDelta = namesWidthDefault - namesWidth;
+        break;
+      case "medium2":
+        vehiclesWidth = Config.s_config.playersPanel.medium2.width;
+        widthDelta = vehiclesWidthDefault - vehiclesWidth;
+        break;
+      case "large":
+        namesWidthDefault = 296;
+        namesWidth = XVMGetMaximumFieldWidth(m_names) + 10;
+        //namesWidth = Config.s_config.playersPanel.large.width;
+        vehiclesWidth = XVMGetMaximumFieldWidth(m_vehicles) + 10;
+        widthDelta = namesWidthDefault - namesWidth + vehiclesWidthDefault - vehiclesWidth;
+        squadSize = SQUAD_SIZE;
+        break;
+      default:
+        m_list._x = players_bg._x = (m_type == "left") ? STATES[m_state].bg_x : players_bg._width - STATES[m_state].bg_x;
+        return;
+    }
+
+    m_names._width = namesWidth;
+    m_vehicles._width = vehiclesWidth;
+
+    if (m_type == "left")
+    {
+      m_frags._x = m_names._x + m_names._width;
+      m_vehicles._x = m_frags._x + m_frags._width;
+      m_list._x = players_bg._x = STATES[m_state].bg_x - widthDelta;
+      if (squadSize > 0)
+        m_list.updateSquadIconPosition(-m_list._x);
     }
     else
     {
-      if (Stat.s_player_ratings)
-      {
-        var middleColor: String = Config.s_config.playersPanel.middleColor;
-        if (middleColor)
-          str = Stat.FormatText(data, "<font color='" + middleColor + "'>" + str + "</font>");
-      }
-    }*/
-    return format;
+      m_names._x = players_bg._width - m_names._width - squadSize;
+      m_frags._x = m_names._x - m_frags._width;
+      m_vehicles._x = m_frags._x - m_vehicles._width;
+      m_list._x = players_bg._x = players_bg._width - STATES[m_state].bg_x + widthDelta;
+      if (squadSize > 0)
+        m_list.updateSquadIconPosition(-440 + m_names._width + m_frags._width + m_vehicles._width + squadSize);
+    }
+  }
+
+  function XVMGetMaximumFieldWidth(field: TextField)
+  {
+    var max_width = 0;
+    for (var i = 0; i < field.numLines; ++i)
+    {
+      var w = Math.round(field.getLineMetrics(i).width);
+      if (w > max_width)
+        max_width = w;
+    }
+    return max_width;
   }
 }

@@ -1,3 +1,7 @@
+XVM-2.0.test7:
+  * icons transparency in players panel (parameter playersPanel/iconAlpha)
+  * players panel field width changing
+
 XVM-2.0.test6:
   * adaptation to WoT 0.7.2 Common Test 3
   * fixed transparency in players panel

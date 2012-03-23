@@ -1,6 +1,8 @@
 ﻿intrinsic class net.wargaming.ingame.PlayersPanel extends MovieClip
 {
   static var PLAYER_NAME_LENGTH;
+  static var STATES;
+  static var SQUAD_SIZE;
 
   var m_state: String;
   var m_type: String;
@@ -17,5 +19,5 @@
   function _setNamesStr(data, sel, isColorBlind, knownPlayersCount);
   function _getHTMLText(colorScheme, text);
   function updateWidthOfLongestName();
-  function updatePanel()
+  function updatePanel();
 }

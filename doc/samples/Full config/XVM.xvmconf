@@ -29,13 +29,14 @@
   },
   "playersPanel": {
     "alpha": 60,
+    "iconAlpha": 100,
     "medium": {
-      "width": 50,
+      "width": 65,
       "formatLeft": "<font color='{{c:eff}}'>{{nick}}</font>",
       "formatRight": "<font color='{{c:eff}}'>{{nick}}</font>"
     },
     "medium2": {
-      "width": 50,
+      "width": 65,
       "formatLeft": "<font color='{{c:eff}}'>{{vehicle}}</font>",
       "formatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
     },
