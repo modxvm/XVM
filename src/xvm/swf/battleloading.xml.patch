@@ -1,5 +1,5 @@
---- orig\battleloading.xml	2012-03-15 17:19:09.252556500 +0200
-+++ battleloading.xml	2012-03-15 17:35:47.044627000 +0200
+--- orig\battleloading.xml	2012-03-23 11:30:18.996978200 +0200
++++ battleloading.xml	2012-03-23 11:32:39.751052200 +0200
 @@ -43637,7 +43637,7 @@
          <actions>
            <PushData>

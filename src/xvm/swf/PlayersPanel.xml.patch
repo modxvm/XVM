@@ -1,6 +1,6 @@
---- orig\PlayersPanel.xml	2012-03-15 17:19:12.314731700 +0200
-+++ PlayersPanel.xml	2012-03-15 17:35:49.362759600 +0200
-@@ -55258,8 +55258,8 @@
+--- orig\PlayersPanel.xml	2012-03-23 11:30:21.169195400 +0200
++++ PlayersPanel.xml	2012-03-23 11:32:38.313908500 +0200
+@@ -55291,8 +55291,8 @@
                <String value="charAt"/>
                <String value=" "/>
                <String value="\"/>
@@ -11,7 +11,7 @@
                <String value="&#10;"/>
                <String value="&#13;"/>
                <String value="&#9;"/>
-@@ -59423,7 +59423,7 @@
+@@ -59456,7 +59456,7 @@
          <actions>
            <PushData>
              <items>

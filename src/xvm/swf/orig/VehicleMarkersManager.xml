@@ -7,7 +7,7 @@
     <tags>
       <FileAttributes hasMetaData="1" useNetwork="0"/>
       <Metadata>
-        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"> <rdf:Description xmlns:xmp="http://ns.adobe.com/xap/1.0/" rdf:about=""> <xmp:CreatorTool>Adobe Flash CS4 Professional</xmp:CreatorTool> <xmp:CreateDate>2009-11-20T11:49:08+02:00</xmp:CreateDate> <xmp:MetadataDate>2012-03-13T15:09:43+03:00</xmp:MetadataDate> <xmp:ModifyDate>2012-03-13T15:09:43+03:00</xmp:ModifyDate> </rdf:Description> <rdf:Description xmlns:dc="http://purl.org/dc/elements/1.1/" rdf:about=""> <dc:format>application/x-shockwave-flash</dc:format> </rdf:Description> <rdf:Description xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/" xmlns:stRef="http://ns.adobe.com/xap/1.0/sType/ResourceRef#" rdf:about=""> <xmpMM:InstanceID>xmp.iid:5A947C3D5F6CE1118EB983E02E08A61D</xmpMM:InstanceID> <xmpMM:DocumentID>xmp.did:5A947C3D5F6CE1118EB983E02E08A61D</xmpMM:DocumentID> <xmpMM:OriginalDocumentID>xmp.did:BA40697429D5DE11A7C6E1C8A72841AA</xmpMM:OriginalDocumentID> <xmpMM:DerivedFrom rdf:parseType="Resource"> <stRef:instanceID>xmp.iid:59947C3D5F6CE1118EB983E02E08A61D</stRef:instanceID> <stRef:documentID>xmp.did:FCDFC32FE338DF11A7ACAC43065E28B4</stRef:documentID> <stRef:originalDocumentID>xmp.did:BA40697429D5DE11A7C6E1C8A72841AA</stRef:originalDocumentID> </xmpMM:DerivedFrom> </rdf:Description> </rdf:RDF>
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"> <rdf:Description xmlns:xmp="http://ns.adobe.com/xap/1.0/" rdf:about=""> <xmp:CreatorTool>Adobe Flash CS4 Professional</xmp:CreatorTool> <xmp:CreateDate>2009-11-20T11:49:08+02:00</xmp:CreateDate> <xmp:MetadataDate>2012-03-15T17:57:51+03:00</xmp:MetadataDate> <xmp:ModifyDate>2012-03-15T17:57:51+03:00</xmp:ModifyDate> </rdf:Description> <rdf:Description xmlns:dc="http://purl.org/dc/elements/1.1/" rdf:about=""> <dc:format>application/x-shockwave-flash</dc:format> </rdf:Description> <rdf:Description xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/" xmlns:stRef="http://ns.adobe.com/xap/1.0/sType/ResourceRef#" rdf:about=""> <xmpMM:InstanceID>xmp.iid:0820B33BAF6EE111A421A54732BB5AAA</xmpMM:InstanceID> <xmpMM:DocumentID>xmp.did:0820B33BAF6EE111A421A54732BB5AAA</xmpMM:DocumentID> <xmpMM:OriginalDocumentID>xmp.did:BA40697429D5DE11A7C6E1C8A72841AA</xmpMM:OriginalDocumentID> <xmpMM:DerivedFrom rdf:parseType="Resource"> <stRef:instanceID>xmp.iid:0720B33BAF6EE111A421A54732BB5AAA</stRef:instanceID> <stRef:documentID>xmp.did:FCDFC32FE338DF11A7ACAC43065E28B4</stRef:documentID> <stRef:originalDocumentID>xmp.did:BA40697429D5DE11A7C6E1C8A72841AA</stRef:originalDocumentID> </xmpMM:DerivedFrom> </rdf:Description> </rdf:RDF>
       </Metadata>
       <SetBackgroundColor>
         <color>
@@ -8596,7 +8596,7 @@
         <tags>
           <PlaceObject2 replace="0" depth="1" objectID="256" name="icon">
             <transform>
-              <Transform transX="-170" transY="-500"/>
+              <Transform transX="-180" transY="-140"/>
             </transform>
           </PlaceObject2>
           <ShowFrame/>

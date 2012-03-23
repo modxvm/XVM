@@ -1,5 +1,5 @@
---- orig\VehicleMarkersManager.xml	2012-03-15 17:19:14.848876600 +0200
-+++ VehicleMarkersManager.xml	2012-03-16 23:09:27.383774600 +0200
+--- orig\VehicleMarkersManager.xml	2012-03-23 11:30:24.569535400 +0200
++++ VehicleMarkersManager.xml	2012-03-23 11:32:35.360613200 +0200
 @@ -3117,7 +3117,7 @@
        </DefineBitsLossless2>
        <DefineShape objectID="81">
@@ -1780,7 +1780,7 @@
          <tags>
            <PlaceObject2 replace="0" depth="1" objectID="256" name="icon">
              <transform>
--              <Transform transX="-170" transY="-500"/>
+-              <Transform transX="-180" transY="-140"/>
 +              <Transform transX="0" transY="0"/>
              </transform>
            </PlaceObject2>
