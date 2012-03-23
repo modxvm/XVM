@@ -9,6 +9,9 @@
 Сайт проекта: http://code.google.com/p/wot-xvm/
 Поддержка:    http://forum.bulychev.net/viewforum.php?f=6
 
+Всем, кто считает что мод грузит сервер статистики, сюда:
+http://bulychev.net/blog/2012/02/pozitsiya-wg-v-otnoshenii-modov-so-statisti/
+
 Конфигурационный файл мода:
   \res_mods\<game version>\gui\flash\XVM.xvmconf (основной конфиг)
   \res_mods\<game version>\gui\flash\OTMData.xml (в режиме совместимости)
