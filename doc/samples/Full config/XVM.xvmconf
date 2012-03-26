@@ -31,7 +31,7 @@
     "alpha": 60,
     "iconAlpha": 100,
     "medium": {
-      "width": 65,
+      "width": 46,
       "formatLeft": "<font color='{{c:eff}}'>{{nick}}</font>",
       "formatRight": "<font color='{{c:eff}}'>{{nick}}</font>"
     },
@@ -41,7 +41,7 @@
       "formatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
     },
     "large": {
-      "width": 187,
+      "width": 170,
       "nickFormatLeft": "<font color='{{c:eff}}'>{{rating}}</font> {{nick}}",
       "nickFormatRight": "{{nick}} <font color='{{c:eff}}'>{{rating}}</font>",
       "vehicleFormatLeft": "<font color='{{c:rating}}'>{{vehicle}}</font>",

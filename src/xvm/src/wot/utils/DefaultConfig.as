@@ -57,8 +57,8 @@ class wot.utils.DefaultConfig
        iconAlpha: 100,
         // режим medium1
         medium: {
-          // 0..250 - задает ширину поля имени игрока. По умолчанию: 65
-          width: 65,
+          // 0..250 - задает ширину поля имени игрока. По умолчанию: 46
+          width: 46,
           // формат отображения
           formatLeft: "<font color='{{c:eff}}'>{{nick}}</font>",
           formatRight: "<font color='{{c:eff}}'>{{nick}}</font>"
@@ -71,8 +71,8 @@ class wot.utils.DefaultConfig
           formatRight: "<font color='{{c:eff}}'>{{vehicle}}</font>"
         },
         large: {
-          // 0..250 - задает ширину поля имени игрока. По умолчанию: 187
-          width: 187,
+          // 0..250 - задает ширину поля имени игрока. По умолчанию: 170
+          width: 170,
           // формат отображения
           nickFormatLeft: "<font color='{{c:eff}}'>{{rating}}</font> {{nick}}",
           nickFormatRight: "{{nick}} <font color='{{c:eff}}'>{{rating}}</font>",

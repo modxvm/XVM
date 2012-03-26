@@ -186,16 +186,17 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         if (s_widthTester == null)
         {
           s_widthTester = _root.createTextField("widthTester", _root.getNextHighestDepth(), 0, 0, 268, 20);
-          s_widthTester.setTextFormat(m_names.getTextFormat());
-          s_widthTester.autoSize = true;
+          var tf: TextFormat = m_names.getTextFormat();
+          s_widthTester.autoSize = false;
           s_widthTester.html = true;
+          s_widthTester.setTextFormat(tf);
           s_widthTester._visible = false;
         }
         while (pname.length > 0)
         {
-          str = (pname == name) ? pname : pname + "...";
+          str = (pname == name || m_state != "large") ? pname : pname + "...";
           s_widthTester.htmlText = format.split("{{nick}}").join(str);
-          if (Math.round(s_widthTester._width) <= configWidth)
+          if (Math.round(s_widthTester.getLineMetrics(0).width) + 4 <= configWidth) // 4 is a size of gutters
           {
             //wot.utils.Logger.add("configWidth=" + configWidth + " _width=" + s_widthTester._width + " lineWidth=" + Math.round(s_widthTester.getLineMetrics(0).width) + " " + str);
             break;
@@ -211,7 +212,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 
   function XVMAdjustPanelSize()
   {
-    var namesWidthDefault = 37;
+    var namesWidthDefault = 46;
     var namesWidth = namesWidthDefault;
     var vehiclesWidthDefault = 65;
     var vehiclesWidth = vehiclesWidthDefault;
@@ -220,8 +221,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     switch (m_state)
     {
       case "medium":
-        namesWidth = XVMGetMaximumFieldWidth(m_names) + 10;
-        //namesWidth = Config.s_config.playersPanel.medium.width;
+        namesWidth = Math.max(XVMGetMaximumFieldWidth(m_names), Config.s_config.playersPanel.medium.width);
         widthDelta = namesWidthDefault - namesWidth;
         break;
       case "medium2":
@@ -230,9 +230,8 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         break;
       case "large":
         namesWidthDefault = 296;
-        namesWidth = XVMGetMaximumFieldWidth(m_names) + 10;
-        //namesWidth = Config.s_config.playersPanel.large.width;
-        vehiclesWidth = XVMGetMaximumFieldWidth(m_vehicles) + 10;
+        namesWidth = Math.max(XVMGetMaximumFieldWidth(m_names), Config.s_config.playersPanel.large.width);
+        vehiclesWidth = XVMGetMaximumFieldWidth(m_vehicles);
         widthDelta = namesWidthDefault - namesWidth + vehiclesWidthDefault - vehiclesWidth;
         squadSize = SQUAD_SIZE;
         break;
@@ -268,7 +267,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     var max_width = 0;
     for (var i = 0; i < field.numLines; ++i)
     {
-      var w = Math.round(field.getLineMetrics(i).width);
+      var w = Math.round(field.getLineMetrics(i).width + 4); // 4 is a size of gutters
       if (w > max_width)
         max_width = w;
     }
