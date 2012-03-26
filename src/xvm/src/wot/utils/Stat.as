@@ -268,13 +268,13 @@ class wot.utils.Stat
   }
 
   public static function AddPlayerData(reference: Object, playerId: Number, playerName: String,
-    originalText: String, team: Number)
+    originalText: String, vehicleInfo: Object, team: Number)
   {
     if (playerId <= 0 || !playerName)
       return;
 
-    var pname = Utils.CleanPlayerName(playerName);
-    //wot.utils.Logger.add("AddPlayerData("+playerName+"): "+pname);
+    var pname = Utils.CleanPlayerName(playerName).toUpperCase();
+    //wot.utils.Logger.add("AddPlayerData(" + playerName + "): " + pname + " level=" + level);
     if (!s_player_data[pname])
     {
       s_player_ids.push(playerId);
@@ -284,6 +284,7 @@ class wot.utils.Stat
         playerId: playerId,
         name: pname,
         originalText: originalText,
+        vehicleInfo: vehicleInfo,
         team: team,
         loaded: false
       };
@@ -393,7 +394,7 @@ class wot.utils.Stat
       for (var pi in playerInfo)
       {
         var info = (playerInfo[pi]).split("-");
-        Stat.s_player_names.push(info[0]);
+        Stat.s_player_names.push(info[0].toUpperCase());
         Stat.s_player_ids.push(info[1]);
       }
     };
@@ -412,4 +413,56 @@ class wot.utils.Stat
     }
   }
 
+  /////////////////////////////////////
+  
+  // Result: { win1, win2, draw }
+  public static function GetChances(): Object
+  {
+    // currently only for 15x15 battles
+    if (s_player_names.length != 30)
+      return null;
+
+    if (!s_player_ratings)
+      return null;
+
+    // Calculate average efficiency.
+    var ae1 = AvgEfficiency(Defines.TEAM_ALLY);
+    var ae2 = AvgEfficiency(Defines.TEAM_ENEMY);
+
+    wot.utils.Logger.add("AvgEfficiency: " + ae1 + " / " + ae2);
+    
+    for (var i in s_player_names)
+    {
+      var pname = s_player_names[i];
+      var pdata = s_player_data[pname];
+      var eff: Number = s_player_ratings[pname].eff;
+      wot.utils.Logger.addObject(pdata.vehicleInfo, "vehicleInfo");
+    }
+  }
+  
+  public static function AvgEfficiency(team: Number)
+  {
+    var e: Number = 0;
+    var n: Number = 0;
+    for (var i in s_player_names)
+    {
+      var pname = s_player_names[i];
+      var pdata = s_player_data[pname];
+      if (pdata.team != team)
+        continue;
+
+      var eff: Number = s_player_ratings[pname].eff;
+      if (!eff)
+        continue;
+
+      ++n;
+      e += eff;
+    };
+
+    if (!n || !e)
+      return 0;
+    
+    return 1.0 * e / n;
+  }
+  
 }

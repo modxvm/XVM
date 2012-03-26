@@ -186,11 +186,11 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         if (s_widthTester == null)
         {
           s_widthTester = _root.createTextField("widthTester", _root.getNextHighestDepth(), 0, 0, 268, 20);
-          var tf: TextFormat = m_names.getTextFormat();
           s_widthTester.autoSize = false;
           s_widthTester.html = true;
-          s_widthTester.setTextFormat(tf);
           s_widthTester._visible = false;
+          var tf: TextFormat = m_names.getNewTextFormat();
+          s_widthTester.setNewTextFormat(tf);
         }
         while (pname.length > 0)
         {
@@ -267,7 +267,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     var max_width = 0;
     for (var i = 0; i < field.numLines; ++i)
     {
-      var w = Math.round(field.getLineMetrics(i).width + 4); // 4 is a size of gutters
+      var w = Math.round(field.getLineMetrics(i).width) + 4; // 4 is a size of gutters
       if (w > max_width)
         max_width = w;
     }

@@ -110,5 +110,10 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
     }
 
     infoField.text = txt;
+
+    if (Stat.s_loaded)
+    {
+      //Stat.GetChances();
+    }
   }
 }

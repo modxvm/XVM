@@ -6,6 +6,7 @@ import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.Logger;
 import wot.utils.Stat;
+import wot.utils.VehicleInfo;
 
 class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRenderer
 {
@@ -44,7 +45,7 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
         _logShown = true;
         Logger.add("[BattleLoading] Show Players Statistics = TRUE"); // Just to check config is loaded correctly
       }
-      Stat.AddPlayerData(this, data.id, data.label, data.vehicle,
+      Stat.AddPlayerData(this, data.id, data.label, data.vehicle, VehicleInfo.getInfo(data.icon),
         this.owner._name == "team1List" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
       if (Stat.s_player_ids.length === 30)
         Stat.StartLoadData();
