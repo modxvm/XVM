@@ -67,7 +67,9 @@ namespace wot.Properties {
   <string>EU	aHR0cDovL3dvdC1yYXRpbmdzLmFwcHNwb3QuY29tL3JhdGluZ3MvMi8yLyUx</string>
   <string>NA	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC9uYS8/JTE=</string>
   <string>CN1	aHR0cDovL2dhcnBoeS5jb20vdG9vbC93b3QvRUZGMi9ub3J0aC8lMS5qc29u</string>
+  <string>CN1	aHR0cDovL3RpcHMuY3MwMzA5LmltdHQucXEuY29tL2dldFVzZXI/bmFtZT0lMSZ6b25lPW5vcnRoJmxjPTIwMTIwMzA4JndheT1uZXc=</string>
   <string>CN2	aHR0cDovL2dhcnBoeS5jb20vdG9vbC93b3QvRUZGMi9zb3V0aC8lMS5qc29u</string>
+  <string>CN2	aHR0cDovL3RpcHMuY3MwMzA5LmltdHQucXEuY29tL2dldFVzZXI/bmFtZT0lMSZ6b25lPXNvdXRoJmxjPTIwMTIwMzA4JndheT1uZXc=</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection proxy_servers {
             get {

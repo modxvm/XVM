@@ -69,6 +69,7 @@ namespace wot
     private bool _unavailable = false;
     private DateTime _unavailableFrom;
     private String _lastResult = "";
+    private readonly String _currentProxyUrl;
     private bool added = false;
     private Thread runningIngameThread;
 
@@ -88,6 +89,7 @@ namespace wot
 
       //check version
       version = String.IsNullOrEmpty(ver) ? GetVersion() : ver;
+      _currentProxyUrl = GetProxyAddress();
     }
 
     #endregion
@@ -538,7 +540,7 @@ namespace wot
       return JsonMapper.ToJson(res);
     }
 
-    // Load balancer
+    // Get fastest proxy server (with minimal ping)
     private string GetProxyAddress()
     {
       List<string> ps = new List<string>();
@@ -557,9 +559,95 @@ namespace wot
       if (ps.Count == 0)
         throw new Exception(String.Format("Cannot find proxy server for '{0}' in config", version));
 
-      string proxy_addr = ps[(new Random()).Next(ps.Count)];
-      byte[] decbuff = Convert.FromBase64String(proxy_addr);
-      return Encoding.ASCII.GetString(decbuff);
+      return GetFastestProxyAddress(ps);
+    }
+
+    private string GetFastestProxyAddress(List<string> ps)
+    {
+      long minTime = long.MaxValue;
+      List<string> proxyUrl = new List<string>();
+      Dictionary<string, long> proxyUrls = new Dictionary<string, long>();
+
+      foreach (var addr in ps)
+      {
+        string tempUrl = Encoding.ASCII.GetString(Convert.FromBase64String(addr));
+
+        long tmpTime = long.MaxValue;
+        try
+        {
+          string testId = (version.StartsWith("CN", StringComparison.InvariantCultureIgnoreCase))
+            ? "test" : "001";
+          loadUrl(tempUrl, testId, out tmpTime);
+        }
+        catch (Exception ex)
+        {
+          Log(1, string.Format("Exception: {0}", ex));
+        }
+
+        Log(0, "urlload - " + tmpTime);
+
+        proxyUrls.Add(tempUrl, tmpTime);
+
+        //Get the fastest load time
+        if (tmpTime < minTime)
+          minTime = tmpTime;
+      }
+
+      foreach (var urlload in proxyUrls)
+      {
+        //If little difference between the urls, add it for random select 
+        if ((urlload.Value - minTime) < 500)
+          proxyUrl.Add(urlload.Key);
+      }
+
+      return proxyUrl[(new Random()).Next(proxyUrl.Count)];
+    }
+
+    private static string loadUrl(string url, string members)
+    {
+      long dummy;
+      return loadUrl(url, members, out dummy);
+    }
+
+    private static string loadUrl(string url, string members, out long duration)
+    {
+      Log(1, "HTTP - " + members);
+      url = url.Replace("%1", members);
+      duration = long.MaxValue;
+
+      Stopwatch sw = new Stopwatch();
+      sw.Start();
+
+      WebRequest request = WebRequest.Create(url);
+      request.Credentials = CredentialCache.DefaultCredentials;
+      request.Timeout = Settings.Default.Timeout;
+
+      HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+      Stream dataStream = response.GetResponseStream();
+      StreamReader reader = new StreamReader(dataStream);
+      string responseFromServer = reader.ReadToEnd();
+
+      reader.Close();
+      dataStream.Close();
+      response.Close();
+
+      sw.Stop();
+
+      Log(1, String.Format("  Time: {0} ms, Size: {1} bytes",
+        sw.ElapsedMilliseconds, responseFromServer.Length));
+
+      Debug("responseFromServer: " + responseFromServer);
+
+      // check if error (???)
+      if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Accepted)
+      {
+        // One of our ratting servers' exception starts with "onException"
+        if (!responseFromServer.StartsWith("onException", StringComparison.InvariantCultureIgnoreCase))
+          duration = sw.ElapsedMilliseconds;
+      }
+
+      return responseFromServer;
     }
 
     private void PrepareStat()
@@ -603,37 +691,9 @@ namespace wot
 		
         //The character "?" may be used in china server as the username , for example  "?ABC" . So it's must be replace to "%3F" for search.
         if (reqMembers.IndexOf('?') > 0)
-        {
-            reqMembers = reqMembers.Replace("?", "%3F");           
-        }
+          reqMembers = reqMembers.Replace("?", "%3F");           
 
-        String url = GetProxyAddress().Replace("%1", reqMembers);
-
-        Log(1, String.Format("HTTP - {0}", reqMembers));
-
-        Stopwatch sw = new Stopwatch();
-        sw.Start();
-
-        WebRequest request = WebRequest.Create(url);
-        request.Credentials = CredentialCache.DefaultCredentials;
-        request.Timeout = Settings.Default.Timeout;
-
-        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-        Stream dataStream = response.GetResponseStream();
-        StreamReader reader = new StreamReader(dataStream);
-        string responseFromServer = reader.ReadToEnd();
-
-        reader.Close();
-        dataStream.Close();
-        response.Close();
-
-        sw.Stop();
-
-        Log(1, String.Format("  Time: {0} ms, Size: {1} bytes",
-          sw.ElapsedMilliseconds, responseFromServer.Length));
-
-        Debug("responseFromServer: " + responseFromServer);
+        string responseFromServer = loadUrl(_currentProxyUrl, reqMembers);
 
         Response res = JsonDataToResponse(JsonMapper.ToObject(responseFromServer));
         if (res == null || res.players == null)

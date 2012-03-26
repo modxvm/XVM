@@ -2,6 +2,8 @@ XVM-2.0.test8:
   * fixed grid
   * fixed default size of players panel in medium mode
   * fixed names cutting in medium mode of players panel
+  * automatically select the fastest server to connect (currently useful
+    only for China servers)
 
 XVM-2.0.test7:
   * icons transparency in players panel (parameter playersPanel/iconAlpha)
