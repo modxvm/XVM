@@ -20,7 +20,8 @@
   - прозрачность в Combat Scroll Text
   - -1 для БК
   - eval()
-  - добавить к Vehicle Icon, Contour Icon эфекты тени
+  - добавить к Vehicle Icon, Contour Icon, healthBar эффекты тени.
+  - динамический цвет и прозрачность для тени
 
 battle.swf
   - настраиваемые сообщения в панели над миникартой
