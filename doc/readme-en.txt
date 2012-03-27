@@ -66,6 +66,14 @@ alpha
   hp: [ ]               array of values for dynamic transparency by health points (only in markers)
   hp_ratio: [ ]         array of values for dynamic transparency by health ratio (only in markers)
 
+iconset			icon sets for:
+  battleLoading:          battle loading screen
+  statisticForm:          battle statistic window (when Tab pressed)
+  playersPanel:           players panels
+  vehicleMarker:          vehicle markers
+path for standard icons: "../maps/icons/vehicle/contour" (used by default)
+only relative paths can be used
+
 markers
   ally
     alive
