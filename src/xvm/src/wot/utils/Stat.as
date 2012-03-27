@@ -418,8 +418,17 @@ class wot.utils.Stat
   // Result: { win1, win2, draw }
   public static function GetChances(): Object
   {
-    // currently only for 15x15 battles
-    if (s_player_names.length != 30)
+    var nally = 0;
+    var nenemy = 0;
+    for (var i in s_player_names)
+    { 
+      var pname = s_player_names[i];
+      var pdata = s_player_data[pname];
+      if (pdata.team == Defines.TEAM_ALLY) ++nally else ++nenemy;
+    }
+
+    // only equal and non empty team supported
+    if (nally != nenemy || nally == 0)
       return null;
 
     if (!s_player_ratings)
