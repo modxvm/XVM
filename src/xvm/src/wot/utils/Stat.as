@@ -425,24 +425,62 @@ class wot.utils.Stat
     if (!s_player_ratings)
       return null;
 
+    var tier = guessBattleTier();
+      
     // Calculate average efficiency.
-    var ae1 = AvgEfficiency(Defines.TEAM_ALLY);
-    var ae2 = AvgEfficiency(Defines.TEAM_ENEMY);
+    var ae1 = AvgStat("eff", Defines.TEAM_ALLY);
+    var ae2 = AvgStat("eff", Defines.TEAM_ENEMY);
 
-    wot.utils.Logger.add("AvgEfficiency: " + ae1 + " / " + ae2);
+    var ar1 = AvgStat("rating", Defines.TEAM_ALLY);
+    var ar2 = AvgStat("rating", Defines.TEAM_ENEMY);
+
+    var ab1 = AvgStat("battles", Defines.TEAM_ALLY);
+    var ab2 = AvgStat("battles", Defines.TEAM_ENEMY);
     
+    var k1 = 0;
+    var k2 = 0;
+    var m1 = 0;
+    var m2 = 0;
     for (var i in s_player_names)
     {
       var pname = s_player_names[i];
       var pdata = s_player_data[pname];
-      var eff: Number = s_player_ratings[pname].eff;
-      wot.utils.Logger.addObject(pdata.vehicleInfo, "vehicleInfo");
+      var eff: Number = s_player_ratings[pname].eff || ((pdata.team == Defines.TEAM_ALLY) ? ae1 : ae2);
+      var gwr: Number = (s_player_ratings[pname].rating || ((pdata.team == Defines.TEAM_ALLY) ? ar1 : ar2)) / 100.0;
+      var bat: Number = (s_player_ratings[pname].battles || ((pdata.team == Defines.TEAM_ALLY) ? ab1 : ab2)) / 100000.0;
+      //wot.utils.Logger.addObject(s_player_ratings[pname], "s_player_ratings[" + pname + "]");
+
+      // 1
+      var kx = eff * pdata.vehicleInfo.level;
+      if (pdata.team == Defines.TEAM_ALLY) k1 += kx; else k2 += kx;
+        
+      // 2
+      var tx = (pdata.vehicleInfo.tier1 + pdata.vehicleInfo.tier2) / 2.0 - tier;
+      var mx = eff * (1 + gwr - 0.48) * (1 + bat) * (1 - 0.25 * tx);
+      if (pdata.team == Defines.TEAM_ALLY) m1 += mx else m2 += mx;
+      //wot.utils.Logger.add("tx=" + tx + " " + int(eff) + " " + int(gwr) + " " + int(bat));
+      //wot.utils.Logger.add("mx=" + mx + " m1=" + m1 + " m2=" + m2 + " team: " + (pdata.team == Defines.TEAM_ALLY ? "ally" : "enemy") + " " + pdata.originalText);
     }
+
+    // 1
+    if (k1 == 0 && k2 == 0) k1 = k2 = 1;
+    if (k1 == 0) k1 = k2;
+    if (k2 == 0) k2 = k1;
+
+    return
+    {
+      k1: Math.round(k1),
+      k2: Math.round(k2),
+      k: Math.round(k1 / (k1 + k2) * 10000) / 100.0,
+      m1: Math.round(m1),
+      m2: Math.round(m2),
+      m: Math.round(m1 / (m1 + m2) * 10000) / 100.0
+    };
   }
   
-  public static function AvgEfficiency(team: Number)
+  private static function AvgStat(arg: String, team: Number)
   {
-    var e: Number = 0;
+    var v: Number = 0;
     var n: Number = 0;
     for (var i in s_player_names)
     {
@@ -451,18 +489,39 @@ class wot.utils.Stat
       if (pdata.team != team)
         continue;
 
-      var eff: Number = s_player_ratings[pname].eff;
-      if (!eff)
+      var value: Number = s_player_ratings[pname][arg];
+      if (!value)
         continue;
 
       ++n;
-      e += eff;
+      v += value;
     };
 
-    if (!n || !e)
+    if (!n || !v)
       return 0;
     
-    return 1.0 * e / n;
+    return 1.0 * v / n;
   }
-  
+
+  private static function guessBattleTier(): Number
+  {
+    var tierLo = 1;
+    var tierHi = 13;
+    for (var i in s_player_names)
+    {
+      var pname = s_player_names[i];
+      var pdata = s_player_data[pname];
+
+      tierLo = Math.max(pdata.vehicleInfo.tier1, tierLo);
+      var tiertmp = Math.min(pdata.vehicleInfo.tier2, tierHi);
+      if (tiertmp >= tierLo)
+        tierHi = tiertmp;
+      //wot.utils.Logger.add("tiers: " + tierLo + ".." + tierHi + " " + pdata.originalText);
+      if (tierLo == tierHi)
+        return tierLo;
+    };
+    
+    //wot.utils.Logger.add("avg tier: " + (tierHi + tierLo ) / 2.0);
+    return (tierHi + tierLo ) / 2.0;
+  }
 }

@@ -77,17 +77,6 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
       Stat.StartLoadData();
   }
 
-  // TODO: Clock color depended of win chances
-  public function calculateChances()
-  {
-/*    for (var pname in Stat.s_player_data)
-    {
-      var pdata = Stat.s_player_data[pname];
-      if (pdata.reference)
-        pdata.reference.XVMStatUpdateCallback(pdata);
-    }*/
-  }
-
   public function setInfoFieldData(data)
   {
     if (!infoField)
@@ -109,11 +98,14 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
       infoField.textColor = 0xFF8080;
     }
 
-    infoField.text = txt;
-
     if (Stat.s_loaded)
     {
-      //Stat.GetChances();
+      var chances = Stat.GetChances();
+      txt += "\nChances:";
+      txt += "\n  m = " + chances.m + " (" + chances.m1 + " / " + chances.m2 + ")";
+      txt += "\n  k = " + chances.k + " (" + chances.k1 + " / " + chances.k2 + ")";
     }
+
+    infoField.text = txt;
   }
 }
