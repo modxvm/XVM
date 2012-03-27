@@ -4,6 +4,8 @@ XVM-2.0.test8:
   * fixed names cutting in medium mode of players panel
   * automatically select the fastest server to connect (currently useful
     only for China servers)
+  * added icon sets ("iconset" config section)
+  * health bar modified
 
 XVM-2.0.test7:
   * icons transparency in players panel (parameter playersPanel/iconAlpha)

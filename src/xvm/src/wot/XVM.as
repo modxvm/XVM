@@ -23,7 +23,10 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
   // UI Elements
   var damageHolder: MovieClip;
-  var xvmHealthBar: MovieClip;
+  var xvmHB: MovieClip;
+  var xvmHBBorder: MovieClip;
+  var xvmHBFill: MovieClip;
+  var xvmHBDamage: MovieClip;
   var grid: MovieClip = null;
 
   // Private static members
@@ -39,9 +42,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   var textFields: Object = null;
 
   // Healthbar Settings
-  var hbBar: MovieClip;
-  var hbDamageBar: MovieClip;
-  var hb: Object = { };
+  var hbCfg: Object = null;
 
   // All stated
   var allStatesAlly: Array = [
@@ -64,7 +65,10 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     Config.LoadConfigAndStatLegacy("XVM.xvmconf", "XVM.as");
 
     damageHolder = createEmptyMovieClip("damageHolder", getNextHighestDepth());
-    xvmHealthBar = createEmptyMovieClip("xvmHealthBar", getNextHighestDepth());
+    xvmHB = createEmptyMovieClip("xvmHB", getNextHighestDepth());
+    xvmHBBorder = xvmHB.createEmptyMovieClip("border", xvmHB.getNextHighestDepth());
+    xvmHBFill = xvmHB.createEmptyMovieClip("fill", xvmHB.getNextHighestDepth());
+    xvmHBDamage = xvmHB.createEmptyMovieClip("damage", xvmHB.getNextHighestDepth());
 
     // Remove standard fields
     pNameField._visible = false;
@@ -109,6 +113,11 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
           this.grid = this.createEmptyMovieClip("grid", this.getNextHighestDepth());
           GraphicsUtil.drawGrid(this.grid, -50, -50, 100, 100, 0xFFFF00, 30);
         }
+
+        // Alternative icon set
+        this.m_source = this.m_source.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.vehicleMarker);
+        if (this.iconLoader != null)
+          this.iconLoader.source = this.m_source;
 
         this.XVMPopulateData();
         this.updateMarkerLabel();
@@ -235,7 +244,13 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   // override
   function _onErrorLoad(event)
   {
-    super._onErrorLoad(event);
+    if (event.target.source)
+    {
+      // Fallback to default icon
+      event.target.source = (Config.s_config.iconset.vehicleMarker != Defines.CONTOUR_ICON_PATH)
+        ? event.target.source.split(Config.s_config.iconset.vehicleMarker).join(Defines.CONTOUR_ICON_PATH)
+        : event.target.source = Defines.CONTOUR_ICON_PATH + "noImage.tga";
+    }
   }
 
   // override
@@ -555,17 +570,19 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       var delta: Number = curHealth - m_currentHealth;
       if (delta < 0)
       {
-        XVMUpdateCurrentColor(curHealth, m_maxHealth); //colorizing health bar after taking damage
+        XVMUpdateHealthBar(curHealth, m_maxHealth); // colorizing health bar after taking damage
 
         XVMShowDamage(curHealth, -delta);
 
         m_currentHealth = curHealth;
 
         //Flow bar animation
-        TweenLite.killTweensOf(this.hbDamageBar);
-        this.hbDamageBar._x = hb.border + hb.width * (curHealth / m_maxHealth);
-        this.hbDamageBar._xscale = this.hbDamageBar._xscale + 100 * (-delta / m_maxHealth);
-        TweenLite.to(this.hbDamageBar, hb.damageTime, {_xscale:0, ease:Cubic.easeIn});
+        TweenLite.killTweensOf(xvmHBDamage);
+        xvmHBDamage._x = hbCfg.border.size + hbCfg.width * (curHealth / m_maxHealth);
+        xvmHBDamage._xscale = xvmHBDamage._xscale + 100 * (-delta / m_maxHealth);
+        GraphicsUtil.setColor(xvmHBDamage, XVMFormatDynamicColor(hbCfg.damage.color, curHealth));
+        xvmHBDamage._alpha = XVMFormatDynamicAlpha(hbCfg.damage.alpha, curHealth);
+        TweenLite.to(xvmHBDamage, hbCfg.damage.fade, {_xscale: 0, ease: Cubic.easeIn });
       }
     }
     catch (e)
@@ -603,7 +620,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   {
     try
     {
-      this.hbBar._xscale = curHealth / m_maxHealth * 100;
+      xvmHBFill._xscale = Math.min(curHealth / m_maxHealth * 100, 100);
 
       if (textFields)
       {
@@ -623,7 +640,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     }
   }
 
-  function XVMUpdateCurrentColor(curHealth)
+  function XVMUpdateHealthBar(curHealth)
   {
     try
     {
@@ -632,6 +649,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
       var cfg = GetCurrentStateConfigRootNormal().healthBar;
 
+      xvmHB._alpha = XVMFormatDynamicAlpha(cfg.alpha, curHealth);
+      
       var ct = XVMFormatStaticColorText(cfg.color);
       var lct = XVMFormatStaticColorText(cfg.lcolor);
       var fullColor: Number = XVMFormatDynamicColor(ct, curHealth);
@@ -639,9 +658,17 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
       var percent: Number = curHealth / m_maxHealth;
 
-      //determ current (real-time) color
-      hb.currColor = GraphicsUtil.colorByRatio(percent, lowColor, fullColor);
-      GraphicsUtil.setColor(this.hbBar, hb.currColor); //colorizing health bar
+      // determ current (real-time) color
+      var currColor = GraphicsUtil.colorByRatio(percent, lowColor, fullColor);
+
+      GraphicsUtil.setColor(xvmHBFill, currColor); // colorizing health bar
+      xvmHBFill._alpha = XVMFormatDynamicAlpha(cfg.fill.alpha, curHealth);
+
+      GraphicsUtil.setColor(xvmHBBorder, XVMFormatDynamicColor(cfg.border.color, curHealth));
+      xvmHBBorder._alpha = XVMFormatDynamicAlpha(cfg.border.alpha, curHealth);
+      
+      GraphicsUtil.setColor(xvmHBDamage, XVMFormatDynamicColor(cfg.damage.color, curHealth));
+      xvmHBDamage._alpha = XVMFormatDynamicAlpha(cfg.damage.alpha, curHealth);
     }
     catch (e)
     {
@@ -689,6 +716,26 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     }
   }
 
+  function XVMDrawHealthBar(cfg)
+  {
+    xvmHB.clear();
+    xvmHBBorder.clear();
+    xvmHBFill.clear();
+    xvmHBDamage.clear();
+
+    hbCfg = cfg;
+
+    //GraphicsUtil.fillRect(xvmHB, 0, 0, hbCfg.width + 2 * hbCfg.border, hb.height + 2 * hb.border,
+    //  cfg.healthBar.border.color, cfg.healthBar.border.alpha);
+    GraphicsUtil.fillRect(xvmHBBorder, 0, 0, cfg.width + cfg.border.size * 2, cfg.height + cfg.border.size * 2);
+    GraphicsUtil.fillRect(xvmHBFill, cfg.border.size, cfg.border.size, cfg.width, cfg.height);
+    GraphicsUtil.fillRect(xvmHBDamage, cfg.border.size, cfg.border.size, cfg.width, cfg.height);
+
+    xvmHBDamage._xscale = 0;
+    
+    XVMUpdateHealthBar(m_curHealth);
+  }
+  
   private var _statesInitialized: Boolean = false;
   function XVMInitializeStates()
   {
@@ -760,7 +807,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       XVMSetErrorText("ERROR: XVMPopulateVehicleTypeMarker():" + String(e));
     }
   }
-  
+
   function XVMPopulateData()
   {
     try
@@ -781,34 +828,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
         iconLoader.addEventListener("complete", this, "XVMIconCompleteLoad");
 
       // Health Bar
-      xvmHealthBar.clear();
-
-      if (this.hbBar)
-        this.hbBar.clear();
-      else
-        this.hbBar = xvmHealthBar.createEmptyMovieClip("barMC", xvmHealthBar.getNextHighestDepth());
-
-      if (this.hbDamageBar)
-        this.hbDamageBar.clear();
-      else
-        this.hbDamageBar = xvmHealthBar.createEmptyMovieClip("damageMC", xvmHealthBar.getNextHighestDepth());
-
-      hb.border = cfg.healthBar.border.size;
-      hb.width = cfg.healthBar.width;
-      hb.height = cfg.healthBar.height;
-      hb.damageTime = cfg.healthBar.damage.fade;
-
-      GraphicsUtil.fillRect(xvmHealthBar, 0, 0, hb.width + 2 * hb.border, hb.height + 2 * hb.border,
-        cfg.healthBar.border.color, cfg.healthBar.border.alpha);
-      GraphicsUtil.fillRect(this.hbBar, 0, 0, hb.width, hb.height,
-        hb.currColor, cfg.healthBar.fill.alpha);
-      GraphicsUtil.fillRect(this.hbDamageBar, 0, 0, hb.width, hb.height,
-        XVMFormatDynamicColor(cfg.healthBar.damage.color, m_curHealth), XVMFormatDynamicAlpha(cfg.healthBar.damage.alpha, m_curHealth));
-
-      this.hbBar._x = this.hbBar._y = hb.border;
-      this.hbDamageBar._x = hb.border + hb.width;
-      this.hbDamageBar._y = hb.border;
-      this.hbDamageBar._xscale = 0;
+      XVMDrawHealthBar(cfg.healthBar);
 
       // Initialize states and creating text fields
       XVMInitializeStates();
@@ -892,11 +912,11 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       visible = cfg.healthBar.visible;
       if (visible)
       {
-        xvmHealthBar._x = cfg.healthBar.x;
-        xvmHealthBar._y = cfg.healthBar.y;
-        xvmHealthBar._alpha = XVMFormatDynamicAlpha(cfg.healthBar.alpha, m_curHealth);
+        xvmHB._x = cfg.healthBar.x;
+        xvmHB._y = cfg.healthBar.y;
+        xvmHB._alpha = XVMFormatDynamicAlpha(cfg.healthBar.alpha, m_curHealth);
       }
-      xvmHealthBar._visible = visible;
+      xvmHB._visible = visible;
 
       // Text fields
       if (textFields)
@@ -910,7 +930,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       }
 
       // Update Colors and Values
-      XVMUpdateCurrentColor(m_curHealth);
+      XVMUpdateHealthBar(m_curHealth);
       XVMUpdateUI(m_curHealth);
 
       if (DEBUG_TIMES)

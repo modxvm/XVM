@@ -261,6 +261,12 @@ class wot.utils.DefaultConfig
           { value: 50,  alpha: 60 },
           { value: 101, alpha: 40 }
         ]
+      },
+      iconset: {
+        battleLoading: "../maps/icons/vehicle/contour",
+        statisticForm: "../maps/icons/vehicle/contour",
+        playersPanel:  "../maps/icons/vehicle/contour",
+        vehicleMarker: "../maps/icons/vehicle/contour"
       }
     };
   }

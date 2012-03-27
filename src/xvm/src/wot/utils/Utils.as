@@ -125,4 +125,11 @@ class wot.utils.Utils
     return date2 - date1;
   }
 
+  public static function fixPath(path: String)
+  {
+    path = path.split("\\").join("/");
+    if (!Utils.endsWith("/", path))
+      path += "/";
+    return path;
+  }
 }

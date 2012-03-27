@@ -1185,5 +1185,11 @@
       { "value": 10,  "alpha": 100 },
       { "value": 999, "alpha": 100 }
     ]
+  },
+  "iconset": {
+    "battleLoading": "../maps/icons/vehicle/contour",
+    "statisticForm": "../maps/icons/vehicle/contour",
+    "playersPanel":  "../maps/icons/vehicle/contour",
+    "vehicleMarker": "../maps/icons/vehicle/contour"
   }
 }

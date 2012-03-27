@@ -15,23 +15,40 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
     super();
     vehicleField.html = true;
     Config.LoadConfig("XVM.xvmconf");
-    iconLoader.addEventListener("complete", this, "completeLoad");
   }
 
+  // override
+  function errorLoad(event)
+  {
+    if (event.target.source)
+    {
+      // Fallback to default icon
+      event.target.source = (Config.s_config.iconset.battleLoading != Defines.CONTOUR_ICON_PATH)
+        ? event.target.source.split(Config.s_config.iconset.battleLoading).join(Defines.CONTOUR_ICON_PATH)
+        : event.target.source = Defines.CONTOUR_ICON_PATH + "noImage.tga";
+    }
+  }
+
+  // override
+  private var _iconLoaded = false;
   function completeLoad(event)
   {
-    event.target.removeEventListener("complete", this, "completeLoad");
-    vehicleField._width += 80;
-    if (this.owner._name == "team1List")
-      vehicleField._x -= 113; // sirmax: why this value?
-    if (!Config.s_config.battle.mirroredVehicleIcons)
+    if (!_iconLoaded)
     {
-      if (this.owner._name == "team2List")
+      _iconLoaded = true;
+      vehicleField._width += 80;
+      if (this.owner._name == "team1List")
+        vehicleField._x -= 113; // sirmax: why this value?
+      if (!Config.s_config.battle.mirroredVehicleIcons)
       {
-        event.target._xscale = -event.target._xscale;
-        event.target._x -= event.target.__width - 5;
+        if (this.owner._name == "team2List")
+        {
+          event.target._xscale = -event.target._xscale;
+          event.target._x -= event.target.__width - 5;
+        }
       }
     }
+    event.target.visible = true;
   }
 
   // override
@@ -50,6 +67,11 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
       if (Stat.s_player_ids.length === 30)
         Stat.StartLoadData();
     }
+    
+    // Alternative icon set
+    if (data)
+      data.icon = data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.battleLoading);
+
     super.setData(data);
   }
 

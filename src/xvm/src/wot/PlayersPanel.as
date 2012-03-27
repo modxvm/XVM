@@ -3,6 +3,7 @@
  * @author sirmax2
  */
 import wot.utils.Config;
+import wot.utils.Defines;
 import wot.utils.Stat;
 import wot.utils.Utils;
 
@@ -13,7 +14,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   private var m_currentFieldType = "";
   private var m_currentData = null;
   private var m_currentItem = 0;
-
+  
   function PlayersPanel()
   {
     /*if (!_global.xvm)
@@ -27,27 +28,45 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     Config.LoadConfigAndStatLegacy("XVM.xvmconf", "PlayersPanel.as");
   }
 
+  function errorLoad(event)
+  {
+    if (event.target.source)
+    {
+      // Fallback to default icon
+      event.target.source = (Config.s_config.iconset.playersPanel != Defines.CONTOUR_ICON_PATH)
+        ? event.target.source.split(Config.s_config.iconset.playersPanel).join(Defines.CONTOUR_ICON_PATH)
+        : event.target.source = Defines.CONTOUR_ICON_PATH + "noImage.tga";
+    }
+  }
+
   function completeLoad(event)
   {
-    event.target.removeEventListener("complete", this, "completeLoad");
+    if (!event.target["xvm_initialized"])
+    {
+      event.target["xvm_initialized"] = true;
+      if (!Config.s_config.battle.mirroredVehicleIcons && m_type == "right")
+      {
+        event.target._xscale = -event.target._xscale;
+        event.target._x -= event.target.__width;
 
-    if (Config.s_config.battle.mirroredVehicleIcons)
-      return;
-
-    if (m_type == "left")
-      return;
-
-    event.target._xscale = -event.target._xscale;
-    event.target._x -= event.target.__width;
-
-    if (!Config.s_config.battle.mirroredVehicleIcons)
-      event.target.renderer.vehicleLevel._x = event.target._x + 15;
+        if (!Config.s_config.battle.mirroredVehicleIcons)
+          event.target.renderer.vehicleLevel._x = event.target._x + 15;
+      }
+    }
+    event.target.visible = true;
   }
 
   // override
   private var _initialized = false;
   function setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount)
   {
+    // Alternative icon set
+    if (data)
+    {
+      for (var i = 0; i < data.length; ++i)
+        data[i].icon = data[i].icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.playersPanel);
+    }
+
     super.setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount);
 
     if (!_initialized)
@@ -56,6 +75,9 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
       for (var i = 0; i < m_list.renderers.length; ++i)
       {
         var renderer = m_list.renderers[i];
+        renderer.iconLoader.removeEventListener("ioError", renderer, "errorLoad");
+        renderer.iconLoader.removeEventListener("complete", renderer, "completeLoad");
+        renderer.iconLoader.addEventListener("ioError", this, "errorLoad");
         renderer.iconLoader.addEventListener("complete", this, "completeLoad");
         renderer.iconLoader["renderer"] = renderer;
       }

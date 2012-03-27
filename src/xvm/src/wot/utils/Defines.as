@@ -5,7 +5,7 @@
 class wot.utils.Defines
 {
   // Global versions
-  public static var XVM_VERSION = "2.0.test7";
+  public static var XVM_VERSION = "2.0.test8";
   public static var WOT_VERSION = "0.7.2";
   public static var CONFIG_VERSION = "1.2.0";
   public static var EDITOR_VERSION = "0.0.0";
@@ -13,7 +13,7 @@ class wot.utils.Defines
   public static var DEFAULT_CONFIG_NAME = "XVM.xvmconf";
 
   // file name limit is ~ 220 chars
-  public static var MAX_PATH = 180;
+  public static var MAX_PATH = 170;
 
   // Path to Dokan MountPoint
   public static var DOKAN_MP = "../../../.stat/";
@@ -50,4 +50,7 @@ class wot.utils.Defines
   public static var DYNAMIC_ALPHA_KB = 3;
   public static var DYNAMIC_ALPHA_HP = 4;
   public static var DYNAMIC_ALPHA_HP_RATIO = 5;
+  
+  // Default path to vehicle icons (relative)
+  public static var CONTOUR_ICON_PATH = "../maps/icons/vehicle/contour/";
 }

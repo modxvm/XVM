@@ -147,5 +147,11 @@
       { "value": 500,  "alpha": 50 },
       { "value": 9999, "alpha": 0 }
     ]
+  },
+  "iconset": {
+    "battleLoading": "../../../HARDicons",
+    "statisticForm": "../../../HARDicons",
+    "playersPanel":  "../../../HARDicons",
+    "vehicleMarker": "../../../HARDicons"
   }
 }

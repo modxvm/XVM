@@ -146,6 +146,7 @@ class wot.utils.Config
             else
             {
               Config.s_config = Config.MergeConfigs(Config.FixConfig(config), Config.s_config);
+              Config.TuneupConfig();
               //Logger.addObject(Config.s_config);
               if (Config.DEBUG_TIMES)
               {
@@ -241,7 +242,18 @@ class wot.utils.Config
         return def;
       }
   }
-   
+
+  /**
+   * Modify some parameters to be with correct format.
+   */
+  private static function TuneupConfig()
+  {
+    Config.s_config.iconset.battleLoading = Utils.fixPath(Config.s_config.iconset.battleLoading);
+    Config.s_config.iconset.playersPanel = Utils.fixPath(Config.s_config.iconset.playersPanel);
+    Config.s_config.iconset.statisticForm = Utils.fixPath(Config.s_config.iconset.statisticForm);
+    Config.s_config.iconset.vehicleMarker = Utils.fixPath(Config.s_config.iconset.vehicleMarker);
+  }
+  
   /**
    * Convert config to new format.
    */
