@@ -1,4 +1,4 @@
-﻿intrinsic class net.wargaming.controls.LobbyPlayerListItemRenderer // extends net.wargaming.controls.TextFieldShort
+﻿intrinsic class net.wargaming.controls.LobbyPlayerListItemRenderer extends gfx.core.UIComponent // net.wargaming.controls.TextFieldShort
 {
   var data;
   var iconLoader;

@@ -85,14 +85,21 @@ class wot.utils.Utils
     }
   }
 
-  public static function CleanPlayerName(str: String)
+  public static function GetPlayerName(fullplayername: String): String
   {
-    str = str.toLowerCase();
-    var pos = str.indexOf("[");
-    if (pos >= 0)
-      str = str.slice(0, pos);
+    var pos = fullplayername.indexOf("[");
+    return (pos < 0) ? fullplayername : fullplayername.slice(0, pos);
+  }
 
-    return str;
+  public static function GetUpperPlayerName(fullplayername: String): String
+  {
+    return GetPlayerName(fullplayername).toUpperCase();
+  }
+  
+  public static function GetClanName(fullplayername: String): String
+  {
+    var pos = fullplayername.indexOf("[");
+    return (pos < 0) ? null : fullplayername.slice(pos);
   }
 
   public static function toInt(value: Object, defaultValue: Number): Number

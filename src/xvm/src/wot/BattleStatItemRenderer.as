@@ -5,6 +5,7 @@
 
 import wot.utils.Config;
 import wot.utils.Defines;
+import wot.utils.PlayerInfo;
 import wot.utils.Stat;
 
 class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
@@ -18,9 +19,15 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     wot.utils.Logger.add("--> " + _global.xvm.join(", "));*/
 
     super();
+
     col3.html = true;
     col3._width += 80;
     Config.LoadConfigAndStatLegacy("XVM.xvmconf", "BattleStatItemRenderer.as");
+  }
+
+  private function get team(): Number
+  {
+    return (this.owner._name == "team1") ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
   }
 
   // override
@@ -42,11 +49,11 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     if (!_iconLoaded)
     {
       _iconLoaded = true;
-      if (this.owner._name == "team1")
+      if (team == Defines.TEAM_ALLY)
         col3._x -= 80;
       if (!Config.s_config.battle.mirroredVehicleIcons)
       {
-        if (this.owner._name == "team2")
+        if (team == Defines.TEAM_ENEMY)
         {
           event.target._xscale = -event.target._xscale;
           event.target._x -= 80 - 5; // FIXIT: where I can get image width?
@@ -57,16 +64,28 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
   }
 
   // override
+  private var _clanIconLoaded = false;
   function updateData()
   {
-    // Alternative icon set
     if (data)
+    {
+      // Player/clan icons
+      if (!_clanIconLoaded)
+      {
+        _clanIconLoaded = true;
+        var pinfo = PlayerInfo.getPlayerInfo(data.label, data.clanAbbrev ? "[" + data.clanAbbrev + "]" : null);
+        if (pinfo)
+          PlayerInfo.createClanIcon(this, pinfo, iconLoader._x, iconLoader._y, team);
+      }
+
+      // Alternative icon set
       data.icon = data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.statisticForm);
+    }
 
     super.updateData();
 
     col3.htmlText = Stat.DecorateField(data, data.vehicle,
-      this.owner._name == "team1" ? Config.s_config.statisticForm.formatLeft : Config.s_config.statisticForm.formatRight,
-      this.owner._name == "team1" ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
+      team == Defines.TEAM_ALLY ? Config.s_config.statisticForm.formatLeft : Config.s_config.statisticForm.formatRight,
+      team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
   }
 }

@@ -59300,7 +59300,7 @@
         <actions>
           <PushData>
             <items>
-              <StackString value="net.wargaming.ingame.PlayerListItemRenderer"/>
+              <StackString value="wot.PlayerListItemRenderer"/>
             </items>
           </PushData>
           <GetVariable/>
@@ -59326,7 +59326,7 @@
         <actions>
           <PushData>
             <items>
-              <StackString value="net.wargaming.ingame.PlayerListItemRenderer"/>
+              <StackString value="wot.PlayerListItemRenderer"/>
             </items>
           </PushData>
           <GetVariable/>

@@ -38,6 +38,7 @@
   <compileTargets>
     <compile path="src\wot\PlayersPanel.as" />
     <compile path="src\Mouse.as" />
+    <compile path="src\wot\PlayerListItemRenderer.as" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>

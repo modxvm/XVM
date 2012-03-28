@@ -1,4 +1,4 @@
-﻿intrinsic class net.wargaming.BattleStatItemRenderer // extends net.wargaming.controls.TextFieldShort
+﻿intrinsic class net.wargaming.BattleStatItemRenderer extends MovieClip // net.wargaming.controls.TextFieldShort
 {
   var col3;
   var data;

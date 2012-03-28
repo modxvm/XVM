@@ -1,5 +1,5 @@
 --- orig\PlayersPanel.xml	2012-03-23 11:30:21.169195400 +0200
-+++ PlayersPanel.xml	2012-03-23 11:32:38.313908500 +0200
++++ PlayersPanel.xml	2012-03-28 17:35:12.163865500 +0300
 @@ -55291,8 +55291,8 @@
                <String value="charAt"/>
                <String value=" "/>
@@ -11,6 +11,24 @@
                <String value="&#10;"/>
                <String value="&#13;"/>
                <String value="&#9;"/>
+@@ -59300,7 +59300,7 @@
+         <actions>
+           <PushData>
+             <items>
+-              <StackString value="net.wargaming.ingame.PlayerListItemRenderer"/>
++              <StackString value="wot.PlayerListItemRenderer"/>
+             </items>
+           </PushData>
+           <GetVariable/>
+@@ -59326,7 +59326,7 @@
+         <actions>
+           <PushData>
+             <items>
+-              <StackString value="net.wargaming.ingame.PlayerListItemRenderer"/>
++              <StackString value="wot.PlayerListItemRenderer"/>
+             </items>
+           </PushData>
+           <GetVariable/>
 @@ -59456,7 +59456,7 @@
          <actions>
            <PushData>

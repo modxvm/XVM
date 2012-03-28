@@ -910,7 +910,12 @@ namespace wot
       try
       {
         for (int i = 0; i < logString.Length - 1; i += 2)
-          buf.Add(Convert.ToByte(logString.Substring(i, 2), 16));
+        {
+          byte b = Convert.ToByte(logString.Substring(i, 2), 16);
+          if (b < 32 && b != 10 && b != 13 && b != 9) // '\n', '\r', '\t'
+            b = 63; // '?'
+          buf.Add(b);
+        }
         Log(1, Encoding.ASCII.GetString(buf.ToArray()));
       }
       catch (Exception ex)

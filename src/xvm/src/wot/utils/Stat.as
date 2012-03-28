@@ -49,7 +49,7 @@ class wot.utils.Stat
 
     if (Stat.s_player_ratings)
     {
-      var pname: String = Utils.CleanPlayerName(data.label || data.name).toUpperCase();
+      var pname: String = Utils.GetUpperPlayerName(data.label || data.name);
       if (!data.uid || data.uid == undefined)
         data.uid = s_player_data[pname].playerId;
       var stat = Stat.s_player_ratings[pname];
@@ -105,7 +105,7 @@ class wot.utils.Stat
 
   public static function processForFogOfWar(data)
   {
-    var pname: String = Utils.CleanPlayerName(data.label || data.name).toUpperCase();
+    var pname: String = Utils.GetUpperPlayerName(data.label || data.name);
     if (data.uid && !s_player_names[pname] && !s_player_data[pname])
     {
       try
@@ -163,7 +163,7 @@ class wot.utils.Stat
   {
     if (!s_player_ratings)
       return txt;
-    var pname = Utils.CleanPlayerName(data.label || data.name).toUpperCase();
+    var pname = Utils.GetUpperPlayerName(data.label || data.name);
     var ratingText = Stat.FormatText(data, format, false);
     if (!ratingText || ratingText == "")
       return txt;
@@ -205,7 +205,7 @@ class wot.utils.Stat
               for (var i = 0; i < stats.players.length; ++i)
               {
                 var p_stat = stats.players[i];
-                var p_name = Utils.CleanPlayerName(p_stat.name).toUpperCase();
+                var p_name = Utils.GetUpperPlayerName(p_stat.name);
                 if (Stat.s_player_ratings[p_name])
                 {
                   //wot.utils.Logger.add(p_name + " already in ratings");
@@ -231,7 +231,7 @@ class wot.utils.Stat
                   for (var i = 0; i < stats_new.players.length; ++i)
                   {
                     var p_stat_new = stats_new.players[i];
-                    var p_name_new = Utils.CleanPlayerName(p_stat_new.name).toUpperCase();
+                    var p_name_new = Utils.GetUpperPlayerName(p_stat_new.name);
                     if (Stat.s_player_ratings[p_name_new])
                     {
                       //wot.utils.Logger.add(p_name_new + " already in ratings");
@@ -273,7 +273,7 @@ class wot.utils.Stat
     if (playerId <= 0 || !playerName)
       return;
 
-    var pname = Utils.CleanPlayerName(playerName).toUpperCase();
+    var pname = Utils.GetUpperPlayerName(playerName);
     //wot.utils.Logger.add("AddPlayerData(" + playerName + "): " + pname + " level=" + level);
     if (!s_player_data[pname])
     {

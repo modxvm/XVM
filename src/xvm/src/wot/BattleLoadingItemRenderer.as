@@ -6,7 +6,9 @@ import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.Logger;
 import wot.utils.Stat;
+import wot.utils.PlayerInfo;
 import wot.utils.VehicleInfo;
+import wot.utils.Utils;
 
 class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRenderer
 {
@@ -15,6 +17,11 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
     super();
     vehicleField.html = true;
     Config.LoadConfig("XVM.xvmconf");
+  }
+
+  private function get team(): Number
+  {
+    return (this.owner._name == "team1List") ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
   }
 
   // override
@@ -37,11 +44,11 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
     {
       _iconLoaded = true;
       vehicleField._width += 80;
-      if (this.owner._name == "team1List")
+      if (team == Defines.TEAM_ALLY)
         vehicleField._x -= 113; // sirmax: why this value?
       if (!Config.s_config.battle.mirroredVehicleIcons)
       {
-        if (this.owner._name == "team2List")
+        if (team == Defines.TEAM_ENEMY)
         {
           event.target._xscale = -event.target._xscale;
           event.target._x -= event.target.__width - 5;
@@ -53,24 +60,35 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
 
   // override
   private static var _logShown = false;
+  private var _clanIconLoaded = false;
   function setData(data)
   {
-    if (data && Config.s_config.rating.showPlayersStatistics)
-    {
-      if (!_logShown)
-      {
-        _logShown = true;
-        Logger.add("[BattleLoading] Show Players Statistics = TRUE"); // Just to check config is loaded correctly
-      }
-      Stat.AddPlayerData(this, data.id, data.label, data.vehicle, VehicleInfo.getInfo(data.icon),
-        this.owner._name == "team1List" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
-      if (Stat.s_player_ids.length === 30)
-        Stat.StartLoadData();
-    }
-    
-    // Alternative icon set
     if (data)
+    {
+      if (Config.s_config.rating.showPlayersStatistics)
+      {
+        if (!_logShown)
+        {
+          _logShown = true;
+          Logger.add("[BattleLoading] Show Players Statistics = true"); // Just to check config is loaded correctly
+        }
+        Stat.AddPlayerData(this, data.id, data.label, data.vehicle, VehicleInfo.getInfo(data.icon), team);
+        if (Stat.s_player_ids.length === 30)
+          Stat.StartLoadData();
+      }
+    
+      // Alternative icon set
       data.icon = data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.battleLoading);
+
+      // Player/clan icons
+      if (!_clanIconLoaded)
+      {
+        _clanIconLoaded = true;
+        var pinfo = PlayerInfo.getPlayerInfo(Utils.GetPlayerName(data.label), Utils.GetClanName(data.label));
+        if (pinfo)
+          PlayerInfo.createClanIcon(this, pinfo, iconLoader._x, iconLoader._y, team);
+      }
+    }
 
     super.setData(data);
   }
@@ -84,8 +102,8 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
       if (data)
       {
         vehicleField.htmlText = Stat.DecorateField(data, data.vehicle,
-          this.owner._name == "team1List" ? Config.s_config.battleLoading.formatLeft : Config.s_config.battleLoading.formatRight,
-          this.owner._name == "team1List" ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
+          team == Defines.TEAM_ALLY ? Config.s_config.battleLoading.formatLeft : Config.s_config.battleLoading.formatRight,
+          team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
       }
     }
   }

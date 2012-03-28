@@ -74,6 +74,20 @@ iconset			icon sets for:
 path for standard icons: "../maps/icons/vehicle/contour" (used by default)
 only relative paths can be used
 
+players: [ ]            array of data for players and clans:
+player example: { "nick": "sirmax2", "icon": "../../../clanicons/XVM.png", "x": 0, "y": 4, "w": 16, "h": 16, "alpha": 100 },
+clan example:   { "clan": "[WG]",    "icon": "../../../clanicons/WG.png",  "x": 0, "y": 4, "w": 16, "h": 16, "alpha": 100 },
+where:
+  nick  - player name (only full names allowed)
+  clan  - clan name. Substing searching is used. For example:
+          clan: "[RED]" - search clan with exact name "RED"
+          clan: "[RED"  - search all clans with name starting with "RED"
+          clan: "RED"   - search all clans containing "RED".
+  icon  - icon file name (relative paths allowed)
+  x,y   - icon position relative to vehicle icon
+  w,h   - icon width and height
+  alpha - icon transparency (0..100, dynamic transparency will not work)
+
 markers
   ally
     alive

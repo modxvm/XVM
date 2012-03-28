@@ -1,3 +1,6 @@
+XVM-2.0.test9:
+  * player/clan icons added
+
 XVM-2.0.test8:
   * fixed grid
   * fixed default size of players panel in medium mode
