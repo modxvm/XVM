@@ -22,11 +22,6 @@ battle
   mirroredVehicleIcons:   false - disable vehicle icons mirroring (useful for
                                   alternative icons)
   showPostmortemTips:     false - disable sliding postmortem panel
-  battleLoadingShowClock: false - disable clock at battle loading screen
-  playersPanelAlpha:      0..100 - players panel transparentness. 0 - transparent,
-                                  100 - not transparent
-  playersPanelLargeWidth: 0..170 - set players names width in panels in large mode.
-                                  Default: 170
   drawGrid:               true  - draw coordinates grid (may be usefil for
                                   aligning marker elements)
 
@@ -36,21 +31,34 @@ rating
                                   everywhere without it.
   loadEnemyStatsInFogOfWar: true - enable loading enemy stats in Fog of War (experimental).
 
-  battleLoading
-    show:                 false - disable showing statistics at battle loading
-                                  screen
-    format:               "text" - format of field (statistics macros can be
-                                  used - see below)
-  playersPanel
-    show:                 false - disable showing statistics at players panels
-    format:               "text" - format of field
-    middleColor:          "{{c:...}}" - color of player names in the middle
-                                  mode of players panels (statistics macros can
-                                  be used)
-  statisticForm
-    show:                 false - disable showing statistics at battle
-                                  statistics window (when Tab pressed)
-    format:               "text" - format of field
+battleLoading
+  showClock:               false - disable clock at battle loading screen
+  showChances:             true - enable showing win chances
+                                  Discussion: http://forum.bulychev.net/viewtopic.php?f=4&t=26 (Russian)
+  formatLeft:              "text" - left field format (statistics macros can be used - see below)
+  formatRight:             "text" - right field format
+
+statisticForm
+  formatLeft:              "text" - left field format (statistics macros can be used - see below)
+  formatRight:             "text" - right field format
+
+playersPanel
+  alpha:                   0..100 - players panel transparency. 0 - transparent, 100 - not transparent
+  iconAlpha:               0..100 - players panel icon transparency. 0 - transparent, 100 - not transparent
+  medium                   medium1 mode
+    width:                   0..250 - set players names width. Default: 46
+    formatLeft:              field format
+    formatRight:             field format
+  medium2                  medium2 mode
+    width:                   0..250 - set players names width. Default: 65
+    formatLeft:              field format
+    formatRight:             field format
+  large:                   large mode
+    width:                   0..250 - set players names width. Default: 170
+    nickFormatLeft:          player name field format
+    nickFormatRight:         player name field format
+    vehicleFormatLeft:       vehicle name field format
+    vehicleFormatRight:      vehicle name field format
 
 colors
   eff: [ ]              array of values for dynamic colors by efficiency

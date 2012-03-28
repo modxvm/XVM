@@ -1,5 +1,7 @@
 XVM-2.0.test9:
   * player/clan icons added
+  * Win chances calculation added.
+    Discussion: http://forum.bulychev.net/viewtopic.php?f=4&t=26 (Russian)
 
 XVM-2.0.test8:
   * fixed grid

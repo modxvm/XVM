@@ -41,6 +41,8 @@ class wot.utils.DefaultConfig
       battleLoading: {
         // false - выключить отображение часов на экране загрузки боя
         showClock: true,
+        // true - включить отображение шансов на победу
+        showChances: false,
         // формат отображения (допускаются макроподстановки)
         formatLeft: "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
         formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
@@ -54,7 +56,7 @@ class wot.utils.DefaultConfig
         // 0..100 - задает прозрачность "ушей". 0 - прозрачные, 100 - не прозрачные
         alpha: 60,
         // 0..100 - задает прозрачность иконок в "ушах". 0 - прозрачные, 100 - не прозрачные
-       iconAlpha: 100,
+        iconAlpha: 100,
         // режим medium1
         medium: {
           // 0..250 - задает ширину поля имени игрока. По умолчанию: 46
@@ -63,6 +65,7 @@ class wot.utils.DefaultConfig
           formatLeft: "<font color='{{c:eff}}'>{{nick}}</font>",
           formatRight: "<font color='{{c:eff}}'>{{nick}}</font>"
         },
+        // режим medium2
         medium2: {
           // 0..250 - задает ширину поля имени игрока. По умолчанию: 65
           width: 65,
@@ -70,6 +73,7 @@ class wot.utils.DefaultConfig
           formatLeft: "<font color='{{c:eff}}'>{{vehicle}}</font>",
           formatRight: "<font color='{{c:eff}}'>{{vehicle}}</font>"
         },
+        // режим large
         large: {
           // 0..250 - задает ширину поля имени игрока. По умолчанию: 170
           width: 170,
