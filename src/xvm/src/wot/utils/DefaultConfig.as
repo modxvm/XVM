@@ -267,7 +267,15 @@ class wot.utils.DefaultConfig
         statisticForm: "../maps/icons/vehicle/contour",
         playersPanel:  "../maps/icons/vehicle/contour",
         vehicleMarker: "../maps/icons/vehicle/contour"
-      }
+      },
+      players: [
+        { nick: "sirmax2", icon: "XVM.png",   x: 0, y: 0, alpha: 100 },
+        { nick: "0x01",    icon: "XVM.png",   x: 0, y: 0, alpha: 100 },
+        { clan: "[WG]",    icon: "WG.png",    x: 0, y: 0, alpha: 100 },
+        { clan: "[WG-A]",  icon: "WG.png",    x: 0, y: 0, alpha: 100 },
+        { clan: "[WTMOD]", icon: "WTMOD.png", x: 0, y: 0, alpha: 100 },
+        { clan: "[WGST]",  icon: "WGST.png",  x: 0, y: 0, alpha: 100 }
+      ]
     };
   }
 
