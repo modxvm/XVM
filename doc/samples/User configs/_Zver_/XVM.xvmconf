@@ -1,104 +1,53 @@
-﻿{
-  "configVersion": "1.1.0",
+{
+  "configVersion": "1.2.0",
   "editorVersion": "0.0.0",
   "definition": {
-    "author": "zver (by rreeedd)",
-    "description": "Minimarkers",
+    "author": "_Zver_",
+    "description": "Winratio + flying damage",
     "url": "http://code.google.com/p/wot-xvm/",
-    "date": "14.03.2012",
-    "gameVersion": "0.7.1.1",
-    "modMinVersion": "1.7"
+    "date": "29.03.2012",
+    "gameVersion": "0.7.2",
+    "modMinVersion": "2.0"
   },
   "battle": {
     "mirroredVehicleIcons": true,
-    "showPostmortemTips": true,
-    "playersPanelAlpha": 50,
-    "playersPanelLargeWidth": 100,
+    "showPostmortemTips": false,
     "drawGrid": false
   },
   "rating": {
     "showPlayersStatistics": true,
-    "loadEnemyStatsInFogOfWar": true,
-    "battleLoading": {
-      "show": true,
-      "format": "<font face='Consolas' size='10' color='{{c:kb}}'>{{kb:3}}</font> <font face='Consolas' size='10' color='{{c:rating}}'>{{rating:3}}</font>"
+    "loadEnemyStatsInFogOfWar": true
+  },
+  "battleLoading": {
+    "showClock": true,
+    "showChances": true,
+    "formatLeft": "<font color='{{c:kb}}'>{{kb}}</font>  <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font>  <font color='{{c:kb}}'>{{kb}}</font>"
+  },
+  "statisticForm": {
+    "formatLeft": "<font color='{{c:kb}}'>{{kb}}</font>  <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font>  <font color='{{c:kb}}'>{{kb}}</font>"
+  },
+  "playersPanel": {
+    "alpha": 50,
+    "iconAlpha": 70,
+    "medium": {
+      "width": 46,
+      "formatLeft": "<font color='{{c:rating}}'>{{nick}}</font>",
+      "formatRight": "<font color='{{c:rating}}'>{{nick}}</font>"
     },
-    "playersPanel": {
-      "show": true,
-      "format": "<font color='{{c:rating}}'>{{rating}}</font>",
-      "middleColor": "{{c:rating}}"
+    "medium2": {
+      "width": 65,
+      "formatLeft": "<font color='{{c:rating}}'>{{vehicle}}</font>",
+      "formatRight": "<font color='{{c:rating}}'>{{vehicle}}</font>"
     },
-    "statisticForm": {
-      "show": true,
-      "format": "<font face='Consolas' size='10' color='{{c:kb}}'>{{kb:3}}</font> <font face='Consolas' size='10' color='{{c:rating}}'>{{rating:3}}</font>"
+    "large": {
+      "width": 100,
+      "nickFormatLeft": "<font color='{{c:rating}}'>{{rating}}</font> {{nick}}",
+      "nickFormatRight": "{{nick}} <font color='{{c:rating}}'>{{rating}}</font>",
+      "vehicleFormatLeft": "<font>{{vehicle}}</font>",
+      "vehicleFormatRight": "<font>{{vehicle}}</font>"
     }
-  },
-  "colors": {
-    "eff": [
-      { "value": 600,  "color": "0xDD0000" },
-      { "value": 900,  "color": "0xDD3333" },
-      { "value": 1200, "color": "0xFFCC33" },
-      { "value": 1500, "color": "0x99FF33" },
-      { "value": 1800, "color": "0x33FF33" },
-      { "value": 9999, "color": "0xCC66CC" }
-    ],
-    "rating": [
-      { "value": 42,  "color": "0xDD0000" },
-      { "value": 48,  "color": "0xDD3333" },
-      { "value": 51,  "color": "0xDDDD33" },
-      { "value": 53,  "color": "0x99FF33" },
-      { "value": 57,  "color": "0x33FF33" },
-      { "value": 101, "color": "0xCC66CC" }
-    ],
-    "kb": [
-      { "value": 1,   "color": "0xDD0000" },
-      { "value": 3,   "color": "0xDD3333" },
-      { "value": 5,   "color": "0xFFCC33" },
-      { "value": 8,   "color": "0x99FF33" },
-      { "value": 12,  "color": "0x33FF33" },
-      { "value": 999, "color": "0xCC66CC" }
-    ],
-    "hp": [
-      { "value": 200,  "color": "0xDD0000" },
-      { "value": 400,  "color": "0xDD3333" },
-      { "value": 1000, "color": "0xFFCC33" },
-      { "value": 9999, "color": "0xFFFFFF" }
-    ],
-    "hp_ratio": [
-      { "value": 10,  "color": "0xDD0000" },
-      { "value": 25,  "color": "0xDD3333" },
-      { "value": 50,  "color": "0xFFCC33" },
-      { "value": 101, "color": "0xFFFFFF" }
-    ]
-  },
-  "alpha": {
-    "eff": [
-      { "value": 900,  "alpha": 100 },
-      { "value": 1200, "alpha": 100 },
-      { "value": 9999, "alpha": 100 }
-    ],
-    "rating": [
-      { "value": 49,  "alpha": 100 },
-      { "value": 53,  "alpha": 100 },
-      { "value": 101, "alpha": 100 }
-    ],
-    "kb": [
-      { "value": 2,   "alpha": 100 },
-      { "value": 10,  "alpha": 100 },
-      { "value": 999, "alpha": 100 }
-    ],
-    "hp": [
-      { "value": 200,  "alpha": 100 },
-      { "value": 400,  "alpha": 90 },
-      { "value": 1000, "alpha": 80 },
-      { "value": 9999, "alpha": 70 }
-    ],
-    "hp_ratio": [
-      { "value": 10,  "alpha": 100 },
-      { "value": 25,  "alpha": 90 },
-      { "value": 50,  "alpha": 80 },
-      { "value": 101, "alpha": 70 }
-    ]
   },
   "markers": {
     "ally": {
@@ -126,7 +75,7 @@
             "visible": true,
             "x": -26,
             "y": -20,
-            "alpha": 0,
+           "alpha": 0,
             "color": "8706574",
             "lcolor": null,
             "width": 50,
@@ -145,7 +94,7 @@
               "fade": 1
             }
           },
-          "damageText": {
+         "damageText": {
             "visible": true,
             "x": 0,
             "y": -65,
@@ -157,7 +106,7 @@
               "align": "center",
               "bold": true
             },
-            "shadow": {
+     "shadow": {
               "alpha": 100,
               "color": "47872",
               "angle": 0,
@@ -165,10 +114,10 @@
               "distance": 0,
               "size": 6
             },
-            "speed": 2,
+        "speed": 2,
             "maxRange": 60,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Готов!"
+            "blowupMessage": "Blow-up!"
           },
           "contourIcon": {
             "visible": false,
@@ -192,7 +141,7 @@
           },
           "textFields": [
              {
-              "visible": true,
+   "visible": true,
               "x": 0,
               "y": -24,
               "alpha": 100,
@@ -213,10 +162,10 @@
               },
               "format": "{{vehicle}}"
             },
-            {
+   {
               "visible": true,
               "x": 0,
-              "y": -9,
+              "y": -11,
               "alpha": 100,
               "color": "0xFFFFFF",
               "font": {
@@ -324,7 +273,7 @@
             "speed": 2,
             "maxRange": 60,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Готов!"
+            "blowupMessage": "Blow-up!"
           },
           "contourIcon": {
             "visible": false,
@@ -372,7 +321,7 @@
             {
               "visible": true,
               "x": 0,
-              "y": -9,
+              "y": -11,
               "alpha": 100,
               "color": "0xFFFFFF",
               "font": {
@@ -483,7 +432,7 @@
             "speed": 2,
             "maxRange": 60,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Готов!"
+            "blowupMessage": "Blow-up!"
           },
           "contourIcon": {
             "visible": false,
@@ -596,7 +545,7 @@
             "speed": 2,
             "maxRange": 60,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Готов!"
+            "blowupMessage": "Blow-up!"
           },
           "contourIcon": {
             "visible": false,
@@ -619,7 +568,7 @@
             "alpha": 100
           },
           "textFields": [
-		{
+            {
               "visible": true,
               "x": 0,
               "y": -24,
@@ -712,7 +661,7 @@
             "speed": 2,
             "maxRange": 60,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Готов!"
+            "blowupMessage": "Blow-up!"
           },
           "contourIcon": {
             "visible": false,
@@ -735,7 +684,7 @@
             "alpha": 100
           },
           "textFields": [
-             {
+            {
               "visible": true,
               "x": 0,
               "y": -24,
@@ -760,7 +709,7 @@
             {
               "visible": true,
               "x": 0,
-              "y": -9,
+              "y": -11,
               "alpha": 100,
               "color": "0xFFFFFF",
               "font": {
@@ -868,7 +817,7 @@
             "speed": 2,
             "maxRange": 60,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Готов!"
+            "blowupMessage": "Blow-up!"
           },
           "contourIcon": {
             "visible": false,
@@ -916,7 +865,7 @@
             {
               "visible": true,
               "x": 0,
-              "y": -9,
+              "y": -11,
               "alpha": 100,
               "color": "0xFFFFFF",
               "font": {
@@ -1027,7 +976,7 @@
             "speed": 2,
             "maxRange": 60,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Готов!"
+            "blowupMessage": "Blow-up!"
           },
           "contourIcon": {
             "visible": false,
@@ -1140,7 +1089,7 @@
             "speed": 2,
             "maxRange": 60,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Готов!"
+            "blowupMessage": "Blow-up!"
           },
           "contourIcon": {
             "visible": false,
@@ -1163,7 +1112,7 @@
             "alpha": 100
           },
           "textFields": [
-		{
+            {
               "visible": true,
               "x": 0,
               "y": -24,
@@ -1189,5 +1138,113 @@
         }
       }
     }
-  }
+  },
+  "colors": {
+    "system": {
+      "ally_alive_normal": "0x96FF00",
+      "ally_alive_blind": "0x96FF00",
+      "ally_dead_normal": "0x009900",
+      "ally_dead_blind": "0x009900",
+      "ally_blowedup_normal": "0x007700",
+      "ally_blowedup_blind": "0x007700",
+      "squadman_alive_normal": "0xFFB964",
+      "squadman_alive_blind": "0xFFFF00",
+      "squadman_dead_normal": "0xCA7000",
+      "squadman_dead_blind": "0xAAAA00",
+      "squadman_blowedup_normal": "0xA45A00",
+      "squadman_blowedup_blind": "0x888800",
+      "teamKiller_alive_normal": "0x00EAFF",
+      "teamKiller_alive_blind": "0x00EAFF",
+      "teamKiller_dead_normal": "0x097783",
+      "teamKiller_dead_blind": "0x097783",
+      "teamKiller_blowedup_normal": "0x096A75",
+      "teamKiller_blowedup_blind": "0x096A75",
+      "enemy_alive_normal": "0xF50800",
+      "enemy_alive_blind": "0x8379FE",
+      "enemy_dead_normal": "0x840500",
+      "enemy_dead_blind": "0x47407A",
+      "enemy_blowedup_normal": "0x5A0401",
+      "enemy_blowedup_blind": "0x3B365F"
+    },
+    "hp": [
+      { "value": 200,  "color": "0xDD0000" },
+      { "value": 400,  "color": "0xDD3333" },
+      { "value": 1000, "color": "0xFFCC33" },
+      { "value": 9999, "color": "0xFFFFFF" }
+    ],
+    "hp_ratio": [
+      { "value": 10,  "color": "0xDD0000" },
+      { "value": 25,  "color": "0xDD3333" },
+      { "value": 50,  "color": "0xFFCC33" },
+      { "value": 101, "color": "0xFFFFFF" }
+    ],
+    "eff": [
+      { "value": 600,  "color": "0xDD0000" },
+      { "value": 900,  "color": "0xDD3333" },
+      { "value": 1200, "color": "0xFFCC33" },
+      { "value": 1500, "color": "0x99FF33" },
+      { "value": 1800, "color": "0x33FF33" },
+      { "value": 9999, "color": "0xCC66CC" }
+    ],
+    "rating": [
+      { "value": 42,  "color": "0xDD0000" },
+      { "value": 48,  "color": "0xDD3333" },
+      { "value": 51,  "color": "0xDDDD33" },
+
+      { "value": 53,  "color": "0x99FF33" },
+      { "value": 57,  "color": "0x33FF33" },
+      { "value": 101, "color": "0xCC66CC" }
+    ],
+    "kb": [
+      { "value": 1,   "color": "0xDD0000" },
+      { "value": 3,   "color": "0xDD3333" },
+      { "value": 5,   "color": "0xFFCC33" },
+      { "value": 8,   "color": "0x99FF33" },
+      { "value": 12,  "color": "0x33FF33" },
+      { "value": 999, "color": "0xCC66CC" }
+    ]
+  },
+  "alpha": {
+    "hp": [
+      { "value": 200,  "alpha": 100 },
+      { "value": 400,  "alpha": 80 },
+      { "value": 1000, "alpha": 60 },
+      { "value": 9999, "alpha": 40 }
+    ],
+    "hp_ratio": [
+      { "value": 10,  "alpha": 100 },
+      { "value": 25,  "alpha": 80 },
+      { "value": 50,  "alpha": 60 },
+      { "value": 101, "alpha": 40 }
+    ],
+    "eff": [
+      { "value": 900,  "alpha": 100 },
+      { "value": 1200, "alpha": 100 },
+      { "value": 9999, "alpha": 100 }
+    ],
+    "rating": [
+      { "value": 49,  "alpha": 100 },
+      { "value": 53,  "alpha": 100 },
+      { "value": 101, "alpha": 100 }
+    ],
+    "kb": [
+      { "value": 2,   "alpha": 100 },
+      { "value": 10,  "alpha": 100 },
+      { "value": 999, "alpha": 100 }
+    ]
+  },
+  "iconset": {
+    "battleLoading": "../maps/icons/vehicle/contour",
+    "statisticForm": "../maps/icons/vehicle/contour",
+    "playersPanel":  "../maps/icons/vehicle/contour",
+    "vehicleMarker": "../maps/icons/vehicle/contour"
+  },
+  "players": [
+    { "nick": "sirmax2", "icon": "../../../clanicons/XVM.png",   "x": 0, "y": 4, "h": 16, "w": 16, "alpha": 100 },
+    { "nick": "0x01",    "icon": "../../../clanicons/XVM.png",   "x": 0, "y": 4, "h": 16, "w": 16, "alpha": 100 },
+    { "clan": "[WG]",    "icon": "../../../clanicons/WG.png",    "x": 0, "y": 4, "h": 16, "w": 16, "alpha": 100 },
+    { "clan": "[WG-A]",  "icon": "../../../clanicons/WG.png",    "x": 0, "y": 4, "h": 16, "w": 16, "alpha": 100 },
+    { "clan": "[WTMOD]", "icon": "../../../clanicons/WTMOD.png", "x": 0, "y": 4, "h": 16, "w": 16, "alpha": 100 },
+    { "clan": "[WGST]",  "icon": "../../../clanicons/WGST.png",  "x": 0, "y": 4, "h": 16, "w": 16, "alpha": 100 }
+  ]
 }
