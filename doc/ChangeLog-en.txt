@@ -1,43 +1,17 @@
-XVM-2.0.test9:
-  * player/clan icons added
-  * Win chances calculation added.
-    Discussion: http://forum.bulychev.net/viewtopic.php?f=4&t=26 (Russian)
-
-XVM-2.0.test8:
-  * fixed grid
-  * fixed default size of players panel in medium mode
-  * fixed names cutting in medium mode of players panel
-  * automatically select the fastest server to connect (currently useful
-    only for China servers)
-  * added icon sets ("iconset" config section)
-  * health bar modified
-
-XVM-2.0.test7:
-  * icons transparency in players panel (parameter playersPanel/iconAlpha)
-  * players panel field width changing
-
-XVM-2.0.test6:
-  * adaptation to WoT 0.7.2 Common Test 3
-  * fixed transparency in players panel
-  * configurable formats for name and vehicle text fields in players panel
-  * darker color for dead or not loaded players in players panel
-
-XVM-2.0.test5:
-  * fixed marker for dead allies
-  * fixed color blind mode
-  * configurable system colors (section colors/system in XVM.xvmconf)
-    working with all elements except vehicle type markers
-
-XVM-2.0.test4:
-  * fixed config loading
-
-XVM-2.0.test3:
-  * fixed extra '-' in damage text
+XVM-2.0:
+  * adaptation to WoT 0.7.2
+  * mod distribution model changed:
+      xvm-lite package for mod without players ratio
+      xvm-full package for mod with players ratio
+  * dynamic color optimization
+  * added {{level}} macro for vehicle level
+  * always use 'alive' color for damage text with system colors
+  * added clock to battle loading screen (can be disabled in config)
+  * macros optimization
+  * shadows quality improved
   * advanced in-game error reporting
   * text formats in battleLoading, statisticForm and playersPanel split to
     left and right
-  * playersPanel.swf modified for 0.7.2 patch (only icon mirroring and
-    transparency is working now)
   * config changed to version 1.2.0. Parameters moved:
       rating/battleLoading => battleLoading
       rating/statisticForm => statisticForm
@@ -45,21 +19,19 @@ XVM-2.0.test3:
       battle/battleLoadingShowClock => battleLoading/showClock
       battle/playersPanelAlpha => playersPanel/alpha
       battle/playersPanelLargeWidth => playersPanel/large/width
-
-XVM-2.0.test2:
-  * adaptation to WoT 0.7.2 Common Test 2
-  * dynamic color optimization
-  * added {{level}} macro for vehicle level
-  * always use 'alive' color for damage text with system colors
-  * added clock to battle loading screen (can be disabled in config)
-  * macros optimization
-  * shadows quality improved
-
-XVM-2.0.test1:
-  * adaptation to WoT 0.7.2 Common Test 1
-  * mod distribution model changed:
-      xvm-lite package for mod without players ratio
-      xvm-full package for mod with players ratio
+  * configurable system colors (section colors/system in XVM.xvmconf)
+    working with all elements except vehicle type markers
+  * configurable formats for name and vehicle text fields in players panel
+  * darker color for dead or not loaded players in players panel
+  * icons transparency in players panel (parameter playersPanel/iconAlpha)
+  * players panel field width changing
+  * automatically select the fastest server to connect (currently useful
+    only for China servers)
+  * added icon sets ("iconset" config section)
+  * player/clan icons added
+  * Win chances calculation added.
+    Discussion: http://forum.bulychev.net/viewtopic.php?f=4&t=26 (Russian)
+  * many other fixes
 
 XVM-1.7:
   * merge configs in XVM.xvmconf (with legacy support of OTMData.xml)
