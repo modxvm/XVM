@@ -81,12 +81,13 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
       data.icon = data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.battleLoading);
 
       // Player/clan icons
-      if (!_clanIconLoaded)
+      var cfg = Config.s_config.battleLoading.clanIcon;
+      if (cfg.show && !_clanIconLoaded)
       {
         _clanIconLoaded = true;
         var pinfo = PlayerInfo.getPlayerInfo(Utils.GetPlayerName(data.label), Utils.GetClanName(data.label));
         if (pinfo)
-          PlayerInfo.createClanIcon(this, pinfo, iconLoader._x, iconLoader._y, team);
+          PlayerInfo.createClanIcon(this, pinfo, cfg, iconLoader._x, iconLoader._y, team);
       }
     }
 

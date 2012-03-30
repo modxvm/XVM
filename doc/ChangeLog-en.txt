@@ -1,3 +1,10 @@
+XVM-2.1:
+  * do not show warning when config is absent.
+  * added separated parameters for clan/player icons:
+      battleLoading/clanIcon: for battle loading screen
+      statisticForm/clanIcon: for battle statistics (when Tab pressed)
+      playersPanel/clanIcon: for players panel
+
 XVM-2.0:
   * adaptation to WoT 0.7.2
   * mod distribution model changed:

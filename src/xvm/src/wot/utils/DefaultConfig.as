@@ -43,11 +43,15 @@ class wot.utils.DefaultConfig
         showClock: true,
         // true - включить отображение шансов на победу
         showChances: false,
+        // параметры иконки игрока/клана
+        clanIcon: { show: true, x: 60, y: 4, h: 16, w: 16, alpha: 100 },
         // формат отображения (допускаются макроподстановки)
         formatLeft: "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
         formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
       },
       statisticForm: {
+        // параметры иконки игрока/клана
+        clanIcon: { show: true, x: 60, y: 4, h: 16, w: 16, alpha: 100 },
         // формат отображения
         formatLeft: "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
         formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
@@ -57,6 +61,8 @@ class wot.utils.DefaultConfig
         alpha: 60,
         // 0..100 - задает прозрачность иконок в "ушах". 0 - прозрачные, 100 - не прозрачные
         iconAlpha: 100,
+        // параметры иконки игрока/клана
+        clanIcon: { show: true, x: 60, y: 4, h: 16, w: 16, alpha: 100 },
         // режим medium1
         medium: {
           // 0..250 - задает ширину поля имени игрока. По умолчанию: 46
@@ -273,12 +279,12 @@ class wot.utils.DefaultConfig
         vehicleMarker: "../maps/icons/vehicle/contour"
       },
       players: [
-        { nick: "sirmax2", icon: "../../../clanicons/XVM.png",   x: 0, y: 4, w: 16, h: 16, alpha: 100 },
-        { nick: "0x01",    icon: "../../../clanicons/XVM.png",   x: 0, y: 4, w: 16, h: 16, alpha: 100 },
-        { clan: "[WG]",    icon: "../../../clanicons/WG.png",    x: 0, y: 4, w: 16, h: 16, alpha: 100 },
-        { clan: "[WG-A]",  icon: "../../../clanicons/WG.png",    x: 0, y: 4, w: 16, h: 16, alpha: 100 },
-        { clan: "[WTMOD]", icon: "../../../clanicons/WTMOD.png", x: 0, y: 4, w: 16, h: 16, alpha: 100 },
-        { clan: "[WGST]",  icon: "../../../clanicons/WGST.png",  x: 0, y: 4, w: 16, h: 16, alpha: 100 }
+        { nick: "sirmax2", icon: "../../../clanicons/XVM.png" },
+        { nick: "0x01",    icon: "../../../clanicons/XVM.png" },
+        { clan: "[WG]",    icon: "../../../clanicons/WG.png" },
+        { clan: "[WG-A]",  icon: "../../../clanicons/WG.png" },
+        { clan: "[WTMOD]", icon: "../../../clanicons/WTMOD.png" },
+        { clan: "[WGST]",  icon: "../../../clanicons/WGST.png" }
       ]
     };
   }

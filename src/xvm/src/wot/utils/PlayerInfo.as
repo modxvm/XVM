@@ -23,22 +23,22 @@ class wot.utils.PlayerInfo extends MovieClip
     return null;
   }
   
-  public static function createClanIcon(owner: MovieClip, pinfo, dx, dy, team): MovieClip
+  public static function createClanIcon(owner: MovieClip, pinfo, cfg, dx, dy, team): MovieClip
   {
-    if (!pinfo || !pinfo.w || !pinfo.h || pinfo.w <= 0 || pinfo.h <= 0)
+    if (!pinfo || !pinfo.icon)
       return null;
 
     var depth = owner.getNextHighestDepth();
     var icon: MovieClip = owner.attachMovie("UILoader", "clanIcon" + depth, depth);
     
     icon["xvm_parent"] = owner;
-    icon["xvm_pinfo"] = pinfo;
+    icon["xvm_claninfo"] = { w: cfg.w, h: cfg.h };
     var mx = team == Defines.TEAM_ALLY ? 1 : -1;
-    icon._x = dx + pinfo.x * mx;
+    icon._x = dx + cfg.x * mx;
     if (team == Defines.TEAM_ENEMY)
-      icon._x -= pinfo.w;
-    icon._y = dy + pinfo.y;
-    icon._alpha = pinfo.alpha;
+      icon._x -= cfg.w;
+    icon._y = dy + cfg.y;
+    icon._alpha = cfg.alpha;
     icon.addEventListener("complete", instance, "completeLoadClanIcon");
     icon.source = pinfo.icon;
     icon.visible = false;
@@ -57,11 +57,12 @@ class wot.utils.PlayerInfo extends MovieClip
   private function completeLoadClanIcon(event)
   {
     var icon: MovieClip = event.target;
-    icon.setSize(icon["xvm_pinfo"].w, icon["xvm_pinfo"].h);
-    icon["xvm_parent"].onEnterFrame = function()
+    icon.setSize(icon["xvm_claninfo"].w, icon["xvm_claninfo"].h);
+      icon.visible = true;
+/*    icon["xvm_parent"].onEnterFrame = function()
     {
       this.onEnterFrame = null;
       icon.visible = true;
-    }
+    }*/
   }
 }

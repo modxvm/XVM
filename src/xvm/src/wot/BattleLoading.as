@@ -98,6 +98,12 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
       infoField.textColor = 0xFF8080;
     }
 
+    if (data.warning)
+    {
+      txt += data.warning + "\n";
+      infoField.textColor = 0xFFFFCC;
+    }
+
     if (Stat.s_loaded && Config.s_config.battleLoading.showChances)
     {
       var chances = Stat.GetChances();

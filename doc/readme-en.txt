@@ -34,22 +34,23 @@ rating
 battleLoading
   showClock:               false - disable clock at battle loading screen
   showChances:             true - enable showing win chances. Discussion: http://forum.bulychev.net/viewtopic.php?f=4&t=26 (Russian)
-  formatLeft:              "text" - left field format (statistics macros can be used - see below)
-  formatRight:             "text" - right field format
   clanIcon:                player/clan icon settings
     show:    - show (true) or not (false)
     x,y      - icon position relative to vehicle icon
     w,h      - icon width and height
     alpha    - icon transparency (0..100, dynamic transparency will not work)
-
-statisticForm
   formatLeft:              "text" - left field format (statistics macros can be used - see below)
   formatRight:             "text" - right field format
+
+statisticForm
   clanIcon:                player/clan icon settings (see battleLoading)
+  formatLeft:              "text" - left field format (statistics macros can be used - see below)
+  formatRight:             "text" - right field format
 
 playersPanel
   alpha:                   0..100 - players panel transparency. 0 - transparent, 100 - not transparent
   iconAlpha:               0..100 - players panel icon transparency. 0 - transparent, 100 - not transparent
+  clanIcon:                player/clan icon settings (see battleLoading)
   medium                   medium1 mode
     width:                   0..250 - set players names width. Default: 46
     formatLeft:              field format
@@ -64,7 +65,6 @@ playersPanel
     nickFormatRight:         player name field format
     vehicleFormatLeft:       vehicle name field format
     vehicleFormatRight:      vehicle name field format
-  clanIcon:                player/clan icon settings (see battleLoading)
 
 colors
   eff: [ ]              array of values for dynamic colors by efficiency

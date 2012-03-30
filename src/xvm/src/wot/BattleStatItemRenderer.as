@@ -70,12 +70,13 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     if (data)
     {
       // Player/clan icons
-      if (!_clanIconLoaded)
+      var cfg = Config.s_config.statisticForm.clanIcon;
+      if (cfg.show && !_clanIconLoaded)
       {
         _clanIconLoaded = true;
         var pinfo = PlayerInfo.getPlayerInfo(data.label, data.clanAbbrev ? "[" + data.clanAbbrev + "]" : null);
         if (pinfo)
-          PlayerInfo.createClanIcon(this, pinfo, iconLoader._x, iconLoader._y, team);
+          PlayerInfo.createClanIcon(this, pinfo, cfg, iconLoader._x, iconLoader._y, team);
       }
 
       // Alternative icon set

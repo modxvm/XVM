@@ -171,7 +171,7 @@ class wot.utils.Config
         else
         {
           if (_global.xvm_battleloading)
-            _global.xvm_battleloading.setInfoFieldData({ error: "Error loading config file. Using default settings." });
+            _global.xvm_battleloading.setInfoFieldData({ warning: " " });
         }
         if (Config.s_load_last_stat && Config.s_config.rating.showPlayersStatistics)
           Stat.LoadStatData(Defines.COMMAND_GET_LAST_STAT);

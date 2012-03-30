@@ -8,6 +8,8 @@ import wot.utils.PlayerInfo;
 
 class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRenderer
 {
+  var m_clanIcon: MovieClip = null;
+
   function PlayerListItemRenderer()
   {
     /*if (!_global.xvm)
@@ -65,12 +67,13 @@ class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRend
     if (data)
     {
       // Player/clan icons
-      if (!_clanIconLoaded)
+      var cfg = Config.s_config.playersPanel.clanIcon;
+      if (cfg.show && !_clanIconLoaded)
       {
         _clanIconLoaded = true;
         var pinfo = PlayerInfo.getPlayerInfo(data.label, data.clanAbbrev ? "[" + data.clanAbbrev + "]" : null);
         if (pinfo)
-          PlayerInfo.createClanIcon(this, pinfo, iconLoader._x, iconLoader._y, team);
+          m_clanIcon = PlayerInfo.createClanIcon(this, pinfo, cfg, iconLoader._x, iconLoader._y, team);
       }
 
       // Alternative icon set
@@ -79,5 +82,4 @@ class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRend
 
     super.setData(data);
   }
-  
 }

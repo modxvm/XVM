@@ -21,32 +21,19 @@
   "battleLoading": {
     "showClock": true,
     "showChances": false,
+    "clanIcon": { "show": true, "x": 60, "y": 4, "h": 16, "w": 16, "alpha": 100 },
     "formatLeft": "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
-    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>",
-    "clanIcon": {
-      "show": true,
-      "x": 0,
-      "y": 4,
-      "h": 16,
-      "w": 16,
-      "alpha": 100
-    }
+    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
   },
   "statisticForm": {
+    "clanIcon": { "show": true, "x": 60, "y": 4, "h": 16, "w": 16, "alpha": 100 },
     "formatLeft": "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
-    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>",
-    "clanIcon": {
-      "show": true,
-      "x": 0,
-      "y": 4,
-      "h": 16,
-      "w": 16,
-      "alpha": 100
-    }
+    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
   },
   "playersPanel": {
     "alpha": 60,
     "iconAlpha": 100,
+    "clanIcon": { "show": true, "x": 60, "y": 4, "h": 16, "w": 16, "alpha": 100 },
     "medium": {
       "width": 46,
       "formatLeft": "<font color='{{c:eff}}'>{{nick}}</font>",
@@ -63,14 +50,6 @@
       "nickFormatRight": "{{nick}} <font color='{{c:eff}}'>{{rating}}</font>",
       "vehicleFormatLeft": "<font color='{{c:rating}}'>{{vehicle}}</font>",
       "vehicleFormatRight": "<font color='{{c:rating}}'>{{vehicle}}</font>"
-    },
-    "clanIcon": {
-      "show": true,
-      "x": 0,
-      "y": 4,
-      "h": 16,
-      "w": 16,
-      "alpha": 100
     }
   },
   "colors": {

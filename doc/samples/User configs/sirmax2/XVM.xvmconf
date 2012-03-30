@@ -17,31 +17,18 @@
   },
   "battleLoading": {
     "showChances": true,
+    "clanIcon": { "show": true, "x": 60, "y": 4, "h": 16, "w": 16, "alpha": 100 },
     "formatLeft": "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
-    "formatRight": "<font face='Consolas' size='11'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>",
-    "clanIcon": {
-      "show": true,
-      "x": 60,
-      "y": 4,
-      "h": 16,
-      "w": 16,
-      "alpha": 100
-    }
+    "formatRight": "<font face='Consolas' size='11'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>"
   },
   "statisticForm": {
+    "clanIcon": { "show": true, "x": 60, "y": 4, "h": 16, "w": 16, "alpha": 100 },
     "formatLeft": "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
-    "formatRight": "<font face='Consolas' size='11'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>",
-    "clanIcon": {
-      "show": true,
-      "x": 60,
-      "y": 4,
-      "h": 16,
-      "w": 16,
-      "alpha": 100
-    }
+    "formatRight": "<font face='Consolas' size='11'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>"
   },
   "playersPanel": {
     "alpha": 50,
+    "clanIcon": { "show": true, "x": 60, "y": 4, "h": 16, "w": 16, "alpha": 100 },
     "medium": {
       "formatLeft": "<font color='{{c:eff}}'>{{nick}}</font>",
       "formatRight": "<font color='{{c:eff}}'>{{nick}}</font>"
@@ -56,14 +43,6 @@
       "nickFormatRight": "{{nick}} <font color='{{c:eff}}'>{{rating}}</font>",
       "vehicleFormatLeft": "{{vehicle}}",
       "vehicleFormatRight": "{{vehicle}}"
-    },
-    "clanIcon": {
-      "show": true,
-      "x": 80,
-      "y": 4,
-      "h": 16,
-      "w": 16,
-      "alpha": 100
     }
   },
   "markers": {
