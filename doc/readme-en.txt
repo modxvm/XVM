@@ -16,7 +16,7 @@ You can select ready config file from \xvm-doc\samples\ directory
 You can create new config or edit existing using online editor:
   http://bulychev.net/generator/
 
-XVM.xvmconf parameters:
+XVM.xvmconf parameters (config version is 1.2.0):
 
 battle
   mirroredVehicleIcons:   false - disable vehicle icons mirroring (useful for
@@ -33,14 +33,19 @@ rating
 
 battleLoading
   showClock:               false - disable clock at battle loading screen
-  showChances:             true - enable showing win chances
-                                  Discussion: http://forum.bulychev.net/viewtopic.php?f=4&t=26 (Russian)
+  showChances:             true - enable showing win chances. Discussion: http://forum.bulychev.net/viewtopic.php?f=4&t=26 (Russian)
   formatLeft:              "text" - left field format (statistics macros can be used - see below)
   formatRight:             "text" - right field format
+  clanIcon:                player/clan icon settings
+    show:    - show (true) or not (false)
+    x,y      - icon position relative to vehicle icon
+    w,h      - icon width and height
+    alpha    - icon transparency (0..100, dynamic transparency will not work)
 
 statisticForm
   formatLeft:              "text" - left field format (statistics macros can be used - see below)
   formatRight:             "text" - right field format
+  clanIcon:                player/clan icon settings (see battleLoading)
 
 playersPanel
   alpha:                   0..100 - players panel transparency. 0 - transparent, 100 - not transparent
@@ -59,6 +64,7 @@ playersPanel
     nickFormatRight:         player name field format
     vehicleFormatLeft:       vehicle name field format
     vehicleFormatRight:      vehicle name field format
+  clanIcon:                player/clan icon settings (see battleLoading)
 
 colors
   eff: [ ]              array of values for dynamic colors by efficiency
@@ -92,9 +98,6 @@ where:
           clan: "[RED"  - search all clans with name starting with "RED"
           clan: "RED"   - search all clans containing "RED".
   icon  - icon file name (relative paths allowed)
-  x,y   - icon position relative to vehicle icon
-  w,h   - icon width and height
-  alpha - icon transparency (0..100, dynamic transparency will not work)
 
 markers
   ally

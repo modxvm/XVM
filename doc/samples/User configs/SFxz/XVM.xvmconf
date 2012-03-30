@@ -1,5 +1,5 @@
 ﻿{
-  "configVersion": "7.1.6",
+  "configVersion": "1.0.0",
   "editorVersion": "0.0.1.a1",
   "definition": {
 	"author": "SFxz",
@@ -18,41 +18,41 @@
 	},
 
 "rating": {
-	"showPlayersStatistics": "true", 
+	"showPlayersStatistics": "true",
 "battleLoading": {
-	"show": "false", 
-	"format": "<font face='Consolas' size='10' color='{{c:kb}}'>{{kb:3}}</font> <font face='Consolas' size='10' color='{{c:rating}}'>{{rating:3}}</font> <font face='Consolas' size='10' color='{{c:eff}}'>{{eff:4}}</font>" 
+	"show": "false",
+	"format": "<font face='Consolas' size='10' color='{{c:kb}}'>{{kb:3}}</font> <font face='Consolas' size='10' color='{{c:rating}}'>{{rating:3}}</font> <font face='Consolas' size='10' color='{{c:eff}}'>{{eff:4}}</font>"
 	},
 "playersPanel": {
 	"show": "false",
-	"format": "<font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font>", 
+	"format": "<font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font>",
 	"middleColor": "" },
 "statisticForm": {
 	"show": "true",
-	"format": "<font face='Consolas' size='10' color='{{c:kb}}'>{{kb:3}}</font> <font face='Consolas' size='10' color='{{c:rating}}'>{{rating:3}}</font> <font face='Consolas' size='10' color='{{c:eff}}'>{{eff:4}}</font>" 
+	"format": "<font face='Consolas' size='10' color='{{c:kb}}'>{{kb:3}}</font> <font face='Consolas' size='10' color='{{c:rating}}'>{{rating:3}}</font> <font face='Consolas' size='10' color='{{c:eff}}'>{{eff:4}}</font>"
 	},
-"colors": { 
-	"eff":[ 
-		{	"value":500,"color": "0x00EAFF"		}, 
-		{	"value":900,"color": "0xDD0000"		}, 
-		{	"value":1200,"color": "0xFFCC33"	}, 
-		{	"value":1500,"color": "0x99FF33"	}, 
-		{	"value":1800,"color": "0x33FF33"	}, 
-		{	"value":9999,"color": "0xCC00CC"	} 
+"colors": {
+	"eff":[
+		{	"value":500,"color": "0x00EAFF"		},
+		{	"value":900,"color": "0xDD0000"		},
+		{	"value":1200,"color": "0xFFCC33"	},
+		{	"value":1500,"color": "0x99FF33"	},
+		{	"value":1800,"color": "0x33FF33"	},
+		{	"value":9999,"color": "0xCC00CC"	}
 		],
-	"rating": [ 
-		{	"value": 40, "color": "0x00EAFF"	}, 
-		{	"value": 47, "color": "0xDD0000"	}, 
-		{	"value": 51, "color": "0xFFCC33"	}, 
-		{	"value": 60, "color": "0x33FF33"	}, 
-		{	"value": 100, "color": "0xCC00CC"} 
+	"rating": [
+		{	"value": 40, "color": "0x00EAFF"	},
+		{	"value": 47, "color": "0xDD0000"	},
+		{	"value": 51, "color": "0xFFCC33"	},
+		{	"value": 60, "color": "0x33FF33"	},
+		{	"value": 100, "color": "0xCC00CC"}
 		],
-	"kb":[ 
-		{	"value":3,"color": "0xDD0000"		}, 
-		{	"value":5,"color": "0xFFCC33"		}, 
-		{	"value":8,"color": "0x99FF33"		}, 
-		{	"value":15,"color": "0x33FF33"		}, 
-		{	"value":9999,"color": "0xCC00CC"	} 
+	"kb":[
+		{	"value":3,"color": "0xDD0000"		},
+		{	"value":5,"color": "0xFFCC33"		},
+		{	"value":8,"color": "0x99FF33"		},
+		{	"value":15,"color": "0x33FF33"		},
+		{	"value":9999,"color": "0xCC00CC"	}
 		]
 	  }
 	}
