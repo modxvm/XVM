@@ -1,5 +1,6 @@
 1. Unzip archive to game folder:
-   Right click to archive -> "Exctract all..." -> select game folder -> "Extract"
+   Right click to archive -> "Extract all..." -> select game folder -> "Extract"
+
 2. You do not need to setup anything by default.
 
    If you want special settings, you need to create config file:
