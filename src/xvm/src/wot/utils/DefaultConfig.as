@@ -23,8 +23,6 @@ class wot.utils.DefaultConfig
         modMinVersion: Defines.XVM_VERSION
       },
       battle: {
-        // true - включить режим цветовой слепоты
-//        isColorBlind: false,
         // false - отключить зеркалирование иконок танков (полезно для альтернативных иконок)
         mirroredVehicleIcons: true,
         // false - отключить всплывающую внизу панель после смерти

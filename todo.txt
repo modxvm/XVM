@@ -1,4 +1,7 @@
-﻿Sometimes enemy vehicle contour icon is showing default WoT icon instead of my modded one.
+шансы на победу в окне статистики
+подвинуть имя танка, чтобы не заезжали иконки
+в левых ушах сделать высоту 24px, чтобы не было размытия
+Sometimes enemy vehicle contour icon is showing default WoT icon instead of my modded one.
 
 VMM.swf:
 
@@ -45,6 +48,7 @@ Common:
   - различные профили в одном файле конфигурации
   - настройка положения, размера и формата часов
   - различные iconset'ы для левой и правой панелей
+  - отображение знака классности
 
 Delayed:
   - отмечать вражеские взводы в маркерах (невозможно достучаться из маркера до
