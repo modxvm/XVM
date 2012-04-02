@@ -578,7 +578,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
         //Flow bar animation
         TweenLite.killTweensOf(xvmHBDamage);
-        xvmHBDamage._x = hbCfg.border.size + hbCfg.width * (curHealth / m_maxHealth);
+        xvmHBDamage._x = hbCfg.border.size + hbCfg.width * (curHealth / m_maxHealth) - 1;
         xvmHBDamage._xscale = xvmHBDamage._xscale + 100 * (-delta / m_maxHealth);
         GraphicsUtil.setColor(xvmHBDamage, XVMFormatDynamicColor(hbCfg.damage.color, curHealth));
         xvmHBDamage._alpha = XVMFormatDynamicAlpha(hbCfg.damage.alpha, curHealth);

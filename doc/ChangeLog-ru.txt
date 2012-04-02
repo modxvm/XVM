@@ -4,6 +4,7 @@
       battleLoading/clanIcon: для экрана загрузки
       statisticForm/clanIcon: для окна статистики боя (по Tab)
       playersPanel/clanIcon: для ушей
+  * исправлена анимация строки здоровья
 
 XVM-2.0:
   * мод адаптирован для WoT 0.7.2

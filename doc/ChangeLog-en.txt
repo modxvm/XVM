@@ -4,6 +4,7 @@ XVM-2.1:
       battleLoading/clanIcon: for battle loading screen
       statisticForm/clanIcon: for battle statistics (when Tab pressed)
       playersPanel/clanIcon: for players panel
+  * fixed health bar animation
 
 XVM-2.0:
   * adaptation to WoT 0.7.2
