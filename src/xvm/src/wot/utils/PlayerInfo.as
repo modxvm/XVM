@@ -23,26 +23,41 @@ class wot.utils.PlayerInfo extends MovieClip
     return null;
   }
   
-  public static function createClanIcon(owner: MovieClip, pinfo, cfg, dx, dy, team): MovieClip
+  public static function createClanIcon(owner: MovieClip, name: String, pinfo, cfg, dx, dy, team, oldIcon: MovieClip): MovieClip
   {
     if (!pinfo || !pinfo.icon)
       return null;
 
-    var depth = owner.getNextHighestDepth();
-    var icon: MovieClip = owner.attachMovie("UILoader", "clanIcon" + depth, depth);
-    
-    icon["xvm_parent"] = owner;
-    icon["xvm_claninfo"] = { w: cfg.w, h: cfg.h };
+    var holder: MovieClip = owner.createEmptyMovieClip(name, owner.getNextHighestDepth());
+    var icon: MovieClip = holder.attachMovie("UILoader", "clanIcon", holder.getNextHighestDepth());
+    var depth = holder.getNextHighestDepth();
+    var t: TextField = holder.createTextField("tf", depth, 0, 0, 16, 16);
+    t.textColor = 0x00FF00;
+    t.text = depth.toString();
+
     var mx = team == Defines.TEAM_ALLY ? 1 : -1;
-    icon._x = dx + cfg.x * mx;
+    holder._x = dx + cfg.x * mx;
     if (team == Defines.TEAM_ENEMY)
-      icon._x -= cfg.w;
-    icon._y = dy + cfg.y;
+      holder._x -= cfg.w;
+    holder._y = dy + cfg.y;
+
+    icon._x = icon._y = 0;
     icon._alpha = cfg.alpha;
     icon.addEventListener("complete", instance, "completeLoadClanIcon");
     icon.source = pinfo.icon;
     icon.visible = false;
-    return icon;
+    icon["xvm_claninfo"] = { w: cfg.w, h: cfg.h };
+    icon["holder"] = holder;
+    icon["oldIcon"] = oldIcon;
+
+/*    if (icon.hasOwnProperty("oldIcon"))
+    {
+      icon["oldIcon"].removeMovieClip();
+      delete icon["oldIcon"];
+      icon["oldIcon"] = null;
+    }*/
+    
+    return holder;
   }
 
   // private
@@ -58,11 +73,19 @@ class wot.utils.PlayerInfo extends MovieClip
   {
     var icon: MovieClip = event.target;
     icon.setSize(icon["xvm_claninfo"].w, icon["xvm_claninfo"].h);
-      icon.visible = true;
-/*    icon["xvm_parent"].onEnterFrame = function()
+
+    if (icon.hasOwnProperty("oldIcon"))
+    {
+      //if (icon["oldIcon"])
+      //  icon["oldIcon"]["owner"]["m_clanIcon"].removeMovieClip();
+      //delete icon["oldIcon"];
+      //icon["oldIcon"] = null;
+    }
+
+    icon["holder"].onEnterFrame = function()
     {
       this.onEnterFrame = null;
       icon.visible = true;
-    }*/
+    }
   }
 }

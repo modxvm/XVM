@@ -3,6 +3,8 @@
   var vehicleLevel;
   var iconLoader;
   var owner;
+  var data;
 
   function setData(data);
+  function update();
 }
