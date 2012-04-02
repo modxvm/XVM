@@ -21,12 +21,12 @@
   "battleLoading": {
     "showClock": true,
     "showChances": false,
-    "clanIcon": { "show": true, "x": 60, "y": 4, "h": 16, "w": 16, "alpha": 100 },
+    "clanIcon": { "show": true, "x": -340, "y": 6, "h": 16, "w": 16, "alpha": 100 },
     "formatLeft": "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
     "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
   },
   "statisticForm": {
-    "clanIcon": { "show": true, "x": 60, "y": 4, "h": 16, "w": 16, "alpha": 100 },
+    "clanIcon": { "show": true, "x": -340, "y": 6, "h": 16, "w": 16, "alpha": 100 },
     "formatLeft": "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
     "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
   },
