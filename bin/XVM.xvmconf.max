@@ -160,7 +160,7 @@
   },
   "players": [
 //    { "clan": "D" },
-//    { "clan": "[",          "icon": "../../../clanicons/XVM.png" },
+    { "clan": "[",          "icon": "../../../clanicons/XVM.png" },
     { "nick": "sirmax2",    "icon": "../../../clanicons/XVM.png" },
     { "nick": "sirmax2_RU", "icon": "../../../clanicons/XVM.png" },
     { "nick": "0x01",       "icon": "../../../clanicons/XVM.png" },

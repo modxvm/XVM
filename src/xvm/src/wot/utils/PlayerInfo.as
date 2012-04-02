@@ -30,10 +30,6 @@ class wot.utils.PlayerInfo extends MovieClip
 
     var holder: MovieClip = owner.createEmptyMovieClip(name, owner.getNextHighestDepth());
     var icon: MovieClip = holder.attachMovie("UILoader", "clanIcon", holder.getNextHighestDepth());
-    var depth = holder.getNextHighestDepth();
-    var t: TextField = holder.createTextField("tf", depth, 0, 0, 16, 16);
-    t.textColor = 0x00FF00;
-    t.text = depth.toString();
 
     var mx = team == Defines.TEAM_ALLY ? 1 : -1;
     holder._x = dx + cfg.x * mx;

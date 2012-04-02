@@ -7,4 +7,5 @@
 
   function setData(data);
   function update();
+  function invalidate();
 }
