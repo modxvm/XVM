@@ -41,10 +41,10 @@ class wot.utils.DefaultConfig
       battleLoading: {
         // false - выключить отображение часов на экране загрузки боя
         showClock: true,
-        // true - убрать отображение иконки взвода
-        removeSquadIcon: false,
         // true - включить отображение шансов на победу
         showChances: false,
+        // true - убрать отображение иконки взвода
+        removeSquadIcon: false,
         // параметры иконки игрока/клана
         clanIcon: { show: true, x: 60, y: 4, h: 16, w: 16, alpha: 100 },
         // формат отображения (допускаются макроподстановки)
@@ -52,6 +52,8 @@ class wot.utils.DefaultConfig
         formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
       },
       statisticForm: {
+        // true - включить отображение шансов на победу
+        showChances: false,
         // true - убрать отображение иконки взвода
         removeSquadIcon: false,
         // параметры иконки игрока/клана

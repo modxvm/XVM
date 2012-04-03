@@ -15,7 +15,7 @@ class wot.utils.Stat
 {
   // Config
   public static var s_player_ids = [];
-  public static var s_player_names = [];
+  public static var s_player_names: Array = [];
   public static var s_player_data = {};
   public static var s_player_ratings = null;
   public static var s_loadDataStarted = false;

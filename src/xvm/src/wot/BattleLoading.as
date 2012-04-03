@@ -36,18 +36,6 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
       infoField._visible = true;
     }
 
-    if (!chancesField)
-    {
-      chancesField = createTextField("chances", getNextHighestDepth(), 20, 20, 400, 100);
-      chancesField.wordWrap = true;
-      chancesField.antiAliasType = "advanced";
-      chancesField.setNewTextFormat(new TextFormat("$FieldFont", 16, 0x000000, true, false, false, null, null, "left"));
-      chancesField.filters = [ new DropShadowFilter(0, 0, 0, 100, 3, 3, 3, 3) ];
-      chancesField.textColor = 0xFFFFFF;
-      chancesField._alpha = 100;
-      chancesField._visible = true;
-    }
-
     setInfoFieldData({ });
 
     BattleLoadingInit();
@@ -123,6 +111,18 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
     // Chances
     if (Stat.s_loaded && Config.s_config.battleLoading.showChances)
     {
+      if (!chancesField)
+      {
+        chancesField = createTextField("chances", getNextHighestDepth(), 20, 25, 400, 100);
+        chancesField.wordWrap = true;
+        chancesField.antiAliasType = "advanced";
+        chancesField.setNewTextFormat(new TextFormat("$FieldFont", 16, 0x000000, true, false, false, null, null, "left"));
+        chancesField.filters = [ new DropShadowFilter(0, 0, 0, 100, 3, 3, 3, 3) ];
+        chancesField.textColor = 0xFFFFFF;
+        chancesField._alpha = 100;
+        chancesField._visible = true;
+      }
+
       var chances = Stat.GetChances();
       chancesField.text = "Chances(m) = " + chances.m + " (" + chances.m1 + " / " + chances.m2 + ")\n" +
         "Chances(k) = " + chances.k + " (" + chances.k1 + " / " + chances.k2 + ")";

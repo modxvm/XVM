@@ -11,6 +11,7 @@ XVM-2.1:
     battle loading screen, players panel and Tab key statistic form
   * fixed dynamic transparency
   * fixed player/clan icon in players panel
+  * show win chances in statistic form (work only in 15x15 battles)
 
 XVM-2.0:
   * adaptation to WoT 0.7.2

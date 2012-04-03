@@ -9,10 +9,13 @@ import wot.utils.Defines;
 import wot.utils.GraphicsUtil;
 import wot.utils.PlayerInfo;
 import wot.utils.Stat;
+import wot.utils.Utils;
+import wot.utils.VehicleInfo;
 
 class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
 {
-  public static var chancesField: TextField = null;
+  public static var s_chancesField: TextField = null;
+  public static var s_chancesText: String;
 
   var m_clanIcon: MovieClip = null;
 
@@ -28,18 +31,6 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
 
     col3.html = true;
     Config.LoadConfigAndStatLegacy("XVM.xvmconf", "BattleStatItemRenderer.as");
-
-    if (!chancesField && (this.owner._name == "team1"))
-    {
-      chancesField = this.owner.createTextField("chances", this.owner.getNextHighestDepth(), -50, 20, 400, 100);
-      chancesField.wordWrap = true;
-      chancesField.antiAliasType = "advanced";
-      chancesField.setNewTextFormat(new TextFormat("$FieldFont", 16, 0x000000, true, false, false, null, null, "left"));
-      chancesField.filters = [ new DropShadowFilter(0, 0, 0, 100, 3, 3, 3, 3) ];
-      chancesField.textColor = 0xFFFFFF;
-      chancesField._alpha = 100;
-      chancesField._visible = true;
-    }
   }
 
   private function get team(): Number
@@ -86,21 +77,27 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
   }
 
   // override
-  private var _chancesShown = false;
   function updateData()
   {
     // Chances
-    if (Stat.s_loaded && Config.s_config.battleLoading.showChances && !_chancesShown)
+    wot.utils.Logger.add(Stat.s_player_names.length.toString());
+    if (Stat.s_loaded && Config.s_config.battleLoading.showChances && Stat.s_player_names.length == 30)
     {
-      _chancesShown = true;
-      var chances = Stat.GetChances();
-      chancesField.text = "Chances(m) = " + chances.m + " (" + chances.m1 + " / " + chances.m2 + ")\n" +
-        "Chances(k) = " + chances.k + " (" + chances.k1 + " / " + chances.k2 + ")";
-      chancesField.textColor = Number(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, chances.m_raw, "0x"));
+      if (!s_chancesField)
+        ShowChances();
+      if (s_chancesField.htmlText != s_chancesText)
+      {
+        wot.utils.Logger.add(s_chancesField.htmlText);
+        s_chancesField.html = true;
+        s_chancesField.htmlText = s_chancesText;
+      }
     }
 
     if (data)
     {
+      if (Config.s_config.rating.showPlayersStatistics && !Stat.s_player_data[data.label.toUpperCase()])
+        Stat.AddPlayerData(this, 1, data.label, data.vehicle, VehicleInfo.getInfo(data.icon), team);
+
       // Alternative icon set
       data.icon = data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.statisticForm);
 
@@ -140,5 +137,16 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
       else if (pinfo.icon != m_clanIcon.clanIcon.source)
         m_clanIcon.clanIcon.source = pinfo.icon;
     }
+  }
+  
+  function ShowChances()
+  {
+    var chances = Stat.GetChances();
+    s_chancesField = _root.statsDialog.battleText;
+    s_chancesField.html = true;
+    s_chancesField.htmlText = s_chancesField.text + 
+      " <font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, chances.m_raw) + "'>" +
+      "(Chances: m = " + chances.m + ", k = " + chances.k + ")</font>";
+    s_chancesText = s_chancesField.htmlText;
   }
 }
