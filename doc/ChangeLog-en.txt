@@ -7,6 +7,8 @@ XVM-2.1:
   * fixed health bar animation
   * added option battle/removePanelsModeSwitcher for removing panel switcher
   * battle loading screen fields alignment
+  * added parameter "removeSquadIcon" for ability of removing squad icon from
+    battle loading screen, players panel and Tab key statistic form
 
 XVM-2.0:
   * adaptation to WoT 0.7.2

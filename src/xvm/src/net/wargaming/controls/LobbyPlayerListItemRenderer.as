@@ -4,6 +4,7 @@
   var iconLoader;
   var owner;
   var vehicleField;
+  var squad;
 
   function setData(data);
   function update();

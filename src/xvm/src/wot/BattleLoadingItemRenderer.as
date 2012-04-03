@@ -88,10 +88,16 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
         _clanIconLoaded = true;
         var pinfo = PlayerInfo.getPlayerInfo(Utils.GetPlayerName(data.label), Utils.GetClanName(data.label));
         if (pinfo)
-          PlayerInfo.createClanIcon(this, "m_clanIcon", pinfo, cfg, iconLoader._x, iconLoader._y, team);
+        {
+          PlayerInfo.createClanIcon(this, "m_clanIcon", pinfo, cfg,
+            iconLoader._x + ((team == Defines.TEAM_ALLY) ? 0 : 5), iconLoader._y, team);
+        }
       }
     }
 
+    if (Config.s_config.battleLoading.removeSquadIcon && squad)
+      squad._visible = false;
+    
     super.setData(data);
   }
 

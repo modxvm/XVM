@@ -41,6 +41,8 @@ class wot.utils.DefaultConfig
       battleLoading: {
         // false - выключить отображение часов на экране загрузки боя
         showClock: true,
+        // true - убрать отображение иконки взвода
+        removeSquadIcon: false,
         // true - включить отображение шансов на победу
         showChances: false,
         // параметры иконки игрока/клана
@@ -50,6 +52,8 @@ class wot.utils.DefaultConfig
         formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
       },
       statisticForm: {
+        // true - убрать отображение иконки взвода
+        removeSquadIcon: false,
         // параметры иконки игрока/клана
         clanIcon: { show: true, x: 60, y: 4, h: 16, w: 16, alpha: 100 },
         // формат отображения
@@ -61,8 +65,10 @@ class wot.utils.DefaultConfig
         alpha: 60,
         // 0..100 - задает прозрачность иконок в "ушах". 0 - прозрачные, 100 - не прозрачные
         iconAlpha: 100,
+        // true - убрать отображение иконки взвода
+        removeSquadIcon: false,
         // параметры иконки игрока/клана
-        clanIcon: { show: true, x: 60, y: 4, h: 16, w: 16, alpha: 100 },
+        clanIcon: { show: false, x: 60, y: 4, h: 16, w: 16, alpha: 100 },
         // режим medium1
         medium: {
           // 0..250 - задает ширину поля имени игрока. По умолчанию: 46

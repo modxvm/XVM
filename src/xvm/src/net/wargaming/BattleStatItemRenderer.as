@@ -4,6 +4,7 @@
   var data;
   var iconLoader;
   var owner;
+  var squad;
 
   function updateData();
 }

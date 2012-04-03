@@ -21,7 +21,6 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     super();
 
     col3.html = true;
-    col3._width += 80;
     Config.LoadConfigAndStatLegacy("XVM.xvmconf", "BattleStatItemRenderer.as");
   }
 
@@ -48,15 +47,20 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
   {
     if (!_iconLoaded)
     {
+      col3._width += 80;
       _iconLoaded = true;
       if (team == Defines.TEAM_ALLY)
+      {
         col3._x -= 80;
+        //wot.utils.Logger.addObject(event.target);
+      }
       if (!Config.s_config.battle.mirroredVehicleIcons)
       {
         if (team == Defines.TEAM_ENEMY)
         {
           event.target._xscale = -event.target._xscale;
           event.target._x -= 80 - 5; // FIXIT: where I can get image width?
+          col3._x += 5;
         }
       }
     }
@@ -76,12 +80,18 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
         _clanIconLoaded = true;
         var pinfo = PlayerInfo.getPlayerInfo(data.label, data.clanAbbrev ? "[" + data.clanAbbrev + "]" : null);
         if (pinfo)
-          PlayerInfo.createClanIcon(this, pinfo, cfg, iconLoader._x, iconLoader._y, team);
+        {
+          PlayerInfo.createClanIcon(this, "m_clanIcon", pinfo, cfg,
+            iconLoader._x + ((team == Defines.TEAM_ALLY) ? 0 : 5), iconLoader._y, team);
+        }
       }
 
       // Alternative icon set
       data.icon = data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.statisticForm);
     }
+
+    if (Config.s_config.statisticForm.removeSquadIcon && squad)
+      squad._visible = false;
 
     super.updateData();
 
