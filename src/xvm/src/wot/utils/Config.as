@@ -218,7 +218,11 @@ class wot.utils.Config
 
       case 'number':
         //Logger.add(prefix + " = number " + config + " = " + def);
-        return isFinite(config) ? Number(config) : def;
+        if (isFinite(config))
+          return Number(config);
+        if (typeof config == 'string')
+          return config;
+        return def;
 
       case 'boolean':
         //Logger.add(prefix + " = boolean " + config + " = " + def);

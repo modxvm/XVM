@@ -23,7 +23,7 @@ class wot.utils.PlayerInfo extends MovieClip
     return null;
   }
   
-  public static function createClanIcon(owner: MovieClip, name: String, pinfo, cfg, dx, dy, team, oldIcon: MovieClip): MovieClip
+  public static function createClanIcon(owner: MovieClip, name: String, pinfo, cfg, dx, dy, team): MovieClip
   {
     if (!pinfo || !pinfo.icon)
       return null;
@@ -44,15 +44,7 @@ class wot.utils.PlayerInfo extends MovieClip
     icon.visible = false;
     icon["xvm_claninfo"] = { w: cfg.w, h: cfg.h };
     icon["holder"] = holder;
-    icon["oldIcon"] = oldIcon;
 
-/*    if (icon.hasOwnProperty("oldIcon"))
-    {
-      icon["oldIcon"].removeMovieClip();
-      delete icon["oldIcon"];
-      icon["oldIcon"] = null;
-    }*/
-    
     return holder;
   }
 
@@ -69,14 +61,6 @@ class wot.utils.PlayerInfo extends MovieClip
   {
     var icon: MovieClip = event.target;
     icon.setSize(icon["xvm_claninfo"].w, icon["xvm_claninfo"].h);
-
-    if (icon.hasOwnProperty("oldIcon"))
-    {
-      //if (icon["oldIcon"])
-      //  icon["oldIcon"]["owner"]["m_clanIcon"].removeMovieClip();
-      //delete icon["oldIcon"];
-      //icon["oldIcon"] = null;
-    }
 
     icon["holder"].onEnterFrame = function()
     {

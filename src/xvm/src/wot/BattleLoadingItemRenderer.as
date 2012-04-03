@@ -66,6 +66,7 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
   {
     if (data)
     {
+      // Add players for statistics loading
       if (Config.s_config.rating.showPlayersStatistics)
       {
         if (!_logShown)
