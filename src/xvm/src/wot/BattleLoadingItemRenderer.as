@@ -51,8 +51,9 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
         if (team == Defines.TEAM_ENEMY)
         {
           event.target._xscale = -event.target._xscale;
-          event.target._x -= event.target.__width - 5;
+          event.target._x -= event.target.__width;
           vehicleField._x += 5;
+          //Logger.add(event.target.width + "x" + event.target.height);
         }
       }
     }

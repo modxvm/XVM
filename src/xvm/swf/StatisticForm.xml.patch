@@ -1,5 +1,5 @@
---- orig\StatisticForm.xml	2012-03-23 11:30:22.900368500 +0200
-+++ StatisticForm.xml	2012-03-23 11:32:36.915768700 +0200
+--- orig\StatisticForm.xml	2012-03-23 19:56:37.189969700 +0200
++++ StatisticForm.xml	2012-03-23 19:56:36.597168600 +0200
 @@ -38730,7 +38730,7 @@
          <actions>
            <PushData>

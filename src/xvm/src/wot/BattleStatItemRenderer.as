@@ -3,13 +3,11 @@
  * @author sirmax2
  */
 
-import flash.filters.DropShadowFilter;
 import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.GraphicsUtil;
 import wot.utils.PlayerInfo;
 import wot.utils.Stat;
-import wot.utils.Utils;
 import wot.utils.VehicleInfo;
 
 class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
@@ -80,14 +78,14 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
   function updateData()
   {
     // Chances
-    wot.utils.Logger.add(Stat.s_player_names.length.toString());
+    //wot.utils.Logger.add(Stat.s_player_names.length.toString());
     if (Stat.s_loaded && Config.s_config.battleLoading.showChances && Stat.s_player_names.length == 30)
     {
       if (!s_chancesField)
         ShowChances();
       if (s_chancesField.htmlText != s_chancesText)
       {
-        wot.utils.Logger.add(s_chancesField.htmlText);
+        //wot.utils.Logger.add(s_chancesField.htmlText);
         s_chancesField.html = true;
         s_chancesField.htmlText = s_chancesText;
       }
