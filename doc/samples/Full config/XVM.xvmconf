@@ -12,6 +12,7 @@
   "battle": {
     "mirroredVehicleIcons": true,
     "showPostmortemTips": true,
+    "removePanelsModeSwitcher": false,
     "drawGrid": false
   },
   "rating": {

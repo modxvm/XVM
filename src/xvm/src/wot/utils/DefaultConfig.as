@@ -27,6 +27,8 @@ class wot.utils.DefaultConfig
         mirroredVehicleIcons: true,
         // false - отключить всплывающую внизу панель после смерти
         showPostmortemTips: true,
+        // true - убрать переключатель режимов мышкой
+        removePanelsModeSwitcher: false,
         // true - включить отображение сетки координат (может быть полезным для настройки)
         drawGrid: false
       },

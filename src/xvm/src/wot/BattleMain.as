@@ -2,6 +2,8 @@
  * ...
  * @author sirmax2
  */
+import com.greensock.TimelineLite;
+import com.greensock.TweenLite;
 import wot.utils.Config;
 
 class wot.BattleMain
@@ -20,11 +22,30 @@ class wot.BattleMain
     Config.LoadConfigAndStatLegacy("XVM.xvmconf", "BattleMain.as");
 
     instance = new BattleMain();
-
+    instance.BattleMainInit();
+    
     gfx.io.GameDelegate.addCallBack("battle.showPostmortemTips", instance, "showPostmortemTips");
     gfx.io.GameDelegate.addCallBack("Stage.Update", instance, "onUpdateStage");
   }
 
+  function BattleMainInit(obj: Object)
+  {
+    if (!obj)
+      obj = this;
+
+    if (!Config.s_loaded)
+    {
+      // Wait for config loaded
+      var timer: TimelineLite = new TimelineLite({onComplete:BattleMainInit, onCompleteParams:[obj]});
+      timer.insert(new TweenLite(obj, 0.1));
+      return;
+    }
+
+    if (Config.s_config.battle.removePanelsModeSwitcher)
+      _root.switcher_mc._visible = false;
+  }
+
+    
   function showPostmortemTips(movingUpTime, showTime, movingDownTime)
   {
     if (Config.s_config.battle.showPostmortemTips)

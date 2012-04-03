@@ -5,6 +5,7 @@ XVM-2.1:
       statisticForm/clanIcon: for battle statistics (when Tab pressed)
       playersPanel/clanIcon: for players panel
   * fixed health bar animation
+  * added option battle/removePanelsModeSwitcher for removing panel switcher
 
 XVM-2.0:
   * adaptation to WoT 0.7.2
