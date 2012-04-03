@@ -480,13 +480,21 @@ class wot.utils.Stat
     {
       k1: Math.round(k1),
       k2: Math.round(k2),
-      k: Math.round(k1 / (k1 + k2) * 10000) / 100.0,
+      k: NormalizeResult(k1, k2),
+      k_raw: k1 / (k1 + k2) * 100,
+
       m1: Math.round(m1),
       m2: Math.round(m2),
-      m: Math.round(m1 / (m1 + m2) * 10000) / 100.0
+      m: NormalizeResult(m1, m2),
+      m_raw: m1 / (m1 + m2) * 100
     };
   }
-  
+
+  private static function NormalizeResult(a, b)
+  {
+    return Math.round(Math.max(0.05, Math.min(0.95, (0.5 + (a / (a + b) - 0.5) * 5.0))) * 10000) / 100.0;
+  }
+
   private static function AvgStat(arg: String, team: Number)
   {
     var v: Number = 0;
@@ -520,6 +528,9 @@ class wot.utils.Stat
     {
       var pname = s_player_names[i];
       var pdata = s_player_data[pname];
+
+      if (pdata.vehicleInfo.level == 0)
+        continue;
 
       tierLo = Math.max(pdata.vehicleInfo.tier1, tierLo);
       var tiertmp = Math.min(pdata.vehicleInfo.tier2, tierHi);

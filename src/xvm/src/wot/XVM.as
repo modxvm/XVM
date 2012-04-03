@@ -496,8 +496,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       textField.antiAliasType = "normal";
       textField.embedFonts = true;
       textField.selectable = false;
-      textField.multiline = true;
-      textField.wordWrap = true;
+      textField.multiline = false;
+      textField.wordWrap = false;
       var textFormat: TextFormat = XVMCreateNewTextFormat(cfg.font);
       textField.setNewTextFormat(textFormat);
       textField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];

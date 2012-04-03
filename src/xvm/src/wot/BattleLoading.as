@@ -7,12 +7,14 @@ import com.greensock.TimelineLite;
 import com.greensock.TweenLite;
 import wot.utils.Config;
 import wot.utils.Defines;
+import wot.utils.GraphicsUtil;
 import wot.utils.Stat;
 import wot.utils.Utils;
 
 class wot.BattleLoading extends net.wargaming.BattleLoading
 {
   public static var infoField: TextField = null;
+  public static var chancesField: TextField = null;
 
   public function BattleLoading()
   {
@@ -32,6 +34,18 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
       infoField.textColor = 0xFFFFFF;
       infoField._alpha = 100;
       infoField._visible = true;
+    }
+
+    if (!chancesField)
+    {
+      chancesField = createTextField("chances", getNextHighestDepth(), 20, 20, 400, 100);
+      chancesField.wordWrap = true;
+      chancesField.antiAliasType = "advanced";
+      chancesField.setNewTextFormat(new TextFormat("$FieldFont", 16, 0x000000, true, false, false, null, null, "left"));
+      chancesField.filters = [ new DropShadowFilter(0, 0, 0, 100, 3, 3, 3, 3) ];
+      chancesField.textColor = 0xFFFFFF;
+      chancesField._alpha = 100;
+      chancesField._visible = true;
     }
 
     setInfoFieldData({ });
@@ -104,14 +118,15 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
       infoField.textColor = 0xFFFFCC;
     }
 
+    infoField.text = txt;
+
+    // Chances
     if (Stat.s_loaded && Config.s_config.battleLoading.showChances)
     {
       var chances = Stat.GetChances();
-      txt += "\nChances:";
-      txt += "\n  m = " + chances.m + " (" + chances.m1 + " / " + chances.m2 + ")";
-      txt += "\n  k = " + chances.k + " (" + chances.k1 + " / " + chances.k2 + ")";
+      chancesField.text = "Chances(m) = " + chances.m + " (" + chances.m1 + " / " + chances.m2 + ")\n" +
+        "Chances(k) = " + chances.k + " (" + chances.k1 + " / " + chances.k2 + ")";
+      chancesField.textColor = Number(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, chances.m_raw, "0x"));
     }
-
-    infoField.text = txt;
   }
 }

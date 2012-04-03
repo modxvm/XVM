@@ -10,6 +10,7 @@ XVM-2.1:
   * added parameter "removeSquadIcon" for ability of removing squad icon from
     battle loading screen, players panel and Tab key statistic form
   * fixed dynamic transparency
+  * fixed player/clan icon in players panel
 
 XVM-2.0:
   * adaptation to WoT 0.7.2

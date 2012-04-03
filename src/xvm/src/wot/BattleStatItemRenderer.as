@@ -3,13 +3,19 @@
  * @author sirmax2
  */
 
+import flash.filters.DropShadowFilter;
 import wot.utils.Config;
 import wot.utils.Defines;
+import wot.utils.GraphicsUtil;
 import wot.utils.PlayerInfo;
 import wot.utils.Stat;
 
 class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
 {
+  public static var chancesField: TextField = null;
+
+  var m_clanIcon: MovieClip = null;
+
   function BattleStatItemRenderer()
   {
     /*if (!_global.xvm)
@@ -22,6 +28,18 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
 
     col3.html = true;
     Config.LoadConfigAndStatLegacy("XVM.xvmconf", "BattleStatItemRenderer.as");
+
+    if (!chancesField && (this.owner._name == "team1"))
+    {
+      chancesField = this.owner.createTextField("chances", this.owner.getNextHighestDepth(), -50, 20, 400, 100);
+      chancesField.wordWrap = true;
+      chancesField.antiAliasType = "advanced";
+      chancesField.setNewTextFormat(new TextFormat("$FieldFont", 16, 0x000000, true, false, false, null, null, "left"));
+      chancesField.filters = [ new DropShadowFilter(0, 0, 0, 100, 3, 3, 3, 3) ];
+      chancesField.textColor = 0xFFFFFF;
+      chancesField._alpha = 100;
+      chancesField._visible = true;
+    }
   }
 
   private function get team(): Number
@@ -68,26 +86,28 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
   }
 
   // override
-  private var _clanIconLoaded = false;
+  private var _chancesShown = false;
   function updateData()
   {
+    // Chances
+    if (Stat.s_loaded && Config.s_config.battleLoading.showChances && !_chancesShown)
+    {
+      _chancesShown = true;
+      var chances = Stat.GetChances();
+      chancesField.text = "Chances(m) = " + chances.m + " (" + chances.m1 + " / " + chances.m2 + ")\n" +
+        "Chances(k) = " + chances.k + " (" + chances.k1 + " / " + chances.k2 + ")";
+      chancesField.textColor = Number(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, chances.m_raw, "0x"));
+    }
+
     if (data)
     {
-      // Player/clan icons
-      var cfg = Config.s_config.statisticForm.clanIcon;
-      if (cfg.show && !_clanIconLoaded)
-      {
-        _clanIconLoaded = true;
-        var pinfo = PlayerInfo.getPlayerInfo(data.label, data.clanAbbrev ? "[" + data.clanAbbrev + "]" : null);
-        if (pinfo)
-        {
-          PlayerInfo.createClanIcon(this, "m_clanIcon", pinfo, cfg,
-            iconLoader._x + ((team == Defines.TEAM_ALLY) ? 0 : 5), iconLoader._y, team);
-        }
-      }
-
       // Alternative icon set
       data.icon = data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.statisticForm);
+
+      // Player/clan icons
+      var cfg = Config.s_config.statisticForm.clanIcon;
+      if (cfg.show)
+        XVMClanIcon(cfg);
     }
 
     if (Config.s_config.statisticForm.removeSquadIcon && squad)
@@ -98,5 +118,27 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     col3.htmlText = Stat.DecorateField(data, data.vehicle,
       team == Defines.TEAM_ALLY ? Config.s_config.statisticForm.formatLeft : Config.s_config.statisticForm.formatRight,
       team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
+  }
+
+  function XVMClanIcon(cfg)
+  {
+    var pinfo = PlayerInfo.getPlayerInfo(data.label, data.clanAbbrev ? "[" + data.clanAbbrev + "]" : null);
+    if (!pinfo && m_clanIcon)
+    {
+      m_clanIcon.removeMovieClip();
+      delete m_clanIcon;
+      m_clanIcon = null;
+    }
+    else if (pinfo)
+    {
+      if (!m_clanIcon)
+      {
+        var x = (!_iconLoaded || Config.s_config.battle.mirroredVehicleIcons || (team == Defines.TEAM_ALLY))
+          ? iconLoader._x : iconLoader._x + 80 - 5;
+        m_clanIcon = PlayerInfo.createClanIcon(this, "m_clanIcon", pinfo, cfg, x, iconLoader._y, team);
+      }
+      else if (pinfo.icon != m_clanIcon.clanIcon.source)
+        m_clanIcon.clanIcon.source = pinfo.icon;
+    }
   }
 }
