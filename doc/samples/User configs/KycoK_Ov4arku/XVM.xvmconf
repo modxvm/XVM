@@ -1,18 +1,17 @@
-О╩©{
+{
   "configVersion": "1.2.0",
   "editorVersion": "0.0.0",
   "definition": {
-    "author": "sirmax2",
-    "description": "Default settings for XVM",
+    "author": "KycoK_Ov4arku",
+    "description": "settings by KycoK_Ov4arku",
     "url": "http://code.google.com/p/wot-xvm/",
-    "date": "18.03.2012",
+    "date": "02.04.2012",
     "gameVersion": "0.7.2",
     "modMinVersion": "2.0"
   },
   "battle": {
-    "mirroredVehicleIcons": true,
-    "showPostmortemTips": true,
-    "removePanelsModeSwitcher": false,
+    "mirroredVehicleIcons": false,
+    "showPostmortemTips": false,
     "drawGrid": false
   },
   "rating": {
@@ -22,19 +21,16 @@
   "battleLoading": {
     "showClock": true,
     "showChances": false,
-    "clanIcon": { "show": true, "x": -340, "y": 6, "h": 16, "w": 16, "alpha": 100 },
     "formatLeft": "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
     "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
   },
   "statisticForm": {
-    "clanIcon": { "show": true, "x": -340, "y": 6, "h": 16, "w": 16, "alpha": 100 },
     "formatLeft": "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
     "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
   },
   "playersPanel": {
     "alpha": 60,
     "iconAlpha": 100,
-    "clanIcon": { "show": true, "x": 60, "y": 4, "h": 16, "w": 16, "alpha": 100 },
     "medium": {
       "width": 46,
       "formatLeft": "<font color='{{c:eff}}'>{{nick}}</font>",
@@ -76,7 +72,7 @@
             }
           },
           "healthBar": {
-            "visible": true,
+            "visible": false,
             "x": -41,
             "y": -33,
             "alpha": 100,
@@ -93,7 +89,7 @@
               "alpha": 30
             },
             "damage": {
-              "alpha": 80,
+              "alpha": 100,
               "color": null,
               "fade": 1
             }
@@ -101,12 +97,12 @@
           "damageText": {
             "visible": true,
             "x": 0,
-            "y": -67,
+            "y": -95,
             "alpha": 100,
-            "color": null,
+            "color": "0xe49b0f",
             "font": {
-              "name": "$FieldFont",
-              "size": 14,
+              "name": "Comic Sans MS",
+              "size": 16,
               "align": "center",
               "bold": true
             },
@@ -114,14 +110,14 @@
               "alpha": 100,
               "color": "0x000000",
               "angle": 45,
-              "strength": 200,
+              "strength": 300,
               "distance": 1,
               "size": 1
             },
-            "speed": 2,
-            "maxRange": 40,
+            "speed": 3,
+            "maxRange": 50,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "ай! -{{dmg}}"
           },
           "contourIcon": {
             "visible": false,
@@ -140,21 +136,21 @@
           "actionMarker": {
             "visible": true,
             "x": 0,
-            "y": -67,
+            "y": -100,
             "alpha": 100
           },
           "textFields": [
              {
               "visible": true,
               "x": 0,
-              "y": -36,
+              "y": -35,
               "alpha": 100,
-              "color": null,
+              "color": "0xfffacd",
               "font": {
-                "name": "$FieldFont",
-                "size": 13,
+                "name": "Comic Sans MS",
+                "size": 12,
                 "align": "center",
-                "bold": false
+                "bold": true
               },
               "shadow": {
                 "alpha": 100,
@@ -164,17 +160,17 @@
                 "distance": 1,
                 "size": 1
               },
-              "format": "{{vehicle}}"
+              "format": "{{hp}}"
             },
             {
               "visible": true,
               "x": 0,
               "y": -20,
               "alpha": 100,
-              "color": "0xFFFFFF",
+              "color": "0xfffacd",
               "font": {
-                "name": "$FieldFont",
-                "size": 11,
+                "name": "Comic Sans MS",
+                "size": 12,
                 "align": "center",
                 "bold": true
               },
@@ -186,7 +182,7 @@
                 "distance": 1,
                 "size": 1
               },
-              "format": "{{hp}} / {{hp-max}}"
+              "format": "{{hp-ratio}}\u0025"
             }
           ]
         },
@@ -210,7 +206,7 @@
             }
           },
           "healthBar": {
-            "visible": true,
+            "visible": false,
             "x": -41,
             "y": -33,
             "alpha": 100,
@@ -235,12 +231,12 @@
           "damageText": {
             "visible": true,
             "x": 0,
-            "y": -67,
+            "y": -95,
             "alpha": 100,
-            "color": null,
+            "color": "0xe49b0f",
             "font": {
-              "name": "$FieldFont",
-              "size": 14,
+              "name": "Comic Sans MS",
+              "size": 16,
               "align": "center",
               "bold": true
             },
@@ -248,14 +244,14 @@
               "alpha": 100,
               "color": "0x000000",
               "angle": 45,
-              "strength": 200,
+              "strength": 300,
               "distance": 1,
               "size": 1
             },
-            "speed": 2,
-            "maxRange": 40,
+            "speed": 3,
+            "maxRange": 50,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "ай! -{{dmg}}"
           },
           "contourIcon": {
             "visible": false,
@@ -274,41 +270,19 @@
           "actionMarker": {
             "visible": true,
             "x": 0,
-            "y": -67,
+            "y": -100,
             "alpha": 100
           },
           "textFields": [
-            {
+			{
               "visible": true,
               "x": 0,
-              "y": -36,
+              "y": -70,
               "alpha": 100,
-              "color": null,
+              "color": "0xf4c430",
               "font": {
-                "name": "$FieldFont",
-                "size": 13,
-                "align": "center",
-                "bold": false
-              },
-              "shadow": {
-                "alpha": 100,
-                "color": "0x000000",
-                "angle": 45,
-                "strength": 120,
-                "distance": 1,
-                "size": 1
-              },
-              "format": "{{nick}}"
-            },
-            {
-              "visible": true,
-              "x": 0,
-              "y": -20,
-              "alpha": 100,
-              "color": "0xFFFFFF",
-              "font": {
-                "name": "$FieldFont",
-                "size": 11,
+                "name": "Comic Sans MS",
+                "size": 14,
                 "align": "center",
                 "bold": true
               },
@@ -316,20 +290,42 @@
                 "alpha": 100,
                 "color": "0x000000",
                 "angle": 45,
-                "strength": 60,
+                "strength": 400,
                 "distance": 1,
                 "size": 1
               },
-              "format": "{{hp-ratio}}\u0025"
+              "format": "{{vehicle}}"
             },
             {
               "visible": true,
               "x": 0,
-              "y": -50,
-              "alpha": 75,
-              "color": "{{c:eff}}",
+              "y": -55,
+              "alpha": 100,
+              "color": "0xf4c430",
               "font": {
-                "name": "$FieldFont",
+                "name": "Comic Sans MS",
+                "size": 14,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "0x000000",
+                "angle": 45,
+                "strength": 400,
+                "distance": 1,
+                "size": 1
+              },
+              "format": "{{nick}}"
+            },
+             {
+              "visible": true,
+              "x": 0,
+              "y": -35,
+              "alpha": 100,
+              "color": "0xfffacd",
+              "font": {
+                "name": "Comic Sans MS",
                 "size": 12,
                 "align": "center",
                 "bold": true
@@ -342,7 +338,29 @@
                 "distance": 1,
                 "size": 1
               },
-              "format": "{{rating}}"
+              "format": "{{hp}}"
+            },
+            {
+              "visible": true,
+              "x": 0,
+              "y": -20,
+              "alpha": 100,
+              "color": "0xfffacd",
+              "font": {
+                "name": "Comic Sans MS",
+                "size": 12,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "0x000000",
+                "angle": 45,
+                "strength": 60,
+                "distance": 1,
+                "size": 1
+              },
+              "format": "{{hp-ratio}}\u0025"
             }
           ]
         }
@@ -382,11 +400,10 @@
               "size": 1
             },
             "fill": {
-              "alpha": 30,
-              "color": null
+              "alpha": 30
             },
             "damage": {
-              "alpha": 80,
+              "alpha": 100,
               "color": null,
               "fade": 1
             }
@@ -394,12 +411,12 @@
           "damageText": {
             "visible": true,
             "x": 0,
-            "y": -67,
+            "y": -95,
             "alpha": 100,
-            "color": null,
+            "color": "0xe49b0f",
             "font": {
-              "name": "$FieldFont",
-              "size": 14,
+              "name": "Comic Sans MS",
+              "size": 16,
               "align": "center",
               "bold": true
             },
@@ -407,14 +424,14 @@
               "alpha": 100,
               "color": "0x000000",
               "angle": 45,
-              "strength": 200,
+              "strength": 300,
               "distance": 1,
               "size": 1
             },
-            "speed": 2,
-            "maxRange": 40,
+            "speed": 3,
+            "maxRange": 50,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "ай! -{{dmg}}"
           },
           "contourIcon": {
             "visible": false,
@@ -433,10 +450,55 @@
           "actionMarker": {
             "visible": true,
             "x": 0,
-            "y": -67,
+            "y": -100,
             "alpha": 100
           },
-          "textFields": [  ]
+          "textFields": [
+             {
+              "visible": false,
+              "x": 0,
+              "y": -35,
+              "alpha": 100,
+              "color": "0xfffacd",
+              "font": {
+                "name": "Comic Sans MS",
+                "size": 12,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "0x000000",
+                "angle": 45,
+                "strength": 120,
+                "distance": 1,
+                "size": 1
+              },
+              "format": "{{hp}}"
+            },
+            {
+              "visible": false,
+              "x": 0,
+              "y": -20,
+              "alpha": 100,
+              "color": "0xfffacd",
+              "font": {
+                "name": "Comic Sans MS",
+                "size": 12,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "0x000000",
+                "angle": 45,
+                "strength": 60,
+                "distance": 1,
+                "size": 1
+              },
+              "format": "{{hp-ratio}}\u0025"
+            }
+          ]
         },
         "extended": {
           "vehicleIcon": {
@@ -484,12 +546,12 @@
           "damageText": {
             "visible": true,
             "x": 0,
-            "y": -67,
+            "y": -95,
             "alpha": 100,
-            "color": null,
+            "color": "0xe49b0f",
             "font": {
-              "name": "$FieldFont",
-              "size": 14,
+              "name": "Comic Sans MS",
+              "size": 16,
               "align": "center",
               "bold": true
             },
@@ -497,14 +559,14 @@
               "alpha": 100,
               "color": "0x000000",
               "angle": 45,
-              "strength": 200,
+              "strength": 300,
               "distance": 1,
               "size": 1
             },
-            "speed": 2,
-            "maxRange": 40,
+            "speed": 3,
+            "maxRange": 50,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "ай! -{{dmg}}"
           },
           "contourIcon": {
             "visible": false,
@@ -521,29 +583,29 @@
             "alpha": 100
           },
           "actionMarker": {
-            "visible": true,
+            "visible": false,
             "x": 0,
-            "y": -67,
+            "y": -100,
             "alpha": 100
           },
           "textFields": [
             {
               "visible": true,
               "x": 0,
-              "y": -34,
+              "y": -55,
               "alpha": 80,
-              "color": null,
+              "color": "0xf4c430",
               "font": {
-                "name": "$FieldFont",
-                "size": 13,
+                "name": "Comic Sans MS",
+                "size": 14,
                 "align": "center",
-                "bold": false
+                "bold": true
               },
               "shadow": {
                 "alpha": 100,
                 "color": "0x000000",
                 "angle": 45,
-                "strength": 120,
+                "strength": 400,
                 "distance": 1,
                 "size": 1
               },
@@ -552,20 +614,20 @@
             {
               "visible": true,
               "x": 0,
-              "y": -20,
+              "y": -70,
               "alpha": 80,
-              "color": null,
+              "color": "0xf4c430",
               "font": {
-                "name": "$FieldFont",
-                "size": 13,
+                "name": "Comic Sans MS",
+                "size": 14,
                 "align": "center",
-                "bold": false
+                "bold": true
               },
               "shadow": {
                 "alpha": 100,
                 "color": "0x000000",
                 "angle": 45,
-                "strength": 120,
+                "strength": 400,
                 "distance": 1,
                 "size": 1
               },
@@ -597,7 +659,7 @@
             }
           },
           "healthBar": {
-            "visible": true,
+            "visible": false,
             "x": -41,
             "y": -33,
             "alpha": 100,
@@ -614,7 +676,7 @@
               "alpha": 30
             },
             "damage": {
-              "alpha": 80,
+              "alpha": 100,
               "color": null,
               "fade": 1
             }
@@ -622,12 +684,12 @@
           "damageText": {
             "visible": true,
             "x": 0,
-            "y": -67,
+            "y": -95,
             "alpha": 100,
-            "color": null,
+            "color": "0xcd00cd",
             "font": {
-              "name": "$FieldFont",
-              "size": 14,
+              "name": "Comic Sans MS",
+              "size": 16,
               "align": "center",
               "bold": true
             },
@@ -635,14 +697,14 @@
               "alpha": 100,
               "color": "0x000000",
               "angle": 45,
-              "strength": 200,
+              "strength": 300,
               "distance": 1,
               "size": 1
             },
-            "speed": 2,
-            "maxRange": 40,
+            "speed": 3,
+            "maxRange": 50,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "ай! -{{dmg}}"
           },
           "contourIcon": {
             "visible": false,
@@ -661,21 +723,21 @@
           "actionMarker": {
             "visible": true,
             "x": 0,
-            "y": -67,
+            "y": -100,
             "alpha": 100
           },
           "textFields": [
-            {
+             {
               "visible": true,
               "x": 0,
-              "y": -36,
+              "y": -35,
               "alpha": 100,
-              "color": null,
+              "color": "0xfffacd",
               "font": {
-                "name": "$FieldFont",
-                "size": 13,
+                "name": "Comic Sans MS",
+                "size": 12,
                 "align": "center",
-                "bold": false
+                "bold": true
               },
               "shadow": {
                 "alpha": 100,
@@ -685,17 +747,17 @@
                 "distance": 1,
                 "size": 1
               },
-              "format": "{{vehicle}}"
+              "format": "{{hp}}"
             },
             {
               "visible": true,
               "x": 0,
               "y": -20,
               "alpha": 100,
-              "color": "0xFFFFFF",
+              "color": "0xfffacd",
               "font": {
-                "name": "$FieldFont",
-                "size": 11,
+                "name": "Comic Sans MS",
+                "size": 12,
                 "align": "center",
                 "bold": true
               },
@@ -707,7 +769,7 @@
                 "distance": 1,
                 "size": 1
               },
-              "format": "{{hp}} / {{hp-max}}"
+              "format": "{{hp-ratio}}\u0025"
             }
           ]
         },
@@ -731,7 +793,7 @@
             }
           },
           "healthBar": {
-            "visible": true,
+            "visible": false,
             "x": -41,
             "y": -33,
             "alpha": 100,
@@ -756,12 +818,12 @@
           "damageText": {
             "visible": true,
             "x": 0,
-            "y": -67,
+            "y": -95,
             "alpha": 100,
-            "color": null,
+            "color": "0xcd00cd",
             "font": {
-              "name": "$FieldFont",
-              "size": 14,
+              "name": "Comic Sans MS",
+              "size": 16,
               "align": "center",
               "bold": true
             },
@@ -769,14 +831,14 @@
               "alpha": 100,
               "color": "0x000000",
               "angle": 45,
-              "strength": 200,
+              "strength": 300,
               "distance": 1,
               "size": 1
             },
-            "speed": 2,
-            "maxRange": 40,
+            "speed": 3,
+            "maxRange": 50,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "ай! -{{dmg}}"
           },
           "contourIcon": {
             "visible": false,
@@ -795,41 +857,19 @@
           "actionMarker": {
             "visible": true,
             "x": 0,
-            "y": -67,
+            "y": -100,
             "alpha": 100
           },
           "textFields": [
-            {
+			{
               "visible": true,
               "x": 0,
-              "y": -36,
+              "y": -70,
               "alpha": 100,
-              "color": null,
+              "color": "0x0099cc",
               "font": {
-                "name": "$FieldFont",
-                "size": 13,
-                "align": "center",
-                "bold": false
-              },
-              "shadow": {
-                "alpha": 100,
-                "color": "0x000000",
-                "angle": 45,
-                "strength": 120,
-                "distance": 1,
-                "size": 1
-              },
-              "format": "{{nick}}"
-            },
-            {
-              "visible": true,
-              "x": 0,
-              "y": -20,
-              "alpha": 100,
-              "color": "0xFFFFFF",
-              "font": {
-                "name": "$FieldFont",
-                "size": 11,
+                "name": "Comic Sans MS",
+                "size": 14,
                 "align": "center",
                 "bold": true
               },
@@ -837,20 +877,42 @@
                 "alpha": 100,
                 "color": "0x000000",
                 "angle": 45,
-                "strength": 60,
+                "strength": 400,
                 "distance": 1,
                 "size": 1
               },
-              "format": "{{hp-ratio}}\u0025"
+              "format": "{{vehicle}}"
             },
             {
               "visible": true,
               "x": 0,
-              "y": -50,
-              "alpha": 75,
-              "color": "{{c:eff}}",
+              "y": -55,
+              "alpha": 100,
+              "color": "0x0099cc",
               "font": {
-                "name": "$FieldFont",
+                "name": "Comic Sans MS",
+                "size": 14,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "0x000000",
+                "angle": 45,
+                "strength": 400,
+                "distance": 1,
+                "size": 1
+              },
+              "format": "{{nick}}"
+            },
+             {
+              "visible": true,
+              "x": 0,
+              "y": -35,
+              "alpha": 100,
+              "color": "0xfffacd",
+              "font": {
+                "name": "Comic Sans MS",
                 "size": 12,
                 "align": "center",
                 "bold": true
@@ -863,7 +925,29 @@
                 "distance": 1,
                 "size": 1
               },
-              "format": "{{rating}}"
+              "format": "{{hp}}"
+            },
+            {
+              "visible": true,
+              "x": 0,
+              "y": -20,
+              "alpha": 100,
+              "color": "0xfffacd",
+              "font": {
+                "name": "Comic Sans MS",
+                "size": 12,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "0x000000",
+                "angle": 45,
+                "strength": 60,
+                "distance": 1,
+                "size": 1
+              },
+              "format": "{{hp-ratio}}\u0025"
             }
           ]
         }
@@ -903,11 +987,10 @@
               "size": 1
             },
             "fill": {
-              "alpha": 30,
-              "color": null
+              "alpha": 30
             },
             "damage": {
-              "alpha": 80,
+              "alpha": 100,
               "color": null,
               "fade": 1
             }
@@ -915,12 +998,12 @@
           "damageText": {
             "visible": true,
             "x": 0,
-            "y": -67,
+            "y": -95,
             "alpha": 100,
-            "color": null,
+            "color": "0xcd00cd",
             "font": {
-              "name": "$FieldFont",
-              "size": 14,
+              "name": "Comic Sans MS",
+              "size": 16,
               "align": "center",
               "bold": true
             },
@@ -928,14 +1011,14 @@
               "alpha": 100,
               "color": "0x000000",
               "angle": 45,
-              "strength": 200,
+              "strength": 300,
               "distance": 1,
               "size": 1
             },
-            "speed": 2,
-            "maxRange": 40,
+            "speed": 3,
+            "maxRange": 50,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "ай! -{{dmg}}"
           },
           "contourIcon": {
             "visible": false,
@@ -954,10 +1037,55 @@
           "actionMarker": {
             "visible": true,
             "x": 0,
-            "y": -67,
+            "y": -100,
             "alpha": 100
           },
-          "textFields": [  ]
+          "textFields": [
+             {
+              "visible": false,
+              "x": 0,
+              "y": -35,
+              "alpha": 100,
+              "color": "0xfffacd",
+              "font": {
+                "name": "Comic Sans MS",
+                "size": 12,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "0x000000",
+                "angle": 45,
+                "strength": 120,
+                "distance": 1,
+                "size": 1
+              },
+              "format": "{{hp}}"
+            },
+            {
+              "visible": false,
+              "x": 0,
+              "y": -20,
+              "alpha": 100,
+              "color": "0xfffacd",
+              "font": {
+                "name": "Comic Sans MS",
+                "size": 12,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "0x000000",
+                "angle": 45,
+                "strength": 60,
+                "distance": 1,
+                "size": 1
+              },
+              "format": "{{hp-ratio}}\u0025"
+            }
+          ]
         },
         "extended": {
           "vehicleIcon": {
@@ -1005,12 +1133,12 @@
           "damageText": {
             "visible": true,
             "x": 0,
-            "y": -67,
+            "y": -95,
             "alpha": 100,
-            "color": null,
+            "color": "0xcd00cd",
             "font": {
-              "name": "$FieldFont",
-              "size": 14,
+              "name": "Comic Sans MS",
+              "size": 16,
               "align": "center",
               "bold": true
             },
@@ -1018,14 +1146,14 @@
               "alpha": 100,
               "color": "0x000000",
               "angle": 45,
-              "strength": 200,
+              "strength": 300,
               "distance": 1,
               "size": 1
             },
-            "speed": 2,
-            "maxRange": 40,
+            "speed": 3,
+            "maxRange": 50,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "ай! -{{dmg}}"
           },
           "contourIcon": {
             "visible": false,
@@ -1042,29 +1170,29 @@
             "alpha": 100
           },
           "actionMarker": {
-            "visible": true,
+            "visible": false,
             "x": 0,
-            "y": -67,
+            "y": -100,
             "alpha": 100
           },
           "textFields": [
             {
               "visible": true,
               "x": 0,
-              "y": -34,
+              "y": -35,
               "alpha": 80,
-              "color": null,
+              "color": "0x0099cc",
               "font": {
-                "name": "$FieldFont",
-                "size": 13,
+                "name": "Comic Sans MS",
+                "size": 14,
                 "align": "center",
-                "bold": false
+                "bold": true
               },
               "shadow": {
                 "alpha": 100,
                 "color": "0x000000",
                 "angle": 45,
-                "strength": 120,
+                "strength": 400,
                 "distance": 1,
                 "size": 1
               },
@@ -1073,20 +1201,20 @@
             {
               "visible": true,
               "x": 0,
-              "y": -20,
+              "y": -55,
               "alpha": 80,
-              "color": null,
+              "color": "0x0099cc",
               "font": {
-                "name": "$FieldFont",
-                "size": 13,
+                "name": "Comic Sans MS",
+                "size": 14,
                 "align": "center",
-                "bold": false
+                "bold": true
               },
               "shadow": {
                 "alpha": 100,
                 "color": "0x000000",
                 "angle": 45,
-                "strength": 120,
+                "strength": 400,
                 "distance": 1,
                 "size": 1
               },
@@ -1137,30 +1265,29 @@
       { "value": 101, "color": "0xFFFFFF" }
     ],
     "eff": [
-      { "value": 600,  "color": "0xDD0000" },
-      { "value": 900,  "color": "0xDD3333" },
-      { "value": 1200, "color": "0xFFCC33" },
-      { "value": 1500, "color": "0x99FF33" },
-      { "value": 1800, "color": "0x33FF33" },
-      { "value": 9999, "color": "0xCC66CC" }
-    ],
-    "rating": [
-      { "value": 42,  "color": "0xDD0000" },
-      { "value": 46,  "color": "0xDD3333" },
-      { "value": 49,  "color": "0xDDDD33" },
-      { "value": 51,  "color": "0xFFCC33" },
-      { "value": 53,  "color": "0x99FF33" },
-      { "value": 57,  "color": "0x33FF33" },
-      { "value": 101, "color": "0xCC66CC" }
-    ],
-    "kb": [
-      { "value": 1,   "color": "0xDD0000" },
-      { "value": 3,   "color": "0xDD3333" },
-      { "value": 5,   "color": "0xFFCC33" },
-      { "value": 8,   "color": "0x99FF33" },
-      { "value": 12,  "color": "0x33FF33" },
-      { "value": 999, "color": "0xCC66CC" }
-    ]
+        { "value": 600, "color": "0x999999" },
+        { "value": 900, "color": "0xffffff" },
+        { "value": 1200, "color": "0xfcbb7e" },
+        { "value": 1500, "color": "0x99ff33" },
+        { "value": 1800, "color": "0x007fff" },
+        { "value": 9999, "color": "0xcc66cc" }
+      ],
+      "rating": [
+        { "value": 43, "color": "0x999999" },
+        { "value": 47, "color": "0xffffff" },
+        { "value": 50, "color": "0xfcbb7e" },
+        { "value": 55, "color": "0x99ff33" },
+        { "value": 60, "color": "0x007fff" },
+        { "value": 100, "color": "0xcc66cc" }
+      ],
+      "kb": [
+        { "value": 1, "color": "0x999999" },
+        { "value": 3, "color": "0xffffff" },
+        { "value": 5, "color": "0xfcbb7e" },
+        { "value": 8, "color": "0x99ff33" },
+        { "value": 12, "color": "0x007fff" },
+        { "value": 9999, "color": "0xcc66cc" }
+      ]
   },
   "alpha": {
     "hp": [
@@ -1198,11 +1325,11 @@
     "vehicleMarker": "../maps/icons/vehicle/contour"
   },
   "players": [
-    { "nick": "sirmax2",    "icon": "../../../clanicons/XVM.png" },
-    { "nick": "0x01",       "icon": "../../../clanicons/XVM.png" },
-    { "clan": "[WG]",       "icon": "../../../clanicons/WG.png" },
-    { "clan": "[WG-A]",     "icon": "../../../clanicons/WG.png" },
-    { "clan": "[WTMOD]",    "icon": "../../../clanicons/WTMOD.png" },
-    { "clan": "[WGST]",     "icon": "../../../clanicons/WGST.png" }
+    { "nick": "sirmax2", "icon": "../../../clanicons/XVM.png",   "x": 0, "y": 4, "h": 16, "w": 16, "alpha": 100 },
+    { "nick": "0x01",    "icon": "../../../clanicons/XVM.png",   "x": 0, "y": 4, "h": 16, "w": 16, "alpha": 100 },
+    { "clan": "[WG]",    "icon": "../../../clanicons/WG.png",    "x": 0, "y": 4, "h": 16, "w": 16, "alpha": 100 },
+    { "clan": "[WG-A]",  "icon": "../../../clanicons/WG.png",    "x": 0, "y": 4, "h": 16, "w": 16, "alpha": 100 },
+    { "clan": "[WTMOD]", "icon": "../../../clanicons/WTMOD.png", "x": 0, "y": 4, "h": 16, "w": 16, "alpha": 100 },
+    { "clan": "[WGST]",  "icon": "../../../clanicons/WGST.png",  "x": 0, "y": 4, "h": 16, "w": 16, "alpha": 100 }
   ]
 }

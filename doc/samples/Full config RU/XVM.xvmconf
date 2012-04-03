@@ -80,11 +80,11 @@
     "large": {
       "width": 170,  // 0..250 - задает ширину поля имени игрока. По умолчанию: 170
       // формат отображения имени игрока (допускаются макроподстановки, см. readme-ru.txt)
-      "nickFormatLeft": "<font color='{{c:eff}}'>{{rating}}</font> {{nick}}",
-      "nickFormatRight": "{{nick}} <font color='{{c:eff}}'>{{rating}}</font>",
+      "nickFormatLeft": "<font color='{{c:rating}}'>{{rating}}</font> {{nick}}",
+      "nickFormatRight": "{{nick}} <font color='{{c:rating}}'>{{rating}}</font>",
       // формат отображения названия танка (допускаются макроподстановки, см. readme-ru.txt)
-      "vehicleFormatLeft": "<font color='{{c:rating}}'>{{vehicle}}</font>",
-      "vehicleFormatRight": "<font color='{{c:rating}}'>{{vehicle}}</font>"
+      "vehicleFormatLeft": "<font color='{{c:eff}}'>{{vehicle}}</font>",
+      "vehicleFormatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
     }
   },
   // Блок маркеров над танками.

@@ -6,6 +6,7 @@ XVM-2.1:
       playersPanel/clanIcon: for players panel
   * fixed health bar animation
   * added option battle/removePanelsModeSwitcher for removing panel switcher
+  * battle loading screen fields alignment
 
 XVM-2.0:
   * adaptation to WoT 0.7.2

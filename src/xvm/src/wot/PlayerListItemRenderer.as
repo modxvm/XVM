@@ -5,10 +5,11 @@
 import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.PlayerInfo;
+import wot.utils.Logger;
 
 class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRenderer
 {
-  //static var s_clanIcons: Object = { };
+  static var s_clanIcons: Object = { };
   var m_clanIcon: MovieClip = null;
 
   function PlayerListItemRenderer()
@@ -62,6 +63,7 @@ class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRend
   }
 
   // override
+  private var _loaded = false;
   function update()
   {
     try
@@ -71,22 +73,25 @@ class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRend
         // Alternative icon set
         data.icon = data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.playersPanel);
 
-        // Player/clan icons
-        var cfg = Config.s_config.playersPanel.clanIcon;
-        if (cfg.show)
+        if (!_loaded)
         {
-          var pinfo = PlayerInfo.getPlayerInfo(data.label, data.clanAbbrev ? "[" + data.clanAbbrev + "]" : null);
-          if (pinfo)
+          _loaded = true;
+          // Player/clan icons
+          var cfg = Config.s_config.playersPanel.clanIcon;
+          if (cfg.show)
           {
-            if (m_clanIcon)
+            var pinfo = PlayerInfo.getPlayerInfo(data.label, data.clanAbbrev ? "[" + data.clanAbbrev + "]" : null);
+            if (pinfo)
             {
-              m_clanIcon.removeMovieClip();
-              delete m_clanIcon;
+              m_clanIcon = createEmptyMovieClip("m_clanIcon", getNextHighestDepth());
+              m_clanIcon.clanIcon = m_clanIcon.attachMovie("UILoader", "clanIcon", 1);
+              createClanIcon(pinfo, cfg, iconLoader._x, iconLoader._y, team);
             }
-            m_clanIcon = createEmptyMovieClip("m_clanIcon", getNextHighestDepth());
-            m_clanIcon.clanIcon = m_clanIcon.attachMovie("UILoader", "clanIcon", 1);
-            createClanIcon(pinfo, cfg, iconLoader._x, iconLoader._y, team);
           }
+        }
+        else
+        {
+          Logger.add("loaded: m_clanIcon=" + m_clanIcon);
         }
       }
 

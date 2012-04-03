@@ -47,10 +47,10 @@
     },
     "large": {
       "width": 170,
-      "nickFormatLeft": "<font color='{{c:eff}}'>{{rating}}</font> {{nick}}",
-      "nickFormatRight": "{{nick}} <font color='{{c:eff}}'>{{rating}}</font>",
-      "vehicleFormatLeft": "<font color='{{c:rating}}'>{{vehicle}}</font>",
-      "vehicleFormatRight": "<font color='{{c:rating}}'>{{vehicle}}</font>"
+      "nickFormatLeft": "<font color='{{c:rating}}'>{{rating}}</font> {{nick}}",
+      "nickFormatRight": "{{nick}} <font color='{{c:rating}}'>{{rating}}</font>",
+      "vehicleFormatLeft": "<font color='{{c:eff}}'>{{vehicle}}</font>",
+      "vehicleFormatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
     }
   },
   "colors": {
