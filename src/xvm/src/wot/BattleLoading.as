@@ -14,8 +14,10 @@ import wot.utils.Utils;
 class wot.BattleLoading extends net.wargaming.BattleLoading
 {
   public static var infoField: TextField = null;
-  public static var chancesField: TextField = null;
 
+  public static var s_chancesField: TextField = null;
+  public static var s_chancesText: String;
+  
   public function BattleLoading()
   {
     super();
@@ -111,22 +113,28 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
     // Chances
     if (Stat.s_loaded && Config.s_config.battleLoading.showChances)
     {
-      if (!chancesField)
+      if (!s_chancesField)
+        ShowChances();
+      if (s_chancesField.htmlText != s_chancesText)
       {
-        chancesField = createTextField("chances", getNextHighestDepth(), 20, 25, 400, 100);
-        chancesField.wordWrap = true;
-        chancesField.antiAliasType = "advanced";
-        chancesField.setNewTextFormat(new TextFormat("$FieldFont", 16, 0x000000, true, false, false, null, null, "left"));
-        chancesField.filters = [ new DropShadowFilter(0, 0, 0, 100, 3, 3, 3, 3) ];
-        chancesField.textColor = 0xFFFFFF;
-        chancesField._alpha = 100;
-        chancesField._visible = true;
+        //wot.utils.Logger.add(s_chancesField.htmlText);
+        s_chancesField.html = true;
+        s_chancesField.htmlText = s_chancesText;
       }
-
-      var chances = Stat.GetChances();
-      chancesField.text = "Chances(m) = " + chances.m + " (" + chances.m1 + " / " + chances.m2 + ")\n" +
-        "Chances(k) = " + chances.k + " (" + chances.k1 + " / " + chances.k2 + ")";
-      chancesField.textColor = Number(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, chances.m_raw, "0x"));
     }
+  }
+
+  function ShowChances()
+  {
+    var chances = Stat.GetChances();
+    s_chancesField = form_mc.battleText;
+    var color = GraphicsUtil.brightenColor(
+      Number(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, chances.m_raw, "0x")), 50);
+    wot.utils.Logger.add(color.toString(16) + " " + Number(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, chances.m_raw, "0x")));
+    s_chancesField.html = true;
+    s_chancesField.htmlText = s_chancesField.text + 
+      " <font color='#" + color.toString(16) + "'>" +
+      "(Chances: m = " + chances.m + ", k = " + chances.k + ")</font>";
+    s_chancesText = s_chancesField.htmlText;
   }
 }

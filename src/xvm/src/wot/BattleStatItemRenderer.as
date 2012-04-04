@@ -141,9 +141,11 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
   {
     var chances = Stat.GetChances();
     s_chancesField = _root.statsDialog.battleText;
+    var color = GraphicsUtil.brightenColor(
+      Number(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, chances.m_raw, "0x")), 50);
     s_chancesField.html = true;
     s_chancesField.htmlText = s_chancesField.text + 
-      " <font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, chances.m_raw) + "'>" +
+      " <font color='#" + color.toString(16) + "'>" +
       "(Chances: m = " + chances.m + ", k = " + chances.k + ")</font>";
     s_chancesText = s_chancesField.htmlText;
   }

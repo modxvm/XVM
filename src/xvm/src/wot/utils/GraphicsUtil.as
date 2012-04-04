@@ -94,11 +94,68 @@ class wot.utils.GraphicsUtil
     item.transform.colorTransform = myColorTransform;
   }
 
-  public static function MultiplyColor(color: Number, ratio: Number): Number
+  public static function brightenColor(hexColor: Number, percent: Number): Number
   {
-     return ((((color >> 16) & 0xFF) * ratio) << 16) + ((((color >> 8) & 0xFF) * ratio) << 8) + ((color & 0xFF) * ratio);
+    if (isNaN(percent))
+      percent = 0;
+    if (percent > 100)
+      percent = 100;
+    if (percent < 0)
+      percent = 0;
+
+    var factor: Number = percent / 100;
+    var rgb: Object = hexToRgb(hexColor);
+
+    rgb.r += (255 - rgb.r) * factor;
+    rgb.b += (255 - rgb.b) * factor;
+    rgb.g += (255 - rgb.g) * factor;
+
+    return rgbToHex(Math.round(rgb.r), Math.round(rgb.g), Math.round(rgb.b));
   }
-  
+
+  public static function darkenColor(hexColor:Number, percent:Number): Number
+  {
+    if (isNaN(percent))
+      percent = 0;
+    if (percent > 100)
+      percent = 100;
+    if (percent < 0)
+      percent = 0;
+
+    var factor: Number = 1 - (percent/100);
+    var rgb: Object = hexToRgb(hexColor);
+
+    rgb.r *= factor;
+    rgb.b *= factor;
+    rgb.g *= factor;
+
+    return rgbToHex(Math.round(rgb.r), Math.round(rgb.g), Math.round(rgb.b));
+  }
+
+  public static function rgbToHex(r:Number, g:Number, b:Number): Number
+  {
+    return (r << 16 | g << 8 | b);
+  }
+
+  public static function hexToRgb(hex:Number): Object
+  {
+    return { r: (hex & 0xff0000) >> 16, g: (hex & 0x00ff00) >> 8, b: hex & 0x0000ff };
+  }
+
+  public static function brightness(hex:Number): Number
+  {
+    var max: Number = 0;
+    var rgb: Object = hexToRgb(hex);
+    if(rgb.r > max)
+      max = rgb.r;
+    if(rgb.g > max)
+      max = rgb.g;
+    if(rgb.b > max)
+      max = rgb.b;
+    max /= 255;
+    return max;
+  }
+
   public static function GetDynamicColorValue(type: Number, value: Number, prefix: String, darker: Boolean): String
   {
     if (!prefix)
@@ -137,7 +194,7 @@ class wot.utils.GraphicsUtil
       if (value < cvalue)
       {
         if (darker)
-          color = GraphicsUtil.MultiplyColor(color, 0.5);
+          color = GraphicsUtil.darkenColor(color, 50);
         return prefix + color.toString(16);
       }
     }
