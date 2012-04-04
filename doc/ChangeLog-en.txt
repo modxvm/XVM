@@ -1,4 +1,4 @@
-XVM-2.1:
+XVM-2.1.test1:
   * do not show warning when config is absent.
   * added separated parameters for clan/player icons:
       battleLoading/clanIcon: for battle loading screen

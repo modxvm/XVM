@@ -38,7 +38,7 @@
     "alpha": 60,
     "iconAlpha": 100,
     "removeSquadIcon": false,
-    "clanIcon": { "show": false, "x": 60, "y": 6, "h": 16, "w": 16, "alpha": 100 },
+    "clanIcon": { "show": true, "x": 60, "y": 6, "h": 16, "w": 16, "alpha": 100 },
     "medium": {
       "width": 46,
       "formatLeft": "<font color='{{c:eff}}'>{{nick}}</font>",

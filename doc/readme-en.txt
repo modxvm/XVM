@@ -34,6 +34,7 @@ rating
 battleLoading
   showClock:               false - disable clock at battle loading screen
   showChances:             true - enable showing win chances. Discussion: http://forum.bulychev.net/viewtopic.php?f=4&t=26 (Russian)
+  removeSquadIcon:         true - removing squad icon (use only if you really need it)
   clanIcon:                player/clan icon settings
     show:    - show (true) or not (false)
     x,y      - icon position relative to vehicle icon
@@ -43,6 +44,8 @@ battleLoading
   formatRight:             "text" - right field format
 
 statisticForm
+  showChances:             true - enable showing win chances
+  removeSquadIcon:         true - removing squad icon (use only if you really need it)
   clanIcon:                player/clan icon settings (see battleLoading)
   formatLeft:              "text" - left field format (statistics macros can be used - see below)
   formatRight:             "text" - right field format
@@ -50,6 +53,7 @@ statisticForm
 playersPanel
   alpha:                   0..100 - players panel transparency. 0 - transparent, 100 - not transparent
   iconAlpha:               0..100 - players panel icon transparency. 0 - transparent, 100 - not transparent
+  removeSquadIcon:         true - removing squad icon (use only if you really need it)
   clanIcon:                player/clan icon settings (see battleLoading)
   medium                   medium1 mode
     width:                   0..250 - set players names width. Default: 46
