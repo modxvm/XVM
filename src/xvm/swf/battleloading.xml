@@ -265,7 +265,7 @@
               <Transform transX="3060" transY="60"/>
             </transform>
             <filters>
-              <DropShadow blurX="2.000000000000000" blurY="2.000000000000000" angle="1.570785522460938" distance="1.000000000000000" strength="1.000000000000000" innerShadow="0" knockout="0" passes="2">
+              <DropShadow blurX="2.000000000000000" blurY="2.000000000000000" angle="1.570785522460938" distance="1.570785522460938" strength="1.000000000000000" innerShadow="0" knockout="0" passes="2">
                 <color>
                   <Color red="0" green="0" blue="0" alpha="255"/>
                 </color>
