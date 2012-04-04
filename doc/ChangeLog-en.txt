@@ -1,3 +1,7 @@
+XVM-2.1.test2:
+  * added configs like in standard client.
+  * fixes in win chances formulas.
+
 XVM-2.1.test1:
   * do not show warning when config is absent.
   * added separated parameters for clan/player icons:

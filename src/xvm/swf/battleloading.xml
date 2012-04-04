@@ -120,7 +120,7 @@
       </ImportAssets2>
       <DefineEditText objectID="7" wordWrap="0" multiLine="0" password="0" readOnly="1" autoSize="0" hasLayout="1" notSelectable="1" hasBorder="0" isHTML="0" useOutlines="1" fontRef="6" fontHeight="260" align="1" leftMargin="0" rightMargin="0" indent="0" leading="40" variableName="">
         <size>
-          <Rectangle left="-40" right="4460" top="-40" bottom="367"/>
+          <Rectangle left="-40" right="4220" top="-40" bottom="367"/>
         </size>
         <color>
           <Color red="201" green="201" blue="182" alpha="255"/>
@@ -198,9 +198,9 @@
           <Symbol objectID="12" name="SquadIcon"/>
         </symbols>
       </ImportAssets2>
-      <DefineEditText objectID="13" wordWrap="0" multiLine="0" password="0" readOnly="1" autoSize="0" hasLayout="1" notSelectable="1" hasBorder="0" isHTML="0" useOutlines="1" fontRef="6" fontHeight="240" align="0" leftMargin="0" rightMargin="0" indent="0" leading="40" variableName="">
+      <DefineEditText objectID="13" wordWrap="0" multiLine="0" password="0" readOnly="1" autoSize="0" hasLayout="1" notSelectable="1" hasBorder="0" isHTML="0" useOutlines="1" fontRef="6" fontHeight="260" align="0" leftMargin="0" rightMargin="0" indent="0" leading="40" variableName="">
         <size>
-          <Rectangle left="-40" right="1126" top="-40" bottom="367"/>
+          <Rectangle left="-40" right="1310" top="-40" bottom="367"/>
         </size>
         <color>
           <Color red="162" green="146" blue="126" alpha="255"/>
@@ -262,10 +262,10 @@
           </PlaceObject2>
           <PlaceObject3 replace="0" depth="5" objectID="7" name="textField">
             <transform>
-              <Transform transX="3060" transY="60"/>
+              <Transform transX="3300" transY="100"/>
             </transform>
             <filters>
-              <DropShadow blurX="2.000000000000000" blurY="2.000000000000000" angle="1.570785522460938" distance="1.570785522460938" strength="1.000000000000000" innerShadow="0" knockout="0" passes="2">
+              <DropShadow blurX="2.000000000000000" blurY="2.000000000000000" angle="1.570785522460938" distance="1.000000000000000" strength="1.000000000000000" innerShadow="0" knockout="0" passes="2">
                 <color>
                   <Color red="0" green="0" blue="0" alpha="255"/>
                 </color>
@@ -301,7 +301,7 @@
           </PlaceObject2>
           <PlaceObject2 replace="0" depth="7" objectID="11" name="iconLoader" allflags1="0" allflags2="4">
             <transform>
-              <Transform scaleX="-0.6250000000000000" scaleY="0.1999511718750000" transX="1680" transY="0"/>
+              <Transform scaleX="-0.6250000000000000" scaleY="0.1999511718750000" transX="1600" transY="0"/>
             </transform>
             <events>
               <Event flags1="0" flags2="4">
@@ -347,7 +347,7 @@
           </PlaceObject2>
           <PlaceObject3 replace="0" depth="10" objectID="13" name="vehicleField">
             <transform>
-              <Transform scaleX="1.200012207031250" scaleY="1.000000000000000" transX="1708" transY="100"/>
+              <Transform scaleX="1.200012207031250" scaleY="1.000000000000000" transX="1668" transY="100"/>
             </transform>
             <filters>
               <DropShadow blurX="2.000000000000000" blurY="2.000000000000000" angle="1.570785522460938" distance="0.000000000000000" strength="0.1992187500000000" innerShadow="0" knockout="0" passes="3">
@@ -426,9 +426,9 @@
         </color>
       </DefineEditText>
       <CSMTextSettings objectID="16" useFlashType="1" gridFit="1" thickness="0.000000000000000" sharpness="0.000000000000000"/>
-      <DefineEditText objectID="17" wordWrap="0" multiLine="0" password="0" readOnly="1" autoSize="0" hasLayout="1" notSelectable="1" hasBorder="0" isHTML="0" useOutlines="1" fontRef="6" fontHeight="240" align="1" leftMargin="0" rightMargin="0" indent="0" leading="40" variableName="">
+      <DefineEditText objectID="17" wordWrap="0" multiLine="0" password="0" readOnly="1" autoSize="0" hasLayout="1" notSelectable="1" hasBorder="0" isHTML="0" useOutlines="1" fontRef="6" fontHeight="260" align="1" leftMargin="0" rightMargin="0" indent="0" leading="40" variableName="">
         <size>
-          <Rectangle left="-40" right="1210" top="-40" bottom="360"/>
+          <Rectangle left="-40" right="1210" top="-40" bottom="367"/>
         </size>
         <color>
           <Color red="162" green="146" blue="126" alpha="255"/>
@@ -490,7 +490,7 @@
           </PlaceObject2>
           <PlaceObject3 replace="0" depth="5" objectID="16" name="textField">
             <transform>
-              <Transform transX="920" transY="60"/>
+              <Transform transX="920" transY="100"/>
             </transform>
             <filters>
               <DropShadow blurX="2.000000000000000" blurY="2.000000000000000" angle="1.570785522460938" distance="1.000000000000000" strength="1.000000000000000" innerShadow="0" knockout="0" passes="2">
@@ -1790,7 +1790,7 @@
           </PlaceObject2>
           <PlaceObject2 replace="0" depth="4" objectID="20" name="team1List" allflags1="0" allflags2="4">
             <transform>
-              <Transform scaleX="3.230804443359375" scaleY="3.073638916015625" transX="-8420" transY="4660"/>
+              <Transform scaleX="3.246185302734375" scaleY="3.073638916015625" transX="-8420" transY="4660"/>
             </transform>
             <events>
               <Event flags1="0" flags2="4">
@@ -1921,7 +1921,7 @@
           </PlaceObject2>
           <PlaceObject2 replace="0" depth="6" objectID="20" name="team2List" allflags1="0" allflags2="4">
             <transform>
-              <Transform scaleX="3.230773925781250" scaleY="3.073638916015625" transX="20" transY="4660"/>
+              <Transform scaleX="3.246154785156250" scaleY="3.073638916015625" transX="20" transY="4660"/>
             </transform>
             <events>
               <Event flags1="0" flags2="4">
@@ -2223,7 +2223,7 @@
       </DoAction>
       <PlaceObject2 replace="0" depth="1" objectID="34" name="main" allflags1="0" allflags2="4">
         <transform>
-          <Transform transX="0" transY="0"/>
+          <Transform transX="0" transY="-20"/>
         </transform>
         <events>
           <Event flags1="0" flags2="4">

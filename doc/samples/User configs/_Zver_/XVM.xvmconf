@@ -1,17 +1,18 @@
-﻿{
+{
   "configVersion": "1.2.0",
   "editorVersion": "0.0.0",
   "definition": {
     "author": "_Zver_",
-    "description": "Winratio + flying damage",
+    "description": "Winratio + floating damage",
     "url": "http://code.google.com/p/wot-xvm/",
-    "date": "29.03.2012",
+    "date": "04.04.2012",
     "gameVersion": "0.7.2",
-    "modMinVersion": "2.0"
+    "modMinVersion": "2.1"
   },
   "battle": {
     "mirroredVehicleIcons": true,
     "showPostmortemTips": false,
+    "removePanelsModeSwitcher": true,
     "drawGrid": false
   },
   "rating": {
@@ -21,16 +22,23 @@
   "battleLoading": {
     "showClock": true,
     "showChances": true,
-    "formatLeft": "<font color='{{c:kb}}'>{{kb}}</font>  <font color='{{c:rating}}'>{{rating}}</font>",
-    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font>  <font color='{{c:kb}}'>{{kb}}</font>"
+    "removeSquadIcon": false,
+    "clanIcon": { "show": true, "x": 54, "y": 1, "h": 24, "w": 24, "alpha": 100 },
+    "formatLeft": "<font color='{{c:eff}}'>{{eff}}</font>  <font color='{{c:kb}}'>{{kb}}</font>  <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font>  <font color='{{c:kb}}'>{{kb}}</font>  <font color='{{c:eff}}'>{{eff}}</font>"
   },
   "statisticForm": {
-    "formatLeft": "<font color='{{c:kb}}'>{{kb}}</font>  <font color='{{c:rating}}'>{{rating}}</font>",
-    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font>  <font color='{{c:kb}}'>{{kb}}</font>"
+    "showChances": true,
+    "removeSquadIcon": false,
+    "clanIcon": { "show": true, "x": 60, "y": 1, "h": 24, "w": 24, "alpha": 100 },
+    "formatLeft": "<font color='{{c:eff}}'>{{eff}}</font>  <font color='{{c:kb}}'>{{kb}}</font>  <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font>  <font color='{{c:kb}}'>{{kb}}</font>  <font color='{{c:eff}}'>{{eff}}</font>"
   },
   "playersPanel": {
     "alpha": 50,
     "iconAlpha": 70,
+    "removeSquadIcon": false,
+    "clanIcon": { "show": true, "x": -8, "y": -1, "h": 24, "w": 24, "alpha": 100 },
     "medium": {
       "width": 46,
       "formatLeft": "<font color='{{c:rating}}'>{{nick}}</font>",
@@ -45,8 +53,8 @@
       "width": 100,
       "nickFormatLeft": "<font color='{{c:rating}}'>{{rating}}</font> {{nick}}",
       "nickFormatRight": "{{nick}} <font color='{{c:rating}}'>{{rating}}</font>",
-      "vehicleFormatLeft": "<font>{{vehicle}}</font>",
-      "vehicleFormatRight": "<font>{{vehicle}}</font>"
+      "vehicleFormatLeft": "{{vehicle}}",
+      "vehicleFormatRight": "{{vehicle}}"
     }
   },
   "markers": {
@@ -58,7 +66,7 @@
             "x": 0,
             "y": -45,
             "alpha": 100,
-            "color": "8706574",
+            "color": "0x84DA0E",
             "maxScale": 70,
             "scaleX": 0,
             "scaleY": 0,
@@ -76,13 +84,13 @@
             "x": -26,
             "y": -20,
            "alpha": 0,
-            "color": "8706574",
+            "color": "0x84DA0E",
             "lcolor": null,
             "width": 50,
             "height": 3,
             "border": {
               "alpha": 100,
-              "color": "8704",
+              "color": "0x002200",
               "size": 1
             },
             "fill": {
@@ -90,7 +98,7 @@
             },
             "damage": {
               "alpha": 100,
-              "color": "12307387",
+              "color": "0xBBCBBB",
               "fade": 1
             }
           },
@@ -99,7 +107,7 @@
             "x": 0,
             "y": -65,
             "alpha": 100,
-            "color": "16777215",
+            "color": "0xFFFFFF",
             "font": {
               "name": "$FieldFont",
               "size": 15,
@@ -108,7 +116,7 @@
             },
      "shadow": {
               "alpha": 100,
-              "color": "47872",
+              "color": "0x00BB00",
               "angle": 0,
               "strength": 250,
               "distance": 0,
@@ -145,7 +153,7 @@
               "x": 0,
               "y": -24,
               "alpha": 100,
-              "color": "16777215",
+              "color": "0xFFFFFF",
               "font": {
                 "name": "$FieldFont",
                 "size": 12,
@@ -214,7 +222,7 @@
             "x": 0,
             "y": -45,
             "alpha": 100,
-            "color": "8706574",
+            "color": "0x84DA0E",
             "maxScale": 70,
             "scaleX": 0,
             "scaleY": 0,
@@ -232,13 +240,13 @@
             "x": -26,
             "y": -20,
             "alpha": 0,
-            "color": "8706574",
+            "color": "0x84DA0E",
             "lcolor": null,
             "width": 50,
             "height": 3,
             "border": {
               "alpha": 100,
-              "color": "8704",
+              "color": "0x002200",
               "size": 1
             },
             "fill": {
@@ -246,7 +254,7 @@
             },
             "damage": {
               "alpha": 100,
-              "color": "12307387",
+              "color": "0xBBCBBB",
               "fade": 1
             }
           },
@@ -255,7 +263,7 @@
             "x": 0,
             "y": -65,
             "alpha": 100,
-            "color": "16777215",
+            "color": "0xFFFFFF",
             "font": {
               "name": "$FieldFont",
               "size": 15,
@@ -264,7 +272,7 @@
             },
             "shadow": {
               "alpha": 100,
-              "color": "47872",
+              "color": "0x00BB00",
               "angle": 0,
               "strength": 250,
               "distance": 0,
@@ -301,7 +309,7 @@
               "x": 0,
               "y": -24,
               "alpha": 100,
-              "color": "16777215",
+              "color": "0xFFFFFF",
               "font": {
                 "name": "$FieldFont",
                 "size": 12,
@@ -372,7 +380,7 @@
             "x": 0,
             "y": -45,
             "alpha": 100,
-            "color": "1147921",
+            "color": "0x118411",
             "maxScale": 70,
             "scaleX": 0,
             "scaleY": 0,
@@ -414,7 +422,7 @@
             "x": 0,
             "y": -65,
             "alpha": 100,
-            "color": "16777215",
+            "color": "0xFFFFFF",
             "font": {
               "name": "$FieldFont",
               "size": 15,
@@ -423,7 +431,7 @@
             },
             "shadow": {
               "alpha": 100,
-              "color": "47872",
+              "color": "0x00BB00",
               "angle": 0,
               "strength": 250,
               "distance": 0,
@@ -460,7 +468,7 @@
               "x": 0,
               "y": -24,
               "alpha": 100,
-              "color": "1147921",
+              "color": "0x118411",
               "font": {
                 "name": "$FieldFont",
                 "size": 12,
@@ -485,7 +493,7 @@
             "x": 0,
             "y": -45,
             "alpha": 100,
-            "color": "1147921",
+            "color": "0x118411",
             "maxScale": 100,
             "scaleX": 0,
             "scaleY": 0,
@@ -527,7 +535,7 @@
             "x": 0,
             "y": -65,
             "alpha": 100,
-            "color": "16777215",
+            "color": "0xFFFFFF",
             "font": {
               "name": "$FieldFont",
               "size": 15,
@@ -536,7 +544,7 @@
             },
             "shadow": {
               "alpha": 100,
-              "color": "47872",
+              "color": "0x00BB00",
               "angle": 0,
               "strength": 250,
               "distance": 0,
@@ -573,7 +581,7 @@
               "x": 0,
               "y": -24,
               "alpha": 100,
-              "color": "1147921",
+              "color": "0x118411",
               "font": {
                 "name": "$FieldFont",
                 "size": 12,
@@ -602,7 +610,7 @@
             "x": 0,
             "y": -45,
             "alpha": 100,
-            "color": "16719116",
+            "color": "0xFF1D0C",
             "maxScale": 70,
             "scaleX": 0,
             "scaleY": 0,
@@ -620,13 +628,13 @@
             "x": -26,
             "y": -20,
             "alpha": 0,
-            "color": "16719116",
+            "color": "0xFF1D0C",
             "lcolor": null,
             "width": 50,
             "height": 3,
             "border": {
               "alpha": 100,
-              "color": "2228224",
+              "color": "0x220000",
               "size": 1
             },
             "fill": {
@@ -634,7 +642,7 @@
             },
             "damage": {
               "alpha": 100,
-              "color": "14400443",
+              "color": "0xDBBBBB",
               "fade": 1
             }
           },
@@ -643,7 +651,7 @@
             "x": 0,
             "y": -65,
             "alpha": 100,
-            "color": "16777215",
+            "color": "0xFFFFFF",
             "font": {
               "name": "$FieldFont",
               "size": 15,
@@ -652,7 +660,7 @@
             },
             "shadow": {
               "alpha": 100,
-              "color": "16711680",
+              "color": "0xFF0000",
               "angle": 0,
               "strength": 250,
               "distance": 0,
@@ -689,7 +697,7 @@
               "x": 0,
               "y": -24,
               "alpha": 100,
-              "color": "16777215",
+              "color": "0xFFFFFF",
               "font": {
                 "name": "$FieldFont",
                 "size": 12,
@@ -758,7 +766,7 @@
             "x": 0,
             "y": -45,
             "alpha": 100,
-            "color": "16719116",
+            "color": "0xFF1D0C",
             "maxScale": 70,
             "scaleX": 0,
             "scaleY": 0,
@@ -776,13 +784,13 @@
             "x": -26,
             "y": -20,
             "alpha": 0,
-            "color": "16719116",
+            "color": "0xFF1D0C",
             "lcolor": null,
             "width": 50,
             "height": 3,
             "border": {
               "alpha": 100,
-              "color": "2228224",
+              "color": "0x220000",
               "size": 1
             },
             "fill": {
@@ -790,7 +798,7 @@
             },
             "damage": {
               "alpha": 100,
-              "color": "14400443",
+              "color": "0xDBBBBB",
               "fade": 1
             }
           },
@@ -799,7 +807,7 @@
             "x": 0,
             "y": -65,
             "alpha": 100,
-            "color": "16777215",
+            "color": "0xFFFFFF",
             "font": {
               "name": "$FieldFont",
               "size": 15,
@@ -808,7 +816,7 @@
             },
             "shadow": {
               "alpha": 100,
-              "color": "16711680",
+              "color": "0xFF0000",
               "angle": 0,
               "strength": 250,
               "distance": 0,
@@ -845,7 +853,7 @@
               "x": 0,
               "y": -24,
               "alpha": 100,
-              "color": "16777215",
+              "color": "0xFFFFFF",
               "font": {
                 "name": "$FieldFont",
                 "size": 12,
@@ -916,7 +924,7 @@
             "x": 0,
             "y": -45,
             "alpha": 100,
-            "color": "16719116",
+            "color": "0xFF1D0C",
             "maxScale": 70,
             "scaleX": 0,
             "scaleY": 0,
@@ -958,7 +966,7 @@
             "x": 0,
             "y": -65,
             "alpha": 100,
-            "color": "16777215",
+            "color": "0xFFFFFF",
             "font": {
               "name": "$FieldFont",
               "size": 15,
@@ -967,7 +975,7 @@
             },
             "shadow": {
               "alpha": 100,
-              "color": "16711680",
+              "color": "0xFF0000",
               "angle": 0,
               "strength": 250,
               "distance": 0,
@@ -1004,7 +1012,7 @@
               "x": 0,
               "y": -24,
               "alpha": 100,
-              "color": "8655121",
+              "color": "0x841111",
               "font": {
                 "name": "$FieldFont",
                 "size": 12,
@@ -1029,7 +1037,7 @@
             "x": 0,
             "y": -45,
             "alpha": 100,
-            "color": "16719116",
+            "color": "0xFF1D0C",
             "maxScale": 100,
             "scaleX": 0,
             "scaleY": 0,
@@ -1071,7 +1079,7 @@
             "x": 0,
             "y": -65,
             "alpha": 100,
-            "color": "16777215",
+            "color": "0xFFFFFF",
             "font": {
               "name": "$FieldFont",
               "size": 15,
@@ -1080,7 +1088,7 @@
             },
             "shadow": {
               "alpha": 100,
-              "color": "16711680",
+              "color": "0xFF0000",
               "angle": 0,
               "strength": 250,
               "distance": 0,
@@ -1117,7 +1125,7 @@
               "x": 0,
               "y": -24,
               "alpha": 100,
-              "color": "8655121",
+              "color": "0x841111",
               "font": {
                 "name": "$FieldFont",
                 "size": 12,
@@ -1240,11 +1248,11 @@
     "vehicleMarker": "../maps/icons/vehicle/contour"
   },
   "players": [
-    { "nick": "sirmax2", "icon": "../../../clanicons/XVM.png",   "x": 0, "y": 4, "h": 16, "w": 16, "alpha": 100 },
-    { "nick": "0x01",    "icon": "../../../clanicons/XVM.png",   "x": 0, "y": 4, "h": 16, "w": 16, "alpha": 100 },
-    { "clan": "[WG]",    "icon": "../../../clanicons/WG.png",    "x": 0, "y": 4, "h": 16, "w": 16, "alpha": 100 },
-    { "clan": "[WG-A]",  "icon": "../../../clanicons/WG.png",    "x": 0, "y": 4, "h": 16, "w": 16, "alpha": 100 },
-    { "clan": "[WTMOD]", "icon": "../../../clanicons/WTMOD.png", "x": 0, "y": 4, "h": 16, "w": 16, "alpha": 100 },
-    { "clan": "[WGST]",  "icon": "../../../clanicons/WGST.png",  "x": 0, "y": 4, "h": 16, "w": 16, "alpha": 100 }
+    { "nick": "sirmax2",    "icon": "../../../clanicons/XVM.png" },
+    { "nick": "0x01",       "icon": "../../../clanicons/XVM.png" },
+    { "clan": "[WG]",       "icon": "../../../clanicons/WG.png" },
+    { "clan": "[WG-A]",     "icon": "../../../clanicons/WG.png" },
+    { "clan": "[WTMOD]",    "icon": "../../../clanicons/WTMOD.png" },
+    { "clan": "[WGST]",     "icon": "../../../clanicons/WGST.png" }
   ]
 }
