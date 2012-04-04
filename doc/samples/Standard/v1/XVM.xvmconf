@@ -1,0 +1,1070 @@
+﻿{
+  "configVersion": "1.1.0",
+  "editorVersion": "0.0.0",
+  "definition": {
+    "author": "sfedu RED-N",
+    "description": "XVMmini",
+    "url": "http://code.google.com/p/wot-xvm/",
+    "date": "14.03.2012",
+    "gameVersion": "0.7.2",
+    "modMinVersion": "1.7"
+  },
+  "markers": {
+    "ally": {
+      "alive": {
+        "normal": {
+          "vehicleIcon": {
+            "visible": true,
+            "x": 0,
+            "y": -2,
+            "alpha": 100,
+            "color": "8706574",
+            "maxScale": 90,
+            "scaleX": 0,
+            "scaleY": 0,
+            "shadow": {
+              "alpha": 100,
+              "color": "0x999000",
+              "angle": 45,
+              "strength": 120,
+              "distance": 1,
+              "size": 0
+            }
+          },
+           "healthBar": {
+            "visible": true,
+            "x": -26,
+            "y": -34,
+            "alpha": 0,
+            "color": "8706574",
+            "lcolor": null,
+            "width": 50,
+            "height": 3,
+            "border": {
+              "alpha": 30,
+              "color": "8704",
+              "size": 2
+            },
+            "fill": {
+              "alpha": 100
+            },
+            "damage": {
+              "alpha": 100,
+              "color": "12307387",
+              "fade": 1
+            }
+          },
+          "damageText": {
+            "visible": true,
+            "x": 0,
+            "y": -65,
+            "alpha": 100,
+            "color": "16777215",
+            "font": {
+              "name": "$FieldFont",
+              "size": 15,
+              "align": "center",
+              "bold": true
+            },
+            "shadow": {
+              "alpha": 100,
+              "color": "47872",
+              "angle": 0,
+              "strength": 250,
+              "distance": 0,
+              "size": 6
+            },
+            "speed": 4,
+            "maxRange": 60,
+            "damageMessage": "-{{dmg}}",
+            "blowupMessage": "ВАНШОТ!"
+          },
+          "contourIcon": {
+            "visible": false,
+            "x": 6,
+            "y": -65,
+            "alpha": 100,
+            "color": null,
+            "amount": 0
+          },
+          "levelIcon": {
+            "visible": false,
+            "x": 0,
+            "y": -21,
+            "alpha": 100
+          },
+          "actionMarker": {
+            "visible": true,
+            "x": 0,
+            "y": -65,
+            "alpha": 100
+          },
+          "textFields": [
+             {
+              "visible": true,
+              "x": 0,
+              "y": -36,
+              "alpha": 100,
+              "color": "33FF00",
+              "font": {
+                "name": "$FieldFont",
+                "size": 13,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "33FF00",
+                "angle": 45,
+                "strength": 200,
+                "distance": 1,
+                "size": 3
+              },
+              "format": "{{vehicle}}"
+            },
+            {
+              "visible": true,
+              "x": 0,
+              "y": -16,
+              "alpha": 100,
+              "color": "0xFFFFFF",
+              "font": {
+                "name": "$FieldFont",
+                "size": 12,
+                "align": "center",
+                "bold": true
+              },
+              "format": "{{hp}} / {{hp-max}}"
+            }
+          ]
+        },
+        "extended": {
+          "vehicleIcon": {
+            "visible": true,
+            "x": 0,
+            "y": -2,
+            "alpha": 100,
+            "color": "8706574",
+            "maxScale": 100,
+            "scaleX": 0,
+            "scaleY": 0,
+            "shadow": {
+              "alpha": 100,
+              "color": "0x999000",
+              "angle": 45,
+              "strength": 120,
+              "distance": 1,
+              "size": 0
+            }
+          },
+           "healthBar": {
+            "visible": true,
+            "x": -26,
+            "y": -34,
+            "alpha": 0,
+            "color": "8706574",
+            "lcolor": null,
+            "width": 50,
+            "height": 3,
+            "border": {
+              "alpha": 30,
+              "color": "8704",
+              "size": 2
+            },
+            "fill": {
+              "alpha": 100
+            },
+            "damage": {
+              "alpha": 100,
+              "color": "12307387",
+              "fade": 1
+            }
+          },
+          "damageText": {
+            "visible": true,
+            "x": 0,
+            "y": -65,
+            "alpha": 100,
+            "color": "16777215",
+            "font": {
+              "name": "$FieldFont",
+              "size": 15,
+              "align": "center",
+              "bold": true
+            },
+            "shadow": {
+              "alpha": 100,
+              "color": "47872",
+              "angle": 0,
+              "strength": 250,
+              "distance": 0,
+              "size": 6
+            },
+            "speed": 4,
+            "maxRange": 60,
+            "damageMessage": "-{{dmg}}",
+            "blowupMessage": "ВАНШОТ!"
+          },
+          "contourIcon": {
+            "visible": false,
+            "x": 6,
+            "y": -65,
+            "alpha": 100,
+            "color": null,
+            "amount": 0
+          },
+          "levelIcon": {
+            "visible": true,
+            "x": 0,
+            "y": -62,
+            "alpha": 100
+          },
+          "actionMarker": {
+            "visible": true,
+            "x": 0,
+            "y": -65,
+            "alpha": 100
+          },
+          "textFields": [
+             {
+              "visible": true,
+              "x": 0,
+              "y": -36,
+              "alpha": 100,
+              "color": "33FF00",
+              "font": {
+                "name": "$FieldFont",
+                "size": 13,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "33FF00",
+                "angle": 45,
+                "strength": 200,
+                "distance": 1,
+                "size": 3
+              },
+               "format": "{{nick}}"
+            },
+            {
+              "visible": true,
+              "x": 0,
+              "y": -16,
+              "alpha": 100,
+              "color": "0xFFFFFF",
+              "font": {
+                "name": "$FieldFont",
+                "size": 12,
+                "align": "center",
+                "bold": true
+              },
+              "format": "{{hp-ratio}}\u0025"
+            }
+          ]
+        }
+      },
+      "dead": {
+        "normal": {
+          "vehicleIcon": {
+            "visible": false,
+            "x": 0,
+            "y": 8,
+            "alpha": 100,
+            "color": "1147921",
+            "maxScale": 70,
+            "scaleX": 0,
+            "scaleY": 0,
+            "shadow": {
+              "alpha": 100,
+              "color": "0x999000",
+              "angle": 45,
+              "strength": 120,
+              "distance": 1,
+              "size": 0
+            }
+          },
+          "healthBar": {
+            "visible": false,
+            "x": -26,
+            "y": -33,
+            "alpha": 0,
+            "color": null,
+            "lcolor": null,
+            "width": 50,
+            "height": 3,
+            "border": {
+              "alpha": 30,
+              "color": "0x999000",
+              "size": 1
+            },
+            "fill": {
+              "alpha": 30,
+              "color": null
+            },
+            "damage": {
+              "alpha": 80,
+              "color": null,
+              "fade": 1
+            }
+          },
+          "damageText": {
+            "visible": true,
+            "x": 0,
+            "y": -65,
+            "alpha": 100,
+            "color": "16777215",
+            "font": {
+              "name": "$FieldFont",
+              "size": 15,
+              "align": "center",
+              "bold": true
+            },
+            "shadow": {
+              "alpha": 100,
+              "color": "47872",
+              "angle": 0,
+              "strength": 250,
+              "distance": 0,
+              "size": 6
+            },
+            "speed": 2,
+            "maxRange": 60,
+            "damageMessage": "-{{dmg}}",
+            "blowupMessage": "ВАНШОТ!"
+          },
+          "contourIcon": {
+            "visible": false,
+            "x": 6,
+            "y": -65,
+            "alpha": 100,
+            "color": null,
+            "amount": 0
+          },
+          "levelIcon": {
+            "visible": false,
+            "x": 0,
+            "y": -21,
+            "alpha": 100
+          },
+          "actionMarker": {
+            "visible": true,
+            "x": 0,
+            "y": -65,
+            "alpha": 100
+          },
+          "textFields": [
+	{
+              "visible": false,
+              "x": 0,
+              "y": -15,
+              "alpha": 100,
+              "color": "0xb2b2b2",
+              "font": {
+                "name": "$FieldFont",
+                "size": 12,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+                "alpha": 150,
+                "color": "0x999000",
+                "angle": 45,
+                "strength": 200,
+                "distance": 1,
+                "size": 3
+              },
+              "format": "{{vehicle}}"
+            },
+	     {
+              "visible": false,
+              "x": 0,
+              "y": -10,
+              "alpha": 100,
+              "color": "0xb2b2b2",
+              "font": {
+                "name": "$FieldFont",
+                "size": 12,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+                "alpha": 150,
+                "color": "0x999000",
+                "angle": 45,
+                "strength": 200,
+                "distance": 1,
+                "size": 3
+              },
+              "format": "{{nick}}"
+            }
+   	 ]
+        },
+        "extended": {
+          "vehicleIcon": {
+            "visible": true,
+            "x": 0,
+            "y": -2,
+            "alpha": 100,
+            "color": "1147921",
+            "maxScale": 100,
+            "scaleX": 0,
+            "scaleY": 0,
+            "shadow": {
+              "alpha": 100,
+              "color": "0x999000",
+              "angle": 45,
+              "strength": 120,
+              "distance": 1,
+              "size": 0
+            }
+          },
+          "healthBar": {
+            "visible": false,
+            "x": -26,
+            "y": -33,
+            "alpha": 0,
+            "color": null,
+            "lcolor": null,
+            "width": 50,
+            "height": 3,
+            "border": {
+              "alpha": 30,
+              "color": "0x999000",
+              "size": 1
+            },
+            "fill": {
+              "alpha": 30,
+              "color": null
+            },
+            "damage": {
+              "alpha": 80,
+              "color": null,
+              "fade": 1
+            }
+          },
+          "damageText": {
+            "visible": true,
+            "x": 0,
+            "y": -65,
+            "alpha": 100,
+            "color": "16777215",
+            "font": {
+              "name": "$FieldFont",
+              "size": 15,
+              "align": "center",
+              "bold": true
+            },
+            "shadow": {
+              "alpha": 100,
+              "color": "47872",
+              "angle": 0,
+              "strength": 250,
+              "distance": 0,
+              "size": 6
+            },
+            "speed": 2,
+            "maxRange": 60,
+            "damageMessage": "-{{dmg}}",
+            "blowupMessage": "ВАНШОТ!"
+          },
+          "contourIcon": {
+            "visible": false,
+            "x": 6,
+            "y": -65,
+            "alpha": 100,
+            "color": null,
+            "amount": 0
+          },
+          "levelIcon": {
+            "visible": false,
+            "x": 0,
+            "y": -21,
+            "alpha": 100
+          },
+          "actionMarker": {
+            "visible": true,
+            "x": 0,
+            "y": -65,
+            "alpha": 100
+          },
+           "textFields": [
+	{
+              "visible": true,
+              "x": 0,
+              "y": -36,
+              "alpha": 100,
+              "color": "0xb2b2b2",
+              "font": {
+                "name": "$FieldFont",
+                "size": 12,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+                "alpha": 150,
+                "color": "0x999000",
+                "angle": 45,
+                "strength": 200,
+                "distance": 1,
+                "size": 3
+              },
+              "format": "{{vehicle}}"
+            },
+	     {
+              "visible": true,
+              "x": 0,
+              "y": -22,
+              "alpha": 100,
+              "color": "0xb2b2b2",
+              "font": {
+                "name": "$FieldFont",
+                "size": 12,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+                "alpha": 150,
+                "color": "0x999000",
+                "angle": 45,
+                "strength": 200,
+                "distance": 1,
+                "size": 3
+              },
+              "format": "{{nick}}"
+            }
+   	  ]
+        }
+      }
+    },
+    "enemy": {
+      "alive": {
+        "normal": {
+          "vehicleIcon": {
+            "visible": true,
+            "x": 0,
+            "y": -2,
+            "alpha": 100,
+            "color": "0xff0000",
+            "maxScale": 100,
+            "scaleX": 0,
+            "scaleY": 0,
+            "shadow": {
+              "alpha": 100,
+              "color": "0x999000",
+              "angle": 45,
+              "strength": 120,
+              "distance": 1,
+              "size": 0
+            }
+          },
+           "healthBar": {
+            "visible": true,
+            "x": -26,
+            "y": -34,
+            "alpha": 0,
+            "color": "16719116",
+            "lcolor": null,
+            "width": 50,
+            "height": 3,
+            "border": {
+              "alpha": 30,
+              "color": "2228224",
+              "size": 2
+            },
+            "fill": {
+              "alpha": 100
+            },
+            "damage": {
+              "alpha": 100,
+              "color": "14400443",
+              "fade": 1
+            }
+          },
+          "damageText": {
+            "visible": true,
+            "x": 0,
+            "y": -65,
+            "alpha": 100,
+            "color": "16777215",
+            "font": {
+              "name": "$FieldFont",
+              "size": 15,
+              "align": "center",
+              "bold": true
+            },
+            "shadow": {
+              "alpha": 100,
+              "color": "16711680",
+              "angle": 0,
+              "strength": 250,
+              "distance": 0,
+              "size": 6
+            },
+            "speed": 2,
+            "maxRange": 60,
+            "damageMessage": "-{{dmg}}",
+            "blowupMessage": "ВАНШОТ!"
+          },
+          "contourIcon": {
+            "visible": false,
+            "x": 6,
+            "y": -65,
+            "alpha": 100,
+            "color": null,
+            "amount": 0
+          },
+          "levelIcon": {
+            "visible": false,
+            "x": 0,
+            "y": -35,
+            "alpha": 100
+          },
+          "actionMarker": {
+            "visible": true,
+            "x": 0,
+            "y": -65,
+            "alpha": 100
+          },
+          "textFields": [
+             {
+              "visible": true,
+              "x": 0,
+              "y": -36,
+              "alpha": 100,
+              "color": "0xff0000",
+              "font": {
+                "name": "$FieldFont",
+                "size": 13,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "33FF00",
+                "angle": 45,
+                "strength": 200,
+                "distance": 1,
+                "size": 3
+              },
+              "format": "{{vehicle}}"
+            },
+            {
+              "visible": true,
+              "x": 0,
+              "y": -16,
+              "alpha": 100,
+              "color": "0xFFFFFF",
+              "font": {
+                "name": "$FieldFont",
+                "size": 12,
+                "align": "center",
+                "bold": true
+              },
+              "format": "{{hp}} / {{hp-max}}"
+            }
+          ]
+        },
+        "extended": {
+          "vehicleIcon": {
+            "visible": true,
+            "x": 0,
+            "y": -2,
+            "alpha": 100,
+            "color": "16719116",
+            "maxScale": 100,
+            "scaleX": 0,
+            "scaleY": 0,
+            "shadow": {
+              "alpha": 100,
+              "color": "0x999000",
+              "angle": 45,
+              "strength": 120,
+              "distance": 1,
+              "size": 0
+            }
+          },
+           "healthBar": {
+            "visible": true,
+            "x": -26,
+            "y": -34,
+            "alpha": 0,
+            "color": "16719116",
+            "lcolor": null,
+            "width": 50,
+            "height": 3,
+            "border": {
+              "alpha": 30,
+              "color": "2228224",
+              "size": 2
+            },
+            "fill": {
+              "alpha": 100
+            },
+            "damage": {
+              "alpha": 100,
+              "color": "14400443",
+              "fade": 1
+            }
+          },
+          "damageText": {
+            "visible": true,
+            "x": 0,
+            "y": -65,
+            "alpha": 100,
+            "color": "16777215",
+            "font": {
+              "name": "$FieldFont",
+              "size": 15,
+              "align": "center",
+              "bold": true
+            },
+            "shadow": {
+              "alpha": 100,
+              "color": "16711680",
+              "angle": 0,
+              "strength": 250,
+              "distance": 0,
+              "size": 6
+            },
+            "speed": 2,
+            "maxRange": 60,
+            "damageMessage": "-{{dmg}}",
+            "blowupMessage": "ВАНШОТ!"
+          },
+          "contourIcon": {
+            "visible": false,
+            "x": 6,
+            "y": -65,
+            "alpha": 100,
+            "color": null,
+            "amount": 0
+          },
+          "levelIcon": {
+            "visible": true,
+            "x": 0,
+            "y": -62,
+            "alpha": 100
+          },
+          "actionMarker": {
+            "visible": true,
+            "x": 0,
+            "y": -65,
+            "alpha": 100
+          },
+          "textFields": [
+             {
+              "visible": true,
+              "x": 0,
+              "y": -36,
+              "alpha": 100,
+              "color": "0xff0000",
+              "font": {
+                "name": "$FieldFont",
+                "size": 13,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "33FF00",
+                "angle": 45,
+                "strength": 200,
+                "distance": 1,
+                "size": 3
+              },
+              "format": "{{nick}}"
+            },
+            {
+              "visible": true,
+              "x": 0,
+              "y": -16,
+              "alpha": 100,
+              "color": "0xFFFFFF",
+              "font": {
+                "name": "$FieldFont",
+                "size": 12,
+                "align": "center",
+                "bold": true
+              },
+              "format": "{{hp-ratio}}\u0025"
+            }
+          ]
+        }
+      },
+      "dead": {
+        "normal": {
+          "vehicleIcon": {
+            "visible": false,
+            "x": 0,
+            "y": -2,
+            "alpha": 100,
+            "color": "16719116",
+            "maxScale": 70,
+            "scaleX": 0,
+            "scaleY": 0,
+            "shadow": {
+              "alpha": 100,
+              "color": "0x999000",
+              "angle": 45,
+              "strength": 120,
+              "distance": 1,
+              "size": 0
+            }
+          },
+          "healthBar": {
+            "visible": false,
+            "x": -26,
+            "y": -33,
+            "alpha": 0,
+            "color": null,
+            "lcolor": null,
+            "width": 50,
+            "height": 3,
+            "border": {
+              "alpha": 30,
+              "color": "0x000000",
+              "size": 1
+            },
+            "fill": {
+              "alpha": 30,
+              "color": null
+            },
+            "damage": {
+              "alpha": 80,
+              "color": null,
+              "fade": 1
+            }
+          },
+          "damageText": {
+            "visible": true,
+            "x": 0,
+            "y": -65,
+            "alpha": 100,
+            "color": "16777215",
+            "font": {
+              "name": "$FieldFont",
+              "size": 15,
+              "align": "center",
+              "bold": true
+            },
+            "shadow": {
+              "alpha": 100,
+              "color": "16711680",
+              "angle": 0,
+              "strength": 250,
+              "distance": 0,
+              "size": 6
+            },
+            "speed": 2,
+            "maxRange": 60,
+            "damageMessage": "-{{dmg}}",
+            "blowupMessage": "ВАНШОТ!"
+          },
+          "contourIcon": {
+            "visible": false,
+            "x": 6,
+            "y": -65,
+            "alpha": 100,
+            "color": null,
+            "amount": 0
+          },
+          "levelIcon": {
+            "visible": false,
+            "x": 0,
+            "y": -21,
+            "alpha": 100
+          },
+          "actionMarker": {
+            "visible": true,
+            "x": 0,
+            "y": -65,
+            "alpha": 100
+          },
+           "textFields": [
+	   {
+              "visible": false,
+              "x": 0,
+              "y": -18,
+              "alpha": 100,
+              "color": "0xb2b2b2",
+              "font": {
+                "name": "$FieldFont",
+                "size": 12,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+                "alpha": 150,
+                "color": "0x999000",
+                "angle": 45,
+                "strength": 200,
+                "distance": 1,
+                "size": 3
+              },
+              "format": "{{vehicle}}"
+            },
+	     {
+              "visible": false,
+              "x": 0,
+              "y": -5,
+              "alpha": 100,
+              "color": "0xb2b2b2",
+              "font": {
+                "name": "$FieldFont",
+                "size": 12,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+                "alpha": 150,
+                "color": "0x999000",
+                "angle": 45,
+                "strength": 200,
+                "distance": 1,
+                "size": 3
+              },
+              "format": "{{nick}}"
+            }
+   	  ]
+        },
+        "extended": {
+          "vehicleIcon": {
+            "visible": true,
+            "x": 0,
+            "y": -2,
+            "alpha": 100,
+            "color": "16719116",
+            "maxScale": 100,
+            "scaleX": 0,
+            "scaleY": 0,
+            "shadow": {
+              "alpha": 100,
+              "color": "0x000000",
+              "angle": 45,
+              "strength": 120,
+              "distance": 1,
+              "size": 0
+            }
+          },
+          "healthBar": {
+            "visible": false,
+            "x": -26,
+            "y": -33,
+            "alpha": 0,
+            "color": null,
+            "lcolor": null,
+            "width": 50,
+            "height": 3,
+            "border": {
+              "alpha": 30,
+              "color": "0x000000",
+              "size": 1
+            },
+            "fill": {
+              "alpha": 30,
+              "color": null
+            },
+            "damage": {
+              "alpha": 80,
+              "color": null,
+              "fade": 1
+            }
+          },
+          "damageText": {
+            "visible": true,
+            "x": 0,
+            "y": -65,
+            "alpha": 100,
+            "color": "16777215",
+            "font": {
+              "name": "$FieldFont",
+              "size": 15,
+              "align": "center",
+              "bold": true
+            },
+            "shadow": {
+              "alpha": 100,
+              "color": "16711680",
+              "angle": 0,
+              "strength": 250,
+              "distance": 0,
+              "size": 6
+            },
+            "speed": 2,
+            "maxRange": 60,
+            "damageMessage": "-{{dmg}}",
+            "blowupMessage": "ВАНШОТ!"
+          },
+          "contourIcon": {
+            "visible": false,
+            "x": 6,
+            "y": -65,
+            "alpha": 100,
+            "color": null,
+            "amount": 0
+          },
+          "levelIcon": {
+            "visible": false,
+            "x": 0,
+            "y": -21,
+            "alpha": 100
+          },
+          "actionMarker": {
+            "visible": true,
+            "x": 0,
+            "y": -65,
+            "alpha": 100
+          },
+           "textFields": [
+		{
+              "visible": true,
+              "x": 0,
+              "y": -36,
+              "alpha": 100,
+              "color": "0x4f0000",
+              "font": {
+                "name": "$FieldFont",
+                "size": 13,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+	              "alpha": 100,
+	              "color": "0x000000",
+	              "angle": 45,
+	              "strength": 120,
+        	      "distance": 1,
+	              "size": 3
+              },
+              "format": "{{vehicle}}"
+            },
+	     {
+              "visible": true,
+              "x": 0,
+              "y": -22,
+              "alpha": 100,
+              "color": "0x4f0000",
+              "font": {
+                "name": "$FieldFont",
+                "size": 13,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+	              "alpha": 100,
+	              "color": "0x000000",
+	              "angle": 45,
+	              "strength": 120,
+        	      "distance": 1,
+	              "size": 3
+              },
+              "format": "{{nick}}"
+            }
+   	  ]
+        }
+      }
+    }
+  }
+}
