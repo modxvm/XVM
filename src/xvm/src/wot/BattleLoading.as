@@ -17,7 +17,7 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
 
   public static var s_chancesField: TextField = null;
   public static var s_chancesText: String;
-  
+
   public function BattleLoading()
   {
     super();
@@ -130,9 +130,9 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
     s_chancesField = form_mc.battleText;
     var color = GraphicsUtil.brightenColor(
       Number(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, chances.m_raw, "0x")), 50);
-    wot.utils.Logger.add(color.toString(16) + " " + Number(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, chances.m_raw, "0x")));
+    //wot.utils.Logger.add(color.toString(16) + " " + Number(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, chances.m_raw, "0x")));
     s_chancesField.html = true;
-    s_chancesField.htmlText = s_chancesField.text + 
+    s_chancesField.htmlText = s_chancesField.text +
       " <font color='#" + color.toString(16) + "'>" +
       "(Chances: m = " + chances.m + ", k = " + chances.k + ")</font>";
     s_chancesText = s_chancesField.htmlText;

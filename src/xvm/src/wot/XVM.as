@@ -431,7 +431,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
       format = format.split("{{c:hp}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth, "0x"));
       format = format.split("{{c:hp-ratio}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"));
-
       return isFinite(format) ? Number(format) : systemColor;
     }
     catch (e)
@@ -647,7 +646,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       if (!Config.s_loaded)
         return;
 
-      var cfg = GetCurrentStateConfigRootNormal().healthBar;
+      var cfg = GetCurrentStateConfigRoot().healthBar;
 
       xvmHB._alpha = XVMFormatDynamicAlpha(cfg.alpha, curHealth);
       
@@ -669,6 +668,10 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       
       GraphicsUtil.setColor(xvmHBDamage, XVMFormatDynamicColor(cfg.damage.color, curHealth));
       xvmHBDamage._alpha = XVMFormatDynamicAlpha(cfg.damage.alpha, curHealth);
+      
+      //Logger.add("color: " + cfg.color + " => " + currColor);
+      //if (cfg.alpha == "{{a:hp-ratio}}")
+      //  Logger.add(Math.round(percent * 100) + " => " + Math.round(xvmHB._alpha));
     }
     catch (e)
     {
