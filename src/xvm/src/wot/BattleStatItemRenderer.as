@@ -118,21 +118,17 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
   function XVMClanIcon(cfg)
   {
     var pinfo = PlayerInfo.getPlayerInfo(data.label, data.clanAbbrev ? "[" + data.clanAbbrev + "]" : null);
-    if (!pinfo && m_clanIcon)
+    if (!m_clanIcon)
     {
-      m_clanIcon.removeMovieClip();
-      delete m_clanIcon;
-      m_clanIcon = null;
+      var x = (!_iconLoaded || Config.s_config.battle.mirroredVehicleIcons || (team == Defines.TEAM_ALLY))
+        ? iconLoader._x : iconLoader._x + 80 - 5;
+      m_clanIcon = PlayerInfo.createClanIcon(this, "m_clanIcon", pinfo ? pinfo.icon : null, cfg, x, iconLoader._y, team);
     }
-    else if (pinfo)
+    if (!pinfo)
+      m_clanIcon.clanIcon.source = null;
+    else
     {
-      if (!m_clanIcon)
-      {
-        var x = (!_iconLoaded || Config.s_config.battle.mirroredVehicleIcons || (team == Defines.TEAM_ALLY))
-          ? iconLoader._x : iconLoader._x + 80 - 5;
-        m_clanIcon = PlayerInfo.createClanIcon(this, "m_clanIcon", pinfo, cfg, x, iconLoader._y, team);
-      }
-      else if (pinfo.icon != m_clanIcon.clanIcon.source)
+      if (pinfo.icon != m_clanIcon.clanIcon.source)
         m_clanIcon.clanIcon.source = pinfo.icon;
     }
   }

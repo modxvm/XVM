@@ -46,13 +46,14 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
       vehicleField._width += 80;
       if (team == Defines.TEAM_ALLY)
         vehicleField._x -= 113; // sirmax: why this value?
+      else
+        vehicleField._x += 5;
       if (!Config.s_config.battle.mirroredVehicleIcons)
       {
         if (team == Defines.TEAM_ENEMY)
         {
           event.target._xscale = -event.target._xscale;
           event.target._x -= event.target.__width;
-          vehicleField._x += 5;
           //Logger.add(event.target.width + "x" + event.target.height);
         }
       }
@@ -91,8 +92,8 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
         var pinfo = PlayerInfo.getPlayerInfo(Utils.GetPlayerName(data.label), Utils.GetClanName(data.label));
         if (pinfo)
         {
-          PlayerInfo.createClanIcon(this, "m_clanIcon", pinfo, cfg,
-            iconLoader._x + ((team == Defines.TEAM_ALLY) ? 0 : 5), iconLoader._y, team);
+          PlayerInfo.createClanIcon(this, "m_clanIcon", pinfo.icon, cfg,
+            iconLoader._x /*+ ((team == Defines.TEAM_ALLY) ? 0 : 5)*/, iconLoader._y, team);
         }
       }
     }

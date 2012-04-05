@@ -5,7 +5,6 @@
 import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.PlayerInfo;
-import wot.utils.Logger;
 
 class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRenderer
 {
@@ -82,23 +81,18 @@ class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRend
   function XVMClanIcon(cfg)
   {
     var pinfo = PlayerInfo.getPlayerInfo(data.label, data.clanAbbrev ? "[" + data.clanAbbrev + "]" : null);
-    if (!pinfo && m_clanIcon)
+    if (!m_clanIcon)
     {
-      m_clanIcon.removeMovieClip();
-      delete m_clanIcon;
-      m_clanIcon = null;
+      var x = (!_iconLoaded || Config.s_config.battle.mirroredVehicleIcons || (team == Defines.TEAM_ALLY))
+        ? iconLoader._x : iconLoader._x + iconLoader.width;
+      m_clanIcon = PlayerInfo.createClanIcon(this, "m_clanIcon", pinfo ? pinfo.icon : null, cfg, x, iconLoader._y, team);
     }
-    else if (pinfo)
+    if (!pinfo)
+      m_clanIcon.clanIcon.source = null;
+    else
     {
-      if (!m_clanIcon)
-      {
-        var x = (!_iconLoaded || Config.s_config.battle.mirroredVehicleIcons || (team == Defines.TEAM_ALLY))
-          ? iconLoader._x : iconLoader._x + iconLoader.width;
-        m_clanIcon = PlayerInfo.createClanIcon(this, "m_clanIcon", pinfo, cfg, x, iconLoader._y, team);
-      }
-      else if (pinfo.icon != m_clanIcon.clanIcon.source)
+      if (pinfo.icon != m_clanIcon.clanIcon.source)
         m_clanIcon.clanIcon.source = pinfo.icon;
-
       m_clanIcon._alpha = ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0) ? 100 : 50;
     }
   }

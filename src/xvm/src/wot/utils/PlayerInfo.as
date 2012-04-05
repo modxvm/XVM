@@ -23,11 +23,8 @@ class wot.utils.PlayerInfo extends MovieClip
     return null;
   }
   
-  public static function createClanIcon(owner: MovieClip, name: String, pinfo, cfg, dx, dy, team): MovieClip
+  public static function createClanIcon(owner: MovieClip, name: String, source: String, cfg, dx, dy, team): MovieClip
   {
-    if (!pinfo || !pinfo.icon)
-      return null;
-
     var holder: MovieClip = owner.createEmptyMovieClip(name, owner.getNextHighestDepth());
     var icon: MovieClip = holder.attachMovie("UILoader", "clanIcon", holder.getNextHighestDepth());
 
@@ -40,7 +37,7 @@ class wot.utils.PlayerInfo extends MovieClip
     icon._x = icon._y = 0;
     icon._alpha = cfg.alpha;
     icon.addEventListener("complete", instance, "completeLoadClanIcon");
-    icon.source = pinfo.icon;
+    icon.source = source;
     icon.visible = false;
     icon["xvm_claninfo"] = { w: cfg.w, h: cfg.h };
     icon["holder"] = holder;
@@ -50,7 +47,7 @@ class wot.utils.PlayerInfo extends MovieClip
 
   // private
   private static var _instance = null;
-  private static function get instance()
+  public static function get instance()
   {
     if (!_instance)
       _instance = new PlayerInfo();
@@ -61,10 +58,15 @@ class wot.utils.PlayerInfo extends MovieClip
   {
     var icon: MovieClip = event.target;
     icon.setSize(icon["xvm_claninfo"].w, icon["xvm_claninfo"].h);
+    icon.invalidate();
+    icon.visible = false;
 
     icon["holder"].onEnterFrame = function()
     {
+      if (icon.invalidationIntervalID)
+        return;
       this.onEnterFrame = null;
+      this.stop();
       icon.visible = true;
     }
   }

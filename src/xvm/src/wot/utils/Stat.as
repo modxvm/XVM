@@ -476,6 +476,11 @@ class wot.utils.Stat
     if (k1 == 0) k1 = k2;
     if (k2 == 0) k2 = k1;
 
+    // 2
+    if (m1 == 0 && m2 == 0) m1 = m2 = 1;
+    if (m1 == 0) m1 = m2;
+    if (m2 == 0) m2 = m1;
+
     return
     {
       k1: Math.round(k1),
