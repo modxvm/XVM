@@ -1,3 +1,6 @@
+XVM-2.1.test4:
+  * fixed bug when dead enemy tank still have tank icon active.
+
 XVM-2.1.test2:
   * added configs like in standard client.
   * fixes in win chances formulas.

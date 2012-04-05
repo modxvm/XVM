@@ -212,6 +212,9 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     if (m_vehicleClass != null)
       this.setVehicleClass();
 
+    if (m_markerState != null)
+      marker.gotoAndPlay(m_markerState);
+
     XVMPopulateData();
     XVMSetupNewHealth(m_curHealth);
 
@@ -594,10 +597,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
   function XVMUpdateMarkerLabel()
   {
-    // Dead allies marker is green when appear again. This is the fix, but why it is required?
-    if (m_markerState == "immediate_dead")
-      marker.gotoAndStop(m_markerState);
-
     // Guess color blind mode
     if (m_markerLabel == "yellow" || m_markerLabel == "purple")
       s_isColorBlindMode = true;
