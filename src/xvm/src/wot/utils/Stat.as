@@ -426,16 +426,20 @@ class wot.utils.Stat
       var pdata = s_player_data[pname];
       if (pdata.team == Defines.TEAM_ALLY) ++nally else ++nenemy;
     }
+    wot.utils.Logger.add("1");
 
     // only equal and non empty team supported
     if (nally != nenemy || nally == 0)
       return null;
+    wot.utils.Logger.add("2");
 
     if (!s_player_ratings)
       return null;
+    wot.utils.Logger.add("3");
 
     var tier = guessBattleTier();
-      
+    wot.utils.Logger.add("tier: " + tier);
+
     // Calculate average efficiency.
     var ae1 = AvgStat("eff", Defines.TEAM_ALLY);
     var ae2 = AvgStat("eff", Defines.TEAM_ENEMY);
@@ -445,7 +449,8 @@ class wot.utils.Stat
 
     var ab1 = AvgStat("battles", Defines.TEAM_ALLY);
     var ab2 = AvgStat("battles", Defines.TEAM_ENEMY);
-    
+    wot.utils.Logger.add(ae1 + " " + ae2 + " - " + ar1 + " " + ar2 + " - " + ab1 + " " + ab2);
+
     var k1 = 0;
     var k2 = 0;
     var m1 = 0;
@@ -470,6 +475,7 @@ class wot.utils.Stat
       //wot.utils.Logger.add("tx=" + tx + " " + int(eff) + " " + int(gwr) + " " + int(bat));
       //wot.utils.Logger.add("mx=" + mx + " m1=" + m1 + " m2=" + m2 + " team: " + (pdata.team == Defines.TEAM_ALLY ? "ally" : "enemy") + " " + pdata.originalText);
     }
+    wot.utils.Logger.add("4");
 
     // 1
     if (k1 == 0 && k2 == 0) k1 = k2 = 1;
