@@ -79,7 +79,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
   {
     // Chances
     //wot.utils.Logger.add(Stat.s_player_names.length.toString());
-    if (Stat.s_loaded && Config.s_config.battleLoading.showChances && Stat.s_player_names.length == 30)
+    if (Stat.s_loaded && Config.s_config.statisticForm.showChances && Stat.s_player_names.length == 30)
     {
       if (!s_chancesField)
         ShowChances();
@@ -136,7 +136,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
         m_clanIcon.clanIcon.source = pinfo.icon;
     }
   }
-  
+
   function ShowChances()
   {
     var chances = Stat.GetChances();
@@ -144,7 +144,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     var color = GraphicsUtil.brightenColor(
       Number(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, chances.m_raw, "0x")), 50);
     s_chancesField.html = true;
-    s_chancesField.htmlText = s_chancesField.text + 
+    s_chancesField.htmlText = s_chancesField.text +
       " <font color='#" + color.toString(16) + "'>" +
       "(Chances: m = " + chances.m + ", k = " + chances.k + ")</font>";
     s_chancesText = s_chancesField.htmlText;
