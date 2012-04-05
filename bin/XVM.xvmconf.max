@@ -17,19 +17,19 @@
   },
   "battleLoading": {
     "showChances": true,
-    "clanIcon": { "show": true, "x": 60, "y": 6, "h": 16, "w": 16, "alpha": 100 },
+    "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 80 },
     "formatLeft": "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
     "formatRight": "<font face='Consolas' size='11'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>"
   },
   "statisticForm": {
     "showChances": true,
-    "clanIcon": { "show": true, "x": 60, "y": 6, "h": 16, "w": 16, "alpha": 100 },
+    "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 80 },
     "formatLeft": "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
     "formatRight": "<font face='Consolas' size='11'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>"
   },
   "playersPanel": {
     "alpha": 50,
-    "clanIcon": { "show": true, "x": 60, "y": 6, "h": 16, "w": 16, "alpha": 100 },
+    "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 80 },
     "medium": {
       "formatLeft": "<font color='{{c:eff}}'>{{nick}}</font>",
       "formatRight": "<font color='{{c:eff}}'>{{nick}}</font>"
@@ -154,6 +154,10 @@
     ]
   },
   "iconset": {
+//    "battleLoading": "../../../icons/_Say_",
+//    "statisticForm": "../../../icons/_Say_",
+//    "playersPanel":  "../../../icons/_Say_",
+//    "vehicleMarker": "../../../icons/_Say_"
     "battleLoading": "../../../HARDicons",
     "statisticForm": "../../../HARDicons",
     "playersPanel":  "../../../HARDicons",
