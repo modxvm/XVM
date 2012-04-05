@@ -5,10 +5,8 @@
 
 import wot.utils.Config;
 import wot.utils.Defines;
-import wot.utils.GraphicsUtil;
 import wot.utils.PlayerInfo;
 import wot.utils.Stat;
-import wot.utils.VehicleInfo;
 
 class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
 {
@@ -82,7 +80,10 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     if (Stat.s_loaded && Config.s_config.statisticForm.showChances && Stat.s_player_names.length == 30)
     {
       if (!s_chancesField)
-        ShowChances();
+      {
+        s_chancesField = _root.statsDialog.battleText;
+        s_chancesText = Stat.ShowChances(s_chancesField);
+      }
       if (s_chancesField.htmlText != s_chancesText)
       {
         //wot.utils.Logger.add(s_chancesField.htmlText);
@@ -94,7 +95,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     if (data)
     {
       if (Config.s_config.rating.showPlayersStatistics && !Stat.s_player_data[data.label.toUpperCase()])
-        Stat.AddPlayerData(this, 1, data.label, data.vehicle, VehicleInfo.getInfo(data.icon), team);
+        Stat.AddPlayerData(this, 1, data.label, data.vehicle, data.icon, team);
 
       // Alternative icon set
       data.icon = data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.statisticForm);
@@ -131,18 +132,5 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
       if (pinfo.icon != m_clanIcon.clanIcon.source)
         m_clanIcon.clanIcon.source = pinfo.icon;
     }
-  }
-
-  function ShowChances()
-  {
-    var chances = Stat.GetChances();
-    s_chancesField = _root.statsDialog.battleText;
-    var color = GraphicsUtil.brightenColor(
-      Number(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, chances.m_raw, "0x")), 50);
-    s_chancesField.html = true;
-    s_chancesField.htmlText = s_chancesField.text +
-      " <font color='#" + color.toString(16) + "'>" +
-      "(Chances: m = " + chances.m + ", k = " + chances.k + ")</font>";
-    s_chancesText = s_chancesField.htmlText;
   }
 }

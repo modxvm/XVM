@@ -7,7 +7,6 @@ import com.greensock.TimelineLite;
 import com.greensock.TweenLite;
 import wot.utils.Config;
 import wot.utils.Defines;
-import wot.utils.GraphicsUtil;
 import wot.utils.Stat;
 import wot.utils.Utils;
 
@@ -114,7 +113,10 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
     if (Stat.s_loaded && Config.s_config.battleLoading.showChances)
     {
       if (!s_chancesField)
-        ShowChances();
+      {
+        s_chancesField = form_mc.battleText;
+        s_chancesText = Stat.ShowChances(s_chancesField);
+      }
       if (s_chancesField.htmlText != s_chancesText)
       {
         //wot.utils.Logger.add(s_chancesField.htmlText);
@@ -122,19 +124,5 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
         s_chancesField.htmlText = s_chancesText;
       }
     }
-  }
-
-  function ShowChances()
-  {
-    var chances = Stat.GetChances();
-    s_chancesField = form_mc.battleText;
-    var color = GraphicsUtil.brightenColor(
-      Number(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, chances.m_raw, "0x")), 50);
-    //wot.utils.Logger.add(color.toString(16) + " " + Number(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, chances.m_raw, "0x")));
-    s_chancesField.html = true;
-    s_chancesField.htmlText = s_chancesField.text +
-      " <font color='#" + color.toString(16) + "'>" +
-      "(Chances: m = " + chances.m + ", k = " + chances.k + ")</font>";
-    s_chancesText = s_chancesField.htmlText;
   }
 }

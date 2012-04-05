@@ -7,7 +7,6 @@ import wot.utils.Defines;
 import wot.utils.Logger;
 import wot.utils.Stat;
 import wot.utils.PlayerInfo;
-import wot.utils.VehicleInfo;
 import wot.utils.Utils;
 
 class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRenderer
@@ -76,11 +75,11 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
           _logShown = true;
           Logger.add("[BattleLoading] Show Players Statistics = true"); // Just to check config is loaded correctly
         }
-        Stat.AddPlayerData(this, data.id, data.label, data.vehicle, VehicleInfo.getInfo(data.icon), team);
+        Stat.AddPlayerData(this, data.id, data.label, data.vehicle, data.icon, team);
         if (Stat.s_player_ids.length === 30)
           Stat.StartLoadData();
       }
-    
+
       // Alternative icon set
       data.icon = data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.battleLoading);
 
@@ -100,7 +99,7 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
 
     if (Config.s_config.battleLoading.removeSquadIcon && squad)
       squad._visible = false;
-    
+
     super.setData(data);
   }
 

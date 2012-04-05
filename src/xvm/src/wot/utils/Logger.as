@@ -9,6 +9,8 @@ class wot.utils.Logger
 {
   public static var counter: Number = 0;
 
+  public static function dummy() { };
+  
   public static function add(str: String)
   {
     var a: Array = ("[" + Utils.padLeft(String(counter++), 3, '0') + "] " + str).split("");

@@ -9,7 +9,9 @@ import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.GraphicsUtil;
 import wot.utils.JSON;
+import wot.utils.Logger;
 import wot.utils.Utils;
+import wot.utils.VehicleInfo;
 
 class wot.utils.Stat
 {
@@ -35,6 +37,7 @@ class wot.utils.Stat
     new TweenLite(null, 1), new TweenLite(null, 3) ],
     onComplete:Stat.retrieveStatsIngame, onCompleteParams:[],
     paused: true});
+
   public static function FormatText(data, format: String, isDead: Boolean)
   {
     var sWins: String = "";
@@ -149,7 +152,7 @@ class wot.utils.Stat
       }
       catch (FormatException)
       {
-        //wot.utils.Logger.add(data.uid + " is not a uid!");
+        //Logger.add(data.uid + " is not a uid!");
       }
     }
     else
@@ -179,7 +182,7 @@ class wot.utils.Stat
     if (!retrieving && ! retrieved)
     {
       // retrieve stats
-      //wot.utils.Logger.add("Retrieve stats");
+      //Logger.add("Retrieve stats");
       retrieving = true;
 
       // check if retrieving stats from server finished
@@ -188,7 +191,7 @@ class wot.utils.Stat
       {
         try
         {
-          //wot.utils.Logger.add("check: "+check)
+          //Logger.add("check: "+check)
           if (check == "FINISHED")
           {
             Stat.retrieving = true;
@@ -208,11 +211,11 @@ class wot.utils.Stat
                 var p_name = Utils.GetUpperPlayerName(p_stat.name);
                 if (Stat.s_player_ratings[p_name])
                 {
-                  //wot.utils.Logger.add(p_name + " already in ratings");
+                  //Logger.add(p_name + " already in ratings");
                   continue;
                 }
                 _is_str_new = true;
-                //wot.utils.Logger.addObject(p_stat, "Adding to "+p_name+" :");
+                //Logger.addObject(p_stat, "Adding to "+p_name+" :");
                 p_stat.rating = p_stat.battles > 0 ? Math.round(p_stat.wins / p_stat.battles * 100) : 0;
                 Stat.s_player_ratings[p_name] = p_stat;
                 Stat.s_player_data[p_name].loaded = true;
@@ -221,7 +224,7 @@ class wot.utils.Stat
               // If there's no new data submitted, try with @GET_LAST_STAT (FIXME)
               if (!_is_str_new)
               {
-                //wot.utils.Logger.add("Nothing new");
+                //Logger.add("Nothing new");
                 var lv_ret_new:LoadVars = new LoadVars();
                 lv_ret_new.onData = function(str_new)
                 {
@@ -234,10 +237,10 @@ class wot.utils.Stat
                     var p_name_new = Utils.GetUpperPlayerName(p_stat_new.name);
                     if (Stat.s_player_ratings[p_name_new])
                     {
-                      //wot.utils.Logger.add(p_name_new + " already in ratings");
+                      //Logger.add(p_name_new + " already in ratings");
                       continue;
                     }
-                    //wot.utils.Logger.addObject(p_stat_new, "Adding to "+p_name_new+" :");
+                    //Logger.addObject(p_stat_new, "Adding to "+p_name_new+" :");
                     p_stat_new.rating = p_stat_new.battles > 0 ? Math.round(p_stat_new.wins / p_stat_new.battles * 100) : 0;
                     Stat.s_player_ratings[p_name_new] = p_stat_new;
                     Stat.s_player_data[p_name_new].loaded = true;
@@ -268,13 +271,13 @@ class wot.utils.Stat
   }
 
   public static function AddPlayerData(reference: Object, playerId: Number, playerName: String,
-    originalText: String, vehicleInfo: Object, team: Number)
+    originalText: String, icon: String, team: Number)
   {
     if (playerId <= 0 || !playerName)
       return;
 
     var pname = Utils.GetUpperPlayerName(playerName);
-    //wot.utils.Logger.add("AddPlayerData(" + playerName + "): " + pname + " level=" + level);
+    //Logger.add("AddPlayerData(" + playerName + "): " + pname + " level=" + level);
     if (!s_player_data[pname])
     {
       s_player_ids.push(playerId);
@@ -284,7 +287,7 @@ class wot.utils.Stat
         playerId: playerId,
         name: pname,
         originalText: originalText,
-        vehicleInfo: vehicleInfo,
+        icon: icon,
         team: team,
         loaded: false
       };
@@ -293,7 +296,7 @@ class wot.utils.Stat
 
   public static function StartLoadData()
   {
-    //wot.utils.Logger.add("Stat.StartLoadData(): "+ s_loadDataStarted);
+    //Logger.add("Stat.StartLoadData(): "+ s_loadDataStarted);
     if (s_loadDataStarted)
       return;
     s_loadDataStarted = true;
@@ -303,7 +306,7 @@ class wot.utils.Stat
   private static var _s_isNew = true;
   private static function LoadData()
   {
-    //wot.utils.Logger.add("Stat.LoadData()");
+    //Logger.add("Stat.LoadData()");
 
     var is_new = _s_isNew;
     _s_isNew = false;
@@ -351,7 +354,7 @@ class wot.utils.Stat
     {
       try
       {
-        //wot.utils.Logger.add("lv: "+str);
+        //Logger.add("lv: "+str);
         if (!str || str == undefined)
           return;
         var stats = JSON.parse(str);
@@ -403,7 +406,7 @@ class wot.utils.Stat
 
   private static function UpdateAll()
   {
-    //wot.utils.Logger.add("Stat.UpdateAll()");
+    //Logger.add("Stat.UpdateAll()");
 
     for (var pname in s_player_data)
     {
@@ -418,6 +421,8 @@ class wot.utils.Stat
   // Result: { win1, win2, draw }
   public static function GetChances(): Object
   {
+    Logger.dummy();
+
     var nally = 0;
     var nenemy = 0;
     for (var i in s_player_names)
@@ -426,19 +431,16 @@ class wot.utils.Stat
       var pdata = s_player_data[pname];
       if (pdata.team == Defines.TEAM_ALLY) ++nally else ++nenemy;
     }
-    //wot.utils.Logger.add("1");
 
     // only equal and non empty team supported
     if (nally != nenemy || nally == 0)
       return null;
-    //wot.utils.Logger.add("2");
 
     if (!s_player_ratings)
       return null;
-    //wot.utils.Logger.add("3");
 
     var tier = guessBattleTier();
-    //wot.utils.Logger.add("tier: " + tier);
+    //Logger.add("tier: " + tier);
 
     // Calculate average efficiency.
     var ae1 = AvgStat("eff", Defines.TEAM_ALLY);
@@ -449,7 +451,7 @@ class wot.utils.Stat
 
     var ab1 = AvgStat("battles", Defines.TEAM_ALLY);
     var ab2 = AvgStat("battles", Defines.TEAM_ENEMY);
-    //wot.utils.Logger.add(ae1 + " " + ae2 + " - " + ar1 + " " + ar2 + " - " + ab1 + " " + ab2);
+    //Logger.add(ae1 + " " + ae2 + " - " + ar1 + " " + ar2 + " - " + ab1 + " " + ab2);
 
     var k1 = 0;
     var k2 = 0;
@@ -459,35 +461,40 @@ class wot.utils.Stat
     {
       var pname = s_player_names[i];
       var pdata = s_player_data[pname];
+
+      var vi = VehicleInfo.getInfo(pdata.icon);
+
+      if (!vi || vi.level == 0)
+        return { error: "No data for: " + VehicleInfo.getName(pdata.icon) };
+
       var eff: Number = s_player_ratings[pname].eff || ((pdata.team == Defines.TEAM_ALLY) ? ae1 : ae2);
       var gwr: Number = (s_player_ratings[pname].rating || ((pdata.team == Defines.TEAM_ALLY) ? ar1 : ar2)) / 100.0;
       var bat: Number = (s_player_ratings[pname].battles || ((pdata.team == Defines.TEAM_ALLY) ? ab1 : ab2)) / 100000.0;
-      //wot.utils.Logger.addObject(s_player_ratings[pname], "s_player_ratings[" + pname + "]");
+      //Logger.addObject(s_player_ratings[pname], "s_player_ratings[" + pname + "]");
 
       // 1
-      var kx = eff * pdata.vehicleInfo.level;
+      var kx = eff * vi.level;
       if (pdata.team == Defines.TEAM_ALLY) k1 += kx; else k2 += kx;
         
       // 2
-      var tx = (pdata.vehicleInfo.tier1 + pdata.vehicleInfo.tier2) / 2.0 - tier;
-      var mx = eff * (1 + gwr - 0.48) * (1 + bat) * (1 - 0.25 * tx);
+      var tx = (vi.tier1 + vi.tier2) / 2.0 - tier;
+      var mx = eff * (1 + gwr - 0.48) * (1 + bat) * (1 + 0.25 * tx);
       if (pdata.team == Defines.TEAM_ALLY) m1 += mx else m2 += mx;
-      //wot.utils.Logger.add("tx=" + tx + " " + int(eff) + " " + int(gwr) + " " + int(bat));
-      //wot.utils.Logger.add("mx=" + mx + " m1=" + m1 + " m2=" + m2 + " team: " + (pdata.team == Defines.TEAM_ALLY ? "ally" : "enemy") + " " + pdata.originalText);
+      //Logger.add("mx=" + mx + " tx=" + tx + " eff=" + int(eff) + " gwr=" + int(gwr) + " kb=" + int(bat));
+      //Logger.add("m1=" + m1 + " m2=" + m2 + " team: " + (pdata.team == Defines.TEAM_ALLY ? "ally" : "enemy") + " " + pdata.originalText);
     }
-    //wot.utils.Logger.add("4");
 
     // 1
-    if (!k1 && !k2) k1 = k2 = 1;
-    if (!k1) k1 = k2;
-    if (!k2) k2 = k1;
-    //wot.utils.Logger.add("k1=" + k1 + " k2=" + k2);
+    if (k1 == 0 && k2 == 0) k1 = k2 = 1;
+    if (k1 == 0) k1 = k2;
+    if (k2 == 0) k2 = k1;
+    //Logger.add("k1=" + Math.round(k1) + " k2=" + Math.round(k2));
 
     // 2
-    if (!m1 && !m2) m1 = m2 = 1;
-    if (!m1) m1 = m2;
-    if (!m2) m2 = m1;
-    //wot.utils.Logger.add("m1=" + m1 + " m2=" + m2);
+    if (m1 == 0 && m2 == 0) m1 = m2 = 1;
+    if (m1 == 0) m1 = m2;
+    if (m2 == 0) m2 = m1;
+    //Logger.add("m1=" + Math.round(m1) + " m2=" + Math.round(m2));
 
     return
     {
@@ -535,26 +542,67 @@ class wot.utils.Stat
 
   private static function guessBattleTier(): Number
   {
-    var tierLo = 1;
-    var tierHi = 13;
-    for (var i in s_player_names)
+    var vis = [];
+    for (var i = 0; i < s_player_names.length; ++i)
     {
-      var pname = s_player_names[i];
-      var pdata = s_player_data[pname];
+      var pdata = s_player_data[s_player_names[i]];
+      var vi = VehicleInfo.getInfo(pdata.icon);
+      if (!vi || vi == 0)
+        return 0;
+      vis.push(vi);
+    }
 
-      if (pdata.vehicleInfo.level == 0)
+    // 1. Find top tank tiers
+    var tierMin = 1;
+    var tierMax = 1;
+    for (var i = 0; i < vis.length; ++i)
+    {
+      var vi = vis[i];
+      if (vi.tier2 < tierMax)
         continue;
+      if (vi.tier2 > tierMax)
+      {
+        tierMax = vi.tier2;
+        tierMin = vi.tier1;
+        continue;
+      }
+      if (vi.tier1 > tierMin)
+        tierMin = vi.tier1;
+    }
+    //Logger.add("tiers=" + tierMin + ".." + tierMax);
 
-      tierLo = Math.max(pdata.vehicleInfo.tier1, tierLo);
-      var tiertmp = Math.min(pdata.vehicleInfo.tier2, tierHi);
-      if (tiertmp >= tierLo)
-        tierHi = tiertmp;
-      //wot.utils.Logger.add("tiers: " + tierLo + ".." + tierHi + " " + pdata.originalText);
-      if (tierLo == tierHi)
-        return tierLo;
+    for (var i = 0; i < vis.length; ++i)
+    {
+      var vi = vis[i];
+      if (vi.tier2 < tierMin)
+        continue;
+      if (vi.tier2 == tierMin)
+        return tierMin;
+      tierMax = Math.min(vi.tier2, tierMax);
+      //Logger.add("tiers=" + tierMin + ".." + tierMax);
     };
     
-    //wot.utils.Logger.add("avg tier: " + (tierHi + tierLo ) / 2.0);
-    return (tierHi + tierLo ) / 2.0;
+    //Logger.add("avg tier: " + (tierMax + tierMin) / 2.0);
+    return (tierMax + tierMin) / 2.0;
+  }
+  
+  public static function ShowChances(tf: TextField): String
+  {
+    var chances = Stat.GetChances();
+    if (chances != null)
+    {
+      tf.html = true;
+      if (chances.error)
+        tf.htmlText = tf.text + " <font color='#FF8080'>(Chances error: " + chances.error + ")</font>";
+      else
+      {
+        var color = GraphicsUtil.brightenColor(
+          Number(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, chances.m_raw, "0x")), 50);
+        tf.htmlText = tf.text +
+          " <font color='#" + color.toString(16) + "'>" +
+          "(Chances: m = " + chances.m + ", k = " + chances.k + ")</font>";
+      }
+    }
+    return tf.htmlText;
   }
 }

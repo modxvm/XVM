@@ -7,7 +7,7 @@ import wot.utils.Utils;
 class wot.utils.VehicleInfo
 {
   // icon = ../maps/icons/vehicle/contour/usa-M24_Chaffee.tga
-  public static function getInfo(str: String): Object
+  public static function getName(str: String): String
   {
     // str is icon path?
     if (Utils.endsWith(".tga", str))
@@ -18,8 +18,13 @@ class wot.utils.VehicleInfo
       str = str.split("-").join("_");
       str = Utils.trim(str);
     }
+    
+    return str;
+  }
 
-    return _data[str] || null;
+  public static function getInfo(str: String): Object
+  {
+    return _data[getName(str)] || null;
   }
 
   // PRIVATE
@@ -94,7 +99,7 @@ class wot.utils.VehicleInfo
     PzVI_Tiger_P:		{ level: 7,  type: HT, tier1: 8,  tier2: 12 },
     PzVIB_Tiger_II:		{ level: 8,  type: HT, tier1: 9,  tier2: 12 },
     S35_captured:		{ level: 3,  type: MT, tier1: 3,  tier2: 6 },
-    StugIII:			{ level: 5,  type: TD, tier1: 6,  tier2: 9 },
+    StuGIII:			{ level: 5,  type: TD, tier1: 6,  tier2: 9 },
     Sturmpanzer_II:		{ level: 3,  type: SP, tier1: 4,  tier2: 8 },
     T_15:			{ level: 3,  type: LT, tier1: 3,  tier2: 6 },
     T_25:			{ level: 5,  type: MT, tier1: 6,  tier2: 9 },
