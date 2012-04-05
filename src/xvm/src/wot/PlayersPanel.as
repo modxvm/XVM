@@ -204,8 +204,8 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         namesWidthDefault = 296;
         namesWidth = Math.max(XVMGetMaximumFieldWidth(m_names), Config.s_config.playersPanel.large.width);
         vehiclesWidth = XVMGetMaximumFieldWidth(m_vehicles);
-        widthDelta = namesWidthDefault - namesWidth + vehiclesWidthDefault - vehiclesWidth;
-        squadSize = SQUAD_SIZE;
+        squadSize = Config.s_config.playersPanel.removeSquadIcon ? 0 : SQUAD_SIZE;
+        widthDelta = namesWidthDefault - namesWidth + vehiclesWidthDefault - vehiclesWidth - squadSize + SQUAD_SIZE;
         break;
       default:
         m_list._x = players_bg._x = (m_type == "left") ? STATES[m_state].bg_x : players_bg._width - STATES[m_state].bg_x;
@@ -217,6 +217,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 
     if (m_type == "left")
     {
+      m_names._x = squadSize;
       m_frags._x = m_names._x + m_names._width;
       m_vehicles._x = m_frags._x + m_frags._width;
       m_list._x = players_bg._x = STATES[m_state].bg_x - widthDelta;
