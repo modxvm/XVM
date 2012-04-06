@@ -1,3 +1,6 @@
+XVM-2.1.test6:
+  * optimization of macros with dynamic values
+
 XVM-2.1.test5:
   * fixes in win chances
 
