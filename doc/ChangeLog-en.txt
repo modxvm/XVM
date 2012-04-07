@@ -1,6 +1,7 @@
 XVM-2.1.test6:
   * optimization of macros with dynamic values
   * fixed health bar z-order
+  * optimization of player/clan icon
 
 XVM-2.1.test5:
   * fixes in win chances

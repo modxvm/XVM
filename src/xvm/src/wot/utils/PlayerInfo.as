@@ -7,20 +7,33 @@ import wot.utils.Defines;
 
 class wot.utils.PlayerInfo extends MovieClip
 {
+  private static var s_playersInfoCache = { };
+
   public static function getPlayerInfo(nick: String, clan: String)
   {
     if (!Config.s_loaded)
       return null;
 
+    if (s_playersInfoCache.hasOwnProperty(nick))
+      return s_playersInfoCache[nick];
+
+    var result = null;
     for (var i = 0; i < Config.s_config.players.length; ++i)
     {
       var pinfo = Config.s_config.players[i];
       if (nick && pinfo.nick && nick == pinfo.nick)
-        return pinfo;
+      {
+        result = pinfo;
+        break;
+      }
       if (clan && pinfo.clan && clan.indexOf(pinfo.clan, 0) != -1)
-        return pinfo;
+      {
+        result = pinfo;
+        break;
+      }
     }
-    return null;
+    s_playersInfoCache[nick] = result;
+    return result;
   }
   
   public static function createClanIcon(owner: MovieClip, name: String, source: String, cfg, dx, dy, team): MovieClip
