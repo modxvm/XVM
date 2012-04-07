@@ -64,12 +64,13 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
     Config.LoadConfigAndStatLegacy("XVM.xvmconf", "XVM.as");
 
-    damageHolder = createEmptyMovieClip("damageHolder", getNextHighestDepth());
-    xvmHB = createEmptyMovieClip("xvmHB", getNextHighestDepth());
-    xvmHBBorder = xvmHB.createEmptyMovieClip("border", xvmHB.getNextHighestDepth());
-    xvmHBFill = xvmHB.createEmptyMovieClip("fill", xvmHB.getNextHighestDepth());
-    xvmHBDamage = xvmHB.createEmptyMovieClip("damage", xvmHB.getNextHighestDepth());
+    xvmHB = createEmptyMovieClip("xvmHB", marker.getDepth() - 1); // Put health Bar to back.
+    xvmHBBorder = xvmHB.createEmptyMovieClip("border", 1);
+    xvmHBDamage = xvmHB.createEmptyMovieClip("damage", 2);
+    xvmHBFill = xvmHB.createEmptyMovieClip("fill", 3);
 
+    damageHolder = createEmptyMovieClip("damageHolder", getNextHighestDepth());
+    
     // Remove standard fields
     pNameField._visible = false;
     pNameField.removeTextField();
