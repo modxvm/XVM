@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="100%">
+	<fx:Script>
+		import flash.events.Event;
+		import events.XVMValueEvent;
+
+		protected function onChange(event: Event):void
+		{
+			dispatchEvent(new events.XVMValueEvent(Const.GroupComponent));
+			//	valueChanged_p(event.target as UIComponent);
+		}
+	</fx:Script>
+	<fx:Metadata>
+		[Event(name="xvmvalue", type="events.XVMValueEvent")]
+	</fx:Metadata>
+</s:Panel>

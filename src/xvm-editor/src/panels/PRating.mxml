@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<c:PanelComponent
+	xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:s="library://ns.adobe.com/flex/spark"
+	xmlns:mx="library://ns.adobe.com/flex/mx"
+	xmlns:c="components.*"
+	width="100%" height="80" title="Статистика игроков во время боя">
+	<mx:Image right="5" y="-18" width="16" height="16" source="@Embed(source='cancel.png')" toolTip="Вернуть настройки по умолчанию" useHandCursor="true" buttonMode="true"/>
+	<s:VGroup left="10" right="10" top="10" bottom="10" gap="2" variableRowHeight="true">
+		<s:CheckBox label="Включить статистику игроков" selected="false" id="c_rating_showPlayersStatistics" change="onChange(event)"/>
+		<s:CheckBox label="Включить загрузку данных по противникам в тумане войны" selected="false" id="c_rating_loadEnemyStatsInFogOfWar" change="onChange(event)"/>
+	</s:VGroup>
+</c:PanelComponent>

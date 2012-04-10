@@ -4,6 +4,11 @@ Top:
 размытия иконок на экране загрузки
 Sometimes enemy vehicle contour icon is showing default WoT icon instead of my modded one.
 
+Is there any chance to get {{hp-max}}, {{eff}}, {{nick}}, {{vehicle}} in playerspanel?
+I think its not impossible. If you fix positions of info above the tanks to playerspanel
+position, that should work. Of course, non-spoted enemy tanks would be without stats untill
+you spot them.
+
 VMM.swf:
 
   Сделать так, чтобы мод понимал команды стандартного настройщика (ВГ). Т.е. Если убрать
@@ -49,6 +54,12 @@ Common:
   - отключение имени танка в BL и SF.
   - отображение знака классности
   - иконки игроков в зависимости от статы
+
+  Если %побед у союзника меньше, чем у игрока, то:
+    - его щелканье на миникарте и нажатие F5,F6,F8,F9,F10,F11,F12 игнорировались. F7-Нужна помощь пусть будет.
+    - сообщения в чате либо игнорировать либо чёрным либо прозрачным.
+    Если %побед>50 то оставить оригинальным.
+    Если %побед больше чем у игрока, то писать в чате с обрамлением !!!...!!! ярко белым жирно.
 
 Delayed:
   - отмечать вражеские взводы в маркерах (невозможно достучаться из маркера до
