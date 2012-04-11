@@ -9,6 +9,6 @@
 	<s:VGroup left="10" right="10" top="10" bottom="10" gap="2" variableRowHeight="true">
 		<c:LabeledNumberSelector label="Прозрачность панелей" id="v_alpha" minimum="0" maximum="100" change="onChange(event)"/>
 		<c:LabeledNumberSelector label="Прозрачность иконок" id="v_iconAlpha" minimum="0" maximum="100" change="onChange(event)"/>
-      	<s:CheckBox label="Отключить отображение иконок взводов" selected="false" id="v_removeSquadIcon" change="onChange(event)"/>
+		<c:LabeledCheckBox label="Отключить отображение иконок взводов" id="v_removeSquadIcon" change="onChange(event)"/>
 	</s:VGroup>
 </c:PanelComponent>

@@ -10,6 +10,6 @@
 		<c:LabeledFontSelector label="Название шрифта" id="v_name"/>
 		<c:LabeledNumberSelector label="Размер" id="v_size" minimum="0" maximum="50" change="onChange(event)"/>
 		<c:LabeledAlignSelector label="Выравнивание" width="250" id="v_align"/>
-		<s:CheckBox label="Жирный" selected="false" id="v_bold" change="onChange(event)"/>
+		<c:LabeledCheckBox label="Жирный" id="v_bold" change="onChange(event)"/>
 	</s:VGroup>
 </c:PanelComponent>

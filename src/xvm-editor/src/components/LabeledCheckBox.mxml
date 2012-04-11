@@ -4,20 +4,19 @@
 	    xmlns:mx="library://ns.adobe.com/flex/mx"
 		xmlns:c="components.*"
 		width="100%"
-		height="22"
+		height="20"
 		borderVisible="false">
 	<fx:Script>
 		// value
 		[Bindable]
 		public override function get value():*
 		{
-			return edit.value;
+			return edit.selected;
 		}
 		public override function set value(value:*): void
 		{
-			edit.value = value;
+			edit.selected = value;
 		}
 	</fx:Script>
-	<s:Label x="0" text="{label}" width="{labelWidth}" height="{height}" verticalAlign="middle"/>
-	<c:ColorSelector left="{labelWidth}" right="10" height="{height}" id="edit"/>
+	<s:CheckBox left="0" right="0" label="{label}" width="{width}" change="onChange(event)" id="edit"/>
 </c:LabeledComponent>

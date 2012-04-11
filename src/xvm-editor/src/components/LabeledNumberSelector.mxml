@@ -1,49 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
+<c:LabeledComponent xmlns:fx="http://ns.adobe.com/mxml/2009"
 	    xmlns:s="library://ns.adobe.com/flex/spark"
 	    xmlns:mx="library://ns.adobe.com/flex/mx"
+		xmlns:c="components.*"
 		width="100%"
 		height="20"
 		borderVisible="false">
 	<fx:Script>
-		// label
-		protected var _label: String = "";
-
-		[Bindable]
-		public function get label(): String
-		{
-			return _label;
-		}
-		public function set label(v: String): void
-		{
-			_label = v;
-		}
-
-		// labelWidth
-		protected var _labelWidth: String = "140";
-
-		[Bindable]
-		public function get labelWidth(): String
-		{
-			return _labelWidth;
-		}
-		public function set labelWidth(v: String): void
-		{
-			_labelWidth = v;
-		}
-
 		// value
 		[Bindable]
-		public function get value(): Number
+		public override function get value():*
 		{
 			return edit.value;
 		}
-		public function set value(v: Number): void
+		public override function set value(v:*): void
 		{
 			edit.value = v;
 			stepper.value = v;
 		}
-		
+
 		// minimum
 		protected var _minimum: Number = 0;
 
@@ -58,7 +33,7 @@
 			//stepper.minimum = v;
 			_minimum = v;
 		}
-		
+
 		// maximum
 		protected var _maximum: Number = 10;
 
@@ -73,7 +48,7 @@
 			//stepper.maximum = v;
 			_maximum = v;
 		}
-		
+
 		// sliderVisible
 		protected var _sliderVisible: Boolean = true;
 
@@ -86,14 +61,14 @@
 		{
 			_sliderVisible = v;
 		}
-		
-		protected function onChange(event:Event):void
+
+		protected override function onChange(event:Event):void
 		{
 			if (event.target == stepper)
 				edit.value = stepper.value;
 			else
 				stepper.value = edit.value;
-			
+
 			dispatchEvent(new Event(Event.CHANGE));
 		}
 	</fx:Script>
@@ -103,4 +78,4 @@
 	<s:Label x="0" text="{label}" width="{labelWidth}" height="{height}" verticalAlign="middle"/>
 	<s:NumericStepper left="{labelWidth}" width="52" height="{height}" minimum="{minimum}" maximum="{maximum}" id="stepper" change="onChange(event)"/>
 	<s:HSlider left="{stepper.x + stepper.width + 10}" right="0" y="4" minimum="{minimum}" maximum="{maximum}" visible="{sliderVisible}" id="edit" change="onChange(event)"/>
-</s:BorderContainer>
+</c:LabeledComponent>

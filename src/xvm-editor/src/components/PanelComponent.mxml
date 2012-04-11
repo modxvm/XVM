@@ -4,18 +4,19 @@
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
 		 width="100%">
 	<fx:Script>
+		import events.ValueChangedEvent;
+		
 		import flash.events.Event;
-		import events.XVMValueEvent;
-
-		import utils.Defines;
 
 		protected function onChange(event: Event):void
 		{
-			dispatchEvent(new events.XVMValueEvent(Defines.PanelComponent));
-			//	valueChanged_p(event.target as UIComponent);
+			var target:LabeledComponent = event.target as LabeledComponent;
+			if (!target)
+				return;
+			dispatchEvent(new events.ValueChangedEvent(target));
 		}
 	</fx:Script>
 	<fx:Metadata>
-		[Event(name="xvmvalue", type="events.XVMValueEvent")]
+		[Event(name="valueChanged", type="events.ValueChangedEvent")]
 	</fx:Metadata>
 </s:Panel>

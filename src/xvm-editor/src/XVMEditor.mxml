@@ -39,7 +39,7 @@
 			<s:Button label="Новый" click="onCreateNewConfigClick()"/>
 			<s:Button label="Открыть" click="onLoadConfigClick()"/>
 			<s:Button label="Сохранить" click="onSaveConfigClick()"/>
-			<mx:PopUpMenuButton label="Дополнительно"/>
+			<mx:PopUpMenuButton label="Дополнительно" enabled="false" toolTip="Еще не реализовано"/>
 		</s:HGroup>
 		<s:HGroup top="0" bottom="0" gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="4" horizontalAlign="right" width="147" right="0">
 			<s:Button label="En" width="40" enabled="false" toolTip="Not implemented yet"/>
@@ -51,9 +51,9 @@
 			<ns1:FlashComponentPlaceholder y="0" width="500" height="400" x="419"/>
 			<s:Scroller x="0" y="0" width="420" height="100%">
 				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-					<p:PDefinition id="p_definition"/>
-					<p:PBattle id="p_battle"/>
-					<p:PRating id="p_rating"/>
+					<p:PDefinition id="p_definition" valueChanged="updateValue(event)"/>
+					<p:PBattle id="p_battle" valueChanged="updateValue(event)"/>
+					<p:PRating id="p_rating" valueChanged="updateValue(event)"/>
 				</s:VGroup>
 			</s:Scroller>
 		</s:NavigatorContent>
@@ -78,51 +78,51 @@
 						<s:NavigatorContent label="Класс танка">
 							<s:Scroller x="0" y="0" width="100%" height="100%">
 								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-									<m:MVehicleIcon id="m_vehicleIcon" xvmvalue="updateValue(event)"/>
+									<m:MVehicleIcon id="m_vehicleIcon" valueChanged="updateMarkerValue(event)"/>
 								</s:VGroup>
 							</s:Scroller>
 						</s:NavigatorContent>
 						<s:NavigatorContent id="hb" label="Уровень здоровья">
 							<s:Scroller x="0" y="0" width="100%" height="100%">
 								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-									<m:MHealthBar/>
+									<m:MHealthBar id="m_healthBar" valueChanged="updateMarkerValue(event)"/>
 								</s:VGroup>
 							</s:Scroller>
 						</s:NavigatorContent>
 						<s:NavigatorContent label="Наносимый урон">
 							<s:Scroller x="0" y="0" width="100%" height="100%">
 								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-									<m:MDamageText/>
-									<m:MFont/>
-									<m:MShadow/>
+									<m:MDamageText id="m_damageText" valueChanged="updateMarkerValue(event)"/>
+									<m:MFont id="m_damageText_font" valueChanged="updateMarkerValue(event)"/>
+									<m:MShadow id="m_damageText_shadow" valueChanged="updateMarkerValue(event)"/>
 								</s:VGroup>
 							</s:Scroller>
 						</s:NavigatorContent>
 						<s:NavigatorContent label="Иконка танка">
 							<s:Scroller x="0" y="0" width="100%" height="100%">
 								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-									<m:MContourIcon/>
+									<m:MContourIcon id="m_contourIcon" valueChanged="updateMarkerValue(event)"/>
 								</s:VGroup>
 							</s:Scroller>
 						</s:NavigatorContent>
 						<s:NavigatorContent label="Уровень танка">
 							<s:Scroller x="0" y="0" width="100%" height="100%">
 								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-									<m:MLevelIcon/>
+									<m:MLevelIcon id="m_levelIcon" valueChanged="updateMarkerValue(event)"/>
 								</s:VGroup>
 							</s:Scroller>
 						</s:NavigatorContent>
 						<s:NavigatorContent label="Маркер действия">
 							<s:Scroller x="0" y="0" width="100%" height="100%">
 								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-									<m:MActionMarker/>
+									<m:MActionMarker id="m_actionMarker" valueChanged="updateMarkerValue(event)"/>
 								</s:VGroup>
 							</s:Scroller>
 						</s:NavigatorContent>
 						<s:NavigatorContent label="Текстовые поля">
 							<s:Scroller x="0" y="0" width="100%" height="100%">
 								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-									<m:MTextFields/>
+									<m:MTextFields id="m_textFields" valueChanged="updateMarkerValue(event)"/>
 								</s:VGroup>
 							</s:Scroller>
 						</s:NavigatorContent>
@@ -134,9 +134,9 @@
 			<ns1:FlashComponentPlaceholder y="0" width="500" height="400" x="419"/>
 			<s:Scroller x="0" y="0" width="420" height="100%">
 				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-					<p:PBattleLoading id="p_battleLoading"/>
-					<p:PBattleLoadingIcons id="p_battleLoading_icons"/>
-					<p:PBattleLoadingText id="p_battleLoading_text"/>
+					<p:PBattleLoading id="p_battleLoading" valueChanged="updateValue(event)"/>
+					<p:PBattleLoadingIcons id="p_battleLoading_icons" valueChanged="updateValue(event)"/>
+					<p:PBattleLoadingText id="p_battleLoading_text" valueChanged="updateValue(event)"/>
 				</s:VGroup>
 			</s:Scroller>
 		</s:NavigatorContent>
@@ -144,9 +144,9 @@
 			<ns1:FlashComponentPlaceholder y="0" width="500" height="400" x="419"/>
 			<s:Scroller x="0" y="0" width="420" height="100%">
 				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-					<p:PStatisticForm id="p_statisticForm"/>
-					<p:PStatisticFormIcons id="p_statisticForm_icons"/>
-					<p:PStatisticFormText id="p_statisticForm_text"/>
+					<p:PStatisticForm id="p_statisticForm" valueChanged="updateValue(event)"/>
+					<p:PStatisticFormIcons id="p_statisticForm_icons" valueChanged="updateValue(event)"/>
+					<p:PStatisticFormText id="p_statisticForm_text" valueChanged="updateValue(event)"/>
 				</s:VGroup>
 			</s:Scroller>
 		</s:NavigatorContent>
@@ -154,11 +154,11 @@
 			<ns1:FlashComponentPlaceholder y="0" width="500" height="400" x="419"/>
 			<s:Scroller x="0" y="0" width="420" height="100%">
 				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-					<p:PPlayersPanel id="p_playersPanel"/>
-					<p:PPlayersPanelIcons id="p_playersPanel_icons"/>
-					<p:PPlayersPanelMedium id="p_playersPanel_medium"/>
-					<p:PPlayersPanelMedium2 id="p_playersPanel_medium2"/>
-					<p:PPlayersPanelLarge id="p_playersPanel_large"/>
+					<p:PPlayersPanel id="p_playersPanel" valueChanged="updateValue(event)"/>
+					<p:PPlayersPanelIcons id="p_playersPanel_icons" valueChanged="updateValue(event)"/>
+					<p:PPlayersPanelMedium id="p_playersPanel_medium" valueChanged="updateValue(event)"/>
+					<p:PPlayersPanelMedium2 id="p_playersPanel_medium2" valueChanged="updateValue(event)"/>
+					<p:PPlayersPanelLarge id="p_playersPanel_large" valueChanged="updateValue(event)"/>
 				</s:VGroup>
 			</s:Scroller>
 		</s:NavigatorContent>
@@ -298,7 +298,7 @@
 			<ns1:FlashComponentPlaceholder y="0" width="500" height="400" x="419"/>
 			<s:Scroller x="0" y="0" width="420" height="100%">
 				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-					<p:PIconSet id="p_iconSet"/>
+					<p:PIconSet id="p_iconSet" valueChanged="updateValue(event)"/>
 				</s:VGroup>
 			</s:Scroller>
 		</s:NavigatorContent>
