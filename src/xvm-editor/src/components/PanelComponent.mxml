@@ -7,9 +7,11 @@
 		import flash.events.Event;
 		import events.XVMValueEvent;
 
+		import utils.Defines;
+
 		protected function onChange(event: Event):void
 		{
-			dispatchEvent(new events.XVMValueEvent(Const.GroupComponent));
+			dispatchEvent(new events.XVMValueEvent(Defines.PanelComponent));
 			//	valueChanged_p(event.target as UIComponent);
 		}
 	</fx:Script>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<c:PanelComponent
+	xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:s="library://ns.adobe.com/flex/spark"
+	xmlns:mx="library://ns.adobe.com/flex/mx"
+	xmlns:c="components.*"
+	title="Тень" width="100%" height="175">
+	<mx:Image right="5" y="-18" width="16" height="16" source="@Embed(source='cancel.png')" toolTip="Вернуть настройки по умолчанию" useHandCursor="true" buttonMode="true"/>
+	<s:VGroup left="10" right="10" top="10" bottom="10" gap="2" variableRowHeight="true">
+		<c:LabeledNumberSelector label="Прозрачность" id="v_alpha" minimum="0" maximum="100" change="onChange(event)"/>
+		<c:LabeledColorSelector label="Цвет" width="250" id="v_color" change="onChange(event)"/>
+		<c:LabeledNumberSelector label="Угол" id="v_angle" minimum="0" maximum="359" change="onChange(event)"/>
+		<c:LabeledNumberSelector label="Интенсивность" id="v_strength" minimum="0" maximum="9999" sliderVisible="false" change="onChange(event)"/>
+		<c:LabeledNumberSelector label="Расстояние" id="v_distance" minimum="0" maximum="10" change="onChange(event)"/>
+		<c:LabeledNumberSelector label="Размер" id="v_size" minimum="0" maximum="10" change="onChange(event)"/>
+	</s:VGroup>
+</c:PanelComponent>

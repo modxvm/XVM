@@ -10,43 +10,6 @@ import utils.UIUtils;
 
 private var dp:Array;
 
-private function RefreshConfigData():void
-{
-	//d.text += "RefreshConfigData()\n";
-	try
-	{
-		d.text += ObjectUtil.toString(config) + "\n";
-
-		var section:Object;
-
-		section = config.definition || {};
-		this.c_definition_author.text = section.author;
-		this.c_definition_description.text = section.description;
-		this.c_definition_url.text = section.url;
-		this.c_definition_date.selectedDate = section.date;
-		this.c_definition_gameVersion.text = section.gameVersion;
-		this.c_definition_modVersion.text = section.modVersion;
-
-		section = config.battle || {};
-		this.c_battle_showPostmortemTips.selected = section.showPostmortemTips || true;
-		this.c_battle_drawGrid.selected = section.drawGrid || true;
-		this.c_battle_disableMirroredVehicleIcons.selected = section.disableMirroredVehicleIcons || false;
-
-		section = config.rating || {};
-		this.c_rating_showPlayersStatistics.selected = section.showPlayersStatistics || false;
-		this.c_rating_showAtBattleLoading.selected = section.showAtBattleLoading || true;
-		this.c_rating_showAtLargePlayersPanel.selected = section.showAtLargePlayersPanel || true;
-		this.c_rating_colorizeMiddlePlayersPanel.selected = section.colorizeMiddlePlayersPanel || true;
-		this.c_rating_showAtStatisticForm.selected = section.showAtStatisticForm || true;
-
-		RefreshMarkers();
-	}
-	catch (ex:Error)
-	{
-		d.text += "RefreshConfigData(): " + ex.toString() + "\n";
-	}
-}
-
 private var activeBehaviors:Array;
 private function PopulateValue(path:String):*
 {
@@ -70,36 +33,6 @@ private function PopulateValue(path:String):*
 		}
 		return ok ? value : undefined;
 	}
-}
-
-private function RefreshMarkers():void
-{
-	// FIXIT: remove after eneble marker editing
-	return;
-	
-	d.text += "RefreshMarkers()\n";
-	try
-	{
-		var activeElements:uint = gElements.getActiveElements();
-
-		dp = Mapping.filterData(activeElements);
-		adg.dataProvider = new HierarchicalData(dp);
-		adg.validateNow();
-		adg.expandAll();
-
-		activeBehaviors = getActiveBehaviors();
-
-		for each (var o1:Object in dp)
-		{
-			for each (var o2:Object in o1["children"])
-				o2["value"] = PopulateValue(o2["path"]);
-		}
-	}
-	catch (ex:Error)
-	{
-		d.text += "RefreshMarkers(): " + ex.toString() + "\n";
-	}
-	//d.text += ObjectUtil.toString(config) + "\n";
 }
 
 private function ChangeValue(xmlpaths:Array, value:*):void

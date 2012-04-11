@@ -53,7 +53,7 @@ class wot.utils.Config
     else
       ReloadXvmConfig();
   }
-  
+
   public static function ReloadLegacyConfig()
   {
     var start = new Date();
@@ -131,7 +131,7 @@ class wot.utils.Config
           try
           {
             var config = wot.utils.JSON.parse(str);
-            
+
             if (Config.DEBUG_TIMES)
             {
               var curr = Utils.elapsedMSec(start, new Date());
@@ -163,7 +163,7 @@ class wot.utils.Config
               txt = txt.split("  ").join(" ");
             if (_global.xvm_battleloading)
             {
-              _global.xvm_battleloading.setInfoFieldData( { error: "Error loading config file. Using default settings.\n" + 
+              _global.xvm_battleloading.setInfoFieldData( { error: "Error loading config file. Using default settings.\n" +
                 "[" + Utils.trim(ex.at) + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " + txt } );
             }
           }
@@ -194,7 +194,7 @@ class wot.utils.Config
 
     //if (prefix.indexOf("damageText.color") >= 0)
     //  Logger.add(prefix + " def=" + def + " config=" + config);
-      
+
     switch (typeof def)
     {
       case 'object':
@@ -257,7 +257,7 @@ class wot.utils.Config
     Config.s_config.iconset.statisticForm = Utils.fixPath(Config.s_config.iconset.statisticForm);
     Config.s_config.iconset.vehicleMarker = Utils.fixPath(Config.s_config.iconset.vehicleMarker);
   }
-  
+
   /**
    * Convert config to new format.
    */
@@ -313,7 +313,7 @@ class wot.utils.Config
       config.playersPanel = { };
       config.playersPanel.medium = { };
       config.playersPanel.large = { };
-      
+
       if (config.battle)
       {
         config.battleLoading.showClock = Utils.toBool(config.battle.battleLoadingShowClock, true);
@@ -350,13 +350,15 @@ class wot.utils.Config
 
       v = "1.2.0";
     }
-    
+
 /*
     if (v == "1.x.x")
     {
       // Convert XVM 1.x.x => 1.y.y
     }
 */
+
+    config.configVersion = v;
     return config;
   }
 

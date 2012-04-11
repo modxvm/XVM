@@ -6,6 +6,8 @@
 		height="20"
 		borderVisible="false">
 	<fx:Script>
+		import flash.net.FileReference;
+
 		// label
 		private var _label: String = "";
 
@@ -32,17 +34,6 @@
 			_labelWidth = value;
 		}
 
-		// value
-		[Bindable]
-		public function get value(): String
-		{
-			return edit.text;
-		}
-		public function set value(value: String): void
-		{
-			edit.text = value;
-		}
-
 		// wrapTextField
 		protected var _wrapTextField: Boolean = false;
 
@@ -56,15 +47,50 @@
 			_wrapTextField = value;
 		}
 
+		// value
+		[Bindable]
+		public function get value(): String
+		{
+			return edit.text;
+		}
+		public function set value(value: String): void
+		{
+			edit.text = value;
+		}
+
 		// onChange
 		protected function onChange(event:Event):void
 		{
 			dispatchEvent(new Event(Event.CHANGE));
 		}
+
+		// Browse for Folder
+		/*private var fr:FileReference;
+
+		private function SelectDir(e:Event):void
+		{
+			fr = new FileReference();
+			fr.addEventListener(Event.SELECT, onFileLoadSelect);
+			fr.addEventListener(Event.CANCEL,onCancelLoad);
+			fr.browse([]);
+		}
+		
+		private function onFileLoadSelect(e:Event):void
+		{
+			edit.text = fr.name;
+			fr = null;
+		}
+		
+		private function onCancelLoad(e:Event):void
+		{
+			fr = null;
+		}*/
+		
 	</fx:Script>
 	<fx:Metadata>
 		[Event(name="change", type="flash.events.Event")]
 	</fx:Metadata>
 	<s:Label x="0" text="{label}" width="{labelWidth}" height="{wrapTextField ? height/2 : height}" verticalAlign="middle"/>
 	<s:TextInput left="{wrapTextField ? 0 : labelWidth}" right="0" bottom="0" height="{wrapTextField ? height/2 : height}" change="onChange(event)" id="edit"/>
+	<!--<mx:Image right="0" bottom="2" width="16" height="16" source="@Embed(source='folder.png')" useHandCursor="true" buttonMode="true" click="SelectDir(event)"/>-->
 </s:BorderContainer>

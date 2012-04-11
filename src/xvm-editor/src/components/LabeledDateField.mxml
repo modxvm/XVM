@@ -30,6 +30,17 @@
 			_labelWidth = value;
 		}
 
+		// value
+		[Bindable]
+		public function get value(): String
+		{
+			return edit.text;
+		}
+		public function set value(value: String): void
+		{
+			edit.text = value;
+		}
+
 		protected function onChange(event:Event):void
 		{
 			dispatchEvent(new Event(Event.CHANGE));
@@ -38,6 +49,6 @@
 	<fx:Metadata>
 		[Event(name="change", type="flash.events.Event")]
 	</fx:Metadata>
-    <s:Label x="0" text="{label}" width="{labelWidth}" height="{height}" verticalAlign="middle"/>
-	<mx:DateField left="{labelWidth}" right="0" height="{height}" change="onChange(event)"/>
+        <s:Label x="0" text="{label}" width="{labelWidth}" height="{height}" verticalAlign="middle"/>
+        <mx:DateField editable="true" left="{labelWidth}" right="0" height="{height}" change="onChange(event)" id="edit"/>
 </s:BorderContainer>

@@ -4,17 +4,18 @@
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
 		 xmlns:validators="validators.*"
 		 xmlns:utils="utils.*"
+		 verticalAlign="middle"
 		 gap="0">
 	<fx:Script>
 		<![CDATA[
 			import utils.StringUtils;
 
-			public function get colorStr():String
+			[Bindable]
+			public function get value():String
 			{
 				return StringUtils.toHexColor(cp.selectedColor);
 			}
-
-			public function set colorStr(value:String):void
+			public function set value(value:String):void
 			{
 				c.text = value;
 				c.validateNow();

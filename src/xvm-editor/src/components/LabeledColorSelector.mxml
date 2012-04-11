@@ -2,12 +2,12 @@
 <s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
 	    xmlns:s="library://ns.adobe.com/flex/spark"
 	    xmlns:mx="library://ns.adobe.com/flex/mx"
+		xmlns:c="components.*"
 		width="100%"
-		height="20"
+		height="22"
 		borderVisible="false">
 	<fx:Script>
-		// label
-		private var _label: String = "";
+		protected var _label: String = "";
 
 		[Bindable]
 		public function get label(): String
@@ -19,7 +19,6 @@
 			_label = value;
 		}
 
-		// labelWidth
 		protected var _labelWidth: String = "140";
 
 		[Bindable]
@@ -36,27 +35,13 @@
 		[Bindable]
 		public function get value(): String
 		{
-			return edit.text;
+			return edit.value;
 		}
 		public function set value(value: String): void
 		{
-			edit.text = value;
+			edit.value = value;
 		}
 
-		// wrapTextField
-		protected var _wrapTextField: Boolean = false;
-
-		[Bindable]
-		public function get wrapTextField(): Boolean
-		{
-			return _wrapTextField;
-		}
-		public function set wrapTextField(value: Boolean): void
-		{
-			_wrapTextField = value;
-		}
-
-		// onChange
 		protected function onChange(event:Event):void
 		{
 			dispatchEvent(new Event(Event.CHANGE));
@@ -65,6 +50,6 @@
 	<fx:Metadata>
 		[Event(name="change", type="flash.events.Event")]
 	</fx:Metadata>
-	<s:Label x="0" text="{label}" width="{labelWidth}" height="{wrapTextField ? height/2 : height}" verticalAlign="middle"/>
-	<s:TextInput left="{wrapTextField ? 0 : labelWidth}" right="0" bottom="0" height="{wrapTextField ? height/2 : height}" change="onChange(event)" id="edit"/>
+	<s:Label x="0" text="{label}" width="{labelWidth}" height="{height}" verticalAlign="middle"/>
+	<c:ColorSelector left="{labelWidth}" right="10" height="{height}" id="edit"/>
 </s:BorderContainer>

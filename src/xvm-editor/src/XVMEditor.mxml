@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
-	   xmlns:s="library://ns.adobe.com/flex/spark"
-	   xmlns:mx="library://ns.adobe.com/flex/mx"
-	   pageTitle="XVM Editor"
-	   backgroundColor="0x808080"
-	   minWidth="920" minHeight="520" maxWidth="920" maxHeight="520" width="920" height="520"
-	   preinitialize="application_preinitializeHandler(event)"
-	   xmlns:ns1="*"
-	   xmlns:controls="it.sephiroth.controls.*"
-	   xmlns:c="components.*"
-	   xmlns:p="panels.*">
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:mx="library://ns.adobe.com/flex/mx"
+		pageTitle="XVM Editor"
+		backgroundColor="0x808080"
+		minWidth="920" minHeight="520" maxWidth="920" maxHeight="520" width="920" height="520"
+		xmlns:ns1="*"
+		xmlns:c="components.*"
+		xmlns:p="panels.*"
+		xmlns:m="markers.*">
 	<s:layout>
 		<s:BasicLayout/>
 	</s:layout>
@@ -17,16 +16,13 @@
 		import mx.events.FlexEvent;
 		import mx.events.TreeEvent;
 
-		import Const;
-
+		include "IO.as";
 		include "Main.as";
 
-		protected function application_preinitializeHandler(event:FlexEvent):void
+		protected function onCreationComplete(event:Event):void
 		{
-			// Initialize Singleton
-			//ConfigHelper.instance;
+			taDebug.visible = DEBUG;
 		}
-
 	</fx:Script>
 	<fx:Style>
 		@namespace s "library://ns.adobe.com/flex/spark";
@@ -38,7 +34,7 @@
 			skinClass: ClassReference("skins.TileButtonBarSkin");
 		}
 	</fx:Style>
-	<s:BorderContainer top="0" left="0" height="32" creationPolicy="all" width="920">
+	<s:BorderContainer top="0" left="0" height="32" creationPolicy="all" width="920" creationComplete="onCreationComplete(event)">
 		<s:HGroup top="0" left="0" bottom="0" gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="4" width="361">
 			<s:Button label="Новый" click="onCreateNewConfigClick()"/>
 			<s:Button label="Открыть" click="onLoadConfigClick()"/>
@@ -55,41 +51,9 @@
 			<ns1:FlashComponentPlaceholder y="0" width="500" height="400" x="419"/>
 			<s:Scroller x="0" y="0" width="420" height="100%">
 				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-					<p:PDefinition/>
-					<p:PBattle/>
-					<p:PRating/>
-				</s:VGroup>
-			</s:Scroller>
-		</s:NavigatorContent>
-		<s:NavigatorContent label="Экран загрузки" width="100%" height="100%" id="pgBattleLoading">
-			<ns1:FlashComponentPlaceholder y="0" width="500" height="400" x="419"/>
-			<s:Scroller x="0" y="0" width="420" height="100%">
-				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-					<p:PBattleLoading/>
-					<p:PBattleLoadingIcons/>
-					<p:PBattleLoadingText/>
-				</s:VGroup>
-			</s:Scroller>
-		</s:NavigatorContent>
-		<s:NavigatorContent label="Статистика по Tab" width="100%" height="100%" id="pgStatisticForm">
-			<ns1:FlashComponentPlaceholder y="0" width="500" height="400" x="419"/>
-			<s:Scroller x="0" y="0" width="420" height="100%">
-				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-					<p:PStatisticForm/>
-					<p:PStatisticFormIcons/>
-					<p:PStatisticFormText/>
-				</s:VGroup>
-			</s:Scroller>
-		</s:NavigatorContent>
-		<s:NavigatorContent label="Панели игроков" width="100%" height="100%" id="pgPlayersPanel">
-			<ns1:FlashComponentPlaceholder y="0" width="500" height="400" x="419"/>
-			<s:Scroller x="0" y="0" width="420" height="100%">
-				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-					<p:PPlayersPanel/>
-					<p:PPlayersPanelIcons/>
-					<p:PPlayersPanelMedium/>
-					<p:PPlayersPanelMedium2/>
-					<p:PPlayersPanelLarge/>
+					<p:PDefinition id="p_definition"/>
+					<p:PBattle id="p_battle"/>
+					<p:PRating id="p_rating"/>
 				</s:VGroup>
 			</s:Scroller>
 		</s:NavigatorContent>
@@ -97,8 +61,7 @@
 			<ns1:FlashComponentPlaceholder y="0" width="500" height="400" x="419"/>
 			<s:Scroller x="0" y="0" width="420" height="100%">
 				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-					<s:HGroup left="10" right="10" height="145">
-						<s:ButtonBar left="10" dataProvider="{vsMarkers}"/>
+					<s:HGroup width="100%" height="145">
 						<s:BorderContainer width="245" height="100" borderVisible="false">
 							<s:ToggleButton x="10" y="10" width="110" label="Союзник"/>
 							<s:ToggleButton x="125" y="10" width="110" label="Противник"/>
@@ -107,32 +70,95 @@
 							<s:ToggleButton x="10" y="70" width="110" label="Номальный"/>
 							<s:ToggleButton x="125" y="70" width="110" label="Расширенный"/>
 						</s:BorderContainer>
+						<s:BorderContainer x="10" borderVisible="false">
+							<s:ButtonBar dataProvider="{vsMarkers}"/>
+						</s:BorderContainer>
 					</s:HGroup>
 					<mx:ViewStack id="vsMarkers" width="100%" height="100%">
-						<s:NavigatorContent label="Класс танка" width="100%" height="100%">
-							<p:MVehicleIcon/>
+						<s:NavigatorContent label="Класс танка">
+							<s:Scroller x="0" y="0" width="100%" height="100%">
+								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+									<m:MVehicleIcon id="m_vehicleIcon" xvmvalue="updateValue(event)"/>
+								</s:VGroup>
+							</s:Scroller>
 						</s:NavigatorContent>
-						<s:NavigatorContent id="hb" label="Уровень здоровья" width="100%" height="100%">
-							<p:MHealthBar/>
+						<s:NavigatorContent id="hb" label="Уровень здоровья">
+							<s:Scroller x="0" y="0" width="100%" height="100%">
+								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+									<m:MHealthBar/>
+								</s:VGroup>
+							</s:Scroller>
 						</s:NavigatorContent>
-						<s:NavigatorContent label="Текущий урон" width="100%" height="100%">
-							<p:MDamageText/>
-							<p:MFont/>
-							<p:MShadow/>
+						<s:NavigatorContent label="Наносимый урон">
+							<s:Scroller x="0" y="0" width="100%" height="100%">
+								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+									<m:MDamageText/>
+									<m:MFont/>
+									<m:MShadow/>
+								</s:VGroup>
+							</s:Scroller>
 						</s:NavigatorContent>
-						<s:NavigatorContent label="Контур танка" width="100%" height="100%">
-							<p:MContourIcon/>
+						<s:NavigatorContent label="Иконка танка">
+							<s:Scroller x="0" y="0" width="100%" height="100%">
+								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+									<m:MContourIcon/>
+								</s:VGroup>
+							</s:Scroller>
 						</s:NavigatorContent>
-						<s:NavigatorContent label="Уровень танка" width="100%" height="100%">
-							<p:MLevelIcon/>
+						<s:NavigatorContent label="Уровень танка">
+							<s:Scroller x="0" y="0" width="100%" height="100%">
+								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+									<m:MLevelIcon/>
+								</s:VGroup>
+							</s:Scroller>
 						</s:NavigatorContent>
-						<s:NavigatorContent label="Маркер действия" width="100%" height="100%">
-							<p:MActionMarker/>
+						<s:NavigatorContent label="Маркер действия">
+							<s:Scroller x="0" y="0" width="100%" height="100%">
+								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+									<m:MActionMarker/>
+								</s:VGroup>
+							</s:Scroller>
 						</s:NavigatorContent>
-						<s:NavigatorContent label="Текстовые поля" width="100%" height="100%">
-							<p:MTextFields/>
+						<s:NavigatorContent label="Текстовые поля">
+							<s:Scroller x="0" y="0" width="100%" height="100%">
+								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+									<m:MTextFields/>
+								</s:VGroup>
+							</s:Scroller>
 						</s:NavigatorContent>
 					</mx:ViewStack>
+				</s:VGroup>
+			</s:Scroller>
+		</s:NavigatorContent>
+		<s:NavigatorContent label="Экран загрузки" width="100%" height="100%" id="pgBattleLoading">
+			<ns1:FlashComponentPlaceholder y="0" width="500" height="400" x="419"/>
+			<s:Scroller x="0" y="0" width="420" height="100%">
+				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+					<p:PBattleLoading id="p_battleLoading"/>
+					<p:PBattleLoadingIcons id="p_battleLoading_icons"/>
+					<p:PBattleLoadingText id="p_battleLoading_text"/>
+				</s:VGroup>
+			</s:Scroller>
+		</s:NavigatorContent>
+		<s:NavigatorContent label="Статистика по Tab" width="100%" height="100%" id="pgStatisticForm">
+			<ns1:FlashComponentPlaceholder y="0" width="500" height="400" x="419"/>
+			<s:Scroller x="0" y="0" width="420" height="100%">
+				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+					<p:PStatisticForm id="p_statisticForm"/>
+					<p:PStatisticFormIcons id="p_statisticForm_icons"/>
+					<p:PStatisticFormText id="p_statisticForm_text"/>
+				</s:VGroup>
+			</s:Scroller>
+		</s:NavigatorContent>
+		<s:NavigatorContent label="Панели игроков (&quot;Уши&quot;)" width="100%" height="100%" id="pgPlayersPanel">
+			<ns1:FlashComponentPlaceholder y="0" width="500" height="400" x="419"/>
+			<s:Scroller x="0" y="0" width="420" height="100%">
+				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+					<p:PPlayersPanel id="p_playersPanel"/>
+					<p:PPlayersPanelIcons id="p_playersPanel_icons"/>
+					<p:PPlayersPanelMedium id="p_playersPanel_medium"/>
+					<p:PPlayersPanelMedium2 id="p_playersPanel_medium2"/>
+					<p:PPlayersPanelLarge id="p_playersPanel_large"/>
 				</s:VGroup>
 			</s:Scroller>
 		</s:NavigatorContent>
@@ -272,7 +298,7 @@
 			<ns1:FlashComponentPlaceholder y="0" width="500" height="400" x="419"/>
 			<s:Scroller x="0" y="0" width="420" height="100%">
 				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-					<p:PIconSet/>
+					<p:PIconSet id="p_iconSet"/>
 				</s:VGroup>
 			</s:Scroller>
 		</s:NavigatorContent>
@@ -286,4 +312,5 @@
 			</s:Scroller>
 		</s:NavigatorContent>
 	</mx:TabNavigator>
+	<s:TextArea y="{tabs.y+33}" right="0" width="500" height="{tabs.height}" id="taDebug" visible="true" fontFamily="Consolas"/>
 </s:Application>

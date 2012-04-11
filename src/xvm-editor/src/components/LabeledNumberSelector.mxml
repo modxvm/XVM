@@ -6,6 +6,7 @@
 		height="20"
 		borderVisible="false">
 	<fx:Script>
+		// label
 		protected var _label: String = "";
 
 		[Bindable]
@@ -13,11 +14,12 @@
 		{
 			return _label;
 		}
-		public function set label(value: String): void
+		public function set label(v: String): void
 		{
-			_label = value;
+			_label = v;
 		}
 
+		// labelWidth
 		protected var _labelWidth: String = "140";
 
 		[Bindable]
@@ -25,13 +27,73 @@
 		{
 			return _labelWidth;
 		}
-		public function set labelWidth(value: String): void
+		public function set labelWidth(v: String): void
 		{
-			_labelWidth = value;
+			_labelWidth = v;
 		}
 
+		// value
+		[Bindable]
+		public function get value(): Number
+		{
+			return edit.value;
+		}
+		public function set value(v: Number): void
+		{
+			edit.value = v;
+			stepper.value = v;
+		}
+		
+		// minimum
+		protected var _minimum: Number = 0;
+
+		[Bindable]
+		public function get minimum(): Number
+		{
+			return _minimum;
+		}
+		public function set minimum(v: Number): void
+		{
+			//edit.minimum = v;
+			//stepper.minimum = v;
+			_minimum = v;
+		}
+		
+		// maximum
+		protected var _maximum: Number = 10;
+
+		[Bindable]
+		public function get maximum(): Number
+		{
+			return _maximum;
+		}
+		public function set maximum(v: Number): void
+		{
+			//edit.maximum = v;
+			//stepper.maximum = v;
+			_maximum = v;
+		}
+		
+		// sliderVisible
+		protected var _sliderVisible: Boolean = true;
+
+		[Bindable]
+		public function get sliderVisible(): Boolean
+		{
+			return _sliderVisible;
+		}
+		public function set sliderVisible(v: Boolean): void
+		{
+			_sliderVisible = v;
+		}
+		
 		protected function onChange(event:Event):void
 		{
+			if (event.target == stepper)
+				edit.value = stepper.value;
+			else
+				stepper.value = edit.value;
+			
 			dispatchEvent(new Event(Event.CHANGE));
 		}
 	</fx:Script>
@@ -39,6 +101,6 @@
 		[Event(name="change", type="flash.events.Event")]
 	</fx:Metadata>
 	<s:Label x="0" text="{label}" width="{labelWidth}" height="{height}" verticalAlign="middle"/>
-	<s:NumericStepper left="{labelWidth}" width="50" height="{height}" id="stepper"/>
-	<s:HSlider left="{stepper.x + stepper.width + 10}" right="0" y="4" change="onChange(event)"/>
+	<s:NumericStepper left="{labelWidth}" width="52" height="{height}" minimum="{minimum}" maximum="{maximum}" id="stepper" change="onChange(event)"/>
+	<s:HSlider left="{stepper.x + stepper.width + 10}" right="0" y="4" minimum="{minimum}" maximum="{maximum}" visible="{sliderVisible}" id="edit" change="onChange(event)"/>
 </s:BorderContainer>

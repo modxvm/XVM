@@ -137,7 +137,7 @@ package helpers
 		private function DecodeXML(xml:XML):*
 		{
 			var qName:QName = new QName(schema.targetNamespace.uri, "xvmconfig");
-			var xmlDecoder:PatchedXMLDecoder = new PatchedXMLDecoder();
+  			var xmlDecoder:PatchedXMLDecoder = new PatchedXMLDecoder();
 			xmlDecoder.schemaManager = schemaManager;
 			return xmlDecoder.decode(xml, qName);
 		}
