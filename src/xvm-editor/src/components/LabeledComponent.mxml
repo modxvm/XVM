@@ -14,9 +14,9 @@
 		{
 			return _label;
 		}
-		public function set label(value: String): void
+		public function set label(v: String): void
 		{
-			_label = value;
+			_label = v;
 		}
 
 		protected var _labelWidth: String = "140";
@@ -26,9 +26,21 @@
 		{
 			return _labelWidth;
 		}
-		public function set labelWidth(value: String): void
+		public function set labelWidth(v: String): void
 		{
-			_labelWidth = value;
+			_labelWidth = v;
+		}
+
+		// config
+		[Bindable]
+		protected var _config: String = null;
+		public virtual function get config():String
+		{
+			return _config;
+		}
+		public virtual function set config(v:String): void
+		{
+			_config = v;
 		}
 
 		// value
@@ -37,7 +49,7 @@
 		{
 			return null;
 		}
-		public virtual function set value(value:*): void
+		public virtual function set value(v:*): void
 		{
 		}
 

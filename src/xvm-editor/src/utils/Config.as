@@ -71,6 +71,33 @@ package utils
       Config.s_config.iconset.vehicleMarker = Utils.fixPath(Config.s_config.iconset.vehicleMarker);
     }
 
+	/**
+	 * Set config value
+	 */
+	public static function SetValue(path:String, value:*):void
+	{
+		var p:Array = path.split("."); // "path.to.value"
+		var valueElement:String = p.pop(); // last element is value
+		
+		// Start from root element
+		var root:* = s_config;
+		
+		for each (var e:String in p)
+		{
+			// Create shild if not exist
+			if (!root.hasOwnProperty(e))
+				root[e] = new Object();
+			// Shift root to next child
+			root = root[e];
+		}
+		
+		// Set value
+		if (value != null)
+			root[valueElement] = value;
+		else
+			delete root[valueElement];
+	}
+
     /**
      * Convert config to new format.
      */

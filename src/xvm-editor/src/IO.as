@@ -91,12 +91,14 @@ private function onLoadError(e:IOErrorEvent):void
 }
 
 // SAVE
-private function SaveConfig(str:String):void
+private function SaveConfig():void
 {
 	fr = new FileReference();
 	fr.addEventListener(Event.COMPLETE, onFileSave);
 	fr.addEventListener(Event.CANCEL,onCancelSave);
 	fr.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
+	// Serialize and add UTF-8 BOM
+	var str:String = "\uFEFF" + JSON.stringify(Config.s_config);
 	fr.save(str, lastFileName.toLowerCase() == "otmdata.xml" ? "XVM.xvmconf" : lastFileName);
 }
 

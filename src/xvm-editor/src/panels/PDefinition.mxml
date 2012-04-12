@@ -7,11 +7,11 @@
 	width="100%" height="170" title="Информация о конфигурации">
 	<mx:Image right="5" y="-18" width="16" height="16" source="@Embed(source='cancel.png')" toolTip="Вернуть настройки по умолчанию" useHandCursor="true" buttonMode="true"/>
 	<s:VGroup left="10" right="10" top="10" bottom="10" gap="2" variableRowHeight="true">
-		<c:LabeledTextInput label="Автор" labelWidth="110" id="v_author" change="onChange(event)"/>
-		<c:LabeledTextInput label="Описание" labelWidth="110" id="v_description" change="onChange(event)"/>
-		<c:LabeledTextInput label="URL" labelWidth="110" id="v_url" change="onChange(event)"/>
-		<c:LabeledDateField label="Дата" labelWidth="110" width="256" id="v_date" change="onChange(event)"/>
-		<c:LabeledTextInput label="Версия клиента" labelWidth="110" width="256" id="v_gameVersion" change="onChange(event)"/>
-		<c:LabeledTextInput label="Мин. версия мода" labelWidth="110" width="256" id="v_modMinVersion" change="onChange(event)"/>
+		<c:LabeledTextInput label="Автор" labelWidth="110" id="v_author" config="definition.author" change="onChange(event)"/>
+		<c:LabeledTextInput label="Описание" labelWidth="110" id="v_description" config="definition.description" change="onChange(event)"/>
+		<c:LabeledTextInput label="URL" labelWidth="110" id="v_url" config="definition.url" change="onChange(event)"/>
+		<c:LabeledDateField label="Дата" labelWidth="110" width="256" id="v_date" config="definition.date" change="onChange(event)"/>
+		<c:LabeledTextInput label="Версия клиента" labelWidth="110" width="256" id="v_gameVersion" config="definition.gameVersion" change="onChange(event)"/>
+		<c:LabeledTextInput label="Мин. версия мода" labelWidth="110" width="256" id="v_modMinVersion" config="definition.modMinVersion" change="onChange(event)"/>
 	</s:VGroup>
 </c:PanelComponent>

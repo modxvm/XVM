@@ -18,6 +18,8 @@
 
 		include "IO.as";
 		include "Main.as";
+		include "Refresh.as";
+		include "Update.as";
 
 		protected function onCreationComplete(event:Event):void
 		{
