@@ -42,6 +42,7 @@ namespace wot
     {
       Console.WriteLine("Usage: wot-xvm-proxy.exe [/launcher] [/debug] [/server=(RU|EU|NA|CN1|CN2|CT)] [file.wotreplay]");
       Console.WriteLine("  /launcher - run launcher instead of game");
+      Console.WriteLine("  /noauto - do not run game automatically");
       Console.WriteLine("  /debug - run in debug mode (extended log)");
       Console.WriteLine("  /server=(RU|EU|NA|CN1|CN2|CT) - select server (disable autodetection)");
       Console.WriteLine("  file.wotreplay - play replay");
@@ -98,9 +99,9 @@ namespace wot
           }
           if (String.Compare(args[i], "/noauto", true) == 0)
           {
-              isNoAuto = true;
-              args[i] = "";
-              continue;
+            isNoAuto = true;
+            args[i] = "";
+            continue;
           }
 
           if (File.Exists(args[i]))
@@ -200,48 +201,48 @@ namespace wot
             Debug("Dokan thread is not alive. Exiting.");
           else
           {
-              if (!isNoAuto)
+            if (!isNoAuto)
+            {
+              Debug("Dokan thread is alive");
+              string arg = String.Join(" ", args);
+              Console.WriteLine(String.Format("Starting game process: {0} {1}", wotExeFileName, arg));
+              using (Process wotProc = Process.Start(wotExeFileName, arg))
               {
-                  Debug("Dokan thread is alive");
-                  string arg = String.Join(" ", args);
-                  Console.WriteLine(String.Format("Starting game process: {0} {1}", wotExeFileName, arg));
-                  using (Process wotProc = Process.Start(wotExeFileName, arg))
+                Debug("Check game process");
+                if (wotProc == null)
+                  throw new Exception("Cannot start game: " + wotExeFileName);
+                Thread.Sleep(5000);
+                Debug("Wait for process to exit");
+                wotProc.WaitForExit();
+                if (isLauncher && wotProc.ExitCode == 0)
+                {
+                  Console.WriteLine("Searching game process: " + WOT_PROCESS_NAME);
+                  Thread.Sleep(5000);
+                  Process[] wotProcesses = Process.GetProcessesByName(WOT_PROCESS_NAME);
+                  Debug(String.Format("Found {0} process", wotProcesses.Length));
+                  if (wotProcesses.Length > 0)
                   {
-                      Debug("Check game process");
-                      if (wotProc == null)
-                          throw new Exception("Cannot start game: " + wotExeFileName);
-                      Thread.Sleep(5000);
-                      Debug("Wait for process to exit");
-                      wotProc.WaitForExit();
-                      if (isLauncher && wotProc.ExitCode == 0)
-                      {
-                          Console.WriteLine("Searching game process: " + WOT_PROCESS_NAME);
-                          Thread.Sleep(5000);
-                          Process[] wotProcesses = Process.GetProcessesByName(WOT_PROCESS_NAME);
-                          Debug(String.Format("Found {0} process", wotProcesses.Length));
-                          if (wotProcesses.Length > 0)
-                          {
-                              Debug("Wait for process to exit");
-                              wotProcesses[0].WaitForExit();
-                          }
-                      }
+                    Debug("Wait for process to exit");
+                    wotProcesses[0].WaitForExit();
                   }
+                }
               }
-              else
-              {
-                  Console.WriteLine("Please start your game manully within 2 minutes");
+            }
+            else
+            {
+              Console.WriteLine("Please start your game manually within 2 minutes");
 
-                  for (int i = 0; i < 20; i++)
-                  {
-                      Thread.Sleep(6000);
-                      Process[] wotProcesses = Process.GetProcessesByName(WOT_PROCESS_NAME);
-                      if (wotProcesses.Length > 0)
-                      {
-                          wotProcesses[0].WaitForExit();
-                          break;
-                      }
-                  }
-              }          
+              for (int i = 0; i < 20; i++)
+              {
+                Thread.Sleep(6000);
+                Process[] wotProcesses = Process.GetProcessesByName(WOT_PROCESS_NAME);
+                if (wotProcesses.Length > 0)
+                {
+                  wotProcesses[0].WaitForExit();
+                  break;
+                }
+              }
+            }
           }
         }
         finally

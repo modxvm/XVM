@@ -61,27 +61,6 @@ namespace wot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>RU	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC9ydS8/JTE=</string>
-  <string>EU	aHR0cDovL3dvdC1yYXRpbmdzLmFwcHNwb3QuY29tL3JhdGluZ3MvMi8yLyUx</string>
-  <string>NA	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC9uYS8/JTE=</string>
-  <string>CN1	aHR0cDovL2dhcnBoeS5jb20vdG9vbC93b3QvRUZGMi9ub3J0aC8lMS5qc29u</string>
-  <string>CN1	aHR0cDovL3RpcHMuY3MwMzA5LmltdHQucXEuY29tL2dldFVzZXI/bmFtZT0lMSZ6b25lPW5vcnRoJmxjPTIwMTIwMzA4JndheT1uZXc=</string>
-  <string>CN2	aHR0cDovL2dhcnBoeS5jb20vdG9vbC93b3QvRUZGMi9zb3V0aC8lMS5qc29u</string>
-  <string>CN2	aHR0cDovL3RpcHMuY3MwMzA5LmltdHQucXEuY29tL2dldFVzZXI/bmFtZT0lMSZ6b25lPXNvdXRoJmxjPTIwMTIwMzA4JndheT1uZXc=</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection proxy_servers {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["proxy_servers"]));
-            }
-            set {
-                this["proxy_servers"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(".stat")]
         public string MountPoint {
             get {
@@ -89,6 +68,26 @@ namespace wot.Properties {
             }
             set {
                 this["MountPoint"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>RU	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC9ydS8/JTE=</string>
+  <string>EU	aHR0cDovL3dvdC1yYXRpbmdzLmFwcHNwb3QuY29tL3JhdGluZ3MvMi8yLyUx</string>
+  <string>NA	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC9uYS8/JTE=</string>
+  <string>CN1	aHR0cDovL2dhcnBoeS5jb20vdG9vbC93b3QvRUZGMi8lMS5qc29u</string>
+  <string>CN1	aHR0cDovL3RpcHMuY3MwMzA5LmltdHQucXEuY29tL2dldFVzZXI/bmFtZT0lMSZ6b25lPW5vcnRoJmxjPTIwMTIwMzA4JndheT1uZXc=</string>
+  <string>CN1	aHR0cDovL3dvdHJhdGUudmljcC5jby9Xb3RSYXRlWFZNMS8lMQ==</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection proxy_servers {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["proxy_servers"]));
+            }
+            set {
+                this["proxy_servers"] = value;
             }
         }
     }
