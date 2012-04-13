@@ -24,6 +24,7 @@
 		protected function onCreationComplete(event:Event):void
 		{
 			taDebug.visible = DEBUG;
+			onVehicleStateChanged(event);
 		}
 	</fx:Script>
 	<fx:Style>
@@ -65,33 +66,33 @@
 				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
 					<s:HGroup width="100%" height="145">
 						<s:BorderContainer width="245" height="100" borderVisible="false">
-							<s:ToggleButton x="10" y="10" width="110" label="Союзник"/>
-							<s:ToggleButton x="125" y="10" width="110" label="Противник"/>
-							<s:ToggleButton x="10" y="40" width="110" label="Живой"/>
-							<s:ToggleButton x="125" y="40" width="110" label="Мертвый"/>
-							<s:ToggleButton x="10" y="70" width="110" label="Номальный"/>
-							<s:ToggleButton x="125" y="70" width="110" label="Расширенный"/>
+							<s:ToggleButton x="10" y="10" width="110" label="Союзник" id="ally" change="onVehicleStateChanged(event)"/>
+							<s:ToggleButton x="125" y="10" width="110" label="Противник" id="enemy" change="onVehicleStateChanged(event)"/>
+							<s:ToggleButton x="10" y="40" width="110" label="Живой" id="alive" change="onVehicleStateChanged(event)"/>
+							<s:ToggleButton x="125" y="40" width="110" label="Мертвый" id="dead" change="onVehicleStateChanged(event)"/>
+							<s:ToggleButton x="10" y="70" width="110" label="Номальный" id="normal" change="onVehicleStateChanged(event)"/>
+							<s:ToggleButton x="125" y="70" width="110" label="Расширенный" id="extended" change="onVehicleStateChanged(event)"/>
 						</s:BorderContainer>
 						<s:BorderContainer x="10" borderVisible="false">
-							<s:ButtonBar dataProvider="{vsMarkers}"/>
+							<s:ButtonBar dataProvider="{vsMarkers}" id="elements" change="onVehicleStateChanged(event)"/>
 						</s:BorderContainer>
 					</s:HGroup>
 					<mx:ViewStack id="vsMarkers" width="100%" height="100%">
-						<s:NavigatorContent label="Класс танка">
+						<s:NavigatorContent label="Класс танка" id="vehicleIcon">
 							<s:Scroller x="0" y="0" width="100%" height="100%">
 								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
 									<m:MVehicleIcon id="m_vehicleIcon" valueChanged="updateMarkerValue(event)"/>
 								</s:VGroup>
 							</s:Scroller>
 						</s:NavigatorContent>
-						<s:NavigatorContent id="hb" label="Уровень здоровья">
+						<s:NavigatorContent label="Уровень здоровья" id="healthBar">
 							<s:Scroller x="0" y="0" width="100%" height="100%">
 								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
 									<m:MHealthBar id="m_healthBar" valueChanged="updateMarkerValue(event)"/>
 								</s:VGroup>
 							</s:Scroller>
 						</s:NavigatorContent>
-						<s:NavigatorContent label="Наносимый урон">
+						<s:NavigatorContent label="Наносимый урон" id="damageText">
 							<s:Scroller x="0" y="0" width="100%" height="100%">
 								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
 									<m:MDamageText id="m_damageText" valueChanged="updateMarkerValue(event)"/>
@@ -100,28 +101,28 @@
 								</s:VGroup>
 							</s:Scroller>
 						</s:NavigatorContent>
-						<s:NavigatorContent label="Иконка танка">
+						<s:NavigatorContent label="Иконка танка" id="contourIcon">
 							<s:Scroller x="0" y="0" width="100%" height="100%">
 								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
 									<m:MContourIcon id="m_contourIcon" valueChanged="updateMarkerValue(event)"/>
 								</s:VGroup>
 							</s:Scroller>
 						</s:NavigatorContent>
-						<s:NavigatorContent label="Уровень танка">
+						<s:NavigatorContent label="Уровень танка" id="levelIcon">
 							<s:Scroller x="0" y="0" width="100%" height="100%">
 								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
 									<m:MLevelIcon id="m_levelIcon" valueChanged="updateMarkerValue(event)"/>
 								</s:VGroup>
 							</s:Scroller>
 						</s:NavigatorContent>
-						<s:NavigatorContent label="Маркер действия">
+						<s:NavigatorContent label="Маркер действия" id="actionMarker">
 							<s:Scroller x="0" y="0" width="100%" height="100%">
 								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
 									<m:MActionMarker id="m_actionMarker" valueChanged="updateMarkerValue(event)"/>
 								</s:VGroup>
 							</s:Scroller>
 						</s:NavigatorContent>
-						<s:NavigatorContent label="Текстовые поля">
+						<s:NavigatorContent label="Текстовые поля" id="textFields">
 							<s:Scroller x="0" y="0" width="100%" height="100%">
 								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
 									<m:MTextFields id="m_textFields" valueChanged="updateMarkerValue(event)"/>

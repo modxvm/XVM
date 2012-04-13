@@ -72,6 +72,29 @@ package utils
     }
 
 	/**
+	 * Get config value
+	 */
+	public static function GetValue(path:String):*
+	{
+		var p:Array = path.split("."); // "path.to.value"
+		var valueElement:String = p.pop(); // last element is value
+		
+		// Start from root element
+		var root:* = s_config;
+		
+		for each (var e:String in p)
+		{
+			// Create shild if not exist
+			if (!root.hasOwnProperty(e))
+				return undefined;
+			// Shift root to next child
+			root = root[e];
+		}
+		
+		return root[valueElement];
+	}
+
+	/**
 	 * Set config value
 	 */
 	public static function SetValue(path:String, value:*):void
@@ -97,7 +120,7 @@ package utils
 		else
 			delete root[valueElement];
 	}
-
+	
     /**
      * Convert config to new format.
      */
