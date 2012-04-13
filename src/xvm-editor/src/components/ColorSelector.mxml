@@ -8,23 +8,28 @@
 		 gap="0">
 	<fx:Script>
 		<![CDATA[
-			import utils.StringUtils;
-
+			public static function toHex(item:Object):String
+			{
+				var hex:String = Number(item).toString(16);
+				return ("00000" + hex.toUpperCase()).substr(-6);
+			}
+			
 			[Bindable]
 			public function get value():String
 			{
-				return StringUtils.toHexColor(cp.selectedColor);
+				return "0x" + toHex(cp.selectedColor);
 			}
 			public function set value(value:String):void
 			{
-				c.text = value;
+				var n:Number = parseInt(value);
+				c.text = isFinite(n) ? "#" + toHex(n) : "";
 				c.validateNow();
 			}
 
 			protected function onChange(event:Event):void
 			{
 				if (event.target == cp)
-					c.text = StringUtils.toHexColor(cp.selectedColor);
+					c.text = "#" + toHex(cp.selectedColor);
 				else
 					cp.selectedColor = parseInt(c.text.substr(1), 16);
 
