@@ -2,9 +2,6 @@
  * ...
  * @author sirmax2
  */
-import wot.utils.Defines;
-
-// TODO: translate comments to English
 
 package utils
 {

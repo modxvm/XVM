@@ -7,7 +7,7 @@
     "url": "http://code.google.com/p/wot-xvm/",
     "date": "18.03.2012",
     "gameVersion": "0.7.2",
-    "modMinVersion": "2.0"
+    "modMinVersion": "2.1"
   },
   "battle": {
     "mirroredVehicleIcons": true,
@@ -16,7 +16,7 @@
     "drawGrid": false
   },
   "rating": {
-    "showPlayersStatistics": true,
+    "showPlayersStatistics": false,
     "loadEnemyStatsInFogOfWar": false
   },
   "battleLoading": {

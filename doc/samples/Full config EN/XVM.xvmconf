@@ -15,7 +15,7 @@
     "url": "http://code.google.com/p/wot-xvm/", // Address to config updates.
     "date": "18.03.2012",                       // Config last modified.
     "gameVersion": "0.7.2",                     // Supported version of the game.
-    "modMinVersion": "2.0"                      // The minimum required version of the XVM mod.
+    "modMinVersion": "2.1"                      // The minimum required version of the XVM mod.
   },
   // General parameters for the battle interface
   "battle": {
