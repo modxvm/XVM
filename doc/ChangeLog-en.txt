@@ -2,7 +2,9 @@ XVM-2.1.test6:
   * optimization of macros with dynamic values
   * fixed health bar z-order
   * optimization of player/clan icon
-  * added new command line parameter "/noauto" for disabling auto running the game
+  * wot-xvm-proxy: added new command line parameter "/noauto" for disabling
+    auto running the game
+  * added 'name' option for text fields in config
 
 XVM-2.1.test5:
   * fixes in win chances

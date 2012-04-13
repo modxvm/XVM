@@ -26,7 +26,7 @@
   },
   // Options for player statistics (only with XVM-full)
   "rating": {
-    "showPlayersStatistics": true,              // true - Toggle player statistics on/off. Global setting - without the statistics module, this is always disabled.
+    "showPlayersStatistics": false,             // true - Toggle player statistics on/off. Global setting - without the statistics module, this is always disabled.
     "loadEnemyStatsInFogOfWar": false           // true - Enable downloading of data on opponents in the "fog of war".
   },
   // Parameters of the Battle Loading Screen
@@ -133,7 +133,7 @@
               "color": "0x000000",            //     Color
               "size": 1                       //     Border size
             },
-            "fill": {                         //   Options for remaining health 
+            "fill": {                         //   Options for remaining health
               "alpha": 30                     //     Opacity
             },                                //
             "damage": {                       //   Options for animation of health loss
@@ -271,7 +271,7 @@
               "color": "0x000000",            //     Color
               "size": 1                       //     Border size
             },
-            "fill": {                         //   Options for remaining health 
+            "fill": {                         //   Options for remaining health
               "alpha": 30                     //     Opacity
             },                                //
             "damage": {                       //   Options for animation of health loss
@@ -413,7 +413,7 @@
               "color": "0x000000",            //     Color
               "size": 1                       //     Border size
             },
-            "fill": {                         //   Options for remaining health 
+            "fill": {                         //   Options for remaining health
               "alpha": 30                     //     Opacity
             },                                //
             "damage": {                       //   Options for animation of health loss
@@ -504,7 +504,7 @@
               "color": "0x000000",            //     Color
               "size": 1                       //     Border size
             },
-            "fill": {                         //   Options for remaining health 
+            "fill": {                         //   Options for remaining health
               "alpha": 30                     //     Opacity
             },                                //
             "damage": {                       //   Options for animation of health loss
@@ -648,7 +648,7 @@
               "color": "0x000000",            //     Color
               "size": 1                       //     Border size
             },
-            "fill": {                         //   Options for remaining health 
+            "fill": {                         //   Options for remaining health
               "alpha": 30                     //     Opacity
             },                                //
             "damage": {                       //   Options for animation of health loss
@@ -786,7 +786,7 @@
               "color": "0x000000",            //     Color
               "size": 1                       //     Border size
             },
-            "fill": {                         //   Options for remaining health 
+            "fill": {                         //   Options for remaining health
               "alpha": 30                     //     Opacity
             },                                //
             "damage": {                       //   Options for animation of health loss
@@ -928,7 +928,7 @@
               "color": "0x000000",            //     Color
               "size": 1                       //     Border size
             },
-            "fill": {                         //   Options for remaining health 
+            "fill": {                         //   Options for remaining health
               "alpha": 30                     //     Opacity
             },                                //
             "damage": {                       //   Options for animation of health loss
@@ -1019,7 +1019,7 @@
               "color": "0x000000",            //     Color
               "size": 1                       //     Border size
             },
-            "fill": {                         //   Options for remaining health 
+            "fill": {                         //   Options for remaining health
               "alpha": 30                     //     Opacity
             },                                //
             "damage": {                       //   Options for animation of health loss

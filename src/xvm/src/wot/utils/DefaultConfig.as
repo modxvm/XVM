@@ -10,7 +10,8 @@ class wot.utils.DefaultConfig
 {
   public static function get config(): Object
   {
-    return
+    var d:Date = new Date();
+    var a:* =
     {
       configVersion: Defines.CONFIG_VERSION,
       editorVersion: Defines.EDITOR_VERSION,
@@ -18,7 +19,7 @@ class wot.utils.DefaultConfig
         author: "sirmax2",
         description: "Default settings for XVM",
         url: "http://code.google.com/p/wot-xvm/",
-        date: (new Date()).toString(),
+        date: (d.date < 10 ? "0" : "") + d.date + "." + (d.month < 9 ? "0" : "") + (d.month + 1) + "." + d.fullYear,
         gameVersion: Defines.WOT_VERSION,
         modMinVersion: Defines.XVM_VERSION
       },
@@ -295,6 +296,8 @@ class wot.utils.DefaultConfig
         { clan: "[WGST]",  icon: "../../../clanicons/WGST.png" }
       ]
     };
+
+    return a;
   }
 
   public static function get shadow_60(): Object
@@ -516,6 +519,7 @@ class wot.utils.DefaultConfig
   public static function get playerName_alive(): Object
   {
     return {
+      name: "Player Name",
       visible: true,
       x: 0,
       y: -36,
@@ -530,6 +534,7 @@ class wot.utils.DefaultConfig
   public static function get playerName_dead(): Object
   {
     return {
+      name: "Player Name",
       visible: true,
       x: 0,
       y: -34,
@@ -545,6 +550,7 @@ class wot.utils.DefaultConfig
   public static function get vehicleName_alive(): Object
   {
     return {
+      name: "Vehicle Name",
       visible: true,
       x: 0,
       y: -36,
@@ -559,6 +565,7 @@ class wot.utils.DefaultConfig
   public static function get vehicleName_dead(): Object
   {
     return {
+      name: "Vehicle Name",
       visible: true,
       x: 0,
       y: -20,
@@ -574,6 +581,7 @@ class wot.utils.DefaultConfig
   public static function get currentHealth(): Object
   {
     return {
+      name: "Current Health",
       visible: true,
       x: 0,
       y: -20,
@@ -589,6 +597,7 @@ class wot.utils.DefaultConfig
   public static function get healthRatio(): Object
   {
     return {
+      name: "Health Ratio",
       visible: true,
       x: 0,
       y: -20,
@@ -604,6 +613,7 @@ class wot.utils.DefaultConfig
   public static function get ratingText(): Object
   {
     return {
+      name: "Rating",
       visible: true,
       x: 0,
       y: -50,

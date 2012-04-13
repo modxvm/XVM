@@ -16,7 +16,7 @@
     "drawGrid": false
   },
   "rating": {
-    "showPlayersStatistics": true,
+    "showPlayersStatistics": false,
     "loadEnemyStatsInFogOfWar": false
   },
   "battleLoading": {
