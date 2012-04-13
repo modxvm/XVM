@@ -13,9 +13,6 @@
 		<s:BasicLayout/>
 	</s:layout>
 	<fx:Script>
-		import mx.events.FlexEvent;
-		import mx.events.TreeEvent;
-
 		include "IO.as";
 		include "Main.as";
 		include "Refresh.as";
@@ -23,7 +20,8 @@
 
 		protected function onCreationComplete(event:Event):void
 		{
-			taDebug.visible = DEBUG;
+			preview.vsPreview.selectedChild = DEBUG ? preview.debug : preview.preview;
+			onCreateNewConfigClick();
 			onVehicleStateChanged(event);
 		}
 	</fx:Script>
@@ -37,283 +35,279 @@
 			skinClass: ClassReference("skins.TileButtonBarSkin");
 		}
 	</fx:Style>
-	<s:BorderContainer top="0" left="0" height="32" creationPolicy="all" width="920" creationComplete="onCreationComplete(event)">
-		<s:HGroup top="0" left="0" bottom="0" gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="4" width="361">
-			<s:Button label="Новый" click="onCreateNewConfigClick()"/>
-			<s:Button label="Открыть" click="onLoadConfigClick()"/>
-			<s:Button label="Сохранить" click="onSaveConfigClick()"/>
-			<mx:PopUpMenuButton label="Дополнительно" enabled="false" toolTip="Еще не реализовано"/>
+	<s:VGroup left="0" right="0" top="0" bottom="0" gap="-1" creationComplete="onCreationComplete(event)">
+		<s:BorderContainer width="920" height="32">
+			<s:HGroup top="0" left="0" bottom="0" gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="4" width="361">
+				<s:Button label="Новый" click="onCreateNewConfigClick()"/>
+				<s:Button label="Открыть" click="onLoadConfigClick()"/>
+				<s:Button label="Сохранить" click="onSaveConfigClick()"/>
+				<mx:PopUpMenuButton label="Дополнительно" enabled="false" toolTip="Еще не реализовано"/>
+			</s:HGroup>
+			<s:HGroup top="0" bottom="0" gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="4" horizontalAlign="right" width="147" right="0">
+				<s:Button label="En" width="40" enabled="false" toolTip="Not implemented yet"/>
+				<s:Button label="Ru" width="40" enabled="false"/>
+			</s:HGroup>
+		</s:BorderContainer>
+		<s:TabBar width="920" height="20" dataProvider="{vsTabs}"/>
+		<s:HGroup width="920" height="100%" gap="-1">
+			<mx:ViewStack width="420" height="100%" backgroundColor="0xFFFFFF" id="vsTabs" creationPolicy="all">
+				<s:NavigatorContent label="Общие" width="100%" height="100%" id="pgCommon">
+					<s:Scroller x="0" y="0" width="420" height="100%">
+						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+							<p:PDefinition id="p_definition" valueChanged="updateValue(event)"/>
+							<p:PBattle id="p_battle" valueChanged="updateValue(event)"/>
+							<p:PRating id="p_rating" valueChanged="updateValue(event)"/>
+						</s:VGroup>
+					</s:Scroller>
+				</s:NavigatorContent>
+				<s:NavigatorContent label="Маркеры" width="100%" height="100%" id="pgMarkers">
+					<s:Scroller x="0" y="0" width="420" height="100%">
+						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+							<s:HGroup width="100%" height="145">
+								<s:BorderContainer width="245" height="100" borderVisible="false">
+									<s:ToggleButton x="10" y="10" width="110" label="Союзник" id="ally" change="onVehicleStateChanged(event)"/>
+									<s:ToggleButton x="125" y="10" width="110" label="Противник" id="enemy" change="onVehicleStateChanged(event)"/>
+									<s:ToggleButton x="10" y="40" width="110" label="Живой" id="alive" change="onVehicleStateChanged(event)"/>
+									<s:ToggleButton x="125" y="40" width="110" label="Мертвый" id="dead" change="onVehicleStateChanged(event)"/>
+									<s:ToggleButton x="10" y="70" width="110" label="Номальный" id="normal" change="onVehicleStateChanged(event)"/>
+									<s:ToggleButton x="125" y="70" width="110" label="Расширенный" id="extended" change="onVehicleStateChanged(event)"/>
+								</s:BorderContainer>
+								<s:BorderContainer x="10" borderVisible="false">
+									<s:ButtonBar dataProvider="{vsMarkers}" id="elements" change="onVehicleStateChanged(event)"/>
+								</s:BorderContainer>
+							</s:HGroup>
+							<mx:ViewStack id="vsMarkers" width="100%" height="100%">
+								<s:NavigatorContent label="Класс танка" id="vehicleIcon">
+									<s:Scroller x="0" y="0" width="100%" height="100%">
+										<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+											<m:MVehicleIcon id="m_vehicleIcon" valueChanged="updateMarkerValue(event)"/>
+										</s:VGroup>
+									</s:Scroller>
+								</s:NavigatorContent>
+								<s:NavigatorContent label="Уровень здоровья" id="healthBar">
+									<s:Scroller x="0" y="0" width="100%" height="100%">
+										<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+											<m:MHealthBar id="m_healthBar" valueChanged="updateMarkerValue(event)"/>
+										</s:VGroup>
+									</s:Scroller>
+								</s:NavigatorContent>
+								<s:NavigatorContent label="Наносимый урон" id="damageText">
+									<s:Scroller x="0" y="0" width="100%" height="100%">
+										<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+											<m:MDamageText id="m_damageText" valueChanged="updateMarkerValue(event)"/>
+											<m:MFont id="m_damageText_font" valueChanged="updateMarkerValue(event)"/>
+											<m:MShadow id="m_damageText_shadow" valueChanged="updateMarkerValue(event)"/>
+										</s:VGroup>
+									</s:Scroller>
+								</s:NavigatorContent>
+								<s:NavigatorContent label="Иконка танка" id="contourIcon">
+									<s:Scroller x="0" y="0" width="100%" height="100%">
+										<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+											<m:MContourIcon id="m_contourIcon" valueChanged="updateMarkerValue(event)"/>
+										</s:VGroup>
+									</s:Scroller>
+								</s:NavigatorContent>
+								<s:NavigatorContent label="Уровень танка" id="levelIcon">
+									<s:Scroller x="0" y="0" width="100%" height="100%">
+										<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+											<m:MLevelIcon id="m_levelIcon" valueChanged="updateMarkerValue(event)"/>
+										</s:VGroup>
+									</s:Scroller>
+								</s:NavigatorContent>
+								<s:NavigatorContent label="Маркер действия" id="actionMarker">
+									<s:Scroller x="0" y="0" width="100%" height="100%">
+										<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+											<m:MActionMarker id="m_actionMarker" valueChanged="updateMarkerValue(event)"/>
+										</s:VGroup>
+									</s:Scroller>
+								</s:NavigatorContent>
+								<s:NavigatorContent label="Текстовые поля" id="textFields">
+									<s:Scroller x="0" y="0" width="100%" height="100%">
+										<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+											<m:MTextFields id="m_textFields" valueChanged="updateMarkerValue(event)"/>
+										</s:VGroup>
+									</s:Scroller>
+								</s:NavigatorContent>
+							</mx:ViewStack>
+						</s:VGroup>
+					</s:Scroller>
+				</s:NavigatorContent>
+				<s:NavigatorContent label="Экран загрузки" width="100%" height="100%" id="pgBattleLoading">
+					<s:Scroller x="0" y="0" width="420" height="100%">
+						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+							<p:PBattleLoading id="p_battleLoading" valueChanged="updateValue(event)"/>
+							<p:PBattleLoadingIcons id="p_battleLoading_icons" valueChanged="updateValue(event)"/>
+							<p:PBattleLoadingText id="p_battleLoading_text" valueChanged="updateValue(event)"/>
+						</s:VGroup>
+					</s:Scroller>
+				</s:NavigatorContent>
+				<s:NavigatorContent label="Статистика по Tab" width="100%" height="100%" id="pgStatisticForm">
+					<s:Scroller x="0" y="0" width="420" height="100%">
+						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+							<p:PStatisticForm id="p_statisticForm" valueChanged="updateValue(event)"/>
+							<p:PStatisticFormIcons id="p_statisticForm_icons" valueChanged="updateValue(event)"/>
+							<p:PStatisticFormText id="p_statisticForm_text" valueChanged="updateValue(event)"/>
+						</s:VGroup>
+					</s:Scroller>
+				</s:NavigatorContent>
+				<s:NavigatorContent label="Панели игроков (&quot;Уши&quot;)" width="100%" height="100%" id="pgPlayersPanel">
+					<s:Scroller x="0" y="0" width="420" height="100%">
+						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+							<p:PPlayersPanel id="p_playersPanel" valueChanged="updateValue(event)"/>
+							<p:PPlayersPanelIcons id="p_playersPanel_icons" valueChanged="updateValue(event)"/>
+							<p:PPlayersPanelMedium id="p_playersPanel_medium" valueChanged="updateValue(event)"/>
+							<p:PPlayersPanelMedium2 id="p_playersPanel_medium2" valueChanged="updateValue(event)"/>
+							<p:PPlayersPanelLarge id="p_playersPanel_large" valueChanged="updateValue(event)"/>
+						</s:VGroup>
+					</s:Scroller>
+				</s:NavigatorContent>
+				<s:NavigatorContent label="Цвета" width="100%" height="100%" id="pgColors">
+					<s:Scroller x="0" y="0" width="420" height="100%">
+						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+							<s:Panel width="100%" height="100" title="Системные цвета">
+							</s:Panel>
+							<s:Panel width="100%" height="100" title="Динамический цвет по оставшемуся здоровью">
+							</s:Panel>
+							<s:Panel width="100%" height="100" title="Динамический цвет по проценту оставшегося здоровья">
+							</s:Panel>
+							<s:Panel width="100%" height="100" title="Динамический цвет по эффективности (только в xvm-full)">
+							</s:Panel>
+							<s:Panel width="100%" height="100" title="Динамический цвет по проценту побед (только в xvm-full)">
+							</s:Panel>
+							<s:Panel width="100%" height="100" title="Динамический цвет по количеству кило-боев (только в xvm-full)">
+							</s:Panel>
+						</s:VGroup>
+					</s:Scroller>
+		<!--
+		    "system": {
+		      "ally_alive_normal": "0x96FF00",
+		      "ally_alive_blind": "0x96FF00",
+		      "ally_dead_normal": "0x009900",
+		      "ally_dead_blind": "0x009900",
+		      "ally_blowedup_normal": "0x007700",
+		      "ally_blowedup_blind": "0x007700",
+		      "squadman_alive_normal": "0xFFB964",
+		      "squadman_alive_blind": "0xFFFF00",
+		      "squadman_dead_normal": "0xCA7000",
+		      "squadman_dead_blind": "0xAAAA00",
+		      "squadman_blowedup_normal": "0xA45A00",
+		      "squadman_blowedup_blind": "0x888800",
+		      "teamKiller_alive_normal": "0x00EAFF",
+		      "teamKiller_alive_blind": "0x00EAFF",
+		      "teamKiller_dead_normal": "0x097783",
+		      "teamKiller_dead_blind": "0x097783",
+		      "teamKiller_blowedup_normal": "0x096A75",
+		      "teamKiller_blowedup_blind": "0x096A75",
+		      "enemy_alive_normal": "0xF50800",
+		      "enemy_alive_blind": "0x8379FE",
+		      "enemy_dead_normal": "0x840500",
+		      "enemy_dead_blind": "0x47407A",
+		      "enemy_blowedup_normal": "0x5A0401",
+		      "enemy_blowedup_blind": "0x3B365F"
+		    },
+		    "hp": [
+		      { "value": 200,  "color": "0xDD0000" },
+		      { "value": 400,  "color": "0xDD3333" },
+		      { "value": 1000, "color": "0xFFCC33" },
+		      { "value": 9999, "color": "0xFFFFFF" }
+		    ],
+		    "hp_ratio": [
+		      { "value": 10,  "color": "0xDD0000" },
+		      { "value": 25,  "color": "0xDD3333" },
+		      { "value": 50,  "color": "0xFFCC33" },
+		      { "value": 101, "color": "0xFFFFFF" }
+		    ],
+		    "eff": [
+		      { "value": 600,  "color": "0xDD0000" },
+		      { "value": 900,  "color": "0xDD3333" },
+		      { "value": 1200, "color": "0xFFCC33" },
+		      { "value": 1500, "color": "0x99FF33" },
+		      { "value": 1800, "color": "0x33FF33" },
+		      { "value": 9999, "color": "0xCC66CC" }
+		    ],
+		    "rating": [
+		      { "value": 42,  "color": "0xDD0000" },
+		      { "value": 46,  "color": "0xDD3333" },
+		      { "value": 49,  "color": "0xDDDD33" },
+		      { "value": 51,  "color": "0xFFCC33" },
+		      { "value": 53,  "color": "0x99FF33" },
+		      { "value": 57,  "color": "0x33FF33" },
+		      { "value": 101, "color": "0xCC66CC" }
+		    ],
+		    "kb": [
+		      { "value": 1,   "color": "0xDD0000" },
+		      { "value": 3,   "color": "0xDD3333" },
+		      { "value": 5,   "color": "0xFFCC33" },
+		      { "value": 8,   "color": "0x99FF33" },
+		      { "value": 12,  "color": "0x33FF33" },
+		      { "value": 999, "color": "0xCC66CC" }
+		    ]
+		-->
+				</s:NavigatorContent>
+				<s:NavigatorContent label="Прозрачность" width="100%" height="100%" id="pgTransparency">
+					<s:Scroller x="0" y="0" width="420" height="100%">
+						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+							<s:Panel width="100%" height="100" title="Динамическая прозрачность по оставшемуся здоровью">
+							</s:Panel>
+							<s:Panel width="100%" height="100" title="Динамическая прозрачность по проценту оставшегося здоровья">
+							</s:Panel>
+							<s:Panel width="100%" height="100" title="Динамическая прозрачность по эффективности (xvm-full)">
+							</s:Panel>
+							<s:Panel width="100%" height="100" title="Динамическая прозрачность по проценту побед (xvm-full)">
+							</s:Panel>
+							<s:Panel width="100%" height="100" title="Динамическая прозрачность по количеству кило-боев (xvm-full)">
+							</s:Panel>
+						</s:VGroup>
+					</s:Scroller>
+		<!--
+		  "alpha": {
+		    "hp": [
+		      { "value": 200,  "alpha": 100 },
+		      { "value": 400,  "alpha": 80 },
+		      { "value": 1000, "alpha": 60 },
+		      { "value": 9999, "alpha": 40 }
+		    ],
+		    "hp_ratio": [
+		      { "value": 10,  "alpha": 100 },
+		      { "value": 25,  "alpha": 80 },
+		      { "value": 50,  "alpha": 60 },
+		      { "value": 101, "alpha": 40 }
+		    ],
+		    "eff": [
+		      { "value": 900,  "alpha": 100 },
+		      { "value": 1200, "alpha": 100 },
+		      { "value": 9999, "alpha": 100 }
+		    ],
+		    "rating": [
+		      { "value": 49,  "alpha": 100 },
+		      { "value": 53,  "alpha": 100 },
+		      { "value": 101, "alpha": 100 }
+		    ],
+		    "kb": [
+		      { "value": 2,   "alpha": 100 },
+		      { "value": 10,  "alpha": 100 },
+		      { "value": 999, "alpha": 100 }
+		    ]
+		  },
+		-->
+				</s:NavigatorContent>
+				<s:NavigatorContent label="Наборы иконок" width="100%" height="100%" id="pgIconset">
+					<s:Scroller x="0" y="0" width="420" height="100%">
+						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+							<p:PIconSet id="p_iconSet" valueChanged="updateValue(event)"/>
+						</s:VGroup>
+					</s:Scroller>
+				</s:NavigatorContent>
+				<s:NavigatorContent label="Игроки/кланы" width="100%" height="100%" id="pgPlayers">
+					<s:Scroller x="0" y="0" width="420" height="100%">
+						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+							<s:Panel width="100%" height="100%" title="Иконки игроков/кланов">
+							</s:Panel>
+						</s:VGroup>
+					</s:Scroller>
+				</s:NavigatorContent>
+			</mx:ViewStack>
+			<c:PreviewComponent height="100%" id="preview"/>
 		</s:HGroup>
-		<s:HGroup top="0" bottom="0" gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="4" horizontalAlign="right" width="147" right="0">
-			<s:Button label="En" width="40" enabled="false" toolTip="Not implemented yet"/>
-			<s:Button label="Ru" width="40" enabled="false"/>
-		</s:HGroup>
-	</s:BorderContainer>
-	<mx:TabNavigator id="tabs" creationPolicy="all" creationComplete="onCreateNewConfigClick()" top="32" left="0" width="920" height="488">
-		<s:NavigatorContent label="Общие" width="100%" height="100%" id="pgCommon">
-			<ns1:FlashComponentPlaceholder y="0" width="500" height="400" x="419"/>
-			<s:Scroller x="0" y="0" width="420" height="100%">
-				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-					<p:PDefinition id="p_definition" valueChanged="updateValue(event)"/>
-					<p:PBattle id="p_battle" valueChanged="updateValue(event)"/>
-					<p:PRating id="p_rating" valueChanged="updateValue(event)"/>
-				</s:VGroup>
-			</s:Scroller>
-		</s:NavigatorContent>
-		<s:NavigatorContent label="Маркеры" width="100%" height="100%" id="pgMarkers">
-			<ns1:FlashComponentPlaceholder y="0" width="500" height="400" x="419"/>
-			<s:Scroller x="0" y="0" width="420" height="100%">
-				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-					<s:HGroup width="100%" height="145">
-						<s:BorderContainer width="245" height="100" borderVisible="false">
-							<s:ToggleButton x="10" y="10" width="110" label="Союзник" id="ally" change="onVehicleStateChanged(event)"/>
-							<s:ToggleButton x="125" y="10" width="110" label="Противник" id="enemy" change="onVehicleStateChanged(event)"/>
-							<s:ToggleButton x="10" y="40" width="110" label="Живой" id="alive" change="onVehicleStateChanged(event)"/>
-							<s:ToggleButton x="125" y="40" width="110" label="Мертвый" id="dead" change="onVehicleStateChanged(event)"/>
-							<s:ToggleButton x="10" y="70" width="110" label="Номальный" id="normal" change="onVehicleStateChanged(event)"/>
-							<s:ToggleButton x="125" y="70" width="110" label="Расширенный" id="extended" change="onVehicleStateChanged(event)"/>
-						</s:BorderContainer>
-						<s:BorderContainer x="10" borderVisible="false">
-							<s:ButtonBar dataProvider="{vsMarkers}" id="elements" change="onVehicleStateChanged(event)"/>
-						</s:BorderContainer>
-					</s:HGroup>
-					<mx:ViewStack id="vsMarkers" width="100%" height="100%">
-						<s:NavigatorContent label="Класс танка" id="vehicleIcon">
-							<s:Scroller x="0" y="0" width="100%" height="100%">
-								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-									<m:MVehicleIcon id="m_vehicleIcon" valueChanged="updateMarkerValue(event)"/>
-								</s:VGroup>
-							</s:Scroller>
-						</s:NavigatorContent>
-						<s:NavigatorContent label="Уровень здоровья" id="healthBar">
-							<s:Scroller x="0" y="0" width="100%" height="100%">
-								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-									<m:MHealthBar id="m_healthBar" valueChanged="updateMarkerValue(event)"/>
-								</s:VGroup>
-							</s:Scroller>
-						</s:NavigatorContent>
-						<s:NavigatorContent label="Наносимый урон" id="damageText">
-							<s:Scroller x="0" y="0" width="100%" height="100%">
-								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-									<m:MDamageText id="m_damageText" valueChanged="updateMarkerValue(event)"/>
-									<m:MFont id="m_damageText_font" valueChanged="updateMarkerValue(event)"/>
-									<m:MShadow id="m_damageText_shadow" valueChanged="updateMarkerValue(event)"/>
-								</s:VGroup>
-							</s:Scroller>
-						</s:NavigatorContent>
-						<s:NavigatorContent label="Иконка танка" id="contourIcon">
-							<s:Scroller x="0" y="0" width="100%" height="100%">
-								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-									<m:MContourIcon id="m_contourIcon" valueChanged="updateMarkerValue(event)"/>
-								</s:VGroup>
-							</s:Scroller>
-						</s:NavigatorContent>
-						<s:NavigatorContent label="Уровень танка" id="levelIcon">
-							<s:Scroller x="0" y="0" width="100%" height="100%">
-								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-									<m:MLevelIcon id="m_levelIcon" valueChanged="updateMarkerValue(event)"/>
-								</s:VGroup>
-							</s:Scroller>
-						</s:NavigatorContent>
-						<s:NavigatorContent label="Маркер действия" id="actionMarker">
-							<s:Scroller x="0" y="0" width="100%" height="100%">
-								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-									<m:MActionMarker id="m_actionMarker" valueChanged="updateMarkerValue(event)"/>
-								</s:VGroup>
-							</s:Scroller>
-						</s:NavigatorContent>
-						<s:NavigatorContent label="Текстовые поля" id="textFields">
-							<s:Scroller x="0" y="0" width="100%" height="100%">
-								<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-									<m:MTextFields id="m_textFields" valueChanged="updateMarkerValue(event)"/>
-								</s:VGroup>
-							</s:Scroller>
-						</s:NavigatorContent>
-					</mx:ViewStack>
-				</s:VGroup>
-			</s:Scroller>
-		</s:NavigatorContent>
-		<s:NavigatorContent label="Экран загрузки" width="100%" height="100%" id="pgBattleLoading">
-			<ns1:FlashComponentPlaceholder y="0" width="500" height="400" x="419"/>
-			<s:Scroller x="0" y="0" width="420" height="100%">
-				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-					<p:PBattleLoading id="p_battleLoading" valueChanged="updateValue(event)"/>
-					<p:PBattleLoadingIcons id="p_battleLoading_icons" valueChanged="updateValue(event)"/>
-					<p:PBattleLoadingText id="p_battleLoading_text" valueChanged="updateValue(event)"/>
-				</s:VGroup>
-			</s:Scroller>
-		</s:NavigatorContent>
-		<s:NavigatorContent label="Статистика по Tab" width="100%" height="100%" id="pgStatisticForm">
-			<ns1:FlashComponentPlaceholder y="0" width="500" height="400" x="419"/>
-			<s:Scroller x="0" y="0" width="420" height="100%">
-				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-					<p:PStatisticForm id="p_statisticForm" valueChanged="updateValue(event)"/>
-					<p:PStatisticFormIcons id="p_statisticForm_icons" valueChanged="updateValue(event)"/>
-					<p:PStatisticFormText id="p_statisticForm_text" valueChanged="updateValue(event)"/>
-				</s:VGroup>
-			</s:Scroller>
-		</s:NavigatorContent>
-		<s:NavigatorContent label="Панели игроков (&quot;Уши&quot;)" width="100%" height="100%" id="pgPlayersPanel">
-			<ns1:FlashComponentPlaceholder y="0" width="500" height="400" x="419"/>
-			<s:Scroller x="0" y="0" width="420" height="100%">
-				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-					<p:PPlayersPanel id="p_playersPanel" valueChanged="updateValue(event)"/>
-					<p:PPlayersPanelIcons id="p_playersPanel_icons" valueChanged="updateValue(event)"/>
-					<p:PPlayersPanelMedium id="p_playersPanel_medium" valueChanged="updateValue(event)"/>
-					<p:PPlayersPanelMedium2 id="p_playersPanel_medium2" valueChanged="updateValue(event)"/>
-					<p:PPlayersPanelLarge id="p_playersPanel_large" valueChanged="updateValue(event)"/>
-				</s:VGroup>
-			</s:Scroller>
-		</s:NavigatorContent>
-		<s:NavigatorContent label="Цвета" width="100%" height="100%" id="pgColors">
-			<ns1:FlashComponentPlaceholder y="0" width="500" height="400" x="419"/>
-			<s:Scroller x="0" y="0" width="420" height="100%">
-				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-					<s:Panel width="100%" height="100" title="Системные цвета">
-					</s:Panel>
-					<s:Panel width="100%" height="100" title="Динамический цвет по оставшемуся здоровью">
-					</s:Panel>
-					<s:Panel width="100%" height="100" title="Динамический цвет по проценту оставшегося здоровья">
-					</s:Panel>
-					<s:Panel width="100%" height="100" title="Динамический цвет по эффективности (только в xvm-full)">
-					</s:Panel>
-					<s:Panel width="100%" height="100" title="Динамический цвет по проценту побед (только в xvm-full)">
-					</s:Panel>
-					<s:Panel width="100%" height="100" title="Динамический цвет по количеству кило-боев (только в xvm-full)">
-					</s:Panel>
-				</s:VGroup>
-			</s:Scroller>
-<!--
-    "system": {
-      "ally_alive_normal": "0x96FF00",
-      "ally_alive_blind": "0x96FF00",
-      "ally_dead_normal": "0x009900",
-      "ally_dead_blind": "0x009900",
-      "ally_blowedup_normal": "0x007700",
-      "ally_blowedup_blind": "0x007700",
-      "squadman_alive_normal": "0xFFB964",
-      "squadman_alive_blind": "0xFFFF00",
-      "squadman_dead_normal": "0xCA7000",
-      "squadman_dead_blind": "0xAAAA00",
-      "squadman_blowedup_normal": "0xA45A00",
-      "squadman_blowedup_blind": "0x888800",
-      "teamKiller_alive_normal": "0x00EAFF",
-      "teamKiller_alive_blind": "0x00EAFF",
-      "teamKiller_dead_normal": "0x097783",
-      "teamKiller_dead_blind": "0x097783",
-      "teamKiller_blowedup_normal": "0x096A75",
-      "teamKiller_blowedup_blind": "0x096A75",
-      "enemy_alive_normal": "0xF50800",
-      "enemy_alive_blind": "0x8379FE",
-      "enemy_dead_normal": "0x840500",
-      "enemy_dead_blind": "0x47407A",
-      "enemy_blowedup_normal": "0x5A0401",
-      "enemy_blowedup_blind": "0x3B365F"
-    },
-    "hp": [
-      { "value": 200,  "color": "0xDD0000" },
-      { "value": 400,  "color": "0xDD3333" },
-      { "value": 1000, "color": "0xFFCC33" },
-      { "value": 9999, "color": "0xFFFFFF" }
-    ],
-    "hp_ratio": [
-      { "value": 10,  "color": "0xDD0000" },
-      { "value": 25,  "color": "0xDD3333" },
-      { "value": 50,  "color": "0xFFCC33" },
-      { "value": 101, "color": "0xFFFFFF" }
-    ],
-    "eff": [
-      { "value": 600,  "color": "0xDD0000" },
-      { "value": 900,  "color": "0xDD3333" },
-      { "value": 1200, "color": "0xFFCC33" },
-      { "value": 1500, "color": "0x99FF33" },
-      { "value": 1800, "color": "0x33FF33" },
-      { "value": 9999, "color": "0xCC66CC" }
-    ],
-    "rating": [
-      { "value": 42,  "color": "0xDD0000" },
-      { "value": 46,  "color": "0xDD3333" },
-      { "value": 49,  "color": "0xDDDD33" },
-      { "value": 51,  "color": "0xFFCC33" },
-      { "value": 53,  "color": "0x99FF33" },
-      { "value": 57,  "color": "0x33FF33" },
-      { "value": 101, "color": "0xCC66CC" }
-    ],
-    "kb": [
-      { "value": 1,   "color": "0xDD0000" },
-      { "value": 3,   "color": "0xDD3333" },
-      { "value": 5,   "color": "0xFFCC33" },
-      { "value": 8,   "color": "0x99FF33" },
-      { "value": 12,  "color": "0x33FF33" },
-      { "value": 999, "color": "0xCC66CC" }
-    ]
--->
-		</s:NavigatorContent>
-		<s:NavigatorContent label="Прозрачность" width="100%" height="100%" id="pgTransparency">
-			<ns1:FlashComponentPlaceholder y="0" width="500" height="400" x="419"/>
-			<s:Scroller x="0" y="0" width="420" height="100%">
-				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-					<s:Panel width="100%" height="100" title="Динамическая прозрачность по оставшемуся здоровью">
-					</s:Panel>
-					<s:Panel width="100%" height="100" title="Динамическая прозрачность по проценту оставшегося здоровья">
-					</s:Panel>
-					<s:Panel width="100%" height="100" title="Динамическая прозрачность по эффективности (xvm-full)">
-					</s:Panel>
-					<s:Panel width="100%" height="100" title="Динамическая прозрачность по проценту побед (xvm-full)">
-					</s:Panel>
-					<s:Panel width="100%" height="100" title="Динамическая прозрачность по количеству кило-боев (xvm-full)">
-					</s:Panel>
-				</s:VGroup>
-			</s:Scroller>
-<!--
-  "alpha": {
-    "hp": [
-      { "value": 200,  "alpha": 100 },
-      { "value": 400,  "alpha": 80 },
-      { "value": 1000, "alpha": 60 },
-      { "value": 9999, "alpha": 40 }
-    ],
-    "hp_ratio": [
-      { "value": 10,  "alpha": 100 },
-      { "value": 25,  "alpha": 80 },
-      { "value": 50,  "alpha": 60 },
-      { "value": 101, "alpha": 40 }
-    ],
-    "eff": [
-      { "value": 900,  "alpha": 100 },
-      { "value": 1200, "alpha": 100 },
-      { "value": 9999, "alpha": 100 }
-    ],
-    "rating": [
-      { "value": 49,  "alpha": 100 },
-      { "value": 53,  "alpha": 100 },
-      { "value": 101, "alpha": 100 }
-    ],
-    "kb": [
-      { "value": 2,   "alpha": 100 },
-      { "value": 10,  "alpha": 100 },
-      { "value": 999, "alpha": 100 }
-    ]
-  },
--->
-		</s:NavigatorContent>
-		<s:NavigatorContent label="Наборы иконок" width="100%" height="100%" id="pgIconset">
-			<ns1:FlashComponentPlaceholder y="0" width="500" height="400" x="419"/>
-			<s:Scroller x="0" y="0" width="420" height="100%">
-				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-					<p:PIconSet id="p_iconSet" valueChanged="updateValue(event)"/>
-				</s:VGroup>
-			</s:Scroller>
-		</s:NavigatorContent>
-		<s:NavigatorContent label="Игроки/кланы" width="100%" height="100%" id="pgPlayers">
-			<ns1:FlashComponentPlaceholder y="0" width="500" height="400" x="419"/>
-			<s:Scroller x="0" y="0" width="420" height="100%">
-				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-					<s:Panel width="100%" height="100%" title="Иконки игроков/кланов">
-					</s:Panel>
-				</s:VGroup>
-			</s:Scroller>
-		</s:NavigatorContent>
-	</mx:TabNavigator>
-	<s:TextArea y="{tabs.y+33}" right="0" width="500" height="{tabs.height}" id="taDebug" visible="true" fontFamily="Consolas"/>
+	</s:VGroup>
 </s:Application>

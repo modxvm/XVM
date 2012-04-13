@@ -5,7 +5,7 @@
 	xmlns:mx="library://ns.adobe.com/flex/mx"
 	xmlns:c="components.*"
 	title="Шрифт" width="100%" height="100%">
-	<mx:Image right="5" y="-18" width="16" height="16" source="@Embed(source='cancel.png')" toolTip="Вернуть настройки по умолчанию" useHandCursor="true" buttonMode="true"/>
+	<mx:Image right="5" y="-18" width="16" height="16" source="@Embed(source='images/cancel.png')" toolTip="Вернуть настройки по умолчанию" useHandCursor="true" buttonMode="true"/>
 	<s:VGroup left="10" right="10" top="10" bottom="10" gap="2" variableRowHeight="true">
 		<c:LabeledFontSelector label="Название шрифта" id="v_name" config="font.name" change="onChange(event)"/>
 		<c:LabeledNumberSelector label="Размер" id="v_size" config="font.size" minimum="0" maximum="50" change="onChange(event)"/>

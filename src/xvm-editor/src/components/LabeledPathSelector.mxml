@@ -58,5 +58,5 @@
 	</fx:Script>
 	<s:Label x="0" text="{label}" width="{labelWidth}" height="{wrapTextField ? height/2 : height}" verticalAlign="middle"/>
 	<s:TextInput left="{wrapTextField ? 0 : labelWidth}" right="0" bottom="0" height="{wrapTextField ? height/2 : height}" change="onChange(event)" id="edit"/>
-	<!--<mx:Image right="0" bottom="2" width="16" height="16" source="@Embed(source='folder.png')" useHandCursor="true" buttonMode="true" click="SelectDir(event)"/>-->
+	<!--<mx:Image right="0" bottom="2" width="16" height="16" source="@Embed(source='images/folder.png')" useHandCursor="true" buttonMode="true" click="SelectDir(event)"/>-->
 </c:LabeledComponent>

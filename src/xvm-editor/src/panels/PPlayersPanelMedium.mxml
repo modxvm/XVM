@@ -5,7 +5,7 @@
 	xmlns:mx="library://ns.adobe.com/flex/mx"
 	xmlns:c="components.*"
 	width="100%" height="140" title="Режим ушей 'medium' - первые средние уши в игре">
-	<mx:Image right="5" y="-18" width="16" height="16" source="@Embed(source='cancel.png')" toolTip="Вернуть настройки по умолчанию" useHandCursor="true" buttonMode="true"/>
+	<mx:Image right="5" y="-18" width="16" height="16" source="@Embed(source='images/cancel.png')" toolTip="Вернуть настройки по умолчанию" useHandCursor="true" buttonMode="true"/>
 	<s:VGroup left="10" right="10" top="10" bottom="10" gap="2" variableRowHeight="true">
 		<c:LabeledNumberSelector label="Ширина имени игрока" id="v_width" config="playersPanel.medium.width" minimum="0" maximum="250" change="onChange(event)"/>
 		<c:LabeledTextInput label="Формат левого поля имени игрока" labelWidth="100%" wrapTextField="true" height="40" id="v_formatLeft" config="playersPanel.medium.formatLeft" change="onChange(event)"/>

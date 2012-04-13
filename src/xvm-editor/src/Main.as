@@ -6,13 +6,13 @@ import utils.DefaultConfig;
 import utils.Defines;
 import utils.JSON;
 
-public const DEBUG:Boolean = true;
+public const DEBUG:Boolean = false;
 
 public function debug(str:String):void
 {
-	if (!DEBUG)
+	if (!DEBUG || !preview || !preview.taDebug)
 		return;
-	taDebug.text += str + "\n";
+	preview.taDebug.text += str + "\n";
 }
 
 protected function onCreateNewConfigClick():void
