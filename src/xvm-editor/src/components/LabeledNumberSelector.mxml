@@ -69,7 +69,7 @@
 			else
 				stepper.value = edit.value;
 
-			dispatchEvent(new Event(Event.CHANGE));
+			super.onChange(event);
 		}
 	</fx:Script>
 	<fx:Metadata>
