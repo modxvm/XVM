@@ -400,7 +400,7 @@
             }
           },
           "healthBar": {                      // Health indicator
-            "visible": true,                  //   false - Disable
+            "visible": false,                 //   false - Disable
             "x": -41,                         //   Position on the X axis
             "y": -33,                         //   Position on the Y axis
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
@@ -491,7 +491,7 @@
             }
           },
           "healthBar": {                      // Health indicator
-            "visible": true,                  //   false - Disable
+            "visible": false,                 //   false - Disable
             "x": -41,                         //   Position on the X axis
             "y": -33,                         //   Position on the Y axis
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
@@ -915,7 +915,7 @@
             }
           },
           "healthBar": {                      // Health indicator
-            "visible": true,                  //   false - Disable
+            "visible": false,                 //   false - Disable
             "x": -41,                         //   Position on the X axis
             "y": -33,                         //   Position on the Y axis
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
@@ -1006,7 +1006,7 @@
             }
           },
           "healthBar": {                      // Health indicator
-            "visible": true,                  //   false - Disable
+            "visible": false,                 //   false - Disable
             "x": -41,                         //   Position on the X axis
             "y": -33,                         //   Position on the Y axis
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)

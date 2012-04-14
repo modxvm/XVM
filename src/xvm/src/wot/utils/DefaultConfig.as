@@ -11,7 +11,7 @@ class wot.utils.DefaultConfig
   public static function get config(): Object
   {
     var d:Date = new Date();
-    var a:* =
+    var a:Object =
     {
       configVersion: Defines.CONFIG_VERSION,
       editorVersion: Defines.EDITOR_VERSION,
@@ -19,7 +19,8 @@ class wot.utils.DefaultConfig
         author: "sirmax2",
         description: "Default settings for XVM",
         url: "http://code.google.com/p/wot-xvm/",
-        date: (d.date < 10 ? "0" : "") + d.date + "." + (d.month < 9 ? "0" : "") + (d.month + 1) + "." + d.fullYear,
+        date: (d.getDate() < 10 ? "0" : "") + d.getDate() + "." + 
+          (d.getMonth() < 9 ? "0" : "") + (d.getMonth() + 1) + "." + d.getFullYear(),
         gameVersion: Defines.WOT_VERSION,
         modMinVersion: Defines.XVM_VERSION
       },
