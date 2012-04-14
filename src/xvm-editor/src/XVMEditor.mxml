@@ -124,7 +124,10 @@
 								<s:NavigatorContent label="Текстовые поля" id="textFields">
 									<s:Scroller x="0" y="0" width="100%" height="100%">
 										<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-											<m:MTextFields id="m_textFields" valueChanged="updateMarkerValue(event)"/>
+											<m:MTextFieldList height="100" id="m_textFieldList" valueChanged="updateMarkerValue(event)"/>
+											<m:MTextField id="m_textField" valueChanged="updateMarkerValue(event)"/>
+											<m:MFont id="m_textField_font" valueChanged="updateMarkerValue(event)"/>
+											<m:MShadow id="m_textField_shadow" valueChanged="updateMarkerValue(event)"/>
 										</s:VGroup>
 									</s:Scroller>
 								</s:NavigatorContent>

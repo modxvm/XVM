@@ -250,9 +250,15 @@ private function RefreshMarkersPage():void
 	debug("RefreshMarkersPage()");
 	try
 	{
+		var activeElement:* = getActiveMarkerElement();
+		if (activeElement == textFields)
+		{
+			RefreshTextFields();
+			return;
+		}
+		
 		var activeMarkerStates:Array = getActiveMarkerStates();
 
-		var activeElement:* = getActiveMarkerElement();
 		for each (var mname:String in ElementControls[activeElement.id])
 		{
 			for each (var mname2:String in ElementControls[mname])
@@ -260,7 +266,6 @@ private function RefreshMarkersPage():void
 				var control:LabeledComponent = this[mname][mname2] as LabeledComponent;
 				
 				//debug(mname + "." + mname2);
-				//var values:Array = [];
 				var valueSet: Boolean = false;
 				var value:*;
 				var valueOk: Boolean = true;
@@ -284,7 +289,7 @@ private function RefreshMarkersPage():void
 					}
 				}
 
-				control.enabled = valueOk;
+				control.conflict = !valueOk;
 				control.value = value; 
 			}
 		}
@@ -293,4 +298,9 @@ private function RefreshMarkersPage():void
 	{
 		debug("ERROR: RefreshMarkersPage(): " + ex.toString());
 	}
+}
+
+private function RefreshTextFields():void
+{
+	
 }

@@ -11,46 +11,6 @@
 
 		[Embed(source="images/bg1.jpg")]
 		private static var IMG_bg1 : Class;
-		[Embed(source="images/ally/Ferdinand.png")]
-		private static var IMG_ally_Ferdinand : Class;
-		[Embed(source="images/ally/Ferdinand-dead.png")]
-		private static var IMG_ally_Ferdinand_dead : Class;
-		[Embed(source="images/ally/GWPanther.png")]
-		private static var IMG_ally_GWPanther : Class;
-		[Embed(source="images/ally/GWPanther-dead.png")]
-		private static var IMG_ally_GWPanther_dead : Class;
-		[Embed(source="images/ally/Panther2.png")]
-		private static var IMG_ally_Panther2 : Class;
-		[Embed(source="images/ally/Panther2-dead.png")]
-		private static var IMG_ally_Panther2_dead : Class;
-		[Embed(source="images/ally/Tiger2.png")]
-		private static var IMG_ally_Tiger2 : Class;
-		[Embed(source="images/ally/Tiger2-dead.png")]
-		private static var IMG_ally_Tiger2_dead : Class;
-		[Embed(source="images/ally/VK2801.png")]
-		private static var IMG_ally_VK2801 : Class;
-		[Embed(source="images/ally/VK2801-dead.png")]
-		private static var IMG_ally_VK2801_dead : Class;
-		[Embed(source="images/enemy/Chaffee.png")]
-		private static var IMG_enemy_Chaffee : Class;
-		[Embed(source="images/enemy/Chaffee-dead.png")]
-		private static var IMG_enemy_Chaffee_dead : Class;
-		[Embed(source="images/enemy/M40.png")]
-		private static var IMG_enemy_M40 : Class;
-		[Embed(source="images/enemy/M40-dead.png")]
-		private static var IMG_enemy_M40_dead : Class;
-		[Embed(source="images/enemy/Pershing.png")]
-		private static var IMG_enemy_Pershing : Class;
-		[Embed(source="images/enemy/Pershing-dead.png")]
-		private static var IMG_enemy_Pershing_dead : Class;
-		[Embed(source="images/enemy/T28P.png")]
-		private static var IMG_enemy_T28P : Class;
-		[Embed(source="images/enemy/T28P-dead.png")]
-		private static var IMG_enemy_T28P_dead : Class;
-		[Embed(source="images/enemy/T32.png")]
-		private static var IMG_enemy_T32 : Class;
-		[Embed(source="images/enemy/T32-dead.png")]
-		private static var IMG_enemy_T32_dead : Class;
 
 		protected virtual function onChange(event:Event):void
 		{
@@ -66,60 +26,6 @@
 					break;
 			}
 		}
-
-		protected function cbAlly_changeHandler(event:ListEvent):void
-		{
-			switch (cbAlly.text)
-			{
-				case "Ferdinand":
-					imgAllyAlive.source = new IMG_ally_Ferdinand();
-					imgAllyDead.source = new IMG_ally_Ferdinand_dead();
-					break;
-				case "GWPanther":
-					imgAllyAlive.source = new IMG_ally_GWPanther();
-					imgAllyDead.source = new IMG_ally_GWPanther_dead();
-					break;
-				case "Panther2":
-					imgAllyAlive.source = new IMG_ally_Panther2();
-					imgAllyDead.source = new IMG_ally_Panther2_dead();
-					break;
-				case "Tiger2":
-					imgAllyAlive.source = new IMG_ally_Tiger2();
-					imgAllyDead.source = new IMG_ally_Tiger2_dead();
-					break;
-				case "VK2801":
-					imgAllyAlive.source = new IMG_ally_VK2801();
-					imgAllyDead.source = new IMG_ally_VK2801_dead();
-					break;
-			}
-		}
-
-		protected function cbEnemy_changeHandler(event:ListEvent):void
-		{
-			switch (cbEnemy.text)
-			{
-				case "Chaffee":
-					imgEnemyAlive.source = new IMG_enemy_Chaffee();
-					imgEnemyDead.source = new IMG_enemy_Chaffee_dead();
-					break;
-				case "M40":
-					imgEnemyAlive.source = new IMG_enemy_M40();
-					imgEnemyDead.source = new IMG_enemy_M40_dead();
-					break;
-				case "Pershing":
-					imgEnemyAlive.source = new IMG_enemy_Pershing();
-					imgEnemyDead.source = new IMG_enemy_Pershing_dead();
-					break;
-				case "T28P":
-					imgEnemyAlive.source = new IMG_enemy_T28P();
-					imgEnemyDead.source = new IMG_enemy_T28P_dead();
-					break;
-				case "T32":
-					imgEnemyAlive.source = new IMG_enemy_T32();
-					imgEnemyDead.source = new IMG_enemy_T32_dead();
-					break;
-			}
-		}
 	</fx:Script>
 	<fx:Metadata>
 		[Event(name="change", type="flash.events.Event")]
@@ -128,10 +34,6 @@
 		<s:NavigatorContent width="100%" height="100%" id="preview">
 			<mx:Canvas x="0" y="0" width="500" height="400" backgroundColor="0xAACCBB">
 				<mx:Image id="imgBG" x="0" y="0" width="500" height="400"/>
-				<mx:Image id="imgAllyAlive" x="-10" y="200"/>
-				<mx:Image id="imgAllyDead" x="110" y="120" width="200" height="160"/>
-				<mx:Image id="imgEnemyAlive" x="250" y="200"/>
-				<mx:Image id="imgEnemyDead" x="200" y="120" width="200" height="160"/>
 			</mx:Canvas>
 			<s:BorderContainer y="400" width="100%" height="32" borderVisible="false">
 				<s:HGroup top="0" left="0" bottom="0" width="100%" gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="4">
@@ -139,27 +41,7 @@
 						<s:Label text="Фон" height="24" verticalAlign="middle"/>
 						<mx:ComboBox id="cbBG" selectedIndex="0" editable="false" change="cbBG_changeHandler(event)" creationComplete="cbBG_changeHandler(new ListEvent(''))">
 							<mx:ArrayCollection>
-								<fx:String>Малиновка</fx:String>
-							</mx:ArrayCollection>
-						</mx:ComboBox>
-						<s:Label text="Танк союзника" height="24" verticalAlign="middle"/>
-						<mx:ComboBox id="cbAlly" selectedIndex="0" editable="false" change="cbAlly_changeHandler(event)" creationComplete="cbAlly_changeHandler(new ListEvent(''))">
-							<mx:ArrayCollection>
-								<fx:String>Tiger2</fx:String>
-								<fx:String>Panther2</fx:String>
-								<fx:String>Ferdinand</fx:String>
-								<fx:String>VK2801</fx:String>
-								<fx:String>GWPanther</fx:String>
-							</mx:ArrayCollection>
-						</mx:ComboBox>
-						<s:Label text="Танк противника" height="24" verticalAlign="middle"/>
-						<mx:ComboBox id="cbEnemy" selectedIndex="0" editable="false" change="cbEnemy_changeHandler(event)" creationComplete="cbEnemy_changeHandler(new ListEvent(''))">
-							<mx:ArrayCollection>
-								<fx:String>T32</fx:String>
-								<fx:String>Pershing</fx:String>
-								<fx:String>T28P</fx:String>
-								<fx:String>Chaffee</fx:String>
-								<fx:String>M40</fx:String>
+								<fx:String>Фон 1</fx:String>
 							</mx:ArrayCollection>
 						</mx:ComboBox>
 					</s:TileGroup>
