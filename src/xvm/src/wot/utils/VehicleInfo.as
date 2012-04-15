@@ -37,8 +37,8 @@ class wot.utils.VehicleInfo
 
   private static var _data = {
     Ch01_Type59:		{ level: 8,  type: MT, tier1: 9,  tier2: 11 },
-    Ch02_Type62:		{ level: 0,  type: HT, tier1: 0,  tier2: 0 },
-    Ch03_WZ_111:		{ level: 0,  type: HT, tier1: 0,  tier2: 0 },
+    Ch02_Type62:		{ level: 6,  type: LT, tier1: 8,  tier2: 12 },
+    Ch03_WZ_111:		{ level: 8,  type: HT, tier1: 9,  tier2: 12 },
     _105_leFH18B2:		{ level: 4,  type: TD, tier1: 5,  tier2: 8 },
     AMX_12t:			{ level: 5,  type: LT, tier1: 7,  tier2: 10 },
     AMX_13_75:			{ level: 6,  type: LT, tier1: 8,  tier2: 12 },

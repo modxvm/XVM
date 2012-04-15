@@ -6,6 +6,7 @@ XVM-2.1.test6:
     auto running the game
   * added 'name' option for text fields in config
   * fixed default configs
+  * added vehicle info for Type 62 and WZ111
 
 XVM-2.1.test5:
   * fixes in win chances
