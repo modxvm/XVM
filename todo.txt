@@ -4,6 +4,7 @@ Top:
 размытия иконок на экране загрузки
 Sometimes enemy vehicle contour icon is showing default WoT icon instead of my modded one.
 отдельная настройка положения иконки для левой и правой панелей
+иконка игрока/клана в маркерах над танками
 
 Is there any chance to get {{hp-max}}, {{eff}}, {{nick}}, {{vehicle}} in playerspanel?
 I think its not impossible. If you fix positions of info above the tanks to playerspanel
