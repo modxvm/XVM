@@ -32,7 +32,9 @@ public class DefaultConfig
         // true - убрать переключатель режимов мышкой
         removePanelsModeSwitcher: false,
         // true - включить отображение сетки координат (может быть полезным для настройки)
-        drawGrid: false
+        drawGrid: false,
+        // true - отключить отображение версии xvm в верхнем левом углу экрана
+        hideXVMVersion: false
       },
       rating: {
         // true - включить отображение статистики. Глобальный переключатель - без него модуль статистики будет везде отключен.

@@ -5,12 +5,6 @@
     <mod-version-min>2.0</mod-version-min>
     <game-version>0.7.2</game-version>
   </definition>
-  <battle>
-    <drawGrid>false</drawGrid>
-  </battle>
-  <rating>
-    <showPlayersStatistics>true</showPlayersStatistics>
-  </rating>
   <components>
     <friend>
       <combatScrollText>

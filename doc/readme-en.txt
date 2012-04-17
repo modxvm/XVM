@@ -24,6 +24,7 @@ battle
   showPostmortemTips:     false - disable sliding postmortem panel
   drawGrid:               true  - draw coordinates grid (may be usefil for
                                   aligning marker elements)
+  hideXVMVersion:         true  - hide xvm version at top left corner of screen
 
 rating
   showPlayersStatistics:  true  - enable player statistics. Global switch,

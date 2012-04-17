@@ -70,7 +70,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     xvmHBFill = xvmHB.createEmptyMovieClip("fill", 3);
 
     damageHolder = createEmptyMovieClip("damageHolder", getNextHighestDepth());
-    
+
     // Remove standard fields
     pNameField._visible = false;
     pNameField.removeTextField();
@@ -99,7 +99,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
         delete this.onEnterFrame;
 
         // Draw watermark
-        if (!_root.hasOwnProperty("xvmWatermark"))
+        if (!Config.s_config.battle.hideXVMVersion && !_root.hasOwnProperty("xvmWatermark"))
         {
           var wm = _root.createTextField("xvmWatermark", _root.getNextHighestDepth(), -1, -2, 50, 16);
           wm.antiAliasType = "advanced";

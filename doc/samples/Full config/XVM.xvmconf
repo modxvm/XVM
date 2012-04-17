@@ -13,7 +13,8 @@
     "mirroredVehicleIcons": true,
     "showPostmortemTips": true,
     "removePanelsModeSwitcher": false,
-    "drawGrid": false
+    "drawGrid": false,
+    "hideXVMVersion": false
   },
   "rating": {
     "showPlayersStatistics": false,

@@ -19,7 +19,7 @@ class wot.utils.DefaultConfig
         author: "sirmax2",
         description: "Default settings for XVM",
         url: "http://code.google.com/p/wot-xvm/",
-        date: (d.getDate() < 10 ? "0" : "") + d.getDate() + "." + 
+        date: (d.getDate() < 10 ? "0" : "") + d.getDate() + "." +
           (d.getMonth() < 9 ? "0" : "") + (d.getMonth() + 1) + "." + d.getFullYear(),
         gameVersion: Defines.WOT_VERSION,
         modMinVersion: Defines.XVM_VERSION
@@ -32,7 +32,9 @@ class wot.utils.DefaultConfig
         // true - убрать переключатель режимов мышкой
         removePanelsModeSwitcher: false,
         // true - включить отображение сетки координат (может быть полезным для настройки)
-        drawGrid: false
+        drawGrid: false,
+        // true - отключить отображение версии xvm в верхнем левом углу экрана
+        hideXVMVersion: false
       },
       rating: {
         // true - включить отображение статистики. Глобальный переключатель - без него модуль статистики будет везде отключен.

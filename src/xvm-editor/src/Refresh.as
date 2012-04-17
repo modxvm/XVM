@@ -46,6 +46,7 @@ private function RefreshCommonPage():void
 		this.p_battle.v_showPostmortemTips.value = section.showPostmortemTips;
 		this.p_battle.v_removePanelsModeSwitcher.value = section.removePanelsModeSwitcher;
 		this.p_battle.v_drawGrid.value = section.drawGrid;
+		this.p_battle.v_hideXVMVersion.value = section.hideXVMVersion;
 
 		section = Config.s_config.rating;
 		this.p_rating.v_showPlayersStatistics.value = section.showPlayersStatistics;
@@ -256,7 +257,7 @@ private function RefreshMarkersPage():void
 			RefreshTextFields();
 			return;
 		}
-		
+
 		var activeMarkerStates:Array = getActiveMarkerStates();
 
 		for each (var mname:String in ElementControls[activeElement.id])
@@ -264,14 +265,14 @@ private function RefreshMarkersPage():void
 			for each (var mname2:String in ElementControls[mname])
 			{
 				var control:LabeledComponent = this[mname][mname2] as LabeledComponent;
-				
+
 				//debug(mname + "." + mname2);
 				var valueSet: Boolean = false;
 				var value:*;
 				var valueOk: Boolean = true;
 				for each (var state:String in activeMarkerStates)
 				{
-					var conf:String = "markers." + state + "." + activeElement.id + "." + control.config;   
+					var conf:String = "markers." + state + "." + activeElement.id + "." + control.config;
 					//debug("  " + conf + "=" + Config.GetValue(conf));
 					//values.push(Config.GetValue(conf));
 					if (!valueSet)
@@ -290,7 +291,7 @@ private function RefreshMarkersPage():void
 				}
 
 				control.conflict = !valueOk;
-				control.value = value; 
+				control.value = value;
 			}
 		}
 	}
@@ -302,5 +303,5 @@ private function RefreshMarkersPage():void
 
 private function RefreshTextFields():void
 {
-	
+
 }
