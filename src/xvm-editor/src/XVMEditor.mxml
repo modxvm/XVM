@@ -171,41 +171,41 @@
 				<s:NavigatorContent label="Цвета" width="100%" height="100%" id="pgColors">
 						<mx:Accordion width="420" height="100%">
 							<s:NavigatorContent label="Системные цвета" width="100%" height="100%">
-								<p:PSystemColors id="p_systemColors"/>
+								<p:PSystemColors id="p_systemColors" valueChanged="updateValue(event)"/>
 							</s:NavigatorContent>
 							<s:NavigatorContent label="Динамический цвет по оставшемуся здоровью" width="100%" height="100%">
-								<p:PDynamicValues id="p_colors_hp" config="colors.hp" minimum="0" maximum="3000" editorClass="DynamicColorEdit"/>
+								<p:PDynamicValues id="p_colors_hp" config="colors.hp" minimum="0" maximum="3000" editorClass="DynamicColorEdit" valueChanged="updateValue(event)"/>
 							</s:NavigatorContent>
 							<s:NavigatorContent label="Динамический цвет по проценту оставшегося здоровья" width="100%" height="100%">
-								<p:PDynamicValues id="p_colors_hp_ratio" config="colors.hp_ratio" minimum="0" maximum="101" editorClass="DynamicColorEdit"/>
+								<p:PDynamicValues id="p_colors_hp_ratio" config="colors.hp_ratio" minimum="0" maximum="101" editorClass="DynamicColorEdit" valueChanged="updateValue(event)"/>
 							</s:NavigatorContent>
 							<s:NavigatorContent label="Динамический цвет по эффективности (только в xvm-full)" width="100%" height="100%">
-								<p:PDynamicValues id="p_colors_eff" config="colors.eff" minimum="0" maximum="3000" editorClass="DynamicColorEdit"/>
+								<p:PDynamicValues id="p_colors_eff" config="colors.eff" minimum="0" maximum="3000" editorClass="DynamicColorEdit" valueChanged="updateValue(event)"/>
 							</s:NavigatorContent>
 							<s:NavigatorContent label="Динамический цвет по проценту побед (только в xvm-full)" width="100%" height="100%">
-								<p:PDynamicValues id="p_colors_rating" config="colors.rating" minimum="0" maximum="101" editorClass="DynamicColorEdit"/>
+								<p:PDynamicValues id="p_colors_rating" config="colors.rating" minimum="0" maximum="101" editorClass="DynamicColorEdit" valueChanged="updateValue(event)"/>
 							</s:NavigatorContent>
 							<s:NavigatorContent label="Динамический цвет по количеству кило-боев (только в xvm-full)" width="100%" height="100%">
-								<p:PDynamicValues id="p_colors_kb" config="colors.kb" minimum="0" maximum="100" editorClass="DynamicColorEdit"/>
+								<p:PDynamicValues id="p_colors_kb" config="colors.kb" minimum="0" maximum="100" editorClass="DynamicColorEdit" valueChanged="updateValue(event)"/>
 							</s:NavigatorContent>
 						</mx:Accordion>
 				</s:NavigatorContent>
 				<s:NavigatorContent label="Прозрачность" width="100%" height="100%" id="pgTransparency">
 					<mx:Accordion width="420" height="100%">
 						<s:NavigatorContent label="Динамическая прозрачность по оставшемуся здоровью" width="100%" height="100%">
-							<p:PDynamicValues id="p_alpha_hp" config="alpha.hp" minimum="0" maximum="3000" editorClass="DynamicAlphaEdit"/>
+							<p:PDynamicValues id="p_alpha_hp" config="alpha.hp" minimum="0" maximum="3000" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)"/>
 						</s:NavigatorContent>
 						<s:NavigatorContent label="Динамическая прозрачность по проценту оставшегося здоровья" width="100%" height="100%">
-							<p:PDynamicValues id="p_alpha_hp_ratio" config="alpha.hp_ratio" minimum="0" maximum="101" editorClass="DynamicAlphaEdit"/>
+							<p:PDynamicValues id="p_alpha_hp_ratio" config="alpha.hp_ratio" minimum="0" maximum="101" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)"/>
 						</s:NavigatorContent>
 						<s:NavigatorContent label="Динамическая прозрачность по эффективности (только в xvm-full)" width="100%" height="100%">
-							<p:PDynamicValues id="p_alpha_eff" config="alpha.eff" minimum="0" maximum="3000" editorClass="DynamicAlphaEdit"/>
+							<p:PDynamicValues id="p_alpha_eff" config="alpha.eff" minimum="0" maximum="3000" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)"/>
 						</s:NavigatorContent>
 						<s:NavigatorContent label="Динамическая прозрачность по проценту побед (только в xvm-full)" width="100%" height="100%">
-							<p:PDynamicValues id="p_alpha_rating" config="alpha.rating" minimum="0" maximum="101" editorClass="DynamicAlphaEdit"/>
+							<p:PDynamicValues id="p_alpha_rating" config="alpha.rating" minimum="0" maximum="101" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)"/>
 						</s:NavigatorContent>
 						<s:NavigatorContent label="Динамическая прозрачность по количеству кило-боев (xvm-full)" width="100%" height="100%">
-							<p:PDynamicValues id="p_alpha_kb" config="alpha.kb" minimum="0" maximum="100" editorClass="DynamicAlphaEdit"/>
+							<p:PDynamicValues id="p_alpha_kb" config="alpha.kb" minimum="0" maximum="100" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)"/>
 						</s:NavigatorContent>
 					</mx:Accordion>
 				</s:NavigatorContent>
@@ -220,7 +220,7 @@
 					<s:Scroller x="0" y="0" width="420" height="100%">
 						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
 							<s:Panel width="100%" height="100%" title="Иконки игроков/кланов">
-								<p:PDynamicValues id="p_players" config="players" editorClass="DynamicPlayersEdit"/>
+								<p:PDynamicValues id="p_players" config="players" editorClass="DynamicPlayersEdit" valueChanged="updateValue(event)"/>
 							</s:Panel>
 						</s:VGroup>
 					</s:Scroller>

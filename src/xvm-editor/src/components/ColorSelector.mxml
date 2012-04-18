@@ -5,34 +5,31 @@
 		 xmlns:validators="validators.*"
 		 xmlns:utils="utils.*"
 		 verticalAlign="middle"
-		 gap="0">
+		 gap="-1">
 	<fx:Script>
 		<![CDATA[
-			public static function toHex(item:Object):String
+			private static function toHex(v:Number):String
 			{
-				var hex:String = Number(item).toString(16);
-				return ("00000" + hex.toUpperCase()).substr(-6);
+				return ("00000" + v.toString(16).toUpperCase()).substr(-6);
 			}
 
+			protected var _value:Number;
 			[Bindable]
 			public function get value():String
 			{
-				return "0x" + toHex(cp.selectedColor);
+				return !isNaN(_value) ? "0x" + toHex(_value) : null;
 			}
-			public function set value(value:String):void
+			public function set value(v:String):void
 			{
-				var n:Number = parseInt(value);
-				c.text = isFinite(n) ? "#" + toHex(n) : "";
+				_value = Number(v);
+				c.text = !isNaN(_value) ? "#" + toHex(_value) : "";
 				c.validateNow();
+				cp.selectedColor = _value;
 			}
 
 			protected function onChange(event:Event):void
 			{
-				if (event.target == cp)
-					c.text = "#" + toHex(cp.selectedColor);
-				else
-					cp.selectedColor = parseInt(c.text.substr(1), 16);
-
+				value = (event.target == cp) ? cp.selectedColor.toString() : "0x" + c.text.substr(1);
 				dispatchEvent(new Event(Event.CHANGE));
 			}
 		]]>
@@ -41,7 +38,7 @@
 		[Event(name="change", type="flash.events.Event")]
 	</fx:Metadata>
 	<fx:Declarations>
-		<validators:TextColorValidator required="true" id="v" source="{c}" property="text" valid="onChange(event)"/>
+		<validators:TextColorValidator required="true" source="{c}" property="text" valid="onChange(event)"/>
 	</fx:Declarations>
 	<s:TextInput x="72" y="72" id="c" width="100%" restrict="#0-9A-Fa-f" change="c.validateNow()"/>
 	<mx:ColorPicker x="132" y="72" id="cp" change="onChange(event)"/>

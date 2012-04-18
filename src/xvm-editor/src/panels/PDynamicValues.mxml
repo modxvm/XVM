@@ -31,15 +31,15 @@
 					{
 						case "DynamicAlphaEdit":
 							instance = new DynamicAlphaEdit();
-							instance.label = "менее чем";
-							instance.labelWidth = "75";
+							instance.label = "<";
+							instance.labelWidth = "10";
 							(instance as DynamicAlphaEdit).minimum = minimum;
 							(instance as DynamicAlphaEdit).maximum = maximum;
 							break;
 						case "DynamicColorEdit":
 							instance = new DynamicColorEdit();
-							instance.label = "менее чем";
-							instance.labelWidth = "75";
+							instance.label = "<";
+							instance.labelWidth = "10";
 							(instance as DynamicColorEdit).minimum = minimum;
 							(instance as DynamicColorEdit).maximum = maximum;
 							break;
@@ -68,7 +68,6 @@
 			
 			// minimum
 			protected var _minimum: Number = 0;
-			
 			[Bindable]
 			public function get minimum(): Number
 			{
@@ -81,7 +80,6 @@
 			
 			// maximum
 			protected var _maximum: Number = 10;
-			
 			[Bindable]
 			public function get maximum(): Number
 			{
@@ -94,7 +92,6 @@
 			
 			// renderer
 			private var _editorClass:String;
-			
 			[Bindable]
 			public function get editorClass():String
 			{
@@ -107,13 +104,9 @@
 		]]>
 	</fx:Script>
 	<mx:Image right="5" y="5" width="16" height="16" source="@Embed(source='images/cancel.png')" toolTip="Вернуть настройки по умолчанию" useHandCursor="true" buttonMode="true"/>
-	<s:HGroup left="10" right="30" top="10" bottom="10">
-		<s:Scroller>
-			<s:VGroup id="container" width="100%" height="100%">
-					  
-			</s:VGroup>
+	<s:HGroup left="10" right="25" top="10" bottom="10">
+		<s:Scroller width="100%" height="100%">
+			<s:VGroup id="container" width="100%" height="100%" gap="-1"/>
 		</s:Scroller>
-		<mx:Button icon="@Embed(source='images/delete.png')" width="20"/>
-		<mx:Button icon="@Embed(source='images/add.png')" width="20"/>
 	</s:HGroup>
 </c:BorderContainerComponent>
