@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009"
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
 		 xmlns:s="library://ns.adobe.com/flex/spark"
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
-		 width="100%">
+		 width="100%"
+		 borderVisible="false">
 	<fx:Script>
 		import events.ValueChangedEvent;
 
@@ -18,4 +19,4 @@
 	<fx:Metadata>
 		[Event(name="valueChanged", type="events.ValueChangedEvent")]
 	</fx:Metadata>
-</s:Panel>
+</s:BorderContainer>

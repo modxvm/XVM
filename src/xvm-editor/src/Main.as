@@ -1,12 +1,11 @@
-﻿
-import mx.core.UIComponent;
+﻿import mx.core.UIComponent;
 
 import utils.Config;
 import utils.DefaultConfig;
 import utils.Defines;
 import utils.JSON;
 
-public const DEBUG:Boolean = false;
+public const DEBUG:Boolean = true;
 
 public function debug(str:String):void
 {

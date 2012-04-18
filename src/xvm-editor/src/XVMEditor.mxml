@@ -13,17 +13,21 @@
 		<s:BasicLayout/>
 	</s:layout>
 	<fx:Script>
-		include "IO.as";
-		include "Main.as";
-		include "Refresh.as";
-		include "Update.as";
-
-		protected function onCreationComplete(event:Event):void
-		{
-			preview.vsPreview.selectedChild = DEBUG ? preview.debug : preview.preview;
-			onCreateNewConfigClick();
-			onVehicleStateChanged(event);
-		}
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			include "IO.as";
+			include "Main.as";
+			include "Refresh.as";
+			include "Update.as";
+	
+			protected function onCreationComplete(event:Event):void
+			{
+				preview.vsPreview.selectedChild = DEBUG ? preview.debug : preview.preview;
+				onCreateNewConfigClick();
+				onVehicleStateChanged(event);
+			}
+		]]>
 	</fx:Script>
 	<fx:Style>
 		@namespace s "library://ns.adobe.com/flex/spark";
@@ -165,134 +169,45 @@
 					</s:Scroller>
 				</s:NavigatorContent>
 				<s:NavigatorContent label="Цвета" width="100%" height="100%" id="pgColors">
-					<s:Scroller x="0" y="0" width="420" height="100%">
-						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-							<s:Panel width="100%" height="100" title="Системные цвета">
-							</s:Panel>
-							<s:Panel width="100%" height="100" title="Динамический цвет по оставшемуся здоровью">
-							</s:Panel>
-							<s:Panel width="100%" height="100" title="Динамический цвет по проценту оставшегося здоровья">
-							</s:Panel>
-							<s:Panel width="100%" height="100" title="Динамический цвет по эффективности (только в xvm-full)">
-							</s:Panel>
-							<s:Panel width="100%" height="100" title="Динамический цвет по проценту побед (только в xvm-full)">
-							</s:Panel>
-							<s:Panel width="100%" height="100" title="Динамический цвет по количеству кило-боев (только в xvm-full)">
-							</s:Panel>
-						</s:VGroup>
-					</s:Scroller>
-		<!--
-		    "system": {
-		      "ally_alive_normal": "0x96FF00",
-		      "ally_alive_blind": "0x96FF00",
-		      "ally_dead_normal": "0x009900",
-		      "ally_dead_blind": "0x009900",
-		      "ally_blowedup_normal": "0x007700",
-		      "ally_blowedup_blind": "0x007700",
-		      "squadman_alive_normal": "0xFFB964",
-		      "squadman_alive_blind": "0xFFFF00",
-		      "squadman_dead_normal": "0xCA7000",
-		      "squadman_dead_blind": "0xAAAA00",
-		      "squadman_blowedup_normal": "0xA45A00",
-		      "squadman_blowedup_blind": "0x888800",
-		      "teamKiller_alive_normal": "0x00EAFF",
-		      "teamKiller_alive_blind": "0x00EAFF",
-		      "teamKiller_dead_normal": "0x097783",
-		      "teamKiller_dead_blind": "0x097783",
-		      "teamKiller_blowedup_normal": "0x096A75",
-		      "teamKiller_blowedup_blind": "0x096A75",
-		      "enemy_alive_normal": "0xF50800",
-		      "enemy_alive_blind": "0x8379FE",
-		      "enemy_dead_normal": "0x840500",
-		      "enemy_dead_blind": "0x47407A",
-		      "enemy_blowedup_normal": "0x5A0401",
-		      "enemy_blowedup_blind": "0x3B365F"
-		    },
-		    "hp": [
-		      { "value": 200,  "color": "0xDD0000" },
-		      { "value": 400,  "color": "0xDD3333" },
-		      { "value": 1000, "color": "0xFFCC33" },
-		      { "value": 9999, "color": "0xFFFFFF" }
-		    ],
-		    "hp_ratio": [
-		      { "value": 10,  "color": "0xDD0000" },
-		      { "value": 25,  "color": "0xDD3333" },
-		      { "value": 50,  "color": "0xFFCC33" },
-		      { "value": 101, "color": "0xFFFFFF" }
-		    ],
-		    "eff": [
-		      { "value": 600,  "color": "0xDD0000" },
-		      { "value": 900,  "color": "0xDD3333" },
-		      { "value": 1200, "color": "0xFFCC33" },
-		      { "value": 1500, "color": "0x99FF33" },
-		      { "value": 1800, "color": "0x33FF33" },
-		      { "value": 9999, "color": "0xCC66CC" }
-		    ],
-		    "rating": [
-		      { "value": 42,  "color": "0xDD0000" },
-		      { "value": 46,  "color": "0xDD3333" },
-		      { "value": 49,  "color": "0xDDDD33" },
-		      { "value": 51,  "color": "0xFFCC33" },
-		      { "value": 53,  "color": "0x99FF33" },
-		      { "value": 57,  "color": "0x33FF33" },
-		      { "value": 101, "color": "0xCC66CC" }
-		    ],
-		    "kb": [
-		      { "value": 1,   "color": "0xDD0000" },
-		      { "value": 3,   "color": "0xDD3333" },
-		      { "value": 5,   "color": "0xFFCC33" },
-		      { "value": 8,   "color": "0x99FF33" },
-		      { "value": 12,  "color": "0x33FF33" },
-		      { "value": 999, "color": "0xCC66CC" }
-		    ]
-		-->
+						<mx:Accordion width="420" height="100%">
+							<s:NavigatorContent label="Системные цвета" width="100%" height="100%">
+								<p:PSystemColors id="p_systemColors"/>
+							</s:NavigatorContent>
+							<s:NavigatorContent label="Динамический цвет по оставшемуся здоровью" width="100%" height="100%">
+								<p:PDynamicValues id="p_colors_hp" config="colors.hp" minimum="0" maximum="3000" editorClass="DynamicColorEdit"/>
+							</s:NavigatorContent>
+							<s:NavigatorContent label="Динамический цвет по проценту оставшегося здоровья" width="100%" height="100%">
+								<p:PDynamicValues id="p_colors_hp_ratio" config="colors.hp_ratio" minimum="0" maximum="101" editorClass="DynamicColorEdit"/>
+							</s:NavigatorContent>
+							<s:NavigatorContent label="Динамический цвет по эффективности (только в xvm-full)" width="100%" height="100%">
+								<p:PDynamicValues id="p_colors_eff" config="colors.eff" minimum="0" maximum="3000" editorClass="DynamicColorEdit"/>
+							</s:NavigatorContent>
+							<s:NavigatorContent label="Динамический цвет по проценту побед (только в xvm-full)" width="100%" height="100%">
+								<p:PDynamicValues id="p_colors_rating" config="colors.rating" minimum="0" maximum="101" editorClass="DynamicColorEdit"/>
+							</s:NavigatorContent>
+							<s:NavigatorContent label="Динамический цвет по количеству кило-боев (только в xvm-full)" width="100%" height="100%">
+								<p:PDynamicValues id="p_colors_kb" config="colors.kb" minimum="0" maximum="100" editorClass="DynamicColorEdit"/>
+							</s:NavigatorContent>
+						</mx:Accordion>
 				</s:NavigatorContent>
 				<s:NavigatorContent label="Прозрачность" width="100%" height="100%" id="pgTransparency">
-					<s:Scroller x="0" y="0" width="420" height="100%">
-						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-							<s:Panel width="100%" height="100" title="Динамическая прозрачность по оставшемуся здоровью">
-							</s:Panel>
-							<s:Panel width="100%" height="100" title="Динамическая прозрачность по проценту оставшегося здоровья">
-							</s:Panel>
-							<s:Panel width="100%" height="100" title="Динамическая прозрачность по эффективности (xvm-full)">
-							</s:Panel>
-							<s:Panel width="100%" height="100" title="Динамическая прозрачность по проценту побед (xvm-full)">
-							</s:Panel>
-							<s:Panel width="100%" height="100" title="Динамическая прозрачность по количеству кило-боев (xvm-full)">
-							</s:Panel>
-						</s:VGroup>
-					</s:Scroller>
-		<!--
-		  "alpha": {
-		    "hp": [
-		      { "value": 200,  "alpha": 100 },
-		      { "value": 400,  "alpha": 80 },
-		      { "value": 1000, "alpha": 60 },
-		      { "value": 9999, "alpha": 40 }
-		    ],
-		    "hp_ratio": [
-		      { "value": 10,  "alpha": 100 },
-		      { "value": 25,  "alpha": 80 },
-		      { "value": 50,  "alpha": 60 },
-		      { "value": 101, "alpha": 40 }
-		    ],
-		    "eff": [
-		      { "value": 900,  "alpha": 100 },
-		      { "value": 1200, "alpha": 100 },
-		      { "value": 9999, "alpha": 100 }
-		    ],
-		    "rating": [
-		      { "value": 49,  "alpha": 100 },
-		      { "value": 53,  "alpha": 100 },
-		      { "value": 101, "alpha": 100 }
-		    ],
-		    "kb": [
-		      { "value": 2,   "alpha": 100 },
-		      { "value": 10,  "alpha": 100 },
-		      { "value": 999, "alpha": 100 }
-		    ]
-		  },
-		-->
+					<mx:Accordion width="420" height="100%">
+						<s:NavigatorContent label="Динамическая прозрачность по оставшемуся здоровью" width="100%" height="100%">
+							<p:PDynamicValues id="p_alpha_hp" config="alpha.hp" minimum="0" maximum="3000" editorClass="DynamicAlphaEdit"/>
+						</s:NavigatorContent>
+						<s:NavigatorContent label="Динамическая прозрачность по проценту оставшегося здоровья" width="100%" height="100%">
+							<p:PDynamicValues id="p_alpha_hp_ratio" config="alpha.hp_ratio" minimum="0" maximum="101" editorClass="DynamicAlphaEdit"/>
+						</s:NavigatorContent>
+						<s:NavigatorContent label="Динамическая прозрачность по эффективности (только в xvm-full)" width="100%" height="100%">
+							<p:PDynamicValues id="p_alpha_eff" config="alpha.eff" minimum="0" maximum="3000" editorClass="DynamicAlphaEdit"/>
+						</s:NavigatorContent>
+						<s:NavigatorContent label="Динамическая прозрачность по проценту побед (только в xvm-full)" width="100%" height="100%">
+							<p:PDynamicValues id="p_alpha_rating" config="alpha.rating" minimum="0" maximum="101" editorClass="DynamicAlphaEdit"/>
+						</s:NavigatorContent>
+						<s:NavigatorContent label="Динамическая прозрачность по количеству кило-боев (xvm-full)" width="100%" height="100%">
+							<p:PDynamicValues id="p_alpha_kb" config="alpha.kb" minimum="0" maximum="100" editorClass="DynamicAlphaEdit"/>
+						</s:NavigatorContent>
+					</mx:Accordion>
 				</s:NavigatorContent>
 				<s:NavigatorContent label="Наборы иконок" width="100%" height="100%" id="pgIconset">
 					<s:Scroller x="0" y="0" width="420" height="100%">
@@ -305,6 +220,7 @@
 					<s:Scroller x="0" y="0" width="420" height="100%">
 						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
 							<s:Panel width="100%" height="100%" title="Иконки игроков/кланов">
+								<p:PDynamicValues id="p_players" config="players" editorClass="DynamicPlayersEdit"/>
 							</s:Panel>
 						</s:VGroup>
 					</s:Scroller>

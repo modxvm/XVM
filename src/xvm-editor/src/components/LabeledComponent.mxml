@@ -2,15 +2,14 @@
 <s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
 	    xmlns:s="library://ns.adobe.com/flex/spark"
 	    xmlns:mx="library://ns.adobe.com/flex/mx"
-		xmlns:c="components.*"
-		width="100%"
-		height="22"
-		borderVisible="false"
-		backgroundColor="{conflict ? 0xFFDDDD : 0xFFFFFF}"
+	    xmlns:c="components.*"
+	    width="100%" height="22"
+	    borderVisible="false"
+	    backgroundColor="{conflict ? 0xFFDDDD : 0xFFFFFF}"
 	    toolTip="{conflict ? 'Конфликт значений' : ''}">
 	<fx:Script>
+		// label
 		protected var _label: String = "";
-
 		[Bindable]
 		public function get label(): String
 		{
@@ -21,8 +20,8 @@
 			_label = v;
 		}
 
+		// labelWidth
 		protected var _labelWidth: String = "140";
-
 		[Bindable]
 		public function get labelWidth(): String
 		{
@@ -33,8 +32,8 @@
 			_labelWidth = v;
 		}
 
+		// conflict
 		protected var _conflict: Boolean = false;
-
 		[Bindable]
 		public function get conflict(): Boolean
 		{
@@ -46,8 +45,8 @@
 		}
 
 		// config
-		[Bindable]
 		protected var _config: String = null;
+		[Bindable]
 		public virtual function get config():String
 		{
 			return _config;
@@ -57,16 +56,43 @@
 			_config = v;
 		}
 
+		// minimum
+		protected var _minimum: Number = 0;
+		[Bindable]
+		public function get minimum(): Number
+		{
+			return _minimum;
+		}
+		public function set minimum(v: Number): void
+		{
+			_minimum = v;
+		}
+
+		// maximum
+		protected var _maximum: Number = 10;
+		[Bindable]
+		public function get maximum(): Number
+		{
+			return _maximum;
+		}
+		public function set maximum(v: Number): void
+		{
+			_maximum = v;
+		}
+
 		// value
+		protected var _value:*;
 		[Bindable]
 		public virtual function get value():*
 		{
-			return null;
+			return _value;
 		}
 		public virtual function set value(v:*): void
 		{
+			_value = v;
 		}
 
+		// onChange
 		protected virtual function onChange(event:Event):void
 		{
 			conflict = false;

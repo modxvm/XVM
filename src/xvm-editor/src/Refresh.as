@@ -163,8 +163,37 @@ private function RefreshColorsPage():void
 	{
 		var section:*;
 
-		//section = Config.s_config.definition;
-		//this.p_definition.author.value = section.author;
+		section = Config.s_config.colors.system;
+		this.p_systemColors.v_ally_alive_normal.value = section.ally_alive_normal;
+		this.p_systemColors.v_ally_alive_blind.value = section.ally_alive_blind;
+		this.p_systemColors.v_ally_dead_normal.value = section.ally_dead_normal;
+		this.p_systemColors.v_ally_dead_blind.value = section.ally_dead_blind;
+		this.p_systemColors.v_ally_blowedup_normal.value = section.ally_blowedup_normal;
+		this.p_systemColors.v_ally_blowedup_blind.value = section.ally_blowedup_blind;
+		this.p_systemColors.v_squadman_alive_normal.value = section.squadman_alive_normal;
+		this.p_systemColors.v_squadman_alive_blind.value = section.squadman_alive_blind;
+		this.p_systemColors.v_squadman_dead_normal.value = section.squadman_dead_normal;
+		this.p_systemColors.v_squadman_dead_blind.value = section.squadman_dead_blind;
+		this.p_systemColors.v_squadman_blowedup_normal.value = section.squadman_blowedup_normal;
+		this.p_systemColors.v_squadman_blowedup_blind.value = section.squadman_blowedup_blind;
+		this.p_systemColors.v_teamKiller_alive_normal.value = section.teamKiller_alive_normal;
+		this.p_systemColors.v_teamKiller_alive_blind.value = section.teamKiller_alive_blind;
+		this.p_systemColors.v_teamKiller_dead_normal.value = section.teamKiller_dead_normal;
+		this.p_systemColors.v_teamKiller_dead_blind.value = section.teamKiller_dead_blind;
+		this.p_systemColors.v_teamKiller_blowedup_normal.value = section.teamKiller_blowedup_normal;
+		this.p_systemColors.v_teamKiller_blowedup_blind.value = section.teamKiller_blowedup_blind;
+		this.p_systemColors.v_enemy_alive_normal.value = section.enemy_alive_normal;
+		this.p_systemColors.v_enemy_alive_blind.value = section.enemy_alive_blind;
+		this.p_systemColors.v_enemy_dead_normal.value = section.enemy_dead_normal;
+		this.p_systemColors.v_enemy_dead_blind.value = section.enemy_dead_blind;
+		this.p_systemColors.v_enemy_blowedup_normal.value = section.enemy_blowedup_normal;
+		this.p_systemColors.v_enemy_blowedup_blind.value = section.enemy_blowedup_blind;
+		
+		this.p_colors_hp.RefreshSource();
+		this.p_colors_hp_ratio.RefreshSource();
+		this.p_colors_eff.RefreshSource();
+		this.p_colors_rating.RefreshSource();
+		this.p_colors_kb.RefreshSource();
 	}
 	catch (ex:Error)
 	{
@@ -177,10 +206,11 @@ private function RefreshTransparencyPage():void
 	debug("RefreshTransparencyPage()");
 	try
 	{
-		var section:*;
-
-		//section = Config.s_config.definition;
-		//this.p_definition.author.value = section.author;
+		this.p_alpha_hp.RefreshSource();
+		this.p_alpha_hp_ratio.RefreshSource();
+		this.p_alpha_eff.RefreshSource();
+		this.p_alpha_rating.RefreshSource();
+		this.p_alpha_kb.RefreshSource();
 	}
 	catch (ex:Error)
 	{
@@ -212,10 +242,7 @@ private function RefreshPlayersPage():void
 	debug("RefreshPlayersPage()");
 	try
 	{
-		var section:*;
-
-		//section = Config.s_config.definition;
-		//this.p_definition.author.value = section.author;
+		this.p_players.RefreshSource();
 	}
 	catch (ex:Error)
 	{
@@ -303,5 +330,75 @@ private function RefreshMarkersPage():void
 
 private function RefreshTextFields():void
 {
+	debug("RefreshTextFields()");
+	try
+	{
+		var activeMarkerStates:Array = getActiveMarkerStates();
 
+		var valueSet: Boolean = false;
+		var value:*;
+		var valueOk: Boolean = true;
+		for each (var state:String in activeMarkerStates)
+		{
+			var conf:String = "markers." + state + ".textFields";
+			debug("  " + conf + "=" + Config.GetValue(conf));
+			//values.push(Config.GetValue(conf));
+			if (!valueSet)
+			{
+				valueSet = true;
+				value = Config.GetValue(conf);
+			}
+			else
+			{
+				if (value != Config.GetValue(conf))
+				{
+					valueOk = false;
+					break;
+				}
+			}
+		}
+
+		//control.conflict = !valueOk;
+		//control.value = value;
+
+
+/*		for each (var mname:String in ElementControls[activeElement.id])
+		{
+			for each (var mname2:String in ElementControls[mname])
+			{
+				var control:LabeledComponent = this[mname][mname2] as LabeledComponent;
+
+				//debug(mname + "." + mname2);
+				var valueSet: Boolean = false;
+				var value:*;
+				var valueOk: Boolean = true;
+				for each (var state:String in activeMarkerStates)
+				{
+					var conf:String = "markers." + state + "." + activeElement.id + "." + control.config;
+					//debug("  " + conf + "=" + Config.GetValue(conf));
+					//values.push(Config.GetValue(conf));
+					if (!valueSet)
+					{
+						valueSet = true;
+						value = Config.GetValue(conf);
+					}
+					else
+					{
+						if (value != Config.GetValue(conf))
+						{
+							valueOk = false;
+							break;
+						}
+					}
+				}
+
+				control.conflict = !valueOk;
+				control.value = value;
+			}
+		}*/
+	}
+	catch (ex:Error)
+	{
+		debug("ERROR: RefreshTextFields(): " + ex.toString());
+	}
 }

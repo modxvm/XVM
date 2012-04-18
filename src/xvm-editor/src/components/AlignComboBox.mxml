@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:ComboBox xmlns:fx="http://ns.adobe.com/mxml/2009" 
-			 xmlns:s="library://ns.adobe.com/flex/spark" 
+<mx:ComboBox xmlns:fx="http://ns.adobe.com/mxml/2009"
+			 xmlns:s="library://ns.adobe.com/flex/spark"
 			 xmlns:mx="library://ns.adobe.com/flex/mx"
 			 selectedIndex="1" change="onChange(event)">
 	<fx:Script>
@@ -12,7 +12,7 @@
 		]]>
 	</fx:Script>
 	<fx:Metadata>
-		[Event(name="change", type="Event")]
+		[Event(name="change", type="flash.events.Event")]
 	</fx:Metadata>
 	<mx:dataProvider>
 		<mx:ArrayList>

@@ -1,23 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <c:LabeledComponent xmlns:fx="http://ns.adobe.com/mxml/2009"
-	    xmlns:s="library://ns.adobe.com/flex/spark"
-	    xmlns:mx="library://ns.adobe.com/flex/mx"
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:mx="library://ns.adobe.com/flex/mx"
 		xmlns:c="components.*"
-		width="100%"
-		height="22"
-		borderVisible="false">
+		width="100%" height="22">
 	<fx:Script>
-		// value
-		[Bindable]
-		public override function get value():*
-		{
-			return edit.value;
-		}
-		public override function set value(value:*): void
-		{
-			edit.value = value;
-		}
 	</fx:Script>
 	<s:Label x="0" text="{label}" width="{labelWidth}" height="{height}" verticalAlign="middle"/>
-	<c:ColorSelector left="{labelWidth}" right="10" height="{height}" id="edit"/>
+	<c:ColorSelector left="{labelWidth}" right="10" height="{height}"
+		id="edit" value="{value}" change="value=edit.value; onChange(event)"/>
 </c:LabeledComponent>

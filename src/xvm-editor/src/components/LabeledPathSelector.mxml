@@ -3,9 +3,7 @@
 	    xmlns:s="library://ns.adobe.com/flex/spark"
 	    xmlns:mx="library://ns.adobe.com/flex/mx"
 		xmlns:c="components.*"
-		width="100%"
-		height="20"
-		borderVisible="false">
+		width="100%" height="20">
 	<fx:Script>
 		//import flash.net.FileReference;
 
@@ -20,17 +18,6 @@
 		public function set wrapTextField(value: Boolean): void
 		{
 			_wrapTextField = value;
-		}
-
-		// value
-		[Bindable]
-		public override function get value():*
-		{
-			return edit.text;
-		}
-		public override function set value(value:*): void
-		{
-			edit.text = value;
 		}
 
 		// Browse for Folder
@@ -57,6 +44,7 @@
 
 	</fx:Script>
 	<s:Label x="0" text="{label}" width="{labelWidth}" height="{wrapTextField ? height/2 : height}" verticalAlign="middle"/>
-	<s:TextInput left="{wrapTextField ? 0 : labelWidth}" right="0" bottom="0" height="{wrapTextField ? height/2 : height}" change="onChange(event)" id="edit"/>
+	<s:TextInput left="{wrapTextField ? 0 : labelWidth}" right="0" bottom="0" height="{wrapTextField ? height/2 : height}"
+		id="edit" text="{value}" change="value=edit.text; onChange(event)"/>
 	<!--<mx:Image right="0" bottom="2" width="16" height="16" source="@Embed(source='images/folder.png')" useHandCursor="true" buttonMode="true" click="SelectDir(event)"/>-->
 </c:LabeledComponent>

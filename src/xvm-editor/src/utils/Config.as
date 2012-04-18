@@ -76,6 +76,9 @@ package utils
 	 */
 	public static function GetValue(path:String):*
 	{
+		if (!s_config)
+			return null;
+		
 		var p:Array = path.split("."); // "path.to.value"
 		var valueElement:String = p.pop(); // last element is value
 		

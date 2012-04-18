@@ -3,20 +3,9 @@
 	    xmlns:s="library://ns.adobe.com/flex/spark"
 	    xmlns:mx="library://ns.adobe.com/flex/mx"
 		xmlns:c="components.*"
-		width="100%"
-		height="20"
-		borderVisible="false">
+		width="100%" height="20">
 	<fx:Script>
-		// value
-		[Bindable]
-		public override function get value():*
-		{
-			return edit.selected;
-		}
-		public override function set value(value:*): void
-		{
-			edit.selected = value;
-		}
 	</fx:Script>
-	<s:CheckBox left="0" right="0" label="{label}" width="{width}" change="onChange(event)" id="edit"/>
+	<s:CheckBox left="0" right="0" label="{label}"
+		id="edit" selected="{value}" change="value=edit.selected; onChange(event)"/>
 </c:LabeledComponent>

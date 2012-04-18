@@ -13,7 +13,7 @@
 				var hex:String = Number(item).toString(16);
 				return ("00000" + hex.toUpperCase()).substr(-6);
 			}
-			
+
 			[Bindable]
 			public function get value():String
 			{
@@ -38,7 +38,7 @@
 		]]>
 	</fx:Script>
 	<fx:Metadata>
-		[Event(name="change", type="Event")]
+		[Event(name="change", type="flash.events.Event")]
 	</fx:Metadata>
 	<fx:Declarations>
 		<validators:TextColorValidator required="true" id="v" source="{c}" property="text" valid="onChange(event)"/>

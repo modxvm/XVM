@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<c:LabeledComponent xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:mx="library://ns.adobe.com/flex/mx"
+		xmlns:c="components.*"
+		width="100%" height="22">
+	<fx:Script>
+		[Bindable]
+		public function get v_value():*
+		{
+			return value.value;
+		}
+		public function set v_value(v:*): void
+		{
+			value.value = v;
+		}
+		
+		[Bindable]
+		public function get v_color():*
+		{
+			return value.color;
+		}
+		public function set v_color(v:*): void
+		{
+			value.color = v;
+		}
+	</fx:Script>
+	<s:Label x="0" text="{label}" width="{labelWidth}" height="{height}" verticalAlign="middle"/>
+	<s:NumericStepper left="{labelWidth}" width="100" height="{height}" minimum="{minimum}" maximum="{maximum}"
+		id="valueEdit" value="{v_value}" change="v_value=valueEdit.value; onChange(event)"/>
+	<c:ColorSelector left="{valueEdit.x + valueEdit.width + 10}" right="10" height="{height}"
+		id="colorEdit" value="{v_color}" change="v_color=colorEdit.value; onChange(event)"/>
+</c:LabeledComponent>
