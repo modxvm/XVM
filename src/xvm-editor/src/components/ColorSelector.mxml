@@ -29,8 +29,12 @@
 
 			protected function onChange(event:Event):void
 			{
-				value = (event.target == cp) ? cp.selectedColor.toString() : "0x" + c.text.substr(1);
-				dispatchEvent(new Event(Event.CHANGE));
+				var v:String = (event.target == cp) ? cp.selectedColor.toString() : "0x" + c.text.substr(1);
+				if (value != v)
+				{
+					value = v;
+					dispatchEvent(new Event(Event.CHANGE));
+				}
 			}
 		]]>
 	</fx:Script>

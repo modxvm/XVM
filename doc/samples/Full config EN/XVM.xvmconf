@@ -8,7 +8,7 @@
 {
   "configVersion": "1.2.0", // Version of the config. Do not remove or change it unnecessarily.
   "editorVersion": "0.0.0", // Version of the editor. Not in use yet.
-  // Common config options. All settings information in a fashion not being used.
+  // Common config options. All settings information in the mod not being used.
   "definition": {
     "author": "sirmax2",                        // Config author.
     "description": "Default settings for XVM",  // Config description.

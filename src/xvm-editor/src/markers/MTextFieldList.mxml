@@ -44,7 +44,7 @@
 				</s:ArrayList>
 			</s:dataProvider>
 		</s:List>
-		<mx:Button icon="@Embed(source='images/delete.png')" width="20" click="button1_clickHandler(event)"/>
-		<mx:Button icon="@Embed(source='images/add.png')" width="20" click="button2_clickHandler(event)"/>
+		<mx:Image width="16" height="16" id="del" source="@Embed(source='images/delete.png')" toolTip="Удалить" useHandCursor="true" buttonMode="true"/>
+		<mx:Image width="16" height="16" id="add" source="@Embed(source='images/add.png')" toolTip="Вставить" useHandCursor="true" buttonMode="true"/>
 	</s:HGroup>
 </c:PanelComponent>
