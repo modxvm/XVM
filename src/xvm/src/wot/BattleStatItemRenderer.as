@@ -5,15 +5,20 @@
 
 import wot.utils.Config;
 import wot.utils.Defines;
+import wot.utils.Logger;
 import wot.utils.PlayerInfo;
 import wot.utils.Stat;
+import wot.utils.Utils;
 
 class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
 {
+  static var DEBUG_TIMES = false;
+
   public static var s_chancesField: TextField = null;
   public static var s_chancesText: String;
 
   var m_clanIcon: MovieClip = null;
+  var m_textCache = {};
 
   function BattleStatItemRenderer()
   {
@@ -21,7 +26,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
       _global.xvm = [];
     if (wot.utils.Utils.indexOf(_global.xvm, "BattleStatItemRenderer") == -1)
       _global.xvm.push("BattleStatItemRenderer");
-    wot.utils.Logger.add("--> " + _global.xvm.join(", "));*/
+    Logger.add("--> " + _global.xvm.join(", "));*/
 
     super();
 
@@ -57,7 +62,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
       if (team == Defines.TEAM_ALLY)
       {
         col3._x -= 80;
-        //wot.utils.Logger.addObject(event.target);
+        //Logger.addObject(event.target);
       }
       if (!Config.s_config.battle.mirroredVehicleIcons)
       {
@@ -75,8 +80,10 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
   // override
   function updateData()
   {
+    var start = new Date();
+
     // Chances
-    //wot.utils.Logger.add(Stat.s_player_names.length.toString());
+    //Logger.add(Stat.s_player_names.length.toString());
     if (Stat.s_loaded && Config.s_config.statisticForm.showChances && Stat.s_player_names.length == 30)
     {
       if (!s_chancesField)
@@ -86,7 +93,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
       }
       if (s_chancesField.htmlText != s_chancesText)
       {
-        //wot.utils.Logger.add(s_chancesField.htmlText);
+        //Logger.add(s_chancesField.htmlText);
         s_chancesField.html = true;
         s_chancesField.htmlText = s_chancesText;
       }
@@ -111,9 +118,19 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
 
     super.updateData();
 
-    col3.htmlText = Stat.DecorateField(data, data.vehicle,
-      team == Defines.TEAM_ALLY ? Config.s_config.statisticForm.formatLeft : Config.s_config.statisticForm.formatRight,
-      team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
+    if (!m_textCache.hasOwnProperty(data.label))
+    {
+      m_textCache[data.label] = Stat.DecorateField(data, data.vehicle,
+        team == Defines.TEAM_ALLY ? Config.s_config.statisticForm.formatLeft : Config.s_config.statisticForm.formatRight,
+        team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
+    }
+    col3.htmlText = m_textCache[data.label];
+
+    if (DEBUG_TIMES)
+    {
+      Logger.add("DEBUG TIME: BattleStatItemRenderer[" + data.label + "]: updateData(): " +
+        Utils.elapsedMSec(start, new Date()) + " ms");
+    }
   }
 
   function XVMClanIcon(cfg)

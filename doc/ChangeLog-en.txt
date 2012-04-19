@@ -1,6 +1,7 @@
 XVM-2.1.test7:
   * added vehicle info for Type 62 and WZ111
   * added option to hide xvm version at top left corner of screen
+  * players panels and statistic form optimization (avoid lags)
 
 XVM-2.1.test6:
   * optimization of macros with dynamic values

@@ -3,16 +3,22 @@
  * @author sirmax2
  */
 import wot.utils.Config;
+import wot.utils.Logger;
 import wot.utils.Stat;
 import wot.utils.Utils;
 
 class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 {
+  static var DEBUG_TIMES = false;
+
   static private var s_widthTester: TextField;
 
   private var m_currentFieldType = "";
   private var m_currentData = null;
   private var m_currentItem = 0;
+
+  private var m_textCache = {};
+  private var m_panelSizesCache = null;
   
   function PlayersPanel()
   {
@@ -20,7 +26,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
       _global.xvm = [];
     if (Utils.indexOf(_global.xvm, "PlayersPanel") == -1)
       _global.xvm.push("PlayersPanel");
-    wot.utils.Logger.add("--> " + _global.xvm.join(", "));*/
+    Logger.add("--> " + _global.xvm.join(", "));*/
 
     super();
 
@@ -31,12 +37,16 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   private var _initialized = false;
   function setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount)
   {
+    var start = new Date();
     super.setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount);
 
     players_bg._alpha = Config.s_config.playersPanel.alpha;
     m_list._alpha = Config.s_config.playersPanel.iconAlpha;
 
     XVMAdjustPanelSize();
+
+    if (DEBUG_TIMES)
+      Logger.add("DEBUG TIME: PlayersPanel: setData(): " + Utils.elapsedMSec(start, new Date()) + " ms");
   }
 
   // override
@@ -144,46 +154,62 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         return (fieldType == "name") ? name : data.vehicle.toString();
     }
 
-    format = format.split("{{vehicle}}").join(data.vehicle.toString());
-    format = Stat.FormatText(data, format, isDead);
-
-    // cut player name for field width
-    if (format.indexOf("{{nick}}") > -1)
+    var key = (isDead ? "d" : "a") + " " + data.label + " " + format;
+    if (!m_textCache.hasOwnProperty(key))
     {
-      var str: String = name;
-      var pname: String = name;
-      if (m_state == "medium" || m_state == "medium2" || m_state == "large")
+      format = format.split("{{vehicle}}").join(data.vehicle.toString());
+      format = Stat.FormatText(data, format, isDead);
+
+      // cut player name for field width
+      if (format.indexOf("{{nick}}") > -1)
       {
-        var configWidth = Config.s_config.playersPanel[m_state].width;
-        if (s_widthTester == null)
+        var str: String = name;
+        var pname: String = name;
+        if (m_state == "medium" || m_state == "medium2" || m_state == "large")
         {
-          s_widthTester = _root.createTextField("widthTester", _root.getNextHighestDepth(), 0, 0, 268, 20);
-          s_widthTester.autoSize = false;
-          s_widthTester.html = true;
-          s_widthTester._visible = false;
-          var tf: TextFormat = m_names.getNewTextFormat();
-          s_widthTester.setNewTextFormat(tf);
-        }
-        while (pname.length > 0)
-        {
-          str = (pname == name || m_state != "large") ? pname : pname + "...";
-          s_widthTester.htmlText = format.split("{{nick}}").join(str);
-          if (Math.round(s_widthTester.getLineMetrics(0).width) + 4 <= configWidth) // 4 is a size of gutters
+          var configWidth = Config.s_config.playersPanel[m_state].width;
+          if (s_widthTester == null)
           {
-            //wot.utils.Logger.add("configWidth=" + configWidth + " _width=" + s_widthTester._width + " lineWidth=" + Math.round(s_widthTester.getLineMetrics(0).width) + " " + str);
-            break;
+            s_widthTester = _root.createTextField("widthTester", _root.getNextHighestDepth(), 0, 0, 268, 20);
+            s_widthTester.autoSize = false;
+            s_widthTester.html = true;
+            s_widthTester._visible = false;
+            var tf: TextFormat = m_names.getNewTextFormat();
+            s_widthTester.setNewTextFormat(tf);
           }
-          pname = pname.substr(0, pname.length - 1);
+          while (pname.length > 0)
+          {
+            str = (pname == name || m_state != "large") ? pname : pname + "...";
+            s_widthTester.htmlText = format.split("{{nick}}").join(str);
+            if (Math.round(s_widthTester.getLineMetrics(0).width) + 4 <= configWidth) // 4 is a size of gutters
+            {
+              //Logger.add("configWidth=" + configWidth + " _width=" + s_widthTester._width + " lineWidth=" + Math.round(s_widthTester.getLineMetrics(0).width) + " " + str);
+              break;
+            }
+            pname = pname.substr(0, pname.length - 1);
+          }
         }
+        format = format.split("{{nick}}").join(pname.length == 0 ? "" : str);
       }
-      format = format.split("{{nick}}").join(pname.length == 0 ? "" : str);
+
+      m_textCache[key] = Utils.trim(format);
     }
 
-    return Utils.trim(format);
+    return m_textCache[key];
   }
 
   function XVMAdjustPanelSize()
   {
+    if (!m_panelSizesCache)
+    {
+      m_panelSizesCache = {
+        medium: Math.max(XVMGetMaximumFieldWidth(m_names), Config.s_config.playersPanel.medium.width),
+        large_names: Math.max(XVMGetMaximumFieldWidth(m_names), Config.s_config.playersPanel.large.width),
+        large_vehicles: XVMGetMaximumFieldWidth(m_vehicles)
+      }
+    }
+
+    //Logger.add("XVMAdjustPanelSize()");
     var namesWidthDefault = 46;
     var namesWidth = namesWidthDefault;
     var vehiclesWidthDefault = 65;
@@ -193,7 +219,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     switch (m_state)
     {
       case "medium":
-        namesWidth = Math.max(XVMGetMaximumFieldWidth(m_names), Config.s_config.playersPanel.medium.width);
+        namesWidth = m_panelSizesCache.medium;
         widthDelta = namesWidthDefault - namesWidth;
         break;
       case "medium2":
@@ -202,8 +228,8 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         break;
       case "large":
         namesWidthDefault = 296;
-        namesWidth = Math.max(XVMGetMaximumFieldWidth(m_names), Config.s_config.playersPanel.large.width);
-        vehiclesWidth = XVMGetMaximumFieldWidth(m_vehicles);
+        namesWidth = m_panelSizesCache.large_names;
+        vehiclesWidth = m_panelSizesCache.large_vehicles;
         squadSize = Config.s_config.playersPanel.removeSquadIcon ? 0 : SQUAD_SIZE;
         widthDelta = namesWidthDefault - namesWidth + vehiclesWidthDefault - vehiclesWidth - squadSize + SQUAD_SIZE;
         break;
