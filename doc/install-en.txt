@@ -15,17 +15,13 @@
      \res_mods\<game version>\gui\flash\XVM.xvmconf
 
    You can select ready config file from \xvm-doc\samples\ directory, or use
-   online editor: http://bulychev.net/generator/
+   online editor: https://sites.google.com/site/sirmaxwiki/xvm-editor (not ready yet)
 
    Old OTMData.xml configs are also supported in legacy mode, you can use if if
    you do not need new features.
 
    All possible config options you can see in this file:
-     \xvm-doc\samples\Full config\XVM.xvmconf
-
-   All possible config options except markers you can see in this file:
-     \xvm-doc\samples\No markers config\XVM.xvmconf
-   You can use it if you want to leave your old OTMData.xml and use new features.
+     \xvm-doc\samples\Full config EN\XVM.xvmconf
 
    Note: If you changing config manually, use Notepad, DO NOT use MS Word,
    WordPad and such editors.
@@ -33,7 +29,8 @@
 6. If you do not want statistics, run game as usual.
 
    If you want statistics, run wot-xvm-proxy.exe (game will be started
-   automatically).
+   automatically). Also make a note that statistics is turned off by default,
+   so you need to enable it in config file.
 
    If you want statistics and game launcher, start with /launcher argument:
      Create shortcut wot-xvm-proxy.exe
