@@ -4,47 +4,130 @@
 	xmlns:s="library://ns.adobe.com/flex/spark"
 	xmlns:mx="library://ns.adobe.com/flex/mx"
 	xmlns:c="components.*"
-	xmlns:m="markers.*"
-	title="Текстовые поля" width="100%" height="80">
+	title="Текстовые поля"
+	width="100%" height="100%"
+	borderVisible="false">
 	<fx:Script>
 		<![CDATA[
-			import mx.collections.ArrayList;
-
-			import spark.events.IndexChangeEvent;
+			import components.DynamicTextFieldEdit;
 			
-			public var textFields:ArrayList = new ArrayList();
+			import mx.core.IVisualElement;
+			
+			import utils.Config;
 
-			protected function button1_clickHandler(event:MouseEvent):void
+			private var values:Array = [];
+			
+			protected var _selected:Boolean = false;
+			[Bindable]
+			public function get selected():Boolean
 			{
-				if (fields.selectedIndex >= 0)
-					fields.dataProvider.removeItemAt(fields.selectedIndex);
+				return _selected;
+			}
+			public function set selected(v:Boolean):void
+			{
+				_selected = v;
+			}
+			
+			[Embed(source="images/add.png")]
+			private static var IMG_add : Class;
+
+			private function CreateNewElementButton():IVisualElement
+			{
+				var img:Image = new Image();
+				img.width = 16;
+				img.height = 16;
+				img.id = "new";
+				img.source = new IMG_add();
+				img.toolTip = "Добавить текстовое поле";
+				img.useHandCursor = true;
+				img.buttonMode = true;
+				img.addEventListener(MouseEvent.CLICK, this.onClick);
+				return img;
+			}
+			
+			private function CreateElement(v:String):DynamicTextFieldEdit
+			{
+				var instance:DynamicTextFieldEdit = new DynamicTextFieldEdit();
+				instance.label = v;
+				instance.labelWidth = "200";
+				instance.width = 255;
+				instance.group = rbg;
+				instance.addEventListener(MouseEvent.CLICK, onClick);
+				return instance;
 			}
 
-			protected function button2_clickHandler(event:MouseEvent):void
+			public function RefreshSource(activeMarkerStates: Array): void
 			{
-				// TODO Auto-generated method stub
-				fields.dataProvider.addItem({ label: "Текст" });
+				values = [];
+				for each (var state:String in activeMarkerStates)
+				{
+					var conf:String = "markers." + state + ".textFields";
+					var v:Array = Config.GetValue(conf);
+					for (var i:Number = 0; i < v.length; ++i)
+						values.push(v[i]);
+				}
+
+				container.removeAllElements();
+				if (values.length == 0)
+					container.addElement(CreateNewElementButton());
+				else
+				{
+					for (var j: Number = 0; j < values.length; ++j)
+						container.addElement(CreateElement(values[j].name || "Текст " + (j + 1)));
+				}
 			}
 
-			protected function list1_changeHandler(event:IndexChangeEvent):void
+/*			public function get value():*
 			{
-				//var item:* = list.dataProvider.getItemAt(evt.newIndex);
-				//if (item.type != "employee") {
-				//	evt.preventDefault();
-				//}
+				var a: Array = [];
+				for (var i:Number = 0; i < container.numElements; ++i)
+					a.push((container.getElementAt(i) as LabeledComponent).value);
+				return a;
+			}*/
+
+			// config
+			private var _config:String;
+
+			[Bindable]
+			public function get config():String
+			{
+				return _config;
+			}
+			public function set config(value:String): void
+			{
+				_config = value;
 			}
 
+			// add/del
+			protected function onClick(event:MouseEvent):void
+			{
+				if (event.target.id == "del")
+				{
+					container.removeElement(event.currentTarget as IVisualElement);
+					onChange(null);
+					if (container.numElements == 0)
+						container.addElement(CreateNewElementButton());
+				}
+				else if (event.target.id == "add")
+				{
+					var index:Number = container.getElementIndex(event.currentTarget as IVisualElement) + 1;
+					container.addElementAt(CreateElement("Текст " + index), index);
+					onChange(null);
+				}
+				else if (event.target.id == "new")
+				{
+					container.removeAllElements();
+					container.addElement(CreateElement("Текст 1"));
+					onChange(null);
+				}
+			}
 		]]>
 	</fx:Script>
+	<fx:Declarations>
+		<s:RadioButtonGroup id="rbg"/>
+	</fx:Declarations>
 	<mx:Image right="5" y="-18" width="16" height="16" source="@Embed(source='images/cancel.png')" toolTip="Вернуть настройки по умолчанию" useHandCursor="true" buttonMode="true"/>
-	<s:HGroup left="10" right="10" top="5" bottom="5" gap="2" verticalAlign="middle">
-		<s:List width="100%" height="100%" id="fields" change="list1_changeHandler(event)" >
-			<s:dataProvider>
-				<s:ArrayList>
-				</s:ArrayList>
-			</s:dataProvider>
-		</s:List>
-		<mx:Image width="16" height="16" id="del" source="@Embed(source='images/delete.png')" toolTip="Удалить" useHandCursor="true" buttonMode="true"/>
-		<mx:Image width="16" height="16" id="add" source="@Embed(source='images/add.png')" toolTip="Вставить" useHandCursor="true" buttonMode="true"/>
-	</s:HGroup>
+	<s:Scroller left="10" right="10" top="5" bottom="5">
+		<s:VGroup id="container" width="100%" height="100%" gap="-1"/>
+	</s:Scroller>
 </c:PanelComponent>

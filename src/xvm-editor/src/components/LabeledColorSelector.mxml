@@ -5,8 +5,18 @@
 		xmlns:c="components.*"
 		width="100%" height="22">
 	<fx:Script>
+		protected var _allowSystemColors:Boolean = true;
+		[Bindable]
+		public function get allowSystemColors():Boolean
+		{
+			return _allowSystemColors;
+		}
+		public function set allowSystemColors(v:Boolean):void
+		{
+			_allowSystemColors = v;
+		}
 	</fx:Script>
 	<s:Label x="0" text="{label}" width="{labelWidth}" height="{height}" verticalAlign="middle"/>
-	<c:ColorSelector left="{labelWidth}" right="10" height="{height}"
+	<c:ColorSelector left="{labelWidth}" right="10" height="{height}" allowSystemColors="{allowSystemColors}"
 		id="edit" value="{value}" change="value=edit.value; onChange(event)"/>
 </c:LabeledComponent>

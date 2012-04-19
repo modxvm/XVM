@@ -11,34 +11,34 @@
 		<mx:ViewStack id="vs" width="100%" height="100%">
 			<s:NavigatorContent width="100%" height="100%" id="normal">
 				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-					<c:LabeledColorSelector label="Союзник/Живой" width="250" id="v_ally_alive_normal" config="colors.system.ally_alive_normal" change="onChange(event)"/>
-					<c:LabeledColorSelector label="Союзник/Мертвый" width="250" id="v_ally_dead_normal" config="colors.system.ally_dead_normal" change="onChange(event)"/>
-					<c:LabeledColorSelector label="Союзник/Взрыв БК" width="250" id="v_ally_blowedup_normal" config="colors.system.ally_blowedup_normal" change="onChange(event)"/>
-					<c:LabeledColorSelector label="Взводный/Живой" width="250" id="v_squadman_alive_normal" config="colors.system.squadman_alive_normal" change="onChange(event)"/>
-					<c:LabeledColorSelector label="Взводный/Мертвый" width="250" id="v_squadman_dead_normal" config="colors.system.squadman_dead_normal" change="onChange(event)"/>
-					<c:LabeledColorSelector label="Взводный/Взрыв БК" width="250" id="v_squadman_blowedup_normal" config="colors.system.squadman_blowedup_normal" change="onChange(event)"/>
-					<c:LabeledColorSelector label="Тимкиллер/Живой" width="250" id="v_teamKiller_alive_normal" config="colors.system.teamKiller_alive_normal" change="onChange(event)"/>
-					<c:LabeledColorSelector label="Тимкиллер/Мертвый" width="250" id="v_teamKiller_dead_normal" config="colors.system.teamKiller_dead_normal" change="onChange(event)"/>
-					<c:LabeledColorSelector label="Тимкиллер/Взрыв БК" width="250" id="v_teamKiller_blowedup_normal" config="colors.system.teamKiller_blowedup_normal" change="onChange(event)"/>
-					<c:LabeledColorSelector label="Противник/Живой" width="250" id="v_enemy_alive_normal" config="colors.system.enemy_alive_normal" change="onChange(event)"/>
-					<c:LabeledColorSelector label="Противник/Мертвый" width="250" id="v_enemy_dead_normal" config="colors.system.enemy_dead_normal" change="onChange(event)"/>
-					<c:LabeledColorSelector label="Противник/Взрыв БК" width="250" id="v_enemy_blowedup_normal" config="colors.system.enemy_blowedup_normal" change="onChange(event)"/>
+					<c:LabeledColorSelector label="Союзник/Живой" width="240" id="v_ally_alive_normal" config="colors.system.ally_alive_normal" allowSystemColors="false" change="onChange(event)"/>
+					<c:LabeledColorSelector label="Союзник/Мертвый" width="240" id="v_ally_dead_normal" config="colors.system.ally_dead_normal" allowSystemColors="false" change="onChange(event)"/>
+					<c:LabeledColorSelector label="Союзник/Взрыв БК" width="240" id="v_ally_blowedup_normal" config="colors.system.ally_blowedup_normal" allowSystemColors="false" change="onChange(event)"/>
+					<c:LabeledColorSelector label="Взводный/Живой" width="240" id="v_squadman_alive_normal" config="colors.system.squadman_alive_normal" allowSystemColors="false" change="onChange(event)"/>
+					<c:LabeledColorSelector label="Взводный/Мертвый" width="240" id="v_squadman_dead_normal" config="colors.system.squadman_dead_normal" allowSystemColors="false" change="onChange(event)"/>
+					<c:LabeledColorSelector label="Взводный/Взрыв БК" width="240" id="v_squadman_blowedup_normal" config="colors.system.squadman_blowedup_normal" allowSystemColors="false" change="onChange(event)"/>
+					<c:LabeledColorSelector label="Тимкиллер/Живой" width="240" id="v_teamKiller_alive_normal" config="colors.system.teamKiller_alive_normal" allowSystemColors="false" change="onChange(event)"/>
+					<c:LabeledColorSelector label="Тимкиллер/Мертвый" width="240" id="v_teamKiller_dead_normal" config="colors.system.teamKiller_dead_normal" allowSystemColors="false" change="onChange(event)"/>
+					<c:LabeledColorSelector label="Тимкиллер/Взрыв БК" width="240" id="v_teamKiller_blowedup_normal" config="colors.system.teamKiller_blowedup_normal" allowSystemColors="false" change="onChange(event)"/>
+					<c:LabeledColorSelector label="Противник/Живой" width="240" id="v_enemy_alive_normal" config="colors.system.enemy_alive_normal" allowSystemColors="false" change="onChange(event)"/>
+					<c:LabeledColorSelector label="Противник/Мертвый" width="240" id="v_enemy_dead_normal" config="colors.system.enemy_dead_normal" allowSystemColors="false" change="onChange(event)"/>
+					<c:LabeledColorSelector label="Противник/Взрыв БК" width="240" id="v_enemy_blowedup_normal" config="colors.system.enemy_blowedup_normal" allowSystemColors="false" change="onChange(event)"/>
 				</s:VGroup>
 			</s:NavigatorContent>
 			<s:NavigatorContent width="100%" height="100%" id="blind">
 				<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-					<c:LabeledColorSelector label="Союзник/Живой" width="250" id="v_ally_alive_blind" config="colors.system.ally_alive_blind" change="onChange(event)"/>
-					<c:LabeledColorSelector label="Союзник/Мертвый" width="250" id="v_ally_dead_blind" config="colors.system.ally_dead_blind" change="onChange(event)"/>
-					<c:LabeledColorSelector label="Союзник/Взрыв БК" width="250" id="v_ally_blowedup_blind" config="colors.system.ally_blowedup_blind" change="onChange(event)"/>
-					<c:LabeledColorSelector label="Взводный/Живой" width="250" id="v_squadman_alive_blind" config="colors.system.squadman_alive_blind" change="onChange(event)"/>
-					<c:LabeledColorSelector label="Взводный/Мертвый" width="250" id="v_squadman_dead_blind" config="colors.system.squadman_dead_blind" change="onChange(event)"/>
-					<c:LabeledColorSelector label="Взводный/Взрыв БК" width="250" id="v_squadman_blowedup_blind" config="colors.system.squadman_blowedup_blind" change="onChange(event)"/>
-					<c:LabeledColorSelector label="Тимкиллер/Живой" width="250" id="v_teamKiller_alive_blind" config="colors.system.teamKiller_alive_blind" change="onChange(event)"/>
-					<c:LabeledColorSelector label="Тимкиллер/Мертвый" width="250" id="v_teamKiller_dead_blind" config="colors.system.teamKiller_dead_blind" change="onChange(event)"/>
-					<c:LabeledColorSelector label="Тимкиллер/Взрыв БК" width="250" id="v_teamKiller_blowedup_blind" config="colors.system.teamKiller_blowedup_blind" change="onChange(event)"/>
-					<c:LabeledColorSelector label="Противник/Живой" width="250" id="v_enemy_alive_blind" config="colors.system.enemy_alive_blind" change="onChange(event)"/>
-					<c:LabeledColorSelector label="Противник/Мертвый" width="250" id="v_enemy_dead_blind" config="colors.system.enemy_dead_blind" change="onChange(event)"/>
-					<c:LabeledColorSelector label="Противник/Взрыв БК" width="250" id="v_enemy_blowedup_blind" config="colors.system.enemy_blowedup_blind" change="onChange(event)"/>
+					<c:LabeledColorSelector label="Союзник/Живой" width="240" id="v_ally_alive_blind" config="colors.system.ally_alive_blind" allowSystemColors="false" change="onChange(event)"/>
+					<c:LabeledColorSelector label="Союзник/Мертвый" width="240" id="v_ally_dead_blind" config="colors.system.ally_dead_blind" allowSystemColors="false" change="onChange(event)"/>
+					<c:LabeledColorSelector label="Союзник/Взрыв БК" width="240" id="v_ally_blowedup_blind" config="colors.system.ally_blowedup_blind" allowSystemColors="false" change="onChange(event)"/>
+					<c:LabeledColorSelector label="Взводный/Живой" width="240" id="v_squadman_alive_blind" config="colors.system.squadman_alive_blind" allowSystemColors="false" change="onChange(event)"/>
+					<c:LabeledColorSelector label="Взводный/Мертвый" width="240" id="v_squadman_dead_blind" config="colors.system.squadman_dead_blind" allowSystemColors="false" change="onChange(event)"/>
+					<c:LabeledColorSelector label="Взводный/Взрыв БК" width="240" id="v_squadman_blowedup_blind" config="colors.system.squadman_blowedup_blind" allowSystemColors="false" change="onChange(event)"/>
+					<c:LabeledColorSelector label="Тимкиллер/Живой" width="240" id="v_teamKiller_alive_blind" config="colors.system.teamKiller_alive_blind" allowSystemColors="false" change="onChange(event)"/>
+					<c:LabeledColorSelector label="Тимкиллер/Мертвый" width="240" id="v_teamKiller_dead_blind" config="colors.system.teamKiller_dead_blind" allowSystemColors="false" change="onChange(event)"/>
+					<c:LabeledColorSelector label="Тимкиллер/Взрыв БК" width="240" id="v_teamKiller_blowedup_blind" config="colors.system.teamKiller_blowedup_blind" allowSystemColors="false" change="onChange(event)"/>
+					<c:LabeledColorSelector label="Противник/Живой" width="240" id="v_enemy_alive_blind" config="colors.system.enemy_alive_blind" allowSystemColors="false" change="onChange(event)"/>
+					<c:LabeledColorSelector label="Противник/Мертвый" width="240" id="v_enemy_dead_blind" config="colors.system.enemy_dead_blind" allowSystemColors="false" change="onChange(event)"/>
+					<c:LabeledColorSelector label="Противник/Взрыв БК" width="240" id="v_enemy_blowedup_blind" config="colors.system.enemy_blowedup_blind" allowSystemColors="false" change="onChange(event)"/>
 				</s:VGroup>
 			</s:NavigatorContent>
 		</mx:ViewStack>

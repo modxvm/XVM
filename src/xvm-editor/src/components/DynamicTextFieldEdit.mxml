@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<c:LabeledComponent xmlns:fx="http://ns.adobe.com/mxml/2009"
+	    xmlns:s="library://ns.adobe.com/flex/spark"
+	    xmlns:mx="library://ns.adobe.com/flex/mx"
+		xmlns:c="components.*"
+		width="100%" height="20">
+	<fx:Script>
+/*
+		skinClass: ClassReference("skins.PanelSkin");
+		dropShadowVisible: false;
+*/
+		
+		import spark.components.RadioButtonGroup;
+		
+		protected var _rbg:RadioButtonGroup = null;
+		[Bindable]
+		public function get group():RadioButtonGroup
+		{
+			return _rbg;
+		}
+		public function set group(v:RadioButtonGroup):void
+		{
+			_rbg = v;
+		}
+		
+		protected var _bgc:uint = 0xFFFFFF;
+		[Bindable]
+		public function get bgColor():uint
+		{
+			return _bgc;
+		}
+		public function set bgColor(v:uint):void
+		{
+			_bgc = v;
+		}
+	</fx:Script>
+	<fx:Metadata>
+		[Event(name="click", type="flash.events.MouseEvent")]
+	</fx:Metadata>
+	<s:SkinnableContainer width="100%" height="100%" backgroundColor="{bgColor}">
+		<s:layout>
+			<s:HorizontalLayout verticalAlign="middle"/>
+		</s:layout>
+		<mx:Spacer width="0"/>
+		<s:RadioButton label="{label}" width="{labelWidth}" group="{group}"/>
+		<mx:Image width="16" height="16" id="del" source="@Embed(source='images/delete.png')" toolTip="Удалить строку" useHandCursor="true" buttonMode="true"/>
+		<mx:Image width="16" height="16" id="add" source="@Embed(source='images/add.png')" toolTip="Вставить строку" useHandCursor="true" buttonMode="true"/>
+	</s:SkinnableContainer>
+</c:LabeledComponent>

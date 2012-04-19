@@ -188,7 +188,7 @@ private function RefreshColorsPage():void
 		this.p_systemColors.v_enemy_dead_blind.value = section.enemy_dead_blind;
 		this.p_systemColors.v_enemy_blowedup_normal.value = section.enemy_blowedup_normal;
 		this.p_systemColors.v_enemy_blowedup_blind.value = section.enemy_blowedup_blind;
-		
+
 		this.p_colors_hp.RefreshSource();
 		this.p_colors_hp_ratio.RefreshSource();
 		this.p_colors_eff.RefreshSource();
@@ -333,30 +333,7 @@ private function RefreshTextFields():void
 	debug("RefreshTextFields()");
 	try
 	{
-		var activeMarkerStates:Array = getActiveMarkerStates();
-
-		var valueSet: Boolean = false;
-		var value:*;
-		var valueOk: Boolean = true;
-		for each (var state:String in activeMarkerStates)
-		{
-			var conf:String = "markers." + state + ".textFields";
-			debug("  " + conf + "=" + Config.GetValue(conf));
-			//values.push(Config.GetValue(conf));
-			if (!valueSet)
-			{
-				valueSet = true;
-				value = Config.GetValue(conf);
-			}
-			else
-			{
-				if (value != Config.GetValue(conf))
-				{
-					valueOk = false;
-					break;
-				}
-			}
-		}
+		this.m_textFieldList.RefreshSource(getActiveMarkerStates());
 
 		//control.conflict = !valueOk;
 		//control.value = value;

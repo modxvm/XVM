@@ -11,7 +11,7 @@
 		<c:LabeledNumberSelector label="Позиция по оси X" id="v_x" config="x" minimum="-100" maximum="100" change="onChange(event)"/>
 		<c:LabeledNumberSelector label="Позиция по оси Y" id="v_y" config="y" minimum="-100" maximum="100" change="onChange(event)"/>
 		<c:LabeledNumberSelector label="Прозрачность" id="v_alpha" config="alpha" minimum="0" maximum="100" change="onChange(event)"/>
-		<c:LabeledColorSelector label="Цвет" width="250" id="v_color" config="color" change="onChange(event)"/>
+		<c:LabeledColorSelector label="Цвет" width="260" id="v_color" config="color" change="onChange(event)"/>
 		<c:LabeledNumberSelector label="Время отображения" id="v_speed" config="speed" minimum="0" maximum="10" change="onChange(event)"/>
 		<c:LabeledNumberSelector label="Расстояние" id="v_maxRange" config="maxRange" minimum="0" maximum="100" change="onChange(event)"/>
 		<c:LabeledTextInput label="Текст при уроне" id="v_damageMessage" config="damageMessage" change="onChange(event)"/>

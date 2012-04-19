@@ -21,7 +21,7 @@ package validators
 
 			var text:String = String(value).toUpperCase();
 			
-			if (!/^#[0-9A-F]{6}$/.test(text))
+			if (text != "" && !/^#[0-9A-F]{6}$/.test(text))
 			{
 				results.push(new ValidationResult(true, null, "Format",
 					"Цвет должен быть в формате '#xxxxxx', где x - 16-ричное число."));

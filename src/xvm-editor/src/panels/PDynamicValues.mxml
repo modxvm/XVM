@@ -12,18 +12,32 @@
 			import components.DynamicColorEdit;
 			import components.DynamicPlayersEdit;
 			import components.LabeledComponent;
-			
+
 			import events.ValueChangedEvent;
-			
+
 			import flash.events.Event;
-			
+
 			import mx.core.IVisualElement;
-			
+
 			import utils.Config;
 
 			[Embed(source="images/add.png")]
 			private static var IMG_add : Class;
-			
+
+			private function CreateNewElementButton():IVisualElement
+			{
+				var img:Image = new Image();
+				img.width = 16;
+				img.height = 16;
+				img.id = "new";
+				img.source = new IMG_add();
+				img.toolTip = "Добавить строку";
+				img.useHandCursor = true;
+				img.buttonMode = true;
+				img.addEventListener(MouseEvent.CLICK, this.onClick);
+				return img;
+			}
+
 			private function CreateElement(v:Object = null):LabeledComponent
 			{
 				//var cls:Class = getDefinitionByName(editorClass) as Class;
@@ -53,18 +67,23 @@
 						  : { clan: v ? v.clan : "", icon: v ? v.icon : "" };
 						break;
 				}
-				
+
 				instance.addEventListener(Event.CHANGE, onChange);
 				instance.addEventListener(MouseEvent.CLICK, onClick);
 				return instance;
 			}
-			
+
 			public function RefreshSource(): void
 			{
 				container.removeAllElements();
 				var src:Array = Config.GetValue(_config);
-				for (var i: Number = 0; i < src.length; ++i)
-					container.addElement(CreateElement(src[i]));
+				if (src.length == 0)
+                                       	container.addElement(CreateNewElementButton());
+				else
+				{
+					for (var i: Number = 0; i < src.length; ++i)
+						container.addElement(CreateElement(src[i]));
+				}
 			}
 
 			public function get value():*
@@ -74,10 +93,10 @@
 					a.push((container.getElementAt(i) as LabeledComponent).value);
 				return a;
 			}
-			
+
 			// config
 			private var _config:String;
-			
+
 			[Bindable]
 			public function get config():String
 			{
@@ -87,7 +106,7 @@
 			{
 				_config = value;
 			}
-			
+
 			// minimum
 			protected var _minimum: Number = 0;
 			[Bindable]
@@ -99,7 +118,7 @@
 			{
 				_minimum = v;
 			}
-			
+
 			// maximum
 			protected var _maximum: Number = 10;
 			[Bindable]
@@ -111,7 +130,7 @@
 			{
 				_maximum = v;
 			}
-			
+
 			// renderer
 			private var _editorClass:String;
 			[Bindable]
@@ -138,18 +157,7 @@
 					container.removeElement(event.currentTarget as IVisualElement);
 					onChange(null);
 					if (container.numElements == 0)
-					{
-						var img:Image = new Image();
-						img.width = 16;
-						img.height = 16;
-						img.id = "new";
-						img.source = new IMG_add();
-						img.toolTip = "Добавить строку";
-						img.useHandCursor = true;
-						img.buttonMode = true;
-						img.addEventListener(MouseEvent.CLICK, this.onClick);
-						container.addElement(img);
-					}
+                                        	container.addElement(CreateNewElementButton());
 				}
 				else if (event.target.id == "add")
 				{

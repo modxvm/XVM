@@ -30,7 +30,7 @@
 	</fx:Metadata>
 	<s:HGroup width="100%" height="100%" verticalAlign="middle">
 		<s:Label text="{label}" width="{labelWidth}"/>
-		<s:NumericStepper width="100" minimum="{minimum}" maximum="{maximum}"
+		<s:NumericStepper width="60" minimum="{minimum}" maximum="{maximum}"
 			id="valueEdit" value="{v_value}" change="v_value=valueEdit.value; onChange(event)"/>
 		<s:HSlider width="100%" minimum="0" maximum="100" toolTip="{v_alpha}"
 			id="alphaEdit" value="{v_alpha}" change="v_alpha=alphaEdit.value; onChange(event)"/>
