@@ -15,22 +15,27 @@
 			
 			import utils.Config;
 
-			private var values:Array = [];
-			
-			protected var _selected:Boolean = false;
-			[Bindable]
-			public function get selected():Boolean
-			{
-				return _selected;
-			}
-			public function set selected(v:Boolean):void
-			{
-				_selected = v;
-			}
+			private var m_values:Object = {};
 			
 			[Embed(source="images/add.png")]
 			private static var IMG_add : Class;
 
+			public function get value():*
+			{
+				var a:Object = {}; 
+				for (var v:Object in m_values)
+				{
+					for (var i:Number = 0; i < v.states.length; ++i)
+					{
+						var state:String = v.states[i];
+						if (!a.hasOwnProperty(state))
+							a[state] = [];
+						a[state].push(v.values[i]);
+					}
+				}
+				return a;
+			}
+			
 			private function CreateNewElementButton():IVisualElement
 			{
 				var img:Image = new Image();
@@ -58,34 +63,103 @@
 
 			public function RefreshSource(activeMarkerStates: Array): void
 			{
-				values = [];
+				for (var n:Number = 0; n < container.numElements; ++n)
+				{
+					var e_old:DynamicTextFieldEdit = container.getElementAt(n) as DynamicTextFieldEdit; 
+					if (e_old)
+						e_old.group = null;
+					delete container.getElementAt(n);
+				}
+				container.removeAllElements();
+
+				m_values = {};
+				var empty: Boolean = true;
+				var unnamedCounter:Number = 0;
 				for each (var state:String in activeMarkerStates)
 				{
 					var conf:String = "markers." + state + ".textFields";
 					var v:Array = Config.GetValue(conf);
 					for (var i:Number = 0; i < v.length; ++i)
-						values.push(v[i]);
+					{
+						empty = false;
+						var value:Object = v[i];
+						var name:String = value.name || value.format || "Текст " + (++unnamedCounter);
+						if (!m_values.hasOwnProperty(name))
+						{
+							var e:DynamicTextFieldEdit = CreateElement(name);
+							container.addElement(e);
+							m_values[name] = { element: e, states: [], values: [] };
+						}
+						m_values[name].states.push(state);
+						m_values[name].values.push(value);
+					}
 				}
 
-				container.removeAllElements();
-				if (values.length == 0)
+				if (empty)
+				{
 					container.addElement(CreateNewElementButton());
+					return;
+				}
 				else
 				{
-					for (var j: Number = 0; j < values.length; ++j)
-						container.addElement(CreateElement(values[j].name || "Текст " + (j + 1)));
+					var el:DynamicTextFieldEdit = container.getElementAt(0) as DynamicTextFieldEdit; 
+					el.selected = true;
+					this.RefreshElement(el.label);	
 				}
 			}
 
-/*			public function get value():*
+			protected function onRadioButtonChange(event:Event):void
 			{
-				var a: Array = [];
-				for (var i:Number = 0; i < container.numElements; ++i)
-					a.push((container.getElementAt(i) as LabeledComponent).value);
-				return a;
-			}*/
-
-			// config
+				RefreshElement(rbg.selectedValue.toString());
+			}
+			
+			protected function RefreshElement(name:String):void
+			{
+				trace(name);
+				/*
+				//control.conflict = !valueOk;
+				//control.value = value;
+				
+				for each (var mname:String in ElementControls[activeElement.id])
+				{
+				for each (var mname2:String in ElementControls[mname])
+				{
+				var control:LabeledComponent = this[mname][mname2] as LabeledComponent;
+				
+				//debug(mname + "." + mname2);
+				var valueSet: Boolean = false;
+				var value:*;
+				var valueOk: Boolean = true;
+				for each (var state:String in activeMarkerStates)
+				{
+				var conf:String = "markers." + state + "." + activeElement.id + "." + control.config;
+				//debug("  " + conf + "=" + Config.GetValue(conf));
+				//values.push(Config.GetValue(conf));
+				if (!valueSet)
+				{
+				valueSet = true;
+				value = Config.GetValue(conf);
+				}
+				else
+				{
+				if (value != Config.GetValue(conf))
+				{
+				valueOk = false;
+				break;
+				}
+				}
+				}
+				
+				control.conflict = !valueOk;
+				control.value = value;
+				}
+				}
+				
+				
+				*/
+			}
+			
+/*			// config
 			private var _config:String;
 
 			[Bindable]
@@ -97,11 +171,11 @@
 			{
 				_config = value;
 			}
-
+*/
 			// add/del
 			protected function onClick(event:MouseEvent):void
 			{
-				if (event.target.id == "del")
+/*				if (event.target.id == "del")
 				{
 					container.removeElement(event.currentTarget as IVisualElement);
 					onChange(null);
@@ -119,15 +193,15 @@
 					container.removeAllElements();
 					container.addElement(CreateElement("Текст 1"));
 					onChange(null);
-				}
+				}*/
 			}
 		]]>
 	</fx:Script>
 	<fx:Declarations>
-		<s:RadioButtonGroup id="rbg"/>
+		<s:RadioButtonGroup id="rbg" change="onRadioButtonChange(event)"/>
 	</fx:Declarations>
 	<mx:Image right="5" y="-18" width="16" height="16" source="@Embed(source='images/cancel.png')" toolTip="Вернуть настройки по умолчанию" useHandCursor="true" buttonMode="true"/>
-	<s:Scroller left="10" right="10" top="5" bottom="5">
+	<s:Scroller left="10" right="10" top="5" bottom="6">
 		<s:VGroup id="container" width="100%" height="100%" gap="-1"/>
 	</s:Scroller>
 </c:PanelComponent>

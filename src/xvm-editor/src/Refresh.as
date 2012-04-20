@@ -19,10 +19,12 @@ protected function RefreshConfig():void
 		RefreshTransparencyPage();
 		RefreshIconsetPage();
 		RefreshPlayersPage();
+
+		RefreshMarkersPage();
 	}
 	catch (ex:Error)
 	{
-		debug("ERROR: RefreshConfigData(): " + ex.toString());
+		debug("ERROR: RefreshConfig(): " + ex.toString());
 	}
 }
 
@@ -279,6 +281,10 @@ private function RefreshMarkersPage():void
 	try
 	{
 		var activeElement:* = getActiveMarkerElement();
+
+		if (!activeElement)
+			return;
+		
 		if (activeElement == textFields)
 		{
 			RefreshTextFields();
@@ -334,45 +340,6 @@ private function RefreshTextFields():void
 	try
 	{
 		this.m_textFieldList.RefreshSource(getActiveMarkerStates());
-
-		//control.conflict = !valueOk;
-		//control.value = value;
-
-
-/*		for each (var mname:String in ElementControls[activeElement.id])
-		{
-			for each (var mname2:String in ElementControls[mname])
-			{
-				var control:LabeledComponent = this[mname][mname2] as LabeledComponent;
-
-				//debug(mname + "." + mname2);
-				var valueSet: Boolean = false;
-				var value:*;
-				var valueOk: Boolean = true;
-				for each (var state:String in activeMarkerStates)
-				{
-					var conf:String = "markers." + state + "." + activeElement.id + "." + control.config;
-					//debug("  " + conf + "=" + Config.GetValue(conf));
-					//values.push(Config.GetValue(conf));
-					if (!valueSet)
-					{
-						valueSet = true;
-						value = Config.GetValue(conf);
-					}
-					else
-					{
-						if (value != Config.GetValue(conf))
-						{
-							valueOk = false;
-							break;
-						}
-					}
-				}
-
-				control.conflict = !valueOk;
-				control.value = value;
-			}
-		}*/
 	}
 	catch (ex:Error)
 	{

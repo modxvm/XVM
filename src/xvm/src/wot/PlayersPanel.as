@@ -35,6 +35,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 
   // override
   private var _initialized = false;
+  private var _lastAdjustedState = "";
   function setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount)
   {
     var start = new Date();
@@ -47,7 +48,11 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     players_bg._alpha = Config.s_config.playersPanel.alpha;
     m_list._alpha = Config.s_config.playersPanel.iconAlpha;
 
-    XVMAdjustPanelSize();
+    if (m_state != _lastAdjustedState)
+    {
+      XVMAdjustPanelSize();
+      _lastAdjustedState = m_state;
+    }
 
     if (DEBUG_TIMES)
       Logger.add("DEBUG TIME: PlayersPanel: setData(): " + Utils.elapsedMSec(start, new Date()) + " ms");
@@ -122,6 +127,18 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   
   function XVMFormatText(data, fieldType, isDead)
   {
+    var key_prefix = data.label + "/" +  m_state + "/" + fieldType + "/";
+    var key = key_prefix + (isDead ? "d" : "a");
+    if (!m_textCache.hasOwnProperty(key))
+    {
+      m_textCache[key_prefix + "a"] = XVMFormatText2(data, fieldType, false);
+      m_textCache[key_prefix + "d"] = XVMFormatText2(data, fieldType, true);
+    }
+    return m_textCache[key];
+  }
+          
+  function XVMFormatText2(data, fieldType, isDead)
+  {
     var format: String = "";
     var name = data.label + ((data.clanAbbrev == "") ? "" : "[" + data.clanAbbrev + "]");
     switch (m_state)
@@ -158,49 +175,43 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         return (fieldType == "name") ? name : data.vehicle.toString();
     }
 
-    var key = (isDead ? "d" : "a") + " " + data.label + " " + format;
-    if (!m_textCache.hasOwnProperty(key))
+    format = format.split("{{vehicle}}").join(data.vehicle.toString());
+    format = Stat.FormatText(data, format, isDead);
+
+    // cut player name for field width
+    if (format.indexOf("{{nick}}") > -1)
     {
-      format = format.split("{{vehicle}}").join(data.vehicle.toString());
-      format = Stat.FormatText(data, format, isDead);
-
-      // cut player name for field width
-      if (format.indexOf("{{nick}}") > -1)
+      var str: String = name;
+      var pname: String = name;
+      if (m_state == "medium" || m_state == "medium2" || m_state == "large")
       {
-        var str: String = name;
-        var pname: String = name;
-        if (m_state == "medium" || m_state == "medium2" || m_state == "large")
+        var configWidth = Config.s_config.playersPanel[m_state].width;
+        if (s_widthTester == null)
         {
-          var configWidth = Config.s_config.playersPanel[m_state].width;
-          if (s_widthTester == null)
-          {
-            s_widthTester = _root.createTextField("widthTester", _root.getNextHighestDepth(), 0, 0, 268, 20);
-            s_widthTester.autoSize = false;
-            s_widthTester.html = true;
-            s_widthTester.condenseWhite = true;
-            s_widthTester._visible = false;
-            var tf: TextFormat = m_names.getNewTextFormat();
-            s_widthTester.setNewTextFormat(tf);
-          }
-          while (pname.length > 0)
-          {
-            str = (pname == name || m_state != "large") ? pname : pname + "...";
-            s_widthTester.htmlText = format.split("{{nick}}").join(str);
-            if (Math.round(s_widthTester.getLineMetrics(0).width) + 4 <= configWidth) // 4 is a size of gutters
-            {
-              //Logger.add("configWidth=" + configWidth + " _width=" + s_widthTester._width + " lineWidth=" + Math.round(s_widthTester.getLineMetrics(0).width) + " " + str);
-              break;
-            }
-            pname = pname.substr(0, pname.length - 1);
-          }
+          s_widthTester = _root.createTextField("widthTester", _root.getNextHighestDepth(), 0, 0, 268, 20);
+          s_widthTester.autoSize = false;
+          s_widthTester.html = true;
+          s_widthTester.condenseWhite = true;
+          s_widthTester._visible = false;
+          var tf: TextFormat = m_names.getNewTextFormat();
+          s_widthTester.setNewTextFormat(tf);
         }
-        format = format.split("{{nick}}").join(pname.length == 0 ? "" : str);
+        while (pname.length > 0)
+        {
+          str = (pname == name || m_state != "large") ? pname : pname + "...";
+          s_widthTester.htmlText = format.split("{{nick}}").join(str);
+          if (Math.round(s_widthTester.getLineMetrics(0).width) + 4 <= configWidth) // 4 is a size of gutters
+          {
+            //Logger.add("configWidth=" + configWidth + " _width=" + s_widthTester._width + " lineWidth=" + Math.round(s_widthTester.getLineMetrics(0).width) + " " + str);
+            break;
+          }
+          pname = pname.substr(0, pname.length - 1);
+        }
       }
-
-      m_textCache[key] = Utils.trim(format);
+      format = format.split("{{nick}}").join(pname.length == 0 ? "" : str);
     }
 
-    return m_textCache[key];
+    return format;
   }
 
   function XVMAdjustPanelSize()

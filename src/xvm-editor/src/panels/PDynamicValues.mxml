@@ -75,6 +75,8 @@
 
 			public function RefreshSource(): void
 			{
+				for (var n:Number = 0; n < container.numElements; ++n)
+					delete container.getElementAt(n);
 				container.removeAllElements();
 				var src:Array = Config.GetValue(_config);
 				if (src.length == 0)
@@ -154,10 +156,10 @@
 			{
 				if (event.target.id == "del")
 				{
-					container.removeElement(event.currentTarget as IVisualElement);
+					delete container.removeElement(event.currentTarget as IVisualElement);
 					onChange(null);
 					if (container.numElements == 0)
-                                        	container.addElement(CreateNewElementButton());
+						container.addElement(CreateNewElementButton());
 				}
 				else if (event.target.id == "add")
 				{
@@ -167,6 +169,8 @@
 				}
 				else if (event.target.id == "new")
 				{
+					for (var n:Number = 0; n < container.numElements; ++n)
+						delete container.getElementAt(n);
 					container.removeAllElements();
 					container.addElement(CreateElement());
 					onChange(null);
