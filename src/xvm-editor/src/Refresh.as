@@ -261,18 +261,16 @@ public static var ElementControls:Object = {
 	contourIcon: [ "m_contourIcon" ],
 	levelIcon: [ "m_levelIcon" ],
 	actionMarker: [ "m_actionMarker" ],
-	textFields: [ "m_textFields" ],
 
-	m_vehicleIcon: [ "v_visible", "v_x", "v_y", "v_alpha", "v_maxScale", "v_scaleX", "v_scaleY"],
-	m_healthBar: ["v_visible", "v_x", "v_y", "v_alpha", "v_color", "v_lcolor", "v_width", "v_height", "v_border_size",
-		"v_border_color", "v_border_alpha", "v_fill_alpha", "v_damage_color", "v_damage_alpha", "v_damage_fade"],
-	m_damageText: ["v_visible", "v_x", "v_y", "v_alpha", "v_color", "v_maxRange", "v_damageMessage", "v_blowupMessage"],
+	m_vehicleIcon: [ "v_visible", "v_x", "v_y", "v_alpha", "v_maxScale", "v_scaleX", "v_scaleY" ],
+	m_healthBar: [ "v_visible", "v_x", "v_y", "v_alpha", "v_color", "v_lcolor", "v_width", "v_height", "v_border_size",
+		"v_border_color", "v_border_alpha", "v_fill_alpha", "v_damage_color", "v_damage_alpha", "v_damage_fade" ],
+	m_damageText: [ "v_visible", "v_x", "v_y", "v_alpha", "v_color", "v_maxRange", "v_damageMessage", "v_blowupMessage" ],
 	m_damageText_font: [ "v_name", "v_size", "v_align", "v_bold" ],
 	m_damageText_shadow: [ "v_size", "v_strength", "v_angle", "v_distance", "v_color", "v_alpha" ],
 	m_contourIcon: ["v_visible", "v_x", "v_y", "v_alpha", "v_color", "v_amount" ],
 	m_levelIcon: ["v_visible", "v_x", "v_y", "v_alpha" ],
-	m_actionMarker: ["v_visible", "v_x", "v_y", "v_alpha" ],
-	m_textFields: []
+	m_actionMarker: ["v_visible", "v_x", "v_y", "v_alpha" ]
 };
 
 private function RefreshMarkersPage():void

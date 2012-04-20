@@ -74,16 +74,15 @@ package utils
 	/**
 	 * Get config value
 	 */
-	public static function GetValue(path:String):*
+	public static function GetValue(path:String, root:Object = null):*
 	{
-		if (!s_config)
+		if (root == null)
+			root = s_config;
+		if (!root)
 			return null;
 		
 		var p:Array = path.split("."); // "path.to.value"
 		var valueElement:String = p.pop(); // last element is value
-		
-		// Start from root element
-		var root:* = s_config;
 		
 		for each (var e:String in p)
 		{
