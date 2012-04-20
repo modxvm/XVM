@@ -17,9 +17,14 @@
 			
 			import mx.core.IVisualElement;
 			
+			import spark.components.ToggleButton;
+			
 			import utils.Config;
+			import utils.DefaultConfig;
 			import utils.Utils;
 
+			private var m_activeMarkerStates:Array = null;
+			private var m_names:Array = [];
 			private var m_values:Object = {};
 			
 			[Embed(source="images/add.png")]
@@ -27,16 +32,14 @@
 			
 			public function get value():*
 			{
-				var a:Object = {}; 
-				for (var v:Object in m_values)
+				var a:Object = {};
+				for each (var state:String in this.m_activeMarkerStates)
+					a[state] = [];
+				for (var n:Number = 0; n < m_names.length; ++n)
 				{
+					var v:Object = m_values[m_names[n]];
 					for (var i:Number = 0; i < v.states.length; ++i)
-					{
-						var state:String = v.states[i];
-						if (!a.hasOwnProperty(state))
-							a[state] = [];
-						a[state].push(v.values[i]);
-					}
+						a[v.states[i]].push(v.values[i]);
 				}
 				return a;
 			}
@@ -73,6 +76,8 @@
 
 			public function RefreshSource(activeMarkerStates: Array): void
 			{
+				m_activeMarkerStates = activeMarkerStates;
+				
 				for (var n:Number = 0; n < container.numElements; ++n)
 				{
 					var e_old:DynamicTextFieldEdit = container.getElementAt(n) as DynamicTextFieldEdit; 
@@ -82,6 +87,7 @@
 				}
 				container.removeAllElements();
 
+				m_names = [];
 				m_values = {};
 				var empty: Boolean = true;
 				var unnamedCounter:Number = 0;
@@ -98,6 +104,7 @@
 						{
 							var e:DynamicTextFieldEdit = CreateElement(name);
 							container.addElement(e);
+							m_names.push(name);
 							m_values[name] = { element: e, states: [], values: [] };
 						}
 						m_values[name].states.push(state);
@@ -109,9 +116,16 @@
 					container.addElement(CreateNewElementButton());
 				else
 				{
-					var el:DynamicTextFieldEdit = container.getElementAt(0) as DynamicTextFieldEdit; 
-					el.selected = true;
-					this.RefreshElement(el.label);	
+					for (var j:Number = 0; j < container.numElements; ++j)
+					{
+						var el:DynamicTextFieldEdit = container.getElementAt(j) as DynamicTextFieldEdit;
+						if (j == 0)
+						{
+							el.selected = true;
+							this.RefreshElement(el.label);
+						}
+						el.conflict = m_values[el.label].states.length != m_activeMarkerStates.length;
+					}
 				}
 			}
 
@@ -126,7 +140,7 @@
 				m_textField_font: [ "v_name", "v_size", "v_align", "v_bold" ],
 				m_textField_shadow: [ "v_size", "v_strength", "v_angle", "v_distance", "v_color", "v_alpha" ]
 			};
-			
+
 			protected function RefreshElement(name:String):void
 			{
 				//trace(name);
@@ -137,7 +151,7 @@
 					for each (var mname2:String in ElementControls[mname])
 					{
 						var control:LabeledComponent = this[mname][mname2] as LabeledComponent;
-						
+
 						//trace(mname + "." + mname2);
 						var valueSet: Boolean = false;
 						var value:*;
@@ -159,7 +173,7 @@
 								}
 							}
 						}
-					
+
 						control.conflict = !valueOk;
 						control.value = value;
 					}
@@ -175,7 +189,7 @@
 						trace("ERROR: config is null for: " + event.sender.id);
 						return;
 					}
-					
+
 					//var activeElement:String = getActiveMarkerElement().id;
 					//var activeMarkerStates:Array = getActiveMarkerStates();
 					/*for each (var state:String in activeMarkerStates)
@@ -190,29 +204,50 @@
 					trace("ERROR: updateMarkerValue(): " + ex.toString());
 				}
 			}
-			
+
 			// add/del
 			protected function onClick(event:MouseEvent):void
 			{
-/*				if (event.target.id == "del")
+				var e:DynamicTextFieldEdit = event.currentTarget as DynamicTextFieldEdit; 
+				if (event.target.id == "del")
 				{
-					container.removeElement(event.currentTarget as IVisualElement);
-					onChange(null);
-					if (container.numElements == 0)
-						container.addElement(CreateNewElementButton());
+					m_names.splice(m_names.indexOf(e.label), 1);
+					delete m_values[e.label];
 				}
-				else if (event.target.id == "add")
+				else if (event.target.id == "copy")
 				{
-					var index:Number = container.getElementIndex(event.currentTarget as IVisualElement) + 1;
-					container.addElementAt(CreateElement("Текст " + index), index);
-					onChange(null);
+					for (var i:Number = 0; i < this.m_activeMarkerStates.length; ++i)
+					{
+						var state:String = m_activeMarkerStates[i];
+						if (m_values[e.label].states.indexOf(state) == -1)
+						{
+							m_values[e.label].states.push(state);
+							m_values[e.label].values.push(m_values[e.label].values[0]);
+						}
+						else if (i != 0)
+						{
+							m_values[e.label].values[i] = m_values[e.label].values[0];
+						}
+					}
 				}
-				else if (event.target.id == "new")
+				else if (event.target.id == "add" || event.target.id == "new")
 				{
-					container.removeAllElements();
-					container.addElement(CreateElement("Текст 1"));
-					onChange(null);
-				}*/
+					var n:Number = 0;
+					var name:String; 
+					do { name = "Текст " + (++n); } while (m_values.hasOwnProperty(name));
+					m_names.push(name);
+					m_values[name] = { element: null, states: this.m_activeMarkerStates, values: [] };
+					var defValue:Object = DefaultConfig.vehicleName_alive;
+					defValue.name = name;
+					defValue.format = "ТЕКСТ";
+					for (var j:Number = 0; j < m_values[name].states.length; ++j)
+						m_values[name].values.push(defValue);
+				}
+				else
+					return;
+
+				onChange(null);
+				this.RefreshSource(this.m_activeMarkerStates);
 			}
 		]]>
 	</fx:Script>

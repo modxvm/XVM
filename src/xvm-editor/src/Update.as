@@ -47,3 +47,24 @@ protected function updateMarkerValue(event:ValueChangedEvent):void
 		debug("ERROR: updateMarkerValue(): " + ex.toString());
 	}
 }
+
+protected function updateMarkerTextFieldValue(event:ValueChangedEvent):void
+{
+	//debug("updateMarkerTextFieldValue");
+	try
+	{
+		var values:Object = event.sender.value; 
+		var activeElement:String = getActiveMarkerElement().id;
+		var activeMarkerStates:Array = getActiveMarkerStates();
+		for each (var state:String in activeMarkerStates)
+		{
+			var config:String = "markers." + state + "." + activeElement; 
+			//debug(config + "=" + event.sender.value);
+			Config.SetValue(config, values[state]);
+		}
+	}
+	catch (ex:Error)
+	{
+		debug("ERROR: updateMarkerTextFieldValue(): " + ex.toString());
+	}
+}
