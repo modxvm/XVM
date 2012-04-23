@@ -248,7 +248,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   // override
   function _onErrorLoad(event)
   {
-    Logger.add("_onErrorLoad: " + event.target.source);
+    //Logger.add("_onErrorLoad: " + event.target.source);
     if (event.target.source)
     {
       // Fallback to default icon

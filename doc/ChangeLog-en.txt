@@ -1,32 +1,4 @@
-XVM-2.1.test7:
-  * added vehicle info for Type 62 and WZ111
-  * added option to hide xvm version at top left corner of screen
-  * players panels and statistic form optimization (avoid lags)
-
-XVM-2.1.test6:
-  * optimization of macros with dynamic values
-  * fixed health bar z-order
-  * optimization of player/clan icon
-  * wot-xvm-proxy: added new command line parameter "/noauto" for disabling
-    auto running the game
-  * added 'name' option for text fields in config
-  * fixed default configs
-
-XVM-2.1.test5:
-  * fixes in win chances
-
-XVM-2.1.test4:
-  * fixed bug when dead enemy tank still have tank icon active.
-  * remove empty space in large mode of players panel when squad icon is disabled
-  * dynamic color and transparency for all health bar elements in all states
-  * fixed player/clan icon in players panel
-  * fixed NaN in win chances
-
-XVM-2.1.test2:
-  * added configs like in standard client
-  * fixes in win chances formulas
-
-XVM-2.1.test1:
+XVM-2.1:
   * do not show warning when config is absent.
   * added separated parameters for clan/player icons:
       battleLoading/clanIcon: for battle loading screen
@@ -40,6 +12,22 @@ XVM-2.1.test1:
   * fixed dynamic transparency
   * fixed player/clan icon in players panel
   * show win chances in statistic form (work only in 15x15 battles)
+  * added configs like in standard client
+  * fixes in win chances formulas
+  * fixed bug when dead enemy tank still have tank icon active.
+  * remove empty space in large mode of players panel when squad icon is disabled
+  * dynamic color and transparency for all health bar elements in all states
+  * optimization of macros with dynamic values
+  * fixed health bar z-order
+  * optimization of player/clan icon
+  * wot-xvm-proxy: added new command line parameter "/noauto" for disabling
+    auto running the game
+  * added 'name' option for text fields in config
+  * fixed default configs
+  * added option to hide xvm version at top left corner of screen
+  * players panels and statistic form optimization (avoid lags)
+  * proxy server for EU client is changed
+  * added config with English comments
 
 XVM-2.0:
   * adaptation to WoT 0.7.2

@@ -14,7 +14,7 @@ Mod config files:
   \res_mods\<game version>\gui\flash\OTMData.xml (in legacy mode)
 You can select ready config file from \xvm-doc\samples\ directory
 You can create new config or edit existing using online editor:
-  http://bulychev.net/generator/
+  https://sites.google.com/site/sirmaxwiki/xvm-editor (not ready yet)
 
 XVM.xvmconf parameters (config version is 1.2.0):
 

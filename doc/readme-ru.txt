@@ -17,7 +17,7 @@ http://bulychev.net/blog/2012/02/pozitsiya-wg-v-otnoshenii-modov-so-statisti/
   \res_mods\<game version>\gui\flash\OTMData.xml (в режиме совместимости)
 Можно скопировать готовый конфиг из папки \xvm-doc\samples\
 Можно создать новый конфиг или изменить существующий с помощью онлайн-редактора:
-  http://bulychev.net/generator/
+  https://sites.google.com/site/sirmaxwiki/xvm-editor (еще в разработке)
 
 Параметры конфига XVM.xvmconf (версия конфига 1.2.0):
 
