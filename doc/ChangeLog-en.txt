@@ -1,3 +1,6 @@
+XVM-2.1.1:
+  * fixed bug - missed vehicle name in players panel
+
 XVM-2.1:
   * do not show warning when config is absent.
   * added separated parameters for clan/player icons:

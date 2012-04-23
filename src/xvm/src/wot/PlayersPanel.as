@@ -18,7 +18,6 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   private var m_currentItem = 0;
 
   private var m_textCache = {};
-  private var m_panelSizesCache = null;
   
   function PlayersPanel()
   {
@@ -216,16 +215,8 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 
   function XVMAdjustPanelSize()
   {
-    if (!m_panelSizesCache)
-    {
-      m_panelSizesCache = {
-        medium: Math.max(XVMGetMaximumFieldWidth(m_names), Config.s_config.playersPanel.medium.width),
-        large_names: Math.max(XVMGetMaximumFieldWidth(m_names), Config.s_config.playersPanel.large.width),
-        large_vehicles: XVMGetMaximumFieldWidth(m_vehicles)
-      }
-    }
-
     //Logger.add("XVMAdjustPanelSize()");
+
     var namesWidthDefault = 46;
     var namesWidth = namesWidthDefault;
     var vehiclesWidthDefault = 65;
@@ -235,7 +226,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     switch (m_state)
     {
       case "medium":
-        namesWidth = m_panelSizesCache.medium;
+        namesWidth = Math.max(XVMGetMaximumFieldWidth(m_names), Config.s_config.playersPanel.medium.width);
         widthDelta = namesWidthDefault - namesWidth;
         break;
       case "medium2":
@@ -244,8 +235,8 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         break;
       case "large":
         namesWidthDefault = 296;
-        namesWidth = m_panelSizesCache.large_names;
-        vehiclesWidth = m_panelSizesCache.large_vehicles;
+        namesWidth = Math.max(XVMGetMaximumFieldWidth(m_names), Config.s_config.playersPanel.large.width);
+        vehiclesWidth = XVMGetMaximumFieldWidth(m_vehicles);
         squadSize = Config.s_config.playersPanel.removeSquadIcon ? 0 : SQUAD_SIZE;
         widthDelta = namesWidthDefault - namesWidth + vehiclesWidthDefault - vehiclesWidth - squadSize + SQUAD_SIZE;
         break;
