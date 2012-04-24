@@ -228,6 +228,7 @@
     { "clan": "[--S--]",    "icon": "../../../clanicons/s.png" },
     { "clan": "[TGD]",      "icon": "../../../clanicons/tgd.png" },
     { "clan": "[LA]",       "icon": "../../../clanicons/la.png" },
-    { "clan": "[1CLUB]",    "icon": "../../../clanicons/fc.png" }
+    { "clan": "[1CLUB]",    "icon": "../../../clanicons/fc.png" },
+    { "clan": "[-DEI-]",    "icon": "../../../clanicons/dei.png" }
   ]
 }
