@@ -159,10 +159,10 @@
 //    "statisticForm": "../../../icons/_Say_",
 //    "playersPanel":  "../../../icons/_Say_",
 //    "vehicleMarker": "../../../icons/_Say_"
-    "battleLoading": "../../../HARDicons",
-    "statisticForm": "../../../HARDicons",
-    "playersPanel":  "../../../HARDicons",
-    "vehicleMarker": "../../../HARDicons"
+    "battleLoading": "../../../icons/HARDicons",
+    "statisticForm": "../../../icons/HARDicons",
+    "playersPanel":  "../../../icons/HARDicons",
+    "vehicleMarker": "../../../icons/Aslain"
   },
   "players": [
 //    { "clan": "D" },
@@ -231,4 +231,3 @@
     { "clan": "[1CLUB]",    "icon": "../../../clanicons/fc.png" }
   ]
 }
-
