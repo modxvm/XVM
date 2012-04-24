@@ -5,7 +5,7 @@ import utils.DefaultConfig;
 import utils.Defines;
 import utils.JSON;
 
-public const DEBUG:Boolean = true;
+public const DEBUG:Boolean = false;
 
 public function debug(str:String):void
 {

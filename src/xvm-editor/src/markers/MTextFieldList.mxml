@@ -10,15 +10,15 @@
 		<![CDATA[
 			import components.DynamicTextFieldEdit;
 			import components.LabeledComponent;
-
+			
 			import events.ValueChangedEvent;
-
+			
 			import flash.events.Event;
-
+			
 			import mx.core.IVisualElement;
-
+			
 			import spark.components.ToggleButton;
-
+			
 			import utils.Config;
 			import utils.DefaultConfig;
 			import utils.Utils;
@@ -80,6 +80,8 @@
 			{
 				m_activeMarkerStates = activeMarkerStates;
 
+				var saved_label:String = rbg && rbg.selectedValue ? rbg.selectedValue.toString() : null;
+				
 				for (var n:Number = 0; n < container.numElements; ++n)
 				{
 					var e_old:DynamicTextFieldEdit = container.getElementAt(n) as DynamicTextFieldEdit;
@@ -115,19 +117,24 @@
 				}
 
 				if (empty)
+				{
+					this.RefreshElement(null);
 					container.addElement(CreateNewElementButton());
+				}
 				else
 				{
+					var selected:DynamicTextFieldEdit = null;
 					for (var j:Number = 0; j < container.numElements; ++j)
 					{
 						var el:DynamicTextFieldEdit = container.getElementAt(j) as DynamicTextFieldEdit;
-						if (j == 0)
-						{
-							el.selected = true;
-							this.RefreshElement(el.label);
-						}
+						if (el.label == saved_label)
+							selected = el;
 						el.conflict = m_values[el.label].states.length != m_activeMarkerStates.length;
 					}
+					if (!selected)
+						selected = container.getElementAt(0) as DynamicTextFieldEdit;
+					selected.selected = true;
+					this.RefreshElement(selected.label);
 				}
 			}
 
@@ -146,14 +153,20 @@
 			protected function RefreshElement(name:String):void
 			{
 				//trace(name);
-
-				var values:Object = m_values[name];
+				var values:Object = name ? m_values[name] : null;
 				for each (var mname:String in ElementControls.textFields)
 				{
+					this[mname].enabled = name != null;
 					for each (var mname2:String in ElementControls[mname])
 					{
 						var control:LabeledComponent = this[mname][mname2] as LabeledComponent;
 
+						if (!values)
+						{
+							control.value = null;
+							continue;
+						}
+						
 						//trace(mname + "." + mname2);
 						var valueSet: Boolean = false;
 						var value:*;
@@ -194,14 +207,17 @@
 						return;
 					}
 
-					//var activeElement:String = getActiveMarkerElement().id;
-					//var activeMarkerStates:Array = getActiveMarkerStates();
-					/*for each (var state:String in activeMarkerStates)
+					var activeValue:Object = m_values[rbg.selectedValue.toString()];
+					for each (var value:Object in activeValue.values)
+						Config.SetValue(event.sender.config, event.sender.value, value);
+
+					onChange(null);
+					
+					if (event.sender.config == "name")
 					{
-						var config:String = "markers." + state + "." + activeElement + "." + event.sender.config;
-						//debug(config + "=" + event.sender.value);
-						Config.SetValue(config, event.sender.value);
-					}*/
+						(activeValue.element as DynamicTextFieldEdit).label = event.sender.value;
+						RefreshSource(m_activeMarkerStates);
+					}
 				}
 				catch (ex:Error)
 				{
@@ -250,8 +266,10 @@
 				else
 					return;
 
+				event.stopPropagation();
+				
 				onChange(null);
-				this.RefreshSource(this.m_activeMarkerStates);
+				RefreshSource(m_activeMarkerStates);
 			}
 		]]>
 	</fx:Script>
