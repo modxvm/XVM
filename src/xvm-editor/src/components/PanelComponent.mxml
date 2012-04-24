@@ -10,6 +10,8 @@
 
 		protected function onChange(event: Event):void
 		{
+			if (event)
+				event.stopPropagation();
 			var target:LabeledComponent = event.target as LabeledComponent;
 			if (target)
 				dispatchEvent(new events.ValueChangedEvent(target));

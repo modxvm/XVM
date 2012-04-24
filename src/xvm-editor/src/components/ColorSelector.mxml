@@ -19,7 +19,7 @@
 			{
 				_allowSystemColors = v;
 			}
-			
+
 			private static function toHex(v:Number):String
 			{
 				return ("00000" + v.toString(16).toUpperCase()).substr(-6);
@@ -38,11 +38,13 @@
 				cp.selectedColor = _value;
 				cp.alpha = isNaN(_value) ? 0.5 : 1;
 				sc.alpha = isNaN(_value) ? 0.8 : 0.2;
-				sc.toolTip = isNaN(_value) ? "Системный цвет" : "Использовать системный цвет"; 
+				sc.toolTip = isNaN(_value) ? "Системный цвет" : "Использовать системный цвет";
 			}
 
 			protected function onChange(event:Event):void
 			{
+				if (event)
+					event.stopPropagation();
 				var v:String = null;
 				if (event.target == cp)
 				  v = isNaN(cp.selectedColor) ? null : cp.selectedColor.toString()

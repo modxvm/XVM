@@ -95,6 +95,8 @@
 		// onChange
 		protected virtual function onChange(event:Event):void
 		{
+			if (event)
+				event.stopPropagation();
 			conflict = false;
 			dispatchEvent(new Event(Event.CHANGE));
 		}

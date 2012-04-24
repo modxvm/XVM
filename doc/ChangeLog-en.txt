@@ -1,3 +1,6 @@
+XVM-2.2.test1:
+  * adaptation to WoT 0.7.3.test1
+
 XVM-2.1.1:
   * fixed bug - missed vehicle name in players panel
 

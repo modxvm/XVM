@@ -148,12 +148,17 @@
 			// onChange
 			protected function onChange(event:Event):void
 			{
+				if (event)
+					event.stopPropagation();
 				dispatchEvent(new events.ValueChangedEvent(this));
 			}
 
 			// add/del
 			protected function onClick(event:MouseEvent):void
 			{
+				if (!event)
+					return;
+				event.stopPropagation();
 				if (event.target.id == "del")
 				{
 					delete container.removeElement(event.currentTarget as IVisualElement);

@@ -2,19 +2,22 @@
 <mx:ComboBox xmlns:fx="http://ns.adobe.com/mxml/2009"
 			 xmlns:s="library://ns.adobe.com/flex/spark"
 			 xmlns:mx="library://ns.adobe.com/flex/mx"
-			 selectedIndex="0" change="onChange(event)" creationComplete="init(event)" dropdownWidth="300">
+			 selectedIndex="0" creationComplete="init(event)" dropdownWidth="300">
 	<fx:Script>
 		<![CDATA[
 			import mx.collections.ArrayCollection;
 			import mx.collections.Sort;
 			import mx.collections.SortField;
 			import mx.events.FlexEvent;
+			import mx.events.ListEvent;
 			import mx.utils.ObjectUtil;
 
 			private var internalFonts:Array = ["$FieldFont - встроенный", "$TextFont - встроенный"]; // TODO: Add all internal fonts
 
 			protected function onChange(event:Event):void
 			{
+				if (event)
+					event.stopPropagation();
 				dispatchEvent(new Event(Event.CHANGE));
 			}
 

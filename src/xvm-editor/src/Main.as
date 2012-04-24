@@ -35,7 +35,7 @@ protected function onSaveConfigClick():void
 protected function onVehicleStateChanged(event:Event):void
 {
 	//var target:* = event.target;
-	vsMarkers.enabled = (ally.selected || enemy.selected) && 
+	vsMarkers.enabled = (ally.selected || enemy.selected) &&
 		(alive.selected || dead.selected) &&
 		(normal.selected || extended.selected);
 

@@ -63,6 +63,11 @@ Common:
     Если %побед>50 то оставить оригинальным.
     Если %побед больше чем у игрока, то писать в чате с обрамлением !!!...!!! ярко белым жирно.
 
+  Well durring a battle we see automated messages like "Player_named_A (Ferdinand) killed Player_named_B (IS-4)". I was wondering if you could make them colored, especialy since XVM is extended visualization mod
+  Ok so originaly we got: "Player_named_A (Ferdinand) killed Player_named_B (IS-4)"
+  Idea #1: "Player_named_A (Ferdinand) killed Player_named_B (IS-4)" - simply saying vehicle name color by vehicle class color or some other varations with colors.
+  Idea #2: "Player_named_A (<icon>) killed Player_named_B (<icon>)" - using hardcoded contour icons.
+
 Delayed:
   - отмечать вражеские взводы в маркерах (невозможно достучаться из маркера до
     ушей или окна статистики)

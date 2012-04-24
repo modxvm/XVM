@@ -1,11 +1,11 @@
 #!/bin/sh
 
-GAME_VER="0.7.2"
+GAME_VER="0.7.3 Common Test"
 FILES="battle.swf battleloading.swf PlayersPanel.swf StatisticForm.swf VehicleMarkersManager.swf XVM.xvmconf OTMData.xml"
 
 cd $(dirname $(realpath $(cygpath --unix $0)))
 
-[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/home/games/WoT
+[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/home/games/WoT-test
 SWF_DIR="$WOT_DIRECTORY/res_mods/$GAME_VER/gui/flash"
 
 copy_file()

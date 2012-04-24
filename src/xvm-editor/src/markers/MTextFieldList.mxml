@@ -10,15 +10,15 @@
 		<![CDATA[
 			import components.DynamicTextFieldEdit;
 			import components.LabeledComponent;
-			
+
 			import events.ValueChangedEvent;
-			
+
 			import flash.events.Event;
-			
+
 			import mx.core.IVisualElement;
-			
+
 			import spark.components.ToggleButton;
-			
+
 			import utils.Config;
 			import utils.DefaultConfig;
 			import utils.Utils;
@@ -26,10 +26,10 @@
 			private var m_activeMarkerStates:Array = null;
 			private var m_names:Array = [];
 			private var m_values:Object = {};
-			
+
 			[Embed(source="images/add.png")]
 			private static var IMG_add : Class;
-			
+
 			public function get value():*
 			{
 				var a:Object = {};
@@ -46,9 +46,11 @@
 
 			protected function onChange(event: Event):void
 			{
+				if (event)
+					event.stopPropagation();
 				dispatchEvent(new events.ValueChangedEvent(this));
 			}
-			
+
 			private function CreateNewElementButton():IVisualElement
 			{
 				var img:Image = new Image();
@@ -62,7 +64,7 @@
 				img.addEventListener(MouseEvent.CLICK, this.onClick);
 				return img;
 			}
-			
+
 			private function CreateElement(v:String):DynamicTextFieldEdit
 			{
 				var instance:DynamicTextFieldEdit = new DynamicTextFieldEdit();
@@ -77,10 +79,10 @@
 			public function RefreshSource(activeMarkerStates: Array): void
 			{
 				m_activeMarkerStates = activeMarkerStates;
-				
+
 				for (var n:Number = 0; n < container.numElements; ++n)
 				{
-					var e_old:DynamicTextFieldEdit = container.getElementAt(n) as DynamicTextFieldEdit; 
+					var e_old:DynamicTextFieldEdit = container.getElementAt(n) as DynamicTextFieldEdit;
 					if (e_old)
 						e_old.group = null;
 					delete container.getElementAt(n);
@@ -184,6 +186,8 @@
 			{
 				try
 				{
+					event.stopPropagation();
+
 					if (!event.sender.config)
 					{
 						trace("ERROR: config is null for: " + event.sender.id);
@@ -194,7 +198,7 @@
 					//var activeMarkerStates:Array = getActiveMarkerStates();
 					/*for each (var state:String in activeMarkerStates)
 					{
-						var config:String = "markers." + state + "." + activeElement + "." + event.sender.config; 
+						var config:String = "markers." + state + "." + activeElement + "." + event.sender.config;
 						//debug(config + "=" + event.sender.value);
 						Config.SetValue(config, event.sender.value);
 					}*/
@@ -208,7 +212,7 @@
 			// add/del
 			protected function onClick(event:MouseEvent):void
 			{
-				var e:DynamicTextFieldEdit = event.currentTarget as DynamicTextFieldEdit; 
+				var e:DynamicTextFieldEdit = event.currentTarget as DynamicTextFieldEdit;
 				if (event.target.id == "del")
 				{
 					m_names.splice(m_names.indexOf(e.label), 1);
@@ -233,7 +237,7 @@
 				else if (event.target.id == "add" || event.target.id == "new")
 				{
 					var n:Number = 0;
-					var name:String; 
+					var name:String;
 					do { name = "Текст " + (++n); } while (m_values.hasOwnProperty(name));
 					m_names.push(name);
 					m_values[name] = { element: null, states: this.m_activeMarkerStates, values: [] };
