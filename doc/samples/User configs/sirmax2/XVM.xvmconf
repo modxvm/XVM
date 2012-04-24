@@ -30,6 +30,7 @@
   },
   "playersPanel": {
     "alpha": 50,
+    "removeSquadIcon": true,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 80 },
     "medium": {
       "formatLeft": "<font color='{{c:eff}}'>{{nick}}</font>",
@@ -40,7 +41,7 @@
       "formatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
     },
     "large": {
-      "width": 100,
+      "width": 120,
       "nickFormatLeft": "<font color='{{c:eff}}'>{{rating}}</font> {{nick}}",
       "nickFormatRight": "{{nick}} <font color='{{c:eff}}'>{{rating}}</font>",
       "vehicleFormatLeft": "",
