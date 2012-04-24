@@ -43,8 +43,8 @@
       "width": 100,
       "nickFormatLeft": "<font color='{{c:eff}}'>{{rating}}</font> {{nick}}",
       "nickFormatRight": "{{nick}} <font color='{{c:eff}}'>{{rating}}</font>",
-      "vehicleFormatLeft": "{{vehicle}}",
-      "vehicleFormatRight": "{{vehicle}}"
+      "vehicleFormatLeft": "",
+      "vehicleFormatRight": ""
     }
   },
   "markers": {
@@ -174,7 +174,7 @@
     { "clan": "[WG]",       "icon": "../../../clanicons/WG.png" },
     { "clan": "[WG-A]",     "icon": "../../../clanicons/WG.png" },
     { "clan": "[WTMOD]",    "icon": "../../../clanicons/WTMOD.png" },
-    { "clan": "[WGST]",     "icon": "../../../clanicons/WGST.png" }
+    { "clan": "[WGST]",     "icon": "../../../clanicons/WGST.png" },
     { "clan": "[S_O_R",     "icon": "../../../clanicons/sor.png" },
     { "clan": "[RED",       "icon": "../../../clanicons/RED.png", "w": 20, "h": 20 },
     { "clan": "[TD42",      "icon": "../../../clanicons/td42.png"},
