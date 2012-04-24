@@ -1,0 +1,2 @@
+1. Unzip archive to game folder:
+   Right click to archive -> "Extract all..." -> select game folder -> "Extract"
