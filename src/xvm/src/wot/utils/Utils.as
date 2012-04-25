@@ -99,7 +99,7 @@ class wot.utils.Utils
   public static function GetClanName(fullplayername: String): String
   {
     var pos = fullplayername.indexOf("[");
-    return (pos < 0) ? null : fullplayername.slice(pos);
+    return (pos < 0) ? "" : fullplayername.slice(pos);
   }
 
   public static function toInt(value: Object, defaultValue: Number): Number

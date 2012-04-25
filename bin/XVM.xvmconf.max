@@ -52,11 +52,17 @@
     "ally": {
       "alive": {
         "normal": {
+          "vehicleIcon": {
+            "maxScale": 80
+          },
           "damageText": {
             "blowupMessage": "Blow-up!"
           }
         },
         "extended": {
+          "vehicleIcon": {
+            "maxScale": 80
+          },
           "damageText": {
             "blowupMessage": "Blow-up!"
           }
@@ -64,11 +70,17 @@
       },
       "dead": {
         "normal": {
+          "vehicleIcon": {
+            "maxScale": 80
+          },
           "damageText": {
             "color": "0x33FF33"
           }
         },
         "extended": {
+          "vehicleIcon": {
+            "maxScale": 80
+          },
           "damageText": {
             "color": "0x33FF33"
           }
@@ -78,6 +90,9 @@
     "enemy": {
       "alive": {
         "normal": {
+          "vehicleIcon": {
+            "maxScale": 80
+          },
           "damageText": {
             "blowupMessage": "Blow-up!"
           },
@@ -129,6 +144,9 @@
           ]
         },
         "extended": {
+          "vehicleIcon": {
+            "maxScale": 80
+          },
           "damageText": {
             "blowupMessage": "Blow-up!"
           }
@@ -136,11 +154,17 @@
       },
       "dead": {
         "normal": {
+          "vehicleIcon": {
+            "maxScale": 80
+          },
           "damageText": {
             "color": "0xFF3333"
           }
         },
         "extended": {
+          "vehicleIcon": {
+            "maxScale": 80
+          },
           "damageText": {
             "color": "0xFF3333"
           }

@@ -241,7 +241,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     XVMIconCompleteLoad();
 
     // Update layout for the current marker state
-    XVMPopulateVehicleTypeMarker();
     XVMUpdateStyle();
   }
 
@@ -796,36 +795,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     }
   }
 
-  function XVMPopulateVehicleTypeMarker()
-  {
-    try
-    {
-      var cfg = GetCurrentStateConfigRootNormal();
-
-      // Vehicle Type Marker
-      var systemColor = XVMGetSystemColor();
-      for (var childName in marker.marker)
-      {
-        //if (childName == "marker_shadow")
-        //  return;
-
-        var icon: MovieClip = marker.marker[childName];
-        icon._x = cfg.vehicleIcon.scaleX * cfg.vehicleIcon.maxScale / 100;
-        icon._y = cfg.vehicleIcon.scaleY * cfg.vehicleIcon.maxScale / 100;
-        icon._xscale = icon._yscale = cfg.vehicleIcon.maxScale;
-
-        /*var ms: MovieClip = icon.duplicateMovieClip("marker_shadow", icon.getNextHighestDepth());
-        ms.gotoAndStop(icon._currentframe);
-        ms.filters = [ new DropShadowFilter(0, 0, 0, 1, 1, 1, 10, 1, false, true) ];
-        GraphicsUtil.setColor(icon, systemColor);*/
-      };
-    }
-    catch (e)
-    {
-      XVMSetErrorText("ERROR: XVMPopulateVehicleTypeMarker():" + String(e));
-    }
-  }
-
   function XVMPopulateData()
   {
     try
@@ -837,9 +806,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       var start = new Date();
 
       var cfg = GetCurrentStateConfigRootNormal();
-
-      // Vehicle Type Marker
-      XVMPopulateVehicleTypeMarker();
 
       // Vehicle Type Icon
       if (iconLoader != null && iconLoader.initialized)
@@ -879,6 +845,26 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       visible = cfg.vehicleIcon.visible;
       if (visible)
       {
+        // Vehicle Type Marker
+        //var systemColor = XVMGetSystemColor();
+        var x = cfg.vehicleIcon.scaleX * cfg.vehicleIcon.maxScale / 100;
+        var y = cfg.vehicleIcon.scaleY * cfg.vehicleIcon.maxScale / 100;
+        for (var childName in marker.marker)
+        {
+          //if (childName == "marker_shadow")
+          //  return;
+
+          var icon: MovieClip = marker.marker[childName];
+          icon._x = x;
+          icon._y = y;
+          icon._xscale = icon._yscale = cfg.vehicleIcon.maxScale;
+
+          /*var ms: MovieClip = icon.duplicateMovieClip("marker_shadow", icon.getNextHighestDepth());
+          ms.gotoAndStop(icon._currentframe);
+          ms.filters = [ new DropShadowFilter(0, 0, 0, 1, 1, 1, 10, 1, false, true) ];
+          GraphicsUtil.setColor(icon, systemColor);*/
+        };
+
         marker._x = cfg.vehicleIcon.x;
         marker._y = cfg.vehicleIcon.y;
         marker._alpha = XVMFormatDynamicAlpha(cfg.vehicleIcon.alpha, m_curHealth);
