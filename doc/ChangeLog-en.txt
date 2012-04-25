@@ -1,3 +1,8 @@
+XVM-2.2.test2:
+  * updated tank info for win chances calculation
+  * added option battle/useStandardMarkers for enabling standard client
+    vehicle markers
+
 XVM-2.2.test1:
   * adaptation to WoT 0.7.3.test1
 

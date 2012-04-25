@@ -6,15 +6,16 @@
     "description": "Default settings for XVM",
     "url": "http://code.google.com/p/wot-xvm/",
     "date": "18.03.2012",
-    "gameVersion": "0.7.2",
-    "modMinVersion": "2.1"
+    "gameVersion": "0.7.3",
+    "modMinVersion": "2.2"
   },
   "battle": {
     "mirroredVehicleIcons": true,
     "showPostmortemTips": true,
     "removePanelsModeSwitcher": false,
     "drawGrid": false,
-    "hideXVMVersion": false
+    "hideXVMVersion": false,
+    "useStandardMarkers": false
   },
   "rating": {
     "showPlayersStatistics": false,
