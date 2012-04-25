@@ -34,7 +34,7 @@
   // Parameters of the Battle Loading Screen
   "battleLoading": {
     "showClock": true,                          // false - Disable the clock on the Battle Loading Screen.
-    "showChances": false,                       // true – Enable display of "chances to win" (only with XVM-full).
+    "showChances": true,                        // true – Enable display of "chances to win" (only with XVM-full).
     "removeSquadIcon": false,                   // true – Disable Platoon icons. This blank space can house, for example, clan logos.
     "clanIcon": {                               // Display options for Team/Clan logos
       "show": true,                             //   false – Disable Team/Clan logos in Battle Loading Screen.
@@ -51,7 +51,7 @@
   },
   // Parameters of the Battle Statistics Form
   "statisticForm": {
-    "showChances": false,     // true - Enable display of "chance to win" (only with XVM-full).
+    "showChances": true,      // true - Enable display of "chance to win" (only with XVM-full).
     "removeSquadIcon": false, // true - Disable Platoon icons. This blank space can house, for example, clan logos.
     // Display options for Team/Clan logos (see battleLoading above)
     "clanIcon": { "show": true, "x": 60, "y": 6, "h": 16, "w": 16, "alpha": 100 },
