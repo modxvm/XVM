@@ -6,6 +6,7 @@ Top:
 3. Установка значений по умолчанию.
 4. Локализация (англ. язык).
 
+динамическая прозрачность по статистике
 динамический цвет и прозрачность для тени
 размытия иконок на экране загрузки
 Sometimes enemy vehicle contour icon is showing default WoT icon instead of my modded one.

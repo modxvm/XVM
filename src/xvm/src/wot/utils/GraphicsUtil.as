@@ -187,6 +187,19 @@ class wot.utils.GraphicsUtil
         return prefix + "FFFEFE";
     }
 
+    if (value == 0 && (type == Defines.DYNAMIC_COLOR_EFF || type == Defines.DYNAMIC_COLOR_RATING))
+    {
+      if (cfg.length == 0)
+        return "";
+      var cvalue: Number = cfg[0].value;
+      if (cvalue != 0)
+        return "";
+      var color: Number = Utils.toInt(cfg[0].color, 0xFFFFFF);
+      if (darker)
+          color = GraphicsUtil.darkenColor(color, 50);
+      return prefix + color.toString(16);
+    }
+    
     for (var i = 0; i < cfg.length; ++i)
     {
       var cvalue: Number = cfg[i].value;

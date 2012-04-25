@@ -94,9 +94,9 @@ class wot.utils.Stat
     format = format.split("{{eff:4}}").join(Utils.padLeft(sEff, 4));
 
     // Dynamic colors
-    format = format.split("{{c:eff}}").join(eff <= 0 ? ""
+    format = format.split("{{c:eff}}").join(eff < 0 ? ""
       : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff, "#", isDead));
-    format = format.split("{{c:rating}}").join(rating <= 0 ? ""
+    format = format.split("{{c:rating}}").join(rating < 0 ? ""
       : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, rating, "#", isDead));
     format = format.split("{{c:kb}}").join(
       GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, kb, "#", isDead));

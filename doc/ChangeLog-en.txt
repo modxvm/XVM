@@ -4,6 +4,7 @@ XVM-2.2.test2:
     vehicle markers
   * vehicle type marker settings may be different for each state
   * empty clan name for showing icons for players without clan
+  * in dynamic color "value":0 defines color for not loaded statistic
 
 XVM-2.2.test1:
   * adaptation to WoT 0.7.3.test1
