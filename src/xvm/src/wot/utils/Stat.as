@@ -195,6 +195,8 @@ class wot.utils.Stat
           if (check == "FINISHED")
           {
             Stat.retrieving = true;
+            // stop timer execution
+            Stat.timer.stop();
             // retrieve stats from proxy
             var lv_ret:LoadVars = new LoadVars();
             lv_ret.onData = function(str)
