@@ -77,7 +77,10 @@ package utils
                 if (c == '\\' || c == '"') {
                     s += '\\';
                 }
-                s += c;
+				if (c == '%')
+					s += '\\u0025';
+				else
+                	s += c;
             } else {
                 switch (c) {
                     case '\b':
