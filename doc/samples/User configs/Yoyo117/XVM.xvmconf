@@ -1,0 +1,79 @@
+{
+  "configVersion": "1.2.0",
+  "editorVersion": "0.0.0",
+  "definition": {
+    "author": "Yoyo117",
+    "description": "Yoyo117's settings for XVM",
+    "url": "http://code.google.com/p/wot-xvm/",
+    "date": "26.04.2012",
+    "gameVersion": "0.7.3",
+    "modMinVersion": "2.2"
+  },
+  "battle": {
+    "mirroredVehicleIcons": false,
+    "showPostmortemTips": false,
+    "removePanelsModeSwitcher": true
+  },
+  "rating": {
+    "showPlayersStatistics": true,
+    "loadEnemyStatsInFogOfWar": true
+  },
+  "battleLoading": {
+    "clanIcon": {
+      "show": true,
+      "x": -350,
+      "y": 6,
+      "w": 16,
+      "h": 16,
+      "alpha": 100
+    }
+  },
+  "statisticForm": {
+    "clanIcon": { "show": true, "x": 120, "y": 6, "h": 16, "w": 16, "alpha": 100 }
+  },
+  "playersPanel": {
+    "alpha": 20
+  },
+  "players": [
+    { "clan": "[-DEI-]",  "icon": "../../../clanicons/dei.png" },
+    { "clan": "[OM]",    "icon": "../../../clanicons/om.png" },
+    { "clan": "[OM-V]",  "icon": "../../../clanicons/omv.png" },
+    { "clan": "[OM-X]", "icon": "../../../clanicons/omx.png" },
+    { "clan": "[OM-BC]",  "icon": "../../../clanicons/ombc.png" },
+    { "clan": "[PTS]",    "icon": "../../../clanicons/pts.png" },
+    { "clan": "[V-V-V]",  "icon": "../../../clanicons/vvv.png" },
+    { "clan": "[HARD]", "icon": "../../../clanicons/hard.png" },
+    { "clan": "[HARDS]",  "icon": "../../../clanicons/hards.png" },
+    { "clan": "[HARD2]", "icon": "../../../clanicons/hard2.png" },
+    { "clan": "[1SBP]",  "icon": "../../../clanicons/1sbp.png" },
+    { "clan": "[2SBP]",  "icon": "../../../clanicons/2sbp.png" },
+    { "clan": "[EPIC]", "icon": "../../../clanicons/epic.png" },
+    { "clan": "[ZTD]",  "icon": "../../../clanicons/ztd.png" },
+    { "clan": "[MARS]", "icon": "../../../clanicons/mars.png" },
+    { "clan": "[PMHC]",  "icon": "../../../clanicons/pmhc.png" },
+    { "clan": "[PMHC2]", "icon": "../../../clanicons/pmhc2.png" },
+    { "clan": "[MUMMY]",  "icon": "../../../clanicons/mummy.png" },
+    { "clan": "[ISTI]",  "icon": "../../../clanicons/isti.png" },
+    { "clan": "[EPA]",  "icon": "../../../clanicons/epa.png" },
+    { "clan": "[WT]",  "icon": "../../../clanicons/wt.png" },
+    { "clan": "[DID]",  "icon": "../../../clanicons/did.png" },
+    { "clan": "[JOD]",  "icon": "../../../clanicons/jod.png" },
+    { "clan": "[-BR-]",  "icon": "../../../clanicons/br.png" },
+    { "clan": "[CSA]",  "icon": "../../../clanicons/csa.png" },
+    { "clan": "[CSA-",  "icon": "../../../clanicons/csa.png" },
+    { "clan": "[BIA]",  "icon": "../../../clanicons/bia.png" },
+    { "clan": "[BIA-2]",  "icon": "../../../clanicons/bia2.png" },
+    { "clan": "[NOB]",  "icon": "../../../clanicons/nob.png" },
+    { "clan": "[SLF]",  "icon": "../../../clanicons/slf.png" },
+    { "clan": "[SLF2]",  "icon": "../../../clanicons/slf2.png" },
+    { "clan": "[ODV]",  "icon": "../../../clanicons/odv.png" },
+    { "clan": "[-SB-]",  "icon": "../../../clanicons/sb.png" },
+    { "clan": "[SB-R]",  "icon": "../../../clanicons/sbr.png" },
+    { "clan": "[SB_2]",  "icon": "../../../clanicons/sb2.png" },
+    { "clan": "[1PADX]",  "icon": "../../../clanicons/1padx.png" },
+    { "clan": "[JNA]",  "icon": "../../../clanicons/jna.png" },
+    { "clan": "[EES]",  "icon": "../../../clanicons/ees.png" },
+    { "clan": "[-PRC-]",  "icon": "../../../clanicons/prc.png" },
+    { "clan": "[-AX-]",  "icon": "../../../clanicons/ax.png" }
+  ]
+}
