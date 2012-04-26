@@ -37,7 +37,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   var m_showExInfo: Boolean = false;
   var m_currentHealth: Number;
   var m_showMaxHealth: Boolean;
-
+  var m_team: String;
+  
   // TextFields
   var textFields: Object = null;
 
@@ -342,7 +343,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   // VehicleMarkerEnemy should contain 2 named frames:
   // - red - normal enemy
   // - purple - enemy in color blind mode
-  function XVMGetMarkerColorAlias()
+  /*function XVMGetMarkerColorAlias()
   {
     //if (m_entityName != "ally" && m_entityName != "enemy" && m_entityName != "squadman" && m_entityName != "teamKiller")
     //  Logger.add("m_entityName=" + m_entityName);
@@ -357,7 +358,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
     // if not found (node is not implemented), return inverted enemy color
     return s_isColorBlindMode ? "red" : "purple";
-  }
+  }*/
 
   function XVMGetSystemColor()
   {
@@ -369,7 +370,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
   function GetCurrentStateString(): String
   {
-    var result = m_entityName == "enemy" ? "enemy/" : "ally/";
+    var result = m_team + "/";
     result += this.vehicleDestroyed ? "dead/" : "alive/";
     result += m_showExInfo ? "extended" : "normal";
     return result;
@@ -808,7 +809,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       _statesInitialized = true;
 
       textFields = { };
-      var allStates = (m_entityName == "enemy") ? allStatesEnemy : allStatesAlly;
+      var allStates = (m_team == "enemy") ? allStatesEnemy : allStatesAlly;
       for (var stid in allStates)
       {
         var st = allStates[stid];
@@ -820,9 +821,9 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
         {
           if (cfg.textFields[i].visible)
           {
-            //if (m_entityName == "ally")
+            //if (m_team == "ally")
               //Logger.addObject(cfg.textFields[i], m_vname + " " + m_playerFullName + " " + st);
-  //          if (m_entityName == "enemy")
+  //          if (m_team == "enemy")
   //            Logger.addObject(cfg.textFields[i], m_vname + " " + m_playerFullName + " " + st);
             fields.push(XVMCreateTextField(cfg.textFields[i]));
           }
@@ -899,10 +900,10 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
           icon._y = y;
           icon._xscale = icon._yscale = cfg.vehicleIcon.maxScale;
 
-          /*var ms: MovieClip = icon.duplicateMovieClip("marker_shadow", icon.getNextHighestDepth());
-          ms.gotoAndStop(icon._currentframe);
-          ms.filters = [ new DropShadowFilter(0, 0, 0, 1, 1, 1, 10, 1, false, true) ];
-          GraphicsUtil.setColor(icon, systemColor);*/
+          //var ms: MovieClip = icon.duplicateMovieClip("marker_shadow", icon.getNextHighestDepth());
+          //ms.gotoAndStop(icon._currentframe);
+          //ms.filters = [ new DropShadowFilter(0, 0, 0, 1, 1, 1, 10, 1, false, true) ];
+          //GraphicsUtil.setColor(icon, systemColor);
         };
 
         marker._x = cfg.vehicleIcon.x;

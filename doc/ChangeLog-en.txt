@@ -1,4 +1,7 @@
-﻿XVM-2.2.test2:
+﻿XVM-2.2.test3:
+  * fixed bug with enemy team killer
+
+XVM-2.2.test2:
   * updated tank info for win chances calculation
   * vehicle type marker settings may be different for each state
   * empty clan name for showing icons for players without clan
