@@ -14,8 +14,7 @@
     "showPostmortemTips": true,
     "removePanelsModeSwitcher": false,
     "drawGrid": false,
-    "hideXVMVersion": false,
-    "useStandardMarkers": false
+    "hideXVMVersion": false
   },
   "rating": {
     "showPlayersStatistics": false,

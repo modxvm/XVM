@@ -18,7 +18,7 @@ class wot.utils.VehicleInfo
       str = str.split("-").join("_");
       str = Utils.trim(str);
     }
-    
+
     return str;
   }
 
@@ -39,7 +39,7 @@ class wot.utils.VehicleInfo
     Ch01_Type59:		{ level: 8,  type: MT, tier1: 9,  tier2: 11 },
     Ch02_Type62:		{ level: 6,  type: LT, tier1: 8,  tier2: 12 },
     Ch03_WZ_111:		{ level: 8,  type: HT, tier1: 9,  tier2: 12 },
-    _105_leFH18B2:		{ level: 4,  type: TD, tier1: 5,  tier2: 8 },
+    _105_leFH18B2:		{ level: 4,  type: SP, tier1: 5,  tier2: 8 },
     AMX_12t:			{ level: 5,  type: LT, tier1: 7,  tier2: 10 },
     AMX_13_75:			{ level: 6,  type: LT, tier1: 8,  tier2: 12 },
     AMX_13_90:			{ level: 7,  type: LT, tier1: 10, tier2: 13 },
@@ -174,15 +174,18 @@ class wot.utils.VehicleInfo
     GAZ_74b:			{ level: 4,  type: TD, tier1: 5,  tier2: 8 },
     IS:				{ level: 7,  type: HT, tier1: 8,  tier2: 12 },
     IS_3:			{ level: 8,  type: HT, tier1: 9,  tier2: 12 },
-    IS_4:			{ level: 9,  type: HT, tier1: 10, tier2: 13 },
+    IS_4:			{ level: 10, type: HT, tier1: 11, tier2: 13 },
     IS_7:			{ level: 10, type: HT, tier1: 11, tier2: 13 },
+    IS8:			{ level: 9,  type: HT, tier1: 10, tier2: 13 },
     ISU_152:			{ level: 8,  type: TD, tier1: 9,  tier2: 12 },
-    KV:				{ level: 5,  type: HT, tier1: 6,  tier2: 10 },
+    KV1:			{ level: 5,  type: HT, tier1: 6,  tier2: 10 },
+    KV2:			{ level: 6,  type: HT, tier1: 7,  tier2: 11 },
+    KV4:			{ level: 8,  type: HT, tier1: 9,  tier2: 12 },
     KV_13:			{ level: 7,  type: MT, tier1: 8,  tier2: 11 },
     KV_1s:			{ level: 6,  type: HT, tier1: 7,  tier2: 11 },
     KV_220:			{ level: 5,  type: HT, tier1: 6,  tier2: 8 },
     KV_220_action:		{ level: 5,  type: HT, tier1: 6,  tier2: 8 },
-    KV_3:			{ level: 6,  type: HT, tier1: 7,  tier2: 11 },
+    KV_3:			{ level: 7,  type: HT, tier1: 8,  tier2: 12 },
     KV_5:			{ level: 8,  type: HT, tier1: 9,  tier2: 10 },
     M3_Stuart_LL:		{ level: 3,  type: LT, tier1: 3,  tier2: 5 },
     Matilda_II_LL:		{ level: 5,  type: MT, tier1: 6,  tier2: 8 },
@@ -191,6 +194,7 @@ class wot.utils.VehicleInfo
     Object_261:			{ level: 8,  type: SP, tier1: 12, tier2: 13 },
     Object_704:			{ level: 9,  type: TD, tier1: 10, tier2: 13 },
     S_51:			{ level: 6,  type: SP, tier1: 10, tier2: 11 },
+    ST_I:			{ level: 9,  type: HT, tier1: 10, tier2: 13 },
     SU_100:			{ level: 6,  type: TD, tier1: 7,  tier2: 10 },
     SU_14:			{ level: 6,  type: SP, tier1: 10, tier2: 11 },
     SU_152:			{ level: 7,  type: TD, tier1: 8,  tier2: 11 },
@@ -212,6 +216,7 @@ class wot.utils.VehicleInfo
     T_50:			{ level: 4,  type: LT, tier1: 6,  tier2: 10 },
     T_54:			{ level: 9,  type: MT, tier1: 11, tier2: 13 },
     T_50_2:			{ level: 5,  type: LT, tier1: 8,  tier2: 13 },
+    T150:			{ level: 6,  type: HT, tier1: 7,  tier2: 11 },
     Tetrarch_LL:		{ level: 2,  type: LT, tier1: 2,  tier2: 3 },
     Valentine_LL:		{ level: 4,  type: LT, tier1: 4,  tier2: 5 }
   }

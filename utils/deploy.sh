@@ -1,5 +1,6 @@
 #!/bin/sh
 
+#GAME_VER="0.7.2"
 GAME_VER="0.7.3 Common Test"
 FILES="battle.swf battleloading.swf PlayersPanel.swf StatisticForm.swf VehicleMarkersManager.swf XVM.xvmconf OTMData.xml"
 

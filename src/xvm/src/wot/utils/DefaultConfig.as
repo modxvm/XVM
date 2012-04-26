@@ -34,7 +34,9 @@ class wot.utils.DefaultConfig
         // true - включить отображение сетки координат (может быть полезным для настройки)
         drawGrid: false,
         // true - отключить отображение версии xvm в верхнем левом углу экрана
-        hideXVMVersion: false
+        hideXVMVersion: false,
+        // true - использовать стандартные маркеры клиента (не работает)
+        useStandardMarkers: false
       },
       rating: {
         // true - включить отображение статистики. Глобальный переключатель - без него модуль статистики будет везде отключен.
@@ -46,7 +48,7 @@ class wot.utils.DefaultConfig
         // false - выключить отображение часов на экране загрузки боя
         showClock: true,
         // true - включить отображение шансов на победу
-        showChances: false,
+        showChances: true,
         // true - убрать отображение иконки взвода
         removeSquadIcon: false,
         // параметры иконки игрока/клана
@@ -57,7 +59,7 @@ class wot.utils.DefaultConfig
       },
       statisticForm: {
         // true - включить отображение шансов на победу
-        showChances: false,
+        showChances: true,
         // true - убрать отображение иконки взвода
         removeSquadIcon: false,
         // параметры иконки игрока/клана

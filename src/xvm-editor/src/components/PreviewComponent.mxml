@@ -4,69 +4,103 @@
 	    xmlns:mx="library://ns.adobe.com/flex/mx"
 		xmlns:c="components.*"
 		width="500" height="450"
-		borderVisible="false">
+		borderVisible="false" xmlns:ns1="*" creationComplete="onCreationComplete(event)">
 	<fx:Script>
-		import mx.events.ListEvent;
-
-		[Embed(source="images/bg/hills-1.jpg")]
-		private static var IMG_hills1 : Class;
-		[Embed(source="images/bg/hills-2.jpg")]
-		private static var IMG_hills2 : Class;
-		[Embed(source="images/bg/hills-3.jpg")]
-		private static var IMG_hills3 : Class;
-		[Embed(source="images/bg/mannerheim-1.jpg")]
-		private static var IMG_mannerheim1 : Class;
-		[Embed(source="images/bg/mannerheim-2.jpg")]
-		private static var IMG_mannerheim2 : Class;
-		[Embed(source="images/bg/mannerheim-3.jpg")]
-		private static var IMG_mannerheim3 : Class;
-		[Embed(source="images/bg/desert-1.jpg")]
-		private static var IMG_desert1 : Class;
-		[Embed(source="images/bg/desert-2.jpg")]
-		private static var IMG_desert2 : Class;
-		[Embed(source="images/bg/desert-3.jpg")]
-		private static var IMG_desert3 : Class;
-
-		protected virtual function onChange(event:Event):void
-		{
-			if (event)
-				event.stopPropagation();
-			dispatchEvent(new Event(Event.CHANGE));
-		}
-
-		protected function cbBG_changeHandler(event:ListEvent):void
-		{
-			switch (cbBG.selectedIndex + 1)
+		<![CDATA[
+			import flash.display.Loader;
+			
+			import mx.controls.SWFLoader;
+			import mx.events.FlexEvent;
+			import mx.events.ListEvent;
+	
+			[Embed(source="images/bg/hills-1.jpg")]
+			private static var IMG_hills1 : Class;
+			[Embed(source="images/bg/hills-2.jpg")]
+			private static var IMG_hills2 : Class;
+			[Embed(source="images/bg/hills-3.jpg")]
+			private static var IMG_hills3 : Class;
+			[Embed(source="images/bg/mannerheim-1.jpg")]
+			private static var IMG_mannerheim1 : Class;
+			[Embed(source="images/bg/mannerheim-2.jpg")]
+			private static var IMG_mannerheim2 : Class;
+			[Embed(source="images/bg/mannerheim-3.jpg")]
+			private static var IMG_mannerheim3 : Class;
+			[Embed(source="images/bg/desert-1.jpg")]
+			private static var IMG_desert1 : Class;
+			[Embed(source="images/bg/desert-2.jpg")]
+			private static var IMG_desert2 : Class;
+			[Embed(source="images/bg/desert-3.jpg")]
+			private static var IMG_desert3 : Class;
+	
+			//[Embed(source="../assets/gfxfontlib.swf")]
+			//private static var SWF_gfxfontlib : Class;
+			
+			protected function onCreationComplete(event:FlexEvent):void
 			{
-				case 1:
-					imgBG.source = new IMG_hills1();
-					break;
-				case 2:
-					imgBG.source = new IMG_hills2();
-					break;
-				case 3:
-					imgBG.source = new IMG_hills3();
-					break;
-				case 4:
-					imgBG.source = new IMG_mannerheim1();
-					break;
-				case 5:
-					imgBG.source = new IMG_mannerheim2();
-					break;
-				case 6:
-					imgBG.source = new IMG_mannerheim3();
-					break;
-				case 7:
-					imgBG.source = new IMG_desert1();
-					break;
-				case 8:
-					imgBG.source = new IMG_desert2();
-					break;
-				case 9:
-					imgBG.source = new IMG_desert3();
-					break;
+				/*loadSWF("battle.swf");
+				loadSWF("battleloading.swf");
+				loadSWF("PlayersPanel.swf");
+				loadSWF("StatisticForm.swf");
+				loadSWF("VehicleMarkersManager.swf");*/
 			}
-		}
+
+			private function loadSWF(url:String):void
+			{
+				var loader:SWFLoader = new SWFLoader();
+				loader.addEventListener(Event.COMPLETE, loadSWFComplete); 
+				loader.load(url);
+			}
+			
+			private function loadSWFComplete( event:Event ):void
+			{
+				var loader:SWFLoader = event.target as SWFLoader;
+				//var str:String = loader.content['hello']();
+				trace(loader.content.toString());
+			}
+
+			protected virtual function onChange(event:Event):void
+			{
+				if (event)
+					event.stopPropagation();
+				
+				dispatchEvent(new Event(Event.CHANGE));
+			}
+	
+			protected function cbBG_changeHandler(event:ListEvent):void
+			{
+				switch (cbBG.selectedIndex + 1)
+				{
+					case 1:
+						imgBG.source = new IMG_hills1();
+						break;
+					case 2:
+						imgBG.source = new IMG_hills2();
+						break;
+					case 3:
+						imgBG.source = new IMG_hills3();
+						break;
+					case 4:
+						imgBG.source = new IMG_mannerheim1();
+						break;
+					case 5:
+						imgBG.source = new IMG_mannerheim2();
+						break;
+					case 6:
+						imgBG.source = new IMG_mannerheim3();
+						break;
+					case 7:
+						imgBG.source = new IMG_desert1();
+						break;
+					case 8:
+						imgBG.source = new IMG_desert2();
+						break;
+					case 9:
+						imgBG.source = new IMG_desert3();
+						break;
+				}
+			}
+
+		]]>
 	</fx:Script>
 	<fx:Metadata>
 		[Event(name="change", type="flash.events.Event")]

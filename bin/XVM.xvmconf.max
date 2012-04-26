@@ -11,7 +11,8 @@
   "battle": {
     "mirroredVehicleIcons": false,
     "showPostmortemTips": false,
-    "hideXVMVersion": true
+    "removePanelsModeSwitcher": true,
+    "hideXVMVersion": false
   },
   "rating": {
     "showPlayersStatistics": true
@@ -187,7 +188,7 @@
     "battleLoading": "../../../icons/HARDicons",
     "statisticForm": "../../../icons/HARDicons",
     "playersPanel":  "../../../icons/HARDicons",
-    "vehicleMarker": "../../../icons/Aslain"
+    "vehicleMarker": "../../../icons/Aslain/iconset2"
   },
   "players": [
 //    { "clan": "D" },

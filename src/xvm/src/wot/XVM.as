@@ -1,6 +1,6 @@
 ﻿/**
  * ...
- * @author Nikolas Siver
+ * @author Nicolas Siver
  * @author bkon
  * @author sirmax2
  * @author STL1te
@@ -58,33 +58,13 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       _global.xvm = [];
     if (wot.utils.Utils.indexOf(_global.xvm, "XVM") == -1)
       _global.xvm.push("XVM");
-    wot.utils.Logger.add("--> " + _global.xvm.join(", "));*/
+    Logger.add("--> " + _global.xvm.join(", "));*/
+
+    //Logger.add("XVM()");
 
     super();
 
     Config.LoadConfigAndStatLegacy("XVM.xvmconf", "XVM.as");
-
-    xvmHB = createEmptyMovieClip("xvmHB", marker.getDepth() - 1); // Put health Bar to back.
-    xvmHBBorder = xvmHB.createEmptyMovieClip("border", 1);
-    xvmHBDamage = xvmHB.createEmptyMovieClip("damage", 2);
-    xvmHBFill = xvmHB.createEmptyMovieClip("fill", 3);
-
-    damageHolder = createEmptyMovieClip("damageHolder", getNextHighestDepth());
-
-    // Remove standard fields
-    pNameField._visible = false;
-    pNameField.removeTextField();
-
-    vNameField._visible = false;
-    vNameField.removeTextField();
-
-    healthBar.stop();
-    healthBar._visible = false;
-    healthBar.removeMovieClip();
-
-    bgShadow.stop();
-    bgShadow._visible = false;
-    bgShadow.removeMovieClip();
   }
 
   function XVMInit(obj: Object)
@@ -108,6 +88,36 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
           wm.text = "XVM v" + Defines.XVM_VERSION;
         }
 
+        // Alternative icon set
+        this.m_source = this.m_source.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.vehicleMarker);
+        if (this.iconLoader != null)
+          this.iconLoader.source = this.m_source;
+
+        //if (Config.s_config.battle.useStandardMarkers)
+        //  return;
+
+        this.xvmHB = this.createEmptyMovieClip("xvmHB", this.marker.getDepth() - 1); // Put health Bar to back.
+        this.xvmHBBorder = this.xvmHB.createEmptyMovieClip("border", 1);
+        this.xvmHBDamage = this.xvmHB.createEmptyMovieClip("damage", 2);
+        this.xvmHBFill = this.xvmHB.createEmptyMovieClip("fill", 3);
+
+        this.damageHolder = this.createEmptyMovieClip("damageHolder", this.getNextHighestDepth());
+
+        // Remove standard fields
+        this.pNameField._visible = false;
+        this.pNameField.removeTextField();
+
+        this.vNameField._visible = false;
+        this.vNameField.removeTextField();
+
+        this.healthBar.stop();
+        this.healthBar._visible = false;
+        this.healthBar.removeMovieClip();
+
+        this.bgShadow.stop();
+        this.bgShadow._visible = false;
+        this.bgShadow.removeMovieClip();
+
         // Draw grid
         if (Config.s_config.battle.drawGrid)
         {
@@ -115,13 +125,9 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
           GraphicsUtil.drawGrid(this.grid, -50, -50, 100, 100, 0xFFFF00, 30);
         }
 
-        // Alternative icon set
-        this.m_source = this.m_source.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.vehicleMarker);
-        if (this.iconLoader != null)
-          this.iconLoader.source = this.m_source;
-
         this.XVMPopulateData();
         this.updateMarkerLabel();
+        this.XVMUpdateStyle();
       }
       catch (e)
       {
@@ -133,6 +139,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   // override
   function init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt)
   {
+    //Logger.add("XVM::init(): Config.s_loaded=" + Config.s_loaded);
     // Use currently remembered extended / normal status for new markers
     m_showExInfo = s_showExInfo;
     super.init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt);
@@ -141,12 +148,21 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   // override
   function updateMarkerSettings()
   {
-    // do nothing
+    //Logger.add("XVM::updateMarkerSettings(): Config.s_loaded=" + Config.s_loaded);
+    //if (Config.s_config.battle.useStandardMarkers)
+    //  super.updateMarkerSettings();
   }
 
   // override
   function updateHealth(curHealth)
   {
+    //Logger.add("XVM::updateHealth(): Config.s_loaded=" + Config.s_loaded);
+    //if (Config.s_config.battle.useStandardMarkers)
+    //{
+    //  super.updateHealth(curHealth);
+    //  return;
+    //}
+
     if (curHealth < 0)
       s_blowedUp.push(m_playerFullName);
     m_curHealth = curHealth >= 0 ? curHealth : 0;
@@ -157,6 +173,13 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   // override
   function updateState(newState, isImmediate)
   {
+    //Logger.add("XVM::updateState(): Config.s_loaded=" + Config.s_loaded);
+    //if (Config.s_config.battle.useStandardMarkers)
+    //{
+    //  super.updateState(newState, isImmediate);
+    //  return;
+    //}
+
     //Logger.add("updateState(): " + GetCurrentStateString() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
     super.updateState(newState, isImmediate);
     XVMUpdateStyle();
@@ -165,6 +188,13 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   // override
   function showExInfo(show)
   {
+    //Logger.add("XVM::showExInfo(): Config.s_loaded=" + Config.s_loaded);
+    //if (Config.s_config.battle.useStandardMarkers)
+    //{
+    //  super.showExInfo(show);
+    //  return;
+    //}
+
     if (m_showExInfo == show)
       return;
     m_showExInfo = show;
@@ -179,16 +209,20 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   // override
   function configUI()
   {
+    //Logger.add("XVM::configUI(): Config.s_loaded=" + Config.s_loaded);
     //Logger.add("configUI(): " + GetCurrentStateString() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
     m_currentHealth = m_curHealth;
     super.configUI();
     XVMInit();
-    XVMUpdateStyle();
   }
 
   // override
   function populateData()
   {
+    //Logger.add("XVM::populateData(): Config.s_loaded=" + Config.s_loaded);
+    //if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
+    //  return super.populateData();
+
     //Logger.add("populateData(): " + GetCurrentStateString() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
 
     if (m_isPopulated)
@@ -225,7 +259,11 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   // override
   function initMarkerLabel()
   {
+    //Logger.add("XVM::initMarkerLabel(): Config.s_loaded=" + Config.s_loaded);
     super.initMarkerLabel();
+    //if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
+    //  return;
+
     XVMUpdateMarkerLabel();
     XVMUpdateUI(m_curHealth);
   }
@@ -233,8 +271,11 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   // override
   function updateMarkerLabel()
   {
+    //Logger.add("XVM::updateMarkerLabel(): Config.s_loaded=" + Config.s_loaded);
     //Logger.add("updateMarkerLabel(): " + GetCurrentStateString() + " markerLabel=" + m_markerLabel + " pname=" + m_playerFullName);
     super.updateMarkerLabel();
+    //if (Config.s_config.battle.useStandardMarkers)
+    //  return;
 
     XVMUpdateMarkerLabel();
 
@@ -263,8 +304,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     iconLoader._visible = false;
     onEnterFrame = function()
     {
-      this.XVMIconCompleteLoad();
       delete this.onEnterFrame;
+      this.XVMIconCompleteLoad();
     };
   }
 
@@ -831,7 +872,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     try
     {
       //Logger.add("XVMUpdateStyle: " + m_vname + " " + m_playerFullName);
-
       if (!Config.s_loaded)
         return;
 

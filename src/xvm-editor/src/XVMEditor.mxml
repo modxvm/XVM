@@ -73,7 +73,7 @@
 									<s:ToggleButton x="125" y="10" width="110" label="Противник" id="enemy" change="onVehicleStateChanged(event)"/>
 									<s:ToggleButton x="10" y="40" width="110" label="Живой" id="alive" selected="true" change="onVehicleStateChanged(event)"/>
 									<s:ToggleButton x="125" y="40" width="110" label="Мертвый" id="dead" change="onVehicleStateChanged(event)"/>
-									<s:ToggleButton x="10" y="70" width="110" label="Номальный" id="normal" selected="true" change="onVehicleStateChanged(event)"/>
+									<s:ToggleButton x="10" y="70" width="110" label="Нормальный" id="normal" selected="true" change="onVehicleStateChanged(event)"/>
 									<s:ToggleButton x="125" y="70" width="110" label="Расширенный" id="extended" change="onVehicleStateChanged(event)"/>
 								</s:BorderContainer>
 								<s:BorderContainer x="10" borderVisible="false">
