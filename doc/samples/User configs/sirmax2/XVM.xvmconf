@@ -11,7 +11,8 @@
   "battle": {
     "mirroredVehicleIcons": false,
     "showPostmortemTips": false,
-    "hideXVMVersion": true
+    "removePanelsModeSwitcher": true,
+    "hideXVMVersion": false
   },
   "rating": {
     "showPlayersStatistics": true
@@ -52,11 +53,17 @@
     "ally": {
       "alive": {
         "normal": {
+          "vehicleIcon": {
+            "maxScale": 80
+          },
           "damageText": {
             "blowupMessage": "Blow-up!"
           }
         },
         "extended": {
+          "vehicleIcon": {
+            "maxScale": 80
+          },
           "damageText": {
             "blowupMessage": "Blow-up!"
           }
@@ -64,11 +71,17 @@
       },
       "dead": {
         "normal": {
+          "vehicleIcon": {
+            "maxScale": 80
+          },
           "damageText": {
             "color": "0x33FF33"
           }
         },
         "extended": {
+          "vehicleIcon": {
+            "maxScale": 80
+          },
           "damageText": {
             "color": "0x33FF33"
           }
@@ -78,6 +91,9 @@
     "enemy": {
       "alive": {
         "normal": {
+          "vehicleIcon": {
+            "maxScale": 80
+          },
           "damageText": {
             "blowupMessage": "Blow-up!"
           },
@@ -129,6 +145,9 @@
           ]
         },
         "extended": {
+          "vehicleIcon": {
+            "maxScale": 80
+          },
           "damageText": {
             "blowupMessage": "Blow-up!"
           }
@@ -136,11 +155,17 @@
       },
       "dead": {
         "normal": {
+          "vehicleIcon": {
+            "maxScale": 80
+          },
           "damageText": {
             "color": "0xFF3333"
           }
         },
         "extended": {
+          "vehicleIcon": {
+            "maxScale": 80
+          },
           "damageText": {
             "color": "0xFF3333"
           }
@@ -163,7 +188,7 @@
     "battleLoading": "../../../icons/HARDicons",
     "statisticForm": "../../../icons/HARDicons",
     "playersPanel":  "../../../icons/HARDicons",
-    "vehicleMarker": "../../../icons/Aslain"
+    "vehicleMarker": "../../../icons/Aslain/iconset2"
   },
   "players": [
 //    { "clan": "D" },
@@ -177,7 +202,7 @@
     { "clan": "[WTMOD]",    "icon": "../../../clanicons/WTMOD.png" },
     { "clan": "[WGST]",     "icon": "../../../clanicons/WGST.png" },
     { "clan": "[S_O_R",     "icon": "../../../clanicons/sor.png" },
-    { "clan": "[RED",       "icon": "../../../clanicons/RED.png", "w": 20, "h": 20 },
+    { "clan": "[RED",       "icon": "../../../clanicons/RED.png" },
     { "clan": "[TD42",      "icon": "../../../clanicons/td42.png"},
     { "clan": "[BEES",      "icon": "../../../clanicons/bees.png"},
     { "clan": "[HIVE",      "icon": "../../../clanicons/bees.png"},

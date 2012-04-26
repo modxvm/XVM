@@ -106,7 +106,7 @@
           <healthBar x="-21" y="-23" alpha="100" visible="true"/>
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-73" alpha="100" visible="false"/>
-          <contourIcon x="6" y="-65" alpha="100" visible="false"/>
+          <contourIcon x="0" y="-65" alpha="100" visible="false"/>
         </normal>
         <extended>
           <actionMarker x="0" y="-55"/>
@@ -118,7 +118,7 @@
           <healthBar x="-21" y="-23" alpha="100" visible="true"/>
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-73" alpha="100" visible="false"/>
-          <contourIcon x="6" y="-65" alpha="100" visible="false"/>
+          <contourIcon x="0" y="-65" alpha="100" visible="true"/>
           <infoText x="0" y="-50" color="{{c:eff}}" alpha="75" visible="true" format="{{rating}}" bold="true"/>
         </extended>
       </alive>
@@ -133,7 +133,7 @@
           <healthBar x="-41" y="-38" alpha="100" visible="false"/>
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-21" alpha="100" visible="false"/>
-          <contourIcon x="6" y="-65" alpha="100" visible="false"/>
+          <contourIcon x="0" y="-65" alpha="100" visible="false"/>
         </normal>
         <extended>
           <actionMarker x="0" y="-55"/>
@@ -145,7 +145,7 @@
           <healthBar x="-41" y="-34" alpha="100" visible="false"/>
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-21" alpha="100" visible="false"/>
-          <contourIcon x="6" y="-65" alpha="100" visible="false"/>
+          <contourIcon x="0" y="-65" alpha="100" visible="false"/>
         </extended>
       </dead>
     </friend>
@@ -161,7 +161,7 @@
           <healthBar x="-21" y="-23" alpha="100" visible="true"/>
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-73" alpha="100" visible="false"/>
-          <contourIcon x="6" y="-65" alpha="100" visible="false"/>
+          <contourIcon x="0" y="-65" alpha="100" visible="false"/>
         </normal>
         <extended>
           <actionMarker x="0" y="-55"/>
@@ -173,7 +173,7 @@
           <healthBar x="-21" y="-23" alpha="100" visible="true"/>
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-73" alpha="100" visible="false"/>
-          <contourIcon x="6" y="-65" alpha="100" visible="false"/>
+          <contourIcon x="0" y="-65" alpha="100" visible="false"/>
           <infoText x="0" y="-50" color="{{c:eff}}" alpha="75" visible="true" format="{{rating}}" bold="true"/>
         </extended>
       </alive>
@@ -188,7 +188,7 @@
           <healthBar x="-21" y="-19" alpha="100" visible="false"/>
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-21" alpha="100" visible="false"/>
-          <contourIcon x="6" y="-65" alpha="100" visible="false"/>
+          <contourIcon x="0" y="-65" alpha="100" visible="false"/>
         </normal>
         <extended>
           <actionMarker x="0" y="-55"/>
@@ -200,7 +200,7 @@
           <healthBar x="-21" y="-19" alpha="100" visible="false"/>
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-21" alpha="100" visible="false"/>
-          <contourIcon x="6" y="-65" alpha="100" visible="false"/>
+          <contourIcon x="0" y="-65" alpha="100" visible="false"/>
         </extended>
       </dead>
     </enemy>

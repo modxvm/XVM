@@ -292,14 +292,7 @@ class wot.utils.DefaultConfig
         playersPanel:  "../maps/icons/vehicle/contour",
         vehicleMarker: "../maps/icons/vehicle/contour"
       },
-      players: [
-        { nick: "sirmax2", icon: "../../../clanicons/XVM.png" },
-        { nick: "0x01",    icon: "../../../clanicons/XVM.png" },
-        { clan: "[WG]",    icon: "../../../clanicons/WG.png" },
-        { clan: "[WG-A]",  icon: "../../../clanicons/WG.png" },
-        { clan: "[WTMOD]", icon: "../../../clanicons/WTMOD.png" },
-        { clan: "[WGST]",  icon: "../../../clanicons/WGST.png" }
-      ]
+      players: players
     };
 
     return a;
@@ -628,5 +621,72 @@ class wot.utils.DefaultConfig
       shadow: shadow_120,
       format: "{{rating}}"
     }
+  }
+  
+  public static function get players(): Array
+  {
+    return [
+      { nick: "sirmax2",    icon: "../../../clanicons/XVM.png" },
+      { nick: "sirmax2_RU", icon: "../../../clanicons/XVM.png" },
+      { nick: "0x01",       icon: "../../../clanicons/XVM.png" },
+      { clan: "[WG]",       icon: "../../../clanicons/WG.png" },
+      { clan: "[WG-A]",     icon: "../../../clanicons/WG.png" },
+      { clan: "[WTMOD]",    icon: "../../../clanicons/WTMOD.png" },
+      { clan: "[WGST]",     icon: "../../../clanicons/WGST.png" },
+      { clan: "[S_O_R",     icon: "../../../clanicons/sor.png" },
+      { clan: "[RED",       icon: "../../../clanicons/RED.png" },
+      { clan: "[TD42",      icon: "../../../clanicons/td42.png"},
+      { clan: "[BEES",      icon: "../../../clanicons/bees.png"},
+      { clan: "[HIVE",      icon: "../../../clanicons/bees.png"},
+      { clan: "[CAIM",      icon: "../../../clanicons/caim.png"},
+      { clan: "[DEFS",      icon: "../../../clanicons/defs.png"},
+      { clan: "[ENOT",      icon: "../../../clanicons/enot.png" },
+      { clan: "[FRS",       icon: "../../../clanicons/frs.png" },
+      { clan: "[G_O_W]",    icon: "../../../clanicons/gow.png" },
+      { clan: "[_GOW_]",    icon: "../../../clanicons/gow.png" },
+      { clan: "[G_0_W]",    icon: "../../../clanicons/gow.png" },
+      { clan: "[G-O-W]",    icon: "../../../clanicons/gow.png" },
+      { clan: "[GREE",      icon: "../../../clanicons/green.png" },
+      { clan: "[H4RD",      icon: "../../../clanicons/hard.png" },
+      { clan: "[IRONT",     icon: "../../../clanicons/iron.png" },
+      { clan: "[IR0NT",     icon: "../../../clanicons/iron.png" },
+      { clan: "[KO3AK",     icon: "../../../clanicons/kozak.png" },
+      { clan: "[OLENI",     icon: "../../../clanicons/oleni.png" },
+      { clan: "[0_0",       icon: "../../../clanicons/oo.png" },
+      { clan: "[PZE",       icon: "../../../clanicons/pze.png" },
+      { clan: "[RATTE",     icon: "../../../clanicons/ratte.png" },
+      { clan: "[RKKA",      icon: "../../../clanicons/rkka.png" },
+      { clan: "[SB-",       icon: "../../../clanicons/sb.png" },
+      { clan: "[STAL",      icon: "../../../clanicons/stal.png" },
+      { clan: "[TAIP",      icon: "../../../clanicons/taip.png" },
+      { clan: "[VES",       icon: "../../../clanicons/ves.png"},
+      { clan: "[XOVER",     icon: "../../../clanicons/xover.png" },
+      { clan: "[SAM]",      icon: "../../../clanicons/samurai.png" },
+      { clan: "[NSTR]",     icon: "../../../clanicons/nstr.png" },
+      { clan: "[DARK_",     icon: "../../../clanicons/da.png" },
+      { clan: "[CRABS]",    icon: "../../../clanicons/crabs.png" },
+      { clan: "[AMIG",      icon: "../../../clanicons/amigo.png" },
+      { clan: "[B-SKY]",    icon: "../../../clanicons/bsky.png" },
+      { clan: "[_E_]",      icon: "../../../clanicons/e.png" },
+      { clan: "[CWOT]",     icon: "../../../clanicons/cwot.png" },
+      { clan: "[BTR",       icon: "../../../clanicons/btr.png" },
+      { clan: "[CHESS]",    icon: "../../../clanicons/chess.png" },
+      { clan: "[URFO]",     icon: "../../../clanicons/urfo.png" },
+      { clan: "[W_R]",      icon: "../../../clanicons/wr.png" },
+      { clan: "[PEKET]",    icon: "../../../clanicons/reket.png" },
+      { clan: "[-KNI-]",    icon: "../../../clanicons/kni.png" },
+      { clan: "[GUEST]",    icon: "../../../clanicons/guest.png" },
+      { clan: "[_CT_]",     icon: "../../../clanicons/st.png" },
+      { clan: "[C0BRA]",    icon: "../../../clanicons/cobra.png" },
+      { clan: "[COBRA]",    icon: "../../../clanicons/cobra.png" },
+      { clan: "[GRXOA]",    icon: "../../../clanicons/xover.png" },
+      { clan: "[JAZZ]",     icon: "../../../clanicons/jazz.png" },
+      { clan: "[ZB]",       icon: "../../../clanicons/zb.png" },
+      { clan: "[ZB-A]",     icon: "../../../clanicons/zb.png" },
+      { clan: "[--S--]",    icon: "../../../clanicons/s.png" },
+      { clan: "[TGD]",      icon: "../../../clanicons/tgd.png" },
+      { clan: "[LA]",       icon: "../../../clanicons/la.png" },
+      { clan: "[1CLUB]",    icon: "../../../clanicons/fc.png" }
+    ];
   }
 }
