@@ -1,4 +1,4 @@
-/**
+ï»¿/**
  * Full configuration file (hereinafter - the configuration) with all possible options,
  * default configuration.
  *
@@ -22,7 +22,7 @@
     "mirroredVehicleIcons": true,               // false - Disable tank icon mirroring (good for alternative icons). True by default.
     "showPostmortemTips": true,                 // false - Disable pop-up panel at the bottom after death. True by default.
     "removePanelsModeSwitcher": false,          // true - Remove the Players Panel mode switcher (buttons for changing size).
-    "drawGrid": false,                          // true - Enable grid coordinates (may be useful for tactical setup). Change only if you know what you’re doing!
+    "drawGrid": false,                          // true - Enable grid coordinates (may be useful for tactical setup). Change only if you know what youâ€™re doing!
     "hideXVMVersion": false                     // true - hide xvm version at top left corner of screen.
   },
   // Options for player statistics (only with XVM-full)
@@ -33,10 +33,10 @@
   // Parameters of the Battle Loading Screen
   "battleLoading": {
     "showClock": true,                          // false - Disable the clock on the Battle Loading Screen.
-    "showChances": true,                        // true – Enable display of "chances to win" (only with XVM-full).
-    "removeSquadIcon": false,                   // true – Disable Platoon icons. This blank space can house, for example, clan logos.
+    "showChances": true,                        // true â€“ Enable display of "chances to win" (only with XVM-full).
+    "removeSquadIcon": false,                   // true â€“ Disable Platoon icons. This blank space can house, for example, clan logos.
     "clanIcon": {                               // Display options for Team/Clan logos
-      "show": true,                             //   false – Disable Team/Clan logos in Battle Loading Screen.
+      "show": true,                             //   false â€“ Disable Team/Clan logos in Battle Loading Screen.
       "x": 60,                                  //   Position on the X axis, relative to the vehicle icon.
       "y": 6,                                   //   Position on the Y axis, relative to the vehicle icon.
       "w": 16,                                  //   Width of the Team/Clan logo.
@@ -61,11 +61,11 @@
   },
   // Parameters of the Players Panels
   "playersPanel": {
-    "alpha": 60,       // Opacity percentage of the panels. (0 – transparent ... 100 – opaque)
-    "iconAlpha": 100,  // Opacity percentage of icons in the panels. (0 – transparent ... 100 – opaque)
+    "alpha": 60,       // Opacity percentage of the panels. (0 â€“ transparent ... 100 â€“ opaque)
+    "iconAlpha": 100,  // Opacity percentage of icons in the panels. (0 â€“ transparent ... 100 â€“ opaque)
     "removeSquadIcon": false, // true - Disable Platoon icons.
     // Display options for Team/Clan logos (see battleLoading above).
-    // Doesn’t work yet!!!
+    // Doesnâ€™t work yet!!!
     "clanIcon": { "show": false, "x": 60, "y": 6, "h": 16, "w": 16, "alpha": 100 },
     // Options for the "medium" panels - the first of the medium panels
     "medium": {
@@ -1131,30 +1131,30 @@
   "colors": {
     // System colors
     "system": {
-      "ally_alive_normal": "0x96FF00",             // Ally – alive
-      "ally_alive_blind": "0x96FF00",              // Ally – alive – color blind mode
+      "ally_alive_normal": "0x96FF00",             // Ally â€“ alive
+      "ally_alive_blind": "0x96FF00",              // Ally â€“ alive â€“ color blind mode
       "ally_dead_normal": "0x009900",              // Ally - dead
-      "ally_dead_blind": "0x009900",               // Ally – dead – color blind mode
-      "ally_blowedup_normal": "0x007700",          // Ally – blow-up
-      "ally_blowedup_blind": "0x007700",           // Ally – blow-up – color blind mode
+      "ally_dead_blind": "0x009900",               // Ally â€“ dead â€“ color blind mode
+      "ally_blowedup_normal": "0x007700",          // Ally â€“ blow-up
+      "ally_blowedup_blind": "0x007700",           // Ally â€“ blow-up â€“ color blind mode
       "squadman_alive_normal": "0xFFB964",         // Platoon member - alive
-      "squadman_alive_blind": "0xFFFF00",          // Platoon member – alive – color blind mode
+      "squadman_alive_blind": "0xFFFF00",          // Platoon member â€“ alive â€“ color blind mode
       "squadman_dead_normal": "0xCA7000",          // Platoon member - dead
-      "squadman_dead_blind": "0xAAAA00",           // Platoon member – dead – color blind mode
-      "squadman_blowedup_normal": "0xA45A00",      // Platoon member – blow-up
-      "squadman_blowedup_blind": "0x888800",       // Platoon member – blow-up – color blind mode
+      "squadman_dead_blind": "0xAAAA00",           // Platoon member â€“ dead â€“ color blind mode
+      "squadman_blowedup_normal": "0xA45A00",      // Platoon member â€“ blow-up
+      "squadman_blowedup_blind": "0x888800",       // Platoon member â€“ blow-up â€“ color blind mode
       "teamKiller_alive_normal": "0x00EAFF",       // Team killer - alive
-      "teamKiller_alive_blind": "0x00EAFF",        // Team killer - alive – color blind mode
+      "teamKiller_alive_blind": "0x00EAFF",        // Team killer - alive â€“ color blind mode
       "teamKiller_dead_normal": "0x097783",        // Team killer - dead
-      "teamKiller_dead_blind": "0x097783",         // Team killer - dead – color blind mode
+      "teamKiller_dead_blind": "0x097783",         // Team killer - dead â€“ color blind mode
       "teamKiller_blowedup_normal": "0x096A75",    // Team killer - blow-up
-      "teamKiller_blowedup_blind": "0x096A75",     // Team killer - blow-up – color blind mode
-      "enemy_alive_normal": "0xF50800",            // Enemy – alive
-      "enemy_alive_blind": "0x8379FE",             // Enemy – alive – color blind mode
+      "teamKiller_blowedup_blind": "0x096A75",     // Team killer - blow-up â€“ color blind mode
+      "enemy_alive_normal": "0xF50800",            // Enemy â€“ alive
+      "enemy_alive_blind": "0x8379FE",             // Enemy â€“ alive â€“ color blind mode
       "enemy_dead_normal": "0x840500",             // Enemy - dead
-      "enemy_dead_blind": "0x47407A",              // Enemy – dead – color blind mode
-      "enemy_blowedup_normal": "0x5A0401",         // Enemy – blow-up
-      "enemy_blowedup_blind": "0x3B365F"           // Enemy – blow-up – color blind mode
+      "enemy_dead_blind": "0x47407A",              // Enemy â€“ dead â€“ color blind mode
+      "enemy_blowedup_normal": "0x5A0401",         // Enemy â€“ blow-up
+      "enemy_blowedup_blind": "0x3B365F"           // Enemy â€“ blow-up â€“ color blind mode
     },
     // Dynamic color for remaining health
     "hp": [

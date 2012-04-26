@@ -1,3 +1,3 @@
-Конфиг Over Target Manager по умолчанию.
+п»їРљРѕРЅС„РёРі Over Target Manager РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ.
 
 Default Over Target Manager config.
