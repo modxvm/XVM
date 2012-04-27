@@ -41,11 +41,10 @@ class wot.utils.PlayerInfo extends MovieClip
     var holder: MovieClip = owner.createEmptyMovieClip(name, owner.getNextHighestDepth());
     var icon: MovieClip = holder.attachMovie("UILoader", "clanIcon", holder.getNextHighestDepth());
 
-    var mx = team == Defines.TEAM_ALLY ? 1 : -1;
-    holder._x = dx + cfg.x * mx;
+    holder._x = dx + (team == Defines.TEAM_ALLY ? cfg.x : -cfg.xr);
     if (team == Defines.TEAM_ENEMY)
       holder._x -= cfg.w;
-    holder._y = dy + cfg.y;
+    holder._y = dy + (team == Defines.TEAM_ALLY ? cfg.y : cfg.yr);
 
     icon._x = icon._y = 0;
     icon._alpha = cfg.alpha;

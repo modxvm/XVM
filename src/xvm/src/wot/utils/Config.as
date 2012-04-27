@@ -146,7 +146,6 @@ class wot.utils.Config
             else
             {
               Config.s_config = Config.MergeConfigs(Config.FixConfig(config), Config.s_config);
-              Config.TuneupConfig();
               //Logger.addObject(Config.s_config);
               if (Config.DEBUG_TIMES)
               {
@@ -173,6 +172,7 @@ class wot.utils.Config
           if (_global.xvm_battleloading)
             _global.xvm_battleloading.setInfoFieldData({ warning: " " });
         }
+        Config.TuneupConfig();
         if (Config.s_load_last_stat && Config.s_config.rating.showPlayersStatistics)
           Stat.LoadStatData(Defines.COMMAND_GET_LAST_STAT);
       }
@@ -236,13 +236,14 @@ class wot.utils.Config
         //Logger.add(prefix + " = string " + config + " = " + def);
         return (typeof config == 'string') ? config : def;
 
+      case 'undefined':
       case 'null':
         //if (prefix.indexOf("damageText") >= 0)
         //  Logger.add(prefix + " t(def)=" + (typeof def) + " def=" + def + " t(config)=" + (typeof config) + " config=" + config);
-        return (typeof config == 'string') ? config : def;
+        return (typeof config == 'string' || typeof config == 'number') ? config : def;
 
       default:
-        //Logger.add("unknown type = " + (typeof def));
+        //Logger.add("unknown type = " + (typeof def) + " prefix=" + prefix);
         return def;
       }
   }
@@ -256,6 +257,19 @@ class wot.utils.Config
     Config.s_config.iconset.playersPanel = Utils.fixPath(Config.s_config.iconset.playersPanel);
     Config.s_config.iconset.statisticForm = Utils.fixPath(Config.s_config.iconset.statisticForm);
     Config.s_config.iconset.vehicleMarker = Utils.fixPath(Config.s_config.iconset.vehicleMarker);
+
+    if (isNaN(Config.s_config.battleLoading.clanIcon.xr))
+      Config.s_config.battleLoading.clanIcon.xr = Config.s_config.battleLoading.clanIcon.x;
+    if (isNaN(Config.s_config.battleLoading.clanIcon.yr))
+      Config.s_config.battleLoading.clanIcon.yr = Config.s_config.battleLoading.clanIcon.y;
+    if (isNaN(Config.s_config.statisticForm.clanIcon.xr))
+      Config.s_config.statisticForm.clanIcon.xr = Config.s_config.statisticForm.clanIcon.x;
+    if (isNaN(Config.s_config.statisticForm.clanIcon.yr))
+      Config.s_config.statisticForm.clanIcon.yr = Config.s_config.statisticForm.clanIcon.y;
+    if (isNaN(Config.s_config.playersPanel.clanIcon.xr))
+      Config.s_config.playersPanel.clanIcon.xr = Config.s_config.playersPanel.clanIcon.x;
+    if (isNaN(Config.s_config.playersPanel.clanIcon.yr))
+      Config.s_config.playersPanel.clanIcon.yr = Config.s_config.playersPanel.clanIcon.y;
   }
 
   /**

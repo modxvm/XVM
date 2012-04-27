@@ -51,7 +51,7 @@ public class DefaultConfig
         // true - убрать отображение иконки взвода
         removeSquadIcon: false,
         // параметры иконки игрока/клана
-        clanIcon: { show: true, x: 60, y: 4, h: 16, w: 16, alpha: 100 },
+        clanIcon: { show: true, x: 0, y: 6, xr: NaN, yr: NaN, h: 16, w: 16, alpha: 90 },
         // формат отображения (допускаются макроподстановки)
         formatLeft: "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
         formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
@@ -62,7 +62,7 @@ public class DefaultConfig
         // true - убрать отображение иконки взвода
         removeSquadIcon: false,
         // параметры иконки игрока/клана
-        clanIcon: { show: true, x: 60, y: 4, h: 16, w: 16, alpha: 100 },
+        clanIcon: { show: true, x: 0, y: 6, xr: NaN, yr: NaN, h: 16, w: 16, alpha: 90 },
         // формат отображения
         formatLeft: "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
         formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
@@ -75,7 +75,7 @@ public class DefaultConfig
         // true - убрать отображение иконки взвода
         removeSquadIcon: false,
         // параметры иконки игрока/клана
-        clanIcon: { show: false, x: 60, y: 4, h: 16, w: 16, alpha: 100 },
+        clanIcon: { show: true, x: 0, y: 6, xr: NaN, yr: NaN, h: 16, w: 16, alpha: 90 },
         // режим medium1
         medium: {
           // 0..250 - задает ширину поля имени игрока. По умолчанию: 46

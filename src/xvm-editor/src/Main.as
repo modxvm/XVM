@@ -18,6 +18,7 @@ protected function onCreateNewConfigClick():void
 {
 	lastFileName = "XVM.xvmconf";
 	Config.s_config = DefaultConfig.config;
+	Config.TuneupConfig();
 	RefreshConfig();
 }
 

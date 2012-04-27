@@ -52,8 +52,9 @@ package utils
         case 'string':
           return (typeof config == 'string') ? config : def;
 
-        case 'null':
-          return (typeof config == 'string') ? config : def;
+		case 'undefined':
+		case 'null':
+		  return (typeof config == 'string' || typeof config == 'number') ? config : def;
 
         default:
           return def;
@@ -69,6 +70,19 @@ package utils
       Config.s_config.iconset.playersPanel = Utils.fixPath(Config.s_config.iconset.playersPanel);
       Config.s_config.iconset.statisticForm = Utils.fixPath(Config.s_config.iconset.statisticForm);
       Config.s_config.iconset.vehicleMarker = Utils.fixPath(Config.s_config.iconset.vehicleMarker);
+	  
+	  if (isNaN(Config.s_config.battleLoading.clanIcon.xr))
+		  Config.s_config.battleLoading.clanIcon.xr = Config.s_config.battleLoading.clanIcon.x;
+	  if (isNaN(Config.s_config.battleLoading.clanIcon.yr))
+		  Config.s_config.battleLoading.clanIcon.yr = Config.s_config.battleLoading.clanIcon.y;
+	  if (isNaN(Config.s_config.statisticForm.clanIcon.xr))
+		  Config.s_config.statisticForm.clanIcon.xr = Config.s_config.statisticForm.clanIcon.x;
+	  if (isNaN(Config.s_config.statisticForm.clanIcon.yr))
+		  Config.s_config.statisticForm.clanIcon.yr = Config.s_config.statisticForm.clanIcon.y;
+	  if (isNaN(Config.s_config.playersPanel.clanIcon.xr))
+		  Config.s_config.playersPanel.clanIcon.xr = Config.s_config.playersPanel.clanIcon.x;
+	  if (isNaN(Config.s_config.playersPanel.clanIcon.yr))
+		  Config.s_config.playersPanel.clanIcon.yr = Config.s_config.playersPanel.clanIcon.y;
     }
 
 	/**

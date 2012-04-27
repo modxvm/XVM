@@ -78,6 +78,8 @@ private function RefreshBattleLoadingPage():void
 		this.p_battleLoading_icons.v_show.value = section.show;
 		this.p_battleLoading_icons.v_x.value = section.x;
 		this.p_battleLoading_icons.v_y.value = section.y;
+		this.p_battleLoading_icons.v_xr.value = section.xr;
+		this.p_battleLoading_icons.v_yr.value = section.yr;
 		this.p_battleLoading_icons.v_w.value = section.w;
 		this.p_battleLoading_icons.v_h.value = section.h;
 		this.p_battleLoading_icons.v_alpha.value = section.alpha;
@@ -105,6 +107,8 @@ private function RefreshStatisticFormPage():void
 		this.p_statisticForm_icons.v_show.value = section.show;
 		this.p_statisticForm_icons.v_x.value = section.x;
 		this.p_statisticForm_icons.v_y.value = section.y;
+		this.p_statisticForm_icons.v_xr.value = section.xr;
+		this.p_statisticForm_icons.v_yr.value = section.yr;
 		this.p_statisticForm_icons.v_w.value = section.w;
 		this.p_statisticForm_icons.v_h.value = section.h;
 		this.p_statisticForm_icons.v_alpha.value = section.alpha;
@@ -131,6 +135,8 @@ private function RefreshPlayersPanelPage():void
 		this.p_playersPanel_icons.v_show.value = section.show;
 		this.p_playersPanel_icons.v_x.value = section.x;
 		this.p_playersPanel_icons.v_y.value = section.y;
+		this.p_playersPanel_icons.v_xr.value = section.xr;
+		this.p_playersPanel_icons.v_yr.value = section.yr;
 		this.p_playersPanel_icons.v_w.value = section.w;
 		this.p_playersPanel_icons.v_h.value = section.h;
 		this.p_playersPanel_icons.v_alpha.value = section.alpha;

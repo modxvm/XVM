@@ -57,6 +57,7 @@ private function ParseConfigXml(xml:*):void
 	{
 		var config:* = OTMConfigConverter.convert(xml);
 		Config.s_config = Config.MergeConfigs(Config.FixConfig(config), DefaultConfig.config);
+		Config.TuneupConfig();
 		debug("Конфигурация загружена.");
 		//debug(JSON.stringify(Config.s_config));
 	}
