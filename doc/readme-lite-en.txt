@@ -39,7 +39,7 @@
      you do not need new features.
 
      All possible config options you can see in this file:
-       \xvm-doc\samples\Full config EN\XVM.xvmconf
+       \xvm-doc\samples\Lite config EN\XVM.xvmconf
 
      Note: If you changing config manually, use Notepad, DO NOT use MS Word,
      WordPad and such editors.
@@ -65,7 +65,7 @@
     https://sites.google.com/site/sirmaxwiki/xvm-editor (not ready yet)
 
   All possible config options you can see in this file:
-    \xvm-doc\samples\Full config EN\XVM.xvmconf
+    \xvm-doc\samples\Lite config EN\XVM.xvmconf
 
   Macros available:
     In players panel:
