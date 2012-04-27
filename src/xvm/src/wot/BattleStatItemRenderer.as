@@ -135,7 +135,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
 
   function XVMClanIcon(cfg)
   {
-    var pinfo = PlayerInfo.getPlayerInfo(data.label, data.clanAbbrev ? "[" + data.clanAbbrev + "]" : null);
+    var pinfo = PlayerInfo.getPlayerInfo(data.label, data.clanAbbrev ? "[" + data.clanAbbrev + "]" : "");
     if (!m_clanIcon)
     {
       var x = (!_iconLoaded || Config.s_config.battle.mirroredVehicleIcons || (team == Defines.TEAM_ALLY))

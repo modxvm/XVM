@@ -551,7 +551,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     {
       var n = getNextHighestDepth();
       var textField: TextField = createTextField("textField" + n, n, 0, 0, 140, 31);
-      textField.html = true; // FIXIT: in html mode Font and Position are wrong.
+      textField.html = false; // FIXIT: in html mode Font and Position are wrong.
       textField.antiAliasType = "normal";
       textField.embedFonts = true;
       textField.selectable = false;
