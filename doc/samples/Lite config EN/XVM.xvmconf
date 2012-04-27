@@ -1,6 +1,7 @@
 ﻿/**
  * Full configuration file (hereinafter - the configuration) with all possible options,
  * default configuration.
+ * Not includes in-game players ratio settings.
  *
  * Attention! You must NOT use the percent symbol in this file.
  * Instead, the percent symbol should be written: \ u0025
@@ -25,15 +26,9 @@
     "drawGrid": false,                          // true - Enable grid coordinates (may be useful for tactical setup). Change only if you know what you’re doing!
     "hideXVMVersion": false                     // true - hide xvm version at top left corner of screen
   },
-  // Options for player statistics (only with XVM-full)
-  "rating": {
-    "showPlayersStatistics": true,              // true - Toggle player statistics on/off. Global setting - without the statistics module, this is always disabled
-    "loadEnemyStatsInFogOfWar": false           // true - Enable downloading of data on opponents in the "fog of war"
-  },
   // Parameters of the Battle Loading Screen
   "battleLoading": {
     "showClock": true,                          // false - Disable the clock on the Battle Loading Screen
-    "showChances": true,                        // true – Enable display of "chances to win" (only with XVM-full)
     "removeSquadIcon": false,                   // true – Disable Platoon icons. This blank space can house, for example, clan logos
     "clanIcon": {                               // Display options for Team/Clan logos
       "show": true,                             //   false – Disable Team/Clan logos in Battle Loading Screen
@@ -46,20 +41,19 @@
       "alpha": 90                               //   Transparency of the Team/Clan logo
     },
     // Display format for the left Players Panel (macros allowed, see readme-en.txt)
-    "formatLeft": "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatLeft": "",
     // Display format for the right Players Panel (macros allowed, see readme-en.txt)
-    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
+    "formatRight": ""
   },
   // Parameters of the Battle Statistics Form
   "statisticForm": {
-    "showChances": true,      // true - Enable display of "chance to win" (only with XVM-full).
     "removeSquadIcon": false, // true - Disable Platoon icons. This blank space can house, for example, clan logos.
     // Display options for Team/Clan logos (see battleLoading above)
     "clanIcon": { "show": true, "x": 0, "y": 6, "xr": 0, "yr": 6, "h": 16, "w": 16, "alpha": 90 },
     // Display format for the left column (macros allowed, see readme-en.txt)
-    "formatLeft": "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatLeft": "",
     // Display format for the right column (macros allowed, see readme-en.txt)
-    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
+    "formatRight": ""
   },
   // Parameters of the Players Panels
   "playersPanel": {
@@ -72,27 +66,27 @@
     "medium": {
       "width": 46,    // 0..250 - Width of the player's name column. Default is 46.
       // Display format for the left panel (macros allowed, see readme-en.txt)
-      "formatLeft": "<font color='{{c:eff}}'>{{nick}}</font>",
+      "formatLeft": "{{nick}}",
       // Display format for the right panel (macros allowed, see readme-en.txt)
-      "formatRight": "<font color='{{c:eff}}'>{{nick}}</font>"
+      "formatRight": "{{nick}}"
     },
     // Options for the "medium2" panels - the second of the medium panels
     "medium2": {
       "width": 65,    // 0..250 - Width of the player's name column. Default is 65.
       // Display format for the left panel (macros allowed, see readme-en.txt)
-      "formatLeft": "<font color='{{c:eff}}'>{{vehicle}}</font>",
+      "formatLeft": "{{vehicle}}",
       // Display format for the right panel (macros allowed, see readme-en.txt)
-      "formatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
+      "formatRight": "{{vehicle}}"
     },
     // Options for the "large" panels - the widest panels
     "large": {
       "width": 170,  // 0..250 - Width of the player's name column. Default is 170.
       // Display format for player nickname (macros allowed, see readme-en.txt)
-      "nickFormatLeft": "<font color='{{c:rating}}'>{{rating}}</font> {{nick}}",
-      "nickFormatRight": "{{nick}} <font color='{{c:rating}}'>{{rating}}</font>",
+      "nickFormatLeft": "{{nick}}",
+      "nickFormatRight": "{{nick}}",
       // Display format for vehicle name (macros allowed, see readme-en.txt)
-      "vehicleFormatLeft": "<font color='{{c:eff}}'>{{vehicle}}</font>",
-      "vehicleFormatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
+      "vehicleFormatLeft": "{{vehicle}}",
+      "vehicleFormatRight": "{{vehicle}}"
     }
   },
   // OVER-TARGET MARKERS
@@ -1170,34 +1164,6 @@
       { "value": 25,  "color": "0xDD3333" },      // Color for health below 25 percent
       { "value": 50,  "color": "0xFFCC33" },      // Color for health below 50 percent
       { "value": 101, "color": "0xFFFFFF" }       // Color for health up to 100 percent
-    ],
-    // Dynamic color for effectiveness (only with XWM-full)
-    "eff": [
-      { "value": 600,  "color": "0xDD0000" },
-      { "value": 900,  "color": "0xDD3333" },
-      { "value": 1200, "color": "0xFFCC33" },
-      { "value": 1500, "color": "0x99FF33" },
-      { "value": 1800, "color": "0x33FF33" },
-      { "value": 9999, "color": "0xCC66CC" }
-    ],
-    // Dynamic color for victory percentage (only with XWM-full)
-    "rating": [
-      { "value": 42,  "color": "0xDD0000" },
-      { "value": 46,  "color": "0xDD3333" },
-      { "value": 49,  "color": "0xDDDD33" },
-      { "value": 51,  "color": "0xFFCC33" },
-      { "value": 53,  "color": "0x99FF33" },
-      { "value": 57,  "color": "0x33FF33" },
-      { "value": 101, "color": "0xCC66CC" }
-    ],
-    // Dynamic color for the number of thousands of battles ("kilo-battles") (only with XWM-full)
-    "kb": [
-      { "value": 1,   "color": "0xDD0000" },
-      { "value": 3,   "color": "0xDD3333" },
-      { "value": 5,   "color": "0xFFCC33" },
-      { "value": 8,   "color": "0x99FF33" },
-      { "value": 12,  "color": "0x33FF33" },
-      { "value": 999, "color": "0xCC66CC" }
     ]
   },
   // OPTIONS FOR DYNAMIC TRANSPARENCY
@@ -1215,24 +1181,6 @@
       { "value": 25,  "alpha": 80 },
       { "value": 50,  "alpha": 60 },
       { "value": 101, "alpha": 40 }
-    ],
-    // Dynamic transparency for effectiveness (only with XWM-full)
-    "eff": [
-      { "value": 900,  "alpha": 100 },
-      { "value": 1200, "alpha": 100 },
-      { "value": 9999, "alpha": 100 }
-    ],
-    // Dynamic transparency for victory percentage (only with XWM-full)
-    "rating": [
-      { "value": 49,  "alpha": 100 },
-      { "value": 53,  "alpha": 100 },
-      { "value": 101, "alpha": 100 }
-    ],
-    // Dynamic transparency for the number of thousands of battles ("kilo-battles") (only with XWM-full)
-    "kb": [
-      { "value": 2,   "alpha": 100 },
-      { "value": 10,  "alpha": 100 },
-      { "value": 999, "alpha": 100 }
     ]
   },
   // ICON SETS

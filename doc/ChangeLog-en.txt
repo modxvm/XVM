@@ -1,5 +1,8 @@
 ﻿XVM-2.2.test3:
   * fixed bug with enemy team killer
+  * added config options for separate clan icon coordinates at right size
+  * added Lite configs without statistics options
+  * clan icons folder reorganization
 
 XVM-2.2.test2:
   * updated tank info for win chances calculation

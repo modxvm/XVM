@@ -1,6 +1,7 @@
 ﻿/**
  * Полный конфигурационный файл (далее - конфиг) со всеми возможными опциями,
  * настроенными по умолчанию.
+ * Опции статистики игроков исключены из этого файла.
  *
  * Внимание! Использование символа процента в данном файле не допустимо.
  * Вместо символа процента следует писать: \u0025
@@ -25,15 +26,9 @@
     "drawGrid": false,                          // true - включить отображение сетки координат (может быть полезным для настройки). Не включайте, если не знаете зачем.
     "hideXVMVersion": false                     // true - отключить отображение версии xvm в верхнем левом углу экрана
   },
-  // Блок управлением статистикой (только xvm-full)
-  "rating": {
-    "showPlayersStatistics": true,              // true - включить отображение статистики. Глобальный переключатель - без него модуль статистики будет везде отключен.
-    "loadEnemyStatsInFogOfWar": false           // true - включить загрузку данных по противникам в "тумане войны"
-  },
   // Параметры экрана загрузки боя
   "battleLoading": {
     "showClock": true,                          // false - выключить отображение часов на экране загрузки боя
-    "showChances": true,                        // true - включить отображение шансов на победу (только в XVM Full)
     "removeSquadIcon": false,                   // true - убрать отображение иконки взвода. На пустое поле можно вывести, например, иконку клана.
     "clanIcon": {                               // параметры отображения иконки игрока/клана
       "show": true,                             //   false - не отображать иконки игрока/клана в окне загрузки боя
@@ -46,20 +41,19 @@
       "alpha": 90                               //   прозрачность иконки игрока/клана
     },
     // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatLeft": "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatLeft": "",
     // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
+    "formatRight": ""
   },
   // Параметры окна статистики по клавише Tab
   "statisticForm": {
-    "showChances": true,      // true - включить отображение шансов на победу (только в XVM Full, пока работает только в боях 15x15)
     "removeSquadIcon": false, // true - убрать отображение иконки взвода
     // параметры отображения иконки игрока/клана (см. battleLoading выше)
     "clanIcon": { "show": true, "x": 0, "y": 6, "xr": 0, "yr": 6, "h": 16, "w": 16, "alpha": 90 },
     // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatLeft": "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatLeft": "",
     // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
+    "formatRight": ""
   },
   // Параметры панелей игроков ("ушей")
   "playersPanel": {
@@ -72,27 +66,27 @@
     "medium": {
       "width": 46,    // 0..250 - задает ширину поля имени игрока. По умолчанию: 46
       // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-      "formatLeft": "<font color='{{c:eff}}'>{{nick}}</font>",
+      "formatLeft": "{{nick}}",
       // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-      "formatRight": "<font color='{{c:eff}}'>{{nick}}</font>"
+      "formatRight": "{{nick}}"
     },
     // режим ушей "medium2" - вторые средние уши в игре
     "medium2": {
       "width": 65,    // 0..250 - задает ширину поля названия танка. По умолчанию: 65
       // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-      "formatLeft": "<font color='{{c:eff}}'>{{vehicle}}</font>",
+      "formatLeft": "{{vehicle}}",
       // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-      "formatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
+      "formatRight": "{{vehicle}}"
     },
     // режим ушей "large" - широкие уши в игре
     "large": {
       "width": 170,  // 0..250 - задает ширину поля имени игрока. По умолчанию: 170
       // формат отображения имени игрока (допускаются макроподстановки, см. readme-ru.txt)
-      "nickFormatLeft": "<font color='{{c:rating}}'>{{rating}}</font> {{nick}}",
-      "nickFormatRight": "{{nick}} <font color='{{c:rating}}'>{{rating}}</font>",
+      "nickFormatLeft": "{{nick}}",
+      "nickFormatRight": "{{nick}}",
       // формат отображения названия танка (допускаются макроподстановки, см. readme-ru.txt)
-      "vehicleFormatLeft": "<font color='{{c:eff}}'>{{vehicle}}</font>",
-      "vehicleFormatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
+      "vehicleFormatLeft": "{{vehicle}}",
+      "vehicleFormatRight": "{{vehicle}}"
     }
   },
   // Блок маркеров над танками.
@@ -1182,34 +1176,6 @@
       { "value": 25,  "color": "0xDD3333" },      // Цвет для значений меньше 25 проц
       { "value": 50,  "color": "0xFFCC33" },      // Цвет для значений меньше 50 проц
       { "value": 101, "color": "0xFFFFFF" }       // Цвет для 100 проц
-    ],
-    // Динамический цвет по эффективности (только в xvm-full). Значения от меньшего к большему.
-    "eff": [
-      { "value": 600,  "color": "0xDD0000" },
-      { "value": 900,  "color": "0xDD3333" },
-      { "value": 1200, "color": "0xFFCC33" },
-      { "value": 1500, "color": "0x99FF33" },
-      { "value": 1800, "color": "0x33FF33" },
-      { "value": 9999, "color": "0xCC66CC" }
-    ],
-    // Динамический цвет по проценту побед (только в xvm-full). Значения от меньшего к большему.
-    "rating": [
-      { "value": 42,  "color": "0xDD0000" },
-      { "value": 46,  "color": "0xDD3333" },
-      { "value": 49,  "color": "0xDDDD33" },
-      { "value": 51,  "color": "0xFFCC33" },
-      { "value": 53,  "color": "0x99FF33" },
-      { "value": 57,  "color": "0x33FF33" },
-      { "value": 101, "color": "0xCC66CC" }
-    ],
-    // Динамический цвет по количеству кило-боев (только в xvm-full). Значения от меньшего к большему.
-    "kb": [
-      { "value": 1,   "color": "0xDD0000" },
-      { "value": 3,   "color": "0xDD3333" },
-      { "value": 5,   "color": "0xFFCC33" },
-      { "value": 8,   "color": "0x99FF33" },
-      { "value": 12,  "color": "0x33FF33" },
-      { "value": 999, "color": "0xCC66CC" }
     ]
   },
   // Настройки динамической прозрачности
@@ -1227,24 +1193,6 @@
       { "value": 25,  "alpha": 80 },
       { "value": 50,  "alpha": 60 },
       { "value": 101, "alpha": 40 }
-    ],
-    // Динамическая прозрачность по эффективности (только в xvm-full). Значения от меньшего к большему.
-    "eff": [
-      { "value": 900,  "alpha": 100 },
-      { "value": 1200, "alpha": 100 },
-      { "value": 9999, "alpha": 100 }
-    ],
-    // Динамическая прозрачность по проценту побед (только в xvm-full). Значения от меньшего к большему.
-    "rating": [
-      { "value": 49,  "alpha": 100 },
-      { "value": 53,  "alpha": 100 },
-      { "value": 101, "alpha": 100 }
-    ],
-    // Динамическая прозрачность по количеству кило-боев (только в xvm-full). Значения от меньшего к большему.
-    "kb": [
-      { "value": 2,   "alpha": 100 },
-      { "value": 10,  "alpha": 100 },
-      { "value": 999, "alpha": 100 }
     ]
   },
   // Наборы иконок
