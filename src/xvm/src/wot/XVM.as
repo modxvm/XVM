@@ -66,6 +66,28 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     super();
 
     Config.LoadConfigAndStatLegacy("XVM.xvmconf", "XVM.as");
+
+    this.xvmHB = this.createEmptyMovieClip("xvmHB", this.marker.getDepth() - 1); // Put health Bar to back.
+    this.xvmHBBorder = this.xvmHB.createEmptyMovieClip("border", 1);
+    this.xvmHBDamage = this.xvmHB.createEmptyMovieClip("damage", 2);
+    this.xvmHBFill = this.xvmHB.createEmptyMovieClip("fill", 3);
+
+    this.damageHolder = this.createEmptyMovieClip("damageHolder", this.getNextHighestDepth());
+
+    // Remove standard fields
+    this.pNameField._visible = false;
+    this.pNameField.removeTextField();
+
+    this.vNameField._visible = false;
+    this.vNameField.removeTextField();
+
+    this.healthBar.stop();
+    this.healthBar._visible = false;
+    this.healthBar.removeMovieClip();
+
+    this.bgShadow.stop();
+    this.bgShadow._visible = false;
+    this.bgShadow.removeMovieClip();
   }
 
   function XVMInit(obj: Object)
@@ -96,28 +118,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
         //if (Config.s_config.battle.useStandardMarkers)
         //  return;
-
-        this.xvmHB = this.createEmptyMovieClip("xvmHB", this.marker.getDepth() - 1); // Put health Bar to back.
-        this.xvmHBBorder = this.xvmHB.createEmptyMovieClip("border", 1);
-        this.xvmHBDamage = this.xvmHB.createEmptyMovieClip("damage", 2);
-        this.xvmHBFill = this.xvmHB.createEmptyMovieClip("fill", 3);
-
-        this.damageHolder = this.createEmptyMovieClip("damageHolder", this.getNextHighestDepth());
-
-        // Remove standard fields
-        this.pNameField._visible = false;
-        this.pNameField.removeTextField();
-
-        this.vNameField._visible = false;
-        this.vNameField.removeTextField();
-
-        this.healthBar.stop();
-        this.healthBar._visible = false;
-        this.healthBar.removeMovieClip();
-
-        this.bgShadow.stop();
-        this.bgShadow._visible = false;
-        this.bgShadow.removeMovieClip();
 
         // Draw grid
         if (Config.s_config.battle.drawGrid)
