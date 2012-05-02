@@ -23,7 +23,7 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
 
     _global.xvm_battleloading = this;
 
-    Config.LoadConfig();
+    Config.LoadConfig(undefined, "BattleLoading.as");
 
     if (!infoField)
     {
@@ -38,8 +38,6 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
     }
 
     setInfoFieldData({ });
-
-    BattleLoadingInit();
   }
 
   function BattleLoadingInit(obj: Object)

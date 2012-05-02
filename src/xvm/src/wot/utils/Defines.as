@@ -5,9 +5,9 @@
 class wot.utils.Defines
 {
   // Global versions
-  public static var XVM_VERSION = "2.2.test3";
+  public static var XVM_VERSION = "2.2.test4";
   public static var WOT_VERSION = "0.7.3";
-  public static var CONFIG_VERSION = "1.2.0";
+  public static var CONFIG_VERSION = "1.3.0";
   public static var EDITOR_VERSION = "0.0.0";
 
   public static var DEFAULT_CONFIG_NAME = "XVM.xvmconf";
@@ -28,6 +28,7 @@ class wot.utils.Defines
   public static var COMMAND_RETRIEVE = DOKAN_MP + "@RETRIEVE";
   public static var COMMAND_READY = DOKAN_MP + "@READY";
   public static var COMMAND_GET_LAST_STAT = DOKAN_MP + "@GET_LAST_STAT";
+  public static var COMMAND_GET_VERSION = DOKAN_MP + "@GET_VERSION";
 
   // Position
   public static var POSITION_LEFT = 0;

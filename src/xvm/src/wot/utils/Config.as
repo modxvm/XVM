@@ -10,6 +10,7 @@ import wot.utils.Utils;
 class wot.utils.Config
 {
   public static var DEBUG_TIMES = false;
+  public static var DEBUG_TUNING = false;
 
   // Private vars
   public static var s_config: Object;
@@ -18,7 +19,7 @@ class wot.utils.Config
   private static var s_load_last_stat: Boolean = false;
   private static var s_load_legacy_config: Boolean = false;
   private static var s_config_filename: String = "";
-  private static var s_src;
+  private static var s_src: String;
 
   // Load XVM mod config; config data is shared between all marker instances, so
   // it should be loaded only once per session. s_loaded flag indicates that
@@ -106,6 +107,7 @@ class wot.utils.Config
   }
 
   private static var _ReloadXvmConfigStarted: Boolean = false;
+  private static var _RegionLoaded: Boolean = false;
   private static function ReloadXvmConfig()
   {
     if (_ReloadXvmConfigStarted)
@@ -178,10 +180,94 @@ class wot.utils.Config
       }
       finally
       {
-        Config.s_loaded = true;
+        if (!Config.s_loaded)
+        {
+          Config.s_loaded = true;
+          if (Config.s_config.rating.showPlayersStatistics)
+          {
+            var lv_ver: LoadVars = new LoadVars();
+            lv_ver.onData = function(region: String)
+            {
+              if (Config._RegionLoaded)
+                return;
+              Config._RegionLoaded = true;
+              Config.TuneConfigForServerRegion(region);
+            }
+            lv_ver.load(Defines.COMMAND_GET_VERSION);
+          }
+          else
+            Config.TuneConfigForServerRegion(undefined);
+          if (Config.s_src == "BattleLoading.as")
+            _global.xvm_battleloading.BattleLoadingInit();
+        }
       }
     };
     lv.load(s_config_filename);
+  }
+
+  private static var useFallback: Boolean = false;
+  private static function TuneConfigForServerRegion(region: String)
+  {
+    if (!Config.s_loaded)
+      return;
+
+    useFallback = (region == undefined) || useFallback;
+    var root: String = "";
+    var folders: Array = [];
+    for (var i in s_config.players)
+    {
+      var ele = s_config.players[i];
+      if (ele.root != null && ele.folders != null)
+      {
+        root = ele.root;
+        if (root != "" && root.charAt(root.length - 1) != "/")
+          root += "/";
+        folders = ele.folders.split(',');
+        folders = Utils.removeDuplicatesAndTrim(folders);
+        break;
+      }
+    }
+    if (Config.DEBUG_TUNING)
+    {
+      Logger.add("DEBUG TUNING TuneConfigForServer(" + region + "): Begin:");
+      for (var i = 0; i < s_config.players.length; ++i)
+        Logger.addObject(s_config.players[i], "players");
+    }
+
+    var subsections: Array = [];
+    for (var i in s_config.players)
+    {
+      var ele = s_config.players[i];
+      if (ele.folder != undefined)
+      { // check if folder matches game version or fallback should be used
+        if (ele.folder.toUpperCase() == region.toUpperCase() || useFallback)
+        { // check if folder is in folders
+          for (var j in folders)
+          {
+            var folder = folders[j];
+            if (folder.toUpperCase() == ele.folder.toUpperCase())
+            {
+              if (Config.DEBUG_TUNING)
+              {
+                Logger.add("DEBUG TUNING: TuneConfigForServer(" + region + "): Found:");
+                for (var k = 0; k < ele.players.length; ++k)
+                  Logger.addObject(ele.players[k], "players");
+              }
+              ele.players = Utils.addRootFor(ele.players, root + ele.folder + "/");
+              subsections = ele.players.concat(subsections);
+              break;
+            }
+          }
+        }
+      }
+    }
+    s_config.players = subsections;
+    if (Config.DEBUG_TUNING)
+    {
+      Logger.add("DEBUG TUNING: TuneConfigForServer(" + region + "): Finished:");
+      for (var i = 0; i < s_config.players.length; i++)
+        Logger.addObject(s_config.players[i], "players");
+    }
   }
 
   /**
@@ -363,6 +449,17 @@ class wot.utils.Config
       }
 
       v = "1.2.0";
+    }
+    
+    if (v == "1.2.0")
+    {
+      if (config.players)
+      {
+        config.players = [ { folder: "", players: config.players } ];
+        config.players.push( { root: "", folders: "" } );
+        Config.useFallback = true;
+      }
+      v = "1.3.0";
     }
 
 /*

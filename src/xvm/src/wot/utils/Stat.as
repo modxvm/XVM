@@ -582,7 +582,7 @@ class wot.utils.Stat
         return tierMin;
       tierMax = Math.min(vi.tier2, tierMax);
       //Logger.add("tiers=" + tierMin + ".." + tierMax);
-    };
+    }
     
     //Logger.add("avg tier: " + (tierMax + tierMin) / 2.0);
     return (tierMax + tierMin) / 2.0;

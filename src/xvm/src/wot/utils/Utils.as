@@ -29,11 +29,10 @@ class wot.utils.Utils
 
   public static function trim(str: String): String
   {
-    while (str.charAt(0) == " ")
-      str = str.substring(1, str.length);
-    while (str.charAt(str.length - 1) == " ")
-      str = str.substring(0, str.length-1);
-    return str;
+    var i, j;
+    for(i = 0; str.charCodeAt(i) < 33; ++i);
+    for(j = str.length-1; str.charCodeAt(j) < 33; --j);
+    return str.substring(i, j+1);
   }
 
   public static function padLeft(str: String, len: Number, char: String)
@@ -138,5 +137,37 @@ class wot.utils.Utils
     if (!Utils.endsWith("/", path))
       path += "/";
     return path;
+  }
+  
+  
+  public static function addRootFor(players: Array, root: String)
+  {
+    if (root == "/" || root == "")
+      return players;
+    for (var i in players)
+    {
+      var ele = players[i];
+      if ((ele.clan || ele.nick) && ele.icon)
+      {
+        ele.icon = root + ele.icon;
+      }
+    }
+    return players;
+  }
+  
+  public static function removeDuplicatesAndTrim(sourceArray:Array): Array
+  {
+    for (var i in sourceArray)
+    {
+      sourceArray[i] = trim(sourceArray[i]);
+    }
+    for (var i = sourceArray.length - 2; i >= 0; --i) 
+    {
+      for (var j = sourceArray.length - 1; j > i; --j)
+      {
+        if (sourceArray[j] === sourceArray[i]) sourceArray.splice(j, 1);
+      }
+    }
+    return sourceArray;
   }
 }

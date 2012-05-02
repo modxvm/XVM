@@ -472,6 +472,10 @@ namespace wot
               _prevResult = getPendingPlayersResult();
               break;
 
+            case "@GET_VERSION":
+              _prevResult = version;
+              break;
+
             default:
               Log(2, "Unknown command: " + filename);
               break;
