@@ -1194,7 +1194,7 @@
     // Folder containing the icon set for the Over-target markers
     "vehicleMarker": "../maps/icons/vehicle/contour"
   },
-  // Options for specific players' clan logos (see readme-en.txt)
+  // Options for specific players' clan logos
   "players": [
     { "root": "../../../clanicons", "folders": "RU,EU,NA,CT" },
     { "folder": "RU",     "players": [

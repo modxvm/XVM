@@ -1258,7 +1258,7 @@
     // набор иконок для маркеров над танками
     "vehicleMarker": "../maps/icons/vehicle/contour"
   },
-  // параметры игроков/кланов (см. readme-ru.txt)
+  // параметры игроков/кланов
   "players": [
     { "root": "../../../clanicons", "folders": "RU,EU,NA,CT" },
     { "folder": "RU",     "players": [
