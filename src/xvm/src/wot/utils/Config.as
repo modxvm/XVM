@@ -455,8 +455,10 @@ class wot.utils.Config
     {
       if (config.players)
       {
-        config.players = [ { folder: "", players: config.players } ];
-        config.players.push( { root: "", folders: "" } );
+        config.players = [
+          { root: "", folders: "" },
+          { folder: "", players: config.players }
+        ];
         Config.useFallback = true;
       }
       v = "1.3.0";
