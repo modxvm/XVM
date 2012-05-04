@@ -211,7 +211,7 @@ class wot.utils.Config
     if (!Config.s_loaded)
       return;
 
-    useFallback = (region == undefined) || useFallback;
+    useFallback = !region || useFallback;
     var root: String = "";
     var folders: Array = [];
     for (var i in s_config.players)
