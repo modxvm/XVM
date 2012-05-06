@@ -1,5 +1,5 @@
---- orig\VehicleMarkersManager.xml	2012-04-24 10:36:04.575366300 +0300
-+++ VehicleMarkersManager.xml	2012-04-24 10:39:15.467671900 +0300
+--- orig\VehicleMarkersManager.xml	2012-04-24 22:01:15.742899500 +0300
++++ VehicleMarkersManager.xml	2012-05-06 19:14:39.231994000 +0300
 @@ -3972,7 +3972,7 @@
        </DefineBitsLossless2>
        <DefineShape objectID="85">
@@ -2043,8 +2043,8 @@
                <String value="\"/>
 -              <String value=""/>
 -              <String value=""/>
-+<!--              <String value="&#08;"/>-->
-+<!--              <String value="&#12;"/>-->
++              <String value=""/>
++              <String value=""/>
                <String value="&#10;"/>
                <String value="&#13;"/>
                <String value="&#9;"/>

@@ -1,13 +1,13 @@
---- orig\PlayersPanel.xml	2012-03-23 11:30:21.169195400 +0200
-+++ PlayersPanel.xml	2012-04-24 10:39:12.784403600 +0300
+--- orig\PlayersPanel.xml	2012-03-23 19:56:37.517570200 +0200
++++ PlayersPanel.xml	2012-05-06 19:14:34.178705000 +0300
 @@ -55291,8 +55291,8 @@
                <String value="charAt"/>
                <String value=" "/>
                <String value="\"/>
 -              <String value=""/>
 -              <String value=""/>
-+<!--              <String value="&#08;"/>-->
-+<!--              <String value="&#12;"/>-->
++              <String value=""/>
++              <String value=""/>
                <String value="&#10;"/>
                <String value="&#13;"/>
                <String value="&#9;"/>

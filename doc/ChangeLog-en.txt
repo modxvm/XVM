@@ -1,5 +1,6 @@
-﻿XVM-2.3.test1:
+﻿XVM-2.3.test2:
   * added new vehicles to win chances calculation
+  * fixed bug in swf modification
 
 XVM-2.2:
   * adaptation to WoT 0.7.3
