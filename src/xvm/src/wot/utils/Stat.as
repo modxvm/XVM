@@ -1,4 +1,4 @@
-﻿/**
+/**
  * ...
  * @author sirmax2
  * @author johnp
@@ -419,7 +419,7 @@ class wot.utils.Stat
   }
 
   /////////////////////////////////////
-  
+
   // Result: { win1, win2, draw }
   public static function GetChances(): Object
   {
@@ -428,7 +428,7 @@ class wot.utils.Stat
     var nally = 0;
     var nenemy = 0;
     for (var i in s_player_names)
-    { 
+    {
       var pname = s_player_names[i];
       var pdata = s_player_data[pname];
       if (pdata.team == Defines.TEAM_ALLY) ++nally else ++nenemy;
@@ -477,9 +477,9 @@ class wot.utils.Stat
       // 1
       var kx = eff * vi.level;
       if (pdata.team == Defines.TEAM_ALLY) k1 += kx; else k2 += kx;
-        
+
       // 2
-      var tx = (vi.tier1 + vi.tier2) / 2.0 - tier;
+      var tx = (vi.tiers[0] + vi.tiers[1]) / 2.0 - tier;
       var mx = eff * (1 + gwr - 0.48) * (1 + bat) * (1 + 0.25 * tx);
       if (pdata.team == Defines.TEAM_ALLY) m1 += mx else m2 += mx;
       //Logger.add("mx=" + mx + " tx=" + tx + " eff=" + int(eff) + " gwr=" + int(gwr) + " kb=" + int(bat));
@@ -538,7 +538,7 @@ class wot.utils.Stat
 
     if (!n || !v)
       return 0;
-    
+
     return 1.0 * v / n;
   }
 
@@ -560,34 +560,34 @@ class wot.utils.Stat
     for (var i = 0; i < vis.length; ++i)
     {
       var vi = vis[i];
-      if (vi.tier2 < tierMax)
+      if (vi.tiers[1] < tierMax)
         continue;
-      if (vi.tier2 > tierMax)
+      if (vi.tiers[1] > tierMax)
       {
-        tierMax = vi.tier2;
-        tierMin = vi.tier1;
+        tierMax = vi.tiers[1];
+        tierMin = vi.tiers[0];
         continue;
       }
-      if (vi.tier1 > tierMin)
-        tierMin = vi.tier1;
+      if (vi.tiers[0] > tierMin)
+        tierMin = vi.tiers[0];
     }
     //Logger.add("tiers=" + tierMin + ".." + tierMax);
 
     for (var i = 0; i < vis.length; ++i)
     {
       var vi = vis[i];
-      if (vi.tier2 < tierMin)
+      if (vi.tiers[1] < tierMin)
         continue;
-      if (vi.tier2 == tierMin)
+      if (vi.tiers[1] == tierMin)
         return tierMin;
-      tierMax = Math.min(vi.tier2, tierMax);
+      tierMax = Math.min(vi.tiers[1], tierMax);
       //Logger.add("tiers=" + tierMin + ".." + tierMax);
     }
-    
+
     //Logger.add("avg tier: " + (tierMax + tierMin) / 2.0);
     return (tierMax + tierMin) / 2.0;
   }
-  
+
   public static function ShowChances(tf: TextField): String
   {
     var chances = Stat.GetChances();
