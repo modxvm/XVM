@@ -1,4 +1,7 @@
-﻿XVM-2.2:
+﻿XVM-2.3.test1:
+  * added new vehicles to win chances calculation
+
+XVM-2.2:
   * adaptation to WoT 0.7.3
   * updated tank info for win chances calculation
   * vehicle type marker settings may be different for each state
