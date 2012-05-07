@@ -20,6 +20,7 @@
 
   Сайт проекта: http://code.google.com/p/wot-xvm/
   Поддержка:    http://forum.bulychev.net/viewforum.php?f=6
+  FAQ:          http://www.koreanrandom.com/forum/topic/1381-faq-otveti-na-chastie-voprosi-po-xvm/
 
   Всем, кто считает что мод грузит сервер статистики, сюда:
   http://bulychev.net/blog/2012/02/pozitsiya-wg-v-otnoshenii-modov-so-statisti/

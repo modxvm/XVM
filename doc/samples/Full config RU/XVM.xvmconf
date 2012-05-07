@@ -1260,11 +1260,11 @@
   },
   // параметры игроков/кланов
   "players": [
-    { "root": "../../../clanicons", "folders": "RU,EU,NA,CT" },
-    { "folder": "RU",     "players": [
-        { "nick": "sirmax2",    "icon": "XVM.png" },
+    { "root": "../../../clanicons", "folders": "RU,EU,NA,CT" }, // root - корневая папка иконок, folders - список подпапок
+    { "folder": "RU",     "players": [                          // определение подпапки "RU"
+        { "nick": "sirmax2",    "icon": "XVM.png" },            // для игрока
         { "nick": "0x01",       "icon": "XVM.png" },
-        { "clan": "[WG]",       "icon": "WG.png" },
+        { "clan": "[WG]",       "icon": "WG.png" },             // для клана
         { "clan": "[WG-A]",     "icon": "WG.png" },
         { "clan": "[WTMOD]",    "icon": "WTMOD.png" },
         { "clan": "[WGST]",     "icon": "WGST.png" },
