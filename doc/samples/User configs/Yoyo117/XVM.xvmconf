@@ -5,7 +5,7 @@
     "author": "Yoyo117",
     "description": "Yoyo117's settings for XVM",
     "url": "http://code.google.com/p/wot-xvm/",
-    "date": "02.05.2012",
+    "date": "07.05.2012",
     "gameVersion": "0.7.3",
     "modMinVersion": "2.2"
   },
@@ -32,81 +32,105 @@
     "ally": {
       "alive": {
         "extended": {
+          "healthRatio": {
+            "visible": true
+          },
           "textFields": [
             {
               "visible": true,
-              "x": -18,
-              "y": -50,
+              "x": 60
+              "y": -35,
               "alpha": 75,
               "color": "{{c:kb}}",
               "font": {
+                "name": "$FieldFont",
+                "size": 11,
+                "align": "left",
                 "bold": true
               },
               "format": "{{kb}}"
             },
             {
               "visible": true,
-              "x": 0,
-              "y": -50,
+              "x": 80,
+              "y": -35,
               "alpha": 75,
               "color": "{{c:eff}}",
               "font": {
+                "name": "$FieldFont",
+                "size": 11,
+                "align": "left",
                 "bold": true
               },
               "format": "{{eff}}"
             },
             {
               "visible": true,
-              "x": 22,
-              "y": -50,
+              "x": 100,
+              "y": -35,
               "alpha": 75,
               "color": "{{c:rating}}",
               "font": {
+                "name": "$FieldFont",
+                "size": 11,
+                "align": "left",
                 "bold": true
               },
               "format": "{{rating}}"
             }
           ]
         }
-      },
-      "enemy": {
-        "extended": {
-          "textFields": [
-            {
-              "visible": true,
-              "x": -18,
-              "y": -50,
-              "alpha": 75,
-              "color": "{{c:kb}}",
-              "font": {
+      }
+    },
+    "enemy": {
+      "extended": {
+        "healthRatio": {
+            "visible": true
+          },
+        "textFields": [
+          {
+            "visible": true,
+            "x": 60,
+            "y": -35,
+            "alpha": 75,
+            "color": "{{c:kb}}",
+            "font": {
+                "name": "$FieldFont",
+                "size": 11,
+                "align": "left",
                 "bold": true
               },
-              "format": "{{kb}}"
-            },
-            {
-              "visible": true,
-              "x": 0,
-              "y": -50,
-              "alpha": 75,
-              "color": "{{c:eff}}",
-              "font": {
+            "format": "{{kb}}"
+          },
+          {
+            "visible": true,
+            "x": 80,
+            "y": -35,
+            "alpha": 75,
+            "color": "{{c:eff}}",
+            "font": {
+                "name": "$FieldFont",
+                "size": 11,
+                "align": "left",
                 "bold": true
               },
-              "format": "{{eff}}"
-            },
-            {
-              "visible": true,
-              "x": 22,
-              "y": -50,
-              "alpha": 75,
-              "color": "{{c:rating}}",
-              "font": {
+            "format": "{{eff}}"
+          },
+          {
+            "visible": true,
+            "x": 100,
+            "y": -35,
+            "alpha": 75,
+            "color": "{{c:rating}}",
+            "font": {
+                "name": "$FieldFont",
+                "size": 11,
+                "align": "left",
                 "bold": true
               },
-              "format": "{{rating}}"
-            }
-          ]
-        }
+            "format": "{{rating}}"
+          }
+        ]
       }
     }
   }
