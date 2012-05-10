@@ -143,7 +143,7 @@ namespace wot
         String[] chunks = parameters.Split(',');
         foreach (String chunk in chunks)
         {
-            // The character "-" may be used in china server as the username, for example  "-_-" 
+            // The character "-" may be used in china server as the username, for example  "-_-"
            String[] param = new String[2];
            param[0] = chunk.Substring(0, chunk.LastIndexOf("-")).Trim();
            param[1] = chunk.Substring(chunk.LastIndexOf("-") + 1).Trim();
@@ -203,7 +203,7 @@ namespace wot
       {
         string s = "";
         XmlDocument doc = new XmlDocument();
-        //read WOTLauncher.cfg 
+        //read WOTLauncher.cfg
         doc.Load("WOTLauncher.cfg");
 
         XmlNode xn = doc.SelectSingleNode("/info/patch_info_urls");
@@ -485,7 +485,7 @@ namespace wot
 
           if (_prevResult == null)
             _prevResult = "";
-            
+
           fileinfo.Length = _prevResult.Length;
         }
         catch (Exception ex)
@@ -599,7 +599,7 @@ namespace wot
 
       foreach (var urlload in proxyUrls)
       {
-        //If little difference between the urls, add it for random select 
+        //If little difference between the urls, add it for random select
         if ((urlload.Value - minTime) < 500)
           proxyUrl.Add(urlload.Key);
       }
@@ -622,7 +622,8 @@ namespace wot
       Stopwatch sw = new Stopwatch();
       sw.Start();
 
-      WebRequest request = WebRequest.Create(url);
+      HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+      request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
       request.Credentials = CredentialCache.DefaultCredentials;
       request.Timeout = Settings.Default.Timeout;
 
@@ -678,7 +679,7 @@ namespace wot
           cache.Remove(uname);
         }
 
-        //We cann't get the id from the offical server in china,so we have to send the name to the rating server of China for search.	
+        //We cann't get the id from the offical server in china,so we have to send the name to the rating server of China for search.
         forUpdate.Add(version.StartsWith("CN", StringComparison.InvariantCultureIgnoreCase)
           ? String.Format("{0}-{1}", pendingPlayers[uname].name, pendingPlayers[uname].id)
           : pendingPlayers[uname].id.ToString());
@@ -691,11 +692,11 @@ namespace wot
 
       try
       {
-        String reqMembers = String.Join(",", forUpdate.ToArray());         
-		
+        String reqMembers = String.Join(",", forUpdate.ToArray());
+
         //The character "?" may be used in china server as the username , for example  "?ABC" . So it's must be replace to "%3F" for search.
         if (reqMembers.IndexOf('?') > 0)
-          reqMembers = reqMembers.Replace("?", "%3F");           
+          reqMembers = reqMembers.Replace("?", "%3F");
 
         string responseFromServer = loadUrl(_currentProxyUrl, reqMembers);
 
