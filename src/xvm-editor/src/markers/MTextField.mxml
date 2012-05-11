@@ -5,15 +5,18 @@
 	xmlns:mx="library://ns.adobe.com/flex/mx"
 	xmlns:c="components.*"
 	xmlns:m="markers.*"
-	title="Текстовое поле: {v_name.value}" width="100%" height="190">
-	<mx:Image right="5" y="-18" width="16" height="16" source="@Embed(source='images/cancel.png')" toolTip="Вернуть настройки по умолчанию" useHandCursor="true" buttonMode="true"/>
+	title="{resourceManager.getString('markers', 'TextField')}: {v_name.value}" width="100%" height="190">
+	<fx:Metadata>
+		[ResourceBundle("markers")]
+	</fx:Metadata>
+	<mx:Image right="5" y="-18" width="16" height="16" source="@Embed(source='images/cancel.png')" toolTip="{resourceManager.getString('markers', 'DefaultSettings')}" useHandCursor="true" buttonMode="true"/>
 	<s:VGroup left="10" right="10" top="10" bottom="10" gap="2" variableRowHeight="true">
-		<c:LabeledCheckBox label="Показывать" id="v_visible" config="visible" change="onChange(event)"/>
-		<c:LabeledTextInput label="Название" id="v_name" config="name" change="onChange(event)"/>
-		<c:LabeledNumberSelector label="Позиция по оси X" id="v_x" config="x" minimum="-100" maximum="100" change="onChange(event)"/>
-		<c:LabeledNumberSelector label="Позиция по оси Y" id="v_y" config="y" minimum="-100" maximum="100" change="onChange(event)"/>
-		<c:LabeledNumberSelector label="Прозрачность" id="v_alpha" config="alpha" minimum="0" maximum="100" change="onChange(event)"/>
-		<c:LabeledColorSelector label="Цвет" width="260" id="v_color" config="color" change="onChange(event)"/>
-		<c:LabeledTextInput label="Формат текста" id="v_format" config="format" change="onChange(event)"/>
+		<c:LabeledCheckBox label="{resourceManager.getString('markers', 'Visible')}" id="v_visible" config="visible" change="onChange(event)"/>
+		<c:LabeledTextInput label="{resourceManager.getString('markers', 'Name')}" id="v_name" config="name" change="onChange(event)"/>
+		<c:LabeledNumberSelector label="{resourceManager.getString('markers', 'XPosition')}" id="v_x" config="x" minimum="-100" maximum="100" change="onChange(event)"/>
+		<c:LabeledNumberSelector label="{resourceManager.getString('markers', 'YPosition')}" id="v_y" config="y" minimum="-100" maximum="100" change="onChange(event)"/>
+		<c:LabeledNumberSelector label="{resourceManager.getString('markers', 'Transparency')}" id="v_alpha" config="alpha" minimum="0" maximum="100" change="onChange(event)"/>
+		<c:LabeledColorSelector label="{resourceManager.getString('markers', 'Color')}" width="260" id="v_color" config="color" change="onChange(event)"/>
+		<c:LabeledTextInput label="{resourceManager.getString('markers', 'TextFormat')}" id="v_format" config="format" change="onChange(event)"/>
 	</s:VGroup>
 </c:PanelComponent>

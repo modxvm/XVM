@@ -6,19 +6,22 @@
 	xmlns:c="components.*"
 	xmlns:m="markers.*"
 	x="0" y="0" width="100%" height="100%" gap="-1">
+	<fx:Metadata>
+		[ResourceBundle("markers")]
+	</fx:Metadata>
 	<fx:Script>
 		<![CDATA[
 			import components.DynamicTextFieldEdit;
 			import components.LabeledComponent;
-			
+
 			import events.ValueChangedEvent;
-			
+
 			import flash.events.Event;
-			
+
 			import mx.core.IVisualElement;
-			
+
 			import spark.components.ToggleButton;
-			
+
 			import utils.Config;
 			import utils.DefaultConfig;
 			import utils.Utils;
@@ -58,7 +61,7 @@
 				img.height = 16;
 				img.id = "new";
 				img.source = new IMG_add();
-				img.toolTip = "Добавить текстовое поле";
+				img.toolTip = resourceManager.getString('markers', 'AddTextField');
 				img.useHandCursor = true;
 				img.buttonMode = true;
 				img.addEventListener(MouseEvent.CLICK, this.onClick);
@@ -81,7 +84,7 @@
 				m_activeMarkerStates = activeMarkerStates;
 
 				var saved_label:String = rbg && rbg.selectedValue ? rbg.selectedValue.toString() : null;
-				
+
 				for (var n:Number = 0; n < container.numElements; ++n)
 				{
 					var e_old:DynamicTextFieldEdit = container.getElementAt(n) as DynamicTextFieldEdit;
@@ -103,7 +106,7 @@
 					{
 						empty = false;
 						var value:Object = v[i];
-						var name:String = value.name || value.format || "Текст " + (++unnamedCounter);
+						var name:String = value.name || value.format || resourceManager.getString('markers', 'Text') + " " + (++unnamedCounter);
 						if (!m_values.hasOwnProperty(name))
 						{
 							var e:DynamicTextFieldEdit = CreateElement(name);
@@ -166,7 +169,7 @@
 							control.value = null;
 							continue;
 						}
-						
+
 						//trace(mname + "." + mname2);
 						var valueSet: Boolean = false;
 						var value:*;
@@ -212,7 +215,7 @@
 						Config.SetValue(event.sender.config, event.sender.value, value);
 
 					onChange(null);
-					
+
 					if (event.sender.config == "name")
 					{
 						(activeValue.element as DynamicTextFieldEdit).label = event.sender.value;
@@ -254,12 +257,12 @@
 				{
 					var n:Number = 0;
 					var name:String;
-					do { name = "Текст " + (++n); } while (m_values.hasOwnProperty(name));
+					do { name = resourceManager.getString('markers', 'Text') + " " + (++n); } while (m_values.hasOwnProperty(name));
 					m_names.push(name);
 					m_values[name] = { element: null, states: this.m_activeMarkerStates, values: [] };
 					var defValue:Object = DefaultConfig.vehicleName_alive;
 					defValue.name = name;
-					defValue.format = "ТЕКСТ";
+					defValue.format = resourceManager.getString('markers', 'TEXT');
 					for (var j:Number = 0; j < m_values[name].states.length; ++j)
 						m_values[name].values.push(defValue);
 				}
@@ -267,7 +270,7 @@
 					return;
 
 				event.stopPropagation();
-				
+
 				onChange(null);
 				RefreshSource(m_activeMarkerStates);
 			}
@@ -279,8 +282,8 @@
 	<fx:Declarations>
 		<s:RadioButtonGroup id="rbg" change="onRadioButtonChange(event)"/>
 	</fx:Declarations>
-	<c:PanelComponent title="Текстовые поля" width="100%" height="100" borderVisible="false">
-		<mx:Image right="5" y="-18" width="16" height="16" source="@Embed(source='images/cancel.png')" toolTip="Вернуть настройки по умолчанию" useHandCursor="true" buttonMode="true"/>
+	<c:PanelComponent title="{resourceManager.getString('markers', 'TextFields')}" width="100%" height="100" borderVisible="false">
+		<mx:Image right="5" y="-18" width="16" height="16" source="@Embed(source='images/cancel.png')" toolTip="{resourceManager.getString('markers', 'DefaultSettings')}" useHandCursor="true" buttonMode="true"/>
 		<s:Scroller left="10" right="10" top="5" bottom="6">
 			<s:VGroup id="container" width="100%" height="100%" gap="-1"/>
 		</s:Scroller>

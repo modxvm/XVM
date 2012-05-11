@@ -4,10 +4,13 @@
 	xmlns:s="library://ns.adobe.com/flex/spark"
 	xmlns:mx="library://ns.adobe.com/flex/mx"
 	xmlns:c="components.*"
-	width="100%" height="120" title="Форматы текстовых полей">
-	<mx:Image right="5" y="-18" width="16" height="16" source="@Embed(source='images/cancel.png')" toolTip="Вернуть настройки по умолчанию" useHandCursor="true" buttonMode="true"/>
+	width="100%" height="120" title="{resourceManager.getString('panels', 'TextFieldsFormats')}">
+	<fx:Metadata>
+		[ResourceBundle("panels")]
+	</fx:Metadata>
+	<mx:Image right="5" y="-18" width="16" height="16" source="@Embed(source='images/cancel.png')" toolTip="{resourceManager.getString('panels', 'DefaultSettings')}" useHandCursor="true" buttonMode="true"/>
 	<s:VGroup left="10" right="10" top="10" bottom="10" gap="2" variableRowHeight="true">
-		<c:LabeledTextInput label="Формат левого поля названия танка" labelWidth="100%" wrapTextField="true" height="40" id="v_formatLeft" config="statisticForm.formatLeft" change="onChange(event)"/>
-		<c:LabeledTextInput label="Формат правого поля названия танка" labelWidth="100%" wrapTextField="true" height="40" id="v_formatRight" config="statisticForm.formatRight" change="onChange(event)"/>
+		<c:LabeledTextInput label="{resourceManager.getString('panels', 'FormatVehicleNameLeft')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatLeft" config="statisticForm.formatLeft" change="onChange(event)"/>
+		<c:LabeledTextInput label="{resourceManager.getString('panels', 'FormatVehicleNameRight')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatRight" config="statisticForm.formatRight" change="onChange(event)"/>
 	</s:VGroup>
 </c:PanelComponent>
