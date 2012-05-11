@@ -15,17 +15,30 @@
 	<fx:Script>
 		<![CDATA[
 			import mx.events.FlexEvent;
+
+			[Bindable(event="languageChanged")]
+			protected function _(textId:String):String
+			{
+				return resourceManager.getString("main", textId);
+			}
 			
 			include "IO.as";
 			include "Main.as";
 			include "Refresh.as";
 			include "Update.as";
-	
+
 			protected function onCreationComplete(event:Event):void
 			{
 				preview.vsPreview.selectedChild = DEBUG ? preview.debug : preview.preview;
 				onCreateNewConfigClick();
 				onVehicleStateChanged(event);
+			}
+			
+			protected function onLanguageButtonClick(event:Event):void
+			{
+				resourceManager.localeChain = (event.target == lang_en) ? ['en_US', 'ru_RU'] : ['ru_RU', 'en_US'];
+				dispatchEvent(new Event('languageChanged'));
+				preview.cbBG.selectedIndex = preview.cbBG.selectedIndex; // refresh preview selected item
 			}
 		]]>
 	</fx:Script>
@@ -39,23 +52,26 @@
 			skinClass: ClassReference("skins.TileButtonBarSkin");
 		}
 	</fx:Style>
+	<fx:Metadata>
+		[ResourceBundle("main")]
+	</fx:Metadata>
 	<s:VGroup left="0" right="0" top="0" bottom="0" gap="-1" creationComplete="onCreationComplete(event)">
 		<s:BorderContainer width="920" height="32">
 			<s:HGroup top="0" left="0" bottom="0" gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="4" width="361">
-				<s:Button label="Новый" click="onCreateNewConfigClick()"/>
-				<s:Button label="Открыть" click="onLoadConfigClick()"/>
-				<s:Button label="Сохранить" click="onSaveConfigClick()"/>
-				<mx:PopUpMenuButton label="Дополнительно" enabled="false" toolTip="Еще не реализовано"/>
+				<s:Button label="{_('newButton')}" click="onCreateNewConfigClick()"/>
+				<s:Button label="{_('openButton')}" click="onLoadConfigClick()"/>
+				<s:Button label="{_('saveButton')}" click="onSaveConfigClick()"/>
+				<mx:PopUpMenuButton label="{_('extraButton')}" enabled="false" toolTip="{_('NotImplementedYet')}"/>
 			</s:HGroup>
 			<s:HGroup top="0" bottom="0" gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="4" horizontalAlign="right" width="147" right="0">
-				<s:Button label="En" width="40" enabled="false" toolTip="Not implemented yet"/>
-				<s:Button label="Ru" width="40" enabled="false"/>
+				<s:Button label="En" id="lang_en" width="40" click="onLanguageButtonClick(event)"/>
+				<s:Button label="Ru" id="lang_ru" width="40" click="onLanguageButtonClick(event)"/>
 			</s:HGroup>
 		</s:BorderContainer>
 		<s:TabBar width="920" height="20" dataProvider="{vsTabs}"/>
 		<s:HGroup width="920" height="100%" gap="-1">
 			<mx:ViewStack width="420" height="100%" backgroundColor="0xFFFFFF" id="vsTabs" creationPolicy="all">
-				<s:NavigatorContent label="Общие" width="100%" height="100%" id="pgCommon">
+				<s:NavigatorContent label="{_('commonPage')}" width="100%" height="100%" id="pgCommon">
 					<s:Scroller x="0" y="0" width="420" height="100%">
 						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
 							<p:PDefinition id="p_definition" valueChanged="updateValue(event)"/>
@@ -64,38 +80,38 @@
 						</s:VGroup>
 					</s:Scroller>
 				</s:NavigatorContent>
-				<s:NavigatorContent label="Маркеры" width="100%" height="100%" id="pgMarkers">
+				<s:NavigatorContent label="{_('markersPage')}" width="100%" height="100%" id="pgMarkers">
 					<s:Scroller x="0" y="0" width="420" height="100%">
 						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
 							<s:HGroup width="100%" height="140">
 								<s:BorderContainer width="245" height="100" borderVisible="false">
-									<s:ToggleButton x="10" y="10" width="110" label="Союзник" id="ally" selected="true" change="onVehicleStateChanged(event)"/>
-									<s:ToggleButton x="125" y="10" width="110" label="Противник" id="enemy" change="onVehicleStateChanged(event)"/>
-									<s:ToggleButton x="10" y="40" width="110" label="Живой" id="alive" selected="true" change="onVehicleStateChanged(event)"/>
-									<s:ToggleButton x="125" y="40" width="110" label="Мертвый" id="dead" change="onVehicleStateChanged(event)"/>
-									<s:ToggleButton x="10" y="70" width="110" label="Нормальный" id="normal" selected="true" change="onVehicleStateChanged(event)"/>
-									<s:ToggleButton x="125" y="70" width="110" label="Расширенный" id="extended" change="onVehicleStateChanged(event)"/>
+									<s:ToggleButton x="10" y="10" width="110" label="{_('ally')}" id="ally" selected="true" change="onVehicleStateChanged(event)"/>
+									<s:ToggleButton x="125" y="10" width="110" label="{_('enemy')}" id="enemy" change="onVehicleStateChanged(event)"/>
+									<s:ToggleButton x="10" y="40" width="110" label="{_('alive')}" id="alive" selected="true" change="onVehicleStateChanged(event)"/>
+									<s:ToggleButton x="125" y="40" width="110" label="{_('dead')}" id="dead" change="onVehicleStateChanged(event)"/>
+									<s:ToggleButton x="10" y="70" width="110" label="{_('normal')}" id="normal" selected="true" change="onVehicleStateChanged(event)"/>
+									<s:ToggleButton x="125" y="70" width="110" label="{_('extended')}" id="extended" change="onVehicleStateChanged(event)"/>
 								</s:BorderContainer>
 								<s:BorderContainer x="10" borderVisible="false">
 									<s:ButtonBar dataProvider="{vsMarkers}" id="elements" change="onVehicleStateChanged(event)"/>
 								</s:BorderContainer>
 							</s:HGroup>
 							<mx:ViewStack id="vsMarkers" width="100%" height="100%">
-								<s:NavigatorContent label="Класс танка" id="vehicleIcon">
+								<s:NavigatorContent label="{_('VehicleClass')}" id="vehicleIcon">
 									<s:Scroller x="0" y="0" width="100%" height="100%">
 										<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
 											<m:MVehicleIcon id="m_vehicleIcon" valueChanged="updateMarkerValue(event)"/>
 										</s:VGroup>
 									</s:Scroller>
 								</s:NavigatorContent>
-								<s:NavigatorContent label="Уровень здоровья" id="healthBar">
+								<s:NavigatorContent label="{_('HealthBar')}" id="healthBar">
 									<s:Scroller x="0" y="0" width="100%" height="100%">
 										<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
 											<m:MHealthBar id="m_healthBar" valueChanged="updateMarkerValue(event)"/>
 										</s:VGroup>
 									</s:Scroller>
 								</s:NavigatorContent>
-								<s:NavigatorContent label="Наносимый урон" id="damageText">
+								<s:NavigatorContent label="{_('DamageText')}" id="damageText">
 									<s:Scroller x="0" y="0" width="100%" height="100%">
 										<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
 											<m:MDamageText id="m_damageText" valueChanged="updateMarkerValue(event)"/>
@@ -104,28 +120,28 @@
 										</s:VGroup>
 									</s:Scroller>
 								</s:NavigatorContent>
-								<s:NavigatorContent label="Иконка танка" id="contourIcon">
+								<s:NavigatorContent label="{_('ContourIcon')}" id="contourIcon">
 									<s:Scroller x="0" y="0" width="100%" height="100%">
 										<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
 											<m:MContourIcon id="m_contourIcon" valueChanged="updateMarkerValue(event)"/>
 										</s:VGroup>
 									</s:Scroller>
 								</s:NavigatorContent>
-								<s:NavigatorContent label="Уровень танка" id="levelIcon">
+								<s:NavigatorContent label="{_('LevelIcon')}" id="levelIcon">
 									<s:Scroller x="0" y="0" width="100%" height="100%">
 										<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
 											<m:MLevelIcon id="m_levelIcon" valueChanged="updateMarkerValue(event)"/>
 										</s:VGroup>
 									</s:Scroller>
 								</s:NavigatorContent>
-								<s:NavigatorContent label="Маркер действия" id="actionMarker">
+								<s:NavigatorContent label="{_('ActionMarker')}" id="actionMarker">
 									<s:Scroller x="0" y="0" width="100%" height="100%">
 										<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
 											<m:MActionMarker id="m_actionMarker" valueChanged="updateMarkerValue(event)"/>
 										</s:VGroup>
 									</s:Scroller>
 								</s:NavigatorContent>
-								<s:NavigatorContent label="Текстовые поля" id="textFields">
+								<s:NavigatorContent label="{_('TextFields')}" id="textFields">
 									<s:Scroller x="0" y="0" width="100%" height="100%">
 										<m:MTextFieldList id="m_textFieldList" valueChanged="updateMarkerTextFieldValue(event)"/>
 									</s:Scroller>
@@ -134,7 +150,7 @@
 						</s:VGroup>
 					</s:Scroller>
 				</s:NavigatorContent>
-				<s:NavigatorContent label="Экран загрузки" width="100%" height="100%" id="pgBattleLoading">
+				<s:NavigatorContent label="{_('LoadingScreen')}" width="100%" height="100%" id="pgBattleLoading">
 					<s:Scroller x="0" y="0" width="420" height="100%">
 						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
 							<p:PBattleLoading id="p_battleLoading" valueChanged="updateValue(event)"/>
@@ -143,7 +159,7 @@
 						</s:VGroup>
 					</s:Scroller>
 				</s:NavigatorContent>
-				<s:NavigatorContent label="Статистика по Tab" width="100%" height="100%" id="pgStatisticForm">
+				<s:NavigatorContent label="{_('StatisticForm')}" width="100%" height="100%" id="pgStatisticForm">
 					<s:Scroller x="0" y="0" width="420" height="100%">
 						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
 							<p:PStatisticForm id="p_statisticForm" valueChanged="updateValue(event)"/>
@@ -152,7 +168,7 @@
 						</s:VGroup>
 					</s:Scroller>
 				</s:NavigatorContent>
-				<s:NavigatorContent label="Панели игроков (&quot;Уши&quot;)" width="100%" height="100%" id="pgPlayersPanel">
+				<s:NavigatorContent label="{_('PlayersPanel')}" width="100%" height="100%" id="pgPlayersPanel">
 					<s:Scroller x="0" y="0" width="420" height="100%">
 						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
 							<p:PPlayersPanel id="p_playersPanel" valueChanged="updateValue(event)"/>
@@ -163,58 +179,58 @@
 						</s:VGroup>
 					</s:Scroller>
 				</s:NavigatorContent>
-				<s:NavigatorContent label="Цвета" width="100%" height="100%" id="pgColors">
+				<s:NavigatorContent label="{_('colorsPage')}" width="100%" height="100%" id="pgColors">
 						<mx:Accordion width="420" height="100%">
-							<s:NavigatorContent label="Системные цвета" width="100%" height="100%">
+							<s:NavigatorContent label="{_('SystemColors')}" width="100%" height="100%">
 								<p:PSystemColors id="p_systemColors" valueChanged="updateValue(event)"/>
 							</s:NavigatorContent>
-							<s:NavigatorContent label="Динамический цвет по оставшемуся здоровью" width="100%" height="100%">
+							<s:NavigatorContent label="{_('DynamicColorByHealthAmount')}" width="100%" height="100%">
 								<p:PDynamicValues id="p_colors_hp" config="colors.hp" minimum="0" maximum="3000" editorClass="DynamicColorEdit" valueChanged="updateValue(event)"/>
 							</s:NavigatorContent>
-							<s:NavigatorContent label="Динамический цвет по проценту оставшегося здоровья" width="100%" height="100%">
+							<s:NavigatorContent label="{_('DynamicColorByHealthRatio')}" width="100%" height="100%">
 								<p:PDynamicValues id="p_colors_hp_ratio" config="colors.hp_ratio" minimum="0" maximum="101" editorClass="DynamicColorEdit" valueChanged="updateValue(event)"/>
 							</s:NavigatorContent>
-							<s:NavigatorContent label="Динамический цвет по эффективности (только в xvm-full)" width="100%" height="100%">
+							<s:NavigatorContent label="{_('DynamicColorByEfficiency')}" width="100%" height="100%">
 								<p:PDynamicValues id="p_colors_eff" config="colors.eff" minimum="0" maximum="3000" editorClass="DynamicColorEdit" valueChanged="updateValue(event)"/>
 							</s:NavigatorContent>
-							<s:NavigatorContent label="Динамический цвет по проценту побед (только в xvm-full)" width="100%" height="100%">
+							<s:NavigatorContent label="{_('DynamicColorByWinRate')}" width="100%" height="100%">
 								<p:PDynamicValues id="p_colors_rating" config="colors.rating" minimum="0" maximum="101" editorClass="DynamicColorEdit" valueChanged="updateValue(event)"/>
 							</s:NavigatorContent>
-							<s:NavigatorContent label="Динамический цвет по количеству кило-боев (только в xvm-full)" width="100%" height="100%">
+							<s:NavigatorContent label="{_('DynamicColorByKiloBattles')}" width="100%" height="100%">
 								<p:PDynamicValues id="p_colors_kb" config="colors.kb" minimum="0" maximum="100" editorClass="DynamicColorEdit" valueChanged="updateValue(event)"/>
 							</s:NavigatorContent>
 						</mx:Accordion>
 				</s:NavigatorContent>
-				<s:NavigatorContent label="Прозрачность" width="100%" height="100%" id="pgTransparency">
+				<s:NavigatorContent label="{_('transparencyPage')}" width="100%" height="100%" id="pgTransparency">
 					<mx:Accordion width="420" height="100%">
-						<s:NavigatorContent label="Динамическая прозрачность по оставшемуся здоровью" width="100%" height="100%">
+						<s:NavigatorContent label="{_('DynamicTransparencyByHealthAmount')}" width="100%" height="100%">
 							<p:PDynamicValues id="p_alpha_hp" config="alpha.hp" minimum="0" maximum="3000" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)"/>
 						</s:NavigatorContent>
-						<s:NavigatorContent label="Динамическая прозрачность по проценту оставшегося здоровья" width="100%" height="100%">
+						<s:NavigatorContent label="{_('DynamicTransparencyByHealthRatio')}" width="100%" height="100%">
 							<p:PDynamicValues id="p_alpha_hp_ratio" config="alpha.hp_ratio" minimum="0" maximum="101" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)"/>
 						</s:NavigatorContent>
-						<s:NavigatorContent label="Динамическая прозрачность по эффективности (только в xvm-full)" width="100%" height="100%">
+						<s:NavigatorContent label="{_('DynamicTransparencyByEfficiency')}" width="100%" height="100%">
 							<p:PDynamicValues id="p_alpha_eff" config="alpha.eff" minimum="0" maximum="3000" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)"/>
 						</s:NavigatorContent>
-						<s:NavigatorContent label="Динамическая прозрачность по проценту побед (только в xvm-full)" width="100%" height="100%">
+						<s:NavigatorContent label="{_('DynamicTransparencyByWinRate')}" width="100%" height="100%">
 							<p:PDynamicValues id="p_alpha_rating" config="alpha.rating" minimum="0" maximum="101" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)"/>
 						</s:NavigatorContent>
-						<s:NavigatorContent label="Динамическая прозрачность по количеству кило-боев (xvm-full)" width="100%" height="100%">
+						<s:NavigatorContent label="{_('DynamicTransparencyByKiloBattles')}" width="100%" height="100%">
 							<p:PDynamicValues id="p_alpha_kb" config="alpha.kb" minimum="0" maximum="100" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)"/>
 						</s:NavigatorContent>
 					</mx:Accordion>
 				</s:NavigatorContent>
-				<s:NavigatorContent label="Наборы иконок" width="100%" height="100%" id="pgIconset">
+				<s:NavigatorContent label="{_('iconsetPage')}" width="100%" height="100%" id="pgIconset">
 					<s:Scroller x="0" y="0" width="420" height="100%">
 						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
 							<p:PIconSet id="p_iconSet" valueChanged="updateValue(event)"/>
 						</s:VGroup>
 					</s:Scroller>
 				</s:NavigatorContent>
-				<s:NavigatorContent label="Игроки/кланы" width="100%" height="100%" id="pgPlayers">
+				<s:NavigatorContent label="{_('claniconPage')}" width="100%" height="100%" id="pgPlayers">
 					<s:Scroller x="0" y="0" width="420" height="100%">
 						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-							<s:Panel width="100%" height="100%" title="Иконки игроков/кланов">
+							<s:Panel width="100%" height="100%" title="{_('PlayersClansIcons')}">
 								<p:PDynamicValues id="p_players" config="players" editorClass="DynamicPlayersEdit" valueChanged="updateValue(event)"/>
 							</s:Panel>
 						</s:VGroup>

@@ -9,10 +9,6 @@ import utils.OTMConfigConverter;
 import utils.PatchedXMLDecoder;
 import utils.Utils;
 
-private static const FILE_TYPES:Array =	[
-	new FileFilter("Файл конфигурации XVM, OTM (*.xvmconf; *.xml)", "*.xvmconf; *.xml")
-];
-
 private var fr:FileReference;
 private var lastFileName:String;
 
@@ -23,7 +19,7 @@ private function LoadConfig():void
 	fr = new FileReference();
 	fr.addEventListener(Event.SELECT, onFileLoadSelect);
 	fr.addEventListener(Event.CANCEL,onCancelLoad);
-	fr.browse(FILE_TYPES);
+	fr.browse([ new FileFilter(_("FileFilterText"), "*.xvmconf; *.xml") ]);
 }
 
 private function onFileLoadSelect(e:Event):void
@@ -58,7 +54,7 @@ private function ParseConfigXml(xml:*):void
 		var config:* = OTMConfigConverter.convert(xml);
 		Config.s_config = Config.MergeConfigs(Config.FixConfig(config), DefaultConfig.config);
 		Config.TuneupConfig();
-		debug("Конфигурация загружена.");
+		debug(_("ConfigurationLoaded"));
 		//debug(JSON.stringify(Config.s_config));
 	}
 	catch (ex:Error)
@@ -76,7 +72,7 @@ private function ParseConfigJson(str:String):void
 		var config:* = JSON.parse(str);
 		Config.s_config = Config.MergeConfigs(Config.FixConfig(config), DefaultConfig.config);
 		Config.TuneupConfig();
-		debug("Конфигурация загружена.");
+		debug(_("ConfigurationLoaded"));
 		//debug(JSON.stringify(Config.s_config));
 	}
 	catch (ex:Error)
@@ -88,7 +84,7 @@ private function ParseConfigJson(str:String):void
 
 private function onLoadError(e:IOErrorEvent):void
 {
-	debug("Ошибка загрузки файла: " + e.text);
+	debug(_("LoadFileError") + ": " + e.text);
 }
 
 // SAVE
@@ -105,7 +101,7 @@ private function SaveConfig():void
 
 private function onFileSave(e:Event):void
 {
-	debug("Конфигурация сохранена.");
+	debug(_("ConfigurationSaved"));
 	fr = null;
 }
 
@@ -116,6 +112,6 @@ private function onCancelSave(e:Event):void
 
 private function onSaveError(e:IOErrorEvent):void
 {
-	debug("Ошибка сохранения файла: " + e.text);
+	debug(_("SaveFileError") + ": " + e.text);
 	fr = null;
 }

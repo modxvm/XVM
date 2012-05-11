@@ -8,11 +8,11 @@
 	<fx:Script>
 		<![CDATA[
 			import flash.display.Loader;
-			
+
 			import mx.controls.SWFLoader;
 			import mx.events.FlexEvent;
 			import mx.events.ListEvent;
-	
+
 			[Embed(source="images/bg/hills-1.jpg")]
 			private static var IMG_hills1 : Class;
 			[Embed(source="images/bg/hills-2.jpg")]
@@ -31,10 +31,10 @@
 			private static var IMG_desert2 : Class;
 			[Embed(source="images/bg/desert-3.jpg")]
 			private static var IMG_desert3 : Class;
-	
+
 			//[Embed(source="../assets/gfxfontlib.swf")]
 			//private static var SWF_gfxfontlib : Class;
-			
+
 			protected function onCreationComplete(event:FlexEvent):void
 			{
 				/*loadSWF("battle.swf");
@@ -47,10 +47,10 @@
 			private function loadSWF(url:String):void
 			{
 				var loader:SWFLoader = new SWFLoader();
-				loader.addEventListener(Event.COMPLETE, loadSWFComplete); 
+				loader.addEventListener(Event.COMPLETE, loadSWFComplete);
 				loader.load(url);
 			}
-			
+
 			private function loadSWFComplete( event:Event ):void
 			{
 				var loader:SWFLoader = event.target as SWFLoader;
@@ -62,10 +62,10 @@
 			{
 				if (event)
 					event.stopPropagation();
-				
+
 				dispatchEvent(new Event(Event.CHANGE));
 			}
-	
+
 			protected function cbBG_changeHandler(event:ListEvent):void
 			{
 				switch (cbBG.selectedIndex + 1)
@@ -104,6 +104,7 @@
 	</fx:Script>
 	<fx:Metadata>
 		[Event(name="change", type="flash.events.Event")]
+		[ResourceBundle("components")]
 	</fx:Metadata>
 	<mx:ViewStack width="100%" height="100%" id="vsPreview" creationPolicy="all">
 		<s:NavigatorContent width="100%" height="100%" id="preview">
@@ -112,18 +113,18 @@
 			</mx:Canvas>
 			<s:BorderContainer y="400" width="100%" height="32" borderVisible="false">
 				<s:HGroup top="0" left="0" bottom="0" width="100%" gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="4">
-					<s:Label text="Фон" height="24" verticalAlign="middle"/>
+					<s:Label text="{resourceManager.getString('components', 'Background')}"/>
 					<mx:ComboBox id="cbBG" width="150" selectedIndex="0" editable="false" change="cbBG_changeHandler(event)" creationComplete="cbBG_changeHandler(new ListEvent(''))">
 						<mx:ArrayCollection>
-							<fx:String>Рудники 1</fx:String>
-							<fx:String>Рудники 2</fx:String>
-							<fx:String>Рудники 3</fx:String>
-							<fx:String>Заполярье 1</fx:String>
-							<fx:String>Заполярье 2</fx:String>
-							<fx:String>Заполярье 3</fx:String>
-							<fx:String>Песчаная река 1</fx:String>
-							<fx:String>Песчаная река 2</fx:String>
-							<fx:String>Песчаная река 3</fx:String>
+							<fx:String>{resourceManager.getString('components', 'Hills')} 1</fx:String>
+							<fx:String>{resourceManager.getString('components', 'Hills')} 2</fx:String>
+							<fx:String>{resourceManager.getString('components', 'Hills')} 3</fx:String>
+							<fx:String>{resourceManager.getString('components', 'Mannerheim')} 1</fx:String>
+							<fx:String>{resourceManager.getString('components', 'Mannerheim')} 2</fx:String>
+							<fx:String>{resourceManager.getString('components', 'Mannerheim')} 3</fx:String>
+							<fx:String>{resourceManager.getString('components', 'Desert')} 1</fx:String>
+							<fx:String>{resourceManager.getString('components', 'Desert')} 2</fx:String>
+							<fx:String>{resourceManager.getString('components', 'Desert')} 3</fx:String>
 						</mx:ArrayCollection>
 					</mx:ComboBox>
 				</s:HGroup>

@@ -47,6 +47,5 @@
 		[Event(name="change", type="flash.events.Event")]
 	</fx:Metadata>
 	<fx:Declarations>
-		<!-- Разместить невизуальные элементы (например, службы или объекты значений) -->
 	</fx:Declarations>
 </mx:ComboBox>

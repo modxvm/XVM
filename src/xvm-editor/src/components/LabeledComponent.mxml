@@ -6,7 +6,7 @@
 	    width="100%" height="22"
 	    borderVisible="false"
 	    backgroundColor="{conflict ? 0xFFDDDD : 0xFFFFFF}"
-	    toolTip="{conflict ? 'Конфликт значений' : ''}">
+	    toolTip="{conflict ? resourceManager.getString('components', 'ValuesConflict') : ''}">
 	<fx:Script>
 		// label
 		protected var _label: String = "";
@@ -66,8 +66,8 @@
 		public function set minimum(v: Number): void
 		{
 			_minimum = v;
-		}
 
+		}
 		// maximum
 		protected var _maximum: Number = 10;
 		[Bindable]
@@ -103,5 +103,6 @@
 	</fx:Script>
 	<fx:Metadata>
 		[Event(name="change", type="flash.events.Event")]
+		[ResourceBundle("components")]
 	</fx:Metadata>
 </s:BorderContainer>

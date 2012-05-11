@@ -38,7 +38,6 @@
 				cp.selectedColor = _value;
 				cp.alpha = isNaN(_value) ? 0.5 : 1;
 				sc.alpha = isNaN(_value) ? 0.8 : 0.2;
-				sc.toolTip = isNaN(_value) ? "Системный цвет" : "Использовать системный цвет";
 			}
 
 			protected function onChange(event:Event):void
@@ -61,6 +60,7 @@
 	</fx:Script>
 	<fx:Metadata>
 		[Event(name="change", type="flash.events.Event")]
+		[ResourceBundle("components")]
 	</fx:Metadata>
 	<fx:Declarations>
 		<validators:TextColorValidator id="tv" required="{!allowSystemColors}" source="{ti}" property="text" valid="onChange(event)"/>
@@ -68,5 +68,5 @@
 	<s:TextInput id="ti" width="100%" maxChars="7" restrict="#0-9A-Fa-f" change="ti.validateNow()"/>
 	<mx:ColorPicker id="cp" change="onChange(event)" useHandCursor="true" buttonMode="true"/>
 	<mx:Spacer width="{allowSystemColors ? 5 : 0}" visible="{allowSystemColors}"/>
-	<mx:Image id="sc" width="{allowSystemColors ? 16 : 0}" height="16" visible="{allowSystemColors}" source="@Embed(source='images/syscolors.png')" useHandCursor="true" buttonMode="true" click="onChange(event)"/>
+	<mx:Image id="sc" width="{allowSystemColors ? 16 : 0}" height="16" visible="{allowSystemColors}" source="@Embed(source='images/syscolors.png')" toolTip="{value ? resourceManager.getString('components', 'SystemColor') : resourceManager.getString('components', 'UseSystemColor')}" useHandCursor="true" buttonMode="true" click="onChange(event)"/>
 </s:HGroup>
