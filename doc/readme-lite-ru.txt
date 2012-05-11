@@ -19,8 +19,9 @@
     * Рейтинг игроков в игре (только в пакете xvm-full)
 
   Сайт проекта: http://code.google.com/p/wot-xvm/
-  Поддержка:    http://forum.worldoftanks.ru/index.php?/topic/336171-0/
+  Поддержка:    http://forum.bulychev.net/viewforum.php?f=6
   FAQ:          http://www.koreanrandom.com/forum/topic/1381-faq-otveti-na-chastie-voprosi-po-xvm/
+  Редактор:     https://sites.google.com/site/sirmaxwiki/xvm-editor
 
 -----------------------------------------------------------
 2. УСТАНОВКА
@@ -35,7 +36,7 @@
        \res_mods\<game version>\gui\flash\XVM.xvmconf
 
      Можно скопировать готовый из папки \xvm-doc\samples\, или воспользоваться
-     онлайн-редактором: https://sites.google.com/site/sirmaxwiki/xvm-editor (еще в разработке)
+     онлайн-редактором: https://sites.google.com/site/sirmaxwiki/xvm-editor
 
      Старые конфигурационные файлы OTMData.xml тоже поддерживаются, вы можете
      их использовать если вам не нужны новые возможности.
@@ -63,7 +64,7 @@
     \res_mods\<game version>\gui\flash\XVM.xvmconf
   Можно скопировать готовый конфиг из папки \xvm-doc\samples\
   Можно создать новый конфиг или изменить существующий с помощью онлайн-редактора:
-    https://sites.google.com/site/sirmaxwiki/xvm-editor (еще в разработке)
+    https://sites.google.com/site/sirmaxwiki/xvm-editor
 
   Все возможные параметры конфига можно посмотреть в конфиге с русскими комментариями,
   который находится в папке документации в архиве мода:

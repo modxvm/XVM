@@ -20,6 +20,7 @@
   Project site:  http://code.google.com/p/wot-xvm/
   Support:       http://forum.bulychev.net/viewforum.php?f=7
   FAQ (Russian): http://www.koreanrandom.com/forum/topic/1381-faq-otveti-na-chastie-voprosi-po-xvm/
+  Сonfig editor: https://sites.google.com/site/sirmaxwiki/xvm-editor
 
 -----------------------------------------------------------
 2. INSTALL
@@ -34,7 +35,7 @@
        \res_mods\<game version>\gui\flash\XVM.xvmconf
 
      You can select ready config file from \xvm-doc\samples\ directory, or use
-     online editor: https://sites.google.com/site/sirmaxwiki/xvm-editor (not ready yet)
+     online editor: https://sites.google.com/site/sirmaxwiki/xvm-editor
 
      Old OTMData.xml configs are also supported in legacy mode, you can use if if
      you do not need new features.
@@ -63,7 +64,7 @@
     \res_mods\<game version>\gui\flash\OTMData.xml (in legacy mode)
   You can select ready config file from \xvm-doc\samples\ directory
   You can create new config or edit existing using online editor:
-    https://sites.google.com/site/sirmaxwiki/xvm-editor (not ready yet)
+    https://sites.google.com/site/sirmaxwiki/xvm-editor
 
   All possible config options you can see in this file:
     \xvm-doc\samples\Lite config EN\XVM.xvmconf

@@ -4,6 +4,8 @@
   * wot-xvm-proxy: added compression of proxy servers requests
   * added top 100 icons for RU clans (http://ivanerr.ru/lt/showclansrating/)
   * default config reworked
+  * config editor: https://sites.google.com/site/sirmaxwiki/xvm-editor
+    (not all is ready, but can be used)
 
 XVM-2.2:
   * adaptation to WoT 0.7.3
