@@ -298,27 +298,15 @@ class wot.utils.DefaultConfig
     return a;
   }
 
-  public static function get shadow_60(): Object
+  public static function get shadow_100(): Object
   {
     return {
       alpha: 100,
       color: "0x000000",
       angle: 45,
-      strength: 60,
       distance: 1,
-      size: 1
-    }
-  }
-
-  public static function get shadow_120(): Object
-  {
-    return {
-      alpha: 100,
-      color: "0x000000",
-      angle: 45,
-      strength: 120,
-      distance: 1,
-      size: 1
+      size: 2,
+      strength: 100
     }
   }
 
@@ -328,9 +316,21 @@ class wot.utils.DefaultConfig
       alpha: 100,
       color: "0x000000",
       angle: 45,
-      strength: 200,
       distance: 1,
-      size: 1
+      size: 2,
+      strength: 200
+    }
+  }
+
+  public static function get shadow_250(): Object
+  {
+    return {
+      alpha: 100,
+      color: "0x000000",
+      angle: 45,
+      distance: 1,
+      size: 2,
+      strength: 250
     }
   }
 
@@ -396,7 +396,7 @@ class wot.utils.DefaultConfig
       maxScale: 100,
       scaleX: 0,
       scaleY: 16,
-      shadow: shadow_120
+      shadow: shadow_250
     }
   }
 
@@ -411,7 +411,7 @@ class wot.utils.DefaultConfig
       color: null,
       lcolor: null,
       width: 80,
-      height: 11,
+      height: 12,
       border: {
         alpha: 30,
         color: "0x000000",
@@ -438,7 +438,7 @@ class wot.utils.DefaultConfig
       color: null,
       lcolor: null,
       width: 80,
-      height: 11,
+      height: 12,
       border: {
         alpha: 30,
         color: "0x000000",
@@ -466,10 +466,10 @@ class wot.utils.DefaultConfig
       alpha: 100,
       color: null,
       font: font_14b,
-      shadow: shadow_200,
+      shadow: shadow_250,
       speed: 2,
       maxRange: 40,
-      damageMessage: "-{{dmg}}",
+      damageMessage: "{{dmg}}",
       blowupMessage: "Blow-up!"
     }
   }
@@ -524,7 +524,7 @@ class wot.utils.DefaultConfig
       alpha: 100,
       color: null,
       font: font_13,
-      shadow: shadow_120,
+      shadow: shadow_200,
       format: "{{nick}}"
     }
   }
@@ -539,7 +539,7 @@ class wot.utils.DefaultConfig
       alpha: 80,
       color: null,
       font: font_13,
-      shadow: shadow_120,
+      shadow: shadow_200,
       format: "{{nick}}"
     }
   }
@@ -555,7 +555,7 @@ class wot.utils.DefaultConfig
       alpha: 100,
       color: null,
       font: font_13,
-      shadow: shadow_120,
+      shadow: shadow_200,
       format: "{{vehicle}}"
     }
   }
@@ -570,7 +570,7 @@ class wot.utils.DefaultConfig
       alpha: 80,
       color: null,
       font: font_13,
-      shadow: shadow_120,
+      shadow: shadow_200,
       format: "{{vehicle}}"
     }
   }
@@ -586,7 +586,7 @@ class wot.utils.DefaultConfig
       alpha: 100,
       color: "0xFFFFFF",
       font: font_11b,
-      shadow: shadow_60,
+      shadow: shadow_100,
       format: "{{hp}} / {{hp-max}}"
     }
   }
@@ -602,7 +602,7 @@ class wot.utils.DefaultConfig
       alpha: 100,
       color: "0xFFFFFF",
       font: font_11b,
-      shadow: shadow_60,
+      shadow: shadow_100,
       format: "{{hp-ratio}}%"
     }
   }
@@ -614,11 +614,11 @@ class wot.utils.DefaultConfig
       name: "Rating",
       visible: true,
       x: 0,
-      y: -50,
+      y: -46,
       alpha: 75,
       color: "{{c:eff}}",
       font: font_12b,
-      shadow: shadow_120,
+      shadow: shadow_200,
       format: "{{rating}}"
     }
   }
@@ -627,27 +627,34 @@ class wot.utils.DefaultConfig
   {
     return [
       { root: "../../../clanicons", folders: "RU,EU,NA,CT" },
-      { folder: "RU",     players: [
+      { folder: "RU", players: [
           { nick: "sirmax2",    icon: "XVM.png" },
           { nick: "0x01",       icon: "XVM.png" },
           { clan: "[WG]",       icon: "WG.png" },
           { clan: "[WG-A]",     icon: "WG.png" },
           { clan: "[WTMOD]",    icon: "WTMOD.png" },
           { clan: "[WGST]",     icon: "WGST.png" },
-          { clan: "[S_O_R",     icon: "sor.png" },
-          { clan: "[RED",       icon: "RED.png" },
-          { clan: "[TD42",      icon: "td42.png"},
-          { clan: "[BEES",      icon: "bees.png"},
-          { clan: "[HIVE",      icon: "bees.png"},
-          { clan: "[CAIM",      icon: "caim.png"},
-          { clan: "[DEFS",      icon: "defs.png"},
+          { clan: "[S_O_R]",    icon: "sor.png" },
+          { clan: "[TD42]",     icon: "td42.png"},
+          { clan: "[TD42A]",    icon: "td42.png"},
+          { clan: "[TD42B]",    icon: "td42.png"},
+          { clan: "[TD42R]",    icon: "td42.png"},
+          { clan: "[BEES]",     icon: "bees.png"},
+          { clan: "[HIVE]",     icon: "bees.png"},
+          { clan: "[LAIR]",     icon: "bees.png"},
+          { clan: "[CAIM]",     icon: "caim.png"},
+          { clan: "[CAIM2]",    icon: "caim.png"},
+          { clan: "[DEFS]",     icon: "defs.png"},
+          { clan: "[DEFS2]",    icon: "defs2.png"},
           { clan: "[ENOT",      icon: "enot.png" },
           { clan: "[FRS",       icon: "frs.png" },
           { clan: "[G_O_W]",    icon: "gow.png" },
           { clan: "[_GOW_]",    icon: "gow.png" },
           { clan: "[G_0_W]",    icon: "gow.png" },
           { clan: "[G-O-W]",    icon: "gow.png" },
-          { clan: "[GREE",      icon: "green.png" },
+          { clan: "[GREEN]",    icon: "green.png" },
+          { clan: "[GREEH]",    icon: "green.png" },
+          { clan: "[GRN-R]",    icon: "GRN-R.png" },
           { clan: "[H4RD",      icon: "h4rd.png" },
           { clan: "[IRONT",     icon: "iron.png" },
           { clan: "[IR0NT",     icon: "iron.png" },
@@ -657,7 +664,11 @@ class wot.utils.DefaultConfig
           { clan: "[PZE",       icon: "pze.png" },
           { clan: "[RATTE",     icon: "ratte.png" },
           { clan: "[RKKA",      icon: "rkka.png" },
-          { clan: "[SB-",       icon: "sb.png" },
+          { clan: "[SB_F]",     icon: "SB_F.png" },
+          { clan: "[SB--K]",    icon: "SB--K.png" },
+          { clan: "[SB-E]",     icon: "SB-E.png" },
+          { clan: "[SB-H]",     icon: "SB-H.png" },
+          { clan: "[SB_K]",     icon: "SB_K.png" },
           { clan: "[STAL",      icon: "stal.png" },
           { clan: "[TAIP",      icon: "taip.png" },
           { clan: "[VES",       icon: "ves.png"},
@@ -666,12 +677,13 @@ class wot.utils.DefaultConfig
           { clan: "[NSTR]",     icon: "nstr.png" },
           { clan: "[DARK_",     icon: "da.png" },
           { clan: "[CRABS]",    icon: "crabs.png" },
-          { clan: "[AMIG",      icon: "amigo.png" },
+          { clan: "[AMIG0]",    icon: "amigo.png" },
           { clan: "[B-SKY]",    icon: "bsky.png" },
           { clan: "[_E_]",      icon: "e.png" },
-          { clan: "[CWOT]",     icon: "cwot.png" },
+          { clan: "[CWOT",      icon: "cwot.png" },
           { clan: "[BTR",       icon: "btr.png" },
           { clan: "[CHESS]",    icon: "chess.png" },
+          { clan: "[4S-B]",     icon: "4S-B.png" },
           { clan: "[URFO]",     icon: "urfo.png" },
           { clan: "[W_R]",      icon: "wr.png" },
           { clan: "[PEKET]",    icon: "reket.png" },
@@ -687,10 +699,37 @@ class wot.utils.DefaultConfig
           { clan: "[--S--]",    icon: "s.png" },
           { clan: "[TGD]",      icon: "tgd.png" },
           { clan: "[LA]",       icon: "la.png" },
+          { clan: "[RED]",      icon: "RED.png" },
+          { clan: "[RED-E]",    icon: "RED.png" },
+          { clan: "[RED-N]",    icon: "RED.png" },
+          { clan: "[RED-S]",    icon: "RED.png" },
+          { clan: "[RED-W]",    icon: "RED.png" },
+          { clan: "[RED-Z]",    icon: "RED.png" },
+          { clan: "[RED-A]",    icon: "RED.png" },
+          { clan: "[RED-L]",    icon: "RED.png" },
+          { clan: "[RED-Y]",    icon: "RED.png" },
+          { clan: "[RED-K]",    icon: "redk.png" },
+          { clan: "[RED_W]",    icon: "red-b.png" },
+          { clan: "[RED_A]",    icon: "aces.png" },
+          { clan: "[RED_K]",    icon: "RED.png" },
+          { clan: "[RED-J]",    icon: "RED.png" },
+          { clan: "[RED-F]",    icon: "red-b.png" },
+          { clan: "[RED]",      icon: "RED.png" },
+          { clan: "[RED-0]",    icon: "red-b.png" },
+          { clan: "[RED-U]",    icon: "RED.png" },
+          { clan: "[REDMG]",    icon: "RED.png" },
+          { clan: "[RED_M]",    icon: "red-b.png" },
+          { clan: "[RED-B]",    icon: "red-b.png" },
+          { clan: "[RED-Q]",    icon: "red-b.png" },
+          { clan: "[YKT]",      icon: "ykt.png" },
+          { clan: "[NOMAD]",    icon: "nomad.png" },
+          { clan: "[OOPS",      icon: "oops.png" },
+          { clan: "[GAD]",      icon: "gad.png" },
+          { clan: "[LJ",        icon: "lj.png" },
           { clan: "[1CLUB]",    icon: "fc.png" }
         ]
       },
-      { folder: "EU",     players: [
+      { folder: "EU", players: [
           { nick: "Yoyo117",    icon: "XVM.png" },
           { nick: "sirmax2",    icon: "XVM.png" },
           { clan: "[INC-A]",    icon: "inc-a.png" },
@@ -804,6 +843,7 @@ class wot.utils.DefaultConfig
         ]
       },
       { folder: "NA", players: [
+          { nick: "sirmax",     icon: "XVM.png" },
           { clan: "[WGA]",      icon: "WG.png" }
         ]
       },

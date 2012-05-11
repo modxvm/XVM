@@ -109,10 +109,10 @@
             "shadow": {                       //   Shadow options
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
-              "strength": 120,                //     Intensity
-              "size": 1,                      //     Size
               "angle": 45,                    //     Offset angle
-              "distance": 1                   //     Offset distance
+              "distance": 1,                  //     Offset distance
+              "size": 2,                      //     Size
+              "strength": 250                 //     Intensity
             }
           },
           "healthBar": {                      // Health indicator
@@ -123,7 +123,7 @@
             "color": null,                    //   Primary color (dynamic colors allowed, see readme-en.txt)
             "lcolor": null,                   //   Optional color (for the gradient)
             "width": 80,                      //   Width of health bar
-            "height": 11,                     //   Height of health bar
+            "height": 12,                     //   Height of health bar
             "border": {                       //   Options for substrate and border
               "alpha": 30,                    //     Opacity
               "color": "0x000000",            //     Color
@@ -153,14 +153,14 @@
             "shadow": {                       //   Shadow options
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
-              "strength": 200,                //     Intensity
-              "size": 1,                      //     Size
               "angle": 45,                    //     Offset angle
-              "distance": 1                   //     Offset distance
+              "distance": 1,                  //     Offset distance
+              "size": 2,                      //     Size
+              "strength": 250                 //     Intensity
             },
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
-            "damageMessage": "-{{dmg}}",      //   Text for normal damage (see description of macros in the readme-en.txt)
+            "damageMessage": "{{dmg}}",       //   Text for normal damage (see description of macros in the readme-en.txt)
             "blowupMessage": "Blow-up!"       //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
           "contourIcon": {                    // Vehicle icon
@@ -201,10 +201,10 @@
               "shadow": {                     //   Shadow options
                 "alpha": 100,                 //     Opacity
                 "color": "0x000000",          //     Color
-                "strength": 120,              //     Intensity
-                "size": 1,                    //     Size
                 "angle": 45,                  //     Offset angle
-                "distance": 1                 //     Offset distance
+                "distance": 1,                //     Offset distance
+                "size": 2,                    //     Size
+                "strength": 200               //     Intensity
               },
               "format": "{{vehicle}}"         // Text format (see description of macros in the readme-en.txt)
             },
@@ -224,10 +224,10 @@
               "shadow": {                     //   Shadow options
                 "alpha": 100,                 //     Opacity
                 "color": "0x000000",          //     Color
-                "strength": 60,               //     Intensity
-                "size": 1,                    //     Size
                 "angle": 45,                  //     Offset angle
-                "distance": 1                 //     Offset distance
+                "distance": 1,                //     Offset distance
+                "size": 2,                    //     Size
+                "strength": 100               //     Intensity
               },
               "format": "{{hp}} / {{hp-max}}" // Text format (see description of macros in the readme-en.txt)
             }
@@ -247,10 +247,10 @@
             "shadow": {                       //   Shadow options
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
-              "strength": 120,                //     Intensity
-              "size": 1,                      //     Size
               "angle": 45,                    //     Offset angle
-              "distance": 1                   //     Offset distance
+              "distance": 1,                  //     Offset distance
+              "size": 2,                      //     Size
+              "strength": 250                 //     Intensity
             }
           },
           "healthBar": {                      // Health indicator
@@ -261,7 +261,7 @@
             "color": null,                    //   Primary color (dynamic colors allowed, see readme-en.txt)
             "lcolor": null,                   //   Optional color (for the gradient)
             "width": 80,                      //   Width of health bar
-            "height": 11,                     //   Height of health bar
+            "height": 12,                     //   Height of health bar
             "border": {                       //   Options for substrate and border
               "alpha": 30,                    //     Opacity
               "color": "0x000000",            //     Color
@@ -291,14 +291,14 @@
             "shadow": {                       //   Shadow options
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
-              "strength": 200,                //     Intensity
-              "size": 1,                      //     Size
               "angle": 45,                    //     Offset angle
-              "distance": 1                   //     Offset distance
+              "distance": 1,                  //     Offset distance
+              "size": 2,                      //     Size
+              "strength": 250                 //     Intensity
             },
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
-            "damageMessage": "-{{dmg}}",      //   Text for normal damage (see description of macros in the readme-en.txt)
+            "damageMessage": "{{dmg}}",       //   Text for normal damage (see description of macros in the readme-en.txt)
             "blowupMessage": "Blow-up!"       //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
           "contourIcon": {                    // Vehicle icon
@@ -339,10 +339,10 @@
               "shadow": {                     //   Shadow options
                 "alpha": 100,                 //     Opacity
                 "color": "0x000000",          //     Color
-                "strength": 120,              //     Intensity
-                "size": 1,                    //     Size
                 "angle": 45,                  //     Offset angle
-                "distance": 1                 //     Offset distance
+                "distance": 1,                //     Offset distance
+                "size": 2,                    //     Size
+                "strength": 200               //     Intensity
               },
               "format": "{{nick}}"            // Text format (see description of macros in the readme-en.txt)
             },
@@ -362,10 +362,10 @@
               "shadow": {                     //   Shadow options
                 "alpha": 100,                 //     Opacity
                 "color": "0x000000",          //     Color
-                "strength": 60,               //     Intensity
-                "size": 1,                    //     Size
                 "angle": 45,                  //     Offset angle
-                "distance": 1                 //     Offset distance
+                "distance": 1,                //     Offset distance
+                "size": 2,                    //     Size
+                "strength": 100               //     Intensity
               },
               // Percent symbol - \u0025
               "format": "{{hp-ratio}}\u0025"  // Text format (see description of macros in the readme-en.txt)
@@ -389,10 +389,10 @@
             "shadow": {                       //   Shadow options
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
-              "strength": 120,                //     Intensity
-              "size": 1,                      //     Size
               "angle": 45,                    //     Offset angle
-              "distance": 1                   //     Offset distance
+              "distance": 1,                  //     Offset distance
+              "size": 2,                      //     Size
+              "strength": 250                 //     Intensity
             }
           },
           "healthBar": {                      // Health indicator
@@ -403,7 +403,7 @@
             "color": null,                    //   Primary color (dynamic colors allowed, see readme-en.txt)
             "lcolor": null,                   //   Optional color (for the gradient)
             "width": 80,                      //   Width of health bar
-            "height": 11,                     //   Height of health bar
+            "height": 12,                     //   Height of health bar
             "border": {                       //   Options for substrate and border
               "alpha": 30,                    //     Opacity
               "color": "0x000000",            //     Color
@@ -433,14 +433,14 @@
             "shadow": {                       //   Shadow options
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
-              "strength": 200,                //     Intensity
-              "size": 1,                      //     Size
               "angle": 45,                    //     Offset angle
-              "distance": 1                   //     Offset distance
+              "distance": 1,                  //     Offset distance
+              "size": 2,                      //     Size
+              "strength": 250                 //     Intensity
             },
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
-            "damageMessage": "-{{dmg}}",      //   Text for normal damage (see description of macros in the readme-en.txt)
+            "damageMessage": "{{dmg}}",       //   Text for normal damage (see description of macros in the readme-en.txt)
             "blowupMessage": "Blow-up!"       //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
           "contourIcon": {                    // Vehicle icon
@@ -480,10 +480,10 @@
             "shadow": {                       //   Shadow options
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
-              "strength": 120,                //     Intensity
-              "size": 1,                      //     Size
               "angle": 45,                    //     Offset angle
-              "distance": 1                   //     Offset distance
+              "distance": 1,                  //     Offset distance
+              "size": 2,                      //     Size
+              "strength": 250                 //     Intensity
             }
           },
           "healthBar": {                      // Health indicator
@@ -494,7 +494,7 @@
             "color": null,                    //   Primary color (dynamic colors allowed, see readme-en.txt)
             "lcolor": null,                   //   Optional color (for the gradient)
             "width": 80,                      //   Width of health bar
-            "height": 11,                     //   Height of health bar
+            "height": 12,                     //   Height of health bar
             "border": {                       //   Options for substrate and border
               "alpha": 30,                    //     Opacity
               "color": "0x000000",            //     Color
@@ -524,14 +524,14 @@
             "shadow": {                       //   Shadow options
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
-              "strength": 200,                //     Intensity
-              "size": 1,                      //     Size
               "angle": 45,                    //     Offset angle
-              "distance": 1                   //     Offset distance
+              "distance": 1,                  //     Offset distance
+              "size": 2,                      //     Size
+              "strength": 250                 //     Intensity
             },
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
-            "damageMessage": "-{{dmg}}",      //   Text for normal damage (see description of macros in the readme-en.txt)
+            "damageMessage": "{{dmg}}",       //   Text for normal damage (see description of macros in the readme-en.txt)
             "blowupMessage": "Blow-up!"       //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
           "contourIcon": {                    // Vehicle icon
@@ -572,10 +572,10 @@
               "shadow": {                     //   Shadow options
                 "alpha": 100,                 //     Opacity
                 "color": "0x000000",          //     Color
-                "strength": 120,              //     Intensity
-                "size": 1,                    //     Size
                 "angle": 45,                  //     Offset angle
-                "distance": 1                 //     Offset distance
+                "distance": 1,                //     Offset distance
+                "size": 2,                    //     Size
+                "strength": 200               //     Intensity
               },
               "format": "{{nick}}"            // Text format (see description of macros in the readme-en.txt)
             },
@@ -595,10 +595,10 @@
               "shadow": {                     //   Shadow options
                 "alpha": 100,                 //     Opacity
                 "color": "0x000000",          //     Color
-                "strength": 120,              //     Intensity
-                "size": 1,                    //     Size
                 "angle": 45,                  //     Offset angle
-                "distance": 1                 //     Offset distance
+                "distance": 1,                //     Offset distance
+                "size": 2,                    //     Size
+                "strength": 200               //     Intensity
               },
               "format": "{{vehicle}}"         // Text format (see description of macros in the readme-en.txt)
             }
@@ -624,10 +624,10 @@
             "shadow": {                       //   Shadow options
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
-              "strength": 120,                //     Intensity
-              "size": 1,                      //     Size
               "angle": 45,                    //     Offset angle
-              "distance": 1                   //     Offset distance
+              "distance": 1,                  //     Offset distance
+              "size": 2,                      //     Size
+              "strength": 250                 //     Intensity
             }
           },
           "healthBar": {                      // Health indicator
@@ -638,7 +638,7 @@
             "color": null,                    //   Primary color (dynamic colors allowed, see readme-en.txt)
             "lcolor": null,                   //   Optional color (for the gradient)
             "width": 80,                      //   Width of health bar
-            "height": 11,                     //   Height of health bar
+            "height": 12,                     //   Height of health bar
             "border": {                       //   Options for substrate and border
               "alpha": 30,                    //     Opacity
               "color": "0x000000",            //     Color
@@ -668,14 +668,14 @@
             "shadow": {                       //   Shadow options
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
-              "strength": 200,                //     Intensity
-              "size": 1,                      //     Size
               "angle": 45,                    //     Offset angle
-              "distance": 1                   //     Offset distance
+              "distance": 1,                  //     Offset distance
+              "size": 2,                      //     Size
+              "strength": 250                 //     Intensity
             },
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
-            "damageMessage": "-{{dmg}}",      //   Text for normal damage (see description of macros in the readme-en.txt)
+            "damageMessage": "{{dmg}}",       //   Text for normal damage (see description of macros in the readme-en.txt)
             "blowupMessage": "Blow-up!"       //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
           "contourIcon": {                    // Vehicle icon
@@ -716,10 +716,10 @@
               "shadow": {                     //   Shadow options
                 "alpha": 100,                 //     Opacity
                 "color": "0x000000",          //     Color
-                "strength": 120,              //     Intensity
-                "size": 1,                    //     Size
                 "angle": 45,                  //     Offset angle
-                "distance": 1                 //     Offset distance
+                "distance": 1,                //     Offset distance
+                "size": 2,                    //     Size
+                "strength": 200               //     Intensity
               },
               "format": "{{vehicle}}"         // Text format (see description of macros in the readme-en.txt)
             },
@@ -739,10 +739,10 @@
               "shadow": {                     //   Shadow options
                 "alpha": 100,                 //     Opacity
                 "color": "0x000000",          //     Color
-                "strength": 60,               //     Intensity
-                "size": 1,                    //     Size
                 "angle": 45,                  //     Offset angle
-                "distance": 1                 //     Offset distance
+                "distance": 1,                //     Offset distance
+                "size": 2,                    //     Size
+                "strength": 100               //     Intensity
               },
               "format": "{{hp}} / {{hp-max}}" // Text format (see description of macros in the readme-en.txt)
             }
@@ -762,10 +762,10 @@
             "shadow": {                       //   Shadow options
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
-              "strength": 120,                //     Intensity
-              "size": 1,                      //     Size
               "angle": 45,                    //     Offset angle
-              "distance": 1                   //     Offset distance
+              "distance": 1,                  //     Offset distance
+              "size": 2,                      //     Size
+              "strength": 250                 //     Intensity
             }
           },
           "healthBar": {                      // Health indicator
@@ -776,7 +776,7 @@
             "color": null,                    //   Primary color (dynamic colors allowed, see readme-en.txt)
             "lcolor": null,                   //   Optional color (for the gradient)
             "width": 80,                      //   Width of health bar
-            "height": 11,                     //   Height of health bar
+            "height": 12,                     //   Height of health bar
             "border": {                       //   Options for substrate and border
               "alpha": 30,                    //     Opacity
               "color": "0x000000",            //     Color
@@ -806,14 +806,14 @@
             "shadow": {                       //   Shadow options
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
-              "strength": 200,                //     Intensity
-              "size": 1,                      //     Size
               "angle": 45,                    //     Offset angle
-              "distance": 1                   //     Offset distance
+              "distance": 1,                  //     Offset distance
+              "size": 2,                      //     Size
+              "strength": 250                 //     Intensity
             },
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
-            "damageMessage": "-{{dmg}}",      //   Text for normal damage (see description of macros in the readme-en.txt)
+            "damageMessage": "{{dmg}}",       //   Text for normal damage (see description of macros in the readme-en.txt)
             "blowupMessage": "Blow-up!"       //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
           "contourIcon": {                    // Vehicle icon
@@ -854,10 +854,10 @@
               "shadow": {                     //   Shadow options
                 "alpha": 100,                 //     Opacity
                 "color": "0x000000",          //     Color
-                "strength": 120,              //     Intensity
-                "size": 1,                    //     Size
                 "angle": 45,                  //     Offset angle
-                "distance": 1                 //     Offset distance
+                "distance": 1,                //     Offset distance
+                "size": 2,                    //     Size
+                "strength": 200               //     Intensity
               },
               "format": "{{nick}}"            // Text format (see description of macros in the readme-en.txt)
             },
@@ -878,9 +878,9 @@
                 "alpha": 100,                 //     Opacity
                 "color": "0x000000",          //     Color
                 "angle": 45,                  //     Offset angle
-                "strength": 60,               //     Intensity
                 "distance": 1,                //     Offset distance
-                "size": 1                     //     Size
+                "size": 2,                    //     Size
+                "strength": 100               //     Intensity
               },
               // Percent symbol - \u0025
               "format": "{{hp-ratio}}\u0025"  // Text format (see description of macros in the readme-en.txt)
@@ -904,10 +904,10 @@
             "shadow": {                       //   Shadow options
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
-              "strength": 120,                //     Intensity
-              "size": 1,                      //     Size
               "angle": 45,                    //     Offset angle
-              "distance": 1                   //     Offset distance
+              "distance": 1,                  //     Offset distance
+              "size": 2,                      //     Size
+              "strength": 250                 //     Intensity
             }
           },
           "healthBar": {                      // Health indicator
@@ -918,7 +918,7 @@
             "color": null,                    //   Primary color (dynamic colors allowed, see readme-en.txt)
             "lcolor": null,                   //   Optional color (for the gradient)
             "width": 80,                      //   Width of health bar
-            "height": 11,                     //   Height of health bar
+            "height": 12,                     //   Height of health bar
             "border": {                       //   Options for substrate and border
               "alpha": 30,                    //     Opacity
               "color": "0x000000",            //     Color
@@ -948,14 +948,14 @@
             "shadow": {                       //   Shadow options
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
-              "strength": 200,                //     Intensity
-              "size": 1,                      //     Size
               "angle": 45,                    //     Offset angle
-              "distance": 1                   //     Offset distance
+              "distance": 1,                  //     Offset distance
+              "size": 2,                      //     Size
+              "strength": 250                 //     Intensity
             },
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
-            "damageMessage": "-{{dmg}}",      //   Text for normal damage (see description of macros in the readme-en.txt)
+            "damageMessage": "{{dmg}}",       //   Text for normal damage (see description of macros in the readme-en.txt)
             "blowupMessage": "Blow-up!"       //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
           "contourIcon": {                    // Vehicle icon
@@ -995,10 +995,10 @@
             "shadow": {                       //   Shadow options
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
-              "strength": 120,                //     Intensity
-              "size": 1,                      //     Size
               "angle": 45,                    //     Offset angle
-              "distance": 1                   //     Offset distance
+              "distance": 1,                  //     Offset distance
+              "size": 2,                      //     Size
+              "strength": 250                 //     Intensity
             }
           },
           "healthBar": {                      // Health indicator
@@ -1009,7 +1009,7 @@
             "color": null,                    //   Primary color (dynamic colors allowed, see readme-en.txt)
             "lcolor": null,                   //   Optional color (for the gradient)
             "width": 80,                      //   Width of health bar
-            "height": 11,                     //   Height of health bar
+            "height": 12,                     //   Height of health bar
             "border": {                       //   Options for substrate and border
               "alpha": 30,                    //     Opacity
               "color": "0x000000",            //     Color
@@ -1039,14 +1039,14 @@
             "shadow": {                       //   Shadow options
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
-              "strength": 200,                //     Intensity
-              "size": 1,                      //     Size
               "angle": 45,                    //     Offset angle
-              "distance": 1                   //     Offset distance
+              "distance": 1,                  //     Offset distance
+              "size": 2,                      //     Size
+              "strength": 250                 //     Intensity
             },
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
-            "damageMessage": "-{{dmg}}",      //   Text for normal damage (see description of macros in the readme-en.txt)
+            "damageMessage": "{{dmg}}",       //   Text for normal damage (see description of macros in the readme-en.txt)
             "blowupMessage": "Blow-up!"       //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
           "contourIcon": {                    // Vehicle icon
@@ -1087,10 +1087,10 @@
               "shadow": {                     //   Shadow options
                 "alpha": 100,                 //     Opacity
                 "color": "0x000000",          //     Color
-                "strength": 120,              //     Intensity
-                "size": 1,                    //     Size
                 "angle": 45,                  //     Offset angle
-                "distance": 1                 //     Offset distance
+                "distance": 1,                //     Offset distance
+                "size": 2,                    //     Size
+                "strength": 200               //     Intensity
               },
               "format": "{{nick}}"            // Text format (see description of macros in the readme-en.txt)
             },
@@ -1110,10 +1110,10 @@
               "shadow": {                     //   Shadow options
                 "alpha": 100,                 //     Opacity
                 "color": "0x000000",          //     Color
-                "strength": 120,              //     Intensity
-                "size": 1,                    //     Size
                 "angle": 45,                  //     Offset angle
-                "distance": 1                 //     Offset distance
+                "distance": 1,                //     Offset distance
+                "size": 2,                    //     Size
+                "strength": 200               //     Intensity
               },
               "format": "{{vehicle}}"         // Text format (see description of macros in the readme-en.txt)
             }
@@ -1194,7 +1194,7 @@
     // Folder containing the icon set for the Over-target markers
     "vehicleMarker": "../maps/icons/vehicle/contour"
   },
-  // Options for specific players' clan logos
+  // Options for specific players' clan logos (top 100 clans included by default)
   "players": [
     { "root": "../../../clanicons", "folders": "RU,EU,NA,CT" },
     { "folder": "RU", "players": [

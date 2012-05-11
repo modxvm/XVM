@@ -2,10 +2,11 @@
  * ...
  * @author sirmax2
  */
-
 package utils
 {
   import utils.Defines;
+
+// TODO: translate comments to English
 
 public class DefaultConfig
 {
@@ -35,7 +36,9 @@ public class DefaultConfig
         // true - включить отображение сетки координат (может быть полезным для настройки)
         drawGrid: false,
         // true - отключить отображение версии xvm в верхнем левом углу экрана
-        hideXVMVersion: false
+        hideXVMVersion: false,
+        // true - использовать стандартные маркеры клиента (не работает)
+        useStandardMarkers: false
       },
       rating: {
         // true - включить отображение статистики. Глобальный переключатель - без него модуль статистики будет везде отключен.
@@ -291,40 +294,21 @@ public class DefaultConfig
         playersPanel:  "../maps/icons/vehicle/contour",
         vehicleMarker: "../maps/icons/vehicle/contour"
       },
-      players: [
-        { nick: "sirmax2", icon: "../../../clanicons/XVM.png" },
-        { nick: "0x01",    icon: "../../../clanicons/XVM.png" },
-        { clan: "[WG]",    icon: "../../../clanicons/WG.png" },
-        { clan: "[WG-A]",  icon: "../../../clanicons/WG.png" },
-        { clan: "[WTMOD]", icon: "../../../clanicons/WTMOD.png" },
-        { clan: "[WGST]",  icon: "../../../clanicons/WGST.png" }
-      ]
+      players: players
     };
 
     return a;
   }
 
-  public static function get shadow_60(): Object
+  public static function get shadow_100(): Object
   {
     return {
       alpha: 100,
       color: "0x000000",
       angle: 45,
-      strength: 60,
       distance: 1,
-      size: 1
-    }
-  }
-
-  public static function get shadow_120(): Object
-  {
-    return {
-      alpha: 100,
-      color: "0x000000",
-      angle: 45,
-      strength: 120,
-      distance: 1,
-      size: 1
+      size: 2,
+      strength: 100
     }
   }
 
@@ -334,9 +318,21 @@ public class DefaultConfig
       alpha: 100,
       color: "0x000000",
       angle: 45,
-      strength: 200,
       distance: 1,
-      size: 1
+      size: 2,
+      strength: 200
+    }
+  }
+
+  public static function get shadow_250(): Object
+  {
+    return {
+      alpha: 100,
+      color: "0x000000",
+      angle: 45,
+      distance: 1,
+      size: 2,
+      strength: 250
     }
   }
 
@@ -402,7 +398,7 @@ public class DefaultConfig
       maxScale: 100,
       scaleX: 0,
       scaleY: 16,
-      shadow: shadow_120
+      shadow: shadow_250
     }
   }
 
@@ -417,7 +413,7 @@ public class DefaultConfig
       color: null,
       lcolor: null,
       width: 80,
-      height: 11,
+      height: 12,
       border: {
         alpha: 30,
         color: "0x000000",
@@ -444,7 +440,7 @@ public class DefaultConfig
       color: null,
       lcolor: null,
       width: 80,
-      height: 11,
+      height: 12,
       border: {
         alpha: 30,
         color: "0x000000",
@@ -472,10 +468,10 @@ public class DefaultConfig
       alpha: 100,
       color: null,
       font: font_14b,
-      shadow: shadow_200,
+      shadow: shadow_250,
       speed: 2,
       maxRange: 40,
-      damageMessage: "-{{dmg}}",
+      damageMessage: "{{dmg}}",
       blowupMessage: "Blow-up!"
     }
   }
@@ -530,7 +526,7 @@ public class DefaultConfig
       alpha: 100,
       color: null,
       font: font_13,
-      shadow: shadow_120,
+      shadow: shadow_200,
       format: "{{nick}}"
     }
   }
@@ -545,7 +541,7 @@ public class DefaultConfig
       alpha: 80,
       color: null,
       font: font_13,
-      shadow: shadow_120,
+      shadow: shadow_200,
       format: "{{nick}}"
     }
   }
@@ -561,7 +557,7 @@ public class DefaultConfig
       alpha: 100,
       color: null,
       font: font_13,
-      shadow: shadow_120,
+      shadow: shadow_200,
       format: "{{vehicle}}"
     }
   }
@@ -576,7 +572,7 @@ public class DefaultConfig
       alpha: 80,
       color: null,
       font: font_13,
-      shadow: shadow_120,
+      shadow: shadow_200,
       format: "{{vehicle}}"
     }
   }
@@ -592,7 +588,7 @@ public class DefaultConfig
       alpha: 100,
       color: "0xFFFFFF",
       font: font_11b,
-      shadow: shadow_60,
+      shadow: shadow_100,
       format: "{{hp}} / {{hp-max}}"
     }
   }
@@ -608,7 +604,7 @@ public class DefaultConfig
       alpha: 100,
       color: "0xFFFFFF",
       font: font_11b,
-      shadow: shadow_60,
+      shadow: shadow_100,
       format: "{{hp-ratio}}%"
     }
   }
@@ -620,13 +616,247 @@ public class DefaultConfig
       name: "Rating",
       visible: true,
       x: 0,
-      y: -50,
+      y: -46,
       alpha: 75,
       color: "{{c:eff}}",
       font: font_12b,
-      shadow: shadow_120,
+      shadow: shadow_200,
       format: "{{rating}}"
     }
+  }
+
+  public static function get players(): Array
+  {
+    return [
+      { root: "../../../clanicons", folders: "RU,EU,NA,CT" },
+      { folder: "RU", players: [
+          { nick: "sirmax2",    icon: "XVM.png" },
+          { nick: "0x01",       icon: "XVM.png" },
+          { clan: "[WG]",       icon: "WG.png" },
+          { clan: "[WG-A]",     icon: "WG.png" },
+          { clan: "[WTMOD]",    icon: "WTMOD.png" },
+          { clan: "[WGST]",     icon: "WGST.png" },
+          { clan: "[S_O_R]",    icon: "sor.png" },
+          { clan: "[TD42]",     icon: "td42.png"},
+          { clan: "[TD42A]",    icon: "td42.png"},
+          { clan: "[TD42B]",    icon: "td42.png"},
+          { clan: "[TD42R]",    icon: "td42.png"},
+          { clan: "[BEES]",     icon: "bees.png"},
+          { clan: "[HIVE]",     icon: "bees.png"},
+          { clan: "[LAIR]",     icon: "bees.png"},
+          { clan: "[CAIM]",     icon: "caim.png"},
+          { clan: "[CAIM2]",    icon: "caim.png"},
+          { clan: "[DEFS]",     icon: "defs.png"},
+          { clan: "[DEFS2]",    icon: "defs2.png"},
+          { clan: "[ENOT",      icon: "enot.png" },
+          { clan: "[FRS",       icon: "frs.png" },
+          { clan: "[G_O_W]",    icon: "gow.png" },
+          { clan: "[_GOW_]",    icon: "gow.png" },
+          { clan: "[G_0_W]",    icon: "gow.png" },
+          { clan: "[G-O-W]",    icon: "gow.png" },
+          { clan: "[GREEN]",    icon: "green.png" },
+          { clan: "[GREEH]",    icon: "green.png" },
+          { clan: "[GRN-R]",    icon: "GRN-R.png" },
+          { clan: "[H4RD",      icon: "h4rd.png" },
+          { clan: "[IRONT",     icon: "iron.png" },
+          { clan: "[IR0NT",     icon: "iron.png" },
+          { clan: "[KO3AK",     icon: "kozak.png" },
+          { clan: "[OLENI",     icon: "oleni.png" },
+          { clan: "[0_0",       icon: "oo.png" },
+          { clan: "[PZE",       icon: "pze.png" },
+          { clan: "[RATTE",     icon: "ratte.png" },
+          { clan: "[RKKA",      icon: "rkka.png" },
+          { clan: "[SB_F]",     icon: "SB_F.png" },
+          { clan: "[SB--K]",    icon: "SB--K.png" },
+          { clan: "[SB-E]",     icon: "SB-E.png" },
+          { clan: "[SB-H]",     icon: "SB-H.png" },
+          { clan: "[SB_K]",     icon: "SB_K.png" },
+          { clan: "[STAL",      icon: "stal.png" },
+          { clan: "[TAIP",      icon: "taip.png" },
+          { clan: "[VES",       icon: "ves.png"},
+          { clan: "[XOVER",     icon: "xover.png" },
+          { clan: "[SAM]",      icon: "samurai.png" },
+          { clan: "[NSTR]",     icon: "nstr.png" },
+          { clan: "[DARK_",     icon: "da.png" },
+          { clan: "[CRABS]",    icon: "crabs.png" },
+          { clan: "[AMIG0]",    icon: "amigo.png" },
+          { clan: "[B-SKY]",    icon: "bsky.png" },
+          { clan: "[_E_]",      icon: "e.png" },
+          { clan: "[CWOT",      icon: "cwot.png" },
+          { clan: "[BTR",       icon: "btr.png" },
+          { clan: "[CHESS]",    icon: "chess.png" },
+          { clan: "[4S-B]",     icon: "4S-B.png" },
+          { clan: "[URFO]",     icon: "urfo.png" },
+          { clan: "[W_R]",      icon: "wr.png" },
+          { clan: "[PEKET]",    icon: "reket.png" },
+          { clan: "[-KNI-]",    icon: "kni.png" },
+          { clan: "[GUEST]",    icon: "guest.png" },
+          { clan: "[_CT_]",     icon: "st.png" },
+          { clan: "[C0BRA]",    icon: "cobra.png" },
+          { clan: "[COBRA]",    icon: "cobra.png" },
+          { clan: "[GRXOA]",    icon: "xover.png" },
+          { clan: "[JAZZ]",     icon: "jazz.png" },
+          { clan: "[ZB]",       icon: "zb.png" },
+          { clan: "[ZB-A]",     icon: "zb.png" },
+          { clan: "[--S--]",    icon: "s.png" },
+          { clan: "[TGD]",      icon: "tgd.png" },
+          { clan: "[LA]",       icon: "la.png" },
+          { clan: "[RED]",      icon: "RED.png" },
+          { clan: "[RED-E]",    icon: "RED.png" },
+          { clan: "[RED-N]",    icon: "RED.png" },
+          { clan: "[RED-S]",    icon: "RED.png" },
+          { clan: "[RED-W]",    icon: "RED.png" },
+          { clan: "[RED-Z]",    icon: "RED.png" },
+          { clan: "[RED-A]",    icon: "RED.png" },
+          { clan: "[RED-L]",    icon: "RED.png" },
+          { clan: "[RED-Y]",    icon: "RED.png" },
+          { clan: "[RED-K]",    icon: "redk.png" },
+          { clan: "[RED_W]",    icon: "red-b.png" },
+          { clan: "[RED_A]",    icon: "aces.png" },
+          { clan: "[RED_K]",    icon: "RED.png" },
+          { clan: "[RED-J]",    icon: "RED.png" },
+          { clan: "[RED-F]",    icon: "red-b.png" },
+          { clan: "[RED]",      icon: "RED.png" },
+          { clan: "[RED-0]",    icon: "red-b.png" },
+          { clan: "[RED-U]",    icon: "RED.png" },
+          { clan: "[REDMG]",    icon: "RED.png" },
+          { clan: "[RED_M]",    icon: "red-b.png" },
+          { clan: "[RED-B]",    icon: "red-b.png" },
+          { clan: "[RED-Q]",    icon: "red-b.png" },
+          { clan: "[YKT]",      icon: "ykt.png" },
+          { clan: "[NOMAD]",    icon: "nomad.png" },
+          { clan: "[OOPS",      icon: "oops.png" },
+          { clan: "[GAD]",      icon: "gad.png" },
+          { clan: "[LJ",        icon: "lj.png" },
+          { clan: "[1CLUB]",    icon: "fc.png" }
+        ]
+      },
+      { folder: "EU", players: [
+          { nick: "Yoyo117",    icon: "XVM.png" },
+          { nick: "sirmax2",    icon: "XVM.png" },
+          { clan: "[INC-A]",    icon: "inc-a.png" },
+          { clan: "[WG]",       icon: "WG.png" },
+          { clan: "[OM]",       icon: "om.png" },
+          { clan: "[OM-V]",     icon: "omv.png" },
+          { clan: "[OM-X]",     icon: "omx.png" },
+          { clan: "[OM-BC]",    icon: "ombc.png" },
+          { clan: "[PTS]",      icon: "pts.png" },
+          { clan: "[V-V-V]",    icon: "vvv.png" },
+          { clan: "[HARD]",     icon: "hard.png" },
+          { clan: "[HARDS]",    icon: "hards.png" },
+          { clan: "[HARD2]",    icon: "hard2.png" },
+          { clan: "[1SBP]",     icon: "1sbp.png" },
+          { clan: "[2SBP]",     icon: "2sbp.png" },
+          { clan: "[3SBP]",     icon: "3sbp.png" },
+          { clan: "[EPIC]",     icon: "epic.png" },
+          { clan: "[MARS]",     icon: "mars.png" },
+          { clan: "[PMHC]",     icon: "pmhc.png" },
+          { clan: "[PMHC2]",    icon: "pmhc2.png" },
+          { clan: "[MUMMY]",    icon: "mummy.png" },
+          { clan: "[ISTI]",     icon: "isti.png" },
+          { clan: "[ISTI2]",    icon: "isti2.png" },
+          { clan: "[ISTI3]",    icon: "isti3.png" },
+          { clan: "[ISTI4]",    icon: "isti3.png" },
+          { clan: "[EPA]",      icon: "epa.png" },
+          { clan: "[WT]",       icon: "wt.png" },
+          { clan: "[VVT]",      icon: "wt.png" },
+          { clan: "[VVTF]",     icon: "wt.png" },
+          { clan: "[DID]",      icon: "did.png" },
+          { clan: "[DIDO]",     icon: "dido.png" },
+          { clan: "[JOD]",      icon: "jod.png" },
+          { clan: "[-BR-]",     icon: "br.png" },
+          { clan: "[CSA]",      icon: "csa.png" },
+          { clan: "[CSA-",      icon: "csa.png" },
+          { clan: "[BIA]",      icon: "bia.png" },
+          { clan: "[BIA-2]",    icon: "bia2.png" },
+          { clan: "[NOB]",      icon: "nob.png" },
+          { clan: "[SLF]",      icon: "slf.png" },
+          { clan: "[SLF2]",     icon: "slf2.png" },
+          { clan: "[ODV]",      icon: "odv.png" },
+          { clan: "[-SB-]",     icon: "-sb-.png" },
+          { clan: "[SB-R]",     icon: "sbr.png" },
+          { clan: "[SB_2]",     icon: "sb2.png" },
+          { clan: "[1PADX]",    icon: "1padx.png" },
+          { clan: "[JNA]",      icon: "jna.png" },
+          { clan: "[EES]",      icon: "ees.png" },
+          { clan: "[EES2]",     icon: "ees.png" },
+          { clan: "[-AX-]",     icon: "ax.png" },
+          { clan: "[PX]",       icon: "px.png" },
+          { clan: "[TAC]",      icon: "tac.png" },
+          { clan: "[ASEET]",    icon: "aseet.png" },
+          { clan: "[PRT]",      icon: "prt.png" },
+          { clan: "[IC]",       icon: "ic.png" },
+          { clan: "[EFE]",      icon: "efe.png" },
+          { clan: "[ANV]",      icon: "anv.png" },
+          { clan: "[HUHN]",     icon: "huhn.png" },
+          { clan: "[BR1]",      icon: "br1.png" },
+          { clan: "[507]",      icon: "507.png" },
+          { clan: "[G-A-D]",    icon: "g-a-d.png" },
+          { clan: "[FROG]",     icon: "frog.png" },
+          { clan: "[-ANV-]",    icon: "-anv-.png" },
+          { clan: "[FROG1]",    icon: "frog1.png" },
+          { clan: "[-RPD-]",    icon: "-rpd-.png" },
+          { clan: "[G-A-A]",    icon: "g-a-a.png" },
+          { clan: "[SBG]",      icon: "sbg.png" },
+          { clan: "[130]",      icon: "130.png" },
+          { clan: "[5O3]",      icon: "5o3.png" },
+          { clan: "[PVE]",      icon: "pve.png" },
+          { clan: "[OPNV]",     icon: "opnv.png" },
+          { clan: "[RADAU]",    icon: "radau.png" },
+          { clan: "[BIH]",      icon: "bih.png" },
+          { clan: "[D-R-K]",    icon: "d-r-k.png" },
+          { clan: "[SRSLY]",    icon: "srsly.png" },
+          { clan: "[DTT]",      icon: "dtt.png" },
+          { clan: "[GM-K]",     icon: "gm-k.png" },
+          { clan: "[S-G]",      icon: "s-g.png" },
+          { clan: "[BG-DH]",    icon: "bg-dh.png" },
+          { clan: "[VI]",       icon: "vi.png" },
+          { clan: "[FROG2]",    icon: "frog2.png" },
+          { clan: "[GS_]",      icon: "gs_.png" },
+          { clan: "[205TH]",    icon: "205th.png" },
+          { clan: "[GBP]",      icon: "gbp.png" },
+          { clan: "[DEI]",      icon: "dei.png" },
+          { clan: "[SIS]",      icon: "sis.png" },
+          { clan: "[FBFU]",     icon: "fbfu.png" },
+          { clan: "[GOH]",      icon: "goh.png" },
+          { clan: "[-PHX-]",    icon: "-phx-.png" },
+          { clan: "[KKC]",      icon: "kkc.png" },
+          { clan: "[7PZD]",     icon: "7pzd.png" },
+          { clan: "[GTT]",      icon: "gtt.png" },
+          { clan: "[-PRC-]",    icon: "-prc-.png" },
+          { clan: "[-BD-]",     icon: "-bd-.png" },
+          { clan: "[SIEG]",     icon: "sieg.png" },
+          { clan: "[BTC]",      icon: "btc.png" },
+          { clan: "[DLA]",      icon: "dla.png" },
+          { clan: "[G-A-B]",    icon: "g-a-b.png" },
+          { clan: "[DGW-E]",    icon: "dgw-e.png" },
+          { clan: "[-69-]",     icon: "-69-.png" },
+          { clan: "[STS]",      icon: "sts.png" },
+          { clan: "[RED-R]",    icon: "red-r.png" },
+          { clan: "[GOLD]",     icon: "gold.png" },
+          { clan: "[RT]",       icon: "rt.png" },
+          { clan: "[A-P]",      icon: "a-p.png" },
+          { clan: "[-XII-]",    icon: "-xii-.png" },
+          { clan: "[FAIL]",     icon: "fail.png" },
+          { clan: "[-SGL-]",    icon: "-sgl-.png" },
+          { clan: "[VTEPS]",    icon: "vteps.png" },
+          { clan: "[LAS]",      icon: "las.png" },
+          { clan: "[SAO]",      icon: "sao.png" }
+        ]
+      },
+      { folder: "NA", players: [
+          { nick: "sirmax",     icon: "XVM.png" },
+          { clan: "[WGA]",      icon: "WG.png" }
+        ]
+      },
+      { folder: "CT", players: [
+          { nick: "sirmax2_RU", icon: "XVM.png" },
+          { nick: "0x01_RU",    icon: "XVM.png" },
+          { nick: "Yoyo117_EU", icon: "XVM.png" },
+          { clan: "[WG]",       icon: "WG.png" }
+        ]
+      }
+    ];
   }
 }
 }

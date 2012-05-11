@@ -4,7 +4,7 @@
  */
 package utils
 {
-  public class Utils
+  public class Utils 
   {
 	  public static function startsWith(substr: String, str: String): Boolean
 	  {

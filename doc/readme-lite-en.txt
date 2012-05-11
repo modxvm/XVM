@@ -17,8 +17,9 @@
     * Player/clan icon
     * Vehicle icon sets
 
-  Project site: http://code.google.com/p/wot-xvm/
-  Support:      http://forum.bulychev.net/viewforum.php?f=7
+  Project site:  http://code.google.com/p/wot-xvm/
+  Support:       http://forum.bulychev.net/viewforum.php?f=7
+  FAQ (Russian): http://www.koreanrandom.com/forum/topic/1381-faq-otveti-na-chastie-voprosi-po-xvm/
 
 -----------------------------------------------------------
 2. INSTALL

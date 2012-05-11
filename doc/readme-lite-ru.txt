@@ -19,7 +19,8 @@
     * Рейтинг игроков в игре (только в пакете xvm-full)
 
   Сайт проекта: http://code.google.com/p/wot-xvm/
-  Поддержка:   http://forum.worldoftanks.ru/index.php?/topic/336171-0/
+  Поддержка:    http://forum.worldoftanks.ru/index.php?/topic/336171-0/
+  FAQ:          http://www.koreanrandom.com/forum/topic/1381-faq-otveti-na-chastie-voprosi-po-xvm/
 
 -----------------------------------------------------------
 2. УСТАНОВКА

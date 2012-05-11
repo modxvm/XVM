@@ -3,6 +3,7 @@
   * fixed bug in swf modification
   * wot-xvm-proxy: added compression of proxy servers requests
   * added top 100 icons for RU clans (http://ivanerr.ru/lt/showclansrating/)
+  * default config reworked
 
 XVM-2.2:
   * adaptation to WoT 0.7.3
