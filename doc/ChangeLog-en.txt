@@ -6,6 +6,9 @@
   * default config reworked
   * config editor: https://sites.google.com/site/sirmaxwiki/xvm-editor
     (not all is ready, but can be used)
+  * players panel performance optimization on kill
+  * separated settings for section "damageText" for alive and dead, last
+    damage will be shown with settings from section "dead"
 
 XVM-2.2:
   * adaptation to WoT 0.7.3

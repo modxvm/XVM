@@ -38,6 +38,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   var m_currentHealth: Number;
   var m_showMaxHealth: Boolean;
   var m_team: String;
+  var m_isDead: Boolean = false;
   
   // TextFields
   var textFields: Object = null;
@@ -143,6 +144,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     //Logger.add("XVM::init(): Config.s_loaded=" + Config.s_loaded);
     // Use currently remembered extended / normal status for new markers
     m_showExInfo = s_showExInfo;
+    m_isDead = curHealth <= 0;
+
     super.init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt);
   }
 
@@ -166,7 +169,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
     if (curHealth < 0)
       s_blowedUp.push(m_playerFullName);
-    m_curHealth = curHealth >= 0 ? curHealth : 0;
+    m_isDead = curHealth <= 0;
+    m_curHealth = m_isDead ? 0 : curHealth; // fix "-1"
     XVMSetupNewHealth(curHealth);
     XVMUpdateUI(curHealth);
   }
@@ -363,7 +367,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   function XVMGetSystemColor()
   {
     var systemColorName: String = m_entityName + "_";
-    systemColorName += (!vehicleDestroyed) ? "alive_" : (Utils.indexOf(s_blowedUp, m_playerFullName) >= 0) ? "blowedup_" : "dead_";
+    systemColorName += (!vehicleDestroyed && !m_isDead) ? "alive_" : (Utils.indexOf(s_blowedUp, m_playerFullName) >= 0) ? "blowedup_" : "dead_";
     systemColorName += s_isColorBlindMode ? "blind" : "normal";
     return Config.s_config.colors.system[systemColorName];
   }
@@ -371,7 +375,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   function GetCurrentStateString(): String
   {
     var result = m_team + "/";
-    result += this.vehicleDestroyed ? "dead/" : "alive/";
+    result += (vehicleDestroyed || m_isDead) ? "dead/" : "alive/";
     result += m_showExInfo ? "extended" : "normal";
     return result;
   }

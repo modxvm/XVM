@@ -37,6 +37,16 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   private var _lastAdjustedState = "";
   function setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount)
   {
+    // fix WG bug - double redrawing panels on kill
+    onEnterFrame = function()
+    {
+      delete this.onEnterFrame;
+      this.setData2(data, sel, postmortemIndex, isColorBlind, knownPlayersCount);
+    }
+  }
+
+  function setData2(data, sel, postmortemIndex, isColorBlind, knownPlayersCount)
+  {
     var start = new Date();
 
     m_names.condenseWhite = true;
