@@ -80,7 +80,11 @@
   1. Unzip archive to game folder:
      Right click to archive -> "Exctract all..." -> select game folder -> "Extract"
 
-  2. Do NOT do anything else.
+  2. If game version was updated, copy your config:
+     from res_mods/[OLD VERSION]/gui/flash/XVM.xvmconf
+     to res_mods/[NEW VERSION]/gui/flash/XVM.xvmconf
+
+  3. Do NOT do anything else.
 
 -----------------------------------------------------------
 4. ADDITIONAL INFORMATION ABOUT CONFIG FILE
