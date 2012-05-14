@@ -512,7 +512,7 @@ namespace wot
           {
             ms.Seek(offset, SeekOrigin.Begin);
             readBytes = (uint)ms.Read(buffer, 0, buffer.Length);
-            Log(1, String.Format("Readed {0} bytes", readBytes));
+            Log(1, String.Format("Read {0} bytes", readBytes));
           }
         }
         return 0;
