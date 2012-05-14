@@ -76,7 +76,7 @@
           },
           "damageText": {
             "color": "0x33FF33",
-            "damageMessage": "=({{dmg}})=",
+            "damageMessage": "({{dmg}})",
             "blowupMessage": "Blow-up!"
           }
         },
@@ -86,7 +86,7 @@
           },
           "damageText": {
             "color": "0x33FF33",
-            "damageMessage": "=({{dmg}})=",
+            "damageMessage": "({{dmg}})",
             "blowupMessage": "Blow-up!"
           }
         }
@@ -164,7 +164,7 @@
           },
           "damageText": {
             "color": "0xFF3333",
-            "damageMessage": "=({{dmg}})=",
+            "damageMessage": "({{dmg}})",
             "blowupMessage": "Blow-up!"
           }
         },
@@ -174,7 +174,7 @@
           },
           "damageText": {
             "color": "0xFF3333",
-            "damageMessage": "=({{dmg}})=",
+            "damageMessage": "({{dmg}})",
             "blowupMessage": "Blow-up!"
           }
         }
@@ -308,8 +308,8 @@
         { "clan": "[INC-A]",    "icon": "inc-a.png" },
         { "clan": "[WG]",       "icon": "WG.png" },
         { "clan": "[OM]",       "icon": "om.png" },
-        { "clan": "[OM-V]",     "icon": "om-v.png" },
-        { "clan": "[OM-X]",     "icon": "om-x.png" },
+        { "clan": "[OM-V]",     "icon": "omv.png" },
+        { "clan": "[OM-X]",     "icon": "omx.png" },
         { "clan": "[OM-BC]",    "icon": "ombc.png" },
         { "clan": "[PTS]",      "icon": "pts.png" },
         { "clan": "[V-V-V]",    "icon": "vvv.png" },

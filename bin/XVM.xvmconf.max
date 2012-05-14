@@ -76,7 +76,7 @@
           },
           "damageText": {
             "color": "0x33FF33",
-            "damageMessage": "=({{dmg}})=",
+            "damageMessage": "({{dmg}})",
             "blowupMessage": "Blow-up!"
           }
         },
@@ -86,7 +86,7 @@
           },
           "damageText": {
             "color": "0x33FF33",
-            "damageMessage": "=({{dmg}})=",
+            "damageMessage": "({{dmg}})",
             "blowupMessage": "Blow-up!"
           }
         }
@@ -164,7 +164,7 @@
           },
           "damageText": {
             "color": "0xFF3333",
-            "damageMessage": "=({{dmg}})=",
+            "damageMessage": "({{dmg}})",
             "blowupMessage": "Blow-up!"
           }
         },
@@ -174,7 +174,7 @@
           },
           "damageText": {
             "color": "0xFF3333",
-            "damageMessage": "=({{dmg}})=",
+            "damageMessage": "({{dmg}})",
             "blowupMessage": "Blow-up!"
           }
         }
