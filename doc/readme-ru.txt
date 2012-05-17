@@ -21,6 +21,7 @@
   Сайт проекта: http://code.google.com/p/wot-xvm/
   Поддержка:    http://forum.bulychev.net/viewforum.php?f=6
   FAQ:          http://www.koreanrandom.com/forum/topic/1381-faq-otveti-na-chastie-voprosi-po-xvm/
+  Конфиги:      http://www.koreanrandom.com/forum/topic/1384-xvm-configurations/
   Редактор:     https://sites.google.com/site/sirmaxwiki/xvm-editor
 
   Всем, кто считает что мод грузит сервер статистики, сюда:
