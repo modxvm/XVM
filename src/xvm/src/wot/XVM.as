@@ -119,8 +119,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
         if (this.iconLoader != null)
           this.iconLoader.source = this.m_source;
 
-        //if (Config.s_config.battle.useStandardMarkers)
-        //  return;
+        if (Config.s_config.battle.useStandardMarkers)
+          return;
 
         // Draw grid
         if (Config.s_config.battle.drawGrid)
@@ -155,19 +155,19 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   function updateMarkerSettings()
   {
     //Logger.add("XVM::updateMarkerSettings(): Config.s_loaded=" + Config.s_loaded);
-    //if (Config.s_config.battle.useStandardMarkers)
-    //  super.updateMarkerSettings();
+    if (Config.s_config.battle.useStandardMarkers)
+      super.updateMarkerSettings();
   }
 
   // override
   function updateHealth(curHealth)
   {
     //Logger.add("XVM::updateHealth(): Config.s_loaded=" + Config.s_loaded);
-    //if (Config.s_config.battle.useStandardMarkers)
-    //{
-    //  super.updateHealth(curHealth);
-    //  return;
-    //}
+    if (Config.s_config.battle.useStandardMarkers)
+    {
+      super.updateHealth(curHealth);
+      return;
+    }
 
     if (curHealth < 0)
       s_blowedUp.push(m_playerFullName);
@@ -181,11 +181,11 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   function updateState(newState, isImmediate)
   {
     //Logger.add("XVM::updateState(): Config.s_loaded=" + Config.s_loaded);
-    //if (Config.s_config.battle.useStandardMarkers)
-    //{
-    //  super.updateState(newState, isImmediate);
-    //  return;
-    //}
+    if (Config.s_config.battle.useStandardMarkers)
+    {
+      super.updateState(newState, isImmediate);
+      return;
+    }
 
     //Logger.add("updateState(): " + GetCurrentStateString() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
     super.updateState(newState, isImmediate);
@@ -196,11 +196,11 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   function showExInfo(show)
   {
     //Logger.add("XVM::showExInfo(): Config.s_loaded=" + Config.s_loaded);
-    //if (Config.s_config.battle.useStandardMarkers)
-    //{
-    //  super.showExInfo(show);
-    //  return;
-    //}
+    if (Config.s_config.battle.useStandardMarkers)
+    {
+      super.showExInfo(show);
+      return;
+    }
 
     if (m_showExInfo == show)
       return;
@@ -227,8 +227,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   function populateData()
   {
     //Logger.add("XVM::populateData(): Config.s_loaded=" + Config.s_loaded);
-    //if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
-    //  return super.populateData();
+    if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
+      return super.populateData();
 
     //Logger.add("populateData(): " + GetCurrentStateString() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
 
@@ -268,8 +268,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   {
     //Logger.add("XVM::initMarkerLabel(): Config.s_loaded=" + Config.s_loaded);
     super.initMarkerLabel();
-    //if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
-    //  return;
+    if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
+      return;
 
     XVMUpdateMarkerLabel();
     XVMUpdateUI(m_curHealth);
@@ -281,8 +281,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     //Logger.add("XVM::updateMarkerLabel(): Config.s_loaded=" + Config.s_loaded);
     //Logger.add("updateMarkerLabel(): " + GetCurrentStateString() + " markerLabel=" + m_markerLabel + " pname=" + m_playerFullName);
     super.updateMarkerLabel();
-    //if (Config.s_config.battle.useStandardMarkers)
-    //  return;
+    if (Config.s_config.battle.useStandardMarkers)
+      return;
 
     XVMUpdateMarkerLabel();
 

@@ -2,7 +2,7 @@
 
 GAME_VER="0.7.3"
 #GAME_VER="0.7.3 Common Test"
-FILES="battle.swf battleloading.swf PlayersPanel.swf StatisticForm.swf VehicleMarkersManager.swf XVM.xvmconf OTMData.xml"
+FILES="battle.swf battleloading.swf PlayersPanel.swf StatisticForm.swf FinalStatisticForm.swf VehicleMarkersManager.swf XVM.xvmconf OTMData.xml"
 
 cd $(dirname $(realpath $(cygpath --unix $0)))
 

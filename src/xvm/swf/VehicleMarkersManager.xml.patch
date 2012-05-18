@@ -1,5 +1,5 @@
---- orig\VehicleMarkersManager.xml	2012-04-24 22:01:15.742899500 +0300
-+++ VehicleMarkersManager.xml	2012-05-06 19:14:39.231994000 +0300
+--- orig\VehicleMarkersManager.xml	2012-04-24 10:36:04.575366300 +0300
++++ VehicleMarkersManager.xml	2012-05-14 11:24:36.090003300 +0300
 @@ -3972,7 +3972,7 @@
        </DefineBitsLossless2>
        <DefineShape objectID="85">

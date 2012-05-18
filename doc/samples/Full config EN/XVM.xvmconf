@@ -13,9 +13,9 @@
     "author": "sirmax2",                        // Config author
     "description": "Default settings for XVM",  // Config description
     "url": "http://code.google.com/p/wot-xvm/", // Address to config updates
-    "date": "02.05.2012",                       // Config last modified
+    "date": "18.05.2012",                       // Config last modified
     "gameVersion": "0.7.3",                     // Supported version of the game
-    "modMinVersion": "2.2"                      // The minimum required version of the XVM mod
+    "modMinVersion": "2.3"                      // The minimum required version of the XVM mod
   },
   // General parameters for the battle interface
   "battle": {
@@ -23,7 +23,8 @@
     "showPostmortemTips": true,                 // false - Disable pop-up panel at the bottom after death. True by default.
     "removePanelsModeSwitcher": false,          // true - Remove the Players Panel mode switcher (buttons for changing size)
     "drawGrid": false,                          // true - Enable grid coordinates (may be useful for tactical setup). Change only if you know what you’re doing!
-    "hideXVMVersion": false                     // true - hide xvm version at top left corner of screen
+    "hideXVMVersion": false,                    // true - hide xvm version at top left corner of screen
+    "useStandardMarkers": false                 // true - use standard client vehicle markers
   },
   // Options for player statistics (only with XVM-full)
   "rating": {

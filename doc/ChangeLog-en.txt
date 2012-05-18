@@ -14,6 +14,8 @@
   * wot-xvm-proxy: check for another instance
   * fixed text field default settings if not set in config
   * player/clan icons in vehicle markers
+  * added option battle/useStandardMarkers, that allow to use standard
+    client vehicle markers
 
 XVM-2.2:
   * adaptation to WoT 0.7.3
