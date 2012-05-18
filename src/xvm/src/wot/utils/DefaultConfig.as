@@ -112,6 +112,7 @@ class wot.utils.DefaultConfig
               healthBar: hb_alive,
               damageText: dmg,
               contourIcon: ci,
+              clanIcon: clanIcon,
               levelIcon: li,
               actionMarker: am,
               textFields: [ vehicleName_alive, currentHealth ]
@@ -121,6 +122,7 @@ class wot.utils.DefaultConfig
               healthBar: hb_alive,
               damageText: dmg,
               contourIcon: ci,
+              clanIcon: clanIcon,
               levelIcon: li,
               actionMarker: am,
               textFields: [ playerName_alive, healthRatio, ratingText ]
@@ -132,6 +134,7 @@ class wot.utils.DefaultConfig
               healthBar: hb_dead,
               damageText: dmg,
               contourIcon: ci,
+              clanIcon: clanIcon,
               levelIcon: li,
               actionMarker: am,
               textFields: [  ]
@@ -141,6 +144,7 @@ class wot.utils.DefaultConfig
               healthBar: hb_dead,
               damageText: dmg,
               contourIcon: ci,
+              clanIcon: clanIcon,
               levelIcon: li,
               actionMarker: am,
               textFields: [ playerName_dead, vehicleName_dead ]
@@ -154,6 +158,7 @@ class wot.utils.DefaultConfig
               healthBar: hb_alive,
               damageText: dmg,
               contourIcon: ci,
+              clanIcon: clanIcon,
               levelIcon: li,
               actionMarker: am,
               textFields: [ vehicleName_alive, currentHealth ]
@@ -163,6 +168,7 @@ class wot.utils.DefaultConfig
               healthBar: hb_alive,
               damageText: dmg,
               contourIcon: ci,
+              clanIcon: clanIcon,
               levelIcon: li,
               actionMarker: am,
               textFields: [ playerName_alive, healthRatio, ratingText ]
@@ -174,6 +180,7 @@ class wot.utils.DefaultConfig
               healthBar: hb_dead,
               damageText: dmg,
               contourIcon: ci,
+              clanIcon: clanIcon,
               levelIcon: li,
               actionMarker: am,
               textFields: [  ]
@@ -183,6 +190,7 @@ class wot.utils.DefaultConfig
               healthBar: hb_dead,
               damageText: dmg,
               contourIcon: ci,
+              clanIcon: clanIcon,
               levelIcon: li,
               actionMarker: am,
               textFields: [ playerName_dead, vehicleName_dead ]
@@ -487,6 +495,19 @@ class wot.utils.DefaultConfig
     }
   }
 
+  // clanIcon
+  public static function get clanIcon(): Object
+  {
+    return {
+      visible: false,
+      x: 0,
+      y: -67,
+      w: 16,
+      h: 16,
+      alpha: 100
+    }
+  }
+  
   // levelIcon
   public static function get li(): Object
   {

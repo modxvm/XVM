@@ -20,10 +20,12 @@ class wot.utils.Logger
     s = s.length.toString(16) + "," + s;
 
     var p = new LoadVars();
-    while (s.length > Defines.MAX_PATH)
+    var command = Defines.COMMAND_LOG + " ";
+    var max_len = Defines.MAX_PATH - command.length;
+    while (s.length > max_len)
     {
-      p.load(Defines.COMMAND_LOG + " " + s.slice(0, Defines.MAX_PATH));
-      s = s.slice(Defines.MAX_PATH);
+      p.load(command + s.slice(0, max_len));
+      s = s.slice(max_len);
     }
     p.load(Defines.COMMAND_LOG + " " + s);
   }

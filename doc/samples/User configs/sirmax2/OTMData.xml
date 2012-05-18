@@ -173,7 +173,7 @@
           <healthBar x="-21" y="-23" alpha="100" visible="true"/>
           <vehicleIcon x="0" y="-16" alpha="100" visible="true"/>
           <levelIcon x="0" y="-73" alpha="100" visible="false"/>
-          <contourIcon x="0" y="-65" alpha="100" visible="false"/>
+          <contourIcon x="0" y="-65" alpha="100" visible="true"/>
           <infoText x="0" y="-50" color="{{c:eff}}" alpha="75" visible="true" format="{{rating}}" bold="true"/>
         </extended>
       </alive>

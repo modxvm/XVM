@@ -38,20 +38,27 @@ class wot.utils.PlayerInfo extends MovieClip
   
   public static function createClanIcon(owner: MovieClip, name: String, source: String, cfg, dx, dy, team): MovieClip
   {
+    var holder_x = dx + (team == Defines.TEAM_ALLY ? cfg.x : -cfg.xr);
+    if (team == Defines.TEAM_ENEMY)
+      holder_x -= cfg.w;
+    var holder_y = dy + (team == Defines.TEAM_ALLY ? cfg.y : cfg.yr);
+    return createClanIcon2(owner, name, source, holder_x, holder_y, cfg.w, cfg.h, cfg.alpha);
+  }
+
+  public static function createClanIcon2(owner: MovieClip, name: String, source: String, x, y, w, h, alpha): MovieClip
+  {
     var holder: MovieClip = owner.createEmptyMovieClip(name, owner.getNextHighestDepth());
     var icon: MovieClip = holder.attachMovie("UILoader", "clanIcon", holder.getNextHighestDepth());
 
-    holder._x = dx + (team == Defines.TEAM_ALLY ? cfg.x : -cfg.xr);
-    if (team == Defines.TEAM_ENEMY)
-      holder._x -= cfg.w;
-    holder._y = dy + (team == Defines.TEAM_ALLY ? cfg.y : cfg.yr);
+    holder._x = x;
+    holder._y = y;
 
     icon._x = icon._y = 0;
-    icon._alpha = cfg.alpha;
+    icon._alpha = alpha;
     icon.addEventListener("complete", instance, "completeLoadClanIcon");
     icon.source = source;
     icon.visible = false;
-    icon["xvm_claninfo"] = { w: cfg.w, h: cfg.h };
+    icon["xvm_claninfo"] = { w: w, h: h };
     icon["holder"] = holder;
 
     return holder;

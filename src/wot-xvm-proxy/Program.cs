@@ -113,6 +113,13 @@ namespace wot
         Debug("Change dir: " + game_dir);
         Directory.SetCurrentDirectory(game_dir);
 
+        // Check for another instance started
+        bool ok;
+        Mutex m = new Mutex(true, "wot-xvm-proxy", out ok);
+        if (!ok)
+          throw new Exception("Another proxy instance is already running.");
+        GC.KeepAlive(m);
+
         // Check game start file exists
         Debug("Check start file exists: " + wotExeFileName);
         if (!File.Exists(wotExeFileName))

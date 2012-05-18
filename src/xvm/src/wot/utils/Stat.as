@@ -18,6 +18,14 @@ class wot.utils.Stat
   // Config
   public static var s_player_ids = [];
   public static var s_player_names: Array = [];
+  // s_player_data members:
+  //   reference: Object,
+  //   playerId: Number,
+  //   name: String,
+  //   clan: String,
+  //   originalText: String,
+  //   team: Defines.TEAM_ALLY | Defines.TEAM_ENEMY,
+  //   loaded: Boolean
   public static var s_player_data = {};
   public static var s_player_ratings = null;
   public static var s_loadDataStarted = false;
@@ -108,7 +116,9 @@ class wot.utils.Stat
 
   public static function processForFogOfWar(data)
   {
-    var pname: String = Utils.GetUpperPlayerName(data.label || data.name);
+    var fullPlayerName = data.label || data.name;
+    var pname: String = Utils.GetUpperPlayerName(fullPlayerName);
+    var clan: String = Utils.GetClanName(fullPlayerName);
     if (data.uid && !s_player_names[pname] && !s_player_data[pname])
     {
       try
@@ -122,13 +132,15 @@ class wot.utils.Stat
         {
           reference: null,
           playerId: data.uid,
+          fullPlayerName: fullPlayerName,
           name: pname,
+          clan: clan,
           originalText: data.vehicle || data.originalText,
           team: data.team == "team1" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY,
           loaded: false
         };
 
-        var str: String = pname + "-" + data.uid;
+        var str: String = data.uid + "=" + fullPlayerName;
         var lv: LoadVars = new LoadVars();
         lv.onData = function(success)
         {
@@ -279,6 +291,7 @@ class wot.utils.Stat
       return;
 
     var pname = Utils.GetUpperPlayerName(playerName);
+    var clan = Utils.GetClanName(playerName);
     //Logger.add("AddPlayerData(" + playerName + "): " + pname + " level=" + level);
     if (!s_player_data[pname])
     {
@@ -287,7 +300,9 @@ class wot.utils.Stat
       s_player_data[pname] = {
         reference: reference,
         playerId: playerId,
+        fullPlayerName: playerName,
         name: pname,
+        clan: clan,
         originalText: originalText,
         icon: icon,
         team: team,
@@ -312,6 +327,7 @@ class wot.utils.Stat
 
     var is_new = _s_isNew;
     _s_isNew = false;
+    var command = (is_new ? Defines.COMMAND_SET : Defines.COMMAND_ADD) + " ";
 
     var players_to_load = [];
     var len = 0;
@@ -320,8 +336,8 @@ class wot.utils.Stat
       var pdata = s_player_data[pname];
       if (!pdata.loaded)
       {
-        var str: String = pname + "-" + String(pdata.playerId);
-        if (len + str.length > Defines.MAX_PATH)
+        var str: String = String(pdata.playerId) + "=" + pdata.fullPlayerName;
+        if (len + str.length > Defines.MAX_PATH - command.length)
           break;
         pdata.loaded = true;
         players_to_load.push(str);
@@ -336,8 +352,7 @@ class wot.utils.Stat
       {
         Stat.LoadData();
       }
-      var fn = is_new ? Defines.COMMAND_SET : Defines.COMMAND_ADD;
-      lv.load(fn + " " + players_to_load.join(","));
+      lv.load(command + players_to_load.join(","));
     }
     else
     {
@@ -384,26 +399,6 @@ class wot.utils.Stat
       }
     };
     lv.load(command);
-  }
-
-  public static function LoadPlayerInfo()
-  {
-    var lv = new LoadVars();
-    lv.onLoad = function(success)
-    {
-      if (!success)
-        return;
-      Stat.s_player_ids = [];
-      Stat.s_player_names = [];
-      var playerInfo = this.split(",");
-      for (var pi in playerInfo)
-      {
-        var info = (playerInfo[pi]).split("-");
-        Stat.s_player_names.push(info[0].toUpperCase());
-        Stat.s_player_ids.push(info[1]);
-      }
-    };
-    lv.load(Defines.COMMAND_GET);
   }
 
   private static function UpdateAll()

@@ -9,6 +9,11 @@
   * players panel performance optimization on kill
   * separated settings for section "damageText" for alive and dead, last
     damage will be shown with settings from section "dead"
+  * dynamically determine maximum request length in depend of game folder
+  * wot-xvm-proxy: swf communication protocol changed
+  * wot-xvm-proxy: check for another instance
+  * fixed text field default settings if not set in config
+  * player/clan icons in vehicle markers
 
 XVM-2.2:
   * adaptation to WoT 0.7.3

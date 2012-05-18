@@ -10,6 +10,7 @@ using System.Xml;
 using Dokan;
 using LitJson;
 using wot.Properties;
+using System.Reflection;
 
 namespace wot
 {
@@ -22,6 +23,7 @@ namespace wot
     {
       public int id;
       public String name;
+      public String clan;
       public int eff;
       public int battles;
       public int wins;
@@ -60,9 +62,8 @@ namespace wot
     }
 
     // local cache
-    private readonly Dictionary<string, PlayerInfo> cache = new Dictionary<string, PlayerInfo>();
-
-    private readonly Dictionary<string, Stat> pendingPlayers = new Dictionary<string, Stat>();
+    private readonly Dictionary<int, PlayerInfo> cache = new Dictionary<int, PlayerInfo>();
+    private readonly Dictionary<int, Stat> pendingPlayers = new Dictionary<int, Stat>();
 
     private Info _modInfo = null;
     private bool _firstError = true;
@@ -135,34 +136,6 @@ namespace wot
       }
     }
 
-    // name-id,name-id,... or name,name,...
-    private void AddPendingPlayers(String parameters)
-    {
-      lock (_lockIngame)
-      {
-        String[] chunks = parameters.Split(',');
-        foreach (String chunk in chunks)
-        {
-            // The character "-" may be used in china server as the username, for example  "-_-"
-           String[] param = new String[2];
-           param[0] = chunk.Substring(0, chunk.LastIndexOf("-")).Trim();
-           param[1] = chunk.Substring(chunk.LastIndexOf("-") + 1).Trim();
-
-          string name = param[0].ToUpper();
-          int id = (param.Length > 1) ? int.Parse(param[1]) : 0;
-          if (!pendingPlayers.ContainsKey(name))
-          {
-            pendingPlayers[name] = new Stat()
-            {
-              id = id,
-              name = name
-            };
-          }
-        }
-        added = true;
-      }
-    }
-
     private void SetPendingPlayers(String parameters)
     {
       lock (_lockIngame)
@@ -172,16 +145,37 @@ namespace wot
       }
     }
 
-    private string getPendingPlayersResult()
+    // id=name[clan],id=name
+    private void AddPendingPlayers(String parameters)
     {
-      string result = "";
-      foreach (Stat stat in pendingPlayers.Values)
+      lock (_lockIngame)
       {
-        if (result != "")
-          result += ",";
-        result += String.Format("{0}-{1}", stat.name, stat.id);
+        String[] chunks = parameters.Split(',');
+        foreach (String chunk in chunks)
+        {
+          String[] param = chunk.Split(new char[] { '=' }, 2, StringSplitOptions.RemoveEmptyEntries);
+          if (param.Length != 2)
+            continue;
+
+          int id = int.Parse(param[0]);
+          string name = param[1];
+          if (name.Contains("["))
+            name = name.Remove(name.IndexOf("["));
+          string clan = "";
+          if (param[1].Contains("["))
+            clan = param[1].Split(new char[] { '[', ']' }, 3)[1];
+          if (!pendingPlayers.ContainsKey(id))
+          {
+            pendingPlayers[id] = new Stat()
+            {
+              id = id,
+              name = name,
+              clan = clan,
+            };
+          }
+        }
+        added = true;
       }
-      return result;
     }
 
     private void retrieveStats()
@@ -468,12 +462,10 @@ namespace wot
               _prevResult = _lastResult;
               break;
 
-            case "@GET":
-              _prevResult = getPendingPlayersResult();
-              break;
-
             case "@GET_VERSION":
-              _prevResult = version;
+              _prevResult = version + "\n" +
+                Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+;
               break;
 
             default:
@@ -533,11 +525,10 @@ namespace wot
       };
 
       int pos = 0;
-      foreach (string name in pendingPlayers.Keys)
+      foreach (int id in pendingPlayers.Keys)
       {
-        string uname = name.ToUpper();
-        if (cache.ContainsKey(uname))
-          res.players[pos++] = cache[uname].stat;
+        if (cache.ContainsKey(id))
+          res.players[pos++] = cache[id].stat;
       }
       Array.Resize<Stat>(ref res.players, pos);
 
@@ -658,33 +649,31 @@ namespace wot
     private void PrepareStat()
     {
       List<string> forUpdate = new List<string>();
-      List<string> forUpdateNames = new List<string>();
+      List<int> forUpdateIds = new List<int>();
 
-      foreach (string name in pendingPlayers.Keys)
+      foreach (int id in pendingPlayers.Keys)
       {
-        string uname = name.ToUpper();
-        if (cache.ContainsKey(uname))
+        if (cache.ContainsKey(id))
         {
-          PlayerInfo currentMember = cache[uname];
+          PlayerInfo currentMember = cache[id];
           if (currentMember.notInDb)
             continue;
           if (!currentMember.httpError)
           {
-            Log(1, string.Format("CACHE - {0}: eff={1} battles={2} wins={3}", name,
+            Log(1, string.Format("CACHE - {0}: eff={1} battles={2} wins={3}", pendingPlayers[id].name,
               currentMember.stat.eff, currentMember.stat.battles, currentMember.stat.wins));
             continue;
           }
           if (DateTime.Now.Subtract(currentMember.errorTime).Minutes < Settings.Default.ServerUnavailableTimeout)
             continue;
-          cache.Remove(uname);
+          cache.Remove(id);
         }
 
         //We cann't get the id from the offical server in china,so we have to send the name to the rating server of China for search.
         forUpdate.Add(version.StartsWith("CN", StringComparison.InvariantCultureIgnoreCase)
-          ? String.Format("{0}-{1}", pendingPlayers[uname].name, pendingPlayers[uname].id)
-          : pendingPlayers[uname].id.ToString());
+          ? String.Format("{0}-{1}", pendingPlayers[id].name, id) : id.ToString());
 
-        forUpdateNames.Add(uname);
+        forUpdateIds.Add(id);
       }
 
       if (forUpdate.Count == 0 || ServiceUnavailable())
@@ -694,7 +683,8 @@ namespace wot
       {
         String reqMembers = String.Join(",", forUpdate.ToArray());
 
-        //The character "?" may be used in china server as the username , for example  "?ABC" . So it's must be replace to "%3F" for search.
+        // The character "?" may be used in china server as the username,
+        // for example  "?ABC" . So it's must be replace to "%3F" for search.
         if (reqMembers.IndexOf('?') > 0)
           reqMembers = reqMembers.Replace("?", "%3F");
 
@@ -711,38 +701,41 @@ namespace wot
         {
           if (String.IsNullOrEmpty(stat.name))
             continue;
-          string name = forUpdateNames[forUpdate.FindIndex(x =>
+          int id = forUpdateIds[forUpdate.FindIndex(x =>
             {
               if (!version.StartsWith("CN"))
                 return x == stat.id.ToString();
               return x.EndsWith("-" + stat.id);
             })];
-          cache[name.ToUpper()] = new PlayerInfo()
+          cache[id] = new PlayerInfo()
           {
             stat = stat,
             httpError = false
           };
-          cache[name.ToUpper()].stat.name = name;
+          if (String.IsNullOrEmpty(cache[id].stat.name))
+            cache[id].stat.name = pendingPlayers[id].name;
+          cache[id].stat.clan = pendingPlayers[id].clan;
         };
 
         // disable stat retrieving for people in cache, but not in server db
-        foreach (string uname in forUpdateNames)
+        foreach (int id in forUpdateIds)
         {
-          if (cache.ContainsKey(uname))
+          if (cache.ContainsKey(id))
             continue;
 
-          cache[uname] = new PlayerInfo()
+          cache[id] = new PlayerInfo()
           {
             stat = new Stat()
             {
-              id = pendingPlayers[uname].id,
-              name = uname
+              id = id,
+              name = pendingPlayers[id].name,
+              clan = pendingPlayers[id].clan,
             },
             httpError = false,
             notInDb = true
           };
 
-          Debug(String.Format("Player {0} not in Database", uname));
+          Debug(String.Format("Player [{0}] {1} not in Database", id, pendingPlayers[id].name));
         };
         _modInfo = res.info;
       }
@@ -752,12 +745,14 @@ namespace wot
         ErrorHandle();
         for (var i = 0; i < forUpdate.Count; i++)
         {
-          string name = forUpdateNames[i];
-          cache[name.ToUpper()] = new PlayerInfo()
+          int id = forUpdateIds[i];
+          cache[id] = new PlayerInfo()
           {
             stat = new Stat()
             {
-              name = name
+              id = id,
+              name = pendingPlayers[id].name,
+              clan = pendingPlayers[id].clan,
             },
             httpError = true,
             errorTime = DateTime.Now

@@ -186,12 +186,17 @@ class wot.utils.Config
           if (Config.s_config.rating.showPlayersStatistics)
           {
             var lv_ver: LoadVars = new LoadVars();
-            lv_ver.onData = function(region: String)
+            lv_ver.onData = function(str2: String)
             {
               if (Config._RegionLoaded)
                 return;
               Config._RegionLoaded = true;
-              Config.TuneConfigForServerRegion(region);
+              var a: Array = str2.split("\n");
+              Config.TuneConfigForServerRegion(a[0]);
+              // MAX_PATH is 259 on NTFS
+              // WARNING: What if MAX_PATH less then 50?
+              //   259 - "\res_mods\.stat\".length - 1 = 242
+              Defines.MAX_PATH = Math.max(50, 242 - a[1].length);
             }
             lv_ver.load(Defines.COMMAND_GET_VERSION);
           }

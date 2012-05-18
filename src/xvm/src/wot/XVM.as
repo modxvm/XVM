@@ -16,6 +16,7 @@ import wot.utils.GraphicsUtil;
 import wot.utils.Stat;
 import wot.utils.Utils;
 import wot.utils.Logger;
+import wot.utils.PlayerInfo;
 
 class wot.XVM extends net.wargaming.ingame.VehicleMarker
 {
@@ -39,6 +40,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   var m_showMaxHealth: Boolean;
   var m_team: String;
   var m_isDead: Boolean = false;
+  var m_clanIcon = null;
   
   // TextFields
   var textFields: Object = null;
@@ -534,12 +536,12 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
         return null;
 
       return new TextFormat(
-        config_font.name,
-        config_font.size,
+        config_font.name || "$FieldFont",
+        config_font.size || 13,
         0x000000,
         config_font.bold,
         false, false, null, null,
-        config_font.align);
+        config_font.align || "center");
     }
     catch (e)
     {
@@ -841,6 +843,23 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     }
   }
 
+  function XVMInitializeClanIcon(cfg)
+  {
+    var pinfo = PlayerInfo.getPlayerInfo(Utils.GetPlayerName(m_playerFullName), Utils.GetClanName(m_playerFullName));
+    if (!m_clanIcon)
+    {
+      m_clanIcon = PlayerInfo.createClanIcon2(this, "m_clanIcon", pinfo ? pinfo.icon : null,
+        cfg.x - (cfg.w / 2.0), cfg.y - (cfg.h / 2.0), cfg.w, cfg.h, 100);
+    }
+    if (!pinfo)
+      m_clanIcon.clanIcon.source = null;
+    else
+    {
+      if (pinfo.icon != m_clanIcon.clanIcon.source)
+        m_clanIcon.clanIcon.source = pinfo.icon;
+    }
+  }
+
   function XVMPopulateData()
   {
     try
@@ -862,6 +881,9 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
       // Initialize states and creating text fields
       XVMInitializeStates();
+
+      // Initialize clan icons
+      XVMInitializeClanIcon(cfg.clanIcon);
 
       if (DEBUG_TIMES)
         Logger.add("DEBUG TIME: XVMPopulateData(): " + Utils.elapsedMSec(start, new Date()) + " ms");
@@ -946,6 +968,20 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
           iconLoader._alpha = XVMFormatDynamicAlpha(cfg.contourIcon.alpha, m_curHealth);
         }
         iconLoader._visible = visible;
+      }
+
+      // Clan Icon
+      if (m_clanIcon != null && m_clanIcon.clanIcon.source != null)
+      {
+        visible = cfg.clanIcon.visible;
+        if (visible)
+        {
+          m_clanIcon._x = cfg.clanIcon.x - (cfg.clanIcon.w >> 1);
+          m_clanIcon._y = cfg.clanIcon.y - (cfg.clanIcon.h >> 1);
+          m_clanIcon.clanIcon.setSize(cfg.clanIcon.w, cfg.clanIcon.h);
+          m_clanIcon._alpha = XVMFormatDynamicAlpha(cfg.clanIcon.alpha, m_curHealth);
+        }
+        m_clanIcon._visible = visible;
       }
 
       // Damage Text

@@ -177,6 +177,14 @@
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "amount": 0                       //   Color intensity from 0 to 100. The default is 0 (off).
           },
+          "clanIcon": {                       // Player/clan icon
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "w": 16,                          //   Width
+            "h": 16,                          //   Height
+            "alpha": 100                      //   Opacity (dynamic transparency allowed, see readme-en.txt)
+          },
           "levelIcon": {                      // Vehicle tier
             "visible": false,                 //   false - Disable
             "x": 0,                           //   Position on the X axis
@@ -314,6 +322,14 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "amount": 0                       //   Color intensity from 0 to 100. The default is 0 (off).
+          },
+          "clanIcon": {                       // Player/clan icon
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "w": 16,                          //   Width
+            "h": 16,                          //   Height
+            "alpha": 100                      //   Opacity (dynamic transparency allowed, see readme-en.txt)
           },
           "levelIcon": {                      // Vehicle tier
             "visible": false,                 //   false - Disable
@@ -481,6 +497,14 @@
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "amount": 0                       //   Color intensity from 0 to 100. The default is 0 (off).
           },
+          "clanIcon": {                       // Player/clan icon
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "w": 16,                          //   Width
+            "h": 16,                          //   Height
+            "alpha": 100                      //   Opacity (dynamic transparency allowed, see readme-en.txt)
+          },
           "levelIcon": {                      // Vehicle tier
             "visible": false,                 //   false - Disable
             "x": 0,                           //   Position on the X axis
@@ -571,6 +595,14 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "amount": 0                       //   Color intensity from 0 to 100. The default is 0 (off).
+          },
+          "clanIcon": {                       // Player/clan icon
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "w": 16,                          //   Width
+            "h": 16,                          //   Height
+            "alpha": 100                      //   Opacity (dynamic transparency allowed, see readme-en.txt)
           },
           "levelIcon": {                      // Vehicle tier
             "visible": false,                 //   false - Disable
@@ -716,6 +748,14 @@
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "amount": 0                       //   Color intensity from 0 to 100. The default is 0 (off).
           },
+          "clanIcon": {                       // Player/clan icon
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "w": 16,                          //   Width
+            "h": 16,                          //   Height
+            "alpha": 100                      //   Opacity (dynamic transparency allowed, see readme-en.txt)
+          },
           "levelIcon": {                      // Vehicle tier
             "visible": false,                 //   false - Disable
             "x": 0,                           //   Position on the X axis
@@ -853,6 +893,14 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "amount": 0                       //   Color intensity from 0 to 100. The default is 0 (off).
+          },
+          "clanIcon": {                       // Player/clan icon
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "w": 16,                          //   Width
+            "h": 16,                          //   Height
+            "alpha": 100                      //   Opacity (dynamic transparency allowed, see readme-en.txt)
           },
           "levelIcon": {                      // Vehicle tier
             "visible": false,                 //   false - Disable
@@ -1020,6 +1068,14 @@
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "amount": 0                       //   Color intensity from 0 to 100. The default is 0 (off).
           },
+          "clanIcon": {                       // Player/clan icon
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "w": 16,                          //   Width
+            "h": 16,                          //   Height
+            "alpha": 100                      //   Opacity (dynamic transparency allowed, see readme-en.txt)
+          },
           "levelIcon": {                      // Vehicle tier
             "visible": false,                 //   false - Disable
             "x": 0,                           //   Position on the X axis
@@ -1110,6 +1166,14 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "amount": 0                       //   Color intensity from 0 to 100. The default is 0 (off).
+          },
+          "clanIcon": {                       // Player/clan icon
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "w": 16,                          //   Width
+            "h": 16,                          //   Height
+            "alpha": 100                      //   Opacity (dynamic transparency allowed, see readme-en.txt)
           },
           "levelIcon": {                      // Vehicle tier
             "visible": false,                 //   false - Disable

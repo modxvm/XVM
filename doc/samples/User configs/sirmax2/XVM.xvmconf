@@ -66,6 +66,11 @@
           },
           "damageText": {
             "damageMessage": "{{dmg}}"
+          },
+          "clanIcon": {
+            "visible": true,
+            "x": 0,
+            "y": -67
           }
         }
       },
@@ -154,6 +159,11 @@
           },
           "damageText": {
             "damageMessage": "{{dmg}}"
+          },
+          "clanIcon": {
+            "visible": true,
+            "x": 0,
+            "y": -67
           }
         }
       },
@@ -336,6 +346,7 @@
         { "clan": "[NOD]",      "icon": "nod.png" },
         { "clan": "[MCDAC]",    "icon": "MCDAC.png" },
         { "clan": "[LADY]",     "icon": "lady.png" }
+//        ,{ "clan": "[",       "icon": "WG.png" }
       ]
     },
     { "folder": "EU", "players": [
