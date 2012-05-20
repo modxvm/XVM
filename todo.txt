@@ -1,5 +1,7 @@
 Top:
 
+обновить конфиги в архиве (взять топовые с КР)
+
 Редактор:
 1. Player/clan icons для версии конфига 1.3.0
    battle/useStandardMarkers

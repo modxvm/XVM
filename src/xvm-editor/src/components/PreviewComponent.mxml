@@ -8,10 +8,12 @@
 	<fx:Script>
 		<![CDATA[
 			import flash.display.Loader;
-
+			
 			import mx.controls.SWFLoader;
 			import mx.events.FlexEvent;
 			import mx.events.ListEvent;
+			
+			import utils.ClassLoader;
 
 			[Embed(source="images/bg/hills-1.jpg")]
 			private static var IMG_hills1 : Class;
@@ -37,25 +39,51 @@
 
 			protected function onCreationComplete(event:FlexEvent):void
 			{
-				/*loadSWF("battle.swf");
-				loadSWF("battleloading.swf");
-				loadSWF("PlayersPanel.swf");
-				loadSWF("StatisticForm.swf");
-				loadSWF("VehicleMarkersManager.swf");*/
+				//loadSWF("battle.swf");
+				//loadSWF("battleloading.swf");
+				//loadSWF("PlayersPanel.swf");
+				//loadSWF("StatisticForm.swf");
+				loadSWF("VehicleMarkersManager.swf");
 			}
 
+			private var loader:ClassLoader;
 			private function loadSWF(url:String):void
 			{
-				var loader:SWFLoader = new SWFLoader();
-				loader.addEventListener(Event.COMPLETE, loadSWFComplete);
+				loader = new ClassLoader();
+				loader.addEventListener(ClassLoader.LOAD_ERROR,loadErrorHandler);
+				loader.addEventListener(ClassLoader.CLASS_LOADED,classLoadedHandler);
 				loader.load(url);
 			}
 
-			private function loadSWFComplete( event:Event ):void
+			private function loadErrorHandler(e:Event):void {
+				throw new IllegalOperationError("Cannot load the specified file.");
+			}
+			
+			private function classLoadedHandler(e:Event):void {
+				var xvmRef:Class = loader.getClass("VehicleMarkerAlly");
+				var xvm:Object = new xvmRef();
+				addChild(xvm as DisplayObject);
+			}
+			
+			/*private function loadSWFComplete( event:Event ):void
 			{
-				var loader:SWFLoader = event.target as SWFLoader;
+-				var loader:Loader = event.target as Loader;
 				//var str:String = loader.content['hello']();
-				trace(loader.content.toString());
+				
+				var c:Class = loader.contentLoaderInfo.applicationDomain.getDefinition("VehicleMarkerAlly") as Class;
+				var vmm = new c() as MovieClip;
+				addChild(vmm);
+				
+				//trace(loader.content.toString());
+			}*/
+
+			private function loader_complete(evt:Event):void
+			{
+				var loader:Loader = evt.currentTarget.loader as Loader;
+				var c:Class = loader.contentLoaderInfo.applicationDomain
+					.getDefinition("wot.ingame.VehicleMarkerAlly") as Class;
+				var vmm = new c() as MovieClip;
+				addChild(vmm);
 			}
 
 			protected virtual function onChange(event:Event):void
