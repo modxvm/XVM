@@ -597,7 +597,7 @@ class wot.utils.Stat
           Number(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, chances.m_raw, "0x")), 50);
         tf.htmlText = tf.text +
           " <font color='#" + color.toString(16) + "'>" +
-          "(Chances: m = " + chances.m + ", k = " + chances.k + ")</font>";
+          "(Win chances: " + Math.round(chances.m) + "%)</font>";
       }
     }
     return tf.htmlText;

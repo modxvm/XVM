@@ -16,6 +16,7 @@ Top:
 размытия иконок на экране загрузки
 Sometimes enemy vehicle contour icon is showing default WoT icon instead of my modded one.
 скругления краев healthBar
+замена лампочки 6-го чувства
 
 Is there any chance to get {{hp-max}}, {{eff}}, {{nick}}, {{vehicle}} in playerspanel?
 I think its not impossible. If you fix positions of info above the tanks to playerspanel
