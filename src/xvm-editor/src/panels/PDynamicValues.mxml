@@ -81,7 +81,7 @@
 				container.removeAllElements();
 				var src:Array = Config.GetValue(_config);
 				if (src.length == 0)
-                                       	container.addElement(CreateNewElementButton());
+					container.addElement(CreateNewElementButton());
 				else
 				{
 					for (var i: Number = 0; i < src.length; ++i)

@@ -241,9 +241,7 @@
 				<s:NavigatorContent label="{_('claniconPage')}" width="100%" height="100%" id="pgPlayers">
 					<s:Scroller x="0" y="0" width="420" height="100%">
 						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-							<s:Panel width="100%" height="100%" title="{_('PlayersClansIcons')}">
-								<p:PDynamicValues id="p_players" config="players" editorClass="DynamicPlayersEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshPlayersPage();"/>
-							</s:Panel>
+							<p:PClanIcons id="p_players" config="players" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshPlayersPage();"/>
 						</s:VGroup>
 					</s:Scroller>
 				</s:NavigatorContent>
