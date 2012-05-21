@@ -13,7 +13,7 @@
 			import mx.events.FlexEvent;
 			import mx.events.ListEvent;
 			
-			import utils.ClassLoader;
+			//import utils.ClassLoader;
 
 			[Embed(source="images/bg/hills-1.jpg")]
 			private static var IMG_hills1 : Class;
@@ -46,13 +46,13 @@
 				loadSWF("VehicleMarkersManager.swf");
 			}
 
-			private var loader:ClassLoader;
+			//private var loader:ClassLoader;
 			private function loadSWF(url:String):void
 			{
-				loader = new ClassLoader();
+				/*loader = new ClassLoader();
 				loader.addEventListener(ClassLoader.LOAD_ERROR,loadErrorHandler);
 				loader.addEventListener(ClassLoader.CLASS_LOADED,classLoadedHandler);
-				loader.load(url);
+				loader.load(url);*/
 			}
 
 			private function loadErrorHandler(e:Event):void {
@@ -60,9 +60,9 @@
 			}
 			
 			private function classLoadedHandler(e:Event):void {
-				var xvmRef:Class = loader.getClass("VehicleMarkerAlly");
+				/*var xvmRef:Class = loader.getClass("VehicleMarkerAlly");
 				var xvm:Object = new xvmRef();
-				addChild(xvm as DisplayObject);
+				addChild(xvm as DisplayObject);*/
 			}
 			
 			/*private function loadSWFComplete( event:Event ):void
@@ -79,11 +79,11 @@
 
 			private function loader_complete(evt:Event):void
 			{
-				var loader:Loader = evt.currentTarget.loader as Loader;
+				/*var loader:Loader = evt.currentTarget.loader as Loader;
 				var c:Class = loader.contentLoaderInfo.applicationDomain
 					.getDefinition("wot.ingame.VehicleMarkerAlly") as Class;
 				var vmm = new c() as MovieClip;
-				addChild(vmm);
+				addChild(vmm);*/
 			}
 
 			protected virtual function onChange(event:Event):void

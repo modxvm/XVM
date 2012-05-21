@@ -49,6 +49,7 @@ private function RefreshCommonPage():void
 		this.p_battle.v_removePanelsModeSwitcher.value = section.removePanelsModeSwitcher;
 		this.p_battle.v_drawGrid.value = section.drawGrid;
 		this.p_battle.v_hideXVMVersion.value = section.hideXVMVersion;
+		this.p_battle.v_useStandardMarkers.value = section.useStandardMarkers;
 
 		section = Config.s_config.rating;
 		this.p_rating.v_showPlayersStatistics.value = section.showPlayersStatistics;
@@ -265,6 +266,7 @@ public static var ElementControls:Object = {
 	healthBar: [ "m_healthBar" ],
 	damageText: [ "m_damageText", "m_damageText_font", "m_damageText_shadow" ],
 	contourIcon: [ "m_contourIcon" ],
+	clanIcon: [ "m_clanIcon" ],
 	levelIcon: [ "m_levelIcon" ],
 	actionMarker: [ "m_actionMarker" ],
 
@@ -275,6 +277,7 @@ public static var ElementControls:Object = {
 	m_damageText_font: [ "v_name", "v_size", "v_align", "v_bold" ],
 	m_damageText_shadow: [ "v_size", "v_strength", "v_angle", "v_distance", "v_color", "v_alpha" ],
 	m_contourIcon: ["v_visible", "v_x", "v_y", "v_alpha", "v_color", "v_amount" ],
+	m_clanIcon: ["v_visible", "v_x", "v_y", "v_w", "v_h", "v_alpha" ],
 	m_levelIcon: ["v_visible", "v_x", "v_y", "v_alpha" ],
 	m_actionMarker: ["v_visible", "v_x", "v_y", "v_alpha" ]
 };
@@ -288,7 +291,7 @@ private function RefreshMarkersPage():void
 
 		if (!activeElement)
 			return;
-		
+
 		if (activeElement == textFields)
 		{
 			RefreshTextFields();

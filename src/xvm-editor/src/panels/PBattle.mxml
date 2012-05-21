@@ -15,5 +15,6 @@
 		<c:LabeledCheckBox label="{resourceManager.getString('panels', 'removePanelsModeSwitcher')}" id="v_removePanelsModeSwitcher" config="battle.removePanelsModeSwitcher" change="onChange(event)"/>
 		<c:LabeledCheckBox label="{resourceManager.getString('panels', 'drawGrid')}" toolTip="{resourceManager.getString('panels', 'drawGridToolTip')}" id="v_drawGrid" config="battle.drawGrid" change="onChange(event)"/>
 		<c:LabeledCheckBox label="{resourceManager.getString('panels', 'hideXVMVersion')}" toolTip="{resourceManager.getString('panels', 'hideXVMVersionToolTip')}" id="v_hideXVMVersion" config="battle.hideXVMVersion" change="onChange(event)"/>
+		<c:LabeledCheckBox label="{resourceManager.getString('panels', 'useStandardMarkers')}" id="v_useStandardMarkers" config="battle.useStandardMarkers" change="onChange(event)"/>
 	</s:VGroup>
 </c:PanelComponent>

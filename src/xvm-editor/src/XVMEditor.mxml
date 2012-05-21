@@ -21,7 +21,7 @@
 			{
 				return resourceManager.getString("main", textId);
 			}
-			
+
 			include "IO.as";
 			include "Main.as";
 			include "Refresh.as";
@@ -33,7 +33,7 @@
 				onCreateNewConfigClick();
 				onVehicleStateChanged(event);
 			}
-			
+
 			protected function onLanguageButtonClick(event:Event):void
 			{
 				resourceManager.localeChain = (event.target == lang_en) ? ['en_US', 'ru_RU'] : ['ru_RU', 'en_US'];
@@ -83,19 +83,21 @@
 				<s:NavigatorContent label="{_('markersPage')}" width="100%" height="100%" id="pgMarkers">
 					<s:Scroller x="0" y="0" width="420" height="100%">
 						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-							<s:HGroup width="100%" height="140">
-								<s:BorderContainer width="245" height="100" borderVisible="false">
-									<s:ToggleButton x="10" y="10" width="110" label="{_('ally')}" id="ally" selected="true" change="onVehicleStateChanged(event)"/>
-									<s:ToggleButton x="125" y="10" width="110" label="{_('enemy')}" id="enemy" change="onVehicleStateChanged(event)"/>
-									<s:ToggleButton x="10" y="40" width="110" label="{_('alive')}" id="alive" selected="true" change="onVehicleStateChanged(event)"/>
-									<s:ToggleButton x="125" y="40" width="110" label="{_('dead')}" id="dead" change="onVehicleStateChanged(event)"/>
-									<s:ToggleButton x="10" y="70" width="110" label="{_('normal')}" id="normal" selected="true" change="onVehicleStateChanged(event)"/>
-									<s:ToggleButton x="125" y="70" width="110" label="{_('extended')}" id="extended" change="onVehicleStateChanged(event)"/>
-								</s:BorderContainer>
-								<s:BorderContainer x="10" borderVisible="false">
-									<s:ButtonBar dataProvider="{vsMarkers}" id="elements" change="onVehicleStateChanged(event)"/>
-								</s:BorderContainer>
-							</s:HGroup>
+							<s:BorderContainer width="100%" height="165" borderVisible="false">
+								<s:HGroup x="5" y="5" width="100%" height="100%">
+									<s:BorderContainer borderVisible="false">
+										<s:ButtonBar dataProvider="{vsMarkers}" id="elements" change="onVehicleStateChanged(event)"/>
+									</s:BorderContainer>
+									<s:TileGroup requestedColumnCount="2" verticalGap="5">
+										<s:ToggleButton width="110" label="{_('ally')}" id="ally" selected="true" change="onVehicleStateChanged(event)"/>
+										<s:ToggleButton width="110" label="{_('enemy')}" id="enemy" change="onVehicleStateChanged(event)"/>
+										<s:ToggleButton width="110" label="{_('alive')}" id="alive" selected="true" change="onVehicleStateChanged(event)"/>
+										<s:ToggleButton width="110" label="{_('dead')}" id="dead" change="onVehicleStateChanged(event)"/>
+										<s:ToggleButton width="110" label="{_('normal')}" id="normal" selected="true" change="onVehicleStateChanged(event)"/>
+										<s:ToggleButton width="110" label="{_('extended')}" id="extended" change="onVehicleStateChanged(event)"/>
+									</s:TileGroup>
+								</s:HGroup>
+							</s:BorderContainer>
 							<mx:ViewStack id="vsMarkers" width="100%" height="100%">
 								<s:NavigatorContent label="{_('VehicleClass')}" id="vehicleIcon">
 									<s:Scroller x="0" y="0" width="100%" height="100%">
@@ -124,6 +126,13 @@
 									<s:Scroller x="0" y="0" width="100%" height="100%">
 										<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
 											<m:MContourIcon id="m_contourIcon" valueChanged="updateMarkerValue(event)"/>
+										</s:VGroup>
+									</s:Scroller>
+								</s:NavigatorContent>
+								<s:NavigatorContent label="{_('ClanIcon')}" id="clanIcon">
+									<s:Scroller x="0" y="0" width="100%" height="100%">
+										<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+											<m:MClanIcon id="m_clanIcon" valueChanged="updateMarkerValue(event)"/>
 										</s:VGroup>
 									</s:Scroller>
 								</s:NavigatorContent>
