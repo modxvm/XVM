@@ -1,0 +1,86 @@
+﻿{
+  "configVersion": "1.2.0",
+  "definition": {
+    "author": "BOtsmAN",
+    "description": "Settings for XVM",
+    "url": "http://www.koreanrandom.com/forum/topic/1384-xvm-configurations/",
+    "date": "24.04.2012",
+    "gameVersion": "0.7.2",
+    "modMinVersion": "2.0"
+  },
+  "battle": {
+    "mirroredVehicleIcons": true,
+    "showPostmortemTips": false,
+    "drawGrid": false,
+    "hideXVMVersion": true
+  },
+  "rating": {
+    "showPlayersStatistics": true,
+    "loadEnemyStatsInFogOfWar": true
+  },
+  "battleLoading": {
+    "showChances": true,
+    "showClock": false,
+    "formatLeft": "{{kb}} {{eff}} <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatRight": "{{kb}} {{eff}} <font color='{{c:rating}}'>{{rating}}</font>"
+  },
+  "statisticForm": {
+    "showChances": true,
+    "formatLeft": "{{kb}} {{eff}} <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatRight": "{{kb}} {{eff}} <font color='{{c:rating}}'>{{rating}}</font>"
+  },
+  "playersPanel": {
+    "alpha": 80,
+    "removeSquadIcon": true,             
+    "medium": {
+     "width": 70,
+      "formatLeft": "<font color='{{c:rating}}'>{{rating}}</font> {{vehicle}}",
+      "formatRight": "{{vehicle}} <font color='{{c:rating}}'>{{rating}}</font>"
+    },
+    "medium2": {
+      "formatLeft": "{{vehicle}}",
+      "formatRight": "{{vehicle}}"
+    },
+    "large": {
+      "width": 130,
+      "nickFormatLeft": "<font color='{{c:rating}}'>{{rating}}</font> {{nick}}",
+      "nickFormatRight": "{{nick}} <font color='{{c:rating}}'>{{rating}}</font>",
+      "vehicleFormatLeft": "{{vehicle}}",
+      "vehicleFormatRight": "{{vehicle}}"
+    }
+  },
+  "colors": {
+     "eff": [
+      { "value": 600, "color": "0xDD0000" },
+      { "value": 900, "color": "0xDD3333" },
+      { "value": 1200, "color": "0xFFCC33" },
+      { "value": 1500, "color": "0x99FF33" },
+      { "value": 1800, "color": "0x33FF33" },
+      { "value": 9999, "color": "0xCC66CC" }
+   ],
+     "rating": [
+      { "value": 42, "color": "0xDD0000" },
+      { "value": 47, "color": "0xDD0000" },
+      { "value": 49, "color": "0xDDDD33" },
+      { "value": 51, "color": "0xFFCC33" },
+      { "value": 55, "color": "0x33FF33" },
+      { "value": 100, "color": "0xCC66CC" }
+   ],
+    "kb": [
+      { "value": 1, "color": "0xDD0000" },
+      { "value": 3, "color": "0xDD3333" },
+      { "value": 5, "color": "0xFFCC33" },
+      { "value": 8, "color": "0x99FF33" },
+      { "value": 12, "color": "0x33FF33" },
+      { "value": 9999, "color": "0xCC66CC" }
+    ]
+  },
+  "alpha": {
+    "hp": [
+      { "value": 350,  "alpha": 100 },
+      { "value": 500,  "alpha": 50 },
+      { "value": 9999, "alpha": 0 }
+    ]
+  }
+}
+

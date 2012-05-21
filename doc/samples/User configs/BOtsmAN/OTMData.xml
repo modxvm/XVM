@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<overTargetMarkers>
+  <definition>
+    <author>BOtsmAN</author>
+    <mod-version-min>2.0</mod-version-min>
+    <game-version>0.7.2</game-version>
+  </definition>
+  <battle>
+    <drawGrid>false</drawGrid>
+  </battle>
+  <rating>
+    <showPlayersStatistics>true</showPlayersStatistics>
+  </rating>
+  <components>
+    <friend>
+      <combatScrollText>
+        <enabled value="true"/>
+        <speed value="2"/>
+        <color value="10549277"/>
+        <maxRange value="40"/>
+        <textSize value="14"/>
+        <message>Бах!</message>
+        <prefix>-</prefix>
+        <postfix/>
+        <filter type="DropShadowFilter" size="3" angle="45" distance="1" color="0x000000" alpha="100" strength="200"/>
+      </combatScrollText>
+      <currentHealth>
+        <format size="11" align="center" bold="true"/>
+        <filter type="DropShadowFilter" size="3" angle="45" distance="1" color="0x000000" alpha="100" strength="60"/>
+        <maxValue enabled="true"/>
+      </currentHealth>
+      <healthBar>
+        <border size="1" color="0x000000" alpha="35"/>
+        <fill width="80" height="5" color="0x00FF00" alpha="30"/>
+        <damage fade="1" color="0x00FF00" alpha="65"/>
+      </healthBar>
+      <healthRatio>
+        <format size="11" align="center"/>
+        <filter type="DropShadowFilter" size="3" angle="45" distance="1" color="0x000000" alpha="100" strength="60"/>
+      </healthRatio>
+      <playerName>
+        <format size="13" align="center"/>
+        <filter type="DropShadowFilter" size="3" angle="45" distance="1" color="0x000000" alpha="100" strength="120"/>
+      </playerName>
+      <vehicleIcon>
+        <fill color="0x84DA0E"/>
+        <scale maxScale="100" x="0" y="16"/>
+      </vehicleIcon>
+      <vehicleName>
+        <format size="13" align="center"/>
+        <filter type="DropShadowFilter" size="3" angle="45" distance="1" color="0x000000" alpha="100" strength="120"/>
+      </vehicleName>
+      <infoText>
+        <format size="12" align="center" font="$FieldFont"/>
+        <filter type="DropShadowFilter" size="3" angle="45" distance="1" color="0x000000" alpha="100" strength="200"/>
+        <maxValue enabled="true"/>
+      </infoText>
+    </friend>
+    <enemy>
+      <combatScrollText>
+        <enabled value="true"/>
+        <speed value="2"/>
+        <color value="0xF02311"/>
+        <maxRange value="40"/>
+        <textSize value="14"/>
+        <message>Бах!</message>
+        <prefix>-</prefix>
+        <postfix/>
+        <filter type="DropShadowFilter" size="3" angle="45" distance="1" color="0x000000" alpha="100" strength="200"/>
+      </combatScrollText>
+      <currentHealth>
+        <format size="11" align="center"/>
+        <filter type="DropShadowFilter" size="3" angle="45" distance="1" color="0x000000" alpha="100" strength="60"/>
+        <maxValue enabled="true"/>
+      </currentHealth>
+      <healthBar>
+        <border size="1" color="0x000000" alpha="35"/>
+        <fill width="80" height="5" color="0xFF0000" alpha="30"/>
+        <damage fade="1" color="0xFF0000" alpha="80"/>
+      </healthBar>
+      <healthRatio>
+        <format size="11" align="center"/>
+        <filter type="DropShadowFilter" size="3" angle="45" distance="1" color="0x000000" alpha="100" strength="60"/>
+      </healthRatio>
+      <playerName>
+        <format size="13" align="center"/>
+        <filter type="DropShadowFilter" size="3" angle="45" distance="1" color="0x000000" alpha="100" strength="120"/>
+      </playerName>
+      <vehicleIcon>
+        <fill color="0xFF1D0C"/>
+        <scale maxScale="100" x="0" y="16"/>
+      </vehicleIcon>
+      <vehicleName>
+        <format size="13" align="center"/>
+        <filter type="DropShadowFilter" size="3" angle="45" distance="1" color="0x000000" alpha="100" strength="120"/>
+      </vehicleName>
+      <infoText>
+        <format size="12" align="center" font="$FieldFont"/>
+        <filter type="DropShadowFilter" size="3" angle="45" distance="1" color="0x000000" alpha="100" strength="200"/>
+        <maxValue enabled="true"/>
+      </infoText>
+    </enemy>
+  </components>
+  <behavior>
+    <friend>
+      <alive>
+        <normal>
+          <actionMarker x="0" y="-50"/>
+          <combatScrollText x="56" y="-20"/>
+          <playerName x="-70" y="-73" color="0x7BEC37" alpha="100" visible="false"/>
+          <vehicleName x="-70" y="-50" color="0x7BEC37" alpha="100" visible="true"/>
+          <currentHealth x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="true"/>
+          <healthRatio x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="false"/>
+          <healthBar x="-41" y="-20" alpha="100" visible="true"/>
+          <teamTag x="-41" y="-12"/>
+          <vehicleIcon x="0" y="-12" alpha="100" visible="true"/>
+          <levelIcon x="30" y="-10" alpha="100" visible="false"/>
+          <contourIcon x="6" y="-65" alpha="100" visible="false"/>
+        </normal>
+        <extended>
+          <actionMarker x="0" y="-50"/>
+          <combatScrollText x="56" y="-20"/>
+          <playerName x="-70" y="-50" color="0x7BEC37" alpha="100" visible="true"/>
+          <vehicleName x="-70" y="-50" color="0x7BEC37" alpha="100" visible="false"/>
+          <currentHealth x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="false"/>
+          <healthRatio x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="true"/>
+          <healthBar x="-41" y="-20" alpha="100" visible="true"/>
+          <teamTag x="-41" y="-12"/>
+          <vehicleIcon x="0" y="-12" alpha="100" visible="true"/>
+          <levelIcon x="30" y="-10" alpha="100" visible="true"/>
+          <contourIcon x="6" y="-65" alpha="100" visible="false"/>
+          <infoText x="0" y="-50" color="{{c:rating}}" alpha="75" visible="true" format="{{rating}}" bold="true"/>
+        </extended>
+      </alive>
+      <dead>
+        <normal>
+          <actionMarker x="0" y="-67"/>
+          <combatScrollText x="0" y="-67"/>
+          <playerName x="-70" y="-73" color="0x7BEC37" alpha="100" visible="false"/>
+          <vehicleName x="-70" y="-55" color="0x7BEC37" alpha="100" visible="false"/>
+          <currentHealth x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="false"/>
+          <healthRatio x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="false"/>
+          <healthBar x="-41" y="-38" alpha="100" visible="false"/>
+          <teamTag x="-41" y="-12"/>
+          <vehicleIcon x="0" y="-12" alpha="100" visible="true"/>
+          <levelIcon x="30" y="-10" alpha="100" visible="false"/>
+          <contourIcon x="6" y="-65" alpha="100" visible="false"/>
+        </normal>
+        <extended>
+          <actionMarker x="0" y="-67"/>
+          <combatScrollText x="0" y="-67"/>
+          <playerName x="-70" y="-45" color="0x7BEC37" alpha="80" visible="true"/>
+          <vehicleName x="-70" y="-30" color="0x7BEC37" alpha="80" visible="true"/>
+          <currentHealth x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="false"/>
+          <healthRatio x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="false"/>
+          <healthBar x="-41" y="-34" alpha="100" visible="false"/>
+          <teamTag x="-41" y="-12"/>
+          <vehicleIcon x="0" y="-12" alpha="100" visible="true"/>
+          <levelIcon x="30" y="-10" alpha="100" visible="true"/>
+          <contourIcon x="6" y="-65" alpha="100" visible="false"/>
+        </extended>
+      </dead>
+    </friend>
+    <enemy>
+      <alive>
+        <normal>
+          <actionMarker x="0" y="-50"/>
+          <combatScrollText x="56" y="-20"/>
+          <playerName x="-70" y="-73" color="0xEC3737" alpha="100" visible="false"/>
+          <vehicleName x="-70" y="-50" color="0xEC3737" alpha="100" visible="true"/>
+          <currentHealth x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="true"/>
+          <healthRatio x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="false"/>
+          <healthBar x="-41" y="-20" alpha="100" visible="true"/>
+          <teamTag x="-41" y="-12"/>
+          <vehicleIcon x="0" y="-12" alpha="100" visible="true"/>
+          <levelIcon x="30" y="-10" alpha="100" visible="false"/>
+          <contourIcon x="6" y="-65" alpha="100" visible="false"/>
+        </normal>
+        <extended>
+          <actionMarker x="0" y="-50"/>
+          <combatScrollText x="56" y="-20"/>
+          <playerName x="-70" y="-50" color="0xEC3737" alpha="100" visible="true"/>
+          <vehicleName x="-70" y="-55" color="0xEC3737" alpha="100" visible="false"/>
+          <currentHealth x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="false"/>
+          <healthRatio x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="true"/>
+          <healthBar x="-41" y="-20" alpha="100" visible="true"/>
+          <teamTag x="-41" y="-12"/>
+          <vehicleIcon x="0" y="-12" alpha="100" visible="true"/>
+          <levelIcon x="-32" y="-8" alpha="100" visible="true"/>
+          <contourIcon x="6" y="-65" alpha="100" visible="false"/>
+          <infoText x="0" y="-50" color="{{c:rating}}" alpha="75" visible="true" format="{{rating}}" bold="true"/>
+        </extended>
+      </alive>
+      <dead>
+        <normal>
+          <actionMarker x="0" y="-67"/>
+          <combatScrollText x="0" y="-67"/>
+          <playerName x="-70" y="-73" color="0xEC3737" alpha="100" visible="false"/>
+          <vehicleName x="-70" y="-55" color="0xEC3737" alpha="100" visible="false"/>
+          <currentHealth x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="false"/>
+          <healthRatio x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="false"/>
+          <healthBar x="-41" y="-34" alpha="100" visible="false"/>
+          <teamTag x="-62" y="-34"/>
+          <vehicleIcon x="0" y="-12" alpha="100" visible="true"/>
+          <levelIcon x="30" y="-10" alpha="100" visible="false"/>
+          <contourIcon x="6" y="-65" alpha="100" visible="false"/>
+        </normal>
+        <extended>
+          <actionMarker x="0" y="-67"/>
+          <combatScrollText x="0" y="-67"/>
+          <playerName x="-70" y="-45" color="0xEC3737" alpha="80" visible="true"/>
+          <vehicleName x="-70" y="-30" color="0xEC3737" alpha="80" visible="true"/>
+          <currentHealth x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="false"/>
+          <healthRatio x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="false"/>
+          <healthBar x="-41" y="-34" alpha="100" visible="false"/>
+          <teamTag x="-62" y="-34"/>
+          <vehicleIcon x="0" y="-12" alpha="100" visible="true"/>
+          <levelIcon x="-32" y="-8" alpha="100" visible="true"/>
+          <contourIcon x="6" y="-65" alpha="100" visible="false"/>
+        </extended>
+      </dead>
+    </enemy>
+  </behavior>
+</overTargetMarkers>
