@@ -8,7 +8,7 @@
 	<fx:Metadata>
 		[ResourceBundle("panels")]
 	</fx:Metadata>
-	<mx:Image right="5" y="-18" width="16" height="16" source="@Embed(source='images/cancel.png')" toolTip="{resourceManager.getString('panels', 'DefaultSettings')}" useHandCursor="true" buttonMode="true"/>
+	<mx:Image right="5" y="-18" width="16" height="16" source="@Embed(source='images/revert.png')" toolTip="{resourceManager.getString('panels', 'DefaultSettings')}" useHandCursor="true" buttonMode="true" click="onSetDefault(event)"/>
 	<s:VGroup left="10" right="10" top="10" bottom="10" gap="2" variableRowHeight="true">
 		<c:LabeledNumberSelector label="{resourceManager.getString('panels', 'ppAlpha')}" id="v_alpha" config="playersPanel.alpha" minimum="0" maximum="100" change="onChange(event)"/>
 		<c:LabeledNumberSelector label="{resourceManager.getString('panels', 'ppIconAlpha')}" id="v_iconAlpha" config="playersPanel.iconAlpha" minimum="0" maximum="100" change="onChange(event)"/>

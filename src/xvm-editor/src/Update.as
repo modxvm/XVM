@@ -68,3 +68,56 @@ protected function updateMarkerTextFieldValue(event:ValueChangedEvent):void
 		debug("ERROR: updateMarkerTextFieldValue(): " + ex.toString());
 	}
 }
+
+protected function onSetDefaultValue(event:SetDefaultValueEvent):void
+{
+	var config:String = event.sender.config;
+	//debug(config);
+	
+	var c: String;
+	switch (config)
+	{
+		case "battleLoading":
+			c = "battleLoading.showClock"; Config.SetValue(c, Config.GetValue(c, utils.DefaultConfig.config));
+			c = "battleLoading.showChances"; Config.SetValue(c, Config.GetValue(c, utils.DefaultConfig.config));
+			c = "battleLoading.removeSquadIcon"; Config.SetValue(c, Config.GetValue(c, utils.DefaultConfig.config));
+			break;
+
+		case "battleLoading.text":
+			c = "battleLoading.formatLeft"; Config.SetValue(c, Config.GetValue(c, utils.DefaultConfig.config));
+			c = "battleLoading.formatRight"; Config.SetValue(c, Config.GetValue(c, utils.DefaultConfig.config));
+			break;
+		
+		case "statisticForm":
+			c = "statisticForm.showChances"; Config.SetValue(c, Config.GetValue(c, utils.DefaultConfig.config));
+			c = "statisticForm.removeSquadIcon"; Config.SetValue(c, Config.GetValue(c, utils.DefaultConfig.config));
+			break;
+		
+		case "statisticForm.text":
+			c = "statisticForm.formatLeft"; Config.SetValue(c, Config.GetValue(c, utils.DefaultConfig.config));
+			c = "statisticForm.formatRight"; Config.SetValue(c, Config.GetValue(c, utils.DefaultConfig.config));
+			break;
+		
+		case "playersPanel":
+			c = "playersPanel.alpha"; Config.SetValue(c, Config.GetValue(c, utils.DefaultConfig.config));
+			c = "playersPanel.iconAlpha"; Config.SetValue(c, Config.GetValue(c, utils.DefaultConfig.config));
+			c = "playersPanel.removeSquadIcon"; Config.SetValue(c, Config.GetValue(c, utils.DefaultConfig.config));
+			break;
+		
+		default:
+			var defValue:Object = Config.GetValue(config, utils.DefaultConfig.config);
+			if (defValue != null)
+			{
+				Config.SetValue(config, defValue);
+				Config.TuneupConfig();
+			}
+			else
+				debug("config not found: " + config);
+	}
+}
+
+protected function onSetDefaultMarkerValue(event:SetDefaultValueEvent):void
+{
+	var config:String = event.sender.config;
+	//debug(config);
+}

@@ -5,9 +5,21 @@
 		 width="100%">
 	<fx:Script>
 		import events.ValueChangedEvent;
+		import events.SetDefaultValueEvent;
 
 		import flash.events.Event;
 
+		protected var _config:String = null;
+		[Bindable]
+		public function get config():String
+		{
+			return _config;
+		}
+		public function set config(v:String):void
+		{
+			_config = v;
+		}
+		
 		protected function onChange(event: Event):void
 		{
 			if (event)
@@ -16,8 +28,16 @@
 			if (target)
 				dispatchEvent(new events.ValueChangedEvent(target));
 		}
+
+		protected function onSetDefault(event: Event):void
+		{
+			if (event)
+				event.stopPropagation();
+			dispatchEvent(new events.SetDefaultValueEvent(this));
+		}
 	</fx:Script>
 	<fx:Metadata>
 		[Event(name="valueChanged", type="events.ValueChangedEvent")]
+		[Event(name="setDefaultValue", type="events.SetDefaultValueEvent")]
 	</fx:Metadata>
 </s:Panel>

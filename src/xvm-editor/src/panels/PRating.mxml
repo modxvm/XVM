@@ -8,7 +8,7 @@
 	<fx:Metadata>
 		[ResourceBundle("panels")]
 	</fx:Metadata>
-	<mx:Image right="5" y="-18" width="16" height="16" source="@Embed(source='images/cancel.png')" toolTip="{resourceManager.getString('panels', 'DefaultSettings')}" useHandCursor="true" buttonMode="true"/>
+	<mx:Image right="5" y="-18" width="16" height="16" source="@Embed(source='images/revert.png')" toolTip="{resourceManager.getString('panels', 'DefaultSettings')}" useHandCursor="true" buttonMode="true" click="onSetDefault(event)"/>
 	<s:VGroup left="10" right="10" top="10" bottom="10" gap="2" variableRowHeight="true">
 		<c:LabeledCheckBox label="{resourceManager.getString('panels', 'showPlayersStatistics')}" id="v_showPlayersStatistics" config="rating.showPlayersStatistics" change="onChange(event)"/>
 		<c:LabeledCheckBox label="{resourceManager.getString('panels', 'loadEnemyStatsInFogOfWar')}" id="v_loadEnemyStatsInFogOfWar" config="rating.loadEnemyStatsInFogOfWar" change="onChange(event)"/>

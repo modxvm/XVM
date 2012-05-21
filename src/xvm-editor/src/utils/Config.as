@@ -70,7 +70,7 @@ package utils
       Config.s_config.iconset.playersPanel = Utils.fixPath(Config.s_config.iconset.playersPanel);
       Config.s_config.iconset.statisticForm = Utils.fixPath(Config.s_config.iconset.statisticForm);
       Config.s_config.iconset.vehicleMarker = Utils.fixPath(Config.s_config.iconset.vehicleMarker);
-	  
+
 	  if (isNaN(Config.s_config.battleLoading.clanIcon.xr))
 		  Config.s_config.battleLoading.clanIcon.xr = Config.s_config.battleLoading.clanIcon.x;
 	  if (isNaN(Config.s_config.battleLoading.clanIcon.yr))
@@ -94,10 +94,10 @@ package utils
 			root = s_config;
 		if (!root)
 			return null;
-		
+
 		var p:Array = path.split("."); // "path.to.value"
 		var valueElement:String = p.pop(); // last element is value
-		
+
 		for each (var e:String in p)
 		{
 			// Create shild if not exist
@@ -106,7 +106,7 @@ package utils
 			// Shift root to next child
 			root = root[e];
 		}
-		
+
 		return root[valueElement];
 	}
 
@@ -122,7 +122,7 @@ package utils
 
 		var p:Array = path.split("."); // "path.to.value"
 		var valueElement:String = p.pop(); // last element is value
-		
+
 		for each (var e:String in p)
 		{
 			// Create shild if not exist
@@ -131,14 +131,14 @@ package utils
 			// Shift root to next child
 			root = root[e];
 		}
-		
+
 		// Set value
 		if (value != null)
 			root[valueElement] = value;
 		else
 			delete root[valueElement];
 	}
-	
+
     /**
      * Convert config to new format.
      */
@@ -225,6 +225,18 @@ package utils
         }
 
         v = "1.2.0";
+      }
+
+      if (v == "1.2.0")
+      {
+        if (config.players)
+        {
+          config.players = [
+            { root: "", folders: "" },
+            { folder: "", players: config.players }
+          ];
+        }
+        v = "1.3.0";
       }
 
   /*
