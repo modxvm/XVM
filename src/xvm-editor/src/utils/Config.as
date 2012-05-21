@@ -139,6 +139,17 @@ package utils
 			delete root[valueElement];
 	}
 
+	public static function SetDefaultValue(path:String):Boolean
+	{
+		var defValue:Object = GetValue(path, DefaultConfig.config);
+		if (defValue == null)
+			return false;
+
+		Config.SetValue(path, defValue);
+		Config.TuneupConfig();
+		return true;
+	}
+	
     /**
      * Convert config to new format.
      */

@@ -71,53 +71,83 @@ protected function updateMarkerTextFieldValue(event:ValueChangedEvent):void
 
 protected function onSetDefaultValue(event:SetDefaultValueEvent):void
 {
-	var config:String = event.sender.config;
-	//debug(config);
-	
-	var c: String;
-	switch (config)
+	try
 	{
-		case "battleLoading":
-			c = "battleLoading.showClock"; Config.SetValue(c, Config.GetValue(c, utils.DefaultConfig.config));
-			c = "battleLoading.showChances"; Config.SetValue(c, Config.GetValue(c, utils.DefaultConfig.config));
-			c = "battleLoading.removeSquadIcon"; Config.SetValue(c, Config.GetValue(c, utils.DefaultConfig.config));
-			break;
-
-		case "battleLoading.text":
-			c = "battleLoading.formatLeft"; Config.SetValue(c, Config.GetValue(c, utils.DefaultConfig.config));
-			c = "battleLoading.formatRight"; Config.SetValue(c, Config.GetValue(c, utils.DefaultConfig.config));
-			break;
+		var path:String = event.sender.config;
+		//debug(config);
 		
-		case "statisticForm":
-			c = "statisticForm.showChances"; Config.SetValue(c, Config.GetValue(c, utils.DefaultConfig.config));
-			c = "statisticForm.removeSquadIcon"; Config.SetValue(c, Config.GetValue(c, utils.DefaultConfig.config));
-			break;
-		
-		case "statisticForm.text":
-			c = "statisticForm.formatLeft"; Config.SetValue(c, Config.GetValue(c, utils.DefaultConfig.config));
-			c = "statisticForm.formatRight"; Config.SetValue(c, Config.GetValue(c, utils.DefaultConfig.config));
-			break;
-		
-		case "playersPanel":
-			c = "playersPanel.alpha"; Config.SetValue(c, Config.GetValue(c, utils.DefaultConfig.config));
-			c = "playersPanel.iconAlpha"; Config.SetValue(c, Config.GetValue(c, utils.DefaultConfig.config));
-			c = "playersPanel.removeSquadIcon"; Config.SetValue(c, Config.GetValue(c, utils.DefaultConfig.config));
-			break;
-		
-		default:
-			var defValue:Object = Config.GetValue(config, utils.DefaultConfig.config);
-			if (defValue != null)
-			{
-				Config.SetValue(config, defValue);
-				Config.TuneupConfig();
-			}
-			else
-				debug("config not found: " + config);
+		switch (path)
+		{
+			case "battleLoading":
+				Config.SetDefaultValue("battleLoading.showClock");
+				Config.SetDefaultValue("battleLoading.showChances");
+				Config.SetDefaultValue("battleLoading.removeSquadIcon");
+				break;
+	
+			case "battleLoading.text":
+				Config.SetDefaultValue("battleLoading.formatLeft");
+				Config.SetDefaultValue("battleLoading.formatRight");
+				break;
+			
+			case "statisticForm":
+				Config.SetDefaultValue("statisticForm.showChances");
+				Config.SetDefaultValue("statisticForm.removeSquadIcon");
+				break;
+			
+			case "statisticForm.text":
+				Config.SetDefaultValue("statisticForm.formatLeft");
+				Config.SetDefaultValue("statisticForm.formatRight");
+				break;
+			
+			case "playersPanel":
+				Config.SetDefaultValue("playersPanel.alpha");
+				Config.SetDefaultValue("playersPanel.iconAlpha");
+				Config.SetDefaultValue("playersPanel.removeSquadIcon");
+				break;
+			
+			default:
+				if (!Config.SetDefaultValue(path))
+					debug("config not found: " + path);
+		}
+	}
+	catch (ex:Error)
+	{
+		debug("ERROR: onSetDefaultValue(): " + ex.toString());
 	}
 }
 
 protected function onSetDefaultMarkerValue(event:SetDefaultValueEvent):void
 {
-	var config:String = event.sender.config;
-	//debug(config);
+	debug("onSetDefaultMarkerValue()");
+	try
+	{
+		var activeMarkerStates:Array = getActiveMarkerStates();
+		for each (var state:String in activeMarkerStates)
+		{
+			var config_prefix:String = "markers." + state + "."; 
+			
+			switch (event.target.config)
+			{
+				case "damageText":
+					config_prefix += "damageText.";
+					Config.SetDefaultValue(config_prefix + "visible");
+					Config.SetDefaultValue(config_prefix + "x");
+					Config.SetDefaultValue(config_prefix + "y");
+					Config.SetDefaultValue(config_prefix + "alpha");
+					Config.SetDefaultValue(config_prefix + "color");
+					Config.SetDefaultValue(config_prefix + "speed");
+					Config.SetDefaultValue(config_prefix + "maxRange");
+					Config.SetDefaultValue(config_prefix + "damageMessage");
+					Config.SetDefaultValue(config_prefix + "blowupMessage");
+					break;
+
+				default:
+					Config.SetDefaultValue(config_prefix + event.target.config);
+			}
+		}
+	}
+	catch (ex:Error)
+	{
+		debug("ERROR: onSetDefaultMarkerValue(): " + ex.toString());
+	}
 }

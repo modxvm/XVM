@@ -16,6 +16,8 @@
   * player/clan icons in vehicle markers
   * added option battle/useStandardMarkers, that allow to use standard
     client vehicle markers
+  * editor: set default values
+  * editor: added new config version settings
 
 XVM-2.2:
   * adaptation to WoT 0.7.3
