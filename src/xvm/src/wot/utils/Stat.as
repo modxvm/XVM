@@ -9,6 +9,7 @@ import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.GraphicsUtil;
 import wot.utils.JSON;
+import wot.utils.Locale;
 import wot.utils.Logger;
 import wot.utils.Utils;
 import wot.utils.VehicleInfo;
@@ -590,14 +591,14 @@ class wot.utils.Stat
     {
       tf.html = true;
       if (chances.error)
-        tf.htmlText = tf.text + " <font color='#FF8080'>(Chances error: " + chances.error + ")</font>";
+        tf.htmlText = tf.text + " <font color='#FF8080'>(" + Locale.get("Chances error") + ": " + chances.error + ")</font>";
       else
       {
         var color = GraphicsUtil.brightenColor(
           Number(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, chances.m_raw, "0x")), 50);
         tf.htmlText = tf.text +
           " <font color='#" + color.toString(16) + "'>" +
-          "(Win chances: " + Math.round(chances.m) + "%)</font>";
+          "(" + Locale.get("Win chances") + ": " + Math.round(chances.m) + "%)</font>";
       }
     }
     return tf.htmlText;

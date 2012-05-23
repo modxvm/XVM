@@ -3,6 +3,7 @@
  * @author sirmax2
  */
 import wot.utils.Defines;
+import wot.utils.Locale;
 import wot.utils.Logger;
 import wot.utils.Stat;
 import wot.utils.Utils;
@@ -15,6 +16,7 @@ class wot.utils.Config
   // Private vars
   public static var s_config: Object;
   public static var s_loaded: Boolean = false;
+  public static var s_game_region: String = null;
   private static var s_loading: Boolean = false;
   private static var s_load_last_stat: Boolean = false;
   private static var s_load_legacy_config: Boolean = false;
@@ -143,7 +145,9 @@ class wot.utils.Config
             if (!config)
             {
               if (_global.xvm_battleloading)
+              {
                 _global.xvm_battleloading.setInfoFieldData( { error: "Error parsing config file. Using default settings." } );
+              }
             }
             else
             {
@@ -165,7 +169,7 @@ class wot.utils.Config
             if (_global.xvm_battleloading)
             {
               _global.xvm_battleloading.setInfoFieldData( { error: "Error loading config file. Using default settings.\n" +
-                "[" + Utils.trim(ex.at) + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " + txt } );
+                  "[" + ex.at + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " + txt } );
             }
           }
         }
@@ -192,7 +196,9 @@ class wot.utils.Config
                 return;
               Config._RegionLoaded = true;
               var a: Array = str2.split("\n");
-              Config.TuneConfigForServerRegion(a[0]);
+              Config.s_game_region = a[0].toUpperCase();
+              Locale.setRegion(Config.s_game_region);
+              Config.TuneConfigForServerRegion();
               // MAX_PATH is 259 on NTFS
               // WARNING: What if MAX_PATH less then 50?
               //   259 - "\res_mods\.stat\".length - 1 = 242
@@ -201,7 +207,9 @@ class wot.utils.Config
             lv_ver.load(Defines.COMMAND_GET_VERSION);
           }
           else
-            Config.TuneConfigForServerRegion(undefined);
+          {
+            Config.TuneConfigForServerRegion();
+          }
           if (Config.s_src == "BattleLoading.as")
             _global.xvm_battleloading.BattleLoadingInit();
         }
@@ -211,11 +219,12 @@ class wot.utils.Config
   }
 
   private static var useFallback: Boolean = false;
-  private static function TuneConfigForServerRegion(region: String)
+  private static function TuneConfigForServerRegion()
   {
     if (!Config.s_loaded)
       return;
 
+    var region = Config.s_game_region;
     useFallback = !region || useFallback;
     var root: String = "";
     var folders: Array = [];
@@ -234,7 +243,7 @@ class wot.utils.Config
     }
     if (Config.DEBUG_TUNING)
     {
-      Logger.add("DEBUG TUNING TuneConfigForServer(" + region + "): Begin:");
+      Logger.add("DEBUG TUNING TuneConfigForServer: " + region + ": Begin:");
       for (var i = 0; i < s_config.players.length; ++i)
         Logger.addObject(s_config.players[i], "players");
     }
@@ -245,7 +254,7 @@ class wot.utils.Config
       var ele = s_config.players[i];
       if (ele.folder != undefined)
       { // check if folder matches game version or fallback should be used
-        if (ele.folder.toUpperCase() == region.toUpperCase() || useFallback)
+        if (ele.folder.toUpperCase() == region || useFallback)
         { // check if folder is in folders
           for (var j in folders)
           {
@@ -254,7 +263,7 @@ class wot.utils.Config
             {
               if (Config.DEBUG_TUNING)
               {
-                Logger.add("DEBUG TUNING: TuneConfigForServer(" + region + "): Found:");
+                Logger.add("DEBUG TUNING: TuneConfigForServer: " + region + ": Found:");
                 for (var k = 0; k < ele.players.length; ++k)
                   Logger.addObject(ele.players[k], "players");
               }
@@ -269,7 +278,7 @@ class wot.utils.Config
     s_config.players = subsections;
     if (Config.DEBUG_TUNING)
     {
-      Logger.add("DEBUG TUNING: TuneConfigForServer(" + region + "): Finished:");
+      Logger.add("DEBUG TUNING: TuneConfigForServer: " + region + ": Finished:");
       for (var i = 0; i < s_config.players.length; i++)
         Logger.addObject(s_config.players[i], "players");
     }

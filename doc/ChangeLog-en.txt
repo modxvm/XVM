@@ -18,6 +18,7 @@
     client vehicle markers
   * editor: set default values
   * editor: added new config version settings
+  * localization
 
 XVM-2.2:
   * adaptation to WoT 0.7.3
