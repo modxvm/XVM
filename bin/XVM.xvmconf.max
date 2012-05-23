@@ -332,6 +332,7 @@
         { "clan": "[1CLUB]",    "icon": "fc.png" },
         { "clan": "[-TAU-]",    "icon": "tau.png" },
         { "clan": "[_WVW_]",    "icon": "WVW.png" },
+        { "clan": "[K-69]",     "icon": "k69.png" },
         { "clan": "[VND]",      "icon": "VND.png" },
         { "clan": "[_GS_]",     "icon": "GS.png" },
         { "clan": "[SHDS]",     "icon": "sh.png" },
@@ -339,12 +340,15 @@
         { "clan": "[RGR-2]",    "icon": "RGR.png" },
         { "clan": "[MAMTH]",    "icon": "mmth.png" },
         { "clan": "[YOKO]",     "icon": "yoko.png" },
+        { "clan": "[YOK0]",     "icon": "yoko.png" },
         { "clan": "[SITH]",     "icon": "SITH.png" },
         { "clan": "[TG74]",     "icon": "tg74.png" },
         { "clan": "[LOL]",      "icon": "lol.png" },
         { "clan": "[AWA]",      "icon": "awa.png" },
         { "clan": "[NOD]",      "icon": "nod.png" },
         { "clan": "[MCDAC]",    "icon": "MCDAC.png" },
+        { "clan": "[BEDA_]",    "icon": "beda.png" },
+        { "clan": "[DIXIE]",    "icon": "dixie.png" },
         { "clan": "[LADY]",     "icon": "lady.png" }
 //        ,{ "clan": "[",       "icon": "WG.png" }
       ]

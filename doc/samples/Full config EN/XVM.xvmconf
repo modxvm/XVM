@@ -1501,7 +1501,8 @@
         { "clan": "[MCDAC]",    "icon": "MCDAC.png" },
         { "clan": "[BEDA_]",    "icon": "beda.png" },
         { "clan": "[DIXIE]",    "icon": "dixie.png" },
-        { "clan": "[LADY]",     "icon": "lady.png" }      ]
+        { "clan": "[LADY]",     "icon": "lady.png" }
+      ]
     },
     { "folder": "EU", "players": [
         { "nick": "Yoyo117",    "icon": "XVM.png" },
