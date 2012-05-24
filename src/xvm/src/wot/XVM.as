@@ -71,8 +71,12 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     Config.LoadConfigAndStatLegacy("XVM.xvmconf", "XVM.as");
   }
 
-  function XVMInit(obj: Object)
+  private var _initialized = false;
+  function XVMInit()
   {
+    if (_initialized)
+      return;
+    _initialized = true;
     onEnterFrame = function()
     {
       try
@@ -898,6 +902,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   {
     try
     {
+      XVMInit();
+
       //Logger.add("XVMUpdateStyle: " + m_vname + " " + m_playerFullName);
       if (!Config.s_loaded)
         return;
