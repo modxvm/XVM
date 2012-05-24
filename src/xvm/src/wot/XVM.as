@@ -68,7 +68,10 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
     super();
 
-    Config.LoadConfigAndStatLegacy("XVM.xvmconf", "XVM.as");
+    if (Config.s_loaded)
+      XVMInit2();
+    else
+      Config.LoadConfigAndStatLegacy("XVM.xvmconf", "XVM.as");
   }
 
   private var _initialized = false;
@@ -77,73 +80,82 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     if (_initialized)
       return;
     _initialized = true;
-    onEnterFrame = function()
+    
+    if (Config.s_loaded)
+      XVMInit2();
+    else
     {
-      try
+      onEnterFrame = function()
       {
         if (!Config.s_loaded)
           return;
-
         delete this.onEnterFrame;
-
-        // Draw watermark
-        if (!Config.s_config.battle.hideXVMVersion && !_root.hasOwnProperty("xvmWatermark"))
-        {
-          var wm = _root.createTextField("xvmWatermark", _root.getNextHighestDepth(), -1, -2, 50, 16);
-          wm.antiAliasType = "advanced";
-          wm.setNewTextFormat(new TextFormat("$FieldFont", 8, 0x808080, false, false, false, null, null, "left"));
-          wm._alpha = 10;
-          wm.text = "XVM v" + Defines.XVM_VERSION;
-        }
-
-        // Alternative icon set
-        this.m_source = this.m_source.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.vehicleMarker);
-        if (this.iconLoader != null)
-          this.iconLoader.source = this.m_source;
-
-        if (Config.s_config.battle.useStandardMarkers)
-          return;
-
-        // Draw grid
-        if (Config.s_config.battle.drawGrid)
-        {
-          this.grid = this.createEmptyMovieClip("grid", this.getNextHighestDepth());
-          GraphicsUtil.drawGrid(this.grid, -50, -50, 100, 100, 0xFFFF00, 30);
-        }
-
-        this.xvmHB = this.createEmptyMovieClip("xvmHB", this.marker.getDepth() - 1); // Put health Bar to back.
-        this.xvmHBBorder = this.xvmHB.createEmptyMovieClip("border", 1);
-        this.xvmHBDamage = this.xvmHB.createEmptyMovieClip("damage", 2);
-        this.xvmHBFill = this.xvmHB.createEmptyMovieClip("fill", 3);
-
-        this.damageHolder = this.createEmptyMovieClip("damageHolder", this.getNextHighestDepth());
-
-        // Remove standard fields
-        this.pNameField._visible = false;
-        this.pNameField.removeTextField();
-
-        this.vNameField._visible = false;
-        this.vNameField.removeTextField();
-
-        this.healthBar.stop();
-        this.healthBar._visible = false;
-        this.healthBar.removeMovieClip();
-
-        this.bgShadow.stop();
-        this.bgShadow._visible = false;
-        this.bgShadow.removeMovieClip();
-
-        this.XVMPopulateData();
-        this.updateMarkerLabel();
-        this.XVMUpdateStyle();
-      }
-      catch (e)
-      {
-        this.XVMSetErrorText("ERROR: XVMInit():" + String(e));
+        this.XVMInit2();
       }
     }
   }
 
+  function XVMInit2()
+  {
+    try
+    {
+      // Draw watermark
+      if (!Config.s_config.battle.hideXVMVersion && !_root.hasOwnProperty("xvmWatermark"))
+      {
+        var wm = _root.createTextField("xvmWatermark", _root.getNextHighestDepth(), -1, -2, 50, 16);
+        wm.antiAliasType = "advanced";
+        wm.setNewTextFormat(new TextFormat("$FieldFont", 8, 0x808080, false, false, false, null, null, "left"));
+        wm._alpha = 10;
+        wm.text = "XVM v" + Defines.XVM_VERSION;
+      }
+
+      // Alternative icon set
+      m_source = m_source.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.vehicleMarker);
+      if (iconLoader != null)
+        iconLoader.source = m_source;
+
+      if (Config.s_config.battle.useStandardMarkers)
+        return;
+
+      // Draw grid
+      if (Config.s_config.battle.drawGrid)
+      {
+        grid = createEmptyMovieClip("grid", getNextHighestDepth());
+        GraphicsUtil.drawGrid(grid, -50, -50, 100, 100, 0xFFFF00, 30);
+      }
+
+      xvmHB = createEmptyMovieClip("xvmHB", marker.getDepth() - 1); // Put health Bar to back.
+      xvmHBBorder = xvmHB.createEmptyMovieClip("border", 1);
+      xvmHBDamage = xvmHB.createEmptyMovieClip("damage", 2);
+      xvmHBFill = xvmHB.createEmptyMovieClip("fill", 3);
+
+      damageHolder = createEmptyMovieClip("damageHolder", this.getNextHighestDepth());
+
+      // Remove standard fields
+      pNameField._visible = false;
+      pNameField.removeTextField();
+
+      vNameField._visible = false;
+      vNameField.removeTextField();
+
+      healthBar.stop();
+      healthBar._visible = false;
+      healthBar.removeMovieClip();
+
+      bgShadow.stop();
+      bgShadow._visible = false;
+      bgShadow.removeMovieClip();
+
+      XVMPopulateData();
+      updateMarkerLabel();
+      XVMUpdateStyle();
+    }
+    catch (e)
+    {
+      XVMSetErrorText("ERROR: XVMInit():" + String(e));
+    }
+  }
+  
   // override
   function init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt)
   {
@@ -159,7 +171,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   function updateMarkerSettings()
   {
     //Logger.add("XVM::updateMarkerSettings(): Config.s_loaded=" + Config.s_loaded);
-    if (Config.s_config.battle.useStandardMarkers)
+    if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
       super.updateMarkerSettings();
   }
 
@@ -902,8 +914,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   {
     try
     {
-      XVMInit();
-
       //Logger.add("XVMUpdateStyle: " + m_vname + " " + m_playerFullName);
       if (!Config.s_loaded)
         return;
