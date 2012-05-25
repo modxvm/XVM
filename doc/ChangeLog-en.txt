@@ -1,4 +1,7 @@
-﻿XVM-2.3:
+﻿XVM-2.3.1:
+  * fix 2.3 release bugs
+
+XVM-2.3:
   * added new vehicles to win chances calculation
   * fixed bug in swf modification
   * wot-xvm-proxy: added compression of proxy servers requests

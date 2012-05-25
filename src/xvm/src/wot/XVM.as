@@ -155,6 +155,13 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       XVMSetErrorText("ERROR: XVMInit():" + String(e));
     }
   }
+
+  function setDefaultVehicleMarkerPosition()
+  {
+    for (var childName in marker.marker)
+      marker.marker[childName]._y = 16;
+    marker._y = -16;
+  }
   
   // override
   function init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt)
@@ -172,7 +179,10 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   {
     //Logger.add("XVM::updateMarkerSettings(): Config.s_loaded=" + Config.s_loaded);
     if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
+    {
       super.updateMarkerSettings();
+      setDefaultVehicleMarkerPosition();
+    }
   }
 
   // override
@@ -285,7 +295,10 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     //Logger.add("XVM::initMarkerLabel(): Config.s_loaded=" + Config.s_loaded);
     super.initMarkerLabel();
     if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
+    {
+      setDefaultVehicleMarkerPosition();
       return;
+    }
 
     XVMUpdateMarkerLabel();
     XVMUpdateUI(m_curHealth);
@@ -298,7 +311,10 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     //Logger.add("updateMarkerLabel(): " + GetCurrentStateString() + " markerLabel=" + m_markerLabel + " pname=" + m_playerFullName);
     super.updateMarkerLabel();
     if (Config.s_config.battle.useStandardMarkers)
+    {
+      setDefaultVehicleMarkerPosition();
       return;
+    }
 
     XVMUpdateMarkerLabel();
 
@@ -324,6 +340,12 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   // override
   function _onCompleteLoad(event)
   {
+    if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
+    {
+      super._onCompleteLoad(event);
+      return;
+    }
+
     iconLoader._visible = false;
     onEnterFrame = function()
     {
