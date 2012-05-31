@@ -15,7 +15,8 @@
     "hideXVMVersion": false
   },
   "rating": {
-    "showPlayersStatistics": true
+    "showPlayersStatistics": true,
+    "loadEnemyStatsInFogOfWar": true
   },
   "battleLoading": {
     "showChances": true,
