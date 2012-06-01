@@ -92,10 +92,7 @@ class wot.utils.Utils
 
   public static function GetNormalizedPlayerName(fullplayername: String): String
   {
-    var res: String = GetPlayerName(fullplayername).toUpperCase();
-    //if (wot.utils.Config.s_game_region == "CT")
-    //  res = res.substring(0, res.length - 3);
-    return res;
+    return GetPlayerName(fullplayername).toUpperCase();
   }
   
   public static function GetClanName(fullplayername: String): String

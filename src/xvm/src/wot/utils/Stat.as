@@ -181,6 +181,7 @@ class wot.utils.Stat
   {
     if (!s_player_ratings)
       return txt;
+    //Logger.add("DecorateField: " + data.label + " / " + data.name);
     var pname = Utils.GetNormalizedPlayerName(data.label || data.name);
     var ratingText = Stat.FormatText(data, format, false);
     if (!ratingText || ratingText == "")
@@ -385,23 +386,8 @@ class wot.utils.Stat
           if (!Stat.s_player_ratings)
             Stat.s_player_ratings = {};
           var stat = stats.players[i];
-
           stat.rating = stat.battles > 0 ? Math.round(stat.wins / stat.battles * 100) : 0;
-
-          var name = stat.name.toUpperCase();
-          if (Config.s_game_region == "CT")
-          {
-            var suffixes = [ "_RU", "_EU", "_US" ];
-            for (var suf = 0; suf < suffixes.length; ++suf)
-            {
-              if (Utils.indexOf(Stat.s_player_names, name + suffixes[suf]) >= 0)
-              {
-                name += suffixes[suf];
-                break;
-              }
-            }
-          }
-          Stat.s_player_ratings[name] = stat;
+          Stat.s_player_ratings[stat.name.toUpperCase()] = stat;
         };
 
         if (stats.info && stats.info.xvm)

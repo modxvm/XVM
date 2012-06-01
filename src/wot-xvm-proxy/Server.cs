@@ -528,7 +528,13 @@ namespace wot
       foreach (int id in pendingPlayers.Keys)
       {
         if (cache.ContainsKey(id))
-          res.players[pos++] = cache[id].stat;
+        {
+          res.players[pos] = cache[id].stat;
+          // fix CT player names
+          if (version == "CT")
+            res.players[pos].name = pendingPlayers[id].name;
+          pos++;
+        }
       }
       Array.Resize<Stat>(ref res.players, pos);
 

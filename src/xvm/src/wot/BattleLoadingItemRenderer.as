@@ -80,10 +80,9 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
 
       // Alternative icon set
       if (!m_iconset)
-        m_iconset = new Iconset();
-      m_iconset.init(this, iconLoader, [
-        data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.battleLoading),
-        data.icon ], completeLoad);
+        m_iconset = new Iconset(this, completeLoad, data.icon);
+      m_iconset.init(iconLoader,
+        [ data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.battleLoading), data.icon ]);
       data.icon = m_iconset.currentIcon;
       
       // Player/clan icons
@@ -101,6 +100,9 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
       squad._visible = false;
 
     super.setData(data);
+
+    if (data)
+      data.icon = m_iconset.originalIcon;
   }
 
   // override
