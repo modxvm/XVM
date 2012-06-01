@@ -3,13 +3,15 @@
  * @author sirmax2
  */
 import wot.utils.Config;
+import wot.utils.Iconset;
 import wot.utils.Defines;
 import wot.utils.PlayerInfo;
 
 class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRenderer
 {
   var m_clanIcon: MovieClip = null;
-
+  var m_iconset: Iconset;
+  
   function PlayerListItemRenderer()
   {
     /*if (!_global.xvm)
@@ -28,34 +30,14 @@ class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRend
     return (this.owner._itemRenderer == "LeftItemRendererIcon") ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
   }
 
-  // override
-  function errorLoad(event)
+  function completeLoad()
   {
-    if (event.target.source)
+    if (!Config.s_config.battle.mirroredVehicleIcons && team == Defines.TEAM_ENEMY)
     {
-      // Fallback to default icon
-      event.target.source = (Config.s_config.iconset.playersPanel != Defines.CONTOUR_ICON_PATH)
-        ? event.target.source.split(Config.s_config.iconset.playersPanel).join(Defines.CONTOUR_ICON_PATH)
-        : event.target.source = Defines.CONTOUR_ICON_PATH + "noImage.tga";
+      icon._xscale = -icon._xscale;
+      icon._x -= icon.width;
+      this.vehicleLevel._x = icon._x + 15;
     }
-  }
-
-  // override
-  private var _iconLoaded = false;
-  function completeLoad(event)
-  {
-    var icon = event.target;
-    if (!_iconLoaded)
-    {
-      _iconLoaded = true;
-      if (!Config.s_config.battle.mirroredVehicleIcons && team == Defines.TEAM_ENEMY)
-      {
-        icon._xscale = -icon._xscale;
-        icon._x -= icon.width;
-        this.vehicleLevel._x = icon._x + 15;
-      }
-    }
-    icon.visible = true;
   }
 
   // override
@@ -64,7 +46,10 @@ class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRend
     if (data)
     {
       // Alternative icon set
-      data.icon = data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.playersPanel);
+      m_iconset = new Iconset(iconLoader, [
+        data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.playersPanel),
+        data.icon ], completeLoad);
+      data.icon = m_iconset.currentIcon;
 
       // Player/clan icons
       var cfg = Config.s_config.playersPanel.clanIcon;

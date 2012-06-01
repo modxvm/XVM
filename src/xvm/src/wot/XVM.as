@@ -13,6 +13,7 @@ import com.greensock.easing.Cubic;
 import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.GraphicsUtil;
+import wot.utils.Iconset;
 import wot.utils.Stat;
 import wot.utils.Utils;
 import wot.utils.Logger;
@@ -41,6 +42,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   var m_team: String;
   var m_isDead: Boolean = false;
   var m_clanIcon = null;
+  var m_iconset: Iconset;
   
   // TextFields
   var textFields: Object = null;
@@ -110,9 +112,11 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       }
 
       // Alternative icon set
-      m_source = m_source.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.vehicleMarker);
+      m_iconset = new Iconset(iconLoader, [
+        m_source.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.vehicleMarker),
+        m_source ], completeLoad);
       if (iconLoader != null)
-        iconLoader.source = m_source;
+        iconLoader.source = m_iconset.currentIcon;
 
       if (Config.s_config.battle.useStandardMarkers)
         return;
@@ -324,27 +328,14 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     XVMUpdateStyle();
   }
 
-  // override
-  function _onErrorLoad(event)
-  {
-    //Logger.add("_onErrorLoad: " + event.target.source);
-    if (event.target.source)
-    {
-      // Fallback to default icon
-      event.target.source = (Config.s_config.iconset.vehicleMarker != Defines.CONTOUR_ICON_PATH)
-        ? event.target.source.split(Config.s_config.iconset.vehicleMarker).join(Defines.CONTOUR_ICON_PATH)
-        : event.target.source = Defines.CONTOUR_ICON_PATH + "noImage.tga";
-    }
-  }
+  /**
+   * MAIN
+   */
 
-  // override
-  function _onCompleteLoad(event)
+  function completeLoad()
   {
     if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
-    {
-      super._onCompleteLoad(event);
       return;
-    }
 
     iconLoader._visible = false;
     onEnterFrame = function()
@@ -353,10 +344,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       this.XVMIconCompleteLoad();
     };
   }
-
-  /**
-   * MAIN
-   */
 
   static var errorCounter: Number = 0;
   static var errorText: String = "";

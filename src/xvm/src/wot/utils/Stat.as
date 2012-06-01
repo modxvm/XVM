@@ -21,6 +21,7 @@ class wot.utils.Stat
   public static var s_player_names: Array = [];
   // s_player_data members:
   //   reference: Object,
+  //   updateFunc: Function,
   //   playerId: Number,
   //   name: String,
   //   clan: String,
@@ -61,7 +62,7 @@ class wot.utils.Stat
 
     if (Stat.s_player_ratings)
     {
-      var pname: String = Utils.GetUpperPlayerName(data.label || data.name);
+      var pname: String = Utils.GetNormalizedPlayerName(data.label || data.name);
       if (!data.uid || data.uid == undefined)
         data.uid = s_player_data[pname].playerId;
       var stat = Stat.s_player_ratings[pname];
@@ -118,7 +119,7 @@ class wot.utils.Stat
   public static function processForFogOfWar(data)
   {
     var fullPlayerName = data.label || data.name;
-    var pname: String = Utils.GetUpperPlayerName(fullPlayerName);
+    var pname: String = Utils.GetNormalizedPlayerName(fullPlayerName);
     var clan: String = Utils.GetClanName(fullPlayerName);
     if (data.uid && !s_player_names[pname] && !s_player_data[pname])
     {
@@ -132,6 +133,7 @@ class wot.utils.Stat
         s_player_data[pname] =
         {
           reference: null,
+          updateFunc: null,
           playerId: data.uid,
           fullPlayerName: fullPlayerName,
           name: pname,
@@ -179,7 +181,7 @@ class wot.utils.Stat
   {
     if (!s_player_ratings)
       return txt;
-    var pname = Utils.GetUpperPlayerName(data.label || data.name);
+    var pname = Utils.GetNormalizedPlayerName(data.label || data.name);
     var ratingText = Stat.FormatText(data, format, false);
     if (!ratingText || ratingText == "")
       return txt;
@@ -223,7 +225,7 @@ class wot.utils.Stat
               for (var i = 0; i < stats.players.length; ++i)
               {
                 var p_stat = stats.players[i];
-                var p_name = Utils.GetUpperPlayerName(p_stat.name);
+                var p_name = Utils.GetNormalizedPlayerName(p_stat.name);
                 if (Stat.s_player_ratings[p_name])
                 {
                   //Logger.add(p_name + " already in ratings");
@@ -249,7 +251,7 @@ class wot.utils.Stat
                   for (var i = 0; i < stats_new.players.length; ++i)
                   {
                     var p_stat_new = stats_new.players[i];
-                    var p_name_new = Utils.GetUpperPlayerName(p_stat_new.name);
+                    var p_name_new = Utils.GetNormalizedPlayerName(p_stat_new.name);
                     if (Stat.s_player_ratings[p_name_new])
                     {
                       //Logger.add(p_name_new + " already in ratings");
@@ -285,13 +287,13 @@ class wot.utils.Stat
     }
   }
 
-  public static function AddPlayerData(reference: Object, playerId: Number, playerName: String,
-    originalText: String, icon: String, team: Number)
+  public static function AddPlayerData(reference: Object, updateFunc: Function,
+    playerId: Number, playerName: String, originalText: String, icon: String, team: Number)
   {
     if (playerId <= 0 || !playerName)
       return;
 
-    var pname = Utils.GetUpperPlayerName(playerName);
+    var pname = Utils.GetNormalizedPlayerName(playerName);
     var clan = Utils.GetClanName(playerName);
     //Logger.add("AddPlayerData(" + playerName + "): " + pname + " level=" + level);
     if (!s_player_data[pname])
@@ -300,6 +302,7 @@ class wot.utils.Stat
       s_player_names.push(pname);
       s_player_data[pname] = {
         reference: reference,
+        updateFunc: updateFunc,
         playerId: playerId,
         fullPlayerName: playerName,
         name: pname,
@@ -376,6 +379,7 @@ class wot.utils.Stat
         if (!str || str == undefined)
           return;
         var stats = JSON.parse(str);
+
         for (var i = 0; i < stats.players.length; ++i)
         {
           if (!Stat.s_player_ratings)
@@ -383,7 +387,21 @@ class wot.utils.Stat
           var stat = stats.players[i];
 
           stat.rating = stat.battles > 0 ? Math.round(stat.wins / stat.battles * 100) : 0;
-          Stat.s_player_ratings[stat.name.toUpperCase()] = stat;
+
+          var name = stat.name.toUpperCase();
+          if (Config.s_game_region == "CT")
+          {
+            var suffixes = [ "_RU", "_EU", "_US" ];
+            for (var suf = 0; suf < suffixes.length; ++suf)
+            {
+              if (Utils.indexOf(Stat.s_player_names, name + suffixes[suf]) >= 0)
+              {
+                name += suffixes[suf];
+                break;
+              }
+            }
+          }
+          Stat.s_player_ratings[name] = stat;
         };
 
         if (stats.info && stats.info.xvm)
@@ -409,8 +427,8 @@ class wot.utils.Stat
     for (var pname in s_player_data)
     {
       var pdata = s_player_data[pname];
-      if (pdata.reference)
-        pdata.reference.XVMStatUpdateCallback(pdata);
+      if (pdata.reference && pdata.updateFunc)
+        pdata.updateFunc.call(pdata.reference, pdata);
     }
   }
 

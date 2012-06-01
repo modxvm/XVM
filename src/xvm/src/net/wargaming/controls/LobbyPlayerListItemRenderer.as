@@ -6,6 +6,7 @@
   var vehicleField;
   var squad;
 
+  function configUI();
   function setData(data);
   function update();
 }

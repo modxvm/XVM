@@ -202,7 +202,9 @@ class wot.utils.Config
               // MAX_PATH is 259 on NTFS
               // WARNING: What if MAX_PATH less then 50?
               //   259 - "\res_mods\.stat\".length - 1 = 242
-              Defines.MAX_PATH = Math.max(50, 242 - a[1].length);
+              // 199 - ?
+              Defines.MAX_PATH = Math.min(199, Math.max(50, 242 - a[1].length));
+              Logger.add("MAX_PATH=" + Defines.MAX_PATH);
             }
             lv_ver.load(Defines.COMMAND_GET_VERSION);
           }

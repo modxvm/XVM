@@ -1,24 +1,24 @@
---- orig\battleloading.xml	2012-04-24 10:36:13.532366300 +0300
-+++ battleloading.xml	2012-04-24 10:39:09.918117000 +0300
-@@ -301,7 +301,7 @@
+--- orig\battleloading.xml	2012-06-01 13:09:29.538339400 +0300
++++ battleloading.xml	2012-06-01 18:53:05.806906600 +0300
+@@ -300,7 +300,7 @@
            </PlaceObject2>
-           <PlaceObject2 replace="0" depth="7" objectID="11" name="iconLoader" allflags1="0" allflags2="4">
+           <PlaceObject2 replace="0" depth="8" objectID="13" name="iconLoader" allflags1="0" allflags2="4">
              <transform>
--              <Transform scaleX="-0.6250000000000000" scaleY="0.1999511718750000" transX="1600" transY="0"/>
-+              <Transform scaleX="-0.6250000000000000" scaleY="0.1999511718750000" transX="1674" transY="20"/>
+-              <Transform scaleX="-8.000000000000000" scaleY="2.399993896484375" transX="1600" transY="0"/>
++              <Transform scaleX="-8.000000000000000" scaleY="2.399993896484375" transX="1674" transY="20"/>
              </transform>
              <events>
                <Event flags1="0" flags2="4">
-@@ -529,7 +529,7 @@
+@@ -535,7 +535,7 @@
            </PlaceObject2>
-           <PlaceObject2 replace="0" depth="7" objectID="11" name="iconLoader" allflags1="0" allflags2="4">
+           <PlaceObject2 replace="0" depth="8" objectID="13" name="iconLoader" allflags1="0" allflags2="4">
              <transform>
--              <Transform scaleX="0.6250000000000000" scaleY="0.1999511718750000" transX="6780" transY="0"/>
-+              <Transform scaleX="0.6250000000000000" scaleY="0.1999511718750000" transX="6780" transY="20"/>
+-              <Transform scaleX="8.000000000000000" scaleY="2.399993896484375" transX="6780" transY="0"/>
++              <Transform scaleX="8.000000000000000" scaleY="2.399993896484375" transX="6780" transY="20"/>
              </transform>
              <events>
                <Event flags1="0" flags2="4">
-@@ -43637,7 +43637,7 @@
+@@ -44413,7 +44413,7 @@
          <actions>
            <PushData>
              <items>
@@ -27,7 +27,7 @@
              </items>
            </PushData>
            <GetVariable/>
-@@ -43663,7 +43663,7 @@
+@@ -44439,7 +44439,7 @@
          <actions>
            <PushData>
              <items>
@@ -36,7 +36,7 @@
              </items>
            </PushData>
            <GetVariable/>
-@@ -43715,7 +43715,7 @@
+@@ -44491,7 +44491,7 @@
          <actions>
            <PushData>
              <items>

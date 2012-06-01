@@ -5,8 +5,8 @@
 class wot.utils.Defines
 {
   // Global versions
-  public static var XVM_VERSION = "2.3.1";
-  public static var WOT_VERSION = "0.7.3";
+  public static var XVM_VERSION = "2.4.0";
+  public static var WOT_VERSION = "0.7.4";
   public static var CONFIG_VERSION = "1.3.0";
   public static var EDITOR_VERSION = "0.1.beta1";
 

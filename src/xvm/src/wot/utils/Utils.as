@@ -90,9 +90,12 @@ class wot.utils.Utils
     return (pos < 0) ? fullplayername : fullplayername.slice(0, pos);
   }
 
-  public static function GetUpperPlayerName(fullplayername: String): String
+  public static function GetNormalizedPlayerName(fullplayername: String): String
   {
-    return GetPlayerName(fullplayername).toUpperCase();
+    var res: String = GetPlayerName(fullplayername).toUpperCase();
+    //if (wot.utils.Config.s_game_region == "CT")
+    //  res = res.substring(0, res.length - 3);
+    return res;
   }
   
   public static function GetClanName(fullplayername: String): String
@@ -169,5 +172,6 @@ class wot.utils.Utils
       }
     }
     return sourceArray;
+ 
   }
 }

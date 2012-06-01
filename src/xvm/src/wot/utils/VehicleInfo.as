@@ -10,7 +10,7 @@ class wot.utils.VehicleInfo
   public static function getName(str: String): String
   {
     // str is icon path?
-    if (Utils.endsWith(".tga", str))
+    if (Utils.endsWith(".png", str))
     {
       var a = str.split("\\");
       str = a[a.length - 1];

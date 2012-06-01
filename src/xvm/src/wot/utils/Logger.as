@@ -19,15 +19,15 @@ class wot.utils.Logger
       s += Utils.padLeft(a[i].charCodeAt(0).toString(16), 2, '0');
     s = s.length.toString(16) + "," + s;
 
-    var p = new LoadVars();
     var command = Defines.COMMAND_LOG + " ";
     var max_len = Defines.MAX_PATH - command.length;
+    var p = new LoadVars();
     while (s.length > max_len)
     {
       p.load(command + s.slice(0, max_len));
       s = s.slice(max_len);
     }
-    p.load(Defines.COMMAND_LOG + " " + s);
+    p.load(command + s);
   }
 
   public static function addObject(obj: Object, name: String)

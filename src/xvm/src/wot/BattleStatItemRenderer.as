@@ -5,6 +5,7 @@
 
 import wot.utils.Config;
 import wot.utils.Defines;
+import wot.utils.Iconset;
 import wot.utils.Logger;
 import wot.utils.PlayerInfo;
 import wot.utils.Stat;
@@ -19,7 +20,8 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
 
   var m_clanIcon: MovieClip = null;
   var m_textCache = {};
-
+  var m_iconset: Iconset;
+  
   function BattleStatItemRenderer()
   {
     /*if (!_global.xvm)
@@ -39,42 +41,23 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     return (this.owner._name == "team1") ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
   }
 
-  // override
-  function errorLoad(event)
+  function completeLoad()
   {
-    if (event.target.source)
+    col3._width += 80;
+    if (team == Defines.TEAM_ALLY)
     {
-      // Fallback to default icon
-      event.target.source = (Config.s_config.iconset.statisticForm != Defines.CONTOUR_ICON_PATH)
-        ? event.target.source.split(Config.s_config.iconset.statisticForm).join(Defines.CONTOUR_ICON_PATH)
-        : event.target.source = Defines.CONTOUR_ICON_PATH + "noImage.tga";
+      col3._x -= 80;
+      //Logger.addObject(event.target);
     }
-  }
-
-  // override
-  private var _iconLoaded = false;
-  function completeLoad(event)
-  {
-    if (!_iconLoaded)
+    if (!Config.s_config.battle.mirroredVehicleIcons)
     {
-      col3._width += 80;
-      _iconLoaded = true;
-      if (team == Defines.TEAM_ALLY)
+      if (team == Defines.TEAM_ENEMY)
       {
-        col3._x -= 80;
-        //Logger.addObject(event.target);
-      }
-      if (!Config.s_config.battle.mirroredVehicleIcons)
-      {
-        if (team == Defines.TEAM_ENEMY)
-        {
-          event.target._xscale = -event.target._xscale;
-          event.target._x -= 80 - 5; // FIXIT: where I can get image width?
-          col3._x += 5;
-        }
+        event.target._xscale = -event.target._xscale;
+        event.target._x -= 80 - 5; // FIXIT: where I can get image width?
+        col3._x += 5;
       }
     }
-    event.target.visible = true;
   }
 
   // override
@@ -105,7 +88,10 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
         Stat.AddPlayerData(this, 1, data.label, data.vehicle, data.icon, team);
 
       // Alternative icon set
-      data.icon = data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.statisticForm);
+      m_iconset = new Iconset(iconLoader, [
+        data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.statisticForm),
+        data.icon ], completeLoad);
+      data.icon = m_iconset.currentIcon;
 
       // Player/clan icons
       var cfg = Config.s_config.statisticForm.clanIcon;
