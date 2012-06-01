@@ -10,7 +10,8 @@ import wot.utils.PlayerInfo;
 class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRenderer
 {
   var m_clanIcon: MovieClip = null;
-  var m_iconset: Iconset;
+  var m_iconset: Iconset = null;
+  var m_iconLoaded: Boolean = false;
   
   function PlayerListItemRenderer()
   {
@@ -32,11 +33,15 @@ class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRend
 
   function completeLoad()
   {
+    if (m_iconLoaded)
+      return;
+    m_iconLoaded = true;
+
     if (!Config.s_config.battle.mirroredVehicleIcons && team == Defines.TEAM_ENEMY)
     {
-      icon._xscale = -icon._xscale;
-      icon._x -= icon.width;
-      this.vehicleLevel._x = icon._x + 15;
+      iconLoader._xscale = -iconLoader._xscale;
+      iconLoader._x -= iconLoader.width;
+      this.vehicleLevel._x = iconLoader._x + 15;
     }
   }
 
@@ -46,7 +51,9 @@ class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRend
     if (data)
     {
       // Alternative icon set
-      m_iconset = new Iconset(iconLoader, [
+      if (!m_iconset)
+        m_iconset = new Iconset();
+      m_iconset.init(this, iconLoader, [
         data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.playersPanel),
         data.icon ], completeLoad);
       data.icon = m_iconset.currentIcon;
@@ -68,7 +75,7 @@ class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRend
     var pinfo = PlayerInfo.getPlayerInfo(data.label, data.clanAbbrev ? "[" + data.clanAbbrev + "]" : "");
     if (!m_clanIcon)
     {
-      var x = (!_iconLoaded || Config.s_config.battle.mirroredVehicleIcons || (team == Defines.TEAM_ALLY))
+      var x = (!m_iconLoaded || Config.s_config.battle.mirroredVehicleIcons || (team == Defines.TEAM_ALLY))
         ? iconLoader._x : iconLoader._x + iconLoader.width;
       m_clanIcon = PlayerInfo.createClanIcon(this, "m_clanIcon", pinfo ? pinfo.icon : null, cfg, x, iconLoader._y, team);
     }

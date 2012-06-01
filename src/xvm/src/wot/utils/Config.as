@@ -204,7 +204,6 @@ class wot.utils.Config
               //   259 - "\res_mods\.stat\".length - 1 = 242
               // 199 - ?
               Defines.MAX_PATH = Math.min(199, Math.max(50, 242 - a[1].length));
-              Logger.add("MAX_PATH=" + Defines.MAX_PATH);
             }
             lv_ver.load(Defines.COMMAND_GET_VERSION);
           }

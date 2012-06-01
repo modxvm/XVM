@@ -14,8 +14,9 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
 {
   private static var s_logShown = false;
 
-  private var m_iconset: Iconset;
+  private var m_iconset: Iconset = null;
   private var m_clanIconLoaded = false;
+  var m_iconLoaded: Boolean = false;
   
   function BattleLoadingItemRenderer()
   {
@@ -31,6 +32,10 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
 
   function completeLoad()
   {
+    if (m_iconLoaded)
+      return;
+    m_iconLoaded = true;
+
     vehicleField._width += 80;
     if (team == Defines.TEAM_ALLY)
       vehicleField._x -= 113; // sirmax: why this value?
@@ -58,7 +63,15 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
         if (!s_logShown)
         {
           s_logShown = true;
-          Logger.add("[BattleLoading] Show Players Statistics = true"); // Just to check config is loaded correctly
+          // Just to check config is loaded correctly
+          Logger.add("[BattleLoading]\n" +
+            "  GameRegion=" + Config.s_game_region + "\n" +
+            "  MAX_PATH=" + Defines.MAX_PATH + "\n" +
+            "  configVersion=" + Config.s_config.configVersion + "\n" +
+            "  showPlayersStatistics=true\n" +
+            "  loadEnemyStatsInFogOfWar=" + Config.s_config.rating.loadEnemyStatsInFogOfWar + "\n" +
+            "  loadEnemyStatsInFogOfWar=" + Config.s_config.rating.loadEnemyStatsInFogOfWar + "\n" +
+            "  useStandardMarkers=" + Config.s_config.battle.useStandardMarkers);
         }
         Stat.AddPlayerData(this, XVMStatUpdateCallback, data.id, data.label, data.vehicle, data.icon, team);
         if (Stat.s_player_ids.length === 30)
@@ -66,7 +79,9 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
       }
 
       // Alternative icon set
-      m_iconset = new Iconset(this, iconLoader, [
+      if (!m_iconset)
+        m_iconset = new Iconset();
+      m_iconset.init(this, iconLoader, [
         data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.battleLoading),
         data.icon ], completeLoad);
       data.icon = m_iconset.currentIcon;

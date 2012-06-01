@@ -10,10 +10,9 @@ class wot.utils.Iconset
   private var m_iconLoader: UILoaderAlt;
   private var m_altIcons: Array;
   private var m_currentIndex: Number;
-  private var m_iconLoaded: Boolean = false;
   private var m_completeFunc: Function;
 
-  public function Iconset(owner: Object, iconLoader: UILoaderAlt, altIcons: Array, completeFunc: Function)
+  public function init(owner: Object, iconLoader: UILoaderAlt, altIcons: Array, completeFunc: Function)
   {
     m_owner = owner;
     m_iconLoader = iconLoader;
@@ -42,12 +41,8 @@ class wot.utils.Iconset
 
   private function completeLoad(event)
   {
-    if (!m_iconLoaded)
-    {
-      m_iconLoaded = true;
-      if (m_owner && m_completeFunc)
-        m_completeFunc.call(m_owner);
-    }
+    if (m_owner && m_completeFunc)
+      m_completeFunc.call(m_owner);
     event.target.visible = true;
   }
 }
