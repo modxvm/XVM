@@ -1,4 +1,9 @@
-﻿XVM-2.3.1:
+﻿XVM-2.4.test1:
+  * adaptation to WoT 0.7.4.CT1
+  * updated tank info for win chances calculation
+  * new proxy server
+
+XVM-2.3.1:
   * fix 2.3 release bugs
 
 XVM-2.3:

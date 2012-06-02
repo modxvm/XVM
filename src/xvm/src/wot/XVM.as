@@ -112,11 +112,13 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       }
 
       // Alternative icon set
-      m_iconset = new Iconset(iconLoader, [
-        m_source.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.vehicleMarker),
-        m_source ], completeLoad);
-      if (iconLoader != null)
-        iconLoader.source = m_iconset.currentIcon;
+      if (!m_iconset)
+        m_iconset = new Iconset(this, completeLoad, m_source);
+      else
+        m_source = m_iconset.originalIcon;
+      m_iconset.init(iconLoader,
+        [ m_source.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.vehicleMarker), m_source ]);
+      m_source = m_iconset.currentIcon;
 
       if (Config.s_config.battle.useStandardMarkers)
         return;
