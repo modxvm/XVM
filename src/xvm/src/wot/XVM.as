@@ -114,12 +114,12 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       // Alternative icon set
       if (!m_iconset)
         m_iconset = new Iconset(this, completeLoad, m_source);
-      else
-        m_source = m_iconset.originalIcon;
+      //else
+      //  m_source = m_iconset.originalIcon;
       m_iconset.init(iconLoader,
-        [ m_source.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.vehicleMarker), m_source ]);
-      m_source = m_iconset.currentIcon;
-
+        [ /*m_source.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.vehicleMarker),*/ m_source ]);
+      //m_source = m_iconset.currentIcon;
+      
       if (Config.s_config.battle.useStandardMarkers)
         return;
 
@@ -262,6 +262,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
       return super.populateData();
 
+    //super.populateData();
+
     //Logger.add("populateData(): " + GetCurrentStateString() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
 
     if (m_isPopulated)
@@ -270,15 +272,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
     initMarkerLabel();
 
-    if (iconLoader != null && iconLoader.initialized)
-    {
-      iconLoader.addEventListener("ioError", this, "_onErrorLoad");
-      iconLoader.addEventListener("complete", this, "_onCompleteLoad");
-    }
-    else
-    {
-      this.invalidate();
-    }
+    setupIconLoader();
 
     if (levelIcon != null)
       levelIcon.gotoAndStop(m_level);
@@ -328,6 +322,13 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
     // Update layout for the current marker state
     XVMUpdateStyle();
+  }
+
+  // override
+  function _centeringIcon()
+  {
+    if (Config.s_config.battle.useStandardMarkers)
+      super._centeringIcon();
   }
 
   /**
@@ -901,7 +902,9 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
       // Vehicle Type Icon
       if (iconLoader != null && iconLoader.initialized)
-        iconLoader.addEventListener("complete", this, "XVMIconCompleteLoad");
+      {
+      //  iconLoader.addEventListener("complete", this, "XVMIconCompleteLoad");
+      }
 
       // Health Bar
       XVMDrawHealthBar(cfg.healthBar);

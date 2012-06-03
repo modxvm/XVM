@@ -16,7 +16,8 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
 
   private var m_iconset: Iconset = null;
   private var m_clanIconLoaded = false;
-  var m_iconLoaded: Boolean = false;
+  private var m_iconLoaded: Boolean = false;
+  private var m_textCache = {};
   
   function BattleLoadingItemRenderer()
   {
@@ -32,6 +33,7 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
 
   function completeLoad()
   {
+    //Logger.add("completeLoad");
     if (m_iconLoaded)
       return;
     m_iconLoaded = true;
@@ -55,6 +57,7 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
   // override
   function setData(data)
   {
+    //Logger.add("setData");
     if (data)
     {
       // Add players for statistics loading
@@ -79,12 +82,17 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
       }
 
       // Alternative icon set
-      if (!m_iconset)
+/*      if (!m_iconset)
         m_iconset = new Iconset(this, completeLoad, data.icon);
+      else
+        data.icon = m_iconset.originalIcon;
       m_iconset.init(iconLoader,
         [ data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.battleLoading), data.icon ]);
-      data.icon = m_iconset.currentIcon;
-      
+      data.icon = m_iconset.currentIcon;*/
+      if (!m_iconset)
+        m_iconset = new Iconset(this, completeLoad, data.icon);
+      m_iconset.init(iconLoader, [ data.icon ]);
+
       // Player/clan icons
       var cfg = Config.s_config.battleLoading.clanIcon;
       if (cfg.show && !m_clanIconLoaded)
@@ -100,23 +108,17 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
       squad._visible = false;
 
     super.setData(data);
-
-    if (data)
-      data.icon = m_iconset.originalIcon;
   }
 
   // override
   function update()
   {
+    //Logger.add("update");
     super.update();
     if (Config.s_config.rating.showPlayersStatistics)
     {
       if (data)
-      {
-        vehicleField.htmlText = Stat.DecorateField(data, data.vehicle,
-          team == Defines.TEAM_ALLY ? Config.s_config.battleLoading.formatLeft : Config.s_config.battleLoading.formatRight,
-          team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
-      }
+        vehicleField.htmlText = (m_textCache.hasOwnProperty(data.label)) ? m_textCache[data.label] : data.vehicle;
     }
   }
 
@@ -124,9 +126,13 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
   function XVMStatUpdateCallback(pdata)
   {
     //Logger.add("XVMStatUpdateCallback(): " + pdata.originalText);
-    vehicleField.htmlText = Stat.DecorateField(pdata, pdata.originalText,
-      pdata.team == Defines.TEAM_ALLY ? Config.s_config.battleLoading.formatLeft : Config.s_config.battleLoading.formatRight,
-      pdata.team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
+    if (!m_textCache.hasOwnProperty(pdata.fullPlayerName))
+    {
+      m_textCache[data.label] = Stat.DecorateField(pdata, pdata.originalText,
+        team == Defines.TEAM_ALLY ? Config.s_config.battleLoading.formatLeft : Config.s_config.battleLoading.formatRight,
+        team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
+    }
+    vehicleField.htmlText = m_textCache[pdata.fullPlayerName];
     //Logger.add(vehicleField.htmlText);
   }
 }

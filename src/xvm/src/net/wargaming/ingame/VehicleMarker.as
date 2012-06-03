@@ -36,8 +36,8 @@
   function populateData();
   function initMarkerLabel();
   function updateMarkerLabel();
-  function _onErrorLoad(event);
-  function _onCompleteLoad(event);
+  function setupIconLoader();
+  function _centeringIcon();
 
   function invalidate();
   function setVehicleClass();

@@ -1,4 +1,7 @@
-﻿XVM-2.4.test1:
+﻿XVM-2.4.test3:
+  * fixed vehicle icons loading
+
+XVM-2.4.test1:
   * adaptation to WoT 0.7.4.CT1
   * updated tank info for win chances calculation
   * new proxy server
