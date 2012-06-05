@@ -153,7 +153,7 @@ class wot.utils.Stat
     format = format.split("{{c:t-rating}}").join(rating < 0 ? ""
       : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, t_rating, "#", isDead));
     format = format.split("{{c:t-kb}}").join(
-      GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, t_kb, "#", isDead));
+      GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, t_kb * 10, "#", isDead));
 
     format = Utils.trim(format);
 
@@ -450,7 +450,7 @@ class wot.utils.Stat
     if (!vi || vi.level == 0)
       data.t_rating = 0;
     else
-      data.t_rating = data.rating - (data.rating - t_rating) * data.t_battles / (vi.level * 10);
+      data.t_rating = Math.round(data.rating - (data.rating - t_rating) * data.t_battles / (vi.level * 10));
 
     Logger.addObject(data);
   }

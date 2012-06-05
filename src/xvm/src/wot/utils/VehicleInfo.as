@@ -22,9 +22,14 @@ class wot.utils.VehicleInfo
 
   public static function getShortName(str: String): String
   {
-    str = getName(str);
-    str = str.slice(str.indexOf("_") + 1, str.length - 1);
-    return str;
+    if (Utils.endsWith(".png", str))
+    {
+      str = str.slice(str.lastIndexOf("/") + 1, str.lastIndexOf("."));
+      str = str.slice(str.indexOf("-") + 1);
+      str = Utils.trim(str);
+      return str;
+    }
+    return null;
   }
 
   public static function getInfo(str: String): Object

@@ -807,6 +807,16 @@ namespace wot
               name = "";
             }
 
+            string vname;
+            try
+            {
+              vname = data["vname"].IsString ? data["vname"].ToString() : "";
+            }
+            catch
+            {
+              vname = "";
+            }
+
             int eff;
             try
             {
@@ -871,6 +881,7 @@ namespace wot
             {
               id = id,
               name = name,
+              vname = vname,
               eff = eff,
               battles = battles,
               wins = wins,
