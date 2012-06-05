@@ -444,15 +444,13 @@ class wot.utils.Stat
     data.rating = data.battles > 0 ? Math.round(data.wins / data.battles * 100) : 0;
 
     var t_rating = data.t_battles > 0 ? Math.round(data.t_wins / data.t_battles * 100) : 0;
-
     var pdata = s_player_data[data.name.toUpperCase()];
     var vi = VehicleInfo.getInfo(pdata.icon);
     if (!vi || vi.level == 0)
       data.t_rating = 0;
     else
       data.t_rating = Math.round(data.rating - (data.rating - t_rating) * data.t_battles / (vi.level * 10));
-
-    Logger.addObject(data);
+    //Logger.addObject(data);
   }
   
   private static function UpdateAll()
