@@ -266,7 +266,7 @@ class wot.utils.Stat
                 }
                 _is_str_new = true;
                 //Logger.addObject(p_stat, "Adding to "+p_name+" :");
-                Stat.CalculateRating(p_stat);
+                Stat.CalculateRating(p_stat, p_name);
                 Stat.s_player_ratings[p_name] = p_stat;
                 Stat.s_player_data[p_name].loaded = true;
                 // TODO: Add callback to update GUI
@@ -291,7 +291,7 @@ class wot.utils.Stat
                       continue;
                     }
                     //Logger.addObject(p_stat_new, "Adding to "+p_name_new+" :");
-                    Stat.CalculateRating(p_stat_new);
+                    Stat.CalculateRating(p_stat_new, p_stat_new);
                     Stat.s_player_ratings[p_name_new] = p_stat_new;
                     Stat.s_player_data[p_name_new].loaded = true;
                     // TODO: Add callback to update GUI
@@ -419,7 +419,7 @@ class wot.utils.Stat
           if (!Stat.s_player_ratings)
             Stat.s_player_ratings = {};
           var stat = stats.players[i];
-          Stat.CalculateRating(stat);
+          Stat.CalculateRating(stat, stat.name.toUpperCase());
           Stat.s_player_ratings[stat.name.toUpperCase()] = stat;
         };
 
@@ -439,12 +439,12 @@ class wot.utils.Stat
     lv.load(command);
   }
 
-  public static function CalculateRating(data)
+  public static function CalculateRating(data, pname)
   {
     data.rating = data.battles > 0 ? Math.round(data.wins / data.battles * 100) : 0;
 
     var t_rating = data.t_battles > 0 ? Math.round(data.t_wins / data.t_battles * 100) : 0;
-    var pdata = s_player_data[data.name.toUpperCase()];
+    var pdata = s_player_data[pname];
     var vi = VehicleInfo.getInfo(pdata.icon);
     if (!vi || vi.level == 0)
       data.t_rating = 0;
