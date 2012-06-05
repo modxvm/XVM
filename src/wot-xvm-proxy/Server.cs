@@ -24,9 +24,13 @@ namespace wot
       public int id;
       public String name;
       public String clan;
+      public String vname;
       public int eff;
       public int battles;
       public int wins;
+      //public int t_eff;
+      public int t_battles;
+      public int t_wins;
     }
 
     [Serializable]
@@ -145,7 +149,7 @@ namespace wot
       }
     }
 
-    // id=name[clan],id=name
+    // id=name[clan]&vehicle,id=name&vehicle
     private void AddPendingPlayers(String parameters)
     {
       lock (_lockIngame)
@@ -158,21 +162,28 @@ namespace wot
             continue;
 
           int id = int.Parse(param[0]);
-          string name = param[1];
-          if (name.Contains("["))
-            name = name.Remove(name.IndexOf("["));
+          if (pendingPlayers.ContainsKey(id))
+            continue;
+
+          String[] param2 = param[1].Split(new char[] { '&' }, 2, StringSplitOptions.RemoveEmptyEntries);
+
+          string name = param2[0];
           string clan = "";
-          if (param[1].Contains("["))
-            clan = param[1].Split(new char[] { '[', ']' }, 3)[1];
-          if (!pendingPlayers.ContainsKey(id))
+          if (name.Contains("["))
           {
-            pendingPlayers[id] = new Stat()
-            {
-              id = id,
-              name = name,
-              clan = clan,
-            };
+            clan = name.Split(new char[] { '[', ']' }, 3)[1];
+            name = name.Remove(name.IndexOf("["));
           }
+
+          string vname = param2.Length > 1 ? param2[1] : "";
+
+          pendingPlayers[id] = new Stat()
+          {
+            id = id,
+            name = name,
+            clan = clan,
+            vname = vname,
+          };
         }
         added = true;
       }
@@ -676,10 +687,9 @@ namespace wot
           cache.Remove(id);
         }
 
-        //We cann't get the id from the offical server in china,so we have to send the name to the rating server of China for search.
-        forUpdate.Add(version.StartsWith("CN", StringComparison.InvariantCultureIgnoreCase)
-          ? String.Format("{0}-{1}", pendingPlayers[id].name, id) : id.ToString());
-
+        // playerId=vname,... || playerId,...
+        forUpdate.Add(String.IsNullOrEmpty(pendingPlayers[id].vname) ? id.ToString()
+          : String.Format("{0}={1}", id, pendingPlayers[id].vname));
         forUpdateIds.Add(id);
       }
 
@@ -708,20 +718,14 @@ namespace wot
         {
           if (String.IsNullOrEmpty(stat.name))
             continue;
-          int id = forUpdateIds[forUpdate.FindIndex(x =>
-            {
-              if (!version.StartsWith("CN"))
-                return x == stat.id.ToString();
-              return x.EndsWith("-" + stat.id);
-            })];
-          cache[id] = new PlayerInfo()
+          cache[stat.id] = new PlayerInfo()
           {
             stat = stat,
             httpError = false
           };
-          if (String.IsNullOrEmpty(cache[id].stat.name))
-            cache[id].stat.name = pendingPlayers[id].name;
-          cache[id].stat.clan = pendingPlayers[id].clan;
+          if (String.IsNullOrEmpty(cache[stat.id].stat.name))
+            cache[stat.id].stat.name = pendingPlayers[stat.id].name;
+          cache[stat.id].stat.clan = pendingPlayers[stat.id].clan;
         };
 
         // disable stat retrieving for people in cache, but not in server db
@@ -833,6 +837,36 @@ namespace wot
               wins = 0;
             }
 
+            /*int t_eff;
+            try
+            {
+              t_eff = data["t_eff"].IsInt ? int.Parse(data["t_eff"].ToString()) : 0;
+            }
+            catch
+            {
+              t_eff = 0;
+            }*/
+
+            int t_battles;
+            try
+            {
+              t_battles = data["vehicle"]["battle_count"].IsInt ? int.Parse(data["vehicle"]["battle_count"].ToString()) : 0;
+            }
+            catch
+            {
+              t_battles = 0;
+            }
+
+            int t_wins;
+            try
+            {
+              t_wins = data["vehicle"]["win_count"].IsInt ? int.Parse(data["vehicle"]["win_count"].ToString()) : 0;
+            }
+            catch
+            {
+              t_wins = 0;
+            }
+
             res.players[pos++] = new Stat()
             {
               id = id,
@@ -840,6 +874,9 @@ namespace wot
               eff = eff,
               battles = battles,
               wins = wins,
+              //t_eff = t_eff,
+              t_battles = t_battles,
+              t_wins = t_wins,
             };
           }
         }

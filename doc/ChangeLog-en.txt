@@ -1,4 +1,15 @@
-﻿XVM-2.4.test3:
+﻿XVM-2.4.test4:
+  * added per-vehicle statistics. New macros:
+      {{t-kb}}
+      {{t-battles}}
+      {{t-wins}}
+      {{t-rating}}
+      {{t-kb:4}}
+      {{t-rating:3}}
+      {{c:t-rating}}
+      {{c:t-kb}}
+
+XVM-2.4.test3:
   * fixed vehicle icons loading
 
 XVM-2.4.test1:
@@ -132,7 +143,7 @@ XVM-1.7:
   * added new macros for dynamic colors in vehicle markers:
     {{c:hp}}, {{c:hp-ratio}}
   * added macros of dynamic transparency:
-    {{a:eff}}, {{a:rating}}, {{a:kb}}, {{a:hp}}, {{a:hp-ratio}}
+    {{a:hp}}, {{a:hp-ratio}}
   * changed JSON parser to fixed version, than is 10x faster that internal
   * wot-xvm-proxy: added autodetection of game version: RU, EU, NA, CN1
   * wot-xvm-proxy: added command line options /? and /help for displaying

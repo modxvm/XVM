@@ -10,9 +10,9 @@ CURRENT_DIRECTORY=`pwd`
 #SAMPLE_REPLAY=squad.wotreplay
 #SAMPLE_REPLAY=tk.wotreplay
 #SAMPLE_REPLAY=bk.wotreplay
-SAMPLE_REPLAY=7x7.wotreplay
+#SAMPLE_REPLAY=7x7.wotreplay
 #SAMPLE_REPLAY=fogofwar.wotreplay
-#SAMPLE_REPLAY=markers.wotreplay
+SAMPLE_REPLAY=markers.wotreplay
 #SAMPLE_REPLAY=test.wotreplay
 
 cd ${WOT_DIRECTORY}

@@ -24,7 +24,9 @@ class wot.utils.Locale
     // RU
     tr = _translations["RU"];
     tr["Chances error"] = "Ошибка расчета шансов";
-    tr["Win chances"] = "Шансы на победу";
+    tr["Win chances"] = "Шанс на победу";
+    tr["Global"] = "Общий";
+    tr["By tank"] = "По танку";
 //    tr["Using default settings."] = "Используются настройки по умолчанию.";
 //    tr["Error parsing config file."] = "Ошибка чтения конфигурации.";
 //    tr["Error loading config file."] = "Ошибка загрузки конфигурации.";
@@ -33,11 +35,13 @@ class wot.utils.Locale
     tr = _translations["CN"];
     tr["Chances error"] = "Chances error";
     tr["Win chances"] = "Win chances";
+    tr["Global"] = "Global";
+    tr["By tank"] = "By tank";
 //    tr["Using default settings."] = "Using default settings.";
 //    tr["Error parsing config file."] = "Error parsing config file.";
 //    tr["Error loading config file."] = "Error loading config file.";
   }
-  
+
   public static function setRegion(value: String)
   {
     if (!value)

@@ -14,20 +14,33 @@ import wot.utils.Logger;
 import wot.utils.Utils;
 import wot.utils.VehicleInfo;
 
+  // s_player_data members:
+  //   reference: Object,
+  //   updateFunc: Function,
+  //   playerId: Number,
+  //   fullPlayerName: fullPlayerName,
+  //   name: String,
+  //   clan: String,
+  //   originalText: String,
+  //   icon: String,
+  //   vehicleName: String,
+  //   team: Defines.TEAM_ALLY | Defines.TEAM_ENEMY,
+  //   loaded: Boolean
+
+  // s_player_ratings members:
+  //   battles
+  //   wins
+  //   rating
+  //   eff
+  //   t_battles
+  //   t_wins
+  //   t_rating
+
 class wot.utils.Stat
 {
   // Config
   public static var s_player_ids = [];
   public static var s_player_names: Array = [];
-  // s_player_data members:
-  //   reference: Object,
-  //   updateFunc: Function,
-  //   playerId: Number,
-  //   name: String,
-  //   clan: String,
-  //   originalText: String,
-  //   team: Defines.TEAM_ALLY | Defines.TEAM_ENEMY,
-  //   loaded: Boolean
   public static var s_player_data = {};
   public static var s_player_ratings = null;
   public static var s_loadDataStarted = false;
@@ -55,10 +68,16 @@ class wot.utils.Stat
     var sKb: String = "";
     var sRating: String = "";
     var sEff: String = "";
+    var sTWins: String = "";
+    var sTBattles: String = "";
+    var sTKb: String = "";
+    var sTRating: String = "";
 
     var eff: Number = 0;
     var rating: Number = 0;
     var kb: Number = -1;
+    var t_rating: Number = 0;
+    var t_kb: Number = -1;
 
     if (Stat.s_player_ratings)
     {
@@ -85,6 +104,18 @@ class wot.utils.Stat
             sBattles = bn > 0 ? Utils.toString(bn) : "";
             sWins = bn > 0 ? String(Utils.toInt(stat.wins)) : "";
           }
+
+          t_rating = Utils.toInt(stat.t_rating);
+          sTRating = t_rating ? String(t_rating) + "%" : "--%";
+
+          if (t_rating)
+          {
+            var bn: Number = Utils.toInt(stat.t_battles);
+            t_kb = bn > 0 ? Math.round(bn / 100) / 10 : -1;
+            sTKb = t_kb >= 0 ? String(t_kb) + "k" : "";
+            sTBattles = bn > 0 ? Utils.toString(bn) : "";
+            sTWins = bn > 0 ? String(Utils.toInt(stat.t_wins)) : "";
+          }
         }
       }
       else if (Config.s_config.rating.loadEnemyStatsInFogOfWar)
@@ -98,10 +129,18 @@ class wot.utils.Stat
     format = format.split("{{rating}}").join(sRating);
     format = format.split("{{eff}}").join(sEff);
 
+    format = format.split("{{t-kb}}").join(sTKb);
+    format = format.split("{{t-battles}}").join(sTBattles);
+    format = format.split("{{t-wins}}").join(sTWins);
+    format = format.split("{{t-rating}}").join(sTRating);
+
     // This code is stupid, and needs to be rewritten
     format = format.split("{{kb:3}}").join(Utils.padLeft(sKb, 3));
     format = format.split("{{rating:3}}").join(Utils.padLeft(sRating, 3));
     format = format.split("{{eff:4}}").join(Utils.padLeft(sEff, 4));
+
+    format = format.split("{{t-kb:4}}").join(Utils.padLeft(sTKb, 4));
+    format = format.split("{{t-rating:3}}").join(Utils.padLeft(sTRating, 3));
 
     // Dynamic colors
     format = format.split("{{c:eff}}").join(eff < 0 ? ""
@@ -111,10 +150,31 @@ class wot.utils.Stat
     format = format.split("{{c:kb}}").join(
       GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, kb, "#", isDead));
 
+    format = format.split("{{c:t-rating}}").join(rating < 0 ? ""
+      : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, t_rating, "#", isDead));
+    format = format.split("{{c:t-kb}}").join(
+      GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, t_kb, "#", isDead));
+
     format = Utils.trim(format);
 
     return format;
   }
+
+  public static function DecorateField(data: Object, txt: String, format: String, ratingPosition: Number)
+  {
+    if (!s_player_ratings)
+      return txt;
+    //Logger.add("DecorateField: " + data.label + " / " + data.name);
+    var pname = Utils.GetNormalizedPlayerName(data.label || data.name);
+    var ratingText = Stat.FormatText(data, format, false);
+    if (!ratingText || ratingText == "")
+      return txt;
+    return (ratingPosition == Defines.POSITION_LEFT)
+      ? ratingText + " " + txt
+      : txt + " " + ratingText;
+  }
+
+  // Logic functions
 
   public static function processForFogOfWar(data)
   {
@@ -128,22 +188,10 @@ class wot.utils.Stat
         parseInt(data.uid);
 
         // add player data
-        s_player_ids.push(data.uid);
-        s_player_names.push(pname);
-        s_player_data[pname] =
-        {
-          reference: null,
-          updateFunc: null,
-          playerId: data.uid,
-          fullPlayerName: fullPlayerName,
-          name: pname,
-          clan: clan,
-          originalText: data.vehicle || data.originalText,
-          team: data.team == "team1" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY,
-          loaded: false
-        };
+        AddPlayerData(null, null, data.uid, fullPlayerName, data.vehicle || data.originalText, data.icon,
+          data.team == "team1" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY)
 
-        var str: String = data.uid + "=" + fullPlayerName;
+        var str: String = data.uid + "=" + fullPlayerName + "&" + VehicleInfo.getShortName(data.icon);
         var lv: LoadVars = new LoadVars();
         lv.onData = function(success)
         {
@@ -176,22 +224,6 @@ class wot.utils.Stat
       retrieveStatsIngame();
     }
   }
-
-  public static function DecorateField(data: Object, txt: String, format: String, ratingPosition: Number)
-  {
-    if (!s_player_ratings)
-      return txt;
-    //Logger.add("DecorateField: " + data.label + " / " + data.name);
-    var pname = Utils.GetNormalizedPlayerName(data.label || data.name);
-    var ratingText = Stat.FormatText(data, format, false);
-    if (!ratingText || ratingText == "")
-      return txt;
-    return (ratingPosition == Defines.POSITION_LEFT)
-      ? ratingText + " " + txt
-      : txt + " " + ratingText;
-  }
-
-  // Logic functions
 
   private static function retrieveStatsIngame()
   {
@@ -234,7 +266,7 @@ class wot.utils.Stat
                 }
                 _is_str_new = true;
                 //Logger.addObject(p_stat, "Adding to "+p_name+" :");
-                p_stat.rating = p_stat.battles > 0 ? Math.round(p_stat.wins / p_stat.battles * 100) : 0;
+                Stat.CalculateRating(p_stat);
                 Stat.s_player_ratings[p_name] = p_stat;
                 Stat.s_player_data[p_name].loaded = true;
                 // TODO: Add callback to update GUI
@@ -259,7 +291,7 @@ class wot.utils.Stat
                       continue;
                     }
                     //Logger.addObject(p_stat_new, "Adding to "+p_name_new+" :");
-                    p_stat_new.rating = p_stat_new.battles > 0 ? Math.round(p_stat_new.wins / p_stat_new.battles * 100) : 0;
+                    Stat.CalculateRating(p_stat_new);
                     Stat.s_player_ratings[p_name_new] = p_stat_new;
                     Stat.s_player_data[p_name_new].loaded = true;
                     // TODO: Add callback to update GUI
@@ -310,6 +342,7 @@ class wot.utils.Stat
         clan: clan,
         originalText: originalText,
         icon: icon,
+        vehicleName: VehicleInfo.getShortName(icon),
         team: team,
         loaded: false
       };
@@ -341,7 +374,7 @@ class wot.utils.Stat
       var pdata = s_player_data[pname];
       if (!pdata.loaded)
       {
-        var str: String = String(pdata.playerId) + "=" + pdata.fullPlayerName;
+        var str: String = String(pdata.playerId) + "=" + pdata.fullPlayerName + "&" + pdata.vehicleName;
         if (len + str.length > Defines.MAX_PATH - command.length)
           break;
         pdata.loaded = true;
@@ -386,7 +419,7 @@ class wot.utils.Stat
           if (!Stat.s_player_ratings)
             Stat.s_player_ratings = {};
           var stat = stats.players[i];
-          stat.rating = stat.battles > 0 ? Math.round(stat.wins / stat.battles * 100) : 0;
+          Stat.CalculateRating(stat);
           Stat.s_player_ratings[stat.name.toUpperCase()] = stat;
         };
 
@@ -406,6 +439,22 @@ class wot.utils.Stat
     lv.load(command);
   }
 
+  public static function CalculateRating(data)
+  {
+    data.rating = data.battles > 0 ? Math.round(data.wins / data.battles * 100) : 0;
+
+    var t_rating = data.t_battles > 0 ? Math.round(data.t_wins / data.t_battles * 100) : 0;
+
+    var pdata = s_player_data[data.name.toUpperCase()];
+    var vi = VehicleInfo.getInfo(pdata.icon);
+    if (!vi || vi.level == 0)
+      data.t_rating = 0;
+    else
+      data.t_rating = data.rating - (data.rating - t_rating) * data.t_battles / (vi.level * 10);
+
+    Logger.addObject(data);
+  }
+  
   private static function UpdateAll()
   {
     //Logger.add("Stat.UpdateAll()");
@@ -453,12 +502,18 @@ class wot.utils.Stat
 
     var ab1 = AvgStat("battles", Defines.TEAM_ALLY);
     var ab2 = AvgStat("battles", Defines.TEAM_ENEMY);
+
+    var art1 = AvgStat("t_rating", Defines.TEAM_ALLY);
+    var art2 = AvgStat("t_rating", Defines.TEAM_ENEMY);
+
+    var abt1 = AvgStat("t_battles", Defines.TEAM_ALLY);
+    var abt2 = AvgStat("t_battles", Defines.TEAM_ENEMY);
     //Logger.add(ae1 + " " + ae2 + " - " + ar1 + " " + ar2 + " - " + ab1 + " " + ab2);
 
-    var k1 = 0;
-    var k2 = 0;
     var m1 = 0;
     var m2 = 0;
+    var mt1 = 0;
+    var mt2 = 0;
     for (var i in s_player_names)
     {
       var pname = s_player_names[i];
@@ -472,49 +527,45 @@ class wot.utils.Stat
       var eff: Number = s_player_ratings[pname].eff || ((pdata.team == Defines.TEAM_ALLY) ? ae1 : ae2);
       var gwr: Number = (s_player_ratings[pname].rating || ((pdata.team == Defines.TEAM_ALLY) ? ar1 : ar2)) / 100.0;
       var bat: Number = (s_player_ratings[pname].battles || ((pdata.team == Defines.TEAM_ALLY) ? ab1 : ab2)) / 100000.0;
+      var gwrt: Number = (s_player_ratings[pname].t_rating || ((pdata.team == Defines.TEAM_ALLY) ? art1 : art2)) / 100.0;
+      var batt: Number = (s_player_ratings[pname].t_battles || ((pdata.team == Defines.TEAM_ALLY) ? abt1 : abt2)) / 1000.0;
       //Logger.addObject(s_player_ratings[pname], "s_player_ratings[" + pname + "]");
 
-      // 1
-      var kx = eff * vi.level;
-      if (pdata.team == Defines.TEAM_ALLY) k1 += kx; else k2 += kx;
-
-      // 2
       var tx = (vi.tiers[0] + vi.tiers[1]) / 2.0 - tier;
       var mx = eff * (1 + gwr - 0.48) * (1 + bat) * (1 + 0.25 * tx);
+      var mxt = eff * (1 + gwrt - 0.48) * (1 + batt) * (1 + 0.25 * tx);
       if (pdata.team == Defines.TEAM_ALLY) m1 += mx else m2 += mx;
+      if (pdata.team == Defines.TEAM_ALLY) mt1 += mxt else mt2 += mxt;
       //Logger.add("mx=" + mx + " tx=" + tx + " eff=" + int(eff) + " gwr=" + int(gwr) + " kb=" + int(bat));
       //Logger.add("m1=" + m1 + " m2=" + m2 + " team: " + (pdata.team == Defines.TEAM_ALLY ? "ally" : "enemy") + " " + pdata.originalText);
     }
 
-    // 1
-    if (k1 == 0 && k2 == 0) k1 = k2 = 1;
-    if (k1 == 0) k1 = k2;
-    if (k2 == 0) k2 = k1;
-    //Logger.add("k1=" + Math.round(k1) + " k2=" + Math.round(k2));
-
-    // 2
     if (m1 == 0 && m2 == 0) m1 = m2 = 1;
     if (m1 == 0) m1 = m2;
     if (m2 == 0) m2 = m1;
     //Logger.add("m1=" + Math.round(m1) + " m2=" + Math.round(m2));
 
+    if (mt1 == 0 && mt2 == 0) mt1 = mt2 = 1;
+    if (mt1 == 0) mt1 = mt2;
+    if (mt2 == 0) mt2 = mt1;
+
     return
     {
-      k1: Math.round(k1),
-      k2: Math.round(k2),
-      k: NormalizeResult(k1, k2),
-      k_raw: k1 / (k1 + k2) * 100,
-
       m1: Math.round(m1),
       m2: Math.round(m2),
       m: NormalizeResult(m1, m2),
-      m_raw: m1 / (m1 + m2) * 100
+      m_raw: m1 / (m1 + m2) * 100,
+
+      mt1: Math.round(mt1),
+      mt2: Math.round(mt2),
+      mt: NormalizeResult(mt1, mt2),
+      mt_raw: mt1 / (mt1 + mt2) * 100
     };
   }
 
   private static function NormalizeResult(a, b)
   {
-    return Math.round(Math.max(0.05, Math.min(0.95, (0.5 + (a / (a + b) - 0.5) * 5.0))) * 10000) / 100.0;
+    return Math.round(Math.max(0.05, Math.min(0.95, (0.5 + (a / (a + b) - 0.5) * 5.0))) * 100);
   }
 
   private static function AvgStat(arg: String, team: Number)
@@ -595,14 +646,16 @@ class wot.utils.Stat
     {
       tf.html = true;
       if (chances.error)
-        tf.htmlText = tf.text + " <font color='#FF8080'>(" + Locale.get("Chances error") + ": " + chances.error + ")</font>";
+        tf.htmlText = tf.text + " | <font color='#FF8080'> " + Locale.get("Chances error") + ": " + chances.error + "</font>";
       else
       {
         var color = GraphicsUtil.brightenColor(
           Number(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, chances.m_raw, "0x")), 50);
         tf.htmlText = tf.text +
           " <font color='#" + color.toString(16) + "'>" +
-          "(" + Locale.get("Win chances") + ": " + Math.round(chances.m) + "%)</font>";
+          "/ " + Locale.get("Win chances") + ": " +
+          Locale.get("Global") + ": " + chances.m + "%" + ", " +
+          Locale.get("By tank") + ": " + chances.mt + "%</font>";
       }
     }
     return tf.htmlText;

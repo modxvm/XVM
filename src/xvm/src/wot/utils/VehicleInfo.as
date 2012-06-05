@@ -20,6 +20,13 @@ class wot.utils.VehicleInfo
     return str;
   }
 
+  public static function getShortName(str: String): String
+  {
+    str = getName(str);
+    str = str.slice(str.indexOf("_") + 1, str.length - 1);
+    return str;
+  }
+
   public static function getInfo(str: String): Object
   {
     return _data[getName(str)] || null;

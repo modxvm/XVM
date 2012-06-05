@@ -125,6 +125,11 @@
       {{rating:3}}   - GWR aligned from left to 3 chars
       {{eff:4}}      - player efficiency aligned from left to 4 chars
       {{kb:3}}       - number of kilo-battles aligned from left to 3 chars
+      {{t-kb}}       - number of kilo-battles for current vehicle.
+      {{t-battles}}  - total battles count for current vehicle
+      {{t-wins}}     - total wins count for current vehicle
+      {{t-rating:3}} - Vehicle win ratio aligned from left to 3 chars
+      {{t-kb:4}}     - number of kilo-battles for current vehicle aligned from left to 4 chars
 
     Dynamic colors macros:
       {{c:hp}}       - color depended from current health points (only in vehicle markers)
@@ -132,13 +137,12 @@
       {{c:eff}}      - color depended from player efficiency
       {{c:rating}}   - color depended from GWR
       {{c:kb}}       - color depended from kilo-battles
+      {{c:t-rating}} - color depended from current vehicle win ratio
+      {{c:t-kb}}     - color depended from current vehicle kilo-battles
 
     Dynamic transparency macros:
       {{a:hp}}       - transparency depended from current health points (only in vehicle markers)
       {{a:hp-ratio}} - transparency depended from current health ratio (only in vehicle markers)
-      {{a:eff}}      - transparency depended from player efficiency
-      {{a:rating}}   - transparency depended from GWR
-      {{a:kb}}       - transparency depended from kilo-battles
 
   "format" field examples:
     1. Show number of kilo-battles, efficiency and GWR without changing a color:

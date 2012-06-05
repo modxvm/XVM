@@ -35,7 +35,7 @@ class wot.utils.PlayerInfo extends MovieClip
     s_playersInfoCache[nick] = result;
     return result;
   }
-  
+
   public static function createClanIcon(owner: MovieClip, name: String, source: String, cfg, dx, dy, team): MovieClip
   {
     var holder_x = dx + (team == Defines.TEAM_ALLY ? cfg.x : -cfg.xr);
