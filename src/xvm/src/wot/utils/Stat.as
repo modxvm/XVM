@@ -1,4 +1,5 @@
 /**
+/**
  * ...
  * @author sirmax2
  * @author johnp
@@ -35,6 +36,7 @@ import wot.utils.VehicleInfo;
   //   t_battles
   //   t_wins
   //   t_rating
+  //   t_level
 
 class wot.utils.Stat
 {
@@ -266,7 +268,7 @@ class wot.utils.Stat
                 }
                 _is_str_new = true;
                 //Logger.addObject(p_stat, "Adding to "+p_name+" :");
-                Stat.CalculateRating(p_stat, p_name);
+                Stat.CalculateRating(p_stat);
                 Stat.s_player_ratings[p_name] = p_stat;
                 Stat.s_player_data[p_name].loaded = true;
                 // TODO: Add callback to update GUI
@@ -291,7 +293,7 @@ class wot.utils.Stat
                       continue;
                     }
                     //Logger.addObject(p_stat_new, "Adding to "+p_name_new+" :");
-                    Stat.CalculateRating(p_stat_new, p_stat_new);
+                    Stat.CalculateRating(p_stat_new);
                     Stat.s_player_ratings[p_name_new] = p_stat_new;
                     Stat.s_player_data[p_name_new].loaded = true;
                     // TODO: Add callback to update GUI
@@ -419,8 +421,9 @@ class wot.utils.Stat
           if (!Stat.s_player_ratings)
             Stat.s_player_ratings = {};
           var stat = stats.players[i];
-          Stat.CalculateRating(stat, stat.name.toUpperCase());
+          Stat.CalculateRating(stat);
           Stat.s_player_ratings[stat.name.toUpperCase()] = stat;
+          //Logger.addObject(stat, stat.name);
         };
 
         if (stats.info && stats.info.xvm)
@@ -439,20 +442,20 @@ class wot.utils.Stat
     lv.load(command);
   }
 
-  public static function CalculateRating(data, pname)
+  public static function CalculateRating(data)
   {
     data.rating = data.battles > 0 ? Math.round(data.wins / data.battles * 100) : 0;
 
-    var t_rating = data.t_battles > 0 ? Math.round(data.t_wins / data.t_battles * 100) : 0;
-    var pdata = s_player_data[pname];
-    var vi = VehicleInfo.getInfo(pdata.icon);
-    if (!vi || vi.level == 0)
-      data.t_rating = 0;
+    if (!data.t_battles || data.t_battles <= 0 || !data.t_level || data.t_level <= 0)
+      data.t_rating = data.rating;
     else
-      data.t_rating = Math.round(data.rating - (data.rating - t_rating) * data.t_battles / (vi.level * 10));
+    {
+      var t_rating = Math.round(data.t_wins / data.t_battles * 100);
+      data.t_rating = Math.round(data.rating - (data.rating - t_rating) * data.t_battles / (data.t_level * 10));
+    }
     //Logger.addObject(data);
   }
-  
+    
   private static function UpdateAll()
   {
     //Logger.add("Stat.UpdateAll()");
@@ -531,7 +534,7 @@ class wot.utils.Stat
 
       var tx = (vi.tiers[0] + vi.tiers[1]) / 2.0 - tier;
       var mx = eff * (1 + gwr - 0.48) * (1 + bat) * (1 + 0.25 * tx);
-      var mxt = eff * (1 + gwrt - 0.48) * (1 + batt) * (1 + 0.25 * tx);
+      var mxt = eff * (1 + gwrt - 0.48) /* * (1 + batt)*/ * (1 + 0.25 * tx);
       if (pdata.team == Defines.TEAM_ALLY) m1 += mx else m2 += mx;
       if (pdata.team == Defines.TEAM_ALLY) mt1 += mxt else mt2 += mxt;
       //Logger.add("mx=" + mx + " tx=" + tx + " eff=" + int(eff) + " gwr=" + int(gwr) + " kb=" + int(bat));
@@ -644,14 +647,14 @@ class wot.utils.Stat
     {
       tf.html = true;
       if (chances.error)
-        tf.htmlText = tf.text + " | <font color='#FF8080'> " + Locale.get("Chances error") + ": " + chances.error + "</font>";
+        tf.htmlText = tf.text + " | <font color='#FF8080'>" + Locale.get("Chances error") + ": " + chances.error + "</font>";
       else
       {
         var color = GraphicsUtil.brightenColor(
           Number(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, chances.m_raw, "0x")), 50);
         tf.htmlText = tf.text +
-          " <font color='#" + color.toString(16) + "'>" +
-          "/ " + Locale.get("Win chances") + ": " +
+          " | <font color='#" + color.toString(16) + "'>" +
+          Locale.get("Win chances") + ": " +
           Locale.get("Global") + ": " + chances.m + "%" + ", " +
           Locale.get("By tank") + ": " + chances.mt + "%</font>";
       }

@@ -11,12 +11,9 @@ class wot.utils.VehicleInfo
   {
     // str is icon path?
     if (Utils.endsWith(".png", str))
-    {
       str = str.slice(str.lastIndexOf("/") + 1, str.lastIndexOf("."));
-      str = str.split("-").join("_");
-      str = Utils.trim(str);
-    }
-
+    str = str.split("-").join("_");
+    str = Utils.trim(str);
     return str;
   }
 

@@ -31,6 +31,7 @@ namespace wot
       //public int t_eff;
       public int t_battles;
       public int t_wins;
+      public int t_level;
     }
 
     [Serializable]
@@ -877,6 +878,16 @@ namespace wot
               t_wins = 0;
             }
 
+            int t_level;
+            try
+            {
+              t_level = data["vehicle"]["level"].IsInt ? int.Parse(data["vehicle"]["level"].ToString()) : 0;
+            }
+            catch
+            {
+              t_level = 0;
+            }
+
             res.players[pos++] = new Stat()
             {
               id = id,
@@ -888,6 +899,7 @@ namespace wot
               //t_eff = t_eff,
               t_battles = t_battles,
               t_wins = t_wins,
+              t_level = t_level,
             };
           }
         }
