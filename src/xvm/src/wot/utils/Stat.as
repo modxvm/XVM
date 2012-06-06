@@ -80,6 +80,7 @@ class wot.utils.Stat
     var kb: Number = -1;
     var t_rating: Number = 0;
     var t_kb: Number = -1;
+    var t_battles: Number = -1;
 
     if (Stat.s_player_ratings)
     {
@@ -114,6 +115,7 @@ class wot.utils.Stat
           {
             var bn: Number = Utils.toInt(stat.t_battles);
             t_kb = bn > 0 ? Math.round(bn / 100) / 10 : -1;
+            t_battles = bn > 0 ? bn : -1;
             sTKb = t_kb >= 0 ? Sprintf.format("%.1fk", t_kb) : "";
             if (sTKb.length > 0 && sTKb.charAt(0) == '0')
               sTKb = sTKb.slice(1);
@@ -144,7 +146,11 @@ class wot.utils.Stat
     format = format.split("{{eff:4}}").join(Utils.padLeft(sEff, 4));
 
     format = format.split("{{t-kb:4}}").join(Utils.padLeft(sTKb, 4));
+    format = format.split("{{t_kb:4}}").join(Utils.padLeft(sTKb, 4));
+    format = format.split("{{t-battles:4}}").join(Utils.padLeft(sTBattles, 4));
+    format = format.split("{{t_battles:4}}").join(Utils.padLeft(sTBattles, 4));
     format = format.split("{{t-rating:3}}").join(Utils.padLeft(sTRating, 3));
+    format = format.split("{{t_rating:3}}").join(Utils.padLeft(sTRating, 3));
 
     // Dynamic colors
     format = format.split("{{c:eff}}").join(eff < 0 ? ""
@@ -156,8 +162,16 @@ class wot.utils.Stat
 
     format = format.split("{{c:t-rating}}").join(rating < 0 ? ""
       : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, t_rating, "#", isDead));
+    format = format.split("{{c:t_rating}}").join(rating < 0 ? ""
+      : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, t_rating, "#", isDead));
     format = format.split("{{c:t-kb}}").join(
       GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, t_kb * 10, "#", isDead));
+    format = format.split("{{c:t_kb}}").join(
+      GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, t_kb * 10, "#", isDead));
+    format = format.split("{{c:t-battles}}").join(
+      GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, t_battles, "#", isDead));
+    format = format.split("{{c:t_battles}}").join(
+      GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, t_battles, "#", isDead));
 
     format = Utils.trim(format);
 

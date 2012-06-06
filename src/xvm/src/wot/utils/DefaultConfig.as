@@ -262,6 +262,14 @@ class wot.utils.DefaultConfig
           { value: 8,   color: "0x99FF33" },
           { value: 12,  color: "0x33FF33" },
           { value: 999, color: "0xCC66CC" }
+        ],
+        t_battles: [
+          { value: 100,  color: "0xDD0000" },
+          { value: 200,  color: "0xDD3333" },
+          { value: 300,  color: "0xFFCC33" },
+          { value: 500,  color: "0x99FF33" },
+          { value: 800,  color: "0x33FF33" },
+          { value: 9999, color: "0xCC66CC" }
         ]
       },
       alpha: {
@@ -507,7 +515,7 @@ class wot.utils.DefaultConfig
       alpha: 100
     }
   }
-  
+
   // levelIcon
   public static function get li(): Object
   {

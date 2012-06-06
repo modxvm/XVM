@@ -103,46 +103,48 @@
 
   Macros available:
     In players panel:
-      {{nick}}       - player name
-      {{vehicle}}    - vehicle name
+      {{nick}}        - player name
+      {{vehicle}}     - vehicle name
 
     In tank markers:
-      {{hp}}         - current health points
-      {{hp-ratio}}   - current health ratio (without '%' sign)
-      {{hp-max}}     - maximum health points
-      {{nick}}       - player name
-      {{vehicle}}    - vehicle name
-      {{level}}      - vehicle level
-      {{dmg}}        - damage health points
-      {{dmg-ratio}}  - damage health ratio (without '%' sign)
+      {{hp}}          - current health points
+      {{hp-ratio}}    - current health ratio (without '%' sign)
+      {{hp-max}}      - maximum health points
+      {{nick}}        - player name
+      {{vehicle}}     - vehicle name
+      {{level}}       - vehicle level
+      {{dmg}}         - damage health points
+      {{dmg-ratio}}   - damage health ratio (without '%' sign)
 
     Statistics macros ('rating/showPlayersStatistics' must be anabled):
-      {{rating}}     - GWR (Global Win Ratio)
-      {{eff}}        - player efficiency (http://wot-news.com/index.php/stat/calc/en/)
-      {{kb}}         - number of kilo-battles (total battles count divided by 1000).
-      {{battles}}    - total battles count
-      {{wins}}       - total wins count
-      {{rating:3}}   - GWR aligned from left to 3 chars
-      {{eff:4}}      - player efficiency aligned from left to 4 chars
-      {{kb:3}}       - number of kilo-battles aligned from left to 3 chars
-      {{t-kb}}       - number of kilo-battles for current vehicle.
-      {{t-battles}}  - total battles count for current vehicle
-      {{t-wins}}     - total wins count for current vehicle
-      {{t-rating:3}} - Vehicle win ratio aligned from left to 3 chars
-      {{t-kb:4}}     - number of kilo-battles for current vehicle aligned from left to 4 chars
+      {{rating}}      - GWR (Global Win Ratio)
+      {{eff}}         - player efficiency (http://wot-news.com/index.php/stat/calc/en/)
+      {{kb}}          - number of kilo-battles (total battles count divided by 1000).
+      {{battles}}     - total battles count
+      {{wins}}        - total wins count
+      {{rating:3}}    - GWR aligned from left to 3 chars
+      {{eff:4}}       - player efficiency aligned from left to 4 chars
+      {{kb:3}}        - number of kilo-battles aligned from left to 3 chars
+      {{t-kb}}        - number of kilo-battles for current vehicle.
+      {{t-battles}}   - total battles count for current vehicle
+      {{t-wins}}      - total wins count for current vehicle
+      {{t-rating:3}}  - Vehicle win ratio aligned from left to 3 chars
+      {{t-kb:4}}      - number of kilo-battles for current vehicle aligned from left to 4 chars
+      {{t-battles:4}} - number of battles for current vehicle aligned from left to 4 chars
 
     Dynamic colors macros:
-      {{c:hp}}       - color depended from current health points (only in vehicle markers)
-      {{c:hp-ratio}} - color depended from current health ratio (only in vehicle markers)
-      {{c:eff}}      - color depended from player efficiency
-      {{c:rating}}   - color depended from GWR
-      {{c:kb}}       - color depended from kilo-battles
-      {{c:t-rating}} - color depended from current vehicle win ratio
-      {{c:t-kb}}     - color depended from current vehicle kilo-battles
+      {{c:hp}}        - color depended from current health points (only in vehicle markers)
+      {{c:hp-ratio}}  - color depended from current health ratio (only in vehicle markers)
+      {{c:eff}}       - color depended from player efficiency
+      {{c:rating}}    - color depended from GWR
+      {{c:kb}}        - color depended from kilo-battles
+      {{c:t-rating}}  - color depended from current vehicle win ratio
+      {{c:t-kb}}      - color depended from current vehicle kilo-battles
+      {{c:t-battles}} - color depended from current vehicle battles
 
     Dynamic transparency macros:
-      {{a:hp}}       - transparency depended from current health points (only in vehicle markers)
-      {{a:hp-ratio}} - transparency depended from current health ratio (only in vehicle markers)
+      {{a:hp}}        - transparency depended from current health points (only in vehicle markers)
+      {{a:hp-ratio}}  - transparency depended from current health ratio (only in vehicle markers)
 
   "format" field examples:
     1. Show number of kilo-battles, efficiency and GWR without changing a color:

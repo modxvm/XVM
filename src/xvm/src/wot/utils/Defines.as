@@ -5,7 +5,7 @@
 class wot.utils.Defines
 {
   // Global versions
-  public static var XVM_VERSION: String = "2.4.test5";
+  public static var XVM_VERSION: String = "2.4.test6";
   public static var WOT_VERSION: String = "0.7.4";
   public static var CONFIG_VERSION: String = "1.3.0";
   public static var EDITOR_VERSION: String = "0.1.beta1";
@@ -43,6 +43,7 @@ class wot.utils.Defines
   public static var DYNAMIC_COLOR_KB: Number = 3;
   public static var DYNAMIC_COLOR_HP: Number = 4;
   public static var DYNAMIC_COLOR_HP_RATIO: Number = 5;
+  public static var DYNAMIC_COLOR_TBATTLES: Number = 6;
 
   // Dynamic alpha types
   //public static var DYNAMIC_ALPHA_EFF: Number = 1;
@@ -50,6 +51,7 @@ class wot.utils.Defines
   //public static var DYNAMIC_ALPHA_KB: Number = 3;
   public static var DYNAMIC_ALPHA_HP: Number = 4;
   public static var DYNAMIC_ALPHA_HP_RATIO: Number = 5;
+  //public static var DYNAMIC_ALPHA_TBATTLES: Number = 6;
 
   // Default path to vehicle icons (relative)
   public static var CONTOUR_ICON_PATH: String = "../maps/icons/vehicle/contour/";

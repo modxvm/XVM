@@ -22,15 +22,15 @@
     "showChances": true,
     "removeSquadIcon": false,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft": "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
-    "formatRight": "<font face='Consolas' size='11'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>"
+    "formatLeft": "<font face='Consolas' size='11'><font color='{{c:t-kb}}'>{{t-kb:4}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
+    "formatRight": "<font face='Consolas' size='11'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-kb}}'>{{t-kb:4}}</font></font>"
   },
   "statisticForm": {
     "showChances": true,
     "removeSquadIcon": false,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft": "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
-    "formatRight": "<font face='Consolas' size='11'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>"
+    "formatLeft": "<font face='Consolas' size='11'><font color='{{c:t-kb}}'>{{t-kb:4}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
+    "formatRight": "<font face='Consolas' size='11'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-kb}}'>{{t-kb:4}}</font></font>"
   },
   "playersPanel": {
     "alpha": 50,
@@ -641,7 +641,7 @@
         { "nick": "0x01_RU",    "icon": "XVM.png" },
         { "nick": "Yoyo117_EU", "icon": "XVM.png" },
         { "clan": "[WG]",       "icon": "WG.png" }
-//        ,{ "clan": "[",       "icon": "WG.png" }
+        ,{ "clan": "[",       "icon": "WG.png" }
       ]
     }
   ]

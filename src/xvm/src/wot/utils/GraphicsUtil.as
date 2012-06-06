@@ -177,6 +177,9 @@ class wot.utils.GraphicsUtil
       case Defines.DYNAMIC_COLOR_KB:
         cfg = cfg_root.kb;
         break;
+      case Defines.DYNAMIC_COLOR_TBATTLES:
+        cfg = cfg_root.t_battles;
+        break;
       case Defines.DYNAMIC_COLOR_HP:
         cfg = cfg_root.hp;
         break;
@@ -199,7 +202,7 @@ class wot.utils.GraphicsUtil
           color = GraphicsUtil.darkenColor(color, 50);
       return prefix + color.toString(16);
     }
-    
+
     for (var i = 0; i < cfg.length; ++i)
     {
       var cvalue: Number = cfg[i].value;
@@ -224,7 +227,8 @@ class wot.utils.GraphicsUtil
     var cfg: Array;
     switch (type)
     {
-/*      case Defines.DYNAMIC_ALPHA_EFF:
+/*
+      case Defines.DYNAMIC_ALPHA_EFF:
         cfg = cfg_root.eff;
         break;
       case Defines.DYNAMIC_ALPHA_RATING:
@@ -232,7 +236,11 @@ class wot.utils.GraphicsUtil
         break;
       case Defines.DYNAMIC_ALPHA_KB:
         cfg = cfg_root.kb;
-        break;*/
+        break;
+      case Defines.DYNAMIC_ALPHA_TBATTLES:
+        cfg = cfg_root.t_battles;
+        break;
+*/
       case Defines.DYNAMIC_ALPHA_HP:
         cfg = cfg_root.hp;
         break;

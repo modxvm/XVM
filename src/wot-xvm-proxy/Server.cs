@@ -67,7 +67,7 @@ namespace wot
     }
 
     // local cache
-    private readonly Dictionary<int, PlayerInfo> cache = new Dictionary<int, PlayerInfo>();
+    private readonly Dictionary<string, PlayerInfo> cache = new Dictionary<string, PlayerInfo>();
     private readonly Dictionary<int, Stat> pendingPlayers = new Dictionary<int, Stat>();
 
     private Info _modInfo = null;
@@ -539,9 +539,10 @@ namespace wot
       int pos = 0;
       foreach (int id in pendingPlayers.Keys)
       {
-        if (cache.ContainsKey(id))
+        string cacheKey = id + "=" + pendingPlayers[id].vname;
+        if (cache.ContainsKey(cacheKey))
         {
-          res.players[pos] = cache[id].stat;
+          res.players[pos] = cache[cacheKey].stat;
           // fix CT player names
           if (version == "CT")
             res.players[pos].name = pendingPlayers[id].name;
@@ -672,20 +673,22 @@ namespace wot
 
       foreach (int id in pendingPlayers.Keys)
       {
-        if (cache.ContainsKey(id))
+        string cacheKey = id + "=" + pendingPlayers[id].vname;
+        if (cache.ContainsKey(cacheKey))
         {
-          PlayerInfo currentMember = cache[id];
+          PlayerInfo currentMember = cache[cacheKey];
           if (currentMember.notInDb)
             continue;
           if (!currentMember.httpError)
           {
-            Log(1, string.Format("CACHE - {0}: eff={1} battles={2} wins={3}", pendingPlayers[id].name,
-              currentMember.stat.eff, currentMember.stat.battles, currentMember.stat.wins));
+            Log(1, string.Format("CACHE - {0} {1} {2}: eff={3} battles={4} wins={5} t-battles={6} t-wins={7}",
+              id, pendingPlayers[id].name, pendingPlayers[id].vname, currentMember.stat.eff,
+              currentMember.stat.battles, currentMember.stat.wins, currentMember.stat.t_battles, currentMember.stat.t_wins));
             continue;
           }
           if (DateTime.Now.Subtract(currentMember.errorTime).Minutes < Settings.Default.ServerUnavailableTimeout)
             continue;
-          cache.Remove(id);
+          cache.Remove(cacheKey);
         }
 
         // playerId=vname,... || playerId,...
@@ -717,25 +720,27 @@ namespace wot
 
         foreach (Stat stat in res.players)
         {
+          string cacheKey = stat.id + "=" + stat.vname;
           if (String.IsNullOrEmpty(stat.name))
             continue;
-          cache[stat.id] = new PlayerInfo()
+          cache[cacheKey] = new PlayerInfo()
           {
             stat = stat,
             httpError = false
           };
-          if (String.IsNullOrEmpty(cache[stat.id].stat.name))
-            cache[stat.id].stat.name = pendingPlayers[stat.id].name;
-          cache[stat.id].stat.clan = pendingPlayers[stat.id].clan;
+          if (String.IsNullOrEmpty(cache[cacheKey].stat.name))
+            cache[cacheKey].stat.name = pendingPlayers[stat.id].name;
+          cache[cacheKey].stat.clan = pendingPlayers[stat.id].clan;
         };
 
         // disable stat retrieving for people in cache, but not in server db
         foreach (int id in forUpdateIds)
         {
-          if (cache.ContainsKey(id))
+          string cacheKey = id + "=" + pendingPlayers[id].vname;
+          if (cache.ContainsKey(cacheKey))
             continue;
 
-          cache[id] = new PlayerInfo()
+          cache[cacheKey] = new PlayerInfo()
           {
             stat = new Stat()
             {
@@ -755,10 +760,11 @@ namespace wot
       {
         Log(2, string.Format("Exception: {0}", ex));
         ErrorHandle();
-        for (var i = 0; i < forUpdate.Count; i++)
+        for (var i = 0; i < forUpdateIds.Count; i++)
         {
           int id = forUpdateIds[i];
-          cache[id] = new PlayerInfo()
+          string cacheKey = id + "=" + pendingPlayers[id].vname;
+          cache[cacheKey] = new PlayerInfo()
           {
             stat = new Stat()
             {
