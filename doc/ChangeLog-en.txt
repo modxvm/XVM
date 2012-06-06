@@ -1,4 +1,7 @@
-﻿XVM-2.4.test4:
+﻿XVM-2.4.test5:
+  * rating bugfix
+
+XVM-2.4.test4:
   * added per-vehicle statistics. New macros:
       {{t-kb}}
       {{t-battles}}

@@ -454,7 +454,7 @@ class wot.utils.Stat
     {
       var Or = data.rating;
       var Tr = Math.round(data.t_wins / data.t_battles * 100);
-      var Tb = Math.max(data.t_battles, 100);
+      var Tb = Math.min(data.t_battles, 100);
       var Tl = Math.max(data.t_level, 10) * 10;
       data.t_rating = Math.round(Or - (Or - Tr) * Tb / Tl);
     }
