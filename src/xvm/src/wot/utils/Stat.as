@@ -1,15 +1,15 @@
 /**
-/**
  * ...
  * @author sirmax2
  * @author johnp
  */
 import com.greensock.TimelineLite;
 import com.greensock.TweenLite;
+import com.natecook.Sprintf;
+import com.xvm.JSON;
 import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.GraphicsUtil;
-import wot.utils.JSON;
 import wot.utils.Locale;
 import wot.utils.Logger;
 import wot.utils.Utils;
@@ -114,7 +114,9 @@ class wot.utils.Stat
           {
             var bn: Number = Utils.toInt(stat.t_battles);
             t_kb = bn > 0 ? Math.round(bn / 100) / 10 : -1;
-            sTKb = t_kb >= 0 ? String(t_kb) + "k" : "";
+            sTKb = t_kb >= 0 ? Sprintf.format("%.1fk", t_kb) : "";
+            if (sTKb.length > 0 && sTKb.charAt(0) == '0')
+              sTKb = sTKb.slice(1);
             sTBattles = bn > 0 ? Utils.toString(bn) : "";
             sTWins = bn > 0 ? String(Utils.toInt(stat.t_wins)) : "";
           }
@@ -450,12 +452,15 @@ class wot.utils.Stat
       data.t_rating = data.rating;
     else
     {
-      var t_rating = Math.round(data.t_wins / data.t_battles * 100);
-      data.t_rating = Math.round(data.rating - (data.rating - t_rating) * data.t_battles / (data.t_level * 10));
+      var Or = data.rating;
+      var Tr = Math.round(data.t_wins / data.t_battles * 100);
+      var Tb = Math.max(data.t_battles, 100);
+      var Tl = Math.max(data.t_level, 10) * 10;
+      data.t_rating = Math.round(Or - (Or - Tr) * Tb / Tl);
     }
     //Logger.addObject(data);
   }
-    
+
   private static function UpdateAll()
   {
     //Logger.add("Stat.UpdateAll()");

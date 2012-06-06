@@ -2,7 +2,7 @@
 {
   var col3;
   var data;
-  var iconLoader;
+  var iconLoader: net.wargaming.controls.UILoaderAlt;
   var owner;
   var squad;
 

@@ -439,7 +439,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       // AS 2 doesn't have String.replace? Shame on them. Let's use our own square wheel.
       format = format.split("{{nick}}").join(m_playerFullName);
       format = format.split("{{vehicle}}").join(m_vname);
-      format = format.split("{{level}}").join(m_level);
+      format = format.split("{{level}}").join(String(m_level));
       format = Stat.FormatText({ label: m_playerFullName }, format);
       format = Utils.trim(format);
     }
@@ -993,8 +993,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
         visible = cfg.contourIcon.visible;
         if (visible)
         {
-          iconLoader._x = cfg.contourIcon.x - (iconLoader.content._width >> 1);
-          iconLoader._y = cfg.contourIcon.y - (iconLoader.content._height >> 1);
+          iconLoader._x = cfg.contourIcon.x - (80 >> 1);
+          iconLoader._y = cfg.contourIcon.y - (80 >> 1);
           iconLoader._alpha = XVMFormatDynamicAlpha(cfg.contourIcon.alpha, m_curHealth);
         }
         iconLoader._visible = visible;

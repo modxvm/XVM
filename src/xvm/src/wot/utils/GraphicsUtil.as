@@ -224,7 +224,7 @@ class wot.utils.GraphicsUtil
     var cfg: Array;
     switch (type)
     {
-      case Defines.DYNAMIC_ALPHA_EFF:
+/*      case Defines.DYNAMIC_ALPHA_EFF:
         cfg = cfg_root.eff;
         break;
       case Defines.DYNAMIC_ALPHA_RATING:
@@ -232,7 +232,7 @@ class wot.utils.GraphicsUtil
         break;
       case Defines.DYNAMIC_ALPHA_KB:
         cfg = cfg_root.kb;
-        break;
+        break;*/
       case Defines.DYNAMIC_ALPHA_HP:
         cfg = cfg_root.hp;
         break;

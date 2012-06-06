@@ -48,7 +48,7 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
       if (team == Defines.TEAM_ENEMY)
       {
         iconLoader._xscale = -iconLoader._xscale;
-        iconLoader._x -= iconLoader.__width;
+        iconLoader._x -= 80;
         //Logger.add(iconLoader.width + "x" + iconLoader.height);
       }
     }

@@ -31,7 +31,7 @@ USAGE:
 
 */
 
-class wot.utils.JSON {
+class com.xvm.JSON {
 
   static function stringify(arg):String {
 

@@ -79,7 +79,7 @@ class wot.utils.Config
         if (!success)
           return;
 
-        var config = net.produxion.util.XML2Object.deserialize(xml);
+        var config = com.produxion.util.XML2Object.deserialize(xml);
         config = config["overTargetMarkers"];
         if (!config)
           return;
@@ -134,7 +134,7 @@ class wot.utils.Config
           }
           try
           {
-            var config = wot.utils.JSON.parse(str);
+            var config = com.xvm.JSON.parse(str);
 
             if (Config.DEBUG_TIMES)
             {
@@ -465,7 +465,7 @@ class wot.utils.Config
 
       v = "1.2.0";
     }
-    
+
     if (v == "1.2.0")
     {
       if (config.players)

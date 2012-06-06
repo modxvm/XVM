@@ -1,8 +1,8 @@
 ﻿intrinsic class net.wargaming.ingame.PlayersPanel extends MovieClip
 {
-  static var PLAYER_NAME_LENGTH;
-  static var STATES;
-  static var SQUAD_SIZE;
+  static var PLAYER_NAME_LENGTH: Number;
+  static var STATES: Object;
+  static var SQUAD_SIZE: Number;
 
   var m_state: String;
   var m_type: String;

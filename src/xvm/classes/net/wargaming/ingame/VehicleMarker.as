@@ -1,25 +1,25 @@
 ﻿intrinsic class net.wargaming.ingame.VehicleMarker extends gfx.core.UIComponent
 {
-  static var s_showExInfo;
+  static var s_showExInfo: Boolean;
 
-  var m_curHealth;
-  var m_maxHealth;
-  var m_playerFullName;
-  var m_vname;
-  var m_entityName;
-  var m_level;
-  var m_source;
-  var m_isPopulated;
-  var m_vehicleClass;
-  var m_markerState;
-  var m_markerLabel;
+  var m_curHealth: Number;
+  var m_maxHealth: Number;
+  var m_playerFullName: String;
+  var m_vname: String;
+  var m_entityName: String;
+  var m_level: Number;
+  var m_source: String;
+  var m_isPopulated: Boolean;
+  var m_vehicleClass: String;
+  var m_markerState: String;
+  var m_markerLabel: String;
 
   var marker: MovieClip;
   var pNameField: TextField;
   var vNameField: TextField;
-  var iconLoader;
-  var levelIcon;
-  var actionMarker;
+  var iconLoader: net.wargaming.controls.UILoaderAlt;
+  var levelIcon: MovieClip;
+  var actionMarker: MovieClip;
   var healthBar: MovieClip;
   var bgShadow: MovieClip;
 

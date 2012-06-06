@@ -80,7 +80,7 @@ class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRend
     if (!m_clanIcon)
     {
       var x = (!m_iconLoaded || Config.s_config.battle.mirroredVehicleIcons || (team == Defines.TEAM_ALLY))
-        ? iconLoader._x : iconLoader._x + iconLoader.width;
+        ? iconLoader._x : iconLoader._x + 80;
       m_clanIcon = PlayerInfo.createClanIcon(this, "m_clanIcon", pinfo ? pinfo.icon : null, cfg, x, iconLoader._y, team);
     }
     if (!pinfo)

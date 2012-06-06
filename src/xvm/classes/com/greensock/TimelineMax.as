@@ -455,11 +455,11 @@ class com.greensock.TimelineMax extends TimelineLite {
 				
 				var prevCycles:Number = _cyclesComplete;
 				var cycleDuration:Number = this.cachedDuration + _repeatDelay;
-				var prevCycles:Number = _cyclesComplete;
+				var prevCycles2:Number = _cyclesComplete;
 				if ((_cyclesComplete = (this.cachedTotalTime / cycleDuration) >> 0) == (this.cachedTotalTime / cycleDuration) && _cyclesComplete != 0) {
 					_cyclesComplete--; //otherwise when rendered exactly at the end time, it will act as though it is repeating (at the beginning)
 				}
-				repeated = Boolean(prevCycles != _cyclesComplete);
+				repeated = Boolean(prevCycles2 != _cyclesComplete);
 				
 				if (isComplete) {
 					if (this.yoyo && _repeat % 2) {
@@ -491,9 +491,9 @@ class com.greensock.TimelineMax extends TimelineLite {
 					*/
 					
 					var forward:Boolean = Boolean(!this.yoyo || (_cyclesComplete % 2 == 0));
-					var prevForward:Boolean = Boolean(!this.yoyo || (prevCycles % 2 == 0));
+					var prevForward:Boolean = Boolean(!this.yoyo || (prevCycles2 % 2 == 0));
 					var wrap:Boolean = Boolean(forward == prevForward);
-					if (prevCycles > _cyclesComplete) {
+					if (prevCycles2 > _cyclesComplete) {
 						prevForward = !prevForward;
 					}
 					if (prevForward) {

@@ -1,0 +1,1535 @@
+{
+  "configVersion": "1.3.0",
+  "editorVersion": "0.0.0",
+  "definition": {
+    "author": "ZeGnor",
+    "description": "Релиз версия 0.7.3",
+    "url": "http://www.koreanrandom.com/forum/topic/1384-xvm-configurations/",
+    "date": "24.05.2012",
+    "gameVersion": "0.7.3",
+    "modMinVersion": "2.3"
+  },
+  "battle": {
+    "mirroredVehicleIcons": false,
+    "showPostmortemTips": false,
+    "removePanelsModeSwitcher": false,
+    "drawGrid": false,
+    "hideXVMVersion": false,
+    "useStandardMarkers": false
+  },
+  "rating": {
+    "showPlayersStatistics": true,
+    "loadEnemyStatsInFogOfWar": true
+  },
+  "battleLoading": {
+    "showClock": true,
+    "showChances": true,
+    "removeSquadIcon": false,
+    "clanIcon": { "show": true, "x": -348, "y": 4, "h": 16, "w": 16, "alpha": 100 },
+    "formatLeft": "<font face='$FieldFont' size='13'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
+    "formatRight": "<font face='$FieldFont' size='13'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>"
+  },
+  "statisticForm": {
+    "showChances": true,
+    "removeSquadIcon": false,
+    "clanIcon": { "show": true, "x": -348, "y": 4, "h": 16, "w": 16, "alpha": 100 },
+    "formatLeft": "<font face='$FieldFont' size='12'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
+    "formatRight": "<font face='$FieldFont' size='12'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>"
+  },
+  "playersPanel": {
+    "alpha": 50,
+    "iconAlpha": 100,
+    "removeSquadIcon": false,
+    "clanIcon": { "show": true, "x": 85, "y": 4, "h": 16, "w": 16, "alpha": 100 },
+    "medium": {
+      "width": 46,
+      "formatLeft": "<font color='{{c:eff}}'>{{nick}}</font>",
+      "formatRight": "<font color='{{c:eff}}'>{{nick}}</font>"
+    },
+    "medium2": {
+      "width": 65,
+      "formatLeft": "<font color='{{c:eff}}'>{{vehicle}}</font>",
+      "formatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
+    },
+    "large": {
+      "width": 170,
+      "nickFormatLeft": "<font color='{{c:eff}}'>{{rating}}</font> {{nick}}",
+      "nickFormatRight": "{{nick}} <font color='{{c:eff}}'>{{rating}}</font>",
+      "vehicleFormatLeft": "<font color='{{c:rating}}'>{{vehicle}}</font>",
+      "vehicleFormatRight": "<font color='{{c:rating}}'>{{vehicle}}</font>"
+    }
+  },
+  "markers": {
+    "ally": {
+      "alive": {
+        "normal": {
+          "vehicleIcon": {
+            "visible": true,
+            "x": 0,
+            "y": -10,
+            "alpha": 100,
+            "color": "0x84DA0E",
+            "maxScale": 80,
+            "scaleX": 0,
+            "scaleY": 30,
+            "shadow": {
+              "alpha": 100,
+              "color": "0x000000",
+              "angle": 45,
+              "strength": 120,
+              "distance": 1,
+              "size": 1
+            }
+          },
+          "healthBar": {
+            "visible": true,
+            "x": -9,
+            "y": -27,
+            "alpha": 100,
+            "color": "0x7BEC37",
+            "lcolor": null,
+            "width": 50,
+            "height": 5,
+            "border": {
+              "alpha": 30,
+              "color": "0x000000",
+              "size": 1
+            },
+            "fill": {
+              "alpha": 30
+            },
+            "damage": {
+              "alpha": 65,
+              "color": "0xFFFFFF",
+              "fade": 1
+            }
+          },
+          "damageText": {
+            "visible": true,
+            "x": 0,
+            "y": -50,
+            "alpha": 100,
+            "color": "0xFD0715",
+            "font": {
+              "name": "$FieldFont",
+              "size": 15,
+              "align": "center",
+              "bold": true
+            },
+            "shadow": {
+              "alpha": 100,
+              "color": "0x000000",
+              "angle": 0,
+              "strength": 200,
+              "distance": 1,
+              "size": 1
+            },
+            "speed": 2,
+            "maxRange": 40,
+            "damageMessage": "-{{dmg}}-",
+            "blowupMessage": "OMG!"
+          },
+          "contourIcon": {
+            "visible": false,
+            "x": 0,
+            "y": 0,
+            "alpha": 100,
+            "color": null,
+            "amount": 0
+          },
+          "clanIcon": {
+            "visible": false,
+            "x": 0,
+            "y": -67,
+            "w": 16,
+            "h": 16,
+            "alpha": 100
+          },
+          "levelIcon": {
+            "visible": false,
+            "x": 0,
+            "y": 0,
+            "alpha": 100
+          },
+          "actionMarker": {
+            "visible": true,
+            "x": 0,
+            "y": -50,
+            "alpha": 100
+          },
+          "textFields": [
+             {
+              "name": "Название танка",
+              "visible": true,
+              "x": 0,
+              "y": -8,
+              "alpha": 100,
+              "color": "0x7BEC37",
+              "font": {
+                "name": "$FieldFont",
+                "size": 12,
+                "align": "center",
+                "bold": false
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "0x000000",
+                "angle": 0,
+                "strength": 100,
+                "distance": 1,
+                "size": 1
+              },
+              "format": "{{vehicle}}"
+            },
+            {
+              "name": "Здоровье",
+              "visible": true,
+              "x": 17,
+              "y": -19,
+              "alpha": 100,
+              "color": "0xFFFA07",
+              "font": {
+                "name": "$FieldFont",
+                "size": 9,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "0x000000",
+                "angle": 0,
+                "strength": 60,
+                "distance": 1,
+                "size": 1
+              },
+              "format": "{{hp}}"
+            },
+            {
+              "name": "Процент здоровья",
+              "visible": true,
+              "x": -23,
+              "y": -19,
+              "alpha": 100,
+              "color": "0xFFFA07",
+              "font": {
+                "name": "$FieldFont",
+                "size": 12,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "0x000000",
+                "angle": 0,
+                "strength": 60,
+                "distance": 1,
+                "size": 1
+              },
+              "format": "{{hp-ratio}}\u0025"
+            }
+          ]
+        },
+        "extended": {
+          "vehicleIcon": {
+            "visible": true,
+            "x": 0,
+            "y": -10,
+            "alpha": 100,
+            "color": "0x84DA0E",
+            "maxScale": 80,
+            "scaleX": 0,
+            "scaleY": 30,
+            "shadow": {
+              "alpha": 100,
+              "color": "0x000000",
+              "angle": 45,
+              "strength": 120,
+              "distance": 1,
+              "size": 1
+            }
+          },
+          "healthBar": {
+            "visible": false,
+            "x": 0,
+            "y": 0,
+            "alpha": 100,
+            "color": null,
+            "lcolor": null,
+            "width": 80,
+            "height": 11,
+            "border": {
+              "alpha": 30,
+              "color": "0x000000",
+              "size": 1
+            },
+            "fill": {
+              "alpha": 30
+            },
+            "damage": {
+              "alpha": 80,
+              "color": null,
+              "fade": 1
+            }
+          },
+          "damageText": {
+            "visible": true,
+            "x": 0,
+            "y": -50,
+            "alpha": 100,
+            "color": "0xFD0715",
+            "font": {
+              "name": "$FieldFont",
+              "size": 15,
+              "align": "center",
+              "bold": true
+            },
+            "shadow": {
+              "alpha": 100,
+              "color": "0x000000",
+              "angle": 0,
+              "strength": 200,
+              "distance": 1,
+              "size": 1
+            },
+            "speed": 2,
+            "maxRange": 40,
+            "damageMessage": "-{{dmg}}-",
+            "blowupMessage": "OMG!"
+          },
+          "contourIcon": {
+            "visible": true,
+            "x": 0,
+            "y": -30,
+            "alpha": 100,
+            "color": null,
+            "amount": 0
+          },
+          "clanIcon": {
+            "visible": true,
+            "x": 0,
+            "y": -67,
+            "w": 16,
+            "h": 16,
+            "alpha": 100
+          },
+          "levelIcon": {
+            "visible": false,
+            "x": 0,
+            "y": 0,
+            "alpha": 100
+          },
+          "actionMarker": {
+            "visible": true,
+            "x": 0,
+            "y": -50,
+            "alpha": 100
+          },
+          "textFields": [
+            {
+              "name": "Имя игрока",
+              "visible": true,
+              "x": 0,
+              "y": -8,
+              "alpha": 100,
+              "color": "0x7BEC37",
+              "font": {
+                "name": "$FieldFont",
+                "size": 12,
+                "align": "center",
+                "bold": false
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "0x000000",
+                "angle": 0,
+                "strength": 60,
+                "distance": 1,
+                "size": 1
+              },
+              "format": "{{nick}}"
+            },
+            {
+              "name": "Эффективность",
+              "visible": true,
+              "x": 0,
+              "y": -44,
+              "alpha": 100,
+              "color": "{{c:eff}}",
+              "font": {
+                "name": "$FieldFont",
+                "size": 12,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "0x000000",
+                "angle": 0,
+                "strength": 60,
+                "distance": 1,
+                "size": 1
+              },
+              "format": "{{eff}}"
+            }
+          ]
+        }
+      },
+      "dead": {
+        "normal": {
+          "vehicleIcon": {
+            "visible": true,
+            "x": 0,
+            "y": -10,
+            "alpha": 100,
+            "color": "0x84DA0E",
+            "maxScale": 80,
+            "scaleX": 0,
+            "scaleY": 30,
+            "shadow": {
+              "alpha": 100,
+              "color": "0x000000",
+              "angle": 45,
+              "strength": 120,
+              "distance": 1,
+              "size": 1
+            }
+          },
+          "healthBar": {
+            "visible": false,
+            "x": 0,
+            "y": 0,
+            "alpha": 100,
+            "color": null,
+            "lcolor": null,
+            "width": 80,
+            "height": 11,
+            "border": {
+              "alpha": 30,
+              "color": "0x000000",
+              "size": 1
+            },
+            "fill": {
+              "alpha": 30,
+              "color": null
+            },
+            "damage": {
+              "alpha": 80,
+              "color": null,
+              "fade": 1
+            }
+          },
+          "damageText": {
+            "visible": true,
+            "x": 0,
+            "y": -50,
+            "alpha": 100,
+            "color": "0xFD0715",
+            "font": {
+              "name": "$FieldFont",
+              "size": 13,
+              "align": "center",
+              "bold": true
+            },
+            "shadow": {
+              "alpha": 100,
+              "color": "0x000000",
+              "angle": 0,
+              "strength": 200,
+              "distance": 1,
+              "size": 1
+            },
+            "speed": 2,
+            "maxRange": 40,
+            "damageMessage": "{{nick}} -kill-",
+            "blowupMessage": "{{nick}} OMG!"
+          },
+          "contourIcon": {
+            "visible": false,
+            "x": 0,
+            "y": 0,
+            "alpha": 100,
+            "color": null,
+            "amount": 0
+          },
+          "clanIcon": {
+            "visible": false,
+            "x": 0,
+            "y": -67,
+            "w": 16,
+            "h": 16,
+            "alpha": 100
+          },
+          "levelIcon": {
+            "visible": false,
+            "x": 0,
+            "y": 0,
+            "alpha": 100
+          },
+          "actionMarker": {
+            "visible": true,
+            "x": 0,
+            "y": -50,
+            "alpha": 100
+          },
+          "textFields": [  ]
+        },
+        "extended": {
+          "vehicleIcon": {
+            "visible": true,
+            "x": 0,
+            "y": -10,
+            "alpha": 100,
+            "color": "0x84DA0E",
+            "maxScale": 80,
+            "scaleX": 0,
+            "scaleY": 30,
+            "shadow": {
+              "alpha": 100,
+              "color": "0x000000",
+              "angle": 45,
+              "strength": 120,
+              "distance": 1,
+              "size": 1
+            }
+          },
+          "healthBar": {
+            "visible": false,
+            "x": 0,
+            "y": 0,
+            "alpha": 100,
+            "color": null,
+            "lcolor": null,
+            "width": 80,
+            "height": 11,
+            "border": {
+              "alpha": 30,
+              "color": "0x000000",
+              "size": 1
+            },
+            "fill": {
+              "alpha": 30,
+              "color": null
+            },
+            "damage": {
+              "alpha": 80,
+              "color": null,
+              "fade": 1
+            }
+          },
+          "damageText": {
+            "visible": true,
+            "x": 0,
+            "y": -50,
+            "alpha": 100,
+            "color": "0xFD0715",
+            "font": {
+              "name": "$FieldFont",
+              "size": 13,
+              "align": "center",
+              "bold": true
+            },
+            "shadow": {
+              "alpha": 100,
+              "color": "0x000000",
+              "angle": 0,
+              "strength": 200,
+              "distance": 1,
+              "size": 1
+            },
+            "speed": 2,
+            "maxRange": 40,
+            "damageMessage": "{{nick}} -kill-",
+            "blowupMessage": "{{nick}} OMG!"
+          },
+          "contourIcon": {
+            "visible": false,
+            "x": 0,
+            "y": 0,
+            "alpha": 100,
+            "color": null,
+            "amount": 0
+          },
+          "clanIcon": {
+            "visible": true,
+            "x": 0,
+            "y": -30,
+            "w": 16,
+            "h": 16,
+            "alpha": 100
+          },
+          "levelIcon": {
+            "visible": false,
+            "x": 0,
+            "y": 0,
+            "alpha": 100
+          },
+          "actionMarker": {
+            "visible": true,
+            "x": 0,
+            "y": -50,
+            "alpha": 100
+          },
+          "textFields": [
+            {
+              "name": "Название танка",
+              "visible": true,
+              "x": 0,
+              "y": -8,
+              "alpha": 80,
+              "color": "0x7BEC37",
+              "font": {
+                "name": "$FieldFont",
+                "size": 12,
+                "align": "center",
+                "bold": false
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "0x000000",
+                "angle": 0,
+                "strength": 120,
+                "distance": 1,
+                "size": 1
+              },
+              "format": "{{vehicle}}"
+            }
+          ]
+        }
+      }
+    },
+    "enemy": {
+      "alive": {
+        "normal": {
+          "vehicleIcon": {
+            "visible": true,
+            "x": 0,
+            "y": -10,
+            "alpha": 100,
+            "color": "0xFF1D0C",
+            "maxScale": 80,
+            "scaleX": 0,
+            "scaleY": 30,
+            "shadow": {
+              "alpha": 100,
+              "color": "0x000000",
+              "angle": 45,
+              "strength": 120,
+              "distance": 1,
+              "size": 1
+            }
+          },
+          "healthBar": {
+            "visible": true,
+            "x": -9,
+            "y": -27,
+            "alpha": 100,
+            "color": "0xFF0000",
+            "lcolor": null,
+            "width": 50,
+            "height": 5,
+            "border": {
+              "alpha": 30,
+              "color": "0x000000",
+              "size": 1
+            },
+            "fill": {
+              "alpha": 30
+            },
+            "damage": {
+              "alpha": 65,
+              "color": "0xFFFFFF",
+              "fade": 1
+            }
+          },
+          "damageText": {
+            "visible": true,
+            "x": 0,
+            "y": -50,
+            "alpha": 100,
+            "color": "0x1800FD",
+            "font": {
+              "name": "$FieldFont",
+              "size": 15,
+              "align": "center",
+              "bold": true
+            },
+            "shadow": {
+              "alpha": 100,
+              "color": "0x000000",
+              "angle": 0,
+              "strength": 200,
+              "distance": 1,
+              "size": 1
+            },
+            "speed": 2,
+            "maxRange": 40,
+            "damageMessage": "-{{dmg}}-",
+            "blowupMessage": "One Piece!"
+          },
+          "contourIcon": {
+            "visible": false,
+            "x": 0,
+            "y": 0,
+            "alpha": 100,
+            "color": null,
+            "amount": 0
+          },
+          "clanIcon": {
+            "visible": false,
+            "x": 0,
+            "y": -67,
+            "w": 16,
+            "h": 16,
+            "alpha": 100
+          },
+          "levelIcon": {
+            "visible": false,
+            "x": 0,
+            "y": 0,
+            "alpha": 100
+          },
+          "actionMarker": {
+            "visible": true,
+            "x": 0,
+            "y": -50,
+            "alpha": 100
+          },
+          "textFields": [
+            {
+              "name": "Название танка",
+              "visible": true,
+              "x": 0,
+              "y": -8,
+              "alpha": 100,
+              "color": "0xEC3737",
+              "font": {
+                "name": "$FieldFont",
+                "size": 12,
+                "align": "center",
+                "bold": false
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "0x000000",
+                "angle": 0,
+                "strength": 120,
+                "distance": 1,
+                "size": 1
+              },
+              "format": "{{vehicle}}"
+            },
+            {
+              "name": "Здоровье",
+              "visible": true,
+              "x": 17,
+              "y": -19,
+              "alpha": 100,
+              "color": "0xF5C600",
+              "font": {
+                "name": "$FieldFont",
+                "size": 9,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "0x000000",
+                "angle": 0,
+                "strength": 60,
+                "distance": 1,
+                "size": 1
+              },
+              "format": "{{hp}}"
+            },
+            {
+              "name": "Процент здоровья",
+              "visible": true,
+              "x": -23,
+              "y": -19,
+              "alpha": 100,
+              "color": "0xF5C600",
+              "font": {
+                "name": "$FieldFont",
+                "size": 12,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "0x000000",
+                "angle": 0,
+                "strength": 60,
+                "distance": 1,
+                "size": 1
+              },
+              "format": "{{hp-ratio}}\u0025"
+            }
+          ]
+        },
+        "extended": {
+          "vehicleIcon": {
+            "visible": true,
+            "x": 0,
+            "y": -10,
+            "alpha": 100,
+            "color": "0xFF1D0C",
+            "maxScale": 80,
+            "scaleX": 0,
+            "scaleY": 30,
+            "shadow": {
+              "alpha": 100,
+              "color": "0x000000",
+              "angle": 45,
+              "strength": 120,
+              "distance": 1,
+              "size": 1
+            }
+          },
+          "healthBar": {
+            "visible": false,
+            "x": 0,
+            "y": 0,
+            "alpha": 100,
+            "color": null,
+            "lcolor": null,
+            "width": 80,
+            "height": 11,
+            "border": {
+              "alpha": 30,
+              "color": "0x000000",
+              "size": 1
+            },
+            "fill": {
+              "alpha": 30
+            },
+            "damage": {
+              "alpha": 80,
+              "color": null,
+              "fade": 1
+            }
+          },
+          "damageText": {
+            "visible": true,
+            "x": 0,
+            "y": -50,
+            "alpha": 100,
+            "color": "0x1800FD",
+            "font": {
+              "name": "$FieldFont",
+              "size": 15,
+              "align": "center",
+              "bold": true
+            },
+            "shadow": {
+              "alpha": 100,
+              "color": "0x000000",
+              "angle": 0,
+              "strength": 200,
+              "distance": 1,
+              "size": 1
+            },
+            "speed": 2,
+            "maxRange": 40,
+            "damageMessage": "-{{dmg}}-",
+            "blowupMessage": "One Piece!"
+          },
+          "contourIcon": {
+            "visible": true,
+            "x": 0,
+            "y": -30,
+            "alpha": 100,
+            "color": null,
+            "amount": 0
+          },
+          "clanIcon": {
+            "visible": true,
+            "x": 0,
+            "y": -67,
+            "w": 16,
+            "h": 16,
+            "alpha": 100
+          },
+          "levelIcon": {
+            "visible": false,
+            "x": 0,
+            "y": 01,
+            "alpha": 100
+          },
+          "actionMarker": {
+            "visible": true,
+            "x": 0,
+            "y": -50,
+            "alpha": 100
+          },
+          "textFields": [
+            {
+              "name": "Имя игрока",
+              "visible": true,
+              "x": 0,
+              "y": -8,
+              "alpha": 100,
+              "color": "0xEC3737",
+              "font": {
+                "name": "$FieldFont",
+                "size": 12,
+                "align": "center",
+                "bold": false
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "0x000000",
+                "angle": 0,
+                "strength": 60,
+                "distance": 1,
+                "size": 1
+              },
+              "format": "{{nick}}"
+            },
+            {
+              "name": "Эффективность",
+              "visible": true,
+              "x": 0,
+              "y": -44,
+              "alpha": 100,
+              "color": "{{c:eff}}",
+              "font": {
+                "name": "$FieldFont",
+                "size": 12,
+                "align": "center",
+                "bold": true
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "0x000000",
+                "angle": 0,
+                "strength": 60,
+                "distance": 1,
+                "size": 1
+              },
+              "format": "{{eff}}"
+            }
+          ]
+        }
+      },
+      "dead": {
+        "normal": {
+          "vehicleIcon": {
+            "visible": true,
+            "x": 0,
+            "y": -10,
+            "alpha": 100,
+            "color": "0xFF1D0C",
+            "maxScale": 80,
+            "scaleX": 0,
+            "scaleY": 30,
+            "shadow": {
+              "alpha": 100,
+              "color": "0x000000",
+              "angle": 45,
+              "strength": 120,
+              "distance": 1,
+              "size": 1
+            }
+          },
+          "healthBar": {
+            "visible": false,
+            "x": 0,
+            "y": 0,
+            "alpha": 100,
+            "color": null,
+            "lcolor": null,
+            "width": 80,
+            "height": 11,
+            "border": {
+              "alpha": 30,
+              "color": "0x000000",
+              "size": 1
+            },
+            "fill": {
+              "alpha": 30,
+              "color": null
+            },
+            "damage": {
+              "alpha": 80,
+              "color": null,
+              "fade": 1
+            }
+          },
+          "damageText": {
+            "visible": true,
+            "x": 0,
+            "y": -50,
+            "alpha": 100,
+            "color": "0x1800FD",
+            "font": {
+              "name": "$FieldFont",
+              "size": 13,
+              "align": "center",
+              "bold": true
+            },
+            "shadow": {
+              "alpha": 100,
+              "color": "0x000000",
+              "angle": 0,
+              "strength": 200,
+              "distance": 1,
+              "size": 1
+            },
+            "speed": 2,
+            "maxRange": 40,
+            "damageMessage": "{{nick}} ({{vehicle}}) -kill-",
+            "blowupMessage": "{{nick}} ({{vehicle}}) One Piece!"
+          },
+          "contourIcon": {
+            "visible": false,
+            "x": 0,
+            "y": 0,
+            "alpha": 100,
+            "color": null,
+            "amount": 0
+          },
+          "clanIcon": {
+            "visible": false,
+            "x": 0,
+            "y": -30,
+            "w": 16,
+            "h": 16,
+            "alpha": 100
+          },
+          "levelIcon": {
+            "visible": false,
+            "x": 0,
+            "y": 0,
+            "alpha": 100
+          },
+          "actionMarker": {
+            "visible": false,
+            "x": 0,
+            "y": 0,
+            "alpha": 100
+          },
+          "textFields": [  ]
+        },
+        "extended": {
+          "vehicleIcon": {
+            "visible": true,
+            "x": 0,
+            "y": -10,
+            "alpha": 100,
+            "color": "0xFF1D0C",
+            "maxScale": 80,
+            "scaleX": 0,
+            "scaleY": 30,
+            "shadow": {
+              "alpha": 100,
+              "color": "0x000000",
+              "angle": 45,
+              "strength": 120,
+              "distance": 1,
+              "size": 1
+            }
+          },
+          "healthBar": {
+            "visible": false,
+            "x": 0,
+            "y": 0,
+            "alpha": 100,
+            "color": null,
+            "lcolor": null,
+            "width": 80,
+            "height": 11,
+            "border": {
+              "alpha": 30,
+              "color": "0x000000",
+              "size": 1
+            },
+            "fill": {
+              "alpha": 30,
+              "color": null
+            },
+            "damage": {
+              "alpha": 80,
+              "color": null,
+              "fade": 1
+            }
+          },
+          "damageText": {
+            "visible": true,
+            "x": 0,
+            "y": -50,
+            "alpha": 100,
+            "color": "0x1800FD",
+            "font": {
+              "name": "$FieldFont",
+              "size": 13,
+              "align": "center",
+              "bold": true
+            },
+            "shadow": {
+              "alpha": 100,
+              "color": "0x000000",
+              "angle": 0,
+              "strength": 200,
+              "distance": 1,
+              "size": 1
+            },
+            "speed": 2,
+            "maxRange": 40,
+            "damageMessage": "{{nick}} ({{vehicle}}) -kill-",
+            "blowupMessage": "{{nick}} ({{vehicle}}) One Piece!"
+          },
+          "contourIcon": {
+            "visible": false,
+            "x": 0,
+            "y": 0,
+            "alpha": 100,
+            "color": null,
+            "amount": 0
+          },
+          "clanIcon": {
+            "visible": true,
+            "x": 0,
+            "y": -30,
+            "w": 16,
+            "h": 16,
+            "alpha": 100
+          },
+          "levelIcon": {
+            "visible": false,
+            "x": 0,
+            "y": 0,
+            "alpha": 100
+          },
+          "actionMarker": {
+            "visible": true,
+            "x": 0,
+            "y": -50,
+            "alpha": 100
+          },
+          "textFields": [
+            {
+              "name": "Название танка",
+              "visible": true,
+              "x": 0,
+              "y": -8,
+              "alpha": 80,
+              "color": "0xEC3737",
+              "font": {
+                "name": "$FieldFont",
+                "size": 12,
+                "align": "center",
+                "bold": false
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "0x000000",
+                "angle": 0,
+                "strength": 120,
+                "distance": 1,
+                "size": 1
+              },
+              "format": "{{vehicle}}"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "colors": {
+    "system": {
+      "ally_alive_normal": "0x96FF00",
+      "ally_alive_blind": "0x96FF00",
+      "ally_dead_normal": "0x009900",
+      "ally_dead_blind": "0x009900",
+      "ally_blowedup_normal": "0x007700",
+      "ally_blowedup_blind": "0x007700",
+      "squadman_alive_normal": "0xFFB964",
+      "squadman_alive_blind": "0xFFFF00",
+      "squadman_dead_normal": "0xCA7000",
+      "squadman_dead_blind": "0xAAAA00",
+      "squadman_blowedup_normal": "0xA45A00",
+      "squadman_blowedup_blind": "0x888800",
+      "teamKiller_alive_normal": "0x00EAFF",
+      "teamKiller_alive_blind": "0x00EAFF",
+      "teamKiller_dead_normal": "0x097783",
+      "teamKiller_dead_blind": "0x097783",
+      "teamKiller_blowedup_normal": "0x096A75",
+      "teamKiller_blowedup_blind": "0x096A75",
+      "enemy_alive_normal": "0xF50800",
+      "enemy_alive_blind": "0x8379FE",
+      "enemy_dead_normal": "0x840500",
+      "enemy_dead_blind": "0x47407A",
+      "enemy_blowedup_normal": "0x5A0401",
+      "enemy_blowedup_blind": "0x3B365F"
+    },
+    "hp": [
+      { "value": 200,  "color": "0xDD0000" },
+      { "value": 400,  "color": "0xDD3333" },
+      { "value": 1000, "color": "0xFFCC33" },
+      { "value": 9999, "color": "0xFFFFFF" }
+    ],
+    "hp_ratio": [
+      { "value": 10,  "color": "0xDD0000" },
+      { "value": 25,  "color": "0xDD3333" },
+      { "value": 50,  "color": "0xFFCC33" },
+      { "value": 101, "color": "0xFFFFFF" }
+    ],
+    "eff": [
+      { "value": 600,  "color": "0xDD0000" },
+      { "value": 900,  "color": "0xDD3333" },
+      { "value": 1200, "color": "0xFFCC33" },
+      { "value": 1500, "color": "0x99FF33" },
+      { "value": 1800, "color": "0x33FF33" },
+      { "value": 9999, "color": "0xCC66CC" }
+    ],
+    "rating": [
+      { "value": 42,  "color": "0xDD0000" },
+      { "value": 46,  "color": "0xDD3333" },
+      { "value": 49,  "color": "0xDDDD33" },
+      { "value": 51,  "color": "0xFFCC33" },
+      { "value": 53,  "color": "0x99FF33" },
+      { "value": 57,  "color": "0x33FF33" },
+      { "value": 101, "color": "0xCC66CC" }
+    ],
+    "kb": [
+      { "value": 1,   "color": "0xDD0000" },
+      { "value": 3,   "color": "0xDD3333" },
+      { "value": 5,   "color": "0xFFCC33" },
+      { "value": 8,   "color": "0x99FF33" },
+      { "value": 12,  "color": "0x33FF33" },
+      { "value": 999, "color": "0xCC66CC" }
+    ]
+  },
+  "alpha": {
+    "hp": [
+      { "value": 200,  "alpha": 100 },
+      { "value": 400,  "alpha": 80 },
+      { "value": 1000, "alpha": 60 },
+      { "value": 9999, "alpha": 40 }
+    ],
+    "hp_ratio": [
+      { "value": 10,  "alpha": 100 },
+      { "value": 25,  "alpha": 80 },
+      { "value": 50,  "alpha": 60 },
+      { "value": 101, "alpha": 40 }
+    ],
+    "eff": [
+      { "value": 900,  "alpha": 100 },
+      { "value": 1200, "alpha": 100 },
+      { "value": 9999, "alpha": 100 }
+    ],
+    "rating": [
+      { "value": 49,  "alpha": 100 },
+      { "value": 53,  "alpha": 100 },
+      { "value": 101, "alpha": 100 }
+    ],
+    "kb": [
+      { "value": 2,   "alpha": 100 },
+      { "value": 10,  "alpha": 100 },
+      { "value": 999, "alpha": 100 }
+    ]
+  },
+  "iconset": {
+    "battleLoading": "../../../contour",
+    "statisticForm": "../../../contour",
+    "playersPanel":  "../../../contour",
+    "vehicleMarker": "../../../contour"
+  },
+  "players": [
+    { "root": "../../../clanicons", "folders": "RU,EU,NA,CT" },
+    { "folder": "RU",     "players": [
+        { "nick": "ZeGnor",     "icon": "Team.png" },
+        { "nick": "Ma3ayy",     "icon": "Team.png" },
+        { "nick": "PSiH989",    "icon": "Team.png" },
+        { "nick": "Laromir",    "icon": "Team.png" },
+        { "nick": "sirmax2",    "icon": "XVM.png" },
+        { "nick": "0x01",       "icon": "XVM.png" },
+        { "clan": "[WG]",       "icon": "WG.png" },
+        { "clan": "[WG-A]",     "icon": "WG.png" },
+        { "clan": "[WTMOD]",    "icon": "WTMOD.png" },
+        { "clan": "[WGST]",     "icon": "WGST.png" },
+        { "clan": "[S_O_R]",    "icon": "sor.png" },
+        { "clan": "[TD42]",     "icon": "td42.png"},
+        { "clan": "[TD42A]",    "icon": "td42.png"},
+        { "clan": "[TD42B]",    "icon": "td42.png"},
+        { "clan": "[TD42R]",    "icon": "td42.png"},
+        { "clan": "[BEES]",     "icon": "bees.png"},
+        { "clan": "[HIVE]",     "icon": "bees.png"},
+        { "clan": "[LAIR]",     "icon": "bees.png"},
+        { "clan": "[CAIM]",     "icon": "caim.png"},
+        { "clan": "[CAIM2]",    "icon": "caim.png"},
+        { "clan": "[DEFS]",     "icon": "defs.png"},
+        { "clan": "[DEFS2]",    "icon": "defs2.png"},
+        { "clan": "[ENOT]",     "icon": "enot.png" },
+        { "clan": "[FRS",       "icon": "frs.png" },
+        { "clan": "[G_O_W]",    "icon": "gow.png" },
+        { "clan": "[_GOW_]",    "icon": "gow.png" },
+        { "clan": "[G_0_W]",    "icon": "gow.png" },
+        { "clan": "[G-O-W]",    "icon": "gow.png" },
+        { "clan": "[GREEN]",    "icon": "green.png" },
+        { "clan": "[GREEH]",    "icon": "green.png" },
+        { "clan": "[GRN-R]",    "icon": "GRN-R.png" },
+        { "clan": "[H4RD",      "icon": "h4rd.png" },
+        { "clan": "[IR0NT]",    "icon": "iron.png" },
+        { "clan": "[KO3AK",     "icon": "kozak.png" },
+        { "clan": "[OLENI",     "icon": "oleni.png" },
+        { "clan": "[0_0",       "icon": "oo.png" },
+        { "clan": "[PZE]",      "icon": "pze.png" },
+        { "clan": "[PZE-N]",    "icon": "pze.png" },
+        { "clan": "[PZE-O]",    "icon": "pze.png" },
+        { "clan": "[PZE-B]",    "icon": "pze.png" },
+        { "clan": "[PZE-G]",    "icon": "pze.png" },
+        { "clan": "[RATTE]",    "icon": "ratte.png" },
+        { "clan": "[PATTE]",    "icon": "patte.png" },
+        { "clan": "[RKKA]",     "icon": "rkka.png" },
+        { "clan": "[RKKA3]",    "icon": "rkka.png" },
+        { "clan": "[RKKA4]",    "icon": "rkka.png" },
+        { "clan": "[SB_F]",     "icon": "SB_F.png" },
+        { "clan": "[SB--K]",    "icon": "SB--K.png" },
+        { "clan": "[SB-E]",     "icon": "SB-E.png" },
+        { "clan": "[SB-H]",     "icon": "SB-H.png" },
+        { "clan": "[SB_K]",     "icon": "SB_K.png" },
+        { "clan": "[STAL1]",    "icon": "stal.png" },
+        { "clan": "[STAL2]",    "icon": "stal.png" },
+        { "clan": "[STAL3]",    "icon": "stal.png" },
+        { "clan": "[STAL6]",    "icon": "stal.png" },
+        { "clan": "[STAL7]",    "icon": "stal.png" },
+        { "clan": "[STAL_]",    "icon": "stal.png" },
+        { "clan": "[3STAL]",    "icon": "stal.png" },
+        { "clan": "[STAL5]",    "icon": "stal.png" },
+        { "clan": "[STAL0]",    "icon": "stal.png" },
+        { "clan": "[STALX]",    "icon": "stal.png" },
+        { "clan": "[STAL9]",    "icon": "stal.png" },
+        { "clan": "[8STAL]",    "icon": "stal.png" },
+        { "clan": "[TAIP",      "icon": "taip.png" },
+        { "clan": "[VES]",      "icon": "ves.png"},
+        { "clan": "[V_E_S]",    "icon": "ves.png"},
+        { "clan": "[XOVER",     "icon": "xover.png" },
+        { "clan": "[SAM]",      "icon": "samurai.png" },
+        { "clan": "[NSTR]",     "icon": "nstr.png" },
+        { "clan": "[DARK_]",    "icon": "da.png" },
+        { "clan": "[AMIG0]",    "icon": "amigo.png" },
+        { "clan": "[B-SKY]",    "icon": "bsky.png" },
+        { "clan": "[_E_]",      "icon": "e.png" },
+        { "clan": "[CWOT",      "icon": "cwot.png" },
+        { "clan": "[BTR]",      "icon": "btr.png" },
+        { "clan": "[BTR2]",     "icon": "btr.png" },
+        { "clan": "[CHESS]",    "icon": "chess.png" },
+        { "clan": "[4S-B]",     "icon": "4S-B.png" },
+        { "clan": "[URFO]",     "icon": "urfo.png" },
+        { "clan": "[URF0]",     "icon": "urfo.png" },
+        { "clan": "[W_R]",      "icon": "wr.png" },
+        { "clan": "[PIKET]",    "icon": "PIKET.png" },
+        { "clan": "[-KNI-]",    "icon": "kni.png" },
+        { "clan": "[GUEST]",    "icon": "guest.png" },
+        { "clan": "[_CT_]",     "icon": "st.png" },
+        { "clan": "[C0BRA]",    "icon": "cobra.png" },
+        { "clan": "[COBRA]",    "icon": "cobra.png" },
+        { "clan": "[GRXOA]",    "icon": "xover.png" },
+        { "clan": "[JAZZ]",     "icon": "jazz.png" },
+        { "clan": "[ZB]",       "icon": "zb.png" },
+        { "clan": "[ZB-A]",     "icon": "zb.png" },
+        { "clan": "[--S--]",    "icon": "s.png" },
+        { "clan": "[TGD]",      "icon": "tgd.png" },
+        { "clan": "[LA]",       "icon": "la.png" },
+        { "clan": "[RED]",      "icon": "RED.png" },
+        { "clan": "[RED-E]",    "icon": "RED.png" },
+        { "clan": "[RED-N]",    "icon": "RED.png" },
+        { "clan": "[RED-S]",    "icon": "RED.png" },
+        { "clan": "[RED-W]",    "icon": "RED.png" },
+        { "clan": "[RED-Z]",    "icon": "RED.png" },
+        { "clan": "[RED-A]",    "icon": "RED.png" },
+        { "clan": "[RED-L]",    "icon": "RED.png" },
+        { "clan": "[RED-Y]",    "icon": "RED.png" },
+        { "clan": "[RED-K]",    "icon": "redk.png" },
+        { "clan": "[RED_W]",    "icon": "red-b.png" },
+        { "clan": "[RED_A]",    "icon": "aces.png" },
+        { "clan": "[RED_K]",    "icon": "RED.png" },
+        { "clan": "[RED-J]",    "icon": "RED.png" },
+        { "clan": "[RED-F]",    "icon": "red-b.png" },
+        { "clan": "[RED]",      "icon": "RED.png" },
+        { "clan": "[RED-0]",    "icon": "red-b.png" },
+        { "clan": "[RED-U]",    "icon": "RED.png" },
+        { "clan": "[REDMG]",    "icon": "RED.png" },
+        { "clan": "[RED_M]",    "icon": "red-b.png" },
+        { "clan": "[RED-B]",    "icon": "red-b.png" },
+        { "clan": "[RED-Q]",    "icon": "red-b.png" },
+        { "clan": "[TIRED]",    "icon": "tired.png" },
+        { "clan": "[YKT]",      "icon": "ykt.png" },
+        { "clan": "[NOMAD]",    "icon": "nomad.png" },
+        { "clan": "[OOPS",      "icon": "oops.png" },
+        { "clan": "[GAD]",      "icon": "gad.png" },
+        { "clan": "[LJ",        "icon": "lj.png" },
+        { "clan": "[1CLUB]",    "icon": "fc.png" },
+        { "clan": "[-TAU-]",    "icon": "tau.png" },
+        { "clan": "[_WVW_]",    "icon": "WVW.png" },
+        { "clan": "[K-69]",     "icon": "k69.png" },
+        { "clan": "[VND]",      "icon": "VND.png" },
+        { "clan": "[_GS_]",     "icon": "GS.png" },
+        { "clan": "[SHDS]",     "icon": "sh.png" },
+        { "clan": "[RGR]",      "icon": "RGR.png" },
+        { "clan": "[RGR-2]",    "icon": "RGR.png" },
+        { "clan": "[MAMTH]",    "icon": "mmth.png" },
+        { "clan": "[YOKO]",     "icon": "yoko.png" },
+        { "clan": "[YOK0]",     "icon": "yoko.png" },
+        { "clan": "[SITH]",     "icon": "SITH.png" },
+        { "clan": "[TG74]",     "icon": "tg74.png" },
+        { "clan": "[LOL]",      "icon": "lol.png" },
+        { "clan": "[AWA]",      "icon": "awa.png" },
+        { "clan": "[NOD]",      "icon": "nod.png" },
+        { "clan": "[MCDAC]",    "icon": "MCDAC.png" },
+        { "clan": "[BEDA_]",    "icon": "beda.png" },
+        { "clan": "[DIXIE]",    "icon": "dixie.png" },
+        { "clan": "[LADY]",     "icon": "lady.png" }
+      ]
+    },
+    { "folder": "EU", "players": [
+        { "nick": "Yoyo117",    "icon": "XVM.png" },
+        { "nick": "sirmax2",    "icon": "XVM.png" },
+        { "clan": "[INC-A]",    "icon": "inc-a.png" },
+        { "clan": "[WG]",       "icon": "WG.png" },
+        { "clan": "[OM]",       "icon": "om.png" },
+        { "clan": "[OM-V]",     "icon": "om-v.png" },
+        { "clan": "[OM-X]",     "icon": "om-x.png" },
+        { "clan": "[OM-BC]",    "icon": "ombc.png" },
+        { "clan": "[PTS]",      "icon": "pts.png" },
+        { "clan": "[V-V-V]",    "icon": "vvv.png" },
+        { "clan": "[HARD]",     "icon": "hard.png" },
+        { "clan": "[HARDS]",    "icon": "hards.png" },
+        { "clan": "[HARD2]",    "icon": "hard2.png" },
+        { "clan": "[1SBP]",     "icon": "1sbp.png" },
+        { "clan": "[2SBP]",     "icon": "2sbp.png" },
+        { "clan": "[3SBP]",     "icon": "3sbp.png" },
+        { "clan": "[EPIC]",     "icon": "epic.png" },
+        { "clan": "[MARS]",     "icon": "mars.png" },
+        { "clan": "[PMHC]",     "icon": "pmhc.png" },
+        { "clan": "[PMHC2]",    "icon": "pmhc2.png" },
+        { "clan": "[MUMMY]",    "icon": "mummy.png" },
+        { "clan": "[ISTI]",     "icon": "isti.png" },
+        { "clan": "[ISTI2]",    "icon": "isti2.png" },
+        { "clan": "[ISTI3]",    "icon": "isti3.png" },
+        { "clan": "[ISTI4]",    "icon": "isti3.png" },
+        { "clan": "[EPA]",      "icon": "epa.png" },
+        { "clan": "[WT]",       "icon": "wt.png" },
+        { "clan": "[VVT]",      "icon": "wt.png" },
+        { "clan": "[VVTF]",     "icon": "wt.png" },
+        { "clan": "[DID]",      "icon": "did.png" },
+        { "clan": "[DIDO]",     "icon": "dido.png" },
+        { "clan": "[JOD]",      "icon": "jod.png" },
+        { "clan": "[-BR-]",     "icon": "br.png" },
+        { "clan": "[CSA]",      "icon": "csa.png" },
+        { "clan": "[CSA-",      "icon": "csa.png" },
+        { "clan": "[BIA]",      "icon": "bia.png" },
+        { "clan": "[BIA-2]",    "icon": "bia2.png" },
+        { "clan": "[NOB]",      "icon": "nob.png" },
+        { "clan": "[SLF]",      "icon": "slf.png" },
+        { "clan": "[SLF2]",     "icon": "slf2.png" },
+        { "clan": "[ODV]",      "icon": "odv.png" },
+        { "clan": "[-SB-]",     "icon": "sb.png" },
+        { "clan": "[SB-R]",     "icon": "sbr.png" },
+        { "clan": "[SB_2]",     "icon": "sb2.png" },
+        { "clan": "[1PADX]",    "icon": "1padx.png" },
+        { "clan": "[JNA]",      "icon": "jna.png" },
+        { "clan": "[EES]",      "icon": "ees.png" },
+        { "clan": "[EES2]",     "icon": "ees.png" },
+        { "clan": "[-PRC-]",    "icon": "prc.png" },
+        { "clan": "[-AX-]",     "icon": "ax.png" },
+        { "clan": "[PX]",       "icon": "px.png" },
+        { "clan": "[TAC]",      "icon": "tac.png" },
+        { "clan": "[ASEET]",    "icon": "aseet.png" },
+        { "clan": "[PRT]",      "icon": "prt.png" },
+        { "clan": "[IC]",       "icon": "ic.png" },
+        { "clan": "[EFE]",      "icon": "efe.png" },
+        { "clan": "[ANV]",      "icon": "anv.png" },
+        { "clan": "[HUHN]",     "icon": "huhn.png" },
+        { "clan": "[BR1]",      "icon": "br1.png" },
+        { "clan": "[507]",      "icon": "507.png" },
+        { "clan": "[G-A-D]",    "icon": "g-a-d.png" },
+        { "clan": "[FROG]",     "icon": "frog.png" },
+        { "clan": "[-ANV-]",    "icon": "-anv-.png" },
+        { "clan": "[FROG1]",    "icon": "frog1.png" },
+        { "clan": "[-RPD-]",    "icon": "-rpd-.png" },
+        { "clan": "[G-A-A]",    "icon": "g-a-a.png" },
+        { "clan": "[SBG]",      "icon": "sbg.png" },
+        { "clan": "[130]",      "icon": "130.png" },
+        { "clan": "[5O3]",      "icon": "5o3.png" },
+        { "clan": "[PVE]",      "icon": "pve.png" },
+        { "clan": "[OPNV]",     "icon": "opnv.png" },
+        { "clan": "[RADAU]",    "icon": "radau.png" },
+        { "clan": "[BIH]",      "icon": "bih.png" },
+        { "clan": "[D-R-K]",    "icon": "d-r-k.png" },
+        { "clan": "[SRSLY]",    "icon": "srsly.png" },
+        { "clan": "[DTT]",      "icon": "dtt.png" },
+        { "clan": "[GM-K]",     "icon": "gm-k.png" },
+        { "clan": "[S-G]",      "icon": "s-g.png" },
+        { "clan": "[BG-DH]",    "icon": "bg-dh.png" },
+        { "clan": "[VI]",       "icon": "vi.png" },
+        { "clan": "[FROG2]",    "icon": "frog2.png" },
+        { "clan": "[GS_]",      "icon": "gs_.png" },
+        { "clan": "[205TH]",    "icon": "205th.png" },
+        { "clan": "[GBP]",      "icon": "gbp.png" },
+        { "clan": "[DEI]",      "icon": "dei.png" },
+        { "clan": "[SIS]",      "icon": "sis.png" },
+        { "clan": "[FBFU]",     "icon": "fbfu.png" },
+        { "clan": "[GOH]",      "icon": "goh.png" },
+        { "clan": "[-PHX-]",    "icon": "-phx-.png" },
+        { "clan": "[KKC]",      "icon": "kkc.png" },
+        { "clan": "[7PZD]",     "icon": "7pzd.png" },
+        { "clan": "[GTT]",      "icon": "gtt.png" },
+        { "clan": "[-PRC-]",    "icon": "-prc-.png" },
+        { "clan": "[-BD-]",     "icon": "-bd-.png" },
+        { "clan": "[SIEG]",     "icon": "sieg.png" },
+        { "clan": "[BTC]",      "icon": "btc.png" },
+        { "clan": "[DLA]",      "icon": "dla.png" },
+        { "clan": "[G-A-B]",    "icon": "g-a-b.png" },
+        { "clan": "[DGW-E]",    "icon": "dgw-e.png" },
+        { "clan": "[-69-]",     "icon": "-69-.png" },
+        { "clan": "[STS]",      "icon": "sts.png" },
+        { "clan": "[RED-R]",    "icon": "red-r.png" },
+        { "clan": "[GOLD]",     "icon": "gold.png" },
+        { "clan": "[RT]",       "icon": "rt.png" },
+        { "clan": "[A-P]",      "icon": "a-p.png" },
+        { "clan": "[-XII-]",    "icon": "-xii-.png" },
+        { "clan": "[FAIL]",     "icon": "fail.png" },
+        { "clan": "[-SGL-]",    "icon": "-sgl-.png" },
+        { "clan": "[VTEPS]",    "icon": "vteps.png" },
+        { "clan": "[LAS]",      "icon": "las.png" },
+        { "clan": "[SAO]",      "icon": "sao.png" },
+        { "clan": "[S-D]",      "icon": "s-d.png" },
+        { "clan": "[PPKI]",     "icon": "ppki.png" },
+        { "clan": "[-LTU-]",    "icon": "-ltu-.png" },
+        { "clan": "[RDR]",      "icon": "rdr.png" },
+        { "clan": "[POP]",      "icon": "pop.png" },
+        { "clan": "[13D]",      "icon": "13d.png" },
+        { "clan": "[K-_-K]",    "icon": "k-_-k.png" },
+        { "clan": "[FAFE]",     "icon": "fafe.png" },
+        { "clan": "[XX0XX]",    "icon": "xx0xx.png" },
+        { "clan": "[13DF]",     "icon": "13df.png" },
+        { "clan": "[EUC-1]",    "icon": "euc-1.png" },
+        { "clan": "[210]",      "icon": "210.png" },
+        { "clan": "[D-BS]",     "icon": "d-bs.png" },
+        { "clan": "[GUD]",      "icon": "gud.png" },
+        { "clan": "[LECA]",     "icon": "leca.png" },
+        { "clan": "[-AK-]",     "icon": "-ak-.png" },
+        { "clan": "[TGM]",      "icon": "tgm.png" },
+        { "clan": "[1-IS]",     "icon": "1-is.png" },
+        { "clan": "[CZPIP]",    "icon": "czpip.png" }
+      ]
+    },
+    { "folder": "NA", "players": [
+        { "nick": "sirmax",     "icon": "XVM.png" },
+        { "clan": "[WGA]",      "icon": "WG.png" }
+      ]
+    },
+    { "folder": "CT", "players": [
+        { "nick": "ZeGnor_RU",  "icon": "Team.png" },
+        { "nick": "Ma3ayy_RU",  "icon": "Team.png" },
+        { "nick": "PSiH989_RU", "icon": "Team.png" },
+        { "nick": "sirmax2_RU", "icon": "XVM.png" },
+        { "nick": "0x01_RU",    "icon": "XVM.png" },
+        { "nick": "Yoyo117_EU", "icon": "XVM.png" },
+        { "clan": "[WG]",       "icon": "WG.png" }
+      ]
+    }
+  ]
+}

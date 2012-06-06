@@ -1,10 +1,10 @@
 ﻿intrinsic class net.wargaming.ingame.PlayerListItemRenderer extends gfx.core.UIComponent
 {
-  var vehicleLevel;
-  var iconLoader;
-  var owner;
-  var data;
-  var squadIcon;
+  var vehicleLevel: MovieClip;
+  var iconLoader: net.wargaming.controls.UILoaderAlt;
+  var owner: Object;
+  var data: Object;
+  var squadIcon: MovieClip;
 
   function setData(data);
   function update();

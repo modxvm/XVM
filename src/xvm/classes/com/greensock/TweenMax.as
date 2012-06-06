@@ -570,7 +570,6 @@ class com.greensock.TweenMax extends TweenLite {
 				
 				var cycleDuration:Number = this.cachedDuration + _repeatDelay;
 				var prevCycles:Number = _cyclesComplete;
-				var prevCycles:Number = _cyclesComplete;
 				if ((_cyclesComplete = (this.cachedTotalTime / cycleDuration) >> 0) == (this.cachedTotalTime / cycleDuration) && _cyclesComplete != 0) {
 					_cyclesComplete--; //otherwise when rendered exactly at the end time, it will act as though it is repeating (at the beginning)
 				}

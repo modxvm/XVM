@@ -7,7 +7,7 @@
 *
 * Example usage:
 *
-*   import net.produxion.util.XML2Object;
+*   import com.produxion.util.XML2Object;
 *   var contentObj:Object;
 *   var xml:XML = new XML();
 *   var xmlLoaded = function( success:Boolean )
@@ -45,7 +45,7 @@
 *   contentObj.content.attributes.created => "22-May-2006"
 */
 
-class net.produxion.util.XML2Object {
+class com.produxion.util.XML2Object {
 
 	private var _result:Object;
 	private var _xml:XML;
@@ -54,39 +54,39 @@ class net.produxion.util.XML2Object {
 
 	public function XML2Object()
 	{
-		this._result = new Object();		
+		this._result = new Object();
 	}
-	
+
 	public static function deserialize( xml:XML ):Object
 	{
 		xml2object = new XML2Object();
 		xml2object.xml = xml;
 		return xml2object.nodesToProperties();
 	}
-	
+
 	public function get xml():XML
 	{
 		return _xml;
 	}
-	
+
 	public function set xml( xml:XML ):Void
 	{
 		this._xml = xml;
 	}
-	
+
 	private function nodesToProperties( parent:XMLNode, path:Object, name:String, position:Number ):Object
 	{
 		var nodes:Array;
 		var node:XMLNode;
-		
+
 		path == undefined ? path = this._result : path = path[name];
 		if( parent == undefined) parent = XMLNode( this._xml );
-		
+
 		if( parent.hasChildNodes() )
 		{
 			nodes = parent.childNodes;
 			if (position != undefined) path = path[position];
-			
+
 			while( nodes.length > 0 )
 			{
 				node = XMLNode( nodes.shift() );
@@ -96,7 +96,7 @@ class net.produxion.util.XML2Object {
 					var obj = new Object();
 					obj.attributes = node.attributes;
 					obj.data = sanitizeLineBreaks( node.firstChild.nodeValue );
-					
+
 					if( path[node.nodeName] != undefined )
 					{
 
@@ -108,7 +108,7 @@ class net.produxion.util.XML2Object {
 						{
 							var copyObj = path[node.nodeName];
 							delete path[node.nodeName];
-							path[node.nodeName] = new Array();  
+							path[node.nodeName] = new Array();
 							path[node.nodeName].push( copyObj );
 							path[node.nodeName].push( obj );
 						}
@@ -121,17 +121,17 @@ class net.produxion.util.XML2Object {
 					}
 					name = node.nodeName;
 				}
-				
+
 				if( node.hasChildNodes() )
 				{
 					this.nodesToProperties( node, path, name, position );
 				}
 			}
-			
+
 		}
 		return this._result;
 	}
-	
+
 	private function sanitizeLineBreaks( raw:String )
 	{
 		if( raw.indexOf( "\r\n" ) > -1 )
