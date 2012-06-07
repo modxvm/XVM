@@ -1,4 +1,7 @@
-﻿XVM-2.4.test6:
+﻿XVM-2.4.test7:
+  * adaptation to WoT 0.7.4.CT2
+
+XVM-2.4.test6:
   * added per-vehicle new macros:
       {{t-battles:4}}
       {{c:t-battles}}
