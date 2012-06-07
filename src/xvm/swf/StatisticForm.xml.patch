@@ -1,6 +1,6 @@
---- orig\StatisticForm.xml	2012-06-01 22:57:54.096079000 +0300
-+++ StatisticForm.xml	2012-06-01 22:57:50.355878000 +0300
-@@ -39431,7 +39431,7 @@
+--- orig\StatisticForm.xml	2012-06-07 23:42:48.240348600 +0300
++++ StatisticForm.xml	2012-06-07 23:46:03.547445400 +0300
+@@ -39657,7 +39657,7 @@
          <actions>
            <PushData>
              <items>
@@ -9,7 +9,7 @@
              </items>
            </PushData>
            <GetVariable/>
-@@ -39457,7 +39457,7 @@
+@@ -39683,7 +39683,7 @@
          <actions>
            <PushData>
              <items>
