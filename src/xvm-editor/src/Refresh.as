@@ -203,6 +203,7 @@ private function RefreshColorsPage():void
 		this.p_colors_eff.RefreshSource();
 		this.p_colors_rating.RefreshSource();
 		this.p_colors_kb.RefreshSource();
+		this.p_colors_tbattles.RefreshSource();
 	}
 	catch (ex:Error)
 	{
@@ -217,9 +218,9 @@ private function RefreshTransparencyPage():void
 	{
 		this.p_alpha_hp.RefreshSource();
 		this.p_alpha_hp_ratio.RefreshSource();
-		this.p_alpha_eff.RefreshSource();
-		this.p_alpha_rating.RefreshSource();
-		this.p_alpha_kb.RefreshSource();
+		//this.p_alpha_eff.RefreshSource();
+		//this.p_alpha_rating.RefreshSource();
+		//this.p_alpha_kb.RefreshSource();
 	}
 	catch (ex:Error)
 	{

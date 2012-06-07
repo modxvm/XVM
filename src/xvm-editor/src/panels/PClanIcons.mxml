@@ -13,12 +13,12 @@
 		<![CDATA[
 			import components.DynamicClanFolderFieldEdit;
 			import components.LabeledComponent;
-			
+
 			import events.SetDefaultValueEvent;
 			import events.ValueChangedEvent;
-			
+
 			import mx.core.IVisualElement;
-			
+
 			import utils.Config;
 			import utils.DefaultConfig;
 			import utils.Utils;
