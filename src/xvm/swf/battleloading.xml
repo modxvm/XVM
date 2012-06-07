@@ -7,7 +7,7 @@
     <tags>
       <FileAttributes hasMetaData="1" useNetwork="0"/>
       <Metadata>
-        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"> <rdf:Description xmlns:xmp="http://ns.adobe.com/xap/1.0/" rdf:about=""> <xmp:CreatorTool>Adobe Flash CS4 Professional</xmp:CreatorTool> <xmp:CreateDate>2009-10-16T17:36:04+03:00</xmp:CreateDate> <xmp:MetadataDate>2012-04-18T11:48:18+03:00</xmp:MetadataDate> <xmp:ModifyDate>2012-04-18T11:48:18+03:00</xmp:ModifyDate> </rdf:Description> <rdf:Description xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/" xmlns:stRef="http://ns.adobe.com/xap/1.0/sType/ResourceRef#" rdf:about=""> <xmpMM:InstanceID>xmp.iid:B913DD3E3389E11192668CE0E4F74FCC</xmpMM:InstanceID> <xmpMM:DocumentID>xmp.did:B913DD3E3389E11192668CE0E4F74FCC</xmpMM:DocumentID> <xmpMM:OriginalDocumentID>xmp.did:25D88A6A61BADE119A05811A545BC466</xmpMM:OriginalDocumentID> <xmpMM:DerivedFrom rdf:parseType="Resource"> <stRef:instanceID>xmp.iid:AA94A1043389E11192668CE0E4F74FCC</stRef:instanceID> <stRef:documentID>xmp.did:BC6C7809311ADF11A9439F4B1F8C7348</stRef:documentID> <stRef:originalDocumentID>xmp.did:25D88A6A61BADE119A05811A545BC466</stRef:originalDocumentID> </xmpMM:DerivedFrom> </rdf:Description> <rdf:Description xmlns:dc="http://purl.org/dc/elements/1.1/" rdf:about=""> <dc:format>application/x-shockwave-flash</dc:format> </rdf:Description> </rdf:RDF>
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"> <rdf:Description xmlns:xmp="http://ns.adobe.com/xap/1.0/" rdf:about=""> <xmp:CreatorTool>Adobe Flash CS4 Professional</xmp:CreatorTool> <xmp:CreateDate>2009-10-16T17:36:04+03:00</xmp:CreateDate> <xmp:MetadataDate>2012-06-06T13:09:13+03:00</xmp:MetadataDate> <xmp:ModifyDate>2012-06-06T13:09:13+03:00</xmp:ModifyDate> </rdf:Description> <rdf:Description xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/" xmlns:stRef="http://ns.adobe.com/xap/1.0/sType/ResourceRef#" rdf:about=""> <xmpMM:InstanceID>xmp.iid:50F20D79BFAFE11180218E1EFEF75C7A</xmpMM:InstanceID> <xmpMM:DocumentID>xmp.did:50F20D79BFAFE11180218E1EFEF75C7A</xmpMM:DocumentID> <xmpMM:OriginalDocumentID>xmp.did:25D88A6A61BADE119A05811A545BC466</xmpMM:OriginalDocumentID> <xmpMM:DerivedFrom rdf:parseType="Resource"> <stRef:instanceID>xmp.iid:4FF20D79BFAFE11180218E1EFEF75C7A</stRef:instanceID> <stRef:documentID>xmp.did:BC6C7809311ADF11A9439F4B1F8C7348</stRef:documentID> <stRef:originalDocumentID>xmp.did:25D88A6A61BADE119A05811A545BC466</stRef:originalDocumentID> </xmpMM:DerivedFrom> </rdf:Description> <rdf:Description xmlns:dc="http://purl.org/dc/elements/1.1/" rdf:about=""> <dc:format>application/x-shockwave-flash</dc:format> </rdf:Description> </rdf:RDF>
       </Metadata>
       <SetBackgroundColor>
         <color>
@@ -829,15 +829,11 @@
         </color>
       </DefineEditText>
       <CSMTextSettings objectID="32" useFlashType="1" gridFit="2" thickness="0.000000000000000" sharpness="0.000000000000000"/>
-      <DefineEditText objectID="33" wordWrap="1" multiLine="1" password="0" readOnly="1" autoSize="0" hasLayout="1" notSelectable="1" hasBorder="0" isHTML="0" useOutlines="1" fontRef="9" fontHeight="300" align="2" leftMargin="0" rightMargin="0" indent="0" leading="65436" variableName="">
-        <size>
-          <Rectangle left="-40" right="15960" top="-40" bottom="760"/>
-        </size>
-        <color>
-          <Color red="216" green="216" blue="200" alpha="255"/>
-        </color>
-      </DefineEditText>
-      <CSMTextSettings objectID="33" useFlashType="1" gridFit="2" thickness="0.000000000000000" sharpness="0.000000000000000"/>
+      <ImportAssets2 url="ComponentsLib.swf" reserved1="1" reserved2="0">
+        <symbols>
+          <Symbol objectID="33" name="TypeWriterText"/>
+        </symbols>
+      </ImportAssets2>
       <DefineSprite objectID="34" frames="1">
         <tags>
           <DoAction>
@@ -861,6 +857,7 @@
                   <String value="textHeight"/>
                   <String value="Math"/>
                   <String value="round"/>
+                  <String value="startTyping"/>
                   <String value="net"/>
                   <String value="wargaming"/>
                   <String value="managers"/>
@@ -1082,7 +1079,7 @@
                   <GetVariable/>
                   <PushData>
                     <items>
-                      <StackDictionaryLookup index="11"/>
+                      <StackDictionaryLookup index="3"/>
                       <StackRegister reg="1"/>
                     </items>
                   </PushData>
@@ -1096,7 +1093,7 @@
                   <PushData>
                     <items>
                       <StackDictionaryLookup index="13"/>
-                      <StackInteger value="128"/>
+                      <StackInteger value="123"/>
                       <StackInteger value="40"/>
                       <StackDictionaryLookup index="12"/>
                     </items>
@@ -1130,6 +1127,20 @@
                   <CallMethod/>
                   <AddTyped/>
                   <SetMember/>
+                  <PushData>
+                    <items>
+                      <StackDouble value="0.000000000000000"/>
+                      <StackDictionaryLookup index="12"/>
+                    </items>
+                  </PushData>
+                  <GetVariable/>
+                  <PushData>
+                    <items>
+                      <StackDictionaryLookup index="17"/>
+                    </items>
+                  </PushData>
+                  <CallMethod/>
+                  <Pop/>
                 </actions>
               </DeclareFunction2>
               <DeclareFunction name="onLoad" argc="0" length="69">
@@ -1139,16 +1150,10 @@
                 <items>
                   <StackDouble value="0.000000000000000"/>
                   <StackDouble value="0.000000000000000"/>
-                  <StackDictionaryLookup index="17"/>
-                </items>
-              </PushData>
-              <GetVariable/>
-              <PushData>
-                <items>
                   <StackDictionaryLookup index="18"/>
                 </items>
               </PushData>
-              <GetMember/>
+              <GetVariable/>
               <PushData>
                 <items>
                   <StackDictionaryLookup index="19"/>
@@ -1166,24 +1171,30 @@
                   <StackDictionaryLookup index="21"/>
                 </items>
               </PushData>
-              <CallMethod/>
+              <GetMember/>
               <PushData>
                 <items>
                   <StackDictionaryLookup index="22"/>
                 </items>
               </PushData>
               <CallMethod/>
-              <Pop/>
               <PushData>
                 <items>
                   <StackDictionaryLookup index="23"/>
+                </items>
+              </PushData>
+              <CallMethod/>
+              <Pop/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="24"/>
                 </items>
               </PushData>
               <GetVariable/>
               <PushData>
                 <items>
                   <StackDictionaryLookup index="3"/>
-                  <StackDictionaryLookup index="24"/>
+                  <StackDictionaryLookup index="25"/>
                 </items>
               </PushData>
               <SetMember/>
@@ -1200,7 +1211,7 @@
                   <PushData>
                     <items>
                       <StackDouble value="0.000000000000000"/>
-                      <StackDictionaryLookup index="25"/>
+                      <StackDictionaryLookup index="26"/>
                     </items>
                   </PushData>
                   <New/>
@@ -1210,7 +1221,7 @@
                     <items>
                       <StackDouble value="0.000000000000000"/>
                       <StackRegister reg="2"/>
-                      <StackDictionaryLookup index="26"/>
+                      <StackDictionaryLookup index="27"/>
                     </items>
                   </PushData>
                   <CallMethod/>
@@ -1220,7 +1231,7 @@
                     <items>
                       <StackDouble value="0.000000000000000"/>
                       <StackRegister reg="2"/>
-                      <StackDictionaryLookup index="26"/>
+                      <StackDictionaryLookup index="27"/>
                     </items>
                   </PushData>
                   <CallMethod/>
@@ -1230,7 +1241,7 @@
                     <items>
                       <StackDouble value="0.000000000000000"/>
                       <StackRegister reg="2"/>
-                      <StackDictionaryLookup index="26"/>
+                      <StackDictionaryLookup index="27"/>
                     </items>
                   </PushData>
                   <CallMethod/>
@@ -1247,7 +1258,7 @@
                     <items>
                       <StackRegister reg="3"/>
                       <StackRegister reg="2"/>
-                      <StackDictionaryLookup index="27"/>
+                      <StackDictionaryLookup index="28"/>
                     </items>
                   </PushData>
                   <GetMember/>
@@ -1274,7 +1285,7 @@
                   <PushData>
                     <items>
                       <StackRegister reg="4"/>
-                      <StackDictionaryLookup index="27"/>
+                      <StackDictionaryLookup index="28"/>
                     </items>
                   </PushData>
                   <GetMember/>
@@ -1282,7 +1293,7 @@
                   <Pop/>
                   <PushData>
                     <items>
-                      <StackDictionaryLookup index="28"/>
+                      <StackDictionaryLookup index="29"/>
                       <StackRegister reg="2"/>
                       <StackRegister reg="3"/>
                       <StackInteger value="8"/>
@@ -1292,7 +1303,7 @@
                   <GetMember/>
                   <PushData>
                     <items>
-                      <StackDictionaryLookup index="29"/>
+                      <StackDictionaryLookup index="30"/>
                       <StackRegister reg="2"/>
                       <StackRegister reg="3"/>
                       <StackInteger value="9"/>
@@ -1302,7 +1313,7 @@
                   <GetMember/>
                   <PushData>
                     <items>
-                      <StackDictionaryLookup index="30"/>
+                      <StackDictionaryLookup index="31"/>
                       <StackRegister reg="2"/>
                       <StackRegister reg="3"/>
                       <StackInteger value="4"/>
@@ -1312,9 +1323,9 @@
                   <GetMember/>
                   <PushData>
                     <items>
-                      <StackDictionaryLookup index="31"/>
+                      <StackDictionaryLookup index="32"/>
                       <StackRegister reg="4"/>
-                      <StackDictionaryLookup index="27"/>
+                      <StackDictionaryLookup index="28"/>
                     </items>
                   </PushData>
                   <GetMember/>
@@ -1324,30 +1335,20 @@
                     </items>
                   </PushData>
                   <AddTyped/>
-                  <PushData>
-                    <items>
-                      <StackDictionaryLookup index="32"/>
-                      <StackRegister reg="2"/>
-                      <StackRegister reg="3"/>
-                    </items>
-                  </PushData>
-                  <GetMember/>
                   <PushData>
                     <items>
                       <StackDictionaryLookup index="33"/>
                       <StackRegister reg="2"/>
                       <StackRegister reg="3"/>
-                      <StackInteger value="1"/>
                     </items>
                   </PushData>
-                  <AddTyped/>
                   <GetMember/>
                   <PushData>
                     <items>
                       <StackDictionaryLookup index="34"/>
                       <StackRegister reg="2"/>
                       <StackRegister reg="3"/>
-                      <StackInteger value="2"/>
+                      <StackInteger value="1"/>
                     </items>
                   </PushData>
                   <AddTyped/>
@@ -1357,7 +1358,7 @@
                       <StackDictionaryLookup index="35"/>
                       <StackRegister reg="2"/>
                       <StackRegister reg="3"/>
-                      <StackInteger value="3"/>
+                      <StackInteger value="2"/>
                     </items>
                   </PushData>
                   <AddTyped/>
@@ -1365,6 +1366,16 @@
                   <PushData>
                     <items>
                       <StackDictionaryLookup index="36"/>
+                      <StackRegister reg="2"/>
+                      <StackRegister reg="3"/>
+                      <StackInteger value="3"/>
+                    </items>
+                  </PushData>
+                  <AddTyped/>
+                  <GetMember/>
+                  <PushData>
+                    <items>
+                      <StackDictionaryLookup index="37"/>
                       <StackRegister reg="2"/>
                       <StackRegister reg="3"/>
                       <StackInteger value="5"/>
@@ -1406,7 +1417,7 @@
                   <AddTyped/>
                   <PushData>
                     <items>
-                      <StackDictionaryLookup index="37"/>
+                      <StackDictionaryLookup index="38"/>
                       <StackRegister reg="2"/>
                       <StackRegister reg="3"/>
                       <StackInteger value="10"/>
@@ -1416,7 +1427,7 @@
                   <GetMember/>
                   <PushData>
                     <items>
-                      <StackDictionaryLookup index="38"/>
+                      <StackDictionaryLookup index="39"/>
                       <StackRegister reg="2"/>
                       <StackRegister reg="3"/>
                       <StackInteger value="11"/>
@@ -1426,7 +1437,7 @@
                   <GetMember/>
                   <PushData>
                     <items>
-                      <StackDictionaryLookup index="39"/>
+                      <StackDictionaryLookup index="40"/>
                       <StackRegister reg="2"/>
                       <StackRegister reg="3"/>
                       <StackInteger value="12"/>
@@ -1436,7 +1447,7 @@
                   <GetMember/>
                   <PushData>
                     <items>
-                      <StackDictionaryLookup index="40"/>
+                      <StackDictionaryLookup index="41"/>
                       <StackRegister reg="6"/>
                       <StackInteger value="13"/>
                     </items>
@@ -1449,7 +1460,7 @@
                       <StackRegister reg="5"/>
                       <StackInteger value="1"/>
                       <StackRegister reg="4"/>
-                      <StackDictionaryLookup index="41"/>
+                      <StackDictionaryLookup index="42"/>
                     </items>
                   </PushData>
                   <CallMethod/>
@@ -1468,14 +1479,14 @@
                     <items>
                       <StackRegister reg="1"/>
                       <StackRegister reg="6"/>
-                      <StackDictionaryLookup index="42"/>
+                      <StackDictionaryLookup index="43"/>
                     </items>
                   </PushData>
                   <AddTyped/>
                   <GetMember/>
                   <PushData>
                     <items>
-                      <StackDictionaryLookup index="43"/>
+                      <StackDictionaryLookup index="44"/>
                       <StackRegister reg="4"/>
                     </items>
                   </PushData>
@@ -1494,14 +1505,14 @@
                     <items>
                       <StackRegister reg="1"/>
                       <StackRegister reg="6"/>
-                      <StackDictionaryLookup index="42"/>
+                      <StackDictionaryLookup index="43"/>
                     </items>
                   </PushData>
                   <AddTyped/>
                   <GetMember/>
                   <PushData>
                     <items>
-                      <StackDictionaryLookup index="44"/>
+                      <StackDictionaryLookup index="45"/>
                       <StackRegister reg="19"/>
                     </items>
                   </PushData>
@@ -1511,24 +1522,18 @@
               <PushData>
                 <items>
                   <StackDictionaryLookup index="1"/>
-                  <StackDictionaryLookup index="45"/>
-                </items>
-              </PushData>
-              <GetVariable/>
-              <PushData>
-                <items>
                   <StackDictionaryLookup index="46"/>
-                  <StackInteger value="3"/>
-                  <StackDictionaryLookup index="47"/>
                 </items>
               </PushData>
               <GetVariable/>
               <PushData>
                 <items>
+                  <StackDictionaryLookup index="47"/>
+                  <StackInteger value="3"/>
                   <StackDictionaryLookup index="48"/>
                 </items>
               </PushData>
-              <GetMember/>
+              <GetVariable/>
               <PushData>
                 <items>
                   <StackDictionaryLookup index="49"/>
@@ -1540,165 +1545,131 @@
                   <StackDictionaryLookup index="50"/>
                 </items>
               </PushData>
-              <CallMethod/>
-              <Pop/>
+              <GetMember/>
               <PushData>
                 <items>
                   <StackDictionaryLookup index="51"/>
-                  <StackDictionaryLookup index="45"/>
                 </items>
               </PushData>
-              <GetVariable/>
+              <CallMethod/>
+              <Pop/>
               <PushData>
                 <items>
                   <StackDictionaryLookup index="52"/>
-                  <StackInteger value="3"/>
-                  <StackDictionaryLookup index="47"/>
+                  <StackDictionaryLookup index="46"/>
                 </items>
               </PushData>
               <GetVariable/>
-              <PushData>
-                <items>
-                  <StackDictionaryLookup index="48"/>
-                </items>
-              </PushData>
-              <GetMember/>
-              <PushData>
-                <items>
-                  <StackDictionaryLookup index="49"/>
-                </items>
-              </PushData>
-              <GetMember/>
-              <PushData>
-                <items>
-                  <StackDictionaryLookup index="50"/>
-                </items>
-              </PushData>
-              <CallMethod/>
-              <Pop/>
               <PushData>
                 <items>
                   <StackDictionaryLookup index="53"/>
-                  <StackDictionaryLookup index="45"/>
+                  <StackInteger value="3"/>
+                  <StackDictionaryLookup index="48"/>
                 </items>
               </PushData>
               <GetVariable/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="49"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="50"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="51"/>
+                </items>
+              </PushData>
+              <CallMethod/>
+              <Pop/>
               <PushData>
                 <items>
                   <StackDictionaryLookup index="54"/>
-                  <StackInteger value="3"/>
-                  <StackDictionaryLookup index="47"/>
+                  <StackDictionaryLookup index="46"/>
                 </items>
               </PushData>
               <GetVariable/>
-              <PushData>
-                <items>
-                  <StackDictionaryLookup index="48"/>
-                </items>
-              </PushData>
-              <GetMember/>
-              <PushData>
-                <items>
-                  <StackDictionaryLookup index="49"/>
-                </items>
-              </PushData>
-              <GetMember/>
-              <PushData>
-                <items>
-                  <StackDictionaryLookup index="50"/>
-                </items>
-              </PushData>
-              <CallMethod/>
-              <Pop/>
               <PushData>
                 <items>
                   <StackDictionaryLookup index="55"/>
-                  <StackDictionaryLookup index="45"/>
+                  <StackInteger value="3"/>
+                  <StackDictionaryLookup index="48"/>
                 </items>
               </PushData>
               <GetVariable/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="49"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="50"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="51"/>
+                </items>
+              </PushData>
+              <CallMethod/>
+              <Pop/>
               <PushData>
                 <items>
                   <StackDictionaryLookup index="56"/>
-                  <StackInteger value="3"/>
-                  <StackDictionaryLookup index="47"/>
+                  <StackDictionaryLookup index="46"/>
                 </items>
               </PushData>
               <GetVariable/>
-              <PushData>
-                <items>
-                  <StackDictionaryLookup index="48"/>
-                </items>
-              </PushData>
-              <GetMember/>
-              <PushData>
-                <items>
-                  <StackDictionaryLookup index="49"/>
-                </items>
-              </PushData>
-              <GetMember/>
-              <PushData>
-                <items>
-                  <StackDictionaryLookup index="50"/>
-                </items>
-              </PushData>
-              <CallMethod/>
-              <Pop/>
               <PushData>
                 <items>
                   <StackDictionaryLookup index="57"/>
-                  <StackDictionaryLookup index="45"/>
+                  <StackInteger value="3"/>
+                  <StackDictionaryLookup index="48"/>
                 </items>
               </PushData>
               <GetVariable/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="49"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="50"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="51"/>
+                </items>
+              </PushData>
+              <CallMethod/>
+              <Pop/>
               <PushData>
                 <items>
                   <StackDictionaryLookup index="58"/>
-                  <StackInteger value="3"/>
-                  <StackDictionaryLookup index="47"/>
+                  <StackDictionaryLookup index="46"/>
                 </items>
               </PushData>
               <GetVariable/>
-              <PushData>
-                <items>
-                  <StackDictionaryLookup index="48"/>
-                </items>
-              </PushData>
-              <GetMember/>
-              <PushData>
-                <items>
-                  <StackDictionaryLookup index="49"/>
-                </items>
-              </PushData>
-              <GetMember/>
-              <PushData>
-                <items>
-                  <StackDictionaryLookup index="50"/>
-                </items>
-              </PushData>
-              <CallMethod/>
-              <Pop/>
               <PushData>
                 <items>
                   <StackDictionaryLookup index="59"/>
-                  <StackDictionaryLookup index="45"/>
-                </items>
-              </PushData>
-              <GetVariable/>
-              <PushData>
-                <items>
-                  <StackDictionaryLookup index="60"/>
                   <StackInteger value="3"/>
-                  <StackDictionaryLookup index="47"/>
-                </items>
-              </PushData>
-              <GetVariable/>
-              <PushData>
-                <items>
                   <StackDictionaryLookup index="48"/>
                 </items>
               </PushData>
-              <GetMember/>
+              <GetVariable/>
               <PushData>
                 <items>
                   <StackDictionaryLookup index="49"/>
@@ -1708,31 +1679,31 @@
               <PushData>
                 <items>
                   <StackDictionaryLookup index="50"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="51"/>
                 </items>
               </PushData>
               <CallMethod/>
               <Pop/>
               <PushData>
                 <items>
+                  <StackDictionaryLookup index="60"/>
+                  <StackDictionaryLookup index="46"/>
+                </items>
+              </PushData>
+              <GetVariable/>
+              <PushData>
+                <items>
                   <StackDictionaryLookup index="61"/>
-                  <StackDictionaryLookup index="45"/>
-                </items>
-              </PushData>
-              <GetVariable/>
-              <PushData>
-                <items>
-                  <StackDictionaryLookup index="62"/>
                   <StackInteger value="3"/>
-                  <StackDictionaryLookup index="47"/>
-                </items>
-              </PushData>
-              <GetVariable/>
-              <PushData>
-                <items>
                   <StackDictionaryLookup index="48"/>
                 </items>
               </PushData>
-              <GetMember/>
+              <GetVariable/>
               <PushData>
                 <items>
                   <StackDictionaryLookup index="49"/>
@@ -1742,6 +1713,46 @@
               <PushData>
                 <items>
                   <StackDictionaryLookup index="50"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="51"/>
+                </items>
+              </PushData>
+              <CallMethod/>
+              <Pop/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="62"/>
+                  <StackDictionaryLookup index="46"/>
+                </items>
+              </PushData>
+              <GetVariable/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="63"/>
+                  <StackInteger value="3"/>
+                  <StackDictionaryLookup index="48"/>
+                </items>
+              </PushData>
+              <GetVariable/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="49"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="50"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="51"/>
                 </items>
               </PushData>
               <CallMethod/>
@@ -2122,18 +2133,61 @@
               </DropShadow>
             </filters>
           </PlaceObject3>
-          <PlaceObject3 replace="0" depth="13" objectID="33" name="winText">
+          <PlaceObject2 replace="0" depth="13" objectID="33" name="winText" allflags1="0" allflags2="4">
             <transform>
-              <Transform transX="-8000" transY="2600"/>
+              <Transform scaleX="7.692306518554688" scaleY="1.593627929687500" transX="-8040" transY="2560"/>
             </transform>
-            <filters>
-              <DropShadow blurX="4.000000000000000" blurY="4.000000000000000" angle="1.570785522460938" distance="1.000000000000000" strength="1.500000000000000" innerShadow="0" knockout="0" passes="2">
-                <color>
-                  <Color red="0" green="0" blue="0" alpha="255"/>
-                </color>
-              </DropShadow>
-            </filters>
-          </PlaceObject3>
+            <events>
+              <Event flags1="0" flags2="4">
+                <actions>
+                  <PushData>
+                    <items>
+                      <StackString value="duration"/>
+                      <StackInteger value="1000"/>
+                    </items>
+                  </PushData>
+                  <SetVariable/>
+                  <PushData>
+                    <items>
+                      <StackString value="manualStart"/>
+                      <StackBoolean value="1"/>
+                    </items>
+                  </PushData>
+                  <SetVariable/>
+                  <PushData>
+                    <items>
+                      <StackString value="text"/>
+                      <StackString value=""/>
+                    </items>
+                  </PushData>
+                  <SetVariable/>
+                  <PushData>
+                    <items>
+                      <StackString value="textColor"/>
+                      <StackInteger value="16565369"/>
+                    </items>
+                  </PushData>
+                  <SetVariable/>
+                  <PushData>
+                    <items>
+                      <StackString value="textSize"/>
+                      <StackInteger value="15"/>
+                    </items>
+                  </PushData>
+                  <SetVariable/>
+                  <PushData>
+                    <items>
+                      <StackString value="visible"/>
+                      <StackBoolean value="1"/>
+                    </items>
+                  </PushData>
+                  <SetVariable/>
+                  <EndAction/>
+                </actions>
+              </Event>
+              <Event flags1="0" flags2="0"/>
+            </events>
+          </PlaceObject2>
           <ShowFrame/>
           <End/>
         </tags>
@@ -23016,6 +23070,7 @@
               <String value="initialized"/>
               <String value="hideToolTipFunction"/>
               <String value="hide"/>
+              <String value="_useWheel"/>
               <String value="onMouseDown"/>
               <String value="onMouseWheel"/>
               <String value="onKeyDown"/>
@@ -23024,6 +23079,7 @@
               <String value="Mouse"/>
               <String value="addListener"/>
               <String value="show"/>
+              <String value="useWheel"/>
               <String value="g_cursorVisible"/>
               <String value="tooltip_mc"/>
               <String value="ToolTip"/>
@@ -23235,7 +23291,7 @@
           <GetMember/>
           <LogicalNOT/>
           <LogicalNOT/>
-          <BranchIfTrue byteOffset="3128"/>
+          <BranchIfTrue byteOffset="3286"/>
           <PushData>
             <items>
               <StackDictionaryLookup index="1"/>
@@ -23279,7 +23335,7 @@
               <StackDictionaryLookup index="7"/>
             </items>
           </PushData>
-          <DeclareFunction2 name="" argc="0" regc="2" preloadParent="0" preloadRoot="0" suppressSuper="1" preloadSuper="0" suppressArguments="1" preloadArguments="0" suppressThis="1" preloadThis="0" reserved="0" preloadGlobal="0">
+          <DeclareFunction2 name="" argc="0" regc="3" preloadParent="0" preloadRoot="0" suppressSuper="1" preloadSuper="0" suppressArguments="1" preloadArguments="0" suppressThis="1" preloadThis="0" reserved="0" preloadGlobal="0">
             <args/>
             <actions>
               <PushData>
@@ -23365,15 +23421,77 @@
               <CallMethod/>
               <Pop/>
               <SetLocalVariable/>
+              <DeclareFunction name="" argc="1" length="76">
+                <args>
+                  <String value="args"/>
+                </args>
+              </DeclareFunction>
               <PushData>
                 <items>
-                  <StackRegister reg="1"/>
-                  <StackDictionaryLookup index="11"/>
-                  <StackDictionaryLookup index="9"/>
+                  <StackDictionaryLookup index="1"/>
                 </items>
               </PushData>
               <GetVariable/>
-              <SetMember/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="3"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="4"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="5"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="11"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <LogicalNOT/>
+              <BranchIfTrue byteOffset="40"/>
+              <PushData>
+                <items>
+                  <StackDouble value="0.000000000000000"/>
+                  <StackDictionaryLookup index="1"/>
+                </items>
+              </PushData>
+              <GetVariable/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="3"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="4"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="5"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="10"/>
+                </items>
+              </PushData>
+              <CallMethod/>
+              <Pop/>
+              <StoreRegister reg="2"/>
+              <Pop/>
               <PushData>
                 <items>
                   <StackRegister reg="1"/>
@@ -23387,6 +23505,14 @@
                 <items>
                   <StackRegister reg="1"/>
                   <StackDictionaryLookup index="13"/>
+                  <StackRegister reg="2"/>
+                </items>
+              </PushData>
+              <SetMember/>
+              <PushData>
+                <items>
+                  <StackRegister reg="1"/>
+                  <StackDictionaryLookup index="14"/>
                 </items>
               </PushData>
               <DeclareFunction name="" argc="0" length="53">
@@ -23395,13 +23521,13 @@
               <PushData>
                 <items>
                   <StackDouble value="0.000000000000000"/>
-                  <StackDictionaryLookup index="14"/>
+                  <StackDictionaryLookup index="15"/>
                 </items>
               </PushData>
               <GetVariable/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="15"/>
+                  <StackDictionaryLookup index="16"/>
                 </items>
               </PushData>
               <CallMethod/>
@@ -23427,13 +23553,13 @@
                 <items>
                   <StackRegister reg="1"/>
                   <StackInteger value="1"/>
-                  <StackDictionaryLookup index="16"/>
+                  <StackDictionaryLookup index="17"/>
                 </items>
               </PushData>
               <GetVariable/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="17"/>
+                  <StackDictionaryLookup index="18"/>
                 </items>
               </PushData>
               <CallMethod/>
@@ -23442,13 +23568,13 @@
                 <items>
                   <StackRegister reg="1"/>
                   <StackInteger value="1"/>
-                  <StackDictionaryLookup index="14"/>
+                  <StackDictionaryLookup index="15"/>
                 </items>
               </PushData>
               <GetVariable/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="17"/>
+                  <StackDictionaryLookup index="18"/>
                 </items>
               </PushData>
               <CallMethod/>
@@ -23459,13 +23585,13 @@
           <PushData>
             <items>
               <StackRegister reg="1"/>
-              <StackDictionaryLookup index="18"/>
+              <StackDictionaryLookup index="19"/>
             </items>
           </PushData>
           <DeclareFunction2 name="" argc="2" regc="4" preloadParent="0" preloadRoot="1" suppressSuper="1" preloadSuper="0" suppressArguments="1" preloadArguments="0" suppressThis="1" preloadThis="0" reserved="0" preloadGlobal="0">
             <args>
-              <Parameter reg="2" name="string"/>
-              <Parameter reg="3" name="initProps"/>
+              <Parameter reg="3" name="string"/>
+              <Parameter reg="2" name="initProps"/>
             </args>
             <actions>
               <PushData>
@@ -23567,7 +23693,52 @@
               <Pop/>
               <PushData>
                 <items>
+                  <StackDictionaryLookup index="1"/>
+                </items>
+              </PushData>
+              <GetVariable/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="3"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="4"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="5"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="11"/>
                   <StackRegister reg="2"/>
+                  <StackDictionaryLookup index="20"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <BranchIfTrue byteOffset="10"/>
+              <PushData>
+                <items>
+                  <StackBoolean value="0"/>
+                </items>
+              </PushData>
+              <BranchAlways byteOffset="5"/>
+              <PushData>
+                <items>
+                  <StackBoolean value="1"/>
+                </items>
+              </PushData>
+              <SetMember/>
+              <PushData>
+                <items>
+                  <StackRegister reg="3"/>
                 </items>
               </PushData>
               <LogicalNOT/>
@@ -23577,7 +23748,7 @@
               <PushData>
                 <items>
                   <StackRegister reg="1"/>
-                  <StackDictionaryLookup index="19"/>
+                  <StackDictionaryLookup index="21"/>
                 </items>
               </PushData>
               <GetMember/>
@@ -23616,12 +23787,12 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="20"/>
-                  <StackRegister reg="3"/>
-                  <StackDictionaryLookup index="21"/>
+                  <StackDictionaryLookup index="22"/>
+                  <StackRegister reg="2"/>
+                  <StackDictionaryLookup index="23"/>
                   <StackRegister reg="1"/>
                   <StackInteger value="3"/>
-                  <StackDictionaryLookup index="22"/>
+                  <StackDictionaryLookup index="24"/>
                 </items>
               </PushData>
               <GetVariable/>
@@ -23633,13 +23804,13 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="23"/>
+                  <StackDictionaryLookup index="25"/>
                 </items>
               </PushData>
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="24"/>
+                  <StackDictionaryLookup index="26"/>
                 </items>
               </PushData>
               <CallMethod/>
@@ -23670,7 +23841,7 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="20"/>
+                  <StackDictionaryLookup index="22"/>
                 </items>
               </PushData>
               <GetMember/>
@@ -23678,8 +23849,8 @@
               <BranchIfTrue byteOffset="46"/>
               <PushData>
                 <items>
-                  <StackRegister reg="3"/>
                   <StackRegister reg="2"/>
+                  <StackRegister reg="3"/>
                   <StackInteger value="2"/>
                   <StackDictionaryLookup index="1"/>
                 </items>
@@ -23705,13 +23876,13 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="20"/>
+                  <StackDictionaryLookup index="22"/>
                 </items>
               </PushData>
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="18"/>
+                  <StackDictionaryLookup index="19"/>
                 </items>
               </PushData>
               <CallMethod/>
@@ -23722,7 +23893,7 @@
           <PushData>
             <items>
               <StackRegister reg="1"/>
-              <StackDictionaryLookup index="25"/>
+              <StackDictionaryLookup index="27"/>
             </items>
           </PushData>
           <DeclareFunction2 name="" argc="3" regc="5" preloadParent="0" preloadRoot="1" suppressSuper="1" preloadSuper="0" suppressArguments="1" preloadArguments="0" suppressThis="1" preloadThis="0" reserved="0" preloadGlobal="0">
@@ -23841,7 +24012,7 @@
               <PushData>
                 <items>
                   <StackRegister reg="1"/>
-                  <StackDictionaryLookup index="19"/>
+                  <StackDictionaryLookup index="21"/>
                 </items>
               </PushData>
               <GetMember/>
@@ -23880,12 +24051,12 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="20"/>
+                  <StackDictionaryLookup index="22"/>
                   <StackRegister reg="3"/>
                   <StackRegister reg="4"/>
                   <StackRegister reg="1"/>
                   <StackInteger value="3"/>
-                  <StackDictionaryLookup index="22"/>
+                  <StackDictionaryLookup index="24"/>
                 </items>
               </PushData>
               <GetVariable/>
@@ -23897,13 +24068,13 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="23"/>
+                  <StackDictionaryLookup index="25"/>
                 </items>
               </PushData>
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="24"/>
+                  <StackDictionaryLookup index="26"/>
                 </items>
               </PushData>
               <CallMethod/>
@@ -23934,7 +24105,7 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="20"/>
+                  <StackDictionaryLookup index="22"/>
                 </items>
               </PushData>
               <GetMember/>
@@ -23969,13 +24140,13 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="20"/>
+                  <StackDictionaryLookup index="22"/>
                 </items>
               </PushData>
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="18"/>
+                  <StackDictionaryLookup index="19"/>
                 </items>
               </PushData>
               <CallMethod/>
@@ -23986,7 +24157,7 @@
           <PushData>
             <items>
               <StackRegister reg="1"/>
-              <StackDictionaryLookup index="26"/>
+              <StackDictionaryLookup index="28"/>
             </items>
           </PushData>
           <DeclareFunction2 name="" argc="2" regc="3" preloadParent="0" preloadRoot="0" suppressSuper="1" preloadSuper="0" suppressArguments="1" preloadArguments="0" suppressThis="1" preloadThis="0" reserved="0" preloadGlobal="0">
@@ -24021,7 +24192,7 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="27"/>
+                  <StackDictionaryLookup index="29"/>
                 </items>
               </PushData>
               <GetMember/>
@@ -24048,7 +24219,7 @@
               <Pop/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="28"/>
+                  <StackDictionaryLookup index="30"/>
                 </items>
               </PushData>
               <PushData>
@@ -24077,7 +24248,7 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="27"/>
+                  <StackDictionaryLookup index="29"/>
                 </items>
               </PushData>
               <GetMember/>
@@ -24104,7 +24275,7 @@
               <Pop/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="28"/>
+                  <StackDictionaryLookup index="30"/>
                 </items>
               </PushData>
               <PushData>
@@ -24120,7 +24291,7 @@
           <PushData>
             <items>
               <StackRegister reg="1"/>
-              <StackDictionaryLookup index="29"/>
+              <StackDictionaryLookup index="31"/>
             </items>
           </PushData>
           <DeclareFunction2 name="" argc="3" regc="5" preloadParent="0" preloadRoot="0" suppressSuper="1" preloadSuper="0" suppressArguments="1" preloadArguments="0" suppressThis="1" preloadThis="0" reserved="0" preloadGlobal="0">
@@ -24140,7 +24311,7 @@
               <Pop/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="30"/>
+                  <StackDictionaryLookup index="32"/>
                 </items>
               </PushData>
               <PushData>
@@ -24171,7 +24342,7 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="26"/>
+                  <StackDictionaryLookup index="28"/>
                 </items>
               </PushData>
               <CallMethod/>
@@ -24200,7 +24371,7 @@
               <AddTyped/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="31"/>
+                  <StackDictionaryLookup index="33"/>
                 </items>
               </PushData>
               <AddTyped/>
@@ -24211,7 +24382,7 @@
           <PushData>
             <items>
               <StackRegister reg="1"/>
-              <StackDictionaryLookup index="32"/>
+              <StackDictionaryLookup index="34"/>
             </items>
           </PushData>
           <DeclareFunction2 name="" argc="2" regc="11" preloadParent="0" preloadRoot="0" suppressSuper="1" preloadSuper="0" suppressArguments="1" preloadArguments="0" suppressThis="1" preloadThis="0" reserved="0" preloadGlobal="0">
@@ -24222,7 +24393,7 @@
             <actions>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="28"/>
+                  <StackDictionaryLookup index="30"/>
                 </items>
               </PushData>
               <StoreRegister reg="8"/>
@@ -24253,7 +24424,7 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="33"/>
+                  <StackDictionaryLookup index="35"/>
                 </items>
               </PushData>
               <GetMember/>
@@ -24275,53 +24446,8 @@
               <Pop/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="34"/>
-                  <StackDictionaryLookup index="35"/>
-                  <StackDictionaryLookup index="1"/>
-                </items>
-              </PushData>
-              <GetVariable/>
-              <PushData>
-                <items>
-                  <StackDictionaryLookup index="3"/>
-                </items>
-              </PushData>
-              <GetMember/>
-              <PushData>
-                <items>
-                  <StackDictionaryLookup index="4"/>
-                </items>
-              </PushData>
-              <GetMember/>
-              <PushData>
-                <items>
-                  <StackDictionaryLookup index="5"/>
-                </items>
-              </PushData>
-              <GetMember/>
-              <PushData>
-                <items>
-                  <StackDictionaryLookup index="33"/>
-                </items>
-              </PushData>
-              <GetMember/>
-              <PushData>
-                <items>
-                  <StackRegister reg="9"/>
-                </items>
-              </PushData>
-              <GetMember/>
-              <AddTyped/>
-              <PushData>
-                <items>
                   <StackDictionaryLookup index="36"/>
-                </items>
-              </PushData>
-              <AddTyped/>
-              <PushData>
-                <items>
                   <StackDictionaryLookup index="37"/>
-                  <StackDictionaryLookup index="38"/>
                   <StackDictionaryLookup index="1"/>
                 </items>
               </PushData>
@@ -24346,7 +24472,7 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="33"/>
+                  <StackDictionaryLookup index="35"/>
                 </items>
               </PushData>
               <GetMember/>
@@ -24359,7 +24485,52 @@
               <AddTyped/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="36"/>
+                  <StackDictionaryLookup index="38"/>
+                </items>
+              </PushData>
+              <AddTyped/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="39"/>
+                  <StackDictionaryLookup index="40"/>
+                  <StackDictionaryLookup index="1"/>
+                </items>
+              </PushData>
+              <GetVariable/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="3"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="4"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="5"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="35"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <PushData>
+                <items>
+                  <StackRegister reg="9"/>
+                </items>
+              </PushData>
+              <GetMember/>
+              <AddTyped/>
+              <PushData>
+                <items>
+                  <StackDictionaryLookup index="38"/>
                 </items>
               </PushData>
               <AddTyped/>
@@ -24373,9 +24544,9 @@
               <Pop/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="39"/>
+                  <StackDictionaryLookup index="41"/>
                   <StackRegister reg="2"/>
-                  <StackDictionaryLookup index="34"/>
+                  <StackDictionaryLookup index="36"/>
                 </items>
               </PushData>
               <GetMember/>
@@ -24383,15 +24554,15 @@
                 <items>
                   <StackInteger value="1"/>
                   <StackRegister reg="3"/>
-                  <StackDictionaryLookup index="40"/>
+                  <StackDictionaryLookup index="42"/>
                 </items>
               </PushData>
               <CallMethod/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="41"/>
+                  <StackDictionaryLookup index="43"/>
                   <StackRegister reg="2"/>
-                  <StackDictionaryLookup index="37"/>
+                  <StackDictionaryLookup index="39"/>
                 </items>
               </PushData>
               <GetMember/>
@@ -24399,7 +24570,7 @@
                 <items>
                   <StackInteger value="1"/>
                   <StackRegister reg="3"/>
-                  <StackDictionaryLookup index="40"/>
+                  <StackDictionaryLookup index="42"/>
                 </items>
               </PushData>
               <CallMethod/>
@@ -24414,7 +24585,7 @@
               <PushData>
                 <items>
                   <StackRegister reg="1"/>
-                  <StackDictionaryLookup index="39"/>
+                  <StackDictionaryLookup index="41"/>
                 </items>
               </PushData>
               <GetMember/>
@@ -24432,7 +24603,7 @@
               <PushData>
                 <items>
                   <StackRegister reg="1"/>
-                  <StackDictionaryLookup index="41"/>
+                  <StackDictionaryLookup index="43"/>
                 </items>
               </PushData>
               <GetMember/>
@@ -24450,7 +24621,7 @@
               <PushData>
                 <items>
                   <StackRegister reg="1"/>
-                  <StackDictionaryLookup index="39"/>
+                  <StackDictionaryLookup index="41"/>
                 </items>
               </PushData>
               <GetMember/>
@@ -24468,7 +24639,7 @@
               <PushData>
                 <items>
                   <StackRegister reg="1"/>
-                  <StackDictionaryLookup index="41"/>
+                  <StackDictionaryLookup index="43"/>
                 </items>
               </PushData>
               <GetMember/>
@@ -24484,22 +24655,22 @@
               <PushData>
                 <items>
                   <StackRegister reg="1"/>
-                  <StackDictionaryLookup index="39"/>
+                  <StackDictionaryLookup index="41"/>
                   <StackRegister reg="1"/>
-                  <StackDictionaryLookup index="39"/>
+                  <StackDictionaryLookup index="41"/>
                 </items>
               </PushData>
               <GetMember/>
               <PushData>
                 <items>
                   <StackRegister reg="2"/>
-                  <StackDictionaryLookup index="34"/>
+                  <StackDictionaryLookup index="36"/>
                 </items>
               </PushData>
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="42"/>
+                  <StackDictionaryLookup index="44"/>
                 </items>
               </PushData>
               <GetMember/>
@@ -24509,7 +24680,7 @@
                 <items>
                   <StackRegister reg="8"/>
                   <StackRegister reg="10"/>
-                  <StackDictionaryLookup index="43"/>
+                  <StackDictionaryLookup index="45"/>
                 </items>
               </PushData>
               <GetMember/>
@@ -24539,7 +24710,7 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="33"/>
+                  <StackDictionaryLookup index="35"/>
                 </items>
               </PushData>
               <GetMember/>
@@ -24552,14 +24723,14 @@
               <PushData>
                 <items>
                   <StackRegister reg="1"/>
-                  <StackDictionaryLookup index="41"/>
+                  <StackDictionaryLookup index="43"/>
                 </items>
               </PushData>
               <GetMember/>
               <PushData>
                 <items>
                   <StackRegister reg="1"/>
-                  <StackDictionaryLookup index="39"/>
+                  <StackDictionaryLookup index="41"/>
                 </items>
               </PushData>
               <GetMember/>
@@ -24567,7 +24738,7 @@
               <PushData>
                 <items>
                   <StackRegister reg="1"/>
-                  <StackDictionaryLookup index="39"/>
+                  <StackDictionaryLookup index="41"/>
                 </items>
               </PushData>
               <GetMember/>
@@ -24575,7 +24746,7 @@
                 <items>
                   <StackInteger value="2"/>
                   <StackRegister reg="3"/>
-                  <StackDictionaryLookup index="44"/>
+                  <StackDictionaryLookup index="46"/>
                 </items>
               </PushData>
               <CallMethod/>
@@ -24606,7 +24777,7 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="29"/>
+                  <StackDictionaryLookup index="31"/>
                 </items>
               </PushData>
               <CallMethod/>
@@ -24626,7 +24797,7 @@
           <PushData>
             <items>
               <StackRegister reg="1"/>
-              <StackDictionaryLookup index="45"/>
+              <StackDictionaryLookup index="47"/>
             </items>
           </PushData>
           <DeclareFunction2 name="" argc="2" regc="10" preloadParent="0" preloadRoot="0" suppressSuper="1" preloadSuper="0" suppressArguments="1" preloadArguments="0" suppressThis="1" preloadThis="0" reserved="0" preloadGlobal="0">
@@ -24637,7 +24808,7 @@
             <actions>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="28"/>
+                  <StackDictionaryLookup index="30"/>
                 </items>
               </PushData>
               <StoreRegister reg="1"/>
@@ -24645,7 +24816,7 @@
               <PushData>
                 <items>
                   <StackRegister reg="8"/>
-                  <StackDictionaryLookup index="46"/>
+                  <StackDictionaryLookup index="48"/>
                 </items>
               </PushData>
               <AddTyped/>
@@ -24654,7 +24825,7 @@
               <PushData>
                 <items>
                   <StackRegister reg="8"/>
-                  <StackDictionaryLookup index="47"/>
+                  <StackDictionaryLookup index="49"/>
                 </items>
               </PushData>
               <AddTyped/>
@@ -24663,7 +24834,7 @@
               <PushData>
                 <items>
                   <StackRegister reg="8"/>
-                  <StackDictionaryLookup index="48"/>
+                  <StackDictionaryLookup index="50"/>
                 </items>
               </PushData>
               <AddTyped/>
@@ -24697,13 +24868,13 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="49"/>
+                  <StackDictionaryLookup index="51"/>
                 </items>
               </PushData>
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="50"/>
+                  <StackDictionaryLookup index="52"/>
                 </items>
               </PushData>
               <CallMethod/>
@@ -24737,13 +24908,13 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="49"/>
+                  <StackDictionaryLookup index="51"/>
                 </items>
               </PushData>
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="50"/>
+                  <StackDictionaryLookup index="52"/>
                 </items>
               </PushData>
               <CallMethod/>
@@ -24777,13 +24948,13 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="49"/>
+                  <StackDictionaryLookup index="51"/>
                 </items>
               </PushData>
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="50"/>
+                  <StackDictionaryLookup index="52"/>
                 </items>
               </PushData>
               <CallMethod/>
@@ -24804,7 +24975,7 @@
               <PushData>
                 <items>
                   <StackRegister reg="3"/>
-                  <StackDictionaryLookup index="42"/>
+                  <StackDictionaryLookup index="44"/>
                 </items>
               </PushData>
               <GetMember/>
@@ -24833,13 +25004,13 @@
                 <items>
                   <StackRegister reg="1"/>
                   <StackRegister reg="9"/>
-                  <StackDictionaryLookup index="43"/>
+                  <StackDictionaryLookup index="45"/>
                 </items>
               </PushData>
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="51"/>
+                  <StackDictionaryLookup index="53"/>
                   <StackRegister reg="3"/>
                   <StackInteger value="3"/>
                   <StackDictionaryLookup index="1"/>
@@ -24866,7 +25037,7 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="29"/>
+                  <StackDictionaryLookup index="31"/>
                 </items>
               </PushData>
               <CallMethod/>
@@ -24888,7 +25059,7 @@
               <PushData>
                 <items>
                   <StackRegister reg="4"/>
-                  <StackDictionaryLookup index="42"/>
+                  <StackDictionaryLookup index="44"/>
                 </items>
               </PushData>
               <GetMember/>
@@ -24917,13 +25088,13 @@
                 <items>
                   <StackRegister reg="1"/>
                   <StackRegister reg="9"/>
-                  <StackDictionaryLookup index="43"/>
+                  <StackDictionaryLookup index="45"/>
                 </items>
               </PushData>
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="52"/>
+                  <StackDictionaryLookup index="54"/>
                   <StackRegister reg="4"/>
                   <StackInteger value="3"/>
                   <StackDictionaryLookup index="1"/>
@@ -24950,7 +25121,7 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="29"/>
+                  <StackDictionaryLookup index="31"/>
                 </items>
               </PushData>
               <CallMethod/>
@@ -24972,7 +25143,7 @@
               <PushData>
                 <items>
                   <StackRegister reg="2"/>
-                  <StackDictionaryLookup index="42"/>
+                  <StackDictionaryLookup index="44"/>
                 </items>
               </PushData>
               <GetMember/>
@@ -25001,13 +25172,13 @@
                 <items>
                   <StackRegister reg="1"/>
                   <StackRegister reg="9"/>
-                  <StackDictionaryLookup index="43"/>
+                  <StackDictionaryLookup index="45"/>
                 </items>
               </PushData>
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="53"/>
+                  <StackDictionaryLookup index="55"/>
                   <StackRegister reg="2"/>
                   <StackInteger value="3"/>
                   <StackDictionaryLookup index="1"/>
@@ -25034,7 +25205,7 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="29"/>
+                  <StackDictionaryLookup index="31"/>
                 </items>
               </PushData>
               <CallMethod/>
@@ -25053,7 +25224,7 @@
           <PushData>
             <items>
               <StackRegister reg="1"/>
-              <StackDictionaryLookup index="54"/>
+              <StackDictionaryLookup index="56"/>
             </items>
           </PushData>
           <DeclareFunction2 name="" argc="2" regc="3" preloadParent="0" preloadRoot="0" suppressSuper="1" preloadSuper="0" suppressArguments="1" preloadArguments="0" suppressThis="1" preloadThis="0" reserved="0" preloadGlobal="0">
@@ -25069,13 +25240,13 @@
                   <StackDouble value="0.000000000000000"/>
                   <StackInteger value="2"/>
                   <StackRegister reg="1"/>
-                  <StackDictionaryLookup index="44"/>
+                  <StackDictionaryLookup index="46"/>
                 </items>
               </PushData>
               <CallMethod/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="55"/>
+                  <StackDictionaryLookup index="57"/>
                 </items>
               </PushData>
               <EqualTyped/>
@@ -25109,7 +25280,7 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="32"/>
+                  <StackDictionaryLookup index="34"/>
                 </items>
               </PushData>
               <CallMethod/>
@@ -25143,7 +25314,7 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="45"/>
+                  <StackDictionaryLookup index="47"/>
                 </items>
               </PushData>
               <CallMethod/>
@@ -25174,7 +25345,7 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="18"/>
+                  <StackDictionaryLookup index="19"/>
                 </items>
               </PushData>
               <CallMethod/>
@@ -25217,7 +25388,7 @@
           <GetMember/>
           <PushData>
             <items>
-              <StackDictionaryLookup index="20"/>
+              <StackDictionaryLookup index="22"/>
             </items>
           </PushData>
           <GetMember/>
@@ -25257,7 +25428,7 @@
           <GetMember/>
           <PushData>
             <items>
-              <StackDictionaryLookup index="20"/>
+              <StackDictionaryLookup index="22"/>
             </items>
           </PushData>
           <GetMember/>
@@ -25295,13 +25466,13 @@
           <GetMember/>
           <PushData>
             <items>
-              <StackDictionaryLookup index="20"/>
+              <StackDictionaryLookup index="22"/>
             </items>
           </PushData>
           <GetMember/>
           <PushData>
             <items>
-              <StackDictionaryLookup index="56"/>
+              <StackDictionaryLookup index="58"/>
             </items>
           </PushData>
           <CallMethod/>
@@ -25332,7 +25503,7 @@
           <GetMember/>
           <PushData>
             <items>
-              <StackDictionaryLookup index="20"/>
+              <StackDictionaryLookup index="22"/>
             </items>
           </PushData>
           <Delete/>
@@ -25341,7 +25512,7 @@
           <PushData>
             <items>
               <StackRegister reg="1"/>
-              <StackDictionaryLookup index="57"/>
+              <StackDictionaryLookup index="59"/>
             </items>
           </PushData>
           <DeclareFunction2 name="" argc="1" regc="2" preloadParent="0" preloadRoot="0" suppressSuper="1" preloadSuper="0" suppressArguments="1" preloadArguments="0" suppressThis="1" preloadThis="0" reserved="0" preloadGlobal="0">
@@ -25375,7 +25546,7 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="20"/>
+                  <StackDictionaryLookup index="22"/>
                 </items>
               </PushData>
               <GetMember/>
@@ -25414,13 +25585,13 @@
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="20"/>
+                  <StackDictionaryLookup index="22"/>
                 </items>
               </PushData>
               <GetMember/>
               <PushData>
                 <items>
-                  <StackDictionaryLookup index="58"/>
+                  <StackDictionaryLookup index="60"/>
                   <StackRegister reg="1"/>
                 </items>
               </PushData>
@@ -25439,7 +25610,7 @@
           <PushData>
             <items>
               <StackRegister reg="1"/>
-              <StackDictionaryLookup index="49"/>
+              <StackDictionaryLookup index="51"/>
               <StackDouble value="0.000000000000000"/>
               <StackDictionaryLookup index="1"/>
             </items>
@@ -25459,7 +25630,7 @@
           <GetMember/>
           <PushData>
             <items>
-              <StackDictionaryLookup index="59"/>
+              <StackDictionaryLookup index="61"/>
             </items>
           </PushData>
           <NewMethod/>
@@ -25467,10 +25638,18 @@
           <PushData>
             <items>
               <StackRegister reg="1"/>
-              <StackDictionaryLookup index="33"/>
-              <StackDictionaryLookup index="51"/>
-              <StackDictionaryLookup index="52"/>
+              <StackDictionaryLookup index="11"/>
+              <StackBoolean value="1"/>
+            </items>
+          </PushData>
+          <SetMember/>
+          <PushData>
+            <items>
+              <StackRegister reg="1"/>
+              <StackDictionaryLookup index="35"/>
               <StackDictionaryLookup index="53"/>
+              <StackDictionaryLookup index="54"/>
+              <StackDictionaryLookup index="55"/>
               <StackInteger value="3"/>
             </items>
           </PushData>
@@ -25479,19 +25658,10 @@
           <PushData>
             <items>
               <StackRegister reg="1"/>
-              <StackDictionaryLookup index="27"/>
-              <StackDictionaryLookup index="51"/>
-              <StackDictionaryLookup index="30"/>
-              <StackDictionaryLookup index="60"/>
-              <StackDictionaryLookup index="61"/>
-              <StackInteger value="2"/>
-            </items>
-          </PushData>
-          <DeclareArray/>
-          <PushData>
-            <items>
+              <StackDictionaryLookup index="29"/>
+              <StackDictionaryLookup index="53"/>
+              <StackDictionaryLookup index="32"/>
               <StackDictionaryLookup index="62"/>
-              <StackDictionaryLookup index="60"/>
               <StackDictionaryLookup index="63"/>
               <StackInteger value="2"/>
             </items>
@@ -25499,22 +25669,8 @@
           <DeclareArray/>
           <PushData>
             <items>
-              <StackInteger value="2"/>
-            </items>
-          </PushData>
-          <DeclareObject/>
-          <PushData>
-            <items>
-              <StackDictionaryLookup index="52"/>
-              <StackDouble value="0.000000000000000"/>
-            </items>
-          </PushData>
-          <DeclareObject/>
-          <PushData>
-            <items>
-              <StackDictionaryLookup index="53"/>
-              <StackDictionaryLookup index="30"/>
               <StackDictionaryLookup index="64"/>
+              <StackDictionaryLookup index="62"/>
               <StackDictionaryLookup index="65"/>
               <StackInteger value="2"/>
             </items>
@@ -25522,9 +25678,32 @@
           <DeclareArray/>
           <PushData>
             <items>
-              <StackDictionaryLookup index="62"/>
+              <StackInteger value="2"/>
+            </items>
+          </PushData>
+          <DeclareObject/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="54"/>
+              <StackDouble value="0.000000000000000"/>
+            </items>
+          </PushData>
+          <DeclareObject/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="55"/>
+              <StackDictionaryLookup index="32"/>
+              <StackDictionaryLookup index="66"/>
+              <StackDictionaryLookup index="67"/>
+              <StackInteger value="2"/>
+            </items>
+          </PushData>
+          <DeclareArray/>
+          <PushData>
+            <items>
               <StackDictionaryLookup index="64"/>
-              <StackDictionaryLookup index="65"/>
+              <StackDictionaryLookup index="66"/>
+              <StackDictionaryLookup index="67"/>
               <StackInteger value="2"/>
             </items>
           </PushData>
@@ -25577,7 +25756,7 @@
           <PushData>
             <items>
               <StackInteger value="3"/>
-              <StackDictionaryLookup index="66"/>
+              <StackDictionaryLookup index="68"/>
             </items>
           </PushData>
           <CallFunction/>
@@ -36254,7 +36433,7 @@
               <String value="prototype"/>
               <String value="initialize"/>
               <String value="_instance"/>
-              <String value="colorSchemeManager.setColors"/>
+              <String value="SET_COLORS_EVENT"/>
               <String value="gfx"/>
               <String value="io"/>
               <String value="GameDelegate"/>
@@ -36262,7 +36441,7 @@
               <String value="onSetColors"/>
               <String value="addCallBack"/>
               <String value="update"/>
-              <String value="colorSchemeManager.getColors"/>
+              <String value="GET_COLORS_EVENT"/>
               <String value="call"/>
               <String value="addChangeCallBack"/>
               <String value="_callbacks"/>
@@ -36284,6 +36463,8 @@
               <String value="flash"/>
               <String value="geom"/>
               <String value="ColorTransform"/>
+              <String value="colorSchemeManager.setColors"/>
+              <String value="colorSchemeManager.getColors"/>
               <String value="instance"/>
               <String value="addProperty"/>
               <String value="ASSetPropFlags"/>
@@ -36450,7 +36631,7 @@
           <GetMember/>
           <LogicalNOT/>
           <LogicalNOT/>
-          <BranchIfTrue byteOffset="1569"/>
+          <BranchIfTrue byteOffset="1673"/>
           <PushData>
             <items>
               <StackDictionaryLookup index="1"/>
@@ -36494,7 +36675,7 @@
               <StackDictionaryLookup index="7"/>
             </items>
           </PushData>
-          <DeclareFunction name="" argc="0" length="197">
+          <DeclareFunction name="" argc="0" length="253">
             <args/>
           </DeclareFunction>
           <PushData>
@@ -36534,7 +36715,7 @@
           </PushData>
           <EqualTyped/>
           <LogicalNOT/>
-          <BranchIfTrue byteOffset="156"/>
+          <BranchIfTrue byteOffset="212"/>
           <PushData>
             <items>
               <StackDictionaryLookup index="1"/>
@@ -36588,7 +36769,36 @@
           <SetMember/>
           <PushData>
             <items>
+              <StackDictionaryLookup index="1"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="3"/>
+            </items>
+          </PushData>
+          <GetMember/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="4"/>
+            </items>
+          </PushData>
+          <GetMember/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="5"/>
+            </items>
+          </PushData>
+          <GetMember/>
+          <PushData>
+            <items>
               <StackDictionaryLookup index="9"/>
+            </items>
+          </PushData>
+          <GetMember/>
+          <PushData>
+            <items>
               <StackInteger value="1"/>
               <StackDictionaryLookup index="10"/>
             </items>
@@ -36646,7 +36856,36 @@
           <GetMember/>
           <PushData>
             <items>
+              <StackDictionaryLookup index="1"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="3"/>
+            </items>
+          </PushData>
+          <GetMember/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="4"/>
+            </items>
+          </PushData>
+          <GetMember/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="5"/>
+            </items>
+          </PushData>
+          <GetMember/>
+          <PushData>
+            <items>
               <StackDictionaryLookup index="9"/>
+            </items>
+          </PushData>
+          <GetMember/>
+          <PushData>
+            <items>
               <StackInteger value="3"/>
               <StackDictionaryLookup index="10"/>
             </items>
@@ -36678,7 +36917,7 @@
               <StackDictionaryLookup index="16"/>
             </items>
           </PushData>
-          <DeclareFunction name="" argc="0" length="45">
+          <DeclareFunction name="" argc="0" length="73">
             <args/>
           </DeclareFunction>
           <PushData>
@@ -36689,7 +36928,36 @@
           <DeclareArray/>
           <PushData>
             <items>
+              <StackDictionaryLookup index="1"/>
+            </items>
+          </PushData>
+          <GetVariable/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="3"/>
+            </items>
+          </PushData>
+          <GetMember/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="4"/>
+            </items>
+          </PushData>
+          <GetMember/>
+          <PushData>
+            <items>
+              <StackDictionaryLookup index="5"/>
+            </items>
+          </PushData>
+          <GetMember/>
+          <PushData>
+            <items>
               <StackDictionaryLookup index="17"/>
+            </items>
+          </PushData>
+          <GetMember/>
+          <PushData>
+            <items>
               <StackInteger value="2"/>
               <StackDictionaryLookup index="10"/>
             </items>
@@ -37534,6 +37802,22 @@
           </PushData>
           <DeclareArray/>
           <SetMember/>
+          <PushData>
+            <items>
+              <StackRegister reg="1"/>
+              <StackDictionaryLookup index="9"/>
+              <StackDictionaryLookup index="39"/>
+            </items>
+          </PushData>
+          <SetMember/>
+          <PushData>
+            <items>
+              <StackRegister reg="1"/>
+              <StackDictionaryLookup index="17"/>
+              <StackDictionaryLookup index="40"/>
+            </items>
+          </PushData>
+          <SetMember/>
           <DeclareFunction name="" argc="0" length="0">
             <args/>
           </DeclareFunction>
@@ -37546,10 +37830,10 @@
           <GetMember/>
           <PushData>
             <items>
-              <StackDictionaryLookup index="39"/>
+              <StackDictionaryLookup index="41"/>
               <StackInteger value="3"/>
               <StackRegister reg="1"/>
-              <StackDictionaryLookup index="40"/>
+              <StackDictionaryLookup index="42"/>
             </items>
           </PushData>
           <CallMethod/>
@@ -37588,7 +37872,7 @@
           <PushData>
             <items>
               <StackInteger value="3"/>
-              <StackDictionaryLookup index="41"/>
+              <StackDictionaryLookup index="43"/>
             </items>
           </PushData>
           <CallFunction/>
