@@ -1,6 +1,7 @@
 ﻿import components.LabeledComponent;
 
 import utils.Config;
+import utils.Utils;
 
 protected function RefreshConfig():void
 {
@@ -10,17 +11,44 @@ protected function RefreshConfig():void
 		if (!Config.s_config)
 			Config.s_config = DefaultConfig.config;
 
+		var now: Date = new Date();
+		
 		//debug(JSON.stringify(Config.s_config));
 		RefreshCommonPage();
+		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
+		now = new Date();
+		
 		RefreshBattleLoadingPage();
+		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
+		now = new Date();
+		
 		RefreshStatisticFormPage();
+		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
+		now = new Date();
+		
 		RefreshPlayersPanelPage();
+		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
+		now = new Date();
+		
 		RefreshColorsPage();
+		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
+		now = new Date();
+		
 		RefreshTransparencyPage();
+		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
+		now = new Date();
+		
 		RefreshIconsetPage();
+		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
+		now = new Date();
+		
 		RefreshPlayersPage();
+		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
+		now = new Date();
 
 		RefreshMarkersPage();
+		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
+		now = new Date();
 	}
 	catch (ex:Error)
 	{
@@ -252,7 +280,7 @@ private function RefreshPlayersPage():void
 	debug("RefreshPlayersPage()");
 	try
 	{
-		this.p_players.RefreshSource();
+		p_players.RefreshSource(true);
 	}
 	catch (ex:Error)
 	{

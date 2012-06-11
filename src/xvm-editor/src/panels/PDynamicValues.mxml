@@ -74,12 +74,13 @@
 				return instance;
 			}
 
-			public function RefreshSource(): void
+			public function RefreshSource(src: Array = null): void
 			{
 				for (var n:Number = 0; n < container.numElements; ++n)
 					delete container.getElementAt(n);
 				container.removeAllElements();
-				var src:Array = Config.GetValue(_config);
+				if (!src)
+					src = Config.GetValue(_config);
 				if (src.length == 0)
 					container.addElement(CreateNewElementButton());
 				else

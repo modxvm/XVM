@@ -93,16 +93,11 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
         Stat.AddPlayerData(this, null, 1, data.label, data.vehicle, data.icon, team);
 
       // Alternative icon set
-      /*if (!m_iconset)
-        m_iconset = new Iconset(this, completeLoad, data.icon);
-      else
-        data.icon = m_iconset.originalIcon;
-      m_iconset.init(iconLoader,
-        [ data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.statisticForm), data.icon ]);
-      data.icon = m_iconset.currentIcon;*/
       if (!m_iconset)
         m_iconset = new Iconset(this, completeLoad, data.icon);
-      m_iconset.init(iconLoader, [ data.icon ]);
+      m_iconset.init(iconLoader,
+        [ data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.battleLoading), data.icon ]);
+      data.icon = m_iconset.currentIcon;
 
       // Player/clan icons
       var cfg = Config.s_config.statisticForm.clanIcon;
@@ -114,6 +109,9 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
       squad._visible = false;
 
     super.updateData();
+
+    if (data)
+      data.icon = m_iconset.originalIcon;
 
     if (!m_textCache.hasOwnProperty(data.label))
     {

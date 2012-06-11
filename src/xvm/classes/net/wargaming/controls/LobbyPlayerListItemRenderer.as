@@ -8,6 +8,8 @@ intrinsic class net.wargaming.controls.LobbyPlayerListItemRenderer extends UICom
   var owner: Object;
   var vehicleField: TextField;
   var squad;
+  var self_bg;
+  var _selected;
 
   function configUI();
   function setData(data);

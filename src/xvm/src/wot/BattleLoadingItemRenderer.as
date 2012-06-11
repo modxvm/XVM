@@ -81,18 +81,6 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
           Stat.StartLoadData();
       }
 
-      // Alternative icon set
-/*      if (!m_iconset)
-        m_iconset = new Iconset(this, completeLoad, data.icon);
-      else
-        data.icon = m_iconset.originalIcon;
-      m_iconset.init(iconLoader,
-        [ data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.battleLoading), data.icon ]);
-      data.icon = m_iconset.currentIcon;*/
-      if (!m_iconset)
-        m_iconset = new Iconset(this, completeLoad, data.icon);
-      m_iconset.init(iconLoader, [ data.icon ]);
-
       // Player/clan icons
       var cfg = Config.s_config.battleLoading.clanIcon;
       if (cfg.show && !m_clanIconLoaded)
@@ -104,6 +92,7 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
       }
     }
 
+    // Remove squad icon
     if (Config.s_config.battleLoading.removeSquadIcon && squad)
       squad._visible = false;
 
@@ -113,16 +102,46 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
   // override
   function update()
   {
-    //Logger.add("update");
-    super.update();
-    if (Config.s_config.rating.showPlayersStatistics)
+    if (!data)
     {
-      if (data)
-        vehicleField.htmlText = (m_textCache.hasOwnProperty(data.label)) ? m_textCache[data.label] : data.vehicle;
+      super.update();
+      return;
+    }
+    self_bg._visible = _selected;
+    
+    onEnterFrame = function()
+    {
+      delete this.onEnterFrame;
+      this.update2();
     }
   }
 
-  // update delegate (function name is fixed and cannot be changed)
+  function update2()
+  {
+    //Logger.add("update");
+    if (data)
+    {
+      // Alternative icon set
+      if (!m_iconset)
+        m_iconset = new Iconset(this, completeLoad, data.icon);
+      m_iconset.init(iconLoader,
+        [ data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.battleLoading), data.icon ]);
+      data.icon = m_iconset.currentIcon;
+    }
+
+    super.update();
+
+    if (data)
+      data.icon = m_iconset.originalIcon;
+
+    if (data && Config.s_config.rating.showPlayersStatistics)
+    {
+      vehicleField.htmlText = m_textCache.hasOwnProperty(data.label)
+        ? m_textCache[data.label] : data.vehicle;
+    }
+  }
+  
+  // update delegate
   function XVMStatUpdateCallback(pdata)
   {
     //Logger.add("XVMStatUpdateCallback(): " + pdata.originalText);

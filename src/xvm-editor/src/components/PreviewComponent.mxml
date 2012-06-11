@@ -19,8 +19,6 @@
 			private static var IMG_hills1 : Class;
 			[Embed(source="images/bg/hills-2.jpg")]
 			private static var IMG_hills2 : Class;
-			[Embed(source="images/bg/hills-3.jpg")]
-			private static var IMG_hills3 : Class;
 			[Embed(source="images/bg/mannerheim-1.jpg")]
 			private static var IMG_mannerheim1 : Class;
 			[Embed(source="images/bg/mannerheim-2.jpg")]
@@ -105,24 +103,21 @@
 						imgBG.source = new IMG_hills2();
 						break;
 					case 3:
-						imgBG.source = new IMG_hills3();
-						break;
-					case 4:
 						imgBG.source = new IMG_mannerheim1();
 						break;
-					case 5:
+					case 4:
 						imgBG.source = new IMG_mannerheim2();
 						break;
-					case 6:
+					case 5:
 						imgBG.source = new IMG_mannerheim3();
 						break;
-					case 7:
+					case 6:
 						imgBG.source = new IMG_desert1();
 						break;
-					case 8:
+					case 7:
 						imgBG.source = new IMG_desert2();
 						break;
-					case 9:
+					case 8:
 						imgBG.source = new IMG_desert3();
 						break;
 				}
@@ -146,7 +141,6 @@
 						<mx:ArrayCollection>
 							<fx:String>{resourceManager.getString('components', 'Hills')} 1</fx:String>
 							<fx:String>{resourceManager.getString('components', 'Hills')} 2</fx:String>
-							<fx:String>{resourceManager.getString('components', 'Hills')} 3</fx:String>
 							<fx:String>{resourceManager.getString('components', 'Mannerheim')} 1</fx:String>
 							<fx:String>{resourceManager.getString('components', 'Mannerheim')} 2</fx:String>
 							<fx:String>{resourceManager.getString('components', 'Mannerheim')} 3</fx:String>

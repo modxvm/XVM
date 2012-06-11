@@ -13,12 +13,12 @@
 		<![CDATA[
 			import components.DynamicClanFolderFieldEdit;
 			import components.LabeledComponent;
-
+			
 			import events.SetDefaultValueEvent;
 			import events.ValueChangedEvent;
-
+			
 			import mx.core.IVisualElement;
-
+			
 			import utils.Config;
 			import utils.DefaultConfig;
 			import utils.Utils;
@@ -76,14 +76,14 @@
 			{
 				var instance:DynamicClanFolderFieldEdit = new DynamicClanFolderFieldEdit();
 				instance.label = v;
-				//instance.labelWidth = "200";
+				instance.value = v;
 				instance.width = 255;
 				instance.group = rbg;
 				instance.addEventListener(MouseEvent.CLICK, onClick);
 				return instance;
 			}
 
-			public function RefreshSource(): void
+			public function RefreshSource(force: Boolean): void
 			{
 				var saved_label:String = rbg && rbg.selectedValue ? rbg.selectedValue.toString() : null;
 
@@ -105,32 +105,22 @@
 				for (var i:Number = 0; i < v.length; ++i)
 				{
 					if (v[i].hasOwnProperty("root"))
+						root = { root: v[i]["root"] };
+					else if (v[i].hasOwnProperty("folder") && v[i].hasOwnProperty("players"))
 					{
-						root = v[i];
-						break;
+						var folder_name:String = Utils.trim(v[i]["folder"]).toUpperCase();
+						m_folders.push(folder_name);
+						m_values[folder_name] = v[i].players;
+						container.addElement(CreateElement(folder_name));
 					}
 				}
 
 				if (!root)
-					root = { root: "../../../clanicons", folders: "RU,EU,NA,CT" };
-				if (!root.hasOwnProperty("folders"))
-					root.folders = "RU,EU,NA,CT";
-
-				m_folders = root.folders.split(",");
+					root = { root: "../../../clanicons" };
 				if (!m_folders || m_folders.length == 0)
-					m_folders = [ "." ];
-
-				for (var j:Number = 0; j < v.length; ++j)
-				{
-					if (!v[j].hasOwnProperty("folder") || v[j].hasOwnProperty("players"))
-						continue;
-					
-					var name:String = v[j].folder || ".";
-					m_values[name] = v[j].players;
-					
-					var e:DynamicClanFolderFieldEdit = CreateElement(name);
-					container.addElement(e);
-				}
+					m_folders = [ "" ];
+				root.folders = m_folders.join(",");
+				v_root.value = root.root;
 
 				if (container.numElements == 0)
 				{
@@ -146,10 +136,16 @@
 						if (el.label == saved_label)
 							selected = el;
 					}
-					if (!selected)
-						selected = container.getElementAt(0) as DynamicClanFolderFieldEdit;
-					selected.selected = true;
-					this.RefreshElement(selected.label);
+					if (selected)
+					{
+						selected.selected = true;
+						if (selected.label != saved_label || force)
+							this.RefreshElement(selected.label);
+					}
+					else
+					{
+						this.RefreshElement(null);						
+					}
 				}
 			}
 
@@ -158,10 +154,18 @@
 				RefreshElement(rbg.selectedValue.toString());
 			}
 
-			protected function RefreshElement(name:String):void
+			public function RefreshElement(name:String):void
 			{
-				//trace(name);
-				//p_players.value = name ? m_values[name] : null;
+				if (name)
+				{
+					p_players.enabled = true;
+					p_players.RefreshSource(m_values[name]);
+				}
+				else
+				{
+					p_players.enabled = false
+					p_players.RefreshSource([]);
+				}
 			}
 
 			public function updateValue(event:ValueChangedEvent):void
@@ -176,15 +180,21 @@
 						return;
 					}
 
-					var activeValue:Object = m_values[rbg.selectedValue.toString()];
-					for each (var value:Object in activeValue.values)
-						Config.SetValue(event.sender.config, event.sender.value, value);
-
+					if (event.target.config == "players")
+					{
+						m_values[rbg.selectedValue.toString()] = event.sender.value;
+					}
+					else
+					{
+						trace("ERROR: unknown target config: " + event.target.config);
+						return;
+					}
+					
 					onChange(null);
 				}
 				catch (ex:Error)
 				{
-					trace("ERROR: updateMarkerValue(): " + ex.toString());
+					trace("ERROR: updateValue(): " + ex.toString());
 				}
 			}
 
@@ -200,31 +210,28 @@
 						return;
 					}
 
-					var activeValue:Object = m_values[rbg.selectedValue.toString()];
-					for (var i:Number = 0; i < activeValue.values.length; ++i)
+					if (event.target.config == "players")
 					{
-						if (event.target.config == "textField")
+						var v:Array = Config.GetValue(event.target.config, DefaultConfig.config);
+						for (var i:Number = 0; i < v.length; ++i)
 						{
-							var defValue:Object = DefaultConfig.vehicleName_alive;
-							defValue.name = activeValue.values[i].name;
-							defValue.format = activeValue.values[i].format;
-							defValue.font = activeValue.values[i].font;
-							defValue.shadow = activeValue.values[i].shadow;
-							activeValue.values[i] = defValue;
-						}
-						else if (event.target.config == "textField.font")
-							activeValue.values[i].font = DefaultConfig.font_13;
-						else if (event.target.config == "textField.shadow")
-							activeValue.values[i].shadow = DefaultConfig.shadow_200;
-						else
-						{
-							trace("ERROR: unknown target config: " + event.target.config);
-							return;
+							if (!v[i].hasOwnProperty("folder"))
+								continue;
+							var folder_name:String = v[i]["folder"].toString();
+							if (folder_name != rbg.selectedValue.toString())
+								continue;
+							m_values[folder_name] = v[i].players;
+							break;
 						}
 					}
-
+					else
+					{
+						trace("ERROR: unknown target config: " + event.target.config);
+						return;
+					}
+					
 					onChange(null);
-					RefreshSource();
+					RefreshSource(true);
 				}
 				catch (ex:Error)
 				{
@@ -248,15 +255,9 @@
 				else if (event.target.id == "add" || event.target.id == "new")
 				{
 					var n:Number = 0;
-					var name:String;
-					do { name = resourceManager.getString('markers', 'Text') + " " + (++n); } while (m_values.hasOwnProperty(name));
+					var name:String = "";
 					m_folders.push(name);
 					m_values[name] = { folder: name, players: [] };
-					var defValue:Object = DefaultConfig.vehicleName_alive;
-					defValue.name = name;
-					defValue.format = resourceManager.getString('markers', 'TEXT');
-					for (var j:Number = 0; j < m_values[name].states.length; ++j)
-						m_values[name].values.push(defValue);
 				}
 				else
 					return;
@@ -264,7 +265,7 @@
 				event.stopPropagation();
 
 				onChange(null);
-				RefreshSource();
+				RefreshSource(false);
 			}
 		]]>
 	</fx:Script>
@@ -275,16 +276,16 @@
 	<fx:Declarations>
 		<s:RadioButtonGroup id="rbg" change="onRadioButtonChange(event)"/>
 	</fx:Declarations>
-	<c:PanelComponent title="{resourceManager.getString('panels', 'PClanIcons')}" width="100%" height="130" borderVisible="false">
+	<c:PanelComponent title="{resourceManager.getString('panels', 'PClanIcons')}" width="100%" height="150" borderVisible="false">
 		<mx:Image id="def" right="5" y="-18" width="16" height="16" source="@Embed(source='images/revert.png')" toolTip="{resourceManager.getString('markers', 'DefaultSettings')}" useHandCursor="true" buttonMode="true" click="onClick(event)"/>
 		<s:VGroup left="10" right="10" top="10" bottom="10" gap="10">
 			<c:LabeledPathSelector label="{resourceManager.getString('panels', 'PClanIconsRoot')}" id="v_root" change="onChange(event)"/>
-			<s:Scroller left="10" right="10" top="5" bottom="6">
+			<s:Scroller left="10" right="10" top="5" height="88">
 				<s:VGroup id="container" width="100%" height="100%" gap="-1"/>
 			</s:Scroller>
 		</s:VGroup>
 	</c:PanelComponent>
 	<s:Panel width="100%" height="100%" title="{resourceManager.getString('panels', 'PClanIconsIcons')}">
-		<p:PDynamicValues id="p_players" config="players" editorClass="DynamicPlayersEdit" valueChanged="updateValue(event)"/>
+		<p:PDynamicValues id="p_players" config="players" editorClass="DynamicPlayersEdit" valueChanged="updateValue(event)" setDefaultValue="setDefaultValue(event)"/>
 	</s:Panel>
 </s:VGroup>

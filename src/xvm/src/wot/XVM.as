@@ -102,24 +102,16 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     try
     {
       // Draw watermark
-      if (!Config.s_config.battle.hideXVMVersion && !_root.hasOwnProperty("xvmWatermark"))
+      if (!Config.s_config.battle.hideXVMVersion && !_global.xvmWatermark)
       {
+        _global.xvmWatermark = true;
         var wm = _root.createTextField("xvmWatermark", _root.getNextHighestDepth(), -1, -2, 50, 16);
         wm.antiAliasType = "advanced";
         wm.setNewTextFormat(new TextFormat("$FieldFont", 8, 0x808080, false, false, false, null, null, "left"));
-        wm._alpha = 10;
+        wm._alpha = 50;
         wm.text = "XVM v" + Defines.XVM_VERSION;
       }
 
-      // Alternative icon set
-      if (!m_iconset)
-        m_iconset = new Iconset(this, completeLoad, m_source);
-      //else
-      //  m_source = m_iconset.originalIcon;
-      m_iconset.init(iconLoader,
-        [ /*m_source.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.vehicleMarker),*/ m_source ]);
-      //m_source = m_iconset.currentIcon;
-      
       if (Config.s_config.battle.useStandardMarkers)
         return;
 
@@ -255,6 +247,23 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     XVMInit();
   }
 
+  // override
+  function setupIconLoader()
+  {
+    if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
+    {
+      super.setupIconLoader();
+      return;
+    }
+
+    // Alternative icon set
+    if (!m_iconset)
+      m_iconset = new Iconset(this, completeLoad, m_source);
+    m_iconset.init(iconLoader,
+      [ m_source.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.vehicleMarker), m_source ]);
+    iconLoader.source = m_iconset.currentIcon;
+  }
+  
   // override
   function populateData()
   {
@@ -781,24 +790,11 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
       if (cfg.amount >= 0)
       {
-        var iconColor: Color = new Color(iconLoader);
         var tintColor: Number = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.color), m_curHealth);
-        var tintAmount: Number = cfg.amount * 0.01;
-        var tintRatio: Number;
-
-        var iconTransform: Object = iconColor.getTransform();
-        iconTransform.rb = (tintColor >> 16);
-        iconTransform.gb = (tintColor >> 8) & 0xff;
-        iconTransform.bb = (tintColor & 0xff);
-        iconTransform.ra = 0;
-        iconTransform.ga = 0;
-        iconTransform.ba = 0;
-        tintRatio = tintAmount / (1 - ((iconTransform.ra + iconTransform.ga + iconTransform.ba) / 300));
-        iconTransform.rb *= tintRatio;
-        iconTransform.gb *= tintRatio;
-        iconTransform.bb *= tintRatio;
-        iconTransform.ra = iconTransform.ga = iconTransform.ba = (1 - tintAmount) * 100;
-        iconColor.setTransform(iconTransform);
+        var tintAmount: Number = Math.min(100, Math.max(0, cfg.amount)) * 0.01;
+        GraphicsUtil.setColor(iconLoader, tintColor, tintAmount);
+//        var _loc2 = new flash.geom.Transform(iconLoader);
+//        _loc2.colorTransform = this.__get__colorsManager().getTransform(this.__get__colorSchemeName());
       }
 
       XVMUpdateStyle();
@@ -902,9 +898,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
       // Vehicle Type Icon
       if (iconLoader != null && iconLoader.initialized)
-      {
-      //  iconLoader.addEventListener("complete", this, "XVMIconCompleteLoad");
-      }
+        setupIconLoader();
 
       // Health Bar
       XVMDrawHealthBar(cfg.healthBar);
@@ -993,8 +987,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
         visible = cfg.contourIcon.visible;
         if (visible)
         {
-          iconLoader._x = cfg.contourIcon.x - (80 >> 1);
-          iconLoader._y = cfg.contourIcon.y - (80 >> 1);
+          iconLoader._x = cfg.contourIcon.x - (iconLoader.contentHolder._width >> 1);
+          iconLoader._y = cfg.contourIcon.y - (iconLoader.contentHolder._height >> 1);
           iconLoader._alpha = XVMFormatDynamicAlpha(cfg.contourIcon.alpha, m_curHealth);
         }
         iconLoader._visible = visible;

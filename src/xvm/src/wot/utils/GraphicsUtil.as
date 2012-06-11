@@ -87,11 +87,22 @@ class wot.utils.GraphicsUtil
   }
 
   //method to set a specified movieClip(item:movidClip) to a specified color(col:hex value number)
-  public static function setColor(item, col)
+  public static function setColor(item: MovieClip, col: Number, ratio: Number)
   {
-    var myColorTransform: ColorTransform = new ColorTransform();
-    myColorTransform.rgb = Number(col);
-    item.transform.colorTransform = myColorTransform;
+    var tr: ColorTransform = new ColorTransform();
+    tr.rgb = Number(col);
+
+    if (isFinite(ratio))
+    {
+      tr.redMultiplier = 1 - ratio;
+      tr.greenMultiplier = 1 - ratio;
+      tr.blueMultiplier = 1 - ratio;
+      tr.redOffset *= ratio;
+      tr.greenOffset *= ratio;
+      tr.blueOffset *= ratio;
+    }
+
+    item.transform.colorTransform = tr;
   }
 
   public static function brightenColor(hexColor: Number, percent: Number): Number

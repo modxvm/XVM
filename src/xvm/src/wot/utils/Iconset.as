@@ -3,9 +3,12 @@
  * @author Maxim Schedriviy
  */
 import net.wargaming.controls.UILoaderAlt;
+import wot.utils.Utils;
 
 class wot.utils.Iconset
 {
+  private static var s_failIcons: Array = [];
+
   private var m_owner: Object;
   private var m_completeFunc: Function;
   private var m_originalIcon: String;
@@ -24,19 +27,25 @@ class wot.utils.Iconset
   {
     if (m_iconLoader != null)
     {
-      iconLoader.removeEventListener("ioError", this, "errorLoad");
-      iconLoader.removeEventListener("complete", this, "completeLoad");
+      m_iconLoader.removeEventListener("ioError", this, "errorLoad");
+      m_iconLoader.removeEventListener("complete", this, "completeLoad");
     }
 
     m_iconLoader = iconLoader;
-    iconLoader.addEventListener("ioError", this, "errorLoad");
-    iconLoader.addEventListener("complete", this, "completeLoad");
+    m_iconLoader.addEventListener("ioError", this, "errorLoad");
+    m_iconLoader.addEventListener("complete", this, "completeLoad");
 
-    m_altIcons = altIcons;
-    if (iconLoader._sourceAlt != "")
+    m_altIcons = [];
+    for (var i = 0; i < altIcons.length; ++i)
     {
-      m_altIcons.push(iconLoader._sourceAlt);
-      iconLoader._sourceAlt = "";
+      if (Utils.indexOf(s_failIcons, altIcons[i]) < 0)
+        m_altIcons.push(altIcons[i]);
+    }
+    if (m_iconLoader._sourceAlt != "")
+    {
+      if (Utils.indexOf(s_failIcons, m_iconLoader._sourceAlt) < 0)
+        m_altIcons.push(m_iconLoader._sourceAlt);
+      m_iconLoader._sourceAlt = "";
     }
 
     m_currentIndex = 0;
@@ -56,6 +65,7 @@ class wot.utils.Iconset
   {
     m_currentIndex++;
     //wot.utils.Logger.add("errorLoad(): " + event.target.source + " => " + currentIcon);
+    s_failIcons.push(event.target.source);
     event.target.source = currentIcon;
   }
 

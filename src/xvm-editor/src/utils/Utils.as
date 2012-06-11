@@ -49,6 +49,18 @@ package utils
 		  return value ? String(value) : defaultValue;
 	  }
 	  
+	  public static function trim(s:String):String
+	  { 
+		  return s ? s.replace(/^\s+|\s+$/gs, '') : ""; 
+	  }
+
+	  public static function elapsedMSec(start:Date, end:Date): Number
+	  {
+		  var d1:Number = start.hours * 3600000 + start.minutes * 60000 + start.seconds * 1000 + start.milliseconds;
+		  var d2:Number = end.hours * 3600000 + end.minutes * 60000 + end.seconds * 1000 + end.milliseconds;
+		  return d2 - d1;
+	  }
+
 /*    public static function indexOf(array:Array, value:Object):Number
     {
       var i:Number = 0;
@@ -60,15 +72,6 @@ package utils
         ++i;
       }
       return -1;
-    }
-
-    public static function trim(str: String): String
-    {
-      while (str.charAt(0) == " ")
-        str = str.substring(1, str.length);
-      while (str.charAt(str.length - 1) == " ")
-        str = str.substring(0, str.length-1);
-      return str;
     }
 
     public static function padLeft(str: String, len: Number, char: String)
@@ -135,11 +138,6 @@ package utils
     {
       var pos = fullplayername.indexOf("[");
       return (pos < 0) ? null : fullplayername.slice(pos);
-    }
-
-    public static function elapsedMSec(date1, date2): Number
-    {
-      return date2 - date1;
     }
 */
   }
