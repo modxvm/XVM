@@ -118,12 +118,13 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
 
   function update2()
   {
-    //Logger.add("update");
+    //Logger.add("update2");
+    var saved_icon = data ? data.icon : null;
     if (data)
     {
       // Alternative icon set
       if (!m_iconset)
-        m_iconset = new Iconset(this, completeLoad, data.icon);
+        m_iconset = new Iconset(this, completeLoad);
       m_iconset.init(iconLoader,
         [ data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.battleLoading), data.icon ]);
       data.icon = m_iconset.currentIcon;
@@ -132,7 +133,7 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
     super.update();
 
     if (data)
-      data.icon = m_iconset.originalIcon;
+      data.icon = saved_icon;
 
     if (data && Config.s_config.rating.showPlayersStatistics)
     {

@@ -48,13 +48,14 @@ class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRend
   // override
   function update()
   {
+    var saved_icon = data ? data.icon : null;
     if (data)
     {
       // Alternative icon set
       if (!m_iconset)
-        m_iconset = new Iconset(this, completeLoad, data.icon);
+        m_iconset = new Iconset(this, completeLoad);
       m_iconset.init(iconLoader,
-        [ data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.battleLoading), data.icon ]);
+        [ data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.playersPanel), data.icon ]);
       data.icon = m_iconset.currentIcon;
 
       // Player/clan icons
@@ -69,7 +70,7 @@ class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRend
     super.update();
 
     if (data)
-      data.icon = m_iconset.originalIcon;
+      data.icon = saved_icon;
   }
   
   function XVMClanIcon(cfg)

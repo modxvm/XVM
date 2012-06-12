@@ -28,7 +28,7 @@ namespace wot
       public int eff;
       public int battles;
       public int wins;
-      //public int t_eff;
+      public int t_eff;
       public int t_battles;
       public int t_wins;
       public int t_level;
@@ -681,9 +681,10 @@ namespace wot
             continue;
           if (!currentMember.httpError)
           {
-            Log(1, string.Format("CACHE - {0} {1} {2}: eff={3} battles={4} wins={5} t-battles={6} t-wins={7}",
-              id, pendingPlayers[id].name, pendingPlayers[id].vname, currentMember.stat.eff,
-              currentMember.stat.battles, currentMember.stat.wins, currentMember.stat.t_battles, currentMember.stat.t_wins));
+            Log(1, string.Format("CACHE - {0} {1} {2}: eff={3} battles={4} wins={5} t-eff={6} t-battles={7} t-wins={8}",
+              id, pendingPlayers[id].name, pendingPlayers[id].vname,
+              currentMember.stat.eff, currentMember.stat.battles, currentMember.stat.wins,
+              currentMember.stat.t_eff, currentMember.stat.t_battles, currentMember.stat.t_wins));
             continue;
           }
           if (DateTime.Now.Subtract(currentMember.errorTime).Minutes < Settings.Default.ServerUnavailableTimeout)
@@ -867,7 +868,7 @@ namespace wot
             int t_battles;
             try
             {
-              t_battles = data["vehicle"]["battle_count"].IsInt ? int.Parse(data["vehicle"]["battle_count"].ToString()) : 0;
+              t_battles = data["v"]["b"].IsInt ? int.Parse(data["v"]["b"].ToString()) : 0;
             }
             catch
             {
@@ -877,7 +878,7 @@ namespace wot
             int t_wins;
             try
             {
-              t_wins = data["vehicle"]["win_count"].IsInt ? int.Parse(data["vehicle"]["win_count"].ToString()) : 0;
+              t_wins = data["v"]["w"].IsInt ? int.Parse(data["v"]["w"].ToString()) : 0;
             }
             catch
             {
@@ -887,7 +888,7 @@ namespace wot
             int t_level;
             try
             {
-              t_level = data["vehicle"]["level"].IsInt ? int.Parse(data["vehicle"]["level"].ToString()) : 0;
+              t_level = data["v"]["l"].IsInt ? int.Parse(data["v"]["l"].ToString()) : 0;
             }
             catch
             {

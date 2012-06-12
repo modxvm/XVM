@@ -11,16 +11,14 @@ class wot.utils.Iconset
 
   private var m_owner: Object;
   private var m_completeFunc: Function;
-  private var m_originalIcon: String;
   private var m_iconLoader: UILoaderAlt = null;
   private var m_altIcons: Array;
   private var m_currentIndex: Number;
   
-  public function Iconset(owner: Object, completeFunc: Function, originalIcon: String)
+  public function Iconset(owner: Object, completeFunc: Function)
   {
     m_owner = owner;
     m_completeFunc = completeFunc;
-    m_originalIcon = originalIcon;
   }
 
   public function init(iconLoader: UILoaderAlt, altIcons: Array)
@@ -51,11 +49,6 @@ class wot.utils.Iconset
     m_currentIndex = 0;
   }
 
-  public function get originalIcon(): String
-  {
-    return m_originalIcon;
-  }
-  
   public function get currentIcon(): String
   {
     return (m_currentIndex < m_altIcons.length) ? m_altIcons[m_currentIndex] : "";

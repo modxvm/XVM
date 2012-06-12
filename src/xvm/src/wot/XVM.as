@@ -105,7 +105,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       if (!Config.s_config.battle.hideXVMVersion && !_global.xvmWatermark)
       {
         _global.xvmWatermark = true;
-        var wm = _root.createTextField("xvmWatermark", _root.getNextHighestDepth(), -1, -2, 50, 16);
+        var wm = _root.createTextField("xvmWatermark", _root.getNextHighestDepth(), -1, -2, 100, 16);
         wm.antiAliasType = "advanced";
         wm.setNewTextFormat(new TextFormat("$FieldFont", 8, 0x808080, false, false, false, null, null, "left"));
         wm._alpha = 50;
@@ -258,7 +258,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
     // Alternative icon set
     if (!m_iconset)
-      m_iconset = new Iconset(this, completeLoad, m_source);
+      m_iconset = new Iconset(this, completeLoad);
     m_iconset.init(iconLoader,
       [ m_source.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.vehicleMarker), m_source ]);
     iconLoader.source = m_iconset.currentIcon;

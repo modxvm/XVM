@@ -1,4 +1,8 @@
-﻿XVM-2.4.test8:
+﻿XVM-2.4.test9:
+  * proxy server protocol updated
+  * some bugs fixed
+
+XVM-2.4.test8:
   * some bugs fixed
 
 XVM-2.4.test7:
