@@ -21,17 +21,19 @@ namespace wot
     [Serializable]
     public class Stat
     {
-      public int id;
-      public String name;
-      public String clan;
-      public String vname;
-      public int eff;
-      public int battles;
-      public int wins;
-      public int t_eff;
-      public int t_battles;
-      public int t_wins;
-      public int t_level;
+      public int id;          // player id
+      public String name;     // player name
+      public String clan;     // clan
+      public String vn;       // vehicle name
+      public int b;           // total battles
+      public int w;           // total wins
+      public int e;           // global efficiency
+      public int tb;          // tank battles
+      public int tw;          // tank wins
+      public int tl;          // tank level
+      public int ts;          // tank spotted
+      public int td;          // tank damage
+      public int tf;          // tank frags
     }
 
     [Serializable]
@@ -183,7 +185,7 @@ namespace wot
             id = id,
             name = name,
             clan = clan,
-            vname = vname,
+            vn = vname,
           };
         }
         added = true;
@@ -539,7 +541,7 @@ namespace wot
       int pos = 0;
       foreach (int id in pendingPlayers.Keys)
       {
-        string cacheKey = id + "=" + pendingPlayers[id].vname;
+        string cacheKey = id + "=" + pendingPlayers[id].vn;
         if (cache.ContainsKey(cacheKey))
         {
           res.players[pos] = cache[cacheKey].stat;
@@ -673,7 +675,7 @@ namespace wot
 
       foreach (int id in pendingPlayers.Keys)
       {
-        string cacheKey = id + "=" + pendingPlayers[id].vname;
+        string cacheKey = id + "=" + pendingPlayers[id].vn;
         if (cache.ContainsKey(cacheKey))
         {
           PlayerInfo currentMember = cache[cacheKey];
@@ -681,10 +683,10 @@ namespace wot
             continue;
           if (!currentMember.httpError)
           {
-            Log(1, string.Format("CACHE - {0} {1} {2}: eff={3} battles={4} wins={5} t-eff={6} t-battles={7} t-wins={8}",
-              id, pendingPlayers[id].name, pendingPlayers[id].vname,
-              currentMember.stat.eff, currentMember.stat.battles, currentMember.stat.wins,
-              currentMember.stat.t_eff, currentMember.stat.t_battles, currentMember.stat.t_wins));
+            Log(1, string.Format("CACHE - {0} {1} {2}: eff={3} battles={4} wins={5} t-battles={6} t-wins={7}",
+              id, pendingPlayers[id].name, pendingPlayers[id].vn,
+              currentMember.stat.e, currentMember.stat.b, currentMember.stat.w,
+              currentMember.stat.tb, currentMember.stat.tw));
             continue;
           }
           if (DateTime.Now.Subtract(currentMember.errorTime).Minutes < Settings.Default.ServerUnavailableTimeout)
@@ -693,8 +695,8 @@ namespace wot
         }
 
         // playerId=vname,... || playerId,...
-        forUpdate.Add(String.IsNullOrEmpty(pendingPlayers[id].vname) ? id.ToString()
-          : String.Format("{0}={1}", id, pendingPlayers[id].vname));
+        forUpdate.Add(String.IsNullOrEmpty(pendingPlayers[id].vn) ? id.ToString()
+          : String.Format("{0}={1}", id, pendingPlayers[id].vn));
         forUpdateIds.Add(id);
       }
 
@@ -721,7 +723,7 @@ namespace wot
 
         foreach (Stat stat in res.players)
         {
-          string cacheKey = stat.id + "=" + stat.vname;
+          string cacheKey = stat.id + "=" + stat.vn;
           if (String.IsNullOrEmpty(stat.name))
             continue;
           cache[cacheKey] = new PlayerInfo()
@@ -737,7 +739,7 @@ namespace wot
         // disable stat retrieving for people in cache, but not in server db
         foreach (int id in forUpdateIds)
         {
-          string cacheKey = id + "=" + pendingPlayers[id].vname;
+          string cacheKey = id + "=" + pendingPlayers[id].vn;
           if (cache.ContainsKey(cacheKey))
             continue;
 
@@ -764,7 +766,7 @@ namespace wot
         for (var i = 0; i < forUpdateIds.Count; i++)
         {
           int id = forUpdateIds[i];
-          string cacheKey = id + "=" + pendingPlayers[id].vname;
+          string cacheKey = id + "=" + pendingPlayers[id].vn;
           cache[cacheKey] = new PlayerInfo()
           {
             stat = new Stat()
@@ -777,6 +779,34 @@ namespace wot
             errorTime = DateTime.Now
           };
         }
+      }
+    }
+
+    private static int ParseInt(JsonData data, params String[] path)
+    {
+      try
+      {
+        for (int i = 0; i < path.Length - 1; ++i)
+          data = data[path[i]];
+        return data[path[path.Length - 1]].IsInt ? int.Parse(data[path[path.Length - 1]].ToString()) : 0;
+      }
+      catch
+      {
+        return 0;
+      }
+    }
+
+    private static string ParseString(JsonData data, params String[] path)
+    {
+      try
+      {
+        for (int i = 0; i < path.Length - 1; ++i)
+          data = data[path[i]];
+        return data[path[path.Length - 1]].IsString ? data[path[path.Length - 1]].ToString() : "";
+      }
+      catch
+      {
+        return "";
       }
     }
 
@@ -795,118 +825,20 @@ namespace wot
           int pos = 0;
           foreach (JsonData data in jd["players"])
           {
-            int id;
-            try
-            {
-              id = data["id"].IsInt ? int.Parse(data["id"].ToString()) : 0;
-            }
-            catch
-            {
-              id = 0;
-            }
-
-            string name;
-            try
-            {
-              name = data["name"].IsString ? data["name"].ToString() : "";
-            }
-            catch
-            {
-              name = "";
-            }
-
-            string vname;
-            try
-            {
-              vname = data["vname"].IsString ? data["vname"].ToString() : "";
-            }
-            catch
-            {
-              vname = "";
-            }
-
-            int eff;
-            try
-            {
-              eff = data["eff"].IsInt ? int.Parse(data["eff"].ToString()) : 0;
-            }
-            catch
-            {
-              eff = 0;
-            }
-
-            int battles;
-            try
-            {
-              battles = data["battles"].IsInt ? int.Parse(data["battles"].ToString()) : 0;
-            }
-            catch
-            {
-              battles = 0;
-            }
-
-            int wins;
-            try
-            {
-              wins = data["wins"].IsInt ? int.Parse(data["wins"].ToString()) : 0;
-            }
-            catch
-            {
-              wins = 0;
-            }
-
-            /*int t_eff;
-            try
-            {
-              t_eff = data["t_eff"].IsInt ? int.Parse(data["t_eff"].ToString()) : 0;
-            }
-            catch
-            {
-              t_eff = 0;
-            }*/
-
-            int t_battles;
-            try
-            {
-              t_battles = data["v"]["b"].IsInt ? int.Parse(data["v"]["b"].ToString()) : 0;
-            }
-            catch
-            {
-              t_battles = 0;
-            }
-
-            int t_wins;
-            try
-            {
-              t_wins = data["v"]["w"].IsInt ? int.Parse(data["v"]["w"].ToString()) : 0;
-            }
-            catch
-            {
-              t_wins = 0;
-            }
-
-            int t_level;
-            try
-            {
-              t_level = data["v"]["l"].IsInt ? int.Parse(data["v"]["l"].ToString()) : 0;
-            }
-            catch
-            {
-              t_level = 0;
-            }
-
             res.players[pos++] = new Stat()
             {
-              id = id,
-              name = name,
-              vname = vname,
-              eff = eff,
-              battles = battles,
-              wins = wins,
-              //t_eff = t_eff,
-              t_battles = t_battles,
-              t_wins = t_wins,
-              t_level = t_level,
+              id = ParseInt(data, "id"),
+              name = ParseString(data, "name"),
+              vn = ParseString(data, "vname"),
+              b = ParseInt(data, "battles"),
+              w = ParseInt(data, "wins"),
+              e = ParseInt(data, "eff"),
+              tb = ParseInt(data, "v", "b"),
+              tw = ParseInt(data, "v", "w"),
+              tl = ParseInt(data, "v", "l"),
+              ts = ParseInt(data, "v", "s"),
+              td = ParseInt(data, "v", "d"),
+              tf = ParseInt(data, "v", "f"),
             };
           }
         }

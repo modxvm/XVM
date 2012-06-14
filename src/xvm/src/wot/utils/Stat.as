@@ -29,14 +29,17 @@ import wot.utils.VehicleInfo;
   //   loaded: Boolean
 
   // s_player_ratings members:
-  //   battles
-  //   wins
-  //   rating
-  //   eff
-  //   t_battles
-  //   t_wins
-  //   t_rating
-  //   t_level
+  //   b - battles
+  //   w - wins
+  //   r - global win ratio
+  //   e - eff
+  //   tb - tank battles
+  //   tw - tank wins
+  //   tr - tank win ratio
+  //   tl - tank level
+  //   ts - tank spotted
+  //   td - tank damage
+  //   tf - tank frags
 
 class wot.utils.Stat
 {
@@ -93,34 +96,34 @@ class wot.utils.Stat
       {
         if (!stat.notInDb)
         {
-          rating = Utils.toInt(stat.rating);
+          rating = Utils.toInt(stat.r);
           sRating = rating ? String(rating) + "%" : "--%";
 
-          eff = Utils.toInt(stat.eff);
+          eff = Utils.toInt(stat.e);
           sEff = eff ? String(eff) : "--";
 
           if (rating)
           {
-            var bn: Number = Utils.toInt(stat.battles);
+            var bn: Number = Utils.toInt(stat.b);
             kb = bn > 0 ? Math.round(bn / 1000) : -1;
             sKb = kb >= 0 ? String(kb) + "k" : "";
             sBattles = bn > 0 ? Utils.toString(bn) : "";
-            sWins = bn > 0 ? String(Utils.toInt(stat.wins)) : "";
+            sWins = bn > 0 ? String(Utils.toInt(stat.w)) : "";
           }
 
-          t_rating = Utils.toInt(stat.t_rating);
+          t_rating = Utils.toInt(stat.tr);
           sTRating = t_rating ? String(t_rating) + "%" : "--%";
 
           if (t_rating)
           {
-            var bn: Number = Utils.toInt(stat.t_battles);
+            var bn: Number = Utils.toInt(stat.tb);
             t_kb = bn > 0 ? Math.round(bn / 100) / 10 : -1;
             t_battles = bn > 0 ? bn : -1;
             sTKb = t_kb >= 0 ? Sprintf.format("%.1fk", t_kb) : "";
             if (sTKb.length > 0 && sTKb.charAt(0) == '0')
               sTKb = sTKb.slice(1);
             sTBattles = bn > 0 ? Utils.toString(bn) : "";
-            sTWins = bn > 0 ? String(Utils.toInt(stat.t_wins)) : "";
+            sTWins = bn > 0 ? String(Utils.toInt(stat.tw)) : "";
           }
         }
       }
@@ -458,21 +461,21 @@ class wot.utils.Stat
     lv.load(command);
   }
 
-  public static function CalculateRating(data)
+  public static function CalculateRating(stat)
   {
-    data.rating = data.battles > 0 ? Math.round(data.wins / data.battles * 100) : 0;
+    stat.r = stat.b > 0 ? Math.round(stat.w / stat.b * 100) : 0;
 
-    if (!data.t_battles || data.t_battles <= 0 || !data.t_level || data.t_level <= 0)
-      data.t_rating = data.rating;
+    if (!stat.tb || stat.tb <= 0 || !stat.tl || stat.tl <= 0)
+      stat.tr = stat.r;
     else
     {
-      var Or = data.rating;
-      var Tr = Math.round(data.t_wins / data.t_battles * 100);
-      var Tb = Math.min(data.t_battles, 100);
-      var Tl = Math.max(data.t_level, 10) * 10;
-      data.t_rating = Math.round(Or - (Or - Tr) * Tb / Tl);
+      var Or = stat.r;
+      var Tr = Math.round(stat.tw / stat.tb * 100);
+      var Tb = Math.min(stat.tb, 100);
+      var Tl = Math.max(stat.tl, 10) * 10;
+      stat.tr = Math.round(Or - (Or - Tr) * Tb / Tl);
     }
-    //Logger.addObject(data);
+    //Logger.addObject(stat);
   }
 
   private static function UpdateAll()
@@ -513,22 +516,16 @@ class wot.utils.Stat
     var tier = guessBattleTier();
     //Logger.add("tier: " + tier);
 
-    // Calculate average efficiency.
-    var ae1 = AvgStat("eff", Defines.TEAM_ALLY);
-    var ae2 = AvgStat("eff", Defines.TEAM_ENEMY);
 
-    var ar1 = AvgStat("rating", Defines.TEAM_ALLY);
-    var ar2 = AvgStat("rating", Defines.TEAM_ENEMY);
+    // Calculate average values
+    var a_r = 48; // avg rating is approximately 48%
 
-    var ab1 = AvgStat("battles", Defines.TEAM_ALLY);
-    var ab2 = AvgStat("battles", Defines.TEAM_ENEMY);
+    var ae1 = AvgStat("e", Defines.TEAM_ALLY);
+    var ae2 = AvgStat("e", Defines.TEAM_ENEMY);
 
-    var art1 = AvgStat("t_rating", Defines.TEAM_ALLY);
-    var art2 = AvgStat("t_rating", Defines.TEAM_ENEMY);
-
-    var abt1 = AvgStat("t_battles", Defines.TEAM_ALLY);
-    var abt2 = AvgStat("t_battles", Defines.TEAM_ENEMY);
-    //Logger.add(ae1 + " " + ae2 + " - " + ar1 + " " + ar2 + " - " + ab1 + " " + ab2);
+    var ab1 = AvgStat("b", Defines.TEAM_ALLY);
+    var ab2 = AvgStat("b", Defines.TEAM_ENEMY);
+    //Logger.add(ae1 + " " + ae2 + " - " + ab1 + " " + ab2);
 
     var m1 = 0;
     var m2 = 0;
@@ -545,15 +542,14 @@ class wot.utils.Stat
         return { error: "No data for: " + VehicleInfo.getName(pdata.icon) };
 
       var eff: Number = s_player_ratings[pname].eff || ((pdata.team == Defines.TEAM_ALLY) ? ae1 : ae2);
-      var gwr: Number = (s_player_ratings[pname].rating || ((pdata.team == Defines.TEAM_ALLY) ? ar1 : ar2)) / 100.0;
+      var gwr: Number = (s_player_ratings[pname].rating || ((pdata.team == Defines.TEAM_ALLY) ? a_r : a_r)) / 100.0;
       var bat: Number = (s_player_ratings[pname].battles || ((pdata.team == Defines.TEAM_ALLY) ? ab1 : ab2)) / 100000.0;
-      var gwrt: Number = (s_player_ratings[pname].t_rating || ((pdata.team == Defines.TEAM_ALLY) ? art1 : art2)) / 100.0;
-      var batt: Number = (s_player_ratings[pname].t_battles || ((pdata.team == Defines.TEAM_ALLY) ? abt1 : abt2)) / 1000.0;
+      var gwrt: Number = (s_player_ratings[pname].t_rating || ((pdata.team == Defines.TEAM_ALLY) ? a_r : a_r)) / 100.0;
       //Logger.addObject(s_player_ratings[pname], "s_player_ratings[" + pname + "]");
 
       var tx = (vi.tiers[0] + vi.tiers[1]) / 2.0 - tier;
-      var mx = eff * (1 + gwr - 0.48) * (1 + bat) * (1 + 0.25 * tx);
-      var mxt = eff * (1 + gwrt - 0.48) /* * (1 + batt)*/ * (1 + 0.25 * tx);
+      var mx = eff * (1 + gwr - (a_r / 100.0)) * (1 + 0.25 * tx) * (1 + bat);
+      var mxt = eff * (1 + gwrt - (a_r / 100.0)) * (1 + 0.25 * tx);
       if (pdata.team == Defines.TEAM_ALLY) m1 += mx else m2 += mx;
       if (pdata.team == Defines.TEAM_ALLY) mt1 += mxt else mt2 += mxt;
       //Logger.add("mx=" + mx + " tx=" + tx + " eff=" + int(eff) + " gwr=" + int(gwr) + " kb=" + int(bat));

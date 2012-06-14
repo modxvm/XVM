@@ -595,11 +595,14 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       var n = getNextHighestDepth();
       var textField: TextField = createTextField("textField" + n, n, 0, 0, 140, 31);
       textField.html = false; // FIXIT: in html mode Font and Position are wrong.
-      textField.antiAliasType = "normal";
       textField.embedFonts = true;
       textField.selectable = false;
       textField.multiline = false;
       textField.wordWrap = false;
+      textField.antiAliasType = "normal";
+      //textField.antiAliasType = "advanced";
+      //textField.gridFitType = "none";
+      //textField.autoSize = "center"; // http://theolagendijk.com/2006/09/07/aligning-htmltext-inside-flash-textfield/
       var textFormat: TextFormat = XVMCreateNewTextFormat(cfg.font);
       textField.setNewTextFormat(textFormat);
       textField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
@@ -727,6 +730,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
         {
           var tf = textFields[st][i];
           tf.field.text = XVMFormatDynamicText(tf.format, curHealth);
+          //tf.field.htmlText = "<p align='center'><font face='$FieldFont'>" + XVMFormatDynamicText(tf.format, curHealth) + "</font></p>";
           tf.field.textColor = XVMFormatDynamicColor(tf.color, curHealth);
           tf.field._alpha = XVMFormatDynamicAlpha(tf.alpha, curHealth);
         }
