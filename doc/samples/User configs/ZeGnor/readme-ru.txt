@@ -1,7 +1,8 @@
-﻿Ссылка на оригинал: http://www.koreanrandom.com/forum/topic/1384-xvm-configurations/page__p__10794#entry10794
+﻿Ссылка на оригинал: http://www.koreanrandom.com/forum/topic/1384-xvm-configurations/#entry11269
 
 Изменения:
-  Экран загрузки боя
+
+Экран загрузки боя
   Иконки игрока/клана вынесены за иконки взвода. Размер 16х16.
   Статистика выравнина на 3-4 символа.
 

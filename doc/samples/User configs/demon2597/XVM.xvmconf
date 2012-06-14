@@ -13,7 +13,7 @@
     "author": "demon2597",                        // автор конфига
     "description": "My settings for XVM",  // описание конфига
     "url": "http://www.koreanrandom.com/forum/topic/1384-xvm-configurations/", // адрес, где выкладываеются обновления конфига
-    "date": "25.05.2012",                       // дата последней модификации конфига
+    "date": "11.06.2012",                       // дата последней модификации конфига
     "gameVersion": "0.7.3",                     // поддерживаемая версия игры
     "modMinVersion": "2.3"                      // минимально необходимая версия мода XVM
   },
@@ -47,9 +47,9 @@
       "alpha": 90                               //   прозрачность иконки игрока/клана
     },
     // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatLeft": "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatLeft": "<font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:rating}}'>{{rating:3}}</font>",
     // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
+    "formatRight": "<font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{kb:3}}</font>"
   },
   // Параметры окна статистики по клавише Tab
   "statisticForm": {
@@ -58,9 +58,9 @@
     // параметры отображения иконки игрока/клана (см. battleLoading выше).
     "clanIcon": { "show": false, "x": 0, "y": 6, "xr": 0, "yr": 6, "h": 16, "w": 16, "alpha": 90 },
     // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatLeft": "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatLeft": "<font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:rating}}'>{{rating:3}}</font>",
     // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
+    "formatRight": "<font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{kb:3}}</font>"
   },
   // Параметры панелей игроков ("ушей")
   "playersPanel": {
@@ -89,8 +89,8 @@
     "large": {
       "width": 110,  // 0..250 - задает ширину поля имени игрока. По умолчанию: 170
       // формат отображения имени игрока (допускаются макроподстановки, см. readme-ru.txt)
-      "nickFormatLeft": "<font color='{{c:kb}}'>{{kb}}</font>  {{nick}}",
-      "nickFormatRight": "{{nick}}  <font color='{{c:kb}}'>{{kb}}</font>",
+      "nickFormatLeft": "<font color='{{c:kb}}'>{{kb:3}}</font> {{nick}}",
+      "nickFormatRight": "{{nick}} <font color='{{c:kb}}'>{{kb:3}}</font>",
       // формат отображения названия танка (допускаются макроподстановки, см. readme-ru.txt)
       "vehicleFormatLeft": "<font color='{{c:eff}}'>{{eff}}</font>",
       "vehicleFormatRight": "<font color='{{c:eff}}'>{{eff}}</font>"
@@ -353,7 +353,7 @@
               "name": "Название танка",           // название текстового поля, ни на что не влияет
               "visible": true,                // false - не отображать
               "x": 0,                         // положение по оси X
-              "y": -43,                       // положение по оси Y
+              "y": -59,                       // положение по оси Y
               "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
               "color": null,                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
               "font": {                       // параметры шрифта
@@ -372,12 +372,58 @@
               },
               "format": "{{vehicle}}"         // формат текста. См. описание макросов в readme-ru.txt
             },
+        // Текстовое поле с количеством боев на танке
+            {
+              "visible": true,                // false - не отображать
+              "x": -14,                         // положение по оси X
+              "y": -41,                       // положение по оси Y
+              "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+              "color": "{{c:t-battles}}",                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
+              "font": {                       // параметры шрифта
+                "name": "$FieldFont",         //   название
+                "size": 13,                   //   размер
+                "align": "center",            //   выравнивание текста (left, center, right)
+                "bold": true                 //   обычный (false) или жирный (true)
+              },
+              "shadow": {                     // параметры тени
+                "alpha": 100,                 //   прозрачность
+                "color": "0x000000",          //   цвет
+                "angle": 45,                  //   угол смещения
+                "strength": 300,              //   интенсивность
+                "distance": 1,                //   дистанция смещение
+                "size": 1                     //   размер
+              },
+              "format": "{{t-battles}}"         // формат текста. См. описание макросов в readme-ru.txt
+            },
+        // Текстовое поле с общим количеством боев
+            {
+              "visible": true,                // false - не отображать
+              "x": 14,                         // положение по оси X
+              "y": -41,                       // положение по оси Y
+              "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+              "color": "{{c:kb}}",                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
+              "font": {                       // параметры шрифта
+                "name": "$FieldFont",         //   название
+                "size": 13,                   //   размер
+                "align": "center",            //   выравнивание текста (left, center, right)
+                "bold": true                 //   обычный (false) или жирный (true)
+              },
+              "shadow": {                     // параметры тени
+                "alpha": 100,                 //   прозрачность
+                "color": "0x000000",          //   цвет
+                "angle": 45,                  //   угол смещения
+                "strength": 300,              //   интенсивность
+                "distance": 1,                //   дистанция смещение
+                "size": 1                     //   размер
+              },
+              "format": "{{kb}}"         // формат текста. См. описание макросов в readme-ru.txt
+            },
             // Текстовое поле с именем игрока
             {
               "name": "Имя игрока",     // название текстового поля, ни на что не влияет
               "visible": true,                // false - не отображать
               "x": 0,                         // положение по оси X
-              "y": -61,                       // положение по оси Y
+              "y": -78,                       // положение по оси Y
               "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
               "color": null,                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
               "font": {                       // параметры шрифта
@@ -536,8 +582,8 @@
             },
             "speed": 2,                       //   время отображения отлетающего урона
             "maxRange": 60,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "Уничтожен!",      //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "Взрыв БК!"       //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+            "damageMessage": "{{vehicle}}\nуничтожен!",      //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
+            "blowupMessage": "{{vehicle}}\nвзрыв БК!"       //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -635,8 +681,8 @@
             },
             "speed": 2,                       //   время отображения отлетающего урона
             "maxRange": 60,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "Уничтожен!",      //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "Взрыв БК!"       //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+            "damageMessage": "{{vehicle}}\nуничтожен!",      //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
+            "blowupMessage": "{{vehicle}}\nвзрыв БК!"       //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -970,7 +1016,7 @@
             {
               "visible": true,                // false - не отображать
               "x": 0,                         // положение по оси X
-              "y": -43,                       // положение по оси Y
+              "y": -59,                       // положение по оси Y
               "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
               "color": null,                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
               "font": {                       // параметры шрифта
@@ -989,11 +1035,57 @@
               },
               "format": "{{vehicle}}"         // формат текста. См. описание макросов в readme-ru.txt
             },
+        // Текстовое поле с количеством боев на танке
+            {
+              "visible": true,                // false - не отображать
+              "x": -14,                         // положение по оси X
+              "y": -41,                       // положение по оси Y
+              "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+              "color": "{{c:t-battles}}",                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
+              "font": {                       // параметры шрифта
+                "name": "$FieldFont",         //   название
+                "size": 13,                   //   размер
+                "align": "center",            //   выравнивание текста (left, center, right)
+                "bold": true                 //   обычный (false) или жирный (true)
+              },
+              "shadow": {                     // параметры тени
+                "alpha": 100,                 //   прозрачность
+                "color": "0x000000",          //   цвет
+                "angle": 45,                  //   угол смещения
+                "strength": 300,              //   интенсивность
+                "distance": 1,                //   дистанция смещение
+                "size": 1                     //   размер
+              },
+              "format": "{{t-battles}}"         // формат текста. См. описание макросов в readme-ru.txt
+            },
+        // Текстовое поле с общим количеством боев
+            {
+              "visible": true,                // false - не отображать
+              "x": 14,                         // положение по оси X
+              "y": -41,                       // положение по оси Y
+              "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+              "color": "{{c:kb}}",                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
+              "font": {                       // параметры шрифта
+                "name": "$FieldFont",         //   название
+                "size": 13,                   //   размер
+                "align": "center",            //   выравнивание текста (left, center, right)
+                "bold": true                 //   обычный (false) или жирный (true)
+              },
+              "shadow": {                     // параметры тени
+                "alpha": 100,                 //   прозрачность
+                "color": "0x000000",          //   цвет
+                "angle": 45,                  //   угол смещения
+                "strength": 300,              //   интенсивность
+                "distance": 1,                //   дистанция смещение
+                "size": 1                     //   размер
+              },
+              "format": "{{kb}}"         // формат текста. См. описание макросов в readme-ru.txt
+            },
             // Текстовое поле с именем игрока
             {
               "visible": true,                // false - не отображать
               "x": 0,                         // положение по оси X
-              "y": -61,                       // положение по оси Y
+              "y": -78,                       // положение по оси Y
               "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
               "color": null,                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
               "font": {                       // параметры шрифта
@@ -1152,8 +1244,8 @@
             },
             "speed": 2,                       //   время отображения отлетающего урона
             "maxRange": 60,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "Уничтожен!",      //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "Взрыв БК!"       //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+            "damageMessage": "{{vehicle}}\nуничтожен!",      //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
+            "blowupMessage": "{{vehicle}}\nвзрыв БК!"       //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -1251,8 +1343,8 @@
             },
             "speed": 2,                       //   время отображения отлетающего урона
             "maxRange": 60,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "Уничтожен!",      //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "Взрыв БК!"       //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+            "damageMessage": "{{vehicle}}\nуничтожен!",      //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
+            "blowupMessage": "{{vehicle}}\nвзрыв БК!"       //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -1405,6 +1497,15 @@
       { "value": 8,   "color": "0x4FFD02" },
       { "value": 12,  "color": "0x029615" },
       { "value": 999, "color": "0xCA02B1" }
+    ],
+    // Динамический цвет по количеству боев по текущему танку (только в xvm-full). Значения от меньшего к большему.
+    "t_battles": [
+      { "value": 100,  "color": "0xC81103" },
+      { "value": 200,  "color": "0xFE7903" },
+      { "value": 300,  "color": "0xFCFA05" },
+      { "value": 500,  "color": "0x4FFD02" },
+      { "value": 800,  "color": "0x029615" },
+      { "value": 9999, "color": "0xCA02B1" }
     ]
   },
   // Настройки динамической прозрачности
@@ -1733,6 +1834,148 @@
     },
     { "folder": "NA", "players": [
         { "nick": "sirmax",     "icon": "XVM.png" },
+        { "nick": "WooSai",     "icon": "XVM.png" },
+        { "nick": "Millbarge",  "icon": "Millbarge.png" },
+        { "clan": "[SSGS]",     "icon": "SSGS.png" },
+        { "clan": "[SSGS2]",    "icon": "SSGS.png" },
+        { "clan": "[SSGS3]",    "icon": "SSGS.png" },
+        { "clan": "[BT]",       "icon": "BT.png" },
+        { "clan": "[PBKAC]",    "icon": "PBKAC.png" },
+        { "clan": "[RDDT]",     "icon": "RDDT.png" },
+        { "clan": "[RDDT3]",    "icon": "RDDT.png" },
+        { "clan": "[RDDT4]",    "icon": "RDDT.png" },
+        { "clan": "[RDDT5]",    "icon": "RDDT.png" },
+        { "clan": "[PANZA]",    "icon": "PANZA.png" },
+        { "clan": "[PANZX]",    "icon": "PANZA.png" },
+        { "clan": "[PANZK]",    "icon": "PANZA.png" },
+        { "clan": "[PANZY]",    "icon": "PANZA.png" },
+        { "clan": "[KING]",     "icon": "KING.png" },
+        { "clan": "[KING3]",    "icon": "KING.png" },
+        { "clan": "[DEMI]",     "icon": "DEMI.png" },
+        { "clan": "[DEMII]",    "icon": "DEMI.png" },
+        { "clan": "[13TH]",     "icon": "13TH.png" },
+        { "clan": "[13TH2]",    "icon": "13TH.png" },
+        { "clan": "[RS]",       "icon": "RS.png" },
+        { "clan": "[RSRDD]",    "icon": "RSRDD.png" },
+        { "clan": "[RSRC]",     "icon": "RSRDD.png" },
+        { "clan": "[CB]",       "icon": "CB.png" },
+        { "clan": "[CB2]",      "icon": "CB.png" },
+        { "clan": "[CB3]",      "icon": "CB.png" },
+        { "clan": "[CB4]",      "icon": "CB.png" },
+        { "clan": "[WWPD]",     "icon": "WWPD.png" },
+        { "clan": "[WWPD2]",    "icon": "WWPD.png" },
+        { "clan": "[3AC]",      "icon": "3AC.png" },
+        { "clan": "[3AC-S]",    "icon": "3AC.png" },
+        { "clan": "[TSF]",      "icon": "TSF.png" },
+        { "clan": "[TSF-2]",    "icon": "TSF.png" },
+        { "clan": "[MFH]",      "icon": "MFH.png" },
+        { "clan": "[MFH-B]",    "icon": "MFH.png" },
+        { "clan": "[ACA]",      "icon": "ACA.png" },
+        { "clan": "[ACA-T]",    "icon": "ACA.png" },
+        { "clan": "[1STCV]",    "icon": "1STCV.png" },
+        { "clan": "[1STCA]",    "icon": "1STCV.png" },
+        { "clan": "[1STCG]",    "icon": "1STCV.png" },
+        { "clan": "[1STCD]",    "icon": "1STCV.png" },
+        { "clan": "[5CAD]",     "icon": "5CAD.png" },
+        { "clan": "[5CAD2]",    "icon": "5CAD.png" },
+        { "clan": "[5CAD3]",    "icon": "5CAD.png" },
+        { "clan": "[5CAD4]",    "icon": "5CAD.png" },
+        { "clan": "[5CAD5]",    "icon": "5CAD.png" },
+        { "clan": "[EGO]",      "icon": "EGO.png" },
+        { "clan": "[EGO-A]",    "icon": "EGO.png" },
+        { "clan": "[PVP]",      "icon": "PVP.png" },
+        { "clan": "[PVP-2]",    "icon": "PVP.png" },
+        { "clan": "[PVP-3]",    "icon": "PVP.png" },
+        { "clan": "[PVP-4]",    "icon": "PVP.png" },
+        { "clan": "[PVP-5]",    "icon": "PVP.png" },
+        { "clan": "[PVP-6]",    "icon": "PVP.png" },
+        { "clan": "[PVP-7]",    "icon": "PVP.png" },
+        { "clan": "[_BAD_]",    "icon": "_BAD_.png" },
+        { "clan": "[1STCV]",    "icon": "1STCAV.png" },
+        { "clan": "[5AD]",      "icon": "5AD.png" },
+        { "clan": "[5IB]",      "icon": "5IB.png" },
+        { "clan": "[13TH]",     "icon": "13TH.png" },
+        { "clan": "[7THAD]",    "icon": "7THAD.png" },
+        { "clan": "[ADD]",      "icon": "ADD.png" },
+        { "clan": "[ANGER]",    "icon": "ANGER.png" },
+        { "clan": "[ANVIL]",    "icon": "ANVIL.png" },
+        { "clan": "[BASIN]",    "icon": "BASIN.png" },
+        { "clan": "[-BC-]",     "icon": "-BC-.png" },
+        { "clan": "[-BC-V]",    "icon": "-BC-.png" },
+        { "clan": "[BD]",       "icon": "BD.png" },
+        { "clan": "[BOSS]",     "icon": "BOSS.png" },
+        { "clan": "[BSS]",      "icon": "BSS.png" },
+        { "clan": "[CB]",       "icon": "CB.png" },
+        { "clan": "[CIA]",      "icon": "CIA.png" },
+        { "clan": "[-CL-]",     "icon": "CL-.png" },
+        { "clan": "[COD]",      "icon": "COD.png" },
+        { "clan": "[DOKSA]",    "icon": "DOKSA.png" },
+        { "clan": "[D-O-S]",    "icon": "D-O-S.png" },
+        { "clan": "[DRB]",      "icon": "DRB.png" },
+        { "clan": "[EARCT]",    "icon": "EARCT.png" },
+        { "clan": "[EGO]",      "icon": "EGO.png" },
+        { "clan": "[3E]",       "icon": "3E.png" },
+        { "clan": "[FORGE]",    "icon": "FORGE.png" },
+        { "clan": "[-G-]",      "icon": "-G-.png" },
+        { "clan": "[HAVOK]",    "icon": "HAVOK.png" },
+        { "clan": "[HAV0K]",    "icon": "HAV0K.png" },
+        { "clan": "[HBS]",      "icon": "HBS.png" },
+        { "clan": "[IL]",       "icon": "IL.png" },
+        { "clan": "[INCA]",     "icon": "INCA.png" },
+        { "clan": "[IOP]",      "icon": "IOP.png" },
+        { "clan": "[IR]",       "icon": "IR.png" },
+        { "clan": "[JDAM]",     "icon": "JDAM.png" },
+        { "clan": "[KING]",     "icon": "KING.png" },
+        { "clan": "[KISS]",     "icon": "KISS.png" },
+        { "clan": "[L2R]",      "icon": "L2R.png" },
+        { "clan": "[MARV]",     "icon": "MARV.png" },
+        { "clan": "[MFH]",      "icon": "MFH.png" },
+        { "clan": "[MOWR]",     "icon": "MOWR.png" },
+        { "clan": "[NDP]",      "icon": "NDP.png" },
+        { "clan": "[NOD]",      "icon": "NOD.png" },
+        { "clan": "[NUKE]",     "icon": "NUKE.png" },
+        { "clan": "[NUKED]",    "icon": "NUKED.png" },
+        { "clan": "[PBKAC]",    "icon": "PBKAC.png" },
+        { "clan": "[QIN]",      "icon": "QIN.png" },
+        { "clan": "[REL-2]",    "icon": "REL-2.png" },
+        { "clan": "[REL-A]",    "icon": "REL-A.png" },
+        { "clan": "[RELIC]",    "icon": "RELIC.png" },
+        { "clan": "[RIVEN]",    "icon": "RIVEN.png" },
+        { "clan": "[RMAD]",     "icon": "RMAD.png" },
+        { "clan": "[RNT]",      "icon": "RNT.png" },
+        { "clan": "[RNTP]",     "icon": "RNTP.png" },
+        { "clan": "[ROTA]",     "icon": "ROTA.png" },
+        { "clan": "[ROTA2]",    "icon": "ROTA2.png" },
+        { "clan": "[ROTA3]",    "icon": "ROTA3.png" },
+        { "clan": "[RPM]",      "icon": "RPM.png" },
+        { "clan": "[RS]",       "icon": "RS.png" },
+        { "clan": "[RSRDD]",    "icon": "RSRDD.png" },
+        { "clan": "[RUS]",      "icon": "RUS.png" },
+        { "clan": "[RUSS]",     "icon": "RUSS.png" },
+        { "clan": "[RUS_2]",    "icon": "RUS_2.png" },
+        { "clan": "[RXR]",      "icon": "RXR.png" },
+        { "clan": "[SDP]",      "icon": "SDP.png" },
+        { "clan": "[SG]",       "icon": "SG.png" },
+        { "clan": "[SGLE]",     "icon": "SGLE.png" },
+        { "clan": "[SIEGE]",    "icon": "SIEGE.png" },
+        { "clan": "[SLAP]",     "icon": "SLAP.png" },
+        { "clan": "[SMO]",      "icon": "SMO.png" },
+        { "clan": "[SNS-X]",    "icon": "SNS-X.png" },
+        { "clan": "[SNS]",      "icon": "SNS.png" },
+        { "clan": "[TBW]",      "icon": "TBW.png" },
+        { "clan": "[TBZ]",      "icon": "TBZ.png" },
+        { "clan": "[TSF]",      "icon": "TSF.png" },
+        { "clan": "[TSP]",      "icon": "TSP.png" },
+        { "clan": "[UFTS]",     "icon": "UFTS.png" },
+        { "clan": "[UN]",       "icon": "UN.png" },
+        { "clan": "[USBP]",     "icon": "USBP.png" },
+        { "clan": "[VPG-R]",    "icon": "VPG-R.png" },
+        { "clan": "[VPG]",      "icon": "VPG.png" },
+        { "clan": "[W-A-R]",    "icon": "W-A-R.png" },
+        { "clan": "[WOLF]",     "icon": "WOLF.png" },
+        { "clan": "[WWIII]",    "icon": "WWIII.png" },
+        { "clan": "[WWPD]",     "icon": "WWPD.png" },
+        { "clan": "[ML]",       "icon": "ML.png" },
         { "clan": "[WGA]",      "icon": "WG.png" }
       ]
     },
