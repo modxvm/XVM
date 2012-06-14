@@ -1,22 +1,6 @@
-﻿XVM-2.4.test9:
-  * proxy server protocol updated
-  * some bugs fixed
-
-XVM-2.4.test8:
-  * some bugs fixed
-
-XVM-2.4.test7:
-  * adaptation to WoT 0.7.4.CT2
-
-XVM-2.4.test6:
-  * added per-vehicle new macros:
-      {{t-battles:4}}
-      {{c:t-battles}}
-
-XVM-2.4.test5:
-  * rating bugfix
-
-XVM-2.4.test4:
+﻿XVM-2.4:
+  * adaptation to WoT 0.7.4
+  * new proxy server
   * added per-vehicle statistics. New macros:
       {{t-kb}}
       {{t-battles}}
@@ -24,16 +8,10 @@ XVM-2.4.test4:
       {{t-rating}}
       {{t-kb:4}}
       {{t-rating:3}}
+      {{t-battles:4}}
       {{c:t-rating}}
       {{c:t-kb}}
-
-XVM-2.4.test3:
-  * fixed vehicle icons loading
-
-XVM-2.4.test1:
-  * adaptation to WoT 0.7.4.CT1
-  * updated tank info for win chances calculation
-  * new proxy server
+      {{c:t-battles}}
 
 XVM-2.3.1:
   * fix 2.3 release bugs
