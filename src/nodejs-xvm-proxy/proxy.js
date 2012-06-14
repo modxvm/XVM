@@ -5,6 +5,7 @@ var http = require("http"),
     settings = require("./settings"),
     mongo = require("mongodb"),
     collection,
+    missed_collection,
     serverOptions = {
         auto_reconnect: true,
         poolSize: 50
@@ -12,7 +13,7 @@ var http = require("http"),
     db = new mongo.Db(settings.dbName, new mongo.Server("localhost", 27017, serverOptions));
 
 // Global vars
-var lastError = null,
+var lastErrors = {},
     waiting_shown = false,
     error_shown = false;
 
@@ -29,6 +30,7 @@ db.open(function(error, client) {
     }
     utils.log("MongoDB Connected");
     collection = new mongo.Collection(client, settings.collectionName);
+    missed_collection = new mongo.Collection(client, settings.missedCollectionName);
 });
 
 // WG Server Statistics retrieve
@@ -36,6 +38,8 @@ db.open(function(error, client) {
 // execute request for single player id
 var makeSingleRequest = function(id, callback) {
     var now = new Date();
+    var statHostId = Math.floor(id / 500000000);
+    var lastError = lastErrors["s" + statHostId] || null;
 
     // Do not execute requests some time after error responce
     if (lastError != null) {
@@ -47,14 +51,13 @@ var makeSingleRequest = function(id, callback) {
             callback(null, null);
             return;
          } else {
-            lastError = null;
+            lastErrors["s" + statHostId] = null;
             waiting_shown = false;
             error_shown = false;
          }
     }
 
     // Select proper server by player id
-    var statHostId = Math.floor(id / 500000000);
     if (statHostId >= settings.statHosts.length) {
         callback(null, null);
         return;
@@ -80,10 +83,10 @@ var makeSingleRequest = function(id, callback) {
             clearTimeout(reqTimeout);
             try {
                 var result = JSON.parse(responseData);
-//                utils.debug2("responseData.length = " + responseData.length);
+//                utils.debug("responseData.length = " + responseData.length);
                 callback(null, result);
             } catch(e) {
-                utils.debug2("JSON.parse error: " + responseData);
+                utils.debug("JSON.parse error: length=" + responseData.length);
                 callback(null, {__error:"JSON.parse error: " + e});
             }
         });
@@ -127,10 +130,10 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, response) {
             {
                 if (curResult.__error) {
                     resultItem.status = "error";
-                    lastError = now;
+                    lastErrors["s" + Math.floor(id / 500000000)] = now;
                     if (!error_shown) {
                          error_shown = true;
-                         utils.debug(curResult.__error);
+                         utils.debug("S" + Math.floor(id / 500000000) + ": " + curResult.__error);
                     }
                 } else if (curResult.status === "ok" && curResult.status_code === "NO_ERROR") {
                     // fill global info
@@ -194,6 +197,7 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, response) {
                 if (missed_count < 5)
                   missed_ids.push(player.id);
                 missed_count++;
+                missed_collection.update({ id: player.id }, { id: player.id }, { upsert: true });
             } else {
                 // Return only one vehicle data
                 if (player.v)
@@ -281,7 +285,9 @@ http.createServer(function(request, response) {
                 }
             }
 
-            //utils.debug2("records from cache:  " + inCache.length + ", to retrieve: " + forUpdate.length);
+            utils.debug("total: " + (ids.length < 10 ? " " : "") + ids.length +
+                "   from cache: " + (inCache.length < 10 ? " " : "") + inCache.length +
+                "   to retrieve: " + (forUpdate.length < 10 ? " " : "") + forUpdate.length);
             processRemotes(inCache, forUpdate, forUpdateVNames, response);
         } catch(e) {
             response.statusCode = 500;

@@ -52,16 +52,10 @@ module.exports = (function()
     };
 
 
-    // debug2
-    var debug2 = function(str) {
-        log("DEBUG2: " + str);
-    };
-
     // exports
     return {
         calculateEfficiency: calculateEfficiency,
         log: log,
-        debug: debug,
-        debug2: debug2
+        debug: debug
     }
 })();

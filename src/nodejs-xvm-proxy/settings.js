@@ -9,6 +9,7 @@ module.exports = (function()
         lastErrorTtl: 5 * 1000, // in msec
         dbName: "<dbname>",
         collectionName: "<collection>",
+        missedCollectionName: "<missed_collection>",
         //           RU: 0..5E8         EU: 5E8..10E8      NA: 10E8..15E8
         statHosts: [ "worldoftanks.ru", "worldoftanks.eu", "worldoftanks.com" ],
         wotApiVersion: "1.5",
