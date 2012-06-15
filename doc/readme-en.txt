@@ -131,6 +131,9 @@
       {{t-rating:3}}  - Vehicle win ratio aligned from left to 3 chars
       {{t-kb:4}}      - number of kilo-battles for current vehicle aligned from left to 4 chars
       {{t-battles:4}} - number of battles for current vehicle aligned from left to 4 chars
+      {{t-kb-0}}      - number of kilo-battles for current vehicle with leading zero
+      {{t-hb}}        - number of hecto-battles for current vehicle (hecto = 100)
+      {{t-hb:3}}      - number of hecto-battles for current vehicle aligned from left to 3 chars
 
     Dynamic colors macros:
       {{c:hp}}        - color depended from current health points (only in vehicle markers)

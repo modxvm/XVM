@@ -76,6 +76,8 @@ class wot.utils.Stat
     var sTWins: String = "";
     var sTBattles: String = "";
     var sTKb: String = "";
+    var sTKbWithout0: String = "";
+    var sTHb: String = "";
     var sTRating: String = "";
 
     var eff: Number = 0;
@@ -120,8 +122,8 @@ class wot.utils.Stat
             t_kb = bn > 0 ? Math.round(bn / 100) / 10 : -1;
             t_battles = bn > 0 ? bn : -1;
             sTKb = t_kb >= 0 ? Sprintf.format("%.1fk", t_kb) : "";
-            if (sTKb.length > 0 && sTKb.charAt(0) == '0')
-              sTKb = sTKb.slice(1);
+            sTKbWithout0 = (sTKb.length > 0 && sTKb.charAt(0) == '0') ? sTKb.slice(1) : sTKb;
+            sTHb = t_kb >= 0 ? String(Math.round(bn / 100)) + "h" : "";
             sTBattles = bn > 0 ? Utils.toString(bn) : "";
             sTWins = bn > 0 ? String(Utils.toInt(stat.tw)) : "";
           }
@@ -138,7 +140,9 @@ class wot.utils.Stat
     format = format.split("{{rating}}").join(sRating);
     format = format.split("{{eff}}").join(sEff);
 
-    format = format.split("{{t-kb}}").join(sTKb);
+    format = format.split("{{t-kb}}").join(sTKbWithout0);
+    format = format.split("{{t-kb-0}}").join(Utils.padLeft(sTKb, 4));
+    format = format.split("{{t-hb}}").join(sTHb);
     format = format.split("{{t-battles}}").join(sTBattles);
     format = format.split("{{t-wins}}").join(sTWins);
     format = format.split("{{t-rating}}").join(sTRating);
@@ -148,8 +152,10 @@ class wot.utils.Stat
     format = format.split("{{rating:3}}").join(Utils.padLeft(sRating, 3));
     format = format.split("{{eff:4}}").join(Utils.padLeft(sEff, 4));
 
-    format = format.split("{{t-kb:4}}").join(Utils.padLeft(sTKb, 4));
-    format = format.split("{{t_kb:4}}").join(Utils.padLeft(sTKb, 4));
+    format = format.split("{{t-kb:4}}").join(Utils.padLeft(sTKbWithout0, 4));
+    format = format.split("{{t_kb:4}}").join(Utils.padLeft(sTKbWithout0, 4));
+    format = format.split("{{t-hb:3}}").join(Utils.padLeft(sTHb, 3));
+    format = format.split("{{t_hb:3}}").join(Utils.padLeft(sTHb, 3));
     format = format.split("{{t-battles:4}}").join(Utils.padLeft(sTBattles, 4));
     format = format.split("{{t_battles:4}}").join(Utils.padLeft(sTBattles, 4));
     format = format.split("{{t-rating:3}}").join(Utils.padLeft(sTRating, 3));

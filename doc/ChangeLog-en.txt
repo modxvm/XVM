@@ -1,4 +1,10 @@
-﻿XVM-2.4.1.test1:
+﻿XVM-2.4.1.test2:
+  * added new macros:
+      {{t-kb-0}} - kilo-battles with leading zero
+      {{t-hb}} - hecto-battles - battles/100
+      {{t-hb:3}} - hecto-battles aligned to 3 chars
+
+XVM-2.4.1.test1:
   * battle task animation removed
 
 XVM-2.4:

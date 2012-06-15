@@ -26,7 +26,7 @@ class wot.utils.Locale
     tr["Chances error"] = "Ошибка расчета шансов";
     tr["Win chances"] = "Шанс на победу";
     tr["Global"] = "Общий";
-    tr["By tank"] = "По танку";
+    tr["By tank"] = "По технике";
 //    tr["Using default settings."] = "Используются настройки по умолчанию.";
 //    tr["Error parsing config file."] = "Ошибка чтения конфигурации.";
 //    tr["Error loading config file."] = "Ошибка загрузки конфигурации.";
