@@ -12,36 +12,36 @@ protected function RefreshConfig():void
 			Config.s_config = DefaultConfig.config;
 
 		var now: Date = new Date();
-		
+
 		//debug(JSON.stringify(Config.s_config));
 		RefreshCommonPage();
 		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
 		now = new Date();
-		
+
 		RefreshBattleLoadingPage();
 		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
 		now = new Date();
-		
+
 		RefreshStatisticFormPage();
 		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
 		now = new Date();
-		
+
 		RefreshPlayersPanelPage();
 		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
 		now = new Date();
-		
+
 		RefreshColorsPage();
 		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
 		now = new Date();
-		
+
 		RefreshTransparencyPage();
 		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
 		now = new Date();
-		
+
 		RefreshIconsetPage();
 		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
 		now = new Date();
-		
+
 		RefreshPlayersPage();
 		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
 		now = new Date();
@@ -299,7 +299,7 @@ public static var ElementControls:Object = {
 	levelIcon: [ "m_levelIcon" ],
 	actionMarker: [ "m_actionMarker" ],
 
-	m_vehicleIcon: [ "v_visible", "v_x", "v_y", "v_alpha", "v_maxScale", "v_scaleX", "v_scaleY" ],
+	m_vehicleIcon: [ "v_visible", "v_showSpeaker", "v_x", "v_y", "v_alpha", "v_maxScale", "v_scaleX", "v_scaleY" ],
 	m_healthBar: [ "v_visible", "v_x", "v_y", "v_alpha", "v_color", "v_lcolor", "v_width", "v_height", "v_border_size",
 		"v_border_color", "v_border_alpha", "v_fill_alpha", "v_damage_color", "v_damage_alpha", "v_damage_fade" ],
 	m_damageText: [ "v_visible", "v_x", "v_y", "v_alpha", "v_color", "v_maxRange", "v_damageMessage", "v_blowupMessage" ],

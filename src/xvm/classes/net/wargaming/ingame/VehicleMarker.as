@@ -13,6 +13,7 @@
   var m_vehicleClass: String;
   var m_markerState: String;
   var m_markerLabel: String;
+  var m_speaking: Boolean;
 
   var marker: MovieClip;
   var pNameField: TextField;
@@ -29,6 +30,7 @@
 
   function init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt);
   function updateMarkerSettings();
+  function setSpeaking(value);
   function updateHealth(curHealth);
   function updateState(newState, isImmediate);
   function showExInfo(show);

@@ -723,17 +723,25 @@ namespace wot
 
         foreach (Stat stat in res.players)
         {
-          string cacheKey = stat.id + "=" + stat.vn;
-          if (String.IsNullOrEmpty(stat.name))
-            continue;
-          cache[cacheKey] = new PlayerInfo()
+          if (pendingPlayers.ContainsKey(stat.id))
           {
-            stat = stat,
-            httpError = false
-          };
-          if (String.IsNullOrEmpty(cache[cacheKey].stat.name))
-            cache[cacheKey].stat.name = pendingPlayers[stat.id].name;
-          cache[cacheKey].stat.clan = pendingPlayers[stat.id].clan;
+            string cacheKey = stat.id + "=" + pendingPlayers[stat.id].vn;
+            if (String.IsNullOrEmpty(stat.name))
+              continue;
+            cache[cacheKey] = new PlayerInfo()
+            {
+              stat = stat,
+              httpError = false
+            };
+            if (String.IsNullOrEmpty(cache[cacheKey].stat.name))
+              cache[cacheKey].stat.name = pendingPlayers[stat.id].name;
+            cache[cacheKey].stat.clan = pendingPlayers[stat.id].clan;
+          }
+          else
+          {
+            Log(2, "WARNING: pendingPlayers key not found for id=" + stat.id);
+            Log(1, JsonMapper.ToJson(stat));
+          }
         };
 
         // disable stat retrieving for people in cache, but not in server db

@@ -18,7 +18,7 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
   private var m_clanIconLoaded = false;
   private var m_iconLoaded: Boolean = false;
   private var m_textCache = {};
-  
+
   function BattleLoadingItemRenderer()
   {
     super();
@@ -53,7 +53,7 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
       }
     }
   }
-  
+
   // override
   function setData(data)
   {
@@ -108,7 +108,7 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
       return;
     }
     self_bg._visible = _selected;
-    
+
     onEnterFrame = function()
     {
       delete this.onEnterFrame;
@@ -141,7 +141,7 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
         ? m_textCache[data.label] : data.vehicle;
     }
   }
-  
+
   // update delegate
   function XVMStatUpdateCallback(pdata)
   {

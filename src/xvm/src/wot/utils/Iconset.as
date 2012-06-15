@@ -67,6 +67,5 @@ class wot.utils.Iconset
     //wot.utils.Logger.add("completeLoad(): " + currentIcon);
     if (m_owner && m_completeFunc)
       m_completeFunc.call(m_owner);
-    event.target.visible = true;
   }
 }

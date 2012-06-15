@@ -100,6 +100,7 @@
         "normal": {
           "vehicleIcon": {                    // "Type of vehicle" icon (HT / MT / LT / TD / Arty)
             "visible": true,                  //   false - Disable
+            "showSpeaker": false,             //   true - Show speaker even if visible=false
             "x": 0,                           //   Position on the X axis
             "y": -16,                         //   Position on the Y axis
             "alpha": 100,                     //   Opacity
@@ -238,6 +239,7 @@
         "extended": {
           "vehicleIcon": {                    // "Type of vehicle" icon (HT / MT / LT / TD / Arty)
             "visible": true,                  //   false - Disable
+            "showSpeaker": false,             //   true - Show speaker even if visible=false
             "x": 0,                           //   Position on the X axis
             "y": -16,                         //   Position on the Y axis
             "alpha": 100,                     //   Opacity
@@ -380,6 +382,7 @@
         "normal": {
           "vehicleIcon": {                    // "Type of vehicle" icon (HT / MT / LT / TD / Arty)
             "visible": true,                  //   false - Disable
+            "showSpeaker": false,             //   true - Show speaker even if visible=false
             "x": 0,                           //   Position on the X axis
             "y": -16,                         //   Position on the Y axis
             "alpha": 100,                     //   Opacity
@@ -471,6 +474,7 @@
         "extended": {
           "vehicleIcon": {                    // "Type of vehicle" icon (HT / MT / LT / TD / Arty)
             "visible": true,                  //   false - Disable
+            "showSpeaker": false,             //   true - Show speaker even if visible=false
             "x": 0,                           //   Position on the X axis
             "y": -16,                         //   Position on the Y axis
             "alpha": 100,                     //   Opacity
@@ -615,6 +619,7 @@
         "normal": {
           "vehicleIcon": {                    // "Type of vehicle" icon (HT / MT / LT / TD / Arty)
             "visible": true,                  //   false - Disable
+            "showSpeaker": false,             //   true - Show speaker even if visible=false
             "x": 0,                           //   Position on the X axis
             "y": -16,                         //   Position on the Y axis
             "alpha": 100,                     //   Opacity
@@ -753,6 +758,7 @@
         "extended": {
           "vehicleIcon": {                    // "Type of vehicle" icon (HT / MT / LT / TD / Arty)
             "visible": true,                  //   false - Disable
+            "showSpeaker": false,             //   true - Show speaker even if visible=false
             "x": 0,                           //   Position on the X axis
             "y": -16,                         //   Position on the Y axis
             "alpha": 100,                     //   Opacity
@@ -895,6 +901,7 @@
         "normal": {
           "vehicleIcon": {                    // "Type of vehicle" icon (HT / MT / LT / TD / Arty)
             "visible": true,                  //   false - Disable
+            "showSpeaker": false,             //   true - Show speaker even if visible=false
             "x": 0,                           //   Position on the X axis
             "y": -16,                         //   Position on the Y axis
             "alpha": 100,                     //   Opacity
@@ -986,6 +993,7 @@
         "extended": {
           "vehicleIcon": {                    // "Type of vehicle" icon (HT / MT / LT / TD / Arty)
             "visible": true,                  //   false - Disable
+            "showSpeaker": false,             //   true - Show speaker even if visible=false
             "x": 0,                           //   Position on the X axis
             "y": -16,                         //   Position on the Y axis
             "alpha": 100,                     //   Opacity

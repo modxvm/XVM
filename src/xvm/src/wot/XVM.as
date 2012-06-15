@@ -184,6 +184,17 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   }
 
   // override
+  function setSpeaking(value)
+  {
+    super.setSpeaking(value);
+    if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
+      return;
+
+    if (marker._visible != m_speaking)
+      XVMUpdateStyle();
+  }
+
+  // override
   function updateHealth(curHealth)
   {
     //Logger.add("XVM::updateHealth(): Config.s_loaded=" + Config.s_loaded);
@@ -937,7 +948,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       var visible: Boolean;
 
       // Vehicle Type Marker
-      visible = cfg.vehicleIcon.visible;
+      visible = cfg.vehicleIcon.visible || (m_speaking && cfg.vehicleIcon.showSpeaker);
       if (visible)
       {
         // Vehicle Type Marker

@@ -407,6 +407,7 @@ public class DefaultConfig
   {
     return {
       visible: true,
+      showSpeaker: false,
       x: 0,
       y: -16,
       alpha: 100,

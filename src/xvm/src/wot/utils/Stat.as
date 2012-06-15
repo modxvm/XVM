@@ -173,10 +173,6 @@ class wot.utils.Stat
       : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, t_rating, "#", isDead));
     format = format.split("{{c:t_rating}}").join(rating < 0 ? ""
       : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, t_rating, "#", isDead));
-    format = format.split("{{c:t-kb}}").join(
-      GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, t_kb * 10, "#", isDead));
-    format = format.split("{{c:t_kb}}").join(
-      GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, t_kb * 10, "#", isDead));
     format = format.split("{{c:t-battles}}").join(
       GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, t_battles, "#", isDead));
     format = format.split("{{c:t_battles}}").join(

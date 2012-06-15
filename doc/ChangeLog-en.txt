@@ -1,4 +1,11 @@
-﻿XVM-2.4.1.test2:
+﻿XVM-2.4.1.test3:
+  * added option:
+      markers/*/vehicleIcon/showSpeaker - show speaker even if vehicle type
+      icon is disabled
+  * removed macros {{c:t-kb}}, use {{c:t-battles}} instead.
+  * fixed icon appearing for a moment when vehicle is spotted
+
+XVM-2.4.1.test2:
   * battle task animation removed
   * added new macros:
       {{t-kb-0}} - kilo-battles with leading zero
