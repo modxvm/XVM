@@ -2143,7 +2143,7 @@
                   <PushData>
                     <items>
                       <StackString value="duration"/>
-                      <StackInteger value="1000"/>
+                      <StackInteger value="1"/>
                     </items>
                   </PushData>
                   <SetVariable/>

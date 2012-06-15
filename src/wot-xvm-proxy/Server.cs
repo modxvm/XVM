@@ -810,7 +810,7 @@ namespace wot
       }
     }
 
-    private static Response JsonDataToResponse(JsonData jd)
+    private Response JsonDataToResponse(JsonData jd)
     {
       if (jd == null)
         return null;
@@ -854,9 +854,9 @@ namespace wot
           return res;
 
         res.info = new Info();
-        if (jd["info"]["xvm"] != null)
+        if (jd["info"][version] != null)
         {
-          JsonData data = jd["info"]["xvm"];
+          JsonData data = jd["info"][version];
           res.info.xvm = new XVMInfo()
           {
             ver = data["ver"].ToString(),

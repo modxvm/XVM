@@ -1,4 +1,7 @@
-﻿XVM-2.4:
+﻿XVM-2.4.1.test1:
+  * battle task animation removed
+
+XVM-2.4:
   * adaptation to WoT 0.7.4
   * new proxy server
   * added per-vehicle statistics. New macros:

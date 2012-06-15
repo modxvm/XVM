@@ -1,0 +1,11 @@
+--- orig\BattleTimerBig.xml	2012-06-15 14:09:11.796750700 +0300
++++ BattleTimerBig.xml	2012-06-15 14:09:27.386309500 +0300
+@@ -533,7 +533,7 @@
+                   <PushData>
+                     <items>
+                       <StackString value="duration"/>
+-                      <StackInteger value="1000"/>
++                      <StackInteger value="1"/>
+                     </items>
+                   </PushData>
+                   <SetVariable/>
