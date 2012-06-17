@@ -8,7 +8,7 @@ var http = require("http"),
     missed_collection,
     serverOptions = {
         auto_reconnect: true,
-        poolSize: 50
+        poolSize: 100
     },
     db = new mongo.Db(settings.dbName, new mongo.Server("localhost", 27017, serverOptions));
 
@@ -21,6 +21,13 @@ var lastErrors = {},
 // Main
 
 utils.log("Starting server");
+
+// Set max client connections (5 by default)
+http.globalAgent.maxSockets = settings.maxSockets;
+
+var getStatHostId = function(id) {
+    return Math.max(0, Math.min(Math.floor(id / 500000000), settings.statHosts.length - 1));
+}
 
 // Connect to database
 db.open(function(error, client) {
@@ -36,13 +43,13 @@ db.open(function(error, client) {
 // WG Server Statistics retrieve
 
 // execute request for single player id
-var makeSingleRequest = function(id, callback) {
+var makeSingleRequest = function(id, callback, force) {
     var now = new Date();
-    var statHostId = Math.floor(id / 500000000);
+    var statHostId = getStatHostId(id);
     var lastError = lastErrors["s" + statHostId] || null;
 
     // Do not execute requests some time after error responce
-    if (lastError != null) {
+    if (lastError != null && ! force) {
         if ((now - lastError) < settings.lastErrorTtl) {
             if (!waiting_shown) {
                 waiting_shown = true;
@@ -66,14 +73,15 @@ var makeSingleRequest = function(id, callback) {
     var options = {
         host: settings.statHosts[statHostId],
         port: 80,
-        path: "/uc/accounts/" + id + "/api/" + settings.wotApiVersion + "/?source_token=Intellect_Soft-WoT_Mobile-unofficial_stats"
+        path: "/uc/accounts/" + id + "/api/" + settings.wotApiVersion + "/?source_token=Intellect_Soft-WoT_Mobile-unofficial_stats"//,
+ //       agent: agent
     };
 
     var reqTimeout = setTimeout(function() {
         callback(null, {__error:"Timeout"});
      }, 5000);
 
-     request = http.get(options, function(res) {
+    var request = http.get(options, function(res) {
         var responseData = "";
         res.setEncoding("utf8");
         res.on("data", function(chunk) {
@@ -87,13 +95,13 @@ var makeSingleRequest = function(id, callback) {
                 callback(null, result);
             } catch(e) {
                 utils.debug("JSON.parse error: length=" + responseData.length);
-                callback(null, {__error:"JSON.parse error: " + e});
+                callback(null, {__error:"JSON.parse error"});
             }
         });
     });
     request.on("error", function(e) {
         clearTimeout(reqTimeout);
-        callback(false, {__error:"Http error: " + e});
+        callback(null, {__error:"Http error: " + e});
     });
 
     request.shouldKeepAlive = false;
@@ -104,10 +112,11 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, response) {
 
     forUpdate.forEach(function(id) {
         urls[id] = function(callback) {
-            makeSingleRequest(id, callback);
+            makeSingleRequest(id, callback, forUpdate.length == 1);
         };
     });
 
+//    async.series(urls, function(err, results) {
     async.parallel(urls, function(err, results) {
 
         var now = new Date();
@@ -124,16 +133,16 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, response) {
             var vname = forUpdateVNames[i];
 
             var curResult = results[id];
-            var resultItem = { id: id, status: "fail", date: now };
+            var resultItem = { id: id, status: "fail", date: now, vname: vname };
 
             if (curResult)
             {
                 if (curResult.__error) {
                     resultItem.status = "error";
-                    lastErrors["s" + Math.floor(id / 500000000)] = now;
+                    lastErrors["s" + getStatHostId(id)] = now;
                     if (!error_shown) {
                          error_shown = true;
-                         utils.debug("S" + Math.floor(id / 500000000) + ": " + curResult.__error);
+                         utils.debug("Server_" + getStatHostId(id) + ": " + curResult.__error);
                     }
                 } else if (curResult.status === "ok" && curResult.status_code === "NO_ERROR") {
                     // fill global info
@@ -165,9 +174,6 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, response) {
                     updated++;
                 }
             }
-
-            if (vname)
-                resultItem.vname = vname;
 
             result.players.push(resultItem);
         }
@@ -217,8 +223,11 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, response) {
             }
         });
         if (missed_count > 0 && result.players.length > 1) {
-            utils.debug("missed stat: " + missed_count + " / " + result.players.length + 
-                ". ids: " + missed_ids.join(",") + (missed_count > 5 ? ",..." : ""));
+            utils.debug("total: " + (result.players.length < 10 ? " " : "") + result.players.length +
+                "   cache: " + (inCache.length < 10 ? " " : "") + inCache.length +
+                "   retrieve: " + (forUpdate.length < 10 ? " " : "") + forUpdate.length +
+                "   missed: " + (missed_count < 10 ? " " : "") + missed_count +
+                (missed_count > 0 ? ". ids: " : "") + missed_ids.join(",") + (missed_count > 5 ? ",..." : ""));
         }
 
         // return response to client
@@ -231,13 +240,14 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, response) {
 http.createServer(function(request, response) {
     // parse request
     var ids = [ ];
+    var vehicles = [ ];
     try {
         var query = url.parse(request.url).query;
         if(!query || !query.match(/^((\d)|(\d[\dA-Z_\-,=]*))$/))
             throw "query match error: " + query;
 
         if (query == "001" || query == "test") {
-            response.end('{"players":[{"id":1,"status":"fail"}]}');
+            response.end('{"players":[{"id":1,"status":"ok"}]}');
             return;
         }
 
@@ -266,6 +276,13 @@ http.createServer(function(request, response) {
             for (var a = 0; a < ids.length; ++a) {
                 var id = ids[a];
                 var vname = vehicles[a] ? vehicles[a].toUpperCase() : null;
+//if (!vname)
+//{
+//    utils.debug("a:" + a);
+//    utils.debug("ids:" + ids.join(","));
+//    utils.debug("vehicles:" + vehicles.join(","));
+//    utils.debug("query: " + url.parse(request.url).query);
+//}
                 // Check cache data
                 var found = false;
                 for (var i = 0; i < inCache.length; ++i) {
@@ -285,9 +302,6 @@ http.createServer(function(request, response) {
                 }
             }
 
-            utils.debug("total: " + (ids.length < 10 ? " " : "") + ids.length +
-                "   from cache: " + (inCache.length < 10 ? " " : "") + inCache.length +
-                "   to retrieve: " + (forUpdate.length < 10 ? " " : "") + forUpdate.length);
             processRemotes(inCache, forUpdate, forUpdateVNames, response);
         } catch(e) {
             response.statusCode = 500;

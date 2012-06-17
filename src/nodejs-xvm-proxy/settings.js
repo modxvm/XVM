@@ -4,14 +4,20 @@ module.exports = (function()
     return {
         host: "127.0.0.1",
         port: <port>,
+        maxSockets: 100, // per client
         cacheTtl: 7 * 24 * 60 * 60 * 1000, // 7 days
-        vcacheTtl: 3 * 24 * 60 * 60 * 1000, // not used yet
         lastErrorTtl: 5 * 1000, // in msec
         dbName: "<dbname>",
         collectionName: "<collection>",
         missedCollectionName: "<missed_collection>",
-        //           RU: 0..5E8         EU: 5E8..10E8      NA: 10E8..15E8
-        statHosts: [ "worldoftanks.ru", "worldoftanks.eu", "worldoftanks.com" ],
+        statHosts: [
+            "worldoftanks.ru",      // RU:            0 ..  499999999
+            "worldoftanks.eu",      // EU:    500000000 ..  999999999
+            "worldoftanks.com",     // NA:   1000000000 .. 1499999999
+            "worldoftanks-sea.com", // ???: 15000000000 .. 1999999999
+            "worldoftanks-sea.com", // SEA: 20000000000 .. 2499999999
+            "wot.go.vn"             // VTC: 25000000000 .. 2999999999
+        ],
         wotApiVersion: "1.5",
         info: {
             RU: {
@@ -34,6 +40,18 @@ module.exports = (function()
                     "<msg line 1>",
                     "<msg line N"
                 ].join("\n")
+            },
+            SEA: {
+                ver: "<version>",
+                message: ""
+            },
+            VTC: {
+                ver: "<version>",
+                message: ""
+            },
+            CT: {
+                ver: "<version>",
+                message: ""
             }
         }
     }
