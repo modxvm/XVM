@@ -43,10 +43,6 @@ class wot.utils.VehicleInfo
   private static var SP = 5;
 
   private static var _data = {
-    // unknown
-    //germany_DickerMax:          { level: 1,  type: MT, tiers: [ 1, 2 ] },
-    //usa_T26_E4_SuperPershing:   { level: 1,  type: MT, tiers: [ 1, 2 ] },
-
     // level 1
     germany_Ltraktor:			{ level: 1,  type: LT, tiers: [ 1, 2 ] },
     ussr_MS_1:				{ level: 1,  type: LT, tiers: [ 1, 2 ] },
@@ -168,6 +164,7 @@ class wot.utils.VehicleInfo
     usa_M36_Slagger:			{ level: 6,  type: TD, tiers: [ 7, 10 ] },
     ussr_SU_100:			{ level: 6,  type: TD, tiers: [ 7, 10 ] },
     france_ARL_V39:             	{ level: 6,  type: TD, tiers: [ 7, 10 ] },
+    germany_DickerMax:                  { level: 6,  type: TD, tiers: [ 7, 10 ] }, // ?
 
     // level 7
     france_AMX_13_90:			{ level: 7,  type: LT, tiers: [ 10, 13 ] },
@@ -198,6 +195,7 @@ class wot.utils.VehicleInfo
     germany_Panther_II:			{ level: 8,  type: MT, tiers: [ 9, 11 ] },
     usa_Pershing:			{ level: 8,  type: MT, tiers: [ 9, 11 ] },
     ussr_T_44:				{ level: 8,  type: MT, tiers: [ 9, 11 ] },
+    usa_T26_E4_SuperPershing:           { level: 8,  type: MT, tiers: [ 9, 11 ] }, // ?
     france_AMX_50_100:			{ level: 8,  type: HT, tiers: [ 9, 12 ] },
     china_Ch03_WZ_111:			{ level: 8,  type: HT, tiers: [ 9, 12 ] },
     ussr_IS_3:				{ level: 8,  type: HT, tiers: [ 9, 12 ] },
