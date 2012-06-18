@@ -40,11 +40,11 @@ namespace wot
 
     private static void Usage()
     {
-      Console.WriteLine("Usage: wot-xvm-proxy.exe [/launcher] [/debug] [/server=(RU|EU|NA|CN1|CN2|CT)] [file.wotreplay]");
+      Console.WriteLine("Usage: wot-xvm-proxy.exe [/launcher] [/debug] [/server=(RU|EU|NA|CN|SEA|VTC|CT)] [file.wotreplay]");
       Console.WriteLine("  /launcher - run launcher instead of game");
       Console.WriteLine("  /noauto - do not run game automatically");
       Console.WriteLine("  /debug - run in debug mode (extended log)");
-      Console.WriteLine("  /server=(RU|EU|NA|CN1|CN2|CT) - select server (disable autodetection)");
+      Console.WriteLine("  /server=(RU|EU|NA|CN|SEA|VTC|CT) - select server (disable autodetection)");
       Console.WriteLine("  file.wotreplay - play replay");
       Console.WriteLine("Press any key to exit.");
       Console.ReadKey(true);
@@ -94,6 +94,8 @@ namespace wot
           if (args[i].StartsWith("/server=", StringComparison.InvariantCultureIgnoreCase))
           {
             serverVersion = args[i].Substring(8);
+            if (serverVersion.ToUpper() == "CN1")
+              serverVersion = "CN";
             args[i] = "";
             continue;
           }

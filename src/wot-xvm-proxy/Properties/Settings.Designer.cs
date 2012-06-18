@@ -78,9 +78,11 @@ namespace wot.Properties {
   <string>RU	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC91Yy8/JTE=</string>
   <string>EU	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC91Yy8/JTE=</string>
   <string>NA	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC91Yy8/JTE=</string>
-  <string>CN1	aHR0cDovL2dhcnBoeS5jb20vdG9vbC93b3QvRUZGMi8lMS5qc29u</string>
-  <string>CN1	aHR0cDovL3RpcHMuY3MwMzA5LmltdHQucXEuY29tL2dldFVzZXI/bmFtZT0lMSZ6b25lPW5vcnRoJmxjPTIwMTIwMzA4JndheT1uZXc=</string>
-  <string>CN1	aHR0cDovL3dvdHJhdGUudmljcC5jby9Xb3RSYXRlWFZNMS8lMQ==</string>
+  <string>CN	aHR0cDovL2dhcnBoeS5jb20vdG9vbC93b3QvRUZGMi8lMS5qc29u</string>
+  <string>CN	aHR0cDovL3RpcHMuY3MwMzA5LmltdHQucXEuY29tL2dldFVzZXI/bmFtZT0lMSZ6b25lPW5vcnRoJmxjPTIwMTIwMzA4JndheT1uZXc=</string>
+  <string>CN	aHR0cDovL3dvdHJhdGUudmljcC5jby9Xb3RSYXRlWFZNMS8lMQ==</string>
+  <string>SEA	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC91Yy8/JTE=</string>
+  <string>VTC	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC91Yy8/JTE=</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection proxy_servers {
             get {

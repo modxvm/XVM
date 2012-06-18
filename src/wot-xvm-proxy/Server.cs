@@ -222,17 +222,18 @@ namespace wot
         {
           XmlElement xe = (XmlElement)xnf;
           s = xe.InnerText;
-          if (s.LastIndexOf("http://update.worldoftanks.cn/") > -1)
-            wotVersion = "CN1";
-          else if (s.LastIndexOf("http://update.wot.ru.wargaming.net") > -1 ||
-            s.LastIndexOf("http://update.worldoftanks.ru") > -1)
-          {
+          if (s.LastIndexOf("http://update.wot.ru.wargaming.net") > -1 || s.LastIndexOf("http://update.worldoftanks.ru") > -1)
             wotVersion = "RU";
-          }
           else if (s.LastIndexOf("http://update.worldoftanks.com") > -1)
             wotVersion = "NA";
           else if (s.LastIndexOf("http://update.worldoftanks.eu") > -1)
             wotVersion = "EU";
+          else if (s.LastIndexOf("http://update.worldoftanks.cn") > -1)
+            wotVersion = "CN";
+          else if (s.LastIndexOf("http://update.worldoftanks-sea.com") > -1)
+            wotVersion = "SEA";
+          else if (s.LastIndexOf("http://update.worldoftanks.vn") > -1)
+            wotVersion = "VTC";
           else if (s.LastIndexOf("http://update-ct.worldoftanks.net") > -1)
             wotVersion = "CT";
         }
