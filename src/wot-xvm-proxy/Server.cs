@@ -21,7 +21,7 @@ namespace wot
     [Serializable]
     public class Stat
     {
-      public int id;          // player id
+      public long id;          // player id
       public String name;     // player name
       public String clan;     // clan
       public String vn;       // vehicle name
@@ -70,7 +70,7 @@ namespace wot
 
     // local cache
     private readonly Dictionary<string, PlayerInfo> cache = new Dictionary<string, PlayerInfo>();
-    private readonly Dictionary<int, Stat> pendingPlayers = new Dictionary<int, Stat>();
+    private readonly Dictionary<long, Stat> pendingPlayers = new Dictionary<long, Stat>();
 
     private Info _modInfo = null;
     private bool _firstError = true;
@@ -164,7 +164,7 @@ namespace wot
           if (param.Length != 2)
             continue;
 
-          int id = int.Parse(param[0]);
+          long id = long.Parse(param[0]);
           if (pendingPlayers.ContainsKey(id))
             continue;
 
@@ -540,7 +540,7 @@ namespace wot
       };
 
       int pos = 0;
-      foreach (int id in pendingPlayers.Keys)
+      foreach (long id in pendingPlayers.Keys)
       {
         string cacheKey = id + "=" + pendingPlayers[id].vn;
         if (cache.ContainsKey(cacheKey))
@@ -672,9 +672,9 @@ namespace wot
     private void PrepareStat()
     {
       List<string> forUpdate = new List<string>();
-      List<int> forUpdateIds = new List<int>();
+      List<long> forUpdateIds = new List<long>();
 
-      foreach (int id in pendingPlayers.Keys)
+      foreach (long id in pendingPlayers.Keys)
       {
         string cacheKey = id + "=" + pendingPlayers[id].vn;
         if (cache.ContainsKey(cacheKey))
@@ -746,7 +746,7 @@ namespace wot
         };
 
         // disable stat retrieving for people in cache, but not in server db
-        foreach (int id in forUpdateIds)
+        foreach (long id in forUpdateIds)
         {
           string cacheKey = id + "=" + pendingPlayers[id].vn;
           if (cache.ContainsKey(cacheKey))
@@ -774,7 +774,7 @@ namespace wot
         ErrorHandle();
         for (var i = 0; i < forUpdateIds.Count; i++)
         {
-          int id = forUpdateIds[i];
+          long id = forUpdateIds[i];
           string cacheKey = id + "=" + pendingPlayers[id].vn;
           cache[cacheKey] = new PlayerInfo()
           {
@@ -798,6 +798,20 @@ namespace wot
         for (int i = 0; i < path.Length - 1; ++i)
           data = data[path[i]];
         return data[path[path.Length - 1]].IsInt ? int.Parse(data[path[path.Length - 1]].ToString()) : 0;
+      }
+      catch
+      {
+        return 0;
+      }
+    }
+
+    private static long ParseLong(JsonData data, params String[] path)
+    {
+      try
+      {
+        for (int i = 0; i < path.Length - 1; ++i)
+          data = data[path[i]];
+        return data[path[path.Length - 1]].IsLong ? long.Parse(data[path[path.Length - 1]].ToString()) : 0;
       }
       catch
       {
@@ -836,7 +850,7 @@ namespace wot
           {
             res.players[pos++] = new Stat()
             {
-              id = ParseInt(data, "id"),
+              id = ParseLong(data, "id"),
               name = ParseString(data, "name"),
               vn = ParseString(data, "vname"),
               b = ParseInt(data, "battles"),
