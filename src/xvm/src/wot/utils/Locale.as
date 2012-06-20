@@ -24,9 +24,9 @@ class wot.utils.Locale
     // RU
     tr = _translations["RU"];
     tr["Chances error"] = "Ошибка расчета шансов";
-    tr["Win chances"] = "Шанс на победу";
+    tr["Chance to win"] = "Шанс на победу";
     tr["Global"] = "Общий";
-    tr["By tank"] = "По технике";
+    tr["By vehicle"] = "По технике";
 //    tr["Using default settings."] = "Используются настройки по умолчанию.";
 //    tr["Error parsing config file."] = "Ошибка чтения конфигурации.";
 //    tr["Error loading config file."] = "Ошибка загрузки конфигурации.";
@@ -34,9 +34,9 @@ class wot.utils.Locale
     // CN
     tr = _translations["CN"];
     tr["Chances error"] = "Chances error";
-    tr["Win chances"] = "Win chances";
+    tr["Chance to win"] = "Chance to win";
     tr["Global"] = "Global";
-    tr["By tank"] = "By tank";
+    tr["By vehicle"] = "By vehicle";
 //    tr["Using default settings."] = "Using default settings.";
 //    tr["Error parsing config file."] = "Error parsing config file.";
 //    tr["Error loading config file."] = "Error loading config file.";

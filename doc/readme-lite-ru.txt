@@ -33,7 +33,7 @@
   2. По умолчанию ничего настраивать не надо.
 
      Если нужны не стандартные настройки, необходимо создать конфигурационный файл:
-       \res_mods\<game version>\gui\flash\XVM.xvmconf
+       \res_mods\[ВЕРСИЯ ИГРЫ]\gui\flash\XVM.xvmconf
 
      Можно скопировать готовый из папки \xvm-doc\samples\, или воспользоваться
      онлайн-редактором: https://sites.google.com/site/sirmaxwiki/xvm-editor
@@ -65,7 +65,7 @@
 -----------------------------------------------------------
 
   Конфигурационный файл мода:
-    \res_mods\<game version>\gui\flash\XVM.xvmconf
+    \res_mods\[ВЕРСИЯ ИГРЫ]\gui\flash\XVM.xvmconf
   Можно скопировать готовый конфиг из папки \xvm-doc\samples\
   Можно создать новый конфиг или изменить существующий с помощью онлайн-редактора:
     https://sites.google.com/site/sirmaxwiki/xvm-editor

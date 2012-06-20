@@ -42,7 +42,7 @@
   5. You do not need to setup anything by default.
 
      If you want special settings, you need to create config file:
-       \res_mods\<game version>\gui\flash\XVM.xvmconf
+       \res_mods\[GAME VERSION]\gui\flash\XVM.xvmconf
 
      You can select ready config file from \xvm-doc\samples\ directory, or use
      online editor: https://sites.google.com/site/sirmaxwiki/xvm-editor
@@ -92,8 +92,7 @@
 -----------------------------------------------------------
 
   Mod config files:
-    \res_mods\<game version>\gui\flash\XVM.xvmconf (main config file)
-    \res_mods\<game version>\gui\flash\OTMData.xml (in legacy mode)
+    \res_mods\[GAME VERSION]\gui\flash\XVM.xvmconf
   You can select ready config file from \xvm-doc\samples\ directory
   You can create new config or edit existing using online editor:
     https://sites.google.com/site/sirmaxwiki/xvm-editor

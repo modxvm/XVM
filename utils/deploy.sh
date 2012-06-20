@@ -6,11 +6,14 @@ FILES="
   libxvm.swf
   libxvmLoader.swf
   battle.swf
-  ../src/xvm/swf/BattleTimerBig.swf
   battleloading.swf
+  ../src/xvm/swf/BattleTimerBig.swf
+  ComponentsLib.swf
+  FinalStatisticForm.swf
   PlayersPanel.swf
   StatisticForm.swf
-  FinalStatisticForm.swf
+  TrainingInfoForm.swf
+  TrainingOwnerInfoForm.swf
   VehicleMarkersManager.swf
   XVM.xvmconf OTMData.xml"
 

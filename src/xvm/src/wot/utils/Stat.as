@@ -671,9 +671,9 @@ class wot.utils.Stat
           Number(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, chances.m_raw, "0x")), 50);
         tf.htmlText = tf.text +
           " | <font color='#" + color.toString(16) + "'>" +
-          Locale.get("Win chances") + ": " +
+          Locale.get("Chance to win") + ": " +
           Locale.get("Global") + ": " + chances.m + "%" + ", " +
-          Locale.get("By tank") + ": " + chances.mt + "%</font>";
+          Locale.get("By vehicle") + ": " + chances.mt + "%</font>";
       }
     }
     return tf.htmlText;

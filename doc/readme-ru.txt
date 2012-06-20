@@ -45,7 +45,7 @@
   5. По умолчанию ничего настраивать не надо.
 
      Если нужны не стандартные настройки, необходимо создать конфигурационный файл:
-       \res_mods\<game version>\gui\flash\XVM.xvmconf
+       \res_mods\[ВЕРСИЯ ИГРЫ]\gui\flash\XVM.xvmconf
 
      Можно скопировать готовый из папки \xvm-doc\samples\, или воспользоваться
      онлайн-редактором: https://sites.google.com/site/sirmaxwiki/xvm-editor
@@ -54,7 +54,7 @@
      их использовать если вам не нужны новые возможности.
 
      Все возможные настройки можно посмотреть в этом файле:
-       \xvm-doc\samples\Lite config RU\XVM.xvmconf
+       \xvm-doc\samples\Full config RU\XVM.xvmconf
 
      Внимание: Если вы меняете конфиг вручную, используйте Блокнот (notepad),
      НЕ используйте word, wordpad и подобные редакторы)
@@ -97,14 +97,14 @@
 -----------------------------------------------------------
 
   Конфигурационный файл мода:
-    \res_mods\<game version>\gui\flash\XVM.xvmconf
+    \res_mods\[ВЕРСИЯ ИГРЫ]\gui\flash\XVM.xvmconf
   Можно скопировать готовый конфиг из папки \xvm-doc\samples\
   Можно создать новый конфиг или изменить существующий с помощью онлайн-редактора:
     https://sites.google.com/site/sirmaxwiki/xvm-editor
 
   Все возможные параметры конфига можно посмотреть в конфиге с русскими комментариями,
   который находится в папке документации в архиве мода:
-    \xvm-doc\samples\Lite config RU\XVM.xvmconf
+    \xvm-doc\samples\Full config RU\XVM.xvmconf
 
   Используемые макросы:
     В ушах:
