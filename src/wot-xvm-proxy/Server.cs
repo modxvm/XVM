@@ -21,7 +21,7 @@ namespace wot
     [Serializable]
     public class Stat
     {
-      public long id;          // player id
+      public long id;         // player id
       public String name;     // player name
       public String clan;     // clan
       public String vn;       // vehicle name
@@ -811,7 +811,8 @@ namespace wot
       {
         for (int i = 0; i < path.Length - 1; ++i)
           data = data[path[i]];
-        return data[path[path.Length - 1]].IsLong ? long.Parse(data[path[path.Length - 1]].ToString()) : 0;
+        return (data[path[path.Length - 1]].IsInt || data[path[path.Length - 1]].IsLong)
+            ? long.Parse(data[path[path.Length - 1]].ToString()) : 0;
       }
       catch
       {
