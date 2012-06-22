@@ -1,4 +1,11 @@
-﻿XVM-2.4.1.test3:
+﻿XVM-2.4.2.test1:
+  * fixed ally icon position using standard markers
+  * added experimental chance to win formula
+  * added new option:
+      battle/highlightVehicleIcon - setup highlighting of selected vehicle icon and squad
+  * editor moved: http://www.koreanrandom.com/forum/topic/1422-/#entry11316
+
+XVM-2.4.1.test3:
   * added option:
       markers/*/vehicleIcon/showSpeaker - show speaker even if vehicle type
       icon is disabled

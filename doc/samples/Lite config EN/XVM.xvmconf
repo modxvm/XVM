@@ -23,6 +23,7 @@
     "mirroredVehicleIcons": true,               // false - Disable tank icon mirroring (good for alternative icons). True by default.
     "showPostmortemTips": true,                 // false - Disable pop-up panel at the bottom after death. True by default.
     "removePanelsModeSwitcher": false,          // true - Remove the Players Panel mode switcher (buttons for changing size)
+    "highlightVehicleIcon": true,               // false - disable highlighting of selected vehicle icon and squad
     "drawGrid": false,                          // true - Enable grid coordinates (may be useful for tactical setup). Change only if you know what you’re doing!
     "hideXVMVersion": false,                    // true - hide xvm version at top left corner of screen
     "useStandardMarkers": false                 // true - use standard client vehicle markers

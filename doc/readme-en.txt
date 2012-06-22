@@ -22,7 +22,7 @@
   Support:       http://forum.bulychev.net/viewforum.php?f=7
   FAQ (Russian): http://www.koreanrandom.com/forum/topic/1381-faq-otveti-na-chastie-voprosi-po-xvm/
   Ready configs: http://www.koreanrandom.com/forum/topic/1384-xvm-configurations/
-  Сonfig editor: https://sites.google.com/site/sirmaxwiki/xvm-editor
+  Сonfig editor: http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
 -----------------------------------------------------------
 2. INSTALL
@@ -37,7 +37,7 @@
   3. Install DokanLibrary: http://dokan-dev.net/en/download/#dokan
 
   4. Unzip archive to game folder:
-     Right click to archive -> "Exctract all..." -> select game folder -> "Extract"
+     Right click to archive -> "Extract all..." -> select game folder -> "Extract"
 
   5. You do not need to setup anything by default.
 
@@ -45,7 +45,7 @@
        \res_mods\[GAME VERSION]\gui\flash\XVM.xvmconf
 
      You can select ready config file from \xvm-doc\samples\ directory, or use
-     online editor: https://sites.google.com/site/sirmaxwiki/xvm-editor
+     online editor: http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
      Old OTMData.xml configs are also supported in legacy mode, you can use if if
      you do not need new features.
@@ -79,7 +79,7 @@
 -----------------------------------------------------------
 
   1. Unzip archive to game folder:
-     Right click to archive -> "Exctract all..." -> select game folder -> "Extract"
+     Right click to archive -> "Extract all..." -> select game folder -> "Extract"
 
   2. If game version was updated, copy your config:
      from res_mods/[OLD VERSION]/gui/flash/XVM.xvmconf
@@ -95,7 +95,7 @@
     \res_mods\[GAME VERSION]\gui\flash\XVM.xvmconf
   You can select ready config file from \xvm-doc\samples\ directory
   You can create new config or edit existing using online editor:
-    https://sites.google.com/site/sirmaxwiki/xvm-editor
+    http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
   All possible config options you can see in this file:
     \xvm-doc\samples\Full config EN\XVM.xvmconf

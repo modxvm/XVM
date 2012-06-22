@@ -4,7 +4,7 @@
 	xmlns:s="library://ns.adobe.com/flex/spark"
 	xmlns:mx="library://ns.adobe.com/flex/mx"
 	xmlns:c="components.*"
-	width="100%" height="100" title="{resourceManager.getString('panels', 'PBattleLoading')}">
+	width="100%" height="120" title="{resourceManager.getString('panels', 'PBattleLoading')}">
 	<fx:Metadata>
 		[ResourceBundle("panels")]
 	</fx:Metadata>
@@ -12,6 +12,7 @@
 	<s:VGroup left="10" right="10" top="10" bottom="10" gap="2" variableRowHeight="true">
 		<c:LabeledCheckBox label="{resourceManager.getString('panels', 'showClock')}" id="v_showClock" config="battleLoading.showClock" change="onChange(event)"/>
 		<c:LabeledCheckBox label="{resourceManager.getString('panels', 'ShowChances')}" id="v_showChances" config="battleLoading.showChances" change="onChange(event)"/>
+		<c:LabeledCheckBox label="{resourceManager.getString('panels', 'ShowChancesExp')}" id="v_showChancesExp" config="battleLoading.showChancesExp" change="onChange(event)"/>
 		<c:LabeledCheckBox label="{resourceManager.getString('panels', 'RemoveSquadIcon')}" id="v_removeSquadIcon" config="battleLoading.removeSquadIcon" change="onChange(event)"/>
 	</s:VGroup>
 </c:PanelComponent>

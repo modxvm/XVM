@@ -37,7 +37,7 @@ protected function updateMarkerValue(event:ValueChangedEvent):void
 		var activeMarkerStates:Array = getActiveMarkerStates();
 		for each (var state:String in activeMarkerStates)
 		{
-			var config:String = "markers." + state + "." + activeElement + "." + event.sender.config; 
+			var config:String = "markers." + state + "." + activeElement + "." + event.sender.config;
 			//debug(config + "=" + event.sender.value);
 			Config.SetValue(config, event.sender.value);
 		}
@@ -53,12 +53,12 @@ protected function updateMarkerTextFieldValue(event:ValueChangedEvent):void
 	//debug("updateMarkerTextFieldValue");
 	try
 	{
-		var values:Object = event.sender.value; 
+		var values:Object = event.sender.value;
 		var activeElement:String = getActiveMarkerElement().id;
 		var activeMarkerStates:Array = getActiveMarkerStates();
 		for each (var state:String in activeMarkerStates)
 		{
-			var config:String = "markers." + state + "." + activeElement; 
+			var config:String = "markers." + state + "." + activeElement;
 			//debug(config + "=" + event.sender.value);
 			Config.SetValue(config, values[state]);
 		}
@@ -75,36 +75,38 @@ protected function onSetDefaultValue(event:SetDefaultValueEvent):void
 	{
 		var path:String = event.sender.config;
 		//debug(config);
-		
+
 		switch (path)
 		{
 			case "battleLoading":
 				Config.SetDefaultValue("battleLoading.showClock");
 				Config.SetDefaultValue("battleLoading.showChances");
+				Config.SetDefaultValue("battleLoading.showChancesExp");
 				Config.SetDefaultValue("battleLoading.removeSquadIcon");
 				break;
-	
+
 			case "battleLoading.text":
 				Config.SetDefaultValue("battleLoading.formatLeft");
 				Config.SetDefaultValue("battleLoading.formatRight");
 				break;
-			
+
 			case "statisticForm":
 				Config.SetDefaultValue("statisticForm.showChances");
+				Config.SetDefaultValue("statisticForm.showChancesExp");
 				Config.SetDefaultValue("statisticForm.removeSquadIcon");
 				break;
-			
+
 			case "statisticForm.text":
 				Config.SetDefaultValue("statisticForm.formatLeft");
 				Config.SetDefaultValue("statisticForm.formatRight");
 				break;
-			
+
 			case "playersPanel":
 				Config.SetDefaultValue("playersPanel.alpha");
 				Config.SetDefaultValue("playersPanel.iconAlpha");
 				Config.SetDefaultValue("playersPanel.removeSquadIcon");
 				break;
-			
+
 			default:
 				if (!Config.SetDefaultValue(path))
 					debug("config not found: " + path);
@@ -124,8 +126,8 @@ protected function onSetDefaultMarkerValue(event:SetDefaultValueEvent):void
 		var activeMarkerStates:Array = getActiveMarkerStates();
 		for each (var state:String in activeMarkerStates)
 		{
-			var config_prefix:String = "markers." + state + "."; 
-			
+			var config_prefix:String = "markers." + state + ".";
+
 			switch (event.target.config)
 			{
 				case "damageText":

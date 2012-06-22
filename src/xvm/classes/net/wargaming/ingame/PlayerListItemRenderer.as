@@ -6,7 +6,11 @@
   var data: Object;
   var squadIcon: MovieClip;
 
+  function __getColorTransform(schemeName);
+  function get selected();
+
   function setData(data);
+  function setState();
   function update();
   function invalidate();
 }

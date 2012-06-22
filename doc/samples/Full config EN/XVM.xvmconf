@@ -22,6 +22,7 @@
     "mirroredVehicleIcons": true,               // false - Disable tank icon mirroring (good for alternative icons). True by default.
     "showPostmortemTips": true,                 // false - Disable pop-up panel at the bottom after death. True by default.
     "removePanelsModeSwitcher": false,          // true - Remove the Players Panel mode switcher (buttons for changing size)
+    "highlightVehicleIcon": true,               // false - disable highlighting of selected vehicle icon and squad
     "drawGrid": false,                          // true - Enable grid coordinates (may be useful for tactical setup). Change only if you know what you’re doing!
     "hideXVMVersion": false,                    // true - hide xvm version at top left corner of screen
     "useStandardMarkers": false                 // true - use standard client vehicle markers
@@ -34,7 +35,8 @@
   // Parameters of the Battle Loading Screen
   "battleLoading": {
     "showClock": true,                          // false - Disable the clock on the Battle Loading Screen
-    "showChances": true,                        // true – Enable display of "chances to win" (only with XVM-full) Read more: http://forum.bulychev.net/viewtopic.php?f=4&t=26
+    "showChances": true,                        // true – Enable display of "chance to win" (only with XVM-full) Read more: http://forum.bulychev.net/viewtopic.php?f=4&t=26
+    "showChancesExp": false,                    // Show experimental "chance to win" formula
     "removeSquadIcon": false,                   // true – Disable Platoon icons. This blank space can house, for example, clan logos
     "clanIcon": {                               // Display options for Team/Clan logos
       "show": true,                             //   false – Disable Team/Clan logos in Battle Loading Screen
@@ -54,6 +56,7 @@
   // Parameters of the Battle Statistics Form
   "statisticForm": {
     "showChances": true,      // true - Enable display of "chance to win" (only with XVM-full).
+    "showChancesExp": false,  // Show experimental "chance to win" formula
     "removeSquadIcon": false, // true - Disable Platoon icons. This blank space can house, for example, clan logos.
     // Display options for Team/Clan logos (see battleLoading above)
     "clanIcon": { "show": true, "x": 0, "y": 6, "xr": 0, "yr": 6, "h": 16, "w": 16, "alpha": 90 },

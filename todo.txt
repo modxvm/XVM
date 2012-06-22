@@ -28,21 +28,15 @@ VMM.swf:
   - добавить к Vehicle Icon, Contour Icon, healthBar эффекты тени.
   - масштабирование иконки танка от расстояния
 
-  Но иконка типа техники уменьшается же с увеличением расстояния) Человек, скорее всего хочет
-  подобное "масштабирование" и для надписей...
-  Но можно же и дальше пойти. Я смутно представляю, как реализовано масштабирование иконки,
-  но неужели нельзя получить по этому масштабированию, пусть не точное, пусть приблизительное
-  расстояние до техники. Можно даже в процентах где-нить отдельной строчкой) типа на 700м
-  дальности - 100%, на 50м - 0%. Что-то подобное реально реализовать?
-
 battle.swf
   - настраиваемые сообщения в панели над миникартой
+    Well durring a battle we see automated messages like "Player_named_A (Ferdinand) killed Player_named_B (IS-4)". I was wondering if you could make them colored, especialy since XVM is extended visualization mod
+    Ok so originaly we got: "Player_named_A (Ferdinand) killed Player_named_B (IS-4)"
+    Idea #1: "Player_named_A (Ferdinand) killed Player_named_B (IS-4)" - simply saying vehicle name color by vehicle class color or some other varations with colors.
+    Idea #2: "Player_named_A (<icon>) killed Player_named_B (<icon>)" - using hardcoded contour icons.
   - прозрачность рамки миникарты
 
 PlayersPanel.swf:
-  - выделение засвеченных танков
-  - сделать так, чтобы иконка танка в ушах не заливалась желтым (для тебя и
-    взводного), настраиваемо в конфиге
 
 Proxy:
   - проверка файловой системы
@@ -59,11 +53,6 @@ Common:
     Если %побед>50 то оставить оригинальным.
     Если %побед больше чем у игрока, то писать в чате с обрамлением !!!...!!! ярко белым жирно.
 
-  Well durring a battle we see automated messages like "Player_named_A (Ferdinand) killed Player_named_B (IS-4)". I was wondering if you could make them colored, especialy since XVM is extended visualization mod
-  Ok so originaly we got: "Player_named_A (Ferdinand) killed Player_named_B (IS-4)"
-  Idea #1: "Player_named_A (Ferdinand) killed Player_named_B (IS-4)" - simply saying vehicle name color by vehicle class color or some other varations with colors.
-  Idea #2: "Player_named_A (<icon>) killed Player_named_B (<icon>)" - using hardcoded contour icons.
-
 Delayed:
   - статистика в итоговом окне прошедшего боя (мало места для отображения)
   - отмечать вражеские взводы в маркерах (невозможно достучаться из маркера до
@@ -72,3 +61,7 @@ Delayed:
     определить чей урон)
   - подсвечивать дополнительным маркером врагов которых светишь (невозможно определить
     кого светишь)
+  - расстояние до техники в зависимости от масштаба иконки типа техники (очень сильно зависит
+    от положения камеры)
+  - выделение засвеченных танков (невозможно определить кто засвечен, только тип танка через
+    миникарту - _root.minimap.icons.MinimapEntryXX)

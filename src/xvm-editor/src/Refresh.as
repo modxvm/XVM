@@ -75,6 +75,7 @@ private function RefreshCommonPage():void
 		this.p_battle.v_mirroredVehicleIcons.value = section.mirroredVehicleIcons;
 		this.p_battle.v_showPostmortemTips.value = section.showPostmortemTips;
 		this.p_battle.v_removePanelsModeSwitcher.value = section.removePanelsModeSwitcher;
+		this.p_battle.v_highlightVehicleIcon.value = section.highlightVehicleIcon;
 		this.p_battle.v_drawGrid.value = section.drawGrid;
 		this.p_battle.v_hideXVMVersion.value = section.hideXVMVersion;
 		this.p_battle.v_useStandardMarkers.value = section.useStandardMarkers;
@@ -99,6 +100,7 @@ private function RefreshBattleLoadingPage():void
 		section = Config.s_config.battleLoading;
 		this.p_battleLoading.v_showClock.value = section.showClock;
 		this.p_battleLoading.v_showChances.value = section.showChances;
+		this.p_battleLoading.v_showChancesExp.value = section.showChancesExp;
 		this.p_battleLoading.v_removeSquadIcon.value = section.removeSquadIcon;
 		this.p_battleLoading_text.v_formatLeft.value = section.formatLeft;
 		this.p_battleLoading_text.v_formatRight.value = section.formatRight;
@@ -128,6 +130,7 @@ private function RefreshStatisticFormPage():void
 
 		section = Config.s_config.statisticForm;
 		this.p_statisticForm.v_showChances.value = section.showChances;
+		this.p_statisticForm.v_showChancesExp.value = section.showChancesExp;
 		this.p_statisticForm.v_removeSquadIcon.value = section.removeSquadIcon;
 		this.p_statisticForm_text.v_formatLeft.value = section.formatLeft;
 		this.p_statisticForm_text.v_formatRight.value = section.formatRight;

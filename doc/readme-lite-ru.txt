@@ -21,7 +21,7 @@
   Сайт проекта: http://code.google.com/p/wot-xvm/
   Поддержка:    http://forum.bulychev.net/viewforum.php?f=6
   FAQ:          http://www.koreanrandom.com/forum/topic/1381-faq-otveti-na-chastie-voprosi-po-xvm/
-  Редактор:     https://sites.google.com/site/sirmaxwiki/xvm-editor
+  Редактор:     http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
 -----------------------------------------------------------
 2. УСТАНОВКА
@@ -36,7 +36,7 @@
        \res_mods\[ВЕРСИЯ ИГРЫ]\gui\flash\XVM.xvmconf
 
      Можно скопировать готовый из папки \xvm-doc\samples\, или воспользоваться
-     онлайн-редактором: https://sites.google.com/site/sirmaxwiki/xvm-editor
+     онлайн-редактором: http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
      Старые конфигурационные файлы OTMData.xml тоже поддерживаются, вы можете
      их использовать если вам не нужны новые возможности.
@@ -68,7 +68,7 @@
     \res_mods\[ВЕРСИЯ ИГРЫ]\gui\flash\XVM.xvmconf
   Можно скопировать готовый конфиг из папки \xvm-doc\samples\
   Можно создать новый конфиг или изменить существующий с помощью онлайн-редактора:
-    https://sites.google.com/site/sirmaxwiki/xvm-editor
+    http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
   Все возможные параметры конфига можно посмотреть в конфиге с русскими комментариями,
   который находится в папке документации в архиве мода:

@@ -113,7 +113,7 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
       if (!s_chancesField)
       {
         s_chancesField = form_mc.battleText;
-        s_chancesText = Stat.ShowChances(s_chancesField);
+        s_chancesText = Stat.ShowChances(s_chancesField, Config.s_config.battleLoading.showChancesExp);
       }
       if (s_chancesField.htmlText != s_chancesText)
       {

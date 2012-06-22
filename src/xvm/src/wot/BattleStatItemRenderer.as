@@ -77,7 +77,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
       if (!s_chancesField)
       {
         s_chancesField = _root.statsDialog.battleText;
-        s_chancesText = Stat.ShowChances(s_chancesField);
+        s_chancesText = Stat.ShowChances(s_chancesField, Config.s_config.statisticForm.showChancesExp);
       }
       if (s_chancesField.htmlText != s_chancesText)
       {
@@ -126,6 +126,19 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     {
       Logger.add("DEBUG TIME: BattleStatItemRenderer[" + data.label + "]: updateData(): " +
         Utils.elapsedMSec(start, new Date()) + " ms");
+    }
+  }
+
+  // override
+  function updateState()
+  {
+    super.updateState();
+
+    if (Config.s_config.battle.highlightVehicleIcon == false && (selected || data.squad > 10))
+    {
+      var tr = new flash.geom.Transform(iconLoader);
+      tr.colorTransform = net.wargaming.managers.ColorSchemeManager.instance.getScheme(
+        (data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0 ? "normal" : "normal_dead").transform;
     }
   }
 

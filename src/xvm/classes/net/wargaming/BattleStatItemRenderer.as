@@ -6,5 +6,8 @@
   var owner;
   var squad;
 
+  function get selected();
+
   function updateData();
+  function updateState();
 }

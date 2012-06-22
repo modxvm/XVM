@@ -31,6 +31,8 @@ class wot.utils.DefaultConfig
         showPostmortemTips: true,
         // true - убрать переключатель режимов мышкой
         removePanelsModeSwitcher: false,
+        // false - disable highlighting of selected vehicle icon and squad
+        highlightVehicleIcon: true,
         // true - включить отображение сетки координат (может быть полезным для настройки)
         drawGrid: false,
         // true - отключить отображение версии xvm в верхнем левом углу экрана
@@ -49,6 +51,8 @@ class wot.utils.DefaultConfig
         showClock: true,
         // true - включить отображение шансов на победу
         showChances: true,
+        // Show experimental "chance to win" formula
+        showChancesExp: false,
         // true - убрать отображение иконки взвода
         removeSquadIcon: false,
         // параметры иконки игрока/клана
@@ -60,6 +64,8 @@ class wot.utils.DefaultConfig
       statisticForm: {
         // true - включить отображение шансов на победу
         showChances: true,
+        // Show experimental "chance to win" formula
+        showChancesExp: false,
         // true - убрать отображение иконки взвода
         removeSquadIcon: false,
         // параметры иконки игрока/клана

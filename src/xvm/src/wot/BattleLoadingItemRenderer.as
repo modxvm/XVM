@@ -100,6 +100,18 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
   }
 
   // override
+  function setState()
+  {
+    super.setState();
+
+    if (Config.s_config.battle.highlightVehicleIcon == false && (selected || data.squad > 10))
+    {
+      var tr = new flash.geom.Transform(iconLoader);
+      tr.colorTransform = net.wargaming.managers.ColorSchemeManager.instance.getScheme(!disabled ? "normal" : "normal_dead").transform;
+    }
+  }
+
+  // override
   function update()
   {
     if (!data)
@@ -107,7 +119,7 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
       super.update();
       return;
     }
-    self_bg._visible = _selected;
+    self_bg._visible = selected;
 
     onEnterFrame = function()
     {

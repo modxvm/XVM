@@ -12,7 +12,7 @@ class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRend
   var m_clanIcon: MovieClip = null;
   var m_iconset: Iconset = null;
   var m_iconLoaded: Boolean = false;
-  
+
   function PlayerListItemRenderer()
   {
     /*if (!_global.xvm)
@@ -46,6 +46,22 @@ class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRend
   }
 
   // override
+  function __getColorTransform(schemeName)
+  {
+    //wot.utils.Logger.add("data.squad=" + data.squad + " " + data.label + " scheme=" + schemeName);
+
+    if (Config.s_config.battle.highlightVehicleIcon == false)
+    {
+      if (schemeName == "selected" || schemeName == "squad")
+        schemeName = "normal";
+      else if (schemeName == "selected_dead" || schemeName == "squad_dead")
+        schemeName = "normal_dead";
+    }
+
+    return super.__getColorTransform(schemeName);
+  }
+
+  // override
   function update()
   {
     var saved_icon = data ? data.icon : null;
@@ -72,7 +88,7 @@ class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRend
     if (data)
       data.icon = saved_icon;
   }
-  
+
   function XVMClanIcon(cfg)
   {
     var pinfo = PlayerInfo.getPlayerInfo(data.label, data.clanAbbrev ? "[" + data.clanAbbrev + "]" : "");

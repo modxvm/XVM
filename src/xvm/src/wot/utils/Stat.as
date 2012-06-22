@@ -531,6 +531,8 @@ class wot.utils.Stat
 
     var m1 = 0;
     var m2 = 0;
+    var mXP1 = 0;
+    var mXP2 = 0;
     var mt1 = 0;
     var mt2 = 0;
     for (var i in s_player_names)
@@ -546,14 +548,31 @@ class wot.utils.Stat
       var eff: Number = s_player_ratings[pname].eff || ((pdata.team == Defines.TEAM_ALLY) ? ae1 : ae2);
       var gwr: Number = (s_player_ratings[pname].rating || ((pdata.team == Defines.TEAM_ALLY) ? a_r : a_r)) / 100.0;
       var bat: Number = (s_player_ratings[pname].battles || ((pdata.team == Defines.TEAM_ALLY) ? ab1 : ab2)) / 100000.0;
+      var batXP: Number = (s_player_ratings[pname].battles || ((pdata.team == Defines.TEAM_ALLY) ? ab1 : ab2));
+      if (batXP < 10000)
+        batXP = (batXP - 2000) / 10000.0;
+      else
+        batXP = 0.8 + (batXP - 10000) / 100000.0
+
       var gwrt: Number = (s_player_ratings[pname].t_rating || ((pdata.team == Defines.TEAM_ALLY) ? a_r : a_r)) / 100.0;
       //Logger.addObject(s_player_ratings[pname], "s_player_ratings[" + pname + "]");
 
       var tx = (vi.tiers[0] + vi.tiers[1]) / 2.0 - tier;
       var mx = eff * (1 + gwr - (a_r / 100.0)) * (1 + 0.25 * tx) * (1 + bat);
+      var mxXP = eff * (1 + gwr - (a_r / 100.0)) * (1 + 0.25 * tx) * (1 + batXP);
       var mxt = eff * (1 + gwrt - (a_r / 100.0)) * (1 + 0.25 * tx);
-      if (pdata.team == Defines.TEAM_ALLY) m1 += mx else m2 += mx;
-      if (pdata.team == Defines.TEAM_ALLY) mt1 += mxt else mt2 += mxt;
+      if (pdata.team == Defines.TEAM_ALLY)
+      {
+        m1 += mx;
+        mXP1 += mxXP;
+        mt1 += mxt;
+      }
+      else
+      {
+        m2 += mx;
+        mXP2 += mxXP;
+        mt2 += mxt;
+      }
       //Logger.add("mx=" + mx + " tx=" + tx + " eff=" + int(eff) + " gwr=" + int(gwr) + " kb=" + int(bat));
       //Logger.add("m1=" + m1 + " m2=" + m2 + " team: " + (pdata.team == Defines.TEAM_ALLY ? "ally" : "enemy") + " " + pdata.originalText);
     }
@@ -562,6 +581,10 @@ class wot.utils.Stat
     if (m1 == 0) m1 = m2;
     if (m2 == 0) m2 = m1;
     //Logger.add("m1=" + Math.round(m1) + " m2=" + Math.round(m2));
+
+    if (mXP1 == 0 && mXP2 == 0) mXP1 = mXP2 = 1;
+    if (mXP1 == 0) mXP1 = mXP2;
+    if (mXP2 == 0) mXP2 = mXP1;
 
     if (mt1 == 0 && mt2 == 0) mt1 = mt2 = 1;
     if (mt1 == 0) mt1 = mt2;
@@ -573,6 +596,11 @@ class wot.utils.Stat
       m2: Math.round(m2),
       m: NormalizeResult(m1, m2),
       m_raw: m1 / (m1 + m2) * 100,
+
+      mXP1: Math.round(mXP1),
+      mXP2: Math.round(mXP2),
+      mXP: NormalizeResult(mXP1, mXP2),
+      mXP_raw: mXP1 / (mXP1 + mXP2) * 100,
 
       mt1: Math.round(mt1),
       mt2: Math.round(mt2),
@@ -657,24 +685,34 @@ class wot.utils.Stat
     return (tierMax + tierMin) / 2.0;
   }
 
-  public static function ShowChances(tf: TextField): String
+  public static function ShowChances(tf: TextField, showExp: Boolean): String
   {
     var chances = Stat.GetChances();
     if (chances != null)
     {
       tf.html = true;
+      tf._width += 200;
+      tf._x -= 100;
+      var htmlText;
       if (chances.error)
-        tf.htmlText = tf.text + " | <font color='#FF8080'>" + Locale.get("Chances error") + ": " + chances.error + "</font>";
+        htmlText = tf.text + " | <font color='#FF8080'>" + Locale.get("Chances error") + ": " + chances.error + "</font>";
       else
       {
         var color = GraphicsUtil.brightenColor(
           Number(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, chances.m_raw, "0x")), 50);
-        tf.htmlText = tf.text +
+        htmlText = tf.text +
           " | <font color='#" + color.toString(16) + "'>" +
           Locale.get("Chance to win") + ": " +
           Locale.get("Global") + ": " + chances.m + "%" + ", " +
-          Locale.get("By vehicle") + ": " + chances.mt + "%</font>";
+          Locale.get("Per-vehicle") + ": " + chances.mt + "%</font>";
+        if (showExp)
+        {
+          color = GraphicsUtil.brightenColor(
+            Number(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, chances.mXP_raw, "0x")), 50);
+          htmlText += " | <font color='#" + color.toString(16) + "'>Exp: " + chances.mXP + "%</font>";
+        }
       }
+      tf.htmlText = htmlText;
     }
     return tf.htmlText;
   }

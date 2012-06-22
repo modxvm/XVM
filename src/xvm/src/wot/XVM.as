@@ -347,7 +347,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   // override
   function _centeringIcon()
   {
-    if (Config.s_config.battle.useStandardMarkers)
+    if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
       super._centeringIcon();
   }
 
@@ -937,7 +937,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   {
     try
     {
-      //Logger.add("XVMUpdateStyle: " + m_vname + " " + m_playerFullName);
+      //Logger.add("XVMUpdateStyle: " + m_vname + " " + m_playerFullName + " scale=" + marker._xscale);
       if (!Config.s_loaded)
         return;
 
