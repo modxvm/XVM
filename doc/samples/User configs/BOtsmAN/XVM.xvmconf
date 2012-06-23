@@ -3,7 +3,7 @@
   "definition": {
     "author": "BOtsmAN",
     "description": "Settings for XVM",
-    "url": "http://www.koreanrandom.com/forum/topic/1384-xvm-configurations/#entry10784,
+    "url": "http://www.koreanrandom.com/forum/topic/1384-xvm-configurations/#entry10784",
     "date": "3.06.2012",
     "gameVersion": "0.7.3",
     "modMinVersion": "2.3"
@@ -34,8 +34,8 @@
   },
   "playersPanel": {
     "alpha": 80,
-    "removeSquadIcon": true, 
-    "clanIcon": { "show": false, "x": 85, "y": 4, "h": 16, "w": 16, "alpha": 100 },            
+    "removeSquadIcon": true,
+    "clanIcon": { "show": false, "x": 85, "y": 4, "h": 16, "w": 16, "alpha": 100 },
     "medium": {
      "width": 70,
       "formatLeft": "<font color='{{c:rating}}'>{{rating}}</font> {{vehicle}}",
