@@ -5,19 +5,17 @@
       battle/highlightVehicleIcon - setup highlighting of selected vehicle icon and squad
   * editor moved: http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
-XVM-2.4.1.test3:
-  * added option:
-      markers/*/vehicleIcon/showSpeaker - show speaker even if vehicle type
-      icon is disabled
-  * removed macros {{c:t-kb}}, use {{c:t-battles}} instead.
-  * fixed icon appearing for a moment when vehicle is spotted
-
-XVM-2.4.1.test2:
+XVM-2.4.1:
   * battle task animation removed
   * added new macros:
       {{t-kb-0}} - kilo-battles with leading zero
       {{t-hb}} - hecto-battles - battles/100
       {{t-hb:3}} - hecto-battles aligned to 3 chars
+  * added option:
+      markers/*/vehicleIcon/showSpeaker - show speaker even if vehicle type
+      icon is disabled
+  * removed macros {{c:t-kb}}, use {{c:t-battles}} instead.
+  * fixed icon appearing for a moment when vehicle is spotted
 
 XVM-2.4:
   * adaptation to WoT 0.7.4
