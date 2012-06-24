@@ -400,7 +400,7 @@
               "x": -24,
               "y": -44,
               "alpha": 100,
-              "color": "{{c:t-kb}}",
+              "color": "{{c:t-battles}}",
               "font": {
                 "name": "$FieldFont",
                 "size": 12,
@@ -983,7 +983,7 @@
               "x": -24,
               "y": -44,
               "alpha": 100,
-              "color": "{{c:t-kb}}",
+              "color": "{{c:t-battles}}",
               "font": {
                 "name": "$FieldFont",
                 "size": 12,

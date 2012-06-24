@@ -520,7 +520,7 @@ class wot.utils.Stat
 
 
     // Calculate average values
-    var a_r = 48; // avg rating is approximately 48%
+    var a_r = 48.5; // avg rating is approximately 48%
 
     var ae1 = AvgStat("e", Defines.TEAM_ALLY);
     var ae2 = AvgStat("e", Defines.TEAM_ENEMY);

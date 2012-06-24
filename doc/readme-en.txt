@@ -141,7 +141,6 @@
       {{c:rating}}    - color depended from GWR
       {{c:kb}}        - color depended from kilo-battles
       {{c:t-rating}}  - color depended from current vehicle win ratio
-      {{c:t-kb}}      - color depended from current vehicle kilo-battles
       {{c:t-battles}} - color depended from current vehicle battles
 
     Dynamic transparency macros:
