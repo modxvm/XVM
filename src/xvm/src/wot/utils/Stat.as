@@ -520,7 +520,7 @@ class wot.utils.Stat
 
 
     // Calculate average values
-    var a_r = 48.5; // avg rating is approximately 48%
+    var avg_r = 48.5; // avg rating is approximately 48%
 
     var ae1 = AvgStat("e", Defines.TEAM_ALLY);
     var ae2 = AvgStat("e", Defines.TEAM_ENEMY);
@@ -545,22 +545,25 @@ class wot.utils.Stat
       if (!vi || vi.level == 0)
         return { error: "No data for: " + VehicleInfo.getName(pdata.icon) };
 
-      var eff: Number = s_player_ratings[pname].eff || ((pdata.team == Defines.TEAM_ALLY) ? ae1 : ae2);
-      var gwr: Number = (s_player_ratings[pname].rating || ((pdata.team == Defines.TEAM_ALLY) ? a_r : a_r)) / 100.0;
-      var bat: Number = (s_player_ratings[pname].battles || ((pdata.team == Defines.TEAM_ALLY) ? ab1 : ab2)) / 100000.0;
-      var batXP: Number = (s_player_ratings[pname].battles || ((pdata.team == Defines.TEAM_ALLY) ? ab1 : ab2));
+      var stat = s_player_ratings[pname];
+      var eff: Number = stat.eff || ((pdata.team == Defines.TEAM_ALLY) ? ae1 : ae2);
+      var gwr: Number = (stat.r || avg_r) / 100.0;
+      var bat: Number = (stat.b || ((pdata.team == Defines.TEAM_ALLY) ? ab1 : ab2)) / 100000.0;
+      var batXP: Number = (stat.b || ((pdata.team == Defines.TEAM_ALLY) ? ab1 : ab2));
       if (batXP < 10000)
         batXP = (batXP - 2000) / 10000.0;
       else
         batXP = 0.8 + (batXP - 10000) / 100000.0
 
-      var gwrt: Number = (s_player_ratings[pname].t_rating || ((pdata.team == Defines.TEAM_ALLY) ? a_r : a_r)) / 100.0;
+      var twr_pre: Number = Math.max(-10, Math.min(10, (stat.tr || avg_r) - avg_r));
+      var twr = twr_pre / 100.0 * 4;
+      //Logger.add("twr=" + twr + " pname=" + pname + " tr=" + s_player_ratings[pname].tr);
       //Logger.addObject(s_player_ratings[pname], "s_player_ratings[" + pname + "]");
 
       var tx = (vi.tiers[0] + vi.tiers[1]) / 2.0 - tier;
-      var mx = eff * (1 + gwr - (a_r / 100.0)) * (1 + 0.25 * tx) * (1 + bat);
-      var mxXP = eff * (1 + gwr - (a_r / 100.0)) * (1 + 0.25 * tx) * (1 + batXP);
-      var mxt = eff * (1 + gwrt - (a_r / 100.0)) * (1 + 0.25 * tx);
+      var mx = eff * (1 + gwr - (avg_r / 100.0)) * (1 + 0.25 * tx) * (1 + bat);
+      var mxXP = eff * (1 + gwr - (avg_r / 100.0)) * (1 + 0.25 * tx) * (1 + batXP);
+      var mxt = eff * (1 + twr) * (1 + 0.25 * tx);
       if (pdata.team == Defines.TEAM_ALLY)
       {
         m1 += mx;

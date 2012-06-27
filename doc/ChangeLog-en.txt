@@ -1,4 +1,7 @@
-﻿XVM-2.4.2.test1:
+﻿XVM-2.4.2.test2:
+  * fixed chances calculation formula
+
+XVM-2.4.2.test1:
   * fixed ally icon position using standard markers
   * added experimental chance to win formula
   * added new option:

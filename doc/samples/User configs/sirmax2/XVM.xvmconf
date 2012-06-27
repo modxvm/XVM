@@ -72,7 +72,41 @@
           },
           "damageText": {
             "damageMessage": "{{dmg}}"
-          }
+          },
+          "textFields": [
+            {
+              "visible": true,
+              "name": "Vehicle Name",
+              "x": 0, "y": -26, "alpha": 100, "color": null,
+              "font": { "name": "$FieldFont", "size": 13, "align": "center", "bold": false },
+              "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
+              "format": "{{vehicle}}"
+            },
+            {
+              "visible": true,
+              "name": "HP",
+              "x": 0, "y": -39, "alpha": "{{a:hp}}", "color": "{{c:hp}}",
+              "font": { "name": "$FieldFont", "size": 11, "align": "center", "bold": true },
+              "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
+              "format": "{{hp}}"
+            },
+/*            {
+              "visible": true,
+              "name": "T-Rating mark",
+              "x": -3, "y": -11, "alpha": 100, "color": "{{c:t-rating}}",
+              "font": { "name": "Symbol", "size": 12, "align": "center", "bold": true },
+              "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 100, "distance": 0, "size": 1 },
+              "format": "·"
+            },*/
+            {
+              "visible": true,
+              "name": "Efficiency mark",
+              "x": 25, "y": -16, "alpha": 100, "color": "{{c:eff}}",
+              "font": { "name": "Symbol", "size": 12, "align": "center", "bold": true },
+              "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 100, "distance": 0, "size": 1 },
+              "format": "·"
+            }
+          ]
         },
         "extended": {
           "vehicleIcon": {
@@ -139,47 +173,35 @@
           "textFields": [
             {
               "visible": true,
-              "x": 0,
-              "y": -26,
-              "alpha": 100,
-              "color": null,
-              "font": {
-                "name": "$FieldFont",
-                "size": 13,
-                "align": "center",
-                "bold": false
-              },
-              "shadow": {
-                "alpha": 100,
-                "color": "0x000000",
-                "angle": 0,
-                "strength": 200,
-                "distance": 0,
-                "size": 3
-              },
+              "name": "Vehicle Name",
+              "x": 0, "y": -26, "alpha": 100, "color": null,
+              "font": { "name": "$FieldFont", "size": 13, "align": "center", "bold": false },
+              "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
               "format": "{{vehicle}}"
             },
             {
               "visible": true,
-              "x": 0,
-              "y": -39,
-              "alpha": "{{a:hp}}",
-              "color": "{{c:hp}}",
-              "font": {
-                "name": "$FieldFont",
-                "size": 11,
-                "align": "center",
-                "bold": true
-              },
-              "shadow": {
-                "alpha": 100,
-                "color": "0x000000",
-                "angle": 45,
-                "strength": 60,
-                "distance": 1,
-                "size": 1
-              },
+              "name": "HP",
+              "x": 0, "y": -39, "alpha": "{{a:hp}}", "color": "{{c:hp}}",
+              "font": { "name": "$FieldFont", "size": 11, "align": "center", "bold": true },
+              "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
               "format": "{{hp}}"
+            },
+/*            {
+              "visible": true,
+              "name": "T-Rating mark",
+              "x": -3, "y": -11, "alpha": 100, "color": "{{c:t-rating}}",
+              "font": { "name": "Symbol", "size": 12, "align": "center", "bold": true },
+              "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 100, "distance": 0, "size": 1 },
+              "format": "·"
+            },*/
+            {
+              "visible": true,
+              "name": "Efficiency mark",
+              "x": 25, "y": -16, "alpha": 100, "color": "{{c:eff}}",
+              "font": { "name": "Symbol", "size": 12, "align": "center", "bold": true },
+              "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 100, "distance": 0, "size": 1 },
+              "format": "·"
             }
           ]
         },
