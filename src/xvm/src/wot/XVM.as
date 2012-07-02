@@ -14,7 +14,7 @@ import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.GraphicsUtil;
 import wot.utils.Iconset;
-import wot.utils.Stat;
+import wot.utils.StatFormat;
 import wot.utils.Utils;
 import wot.utils.Logger;
 import wot.utils.PlayerInfo;
@@ -460,7 +460,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       format = format.split("{{nick}}").join(m_playerFullName);
       format = format.split("{{vehicle}}").join(m_vname);
       format = format.split("{{level}}").join(String(m_level));
-      format = Stat.FormatText({ label: m_playerFullName }, format);
+      format = StatFormat.FormatText({ label: m_playerFullName }, format);
       format = Utils.trim(format);
     }
     catch (e)
@@ -503,7 +503,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       if (!format || isFinite(format))
         return format;
 
-      format = Stat.FormatText( { label: m_playerFullName }, format).split("#").join("0x");
+      format = StatFormat.FormatText( { label: m_playerFullName }, format).split("#").join("0x");
     }
     catch (e)
     {

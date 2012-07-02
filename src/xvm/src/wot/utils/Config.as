@@ -5,7 +5,7 @@
 import wot.utils.Defines;
 import wot.utils.Locale;
 import wot.utils.Logger;
-import wot.utils.Stat;
+import wot.utils.StatLoader;
 import wot.utils.Utils;
 
 class wot.utils.Config
@@ -180,7 +180,7 @@ class wot.utils.Config
         }
         Config.TuneupConfig();
         if (Config.s_load_last_stat && Config.s_config.rating.showPlayersStatistics)
-          Stat.LoadStatData(Defines.COMMAND_GET_LAST_STAT);
+          StatLoader.LoadStatData(Defines.COMMAND_GET_LAST_STAT);
       }
       finally
       {

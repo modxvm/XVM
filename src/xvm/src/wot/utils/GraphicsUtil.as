@@ -167,6 +167,11 @@ class wot.utils.GraphicsUtil
     return max;
   }
 
+  public static function GetDynamicColorValueInt(type: Number, value: Number, darker: Boolean): Number
+  {
+    return Number(GetDynamicColorValue(type, value, "0x", darker));
+  }
+  
   public static function GetDynamicColorValue(type: Number, value: Number, prefix: String, darker: Boolean): String
   {
     if (!prefix)

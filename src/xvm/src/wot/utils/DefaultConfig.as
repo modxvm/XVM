@@ -314,7 +314,8 @@ class wot.utils.DefaultConfig
         playersPanel:  "../maps/icons/vehicle/contour",
         vehicleMarker: "../maps/icons/vehicle/contour"
       },
-      players: players
+      players: players,
+      const: const
     };
 
     return a;
@@ -946,5 +947,15 @@ class wot.utils.DefaultConfig
         ]
       }
     ];
+  }
+
+  public static function get const(): Object
+  {
+    return
+    {
+      AVG_GWR: 48,  // Average GWR. Source: http://wot-news.com/stat/server/ru/norm/en
+      AVG_EFF: 900, // Average Efficiency. Source: http://wot-news.com/index.php/stat/calc/en
+      AVG_BATTLES: 1000 // Averate number of battles. Source: http://wot-news.com/stat/server/ru/norm/en
+    };
   }
 }

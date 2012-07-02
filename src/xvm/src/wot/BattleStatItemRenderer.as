@@ -4,25 +4,28 @@
  */
 
 import wot.utils.Config;
+import wot.utils.Chance;
 import wot.utils.Defines;
 import wot.utils.Iconset;
 import wot.utils.Logger;
 import wot.utils.PlayerInfo;
-import wot.utils.Stat;
+import wot.utils.StatData;
+import wot.utils.StatLoader;
+import wot.utils.StatFormat;
 import wot.utils.Utils;
 
 class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
 {
   static var DEBUG_TIMES = false;
 
-  public static var s_chancesField: TextField = null;
-  public static var s_chancesText: String;
+  public static var s_chanceField: TextField = null;
+  public static var s_chanceText: String;
 
   var m_clanIcon: MovieClip = null;
   var m_textCache = {};
   var m_iconset: Iconset = null;
   var m_iconLoaded: Boolean = false;
-  
+
   function BattleStatItemRenderer()
   {
     /*if (!_global.xvm)
@@ -70,28 +73,28 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
   {
     var start = new Date();
 
-    // Chances
-    //Logger.add(Stat.s_player_names.length.toString());
-    if (Stat.s_loaded && Config.s_config.statisticForm.showChances && Stat.s_player_names.length == 30)
+    // Chance
+    //Logger.add(Stat.s_players_count.toString());
+    if (StatLoader.s_loaded && Config.s_config.statisticForm.showChances && StatLoader.s_players_count === 30)
     {
-      if (!s_chancesField)
+      if (!s_chanceField)
       {
-        s_chancesField = _root.statsDialog.battleText;
-        s_chancesText = Stat.ShowChances(s_chancesField, Config.s_config.statisticForm.showChancesExp);
+        s_chanceField = _root.statsDialog.battleText;
+        s_chanceText = Chance.ShowChance(s_chanceField, Config.s_config.statisticForm.showChancesExp);
       }
-      if (s_chancesField.htmlText != s_chancesText)
+      if (s_chanceField.htmlText != s_chanceText)
       {
-        //Logger.add(s_chancesField.htmlText);
-        s_chancesField.html = true;
-        s_chancesField.htmlText = s_chancesText;
+        //Logger.add(s_chanceField.htmlText);
+        s_chanceField.html = true;
+        s_chanceField.htmlText = s_chanceText;
       }
     }
 
     var saved_icon = data ? data.icon : null;
     if (data)
     {
-      if (Config.s_config.rating.showPlayersStatistics && !Stat.s_player_data[data.label.toUpperCase()])
-        Stat.AddPlayerData(this, null, 1, data.label, data.vehicle, data.icon, team);
+      if (Config.s_config.rating.showPlayersStatistics && !StatData.s_data[data.label.toUpperCase()])
+        StatLoader.AddPlayerData(this, null, 1, data.label, data.vehicle, data.icon, team);
 
       // Alternative icon set
       if (!m_iconset)
@@ -116,7 +119,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
 
     if (!m_textCache.hasOwnProperty(data.label))
     {
-      m_textCache[data.label] = Stat.DecorateField(data, data.vehicle,
+      m_textCache[data.label] = StatFormat.DecorateField(data, data.vehicle,
         team == Defines.TEAM_ALLY ? Config.s_config.statisticForm.formatLeft : Config.s_config.statisticForm.formatRight,
         team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
     }

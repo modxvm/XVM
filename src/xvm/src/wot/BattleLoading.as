@@ -7,15 +7,16 @@ import com.greensock.TimelineLite;
 import com.greensock.TweenLite;
 import wot.utils.Config;
 import wot.utils.Defines;
-import wot.utils.Stat;
+import wot.utils.StatLoader;
+import wot.utils.Chance;
 import wot.utils.Utils;
 
 class wot.BattleLoading extends net.wargaming.BattleLoading
 {
   public static var infoField: TextField = null;
 
-  public static var s_chancesField: TextField = null;
-  public static var s_chancesText: String;
+  public static var s_chanceField: TextField = null;
+  public static var s_chanceText: String;
 
   public function BattleLoading()
   {
@@ -75,7 +76,7 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
   public function StartLoadData()
   {
     if (Config.s_config.rating.showPlayersStatistics)
-      Stat.StartLoadData();
+      StatLoader.StartLoadData();
   }
 
   public function setInfoFieldData(data)
@@ -107,19 +108,19 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
 
     infoField.text = txt;
 
-    // Chances
-    if (Stat.s_loaded && Config.s_config.battleLoading.showChances)
+    // Chance
+    if (StatLoader.s_loaded && Config.s_config.battleLoading.showChances)
     {
-      if (!s_chancesField)
+      if (!s_chanceField)
       {
-        s_chancesField = form_mc.battleText;
-        s_chancesText = Stat.ShowChances(s_chancesField, Config.s_config.battleLoading.showChancesExp);
+        s_chanceField = form_mc.battleText;
+        s_chanceText = Chance.ShowChance(s_chanceField, Config.s_config.battleLoading.showChancesExp);
       }
-      if (s_chancesField.htmlText != s_chancesText)
+      if (s_chanceField.htmlText != s_chanceText)
       {
-        //wot.utils.Logger.add(s_chancesField.htmlText);
-        s_chancesField.html = true;
-        s_chancesField.htmlText = s_chancesText;
+        //wot.utils.Logger.add(s_chanceField.htmlText);
+        s_chanceField.html = true;
+        s_chanceField.htmlText = s_chanceText;
       }
     }
   }

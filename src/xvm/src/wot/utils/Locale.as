@@ -23,7 +23,7 @@ class wot.utils.Locale
 
     // RU
     tr = _translations["RU"];
-    tr["Chances error"] = "Ошибка расчета шансов";
+    tr["Chance error"] = "Ошибка расчета шансов";
     tr["Chance to win"] = "Шанс на победу";
     tr["Global"] = "Общий";
     tr["Per-vehicle"] = "По технике";
@@ -33,7 +33,7 @@ class wot.utils.Locale
 
     // CN
     tr = _translations["CN"];
-    tr["Chances error"] = "Chances error";
+    tr["Chance error"] = "Chance error";
     tr["Chance to win"] = "Chance to win";
     tr["Global"] = "Global";
     tr["Per-vehicle"] = "Per-vehicle";

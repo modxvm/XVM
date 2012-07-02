@@ -4,7 +4,7 @@
  */
 import wot.utils.Config;
 import wot.utils.Logger;
-import wot.utils.Stat;
+import wot.utils.StatFormat;
 import wot.utils.Utils;
 
 class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
@@ -185,7 +185,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     }
 
     format = format.split("{{vehicle}}").join(data.vehicle.toString());
-    format = Stat.FormatText(data, format, isDead);
+    format = StatFormat.FormatText(data, format, isDead);
 
     // cut player name for field width
     if (format.indexOf("{{nick}}") > -1)

@@ -1,4 +1,7 @@
-﻿XVM-2.4.2.test2:
+﻿XVM-2.4.2.test3:
+  * code refactoring
+
+XVM-2.4.2.test2:
   * fixed chances calculation formula
 
 XVM-2.4.2.test1:

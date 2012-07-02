@@ -6,7 +6,8 @@ import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.Iconset;
 import wot.utils.Logger;
-import wot.utils.Stat;
+import wot.utils.StatLoader;
+import wot.utils.StatFormat;
 import wot.utils.PlayerInfo;
 import wot.utils.Utils;
 
@@ -76,9 +77,9 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
             "  loadEnemyStatsInFogOfWar=" + Config.s_config.rating.loadEnemyStatsInFogOfWar + "\n" +
             "  useStandardMarkers=" + Config.s_config.battle.useStandardMarkers);
         }
-        Stat.AddPlayerData(this, XVMStatUpdateCallback, data.id, data.label, data.vehicle, data.icon, team);
-        if (Stat.s_player_ids.length === 30)
-          Stat.StartLoadData();
+        StatLoader.AddPlayerData(this, XVMStatUpdateCallback, data.id, data.label, data.vehicle, data.icon, team);
+        if (StatLoader.s_players_count === 30)
+          StatLoader.StartLoadData();
       }
 
       // Player/clan icons
@@ -160,7 +161,7 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
     //Logger.add("XVMStatUpdateCallback(): " + pdata.originalText);
     if (!m_textCache.hasOwnProperty(pdata.fullPlayerName))
     {
-      m_textCache[data.label] = Stat.DecorateField(pdata, pdata.originalText,
+      m_textCache[data.label] = StatFormat.DecorateField(pdata, pdata.originalText,
         team == Defines.TEAM_ALLY ? Config.s_config.battleLoading.formatLeft : Config.s_config.battleLoading.formatRight,
         team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
     }
