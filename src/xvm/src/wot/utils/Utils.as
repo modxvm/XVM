@@ -2,15 +2,20 @@
  * ...
  * @author sirmax2
  */
+import com.greensock.TimelineLite;
+import com.greensock.TweenLite;
+ 
 class wot.utils.Utils
 {
+  private static var TRACE_XVM_MODULES = true;
+
   public static function indexOf(array:Array, value:Object):Number
   {
     var i:Number = 0;
     var len:Number = array.length;
     while(i < len)
     {
-      if(array[i] === value)
+      if (array[i] === value)
         return i;
       ++i;
     }
@@ -30,8 +35,8 @@ class wot.utils.Utils
   public static function trim(str: String): String
   {
     var i, j;
-    for(i = 0; str.charCodeAt(i) < 33; ++i);
-    for(j = str.length-1; str.charCodeAt(j) < 33; --j);
+    for (i = 0; str.charCodeAt(i) < 33; ++i);
+    for (j = str.length-1; str.charCodeAt(j) < 33; --j);
     return str.substring(i, j+1);
   }
 
@@ -170,5 +175,24 @@ class wot.utils.Utils
     }
     return sourceArray;
  
+  }
+
+  public static function runTimer(target: Object, duration: Number, func: Function, params: Array): TimelineLite
+  {
+    var timer: TimelineLite = new TimelineLite({onComplete:func, onCompleteParams:params || []});
+    timer.insert(new TweenLite(target, duration));
+    return timer;
+  }
+
+  private static var xvmModules: Array = [];
+  public static function TraceXvmModule(moduleName: String)
+  {
+    if (!TRACE_XVM_MODULES)
+      return;
+    if (wot.utils.Utils.indexOf(xvmModules, moduleName) == -1)
+    {
+      xvmModules.push(moduleName);
+      wot.utils.Logger.add("xvm-> [ \"" + xvmModules.join("\", \"") + "\" ]");
+    }
   }
 }

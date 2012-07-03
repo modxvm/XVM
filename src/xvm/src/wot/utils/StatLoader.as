@@ -6,7 +6,9 @@
 import com.greensock.TimelineLite;
 import com.greensock.TweenLite;
 import com.xvm.JSON;
+import wot.utils.Config;
 import wot.utils.Defines;
+import wot.utils.Logger;
 import wot.utils.StatData;
 import wot.utils.Utils;
 import wot.utils.VehicleInfo;
@@ -22,6 +24,8 @@ class wot.utils.StatLoader
   private static var retrieved: Boolean = true;
   private static var runningIngame: Boolean = false;
   private static var added: Boolean = false;
+
+  private static var dummy = Logger.dummy; // avoid import warning
 
   // so we don't have to create it at function execution:
   // try to retrieve stats after 0.3, 0.5, 1 and 3 seconds
@@ -109,6 +113,12 @@ class wot.utils.StatLoader
     }
   }
 
+  public static function LoadLastStat()
+  {
+    if (Config.s_config.rating.showPlayersStatistics)
+      LoadStatData(Defines.COMMAND_GET_LAST_STAT);
+  }
+
   public static function LoadStatData(command)
   {
     if (s_loaded)
@@ -116,7 +126,7 @@ class wot.utils.StatLoader
     s_loaded = true;
 
     var lv:LoadVars = new LoadVars();
-    lv.onData = function(str)
+    lv.onData = function(str: String)
     {
       try
       {
@@ -128,7 +138,17 @@ class wot.utils.StatLoader
         for (var i = 0; i < stats.players.length; ++i)
         {
           var stat = stats.players[i];
-          StatData.s_data[stat.name.toUpperCase()].stat = StatLoader.CalculateRating(stat);
+          stat = StatLoader.CalculateRating(stat);
+          var name = stat.name.toUpperCase();
+          if (StatData.s_data[name])
+            StatData.s_data[name].stat = stat;
+          // processing Common Test
+          else if (StatData.s_data[name + "_RU"])
+            StatData.s_data[name + "_RU"].stat = stat;
+          else if (StatData.s_data[name + "_EU"])
+            StatData.s_data[name + "_EU"].stat = stat;
+          else if (StatData.s_data[name + "_US"])
+            StatData.s_data[name + "_US"].stat = stat;
           //Logger.addObject(stat, stat.name);
         };
 
@@ -169,7 +189,6 @@ class wot.utils.StatLoader
   private static function UpdateAll()
   {
     //Logger.add("Stat.UpdateAll()");
-
     for (var pname in StatData.s_data)
     {
       var pdata = StatData.s_data[pname];

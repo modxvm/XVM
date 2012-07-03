@@ -5,7 +5,6 @@
 import wot.utils.Defines;
 import wot.utils.Locale;
 import wot.utils.Logger;
-import wot.utils.StatLoader;
 import wot.utils.Utils;
 
 class wot.utils.Config
@@ -18,38 +17,34 @@ class wot.utils.Config
   public static var s_loaded: Boolean = false;
   public static var s_game_region: String = null;
   private static var s_loading: Boolean = false;
-  private static var s_load_last_stat: Boolean = false;
   private static var s_load_legacy_config: Boolean = false;
+  private static var s_load_complete_funcs: Array = []; // Static only
   private static var s_config_filename: String = "";
-  private static var s_src: String;
+  private static var s_src: String = "";
 
   // Load XVM mod config; config data is shared between all marker instances, so
   // it should be loaded only once per session. s_loaded flag indicates that
   // we've already initialized config loading process.
-  public static function LoadConfig(filename: String, src: String)
+  public static function LoadConfig(src: String, filename: String, legacy: Boolean, completeFunc: Function)
   {
-    if (s_loading || s_loaded)
+    //Logger.add("TRACE: LoadConfig()");
+    if (s_loaded || s_loading)
       return;
-    s_loading = true;
-    s_config_filename = filename || Defines.DEFAULT_CONFIG_NAME;
     s_src = src || "";
+    s_config_filename = filename || Defines.DEFAULT_CONFIG_NAME;
+    s_load_legacy_config = legacy ? true : false;
+    if (Utils.indexOf(s_load_complete_funcs, completeFunc) == -1)
+      s_load_complete_funcs.push(completeFunc);
     ReloadConfig();
   }
 
-  public static function LoadConfigAndStat(filename: String, src: String)
+  private static function ReloadConfig()
   {
-    s_load_last_stat = true;
-    LoadConfig(filename, src);
-  }
+    //Logger.add("TRACE: Config.ReloadConfig()");
+    if (s_loading)
+      return;
+    s_loading = true;
 
-  public static function LoadConfigAndStatLegacy(filename: String, src: String)
-  {
-    s_load_legacy_config = true;
-    LoadConfigAndStat(filename, src);
-  }
-
-  public static function ReloadConfig()
-  {
     Config.s_config = wot.utils.DefaultConfig.config;
     if (s_load_legacy_config)
       ReloadLegacyConfig();
@@ -57,8 +52,9 @@ class wot.utils.Config
       ReloadXvmConfig();
   }
 
-  public static function ReloadLegacyConfig()
+  private static function ReloadLegacyConfig()
   {
+    //Logger.add("TRACE: Config.ReloadLegacyConfig()");
     var start = new Date();
     if (Config.DEBUG_TIMES)
       Logger.add("DEBUG TIME: ReloadLegacyConfig(): Start " + s_src);
@@ -66,6 +62,7 @@ class wot.utils.Config
     xml.ignoreWhite = true;
     xml.onLoad = function(success: Boolean)
     {
+      var finallyBugWorkaround: Boolean = false; // Workaround: finally block have a bug - it can be called twice. Why? How? F*ck!
       try
       {
         var diff = 0;
@@ -102,129 +99,152 @@ class wot.utils.Config
       }
       finally
       {
+        if (finallyBugWorkaround)
+          return;
+        finallyBugWorkaround = true;
         Config.ReloadXvmConfig();
       }
     };
     xml.load("OTMData.xml");
   }
 
-  private static var _ReloadXvmConfigStarted: Boolean = false;
-  private static var _RegionLoaded: Boolean = false;
   private static function ReloadXvmConfig()
   {
-    if (_ReloadXvmConfigStarted)
-      return;
-    _ReloadXvmConfigStarted = true;
+    //Logger.add("TRACE: Config.ReloadXvmConfig()");
     var start = new Date();
     if (Config.DEBUG_TIMES)
       Logger.add("DEBUG TIME: ReloadXvmConfig(): Start " + s_src);
+
     var lv:LoadVars = new LoadVars();
     lv.onData = function(str: String)
     {
+//Logger.add("ReloadXvmConfig::onData::start");
+      var finallyBugWorkaround: Boolean = false; // Workaround: finally block have a bug - it can be called twice times. Why? How? F*ck!
       try
       {
-        if (str)
-        {
-          var diff = 0;
-          if (Config.DEBUG_TIMES)
-          {
-            var curr = Utils.elapsedMSec(start, new Date());
-            Logger.add("DEBUG TIME: ReloadXvmConfig(): Load:  " + (curr - diff) + " ms");
-            diff = curr;
-          }
-          try
-          {
-            var config = com.xvm.JSON.parse(str);
-
-            if (Config.DEBUG_TIMES)
-            {
-              var curr = Utils.elapsedMSec(start, new Date());
-              Logger.add("DEBUG TIME: ReloadXvmConfig(): Parse: " + (curr - diff) + " ms");
-              diff = curr;
-            }
-            if (!config)
-            {
-              if (_global.xvm_battleloading)
-              {
-                _global.xvm_battleloading.setInfoFieldData( { error: "Error parsing config file. Using default settings." } );
-              }
-            }
-            else
-            {
-              Config.s_config = Config.MergeConfigs(Config.FixConfig(config), Config.s_config);
-              //Logger.addObject(Config.s_config);
-              if (Config.DEBUG_TIMES)
-              {
-                var curr = Utils.elapsedMSec(start, new Date());
-                Logger.add("DEBUG TIME: ReloadXvmConfig(): Apply: " + (curr - diff) + " ms");
-              }
-            }
-          }
-          catch (ex)
-          {
-            var txt = str.substring(ex.at - 100, ex.at - 1) + ">>>" + str.charAt(ex.at) + "<<<" + str.substr(ex.at + 1, 100);
-            txt = txt.split("\r").join("").split("\n").join("");
-            while (txt.indexOf("  ") != -1)
-              txt = txt.split("  ").join(" ");
-            if (_global.xvm_battleloading)
-            {
-              _global.xvm_battleloading.setInfoFieldData( { error: "Error loading config file. Using default settings.\n" +
-                  "[" + ex.at + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " + txt } );
-            }
-          }
-        }
-        else
-        {
-          if (_global.xvm_battleloading)
-            _global.xvm_battleloading.setInfoFieldData({ warning: " " });
-        }
+        Config.ProcessXvmConfig(str, start);
         Config.TuneupConfig();
-        if (Config.s_load_last_stat && Config.s_config.rating.showPlayersStatistics)
-          StatLoader.LoadStatData(Defines.COMMAND_GET_LAST_STAT);
       }
       finally
       {
-        if (!Config.s_loaded)
-        {
-          Config.s_loaded = true;
-          if (Config.s_config.rating.showPlayersStatistics)
-          {
-            var lv_ver: LoadVars = new LoadVars();
-            lv_ver.onData = function(str2: String)
-            {
-              if (Config._RegionLoaded)
-                return;
-              Config._RegionLoaded = true;
-              var a: Array = str2.split("\n");
-              Config.s_game_region = a[0].toUpperCase();
-              Locale.setRegion(Config.s_game_region);
-              Config.TuneConfigForServerRegion();
-              // MAX_PATH is 259 on NTFS
-              // WARNING: What if MAX_PATH less then 50?
-              //   259 - "\res_mods\.stat\".length - 1 = 242
-              // 199 - ?
-              Defines.MAX_PATH = Math.min(199, Math.max(50, 242 - a[1].length));
-            }
-            lv_ver.load(Defines.COMMAND_GET_VERSION);
-          }
-          else
-          {
-            Config.TuneConfigForServerRegion();
-          }
-          if (Config.s_src == "BattleLoading.as")
-            _global.xvm_battleloading.BattleLoadingInit();
-        }
+//Logger.add("ReloadXvmConfig::onData::finally:start");
+        if (finallyBugWorkaround)
+          return;
+        finallyBugWorkaround = true;
+        if (Config.s_config.rating.showPlayersStatistics)
+          Config.ReloadGameRegion();
+        else
+          Config.SetConfigLoaded();
+//Logger.add("ReloadXvmConfig::onData::finally::end");
       }
+//Logger.add("ReloadXvmConfig::onData::end");
     };
     lv.load(s_config_filename);
+  }
+
+  private static function ProcessXvmConfig(str: String, start: Date)
+  {
+    if (str)
+    {
+      var diff = 0;
+      if (Config.DEBUG_TIMES)
+      {
+        var curr = Utils.elapsedMSec(start, new Date());
+        Logger.add("DEBUG TIME: ReloadXvmConfig(): Load:  " + (curr - diff) + " ms");
+        diff = curr;
+      }
+
+      try
+      {
+        var config = com.xvm.JSON.parse(str);
+
+        if (Config.DEBUG_TIMES)
+        {
+          var curr = Utils.elapsedMSec(start, new Date());
+          Logger.add("DEBUG TIME: ReloadXvmConfig(): Parse: " + (curr - diff) + " ms");
+          diff = curr;
+        }
+
+        if (!config)
+        {
+          if (_global.xvm_battleloading)
+            _global.xvm_battleloading.setInfoFieldData( { error: "Error parsing config file. Using default settings." } );
+        }
+        else
+        {
+          Config.s_config = Config.MergeConfigs(Config.FixConfig(config), Config.s_config);
+          //Logger.addObject(Config.s_config);
+          if (Config.DEBUG_TIMES)
+          {
+            var curr = Utils.elapsedMSec(start, new Date());
+            Logger.add("DEBUG TIME: ReloadXvmConfig(): Apply: " + (curr - diff) + " ms");
+          }
+        }
+      }
+      catch (ex)
+      {
+        var txt = str.substring(ex.at - 100, ex.at - 1) + ">>>" + str.charAt(ex.at) + "<<<" + str.substr(ex.at + 1, 100);
+        txt = txt.split("\r").join("").split("\n").join("");
+        while (txt.indexOf("  ") != -1)
+          txt = txt.split("  ").join(" ");
+        if (_global.xvm_battleloading)
+        {
+          _global.xvm_battleloading.setInfoFieldData( { error: "Error loading config file. Using default settings.\n" +
+              "[" + ex.at + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " + txt } );
+        }
+      }
+    }
+    else
+    {
+      if (_global.xvm_battleloading)
+        _global.xvm_battleloading.setInfoFieldData({ warning: " " });
+    }
+  }
+
+  private static function ReloadGameRegion()
+  {
+    //Logger.add("TRACE: Config.ReloadGameRegion()");
+
+    var lv: LoadVars = new LoadVars();
+    lv.onData = function(str: String)
+    {
+      var finallyBugWorkaround: Boolean = false; // Workaround: finally block have a bug - it can be called twice times. Why? How? F*ck!
+      try
+      {
+        var a: Array = str.split("\n");
+        Config.s_game_region = a[0].toUpperCase();
+        Locale.setRegion(Config.s_game_region);
+
+        // MAX_PATH is 259 on NTFS
+        // WARNING: What if MAX_PATH less then 50?
+        //   259 - "\res_mods\.stat\".length - 1 = 242
+        // 199 - ?
+        Defines.MAX_PATH = Math.min(199, Math.max(50, 242 - a[1].length));
+      }
+      finally
+      {
+        if (finallyBugWorkaround)
+          return;
+        finallyBugWorkaround = true;
+        Config.SetConfigLoaded();
+      }
+    }
+    lv.load(Defines.COMMAND_GET_VERSION);
+  }
+
+  private static function SetConfigLoaded()
+  {
+    Logger.add("Config: Loaded");
+    s_loaded = true;
+    s_loading = false;
+    TuneConfigForServerRegion();
+    for (var i = 0; i < s_load_complete_funcs.length; ++i)
+      s_load_complete_funcs[i].call();
   }
 
   private static var useFallback: Boolean = false;
   private static function TuneConfigForServerRegion()
   {
-    if (!Config.s_loaded)
-      return;
-
     var region = Config.s_game_region;
     useFallback = !region || useFallback;
     var root: String = "";

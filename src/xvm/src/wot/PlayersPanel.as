@@ -5,6 +5,7 @@
 import wot.utils.Config;
 import wot.utils.Logger;
 import wot.utils.StatFormat;
+import wot.utils.StatLoader;
 import wot.utils.Utils;
 
 class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
@@ -18,18 +19,14 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   private var m_currentItem = 0;
 
   private var m_textCache = {};
-  
+
   function PlayersPanel()
   {
-    /*if (!_global.xvm)
-      _global.xvm = [];
-    if (Utils.indexOf(_global.xvm, "PlayersPanel") == -1)
-      _global.xvm.push("PlayersPanel");
-    Logger.add("--> " + _global.xvm.join(", "));*/
-
     super();
 
-    Config.LoadConfigAndStatLegacy("XVM.xvmconf", "PlayersPanel.as");
+    Utils.TraceXvmModule("PlayersPanel");
+
+    Config.LoadConfig("PlayersPanel.as", undefined, false, StatLoader.LoadLastStat);
   }
 
   // override
@@ -92,7 +89,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
       m_currentItem = 0;
     }
   }
-  
+
   // override
   function _setNamesStr(data, sel, isColorBlind, knownPlayersCount)
   {
@@ -116,7 +113,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   {
     // do nothing
   }
-  
+
   // override
   function _getHTMLText(colorScheme, text)
   {
@@ -133,7 +130,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   /**
    * XVM
    */
-  
+
   function XVMFormatText(data, fieldType, isDead)
   {
     var key_prefix = data.label + "/" +  m_state + "/" + fieldType + "/";
@@ -145,7 +142,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     }
     return m_textCache[key];
   }
-          
+
   function XVMFormatText2(data, fieldType, isDead)
   {
     var format: String = "";

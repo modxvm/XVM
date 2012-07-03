@@ -1,7 +1,6 @@
 /**
  * ...
  * @author sirmax2
- * @author johnp
  */
 
 /*

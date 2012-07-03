@@ -2,9 +2,9 @@
  * ...
  * @author sirmax2
  */
-import com.greensock.TimelineLite;
-import com.greensock.TweenLite;
 import wot.utils.Config;
+import wot.utils.StatLoader;
+import wot.utils.Utils;
 
 class wot.BattleMain
 {
@@ -13,45 +13,30 @@ class wot.BattleMain
 
   static function main()
   {
-    /*if (!_global.xvm)
-      _global.xvm = [];
-    if (wot.utils.Utils.indexOf(_global.xvm, "Battle::main") == -1)
-      _global.xvm.push("Battle::main");
-    wot.utils.Logger.add("--> " + _global.xvm.join(", "));*/
+    Utils.TraceXvmModule("Battle:main");
 
-    Config.LoadConfigAndStatLegacy("XVM.xvmconf", "BattleMain.as");
+    Config.LoadConfig("BattleMain.as", undefined, true, BattleMainConfigLoadComplete);
 
     instance = new BattleMain();
-    instance.BattleMainInit();
-    
     gfx.io.GameDelegate.addCallBack("battle.showPostmortemTips", instance, "showPostmortemTips");
     gfx.io.GameDelegate.addCallBack("Stage.Update", instance, "onUpdateStage");
   }
 
-  function BattleMainInit(obj: Object)
+  private static function BattleMainConfigLoadComplete()
   {
-    if (!obj)
-      obj = this;
-
-    if (!Config.s_loaded)
-    {
-      // Wait for config loaded
-      var timer: TimelineLite = new TimelineLite({onComplete:BattleMainInit, onCompleteParams:[obj]});
-      timer.insert(new TweenLite(obj, 0.1));
-      return;
-    }
-
     if (Config.s_config.battle.removePanelsModeSwitcher)
       _root.switcher_mc._visible = false;
+
+    StatLoader.LoadLastStat();
   }
 
-    
+
   function showPostmortemTips(movingUpTime, showTime, movingDownTime)
   {
     if (Config.s_config.battle.showPostmortemTips)
       _root.showPostmortemTips(movingUpTime, showTime, movingDownTime);
   }
-  
+
   function onUpdateStage(width, height)
   {
     //wot.utils.Logger.add("onUpdateStage");

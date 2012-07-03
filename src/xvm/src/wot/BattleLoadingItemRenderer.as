@@ -15,6 +15,8 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
 {
   private static var s_logShown = false;
 
+  private static var dummy = Logger.dummy; // avoid import warning
+
   private var m_iconset: Iconset = null;
   private var m_clanIconLoaded = false;
   private var m_iconLoaded: Boolean = false;
@@ -23,8 +25,10 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
   function BattleLoadingItemRenderer()
   {
     super();
+
+    Utils.TraceXvmModule("BattleLoadingItemRenderer");
+    
     vehicleField.html = true;
-    Config.LoadConfig("XVM.xvmconf");
   }
 
   private function get team(): Number
@@ -64,19 +68,6 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
       // Add players for statistics loading
       if (Config.s_config.rating.showPlayersStatistics)
       {
-        if (!s_logShown)
-        {
-          s_logShown = true;
-          // Just to check config is loaded correctly
-          Logger.add("[BattleLoading]\n" +
-            "  GameRegion=" + Config.s_game_region + "\n" +
-            "  MAX_PATH=" + Defines.MAX_PATH + "\n" +
-            "  configVersion=" + Config.s_config.configVersion + "\n" +
-            "  showPlayersStatistics=true\n" +
-            "  loadEnemyStatsInFogOfWar=" + Config.s_config.rating.loadEnemyStatsInFogOfWar + "\n" +
-            "  loadEnemyStatsInFogOfWar=" + Config.s_config.rating.loadEnemyStatsInFogOfWar + "\n" +
-            "  useStandardMarkers=" + Config.s_config.battle.useStandardMarkers);
-        }
         StatLoader.AddPlayerData(this, XVMStatUpdateCallback, data.id, data.label, data.vehicle, data.icon, team);
         if (StatLoader.s_players_count === 30)
           StatLoader.StartLoadData();
@@ -159,7 +150,7 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
   function XVMStatUpdateCallback(pdata)
   {
     //Logger.add("XVMStatUpdateCallback(): " + pdata.originalText);
-    if (!m_textCache.hasOwnProperty(pdata.fullPlayerName))
+    if (!m_textCache.hasOwnProperty(data.label))
     {
       m_textCache[data.label] = StatFormat.DecorateField(pdata, pdata.originalText,
         team == Defines.TEAM_ALLY ? Config.s_config.battleLoading.formatLeft : Config.s_config.battleLoading.formatRight,

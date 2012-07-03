@@ -6,12 +6,15 @@ import com.natecook.Sprintf;
 import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.GraphicsUtil;
+import wot.utils.Logger;
 import wot.utils.StatData;
 import wot.utils.StatLoader;
 import wot.utils.Utils;
 
 class wot.utils.StatFormat
 {
+  private static var dummy = Logger.dummy; // avoid import warning
+
   public static function DecorateField(data: Object, txt: String, format: String, ratingPosition: Number)
   {
     //Logger.add("DecorateField: " + data.label + " / " + data.name);
@@ -50,6 +53,8 @@ class wot.utils.StatFormat
       if (!data.uid || data.uid == undefined)
         data.uid = StatData.s_data[pname].playerId;
       var stat = StatData.s_data[pname].stat;
+      //Logger.addObject(StatData.s_data[pname]);
+      //Logger.add("pname=" + pname + " uid=" + data.uid + " r=" + stat.r + " e=" + stat.e);
       if (stat)
       {
         if (!stat.notInDb)

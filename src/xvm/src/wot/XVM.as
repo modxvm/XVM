@@ -43,7 +43,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   var m_isDead: Boolean = false;
   var m_clanIcon = null;
   var m_iconset: Iconset;
-  
+
   // TextFields
   var textFields: Object = null;
 
@@ -60,20 +60,14 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
   function XVM()
   {
-    /*if (!_global.xvm)
-      _global.xvm = [];
-    if (wot.utils.Utils.indexOf(_global.xvm, "XVM") == -1)
-      _global.xvm.push("XVM");
-    Logger.add("--> " + _global.xvm.join(", "));*/
-
-    //Logger.add("XVM()");
-
     super();
+
+    Utils.TraceXvmModule("PlayerListItemRenderer");
 
     if (Config.s_loaded)
       XVMInit2();
     else
-      Config.LoadConfigAndStatLegacy("XVM.xvmconf", "XVM.as");
+      Config.LoadConfig("XVM.as", undefined, true, StatLoader.LoadLastStat);
   }
 
   private var _initialized = false;
@@ -82,7 +76,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     if (_initialized)
       return;
     _initialized = true;
-    
+
     if (Config.s_loaded)
       XVMInit2();
     else
@@ -160,7 +154,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       marker.marker[childName]._y = 16;
     marker._y = -16;
   }
-  
+
   // override
   function init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt)
   {
@@ -274,7 +268,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       [ m_source.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.vehicleMarker), m_source ]);
     iconLoader.source = m_iconset.currentIcon;
   }
-  
+
   // override
   function populateData()
   {

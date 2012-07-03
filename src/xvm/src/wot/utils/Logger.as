@@ -9,7 +9,7 @@ class wot.utils.Logger
 {
   public static var counter: Number = 0;
 
-  public static function dummy() { };
+  public static var dummy; // avoid import warning
   
   public static function add(str: String)
   {

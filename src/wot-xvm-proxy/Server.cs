@@ -89,14 +89,11 @@ namespace wot
 
     public Server(String ver)
     {
-      Log(2, string.Format("LogLevel: {1}{0}MountPoint: {2}{0}Timeout: {3}",
-        Environment.NewLine,
-        Settings.Default.LogLevel,
-        Settings.Default.MountPoint,
-        Settings.Default.Timeout));
+      Log(string.Format("Timeout: {0}, MountPoint: {1}", Settings.Default.Timeout, Settings.Default.MountPoint));
 
       //check version
       version = String.IsNullOrEmpty(ver) ? GetVersion() : ver;
+      Log(string.Format("Game Region: {0}{1}", version, String.IsNullOrEmpty(ver) ? " (detected)" : ""));
       _currentProxyUrl = GetProxyAddress();
     }
 
@@ -104,10 +101,9 @@ namespace wot
 
     #region service functions
 
-    private static void Log(int level, string message)
+    private static void Log(string message)
     {
-      if (level >= Settings.Default.LogLevel)
-        Console.WriteLine(message);
+      Console.WriteLine(message);
     }
 
     private static void Debug(string message)
@@ -134,12 +130,12 @@ namespace wot
         _unavailable = true;
         _firstError = false;
         _unavailableFrom = DateTime.Now;
-        Log(2, string.Format("Unavailable since {0}", _unavailableFrom));
+        Log(string.Format("Unavailable since {0}", _unavailableFrom));
       }
       else
       {
         _firstError = true;
-        Log(2, string.Format("First error {0}", DateTime.Now));
+        Log(string.Format("First error {0}", DateTime.Now));
       }
     }
 
@@ -197,7 +193,7 @@ namespace wot
       lock (_lockIngame)
       {
         added = false;
-        Log(1, "retrieveStats()");
+        Log("retrieveStats()");
         _prevResult = _lastResult = GetStat();
         Debug("_lastResult: " + _lastResult);
       }
@@ -248,11 +244,9 @@ namespace wot
         //clear
         if (reader != null)
           reader.Close();
-
       }
-      Log(2, string.Format("WoT version is: {0}", wotVersion));
 
-      return (wotVersion);
+      return wotVersion;
     }
 
     #endregion
@@ -260,114 +254,93 @@ namespace wot
     #region Dokan default implementations
 
     public int CreateFile(String filename, FileAccess access, FileShare share,
-                          FileMode mode, FileOptions options, DokanFileInfo info)
+      FileMode mode, FileOptions options, DokanFileInfo info)
     {
-      Log(0, String.Format("-> CreateFile({0})", filename));
       return 0;
     }
 
     public int OpenDirectory(String filename, DokanFileInfo info)
     {
-      Log(0, String.Format("-> OpenDirectory({0})", filename));
       return 0;
     }
 
     public int CreateDirectory(String filename, DokanFileInfo info)
     {
-      Log(0, String.Format("-> CreateDirectory({0})", filename));
       return -1;
     }
 
     public int Cleanup(String filename, DokanFileInfo info)
     {
-      Log(0, String.Format("-> Cleanup({0})", filename));
       return 0;
     }
 
-    public int WriteFile(String filename, Byte[] buffer,
-                         ref uint writtenBytes, long offset, DokanFileInfo info)
+    public int WriteFile(String filename, Byte[] buffer, ref uint writtenBytes, long offset, DokanFileInfo info)
     {
-      Log(0, String.Format("-> WriteFile({0})", filename));
       return -1;
     }
 
     public int FlushFileBuffers(String filename, DokanFileInfo info)
     {
-      Log(0, String.Format("-> FlushFileBuffers({0})", filename));
       return -1;
     }
 
     public int CloseFile(String filename, DokanFileInfo info)
     {
-      Log(0, String.Format("-> CloseFile({0})", filename));
       return 0;
     }
 
     public int FindFiles(String filename, ArrayList files, DokanFileInfo info)
     {
-      Log(0, String.Format("-> FindFiles({0})", filename));
       return 0;
     }
 
     public int SetFileAttributes(String filename, FileAttributes attr, DokanFileInfo info)
     {
-      Log(0, String.Format("-> SetFileAttributes({0})", filename));
       return -1;
     }
 
-    public int SetFileTime(String filename, DateTime ctime,
-                           DateTime atime, DateTime mtime, DokanFileInfo info)
+    public int SetFileTime(String filename, DateTime ctime, DateTime atime, DateTime mtime, DokanFileInfo info)
     {
-      Log(0, String.Format("-> SetFileTime({0})", filename));
       return -1;
     }
 
     public int DeleteFile(String filename, DokanFileInfo info)
     {
-      Log(0, String.Format("-> DeleteFile({0})", filename));
       return -1;
     }
 
     public int DeleteDirectory(String filename, DokanFileInfo info)
     {
-      Log(0, String.Format("-> DeleteDirectory({0})", filename));
       return -1;
     }
 
     public int MoveFile(String filename, String newname, bool replace, DokanFileInfo info)
     {
-      Log(0, String.Format("-> MoveFile({0})", filename));
       return -1;
     }
 
     public int SetEndOfFile(String filename, long length, DokanFileInfo info)
     {
-      Log(0, String.Format("-> SetEndOfFile({0})", filename));
       return -1;
     }
 
     public int SetAllocationSize(String filename, long length, DokanFileInfo info)
     {
-      Log(0, String.Format("-> SetAllocationSize({0})", filename));
       return -1;
     }
 
     public int LockFile(String filename, long offset, long length, DokanFileInfo info)
     {
-      Log(0, String.Format("-> LockFile({0})", filename));
       return 0;
     }
 
     public int UnlockFile(String filename, long offset, long length, DokanFileInfo info)
     {
-      Log(0, String.Format("-> UnlockFile({0})", filename));
       return 0;
     }
 
-    public int GetDiskFreeSpace(ref ulong freeBytesAvailable, ref ulong totalBytes,
-                                ref ulong totalFreeBytes, DokanFileInfo info)
+    public int GetDiskFreeSpace(ref ulong freeBytesAvailable, ref ulong totalBytes, ref ulong totalFreeBytes, DokanFileInfo info)
     {
-      Log(0, "-> GetDiskFreeSpace()");
       freeBytesAvailable = 512 * 1024 * 1024;
       totalBytes = 1024 * 1024 * 1024;
       totalFreeBytes = 512 * 1024 * 1024;
@@ -376,7 +349,6 @@ namespace wot
 
     public int Unmount(DokanFileInfo info)
     {
-      Log(0, "-> Unmount()");
       return 0;
     }
 
@@ -416,7 +388,7 @@ namespace wot
           _prevResult = _prevResult == "FINISHED" ? _temp : "";
 
           if (!filename.StartsWith("\\@LOG"))
-            Log(1, String.Format("=> GetFileInformation({0})", filename));
+            Log(String.Format("=> {0}", filename));
           String command = Path.GetFileName(filename);
           if (String.IsNullOrEmpty(command) || command[0] != '@')
             return 0;
@@ -484,7 +456,7 @@ namespace wot
               break;
 
             default:
-              Log(2, "Unknown command: " + filename);
+              Log("Unknown command: " + filename);
               break;
           }
 
@@ -497,19 +469,21 @@ namespace wot
         }
         catch (Exception ex)
         {
-          Log(2, "Exception: " + ex);
+          Log("Exception: " + ex);
         }
 
         return 0;
       }
     }
 
+    private string _lastReadFileFilenameAndOffset = "";
     public int ReadFile(String filename, Byte[] buffer, ref uint readBytes, long offset, DokanFileInfo info)
     {
       lock (_lock)
       {
         if (String.Compare(filename, "\\@RETRIEVE", true) == 0 &&
-          (String.IsNullOrEmpty(_prevResult) || _prevResult == "FINISHED")) {
+          (String.IsNullOrEmpty(_prevResult) || _prevResult == "FINISHED"))
+        {
           _prevResult = _lastResult;
           Debug("Retrieving");
         }
@@ -519,7 +493,12 @@ namespace wot
           {
             ms.Seek(offset, SeekOrigin.Begin);
             readBytes = (uint)ms.Read(buffer, 0, buffer.Length);
-            Log(1, String.Format("Read {0} bytes", readBytes));
+          }
+
+          if (filename + ":" + offset != _lastReadFileFilenameAndOffset)
+          {
+            _lastReadFileFilenameAndOffset = filename + ":" + offset; // Avoid double requests
+            Log(String.Format("Read {0} bytes", readBytes));
           }
         }
         return 0;
@@ -592,16 +571,13 @@ namespace wot
         long tmpTime = long.MaxValue;
         try
         {
-          string testId = (version.StartsWith("CN", StringComparison.InvariantCultureIgnoreCase))
-            ? "test" : "001";
-          loadUrl(tempUrl, testId, out tmpTime);
+          string testId = (version.StartsWith("CN", StringComparison.InvariantCultureIgnoreCase)) ? "test" : "001";
+          loadUrl(tempUrl, testId, out tmpTime, true);
         }
         catch (Exception ex)
         {
-          Log(1, string.Format("Exception: {0}", ex));
+          Log(string.Format("Exception: {0}", ex));
         }
-
-        Log(0, "urlload - " + tmpTime);
 
         proxyUrls.Add(tempUrl, tmpTime);
 
@@ -626,9 +602,10 @@ namespace wot
       return loadUrl(url, members, out dummy);
     }
 
-    private static string loadUrl(string url, string members, out long duration)
+    private static string loadUrl(string url, string members, out long duration, bool test = false)
     {
-      Log(1, "HTTP - " + members);
+      if (!test)
+        Log("HTTP: " + members);
       url = url.Replace("%1", members);
       duration = long.MaxValue;
 
@@ -653,8 +630,7 @@ namespace wot
 
       sw.Stop();
 
-      Log(1, String.Format("  Time: {0} ms, Size: {1} bytes",
-        sw.ElapsedMilliseconds, responseFromServer.Length));
+      Log(String.Format("  Time: {0} ms, Size: {1} bytes", sw.ElapsedMilliseconds, responseFromServer.Length));
 
       Debug("responseFromServer: " + responseFromServer);
 
@@ -684,7 +660,7 @@ namespace wot
             continue;
           if (!currentMember.httpError)
           {
-            Log(1, string.Format("CACHE - {0} {1} {2}: eff={3} battles={4} wins={5} t-battles={6} t-wins={7}",
+            Log(string.Format("CACHE - {0} {1} {2}: eff={3} battles={4} wins={5} t-battles={6} t-wins={7}",
               id, pendingPlayers[id].name, pendingPlayers[id].vn,
               currentMember.stat.e, currentMember.stat.b, currentMember.stat.w,
               currentMember.stat.tb, currentMember.stat.tw));
@@ -718,7 +694,7 @@ namespace wot
         Response res = JsonDataToResponse(JsonMapper.ToObject(responseFromServer));
         if (res == null || res.players == null)
         {
-          Log(2, "WARNING: empty response or parsing error");
+          Log("WARNING: empty response or parsing error");
           return;
         }
 
@@ -740,8 +716,7 @@ namespace wot
           }
           else
           {
-            Log(2, "WARNING: pendingPlayers key not found for id=" + stat.id);
-            Log(1, JsonMapper.ToJson(stat));
+            Log("WARNING: pendingPlayers key not found for id=" + stat.id + "\n" + JsonMapper.ToJson(stat));
           }
         };
 
@@ -770,7 +745,7 @@ namespace wot
       }
       catch (Exception ex)
       {
-        Log(2, string.Format("Exception: {0}", ex));
+        Log(string.Format("Exception: {0}", ex));
         ErrorHandle();
         for (var i = 0; i < forUpdateIds.Count; i++)
         {
@@ -869,7 +844,7 @@ namespace wot
       }
       catch (Exception ex)
       {
-        Log(2, "Parse error: players: " + ex);
+        Log("Parse error: players: " + ex);
       }
 
       try
@@ -890,7 +865,7 @@ namespace wot
       }
       catch (Exception ex)
       {
-        Log(2, "Parse error: info: " + ex);
+        Log("Parse error: info: " + ex);
       }
 
       return res;
@@ -909,7 +884,7 @@ namespace wot
       {
         if (!String.IsNullOrEmpty(logString))
         {
-          Log(1, "Warning: incomplete @LOG string");
+          Log("Warning: incomplete @LOG string");
           DecodeAndPrintLogString();
         }
         logString = "";
@@ -922,7 +897,7 @@ namespace wot
         catch
         {
           logLength = 0;
-          Log(1, "Error parsing @LOG command parameters");
+          Log("Error parsing @LOG command parameters");
         }
       }
 
@@ -946,11 +921,11 @@ namespace wot
             b = 63; // '?'
           buf.Add(b);
         }
-        Log(1, Encoding.ASCII.GetString(buf.ToArray()));
+        Log(Encoding.ASCII.GetString(buf.ToArray()));
       }
       catch (Exception ex)
       {
-        Log(1, "Error decoding @LOG string: " + Encoding.ASCII.GetString(buf.ToArray()));
+        Log("Error decoding @LOG string: " + Encoding.ASCII.GetString(buf.ToArray()));
         Debug(logString);
         Debug(ex.ToString());
       }

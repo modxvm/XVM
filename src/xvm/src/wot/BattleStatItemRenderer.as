@@ -28,16 +28,12 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
 
   function BattleStatItemRenderer()
   {
-    /*if (!_global.xvm)
-      _global.xvm = [];
-    if (wot.utils.Utils.indexOf(_global.xvm, "BattleStatItemRenderer") == -1)
-      _global.xvm.push("BattleStatItemRenderer");
-    Logger.add("--> " + _global.xvm.join(", "));*/
-
     super();
 
+    Utils.TraceXvmModule("BattleStatItemRenderer");
+
     col3.html = true;
-    Config.LoadConfigAndStatLegacy("XVM.xvmconf", "BattleStatItemRenderer.as");
+    Config.LoadConfig("BattleStatItemRenderer.as", undefined, false, StatLoader.LoadLastStat);
   }
 
   private function get team(): Number

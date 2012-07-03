@@ -6,6 +6,7 @@ import wot.utils.Config;
 import wot.utils.Iconset;
 import wot.utils.Defines;
 import wot.utils.PlayerInfo;
+import wot.utils.Utils;
 
 class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRenderer
 {
@@ -15,15 +16,9 @@ class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRend
 
   function PlayerListItemRenderer()
   {
-    /*if (!_global.xvm)
-      _global.xvm = [];
-    if (wot.utils.Utils.indexOf(_global.xvm, "PlayerListItemRenderer") == -1)
-      _global.xvm.push("PlayerListItemRenderer");
-    wot.utils.Logger.add("--> " + _global.xvm.join(", "));*/
-
     super();
 
-    Config.LoadConfigAndStatLegacy("XVM.xvmconf", "PlayerListItemRenderer.as");
+    Utils.TraceXvmModule("PlayerListItemRenderer");
   }
 
   private function get team(): Number

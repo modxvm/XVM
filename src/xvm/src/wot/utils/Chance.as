@@ -12,10 +12,10 @@ import wot.utils.VehicleInfo;
 
 class wot.utils.Chance
 {
+  private static var dummy = Logger.dummy; // avoid import warning
+
   public static function ShowChance(tf: TextField, showExp: Boolean): String
   {
-    Logger.dummy(); // dummy code to avoid import warning
-
     var teamsCount: Object = CalculateTeamPlayersCount();
     var battleTier: Number = Chance.GuessBattleTier();
     //Logger.add("teamsCount: [" + teamsCount[0] + "," + teamsCount[1] + "], tier: " + tier);
@@ -62,7 +62,7 @@ class wot.utils.Chance
     var Xe = 0;
 
     //Logger.add("eff=" + Config.s_config.const.AVG_EFF + " gwr=" + Config.s_config.const.AVG_GWR + " bat=" + Config.s_config.const.AVG_BATTLES);
-    
+
     for (var pname in StatData.s_data)
     {
       var pdata = StatData.s_data[pname];
@@ -98,7 +98,7 @@ class wot.utils.Chance
     var Xe = 0;
 
     //Logger.add("eff=" + Config.s_config.const.AVG_EFF + " gwr=" + Config.s_config.const.AVG_GWR + " bat=" + Config.s_config.const.AVG_BATTLES);
-    
+
     var AVG_GWR = Config.s_config.const.AVG_GWR;
     for (var pname in StatData.s_data)
     {
@@ -136,7 +136,7 @@ class wot.utils.Chance
     var Xe = 0;
 
     //Logger.add("eff=" + Config.s_config.const.AVG_EFF + " gwr=" + Config.s_config.const.AVG_GWR + " bat=" + Config.s_config.const.AVG_BATTLES);
-    
+
     for (var pname in StatData.s_data)
     {
       var pdata = StatData.s_data[pname];

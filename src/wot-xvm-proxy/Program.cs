@@ -20,9 +20,12 @@ namespace wot
     public static string serverVersion = null;
     private static bool isNoAuto = false;
 
+    private static Process wotProcess = null;
+
     static Program()
     {
       AppDomain.CurrentDomain.AssemblyResolve += Resolver;
+      AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(UnhandledException);
     }
 
     static Assembly Resolver(object sender, ResolveEventArgs args)
@@ -215,16 +218,19 @@ namespace wot
               Debug("Dokan thread is alive");
               string arg = String.Join(" ", args);
               Console.WriteLine(String.Format("Starting game process: {0} {1}", wotExeFileName, arg));
-              using (Process wotProc = Process.Start(wotExeFileName, arg))
+              try
               {
+                wotProcess = Process.Start(wotExeFileName, arg);
                 Debug("Check game process");
-                if (wotProc == null)
+                if (wotProcess == null)
                   throw new Exception("Cannot start game: " + wotExeFileName);
                 Thread.Sleep(5000);
                 Debug("Wait for process to exit");
-                wotProc.WaitForExit();
-                if (isLauncher && wotProc.ExitCode == 0)
+                wotProcess.WaitForExit();
+                if (isLauncher && wotProcess.ExitCode == 0)
                 {
+                  wotProcess.Dispose();
+                  wotProcess = null;
                   Console.WriteLine("Searching game process: " + WOT_PROCESS_NAME);
                   Thread.Sleep(5000);
                   Process[] wotProcesses = Process.GetProcessesByName(WOT_PROCESS_NAME);
@@ -232,8 +238,17 @@ namespace wot
                   if (wotProcesses.Length > 0)
                   {
                     Debug("Wait for process to exit");
-                    wotProcesses[0].WaitForExit();
+                    wotProcess = wotProcesses[0];
+                    wotProcess.WaitForExit();
                   }
+                }
+              }
+              finally
+              {
+                if (wotProcess != null)
+                {
+                  wotProcess.Dispose();
+                  wotProcess = null;
                 }
               }
             }
@@ -247,7 +262,10 @@ namespace wot
                 Process[] wotProcesses = Process.GetProcessesByName(WOT_PROCESS_NAME);
                 if (wotProcesses.Length > 0)
                 {
-                  wotProcesses[0].WaitForExit();
+                  wotProcess = wotProcesses[0];
+                  wotProcess.WaitForExit();
+                  wotProcess.Dispose();
+                  wotProcess = null;
                   break;
                 }
               }
@@ -281,9 +299,18 @@ namespace wot
     static void StartDokan(object opt)
     {
       // Start dokan
-      Debug("Dokan thread: Starting main loop");
-      int status = DokanNet.DokanMain(opt as DokanOptions, new Server(serverVersion));
-      Debug("Dokan thread: Main loop ended");
+      int status;
+      try
+      {
+        Debug("Dokan thread: Starting main loop");
+        status = DokanNet.DokanMain(opt as DokanOptions, new Server(serverVersion));
+        Debug("Dokan thread: Main loop ended");
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex);
+        return;
+      }
 
       switch (status)
       {
@@ -311,6 +338,20 @@ namespace wot
         default:
           Console.WriteLine("Unknown status: {0}", status);
           break;
+      }
+    }
+
+    static void UnhandledException(object sender, UnhandledExceptionEventArgs e)
+    {
+      try
+      {
+        Console.WriteLine("Unhandled exception!\nPlease contact the developers with the following information:\n\n" + 
+          (Exception)e.ExceptionObject);
+      }
+      finally
+      {
+        if (wotProcess != null)
+          wotProcess.Kill();
       }
     }
   }
