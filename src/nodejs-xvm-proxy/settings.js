@@ -7,6 +7,7 @@ module.exports = (function()
         maxSockets: 100, // per client
         cacheTtl: 7 * 24 * 60 * 60 * 1000, // 7 days
         lastErrorTtl: 5 * 1000, // in msec
+        usageStatShowPeriod: 60 * 1000, // in msec
         dbName: "<dbname>",
         collectionName: "<collection>",
         missedCollectionName: "<missed_collection>",
@@ -17,6 +18,14 @@ module.exports = (function()
             "worldoftanks-sea.com", // ???: 15000000000 .. 1999999999
             "worldoftanks-sea.com", // SEA: 20000000000 .. 2499999999
             "wot.go.vn"             // VTC: 25000000000 .. 2999999999
+        ],
+        statHostsTimeouts: [
+            5000,      // RU
+            5000,      // EU
+            5000,      // NA
+            6000,      // ???
+            6000,      // SEA
+            19000      // VTC
         ],
         wotApiVersion: "1.5",
         info: {
