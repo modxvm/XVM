@@ -48,8 +48,8 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
 
     if (Config.s_config.rating.showPlayersStatistics)
     {
-      // Force stats loading after 1 sec (for 12x12 battles, FogOfWar, ...)
-      Utils.runTimer(null, 1, StatLoader.StartLoadData);
+      // Force stats loading after 0.5 sec (for 12x12 battles, FogOfWar, ...)
+      setInterval(StatLoader.StartLoadData, 500);
     }
   }
 

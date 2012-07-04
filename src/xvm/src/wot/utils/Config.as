@@ -28,8 +28,12 @@ class wot.utils.Config
   public static function LoadConfig(src: String, filename: String, legacy: Boolean, completeFunc: Function)
   {
     //Logger.add("TRACE: LoadConfig()");
-    if (s_loaded || s_loading)
+    if (s_loaded)
+    {
+      if (Utils.indexOf(s_load_complete_funcs, completeFunc) == -1)
+        completeFunc.call();
       return;
+    }
     s_src = src || "";
     s_config_filename = filename || Defines.DEFAULT_CONFIG_NAME;
     s_load_legacy_config = legacy ? true : false;
@@ -234,7 +238,7 @@ class wot.utils.Config
 
   private static function SetConfigLoaded()
   {
-    Logger.add("Config: Loaded");
+    Logger.add("Config: Loaded (" + s_src + ")");
     s_loaded = true;
     s_loading = false;
     TuneConfigForServerRegion();

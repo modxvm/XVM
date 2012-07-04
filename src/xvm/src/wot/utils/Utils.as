@@ -2,9 +2,6 @@
  * ...
  * @author sirmax2
  */
-import com.greensock.TimelineLite;
-import com.greensock.TweenLite;
- 
 class wot.utils.Utils
 {
   private static var TRACE_XVM_MODULES = true;
@@ -175,13 +172,6 @@ class wot.utils.Utils
     }
     return sourceArray;
  
-  }
-
-  public static function runTimer(target: Object, duration: Number, func: Function, params: Array): TimelineLite
-  {
-    var timer: TimelineLite = new TimelineLite({onComplete:func, onCompleteParams:params || []});
-    timer.insert(new TweenLite(target, duration));
-    return timer;
   }
 
   private static var xvmModules: Array = [];

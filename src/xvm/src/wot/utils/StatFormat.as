@@ -47,6 +47,7 @@ class wot.utils.StatFormat
     var t_kb: Number = -1;
     var t_battles: Number = -1;
 
+    //Logger.addObject(StatData.s_data);
     if (StatLoader.s_loaded)
     {
       var pname: String = Utils.GetNormalizedPlayerName(data.label || data.name);

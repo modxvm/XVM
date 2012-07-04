@@ -68,7 +68,7 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
       // Add players for statistics loading
       if (Config.s_config.rating.showPlayersStatistics)
       {
-        StatLoader.AddPlayerData(this, XVMStatUpdateCallback, data.id, data.label, data.vehicle, data.icon, team);
+        StatLoader.AddPlayerData(this, XVMStatUpdateCallback, data.id, data.label, data.vehicle, data.icon, team, selected);
         if (StatLoader.s_players_count === 30)
           StatLoader.StartLoadData();
       }

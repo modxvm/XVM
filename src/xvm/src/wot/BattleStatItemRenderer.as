@@ -70,26 +70,17 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     var start = new Date();
 
     // Chance
-    //Logger.add(Stat.s_players_count.toString());
-    if (StatLoader.s_loaded && Config.s_config.statisticForm.showChances && StatLoader.s_players_count === 30)
+    if (StatLoader.s_loaded && Config.s_config.statisticForm.showChances && !s_setChanceFieldDataAdded)
     {
-      if (!s_chanceField)
-      {
-        s_chanceField = _root.statsDialog.battleText;
-        s_chanceText = Chance.ShowChance(s_chanceField, Config.s_config.statisticForm.showChancesExp);
-      }
-      if (s_chanceField.htmlText != s_chanceText)
-      {
-        //Logger.add(s_chanceField.htmlText);
-        s_chanceField.html = true;
-        s_chanceField.htmlText = s_chanceText;
-      }
+      s_setChanceFieldDataAdded = true;
+      setTimeout(SetChanceFieldData, 50);
     }
 
     var saved_icon = data ? data.icon : null;
     if (data)
     {
-      if (Config.s_config.rating.showPlayersStatistics && !StatData.s_data[data.label.toUpperCase()])
+      var pname = data.label.toUpperCase();
+      if (Config.s_config.rating.showPlayersStatistics && !StatData.s_data[pname] || !StatData.s_data[pname].id)
         StatLoader.AddPlayerData(this, null, 1, data.label, data.vehicle, data.icon, team);
 
       // Alternative icon set
@@ -115,6 +106,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
 
     if (!m_textCache.hasOwnProperty(data.label))
     {
+      //Logger.add(data.label);
       m_textCache[data.label] = StatFormat.DecorateField(data, data.vehicle,
         team == Defines.TEAM_ALLY ? Config.s_config.statisticForm.formatLeft : Config.s_config.statisticForm.formatRight,
         team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
@@ -128,6 +120,24 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     }
   }
 
+  private static var s_setChanceFieldDataAdded = false;
+  private static function SetChanceFieldData()
+  {
+    //Logger.add("SetChanceFieldData()");
+    s_setChanceFieldDataAdded = false;
+    if (!s_chanceField)
+    {
+      s_chanceField = _root.statsDialog.battleText;
+      s_chanceText = Chance.ShowChance(s_chanceField, Config.s_config.statisticForm.showChancesExp);
+    }
+    if (s_chanceField.htmlText != s_chanceText)
+    {
+      //Logger.add(s_chanceField.htmlText);
+      s_chanceField.html = true;
+      s_chanceField.htmlText = s_chanceText;
+    }
+  }
+  
   // override
   function updateState()
   {

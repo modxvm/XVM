@@ -11,6 +11,7 @@ module.exports = (function()
         dbName: "<dbname>",
         collectionName: "<collection>",
         missedCollectionName: "<missed_collection>",
+        usersCollectionName: "<users_collection>",
         statHosts: [
             "worldoftanks.ru",      // RU:            0 ..  499999999
             "worldoftanks.eu",      // EU:    500000000 ..  999999999

@@ -25,6 +25,7 @@ namespace wot
       public String name;     // player name
       public String clan;     // clan
       public String vn;       // vehicle name
+      public int me;          // me
       public int b;           // total battles
       public int w;           // total wins
       public int e;           // global efficiency
@@ -164,7 +165,7 @@ namespace wot
           if (pendingPlayers.ContainsKey(id))
             continue;
 
-          String[] param2 = param[1].Split(new char[] { '&' }, 2, StringSplitOptions.RemoveEmptyEntries);
+          String[] param2 = param[1].Split(new char[] { '&' }, StringSplitOptions.RemoveEmptyEntries);
 
           string name = param2[0];
           string clan = "";
@@ -175,6 +176,15 @@ namespace wot
           }
 
           string vname = param2.Length > 1 ? param2[1] : "";
+          int me;
+          try
+          {
+            me = param2.Length > 2 ? int.Parse(param2[2]) : 0;
+          }
+          catch
+          {
+            me = 0;
+          }
 
           pendingPlayers[id] = new Stat()
           {
@@ -182,6 +192,7 @@ namespace wot
             name = name,
             clan = clan,
             vn = vname,
+            me = me,
           };
         }
         added = true;
@@ -525,9 +536,8 @@ namespace wot
         if (cache.ContainsKey(cacheKey))
         {
           res.players[pos] = cache[cacheKey].stat;
-          // fix CT player names
-          if (version == "CT")
-            res.players[pos].name = pendingPlayers[id].name;
+          // fix player names (for CT)
+          res.players[pos].name = pendingPlayers[id].name;
           pos++;
         }
       }
@@ -673,7 +683,7 @@ namespace wot
 
         // playerId=vname,... || playerId,...
         forUpdate.Add(String.IsNullOrEmpty(pendingPlayers[id].vn) ? id.ToString()
-          : String.Format("{0}={1}", id, pendingPlayers[id].vn));
+          : String.Format("{0}={1}{2}", id, pendingPlayers[id].vn, pendingPlayers[id].me == 1 ? "=1" : ""));
         forUpdateIds.Add(id);
       }
 

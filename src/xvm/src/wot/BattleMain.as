@@ -3,7 +3,6 @@
  * @author sirmax2
  */
 import wot.utils.Config;
-import wot.utils.StatLoader;
 import wot.utils.Utils;
 
 class wot.BattleMain
@@ -26,8 +25,6 @@ class wot.BattleMain
   {
     if (Config.s_config.battle.removePanelsModeSwitcher)
       _root.switcher_mc._visible = false;
-
-    StatLoader.LoadLastStat();
   }
 
 

@@ -36,32 +36,34 @@ class wot.utils.StatLoader
     paused: true } );
 
   public static function AddPlayerData(reference: Object, updateFunc: Function,
-    playerId: Number, playerName: String, originalText: String, icon: String, team: Number)
+    playerId: Number, playerName: String, originalText: String, icon: String, team: Number, selected: Boolean)
   {
     if (playerId <= 0 || !playerName)
       return;
 
     var pname = Utils.GetNormalizedPlayerName(playerName);
     var clan = Utils.GetClanName(playerName);
-    //Logger.add("AddPlayerData(" + playerName + "): " + pname + " level=" + level);
+
+    //Logger.add("AddPlayerData(" + playerName + "): " + pname);
+    
     if (!StatData.s_data[pname])
-    {
       s_players_count++;
-      StatData.s_data[pname] = {
-        reference: reference,
-        updateFunc: updateFunc,
-        playerId: playerId,
-        fullPlayerName: playerName,
-        name: pname,
-        clan: clan,
-        originalText: originalText,
-        icon: icon,
-        vehicleName: VehicleInfo.getShortName(icon),
-        team: team,
-        loaded: false,
-        rating: null
-      };
-    }
+    StatData.s_data[pname] = {
+      reference: reference,
+      updateFunc: updateFunc,
+      playerId: playerId,
+      fullPlayerName: playerName,
+      name: pname,
+      clan: clan,
+      originalText: originalText,
+      icon: icon,
+      vehicleName: VehicleInfo.getShortName(icon),
+      team: team,
+      selected: selected,
+      loaded: false,
+      rating: null,
+      stat: StatData.s_data[pname] ? StatData.s_data[pname].stat : undefined
+    };
   }
 
   public static function StartLoadData()
@@ -89,7 +91,8 @@ class wot.utils.StatLoader
       var pdata = StatData.s_data[pname];
       if (!pdata.loaded)
       {
-        var str: String = String(pdata.playerId) + "=" + pdata.fullPlayerName + "&" + pdata.vehicleName;
+        var str: String = String(pdata.playerId) + "=" + pdata.fullPlayerName +
+          "&" + pdata.vehicleName + (pdata.selected ? "&1" : "");
         if (len + str.length > Defines.MAX_PATH - command.length)
           break;
         pdata.loaded = true;
@@ -131,7 +134,7 @@ class wot.utils.StatLoader
       try
       {
         //Logger.add("lv: "+str);
-        if (!str || str == undefined)
+        if (!str)
           return;
         var stats = JSON.parse(str);
 
@@ -140,15 +143,12 @@ class wot.utils.StatLoader
           var stat = stats.players[i];
           stat = StatLoader.CalculateRating(stat);
           var name = stat.name.toUpperCase();
-          if (StatData.s_data[name])
-            StatData.s_data[name].stat = stat;
-          // processing Common Test
-          else if (StatData.s_data[name + "_RU"])
-            StatData.s_data[name + "_RU"].stat = stat;
-          else if (StatData.s_data[name + "_EU"])
-            StatData.s_data[name + "_EU"].stat = stat;
-          else if (StatData.s_data[name + "_US"])
-            StatData.s_data[name + "_US"].stat = stat;
+          if (!StatData.s_data[name])
+          {
+            StatLoader.s_players_count++;
+            StatData.s_data[name] = { };
+          }
+          StatData.s_data[name].stat = stat;
           //Logger.addObject(stat, stat.name);
         };
 

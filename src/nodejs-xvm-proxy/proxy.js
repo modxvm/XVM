@@ -6,6 +6,7 @@ var http = require("http"),
     mongo = require("mongodb"),
     collection,
     missed_collection,
+    users_collection,
     serverOptions = {
         auto_reconnect: true,
         poolSize: 100
@@ -56,6 +57,7 @@ db.open(function(error, client) {
     utils.log("MongoDB Connected");
     collection = new mongo.Collection(client, settings.collectionName);
     missed_collection = new mongo.Collection(client, settings.missedCollectionName);
+    users_collection = new mongo.Collection(client, settings.usersCollectionName);
 });
 
 // WG Server Statistics retrieve
@@ -274,8 +276,17 @@ http.createServer(function(request, response) {
             return;
         }
 
-        ids = query.split(",").map(function(id) { return parseInt(id.split("=")[0]); });
-        vehicles = query.split(",").map(function(id) { return id.split("=")[1]; });
+        //ids = query.split(",").map(function(id) { return parseInt(id.split("=")[0]); });
+        //vehicles = query.split(",").map(function(id) { return id.split("=")[1]; });
+        query.split(",").forEach(function(a) {
+            var x = a.split("=");
+            var id = parseInt(x[0]);
+            ids.push(id);
+            vehicles.push(x[1]);
+            if (x[2] == "1")
+                users_collection.update({ id: id }, { $inc : { counter: 1 } }, { upsert: true });
+
+        });
     } catch(e) {
         response.statusCode = 500;
         var errText = "wrong request: " + e;
