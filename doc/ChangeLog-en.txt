@@ -1,4 +1,7 @@
-﻿XVM-2.4.2.test3:
+﻿XVM-2.4.2.test4:
+  * fixed bug introduced in 2.4.2.test3
+
+XVM-2.4.2.test3:
   * code refactoring
   * BattleTimerBig.swf removed from mod archive
 

@@ -71,15 +71,15 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
     Utils.TraceXvmModule("XVM");
 
-    GlobalEventDispatcher.addEventListener("config_loaded", this, XVMInit);
     Config.LoadConfig("XVM.as", undefined, true);
   }
 
   private var _initialized = false;
-  function XVMInit()
+  function XVMInit(event)
   {
-    //Logger.add("XVMInit()");
-    GlobalEventDispatcher.removeEventListener("config_loaded", this, XVMInit);
+    //Logger.add("XVMInit()" + (event ? ": event=" + event.type : ""));
+    if (event)
+      GlobalEventDispatcher.removeEventListener("config_loaded", this, XVMInit);
 
     if (_initialized)
       return;
@@ -93,10 +93,6 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
       if (Config.s_config.battle.useStandardMarkers)
         return;
-
-      // Load stat
-      GlobalEventDispatcher.addEventListener("stat_loaded", this, XVMStatLoaded);
-      StatLoader.LoadLastStat();
 
       // Draw grid
       if (Config.s_config.battle.drawGrid)
@@ -127,9 +123,14 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       bgShadow._visible = false;
       bgShadow.removeMovieClip();
 
-      XVMPopulateData();
-      updateMarkerLabel();
-      XVMUpdateStyle();
+      // Load stat
+      if (StatLoader.s_loaded)
+        XVMStatLoaded();
+      else
+      {
+        GlobalEventDispatcher.addEventListener("stat_loaded", this, XVMStatLoaded);
+        StatLoader.LoadLastStat();
+      }
     }
     catch (e)
     {
@@ -147,10 +148,13 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     wm.text = "XVM v" + Defines.XVM_VERSION;
   }
 
-  function XVMStatLoaded()
+  function XVMStatLoaded(event)
   {
-    GlobalEventDispatcher.removeEventListener("stat_loaded", this, XVMStatLoaded);
-    XVMInitializeStates(true);
+    //Logger.add("XVMStatLoaded()" + (event ? ": event=" + event.type : ""));
+    if (event)
+      GlobalEventDispatcher.removeEventListener("stat_loaded", this, XVMStatLoaded);
+    XVMPopulateData();
+    updateMarkerLabel();
     XVMUpdateStyle();
   }
 
@@ -255,7 +259,10 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     //Logger.add("configUI(): " + GetCurrentStateString() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
     m_currentHealth = m_curHealth;
     super.configUI();
-    //XVMInit();
+    if (Config.s_loaded)
+      XVMInit();
+    else
+      GlobalEventDispatcher.addEventListener("config_loaded", this, XVMInit);
   }
 
   // override

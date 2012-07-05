@@ -20,6 +20,7 @@ class wot.utils.StatLoader
   public static var s_loadDataStarted = false;
   public static var s_loaded = false;
 
+  private static var s_loading = false;
   private static var _is_new: Boolean = true;
   private static var retrieving: Boolean = false;
   private static var retrieved: Boolean = true;
@@ -114,18 +115,21 @@ class wot.utils.StatLoader
     }
   }
 
-  public static function LoadLastStat()
+  public static function LoadLastStat(event)
   {
-    GlobalEventDispatcher.removeEventListener("config_loaded", StatLoader.LoadLastStat);
+    if (event)
+      GlobalEventDispatcher.removeEventListener("config_loaded", StatLoader.LoadLastStat);
     if (Config.s_config.rating.showPlayersStatistics)
       LoadStatData(Defines.COMMAND_GET_LAST_STAT);
+    else
+      s_loaded = true;
   }
 
   public static function LoadStatData(command)
   {
-    if (s_loaded)
+    if (s_loading || s_loaded)
       return;
-    s_loaded = true;
+    s_loading = true;
 
     var lv:LoadVars = new LoadVars();
     lv.onData = function(str: String)
@@ -155,7 +159,8 @@ class wot.utils.StatLoader
         if (stats.info && stats.info.xvm)
           GlobalEventDispatcher.dispatchEvent({ type: "set_info", ver: stats.info.xvm.ver, message: stats.info.xvm.message });
 
-        GlobalEventDispatcher.dispatchEvent({type: "stat_loaded"});
+          StatLoader.s_loaded = true;
+          GlobalEventDispatcher.dispatchEvent( { type: "stat_loaded" } );
       }
       catch (ex)
       {
