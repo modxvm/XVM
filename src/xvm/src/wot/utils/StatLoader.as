@@ -116,6 +116,7 @@ class wot.utils.StatLoader
 
   public static function LoadLastStat()
   {
+    GlobalEventDispatcher.removeEventListener("config_loaded", StatLoader.LoadLastStat);
     if (Config.s_config.rating.showPlayersStatistics)
       LoadStatData(Defines.COMMAND_GET_LAST_STAT);
   }

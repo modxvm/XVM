@@ -59,7 +59,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   var allStatesEnemy: Array = [
     "enemy/alive/normal", "enemy/alive/extended", "enemy/dead/normal", "enemy/dead/extended"
   ]
-  
+
   function XVM()
   {
     //Logger.add("_global.gfxExtensions = " + _global.gfxExtensions);
@@ -79,6 +79,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   function XVMInit()
   {
     //Logger.add("XVMInit()");
+    GlobalEventDispatcher.removeEventListener("config_loaded", this, XVMInit);
+
     if (_initialized)
       return;
     _initialized = true;
@@ -147,10 +149,11 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
   function XVMStatLoaded()
   {
+    GlobalEventDispatcher.removeEventListener("stat_loaded", this, XVMStatLoaded);
     XVMInitializeStates(true);
     XVMUpdateStyle();
   }
-  
+
   function setDefaultVehicleMarkerPosition()
   {
     for (var childName in marker.marker)

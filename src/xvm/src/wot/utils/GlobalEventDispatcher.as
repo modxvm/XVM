@@ -47,7 +47,7 @@ class wot.utils.GlobalEventDispatcher
       return;
 
     var len = listeners.length;
-    for (var i = 0; i < len; ++i)
+    for (var i = len; i >= 0; --i)
     {
       var a = listeners[i].listenerObject;
       if (!a)

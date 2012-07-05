@@ -36,7 +36,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     col3.html = true;
 
     GlobalEventDispatcher.addEventListener("config_loaded", StatLoader.LoadLastStat);
-    Config.LoadConfig("PlayersPanel.as");
+    Config.LoadConfig("BattleStatItemRenderer.as");
   }
 
   private function get team(): Number

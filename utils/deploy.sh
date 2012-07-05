@@ -7,7 +7,6 @@ FILES="
   libxvmLoader.swf
   battle.swf
   battleloading.swf
-  ../src/xvm/swf/BattleTimerBig.swf
   ComponentsLib.swf
   FinalStatisticForm.swf
   PlayersPanel.swf

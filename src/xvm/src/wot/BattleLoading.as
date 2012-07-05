@@ -32,6 +32,8 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
 
   public function BattleLoadingConfigLoaded()
   {
+    GlobalEventDispatcher.removeEventListener("config_loaded", this, BattleLoadingConfigLoaded);
+
     if (Config.s_config.rating.showPlayersStatistics)
     {
       // Just to check config is loaded correctly
@@ -72,7 +74,7 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
     s_infoField.setNewTextFormat(new TextFormat("$FieldFont", 12, 0xFFFFFF, true, false, false, null, null, "left"));
     s_infoField.filters = [ new DropShadowFilter(0, 0, 0, 100, 3, 3, 1, 3) ];
   }
-  
+
   public function SetInfoFieldData(event)
   {
     //Logger.addObject(event, "SetInfoFieldData(event)");

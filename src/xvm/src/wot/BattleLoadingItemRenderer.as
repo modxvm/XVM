@@ -29,7 +29,7 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
     super();
 
     Utils.TraceXvmModule("BattleLoadingItemRenderer");
-    
+
     vehicleField.html = true;
   }
 
@@ -153,6 +153,8 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
   function StatLoadedCallback()
   {
     //Logger.add("StatLoaded(): " + data.label);
+
+    GlobalEventDispatcher.removeEventListener("stat_loaded", this, StatLoadedCallback);
 
     var pdata = StatData.s_data[Utils.GetNormalizedPlayerName(data.label)];
     if (!pdata)

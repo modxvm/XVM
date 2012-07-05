@@ -1,5 +1,6 @@
 ﻿XVM-2.4.2.test3:
   * code refactoring
+  * BattleTimerBig.swf removed from mod archive
 
 XVM-2.4.2.test2:
   * fixed chances calculation formula
