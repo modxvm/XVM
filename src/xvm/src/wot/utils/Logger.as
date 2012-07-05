@@ -10,12 +10,13 @@ class wot.utils.Logger
   public static var counter: Number = 0;
 
   public static var dummy; // avoid import warning
-  
+
   public static function add(str: String)
   {
     var a: Array = ("[" + Utils.padLeft(String(counter++), 3, '0') + "] " + str).split("");
     var s: String = "";
-    for (var i = 0; i < a.length; ++i)
+    var a_length = a.length;
+    for (var i = 0; i < a_length; ++i)
       s += Utils.padLeft(a[i].charCodeAt(0).toString(16), 2, '0');
     s = s.length.toString(16) + "," + s;
 

@@ -214,7 +214,8 @@ class wot.utils.Chance
     // 1. Find top tank tiers
     var tierMin = 1;
     var tierMax = 1;
-    for (var i = 0; i < vis.length; ++i)
+    var vis_length = vis.length;
+    for (var i = 0; i < vis_length; ++i)
     {
       var vi = vis[i];
       if (vi.tiers[1] < tierMax)
@@ -230,7 +231,7 @@ class wot.utils.Chance
     }
     //Logger.add("tiers=" + tierMin + ".." + tierMax);
 
-    for (var i = 0; i < vis.length; ++i)
+    for (var i = 0; i < vis_length; ++i)
     {
       var vi = vis[i];
       if (vi.tiers[1] < tierMin)

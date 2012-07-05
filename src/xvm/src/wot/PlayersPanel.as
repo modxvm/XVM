@@ -3,6 +3,7 @@
  * @author sirmax2
  */
 import wot.utils.Config;
+import wot.utils.GlobalEventDispatcher;
 import wot.utils.Logger;
 import wot.utils.StatFormat;
 import wot.utils.StatLoader;
@@ -26,7 +27,8 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 
     Utils.TraceXvmModule("PlayersPanel");
 
-    Config.LoadConfig("PlayersPanel.as", undefined, false, StatLoader.LoadLastStat);
+    GlobalEventDispatcher.addEventListener("config_loaded", StatLoader.LoadLastStat);
+    Config.LoadConfig("PlayersPanel.as");
   }
 
   // override

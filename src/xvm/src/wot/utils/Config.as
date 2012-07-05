@@ -3,6 +3,7 @@
  * @author sirmax2
  */
 import wot.utils.Defines;
+import wot.utils.GlobalEventDispatcher;
 import wot.utils.Locale;
 import wot.utils.Logger;
 import wot.utils.Utils;
@@ -18,27 +19,25 @@ class wot.utils.Config
   public static var s_game_region: String = null;
   private static var s_loading: Boolean = false;
   private static var s_load_legacy_config: Boolean = false;
-  private static var s_load_complete_funcs: Array = []; // Static only
   private static var s_config_filename: String = "";
   private static var s_src: String = "";
+
+
 
   // Load XVM mod config; config data is shared between all marker instances, so
   // it should be loaded only once per session. s_loaded flag indicates that
   // we've already initialized config loading process.
-  public static function LoadConfig(src: String, filename: String, legacy: Boolean, completeFunc: Function)
+  public static function LoadConfig(src: String, filename: String, legacy: Boolean)
   {
     //Logger.add("TRACE: LoadConfig()");
     if (s_loaded)
     {
-      if (Utils.indexOf(s_load_complete_funcs, completeFunc) == -1)
-        completeFunc.call();
+      GlobalEventDispatcher.dispatchEvent({type: "config_loaded"});
       return;
     }
     s_src = src || "";
     s_config_filename = filename || Defines.DEFAULT_CONFIG_NAME;
     s_load_legacy_config = legacy ? true : false;
-    if (Utils.indexOf(s_load_complete_funcs, completeFunc) == -1)
-      s_load_complete_funcs.push(completeFunc);
     ReloadConfig();
   }
 
@@ -170,10 +169,7 @@ class wot.utils.Config
         }
 
         if (!config)
-        {
-          if (_global.xvm_battleloading)
-            _global.xvm_battleloading.setInfoFieldData( { error: "Error parsing config file. Using default settings." } );
-        }
+          GlobalEventDispatcher.dispatchEvent({ type: "set_info", error: "Error parsing config file. Using default settings." });
         else
         {
           Config.s_config = Config.MergeConfigs(Config.FixConfig(config), Config.s_config);
@@ -191,17 +187,13 @@ class wot.utils.Config
         txt = txt.split("\r").join("").split("\n").join("");
         while (txt.indexOf("  ") != -1)
           txt = txt.split("  ").join(" ");
-        if (_global.xvm_battleloading)
-        {
-          _global.xvm_battleloading.setInfoFieldData( { error: "Error loading config file. Using default settings.\n" +
-              "[" + ex.at + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " + txt } );
-        }
+        GlobalEventDispatcher.dispatchEvent({ type: "set_info", error: "Error loading config file. Using default settings.\n" +
+          "[" + ex.at + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " + txt });
       }
     }
     else
     {
-      if (_global.xvm_battleloading)
-        _global.xvm_battleloading.setInfoFieldData({ warning: " " });
+      GlobalEventDispatcher.dispatchEvent({ type: "set_info", warning: " " });
     }
   }
 
@@ -242,8 +234,7 @@ class wot.utils.Config
     s_loaded = true;
     s_loading = false;
     TuneConfigForServerRegion();
-    for (var i = 0; i < s_load_complete_funcs.length; ++i)
-      s_load_complete_funcs[i].call();
+    GlobalEventDispatcher.dispatchEvent({type: "config_loaded"});
   }
 
   private static var useFallback: Boolean = false;
@@ -269,7 +260,8 @@ class wot.utils.Config
     if (Config.DEBUG_TUNING)
     {
       Logger.add("DEBUG TUNING TuneConfigForServer: " + region + ": Begin:");
-      for (var i = 0; i < s_config.players.length; ++i)
+      var players_length = s_config.players.length;
+      for (var i = 0; i < players_length; ++i)
         Logger.addObject(s_config.players[i], "players");
     }
 
@@ -289,7 +281,8 @@ class wot.utils.Config
               if (Config.DEBUG_TUNING)
               {
                 Logger.add("DEBUG TUNING: TuneConfigForServer: " + region + ": Found:");
-                for (var k = 0; k < ele.players.length; ++k)
+                var players_length = ele.players.length;
+                for (var k = 0; k < players_length; ++k)
                   Logger.addObject(ele.players[k], "players");
               }
               ele.players = Utils.addRootFor(ele.players, root + ele.folder + "/");
@@ -304,7 +297,8 @@ class wot.utils.Config
     if (Config.DEBUG_TUNING)
     {
       Logger.add("DEBUG TUNING: TuneConfigForServer: " + region + ": Finished:");
-      for (var i = 0; i < s_config.players.length; i++)
+      var players_length = s_config.players.length;
+      for (var i = 0; i < players_length; i++)
         Logger.addObject(s_config.players[i], "players");
     }
   }

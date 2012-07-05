@@ -8,6 +8,7 @@ import com.greensock.TweenLite;
 import com.xvm.JSON;
 import wot.utils.Config;
 import wot.utils.Defines;
+import wot.utils.GlobalEventDispatcher;
 import wot.utils.Logger;
 import wot.utils.StatData;
 import wot.utils.Utils;
@@ -35,8 +36,8 @@ class wot.utils.StatLoader
     onCompleteParams: [],
     paused: true } );
 
-  public static function AddPlayerData(reference: Object, updateFunc: Function,
-    playerId: Number, playerName: String, originalText: String, icon: String, team: Number, selected: Boolean)
+  public static function AddPlayerData(playerId: Number, playerName: String, originalText: String, icon: String,
+    team: Number, selected: Boolean)
   {
     if (playerId <= 0 || !playerName)
       return;
@@ -45,12 +46,10 @@ class wot.utils.StatLoader
     var clan = Utils.GetClanName(playerName);
 
     //Logger.add("AddPlayerData(" + playerName + "): " + pname);
-    
+
     if (!StatData.s_data[pname])
       s_players_count++;
     StatData.s_data[pname] = {
-      reference: reference,
-      updateFunc: updateFunc,
       playerId: playerId,
       fullPlayerName: playerName,
       name: pname,
@@ -61,7 +60,6 @@ class wot.utils.StatLoader
       team: team,
       selected: selected,
       loaded: false,
-      rating: null,
       stat: StatData.s_data[pname] ? StatData.s_data[pname].stat : undefined
     };
   }
@@ -138,7 +136,8 @@ class wot.utils.StatLoader
           return;
         var stats = JSON.parse(str);
 
-        for (var i = 0; i < stats.players.length; ++i)
+        var players_length = stats.players.length;
+        for (var i = 0; i < players_length; ++i)
         {
           var stat = stats.players[i];
           stat = StatLoader.CalculateRating(stat);
@@ -153,12 +152,9 @@ class wot.utils.StatLoader
         };
 
         if (stats.info && stats.info.xvm)
-        {
-          if (_global.xvm_battleloading)
-            _global.xvm_battleloading.setInfoFieldData(stats.info.xvm);
-        }
+          GlobalEventDispatcher.dispatchEvent({ type: "set_info", ver: stats.info.xvm.ver, message: stats.info.xvm.message });
 
-        StatLoader.UpdateAll();
+        GlobalEventDispatcher.dispatchEvent({type: "stat_loaded"});
       }
       catch (ex)
       {
@@ -184,17 +180,6 @@ class wot.utils.StatLoader
     }
     //Logger.addObject(stat);
     return stat;
-  }
-
-  private static function UpdateAll()
-  {
-    //Logger.add("Stat.UpdateAll()");
-    for (var pname in StatData.s_data)
-    {
-      var pdata = StatData.s_data[pname];
-      if (pdata.reference && pdata.updateFunc)
-        pdata.updateFunc.call(pdata.reference, pdata);
-    }
   }
 
   // Fog of War
@@ -278,7 +263,8 @@ class wot.utils.StatLoader
               StatLoader.retrieving = false;
               StatLoader.added = false;
               var stats = JSON.parse(str);
-              for (var i = 0; i < stats.players.length; ++i)
+              var players_length = stats.players.length;
+              for (var i = 0; i < players_length; ++i)
               {
                 var p_stat = stats.players[i];
                 var p_name = Utils.GetNormalizedPlayerName(p_stat.name);
@@ -293,6 +279,8 @@ class wot.utils.StatLoader
                 StatData.s_data[p_name].loaded = true;
                 // TODO: Add callback to update GUI
               };
+              GlobalEventDispatcher.dispatchEvent({type: "stat_loaded"});
+
               // If there's no new data submitted, try with @GET_LAST_STAT (FIXME)
               if (!_is_str_new)
               {
@@ -303,7 +291,8 @@ class wot.utils.StatLoader
                   if (!str_new || str_new == undefined)
                     return;
                   var stats_new = JSON.parse(str_new);
-                  for (var i = 0; i < stats_new.players.length; ++i)
+                  var players_length2 = stats_new.players.length;
+                  for (var i = 0; i < players_length2; ++i)
                   {
                     var p_stat_new = stats_new.players[i];
                     var p_name_new = Utils.GetNormalizedPlayerName(p_stat_new.name);
@@ -318,6 +307,7 @@ class wot.utils.StatLoader
                     StatData.s_data[p_name_new].loaded = true;
                     // TODO: Add callback to update GUI
                   };
+                  GlobalEventDispatcher.dispatchEvent({type: "stat_loaded"});
                 }
                 lv_ret_new.load(Defines.COMMAND_GET_LAST_STAT);
               }

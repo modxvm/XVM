@@ -171,7 +171,7 @@ class wot.utils.GraphicsUtil
   {
     return Number(GetDynamicColorValue(type, value, "0x", darker));
   }
-  
+
   public static function GetDynamicColorValue(type: Number, value: Number, prefix: String, darker: Boolean): String
   {
     if (!prefix)
@@ -206,9 +206,10 @@ class wot.utils.GraphicsUtil
         return prefix + "FFFEFE";
     }
 
+    var cfg_len = cfg.length;
     if (value == 0 && (type == Defines.DYNAMIC_COLOR_EFF || type == Defines.DYNAMIC_COLOR_RATING))
     {
-      if (cfg.length == 0)
+      if (cfg_len == 0)
         return "";
       var cvalue: Number = cfg[0].value;
       if (cvalue != 0)
@@ -219,7 +220,7 @@ class wot.utils.GraphicsUtil
       return prefix + color.toString(16);
     }
 
-    for (var i = 0; i < cfg.length; ++i)
+    for (var i = 0; i < cfg_len; ++i)
     {
       var cvalue: Number = cfg[i].value;
       var color: Number = Utils.toInt(cfg[i].color, 0xFFFFFF);
@@ -267,7 +268,8 @@ class wot.utils.GraphicsUtil
         return 102;
     }
 
-    for (var i = 0; i < cfg.length; ++i)
+    var cfg_len = cfg.length;
+    for (var i = 0; i < cfg_len; ++i)
     {
       var avalue: Number = cfg[i].value;
       var alpha: Number = cfg[i].alpha;

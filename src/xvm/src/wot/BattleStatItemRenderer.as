@@ -6,6 +6,7 @@
 import wot.utils.Config;
 import wot.utils.Chance;
 import wot.utils.Defines;
+import wot.utils.GlobalEventDispatcher;
 import wot.utils.Iconset;
 import wot.utils.Logger;
 import wot.utils.PlayerInfo;
@@ -33,7 +34,9 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     Utils.TraceXvmModule("BattleStatItemRenderer");
 
     col3.html = true;
-    Config.LoadConfig("BattleStatItemRenderer.as", undefined, false, StatLoader.LoadLastStat);
+
+    GlobalEventDispatcher.addEventListener("config_loaded", StatLoader.LoadLastStat);
+    Config.LoadConfig("PlayersPanel.as");
   }
 
   private function get team(): Number
@@ -81,7 +84,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     {
       var pname = data.label.toUpperCase();
       if (Config.s_config.rating.showPlayersStatistics && !StatData.s_data[pname] || !StatData.s_data[pname].id)
-        StatLoader.AddPlayerData(this, null, 1, data.label, data.vehicle, data.icon, team);
+        StatLoader.AddPlayerData(1, data.label, data.vehicle, data.icon, team);
 
       // Alternative icon set
       if (!m_iconset)

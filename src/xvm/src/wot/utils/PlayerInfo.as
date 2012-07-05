@@ -18,7 +18,8 @@ class wot.utils.PlayerInfo extends MovieClip
       return s_playersInfoCache[nick];
 
     var result = null;
-    for (var i = 0; i < Config.s_config.players.length; ++i)
+    var players_length = Config.s_config.players.length;
+    for (var i = 0; i < players_length; ++i)
     {
       var pinfo = Config.s_config.players[i];
       if (nick && pinfo.nick && nick == pinfo.nick)

@@ -5,8 +5,6 @@
 
 /*
   s_data members:
-    reference: Object,
-    updateFunc: Function,
     playerId: Number,
     fullPlayerName: fullPlayerName,
     name: String,
@@ -15,6 +13,7 @@
     icon: String,
     vehicleName: String,
     team: Defines.TEAM_ALLY | Defines.TEAM_ENEMY,
+    selected: Boolean,
     loaded: Boolean
     stat:
       b - battles

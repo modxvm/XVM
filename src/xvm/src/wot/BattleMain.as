@@ -3,30 +3,31 @@
  * @author sirmax2
  */
 import wot.utils.Config;
+import wot.utils.GlobalEventDispatcher;
 import wot.utils.Utils;
 
 class wot.BattleMain
 {
-  static var instance:BattleMain;
+  static var instance: BattleMain;
   static var minimap;
 
   static function main()
   {
     Utils.TraceXvmModule("Battle:main");
 
-    Config.LoadConfig("BattleMain.as", undefined, true, BattleMainConfigLoadComplete);
+    GlobalEventDispatcher.addEventListener("config_loaded", BattleMainConfigLoaded);
+    Config.LoadConfig("BattleMain.as");
 
     instance = new BattleMain();
     gfx.io.GameDelegate.addCallBack("battle.showPostmortemTips", instance, "showPostmortemTips");
     gfx.io.GameDelegate.addCallBack("Stage.Update", instance, "onUpdateStage");
   }
 
-  private static function BattleMainConfigLoadComplete()
+  private static function BattleMainConfigLoaded()
   {
     if (Config.s_config.battle.removePanelsModeSwitcher)
       _root.switcher_mc._visible = false;
   }
-
 
   function showPostmortemTips(movingUpTime, showTime, movingDownTime)
   {

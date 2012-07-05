@@ -33,7 +33,8 @@ class wot.utils.Utils
   {
     var i, j;
     for (i = 0; str.charCodeAt(i) < 33; ++i);
-    for (j = str.length-1; str.charCodeAt(j) < 33; --j);
+    var len = str.length;
+    for (j = len-1; str.charCodeAt(j) < 33; --j);
     return str.substring(i, j+1);
   }
 
@@ -96,7 +97,7 @@ class wot.utils.Utils
   {
     return GetPlayerName(fullplayername).toUpperCase();
   }
-  
+
   public static function GetClanName(fullplayername: String): String
   {
     var pos = fullplayername.indexOf("[");
@@ -140,8 +141,8 @@ class wot.utils.Utils
       path += "/";
     return path;
   }
-  
-  
+
+
   public static function addRootFor(players: Array, root: String)
   {
     if (root == "/" || root == "")
@@ -156,14 +157,14 @@ class wot.utils.Utils
     }
     return players;
   }
-  
+
   public static function removeDuplicatesAndTrim(sourceArray:Array): Array
   {
     for (var i in sourceArray)
     {
       sourceArray[i] = trim(sourceArray[i]);
     }
-    for (var i = sourceArray.length - 2; i >= 0; --i) 
+    for (var i = sourceArray.length - 2; i >= 0; --i)
     {
       for (var j = sourceArray.length - 1; j > i; --j)
       {
@@ -171,7 +172,7 @@ class wot.utils.Utils
       }
     }
     return sourceArray;
- 
+
   }
 
   private static var xvmModules: Array = [];

@@ -14,7 +14,7 @@ class wot.utils.Iconset
   private var m_iconLoader: UILoaderAlt = null;
   private var m_altIcons: Array;
   private var m_currentIndex: Number;
-  
+
   public function Iconset(owner: Object, completeFunc: Function)
   {
     m_owner = owner;
@@ -34,7 +34,8 @@ class wot.utils.Iconset
     m_iconLoader.addEventListener("complete", this, "completeLoad");
 
     m_altIcons = [];
-    for (var i = 0; i < altIcons.length; ++i)
+    var altIcons_length = altIcons.length;
+    for (var i = 0; i < altIcons_length; ++i)
     {
       if (Utils.indexOf(s_failIcons, altIcons[i]) < 0)
         m_altIcons.push(altIcons[i]);
@@ -53,7 +54,7 @@ class wot.utils.Iconset
   {
     return (m_currentIndex < m_altIcons.length) ? m_altIcons[m_currentIndex] : "";
   }
-  
+
   private function errorLoad(event)
   {
     m_currentIndex++;

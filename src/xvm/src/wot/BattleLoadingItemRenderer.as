@@ -4,8 +4,10 @@
  */
 import wot.utils.Config;
 import wot.utils.Defines;
+import wot.utils.GlobalEventDispatcher;
 import wot.utils.Iconset;
 import wot.utils.Logger;
+import wot.utils.StatData;
 import wot.utils.StatLoader;
 import wot.utils.StatFormat;
 import wot.utils.PlayerInfo;
@@ -68,7 +70,8 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
       // Add players for statistics loading
       if (Config.s_config.rating.showPlayersStatistics)
       {
-        StatLoader.AddPlayerData(this, XVMStatUpdateCallback, data.id, data.label, data.vehicle, data.icon, team, selected);
+        StatLoader.AddPlayerData(data.id, data.label, data.vehicle, data.icon, team, selected);
+        GlobalEventDispatcher.addEventListener("stat_loaded", this, StatLoadedCallback);
         if (StatLoader.s_players_count === 30)
           StatLoader.StartLoadData();
       }
@@ -147,9 +150,14 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
   }
 
   // update delegate
-  function XVMStatUpdateCallback(pdata)
+  function StatLoadedCallback()
   {
-    //Logger.add("XVMStatUpdateCallback(): " + pdata.originalText);
+    //Logger.add("StatLoaded(): " + data.label);
+
+    var pdata = StatData.s_data[Utils.GetNormalizedPlayerName(data.label)];
+    if (!pdata)
+      return;
+
     if (!m_textCache.hasOwnProperty(data.label))
     {
       m_textCache[data.label] = StatFormat.DecorateField(pdata, pdata.originalText,

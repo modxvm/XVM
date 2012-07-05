@@ -398,11 +398,12 @@ namespace wot
           _prevCommand = filename;
           _prevResult = _prevResult == "FINISHED" ? _temp : "";
 
-          if (!filename.StartsWith("\\@LOG"))
-            Log(String.Format("=> {0}", filename));
           String command = Path.GetFileName(filename);
           if (String.IsNullOrEmpty(command) || command[0] != '@')
             return 0;
+
+          if (!command.StartsWith("@LOG"))
+            Log(String.Format("=> {0}", command));
 
           String parameters = "";
           if (command.Contains(" "))

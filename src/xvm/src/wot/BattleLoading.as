@@ -5,6 +5,8 @@
 import flash.filters.DropShadowFilter;
 import wot.utils.Config;
 import wot.utils.Defines;
+import wot.utils.GlobalEventDispatcher;
+import wot.utils.Logger;
 import wot.utils.StatLoader;
 import wot.utils.Chance;
 import wot.utils.Utils;
@@ -21,19 +23,19 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
 
     Utils.TraceXvmModule("BattleLoading");
 
-    _global.xvm_battleloading = this;
+    GlobalEventDispatcher.addEventListener("config_loaded", this, BattleLoadingConfigLoaded);
+    Config.LoadConfig("BattleLoading.as");
 
-    Config.LoadConfig("BattleLoading.as", undefined, false, BattleLoadingConfigLoadComplete);
-
-    setInfoFieldData({ });
+    GlobalEventDispatcher.addEventListener("set_info", this, SetInfoFieldData);
+    SetInfoFieldData({ });
   }
 
-  public static function BattleLoadingConfigLoadComplete()
+  public function BattleLoadingConfigLoaded()
   {
     if (Config.s_config.rating.showPlayersStatistics)
     {
       // Just to check config is loaded correctly
-      wot.utils.Logger.add("[BattleLoading]\n" +
+      Logger.add("[BattleLoading]\n" +
         "  XVM_VERSION=" + Defines.XVM_VERSION + "\n" +
         "  MAX_PATH=" + Defines.MAX_PATH + "\n" +
         "  GameRegion=" + Config.s_game_region + "\n" +
@@ -44,7 +46,7 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
     }
 
     if (Config.s_config.battleLoading.showClock)
-      _global.xvm_battleloading.ShowClock();
+      ShowClock();
 
     if (Config.s_config.rating.showPlayersStatistics)
     {
@@ -71,30 +73,32 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
     s_infoField.filters = [ new DropShadowFilter(0, 0, 0, 100, 3, 3, 1, 3) ];
   }
   
-  public function setInfoFieldData(data)
+  public function SetInfoFieldData(event)
   {
+    //Logger.addObject(event, "SetInfoFieldData(event)");
+
     if (!s_infoField)
       CreateInfoField();
 
     var txt: String = "XVM v" + Defines.XVM_VERSION + " ";
 
-    if (data.ver && Utils.compareVersions(String(data.ver), Defines.XVM_VERSION) == 1)
+    if (event.ver && Utils.compareVersions(String(event.ver), Defines.XVM_VERSION) == 1)
     {
-      txt = "XVM: New version available: v" + String(data.ver) + " (current is v" + Defines.XVM_VERSION + ")\n";
-      if (data.message)
-        txt += data.message + "\n";
+      txt = "XVM: New version available: v" + String(event.ver) + " (current is v" + Defines.XVM_VERSION + ")\n";
+      if (event.message)
+        txt += event.message + "\n";
       s_infoField.textColor = 0xAAFFAA;
     }
 
-    if (data.error)
+    if (event.error)
     {
-      txt += data.error + "\n";
+      txt += event.error + "\n";
       s_infoField.textColor = 0xFF8080;
     }
 
-    if (data.warning)
+    if (event.warning)
     {
-      txt += data.warning + "\n";
+      txt += event.warning + "\n";
       s_infoField.textColor = 0xFFFFCC;
     }
 

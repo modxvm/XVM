@@ -12,9 +12,11 @@ import com.greensock.easing.Linear;
 import com.greensock.easing.Cubic;
 import wot.utils.Config;
 import wot.utils.Defines;
+import wot.utils.GlobalEventDispatcher;
 import wot.utils.GraphicsUtil;
 import wot.utils.Iconset;
 import wot.utils.StatFormat;
+import wot.utils.StatLoader;
 import wot.utils.Utils;
 import wot.utils.Logger;
 import wot.utils.PlayerInfo;
@@ -57,57 +59,42 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   var allStatesEnemy: Array = [
     "enemy/alive/normal", "enemy/alive/extended", "enemy/dead/normal", "enemy/dead/extended"
   ]
-
+  
   function XVM()
   {
+    //Logger.add("_global.gfxExtensions = " + _global.gfxExtensions);
+    //Logger.add("_global.noInvisibleAdvance = " + _global.noInvisibleAdvance);
+    if (!_global.noInvisibleAdvance)
+      _global.noInvisibleAdvance = true;
+
     super();
 
-    Utils.TraceXvmModule("PlayerListItemRenderer");
+    Utils.TraceXvmModule("XVM");
 
-    if (Config.s_loaded)
-      XVMInit2();
-    else
-      Config.LoadConfig("XVM.as", undefined, true, StatLoader.LoadLastStat);
+    GlobalEventDispatcher.addEventListener("config_loaded", this, XVMInit);
+    Config.LoadConfig("XVM.as", undefined, true);
   }
 
   private var _initialized = false;
   function XVMInit()
   {
+    //Logger.add("XVMInit()");
     if (_initialized)
       return;
     _initialized = true;
 
-    if (Config.s_loaded)
-      XVMInit2();
-    else
-    {
-      onEnterFrame = function()
-      {
-        if (!Config.s_loaded)
-          return;
-        delete this.onEnterFrame;
-        this.XVMInit2();
-      }
-    }
-  }
-
-  function XVMInit2()
-  {
     try
     {
       // Draw watermark
       if (!Config.s_config.battle.hideXVMVersion && !_global.xvmWatermark)
-      {
-        _global.xvmWatermark = true;
-        var wm = _root.createTextField("xvmWatermark", _root.getNextHighestDepth(), -1, -2, 100, 16);
-        wm.antiAliasType = "advanced";
-        wm.setNewTextFormat(new TextFormat("$FieldFont", 8, 0x808080, false, false, false, null, null, "left"));
-        wm._alpha = 50;
-        wm.text = "XVM v" + Defines.XVM_VERSION;
-      }
+        DrawXvmWatermark();
 
       if (Config.s_config.battle.useStandardMarkers)
         return;
+
+      // Load stat
+      GlobalEventDispatcher.addEventListener("stat_loaded", this, XVMStatLoaded);
+      StatLoader.LoadLastStat();
 
       // Draw grid
       if (Config.s_config.battle.drawGrid)
@@ -148,6 +135,22 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     }
   }
 
+  function DrawXvmWatermark()
+  {
+    _global.xvmWatermark = true;
+    var wm = _root.createTextField("xvmWatermark", _root.getNextHighestDepth(), -1, -2, 100, 16);
+    wm.antiAliasType = "advanced";
+    wm.setNewTextFormat(new TextFormat("$FieldFont", 8, 0x808080, false, false, false, null, null, "left"));
+    wm._alpha = 50;
+    wm.text = "XVM v" + Defines.XVM_VERSION;
+  }
+
+  function XVMStatLoaded()
+  {
+    XVMInitializeStates(true);
+    XVMUpdateStyle();
+  }
+  
   function setDefaultVehicleMarkerPosition()
   {
     for (var childName in marker.marker)
@@ -249,7 +252,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     //Logger.add("configUI(): " + GetCurrentStateString() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
     m_currentHealth = m_curHealth;
     super.configUI();
-    XVMInit();
+    //XVMInit();
   }
 
   // override
@@ -835,14 +838,14 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   }
 
   private var _statesInitialized: Boolean = false;
-  function XVMInitializeStates()
+  function XVMInitializeStates(force: Boolean)
   {
     try
     {
       if (!m_vname || !m_playerFullName)
         return;
 
-      if (_statesInitialized)
+      if (_statesInitialized && !force)
         return;
 
       _statesInitialized = true;

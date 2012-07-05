@@ -41,7 +41,8 @@ class com.xvm.JSON {
   case 'object':
       if (arg) {
           if (arg instanceof Array) {
-              for (i = 0; i < arg.length; ++i) {
+              var len = arg.length;
+              for (i = 0; i < len; ++i) {
                   v = stringify(arg[i]);
                   if (s) {
                       s += ',';

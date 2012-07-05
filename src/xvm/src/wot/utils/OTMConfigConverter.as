@@ -77,7 +77,8 @@ class wot.utils.OTMConfigConverter
       return undefined;
     var p: Array = path.split("/"); // "path/to/value"
     var root = otm;
-    for (var i = 0; i < p.length; ++i)
+    var p_length = p.length;
+    for (var i = 0; i < p_length; ++i)
     {
       if (!root.hasOwnProperty(p[i]))
         return undefined;
@@ -90,13 +91,14 @@ class wot.utils.OTMConfigConverter
   {
     var p: Array = path.split("/"); // "path/to/value"
     var root = xvm;
-    for (var i = 0; i < p.length - 1; ++i)
+    var p_length = p.length;
+    for (var i = 0; i < p_length - 1; ++i)
     {
       if (!root.hasOwnProperty(p[i]))
         root[p[i]] = { };
       root = root[p[i]];
     }
-    root[p[p.length - 1]] = v;
+    root[p[p_length - 1]] = v;
   }
 
   private static function Copy(otmpath: String, xvmpath: String)
