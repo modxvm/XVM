@@ -141,7 +141,7 @@ class wot.utils.StatFormat
       GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, t_battles, "#", isDead));
 
     format = Utils.trim(format);
-
+    
     return format;
   }
 }

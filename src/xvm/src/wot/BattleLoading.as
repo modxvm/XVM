@@ -24,6 +24,7 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
     Utils.TraceXvmModule("BattleLoading");
 
     GlobalEventDispatcher.addEventListener("config_loaded", this, BattleLoadingConfigLoaded);
+    GlobalEventDispatcher.addEventListener("stat_loaded", this, BattleLoadingStatLoaded);
     Config.LoadConfig("BattleLoading.as");
 
     GlobalEventDispatcher.addEventListener("set_info", this, SetInfoFieldData);
@@ -57,7 +58,7 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
     }
   }
 
-  public function ShowClock()
+  private function ShowClock()
   {
     var clock = createTextField("clock", getNextHighestDepth(), 280, 25, 100, 40);
     clock.antiAliasType = "advanced";
@@ -66,7 +67,7 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
     clock.text = Utils.padLeft(String((new Date()).getHours()), 2, '0') + ":" + Utils.padLeft(String((new Date()).getMinutes()), 2, '0');
   }
 
-  public function CreateInfoField()
+  private function CreateInfoField()
   {
     s_infoField = createTextField("info", getNextHighestDepth(), _width / 2, 0, 400, 100);
     s_infoField.wordWrap = true;
@@ -75,7 +76,29 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
     s_infoField.filters = [ new DropShadowFilter(0, 0, 0, 100, 3, 3, 1, 3) ];
   }
 
-  public function SetInfoFieldData(event)
+  private function BattleLoadingStatLoaded(event)
+  {
+    if (event)
+      GlobalEventDispatcher.removeEventListener("stat_loaded", this, BattleLoadingStatLoaded);
+
+    // Chance
+    if (Config.s_config.battleLoading.showChances)
+    {
+      if (!s_chanceField)
+      {
+        s_chanceField = form_mc.battleText;
+        s_chanceText = Chance.ShowChance(s_chanceField, Config.s_config.battleLoading.showChancesExp);
+      }
+      if (s_chanceField.htmlText != s_chanceText)
+      {
+        //wot.utils.Logger.add(s_chanceField.htmlText);
+        s_chanceField.html = true;
+        s_chanceField.htmlText = s_chanceText;
+      }
+    }
+  }
+
+  private function SetInfoFieldData(event)
   {
     //Logger.addObject(event, "SetInfoFieldData(event)");
 
@@ -105,21 +128,5 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
     }
 
     s_infoField.text = txt;
-
-    // Chance
-    if (StatLoader.s_loaded && Config.s_config.battleLoading.showChances)
-    {
-      if (!s_chanceField)
-      {
-        s_chanceField = form_mc.battleText;
-        s_chanceText = Chance.ShowChance(s_chanceField, Config.s_config.battleLoading.showChancesExp);
-      }
-      if (s_chanceField.htmlText != s_chanceText)
-      {
-        //wot.utils.Logger.add(s_chanceField.htmlText);
-        s_chanceField.html = true;
-        s_chanceField.htmlText = s_chanceText;
-      }
-    }
   }
 }

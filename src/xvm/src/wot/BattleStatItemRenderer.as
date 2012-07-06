@@ -34,6 +34,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     Utils.TraceXvmModule("BattleStatItemRenderer");
 
     col3.html = true;
+    col3.condenseWhite = true;
 
     GlobalEventDispatcher.addEventListener("config_loaded", StatLoader.LoadLastStat);
     Config.LoadConfig("BattleStatItemRenderer.as");
@@ -140,7 +141,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
       s_chanceField.htmlText = s_chanceText;
     }
   }
-  
+
   // override
   function updateState()
   {

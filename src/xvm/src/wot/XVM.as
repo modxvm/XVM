@@ -124,11 +124,10 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       bgShadow.removeMovieClip();
 
       // Load stat
-      if (StatLoader.s_loaded)
-        XVMStatLoaded();
-      else
+      XVMInit2();
+      if (Config.s_config.rating.showPlayersStatistics && !StatLoader.s_loaded)
       {
-        GlobalEventDispatcher.addEventListener("stat_loaded", this, XVMStatLoaded);
+        GlobalEventDispatcher.addEventListener("stat_loaded", this, XVMInit2);
         StatLoader.LoadLastStat();
       }
     }
@@ -148,11 +147,11 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     wm.text = "XVM v" + Defines.XVM_VERSION;
   }
 
-  function XVMStatLoaded(event)
+  function XVMInit2(event)
   {
     //Logger.add("XVMStatLoaded()" + (event ? ": event=" + event.type : ""));
     if (event)
-      GlobalEventDispatcher.removeEventListener("stat_loaded", this, XVMStatLoaded);
+      GlobalEventDispatcher.removeEventListener("stat_loaded", this, XVMInit2);
     XVMPopulateData();
     updateMarkerLabel();
     XVMUpdateStyle();
@@ -847,19 +846,27 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     XVMUpdateHealthBar(m_curHealth);
   }
 
-  private var _statesInitialized: Boolean = false;
-  function XVMInitializeStates(force: Boolean)
+  function XVMInitializeStates()
   {
     try
     {
       if (!m_vname || !m_playerFullName)
         return;
 
-      if (_statesInitialized && !force)
-        return;
-
-      _statesInitialized = true;
-
+      // cleanup
+      if (textFields)
+      {
+        for (var st in textFields)
+        {
+          for (var i in textFields[st])
+          {
+            var tf = textFields[st][i];
+            tf.field.removeTextField();
+            delete tf;
+          }
+        }
+      }
+      
       textFields = { };
       var allStates = (m_team == "enemy") ? allStatesEnemy : allStatesAlly;
       for (var stid in allStates)

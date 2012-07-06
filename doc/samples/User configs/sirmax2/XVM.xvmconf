@@ -4,9 +4,9 @@
     "author": "sirmax2",
     "description": "Sirmax's settings for XVM",
     "url": "http://code.google.com/p/wot-xvm/",
-    "date": "02.05.2012",
-    "gameVersion": "0.7.3",
-    "modMinVersion": "2.2"
+    "date": "05.07.2012",
+    "gameVersion": "0.7.4",
+    "modMinVersion": "2.4"
   },
   "battle": {
     "mirroredVehicleIcons": false,
