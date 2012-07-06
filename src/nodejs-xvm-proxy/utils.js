@@ -51,7 +51,6 @@ module.exports = (function()
         log("DEBUG: " + str);
     };
 
-
     // exports
     return {
         calculateEfficiency: calculateEfficiency,

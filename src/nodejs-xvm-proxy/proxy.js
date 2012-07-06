@@ -9,14 +9,14 @@ var http = require("http"),
     users_collection,
     serverOptions = {
         auto_reconnect: true,
-        poolSize: 100
+        poolSize: 50
     },
     db = new mongo.Db(settings.dbName, new mongo.Server("localhost", 27017, serverOptions));
 
 // Global vars
 var lastErrors = {},
-    waiting_shown = false,
-    error_shown = false,
+    waiting_shown = {},
+    error_shown = {},
     usageStat = {
         start: new Date(),
         lastShown: new Date(),
@@ -69,18 +69,20 @@ var makeSingleRequest = function(id, callback, force) {
     var lastError = lastErrors["s" + statHostId] || null;
 
     // Do not execute requests some time after error responce
-    if (lastError != null && ! force) {
+    if (lastError != null && !force) {
         if ((now - lastError) < settings.lastErrorTtl) {
-            if (!waiting_shown) {
-                waiting_shown = true;
-                utils.debug("waiting Server_" + statHostId + ": " + Math.round((settings.lastErrorTtl - (now - lastError)) / 1000) + " s id=" + id);
+            var wait_sec = Math.round((settings.lastErrorTtl - (now - lastError)) / 1000);
+            if (waiting_shown["s" + statHostId] != wait_sec) {
+                waiting_shown["s" + statHostId] = wait_sec;
+                utils.debug("waiting Server_" + statHostId + ": " + wait_sec + " s");
             }
             callback(null, null);
             return;
          } else {
+            utils.debug("resuming Server_" + statHostId);
             lastErrors["s" + statHostId] = null;
-            waiting_shown = false;
-            error_shown = false;
+            waiting_shown["s" + statHostId] = null;
+            error_shown["s" + statHostId] = false;
          }
     }
 
@@ -127,12 +129,12 @@ var makeSingleRequest = function(id, callback, force) {
     request.shouldKeepAlive = false;
 }
 
-var processRemotes = function(inCache, forUpdate, forUpdateVNames, response) {
+var processRemotes = function(inCache, forUpdate, forUpdateVNames, response, start) {
     var urls = { };
 
     forUpdate.forEach(function(id) {
         urls[id] = function(callback) {
-            makeSingleRequest(id, callback, forUpdate.length == 1);
+            makeSingleRequest(id, callback, /*forUpdate.length == 1*/ false);
         };
     });
 
@@ -150,26 +152,27 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, response) {
         for (var i = 0; i < forUpdate.length; ++i) {
             var id = forUpdate[i];
             var vname = forUpdateVNames[i];
+            var statHostId = getStatHostId(id);
 
             var curResult = results[id];
-            var resultItem = { id: id, status: "fail", date: now, vname: vname };
+            var resultItem = { _id: id, st: "fail", dt: now };
 
             if (curResult)
             {
                 if (curResult.__error) {
-                    resultItem.status = "error";
-                    lastErrors["s" + getStatHostId(id)] = now;
-                    if (!error_shown) {
-                         error_shown = true;
-                         utils.debug("Server_" + getStatHostId(id) + ": " + curResult.__error);
+                    resultItem.st = "error";
+                    lastErrors["s" + statHostId] = now;
+                    if (!error_shown["s" + statHostId]) {
+                         error_shown["s" + statHostId] = true;
+                         utils.debug("Server_" + statHostId + ": " + curResult.__error);
                     }
                 } else if (curResult.status === "ok" && curResult.status_code === "NO_ERROR") {
                     // fill global info
-                    resultItem.status = "ok";
-                    resultItem.name = curResult.data.name;
-                    resultItem.battles = curResult.data.summary.battles_count;
-                    resultItem.wins = curResult.data.summary.wins;
-                    resultItem.eff = utils.calculateEfficiency(curResult.data);
+                    resultItem.st = "ok";
+                    resultItem.nm = curResult.data.name;
+                    resultItem.b = curResult.data.summary.battles_count;
+                    resultItem.w = curResult.data.summary.wins;
+                    resultItem.e = utils.calculateEfficiency(curResult.data);
 
                     // fill vehicle data
                     resultItem.v = [];
@@ -189,30 +192,54 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, response) {
                     }
 
                     // updating db
-                    collection.update({ id: id }, resultItem, { upsert: true });
+                    collection.update({ _id: id }, resultItem, { upsert: true });
                     usageStat.updated++;
                 }
             }
 
-            result.players.push(resultItem);
+            var pl = {
+                id: resultItem._id,
+                date: resultItem.dt,
+                vname: vname,
+                status: resultItem.st,
+                name: resultItem.nm,
+                battles: resultItem.b,
+                wins: resultItem.w,
+                eff: resultItem.e,
+                v: resultItem.v,
+            };
+            result.players.push(pl);
         }
 
         // add cached items and set expired data for players with error stat
+        var failed_count = 0;
         inCache.forEach(function(player) {
             var skip = false;
+            var pl = {
+                id: player._id,
+                date: player.dt,
+                vname: player.vname,
+                status: player.st,
+                name: player.nm,
+                battles: player.b,
+                wins: player.w,
+                eff: player.e,
+                v: player.v,
+            };
             for (var i = 0; i < result.players.length; ++i) {
-                if (result.players[i].id == player.id) {
+                if (result.players[i].id == pl.id) {
                     if (result.players[i].status != "ok") {
-                        result.players[i] = player;
+                        result.players[i] = pl;
                         usageStat.cached++;
                         usageStat.updatesFailed++;
+                        failed_count++;
                     }
                     skip = true;
                     break;
                 }
             }
             if (!skip) {
-                result.players.push(player);
+                result.players.push(pl);
                 usageStat.cached++;
             }
         });
@@ -222,10 +249,10 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, response) {
         var missed_ids = [];
         result.players.forEach(function(player) {
             if (player.status != "ok") {
-                if (missed_count < 5)
+                if (missed_count < 3)
                   missed_ids.push(player.id);
                 missed_count++;
-                missed_collection.update({ id: player.id }, { id: player.id }, { upsert: true });
+                missed_collection.update({ _id: player.id }, { _id: player.id }, { upsert: true });
             } else {
                 // Return only one vehicle data
                 if (player.v)
@@ -245,11 +272,18 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, response) {
             }
         });
 
-        if (missed_count > 0 && forUpdate.length > 0 && result.players.length > 1) {
-            utils.debug("total: " + (result.players.length < 10 ? " " : "") + result.players.length +
-                "   cache: " + (inCache.length < 10 ? " " : "") + inCache.length +
-                "   retrieve: " + (forUpdate.length < 10 ? " " : "") + forUpdate.length +
-                "   missed: " + (missed_count < 10 ? " " : "") + missed_count +
+        // Temporary disabled (log overfilled)
+        if (false && (missed_count > 0 || failed_count > 0) && forUpdate.length > 0 && result.players.length > 1) {
+            var duration = String(new Date() - start);
+            while (duration.length < 4)
+                duration = " " + duration;
+            utils.debug(
+                "S" + (statHostId == undefined ? "c" : statHostId) + " " + duration + " ms" +
+                "  total: " + (result.players.length < 10 ? " " : "") + result.players.length +
+                "  cache: " + (inCache.length < 10 ? " " : "") + inCache.length +
+                "  retrieve: " + (forUpdate.length < 10 ? " " : "") + forUpdate.length +
+                "  failed: " + (failed_count < 10 ? " " : "") + failed_count +
+                "  missed: " + (missed_count < 10 ? " " : "") + missed_count +
                 (missed_count > 0 ? ". ids: " : "") + missed_ids.join(",") + (missed_count > 5 ? ",..." : ""));
         }
 
@@ -266,6 +300,7 @@ http.createServer(function(request, response) {
     // parse request
     var ids = [ ];
     var vehicles = [ ];
+    var start = new Date();
     try {
         var query = url.parse(request.url).query;
         if(!query || !query.match(/^((\d)|(\d[\dA-Z_\-,=]*))$/))
@@ -276,15 +311,13 @@ http.createServer(function(request, response) {
             return;
         }
 
-        //ids = query.split(",").map(function(id) { return parseInt(id.split("=")[0]); });
-        //vehicles = query.split(",").map(function(id) { return id.split("=")[1]; });
         query.split(",").forEach(function(a) {
             var x = a.split("=");
             var id = parseInt(x[0]);
             ids.push(id);
             vehicles.push(x[1]);
             if (x[2] == "1")
-                users_collection.update({ id: id }, { $inc : { counter: 1 } }, { upsert: true });
+                users_collection.update({ _id: id }, { $inc : { counter: 1 } }, { upsert: true });
 
         });
     } catch(e) {
@@ -315,7 +348,7 @@ http.createServer(function(request, response) {
     usageStat.players += ids.length;
 
     // Select required data from cache
-    var cursor = collection.find({ id: { $in: ids }}, { _id:0, id:1, status:1, date:1, name:1, battles:1, wins:1, eff:1, v:1 });
+    var cursor = collection.find({ _id: { $in: ids }}, { _id:1, st:1, dt:1, nm:1, b:1, w:1, e:1, v:1 });
     cursor.toArray(function(error, inCache) {
         try {
             if (error)
@@ -338,11 +371,11 @@ http.createServer(function(request, response) {
                 // Check cache data
                 var found = false;
                 for (var i = 0; i < inCache.length; ++i) {
-                    if (inCache[i].id != id)
+                    if (inCache[i]._id != id)
                         continue;
                     if (vname)
                         inCache[i].vname = vname;
-                    if ((now - inCache[i].date) < settings.cacheTtl)
+                    if ((now - inCache[i].dt) < settings.cacheTtl)
                         found = true;
                     break;
                 }
@@ -354,7 +387,7 @@ http.createServer(function(request, response) {
                 }
             }
 
-            processRemotes(inCache, forUpdate, forUpdateVNames, response);
+            processRemotes(inCache, forUpdate, forUpdateVNames, response, start);
         } catch(e) {
             response.statusCode = 500;
             response.end("Error: " + e);

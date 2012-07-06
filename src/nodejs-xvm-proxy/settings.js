@@ -6,7 +6,7 @@ module.exports = (function()
         port: <port>,
         maxSockets: 100, // per client
         cacheTtl: 7 * 24 * 60 * 60 * 1000, // 7 days
-        lastErrorTtl: 5 * 1000, // in msec
+        lastErrorTtl: 6 * 1000, // in msec
         usageStatShowPeriod: 60 * 1000, // in msec
         dbName: "<dbname>",
         collectionName: "<collection>",
