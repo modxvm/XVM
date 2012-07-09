@@ -56,8 +56,16 @@ class wot.utils.StatFormat
       var stat = StatData.s_data[pname].stat;
       //Logger.addObject(StatData.s_data[pname]);
       //Logger.add("pname=" + pname + " uid=" + data.uid + " r=" + stat.r + " e=" + stat.e);
-      if (stat)
+      if (!stat)
       {
+        if (Config.s_config.rating.loadEnemyStatsInFogOfWar)
+          GlobalEventDispatcher.dispatchEvent( { type: "process_fow", data: data } );
+      }
+      else
+      {
+        if (Config.s_config.rating.loadEnemyStatsInFogOfWar && !StatData.s_data[pname].loaded && data.vehicle.toUpperCase != "UNKNOWN")
+          GlobalEventDispatcher.dispatchEvent( { type: "process_fow", data: data } );
+
         if (!stat.notInDb)
         {
           rating = Utils.toInt(stat.r);
@@ -91,8 +99,6 @@ class wot.utils.StatFormat
           }
         }
       }
-      else if (Config.s_config.rating.loadEnemyStatsInFogOfWar)
-        GlobalEventDispatcher.dispatchEvent( { type: "process_fow", data: data } );
     }
 
     // AS 2 doesn't have String.replace? Shame on them. Let's use our own square wheel.
@@ -141,7 +147,7 @@ class wot.utils.StatFormat
       GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, t_battles, "#", isDead));
 
     format = Utils.trim(format);
-    
+
     return format;
   }
 }

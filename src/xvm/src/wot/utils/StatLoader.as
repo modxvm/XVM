@@ -27,8 +27,9 @@ class wot.utils.StatLoader
   private static var dummy = Logger.dummy; // avoid import warning
 
   // so we don't have to create it at function execution:
-  // try to retrieve stats after 0.3, 0.5, 1 and 3 seconds
-  private static var timeouts = [ .3, .5, 1, 3 ];
+  // try to retrieve stats after 0.3, 0.8, 1.5, 3 and 5 seconds
+  private static var currentTimeoutId = 0;
+  private static var timeouts = [ 300, 500, 700, 1500, 2000 ];
 
   public static function AddPlayerData(playerId: Number, playerName: String, originalText: String, icon: String,
     team: Number, selected: Boolean)
@@ -56,6 +57,8 @@ class wot.utils.StatLoader
       loaded: StatData.s_data[pname] ? true : false,
       stat: StatData.s_data[pname] ? StatData.s_data[pname].stat : undefined
     };
+    if (!StatData.s_data[pname].loaded)
+      dirty = true;
   }
 
   public static function StartLoadData(cmd, isRecursiveCall)
@@ -98,6 +101,8 @@ class wot.utils.StatLoader
       return;
     }
 
+    dirty = false;
+    currentTimeoutId = 0;
     LoadStatData(cmd);
   }
 
@@ -110,6 +115,7 @@ class wot.utils.StatLoader
       LoadStatData(Defines.COMMAND_GET_LAST_STAT);
   }
 
+  private static var cmdCounter = 0;
   private static function LoadStatData(command, isRecursiveCall)
   {
     //Logger.add("StatLoader.LoadStatData(): command=" + command);
@@ -121,16 +127,19 @@ class wot.utils.StatLoader
     var lv:LoadVars = new LoadVars();
     lv.onData = function(str: String)
     {
-      Logger.add("lv: " + str);
+      //Logger.add("lv: " + str);
       if (!str)
         return;
-        
+
       if (str == "NOT_READY")
       {
-        setTimeout(StatLoader.LoadStatData(command, true), 500);
+        if (StatLoader.currentTimeoutId >= StatLoader.timeouts.length)
+          return;
+        var timer:Function = _global.setTimeout(function() { StatLoader.LoadStatData(command, true); }, StatLoader.timeouts[StatLoader.currentTimeoutId]);
+        StatLoader.currentTimeoutId++;
         return;
       }
-        
+
       var finallyBugWorkaround: Boolean = false; // Workaround: finally block have a bug - it can be called twice. Why? How? F*ck!
       try
       {
@@ -148,6 +157,8 @@ class wot.utils.StatLoader
             StatData.s_data[name] = { loaded: true };
           }
           StatData.s_data[name].stat = stat;
+          if (StatData.s_data[name].vehicle.toUpperCase() == "UNKNOWN")
+            StatData.s_data[name].loaded = false;
           //Logger.addObject(stat, stat.name);
         };
 
@@ -167,10 +178,15 @@ class wot.utils.StatLoader
         StatData.s_loaded = true;
         StatLoader.s_loadDataStarted = false;
         StatLoader.s_loading = false;
+        //Logger.add("Stat Loaded");
         GlobalEventDispatcher.dispatchEvent( { type: "stat_loaded" } );
+
+        if (StatLoader.dirty)
+          var timer = _global.setTimeout(function() { StatLoader.StartLoadData(Defines.COMMAND_RUNINGAME); }, 50);
       }
     };
-    lv.load(command);
+    lv.load(command + " " + cmdCounter);
+    cmdCounter++;
   }
 
   private static function CalculateRating(stat): Object
@@ -201,10 +217,10 @@ class wot.utils.StatLoader
     if (!data.uid)
       return;
 
-    Logger.add("ProcessForFogOfWar(): " + (data.label || data.name));
+    //Logger.add("ProcessForFogOfWar(): " + (data.label || data.name));
     //Logger.addObject(data);
 
-    var fullPlayerName = data.label || data.name;
+    var fullPlayerName = (data.label || data.name) + (data.clanAbbrev ? "[" + data.clanAbbrev + "]" : "");
     var pname: String = Utils.GetNormalizedPlayerName(fullPlayerName);
 
     if (StatData.s_data[pname])
@@ -213,105 +229,6 @@ class wot.utils.StatLoader
     AddPlayerData(data.uid, fullPlayerName, data.vehicle || data.originalText, data.icon,
       data.team == "team1" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
 
-    setTimeout(function() { StatLoader.StartLoadData(Defines.COMMAND_RUNINGAME); }, 50);
+    var timer = _global.setTimeout(function() { StatLoader.StartLoadData(Defines.COMMAND_RUNINGAME); }, 50);
   }
-
- /* private static function RetrieveStatsIngame()
-  {
-    if (!retrieving && ! retrieved)
-    {
-      // retrieve stats
-      //Logger.add("Retrieve stats");
-      retrieving = true;
-
-      // check if retrieving stats from server finished
-      var lv_check:LoadVars = new LoadVars();
-      lv_check.onData = function(check)
-      {
-        try
-        {
-          //Logger.add("check: "+check)
-          if (check == "FINISHED")
-          {
-            StatLoader.retrieving = true;
-            // stop timer execution
-            StatLoader.timer.stop();
-            // retrieve stats from proxy
-            var lv_ret:LoadVars = new LoadVars();
-            lv_ret.onData = function(str)
-            {
-              if (!str || str == undefined)
-                return;
-              var _is_str_new = false;
-              StatLoader.retrieving = false;
-              StatLoader.added = false;
-              var stats = JSON.parse(str);
-              var players_length = stats.players.length;
-              for (var i = 0; i < players_length; ++i)
-              {
-                var p_stat = stats.players[i];
-                var p_name = Utils.GetNormalizedPlayerName(p_stat.name);
-                if (StatData.s_data[p_name].stat)
-                {
-                  //Logger.add(p_name + " already in ratings");
-                  continue;
-                }
-                _is_str_new = true;
-                //Logger.addObject(p_stat, "Adding to "+p_name+" :");
-                StatData.s_data[p_name].stat = StatLoader.CalculateRating(p_stat);
-                StatData.s_data[p_name].loaded = true;
-                // TODO: Add callback to update GUI
-              };
-              GlobalEventDispatcher.dispatchEvent({type: "stat_loaded"});
-
-              // If there's no new data submitted, try with @GET_LAST_STAT (FIXME)
-              if (!_is_str_new)
-              {
-                //Logger.add("Nothing new");
-                var lv_ret_new:LoadVars = new LoadVars();
-                lv_ret_new.onData = function(str_new)
-                {
-                  if (!str_new || str_new == undefined)
-                    return;
-                  var stats_new = JSON.parse(str_new);
-                  var players_length2 = stats_new.players.length;
-                  for (var i = 0; i < players_length2; ++i)
-                  {
-                    var p_stat_new = stats_new.players[i];
-                    var p_name_new = Utils.GetNormalizedPlayerName(p_stat_new.name);
-                    if (StatData.s_data[p_name_new].stat)
-                    {
-                      //Logger.add(p_name_new + " already in ratings");
-                      continue;
-                    }
-                    //Logger.addObject(p_stat_new, "Adding to "+p_name_new+" :");
-                    StatLoader.CalculateRating(p_stat_new);
-                    StatData.s_data[p_name_new].stat = p_stat_new;
-                    StatData.s_data[p_name_new].loaded = true;
-                    // TODO: Add callback to update GUI
-                  };
-                  GlobalEventDispatcher.dispatchEvent({type: "stat_loaded"});
-                }
-                lv_ret_new.load(Defines.COMMAND_GET_LAST_STAT);
-              }
-              StatLoader.runningIngame = false;
-              StatLoader.retrieving = false;
-              if (!StatLoader.added)
-                StatLoader.retrieved = true;
-            }
-            lv_ret.load(Defines.COMMAND_RETRIEVE);
-          }
-          else
-          {
-            StatLoader.retrieving = false;
-          }
-        }
-        catch (ex)
-        {
-          // do nothing
-        }
-      }
-      lv_check.load(Defines.COMMAND_READY);
-    }
-  }*/
 }

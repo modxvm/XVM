@@ -392,16 +392,16 @@ namespace wot
           fileinfo.LastWriteTime = DateTime.Now;
           fileinfo.Length = 0;
 
-          if (filename == _command)
+          String command = Path.GetFileName(filename);
+          if (command == _command)
           {
             if (!String.IsNullOrEmpty(_result))
               fileinfo.Length = _result.Length;
             return 0;
           }
-          _command = filename;
+          _command = command;
           _result = "";
 
-          String command = Path.GetFileName(filename);
           if (String.IsNullOrEmpty(command) || command[0] != '@')
             return 0;
 
@@ -416,7 +416,6 @@ namespace wot
             parameters = cmd[1];
           }
 
-          Thread t;
           switch (command)
           {
             case "@LOG":
@@ -439,22 +438,25 @@ namespace wot
 
             case "@RUNINGAME":
               if (resultReady)
+              {
+                Debug("_lastResult: " + _lastResult);
                 _result = _lastResult;
+              }
               else
               {
-                if (runningIngameThread == null)
+                if (runningIngameThread == null || !runningIngameThread.IsAlive)
                 {
                   runningIngameThread = new Thread(() =>
                   {
                     lock (_lockIngame)
                     {
-                      _lastResult = GetStat();
+                      _lastResult = GetStat(); // this will start network operations
+                      Debug("Result Ready");
                       resultReady = true;
                     }
                   });
+                  runningIngameThread.Start();
                 }
-                if (!runningIngameThread.IsAlive)
-                  runningIngameThread.Start(); // this too
                 _result = "NOT_READY";
               }
               resultReady = false;
