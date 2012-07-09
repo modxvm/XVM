@@ -5,10 +5,10 @@
 import com.natecook.Sprintf;
 import wot.utils.Config;
 import wot.utils.Defines;
+import wot.utils.GlobalEventDispatcher;
 import wot.utils.GraphicsUtil;
 import wot.utils.Logger;
 import wot.utils.StatData;
-import wot.utils.StatLoader;
 import wot.utils.Utils;
 
 class wot.utils.StatFormat
@@ -48,7 +48,7 @@ class wot.utils.StatFormat
     var t_battles: Number = -1;
 
     //Logger.addObject(StatData.s_data);
-    if (StatLoader.s_loaded)
+    if (StatData.s_loaded)
     {
       var pname: String = Utils.GetNormalizedPlayerName(data.label || data.name);
       if (!data.uid || data.uid == undefined)
@@ -92,7 +92,7 @@ class wot.utils.StatFormat
         }
       }
       else if (Config.s_config.rating.loadEnemyStatsInFogOfWar)
-        StatLoader.ProcessForFogOfWar(data);
+        GlobalEventDispatcher.dispatchEvent( { type: "process_fow", data: data } );
     }
 
     // AS 2 doesn't have String.replace? Shame on them. Let's use our own square wheel.

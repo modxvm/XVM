@@ -37,15 +37,18 @@ class wot.utils.Iconset
     var altIcons_length = altIcons.length;
     for (var i = 0; i < altIcons_length; ++i)
     {
-      if (Utils.indexOf(s_failIcons, altIcons[i]) < 0)
-        m_altIcons.push(altIcons[i]);
+      var icon = altIcons[i];
+      if (Utils.indexOf(s_failIcons, icon) < 0)
+        m_altIcons.push(icon);
     }
     if (m_iconLoader._sourceAlt != "")
     {
-      if (Utils.indexOf(s_failIcons, m_iconLoader._sourceAlt) < 0)
-        m_altIcons.push(m_iconLoader._sourceAlt);
+      var icon = m_iconLoader._sourceAlt;
+      if (Utils.indexOf(s_failIcons, icon) < 0)
+        m_altIcons.push(icon);
       m_iconLoader._sourceAlt = "";
     }
+    m_altIcons.push("../maps/icons/vehicle/contour/noImage.png");
 
     m_currentIndex = 0;
   }

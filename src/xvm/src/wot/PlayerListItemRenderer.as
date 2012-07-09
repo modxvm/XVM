@@ -38,6 +38,8 @@ class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRend
       iconLoader._x -= 80;
       this.vehicleLevel._x = iconLoader._x + 15;
     }
+    
+    iconLoader._visible = true;
   }
 
   // override

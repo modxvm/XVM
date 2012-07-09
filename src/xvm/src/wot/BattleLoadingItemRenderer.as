@@ -73,7 +73,7 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
         StatLoader.AddPlayerData(data.id, data.label, data.vehicle, data.icon, team, selected);
         GlobalEventDispatcher.addEventListener("stat_loaded", this, StatLoadedCallback);
         if (StatLoader.s_players_count === 30)
-          StatLoader.StartLoadData();
+          StatLoader.StartLoadData(Defines.COMMAND_RUN);
       }
 
       // Player/clan icons

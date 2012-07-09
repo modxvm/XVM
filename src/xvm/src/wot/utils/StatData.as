@@ -31,5 +31,6 @@
 
 class wot.utils.StatData
 {
+  public static var s_loaded = false;
   public static var s_data = {};
 }

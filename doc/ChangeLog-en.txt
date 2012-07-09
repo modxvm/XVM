@@ -1,4 +1,7 @@
-﻿XVM-2.4.2.test5:
+﻿XVM-2.4.2.test6:
+  * fixed bugs in "Fog of War" mode.
+
+XVM-2.4.2.test5:
 XVM-2.4.2.test4:
   * fixed bugs introduced in 2.4.2.test3
 

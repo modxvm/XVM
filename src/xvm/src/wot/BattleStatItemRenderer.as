@@ -74,7 +74,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     var start = new Date();
 
     // Chance
-    if (StatLoader.s_loaded && Config.s_config.statisticForm.showChances && !s_setChanceFieldDataAdded)
+    if (StatData.s_loaded && Config.s_config.statisticForm.showChances && !s_setChanceFieldDataAdded)
     {
       s_setChanceFieldDataAdded = true;
       setTimeout(SetChanceFieldData, 50);
@@ -108,14 +108,15 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     if (data)
       data.icon = saved_icon;
 
-    if (!m_textCache.hasOwnProperty(data.label))
+    var key = data.label + "/" + data.vehicle;
+    if (!m_textCache.hasOwnProperty(key))
     {
       //Logger.add(data.label);
-      m_textCache[data.label] = StatFormat.DecorateField(data, data.vehicle,
+      m_textCache[key] = StatFormat.DecorateField(data, data.vehicle,
         team == Defines.TEAM_ALLY ? Config.s_config.statisticForm.formatLeft : Config.s_config.statisticForm.formatRight,
         team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
     }
-    col3.htmlText = m_textCache[data.label];
+    col3.htmlText = m_textCache[key];
 
     if (DEBUG_TIMES)
     {

@@ -15,6 +15,7 @@ import wot.utils.Defines;
 import wot.utils.GlobalEventDispatcher;
 import wot.utils.GraphicsUtil;
 import wot.utils.Iconset;
+import wot.utils.StatData;
 import wot.utils.StatFormat;
 import wot.utils.StatLoader;
 import wot.utils.Utils;
@@ -125,7 +126,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
       // Load stat
       XVMInit2();
-      if (Config.s_config.rating.showPlayersStatistics && !StatLoader.s_loaded)
+      if (Config.s_config.rating.showPlayersStatistics && !StatData.s_loaded)
       {
         GlobalEventDispatcher.addEventListener("stat_loaded", this, XVMInit2);
         StatLoader.LoadLastStat();
@@ -149,6 +150,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
 
   function XVMInit2(event)
   {
+    //XVMSetErrorText("XVMStatLoaded()" + (event ? ": event=" + event.type : ""));
     //Logger.add("XVMStatLoaded()" + (event ? ": event=" + event.type : ""));
     if (event)
       GlobalEventDispatcher.removeEventListener("stat_loaded", this, XVMInit2);

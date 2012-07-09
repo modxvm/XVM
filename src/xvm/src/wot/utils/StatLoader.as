@@ -3,8 +3,6 @@
  * @author sirmax2
  * @author johnp
  */
-import com.greensock.TimelineLite;
-import com.greensock.TweenLite;
 import com.xvm.JSON;
 import wot.utils.Config;
 import wot.utils.Defines;
@@ -18,24 +16,19 @@ class wot.utils.StatLoader
 {
   public static var s_players_count = 0;
   public static var s_loadDataStarted = false;
-  public static var s_loaded = false;
 
   private static var s_loading = false;
   private static var _is_new: Boolean = true;
   private static var retrieving: Boolean = false;
   private static var retrieved: Boolean = true;
   private static var runningIngame: Boolean = false;
-  private static var added: Boolean = false;
+  private static var dirty: Boolean = false;
 
   private static var dummy = Logger.dummy; // avoid import warning
 
   // so we don't have to create it at function execution:
   // try to retrieve stats after 0.3, 0.5, 1 and 3 seconds
-  private static var timer: TimelineLite = new TimelineLite( {
-    tweens: [ new TweenLite(null, .3), new TweenLite(null, .5), new TweenLite(null, 1), new TweenLite(null, 3) ],
-    onComplete: StatLoader.RetrieveStatsIngame,
-    onCompleteParams: [],
-    paused: true } );
+  private static var timeouts = [ .3, .5, 1, 3 ];
 
   public static function AddPlayerData(playerId: Number, playerName: String, originalText: String, icon: String,
     team: Number, selected: Boolean)
@@ -60,28 +53,21 @@ class wot.utils.StatLoader
       vehicleName: VehicleInfo.getShortName(icon),
       team: team,
       selected: selected,
-      loaded: false,
+      loaded: StatData.s_data[pname] ? true : false,
       stat: StatData.s_data[pname] ? StatData.s_data[pname].stat : undefined
     };
   }
 
-  public static function StartLoadData()
+  public static function StartLoadData(cmd, isRecursiveCall)
   {
-    //Logger.add("Stat.StartLoadData(): "+ s_loadDataStarted);
-    if (s_loadDataStarted)
+    //if (!isRecursiveCall)
+    //  Logger.add("StatLoader.StartLoadData(): cmd=" + cmd);
+
+    if (s_loadDataStarted && !isRecursiveCall)
       return;
     s_loadDataStarted = true;
-    LoadData();
-  }
 
-  private static var _s_isNew = true;
-  private static function LoadData()
-  {
-    //Logger.add("Stat.LoadData()");
-
-    var is_new = _s_isNew;
-    _s_isNew = false;
-    var command = (is_new ? Defines.COMMAND_SET : Defines.COMMAND_ADD) + " ";
+    var command = (isRecursiveCall ? Defines.COMMAND_ADD : Defines.COMMAND_SET) + " ";
 
     var players_to_load = [];
     var len = 0;
@@ -90,6 +76,7 @@ class wot.utils.StatLoader
       var pdata = StatData.s_data[pname];
       if (!pdata.loaded)
       {
+        //Logger.addObject(pdata, pname);
         var str: String = String(pdata.playerId) + "=" + pdata.fullPlayerName +
           "&" + pdata.vehicleName + (pdata.selected ? "&1" : "");
         if (len + str.length > Defines.MAX_PATH - command.length)
@@ -105,38 +92,48 @@ class wot.utils.StatLoader
       var lv:LoadVars = new LoadVars();
       lv.onLoad = function(success)
       {
-        StatLoader.LoadData();
+        StatLoader.StartLoadData(cmd, true);
       }
       lv.load(command + players_to_load.join(","));
+      return;
     }
-    else
-    {
-      LoadStatData(Defines.COMMAND_RUN);
-    }
+
+    LoadStatData(cmd);
   }
 
   public static function LoadLastStat(event)
   {
     if (event)
       GlobalEventDispatcher.removeEventListener("config_loaded", StatLoader.LoadLastStat);
-    if (Config.s_config.rating.showPlayersStatistics)
+    GlobalEventDispatcher.addEventListener("process_fow", StatLoader.ProcessForFogOfWar);
+    if (Config.s_config.rating.showPlayersStatistics && !StatData.s_loaded)
       LoadStatData(Defines.COMMAND_GET_LAST_STAT);
   }
 
-  public static function LoadStatData(command)
+  private static function LoadStatData(command, isRecursiveCall)
   {
-    if (s_loading || s_loaded)
+    //Logger.add("StatLoader.LoadStatData(): command=" + command);
+
+    if (s_loading && !isRecursiveCall)
       return;
     s_loading = true;
 
     var lv:LoadVars = new LoadVars();
     lv.onData = function(str: String)
     {
+      Logger.add("lv: " + str);
+      if (!str)
+        return;
+        
+      if (str == "NOT_READY")
+      {
+        setTimeout(StatLoader.LoadStatData(command, true), 500);
+        return;
+      }
+        
+      var finallyBugWorkaround: Boolean = false; // Workaround: finally block have a bug - it can be called twice. Why? How? F*ck!
       try
       {
-        //Logger.add("lv: "+str);
-        if (!str)
-          return;
         var stats = JSON.parse(str);
 
         var players_length = stats.players.length;
@@ -148,7 +145,7 @@ class wot.utils.StatLoader
           if (!StatData.s_data[name])
           {
             StatLoader.s_players_count++;
-            StatData.s_data[name] = { };
+            StatData.s_data[name] = { loaded: true };
           }
           StatData.s_data[name].stat = stat;
           //Logger.addObject(stat, stat.name);
@@ -156,19 +153,27 @@ class wot.utils.StatLoader
 
         if (stats.info && stats.info.xvm)
           GlobalEventDispatcher.dispatchEvent({ type: "set_info", ver: stats.info.xvm.ver, message: stats.info.xvm.message });
-
-          StatLoader.s_loaded = true;
-          GlobalEventDispatcher.dispatchEvent( { type: "stat_loaded" } );
       }
       catch (ex)
       {
         // do nothing
       }
+      finally
+      {
+        if (finallyBugWorkaround)
+          return;
+        finallyBugWorkaround = true;
+
+        StatData.s_loaded = true;
+        StatLoader.s_loadDataStarted = false;
+        StatLoader.s_loading = false;
+        GlobalEventDispatcher.dispatchEvent( { type: "stat_loaded" } );
+      }
     };
     lv.load(command);
   }
 
-  public static function CalculateRating(stat): Object
+  private static function CalculateRating(stat): Object
   {
     stat.r = stat.b > 0 ? Math.round(stat.w / stat.b * 100) : 0;
 
@@ -188,56 +193,30 @@ class wot.utils.StatLoader
 
   // Fog of War
 
-  public static function ProcessForFogOfWar(data)
+  private static function ProcessForFogOfWar(event)
   {
+    if (!event)
+      return;
+    var data = event.data;
+    if (!data.uid)
+      return;
+
+    Logger.add("ProcessForFogOfWar(): " + (data.label || data.name));
+    //Logger.addObject(data);
+
     var fullPlayerName = data.label || data.name;
     var pname: String = Utils.GetNormalizedPlayerName(fullPlayerName);
-    var clan: String = Utils.GetClanName(fullPlayerName);
-    if (data.uid && !StatData.s_data[pname])
-    {
-      try
-      {
-        parseInt(data.uid);
 
-        // add player data
-        AddPlayerData(null, null, data.uid, fullPlayerName, data.vehicle || data.originalText, data.icon,
-          data.team == "team1" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY)
+    if (StatData.s_data[pname])
+      return;
 
-        var str: String = data.uid + "=" + fullPlayerName + "&" + VehicleInfo.getShortName(data.icon);
-        var lv: LoadVars = new LoadVars();
-        lv.onData = function(success)
-        {
-          if (!StatLoader.retrieved || StatLoader.runningIngame)
-            return;
-          StatLoader.runningIngame = true;
-          var lv_run = new LoadVars();
-          lv_run.onData = function(res)
-          {
-            StatLoader._is_new = true;
-            StatLoader.retrieved = false;
-            StatLoader.added = true;
-            // try to retrieve stats
-            StatLoader.timer.gotoAndPlay(null);
-          }
-          lv_run.load(Defines.COMMAND_RUNINGAME);
-        }
-        var cmd = _is_new ? Defines.COMMAND_SET : Defines.COMMAND_ADD;
-        _is_new = false;
-        lv.load(cmd + " " + str);
-      }
-      catch (FormatException)
-      {
-        //Logger.add(data.uid + " is not a uid!");
-      }
-    }
-    else
-    {
-      // just try to load
-      StatLoader.RetrieveStatsIngame();
-    }
+    AddPlayerData(data.uid, fullPlayerName, data.vehicle || data.originalText, data.icon,
+      data.team == "team1" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
+
+    setTimeout(function() { StatLoader.StartLoadData(Defines.COMMAND_RUNINGAME); }, 50);
   }
 
-  private static function RetrieveStatsIngame()
+ /* private static function RetrieveStatsIngame()
   {
     if (!retrieving && ! retrieved)
     {
@@ -334,5 +313,5 @@ class wot.utils.StatLoader
       }
       lv_check.load(Defines.COMMAND_READY);
     }
-  }
+  }*/
 }

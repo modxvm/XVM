@@ -79,8 +79,8 @@ namespace wot
     private DateTime _unavailableFrom;
     private String _lastResult = "";
     private readonly String _currentProxyUrl;
-    private bool added = false;
-    private Thread runningIngameThread;
+    private Thread runningIngameThread = null;
+    private bool resultReady = false;
 
     private readonly object _lockIngame = new object();
     public String version;
@@ -152,63 +152,68 @@ namespace wot
     // id=name[clan]&vehicle,id=name&vehicle
     private void AddPendingPlayers(String parameters)
     {
-      lock (_lockIngame)
+      try
       {
-        String[] chunks = parameters.Split(',');
-        foreach (String chunk in chunks)
+        lock (_lockIngame)
         {
-          String[] param = chunk.Split(new char[] { '=' }, 2, StringSplitOptions.RemoveEmptyEntries);
-          if (param.Length != 2)
-            continue;
-
-          long id = long.Parse(param[0]);
-          if (pendingPlayers.ContainsKey(id))
-            continue;
-
-          String[] param2 = param[1].Split(new char[] { '&' }, StringSplitOptions.RemoveEmptyEntries);
-
-          string name = param2[0];
-          string clan = "";
-          if (name.Contains("["))
+          String[] chunks = parameters.Split(',');
+          foreach (String chunk in chunks)
           {
-            clan = name.Split(new char[] { '[', ']' }, 3)[1];
-            name = name.Remove(name.IndexOf("["));
+            String[] param = chunk.Split(new char[] { '=' }, 2, StringSplitOptions.RemoveEmptyEntries);
+            if (param.Length != 2)
+              continue;
+
+            long id = long.Parse(param[0]);
+            if (pendingPlayers.ContainsKey(id))
+              continue;
+
+            String[] param2 = param[1].Split(new char[] { '&' }, StringSplitOptions.RemoveEmptyEntries);
+
+            string name = param2[0];
+            string clan = "";
+            if (name.Contains("["))
+            {
+              clan = name.Split(new char[] { '[', ']' }, 3)[1];
+              name = name.Remove(name.IndexOf("["));
+            }
+
+            string vname = param2.Length > 1 ? param2[1] : "";
+            int me;
+            try
+            {
+              me = param2.Length > 2 ? int.Parse(param2[2]) : 0;
+            }
+            catch
+            {
+              me = 0;
+            }
+
+            pendingPlayers[id] = new Stat()
+            {
+              id = id,
+              name = name,
+              clan = clan,
+              vn = vname,
+              me = me,
+            };
           }
-
-          string vname = param2.Length > 1 ? param2[1] : "";
-          int me;
-          try
-          {
-            me = param2.Length > 2 ? int.Parse(param2[2]) : 0;
-          }
-          catch
-          {
-            me = 0;
-          }
-
-          pendingPlayers[id] = new Stat()
-          {
-            id = id,
-            name = name,
-            clan = clan,
-            vn = vname,
-            me = me,
-          };
         }
-        added = true;
+      }
+      catch (Exception ex)
+      {
+        Log("Error: " + ex.ToString());
       }
     }
 
-    private void retrieveStats()
+    /*private void retrieveStats()
     {
       lock (_lockIngame)
       {
-        added = false;
         Log("retrieveStats()");
-        _prevResult = _lastResult = GetStat();
+        _lastResult = GetStat();
         Debug("_lastResult: " + _lastResult);
       }
-    }
+    } */
 
     private static string GetVersion()
     {
@@ -367,9 +372,8 @@ namespace wot
 
     #region Dokan overrides
 
-    private string _prevCommand = null;
-    private string _prevResult = null;
-    private string _temp = null;
+    private string _command = null;
+    private string _result = null;
 
     private readonly object _lock = new object();
 
@@ -388,15 +392,14 @@ namespace wot
           fileinfo.LastWriteTime = DateTime.Now;
           fileinfo.Length = 0;
 
-          if (filename == _prevCommand)
+          if (filename == _command)
           {
-            if (!String.IsNullOrEmpty(_prevResult))
-              fileinfo.Length = _prevResult.Length;
+            if (!String.IsNullOrEmpty(_result))
+              fileinfo.Length = _result.Length;
             return 0;
           }
-
-          _prevCommand = filename;
-          _prevResult = _prevResult == "FINISHED" ? _temp : "";
+          _command = filename;
+          _result = "";
 
           String command = Path.GetFileName(filename);
           if (String.IsNullOrEmpty(command) || command[0] != '@')
@@ -421,50 +424,48 @@ namespace wot
               break;
 
             case "@SET":
-              t = new Thread(() => SetPendingPlayers(parameters));
-              t.Start();
+              (new Thread(() => SetPendingPlayers(parameters))).Start();
               break;
 
             case "@ADD":
-              t = new Thread(() => AddPendingPlayers(parameters));
-              t.Start();
+              (new Thread(() => AddPendingPlayers(parameters))).Start();
               break;
 
             case "@RUN":
               _lastResult = GetStat(); // this will start network operations
               Debug("_lastResult: " + _lastResult);
-              _prevResult = _lastResult;
+              _result = _lastResult;
               break;
 
             case "@RUNINGAME":
-              if (added)
+              if (resultReady)
+                _result = _lastResult;
+              else
               {
-                runningIngameThread = new Thread(() => retrieveStats());
-                runningIngameThread.Start(); // this too
+                if (runningIngameThread == null)
+                {
+                  runningIngameThread = new Thread(() =>
+                  {
+                    lock (_lockIngame)
+                    {
+                      _lastResult = GetStat();
+                      resultReady = true;
+                    }
+                  });
+                }
+                if (!runningIngameThread.IsAlive)
+                  runningIngameThread.Start(); // this too
+                _result = "NOT_READY";
               }
-              break;
-
-            case "@RETRIEVE":
-              Debug("_prevResult: " + _prevResult);
-              Debug("_lastResult: " + _lastResult);
-              break;
-
-            case "@READY":
-              if (runningIngameThread != null && !runningIngameThread.IsAlive)
-              {
-                _temp = _prevResult;
-                _prevResult = "FINISHED";
-              }
+              resultReady = false;
               break;
 
             case "@GET_LAST_STAT":
-              _prevResult = _lastResult;
+              _result = _lastResult;
               break;
 
             case "@GET_VERSION":
-              _prevResult = version + "\n" +
-                Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-;
+              _result = version + "\n" + Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
               break;
 
             default:
@@ -474,10 +475,10 @@ namespace wot
 
           _firstError = false;
 
-          if (_prevResult == null)
-            _prevResult = "";
+          if (_result == null)
+            _result = "";
 
-          fileinfo.Length = _prevResult.Length;
+          fileinfo.Length = _result.Length;
         }
         catch (Exception ex)
         {
@@ -494,14 +495,14 @@ namespace wot
       lock (_lock)
       {
         if (String.Compare(filename, "\\@RETRIEVE", true) == 0 &&
-          (String.IsNullOrEmpty(_prevResult) || _prevResult == "FINISHED"))
+          (String.IsNullOrEmpty(_result) || _result == "FINISHED"))
         {
-          _prevResult = _lastResult;
+          _result = _lastResult;
           Debug("Retrieving");
         }
-        if (!String.IsNullOrEmpty(_prevResult))
+        if (!String.IsNullOrEmpty(_result))
         {
-          using (MemoryStream ms = new MemoryStream(Encoding.ASCII.GetBytes(_prevResult)))
+          using (MemoryStream ms = new MemoryStream(Encoding.ASCII.GetBytes(_result)))
           {
             ms.Seek(offset, SeekOrigin.Begin);
             readBytes = (uint)ms.Read(buffer, 0, buffer.Length);

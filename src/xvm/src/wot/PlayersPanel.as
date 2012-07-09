@@ -3,10 +3,9 @@
  * @author sirmax2
  */
 import wot.utils.Config;
-import wot.utils.GlobalEventDispatcher;
 import wot.utils.Logger;
 import wot.utils.StatFormat;
-import wot.utils.StatLoader;
+//import wot.utils.StatLoader;
 import wot.utils.Utils;
 
 class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
@@ -21,13 +20,14 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 
   private var m_textCache = {};
 
+  private var m_knownPlayersCount = 0; // for Fog of War mode.
+  
   function PlayersPanel()
   {
     super();
 
     Utils.TraceXvmModule("PlayersPanel");
 
-    GlobalEventDispatcher.addEventListener("config_loaded", StatLoader.LoadLastStat);
     Config.LoadConfig("PlayersPanel.as");
   }
 
@@ -36,6 +36,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   private var _lastAdjustedState = "";
   function setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount)
   {
+    //Logger.add("PlayersPanel.setData()");
     // fix WG bug - double redrawing panels on kill
     onEnterFrame = function()
     {
@@ -46,6 +47,9 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 
   function setData2(data, sel, postmortemIndex, isColorBlind, knownPlayersCount)
   {
+    //Logger.add("PlayersPanel.setData2()");
+    //Logger.add(data);
+
     var start = new Date();
 
     m_names.condenseWhite = true;
@@ -56,6 +60,12 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     players_bg._alpha = Config.s_config.playersPanel.alpha;
     m_list._alpha = Config.s_config.playersPanel.iconAlpha;
 
+    if (data && m_knownPlayersCount != data.length)
+    {
+      m_knownPlayersCount = data.length;
+      XVMAdjustPanelSize();
+    }
+    
     if (m_state != _lastAdjustedState)
     {
       XVMAdjustPanelSize();
@@ -63,20 +73,21 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     }
 
     if (DEBUG_TIMES)
-      Logger.add("DEBUG TIME: PlayersPanel: setData(): " + Utils.elapsedMSec(start, new Date()) + " ms");
+      Logger.add("DEBUG TIME: PlayersPanel: setData2(): " + Utils.elapsedMSec(start, new Date()) + " ms");
   }
 
   // override
   function onRecreateDevice(width, height)
   {
+    //Logger.add("PlayersPanel.onRecreateDevice()");
     super.onRecreateDevice(width, height);
-
     XVMAdjustPanelSize();
   }
 
   // override
   function _setVehiclesStr(data, sel, isColorBlind, knownPlayersCount)
   {
+    //Logger.add("PlayersPanel._setVehiclesStr(): knownPlayersCount=" + knownPlayersCount + " sel=" + sel);
     try
     {
       m_currentFieldType = "vehicle";
@@ -95,6 +106,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   // override
   function _setNamesStr(data, sel, isColorBlind, knownPlayersCount)
   {
+    //Logger.add("PlayersPanel._setNameStr()");
     try
     {
       m_currentFieldType = "name";
@@ -113,12 +125,14 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   // override
   function updateWidthOfLongestName()
   {
+    //Logger.add("PlayersPanel.updateWidthOfLongestName()");
     // do nothing
   }
 
   // override
   function _getHTMLText(colorScheme, text)
   {
+    //Logger.add("PlayersPanel._getHTMLText()");
     if (m_currentFieldType != "")
     {
       //Logger.add("before: " + text);
@@ -135,12 +149,12 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 
   function XVMFormatText(data, fieldType, isDead)
   {
-    var key_prefix = data.label + "/" +  m_state + "/" + fieldType + "/";
-    var key = key_prefix + (isDead ? "d" : "a");
+    var key_prefix = "/" + data.label + "/" +  m_state + "/" + fieldType + "/" + data.vehicle;
+    var key = (isDead ? "d" : "a") + key_prefix;
     if (!m_textCache.hasOwnProperty(key))
     {
-      m_textCache[key_prefix + "a"] = XVMFormatText2(data, fieldType, false);
-      m_textCache[key_prefix + "d"] = XVMFormatText2(data, fieldType, true);
+      m_textCache["a" + key_prefix] = XVMFormatText2(data, fieldType, false);
+      m_textCache["d" + key_prefix] = XVMFormatText2(data, fieldType, true);
     }
     return m_textCache[key];
   }
@@ -224,7 +238,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 
   function XVMAdjustPanelSize()
   {
-    //Logger.add("XVMAdjustPanelSize()");
+    //Logger.add("PlayersPanel.XVMAdjustPanelSize()");
 
     var namesWidthDefault = 46;
     var namesWidth = namesWidthDefault;
