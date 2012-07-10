@@ -16,13 +16,9 @@ class wot.utils.StatLoader
 {
   public static var s_players_count = 0;
   public static var s_loadDataStarted = false;
-
   private static var s_loading = false;
-  private static var _is_new: Boolean = true;
-  private static var retrieving: Boolean = false;
-  private static var retrieved: Boolean = true;
-  private static var runningIngame: Boolean = false;
   private static var dirty: Boolean = false;
+  private static var requestId: Number = -1;
 
   private static var dummy = Logger.dummy; // avoid import warning
 
@@ -93,9 +89,21 @@ class wot.utils.StatLoader
     if (players_to_load.length > 0)
     {
       var lv:LoadVars = new LoadVars();
-      lv.onLoad = function(success)
+      lv.onData = function(str: String)
       {
-        StatLoader.StartLoadData(cmd, true);
+        //Logger.add("lv: " + str);
+        if (!str)
+          return;
+        try
+        {
+          var response = JSON.parse(str);
+          StatLoader.requestId = response.resultId;
+          StatLoader.StartLoadData(cmd, true);
+        }
+        catch (ex)
+        {
+          StatLoader.requestId = -1;
+        }
       }
       lv.load(command + players_to_load.join(","));
       return;
@@ -115,7 +123,6 @@ class wot.utils.StatLoader
       LoadStatData(Defines.COMMAND_GET_LAST_STAT);
   }
 
-  private static var cmdCounter = 0;
   private static function LoadStatData(command, isRecursiveCall)
   {
     //Logger.add("StatLoader.LoadStatData(): command=" + command);
@@ -131,39 +138,46 @@ class wot.utils.StatLoader
       if (!str)
         return;
 
-      if (str == "NOT_READY")
-      {
-        if (StatLoader.currentTimeoutId >= StatLoader.timeouts.length)
-          return;
-        var timer:Function = _global.setTimeout(function() { StatLoader.LoadStatData(command, true); }, StatLoader.timeouts[StatLoader.currentTimeoutId]);
-        StatLoader.currentTimeoutId++;
-        return;
-      }
-
+      var done = false;
       var finallyBugWorkaround: Boolean = false; // Workaround: finally block have a bug - it can be called twice. Why? How? F*ck!
       try
       {
-        var stats = JSON.parse(str);
+        var response = JSON.parse(str);
 
-        var players_length = stats.players.length;
-        for (var i = 0; i < players_length; ++i)
+        if (response.status == "NOT_READY")
         {
-          var stat = stats.players[i];
-          stat = StatLoader.CalculateRating(stat);
-          var name = stat.name.toUpperCase();
-          if (!StatData.s_data[name])
-          {
-            StatLoader.s_players_count++;
-            StatData.s_data[name] = { loaded: true };
-          }
-          StatData.s_data[name].stat = stat;
-          if (StatData.s_data[name].vehicle.toUpperCase() == "UNKNOWN")
-            StatData.s_data[name].loaded = false;
-          //Logger.addObject(stat, stat.name);
-        };
+          if (StatLoader.currentTimeoutId >= StatLoader.timeouts.length)
+            return;
+          var timer:Function = _global.setTimeout(function() { StatLoader.LoadStatData(command, true); },
+            StatLoader.timeouts[StatLoader.currentTimeoutId]);
+          StatLoader.currentTimeoutId++;
+          return;
+        }
 
-        if (stats.info && stats.info.xvm)
-          GlobalEventDispatcher.dispatchEvent({ type: "set_info", ver: stats.info.xvm.ver, message: stats.info.xvm.message });
+        done = true;
+
+        if (response.info && response.info.xvm)
+          GlobalEventDispatcher.dispatchEvent({ type: "set_info", ver: response.info.xvm.ver, message: response.info.xvm.message });
+
+        if (response.players)
+        {
+          var players_length = response.players.length;
+          for (var i = 0; i < players_length; ++i)
+          {
+            var stat = response.players[i];
+            stat = StatLoader.CalculateRating(stat);
+            var name = stat.name.toUpperCase();
+            if (!StatData.s_data[name])
+            {
+              StatLoader.s_players_count++;
+              StatData.s_data[name] = { loaded: true };
+            }
+            StatData.s_data[name].stat = stat;
+            if (StatData.s_data[name].vehicle.toUpperCase() == "UNKNOWN")
+              StatData.s_data[name].loaded = false;
+            //Logger.addObject(stat, stat.name);
+          }
+        }
       }
       catch (ex)
       {
@@ -175,18 +189,21 @@ class wot.utils.StatLoader
           return;
         finallyBugWorkaround = true;
 
-        StatData.s_loaded = true;
-        StatLoader.s_loadDataStarted = false;
-        StatLoader.s_loading = false;
-        //Logger.add("Stat Loaded");
-        GlobalEventDispatcher.dispatchEvent( { type: "stat_loaded" } );
+        if (done)
+        {
+          StatData.s_loaded = true;
+          StatLoader.s_loadDataStarted = false;
+          StatLoader.s_loading = false;
+          //Logger.add("Stat Loaded");
+          GlobalEventDispatcher.dispatchEvent( { type: "stat_loaded" } );
 
-        if (StatLoader.dirty)
-          var timer = _global.setTimeout(function() { StatLoader.StartLoadData(Defines.COMMAND_RUNINGAME); }, 50);
+          if (StatLoader.dirty)
+            var timer = _global.setTimeout(function() { StatLoader.StartLoadData(Defines.COMMAND_RUN_ASYNC); }, 50);
+        }
       }
     };
-    lv.load(command + " " + cmdCounter);
-    cmdCounter++;
+    
+    lv.load(command + ((command == Defines.COMMAND_RUN_ASYNC) ? " " + requestId : ""));
   }
 
   private static function CalculateRating(stat): Object
@@ -229,6 +246,6 @@ class wot.utils.StatLoader
     AddPlayerData(data.uid, fullPlayerName, data.vehicle || data.originalText, data.icon,
       data.team == "team1" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
 
-    var timer = _global.setTimeout(function() { StatLoader.StartLoadData(Defines.COMMAND_RUNINGAME); }, 50);
+    var timer = _global.setTimeout(function() { StatLoader.StartLoadData(Defines.COMMAND_RUN_ASYNC); }, 50);
   }
 }

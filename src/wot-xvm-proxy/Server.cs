@@ -19,13 +19,22 @@ namespace wot
     #region Private Members
 
     [Serializable]
-    public class Stat
+    public class PlayerDataBase
     {
       public long id;         // player id
       public String name;     // player name
       public String clan;     // clan
       public String vn;       // vehicle name
+    }
+
+    public class PlayerData : PlayerDataBase
+    {
       public int me;          // me
+    }
+
+    [Serializable]
+    public class Stat : PlayerDataBase
+    {
       public int b;           // total battles
       public int w;           // total wins
       public int e;           // global efficiency
@@ -57,31 +66,27 @@ namespace wot
       public Info info;
     }
 
-    [Serializable]
-    public class PlayerInfo
+    public class Request
     {
-      public Stat stat;
-      [NonSerialized]
-      public bool httpError;
-      [NonSerialized]
-      public bool notInDb = false;
-      [NonSerialized]
-      public DateTime errorTime;
+      public List<PlayerData> players;
+      public Thread thread;
+      public string result;
     }
 
-    // local cache
-    private readonly Dictionary<string, PlayerInfo> cache = new Dictionary<string, PlayerInfo>();
-    private readonly Dictionary<long, Stat> pendingPlayers = new Dictionary<long, Stat>();
+    public class CacheEntry
+    {
+      public Stat stat;
+      public bool notInDb;
+    }
 
-    private Info _modInfo = null;
-    private bool _firstError = true;
-    private bool _unavailable = false;
-    private DateTime _unavailableFrom;
-    private String _lastResult = "";
-    private readonly String _currentProxyUrl;
-    private Thread runningIngameThread = null;
-    private bool resultReady = false;
+    // local cache (key => "id=vname")
+    private readonly Dictionary<string, CacheEntry> cache = new Dictionary<string, CacheEntry>();
+    private readonly List<Request> requests = new List<Request>();
+    private int lastResultId = -1;
+    private readonly String[] proxies;
+    private Info modInfo;
 
+    private readonly object _lock = new object();
     private readonly object _lockIngame = new object();
     public String version;
     #endregion
@@ -95,7 +100,7 @@ namespace wot
       //check version
       version = String.IsNullOrEmpty(ver) ? GetVersion() : ver;
       Log(string.Format("Game Region: {0}{1}", version, String.IsNullOrEmpty(ver) ? " (detected)" : ""));
-      _currentProxyUrl = GetProxyAddress();
+      proxies = GetProxyAddresses();
     }
 
     #endregion
@@ -104,116 +109,13 @@ namespace wot
 
     private static void Log(string message)
     {
-      Console.WriteLine(message);
+      Program.Log(message);
     }
 
     private static void Debug(string message)
     {
-      if (Program.isDebug)
-        Console.WriteLine("DEBUG: " + message);
+      Program.Debug(message);
     }
-
-    private bool ServiceUnavailable()
-    {
-      if (!_unavailable)
-        return false;
-
-      if (DateTime.Now.Subtract(_unavailableFrom).Minutes < Settings.Default.ServerUnavailableTimeout)
-        return true;
-      _unavailable = false;
-      return false;
-    }
-
-    private void ErrorHandle()
-    {
-      if (_firstError)
-      {
-        _unavailable = true;
-        _firstError = false;
-        _unavailableFrom = DateTime.Now;
-        Log(string.Format("Unavailable since {0}", _unavailableFrom));
-      }
-      else
-      {
-        _firstError = true;
-        Log(string.Format("First error {0}", DateTime.Now));
-      }
-    }
-
-    private void SetPendingPlayers(String parameters)
-    {
-      lock (_lockIngame)
-      {
-        pendingPlayers.Clear();
-        AddPendingPlayers(parameters);
-      }
-    }
-
-    // id=name[clan]&vehicle,id=name&vehicle
-    private void AddPendingPlayers(String parameters)
-    {
-      try
-      {
-        lock (_lockIngame)
-        {
-          String[] chunks = parameters.Split(',');
-          foreach (String chunk in chunks)
-          {
-            String[] param = chunk.Split(new char[] { '=' }, 2, StringSplitOptions.RemoveEmptyEntries);
-            if (param.Length != 2)
-              continue;
-
-            long id = long.Parse(param[0]);
-            if (pendingPlayers.ContainsKey(id))
-              continue;
-
-            String[] param2 = param[1].Split(new char[] { '&' }, StringSplitOptions.RemoveEmptyEntries);
-
-            string name = param2[0];
-            string clan = "";
-            if (name.Contains("["))
-            {
-              clan = name.Split(new char[] { '[', ']' }, 3)[1];
-              name = name.Remove(name.IndexOf("["));
-            }
-
-            string vname = param2.Length > 1 ? param2[1] : "";
-            int me;
-            try
-            {
-              me = param2.Length > 2 ? int.Parse(param2[2]) : 0;
-            }
-            catch
-            {
-              me = 0;
-            }
-
-            pendingPlayers[id] = new Stat()
-            {
-              id = id,
-              name = name,
-              clan = clan,
-              vn = vname,
-              me = me,
-            };
-          }
-        }
-      }
-      catch (Exception ex)
-      {
-        Log("Error: " + ex.ToString());
-      }
-    }
-
-    /*private void retrieveStats()
-    {
-      lock (_lockIngame)
-      {
-        Log("retrieveStats()");
-        _lastResult = GetStat();
-        Debug("_lastResult: " + _lastResult);
-      }
-    } */
 
     private static string GetVersion()
     {
@@ -374,39 +276,32 @@ namespace wot
 
     private string _command = null;
     private string _result = null;
-
-    private readonly object _lock = new object();
-
     public int GetFileInformation(String filename, FileInformation fileinfo, DokanFileInfo info)
     {
       lock (_lock)
       {
         try
         {
-          // XP send filename in lowercase, W7 in uppercase. Make them both the same.
-          filename = filename.ToUpper();
-
           fileinfo.Attributes = FileAttributes.Archive;
-          fileinfo.CreationTime = DateTime.Now;
-          fileinfo.LastAccessTime = DateTime.Now;
-          fileinfo.LastWriteTime = DateTime.Now;
+          fileinfo.CreationTime = Program.start;
+          fileinfo.LastAccessTime = Program.start;
+          fileinfo.LastWriteTime = Program.start;
           fileinfo.Length = 0;
 
-          String command = Path.GetFileName(filename);
+          // XP send filename in lowercase, W7 in uppercase. Make them both the same.
+          String command = Path.GetFileName(filename).ToUpper();
           if (command == _command)
           {
             if (!String.IsNullOrEmpty(_result))
               fileinfo.Length = _result.Length;
             return 0;
           }
+
           _command = command;
           _result = "";
 
           if (String.IsNullOrEmpty(command) || command[0] != '@')
             return 0;
-
-          if (!command.StartsWith("@LOG"))
-            Log(String.Format("=> {0}", command));
 
           String parameters = "";
           if (command.Contains(" "))
@@ -416,54 +311,63 @@ namespace wot
             parameters = cmd[1];
           }
 
+          if (!command.StartsWith("@LOG"))
+            Log(String.Format("=> {0} {1}", command, parameters));
+
           switch (command)
           {
-            case "@LOG":
+            case "@LOG": // args - encoded log string
               ProcessLog(parameters);
               break;
 
-            case "@SET":
-              (new Thread(() => SetPendingPlayers(parameters))).Start();
-              break;
-
-            case "@ADD":
+            case "@SET": // args - set of players
+            case "@ADD": // args - set of players
+              if (command == "@SET")
+                requests.Add(new Request()
+                {
+                  players = new List<PlayerData>(),
+                  result = null,
+                  thread = null,
+                });
               (new Thread(() => AddPendingPlayers(parameters))).Start();
+              _result = String.Format("{{\"resultId\":{0}}}", requests.Count - 1);
               break;
 
-            case "@RUN":
-              _lastResult = GetStat(); // this will start network operations
-              Debug("_lastResult: " + _lastResult);
-              _result = _lastResult;
+            case "@RUN": // no args
+              lastResultId = requests.Count - 1;
+              if (lastResultId < 0)
+                throw new Exception("No request");
+              _result = requests[lastResultId].result = GetStat(requests[lastResultId]); // this will start network operations
               break;
 
-            case "@RUNINGAME":
-              if (resultReady)
-              {
-                Debug("_lastResult: " + _lastResult);
-                _result = _lastResult;
-              }
+            case "@GET_LAST_STAT": // no args
+              if (lastResultId < 0)
+                throw new Exception("No request");
+              _result = requests[lastResultId].result;
+              break;
+
+            case "@RUN_ASYNC": // args - resultId
+              if (string.IsNullOrEmpty(parameters))
+                throw new Exception("Empty resultId");
+              int resultId;
+              if (!int.TryParse(parameters, out resultId) || resultId < 0 || resultId >= requests.Count)
+                throw new Exception("Invalid resultId: " + parameters);
+
+              if (!string.IsNullOrEmpty(requests[resultId].result))
+                _result = requests[resultId].result;
               else
               {
-                if (runningIngameThread == null || !runningIngameThread.IsAlive)
+                requests[resultId].thread = new Thread(() =>
                 {
-                  runningIngameThread = new Thread(() =>
+                  lock (_lockIngame)
                   {
-                    lock (_lockIngame)
-                    {
-                      _lastResult = GetStat(); // this will start network operations
-                      Debug("Result Ready");
-                      resultReady = true;
-                    }
-                  });
-                  runningIngameThread.Start();
-                }
-                _result = "NOT_READY";
+                    requests[resultId].result = GetStat(requests[resultId]); // this will start network operations
+                    Debug("Loaded: " + resultId);
+                  }
+                });
+                requests[resultId].thread.Start();
+                _result = "{{\"status\":\"NOT_READY\"}}";
               }
-              resultReady = false;
-              break;
-
-            case "@GET_LAST_STAT":
-              _result = _lastResult;
               break;
 
             case "@GET_VERSION":
@@ -471,20 +375,21 @@ namespace wot
               break;
 
             default:
-              Log("Unknown command: " + filename);
+              Log("Unknown command: " + command);
               break;
           }
 
-          _firstError = false;
-
           if (_result == null)
             _result = "";
+
+          if (_result != "")
+            Debug("_result: " + _result);
 
           fileinfo.Length = _result.Length;
         }
         catch (Exception ex)
         {
-          Log("Exception: " + ex);
+          Log("GetFileInformation(): Error: " + ex);
         }
 
         return 0;
@@ -496,12 +401,6 @@ namespace wot
     {
       lock (_lock)
       {
-        if (String.Compare(filename, "\\@RETRIEVE", true) == 0 &&
-          (String.IsNullOrEmpty(_result) || _result == "FINISHED"))
-        {
-          _result = _lastResult;
-          Debug("Retrieving");
-        }
         if (!String.IsNullOrEmpty(_result))
         {
           using (MemoryStream ms = new MemoryStream(Encoding.ASCII.GetBytes(_result)))
@@ -523,35 +422,8 @@ namespace wot
 
     #region Network operations
 
-    private string GetStat()
-    {
-      PrepareStat();
-
-      Response res = new Response()
-      {
-        players = new Stat[pendingPlayers.Keys.Count],
-        info = _modInfo,
-      };
-
-      int pos = 0;
-      foreach (long id in pendingPlayers.Keys)
-      {
-        string cacheKey = id + "=" + pendingPlayers[id].vn;
-        if (cache.ContainsKey(cacheKey))
-        {
-          res.players[pos] = cache[cacheKey].stat;
-          // fix player names (for CT)
-          res.players[pos].name = pendingPlayers[id].name;
-          pos++;
-        }
-      }
-      Array.Resize<Stat>(ref res.players, pos);
-
-      return JsonMapper.ToJson(res);
-    }
-
-    // Get fastest proxy server (with minimal ping)
-    private string GetProxyAddress()
+    // Get fastest proxy servers (with minimal ping)
+    private string[] GetProxyAddresses()
     {
       List<string> ps = new List<string>();
       foreach (string server in Settings.Default.proxy_servers)
@@ -569,11 +441,7 @@ namespace wot
       if (ps.Count == 0)
         throw new Exception(String.Format("Cannot find proxy server for '{0}' in config", version));
 
-      return GetFastestProxyAddress(ps);
-    }
-
-    private string GetFastestProxyAddress(List<string> ps)
-    {
+      // Select fastest
       long minTime = long.MaxValue;
       List<string> proxyUrl = new List<string>();
       Dictionary<string, long> proxyUrls = new Dictionary<string, long>();
@@ -607,7 +475,7 @@ namespace wot
           proxyUrl.Add(urlload.Key);
       }
 
-      return proxyUrl[(new Random()).Next(proxyUrl.Count)];
+      return proxyUrl.ToArray();
     }
 
     private static string loadUrl(string url, string members)
@@ -659,51 +527,131 @@ namespace wot
       return responseFromServer;
     }
 
-    private void PrepareStat()
-    {
-      List<string> forUpdate = new List<string>();
-      List<long> forUpdateIds = new List<long>();
+    #endregion
 
-      foreach (long id in pendingPlayers.Keys)
+    #region Stat operations
+
+    // id=name[clan]&vehicle,id=name&vehicle
+    private void AddPendingPlayers(String parameters)
+    {
+      try
       {
-        string cacheKey = id + "=" + pendingPlayers[id].vn;
+        lock (_lockIngame)
+        {
+          String[] chunks = parameters.Split(',');
+          foreach (String chunk in chunks)
+          {
+            String[] param = chunk.Split(new char[] { '=' }, 2, StringSplitOptions.RemoveEmptyEntries);
+            if (param.Length != 2)
+              continue;
+
+            long id = long.Parse(param[0]);
+            if (requests[requests.Count - 1].players.Exists(x => x.id == id))
+              continue;
+
+            String[] param2 = param[1].Split(new char[] { '&' }, StringSplitOptions.RemoveEmptyEntries);
+
+            string name = param2[0];
+            string clan = "";
+            if (name.Contains("["))
+            {
+              clan = name.Split(new char[] { '[', ']' }, 3)[1];
+              name = name.Remove(name.IndexOf("["));
+            }
+
+            string vname = param2.Length > 1 ? param2[1] : "";
+            int me;
+            try
+            {
+              me = param2.Length > 2 ? int.Parse(param2[2]) : 0;
+            }
+            catch
+            {
+              me = 0;
+            }
+
+            requests[requests.Count - 1].players.Add(new PlayerData()
+            {
+              id = id,
+              name = name,
+              clan = clan,
+              vn = vname,
+              me = me,
+            });
+          }
+        }
+      }
+      catch (Exception ex)
+      {
+        Log("Error: " + ex.ToString());
+      }
+    }
+
+    private string GetStat(Request req)
+    {
+      PrepareStat(req);
+
+      Response res = new Response()
+      {
+        players = new Stat[req.players.Count],
+        info = modInfo,
+      };
+
+      int pos = 0;
+      foreach (PlayerData pd in req.players)
+      {
+        string cacheKey = pd.id + "=" + pd.vn;
         if (cache.ContainsKey(cacheKey))
         {
-          PlayerInfo currentMember = cache[cacheKey];
+          res.players[pos] = cache[cacheKey].stat;
+          // fix player names (for CT)
+          res.players[pos].name = pd.name;
+          pos++;
+        }
+      }
+      Array.Resize<Stat>(ref res.players, pos);
+
+      return JsonMapper.ToJson(res);
+    }
+
+    private void PrepareStat(Request req)
+    {
+      string updateRequest = "";
+      foreach (PlayerData pd in req.players)
+      {
+        string cacheKey = pd.id + "=" + pd.vn;
+        if (cache.ContainsKey(cacheKey))
+        {
+          CacheEntry currentMember = cache[cacheKey];
           if (currentMember.notInDb)
-            continue;
-          if (!currentMember.httpError)
+            Log(string.Format("NOT IN DB - {0} {1} {2}", pd.id, pd.name, pd.vn));
+          else
           {
             Log(string.Format("CACHE - {0} {1} {2}: eff={3} battles={4} wins={5} t-battles={6} t-wins={7}",
-              id, pendingPlayers[id].name, pendingPlayers[id].vn,
+              pd.id, pd.name, pd.vn,
               currentMember.stat.e, currentMember.stat.b, currentMember.stat.w,
               currentMember.stat.tb, currentMember.stat.tw));
-            continue;
           }
-          if (DateTime.Now.Subtract(currentMember.errorTime).Minutes < Settings.Default.ServerUnavailableTimeout)
-            continue;
-          cache.Remove(cacheKey);
+          continue;
         }
 
         // playerId=vname,... || playerId,...
-        forUpdate.Add(String.IsNullOrEmpty(pendingPlayers[id].vn) ? id.ToString()
-          : String.Format("{0}={1}{2}", id, pendingPlayers[id].vn, pendingPlayers[id].me == 1 ? "=1" : ""));
-        forUpdateIds.Add(id);
+        if (!string.IsNullOrEmpty(updateRequest))
+          updateRequest += ",";
+        updateRequest += String.IsNullOrEmpty(pd.vn) ? pd.id.ToString()
+          : String.Format("{0}={1}{2}", pd.id, pd.vn, pd.me == 1 ? "=1" : "");
       }
 
-      if (forUpdate.Count == 0 || ServiceUnavailable())
+      if (string.IsNullOrEmpty(updateRequest))
         return;
 
       try
       {
-        String reqMembers = String.Join(",", forUpdate.ToArray());
-
         // The character "?" may be used in china server as the username,
         // for example  "?ABC" . So it's must be replace to "%3F" for search.
-        if (reqMembers.IndexOf('?') > 0)
-          reqMembers = reqMembers.Replace("?", "%3F");
+        updateRequest = updateRequest.Replace("?", "%3F");
 
-        string responseFromServer = loadUrl(_currentProxyUrl, reqMembers);
+        string responseFromServer = loadUrl(proxies[(new Random()).Next(proxies.Length)], updateRequest);
 
         Response res = JsonDataToResponse(JsonMapper.ToObject(responseFromServer));
         if (res == null || res.players == null)
@@ -712,71 +660,47 @@ namespace wot
           return;
         }
 
+        // save mod info
+        if (res.info != null)
+          modInfo = res.info;
+
         foreach (Stat stat in res.players)
         {
-          if (pendingPlayers.ContainsKey(stat.id))
+          if (String.IsNullOrEmpty(stat.name))
+            continue;
+          string cacheKey = stat.id + "=" + stat.vn;
+          cache[cacheKey] = new CacheEntry()
           {
-            string cacheKey = stat.id + "=" + pendingPlayers[stat.id].vn;
-            if (String.IsNullOrEmpty(stat.name))
-              continue;
-            cache[cacheKey] = new PlayerInfo()
-            {
-              stat = stat,
-              httpError = false
-            };
-            if (String.IsNullOrEmpty(cache[cacheKey].stat.name))
-              cache[cacheKey].stat.name = pendingPlayers[stat.id].name;
-            cache[cacheKey].stat.clan = pendingPlayers[stat.id].clan;
-          }
-          else
-          {
-            Log("WARNING: pendingPlayers key not found for id=" + stat.id + "\n" + JsonMapper.ToJson(stat));
-          }
+            stat = stat,
+          };
+          PlayerData pd = req.players.Find(x => x.id == stat.id);
+          if (pd != null)
+            cache[cacheKey].stat.clan = pd.clan;
         };
 
         // disable stat retrieving for people in cache, but not in server db
-        foreach (long id in forUpdateIds)
+        foreach (PlayerData pd in req.players)
         {
-          string cacheKey = id + "=" + pendingPlayers[id].vn;
+          string cacheKey = pd.id + "=" + pd.vn;
           if (cache.ContainsKey(cacheKey))
             continue;
-
-          cache[cacheKey] = new PlayerInfo()
+          Debug(String.Format("Player [{0}] {1} not in Database", pd.id, pd.name));
+          cache[cacheKey] = new CacheEntry()
           {
             stat = new Stat()
             {
-              id = id,
-              name = pendingPlayers[id].name,
-              clan = pendingPlayers[id].clan,
+              id = pd.id,
+              name = pd.name,
+              vn = pd.vn,
+              clan = pd.clan,
             },
-            httpError = false,
-            notInDb = true
+            notInDb = true,
           };
-
-          Debug(String.Format("Player [{0}] {1} not in Database", id, pendingPlayers[id].name));
         };
-        _modInfo = res.info;
       }
       catch (Exception ex)
       {
         Log(string.Format("Exception: {0}", ex));
-        ErrorHandle();
-        for (var i = 0; i < forUpdateIds.Count; i++)
-        {
-          long id = forUpdateIds[i];
-          string cacheKey = id + "=" + pendingPlayers[id].vn;
-          cache[cacheKey] = new PlayerInfo()
-          {
-            stat = new Stat()
-            {
-              id = id,
-              name = pendingPlayers[id].name,
-              clan = pendingPlayers[id].clan,
-            },
-            httpError = true,
-            errorTime = DateTime.Now
-          };
-        }
       }
     }
 

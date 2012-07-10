@@ -22,6 +22,10 @@ namespace wot
 
     private static Process wotProcess = null;
 
+    private static bool logFileInitialized = false;
+
+    public static DateTime start = DateTime.Now;
+
     static Program()
     {
       AppDomain.CurrentDomain.AssemblyResolve += Resolver;
@@ -43,20 +47,48 @@ namespace wot
 
     private static void Usage()
     {
-      Console.WriteLine("Usage: wot-xvm-proxy.exe [/launcher] [/debug] [/server=(RU|EU|NA|CN|SEA|VTC|CT)] [file.wotreplay]");
-      Console.WriteLine("  /launcher - run launcher instead of game");
-      Console.WriteLine("  /noauto - do not run game automatically");
-      Console.WriteLine("  /debug - run in debug mode (extended log)");
-      Console.WriteLine("  /server=(RU|EU|NA|CN|SEA|VTC|CT) - select server (disable autodetection)");
-      Console.WriteLine("  file.wotreplay - play replay");
-      Console.WriteLine("Press any key to exit.");
+      Log("Usage: wot-xvm-proxy.exe [/launcher] [/debug] [/server=(RU|EU|NA|CN|SEA|VTC|CT)] [file.wotreplay]");
+      Log("  /launcher - run launcher instead of game");
+      Log("  /noauto - do not run game automatically");
+      Log("  /debug - run in debug mode (extended log)");
+      Log("  /server=(RU|EU|NA|CN|SEA|VTC|CT) - select server (disable autodetection)");
+      Log("  file.wotreplay - play replay");
+      Log("Press any key to exit.");
       Console.ReadKey(true);
     }
 
-    private static void Debug(string message)
+    private static object _logLock = new object();
+    public static void Log(string message, bool debug = false)
     {
-      if (isDebug)
-        Console.WriteLine("DEBUG: " + message);
+      if (!debug || isDebug)
+      Console.WriteLine((debug ? "DEBUG: " : "") + message);
+      if (!logFileInitialized)
+        return;
+      lock (_logLock)
+      {
+        try
+        {
+          string timestamp = DateTime.Now.ToString("yyyy.MM.dd HH:mm:ss");
+          string prefix = debug ? "[D]" : "[i]";
+          string logstr = String.Format("{0} {1} ", timestamp, prefix);
+
+          string[] lines = message.Split(new string[] { "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+          for (int i = 1; i < lines.Length; i++)
+            lines[i] = lines[i].PadLeft(lines[i].Length + logstr.Length);
+          logstr += string.Join(Environment.NewLine, lines);
+          
+          File.AppendAllText("XVM.log", logstr + Environment.NewLine);
+        }
+        catch
+        {
+          // do nothing
+        }
+      }
+    }
+
+    public static void Debug(string message)
+    {
+      Log(message, true);
     }
 
     private static void Main(string[] args)
@@ -64,7 +96,7 @@ namespace wot
       try
       {
         Console.Title = "WoT XVM Proxy v" + Assembly.GetExecutingAssembly().GetName().Version;
-        Console.WriteLine(Console.Title);
+        Log(Console.Title);
 
         // Check args
         Debug("Processing command line arguments: " + String.Join(" ", args));
@@ -90,7 +122,7 @@ namespace wot
             args[i] = "";
             isDebug = true;
             Console.Title += " (DEBUG MODE)";
-            Console.WriteLine("DEBUG MODE: ON");
+            Log("DEBUG MODE: ON");
             continue;
           }
 
@@ -129,6 +161,18 @@ namespace wot
         Debug("Check start file exists: " + wotExeFileName);
         if (!File.Exists(wotExeFileName))
           throw new Exception("Game start file not found: " + wotExeFileName);
+
+        // Clear log file
+        try
+        {
+          File.WriteAllText("XVM.log", DateTime.Now.ToString("yyyy.MM.dd HH:mm:ss") + " " +
+            Console.Title + Environment.NewLine);
+          logFileInitialized = true;
+        }
+        catch
+        {
+          // do nothing
+        }
 
         string mp = Settings.Default.MountPoint;
         if (Directory.Exists("res_mods"))
@@ -217,7 +261,7 @@ namespace wot
             {
               Debug("Dokan thread is alive");
               string arg = String.Join(" ", args);
-              Console.WriteLine(String.Format("Starting game process: {0} {1}", wotExeFileName, arg));
+              Log(String.Format("Starting game process: {0} {1}", wotExeFileName, arg));
               try
               {
                 wotProcess = Process.Start(wotExeFileName, arg);
@@ -231,7 +275,7 @@ namespace wot
                 {
                   wotProcess.Dispose();
                   wotProcess = null;
-                  Console.WriteLine("Searching game process: " + WOT_PROCESS_NAME);
+                  Log("Searching game process: " + WOT_PROCESS_NAME);
                   Thread.Sleep(5000);
                   Process[] wotProcesses = Process.GetProcessesByName(WOT_PROCESS_NAME);
                   Debug(String.Format("Found {0} process", wotProcesses.Length));
@@ -254,7 +298,7 @@ namespace wot
             }
             else
             {
-              Console.WriteLine("Please start your game manually within 2 minutes");
+              Log("Please start your game manually within 2 minutes");
 
               for (int i = 0; i < 20; i++)
               {
@@ -274,7 +318,7 @@ namespace wot
         }
         finally
         {
-          Console.WriteLine("Stopping server");
+          Log("Stopping server");
 
           // Unmount and clean.
           DokanNet.DokanRemoveMountPoint(opt.MountPoint);
@@ -285,13 +329,13 @@ namespace wot
 
         if (isDebug)
         {
-          Console.WriteLine("Press any key to exit.");
+          Log("Press any key to exit.");
           Console.ReadKey(true);
         }
       }
       catch (Exception ex)
       {
-        Console.WriteLine(String.Format("{0}{1}{1}Press any key to exit.", ex, Environment.NewLine));
+        Log(String.Format("{0}{1}{1}Press any key to exit.", ex, Environment.NewLine));
         Console.ReadKey(true);
       }
     }
@@ -308,35 +352,35 @@ namespace wot
       }
       catch (Exception ex)
       {
-        Console.WriteLine(ex);
+        Log(ex.ToString());
         return;
       }
 
       switch (status)
       {
         case DokanNet.DOKAN_DRIVE_LETTER_ERROR:
-          Console.WriteLine("Dokan: Bad Drive letter");
+          Log("Dokan: Bad Drive letter");
           break;
         case DokanNet.DOKAN_DRIVER_INSTALL_ERROR:
-          Console.WriteLine("Dokan: Can't install driver");
+          Log("Dokan: Can't install driver");
           break;
         case DokanNet.DOKAN_MOUNT_ERROR:
-          Console.WriteLine("Can't assign a drive letter or mount point");
+          Log("Can't assign a drive letter or mount point");
           break;
         case -6: // DOKAN_MOUNT_POINT_ERROR
-          Console.WriteLine("Mount point is invalid");
+          Log("Mount point is invalid");
           break;
         case DokanNet.DOKAN_START_ERROR:
-          Console.WriteLine("Dokan: Driver something wrong");
+          Log("Dokan: Driver something wrong");
           break;
         case DokanNet.DOKAN_ERROR:
-          Console.WriteLine("Dokan: General Error");
+          Log("Dokan: General Error");
           break;
         case DokanNet.DOKAN_SUCCESS:
-          Console.WriteLine("Dokan: Success");
+          Log("Dokan: Success");
           break;
         default:
-          Console.WriteLine("Unknown status: {0}", status);
+          Log("Unknown status: " + status);
           break;
       }
     }
@@ -345,7 +389,7 @@ namespace wot
     {
       try
       {
-        Console.WriteLine("Unhandled exception!\nPlease contact the developers with the following information:\n\n" + 
+        Log("Unhandled exception!\nPlease contact the developers with the following information:\n\n" + 
           (Exception)e.ExceptionObject);
       }
       finally

@@ -23,9 +23,7 @@ class wot.utils.Defines
   public static var COMMAND_SET: String = DOKAN_MP + "@SET";
   public static var COMMAND_ADD: String = DOKAN_MP + "@ADD";
   public static var COMMAND_RUN: String = DOKAN_MP + "@RUN";
-  public static var COMMAND_RUNINGAME: String = DOKAN_MP + "@RUNINGAME";
-  public static var COMMAND_RETRIEVE: String = DOKAN_MP + "@RETRIEVE";
-  public static var COMMAND_READY: String = DOKAN_MP + "@READY";
+  public static var COMMAND_RUN_ASYNC: String = DOKAN_MP + "@RUN_ASYNC";
   public static var COMMAND_GET_LAST_STAT: String = DOKAN_MP + "@GET_LAST_STAT";
   public static var COMMAND_GET_VERSION: String = DOKAN_MP + "@GET_VERSION";
 
