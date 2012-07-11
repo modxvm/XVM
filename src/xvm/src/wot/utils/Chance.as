@@ -172,6 +172,8 @@ class wot.utils.Chance
     for (var pname in StatData.s_data)
     {
       var pdata = StatData.s_data[pname];
+      if (VehicleInfo.getName(pdata.icon).toUpperCase() == "UNKNOWN") // skip unknown tanks in Fog of War mode
+        continue;
       if (pdata.team == Defines.TEAM_ALLY) ++nally else ++nenemy;
     }
     return { ally: nally, enemy: nenemy };

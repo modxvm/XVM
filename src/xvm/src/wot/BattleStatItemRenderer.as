@@ -80,12 +80,17 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
       var timer = _global.setTimeout(function() { BattleStatItemRenderer.SetChanceFieldData(); }, 50);
     }
 
+    var cacheKey = data ? data.label + "/" + data.vehicle : null;
     var saved_icon = data ? data.icon : null;
     if (data)
     {
       var pname = data.label.toUpperCase();
-      if (Config.s_config.rating.showPlayersStatistics && !StatData.s_data[pname] || !StatData.s_data[pname].id)
-        StatLoader.AddPlayerData(1, data.label, data.vehicle, data.icon, team);
+      if (Config.s_config.rating.showPlayersStatistics && (!StatData.s_data[pname] || !StatData.s_data[pname].playerId))
+      {
+        //Logger.add("StatLoader.AddPlayerData(): " + cacheKey);
+        StatLoader.AddPlayerData(data.uid, data.label, data.vehicle, data.icon, team);
+        //GlobalEventDispatcher.addEventListener("stat_loaded", this, function() { delete this.m_textCache[cacheKey]; } );
+      }
 
       // Alternative icon set
       if (!m_iconset)
@@ -106,17 +111,23 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     super.updateData();
 
     if (data)
+    {
       data.icon = saved_icon;
 
-    var key = data.label + "/" + data.vehicle;
-    if (!m_textCache.hasOwnProperty(key))
-    {
-      //Logger.add(data.label);
-      m_textCache[key] = StatFormat.DecorateField(data, data.vehicle,
-        team == Defines.TEAM_ALLY ? Config.s_config.statisticForm.formatLeft : Config.s_config.statisticForm.formatRight,
-        team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
+      if (!m_textCache.hasOwnProperty(cacheKey))
+      {
+        //Logger.add(cacheKey);
+        var format = team == Defines.TEAM_ALLY ? Config.s_config.statisticForm.formatLeft : Config.s_config.statisticForm.formatRight;
+        format = format.split("{{vehicle}}").join(data.vehicle.toString());
+        format = format.split("{{nick}}").join(data.label + ((data.clanAbbrev == "") ? "" : "[" + data.clanAbbrev + "]");
+);
+
+        m_textCache[cacheKey] = StatFormat.DecorateField(data, data.vehicle,
+          team == Defines.TEAM_ALLY ? Config.s_config.statisticForm.formatLeft : Config.s_config.statisticForm.formatRight,
+          team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
+      }
+      col3.htmlText = m_textCache[cacheKey];
     }
-    col3.htmlText = m_textCache[key];
 
     if (DEBUG_TIMES)
     {

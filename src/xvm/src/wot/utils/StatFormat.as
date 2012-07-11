@@ -15,17 +15,6 @@ class wot.utils.StatFormat
 {
   private static var dummy = Logger.dummy; // avoid import warning
 
-  public static function DecorateField(data: Object, txt: String, format: String, ratingPosition: Number)
-  {
-    //Logger.add("DecorateField: " + data.label + " / " + data.name);
-    var ratingText = StatFormat.FormatText(data, format, false);
-    if (!ratingText || ratingText == "")
-      return txt;
-    return (ratingPosition == Defines.POSITION_LEFT)
-      ? ratingText + " " + txt
-      : txt + " " + ratingText;
-  }
-
   public static function FormatText(data, format: String, isDead: Boolean)
   {
     var sWins: String = "";
@@ -50,8 +39,8 @@ class wot.utils.StatFormat
     //Logger.addObject(StatData.s_data);
     if (StatData.s_loaded)
     {
-      var pname: String = Utils.GetNormalizedPlayerName(data.label || data.name);
-      if (!data.uid || data.uid == undefined)
+      var pname: String = Utils.GetNormalizedPlayerName(data.label);
+      if (!data.uid)
         data.uid = StatData.s_data[pname].playerId;
       var stat = StatData.s_data[pname].stat;
       //Logger.addObject(StatData.s_data[pname]);

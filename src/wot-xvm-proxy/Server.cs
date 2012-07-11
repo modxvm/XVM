@@ -282,17 +282,19 @@ namespace wot
       {
         try
         {
+          DateTime now = DateTime.Now;
+          fileinfo.FileName = filename;
           fileinfo.Attributes = FileAttributes.Archive;
-          fileinfo.CreationTime = Program.start;
-          fileinfo.LastAccessTime = Program.start;
-          fileinfo.LastWriteTime = Program.start;
+          fileinfo.CreationTime = now;
+          fileinfo.LastAccessTime = now;
+          fileinfo.LastWriteTime = now;
           fileinfo.Length = 0;
 
           // XP send filename in lowercase, W7 in uppercase. Make them both the same.
           String command = Path.GetFileName(filename).ToUpper();
-          if (command == _command)
+          if (_command == command)
           {
-            if (!String.IsNullOrEmpty(_result))
+            if (!string.IsNullOrEmpty(_result))
               fileinfo.Length = _result.Length;
             return 0;
           }
@@ -350,23 +352,27 @@ namespace wot
               if (string.IsNullOrEmpty(parameters))
                 throw new Exception("Empty resultId");
               int resultId;
-              if (!int.TryParse(parameters, out resultId) || resultId < 0 || resultId >= requests.Count)
-                throw new Exception("Invalid resultId: " + parameters);
+              string[] p = parameters.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+              if (!int.TryParse(p[0], out resultId) || resultId < 0 || resultId >= requests.Count)
+                throw new Exception("Invalid resultId: " + p[0]);
 
               if (!string.IsNullOrEmpty(requests[resultId].result))
                 _result = requests[resultId].result;
               else
               {
-                requests[resultId].thread = new Thread(() =>
+                if (requests[resultId].thread == null)
                 {
-                  lock (_lockIngame)
+                  requests[resultId].thread = new Thread(() =>
                   {
-                    requests[resultId].result = GetStat(requests[resultId]); // this will start network operations
-                    Debug("Loaded: " + resultId);
-                  }
-                });
-                requests[resultId].thread.Start();
-                _result = "{{\"status\":\"NOT_READY\"}}";
+                    lock (_lockIngame)
+                    {
+                      requests[resultId].result = GetStat(requests[resultId]); // this will start network operations
+                      Debug("Loaded: " + resultId);
+                    }
+                  });
+                  requests[resultId].thread.Start();
+                }
+                _result = "{\"status\":\"NOT_READY\"}";
               }
               break;
 

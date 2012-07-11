@@ -11,6 +11,7 @@ import wot.utils.StatData;
 import wot.utils.StatLoader;
 import wot.utils.StatFormat;
 import wot.utils.PlayerInfo;
+import wot.utils.TextCache;
 import wot.utils.Utils;
 
 class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRenderer
@@ -166,7 +167,7 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
         team == Defines.TEAM_ALLY ? Config.s_config.battleLoading.formatLeft : Config.s_config.battleLoading.formatRight,
         team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
     }
-    vehicleField.htmlText = m_textCache[pdata.fullPlayerName];
+    vehicleField.htmlText = TextCache.GetFormattedText(pdata, "BL", Defines.FIELDTYPE_VEHICLE  m_textCache[pdata.fullPlayerName];
     //Logger.add(vehicleField.htmlText);
   }
 }

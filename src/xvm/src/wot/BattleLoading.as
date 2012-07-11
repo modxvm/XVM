@@ -93,8 +93,6 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
   private function SetInfoFieldData(event)
   {
     //Logger.addObject(event, "SetInfoFieldData(event)");
-
-    
     var info: TextField = form_mc.helpTip;
     var tip: TextField = form_mc.tipText;
 
@@ -102,7 +100,7 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
 
     if (event.ver && Utils.compareVersions(String(event.ver), Defines.XVM_VERSION) == 1)
     {
-      info.textColor = 0xAAFFAA;
+      info.textColor = 0x60FF60;
       info.text = "XVM: New version: v" + String(event.ver) + " (current is v" + Defines.XVM_VERSION + ")";
       if (event.message)
         setTipText(event.message);

@@ -43,7 +43,7 @@ class wot.utils.StatLoader
     StatData.s_data[pname] = {
       playerId: playerId,
       fullPlayerName: playerName,
-      name: pname,
+      label: pname,
       clan: clan,
       originalText: originalText,
       icon: icon,
@@ -123,6 +123,7 @@ class wot.utils.StatLoader
       LoadStatData(Defines.COMMAND_GET_LAST_STAT);
   }
 
+  private static var requestCounter: Number = 0;
   private static function LoadStatData(command, isRecursiveCall)
   {
     //Logger.add("StatLoader.LoadStatData(): command=" + command);
@@ -143,7 +144,6 @@ class wot.utils.StatLoader
       try
       {
         var response = JSON.parse(str);
-
         if (response.status == "NOT_READY")
         {
           if (StatLoader.currentTimeoutId >= StatLoader.timeouts.length)
@@ -202,8 +202,9 @@ class wot.utils.StatLoader
         }
       }
     };
-    
-    lv.load(command + ((command == Defines.COMMAND_RUN_ASYNC) ? " " + requestId : ""));
+
+    lv.load(command + ((command == Defines.COMMAND_RUN_ASYNC) ? " " + requestId + " " + requestCounter: ""));
+    requestCounter++;
   }
 
   private static function CalculateRating(stat): Object
@@ -234,10 +235,10 @@ class wot.utils.StatLoader
     if (!data.uid)
       return;
 
-    //Logger.add("ProcessForFogOfWar(): " + (data.label || data.name));
+    //Logger.add("ProcessForFogOfWar(): " + data.label);
     //Logger.addObject(data);
 
-    var fullPlayerName = (data.label || data.name) + (data.clanAbbrev ? "[" + data.clanAbbrev + "]" : "");
+    var fullPlayerName = data.label + (data.clanAbbrev ? "[" + data.clanAbbrev + "]" : "");
     var pname: String = Utils.GetNormalizedPlayerName(fullPlayerName);
 
     if (StatData.s_data[pname])

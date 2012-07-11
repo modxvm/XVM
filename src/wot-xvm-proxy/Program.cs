@@ -24,8 +24,6 @@ namespace wot
 
     private static bool logFileInitialized = false;
 
-    public static DateTime start = DateTime.Now;
-
     static Program()
     {
       AppDomain.CurrentDomain.AssemblyResolve += Resolver;
@@ -181,7 +179,7 @@ namespace wot
         {
           DebugMode = true,
           MountPoint = Path.GetFullPath(mp),
-          ThreadCount = 5
+          ThreadCount = 5,
         };
         Debug("MountPoint: " + opt.MountPoint);
 

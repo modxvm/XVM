@@ -1,5 +1,6 @@
 ﻿XVM-2.4.2.test6:
-  * fixed bugs in "Fog of War" mode.
+  * fixed bugs in "Fog of War" mode
+  * file XVM.log in the game directory contains mod debugging information
   * added options:
       battle/clockFormat - show the clock on the Debug Panel (near FPS)
       battleLoading/clockFormat - show the clock on the Battle Loading Screen

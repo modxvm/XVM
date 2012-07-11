@@ -27,13 +27,17 @@ class wot.utils.Defines
   public static var COMMAND_GET_LAST_STAT: String = DOKAN_MP + "@GET_LAST_STAT";
   public static var COMMAND_GET_VERSION: String = DOKAN_MP + "@GET_VERSION";
 
-  // Position
-  public static var POSITION_LEFT: Number = 0;
-  public static var POSITION_RIGHT: Number = 1;
+  // Default path to vehicle icons (relative)
+  public static var CONTOUR_ICON_PATH: String = "../maps/icons/vehicle/contour/";
 
   // Team
-  public static var TEAM_ALLY: Number = 0;
-  public static var TEAM_ENEMY: Number = 1;
+  public static var TEAM_ALLY: Number = 1;
+  public static var TEAM_ENEMY: Number = 2;
+
+  // Field Type
+  public static var FIELDTYPE_NONE: Number = 0;
+  public static var FIELDTYPE_NICK: Number = 1;
+  public static var FIELDTYPE_VEHICLE: Number = 2;
 
   // Dynamic color types
   public static var DYNAMIC_COLOR_EFF: Number = 1;
@@ -50,7 +54,4 @@ class wot.utils.Defines
   public static var DYNAMIC_ALPHA_HP: Number = 4;
   public static var DYNAMIC_ALPHA_HP_RATIO: Number = 5;
   //public static var DYNAMIC_ALPHA_TBATTLES: Number = 6;
-
-  // Default path to vehicle icons (relative)
-  public static var CONTOUR_ICON_PATH: String = "../maps/icons/vehicle/contour/";
 }

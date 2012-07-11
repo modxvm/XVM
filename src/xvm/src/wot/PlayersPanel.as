@@ -3,22 +3,18 @@
  * @author sirmax2
  */
 import wot.utils.Config;
+import wot.utils.Defines;
 import wot.utils.Logger;
-import wot.utils.StatFormat;
-//import wot.utils.StatLoader;
+import wot.utils.TextCache;
 import wot.utils.Utils;
 
 class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 {
   static var DEBUG_TIMES = false;
 
-  static private var s_widthTester: TextField;
-
-  private var m_currentFieldType = "";
-  private var m_currentData = null;
-  private var m_currentItem = 0;
-
-  private var m_textCache = {};
+  private var m_fieldType: Number = 0;
+  private var m_data: Object = null;
+  private var m_item: Number = 0;
 
   private var m_knownPlayersCount = 0; // for Fog of War mode.
   
@@ -90,16 +86,16 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     //Logger.add("PlayersPanel._setVehiclesStr(): knownPlayersCount=" + knownPlayersCount + " sel=" + sel);
     try
     {
-      m_currentFieldType = "vehicle";
-      m_currentData = data;
-      m_currentItem = 0;
+      m_fieldType = Defines.FIELDTYPE_VEHICLE;
+      m_data = data;
+      m_item = 0;
       super._setVehiclesStr(data, sel, isColorBlind, knownPlayersCount);
     }
     finally
     {
-      m_currentFieldType = "";
-      m_currentData = null;
-      m_currentItem = 0;
+      m_fieldType = Defines.FIELDTYPE_NONE;
+      m_data = null;
+      m_item = 0;
     }
   }
 
@@ -109,16 +105,16 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     //Logger.add("PlayersPanel._setNameStr()");
     try
     {
-      m_currentFieldType = "name";
-      m_currentData = data;
-      m_currentItem = 0;
+      m_fieldType = Defines.FIELDTYPE_NICK;
+      m_data = data;
+      m_item = 0;
       super._setNamesStr(data, sel, isColorBlind, knownPlayersCount);
     }
     finally
     {
-      m_currentFieldType = "";
-      m_currentData = null;
-      m_currentItem = 0;
+      m_fieldType = Defines.FIELDTYPE_NONE;
+      m_data = null;
+      m_item = 0;
     }
   }
 
@@ -133,11 +129,57 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   function _getHTMLText(colorScheme, text)
   {
     //Logger.add("PlayersPanel._getHTMLText()");
-    if (m_currentFieldType != "")
+    if (m_fieldType != Defines.FIELDTYPE_NONE)
     {
-      //Logger.add("before: " + text);
-      text = XVMFormatText(m_currentData[m_currentItem++], m_currentFieldType, Utils.endsWith("dead", colorScheme));
-      //Logger.add("after: " + text);
+      //var name = m_data.label + ((m_data.clanAbbrev == "") ? "" : "[" + m_data.clanAbbrev + "]");
+      var format: String = null;
+      switch (m_state)
+      {
+        case "medium":
+          if (m_fieldType == Defines.FIELDTYPE_VEHICLE)
+            break;
+            //return m_data.vehicle;
+          format = (m_type == "left")
+            ? Config.s_config.playersPanel.medium.formatLeft
+            : Config.s_config.playersPanel.medium.formatRight;
+          break;
+        case "medium2":
+          if (m_fieldType == Defines.FIELDTYPE_NICK)
+            break;//return name;
+          format = (m_type == "left")
+            ? Config.s_config.playersPanel.medium2.formatLeft
+            : Config.s_config.playersPanel.medium2.formatRight;
+          break;
+        case "large":
+          if (m_fieldType == Defines.FIELDTYPE_NICK)
+          {
+            format = (m_type == "left")
+              ? Config.s_config.playersPanel.large.nickFormatLeft
+              : Config.s_config.playersPanel.large.nickFormatRight;
+          }
+          else
+          {
+            format = (m_type == "left")
+              ? Config.s_config.playersPanel.large.vehicleFormatLeft
+              : Config.s_config.playersPanel.large.vehicleFormatRight;
+          }
+          break;
+        default:
+          break;//return (m_fieldType == Defines.FIELDTYPE_NICK) ? name : m_data.vehicle;
+      }
+
+      if (format)
+      {
+        //Logger.add("before: " + text);
+        text = TextCache.GetFormattedText(
+          m_data[m_item++],
+          "PP_" + m_state + "_" + m_fieldType,
+          Utils.endsWith("dead", colorScheme),
+          format,
+          (m_state == "medium" || m_state == "medium2" || m_state == "large") ? Config.s_config.playersPanel[m_state].width : -1,
+          (m_state == "medium" || m_state == "medium2" || m_state == "large") ? m_names.getNewTextFormat() : null);
+        //Logger.add("after: " + text);
+      }
     }
 
     return super._getHTMLText(colorScheme, text);
@@ -146,95 +188,6 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   /**
    * XVM
    */
-
-  function XVMFormatText(data, fieldType, isDead)
-  {
-    var key_prefix = "/" + data.label + "/" +  m_state + "/" + fieldType + "/" + data.vehicle;
-    var key = (isDead ? "d" : "a") + key_prefix;
-    if (!m_textCache.hasOwnProperty(key))
-    {
-      m_textCache["a" + key_prefix] = XVMFormatText2(data, fieldType, false);
-      m_textCache["d" + key_prefix] = XVMFormatText2(data, fieldType, true);
-    }
-    return m_textCache[key];
-  }
-
-  function XVMFormatText2(data, fieldType, isDead)
-  {
-    var format: String = "";
-    var name = data.label + ((data.clanAbbrev == "") ? "" : "[" + data.clanAbbrev + "]");
-    switch (m_state)
-    {
-      case "medium":
-        if (fieldType == "vehicle")
-          return data.vehicle.toString();
-        format = (m_type == "left")
-          ? Config.s_config.playersPanel.medium.formatLeft
-          : Config.s_config.playersPanel.medium.formatRight;
-        break;
-      case "medium2":
-        if (fieldType == "name")
-          return name;
-        format = (m_type == "left")
-          ? Config.s_config.playersPanel.medium2.formatLeft
-          : Config.s_config.playersPanel.medium2.formatRight;
-        break;
-      case "large":
-        if (fieldType == "name")
-        {
-          format = (m_type == "left")
-            ? Config.s_config.playersPanel.large.nickFormatLeft
-            : Config.s_config.playersPanel.large.nickFormatRight;
-        }
-        else
-        {
-          format = (m_type == "left")
-            ? Config.s_config.playersPanel.large.vehicleFormatLeft
-            : Config.s_config.playersPanel.large.vehicleFormatRight;
-        }
-        break;
-      default:
-        return (fieldType == "name") ? name : data.vehicle.toString();
-    }
-
-    format = format.split("{{vehicle}}").join(data.vehicle.toString());
-    format = StatFormat.FormatText(data, format, isDead);
-
-    // cut player name for field width
-    if (format.indexOf("{{nick}}") > -1)
-    {
-      var str: String = name;
-      var pname: String = name;
-      if (m_state == "medium" || m_state == "medium2" || m_state == "large")
-      {
-        var configWidth = Config.s_config.playersPanel[m_state].width;
-        if (s_widthTester == null)
-        {
-          s_widthTester = _root.createTextField("widthTester", _root.getNextHighestDepth(), 0, 0, 268, 20);
-          s_widthTester.autoSize = false;
-          s_widthTester.html = true;
-          s_widthTester.condenseWhite = true;
-          s_widthTester._visible = false;
-          var tf: TextFormat = m_names.getNewTextFormat();
-          s_widthTester.setNewTextFormat(tf);
-        }
-        while (pname.length > 0)
-        {
-          str = (pname == name || m_state != "large") ? pname : pname + "...";
-          s_widthTester.htmlText = format.split("{{nick}}").join(str);
-          if (Math.round(s_widthTester.getLineMetrics(0).width) + 4 <= configWidth) // 4 is a size of gutters
-          {
-            //Logger.add("configWidth=" + configWidth + " _width=" + s_widthTester._width + " lineWidth=" + Math.round(s_widthTester.getLineMetrics(0).width) + " " + str);
-            break;
-          }
-          pname = pname.substr(0, pname.length - 1);
-        }
-      }
-      format = format.split("{{nick}}").join(pname.length == 0 ? "" : str);
-    }
-
-    return format;
-  }
 
   function XVMAdjustPanelSize()
   {
