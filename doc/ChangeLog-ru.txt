@@ -1,5 +1,14 @@
 ﻿XVM-2.4.2.test6:
   * исправлены ошибки в режиме "тумана войны".
+  * добавлены параметры:
+      battle/clockFormat - показывать часы в панели отладки (возле FPS)
+      battleLoading/clockFormat - показывать часы на экране загрузки боя
+  * удален параметр:
+      battleLoading/showClock - заменен на battleLoading/clockFormat
+  * увеличена версия конфига: 1.3.0 => 1.3.1, из-за того, что
+    battleLoading/showClock заменен на battleLoading/сlockFormat
+  * часы и информация о моде на экране загрузки боя перенесены в нижнюю
+    информационную панель
 
 XVM-2.4.2.test5:
 XVM-2.4.2.test4:

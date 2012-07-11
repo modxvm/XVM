@@ -2,7 +2,6 @@
  * ...
  * @author sirmax2
  */
-import flash.filters.DropShadowFilter;
 import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.GlobalEventDispatcher;
@@ -13,7 +12,6 @@ import wot.utils.Utils;
 
 class wot.BattleLoading extends net.wargaming.BattleLoading
 {
-  private static var s_infoField: TextField;
   private static var s_chanceField: TextField = null;
   private static var s_chanceText: String;
 
@@ -35,6 +33,9 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
   {
     GlobalEventDispatcher.removeEventListener("config_loaded", this, BattleLoadingConfigLoaded);
 
+    // Show Clock
+    ShowClock(Config.s_config.battleLoading.clockFormat);
+
     if (Config.s_config.rating.showPlayersStatistics)
     {
       // Just to check config is loaded correctly
@@ -46,34 +47,25 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
         "  showPlayersStatistics=true\n" +
         "  loadEnemyStatsInFogOfWar=" + Config.s_config.rating.loadEnemyStatsInFogOfWar + "\n" +
         "  useStandardMarkers=" + Config.s_config.battle.useStandardMarkers);
-    }
 
-    if (Config.s_config.battleLoading.showClock)
-      ShowClock();
-
-    if (Config.s_config.rating.showPlayersStatistics)
-    {
-      // Force stats loading after 0.1 sec (for 12x12 battles, FogOfWar, ...)
-      var timer = _global.setTimeout(function() { StatLoader.StartLoadData(Defines.COMMAND_RUN); }, 100);
+      // Force stats loading after 0.1 sec if enabled (for 12x12 battles, FogOfWar, ...)
+      _global.setTimeout(function() { StatLoader.StartLoadData(Defines.COMMAND_RUN); }, 100);
     }
   }
 
-  private function ShowClock()
+  private function ShowClock(format)
   {
-    var clock = createTextField("clock", getNextHighestDepth(), 280, 25, 100, 40);
+    if (!format || format == "")
+      return;
+    var f = form_mc.helpTip;
+    var clock: TextField = form_mc.createTextField("xvm_clock", form_mc.getNextHighestDepth(), f._x, f._y, f._width, f._height);
     clock.antiAliasType = "advanced";
-    clock.setNewTextFormat(new TextFormat("$TitleFont", 32, 0xFFFFFF, false, false, false, null, null, "center"));
-    clock.filters = [ new DropShadowFilter(0, 0, 0, 100, 5, 5, 5, 3) ];
-    clock.text = Utils.padLeft(String((new Date()).getHours()), 2, '0') + ":" + Utils.padLeft(String((new Date()).getMinutes()), 2, '0');
-  }
-
-  private function CreateInfoField()
-  {
-    s_infoField = createTextField("info", getNextHighestDepth(), _width / 2, 0, 400, 100);
-    s_infoField.wordWrap = true;
-    s_infoField.antiAliasType = "advanced";
-    s_infoField.setNewTextFormat(new TextFormat("$FieldFont", 12, 0xFFFFFF, true, false, false, null, null, "left"));
-    s_infoField.filters = [ new DropShadowFilter(0, 0, 0, 100, 3, 3, 1, 3) ];
+    var tf: TextFormat = f.getNewTextFormat();
+    tf.color = 0xFFFFFF;
+    tf.align = "right";
+    clock.setNewTextFormat(tf);
+    clock.filters = f.filters;
+    setInterval(function() { clock.text = Utils.FormatDate(format, new Date()); }, 1000);
   }
 
   private function BattleLoadingStatLoaded(event)
@@ -102,31 +94,51 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
   {
     //Logger.addObject(event, "SetInfoFieldData(event)");
 
-    if (!s_infoField)
-      CreateInfoField();
+    
+    var info: TextField = form_mc.helpTip;
+    var tip: TextField = form_mc.tipText;
 
-    var txt: String = "XVM v" + Defines.XVM_VERSION + " ";
+    info.text = "XVM v" + Defines.XVM_VERSION + " ";
 
     if (event.ver && Utils.compareVersions(String(event.ver), Defines.XVM_VERSION) == 1)
     {
-      txt = "XVM: New version available: v" + String(event.ver) + " (current is v" + Defines.XVM_VERSION + ")\n";
+      info.textColor = 0xAAFFAA;
+      info.text = "XVM: New version: v" + String(event.ver) + " (current is v" + Defines.XVM_VERSION + ")";
       if (event.message)
-        txt += event.message + "\n";
-      s_infoField.textColor = 0xAAFFAA;
-    }
-
-    if (event.error)
-    {
-      txt += event.error + "\n";
-      s_infoField.textColor = 0xFF8080;
+        setTipText(event.message);
     }
 
     if (event.warning)
     {
-      txt += event.warning + "\n";
-      s_infoField.textColor = 0xFFFFCC;
+      info.textColor = 0xFFD040;
+      setTipText(event.warning);
     }
 
-    s_infoField.text = txt;
+    if (event.error)
+    {
+      info.textColor = 0xFF4040;
+      setTipText(event.error, true);
+    }
+  }
+  
+  private function setTipText(text, isError)
+  {
+    var tip: TextField = form_mc.tipText;
+    var tf: TextFormat = tip.getNewTextFormat();
+    tf.align = "left";
+    tf.size = 12;
+    tf.leading = 0;
+    tip.setNewTextFormat(tf);
+    tip.text = text;
+    if (isError)
+    {
+      tf.color = 0xFF4040;
+      var pos = text.indexOf(">>>");
+      if (pos != -1)
+        tip.setTextFormat(pos, pos + 3, tf);
+      pos = text.indexOf("<<<");
+      if (pos != -1)
+        tip.setTextFormat(pos, pos + 3, tf);
+    }
   }
 }

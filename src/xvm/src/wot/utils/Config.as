@@ -183,12 +183,20 @@ class wot.utils.Config
       }
       catch (ex)
       {
-        var txt = str.substring(ex.at - 100, ex.at - 1) + ">>>" + str.charAt(ex.at) + "<<<" + str.substr(ex.at + 1, 100);
-        txt = txt.split("\r").join("").split("\n").join("");
-        while (txt.indexOf("  ") != -1)
-          txt = txt.split("  ").join(" ");
-        GlobalEventDispatcher.dispatchEvent({ type: "set_info", error: "Error loading config file. Using default settings.\n" +
-          "[" + ex.at + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " + txt });
+        var head = ex.at > 0 ? str.substring(0, ex.at) : "";
+        head = head.split("\r").join("").split("\n").join("");
+        while (head.indexOf("  ") != -1)
+          head = head.split("  ").join(" ");
+        head = head.substr(head.length - 75, 75);
+
+        var tail = (ex.at + 1 < str.length) ? str.substring(ex.at + 1, str.length) : "";
+        tail = tail.split("\r").join("").split("\n").join("");
+        while (tail.indexOf("  ") != -1)
+          tail = tail.split("  ").join(" ");
+
+        GlobalEventDispatcher.dispatchEvent({ type: "set_info", error: "Error loading config file: " +
+          "[" + ex.at + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " + 
+          head + ">>>" + str.charAt(ex.at) + "<<<" + tail });
       }
     }
     else
@@ -497,10 +505,17 @@ class wot.utils.Config
       v = "1.3.0";
     }
 
+    if (v == "1.3.0")
+    {
+      if (config.battle)
+        config.battleLoading.clockFormat = config.battleLoading.showClock ? "H:N" : null;
+      v = "1.3.1";
+    }
+
 /*
     if (v == "1.x.x")
     {
-      // Convert XVM 1.x.x => 1.y.y
+      v = "1.y.y";
     }
 */
 

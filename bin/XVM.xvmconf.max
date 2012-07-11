@@ -1,10 +1,10 @@
 ﻿{
-  "configVersion": "1.3.0",
+  "configVersion": "1.3.1",
   "definition": {
     "author": "sirmax2",
     "description": "Sirmax's settings for XVM",
     "url": "http://code.google.com/p/wot-xvm/",
-    "date": "05.07.2012",
+    "date": "11.07.2012",
     "gameVersion": "0.7.4",
     "modMinVersion": "2.4"
   },
@@ -14,6 +14,7 @@
     "removePanelsModeSwitcher": true,
     "highlightVehicleIcon": false,
     "hideXVMVersion": false,
+    "clockFormat": "H:N",
     "useStandardMarkers": false
   },
   "rating": {
@@ -21,7 +22,7 @@
     "loadEnemyStatsInFogOfWar": true
   },
   "battleLoading": {
-    "showChances": true,
+    "clockFormat": "H:N:S",
     "showChancesExp": true,
     "removeSquadIcon": false,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },

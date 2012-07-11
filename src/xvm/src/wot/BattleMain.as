@@ -41,7 +41,7 @@ class wot.BattleMain
 
     GlobalEventDispatcher.removeEventListener("config_loaded", BattleMainConfigLoaded);
     
-    //Logger.addObject(_root.statsDialog);
+    //Logger.addObject(_root.debugPanel.fgMC.lag);
     //_root.timerBig.win.winText
 
     // Disable ugly battle task animation
@@ -49,6 +49,25 @@ class wot.BattleMain
     
     if (Config.s_config.battle.removePanelsModeSwitcher)
       _root.switcher_mc._visible = false;
+      
+    // Show Clocks
+    ShowClock(Config.s_config.battle.clockFormat);
+  }
+
+  private static function ShowClock(format)
+  {
+    if (!format || format == "")
+      return;
+    var fgMC = _root.debugPanel.fgMC;
+    var lag = fgMC.lag;
+    var fps = fgMC.fps;
+    var clock: TextField = fgMC.createTextField("clock", fgMC.getNextHighestDepth(), lag._x + lag._width, fps._y, 300, fps._height);
+    clock.antiAliasType = "advanced";
+    var tf: TextFormat = fps.getNewTextFormat();
+    tf.align = "left";
+    clock.setNewTextFormat(tf);
+    clock.filters = [new flash.filters.DropShadowFilter(0, 0, 0, 100, 3, 3, 2, 3)];
+    setInterval(function() { clock.text = Utils.FormatDate(format, new Date()) }, 1000);
   }
 
   function showPostmortemTips(movingUpTime, showTime, movingDownTime)

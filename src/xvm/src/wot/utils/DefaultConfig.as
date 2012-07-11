@@ -37,6 +37,8 @@ class wot.utils.DefaultConfig
         drawGrid: false,
         // true - отключить отображение версии xvm в верхнем левом углу экрана
         hideXVMVersion: false,
+        // Show the clock on the Debug Panel (near FPS). Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
+        clockFormat: "H:N",
         // true - использовать стандартные маркеры клиента (не работает)
         useStandardMarkers: false
       },
@@ -47,8 +49,8 @@ class wot.utils.DefaultConfig
         loadEnemyStatsInFogOfWar: false
       },
       battleLoading: {
-        // false - выключить отображение часов на экране загрузки боя
-        showClock: true,
+        // Show the clock on the Battle Loading Screen. Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
+        clockFormat: "H:N",
         // true - включить отображение шансов на победу
         showChances: true,
         // Show experimental "chance to win" formula

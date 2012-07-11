@@ -77,7 +77,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     if (StatData.s_loaded && Config.s_config.statisticForm.showChances && !s_setChanceFieldDataAdded)
     {
       s_setChanceFieldDataAdded = true;
-      var timer = _global.setTimeout(this, "SetChanceFieldData", 50);
+      var timer = _global.setTimeout(function() { BattleStatItemRenderer.SetChanceFieldData(); }, 50);
     }
 
     var saved_icon = data ? data.icon : null;

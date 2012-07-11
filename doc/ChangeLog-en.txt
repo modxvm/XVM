@@ -1,5 +1,13 @@
 ﻿XVM-2.4.2.test6:
   * fixed bugs in "Fog of War" mode.
+  * added options:
+      battle/clockFormat - show the clock on the Debug Panel (near FPS)
+      battleLoading/clockFormat - show the clock on the Battle Loading Screen
+  * remove option:
+      battleLoading/showClock - superseded by battleLoading/clockFormat
+  * config version increased: 1.3.0 => 1.3.1, because battleLoading/showClock
+    was replaced with battleLoading/сlockFormat
+  * clock and mod info on battle loading screen moved to the bottom info panel
 
 XVM-2.4.2.test5:
 XVM-2.4.2.test4:

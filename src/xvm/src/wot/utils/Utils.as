@@ -186,4 +186,28 @@ class wot.utils.Utils
       wot.utils.Logger.add("xvm-> [ \"" + xvmModules.join("\", \"") + "\" ]");
     }
   }
+  
+  public static function FormatDate(format: String, date: Date)
+  {
+    var keys = {Y:"getFullYear", M:"getMonth", D:"getDate", H:"getHours", N:"getMinutes", S:"getSeconds"/*, I:"getMilliseconds"*/};
+    var str = "";
+    if (!date)
+      date = new Date();
+    var ci, meth;
+    var formatArr = format.split(""); // charAt() is slow
+    var format_len = formatArr.length;
+    for (var i = 0; i < format_len; ++i)
+    {
+      ci = formatArr[i];
+      if (keys[ci] == undefined)
+      {
+        str += ci;
+        continue;
+      }
+      meth = keys[ci];
+      var val = date[meth]() + ((meth == "getMonth") ? 1 : 0);
+      str += (val < 10) ? "0" + val : val;
+    }
+    return str;
+  }
 }

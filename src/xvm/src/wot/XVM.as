@@ -380,10 +380,9 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
   static var errorText: String = "";
   function XVMSetErrorText(str)
   {
-    var et: TextField;
     if (!_root.hasOwnProperty("xvmErrorText"))
     {
-      et = _root.createTextField("xvmErrorText", _root.getNextHighestDepth(), 350, 40, 1000, 300);
+      var et: TextField = _root.createTextField("xvmErrorText", _root.getNextHighestDepth(), 350, 40, 1000, 300);
       et.antiAliasType = "advanced";
       et.wordWrap = true;
       et.multiline = true;
