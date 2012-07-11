@@ -6,9 +6,13 @@
       battleLoading/clockFormat - show the clock on the Battle Loading Screen
   * remove option:
       battleLoading/showClock - superseded by battleLoading/clockFormat
-  * config version increased: 1.3.0 => 1.3.1, because battleLoading/showClock
-    was replaced with battleLoading/сlockFormat
+  * macros usage for vehicle text fields in Battle Loading and Statistic Form
+  * config version increased: 1.3.0 => 1.4.0, because battleLoading/showClock
+    was replaced with battleLoading/сlockFormat and formatLeft/formatRight
+    behavior was changed
   * clock and mod info on battle loading screen moved to the bottom info panel
+  * wot-xvm-proxy: added new command line parameter "/noproxy" for disabling
+    using of system proxy settings
 
 XVM-2.4.2.test5:
 XVM-2.4.2.test4:

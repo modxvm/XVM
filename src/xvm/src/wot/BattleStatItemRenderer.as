@@ -12,7 +12,7 @@ import wot.utils.Logger;
 import wot.utils.PlayerInfo;
 import wot.utils.StatData;
 import wot.utils.StatLoader;
-import wot.utils.StatFormat;
+import wot.utils.TextCache;
 import wot.utils.Utils;
 
 class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
@@ -23,7 +23,6 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
   public static var s_chanceText: String;
 
   var m_clanIcon: MovieClip = null;
-  var m_textCache = {};
   var m_iconset: Iconset = null;
   var m_iconLoaded: Boolean = false;
 
@@ -34,7 +33,6 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     Utils.TraceXvmModule("BattleStatItemRenderer");
 
     col3.html = true;
-    col3.condenseWhite = true;
 
     GlobalEventDispatcher.addEventListener("config_loaded", StatLoader.LoadLastStat);
     Config.LoadConfig("BattleStatItemRenderer.as");
@@ -80,11 +78,14 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
       var timer = _global.setTimeout(function() { BattleStatItemRenderer.SetChanceFieldData(); }, 50);
     }
 
-    var cacheKey = data ? data.label + "/" + data.vehicle : null;
+    var cacheKey = data ? "SF/" + data.label + "/" + data.vehicle : null;
     var saved_icon = data ? data.icon : null;
     if (data)
     {
       var pname = data.label.toUpperCase();
+
+      col3.condenseWhite = !Config.s_config.rating.showPlayersStatistics;
+
       if (Config.s_config.rating.showPlayersStatistics && (!StatData.s_data[pname] || !StatData.s_data[pname].playerId))
       {
         //Logger.add("StatLoader.AddPlayerData(): " + cacheKey);
@@ -114,19 +115,8 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     {
       data.icon = saved_icon;
 
-      if (!m_textCache.hasOwnProperty(cacheKey))
-      {
-        //Logger.add(cacheKey);
-        var format = team == Defines.TEAM_ALLY ? Config.s_config.statisticForm.formatLeft : Config.s_config.statisticForm.formatRight;
-        format = format.split("{{vehicle}}").join(data.vehicle.toString());
-        format = format.split("{{nick}}").join(data.label + ((data.clanAbbrev == "") ? "" : "[" + data.clanAbbrev + "]");
-);
-
-        m_textCache[cacheKey] = StatFormat.DecorateField(data, data.vehicle,
-          team == Defines.TEAM_ALLY ? Config.s_config.statisticForm.formatLeft : Config.s_config.statisticForm.formatRight,
-          team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
-      }
-      col3.htmlText = m_textCache[cacheKey];
+      col3.htmlText = TextCache.Get(cacheKey) || TextCache.Format(cacheKey, data,
+        team == Defines.TEAM_ALLY ? Config.s_config.statisticForm.formatLeft : Config.s_config.statisticForm.formatRight);
     }
 
     if (DEBUG_TIMES)

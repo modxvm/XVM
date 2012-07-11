@@ -6,10 +6,15 @@
       battleLoading/clockFormat - показывать часы на экране загрузки боя
   * удален параметр:
       battleLoading/showClock - заменен на battleLoading/clockFormat
-  * увеличена версия конфига: 1.3.0 => 1.3.1, из-за того, что
-    battleLoading/showClock заменен на battleLoading/сlockFormat
+  * использование макросов в поле названия танка на экране загрузки боя и
+    в статистике боя.
+  * увеличена версия конфига: 1.3.0 => 1.4.0, из-за того, что
+    battleLoading/showClock заменен на battleLoading/сlockFormat и изменено
+    поведение formatLeft/formatRight
   * часы и информация о моде на экране загрузки боя перенесены в нижнюю
     информационную панель
+  * wot-xvm-proxy: добавлен параметр "/noproxy" для отключения использования
+    настроек системного прокси
 
 XVM-2.4.2.test5:
 XVM-2.4.2.test4:

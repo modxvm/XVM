@@ -19,6 +19,7 @@ namespace wot
 
     public static string serverVersion = null;
     private static bool isNoAuto = false;
+    public static bool isNoProxy = false;
 
     private static Process wotProcess = null;
 
@@ -48,6 +49,7 @@ namespace wot
       Log("Usage: wot-xvm-proxy.exe [/launcher] [/debug] [/server=(RU|EU|NA|CN|SEA|VTC|CT)] [file.wotreplay]");
       Log("  /launcher - run launcher instead of game");
       Log("  /noauto - do not run game automatically");
+      Log("  /noproxy - do not use IE proxy settings");
       Log("  /debug - run in debug mode (extended log)");
       Log("  /server=(RU|EU|NA|CN|SEA|VTC|CT) - select server (disable autodetection)");
       Log("  file.wotreplay - play replay");
@@ -132,9 +134,17 @@ namespace wot
             args[i] = "";
             continue;
           }
+
           if (String.Compare(args[i], "/noauto", true) == 0)
           {
             isNoAuto = true;
+            args[i] = "";
+            continue;
+          }
+
+          if (String.Compare(args[i], "/noproxy", true) == 0)
+          {
+            isNoProxy = true;
             args[i] = "";
             continue;
           }

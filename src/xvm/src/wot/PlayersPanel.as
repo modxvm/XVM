@@ -17,7 +17,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   private var m_item: Number = 0;
 
   private var m_knownPlayersCount = 0; // for Fog of War mode.
-  
+
   function PlayersPanel()
   {
     super();
@@ -61,7 +61,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
       m_knownPlayersCount = data.length;
       XVMAdjustPanelSize();
     }
-    
+
     if (m_state != _lastAdjustedState)
     {
       XVMAdjustPanelSize();
@@ -129,57 +129,56 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
   function _getHTMLText(colorScheme, text)
   {
     //Logger.add("PlayersPanel._getHTMLText()");
-    if (m_fieldType != Defines.FIELDTYPE_NONE)
+    if (m_fieldType == Defines.FIELDTYPE_NONE)
+      return super._getHTMLText(colorScheme, text);
+    
+    var format: String = null;
+    switch (m_state)
     {
-      //var name = m_data.label + ((m_data.clanAbbrev == "") ? "" : "[" + m_data.clanAbbrev + "]");
-      var format: String = null;
-      switch (m_state)
-      {
-        case "medium":
-          if (m_fieldType == Defines.FIELDTYPE_VEHICLE)
-            break;
-            //return m_data.vehicle;
+      case "medium":
+        if (m_fieldType == Defines.FIELDTYPE_VEHICLE)
+          break;
+        format = (m_type == "left")
+          ? Config.s_config.playersPanel.medium.formatLeft
+          : Config.s_config.playersPanel.medium.formatRight;
+        break;
+      case "medium2":
+        if (m_fieldType == Defines.FIELDTYPE_NICK)
+          break;
+        format = (m_type == "left")
+          ? Config.s_config.playersPanel.medium2.formatLeft
+          : Config.s_config.playersPanel.medium2.formatRight;
+        break;
+      case "large":
+        if (m_fieldType == Defines.FIELDTYPE_NICK)
+        {
           format = (m_type == "left")
-            ? Config.s_config.playersPanel.medium.formatLeft
-            : Config.s_config.playersPanel.medium.formatRight;
-          break;
-        case "medium2":
-          if (m_fieldType == Defines.FIELDTYPE_NICK)
-            break;//return name;
+            ? Config.s_config.playersPanel.large.nickFormatLeft
+            : Config.s_config.playersPanel.large.nickFormatRight;
+        }
+        else if (m_fieldType == Defines.FIELDTYPE_VEHICLE)
+        {
           format = (m_type == "left")
-            ? Config.s_config.playersPanel.medium2.formatLeft
-            : Config.s_config.playersPanel.medium2.formatRight;
-          break;
-        case "large":
-          if (m_fieldType == Defines.FIELDTYPE_NICK)
-          {
-            format = (m_type == "left")
-              ? Config.s_config.playersPanel.large.nickFormatLeft
-              : Config.s_config.playersPanel.large.nickFormatRight;
-          }
-          else
-          {
-            format = (m_type == "left")
-              ? Config.s_config.playersPanel.large.vehicleFormatLeft
-              : Config.s_config.playersPanel.large.vehicleFormatRight;
-          }
-          break;
-        default:
-          break;//return (m_fieldType == Defines.FIELDTYPE_NICK) ? name : m_data.vehicle;
-      }
+            ? Config.s_config.playersPanel.large.vehicleFormatLeft
+            : Config.s_config.playersPanel.large.vehicleFormatRight;
+        }
+        break;
+      default:
+        break;
+    }
 
-      if (format)
-      {
-        //Logger.add("before: " + text);
-        text = TextCache.GetFormattedText(
-          m_data[m_item++],
-          "PP_" + m_state + "_" + m_fieldType,
-          Utils.endsWith("dead", colorScheme),
-          format,
-          (m_state == "medium" || m_state == "medium2" || m_state == "large") ? Config.s_config.playersPanel[m_state].width : -1,
-          (m_state == "medium" || m_state == "medium2" || m_state == "large") ? m_names.getNewTextFormat() : null);
-        //Logger.add("after: " + text);
-      }
+    if (format)
+    {
+      //Logger.add("before: " + text);
+      var data = m_data[m_item++];
+      var deadState = Utils.endsWith("dead", colorScheme) ? Defines.DEADSTATE_DEAD : Defines.DEADSTATE_ALIVE;
+      var key = "PP/" + deadState + "/" + data.label + "/" + data.vehicle + "/" +
+        m_state + "/" + m_fieldType;
+      text = TextCache.Get(key) ||  TextCache.Format(key, data, format,
+        (m_state == "medium" || m_state == "medium2" || m_state == "large") ? Config.s_config.playersPanel[m_state].width : -1,
+        (m_state == "medium" || m_state == "medium2" || m_state == "large") ? m_names.getNewTextFormat() : null,
+        deadState);
+      //Logger.add("after: " + text);
     }
 
     return super._getHTMLText(colorScheme, text);

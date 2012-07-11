@@ -27,7 +27,7 @@ class wot.utils.StatLoader
   private static var currentTimeoutId = 0;
   private static var timeouts = [ 300, 500, 700, 1500, 2000 ];
 
-  public static function AddPlayerData(playerId: Number, playerName: String, originalText: String, icon: String,
+  public static function AddPlayerData(playerId: Number, playerName: String, vehicle: String, icon: String,
     team: Number, selected: Boolean)
   {
     if (playerId <= 0 || !playerName)
@@ -44,10 +44,10 @@ class wot.utils.StatLoader
       playerId: playerId,
       fullPlayerName: playerName,
       label: pname,
-      clan: clan,
-      originalText: originalText,
+      clanAbbrev: clan,
+      vehicle: vehicle,
+      vehicleId: VehicleInfo.getVehicleId(icon),
       icon: icon,
-      vehicleName: VehicleInfo.getShortName(icon),
       team: team,
       selected: selected,
       loaded: StatData.s_data[pname] ? true : false,
@@ -77,7 +77,7 @@ class wot.utils.StatLoader
       {
         //Logger.addObject(pdata, pname);
         var str: String = String(pdata.playerId) + "=" + pdata.fullPlayerName +
-          "&" + pdata.vehicleName + (pdata.selected ? "&1" : "");
+          "&" + pdata.vehicleId + (pdata.selected ? "&1" : "");
         if (len + str.length > Defines.MAX_PATH - command.length)
           break;
         pdata.loaded = true;
@@ -173,7 +173,7 @@ class wot.utils.StatLoader
               StatData.s_data[name] = { loaded: true };
             }
             StatData.s_data[name].stat = stat;
-            if (StatData.s_data[name].vehicle.toUpperCase() == "UNKNOWN")
+            if (StatData.s_data[name].vehicleId == "UNKNOWN")
               StatData.s_data[name].loaded = false;
             //Logger.addObject(stat, stat.name);
           }
@@ -244,7 +244,7 @@ class wot.utils.StatLoader
     if (StatData.s_data[pname])
       return;
 
-    AddPlayerData(data.uid, fullPlayerName, data.vehicle || data.originalText, data.icon,
+    AddPlayerData(data.uid, fullPlayerName, data.vehicle, data.icon,
       data.team == "team1" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
 
     var timer = _global.setTimeout(function() { StatLoader.StartLoadData(Defines.COMMAND_RUN_ASYNC); }, 50);

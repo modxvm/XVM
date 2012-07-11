@@ -17,14 +17,14 @@ class wot.utils.VehicleInfo
     return str;
   }
 
-  public static function getShortName(str: String): String
+  public static function getVehicleId(str: String): String
   {
     if (Utils.endsWith(".png", str))
     {
       str = str.slice(str.lastIndexOf("/") + 1, str.lastIndexOf("."));
       str = str.slice(str.indexOf("-") + 1);
       str = Utils.trim(str);
-      return str;
+      return str.toUpperCase();
     }
     return null;
   }

@@ -9,7 +9,6 @@ import wot.utils.Iconset;
 import wot.utils.Logger;
 import wot.utils.StatData;
 import wot.utils.StatLoader;
-import wot.utils.StatFormat;
 import wot.utils.PlayerInfo;
 import wot.utils.TextCache;
 import wot.utils.Utils;
@@ -23,7 +22,6 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
   private var m_iconset: Iconset = null;
   private var m_clanIconLoaded = false;
   private var m_iconLoaded: Boolean = false;
-  private var m_textCache = {};
 
   function BattleLoadingItemRenderer()
   {
@@ -144,10 +142,7 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
       data.icon = saved_icon;
 
     if (data && Config.s_config.rating.showPlayersStatistics)
-    {
-      vehicleField.htmlText = m_textCache.hasOwnProperty(data.label)
-        ? m_textCache[data.label] : data.vehicle;
-    }
+      vehicleField.htmlText = TextCache.Get("BL/" + data.label) || data.vehicle;
   }
 
   // update delegate
@@ -161,13 +156,9 @@ class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerLi
     if (!pdata)
       return;
 
-    if (!m_textCache.hasOwnProperty(data.label))
-    {
-      m_textCache[data.label] = StatFormat.DecorateField(pdata, pdata.originalText,
-        team == Defines.TEAM_ALLY ? Config.s_config.battleLoading.formatLeft : Config.s_config.battleLoading.formatRight,
-        team == Defines.TEAM_ALLY ? Defines.POSITION_RIGHT : Defines.POSITION_LEFT);
-    }
-    vehicleField.htmlText = TextCache.GetFormattedText(pdata, "BL", Defines.FIELDTYPE_VEHICLE  m_textCache[pdata.fullPlayerName];
+    var key = "BL/" + data.label;
+    vehicleField.htmlText = TextCache.Get(key) || TextCache.Format(key, pdata,
+      team == Defines.TEAM_ALLY ? Config.s_config.battleLoading.formatLeft : Config.s_config.battleLoading.formatRight);
     //Logger.add(vehicleField.htmlText);
   }
 }

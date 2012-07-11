@@ -195,7 +195,7 @@ class wot.utils.Config
           tail = tail.split("  ").join(" ");
 
         GlobalEventDispatcher.dispatchEvent({ type: "set_info", error: "Error loading config file: " +
-          "[" + ex.at + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " + 
+          "[" + ex.at + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " +
           head + ">>>" + str.charAt(ex.at) + "<<<" + tail });
       }
     }
@@ -509,7 +509,17 @@ class wot.utils.Config
     {
       if (config.battle)
         config.battleLoading.clockFormat = config.battleLoading.showClock ? "H:N" : null;
-      v = "1.3.1";
+      if (config.battleLoading)
+      {
+        config.battleLoading.formatLeft = "{{vehicle}} " + config.battleLoading.formatLeft;
+        config.battleLoading.formatRight = config.battleLoading.formatRight + " {{vehicle}}";
+      }
+      if (config.statisticForm)
+      {
+        config.statisticForm.formatLeft = "{{vehicle}} " + config.statisticForm.formatLeft;
+        config.statisticForm.formatRight = config.statisticForm.formatRight + " {{vehicle}}";
+      }
+      v = "1.4.0";
     }
 
 /*

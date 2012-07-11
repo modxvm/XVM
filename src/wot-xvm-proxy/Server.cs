@@ -503,7 +503,8 @@ namespace wot
       HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
       request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
       request.Credentials = CredentialCache.DefaultCredentials;
-      request.Proxy.Credentials = CredentialCache.DefaultCredentials;
+      if (!Program.isNoProxy)
+        request.Proxy.Credentials = CredentialCache.DefaultCredentials;
       request.Timeout = Settings.Default.Timeout;
 
       HttpWebResponse response = (HttpWebResponse)request.GetResponse();

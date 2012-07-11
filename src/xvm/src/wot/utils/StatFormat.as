@@ -52,7 +52,7 @@ class wot.utils.StatFormat
       }
       else
       {
-        if (Config.s_config.rating.loadEnemyStatsInFogOfWar && !StatData.s_data[pname].loaded && data.vehicle.toUpperCase != "UNKNOWN")
+        if (Config.s_config.rating.loadEnemyStatsInFogOfWar && !StatData.s_data[pname].loaded && data.vehicleId != "UNKNOWN")
           GlobalEventDispatcher.dispatchEvent( { type: "process_fow", data: data } );
 
         if (!stat.notInDb)
@@ -135,7 +135,7 @@ class wot.utils.StatFormat
     format = format.split("{{c:t_battles}}").join(
       GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, t_battles, "#", isDead));
 
-    format = Utils.trim(format);
+    //format = Utils.trim(format);
 
     return format;
   }

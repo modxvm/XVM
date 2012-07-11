@@ -7,11 +7,11 @@
   s_data members:
     playerId: Number,
     fullPlayerName: fullPlayerName,
-    name: String,
-    clan: String,
-    originalText: String,
+    label: String,
+    clanAbbrev: String,
+    vehicle: String,
+    vehicleId: String,
     icon: String,
-    vehicleName: String,
     team: Defines.TEAM_ALLY | Defines.TEAM_ENEMY,
     selected: Boolean,
     loaded: Boolean

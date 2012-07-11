@@ -7,7 +7,7 @@ class wot.utils.Defines
   // Global versions
   public static var XVM_VERSION: String = "2.4.2.test6";
   public static var WOT_VERSION: String = "0.7.4";
-  public static var CONFIG_VERSION: String = "1.3.1";
+  public static var CONFIG_VERSION: String = "1.4.0";
   public static var EDITOR_VERSION: String = "0.1.1";
 
   public static var DEFAULT_CONFIG_NAME: String = "XVM.xvmconf";
@@ -38,6 +38,11 @@ class wot.utils.Defines
   public static var FIELDTYPE_NONE: Number = 0;
   public static var FIELDTYPE_NICK: Number = 1;
   public static var FIELDTYPE_VEHICLE: Number = 2;
+
+  // Dead State
+  public static var DEADSTATE_NONE: Number = 0;
+  public static var DEADSTATE_ALIVE: Number = 1;
+  public static var DEADSTATE_DEAD: Number = 2;
 
   // Dynamic color types
   public static var DYNAMIC_COLOR_EFF: Number = 1;

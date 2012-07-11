@@ -2,6 +2,7 @@
  * ...
  * @author Maxim Schedriviy
  */
+import wot.utils.Defines;
 import wot.utils.StatFormat;
 
 class wot.utils.TextCache
@@ -14,39 +15,31 @@ class wot.utils.TextCache
   private static var format: String;
   private static var width: Number;
   private static var tf: TextFormat;
-    
-  public static function GetFormattedText(data: Object, state: String, isDead: Boolean,
-    format: String, width: Number, tf: TextFormat): String
+
+  public static function Get(key: String): String
+  {
+    return s_textCache[key];
+  }
+  
+  public static function Format(key: String, data: Object, format: String, width: Number, tf: TextFormat, deadState: Number): String
   {
     TextCache.data = data;
     TextCache.state = state;
-    TextCache.fieldType = fieldType;
     TextCache.format = format;
     TextCache.width = width;
     TextCache.tf = tf;
-    
-    var key_prefix = "/" + data.label + "/" + data.vehicle + "/" + state + "/" + fieldType;
-    var key = (isDead ? "d" : "a") + key_prefix;
+
     if (!s_textCache.hasOwnProperty(key))
-    {
-      s_textCache["a" + key_prefix] = FormatText(false);
-      s_textCache["d" + key_prefix] = FormatText(true);
-    }
+      s_textCache[key] = FormatText(deadState == Defines.DEADSTATE_DEAD);
+
     return s_textCache[key];
   }
 
-  public static function ClearFormattedText(data: Object, state: String, fieldType: Number)
-  {
-    var key_prefix = "/" + data.label + "/" + data.vehicle + "/" + state + "/" + fieldType;
-    delete s_textCache["a" + key_prefix];
-    delete s_textCache["d" + key_prefix];
-  }
-  
   private static function FormatText(isDead: Boolean): String
   {
     var name = data.label + ((data.clanAbbrev == "") ? "" : "[" + data.clanAbbrev + "]");
 
-    format = format.split("{{vehicle}}").join(data.vehicle.toString());
+    format = format.split("{{vehicle}}").join(data.vehicle);
     format = StatFormat.FormatText(data, format, isDead);
 
     // cut player name for field width

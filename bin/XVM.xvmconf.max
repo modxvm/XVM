@@ -1,5 +1,5 @@
 ﻿{
-  "configVersion": "1.3.1",
+  "configVersion": "1.4.0",
   "definition": {
     "author": "sirmax2",
     "description": "Sirmax's settings for XVM",
@@ -26,15 +26,15 @@
     "showChancesExp": true,
     "removeSquadIcon": false,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft": "<font face='Consolas' size='11'><font color='{{c:t-battles}}'>{{t-hb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
-    "formatRight": "<font face='Consolas' size='11'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-battles}}'>{{t-hb:3}}</font></font>"
+    "formatLeft": "{{vehicle}} <font face='Consolas' size='11'><font color='{{c:t-battles}}'>{{t-hb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
+    "formatRight": "<font face='Consolas' size='11'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-battles}}'>{{t-hb:3}}</font></font> {{vehicle}}"
   },
   "statisticForm": {
     "showChances": true,
     "showChancesExp": true,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft": "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{t-hb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
-    "formatRight": "<font face='Consolas' size='11'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{t-hb:3}}</font></font>"
+    "formatLeft": "{{vehicle}} <font face='Consolas' size='11'><font color='{{c:kb}}'>{{t-hb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
+    "formatRight": "<font face='Consolas' size='11'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{t-hb:3}}</font></font> {{vehicle}}"
   },
   "playersPanel": {
     "alpha": 50,
