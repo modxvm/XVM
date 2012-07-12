@@ -27,7 +27,7 @@ class wot.utils.PlayerInfo extends MovieClip
         result = pinfo;
         break;
       }
-      if (clan != null && pinfo.clanAbbrev != null && clan.indexOf(pinfo.clanAbbrev, 0) != -1)
+      if (clan != null && pinfo.clan != null && clan.indexOf(pinfo.clan, 0) != -1)
       {
         result = pinfo;
         break;

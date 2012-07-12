@@ -1,4 +1,7 @@
-﻿XVM-2.4.2.test6:
+﻿XVM-2.4.2.test7:
+  * fixed bugs introduced in 2.4.2.test6
+
+XVM-2.4.2.test6:
   * fixed bugs in "Fog of War" mode (incomplete)
   * file XVM.log in the game directory contains mod debugging information
   * added options:
