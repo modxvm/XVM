@@ -14,7 +14,6 @@
     "removePanelsModeSwitcher": true,
     "highlightVehicleIcon": false,
     "hideXVMVersion": false,
-    "clockFormat": "H:N",
     "useStandardMarkers": false
   },
   "rating": {
@@ -22,7 +21,6 @@
     "loadEnemyStatsInFogOfWar": true
   },
   "battleLoading": {
-    "clockFormat": "H:N:S",
     "showChancesExp": true,
     "removeSquadIcon": false,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },

@@ -35,7 +35,7 @@
   },
   // Parameters of the Battle Loading Screen
   "battleLoading": {
-    "clockFormat": "H:N",                       // Show the clock on the Battle Loading Screen. Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
+    "clockFormat": "H:N:S",                     // Show the clock on the Battle Loading Screen. Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
     "showChances": true,                        // true – Enable display of "chance to win" (only with XVM-full) Read more: http://forum.bulychev.net/viewtopic.php?f=4&t=26
     "showChancesExp": false,                    // Show experimental "chance to win" formula
     "removeSquadIcon": false,                   // true – Disable Platoon icons. This blank space can house, for example, clan logos

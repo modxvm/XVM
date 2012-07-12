@@ -101,7 +101,7 @@
     \xvm-doc\samples\Full config EN\XVM.xvmconf
 
   Macros available:
-    In players panel:
+    In players panel, battle loading screen and statistic form:
       {{nick}}        - player name
       {{vehicle}}     - vehicle name
 

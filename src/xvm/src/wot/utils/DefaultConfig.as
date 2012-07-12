@@ -50,7 +50,7 @@ class wot.utils.DefaultConfig
       },
       battleLoading: {
         // Show the clock on the Battle Loading Screen. Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
-        clockFormat: "H:N",
+        clockFormat: "H:N:S",
         // true - включить отображение шансов на победу
         showChances: true,
         // Show experimental "chance to win" formula
