@@ -7,7 +7,7 @@
     <tags>
       <FileAttributes hasMetaData="1" useNetwork="0"/>
       <Metadata>
-        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"> <rdf:Description xmlns:xmp="http://ns.adobe.com/xap/1.0/" rdf:about=""> <xmp:CreatorTool>Adobe Flash CS4 Professional</xmp:CreatorTool> <xmp:CreateDate>2009-10-16T17:36:04+03:00</xmp:CreateDate> <xmp:MetadataDate>2012-06-06T13:09:13+03:00</xmp:MetadataDate> <xmp:ModifyDate>2012-06-06T13:09:13+03:00</xmp:ModifyDate> </rdf:Description> <rdf:Description xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/" xmlns:stRef="http://ns.adobe.com/xap/1.0/sType/ResourceRef#" rdf:about=""> <xmpMM:InstanceID>xmp.iid:50F20D79BFAFE11180218E1EFEF75C7A</xmpMM:InstanceID> <xmpMM:DocumentID>xmp.did:50F20D79BFAFE11180218E1EFEF75C7A</xmpMM:DocumentID> <xmpMM:OriginalDocumentID>xmp.did:25D88A6A61BADE119A05811A545BC466</xmpMM:OriginalDocumentID> <xmpMM:DerivedFrom rdf:parseType="Resource"> <stRef:instanceID>xmp.iid:4FF20D79BFAFE11180218E1EFEF75C7A</stRef:instanceID> <stRef:documentID>xmp.did:BC6C7809311ADF11A9439F4B1F8C7348</stRef:documentID> <stRef:originalDocumentID>xmp.did:25D88A6A61BADE119A05811A545BC466</stRef:originalDocumentID> </xmpMM:DerivedFrom> </rdf:Description> <rdf:Description xmlns:dc="http://purl.org/dc/elements/1.1/" rdf:about=""> <dc:format>application/x-shockwave-flash</dc:format> </rdf:Description> </rdf:RDF>
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"> <rdf:Description xmlns:xmp="http://ns.adobe.com/xap/1.0/" rdf:about=""> <xmp:CreatorTool>Adobe Flash CS4 Professional</xmp:CreatorTool> <xmp:CreateDate>2009-10-16T17:36:04+03:00</xmp:CreateDate> <xmp:MetadataDate>2012-06-25T16:22:18+03:00</xmp:MetadataDate> <xmp:ModifyDate>2012-06-25T16:22:18+03:00</xmp:ModifyDate> </rdf:Description> <rdf:Description xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/" xmlns:stRef="http://ns.adobe.com/xap/1.0/sType/ResourceRef#" rdf:about=""> <xmpMM:InstanceID>xmp.iid:E9D5FCFFA3BEE111808890F4224691D6</xmpMM:InstanceID> <xmpMM:DocumentID>xmp.did:E9D5FCFFA3BEE111808890F4224691D6</xmpMM:DocumentID> <xmpMM:OriginalDocumentID>xmp.did:25D88A6A61BADE119A05811A545BC466</xmpMM:OriginalDocumentID> <xmpMM:DerivedFrom rdf:parseType="Resource"> <stRef:instanceID>xmp.iid:E7D5FCFFA3BEE111808890F4224691D6</stRef:instanceID> <stRef:documentID>xmp.did:BC6C7809311ADF11A9439F4B1F8C7348</stRef:documentID> <stRef:originalDocumentID>xmp.did:25D88A6A61BADE119A05811A545BC466</stRef:originalDocumentID> </xmpMM:DerivedFrom> </rdf:Description> <rdf:Description xmlns:dc="http://purl.org/dc/elements/1.1/" rdf:about=""> <dc:format>application/x-shockwave-flash</dc:format> </rdf:Description> </rdf:RDF>
       </Metadata>
       <SetBackgroundColor>
         <color>
@@ -420,7 +420,7 @@
       </DefineShape5>
       <DefineEditText objectID="17" wordWrap="0" multiLine="0" password="0" readOnly="1" autoSize="0" hasLayout="1" notSelectable="1" hasBorder="0" isHTML="0" useOutlines="1" fontRef="9" fontHeight="260" align="0" leftMargin="0" rightMargin="0" indent="0" leading="40" variableName="">
         <size>
-          <Rectangle left="-40" right="4360" top="-40" bottom="392"/>
+          <Rectangle left="-40" right="4220" top="-40" bottom="392"/>
         </size>
         <color>
           <Color red="201" green="201" blue="182" alpha="255"/>
@@ -429,7 +429,7 @@
       <CSMTextSettings objectID="17" useFlashType="1" gridFit="1" thickness="0.000000000000000" sharpness="0.000000000000000"/>
       <DefineEditText objectID="18" wordWrap="0" multiLine="0" password="0" readOnly="1" autoSize="0" hasLayout="1" notSelectable="1" hasBorder="0" isHTML="0" useOutlines="1" fontRef="9" fontHeight="260" align="1" leftMargin="0" rightMargin="0" indent="0" leading="40" variableName="">
         <size>
-          <Rectangle left="-40" right="1210" top="-40" bottom="367"/>
+          <Rectangle left="-40" right="1310" top="-40" bottom="367"/>
         </size>
         <color>
           <Color red="162" green="146" blue="126" alpha="255"/>
@@ -583,7 +583,7 @@
           </PlaceObject2>
           <PlaceObject3 replace="0" depth="9" objectID="18" name="vehicleField">
             <transform>
-              <Transform scaleX="1.200012207031250" scaleY="1.000000000000000" transX="5328" transY="100"/>
+              <Transform scaleX="1.200012207031250" scaleY="1.000000000000000" transX="5188" transY="100"/>
             </transform>
             <filters>
               <DropShadow blurX="2.000000000000000" blurY="2.000000000000000" angle="1.570785522460938" distance="0.000000000000000" strength="0.1992187500000000" innerShadow="0" knockout="0" passes="3">

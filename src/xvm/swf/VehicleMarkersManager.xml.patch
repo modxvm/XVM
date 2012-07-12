@@ -1,5 +1,5 @@
---- orig\VehicleMarkersManager.xml	2012-06-01 13:09:38.708706200 +0300
-+++ VehicleMarkersManager.xml	2012-06-11 12:42:40.358038400 +0300
+--- orig\VehicleMarkersManager.xml	2012-07-12 22:17:49.135204800 +0300
++++ VehicleMarkersManager.xml	2012-07-12 22:19:10.705870300 +0300
 @@ -4007,7 +4007,7 @@
        </DefineBitsLossless2>
        <DefineShape objectID="85">
@@ -2028,7 +2028,7 @@
              </transform>
            </PlaceObject2>
            <ShowFrame/>
-@@ -46994,7 +46994,7 @@
+@@ -46738,7 +46738,7 @@
          <actions>
            <PushData>
              <items>
@@ -2037,7 +2037,7 @@
              </items>
            </PushData>
            <GetVariable/>
-@@ -47020,7 +47020,7 @@
+@@ -46764,7 +46764,7 @@
          <actions>
            <PushData>
              <items>
