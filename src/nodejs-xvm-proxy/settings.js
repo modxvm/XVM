@@ -12,6 +12,7 @@ module.exports = (function()
         collectionName: "<collection>",
         missedCollectionName: "<missed_collection>",
         usersCollectionName: "<users_collection>",
+        statHostMaxConnections: 10,
         statHosts: [
             "worldoftanks.ru",      // RU:            0 ..  499999999
             "worldoftanks.eu",      // EU:    500000000 ..  999999999
