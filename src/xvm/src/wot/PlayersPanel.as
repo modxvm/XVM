@@ -167,14 +167,14 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         break;
     }
 
-    if (format)
+    if (format != null)
     {
       //Logger.add("before: " + text);
       var data = m_data[m_item++];
       var deadState = Utils.endsWith("dead", colorScheme) ? Defines.DEADSTATE_DEAD : Defines.DEADSTATE_ALIVE;
       var key = "PP/" + deadState + "/" + data.label + "/" + data.vehicle + "/" +
         m_state + "/" + m_fieldType;
-      text = TextCache.Get(key) ||  TextCache.Format(key, data, format,
+      text = TextCache.Get(key) || TextCache.Format(key, data, format,
         (m_state == "medium" || m_state == "medium2" || m_state == "large") ? Config.s_config.playersPanel[m_state].width : -1,
         (m_state == "medium" || m_state == "medium2" || m_state == "large") ? m_names.getNewTextFormat() : null,
         deadState);
