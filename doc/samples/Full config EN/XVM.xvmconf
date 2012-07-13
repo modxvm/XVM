@@ -50,9 +50,9 @@
       "alpha": 90                               //   Transparency of the Team/Clan logo
     },
     // Display format for the left Players Panel (macros allowed, see readme-en.txt)
-    "formatLeft": "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatLeft": "{{vehicle}} <font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
     // Display format for the right Players Panel (macros allowed, see readme-en.txt)
-    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
+    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font> {{vehicle}}"
   },
   // Parameters of the Battle Statistics Form
   "statisticForm": {
@@ -62,9 +62,9 @@
     // Display options for Team/Clan logos (see battleLoading above)
     "clanIcon": { "show": true, "x": 0, "y": 6, "xr": 0, "yr": 6, "h": 16, "w": 16, "alpha": 90 },
     // Display format for the left column (macros allowed, see readme-en.txt)
-    "formatLeft": "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatLeft": "{{vehicle}} <font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
     // Display format for the right column (macros allowed, see readme-en.txt)
-    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
+    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font> {{vehicle}}"
   },
   // Parameters of the Players Panels
   "playersPanel": {

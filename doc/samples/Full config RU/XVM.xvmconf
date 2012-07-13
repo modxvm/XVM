@@ -50,9 +50,9 @@
       "alpha": 90                               //   прозрачность иконки игрока/клана
     },
     // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatLeft": "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatLeft": "{{vehicle}} <font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
     // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
+    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font> {{vehicle}}"
   },
   // Параметры окна статистики по клавише Tab
   "statisticForm": {
@@ -62,9 +62,9 @@
     // параметры отображения иконки игрока/клана (см. battleLoading выше)
     "clanIcon": { "show": true, "x": 0, "y": 6, "xr": 0, "yr": 6, "h": 16, "w": 16, "alpha": 90 },
     // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatLeft": "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatLeft": "{{vehicle}} <font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
     // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
+    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font> {{vehicle}}"
   },
   // Параметры панелей игроков ("ушей")
   "playersPanel": {

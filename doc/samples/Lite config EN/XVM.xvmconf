@@ -44,9 +44,9 @@
       "alpha": 90                               //   Transparency of the Team/Clan logo
     },
     // Display format for the left Players Panel (macros allowed, see readme-en.txt)
-    "formatLeft": "",
+    "formatLeft": "{{vehicle}}",
     // Display format for the right Players Panel (macros allowed, see readme-en.txt)
-    "formatRight": ""
+    "formatRight": "{{vehicle}}"
   },
   // Parameters of the Battle Statistics Form
   "statisticForm": {
@@ -54,9 +54,9 @@
     // Display options for Team/Clan logos (see battleLoading above)
     "clanIcon": { "show": true, "x": 0, "y": 6, "xr": 0, "yr": 6, "h": 16, "w": 16, "alpha": 90 },
     // Display format for the left column (macros allowed, see readme-en.txt)
-    "formatLeft": "",
+    "formatLeft": "{{vehicle}}",
     // Display format for the right column (macros allowed, see readme-en.txt)
-    "formatRight": ""
+    "formatRight": "{{vehicle}}"
   },
   // Parameters of the Players Panels
   "playersPanel": {
