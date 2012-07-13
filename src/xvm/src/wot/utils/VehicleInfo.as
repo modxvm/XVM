@@ -44,7 +44,7 @@ class wot.utils.VehicleInfo
 
   private static var _data = {
     // unknown
-    uk-GB68_Matilda_Black_Prince	{ level: 0,  type: MT, tiers: [ 0, 0 ] },
+    uk_GB68_Matilda_Black_Prince:	{ level: 0,  type: MT, tiers: [ 0, 0 ] },
 
     // level 1
     germany_Ltraktor:			{ level: 1,  type: LT, tiers: [ 1, 2 ] },
@@ -212,7 +212,7 @@ class wot.utils.VehicleInfo
     usa_T34_hvy:			{ level: 8,  type: HT, tiers: [ 8, 10 ] },
     germany_VK4502A:			{ level: 8,  type: HT, tiers: [ 8, 10 ] },
     germany_Ferdinand:			{ level: 8,  type: TD, tiers: [ 8, 10 ] },
-    germany-JagdPantherII		{ level: 8,  type: TD, tiers: [ 8, 10 ] },
+    germany_JagdPantherII:		{ level: 8,  type: TD, tiers: [ 8, 10 ] },
     ussr_ISU_152:			{ level: 8,  type: TD, tiers: [ 8, 10 ] },
     usa_T28:				{ level: 8,  type: TD, tiers: [ 8, 10 ] },
     usa_T28_Prototype:			{ level: 8,  type: TD, tiers: [ 8, 10 ] },
@@ -241,20 +241,20 @@ class wot.utils.VehicleInfo
 
     // level 10
     france_Bat_Chatillon25t:		{ level: 10, type: MT, tiers: [ 10, 12 ] },
-    germany-E50_Ausf_M			{ level: 10, type: MT, tiers: [ 10, 12 ] },
-    usa-M48A1				{ level: 10, type: MT, tiers: [ 10, 12 ] },
-    ussr-T62A				{ level: 10, type: MT, tiers: [ 10, 12 ] },
+    germany_E50_Ausf_M:			{ level: 10, type: MT, tiers: [ 10, 12 ] },
+    usa_M48A1:				{ level: 10, type: MT, tiers: [ 10, 12 ] },
+    ussr_T62A:				{ level: 10, type: MT, tiers: [ 10, 12 ] },
     germany_E_100:			{ level: 10, type: HT, tiers: [ 10, 12 ] },
     france_F10_AMX_50B:			{ level: 10, type: HT, tiers: [ 10, 12 ] },
     ussr_IS_4:				{ level: 10, type: HT, tiers: [ 10, 12 ] },
     ussr_IS_7:				{ level: 10, type: HT, tiers: [ 10, 12 ] },
     germany_Maus:			{ level: 10, type: HT, tiers: [ 10, 12 ] },
     usa_T110:				{ level: 10, type: HT, tiers: [ 10, 12 ] },
-    france-AMX_50Fosh_155		{ level: 10, type: TD, tiers: [ 10, 12 ] },
-    germany-JagdPz_E100			{ level: 10, type: TD, tiers: [ 10, 12 ] },
-    usa-T110E3				{ level: 10, type: TD, tiers: [ 10, 12 ] },
-    usa-T110E4				{ level: 10, type: TD, tiers: [ 10, 12 ] },
-    ussr-Object268			{ level: 10, type: TD, tiers: [ 10, 12 ] },
+    france_AMX_50Fosh_155:		{ level: 10, type: TD, tiers: [ 10, 12 ] },
+    germany_JagdPz_E100:		{ level: 10, type: TD, tiers: [ 10, 12 ] },
+    usa_T110E3:				{ level: 10, type: TD, tiers: [ 10, 12 ] },
+    usa_T110E4:				{ level: 10, type: TD, tiers: [ 10, 12 ] },
+    ussr_Object268:			{ level: 10, type: TD, tiers: [ 10, 12 ] },
 
     // non-standard
     germany_Bison_I:			{ level: 2,  type: SP, tiers: [ 3, 5 ] },
@@ -266,7 +266,7 @@ class wot.utils.VehicleInfo
     germany_VK1602:			{ level: 4,  type: LT, tiers: [ 5, 9 ] },
     ussr_Valentine_LL:			{ level: 4,  type: LT, tiers: [ 4, 6 ] },
     france_AMX40:			{ level: 4,  type: LT, tiers: [ 4, 6 ] },
-    france-ELC_AMX			{ level: 5,  type: LT, tiers: [ 6, 9 ] },
+    france_ELC_AMX:			{ level: 5,  type: LT, tiers: [ 6, 9 ] },
     germany_PzIV_Hydro:			{ level: 5,  type: MT, tiers: [ 5, 6 ] },
     ussr_Churchill_LL:			{ level: 5,  type: HT, tiers: [ 5, 6 ] },
     ussr_Matilda_II_LL:			{ level: 5,  type: MT, tiers: [ 5, 6 ] },
