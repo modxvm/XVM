@@ -1,12 +1,12 @@
-﻿XVM-2.4.2.test7:
-  * fixed bugs introduced in 2.4.2.test6
-
-XVM-2.4.2.test6:
+﻿XVM-2.5.0.test1:
+  * adaptation to WoT 0.7.5.CT1
+  * code refactoring
   * fixed bugs in "Fog of War" mode (incomplete)
   * file XVM.log in the game directory contains mod debugging information
   * added options:
       battle/clockFormat - show the clock on the Debug Panel (near FPS)
       battleLoading/clockFormat - show the clock on the Battle Loading Screen
+      battle/highlightVehicleIcon - setup highlighting of selected vehicle icon and squad
   * remove option:
       battleLoading/showClock - superseded by battleLoading/clockFormat
   * macros usage for vehicle text fields in Battle Loading and Statistic Form
@@ -16,24 +16,10 @@ XVM-2.4.2.test6:
   * clock and mod info on battle loading screen moved to the bottom info panel
   * wot-xvm-proxy: added new command line parameter "/noproxy" for disabling
     using of system proxy settings
-
-XVM-2.4.2.test5:
-XVM-2.4.2.test4:
-  * fixed bugs introduced in 2.4.2.test3
-
-XVM-2.4.2.test3:
-  * code refactoring
-  * BattleTimerBig.swf removed from mod archive
-
-XVM-2.4.2.test2:
-  * fixed chances calculation formula
-
-XVM-2.4.2.test1:
   * fixed ally icon position using standard markers
   * added experimental chance to win formula
-  * added new option:
-      battle/highlightVehicleIcon - setup highlighting of selected vehicle icon and squad
   * editor moved: http://www.koreanrandom.com/forum/topic/1422-/#entry11316
+  * BattleTimerBig.swf removed from mod archive
 
 XVM-2.4.1:
   * battle task animation removed

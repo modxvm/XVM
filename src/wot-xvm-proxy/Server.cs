@@ -148,7 +148,7 @@ namespace wot
             wotVersion = "SEA";
           else if (s.LastIndexOf("http://update.worldoftanks.vn") > -1)
             wotVersion = "VTC";
-          else if (s.LastIndexOf("http://update-ct.worldoftanks.net") > -1)
+          else if (s.LastIndexOf("http://update-ct.wargaming.net/") > -1)
             wotVersion = "CT";
         }
       }
