@@ -583,7 +583,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
     return 100;
   }
 
-  function XVMCreateNewTextFormat(config_font: Object)
+  function XVMCreateNewTextFormat(config_font: Object): TextFormat
   {
     try
     {
@@ -596,7 +596,8 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
         0x000000,
         config_font.bold,
         false, false, null, null,
-        config_font.align || "center");
+        config_font.align || "center",
+        0, 0, 0, 0);
     }
     catch (e)
     {
@@ -661,7 +662,7 @@ class wot.XVM extends net.wargaming.ingame.VehicleMarker
       var text = XVMFormatDynamicText(XVMFormatStaticText(msg), curHealth, delta);
 
       var n = damageHolder.getNextHighestDepth();
-      var damageField = damageHolder.createTextField("damageField" + n, n, 0, 0, 140, 20);
+      var damageField: TextField = damageHolder.createTextField("damageField" + n, n, 0, 0, 140, 20);
       var animation: TimelineLite = new TimelineLite({ onComplete:this.removeTextField, onCompleteParams:[damageField] });
 
       // For some reason, DropShadowFilter is not rendered when textfield contains only one character,

@@ -43,7 +43,7 @@ class wot.utils.Chance
         FormatChangeText(Locale.get("Global"), chG) + ", " +
         FormatChangeText(Locale.get("Per-vehicle"), chT);
       if (showExp)
-        htmlText += " | Exp: " + FormatChangeText("", chX1);
+        htmlText += " | Exp: " + FormatChangeText("", chX1) + " T=" + battleTier;
     }
 
     tf.htmlText = htmlText;
@@ -58,47 +58,10 @@ class wot.utils.Chance
     if (teamsCount.ally != teamsCount.enemy || teamsCount.ally == 0)
       return null;
 
-    var Xa = 0;
-    var Xe = 0;
-
     //Logger.add("eff=" + Config.s_config.const.AVG_EFF + " gwr=" + Config.s_config.const.AVG_GWR + " bat=" + Config.s_config.const.AVG_BATTLES);
 
-    for (var pname in StatData.s_data)
-    {
-      var pdata = StatData.s_data[pname];
-
-      var vi = VehicleInfo.getInfo(pdata.icon);
-      if (!vi || vi.level == 0)
-        return { error: "No data for: " + VehicleInfo.getName(pdata.icon) };
-
-      var tx = (vi.tiers[0] + vi.tiers[1]) / 2.0 - battleTier;
-
-      var eff: Number = pdata.stat.e || Config.s_config.const.AVG_EFF;
-      var gwr: Number = (pdata.stat.r || Config.s_config.const.AVG_GWR) / 100.0;
-      var bat: Number = (pdata.stat.b || Config.s_config.const.AVG_BATTLES) / 100000.0;
-
-      var m = eff * (1 + gwr - (Config.s_config.const.AVG_GWR / 100.0)) * (1 + 0.25 * tx) * (1 + bat);
-
-      //Logger.add("eff=" + eff + " gwr=" + gwr + " bat=" + bat + " m=" + m);
-
-      Xa += (pdata.team == Defines.TEAM_ALLY) ? m : 0;
-      Xe += (pdata.team == Defines.TEAM_ENEMY) ? m : 0;
-    }
-
-    return PrepareChanceResults(Xa, Xe);
-  }
-
-  private static function GetChanceT(teamsCount, battleTier): Object
-  {
-    // only equal and non empty team supported
-    if (teamsCount.ally != teamsCount.enemy || teamsCount.ally == 0)
-      return null;
-
-    var Xa = 0;
-    var Xe = 0;
-
-    //Logger.add("eff=" + Config.s_config.const.AVG_EFF + " gwr=" + Config.s_config.const.AVG_GWR + " bat=" + Config.s_config.const.AVG_BATTLES);
-
+    var Ka = 0;
+    var Ke = 0;
     var AVG_GWR = Config.s_config.const.AVG_GWR;
     for (var pname in StatData.s_data)
     {
@@ -108,35 +71,34 @@ class wot.utils.Chance
       if (!vi || vi.level == 0)
         return { error: "No data for: " + VehicleInfo.getName(pdata.icon) };
 
-      var tx = (vi.tiers[0] + vi.tiers[1]) / 2.0 - battleTier;
+      var Td = (vi.tiers[0] + vi.tiers[1]) / 2.0 - battleTier;
 
-      var eff: Number = pdata.stat.e || Config.s_config.const.AVG_EFF;
+      var E: Number = pdata.stat.e || Config.s_config.const.AVG_EFF;
+      var Rg: Number = (pdata.stat.r || AVG_GWR) / 100.0;
 
-      var twr_pre: Number = Math.max(-10, Math.min(10, (pdata.stat.tr || AVG_GWR) - AVG_GWR));
-      var twr = twr_pre / 100.0 * 4;
+      var B: Number = pdata.stat.b || Config.s_config.const.AVG_BATTLES;
+      var Bn = (B < 10000) ? (B - 2000) / 10000.0 : 0.8 + (B - 10000) / 100000.0;
 
-      var m = eff * (1 + twr) * (1 + 0.25 * tx);
+      var K = E * (1 + Rg - (AVG_GWR / 100.0)) * (1 + 0.25 * Td) * (1 + Bn);
 
-      //Logger.add("eff=" + eff + " twr=" + twr + " m=" + m);
-
-      Xa += (pdata.team == Defines.TEAM_ALLY) ? m : 0;
-      Xe += (pdata.team == Defines.TEAM_ENEMY) ? m : 0;
+      Ka += (pdata.team == Defines.TEAM_ALLY) ? K : 0;
+      Ke += (pdata.team == Defines.TEAM_ENEMY) ? K : 0;
     }
 
-    return PrepareChanceResults(Xa, Xe);
+    return PrepareChanceResults(Ka, Ke);
   }
 
-  private static function GetChanceX1(teamsCount, battleTier): Object
+  private static function GetChanceT(teamsCount, battleTier): Object
   {
     // only equal and non empty team supported
     if (teamsCount.ally != teamsCount.enemy || teamsCount.ally == 0)
       return null;
 
-    var Xa = 0;
-    var Xe = 0;
-
     //Logger.add("eff=" + Config.s_config.const.AVG_EFF + " gwr=" + Config.s_config.const.AVG_GWR + " bat=" + Config.s_config.const.AVG_BATTLES);
 
+    var Ka = 0;
+    var Ke = 0;
+    var AVG_GWR = Config.s_config.const.AVG_GWR;
     for (var pname in StatData.s_data)
     {
       var pdata = StatData.s_data[pname];
@@ -145,23 +107,71 @@ class wot.utils.Chance
       if (!vi || vi.level == 0)
         return { error: "No data for: " + VehicleInfo.getName(pdata.icon) };
 
-      var tx = (vi.tiers[0] + vi.tiers[1]) / 2.0 - battleTier;
+      var Td = (vi.tiers[0] + vi.tiers[1]) / 2.0 - battleTier;
 
-      var eff: Number = pdata.stat.e || Config.s_config.const.AVG_EFF;
-      var gwr: Number = (pdata.stat.r || Config.s_config.const.AVG_GWR) / 100.0;
+      var E: Number = pdata.stat.e || Config.s_config.const.AVG_EFF;
 
-      var bat: Number = pdata.stat.b || Config.s_config.const.AVG_BATTLES;
-      bat = (bat < 10000) ? (bat - 2000) / 10000.0 : 0.8 + (bat - 10000) / 100000.0;
+      var Rt_pre: Number = Math.max(-10, Math.min(10, (pdata.stat.tr || AVG_GWR) - AVG_GWR));
+      var Rt = Rt_pre / 100.0 * 4;
 
-      var m = eff * (1 + gwr - (Config.s_config.const.AVG_GWR / 100.0)) * (1 + 0.25 * tx) * (1 + bat);
+      var K = E * (1 + Rt) * (1 + 0.25 * Td);
 
-      //Logger.add("eff=" + eff + " gwr=" + gwr + " bat=" + bat + " m=" + m);
-
-      Xa += (pdata.team == Defines.TEAM_ALLY) ? m : 0;
-      Xe += (pdata.team == Defines.TEAM_ENEMY) ? m : 0;
+      Ka += (pdata.team == Defines.TEAM_ALLY) ? K : 0;
+      Ke += (pdata.team == Defines.TEAM_ENEMY) ? K : 0;
     }
 
-    return PrepareChanceResults(Xa, Xe);
+    return PrepareChanceResults(Ka, Ke);
+  }
+
+  private static function GetChanceX1(teamsCount, battleTier): Object
+  {
+    // only equal and non empty team supported
+    if (teamsCount.ally != teamsCount.enemy || teamsCount.ally == 0)
+      return null;
+
+    var Ka = 0;
+    var Ke = 0;
+    //var Ta = 0;
+    //var Te = 0;
+    var AVG_GWR = Config.s_config.const.AVG_GWR;
+    for (var pname in StatData.s_data)
+    {
+      var pdata = StatData.s_data[pname];
+      var vi = VehicleInfo.getInfo(pdata.icon);
+      if (!vi || vi.level == 0)
+        return { error: "No data for: " + VehicleInfo.getName(pdata.icon) };
+
+      var T = vi.tiers[1] - battleTier;
+      var R: Number = (pdata.stat.tr || AVG_GWR) / 100;
+
+      var K = T * R;
+
+      Ka += (pdata.team == Defines.TEAM_ALLY) ? K : 0;
+      Ke += (pdata.team == Defines.TEAM_ENEMY) ? K : 0;
+      //Ta += (pdata.team == Defines.TEAM_ALLY) ? T : 0;
+      //Te += (pdata.team == Defines.TEAM_ENEMY) ? T : 0;
+
+      //Logger.add("T=" + T + " R=" + R);
+    }
+
+    //var Wa = Ka / Ta;
+    //var We = Ke / Te;
+
+    //var M = (Wa - We) * 100;
+    //var P = 48 + M * teamsCount.ally;
+
+    //Logger.add("Ka=" + Ka + " Ta=" + Ta + " Wa=" + Wa);
+    //Logger.add("Ke=" + Ke + " Te=" + Te + " We=" + We);
+    //Logger.add("M=" + M + " P=" + P);
+
+/*    return
+    {
+      ally_value: Wa,
+      enemy_value: We,
+      percent: Math.round(P),
+      raw: Math.round(P)
+    };*/
+    return PrepareChanceResults(Ka, Ke);
   }
 
   // return: { ally: Number, enemy: Number }
@@ -203,49 +213,44 @@ class wot.utils.Chance
 
   private static function GuessBattleTier(): Number
   {
-    var vis = [];
+    // 1. Collect all vehicles info
+    var vis: Array = [];
     for (var pname in StatData.s_data)
     {
       var pdata = StatData.s_data[pname];
       var vi = VehicleInfo.getInfo(pdata.icon);
       if (!vi || vi == 0)
         return 0;
-      vis.push(vi);
+      vis.push( {
+        level: vi.level,
+        Tmin: vi.tiers[0],
+        Tmax: vi.tiers[1]
+      });
     }
 
-    // 1. Find top tank tiers
-    var tierMin = 1;
-    var tierMax = 1;
+    // 2. Sort vehicles info by top tiers descending
+    vis.sortOn("Tmax", Array.NUMERIC | Array.DESCENDING);
+
+    // 3. Find minimum Tmax and maximum Tmin
+    var Tmin = vis[0].Tmin;
+    var Tmax = vis[0].Tmax;
+    //Logger.add("T before=" + Tmin + ".." + Tmax);
     var vis_length = vis.length;
-    for (var i = 0; i < vis_length; ++i)
+    for (var i = 1; i < vis_length; ++i)
     {
       var vi = vis[i];
-      if (vi.tiers[1] < tierMax)
+      //Logger.add("l=" + vi.level + " Tmin=" + vi.Tmin + " Tmax=" + vi.Tmax);
+      if (vi.Tmax < Tmin) // Skip "trinkets"
         continue;
-      if (vi.tiers[1] > tierMax)
-      {
-        tierMax = vi.tiers[1];
-        tierMin = vi.tiers[0];
-        continue;
-      }
-      if (vi.tiers[0] > tierMin)
-        tierMin = vi.tiers[0];
+      if (vi.Tmin > Tmin)
+        Tmin = vi.Tmin;
+      if (vi.Tmax < Tmax)
+        Tmax = vi.Tmax;
     }
-    //Logger.add("tiers=" + tierMin + ".." + tierMax);
+    //Logger.add("T after=" + Tmin + ".." + Tmax);
 
-    for (var i = 0; i < vis_length; ++i)
-    {
-      var vi = vis[i];
-      if (vi.tiers[1] < tierMin)
-        continue;
-      if (vi.tiers[1] == tierMin)
-        return tierMin;
-      tierMax = Math.min(vi.tiers[1], tierMax);
-      //Logger.add("tiers=" + tierMin + ".." + tierMax);
-    }
-
-    //Logger.add("avg tier: " + (tierMax + tierMin) / 2.0);
-    return (tierMax + tierMin) / 2.0;
+    // 4. Calculate average tier
+    return (Tmax + Tmin) / 2.0;
   }
 
   private static function FormatChangeText(txt, chance)
