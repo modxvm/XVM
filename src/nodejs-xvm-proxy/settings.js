@@ -12,14 +12,14 @@ module.exports = (function()
         collectionName: "<collection>",
         missedCollectionName: "<missed_collection>",
         usersCollectionName: "<users_collection>",
-        statHostMaxConnections: 10,
+        statHostMaxConnections: 100,
         statHosts: [
-            "worldoftanks.ru",      // RU:            0 ..  499999999
-            "worldoftanks.eu",      // EU:    500000000 ..  999999999
-            "worldoftanks.com",     // NA:   1000000000 .. 1499999999
-            "worldoftanks-sea.com", // ???: 15000000000 .. 1999999999
-            "worldoftanks-sea.com", // SEA: 20000000000 .. 2499999999
-            "wot.go.vn"             // VTC: 25000000000 .. 2999999999
+            "worldoftanks.ru",      // RU:           0 ..  49999999
+            "worldoftanks.eu",      // EU:    50000000 ..  99999999
+            "worldoftanks.com",     // NA:   100000000 .. 149999999
+            "worldoftanks-sea.com", // ???: 1500000000 .. 199999999
+            "worldoftanks-sea.com", // SEA: 2000000000 .. 249999999
+            "wot.go.vn"             // VTC: 2500000000 .. 299999999
         ],
         statHostsTimeouts: [
             5000,      // RU
@@ -52,18 +52,9 @@ module.exports = (function()
                     "<msg line N"
                 ].join("\n")
             },
-            SEA: {
-                ver: "<version>",
-                message: ""
-            },
-            VTC: {
-                ver: "<version>",
-                message: ""
-            },
-            CT: {
-                ver: "<version>",
-                message: ""
-            }
+            SEA: { ver: "<version>", message: "" },
+            VTC: { ver: "<version>", message: "" },
+            CT: {  ver: "<version>", message: "" }
         }
     }
 })();

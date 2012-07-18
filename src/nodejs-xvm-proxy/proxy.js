@@ -32,7 +32,8 @@ var usageStat = {
     updated: 0,
     missed: 0,
     updatesFailed: 0,
-    connections: []
+    connections: [],
+    maxConnections: []
 };
 
     // Fork workers.
@@ -48,6 +49,10 @@ for (var i = 0; i < /*numCPUs*/ 1; i++) {
             if (msg.missed) usageStat.missed += msg.missed;
             if (msg.updatesFailed) usageStat.updatesFailed += msg.updatesFailed;
             if (msg.connections) usageStat.connections[msg.hostId] = (usageStat.connections[msg.hostId] || 0) + msg.connections;
+            if (msg.maxConnections && usageStat.maxConnections[msg.hostId] != msg.maxConnections) {
+                usageStat.maxConnections[msg.hostId] = msg.maxConnections;
+//                utils.log("> connections limits: [" + usageStat.maxConnections.join(", ") + "]");
+            }
         } else if (msg.cmd == "cmd") {
             //w.send({ chat: 'Ok worker, Master got the message! Over and out!' });
         }
@@ -60,7 +65,7 @@ setInterval(function() {
     var d = parseInt(uptime / (60 * 60 * 24));
     var h = String(parseInt((uptime / 3600) % 24)).lpad("0", 2);
     var m = String(parseInt((uptime / 60) % 60)).lpad("0", 2);
-    utils.log("> uptime  requests  rq/s   players  pl/s  cached updated  missed updfail connections");
+    utils.log("> uptime  requests  rq/s   players  pl/s  cached updated  missed updfail connections/limits");
     utils.log(">" +
         ((d == 0 ? "" : d + "d") + h + "h" + m).lpad(" ", 7) +
         String(usageStat.requests).lpad(" ", 10) + " " + (usageStat.requests / uptime).toFixed().lpad(" ", 5) +
@@ -69,5 +74,5 @@ setInterval(function() {
         ((usageStat.updated / usageStat.players * 100).toFixed(2) + "%").lpad(" ", 8) +
         ((usageStat.missed / usageStat.players * 100).toFixed(2) + "%").lpad(" ", 8) +
         ((usageStat.updatesFailed / usageStat.players * 100).toFixed(2) + "%").lpad(" ", 8) +
-        " [" + usageStat.connections.join(", ") + "]");
+        " [" + usageStat.connections.join(", ") + "]/[" + usageStat.maxConnections.join(", ") + "]");
 }, settings.usageStatShowPeriod);

@@ -24,7 +24,9 @@ for (var i = 0; i < settings.statHosts.length; ++i) {
         lastError: null,
         waiting: null,
         error_shown: false,
-        connections: 0
+        connections: 0,
+        maxConnections: 30,
+        lastMaxConnectionUpdate: null
     });
 }
 
@@ -70,7 +72,7 @@ var makeSingleRequest = function(id, callback, force) {
         return;
     }
 
-    if (hd.connections >= settings.statHostMaxConnections)
+    if (hd.connections >= hd.maxConnections)
     {
         callback(null, null);
         return;
@@ -151,8 +153,14 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, response, sta
                 hd.connections--;
                 process.send({ usage: 1, hostId: statHostId, connections: -1 });
 
-                if (curResult.__error) {
+                if (curResult.__error || !hd.lastMaxConnectionUpdate || (now - hd.lastMaxConnectionUpdate) > 5000)
+                {
+                    hd.lastMaxConnectionUpdate = now;
+                    hd.maxConnections = Math.max(1, Math.min(settings.statHostMaxConnections, hd.maxConnections + (curResult.__error ? -1 : 1)));
+                    process.send({ usage: 1, hostId: statHostId, maxConnections: hd.maxConnections });
+                }
 
+                if (curResult.__error) {
                     resultItem.st = "error";
                     hd.lastError = now;
                     if (!hd.error_shown) {
@@ -226,6 +234,7 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, response, sta
                     if (result.players[i].status != "ok") {
                         result.players[i] = pl;
                         process.send({ usage: 1, cached: 1, updatesFailed: 1 });
+                        missed_collection.update({ _id: pl.id }, { _id: pl.id, missed:false }, { upsert: true });
                         failed_count++;
                     }
                     skip = true;
@@ -246,7 +255,7 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, response, sta
                 if (missed_count < 3)
                   missed_ids.push(player.id);
                 missed_count++;
-                missed_collection.update({ _id: player.id }, { _id: player.id }, { upsert: true });
+                missed_collection.update({ _id: player.id }, { _id: player.id, missed:true }, { upsert: true });
             } else {
                 // Return only one vehicle data
                 if (player.v)
