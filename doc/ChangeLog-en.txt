@@ -1,5 +1,6 @@
 ﻿XVM-2.5.0.test2:
   * changes in chance to win formulas
+  * show chance to win on final statistic form
 
 XVM-2.5.0.test1:
   * adaptation to WoT 0.7.5.CT1

@@ -2,9 +2,13 @@
  * ...
  * @author sirmax2
  */
+import wot.utils.Chance;
 import wot.utils.Config;
+import wot.utils.Defines;
 import wot.utils.GlobalEventDispatcher;
 import wot.utils.Logger;
+import wot.utils.StatData;
+import wot.utils.StatLoader;
 import wot.utils.Utils;
 
 class wot.BattleMain
@@ -21,18 +25,20 @@ class wot.BattleMain
   //static var statHidden;
 
   private static var dummy = Logger.dummy;
-  
+
   static function main()
   {
     Utils.TraceXvmModule("Battle:main");
 
     GlobalEventDispatcher.addEventListener("config_loaded", BattleMainConfigLoaded);
+    GlobalEventDispatcher.addEventListener("config_loaded", StatLoader.LoadLastStat);
     Config.LoadConfig("BattleMain.as");
 
     instance = new BattleMain();
     gfx.io.GameDelegate.addCallBack("battle.showPostmortemTips", instance, "showPostmortemTips");
     gfx.io.GameDelegate.addCallBack("Stage.Update", instance, "onUpdateStage");
     gfx.io.GameDelegate.addCallBack("battle.arenaData", instance, "setArenaData");
+    gfx.io.GameDelegate.addCallBack("battle.showStatus", instance, "showFinalStatus");
   }
 
   private static function BattleMainConfigLoaded()
@@ -40,16 +46,16 @@ class wot.BattleMain
     //Logger.add("BattleMainConfigLoaded()");
 
     GlobalEventDispatcher.removeEventListener("config_loaded", BattleMainConfigLoaded);
-    
+
     //Logger.addObject(_root.debugPanel.fgMC.lag);
     //_root.timerBig.win.winText
 
     // Disable ugly battle task animation
     _root.timerBig.win.winText.duration = 1;
-    
+
     if (Config.s_config.battle.removePanelsModeSwitcher)
       _root.switcher_mc._visible = false;
-      
+
     // Show Clocks
     ShowClock(Config.s_config.battle.clockFormat);
   }
@@ -72,22 +78,62 @@ class wot.BattleMain
 
   function showPostmortemTips(movingUpTime, showTime, movingDownTime)
   {
+    //Logger.add("Battle::showPostmortemTips");
     if (Config.s_config.battle.showPostmortemTips)
       _root.showPostmortemTips(movingUpTime, showTime, movingDownTime);
   }
 
   function setArenaData(mapText, battleType, battleName, team1name, team2name, winText)
   {
-    //Logger.add("setArenaData(" + mapText + ", " + battleType + ", " + battleName + ", " + team1name + ", " + team2name + ", " + winText + ")");
+    //Logger.add("Battle::setArenaData(" + mapText + ", " + battleType + ", " + battleName + ", " + team1name + ", " + team2name + ", " + winText + ")");
     _root.setArenaData(mapText, battleType, battleName, team1name, team2name, winText);
   }
-  
+
   function onUpdateStage(width, height)
   {
-    //wot.utils.Logger.add("onUpdateStage");
+    //Logger.add("Battle::onUpdateStage()");
     _root.onUpdateStage(width, height);
     //_root.minimap.foreground._alpha = 30;
     //_root.minimap.foregroundHR._alpha = 30;
     //wot.utils.Logger.addObject(_root);
+  }
+
+  var finalStatusShown = false;
+  function showFinalStatus(statusText)
+  {
+    if (finalStatusShown)
+      return;
+
+    //Logger.add("Battle::showFinalStatus(): " + statusText);
+
+    _root.showFinalStatus(statusText);
+
+    if (!_root.finalDialog || !_root.finalDialog.form)
+      return;
+
+    finalStatusShown = true;
+
+    if (!Config.s_config.rating.showPlayersStatistics || !Config.s_config.statisticForm.showChances)
+      return;
+
+    for (var i = 0; i < _root.statsData.team1.length; ++i)
+    {
+      var data = _root.statsData.team1[i];
+      var pname = data.label.toUpperCase();
+      if (!StatData.s_data[pname] || !StatData.s_data[pname].playerId)
+        StatLoader.AddPlayerData(data.uid, data.label, data.vehicle, data.icon, Defines.TEAM_ALLY);
+    }
+
+    for (var i = 0; i < _root.statsData.team2.length; ++i)
+    {
+      var data = _root.statsData.team2[i];
+      var pname = data.label.toUpperCase();
+      if (!StatData.s_data[pname] || !StatData.s_data[pname].playerId)
+        StatLoader.AddPlayerData(data.uid, data.label, data.vehicle, data.icon, Defines.TEAM_ENEMY);
+    }
+
+    var t: TextField = _root.finalDialog.form.form.statusText;
+    t.html = true;
+    Chance.ShowChance(t, Config.s_config.statisticForm.showChancesExp);
   }
 }

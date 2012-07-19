@@ -14,23 +14,21 @@ class wot.utils.Chance
 {
   private static var dummy = Logger.dummy; // avoid import warning
 
+  private static var showExp: Boolean = false;
+  private static var battleTier: Number = 0;
+  
   public static function ShowChance(tf: TextField, showExp: Boolean): String
   {
     var teamsCount: Object = CalculateTeamPlayersCount();
-    var battleTier: Number = Chance.GuessBattleTier();
-    //Logger.add("teamsCount: [" + teamsCount[0] + "," + teamsCount[1] + "], tier: " + tier);
+    // only equal and non empty team supported
+    if (teamsCount.ally != teamsCount.enemy || teamsCount.ally == 0)
+      return tf.text;
 
-    var chG = GetChanceG(teamsCount, battleTier);
-    var chT = GetChanceT(teamsCount, battleTier);
-    var chX1 = GetChanceX1(teamsCount, battleTier);
-    //var chX2 = GetChanceX2(teamsCount, battleTier);
+    Chance.showExp = showExp;
+    Chance.battleTier = Chance.GuessBattleTier();
 
-    if (chG == null && chT == null)
-      return tf.htmlText;
-
-    tf.html = true;
-    tf._width += 300;
-    tf._x -= 150;
+    var chG = GetChance(ChanceFuncG);
+    var chT = GetChance(ChanceFuncT);
 
     var htmlText;
     if (chG.error)
@@ -43,7 +41,11 @@ class wot.utils.Chance
         FormatChangeText(Locale.get("Global"), chG) + ", " +
         FormatChangeText(Locale.get("Per-vehicle"), chT);
       if (showExp)
-        htmlText += " | Exp: " + FormatChangeText("", chX1) + " T=" + battleTier;
+      {
+        var chX1 = GetChance(ChanceFuncX1);
+        var chX2 = GetChance(ChanceFuncX2);
+        htmlText += " | Exp: " + FormatChangeText("", chX1) + ", " + FormatChangeText("", chX2) + " T=" + battleTier;
+      }
     }
 
     tf.htmlText = htmlText;
@@ -51,18 +53,12 @@ class wot.utils.Chance
   }
 
   // PRIVATE
-
-  private static function GetChanceG(teamsCount, battleTier): Object
+  private static var _x1Logged = false;
+  private static var _x2Logged = false;
+  private static function GetChance(chanceFunc: Function): Object
   {
-    // only equal and non empty team supported
-    if (teamsCount.ally != teamsCount.enemy || teamsCount.ally == 0)
-      return null;
-
-    //Logger.add("eff=" + Config.s_config.const.AVG_EFF + " gwr=" + Config.s_config.const.AVG_GWR + " bat=" + Config.s_config.const.AVG_BATTLES);
-
     var Ka = 0;
     var Ke = 0;
-    var AVG_GWR = Config.s_config.const.AVG_GWR;
     for (var pname in StatData.s_data)
     {
       var pdata = StatData.s_data[pname];
@@ -71,107 +67,78 @@ class wot.utils.Chance
       if (!vi || vi.level == 0)
         return { error: "No data for: " + VehicleInfo.getName(pdata.icon) };
 
-      var Td = (vi.tiers[0] + vi.tiers[1]) / 2.0 - battleTier;
-
-      var E: Number = pdata.stat.e || Config.s_config.const.AVG_EFF;
-      var Rg: Number = (pdata.stat.r || AVG_GWR) / 100.0;
-
-      var B: Number = pdata.stat.b || Config.s_config.const.AVG_BATTLES;
-      var Bn = (B < 10000) ? (B - 2000) / 10000.0 : 0.8 + (B - 10000) / 100000.0;
-
-      var K = E * (1 + Rg - (AVG_GWR / 100.0)) * (1 + 0.25 * Td) * (1 + Bn);
+      var K = chanceFunc(vi, pdata.team, pdata.stat);
 
       Ka += (pdata.team == Defines.TEAM_ALLY) ? K : 0;
       Ke += (pdata.team == Defines.TEAM_ENEMY) ? K : 0;
+    }
+
+    if (!_x1Logged && chanceFunc == ChanceFuncX1)
+    {
+      _x1Logged = true;
+      Logger.add("X1: K = " + Ka + " / " + Ke);
+    }
+    if (!_x2Logged && chanceFunc == ChanceFuncX2)
+    {
+      _x2Logged = true;
+      Logger.add("X2: K = " + Ka + " / " + Ke);
     }
 
     return PrepareChanceResults(Ka, Ke);
   }
 
-  private static function GetChanceT(teamsCount, battleTier): Object
+  private static function ChanceFuncG(vi, team, stat): Number
   {
-    // only equal and non empty team supported
-    if (teamsCount.ally != teamsCount.enemy || teamsCount.ally == 0)
-      return null;
+    var Td = (vi.tiers[0] + vi.tiers[1]) / 2.0 - battleTier;
 
-    //Logger.add("eff=" + Config.s_config.const.AVG_EFF + " gwr=" + Config.s_config.const.AVG_GWR + " bat=" + Config.s_config.const.AVG_BATTLES);
+    var E: Number = stat.e || Config.s_config.const.AVG_EFF;
+    var Rg: Number = (stat.r || Config.s_config.const.AVG_GWR) / 100.0;
 
-    var Ka = 0;
-    var Ke = 0;
-    var AVG_GWR = Config.s_config.const.AVG_GWR;
-    for (var pname in StatData.s_data)
-    {
-      var pdata = StatData.s_data[pname];
+    var B: Number = stat.b || Config.s_config.const.AVG_BATTLES;
+    var Bn = (B < 10000) ? (B - 2000) / 10000.0 : 0.8 + (B - 10000) / 100000.0;
 
-      var vi = VehicleInfo.getInfo(pdata.icon);
-      if (!vi || vi.level == 0)
-        return { error: "No data for: " + VehicleInfo.getName(pdata.icon) };
+    return E * (1 + Rg - (Config.s_config.const.AVG_GWR / 100.0)) * (1 + 0.25 * Td) * (1 + Bn);
+  }
+  
+  private static function ChanceFuncT(vi, team, stat): Number
+  {
+    var Td = (vi.tiers[0] + vi.tiers[1]) / 2.0 - battleTier;
 
-      var Td = (vi.tiers[0] + vi.tiers[1]) / 2.0 - battleTier;
+    var E: Number = stat.e || Config.s_config.const.AVG_EFF;
 
-      var E: Number = pdata.stat.e || Config.s_config.const.AVG_EFF;
+    var Rt_pre: Number = Math.max(-10, Math.min(10, (stat.tr || Config.s_config.const.AVG_GWR) - Config.s_config.const.AVG_GWR));
+    var Rt = Rt_pre / 100.0 * 4;
 
-      var Rt_pre: Number = Math.max(-10, Math.min(10, (pdata.stat.tr || AVG_GWR) - AVG_GWR));
-      var Rt = Rt_pre / 100.0 * 4;
-
-      var K = E * (1 + Rt) * (1 + 0.25 * Td);
-
-      Ka += (pdata.team == Defines.TEAM_ALLY) ? K : 0;
-      Ke += (pdata.team == Defines.TEAM_ENEMY) ? K : 0;
-    }
-
-    return PrepareChanceResults(Ka, Ke);
+    return E * (1 + Rt) * (1 + 0.25 * Td);
   }
 
-  private static function GetChanceX1(teamsCount, battleTier): Object
+  private static function ChanceFuncX1(vi, team, stat): Number
   {
-    // only equal and non empty team supported
-    if (teamsCount.ally != teamsCount.enemy || teamsCount.ally == 0)
-      return null;
+    var R = stat.tr || Config.s_config.const.AVG_GWR;
+    //var T = (vi.tiers[0] + vi.tiers[1]) / 2.0 - battleTier;
+    //var T = vi.tiers[1] - battleTier;
 
-    var Ka = 0;
-    var Ke = 0;
-    //var Ta = 0;
-    //var Te = 0;
-    var AVG_GWR = Config.s_config.const.AVG_GWR;
+    //Logger.add(stat.tr + " R=" + R + " T=" + T);
+    return R;// * Math.max(0, 1 + 0.25 * T);
+  }
+
+  private static function ChanceFuncX2(vi, team, stat): Number
+  {
+/*    var B = 0;
     for (var pname in StatData.s_data)
     {
       var pdata = StatData.s_data[pname];
-      var vi = VehicleInfo.getInfo(pdata.icon);
-      if (!vi || vi.level == 0)
-        return { error: "No data for: " + VehicleInfo.getName(pdata.icon) };
+      if (pdata.team == team)
+      {
+        var v = VehicleInfo.getInfo(pdata.icon);
+        if (v && v.level > 0)
+          B += v.tiers[1] - battleTier;
+      }
+    }*/
 
-      var T = vi.tiers[1] - battleTier;
-      var R: Number = (pdata.stat.tr || AVG_GWR) / 100;
-
-      var K = T * R;
-
-      Ka += (pdata.team == Defines.TEAM_ALLY) ? K : 0;
-      Ke += (pdata.team == Defines.TEAM_ENEMY) ? K : 0;
-      //Ta += (pdata.team == Defines.TEAM_ALLY) ? T : 0;
-      //Te += (pdata.team == Defines.TEAM_ENEMY) ? T : 0;
-
-      //Logger.add("T=" + T + " R=" + R);
-    }
-
-    //var Wa = Ka / Ta;
-    //var We = Ke / Te;
-
-    //var M = (Wa - We) * 100;
-    //var P = 48 + M * teamsCount.ally;
-
-    //Logger.add("Ka=" + Ka + " Ta=" + Ta + " Wa=" + Wa);
-    //Logger.add("Ke=" + Ke + " Te=" + Te + " We=" + We);
-    //Logger.add("M=" + M + " P=" + P);
-
-/*    return
-    {
-      ally_value: Wa,
-      enemy_value: We,
-      percent: Math.round(P),
-      raw: Math.round(P)
-    };*/
-    return PrepareChanceResults(Ka, Ke);
+    var R = stat.tr || Config.s_config.const.AVG_GWR;
+    var T = vi.tiers[1] - battleTier;
+    return (R * T);// / B;
   }
 
   // return: { ally: Number, enemy: Number }
@@ -249,8 +216,10 @@ class wot.utils.Chance
     }
     //Logger.add("T after=" + Tmin + ".." + Tmax);
 
-    // 4. Calculate average tier
-    return (Tmax + Tmin) / 2.0;
+    //// 4. Calculate average tier
+    //return (Tmax + Tmin) / 2.0;
+    // 4. Return max tier
+    return Tmax;
   }
 
   private static function FormatChangeText(txt, chance)

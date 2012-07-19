@@ -134,6 +134,9 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     if (!s_chanceField)
     {
       s_chanceField = _root.statsDialog.battleText;
+      s_chanceField.html = true;
+      s_chanceField._width += 300;
+      s_chanceField._x -= 150;
       s_chanceText = Chance.ShowChance(s_chanceField, Config.s_config.statisticForm.showChancesExp);
     }
     if (s_chanceField.htmlText != s_chanceText)

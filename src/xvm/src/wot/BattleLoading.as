@@ -2,12 +2,12 @@
  * ...
  * @author sirmax2
  */
+import wot.utils.Chance;
 import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.GlobalEventDispatcher;
 import wot.utils.Logger;
 import wot.utils.StatLoader;
-import wot.utils.Chance;
 import wot.utils.Utils;
 
 class wot.BattleLoading extends net.wargaming.BattleLoading
@@ -48,8 +48,8 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
         "  loadEnemyStatsInFogOfWar=" + Config.s_config.rating.loadEnemyStatsInFogOfWar + "\n" +
         "  useStandardMarkers=" + Config.s_config.battle.useStandardMarkers);
 
-      // Force stats loading after 0.1 sec if enabled (for 12x12 battles, FogOfWar, ...)
-      _global.setTimeout(function() { StatLoader.StartLoadData(Defines.COMMAND_RUN); }, 100);
+      // Force stats loading after 0.5 sec if enabled (for 12x12 battles, FogOfWar, ...)
+      _global.setTimeout(function() { StatLoader.StartLoadData(Defines.COMMAND_RUN); }, 500);
     }
   }
 
@@ -79,6 +79,9 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
       if (!s_chanceField)
       {
         s_chanceField = form_mc.battleText;
+        s_chanceField.html = true;
+        s_chanceField._width += 300;
+        s_chanceField._x -= 150;
         s_chanceText = Chance.ShowChance(s_chanceField, Config.s_config.battleLoading.showChancesExp);
       }
       if (s_chanceField.htmlText != s_chanceText)
@@ -118,7 +121,7 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
       setTipText(event.error, true);
     }
   }
-  
+
   private function setTipText(text, isError)
   {
     var tip: TextField = form_mc.tipText;
