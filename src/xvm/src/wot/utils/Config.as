@@ -179,6 +179,7 @@ class wot.utils.Config
             var curr = Utils.elapsedMSec(start, new Date());
             Logger.add("DEBUG TIME: ReloadXvmConfig(): Apply: " + (curr - diff) + " ms");
           }
+          GlobalEventDispatcher.dispatchEvent({ type: "set_info" }); // Just show version
         }
       }
       catch (ex)

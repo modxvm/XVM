@@ -26,7 +26,6 @@ class wot.BattleLoading extends net.wargaming.BattleLoading
     Config.LoadConfig("BattleLoading.as");
 
     GlobalEventDispatcher.addEventListener("set_info", this, SetInfoFieldData);
-    SetInfoFieldData({ });
   }
 
   public function BattleLoadingConfigLoaded()

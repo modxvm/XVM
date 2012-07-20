@@ -1,6 +1,7 @@
 ﻿XVM-2.5.0.test2:
   * changes in chance to win formulas
   * show chance to win on final statistic form
+  * fixed mod version display when run without proxy
 
 XVM-2.5.0.test1:
   * adaptation to WoT 0.7.5.CT1
