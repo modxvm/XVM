@@ -132,8 +132,26 @@ class wot.BattleMain
         StatLoader.AddPlayerData(data.uid, data.label, data.vehicle, data.icon, Defines.TEAM_ENEMY);
     }
 
-    var t: TextField = _root.finalDialog.form.form.statusText;
-    t.html = true;
-    Chance.ShowChance(t, Config.s_config.statisticForm.showChancesExp);
+    //Logger.addObject(_root.finalDialog.form.form, "form", 2);
+
+    var t: TextField = null;
+    for (var i in _root.finalDialog.form.form)
+    {
+      if (!Utils.startsWith("instance", i))
+        continue;
+      var v = _root.finalDialog.form.form[i];
+      if (v instanceof TextField)
+      {
+        t = v;
+        break;
+      }
+    }
+
+    if (t)
+    {
+      t.html = true;
+      t.text = "";
+      Chance.ShowChance(t, Config.s_config.statisticForm.showChancesExp);
+    }
   }
 }

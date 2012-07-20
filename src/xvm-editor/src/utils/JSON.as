@@ -43,7 +43,8 @@ package utils
     case 'object':
         if (arg) {
             if (arg is Array) {
-                for (i = 0; i < arg.length; ++i) {
+                var len = arg.length;
+                for (i = 0; i < len; ++i) {
                     v = stringify(arg[i], indent + "  ");
                     if (s) {
                         s += ',\n';
@@ -77,10 +78,10 @@ package utils
                 if (c == '\\' || c == '"') {
                     s += '\\';
                 }
-				if (c == '%')
-					s += '\\u0025';
-				else
-                	s += c;
+                if (c == '%')
+                    s += '\\u0025';
+                else
+                    s += c;
             } else {
                 switch (c) {
                     case '\b':

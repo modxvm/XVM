@@ -30,14 +30,14 @@ class wot.utils.Chance
     var chG = GetChance(ChanceFuncG);
     var chT = GetChance(ChanceFuncT);
 
-    var htmlText;
+    var htmlText = tf.text == "" ? "" : tf.text + " | ";
     if (chG.error)
-      htmlText = tf.text + " | <font color='#FF8080'>" + Locale.get("Chance error") + "[G]: " + chG.error + "</font>";
+      htmlText += "<font color='#FF8080'>" + Locale.get("Chance error") + "[G]: " + chG.error + "</font>";
     else if (chT.error)
-      htmlText = tf.text + " | <font color='#FF8080'>" + Locale.get("Chance error") + "[T]: " + chG.error + "</font>";
+      htmlText += "<font color='#FF8080'>" + Locale.get("Chance error") + "[T]: " + chG.error + "</font>";
     else
     {
-      htmlText = tf.text + " | " + Locale.get("Chance to win") + ": " +
+      htmlText += Locale.get("Chance to win") + ": " +
         FormatChangeText(Locale.get("Global"), chG) + ", " +
         FormatChangeText(Locale.get("Per-vehicle"), chT);
       if (showExp)

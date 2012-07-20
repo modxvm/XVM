@@ -33,37 +33,61 @@ USAGE:
 
 class com.xvm.JSON {
 
-  static function stringify(arg):String {
+  static var maxDepth: Number = undefined;
+  static var curDepth: Number = undefined;
+  static function stringifyDepth(arg, depth):String {
+    maxDepth = depth;
+    curDepth = 0;
+    var s = stringify(arg);
+    maxDepth = undefined;
+    curDepth = undefined;
+    return s;
+  }
+
+  public static function stringify(arg, indent:String):String {
 
   var c, i, l, s = '', v;
 
+  if (!indent)
+    indent = "";
+  
   switch (typeof arg) {
+  case 'movieclip':
   case 'object':
+      if (maxDepth && maxDepth > 0 && curDepth >= maxDepth)
+        return stringify(arg.toString());
+
+      curDepth++;
       if (arg) {
           if (arg instanceof Array) {
               var len = arg.length;
               for (i = 0; i < len; ++i) {
-                  v = stringify(arg[i]);
+                  v = stringify(arg[i], indent + "  ");
                   if (s) {
-                      s += ',';
+                      s += ',\n';
                   }
-                  s += v;
+                  s += indent + "  " + v;
               }
-              return '[' + s + ']';
+              curDepth--;
+              return '[\n' + s + '\n' + indent + ']';
           } else if (typeof arg.toString != 'undefined') {
               for (i in arg) {
                   v = arg[i];
                   if (typeof v != 'undefined' && typeof v != 'function') {
-                      v = stringify(v);
+                      v = stringify(v, indent + "  ");
                       if (s) {
-                          s += ',';
+                          s += ',\n';
                       }
-                      s += stringify(i) + ':' + v;
+                      s += indent + "  " + stringify(i, indent + "  ") + ': ' + v;
                   }
               }
-              return '{' + s + '}';
+              curDepth--;
+              return '{' +
+                (arg instanceof MovieClip || arg instanceof TextField ? "// " + arg.toString() : "") + 
+                '\n' + s + '\n' + indent + '}';
           }
       }
+      curDepth--;
       return 'null';
   case 'number':
       return isFinite(arg) ? String(arg) : 'null';
@@ -76,7 +100,10 @@ class com.xvm.JSON {
               if (c == '\\' || c == '"') {
                   s += '\\';
               }
-              s += c;
+              if (c == '%')
+                  s += '\\u0025';
+              else
+                  s += c;
           } else {
               switch (c) {
                   case '\b':
@@ -104,7 +131,11 @@ class com.xvm.JSON {
       return s + '"';
   case 'boolean':
       return String(arg);
+  case 'null':
+    return 'null';
   default:
+      if (maxDepth && maxDepth > 0)
+          wot.utils.Logger.add("JSON> " + (typeof arg));
       return 'null';
   }
 }

@@ -31,11 +31,12 @@ class wot.utils.Logger
     p.load(command + s);
   }
 
-  public static function addObject(obj: Object, name: String)
+  public static function addObject(obj: Object, name: String, depth: Number)
   {
-    var s: String = (name || "[obj]") + "\n";
-    for (var i in obj)
-      s += "  " + i + " = " + obj[i] + "\n";
-    add(s);
+    if (isNaN(depth) || depth < 1)
+      depth = 1;
+    if (depth > 10)
+      depth = 10;
+    add((name || "[obj]") + ": " + com.xvm.JSON.stringifyDepth(obj, depth));
   }
 }
