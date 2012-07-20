@@ -113,7 +113,7 @@ class wot.BattleMain
 
     finalStatusShown = true;
 
-    if (!Config.s_config.rating.showPlayersStatistics || !Config.s_config.statisticForm.showChances)
+    if (!StatData.s_loaded || !Config.s_config.rating.showPlayersStatistics || !Config.s_config.statisticForm.showChances)
       return;
 
     for (var i = 0; i < _root.statsData.team1.length; ++i)

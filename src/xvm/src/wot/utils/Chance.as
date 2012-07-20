@@ -114,12 +114,13 @@ class wot.utils.Chance
 
   private static function ChanceFuncX1(vi, team, stat): Number
   {
-    var R = stat.tr || Config.s_config.const.AVG_GWR;
-    //var T = (vi.tiers[0] + vi.tiers[1]) / 2.0 - battleTier;
+    //var R = stat.tr || Config.s_config.const.AVG_GWR;
+    var T = (vi.tiers[0] + vi.tiers[1]) / 2.0 - battleTier;
     //var T = vi.tiers[1] - battleTier;
 
     //Logger.add(stat.tr + " R=" + R + " T=" + T);
-    return R;// * Math.max(0, 1 + 0.25 * T);
+    //return R;// * Math.max(0, 1 + 0.25 * T);
+    return T;
   }
 
   private static function ChanceFuncX2(vi, team, stat): Number

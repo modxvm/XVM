@@ -1,4 +1,4 @@
-﻿XVM-2.5.0.test2:
+﻿XVM-2.5.0.test3:
   * changes in chance to win formulas
   * show chance to win on final statistic form
   * fixed mod version display when run without proxy
