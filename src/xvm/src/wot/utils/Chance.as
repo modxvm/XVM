@@ -139,7 +139,7 @@ class wot.utils.Chance
     }*/
 
     //var R = stat.tr || Config.s_config.const.AVG_GWR;
-    var R = (Math.max(-10, Math.min(10, (stat.tr || Config.s_config.const.AVG_GWR) - Config.s_config.const.AVG_GWR))) / 100.0 * 4;
+    var R = Math.max(-10, Math.min(10, stat.tr ? stat.tr - Config.s_config.const.AVG_GWR : 0));
 
     //var T = vi.tiers[1] - battleTier;
     var T = vi.tiers[0];
