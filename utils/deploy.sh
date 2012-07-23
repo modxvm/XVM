@@ -1,9 +1,9 @@
 #!/bin/sh
 
-#GAME_VER="0.7.4"
+#[ "$GAME_VER" = "" ] && GAME_VER="0.7.4"
 #[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/home/games/WoT
 
-GAME_VER="0.7.5 Common Test"
+[ "$GAME_VER" = "" ] && GAME_VER="0.7.5 Common Test"
 [ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/home/games/WoT-CT
 
 FILES="
