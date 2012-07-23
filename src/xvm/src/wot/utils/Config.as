@@ -411,12 +411,7 @@ class wot.utils.Config
     var v: String = config.configVersion;
 
     if (!v || v == "")
-    {
-      // Convert OTMData.xml => XVM 1.0.0
-      //xml = instance.EncodeXML(new OTMConfigConverter((new PatchedXMLDecoder().decode(xml))).config);
-      //throw new Error(xml.toXMLString());
       v = "1.0.0";
-    }
 
     if (v == "1.0.0")
     {

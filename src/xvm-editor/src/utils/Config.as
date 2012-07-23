@@ -149,7 +149,7 @@ package utils
 		Config.TuneupConfig();
 		return true;
 	}
-	
+
     /**
      * Convert config to new format.
      */
@@ -250,15 +250,31 @@ package utils
         v = "1.3.0";
       }
 
+    if (v == "1.3.0")
+    {
+      if (config.battle)
+        config.battleLoading.clockFormat = config.battleLoading.showClock ? "H:N:S" : null;
+      if (config.battleLoading)
+      {
+        config.battleLoading.formatLeft = "{{vehicle}} " + config.battleLoading.formatLeft;
+        config.battleLoading.formatRight = config.battleLoading.formatRight + " {{vehicle}}";
+      }
+      if (config.statisticForm)
+      {
+        config.statisticForm.formatLeft = "{{vehicle}} " + config.statisticForm.formatLeft;
+        config.statisticForm.formatRight = config.statisticForm.formatRight + " {{vehicle}}";
+      }
+      v = "1.4.0";
+    }
+
   /*
       if (v == "1.x.x")
       {
-        // Convert XVM 1.x.x => 1.y.y
+        v = "1.y.y";
       }
   */
 
 	  config.configVersion = v;
-
 	  return config;
     }
 

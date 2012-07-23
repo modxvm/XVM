@@ -39,6 +39,8 @@ public class DefaultConfig
         drawGrid: false,
         // true - отключить отображение версии xvm в верхнем левом углу экрана
         hideXVMVersion: false,
+        // Show the clock on the Debug Panel (near FPS). Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
+        clockFormat: "H:N",
         // true - использовать стандартные маркеры клиента (не работает)
         useStandardMarkers: false
       },
@@ -49,8 +51,8 @@ public class DefaultConfig
         loadEnemyStatsInFogOfWar: false
       },
       battleLoading: {
-        // false - выключить отображение часов на экране загрузки боя
-        showClock: true,
+        // Show the clock on the Battle Loading Screen. Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
+        clockFormat: "H:N:S",
         // true - включить отображение шансов на победу
         showChances: true,
         // Show experimental "chance to win" formula
@@ -316,7 +318,8 @@ public class DefaultConfig
         playersPanel:  "../maps/icons/vehicle/contour",
         vehicleMarker: "../maps/icons/vehicle/contour"
       },
-      players: players
+      players: players,
+      const: const
     };
 
     return a;
@@ -949,5 +952,14 @@ public class DefaultConfig
       }
     ];
   }
+
+  public static function get const(): Object
+  {
+    return
+    {
+      AVG_GWR: 48,  // Average GWR. Source: http://wot-news.com/stat/server/ru/norm/en
+      AVG_EFF: 900, // Average Efficiency. Source: http://wot-news.com/index.php/stat/calc/en
+      AVG_BATTLES: 1000 // Averate number of battles. Source: http://wot-news.com/stat/server/ru/norm/en
+    };
 }
 }
