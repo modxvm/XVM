@@ -16,7 +16,7 @@ CURRENT_DIRECTORY=`pwd`
 SAMPLE_REPLAY=markers.wotreplay
 #SAMPLE_REPLAY=test.wotreplay
 
-cd ${WOT_DIRECTORY}
+cd "${WOT_DIRECTORY}"
 REPLAY=${CURRENT_DIRECTORY}/../test/replays/${SAMPLE_REPLAY}
 #cmd /c start ./WorldOfTanks.exe `cygpath --windows $REPLAY`
 cmd /c start ./wot-xvm-proxy.exe `cygpath --windows $REPLAY` &
