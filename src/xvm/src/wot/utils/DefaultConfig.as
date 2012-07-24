@@ -4,8 +4,6 @@
  */
 import wot.utils.Defines;
 
-// TODO: translate comments to English
-
 class wot.utils.DefaultConfig
 {
   public static function get config(): Object
@@ -25,87 +23,73 @@ class wot.utils.DefaultConfig
         modMinVersion: Defines.XVM_VERSION
       },
       battle: {
-        // false - отключить зеркалирование иконок танков (полезно для альтернативных иконок)
-        mirroredVehicleIcons: true,
-        // false - отключить всплывающую внизу панель после смерти
-        showPostmortemTips: true,
-        // true - убрать переключатель режимов мышкой
-        removePanelsModeSwitcher: false,
-        // false - disable highlighting of selected vehicle icon and squad
-        highlightVehicleIcon: true,
-        // true - включить отображение сетки координат (может быть полезным для настройки)
-        drawGrid: false,
-        // true - отключить отображение версии xvm в верхнем левом углу экрана
-        hideXVMVersion: false,
-        // Show the clock on the Debug Panel (near FPS). Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
+		// Show the clock on the Debug Panel (near FPS).
+		// Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
         clockFormat: "H:N",
-        // true - использовать стандартные маркеры клиента (не работает)
-        useStandardMarkers: false
+		drawGrid: false,                 // Onscreen coordinate grid for positioning adjustments.
+		hideXVMVersion: false,           // Hide version label at upper left corner.
+		highlightVehicleIcon: true,      // False - disable highlighting of selected vehicle icon and squad.
+        mirroredVehicleIcons: true,      // Set false for alternative tank icon mirroring.
+        showPostmortemTips: true,        // Popup tooltip panel after death.
+        removePanelsModeSwitcher: false, // Set true to hide mouse modes switcher.
+        useStandardMarkers: false        // Use original wot markers. feature not implemented.
       },
       rating: {
-        // true - включить отображение статистики. Глобальный переключатель - без него модуль статистики будет везде отключен.
-        showPlayersStatistics: false,
-        // true - включить загрузку данных по противникам в "тумане войны"
-        loadEnemyStatsInFogOfWar: false
+        showPlayersStatistics: false,    // Global switch. Handles whole statisctics module.
+        loadEnemyStatsInFogOfWar: false  // Load players data in "fog of war".
       },
       battleLoading: {
-        // Show the clock on the Battle Loading Screen. Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
+        // Show clock at Battle Loading Screen.
+		// ### Is there a clock:on\off switch variable supposed to be? ###
+		
+		// Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
         clockFormat: "H:N:S",
-        // true - включить отображение шансов на победу
-        showChances: true,
-        // Show experimental "chance to win" formula
-        showChancesExp: false,
-        // true - убрать отображение иконки взвода
-        removeSquadIcon: false,
-        // параметры иконки игрока/клана
+        showChances: true,      // Show game round win chances percentage.
+        showChancesExp: false,  // Show experimental "chance to win" formula.
+        removeSquadIcon: false, // Hide squad icon.
+        // Playes/clan icon parameters.
         clanIcon: { show: true, x: 0, y: 6, xr: NaN, yr: NaN, h: 16, w: 16, alpha: 90 },
-        // формат отображения (допускаются макроподстановки)
+        // Dispay format. Macro-substitutiones allowed.
         formatLeft: "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
         formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
       },
       statisticForm: {
-        // true - включить отображение шансов на победу
-        showChances: true,
-        // Show experimental "chance to win" formula
-        showChancesExp: false,
-        // true - убрать отображение иконки взвода
-        removeSquadIcon: false,
-        // параметры иконки игрока/клана
+        showChances: true,      // Show game round win chances percentage.
+        showChancesExp: false,  // Show experimental "chance to win" formula.
+        removeSquadIcon: false, // Hide squad icon.
+        // Playes/clan icon parameters.
         clanIcon: { show: true, x: 0, y: 6, xr: NaN, yr: NaN, h: 16, w: 16, alpha: 90 },
-        // формат отображения
+        // Dispay format. 
         formatLeft: "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
         formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
       },
       playersPanel: {
-        // 0..100 - задает прозрачность "ушей". 0 - прозрачные, 100 - не прозрачные
-        alpha: 60,
-        // 0..100 - задает прозрачность иконок в "ушах". 0 - прозрачные, 100 - не прозрачные
-        iconAlpha: 100,
-        // true - убрать отображение иконки взвода
-        removeSquadIcon: false,
-        // параметры иконки игрока/клана
+        alpha: 60,              // Side panel transparency. 0 - transparent, 100 - opaque.
+        iconAlpha: 100,         // Side panel icons transparency. 0 - transparent, 100 - opaque.
+        removeSquadIcon: false, // Hide squad icon.
+        // Playes/clan icon parameters.
         clanIcon: { show: true, x: 0, y: 6, xr: NaN, yr: NaN, h: 16, w: 16, alpha: 90 },
-        // режим medium1
+        // Medium1 mode.
         medium: {
-          // 0..250 - задает ширину поля имени игрока. По умолчанию: 46
+          // 0..250 - player name field width.
           width: 46,
-          // формат отображения
+          // Dispay format. 
           formatLeft: "<font color='{{c:eff}}'>{{nick}}</font>",
           formatRight: "<font color='{{c:eff}}'>{{nick}}</font>"
         },
-        // режим medium2
+        // Medium2 mode.
         medium2: {
-          // 0..250 - задает ширину поля имени игрока. По умолчанию: 65
+          // 0..250 - player name field width.
           width: 65,
-          // формат отображения
+          // Dispay format. 
           formatLeft: "<font color='{{c:eff}}'>{{vehicle}}</font>",
           formatRight: "<font color='{{c:eff}}'>{{vehicle}}</font>"
         },
         // режим large
         large: {
-          // 0..250 - задает ширину поля имени игрока. По умолчанию: 170
+          // 0..250 - player name field width.
           width: 170,
-          // формат отображения
+          // Dispay format. 
           nickFormatLeft: "<font color='{{c:eff}}'>{{rating}}</font> {{nick}}",
           nickFormatRight: "{{nick}} <font color='{{c:eff}}'>{{rating}}</font>",
           vehicleFormatLeft: "<font color='{{c:rating}}'>{{vehicle}}</font>",
