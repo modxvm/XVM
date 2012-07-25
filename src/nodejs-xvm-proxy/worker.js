@@ -30,22 +30,38 @@ for (var i = 0; i < settings.statHosts.length; ++i) {
     });
 }
 
+// fix connection counter sticking
+setInterval(function() {
+    for (var i = 0; i < hostData.length; ++i)
+        hostData[i].connections = Math.max(0, hostData[i].connections - 1);
+}, 60000);
+
+
 // Main functions
 
 var getStatHostId = function(id) {
-    return Math.max(0, Math.min(Math.floor(id / 500000000), settings.statHosts.length - 1));
+    var result = Math.floor(id / 500000000);
+    return (result >= 0 && result < settings.statHosts.length) ? result : -1;
 }
 
 // WG Server Statistics retrieve
 
 // execute request for single player id
-var makeSingleRequest = function(id, callback, force) {
+var makeSingleRequest = function(id, callback) {
     var now = new Date();
     var statHostId = getStatHostId(id);
+
+    // Skip wrong id and non-working servers
+    if (statHostId == -1 || settings.statHosts[statHostId] == "")
+    {
+        callback(null, {__code:"bad_id"});
+        return;
+    }
+
     var hd = hostData[statHostId];
 
     // Do not execute requests some time after error responce
-    if (hd.lastError && !force) {
+    if (hd.lastError) {
         if ((now - hd.lastError) < settings.lastErrorTtl) {
             var wait_sec = Math.round((settings.lastErrorTtl - (now - hd.lastError)) / 1000);
             if (wait_sec > 0) {
@@ -56,7 +72,7 @@ var makeSingleRequest = function(id, callback, force) {
                     utils.debug("waiting Server_" + statHostId + ": " + wait_sec + " s");
                 }
             }
-            callback(null, null);
+            callback(null, {__code:"wait"});
             return;
          } else {
             utils.debug("resuming Server_" + statHostId);
@@ -66,15 +82,9 @@ var makeSingleRequest = function(id, callback, force) {
          }
     }
 
-    // Select proper server by player id
-    if (statHostId >= settings.statHosts.length) {
-        callback(null, null);
-        return;
-    }
-
     if (hd.connections >= hd.maxConnections)
     {
-        callback(null, null);
+        callback(null, {__code:"max_conn"});
         return;
     }
 
@@ -82,7 +92,7 @@ var makeSingleRequest = function(id, callback, force) {
     process.send({ usage: 1, hostId: statHostId, connections: 1 });
 
     var reqTimeout = setTimeout(function() {
-        callback(null, {__error:"Timeout"});
+        callback(null, {__code:"error",__error:"Timeout"});
      }, settings.statHostsTimeouts[statHostId]);
 
     var options = {
@@ -106,13 +116,13 @@ var makeSingleRequest = function(id, callback, force) {
                 callback(null, result);
             } catch(e) {
                 utils.debug("JSON.parse error: length=" + responseData.length + ", data=" + responseData.substr(0, 70).replace(/[\n\r]/g, ""));
-                callback(null, {__error:"JSON.parse error"});
+                callback(null, {__code:"error",__error:"JSON.parse error"});
             }
         });
     });
     request.on("error", function(e) {
         clearTimeout(reqTimeout);
-        callback(null, {__error:"Http error: " + e});
+        callback(null, {__code:"error",__error:"Http error: " + e});
     });
 
     request.shouldKeepAlive = false;
@@ -123,7 +133,7 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, response, sta
 
     forUpdate.forEach(function(id) {
         urls[id] = function(callback) {
-            makeSingleRequest(id, callback, /*forUpdate.length == 1*/ false);
+            makeSingleRequest(id, callback);
         };
     });
 
@@ -141,61 +151,67 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, response, sta
         var forUpdate_length = forUpdate.length;
         for (var i = 0; i < forUpdate_length; ++i) {
             var id = forUpdate[i];
-            var vname = forUpdateVNames[i];
             var statHostId = getStatHostId(id);
-            var hd = hostData[statHostId];
 
-            var curResult = results[id];
+            if (statHostId == -1)
+                continue;
+
+            var vname = forUpdateVNames[i];
             var resultItem = { _id: id, st: "fail", dt: now };
 
-            if (curResult)
-            {
-                hd.connections--;
-                process.send({ usage: 1, hostId: statHostId, connections: -1 });
+            var curResult = results[id];
+            if (curResult) {
+                if (curResult.__code && curResult.__code != "error") {
+                    resultItem.st = curResult.__code;
+                } else {
+                    var hd = hostData[statHostId];
+                    hd.connections--;
+                    process.send({ usage: 1, hostId: statHostId, connections: -1 });
 
-                if (curResult.__error || !hd.lastMaxConnectionUpdate || (now - hd.lastMaxConnectionUpdate) > 5000)
-                {
-                    hd.lastMaxConnectionUpdate = now;
-                    hd.maxConnections = Math.max(1, Math.min(settings.statHostMaxConnections, hd.maxConnections + (curResult.__error ? -1 : 1)));
-                    process.send({ usage: 1, hostId: statHostId, maxConnections: hd.maxConnections });
-                }
-
-                if (curResult.__error) {
-                    resultItem.st = "error";
-                    hd.lastError = now;
-                    if (!hd.error_shown) {
-                         hd.error_shown = true;
-                         utils.debug("Server_" + statHostId + ": " + curResult.__error);
-                    }
-                } else if (curResult.status === "ok" && curResult.status_code === "NO_ERROR") {
-                    // fill global info
-                    resultItem.st = "ok";
-                    resultItem.nm = curResult.data.name;
-                    resultItem.b = curResult.data.summary.battles_count;
-                    resultItem.w = curResult.data.summary.wins;
-                    resultItem.e = utils.calculateEfficiency(curResult.data);
-
-                    // fill vehicle data
-                    resultItem.v = [];
-                    var vehicles_length = curResult.data.vehicles.length;
-                    for (var j = 0; j < vehicles_length; ++j) {
-                        var vdata = curResult.data.vehicles[j];
-                        resultItem.v.push({
-                            name: vdata.name,
-                            l: vdata.level,
-                            b: vdata.battle_count,
-                            w: vdata.win_count,
-                            s: vdata.spotted,
-                            d: vdata.damageDealt,
-                            //survivedBattles: vdata.survivedBattles,
-                            f: vdata.frags//,
-                            //cl: vdata.class
-                        });
+                    if (curResult.__error || !hd.lastMaxConnectionUpdate || (now - hd.lastMaxConnectionUpdate) > 5000)
+                    {
+                        hd.lastMaxConnectionUpdate = now;
+                        hd.maxConnections = Math.max(1, Math.min(settings.statHostMaxConnections, hd.maxConnections + (curResult.__error ? -1 : 1)));
+                        process.send({ usage: 1, hostId: statHostId, maxConnections: hd.maxConnections });
                     }
 
-                    // updating db
-                    collection.update({ _id: id }, resultItem, { upsert: true });
-                    process.send({ usage: 1, updated: 1 });
+                    if (curResult.__error) {
+                        resultItem.st = "error";
+                        hd.lastError = now;
+                        if (!hd.error_shown) {
+                             hd.error_shown = true;
+                             utils.debug("Server_" + statHostId + ": " + curResult.__error);
+                        }
+                    } else if (curResult.status === "ok" && curResult.status_code === "NO_ERROR") {
+                        // fill global info
+                        resultItem.st = "ok";
+                        resultItem.nm = curResult.data.name;
+                        resultItem.b = curResult.data.summary.battles_count;
+                        resultItem.w = curResult.data.summary.wins;
+                        resultItem.e = utils.calculateEfficiency(curResult.data);
+
+                        // fill vehicle data
+                        resultItem.v = [];
+                        var vehicles_length = curResult.data.vehicles.length;
+                        for (var j = 0; j < vehicles_length; ++j) {
+                            var vdata = curResult.data.vehicles[j];
+                            resultItem.v.push({
+                                name: vdata.name,
+                                l: vdata.level,
+                                b: vdata.battle_count,
+                                w: vdata.win_count,
+                                s: vdata.spotted,
+                                d: vdata.damageDealt,
+                                //survivedBattles: vdata.survivedBattles,
+                                f: vdata.frags//,
+                                //cl: vdata.class
+                            });
+                        }
+
+                        // updating db
+                        collection.update({ _id: id }, resultItem, { upsert: true });
+                        process.send({ usage: 1, updated: 1 });
+                    }
                 }
             }
 
@@ -221,7 +237,7 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, response, sta
                 id: player._id,
                 date: player.dt,
                 vname: player.vname,
-                status: player.st,
+                status: (now - player.dt) < settings.cacheTtl ? "cache" : "expired",
                 name: player.nm,
                 battles: player.b,
                 wins: player.w,
@@ -232,6 +248,8 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, response, sta
             for (var i = 0; i < players_length; ++i) {
                 if (result.players[i].id == pl.id) {
                     if (result.players[i].status != "ok") {
+                        if (result.players[i].status == "bad_id")
+                            pl.status = result.players[i].status;
                         result.players[i] = pl;
                         process.send({ usage: 1, cached: 1, updatesFailed: 1 });
                         missed_collection.update({ _id: pl.id }, { _id: pl.id, missed:false }, { upsert: true });
@@ -251,7 +269,7 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, response, sta
         var missed_count = 0;
         var missed_ids = [];
         result.players.forEach(function(player) {
-            if (player.status != "ok") {
+            if (player.status == "error" || player.status == "fail") {
                 if (missed_count < 3)
                   missed_ids.push(player.id);
                 missed_count++;

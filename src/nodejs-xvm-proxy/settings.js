@@ -17,9 +17,9 @@ module.exports = (function()
             "worldoftanks.ru",      // RU:           0 ..  49999999
             "worldoftanks.eu",      // EU:    50000000 ..  99999999
             "worldoftanks.com",     // NA:   100000000 .. 149999999
-            "worldoftanks-sea.com", // ???: 1500000000 .. 199999999
+            "", // ???: 1500000000 .. 199999999 (disabled - unknown stat server)
             "worldoftanks-sea.com", // SEA: 2000000000 .. 249999999
-            "wot.go.vn"             // VTC: 2500000000 .. 299999999
+            "" // "wot.go.vn"       // VTC: 2500000000 .. 299999999 (disabled - stat server is not working)
         ],
         statHostsTimeouts: [
             5000,      // RU

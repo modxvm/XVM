@@ -48,7 +48,7 @@ for (var i = 0; i < /*numCPUs*/ 1; i++) {
             if (msg.updated) usageStat.updated += msg.updated;
             if (msg.missed) usageStat.missed += msg.missed;
             if (msg.updatesFailed) usageStat.updatesFailed += msg.updatesFailed;
-            if (msg.connections) usageStat.connections[msg.hostId] = (usageStat.connections[msg.hostId] || 0) + msg.connections;
+            if (msg.connections) usageStat.connections[msg.hostId] = Math.max(0, (usageStat.connections[msg.hostId] || 0) + msg.connections);
             if (msg.maxConnections && usageStat.maxConnections[msg.hostId] != msg.maxConnections) {
                 usageStat.maxConnections[msg.hostId] = msg.maxConnections;
 //                utils.log("> connections limits: [" + usageStat.maxConnections.join(", ") + "]");
@@ -59,6 +59,12 @@ for (var i = 0; i < /*numCPUs*/ 1; i++) {
     });
 }
 
+// fix connection counter sticking
+setInterval(function() {
+    for (var i = 0; i < usageStat.connections.length; ++i)
+        usageStat.connections[i] = Math.max(0, (usageStat.connections[i] || 0) - 1);
+}, 60000);
+
 // show usage stat
 setInterval(function() {
     var uptime = Math.round((new Date() - usageStat.start) / 1000);
@@ -66,7 +72,7 @@ setInterval(function() {
     var h = String(parseInt((uptime / 3600) % 24)).lpad("0", 2);
     var m = String(parseInt((uptime / 60) % 60)).lpad("0", 2);
     utils.log("> uptime  requests  rq/s   players  pl/s  cached updated  missed updfail connections/limits");
-    utils.log(">" +
+    utils.log((d > 9 ? "" : ">") +
         ((d == 0 ? "" : d + "d") + h + "h" + m).lpad(" ", 7) +
         String(usageStat.requests).lpad(" ", 10) + " " + (usageStat.requests / uptime).toFixed().lpad(" ", 5) +
         String(usageStat.players).lpad(" ", 10) + " " + (usageStat.players / uptime).toFixed().lpad(" ", 5) +
