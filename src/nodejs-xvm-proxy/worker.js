@@ -248,7 +248,7 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, response, sta
             for (var i = 0; i < players_length; ++i) {
                 if (result.players[i].id == pl.id) {
                     if (result.players[i].status != "ok") {
-                        if (result.players[i].status == "bad_id")
+                        if (result.players[i].status == "bad_id" || result.players[i].status == "wait" || result.players[i].status == "max_conn")
                             pl.status = result.players[i].status;
                         result.players[i] = pl;
                         process.send({ usage: 1, cached: 1, updatesFailed: 1 });
