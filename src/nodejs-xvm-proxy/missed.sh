@@ -18,16 +18,24 @@ else
     echo "db.missed.find({missed:true}).forEach(function(x){print(x._id);})" | mongo --quiet xvm | grep -v "bye" | sort -n -r > $fn
 fi
 
-# $1 - url
-# $2 - ids
+declare -A ids
+
 update()
 {
-    local arr id st rmids="" fail=0
+    local arr id st ids_str="" rmids="" fail=0 i cnt
     declare -A statuses
+
+    cnt=0
+    for i in ${ids[@]}; do
+	[ "$ids_str" != "" ] && ids_str="$ids_str,"
+	ids_str="$ids_str$i"
+	cnt=$(($cnt + 1))
+	[ $cnt -ge $limit ] && break
+    done
 
     OIFS=$IFS
     IFS=$'\n'
-    for line in `wget -q -O - "$1$2" | tr -s '[]' '\n\n' | grep "id" | sed "s/},{/\n/g" | tr -d '"{}'`; do
+    for line in `wget -q -O - "${url}${ids_str}" | tr -s '[]' '\n\n' | grep "id" | sed "s/},{/\n/g" | tr -d '"{}'`; do
 	IFS=$OIFS
 	arr=(`echo "$line" | awk '{
 	    n = split($0, a, ",")
@@ -47,11 +55,15 @@ update()
 	st=${arr[1]}
 	statuses[$st]=$st
 	case "$st" in
-	    bad_id|cache|ok)
+	    bad_id|cache|ok|fail|error)
 		[ "$rmids" != "" ] && rmids="$rmids,"
 		rmids="$rmids$id"
+		unset ids[$id]
 		;;
-	    wait|fail|error|max_conn|expired)
+	    max_conn)
+		sleep 0.1
+		;;
+	    wait|expired)
 		limit=$limitLo
 		sleep 0.1
 		;;
@@ -66,41 +78,48 @@ update()
 
     if [ "$rmids" != "" ]; then
 	echo "db.missed.remove({_id: { \$in: [ $rmids ] }})" | mongo --quiet xvm >/dev/null
-	[ $limit -lt $limitHi ] && limit=$(($limit+1))
     fi
 
-    echo ${statuses[*]}
+    echo "${statuses[*]}"
+    if [ "${statuses[max_conn]}" = "max_conn" ]; then
+	[ $limit -gt $limitLo ] && limit=$(($limit-1))
+    elif [ "$rmids" != ""  ]; then
+	[ $limit -lt $limitHi ] && limit=$(($limit+1))
+    fi
+}
+
+# $1 - pos
+# $2 - total
+prepare()
+{
+    local first last i cnt
+    while :; do
+	[ ${#ids[@]} -lt $limit ] && break
+	last=0
+	first=0
+	cnt=0
+	for i in ${ids[@]}; do
+	    [ $first -eq 0 -o $first -lt $i ] && first=$i
+	    [ $last -eq 0 -o $last -gt $i ] && last=$i
+	    cnt=$(($cnt + 1))
+	    [ $cnt -ge $limit ] && break
+	done
+	echo -n "[$limit] $1/$2: $first..$last "
+	update
+    done
 }
 
 # main loop
 
 total=$(wc -l $fn)
-
 pos=0
-count=0
-first=""
-last=""
-ids=""
-
+ids=()
 for id in $(cat $fn); do
     pos=$((pos+1))
-
-    [ "$ids" = "" ] && first="$id" || ids="$ids,"
-    last="$id"
-
-    count=$((count+1))
-    ids="$ids$id"
-
-    [ $count -lt $limit ] && continue
-
-    echo -n "[$limit] $pos/$total: $first..$last "
-    update "$url" "$ids"
-
-    count=0
-    ids=""
+    ids[$id]=$id
+    prepare $pos $total
 done
 
-echo -n "[$limit] $pos/$total: $first..$last "
-update "$url" "$ids"
+prepare $pos $total
 
 rm -f $fn
