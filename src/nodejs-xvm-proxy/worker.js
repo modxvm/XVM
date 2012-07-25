@@ -72,7 +72,7 @@ var makeSingleRequest = function(id, callback) {
     }
 
     hd.connections++;
-    process.send({ usage: 1, hostId: statHostId, connections: 1 });
+    process.send({ usage: 1, hostId: statHostId, connections: hd.connections });
 
     var reqTimeout = setTimeout(function() {
         callback(null, {__code:"error",__error:"Timeout"});
@@ -149,7 +149,7 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, response, sta
                 } else {
                     var hd = hostData[statHostId];
                     hd.connections--;
-                    process.send({ usage: 1, hostId: statHostId, connections: -1 });
+                    process.send({ usage: 1, hostId: statHostId, connections: hd.connections });
 
                     if (curResult.__error || !hd.lastMaxConnectionUpdate || (now - hd.lastMaxConnectionUpdate) > 5000)
                     {
@@ -318,9 +318,12 @@ var createWorker = function() {
 
     // fix connection counter sticking
     setInterval(function() {
-        for (var i = 0; i < hostData.length; ++i)
-            hostData[i].connections = Math.max(0, hostData[i].connections - 1);
-//        utils.log("conn: " + hostData[0].connections + "/" + hostData[0].maxConnections);
+        for (var i = 0; i < hostData.length; ++i) {
+            var n = hostData[i].connections || 0;
+            if (n > hostData[i].maxConnections)
+                hostData[i].connections = n - 1;
+        }
+//        utils.log("conn[worker]: " + hostData[0].connections + "/" + hostData[0].maxConnections);
     }, 60000);
 
 

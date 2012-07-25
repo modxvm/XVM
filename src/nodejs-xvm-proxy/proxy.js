@@ -48,22 +48,13 @@ for (var i = 0; i < /*numCPUs*/ 1; i++) {
             if (msg.updated) usageStat.updated += msg.updated;
             if (msg.missed) usageStat.missed += msg.missed;
             if (msg.updatesFailed) usageStat.updatesFailed += msg.updatesFailed;
-            if (msg.connections) usageStat.connections[msg.hostId] = Math.max(0, (usageStat.connections[msg.hostId] || 0) + msg.connections);
-            if (msg.maxConnections && usageStat.maxConnections[msg.hostId] != msg.maxConnections) {
-                usageStat.maxConnections[msg.hostId] = msg.maxConnections;
-//                utils.log("> connections limits: [" + usageStat.maxConnections.join(", ") + "]");
-            }
+            if (msg.connections) usageStat.connections[msg.hostId] = msg.connections;
+            if (msg.maxConnections) usageStat.maxConnections[msg.hostId] = msg.maxConnections;
         } else if (msg.cmd == "cmd") {
             //w.send({ chat: 'Ok worker, Master got the message! Over and out!' });
         }
     });
 }
-
-// fix connection counter sticking
-setInterval(function() {
-    for (var i = 0; i < usageStat.connections.length; ++i)
-        usageStat.connections[i] = Math.max(0, (usageStat.connections[i] || 0) - 1);
-}, 60000);
 
 // show usage stat
 setInterval(function() {
