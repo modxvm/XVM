@@ -19,23 +19,6 @@ var collection,
 
 // Global vars
 var hostData = [];
-for (var i = 0; i < settings.statHosts.length; ++i) {
-    hostData.push({
-        lastError: null,
-        waiting: null,
-        error_shown: false,
-        connections: 0,
-        maxConnections: 30,
-        lastMaxConnectionUpdate: null
-    });
-}
-
-// fix connection counter sticking
-setInterval(function() {
-    for (var i = 0; i < hostData.length; ++i)
-        hostData[i].connections = Math.max(0, hostData[i].connections - 1);
-}, 60000);
-
 
 // Main functions
 
@@ -321,6 +304,25 @@ var createWorker = function() {
 
     // Set max client connections (5 by default)
     http.globalAgent.maxSockets = settings.maxSockets;
+
+    for (var i = 0; i < settings.statHosts.length; ++i) {
+        hostData.push({
+            lastError: null,
+            waiting: null,
+            error_shown: false,
+            connections: 0,
+            maxConnections: 30,
+            lastMaxConnectionUpdate: null
+        });
+    }
+
+    // fix connection counter sticking
+    setInterval(function() {
+        for (var i = 0; i < hostData.length; ++i)
+            hostData[i].connections = Math.max(0, hostData[i].connections - 1);
+//        utils.log("conn: " + hostData[0].connections + "/" + hostData[0].maxConnections);
+    }, 60000);
+
 
     // Connect to database
     var db = new mongo.Db(settings.dbName, new mongo.Server("localhost", 27017, mongoOptions));
