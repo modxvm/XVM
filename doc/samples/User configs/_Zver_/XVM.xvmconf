@@ -1,20 +1,22 @@
 {
-  "configVersion": "1.3.0",
+  "configVersion": "1.3.1",
   "editorVersion": "0.1",
   "definition": {
     "author": "_Zver_",
     "description": "Winratio + floating damage",
     "url": "http://www.koreanrandom.com/forum/topic/1392-zver-config-for-xvm/",
-    "date": "07.06.2012",
-    "gameVersion": "0.7.3",
-    "modMinVersion": "2.3"
+    "date": "12.07.2012",
+    "gameVersion": "0.7.4",
+    "modMinVersion": "2.4"
   },
   "battle": {
     "mirroredVehicleIcons": true,
     "showPostmortemTips": false,
     "removePanelsModeSwitcher": true,
+    "highlightVehicleIcon": true,
     "drawGrid": false,
     "hideXVMVersion": false,
+    "clockFormat": "H:N",
     "useStandardMarkers": false
   },
   "rating": {
@@ -22,8 +24,9 @@
     "loadEnemyStatsInFogOfWar": true
   },
   "battleLoading": {
-    "showClock": true,
+    "clockFormat": "H:N:S",
     "showChances": true,
+    "showChancesExp": true,
     "removeSquadIcon": false,
     "clanIcon": { "show": true, "x": 54, "y": 0, "xr": 55, "yr": 0, "h": 24, "w": 24, "alpha": 100 },
     "formatLeft": "<font face='Consolas' size='12' color='{{c:eff}}'>{{eff:4}}</font> <font face='Consolas' size='12' color='{{c:kb}}'>{{kb:3}}</font> <font face='Consolas' size='12' color='{{c:rating}}'>{{rating:3}}</font>",
@@ -31,6 +34,7 @@
   },
   "statisticForm": {
     "showChances": true,
+    "showChancesExp": true,
     "removeSquadIcon": false,
     "clanIcon": { "show": true, "x": 60, "y": 0, "xr": 62, "yr": 0, "h": 24, "w": 24, "alpha": 100 },
     "formatLeft": "<font face='Consolas' size='11' color='{{c:eff}}'>{{eff:4}}</font> <font face='Consolas' size='11' color='{{c:t-rating}}'>{{t-rating:3}}</font> <font face='Consolas' size='11' color='{{c:t-battles}}'>{{t-battles:4}}</font>",

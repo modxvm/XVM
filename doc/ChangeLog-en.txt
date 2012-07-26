@@ -1,10 +1,5 @@
-﻿XVM-2.5.0.test3:
-  * changes in chance to win formulas
-  * show chance to win on final statistic form
-  * fixed mod version display when run without proxy
-
-XVM-2.5.0.test1:
-  * adaptation to WoT 0.7.5.CT1
+﻿XVM-2.5.0:
+  * adaptation to WoT 0.7.5
   * code refactoring
   * fixed bugs in "Fog of War" mode (incomplete)
   * file XVM.log in the game directory contains mod debugging information
@@ -25,6 +20,8 @@ XVM-2.5.0.test1:
   * added experimental chance to win formula
   * editor moved: http://www.koreanrandom.com/forum/topic/1422-/#entry11316
   * BattleTimerBig.swf removed from mod archive
+  * changes in chance to win formulas
+  * show chance to win on final statistic form
 
 XVM-2.4.1:
   * battle task animation removed
