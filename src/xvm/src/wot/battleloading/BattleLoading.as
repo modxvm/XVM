@@ -10,7 +10,7 @@ import wot.utils.Logger;
 import wot.utils.StatLoader;
 import wot.utils.Utils;
 
-class wot.BattleLoading extends net.wargaming.BattleLoading
+class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
 {
   private static var STAT_PRELOAD_DELAY:Number = 500;
   

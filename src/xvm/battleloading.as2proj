@@ -37,8 +37,8 @@
   </build>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="src\wot\BattleLoadingItemRenderer.as" />
-    <compile path="src\wot\BattleLoading.as" />
+    <compile path="src\wot\battleloading\BattleLoading.as" />
+    <compile path="src\wot\battleloading\BattleLoadingItemRenderer.as" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>

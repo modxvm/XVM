@@ -44697,7 +44697,7 @@
         <actions>
           <PushData>
             <items>
-              <StackString value="wot.BattleLoadingItemRenderer"/>
+              <StackString value="wot.battleloading.BattleLoadingItemRenderer"/>
             </items>
           </PushData>
           <GetVariable/>
@@ -44723,7 +44723,7 @@
         <actions>
           <PushData>
             <items>
-              <StackString value="wot.BattleLoadingItemRenderer"/>
+              <StackString value="wot.battleloading.BattleLoadingItemRenderer"/>
             </items>
           </PushData>
           <GetVariable/>
@@ -44775,7 +44775,7 @@
         <actions>
           <PushData>
             <items>
-              <StackString value="wot.BattleLoading"/>
+              <StackString value="wot.battleloading.BattleLoading"/>
             </items>
           </PushData>
           <GetVariable/>

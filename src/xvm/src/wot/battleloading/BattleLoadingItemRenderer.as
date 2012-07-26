@@ -13,7 +13,7 @@ import wot.utils.PlayerInfo;
 import wot.utils.TextCache;
 import wot.utils.Utils;
 
-class wot.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRenderer
+class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRenderer
 {
   private static var s_logShown = false;
 
