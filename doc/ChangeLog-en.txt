@@ -1,4 +1,7 @@
-﻿XVM-2.5.0:
+﻿XVM-2.5.1:
+  * fixed vehicle names in battle loading screen and statistic form
+
+XVM-2.5.0:
   * adaptation to WoT 0.7.5
   * code refactoring
   * fixed bugs in "Fog of War" mode (incomplete)

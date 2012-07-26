@@ -41,7 +41,7 @@ class wot.utils.DefaultConfig
       battleLoading: {
         // Show clock at Battle Loading Screen.
 		// ### Is there a clock:on\off switch variable supposed to be? ###
-		
+
 		// Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
         clockFormat: "H:N:S",
         showChances: true,      // Show game round win chances percentage.
@@ -50,8 +50,8 @@ class wot.utils.DefaultConfig
         // Playes/clan icon parameters.
         clanIcon: { show: true, x: 0, y: 6, xr: NaN, yr: NaN, h: 16, w: 16, alpha: 90 },
         // Dispay format. Macro-substitutiones allowed.
-        formatLeft: "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
-        formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
+        formatLeft: "{{vehicle}} <font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+        formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font> {{vehicle}}"
       },
       statisticForm: {
         showChances: true,      // Show game round win chances percentage.
@@ -59,9 +59,9 @@ class wot.utils.DefaultConfig
         removeSquadIcon: false, // Hide squad icon.
         // Playes/clan icon parameters.
         clanIcon: { show: true, x: 0, y: 6, xr: NaN, yr: NaN, h: 16, w: 16, alpha: 90 },
-        // Dispay format. 
-        formatLeft: "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
-        formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font>"
+        // Dispay format.
+        formatLeft: "{{vehicle}} <font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+        formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font> {{vehicle}}"
       },
       playersPanel: {
         alpha: 60,              // Side panel transparency. 0 - transparent, 100 - opaque.
@@ -73,7 +73,7 @@ class wot.utils.DefaultConfig
         medium: {
           // 0..250 - player name field width.
           width: 46,
-          // Dispay format. 
+          // Dispay format.
           formatLeft: "<font color='{{c:eff}}'>{{nick}}</font>",
           formatRight: "<font color='{{c:eff}}'>{{nick}}</font>"
         },
@@ -81,7 +81,7 @@ class wot.utils.DefaultConfig
         medium2: {
           // 0..250 - player name field width.
           width: 65,
-          // Dispay format. 
+          // Dispay format.
           formatLeft: "<font color='{{c:eff}}'>{{vehicle}}</font>",
           formatRight: "<font color='{{c:eff}}'>{{vehicle}}</font>"
         },
@@ -89,7 +89,7 @@ class wot.utils.DefaultConfig
         large: {
           // 0..250 - player name field width.
           width: 170,
-          // Dispay format. 
+          // Dispay format.
           nickFormatLeft: "<font color='{{c:eff}}'>{{rating}}</font> {{nick}}",
           nickFormatRight: "{{nick}} <font color='{{c:eff}}'>{{rating}}</font>",
           vehicleFormatLeft: "<font color='{{c:rating}}'>{{vehicle}}</font>",
