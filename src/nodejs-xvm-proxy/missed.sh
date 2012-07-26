@@ -62,6 +62,9 @@ update()
 		rmids="$rmids$id"
 		unset ids[$id]
 		;;
+	    api_error)
+		unset ids[$id]
+		;;
 	    max_conn)
 		sleep 0.05
 		;;

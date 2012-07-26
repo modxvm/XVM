@@ -46,21 +46,11 @@ var makeSingleRequest = function(id, callback) {
     // Do not execute requests some time after error responce
     if (hd.lastError) {
         if ((now - hd.lastError) < settings.lastErrorTtl) {
-            var wait_sec = Math.round((settings.lastErrorTtl - (now - hd.lastError)) / 1000);
-            if (wait_sec > 0) {
-                if (!hd.waiting)
-                    hd.waiting = wait_sec;
-                if (hd.waiting - 5 >= wait_sec) {
-                    hd.waiting = wait_sec;
-                    //utils.debug("waiting Server_" + statHostId + ": " + wait_sec + " s");
-                }
-            }
             callback(null, {__code:"wait"});
             return;
          } else {
             utils.debug("resuming Server_" + statHostId);
             hd.lastError = null;
-            hd.waiting = null;
             hd.error_shown = false;
          }
     }
@@ -115,11 +105,14 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, request, resp
     times.push({"n":"process","t":new Date()});
 
     var urls = { };
-    forUpdate.forEach(function(id) {
+    
+    for (var i in forUpdate)
+    {
+        var id = forUpdate[i];
         urls[id] = function(callback) {
             makeSingleRequest(id, callback);
         };
-    });
+    }
     times.push({"n":"prepared","t":new Date()});
 
 //    async.series(urls, function(err, results) {
@@ -198,6 +191,8 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, request, resp
                         // updating db
                         collection.update({ _id: id }, resultItem, { upsert: true });
                         process.send({ usage: 1, updated: 1 });
+                    } else if (curResult.status === "error" && curResult.status_code === "API_UNKNOWN_SERVER_ERROR") {
+                        resultItem.st = "api_error";
                     }
                 }
             }
@@ -218,7 +213,8 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, request, resp
 
         // add cached items and set expired data for players with error stat
         var failed_count = 0;
-        inCache.forEach(function(player) {
+        for (var inCacheId in inCache ) {
+            var player = inCache[inCacheId];
             var skip = false;
             var pl = {
                 id: player._id,
@@ -235,7 +231,7 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, request, resp
             for (var i = 0; i < players_length; ++i) {
                 if (result.players[i].id == pl.id) {
                     if (result.players[i].status != "ok") {
-                        if (result.players[i].status == "bad_id" || result.players[i].status == "wait" || result.players[i].status == "max_conn")
+                        if (result.players[i].status == "bad_id" || result.players[i].status == "wait" || result.players[i].status == "max_conn" || result.players[i].status == "api_error")
                             pl.status = result.players[i].status;
                         result.players[i] = pl;
                         process.send({ usage: 1, cached: 1, updatesFailed: 1 });
@@ -250,37 +246,37 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, request, resp
                 result.players.push(pl);
                 process.send({ usage: 1, cached: 1 });
             }
-        });
+        };
         times.push({"n":"processed","t":new Date()});
 
         // print debug info & remove useless data from result
         var missed_count = 0;
-        var missed_ids = [];
-        result.players.forEach(function(player) {
+        for (var resultId in result.players)
+        {
+            var player = result.players[resultId];
             if (player.status == "error" || player.status == "fail") {
-                if (missed_count < 3)
-                  missed_ids.push(player.id);
                 missed_count++;
                 missed_collection.update({ _id: player.id }, { _id: player.id, missed:true }, { upsert: true });
-            } else {
-                // Return only one vehicle data
-                if (player.v)
-                {
-                    var vs = player.v;
-                    delete player.v;
-                    if (player.vname) {
-                        var vs_length = vs.length;
-                        for (var i = 0; i < vs_length; ++i) {
-                            if (vs[i].name.toUpperCase() == player.vname)
-                            {
-                                player.v = vs[i];
-                                break;
-                            }
+                return;
+            }
+
+            // Return only one vehicle data
+            if (player.v)
+            {
+                var vs = player.v;
+                delete player.v;
+                if (player.vname) {
+                    var vs_length = vs.length;
+                    for (var i = 0; i < vs_length; ++i) {
+                        if (vs[i].name.toUpperCase() == player.vname)
+                        {
+                            player.v = vs[i];
+                            break;
                         }
                     }
                 }
             }
-        });
+        };
         times.push({"n":"debug","t":new Date()});
 
         process.send({ usage: 1, missed: missed_count });
@@ -291,7 +287,6 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, request, resp
         var now2 = new Date();
         var duration = String(now2 - times[0].t);
         if (duration > 6000) {
-        //if (false && (missed_count > 0 || failed_count > 0) && forUpdate.length > 0 && result.players.length > 1) { // Temporary disabled (log overfilled)
             while (duration.length < 4)
                 duration = " " + duration;
 
@@ -304,15 +299,14 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, request, resp
                 "  retrieve: " + (forUpdate.length < 10 ? " " : "") + forUpdate.length +
                 "  failed: " + (failed_count < 10 ? " " : "") + failed_count +
                 "  missed: " + (missed_count < 10 ? " " : "") + missed_count +
-                (missed_count > 0 ? ". ids: " : "") + missed_ids.join(",") + (missed_count > 5 ? ",..." : "")
-                /*+ "  IP:" + ip_address*/);
+                "" /* "  IP:" + ip_address*/);
 
             times.push({"n":"end","t":now2});
             var str = "";
             for (var i = 1; i < times.length; ++i) {
                 if (str != "")
                     str += " ";
-                str += times[i].n + ":" + String(times[i-1].t - times[i].t);
+                str += times[i].n + ":" + String(times[i].t - times[i-1].t);
             }
             utils.debug("times: " + str);
         }
@@ -328,7 +322,6 @@ var createWorker = function() {
     for (var i = 0; i < settings.statHosts.length; ++i) {
         hostData.push({
             lastError: null,
-            waiting: null,
             error_shown: false,
             connections: 0,
             maxConnections: 30,
@@ -375,15 +368,16 @@ var createWorker = function() {
                 return;
             }
 
-            query.split(",").forEach(function(a) {
+            var qarr = query.split(",");
+            for (var i in qarr) {
+                var a = qarr[i];
                 var x = a.split("=");
                 var id = parseInt(x[0]);
                 ids.push(id);
                 vehicles.push(x[1]);
                 if (x[2] == "1")
                     users_collection.update({ _id: id }, { $inc : { counter: 1 } }, { upsert: true });
-
-            });
+            };
         } catch(e) {
             response.statusCode = 500;
             var errText = "wrong request: " + e;
@@ -435,8 +429,8 @@ var createWorker = function() {
 
                     // Add missed or expired ids for update
                     if (!found) {
-                            forUpdate.push(id);
-                            forUpdateVNames.push(vname);
+                        forUpdate.push(id);
+                        forUpdateVNames.push(vname);
                     }
                 }
                 times.push({"n":"beforeprocess","t":new Date()});
