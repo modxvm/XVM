@@ -507,13 +507,13 @@ class wot.utils.Config
         config.battleLoading.clockFormat = config.battleLoading.showClock ? "H:N:S" : null;
       if (config.battleLoading)
       {
-        config.battleLoading.formatLeft = "{{vehicle}} " + config.battleLoading.formatLeft;
-        config.battleLoading.formatRight = config.battleLoading.formatRight + " {{vehicle}}";
+        config.battleLoading.formatLeft = "{{vehicle}}" + (config.battleLoading.formatLeft ? " " + config.battleLoading.formatLeft : "");
+        config.battleLoading.formatRight = (config.battleLoading.formatRight ? config.battleLoading.formatRight + " " : "") + "{{vehicle}}";
       }
       if (config.statisticForm)
       {
-        config.statisticForm.formatLeft = "{{vehicle}} " + config.statisticForm.formatLeft;
-        config.statisticForm.formatRight = config.statisticForm.formatRight + " {{vehicle}}";
+        config.statisticForm.formatLeft = "{{vehicle}} " + (config.statisticForm.formatLeft ? " " + config.statisticForm.formatLeft : "");
+        config.statisticForm.formatRight = (config.statisticForm.formatRight ? config.statisticForm.formatRight + " " : "") + " {{vehicle}}";
       }
       v = "1.4.0";
     }
