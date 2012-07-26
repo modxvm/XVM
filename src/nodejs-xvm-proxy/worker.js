@@ -105,14 +105,12 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, request, resp
     times.push({"n":"process","t":new Date()});
 
     var urls = { };
-    
-    for (var i in forUpdate)
-    {
-        var id = forUpdate[i];
+
+    forUpdate.forEach(function(id) {
         urls[id] = function(callback) {
             makeSingleRequest(id, callback);
-        };
-    }
+        }
+    });
     times.push({"n":"prepared","t":new Date()});
 
 //    async.series(urls, function(err, results) {
@@ -213,7 +211,8 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, request, resp
 
         // add cached items and set expired data for players with error stat
         var failed_count = 0;
-        for (var inCacheId in inCache ) {
+        var inCache_len = inCache.length;
+        for (var inCacheId = 0; inCacheId < inCache_len; ++inCacheId) {
             var player = inCache[inCacheId];
             var skip = false;
             var pl = {
@@ -251,13 +250,14 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, request, resp
 
         // print debug info & remove useless data from result
         var missed_count = 0;
-        for (var resultId in result.players)
+        players_len = result.players.length;
+        for (var resultId = 0; resultId < players_len; ++resultId)
         {
             var player = result.players[resultId];
             if (player.status == "error" || player.status == "fail") {
                 missed_count++;
                 missed_collection.update({ _id: player.id }, { _id: player.id, missed:true }, { upsert: true });
-                return;
+                continue;
             }
 
             // Return only one vehicle data
@@ -369,7 +369,8 @@ var createWorker = function() {
             }
 
             var qarr = query.split(",");
-            for (var i in qarr) {
+            var qarr_len = qarr.length;
+            for (var i = 0; i < qarr.length; ++i) {
                 var a = qarr[i];
                 var x = a.split("=");
                 var id = parseInt(x[0]);
