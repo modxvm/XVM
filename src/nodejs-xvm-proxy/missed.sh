@@ -20,6 +20,8 @@ fi
 
 declare -A ids
 
+last_limit_update=`date +%s`
+
 update()
 {
     local arr id st ids_str="" rmids="" fail=0 i cnt
@@ -61,11 +63,10 @@ update()
 		unset ids[$id]
 		;;
 	    max_conn)
-		sleep 0.1
+		sleep 0.05
 		;;
 	    wait|expired)
-		limit=$limitLo
-		sleep 0.1
+		sleep 1
 		;;
 	    *)
 		echo "UNKNOWN STATUS: $st"
@@ -81,10 +82,19 @@ update()
     fi
 
     echo "${statuses[*]}"
-    if [ "${statuses[max_conn]}" = "max_conn" ]; then
-	[ $limit -gt $limitLo ] && limit=$(($limit-1))
-    elif [ "$rmids" != ""  ]; then
+    if [ "${statuses[wait]}" != "" -o "${statuses[expired]}" != "" ]; then
+	if [ $((`date +%s` - $last_limit_update)) -ge 2 ]; then
+	    [ $limit -gt $limitLo ] && limit=$(($limit-1))
+	    last_limit_update=`date +%s`
+	fi
+    elif [ "${statuses[max_conn]}" != "" ]; then
+	if [ $((`date +%s` - $last_limit_update)) -ge 2 ]; then
+	    [ $limit -gt $limitLo ] && limit=$(($limit-1))
+	    last_limit_update=`date +%s`
+	fi
+    elif [ "${statuses[ok]}" != "" -o "${statuses[bad_id]}" != "" ]; then
 	[ $limit -lt $limitHi ] && limit=$(($limit+1))
+	last_limit_update=`date +%s`
     fi
 }
 
@@ -112,6 +122,7 @@ prepare()
 # main loop
 
 total=$(wc -l $fn)
+echo Total: $total
 pos=0
 ids=()
 for id in $(cat $fn); do

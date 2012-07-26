@@ -52,7 +52,7 @@ var makeSingleRequest = function(id, callback) {
                     hd.waiting = wait_sec;
                 if (hd.waiting - 5 >= wait_sec) {
                     hd.waiting = wait_sec;
-                    utils.debug("waiting Server_" + statHostId + ": " + wait_sec + " s");
+                    //utils.debug("waiting Server_" + statHostId + ": " + wait_sec + " s");
                 }
             }
             callback(null, {__code:"wait"});
@@ -98,7 +98,7 @@ var makeSingleRequest = function(id, callback) {
 //                utils.debug("responseData.length = " + responseData.length);
                 callback(null, result);
             } catch(e) {
-                utils.debug("JSON.parse error: length=" + responseData.length + ", data=" + responseData.substr(0, 70).replace(/[\n\r]/g, ""));
+                utils.debug("JSON.parse error: length=" + responseData.length + ", data=" + responseData.substr(0, 80).replace(/[\n\r]/g, ""));
                 callback(null, {__code:"error",__error:"JSON.parse error"});
             }
         });
@@ -111,18 +111,20 @@ var makeSingleRequest = function(id, callback) {
     request.shouldKeepAlive = false;
 }
 
-var processRemotes = function(inCache, forUpdate, forUpdateVNames, response, start) {
-    var urls = { };
+var processRemotes = function(inCache, forUpdate, forUpdateVNames, request, response, times) {
+    times.push({"n":"process","t":new Date()});
 
+    var urls = { };
     forUpdate.forEach(function(id) {
         urls[id] = function(callback) {
             makeSingleRequest(id, callback);
         };
     });
+    times.push({"n":"prepared","t":new Date()});
 
 //    async.series(urls, function(err, results) {
     async.parallel(urls, function(err, results) {
-
+        times.push({"n":"requestdone","t":new Date()});
         var now = new Date();
 
         var result = {
@@ -149,12 +151,14 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, response, sta
                 } else {
                     var hd = hostData[statHostId];
                     hd.connections--;
+                    if (hd.connections < 0)
+                        hd.connections = 0;
                     process.send({ usage: 1, hostId: statHostId, connections: hd.connections });
 
-                    if (curResult.__error || !hd.lastMaxConnectionUpdate || (now - hd.lastMaxConnectionUpdate) > 5000)
+                    if (!hd.lastMaxConnectionUpdate || (now - hd.lastMaxConnectionUpdate) > (curResult.__error ? 1000 : 5000))
                     {
                         hd.lastMaxConnectionUpdate = now;
-                        hd.maxConnections = Math.max(1, Math.min(settings.statHostMaxConnections, hd.maxConnections + (curResult.__error ? -1 : 1)));
+                        hd.maxConnections = Math.max(1, Math.min(settings.statHostMaxConnections, hd.maxConnections + (curResult.__error ? -5 : 1)));
                         process.send({ usage: 1, hostId: statHostId, maxConnections: hd.maxConnections });
                     }
 
@@ -247,6 +251,7 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, response, sta
                 process.send({ usage: 1, cached: 1 });
             }
         });
+        times.push({"n":"processed","t":new Date()});
 
         // print debug info & remove useless data from result
         var missed_count = 0;
@@ -276,12 +281,22 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, response, sta
                 }
             }
         });
+        times.push({"n":"debug","t":new Date()});
 
-        // Temporary disabled (log overfilled)
-        if (false && (missed_count > 0 || failed_count > 0) && forUpdate.length > 0 && result.players.length > 1) {
-            var duration = String(new Date() - start);
+        process.send({ usage: 1, missed: missed_count });
+
+        // return response to client
+        response.end(JSON.stringify(result));
+
+        var now2 = new Date();
+        var duration = String(now2 - times[0].t);
+        if (duration > 6000) {
+        //if (false && (missed_count > 0 || failed_count > 0) && forUpdate.length > 0 && result.players.length > 1) { // Temporary disabled (log overfilled)
             while (duration.length < 4)
                 duration = " " + duration;
+
+            //ip_address = request.connection.remoteAddress;
+
             utils.debug(
                 "S" + (statHostId == undefined ? "c" : statHostId) + " " + duration + " ms" +
                 "  total: " + (result.players.length < 10 ? " " : "") + result.players.length +
@@ -289,13 +304,18 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, response, sta
                 "  retrieve: " + (forUpdate.length < 10 ? " " : "") + forUpdate.length +
                 "  failed: " + (failed_count < 10 ? " " : "") + failed_count +
                 "  missed: " + (missed_count < 10 ? " " : "") + missed_count +
-                (missed_count > 0 ? ". ids: " : "") + missed_ids.join(",") + (missed_count > 5 ? ",..." : ""));
+                (missed_count > 0 ? ". ids: " : "") + missed_ids.join(",") + (missed_count > 5 ? ",..." : "")
+                /*+ "  IP:" + ip_address*/);
+
+            times.push({"n":"end","t":now2});
+            var str = "";
+            for (var i = 1; i < times.length; ++i) {
+                if (str != "")
+                    str += " ";
+                str += times[i].n + ":" + String(times[i-1].t - times[i].t);
+            }
+            utils.debug("times: " + str);
         }
-
-        process.send({ usage: 1, missed: missed_count });
-
-        // return response to client
-        response.end(JSON.stringify(result));
     });
 };
 
@@ -320,7 +340,7 @@ var createWorker = function() {
     setInterval(function() {
         for (var i = 0; i < hostData.length; ++i) {
             var n = hostData[i].connections || 0;
-            if (n > hostData[i].maxConnections)
+            if (n >= hostData[i].maxConnections)
                 hostData[i].connections = n - 1;
         }
 //        utils.log("conn[worker]: " + hostData[0].connections + "/" + hostData[0].maxConnections);
@@ -344,7 +364,7 @@ var createWorker = function() {
         // parse request
         var ids = [ ];
         var vehicles = [ ];
-        var start = new Date();
+        var times = [ { "n":"start","t":new Date() } ];
         try {
             var query = url.parse(request.url).query;
             if(!query || !query.match(/^((\d)|(\d[\dA-Z_\-,=]*))$/))
@@ -374,11 +394,14 @@ var createWorker = function() {
         }
 
         process.send({ usage: 1, requests: 1, players: ids.length });
+        times.push({"n":"urlparsed","t":new Date()});
 
         // Select required data from cache
         var cursor = collection.find({ _id: { $in: ids }}, { _id:1, st:1, dt:1, nm:1, b:1, w:1, e:1, v:1 });
+        times.push({"n":"find","t":new Date()});
         cursor.toArray(function(error, inCache) {
             try {
+        times.push({"n":"find2","t":new Date()});
                 if (error)
                     throw "MongoDB find error: " + error;
 
@@ -416,8 +439,8 @@ var createWorker = function() {
                             forUpdateVNames.push(vname);
                     }
                 }
-
-                processRemotes(inCache, forUpdate, forUpdateVNames, response, start);
+                times.push({"n":"beforeprocess","t":new Date()});
+                processRemotes(inCache, forUpdate, forUpdateVNames, request, response, times);
             } catch(e) {
                 response.statusCode = 500;
                 response.end("Error: " + e);
