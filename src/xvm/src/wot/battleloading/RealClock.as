@@ -14,6 +14,7 @@ class wot.battleloading.RealClock
     
     private function onConfigLoaded()
     {
+        GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
         showClock(Config.s_config.battleLoading.clockFormat);
     }
     
