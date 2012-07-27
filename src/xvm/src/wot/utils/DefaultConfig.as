@@ -921,8 +921,15 @@ class wot.utils.DefaultConfig
         ]
       },
       { folder: "NA", players: [
-          { nick: "sirmax",     icon: "XVM.png" },
-          { clan: "[WGA]",      icon: "WG.png" }
+          { nick: "sirmax",		icon: "XVM.png" },
+          { clan: "[WGA]",		icon: "WG.png" },
+          { nick: "nagatron",		icon: "Curse.png" },
+          { nick: "Relics",		icon: "Curse.png" },
+          { nick: "Sov13t",		icon: "Curse.png" },
+          { nick: "Friction",		icon: "Curse.png" },
+          { nick: "wg_press_100",	icon: "Curse.png" },
+          { nick: "wg_press_101",	icon: "Curse.png" },
+          { nick: "wg_press_102",	icon: "Curse.png" }
         ]
       },
       { folder: "CT", players: [
