@@ -101,20 +101,22 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
     {
       info.textColor = 0x60FF60;
       info.text = "XVM: New version: v" + String(event.ver) + " (current is v" + Defines.XVM_VERSION + ")";
-      if (event.message)
+      if (event.message && event.message != "")
         setTipText(event.message);
     }
 
-    if (event.warning)
+    if (event.warning != undefined)
     {
       info.textColor = 0xFFD040;
-      setTipText(event.warning);
+      if (event.warning != "")
+        setTipText(event.warning);
     }
 
-    if (event.error)
+    if (event.error != undefined)
     {
       info.textColor = 0xFF4040;
-      setTipText(event.error, true);
+      if (event.error != "")
+        setTipText(event.error, true);
     }
   }
 

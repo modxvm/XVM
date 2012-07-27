@@ -202,7 +202,7 @@ class wot.utils.Config
     }
     else
     {
-      GlobalEventDispatcher.dispatchEvent({ type: "set_info", warning: " " });
+      GlobalEventDispatcher.dispatchEvent({ type: "set_info", warning: "" });
     }
   }
 
