@@ -505,6 +505,8 @@ namespace wot
       request.Credentials = CredentialCache.DefaultCredentials;
       if (!Program.isNoProxy)
         request.Proxy.Credentials = CredentialCache.DefaultCredentials;
+      else
+        request.Proxy = new WebProxy();
       request.Timeout = Settings.Default.Timeout;
 
       HttpWebResponse response = (HttpWebResponse)request.GetResponse();
