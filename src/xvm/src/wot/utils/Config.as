@@ -503,10 +503,9 @@ class wot.utils.Config
 
     if (v == "1.3.0")
     {
-      if (config.battle)
-        config.battleLoading.clockFormat = config.battleLoading.showClock ? "H:N:S" : null;
       if (config.battleLoading)
       {
+        config.battleLoading.clockFormat = config.battleLoading.showClock ? "H:N:S" : "";
         config.battleLoading.formatLeft = "{{vehicle}}" + (config.battleLoading.formatLeft ? " " + config.battleLoading.formatLeft : "");
         config.battleLoading.formatRight = (config.battleLoading.formatRight ? config.battleLoading.formatRight + " " : "") + "{{vehicle}}";
       }
