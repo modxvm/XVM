@@ -44,7 +44,6 @@ class wot.utils.VehicleInfo
 
   private static var _data = {
     // unknown
-    uk_GB68_Matilda_Black_Prince:	{ level: 0,  type: MT, tiers: [ 0, 0 ] },
 
     // level 1
     germany_Ltraktor:			{ level: 1,  type: LT, tiers: [ 1, 2 ] },
@@ -127,6 +126,7 @@ class wot.utils.VehicleInfo
     usa_Ram_II:				{ level: 5,  type: MT, tiers: [ 5, 7 ] },
     germany_T_25:			{ level: 5,  type: MT, tiers: [ 5, 7 ] },
     ussr_T_34:				{ level: 5,  type: MT, tiers: [ 5, 7 ] },
+    uk_GB68_Matilda_Black_Prince:	{ level: 5,  type: MT, tiers: [ 5, 7 ] },
     france_BDR_G1B:			{ level: 5,  type: HT, tiers: [ 5, 7 ] },
     usa_T1_hvy:				{ level: 5,  type: HT, tiers: [ 5, 7 ] },
     ussr_KV1:				{ level: 5,  type: HT, tiers: [ 5, 7 ] },
