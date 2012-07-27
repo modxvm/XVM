@@ -4,7 +4,7 @@
  */
 import wot.battleloading.TipField;
 import wot.battleloading.RealClock;
-import wot.utils.Chance;
+import wot.battleloading.WinChances;
 import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.GlobalEventDispatcher;
@@ -16,9 +16,8 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
 {
     private static var STAT_PRELOAD_DELAY:Number = 500;
     
-    private static var s_chanceField: TextField = null;
-    private static var s_chanceText: String;
-    
+    // Components
+    private var winChances:WinChances;
     private var tipField:TipField;
     private var realClock:RealClock;
 
@@ -29,12 +28,13 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
         Utils.TraceXvmModule("BattleLoading");
         
         GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
-        GlobalEventDispatcher.addEventListener("stat_loaded", this, onStatLoaded);
+        
         Config.LoadConfig("BattleLoading.as");
 
         // Components
-        tipField  = new TipField(form_mc);  // Information field below players list
-        realClock = new RealClock(form_mc); // Realworld time at right side of TipField
+        winChances = new WinChances(form_mc); // Winning chance info above players list.
+        tipField   = new TipField(form_mc);   // Information field below players list.
+        realClock  = new RealClock(form_mc);  // Realworld time at right side of TipField.
     }
 
     private function onConfigLoaded()
@@ -66,31 +66,5 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
                 "    showPlayersStatistics=true\n" +
                 "    loadEnemyStatsInFogOfWar=" + Config.s_config.rating.loadEnemyStatsInFogOfWar + "\n" +
                 "    useStandardMarkers=" + Config.s_config.battle.useStandardMarkers);
-    }
-
-    private function onStatLoaded()
-    {
-        GlobalEventDispatcher.removeEventListener("stat_loaded", this, onStatLoaded);
-
-        if (Config.s_config.battleLoading.showChances)
-            showWinChances();
-    }
-    
-    private function showWinChances()
-    {
-        if (!s_chanceField)
-        {
-            s_chanceField = form_mc.battleText;
-            s_chanceField.html = true;
-            s_chanceField._width += 300;
-            s_chanceField._x -= 150;
-            s_chanceText = Chance.ShowChance(s_chanceField, Config.s_config.battleLoading.showChancesExp);
-        }
-        if (s_chanceField.htmlText != s_chanceText)
-        {
-            //wot.utils.Logger.add(s_chanceField.htmlText);
-            s_chanceField.html = true;
-            s_chanceField.htmlText = s_chanceText;
-        }
-    }
+    }  
 }
