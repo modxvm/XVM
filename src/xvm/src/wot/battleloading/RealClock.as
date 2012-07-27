@@ -1,5 +1,6 @@
 import wot.utils.Config;
 import wot.utils.Utils;
+import wot.utils.GlobalEventDispatcher;
 
 class wot.battleloading.RealClock
 {
@@ -8,6 +9,11 @@ class wot.battleloading.RealClock
     public function RealClock(form_mc) 
     {
         this.form_mc = form_mc;
+        GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
+    }
+    
+    private function onConfigLoaded()
+    {
         showClock(Config.s_config.battleLoading.clockFormat);
     }
     
