@@ -3,6 +3,7 @@
  * @author sirmax2
  */
 import wot.battleloading.TipField;
+import wot.battleloading.RealClock;
 import wot.utils.Chance;
 import wot.utils.Config;
 import wot.utils.Defines;
@@ -19,6 +20,7 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
     private static var s_chanceText: String;
     
     private var tipField:TipField;
+    private var realClock:RealClock;
 
     public function BattleLoading()
     {
@@ -30,7 +32,9 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
         GlobalEventDispatcher.addEventListener("stat_loaded", this, onStatLoaded);
         Config.LoadConfig("BattleLoading.as");
 
-        tipField = new TipField(form_mc);
+        // Components
+        tipField  = new TipField(form_mc);  // Information field below players list
+        realClock = new RealClock(form_mc); // Realworld time at right side of TipField
     }
 
     private function onConfigLoaded()
@@ -38,8 +42,6 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
         GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
         traceToProxyTerminal();
 
-        showClock(Config.s_config.battleLoading.clockFormat);
-        
         if (Config.s_config.rating.showPlayersStatistics)
             loadStatistics();
     }
@@ -90,72 +92,5 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
             s_chanceField.html = true;
             s_chanceField.htmlText = s_chanceText;
         }
-    }
-
-    private function setInfoFieldData(event)
-    {
-        //Logger.addObject(event, "SetInfoFieldData(event)");
-        var info: TextField = form_mc.helpTip;
-        var tip: TextField = form_mc.tipText;
-
-        info.text = "XVM v" + Defines.XVM_VERSION + " ";
-
-        if (event.ver && Utils.compareVersions(String(event.ver), Defines.XVM_VERSION) == 1)
-        {
-            info.textColor = 0x60FF60;
-            info.text = "XVM: New version: v" + String(event.ver) + " (current is v" + Defines.XVM_VERSION + ")";
-            if (event.message && event.message != "")
-                setTipText(event.message);
-        }
-
-        if (event.warning != undefined)
-        {
-            info.textColor = 0xFFD040;
-            if (event.warning != "")
-                setTipText(event.warning);
-        }
-
-        if (event.error != undefined)
-        {
-            info.textColor = 0xFF4040;
-            if (event.error != "")
-                setTipText(event.error, true);
-        }
-    }
-
-    private function setTipText(text, isError)
-    {
-        var tip: TextField = form_mc.tipText;
-        var tf: TextFormat = tip.getNewTextFormat();
-        tf.align = "left";
-        tf.size = 12;
-        tf.leading = 0;
-        tip.setNewTextFormat(tf);
-        tip.text = text;
-        if (isError)
-        {
-            tf.color = 0xFF4040;
-            var pos = text.indexOf(">>>");
-            if (pos != -1)
-                tip.setTextFormat(pos, pos + 3, tf);
-            pos = text.indexOf("<<<");
-            if (pos != -1)
-                tip.setTextFormat(pos, pos + 3, tf);
-        }
-    }
-    
-    private function showClock(format)
-    {
-        if (!format || format == "")
-            return;
-        var f = form_mc.helpTip;
-        var clock: TextField = form_mc.createTextField("xvm_clock", form_mc.getNextHighestDepth(), f._x, f._y, f._width, f._height);
-        clock.antiAliasType = "advanced";
-        var tf: TextFormat = f.getNewTextFormat();
-        tf.color = 0xFFFFFF;
-        tf.align = "right";
-        clock.setNewTextFormat(tf);
-        clock.filters = f.filters;
-        setInterval(function() { clock.text = Utils.FormatDate(format, new Date()); }, 1000);
     }
 }
