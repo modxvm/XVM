@@ -2,6 +2,7 @@
  * ...
  * @author sirmax2
  */
+import wot.battleloading.TipField;
 import wot.utils.Chance;
 import wot.utils.Config;
 import wot.utils.Defines;
@@ -16,6 +17,8 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
     
     private static var s_chanceField: TextField = null;
     private static var s_chanceText: String;
+    
+    private var tipField:TipField;
 
     public function BattleLoading()
     {
@@ -27,7 +30,7 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
         GlobalEventDispatcher.addEventListener("stat_loaded", this, onStatLoaded);
         Config.LoadConfig("BattleLoading.as");
 
-        GlobalEventDispatcher.addEventListener("set_info", this, setInfoFieldData);
+        tipField = new TipField(form_mc);
     }
 
     private function onConfigLoaded()
