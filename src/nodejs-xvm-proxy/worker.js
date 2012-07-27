@@ -14,7 +14,7 @@ var collection,
     users_collection,
     mongoOptions = {
         auto_reconnect: true,
-        poolSize: 50
+        poolSize: 100
     };
 
 // Global vars
@@ -211,9 +211,7 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, request, resp
 
         // add cached items and set expired data for players with error stat
         var failed_count = 0;
-        var inCache_len = inCache.length;
-        for (var inCacheId = 0; inCacheId < inCache_len; ++inCacheId) {
-            var player = inCache[inCacheId];
+        inCache.forEach(function(player) {
             var skip = false;
             var pl = {
                 id: player._id,
@@ -245,38 +243,34 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, request, resp
                 result.players.push(pl);
                 process.send({ usage: 1, cached: 1 });
             }
-        };
+        });
         times.push({"n":"processed","t":new Date()});
 
         // print debug info & remove useless data from result
         var missed_count = 0;
-        players_len = result.players.length;
-        for (var resultId = 0; resultId < players_len; ++resultId)
-        {
-            var player = result.players[resultId];
+        result.players.forEach(function(player) {
             if (player.status == "error" || player.status == "fail") {
                 missed_count++;
                 missed_collection.update({ _id: player.id }, { _id: player.id, missed:true }, { upsert: true });
-                continue;
-            }
-
-            // Return only one vehicle data
-            if (player.v)
-            {
-                var vs = player.v;
-                delete player.v;
-                if (player.vname) {
-                    var vs_length = vs.length;
-                    for (var i = 0; i < vs_length; ++i) {
-                        if (vs[i].name.toUpperCase() == player.vname)
-                        {
-                            player.v = vs[i];
-                            break;
+            } else {
+                // Return only one vehicle data
+                if (player.v)
+                {
+                    var vs = player.v;
+                    delete player.v;
+                    if (player.vname) {
+                        var vs_length = vs.length;
+                        for (var i = 0; i < vs_length; ++i) {
+                            if (vs[i].name.toUpperCase() == player.vname)
+                            {
+                                player.v = vs[i];
+                                break;
+                            }
                         }
                     }
                 }
             }
-        };
+        });
         times.push({"n":"debug","t":new Date()});
 
         process.send({ usage: 1, missed: missed_count });
@@ -369,16 +363,14 @@ var createWorker = function() {
             }
 
             var qarr = query.split(",");
-            var qarr_len = qarr.length;
-            for (var i = 0; i < qarr.length; ++i) {
-                var a = qarr[i];
+            qarr.forEach(function(a) {
                 var x = a.split("=");
                 var id = parseInt(x[0]);
                 ids.push(id);
                 vehicles.push(x[1]);
                 if (x[2] == "1")
                     users_collection.update({ _id: id }, { $inc : { counter: 1 } }, { upsert: true });
-            };
+            });
         } catch(e) {
             response.statusCode = 500;
             var errText = "wrong request: " + e;
@@ -396,7 +388,7 @@ var createWorker = function() {
         times.push({"n":"find","t":new Date()});
         cursor.toArray(function(error, inCache) {
             try {
-        times.push({"n":"find2","t":new Date()});
+                times.push({"n":"find2","t":new Date()});
                 if (error)
                     throw "MongoDB find error: " + error;
 
@@ -408,13 +400,7 @@ var createWorker = function() {
                 for (var a = 0; a < ids_length; ++a) {
                     var id = ids[a];
                     var vname = vehicles[a] ? vehicles[a].toUpperCase() : null;
-//if (!vname)
-//{
-//    utils.debug("a:" + a);
-//    utils.debug("ids:" + ids.join(","));
-//    utils.debug("vehicles:" + vehicles.join(","));
-//    utils.debug("query: " + url.parse(request.url).query);
-//}
+
                     // Check cache data
                     var found = false;
                     var inCache_length = inCache.length;
