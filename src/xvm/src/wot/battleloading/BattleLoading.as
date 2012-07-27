@@ -14,7 +14,7 @@ import wot.utils.Utils;
 
 class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
 {
-    private static var STAT_PRELOAD_DELAY:Number = 500;
+    private static var STAT_PRELOAD_DELAY:Number = 3000; // TODO - sometimes it happens before all items added in BattleLoadingItemRenderer7
     
     // Components
     private var winChances:WinChances;
