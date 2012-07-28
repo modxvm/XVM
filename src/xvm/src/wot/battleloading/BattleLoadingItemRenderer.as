@@ -31,6 +31,48 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
 
         vehicleField.html = true;
     }
+    
+    // override
+    function setData(data)
+    {
+        // Process one player data.
+        if (data)
+        {
+            addPlayerToStatLoadQueue(data);
+            attachClanIconToPlayer(data);
+        }
+        //else
+            Logger.add(data.vehicle);
+
+        // Remove squad icon.
+        if (Config.s_config.battleLoading.removeSquadIcon && squad)
+            squad._visible = false;
+
+        super.setData(data);
+    }
+    
+    function addPlayerToStatLoadQueue(data)
+    {
+        if (Config.s_config.rating.showPlayersStatistics)
+        {
+            StatLoader.AddPlayerData(data.id, data.label, data.vehicle, data.icon, team, selected);
+            GlobalEventDispatcher.addEventListener("stat_loaded", this, StatLoadedCallback);
+            if (!StatData.s_loaded && StatLoader.s_players_count === 30)
+                StatLoader.StartLoadData(Defines.COMMAND_RUN);
+        }
+    }
+    
+    function attachClanIconToPlayer(data)
+    {
+        var cfg = Config.s_config.battleLoading.clanIcon;
+        if (cfg.show && !m_clanIconLoaded)
+        {
+            m_clanIconLoaded = true;
+            var pinfo = PlayerInfo.getPlayerInfo(Utils.GetPlayerName(data.label), Utils.GetClanName(data.label));
+            if (pinfo)
+                PlayerInfo.createClanIcon(this, "m_clanIcon", pinfo.icon, cfg, iconLoader._x, iconLoader._y, team);
+        }
+    }
 
     private function get team(): Number
     {
@@ -58,39 +100,6 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
                 //Logger.add(iconLoader.width + "x" + iconLoader.height);
             }
         }
-    }
-
-    // override
-    function setData(data)
-    {
-        //Logger.add("setData");
-        if (data)
-        {
-            // Add players for statistics loading
-            if (Config.s_config.rating.showPlayersStatistics)
-            {
-                StatLoader.AddPlayerData(data.id, data.label, data.vehicle, data.icon, team, selected);
-                GlobalEventDispatcher.addEventListener("stat_loaded", this, StatLoadedCallback);
-                if (!StatData.s_loaded && StatLoader.s_players_count === 30)
-                    StatLoader.StartLoadData(Defines.COMMAND_RUN);
-            }
-
-            // Player/clan icons
-            var cfg = Config.s_config.battleLoading.clanIcon;
-            if (cfg.show && !m_clanIconLoaded)
-            {
-                m_clanIconLoaded = true;
-                var pinfo = PlayerInfo.getPlayerInfo(Utils.GetPlayerName(data.label), Utils.GetClanName(data.label));
-                if (pinfo)
-                    PlayerInfo.createClanIcon(this, "m_clanIcon", pinfo.icon, cfg, iconLoader._x, iconLoader._y, team);
-            }
-        }
-
-        // Remove squad icon
-        if (Config.s_config.battleLoading.removeSquadIcon && squad)
-            squad._visible = false;
-
-        super.setData(data);
     }
 
     // override
