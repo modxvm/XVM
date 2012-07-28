@@ -27,14 +27,14 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
 
         Utils.TraceXvmModule("BattleLoading");
         
-        GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
-        
-        Config.LoadConfig("BattleLoading.as");
-
         // Components
         winChances = new WinChances(form_mc); // Winning chance info above players list.
         tipField   = new TipField(form_mc);   // Information field below players list.
         realClock  = new RealClock(form_mc);  // Realworld time at right side of TipField.
+        
+        GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
+        
+        Config.LoadConfig("BattleLoading.as");
     }
 
     private function onConfigLoaded()
