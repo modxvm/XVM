@@ -15,8 +15,10 @@ class wot.utils.GraphicsUtil
     if (Number(data.alpha) == 0 || Number(data.strength) == 0)
       return null;
 
-    var shadow: DropShadowFilter = new DropShadowFilter(Number(data.distance), Number(data.angle), Number(data.color),
-      Number(data.alpha) * 0.01, Number(data.size), Number(data.size), Number(data.strength) * 0.01, 3);
+    var shadow: DropShadowFilter = new DropShadowFilter(
+        Number(data.distance),     Number(data.angle), Number(data.color),
+        Number(data.alpha) * 0.01, Number(data.size),  Number(data.size),
+        Number(data.strength) * 0.01, 3);
 
     return shadow;
   }

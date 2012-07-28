@@ -85,7 +85,7 @@ class wot.utils.DefaultConfig
           formatLeft: "<font color='{{c:eff}}'>{{vehicle}}</font>",
           formatRight: "<font color='{{c:eff}}'>{{vehicle}}</font>"
         },
-        // режим large
+        // Large mode.
         large: {
           // 0..250 - player name field width.
           width: 170,
