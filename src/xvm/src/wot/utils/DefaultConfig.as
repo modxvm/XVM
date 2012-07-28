@@ -653,6 +653,7 @@ class wot.utils.DefaultConfig
       { folder: "RU", players: [
           { nick: "sirmax2",    icon: "XVM.png" },
           { nick: "0x01",       icon: "XVM.png" },
+          { nick: "XlebniDizele4ku",icon: "XVM.png" },
           { clan: "[WG]",       icon: "WG.png" },
           { clan: "[WG-A]",     icon: "WG.png" },
           { clan: "[WTMOD]",    icon: "WTMOD.png" },
