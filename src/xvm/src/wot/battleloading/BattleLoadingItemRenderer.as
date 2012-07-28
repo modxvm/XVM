@@ -13,6 +13,8 @@ import wot.utils.PlayerInfo;
 import wot.utils.TextCache;
 import wot.utils.Utils;
 
+// Renders one player, not a bulk.
+
 class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRenderer
 {
     private static var s_logShown = false;
@@ -41,8 +43,6 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
             addPlayerToStatLoadQueue(data);
             attachClanIconToPlayer(data);
         }
-        //else
-            Logger.add(data.vehicle);
 
         // Remove squad icon.
         if (Config.s_config.battleLoading.removeSquadIcon && squad)

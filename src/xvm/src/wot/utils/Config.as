@@ -22,8 +22,6 @@ class wot.utils.Config
   private static var s_config_filename: String = "";
   private static var s_src: String = "";
 
-
-
   // Load XVM mod config; config data is shared between all marker instances, so
   // it should be loaded only once per session. s_loaded flag indicates that
   // we've already initialized config loading process.
