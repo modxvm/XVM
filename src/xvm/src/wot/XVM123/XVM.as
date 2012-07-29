@@ -22,7 +22,7 @@ import wot.utils.Utils;
 import wot.utils.Logger;
 import wot.utils.PlayerInfo;
 
-class wot.XVM extends net.wargaming.ingame.VehicleMarker
+class wot.XVM123.XVM extends net.wargaming.ingame.VehicleMarker
 {
   static var DEBUG_TIMES = false;
 

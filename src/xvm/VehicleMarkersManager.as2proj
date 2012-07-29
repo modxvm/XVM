@@ -41,6 +41,10 @@
     <compile path="src\wot\Main.as" />
     <compile path="classes\wot\ingame\VehicleMarkerAlly.as" />
     <compile path="classes\wot\ingame\VehicleMarkerEnemy.as" />
+    <compile path="src\wot\VehicleMarkersManager\XVM.as" />
+    <compile path="src\wot\ExtendedVehicleMarker\XVM.as" />
+    <compile path="src\wot\ExtendedVehicleMarker1\XVM.as" />
+    <compile path="src\wot\XVM123\XVM.as" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>
@@ -56,7 +60,7 @@
   <postBuildCommand alwaysRun="False" />
   <!-- Other project options -->
   <options>
-    <option showHiddenPaths="False" />
+    <option showHiddenPaths="True" />
     <option testMovie="Custom" />
     <option testMovieCommand="..\..\utils\test.sh" />
   </options>

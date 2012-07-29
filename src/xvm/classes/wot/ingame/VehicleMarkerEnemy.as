@@ -1,4 +1,4 @@
-﻿class wot.ingame.VehicleMarkerEnemy extends wot.XVM
+﻿class wot.ingame.VehicleMarkerEnemy extends wot.XVM123.XVM
 {
   function VehicleMarkerEnemy()
   {
