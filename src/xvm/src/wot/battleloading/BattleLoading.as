@@ -9,6 +9,7 @@ import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.GlobalEventDispatcher;
 import wot.utils.Logger;
+import wot.utils.StatData;
 import wot.utils.StatLoader;
 import wot.utils.Utils;
 
@@ -26,7 +27,7 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
         super();
 
         Utils.TraceXvmModule("BattleLoading");
-        
+
         // Components
         winChances = new WinChances(form_mc); // Winning chance info above players list.
         tipField   = new TipField(form_mc);   // Information field below players list.
@@ -51,7 +52,10 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
         // Force stats loading after 0.5 sec if enabled (for 12x12 battles, FogOfWar, ...)
         _global.setTimeout
         (
-            function() { StatLoader.StartLoadData(Defines.COMMAND_RUN); },
+            function() {
+                if (!StatData.s_loaded)
+                    StatLoader.StartLoadData(Defines.COMMAND_RUN);
+            },
             STAT_PRELOAD_DELAY
         );
     }
