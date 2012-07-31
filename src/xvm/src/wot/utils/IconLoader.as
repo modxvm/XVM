@@ -5,7 +5,7 @@
 import net.wargaming.controls.UILoaderAlt;
 import wot.utils.Utils;
 
-class wot.utils.Iconset
+class wot.utils.IconLoader
 {
   private static var s_failIcons: Array = [];
 
@@ -15,13 +15,13 @@ class wot.utils.Iconset
   private var m_altIcons: Array;
   private var m_currentIndex: Number;
 
-  public function Iconset(owner: Object, completeFunc: Function)
+  public function IconLoader(owner: Object, completeFunc: Function)
   {
     m_owner = owner;
     m_completeFunc = completeFunc;
   }
 
-  public function init(iconLoader: UILoaderAlt, altIcons: Array)
+  public function init(iconLoader: UILoaderAlt, altIcons: Array, useNoImage)
   {
     if (m_iconLoader != null)
     {
@@ -48,7 +48,9 @@ class wot.utils.Iconset
         m_altIcons.push(icon);
       m_iconLoader._sourceAlt = "";
     }
-    m_altIcons.push("../maps/icons/vehicle/contour/noImage.png");
+
+    if (useNoImage == undefined || useNoImage)
+        m_altIcons.push("../maps/icons/vehicle/contour/noImage.png");
 
     m_currentIndex = 0;
   }
@@ -61,15 +63,21 @@ class wot.utils.Iconset
   private function errorLoad(event)
   {
     m_currentIndex++;
-    //wot.utils.Logger.add("errorLoad(): " + event.target.source + " => " + currentIcon);
+    var next = currentIcon;
+    //wot.utils.Logger.add("errorLoad(): " + event.target.source + " => " + next);
     s_failIcons.push(event.target.source);
-    event.target.source = currentIcon;
+    event.target.source = next;
+    if (next == "" && m_owner && m_completeFunc)
+    {
+        event.target._source = "";
+        m_completeFunc.call(m_owner, event);
+    }
   }
 
   private function completeLoad(event)
   {
-    //wot.utils.Logger.add("completeLoad(): " + currentIcon);
+    //wot.utils.Logger.add("completeLoad(): " + event.target.source);
     if (m_owner && m_completeFunc)
-      m_completeFunc.call(m_owner);
+      m_completeFunc.call(m_owner, event);
   }
 }

@@ -37,8 +37,7 @@
   </build>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="src\wot\XVM123\XVM.as" />
-    <compile path="src\wot\Main.as" />
+    <compile path="src\wot\VehicleMarkersManager\XVM.as" />
     <compile path="classes\wot\ingame\VehicleMarkerAlly.as" />
     <compile path="classes\wot\ingame\VehicleMarkerEnemy.as" />
   </compileTargets>

@@ -1,4 +1,4 @@
-﻿class wot.ingame.VehicleMarkerAlly extends wot.XVM123.XVM
+﻿class wot.ingame.VehicleMarkerAlly extends wot.VehicleMarkersManager.XVM
 {
   function VehicleMarkerAlly()
   {

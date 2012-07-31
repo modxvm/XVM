@@ -5,7 +5,7 @@
 import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.GlobalEventDispatcher;
-import wot.utils.Iconset;
+import wot.utils.IconLoader;
 import wot.utils.Logger;
 import wot.utils.StatData;
 import wot.utils.StatLoader;
@@ -21,7 +21,7 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
 
     private static var dummy = Logger.dummy; // avoid import warning
 
-    private var m_iconset: Iconset = null;
+    private var m_iconset: IconLoader = null;
     private var m_clanIconLoaded = false;
     private var m_iconLoaded: Boolean = false;
 
@@ -33,7 +33,7 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
 
         vehicleField.html = true;
     }
-    
+
     // override
     function setData(data)
     {
@@ -50,7 +50,7 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
 
         super.setData(data);
     }
-    
+
     function addPlayerToStatLoadQueue(data)
     {
         if (Config.s_config.rating.showPlayersStatistics)
@@ -61,17 +61,19 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
                 StatLoader.StartLoadData(Defines.COMMAND_RUN);
         }
     }
-    
+
     function attachClanIconToPlayer(data)
     {
+        if (m_clanIconLoaded)
+            return;
+        m_clanIconLoaded = true;
+
         var cfg = Config.s_config.battleLoading.clanIcon;
-        if (cfg.show && !m_clanIconLoaded)
-        {
-            m_clanIconLoaded = true;
-            var pinfo = PlayerInfo.getPlayerInfo(Utils.GetPlayerName(data.label), Utils.GetClanName(data.label));
-            if (pinfo)
-                PlayerInfo.createClanIcon(this, "m_clanIcon", pinfo.icon, cfg, iconLoader._x, iconLoader._y, team);
-        }
+        if (!cfg.show)
+            return;
+
+        var icon = PlayerInfo.createIcon(this, cfg, iconLoader._x, iconLoader._y, team);
+        PlayerInfo.setSource(icon, Utils.GetPlayerName(data.label), Utils.GetClanName(data.label));
     }
 
     private function get team(): Number
@@ -139,7 +141,7 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
         {
             // Alternative icon set
             if (!m_iconset)
-                m_iconset = new Iconset(this, completeLoad);
+                m_iconset = new IconLoader(this, completeLoad);
             m_iconset.init(iconLoader,
                 [ data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.battleLoading), data.icon ]);
             data.icon = m_iconset.currentIcon;

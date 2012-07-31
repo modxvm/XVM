@@ -2,92 +2,101 @@
  * ...
  * @author sirmax2
  */
+import net.wargaming.controls.UILoaderAlt;
 import wot.utils.Config;
 import wot.utils.Defines;
+import wot.utils.IconLoader;
 
 class wot.utils.PlayerInfo extends MovieClip
 {
-  private static var s_playersInfoCache = { };
+    private static var s_playersIconSources: Object = { };
 
-  public static function getPlayerInfo(nick: String, clan: String)
-  {
-    if (!Config.s_loaded)
-      return null;
-
-    if (s_playersInfoCache.hasOwnProperty(nick))
-      return s_playersInfoCache[nick];
-
-    var result = null;
-    var players_length = Config.s_config.players.length;
-    for (var i = 0; i < players_length; ++i)
+    public static function createIcon(owner: MovieClip, cfg: Object, dx: Number, dy: Number, team: Number): UILoaderAlt
     {
-      var pinfo = Config.s_config.players[i];
-      if (nick && pinfo.nick && nick == pinfo.nick)
-      {
-        result = pinfo;
-        break;
-      }
-      if (clan != null && pinfo.clan != null && clan.indexOf(pinfo.clan, 0) != -1)
-      {
-        result = pinfo;
-        break;
-      }
+        var holder:MovieClip = owner["xvm_icon_holder"];
+        if (holder == undefined)
+        {
+            holder = owner.createEmptyMovieClip("xvm_icon_holder", owner.getNextHighestDepth());
+            holder._x = dx + (team == Defines.TEAM_ALLY ? cfg.x : -cfg.xr);
+            if (team == Defines.TEAM_ENEMY)
+                holder._x -= cfg.w;
+            holder._y = dy + (team == Defines.TEAM_ALLY ? cfg.y : cfg.yr);
+        }
+
+        var il = new IconLoader(instance, instance.completeLoadIcon);
+
+        var icon: UILoaderAlt = (UILoaderAlt)(holder.attachMovie("UILoaderAlt", "icon", 0));
+        icon._x = icon._y = 0;
+        icon._alpha = isFinite(cfg.alpha) ? cfg.alpha : 100;
+        icon._visible = false;
+        icon["claninfo"] = { w: cfg.w, h: cfg.h };
+        icon["holder"] = holder;
+        icon["iconloader"] = il;
+
+        return icon;
     }
-    s_playersInfoCache[nick] = result;
-    return result;
-  }
 
-  public static function createClanIcon(owner: MovieClip, name: String, source: String, cfg, dx, dy, team): MovieClip
-  {
-    var holder_x = dx + (team == Defines.TEAM_ALLY ? cfg.x : -cfg.xr);
-    if (team == Defines.TEAM_ENEMY)
-      holder_x -= cfg.w;
-    var holder_y = dy + (team == Defines.TEAM_ALLY ? cfg.y : cfg.yr);
-    return createClanIcon2(owner, name, source, holder_x, holder_y, cfg.w, cfg.h, cfg.alpha);
-  }
-
-  public static function createClanIcon2(owner: MovieClip, name: String, source: String, x, y, w, h, alpha): MovieClip
-  {
-    var holder: MovieClip = owner.createEmptyMovieClip(name, owner.getNextHighestDepth());
-    var icon: MovieClip = holder.attachMovie("UILoader", "clanIcon", holder.getNextHighestDepth());
-
-    holder._x = x;
-    holder._y = y;
-
-    icon._x = icon._y = 0;
-    icon._alpha = alpha;
-    icon.addEventListener("complete", instance, "completeLoadClanIcon");
-    icon.source = source;
-    icon.visible = false;
-    icon["xvm_claninfo"] = { w: w, h: h };
-    icon["holder"] = holder;
-
-    return holder;
-  }
-
-  // private
-  private static var _instance = null;
-  public static function get instance()
-  {
-    if (!_instance)
-      _instance = new PlayerInfo();
-    return _instance;
-  }
-
-  private function completeLoadClanIcon(event)
-  {
-    var icon: MovieClip = event.target;
-    icon.setSize(icon["xvm_claninfo"].w, icon["xvm_claninfo"].h);
-    icon.invalidate();
-    icon.visible = false;
-
-    icon["holder"].onEnterFrame = function()
+    public static function setSource(icon: UILoaderAlt, nick: String, clan: String)
     {
-      if (icon.invalidationIntervalID)
-        return;
-      this.onEnterFrame = null;
-      this.stop();
-      icon.visible = true;
+        if (icon["nick"] == nick)
+            return;
+        icon["nick"] = nick;
+
+        // Load order: nick -> clan -> default clan -> default nick
+        var paths = [ ];
+        var src = s_playersIconSources[nick];
+        if (src != undefined)
+        {
+            if (src == "")
+            {
+                icon.unload();
+                return;
+            }
+            paths.push(s_playersIconSources[nick]);
+        }
+        else
+        {
+            paths.push(Config.s_config.battle.clanIconsFolder + Config.s_game_region + "/nick/" + nick + ".png");
+            if (clan)
+            {
+                paths.push(Config.s_config.battle.clanIconsFolder + Config.s_game_region + "/clan/" + clan + ".png");
+                paths.push(Config.s_config.battle.clanIconsFolder + Config.s_game_region + "/clan/default.png");
+            }
+            paths.push(Config.s_config.battle.clanIconsFolder + Config.s_game_region + "/nick/default.png");
+        }
+
+        var il = icon["iconloader"];
+        il.init(icon, paths, false);
+        var ci = il.currentIcon;
+        icon.source = ci;
     }
-  }
+
+    // private
+    private static var _instance = null;
+    public static function get instance()
+    {
+        if (!_instance)
+            _instance = new PlayerInfo();
+        return _instance;
+    }
+
+    public function completeLoadIcon(event)
+    {
+        var icon: MovieClip = event.target;
+
+        icon.setSize(icon["claninfo"].w, icon["claninfo"].h);
+        icon.invalidate();
+        //icon.visible = false;
+        if (!s_playersIconSources.hasOwnProperty(icon["nick"]))
+            s_playersIconSources[icon["nick"]] = icon.source;
+        
+        icon["holder"].onEnterFrame = function()
+        {
+            if (icon.invalidationIntervalID)
+                return;
+            this.onEnterFrame = null;
+            this.stop();
+            icon.visible = true;
+        }
+    }
 }

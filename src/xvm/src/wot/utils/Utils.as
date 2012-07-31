@@ -101,7 +101,10 @@ class wot.utils.Utils
   public static function GetClanName(fullplayername: String): String
   {
     var pos = fullplayername.indexOf("[");
-    return (pos < 0) ? "" : fullplayername.slice(pos);
+    if (pos < 0)
+        return "";
+    var n = fullplayername.slice(pos + 1);
+    return n.slice(0, n.indexOf("]"));
   }
 
   public static function toInt(value: Object, defaultValue: Number): Number
@@ -143,38 +146,6 @@ class wot.utils.Utils
   }
 
 
-  public static function addRootFor(players: Array, root: String)
-  {
-    if (root == "/" || root == "")
-      return players;
-    for (var i in players)
-    {
-      var ele = players[i];
-      if ((ele.clan || ele.nick) && ele.icon)
-      {
-        ele.icon = root + ele.icon;
-      }
-    }
-    return players;
-  }
-
-  public static function removeDuplicatesAndTrim(sourceArray:Array): Array
-  {
-    for (var i in sourceArray)
-    {
-      sourceArray[i] = trim(sourceArray[i]);
-    }
-    for (var i = sourceArray.length - 2; i >= 0; --i)
-    {
-      for (var j = sourceArray.length - 1; j > i; --j)
-      {
-        if (sourceArray[j] === sourceArray[i]) sourceArray.splice(j, 1);
-      }
-    }
-    return sourceArray;
-
-  }
-
   private static var xvmModules: Array = [];
   public static function TraceXvmModule(moduleName: String)
   {
@@ -186,7 +157,7 @@ class wot.utils.Utils
       wot.utils.Logger.add("xvm-> [ \"" + xvmModules.join("\", \"") + "\" ]");
     }
   }
-  
+
   public static function FormatDate(format: String, date: Date)
   {
     var keys = {Y:"getFullYear", M:"getMonth", D:"getDate", H:"getHours", N:"getMinutes", S:"getSeconds"/*, I:"getMilliseconds"*/};

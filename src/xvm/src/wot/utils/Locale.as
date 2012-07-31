@@ -5,7 +5,7 @@
 class wot.utils.Locale
 {
   // valid regions: EN, RU, CN
-  private static var _region = "RU";
+  private static var _region = "EN";
 
   private static var _translations = {
     RU: { },
