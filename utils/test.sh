@@ -18,7 +18,7 @@ SAMPLE_REPLAY=markers.wotreplay
 cd "${WOT_DIRECTORY}"
 REPLAY=${CURRENT_DIRECTORY}/../test/replays/${SAMPLE_REPLAY}
 #cmd /c start ./WorldOfTanks.exe `cygpath --windows $REPLAY`
-cmd /c start ./wot-xvm-proxy.exe `cygpath --windows $REPLAY` &
-#cmd /c start ./wot-xvm-proxy.exe /server=CT `cygpath --windows $REPLAY` &
+#cmd /c start ./wot-xvm-proxy.exe `cygpath --windows $REPLAY` &
+cmd /c start ./wot-xvm-proxy.exe /server=CT `cygpath --windows $REPLAY` &
 #cmd /c start ./wot-xvm-proxy.exe /debug `cygpath --windows $REPLAY`
 #cmd /c start PsExec.exe -d -a 2 ./wot-xvm-proxy.exe `cygpath --windows $REPLAY` &
