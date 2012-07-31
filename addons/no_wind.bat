@@ -1,6 +1,10 @@
 @echo off
 
-rem Run from res_mods/x.y.z
+rem Disable wind
+rem Run from res_mods\0.7.x
+
+rem Отключить ветер
+rem Запускать из res_mods\0.7.x
 
 if not exist system\data mkdir system\data
 

@@ -1,6 +1,10 @@
 @echo off
 
-rem Run from res_mods/x.y.z
+rem Disable sky
+rem Run from res_mods\0.7.x
+
+rem Отключить небо
+rem Запускать из res_mods\0.7.x
 
 for %%i in (..\..\res\packages\*.pkg) do call :process_package %%i
 
