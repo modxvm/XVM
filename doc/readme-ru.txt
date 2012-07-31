@@ -167,3 +167,22 @@
   Примеры использования динамического цвета и прозрачности:
     "color": "{{c:eff}}" - цвет в зависимости от эффективности
     "alpha": "{{a:hp}}" - прозрачность в зависимости от количества здоровья
+
+  Иконки кланов и игроков.
+  Параметр конфигурационного файла battle/clanIconsFolder определяет путь к корневой
+  папке иконок кланов.
+  Все иконки загружаются автоматически из подпапки с названием, соответствующем региону
+  игры (RU, EU, US, и т.д.).
+  Чтобы добавить иконку клана или игрока, просто скопируйте файл иконки в:
+    clanicons/[REGION]/clan/ (для клана)
+    clanicons/[REGION]/nick/ (для отдельного игрока)
+  Так же можно сделать иконку по умолчанию для клана или игрока:
+    clanicons/[REGION]/clan/default.png (для клана по умолчанию)
+    clanicons/[REGION]/nick/default.png (для игрока по умолчанию)
+  Иконки ищутся в следующем порядке:
+    nick/<player>.png -> clan/<clan>.png -> clan/default.png -> nick/default.png
+  По умолчанию в архив мода добавлены топ 100 кланов.
+  Полный архив со всеми кланами можно скачать отдельно:
+    http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-ru.zip (RU)
+    http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-eu.zip (EU)
+    http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-us.zip (US)

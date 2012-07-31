@@ -99,3 +99,20 @@
   In XVM.xvmconf:
     "color": "{{c:hp-ratio}}" - color depended from current health ratio
     "alpha": "{{a:hp}}" - transparency depended from current health
+
+  Clan and players icons.
+  Config parameter battle/clanIconsFolder set path to clan icons root folder.
+  All icons are loading automatically from game region subfolder (RU/EU/US/...).
+  To add your clan or player icon, just copy icon file to:
+    clanicons/[REGION]/clan/ (for clan)
+    clanicons/[REGION]/nick/ (for single player)
+  Also you can create default clan and player icons:
+    clanicons/[REGION]/clan/default.png (for default clan)
+    clanicons/[REGION]/nick/default.png (for default player)
+  Search order is:
+    nick/<player>.png -> clan/<clan>.png -> clan/default.png -> nick/default.png
+  TOP 100 clans are added to mod archive by default.
+  Full archive with all clans can be downloaded separately:
+    http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-ru.zip (RU)
+    http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-eu.zip (EU)
+    http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-us.zip (US)

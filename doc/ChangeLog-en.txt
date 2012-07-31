@@ -1,4 +1,27 @@
-﻿XVM-2.5.1:
+﻿XVM-2.5.2.test1:
+  * clan icons was reworked. Now config have only one parameter:
+    battle/clanIconsFolder with path to clan icons root folder. All icons
+    are loading automatically from game region subfolder (RU/EU/US/...).
+    To add your clan or player icon, just copy icon file to:
+      clanicons/[REGION]/clan/ (for clan)
+      clanicons/[REGION]/nick/ (for single player)
+    Also you can create default clan and player icons:
+      clanicons/[REGION]/clan/default.png (for default clan)
+      clanicons/[REGION]/nick/default.png (for default player)
+    Search order is:
+      nick/<player>.png -> clan/<clan>.png -> clan/default.png -> nick/default.png
+  * added config option:
+      battle/clanIconsFolder - root of clan icons folder
+  * removed config section:
+      players
+  * config version increased: 1.4.0 => 1.5.0, because clan icons behavior
+    was changed
+  * добавлены архивы с полными наборами иконок кланов:
+      http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-ru.zip (RU)
+      http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-eu.zip (EU)
+      http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-us.zip (US)
+
+XVM-2.5.1:
   * fixed vehicle names in battle loading screen and statistic form
 
 XVM-2.5.0:
