@@ -16,6 +16,7 @@ class wot.utils.Config
     // Private vars
     public static var s_config: Object;
     public static var s_loaded: Boolean = false;
+    public static var s_proxy_available: Boolean = true;
     public static var s_game_region: String = null;
     private static var s_loading: Boolean = false;
     private static var s_load_legacy_config: Boolean = false;
@@ -214,6 +215,13 @@ class wot.utils.Config
         var lv: LoadVars = new LoadVars();
         lv.onData = function(str: String)
         {
+            if (!str) // proxy is not running
+            {
+                Config.s_proxy_available = false;
+                Config.GetGameRegionFromWOTLauncherCfg();
+                return;
+            }
+
             var finallyBugWorkaround: Boolean = false; // Workaround: finally block have a bug - it can be called twice times. Why? How? F*ck!
             try
             {
