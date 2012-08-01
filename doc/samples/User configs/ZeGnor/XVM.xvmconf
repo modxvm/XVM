@@ -14,7 +14,6 @@
     "showPostmortemTips": false,
     "removePanelsModeSwitcher": false,
     "highlightVehicleIcon": true,
-    "drawGrid": false,
     "hideXVMVersion": false,
     "clockFormat": "H:N:S",
     "useStandardMarkers": false

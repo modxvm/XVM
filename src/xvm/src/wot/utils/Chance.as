@@ -16,7 +16,7 @@ class wot.utils.Chance
 
   private static var showExp: Boolean = false;
   private static var battleTier: Number = 0;
-  
+
   public static function ShowChance(tf: TextField, showExp: Boolean): String
   {
     var teamsCount: Object = CalculateTeamPlayersCount();
@@ -91,22 +91,22 @@ class wot.utils.Chance
   {
     var Td = (vi.tiers[0] + vi.tiers[1]) / 2.0 - battleTier;
 
-    var E: Number = stat.e || Config.s_config.const.AVG_EFF;
-    var Rg: Number = (stat.r || Config.s_config.const.AVG_GWR) / 100.0;
+    var E: Number = stat.e || Config.s_config.consts.AVG_EFF;
+    var Rg: Number = (stat.r || Config.s_config.consts.AVG_GWR) / 100.0;
 
-    var B: Number = stat.b || Config.s_config.const.AVG_BATTLES;
+    var B: Number = stat.b || Config.s_config.consts.AVG_BATTLES;
     var Bn = (B < 10000) ? (B - 2000) / 10000.0 : 0.8 + (B - 10000) / 100000.0;
 
-    return E * (1 + Rg - (Config.s_config.const.AVG_GWR / 100.0)) * (1 + 0.25 * Td) * (1 + Bn);
+    return E * (1 + Rg - (Config.s_config.consts.AVG_GWR / 100.0)) * (1 + 0.25 * Td) * (1 + Bn);
   }
-  
+
   private static function ChanceFuncT(vi, team, stat): Number
   {
     var Td = (vi.tiers[0] + vi.tiers[1]) / 2.0 - battleTier;
 
-    var E: Number = stat.e || Config.s_config.const.AVG_EFF;
+    var E: Number = stat.e || Config.s_config.consts.AVG_EFF;
 
-    var Rt_pre: Number = Math.max(-10, Math.min(10, (stat.tr || Config.s_config.const.AVG_GWR) - Config.s_config.const.AVG_GWR));
+    var Rt_pre: Number = Math.max(-10, Math.min(10, (stat.tr || Config.s_config.consts.AVG_GWR) - Config.s_config.consts.AVG_GWR));
     var Rt = Rt_pre / 100.0 * 4;
 
     return E * (1 + Rt) * (1 + 0.25 * Td);
@@ -114,7 +114,7 @@ class wot.utils.Chance
 
   private static function ChanceFuncX1(vi, team, stat): Number
   {
-    //var R = stat.tr || Config.s_config.const.AVG_GWR;
+    //var R = stat.tr || Config.s_config.consts.AVG_GWR;
     //var T = (vi.tiers[0] + vi.tiers[1]) / 2.0 - battleTier;
     //var T = vi.tiers[1] - battleTier;
     var T = vi.tiers[0];
@@ -138,8 +138,8 @@ class wot.utils.Chance
       }
     }*/
 
-    //var R = stat.tr || Config.s_config.const.AVG_GWR;
-    var R = Math.max(-10, Math.min(10, stat.tr ? stat.tr - Config.s_config.const.AVG_GWR : 0)) + 10;
+    //var R = stat.tr || Config.s_config.consts.AVG_GWR;
+    var R = Math.max(-10, Math.min(10, stat.tr ? stat.tr - Config.s_config.consts.AVG_GWR : 0)) + 10;
 
     //var T = vi.tiers[1] - battleTier;
     var T = vi.tiers[0];

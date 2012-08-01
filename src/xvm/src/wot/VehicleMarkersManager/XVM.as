@@ -33,7 +33,6 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
     var xvmHBBorder: MovieClip;
     var xvmHBFill: MovieClip;
     var xvmHBDamage: MovieClip;
-    var grid: MovieClip = null;
 
     // Private static members
     var s_blowedUp: Array = [];
@@ -96,12 +95,6 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             if (Config.s_config.battle.useStandardMarkers)
                 return;
 
-            // Draw grid
-            if (Config.s_config.battle.drawGrid)
-            {
-                grid = createEmptyMovieClip("grid", getNextHighestDepth());
-                GraphicsUtil.drawGrid(grid, -50, -50, 100, 100, 0xFFFF00, 30);
-            }
 
             xvmHB = createEmptyMovieClip("xvmHB", marker.getDepth() - 1); // Put health Bar to back.
             xvmHBBorder = xvmHB.createEmptyMovieClip("border", 1);

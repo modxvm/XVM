@@ -1,4 +1,10 @@
-﻿XVM-2.5.2.test1:
+﻿XVM-2.5.2.test3:
+  * Removed coords grid (parameter battle.drawGrid)
+
+XVM-2.5.2.test2:
+  * bugfix
+
+XVM-2.5.2.test1:
   * clan icons was reworked. Now config have only one parameter:
     battle/clanIconsFolder with path to clan icons root folder. All icons
     are loading automatically from game region subfolder (RU/EU/US/...).

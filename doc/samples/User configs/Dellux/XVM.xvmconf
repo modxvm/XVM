@@ -101,8 +101,7 @@
     "hideXVMVersion": true,
     "showPostmortemTips": false,
     "useStandardMarkers": false,
-    "removePanelsModeSwitcher": false,
-    "drawGrid": false
+    "removePanelsModeSwitcher": false
   },
   "playersPanel": {
     "iconAlpha": 100,

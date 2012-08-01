@@ -169,8 +169,8 @@ class wot.utils.Config
 
                 if (!config)
                 {
-                    GlobalEventDispatcher.dispatchEvent( { 
-                        type: "set_info", 
+                    GlobalEventDispatcher.dispatchEvent( {
+                        type: "set_info",
                         error: "Error parsing config file. Using default settings." } );
                 }
                 else
@@ -424,7 +424,6 @@ class wot.utils.Config
             {
                 config.battle.mirroredVehicleIcons = Utils.toBool(config.battle.mirroredVehicleIcons, true);
                 config.battle.showPostmortemTips = Utils.toBool(config.battle.showPostmortemTips, true);
-                config.battle.drawGrid = Utils.toBool(config.battle.drawGrid, false);
             }
 
             if (config.rating)

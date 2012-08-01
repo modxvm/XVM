@@ -33,7 +33,6 @@ class wot.utils.OTMConfigConverter
     xvm.definition.modMinVersion = string("definition/mod-version-min/data");
 
     xvm.battle.showPostmortemTips = bool("battle/showPostmortemTips/data", true);
-    xvm.battle.drawGrid = bool("battle/drawGrid/data");
 
     xvm.rating.showPlayersStatistics = bool("rating/showPlayersStatistics/data");
 

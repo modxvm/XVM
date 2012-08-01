@@ -11,8 +11,7 @@
   },
   "battle": {
     "mirroredVehicleIcons": false,
-    "showPostmortemTips": false,
-    "drawGrid": false
+    "showPostmortemTips": false
   },
   "rating": {
     "showPlayersStatistics": true,
@@ -273,7 +272,7 @@
             "y": -100,
             "alpha": 100
           },
-          "textFields": [        
+          "textFields": [
 			{
               "visible": true,
               "x": 0,
@@ -860,7 +859,7 @@
             "y": -100,
             "alpha": 100
           },
-          "textFields": [        
+          "textFields": [
 			{
               "visible": true,
               "x": 0,
