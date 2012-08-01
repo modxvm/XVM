@@ -34,7 +34,6 @@ package utils
       xvm.definition.modMinVersion = string("definition/mod-version-min");
 
       xvm.battle.showPostmortemTips = bool("battle/showPostmortemTips", true);
-      xvm.battle.drawGrid = bool("battle/drawGrid");
 
       xvm.rating.showPlayersStatistics = bool("rating/showPlayersStatistics");
 

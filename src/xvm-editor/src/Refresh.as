@@ -1,6 +1,7 @@
 ﻿import components.LabeledComponent;
 
 import utils.Config;
+import utils.DefaultConfig;
 import utils.Utils;
 
 protected function RefreshConfig():void
@@ -42,10 +43,6 @@ protected function RefreshConfig():void
 		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
 		now = new Date();
 
-		RefreshPlayersPage();
-		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
-		now = new Date();
-
 		RefreshMarkersPage();
 		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
 		now = new Date();
@@ -76,9 +73,10 @@ private function RefreshCommonPage():void
 		this.p_battle.v_showPostmortemTips.value = section.showPostmortemTips;
 		this.p_battle.v_removePanelsModeSwitcher.value = section.removePanelsModeSwitcher;
 		this.p_battle.v_highlightVehicleIcon.value = section.highlightVehicleIcon;
-		this.p_battle.v_drawGrid.value = section.drawGrid;
 		this.p_battle.v_hideXVMVersion.value = section.hideXVMVersion;
 		this.p_battle.v_useStandardMarkers.value = section.useStandardMarkers;
+        this.p_battle.v_clockFormat.value = section.clockFormat;
+        this.p_battle.v_clanIconsFolder.value = section.clanIconsFolder;
 
 		section = Config.s_config.rating;
 		this.p_rating.v_showPlayersStatistics.value = section.showPlayersStatistics;
@@ -98,7 +96,7 @@ private function RefreshBattleLoadingPage():void
 		var section:*;
 
 		section = Config.s_config.battleLoading;
-		this.p_battleLoading.v_showClock.value = section.showClock;
+        this.p_battleLoading.v_clockFormat.value = section.clockFormat;
 		this.p_battleLoading.v_showChances.value = section.showChances;
 		this.p_battleLoading.v_showChancesExp.value = section.showChancesExp;
 		this.p_battleLoading.v_removeSquadIcon.value = section.removeSquadIcon;
@@ -275,19 +273,6 @@ private function RefreshIconsetPage():void
 	catch (ex:Error)
 	{
 		debug("ERROR: RefreshIconsetPage(): " + ex.toString());
-	}
-}
-
-private function RefreshPlayersPage():void
-{
-	debug("RefreshPlayersPage()");
-	try
-	{
-		p_players.RefreshSource(true);
-	}
-	catch (ex:Error)
-	{
-		debug("ERROR: RefreshPlayersPage(): " + ex.toString());
 	}
 }
 

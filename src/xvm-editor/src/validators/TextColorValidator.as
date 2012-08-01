@@ -22,6 +22,8 @@ package validators
 
 			var text:String = String(value).toUpperCase();
 
+			var a: RegExp
+			
 			if (text != "" && !/^#[0-9A-F]{6}$/.test(text))
 			{
 				results.push(new ValidationResult(true, null, "Format",

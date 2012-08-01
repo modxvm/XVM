@@ -43,7 +43,7 @@ package utils
     case 'object':
         if (arg) {
             if (arg is Array) {
-                var len = arg.length;
+                var len:Number = arg.length;
                 for (i = 0; i < len; ++i) {
                     v = stringify(arg[i], indent + "  ");
                     if (s) {

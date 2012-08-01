@@ -10,16 +10,15 @@
 		<![CDATA[
 			import components.DynamicAlphaEdit;
 			import components.DynamicColorEdit;
-			import components.DynamicPlayersEdit;
 			import components.LabeledComponent;
-			
+
 			import events.SetDefaultValueEvent;
 			import events.ValueChangedEvent;
-			
+
 			import flash.events.Event;
-			
+
 			import mx.core.IVisualElement;
-			
+
 			import utils.Config;
 
 			[Embed(source="images/add.png")]
@@ -60,12 +59,6 @@
 						(instance as DynamicColorEdit).minimum = minimum;
 						(instance as DynamicColorEdit).maximum = maximum;
 						instance.value = { value: v ? v.value : 0, color: v ? v.color : "" };
-						break;
-					case "DynamicPlayersEdit":
-						instance = new DynamicPlayersEdit();
-						instance.value = v && v.nick
-						  ? { nick: v ? v.nick : "", icon: v ? v.icon : "" }
-						  : { clan: v ? v.clan : "", icon: v ? v.icon : "" };
 						break;
 				}
 

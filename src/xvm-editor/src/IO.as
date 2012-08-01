@@ -1,10 +1,12 @@
 ﻿import flash.net.FileReference;
+import flash.events.Event;
+import flash.events.IOErrorEvent;
+import flash.net.FileFilter;
 
 import mx.utils.ObjectUtil;
 
 import utils.Config;
 import utils.DefaultConfig;
-import utils.JSON;
 import utils.OTMConfigConverter;
 import utils.PatchedXMLDecoder;
 import utils.Utils;
@@ -55,7 +57,7 @@ private function ParseConfigXml(xml:*):void
 		Config.s_config = Config.MergeConfigs(Config.FixConfig(config), DefaultConfig.config);
 		Config.TuneupConfig();
 		debug(_("ConfigurationLoaded"));
-		//debug(JSON.stringify(Config.s_config));
+		//debug(utils.JSON.stringify(Config.s_config));
 	}
 	catch (ex:Error)
 	{
@@ -69,11 +71,11 @@ private function ParseConfigJson(str:String):void
 	//debug("ParseConfigJson()");
 	try
 	{
-		var config:* = JSON.parse(str);
+		var config:* = utils.JSON.parse(str);
 		Config.s_config = Config.MergeConfigs(Config.FixConfig(config), DefaultConfig.config);
 		Config.TuneupConfig();
 		debug(_("ConfigurationLoaded"));
-		//debug(JSON.stringify(Config.s_config));
+		//debug(utils.JSON.stringify(Config.s_config));
 	}
 	catch (ex:Error)
 	{
@@ -95,7 +97,7 @@ private function SaveConfig():void
 	fr.addEventListener(Event.CANCEL,onCancelSave);
 	fr.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
 	// Serialize and add UTF-8 BOM
-	var str:String = "\uFEFF" + JSON.stringify(Config.s_config);
+	var str:String = "\uFEFF" + utils.JSON.stringify(Config.s_config);
 	fr.save(str, lastFileName.toLowerCase() == "otmdata.xml" ? "XVM.xvmconf" : lastFileName);
 }
 

@@ -65,7 +65,10 @@
 				<s:Button label="{_('saveButton')}" click="onSaveConfigClick()"/>
 				<mx:PopUpMenuButton label="{_('extraButton')}" enabled="false" toolTip="{_('NotImplementedYet')}"/>
 			</s:HGroup>
-			<s:HGroup top="0" bottom="0" gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="4" horizontalAlign="right" width="147" right="0">
+            <s:HGroup top="0" bottom="0" width="130" right="100" verticalAlign="middle" horizontalAlign="right">
+                <s:Label text="{_('editorVersion')}: {Defines.EDITOR_VERSION}"/>
+            </s:HGroup>
+			<s:HGroup top="0" bottom="0" gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="4" horizontalAlign="right" width="100" right="0">
 				<s:Button label="En" id="lang_en" width="40" click="onLanguageButtonClick(event)"/>
 				<s:Button label="Ru" id="lang_ru" width="40" click="onLanguageButtonClick(event)"/>
 			</s:HGroup>
@@ -238,13 +241,6 @@
 					<s:Scroller x="0" y="0" width="420" height="100%">
 						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
 							<p:PIconSet id="p_iconSet" config="iconset" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshIconsetPage();"/>
-						</s:VGroup>
-					</s:Scroller>
-				</s:NavigatorContent>
-				<s:NavigatorContent label="{_('claniconPage')}" width="100%" height="100%" id="pgPlayers">
-					<s:Scroller x="0" y="0" width="420" height="100%">
-						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-							<p:PClanIcons id="p_players" config="players" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshPlayersPage();"/>
 						</s:VGroup>
 					</s:Scroller>
 				</s:NavigatorContent>
