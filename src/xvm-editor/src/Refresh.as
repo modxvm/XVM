@@ -47,7 +47,7 @@ protected function RefreshConfig():void
 		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
 		now = new Date();
 
-		updatePreview();
+		//updatePreview();
 	}
 	catch (ex:Error)
 	{

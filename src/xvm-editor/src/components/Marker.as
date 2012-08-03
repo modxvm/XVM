@@ -392,6 +392,7 @@
         if (delta >= 0)
         {
             m_curHealth = curHealth;
+            xvmHBDamage.graphics.clear();
             return;
         }
 
