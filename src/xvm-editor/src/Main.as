@@ -1,4 +1,6 @@
-﻿import mx.core.UIComponent;
+﻿import flash.events.Event;
+
+import mx.core.UIComponent;
 
 import utils.Config;
 import utils.DefaultConfig;
@@ -66,7 +68,7 @@ private function getActiveMarkerStates():Array
 	return res;
 }
 
-private function getActiveMarkerElement():*
+private function getActiveMarkerElement():Object
 {
 	return elements.selectedItem;
 }

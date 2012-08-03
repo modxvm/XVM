@@ -19,9 +19,9 @@
 	</fx:Metadata>
 	<mx:dataProvider>
 		<mx:ArrayList>
-			<fx:String>влево</fx:String>
-			<fx:String>по центру</fx:String>
-			<fx:String>вправо</fx:String>
+			<fx:String>left</fx:String>
+			<fx:String>center</fx:String>
+			<fx:String>right</fx:String>
 		</mx:ArrayList>
 	</mx:dataProvider>
 </mx:ComboBox>

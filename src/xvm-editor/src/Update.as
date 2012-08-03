@@ -1,6 +1,23 @@
-﻿import events.ValueChangedEvent;
+﻿import events.SetDefaultValueEvent;
+import events.ValueChangedEvent;
+
+import flash.utils.clearTimeout;
+import flash.utils.setTimeout;
 
 import utils.Config;
+
+private var timeoutId:Number = 0;
+private function updatePreview():void
+{
+    if (!preview)
+        return;
+    if (timeoutId != 0)
+        clearTimeout(timeoutId);
+    timeoutId = setTimeout(function():void {
+        timeoutId = 0;
+        preview.update();
+    }, 100);
+}
 
 protected function updateValue(event:ValueChangedEvent):void
 {
@@ -15,6 +32,7 @@ protected function updateValue(event:ValueChangedEvent):void
 
 		//debug(event.sender.config + "=" + event.sender.value);
 		Config.SetValue(event.sender.config, event.sender.value);
+        updatePreview();
 	}
 	catch (ex:Error)
 	{
@@ -40,6 +58,7 @@ protected function updateMarkerValue(event:ValueChangedEvent):void
 			var config:String = "markers." + state + "." + activeElement + "." + event.sender.config;
 			//debug(config + "=" + event.sender.value);
 			Config.SetValue(config, event.sender.value);
+            updatePreview();
 		}
 	}
 	catch (ex:Error)
@@ -61,6 +80,7 @@ protected function updateMarkerTextFieldValue(event:ValueChangedEvent):void
 			var config:String = "markers." + state + "." + activeElement;
 			//debug(config + "=" + event.sender.value);
 			Config.SetValue(config, values[state]);
+            updatePreview();
 		}
 	}
 	catch (ex:Error)
@@ -111,6 +131,7 @@ protected function onSetDefaultValue(event:SetDefaultValueEvent):void
 				if (!Config.SetDefaultValue(path))
 					debug("config not found: " + path);
 		}
+        updatePreview();
 	}
 	catch (ex:Error)
 	{
@@ -147,6 +168,7 @@ protected function onSetDefaultMarkerValue(event:SetDefaultValueEvent):void
 					Config.SetDefaultValue(config_prefix + event.target.config);
 			}
 		}
+        updatePreview();
 	}
 	catch (ex:Error)
 	{

@@ -12,7 +12,7 @@
 			import mx.events.ListEvent;
 			import mx.utils.ObjectUtil;
 
-			private var internalFonts:Array = ["$FieldFont - встроенный", "$TextFont - встроенный"]; // TODO: Add all internal fonts
+			private var internalFonts:Array = ["$FieldFont", "$TextFont"]; // TODO: Add all internal fonts
 
 			protected function onChange(event:Event):void
 			{

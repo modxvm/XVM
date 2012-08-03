@@ -46,6 +46,8 @@ protected function RefreshConfig():void
 		RefreshMarkersPage();
 		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
 		now = new Date();
+
+		updatePreview();
 	}
 	catch (ex:Error)
 	{

@@ -4,87 +4,33 @@
 	    xmlns:mx="library://ns.adobe.com/flex/mx"
 		xmlns:c="components.*"
 		width="500" height="450"
-		borderVisible="false" xmlns:ns1="*" creationComplete="onCreationComplete(event)">
+		borderVisible="false" xmlns:ns1="*">
 	<fx:Script>
 		<![CDATA[
-			import flash.display.Loader;
-			
-			import mx.controls.SWFLoader;
-			import mx.events.FlexEvent;
-			import mx.events.ListEvent;
-			
-			//import utils.ClassLoader;
+            import mx.events.FlexEvent;
+            import mx.events.ListEvent;
 
 			[Embed(source="images/bg/hills-1.jpg")]
-			private static var IMG_hills1 : Class;
+			private static var IMG1 : Class;
 			[Embed(source="images/bg/hills-2.jpg")]
-			private static var IMG_hills2 : Class;
+			private static var IMG2 : Class;
 			[Embed(source="images/bg/mannerheim-1.jpg")]
-			private static var IMG_mannerheim1 : Class;
+			private static var IMG3 : Class;
 			[Embed(source="images/bg/mannerheim-2.jpg")]
-			private static var IMG_mannerheim2 : Class;
+			private static var IMG4 : Class;
 			[Embed(source="images/bg/mannerheim-3.jpg")]
-			private static var IMG_mannerheim3 : Class;
-			[Embed(source="images/bg/desert-1.jpg")]
-			private static var IMG_desert1 : Class;
-			[Embed(source="images/bg/desert-2.jpg")]
-			private static var IMG_desert2 : Class;
-			[Embed(source="images/bg/desert-3.jpg")]
-			private static var IMG_desert3 : Class;
+			private static var IMG5 : Class;
 
-			//[Embed(source="../assets/gfxfontlib.swf")]
-			//private static var SWF_gfxfontlib : Class;
+            private static var settings: Array = [
+                //                 x    y    zoom maxHP
+                { img: IMG1, m1: [ 200, 185, 1.0, 2100 ], m2: [ 410, 120, 0.7, 1600 ], m3: [ 360,  83, 0.6, 0 ] },
+                { img: IMG2, m1: [  90, 165, 0.7, 2100 ], m2: [ 180, 245, 1.0, 1600 ], m3: [ 410, 140, 0.9, 0 ] },
+                { img: IMG3, m1: [ 315, 245, 1.0, 2100 ], m2: [  90, 135, 0.9, 1600 ], m3: [ 310, 160, 1.0, 0 ] },
+                { img: IMG4, m1: [ 437, 143, 0.7, 2100 ], m2: [ 130, 200, 1.0, 1600 ], m3: [ 325, 143, 0.8, 0 ] },
+                { img: IMG5, m1: [  95, 260, 0.9, 2100 ], m2: [ 445, 225, 0.9, 1600 ], m3: [ 260, 240, 0.9, 0 ] }
+            ];
 
-			protected function onCreationComplete(event:FlexEvent):void
-			{
-				//loadSWF("battle.swf");
-				//loadSWF("battleloading.swf");
-				//loadSWF("PlayersPanel.swf");
-				//loadSWF("StatisticForm.swf");
-				loadSWF("VehicleMarkersManager.swf");
-			}
-
-			//private var loader:ClassLoader;
-			private function loadSWF(url:String):void
-			{
-				/*loader = new ClassLoader();
-				loader.addEventListener(ClassLoader.LOAD_ERROR,loadErrorHandler);
-				loader.addEventListener(ClassLoader.CLASS_LOADED,classLoadedHandler);
-				loader.load(url);*/
-			}
-
-			private function loadErrorHandler(e:Event):void {
-				throw new IllegalOperationError("Cannot load the specified file.");
-			}
-			
-			private function classLoadedHandler(e:Event):void {
-				/*var xvmRef:Class = loader.getClass("VehicleMarkerAlly");
-				var xvm:Object = new xvmRef();
-				addChild(xvm as DisplayObject);*/
-			}
-			
-			/*private function loadSWFComplete( event:Event ):void
-			{
--				var loader:Loader = event.target as Loader;
-				//var str:String = loader.content['hello']();
-				
-				var c:Class = loader.contentLoaderInfo.applicationDomain.getDefinition("VehicleMarkerAlly") as Class;
-				var vmm = new c() as MovieClip;
-				addChild(vmm);
-				
-				//trace(loader.content.toString());
-			}*/
-
-			private function loader_complete(evt:Event):void
-			{
-				/*var loader:Loader = evt.currentTarget.loader as Loader;
-				var c:Class = loader.contentLoaderInfo.applicationDomain
-					.getDefinition("wot.ingame.VehicleMarkerAlly") as Class;
-				var vmm = new c() as MovieClip;
-				addChild(vmm);*/
-			}
-
-			protected virtual function onChange(event:Event):void
+			protected function onChange(event:Event):void
 			{
 				if (event)
 					event.stopPropagation();
@@ -94,61 +40,62 @@
 
 			protected function cbBG_changeHandler(event:ListEvent):void
 			{
-				switch (cbBG.selectedIndex + 1)
-				{
-					case 1:
-						imgBG.source = new IMG_hills1();
-						break;
-					case 2:
-						imgBG.source = new IMG_hills2();
-						break;
-					case 3:
-						imgBG.source = new IMG_mannerheim1();
-						break;
-					case 4:
-						imgBG.source = new IMG_mannerheim2();
-						break;
-					case 5:
-						imgBG.source = new IMG_mannerheim3();
-						break;
-					case 6:
-						imgBG.source = new IMG_desert1();
-						break;
-					case 7:
-						imgBG.source = new IMG_desert2();
-						break;
-					case 8:
-						imgBG.source = new IMG_desert3();
-						break;
-				}
+                var s:Object = settings[cbBG.selectedIndex];
+                imgBG.source = new (s.img)();
+                marker1.x = s.m1[0];
+                marker1.y = s.m1[1];
+                marker1.zoom = s.m1[2];
+                marker1.maxHP = s.m1[3];
+                marker2.x = s.m2[0];
+                marker2.y = s.m2[1];
+                marker2.zoom = s.m2[2];
+                marker2.maxHP = s.m2[3];
+                marker3.x = s.m3[0];
+                marker3.y = s.m3[1];
+                marker3.zoom = s.m3[2];
+                marker3.maxHP = s.m3[3];
 			}
+
+            public function update():void
+            {
+                if (marker1)
+                    marker1.update();
+                if (marker2)
+                    marker2.update();
+                if (marker3)
+                    marker3.update();
+            }
 
 		]]>
 	</fx:Script>
-	<fx:Metadata>
+    <fx:Metadata>
 		[Event(name="change", type="flash.events.Event")]
 		[ResourceBundle("components")]
 	</fx:Metadata>
 	<mx:ViewStack width="100%" height="100%" id="vsPreview" creationPolicy="all">
 		<s:NavigatorContent width="100%" height="100%" id="preview">
-			<mx:Canvas x="0" y="0" width="500" height="400" backgroundColor="0xAACCBB">
+			<mx:Canvas x="0" y="0" width="500" height="400" backgroundColor="0xAACCBB" verticalScrollPolicy="off" horizontalScrollPolicy="off">
 				<mx:Image id="imgBG" x="0" y="0" width="500" height="400"/>
+                <c:Marker id="marker1" creationComplete="marker1.init('ally','heavyTank',8)"/>
+                <c:Marker id="marker2" creationComplete="marker2.init('enemy','AT-SPG',8)"/>
+                <c:Marker id="marker3" creationComplete="marker3.init('ally_dead','SPG',7)"/>
 			</mx:Canvas>
 			<s:BorderContainer y="400" width="100%" height="32" borderVisible="false">
 				<s:HGroup top="0" left="0" bottom="0" width="100%" gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="4">
 					<s:Label text="{resourceManager.getString('components', 'Background')}"/>
-					<mx:ComboBox id="cbBG" width="150" selectedIndex="0" editable="false" change="cbBG_changeHandler(event)" creationComplete="cbBG_changeHandler(new ListEvent(''))">
+					<mx:ComboBox id="cbBG" width="100" selectedIndex="0" editable="false" change="cbBG_changeHandler(event)" creationComplete="cbBG_changeHandler(new ListEvent(''))">
 						<mx:ArrayCollection>
 							<fx:String>{resourceManager.getString('components', 'Hills')} 1</fx:String>
 							<fx:String>{resourceManager.getString('components', 'Hills')} 2</fx:String>
 							<fx:String>{resourceManager.getString('components', 'Mannerheim')} 1</fx:String>
 							<fx:String>{resourceManager.getString('components', 'Mannerheim')} 2</fx:String>
 							<fx:String>{resourceManager.getString('components', 'Mannerheim')} 3</fx:String>
-							<fx:String>{resourceManager.getString('components', 'Desert')} 1</fx:String>
-							<fx:String>{resourceManager.getString('components', 'Desert')} 2</fx:String>
-							<fx:String>{resourceManager.getString('components', 'Desert')} 3</fx:String>
 						</mx:ArrayCollection>
 					</mx:ComboBox>
+                    <s:ToggleButton id="btnExt" label="Alt" click="{marker1.extMode=marker2.extMode=marker3.extMode=btnExt.selected;}"/>
+                    <s:ToggleButton id="btnDeadType" label="{resourceManager.getString('components', 'SelectDead')}" click="{marker3.deadType=btnDeadType.selected;}"/>
+                    <s:Button label="{resourceManager.getString('components', 'Hit')}" click="{marker1.hit();marker2.hit();}"/>
+                    <s:Button label="{resourceManager.getString('components', 'Action')}" click="{marker1.action();marker2.action();}"/>
 				</s:HGroup>
 			</s:BorderContainer>
 		</s:NavigatorContent>
