@@ -5,7 +5,6 @@
  * @author sirmax2
  * @author STL1te
  */
-import flash.filters.DropShadowFilter;
 import com.greensock.TimelineLite;
 import com.greensock.TweenLite;
 import com.greensock.easing.Linear;
@@ -22,6 +21,7 @@ import wot.utils.StatLoader;
 import wot.utils.Utils;
 import wot.utils.Logger;
 import wot.utils.PlayerInfo;
+import wot.VehicleMarkersManager.ErrorHandler;
 
 class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
 {
@@ -128,7 +128,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         }
         catch (e)
         {
-            XVMSetErrorText("ERROR: XVMInit():" + String(e));
+            ErrorHandler.setText("ERROR: XVMInit():" + String(e));
         }
     }
 
@@ -144,7 +144,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
 
     function XVMInit2(event)
     {
-        //XVMSetErrorText("XVMStatLoaded()" + (event ? ": event=" + event.type : ""));
+        //ErrorHandler.setText("XVMStatLoaded()" + (event ? ": event=" + event.type : ""));
         //Logger.add("XVMStatLoaded()" + (event ? ": event=" + event.type : ""));
         if (event)
           GlobalEventDispatcher.removeEventListener("stat_loaded", this, XVMInit2);
@@ -370,26 +370,6 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         };
     }
 
-    static var errorCounter: Number = 0;
-    static var errorText: String = "";
-    function XVMSetErrorText(str)
-    {
-        if (!_root.hasOwnProperty("xvmErrorText"))
-        {
-            var et: TextField = _root.createTextField("xvmErrorText", _root.getNextHighestDepth(), 350, 40, 1000, 300);
-            et.antiAliasType = "advanced";
-            et.wordWrap = true;
-            et.multiline = true;
-            et.setNewTextFormat(new TextFormat("$FieldFont", 12, 0xFF6666, false, false, false, null, null, "left"));
-            et.filters = [new DropShadowFilter(0, 0, 0, 100, 3, 3, 2, 3)];
-        }
-
-        errorText += "[" + Utils.padLeft((errorCounter++).toString(), 3, '0') + "] " + str + "\n";
-        while ((errorText.split("\n")).length > 15)
-            errorText = errorText.slice(errorText.indexOf("\n") + 1, errorText.length - 1);
-        _root.xvmErrorText.text = errorText;
-    }
-
     // VehicleMarkerAlly should contain 4 named frames:
     // - green - normal ally
     // - gold - squad mate
@@ -466,7 +446,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         }
         catch (e)
         {
-            XVMSetErrorText("ERROR: XVMFormatStaticText(" + format + "):" + String(e));
+            ErrorHandler.setText("ERROR: XVMFormatStaticText(" + format + "):" + String(e));
         }
         return format;
     }
@@ -491,7 +471,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         }
         catch (e)
         {
-            XVMSetErrorText("ERROR: XVMFormatDynamicText(" + format + "):" + String(e));
+            ErrorHandler.setText("ERROR: XVMFormatDynamicText(" + format + "):" + String(e));
         }
 
         return format;
@@ -508,7 +488,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         }
         catch (e)
         {
-            XVMSetErrorText("ERROR: XVMFormatStaticColorText(" + format + "):" + String(e));
+            ErrorHandler.setText("ERROR: XVMFormatStaticColorText(" + format + "):" + String(e));
         }
 
         return format;
@@ -539,7 +519,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         }
         catch (e)
         {
-            XVMSetErrorText("ERROR: XVMFormatDynamicColor(" + format + "):" + String(e));
+            ErrorHandler.setText("ERROR: XVMFormatDynamicColor(" + format + "):" + String(e));
         }
 
         return systemColor;
@@ -571,7 +551,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         }
         catch (e)
         {
-            XVMSetErrorText("ERROR: XVMFormatDynamicAlpha(" + format + "):" + String(e));
+            ErrorHandler.setText("ERROR: XVMFormatDynamicAlpha(" + format + "):" + String(e));
         }
 
         return 100;
@@ -595,7 +575,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         }
         catch (e)
         {
-            XVMSetErrorText("ERROR: XVMCreateNewTextFormat():" + String(e));
+            ErrorHandler.setText("ERROR: XVMCreateNewTextFormat():" + String(e));
         }
 
         return null;
@@ -631,7 +611,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         }
         catch (e)
         {
-            XVMSetErrorText("ERROR: XVMCreateTextField():" + String(e));
+            ErrorHandler.setText("ERROR: XVMCreateTextField():" + String(e));
         }
 
         return null;
@@ -676,7 +656,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         }
         catch (e)
         {
-            XVMSetErrorText("ERROR: showDamage():" + String(e));
+            ErrorHandler.setText("ERROR: showDamage():" + String(e));
         }
     }
 
@@ -705,7 +685,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         }
         catch (e)
         {
-            XVMSetErrorText("ERROR: XVMSetupNewHealth():" + String(e));
+            ErrorHandler.setText("ERROR: XVMSetupNewHealth():" + String(e));
         }
     }
 
@@ -751,7 +731,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         }
         catch (e)
         {
-            XVMSetErrorText("ERROR: XVMUpdateUI():" + String(e));
+            ErrorHandler.setText("ERROR: XVMUpdateUI():" + String(e));
         }
     }
 
@@ -791,7 +771,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         }
         catch (e)
         {
-            XVMSetErrorText("ERROR: updateCurrentColor():" + String(e));
+            ErrorHandler.setText("ERROR: updateCurrentColor():" + String(e));
         }
     }
 
@@ -818,7 +798,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         }
         catch (e)
         {
-            XVMSetErrorText("ERROR: XVMIconCompleteLoad():" + String(e));
+            ErrorHandler.setText("ERROR: XVMIconCompleteLoad():" + String(e));
         }
     }
 
@@ -888,7 +868,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         }
         catch (e)
         {
-            XVMSetErrorText("ERROR: XVMInitializeStates():" + String(e));
+            ErrorHandler.setText("ERROR: XVMInitializeStates():" + String(e));
         }
     }
 
@@ -929,7 +909,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         }
         catch (e)
         {
-            XVMSetErrorText("ERROR: XVMPopulateData():" + String(e));
+            ErrorHandler.setText("ERROR: XVMPopulateData():" + String(e));
         }
     }
 
@@ -1063,7 +1043,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         }
         catch (e)
         {
-          XVMSetErrorText("ERROR: XVMUpdateStyle():" + String(e));
+            ErrorHandler.setText("ERROR: XVMUpdateStyle():" + String(e));
         }
     }
 }
