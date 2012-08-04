@@ -23,6 +23,14 @@ import wot.utils.Logger;
 import wot.utils.PlayerInfo;
 import wot.VehicleMarkersManager.ErrorHandler;
 
+/*
+ * XVM() instance creates corresponding marker
+ * each time some player gets in line of sight.
+ * Instantiated 14 times at normal round start.
+ * Destructed when player get out of sight.
+ * Thus may be instantiated ~50 times and more.
+ */
+
 class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
 {
     static var DEBUG_TIMES = false;
