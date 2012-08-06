@@ -9,7 +9,27 @@
 		 gap="-1">
 	<fx:Script>
 		<![CDATA[
-			protected var _allowSystemColors:Boolean = true;
+            import mx.controls.Menu;
+            import mx.events.MenuEvent;
+
+            [Embed("images/syscolors.png")]
+            public const syscolors:Class;
+            [Embed("images/c_hp.png")]
+            public const c_hp:Class;
+            [Embed("images/c_hp_ratio.png")]
+            public const c_hp_ratio:Class;
+            [Embed("images/c_eff.png")]
+            public const c_eff:Class;
+            [Embed("images/c_rating.png")]
+            public const c_rating:Class;
+            [Embed("images/c_kb.png")]
+            public const c_kb:Class;
+            [Embed("images/c_t_rating.png")]
+            public const c_t_rating:Class;
+            [Embed("images/c_t_battles.png")]
+            public const c_t_battles:Class;
+
+            protected var _allowSystemColors:Boolean = true;
 			[Bindable]
 			public function get allowSystemColors():Boolean
 			{
@@ -20,24 +40,35 @@
 				_allowSystemColors = v;
 			}
 
+            protected var _allowMacros:Array = [];
+            [Bindable]
+            public function get allowMacros():Array
+            {
+                return _allowMacros;
+            }
+            public function set allowMacros(v:Array):void
+            {
+                _allowMacros = v;
+            }
+
 			private static function toHex(v:Number):String
 			{
 				return ("00000" + v.toString(16).toUpperCase()).substr(-6);
 			}
 
-			protected var _value:Number = -1;
+			protected var _value:String = null;
 			[Bindable]
 			public function get value():String
 			{
-				return isNaN(_value) ? null : "0x" + toHex(_value);
+				return isNaN(parseInt(_value)) ? _value : "0x" + toHex(parseInt(_value));
 			}
 			public function set value(v:String):void
 			{
-				_value = (v == null) ? NaN : Number(v);
-				ti.text = isNaN(_value) ? null : "#" + toHex(_value);
-				cp.selectedColor = _value;
-				cp.alpha = isNaN(_value) ? 0.5 : 1;
-				sc.alpha = isNaN(_value) ? 0.8 : 0.2;
+                _value = v;
+                var vv:Number = (v == null) ? NaN : Number(v);
+				ti.text = isNaN(vv) ? _value : "#" + toHex(vv);
+				cp.selectedColor = vv;
+				cp.alpha = isNaN(vv) ? 0.5 : 1;
 			}
 
 			protected function onChange(event:Event):void
@@ -45,10 +76,43 @@
 				if (event)
 					event.stopPropagation();
 				var v:String = null;
-				if (event.target == cp)
+                if (event.target == cp)
 				  v = isNaN(cp.selectedColor) ? null : cp.selectedColor.toString()
 				else if (event.target == tv)
-				  v = ti.text == "" ? null : "0x" + ti.text.substr(1);
+				  v = ti.text.charAt(0) == "#" ? "0x" + ti.text.substr(1) : ti.text;
+                else if (event.target == pm)
+                {
+                    var me:MenuEvent = event as MenuEvent;
+                    switch (me.index)
+                    {
+                        case 0:
+                            v = null;
+                            break;
+                        case 2:
+                            v = "{{c:hp}}";
+                            break;
+                        case 3:
+                            v = "{{c:hp-ratio}}";
+                            break;
+                        case 4:
+                            v = "{{c:eff}}";
+                            break;
+                        case 5:
+                            v = "{{c:rating}}";
+                            break;
+                        case 6:
+                            v = "{{c:kb}}";
+                            break;
+                        case 7:
+                            v = "{{c:t-rating}}";
+                            break;
+                        case 8:
+                            v = "{{c:t-battles}}";
+                            break;
+                    }
+                    (pm.popUp as Menu).selectedIndex = 0;
+                } else
+                    return;
 
 				if (value != v)
 				{
@@ -63,10 +127,25 @@
 		[ResourceBundle("components")]
 	</fx:Metadata>
 	<fx:Declarations>
-		<validators:TextColorValidator id="tv" required="{!allowSystemColors}" source="{ti}" property="text" valid="onChange(event)"/>
+		<validators:TextColorValidator id="tv" source="{ti}" property="text" valid="onChange(event)"
+           allowedValues="[null,'\{\{c:hp\}\}','\{\{c:hp-ratio\}\}','\{\{c:eff\}\}','\{\{c:rating\}\}','\{\{c:kb\}\}','\{\{c:t-rating\}\}','\{\{c:t-battles\}\}']"/>
 	</fx:Declarations>
-	<s:TextInput id="ti" width="100%" maxChars="7" restrict="#0-9A-Fa-f" change="ti.validateNow()"/>
+	<s:TextInput id="ti" width="100%" maxChars="32" restrict="#0-9A-Za-z\{\}\-_:" change="ti.validateNow()"/>
 	<mx:ColorPicker id="cp" change="onChange(event)" useHandCursor="true" buttonMode="true"/>
 	<mx:Spacer width="{allowSystemColors ? 5 : 0}" visible="{allowSystemColors}"/>
-	<mx:Image id="sc" width="{allowSystemColors ? 16 : 0}" height="16" visible="{allowSystemColors}" source="@Embed(source='images/syscolors.png')" toolTip="{value ? resourceManager.getString('components', 'SystemColor') : resourceManager.getString('components', 'UseSystemColor')}" useHandCursor="true" buttonMode="true" click="onChange(event)"/>
+    <mx:PopUpMenuButton id="pm" width="{allowSystemColors ? 40 : 0}" label="" icon="{syscolors}" toolTip="{resourceManager.getString('components', 'UseSystemColor')}" visible="{allowSystemColors}" itemClick="onChange(event)">
+        <mx:dataProvider>
+            <mx:ArrayCollection>
+                <fx:Object label="{resourceManager.getString('components', 'UseSystemColor')}" icon="syscolors"/>
+                <fx:Object type="separator"/>
+                <fx:Object label="{resourceManager.getString('components', 'c_hp')}" icon="c_hp"/>
+                <fx:Object label="{resourceManager.getString('components', 'c_hp_ratio')}" icon="c_hp_ratio"/>
+                <fx:Object label="{resourceManager.getString('components', 'c_eff')}" icon="c_eff"/>
+                <fx:Object label="{resourceManager.getString('components', 'c_rating')}" icon="c_rating"/>
+                <fx:Object label="{resourceManager.getString('components', 'c_kb')}" icon="c_kb"/>
+                <fx:Object label="{resourceManager.getString('components', 'c_t_rating')}" icon="c_t_rating"/>
+                <fx:Object label="{resourceManager.getString('components', 'c_t_battles')}" icon="c_t_battles"/>
+            </mx:ArrayCollection>
+        </mx:dataProvider>
+    </mx:PopUpMenuButton>
 </s:HGroup>

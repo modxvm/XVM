@@ -8,21 +8,22 @@
 	borderVisible="false">
 	<fx:Script>
 		<![CDATA[
-			import components.DynamicAlphaEdit;
-			import components.DynamicColorEdit;
-			import components.LabeledComponent;
-
-			import events.SetDefaultValueEvent;
-			import events.ValueChangedEvent;
-
-			import flash.events.Event;
-
-			import mx.core.IVisualElement;
-
-			import utils.Config;
+            import components.DynamicAlphaEdit;
+            import components.DynamicColorEdit;
+            import components.LabeledComponent;
+            
+            import events.SetDefaultValueEvent;
+            import events.ValueChangedEvent;
+            
+            import flash.events.Event;
+            
+            import mx.core.IVisualElement;
+            import mx.messaging.channels.StreamingAMFChannel;
+            
+            import utils.Config;
 
 			[Embed(source="images/add.png")]
-			private static var IMG_add : Class;
+			private const IMG_add : Class;
 
 			private function CreateNewElementButton():IVisualElement
 			{
@@ -69,16 +70,18 @@
 
 			public function RefreshSource(src: Array = null): void
 			{
-				for (var n:Number = 0; n < container.numElements; ++n)
+                if (!src)
+                    src = Config.GetValue(_config);
+                var len:Number = container.numElements;
+				for (var n:Number = 0; n < len; ++n)
 					delete container.getElementAt(n);
 				container.removeAllElements();
-				if (!src)
-					src = Config.GetValue(_config);
 				if (src.length == 0)
 					container.addElement(CreateNewElementButton());
 				else
 				{
-					for (var i: Number = 0; i < src.length; ++i)
+                    var len2:Number = src.length;
+					for (var i: Number = 0; i < len2; ++i)
 						container.addElement(CreateElement(src[i]));
 				}
 			}

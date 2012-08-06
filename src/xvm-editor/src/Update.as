@@ -9,6 +9,7 @@ import utils.Config;
 private var timeoutId:Number = 0;
 private function updatePreview():void
 {
+    debug("updatePreview");
     if (!preview)
         return;
     if (timeoutId != 0)
@@ -16,7 +17,7 @@ private function updatePreview():void
     timeoutId = setTimeout(function():void {
         timeoutId = 0;
         preview.update();
-    }, 100);
+    }, 10);
 }
 
 protected function updateValue(event:ValueChangedEvent):void

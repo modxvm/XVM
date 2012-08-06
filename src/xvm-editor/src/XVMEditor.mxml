@@ -75,17 +75,17 @@
 		</s:BorderContainer>
 		<s:TabBar width="920" height="20" dataProvider="{vsTabs}"/>
 		<s:HGroup width="920" height="100%" gap="-1">
-			<mx:ViewStack width="420" height="100%" backgroundColor="0xFFFFFF" id="vsTabs" creationPolicy="all">
-				<s:NavigatorContent label="{_('commonPage')}" width="100%" height="100%" id="pgCommon">
+			<mx:ViewStack width="420" height="100%" backgroundColor="0xFFFFFF" id="vsTabs" creationPolicy="auto" change="{RefreshCurrentPage()}">
+                <s:NavigatorContent label="{_('commonPage')}" width="100%" height="100%" id="pgCommon">
 					<s:Scroller x="0" y="0" width="420" height="100%">
-						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-							<p:PDefinition id="p_definition" config="definition" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCommonPage();"/>
-							<p:PBattle id="p_battle" config="battle" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCommonPage();"/>
-							<p:PRating id="p_rating" config="rating" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCommonPage();"/>
+						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1" creationComplete="{RefreshCurrentPage()}">
+							<p:PDefinition id="p_definition" config="definition" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+							<p:PBattle id="p_battle" config="battle" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+							<p:PRating id="p_rating" config="rating" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
 						</s:VGroup>
 					</s:Scroller>
 				</s:NavigatorContent>
-				<s:NavigatorContent label="{_('markersPage')}" width="100%" height="100%" id="pgMarkers">
+                <s:NavigatorContent label="{_('markersPage')}" width="100%" height="100%" id="pgMarkers">
 					<s:Scroller x="0" y="0" width="420" height="100%">
 						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
 							<s:BorderContainer width="100%" height="165" borderVisible="false">
@@ -107,57 +107,57 @@
 								<s:NavigatorContent label="{_('VehicleClass')}" id="vehicleIcon">
 									<s:Scroller x="0" y="0" width="100%" height="100%">
 										<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-											<m:MVehicleIcon id="m_vehicleIcon" config="vehicleIcon" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshMarkersPage();"/>
+											<m:MVehicleIcon id="m_vehicleIcon" config="vehicleIcon" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
 										</s:VGroup>
 									</s:Scroller>
 								</s:NavigatorContent>
 								<s:NavigatorContent label="{_('HealthBar')}" id="healthBar">
 									<s:Scroller x="0" y="0" width="100%" height="100%">
 										<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-											<m:MHealthBar id="m_healthBar" config="healthBar" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshMarkersPage();"/>
+											<m:MHealthBar id="m_healthBar" config="healthBar" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
 										</s:VGroup>
 									</s:Scroller>
 								</s:NavigatorContent>
 								<s:NavigatorContent label="{_('DamageText')}" id="damageText">
 									<s:Scroller x="0" y="0" width="100%" height="100%">
 										<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-											<m:MDamageText id="m_damageText" config="damageText" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshMarkersPage();"/>
-											<m:MFont id="m_damageText_font" config="damageText.font" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshMarkersPage();"/>
-											<m:MShadow id="m_damageText_shadow" config="damageText.shadow" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshMarkersPage();"/>
+											<m:MDamageText id="m_damageText" config="damageText" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+											<m:MFont id="m_damageText_font" config="damageText.font" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+											<m:MShadow id="m_damageText_shadow" config="damageText.shadow" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
 										</s:VGroup>
 									</s:Scroller>
 								</s:NavigatorContent>
 								<s:NavigatorContent label="{_('ContourIcon')}" id="contourIcon">
 									<s:Scroller x="0" y="0" width="100%" height="100%">
 										<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-											<m:MContourIcon id="m_contourIcon" config="contourIcon" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshMarkersPage();"/>
+											<m:MContourIcon id="m_contourIcon" config="contourIcon" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
 										</s:VGroup>
 									</s:Scroller>
 								</s:NavigatorContent>
 								<s:NavigatorContent label="{_('ClanIcon')}" id="clanIcon">
 									<s:Scroller x="0" y="0" width="100%" height="100%">
 										<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-											<m:MClanIcon id="m_clanIcon" config="clanIcon" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshMarkersPage();"/>
+											<m:MClanIcon id="m_clanIcon" config="clanIcon" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
 										</s:VGroup>
 									</s:Scroller>
 								</s:NavigatorContent>
 								<s:NavigatorContent label="{_('LevelIcon')}" id="levelIcon">
 									<s:Scroller x="0" y="0" width="100%" height="100%">
 										<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-											<m:MLevelIcon id="m_levelIcon" config="levelIcon" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshMarkersPage();"/>
+											<m:MLevelIcon id="m_levelIcon" config="levelIcon" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
 										</s:VGroup>
 									</s:Scroller>
 								</s:NavigatorContent>
 								<s:NavigatorContent label="{_('ActionMarker')}" id="actionMarker">
 									<s:Scroller x="0" y="0" width="100%" height="100%">
 										<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-											<m:MActionMarker id="m_actionMarker" config="actionMarker" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshMarkersPage();"/>
+											<m:MActionMarker id="m_actionMarker" config="actionMarker" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
 										</s:VGroup>
 									</s:Scroller>
 								</s:NavigatorContent>
 								<s:NavigatorContent label="{_('TextFields')}" id="textFields">
 									<s:Scroller x="0" y="0" width="100%" height="100%">
-										<m:MTextFieldList id="m_textFieldList" config="textFields" valueChanged="updateMarkerTextFieldValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshMarkersPage();"/>
+										<m:MTextFieldList id="m_textFieldList" config="textFields" valueChanged="updateMarkerTextFieldValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
 									</s:Scroller>
 								</s:NavigatorContent>
 							</mx:ViewStack>
@@ -166,86 +166,77 @@
 				</s:NavigatorContent>
 				<s:NavigatorContent label="{_('LoadingScreen')}" width="100%" height="100%" id="pgBattleLoading">
 					<s:Scroller x="0" y="0" width="420" height="100%">
-						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-							<p:PBattleLoading id="p_battleLoading" config="battleLoading" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshBattleLoadingPage();"/>
-							<p:PBattleLoadingIcons id="p_battleLoading_icons" config="battleLoading.clanIcon" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshBattleLoadingPage();"/>
-							<p:PBattleLoadingText id="p_battleLoading_text" config="battleLoading.text" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshBattleLoadingPage();"/>
+						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1" creationComplete="{RefreshCurrentPage()}">
+							<p:PBattleLoading id="p_battleLoading" config="battleLoading" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+							<p:PBattleLoadingIcons id="p_battleLoading_icons" config="battleLoading.clanIcon" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+							<p:PBattleLoadingText id="p_battleLoading_text" config="battleLoading.text" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
 						</s:VGroup>
 					</s:Scroller>
 				</s:NavigatorContent>
-				<s:NavigatorContent label="{_('StatisticForm')}" width="100%" height="100%" id="pgStatisticForm">
+                <s:NavigatorContent label="{_('StatisticForm')}" width="100%" height="100%" id="pgStatisticForm">
 					<s:Scroller x="0" y="0" width="420" height="100%">
-						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-							<p:PStatisticForm id="p_statisticForm" config="statisticForm" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshStatisticFormPage();"/>
-							<p:PStatisticFormIcons id="p_statisticForm_icons" config="statisticForm.clanIcon" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshStatisticFormPage();"/>
-							<p:PStatisticFormText id="p_statisticForm_text" config="statisticForm.text" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshStatisticFormPage();"/>
+						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1" creationComplete="{RefreshCurrentPage()}">
+							<p:PStatisticForm id="p_statisticForm" config="statisticForm" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+							<p:PStatisticFormIcons id="p_statisticForm_icons" config="statisticForm.clanIcon" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+							<p:PStatisticFormText id="p_statisticForm_text" config="statisticForm.text" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
 						</s:VGroup>
 					</s:Scroller>
 				</s:NavigatorContent>
-				<s:NavigatorContent label="{_('PlayersPanel')}" width="100%" height="100%" id="pgPlayersPanel">
+                <s:NavigatorContent label="{_('PlayersPanel')}" width="100%" height="100%" id="pgPlayersPanel">
 					<s:Scroller x="0" y="0" width="420" height="100%">
-						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-							<p:PPlayersPanel id="p_playersPanel" config="playersPanel" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshPlayersPanelPage();"/>
-							<p:PPlayersPanelIcons id="p_playersPanel_icons" config="playersPanel.clanIcon" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshPlayersPanelPage();"/>
-							<p:PPlayersPanelMedium id="p_playersPanel_medium" config="playersPanel.medium" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshPlayersPanelPage();"/>
-							<p:PPlayersPanelMedium2 id="p_playersPanel_medium2" config="playersPanel.medium2" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshPlayersPanelPage();"/>
-							<p:PPlayersPanelLarge id="p_playersPanel_large" config="playersPanel.large" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshPlayersPanelPage();"/>
+						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1" creationComplete="{RefreshCurrentPage()}">
+							<p:PPlayersPanel id="p_playersPanel" config="playersPanel" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+							<p:PPlayersPanelIcons id="p_playersPanel_icons" config="playersPanel.clanIcon" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+							<p:PPlayersPanelMedium id="p_playersPanel_medium" config="playersPanel.medium" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+							<p:PPlayersPanelMedium2 id="p_playersPanel_medium2" config="playersPanel.medium2" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+							<p:PPlayersPanelLarge id="p_playersPanel_large" config="playersPanel.large" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
 						</s:VGroup>
 					</s:Scroller>
 				</s:NavigatorContent>
-				<s:NavigatorContent label="{_('colorsPage')}" width="100%" height="100%" id="pgColors">
-						<mx:Accordion width="420" height="100%">
-							<s:NavigatorContent label="{_('SystemColors')}" width="100%" height="100%">
-								<p:PSystemColors id="p_systemColors" config="colors.system" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshColorsPage();"/>
+                <s:NavigatorContent label="{_('colorsPage')}" width="100%" height="100%" id="pgColors">
+						<mx:Accordion id="accColors" width="420" height="100%" change="{RefreshCurrentPage()}">
+							<s:NavigatorContent id="nc_systemColors" label="{_('SystemColors')}" width="100%" height="100%">
+								<p:PSystemColors id="p_systemColors" config="colors.system" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
 							</s:NavigatorContent>
-							<s:NavigatorContent label="{_('DynamicColorByHealthAmount')}" width="100%" height="100%">
-								<p:PDynamicValues id="p_colors_hp" config="colors.hp" minimum="0" maximum="3000" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshColorsPage();"/>
+							<s:NavigatorContent id="nc_colors_hp" label="{_('DynamicColorByHealthAmount')}" width="100%" height="100%">
+								<p:PDynamicValues id="p_colors_hp" config="colors.hp" minimum="0" maximum="3000" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
 							</s:NavigatorContent>
-							<s:NavigatorContent label="{_('DynamicColorByHealthRatio')}" width="100%" height="100%">
-								<p:PDynamicValues id="p_colors_hp_ratio" config="colors.hp_ratio" minimum="0" maximum="101" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshColorsPage();"/>
+							<s:NavigatorContent id="nc_colors_hp_ratio" label="{_('DynamicColorByHealthRatio')}" width="100%" height="100%">
+								<p:PDynamicValues id="p_colors_hp_ratio" config="colors.hp_ratio" minimum="0" maximum="101" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
 							</s:NavigatorContent>
-							<s:NavigatorContent label="{_('DynamicColorByEfficiency')}" width="100%" height="100%">
-								<p:PDynamicValues id="p_colors_eff" config="colors.eff" minimum="0" maximum="3000" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshColorsPage();"/>
+							<s:NavigatorContent id="nc_colors_eff" label="{_('DynamicColorByEfficiency')}" width="100%" height="100%">
+								<p:PDynamicValues id="p_colors_eff" config="colors.eff" minimum="0" maximum="3000" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
 							</s:NavigatorContent>
-							<s:NavigatorContent label="{_('DynamicColorByWinRate')}" width="100%" height="100%">
-								<p:PDynamicValues id="p_colors_rating" config="colors.rating" minimum="0" maximum="101" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshColorsPage();"/>
+							<s:NavigatorContent id="nc_colors_rating" label="{_('DynamicColorByWinRate')}" width="100%" height="100%">
+								<p:PDynamicValues id="p_colors_rating" config="colors.rating" minimum="0" maximum="101" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
 							</s:NavigatorContent>
-							<s:NavigatorContent label="{_('DynamicColorByKiloBattles')}" width="100%" height="100%">
-								<p:PDynamicValues id="p_colors_kb" config="colors.kb" minimum="0" maximum="100" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshColorsPage();"/>
+							<s:NavigatorContent id="nc_colors_kb" label="{_('DynamicColorByKiloBattles')}" width="100%" height="100%">
+								<p:PDynamicValues id="p_colors_kb" config="colors.kb" minimum="0" maximum="100" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
 							</s:NavigatorContent>
-							<s:NavigatorContent label="{_('DynamicColorByBattlesForTank')}" width="100%" height="100%">
-								<p:PDynamicValues id="p_colors_tbattles" config="colors.t_battles" minimum="0" maximum="9999" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshColorsPage();"/>
+							<s:NavigatorContent id="nc_colors_tbattles" label="{_('DynamicColorByBattlesForTank')}" width="100%" height="100%">
+								<p:PDynamicValues id="p_colors_tbattles" config="colors.t_battles" minimum="0" maximum="9999" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
 							</s:NavigatorContent>
 						</mx:Accordion>
 				</s:NavigatorContent>
-				<s:NavigatorContent label="{_('transparencyPage')}" width="100%" height="100%" id="pgTransparency">
-					<mx:Accordion width="420" height="100%">
-						<s:NavigatorContent label="{_('DynamicTransparencyByHealthAmount')}" width="100%" height="100%">
-							<p:PDynamicValues id="p_alpha_hp" config="alpha.hp" minimum="0" maximum="3000" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshTransparencyPage();"/>
+                <s:NavigatorContent label="{_('transparencyPage')}" width="100%" height="100%" id="pgTransparency">
+					<mx:Accordion id="accTransparency" width="420" height="100%" change="{RefreshCurrentPage()}">
+						<s:NavigatorContent id="nc_alpha_hp" label="{_('DynamicTransparencyByHealthAmount')}" width="100%" height="100%">
+							<p:PDynamicValues id="p_alpha_hp" config="alpha.hp" minimum="0" maximum="3000" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
 						</s:NavigatorContent>
-						<s:NavigatorContent label="{_('DynamicTransparencyByHealthRatio')}" width="100%" height="100%">
-							<p:PDynamicValues id="p_alpha_hp_ratio" config="alpha.hp_ratio" minimum="0" maximum="101" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshTransparencyPage();"/>
+						<s:NavigatorContent id="nc_alpha_hp_ratio" label="{_('DynamicTransparencyByHealthRatio')}" width="100%" height="100%">
+							<p:PDynamicValues id="p_alpha_hp_ratio" config="alpha.hp_ratio" minimum="0" maximum="101" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
 						</s:NavigatorContent>
-<!--						<s:NavigatorContent label="{_('DynamicTransparencyByEfficiency')}" width="100%" height="100%">
-							<p:PDynamicValues id="p_alpha_eff" config="alpha.eff" minimum="0" maximum="3000" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshTransparencyPage();"/>
-						</s:NavigatorContent>
-						<s:NavigatorContent label="{_('DynamicTransparencyByWinRate')}" width="100%" height="100%">
-							<p:PDynamicValues id="p_alpha_rating" config="alpha.rating" minimum="0" maximum="101" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshTransparencyPage();"/>
-						</s:NavigatorContent>
-						<s:NavigatorContent label="{_('DynamicTransparencyByKiloBattles')}" width="100%" height="100%">
-							<p:PDynamicValues id="p_alpha_kb" config="alpha.kb" minimum="0" maximum="100" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshTransparencyPage();"/>
-						</s:NavigatorContent>-->
-					</mx:Accordion>
+                </mx:Accordion>
 				</s:NavigatorContent>
-				<s:NavigatorContent label="{_('iconsetPage')}" width="100%" height="100%" id="pgIconset">
+                <s:NavigatorContent label="{_('iconsetPage')}" width="100%" height="100%" id="pgIconset">
 					<s:Scroller x="0" y="0" width="420" height="100%">
-						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-							<p:PIconSet id="p_iconSet" config="iconset" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshIconsetPage();"/>
+						<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1" creationComplete="{RefreshCurrentPage()}">
+							<p:PIconSet id="p_iconSet" config="iconset" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
 						</s:VGroup>
 					</s:Scroller>
 				</s:NavigatorContent>
 			</mx:ViewStack>
-			<c:PreviewComponent height="100%" id="preview"/>
+            <c:PreviewComponent height="100%" id="preview"/>
 		</s:HGroup>
 	</s:VGroup>
 </s:Application>

@@ -4,7 +4,7 @@ package events
 
 	public class ValueChangedEvent extends FlexEvent
 	{
-		public static const TYPE:String = "valueChanged";
+		public const TYPE:String = "valueChanged";
 
 		public var sender:Object;
 

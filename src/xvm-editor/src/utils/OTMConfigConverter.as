@@ -123,7 +123,7 @@ package utils
 
     // Components section
 
-    private static var otmComponentsMap:Array = [
+    private static const otmComponentsMap:Array = [
       [ "combatScrollText/enabled/value/1", "damageText/visible" ],
       [ "combatScrollText/speed/value/1", "damageText/speed" ],
       [ "combatScrollText/color/value/1", "damageText/color" ],
@@ -159,13 +159,13 @@ package utils
       [ "vehicleIcon/scale/y", "vehicleIcon/scaleY" ]
     ];
 
-    private static var xp_status_mode_ally:Array = [
+    private static const xp_status_mode_ally:Array = [
       "markers/ally/alive/normal", "markers/ally/alive/extended", "markers/ally/dead/normal", "markers/ally/dead/extended"//,
       //"markers/squad/alive/normal", "markers/squad/alive/extended", "markers/squad/dead/normal", "markers/squad/dead/extended",
       //"markers/teamKiller/alive/normal", "markers/teamKiller/alive/extended", "markers/teamKiller/dead/normal", "markers/ally/dead/extended",
     ];
 
-    private static var xp_status_mode_enemy:Array = [
+    private static const xp_status_mode_enemy:Array = [
       "markers/enemy/alive/normal", "markers/enemy/alive/extended", "markers/enemy/dead/normal", "markers/enemy/dead/extended"
     ];
 

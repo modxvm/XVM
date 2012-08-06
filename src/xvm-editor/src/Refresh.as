@@ -4,50 +4,40 @@ import utils.Config;
 import utils.DefaultConfig;
 import utils.Utils;
 
-protected function RefreshConfig():void
+protected function RefreshCurrentPage():void
 {
-	debug("RefreshConfig()");
+	debug("RefreshCurrentPage()");
 	try
 	{
+        var pg:Object = vsTabs.selectedChild;
+
 		if (!Config.s_config)
 			Config.s_config = DefaultConfig.config;
 
 		var now: Date = new Date();
 
 		//debug(JSON.stringify(Config.s_config));
-		RefreshCommonPage();
-		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
-		now = new Date();
 
-		RefreshBattleLoadingPage();
-		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
-		now = new Date();
+        if (pg == pgCommon)
+    		RefreshCommonPage();
+        else if (pg == pgBattleLoading)
+    		RefreshBattleLoadingPage();
+        else if (pg == pgStatisticForm)
+    		RefreshStatisticFormPage();
+        else if (pg == pgPlayersPanel)
+            RefreshPlayersPanelPage();
+        else if (pg == pgColors)
+		    RefreshColorsPage();
+        else if (pg == pgTransparency)
+		    RefreshTransparencyPage();
+        else if (pg == pgIconset)
+		    RefreshIconsetPage();
+        else if (pg == pgMarkers)
+		    RefreshMarkersPage();
 
-		RefreshStatisticFormPage();
-		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
-		now = new Date();
+        debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
 
-		RefreshPlayersPanelPage();
-		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
-		now = new Date();
-
-		RefreshColorsPage();
-		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
-		now = new Date();
-
-		RefreshTransparencyPage();
-		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
-		now = new Date();
-
-		RefreshIconsetPage();
-		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
-		now = new Date();
-
-		RefreshMarkersPage();
-		debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
-		now = new Date();
-
-		//updatePreview();
+        updatePreview();
 	}
 	catch (ex:Error)
 	{
@@ -92,7 +82,7 @@ private function RefreshCommonPage():void
 
 private function RefreshBattleLoadingPage():void
 {
-	debug("RefreshBattleLoadingPage()");
+    debug("RefreshBattleLoadingPage()");
 	try
 	{
 		var section:*;
@@ -201,40 +191,70 @@ private function RefreshColorsPage():void
 	debug("RefreshColorsPage()");
 	try
 	{
-		var section:*;
-
-		section = Config.s_config.colors.system;
-		this.p_systemColors.v_ally_alive_normal.value = section.ally_alive_normal;
-		this.p_systemColors.v_ally_alive_blind.value = section.ally_alive_blind;
-		this.p_systemColors.v_ally_dead_normal.value = section.ally_dead_normal;
-		this.p_systemColors.v_ally_dead_blind.value = section.ally_dead_blind;
-		this.p_systemColors.v_ally_blowedup_normal.value = section.ally_blowedup_normal;
-		this.p_systemColors.v_ally_blowedup_blind.value = section.ally_blowedup_blind;
-		this.p_systemColors.v_squadman_alive_normal.value = section.squadman_alive_normal;
-		this.p_systemColors.v_squadman_alive_blind.value = section.squadman_alive_blind;
-		this.p_systemColors.v_squadman_dead_normal.value = section.squadman_dead_normal;
-		this.p_systemColors.v_squadman_dead_blind.value = section.squadman_dead_blind;
-		this.p_systemColors.v_squadman_blowedup_normal.value = section.squadman_blowedup_normal;
-		this.p_systemColors.v_squadman_blowedup_blind.value = section.squadman_blowedup_blind;
-		this.p_systemColors.v_teamKiller_alive_normal.value = section.teamKiller_alive_normal;
-		this.p_systemColors.v_teamKiller_alive_blind.value = section.teamKiller_alive_blind;
-		this.p_systemColors.v_teamKiller_dead_normal.value = section.teamKiller_dead_normal;
-		this.p_systemColors.v_teamKiller_dead_blind.value = section.teamKiller_dead_blind;
-		this.p_systemColors.v_teamKiller_blowedup_normal.value = section.teamKiller_blowedup_normal;
-		this.p_systemColors.v_teamKiller_blowedup_blind.value = section.teamKiller_blowedup_blind;
-		this.p_systemColors.v_enemy_alive_normal.value = section.enemy_alive_normal;
-		this.p_systemColors.v_enemy_alive_blind.value = section.enemy_alive_blind;
-		this.p_systemColors.v_enemy_dead_normal.value = section.enemy_dead_normal;
-		this.p_systemColors.v_enemy_dead_blind.value = section.enemy_dead_blind;
-		this.p_systemColors.v_enemy_blowedup_normal.value = section.enemy_blowedup_normal;
-		this.p_systemColors.v_enemy_blowedup_blind.value = section.enemy_blowedup_blind;
-
-		this.p_colors_hp.RefreshSource();
-		this.p_colors_hp_ratio.RefreshSource();
-		this.p_colors_eff.RefreshSource();
-		this.p_colors_rating.RefreshSource();
-		this.p_colors_kb.RefreshSource();
-		this.p_colors_tbattles.RefreshSource();
+        if (accColors.selectedChild == nc_systemColors && p_systemColors != null)
+        {
+            var section:Object = Config.s_config.colors.system;
+            if (p_systemColors.v_ally_alive_normal != null)
+                p_systemColors.v_ally_alive_normal.value = section.ally_alive_normal;
+            if (p_systemColors.v_ally_alive_blind != null)
+                p_systemColors.v_ally_alive_blind.value = section.ally_alive_blind;
+            if (p_systemColors.v_ally_dead_normal != null)
+                p_systemColors.v_ally_dead_normal.value = section.ally_dead_normal;
+            if (p_systemColors.v_ally_dead_blind != null)
+                p_systemColors.v_ally_dead_blind.value = section.ally_dead_blind;
+            if (p_systemColors.v_ally_blowedup_normal != null)
+                p_systemColors.v_ally_blowedup_normal.value = section.ally_blowedup_normal;
+            if (p_systemColors.v_ally_blowedup_blind != null)
+                p_systemColors.v_ally_blowedup_blind.value = section.ally_blowedup_blind;
+            if (p_systemColors.v_squadman_alive_normal != null)
+                p_systemColors.v_squadman_alive_normal.value = section.squadman_alive_normal;
+            if (p_systemColors.v_squadman_alive_blind != null)
+                p_systemColors.v_squadman_alive_blind.value = section.squadman_alive_blind;
+            if (p_systemColors.v_squadman_dead_normal != null)
+                p_systemColors.v_squadman_dead_normal.value = section.squadman_dead_normal;
+            if (p_systemColors.v_squadman_dead_blind != null)
+                p_systemColors.v_squadman_dead_blind.value = section.squadman_dead_blind;
+            if (p_systemColors.v_squadman_blowedup_normal != null)
+                p_systemColors.v_squadman_blowedup_normal.value = section.squadman_blowedup_normal;
+            if (p_systemColors.v_squadman_blowedup_blind != null)
+                p_systemColors.v_squadman_blowedup_blind.value = section.squadman_blowedup_blind;
+            if (p_systemColors.v_teamKiller_alive_normal != null)
+                p_systemColors.v_teamKiller_alive_normal.value = section.teamKiller_alive_normal;
+            if (p_systemColors.v_teamKiller_alive_blind != null)
+                p_systemColors.v_teamKiller_alive_blind.value = section.teamKiller_alive_blind;
+            if (p_systemColors.v_teamKiller_dead_normal != null)
+                p_systemColors.v_teamKiller_dead_normal.value = section.teamKiller_dead_normal;
+            if (p_systemColors.v_teamKiller_dead_blind != null)
+                p_systemColors.v_teamKiller_dead_blind.value = section.teamKiller_dead_blind;
+            if (p_systemColors.v_teamKiller_blowedup_normal != null)
+                p_systemColors.v_teamKiller_blowedup_normal.value = section.teamKiller_blowedup_normal;
+            if (p_systemColors.v_teamKiller_blowedup_blind != null)
+                p_systemColors.v_teamKiller_blowedup_blind.value = section.teamKiller_blowedup_blind;
+            if (p_systemColors.v_enemy_alive_normal != null)
+                p_systemColors.v_enemy_alive_normal.value = section.enemy_alive_normal;
+            if (p_systemColors.v_enemy_alive_blind != null)
+                p_systemColors.v_enemy_alive_blind.value = section.enemy_alive_blind;
+            if (p_systemColors.v_enemy_dead_normal != null)
+                p_systemColors.v_enemy_dead_normal.value = section.enemy_dead_normal;
+            if (p_systemColors.v_enemy_dead_blind != null)
+                p_systemColors.v_enemy_dead_blind.value = section.enemy_dead_blind;
+            if (p_systemColors.v_enemy_blowedup_normal != null)
+                p_systemColors.v_enemy_blowedup_normal.value = section.enemy_blowedup_normal;
+            if (p_systemColors.v_enemy_blowedup_blind != null)
+                p_systemColors.v_enemy_blowedup_blind.value = section.enemy_blowedup_blind;
+        }
+        else if (accColors.selectedChild == nc_colors_hp && p_colors_hp != null)
+            p_colors_hp.RefreshSource();
+        else if (accColors.selectedChild == nc_colors_hp_ratio && p_colors_hp_ratio != null)
+            p_colors_hp_ratio.RefreshSource();
+        else if (accColors.selectedChild == nc_colors_eff && p_colors_eff != null)
+            p_colors_eff.RefreshSource();
+        else if (accColors.selectedChild == nc_colors_rating && p_colors_rating != null)
+            p_colors_rating.RefreshSource();
+        else if (accColors.selectedChild == nc_colors_kb && p_colors_kb != null)
+            p_colors_kb.RefreshSource();
+        else if (accColors.selectedChild == nc_colors_tbattles && p_colors_tbattles != null)
+		    p_colors_tbattles.RefreshSource();
 	}
 	catch (ex:Error)
 	{
@@ -247,11 +267,10 @@ private function RefreshTransparencyPage():void
 	debug("RefreshTransparencyPage()");
 	try
 	{
-		this.p_alpha_hp.RefreshSource();
-		this.p_alpha_hp_ratio.RefreshSource();
-		//this.p_alpha_eff.RefreshSource();
-		//this.p_alpha_rating.RefreshSource();
-		//this.p_alpha_kb.RefreshSource();
+        if (accTransparency.selectedChild == nc_alpha_hp && p_alpha_hp != null)
+		    p_alpha_hp.RefreshSource();
+        else if (accTransparency.selectedChild == nc_alpha_hp_ratio && p_alpha_hp_ratio != null)
+		    p_alpha_hp_ratio.RefreshSource();
 	}
 	catch (ex:Error)
 	{
@@ -280,7 +299,7 @@ private function RefreshIconsetPage():void
 
 // Markers
 
-public static var ElementControls:Object = {
+public const ElementControls:Object = {
 	vehicleIcon: [ "m_vehicleIcon" ],
 	healthBar: [ "m_healthBar" ],
 	damageText: [ "m_damageText", "m_damageText_font", "m_damageText_shadow" ],
@@ -323,6 +342,8 @@ private function RefreshMarkersPage():void
 		{
 			for each (var mname2:String in ElementControls[mname])
 			{
+                if (this[mname] == null)
+                    continue;
 				var control:LabeledComponent = this[mname][mname2] as LabeledComponent;
 
 				//debug(mname + "." + mname2);
@@ -365,7 +386,8 @@ private function RefreshTextFields():void
 	debug("RefreshTextFields()");
 	try
 	{
-		this.m_textFieldList.RefreshSource(getActiveMarkerStates());
+        if (m_textFieldList != null)
+		    m_textFieldList.RefreshSource(getActiveMarkerStates());
 	}
 	catch (ex:Error)
 	{

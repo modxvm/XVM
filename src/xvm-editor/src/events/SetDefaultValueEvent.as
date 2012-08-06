@@ -4,7 +4,7 @@ package events
 
 	public class SetDefaultValueEvent extends FlexEvent
 	{
-		public static const TYPE:String = "setDefaultValue";
+		public const TYPE:String = "setDefaultValue";
 
 		public var sender:Object;
 

@@ -4,18 +4,18 @@
  */
 package utils
 {
-  public class Utils 
+  public class Utils
   {
 	  public static function startsWith(substr: String, str: String): Boolean
 	  {
 		  return str.indexOf(substr, 0) == 0;
 	  }
-	  
+
 	  public static function endsWith(substr: String, str: String): Boolean
 	  {
 		  return str.lastIndexOf(substr) == (str.length - substr.length);
 	  }
-	  
+
 	  public static function fixPath(path: String): String
 	  {
 		  path = path.split("\\").join("/");
@@ -33,7 +33,7 @@ package utils
 		  value = String(value).toLowerCase();
 		  return defaultValue ? value != "false" : value == "true";
 	  }
-	  
+
 	  public static function toInt(value: Object, defaultValue: Number): Number
 	  {
 		  if (!defaultValue)
@@ -43,15 +43,15 @@ package utils
 		  var n: Number = parseInt(value.toString());
 		  return isNaN(n) ? defaultValue : n;
 	  }
-	  
+
 	  public static function toString(value: Object, defaultValue: String): String
 	  {
 		  return value ? String(value) : defaultValue;
 	  }
-	  
+
 	  public static function trim(s:String):String
-	  { 
-		  return s ? s.replace(/^\s+|\s+$/gs, '') : ""; 
+	  {
+		  return s ? s.replace(/^\s+|\s+$/gs, '') : "";
 	  }
 
 	  public static function elapsedMSec(start:Date, end:Date): Number
@@ -60,85 +60,5 @@ package utils
 		  var d2:Number = end.hours * 3600000 + end.minutes * 60000 + end.seconds * 1000 + end.milliseconds;
 		  return d2 - d1;
 	  }
-
-/*    public static function indexOf(array:Array, value:Object):Number
-    {
-      var i:Number = 0;
-      var len:Number = array.length;
-      while(i < len)
-      {
-        if(array[i] === value)
-          return i;
-        ++i;
-      }
-      return -1;
-    }
-
-    public static function padLeft(str: String, len: Number, char: String)
-    {
-      if (!str)
-        str = "";
-      if (!char)
-        char = ' ';
-      while (str.length < len)
-        str = char + str;
-      return str;
-    }
-
-    // 0 - equal, -1 - v1<v2, 1 - v1>v2, -2 - error
-    public static function compareVersions(v1: String, v2: String): Number
-    {
-      try
-      {
-        var a: Array = v1.split(".");
-        while (a.length < 4)
-          a.push("0");
-        var b: Array = v2.split(".");
-        while (b.length < 4)
-          b.push("0");
-
-        for (var i = 0; i < 4; ++i)
-        {
-          if (isNaN(parseInt(a[i])) && isNaN(parseInt(b[i])))
-            return a[i] == b[i] ? 0 : a[i] < b[i] ? -1 : 1;
-
-          if (isNaN(parseInt(a[i])))
-            return -1;
-
-          if (isNaN(parseInt(b[i])))
-            return 1;
-
-          if (parseInt(a[i]) < parseInt(b[i]))
-            return -1;
-
-          if (parseInt(a[i]) > parseInt(b[i]))
-            return 1;
-        }
-
-        return 0;
-      }
-      catch (e)
-      {
-        return -2;
-      }
-    }
-
-    public static function GetPlayerName(fullplayername: String): String
-    {
-      var pos = fullplayername.indexOf("[");
-      return (pos < 0) ? fullplayername : fullplayername.slice(0, pos);
-    }
-
-    public static function GetUpperPlayerName(fullplayername: String): String
-    {
-      return GetPlayerName(fullplayername).toUpperCase();
-    }
-
-    public static function GetClanName(fullplayername: String): String
-    {
-      var pos = fullplayername.indexOf("[");
-      return (pos < 0) ? null : fullplayername.slice(pos);
-    }
-*/
   }
 }

@@ -13,6 +13,12 @@ package validators
 			super();
 		}
 
+        protected var _allowedValues:Array = [];
+        public function set allowedValues(v:Array):void
+        {
+            _allowedValues = v;
+        }
+
 		override protected function doValidation(value:Object):Array
 		{
 			results = [];
@@ -20,10 +26,18 @@ package validators
 			if (results.length > 0)
 				return results;
 
-			var text:String = String(value).toUpperCase();
+            if (_allowedValues)
+            {
+                for each (var v:Object in _allowedValues)
+                {
+                    if (value == null && v == null)
+                        return results;
+                    if (String(value) == v)
+                        return results;
+                }
+            }
 
-			var a: RegExp
-			
+            var text:String = String(value).toUpperCase();
 			if (text != "" && !/^#[0-9A-F]{6}$/.test(text))
 			{
 				results.push(new ValidationResult(true, null, "Format",

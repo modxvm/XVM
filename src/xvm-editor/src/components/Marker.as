@@ -10,15 +10,15 @@
     import flash.utils.clearInterval;
     import flash.utils.setInterval;
     import flash.utils.setTimeout;
-    
+
     import mx.containers.Canvas;
     import mx.core.ScrollPolicy;
     import mx.core.UIComponent;
     import mx.events.FlexEvent;
     import mx.messaging.channels.StreamingAMFChannel;
-    
+
     import spark.components.Image;
-    
+
     import utils.ClassLoader;
     import utils.Config;
     import utils.Defines;
@@ -28,25 +28,25 @@
     public class Marker extends Canvas
     {
         [Embed(source="../assets/markers.swf", mimeType="application/octet-stream")]
-        private static var markersSWF: Class;
+        private const markersSWF: Class;
 
         // TODO: $FieldFont, $TextFont
         /*[Embed(source="../assets/gfxfontlib.swf", symbol="$FieldFont")]
-        private static var $FieldFont: Class;
+        private const $FieldFont: Class;
 
         [Embed(source="../assets/gfxfontlib.swf", symbol="$TextFont")]
-        private static var $TextFont: Class;*/
-        
+        private const $TextFont: Class;*/
+
         [Embed(source="images/markers/clan1.png")]
-        private static var IMG_clan1: Class;
+        private const IMG_clan1: Class;
         [Embed(source="images/markers/clan2.png")]
-        private static var IMG_clan2: Class;
+        private const IMG_clan2: Class;
         [Embed(source="images/markers/ussr-IS-3.png")]
-        private static var IMG_contour1: Class;
+        private const IMG_contour1: Class;
         [Embed(source="images/markers/germany-Ferdinand.png")]
-        private static var IMG_contour2: Class;
+        private const IMG_contour2: Class;
         [Embed(source="images/markers/germany-Hummel.png")]
-        private static var IMG_contour3: Class;
+        private const IMG_contour3: Class;
 
         private var loader:ClassLoader;
 
@@ -126,12 +126,12 @@
                 : _vtype == "ally" ? new IMG_contour1() : new IMG_contour2();
             contourIcon.visible = false;
             addChild(contourIcon);
-            
+
             clanIcon.includeInLayout = false;
             clanIcon.source =  _vtype == "ally" ? new IMG_clan1() : new IMG_clan2();
             clanIcon.visible = false;
             addChild(clanIcon);
-            
+
             loadSWF(markersSWF);
         }
 
@@ -169,7 +169,7 @@
         }
 
         private function PostInit(event: Event):void
-        { 
+        {
             removeEventListener(Event.ENTER_FRAME, PostInit);
 
             vehicleIconAlly.marker.icon.gotoAndStop(vehicleClass);
@@ -182,7 +182,7 @@
             vehicleIconEnemy.marker.scaleX = vehicleIconEnemy.marker.scaleY = _zoom;
             vehicleIconEnemy.visible = false;
 
-            vehicleIcon = _vtype == "ally" ? vehicleIconAlly : vehicleIconEnemy; 
+            vehicleIcon = _vtype == "ally" ? vehicleIconAlly : vehicleIconEnemy;
 
             actionMarkerHelp.stop();
             actionMarkerHelp.visible = false;
@@ -221,9 +221,9 @@
         public function set deadType(value:Boolean):void
         {
             vehicleIcon.visible = false;
-            vehicleIcon = value == true ? vehicleIconEnemy : vehicleIconAlly; 
+            vehicleIcon = value == true ? vehicleIconEnemy : vehicleIconAlly;
             this._vtype = value == true ? "enemy" : "ally";
-            clanIcon.source = value ? new IMG_clan2() : new IMG_clan1(); 
+            clanIcon.source = value ? new IMG_clan2() : new IMG_clan1();
             update();
         }
 
@@ -354,7 +354,7 @@
 
         var damageField: TextField = new TextField();
         damageHolder.addChild(damageField);
-        
+
         damageField.width = 140;
         damageField.height = 20;
 
@@ -456,7 +456,7 @@
             }
         }
     }
-    
+
     private function XVMUpdateHealthBar(curHealth:Number):void
     {
         var cfg:Object = _cfg.healthBar;
@@ -467,9 +467,9 @@
         var lct:String = XVMFormatStaticColorText(cfg.lcolor);
         var fullColor: Number = XVMFormatDynamicColor(ct, curHealth);
         var lowColor: Number = XVMFormatDynamicColor(lct || ct, curHealth);
-        
+
         var percent: Number = curHealth / m_maxHealth;
-        
+
         // determ current (real-time) color
         var currColor:Number = GraphicsUtil.colorByRatio(percent, lowColor, fullColor);
 
@@ -528,19 +528,19 @@
         format = format.split("{{wins}}").join("3210");
         format = format.split("{{rating}}").join("48%");
         format = format.split("{{eff}}").join("1234");
-        
+
         format = format.split("{{t-kb}}").join("1k");
         format = format.split("{{t-kb-0}}").join("1.1k");
         format = format.split("{{t-hb}}").join("12h");
         format = format.split("{{t-battles}}").join("1234");
         format = format.split("{{t-wins}}").join("1000");
         format = format.split("{{t-rating}}").join("54%");
-        
+
         // This code is stupid, and needs to be rewritten
         format = format.split("{{kb:3}}").join(" 4k");
         format = format.split("{{rating:3}}").join("48%");
         format = format.split("{{eff:4}}").join("1234");
-        
+
         format = format.split("{{t-kb:4}}").join("  1k");
         format = format.split("{{t_kb:4}}").join("  1k");
         format = format.split("{{t-hb:3}}").join("12h");
@@ -549,7 +549,7 @@
         format = format.split("{{t_battles:4}}").join("1234");
         format = format.split("{{t-rating:3}}").join("54%");
         format = format.split("{{t_rating:3}}").join("54%");
-        
+
         return format;
     }
 
@@ -598,17 +598,17 @@
         textField.wordWrap = false;
         textField.defaultTextFormat = XVMCreateNewTextFormat(cfg.font);
         textField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
-        
+
         var staticColor:String = XVMFormatStaticColorText(cfg.color);
         textField.textColor = XVMFormatDynamicColor(staticColor, m_curHealth);
         textField.alpha = XVMFormatDynamicAlpha(cfg.alpha, m_curHealth) / 100;
         textField.x = cfg.x - (textField.width >> 1);
         textField.y = cfg.y - (textField.height >> 1);
         textField.visible = cfg.visible;
-        
+
         return textField;
     }
-    
+
     private function XVMFormatDynamicColor(format: String, curHealth: Number): Number
     {
         var systemColorName: String = _vtype + "_";
@@ -634,7 +634,7 @@
             format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"))
         return !isNaN(parseInt(format)) ? int(format) : systemColor;
     }
-    
+
     private function XVMFormatStaticColorText(format: String): String
     {
         if (!format || !isNaN(parseInt(format)))

@@ -63,7 +63,7 @@ private function ParseConfigXml(xml:*):void
 	{
 		debug("ERROR: ParseConfigXml(): " + ex.toString());
 	}
-	RefreshConfig();
+    RefreshCurrentPage();
 }
 
 private function ParseConfigJson(str:String):void
@@ -81,7 +81,7 @@ private function ParseConfigJson(str:String):void
 	{
 		debug("ERROR: ParseConfigJson(): " + ex.toString());
 	}
-	RefreshConfig();
+    RefreshCurrentPage();
 }
 
 private function onLoadError(e:IOErrorEvent):void

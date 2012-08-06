@@ -7,6 +7,7 @@ import utils.DefaultConfig;
 import utils.Defines;
 import utils.JSON;
 
+//public const DEBUG:Boolean = true;
 public const DEBUG:Boolean = false;
 
 public function debug(str:String):void
@@ -21,7 +22,7 @@ protected function onCreateNewConfigClick():void
 	lastFileName = "XVM.xvmconf";
 	Config.s_config = DefaultConfig.config;
 	Config.TuneupConfig();
-	RefreshConfig();
+    RefreshCurrentPage();
 }
 
 protected function onLoadConfigClick():void
@@ -37,12 +38,16 @@ protected function onSaveConfigClick():void
 
 protected function onVehicleStateChanged(event:Event):void
 {
-	//var target:* = event.target;
-	vsMarkers.enabled = (ally.selected || enemy.selected) &&
+    if (vsMarkers == null)
+        return;
+
+    //var target:* = event.target;
+
+    vsMarkers.enabled = (ally.selected || enemy.selected) &&
 		(alive.selected || dead.selected) &&
 		(normal.selected || extended.selected);
 
-	RefreshMarkersPage();
+    RefreshCurrentPage();
 }
 
 // find all selected marker states

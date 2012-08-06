@@ -11,17 +11,17 @@
             import mx.events.ListEvent;
 
 			[Embed(source="images/bg/hills-1.jpg")]
-			private static var IMG1 : Class;
+			private const IMG1 : Class;
 			[Embed(source="images/bg/hills-2.jpg")]
-			private static var IMG2 : Class;
+			private const IMG2 : Class;
 			[Embed(source="images/bg/mannerheim-1.jpg")]
-			private static var IMG3 : Class;
+			private const IMG3 : Class;
 			[Embed(source="images/bg/mannerheim-2.jpg")]
-			private static var IMG4 : Class;
+			private const IMG4 : Class;
 			[Embed(source="images/bg/mannerheim-3.jpg")]
-			private static var IMG5 : Class;
+			private const IMG5 : Class;
 
-            private static var settings: Array = [
+            private const settings: Array = [
                 //                 x    y    zoom maxHP
                 { img: IMG1, m1: [ 200, 185, 1.0, 2100 ], m2: [ 410, 120, 0.7, 1600 ], m3: [ 360,  83, 0.6, 0 ] },
                 { img: IMG2, m1: [  90, 165, 0.7, 2100 ], m2: [ 180, 245, 1.0, 1600 ], m3: [ 410, 140, 0.9, 0 ] },

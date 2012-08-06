@@ -47,11 +47,11 @@
 		// config
 		protected var _config: String = null;
 		[Bindable]
-		public virtual function get config():String
+		public function get config():String
 		{
 			return _config;
 		}
-		public virtual function set config(v:String): void
+		public function set config(v:String): void
 		{
 			_config = v;
 		}
@@ -83,17 +83,17 @@
 		// value
 		protected var _value:*;
 		[Bindable]
-		public virtual function get value():*
+		public function get value():*
 		{
 			return _value;
 		}
-		public virtual function set value(v:*): void
+		public function set value(v:*): void
 		{
 			_value = v;
 		}
 
 		// onChange
-		protected virtual function onChange(event:Event):void
+		protected function onChange(event:Event):void
 		{
 			if (event)
 				event.stopPropagation();

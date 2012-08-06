@@ -13,16 +13,16 @@
 		<![CDATA[
 			import components.DynamicTextFieldEdit;
 			import components.LabeledComponent;
-			
+
 			import events.SetDefaultValueEvent;
 			import events.ValueChangedEvent;
-			
+
 			import flash.events.Event;
-			
+
 			import mx.core.IVisualElement;
-			
+
 			import spark.components.ToggleButton;
-			
+
 			import utils.Config;
 			import utils.DefaultConfig;
 			import utils.Utils;
@@ -32,8 +32,8 @@
 			private var m_values:Object = {};
 
 			[Embed(source="images/add.png")]
-			private static var IMG_add : Class;
-			
+			private const IMG_add : Class;
+
 			protected var _config:String = null;
 			[Bindable]
 			public function get config():String
@@ -158,7 +158,7 @@
 				RefreshElement(rbg.selectedValue.toString());
 			}
 
-			public static var ElementControls:Object = {
+			public const ElementControls:Object = {
 				textFields: [ "m_textField", "m_textField_font", "m_textField_shadow" ],
 				m_textField: [ "v_visible", "v_name", "v_x", "v_y", "v_alpha", "v_color", "v_format" ],
 				m_textField_font: [ "v_name", "v_size", "v_align", "v_bold" ],
@@ -245,13 +245,13 @@
 				try
 				{
 					event.stopPropagation();
-					
+
 					if (!event.sender.config)
 					{
 						trace("ERROR: config is null for: " + event.sender.id);
 						return;
 					}
-					
+
 					var activeValue:Object = m_values[rbg.selectedValue.toString()];
 					for (var i:Number = 0; i < activeValue.values.length; ++i)
 					{
@@ -265,16 +265,16 @@
 							activeValue.values[i] = defValue;
 						}
 						else if (event.target.config == "textField.font")
-							activeValue.values[i].font = DefaultConfig.font_13; 
+							activeValue.values[i].font = DefaultConfig.font_13;
 						else if (event.target.config == "textField.shadow")
-							activeValue.values[i].shadow = DefaultConfig.shadow_200; 
+							activeValue.values[i].shadow = DefaultConfig.shadow_200;
 						else
 						{
 							trace("ERROR: unknown target config: " + event.target.config);
 							return;
 						}
 					}
-					
+
 					onChange(null);
 					RefreshSource(m_activeMarkerStates);
 				}
