@@ -1,45 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
-		 xmlns:s="library://ns.adobe.com/flex/spark"
-		 xmlns:mx="library://ns.adobe.com/flex/mx"
-		 width="100%"
-		 borderVisible="false">
-	<fx:Script>
-		import events.ValueChangedEvent;
-		import events.SetDefaultValueEvent;
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    width="100%"
+    borderVisible="false">
+    <fx:Script>
+        import events.ValueChangedEvent;
+        import events.SetDefaultValueEvent;
 
-		import flash.events.Event;
-		
-		protected var _config:String = null;
-		[Bindable]
-		public function get config():String
-		{
-			return _config;
-		}
-		public function set config(v:String):void
-		{
-			_config = v;
-		}
-		
+        import flash.events.Event;
 
-		protected function onChange(event: Event):void
-		{
-			if (event)
-				event.stopPropagation();
-			var target:LabeledComponent = event.target as LabeledComponent;
-			if (target)
-				dispatchEvent(new events.ValueChangedEvent(target));
-		}
-		
-		protected function onSetDefault(event: Event):void
-		{
-			if (event)
-				event.stopPropagation();
-			dispatchEvent(new events.SetDefaultValueEvent(this));
-		}
-	</fx:Script>
-	<fx:Metadata>
-		[Event(name="valueChanged", type="events.ValueChangedEvent")]
-		[Event(name="setDefaultValue", type="events.SetDefaultValueEvent")]
-	</fx:Metadata>
+        [Bindable]
+        public var config:String = null;
+
+        protected function onChange(event: Event):void
+        {
+            if (event)
+                event.stopPropagation();
+            var target:LabeledComponent = event.target as LabeledComponent;
+            if (target)
+                dispatchEvent(new events.ValueChangedEvent(target));
+        }
+
+        protected function onSetDefault(event: Event):void
+        {
+            if (event)
+                event.stopPropagation();
+            dispatchEvent(new events.SetDefaultValueEvent(this));
+        }
+    </fx:Script>
+    <fx:Metadata>
+        [Event(name="valueChanged", type="events.ValueChangedEvent")]
+        [Event(name="setDefaultValue", type="events.SetDefaultValueEvent")]
+    </fx:Metadata>
 </s:BorderContainer>

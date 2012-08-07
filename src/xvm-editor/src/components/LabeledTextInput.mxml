@@ -5,17 +5,8 @@
     xmlns:c="components.*">
     <fx:Script>
         // wrapTextField
-        protected var _wrapTextField: Boolean = false;
-
         [Bindable]
-        public function get wrapTextField(): Boolean
-        {
-            return _wrapTextField;
-        }
-        public function set wrapTextField(value: Boolean): void
-        {
-            _wrapTextField = value;
-        }
+        public var wrapTextField: Boolean = false;
     </fx:Script>
     <s:TextInput left="{wrapTextField ? 0 : labelWidth}" right="0" bottom="0" height="{wrapTextField ? height/2 : height}"
         id="edit" text="{value}" change="value=edit.text; onChange(event);"/>

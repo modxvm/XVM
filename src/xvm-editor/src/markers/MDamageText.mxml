@@ -5,11 +5,16 @@
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
     title="{resourceManager.getString('markers', 'DamageText')}">
+    <fx:Script>
+        <![CDATA[
+            import utils.Defines;
+        ]]>
+    </fx:Script>
     <c:LabeledCheckBox label="{resourceManager.getString('markers', 'Visible')}" id="v_visible" config="visible" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'XPosition')}" id="v_x" config="x" minimum="-100" maximum="100" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'YPosition')}" id="v_y" config="y" minimum="-100" maximum="100" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'Transparency')}" id="v_alpha" config="alpha" minimum="0" maximum="100" change="onChange(event)"/>
-    <c:LabeledMacrosColorSelector label="{resourceManager.getString('markers', 'Color')}" width="320" id="v_color" config="color" change="onChange(event)"/>
+    <c:LabeledMacrosColorSelector label="{resourceManager.getString('markers', 'Color')}" width="320" id="v_color" config="color" allowedMacros="{Defines.getMacros('colors')}" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'DisplayTime')}" id="v_speed" config="speed" minimum="0" maximum="10" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'MoveRange')}" id="v_maxRange" config="maxRange" minimum="0" maximum="100" change="onChange(event)"/>
     <c:LabeledTextInput label="{resourceManager.getString('markers', 'DamageMessage')}" id="v_damageMessage" config="damageMessage" change="onChange(event)"/>

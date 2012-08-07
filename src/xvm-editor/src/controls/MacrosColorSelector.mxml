@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <a:ColorSelector xmlns:fx="http://ns.adobe.com/mxml/2009"
-		 xmlns:s="library://ns.adobe.com/flex/spark"
-		 xmlns:mx="library://ns.adobe.com/flex/mx"
+         xmlns:s="library://ns.adobe.com/flex/spark"
+         xmlns:mx="library://ns.adobe.com/flex/mx"
          xmlns:a="controls.*"
-		 xmlns:validators="validators.*"
-		 xmlns:utils="utils.*">
-	<fx:Script>
-		<![CDATA[
+         xmlns:validators="validators.*"
+         xmlns:utils="utils.*">
+    <fx:Script>
+        <![CDATA[
             import mx.controls.Menu;
             import mx.events.MenuEvent;
 
             [Embed("images/syscolors.png")]
             public const syscolors:Class;
 
-            protected var _allowedMacros:Array = [];
+            private var _allowedMacros:Array = [];
             [Bindable]
             public function get allowedMacros():Array
             {
@@ -22,43 +22,71 @@
             public function set allowedMacros(v:Array):void
             {
                 _allowedMacros = v;
+                var av:Array = ["(system)"];
+                menuData = [
+                    { label: "UseSystemColor", icon: syscolors },
+                    { type: "separator" }
+                ];
+
+                for each (var a:Object in _allowedMacros)
+                {
+                    av.push(a.value);
+                    menuData.push(a);
+                }
+                tv.allowedValues = av;
             }
 
-            private var _value:String = null;
-			[Bindable]
-			public override function get value():String
-			{
-				return isNaN(parseInt(_value)) ? _value : "0x" + toHex(parseInt(_value));
-			}
-			public override function set value(v:String):void
-			{
+            [Bindable]
+            private var menuData:Array = [];
+
+            private function getLabel(item:Object):String
+            {
+                return resourceManager.getString('components', item.label);
+            }
+
+            private var _value:String = "0";
+            [Bindable]
+            public override function get value():String
+            {
+                return isNaN(parseInt(_value)) ? _value : "0x" + toHex(parseInt(_value));
+            }
+            public override function set value(v:String):void
+            {
                 _value = v;
                 if (v == null)
                 {
                     ti.text = "(system)";
                     ti.alpha = 0.5;
-				    cp.selectedColor = 0;
-				    cp.alpha = 0.5;
+                    cp.selectedColor = 1;
+                    cp.alpha = 0.5;
                 }
                 else
                 {
-                    var vv:int = (v == null) ? NaN : int(v);
-                    ti.text = isNaN(vv) ? _value : "#" + toHex(vv);
+                    ti.text = isNaN(parseInt(v)) ? v : "#" + toHex(parseInt(v));
                     ti.alpha = 1;
-                    cp.selectedColor = vv;
-                    cp.alpha = 1;
+                    cp.selectedColor = parseInt(v) || 1;
+                    cp.alpha = isNaN(parseInt(v)) ? 0.5 : 1;
                 }
-			}
+            }
 
-			protected override function onChange(event:Event):void
-			{
-				if (event)
-					event.stopPropagation();
-				var v:String = null;
+            protected override function textChanged():void
+            {
+                ti.validateNow();
+            }
+
+            protected override function onChange(event:Event):void
+            {
+                if (event)
+                    event.stopPropagation();
+                var v:String = null;
                 if (event.target == cp)
-				  v = isNaN(cp.selectedColor) ? null : cp.selectedColor.toString()
-				else if (event.target == tv)
-				  v = ti.text.charAt(0) == "#" ? "0x" + ti.text.substr(1) : ti.text;
+                {
+                    ti.text = "#" + toHex(cp.selectedColor);
+                    return;
+                }
+
+                if (event.target == tv)
+                  v = ti.text.charAt(0) == "#" ? "0x" + ti.text.substr(1) : ti.text;
                 else if (event.target == pm)
                 {
                     var me:MenuEvent = event as MenuEvent;
@@ -93,38 +121,19 @@
                 } else
                     return;
 
-				if (value != v)
-				{
-					value = v;
-					dispatchEvent(new Event(Event.CHANGE));
-				}
-			}
-		]]>
-	</fx:Script>
-	<fx:Metadata>
-		[Event(name="change", type="flash.events.Event")]
-		[ResourceBundle("components")]
-	</fx:Metadata>
-	<fx:Declarations>
-		<!--<validators:TextColorValidator id="tv" source="{ti}" property="text" valid="onChange(event)"
-           allowedValues="['(system)','\{\{c:hp\}\}','\{\{c:hp-ratio\}\}','\{\{c:eff\}\}','\{\{c:rating\}\}','\{\{c:kb\}\}','\{\{c:t-rating\}\}','\{\{c:t-battles\}\}']"/>-->
-	</fx:Declarations>
-<!--	<s:TextInput id="ti" width="100%" maxChars="32" restrict="#0-9A-Za-z\{\}\-_:" change="ti.validateNow()"/>
-	<mx:ColorPicker id="cp" change="onChange(event)" useHandCursor="true" buttonMode="true"/>-->
-	<mx:Spacer width="5"/>
-    <mx:PopUpMenuButton id="pm" width="40" label="" icon="{syscolors}" toolTip="{resourceManager.getString('components', 'UseSystemColor')}" itemClick="onChange(event)">
-        <mx:dataProvider>
-            <mx:ArrayCollection>
-                <fx:Object label="{resourceManager.getString('components', 'UseSystemColor')}" icon="syscolors"/>
-                <fx:Object type="separator"/>
-                <fx:Object label="{resourceManager.getString('components', 'c_hp')}" icon="c_hp"/>
-                <fx:Object label="{resourceManager.getString('components', 'c_hp_ratio')}" icon="c_hp_ratio"/>
-                <fx:Object label="{resourceManager.getString('components', 'c_eff')}" icon="c_eff"/>
-                <fx:Object label="{resourceManager.getString('components', 'c_rating')}" icon="c_rating"/>
-                <fx:Object label="{resourceManager.getString('components', 'c_kb')}" icon="c_kb"/>
-                <fx:Object label="{resourceManager.getString('components', 'c_t_rating')}" icon="c_t_rating"/>
-                <fx:Object label="{resourceManager.getString('components', 'c_t_battles')}" icon="c_t_battles"/>
-            </mx:ArrayCollection>
-        </mx:dataProvider>
-    </mx:PopUpMenuButton>
+                if (value != v)
+                {
+                    value = v;
+                    dispatchEvent(new Event(Event.CHANGE));
+                }
+            }
+        ]]>
+    </fx:Script>
+    <fx:Metadata>
+        [Event(name="change", type="flash.events.Event")]
+        [ResourceBundle("components")]
+    </fx:Metadata>
+    <mx:Spacer width="5"/>
+    <mx:PopUpMenuButton id="pm" width="40" dataProvider="{menuData}" label="" icon="{syscolors}" labelFunction="getLabel"
+        toolTip="{resourceManager.getString('components', 'UseSystemColor')}" itemClick="onChange(event)"/>
 </a:ColorSelector>

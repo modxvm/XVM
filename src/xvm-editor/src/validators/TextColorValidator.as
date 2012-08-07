@@ -38,7 +38,7 @@ package validators
             }
 
             var text:String = String(value).toUpperCase();
-			if (text != "" && !/^#[0-9A-F]{6}$/.test(text))
+			if (!/^#[0-9A-F]{6}$/.test(text))
 			{
 				results.push(new ValidationResult(true, null, "Format",
 					resourceManager.getString("validators", "colorHint")));

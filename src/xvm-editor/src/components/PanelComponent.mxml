@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009"
-		 xmlns:s="library://ns.adobe.com/flex/spark"
-		 xmlns:mx="library://ns.adobe.com/flex/mx"
+         xmlns:s="library://ns.adobe.com/flex/spark"
+         xmlns:mx="library://ns.adobe.com/flex/mx"
          borderVisible="true"
          minHeight="20"
-		 width="100%">
-	<fx:Script>
+         width="100%">
+    <fx:Script>
     <![CDATA[
         import flash.events.Event;
         import events.SetDefaultValueEvent;
@@ -27,41 +27,33 @@
             }
         }
 
-        protected var _config:String = null;
-		[Bindable]
-		public function get config():String
-		{
-			return _config;
-		}
-		public function set config(v:String):void
-		{
-			_config = v;
-		}
-		
-		protected function onChange(event: Event):void
-		{
-			if (event)
-				event.stopPropagation();
-			var target:LabeledComponent = event.target as LabeledComponent;
-			if (target)
-				dispatchEvent(new events.ValueChangedEvent(target));
-		}
+        [Bindable]
+        public var config:String = null;
 
-		protected function onSetDefault(event: Event):void
-		{
-			if (event)
-				event.stopPropagation();
-			dispatchEvent(new events.SetDefaultValueEvent(this));
-		}
+        protected function onChange(event: Event):void
+        {
+            if (event)
+                event.stopPropagation();
+            var target:LabeledComponent = event.target as LabeledComponent;
+            if (target)
+                dispatchEvent(new events.ValueChangedEvent(target));
+        }
+
+        protected function onSetDefault(event: Event):void
+        {
+            if (event)
+                event.stopPropagation();
+            dispatchEvent(new events.SetDefaultValueEvent(this));
+        }
     ]]>
-	</fx:Script>
-	<fx:Metadata>
-		[Event(name="valueChanged", type="events.ValueChangedEvent")]
-		[Event(name="setDefaultValue", type="events.SetDefaultValueEvent")]
+    </fx:Script>
+    <fx:Metadata>
+        [Event(name="valueChanged", type="events.ValueChangedEvent")]
+        [Event(name="setDefaultValue", type="events.SetDefaultValueEvent")]
         [DefaultProperty("mxmlContent")]
         [ResourceBundle("panels")]
         [ResourceBundle("markers")]
-	</fx:Metadata>
+    </fx:Metadata>
     <mx:Image right="5" y="-18" width="16" height="16" source="@Embed(source='images/revert.png')" toolTip="{resourceManager.getString('panels', 'DefaultSettings')}" useHandCursor="true" buttonMode="true" click="onSetDefault(event)"/>
     <s:VGroup id="holder" left="10" right="10" top="5" bottom="5" gap="2" variableRowHeight="true"/>
 </s:Panel>

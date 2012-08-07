@@ -5,10 +5,15 @@
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
     title="{resourceManager.getString('markers', 'Shadow')}">
+    <fx:Script>
+        <![CDATA[
+            import utils.Defines;
+        ]]>
+    </fx:Script>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'Size')}" id="v_size" config="shadow.size" minimum="0" maximum="10" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'Strength')}" id="v_strength" config="shadow.strength" minimum="0" maximum="9999" sliderVisible="false" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'Angle')}" id="v_angle" config="shadow.angle" minimum="0" maximum="359" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'Distance')}" id="v_distance" config="shadow.distance" minimum="0" maximum="10" change="onChange(event)"/>
-    <c:LabeledMacrosColorSelector label="{resourceManager.getString('markers', 'Color')}" width="320" id="v_color" config="shadow.color" change="onChange(event)"/>
+    <c:LabeledMacrosColorSelector label="{resourceManager.getString('markers', 'Color')}" width="320" id="v_color" config="shadow.color" allowedMacros="{Defines.getMacros('colors')}" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'Transparency')}" id="v_alpha" config="shadow.alpha" minimum="0" maximum="100" change="onChange(event)"/>
 </c:PanelComponent>

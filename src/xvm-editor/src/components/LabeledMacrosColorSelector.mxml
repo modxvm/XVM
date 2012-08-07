@@ -5,16 +5,8 @@
     xmlns:c="components.*"
     xmlns:a="controls.*">
     <fx:Script>
-    	protected var _allowedMacros:Array = [];
     	[Bindable]
-    	public function get allowedMacros():Array
-    	{
-            return _allowedMacros;
-    	}
-    	public function set allowedMacros(v:Array):void
-    	{
-            _allowedMacros = v;
-    	}
+    	public var allowedMacros:Array = [];
     </fx:Script>
     <a:MacrosColorSelector left="{labelWidth}" right="10" height="{height}" allowedMacros="{allowedMacros}"
         id="edit" value="{value}" change="value=edit.value; onChange(event)"/>

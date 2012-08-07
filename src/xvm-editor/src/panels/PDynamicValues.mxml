@@ -1,195 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:BorderContainer
-	xmlns:fx="http://ns.adobe.com/mxml/2009"
-	xmlns:s="library://ns.adobe.com/flex/spark"
-	xmlns:mx="library://ns.adobe.com/flex/mx"
-	xmlns:c="components.*"
-	width="100%" height="100%"
-	borderVisible="false">
-	<fx:Script>
-		<![CDATA[
+    xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:c="components.*"
+    width="100%" height="100%"
+    borderVisible="false">
+    <fx:Script>
+        <![CDATA[
             import components.DefaultComponent;
             import components.DynamicAlphaEdit;
             import components.DynamicColorEdit;
-            
+
             import events.SetDefaultValueEvent;
             import events.ValueChangedEvent;
-            
+
             import flash.events.Event;
-            
+
             import mx.core.IVisualElement;
             import mx.messaging.channels.StreamingAMFChannel;
-            
+
             import utils.Config;
 
-			[Embed(source="images/add.png")]
-			private const IMG_add : Class;
+            [Embed(source="images/add.png")]
+            private const IMG_add : Class;
 
-			private function CreateNewElementButton():IVisualElement
-			{
-				var img:Image = new Image();
-				img.width = 16;
-				img.height = 16;
-				img.id = "new";
-				img.source = new IMG_add();
-				img.toolTip = resourceManager.getString('panels', 'AddLine');
-				img.useHandCursor = true;
-				img.buttonMode = true;
-				img.addEventListener(MouseEvent.CLICK, this.onClick);
-				return img;
-			}
+            private function CreateNewElementButton():IVisualElement
+            {
+                var img:Image = new Image();
+                img.width = 16;
+                img.height = 16;
+                img.id = "new";
+                img.source = new IMG_add();
+                img.toolTip = resourceManager.getString('panels', 'AddLine');
+                img.useHandCursor = true;
+                img.buttonMode = true;
+                img.addEventListener(MouseEvent.CLICK, this.onClick);
+                return img;
+            }
 
-			private function CreateElement(v:Object = null):DefaultComponent
-			{
-				var instance:DefaultComponent;
-				switch (editorClass)
-				{
-					case "DynamicAlphaEdit":
-						instance = new DynamicAlphaEdit();
-						(instance as DynamicAlphaEdit).v_value = v ? v.value : 0;
+            private function CreateElement(v:Object = null):DefaultComponent
+            {
+                var instance:DefaultComponent;
+                switch (editorClass)
+                {
+                    case "DynamicAlphaEdit":
+                        instance = new DynamicAlphaEdit();
+                        (instance as DynamicAlphaEdit).v_value = v ? v.value : 0;
                         (instance as DynamicAlphaEdit).v_alpha = v ? v.alpha : 0;
-						break;
-					case "DynamicColorEdit":
-						instance = new DynamicColorEdit();
+                        break;
+                    case "DynamicColorEdit":
+                        instance = new DynamicColorEdit();
                         (instance as DynamicColorEdit).v_value = v ? v.value : 0;
                         (instance as DynamicColorEdit).v_color = v ? v.color : "";
-						break;
-				}
+                        break;
+                }
 
                 instance.minimum = minimum;
                 instance.maximum = maximum;
 
                 instance.addEventListener(Event.CHANGE, onChange);
-				instance.addEventListener(MouseEvent.CLICK, onClick);
-				return instance;
-			}
+                instance.addEventListener(MouseEvent.CLICK, onClick);
+                return instance;
+            }
 
-			public function RefreshSource(src: Array = null): void
-			{
+            public function RefreshSource(src: Array = null): void
+            {
                 if (!src)
-                    src = Config.GetValue(_config);
+                    src = Config.GetValue(config);
                 var len:int = container.numElements;
-				for (var n:int = 0; n < len; ++n)
-					delete container.getElementAt(n);
-				container.removeAllElements();
-				if (src.length == 0)
-					container.addElement(CreateNewElementButton());
-				else
-				{
+                for (var n:int = 0; n < len; ++n)
+                    delete container.getElementAt(n);
+                container.removeAllElements();
+                if (src.length == 0)
+                    container.addElement(CreateNewElementButton());
+                else
+                {
                     var len2:int = src.length;
-					for (var i:int = 0; i < len2; ++i)
-						container.addElement(CreateElement(src[i]));
-				}
-			}
+                    for (var i:int = 0; i < len2; ++i)
+                        container.addElement(CreateElement(src[i]));
+                }
+            }
 
-			public function get value():*
-			{
-				var a: Array = [];
-				for (var i:int = 0; i < container.numElements; ++i)
-					a.push((container.getElementAt(i) as DefaultComponent).value);
-				return a;
-			}
+            public function get value():*
+            {
+                var a: Array = [];
+                for (var i:int = 0; i < container.numElements; ++i)
+                    a.push((container.getElementAt(i) as DefaultComponent).value);
+                return a;
+            }
 
-			// config
-			private var _config:String;
+            // config
+            [Bindable]
+            public var config:String;
 
-			[Bindable]
-			public function get config():String
-			{
-				return _config;
-			}
-			public function set config(value:String): void
-			{
-				_config = value;
-			}
+            // minimum
+            [Bindable]
+            public var minimum:int = 0;
 
-			// minimum
-			protected var _minimum:int = 0;
-			[Bindable]
-			public function get minimum():int
-			{
-				return _minimum;
-			}
-			public function set minimum(v:int): void
-			{
-				_minimum = v;
-			}
+            // maximum
+            [Bindable]
+            public var maximum:int = 10;
 
-			// maximum
-			protected var _maximum:int = 10;
-			[Bindable]
-			public function get maximum():int
-			{
-				return _maximum;
-			}
-			public function set maximum(v:int): void
-			{
-				_maximum = v;
-			}
+            // renderer
+            [Bindable]
+            public var editorClass:String;
 
-			// renderer
-			private var _editorClass:String;
-			[Bindable]
-			public function get editorClass():String
-			{
-				return _editorClass;
-			}
-			public function set editorClass(value:String): void
-			{
-				_editorClass = value;
-			}
+            // onChange
+            protected function onChange(event:Event):void
+            {
+                if (event)
+                    event.stopPropagation();
+                dispatchEvent(new events.ValueChangedEvent(this));
+            }
 
-			// onChange
-			protected function onChange(event:Event):void
-			{
-				if (event)
-					event.stopPropagation();
-				dispatchEvent(new events.ValueChangedEvent(this));
-			}
-
-			// add/del
-			protected function onClick(event:MouseEvent):void
-			{
-				if (!event)
-					return;
-				event.stopPropagation();
-				if (event.target.id == "def")
-				{
-					dispatchEvent(new events.SetDefaultValueEvent(this));
-				}
-				else if (event.target.id == "del")
-				{
-					delete container.removeElement(event.currentTarget as IVisualElement);
-					onChange(null);
-					if (container.numElements == 0)
-						container.addElement(CreateNewElementButton());
-				}
-				else if (event.target.id == "add")
-				{
-					container.addElementAt(CreateElement(),
-						container.getElementIndex(event.currentTarget as IVisualElement) + 1);
-					onChange(null);
-				}
-				else if (event.target.id == "new")
-				{
-					for (var n:int = 0; n < container.numElements; ++n)
-						delete container.getElementAt(n);
-					container.removeAllElements();
-					container.addElement(CreateElement());
-					onChange(null);
-				}
-			}
-		]]>
-	</fx:Script>
-	<fx:Metadata>
-		[Event(name="valueChanged", type="events.ValueChangedEvent")]
-		[Event(name="setDefaultValue", type="events.SetDefaultValueEvent")]
-		[ResourceBundle("panels")]
-	</fx:Metadata>
-	<mx:Image id="def" right="5" y="5" width="16" height="16" source="@Embed(source='images/revert.png')" toolTip="{resourceManager.getString('panels', 'DefaultSettings')}" useHandCursor="true" buttonMode="true" click="onClick(event)"/>
-	<s:HGroup left="10" right="25" top="10" bottom="10">
-		<s:Scroller width="100%" height="100%">
-			<s:VGroup id="container" width="100%" height="100%" gap="-1"/>
-		</s:Scroller>
-	</s:HGroup>
+            // add/del
+            protected function onClick(event:MouseEvent):void
+            {
+                if (!event)
+                    return;
+                event.stopPropagation();
+                if (event.target.id == "def")
+                {
+                    dispatchEvent(new events.SetDefaultValueEvent(this));
+                }
+                else if (event.target.id == "del")
+                {
+                    delete container.removeElement(event.currentTarget as IVisualElement);
+                    onChange(null);
+                    if (container.numElements == 0)
+                        container.addElement(CreateNewElementButton());
+                }
+                else if (event.target.id == "add")
+                {
+                    container.addElementAt(CreateElement(),
+                        container.getElementIndex(event.currentTarget as IVisualElement) + 1);
+                    onChange(null);
+                }
+                else if (event.target.id == "new")
+                {
+                    for (var n:int = 0; n < container.numElements; ++n)
+                        delete container.getElementAt(n);
+                    container.removeAllElements();
+                    container.addElement(CreateElement());
+                    onChange(null);
+                }
+            }
+        ]]>
+    </fx:Script>
+    <fx:Metadata>
+        [Event(name="valueChanged", type="events.ValueChangedEvent")]
+        [Event(name="setDefaultValue", type="events.SetDefaultValueEvent")]
+        [ResourceBundle("panels")]
+    </fx:Metadata>
+    <mx:Image id="def" right="5" y="5" width="16" height="16" source="@Embed(source='images/revert.png')" toolTip="{resourceManager.getString('panels', 'DefaultSettings')}" useHandCursor="true" buttonMode="true" click="onClick(event)"/>
+    <s:HGroup left="10" right="25" top="10" bottom="10">
+        <s:Scroller width="100%" height="100%">
+            <s:VGroup id="container" width="100%" height="100%" gap="-1"/>
+        </s:Scroller>
+    </s:HGroup>
 </s:BorderContainer>

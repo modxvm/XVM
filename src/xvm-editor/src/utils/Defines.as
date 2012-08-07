@@ -48,6 +48,11 @@ public final class Defines
     public static const a_hp_ratio:Class;
 
     // Macros groups
+    public static function getMacros(m:String):Array
+    {
+        return MACROS[m];
+    }
+
     public static const MACROS: Object = {
         // In players panel, battle loading screen and statistic form:
         panels: [
@@ -87,18 +92,18 @@ public final class Defines
         ],
         // Dynamic colors macros:
         colors: [
-            { value: "{{c:hp}}", label: "", icon: c_hp },
-            { value: "{{c:hp-ratio}}", label: "", icon: c_hp_ratio },
-            { value: "{{c:eff}}", label: "", icon: c_eff },
-            { value: "{{c:rating}}", label: "", icon: c_rating },
-            { value: "{{c:kb}}", label: "", icon: c_kb },
-            { value: "{{c:t-rating}}", label: "", icon: c_t_rating },
-            { value: "{{c:t-battles}}", label: "", icon: c_t_battles }
+            { value: "{{c:hp}}", label: "c_hp", icon: c_hp },
+            { value: "{{c:hp-ratio}}", label: "c_hp_ratio", icon: c_hp_ratio },
+            { value: "{{c:eff}}", label: "c_eff", icon: c_eff },
+            { value: "{{c:rating}}", label: "c_rating", icon: c_rating },
+            { value: "{{c:kb}}", label: "c_kb", icon: c_kb },
+            { value: "{{c:t-rating}}", label: "c_t_rating", icon: c_t_rating },
+            { value: "{{c:t-battles}}", label: "c_t_battles", icon: c_t_battles }
         ],
         // Dynamic transparency macros:
         transparency: [
-            { value: "{{a:hp}}", label: "", icon: a_hp },
-            { value: "{{a:hp-ratio}}", label: "", icon: a_hp_ratio }
+            { value: "{{a:hp}}", label: "a_hp", icon: a_hp },
+            { value: "{{a:hp-ratio}}", label: "a_hp_ratio", icon: a_hp_ratio }
         ]
     };
 }

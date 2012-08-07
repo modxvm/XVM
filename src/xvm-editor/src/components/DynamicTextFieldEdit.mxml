@@ -1,31 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <c:DefaultComponent xmlns:fx="http://ns.adobe.com/mxml/2009"
-	    xmlns:s="library://ns.adobe.com/flex/spark"
-	    xmlns:mx="library://ns.adobe.com/flex/mx"
-		xmlns:c="components.*"
-		width="100%" height="18">
-	<fx:Script>
-		import spark.components.RadioButtonGroup;
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:c="components.*"
+    width="100%" height="18">
+    <fx:Script>
+        import spark.components.RadioButtonGroup;
 
         [Bindable]
-		public var group:RadioButtonGroup = null;
+        public var group:RadioButtonGroup = null;
 
         [Bindable]
-		public var bgColor:uint = 0xFFFFFF;
+        public var bgColor:uint = 0xFFFFFF;
 
         [Bindable]
-		public var selected:Boolean = false;
+        public var selected:Boolean = false;
     </fx:Script>
-	<fx:Metadata>
-		[Event(name="click", type="flash.events.MouseEvent")]
-		[ResourceBundle("components")]
-	</fx:Metadata>
-	<s:HGroup width="100%" height="100%" verticalAlign="middle">
-		<mx:Spacer width="0"/>
-		<s:RadioButton label="{label}" width="{labelWidth}" group="{group}" selected="{selected}"/>
-		<mx:Image width="16" height="16" id="del" source="@Embed(source='images/delete.png')" toolTip="{resourceManager.getString('components', 'DeleteLine')}" useHandCursor="true" buttonMode="true"/>
-		<mx:Image width="16" height="16" id="add" source="@Embed(source='images/add.png')" toolTip="{resourceManager.getString('components', 'InsertLine')}" useHandCursor="true" buttonMode="true"/>
-		<mx:Image visible="{conflict}" width="16" height="16" id="copy" source="@Embed(source='images/bullet_error.png')"
-			toolTip="{resourceManager.getString('components', 'CopyTextSettingsToAllStates')}" useHandCursor="true" buttonMode="true"/>
-	</s:HGroup>
+    <fx:Metadata>
+        [Event(name="click", type="flash.events.MouseEvent")]
+        [ResourceBundle("components")]
+    </fx:Metadata>
+    <s:HGroup width="100%" height="100%" verticalAlign="middle">
+        <mx:Spacer width="0"/>
+        <s:RadioButton label="{label}" width="{labelWidth}" group="{group}" selected="{selected}"/>
+        <mx:Image width="16" height="16" id="del" source="@Embed(source='images/delete.png')" toolTip="{resourceManager.getString('components', 'DeleteLine')}" useHandCursor="true" buttonMode="true"/>
+        <mx:Image width="16" height="16" id="add" source="@Embed(source='images/add.png')" toolTip="{resourceManager.getString('components', 'InsertLine')}" useHandCursor="true" buttonMode="true"/>
+        <mx:Image visible="{conflict}" width="16" height="16" id="copy" source="@Embed(source='images/bullet_error.png')"
+            toolTip="{resourceManager.getString('components', 'CopyTextSettingsToAllStates')}" useHandCursor="true" buttonMode="true"/>
+    </s:HGroup>
 </c:DefaultComponent>

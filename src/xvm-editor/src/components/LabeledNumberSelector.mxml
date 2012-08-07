@@ -3,32 +3,23 @@
     xmlns:s="library://ns.adobe.com/flex/spark"
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*">
-	<fx:Script>
-		// sliderVisible
-		protected var _sliderVisible: Boolean = true;
+    <fx:Script>
+        // sliderVisible
+        [Bindable]
+        public var sliderVisible: Boolean = true;
 
-		[Bindable]
-		public function get sliderVisible(): Boolean
-		{
-			return _sliderVisible;
-		}
-		public function set sliderVisible(v: Boolean): void
-		{
-			_sliderVisible = v;
-		}
-
-		protected override function onChange(event:Event):void
-		{
-			if (event.target == stepper)
-				edit.value = stepper.value;
-			else
-				stepper.value = edit.value;
-			value = edit.value;
-			super.onChange(event);
-		}
-	</fx:Script>
+        protected override function onChange(event:Event):void
+        {
+            if (event.target == stepper)
+                edit.value = stepper.value;
+            else
+                stepper.value = edit.value;
+            value = edit.value;
+            super.onChange(event);
+        }
+    </fx:Script>
     <fx:Metadata>
-      [Event(name="change", type="flash.events.Event")]
+        [Event(name="change", type="flash.events.Event")]
     </fx:Metadata>
     <s:NumericStepper left="{labelWidth}" width="52" height="{height}" minimum="{minimum}" maximum="{maximum}"
         id="stepper" value="{value}" change="onChange(event)"/>
