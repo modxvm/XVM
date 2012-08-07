@@ -6,7 +6,7 @@ import flash.utils.setTimeout;
 
 import utils.Config;
 
-private var timeoutId:Number = 0;
+private var timeoutId:int = 0;
 private function updatePreview():void
 {
     debug("updatePreview");

@@ -12,7 +12,7 @@
 	<fx:Script>
 		<![CDATA[
 			import components.DynamicTextFieldEdit;
-			import components.LabeledComponent;
+			import components.DefaultComponent;
 
 			import events.SetDefaultValueEvent;
 			import events.ValueChangedEvent;
@@ -21,6 +21,7 @@
 
 			import mx.core.IVisualElement;
 
+            import mx.controls.Image;
 			import spark.components.ToggleButton;
 
 			import utils.Config;
@@ -50,10 +51,10 @@
 				var a:Object = {};
 				for each (var state:String in this.m_activeMarkerStates)
 					a[state] = [];
-				for (var n:Number = 0; n < m_names.length; ++n)
+				for (var n:int = 0; n < m_names.length; ++n)
 				{
 					var v:Object = m_values[m_names[n]];
-					for (var i:Number = 0; i < v.states.length; ++i)
+					for (var i:int = 0; i < v.states.length; ++i)
 						a[v.states[i]].push(v.values[i]);
 				}
 				return a;
@@ -76,7 +77,7 @@
 				img.toolTip = resourceManager.getString('markers', 'AddTextField');
 				img.useHandCursor = true;
 				img.buttonMode = true;
-				img.addEventListener(MouseEvent.CLICK, this.onClick);
+				img.addEventListener(MouseEvent.CLICK, onClick);
 				return img;
 			}
 
@@ -84,7 +85,7 @@
 			{
 				var instance:DynamicTextFieldEdit = new DynamicTextFieldEdit();
 				instance.label = v;
-				instance.labelWidth = "200";
+				instance.labelWidth = "180";
 				instance.width = 255;
 				instance.group = rbg;
 				instance.addEventListener(MouseEvent.CLICK, onClick);
@@ -97,7 +98,7 @@
 
 				var saved_label:String = rbg && rbg.selectedValue ? rbg.selectedValue.toString() : null;
 
-				for (var n:Number = 0; n < container.numElements; ++n)
+				for (var n:int = 0; n < container.numElements; ++n)
 				{
 					var e_old:DynamicTextFieldEdit = container.getElementAt(n) as DynamicTextFieldEdit;
 					if (e_old)
@@ -109,12 +110,12 @@
 				m_names = [];
 				m_values = {};
 				var empty: Boolean = true;
-				var unnamedCounter:Number = 0;
+				var unnamedCounter:int = 0;
 				for each (var state:String in activeMarkerStates)
 				{
 					var conf:String = "markers." + state + ".textFields";
 					var v:Array = Config.GetValue(conf);
-					for (var i:Number = 0; i < v.length; ++i)
+					for (var i:int = 0; i < v.length; ++i)
 					{
 						empty = false;
 						var value:Object = v[i];
@@ -139,7 +140,7 @@
 				else
 				{
 					var selected:DynamicTextFieldEdit = null;
-					for (var j:Number = 0; j < container.numElements; ++j)
+					for (var j:int = 0; j < container.numElements; ++j)
 					{
 						var el:DynamicTextFieldEdit = container.getElementAt(j) as DynamicTextFieldEdit;
 						if (el.label == saved_label)
@@ -174,7 +175,7 @@
 					this[mname].enabled = name != null;
 					for each (var mname2:String in ElementControls[mname])
 					{
-						var control:LabeledComponent = this[mname][mname2] as LabeledComponent;
+						var control:DefaultComponent = this[mname][mname2] as DefaultComponent;
 
 						if (!values)
 						{
@@ -253,7 +254,7 @@
 					}
 
 					var activeValue:Object = m_values[rbg.selectedValue.toString()];
-					for (var i:Number = 0; i < activeValue.values.length; ++i)
+					for (var i:int = 0; i < activeValue.values.length; ++i)
 					{
 						if (event.target.config == "textField")
 						{
@@ -288,18 +289,14 @@
 			protected function onClick(event:MouseEvent):void
 			{
 				var e:DynamicTextFieldEdit = event.currentTarget as DynamicTextFieldEdit;
-				if (event.target.id == "def")
-				{
-					dispatchEvent(new events.SetDefaultValueEvent(this));
-				}
-				else if (event.target.id == "del")
+				if (event.target.id == "del")
 				{
 					m_names.splice(m_names.indexOf(e.label), 1);
 					delete m_values[e.label];
 				}
 				else if (event.target.id == "copy")
 				{
-					for (var i:Number = 0; i < this.m_activeMarkerStates.length; ++i)
+					for (var i:int = 0; i < this.m_activeMarkerStates.length; ++i)
 					{
 						var state:String = m_activeMarkerStates[i];
 						if (m_values[e.label].states.indexOf(state) == -1)
@@ -315,7 +312,7 @@
 				}
 				else if (event.target.id == "add" || event.target.id == "new")
 				{
-					var n:Number = 0;
+					var n:int = 0;
 					var name:String;
 					do { name = resourceManager.getString('markers', 'Text') + " " + (++n); } while (m_values.hasOwnProperty(name));
 					m_names.push(name);
@@ -323,7 +320,7 @@
 					var defValue:Object = DefaultConfig.vehicleName_alive;
 					defValue.name = name;
 					defValue.format = resourceManager.getString('markers', 'TEXT');
-					for (var j:Number = 0; j < m_values[name].states.length; ++j)
+					for (var j:int = 0; j < m_values[name].states.length; ++j)
 						m_values[name].values.push(defValue);
 				}
 				else
@@ -343,8 +340,7 @@
 	<fx:Declarations>
 		<s:RadioButtonGroup id="rbg" change="onRadioButtonChange(event)"/>
 	</fx:Declarations>
-	<c:PanelComponent title="{resourceManager.getString('markers', 'TextFields')}" width="100%" height="100" borderVisible="false">
-		<mx:Image id="def" right="5" y="-18" width="16" height="16" source="@Embed(source='images/revert.png')" toolTip="{resourceManager.getString('markers', 'DefaultSettings')}" useHandCursor="true" buttonMode="true" click="onClick(event)"/>
+	<c:PanelComponent title="{resourceManager.getString('markers', 'TextFields')}" width="100%" height="100" borderVisible="false" setDefaultValue="dispatchEvent(new events.SetDefaultValueEvent(this))">
 		<s:Scroller left="10" right="10" top="5" bottom="6">
 			<s:VGroup id="container" width="100%" height="100%" gap="-1"/>
 		</s:Scroller>

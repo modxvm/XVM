@@ -1,12 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<s:HGroup xmlns:fx="http://ns.adobe.com/mxml/2009"
+<a:ColorSelector xmlns:fx="http://ns.adobe.com/mxml/2009"
 		 xmlns:s="library://ns.adobe.com/flex/spark"
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
-		 xmlns:c="components.*"
+         xmlns:a="controls.*"
 		 xmlns:validators="validators.*"
-		 xmlns:utils="utils.*"
-		 verticalAlign="middle"
-		 gap="-1">
+		 xmlns:utils="utils.*">
 	<fx:Script>
 		<![CDATA[
             import mx.controls.Menu;
@@ -14,64 +12,45 @@
 
             [Embed("images/syscolors.png")]
             public const syscolors:Class;
-            [Embed("images/c_hp.png")]
-            public const c_hp:Class;
-            [Embed("images/c_hp_ratio.png")]
-            public const c_hp_ratio:Class;
-            [Embed("images/c_eff.png")]
-            public const c_eff:Class;
-            [Embed("images/c_rating.png")]
-            public const c_rating:Class;
-            [Embed("images/c_kb.png")]
-            public const c_kb:Class;
-            [Embed("images/c_t_rating.png")]
-            public const c_t_rating:Class;
-            [Embed("images/c_t_battles.png")]
-            public const c_t_battles:Class;
 
-            protected var _allowSystemColors:Boolean = true;
-			[Bindable]
-			public function get allowSystemColors():Boolean
-			{
-				return _allowSystemColors;
-			}
-			public function set allowSystemColors(v:Boolean):void
-			{
-				_allowSystemColors = v;
-			}
-
-            protected var _allowMacros:Array = [];
+            protected var _allowedMacros:Array = [];
             [Bindable]
-            public function get allowMacros():Array
+            public function get allowedMacros():Array
             {
-                return _allowMacros;
+                return _allowedMacros;
             }
-            public function set allowMacros(v:Array):void
+            public function set allowedMacros(v:Array):void
             {
-                _allowMacros = v;
+                _allowedMacros = v;
             }
 
-			private static function toHex(v:Number):String
-			{
-				return ("00000" + v.toString(16).toUpperCase()).substr(-6);
-			}
-
-			protected var _value:String = null;
+            private var _value:String = null;
 			[Bindable]
-			public function get value():String
+			public override function get value():String
 			{
 				return isNaN(parseInt(_value)) ? _value : "0x" + toHex(parseInt(_value));
 			}
-			public function set value(v:String):void
+			public override function set value(v:String):void
 			{
                 _value = v;
-                var vv:Number = (v == null) ? NaN : Number(v);
-				ti.text = isNaN(vv) ? _value : "#" + toHex(vv);
-				cp.selectedColor = vv;
-				cp.alpha = isNaN(vv) ? 0.5 : 1;
+                if (v == null)
+                {
+                    ti.text = "(system)";
+                    ti.alpha = 0.5;
+				    cp.selectedColor = 0;
+				    cp.alpha = 0.5;
+                }
+                else
+                {
+                    var vv:int = (v == null) ? NaN : int(v);
+                    ti.text = isNaN(vv) ? _value : "#" + toHex(vv);
+                    ti.alpha = 1;
+                    cp.selectedColor = vv;
+                    cp.alpha = 1;
+                }
 			}
 
-			protected function onChange(event:Event):void
+			protected override function onChange(event:Event):void
 			{
 				if (event)
 					event.stopPropagation();
@@ -127,13 +106,13 @@
 		[ResourceBundle("components")]
 	</fx:Metadata>
 	<fx:Declarations>
-		<validators:TextColorValidator id="tv" source="{ti}" property="text" valid="onChange(event)"
-           allowedValues="[null,'\{\{c:hp\}\}','\{\{c:hp-ratio\}\}','\{\{c:eff\}\}','\{\{c:rating\}\}','\{\{c:kb\}\}','\{\{c:t-rating\}\}','\{\{c:t-battles\}\}']"/>
+		<!--<validators:TextColorValidator id="tv" source="{ti}" property="text" valid="onChange(event)"
+           allowedValues="['(system)','\{\{c:hp\}\}','\{\{c:hp-ratio\}\}','\{\{c:eff\}\}','\{\{c:rating\}\}','\{\{c:kb\}\}','\{\{c:t-rating\}\}','\{\{c:t-battles\}\}']"/>-->
 	</fx:Declarations>
-	<s:TextInput id="ti" width="100%" maxChars="32" restrict="#0-9A-Za-z\{\}\-_:" change="ti.validateNow()"/>
-	<mx:ColorPicker id="cp" change="onChange(event)" useHandCursor="true" buttonMode="true"/>
-	<mx:Spacer width="{allowSystemColors ? 5 : 0}" visible="{allowSystemColors}"/>
-    <mx:PopUpMenuButton id="pm" width="{allowSystemColors ? 40 : 0}" label="" icon="{syscolors}" toolTip="{resourceManager.getString('components', 'UseSystemColor')}" visible="{allowSystemColors}" itemClick="onChange(event)">
+<!--	<s:TextInput id="ti" width="100%" maxChars="32" restrict="#0-9A-Za-z\{\}\-_:" change="ti.validateNow()"/>
+	<mx:ColorPicker id="cp" change="onChange(event)" useHandCursor="true" buttonMode="true"/>-->
+	<mx:Spacer width="5"/>
+    <mx:PopUpMenuButton id="pm" width="40" label="" icon="{syscolors}" toolTip="{resourceManager.getString('components', 'UseSystemColor')}" itemClick="onChange(event)">
         <mx:dataProvider>
             <mx:ArrayCollection>
                 <fx:Object label="{resourceManager.getString('components', 'UseSystemColor')}" icon="syscolors"/>
@@ -148,4 +127,4 @@
             </mx:ArrayCollection>
         </mx:dataProvider>
     </mx:PopUpMenuButton>
-</s:HGroup>
+</a:ColorSelector>

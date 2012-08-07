@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<c:LabeledComponent xmlns:fx="http://ns.adobe.com/mxml/2009"
+<c:DefaultComponent xmlns:fx="http://ns.adobe.com/mxml/2009"
 	    xmlns:s="library://ns.adobe.com/flex/spark"
 	    xmlns:mx="library://ns.adobe.com/flex/mx"
 		xmlns:c="components.*"
@@ -7,39 +7,15 @@
 	<fx:Script>
 		import spark.components.RadioButtonGroup;
 
-		protected var _rbg:RadioButtonGroup = null;
-		[Bindable]
-		public function get group():RadioButtonGroup
-		{
-			return _rbg;
-		}
-		public function set group(v:RadioButtonGroup):void
-		{
-			_rbg = v;
-		}
+        [Bindable]
+		public var group:RadioButtonGroup = null;
 
-		protected var _bgc:uint = 0xFFFFFF;
-		[Bindable]
-		public function get bgColor():uint
-		{
-			return _bgc;
-		}
-		public function set bgColor(v:uint):void
-		{
-			_bgc = v;
-		}
+        [Bindable]
+		public var bgColor:uint = 0xFFFFFF;
 
-		protected var _selected:Boolean = false;
-		[Bindable]
-		public function get selected():Boolean
-		{
-			return _selected;
-		}
-		public function set selected(v:Boolean):void
-		{
-			_selected = v;
-		}
-	</fx:Script>
+        [Bindable]
+		public var selected:Boolean = false;
+    </fx:Script>
 	<fx:Metadata>
 		[Event(name="click", type="flash.events.MouseEvent")]
 		[ResourceBundle("components")]
@@ -52,4 +28,4 @@
 		<mx:Image visible="{conflict}" width="16" height="16" id="copy" source="@Embed(source='images/bullet_error.png')"
 			toolTip="{resourceManager.getString('components', 'CopyTextSettingsToAllStates')}" useHandCursor="true" buttonMode="true"/>
 	</s:HGroup>
-</c:LabeledComponent>
+</c:DefaultComponent>

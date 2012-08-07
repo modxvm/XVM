@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<c:LabeledComponent xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:c="components.*"
+    xmlns:a="controls.*">
+    <fx:Script>
+    	protected var _allowedMacros:Array = [];
+    	[Bindable]
+    	public function get allowedMacros():Array
+    	{
+            return _allowedMacros;
+    	}
+    	public function set allowedMacros(v:Array):void
+    	{
+            _allowedMacros = v;
+    	}
+    </fx:Script>
+    <a:MacrosColorSelector left="{labelWidth}" right="10" height="{height}" allowedMacros="{allowedMacros}"
+        id="edit" value="{value}" change="value=edit.value; onChange(event)"/>
+</c:LabeledComponent>

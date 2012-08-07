@@ -8,9 +8,9 @@
 	borderVisible="false">
 	<fx:Script>
 		<![CDATA[
+            import components.DefaultComponent;
             import components.DynamicAlphaEdit;
             import components.DynamicColorEdit;
-            import components.LabeledComponent;
             
             import events.SetDefaultValueEvent;
             import events.ValueChangedEvent;
@@ -39,31 +39,27 @@
 				return img;
 			}
 
-			private function CreateElement(v:Object = null):LabeledComponent
+			private function CreateElement(v:Object = null):DefaultComponent
 			{
-				//var cls:Class = getDefinitionByName(editorClass) as Class;
-				var instance:LabeledComponent;// = new cls();
+				var instance:DefaultComponent;
 				switch (editorClass)
 				{
 					case "DynamicAlphaEdit":
 						instance = new DynamicAlphaEdit();
-						instance.label = "<";
-						instance.labelWidth = "10";
-						(instance as DynamicAlphaEdit).minimum = minimum;
-						(instance as DynamicAlphaEdit).maximum = maximum;
-						instance.value = { value: v ? v.value : 0, alpha: v ? v.alpha : 0 };
+						(instance as DynamicAlphaEdit).v_value = v ? v.value : 0;
+                        (instance as DynamicAlphaEdit).v_alpha = v ? v.alpha : 0;
 						break;
 					case "DynamicColorEdit":
 						instance = new DynamicColorEdit();
-						instance.label = "<";
-						instance.labelWidth = "10";
-						(instance as DynamicColorEdit).minimum = minimum;
-						(instance as DynamicColorEdit).maximum = maximum;
-						instance.value = { value: v ? v.value : 0, color: v ? v.color : "" };
+                        (instance as DynamicColorEdit).v_value = v ? v.value : 0;
+                        (instance as DynamicColorEdit).v_color = v ? v.color : "";
 						break;
 				}
 
-				instance.addEventListener(Event.CHANGE, onChange);
+                instance.minimum = minimum;
+                instance.maximum = maximum;
+
+                instance.addEventListener(Event.CHANGE, onChange);
 				instance.addEventListener(MouseEvent.CLICK, onClick);
 				return instance;
 			}
@@ -72,16 +68,16 @@
 			{
                 if (!src)
                     src = Config.GetValue(_config);
-                var len:Number = container.numElements;
-				for (var n:Number = 0; n < len; ++n)
+                var len:int = container.numElements;
+				for (var n:int = 0; n < len; ++n)
 					delete container.getElementAt(n);
 				container.removeAllElements();
 				if (src.length == 0)
 					container.addElement(CreateNewElementButton());
 				else
 				{
-                    var len2:Number = src.length;
-					for (var i: Number = 0; i < len2; ++i)
+                    var len2:int = src.length;
+					for (var i:int = 0; i < len2; ++i)
 						container.addElement(CreateElement(src[i]));
 				}
 			}
@@ -89,8 +85,8 @@
 			public function get value():*
 			{
 				var a: Array = [];
-				for (var i:Number = 0; i < container.numElements; ++i)
-					a.push((container.getElementAt(i) as LabeledComponent).value);
+				for (var i:int = 0; i < container.numElements; ++i)
+					a.push((container.getElementAt(i) as DefaultComponent).value);
 				return a;
 			}
 
@@ -108,25 +104,25 @@
 			}
 
 			// minimum
-			protected var _minimum: Number = 0;
+			protected var _minimum:int = 0;
 			[Bindable]
-			public function get minimum(): Number
+			public function get minimum():int
 			{
 				return _minimum;
 			}
-			public function set minimum(v: Number): void
+			public function set minimum(v:int): void
 			{
 				_minimum = v;
 			}
 
 			// maximum
-			protected var _maximum: Number = 10;
+			protected var _maximum:int = 10;
 			[Bindable]
-			public function get maximum(): Number
+			public function get maximum():int
 			{
 				return _maximum;
 			}
-			public function set maximum(v: Number): void
+			public function set maximum(v:int): void
 			{
 				_maximum = v;
 			}
@@ -176,7 +172,7 @@
 				}
 				else if (event.target.id == "new")
 				{
-					for (var n:Number = 0; n < container.numElements; ++n)
+					for (var n:int = 0; n < container.numElements; ++n)
 						delete container.getElementAt(n);
 					container.removeAllElements();
 					container.addElement(CreateElement());

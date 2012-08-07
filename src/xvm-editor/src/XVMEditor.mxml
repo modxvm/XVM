@@ -31,7 +31,6 @@
 
 			protected function onCreationComplete(event:Event):void
 			{
-				preview.vsPreview.selectedChild = DEBUG ? preview.debug : preview.preview;
 				onCreateNewConfigClick();
 				onVehicleStateChanged(event);
 			}
@@ -74,7 +73,7 @@
 			</s:HGroup>
 		</s:BorderContainer>
 		<s:TabBar width="920" height="20" dataProvider="{vsTabs}"/>
-		<s:HGroup width="920" height="100%" gap="-1">
+		<s:HGroup width="920" height="100%" gap="0">
 			<mx:ViewStack width="420" height="100%" backgroundColor="0xFFFFFF" id="vsTabs" creationPolicy="auto" change="{RefreshCurrentPage()}">
                 <s:NavigatorContent label="{_('commonPage')}" width="100%" height="100%" id="pgCommon">
 					<s:Scroller x="0" y="0" width="420" height="100%">

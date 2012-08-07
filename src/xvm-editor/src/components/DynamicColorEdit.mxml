@@ -1,41 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<c:LabeledComponent xmlns:fx="http://ns.adobe.com/mxml/2009"
+<c:DefaultComponent xmlns:fx="http://ns.adobe.com/mxml/2009"
 		xmlns:s="library://ns.adobe.com/flex/spark"
 		xmlns:mx="library://ns.adobe.com/flex/mx"
-		xmlns:c="components.*"
+        xmlns:c="components.*"
+        xmlns:a="controls.*"
 		width="100%" height="22">
 	<fx:Script>
-		[Bindable]
-		public function get v_value():*
-		{
-			return value.value;
-		}
-		public function set v_value(v:*): void
-		{
-			value.value = v;
-		}
+        <![CDATA[
+            private var _v_value:int = 0;
+            [Bindable]
+            public function get v_value():int
+            {
+                return _v_value;
+            }
+            public function set v_value(v:int):void
+            {
+                _v_value = v;
+            }
 
-		[Bindable]
-		public function get v_color():*
-		{
-			return value.color;
-		}
-		public function set v_color(v:*): void
-		{
-			value.color = v;
-		}
+            private var _v_color:String = null;
+    		[Bindable]
+    		public function get v_color():String
+    		{
+    			return _v_color;
+    		}
+    		public function set v_color(v:String):void
+    		{
+    			_v_color = v;
+    		}
+        ]]>
 	</fx:Script>
 	<fx:Metadata>
 		[Event(name="click", type="flash.events.MouseEvent")]
 		[ResourceBundle("components")]
 	</fx:Metadata>
 	<s:HGroup width="100%" height="100%" verticalAlign="middle">
-		<s:Label text="{label}" width="{labelWidth}"/>
-		<s:NumericStepper width="60" minimum="{minimum}" maximum="{maximum}"
-			id="valueEdit" value="{v_value}" change="v_value=valueEdit.value; onChange(event)"/>
-		<c:ColorSelector width="90" allowSystemColors="false"
-			id="colorEdit" value="{v_color}" change="v_color=colorEdit.value; onChange(event)"/>
+        <s:Label text="&lt;" width="10" verticalAlign="middle"/>
+		<s:NumericStepper width="60" minimum="{minimum}" maximum="{maximum}" id="valueEdit" value="{v_value}" change="v_value=valueEdit.value; onChange(event)"/>
+		<a:ColorSelector width="90" id="colorEdit" value="{v_color}" change="v_color=colorEdit.value; onChange(event)"/>
 		<mx:Image width="16" height="16" id="del" source="@Embed(source='images/delete.png')" toolTip="{resourceManager.getString('components', 'DeleteLine')}" useHandCursor="true" buttonMode="true"/>
 		<mx:Image width="16" height="16" id="add" source="@Embed(source='images/add.png')" toolTip="{resourceManager.getString('components', 'InsertLine')}" useHandCursor="true" buttonMode="true"/>
 	</s:HGroup>
-</c:LabeledComponent>
+</c:DefaultComponent>

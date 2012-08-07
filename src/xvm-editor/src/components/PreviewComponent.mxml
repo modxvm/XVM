@@ -66,6 +66,10 @@
                     marker3.update();
             }
 
+            private function switchLayout(event:Event):void
+            {
+                vsPreview.selectedChild = vsPreview.selectedChild == debug ? preview : debug;
+            }
 		]]>
 	</fx:Script>
     <fx:Metadata>
@@ -103,4 +107,5 @@
 			<s:TextArea right="0" width="500" height="100%" id="taDebug" visible="true" fontFamily="Consolas"/>
 		</s:NavigatorContent>
 	</mx:ViewStack>
+    <mx:Image right="5" top="5" width="16" height="16" source="@Embed(source='images/revert.png')" toolTip="Debug Window" useHandCursor="true" buttonMode="true" click="switchLayout(event)"/>
 </s:BorderContainer>

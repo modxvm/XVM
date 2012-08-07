@@ -1,4 +1,4 @@
-﻿import components.LabeledComponent;
+﻿import components.DefaultComponent;
 
 import utils.Config;
 import utils.DefaultConfig;
@@ -344,7 +344,7 @@ private function RefreshMarkersPage():void
 			{
                 if (this[mname] == null)
                     continue;
-				var control:LabeledComponent = this[mname][mname2] as LabeledComponent;
+				var control:DefaultComponent = this[mname][mname2] as DefaultComponent;
 
 				//debug(mname + "." + mname2);
 				var valueSet: Boolean = false;

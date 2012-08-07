@@ -7,13 +7,8 @@ import utils.DefaultConfig;
 import utils.Defines;
 import utils.JSON;
 
-//public const DEBUG:Boolean = true;
-public const DEBUG:Boolean = false;
-
 public function debug(str:String):void
 {
-	if (!DEBUG || !preview || !preview.taDebug)
-		return;
 	preview.taDebug.text += str + "\n";
 }
 
@@ -40,8 +35,6 @@ protected function onVehicleStateChanged(event:Event):void
 {
     if (vsMarkers == null)
         return;
-
-    //var target:* = event.target;
 
     vsMarkers.enabled = (ally.selected || enemy.selected) &&
 		(alive.selected || dead.selected) &&

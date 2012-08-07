@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
+	    xmlns:s="library://ns.adobe.com/flex/spark"
+	    xmlns:mx="library://ns.adobe.com/flex/mx"
+	    xmlns:c="components.*"
+	    width="100%" height="22"
+	    borderVisible="false"
+	    backgroundColor="{conflict ? 0xFFDDDD : 0xFFFFFF}"
+	    toolTip="{conflict ? resourceManager.getString('components', 'ValuesConflict') : ''}">
+    <fx:Script>
+    <![CDATA[
+        public override function set mxmlContent(value:Array):void
+        {
+            var len:int = super.numElements;
+            for (var i:int = len - 1; i >= 0; --i)
+                value.unshift(super.getElementAt(i));
+            super.mxmlContent = value;
+        }
+
+        // label
+        [Bindable]
+        public var label: String = "";
+
+        // labelWidth
+        [Bindable]
+        public var labelWidth: String = "140";
+
+        // conflict
+        [Bindable]
+        public var conflict:Boolean = false;
+
+        // config
+        [Bindable]
+        public var config: String = null;
+
+        // minimum
+        [Bindable]
+        public var minimum:int = 0;
+
+        // maximum
+        [Bindable]
+        public var maximum:int = 10;
+
+        // value
+        [Bindable]
+        public var value:*;
+
+        // onChange
+        protected function onChange(event:Event):void
+        {
+            if (event)
+                event.stopPropagation();
+            conflict = false;
+            dispatchEvent(new Event(Event.CHANGE));
+        }
+    ]]>
+    </fx:Script>
+    <fx:Metadata>
+        [Event(name="change", type="flash.events.Event")]
+        [ResourceBundle("components")]
+        [DefaultProperty("mxmlContent")]
+    </fx:Metadata>
+</s:BorderContainer>
