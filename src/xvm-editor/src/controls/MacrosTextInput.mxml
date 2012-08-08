@@ -13,9 +13,15 @@
 
             protected function macrosSelected(event:Event):void
             {
-                var v:String = macro.selectedItem.value;
+                var t:String = edit.text;
+                var sb:int = Math.min(edit.selectionAnchorPosition, edit.selectionActivePosition);
+                var se:int = Math.max(edit.selectionAnchorPosition, edit.selectionActivePosition);
+                var prefix:String = t.slice(0, sb);
+                var suffix:String = t.slice(se);
+                edit.text = prefix + macro.selectedItem.value + suffix;
+                edit.selectRange(prefix.length, prefix.length + macro.selectedItem.value.length);
+                edit.setFocus();
                 macro.selectedItem = null;
-                edit.text += v;
             }
 
             private function comboBox_open(event:DropdownEvent):void
@@ -27,5 +33,5 @@
     <mx:ComboBox right="0" id="macro" width="40" dataProvider="{menuData}" labelFunction="getLabel"
         toolTip="{resourceManager.getString('components', 'SelectMacros')}" change="macrosSelected(event)"
         dropdownFactory="controls.ComboBoxList" itemRenderer="controls.ComboBoxItemRenderer"
-        dropdownWidth="400" rowCount="8" open="comboBox_open(event);"/>
+        dropdownWidth="400" rowCount="10" open="comboBox_open(event);"/>
 </a:TextInput>
