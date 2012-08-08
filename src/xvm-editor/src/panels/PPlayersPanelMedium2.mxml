@@ -5,7 +5,12 @@
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
     title="{resourceManager.getString('panels', 'PPlayersPanelMedium2')}">
+    <fx:Script>
+        <![CDATA[
+            import utils.Macros;
+        ]]>
+    </fx:Script>
     <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'VehicleNameWidth')}" id="v_width" config="playersPanel.medium2.width" minimum="0" maximum="250" change="onChange(event)"/>
-    <c:LabeledTextInput label="{resourceManager.getString('panels', 'FormatVehicleNameLeft')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatLeft" config="playersPanel.medium2.formatLeft" change="onChange(event)"/>
-    <c:LabeledTextInput label="{resourceManager.getString('panels', 'FormatVehicleNameRight')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatRight" config="playersPanel.medium2.formatRight" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'FormatVehicleNameLeft')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatLeft" config="playersPanel.medium2.formatLeft" allowedMacros="{Macros.get('panels,stats')}" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'FormatVehicleNameRight')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatRight" config="playersPanel.medium2.formatRight" allowedMacros="{Macros.get('panels,stats')}" change="onChange(event)"/>
 </c:PanelComponent>

@@ -17,7 +17,7 @@
         {
             if (event)
                 event.stopPropagation();
-            var target:LabeledComponent = event.target as LabeledComponent;
+            var target:DefaultComponent = event.target as DefaultComponent;
             if (target)
                 dispatchEvent(new events.ValueChangedEvent(target));
         }

@@ -7,16 +7,16 @@
     title="{resourceManager.getString('markers', 'DamageText')}">
     <fx:Script>
         <![CDATA[
-            import utils.Defines;
+            import utils.Macros;
         ]]>
     </fx:Script>
     <c:LabeledCheckBox label="{resourceManager.getString('markers', 'Visible')}" id="v_visible" config="visible" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'XPosition')}" id="v_x" config="x" minimum="-100" maximum="100" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'YPosition')}" id="v_y" config="y" minimum="-100" maximum="100" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'Transparency')}" id="v_alpha" config="alpha" minimum="0" maximum="100" change="onChange(event)"/>
-    <c:LabeledMacrosColorSelector label="{resourceManager.getString('markers', 'Color')}" width="320" id="v_color" config="color" allowedMacros="{Defines.getMacros('colors')}" change="onChange(event)"/>
+    <c:LabeledMacrosNumberSelector label="{resourceManager.getString('markers', 'Transparency')}" id="v_alpha" config="alpha" minimum="0" maximum="100" allowedMacros="{Macros.get('transparency')}" change="onChange(event)"/>
+    <c:LabeledMacrosColorSelector label="{resourceManager.getString('markers', 'Color')}" width="320" id="v_color" config="color" allowedMacros="{Macros.get('syscolors,colors')}" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'DisplayTime')}" id="v_speed" config="speed" minimum="0" maximum="10" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'MoveRange')}" id="v_maxRange" config="maxRange" minimum="0" maximum="100" change="onChange(event)"/>
-    <c:LabeledTextInput label="{resourceManager.getString('markers', 'DamageMessage')}" id="v_damageMessage" config="damageMessage" change="onChange(event)"/>
-    <c:LabeledTextInput label="{resourceManager.getString('markers', 'BlowupMessage')}" id="v_blowupMessage" config="blowupMessage" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{resourceManager.getString('markers', 'DamageMessage')}" id="v_damageMessage" config="damageMessage" allowedMacros="{Macros.get('markers,stats')}" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{resourceManager.getString('markers', 'BlowupMessage')}" id="v_blowupMessage" config="blowupMessage" allowedMacros="{Macros.get('markers,stats')}" change="onChange(event)"/>
 </c:PanelComponent>

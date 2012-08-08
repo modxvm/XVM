@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<c:LabeledComponent xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:c="components.*"
+    xmlns:a="controls.*">
+    <fx:Script>
+    	[Bindable]
+    	public var allowedMacros:Array = [];
+
+        [Bindable]
+        public var sliderVisible:Boolean = true;
+
+        protected override function onChange(event:Event):void
+        {
+            value = edit.value;
+            super.onChange(event);
+        }
+    </fx:Script>
+    <a:MacrosNumberSelector id="edit" left="{labelWidth}" right="0" height="{height}"
+        minimum="{minimum}" maximum="{maximum}" sliderVisible="{sliderVisible}" allowedMacros="{allowedMacros}"
+        value="{value}" change="onChange(event)"/>
+</c:LabeledComponent>

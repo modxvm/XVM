@@ -1,23 +1,12 @@
-﻿<s:HGroup xmlns:fx="http://ns.adobe.com/mxml/2009"
-         xmlns:s="library://ns.adobe.com/flex/spark"
-         xmlns:mx="library://ns.adobe.com/flex/mx"
-         xmlns:c="components.*"
-         xmlns:validators="validators.*"
-         xmlns:utils="utils.*"
-         verticalAlign="middle"
-         gap="-1">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<a:ValueControl xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:a="controls.*"
+    xmlns:validators="validators.*"
+    gap="-1">
     <fx:Script>
         <![CDATA[
-            import mx.core.IVisualElement;
-
-            public override function set mxmlContent(value:Array):void
-            {
-                var len:int = super.numElements;
-                for (var i:int = len - 1; i >= 0; --i)
-                    value.unshift(super.getElementAt(i));
-                super.mxmlContent = value;
-            }
-
             protected static function toHex(v:int):String
             {
                 return ("00000" + v.toString(16).toUpperCase()).substr(-6);
@@ -25,11 +14,11 @@
 
             private var _value:int = 0;
             [Bindable]
-            public function get value():String
+            public override function get value():*
             {
                 return "0x" + toHex(_value);
             }
-            public function set value(v:String):void
+            public override function set value(v:*):void
             {
                 _value = int(v);
                 ti.text = "#" + toHex(_value);
@@ -41,18 +30,18 @@
                 ti.validateNow();
             }
 
-            protected function onChange(event:Event):void
+            protected override function onChange(event:Event):void
             {
                 if (event)
                     event.stopPropagation();
 
-                var v:String = null;
                 if (event.target == cp)
                 {
                     ti.text = "#" + toHex(cp.selectedColor);
                     return;
                 }
 
+                var v:String = null;
                 if (event.target == tv)
                     v = "0x" + ti.text.substr(1);
                 else
@@ -61,19 +50,14 @@
                 if (value != v)
                 {
                     value = v;
-                    dispatchEvent(new Event(Event.CHANGE));
+                    super.onChange(event);
                 }
             }
         ]]>
     </fx:Script>
-    <fx:Metadata>
-        [Event(name="change", type="flash.events.Event")]
-        [ResourceBundle("components")]
-        [DefaultProperty("mxmlContent")]
-    </fx:Metadata>
     <fx:Declarations>
         <validators:TextColorValidator id="tv" source="{ti}" property="text" valid="onChange(event)" invalid="{cp.selectedColor=1}"/>
     </fx:Declarations>
     <s:TextInput id="ti" width="100%" maxChars="7" restrict="#0-9A-Fa-f" change="textChanged()"/>
     <mx:ColorPicker id="cp" change="onChange(event)" useHandCursor="true" buttonMode="true"/>
-</s:HGroup>
+</a:ValueControl>

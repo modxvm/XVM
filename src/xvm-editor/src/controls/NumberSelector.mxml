@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<a:ValueControl xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:a="controls.*">
+    <fx:Script>
+        <![CDATA[
+            import mx.controls.Menu;
+            import mx.events.MenuEvent;
+
+            // minimum
+            [Bindable]
+            public var minimum:int = 0;
+
+            // maximum
+            [Bindable]
+            public var maximum:int = 10;
+
+            [Bindable]
+            public var sliderVisible:Boolean = true;
+
+            protected override function onChange(event:Event):void
+            {
+                if (event.target == stepper)
+                    edit.value = stepper.value;
+                else
+                    stepper.value = edit.value;
+                value = edit.value;
+                super.onChange(event);
+            }
+        ]]>
+    </fx:Script>
+    <s:NumericStepper id="stepper" width="52" height="{height}"
+        minimum="{minimum}" maximum="{maximum}"
+        value="{value}" change="onChange(event)"/>
+    <s:HSlider id="edit" width="100%" y="4"
+        minimum="{minimum}" maximum="{maximum}" visible="{sliderVisible}"
+        value="{value}" change="onChange(event)"/>
+</a:ValueControl>

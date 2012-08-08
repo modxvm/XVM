@@ -1,25 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
-	    xmlns:s="library://ns.adobe.com/flex/spark"
-	    xmlns:mx="library://ns.adobe.com/flex/mx"
-		xmlns:c="components.*"
-		width="500" height="450"
-		borderVisible="false" xmlns:ns1="*">
-	<fx:Script>
-		<![CDATA[
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:c="components.*"
+    width="500" height="450"
+    borderVisible="false" xmlns:ns1="*">
+    <fx:Script>
+        <![CDATA[
             import mx.events.FlexEvent;
             import mx.events.ListEvent;
 
-			[Embed(source="images/bg/hills-1.jpg")]
-			private const IMG1 : Class;
-			[Embed(source="images/bg/hills-2.jpg")]
-			private const IMG2 : Class;
-			[Embed(source="images/bg/mannerheim-1.jpg")]
-			private const IMG3 : Class;
-			[Embed(source="images/bg/mannerheim-2.jpg")]
-			private const IMG4 : Class;
-			[Embed(source="images/bg/mannerheim-3.jpg")]
-			private const IMG5 : Class;
+            [Embed(source="images/bg/hills-1.jpg")]
+            private const IMG1 : Class;
+            [Embed(source="images/bg/hills-2.jpg")]
+            private const IMG2 : Class;
+            [Embed(source="images/bg/mannerheim-1.jpg")]
+            private const IMG3 : Class;
+            [Embed(source="images/bg/mannerheim-2.jpg")]
+            private const IMG4 : Class;
+            [Embed(source="images/bg/mannerheim-3.jpg")]
+            private const IMG5 : Class;
 
             private const settings: Array = [
                 //                 x    y    zoom maxHP
@@ -30,16 +30,16 @@
                 { img: IMG5, m1: [  95, 260, 0.9, 2100 ], m2: [ 445, 225, 0.9, 1600 ], m3: [ 260, 240, 0.9, 0 ] }
             ];
 
-			protected function onChange(event:Event):void
-			{
-				if (event)
-					event.stopPropagation();
+            protected function onChange(event:Event):void
+            {
+                if (event)
+                    event.stopPropagation();
 
-				dispatchEvent(new Event(Event.CHANGE));
-			}
+                dispatchEvent(new Event(Event.CHANGE));
+            }
 
-			protected function cbBG_changeHandler(event:ListEvent):void
-			{
+            protected function cbBG_changeHandler(event:ListEvent):void
+            {
                 var s:Object = settings[cbBG.selectedIndex];
                 imgBG.source = new (s.img)();
                 marker1.x = s.m1[0];
@@ -54,7 +54,7 @@
                 marker3.y = s.m3[1];
                 marker3.zoom = s.m3[2];
                 marker3.maxHP = s.m3[3];
-			}
+            }
 
             public function update():void
             {
@@ -70,42 +70,42 @@
             {
                 vsPreview.selectedChild = vsPreview.selectedChild == debug ? preview : debug;
             }
-		]]>
-	</fx:Script>
+        ]]>
+    </fx:Script>
     <fx:Metadata>
-		[Event(name="change", type="flash.events.Event")]
-		[ResourceBundle("components")]
-	</fx:Metadata>
-	<mx:ViewStack width="100%" height="100%" id="vsPreview" creationPolicy="all">
-		<s:NavigatorContent width="100%" height="100%" id="preview">
-			<mx:Canvas x="0" y="0" width="500" height="400" backgroundColor="0xAACCBB" verticalScrollPolicy="off" horizontalScrollPolicy="off">
-				<mx:Image id="imgBG" x="0" y="0" width="500" height="400"/>
+        [Event(name="change", type="flash.events.Event")]
+        [ResourceBundle("components")]
+    </fx:Metadata>
+    <mx:ViewStack width="100%" height="100%" id="vsPreview" creationPolicy="all">
+        <s:NavigatorContent width="100%" height="100%" id="preview">
+            <mx:Canvas x="0" y="0" width="500" height="400" backgroundColor="0xAACCBB" verticalScrollPolicy="off" horizontalScrollPolicy="off">
+                <mx:Image id="imgBG" x="0" y="0" width="500" height="400"/>
                 <c:Marker id="marker1" creationComplete="marker1.init('ally','heavyTank',8)"/>
                 <c:Marker id="marker2" creationComplete="marker2.init('enemy','AT-SPG',8)"/>
                 <c:Marker id="marker3" creationComplete="marker3.init('ally_dead','SPG',7)"/>
-			</mx:Canvas>
-			<s:BorderContainer y="400" width="100%" height="32" borderVisible="false">
-				<s:HGroup top="0" left="0" bottom="0" width="100%" gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="4">
-					<s:Label text="{resourceManager.getString('components', 'Background')}"/>
-					<mx:ComboBox id="cbBG" width="100" selectedIndex="0" editable="false" change="cbBG_changeHandler(event)" creationComplete="cbBG_changeHandler(new ListEvent(''))">
-						<mx:ArrayCollection>
-							<fx:String>{resourceManager.getString('components', 'Hills')} 1</fx:String>
-							<fx:String>{resourceManager.getString('components', 'Hills')} 2</fx:String>
-							<fx:String>{resourceManager.getString('components', 'Mannerheim')} 1</fx:String>
-							<fx:String>{resourceManager.getString('components', 'Mannerheim')} 2</fx:String>
-							<fx:String>{resourceManager.getString('components', 'Mannerheim')} 3</fx:String>
-						</mx:ArrayCollection>
-					</mx:ComboBox>
+            </mx:Canvas>
+            <s:BorderContainer y="400" width="100%" height="32" borderVisible="false">
+                <s:HGroup top="0" left="0" bottom="0" width="100%" gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="4">
+                    <s:Label text="{resourceManager.getString('components', 'Background')}"/>
+                    <mx:ComboBox id="cbBG" width="100" selectedIndex="0" editable="false" change="cbBG_changeHandler(event)" creationComplete="cbBG_changeHandler(new ListEvent(''))">
+                        <mx:ArrayCollection>
+                            <fx:String>{resourceManager.getString('components', 'Hills')} 1</fx:String>
+                            <fx:String>{resourceManager.getString('components', 'Hills')} 2</fx:String>
+                            <fx:String>{resourceManager.getString('components', 'Mannerheim')} 1</fx:String>
+                            <fx:String>{resourceManager.getString('components', 'Mannerheim')} 2</fx:String>
+                            <fx:String>{resourceManager.getString('components', 'Mannerheim')} 3</fx:String>
+                        </mx:ArrayCollection>
+                    </mx:ComboBox>
                     <s:ToggleButton id="btnExt" label="Alt" click="{marker1.extMode=marker2.extMode=marker3.extMode=btnExt.selected;}"/>
                     <s:ToggleButton id="btnDeadType" label="{resourceManager.getString('components', 'SelectDead')}" click="{marker3.deadType=btnDeadType.selected;}"/>
                     <s:Button label="{resourceManager.getString('components', 'Hit')}" click="{marker1.hit();marker2.hit();}"/>
                     <s:Button label="{resourceManager.getString('components', 'Action')}" click="{marker1.action();marker2.action();}"/>
-				</s:HGroup>
-			</s:BorderContainer>
-		</s:NavigatorContent>
-		<s:NavigatorContent width="100%" height="100%" id="debug">
-			<s:TextArea right="0" width="500" height="100%" id="taDebug" visible="true" fontFamily="Consolas"/>
-		</s:NavigatorContent>
-	</mx:ViewStack>
+                </s:HGroup>
+            </s:BorderContainer>
+        </s:NavigatorContent>
+        <s:NavigatorContent width="100%" height="100%" id="debug">
+            <s:TextArea right="0" width="500" height="100%" id="taDebug" visible="true" fontFamily="Consolas"/>
+        </s:NavigatorContent>
+    </mx:ViewStack>
     <mx:Image right="5" top="5" width="16" height="16" source="@Embed(source='images/revert.png')" toolTip="Debug Window" useHandCursor="true" buttonMode="true" click="switchLayout(event)"/>
 </s:BorderContainer>

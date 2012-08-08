@@ -6,10 +6,15 @@
     xmlns:c="components.*"
     height="100%"
     title="{resourceManager.getString('markers', 'ClanIcon')}">
+    <fx:Script>
+        <![CDATA[
+            import utils.Macros;
+        ]]>
+    </fx:Script>
     <c:LabeledCheckBox label="{resourceManager.getString('markers', 'Visible')}" id="v_visible" config="visible" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'XPosition')}" id="v_x" config="x" minimum="-100" maximum="100" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'YPosition')}" id="v_y" config="y" minimum="-100" maximum="100" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'IconWidth')}" id="v_w" config="w" minimum="0" maximum="64" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'IconHeight')}" id="v_h" config="h" minimum="0" maximum="64" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'Transparency')}" id="v_alpha" config="alpha" minimum="0" maximum="100" change="onChange(event)"/>
+    <c:LabeledMacrosNumberSelector label="{resourceManager.getString('markers', 'Transparency')}" id="v_alpha" config="alpha" minimum="0" maximum="100" allowedMacros="{Macros.get('transparency')}" change="onChange(event)"/>
 </c:PanelComponent>

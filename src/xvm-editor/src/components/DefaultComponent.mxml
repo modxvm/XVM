@@ -41,7 +41,7 @@
         [Bindable]
         public var maximum:int = 10;
 
-        // value
+        // IValueControl: value
         [Bindable]
         public var value:*;
 

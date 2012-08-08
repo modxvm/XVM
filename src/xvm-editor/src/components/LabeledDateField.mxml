@@ -3,6 +3,13 @@
     xmlns:s="library://ns.adobe.com/flex/spark"
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*">
-    <mx:DateField editable="true" left="{labelWidth}" right="0" height="{height}"
-        id="edit" text="{value}" change="value=edit.text; onChange(event)"/>
+    <fx:Script>
+        protected override function onChange(event:Event):void
+        {
+            value = edit.value;
+            super.onChange(event);
+        }
+    </fx:Script>
+    <mx:DateField id="edit" left="{labelWidth}" right="0" height="{height}"
+        editable="true" text="{value}" change="onChange(event)"/>
 </c:LabeledComponent>

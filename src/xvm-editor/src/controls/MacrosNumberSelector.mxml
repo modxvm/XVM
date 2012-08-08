@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<a:NumberSelector xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:a="controls.*"
+    implements="controls.IMacrosValueControl">
+    <fx:Script>
+        <![CDATA[
+            import mx.events.DropdownEvent;
+            import utils.Embed;
+
+            include "include_MacrosValueControl.as";
+
+            protected function macrosSelected(event:Event):void
+            {
+                var v:String = macro.selectedItem.value;
+                macro.selectedItem = null;
+                //edit.text += v;;
+            }
+            
+            private function comboBox_open(event:DropdownEvent):void
+            {
+                event.currentTarget.dropdown.variableRowHeight = true;
+            }
+        ]]>
+    </fx:Script>
+    <mx:ComboBox right="0" id="macro" width="40" dataProvider="{menuData}" labelFunction="getLabel"
+                 toolTip="{resourceManager.getString('components', 'SelectMacros')}" change="macrosSelected(event)"
+                 dropdownFactory="controls.ComboBoxList" itemRenderer="controls.ComboBoxItemRenderer"
+                 dropdownWidth="400" rowCount="8" open="comboBox_open(event);"/>
+</a:NumberSelector>

@@ -1,56 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <a:ColorSelector xmlns:fx="http://ns.adobe.com/mxml/2009"
-         xmlns:s="library://ns.adobe.com/flex/spark"
-         xmlns:mx="library://ns.adobe.com/flex/mx"
-         xmlns:a="controls.*"
-         xmlns:validators="validators.*"
-         xmlns:utils="utils.*">
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:a="controls.*"
+    xmlns:validators="validators.*"
+    implements="controls.IMacrosValueControl"
+    creationComplete="onCreationComplete()">
     <fx:Script>
         <![CDATA[
             import mx.controls.Menu;
             import mx.events.MenuEvent;
+            import mx.binding.utils.BindingUtils;
+            import utils.Embed;
 
-            [Embed("images/syscolors.png")]
-            public const syscolors:Class;
+            include "include_MacrosValueControl.as";
 
-            private var _allowedMacros:Array = [];
-            [Bindable]
-            public function get allowedMacros():Array
+            private function onCreationComplete():void
             {
-                return _allowedMacros;
-            }
-            public function set allowedMacros(v:Array):void
-            {
-                _allowedMacros = v;
-                var av:Array = ["(system)"];
-                menuData = [
-                    { label: "UseSystemColor", icon: syscolors },
-                    { type: "separator" }
-                ];
-
-                for each (var a:Object in _allowedMacros)
-                {
-                    av.push(a.value);
-                    menuData.push(a);
-                }
-                tv.allowedValues = av;
-            }
-
-            [Bindable]
-            private var menuData:Array = [];
-
-            private function getLabel(item:Object):String
-            {
-                return resourceManager.getString('components', item.label);
+                ti.restrict = '#0-9A-Za-z\{\}\-_:';
+                ti.maxChars = 20;
+                BindingUtils.bindProperty(tv, "allowedValues", this, [ "allowedValues" ]);
             }
 
             private var _value:String = "0";
             [Bindable]
-            public override function get value():String
+            public override function get value():*
             {
                 return isNaN(parseInt(_value)) ? _value : "0x" + toHex(parseInt(_value));
             }
-            public override function set value(v:String):void
+            public override function set value(v:*):void
             {
                 _value = v;
                 if (v == null)
@@ -71,6 +49,7 @@
 
             protected override function textChanged():void
             {
+                ti.alpha = 1;
                 ti.validateNow();
             }
 
@@ -78,45 +57,19 @@
             {
                 if (event)
                     event.stopPropagation();
-                var v:String = null;
+
                 if (event.target == cp)
                 {
                     ti.text = "#" + toHex(cp.selectedColor);
                     return;
                 }
 
+                var v:String = null;
                 if (event.target == tv)
-                  v = ti.text.charAt(0) == "#" ? "0x" + ti.text.substr(1) : ti.text;
+                    v = ti.text.charAt(0) == "#" ? "0x" + ti.text.substr(1) : ti.text;
                 else if (event.target == pm)
                 {
-                    var me:MenuEvent = event as MenuEvent;
-                    switch (me.index)
-                    {
-                        case 0:
-                            v = null;
-                            break;
-                        case 2:
-                            v = "{{c:hp}}";
-                            break;
-                        case 3:
-                            v = "{{c:hp-ratio}}";
-                            break;
-                        case 4:
-                            v = "{{c:eff}}";
-                            break;
-                        case 5:
-                            v = "{{c:rating}}";
-                            break;
-                        case 6:
-                            v = "{{c:kb}}";
-                            break;
-                        case 7:
-                            v = "{{c:t-rating}}";
-                            break;
-                        case 8:
-                            v = "{{c:t-battles}}";
-                            break;
-                    }
+                    v = (event as MenuEvent).item.value;
                     (pm.popUp as Menu).selectedIndex = 0;
                 } else
                     return;
@@ -129,11 +82,7 @@
             }
         ]]>
     </fx:Script>
-    <fx:Metadata>
-        [Event(name="change", type="flash.events.Event")]
-        [ResourceBundle("components")]
-    </fx:Metadata>
     <mx:Spacer width="5"/>
-    <mx:PopUpMenuButton id="pm" width="40" dataProvider="{menuData}" label="" icon="{syscolors}" labelFunction="getLabel"
+    <mx:PopUpMenuButton id="pm" width="40" dataProvider="{menuData}" label="" icon="{Embed.syscolors}" labelFunction="getLabel"
         toolTip="{resourceManager.getString('components', 'UseSystemColor')}" itemClick="onChange(event)"/>
 </a:ColorSelector>

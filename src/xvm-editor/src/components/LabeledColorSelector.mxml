@@ -4,6 +4,13 @@
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
     xmlns:a="controls.*">
-    <a:ColorSelector left="{labelWidth}" right="10" height="{height}"
-        id="edit" value="{value}" change="value=edit.value; onChange(event)"/>
+    <fx:Script>
+        protected override function onChange(event:Event):void
+        {
+            value = edit.value;
+            super.onChange(event);
+        }
+    </fx:Script>
+    <a:ColorSelector id="edit" left="{labelWidth}" right="0" height="{height}"
+        value="{value}" change="onChange(event)"/>
 </c:LabeledComponent>

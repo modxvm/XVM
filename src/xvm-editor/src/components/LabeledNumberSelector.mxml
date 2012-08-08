@@ -2,27 +2,19 @@
 <c:LabeledComponent xmlns:fx="http://ns.adobe.com/mxml/2009"
     xmlns:s="library://ns.adobe.com/flex/spark"
     xmlns:mx="library://ns.adobe.com/flex/mx"
-    xmlns:c="components.*">
+    xmlns:c="components.*"
+    xmlns:a="controls.*">
     <fx:Script>
-        // sliderVisible
-        [Bindable]
-        public var sliderVisible: Boolean = true;
+    	[Bindable]
+    	public var sliderVisible:Boolean = true;
 
         protected override function onChange(event:Event):void
         {
-            if (event.target == stepper)
-                edit.value = stepper.value;
-            else
-                stepper.value = edit.value;
             value = edit.value;
             super.onChange(event);
         }
     </fx:Script>
-    <fx:Metadata>
-        [Event(name="change", type="flash.events.Event")]
-    </fx:Metadata>
-    <s:NumericStepper left="{labelWidth}" width="52" height="{height}" minimum="{minimum}" maximum="{maximum}"
-        id="stepper" value="{value}" change="onChange(event)"/>
-    <s:HSlider left="{stepper.x + stepper.width + 10}" right="0" y="4" minimum="{minimum}" maximum="{maximum}" visible="{sliderVisible}"
-        id="edit" value="{value}" change="onChange(event)"/>
+    <a:NumberSelector id="edit" left="{labelWidth}" right="0" height="{height}"
+         minimum="{minimum}" maximum="{maximum}" sliderVisible="{sliderVisible}"
+         value="{value}" change="onChange(event)"/>
 </c:LabeledComponent>

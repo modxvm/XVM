@@ -5,9 +5,14 @@
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
     title="{resourceManager.getString('panels', 'PPlayersPanelLarge')}">
+    <fx:Script>
+        <![CDATA[
+            import utils.Macros;
+        ]]>
+    </fx:Script>
     <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'PlayerNameWidth')}" id="v_width" config="playersPanel.large.width" minimum="0" maximum="250" change="onChange(event)"/>
-    <c:LabeledTextInput label="{resourceManager.getString('panels', 'FormatPlayerNameLeft')}" labelWidth="100%" wrapTextField="true" height="40" id="v_nickFormatLeft" config="playersPanel.large.nickFormatLeft" change="onChange(event)"/>
-    <c:LabeledTextInput label="{resourceManager.getString('panels', 'FormatPlayerNameRight')}" labelWidth="100%" wrapTextField="true" height="40" id="v_nickFormatRight" config="playersPanel.large.nickFormatRight" change="onChange(event)"/>
-    <c:LabeledTextInput label="{resourceManager.getString('panels', 'FormatVehicleNameLeft')}" labelWidth="100%" wrapTextField="true" height="40" id="v_vehicleFormatLeft" config="playersPanel.large.vehicleFormatLeft" change="onChange(event)"/>
-    <c:LabeledTextInput label="{resourceManager.getString('panels', 'FormatVehicleNameRight')}" labelWidth="100%" wrapTextField="true" height="40" id="v_vehicleFormatRight" config="playersPanel.large.vehicleFormatRight" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'FormatPlayerNameLeft')}" labelWidth="100%" wrapTextField="true" height="40" id="v_nickFormatLeft" config="playersPanel.large.nickFormatLeft" allowedMacros="{Macros.get('panels,stats')}" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'FormatPlayerNameRight')}" labelWidth="100%" wrapTextField="true" height="40" id="v_nickFormatRight" config="playersPanel.large.nickFormatRight" allowedMacros="{Macros.get('panels,stats')}" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'FormatVehicleNameLeft')}" labelWidth="100%" wrapTextField="true" height="40" id="v_vehicleFormatLeft" config="playersPanel.large.vehicleFormatLeft" allowedMacros="{Macros.get('panels,stats')}" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'FormatVehicleNameRight')}" labelWidth="100%" wrapTextField="true" height="40" id="v_vehicleFormatRight" config="playersPanel.large.vehicleFormatRight" allowedMacros="{Macros.get('panels,stats')}" change="onChange(event)"/>
 </c:PanelComponent>

@@ -5,6 +5,11 @@
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
     title="{resourceManager.getString('panels', 'ciTitle')}">
+    <fx:Script>
+        <![CDATA[
+            import utils.Macros;
+        ]]>
+    </fx:Script>
     <c:LabeledCheckBox label="{resourceManager.getString('panels', 'ciShow')}" id="v_show" config="playersPanel.clanIcon.show" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'ciX')}" id="v_x" config="playersPanel.clanIcon.x" minimum="-400" maximum="100" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'ciY')}" id="v_y" config="playersPanel.clanIcon.y" minimum="-20" maximum="20" change="onChange(event)"/>
@@ -12,5 +17,5 @@
     <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'ciYR')}" id="v_yr" config="playersPanel.clanIcon.yr" minimum="-20" maximum="20" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'ciW')}" id="v_w" config="playersPanel.clanIcon.w" minimum="0" maximum="32" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'ciH')}" id="v_h" config="playersPanel.clanIcon.h" minimum="0" maximum="32" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'ciAlpha')}" id="v_alpha" config="playersPanel.clanIcon.alpha" minimum="0" maximum="100" change="onChange(event)"/>
+    <c:LabeledMacrosNumberSelector label="{resourceManager.getString('panels', 'ciAlpha')}" id="v_alpha" config="playersPanel.clanIcon.alpha" minimum="0" maximum="100" allowedMacros="{Macros.get('transparency')}" change="onChange(event)"/>
 </c:PanelComponent>

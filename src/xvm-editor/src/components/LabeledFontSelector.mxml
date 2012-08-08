@@ -4,6 +4,13 @@
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
     xmlns:a="controls.*">
-    <a:FontComboBox left="{labelWidth}" right="10" height="{height}"
-        id="edit" text="{value}" change="value=edit.text; onChange(event)"/>
+    <fx:Script>
+        protected override function onChange(event:Event):void
+        {
+            value = edit.value;
+            super.onChange(event);
+        }
+    </fx:Script>
+    <a:FontComboBox id="edit" left="{labelWidth}" right="0" height="{height}"
+        value="{value}" change="onChange(event)"/>
 </c:LabeledComponent>

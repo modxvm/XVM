@@ -7,7 +7,14 @@
     <fx:Script>
     	[Bindable]
     	public var allowedMacros:Array = [];
+
+        protected override function onChange(event:Event):void
+        {
+            value = edit.value;
+            super.onChange(event);
+        }
     </fx:Script>
-    <a:MacrosColorSelector left="{labelWidth}" right="10" height="{height}" allowedMacros="{allowedMacros}"
-        id="edit" value="{value}" change="value=edit.value; onChange(event)"/>
+    <a:MacrosColorSelector id="edit" left="{labelWidth}" right="0" height="{height}"
+        allowedMacros="{allowedMacros}"
+        value="{value}" change="onChange(event)"/>
 </c:LabeledComponent>

@@ -22,9 +22,6 @@ package validators
 		override protected function doValidation(value:Object):Array
 		{
 			results = [];
-			results = super.doValidation(value);
-			if (results.length > 0)
-				return results;
 
             if (_allowedValues)
             {
