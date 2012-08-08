@@ -1,6 +1,7 @@
 ﻿import flash.events.Event;
 
 import mx.core.UIComponent;
+import mx.events.MenuEvent;
 
 import utils.Config;
 import utils.DefaultConfig;
@@ -12,7 +13,7 @@ public function debug(str:String):void
 	preview.taDebug.text += str + "\n";
 }
 
-protected function onCreateNewConfigClick():void
+protected function createNewConfig():void
 {
 	lastFileName = "XVM.xvmconf";
 	Config.s_config = DefaultConfig.config;
@@ -29,6 +30,24 @@ protected function onSaveConfigClick():void
 {
 	Config.s_config.editorVersion = Defines.EDITOR_VERSION;
 	SaveConfig();
+}
+
+protected function mergeConfigs():void
+{
+    
+}
+
+protected function onExtraButtonClick(event:MenuEvent):void
+{
+    switch (event.item.value)
+    {
+        case "merge":
+            mergeConfigs();
+            break;
+        case "newconfig":
+            createNewConfig();
+            break;
+    }
 }
 
 protected function onVehicleStateChanged(event:Event):void

@@ -7,7 +7,7 @@ package controls
     public class ComboBoxItemRenderer extends ListItemRenderer
     {
         [Embed("images/separator.png")]
-        private var iconClass:Class;
+        private const iconClass:Class;
 
         override protected function commitProperties():void
         {
@@ -22,7 +22,7 @@ package controls
                     label.visible = false;
                     icon = new iconClass();
                     addChild(DisplayObject(icon));
-                    height = 3;
+                    //height = 3; // bug when 2 separators in a list
                     return;
                 }
             }

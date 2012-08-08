@@ -46,18 +46,15 @@
                 {
                     case "DynamicAlphaEdit":
                         instance = new DynamicAlphaEdit();
-                        (instance as DynamicAlphaEdit).v_value = v ? v.value : 0;
-                        (instance as DynamicAlphaEdit).v_alpha = v ? v.alpha : 0;
                         break;
                     case "DynamicColorEdit":
                         instance = new DynamicColorEdit();
-                        (instance as DynamicColorEdit).v_value = v ? v.value : 0;
-                        (instance as DynamicColorEdit).v_color = v ? v.color : "";
                         break;
                 }
 
                 instance.minimum = minimum;
                 instance.maximum = maximum;
+                instance.value = v;
 
                 instance.addEventListener(Event.CHANGE, onChange);
                 instance.addEventListener(MouseEvent.CLICK, onClick);

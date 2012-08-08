@@ -31,7 +31,7 @@
 
             protected function onCreationComplete(event:Event):void
             {
-                onCreateNewConfigClick();
+                createNewConfig();
                 onVehicleStateChanged(event);
             }
 
@@ -59,10 +59,16 @@
     <s:VGroup left="0" right="0" top="0" bottom="0" gap="-1" creationComplete="onCreationComplete(event)">
         <s:BorderContainer width="920" height="32">
             <s:HGroup top="0" left="0" bottom="0" gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="4" width="361">
-                <s:Button label="{_('newButton')}" click="onCreateNewConfigClick()"/>
-                <s:Button label="{_('openButton')}" click="onLoadConfigClick()"/>
-                <s:Button label="{_('saveButton')}" click="onSaveConfigClick()"/>
-                <mx:PopUpMenuButton label="{_('extraButton')}" enabled="false" toolTip="{_('NotImplementedYet')}"/>
+                <s:Button label="{_('openButton')}" icon="@Embed(source='images/fileopen.png')" click="onLoadConfigClick()"/>
+                <s:Button label="{_('saveButton')}" icon="@Embed(source='images/filesave.png')" click="onSaveConfigClick()"/>
+                <mx:PopUpMenuButton itemClick="onExtraButtonClick(event)">
+                    <mx:dataProvider>
+                        <fx:Array>
+                            <fx:Object value="merge" label="{_('mergeConfigs')}" icon="@Embed(source='images/merge.png')" />
+                            <fx:Object value="newconfig" label="{_('newConfig')}" icon="@Embed(source='images/filenew.png')"/>
+                        </fx:Array>
+                    </mx:dataProvider>
+                </mx:PopUpMenuButton>
             </s:HGroup>
             <s:HGroup top="0" bottom="0" width="130" right="100" verticalAlign="middle" horizontalAlign="right">
                 <s:Label text="{_('editorVersion')}: {Defines.EDITOR_VERSION}"/>

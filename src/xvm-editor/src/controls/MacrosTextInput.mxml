@@ -7,7 +7,6 @@
     <fx:Script>
         <![CDATA[
             import mx.events.DropdownEvent;
-            import utils.Embed;
 
             include "include_MacrosValueControl.as";
 
@@ -22,16 +21,17 @@
                 edit.selectRange(prefix.length, prefix.length + macro.selectedItem.value.length);
                 edit.setFocus();
                 macro.selectedItem = null;
+                super.onChange(event);
             }
 
             private function comboBox_open(event:DropdownEvent):void
             {
-                event.currentTarget.dropdown.variableRowHeight = true;
+                //event.currentTarget.dropdown.variableRowHeight = true; // bug when 2 separators in a list
             }
         ]]>
     </fx:Script>
     <mx:ComboBox right="0" id="macro" width="40" dataProvider="{menuData}" labelFunction="getLabel"
         toolTip="{resourceManager.getString('components', 'SelectMacros')}" change="macrosSelected(event)"
         dropdownFactory="controls.ComboBoxList" itemRenderer="controls.ComboBoxItemRenderer"
-        dropdownWidth="400" rowCount="10" open="comboBox_open(event);"/>
+        dropdownWidth="420" rowCount="10" open="comboBox_open(event);"/>
 </a:TextInput>

@@ -27,5 +27,5 @@
     <mx:ComboBox enabled="false" right="0" id="macro" width="40" dataProvider="{menuData}" labelFunction="getLabel"
                  toolTip="{resourceManager.getString('components', 'SelectMacros')}" change="macrosSelected(event)"
                  dropdownFactory="controls.ComboBoxList" itemRenderer="controls.ComboBoxItemRenderer"
-                 dropdownWidth="400" rowCount="10" open="comboBox_open(event);"/>
+                 dropdownWidth="420" rowCount="10" open="comboBox_open(event);"/>
 </a:NumberSelector>

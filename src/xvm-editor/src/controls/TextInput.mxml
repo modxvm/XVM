@@ -12,6 +12,5 @@
             }
         ]]>
     </fx:Script>
-    <s:TextInput id="edit" width="100%" height="{height}"
-        text="{value}" change="onChange(event)"/>
+    <s:TextInput id="edit" width="100%" height="{height}" text="{value}" change="onChange(event)"/>
 </a:ValueControl>

@@ -1,12 +1,12 @@
-﻿[Bindable]
-private var _allowedMacros:Array = [];
+﻿private var _allowedMacros:Array = [];
+[Bindable]
 public function get allowedMacros():Array
 {
     return _allowedMacros;
 }
 public function set allowedMacros(v:Array):void
 {
-    //_allowedMacros = v;
+    _allowedMacros = v;
     allowedValues = [];
     menuData = [];
     for each (var a:Object in v)

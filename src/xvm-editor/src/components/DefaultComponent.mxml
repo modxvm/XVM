@@ -41,9 +41,17 @@
         [Bindable]
         public var maximum:int = 10;
 
-        // IValueControl: value
+        // value
+        private var _value:*;
         [Bindable]
-        public var value:*;
+        public function get value():*
+        {
+            return _value;
+        }
+        public function set value(v:*):void
+        {
+            _value = v;
+        }
 
         // onChange
         protected function onChange(event:Event):void
