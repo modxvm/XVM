@@ -25,9 +25,11 @@ package utils
                 case 'object':
                     if (def is Array)
                     {
-                        // warning: arrays are not checked now
+                        // warning: arrays are not checking now
                         return (config is Array) ? config : def;
                     }
+                    if (def == null)
+                        return (typeof config == 'string' || typeof config == 'number') ? config : null;
                     var result:* = { };
                     for (var name:String in def)
                     {
@@ -36,8 +38,8 @@ package utils
                     return result;
 
                 case 'number':
-                    if (isFinite(config))
-                        return Number(config);
+                    if (!isNaN(parseInt(config)))
+                        return parseInt(config);
                     if (typeof config == 'string')
                         return config;
                     return def;
@@ -50,7 +52,7 @@ package utils
                     return def;
 
                 case 'string':
-                    return (typeof config == 'string') ? config : def;
+                    return (config == null || typeof config == 'string') ? config : def;
 
     		    case 'undefined':
 		        case 'null':
@@ -135,10 +137,12 @@ package utils
     		}
 
     		// Set value
-    		if (value != null)
-    			root[valueElement] = value;
+//    		if (value === undefined)
+//                delete root[valueElement];
+            if (value === null || value === undefined) // FIXIT: why undefined presents?
+    			root[valueElement] = null;
     		else
-    			delete root[valueElement];
+                root[valueElement] = value;
     	}
 
     	public static function SetDefaultValue(path:String):Boolean

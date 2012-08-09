@@ -37,7 +37,8 @@ protected function RefreshCurrentPage():void
 
         debug("  " + utils.Utils.elapsedMSec(now, new Date()) + " msec");
 
-        updatePreview();
+        if (preview)
+            preview.update();
 	}
 	catch (ex:Error)
 	{

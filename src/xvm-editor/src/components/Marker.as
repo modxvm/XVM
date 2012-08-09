@@ -426,7 +426,7 @@
                 }
                 xvmHBDamage.graphics.beginFill(color, alpha);
                 xvmHBDamage.graphics.drawRect(
-                    cfg.border.size + cfg.width * (curHealth / m_maxHealth) - 1, cfg.border.size,
+                    cfg.border.size + cfg.width * (1.0 * curHealth / m_maxHealth) - 1, cfg.border.size,
                     w, cfg.height);
                 xvmHBDamage.graphics.endFill();
                 drawing = false;

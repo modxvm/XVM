@@ -22,7 +22,7 @@
                 BindingUtils.bindProperty(tv, "allowedValues", this, [ "allowedValues" ]);
             }
 
-            private var _value:String = "0";
+            private var _value:String = "1";
             [Bindable]
             public override function get value():*
             {
@@ -30,8 +30,8 @@
             }
             public override function set value(v:*):void
             {
-                _value = v;
-                if (v == null)
+                _value = (v == "(system)" || typeof v != "string") ? null : v;
+                if (_value == null)
                 {
                     ti.text = "(system)";
                     ti.alpha = 0.5;
