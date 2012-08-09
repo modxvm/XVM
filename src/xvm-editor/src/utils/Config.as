@@ -9,7 +9,6 @@ package utils
 
     public class Config
     {
-        // Private vars
         public static var s_config: Object;
 
         /**

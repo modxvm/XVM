@@ -23,7 +23,7 @@ protected function createNewConfig():void
 
 protected function onLoadConfigClick():void
 {
-	LoadConfig();
+	LoadConfig(false);
 }
 
 protected function onSaveConfigClick():void
@@ -32,17 +32,12 @@ protected function onSaveConfigClick():void
 	SaveConfig();
 }
 
-protected function mergeConfigs():void
-{
-    
-}
-
 protected function onExtraButtonClick(event:MenuEvent):void
 {
     switch (event.item.value)
     {
         case "merge":
-            mergeConfigs();
+            LoadConfig(true);
             break;
         case "newconfig":
             createNewConfig();

@@ -1,7 +1,7 @@
-﻿import flash.net.FileReference;
-import flash.events.Event;
+﻿import flash.events.Event;
 import flash.events.IOErrorEvent;
 import flash.net.FileFilter;
+import flash.net.FileReference;
 
 import mx.utils.ObjectUtil;
 
@@ -13,11 +13,13 @@ import utils.Utils;
 
 private var fr:FileReference;
 private var lastFileName:String;
+private var merge:Boolean;
 
 // LOAD
 
-private function LoadConfig():void
+private function LoadConfig(merge:Boolean):void
 {
+    this.merge = merge;
 	fr = new FileReference();
 	fr.addEventListener(Event.SELECT, onFileLoadSelect);
 	fr.addEventListener(Event.CANCEL,onCancelLoad);
@@ -37,51 +39,36 @@ private function onCancelLoad(e:Event):void
 	fr = null;
 }
 
+import mx.managers.PopUpManager;
+
+import components.MergeDialog;
 private function onLoadComplete(e:Event):void
 {
-	var data:String = fr.data.readUTFBytes(fr.data.bytesAvailable);
-	if (Utils.endsWith(".xml", fr.name.toLowerCase()))
-		ParseConfigXml((new PatchedXMLDecoder()).decode(data));
-	else
-		ParseConfigJson(data);
-	fr = null;
-}
+    try
+    {
+    	var data:String = fr.data.readUTFBytes(fr.data.bytesAvailable);
+        var config:* = Utils.endsWith(".xml", fr.name.toLowerCase())
+            ? OTMConfigConverter.convert((new PatchedXMLDecoder()).decode(data))
+            : utils.JSON.parse(data)
+        fr = null;
 
-private function ParseConfigXml(xml:*):void
-{
-	//debug(mx.utils.ObjectUtil.toString(xml));
-	//debug("ParseConfigXml()");
-	try
-	{
-		var config:* = OTMConfigConverter.convert(xml);
-		Config.s_config = Config.MergeConfigs(Config.FixConfig(config), DefaultConfig.config);
-		Config.TuneupConfig();
-		debug(_("ConfigurationLoaded"));
-		//debug(utils.JSON.stringify(Config.s_config));
-	}
-	catch (ex:Error)
-	{
-		debug("ERROR: ParseConfigXml(): " + ex.toString());
-	}
-    RefreshCurrentPage();
-}
+        if (merge)
+        {
+            var mergeDialog:MergeDialog = PopUpManager.createPopUp(this, MergeDialog, true) as MergeDialog;
+            mergeDialog.config = config;
+            PopUpManager.centerPopUp(mergeDialog);
+        }
 
-private function ParseConfigJson(str:String):void
-{
-	//debug("ParseConfigJson()");
-	try
-	{
-		var config:* = utils.JSON.parse(str);
-		Config.s_config = Config.MergeConfigs(Config.FixConfig(config), DefaultConfig.config);
-		Config.TuneupConfig();
-		debug(_("ConfigurationLoaded"));
-		//debug(utils.JSON.stringify(Config.s_config));
-	}
-	catch (ex:Error)
-	{
-		debug("ERROR: ParseConfigJson(): " + ex.toString());
-	}
-    RefreshCurrentPage();
+        Config.s_config = Config.MergeConfigs(Config.FixConfig(config), DefaultConfig.config);
+        Config.TuneupConfig();
+        debug(_("ConfigurationLoaded"));
+
+        RefreshCurrentPage();
+    }
+    catch (ex:Error)
+    {
+        debug("ERROR: ParseConfigXml(): " + ex.toString());
+    }
 }
 
 private function onLoadError(e:IOErrorEvent):void
