@@ -12,28 +12,34 @@
             import mx.core.IFlexDisplayObject;
             import mx.events.CloseEvent;
             import mx.managers.PopUpManager;
-            
+
             import utils.Utils;
 
             [Bindable]
             public var data:XMLListCollection;
 
-            public function parseData(v:*, name:String = null, prefix:String = null):XML
+            public var modalResult: Boolean = false;
+
+            public function parseData(v:*, name:String = "", prefix:String = null, path:String = ""):XML
             {
                 // skip leafs
                 if (!v || typeof v != 'object') 
                     return null;
 
-                var resName:String = prefix + name;
-                var index:String = resourceManager.getString("mergeorder", resName) || "99";
+                var resName:String = (prefix || "") + name;
+                var index:String = resName ? 
+                    resourceManager.getString("mergeorder", resName) || "99" : "";
                 if (index == "[obsoleted]")
                     return null;
 
-                var label:String = resourceManager.getString("merge", resName) ||
-                    "[" + resName + "] - report translation bug to support forum";
+                var label:String = resName ? resourceManager.getString("merge", resName) ||
+                    "[" + resName + "] - report translation bug to support forum" : "";
+                label = label.replace(/"/g, '&quot;');
 
                 var xml:XML = new XML('<folder state="checked" isBranch="false" ' +
-                    'label="' + label  + '" index="' + index + '"/>');
+                    'label="' + label  + '" ' +
+                    'index="' + index + '" ' +
+                    'value="' + name + '"/>');
 
                 if (!(v is Array))
                 {
@@ -52,10 +58,37 @@
                 return xml;
             }
 
+            private var _config:*;
+
+            public function filterConfig(root:* = null, nodes:XMLList = null):Object
+            {
+                for each (var item:XML in nodes)
+                {
+                    var name:String = item.@value;
+                    if (item.@state == "unchecked")
+                        delete root[name];
+                    else if (item.@isBranch)
+                        root[name] = filterConfig(root[name], item.children());
+                }
+                return root;
+            }
+
+            public function get config():Object
+            {
+                return filterConfig(_config, data.source);
+            }
+
             public function set config(value:Object):void
             {
+                _config = value;
                 data = new XMLListCollection(parseData(value).children());
                 tree.dataProvider = data;
+            }
+
+            private function close(result:Boolean):void
+            {
+                modalResult = result;
+                dispatchEvent(new CloseEvent(CloseEvent.CLOSE));
             }
 
             protected function onClose():void
@@ -74,6 +107,13 @@
             folderOpenIcon: ClassReference(null);
         }
     </fx:Style>
-    <mx:Tree id="tree" styleName="TreeStyle" itemRenderer="controls.CheckTreeRenderer"
-        labelField="@label" width="100%" height="100%" borderVisible="false"/>
+    <s:VGroup width="100%" height="100%">
+        <mx:Tree id="tree" styleName="TreeStyle" itemRenderer="controls.CheckTreeRenderer"
+            labelField="@label" width="100%" height="100%" borderVisible="false"/>
+        <s:HGroup width="100%" height="30" bottom="0" horizontalAlign="right" gap="10">
+            <s:Button label="OK" click="close(true)"/>
+            <s:Button label="Cancel" click="close(false)"/>
+            <s:Spacer width="0"/>
+        </s:HGroup>
+    </s:VGroup>
 </s:TitleWindow>

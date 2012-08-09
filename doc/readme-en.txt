@@ -124,10 +124,11 @@
       {{rating:3}}    - GWR aligned from left to 3 chars
       {{eff:4}}       - player efficiency aligned from left to 4 chars
       {{kb:3}}        - number of kilo-battles aligned from left to 3 chars
-      {{t-kb}}        - number of kilo-battles for current vehicle.
+      {{t-rating}}    - vehicle win ratio
+      {{t-kb}}        - number of kilo-battles for current vehicle
       {{t-battles}}   - total battles count for current vehicle
       {{t-wins}}      - total wins count for current vehicle
-      {{t-rating:3}}  - Vehicle win ratio aligned from left to 3 chars
+      {{t-rating:3}}  - vehicle win ratio aligned from left to 3 chars
       {{t-kb:4}}      - number of kilo-battles for current vehicle aligned from left to 4 chars
       {{t-battles:4}} - number of battles for current vehicle aligned from left to 4 chars
       {{t-kb-0}}      - number of kilo-battles for current vehicle with leading zero

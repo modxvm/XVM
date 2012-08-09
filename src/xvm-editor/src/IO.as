@@ -1,8 +1,12 @@
-﻿import flash.events.Event;
+﻿import components.MergeDialog;
+
+import flash.events.Event;
 import flash.events.IOErrorEvent;
 import flash.net.FileFilter;
 import flash.net.FileReference;
 
+import mx.collections.XMLListCollection;
+import mx.managers.PopUpManager;
 import mx.utils.ObjectUtil;
 
 import utils.Config;
@@ -14,6 +18,8 @@ import utils.Utils;
 private var fr:FileReference;
 private var lastFileName:String;
 private var merge:Boolean;
+private var mergeDialog:MergeDialog;
+private var config:Object;
 
 // LOAD
 
@@ -39,36 +45,66 @@ private function onCancelLoad(e:Event):void
 	fr = null;
 }
 
-import mx.managers.PopUpManager;
-
-import components.MergeDialog;
 private function onLoadComplete(e:Event):void
 {
     try
     {
     	var data:String = fr.data.readUTFBytes(fr.data.bytesAvailable);
-        var config:* = Utils.endsWith(".xml", fr.name.toLowerCase())
+        config = Utils.endsWith(".xml", fr.name.toLowerCase())
             ? OTMConfigConverter.convert((new PatchedXMLDecoder()).decode(data))
             : utils.JSON.parse(data)
-        fr = null;
 
-        if (merge)
+        if (!merge)
+            onLoadComplete2(null);
+        else
         {
-            var mergeDialog:MergeDialog = PopUpManager.createPopUp(this, MergeDialog, true) as MergeDialog;
+            mergeDialog = PopUpManager.createPopUp(this, MergeDialog, true) as MergeDialog;
             mergeDialog.config = config;
+            mergeDialog.addEventListener(Event.CLOSE, onLoadComplete2);
             PopUpManager.centerPopUp(mergeDialog);
         }
+    }
+    catch (ex:Error)
+    {
+        debug("ERROR: onLoadComplete(): " + ex.toString());
+    }
+    finally
+    {
+        fr = null;
+    }
+}
 
+private function onLoadComplete2(e:Event):void
+{
+    try
+    {
+        if (merge)
+        {
+            if (mergeDialog.modalResult != true)
+            {
+                debug(_("Loaded Canceled"));
+                return;
+            }
+            config = mergeDialog.config;
+        }
         Config.s_config = Config.MergeConfigs(Config.FixConfig(config), DefaultConfig.config);
         Config.TuneupConfig();
         debug(_("ConfigurationLoaded"));
-
         RefreshCurrentPage();
     }
     catch (ex:Error)
     {
-        debug("ERROR: ParseConfigXml(): " + ex.toString());
+        debug("ERROR: onLoadComplete2(): " + ex.toString());
     }
+    finally
+    {
+        mergeDialog = null;
+    }
+}
+
+private function clenupConfig(config:*, data:XMLList):*
+{
+
 }
 
 private function onLoadError(e:IOErrorEvent):void

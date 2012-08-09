@@ -103,7 +103,6 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             if (Config.s_config.battle.useStandardMarkers)
                 return;
 
-
             xvmHB = createEmptyMovieClip("xvmHB", marker.getDepth() - 1); // Put health Bar to back.
             xvmHBBorder = xvmHB.createEmptyMovieClip("border", 1);
             xvmHBDamage = xvmHB.createEmptyMovieClip("damage", 2);

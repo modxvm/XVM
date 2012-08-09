@@ -4,6 +4,8 @@
  */
 package utils
 {
+    import mx.collections.XMLListCollection;
+
     import utils.Defines;
     import utils.Utils;
 
@@ -32,7 +34,9 @@ package utils
                     var result:* = { };
                     for (var name:String in def)
                     {
-                        result[name] = config.hasOwnProperty(name) ? MergeConfigs(config[name], def[name], prefix + "." + name) : def[name];
+                        result[name] = config.hasOwnProperty(name)
+                            ? MergeConfigs(config[name], def[name], prefix + "." + name)
+                            : def[name];
                     }
                     return result;
 
