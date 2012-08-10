@@ -4,21 +4,20 @@
     import flash.display.MovieClip;
     import flash.display.Sprite;
     import flash.events.Event;
+    import flash.events.TimerEvent;
     import flash.text.AntiAliasType;
     import flash.text.TextField;
     import flash.text.TextFormat;
-    import flash.utils.clearInterval;
-    import flash.utils.setInterval;
-    import flash.utils.setTimeout;
-
+    import flash.utils.Timer;
+    
     import mx.containers.Canvas;
     import mx.core.ScrollPolicy;
     import mx.core.UIComponent;
     import mx.events.FlexEvent;
     import mx.messaging.channels.StreamingAMFChannel;
-
+    
     import spark.components.Image;
-
+    
     import utils.ClassLoader;
     import utils.Config;
     import utils.Defines;
@@ -161,11 +160,12 @@
 
         private function CreateMC(className: String):MovieClip
         {
+            var mc:MovieClip = new (loader.getClass(className))() as MovieClip;
             var dow:DisplayObjectWrapper = new DisplayObjectWrapper();
-            dow.content = loader.getClass(className);
+            dow.content = mc;
             dow.content.visible = false;
-            addChild(dow);
-            return dow.content as MovieClip;
+            addElement(dow);
+            return mc;
         }
 
         private function PostInit(event: Event):void
@@ -371,24 +371,37 @@
         damageField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
 
         var st:Number = (new Date()).time;
-        var intervalId:Number = setInterval(function(t:TextField, speed:Number, range:Number):void {
+        var timer:Timer = new Timer(10);
+        var timerFunc:Function = function():void {
             var d:Number = (new Date()).time - st;
-            if (d > speed)
+            if (d > cfg.speed * 1000)
             {
-                damageHolder.removeChild(t);
-                clearInterval(intervalId);
+                damageHolder.removeChild(damageField);
+                timer.stop();
+                timer.removeEventListener(TimerEvent.TIMER, timerFunc);
+                timer = null;
+                timerFunc = null;
                 return;
             }
-            t.y = range * (speed - d) / speed - range;
-        }, 10, damageField, cfg.speed * 1000, cfg.maxRange);
+            damageField.y = cfg.maxRange * (cfg.speed * 1000 - d) / (cfg.speed * 1000) - cfg.maxRange;
+        };
+        timer.addEventListener(TimerEvent.TIMER, timerFunc, false, 0, true);
+        timer.start();
     }
 
     // Health Visualization
-    private var dmgIntervalId:Number = 0;
+    private var dmgTimer:Timer = new Timer(10);
+    private var dmgTimerFunc:Function = null;
     private function XVMSetupNewHealth(curHealth:Number):void
     {
-        if (dmgIntervalId != 0)
-            clearInterval(dmgIntervalId);
+        dmgTimer.stop();
+        if (dmgTimerFunc != null)
+        {
+            dmgTimer.removeEventListener(TimerEvent.TIMER, dmgTimerFunc);
+            dmgTimerFunc = null;
+        }
+
+        XVMUpdateHealthBar(curHealth); // colorizing health bar after taking damage
 
         var delta: Number = curHealth - m_curHealth;
         if (delta >= 0)
@@ -397,8 +410,6 @@
             xvmHBDamage.graphics.clear();
             return;
         }
-
-        XVMUpdateHealthBar(curHealth); // colorizing health bar after taking damage
 
         XVMShowDamage(curHealth, -delta);
 
@@ -413,7 +424,7 @@
             var alpha:Number = XVMFormatDynamicAlpha(cfg.damage.alpha, curHealth) / 100;
             var st:Number = (new Date()).time;
             var drawing: Boolean = false;
-            dmgIntervalId = setInterval(function():void
+            dmgTimerFunc = function():void
             {
                 if (drawing)
                     return;
@@ -423,7 +434,8 @@
                 xvmHBDamage.graphics.clear();
                 if (w <= 0)
                 {
-                    clearInterval(dmgIntervalId);
+                    dmgTimer.stop();
+                    dmgTimer.removeEventListener(TimerEvent.TIMER, dmgTimerFunc);
                     return;
                 }
                 xvmHBDamage.graphics.beginFill(color, alpha);
@@ -432,7 +444,9 @@
                     w, cfg.height);
                 xvmHBDamage.graphics.endFill();
                 drawing = false;
-            }, 10);
+            };
+            dmgTimer.addEventListener(TimerEvent.TIMER, dmgTimerFunc, false, 0, true);
+            dmgTimer.start();
         }
     }
 

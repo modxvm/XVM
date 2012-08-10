@@ -53,6 +53,7 @@ private function onLoadComplete(e:Event):void
         config = Utils.endsWith(".xml", fr.name.toLowerCase())
             ? OTMConfigConverter.convert((new PatchedXMLDecoder()).decode(data))
             : utils.JSON.parse(data)
+        config = Config.FixConfig(config);
 
         if (!merge)
             onLoadComplete2(null);
@@ -87,7 +88,7 @@ private function onLoadComplete2(e:Event):void
             }
             config = mergeDialog.config;
         }
-        Config.s_config = Config.MergeConfigs(Config.FixConfig(config), DefaultConfig.config);
+        Config.s_config = Config.MergeConfigs(config, merge ? Config.s_config : DefaultConfig.config);
         Config.TuneupConfig();
         debug(_("ConfigurationLoaded"));
         RefreshCurrentPage();

@@ -174,19 +174,30 @@ package utils
                 // Convert XVM 1.0.0 => 1.1.0
                 if (config.battle)
                 {
-                    config.battle.mirroredVehicleIcons = Utils.toBool(config.battle.mirroredVehicleIcons, true);
-                    config.battle.showPostmortemTips = Utils.toBool(config.battle.showPostmortemTips, true);
+                    if (config.battle.mirroredVehicleIcons != null)
+                        config.battle.mirroredVehicleIcons = Utils.toBool(config.battle.mirroredVehicleIcons, true);
+                    if (config.battle.showPostmortemTips != null)
+                        config.battle.showPostmortemTips = Utils.toBool(config.battle.showPostmortemTips, true);
                 }
 
                 if (config.rating)
                 {
-                    config.rating.showPlayersStatistics = Utils.toBool(config.rating.showPlayersStatistics, false);
-                    if (config.rating.battleLoading)
-                        config.rating.battleLoading.show = Utils.toBool(config.rating.battleLoading.show, true);
+                    if (config.rating.showPlayersStatistics != null)
+                        config.rating.showPlayersStatistics = Utils.toBool(config.rating.showPlayersStatistics, false);
+                    if (config.rating.battleLoading) {
+                        if (config.rating.battleLoading.show != null)
+                            config.rating.battleLoading.show = Utils.toBool(config.rating.battleLoading.show, true);
+                    }
                     if (config.rating.playersPanel)
-                        config.rating.playersPanel.show = Utils.toBool(config.rating.playersPanel.show, true);
+                    {
+                        if (config.rating.playersPanel.show != null)
+                            config.rating.playersPanel.show = Utils.toBool(config.rating.playersPanel.show, true);
+                    }
                     if (config.rating.statisticForm)
-                        config.rating.statisticForm.show = Utils.toBool(config.rating.statisticForm.show, true);
+                    {
+                        if (config.rating.statisticForm.show != null)
+                            config.rating.statisticForm.show = Utils.toBool(config.rating.statisticForm.show, true);
+                    }
                     if (config.rating.colors)
                     {
                         config.colors = config.rating.colors;
@@ -199,43 +210,79 @@ package utils
             if (v == "1.1.0")
             {
                 // Convert XVM 1.1.0 => 1.2.0
-                config.battleLoading = { };
-                config.statisticForm = { };
-                config.playersPanel = { };
-                config.playersPanel.medium = { };
-                config.playersPanel.large = { };
-
                 if (config.battle)
                 {
-                    config.battleLoading.showClock = Utils.toBool(config.battle.battleLoadingShowClock, true);
-                    config.playersPanel.alpha = Utils.toInt(config.battle.playersPanelAlpha, 100);
-                    config.playersPanel.large.width = Utils.toInt(config.battle.playersPanelLargeWidth, 170); // TODO: * coef
+                    if (config.battle.battleLoadingShowClock != null)
+                    {
+                        if (!config.battleLoading)
+                            config.battleLoading = { };
+                        config.battleLoading.showClock = Utils.toBool(config.battle.battleLoadingShowClock, true);
+                        delete config.battle.battleLoadingShowClock;
+                    }
+                    if (config.battle.playersPanelAlpha != null)
+                    {
+                        if (!config.playersPanel)
+                            config.playersPanel = { };
+                        config.playersPanel.alpha = Utils.toInt(config.battle.playersPanelAlpha, 100);
+                        delete config.battle.playersPanelAlpha;
+                    }
+                    if (config.battle.playersPanelLargeWidth != null)
+                    {
+                        if (!config.playersPanel)
+                            config.playersPanel = { };
+                        config.playersPanel.large = { };
+                        config.playersPanel.large.width = Utils.toInt(config.battle.playersPanelLargeWidth, 170);
+                        delete config.battle.playersPanelLargeWidth;
+                    }
                 }
 
                 if (config.rating)
                 {
-                    if (config.rating.battleLoading && config.rating.battleLoading.format)
+                    if (config.rating.battleLoading)
                     {
-                        config.battleLoading.formatLeft = config.rating.battleLoading.format;
-                        config.battleLoading.formatRight = config.rating.battleLoading.format;
+                        if (config.rating.battleLoading.format)
+                        {
+                            if (!config.battleLoading)
+                                config.battleLoading = { };
+                            config.battleLoading.formatLeft = config.rating.battleLoading.format;
+                            config.battleLoading.formatRight = config.rating.battleLoading.format;
+                        }
+                        delete config.rating.battleLoading;
                     }
-                    if (config.rating.statisticForm && config.rating.statisticForm.format)
+
+                    if (config.rating.statisticForm)
                     {
-                        config.statisticForm.formatLeft = config.rating.statisticForm.format;
-                        config.statisticForm.formatRight = config.rating.statisticForm.format;
+                        if (config.rating.statisticForm.format != null)
+                        {
+                            if (!config.statisticForm)
+                                config.statisticForm = { };
+                            config.statisticForm.formatLeft = config.rating.statisticForm.format;
+                            config.statisticForm.formatRight = config.rating.statisticForm.format;
+                        }
+                        delete config.rating.statisticForm;
                     }
+
                     if (config.rating.playersPanel)
                     {
-                        if (config.rating.playersPanel.format)
+                        if (config.rating.playersPanel.format != null)
                         {
+                            if (!config.playersPanel)
+                                config.playersPanel = { };
+                            if (!config.playersPanel.large)
+                                config.playersPanel.large = { };
                             config.playersPanel.large.nickFormatLeft = config.rating.playersPanel.format + " {{nick}}";
                             config.playersPanel.large.nickFormatRight = "{{nick}} " + config.rating.playersPanel.format;
                         }
                         if (config.rating.playersPanel.middleColor)
                         {
+                            if (!config.playersPanel)
+                                config.playersPanel = { };
+                            if (!config.playersPanel.medium)
+                                config.playersPanel.medium = { };
                             config.playersPanel.medium.formatLeft = "<font color='" + config.rating.playersPanel.middleColor + "'>{{nick}}</font>";
                             config.playersPanel.medium.formatRight = "<font color='" + config.rating.playersPanel.middleColor + "'>{{nick}}</font>";
                         }
+                        delete config.rating.playersPanel;
                     }
                 }
 
@@ -249,14 +296,22 @@ package utils
             {
                 if (config.battleLoading)
                 {
-                    config.battleLoading.clockFormat = config.battleLoading.showClock ? "H:N:S" : "";
-                    config.battleLoading.formatLeft = "{{vehicle}}" + (config.battleLoading.formatLeft ? " " + config.battleLoading.formatLeft : "");
-                    config.battleLoading.formatRight = (config.battleLoading.formatRight ? config.battleLoading.formatRight + " " : "") + "{{vehicle}}";
+                    if (config.battleLoading.showClock != null)
+                    {
+                        config.battleLoading.clockFormat = config.battleLoading.showClock == true ? "H:N:S" : "";
+                        delete config.battleLoading.showClock;
+                    }
+                    if (config.battleLoading.formatLeft != null)
+                        config.battleLoading.formatLeft = "{{vehicle}}" + (config.battleLoading.formatLeft ? " " + config.battleLoading.formatLeft : "");
+                    if (config.battleLoading.formatRight != null)
+                        config.battleLoading.formatRight = (config.battleLoading.formatRight ? config.battleLoading.formatRight + " " : "") + "{{vehicle}}";
                 }
                 if (config.statisticForm)
                 {
-                    config.statisticForm.formatLeft = "{{vehicle}} " + (config.statisticForm.formatLeft ? " " + config.statisticForm.formatLeft : "");
-                    config.statisticForm.formatRight = (config.statisticForm.formatRight ? config.statisticForm.formatRight + " " : "") + " {{vehicle}}";
+                    if (config.statisticForm.formatLeft != null)
+                        config.statisticForm.formatLeft = "{{vehicle}} " + (config.statisticForm.formatLeft ? " " + config.statisticForm.formatLeft : "");
+                    if (config.statisticForm.formatRight != null)
+                        config.statisticForm.formatRight = (config.statisticForm.formatRight ? config.statisticForm.formatRight + " " : "") + " {{vehicle}}";
                 }
                 v = "1.4.0";
             }

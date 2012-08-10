@@ -40,5 +40,5 @@
             }
         ]]>
     </fx:Script>
-    <mx:ComboBox id="edit" selectedIndex="0" dropdownWidth="300" text="{value}" change="onChange(event)"/>
+    <mx:ComboBox id="edit" selectedIndex="0" dropdownWidth="300" rowCount="9" text="{value}" change="onChange(event)"/>
 </a:ValueControl>
