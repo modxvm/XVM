@@ -97,7 +97,7 @@
                         </mx:ArrayCollection>
                     </mx:ComboBox>
                     <s:ToggleButton id="btnExt" label="Alt" click="{marker1.extMode=marker2.extMode=marker3.extMode=btnExt.selected;}"/>
-                    <s:ToggleButton id="btnDeadType" label="{resourceManager.getString('components', 'SelectDead')}" click="{marker3.deadType=btnDeadType.selected;}"/>
+                    <s:ToggleButton id="btnDeadType" label="{resourceManager.getString('components', 'SelectDead')}" toolTip="{resourceManager.getString('components', 'SelectDeadToolTip')}" click="{marker3.deadType=btnDeadType.selected;}"/>
                     <s:Button label="{resourceManager.getString('components', 'Hit')}" click="{marker1.hit();marker2.hit();}"/>
                     <s:Button label="{resourceManager.getString('components', 'Action')}" click="{marker1.action();marker2.action();}"/>
                 </s:HGroup>

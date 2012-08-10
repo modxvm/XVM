@@ -220,9 +220,10 @@
 
         public function set deadType(value:Boolean):void
         {
+            this._vtype = value == true ? "enemy" : "ally";
             vehicleIcon.visible = false;
             vehicleIcon = value == true ? vehicleIconEnemy : vehicleIconAlly;
-            this._vtype = value == true ? "enemy" : "ally";
+            vehicleIcon.marker.scaleX = vehicleIcon.marker.scaleY = _zoom;
             clanIcon.source = value ? new IMG_clan2() : new IMG_clan1();
             update();
         }
@@ -243,7 +244,8 @@
 
             // vehicleIcon
             c = cfg.vehicleIcon;
-            vehicleIcon.visible = c.visible;
+            vehicleIcon.visible = c.visible || c.showSpeaker;
+            vehicleIcon.marker.icon.gotoAndStop(c.visible ? vehicleClass : "dynamic");
             vehicleIcon.x = c.x;
             vehicleIcon.y = c.y;
             vehicleIcon.marker.alpha = XVMFormatDynamicAlpha(c.alpha, m_curHealth) / 100;
