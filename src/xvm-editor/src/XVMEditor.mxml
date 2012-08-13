@@ -70,12 +70,12 @@
                     </mx:dataProvider>
                 </mx:PopUpMenuButton>
             </s:HGroup>
-            <s:HGroup top="0" bottom="0" width="130" right="100" verticalAlign="middle" horizontalAlign="right">
+            <s:HGroup top="0" bottom="0" width="130" right="50" verticalAlign="middle" horizontalAlign="right">
                 <s:Label text="{_('editorVersion')}: {Defines.EDITOR_VERSION}"/>
             </s:HGroup>
-            <s:HGroup top="0" bottom="0" gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="4" horizontalAlign="right" width="100" right="0">
-                <s:Button label="En" id="lang_en" width="40" click="onLanguageButtonClick(event)"/>
-                <s:Button label="Ru" id="lang_ru" width="40" click="onLanguageButtonClick(event)"/>
+            <s:HGroup top="0" bottom="0" gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="4" horizontalAlign="right" width="50" right="0">
+                <mx:Image id="lang_en" width="16" height="16" source="@Embed(source='images/lang_eng_icon.png')" toolTip="English" useHandCursor="true" buttonMode="true" click="onLanguageButtonClick(event)"/>
+                <mx:Image id="lang_ru" width="16" height="16" source="@Embed(source='images/lang_ru_icon.png')" toolTip="Русский" useHandCursor="true" buttonMode="true" click="onLanguageButtonClick(event)"/>
             </s:HGroup>
         </s:BorderContainer>
         <s:TabBar width="920" height="20" dataProvider="{vsTabs}"/>
