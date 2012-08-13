@@ -6,7 +6,7 @@ import utils.Utils;
 
 protected function RefreshCurrentPage():void
 {
-	debug("RefreshCurrentPage()");
+    debug("RefreshCurrentPage()");
 	try
 	{
         var pg:Object = vsTabs.selectedChild;

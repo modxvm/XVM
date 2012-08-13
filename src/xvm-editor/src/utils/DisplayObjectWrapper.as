@@ -19,11 +19,9 @@ package utils
 	{
 
 		private var _content:DisplayObject;
-		private var _watchSize:Boolean;
 
-		public function DisplayObjectWrapper(p_content:*=null,p_watchSize:Boolean=true) {
+		public function DisplayObjectWrapper(p_content:*=null) {
 			content = p_content;
-			watchSize = p_watchSize;
 			super();
 		}
 
@@ -35,21 +33,6 @@ package utils
 		override public function set height(value:Number):void {
 			_content.height = value;
 			super.height = value;
-		}
-
-		[Inspectable]
-		public function set watchSize(value:Boolean):void {
-			_watchSize = value;
-
-			if (_watchSize) {
-				addEventListener(Event.ENTER_FRAME,checkSize);
-			} else {
-				removeEventListener(Event.ENTER_FRAME,checkSize);
-			}
-
-		}
-		public function get watchSize():Boolean {
-			return _watchSize;
 		}
 
 		[Inspectable]
@@ -76,25 +59,9 @@ package utils
 			return _content;
 		}
 
-
 		override protected function measure():void {
 			measuredWidth = (_content) ? _content.width : 0;
 			measuredHeight = (_content) ? _content.height : 0;
 		}
-
-		private function checkSize(evt:Event):void {
-			if (mx_internal::_width != contentWidth || mx_internal::_height != contentHeight) {
-				invalidateSize();
-			}
-		}
-
-		private function get contentWidth():Number {
-			return (_content) ? _content.width : 0;
-		}
-
-		private function get contentHeight():Number {
-			return (_content) ? _content.height : 0;
-		}
-
 	}
 }

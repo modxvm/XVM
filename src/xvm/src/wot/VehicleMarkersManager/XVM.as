@@ -628,6 +628,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
     function removeTextField(f: TextField)
     {
         f.removeTextField();
+        f = null;
     }
 
     function XVMShowDamage(curHealth, delta)

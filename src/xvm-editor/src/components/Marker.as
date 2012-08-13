@@ -29,13 +29,6 @@
         [Embed(source="../assets/markers.swf", mimeType="application/octet-stream")]
         private const markersSWF: Class;
 
-        // TODO: $FieldFont, $TextFont
-        /*[Embed(source="../assets/gfxfontlib.swf", symbol="$FieldFont")]
-        private const $FieldFont: Class;
-
-        [Embed(source="../assets/gfxfontlib.swf", symbol="$TextFont")]
-        private const $TextFont: Class;*/
-
         [Embed(source="images/markers/clan1.png")]
         private const IMG_clan1: Class;
         [Embed(source="images/markers/clan2.png")]
@@ -161,8 +154,7 @@
         private function CreateMC(className: String):MovieClip
         {
             var mc:MovieClip = new (loader.getClass(className))() as MovieClip;
-            var dow:DisplayObjectWrapper = new DisplayObjectWrapper();
-            dow.content = mc;
+            var dow:DisplayObjectWrapper = new DisplayObjectWrapper(mc);
             dow.content.visible = false;
             addElement(dow);
             return mc;
@@ -338,342 +330,342 @@
             mc.gotoAndPlay(0);
         }
 
-    // Damage Visualization
-    private function removeTextField(f: TextField):void
-    {
-        this.removeChild(f);
-    }
+        // Damage Visualization
+        private function removeTextField(f: TextField):void
+        {
+            damageHolder.removeChild(f);
+        }
 
-    private function XVMShowDamage(curHealth:Number, delta:Number):void
-    {
-        var cfg:Object = _cfg.damageText;
+        private function XVMShowDamage(curHealth:Number, delta:Number):void
+        {
+            var cfg:Object = _cfg.damageText;
 
-        if (!cfg.visible)
-            return;
-
-        var msg:String = (curHealth < 0) ? cfg.blowupMessage : cfg.damageMessage;
-        var text:String = XVMFormatDynamicText(XVMFormatStaticText(msg), curHealth, delta);
-
-        var damageField: TextField = new TextField();
-        damageHolder.addChild(damageField);
-
-        damageField.width = 140;
-        damageField.height = 20;
-
-        damageField.text = " " + text + " ";
-        damageField.antiAliasType = AntiAliasType.ADVANCED;
-        damageField.border = false;
-        damageField.defaultTextFormat = XVMCreateNewTextFormat(cfg.font);
-        damageField.text = " " + text + " ";
-        damageField.textColor = !isNaN(parseInt(cfg.color)) ? int(cfg.color)
-            : Config.s_config.colors.system[_vtype + "_alive_" + (s_isColorBlindMode ? "blind" : "normal")];
-        damageField.x = -(damageField.width >> 1);
-        damageField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
-
-        var st:Number = (new Date()).time;
-        var timer:Timer = new Timer(10);
-        var timerFunc:Function = function():void {
-            var d:Number = (new Date()).time - st;
-            if (d > cfg.speed * 1000)
-            {
-                damageHolder.removeChild(damageField);
-                timer.stop();
-                timer.removeEventListener(TimerEvent.TIMER, timerFunc);
-                timer = null;
-                timerFunc = null;
+            if (!cfg.visible)
                 return;
-            }
-            damageField.y = cfg.maxRange * (cfg.speed * 1000 - d) / (cfg.speed * 1000) - cfg.maxRange;
-        };
-        timer.addEventListener(TimerEvent.TIMER, timerFunc, false, 0, true);
-        timer.start();
-    }
 
-    // Health Visualization
-    private var dmgTimer:Timer = new Timer(10);
-    private var dmgTimerFunc:Function = null;
-    private function XVMSetupNewHealth(curHealth:Number):void
-    {
-        dmgTimer.stop();
-        if (dmgTimerFunc != null)
-        {
-            dmgTimer.removeEventListener(TimerEvent.TIMER, dmgTimerFunc);
-            dmgTimerFunc = null;
-        }
+            var msg:String = (curHealth < 0) ? cfg.blowupMessage : cfg.damageMessage;
+            var text:String = XVMFormatDynamicText(XVMFormatStaticText(msg), curHealth, delta);
 
-        XVMUpdateHealthBar(curHealth); // colorizing health bar after taking damage
+            var damageField: TextField = new TextField();
+            damageHolder.addChild(damageField);
 
-        var delta: Number = curHealth - m_curHealth;
-        if (delta >= 0)
-        {
-            m_curHealth = curHealth;
-            xvmHBDamage.graphics.clear();
-            return;
-        }
+            damageField.width = 140;
+            damageField.height = 20;
 
-        XVMShowDamage(curHealth, -delta);
+            damageField.text = " " + text + " ";
+            damageField.antiAliasType = AntiAliasType.ADVANCED;
+            damageField.border = false;
+            damageField.embedFonts = cfg.font.name == "$FieldFont";
+            damageField.defaultTextFormat = XVMCreateNewTextFormat(cfg.font);
+            damageField.text = " " + text + " ";
+            damageField.textColor = !isNaN(parseInt(cfg.color)) ? int(cfg.color)
+                : Config.s_config.colors.system[_vtype + "_alive_" + (s_isColorBlindMode ? "blind" : "normal")];
+            damageField.x = -(damageField.width >> 1);
+            damageField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
 
-        m_curHealth = curHealth;
-
-        //Flow bar animation
-        var cfg:Object = _cfg.healthBar;
-        if (cfg.damage.fade > 0)
-        {
-            var fade:Number = cfg.damage.fade * 1000;
-            var color:Number = XVMFormatDynamicColor(cfg.damage.color, curHealth);
-            var alpha:Number = XVMFormatDynamicAlpha(cfg.damage.alpha, curHealth) / 100;
             var st:Number = (new Date()).time;
-            var drawing: Boolean = false;
-            dmgTimerFunc = function():void
-            {
-                if (drawing)
-                    return;
-                drawing = true;
+            var timer:Timer = new Timer(10);
+            var timerFunc:Function = function():void {
                 var d:Number = (new Date()).time - st;
-                var w:Number = cfg.width * (-delta / m_maxHealth) * (fade - d) / fade;
-                xvmHBDamage.graphics.clear();
-                if (w <= 0)
+                if (d > cfg.speed * 1000)
                 {
-                    dmgTimer.stop();
-                    dmgTimer.removeEventListener(TimerEvent.TIMER, dmgTimerFunc);
+                    damageHolder.removeChild(damageField);
+                    timer.stop();
+                    timer.removeEventListener(TimerEvent.TIMER, timerFunc);
+                    timer = null;
+                    timerFunc = null;
                     return;
                 }
-                xvmHBDamage.graphics.beginFill(color, alpha);
-                xvmHBDamage.graphics.drawRect(
-                    cfg.border.size + cfg.width * (1.0 * curHealth / m_maxHealth) - 1, cfg.border.size,
-                    w, cfg.height);
-                xvmHBDamage.graphics.endFill();
-                drawing = false;
+                damageField.y = cfg.maxRange * (cfg.speed * 1000 - d) / (cfg.speed * 1000) - cfg.maxRange;
             };
-            dmgTimer.addEventListener(TimerEvent.TIMER, dmgTimerFunc, false, 0, true);
-            dmgTimer.start();
+            timer.addEventListener(TimerEvent.TIMER, timerFunc);
+            timer.start();
         }
-    }
 
-    private function XVMUpdateUI(curHealth:Number):void
-    {
-        xvmHBFill.scaleX = Math.min(curHealth / m_maxHealth * 100, 100) / 100;
-
-        for (var i1:String in textFields)
-            removeChild(textFields[i1]);
-
-        textFields = [];
-        for (var i:String in _cfg.textFields)
+        // Health Visualization
+        private var dmgTimer:Timer = new Timer(10);
+        private var dmgTimerFunc:Function = null;
+        private function XVMSetupNewHealth(curHealth:Number):void
         {
-            var cfg:Object = _cfg.textFields[i];
-            if (cfg.visible)
+            dmgTimer.stop();
+            if (dmgTimerFunc != null)
             {
-                var tf:TextField = XVMCreateTextField(cfg);
-                tf.text = XVMFormatDynamicText(XVMFormatStaticText(cfg.format), curHealth);
-                tf.textColor = XVMFormatDynamicColor(cfg.color, curHealth);
-                tf.alpha = XVMFormatDynamicAlpha(cfg.alpha, curHealth) / 100;
-                rawChildren.addChild(tf);
-                textFields.push(tf);
+                dmgTimer.removeEventListener(TimerEvent.TIMER, dmgTimerFunc);
+                dmgTimerFunc = null;
+            }
+
+            XVMUpdateHealthBar(curHealth); // colorizing health bar after taking damage
+
+            var delta: Number = curHealth - m_curHealth;
+            if (delta >= 0)
+            {
+                m_curHealth = curHealth;
+                xvmHBDamage.graphics.clear();
+                return;
+            }
+
+            XVMShowDamage(curHealth, -delta);
+
+            m_curHealth = curHealth;
+
+            //Flow bar animation
+            var cfg:Object = _cfg.healthBar;
+            if (cfg.damage.fade > 0)
+            {
+                var fade:Number = cfg.damage.fade * 1000;
+                var color:Number = XVMFormatDynamicColor(cfg.damage.color, curHealth);
+                var alpha:Number = XVMFormatDynamicAlpha(cfg.damage.alpha, curHealth) / 100;
+                var st:Number = (new Date()).time;
+                var drawing: Boolean = false;
+                dmgTimerFunc = function():void
+                {
+                    if (drawing)
+                        return;
+                    drawing = true;
+                    var d:Number = (new Date()).time - st;
+                    var w:Number = cfg.width * (-delta / m_maxHealth) * (fade - d) / fade;
+                    xvmHBDamage.graphics.clear();
+                    if (w <= 0)
+                    {
+                        dmgTimer.stop();
+                        dmgTimer.removeEventListener(TimerEvent.TIMER, dmgTimerFunc);
+                        dmgTimerFunc = null;
+                        return;
+                    }
+                    xvmHBDamage.graphics.beginFill(color, alpha);
+                    xvmHBDamage.graphics.drawRect(
+                        cfg.border.size + cfg.width * (1.0 * curHealth / m_maxHealth) - 1, cfg.border.size,
+                        w, cfg.height);
+                    xvmHBDamage.graphics.endFill();
+                    drawing = false;
+                };
+                dmgTimer.addEventListener(TimerEvent.TIMER, dmgTimerFunc);
+                dmgTimer.start();
             }
         }
-    }
 
-    private function XVMUpdateHealthBar(curHealth:Number):void
-    {
-        var cfg:Object = _cfg.healthBar;
+        private function XVMUpdateUI(curHealth:Number):void
+        {
+            xvmHBFill.scaleX = Math.min(curHealth / m_maxHealth * 100, 100) / 100;
 
-        xvmHB.alpha = XVMFormatDynamicAlpha(cfg.alpha, curHealth) / 100;
+            for (var i1:String in textFields)
+                removeChild(textFields[i1]);
 
-        var ct:String = XVMFormatStaticColorText(cfg.color);
-        var lct:String = XVMFormatStaticColorText(cfg.lcolor);
-        var fullColor: Number = XVMFormatDynamicColor(ct, curHealth);
-        var lowColor: Number = XVMFormatDynamicColor(lct || ct, curHealth);
+            textFields = [];
+            for (var i:String in _cfg.textFields)
+            {
+                var cfg:Object = _cfg.textFields[i];
+                if (cfg.visible)
+                {
+                    var tf:TextField = XVMCreateTextField(cfg);
+                    tf.text = XVMFormatDynamicText(XVMFormatStaticText(cfg.format), curHealth);
+                    tf.textColor = XVMFormatDynamicColor(cfg.color, curHealth);
+                    tf.alpha = XVMFormatDynamicAlpha(cfg.alpha, curHealth) / 100;
+                    rawChildren.addChild(tf);
+                    textFields.push(tf);
+                }
+            }
+        }
 
-        var percent: Number = curHealth / m_maxHealth;
+        private function XVMUpdateHealthBar(curHealth:Number):void
+        {
+            var cfg:Object = _cfg.healthBar;
 
-        // determ current (real-time) color
-        var currColor:Number = GraphicsUtil.colorByRatio(percent, lowColor, fullColor);
+            xvmHB.alpha = XVMFormatDynamicAlpha(cfg.alpha, curHealth) / 100;
 
-        xvmHBBorder.graphics.clear();
-        xvmHBFill.graphics.clear();
-        xvmHBDamage.graphics.clear();
+            var ct:String = XVMFormatStaticColorText(cfg.color);
+            var lct:String = XVMFormatStaticColorText(cfg.lcolor);
+            var fullColor: Number = XVMFormatDynamicColor(ct, curHealth);
+            var lowColor: Number = XVMFormatDynamicColor(lct || ct, curHealth);
 
-        xvmHBBorder.graphics.beginFill(XVMFormatDynamicColor(cfg.border.color, curHealth), 1);
-        xvmHBBorder.graphics.drawRect(0, 0, cfg.width + cfg.border.size * 2, cfg.height + cfg.border.size * 2);
-        xvmHBBorder.graphics.endFill();
-        xvmHBBorder.alpha = XVMFormatDynamicAlpha(cfg.border.alpha, curHealth) / 100;
+            var percent: Number = curHealth / m_maxHealth;
 
-        xvmHBFill.graphics.beginFill(currColor, 1);
-        xvmHBFill.graphics.drawRect(cfg.border.size, cfg.border.size, cfg.width, cfg.height);
-        xvmHBFill.graphics.endFill();
-        xvmHBFill.alpha = XVMFormatDynamicAlpha(cfg.fill.alpha, curHealth) / 100;
-    }
+            // determ current (real-time) color
+            var currColor:Number = GraphicsUtil.colorByRatio(percent, lowColor, fullColor);
 
-    private function XVMFormatDynamicAlpha(format: String, curHealth: Number): Number
-    {
-        if (!format)
-            return 100;
+            xvmHBBorder.graphics.clear();
+            xvmHBFill.graphics.clear();
+            xvmHBDamage.graphics.clear();
 
-        if (!isNaN(parseInt(format)))
-            return int(format);
+            xvmHBBorder.graphics.beginFill(XVMFormatDynamicColor(cfg.border.color, curHealth), 1);
+            xvmHBBorder.graphics.drawRect(0, 0, cfg.width + cfg.border.size * 2, cfg.height + cfg.border.size * 2);
+            xvmHBBorder.graphics.endFill();
+            xvmHBBorder.alpha = XVMFormatDynamicAlpha(cfg.border.alpha, curHealth) / 100;
 
-        var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
-        var formatArr:Array = format.split("{{a:hp}}");
-        if (formatArr.length > 1)
-            format = formatArr.join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, curHealth).toString());
-        formatArr = format.split("{{a:hp-ratio}}");
-        if (formatArr.length > 1)
-            format = formatArr.join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hpRatio).toString());
-        formatArr = format.split("{{a:hp_ratio}}");
-        if (formatArr.length > 1)
-            format = formatArr.join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hpRatio).toString());
+            xvmHBFill.graphics.beginFill(currColor, 1);
+            xvmHBFill.graphics.drawRect(cfg.border.size, cfg.border.size, cfg.width, cfg.height);
+            xvmHBFill.graphics.endFill();
+            xvmHBFill.alpha = XVMFormatDynamicAlpha(cfg.fill.alpha, curHealth) / 100;
+        }
 
-        var n:Number = !isNaN(parseInt(format)) ? int(format) : 100;
-        return (n <= 0) ? 1 : (n > 100) ? 100 : n;
-    }
+        private function XVMFormatDynamicAlpha(format: String, curHealth: Number): Number
+        {
+            if (!format)
+                return 100;
 
-    private function get pname():String
-    {
-        return "Player" + (_vtype == "ally" ? "Ally" : "Enemy");
-    }
+            if (!isNaN(parseInt(format)))
+                return int(format);
 
-    private function XVMFormatStaticText(format: String): String
-    {
-        // AS 2 doesn't have String.replace? Shame on them. Let's use our own square wheel.
-        format = format.split("{{nick}}").join(pname);
-        format = format.split("{{vehicle}}").join(_vdead ? "Hummel" : _vtype == "ally" ? "IS-3" : "Ferdinand");
-        format = format.split("{{level}}").join(String(_vdead ? "5" : "8"));
+            var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
+            var formatArr:Array = format.split("{{a:hp}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, curHealth).toString());
+            formatArr = format.split("{{a:hp-ratio}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hpRatio).toString());
+            formatArr = format.split("{{a:hp_ratio}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hpRatio).toString());
 
-        format = format.split("{{kb}}").join("4k");
-        format = format.split("{{battles}}").join("4321");
-        format = format.split("{{wins}}").join("3210");
-        format = format.split("{{rating}}").join("48%");
-        format = format.split("{{eff}}").join("1234");
+            var n:Number = !isNaN(parseInt(format)) ? int(format) : 100;
+            return (n <= 0) ? 1 : (n > 100) ? 100 : n;
+        }
 
-        format = format.split("{{t-kb}}").join("1k");
-        format = format.split("{{t-kb-0}}").join("1.1k");
-        format = format.split("{{t-hb}}").join("12h");
-        format = format.split("{{t-battles}}").join("1234");
-        format = format.split("{{t-wins}}").join("1000");
-        format = format.split("{{t-rating}}").join("54%");
+        private function get pname():String
+        {
+            return "Player" + (_vtype == "ally" ? "Ally" : "Enemy");
+        }
 
-        // This code is stupid, and needs to be rewritten
-        format = format.split("{{kb:3}}").join(" 4k");
-        format = format.split("{{rating:3}}").join("48%");
-        format = format.split("{{eff:4}}").join("1234");
+        private function XVMFormatStaticText(format: String): String
+        {
+            // AS 2 doesn't have String.replace? Shame on them. Let's use our own square wheel.
+            format = format.split("{{nick}}").join(pname);
+            format = format.split("{{vehicle}}").join(_vdead ? "Hummel" : _vtype == "ally" ? "IS-3" : "Ferdinand");
+            format = format.split("{{level}}").join(String(_vdead ? "5" : "8"));
 
-        format = format.split("{{t-kb:4}}").join("  1k");
-        format = format.split("{{t_kb:4}}").join("  1k");
-        format = format.split("{{t-hb:3}}").join("12h");
-        format = format.split("{{t_hb:3}}").join("12h");
-        format = format.split("{{t-battles:4}}").join("1234");
-        format = format.split("{{t_battles:4}}").join("1234");
-        format = format.split("{{t-rating:3}}").join("54%");
-        format = format.split("{{t_rating:3}}").join("54%");
+            format = format.split("{{kb}}").join("4k");
+            format = format.split("{{battles}}").join("4321");
+            format = format.split("{{wins}}").join("3210");
+            format = format.split("{{rating}}").join("48%");
+            format = format.split("{{eff}}").join("1234");
 
-        return format;
-    }
+            format = format.split("{{t-kb}}").join("1k");
+            format = format.split("{{t-kb-0}}").join("1.1k");
+            format = format.split("{{t-hb}}").join("12h");
+            format = format.split("{{t-battles}}").join("1234");
+            format = format.split("{{t-wins}}").join("1000");
+            format = format.split("{{t-rating}}").join("54%");
 
-    private function XVMFormatDynamicText(format: String, curHealth: Number, delta: Number = 0): String
-    {
-        if (format.indexOf("{{") == -1)
+            // This code is stupid, and needs to be rewritten
+            format = format.split("{{kb:3}}").join(" 4k");
+            format = format.split("{{rating:3}}").join("48%");
+            format = format.split("{{eff:4}}").join("1234");
+
+            format = format.split("{{t-kb:4}}").join("  1k");
+            format = format.split("{{t_kb:4}}").join("  1k");
+            format = format.split("{{t-hb:3}}").join("12h");
+            format = format.split("{{t_hb:3}}").join("12h");
+            format = format.split("{{t-battles:4}}").join("1234");
+            format = format.split("{{t_battles:4}}").join("1234");
+            format = format.split("{{t-rating:3}}").join("54%");
+            format = format.split("{{t_rating:3}}").join("54%");
+
             return format;
+        }
 
-        var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
-        format = format.split("{{hp}}").join(String(curHealth));
-        format = format.split("{{hp-max}}").join(String(m_maxHealth));
-        format = format.split("{{hp-ratio}}").join(String(hpRatio));
+        private function XVMFormatDynamicText(format: String, curHealth: Number, delta: Number = 0): String
+        {
+            if (format.indexOf("{{") == -1)
+                return format;
 
-        var dmgRatio: Number = delta ? Math.ceil(delta / m_maxHealth * 100) : 0;
-        format = format.split("{{dmg}}").join(delta ? String(delta) : "");
-        format = format.split("{{dmg-ratio}}").join(delta ? String(dmgRatio) : "");
+            var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
+            format = format.split("{{hp}}").join(String(curHealth));
+            format = format.split("{{hp-max}}").join(String(m_maxHealth));
+            format = format.split("{{hp-ratio}}").join(String(hpRatio));
 
-        return format;
-    }
+            var dmgRatio: Number = delta ? Math.ceil(delta / m_maxHealth * 100) : 0;
+            format = format.split("{{dmg}}").join(delta ? String(delta) : "");
+            format = format.split("{{dmg-ratio}}").join(delta ? String(dmgRatio) : "");
 
-    private function XVMCreateNewTextFormat(config_font: Object): TextFormat
-    {
-        var name:String = config_font.name || "$FieldFont";
-        if (name == "$FieldFont")
-            name = "Arial";
-        else if (name == "$TextFont")
-            name = "Tahoma";
-        return new TextFormat(
-            name,
-            config_font.size || 13,
-            0x000000,
-            config_font.bold,
-            false, false, null, null,
-            config_font.align || "center",
-            0, 0, 0, 0);
-    }
-
-    private function XVMCreateTextField(cfg:Object):TextField
-    {
-        var textField: TextField = new TextField();
-        textField.width = 140;
-        textField.height = 31;
-
-        textField.selectable = false;
-        textField.multiline = false;
-        textField.wordWrap = false;
-        textField.defaultTextFormat = XVMCreateNewTextFormat(cfg.font);
-        textField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
-
-        var staticColor:String = XVMFormatStaticColorText(cfg.color);
-        textField.textColor = XVMFormatDynamicColor(staticColor, m_curHealth);
-        textField.alpha = XVMFormatDynamicAlpha(cfg.alpha, m_curHealth) / 100;
-        textField.x = cfg.x - (textField.width >> 1);
-        textField.y = cfg.y - (textField.height >> 1);
-        textField.visible = cfg.visible;
-
-        return textField;
-    }
-
-    private function XVMFormatDynamicColor(format: String, curHealth: Number): Number
-    {
-        var systemColorName: String = _vtype + "_";
-        systemColorName += !_vdead ? "alive_" : m_curHealth < 0 ? "blowedup_" : "dead_";
-        systemColorName += s_isColorBlindMode ? "blind" : "normal";
-        var systemColor:Number = Config.s_config.colors.system[systemColorName];
-
-        if (!format)
-            return systemColor;
-
-        if (!isNaN(parseInt(format)))
-            return int(format);
-
-        var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
-        var formatArr:Array = format.split("{{c:hp}}");
-        if (formatArr.length > 1)
-            format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth, "0x"))
-        formatArr = format.split("{{c:hp-ratio}}");
-        if (formatArr.length > 1)
-            format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"))
-        formatArr = format.split("{{c:hp_ratio}}");
-        if (formatArr.length > 1)
-            format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"))
-        return !isNaN(parseInt(format)) ? int(format) : systemColor;
-    }
-
-    private function XVMFormatStaticColorText(format: String): String
-    {
-        if (!format || !isNaN(parseInt(format)))
             return format;
+        }
 
-        // Dynamic colors
-        format = format.split("{{c:eff}}").join(
-            GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, 1234, "#", _vdead));
-        format = format.split("{{c:rating}}").join(
-            GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 48, "#", _vdead));
-        format = format.split("{{c:kb}}").join(
-            GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, 1, "#", _vdead));
-        format = format.split("{{c:t-rating}}").join(
-            GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 54, "#", _vdead));
-        format = format.split("{{c:t_rating}}").join(
-            GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 54, "#", _vdead));
-        format = format.split("{{c:t-battles}}").join(
-            GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, 1234, "#", _vdead));
-        format = format.split("{{c:t_battles}}").join(
-            GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, 1234, "#", _vdead));
+        private function XVMCreateNewTextFormat(config_font: Object): TextFormat
+        {
+            var name:String = config_font.name || "$FieldFont";
+            if (name == "$TextFont")
+                name = "Tahoma";
+            return new TextFormat(
+                name,
+                config_font.size || 13,
+                0x000000,
+                config_font.bold,
+                false, false, null, null,
+                config_font.align || "center",
+                0, 0, 0, 0);
+        }
 
-        return format;
+        private function XVMCreateTextField(cfg:Object):TextField
+        {
+            var textField: TextField = new TextField();
+            textField.width = 140;
+            textField.height = 31;
+
+            textField.selectable = false;
+            textField.multiline = false;
+            textField.wordWrap = false;
+            textField.embedFonts = cfg.font.name == "$FieldFont";
+            textField.defaultTextFormat = XVMCreateNewTextFormat(cfg.font);
+            textField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
+
+            var staticColor:String = XVMFormatStaticColorText(cfg.color);
+            textField.textColor = XVMFormatDynamicColor(staticColor, m_curHealth);
+            textField.alpha = XVMFormatDynamicAlpha(cfg.alpha, m_curHealth) / 100;
+            textField.x = cfg.x - (textField.width >> 1);
+            textField.y = cfg.y - (textField.height >> 1);
+            textField.visible = cfg.visible;
+
+            return textField;
+        }
+
+        private function XVMFormatDynamicColor(format: String, curHealth: Number): Number
+        {
+            var systemColorName: String = _vtype + "_";
+            systemColorName += !_vdead ? "alive_" : m_curHealth < 0 ? "blowedup_" : "dead_";
+            systemColorName += s_isColorBlindMode ? "blind" : "normal";
+            var systemColor:Number = Config.s_config.colors.system[systemColorName];
+
+            if (!format)
+                return systemColor;
+
+            if (!isNaN(parseInt(format)))
+                return int(format);
+
+            var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
+            var formatArr:Array = format.split("{{c:hp}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth, "0x"))
+            formatArr = format.split("{{c:hp-ratio}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"))
+            formatArr = format.split("{{c:hp_ratio}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"))
+            return !isNaN(parseInt(format)) ? int(format) : systemColor;
+        }
+
+        private function XVMFormatStaticColorText(format: String): String
+        {
+            if (!format || !isNaN(parseInt(format)))
+                return format;
+
+            // Dynamic colors
+            format = format.split("{{c:eff}}").join(
+                GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, 1234, "#", _vdead));
+            format = format.split("{{c:rating}}").join(
+                GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 48, "#", _vdead));
+            format = format.split("{{c:kb}}").join(
+                GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, 1, "#", _vdead));
+            format = format.split("{{c:t-rating}}").join(
+                GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 54, "#", _vdead));
+            format = format.split("{{c:t_rating}}").join(
+                GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 54, "#", _vdead));
+            format = format.split("{{c:t-battles}}").join(
+                GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, 1234, "#", _vdead));
+            format = format.split("{{c:t_battles}}").join(
+                GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, 1234, "#", _vdead));
+
+            return format;
+        }
     }
-    }
-
 }
