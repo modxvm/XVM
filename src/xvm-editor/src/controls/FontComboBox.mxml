@@ -2,8 +2,7 @@
 <a:ValueControl xmlns:fx="http://ns.adobe.com/mxml/2009"
     xmlns:s="library://ns.adobe.com/flex/spark"
     xmlns:mx="library://ns.adobe.com/flex/mx"
-    xmlns:a="controls.*"
-    creationComplete="init(event)">
+    xmlns:a="controls.*">
     <fx:Script>
         <![CDATA[
             import mx.collections.ArrayCollection;
@@ -13,7 +12,7 @@
 
             private var internalFonts:Array = ["$FieldFont", "$TextFont"]; // TODO: Add all internal fonts
 
-            protected function init(event:FlexEvent):void
+            protected function init():void
             {
                 var fontList:ArrayCollection = new ArrayCollection(Font.enumerateFonts(true));
                 var fontSort:Sort = new Sort();
@@ -33,12 +32,25 @@
                 edit.dropdown.variableRowHeight = true;
             }
 
+            // IValueControl: value
+            private var _value:*;
+            [Bindable]
+            public override function get value():*
+            {
+                return _value;
+            }
+            public override function set value(v:*):void
+            {
+                _value = v;
+            }
+
             protected override function onChange(event:Event):void
             {
-                value = edit.text;
+                value = edit.value;
                 super.onChange(event);
             }
         ]]>
     </fx:Script>
-    <mx:ComboBox id="edit" selectedIndex="0" dropdownWidth="300" rowCount="9" text="{value}" close="onChange(event)" change="onChange(event)"/>
+    <mx:ComboBox id="edit" selectedIndex="0" dropdownWidth="300" rowCount="9" selectedItem="{value}"
+        creationComplete="init()" close="onChange(event)" change="onChange(event)"/>
 </a:ValueControl>

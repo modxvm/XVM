@@ -4,17 +4,17 @@ package utils
     {
         // fonts
         [Embed(source="../assets/Zurich Condensed.ttf", fontName="$FieldFont",
-            fontStyle="normal", fontWeight="normal", embedAsCFF="false")]
+            fontStyle="normal", fontWeight="normal", embedAsCFF="true")]
         private static var $FieldFontClass1:Class;
         [Embed(source="../assets/Zurich Bold Condensed.ttf", fontName="$FieldFont",
-            fontStyle="normal", fontWeight="bold", embedAsCFF="false")]
+            fontStyle="normal", fontWeight="bold", embedAsCFF="true")]
         private static var $FieldFontClass2:Class;
-        [Embed(source="../assets/Zurich Condensed Italic.ttf", fontName="$FieldFont",
-            fontStyle="italic", fontWeight="bold", embedAsCFF="false")]
-        private static var $FieldFontClass3:Class;
-        [Embed(source="../assets/Zurich Bold Condensed Italic.ttf", fontName="$FieldFont",
-            fontStyle="italic", fontWeight="normal", embedAsCFF="false")]
-        private static var $FieldFontClass4:Class;
+//        [Embed(source="../assets/Zurich Condensed Italic.ttf", fontName="$FieldFont",
+//            fontStyle="italic", fontWeight="bold", embedAsCFF="true")]
+//        private static var $FieldFontClass3:Class;
+//        [Embed(source="../assets/Zurich Bold Condensed Italic.ttf", fontName="$FieldFont",
+//            fontStyle="italic", fontWeight="normal", embedAsCFF="true")]
+//        private static var $FieldFontClass4:Class;
 
         [Embed("images/syscolors.png")]
         public static const syscolors:Class;

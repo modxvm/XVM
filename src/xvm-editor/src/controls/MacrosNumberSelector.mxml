@@ -15,7 +15,6 @@
             {
                 var v:String = macro.selectedItem.value;
                 macro.selectedItem = null;
-                //edit.text += v;;
             }
 
             private function comboBox_open(event:DropdownEvent):void

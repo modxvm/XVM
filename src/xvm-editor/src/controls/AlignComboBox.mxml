@@ -7,12 +7,12 @@
         <![CDATA[
             protected override function onChange(event:Event):void
             {
-                value = edit.text;
+                value = edit.value;
                 super.onChange(event);
             }
         ]]>
     </fx:Script>
-    <mx:ComboBox id="edit" selectedIndex="1" text="{value}" change="onChange(event)">
+    <mx:ComboBox id="edit" selectedIndex="1" selectedItem="{value}" change="onChange(event)">
         <mx:dataProvider>
             <mx:ArrayList>
                 <fx:String>left</fx:String>
