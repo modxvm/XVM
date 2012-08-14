@@ -598,12 +598,14 @@
         private function XVMCreateTextField(cfg:Object):TextField
         {
             var textField: TextField = new TextField();
-            textField.width = 140;
-            textField.height = 31;
+            textField.width = 139; // 1 less then in VMM.swf (Why not equal?)
+            textField.height = 30; // 1 less then in VMM.swf (Why not equal?)
 
             textField.selectable = false;
             textField.multiline = false;
             textField.wordWrap = false;
+            //textField.border = true;
+            //textField.borderColor = 0xFFFFFF;
             textField.embedFonts = cfg.font.name == "$FieldFont";
             textField.defaultTextFormat = XVMCreateNewTextFormat(cfg.font);
             textField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
@@ -612,7 +614,7 @@
             textField.textColor = XVMFormatDynamicColor(staticColor, m_curHealth);
             textField.alpha = XVMFormatDynamicAlpha(cfg.alpha, m_curHealth) / 100;
             textField.x = cfg.x - (textField.width / 2.0);
-            textField.y = cfg.y - (textField.height / 2.0) + 1;
+            textField.y = cfg.y - (textField.height / 2.0);
             textField.visible = cfg.visible;
 
             return textField;
