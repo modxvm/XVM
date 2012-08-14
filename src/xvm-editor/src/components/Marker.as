@@ -119,11 +119,6 @@
             contourIcon.visible = false;
             addChild(contourIcon);
 
-            clanIcon.includeInLayout = false;
-            clanIcon.source =  _vtype == "ally" ? new IMG_clan1() : new IMG_clan2();
-            clanIcon.visible = false;
-            addChild(clanIcon);
-
             loadSWF(markersSWF);
         }
 
@@ -147,6 +142,11 @@
             actionMarkerHelp = CreateMC("actionHelp");
             actionMarkerVictim = CreateMC("actionVictim");
             actionMarkerArta = CreateMC("actionArta");
+
+            clanIcon.includeInLayout = false;
+            clanIcon.source =  _vtype == "ally" ? new IMG_clan1() : new IMG_clan2();
+            clanIcon.visible = false;
+            addChild(clanIcon);
 
             addEventListener(Event.ENTER_FRAME, PostInit);
         }
@@ -261,8 +261,8 @@
             // contourIcon
             c = cfg.contourIcon;
             contourIcon.visible = c.visible;
-            contourIcon.x = c.x - contourIcon.width / 2;
-            contourIcon.y = c.y - contourIcon.height / 2;
+            contourIcon.x = c.x - contourIcon.width / 2.0;
+            contourIcon.y = c.y - contourIcon.height / 2.0;
             contourIcon.alpha = XVMFormatDynamicAlpha(c.alpha, m_curHealth) / 100;
             var tintColor: Number = c.color;
             var tintAmount: Number = Math.min(100, Math.max(0, c.amount)) * 0.01;
@@ -271,8 +271,8 @@
             // clanIcon
             c = cfg.clanIcon;
             clanIcon.visible = c.visible;
-            clanIcon.x = c.x - c.w / 2;
-            clanIcon.y = c.y - c.h / 2;
+            clanIcon.x = c.x - c.w / 2.0;
+            clanIcon.y = c.y - c.h / 2.0;
             clanIcon.width = c.w;
             clanIcon.height = c.h;
             clanIcon.alpha = XVMFormatDynamicAlpha(c.alpha, m_curHealth) / 100;
@@ -360,7 +360,7 @@
             damageField.text = " " + text + " ";
             damageField.textColor = !isNaN(parseInt(cfg.color)) ? int(cfg.color)
                 : Config.s_config.colors.system[_vtype + "_alive_" + (s_isColorBlindMode ? "blind" : "normal")];
-            damageField.x = -(damageField.width >> 1);
+            damageField.x = -(damageField.width / 2.0);
             damageField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
 
             var st:Number = (new Date()).time;
@@ -611,8 +611,8 @@
             var staticColor:String = XVMFormatStaticColorText(cfg.color);
             textField.textColor = XVMFormatDynamicColor(staticColor, m_curHealth);
             textField.alpha = XVMFormatDynamicAlpha(cfg.alpha, m_curHealth) / 100;
-            textField.x = cfg.x - (textField.width >> 1);
-            textField.y = cfg.y - (textField.height >> 1);
+            textField.x = cfg.x - (textField.width / 2.0);
+            textField.y = cfg.y - (textField.height / 2.0) + 1;
             textField.visible = cfg.visible;
 
             return textField;

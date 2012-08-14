@@ -71,6 +71,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
 
     function XVM()
     {
+        //Logger.addObject(_root, "_root", 2);
         //Logger.add("_global.gfxExtensions = " + _global.gfxExtensions);
         //Logger.add("_global.noInvisibleAdvance = " + _global.noInvisibleAdvance);
         if (!_global.noInvisibleAdvance)
@@ -601,7 +602,8 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             textField.wordWrap = false;
             textField.antiAliasType = "normal";
             //textField.antiAliasType = "advanced";
-            //textField.gridFitType = "none";
+            textField.gridFitType = "NONE";
+            textField._quality = "BEST";
             //textField.autoSize = "center"; // http://theolagendijk.com/2006/09/07/aligning-htmltext-inside-flash-textfield/
             var textFormat: TextFormat = XVMCreateNewTextFormat(cfg.font);
             textField.setNewTextFormat(textFormat);
@@ -610,8 +612,8 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             var staticColor = XVMFormatStaticColorText(cfg.color);
             textField.textColor = XVMFormatDynamicColor(staticColor, m_curHealth);
             textField._alpha = XVMFormatDynamicAlpha(cfg.alpha, m_curHealth);
-            textField._x = cfg.x - (textField._width >> 1);
-            textField._y = cfg.y - (textField._height >> 1);
+            textField._x = cfg.x - (textField._width / 2.0);
+            textField._y = cfg.y - (textField._height / 2.0);
             textField._visible = cfg.visible;
 
             return { field: textField, format: XVMFormatStaticText(cfg.format), alpha: cfg.alpha, color: staticColor };
@@ -657,7 +659,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             damageField.setTextFormat(XVMCreateNewTextFormat(cfg.font));
             damageField.textColor = isFinite(cfg.color) ? Number(cfg.color)
                 : Config.s_config.colors.system[m_entityName + "_alive_" + (s_isColorBlindMode ? "blind" : "normal")];
-            damageField._x = -(damageField._width >> 1);
+            damageField._x = -(damageField._width / 2.0);
             damageField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
 
             animation.insert(new TweenLite(damageField, cfg.speed, { _y: -cfg.maxRange, ease: Linear.easeOut } ), 0);
@@ -990,8 +992,8 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
                 visible = cfg.contourIcon.visible;
                 if (visible)
                 {
-                    iconLoader._x = cfg.contourIcon.x - (iconLoader.contentHolder._width >> 1);
-                    iconLoader._y = cfg.contourIcon.y - (iconLoader.contentHolder._height >> 1);
+                    iconLoader._x = cfg.contourIcon.x - (iconLoader.contentHolder._width / 2.0);
+                    iconLoader._y = cfg.contourIcon.y - (iconLoader.contentHolder._height / 2.0);
                     iconLoader._alpha = XVMFormatDynamicAlpha(cfg.contourIcon.alpha, m_curHealth);
                 }
                 iconLoader._visible = visible;
@@ -1004,8 +1006,8 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
                 if (visible)
                 {
                     var holder = m_clanIcon["holder"];
-                    holder._x = cfg.clanIcon.x - (cfg.clanIcon.w >> 1);
-                    holder._y = cfg.clanIcon.y - (cfg.clanIcon.h >> 1);
+                    holder._x = cfg.clanIcon.x - (cfg.clanIcon.w / 2.0);
+                    holder._y = cfg.clanIcon.y - (cfg.clanIcon.h / 2.0);
                     m_clanIcon.setSize(cfg.clanIcon.w, cfg.clanIcon.h);
                     holder._alpha = XVMFormatDynamicAlpha(cfg.clanIcon.alpha, m_curHealth);
                 }
