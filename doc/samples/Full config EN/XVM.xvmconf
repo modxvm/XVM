@@ -31,7 +31,7 @@
   // Options for player statistics (only with XVM-full)
   "rating": {
     "showPlayersStatistics": true,              // true - Toggle player statistics on/off. Global setting - without the statistics module, this is always disabled
-    "loadEnemyStatsInFogOfWar": false           // true - Enable downloading of data on opponents in the "fog of war"
+    "loadEnemyStatsInFogOfWar": true            // true - Enable downloading of data on opponents in the "fog of war"
   },
   // Parameters of the Battle Loading Screen
   "battleLoading": {

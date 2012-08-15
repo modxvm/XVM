@@ -1,5 +1,6 @@
 ﻿XVM-2.5.2.test3:
   * Removed coords grid (parameter battle.drawGrid)
+  * Statistics enabled by default
 
 XVM-2.5.2.test2:
   * bugfix
@@ -22,7 +23,7 @@ XVM-2.5.2.test1:
       players
   * config version increased: 1.4.0 => 1.5.0, because clan icons behavior
     was changed
-  * добавлены архивы с полными наборами иконок кланов:
+  * Full archive with all clans can be downloaded separately:
       http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-ru.zip (RU)
       http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-eu.zip (EU)
       http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-us.zip (US)

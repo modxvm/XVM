@@ -35,8 +35,8 @@ class wot.utils.DefaultConfig
         clanIconsFolder: "../../../clanicons" // Folder with clan icons
       },
       rating: {
-        showPlayersStatistics: false,    // Global switch. Handles whole statisctics module.
-        loadEnemyStatsInFogOfWar: false  // Load players data in "fog of war".
+        showPlayersStatistics: true,     // Global switch. Handles whole statisctics module.
+        loadEnemyStatsInFogOfWar: true   // Load players data in "fog of war".
       },
       battleLoading: {
         // Show clock at Battle Loading Screen.
