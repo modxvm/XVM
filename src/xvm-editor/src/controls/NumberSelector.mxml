@@ -10,11 +10,17 @@
 
             // minimum
             [Bindable]
-            public var minimum:int = 0;
+            public var minimum:Number = 0;
 
             // maximum
             [Bindable]
-            public var maximum:int = 10;
+            public var maximum:Number = 10;
+
+            [Bindable]
+            public var stepSize:Number = 1;
+
+            [Bindable]
+            public var isLogarithmic:Boolean = false;
 
             [Bindable]
             public var sliderVisible:Boolean = true;
@@ -28,12 +34,19 @@
                 value = edit.value;
                 super.onChange(event);
             }
+
+            // NumbericStepper bug workaround: http://forums.adobe.com/thread/831368
+            private function parseValue(value:String):Number
+            {
+                return Number(value.replace(",","."));
+            }
         ]]>
     </fx:Script>
     <s:NumericStepper id="stepper" width="52" height="{height}"
-        minimum="{minimum}" maximum="{maximum}"
+        minimum="{minimum}" maximum="{maximum}" snapInterval="{stepSize}" stepSize="{stepSize}"
+        valueParseFunction="parseValue"
         value="{value}" change="onChange(event)"/>
-    <s:HSlider id="edit" width="100%" y="4"
+    <s:HSlider id="edit" width="100%" y="4" snapInterval="{stepSize}" stepSize="{stepSize}"
         minimum="{minimum}" maximum="{maximum}" visible="{sliderVisible}"
         value="{value}" change="onChange(event)"/>
 </a:ValueControl>

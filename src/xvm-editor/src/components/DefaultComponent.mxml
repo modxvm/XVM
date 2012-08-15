@@ -19,11 +19,11 @@
 
         // label
         [Bindable]
-        public var label: String = "";
+        public var label:String = "";
 
         // labelWidth
         [Bindable]
-        public var labelWidth: String = "140";
+        public var labelWidth:String = "140";
 
         // conflict
         [Bindable]
@@ -31,15 +31,15 @@
 
         // config
         [Bindable]
-        public var config: String = null;
+        public var config:String = null;
 
         // minimum
         [Bindable]
-        public var minimum:int = 0;
+        public var minimum:Number = 0;
 
         // maximum
         [Bindable]
-        public var maximum:int = 10;
+        public var maximum:Number = 100;
 
         // value
         private var _value:*;
