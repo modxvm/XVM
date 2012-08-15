@@ -10,15 +10,15 @@ package utils
             fontStyle="normal", fontWeight="bold", embedAsCFF="false")]
         private static var $FieldFontClass4:Class;*/
 
-        [Embed(source="../assets/HeliosCond.otf", fontFamily="$FieldFont",
+        [Embed(source="../assets/HeliosCondC.otf", fontFamily="$FieldFont",
             fontStyle="normal", fontWeight="normal", embedAsCFF="false")]
         private static var $FieldFontClassNormal:Class;
-        [Embed(source="../assets/HeliosCond-Bold.otf", fontFamily="$FieldFont",
+        [Embed(source="../assets/HeliosCondC-Bold.otf", fontFamily="$FieldFont",
             fontStyle="normal", fontWeight="bold", embedAsCFF="false")]
         private static var $FieldFontClassBold:Class;
 
-        [Embed(source="../assets/HeliosCond.otf", fontFamily="$FieldFont",
-            fontStyle="normal", fontWeight="normal", embedAsCFF="false")]
+        [Embed(source="../assets/HeliosCondC.otf", fontFamily="$FieldFont",
+            fontStyle="normal", fontWeight="normal", embedAsCFF="true")]
         private static var $FieldFontClassCFF:Class;
 
         [Embed("images/syscolors.png")]

@@ -25,7 +25,7 @@
     import utils.DisplayObjectWrapper;
     import utils.GraphicsUtil;
 
-    public class Marker extends Canvas
+    public class Marker extends UIComponent
     {
         [Embed(source="../assets/markers.swf", mimeType="application/octet-stream")]
         private const markersSWF: Class;
@@ -157,7 +157,7 @@
             var mc:MovieClip = new (loader.getClass(className))() as MovieClip;
             var dow:DisplayObjectWrapper = new DisplayObjectWrapper(mc);
             dow.content.visible = false;
-            addElement(dow);
+            addChild(dow);
             return mc;
         }
 
@@ -462,7 +462,7 @@
                     tf.text = XVMFormatDynamicText(XVMFormatStaticText(cfg.format), curHealth);
                     tf.textColor = XVMFormatDynamicColor(cfg.color, curHealth);
                     tf.alpha = XVMFormatDynamicAlpha(cfg.alpha, curHealth) / 100;
-                    rawChildren.addChild(tf);
+                    addChild(tf);
                     textFields.push(tf);
                 }
             }
@@ -599,13 +599,15 @@
         private function XVMCreateTextField(cfg:Object):TextField
         {
             var textField: TextField = new TextField();
-            textField.width = 139; // 1 less then in VMM.swf (Why not equal?)
-            textField.height = 30; // 1 less then in VMM.swf (Why not equal?)
+            textField.width = 140;
+            textField.height = 30;
+            //textField.height = cfg.font.size + 4;
 
             textField.selectable = false;
             textField.multiline = false;
             textField.wordWrap = false;
-            textField.gridFitType = GridFitType.PIXEL;
+            //textField.antiAliasType = AntiAliasType.ADVANCED;
+            //textField.gridFitType = GridFitType.SUBPIXEL;
             //textField.border = true;
             //textField.borderColor = 0xFFFFFF;
             textField.embedFonts = !cfg.font.name || cfg.font.name == "$FieldFont";
@@ -617,6 +619,9 @@
             textField.alpha = XVMFormatDynamicAlpha(cfg.alpha, m_curHealth) / 100;
             textField.x = cfg.x - (textField.width / 2.0);
             textField.y = cfg.y - (textField.height / 2.0);
+            if (cfg.font.name != "$FieldFont")
+                textField.y--; // -1 to be equal with ScaleForm renderer
+
             textField.visible = cfg.visible;
 
             return textField;

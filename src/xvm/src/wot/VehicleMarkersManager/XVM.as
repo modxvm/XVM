@@ -595,6 +595,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         {
             var n = getNextHighestDepth();
             var textField: TextField = createTextField("textField" + n, n, 0, 0, 140, 31);
+//            var textField: TextField = createTextField("textField" + n, n, 0, 0, 140 + 1, cfg.font.size + 4 + 1); // +1 because of ScaleForm bug
             textField.html = false; // FIXIT: in html mode Font and Position are wrong.
             textField.embedFonts = false;
             textField.selectable = false;
@@ -604,8 +605,8 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             //textField.antiAliasType = "advanced";
             textField.gridFitType = "NONE";
             textField._quality = "BEST";
-//            textField.border = true;
-//            textField.borderColor = 0xFFFFFF;            
+            //textField.border = true;
+            //textField.borderColor = 0xFFFFFF;            
             //textField.autoSize = "center"; // http://theolagendijk.com/2006/09/07/aligning-htmltext-inside-flash-textfield/
             var textFormat: TextFormat = XVMCreateNewTextFormat(cfg.font);
             textField.setNewTextFormat(textFormat);
