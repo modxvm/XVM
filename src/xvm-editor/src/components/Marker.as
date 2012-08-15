@@ -6,6 +6,7 @@
     import flash.events.Event;
     import flash.events.TimerEvent;
     import flash.text.AntiAliasType;
+    import flash.text.GridFitType;
     import flash.text.TextField;
     import flash.text.TextFormat;
     import flash.utils.Timer;
@@ -530,7 +531,7 @@
         {
             // AS 2 doesn't have String.replace? Shame on them. Let's use our own square wheel.
             format = format.split("{{nick}}").join(pname);
-            format = format.split("{{vehicle}}").join(_vdead ? "Hummel" : _vtype == "ally" ? "IS-3" : "Ferdinand");
+            format = format.split("{{vehicle}}").join(_vdead ? "Hummel" : _vtype == "ally" ? "ИС-3" : "Ferdinand");
             format = format.split("{{level}}").join(String(_vdead ? "5" : "8"));
 
             format = format.split("{{kb}}").join("4k");
@@ -604,9 +605,10 @@
             textField.selectable = false;
             textField.multiline = false;
             textField.wordWrap = false;
+            textField.gridFitType = GridFitType.PIXEL;
             //textField.border = true;
             //textField.borderColor = 0xFFFFFF;
-            textField.embedFonts = cfg.font.name == "$FieldFont";
+            textField.embedFonts = !cfg.font.name || cfg.font.name == "$FieldFont";
             textField.defaultTextFormat = XVMCreateNewTextFormat(cfg.font);
             textField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
 

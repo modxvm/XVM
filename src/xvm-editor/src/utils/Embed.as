@@ -3,20 +3,22 @@ package utils
     public final class Embed
     {
         // fonts
-        [Embed(source="../assets/Zurich Condensed.ttf", fontName="$FieldFont",
+        /*[Embed(source="../assets/Zurich Condensed.ttf", fontFamily="$FieldFont",
+            fontStyle="normal", fontWeight="normal", embedAsCFF="false")]
+        private static var $FieldFontClass3:Class;
+        [Embed(source="../assets/Zurich Bold Condensed.ttf", fontFamily="$FieldFont",
+            fontStyle="normal", fontWeight="bold", embedAsCFF="false")]
+        private static var $FieldFontClass4:Class;*/
+
+        [Embed(source="../assets/HeliosCond.otf", fontFamily="$FieldFont",
             fontStyle="normal", fontWeight="normal", embedAsCFF="false")]
         private static var $FieldFontClassNormal:Class;
-        [Embed(source="../assets/Zurich Bold Condensed.ttf", fontName="$FieldFont",
+        [Embed(source="../assets/HeliosCond-Bold.otf", fontFamily="$FieldFont",
             fontStyle="normal", fontWeight="bold", embedAsCFF="false")]
         private static var $FieldFontClassBold:Class;
-        //        [Embed(source="../assets/Zurich Condensed Italic.ttf", fontName="$FieldFont",
-        //            fontStyle="italic", fontWeight="bold", embedAsCFF="true")]
-        //        private static var $FieldFontClass3:Class;
-        //        [Embed(source="../assets/Zurich Bold Condensed Italic.ttf", fontName="$FieldFont",
-        //            fontStyle="italic", fontWeight="normal", embedAsCFF="true")]
-        //        private static var $FieldFontClass4:Class;
-        [Embed(source="../assets/Zurich Condensed.ttf", fontName="$FieldFont",
-            fontStyle="normal", fontWeight="normal", embedAsCFF="true")]
+
+        [Embed(source="../assets/HeliosCond.otf", fontFamily="$FieldFont",
+            fontStyle="normal", fontWeight="normal", embedAsCFF="false")]
         private static var $FieldFontClassCFF:Class;
 
         [Embed("images/syscolors.png")]

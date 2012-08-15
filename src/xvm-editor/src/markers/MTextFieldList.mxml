@@ -215,9 +215,12 @@
                         return;
                     }
 
-                    var activeValue:Object = m_values[rbg.selectedValue.toString()];
-                    for each (var value:Object in activeValue.values)
-                        Config.SetValue(event.sender.config, event.sender.value, value);
+                    if (rbg.selectedValue != null)
+                    {
+                        var activeValue:Object = m_values[rbg.selectedValue.toString()];
+                        for each (var value:Object in activeValue.values)
+                            Config.SetValue(event.sender.config, event.sender.value, value);
+                    }
 
                     onChange(null);
 
@@ -229,7 +232,7 @@
                 }
                 catch (ex:Error)
                 {
-                    trace("ERROR: updateMarkerValue(): " + ex.toString());
+                    trace("ERROR: MTextFieldList.updateValue(): " + ex.toString());
                 }
             }
 
@@ -312,6 +315,8 @@
                     var defValue:Object = DefaultConfig.vehicleName_alive;
                     defValue.name = name;
                     defValue.format = resourceManager.getString('markers', 'TEXT');
+                    defValue.x = 0;
+                    defValue.y = 0;
                     for (var j:int = 0; j < m_values[name].states.length; ++j)
                         m_values[name].values.push(defValue);
                 }

@@ -14,7 +14,7 @@
         {
             super.data = value;
             setStyle("fontFamily", value == "$TextFont" ? "Tahoma" : value);
-            text = value as String;
+            text = (value as String);
             dispatchEvent(new FlexEvent(FlexEvent.DATA_CHANGE));
         }
     }

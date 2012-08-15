@@ -64,8 +64,8 @@
                 <mx:PopUpMenuButton itemClick="onExtraButtonClick(event)">
                     <mx:dataProvider>
                         <fx:Array>
-                            <fx:Object value="merge" label="{_('mergeConfigs')}" icon="@Embed(source='images/merge.png')" />
                             <fx:Object value="newconfig" label="{_('newConfig')}" icon="@Embed(source='images/filenew.png')"/>
+                            <fx:Object value="merge" label="{_('mergeConfigs')}" icon="@Embed(source='images/merge.png')" />
                         </fx:Array>
                     </mx:dataProvider>
                 </mx:PopUpMenuButton>
