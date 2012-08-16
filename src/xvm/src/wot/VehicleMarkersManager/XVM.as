@@ -581,7 +581,8 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
                 config_font.size || 13,
                 0x000000,
                 config_font.bold,
-                false, false, null, null,
+                config_font.italic,
+                false, null, null,
                 config_font.align || "center",
                 0, 0, 0, 0);
         }

@@ -10,15 +10,15 @@
     import flash.text.TextField;
     import flash.text.TextFormat;
     import flash.utils.Timer;
-    
+
     import mx.containers.Canvas;
     import mx.core.ScrollPolicy;
     import mx.core.UIComponent;
     import mx.events.FlexEvent;
     import mx.messaging.channels.StreamingAMFChannel;
-    
+
     import spark.components.Image;
-    
+
     import utils.ClassLoader;
     import utils.Config;
     import utils.Defines;
@@ -601,7 +601,8 @@
                 config_font.size || 13,
                 0x000000,
                 config_font.bold,
-                false, false, null, null,
+                config_font.italic,
+                false, null, null,
                 config_font.align || "center",
                 0, 0, 0, 0);
         }

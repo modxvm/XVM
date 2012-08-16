@@ -154,7 +154,7 @@
             public const ElementControls:Object = {
                 textFields: [ "m_textField", "m_textField_font", "m_textField_shadow" ],
                 m_textField: [ "v_visible", "v_name", "v_x", "v_y", "v_alpha", "v_color", "v_format" ],
-                m_textField_font: [ "v_name", "v_size", "v_align", "v_bold" ],
+                m_textField_font: [ "v_name", "v_size", "v_align", "v_bold", "v_italic" ],
                 m_textField_shadow: [ "v_size", "v_strength", "v_angle", "v_distance", "v_color", "v_alpha" ]
             };
 

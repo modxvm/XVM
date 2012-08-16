@@ -349,7 +349,8 @@ class wot.utils.DefaultConfig
       name: "$FieldFont",
       size: 11,
       align: "center",
-      bold: true
+      bold: true,
+      italic: false
     }
   }
 
@@ -359,7 +360,8 @@ class wot.utils.DefaultConfig
       name: "$FieldFont",
       size: 12,
       align: "center",
-      bold: true
+      bold: true,
+      italic: false
     }
   }
 
@@ -369,7 +371,8 @@ class wot.utils.DefaultConfig
       name: "$FieldFont",
       size: 13,
       align: "center",
-      bold: false
+      bold: false,
+      italic: false
     }
   }
 
@@ -379,7 +382,8 @@ class wot.utils.DefaultConfig
       name: "$FieldFont",
       size: 13,
       align: "center",
-      bold: true
+      bold: true,
+      italic: false
     }
   }
 
@@ -389,7 +393,8 @@ class wot.utils.DefaultConfig
       name: "$FieldFont",
       size: 14,
       align: "center",
-      bold: true
+      bold: true,
+      italic: false
     }
   }
 
