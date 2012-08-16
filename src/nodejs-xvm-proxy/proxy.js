@@ -32,12 +32,13 @@ var usageStat = {
     updated: 0,
     missed: 0,
     updatesFailed: 0,
+    mongorq: 0,
     connections: [],
     maxConnections: []
 };
 
     // Fork workers.
-for (var i = 0; i < /*numCPUs*/ 1; i++) {
+for (var i = 0; i < /*numCPUs*/ 2; i++) {
     var w = cluster.fork();
 
     w.on('message', function(msg) {
@@ -48,6 +49,7 @@ for (var i = 0; i < /*numCPUs*/ 1; i++) {
             if (msg.updated) usageStat.updated += msg.updated;
             if (msg.missed) usageStat.missed += msg.missed;
             if (msg.updatesFailed) usageStat.updatesFailed += msg.updatesFailed;
+            if (msg.mongorq) usageStat.mongorq += msg.mongorq;
             if (msg.connections) usageStat.connections[msg.hostId] = msg.connections;
             if (msg.maxConnections) usageStat.maxConnections[msg.hostId] = msg.maxConnections;
         } else if (msg.cmd == "cmd") {
@@ -62,7 +64,7 @@ setInterval(function() {
     var d = parseInt(uptime / (60 * 60 * 24));
     var h = String(parseInt((uptime / 3600) % 24)).lpad("0", 2);
     var m = String(parseInt((uptime / 60) % 60)).lpad("0", 2);
-    utils.log("> uptime  requests  rq/s   players  pl/s  cached updated  missed updfail connections/limits");
+    utils.log("> uptime  requests  rq/s   players  pl/s  cached updated  missed updfail mongorq connections/limits");
     utils.log((d > 9 ? "" : ">") +
         ((d == 0 ? "" : d + "d") + h + "h" + m).lpad(" ", 7) +
         String(usageStat.requests).lpad(" ", 10) + " " + (usageStat.requests / uptime).toFixed().lpad(" ", 5) +
@@ -71,5 +73,6 @@ setInterval(function() {
         ((usageStat.updated / usageStat.players * 100).toFixed(2) + "%").lpad(" ", 8) +
         ((usageStat.missed / usageStat.players * 100).toFixed(2) + "%").lpad(" ", 8) +
         ((usageStat.updatesFailed / usageStat.players * 100).toFixed(2) + "%").lpad(" ", 8) +
+        String(usageStat.mongorq).lpad(" ", 8) +
         " [" + usageStat.connections.join(", ") + "]/[" + usageStat.maxConnections.join(", ") + "]");
 }, settings.usageStatShowPeriod);

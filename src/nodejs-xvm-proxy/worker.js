@@ -14,11 +14,12 @@ var collection,
     users_collection,
     mongoOptions = {
         auto_reconnect: true,
-        poolSize: 100
+        poolSize: 200
     };
 
 // Global vars
-var hostData = [];
+var hostData = [],
+    mongorq = 0;
 
 // Main functions
 
@@ -178,10 +179,10 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, request, resp
                                 l: vdata.level,
                                 b: vdata.battle_count,
                                 w: vdata.win_count,
-                                s: vdata.spotted,
-                                d: vdata.damageDealt,
+                                //s: vdata.spotted,
+                                //d: vdata.damageDealt,
                                 //survivedBattles: vdata.survivedBattles,
-                                f: vdata.frags//,
+                                //f: vdata.frags//,
                                 //cl: vdata.class
                             });
                         }
@@ -231,9 +232,12 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, request, resp
                         if (result.players[i].status == "bad_id" || result.players[i].status == "wait" || result.players[i].status == "max_conn" || result.players[i].status == "api_error")
                             pl.status = result.players[i].status;
                         result.players[i] = pl;
-                        process.send({ usage: 1, cached: 1, updatesFailed: 1 });
-                        missed_collection.update({ _id: pl.id }, { _id: pl.id, missed:false }, { upsert: true });
-                        failed_count++;
+                        if (pl.status != "bad_id")
+                        {
+                            process.send({ usage: 1, cached: 1, updatesFailed: 1 });
+                            missed_collection.update({ _id: pl.id }, { _id: pl.id, missed:false }, { upsert: true });
+                            failed_count++;
+                        }
                     }
                     skip = true;
                     break;
@@ -307,6 +311,103 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, request, resp
     });
 };
 
+processRequest = function(request, response) {
+    // parse request
+    var ids = [ ];
+    var ids_bad_id = [ ];
+    var vehicles = [ ];
+    var times = [ { "n":"start","t":new Date() } ];
+    try {
+        var query = url.parse(request.url).query;
+        if(!query || !query.match(/^((\d)|(\d[\dA-Z_\-,=]*))$/))
+            throw "query match error: " + query;
+
+        if (query == "001" || query == "test") {
+            response.end('{"players":[{"id":1,"status":"ok"}]}');
+            return;
+        }
+
+        var qarr = query.split(",");
+        qarr.forEach(function(a) {
+            var x = a.split("=");
+            var id = parseInt(x[0]);
+
+            var statHostId = getStatHostId(id);
+            // Skip wrong id and non-working servers
+            if (statHostId == -1 || settings.statHosts[statHostId] == "")
+                ids_bad_id.push(id);
+            else
+                ids.push(id);
+            vehicles.push(x[1]);
+        if (x[2] == "1")
+            users_collection.update({ _id: id }, { $inc : { counter: 1 } }, { upsert: true });
+        });
+    } catch(e) {
+        response.statusCode = 500;
+        var errText = "wrong request: " + e;
+        if (request.url.toLowerCase() != "/favicon.ico")
+            errText += " url=" + request.url;
+        response.end(errText);
+        return;
+    }
+
+    process.send({ usage: 1, requests: 1, players: ids.length + ids_bad_id.length });
+    times.push({"n":"urlparsed","t":new Date()});
+
+    // Select required data from cache
+    mongorq++;
+    if (mongorq > 100)
+        utils.log("mongorq: " + mongorq);
+    process.send({ usage: 1, mongorq: 1 });
+    var cursor = collection.find({ _id: { $in: ids }}, { _id:1, st:1, dt:1, nm:1, b:1, w:1, e:1, v:1 });
+    times.push({"n":"find","t":new Date()});
+    cursor.toArray(function(error, inCache) {
+        mongorq--;
+        process.send({ usage: 1, mongorq: -1 });
+        try {
+            times.push({"n":"find2","t":new Date()});
+            if (error)
+                throw "MongoDB find error: " + error;
+
+            var forUpdate = [ ];
+            var forUpdateVNames = [ ];
+            var now = new Date();
+
+            ids = ids.concat(ids_bad_id);
+            var ids_length = ids.length;
+            for (var a = 0; a < ids_length; ++a) {
+                var id = ids[a];
+                var vname = vehicles[a] ? vehicles[a].toUpperCase() : null;
+
+                // Check cache data
+                var found = false;
+                var inCache_length = inCache.length;
+                for (var i = 0; i < inCache_length; ++i) {
+                    if (inCache[i]._id != id)
+                        continue;
+                    if (vname)
+                        inCache[i].vname = vname;
+                    if ((now - inCache[i].dt) < settings.cacheTtl)
+                        found = true;
+                    break;
+                }
+
+                // Add missed or expired ids for update
+                if (!found) {
+                    forUpdate.push(id);
+                    forUpdateVNames.push(vname);
+                }
+            }
+            times.push({"n":"beforeprocess","t":new Date()});
+            processRemotes(inCache, forUpdate, forUpdateVNames, request, response, times);
+        } catch(e) {
+            response.statusCode = 500;
+            response.end("Error: " + e);
+            utils.debug("Error: " + e);
+        }
+    });
+}
+
 // Create http server
 var createWorker = function() {
 
@@ -345,92 +446,10 @@ var createWorker = function() {
         collection = new mongo.Collection(client, settings.collectionName);
         missed_collection = new mongo.Collection(client, settings.missedCollectionName);
         users_collection = new mongo.Collection(client, settings.usersCollectionName);
+
+        http.createServer(processRequest).listen(settings.port, settings.host);
+        utils.log("Server running at http://" + settings.host + ":" + settings.port + "/");
     });
-
-    http.createServer(function(request, response) {
-        // parse request
-        var ids = [ ];
-        var vehicles = [ ];
-        var times = [ { "n":"start","t":new Date() } ];
-        try {
-            var query = url.parse(request.url).query;
-            if(!query || !query.match(/^((\d)|(\d[\dA-Z_\-,=]*))$/))
-                throw "query match error: " + query;
-
-            if (query == "001" || query == "test") {
-                response.end('{"players":[{"id":1,"status":"ok"}]}');
-                return;
-            }
-
-            var qarr = query.split(",");
-            qarr.forEach(function(a) {
-                var x = a.split("=");
-                var id = parseInt(x[0]);
-                ids.push(id);
-                vehicles.push(x[1]);
-                if (x[2] == "1")
-                    users_collection.update({ _id: id }, { $inc : { counter: 1 } }, { upsert: true });
-            });
-        } catch(e) {
-            response.statusCode = 500;
-            var errText = "wrong request: " + e;
-            if (request.url.toLowerCase() != "/favicon.ico")
-                errText += " url=" + request.url;
-            response.end(errText);
-            return;
-        }
-
-        process.send({ usage: 1, requests: 1, players: ids.length });
-        times.push({"n":"urlparsed","t":new Date()});
-
-        // Select required data from cache
-        var cursor = collection.find({ _id: { $in: ids }}, { _id:1, st:1, dt:1, nm:1, b:1, w:1, e:1, v:1 });
-        times.push({"n":"find","t":new Date()});
-        cursor.toArray(function(error, inCache) {
-            try {
-                times.push({"n":"find2","t":new Date()});
-                if (error)
-                    throw "MongoDB find error: " + error;
-
-                var forUpdate = [ ];
-                var forUpdateVNames = [ ];
-                var now = new Date();
-
-                var ids_length = ids.length;
-                for (var a = 0; a < ids_length; ++a) {
-                    var id = ids[a];
-                    var vname = vehicles[a] ? vehicles[a].toUpperCase() : null;
-
-                    // Check cache data
-                    var found = false;
-                    var inCache_length = inCache.length;
-                    for (var i = 0; i < inCache_length; ++i) {
-                        if (inCache[i]._id != id)
-                            continue;
-                        if (vname)
-                            inCache[i].vname = vname;
-                        if ((now - inCache[i].dt) < settings.cacheTtl)
-                            found = true;
-                        break;
-                    }
-
-                    // Add missed or expired ids for update
-                    if (!found) {
-                        forUpdate.push(id);
-                        forUpdateVNames.push(vname);
-                    }
-                }
-                times.push({"n":"beforeprocess","t":new Date()});
-                processRemotes(inCache, forUpdate, forUpdateVNames, request, response, times);
-            } catch(e) {
-                response.statusCode = 500;
-                response.end("Error: " + e);
-                utils.debug("Error: " + e);
-            }
-        });
-    }).listen(settings.port, settings.host);
-
-    utils.log("Server running at http://" + settings.host + ":" + settings.port + "/");
 }
 
     // exports
