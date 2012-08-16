@@ -160,7 +160,8 @@
               "name": "$FieldFont",           //     название
               "size": 14,                     //     размер
               "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": true                    //     обычный (false) или жирный (true)
+              "bold": true,                   //     обычный (false) или жирный (true)
+              "italic": false                 //     обычный (false) или курсив (true)
             },
             "shadow": {                       //   параметры тени
               "alpha": 100,                   //     прозрачность
@@ -217,7 +218,8 @@
                 "name": "$FieldFont",         //   название
                 "size": 13,                   //   размер
                 "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false                 //   обычный (false) или жирный (true)
+                "bold": false,                //   обычный (false) или жирный (true)
+                "italic": false               //   обычный (false) или курсив (true)
               },
               "shadow": {                     // параметры тени
                 "alpha": 100,                 //   прозрачность
@@ -241,7 +243,8 @@
                 "name": "$FieldFont",         //   название
                 "size": 11,                   //   размер
                 "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": true                  //   обычный (false) или жирный (true)
+                "bold": true,                 //   обычный (false) или жирный (true)
+                "italic": false               //   обычный (false) или курсив (true)
               },
               "shadow": {                     // параметры тени
                 "alpha": 100,                 //   прозрачность
@@ -309,7 +312,8 @@
               "name": "$FieldFont",           //     название
               "size": 14,                     //     размер
               "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": true                    //     обычный (false) или жирный (true)
+              "bold": true,                   //     обычный (false) или жирный (true)
+              "italic": false                 //     обычный (false) или курсив (true)
             },
             "shadow": {                       //   параметры тени
               "alpha": 100,                   //     прозрачность
@@ -366,7 +370,8 @@
                 "name": "$FieldFont",         //   название
                 "size": 13,                   //   размер
                 "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false                 //   обычный (false) или жирный (true)
+                "bold": false,                //   обычный (false) или жирный (true)
+                "italic": false               //   обычный (false) или курсив (true)
               },
               "shadow": {                     // параметры тени
                 "alpha": 100,                 //   прозрачность
@@ -390,7 +395,8 @@
                 "name": "$FieldFont",         //   название
                 "size": 11,                   //   размер
                 "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": true                  //   обычный (false) или жирный (true)
+                "bold": true,                 //   обычный (false) или жирный (true)
+                "italic": false               //   обычный (false) или курсив (true)
               },
               "shadow": {                     // параметры тени
                 "alpha": 100,                 //   прозрачность
@@ -415,7 +421,8 @@
                 "name": "$FieldFont",
                 "size": 11,
                 "align": "center",
-                "bold": true
+                "bold": true,
+                "italic": false
               },
               "shadow": {
                 "alpha": 100,
@@ -486,7 +493,8 @@
               "name": "$FieldFont",           //     название
               "size": 14,                     //     размер
               "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": true                    //     обычный (false) или жирный (true)
+              "bold": true,                   //     обычный (false) или жирный (true)
+              "italic": false                 //     обычный (false) или курсив (true)
             },
             "shadow": {                       //   параметры тени
               "alpha": 100,                   //     прозрачность
@@ -586,7 +594,8 @@
               "name": "$FieldFont",           //     название
               "size": 14,                     //     размер
               "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": true                    //     обычный (false) или жирный (true)
+              "bold": true,                   //     обычный (false) или жирный (true)
+              "italic": false                 //     обычный (false) или курсив (true)
             },
             "shadow": {                       //   параметры тени
               "alpha": 100,                   //     прозрачность
@@ -643,7 +652,8 @@
                 "name": "$FieldFont",         //   название
                 "size": 13,                   //   размер
                 "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false                 //   обычный (false) или жирный (true)
+                "bold": false,                //   обычный (false) или жирный (true)
+                "italic": false               //   обычный (false) или курсив (true)
               },
               "shadow": {                     // параметры тени
                 "alpha": 100,                 //   прозрачность
@@ -667,7 +677,8 @@
                 "name": "$FieldFont",         //   название
                 "size": 13,                   //   размер
                 "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false                 //   обычный (false) или жирный (true)
+                "bold": false,                 //   обычный (false) или жирный (true)
+                "italic": false               //   обычный (false) или курсив (true)
               },
               "shadow": {                     // параметры тени
                 "alpha": 100,                 //   прозрачность
@@ -741,7 +752,8 @@
               "name": "$FieldFont",           //     название
               "size": 14,                     //     размер
               "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": true                    //     обычный (false) или жирный (true)
+              "bold": true,                   //     обычный (false) или жирный (true)
+              "italic": false                 //     обычный (false) или курсив (true)
             },
             "shadow": {                       //   параметры тени
               "alpha": 100,                   //     прозрачность
@@ -798,7 +810,8 @@
                 "name": "$FieldFont",         //   название
                 "size": 13,                   //   размер
                 "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false                 //   обычный (false) или жирный (true)
+                "bold": false,                //   обычный (false) или жирный (true)
+                "italic": false               //   обычный (false) или курсив (true)
               },
               "shadow": {                     // параметры тени
                 "alpha": 100,                 //   прозрачность
@@ -822,7 +835,8 @@
                 "name": "$FieldFont",         //   название
                 "size": 11,                   //   размер
                 "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": true                  //   обычный (false) или жирный (true)
+                "bold": true,                 //   обычный (false) или жирный (true)
+                "italic": false               //   обычный (false) или курсив (true)
               },
               "shadow": {                     // параметры тени
                 "alpha": 100,                 //   прозрачность
@@ -890,7 +904,8 @@
               "name": "$FieldFont",           //     название
               "size": 14,                     //     размер
               "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": true                    //     обычный (false) или жирный (true)
+              "bold": true,                   //     обычный (false) или жирный (true)
+              "italic": false                 //     обычный (false) или курсив (true)
             },
             "shadow": {                       //   параметры тени
               "alpha": 100,                   //     прозрачность
@@ -947,7 +962,8 @@
                 "name": "$FieldFont",         //   название
                 "size": 13,                   //   размер
                 "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false                 //   обычный (false) или жирный (true)
+                "bold": false,                //   обычный (false) или жирный (true)
+                "italic": false               //   обычный (false) или курсив (true)
               },
               "shadow": {                     // параметры тени
                 "alpha": 100,                 //   прозрачность
@@ -971,7 +987,8 @@
                 "name": "$FieldFont",         //   название
                 "size": 11,                   //   размер
                 "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": true                  //   обычный (false) или жирный (true)
+                "bold": true,                 //   обычный (false) или жирный (true)
+                "italic": false               //   обычный (false) или курсив (true)
               },
               "shadow": {                     // параметры тени
                 "alpha": 100,                 //   прозрачность
@@ -996,7 +1013,8 @@
                 "name": "$FieldFont",
                 "size": 11,
                 "align": "center",
-                "bold": true
+                "bold": true,
+                "italic": false
               },
               "shadow": {
                 "alpha": 100,
@@ -1067,7 +1085,8 @@
               "name": "$FieldFont",           //     название
               "size": 14,                     //     размер
               "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": true                    //     обычный (false) или жирный (true)
+              "bold": true,                   //     обычный (false) или жирный (true)
+              "italic": false                 //     обычный (false) или курсив (true)
             },
             "shadow": {                       //   параметры тени
               "alpha": 100,                   //     прозрачность
@@ -1167,7 +1186,8 @@
               "name": "$FieldFont",           //     название
               "size": 14,                     //     размер
               "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": true                    //     обычный (false) или жирный (true)
+              "bold": true,                   //     обычный (false) или жирный (true)
+              "italic": false                 //     обычный (false) или курсив (true)
             },
             "shadow": {                       //   параметры тени
               "alpha": 100,                   //     прозрачность
@@ -1224,7 +1244,8 @@
                 "name": "$FieldFont",         //   название
                 "size": 13,                   //   размер
                 "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false                 //   обычный (false) или жирный (true)
+                "bold": false,                //   обычный (false) или жирный (true)
+                "italic": false               //   обычный (false) или курсив (true)
               },
               "shadow": {                     // параметры тени
                 "alpha": 100,                 //   прозрачность
@@ -1248,7 +1269,8 @@
                 "name": "$FieldFont",         //   название
                 "size": 13,                   //   размер
                 "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false                 //   обычный (false) или жирный (true)
+                "bold": false,                //   обычный (false) или жирный (true)
+                "italic": false               //   обычный (false) или курсив (true)
               },
               "shadow": {                     // параметры тени
                 "alpha": 100,                 //   прозрачность

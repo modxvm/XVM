@@ -152,7 +152,8 @@
               "name": "$FieldFont",           //     Font name
               "size": 14,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": true                    //     Normal (false) or bold (true)
+              "bold": true,                   //     Normal (false) or bold (true)
+              "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
               "alpha": 100,                   //     Opacity
@@ -174,6 +175,14 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "amount": 0                       //   Color intensity from 0 to 100. The default is 0 (off).
+          },
+          "clanIcon": {                       // Player/clan icon
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "w": 16,                          //   Width
+            "h": 16,                          //   Height
+            "alpha": 100                      //   Opacity (dynamic transparency allowed, see readme-en.txt)
           },
           "levelIcon": {                      // Vehicle tier
             "visible": false,                 //   false - Disable
@@ -200,15 +209,16 @@
                 "name": "$FieldFont",         //   Font name
                 "size": 13,                   //   Font size
                 "align": "center",            //   Text alignment (left, center, right)
-                "bold": false                 //   Normal (false) or bold (true)
+                "bold": false,                //   Normal (false) or bold (true)
+                "italic": false               //   Normal (false) or italic (true)
               },
-              "shadow": {                     //   Shadow options
-                "alpha": 100,                 //     Opacity
-                "color": "0x000000",          //     Color
-                "angle": 45,                  //     Offset angle
-                "distance": 1,                //     Offset distance
-                "size": 2,                    //     Size
-                "strength": 200               //     Intensity
+              "shadow": {                     // Shadow options
+                "alpha": 100,                 //   Opacity
+                "color": "0x000000",          //   Color
+                "angle": 45,                  //   Offset angle
+                "distance": 1,                //   Offset distance
+                "size": 2,                    //   Size
+                "strength": 200               //   Intensity
               },
               "format": "{{vehicle}}"         // Text format (see description of macros in the readme-en.txt)
             },
@@ -223,15 +233,16 @@
                 "name": "$FieldFont",         //   Font name
                 "size": 11,                   //   Font size
                 "align": "center",            //   Text alignment (left, center, right)
-                "bold": true                  //   Normal (false) or bold (true)
+                "bold": true,                 //   Normal (false) or bold (true)
+                "italic": false               //   Normal (false) or italic (true)
               },
-              "shadow": {                     //   Shadow options
-                "alpha": 100,                 //     Opacity
-                "color": "0x000000",          //     Color
-                "angle": 45,                  //     Offset angle
-                "distance": 1,                //     Offset distance
-                "size": 2,                    //     Size
-                "strength": 100               //     Intensity
+              "shadow": {                     // Shadow options
+                "alpha": 100,                 //   Opacity
+                "color": "0x000000",          //   Color
+                "angle": 45,                  //   Offset angle
+                "distance": 1,                //   Offset distance
+                "size": 2,                    //   Size
+                "strength": 100               //   Intensity
               },
               "format": "{{hp}} / {{hp-max}}" // Text format (see description of macros in the readme-en.txt)
             }
@@ -291,7 +302,8 @@
               "name": "$FieldFont",           //     Font name
               "size": 14,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": true                    //     Normal (false) or bold (true)
+              "bold": true,                   //     Normal (false) or bold (true)
+              "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
               "alpha": 100,                   //     Opacity
@@ -313,6 +325,14 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "amount": 0                       //   Color intensity from 0 to 100. The default is 0 (off).
+          },
+          "clanIcon": {                       // Player/clan icon
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "w": 16,                          //   Width
+            "h": 16,                          //   Height
+            "alpha": 100                      //   Opacity (dynamic transparency allowed, see readme-en.txt)
           },
           "levelIcon": {                      // Vehicle tier
             "visible": false,                 //   false - Disable
@@ -339,15 +359,16 @@
                 "name": "$FieldFont",         //   Font name
                 "size": 13,                   //   Font size
                 "align": "center",            //   Text alignment (left, center, right)
-                "bold": false                 //   Normal (false) or bold (true)
+                "bold": false,                //   Normal (false) or bold (true)
+                "italic": false               //   Normal (false) or italic (true)
               },
-              "shadow": {                     //   Shadow options
-                "alpha": 100,                 //     Opacity
-                "color": "0x000000",          //     Color
-                "angle": 45,                  //     Offset angle
-                "distance": 1,                //     Offset distance
-                "size": 2,                    //     Size
-                "strength": 200               //     Intensity
+              "shadow": {                     // Shadow options
+                "alpha": 100,                 //   Opacity
+                "color": "0x000000",          //   Color
+                "angle": 45,                  //   Offset angle
+                "distance": 1,                //   Offset distance
+                "size": 2,                    //   Size
+                "strength": 200               //   Intensity
               },
               "format": "{{nick}}"            // Text format (see description of macros in the readme-en.txt)
             },
@@ -362,15 +383,16 @@
                 "name": "$FieldFont",         //   Font name
                 "size": 11,                   //   Font size
                 "align": "center",            //   Text alignment (left, center, right)
-                "bold": true                  //   Normal (false) or bold (true)
+                "bold": true,                 //   Normal (false) or bold (true)
+                "italic": false               //   Normal (false) or italic (true)
               },
-              "shadow": {                     //   Shadow options
-                "alpha": 100,                 //     Opacity
-                "color": "0x000000",          //     Color
-                "angle": 45,                  //     Offset angle
-                "distance": 1,                //     Offset distance
-                "size": 2,                    //     Size
-                "strength": 100               //     Intensity
+              "shadow": {                     // Shadow options
+                "alpha": 100,                 //   Opacity
+                "color": "0x000000",          //   Color
+                "angle": 45,                  //   Offset angle
+                "distance": 1,                //   Offset distance
+                "size": 2,                    //   Size
+                "strength": 100               //   Intensity
               },
               // Percent symbol - \u0025
               "format": "{{hp-ratio}}\u0025"  // Text format (see description of macros in the readme-en.txt)
@@ -434,7 +456,8 @@
               "name": "$FieldFont",           //     Font name
               "size": 14,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": true                    //     Normal (false) or bold (true)
+              "bold": true,                   //     Normal (false) or bold (true)
+              "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
               "alpha": 100,                   //     Opacity
@@ -456,6 +479,14 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "amount": 0                       //   Color intensity from 0 to 100. The default is 0 (off).
+          },
+          "clanIcon": {                       // Player/clan icon
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "w": 16,                          //   Width
+            "h": 16,                          //   Height
+            "alpha": 100                      //   Opacity (dynamic transparency allowed, see readme-en.txt)
           },
           "levelIcon": {                      // Vehicle tier
             "visible": false,                 //   false - Disable
@@ -526,7 +557,8 @@
               "name": "$FieldFont",           //     Font name
               "size": 14,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": true                    //     Normal (false) or bold (true)
+              "bold": true,                   //     Normal (false) or bold (true)
+              "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
               "alpha": 100,                   //     Opacity
@@ -548,6 +580,14 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "amount": 0                       //   Color intensity from 0 to 100. The default is 0 (off).
+          },
+          "clanIcon": {                       // Player/clan icon
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "w": 16,                          //   Width
+            "h": 16,                          //   Height
+            "alpha": 100                      //   Opacity (dynamic transparency allowed, see readme-en.txt)
           },
           "levelIcon": {                      // Vehicle tier
             "visible": false,                 //   false - Disable
@@ -574,7 +614,8 @@
                 "name": "$FieldFont",         //   Font name
                 "size": 13,                   //   Font size
                 "align": "center",            //   Text alignment (left, center, right)
-                "bold": false                 //   Normal (false) or bold (true)
+                "bold": false,                //   Normal (false) or bold (true)
+                "italic": false               //   Normal (false) or italic (true)
               },
               "shadow": {                     //   Shadow options
                 "alpha": 100,                 //     Opacity
@@ -597,7 +638,8 @@
                 "name": "$FieldFont",         //   Font name
                 "size": 13,                   //   Font size
                 "align": "center",            //   Text alignment (left, center, right)
-                "bold": false                 //   Normal (false) or bold (true)
+                "bold": false,                //   Normal (false) or bold (true)
+                "italic": false               //   Normal (false) or italic (true)
               },
               "shadow": {                     //   Shadow options
                 "alpha": 100,                 //     Opacity
@@ -671,7 +713,8 @@
               "name": "$FieldFont",           //     Font name
               "size": 14,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": true                    //     Normal (false) or bold (true)
+              "bold": true,                   //     Normal (false) or bold (true)
+              "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
               "alpha": 100,                   //     Opacity
@@ -693,6 +736,14 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "amount": 0                       //   Color intensity from 0 to 100. The default is 0 (off).
+          },
+          "clanIcon": {                       // Player/clan icon
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "w": 16,                          //   Width
+            "h": 16,                          //   Height
+            "alpha": 100                      //   Opacity (dynamic transparency allowed, see readme-en.txt)
           },
           "levelIcon": {                      // Vehicle tier
             "visible": false,                 //   false - Disable
@@ -719,7 +770,8 @@
                 "name": "$FieldFont",         //   Font name
                 "size": 13,                   //   Font size
                 "align": "center",            //   Text alignment (left, center, right)
-                "bold": false                 //   Normal (false) or bold (true)
+                "bold": false,                //   Normal (false) or bold (true)
+                "italic": false               //   Normal (false) or italic (true)
               },
               "shadow": {                     //   Shadow options
                 "alpha": 100,                 //     Opacity
@@ -742,7 +794,8 @@
                 "name": "$FieldFont",         //   Font name
                 "size": 11,                   //   Font size
                 "align": "center",            //   Text alignment (left, center, right)
-                "bold": true                  //   Normal (false) or bold (true)
+                "bold": true,                 //   Normal (false) or bold (true)
+                "italic": false               //   Normal (false) or italic (true)
               },
               "shadow": {                     //   Shadow options
                 "alpha": 100,                 //     Opacity
@@ -810,7 +863,8 @@
               "name": "$FieldFont",           //     Font name
               "size": 14,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": true                    //     Normal (false) or bold (true)
+              "bold": true,                   //     Normal (false) or bold (true)
+              "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
               "alpha": 100,                   //     Opacity
@@ -832,6 +886,14 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "amount": 0                       //   Color intensity from 0 to 100. The default is 0 (off).
+          },
+          "clanIcon": {                       // Player/clan icon
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "w": 16,                          //   Width
+            "h": 16,                          //   Height
+            "alpha": 100                      //   Opacity (dynamic transparency allowed, see readme-en.txt)
           },
           "levelIcon": {                      // Vehicle tier
             "visible": false,                 //   false - Disable
@@ -858,7 +920,8 @@
                 "name": "$FieldFont",         //   Font name
                 "size": 13,                   //   Font size
                 "align": "center",            //   Text alignment (left, center, right)
-                "bold": false                 //   Normal (false) or bold (true)
+                "bold": false,                //   Normal (false) or bold (true)
+                "italic": false               //   Normal (false) or italic (true)
               },
               "shadow": {                     //   Shadow options
                 "alpha": 100,                 //     Opacity
@@ -881,7 +944,8 @@
                 "name": "$FieldFont",         //   Font name
                 "size": 11,                   //   Font size
                 "align": "center",            //   Text alignment (left, center, right)
-                "bold": true                  //   Normal (false) or bold (true)
+                "bold": true,                 //   Normal (false) or bold (true)
+                "italic": false               //   Normal (false) or italic (true)
               },
               "shadow": {                     //   Shadow options
                 "alpha": 100,                 //     Opacity
@@ -953,7 +1017,8 @@
               "name": "$FieldFont",           //     Font name
               "size": 14,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": true                    //     Normal (false) or bold (true)
+              "bold": true,                   //     Normal (false) or bold (true)
+              "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
               "alpha": 100,                   //     Opacity
@@ -975,6 +1040,14 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "amount": 0                       //   Color intensity from 0 to 100. The default is 0 (off).
+          },
+          "clanIcon": {                       // Player/clan icon
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "w": 16,                          //   Width
+            "h": 16,                          //   Height
+            "alpha": 100                      //   Opacity (dynamic transparency allowed, see readme-en.txt)
           },
           "levelIcon": {                      // Vehicle tier
             "visible": false,                 //   false - Disable
@@ -1045,7 +1118,8 @@
               "name": "$FieldFont",           //     Font name
               "size": 14,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": true                    //     Normal (false) or bold (true)
+              "bold": true,                   //     Normal (false) or bold (true)
+              "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
               "alpha": 100,                   //     Opacity
@@ -1067,6 +1141,14 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "amount": 0                       //   Color intensity from 0 to 100. The default is 0 (off).
+          },
+          "clanIcon": {                       // Player/clan icon
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "w": 16,                          //   Width
+            "h": 16,                          //   Height
+            "alpha": 100                      //   Opacity (dynamic transparency allowed, see readme-en.txt)
           },
           "levelIcon": {                      // Vehicle tier
             "visible": false,                 //   false - Disable
@@ -1093,7 +1175,8 @@
                 "name": "$FieldFont",         //   Font name
                 "size": 13,                   //   Font size
                 "align": "center",            //   Text alignment (left, center, right)
-                "bold": false                 //   Normal (false) or bold (true)
+                "bold": false,                //   Normal (false) or bold (true)
+                "italic": false               //   Normal (false) or italic (true)
               },
               "shadow": {                     //   Shadow options
                 "alpha": 100,                 //     Opacity
@@ -1116,7 +1199,8 @@
                 "name": "$FieldFont",         //   Font name
                 "size": 13,                   //   Font size
                 "align": "center",            //   Text alignment (left, center, right)
-                "bold": false                 //   Normal (false) or bold (true)
+                "bold": false,                //   Normal (false) or bold (true)
+                "italic": false               //   Normal (false) or italic (true)
               },
               "shadow": {                     //   Shadow options
                 "alpha": 100,                 //     Opacity
