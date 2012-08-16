@@ -1,6 +1,8 @@
 ﻿XVM-2.5.2.test3:
   * Removed coords grid (parameter battle.drawGrid)
   * Statistics enabled by default
+  * Added {{rlevel}} macro for vehicle level in roman numerals
+  * Dynamic color and transparency for shadow
 
 XVM-2.5.2.test2:
   * bugfix

@@ -11,18 +11,13 @@ import flash.geom.ColorTransform;
 
 public class GraphicsUtil
 {
-  public static function createShadowFilter(data:Object):Object
-  {
-    if (Number(data.alpha) == 0 || Number(data.strength) == 0)
-      return null;
-
-    var shadow: DropShadowFilter = new DropShadowFilter(
-        Number(data.distance),     Number(data.angle), Number(data.color),
-        Number(data.alpha) * 0.01, Number(data.size),  Number(data.size),
-        Number(data.strength) * 0.01, 3);
-
-    return shadow;
-  }
+    public static function createShadowFilter(distance:Number, angle:Number, color:Number,
+        alpha:Number, size:Number, strength:Number):Object
+    {
+        if (alpha == 0 || strength == 0 || size == 0)
+            return null;
+        return new DropShadowFilter(distance, angle, color, alpha * 0.01, size, size, strength * 0.01, 3);
+    }
 
   public static function colorByRatio($value:Number, $start:Number, $end:Number):Number
   {

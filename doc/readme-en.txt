@@ -111,7 +111,8 @@
       {{hp-max}}      - maximum health points
       {{nick}}        - player name
       {{vehicle}}     - vehicle name
-      {{level}}       - vehicle level
+      {{level}}       - vehicle level (Arabic numerals)
+      {{rlevel}}      - vehicle level (Roman numerals)
       {{dmg}}         - damage health points
       {{dmg-ratio}}   - damage health ratio (without '%' sign)
 

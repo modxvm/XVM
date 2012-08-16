@@ -34,6 +34,7 @@ package utils
                 { value: "{{nick}}", label: "nick", icon: Embed.nick },
                 { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
                 { value: "{{level}}", label: "level", icon: Embed.level },
+                { value: "{{rlevel}}", label: "rlevel", icon: Embed.rlevel },
                 { value: "{{dmg}}", label: "dmg", icon: Embed.dmg },
                 { value: "{{dmg-ratio}}", label: "dmg_ratio", icon: Embed.dmg_ratio }
             ],

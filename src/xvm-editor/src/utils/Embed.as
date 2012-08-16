@@ -49,6 +49,8 @@ package utils
         public static const kb_3:Class;
         [Embed("images/macros/level.png")]
         public static const level:Class;
+        [Embed("images/macros/rlevel.png")]
+        public static const rlevel:Class;
         [Embed("images/macros/nick.png")]
         public static const nick:Class;
         [Embed("images/macros/rating.png")]

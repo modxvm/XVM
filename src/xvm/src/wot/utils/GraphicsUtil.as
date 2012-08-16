@@ -10,17 +10,12 @@ import wot.utils.Utils;
 
 class wot.utils.GraphicsUtil
 {
-  public static function createShadowFilter(data:Object):Object
+  public static function createShadowFilter(distance:Number, angle:Number, color:Number,
+    alpha:Number, size:Number, strength:Number):Object
   {
-    if (Number(data.alpha) == 0 || Number(data.strength) == 0)
+    if (!alpha || !strength || !size)
       return null;
-
-    var shadow: DropShadowFilter = new DropShadowFilter(
-        Number(data.distance),     Number(data.angle), Number(data.color),
-        Number(data.alpha) * 0.01, Number(data.size),  Number(data.size),
-        Number(data.strength) * 0.01, 3);
-
-    return shadow;
+    return new DropShadowFilter(distance, angle, color, alpha * 0.01, size, size, strength * 0.01, 3);
   }
 
   public static function fillRect(target:MovieClip, x:Number, y:Number,

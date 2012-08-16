@@ -362,7 +362,14 @@
             damageField.textColor = !isNaN(parseInt(cfg.color)) ? int(cfg.color)
                 : Config.s_config.colors.system[_vtype + "_alive_" + (s_isColorBlindMode ? "blind" : "normal")];
             damageField.x = -(damageField.width / 2.0);
-            damageField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
+
+            if (cfg.shadow)
+            {
+                var sh_color:Number = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.shadow.color), m_curHealth);
+                var sh_alpha:Number = XVMFormatDynamicAlpha(cfg.shadow.alpha, m_curHealth);
+                damageField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow.distance,
+                    cfg.shadow.angle, sh_color, sh_alpha, cfg.shadow.size, cfg.shadow.strength) ];
+            }
 
             var st:Number = (new Date()).time;
             var timer:Timer = new Timer(10);
@@ -527,12 +534,15 @@
             return "Player" + (_vtype == "ally" ? "Ally" : "Enemy");
         }
 
+        private const rlevel:Array = [ "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" ];
         private function XVMFormatStaticText(format: String): String
         {
             // AS 2 doesn't have String.replace? Shame on them. Let's use our own square wheel.
             format = format.split("{{nick}}").join(pname);
             format = format.split("{{vehicle}}").join(_vdead ? "Hummel" : _vtype == "ally" ? "ИС-3" : "Ferdinand");
-            format = format.split("{{level}}").join(String(_vdead ? "5" : "8"));
+            var level:int = _vdead ? 5 : 8;
+            format = format.split("{{level}}").join(String(level));
+            format = format.split("{{rlevel}}").join(rlevel[level - 1]);
 
             format = format.split("{{kb}}").join("4k");
             format = format.split("{{battles}}").join("4321");
@@ -612,8 +622,14 @@
             //textField.borderColor = 0xFFFFFF;
             textField.embedFonts = !cfg.font.name || cfg.font.name == "$FieldFont";
             textField.defaultTextFormat = XVMCreateNewTextFormat(cfg.font);
+
             if (cfg.shadow)
-                textField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
+            {
+                var sh_color:Number = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.shadow.color), m_curHealth);
+                var sh_alpha:Number = XVMFormatDynamicAlpha(cfg.shadow.alpha, m_curHealth);
+                textField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow.distance,
+                    cfg.shadow.angle, sh_color, sh_alpha, cfg.shadow.size, cfg.shadow.strength) ];
+            }
 
             var staticColor:String = XVMFormatStaticColorText(cfg.color);
             textField.textColor = XVMFormatDynamicColor(staticColor, m_curHealth);

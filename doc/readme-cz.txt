@@ -131,6 +131,7 @@ Obsah:
         {{nick}}        - jméno hráče
         {{vehicle}}     - název vozidla
         {{level}}       - úroveň (tier) vozidla
+        {{rlevel}}      - úroveň (tier) vozidla (Roman)
         {{dmg}}         - pocet ubranych zivotu
         {{dmg-ratio}}   - počet ubraných životů v % (zobrazeno bez jednotky %)
 
