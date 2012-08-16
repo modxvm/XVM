@@ -218,6 +218,13 @@ class wot.utils.DefaultConfig
           enemy_blowedup_normal: "0x5A0401",
           enemy_blowedup_blind: "0x3B365F"
         },
+        vtype: {
+          LT:  "0xA2FF9A",  // Color for light tanks
+          MT:  "0xFFF198",  // Color for medium tanks
+          HT:  "0xFFACAC",  // Color for heavy tanks
+          SPG: "0xEFAEFF",  // Color for arty
+          TD:  "0xA0CFFF"   // Color for tank destroyers
+        },
         // values - from min to max, colors are for values 'lesser then ...'
         hp: [
           { value: 200,  color: "0xDD0000" },

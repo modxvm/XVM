@@ -91,6 +91,7 @@
     Dynamic colors macros:
       {{c:hp}}       - color depended from current health points (only in vehicle markers)
       {{c:hp-ratio}} - color depended from current health ratio (only in vehicle markers)
+      {{c:vtype}}    - color depended from vehicle type (only in vehicle markers)
 
     Dynamic transparency macros:
       {{a:hp}}       - transparency depended from current health points (only in vehicle markers)

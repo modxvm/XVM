@@ -1282,6 +1282,14 @@
       "enemy_blowedup_normal": "0x5A0401",         // Enemy – blow-up
       "enemy_blowedup_blind": "0x3B365F"           // Enemy – blow-up – color blind mode
     },
+    // Dynamic color for vehicle type
+    "vtype": {
+      "LT":  "0xA2FF9A",                           // Color for light tanks
+      "MT":  "0xFFF198",                           // Color for medium tanks
+      "HT":  "0xFFACAC",                           // Color for heavy tanks
+      "SPG": "0xEFAEFF",                           // Color for arty
+      "TD":  "0xA0CFFF"                            // Color for tank destroyers
+    },
     // Dynamic color for remaining health
     "hp": [
       { "value": 200,  "color": "0xDD0000" },      // Color for health below 200

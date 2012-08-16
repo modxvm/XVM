@@ -63,6 +63,7 @@ package utils
             colors: [
                 { value: "{{c:hp}}", label: "c_hp", icon: Embed.c_hp },
                 { value: "{{c:hp-ratio}}", label: "c_hp_ratio", icon: Embed.c_hp_ratio },
+                { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype },
                 { value: "{{c:eff}}", label: "c_eff", icon: Embed.c_eff },
                 { value: "{{c:rating}}", label: "c_rating", icon: Embed.c_rating },
                 { value: "{{c:kb}}", label: "c_kb", icon: Embed.c_kb },

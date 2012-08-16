@@ -244,6 +244,20 @@ private function RefreshColorsPage():void
             if (p_systemColors.v_enemy_blowedup_blind != null)
                 p_systemColors.v_enemy_blowedup_blind.value = section.enemy_blowedup_blind;
         }
+        if (accColors.selectedChild == nc_vtypeColors && p_vtypeColors != null)
+        {
+            var section2:Object = Config.s_config.colors.vtype;
+            if (p_vtypeColors.v_LT != null)
+                p_vtypeColors.v_LT.value = section2.LT;
+            if (p_vtypeColors.v_MT != null)
+                p_vtypeColors.v_MT.value = section2.MT;
+            if (p_vtypeColors.v_HT != null)
+                p_vtypeColors.v_HT.value = section2.HT;
+            if (p_vtypeColors.v_SPG != null)
+                p_vtypeColors.v_SPG.value = section2.SPG;
+            if (p_vtypeColors.v_TD != null)
+                p_vtypeColors.v_TD.value = section2.TD;
+        }
         else if (accColors.selectedChild == nc_colors_hp && p_colors_hp != null)
             p_colors_hp.RefreshSource();
         else if (accColors.selectedChild == nc_colors_hp_ratio && p_colors_hp_ratio != null)

@@ -527,6 +527,9 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             formatArr = format.split("{{c:hp_ratio}}");
             if (formatArr.length > 1)
                 format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"))
+            formatArr = format.split("{{c:vtype}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(GraphicsUtil.GetVTypeColorValue(Utils.vehicleClassToVehicleType(m_vehicleClass), "0x"))
             return isFinite(format) ? Number(format) : systemColor;
         }
         catch (e)

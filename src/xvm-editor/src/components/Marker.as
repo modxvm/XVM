@@ -24,6 +24,7 @@
     import utils.Defines;
     import utils.DisplayObjectWrapper;
     import utils.GraphicsUtil;
+    import utils.Utils;
 
     public class Marker extends UIComponent
     {
@@ -668,6 +669,9 @@
             formatArr = format.split("{{c:hp_ratio}}");
             if (formatArr.length > 1)
                 format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"))
+            formatArr = format.split("{{c:vtype}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(GraphicsUtil.GetVTypeColorValue(Utils.vehicleClassToVehicleType(vehicleClass), "0x"))
             return !isNaN(parseInt(format)) ? int(format) : systemColor;
         }
 

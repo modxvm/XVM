@@ -4,6 +4,8 @@
   * added {{rlevel}} macro for vehicle level in roman numerals
   * dynamic color and transparency for shadow
   * added font/italic parameter (values: true/false)
+  * added {{c:vtype}} macro and colors/vtype section for dynamic color by
+    vehicle type
 
 XVM-2.5.2.test2:
   * bugfix

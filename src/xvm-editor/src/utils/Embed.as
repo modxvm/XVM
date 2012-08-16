@@ -86,6 +86,8 @@ package utils
         public static const c_hp:Class;
         [Embed("images/macros/c_hp_ratio.png")]
         public static const c_hp_ratio:Class;
+        [Embed("images/macros/c_vtype.png")]
+        public static const c_vtype:Class;
         [Embed("images/macros/c_eff.png")]
         public static const c_eff:Class;
         [Embed("images/macros/c_rating.png")]

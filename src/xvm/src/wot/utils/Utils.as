@@ -60,7 +60,7 @@ class wot.utils.Utils
         return value ? String(value) : defaultValue;
     }
 
-    public static function elapsedMSec(start:Date, end:Date): Number
+    public static function elapsedMSec(start, end): Number
     {
         return end - start;
     }
@@ -71,6 +71,19 @@ class wot.utils.Utils
         if (!Utils.endsWith("/", path))
             path += "/";
         return path;
+    }
+
+    public static function vehicleClassToVehicleType(vclass:String):String
+    {
+        switch (vclass)
+        {
+            case "lightTank": return "LT";
+            case "mediumTank": return "MT";
+            case "heavyTank": return "HT";
+            case "SPG": return "SPG";
+            case "AT-SPG": return "TD";
+            default: return vclass;
+        }
     }
 
     ////////////////////
