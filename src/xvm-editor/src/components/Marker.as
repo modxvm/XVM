@@ -449,8 +449,8 @@
         {
             xvmHBFill.scaleX = Math.min(curHealth / m_maxHealth * 100, 100) / 100;
 
-            for (var i1:String in textFields)
-                removeChild(textFields[i1]);
+            while (textFields.length > 0)
+                removeChild(textFields.pop());
 
             textFields = [];
             for (var i:String in _cfg.textFields)
@@ -501,7 +501,7 @@
 
         private function XVMFormatDynamicAlpha(format: String, curHealth: Number): Number
         {
-            if (!format)
+            if (!format || format == "0")
                 return 100;
 
             if (!isNaN(parseInt(format)))
@@ -612,7 +612,8 @@
             //textField.borderColor = 0xFFFFFF;
             textField.embedFonts = !cfg.font.name || cfg.font.name == "$FieldFont";
             textField.defaultTextFormat = XVMCreateNewTextFormat(cfg.font);
-            textField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
+            if (cfg.shadow)
+                textField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow) ];
 
             var staticColor:String = XVMFormatStaticColorText(cfg.color);
             textField.textColor = XVMFormatDynamicColor(staticColor, m_curHealth);

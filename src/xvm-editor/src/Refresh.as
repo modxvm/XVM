@@ -42,7 +42,7 @@ protected function RefreshCurrentPage():void
     }
     catch (ex:Error)
     {
-        debug("ERROR: RefreshConfig(): " + ex.toString());
+        debug("ERROR: RefreshCurrentPage(): " + ex.toString());
     }
 }
 

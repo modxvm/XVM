@@ -58,12 +58,19 @@
 
             public function update():void
             {
-                if (marker1)
-                    marker1.update();
-                if (marker2)
-                    marker2.update();
-                if (marker3)
-                    marker3.update();
+                try
+                {
+                    if (marker1)
+                        marker1.update();
+                    if (marker2)
+                        marker2.update();
+                    if (marker3)
+                        marker3.update();
+                }
+                catch (ex:Error)
+                {
+                    throw new Error("PreviewComponent::update(): " + ex.toString());
+                }
             }
 
             private function switchLayout(event:Event):void
