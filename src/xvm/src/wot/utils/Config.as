@@ -322,40 +322,33 @@ class wot.utils.Config
         if (!prefix)
             prefix = "def";
 
-        //if (prefix.indexOf("damageText.color") >= 0)
-        //    Logger.add(prefix + " def=" + def + " config=" + config);
-
         switch (typeof def)
         {
             case 'object':
                 if (def instanceof Array)
                 {
                     // warning: arrays are not checked now
-                    //Logger.add(prefix + " = [ ]");
                     return (config instanceof Array) ? config : def;
                 }
-                var result = { };
-                for (var name in def)
+                if (def == null)
+                    return (typeof config == 'string' || typeof config == 'number') ? config : null;
+                var result: Object = { };
+                for (var name:String in def)
                 {
-                    /*if (prefix.indexOf("damageText") >= 0 && name == "color")
-                    {
-                        Logger.add(prefix + " " + name + " def=" + def + " config=" + config + " c[n]=" + config[name]);
-                        Logger.addObject(config, "config");
-                    }*/
-                    result[name] = config.hasOwnProperty(name) ? MergeConfigs(config[name], def[name], prefix + "." + name) : def[name];
+                    result[name] = config.hasOwnProperty(name)
+                       ? MergeConfigs(config[name], def[name], prefix + "." + name)
+                       : def[name];
                 }
                 return result;
 
             case 'number':
-                //Logger.add(prefix + " = number " + config + " = " + def);
-                if (isFinite(config))
-                    return Number(config);
+                if (!isNaN(parseFloat(config)))
+                    return parseFloat(config);
                 if (typeof config == 'string')
                     return config;
                 return def;
 
             case 'boolean':
-                //Logger.add(prefix + " = boolean " + config + " = " + def);
                 if (typeof config == 'boolean')
                     return config;
                 if (typeof config == 'string')
@@ -363,17 +356,13 @@ class wot.utils.Config
                 return def;
 
             case 'string':
-                //Logger.add(prefix + " = string " + config + " = " + def);
-                return (typeof config == 'string') ? config : def;
+                return (config == null || typeof config == 'string') ? config : def;
 
             case 'undefined':
             case 'null':
-                //if (prefix.indexOf("damageText") >= 0)
-                //    Logger.add(prefix + " t(def)=" + (typeof def) + " def=" + def + " t(config)=" + (typeof config) + " config=" + config);
                 return (typeof config == 'string' || typeof config == 'number') ? config : def;
 
             default:
-                //Logger.add("unknown type = " + (typeof def) + " prefix=" + prefix);
                 return def;
         }
     }
@@ -407,7 +396,7 @@ class wot.utils.Config
     /**
      * Convert config to new format.
      */
-    private static function FixConfig(config)
+    private static function FixConfig(config):Object
     {
         if (!config)
             return undefined;
@@ -422,19 +411,30 @@ class wot.utils.Config
             // Convert XVM 1.0.0 => 1.1.0
             if (config.battle)
             {
-                config.battle.mirroredVehicleIcons = Utils.toBool(config.battle.mirroredVehicleIcons, true);
-                config.battle.showPostmortemTips = Utils.toBool(config.battle.showPostmortemTips, true);
+                if (config.battle.mirroredVehicleIcons != null)
+                    config.battle.mirroredVehicleIcons = Utils.toBool(config.battle.mirroredVehicleIcons, true);
+                if (config.battle.showPostmortemTips != null)
+                    config.battle.showPostmortemTips = Utils.toBool(config.battle.showPostmortemTips, true);
             }
 
             if (config.rating)
             {
-                config.rating.showPlayersStatistics = Utils.toBool(config.rating.showPlayersStatistics, false);
-                if (config.rating.battleLoading)
-                    config.rating.battleLoading.show = Utils.toBool(config.rating.battleLoading.show, true);
+                if (config.rating.showPlayersStatistics != null)
+                    config.rating.showPlayersStatistics = Utils.toBool(config.rating.showPlayersStatistics, false);
+                if (config.rating.battleLoading) {
+                    if (config.rating.battleLoading.show != null)
+                        config.rating.battleLoading.show = Utils.toBool(config.rating.battleLoading.show, true);
+                }
                 if (config.rating.playersPanel)
-                    config.rating.playersPanel.show = Utils.toBool(config.rating.playersPanel.show, true);
+                {
+                    if (config.rating.playersPanel.show != null)
+                        config.rating.playersPanel.show = Utils.toBool(config.rating.playersPanel.show, true);
+                }
                 if (config.rating.statisticForm)
-                    config.rating.statisticForm.show = Utils.toBool(config.rating.statisticForm.show, true);
+                {
+                    if (config.rating.statisticForm.show != null)
+                        config.rating.statisticForm.show = Utils.toBool(config.rating.statisticForm.show, true);
+                }
                 if (config.rating.colors)
                 {
                     config.colors = config.rating.colors;
@@ -447,43 +447,79 @@ class wot.utils.Config
         if (v == "1.1.0")
         {
             // Convert XVM 1.1.0 => 1.2.0
-            config.battleLoading = { };
-            config.statisticForm = { };
-            config.playersPanel = { };
-            config.playersPanel.medium = { };
-            config.playersPanel.large = { };
-
             if (config.battle)
             {
-                config.battleLoading.showClock = Utils.toBool(config.battle.battleLoadingShowClock, true);
-                config.playersPanel.alpha = Utils.toInt(config.battle.playersPanelAlpha, 100);
-                config.playersPanel.large.width = Utils.toInt(config.battle.playersPanelLargeWidth, 170); // TODO: * coef
+                if (config.battle.battleLoadingShowClock != null)
+                {
+                    if (!config.battleLoading)
+                        config.battleLoading = { };
+                    config.battleLoading.showClock = Utils.toBool(config.battle.battleLoadingShowClock, true);
+                    delete config.battle.battleLoadingShowClock;
+                }
+                if (config.battle.playersPanelAlpha != null)
+                {
+                    if (!config.playersPanel)
+                        config.playersPanel = { };
+                    config.playersPanel.alpha = Utils.toInt(config.battle.playersPanelAlpha, 100);
+                    delete config.battle.playersPanelAlpha;
+                }
+                if (config.battle.playersPanelLargeWidth != null)
+                {
+                    if (!config.playersPanel)
+                        config.playersPanel = { };
+                    config.playersPanel.large = { };
+                    config.playersPanel.large.width = Utils.toInt(config.battle.playersPanelLargeWidth, 170);
+                    delete config.battle.playersPanelLargeWidth;
+                }
             }
 
             if (config.rating)
             {
-                if (config.rating.battleLoading && config.rating.battleLoading.format)
+                if (config.rating.battleLoading)
                 {
-                    config.battleLoading.formatLeft = config.rating.battleLoading.format;
-                    config.battleLoading.formatRight = config.rating.battleLoading.format;
+                    if (config.rating.battleLoading.format)
+                    {
+                        if (!config.battleLoading)
+                            config.battleLoading = { };
+                        config.battleLoading.formatLeft = config.rating.battleLoading.format;
+                        config.battleLoading.formatRight = config.rating.battleLoading.format;
+                    }
+                    delete config.rating.battleLoading;
                 }
-                if (config.rating.statisticForm && config.rating.statisticForm.format)
+
+                if (config.rating.statisticForm)
                 {
-                    config.statisticForm.formatLeft = config.rating.statisticForm.format;
-                    config.statisticForm.formatRight = config.rating.statisticForm.format;
+                    if (config.rating.statisticForm.format != null)
+                    {
+                        if (!config.statisticForm)
+                            config.statisticForm = { };
+                        config.statisticForm.formatLeft = config.rating.statisticForm.format;
+                        config.statisticForm.formatRight = config.rating.statisticForm.format;
+                    }
+                    delete config.rating.statisticForm;
                 }
+
                 if (config.rating.playersPanel)
                 {
-                    if (config.rating.playersPanel.format)
+                    if (config.rating.playersPanel.format != null)
                     {
+                        if (!config.playersPanel)
+                            config.playersPanel = { };
+                        if (!config.playersPanel.large)
+                            config.playersPanel.large = { };
                         config.playersPanel.large.nickFormatLeft = config.rating.playersPanel.format + " {{nick}}";
                         config.playersPanel.large.nickFormatRight = "{{nick}} " + config.rating.playersPanel.format;
                     }
                     if (config.rating.playersPanel.middleColor)
                     {
+                        if (!config.playersPanel)
+                            config.playersPanel = { };
+                        if (!config.playersPanel.medium)
+                            config.playersPanel.medium = { };
                         config.playersPanel.medium.formatLeft = "<font color='" + config.rating.playersPanel.middleColor + "'>{{nick}}</font>";
                         config.playersPanel.medium.formatRight = "<font color='" + config.rating.playersPanel.middleColor + "'>{{nick}}</font>";
                     }
+                    delete config.rating.playersPanel;
                 }
             }
 
@@ -497,14 +533,22 @@ class wot.utils.Config
         {
             if (config.battleLoading)
             {
-                config.battleLoading.clockFormat = config.battleLoading.showClock ? "H:N:S" : "";
-                config.battleLoading.formatLeft = "{{vehicle}}" + (config.battleLoading.formatLeft ? " " + config.battleLoading.formatLeft : "");
-                config.battleLoading.formatRight = (config.battleLoading.formatRight ? config.battleLoading.formatRight + " " : "") + "{{vehicle}}";
+                if (config.battleLoading.showClock != null)
+                {
+                    config.battleLoading.clockFormat = config.battleLoading.showClock == true ? "H:N:S" : "";
+                    delete config.battleLoading.showClock;
+                }
+                if (config.battleLoading.formatLeft != null)
+                    config.battleLoading.formatLeft = "{{vehicle}}" + (config.battleLoading.formatLeft ? " " + config.battleLoading.formatLeft : "");
+                if (config.battleLoading.formatRight != null)
+                    config.battleLoading.formatRight = (config.battleLoading.formatRight ? config.battleLoading.formatRight + " " : "") + "{{vehicle}}";
             }
             if (config.statisticForm)
             {
-                config.statisticForm.formatLeft = "{{vehicle}} " + (config.statisticForm.formatLeft ? " " + config.statisticForm.formatLeft : "");
-                config.statisticForm.formatRight = (config.statisticForm.formatRight ? config.statisticForm.formatRight + " " : "") + " {{vehicle}}";
+                if (config.statisticForm.formatLeft != null)
+                    config.statisticForm.formatLeft = "{{vehicle}} " + (config.statisticForm.formatLeft ? " " + config.statisticForm.formatLeft : "");
+                if (config.statisticForm.formatRight != null)
+                    config.statisticForm.formatRight = (config.statisticForm.formatRight ? config.statisticForm.formatRight + " " : "") + " {{vehicle}}";
             }
             v = "1.4.0";
         }

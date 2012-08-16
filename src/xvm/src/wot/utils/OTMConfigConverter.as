@@ -14,7 +14,7 @@ class wot.utils.OTMConfigConverter
   {
     OTMConfigConverter.otm = otm;
     xvm = {
-      configVersion: "1.1.0",
+      configVersion: "1.0.0",
       definition: { },
       battle: { },
       rating: { },
@@ -23,7 +23,6 @@ class wot.utils.OTMConfigConverter
         enemy: { alive: { normal: { }, extended: { } }, dead: { normal: { }, extended: { } } }
       }
     };
-    xvm.configVersion = "1.0.0";
 
     xvm.definition.author = string("definition/author/data");
     xvm.definition.description = string("definition/description/data");
@@ -54,12 +53,21 @@ class wot.utils.OTMConfigConverter
     return isNaN(n) ? defaultValue : n;
   }
 
-  public static function bool(path: String, trueIsDefault: Boolean): Boolean
+  public static function bool(path: String, defaultValue: Boolean): Boolean
   {
     if (!otm)
       return undefined;
-    var v = value(path).toLowerCase();
-    return trueIsDefault ? v != "false" : v == "true";
+    var v = value(path);
+    if (!v)
+        return defaultValue;
+    if (typeof v == "boolean")
+        return v;
+    if (typeof v == "string")
+    {
+        v = v.toLowerCase();
+        return defaultValue ? v != "false" : v == "true";
+    }
+    return defaultValue;
   }
 
   public static function string(path: String, defaultValue: String): String
@@ -76,22 +84,22 @@ class wot.utils.OTMConfigConverter
       return undefined;
     var p: Array = path.split("/"); // "path/to/value"
     var root = otm;
-    var p_length = p.length;
-    for (var i = 0; i < p_length; ++i)
+    var p_length: Number = p.length;
+    for (var i: Number = 0; i < p_length; ++i)
     {
       if (!root.hasOwnProperty(p[i]))
         return undefined;
       root = root[p[i]];
     }
-    return convertFunc ? convertFunc(root) : root;
+    return (convertFunc != null) ? convertFunc(root) : root;
   }
 
   public static function setValue(path: String, v)
   {
     var p: Array = path.split("/"); // "path/to/value"
     var root = xvm;
-    var p_length = p.length;
-    for (var i = 0; i < p_length - 1; ++i)
+    var p_length: Number = p.length;
+    for (var i: Number = 0; i < p_length - 1; ++i)
     {
       if (!root.hasOwnProperty(p[i]))
         root[p[i]] = { };
@@ -118,7 +126,7 @@ class wot.utils.OTMConfigConverter
 
   // Components section
 
-  private static var otmComponentsMap: Object = [
+  private static var otmComponentsMap:Array = [
     [ "combatScrollText/enabled/attributes/value", "damageText/visible" ],
     [ "combatScrollText/speed/attributes/value", "damageText/speed" ],
     [ "combatScrollText/color/attributes/value", "damageText/color" ],
@@ -167,7 +175,7 @@ class wot.utils.OTMConfigConverter
   private static function ConvertComponents()
   {
     // components/friend/combatScrollText
-    var carr = [ "friend", "enemy" ];
+    var carr: Array = [ "friend", "enemy" ];
     for (var cid in carr)
     {
       var cname = carr[cid];
@@ -217,7 +225,7 @@ class wot.utils.OTMConfigConverter
           {
             if (i4 == "playerName" || i4 == "vehicleName" || i4 == "currentHealth" || i4 == "healthRatio" || i4 == "infoText")
               continue;
-            var xname = i4;
+            var xname: String = i4;
             if (i4 == "combatScrollText")
               xname = "damageText";
             var op:String = "behavior/" + i1 + "/" + i2 + "/" + i3 + "/" + i4 + "/attributes/";
@@ -231,7 +239,7 @@ class wot.utils.OTMConfigConverter
   }
 
   // Text fields section
-  private static function GetTextField(team, mode, fieldName)
+  private static function GetTextField(team: String, mode: String, fieldName: String)
   {
     var ocp: String = "components/" + team + "/" + fieldName + "/";
     var obp: String = "behavior/" + team + "/" + mode + "/" + fieldName + "/attributes/";
@@ -239,10 +247,10 @@ class wot.utils.OTMConfigConverter
     if (!bool(obp + "visible"))
       return null;
 
-    var fieldText = "";
-    var dx = 0;
-    var dy = 0;
-    var bold = false;
+    var fieldText: String = "";
+    var dx: Number = 0;
+    var dy: Number = 0;
+    var bold: Boolean = false;
     switch (fieldName)
     {
       case "playerName":
@@ -328,7 +336,7 @@ class wot.utils.OTMConfigConverter
     var obp: String = "behavior/" + team + "/" + mode + "/infoText";
 
     var infoText = value(obp);
-    var textFields = [];
+    var textFields:Array = [];
     if (infoText instanceof Array)
     {
       for (var i in infoText)
@@ -350,21 +358,21 @@ class wot.utils.OTMConfigConverter
 
   private static function ConvertTextFields()
   {
-    var carr = [ "friend", "enemy" ];
-    var barr = [ "alive/normal", "alive/extended", "dead/normal", "dead/extended" ];
-    var farr = [ "playerName", "vehicleName", "currentHealth", "healthRatio", "infoText" ];
+    var carr:Array = [ "friend", "enemy" ];
+    var barr:Array = [ "alive/normal", "alive/extended", "dead/normal", "dead/extended" ];
+    var farr:Array = [ "playerName", "vehicleName", "currentHealth", "healthRatio", "infoText" ];
 
-    for (var cid in carr)
+    for (var cid:String in carr)
     {
-      var cname = carr[cid];
-      var xname = (cname == "friend") ? "ally" : "enemy";
-      for (var bid in barr)
+      var cname:String = carr[cid];
+      var xname:String = (cname == "friend") ? "ally" : "enemy";
+      for (var bid:String in barr)
       {
-        var bname = barr[bid];
+        var bname:String = barr[bid];
         var fields: Array = [ ];
-        for (var fid in farr)
+        for (var fid:String in farr)
         {
-          var fname = farr[fid];
+          var fname:String = farr[fid];
           //wot.utils.Logger.add("ConvertTextFields: " + cname + ", " + bname + ", " + fname);
           var field = GetTextField(cname, bname, fname);
           if (field)
@@ -372,7 +380,7 @@ class wot.utils.OTMConfigConverter
           //wot.utils.Logger.add("ConvertTextFields: " + cname + ", " + bname + ", " + fname + " - done");
         }
         var infoTextFields = GetInfoTextFields(cname, bname);
-        for (var i in infoTextFields)
+        for (var i:String in infoTextFields)
           fields.push(infoTextFields[i]);
         //wot.utils.Logger.add("markers/" + xname + "/" + bname + "/textFields = " + fields.length)
         setValue("markers/" + xname + "/" + bname + "/textFields", fields);

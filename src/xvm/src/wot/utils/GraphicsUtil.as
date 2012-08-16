@@ -42,12 +42,12 @@ class wot.utils.GraphicsUtil
   }
 
   //method to set a specified movieClip(item:movidClip) to a specified color(col:hex value number)
-  public static function setColor(item: MovieClip, col: Number, ratio: Number)
+  public static function setColor(item:Object, col:Number, ratio:Number)
   {
     var tr: ColorTransform = new ColorTransform();
     tr.rgb = Number(col);
 
-    if (isFinite(ratio))
+    if (!isNaN(ratio))
     {
       tr.redMultiplier = 1 - ratio;
       tr.greenMultiplier = 1 - ratio;
@@ -132,10 +132,10 @@ class wot.utils.GraphicsUtil
     if (!prefix)
       prefix = "#";
 
-    if (value == undefined || value == null)
+    if (isNaN(value))
       return prefix + "FFFBFB";
 
-    var cfg_root = Config.s_config.colors;
+    var cfg_root: Object = Config.s_config.colors;
     var cfg: Array;
     switch (type)
     {
@@ -161,7 +161,7 @@ class wot.utils.GraphicsUtil
         return prefix + "FFFEFE";
     }
 
-    var cfg_len = cfg.length;
+    var cfg_len:Number = cfg.length;
     if (value == 0 && (type == Defines.DYNAMIC_COLOR_EFF || type == Defines.DYNAMIC_COLOR_RATING))
     {
       if (cfg_len == 0)
@@ -175,15 +175,15 @@ class wot.utils.GraphicsUtil
       return prefix + color.toString(16);
     }
 
-    for (var i = 0; i < cfg_len; ++i)
+    for (var i:Number = 0; i < cfg_len; ++i)
     {
-      var cvalue: Number = cfg[i].value;
-      var color: Number = Utils.toInt(cfg[i].color, 0xFFFFFF);
-      if (value < cvalue)
+      var cvalue2: Number = cfg[i].value;
+      var color2: Number = Utils.toInt(cfg[i].color, 0xFFFFFF);
+      if (value < cvalue2)
       {
         if (darker)
-          color = GraphicsUtil.darkenColor(color, 50);
-        return prefix + color.toString(16);
+          color2 = GraphicsUtil.darkenColor(color2, 50);
+        return prefix + color2.toString(16);
       }
     }
 
@@ -192,10 +192,10 @@ class wot.utils.GraphicsUtil
 
   public static function GetDynamicAlphaValue(type: Number, value: Number): Number
   {
-    if (value == undefined || value == null)
+    if (isNaN(value))
       return 101;
 
-    var cfg_root = Config.s_config.alpha;
+    var cfg_root: Object = Config.s_config.alpha;
     var cfg: Array;
     switch (type)
     {
@@ -223,8 +223,8 @@ class wot.utils.GraphicsUtil
         return 102;
     }
 
-    var cfg_len = cfg.length;
-    for (var i = 0; i < cfg_len; ++i)
+    var cfg_len: Number = cfg.length;
+    for (var i: Number = 0; i < cfg_len; ++i)
     {
       var avalue: Number = cfg[i].value;
       var alpha: Number = cfg[i].alpha;

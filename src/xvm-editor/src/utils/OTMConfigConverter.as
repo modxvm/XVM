@@ -9,10 +9,10 @@ package utils
   // Convert OTMData.xml => XVM 1.1.0
   public class OTMConfigConverter
   {
-    private static var otm: *;
-    private static var xvm: *;
+    private static var otm: Object;
+    private static var xvm: Object;
 
-    public static function convert(otm:*):*
+    public static function convert(otm:Object):Object
     {
       OTMConfigConverter.otm = otm;
       xvm = {
@@ -60,16 +60,16 @@ package utils
       if (!otm)
         return undefined;
       var v:* = value(path);
-	  if (!v)
-		  return defaultValue;
-	  if (v is Boolean)
-		  return v;
-	  if (v is String)
-	  {
-	    v = v.toLowerCase();
+      if (!v)
+          return defaultValue;
+      if (v is Boolean)
+          return v;
+      if (v is String)
+      {
+        v = v.toLowerCase();
         return defaultValue ? v != "false" : v == "true";
-	  }
-	  return defaultValue;
+      }
+      return defaultValue;
     }
 
     public static function string(path: String, defaultValue: String = null): String
@@ -86,7 +86,8 @@ package utils
         return undefined;
       var p: Array = path.split("/"); // "path/to/value"
       var root:* = otm;
-      for (var i:Number = 0; i < p.length; ++i)
+      var p_length: Number = p.length;
+      for (var i: Number = 0; i < p_length; ++i)
       {
         if (!root.hasOwnProperty(p[i]))
           return undefined;
@@ -99,13 +100,14 @@ package utils
     {
       var p: Array = path.split("/"); // "path/to/value"
       var root:* = xvm;
-      for (var i:Number = 0; i < p.length - 1; ++i)
+      var p_length: Number = p.length;
+      for (var i: Number = 0; i < p_length - 1; ++i)
       {
         if (!root.hasOwnProperty(p[i]))
           root[p[i]] = { };
         root = root[p[i]];
       }
-      root[p[p.length - 1]] = v;
+      root[p[p_length - 1]] = v;
     }
 
     private static function Copy(otmpath: String, xvmpath: String):void
@@ -180,7 +182,7 @@ package utils
         for each (var map:Array in otmComponentsMap)
           CopyX(op + map[0], xp, map[1]);
 
-		// Convert combat scroll texts
+        // Convert combat scroll texts
         var cstPrefix: String = string(op + "combatScrollText/prefix");
         var cstPostfix: String = string(op + "combatScrollText/postfix");
         var cstHitKind: String = string(op + "combatScrollText/hitKind");

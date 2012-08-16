@@ -16,6 +16,53 @@ package utils
 		  return str.lastIndexOf(substr) == (str.length - substr.length);
 	  }
 
+      public static function trim(s:String):String
+      {
+          return s ? s.replace(/^\s+|\s+$/gs, '') : "";
+      }
+
+      public static function toInt(value: Object, defaultValue: Number): Number
+      {
+          if (!defaultValue)
+              defaultValue = 0;
+          if (!value)
+              return defaultValue;
+          var n: Number = parseInt(value.toString());
+          return isNaN(n) ? defaultValue : n;
+      }
+
+      public static function toFloat(value: Object, defaultValue: Number): Number
+      {
+          if (!defaultValue)
+              defaultValue = 0;
+          if (!value)
+              return defaultValue;
+          var n: Number = parseFloat(value.toString());
+          return isNaN(n) ? defaultValue : n;
+      }
+
+      public static function toBool(value: Object, defaultValue: Boolean): Boolean
+      {
+          if ((typeof value) == "boolean")
+              return Boolean(value);
+          if (!value)
+              return defaultValue;
+          value = String(value).toLowerCase();
+          return defaultValue ? value != "false" : value == "true";
+      }
+
+      public static function toString(value: Object, defaultValue: String): String
+      {
+          return value ? String(value) : defaultValue;
+      }
+
+      public static function elapsedMSec(start:Date, end:Date): Number
+      {
+          var d1:Number = start.hours * 3600000 + start.minutes * 60000 + start.seconds * 1000 + start.milliseconds;
+          var d2:Number = end.hours * 3600000 + end.minutes * 60000 + end.seconds * 1000 + end.milliseconds;
+          return d2 - d1;
+      }
+
 	  public static function fixPath(path: String): String
 	  {
 		  path = path.split("\\").join("/");
@@ -24,42 +71,7 @@ package utils
 		  return path;
 	  }
 
-	  public static function toBool(value: Object, defaultValue: Boolean): Boolean
-	  {
-		  if ((typeof value) == "boolean")
-			  return Boolean(value);
-		  if (!value)
-			  return defaultValue;
-		  value = String(value).toLowerCase();
-		  return defaultValue ? value != "false" : value == "true";
-	  }
-
-	  public static function toInt(value: Object, defaultValue: Number): Number
-	  {
-		  if (!defaultValue)
-			  defaultValue = 0;
-		  if (!value)
-			  return defaultValue;
-		  var n: Number = parseInt(value.toString());
-		  return isNaN(n) ? defaultValue : n;
-	  }
-
-	  public static function toString(value: Object, defaultValue: String): String
-	  {
-		  return value ? String(value) : defaultValue;
-	  }
-
-	  public static function trim(s:String):String
-	  {
-		  return s ? s.replace(/^\s+|\s+$/gs, '') : "";
-	  }
-
-	  public static function elapsedMSec(start:Date, end:Date): Number
-	  {
-		  var d1:Number = start.hours * 3600000 + start.minutes * 60000 + start.seconds * 1000 + start.milliseconds;
-		  var d2:Number = end.hours * 3600000 + end.minutes * 60000 + end.seconds * 1000 + end.milliseconds;
-		  return d2 - d1;
-	  }
+      ///////////////////////
 
       public static function sortXMLByAttribute
           (
@@ -76,15 +88,15 @@ package utils
           for each(item in $xml.children())
           {
               var object:Object = {
-                  data	: item, 
+                  data	: item,
                   order	: item.attribute($attribute)
               };
               xmlArray.push(object);
           }
-          
+
           //sort using the power of Array.sortOn()
           xmlArray.sortOn('order',$options);
-          
+
           //create a new XMLList with sorted XML
           var sortedXmlList:XMLList = new XMLList();
           var xmlObject:Object;
@@ -92,7 +104,7 @@ package utils
           {
               sortedXmlList += xmlObject.data;
           }
-          
+
           if($copy)
           {
               //don't modify original

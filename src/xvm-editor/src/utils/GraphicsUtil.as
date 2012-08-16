@@ -14,7 +14,7 @@ public class GraphicsUtil
     public static function createShadowFilter(distance:Number, angle:Number, color:Number,
         alpha:Number, size:Number, strength:Number):Object
     {
-        if (alpha == 0 || strength == 0 || size == 0)
+        if (!alpha || !strength || !size)
             return null;
         return new DropShadowFilter(distance, angle, color, alpha * 0.01, size, size, strength * 0.01, 3);
     }
@@ -31,12 +31,12 @@ public class GraphicsUtil
   }
 
   //method to set a specified movieClip(item:movidClip) to a specified color(col:hex value number)
-  public static function setColor(item: Object, col: Number, ratio: Number = NaN):void
+  public static function setColor(item:Object, col:Number, ratio:Number = NaN):void
   {
     var tr: ColorTransform = new ColorTransform();
     tr.color = Number(col);
 
-    if (isFinite(ratio))
+    if (!isNaN(ratio))
     {
       tr.redMultiplier = 1 - ratio;
       tr.greenMultiplier = 1 - ratio;
@@ -118,7 +118,10 @@ public class GraphicsUtil
 
   public static function GetDynamicColorValue(type: Number, value: Number, prefix: String = "#", darker: Boolean = false): String
   {
-    var cfg_root:Object = Config.s_config.colors;
+    if (isNaN(value))
+      return prefix + "FFFBFB";
+
+    var cfg_root: Object = Config.s_config.colors;
     var cfg: Array;
     switch (type)
     {
@@ -175,6 +178,9 @@ public class GraphicsUtil
 
   public static function GetDynamicAlphaValue(type: Number, value: Number): Number
   {
+    if (isNaN(value))
+      return 101;
+
     var cfg_root:Object = Config.s_config.alpha;
     var cfg: Array;
     switch (type)

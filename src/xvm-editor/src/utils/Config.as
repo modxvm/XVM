@@ -26,12 +26,12 @@ package utils
                 case 'object':
                     if (def is Array)
                     {
-                        // warning: arrays are not checking now
+                        // warning: arrays are not checked now
                         return (config is Array) ? config : def;
                     }
                     if (def == null)
                         return (typeof config == 'string' || typeof config == 'number') ? config : null;
-                    var result:* = { };
+                    var result: Object = { };
                     for (var name:String in def)
                     {
                         result[name] = config.hasOwnProperty(name)
@@ -41,8 +41,8 @@ package utils
                     return result;
 
                 case 'number':
-                    if (!isNaN(parseInt(config)))
-                        return parseInt(config);
+                    if (!isNaN(parseFloat(config)))
+                        return parseFloat(config);
                     if (typeof config == 'string')
                         return config;
                     return def;
@@ -57,9 +57,9 @@ package utils
                 case 'string':
                     return (config == null || typeof config == 'string') ? config : def;
 
-    		    case 'undefined':
-		        case 'null':
-    		        return (typeof config == 'string' || typeof config == 'number') ? config : def;
+                case 'undefined':
+                case 'null':
+                    return (typeof config == 'string' || typeof config == 'number') ? config : def;
 
                 default:
                     return def;
@@ -91,73 +91,6 @@ package utils
     	    if (isNaN(Config.s_config.playersPanel.clanIcon.yr))
     		    Config.s_config.playersPanel.clanIcon.yr = Config.s_config.playersPanel.clanIcon.y;
         }
-
-    	/**
-    	 * Get config value
-    	 */
-    	public static function GetValue(path:String, root:Object = null):*
-    	{
-    		if (root == null)
-    			root = s_config;
-    		if (!root)
-    			return null;
-
-    		var p:Array = path.split("."); // "path.to.value"
-    		var valueElement:String = p.pop(); // last element is value
-
-    		for each (var e:String in p)
-    		{
-    			// Create shild if not exist
-    			if (!root.hasOwnProperty(e))
-    				return undefined;
-    			// Shift root to next child
-    			root = root[e];
-    		}
-
-    		return root[valueElement];
-    	}
-
-    	/**
-    	 * Set config value
-    	 */
-    	public static function SetValue(path:String, value:*, root:Object = null):void
-    	{
-    		if (root == null)
-    			root = s_config;
-    		if (!root)
-    			return;
-
-    		var p:Array = path.split("."); // "path.to.value"
-    		var valueElement:String = p.pop(); // last element is value
-
-    		for each (var e:String in p)
-    		{
-    			// Create shild if not exist
-    			if (!root.hasOwnProperty(e))
-    				root[e] = new Object();
-    			// Shift root to next child
-    			root = root[e];
-    		}
-
-    		// Set value
-//    		if (value === undefined)
-//                delete root[valueElement];
-            if (value === null || value === undefined) // FIXIT: why undefined presents?
-    			root[valueElement] = null;
-    		else
-                root[valueElement] = value;
-    	}
-
-    	public static function SetDefaultValue(path:String):Boolean
-    	{
-    		var defValue:Object = GetValue(path, DefaultConfig.config);
-    		if (defValue == null)
-    			return false;
-
-    		Config.SetValue(path, defValue);
-    		Config.TuneupConfig();
-    		return true;
-    	}
 
         public static function FixConfig(config:Object):Object
         {
@@ -332,5 +265,72 @@ package utils
             config.configVersion = v;
             return config;
         }
+
+    	/**
+    	 * Get config value
+    	 */
+    	public static function GetValue(path:String, root:Object = null):*
+    	{
+    		if (root == null)
+    			root = s_config;
+    		if (!root)
+    			return null;
+
+    		var p:Array = path.split("."); // "path.to.value"
+    		var valueElement:String = p.pop(); // last element is value
+
+    		for each (var e:String in p)
+    		{
+    			// Create shild if not exist
+    			if (!root.hasOwnProperty(e))
+    				return undefined;
+    			// Shift root to next child
+    			root = root[e];
+    		}
+
+    		return root[valueElement];
+    	}
+
+    	/**
+    	 * Set config value
+    	 */
+    	public static function SetValue(path:String, value:*, root:Object = null):void
+    	{
+    		if (root == null)
+    			root = s_config;
+    		if (!root)
+    			return;
+
+    		var p:Array = path.split("."); // "path.to.value"
+    		var valueElement:String = p.pop(); // last element is value
+
+    		for each (var e:String in p)
+    		{
+    			// Create shild if not exist
+    			if (!root.hasOwnProperty(e))
+    				root[e] = new Object();
+    			// Shift root to next child
+    			root = root[e];
+    		}
+
+    		// Set value
+//    		if (value === undefined)
+//                delete root[valueElement];
+            if (value === null || value === undefined) // FIXIT: why undefined presents?
+    			root[valueElement] = null;
+    		else
+                root[valueElement] = value;
+    	}
+
+    	public static function SetDefaultValue(path:String):Boolean
+    	{
+    		var defValue:Object = GetValue(path, DefaultConfig.config);
+    		if (defValue == null)
+    			return false;
+
+    		Config.SetValue(path, defValue);
+    		Config.TuneupConfig();
+    		return true;
+    	}
     }
 }
