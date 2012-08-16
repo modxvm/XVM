@@ -610,8 +610,8 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             textField.multiline = false;
             textField.wordWrap = false;
             textField.antiAliasType = "normal";
-            textField.antiAliasType = "advanced";
-            textField.gridFitType = "NONE";
+            //textField.antiAliasType = "advanced";
+            //textField.gridFitType = "NONE";
             textField._quality = "BEST";
             //textField.border = true;
             //textField.borderColor = 0xFFFFFF;
