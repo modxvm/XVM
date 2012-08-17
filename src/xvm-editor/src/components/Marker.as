@@ -340,7 +340,12 @@
 
         private function XVMShowDamage(curHealth:Number, delta:Number):void
         {
-            var cfg:Object = _cfg.damageText;
+            var cfg:Object = Config.s_config.markers;
+            cfg = _vtype == "ally" ? cfg.ally : cfg.enemy;
+            cfg = curHealth > 0 ? cfg.alive : cfg.dead;
+            cfg = _extmode ? cfg.extended : cfg.normal;
+
+            cfg = cfg.damageText;
 
             if (!cfg.visible)
                 return;
