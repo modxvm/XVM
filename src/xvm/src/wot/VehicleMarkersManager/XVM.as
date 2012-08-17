@@ -22,6 +22,7 @@ import wot.utils.Utils;
 import wot.utils.Logger;
 import wot.utils.PlayerInfo;
 import wot.VehicleMarkersManager.ErrorHandler;
+import wot.VehicleMarkersManager.LevelIconComponent;
 
 /*
  * XVM() instance creates corresponding marker
@@ -58,6 +59,8 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
 
     // TextFields
     var textFields: Object = null;
+    
+    var levelIconComponent: LevelIconComponent;
 
     // Healthbar Settings
     var hbCfg: Object = null;
@@ -175,12 +178,29 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
     // override
     function init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt)
     {
+       /*  Warning! 
+        *  init() is called two or three times instantaneously by WG
+        * 
+        *  Logger.add("ov:init(" + pFullName + " " + curHealth + " " + maxHealth + " " + entityName);
+        *  ->
+        *  2012.08.12 19:08:07 [i] [002] ov:init(Anatb_RU 300 300 ally
+        *  2012.08.12 19:08:07 [i] [004] ov:init(Anatb_RU 300 300 ally
+        *  
+        *  Introducing preventive measures at this function somehow causes marker malfunction.
+        *  Maybe because of "if (initialized) this.populateData()" statement at parent class.
+        */
+
         //Logger.add("XVM::init(): Config.s_loaded=" + Config.s_loaded);
         // Use currently remembered extended / normal status for new markers
         m_showExInfo = s_showExInfo;
         m_isDead = curHealth <= 0;
         m_defaultIconSource = vIconSource;
 
+       /* super.init(*)
+        * saves arguments to corresponding m_* fields
+        * and calls if (initialized) this.populateData().
+        * See _Super.as for details.
+        */
         super.init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt);
     }
 
@@ -276,6 +296,10 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
     // override
     function setupIconLoader()
     {
+       /* Called by 
+        * populateData()
+        * XVMpopulateData()
+        */
         if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
         {
             super.setupIconLoader();
@@ -293,24 +317,49 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
     // override
     function populateData()
     {
-        //Logger.add("XVM::populateData(): Config.s_loaded=" + Config.s_loaded);
-        if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
-            return super.populateData();
+       /* Called by
+        * super.init()
+        * super.configUI()
+        * Method invocation order determined empirically. Parent method invokes child.
+        * All AS2\AS3 methods are virtual.
+        */
+        
+       /* super.populateData() setups and shows
+        * levelIcon, HP, tankIcon, action marker, player name
+        * depending on normal or extended mode.
+        * This overriden method follows same subjects.
+        */
 
-        //super.populateData();
+        //Logger.add("XVM::populateData(): Config.s_loaded=" + Config.s_loaded);
+       
+       /* Standart marker fallback implementation.
+        * Warning! Breaks normal workflow.
+        * Code below return statement does not get executed at round start.
+        * Commenting out fixed levelIconComponent for ally tanks at round start;
+        * TODO: fix, delete or investigate further.
+        */
+        //if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
+        //    return super.populateData();
 
         //Logger.add("populateData(): " + GetCurrentStateString() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
 
+       /*  populateData() is executed two or three times instantaneously by super.init()
+        *  WG introduced preventive measures at parent class by themselves.
+        *  Code below is WG copypaste from super.populateData()
+        *  see _Super.as for details.
+        */
         if (m_isPopulated)
             return false;
         m_isPopulated = true;
 
+        // super.initMarkerLabel() handles color blind mode.
+        // Commenting out this XVM specific realization does not change behavior.
+        // TODO: fix, delete or investigate further.
         initMarkerLabel();
 
         setupIconLoader();
 
-        if (levelIcon != null)
-            levelIcon.gotoAndStop(m_level);
+        levelIconComponent = new LevelIconComponent(this);
 
         if (m_vehicleClass != null)
             this.setVehicleClass();
@@ -998,15 +1047,8 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             marker._visible = visible;
 
             // Level Icon
-            visible = cfg.levelIcon.visible;
-            if (visible)
-            {
-                levelIcon._x = cfg.levelIcon.x;
-                levelIcon._y = cfg.levelIcon.y;
-                levelIcon._alpha = XVMFormatDynamicAlpha(cfg.levelIcon.alpha, m_curHealth);
-            }
-            levelIcon._visible = visible;
-
+            levelIconComponent.updateState(cfg);
+            
             // Action Marker
             visible = cfg.actionMarker.visible;
             if (visible)
