@@ -532,8 +532,8 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             formatArr = format.split("{{c:vtype}}");
             if (formatArr.length > 1)
             {
-                format = formatArr.join(GraphicsUtil.GetVTypeColorValue(
-                    Utils.vehicleClassToVehicleType(m_vehicleClass), m_defaultIconSource, "0x"))
+                format = formatArr.join(GraphicsUtil.GetVTypeColorValue(m_defaultIconSource,
+                    Utils.vehicleClassToVehicleType(m_vehicleClass), "0x"));
             }
             return isFinite(format) ? Number(format) : systemColor;
         }

@@ -3,6 +3,7 @@
  * @author Maxim Schedriviy
  */
 import wot.utils.Defines;
+import wot.utils.GraphicsUtil;
 import wot.utils.StatFormat;
 
 class wot.utils.TextCache
@@ -20,7 +21,7 @@ class wot.utils.TextCache
   {
     return s_textCache[key];
   }
-  
+
   public static function Format(key: String, data: Object, format: String, width: Number, tf: TextFormat, deadState: Number): String
   {
     TextCache.data = data;
@@ -40,6 +41,8 @@ class wot.utils.TextCache
     var name = data.label + ((data.clanAbbrev == "") ? "" : "[" + data.clanAbbrev + "]");
 
     format = format.split("{{vehicle}}").join(data.vehicle);
+    format = format.split("{{c:vtype}}").join(GraphicsUtil.GetVTypeColorValue(data.icon));
+
     format = StatFormat.FormatText(data, format, isDead);
 
     // cut player name for field width
@@ -75,5 +78,5 @@ class wot.utils.TextCache
 
     return format;
   }
-  
+
 }

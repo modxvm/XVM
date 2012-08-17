@@ -50,6 +50,8 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 
     m_names.condenseWhite = true;
     m_vehicles.condenseWhite = true;
+    m_vehicles.verticalAlign = "center";
+    m_vehicles.verticalAutoSize = true;
 
     super.setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount);
 

@@ -32,6 +32,8 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
         Utils.TraceXvmModule("BattleLoadingItemRenderer");
 
         vehicleField.html = true;
+        vehicleField.verticalAlign = "center";
+        vehicleField.verticalAutoSize = true;
     }
 
     // override

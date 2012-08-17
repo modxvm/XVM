@@ -33,6 +33,8 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
         Utils.TraceXvmModule("BattleStatItemRenderer");
 
         col3.html = true;
+        col3.verticalAlign = "center";
+        col3.verticalAutoSize = true;
 
         GlobalEventDispatcher.addEventListener("config_loaded", StatLoader.LoadLastStat);
         Config.LoadConfig("BattleStatItemRenderer.as");
