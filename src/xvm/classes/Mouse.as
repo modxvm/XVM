@@ -1,14 +1,14 @@
-/**************************************************************************
+﻿/**********************************************************************
+ Copyright (c) 2009 Scaleform Corporation. All Rights Reserved.
 
-Filename    :   Mouse.as
-
-Copyright   :   Copyright 2011 Autodesk, Inc. All Rights reserved.
-
-Use of this software is subject to the terms of the Autodesk license
-agreement provided at the time of installation or download, or which
-otherwise accompanies this software in either electronic or hard copy form.
-
-**************************************************************************/
+ Portions of the integration code is from Epic Games as identified by Perforce annotations.
+ Copyright © 2010 Epic Games, Inc. All rights reserved.
+ 
+ Licensees may use this file in accordance with the valid Scaleform
+ License Agreement provided with the software. This file is provided 
+ AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY 
+ OF DESIGN, MERCHANTABILITY AND FITNESS FOR ANY PURPOSE.
+**********************************************************************/
 
 /**
  * This intrinsic class replaces the built-in intrinsic class, and adds the Scaleform GFx methods and Properties of the Mouse class, making the GFx properties compile-safe so they can be typed using dot-notation instead of bracket-access.
