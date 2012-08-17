@@ -33,6 +33,8 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
         Utils.TraceXvmModule("BattleStatItemRenderer");
 
         col3.html = true;
+        col3._y = 0;
+        col3._height = _height;
         col3.verticalAlign = "center";
         col3.verticalAutoSize = true;
 

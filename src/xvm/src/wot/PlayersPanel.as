@@ -41,6 +41,13 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     }
   }
 
+  var _init:Boolean = false;
+
+  // Centered _y value of text field 
+  var centeredTextY:Number;
+  var leadingNames:Number;
+  var leadingVehicles:Number;
+  
   function setData2(data, sel, postmortemIndex, isColorBlind, knownPlayersCount)
   {
     //Logger.add("PlayersPanel.setData2()");
@@ -50,8 +57,14 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 
     m_names.condenseWhite = true;
     m_vehicles.condenseWhite = true;
-    m_vehicles.verticalAlign = "center";
-    m_vehicles.verticalAutoSize = true;
+
+    if (!_init)
+    {
+        _init = true;
+        centeredTextY = m_names._y - 5;
+        m_names.verticalAlign = "top"; // for incomplete team - cannot set to "center"
+        m_vehicles.verticalAlign = "top"; // for incomplete team - cannot set to "center"
+    }
 
     super.setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount);
 
@@ -69,6 +82,13 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
       XVMAdjustPanelSize();
       _lastAdjustedState = m_state;
     }
+
+    // FIXIT: this code is not optimal. Find how to set default leading for text fields and remove this code.
+    m_names.htmlText = m_names.htmlText.split('LEADING="9"').join('LEADING="' + leadingNames + '"');
+    m_names._y = centeredTextY + leadingNames / 2.0; // centering on cell, because of align=top
+    
+    m_vehicles.htmlText = m_vehicles.htmlText.split('LEADING="9"').join('LEADING="' + leadingVehicles + '"');
+    m_vehicles._y = centeredTextY + leadingVehicles / 2.0; // centering on cell, because of align=top
 
     if (DEBUG_TIMES)
       Logger.add("DEBUG TIME: PlayersPanel: setData2(): " + Utils.elapsedMSec(start, new Date()) + " ms");
@@ -225,6 +245,12 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     m_names._width = namesWidth;
     m_vehicles._width = vehiclesWidth;
 
+    if (m_names && m_names._visible)
+        leadingNames = 29 - XVMGetMaximumFieldHeight(m_names);
+
+    if (m_vehicles && m_vehicles._visible)
+        leadingVehicles = 29 - XVMGetMaximumFieldHeight(m_vehicles);
+
     if (m_type == "left")
     {
       m_names._x = squadSize;
@@ -255,5 +281,17 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         max_width = w;
     }
     return max_width;
+  }
+
+  function XVMGetMaximumFieldHeight(field: TextField)
+  {
+    var max_height = 0;
+    for (var i = 0; i < field.numLines; ++i)
+    {
+      var w = Math.round(field.getLineMetrics(i).height) + 4; // 4 is a size of gutters
+      if (w > max_height)
+        max_height = w;
+    }
+    return max_height;
   }
 }

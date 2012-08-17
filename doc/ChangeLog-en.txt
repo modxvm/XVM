@@ -1,4 +1,9 @@
-﻿XVM-2.5.2.test3:
+﻿XVM-2.5.2.test4:
+  * added color for premium tanks to {{c:vtype}} macro
+  * {{c:vtype}} macro can be used in BattleLoading, PlayersPanel and
+    StatisticForm
+
+XVM-2.5.2.test3:
   * removed coords grid (parameter battle.drawGrid)
   * statistics enabled by default
   * added {{rlevel}} macro for vehicle level in roman numerals
