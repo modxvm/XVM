@@ -23,6 +23,7 @@ import wot.utils.Logger;
 import wot.utils.PlayerInfo;
 import wot.VehicleMarkersManager.ErrorHandler;
 import wot.VehicleMarkersManager.LevelIconComponent;
+import wot.VehicleMarkersManager.LevelIconProxy;
 
 /*
  * XVM() instance creates corresponding marker
@@ -358,8 +359,9 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         initMarkerLabel();
 
         setupIconLoader();
-
-        levelIconComponent = new LevelIconComponent(this);
+        
+        var levelIconProxy = new LevelIconProxy(this);
+        levelIconComponent = new LevelIconComponent(levelIconProxy);
 
         if (m_vehicleClass != null)
             this.setVehicleClass();
