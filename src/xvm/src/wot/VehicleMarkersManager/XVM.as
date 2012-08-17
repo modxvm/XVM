@@ -54,6 +54,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
     var m_isDead: Boolean = false;
     var m_clanIcon: UILoaderAlt = null;
     var m_iconset: IconLoader;
+    var m_defaultIconSource: String;
 
     // TextFields
     var textFields: Object = null;
@@ -178,6 +179,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         // Use currently remembered extended / normal status for new markers
         m_showExInfo = s_showExInfo;
         m_isDead = curHealth <= 0;
+        m_defaultIconSource = vIconSource;
 
         super.init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt);
     }
@@ -529,7 +531,10 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
                 format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"))
             formatArr = format.split("{{c:vtype}}");
             if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetVTypeColorValue(Utils.vehicleClassToVehicleType(m_vehicleClass), "0x"))
+            {
+                format = formatArr.join(GraphicsUtil.GetVTypeColorValue(
+                    Utils.vehicleClassToVehicleType(m_vehicleClass), m_defaultIconSource, "0x"))
+            }
             return isFinite(format) ? Number(format) : systemColor;
         }
         catch (e)

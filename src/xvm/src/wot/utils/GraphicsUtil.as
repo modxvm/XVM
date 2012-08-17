@@ -110,10 +110,19 @@ class wot.utils.GraphicsUtil
         return max;
     }
 
-    public static function GetVTypeColorValue(vtype:String, prefix: String, darker: Boolean): String
+    public static function GetVTypeColorValue(vtype:String, iconSource:String, prefix: String, darker: Boolean): String
     {
+        if (!prefix)
+            prefix = "#";
+
         try
         {
+            if (Config.s_config.colors.vtype.usePremiumColor == true)
+            {
+                var vi = wot.utils.VehicleInfo.getInfo(iconSource);
+                if (vi != null && vi.premium == true)
+                    vtype = "premium";
+            }
             return prefix + Utils.toInt(Config.s_config.colors.vtype[vtype], 0xFFFFFE).toString(16);
         }
         catch (ex:Error)

@@ -1310,7 +1310,9 @@
       "MT":  "0xFFF198",                           // Color for medium tanks
       "HT":  "0xFFACAC",                           // Color for heavy tanks
       "SPG": "0xEFAEFF",                           // Color for arty
-      "TD":  "0xA0CFFF"                            // Color for tank destroyers
+      "TD":  "0xA0CFFF",                           // Color for tank destroyers
+      "premium": "0xFFCC66",                       // Color for premium tanks
+      "usePremiumColor": false                     // Enable/disable premium color usage
     },
     // Dynamic color for remaining health
     "hp": [

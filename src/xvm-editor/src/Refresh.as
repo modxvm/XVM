@@ -257,6 +257,10 @@ private function RefreshColorsPage():void
                 p_vtypeColors.v_SPG.value = section2.SPG;
             if (p_vtypeColors.v_TD != null)
                 p_vtypeColors.v_TD.value = section2.TD;
+            if (p_vtypeColors.v_premium != null)
+                p_vtypeColors.v_premium.value = section2.premium;
+            if (p_vtypeColors.v_usePremiumColor != null)
+                p_vtypeColors.v_usePremiumColor.value = section2.usePremiumColor;
         }
         else if (accColors.selectedChild == nc_colors_hp && p_colors_hp != null)
             p_colors_hp.RefreshSource();

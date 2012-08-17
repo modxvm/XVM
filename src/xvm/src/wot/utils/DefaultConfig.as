@@ -3,6 +3,7 @@
  * @author sirmax2
  */
 import wot.utils.Defines;
+import wot.utils.VehicleInfoData;
 
 class wot.utils.DefaultConfig
 {
@@ -219,11 +220,13 @@ class wot.utils.DefaultConfig
           enemy_blowedup_blind: "0x3B365F"
         },
         vtype: {
-          LT:  "0xA2FF9A",  // Color for light tanks
-          MT:  "0xFFF198",  // Color for medium tanks
-          HT:  "0xFFACAC",  // Color for heavy tanks
-          SPG: "0xEFAEFF",  // Color for arty
-          TD:  "0xA0CFFF"   // Color for tank destroyers
+          LT:  "0xA2FF9A",        // Color for light tanks
+          MT:  "0xFFF198",        // Color for medium tanks
+          HT:  "0xFFACAC",        // Color for heavy tanks
+          SPG: "0xEFAEFF",        // Color for arty
+          TD:  "0xA0CFFF",        // Color for tank destroyers
+          premium: "0xFFCC66",    // Color for premium tanks
+          usePremiumColor: false  // Enable/disable premium color usage
         },
         // values - from min to max, colors are for values 'lesser then ...'
         hp: [
@@ -308,7 +311,8 @@ class wot.utils.DefaultConfig
         playersPanel:  "../maps/icons/vehicle/contour",
         vehicleMarker: "../maps/icons/vehicle/contour"
       },
-      consts: consts
+      consts: consts,
+      vehicleInfo: VehicleInfoData.data
     };
 
     return a;

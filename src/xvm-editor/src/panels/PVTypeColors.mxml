@@ -12,5 +12,8 @@
         <c:LabeledColorSelector label="{resourceManager.getString('panels', 'HT')}" width="240" id="v_HT" config="colors.vtype.HT" change="onChange(event)"/>
         <c:LabeledColorSelector label="{resourceManager.getString('panels', 'SPG')}" width="240" id="v_SPG" config="colors.vtype.SPG" change="onChange(event)"/>
         <c:LabeledColorSelector label="{resourceManager.getString('panels', 'TD')}" width="240" id="v_TD" config="colors.vtype.TD" change="onChange(event)"/>
+        <s:Spacer height="2"/>
+        <c:LabeledCheckBox label="{resourceManager.getString('panels', 'usePremiumColor')}" id="v_usePremiumColor" config="colors.vtype.usePremiumColor" change="onChange(event)"/>
+        <c:LabeledColorSelector label="{resourceManager.getString('panels', 'premium')}" width="240" id="v_premium" enabled="{v_usePremiumColor.value == true}" config="colors.vtype.premium" change="onChange(event)"/>
     </s:VGroup>
 </c:BorderContainerComponent>
