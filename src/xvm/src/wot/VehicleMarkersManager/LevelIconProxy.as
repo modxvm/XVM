@@ -1,16 +1,15 @@
+import wot.VehicleMarkersManager.AbstractAccessProxy;
 import wot.VehicleMarkersManager.XVM;
 
-class wot.VehicleMarkersManager.LevelIconProxy
+class wot.VehicleMarkersManager.LevelIconProxy extends AbstractAccessProxy
 {
    /* This proxy class is only for LevelIconComponent
     * access restriction to wot.VehicleMarkersManager.XVM
     */
    
-    var xvm:XVM;
-    
     public function LevelIconProxy(xvm:XVM) 
     {
-        this.xvm = xvm;
+        super(xvm);
     }
     
     public function get levelIcon():MovieClip
