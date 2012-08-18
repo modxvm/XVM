@@ -2,7 +2,7 @@ import wot.VehicleMarkersManager.LevelIconProxy;
 
 class wot.VehicleMarkersManager.LevelIconComponent
 {
-    var proxy:LevelIconProxy // Reference to composition proxy
+    var proxy:LevelIconProxy
     
     public function LevelIconComponent(proxy:LevelIconProxy) 
     {
@@ -26,6 +26,8 @@ class wot.VehicleMarkersManager.LevelIconComponent
     {
         proxy.levelIcon._x = cfg.levelIcon.x;
         proxy.levelIcon._y = cfg.levelIcon.y;
+        
+        //TODO: extract XVMFormatDynamicAlpha
         proxy.levelIcon._alpha = proxy.XVMFormatDynamicAlpha(cfg.levelIcon.alpha);
     }
 }

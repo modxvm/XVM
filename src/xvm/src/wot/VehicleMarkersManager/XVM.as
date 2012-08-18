@@ -24,6 +24,8 @@ import wot.utils.PlayerInfo;
 import wot.VehicleMarkersManager.ErrorHandler;
 import wot.VehicleMarkersManager.LevelIconComponent;
 import wot.VehicleMarkersManager.LevelIconProxy;
+import wot.VehicleMarkersManager.VehicleState;
+import wot.VehicleMarkersManager.VehicleStateProxy;
 
 /*
  * XVM() instance creates corresponding marker
@@ -62,6 +64,8 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
     var textFields: Object = null;
     
     var levelIconComponent: LevelIconComponent;
+    
+    var vehicleState: VehicleState;
 
     // Healthbar Settings
     var hbCfg: Object = null;
@@ -360,9 +364,10 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
 
         setupIconLoader();
         
-        var levelIconProxy = new LevelIconProxy(this);
-        levelIconComponent = new LevelIconComponent(levelIconProxy);
-
+        levelIconComponent = new LevelIconComponent(new LevelIconProxy(this));
+        
+        vehicleState = new VehicleState(new VehicleStateProxy(this));
+        
         if (m_vehicleClass != null)
             this.setVehicleClass();
 
