@@ -1,30 +1,105 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<a:NumberSelector xmlns:fx="http://ns.adobe.com/mxml/2009"
+<a:ValueControl xmlns:fx="http://ns.adobe.com/mxml/2009"
     xmlns:s="library://ns.adobe.com/flex/spark"
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:a="controls.*"
-    implements="controls.IMacrosValueControl">
+    xmlns:validators="validators.*"
+    implements="controls.IMacrosValueControl"
+    creationComplete="onCreationComplete()">
     <fx:Script>
         <![CDATA[
+            import mx.binding.utils.BindingUtils;
+            import mx.controls.Menu;
             import mx.events.DropdownEvent;
+            import mx.events.MenuEvent;
+            
             import utils.Embed;
 
             include "include_MacrosValueControl.as";
 
-            protected function macrosSelected(event:Event):void
+            private function onCreationComplete():void
             {
-                var v:String = macro.selectedItem.value;
-                macro.selectedItem = null;
+                ti.restrict = '#0-9A-Za-z\{\}\-_:';
+                ti.text = value;
+                BindingUtils.bindProperty(tv, "allowedValues", this, [ "allowedValues" ]);
             }
 
-            private function comboBox_open(event:DropdownEvent):void
+            // minimum
+            [Bindable]
+            public var minimum:Number = 0;
+
+            // maximum
+            [Bindable]
+            public var maximum:Number = 10;
+
+            [Bindable]
+            public var stepSize:Number = 1;
+
+            [Bindable]
+            public var isLogarithmic:Boolean = false;
+
+            private var _value:String = "";
+            [Bindable]
+            public override function get value():*
             {
-                event.currentTarget.dropdown.variableRowHeight = true;
+                return _value;
+            }
+            public override function set value(v:*):void
+            {
+                if (isNaN(parseInt(v)))
+                {
+                    _value = v;
+                    ti.text = _value;
+                    slider.alpha = 0.5;
+                }
+                else
+                {
+                    _value = Math.max(minimum, Math.min(maximum, parseInt(v))).toString();
+                    ti.text = _value;
+                    slider.alpha = 1;
+                    slider.value = parseInt(_value);
+                }
+            }
+
+            protected function textChanged():void
+            {
+                ti.validateNow();
+            }
+
+            protected override function onChange(event:Event):void
+            {
+                if (event)
+                    event.stopPropagation();
+
+                if (event.target == slider)
+                {
+                    ti.text = slider.value.toString();
+                    return;
+                }
+                else if (event.target == macro)
+                {
+                    ti.text = macro.selectedItem.value;
+                    macro.selectedItem = null;
+                }
+                else if (event.target == tv)
+                {
+                    if (value != ti.text)
+                    {
+                        value = ti.text;
+                        dispatchEvent(new Event(Event.CHANGE));
+                    }
+                }
             }
         ]]>
     </fx:Script>
-    <mx:ComboBox enabled="false" right="0" id="macro" width="40" dataProvider="{menuData}" labelFunction="getLabel"
-                 toolTip="{resourceManager.getString('components', 'SelectMacros')}" change="macrosSelected(event)"
+    <fx:Declarations>
+        <validators:TextNumberValidator id="tv" source="{ti}" property="text" valid="onChange(event)"/>
+    </fx:Declarations>
+    <s:TextInput id="ti" width="80" maxChars="20" restrict="#0-9A-Fa-f" change="textChanged()"/>
+    <s:HSlider id="slider" width="100%" y="4" snapInterval="{stepSize}" stepSize="{stepSize}"
+        minimum="{minimum}" maximum="{maximum}" change="onChange(event)"/>
+    <mx:ComboBox right="0" id="macro" width="40" dataProvider="{menuData}" labelFunction="getLabel"
+                 toolTip="{resourceManager.getString('components', 'SelectMacro')}" change="onChange(event)"
                  dropdownFactory="controls.ComboBoxList" itemRenderer="controls.ComboBoxItemRenderer"
-                 dropdownWidth="420" rowCount="10" open="comboBox_open(event);"/>
-</a:NumberSelector>
+                 dropdownWidth="420" rowCount="10"/>
+</a:ValueControl>

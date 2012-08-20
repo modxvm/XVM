@@ -8,9 +8,6 @@
     	[Bindable]
     	public var allowedMacros:Array = [];
 
-        [Bindable]
-        public var sliderVisible:Boolean = true;
-
         protected override function onChange(event:Event):void
         {
             value = edit.value;
@@ -18,6 +15,6 @@
         }
     </fx:Script>
     <a:MacrosNumberSelector id="edit" left="{labelWidth}" right="0" height="{height}"
-        minimum="{minimum}" maximum="{maximum}" sliderVisible="{sliderVisible}" allowedMacros="{allowedMacros}"
+        minimum="{minimum}" maximum="{maximum}" allowedMacros="{allowedMacros}"
         value="{value}" change="onChange(event)"/>
 </c:LabeledComponent>

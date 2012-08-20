@@ -110,16 +110,17 @@
             addChild(xvmHB);
             xvmHB.includeInLayout = false;
 
-            damageHolder = new UIComponent();
-            addChild(damageHolder);
-            damageHolder.includeInLayout = false;
-
-            //contourIcon.;
             contourIcon.includeInLayout = false;
             contourIcon.source = _vdead ? new IMG_contour3()
                 : _vtype == "ally" ? new IMG_contour1() : new IMG_contour2();
+            contourIcon.width = 80;
+            contourIcon.height = 24;
             contourIcon.visible = false;
             addChild(contourIcon);
+
+            damageHolder = new UIComponent();
+            addChild(damageHolder);
+            damageHolder.includeInLayout = false;
 
             loadSWF(markersSWF);
         }
@@ -266,7 +267,7 @@
             contourIcon.x = c.x - contourIcon.width / 2.0;
             contourIcon.y = c.y - contourIcon.height / 2.0;
             contourIcon.alpha = XVMFormatDynamicAlpha(c.alpha, m_curHealth) / 100;
-            var tintColor: Number = c.color;
+            var tintColor: Number = XVMFormatDynamicColor(XVMFormatStaticColorText(c.color), m_curHealth);
             var tintAmount: Number = Math.min(100, Math.max(0, c.amount)) * 0.01;
             GraphicsUtil.setColor(contourIcon, tintColor, tintAmount);
 
@@ -312,7 +313,8 @@
             if (m_curHealth <= 0)
                 hp = m_maxHealth;
             XVMSetupNewHealth(hp);
-            XVMUpdateUI(hp);
+            update();
+            //XVMUpdateUI(hp);
         }
 
         public function action():void
@@ -427,7 +429,7 @@
             if (cfg.damage.fade > 0)
             {
                 var fade:Number = cfg.damage.fade * 1000;
-                var color:Number = XVMFormatDynamicColor(cfg.damage.color, curHealth);
+                var color:Number = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.damage.color), curHealth);
                 var alpha:Number = XVMFormatDynamicAlpha(cfg.damage.alpha, curHealth) / 100;
                 var st:Number = (new Date()).time;
                 var drawing: Boolean = false;
@@ -473,7 +475,7 @@
                 {
                     var tf:TextField = XVMCreateTextField(cfg);
                     tf.text = XVMFormatDynamicText(XVMFormatStaticText(cfg.format), curHealth);
-                    tf.textColor = XVMFormatDynamicColor(cfg.color, curHealth);
+                    tf.textColor = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.color), curHealth);
                     tf.alpha = XVMFormatDynamicAlpha(cfg.alpha, curHealth) / 100;
                     addChild(tf);
                     textFields.push(tf);
@@ -487,10 +489,8 @@
 
             xvmHB.alpha = XVMFormatDynamicAlpha(cfg.alpha, curHealth) / 100;
 
-            var ct:String = XVMFormatStaticColorText(cfg.color);
-            var lct:String = XVMFormatStaticColorText(cfg.lcolor);
-            var fullColor: Number = XVMFormatDynamicColor(ct, curHealth);
-            var lowColor: Number = XVMFormatDynamicColor(lct || ct, curHealth);
+            var fullColor: Number = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.color), curHealth);
+            var lowColor: Number = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.lcolor || cfg.color), curHealth);
 
             var percent: Number = curHealth / m_maxHealth;
 
@@ -501,7 +501,7 @@
             xvmHBFill.graphics.clear();
             xvmHBDamage.graphics.clear();
 
-            xvmHBBorder.graphics.beginFill(XVMFormatDynamicColor(cfg.border.color, curHealth), 1);
+            xvmHBBorder.graphics.beginFill(XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.border.color), curHealth), 1);
             xvmHBBorder.graphics.drawRect(0, 0, cfg.width + cfg.border.size * 2, cfg.height + cfg.border.size * 2);
             xvmHBBorder.graphics.endFill();
             xvmHBBorder.alpha = XVMFormatDynamicAlpha(cfg.border.alpha, curHealth) / 100;
@@ -638,8 +638,7 @@
                     cfg.shadow.angle, sh_color, sh_alpha, cfg.shadow.size, cfg.shadow.strength) ];
             }
 
-            var staticColor:String = XVMFormatStaticColorText(cfg.color);
-            textField.textColor = XVMFormatDynamicColor(staticColor, m_curHealth);
+            textField.textColor = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.color), m_curHealth);
             textField.alpha = XVMFormatDynamicAlpha(cfg.alpha, m_curHealth) / 100;
             textField.x = cfg.x - (textField.width / 2.0);
             textField.y = cfg.y - (textField.height / 2.0);

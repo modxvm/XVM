@@ -32,7 +32,7 @@
         ]]>
     </fx:Script>
     <mx:ComboBox right="0" id="macro" width="40" dataProvider="{menuData}" labelFunction="getLabel"
-        toolTip="{resourceManager.getString('components', 'SelectMacros')}" change="macrosSelected(event)"
+        toolTip="{resourceManager.getString('components', 'SelectMacro')}" change="macrosSelected(event)"
         dropdownFactory="controls.ComboBoxList" itemRenderer="controls.ComboBoxItemRenderer"
         dropdownWidth="420" rowCount="10" open="comboBox_open(event);"/>
 </a:TextInput>

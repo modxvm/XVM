@@ -4,11 +4,11 @@ package validators
     import mx.validators.Validator;
 
     [ResourceBundle("validators")]
-    public class TextColorValidator extends Validator
+    public class TextNumberValidator extends Validator
     {
         private var results:Array;
 
-        public function TextColorValidator()
+        public function TextNumberValidator()
         {
             super();
         }
@@ -34,11 +34,10 @@ package validators
                 }
             }
 
-            var text:String = String(value).toUpperCase();
-            if (!/^#[0-9A-F]{6}$/.test(text))
+            if (isNaN(parseFloat(value.toString())))
             {
                 results.push(new ValidationResult(true, null, "Format",
-                    resourceManager.getString("validators", "colorHint")));
+                    resourceManager.getString("validators", "numberHint")));
                 return results;
             }
 
