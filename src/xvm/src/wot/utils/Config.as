@@ -265,32 +265,22 @@ class wot.utils.Config
                     items = [ items ];
                 for (var i = 0; i < items.length; ++i)
                 {
-                    var url = Utils.trim(items[i]["data"]).toLowerCase();
+                    var url:String = Utils.trim(items[i]["data"]).toLowerCase();
                     //Logger.add("url: " + url);
-                    switch (url) {
-                        case "http://update.wot.ru.wargaming.net":
-                        case "http://update.worldoftanks.ru":
-                            Config.s_game_region = "RU";
-                            break;
-                        case "http://update.worldoftanks.eu":
-                            Config.s_game_region = "EU";
-                            break;
-                        case "http://update.worldoftanks.com":
-                            Config.s_game_region = "US";
-                            break;
-                        case "http://update-ct.wargaming.net/":
-                            Config.s_game_region = "CT";
-                            break;
-                        case "http://update.worldoftanks.cn":
-                            Config.s_game_region = "CN";
-                            break;
-                        case "http://update.worldoftanks-sea.com":
-                            Config.s_game_region = "SEA";
-                            break;
-                        case "http://update.worldoftanks.vn":
-                            Config.s_game_region = "VTC";
-                            break;
-                    }
+                    if (url.indexOf("http://update.wot.ru.wargaming.net") > -1 || url.indexOf("http://update.worldoftanks.ru") > -1)
+                        Config.s_game_region = "RU";
+                    else if (url.indexOf("http://update.worldoftanks.eu") > -1)
+                        Config.s_game_region = "EU";
+                    else if (url.indexOf("http://update.worldoftanks.com") > -1)
+                        Config.s_game_region = "US";
+                    else if (url.indexOf("http://update-ct.wargaming.net") > -1)
+                        Config.s_game_region = "CT";
+                    else if (url.indexOf("http://update.worldoftanks.cn") > -1)
+                        Config.s_game_region = "CN";
+                    else if (url.indexOf("http://update.worldoftanks-sea.com") > -1)
+                        Config.s_game_region = "SEA";
+                    else if (url.indexOf("http://update.worldoftanks.vn") > -1)
+                        Config.s_game_region = "VTC";
                 }
                 Locale.setRegion(Config.s_game_region);
             }

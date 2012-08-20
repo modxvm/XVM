@@ -1,4 +1,7 @@
-﻿XVM-2.5.2.test5:
+﻿XVM-2.5.2.test6:
+  * Fixed clan icons in Lite version
+
+XVM-2.5.2.test5:
   * added "vehicleNames" config section. Used for vehicle names mapping -
     ability to replace any tank name with own value
 
