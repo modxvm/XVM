@@ -11,19 +11,23 @@
             import components.DefaultComponent;
             import components.DynamicAlphaEdit;
             import components.DynamicColorEdit;
-
+            import components.DynamicVehicleNameEdit;
+            
             import events.SetDefaultValueEvent;
             import events.ValueChangedEvent;
-
+            
             import flash.events.Event;
-
+            
+            import mx.collections.ArrayCollection;
+            import mx.collections.Sort;
+            import mx.collections.SortField;
             import mx.core.IVisualElement;
             import mx.messaging.channels.StreamingAMFChannel;
-
+            
             import utils.Config;
+            import utils.Embed;
 
-            [Embed(source="images/add.png")]
-            private const IMG_add : Class;
+            private var valueAsObject:Boolean = false;
 
             private function CreateNewElementButton():IVisualElement
             {
@@ -31,7 +35,7 @@
                 img.width = 16;
                 img.height = 16;
                 img.id = "new";
-                img.source = new IMG_add();
+                img.source = new Embed.add();
                 img.toolTip = resourceManager.getString('panels', 'AddLine');
                 img.useHandCursor = true;
                 img.buttonMode = true;
@@ -46,14 +50,21 @@
                 {
                     case "DynamicAlphaEdit":
                         instance = new DynamicAlphaEdit();
+                        instance.minimum = minimum;
+                        instance.maximum = maximum;
                         break;
                     case "DynamicColorEdit":
                         instance = new DynamicColorEdit();
+                        instance.minimum = minimum;
+                        instance.maximum = maximum;
                         break;
+                    case "DynamicVehicleNameEdit":
+                        instance = new DynamicVehicleNameEdit();
+                        break;
+                    default:
+                        throw new Error("Unknown editor class: " + editorClass);
                 }
 
-                instance.minimum = minimum;
-                instance.maximum = maximum;
                 instance.value = v;
 
                 instance.addEventListener(Event.CHANGE, onChange);
@@ -61,30 +72,68 @@
                 return instance;
             }
 
-            public function RefreshSource(src: Array = null): void
+            public function RefreshSource(src:* = null): void
             {
                 if (!src)
                     src = Config.GetValue(config);
+
+                // Cleanup
                 var len:int = container.numElements;
                 for (var n:int = 0; n < len; ++n)
                     delete container.getElementAt(n);
                 container.removeAllElements();
-                if (src.length == 0)
+
+                // Create elements
+                var data:Array;
+                if (src is Array)
+                {
+                    valueAsObject = false;
+                    data = src;
+                }
+                else
+                {
+                    valueAsObject = true;
+                    data = [];
+                    for (var name:String in src)
+                        data.push({name: name, value: src[name] });
+
+                    var list:ArrayCollection = new ArrayCollection(data);
+                    var sort:Sort = new Sort();
+                    sort.fields = [new SortField("name")];
+                    list.sort = sort;
+                    list.refresh();
+                    data = list.toArray();
+                }
+
+                if (data.length == 0 && !valueAsObject)
                     container.addElement(CreateNewElementButton());
                 else
                 {
-                    var len2:int = src.length;
+                    var len2:int = data.length;
                     for (var i:int = 0; i < len2; ++i)
-                        container.addElement(CreateElement(src[i]));
+                        container.addElement(CreateElement(data[i]));
                 }
             }
 
             public function get value():*
             {
-                var a: Array = [];
-                for (var i:int = 0; i < container.numElements; ++i)
-                    a.push((container.getElementAt(i) as DefaultComponent).value);
-                return a;
+                if (valueAsObject)
+                {
+                    var o:Object = {};
+                    for (var i:int = 0; i < container.numElements; ++i)
+                    {
+                        var v:Object = (container.getElementAt(i) as DefaultComponent).value;
+                        o[v.name] = v.value;
+                    }
+                    return o;
+                }
+                else
+                {
+                    var a: Array = [];
+                    for (var j:int = 0; j < container.numElements; ++j)
+                        a.push((container.getElementAt(j) as DefaultComponent).value);
+                    return a;
+                }
             }
 
             // config

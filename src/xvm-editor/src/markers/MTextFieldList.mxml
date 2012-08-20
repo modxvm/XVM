@@ -11,29 +11,27 @@
     </fx:Metadata>
     <fx:Script>
         <![CDATA[
-            import components.DynamicTextFieldEdit;
             import components.DefaultComponent;
-
+            import components.DynamicTextFieldEdit;
+            
             import events.SetDefaultValueEvent;
             import events.ValueChangedEvent;
-
+            
             import flash.events.Event;
-
-            import mx.core.IVisualElement;
-
+            
             import mx.controls.Image;
+            import mx.core.IVisualElement;
+            
             import spark.components.ToggleButton;
-
+            
             import utils.Config;
             import utils.DefaultConfig;
+            import utils.Embed;
             import utils.Utils;
 
             private var m_activeMarkerStates:Array = null;
             private var m_names:Array = [];
             private var m_values:Object = {};
-
-            [Embed(source="images/add.png")]
-            private const IMG_add : Class;
 
             [Bindable]
             public var config:String = null;
@@ -65,7 +63,7 @@
                 img.width = 16;
                 img.height = 16;
                 img.id = "new";
-                img.source = new IMG_add();
+                img.source = new Embed.add();
                 img.toolTip = resourceManager.getString('markers', 'AddTextField');
                 img.useHandCursor = true;
                 img.buttonMode = true;

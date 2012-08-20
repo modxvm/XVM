@@ -3,7 +3,7 @@
  * @author sirmax2
  */
 import wot.utils.Defines;
-import wot.utils.VehicleInfoData;
+import wot.utils.VehicleInfo;
 
 class wot.utils.DefaultConfig
 {
@@ -312,7 +312,7 @@ class wot.utils.DefaultConfig
         vehicleMarker: "../maps/icons/vehicle/contour"
       },
       consts: consts,
-      vehicleInfo: VehicleInfoData.data
+      vehicleNames: VehicleInfo.getVehicleNamesData()
     };
 
     return a;

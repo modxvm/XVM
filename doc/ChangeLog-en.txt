@@ -1,4 +1,8 @@
-﻿XVM-2.5.2.test4:
+﻿XVM-2.5.2.test5:
+  * added "vehicleNames" config section. Used for vehicle names mapping -
+    ability to replace any tank name with own value
+
+XVM-2.5.2.test4:
   * added color for premium tanks to {{c:vtype}} macro
   * {{c:vtype}} macro can be used in BattleLoading, PlayersPanel and
     StatisticForm

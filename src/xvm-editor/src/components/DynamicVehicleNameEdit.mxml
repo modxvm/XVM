@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<c:DefaultComponent xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:c="components.*"
+    xmlns:a="controls.*">
+    <fx:Script>
+        <![CDATA[
+            private var focused:Boolean = false; 
+
+            [Bindable]
+            public var v_name:String;
+
+            private var _v_value:String;
+            [Bindable]
+            public function get v_value():String
+            {
+                return _v_value || (focused ? "" : "(default)");
+            }
+            public function set v_value(v:String):void
+            {
+                _v_value = v == "(default)" ? null : v;
+            }
+
+            public override function get value():*
+            {
+                return { name: v_name, value: !v_value || v_value == "(default)" ? null : v_value };
+            }
+            public override function set value(v:*):void
+            {
+                v_name = v.name;
+                v_value = v.value;
+                edit.value = v_value;
+                edit.alpha = v_value == '(default)' ? 0.5 : 1;
+            }
+
+            protected function edit_focusInHandler(event:Event):void
+            {
+                focused = true;
+                edit.value = v_value;
+                edit.alpha = 1;
+            }
+
+            protected function edit_focusOutHandler(event:Event):void
+            {
+                focused = false;
+                edit.value = v_value;
+                edit.alpha = v_value == '(default)' ? 0.5 : 1;
+            }
+
+        ]]>
+    </fx:Script>
+    <fx:Metadata>
+        [Event(name="click", type="flash.events.MouseEvent")]
+    </fx:Metadata>
+    <s:HGroup width="100%" height="100%" verticalAlign="middle">
+        <s:Label id="lbl" x="0" text="{v_name}" width="{200}" height="22" verticalAlign="middle"/>
+        <a:TextInput id="edit" width="{150}" change="{v_value=edit.value; onChange(event)}"
+            focusIn="edit_focusInHandler(event)" focusOut="edit_focusOutHandler(event)"/>
+    </s:HGroup>
+</c:DefaultComponent>

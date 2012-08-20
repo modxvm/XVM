@@ -21,6 +21,7 @@ import wot.utils.StatLoader;
 import wot.utils.Utils;
 import wot.utils.Logger;
 import wot.utils.PlayerInfo;
+import wot.utils.VehicleInfo;
 import wot.VehicleMarkersManager.ErrorHandler;
 import wot.VehicleMarkersManager.LevelIconComponent;
 import wot.VehicleMarkersManager.LevelIconProxy;
@@ -508,7 +509,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         {
             // AS 2 doesn't have String.replace? Shame on them. Let's use our own square wheel.
             format = format.split("{{nick}}").join(m_playerFullName);
-            format = format.split("{{vehicle}}").join(m_vname);
+            format = format.split("{{vehicle}}").join(VehicleInfo.mapVehicleName(m_defaultIconSource, m_vname));
             format = format.split("{{level}}").join(String(m_level));
             format = format.split("{{rlevel}}").join(String(rlevel[m_level - 1]));
             format = StatFormat.FormatText({ label: m_playerFullName }, format);

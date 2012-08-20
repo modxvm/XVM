@@ -32,6 +32,8 @@ protected function RefreshCurrentPage():void
             RefreshTransparencyPage();
         else if (pg == pgIconset)
             RefreshIconsetPage();
+        else if (pg == pgVehicleNames)
+            RefreshVehicleNamesPage();
         else if (pg == pgMarkers)
             RefreshMarkersPage();
 
@@ -313,6 +315,19 @@ private function RefreshIconsetPage():void
     catch (ex:Error)
     {
         debug("ERROR: RefreshIconsetPage(): " + ex.toString());
+    }
+}
+
+private function RefreshVehicleNamesPage():void
+{
+    debug("RefreshVehicleNamesPage()");
+    try
+    {
+            p_vehicle_names.RefreshSource();
+    }
+    catch (ex:Error)
+    {
+        debug("ERROR: RefreshVehicleNamesPage(): " + ex.toString());
     }
 }
 

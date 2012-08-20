@@ -20,6 +20,11 @@ package utils
             fontStyle="normal", fontWeight="normal", embedAsCFF="true")]
         private static var $FieldFontClassCFF:Class;
 
+        // images
+        [Embed(source="images/add.png")]
+        public static const add:Class;
+        [Embed(source="images/delete.png")]
+        public static const del:Class;
         [Embed("images/syscolors.png")]
         public static const syscolors:Class;
         [Embed("images/macros.png")]

@@ -312,8 +312,8 @@ public class DefaultConfig
         playersPanel:  "../maps/icons/vehicle/contour",
         vehicleMarker: "../maps/icons/vehicle/contour"
       },
-      consts: consts
-//      vehicleInfo: VehicleInfoData.data
+      consts: consts,
+      vehicleNames: VehicleInfo.getVehicleNamesData()
     };
 
     return a;

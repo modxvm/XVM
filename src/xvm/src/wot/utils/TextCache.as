@@ -5,6 +5,7 @@
 import wot.utils.Defines;
 import wot.utils.GraphicsUtil;
 import wot.utils.StatFormat;
+import wot.utils.VehicleInfo;
 
 class wot.utils.TextCache
 {
@@ -40,7 +41,7 @@ class wot.utils.TextCache
   {
     var name = data.label + ((data.clanAbbrev == "") ? "" : "[" + data.clanAbbrev + "]");
 
-    format = format.split("{{vehicle}}").join(data.vehicle);
+    format = format.split("{{vehicle}}").join(VehicleInfo.mapVehicleName(data.icon, data.vehicle));
     format = format.split("{{c:vtype}}").join(GraphicsUtil.GetVTypeColorValue(data.icon));
 
     format = StatFormat.FormatText(data, format, isDead);

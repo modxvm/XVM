@@ -2,7 +2,10 @@
  * ...
  * @author sirmax2
  */
-class wot.utils.VehicleInfoData
+package utils
+{
+
+public class VehicleInfoData
 {
     public static var data:Object = {
         // unknown
@@ -240,4 +243,6 @@ class wot.utils.VehicleInfoData
         china_Ch01_Type59:              { level: 8,  type: "MT",  tiers: [ 8, 9 ],   premium: true,  name: "Type 59" },
         germany_JagdTiger_SdKfz_185:    { level: 8,  type: "TD",  tiers: [ 8, 9 ],   premium: true,  name: "Jagdtiger 88" }
     }
+}
+
 }
