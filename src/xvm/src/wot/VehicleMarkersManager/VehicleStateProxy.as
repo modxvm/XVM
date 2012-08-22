@@ -1,5 +1,6 @@
 import wot.VehicleMarkersManager.AbstractAccessProxy;
 import wot.VehicleMarkersManager.XVM;
+//import wot.utils.Logger;
 
 class wot.VehicleMarkersManager.VehicleStateProxy extends AbstractAccessProxy
 {
@@ -10,12 +11,6 @@ class wot.VehicleMarkersManager.VehicleStateProxy extends AbstractAccessProxy
     public function VehicleStateProxy(xvm:XVM) 
     {
         super(xvm);
-    }
-    
-    public function get team():String
-    {
-        return xvm.m_team;
-        // TODO: move m_team inside as private
     }
     
     public function get vehicleDestroyed():Boolean
@@ -31,5 +26,10 @@ class wot.VehicleMarkersManager.VehicleStateProxy extends AbstractAccessProxy
     public function get showExInfo():Boolean
     {
         return xvm.m_showExInfo;
+    }
+    
+    public function get team():String
+    {
+        return xvm.m_team;
     }
 }

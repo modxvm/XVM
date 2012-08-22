@@ -1,12 +1,13 @@
 import wot.utils.Config;
 import wot.VehicleMarkersManager.VehicleStateProxy;
+import wot.utils.Logger;
 
 class wot.VehicleMarkersManager.VehicleState
 {
     /* TODO:
      * move isDead showExInfo team etc into this.
     */
-    var proxy:VehicleStateProxy;
+    private var proxy:VehicleStateProxy;
     
     public static var allAlly: Array = [
         "ally/alive/normal", "ally/alive/extended", "ally/dead/normal", "ally/dead/extended"]
@@ -15,18 +16,18 @@ class wot.VehicleMarkersManager.VehicleState
     
     public function VehicleState(proxy:VehicleStateProxy) 
     {
-        super(proxy);
+        this.proxy = proxy;
     }
     
     public function getCurrentStateString(): String
     {
-        var result = proxy.team + "/";
+        var result:String = proxy.team + "/";
         result += (proxy.vehicleDestroyed || proxy.isDead) ? "dead/" : "alive/";
         result += proxy.showExInfo ? "extended" : "normal";
         return result;
     }
 
-    public function GetStateConfigRoot(stateString: String)
+    public function getStateConfigRoot(stateString: String)
     {
         var path: Array = stateString.split("/");
         if (path.length != 3)
@@ -38,13 +39,15 @@ class wot.VehicleMarkersManager.VehicleState
         return result;
     }
 
-    public function GetCurrentStateConfigRoot()
+    public function getCurrentStateConfigRoot()
     {
-        return GetStateConfigRoot(getCurrentStateString());
+        //Logger.add( getStateConfigRoot(getCurrentStateString()) );
+        return      getStateConfigRoot(getCurrentStateString());
     }
 
-    public function GetCurrentStateConfigRootNormal()
+    public function getCurrentStateConfigRootNormal()
     {
-        return GetStateConfigRoot(getCurrentStateString().split("extended").join("normal"));
+        //Logger.add( getStateConfigRoot(getCurrentStateString().split("extended").join("normal")) );
+        return      getStateConfigRoot(getCurrentStateString().split("extended").join("normal")) ;
     }
 }
