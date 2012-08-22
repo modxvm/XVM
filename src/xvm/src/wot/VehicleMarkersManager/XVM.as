@@ -55,7 +55,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
     var m_showExInfo: Boolean = false;
     var m_currentHealth: Number;
     var m_showMaxHealth: Boolean;
-    public var m_team: String;
+    var m_team: String;
     var m_isDead: Boolean = false;
     var m_clanIcon: UILoaderAlt = null;
     var m_iconset: IconLoader;
@@ -260,7 +260,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             return;
         }
 
-        //Logger.add("updateState(): " + vehicleState.getCurrentStateString() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
+        //Logger.add("updateState(): " + vehicleState.getCurrent() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
         super.updateState(newState, isImmediate);
         XVMUpdateStyle();
     }
@@ -290,7 +290,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
     function configUI()
     {
         //Logger.add("XVM::configUI(): Config.s_loaded=" + Config.s_loaded);
-        //Logger.add("configUI(): " + vehicleState.getCurrentStateString() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
+        //Logger.add("configUI(): " + vehicleState.getCurrent() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
         m_currentHealth = m_curHealth;
         super.configUI();
         if (Config.s_loaded)
@@ -347,7 +347,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         //if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
         //    return super.populateData();
 
-        //Logger.add("populateData(): " + vehicleState.getCurrentStateString() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
+        //Logger.add("populateData(): " + vehicleState.getCurrent() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
 
        /*  populateData() is executed two or three times instantaneously by super.init()
         *  WG introduced preventive measures at parent class by themselves.
@@ -400,7 +400,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
     function updateMarkerLabel()
     {
         //Logger.add("XVM::updateMarkerLabel(): Config.s_loaded=" + Config.s_loaded);
-        //Logger.add("updateMarkerLabel(): " + vehicleState.getCurrentStateString() + " markerLabel=" + m_markerLabel + " pname=" + m_playerFullName);
+        //Logger.add("updateMarkerLabel(): " + vehicleState.getCurrent() + " markerLabel=" + m_markerLabel + " pname=" + m_playerFullName);
         super.updateMarkerLabel();
         if (Config.s_config.battle.useStandardMarkers)
         {
@@ -785,7 +785,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
 
             if (textFields)
             {
-                var st = vehicleState.getCurrentStateString();
+                var st = vehicleState.getCurrent();
                 for (var i in textFields[st])
                 {
                     var tf = textFields[st][i];
@@ -915,7 +915,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             for (var stid in allStates)
             {
                 var st = allStates[stid];
-                var cfg = vehicleState.getStateConfigRoot(st);
+                var cfg = vehicleState.getConfigRoot(st);
 
                 // create text fields
                 var fields: Array = [];
@@ -1086,7 +1086,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             // Text fields
             if (textFields)
             {
-                var st = vehicleState.getCurrentStateString();
+                var st = vehicleState.getCurrent();
                 for (var i in textFields)
                 {
                     for (var j in textFields[i])

@@ -1,6 +1,5 @@
 import wot.utils.Config;
 import wot.VehicleMarkersManager.VehicleStateProxy;
-import wot.utils.Logger;
 
 class wot.VehicleMarkersManager.VehicleState
 {
@@ -19,7 +18,7 @@ class wot.VehicleMarkersManager.VehicleState
         this.proxy = proxy;
     }
     
-    public function getCurrentStateString(): String
+    public function getCurrent(): String
     {
         var result:String = proxy.team + "/";
         result += (proxy.vehicleDestroyed || proxy.isDead) ? "dead/" : "alive/";
@@ -27,7 +26,7 @@ class wot.VehicleMarkersManager.VehicleState
         return result;
     }
 
-    public function getStateConfigRoot(stateString: String)
+    public function getConfigRoot(stateString: String)
     {
         var path: Array = stateString.split("/");
         if (path.length != 3)
@@ -41,13 +40,11 @@ class wot.VehicleMarkersManager.VehicleState
 
     public function getCurrentStateConfigRoot()
     {
-        //Logger.add( getStateConfigRoot(getCurrentStateString()) );
-        return      getStateConfigRoot(getCurrentStateString());
+        return      getConfigRoot(getCurrent());
     }
 
     public function getCurrentStateConfigRootNormal()
     {
-        //Logger.add( getStateConfigRoot(getCurrentStateString().split("extended").join("normal")) );
-        return      getStateConfigRoot(getCurrentStateString().split("extended").join("normal")) ;
+        return      getConfigRoot(getCurrent().split("extended").join("normal")) ;
     }
 }

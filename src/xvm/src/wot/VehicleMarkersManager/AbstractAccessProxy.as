@@ -6,8 +6,7 @@ class wot.VehicleMarkersManager.AbstractAccessProxy
     * to wot.VehicleMarkersManager.XVM data
     */
    
-   //TODO: private?
-    var xvm:XVM;
+    private var xvm:XVM;
 
     public function AbstractAccessProxy(xvm:XVM) 
     {
