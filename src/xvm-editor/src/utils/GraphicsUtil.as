@@ -33,20 +33,18 @@ public class GraphicsUtil
     //method to set a specified movieClip(item:movidClip) to a specified color(col:hex value number)
     public static function setColor(item:Object, col:Number, ratio:Number = NaN):void
     {
-        var tr: ColorTransform = new ColorTransform();
-        tr.color = Number(col);
-
         if (!isNaN(ratio))
         {
+            var tr: ColorTransform = new ColorTransform();
+            tr.color = Number(col);
             tr.redMultiplier = 1 - ratio;
             tr.greenMultiplier = 1 - ratio;
             tr.blueMultiplier = 1 - ratio;
             tr.redOffset *= ratio;
             tr.greenOffset *= ratio;
             tr.blueOffset *= ratio;
+            item.transform.colorTransform = tr;
         }
-
-        item.transform.colorTransform = tr;
     }
 
     public static function brightenColor(hexColor: Number, percent: Number): Number

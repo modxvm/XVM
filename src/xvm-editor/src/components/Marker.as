@@ -10,15 +10,15 @@
     import flash.text.TextField;
     import flash.text.TextFormat;
     import flash.utils.Timer;
-
+    
     import mx.containers.Canvas;
     import mx.core.ScrollPolicy;
     import mx.core.UIComponent;
     import mx.events.FlexEvent;
     import mx.messaging.channels.StreamingAMFChannel;
-
+    
     import spark.components.Image;
-
+    
     import utils.ClassLoader;
     import utils.Config;
     import utils.Defines;
@@ -70,6 +70,7 @@
         private var vehicleIconAlly:MovieClip;
         private var vehicleIconEnemy:MovieClip;
         private var contourIcon:Image = new Image();
+        private var contourIconHolder: UIComponent;
         private var clanIcon:Image = new Image();
         private var levelIcon:MovieClip;
         private var actionMarkerHelp:MovieClip;
@@ -110,17 +111,18 @@
             addChild(xvmHB);
             xvmHB.includeInLayout = false;
 
+            contourIconHolder = new UIComponent();
+            contourIconHolder.includeInLayout = false;
+            addChild(contourIconHolder);
+
             contourIcon.includeInLayout = false;
             contourIcon.source = _vdead ? new IMG_contour3()
                 : _vtype == "ally" ? new IMG_contour1() : new IMG_contour2();
             contourIcon.width = 80;
             contourIcon.height = 24;
-            contourIcon.visible = false;
-            addChild(contourIcon);
 
-            damageHolder = new UIComponent();
-            addChild(damageHolder);
-            damageHolder.includeInLayout = false;
+            contourIconHolder.visible = false;
+            contourIconHolder.addChild(contourIcon);
 
             loadSWF(markersSWF);
         }
@@ -150,6 +152,10 @@
             clanIcon.source =  _vtype == "ally" ? new IMG_clan1() : new IMG_clan2();
             clanIcon.visible = false;
             addChild(clanIcon);
+
+            damageHolder = new UIComponent();
+            damageHolder.includeInLayout = false;
+            addChild(damageHolder);
 
             addEventListener(Event.ENTER_FRAME, PostInit);
         }
@@ -263,13 +269,13 @@
 
             // contourIcon
             c = cfg.contourIcon;
-            contourIcon.visible = c.visible;
+            contourIconHolder.visible = c.visible;
             contourIcon.x = c.x - contourIcon.width / 2.0;
             contourIcon.y = c.y - contourIcon.height / 2.0;
-            contourIcon.alpha = XVMFormatDynamicAlpha(c.alpha, m_curHealth) / 100;
             var tintColor: Number = XVMFormatDynamicColor(XVMFormatStaticColorText(c.color), m_curHealth);
             var tintAmount: Number = Math.min(100, Math.max(0, c.amount)) * 0.01;
             GraphicsUtil.setColor(contourIcon, tintColor, tintAmount);
+            contourIconHolder.alpha = XVMFormatDynamicAlpha(c.alpha, m_curHealth) / 100;
 
             // clanIcon
             c = cfg.clanIcon;

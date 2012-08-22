@@ -323,6 +323,7 @@ private function RefreshVehicleNamesPage():void
     debug("RefreshVehicleNamesPage()");
     try
     {
+        if (pgVehicleNames.updateCompletePendingFlag)
             p_vehicle_names.RefreshSource();
     }
     catch (ex:Error)

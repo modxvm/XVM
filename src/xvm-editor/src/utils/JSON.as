@@ -47,23 +47,23 @@ package utils
                 for (i = 0; i < len; ++i) {
                     v = stringify(arg[i], indent + "  ");
                     if (s) {
-                        s += ',\n';
+                        s += ',\r\n';
                     }
                     s += indent + "  " + v;
                 }
-                return '[\n' + s + '\n' + indent + ']';
+                return '[\r\n' + s + '\r\n' + indent + ']';
             } else if (typeof arg.toString != 'undefined') {
                 for (i in arg) {
                     v = arg[i];
                     if (typeof v != 'undefined' && typeof v != 'function') {
                         v = stringify(v, indent + "  ");
                         if (s) {
-                            s += ',\n';
+                            s += ',\r\n';
                         }
                         s += indent + "  " + stringify(i, indent + "  ") + ': ' + v;
                     }
                 }
-                return '{\n' + s + '\n' + indent + '}';
+                return '{\r\n' + s + '\r\n' + indent + '}';
             }
         }
         return 'null';
