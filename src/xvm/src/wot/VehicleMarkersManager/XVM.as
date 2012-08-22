@@ -881,7 +881,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         XVMUpdateHealthBar(m_curHealth);
     }
 
-    function XVMInitializeStates()
+    function XVMInitializeTextfields()
     {
         try
         {
@@ -927,7 +927,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         }
         catch (e)
         {
-            ErrorHandler.setText("ERROR: XVMInitializeStates():" + String(e));
+            ErrorHandler.setText("ERROR: XVMInitializeTextfields():" + String(e));
         }
     }
 
@@ -958,7 +958,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             XVMDrawHealthBar(cfg.healthBar);
 
             // Initialize states and creating text fields
-            XVMInitializeStates();
+            XVMInitializeTextfields();
 
             // Initialize clan icons
             XVMInitializeClanIcon(cfg.clanIcon);
