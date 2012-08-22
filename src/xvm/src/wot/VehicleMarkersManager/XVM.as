@@ -71,14 +71,6 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
     // Healthbar Settings
     var hbCfg: Object = null;
 
-    // All stated
-    private static var allStatesAlly: Array = [
-        "ally/alive/normal", "ally/alive/extended", "ally/dead/normal", "ally/dead/extended"
-    ]
-    private static var allStatesEnemy: Array = [
-        "enemy/alive/normal", "enemy/alive/extended", "enemy/dead/normal", "enemy/dead/extended"
-    ]
-
     // Level in roman numerals
     private static var rlevel: Array = [ "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" ];
 
@@ -911,7 +903,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             }
 
             textFields = { };
-            var allStates = (m_team == "enemy") ? allStatesEnemy : allStatesAlly;
+            var allStates = vehicleState.getAllStates();
             for (var stid in allStates)
             {
                 var st = allStates[stid];

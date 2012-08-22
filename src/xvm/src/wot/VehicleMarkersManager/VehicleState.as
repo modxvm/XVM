@@ -40,11 +40,16 @@ class wot.VehicleMarkersManager.VehicleState
 
     public function getCurrentStateConfigRoot()
     {
-        return      getConfigRoot(getCurrent());
+        return getConfigRoot(getCurrent());
     }
 
     public function getCurrentStateConfigRootNormal()
     {
-        return      getConfigRoot(getCurrent().split("extended").join("normal")) ;
+        return getConfigRoot(getCurrent().split("extended").join("normal")) ;
+    }
+    
+    public function getAllStates()
+    {
+        return (proxy.team == "enemy") ? allEnemy : allAlly;
     }
 }
