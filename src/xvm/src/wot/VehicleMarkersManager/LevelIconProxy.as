@@ -19,11 +19,11 @@ class wot.VehicleMarkersManager.LevelIconProxy extends AbstractAccessProxy
     
     public function get level():Number
     {
-        return xvm.m_level;
+        return xvm["m_level"]; // FIXIT
     }
     
     public function XVMFormatDynamicAlpha(format: String): Number
     {
-        return xvm.XVMFormatDynamicAlpha(format, xvm.m_curHealth);
+        return xvm.XVMFormatDynamicAlpha(format, xvm["m_curHealth"]); // FIXIT
     }
 }

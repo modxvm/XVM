@@ -1,5 +1,25 @@
-﻿intrinsic class gfx.core.UIComponent extends MovieClip
+﻿/**
+ * Defines the methods that all Vehicle Marker components must define.
+ */
+
+interface wot.VehicleMarkersManager.IVehicleMarker
 {
+    /**
+     * called by Battle.pyc
+     */
+
+    function init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt);
+    function update();
+    function updateMarkerSettings();
+    function setSpeaking(value);
+    function setEntityName(value);
+    function updateHealth(curHealth);
+    function updateState(newState, isImmediate);
+    function showExInfo(show);
+    function showActionMarker(actionState);
+
+    // UICompinent // TODO: Cleanup, not all methods required.
+    function onLoad();
     function get disabled();
     function set disabled(value);
     function get visible();

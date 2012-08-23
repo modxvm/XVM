@@ -15,7 +15,7 @@ class wot.VehicleMarkersManager.VehicleStateProxy extends AbstractAccessProxy
     
     public function get vehicleDestroyed():Boolean
     {
-        return xvm.vehicleDestroyed;
+        return xvm["vehicleDestroyed"]; // FIXIT
     }
     
     public function get isDead():Boolean

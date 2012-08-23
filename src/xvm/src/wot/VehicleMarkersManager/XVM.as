@@ -36,8 +36,21 @@ import wot.VehicleMarkersManager.VehicleStateProxy;
  * Thus may be instantiated ~50 times and more.
  */
 
-class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
+class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker implements wot.VehicleMarkersManager.IVehicleMarker
 {
+    // BEGIN
+    // TODO: remove 
+    public var levelIcon:MovieClip;
+    public var iconLoader:UILoaderAlt;
+    public var vNameField:TextField;
+    public var pNameField:TextField;
+    public var actionMarker:MovieClip;
+    public var marker:MovieClip;
+    public var healthBar:MovieClip;
+    public var bgShadow:MovieClip;
+    static var s_showExInfo;
+    // END
+
     static var DEBUG_TIMES = false;
 
     // UI Elements
@@ -79,23 +92,15 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         //Logger.addObject(_root, "_root", 2);
         //Logger.add("_global.gfxExtensions = " + _global.gfxExtensions);
         //Logger.add("_global.noInvisibleAdvance = " + _global.noInvisibleAdvance);
-        if (!_global.noInvisibleAdvance)
-            _global.noInvisibleAdvance = true;
-
         super();
 
         Utils.TraceXvmModule("XVM");
-
-        Config.LoadConfig("XVM.as", undefined, true);
     }
 
     private var _initialized = false;
-    function XVMInit(event)
+    function XVMInit()
     {
         //Logger.add("XVMInit()" + (event ? ": event=" + event.type : ""));
-        if (event)
-            GlobalEventDispatcher.removeEventListener("config_loaded", this, XVMInit);
-
         if (_initialized)
             return;
         _initialized = true;
@@ -105,9 +110,6 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             // Draw watermark
             if (!Config.s_config.battle.hideXVMVersion && !_global.xvmWatermark)
                 DrawXvmWatermark();
-
-            if (Config.s_config.battle.useStandardMarkers)
-                return;
 
             xvmHB = createEmptyMovieClip("xvmHB", marker.getDepth() - 1); // Put health Bar to back.
             xvmHBBorder = xvmHB.createEmptyMovieClip("border", 1);
@@ -188,7 +190,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         *  Maybe because of "if (initialized) this.populateData()" statement at parent class.
         */
 
-        //Logger.add("XVM::init(): Config.s_loaded=" + Config.s_loaded);
+        //Logger.add("XVM::init()");
         // Use currently remembered extended / normal status for new markers
         m_showExInfo = s_showExInfo;
         m_isDead = curHealth <= 0;
@@ -205,39 +207,25 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
     // override
     function updateMarkerSettings()
     {
-        //Logger.add("XVM::updateMarkerSettings(): Config.s_loaded=" + Config.s_loaded);
-        if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
-        {
-            super.updateMarkerSettings();
-            setDefaultVehicleMarkerPosition();
-        }
+        //Logger.add("XVM::updateMarkerSettings()");
     }
 
     // override
     function setSpeaking(value)
     {
         super.setSpeaking(value);
-        if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
-            return;
-
-        if (marker._visible != m_speaking)
+        if (marker._visible != this["m_speaking"])
             XVMUpdateStyle();
     }
 
     // override
     function updateHealth(curHealth)
     {
-        //Logger.add("XVM::updateHealth(): Config.s_loaded=" + Config.s_loaded);
-        if (Config.s_config.battle.useStandardMarkers)
-        {
-            super.updateHealth(curHealth);
-            return;
-        }
-
+        //Logger.add("XVM::updateHealth()");
         if (curHealth < 0)
-            s_blowedUp.push(m_playerFullName);
+            s_blowedUp.push(this["m_playerFullName"]);
         m_isDead = curHealth <= 0;
-        m_curHealth = m_isDead ? 0 : curHealth; // fix "-1"
+        this["m_curHealth"] = m_isDead ? 0 : curHealth; // fix "-1"
         XVMSetupNewHealth(curHealth);
         XVMUpdateUI(curHealth);
     }
@@ -245,13 +233,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
     // override
     function updateState(newState, isImmediate)
     {
-        //Logger.add("XVM::updateState(): Config.s_loaded=" + Config.s_loaded);
-        if (Config.s_config.battle.useStandardMarkers)
-        {
-            super.updateState(newState, isImmediate);
-            return;
-        }
-
+        //Logger.add("XVM::updateState()");
         //Logger.add("updateState(): " + vehicleState.getCurrent() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
         super.updateState(newState, isImmediate);
         XVMUpdateStyle();
@@ -260,13 +242,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
     // override
     function showExInfo(show)
     {
-        //Logger.add("XVM::showExInfo(): Config.s_loaded=" + Config.s_loaded);
-        if (Config.s_config.battle.useStandardMarkers)
-        {
-            super.showExInfo(show);
-            return;
-        }
-
+        //Logger.add("XVM::showExInfo()");
         if (m_showExInfo == show)
             return;
         m_showExInfo = show;
@@ -281,14 +257,11 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
     // override
     function configUI()
     {
-        //Logger.add("XVM::configUI(): Config.s_loaded=" + Config.s_loaded);
+        //Logger.add("XVM::configUI()");
         //Logger.add("configUI(): " + vehicleState.getCurrent() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
-        m_currentHealth = m_curHealth;
+        m_currentHealth = this["m_curHealth"];
         super.configUI();
-        if (Config.s_loaded)
-            XVMInit();
-        else
-            GlobalEventDispatcher.addEventListener("config_loaded", this, XVMInit);
+        XVMInit();
     }
 
     // override
@@ -298,17 +271,11 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         * populateData()
         * XVMpopulateData()
         */
-        if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
-        {
-            super.setupIconLoader();
-            return;
-        }
-
         // Alternative icon set
         if (!m_iconset)
             m_iconset = new IconLoader(this, completeLoad);
         m_iconset.init(iconLoader,
-            [ m_source.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.vehicleMarker), m_source ]);
+            [ this["m_source"].split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.vehicleMarker), this["m_source"] ]);
         iconLoader.source = m_iconset.currentIcon;
     }
 
@@ -328,17 +295,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         * This overriden method follows same subjects.
         */
 
-        //Logger.add("XVM::populateData(): Config.s_loaded=" + Config.s_loaded);
-       
-       /* Standart marker fallback implementation.
-        * Warning! Breaks normal workflow.
-        * Code below return statement does not get executed at round start.
-        * Commenting out fixed levelIconComponent for ally tanks at round start;
-        * TODO: fix, delete or investigate further.
-        */
-        //if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
-        //    return super.populateData();
-
+        //Logger.add("XVM::populateData()");
         //Logger.add("populateData(): " + vehicleState.getCurrent() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
 
        /*  populateData() is executed two or three times instantaneously by super.init()
@@ -346,9 +303,9 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         *  Code below is WG copypaste from super.populateData()
         *  see _Super.as for details.
         */
-        if (m_isPopulated)
+        if (this["m_isPopulated"])
             return false;
-        m_isPopulated = true;
+        this["m_isPopulated"] = true;
 
         // super.initMarkerLabel() handles color blind mode.
         // Commenting out this XVM specific realization does not change behavior.
@@ -361,14 +318,14 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         
         vehicleState = new VehicleState(new VehicleStateProxy(this));
         
-        if (m_vehicleClass != null)
-            this.setVehicleClass();
+        if (this["m_vehicleClass"] != null)
+            this["setVehicleClass"]();
 
-        if (m_markerState != null)
-            marker.gotoAndPlay(m_markerState);
+        if (this["m_markerState"] != null)
+            marker.gotoAndPlay(this["m_markerState"]);
 
         XVMPopulateData();
-        XVMSetupNewHealth(m_curHealth);
+        XVMSetupNewHealth(this["m_curHealth"]);
 
         return true;
     }
@@ -376,30 +333,18 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
     // override
     function initMarkerLabel()
     {
-        //Logger.add("XVM::initMarkerLabel(): Config.s_loaded=" + Config.s_loaded);
-        super.initMarkerLabel();
-        if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
-        {
-            setDefaultVehicleMarkerPosition();
-            return;
-        }
-
+        //Logger.add("XVM::initMarkerLabel()");
+        super["initMarkerLabel"]();
         XVMUpdateMarkerLabel();
-        XVMUpdateUI(m_curHealth);
+        XVMUpdateUI(this["m_curHealth"]);
     }
 
     // override
     function updateMarkerLabel()
     {
-        //Logger.add("XVM::updateMarkerLabel(): Config.s_loaded=" + Config.s_loaded);
+        //Logger.add("XVM::updateMarkerLabel()");
         //Logger.add("updateMarkerLabel(): " + vehicleState.getCurrent() + " markerLabel=" + m_markerLabel + " pname=" + m_playerFullName);
-        super.updateMarkerLabel();
-        if (Config.s_config.battle.useStandardMarkers)
-        {
-            setDefaultVehicleMarkerPosition();
-            return;
-        }
-
+        super["updateMarkerLabel"]();
         XVMUpdateMarkerLabel();
 
         XVMIconCompleteLoad();
@@ -408,22 +353,12 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         XVMUpdateStyle();
     }
 
-    // override
-    function _centeringIcon()
-    {
-        if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
-            super._centeringIcon();
-    }
-
     /**
     * MAIN
     */
 
     function completeLoad()
     {
-        if (!Config.s_loaded || Config.s_config.battle.useStandardMarkers)
-            return;
-
         iconLoader._visible = false;
         onEnterFrame = function()
         {
@@ -459,8 +394,8 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
 
     function XVMGetSystemColor()
     {
-        var systemColorName: String = m_entityName + "_";
-        systemColorName += (!vehicleDestroyed && !m_isDead) ? "alive_" : (Utils.indexOf(s_blowedUp, m_playerFullName) >= 0) ? "blowedup_" : "dead_";
+        var systemColorName: String = this["m_entityName"] + "_";
+        systemColorName += (!this["vehicleDestroyed"] && !m_isDead) ? "alive_" : (Utils.indexOf(s_blowedUp, this["m_playerFullName"]) >= 0) ? "blowedup_" : "dead_";
         systemColorName += s_isColorBlindMode ? "blind" : "normal";
         return Config.s_config.colors.system[systemColorName];
     }
@@ -470,11 +405,11 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         try
         {
             // AS 2 doesn't have String.replace? Shame on them. Let's use our own square wheel.
-            format = format.split("{{nick}}").join(m_playerFullName);
-            format = format.split("{{vehicle}}").join(VehicleInfo.mapVehicleName(m_defaultIconSource, m_vname));
-            format = format.split("{{level}}").join(String(m_level));
-            format = format.split("{{rlevel}}").join(String(rlevel[m_level - 1]));
-            format = StatFormat.FormatText({ label: m_playerFullName }, format);
+            format = format.split("{{nick}}").join(this["m_playerFullName"]);
+            format = format.split("{{vehicle}}").join(VehicleInfo.mapVehicleName(m_defaultIconSource, this["m_vname"]));
+            format = format.split("{{level}}").join(String(this["m_level"]));
+            format = format.split("{{rlevel}}").join(String(rlevel[this["m_level"] - 1]));
+            format = StatFormat.FormatText({ label: this["m_playerFullName"] }, format);
             format = Utils.trim(format);
         }
         catch (e)
@@ -506,12 +441,12 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             if (format.indexOf("{{") == -1)
                 return format;
 
-            var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
+            var hpRatio: Number = Math.ceil(curHealth / this["m_maxHealth"] * 100);
             format = format.split("{{hp-ratio}}").join(String(hpRatio));
             format = format.split("{{hp}}").join(String(curHealth));
-            format = format.split("{{hp-max}}").join(String(m_maxHealth));
+            format = format.split("{{hp-max}}").join(String(this["m_maxHealth"]));
 
-            var dmgRatio: Number = delta ? Math.ceil(delta / m_maxHealth * 100) : 0;
+            var dmgRatio: Number = delta ? Math.ceil(delta / this["m_maxHealth"] * 100) : 0;
             format = format.split("{{dmg-ratio}}").join(delta ? String(dmgRatio) : "");
             format = format.split("{{dmg}}").join(delta ? String(delta) : "");
 
@@ -532,7 +467,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             if (!format || isFinite(format))
                 return format;
 
-            format = StatFormat.FormatText( { label: m_playerFullName }, format).split("#").join("0x");
+            format = StatFormat.FormatText( { label: this["m_playerFullName"] }, format).split("#").join("0x");
         }
         catch (e)
         {
@@ -553,7 +488,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             if (isFinite(format))
                 return Number(format);
 
-            var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
+            var hpRatio: Number = Math.ceil(curHealth / this["m_maxHealth"] * 100);
             var formatArr = format.split("{{c:hp}}");
             if (formatArr.length > 1)
                 format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth, "0x"))
@@ -567,7 +502,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             if (formatArr.length > 1)
             {
                 format = formatArr.join(GraphicsUtil.GetVTypeColorValue(m_defaultIconSource,
-                    Utils.vehicleClassToVehicleType(m_vehicleClass), "0x"));
+                    Utils.vehicleClassToVehicleType(this["m_vehicleClass"]), "0x"));
             }
             return isFinite(format) ? Number(format) : systemColor;
         }
@@ -589,7 +524,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             if (isFinite(format))
                 return Number(format);
 
-            var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
+            var hpRatio: Number = Math.ceil(curHealth / this["m_maxHealth"] * 100);
             var formatArr = format.split("{{a:hp}}");
             if (formatArr.length > 1)
                 format = formatArr.join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, curHealth).toString());
@@ -660,15 +595,15 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
 
             if (cfg.shadow)
             {
-                var sh_color:Number = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.shadow.color), m_curHealth);
-                var sh_alpha:Number = XVMFormatDynamicAlpha(cfg.shadow.alpha, m_curHealth);
+                var sh_color:Number = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.shadow.color), this["m_curHealth"]);
+                var sh_alpha:Number = XVMFormatDynamicAlpha(cfg.shadow.alpha, this["m_curHealth"]);
                 textField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow.distance,
                     cfg.shadow.angle, sh_color, sh_alpha, cfg.shadow.size, cfg.shadow.strength) ];
             }
 
             var staticColor = XVMFormatStaticColorText(cfg.color);
-            textField.textColor = XVMFormatDynamicColor(staticColor, m_curHealth);
-            textField._alpha = XVMFormatDynamicAlpha(cfg.alpha, m_curHealth);
+            textField.textColor = XVMFormatDynamicColor(staticColor, this["m_curHealth"]);
+            textField._alpha = XVMFormatDynamicAlpha(cfg.alpha, this["m_curHealth"]);
             textField._x = cfg.x - (textField._width / 2.0);
             textField._y = cfg.y - (textField._height / 2.0);
             textField._visible = cfg.visible;
@@ -715,13 +650,13 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             damageField.embedFonts = true;
             damageField.setTextFormat(XVMCreateNewTextFormat(cfg.font));
             damageField.textColor = isFinite(cfg.color) ? Number(cfg.color)
-                : Config.s_config.colors.system[m_entityName + "_alive_" + (s_isColorBlindMode ? "blind" : "normal")];
+                : Config.s_config.colors.system[this["m_entityName"] + "_alive_" + (s_isColorBlindMode ? "blind" : "normal")];
             damageField._x = -(damageField._width / 2.0);
 
             if (cfg.shadow)
             {
-                var sh_color:Number = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.shadow.color), m_curHealth);
-                var sh_alpha:Number = XVMFormatDynamicAlpha(cfg.shadow.alpha, m_curHealth);
+                var sh_color:Number = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.shadow.color), this["m_curHealth"]);
+                var sh_alpha:Number = XVMFormatDynamicAlpha(cfg.shadow.alpha, this["m_curHealth"]);
                 damageField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow.distance,
                     cfg.shadow.angle, sh_color, sh_alpha, cfg.shadow.size, cfg.shadow.strength) ];
             }
@@ -742,7 +677,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             var delta: Number = curHealth - m_currentHealth;
             if (delta < 0)
             {
-                XVMUpdateHealthBar(curHealth, m_maxHealth); // colorizing health bar after taking damage
+                XVMUpdateHealthBar(curHealth, this["m_maxHealth"]); // colorizing health bar after taking damage
 
                 XVMShowDamage(curHealth, -delta);
 
@@ -750,8 +685,8 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
 
                 //Flow bar animation
                 TweenLite.killTweensOf(xvmHBDamage);
-                xvmHBDamage._x = hbCfg.border.size + hbCfg.width * (curHealth / m_maxHealth) - 1;
-                xvmHBDamage._xscale = xvmHBDamage._xscale + 100 * (-delta / m_maxHealth);
+                xvmHBDamage._x = hbCfg.border.size + hbCfg.width * (curHealth / this["m_maxHealth"]) - 1;
+                xvmHBDamage._xscale = xvmHBDamage._xscale + 100 * (-delta / this["m_maxHealth"]);
                 GraphicsUtil.setColor(xvmHBDamage, XVMFormatDynamicColor(hbCfg.damage.color, curHealth));
                 xvmHBDamage._alpha = XVMFormatDynamicAlpha(hbCfg.damage.alpha, curHealth);
                 TweenLite.to(xvmHBDamage, hbCfg.damage.fade, {_xscale: 0, ease: Cubic.easeIn });
@@ -766,9 +701,9 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
     function XVMUpdateMarkerLabel()
     {
         // Guess color blind mode
-        if (m_markerLabel == "yellow" || m_markerLabel == "purple")
+        if (this["m_markerLabel"] == "yellow" || this["m_markerLabel"] == "purple")
             s_isColorBlindMode = true;
-        else if (m_markerLabel == "gold" || m_markerLabel == "red")
+        else if (this["m_markerLabel"] == "gold" || this["m_markerLabel"] == "red")
             s_isColorBlindMode = false;
 
         // Hide original fields
@@ -788,7 +723,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
     {
         try
         {
-            xvmHBFill._xscale = Math.min(curHealth / m_maxHealth * 100, 100);
+            xvmHBFill._xscale = Math.min(curHealth / this["m_maxHealth"] * 100, 100);
 
             if (textFields)
             {
@@ -813,9 +748,6 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
     {
         try
         {
-            if (!Config.s_loaded)
-                return;
-
             var cfg = vehicleState.getCurrentStateConfigRoot().healthBar;
 
             xvmHB._alpha = XVMFormatDynamicAlpha(cfg.alpha, curHealth);
@@ -825,7 +757,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             var fullColor: Number = XVMFormatDynamicColor(ct, curHealth);
             var lowColor: Number = XVMFormatDynamicColor(lct || ct, curHealth);
 
-            var percent: Number = curHealth / m_maxHealth;
+            var percent: Number = curHealth / this["m_maxHealth"];
 
             // determ current (real-time) color
             var currColor = GraphicsUtil.colorByRatio(percent, lowColor, fullColor);
@@ -853,15 +785,12 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
     {
         try
         {
-            if (!Config.s_loaded)
-                return;
-
             // Vehicle Icon
             var cfg = vehicleState.getCurrentStateConfigRootNormal().contourIcon;
 
             if (cfg.amount >= 0)
             {
-                var tintColor: Number = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.color), m_curHealth);
+                var tintColor: Number = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.color), this["m_curHealth"]);
                 var tintAmount: Number = Math.min(100, Math.max(0, cfg.amount)) * 0.01;
                 GraphicsUtil.setColor(iconLoader, tintColor, tintAmount);
                 //var _loc2 = new flash.geom.Transform(iconLoader);
@@ -893,14 +822,14 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
 
         xvmHBDamage._xscale = 0;
 
-        XVMUpdateHealthBar(m_curHealth);
+        XVMUpdateHealthBar(this["m_curHealth"]);
     }
 
     function XVMInitializeTextfields()
     {
         try
         {
-            if (!m_vname || !m_playerFullName)
+            if (!this["m_vname"] || !this["m_playerFullName"])
                 return;
 
             // cleanup
@@ -950,7 +879,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
     {
         if (m_clanIcon == null)
             m_clanIcon = PlayerInfo.createIcon(this, cfg, cfg.x - (cfg.w / 2.0), cfg.y - (cfg.h / 2.0), Defines.TEAM_ALLY);
-        PlayerInfo.setSource(m_clanIcon, Utils.GetPlayerName(m_playerFullName), Utils.GetClanName(m_playerFullName));
+        PlayerInfo.setSource(m_clanIcon, Utils.GetPlayerName(this["m_playerFullName"]), Utils.GetClanName(this["m_playerFullName"]));
     }
 
     function XVMPopulateData()
@@ -958,15 +887,12 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         try
         {
             //Logger.add("XVMPopulateData: " + m_vname + " " + m_playerFullName);
-            if (!Config.s_loaded)
-                return;
-
             var start = new Date();
 
             var cfg = vehicleState.getCurrentStateConfigRootNormal();
 
             // Vehicle Type Icon
-            if (iconLoader != null && iconLoader.initialized)
+            if (iconLoader != null && iconLoader["initialized"])
                 setupIconLoader();
 
             // Health Bar
@@ -992,9 +918,6 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         try
         {
             //Logger.add("XVMUpdateStyle: " + m_vname + " " + m_playerFullName + " scale=" + marker._xscale);
-            if (!Config.s_loaded)
-                return;
-
             var start = new Date();
 
             var cfg = vehicleState.getCurrentStateConfigRoot();
@@ -1002,7 +925,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             var visible: Boolean;
 
             // Vehicle Type Marker
-            visible = cfg.vehicleIcon.visible || (m_speaking && cfg.vehicleIcon.showSpeaker);
+            visible = cfg.vehicleIcon.visible || (this["m_speaking"] && cfg.vehicleIcon.showSpeaker);
             if (visible)
             {
                 // Vehicle Type Marker
@@ -1027,7 +950,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
 
                 marker._x = cfg.vehicleIcon.x;
                 marker._y = cfg.vehicleIcon.y;
-                marker._alpha = XVMFormatDynamicAlpha(cfg.vehicleIcon.alpha, m_curHealth);
+                marker._alpha = XVMFormatDynamicAlpha(cfg.vehicleIcon.alpha, this["m_curHealth"]);
             }
             marker._visible = visible;
 
@@ -1044,14 +967,14 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             actionMarker._visible = visible;
 
             // Vehicle Icon
-            if (iconLoader != null && iconLoader.initialized)
+            if (iconLoader != null && iconLoader["initialized"])
             {
                 visible = cfg.contourIcon.visible;
                 if (visible)
                 {
                     iconLoader._x = cfg.contourIcon.x - (iconLoader.contentHolder._width / 2.0);
                     iconLoader._y = cfg.contourIcon.y - (iconLoader.contentHolder._height / 2.0);
-                    iconLoader._alpha = XVMFormatDynamicAlpha(cfg.contourIcon.alpha, m_curHealth);
+                    iconLoader._alpha = XVMFormatDynamicAlpha(cfg.contourIcon.alpha, this["m_curHealth"]);
                 }
                 iconLoader._visible = visible;
             }
@@ -1066,7 +989,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
                     holder._x = cfg.clanIcon.x - (cfg.clanIcon.w / 2.0);
                     holder._y = cfg.clanIcon.y - (cfg.clanIcon.h / 2.0);
                     m_clanIcon.setSize(cfg.clanIcon.w, cfg.clanIcon.h);
-                    holder._alpha = XVMFormatDynamicAlpha(cfg.clanIcon.alpha, m_curHealth);
+                    holder._alpha = XVMFormatDynamicAlpha(cfg.clanIcon.alpha, this["m_curHealth"]);
                 }
                 m_clanIcon._visible = visible;
             }
@@ -1086,7 +1009,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             {
                 xvmHB._x = cfg.healthBar.x;
                 xvmHB._y = cfg.healthBar.y;
-                xvmHB._alpha = XVMFormatDynamicAlpha(cfg.healthBar.alpha, m_curHealth);
+                xvmHB._alpha = XVMFormatDynamicAlpha(cfg.healthBar.alpha, this["m_curHealth"]);
             }
             xvmHB._visible = visible;
 
@@ -1102,8 +1025,8 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
             }
 
             // Update Colors and Values
-            XVMUpdateHealthBar(m_curHealth);
-            XVMUpdateUI(m_curHealth);
+            XVMUpdateHealthBar(this["m_curHealth"]);
+            XVMUpdateUI(this["m_curHealth"]);
 
             if (DEBUG_TIMES)
                 Logger.add("DEBUG TIME: XVMUpdateStyle(): " + Utils.elapsedMSec(start, new Date()) + " ms");
