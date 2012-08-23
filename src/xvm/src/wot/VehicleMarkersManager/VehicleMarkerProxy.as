@@ -14,7 +14,6 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     private static var __dummy = Logger.dummy;
 
     // Used in child classes VehicleMarkerAlly and VehicleMarkerEnemy
-    public var m_team:String; // protected
     public var m_entityName:String; // protected
 
     // Inherited from sprite
@@ -29,7 +28,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     private var bgShadow:MovieClip;
 
     // Private vars
-    private var m_playerName;
+    private var m_playerName; // TODO: remove
 
     /**
      * Subject class with real implementation
@@ -42,7 +41,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      */ 
     private var pendingCalls:Array;
 
-    private function trace(str:String)
+    private function trace(str:String) // TODO: remove
     {
         //if (m_playerName == "Feuer30")
         //Logger.add(m_playerName + "> " + str);
@@ -94,7 +93,9 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         if (Config.s_config.battle.useStandardMarkers == true)
             subject = new net.wargaming.ingame.VehicleMarker();
         else
+        {
             subject = new XVM();
+        }
 
         subject["_proxy"] = this;
         subject["gotoAndStop"] = function(frame) {
@@ -109,7 +110,15 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
 
     private function bindStandardElements()
     {
-        marker._x = marker._y = 0; // TODO: TK vtype marker in not centered using standard markers
+        // Fix marker position _for standard marker_.
+        for (var childName in marker.marker)
+        {
+            marker.marker[childName]._x = 0;
+            marker.marker[childName]._y = 16;
+        }
+        marker._x = 0;
+        marker._y = -16;
+
         subject["marker"] = marker;
         subject["levelIcon"] = levelIcon;
         subject["iconLoader"] = iconLoader;
@@ -169,7 +178,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      */
     public function init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt)
     {
-        m_playerName = pFullName;
+        m_playerName = pFullName; // TODO: remove
         call("init", [ vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt ]);
     }
 
