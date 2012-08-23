@@ -2,7 +2,6 @@
  * Proxy class for vehicle marker components
  */
 import wot.VehicleMarkersManager.IVehicleMarker;
-import wot.VehicleMarkersManager.XVM;
 import wot.utils.Config;
 import wot.utils.GlobalEventDispatcher;
 import wot.utils.Logger;
@@ -14,6 +13,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     private static var __dummy = Logger.dummy;
 
     // Used in child classes VehicleMarkerAlly and VehicleMarkerEnemy
+    // TODO: can include to interface as property?
     public var m_entityName:String; // protected
 
     // Inherited from sprite
@@ -27,90 +27,121 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     private var healthBar:MovieClip;
     private var bgShadow:MovieClip;
 
-    // Private vars
-    private var m_playerName; // TODO: remove
-
     /**
-     * Subject class with real implementation
+     * Instanse of subject class with real implementation
      */
     private var subject: IVehicleMarker;
 
     /**
-     * Pending calls missed while config is loading.
+     * List of pending calls (missed while config is loading).
      * Records is object: { func:String, args:Array }
      */ 
     private var pendingCalls:Array;
 
-    private function trace(str:String) // TODO: remove
+    /**
+     * Log trace
+     * @param	str     Log message
+     */
+    /*
+    static private function trace(str:String):Void
     {
-        //if (m_playerName == "Feuer30")
-        //Logger.add(m_playerName + "> " + str);
+        Logger.add("> " + str);
     }
+    */
     
     /**
      * ctor()
      */
     public function VehicleMarkerProxy()
     {
-        subject = null;
-
-        // ScaleForm optimization
+        // ScaleForm optimization // FIXIT: is required?
         if (!_global.noInvisibleAdvance)
             _global.noInvisibleAdvance = true;
 
-        trace("VehicleMarkerProxy()");
+        subject = null;
 
+        // Initialize UIComponent
         super();
 
-        Utils.TraceXvmModule("VehicleMarkerProxy");
-
-        if (Config.s_loaded == true)
-            initializeSubject();
-        else
+        // Show module trace message (optimized for speed - only one call per battle)
+        if (_global["__trace_vmm_done"] != true)
         {
-            vNameField.text = "Loading...";
+            _global["__trace_vmm_done"] = true;
+            Utils.TraceXvmModule("VehicleMarkerProxy");
+        }
+
+        // Check config
+        if (Config.s_loaded != true)
+        {
+            // if not loaded:
+            //   cleanup marker while config is loading
             pNameField._visible = false;
             marker._visible = false;
             healthBar._visible = false;
             bgShadow._visible = false;
+            vNameField.text = "Loading...";
+            //   start config loading
             Config.LoadConfig("VehicleMarkerProxy.as", undefined, true);
+            //   register config load complete event
             GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
+        }
+        else
+        {
+            // if already loaded, skip config loading steps
+            initializeSubject();
         }
     }
 
-    private function onConfigLoaded()
+    /**
+     * Config load callback
+     * Calls on config loading is complete. Calls always, even if config is missed or loading failed.
+     */
+    private function onConfigLoaded():Void
     {
         trace("onConfigLoaded()");
-        marker._visible = true;
+
         GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
+
+        // re-enable vehicle type marker (required only for standard marker)
+        marker._visible = true;
+
+        // finalize initialization
         initializeSubject();
     }
 
-    private function initializeSubject()
+    /**
+     * Create subject class in depend of config setting
+     */
+    private function initializeSubject():Void
     {
         trace("initializeSubject()");
 
-        if (Config.s_config.battle.useStandardMarkers == true)
-            subject = new net.wargaming.ingame.VehicleMarker();
-        else
-        {
-            subject = new XVM();
-        }
+        // Create marker class depending on config setting
+        subject = (Config.s_config.battle.useStandardMarkers == true)
+            ? new net.wargaming.ingame.VehicleMarker() // Standard marker
+            : new wot.VehicleMarkersManager.XVM(); // XVM marker
 
+        // Translate entity name to subject
+        subject["m_entityName"] = m_entityName;
+
+        // Save link to me in subject
         subject["_proxy"] = this;
+
+        // Replace MovieClip.gotoAndStop (calling for changing marker type: squad, team killer, color blind, ...)
         subject["gotoAndStop"] = function(frame) {
-            //Logger.add("**************** " + frame);
             this["_proxy"].gotoAndStop(frame);
             this["_proxy"].bindStandardElements();
         };
 
+        // Call all skipped steps
         if (pendingCalls.length > 0)
             processPendingCalls();
     }
 
-    private function bindStandardElements()
+    // TODO: review
+    private function bindStandardElements():Void
     {
-        // Fix marker position _for standard marker_.
+        // Fix marker position (required only for standard marker)
         for (var childName in marker.marker)
         {
             marker.marker[childName]._x = 0;
@@ -119,17 +150,42 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         marker._x = 0;
         marker._y = -16;
 
+        // Translate visual elements to subject
         subject["marker"] = marker;
         subject["levelIcon"] = levelIcon;
         subject["iconLoader"] = iconLoader;
-        subject["vNameField"] = vNameField;
-        subject["pNameField"] = pNameField;
         subject["actionMarker"] = actionMarker;
-        subject["healthBar"] = healthBar;
-        subject["bgShadow"] = bgShadow;
+        subject["vNameField"] = vNameField; // required only for standard marker
+        subject["pNameField"] = pNameField; // required only for standard marker
+        subject["healthBar"] = healthBar; // required only for standard marker
+        subject["bgShadow"] = bgShadow; // required only for standard marker
     }
     
-    private function call(func:String, args:Array)
+    /**
+     * Call all skipped steps
+     * subject must be created when this function is called
+     */
+    private function processPendingCalls():Void
+    {
+        trace("processPendingCalls()");
+
+        // Calls order is important
+        var len = pendingCalls.length;
+        for (var i:Number = 0; i < len; ++i)
+        {
+            var data = pendingCalls[i];
+            call(data.func, data.args);
+            delete data;
+        }
+        pendingCalls = null;
+    }
+    
+    /**
+     * Translate function call to subject or save in pending calls if subject is not created yet
+     * @param	func    Name of function
+     * @param	args    Array of arguments
+     */
+    private function call(func:String, args:Array):Void
     {
         if (func != "showExInfo")
             trace("call(): " + func);
@@ -140,25 +196,10 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         {
             if (!pendingCalls)
                 pendingCalls = [];
-            pendingCalls.push( { name:m_playerName, func:func, args:args } );
+            pendingCalls.push( { func:func, args:args } );
         }
     }
 
-    private function processPendingCalls()
-    {
-        trace("processPendingCalls()");
-        if (subject == null)
-            return;
-        
-        var len = pendingCalls.length;
-        for (var i:Number = 0; i < len; ++i)
-        {
-            var data = pendingCalls[i];
-            call(data.func, data.args);
-        }
-        pendingCalls = null;
-    }
-    
     /**
      * IVehicleMarker implementation
      */
@@ -178,7 +219,6 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      */
     public function init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt)
     {
-        m_playerName = pFullName; // TODO: remove
         call("init", [ vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt ]);
     }
 
@@ -256,7 +296,18 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
 
     /**
      * IUIComponent implementation
+     * TODO: not all is required, remove unused.
      */
+
+    public function configUI()
+    {
+        call("configUI");
+    }
+
+    public function validateNow()
+    {
+        call("validateNow");
+    }
 
     public function get disabled()
     {
@@ -339,20 +390,10 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         call("invalidate");
     }
 
-    public function validateNow()
-    {
-        call("validateNow");
-    }
-
     public function toString()
     {
         trace("*** toString()");
         return "[proxy]" + (subject != null ? subject.toString() : "[(null)]");
-    }
-
-    public function configUI()
-    {
-        call("configUI");
     }
 
     public function initSize()

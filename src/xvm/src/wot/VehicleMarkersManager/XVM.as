@@ -76,12 +76,13 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker i
     // Level in roman numerals
     private static var rlevel: Array = [ "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" ];
 
-    // TODO: remove
+    /*
     private function trace(str:String)
     {
         //if (m_playerName == "Feuer30")
-        //Logger.add(this["m_playerFullName"] + "> " + str);
+        Logger.add(this["m_playerFullName"] + "> " + str);
     }
+    */
     
     function XVM()
     {
