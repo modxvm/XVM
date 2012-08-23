@@ -486,19 +486,34 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
 
     function XVMFormatDynamicText(format: String, curHealth: Number, delta: Number): String
     {
+        /* Substitutes macroses with values
+         *
+         * Possible format values with simple config:
+         * incoming format -> outcoming format
+         * {{hp}} / {{hp-max}} -> 725 / 850
+         * Patton -> Patton
+         * -{{dmg}} -> -368
+         * {{dmg}} -> 622
+         * 
+         * Called by
+         * XVMShowDamage(curHealth, delta)
+         * XVMUpdateUI(curHealth) with textField aspect
+         */
+        
         try
         {
+            // skip strings without macroses
             if (format.indexOf("{{") == -1)
                 return format;
 
             var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
+            format = format.split("{{hp-ratio}}").join(String(hpRatio));
             format = format.split("{{hp}}").join(String(curHealth));
             format = format.split("{{hp-max}}").join(String(m_maxHealth));
-            format = format.split("{{hp-ratio}}").join(String(hpRatio));
 
             var dmgRatio: Number = delta ? Math.ceil(delta / m_maxHealth * 100) : 0;
-            format = format.split("{{dmg}}").join(delta ? String(delta) : "");
             format = format.split("{{dmg-ratio}}").join(delta ? String(dmgRatio) : "");
+            format = format.split("{{dmg}}").join(delta ? String(delta) : "");
 
             format = Utils.trim(format);
         }
@@ -506,7 +521,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker
         {
             ErrorHandler.setText("ERROR: XVMFormatDynamicText(" + format + "):" + String(e));
         }
-
+        
         return format;
     }
 
