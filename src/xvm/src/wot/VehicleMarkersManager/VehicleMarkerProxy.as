@@ -3,6 +3,7 @@
  */
 import wot.VehicleMarkersManager.IVehicleMarker;
 import wot.utils.Config;
+import wot.utils.Defines;
 import wot.utils.GlobalEventDispatcher;
 import wot.utils.Logger;
 import wot.utils.Utils;
@@ -102,6 +103,10 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
 
         GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
 
+        // Draw watermark
+        if (!Config.s_config.battle.hideXVMVersion && !_global.xvmWatermark)
+            DrawXvmWatermark();
+
         // re-enable vehicle type marker (required only for standard marker)
         marker._visible = true;
 
@@ -200,6 +205,16 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         }
     }
 
+    function DrawXvmWatermark()
+    {
+        _global.xvmWatermark = true;
+        var wm = _root.createTextField("xvmWatermark", _root.getNextHighestDepth(), -1, -2, 100, 16);
+        wm.antiAliasType = "advanced";
+        wm.setNewTextFormat(new TextFormat("$FieldFont", 8, 0x808080, false, false, false, null, null, "left"));
+        wm._alpha = 50;
+        wm.text = "XVM v" + Defines.XVM_VERSION;
+    }
+    
     /**
      * IVehicleMarker implementation
      */

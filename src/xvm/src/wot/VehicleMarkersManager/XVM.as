@@ -101,10 +101,6 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker i
 
         try
         {
-            // Draw watermark
-            if (!Config.s_config.battle.hideXVMVersion && !_global.xvmWatermark)
-                DrawXvmWatermark();
-
             xvmHB = _proxy.createEmptyMovieClip("xvmHB", marker.getDepth() - 1); // Put health Bar to back.
             xvmHBBorder = xvmHB.createEmptyMovieClip("border", 1);
             xvmHBDamage = xvmHB.createEmptyMovieClip("damage", 2);
@@ -139,16 +135,6 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker i
         {
             ErrorHandler.setText("ERROR: XVMInit():" + String(e));
         }
-    }
-
-    function DrawXvmWatermark()
-    {
-        _global.xvmWatermark = true;
-        var wm = _root.createTextField("xvmWatermark", _root.getNextHighestDepth(), -1, -2, 100, 16);
-        wm.antiAliasType = "advanced";
-        wm.setNewTextFormat(new TextFormat("$FieldFont", 8, 0x808080, false, false, false, null, null, "left"));
-        wm._alpha = 50;
-        wm.text = "XVM v" + Defines.XVM_VERSION;
     }
 
     function XVMInit2(event)
