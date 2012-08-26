@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using RT.Util.Json;
 
-namespace TankDataConverter
+namespace VehicleBankParser
 {
     static class BxmlReader
     {

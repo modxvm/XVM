@@ -11,7 +11,7 @@ using RT.Util.ExtensionMethods;
 using RT.Util.Json;
 using System.Collections.Generic;
 
-namespace TankDataConverter
+namespace VehicleBankParser
 {
     class Program
     {
@@ -24,16 +24,16 @@ namespace TankDataConverter
             var vehicleListPath = @"res\scripts\item_defs\vehicles\{0}\list.xml";
             var moFilesPath = @"res\text\LC_MESSAGES";
             var countries = new[] { "ussr", "germany", "usa", "france", "china", "uk" };
-            var outputPath = @"P:\TankIconMaker\TankIconMaker\Resources";
+            var outputPath = @"D:\bank.txt";
 
             descriptionNameFullWG["Ru"] = "Полные названия танков, оригинал – как в игре.";
             descriptionNameFullWG["En"] = "Full tank names, original – like in the game.";
             descriptionNameShortWG["Ru"] = "Короткие названия танков, оригинал – как в игре.";
             descriptionNameShortWG["En"] = "Short tank names, original – like in the game.";
 
-            generateFiles(@"I:\Games\WorldOfTanks\GameEn", "En", "0.7.4", new[] { "ussr", "germany", "usa", "france", "china" }, outputPath, vehicleListPath, moFilesPath);
-            generateFiles(@"I:\Games\WorldOfTanks\GameRu", "Ru", "0.7.4", new[] { "ussr", "germany", "usa", "france", "china" }, outputPath, vehicleListPath, moFilesPath);
-            generateFiles(@"I:\Games\WorldOfTanks\GameRuTest", "Ru", "0.7.5", countries, outputPath, vehicleListPath, moFilesPath);
+            //generateFiles(@"I:\Games\WorldOfTanks\GameEn", "En", "0.7.4", new[] { "ussr", "germany", "usa", "france", "china" }, outputPath, vehicleListPath, moFilesPath);
+            //generateFiles(@"I:\Games\WorldOfTanks\GameRu", "Ru", "0.7.4", new[] { "ussr", "germany", "usa", "france", "china" }, outputPath, vehicleListPath, moFilesPath);
+            generateFiles(@"D:\Program Files\World_of_Tanks", "Ru", "0.7.5", countries, outputPath, vehicleListPath, moFilesPath);
         }
 
         private static void generateFiles(string gamePath, string lang, string builtInVersion, string[] countries, string outputPath, string vehicleListPath, string moFilesPath)

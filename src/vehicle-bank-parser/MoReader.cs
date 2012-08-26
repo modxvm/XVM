@@ -11,7 +11,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 
-namespace TankDataConverter
+namespace VehicleBankParser
 {
     static class MoReader
     {
