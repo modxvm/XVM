@@ -13,6 +13,7 @@ class wot.VehicleMarkersManager.components.TurretStatusComponent
     public function getString():String
     {
         Logger.add("TurretStatusComponent.getString()");
-        return "";
+        return "#";
+        // circle & half-circle? box & half-box
     }
 }
