@@ -8,6 +8,11 @@ import wot.utils.GlobalEventDispatcher;
 import wot.utils.Logger;
 import wot.utils.Utils;
 
+/* TODO:
+ * Check for performance boost with marker object caching
+ * http://sourcemaking.com/design_patterns/object_pool
+ */
+
 class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent implements IVehicleMarker
 {
     // dummy var to avoid import warning
@@ -18,7 +23,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     public var m_entityName:String; // protected
 
     // Inherited from sprite
-    // TODO: try to remove and create dynamically only with standard markers to improove performance
+    // TODO: try to remove and create dynamically only with standard markers to improve performance
     private var levelIcon:MovieClip;
     private var iconLoader:MovieClip;
     private var vNameField:TextField;
