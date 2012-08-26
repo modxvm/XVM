@@ -22,11 +22,11 @@ import wot.utils.Utils;
 import wot.utils.Logger;
 import wot.utils.PlayerInfo;
 import wot.utils.VehicleInfo;
-import wot.VehicleMarkersManager.componnets.TurretStatusComponent;
-import wot.VehicleMarkersManager.componnets.TurretStatusProxy;
+import wot.VehicleMarkersManager.components.TurretStatusComponent;
+import wot.VehicleMarkersManager.components.TurretStatusProxy;
 import wot.VehicleMarkersManager.ErrorHandler;
-import wot.VehicleMarkersManager.componnets.LevelIconComponent;
-import wot.VehicleMarkersManager.componnets.LevelIconProxy;
+import wot.VehicleMarkersManager.components.LevelIconComponent;
+import wot.VehicleMarkersManager.components.LevelIconProxy;
 import wot.VehicleMarkersManager.VehicleState;
 import wot.VehicleMarkersManager.VehicleStateProxy;
 
