@@ -116,8 +116,6 @@ class wot.BattleMain
     if (!StatData.s_loaded || !Config.s_config.rating.showPlayersStatistics || !Config.s_config.statisticForm.showChances)
       return;
 
-    Logger.addObject(_root.statsData, "_root.statsData", 2);
-      
     for (var i = 0; i < _root.statsData.team1.length; ++i)
     {
       var data = _root.statsData.team1[i];
