@@ -3,7 +3,8 @@ import wot.VehicleMarkersManager.XVM;
 
 class wot.VehicleMarkersManager.components.LevelIconProxy extends AbstractAccessProxy
 {
-   /* This proxy class is only for LevelIconComponent
+   /**
+    * This proxy class is only for LevelIconComponent
     * access restriction to wot.VehicleMarkersManager.XVM
     */
    
@@ -14,16 +15,16 @@ class wot.VehicleMarkersManager.components.LevelIconProxy extends AbstractAccess
     
     public function get levelIcon():MovieClip
     {
-        return xvm.levelIcon;
+        return xvm._proxy.levelIcon;
     }
     
     public function get level():Number
     {
-        return xvm["m_level"]; // FIXIT
+        return xvm.m_level;
     }
     
     public function XVMFormatDynamicAlpha(format: String): Number
     {
-        return xvm.XVMFormatDynamicAlpha(format, xvm["m_curHealth"]); // FIXIT
+        return xvm.XVMFormatDynamicAlpha(format, xvm.m_curHealth);
     }
 }

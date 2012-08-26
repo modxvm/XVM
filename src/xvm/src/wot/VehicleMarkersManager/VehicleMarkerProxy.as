@@ -24,12 +24,12 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
 
     // Inherited from sprite
     // TODO: try to remove and create dynamically only with standard markers to improve performance
-    private var levelIcon:MovieClip;
-    private var iconLoader:MovieClip;
+    public var levelIcon:MovieClip;
+    public var iconLoader:net.wargaming.controls.UILoaderAlt;
+    public var actionMarker:MovieClip;
+    public var marker:MovieClip;
     private var vNameField:TextField;
     private var pNameField:TextField;
-    private var actionMarker:MovieClip;
-    private var marker:MovieClip;
     private var healthBar:MovieClip;
     private var bgShadow:MovieClip;
 
@@ -128,80 +128,92 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
 
         // Create marker class depending on config setting
         if (Config.s_config.battle.useStandardMarkers == true)
-            subject = new net.wargaming.ingame.VehicleMarker() // Standard marker
+        {
+            // Create Standard marker
+            subject = new net.wargaming.ingame.VehicleMarker()
+            // Translate entity name to subject
+            subject["m_entityName"] = m_entityName;
+            // Save link to me in subject
+            subject["_proxy"] = this;
+            // Replace MovieClip.gotoAndStop (calling for changing marker type: squad, team killer, color blind, ...)
+            subject["gotoAndStop"] = function(frame) {
+                //Logger.add(this["m_playerFullName"] + ": gotoAndStop(" + frame + ")");
+                this["_proxy"].gotoAndStop(frame);
+
+                // FIXIT: this is required for properly working of dead's markers. Is there another way to do it?
+                if (this["m_markerState"] != null)
+                    this["marker"].gotoAndPlay(this["m_markerState"]);
+            };
+        }
         else
         {
-            subject = new wot.VehicleMarkersManager.XVM(); // XVM marker
-            subject["m_team"] = m_entityName;
+            // Create XVM marker
+            subject = new wot.VehicleMarkersManager.XVM(this, m_entityName);
         }
-
-        // Translate entity name to subject
-        subject["m_entityName"] = m_entityName;
-
-        // Save link to me in subject
-        subject["_proxy"] = this;
-
-        // Replace MovieClip.gotoAndStop (calling for changing marker type: squad, team killer, color blind, ...)
-        subject["gotoAndStop"] = function(frame) {
-            //Logger.add(this["m_playerFullName"] + ": gotoAndStop(" + frame + ")");
-            this["_proxy"].gotoAndStop(frame);
-            this["_proxy"].bindStandardElements();
-            // {{
-            // FIXIT: this is required for properly working of dead's markers in standard marker. 
-            if (this["m_markerState"] != null)
-                this["marker"].gotoAndPlay(this["m_markerState"]);
-            // }}
-        };
 
         // Call all skipped steps
         if (pendingCalls.length > 0)
             processPendingCalls();
     }
 
-    // TODO: review
-    private function bindStandardElements():Void
+    // override MovieClip
+    function gotoAndStop(frame:Object):Void
     {
-        // Fix marker position (required only for standard marker)
-        for (var childName in marker.marker)
-        {
-            marker.marker[childName]._x = 0;
-            marker.marker[childName]._y = 16;
-        }
-        marker._x = 0;
-        marker._y = -16;
+        super.gotoAndStop(frame);
 
-        // Translate visual elements to subject
-        subject["marker"] = marker;
-        subject["levelIcon"] = levelIcon;
-        subject["iconLoader"] = iconLoader;
-        subject["actionMarker"] = actionMarker;
         if (Config.s_config.battle.useStandardMarkers == true)
         {
-            subject["vNameField"] = vNameField; // required only for standard marker
-            subject["pNameField"] = pNameField; // required only for standard marker
-            subject["healthBar"] = healthBar; // required only for standard marker
-            subject["bgShadow"] = bgShadow; // required only for standard marker
+            // Fix marker position (team Killer for example)
+            for (var childName in marker.marker)
+            {
+                marker.marker[childName]._x = 0;
+                marker.marker[childName]._y = 16;
+            }
+            marker._x = 0;
+            marker._y = -16;
+
+            // Translate visual elements to subject
+            subject["marker"] = marker;
+            subject["levelIcon"] = levelIcon;
+            subject["iconLoader"] = iconLoader;
+            subject["actionMarker"] = actionMarker;
+            subject["vNameField"] = vNameField;
+            subject["pNameField"] = pNameField;
+            subject["healthBar"] = healthBar;
+            subject["bgShadow"] = bgShadow;
         }
         else
         {
             // Remove standard fields for XVM
-            pNameField._visible = false;
-            pNameField.removeTextField();
-            delete pNameField;
+            if (pNameField)
+            {
+                pNameField._visible = false;
+                pNameField.removeTextField();
+                delete pNameField;
+            }
 
-            vNameField._visible = false;
-            vNameField.removeTextField();
-            delete vNameField;
+            if (vNameField)
+            {
+                vNameField._visible = false;
+                vNameField.removeTextField();
+                delete vNameField;
+            }
 
-            healthBar.stop();
-            healthBar._visible = false;
-            healthBar.removeMovieClip();
-            delete healthBar;
+            if (healthBar)
+            {
+                healthBar.stop();
+                healthBar._visible = false;
+                healthBar.removeMovieClip();
+                delete healthBar;
+            }
 
-            bgShadow.stop();
-            bgShadow._visible = false;
-            bgShadow.removeMovieClip();
-            delete bgShadow;
+            if (bgShadow)
+            {
+                bgShadow.stop();
+                bgShadow._visible = false;
+                bgShadow.removeMovieClip();
+                delete bgShadow;
+            }
         }
     }
     
