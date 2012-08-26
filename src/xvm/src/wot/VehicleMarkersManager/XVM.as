@@ -23,8 +23,8 @@ import wot.utils.Logger;
 import wot.utils.PlayerInfo;
 import wot.utils.VehicleInfo;
 import wot.VehicleMarkersManager.ErrorHandler;
-import wot.VehicleMarkersManager.LevelIconComponent;
-import wot.VehicleMarkersManager.LevelIconProxy;
+import wot.VehicleMarkersManager.componnets.LevelIconComponent;
+import wot.VehicleMarkersManager.componnets.LevelIconProxy;
 import wot.VehicleMarkersManager.VehicleState;
 import wot.VehicleMarkersManager.VehicleStateProxy;
 
