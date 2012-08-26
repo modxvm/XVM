@@ -1,19 +1,27 @@
 import wot.VehicleMarkersManager.components.TurretStatusProxy;
-import wot.utils.Logger;
+import wot.utils.VehicleInfo;
+//import wot.utils.Logger;
 
 class wot.VehicleMarkersManager.components.TurretStatusComponent
 {
-    var proxy:TurretStatusProxy
+    private var proxy:TurretStatusProxy
+    
+    private var status:String
     
     public function TurretStatusComponent(proxy:TurretStatusProxy) 
     {
         this.proxy = proxy;
+        defineStatus();
+    }
+    
+    private function defineStatus()
+    {
+        VehicleInfo.getName(proxy.defaultIconSource);
+        status = "*";
     }
      
     public function getString():String
     {
-        Logger.add("TurretStatusComponent.getString()");
-        return "#";
-        // circle & half-circle? box & half-box
+        return status;
     }
 }

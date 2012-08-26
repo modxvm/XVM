@@ -13,9 +13,9 @@ class wot.VehicleMarkersManager.components.TurretStatusProxy extends AbstractAcc
         super(xvm);
     }
     
-    public function get levelIcon():MovieClip
+    public function get defaultIconSource():String
     {
-        return xvm._proxy.levelIcon;
+        return xvm.m_defaultIconSource;
     }
     
     public function get maxHealth():Number

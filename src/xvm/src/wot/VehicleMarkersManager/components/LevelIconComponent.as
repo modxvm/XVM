@@ -2,7 +2,7 @@ import wot.VehicleMarkersManager.components.LevelIconProxy;
 
 class wot.VehicleMarkersManager.components.LevelIconComponent
 {
-    var proxy:LevelIconProxy
+    private var proxy:LevelIconProxy
     
     public function LevelIconComponent(proxy:LevelIconProxy) 
     {
