@@ -17,13 +17,8 @@ class wot.VehicleMarkersManager.componnets.TurretStatusProxy extends AbstractAcc
         return xvm.levelIcon;
     }
     
-    public function get level():Number
+    public function get maxHealth():Number
     {
-        return xvm["m_level"]; // FIXIT
-    }
-    
-    public function XVMFormatDynamicAlpha(format: String): Number
-    {
-        return xvm.XVMFormatDynamicAlpha(format, xvm["m_curHealth"]); // FIXIT
+        return xvm["m_maxHealth"];
     }
 }

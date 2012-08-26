@@ -22,6 +22,8 @@ import wot.utils.Utils;
 import wot.utils.Logger;
 import wot.utils.PlayerInfo;
 import wot.utils.VehicleInfo;
+import wot.VehicleMarkersManager.componnets.TurretStatusComponent;
+import wot.VehicleMarkersManager.componnets.TurretStatusProxy;
 import wot.VehicleMarkersManager.ErrorHandler;
 import wot.VehicleMarkersManager.componnets.LevelIconComponent;
 import wot.VehicleMarkersManager.componnets.LevelIconProxy;
@@ -67,6 +69,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker i
     var textFields: Object;
     
     var levelIconComponent: LevelIconComponent;
+    var turretStatusComponent: TurretStatusComponent;
     
     var vehicleState: VehicleState;
 
@@ -178,7 +181,8 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker i
         * and calls if (initialized) this.populateData().
         * See _Super.as for details.
         */
-        super.init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt);
+       Logger.add("vType = " + vType);
+       super.init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt);
     }
 
     function updateMarkerSettings()
@@ -300,6 +304,7 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker i
         setupIconLoader();
         
         levelIconComponent = new LevelIconComponent(new LevelIconProxy(this));
+        turretStatusComponent = new TurretStatusComponent(new TurretStatusProxy(this));
         
         vehicleState = new VehicleState(new VehicleStateProxy(this));
         
@@ -432,6 +437,8 @@ class wot.VehicleMarkersManager.XVM extends net.wargaming.ingame.VehicleMarker i
             var dmgRatio: Number = delta ? Math.ceil(delta / this["m_maxHealth"] * 100) : 0;
             format = format.split("{{dmg-ratio}}").join(delta ? String(dmgRatio) : "");
             format = format.split("{{dmg}}").join(delta ? String(delta) : "");
+            
+            format = format.split("{{turret}}").join(turretStatusComponent.getString());
 
             format = Utils.trim(format);
         }
