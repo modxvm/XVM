@@ -1,7 +1,7 @@
 import wot.VehicleMarkersManager.AbstractAccessProxy;
 import wot.VehicleMarkersManager.XVM;
 
-class wot.VehicleMarkersManager.componnets.LevelIconProxy extends AbstractAccessProxy
+class wot.VehicleMarkersManager.components.LevelIconProxy extends AbstractAccessProxy
 {
    /* This proxy class is only for LevelIconComponent
     * access restriction to wot.VehicleMarkersManager.XVM

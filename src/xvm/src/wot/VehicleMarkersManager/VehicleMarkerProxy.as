@@ -59,6 +59,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      */
     public function VehicleMarkerProxy()
     {
+        //Logger.add("VehicleMarkerProxy::ctor()");
         // ScaleForm optimization // FIXIT: is required?
         if (!_global.noInvisibleAdvance)
             _global.noInvisibleAdvance = true;
@@ -126,9 +127,13 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         trace("initializeSubject()");
 
         // Create marker class depending on config setting
-        subject = (Config.s_config.battle.useStandardMarkers == true)
-            ? new net.wargaming.ingame.VehicleMarker() // Standard marker
-            : new wot.VehicleMarkersManager.XVM(); // XVM marker
+        if (Config.s_config.battle.useStandardMarkers == true)
+            subject = new net.wargaming.ingame.VehicleMarker() // Standard marker
+        else
+        {
+            subject = new wot.VehicleMarkersManager.XVM(); // XVM marker
+            subject["m_team"] = m_entityName;
+        }
 
         // Translate entity name to subject
         subject["m_entityName"] = m_entityName;
@@ -170,10 +175,34 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         subject["levelIcon"] = levelIcon;
         subject["iconLoader"] = iconLoader;
         subject["actionMarker"] = actionMarker;
-        subject["vNameField"] = vNameField; // required only for standard marker
-        subject["pNameField"] = pNameField; // required only for standard marker
-        subject["healthBar"] = healthBar; // required only for standard marker
-        subject["bgShadow"] = bgShadow; // required only for standard marker
+        if (Config.s_config.battle.useStandardMarkers == true)
+        {
+            subject["vNameField"] = vNameField; // required only for standard marker
+            subject["pNameField"] = pNameField; // required only for standard marker
+            subject["healthBar"] = healthBar; // required only for standard marker
+            subject["bgShadow"] = bgShadow; // required only for standard marker
+        }
+        else
+        {
+            // Remove standard fields for XVM
+            pNameField._visible = false;
+            pNameField.removeTextField();
+            delete pNameField;
+
+            vNameField._visible = false;
+            vNameField.removeTextField();
+            delete vNameField;
+
+            healthBar.stop();
+            healthBar._visible = false;
+            healthBar.removeMovieClip();
+            delete healthBar;
+
+            bgShadow.stop();
+            bgShadow._visible = false;
+            bgShadow.removeMovieClip();
+            delete bgShadow;
+        }
     }
     
     /**
@@ -247,6 +276,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      */
     public function init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt)
     {
+        //Logger.add("init: " + pFullName);
         this["_playerName"] = pFullName; // for debug
         call("init", [ vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt ]);
     }

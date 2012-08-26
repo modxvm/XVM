@@ -1,6 +1,6 @@
-import wot.VehicleMarkersManager.componnets.LevelIconProxy;
+import wot.VehicleMarkersManager.components.LevelIconProxy;
 
-class wot.VehicleMarkersManager.componnets.LevelIconComponent
+class wot.VehicleMarkersManager.components.LevelIconComponent
 {
     var proxy:LevelIconProxy
     

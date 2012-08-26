@@ -1,7 +1,7 @@
 import wot.VehicleMarkersManager.AbstractAccessProxy;
 import wot.VehicleMarkersManager.XVM;
 
-class wot.VehicleMarkersManager.componnets.TurretStatusProxy extends AbstractAccessProxy
+class wot.VehicleMarkersManager.components.TurretStatusProxy extends AbstractAccessProxy
 {
    /* This proxy class is only for LevelIconComponent
     * access restriction to wot.VehicleMarkersManager.XVM

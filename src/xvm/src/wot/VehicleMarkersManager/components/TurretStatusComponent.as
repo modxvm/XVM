@@ -1,7 +1,7 @@
-import wot.VehicleMarkersManager.componnets.TurretStatusProxy;
+import wot.VehicleMarkersManager.components.TurretStatusProxy;
 import wot.utils.Logger;
 
-class wot.VehicleMarkersManager.componnets.TurretStatusComponent
+class wot.VehicleMarkersManager.components.TurretStatusComponent
 {
     var proxy:TurretStatusProxy
     
