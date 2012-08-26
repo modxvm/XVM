@@ -361,6 +361,7 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         setupIconLoader();
 
         levelIconComponent = new LevelIconComponent(new LevelIconProxy(this));
+        turretStatusComponent = new TurretStatusComponent(new TurretStatusProxy(this));
 
         vehicleState = new VehicleState(new VehicleStateProxy(this));
 
