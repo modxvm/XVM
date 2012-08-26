@@ -48,12 +48,11 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      * Log trace
      * @param	str     Log message
      */
-    /*
-    static private function trace(str:String):Void
+    /*private function trace(str:String):Void
     {
-        Logger.add("> " + str);
-    }
-    */
+        if (this["_playerName"] == "dosik_dai")
+        Logger.add(this["_playerName"] + "> " + str);
+    }*/
     
     /**
      * ctor()
@@ -139,8 +138,14 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
 
         // Replace MovieClip.gotoAndStop (calling for changing marker type: squad, team killer, color blind, ...)
         subject["gotoAndStop"] = function(frame) {
+            //Logger.add(this["m_playerFullName"] + ": gotoAndStop(" + frame + ")");
             this["_proxy"].gotoAndStop(frame);
             this["_proxy"].bindStandardElements();
+            // {{
+            // FIXIT: this is required for properly working of dead's markers in standard marker. 
+            if (this["m_markerState"] != null)
+                this["marker"].gotoAndPlay(this["m_markerState"]);
+            // }}
         };
 
         // Call all skipped steps
@@ -198,7 +203,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     private function call(func:String, args:Array):Void
     {
         if (func != "showExInfo")
-            trace("call(): " + func);
+            trace("call(): " + func + (args ? " [" + args.join(", ") + "]" : ""));
 
         if (subject != null)
             subject[func].apply(subject, args);
@@ -210,6 +215,9 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         }
     }
 
+    /**
+     * Draw XVM version at top left corner
+     */
     function DrawXvmWatermark()
     {
         _global.xvmWatermark = true;
@@ -239,6 +247,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      */
     public function init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt)
     {
+        this["_playerName"] = pFullName; // for debug
         call("init", [ vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt ]);
     }
 
@@ -273,7 +282,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      */
     public function setEntityName(value)
     {
-        Logger.add("setEntityName(" + value + ")");
+        //Logger.add("setEntityName(" + value + ")");
         call("setEntityName", [ value ]);
     }
     
