@@ -1,12 +1,13 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
-using RT.Util.Json;
+using System.IO;
+using System.Xml;
+using System.Diagnostics;
 
 class FileBank
 {
     /**
-     * Stores all country/*.xml files data decoded to JsonDict
+     * Stores all country/*.xml files data decoded and parsed
      * Author: ilitvinov87@gmail.com
      */
     
@@ -14,7 +15,7 @@ class FileBank
     private const String GAME_PATH = @"D:\Program Files\World_of_Tanks\";
     static readonly String[] COUNTRIES = new String[] { "ussr", "germany", "usa", "france", "china", "uk" };
 
-    private List<JsonDict> files = new List<JsonDict>();
+    private List<XmlDocument> files = new List<XmlDocument>();
 
     public FileBank()
     {
@@ -22,7 +23,7 @@ class FileBank
             saveToState(decode(onefile));
     }
 
-    public List<JsonDict> getBank()
+    public List<XmlDocument> getBank()
     {
         return files;
     }
@@ -49,13 +50,14 @@ class FileBank
         return pathList;
     }
 
-    private JsonDict decode(string file)
+    private XmlDocument decode(string file)
     {
-        return BxmlReader.ReadFile(file);
+        BxmlReader reader = new BxmlReader(file);
+        return reader.getFile();
     }
 
-    private void saveToState(JsonDict dict)
+    private void saveToState(XmlDocument file)
     {
-        files.Add(dict);
+        files.Add(file);
     }
 }

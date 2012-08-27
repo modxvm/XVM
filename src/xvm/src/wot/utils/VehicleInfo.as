@@ -1,11 +1,9 @@
 /**
- * ...
  * @author sirmax2
  */
 import wot.utils.Config;
 import wot.utils.Utils;
 import wot.utils.VehicleInfoData;
-import wot.utils.Logger;
 
 class wot.utils.VehicleInfo
 {
