@@ -12,11 +12,11 @@ class wot.VehicleMarkersManager.components.TurretStatusComponent
     {
         this.proxy = proxy;
         defineStatus();
+        VehicleInfo.getInfo(proxy.defaultIconSource);
     }
     
     private function defineStatus()
     {
-        VehicleInfo.getName(proxy.defaultIconSource);
         status = "*";
     }
      
