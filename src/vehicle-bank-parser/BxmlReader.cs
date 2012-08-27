@@ -1,8 +1,10 @@
 ﻿/**
-* Based on Tank Icon Maker by Roman Starkov
-* https://bitbucket.org/rstarkov/tankdataconverter
-* GPLv3
-*/
+ * Original file from Tank Icon Maker by Roman Starkov
+ * https://bitbucket.org/rstarkov/tankdataconverter
+ * which is based on WoTModTools by katzsmile
+ * https://github.com/katzsmile/WoTModTools
+ * GPLv3
+ */
 using System;
 using System.Collections.Generic;
 using System.IO;

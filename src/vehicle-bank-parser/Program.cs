@@ -1,13 +1,4 @@
-﻿/**
-* Based on Tank Icon Maker by Roman Starkov https://bitbucket.org/rstarkov/tankdataconverter GPLv3
-*/
-using System;
-//using System.IO;
-//using System.Linq;
-//using RT.Util;
-//using RT.Util.ExtensionMethods;
-//using RT.Util.Json;
-//using System.Collections.Generic;
+﻿using System;
 
 class Program
 {
