@@ -8,8 +8,8 @@
     <ProjectGuid>{844A4AC4-0798-47C3-BD42-C93310004613}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TankDataConverter</RootNamespace>
-    <AssemblyName>TankDataConverter</AssemblyName>
+    <RootNamespace>VehicleBankParser</RootNamespace>
+    <AssemblyName>VehicleBankParser</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BxmlReader.cs" />
+    <Compile Include="XMLFileBank.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
