@@ -16,7 +16,7 @@ class Program
     {
         FileBank fileBank = new FileBank();
         fileBank.getBank();
-        //Filter.process(fileBank);
+        Filter.process(fileBank);
         
         //Debug.WriteLine(fileBank.getBank().Count);
 
