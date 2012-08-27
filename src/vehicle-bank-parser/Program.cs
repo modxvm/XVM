@@ -2,8 +2,8 @@
 
 class Program
 {
-    /**
-    * Programm purpose:
+   /**
+    * Program purpose:
     *  Get vehicles list with secondary turret modules equippable and corresponding HP.
     *  List is then used in XVM to add stock\top turret tank marker.
     * Author: ilitvinov87@gmail.com
