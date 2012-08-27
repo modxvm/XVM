@@ -1,7 +1,5 @@
 ﻿/**
- * Based on Tank Icon Maker by Roman Starkov
- * https://bitbucket.org/rstarkov/tankdataconverter
- * GPLv3
+ * Based on Tank Icon Maker by Roman Starkov https://bitbucket.org/rstarkov/tankdataconverter GPLv3
  */
 using System;
 using System.IO;
@@ -15,28 +13,18 @@ namespace VehicleBankParser
 {
     class Program
     {
-        static Dictionary<string, string> descriptionNameFullWG = new Dictionary<string, string>();
-        static Dictionary<string, string> descriptionNameShortWG = new Dictionary<string, string>();
         static HashSet<string> hardcodedExceptions = new HashSet<string>(new[] { "china-Ch01_Type59_Gold", "usa-T23", "germany-White_Tiger" });
 
         static void Main(string[] args)
         {
             var vehicleListPath = @"res\scripts\item_defs\vehicles\{0}\list.xml";
-            var moFilesPath = @"res\text\LC_MESSAGES";
             var countries = new[] { "ussr", "germany", "usa", "france", "china", "uk" };
-            var outputPath = @"D:\bank.txt";
+            var outputPath = @"D:\";
 
-            descriptionNameFullWG["Ru"] = "Полные названия танков, оригинал – как в игре.";
-            descriptionNameFullWG["En"] = "Full tank names, original – like in the game.";
-            descriptionNameShortWG["Ru"] = "Короткие названия танков, оригинал – как в игре.";
-            descriptionNameShortWG["En"] = "Short tank names, original – like in the game.";
-
-            //generateFiles(@"I:\Games\WorldOfTanks\GameEn", "En", "0.7.4", new[] { "ussr", "germany", "usa", "france", "china" }, outputPath, vehicleListPath, moFilesPath);
-            //generateFiles(@"I:\Games\WorldOfTanks\GameRu", "Ru", "0.7.4", new[] { "ussr", "germany", "usa", "france", "china" }, outputPath, vehicleListPath, moFilesPath);
-            generateFiles(@"D:\Program Files\World_of_Tanks", "Ru", "0.7.5", countries, outputPath, vehicleListPath, moFilesPath);
+            generateFiles(@"D:\Program Files\World_of_Tanks", "Ru", "0.7.5", countries, outputPath, vehicleListPath);
         }
 
-        private static void generateFiles(string gamePath, string lang, string builtInVersion, string[] countries, string outputPath, string vehicleListPath, string moFilesPath)
+        private static void generateFiles(string gamePath, string lang, string builtInVersion, string[] countries, string outputPath, string vehicleListPath)
         {
             // Read the tank data from game files
 
@@ -76,34 +64,13 @@ namespace VehicleBankParser
 
             foreach (var id in hardcodedExceptions)
                 tanks.Remove(id);
-
-            var moFiles = tanks.Select(kvp => kvp.Value.nameFull.file).Concat(tanks.Select(kvp => kvp.Value.nameShort.file)).Distinct()
-                .ToDictionary(filename => filename, filename => MoReader.ReadFile(Path.Combine(gamePath, moFilesPath, filename + ".mo")));
-
-            // Generate data
-
+            
             // Built-in
             using (var csv = OpenWriteCsv(Path.Combine(outputPath, "Data-BuiltIn-{0}-001.csv".Fmt(builtInVersion))))
             {
                 csv.WriteLine("WOT-BUILTIN-DATA,1,,,");
                 foreach (var tank in tanks.OrderBy(tank => tank.Key))
                     csv.WriteLine(ToCsv(new[] { tank.Key, tank.Value.country, tank.Value.tier.ToString(), tank.Value.class_, tank.Value.kind }));
-            }
-
-            // NameFullWG
-            using (var csv = OpenWriteCsv(Path.Combine(outputPath, "Data-NameFullWG-{0}-Romkyns-0.0.0-001.csv".Fmt(lang))))
-            {
-                csv.WriteLine(ToCsv(new[] { "WOT-DATA", "1", descriptionNameFullWG[lang] }));
-                foreach (var tank in tanks.OrderBy(tank => tank.Key))
-                    csv.WriteLine(ToCsv(new[] { tank.Key, moFiles[tank.Value.nameFull.file][tank.Value.nameFull.key] }));
-            }
-
-            // NameShortWG
-            using (var csv = OpenWriteCsv(Path.Combine(outputPath, "Data-NameShortWG-{0}-Romkyns-0.0.0-001.csv".Fmt(lang))))
-            {
-                csv.WriteLine(ToCsv(new[] { "WOT-DATA", "1", descriptionNameShortWG[lang] }));
-                foreach (var tank in tanks.OrderBy(tank => tank.Key))
-                    csv.WriteLine(ToCsv(new[] { tank.Key, moFiles[tank.Value.nameShort.file][tank.Value.nameShort.key] }));
             }
         }
 
