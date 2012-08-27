@@ -22,7 +22,15 @@ namespace VehicleBankParser
 
         static void Main(string[] args)
         {
-            generateFiles(GAME_PATH, GAME_CLUSTER, GAME_VER, COUNTRIES, OUTPUT_PATH, VEHICLE_DIR_PATH);
+            // Get all country/*.XML files to memory
+            // Decode
+            // Parse XML
+            // Clear non-vehicle files
+            // Define stock\top vehicles + max hitpoints
+            // Make CSV bank
+
+            // Obsolete
+            //generateFiles(GAME_PATH, GAME_CLUSTER, GAME_VER, COUNTRIES, OUTPUT_PATH, VEHICLE_DIR_PATH);
         }
 
         private static void generateFiles(string gamePath, string lang, string builtInVersion, string[] countries, string outputPath, string vehicleListPath)
