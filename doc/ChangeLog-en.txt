@@ -1,28 +1,7 @@
-﻿XVM-2.5.2.test6:
-  * Fixed clan icons in Lite version
+﻿XVM-3.0.0.test1:
+  * xvm was refactored
 
-XVM-2.5.2.test5:
-  * added "vehicleNames" config section. Used for vehicle names mapping -
-    ability to replace any tank name with own value
-
-XVM-2.5.2.test4:
-  * added color for premium tanks to {{c:vtype}} macro
-  * {{c:vtype}} macro can be used in BattleLoading, PlayersPanel and
-    StatisticForm
-
-XVM-2.5.2.test3:
-  * removed coords grid (parameter battle.drawGrid)
-  * statistics enabled by default
-  * added {{rlevel}} macro for vehicle level in roman numerals
-  * dynamic color and transparency for shadow
-  * added font/italic parameter (values: true/false)
-  * added {{c:vtype}} macro and colors/vtype section for dynamic color by
-    vehicle type
-
-XVM-2.5.2.test2:
-  * bugfix
-
-XVM-2.5.2.test1:
+XVM-2.5.2:
   * clan icons was reworked. Now config have only one parameter:
     battle/clanIconsFolder with path to clan icons root folder. All icons
     are loading automatically from game region subfolder (RU/EU/US/...).
@@ -44,6 +23,18 @@ XVM-2.5.2.test1:
       http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-ru.zip (RU)
       http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-eu.zip (EU)
       http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-us.zip (US)
+  * removed coords grid (parameter battle.drawGrid)
+  * statistics enabled by default
+  * added {{rlevel}} macro for vehicle level in roman numerals
+  * dynamic color and transparency for shadow
+  * added font/italic parameter (values: true/false)
+  * added {{c:vtype}} macro and colors/vtype section for dynamic color by
+    vehicle type
+  * added color for premium tanks to {{c:vtype}} macro
+  * {{c:vtype}} macro can be used in BattleLoading, PlayersPanel and
+    StatisticForm
+  * added "vehicleNames" config section. Used for vehicle names mapping -
+    ability to replace any tank name with own value
 
 XVM-2.5.1:
   * fixed vehicle names in battle loading screen and statistic form
