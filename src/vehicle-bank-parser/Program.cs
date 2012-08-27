@@ -11,7 +11,7 @@ class Program
 
     static void Main(string[] args)
     {
-        var xmlFileBank = new XMLFileBank();
+        var fileBank = new FileBank();
 
         // VehicleBank class:
         // - Clear non-vehicle files
