@@ -13,15 +13,16 @@ namespace VehicleBankParser
 {
     class Program
     {
-        static HashSet<string> hardcodedExceptions = new HashSet<string>(new[] { "china-Ch01_Type59_Gold", "usa-T23", "germany-White_Tiger" });
+        private const String VEHICLE_DIR_PATH = @"res\scripts\item_defs\vehicles\{0}\list.xml";
+        private const String GAME_PATH = @"D:\Program Files\World_of_Tanks";
+        private const String GAME_CLUSTER = "Ru";
+        private const String GAME_VER = "0.7.5";
+        private const String OUTPUT_PATH = @"D:\";
+        static readonly String [] COUNTRIES = new String[]{ "ussr", "germany", "usa", "france", "china", "uk" };
 
         static void Main(string[] args)
         {
-            var vehicleListPath = @"res\scripts\item_defs\vehicles\{0}\list.xml";
-            var countries = new[] { "ussr", "germany", "usa", "france", "china", "uk" };
-            var outputPath = @"D:\";
-
-            generateFiles(@"D:\Program Files\World_of_Tanks", "Ru", "0.7.5", countries, outputPath, vehicleListPath);
+            generateFiles(GAME_PATH, GAME_CLUSTER, GAME_VER, COUNTRIES, OUTPUT_PATH, VEHICLE_DIR_PATH);
         }
 
         private static void generateFiles(string gamePath, string lang, string builtInVersion, string[] countries, string outputPath, string vehicleListPath)
@@ -62,9 +63,7 @@ namespace VehicleBankParser
                 };
             });
 
-            foreach (var id in hardcodedExceptions)
-                tanks.Remove(id);
-            
+        
             // Built-in
             using (var csv = OpenWriteCsv(Path.Combine(outputPath, "Data-BuiltIn-{0}-001.csv".Fmt(builtInVersion))))
             {
