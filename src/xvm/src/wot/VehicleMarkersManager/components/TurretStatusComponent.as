@@ -17,7 +17,7 @@ class wot.VehicleMarkersManager.components.TurretStatusComponent
     
     private function defineStatus()
     {
-        status = "*";
+        status = "*"; // or "-"
     }
      
     public function getString():String
