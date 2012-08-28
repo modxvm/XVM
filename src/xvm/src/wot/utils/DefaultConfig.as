@@ -29,7 +29,7 @@ class wot.utils.DefaultConfig
         removePanelsModeSwitcher: false, // Set true to hide mouse modes switcher.
 	highlightVehicleIcon: true,      // False - disable highlighting of selected vehicle icon and squad.
 	hideXVMVersion: false,           // Hide version label at upper left corner.
-        useStandardMarkers: false,       // Use original wot markers. feature not implemented.
+        useStandardMarkers: false,       // Use original wot markers.
 	// Show the clock on the Debug Panel (near FPS).
 	// Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
         clockFormat: "H:N",
