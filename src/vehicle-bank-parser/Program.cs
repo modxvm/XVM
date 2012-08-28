@@ -15,11 +15,6 @@ class Program
     {
         FileBank.readXmlFiles();
         DeleteNonVehicleFiles.modify(FileBank.list());
-        List<Vehicle> vehicles = Parser.parseFiles(FileBank.list());
-
-        //"\"crew\":"
-        // - Define stock\top vehicleList + max hitpoints
-            
-        // Make CSV bank
+        Export.CSV(Parser.parseFiles(FileBank.list()));
     }
 }

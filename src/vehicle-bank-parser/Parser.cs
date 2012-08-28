@@ -11,6 +11,7 @@ static class Parser
      * Parses XML nodes object.
      * Gets turret possibilities, max HP, tank name.
      * Saves parsed data to new AffectedVehicles object.
+     * Author: ilitvinov87@gmail.com
      */
     public static List<Vehicle> parseFiles(List<XmlNode> allVehicles)
     {

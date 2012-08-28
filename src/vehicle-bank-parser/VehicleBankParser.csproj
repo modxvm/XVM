@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Decoder\BxmlReader.cs" />
+    <Compile Include="Export.cs" />
     <Compile Include="FileBank.cs" />
     <Compile Include="DeleteNonVehicleFiles.cs" />
     <Compile Include="Decoder\Packed_Section.cs" />
