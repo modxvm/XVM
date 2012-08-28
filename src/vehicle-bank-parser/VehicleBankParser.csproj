@@ -41,10 +41,12 @@
   <ItemGroup>
     <Compile Include="Decoder\BxmlReader.cs" />
     <Compile Include="FileBank.cs" />
-    <Compile Include="Filter.cs" />
+    <Compile Include="DeleteNonVehicleFiles.cs" />
     <Compile Include="Decoder\Packed_Section.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Parser.cs" />
+    <Compile Include="Vehicle.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

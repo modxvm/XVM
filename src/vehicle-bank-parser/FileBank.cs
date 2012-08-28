@@ -2,33 +2,35 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
-using System.Diagnostics;
 
-class FileBank
+static class FileBank
 {
     /**
-     * Stores all country/*.xml files data decoded and parsed
+     * Stores all country/*.xml nodeFiles data decoded and parsed
      * Author: ilitvinov87@gmail.com
      */
-    
+
     private const String VEHICLE_DIR_PATH = @"res\scripts\item_defs\vehicles\";
     private const String GAME_PATH = @"D:\Program Files\World_of_Tanks\";
-    static readonly String[] COUNTRIES = new String[] { "ussr", "germany", "usa", "france", "china", "uk" };
+    private static readonly String[] COUNTRIES = new String[] { "ussr", "germany", "usa", "france", "china", "uk" };
 
-    private List<XmlDocument> files = new List<XmlDocument>();
+    private static List<XmlNode> nodeFiles = new List<XmlNode>();
 
-    public FileBank()
+    public static void readXmlFiles()
     {
         foreach (string onefile in fileList())
             saveToState(decode(onefile));
+        sortBank(); // to simplify debug
     }
 
-    public List<XmlDocument> getBank()
+    public static List<XmlNode> list()
     {
-        return files;
+        return nodeFiles;
     }
 
-    private string[] fileList()
+    // Internals
+
+    private static string[] fileList()
     {
         List<string> fullList = new List<string>();
         foreach (string countryPath in countryPathList())
@@ -40,24 +42,34 @@ class FileBank
         return fullList.ToArray();
     }
 
-    private List<string> countryPathList()
+    private static List<string> countryPathList()
     {
         List<string> pathList = new List<string>();
         foreach ( string country in COUNTRIES)
             pathList.Add(Path.Combine(GAME_PATH, VEHICLE_DIR_PATH, country));
         
-        // returns *\vehicles\ussr, *\vehicles\germany, *\vehicles\usa
+        // returns *\vehicle\ussr, *\vehicle\germany, *\vehicle\usa
         return pathList;
     }
 
-    private XmlDocument decode(string file)
+    private static XmlNode decode(string file)
     {
         BxmlReader reader = new BxmlReader(file);
-        return reader.getFile();
+        return reader.getFile().DocumentElement;
     }
 
-    private void saveToState(XmlDocument file)
+    private static void saveToState(XmlNode file)
     {
-        files.Add(file);
+        nodeFiles.Add(file);
+    }
+
+    private static void sortBank()
+    { 
+        nodeFiles.Sort(compareByFirstTag);
+    }
+
+    private static int compareByFirstTag(XmlNode x, XmlNode y)
+    {
+        return x.Name.CompareTo(y.Name);
     }
 }
