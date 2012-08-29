@@ -1,5 +1,11 @@
 ﻿XVM-3.0.0.test1:
   * xvm was refactored
+  * new tank marker {{turret}}:
+    Displays symbol is tank has stock turret.
+	"*" symbol - stock turret. Cant mount top gun. Subject is highly vulnerable.
+	"-" symbol - stock turret. Top gun is possible. Subject is somewhat vulnerable.
+	Stock turret can have weaker armor, lower sight distance or slower rotation speed.
+	Besides that, tank with stock turret can have weaker crew experience.
 
 XVM-2.5.2:
   * clan icons was reworked. Now config have only one parameter:

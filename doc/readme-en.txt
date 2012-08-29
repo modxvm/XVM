@@ -102,19 +102,20 @@
 
   Macros available:
     In players panel, battle loading screen and statistic form:
-      {{nick}}        - player name
+      {{nick}}        - player nickname
       {{vehicle}}     - vehicle name
 
     In tank markers:
       {{hp}}          - current health points
       {{hp-ratio}}    - current health ratio (without '%' sign)
       {{hp-max}}      - maximum health points
-      {{nick}}        - player name
+      {{nick}}        - player nickname
       {{vehicle}}     - vehicle name
       {{level}}       - vehicle level (Arabic numerals)
       {{rlevel}}      - vehicle level (Roman numerals)
       {{dmg}}         - damage health points
       {{dmg-ratio}}   - damage health ratio (without '%' sign)
+	  {{turret}}      - stock turret marker; "*" symbol - cant mount top gun; "-" top gun is possible
 
     Statistics macros ('rating/showPlayersStatistics' must be anabled):
       {{rating}}      - GWR (Global Win Ratio)
