@@ -19,7 +19,9 @@ var collection,
 
 // Global vars
 var hostData = [],
-    mongorq = 0;
+    mongorq = 0,
+    mongorq_max,
+    mongorq_max_lastupdate;
 
 // Main functions
 
@@ -290,14 +292,13 @@ var processRemotes = function(inCache, forUpdate, forUpdateVNames, request, resp
 
             //ip_address = request.connection.remoteAddress;
 
-            utils.debug(
+/*            utils.debug(
                 "S" + (statHostId == undefined ? "c" : statHostId) + " " + duration + " ms" +
                 "  total: " + (result.players.length < 10 ? " " : "") + result.players.length +
                 "  cache: " + (inCache.length < 10 ? " " : "") + inCache.length +
                 "  retrieve: " + (forUpdate.length < 10 ? " " : "") + forUpdate.length +
                 "  failed: " + (failed_count < 10 ? " " : "") + failed_count +
-                "  missed: " + (missed_count < 10 ? " " : "") + missed_count +
-                "" /* "  IP:" + ip_address*/);
+                "  missed: " + (missed_count < 10 ? " " : "") + missed_count);*/
 
             times.push({"n":"end","t":now2});
             var str = "";
@@ -355,23 +356,54 @@ processRequest = function(request, response) {
     times.push({"n":"urlparsed","t":new Date()});
 
     // Select required data from cache
+    if (mongorq >= mongorq_max)
+    {
+        response.statusCode = 500;
+        var errText = "server db overloaded: " + mongorq + "/" + mongorq_max;
+//        utils.log(errText);
+        if (request.url.toLowerCase() != "/favicon.ico")
+            errText += " url=" + request.url;
+        response.end(errText);
+        return;
+    }
+
     mongorq++;
-    if (mongorq > 100)
-        utils.log("mongorq: " + mongorq);
     process.send({ usage: 1, mongorq: 1 });
     var cursor = collection.find({ _id: { $in: ids }}, { _id:1, st:1, dt:1, nm:1, b:1, w:1, e:1, v:1 });
     times.push({"n":"find","t":new Date()});
     cursor.toArray(function(error, inCache) {
         mongorq--;
         process.send({ usage: 1, mongorq: -1 });
+
+        var now = new Date();
+        var delta = 0;
+        var dtime = 0;
+        var duration = (now - times[0].t);
+        if (duration > settings.mongoMaxTime) {
+            delta = -5;
+            dtime = 1000;
+        } else if (duration < settings.mongoMinTime) {
+            delta = 1;
+            dtime = 1000;
+        }
+
+        if (!mongorq_max_lastupdate || (now - mongorq_max_lastupdate) > dtime)
+        {
+            mongorq_max_lastupdate = now;
+            var oldvalue = mongorq_max;
+            mongorq_max = Math.max(1, Math.min(settings.mongoMaxConnections, mongorq_max + delta));
+            process.send({ usage: 1, mongorq_max: mongorq_max - oldvalue });
+        }
+
+
         try {
-            times.push({"n":"find2","t":new Date()});
+            times.push({"n":"find2","t":now});
+
             if (error)
                 throw "MongoDB find error: " + error;
 
             var forUpdate = [ ];
             var forUpdateVNames = [ ];
-            var now = new Date();
 
             ids = ids.concat(ids_bad_id);
             var ids_length = ids.length;
@@ -423,6 +455,7 @@ var createWorker = function() {
             lastMaxConnectionUpdate: null
         });
     }
+    mongorq_max = settings.mongoMaxConnections;
 
     // fix connection counter sticking
     setInterval(function() {

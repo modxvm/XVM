@@ -13,6 +13,9 @@ module.exports = (function()
         missedCollectionName: "<missed_collection>",
         usersCollectionName: "<users_collection>",
         statHostMaxConnections: 100,
+        mongoMaxConnections: 100,
+        mongoMinTime: 1000, // msec
+        mongoMaxTime: 5000, // msec
         statHosts: [
             "worldoftanks.ru",      // RU:           0 ..  49999999
             "worldoftanks.eu",      // EU:    50000000 ..  99999999

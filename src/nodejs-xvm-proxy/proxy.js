@@ -12,7 +12,8 @@ if (!cluster.isMaster) {
 
 var numCPUs = require('os').cpus().length,
     utils = require("./utils"),
-    settings = require("./settings");
+    settings = require("./settings"),
+    numNodes = 2;
 
 // String.lpad
 String.prototype.lpad = function(padString, length) {
@@ -33,12 +34,13 @@ var usageStat = {
     missed: 0,
     updatesFailed: 0,
     mongorq: 0,
+    mongorq_max: settings.mongoMaxConnections * numNodes,
     connections: [],
     maxConnections: []
 };
 
     // Fork workers.
-for (var i = 0; i < /*numCPUs*/ 2; i++) {
+for (var i = 0; i < numNodes; i++) {
     var w = cluster.fork();
 
     w.on('message', function(msg) {
@@ -50,6 +52,10 @@ for (var i = 0; i < /*numCPUs*/ 2; i++) {
             if (msg.missed) usageStat.missed += msg.missed;
             if (msg.updatesFailed) usageStat.updatesFailed += msg.updatesFailed;
             if (msg.mongorq) usageStat.mongorq += msg.mongorq;
+            if (msg.mongorq_max) {
+               usageStat.mongorq_max += msg.mongorq_max;
+               utils.log("mongorq_max: " + usageStat.mongorq_max);
+            }
             if (msg.connections) usageStat.connections[msg.hostId] = msg.connections;
             if (msg.maxConnections) usageStat.maxConnections[msg.hostId] = msg.maxConnections;
         } else if (msg.cmd == "cmd") {
@@ -73,6 +79,6 @@ setInterval(function() {
         ((usageStat.updated / usageStat.players * 100).toFixed(2) + "%").lpad(" ", 8) +
         ((usageStat.missed / usageStat.players * 100).toFixed(2) + "%").lpad(" ", 8) +
         ((usageStat.updatesFailed / usageStat.players * 100).toFixed(2) + "%").lpad(" ", 8) +
-        String(usageStat.mongorq).lpad(" ", 8) +
+        String(usageStat.mongorq + "/" + usageStat.mongorq_max).lpad(" ", 8) +
         " [" + usageStat.connections.join(", ") + "]/[" + usageStat.maxConnections.join(", ") + "]");
 }, settings.usageStatShowPeriod);
