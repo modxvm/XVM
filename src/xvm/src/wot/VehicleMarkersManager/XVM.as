@@ -542,7 +542,7 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
             format = format.split("{{dmg-ratio}}").join(delta ? String(dmgRatio) : "");
             format = format.split("{{dmg}}").join(delta ? String(delta) : "");
 
-            format = format.split("{{turret}}").join(turretStatusComponent.getString());
+            format = format.split("{{turret}}").join(turretStatusComponent.getMarker());
 
             format = Utils.trim(format);
         }

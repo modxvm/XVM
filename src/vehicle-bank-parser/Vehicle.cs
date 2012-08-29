@@ -13,14 +13,14 @@ class Vehicle
    /**
     * Top turret does not unlock new gun.
     * Player with stock turret can mount top gun.
-    * Yellow status. Medium vulnerability.
+    * Low vulnerability.
     */
     public const short TOP_TURRET_SINGLE = 1;
 
    /**
     * Top turret unlocks new gun.
     * Player with stock turret can not mount top gun.
-    * Red status. High vulnerability.
+    * High vulnerability.
     */
     public const short TOP_TURRET_UNLOCKS_TOP_GUN = 2;
 

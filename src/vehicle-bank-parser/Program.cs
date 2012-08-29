@@ -15,6 +15,6 @@ class Program
     {
         FileBank.readXmlFiles();
         DeleteNonVehicleFiles.modify(FileBank.list());
-        Export.CSV(Parser.parseFiles(FileBank.list()));
+        Export.AS2(Parser.parseFiles(FileBank.list()));
     }
 }
