@@ -139,7 +139,7 @@ namespace wot
           if (s.LastIndexOf("http://update.wot.ru.wargaming.net") > -1 || s.LastIndexOf("http://update.worldoftanks.ru") > -1)
             wotVersion = "RU";
           else if (s.LastIndexOf("http://update.worldoftanks.com") > -1)
-            wotVersion = "NA";
+            wotVersion = "US";
           else if (s.LastIndexOf("http://update.worldoftanks.eu") > -1)
             wotVersion = "EU";
           else if (s.LastIndexOf("http://update.worldoftanks.cn") > -1)

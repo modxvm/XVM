@@ -46,12 +46,12 @@ namespace wot
 
     private static void Usage()
     {
-      Log("Usage: wot-xvm-proxy.exe [/launcher] [/debug] [/server=(RU|EU|NA|CN|SEA|VTC|CT)] [file.wotreplay]");
+      Log("Usage: wot-xvm-proxy.exe [/launcher] [/debug] [/server=(RU|EU|US|CN|SEA|VTC|CT)] [file.wotreplay]");
       Log("  /launcher - run launcher instead of game");
       Log("  /noauto - do not run game automatically");
       Log("  /noproxy - do not use IE proxy settings");
       Log("  /debug - run in debug mode (extended log)");
-      Log("  /server=(RU|EU|NA|CN|SEA|VTC|CT) - select server (disable autodetection)");
+      Log("  /server=(RU|EU|US|CN|SEA|VTC|CT) - select server (disable autodetection)");
       Log("  file.wotreplay - play replay");
       Log("Press any key to exit.");
       Console.ReadKey(true);
@@ -76,7 +76,7 @@ namespace wot
           for (int i = 1; i < lines.Length; i++)
             lines[i] = lines[i].PadLeft(lines[i].Length + logstr.Length);
           logstr += string.Join(Environment.NewLine, lines);
-          
+
           File.AppendAllText("XVM.log", logstr + Environment.NewLine);
         }
         catch
@@ -397,7 +397,7 @@ namespace wot
     {
       try
       {
-        Log("Unhandled exception!\nPlease contact the developers with the following information:\n\n" + 
+        Log("Unhandled exception!\nPlease contact the developers with the following information:\n\n" +
           (Exception)e.ExceptionObject);
       }
       finally

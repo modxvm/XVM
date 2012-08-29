@@ -219,10 +219,10 @@ XVM-1.7:
   * added macros of dynamic transparency:
     {{a:hp}}, {{a:hp-ratio}}
   * changed JSON parser to fixed version, than is 10x faster that internal
-  * wot-xvm-proxy: added autodetection of game version: RU, EU, NA, CN1
+  * wot-xvm-proxy: added autodetection of game version: RU, EU, US, CN1
   * wot-xvm-proxy: added command line options /? and /help for displaying
     usage information
-  * wot-xvm-proxy: added command line option /server=(RU|EU|NA|CN1|CN2) for
+  * wot-xvm-proxy: added command line option /server=(RU|EU|US|CN1|CN2) for
     overriding autodetection
   * wot-xvm-proxy: added china servers support
   * wot-xvm-proxy: added extended debug information with /debug option

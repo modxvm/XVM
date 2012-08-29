@@ -16,7 +16,7 @@
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;string&gt;RU	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC91Yy8/JTE=&lt;/string&gt;
   &lt;string&gt;EU	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC91Yy8/JTE=&lt;/string&gt;
-  &lt;string&gt;NA	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC91Yy8/JTE=&lt;/string&gt;
+  &lt;string&gt;US	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC91Yy8/JTE=&lt;/string&gt;
   &lt;string&gt;CN	aHR0cDovL2dhcnBoeS5jb20vdG9vbC93b3QvRUZGMi8lMS5qc29u&lt;/string&gt;
   &lt;string&gt;CN	aHR0cDovL3RpcHMuY3MwMzA5LmltdHQucXEuY29tL2dldFVzZXI/bmFtZT0lMSZ6b25lPW5vcnRoJmxjPTIwMTIwMzA4JndheT1uZXc=&lt;/string&gt;
   &lt;string&gt;CN	aHR0cDovL3dvdHJhdGUudmljcC5jby9Xb3RSYXRlWFZNMS8lMQ==&lt;/string&gt;
