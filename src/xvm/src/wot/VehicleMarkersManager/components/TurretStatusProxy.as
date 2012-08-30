@@ -18,16 +18,16 @@ class wot.VehicleMarkersManager.components.TurretStatusProxy extends AbstractAcc
     public function defineVehicleStatus():Number
     {
         var vehInfo:Array = TurretStatusProxy.getInfo(vehicleName);
-        if (vehInfo == null)
-            return 0; // Turret status unknown. 
 
         // If database stock max hp == current vehicle max hp
         if (vehInfo[0] == xvm.m_maxHealth)
-            return vehInfo[1]; 
             /**
              * Current vehicle has stock turret.
              * Return vulnerability status.
-             */            
+             */  
+            return vehInfo[1]; 
+          
+        return 0; // Turret status unknown
     }
     
     private function get vehicleName():String
