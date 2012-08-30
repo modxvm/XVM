@@ -103,7 +103,7 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
 
     function XVM(proxy:VehicleMarkerProxy, entityName:String)
     {
-        super();
+        super(); // gfx.core.UIComponent
         _proxy = proxy;
         m_entityName = m_team = entityName;
         Utils.TraceXvmModule("XVM");
@@ -309,7 +309,7 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         trace("XVM::configUI()");
         //Logger.add("configUI(): " + vehicleState.getCurrent() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
         m_currentHealth = m_curHealth;
-        super.configUI();
+        super.configUI(); //gfx.core.UIComponent ??
         this.populateData();
         XVMInit();
     }

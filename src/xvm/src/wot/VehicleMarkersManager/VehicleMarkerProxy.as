@@ -1,5 +1,7 @@
 ﻿/**
  * Proxy class for vehicle marker components
+ * Dispatches event for config loading if it is not loaded
+ * Draws XVM version watermark
  */
 import wot.VehicleMarkersManager.IVehicleMarker;
 import wot.utils.Config;
@@ -34,7 +36,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     private var bgShadow:MovieClip;
 
     /**
-     * Instanse of subject class with real implementation
+     * Instance of subject class with real implementation
      */
     private var subject: IVehicleMarker;
 
@@ -86,10 +88,10 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
             healthBar._visible = false;
             bgShadow._visible = false;
             vNameField.text = "Loading...";
-            //   start config loading
-            Config.LoadConfig("VehicleMarkerProxy.as", undefined, true);
             //   register config load complete event
             GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
+            //   start config loading
+            Config.LoadConfig("VehicleMarkerProxy.as", undefined, true);
         }
         else
         {
@@ -137,7 +139,6 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
             subject["_proxy"] = this;
             // Replace MovieClip.gotoAndStop (calling for changing marker type: squad, team killer, color blind, ...)
             subject["gotoAndStop"] = function(frame) {
-                //Logger.add(this["m_playerFullName"] + ": gotoAndStop(" + frame + ")");
                 this["_proxy"].gotoAndStop(frame);
 
                 // FIXIT: this is required for properly working of dead's markers. Is there another way to do it?
@@ -151,7 +152,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
             subject = new wot.VehicleMarkersManager.XVM(this, m_entityName);
         }
 
-        // Call all skipped steps
+        // Invoke all deferred method calls while config was loading
         if (pendingCalls.length > 0)
             processPendingCalls();
     }

@@ -6,7 +6,7 @@ import wot.utils.VehicleInfo;
 class wot.VehicleMarkersManager.components.TurretStatusProxy extends AbstractAccessProxy
 {
    /**
-    * Restricts access to XVM.
+    * Model for TurretStatus.
     * Queries TurretStatusDatabase.
     */
    
@@ -15,22 +15,27 @@ class wot.VehicleMarkersManager.components.TurretStatusProxy extends AbstractAcc
         super(xvm);
     }
     
-    public function get defaultIconSource():String
+    public function defineVehicleStatus():Number
     {
-        return xvm.m_defaultIconSource;
+        var vehInfo:Array = TurretStatusProxy.getInfo(vehicleName);
+        if (vehInfo == null)
+            return 0; // Turret status unknown. 
+
+        // If database stock max hp == current vehicle max hp
+        if (vehInfo[0] == xvm.m_maxHealth)
+            return vehInfo[1]; 
+            /**
+             * Current vehicle has stock turret.
+             * Return vulnerability status.
+             */            
     }
     
-    public function get maxHealth():Number
-    {
-        return xvm.m_maxHealth;
-    }
-    
-    public function get vehicleName():String
+    private function get vehicleName():String
     {
         return VehicleInfo.getVehicleId(xvm.m_defaultIconSource).toLowerCase();
     }
     
-    public static function getInfo(name:String):Array
+    private static function getInfo(name:String):Array
     {
         var db = TurretStatusDatabase.getDb();
         return db[name];
