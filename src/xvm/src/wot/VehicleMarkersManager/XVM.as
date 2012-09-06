@@ -116,15 +116,9 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         _proxy.gotoAndStop(frame);
     }
     
-    
-    private var _initialized = false;
     function XVMInit()
     {
         trace("XVM::XVMInit()");
-        if (_initialized)
-            return;
-        _initialized = true;
-
         try
         {
             xvmHB = _proxy.createEmptyMovieClip("xvmHB", _proxy.marker.getDepth() - 1); // Put health Bar to back.
@@ -158,28 +152,6 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         updateMarkerLabel();
         XVMUpdateStyle();
     }
-    
-    
-    /**
-     * IUIComponent implementation
-     */
-    
-     // override
-    function configUI()
-    {
-        /*
-         * Warning!
-         * Called twice externally.
-         */
-        Logger.add("configUI for " + m_playerFullName);
-        Logger.add(" m_currentHealth = " + m_currentHealth + " m_curHealth = " + m_curHealth);
-        trace("XVM::configUI()");
-        //Logger.add("configUI(): " + vehicleState.getCurrent() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
-        m_currentHealth = m_curHealth;
-        //super.configUI(); //gfx.core.UIComponent ??
-        this.populateData();
-        XVMInit();
-    }
 
     /**
      * IVehicleMarker implementation
@@ -197,7 +169,6 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         if (entityName != null)
             m_entityName = entityName;
         m_playerFullName = pFullName;
-        Logger.add("init for " + m_playerFullName);
         m_curHealth = curHealth >= 0 ? (curHealth) : (0);
         m_maxHealth = maxHealth;
         m_vehicleClass = vClass;
@@ -206,11 +177,11 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         m_level = vLevel;
         m_speaking = speaking;
         m_hunt = hunt;
-        if (initialized)
-        {
-            Logger.add("*** if (initialized) -> populDat");
-            this.populateData();
-        }
+        
+        // Code below is cut from obsolete configUI()
+        m_currentHealth = m_curHealth;
+        populateData();
+        XVMInit();
     }
 
     function update()
@@ -330,7 +301,7 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
 
     function populateData()
     {
-        Logger.add(" populateData for " + m_playerFullName);
+        //Logger.add(" populateData for " + m_playerFullName);
        /* Called by
         * init()
         * configUI()
