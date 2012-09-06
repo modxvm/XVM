@@ -158,6 +158,28 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         updateMarkerLabel();
         XVMUpdateStyle();
     }
+    
+    
+    /**
+     * IUIComponent implementation
+     */
+    
+     // override
+    function configUI()
+    {
+        /*
+         * Warning!
+         * Called twice externally.
+         */
+        Logger.add("configUI for " + m_playerFullName);
+        Logger.add(" m_currentHealth = " + m_currentHealth + " m_curHealth = " + m_curHealth);
+        trace("XVM::configUI()");
+        //Logger.add("configUI(): " + vehicleState.getCurrent() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
+        m_currentHealth = m_curHealth;
+        //super.configUI(); //gfx.core.UIComponent ??
+        this.populateData();
+        XVMInit();
+    }
 
     /**
      * IVehicleMarker implementation
@@ -165,18 +187,6 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
 
     function init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt)
     {
-       /*  Warning!
-        *  init() is called two or three times instantaneously by WG
-        *
-        *  Logger.add("ov:init(" + pFullName + " " + curHealth + " " + maxHealth + " " + entityName);
-        *  ->
-        *  2012.08.12 19:08:07 [i] [002] ov:init(Anatb_RU 300 300 ally
-        *  2012.08.12 19:08:07 [i] [004] ov:init(Anatb_RU 300 300 ally
-        *
-        *  Introducing preventive measures at this function somehow causes marker malfunction.
-        *  Maybe because of "if (initialized) this.populateData()" statement at parent class.
-        */
-
         trace("XVM::init()");
 
         // Use currently remembered extended / normal status for new markers
@@ -184,13 +194,10 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         m_isDead = curHealth <= 0;
         m_defaultIconSource = vIconSource;
 
-       /* from VehicleMarker.init(*)
-        * saves arguments to corresponding m_* fields
-        * and calls if (initialized) this.populateData().
-        */
         if (entityName != null)
             m_entityName = entityName;
         m_playerFullName = pFullName;
+        Logger.add("init for " + m_playerFullName);
         m_curHealth = curHealth >= 0 ? (curHealth) : (0);
         m_maxHealth = maxHealth;
         m_vehicleClass = vClass;
@@ -200,7 +207,10 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         m_speaking = speaking;
         m_hunt = hunt;
         if (initialized)
+        {
+            Logger.add("*** if (initialized) -> populDat");
             this.populateData();
+        }
     }
 
     function update()
@@ -300,21 +310,6 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
     }
 
     /**
-     * IUIComponent implementation
-     */
-
-    // override
-    function configUI()
-    {
-        trace("XVM::configUI()");
-        //Logger.add("configUI(): " + vehicleState.getCurrent() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
-        m_currentHealth = m_curHealth;
-        super.configUI(); //gfx.core.UIComponent ??
-        this.populateData();
-        XVMInit();
-    }
-
-    /**
      * VehicleMarker overrides
      */
     function setupIconLoader()
@@ -335,6 +330,7 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
 
     function populateData()
     {
+        Logger.add(" populateData for " + m_playerFullName);
        /* Called by
         * init()
         * configUI()
