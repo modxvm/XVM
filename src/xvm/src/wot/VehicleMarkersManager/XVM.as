@@ -159,7 +159,7 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
 
     function init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt)
     {
-        trace("XVM::init()");
+        Logger.add("init for " + m_entityName + " " + m_playerFullName);
 
         // Use currently remembered extended / normal status for new markers
         m_showExInfo = s_showExInfo;
@@ -180,7 +180,32 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         
         // Code below is cut from obsolete configUI()
         m_currentHealth = m_curHealth;
-        populateData();
+        
+        Logger.add("  " + vehicleState.getCurrent() + " markerState=" + m_markerState);
+
+        if (m_isPopulated)
+            return false;
+        m_isPopulated = true;
+
+        // initMarkerLabel() handles color blind mode, squad and team killer.
+        initMarkerLabel();
+
+        setupIconLoader();
+
+        levelIconComponent = new LevelIconComponent(new LevelIconProxy(this));
+        turretStatusComponent = new TurretStatusComponent(new TurretStatusProxy(this));
+
+        vehicleState = new VehicleState(new VehicleStateProxy(this));
+
+        if (m_vehicleClass != null)
+            setVehicleClass();
+
+        if (m_markerState != null)
+            _proxy.marker.gotoAndPlay(m_markerState);
+
+        XVMPopulateData();
+        XVMSetupNewHealth(m_curHealth);
+        
         XVMInit();
     }
 
@@ -297,57 +322,6 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         m_iconset.init(_proxy.iconLoader,
             [ m_source.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.vehicleMarker), m_source ]);
         _proxy.iconLoader.source = m_iconset.currentIcon;
-    }
-
-    function populateData()
-    {
-        //Logger.add(" populateData for " + m_playerFullName);
-       /* Called by
-        * init()
-        * configUI()
-        * Method invocation order determined empirically. Parent method invokes child.
-        * All AS2\AS3 methods are virtual.
-        */
-
-       /* VehicleMarker.populateData() setups and shows
-        * levelIcon, HP, tankIcon, action marker, player name
-        * depending on normal or extended mode.
-        * This overriden method follows same subjects.
-        *  see _Super.as for details.
-        */
-
-        trace("XVM::populateData()");
-        //Logger.add("populateData(): " + vehicleState.getCurrent() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
-
-       /*  populateData() is executed two or three times instantaneously by init()
-        *  WG introduced preventive measures at parent class by themselves.
-        *  Code below is WG copypaste from VehicleMarker.populateData()
-        *  see _Super.as for details.
-        */
-        if (m_isPopulated)
-            return false;
-        m_isPopulated = true;
-
-        // initMarkerLabel() handles color blind mode, squad and team killer.
-        initMarkerLabel();
-
-        setupIconLoader();
-
-        levelIconComponent = new LevelIconComponent(new LevelIconProxy(this));
-        turretStatusComponent = new TurretStatusComponent(new TurretStatusProxy(this));
-
-        vehicleState = new VehicleState(new VehicleStateProxy(this));
-
-        if (m_vehicleClass != null)
-            setVehicleClass();
-
-        if (m_markerState != null)
-            _proxy.marker.gotoAndPlay(m_markerState);
-
-        XVMPopulateData();
-        XVMSetupNewHealth(m_curHealth);
-
-        return true;
     }
 
     function setVehicleClass()
