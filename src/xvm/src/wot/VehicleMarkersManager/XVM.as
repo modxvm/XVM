@@ -115,47 +115,6 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         //Logger.add(this["m_playerFullName"] + ": gotoAndStop(" + frame + ")");
         _proxy.gotoAndStop(frame);
     }
-    
-    function XVMInit()
-    {
-        trace("XVM::XVMInit()");
-        try
-        {
-            xvmHB = _proxy.createEmptyMovieClip("xvmHB", _proxy.marker.getDepth() - 1); // Put health Bar to back.
-            xvmHBBorder = xvmHB.createEmptyMovieClip("border", 1);
-            xvmHBDamage = xvmHB.createEmptyMovieClip("damage", 2);
-            xvmHBFill = xvmHB.createEmptyMovieClip("fill", 3);
-
-            damageHolder = _proxy.createEmptyMovieClip("damageHolder", _proxy.getNextHighestDepth());
-
-            // Load stat
-            XVMInit2();
-            if (Config.s_config.rating.showPlayersStatistics && !StatData.s_loaded)
-            {
-                GlobalEventDispatcher.addEventListener("stat_loaded", this, XVMInit2);
-                StatLoader.LoadLastStat();
-            }
-        }
-        catch (e)
-        {
-            ErrorHandler.setText("ERROR: XVMInit():" + String(e));
-        }
-    }
-
-    function XVMInit2(event)
-    {
-        //ErrorHandler.setText("XVMStatLoaded()" + (event ? ": event=" + event.type : ""));
-        trace("XVM::XVMInit2()" + (event ? ": event=" + event.type : ""));
-        if (event)
-          GlobalEventDispatcher.removeEventListener("stat_loaded", this, XVMInit2);
-        XVMPopulateData();
-        updateMarkerLabel();
-        XVMUpdateStyle();
-    }
-
-    /**
-     * IVehicleMarker implementation
-     */
 
     function init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt)
     {
@@ -206,7 +165,31 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         XVMPopulateData();
         XVMSetupNewHealth(m_curHealth);
         
-        XVMInit();
+        xvmHB = _proxy.createEmptyMovieClip("xvmHB", _proxy.marker.getDepth() - 1); // Put health Bar to back.
+        xvmHBBorder = xvmHB.createEmptyMovieClip("border", 1);
+        xvmHBDamage = xvmHB.createEmptyMovieClip("damage", 2);
+        xvmHBFill = xvmHB.createEmptyMovieClip("fill", 3);
+
+        damageHolder = _proxy.createEmptyMovieClip("damageHolder", _proxy.getNextHighestDepth());
+
+        // Load stat
+        XVMInit2();
+        if (Config.s_config.rating.showPlayersStatistics && !StatData.s_loaded)
+        {
+            GlobalEventDispatcher.addEventListener("stat_loaded", this, XVMInit2);
+            StatLoader.LoadLastStat();
+        }
+    }
+    
+    function XVMInit2(event)
+    {
+        //ErrorHandler.setText("XVMStatLoaded()" + (event ? ": event=" + event.type : ""));
+        trace("XVM::XVMInit2()" + (event ? ": event=" + event.type : ""));
+        if (event)
+          GlobalEventDispatcher.removeEventListener("stat_loaded", this, XVMInit2);
+        XVMPopulateData();
+        updateMarkerLabel();
+        XVMUpdateStyle();
     }
 
     function update()
