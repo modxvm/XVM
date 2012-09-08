@@ -117,9 +117,7 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         m_showExInfo = s_showExInfo;
         m_isDead = curHealth <= 0;
         m_defaultIconSource = vIconSource;
-
-        if (entityName != null)
-            m_entityName = entityName;
+        m_entityName = entityName;
         m_playerFullName = pFullName;
         m_curHealth = curHealth >= 0 ? (curHealth) : (0);
         m_maxHealth = maxHealth;
