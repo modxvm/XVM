@@ -41,8 +41,6 @@ import wot.VehicleMarkersManager.VehicleStateProxy;
 
 class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.VehicleMarkersManager.IVehicleMarker
 {
-    static var DEBUG_TIMES = false;
-
     var _proxy:VehicleMarkerProxy;
 
     static var s_showExInfo;
@@ -95,12 +93,6 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
     // Level in roman numerals
     private static var rlevel: Array = [ "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" ];
 
-    /*private function trace(str:String)
-    {
-        if (m_playerFullName == "Feuer30")
-        Logger.add(m_playerFullName + "> " + str);
-    }*/
-
     function XVM(proxy:VehicleMarkerProxy, entityName:String)
     {
         super(); // gfx.core.UIComponent
@@ -116,9 +108,10 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         _proxy.gotoAndStop(frame);
     }
 
-    function init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt)
+    function init(vClass, vIconSource, vType, vLevel, pFullName,
+                  curHealth, maxHealth, entityName, speaking, hunt)
     {
-        Logger.add("init for " + m_entityName + " " + m_playerFullName);
+        Logger.add("init for " + entityName + " " + pFullName);
 
         // Use currently remembered extended / normal status for new markers
         m_showExInfo = s_showExInfo;
@@ -137,11 +130,8 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         m_speaking = speaking;
         m_hunt = hunt;
         
-        // Code below is cut from obsolete configUI()
         m_currentHealth = m_curHealth;
         
-        Logger.add("  " + vehicleState.getCurrent() + " markerState=" + m_markerState);
-
         if (m_isPopulated)
             return false;
         m_isPopulated = true;
@@ -906,9 +896,6 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
 
             // Initialize clan icons
             XVMInitializeClanIcon(cfg.clanIcon);
-
-            if (DEBUG_TIMES)
-                Logger.add("DEBUG TIME: XVMPopulateData(): " + Utils.elapsedMSec(start, new Date()) + " ms");
         }
         catch (e)
         {
@@ -1030,9 +1017,6 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
             // Update Colors and Values
             XVMUpdateHealthBar(m_curHealth);
             XVMUpdateUI(m_curHealth);
-
-            if (DEBUG_TIMES)
-                Logger.add("DEBUG TIME: XVMUpdateStyle(): " + Utils.elapsedMSec(start, new Date()) + " ms");
         }
         catch (e)
         {
