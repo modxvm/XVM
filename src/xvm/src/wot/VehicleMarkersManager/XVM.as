@@ -55,7 +55,6 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
     var m_speaking;
     var m_hunt;
     var m_markerState;
-    var m_isPopulated;
     var m_markerLabel;
 
     // UI Elements
@@ -111,7 +110,7 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
     function init(vClass, vIconSource, vType, vLevel, pFullName,
                   curHealth, maxHealth, entityName, speaking, hunt)
     {
-        //Logger.add("init for " + entityName + " " + pFullName);
+        Logger.add("init for " + entityName + " " + pFullName);
 
         // Use currently remembered extended / normal status for new markers
         m_showExInfo = s_showExInfo;
@@ -126,15 +125,10 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         m_speaking = speaking;
         m_hunt = hunt;
         
-        Logger.add("## " + curHealth);
         m_isDead = curHealth == 0;
         m_curHealth = curHealth;
         m_currentHealth = m_curHealth;
         
-        if (m_isPopulated)
-            return false;
-        m_isPopulated = true;
-
         // initMarkerLabel() handles color blind mode, squad and team killer.
         initMarkerLabel();
 
