@@ -111,15 +111,13 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
     function init(vClass, vIconSource, vType, vLevel, pFullName,
                   curHealth, maxHealth, entityName, speaking, hunt)
     {
-        Logger.add("init for " + entityName + " " + pFullName);
+        //Logger.add("init for " + entityName + " " + pFullName);
 
         // Use currently remembered extended / normal status for new markers
         m_showExInfo = s_showExInfo;
-        m_isDead = curHealth <= 0;
         m_defaultIconSource = vIconSource;
         m_entityName = entityName;
         m_playerFullName = pFullName;
-        m_curHealth = curHealth >= 0 ? (curHealth) : (0);
         m_maxHealth = maxHealth;
         m_vehicleClass = vClass;
         m_source = vIconSource;
@@ -128,6 +126,9 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         m_speaking = speaking;
         m_hunt = hunt;
         
+        Logger.add("## " + curHealth);
+        m_isDead = curHealth == 0;
+        m_curHealth = curHealth;
         m_currentHealth = m_curHealth;
         
         if (m_isPopulated)
