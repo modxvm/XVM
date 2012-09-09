@@ -8,7 +8,11 @@ goto :EOF
 
 :do_file
 set n=%1
-if exist %n%.xml. (
+if not exist %n%.xml (
+  echo %n%.swf
+  swfmill swf2xml orig\%n%.swf orig\%n%.xml
+  swfmill swf2xml %n%.swf %n%.xml
   diff -u orig\%n%.xml %n%.xml > %n%.xml.patch
+  del orig\%n%.xml %n%.xml
 )
 goto :EOF

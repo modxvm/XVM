@@ -1,6 +1,42 @@
---- orig\battle.xml	2012-07-12 22:17:41.392761900 +0300
-+++ battle.xml	2012-07-12 22:19:03.948483800 +0300
-@@ -116903,8 +116903,8 @@
+--- orig\battle.xml	2012-09-09 16:59:41.847625000 +0300
++++ battle.xml	2012-09-09 16:59:43.144500000 +0300
+@@ -44283,7 +44283,7 @@
+               <GetMember/>
+               <PushData>
+                 <items>
+-                  <StackDouble value="nan"/>
++                  <StackDouble value="2.996191851480570e-307"/>
+                 </items>
+               </PushData>
+               <EqualTyped/>
+@@ -44308,7 +44308,7 @@
+               <GetMember/>
+               <PushData>
+                 <items>
+-                  <StackDouble value="nan"/>
++                  <StackDouble value="2.996191851480570e-307"/>
+                 </items>
+               </PushData>
+               <EqualTyped/>
+@@ -45703,7 +45703,7 @@
+             <items>
+               <StackRegister reg="2"/>
+               <StackDictionaryLookup index="11"/>
+-              <StackDouble value="nan"/>
++              <StackDouble value="2.996191851480602e-307"/>
+             </items>
+           </PushData>
+           <SetMember/>
+@@ -45711,7 +45711,7 @@
+             <items>
+               <StackRegister reg="2"/>
+               <StackDictionaryLookup index="13"/>
+-              <StackDouble value="nan"/>
++              <StackDouble value="2.996191851480602e-307"/>
+             </items>
+           </PushData>
+           <SetMember/>
+@@ -126807,8 +126807,8 @@
                <String value="charAt"/>
                <String value=" "/>
                <String value="\"/>
@@ -11,3 +47,39 @@
                <String value="&#10;"/>
                <String value="&#13;"/>
                <String value="&#9;"/>
+@@ -134779,7 +134779,7 @@
+               <GetMember/>
+               <PushData>
+                 <items>
+-                  <StackDouble value="nan"/>
++                  <StackDouble value="2.996191851480570e-307"/>
+                 </items>
+               </PushData>
+               <EqualTyped/>
+@@ -134810,7 +134810,7 @@
+               <GetMember/>
+               <PushData>
+                 <items>
+-                  <StackDouble value="nan"/>
++                  <StackDouble value="2.996191851480570e-307"/>
+                 </items>
+               </PushData>
+               <EqualTyped/>
+@@ -135150,7 +135150,7 @@
+               <GetMember/>
+               <PushData>
+                 <items>
+-                  <StackDouble value="nan"/>
++                  <StackDouble value="2.996191851480570e-307"/>
+                 </items>
+               </PushData>
+               <EqualTyped/>
+@@ -135181,7 +135181,7 @@
+               <GetMember/>
+               <PushData>
+                 <items>
+-                  <StackDouble value="nan"/>
++                  <StackDouble value="2.996191851480570e-307"/>
+                 </items>
+               </PushData>
+               <EqualTyped/>

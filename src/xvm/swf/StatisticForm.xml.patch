@@ -1,15 +1,42 @@
---- orig\StatisticForm.xml	2012-07-12 22:17:47.276098400 +0300
-+++ StatisticForm.xml	2012-07-12 22:19:09.131780300 +0300
-@@ -1805,7 +1805,7 @@
-                   <PushData>
-                     <items>
-                       <StackString value="duration"/>
--                      <StackInteger value="400"/>
-+                      <StackInteger value="1"/>
-                     </items>
-                   </PushData>
-                   <SetVariable/>
-@@ -39657,7 +39657,7 @@
+--- orig\StatisticForm.xml	2012-09-09 16:59:46.019500000 +0300
++++ StatisticForm.xml	2012-09-09 16:59:46.410125000 +0300
+@@ -2197,7 +2197,7 @@
+               <GetMember/>
+               <PushData>
+                 <items>
+-                  <StackDouble value="nan"/>
++                  <StackDouble value="2.996191851480570e-307"/>
+                 </items>
+               </PushData>
+               <EqualTyped/>
+@@ -2222,7 +2222,7 @@
+               <GetMember/>
+               <PushData>
+                 <items>
+-                  <StackDouble value="nan"/>
++                  <StackDouble value="2.996191851480570e-307"/>
+                 </items>
+               </PushData>
+               <EqualTyped/>
+@@ -3617,7 +3617,7 @@
+             <items>
+               <StackRegister reg="2"/>
+               <StackDictionaryLookup index="11"/>
+-              <StackDouble value="nan"/>
++              <StackDouble value="2.996191851480602e-307"/>
+             </items>
+           </PushData>
+           <SetMember/>
+@@ -3625,7 +3625,7 @@
+             <items>
+               <StackRegister reg="2"/>
+               <StackDictionaryLookup index="13"/>
+-              <StackDouble value="nan"/>
++              <StackDouble value="2.996191851480602e-307"/>
+             </items>
+           </PushData>
+           <SetMember/>
+@@ -39662,7 +39662,7 @@
          <actions>
            <PushData>
              <items>
@@ -18,7 +45,7 @@
              </items>
            </PushData>
            <GetVariable/>
-@@ -39683,7 +39683,7 @@
+@@ -39688,7 +39688,7 @@
          <actions>
            <PushData>
              <items>

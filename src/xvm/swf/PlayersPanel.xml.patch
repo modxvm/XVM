@@ -1,6 +1,42 @@
---- orig\PlayersPanel.xml	2012-07-12 22:17:45.878018500 +0300
-+++ PlayersPanel.xml	2012-07-12 22:19:07.767702300 +0300
-@@ -56508,8 +56508,8 @@
+--- orig\PlayersPanel.xml	2012-09-09 16:59:44.878875000 +0300
++++ PlayersPanel.xml	2012-09-09 16:59:45.347625000 +0300
+@@ -6539,7 +6539,7 @@
+               <GetMember/>
+               <PushData>
+                 <items>
+-                  <StackDouble value="nan"/>
++                  <StackDouble value="2.996191851480570e-307"/>
+                 </items>
+               </PushData>
+               <EqualTyped/>
+@@ -6564,7 +6564,7 @@
+               <GetMember/>
+               <PushData>
+                 <items>
+-                  <StackDouble value="nan"/>
++                  <StackDouble value="2.996191851480570e-307"/>
+                 </items>
+               </PushData>
+               <EqualTyped/>
+@@ -7959,7 +7959,7 @@
+             <items>
+               <StackRegister reg="2"/>
+               <StackDictionaryLookup index="11"/>
+-              <StackDouble value="nan"/>
++              <StackDouble value="2.996191851480602e-307"/>
+             </items>
+           </PushData>
+           <SetMember/>
+@@ -7967,7 +7967,7 @@
+             <items>
+               <StackRegister reg="2"/>
+               <StackDictionaryLookup index="13"/>
+-              <StackDouble value="nan"/>
++              <StackDouble value="2.996191851480602e-307"/>
+             </items>
+           </PushData>
+           <SetMember/>
+@@ -60269,8 +60269,8 @@
                <String value="charAt"/>
                <String value=" "/>
                <String value="\"/>
@@ -11,7 +47,7 @@
                <String value="&#10;"/>
                <String value="&#13;"/>
                <String value="&#9;"/>
-@@ -60491,7 +60491,7 @@
+@@ -64275,7 +64275,7 @@
          <actions>
            <PushData>
              <items>
@@ -20,7 +56,7 @@
              </items>
            </PushData>
            <GetVariable/>
-@@ -60517,7 +60517,7 @@
+@@ -64301,7 +64301,7 @@
          <actions>
            <PushData>
              <items>
@@ -29,7 +65,7 @@
              </items>
            </PushData>
            <GetVariable/>
-@@ -60647,7 +60647,7 @@
+@@ -64431,7 +64431,7 @@
          <actions>
            <PushData>
              <items>
