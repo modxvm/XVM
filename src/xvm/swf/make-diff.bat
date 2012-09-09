@@ -1,8 +1,14 @@
 @echo off
 
-diff -u orig\battle.xml battle.xml > battle.xml.patch
-diff -u orig\battleloading.xml battleloading.xml > battleloading.xml.patch
-diff -u orig\PlayersPanel.xml PlayersPanel.xml > PlayersPanel.xml.patch
-diff -u orig\StatisticForm.xml StatisticForm.xml > StatisticForm.xml.patch
-rem diff -u orig\FinalStatisticForm.xml FinalStatisticForm.xml > FinalStatisticForm.xml.patch
-diff -u orig\VehicleMarkersManager.xml VehicleMarkersManager.xml > VehicleMarkersManager.xml.patch
+set swfs=battle.swf battleloading.swf PlayersPanel.swf StatisticForm.swf VehicleMarkersManager.swf
+
+for %%i in (%swfs%) do call :do_file %%~ni
+
+goto :EOF
+
+:do_file
+set n=%1
+if exist %n%.xml. (
+  diff -u orig\%n%.xml %n%.xml > %n%.xml.patch
+)
+goto :EOF
