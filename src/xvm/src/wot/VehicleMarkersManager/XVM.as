@@ -125,8 +125,8 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         m_speaking = speaking;
         m_hunt = hunt;
         
-        m_isDead = curHealth == 0;
-        m_curHealth = curHealth;
+        m_isDead = curHealth <= 0;
+        m_curHealth = curHealth >= 0 ? (curHealth) : (0);
         m_currentHealth = m_curHealth;
         
         // initMarkerLabel() handles color blind mode, squad and team killer.
