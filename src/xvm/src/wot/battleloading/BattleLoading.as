@@ -40,6 +40,8 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
 
     private function onConfigLoaded()
     {
+        // CANT GET HERE
+        
         GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
         traceToProxyTerminal();
 
