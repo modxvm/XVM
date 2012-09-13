@@ -59,7 +59,7 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.controls.LobbyPlayerListItemRenderer"/>
-+              <StackString value="wot.BattleLoadingItemRenderer"/>
++              <StackString value="wot.battleloading.BattleLoadingItemRenderer"/>
              </items>
            </PushData>
            <GetVariable/>
@@ -68,7 +68,7 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.controls.LobbyPlayerListItemRenderer"/>
-+              <StackString value="wot.BattleLoadingItemRenderer"/>
++              <StackString value="wot.battleloading.BattleLoadingItemRenderer"/>
              </items>
            </PushData>
            <GetVariable/>
@@ -77,7 +77,7 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.BattleLoading"/>
-+              <StackString value="wot.BattleLoading"/>
++              <StackString value="wot.battleloading.BattleLoading"/>
              </items>
            </PushData>
            <GetVariable/>
