@@ -12,8 +12,7 @@ if (!cluster.isMaster) {
 
 var numCPUs = require('os').cpus().length,
     utils = require("./utils"),
-    settings = require("./settings"),
-    numNodes = 2;
+    settings = require("./settings");
 
 // String.lpad
 String.prototype.lpad = function(padString, length) {
@@ -34,13 +33,13 @@ var usageStat = {
     missed: 0,
     updatesFailed: 0,
     mongorq: 0,
-    mongorq_max: settings.mongoMaxConnections * numNodes,
+    mongorq_max: settings.mongoMaxConnections * settings.numNodes,
     connections: [],
     maxConnections: []
 };
 
     // Fork workers.
-for (var i = 0; i < numNodes; i++) {
+for (var i = 0; i < settings.numNodes; i++) {
     var w = cluster.fork();
 
     w.on('message', function(msg) {

@@ -1,10 +1,13 @@
 module.exports = (function()
 {
+    var numNodes = 1; // use X CPU core(s)
+
     // exports
     return {
+        numNodes: numNodes,
         host: "127.0.0.1",
         port: <port>,
-        maxSockets: 100, // per client
+        maxSockets: Math.floor(1000 / numNodes), // per client
         cacheTtl: 7 * 24 * 60 * 60 * 1000, // 7 days
         lastErrorTtl: 6 * 1000, // in msec
         usageStatShowPeriod: 60 * 1000, // in msec
@@ -13,7 +16,7 @@ module.exports = (function()
         missedCollectionName: "<missed_collection>",
         usersCollectionName: "<users_collection>",
         statHostMaxConnections: 100,
-        mongoMaxConnections: 100,
+        mongoMaxConnections: Math.floor(200 / numNodes),
         mongoMinTime: 1000, // msec
         mongoMaxTime: 5000, // msec
         statHosts: [

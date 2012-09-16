@@ -37,7 +37,9 @@ update()
 
     OIFS=$IFS
     IFS=$'\n'
-    for line in `wget -q -O - "${url}${ids_str}" | tr -s '[]' '\n\n' | grep "id" | sed "s/},{/\n/g" | tr -d '"{}'`; do
+    data=`wget -q -O - "${url}${ids_str}" | tr -s '[]' '\n\n' | grep "id" | sed "s/},{/\n/g" | tr -d '"{}'`
+    [ "$data" = "" ] && { echo -n "[no data] "; sleep 1; }
+    for line in $data; do
 	IFS=$OIFS
 	arr=(`echo "$line" | awk '{
 	    n = split($0, a, ",")
@@ -62,7 +64,7 @@ update()
 		rmids="$rmids$id"
 		unset ids[$id]
 		;;
-	    api_error)
+	    api_error|expired)
 		unset ids[$id]
 		;;
 	    max_conn)

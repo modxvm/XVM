@@ -14,7 +14,7 @@ var collection,
     users_collection,
     mongoOptions = {
         auto_reconnect: true,
-        poolSize: 200
+        poolSize: settings.mongoMaxConnections
     };
 
 // Global vars
@@ -344,7 +344,7 @@ processRequest = function(request, response) {
             users_collection.update({ _id: id }, { $inc : { counter: 1 } }, { upsert: true });
         });
     } catch(e) {
-        response.statusCode = 500;
+        response.statusCode = 403; // Forbidden
         var errText = "wrong request: " + e;
         if (request.url.toLowerCase() != "/favicon.ico")
             errText += " url=" + request.url;
@@ -358,12 +358,10 @@ processRequest = function(request, response) {
     // Select required data from cache
     if (mongorq >= mongorq_max)
     {
-        response.statusCode = 500;
-        var errText = "server db overloaded: " + mongorq + "/" + mongorq_max;
+        response.statusCode = 503; // Service Unavailable
+        var errText = "db overloaded: " + mongorq + "/" + mongorq_max;
+        response.end('{"error":"' + errText + '"}');
 //        utils.log(errText);
-        if (request.url.toLowerCase() != "/favicon.ico")
-            errText += " url=" + request.url;
-        response.end(errText);
         return;
     }
 
@@ -381,10 +379,10 @@ processRequest = function(request, response) {
         var duration = (now - times[0].t);
         if (duration > settings.mongoMaxTime) {
             delta = -5;
-            dtime = 1000;
+            dtime = 200;
         } else if (duration < settings.mongoMinTime) {
             delta = 1;
-            dtime = 1000;
+            dtime = 200;
         }
 
         if (!mongorq_max_lastupdate || (now - mongorq_max_lastupdate) > dtime)
