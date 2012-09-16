@@ -56,6 +56,7 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
     var m_hunt;
     var m_markerState;
     var m_markerLabel;
+    var m_entityType; // TODO: how to use?
 
     // UI Elements
     var damageHolder: MovieClip;
@@ -108,7 +109,7 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
     }
 
     function init(vClass, vIconSource, vType, vLevel, pFullName,
-                  curHealth, maxHealth, entityName, speaking, hunt)
+        curHealth, maxHealth, entityName, speaking, hunt, entityType)
     {
         Logger.add("init for " + entityName + " " + pFullName);
 
@@ -116,6 +117,7 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         m_showExInfo = s_showExInfo;
         m_defaultIconSource = vIconSource;
         m_entityName = entityName;
+        m_entityType = entityType;
         m_playerFullName = pFullName;
         m_maxHealth = maxHealth;
         m_vehicleClass = vClass;
@@ -156,20 +158,20 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         damageHolder = _proxy.createEmptyMovieClip("damageHolder", _proxy.getNextHighestDepth());
 
         // Load stat
-        XVMInit2();
+        XVMInit();
         if (Config.s_config.rating.showPlayersStatistics && !StatData.s_loaded)
         {
-            GlobalEventDispatcher.addEventListener("stat_loaded", this, XVMInit2);
+            GlobalEventDispatcher.addEventListener("stat_loaded", this, XVMInit);
             StatLoader.LoadLastStat();
         }
     }
     
-    function XVMInit2(event)
+    function XVMInit(event)
     {
         //ErrorHandler.setText("XVMStatLoaded()" + (event ? ": event=" + event.type : ""));
-        trace("XVM::XVMInit2()" + (event ? ": event=" + event.type : ""));
+        trace("XVM::XVMInit()" + (event ? ": event=" + event.type : ""));
         if (event)
-          GlobalEventDispatcher.removeEventListener("stat_loaded", this, XVMInit2);
+          GlobalEventDispatcher.removeEventListener("stat_loaded", this, XVMInit);
         XVMPopulateData();
         updateMarkerLabel();
         XVMUpdateStyle();
@@ -227,7 +229,7 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         this.updateMarkerLabel();
     }
 
-    function updateHealth(curHealth)
+    function updateHealth(curHealth, flag, damageType) // TODO: use flag and damageType
     {
         trace("XVM::updateHealth()");
         if (curHealth < 0)

@@ -287,11 +287,11 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      * @param	speaking
      * @param	hunt
      */
-    public function init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt)
+    public function init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt, entityType)
     {
         //Logger.add("init: " + pFullName);
         this["_playerName"] = pFullName; // for debug
-        call("init", [ vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt ]);
+        call("init", [ vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt, entityType ]);
     }
 
     /**
@@ -333,9 +333,9 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      * called by Battle.pyc
      * @param	curHealth
      */
-    public function updateHealth(curHealth)
+    public function updateHealth(curHealth, flag, damageType)
     {
-        call("updateHealth", [ curHealth ]);
+        call("updateHealth", [ curHealth, flag, damageType ]);
     }
 
     /**

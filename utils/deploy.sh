@@ -21,6 +21,8 @@ cd $(dirname $(realpath $(cygpath --unix $0)))
 
 SWF_DIR="$WOT_DIRECTORY/res_mods/$GAME_VER/gui/flash"
 
+mkdir -p "$SWF_DIR"
+
 copy_file()
 {
   [ -f "$SWF_DIR/$1" ] && rm -f "$SWF_DIR/$1"
