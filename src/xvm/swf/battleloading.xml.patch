@@ -18,42 +18,6 @@
              </transform>
              <events>
                <Event flags1="0" flags2="4">
-@@ -2601,7 +2601,7 @@
-               <GetMember/>
-               <PushData>
-                 <items>
--                  <StackDouble value="nan"/>
-+                  <StackDouble value="2.996191851480570e-307"/>
-                 </items>
-               </PushData>
-               <EqualTyped/>
-@@ -2626,7 +2626,7 @@
-               <GetMember/>
-               <PushData>
-                 <items>
--                  <StackDouble value="nan"/>
-+                  <StackDouble value="2.996191851480570e-307"/>
-                 </items>
-               </PushData>
-               <EqualTyped/>
-@@ -4021,7 +4021,7 @@
-             <items>
-               <StackRegister reg="2"/>
-               <StackDictionaryLookup index="11"/>
--              <StackDouble value="nan"/>
-+              <StackDouble value="2.996191851480602e-307"/>
-             </items>
-           </PushData>
-           <SetMember/>
-@@ -4029,7 +4029,7 @@
-             <items>
-               <StackRegister reg="2"/>
-               <StackDictionaryLookup index="13"/>
--              <StackDouble value="nan"/>
-+              <StackDouble value="2.996191851480602e-307"/>
-             </items>
-           </PushData>
-           <SetMember/>
 @@ -44654,7 +44654,7 @@
          <actions>
            <PushData>
