@@ -46,15 +46,11 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      */ 
     private var pendingCalls:Array;
 
-    /**
-     * Log trace
-     * @param	str     Log message
-     */
-    /*private function trace(str:String):Void
+    private function trace(str:String):Void
     {
-        if (this["_playerName"] == "dosik_dai")
+        //if (this["_playerName"] == "dosik_dai")
         Logger.add(this["_playerName"] + "> " + str);
-    }*/
+    }
     
     /**
      * ctor()
@@ -293,84 +289,42 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         this["_playerName"] = pFullName; // for debug
         call("init", [ vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt, entityType ]);
     }
+    
+    // *********************
+    // New in 080
+    
+    public function settingsUpdate(flag)
+    {
+        Logger.add("flag = " + flag);
+        call("settingsUpdate", [ flag ]);
+    }
+    
+    /*
+    function draw()
+    {
+        super.draw();
+    }
+    */
+    
+    // *********************
 
     /**
      * called by Battle.pyc
      */
-    public function update()
-    {
-        call("update");
-    }
-    
-    /**
-     * called by Battle.pyc
-     */
-    public function updateMarkerSettings()
-    {
-        call("updateMarkerSettings");
-    }
-    
-    /**
-     * called by Battle.pyc
-     * @param	value
-     */
-    public function setSpeaking(value)
-    {
-        call("setSpeaking", [ value ]);
-    }
-    
-    /**
-     * called by Battle.pyc
-     * @param	value
-     */
-    public function setEntityName(value)
-    {
-        //Logger.add("setEntityName(" + value + ")");
-        call("setEntityName", [ value ]);
-    }
-    
-    /**
-     * called by Battle.pyc
-     * @param	curHealth
-     */
+    public function update()                      { call("update"); }
+    public function updateMarkerSettings()        { call("updateMarkerSettings"); }
+    public function setSpeaking(value)            { call("setSpeaking",      [ value ]); }
+    public function setEntityName(value)          { call("setEntityName",    [ value ]); }
+    public function showExInfo(show)              { call("showExInfo",       [ show ]); }
+    public function showActionMarker(actionState) { call("showActionMarker", [ actionState ]); }
     public function updateHealth(curHealth, flag, damageType)
-    {
-        call("updateHealth", [ curHealth, flag, damageType ]);
-    }
-
-    /**
-     * called by Battle.pyc
-     * @param	newState
-     * @param	isImmediate
-     */
+                                                  { call("updateHealth", [ curHealth, flag, damageType ]); }
     public function updateState(newState, isImmediate)
-    {
-        call("updateState", [ newState, isImmediate ]);
-    }
+                                                  { call("updateState",  [ newState, isImmediate ]);}
 
-    /**
-     * called by Battle.pyc
-     * @param	show
-     */
-    public function showExInfo(show)
-    {
-        call("showExInfo", [ show ]);
-    }
+                                                  
+    // IUIComponent implementation
     
-    /**
-     * called by Battle.pyc
-     * @param	actionState
-     */
-    public function showActionMarker(actionState)
-    {
-        call("showActionMarker", [ actionState ]);
-    }
-
-    /**
-     * IUIComponent implementation
-     * TODO: not all is required, remove unused.
-     */
-
     public function configUI()
     {
         call("configUI");
@@ -380,6 +334,10 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     {
         call("validateNow");
     }
+    
+    /**
+     * TODO: not all is required, remove unused.
+     */
 
     public function get disabled()
     {
@@ -454,11 +412,13 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
 
     public function handleInput(details, pathToFocus)
     {
+        trace("*** handleInput()");
         call("handleInput", [ details, pathToFocus ]);
     }
 
     public function invalidate()
     {
+        trace("*** invalidate()");
         call("invalidate");
     }
 
@@ -470,26 +430,31 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
 
     public function initSize()
     {
+        trace("*** initSize()");
         call("initSize");
     }
 
     public function draw()
     {
+        trace("*** draw()");
         call("draw");
     }
 
     public function changeFocus()
     {
+        trace("*** changeFocus()");
         call("changeFocus");
     }
 
     public function onMouseWheel(delta, target)
     {
+        trace("*** onMouseWheel()");
         call("onMouseWheel", [ delta, target ]);
     }
 
     public function scrollWheel(delta)
     {
+        trace("*** scrollWheel()");
         call("scrollWheel", [ delta ]);
     }
 }
