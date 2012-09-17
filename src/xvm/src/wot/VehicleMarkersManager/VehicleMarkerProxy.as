@@ -122,7 +122,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      */
     private function initializeSubject():Void
     {
-        trace("initializeSubject()");
+        trace("initializeSubject() st = " + Config.s_config.battle.useStandardMarkers);
 
         // Create marker class depending on config setting
         if (Config.s_config.battle.useStandardMarkers == true)
@@ -270,44 +270,14 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      * IVehicleMarker implementation
      */
 
-    /**
-     * called by Battle.pyc
-     * @param	vClass
-     * @param	vIconSource
-     * @param	vType
-     * @param	vLevel
-     * @param	pFullName
-     * @param	curHealth
-     * @param	maxHealth
-     * @param	entityName
-     * @param	speaking
-     * @param	hunt
-     */
+    // called by Battle.pyc
     public function init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt, entityType)
     {
         //Logger.add("init: " + pFullName);
         this["_playerName"] = pFullName; // for debug
-        call("init", [ vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt, entityType ]);
+        call("init",   [ vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt, entityType ]);
     }
     
-    // *********************
-    // New in 080
-    
-    public function settingsUpdate(flag)
-    {
-        Logger.add("flag = " + flag);
-        call("settingsUpdate", [ flag ]);
-    }
-    
-    /*
-    function draw()
-    {
-        super.draw();
-    }
-    */
-    
-    // *********************
-
     /**
      * called by Battle.pyc
      */
@@ -322,44 +292,30 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     public function updateState(newState, isImmediate)
                                                   { call("updateState",  [ newState, isImmediate ]);}
 
-                                                  
+    /**
+     * Ingame original WG marker settings.
+     * 
+     * Five methods below are called when player touches some marker setting
+     * at ingame marker setting menu.
+     * 
+     * settingsUpdate() is new method in 0.8.0.
+     * 
+     * For XVM - do nothing.
+     */
+    public function settingsUpdate(flag) { call("settingsUpdate", [ flag ]); }
+    public function get visible()  { return subject.visible; }
+    public function set visible(value)  {   subject.visible  = value; }
+    public function get disabled() { return subject.disabled; }
+    public function set disabled(value) {   subject.disabled = value; }
+    
     // IUIComponent implementation
     
-    public function configUI()
-    {
-        call("configUI");
-    }
-
-    public function validateNow()
-    {
-        call("validateNow");
-    }
+    public function configUI()    { call("configUI"); }
+    public function validateNow() { call("validateNow"); }
     
     /**
      * TODO: not all is required, remove unused.
      */
-
-    public function get disabled()
-    {
-        trace("*** get disabled()");
-        return subject.disabled;
-    }
-    public function set disabled(value)
-    {
-        trace("*** set disabled()");
-        subject.disabled = value;
-    }
-
-    public function get visible()
-    {
-        trace("*** get visible()");
-        return subject.visible;
-    }
-    public function set visible(value)
-    {
-        trace("*** set visible()");
-        subject.visible = value;
-    }
 
     public function get width()
     {
