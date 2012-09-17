@@ -56,7 +56,7 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
     var m_hunt;
     var m_markerState;
     var m_markerLabel;
-    var m_entityType; // TODO: how to use?
+    var m_entityType;
 
     // UI Elements
     var damageHolder: MovieClip;
@@ -111,23 +111,24 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
     function init(vClass, vIconSource, vType, vLevel, pFullName,
         curHealth, maxHealth, entityName, speaking, hunt, entityType)
     {
-        Logger.add("init for " + entityName + " " + pFullName);
+        Logger.add("init for " + entityName + entityType);
 
         // Use currently remembered extended / normal status for new markers
-        m_showExInfo = s_showExInfo;
-        m_defaultIconSource = vIconSource;
-        m_entityName = entityName;
-        m_entityType = entityType;
-        m_playerFullName = pFullName;
+        m_showExInfo = s_showExInfo; //false
+        m_defaultIconSource = vIconSource; // ../maps/icons/vehicle/contour/usa-M48A1.png
+        m_source            = vIconSource;
+        m_entityName = entityName; // ally, enemy
+        m_entityType = entityType; // ally, enemy
+        m_playerFullName = pFullName; // alex
         m_maxHealth = maxHealth;
-        m_vehicleClass = vClass;
-        m_source = vIconSource;
-        m_vname = vType;
+        m_vehicleClass = vClass; //mediumTank
+        
+        m_vname = vType; // AMX50F155
         m_level = vLevel;
         m_speaking = speaking;
         m_hunt = hunt;
         
-        m_isDead = curHealth <= 0;
+        m_isDead    = curHealth <= 0; // -1 for ammunition storage explosion
         m_curHealth = curHealth >= 0 ? (curHealth) : (0);
         m_currentHealth = m_curHealth;
         
