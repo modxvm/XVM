@@ -317,46 +317,38 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      * TODO: not all is required, remove unused.
      */
 
-    public function get width()
-    {
+    public function get width(){
         trace("*** get width()");
         return subject.width;
     }
-    public function set width(value)
-    {
+    public function set width(value){
         trace("*** set width()");
         subject.width = value;
     }
 
-    public function get height()
-    {
+    public function get height(){
         trace("*** get height()");
         return subject.height;
     }
-    public function set height(value)
-    {
+    public function set height(value){
         trace("*** set height()");
         subject.height = value;
     }
 
-    public function setSize(width, height)
-    {
+    public function setSize(width, height){
         call("setSize", [ width, height ]);
     }
 
-    public function get focused()
-    {
+    public function get focused(){
         trace("*** get focused()");
         return subject.focused;
     }
-    public function set focused(value)
-    {
+    public function set focused(value){
         trace("*** set focused()");
         subject.focused = value;
     }
 
-    public function get displayFocus()
-    {
+    public function get displayFocus(){
         trace("*** get displayFocus()");
         return subject.displayFocus;
     }
@@ -366,50 +358,42 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         subject.displayFocus = value;
     }
 
-    public function handleInput(details, pathToFocus)
-    {
+    public function handleInput(details, pathToFocus) {
         trace("*** handleInput()");
         call("handleInput", [ details, pathToFocus ]);
     }
 
-    public function invalidate()
-    {
+    public function invalidate() {
         trace("*** invalidate()");
         call("invalidate");
     }
 
-    public function toString()
-    {
+    public function toString() {
         trace("*** toString()");
         return "[proxy]" + (subject != null ? subject.toString() : "[(null)]");
     }
 
-    public function initSize()
-    {
+    public function initSize() {
         trace("*** initSize()");
         call("initSize");
     }
 
-    public function draw()
-    {
+    public function draw() {
         trace("*** draw()");
         call("draw");
     }
 
-    public function changeFocus()
-    {
+    public function changeFocus() {
         trace("*** changeFocus()");
         call("changeFocus");
     }
 
-    public function onMouseWheel(delta, target)
-    {
+    public function onMouseWheel(delta, target) {
         trace("*** onMouseWheel()");
         call("onMouseWheel", [ delta, target ]);
     }
 
-    public function scrollWheel(delta)
-    {
+    public function scrollWheel(delta) {
         trace("*** scrollWheel()");
         call("scrollWheel", [ delta ]);
     }
