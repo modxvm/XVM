@@ -3,6 +3,7 @@
  * Dispatches event for config loading if it is not loaded
  * Draws XVM version watermark
  */
+import gfx.core.UIComponent;
 import wot.VehicleMarkersManager.IVehicleMarker;
 import wot.utils.Config;
 import wot.utils.Defines;
@@ -28,13 +29,16 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     // TODO: try to remove and create dynamically only with standard markers to improve performance
     public var levelIcon:MovieClip;
     public var iconLoader:net.wargaming.controls.UILoaderAlt;
+    public var hp_mc:MovieClip;
     public var actionMarker:MovieClip;
     public var marker:MovieClip;
+    public var hitLbl:UIComponent;
+    public var hitExplosion:UIComponent;
     private var vNameField:TextField;
     private var pNameField:TextField;
     private var healthBar:MovieClip;
     private var bgShadow:MovieClip;
-
+    
     /**
      * Instance of subject class with real implementation
      */
@@ -102,7 +106,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      */
     private function onConfigLoaded():Void
     {
-        trace("onConfigLoaded()");
+        //trace("onConfigLoaded()");
 
         GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
 
@@ -122,7 +126,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      */
     private function initializeSubject():Void
     {
-        trace("initializeSubject() st = " + Config.s_config.battle.useStandardMarkers);
+        //trace("initializeSubject() st = " + Config.s_config.battle.useStandardMarkers);
 
         // Create marker class depending on config setting
         if (Config.s_config.battle.useStandardMarkers == true)
@@ -170,10 +174,14 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
             marker._y = -16;
 
             // Translate visual elements to subject
+            //Logger.addObject(this);
             subject["marker"] = marker;
             subject["levelIcon"] = levelIcon;
             subject["iconLoader"] = iconLoader;
+            subject["hp_mc"] = hp_mc;
             subject["actionMarker"] = actionMarker;
+            subject["hitLbl"] = hitLbl;
+            subject["hitExplosion"] = hitExplosion;
             subject["vNameField"] = vNameField;
             subject["pNameField"] = pNameField;
             subject["healthBar"] = healthBar;
@@ -204,12 +212,28 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
                 delete healthBar;
             }
 
-            if (bgShadow)
+            if (hp_mc)
             {
-                bgShadow.stop();
-                bgShadow._visible = false;
-                bgShadow.removeMovieClip();
-                delete bgShadow;
+                hp_mc.stop();
+                hp_mc._visible = false;
+                hp_mc.removeMovieClip();
+                delete hp_mc;
+            }
+
+            if (hitLbl)
+            {
+                hitLbl.stop();
+                hitLbl._visible = false;
+                hitLbl.removeMovieClip();
+                delete hitLbl;
+            }
+
+            if (hp_mc)
+            {
+                hp_mc.stop();
+                hp_mc._visible = false;
+                hp_mc.removeMovieClip();
+                delete hp_mc;
             }
         }
     }
@@ -220,7 +244,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      */
     private function processPendingCalls():Void
     {
-        trace("processPendingCalls()");
+        //trace("processPendingCalls()");
 
         // Calls order is important
         var len = pendingCalls.length;
@@ -240,8 +264,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      */
     private function call(func:String, args:Array):Void
     {
-        if (func != "showExInfo")
-            trace("call(): " + func + (args ? " [" + args.join(", ") + "]" : ""));
+        //if (func != "showExInfo")
+        //    trace("call(): " + func + (args ? " [" + args.join(", ") + "]" : ""));
 
         if (subject != null)
             subject[func].apply(subject, args);

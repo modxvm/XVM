@@ -41,6 +41,9 @@ import wot.VehicleMarkersManager.VehicleStateProxy;
 
 class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.VehicleMarkersManager.IVehicleMarker
 {
+    // dummy var to avoid import warning
+    private static var __dummy = Logger.dummy;
+
     var _proxy:VehicleMarkerProxy;
 
     static var s_showExInfo;
@@ -111,7 +114,7 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
     function init(vClass, vIconSource, vType, vLevel, pFullName,
         curHealth, maxHealth, entityName, speaking, hunt, entityType)
     {
-        Logger.add("init for " + entityName + entityType);
+        //Logger.add("init for " + entityName + " " + entityType);
 
         // Use currently remembered extended / normal status for new markers
         m_showExInfo = s_showExInfo; //false
