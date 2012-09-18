@@ -15,7 +15,7 @@ class wot.VehicleMarkersManager.components.LevelIconProxy extends AbstractAccess
     
     public function get levelIcon():MovieClip
     {
-        return xvm._proxy.levelIcon;
+        return xvm.proxy.levelIcon;
     }
     
     public function get level():Number

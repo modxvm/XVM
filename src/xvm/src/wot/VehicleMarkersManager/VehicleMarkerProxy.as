@@ -158,6 +158,18 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     }
 
     // override MovieClip
+    // TODO: Check performance
+    function onEnterFrame():Void
+    {
+        if (subject == null)
+            return;
+
+        var mc:MovieClip = MovieClip(subject);
+        if (mc.hasOwnProperty("onEnterFrame"))
+            mc.onEnterFrame();
+    }
+
+    // override MovieClip
     function gotoAndStop(frame:Object):Void
     {
         super.gotoAndStop(frame);

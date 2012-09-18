@@ -44,9 +44,21 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
     // dummy var to avoid import warning
     private static var __dummy = Logger.dummy;
 
-    var _proxy:VehicleMarkerProxy;
+    private function trace(str:String):Void
+    {
+        //if (m_playerFullName == "dosik_dai")
+        Logger.add(m_playerFullName + "> " + str);
+    }
+    
+    // Level in roman numerals
+    private static var rlevel: Array = [ "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" ];
 
-    static var s_showExInfo;
+    // Private static members
+    private static var s_showExInfo:Boolean = false; // Saved "Extended Info State" for markers that appeared when Alt pressed.
+    private static var s_blowedUp: Array = []; // List of members that was ammoracked.
+    private static var s_isColorBlindMode = false;
+
+    // Private members
     var m_entityName;
     var m_playerFullName;
     var m_curHealth;
@@ -61,6 +73,17 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
     var m_markerLabel;
     var m_entityType;
 
+    // Private members
+    var m_showExInfo: Boolean;
+    var m_currentHealth: Number;
+    var m_showMaxHealth: Boolean;
+    var m_team: String; // TODO: is the same as m_entityType?
+    var m_isDead: Boolean;
+    var m_clanIcon: UILoaderAlt;
+    var m_iconset: IconLoader;
+    var m_contourIconLoaded:Boolean;
+    var m_defaultIconSource: String;
+
     // UI Elements
     var damageHolder: MovieClip;
     var xvmHB: MovieClip;
@@ -68,23 +91,10 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
     var xvmHBFill: MovieClip;
     var xvmHBDamage: MovieClip;
 
-    // Private static members
-    static var s_blowedUp: Array = [];
-    static var s_isColorBlindMode = false;
-
-    // Private members
-    var m_showExInfo: Boolean;
-    var m_currentHealth: Number;
-    var m_showMaxHealth: Boolean;
-    var m_team: String;
-    var m_isDead: Boolean;
-    var m_clanIcon: UILoaderAlt;
-    var m_iconset: IconLoader;
-    var m_defaultIconSource: String;
-
     // TextFields
     var textFields: Object;
 
+    // UI Components
     var levelIconComponent: LevelIconComponent;
     var turretStatusComponent: TurretStatusComponent;
 
@@ -93,34 +103,47 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
     // Healthbar Settings
     var hbCfg: Object;
 
-    // Level in roman numerals
-    private static var rlevel: Array = [ "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" ];
-
+    // Parent proxy instance (assigned from proxy)
+    private var _proxy:VehicleMarkerProxy;
+    public function get proxy() { return _proxy; }
+    
+    /**
+     * .ctor()
+     * @param	proxy Parent proxy class (for placing UI Components)
+     * @param	entityName Marker type (ally, enemy)
+     */
     function XVM(proxy:VehicleMarkerProxy, entityName:String)
     {
         super(); // gfx.core.UIComponent
         _proxy = proxy;
         m_entityName = m_team = entityName;
+        m_contourIconLoaded = false;
         Utils.TraceXvmModule("XVM");
     }
 
-    // override
+    // override MovieClip
     function gotoAndStop(frame:Object)
     {
-        //Logger.add(this["m_playerFullName"] + ": gotoAndStop(" + frame + ")");
-        _proxy.gotoAndStop(frame);
+        //trace(this["m_playerFullName"] + ": gotoAndStop(" + frame + ")");
+        proxy.gotoAndStop(frame);
     }
 
+    /**
+     * IVehicleMarker implementation
+     */
+    
+    // IVehicleMarker.init()
     function init(vClass, vIconSource, vType, vLevel, pFullName,
         curHealth, maxHealth, entityName, speaking, hunt, entityType)
     {
-        //Logger.add("init for " + entityName + " " + entityType);
+        //trace("init for " + entityName + " " + entityType);
 
         // Use currently remembered extended / normal status for new markers
-        m_showExInfo = s_showExInfo; //false
+        m_showExInfo = s_showExInfo;
+
         m_defaultIconSource = vIconSource; // ../maps/icons/vehicle/contour/usa-M48A1.png
-        m_source            = vIconSource;
-        m_entityName = entityName; // ally, enemy
+        m_source = vIconSource;
+        m_entityName = entityName; // ally, enemy, squadman, (teamkiller?)
         m_entityType = entityType; // ally, enemy
         m_playerFullName = pFullName; // alex
         m_maxHealth = maxHealth;
@@ -138,7 +161,7 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         // initMarkerLabel() handles color blind mode, squad and team killer.
         initMarkerLabel();
 
-        setupIconLoader();
+        setupContourIconLoader();
 
         levelIconComponent = new LevelIconComponent(new LevelIconProxy(this));
         turretStatusComponent = new TurretStatusComponent(new TurretStatusProxy(this));
@@ -149,20 +172,19 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
             setVehicleClass();
 
         if (m_markerState != null)
-            _proxy.marker.gotoAndPlay(m_markerState);
+            proxy.marker.gotoAndPlay(m_markerState);
 
-        XVMPopulateData();
-        XVMSetupNewHealth(m_curHealth);
-        
-        xvmHB = _proxy.createEmptyMovieClip("xvmHB", _proxy.marker.getDepth() - 1); // Put health Bar to back.
+        xvmHB = proxy.createEmptyMovieClip("xvmHB", proxy.marker.getDepth() - 1); // Put health Bar to back.
         xvmHBBorder = xvmHB.createEmptyMovieClip("border", 1);
         xvmHBDamage = xvmHB.createEmptyMovieClip("damage", 2);
         xvmHBFill = xvmHB.createEmptyMovieClip("fill", 3);
 
-        damageHolder = _proxy.createEmptyMovieClip("damageHolder", _proxy.getNextHighestDepth());
+        damageHolder = proxy.createEmptyMovieClip("damageHolder", proxy.getNextHighestDepth());
+
+        XVMSetupNewHealth(m_curHealth);
+        XVMInit();
 
         // Load stat
-        XVMInit();
         if (Config.s_config.rating.showPlayersStatistics && !StatData.s_loaded)
         {
             GlobalEventDispatcher.addEventListener("stat_loaded", this, XVMInit);
@@ -173,7 +195,7 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
     function XVMInit(event)
     {
         //ErrorHandler.setText("XVMStatLoaded()" + (event ? ": event=" + event.type : ""));
-        trace("XVM::XVMInit()" + (event ? ": event=" + event.type : ""));
+        //trace("XVM::XVMInit()" + (event ? ": event=" + event.type : ""));
         if (event)
           GlobalEventDispatcher.removeEventListener("stat_loaded", this, XVMInit);
         XVMPopulateData();
@@ -181,6 +203,91 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         XVMUpdateStyle();
     }
 
+    /**
+     * Contour icon
+     * @see init
+     */
+    function setupContourIconLoader()
+    {
+        //trace("XVM::setupContourIconLoader()");
+        m_contourIconLoaded = false;
+
+        if (proxy.iconLoader == null || !proxy.iconLoader.initialized)
+        {
+            ErrorHandler.setText("INTERNAL ERROR: setupContourIconLoader(): proxy.iconLoader not initialized");
+            return;
+        }
+        
+        // Alternative icon set
+        if (!m_iconset)
+        {
+            m_iconset = new IconLoader(this, completeLoadContourIcon);
+            m_iconset.init(proxy.iconLoader,
+                [ m_source.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.vehicleMarker), m_source ]);
+        }
+
+        proxy.iconLoader.source = m_iconset.currentIcon;
+    }
+
+    /**
+     * Callback function called when contour icon is loaded
+     */
+    function completeLoadContourIcon()
+    {
+        //trace("XVM::completeLoadContourIcon()");
+        proxy.iconLoader._visible = false;
+        this.onEnterFrame = function()
+        {
+            delete this.onEnterFrame;
+            this.m_contourIconLoaded = true;
+            this.updateContourIcon(this.vehicleState.getCurrentStateConfigRoot());
+        }
+    }
+
+    /**
+     * Update contour icon state
+     * @param	state_cfg Current state config section
+     * @see	completeLoadContourIcon
+     * @see	XVMUpdateStyle
+     */
+    function updateContourIcon(state_cfg)
+    {
+        if (!m_contourIconLoaded)
+            return;
+
+        //trace("XVM::updateContourIcon()");
+
+        try
+        {
+            var cfg = state_cfg.contourIcon;
+            if (cfg.amount >= 0)
+            {
+                // TODO: Check performance, not necessary to execute every marker update
+                var tintColor: Number = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.color), m_curHealth);
+                var tintAmount: Number = Math.min(100, Math.max(0, cfg.amount)) * 0.01;
+                GraphicsUtil.setColor(proxy.iconLoader, tintColor, tintAmount);
+            }
+
+            visible = cfg.visible;
+            if (visible)
+            {
+                proxy.iconLoader._x = cfg.x - (proxy.iconLoader.contentHolder._width / 2.0);
+                proxy.iconLoader._y = cfg.y - (proxy.iconLoader.contentHolder._height / 2.0);
+                proxy.iconLoader._alpha = XVMFormatDynamicAlpha(cfg.alpha, m_curHealth);
+            }
+            proxy.iconLoader._visible = visible;
+        }
+        catch (e)
+        {
+            ErrorHandler.setText("ERROR: updateContourIcon():" + String(e));
+        }
+    }
+
+
+    // CODE BELOW IS NOT CHECKED
+    
+    
+    
     function update()
     {
         this.updateMarkerLabel();
@@ -188,7 +295,7 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
 
     function updateMarkerSettings()
     {
-        trace("XVM::updateMarkerSettings()");
+        //trace("XVM::updateMarkerSettings()");
         // do nothing
         // We don't use in-game settings. Yet.
     }
@@ -200,13 +307,13 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
 
     function setSpeaking(value)
     {
-        trace("XVM::setSpeaking()");
+        //trace("XVM::setSpeaking()");
         if (m_speaking == value)
             return;
         m_speaking = value;
         if (initialized)
             this.setVehicleClass();
-        if (_proxy.marker._visible != m_speaking)
+        if (proxy.marker._visible != m_speaking)
             XVMUpdateStyle();
     }
 
@@ -221,7 +328,7 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
                     this.setVehicleClass();
             }
             this.updateMarkerSettings();
-            _proxy.marker.gotoAndPlay(m_markerState);
+            proxy.marker.gotoAndPlay(m_markerState);
         }
     }
 
@@ -235,7 +342,7 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
 
     function updateHealth(curHealth, flag, damageType) // TODO: use flag and damageType
     {
-        trace("XVM::updateHealth()");
+        //trace("XVM::updateHealth()");
         if (curHealth < 0)
             s_blowedUp.push(m_playerFullName);
         m_isDead = curHealth <= 0;
@@ -247,7 +354,7 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
     // override
     function updateState(newState, isImmediate)
     {
-        trace("XVM::updateState()");
+        //trace("XVM::updateState()");
         //Logger.add("updateState(): " + vehicleState.getCurrent() + " markerState=" + m_markerState + " pname=" + m_playerFullName);
         if (this.vehicleDestroyed)
             return;
@@ -274,46 +381,30 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
 
     function showActionMarker(actionState)
     {
-        _proxy.actionMarker.showAction(actionState);
+        proxy.actionMarker.showAction(actionState);
     }
 
     /**
      * VehicleMarker overrides
      */
-    function setupIconLoader()
-    {
-       /* Called by
-        * populateData()
-        * XVMpopulateData()
-        */
-        trace("XVM::setupIconLoader()");
-
-        // Alternative icon set
-        if (!m_iconset)
-            m_iconset = new IconLoader(this, completeLoad);
-        m_iconset.init(_proxy.iconLoader,
-            [ m_source.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.vehicleMarker), m_source ]);
-        _proxy.iconLoader.source = m_iconset.currentIcon;
-    }
-
     function setVehicleClass()
     {
-        if (_proxy.marker.marker.iconHunt != null)
+        if (proxy.marker.marker.iconHunt != null)
         {
-            _proxy.marker.marker.icon._visible = !m_hunt;
-            _proxy.marker.marker.iconHunt._visible = m_hunt;
+            proxy.marker.marker.icon._visible = !m_hunt;
+            proxy.marker.marker.iconHunt._visible = m_hunt;
             if (m_hunt)
-                _proxy.marker.marker.iconHunt.gotoAndStop(this._getVehicleClassName());
+                proxy.marker.marker.iconHunt.gotoAndStop(this._getVehicleClassName());
             else
-                _proxy.marker.marker.icon.gotoAndStop(this._getVehicleClassName());
+                proxy.marker.marker.icon.gotoAndStop(this._getVehicleClassName());
         }
         else
-            _proxy.marker.marker.icon.gotoAndStop(this._getVehicleClassName());
+            proxy.marker.marker.icon.gotoAndStop(this._getVehicleClassName());
     }
 
     function initMarkerLabel()
     {
-        trace("XVM::initMarkerLabel()");
+        //trace("XVM::initMarkerLabel()");
 
         m_markerLabel = XVMGetMarkerColorAlias();
         this.gotoAndStop(m_markerLabel);
@@ -324,7 +415,7 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
 
     function updateMarkerLabel()
     {
-        trace("XVM::updateMarkerLabel()");
+        //trace("XVM::updateMarkerLabel()");
         //Logger.add("updateMarkerLabel(): " + vehicleState.getCurrent() + " markerLabel=" + m_markerLabel + " pname=" + m_playerFullName);
 
         var aliasColor = XVMGetMarkerColorAlias();
@@ -341,13 +432,11 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         {
             if (this.vehicleDestroyed)
                 m_markerState = "immediate_dead";
-            _proxy.marker.gotoAndPlay(m_markerState);
+            proxy.marker.gotoAndPlay(m_markerState);
         }
         this.updateMarkerSettings();
 
         XVMUpdateMarkerLabel();
-
-        XVMIconCompleteLoad();
 
         // Update layout for the current marker state
         XVMUpdateStyle();
@@ -361,16 +450,6 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
     /**
     * MAIN
     */
-
-    function completeLoad()
-    {
-        _proxy.iconLoader._visible = false;
-        onEnterFrame = function()
-        {
-            delete this.onEnterFrame;
-            this.XVMIconCompleteLoad();
-        };
-    }
 
     // VehicleMarkerAlly should contain 4 named frames:
     // - green - normal ally
@@ -582,9 +661,9 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
     {
         try
         {
-            var n = _proxy.getNextHighestDepth();
-            var textField: TextField = _proxy.createTextField("textField" + n, n, 0, 0, 140, 31);
-//            var textField: TextField = _proxy.createTextField("textField" + n, n, 0, 0, 140 + 1, cfg.font.size + 4 + 1); // +1 because of ScaleForm bug
+            var n = proxy.getNextHighestDepth();
+            var textField: TextField = proxy.createTextField("textField" + n, n, 0, 0, 140, 31);
+//            var textField: TextField = proxy.createTextField("textField" + n, n, 0, 0, 140 + 1, cfg.font.size + 4 + 1); // +1 because of ScaleForm bug
             textField.html = false; // FIXIT: in html mode Font and Position are wrong.
             textField.embedFonts = false;
             textField.selectable = false;
@@ -776,28 +855,6 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
         }
     }
 
-    function XVMIconCompleteLoad(event)
-    {
-        try
-        {
-            // Vehicle Icon
-            var cfg = vehicleState.getCurrentStateConfigRootNormal().contourIcon;
-
-            if (cfg.amount >= 0)
-            {
-                var tintColor: Number = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.color), m_curHealth);
-                var tintAmount: Number = Math.min(100, Math.max(0, cfg.amount)) * 0.01;
-                GraphicsUtil.setColor(_proxy.iconLoader, tintColor, tintAmount);
-            }
-
-            XVMUpdateStyle();
-        }
-        catch (e)
-        {
-            ErrorHandler.setText("ERROR: XVMIconCompleteLoad():" + String(e));
-        }
-    }
-
     function XVMDrawHealthBar(cfg)
     {
         xvmHB.clear();
@@ -820,7 +877,7 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
 
     function XVMInitializeTextFields()
     {
-        trace("XVM::XVMInitializeTextFields()");
+        //trace("XVM::XVMInitializeTextFields()");
         try
         {
             // cleanup
@@ -870,7 +927,7 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
     function XVMInitializeClanIcon(cfg)
     {
         if (m_clanIcon == null)
-            m_clanIcon = PlayerInfo.createIcon(_proxy, cfg, cfg.x - (cfg.w / 2.0), cfg.y - (cfg.h / 2.0), Defines.TEAM_ALLY);
+            m_clanIcon = PlayerInfo.createIcon(proxy, cfg, cfg.x - (cfg.w / 2.0), cfg.y - (cfg.h / 2.0), Defines.TEAM_ALLY);
         PlayerInfo.setSource(m_clanIcon, Utils.GetPlayerName(m_playerFullName), Utils.GetClanName(m_playerFullName));
     }
 
@@ -882,10 +939,6 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
             var start = new Date();
 
             var cfg = vehicleState.getCurrentStateConfigRootNormal();
-
-            // Vehicle Type Icon
-            if (_proxy.iconLoader != null && _proxy.iconLoader.initialized)
-                setupIconLoader();
 
             // Health Bar
             XVMDrawHealthBar(cfg.healthBar);
@@ -904,9 +957,9 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
 
     function XVMUpdateStyle()
     {
+        //trace("XVMUpdateStyle: " + m_playerFullName + m_vname + " " + " scale=" + proxy.marker._xscale);
         try
         {
-            trace("XVMUpdateStyle: " + m_playerFullName + m_vname + " " + " scale=" + _proxy.marker._xscale);
             var start = new Date();
 
             var cfg = vehicleState.getCurrentStateConfigRoot();
@@ -921,12 +974,12 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
                 //var systemColor = XVMGetSystemColor();
                 var x = cfg.vehicleIcon.scaleX * cfg.vehicleIcon.maxScale / 100;
                 var y = cfg.vehicleIcon.scaleY * cfg.vehicleIcon.maxScale / 100;
-                for (var childName in _proxy.marker.marker)
+                for (var childName in proxy.marker.marker)
                 {
                     //if (childName == "marker_shadow")
                     //  return;
 
-                    var icon: MovieClip = _proxy.marker.marker[childName];
+                    var icon: MovieClip = proxy.marker.marker[childName];
                     icon._x = x;
                     icon._y = y;
                     icon._xscale = icon._yscale = cfg.vehicleIcon.maxScale;
@@ -937,11 +990,11 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
                     //GraphicsUtil.setColor(icon, systemColor);
                 }
 
-                _proxy.marker._x = cfg.vehicleIcon.x;
-                _proxy.marker._y = cfg.vehicleIcon.y;
-                _proxy.marker._alpha = XVMFormatDynamicAlpha(cfg.vehicleIcon.alpha, m_curHealth);
+                proxy.marker._x = cfg.vehicleIcon.x;
+                proxy.marker._y = cfg.vehicleIcon.y;
+                proxy.marker._alpha = XVMFormatDynamicAlpha(cfg.vehicleIcon.alpha, m_curHealth);
             }
-            _proxy.marker._visible = visible;
+            proxy.marker._visible = visible;
 
             // Level Icon
             levelIconComponent.updateState(cfg);
@@ -950,24 +1003,13 @@ class wot.VehicleMarkersManager.XVM extends gfx.core.UIComponent implements wot.
             visible = cfg.actionMarker.visible;
             if (visible)
             {
-                _proxy.actionMarker._x = cfg.actionMarker.x;
-                _proxy.actionMarker._y = cfg.actionMarker.y;
+                proxy.actionMarker._x = cfg.actionMarker.x;
+                proxy.actionMarker._y = cfg.actionMarker.y;
             }
-            _proxy.actionMarker._visible = visible;
+            proxy.actionMarker._visible = visible;
 
-            // Vehicle Icon
-            if (_proxy.iconLoader != null && _proxy.iconLoader.initialized)
-            {
-                visible = cfg.contourIcon.visible;
-                if (visible)
-                {
-                    _proxy.iconLoader._x = cfg.contourIcon.x - (_proxy.iconLoader.contentHolder._width / 2.0);
-                    _proxy.iconLoader._y = cfg.contourIcon.y - (_proxy.iconLoader.contentHolder._height / 2.0);
-                    _proxy.iconLoader._alpha = XVMFormatDynamicAlpha(cfg.contourIcon.alpha, m_curHealth);
-                }
-                _proxy.iconLoader._visible = visible;
-            }
-
+            updateContourIcon(cfg);
+            
             // Clan Icon
             if (m_clanIcon != null && m_clanIcon.source != "")
             {
