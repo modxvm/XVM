@@ -1,7 +1,7 @@
 #!/bin/sh
 
-[ "$GAME_VER" = "" ] && GAME_VER="0.7.5"
-[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/home/games/WoT
+[ "$GAME_VER" = "" ] && GAME_VER="0.8.0 Common Test"
+[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/home/games/WoT-CT
 
 FILES="
   libxvm.swf
@@ -28,7 +28,7 @@ copy_file()
   [ -f "$SWF_DIR/$1" ] && rm -f "$SWF_DIR/$1"
   [ -f "../bin/$1" ] && {
     echo "=> $1"
-    cp ../bin/$1 "$SWF_DIR/${1##*/}"
+    cp -p ../bin/$1 "$SWF_DIR/${1##*/}"
   }
 }
 
