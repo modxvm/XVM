@@ -28,6 +28,6 @@ class wot.VehicleMarkersManager.components.LevelIconComponent
         proxy.levelIcon._y = cfg.levelIcon.y;
         
         //TODO: extract XVMFormatDynamicAlpha
-        proxy.levelIcon._alpha = proxy.XVMFormatDynamicAlpha(cfg.levelIcon.alpha);
+        proxy.levelIcon._alpha = proxy.formatDynamicAlpha(cfg.levelIcon.alpha);
     }
 }

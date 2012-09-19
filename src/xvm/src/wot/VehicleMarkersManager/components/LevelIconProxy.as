@@ -1,5 +1,5 @@
 import wot.VehicleMarkersManager.AbstractAccessProxy;
-import wot.VehicleMarkersManager.XVM;
+import wot.VehicleMarkersManager.Xvm;
 
 class wot.VehicleMarkersManager.components.LevelIconProxy extends AbstractAccessProxy
 {
@@ -8,7 +8,7 @@ class wot.VehicleMarkersManager.components.LevelIconProxy extends AbstractAccess
     * access restriction to wot.VehicleMarkersManager.XVM
     */
    
-    public function LevelIconProxy(xvm:XVM) 
+    public function LevelIconProxy(xvm:Xvm) 
     {
         super(xvm);
     }
@@ -21,10 +21,5 @@ class wot.VehicleMarkersManager.components.LevelIconProxy extends AbstractAccess
     public function get level():Number
     {
         return xvm.m_level;
-    }
-    
-    public function XVMFormatDynamicAlpha(format: String): Number
-    {
-        return xvm.XVMFormatDynamicAlpha(format, xvm.m_curHealth);
     }
 }

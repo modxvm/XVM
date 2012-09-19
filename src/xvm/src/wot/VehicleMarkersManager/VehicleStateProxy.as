@@ -1,14 +1,14 @@
 import wot.VehicleMarkersManager.AbstractAccessProxy;
-import wot.VehicleMarkersManager.XVM;
+import wot.VehicleMarkersManager.Xvm;
 //import wot.utils.Logger;
 
 class wot.VehicleMarkersManager.VehicleStateProxy extends AbstractAccessProxy
 {
    /* This proxy class is only for VehicleState
-    * access restriction to wot.VehicleMarkersManager.XVM
+    * access restriction to wot.VehicleMarkersManager.Xvm
     */
    
-    public function VehicleStateProxy(xvm:XVM) 
+    public function VehicleStateProxy(xvm:Xvm) 
     {
         super(xvm);
     }

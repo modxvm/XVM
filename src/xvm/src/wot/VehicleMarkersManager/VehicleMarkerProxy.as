@@ -149,7 +149,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         else
         {
             // Create XVM marker
-            subject = new wot.VehicleMarkersManager.XVM(this, m_entityName);
+            subject = new wot.VehicleMarkersManager.Xvm(this, m_entityName);
         }
 
         // Invoke all deferred method calls while config was loading
@@ -165,7 +165,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
             return;
 
         var mc:MovieClip = MovieClip(subject);
-        if (mc.hasOwnProperty("onEnterFrame"))
+        if (mc.onEnterFrame != null)
             mc.onEnterFrame();
     }
 

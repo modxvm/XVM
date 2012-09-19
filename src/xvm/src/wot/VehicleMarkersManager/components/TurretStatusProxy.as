@@ -1,5 +1,5 @@
 import wot.VehicleMarkersManager.AbstractAccessProxy;
-import wot.VehicleMarkersManager.XVM;
+import wot.VehicleMarkersManager.Xvm;
 import wot.VehicleMarkersManager.components.TurretStatusDatabase;
 import wot.utils.VehicleInfo;
 
@@ -10,7 +10,7 @@ class wot.VehicleMarkersManager.components.TurretStatusProxy extends AbstractAcc
     * Queries TurretStatusDatabase.
     */
    
-    public function TurretStatusProxy(xvm:XVM) 
+    public function TurretStatusProxy(xvm:Xvm) 
     {
         super(xvm);
     }
