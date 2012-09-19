@@ -7,6 +7,7 @@
 	Stock turret can have weaker armor, lower sight distance or slower rotation speed.
 	Besides that, tank with stock turret can have weaker crew experience.
   * separate settings for all elements in all states
+  * adaptation to WoT 0.8.0.test3
 
 XVM-2.5.2:
   * clan icons was reworked. Now config have only one parameter:

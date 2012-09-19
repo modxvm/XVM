@@ -318,15 +318,15 @@ class wot.utils.DefaultConfig
     return a;
   }
 
-  public static function get shadow_100(): Object
+  public static function get shadow_150(): Object
   {
     return {
       alpha: 100,
       color: "0x000000",
-      angle: 45,
-      distance: 1,
-      size: 2,
-      strength: 100
+      angle: 90,
+      distance: 0,
+      size: 4,
+      strength: 150
     }
   }
 
@@ -335,22 +335,10 @@ class wot.utils.DefaultConfig
     return {
       alpha: 100,
       color: "0x000000",
-      angle: 45,
-      distance: 1,
-      size: 2,
+      angle: 90,
+      distance: 0,
+      size: 6,
       strength: 200
-    }
-  }
-
-  public static function get shadow_250(): Object
-  {
-    return {
-      alpha: 100,
-      color: "0x000000",
-      angle: 45,
-      distance: 1,
-      size: 2,
-      strength: 250
     }
   }
 
@@ -365,13 +353,13 @@ class wot.utils.DefaultConfig
     }
   }
 
-  public static function get font_12b(): Object
+  public static function get font_12(): Object
   {
     return {
       name: "$FieldFont",
       size: 12,
       align: "center",
-      bold: true,
+      bold: false,
       italic: false
     }
   }
@@ -383,17 +371,6 @@ class wot.utils.DefaultConfig
       size: 13,
       align: "center",
       bold: false,
-      italic: false
-    }
-  }
-
-  public static function get font_13b(): Object
-  {
-    return {
-      name: "$FieldFont",
-      size: 13,
-      align: "center",
-      bold: true,
       italic: false
     }
   }
@@ -422,7 +399,7 @@ class wot.utils.DefaultConfig
       maxScale: 100,
       scaleX: 0,
       scaleY: 16,
-      shadow: shadow_250
+      shadow: shadow_200
     }
   }
 
@@ -471,7 +448,7 @@ class wot.utils.DefaultConfig
       alpha: 100,
       color: null,
       font: font_14b,
-      shadow: shadow_250,
+      shadow: shadow_200,
       speed: 2,
       maxRange: 40,
       damageMessage: "{{dmg}}",
@@ -604,7 +581,7 @@ class wot.utils.DefaultConfig
       alpha: 100,
       color: "0xFFFFFF",
       font: font_11b,
-      shadow: shadow_100,
+      shadow: shadow_150,
       format: "{{hp}} / {{hp-max}}"
     }
   }
@@ -620,7 +597,7 @@ class wot.utils.DefaultConfig
       alpha: 100,
       color: "0xFFFFFF",
       font: font_11b,
-      shadow: shadow_100,
+      shadow: shadow_150,
       format: "{{hp-ratio}}%"
     }
   }
@@ -635,7 +612,7 @@ class wot.utils.DefaultConfig
       y: -46,
       alpha: 75,
       color: "{{c:eff}}",
-      font: font_12b,
+      font: font_12,
       shadow: shadow_200,
       format: "{{rating}}"
     }

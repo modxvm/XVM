@@ -13,9 +13,9 @@
     "author": "sirmax2",                        // Config author
     "description": "Default settings for XVM",  // Config description
     "url": "http://code.google.com/p/wot-xvm/", // Address to config updates
-    "date": "31.07.2012",                       // Config last modified
-    "gameVersion": "0.7.5",                     // Supported version of the game
-    "modMinVersion": "2.5.2"                    // The minimum required version of the XVM mod
+    "date": "20.09.2012",                       // Config last modified
+    "gameVersion": "0.8.0",                     // Supported version of the game
+    "modMinVersion": "3.0.0"                    // The minimum required version of the XVM mod
   },
   // General parameters for the battle interface
   "battle": {
@@ -122,9 +122,9 @@
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
               "angle": 45,                    //     Offset angle
-              "distance": 1,                  //     Offset distance
-              "size": 2,                      //     Size
-              "strength": 250                 //     Intensity
+              "distance": 0,                  //     Offset distance
+              "size": 6,                      //     Size
+              "strength": 200                 //     Intensity
             }
           },
           "healthBar": {                      // Health indicator
@@ -167,9 +167,9 @@
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
               "angle": 45,                    //     Offset angle
-              "distance": 1,                  //     Offset distance
-              "size": 2,                      //     Size
-              "strength": 250                 //     Intensity
+              "distance": 0,                  //     Offset distance
+              "size": 6,                      //     Size
+              "strength": 200                 //     Intensity
             },
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
@@ -224,9 +224,9 @@
                 "alpha": 100,                 //   Opacity
                 "color": "0x000000",          //   Color
                 "angle": 45,                  //   Offset angle
-                "distance": 1,                //   Offset distance
-                "size": 2,                    //   Size
-                "strength": 200               //   Intensity
+                "distance": 0,                //     Offset distance
+                "size": 6,                    //     Size
+                "strength": 200               //     Intensity
               },
               "format": "{{vehicle}}"         // Text format (see description of macros in the readme-en.txt)
             },
@@ -248,8 +248,8 @@
                 "alpha": 100,                 //   Opacity
                 "color": "0x000000",          //   Color
                 "angle": 45,                  //   Offset angle
-                "distance": 1,                //   Offset distance
-                "size": 2,                    //   Size
+                "distance": 0,                //   Offset distance
+                "size": 4,                    //   Size
                 "strength": 100               //   Intensity
               },
               "format": "{{hp}} / {{hp-max}}" // Text format (see description of macros in the readme-en.txt)
@@ -272,9 +272,9 @@
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
               "angle": 45,                    //     Offset angle
-              "distance": 1,                  //     Offset distance
-              "size": 2,                      //     Size
-              "strength": 250                 //     Intensity
+              "distance": 0,                  //     Offset distance
+              "size": 6,                      //     Size
+              "strength": 200                 //     Intensity
             }
           },
           "healthBar": {                      // Health indicator
@@ -317,9 +317,9 @@
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
               "angle": 45,                    //     Offset angle
-              "distance": 1,                  //     Offset distance
-              "size": 2,                      //     Size
-              "strength": 250                 //     Intensity
+              "distance": 0,                  //     Offset distance
+              "size": 6,                      //     Size
+              "strength": 200                 //     Intensity
             },
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
@@ -374,8 +374,8 @@
                 "alpha": 100,                 //   Opacity
                 "color": "0x000000",          //   Color
                 "angle": 45,                  //   Offset angle
-                "distance": 1,                //   Offset distance
-                "size": 2,                    //   Size
+                "distance": 0,                //   Offset distance
+                "size": 6,                    //   Size
                 "strength": 200               //   Intensity
               },
               "format": "{{nick}}"            // Text format (see description of macros in the readme-en.txt)
@@ -398,8 +398,8 @@
                 "alpha": 100,                 //   Opacity
                 "color": "0x000000",          //   Color
                 "angle": 45,                  //   Offset angle
-                "distance": 1,                //   Offset distance
-                "size": 2,                    //   Size
+                "distance": 0,                //   Offset distance
+                "size": 4,                    //   Size
                 "strength": 100               //   Intensity
               },
               // Percent symbol - \u0025
@@ -424,8 +424,8 @@
                 "alpha": 100,
                 "color": "0x000000",
                 "angle": 45,
-                "distance": 1,
-                "size": 2,
+                "distance": 0,
+                "size": 6,
                 "strength": 200
               },
               "format": "{{rating}}"
@@ -451,9 +451,9 @@
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
               "angle": 45,                    //     Offset angle
-              "distance": 1,                  //     Offset distance
-              "size": 2,                      //     Size
-              "strength": 250                 //     Intensity
+              "distance": 0,                  //     Offset distance
+              "size": 6,                      //     Size
+              "strength": 200                 //     Intensity
             }
           },
           "healthBar": {                      // Health indicator
@@ -496,9 +496,9 @@
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
               "angle": 45,                    //     Offset angle
-              "distance": 1,                  //     Offset distance
-              "size": 2,                      //     Size
-              "strength": 250                 //     Intensity
+              "distance": 0,                  //     Offset distance
+              "size": 6,                      //     Size
+              "strength": 200                 //     Intensity
             },
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
@@ -552,9 +552,9 @@
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
               "angle": 45,                    //     Offset angle
-              "distance": 1,                  //     Offset distance
-              "size": 2,                      //     Size
-              "strength": 250                 //     Intensity
+              "distance": 0,                  //     Offset distance
+              "size": 6,                      //     Size
+              "strength": 200                 //     Intensity
             }
           },
           "healthBar": {                      // Health indicator
@@ -597,9 +597,9 @@
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
               "angle": 45,                    //     Offset angle
-              "distance": 1,                  //     Offset distance
-              "size": 2,                      //     Size
-              "strength": 250                 //     Intensity
+              "distance": 0,                  //     Offset distance
+              "size": 6,                      //     Size
+              "strength": 200                 //     Intensity
             },
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
@@ -654,8 +654,8 @@
                 "alpha": 100,                 //     Opacity
                 "color": "0x000000",          //     Color
                 "angle": 45,                  //     Offset angle
-                "distance": 1,                //     Offset distance
-                "size": 2,                    //     Size
+                "distance": 0,                //     Offset distance
+                "size": 6,                    //     Size
                 "strength": 200               //     Intensity
               },
               "format": "{{nick}}"            // Text format (see description of macros in the readme-en.txt)
@@ -678,8 +678,8 @@
                 "alpha": 100,                 //     Opacity
                 "color": "0x000000",          //     Color
                 "angle": 45,                  //     Offset angle
-                "distance": 1,                //     Offset distance
-                "size": 2,                    //     Size
+                "distance": 0,                //     Offset distance
+                "size": 6,                    //     Size
                 "strength": 200               //     Intensity
               },
               "format": "{{vehicle}}"         // Text format (see description of macros in the readme-en.txt)
@@ -708,9 +708,9 @@
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
               "angle": 45,                    //     Offset angle
-              "distance": 1,                  //     Offset distance
-              "size": 2,                      //     Size
-              "strength": 250                 //     Intensity
+              "distance": 0,                  //     Offset distance
+              "size": 6,                      //     Size
+              "strength": 200                 //     Intensity
             }
           },
           "healthBar": {                      // Health indicator
@@ -753,9 +753,9 @@
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
               "angle": 45,                    //     Offset angle
-              "distance": 1,                  //     Offset distance
-              "size": 2,                      //     Size
-              "strength": 250                 //     Intensity
+              "distance": 0,                  //     Offset distance
+              "size": 6,                      //     Size
+              "strength": 200                 //     Intensity
             },
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
@@ -810,8 +810,8 @@
                 "alpha": 100,                 //     Opacity
                 "color": "0x000000",          //     Color
                 "angle": 45,                  //     Offset angle
-                "distance": 1,                //     Offset distance
-                "size": 2,                    //     Size
+                "distance": 0,                //     Offset distance
+                "size": 6,                    //     Size
                 "strength": 200               //     Intensity
               },
               "format": "{{vehicle}}"         // Text format (see description of macros in the readme-en.txt)
@@ -834,8 +834,8 @@
                 "alpha": 100,                 //     Opacity
                 "color": "0x000000",          //     Color
                 "angle": 45,                  //     Offset angle
-                "distance": 1,                //     Offset distance
-                "size": 2,                    //     Size
+                "distance": 0,                //     Offset distance
+                "size": 4,                    //     Size
                 "strength": 100               //     Intensity
               },
               "format": "{{hp}} / {{hp-max}}" // Text format (see description of macros in the readme-en.txt)
@@ -858,9 +858,9 @@
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
               "angle": 45,                    //     Offset angle
-              "distance": 1,                  //     Offset distance
-              "size": 2,                      //     Size
-              "strength": 250                 //     Intensity
+              "distance": 0,                  //     Offset distance
+              "size": 6,                      //     Size
+              "strength": 200                 //     Intensity
             }
           },
           "healthBar": {                      // Health indicator
@@ -903,9 +903,9 @@
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
               "angle": 45,                    //     Offset angle
-              "distance": 1,                  //     Offset distance
-              "size": 2,                      //     Size
-              "strength": 250                 //     Intensity
+              "distance": 0,                  //     Offset distance
+              "size": 6,                      //     Size
+              "strength": 200                 //     Intensity
             },
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
@@ -960,8 +960,8 @@
                 "alpha": 100,                 //     Opacity
                 "color": "0x000000",          //     Color
                 "angle": 45,                  //     Offset angle
-                "distance": 1,                //     Offset distance
-                "size": 2,                    //     Size
+                "distance": 0,                //     Offset distance
+                "size": 6,                    //     Size
                 "strength": 200               //     Intensity
               },
               "format": "{{nick}}"            // Text format (see description of macros in the readme-en.txt)
@@ -984,8 +984,8 @@
                 "alpha": 100,                 //     Opacity
                 "color": "0x000000",          //     Color
                 "angle": 45,                  //     Offset angle
-                "distance": 1,                //     Offset distance
-                "size": 2,                    //     Size
+                "distance": 0,                //     Offset distance
+                "size": 4,                    //     Size
                 "strength": 100               //     Intensity
               },
               // Percent symbol - \u0025
@@ -1010,8 +1010,8 @@
                 "alpha": 100,
                 "color": "0x000000",
                 "angle": 45,
-                "distance": 1,
-                "size": 2,
+                "distance": 0,
+                "size": 6,
                 "strength": 200
               },
               "format": "{{rating}}"
@@ -1037,9 +1037,9 @@
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
               "angle": 45,                    //     Offset angle
-              "distance": 1,                  //     Offset distance
-              "size": 2,                      //     Size
-              "strength": 250                 //     Intensity
+              "distance": 0,                  //     Offset distance
+              "size": 6,                      //     Size
+              "strength": 200                 //     Intensity
             }
           },
           "healthBar": {                      // Health indicator
@@ -1082,9 +1082,9 @@
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
               "angle": 45,                    //     Offset angle
-              "distance": 1,                  //     Offset distance
-              "size": 2,                      //     Size
-              "strength": 250                 //     Intensity
+              "distance": 0,                  //     Offset distance
+              "size": 6,                      //     Size
+              "strength": 200                 //     Intensity
             },
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
@@ -1138,9 +1138,9 @@
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
               "angle": 45,                    //     Offset angle
-              "distance": 1,                  //     Offset distance
-              "size": 2,                      //     Size
-              "strength": 250                 //     Intensity
+              "distance": 0,                  //     Offset distance
+              "size": 6,                      //     Size
+              "strength": 200                 //     Intensity
             }
           },
           "healthBar": {                      // Health indicator
@@ -1183,9 +1183,9 @@
               "alpha": 100,                   //     Opacity
               "color": "0x000000",            //     Color
               "angle": 45,                    //     Offset angle
-              "distance": 1,                  //     Offset distance
-              "size": 2,                      //     Size
-              "strength": 250                 //     Intensity
+              "distance": 0,                  //     Offset distance
+              "size": 6,                      //     Size
+              "strength": 200                 //     Intensity
             },
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
@@ -1240,8 +1240,8 @@
                 "alpha": 100,                 //     Opacity
                 "color": "0x000000",          //     Color
                 "angle": 45,                  //     Offset angle
-                "distance": 1,                //     Offset distance
-                "size": 2,                    //     Size
+                "distance": 0,                //     Offset distance
+                "size": 6,                    //     Size
                 "strength": 200               //     Intensity
               },
               "format": "{{nick}}"            // Text format (see description of macros in the readme-en.txt)
@@ -1264,8 +1264,8 @@
                 "alpha": 100,                 //     Opacity
                 "color": "0x000000",          //     Color
                 "angle": 45,                  //     Offset angle
-                "distance": 1,                //     Offset distance
-                "size": 2,                    //     Size
+                "distance": 0,                //     Offset distance
+                "size": 6,                    //     Size
                 "strength": 200               //     Intensity
               },
               "format": "{{vehicle}}"         // Text format (see description of macros in the readme-en.txt)
