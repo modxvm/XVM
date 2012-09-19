@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="wot.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="Timeout" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">7000</Value>
-    </Setting>
     <Setting Name="ServerUnavailableTimeout" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5</Value>
     </Setting>
@@ -23,6 +20,9 @@
   &lt;string&gt;SEA	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC91Yy8/JTE=&lt;/string&gt;
   &lt;string&gt;VTC	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC91Yy8/JTE=&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="Timeout" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10000</Value>
     </Setting>
   </Settings>
 </SettingsFile>
