@@ -2,6 +2,7 @@
  * Helper class with various xvm-related static functions
  */
 import wot.utils.Config;
+import wot.VehicleMarkersManager.ErrorHandler;
 
 class wot.VehicleMarkersManager.XvmHelper
 {
@@ -20,7 +21,7 @@ class wot.VehicleMarkersManager.XvmHelper
      * @param	isColorBlindMode CB mode flag
      * @return	name of marker frame
      */
-    static public function getMarkerColorAlias(entityName, isColorBlindMode):String
+    public static function getMarkerColorAlias(entityName, isColorBlindMode):String
     {
         //if (m_entityName != "ally" && m_entityName != "enemy" && m_entityName != "squadman" && m_entityName != "teamKiller")
         //  Logger.add("m_entityName=" + m_entityName);
@@ -41,11 +42,39 @@ class wot.VehicleMarkersManager.XvmHelper
     /**
      * Get system color value for current state
      */
-    static public function getSystemColor(entityName:String, isDead:Boolean, isBlowedUp:Boolean, isColorBlindMode:Boolean):Number
+    public static function getSystemColor(entityName:String, isDead:Boolean, isBlowedUp:Boolean, isColorBlindMode:Boolean):Number
     {
         var systemColorName: String = entityName + "_";
         systemColorName += !isDead ? "alive_" : isBlowedUp ? "blowedup_" : "dead_";
         systemColorName += isColorBlindMode ? "blind" : "normal";
         return Config.s_config.colors.system[systemColorName];
+    }
+
+    /**
+     * Create TextFormat based on config
+     */
+    public static function createNewTextFormat(config_font: Object): TextFormat
+    {
+        try
+        {
+            if (!config_font)
+                return null;
+
+            return new TextFormat(
+                config_font.name || "$FieldFont",
+                config_font.size || 13,
+                0x000000,
+                config_font.bold,
+                config_font.italic,
+                false, null, null,
+                config_font.align || "center",
+                0, 0, 0, 0);
+        }
+        catch (e)
+        {
+            ErrorHandler.setText("ERROR: XVMCreateNewTextFormat():" + String(e));
+        }
+
+        return null;
     }
 }

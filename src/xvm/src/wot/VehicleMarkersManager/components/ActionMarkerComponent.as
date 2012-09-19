@@ -2,7 +2,7 @@ import wot.VehicleMarkersManager.components.ActionMarkerProxy;
 
 class wot.VehicleMarkersManager.components.ActionMarkerComponent
 {
-    private var proxy:ActionMarkerProxy
+    private var proxy:ActionMarkerProxy;
 
     public function ActionMarkerComponent(proxy:ActionMarkerProxy)
     {
@@ -25,7 +25,7 @@ class wot.VehicleMarkersManager.components.ActionMarkerComponent
     {
         proxy.actionMarker.showAction(actionState);
     }
-    
+
     private function draw(cfg:Object)
     {
         proxy.actionMarker._x = cfg.x;

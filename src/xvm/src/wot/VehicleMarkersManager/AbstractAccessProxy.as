@@ -16,9 +16,19 @@ class wot.VehicleMarkersManager.AbstractAccessProxy
 
     public function get currentStateConfigRoot():Object
     {
-        return xvm.vehicleState.getCurrentStateConfigRoot();
+        return xvm.vehicleState.getCurrentConfig();
     }
     
+    public function formatStaticText(format:String):String
+    {
+        return xvm.formatStaticText(format);
+    }
+
+    public function formatDynamicText(format:String, curHealth:Number, delta:Number):String
+    {
+        return xvm.formatDynamicText(format, curHealth, delta);
+    }
+
     public function formatDynamicColor(format:String):Number
     {
         return xvm.formatDynamicColor(format, xvm.m_curHealth);

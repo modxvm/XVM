@@ -5,7 +5,7 @@ import wot.VehicleMarkersManager.components.ClanIconProxy;
 
 class wot.VehicleMarkersManager.components.ClanIconComponent
 {
-    private var proxy:ClanIconProxy
+    private var proxy:ClanIconProxy;
 
     private var m_clanIcon: UILoaderAlt;
 
@@ -14,8 +14,9 @@ class wot.VehicleMarkersManager.components.ClanIconComponent
         this.proxy = proxy;
     }
 
-    public function initialize(cfg:Object, mc:MovieClip)
+    public function initialize(state_cfg:Object, mc:MovieClip)
     {
+        var cfg = state_cfg.clanIcon;
         if (m_clanIcon == null)
             m_clanIcon = PlayerInfo.createIcon(mc, cfg, cfg.x - (cfg.w / 2.0), cfg.y - (cfg.h / 2.0));
         PlayerInfo.setSource(m_clanIcon, Utils.GetPlayerName(proxy.playerName), Utils.GetClanName(proxy.playerName));

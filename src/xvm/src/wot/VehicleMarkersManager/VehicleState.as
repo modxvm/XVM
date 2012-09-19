@@ -18,7 +18,7 @@ class wot.VehicleMarkersManager.VehicleState
         this.proxy = proxy;
     }
     
-    public function getCurrent(): String
+    public function getCurrentState(): String
     {
         var result:String = proxy.team + "/";
         result += proxy.isDead ? "dead/" : "alive/";
@@ -26,7 +26,16 @@ class wot.VehicleMarkersManager.VehicleState
         return result;
     }
 
-    public function getConfigRoot(stateString: String)
+    public function getCurrentConfig()
+    {
+        var result = Config.s_config.markers;
+        result = proxy.team == "ally" ? result.ally : result.enemy;
+        result = proxy.isDead ? result.dead : result.alive;
+        result = proxy.showExInfo ? result.extended : result.normal;
+        return result;
+    }
+
+    public function getConfig(stateString: String)
     {
         var path: Array = stateString.split("/");
         if (path.length != 3)
@@ -38,16 +47,6 @@ class wot.VehicleMarkersManager.VehicleState
         return result;
     }
 
-    public function getCurrentStateConfigRoot()
-    {
-        return getConfigRoot(getCurrent());
-    }
-
-    public function getCurrentStateConfigRootNormal()
-    {
-        return getConfigRoot(getCurrent().split("extended").join("normal")) ;
-    }
-    
     public function getAllStates()
     {
         return (proxy.team == "enemy") ? allEnemy : allAlly;

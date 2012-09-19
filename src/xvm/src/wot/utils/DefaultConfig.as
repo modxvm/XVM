@@ -456,30 +456,9 @@ class wot.utils.DefaultConfig
 
   public static function get hb_dead(): Object
   {
-    return {
-      visible: false,
-      x: -41,
-      y: -33,
-      alpha: 100,
-      color: null,
-      lcolor: null,
-      width: 80,
-      height: 12,
-      border: {
-        alpha: 30,
-        color: "0x000000",
-        size: 1
-      },
-      fill: {
-        alpha: 30,
-        color: null
-      },
-      damage: {
-        alpha: 80,
-        color: null,
-        fade: 1
-      }
-    }
+    var hb = hb_alive;
+    hb.visible = false;
+    return hb;
   }
 
   // damageText

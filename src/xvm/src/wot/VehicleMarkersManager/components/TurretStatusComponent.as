@@ -31,9 +31,9 @@ class wot.VehicleMarkersManager.components.TurretStatusComponent
     private static var UNKNOWN_VULN_DISPLAY_MARKER: String = "";
     private static var UNKNOWN_VULN_DATABASE_VAL: Number = 0;
 
-    private var proxy:TurretStatusProxy
+    private var proxy:TurretStatusProxy;
 
-    private var marker:String
+    private var marker:String;
 
     public function TurretStatusComponent(proxy:TurretStatusProxy)
     {

@@ -4,13 +4,13 @@ import wot.VehicleMarkersManager.components.VehicleTypeProxy;
 
 class wot.VehicleMarkersManager.components.VehicleTypeComponent
 {
-    private var proxy:VehicleTypeProxy
+    private var proxy:VehicleTypeProxy;
 
     private var m_hunt;
     private var m_markerLabel;  // [proxy] "green", "gold", "blue", "yellow", "red", "purple"
     private var m_markerState;  // [proxy.marker] "dead", "immediate_dead", ...
     private var m_vehicleClass; // [proxy.marker.marker.icon] "lightTank", "mediumTank", ..., "dynamic" (speaker)
-    
+
     public function VehicleTypeComponent(proxy:VehicleTypeProxy, vehicleClass, hunt)
     {
         this.proxy = proxy;
@@ -27,7 +27,7 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
     public function setVehicleClass()
     {
         var className = (proxy.isSpeaking && !proxy.isDead) ? "dynamic" : m_vehicleClass;
-            
+
         if (proxy.marker.marker.iconHunt == null)
         {
             proxy.marker.marker.icon.gotoAndStop(className);
@@ -52,11 +52,11 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
     {
         m_markerState = value;
         proxy.marker.gotoAndPlay(m_markerState);
-        
+
         if (proxy.isDead && proxy.isSpeaking) // change dynamic to vehicle type marker for dead while speaking
             this.setVehicleClass();
     }
-    
+
     function updateMarkerLabel()
     {
         var aliasColor = XvmHelper.getMarkerColorAlias(proxy.entityName, proxy.isColorBlindMode);
@@ -68,7 +68,7 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
 
         if (m_vehicleClass == null)
             ErrorHandler.setText("INTERNAL ERROR: m_vehicleClass == null");
-        
+
         if (m_markerState != null)
         {
             if (proxy.isDead)
@@ -78,7 +78,7 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
 
         this.setVehicleClass();
     }
-    
+
     public function updateState(state_cfg:Object)
     {
         var cfg = state_cfg.vehicleIcon;

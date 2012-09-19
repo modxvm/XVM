@@ -15,12 +15,17 @@ import wot.VehicleMarkersManager.XvmHelper;
 import wot.VehicleMarkersManager.components.ActionMarkerComponent;
 import wot.VehicleMarkersManager.components.ClanIconComponent;
 import wot.VehicleMarkersManager.components.ContourIconComponent;
+import wot.VehicleMarkersManager.components.DamageTextComponent;
+import wot.VehicleMarkersManager.components.HealthBarComponent;
 import wot.VehicleMarkersManager.components.LevelIconComponent;
 import wot.VehicleMarkersManager.components.TurretStatusComponent;
 import wot.VehicleMarkersManager.components.VehicleTypeComponent;
 
 class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
 {
+    // dummy var to avoid import warning
+    private static var __dummy = Logger.dummy;
+
     /**
      * Trace function for debug purpose. Must be commented on release.
      * TODO: Is AS2/FD have any kind of conditional compilation?
@@ -28,8 +33,8 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
      */
     public function trace(str:String):Void
     {
-        //if (m_playerFullName == "dosik_dai")
-        Logger.add(m_playerFullName + "> " + str);
+        //if (m_playerFullName == "ayne_RU")
+        //Logger.add(m_playerFullName + "> " + str);
     }
 
     // Level in roman numerals
@@ -37,7 +42,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
 
     // Private static members
     private static var s_showExInfo:Boolean = false; // Saved "Extended Info State" for markers that appeared when Alt pressed.
-    private static var s_blowedUp: Array = []; // List of members that was ammoracked.
+    private static var s_blowedUp:Object = {}; // List of members that was ammoracked.
 
     public static var s_isColorBlindMode = false; // TODO: not implemented, always false
 
@@ -54,31 +59,24 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
 
     // Private members
     var m_showExInfo: Boolean;
-    var m_currentHealth: Number;
-    var m_showMaxHealth: Boolean;
     var m_isDead: Boolean;
     var m_defaultIconSource: String;
 
-    // UI Elements
-    var damageHolder: MovieClip;
-    var xvmHB: MovieClip;
-    var xvmHBBorder: MovieClip;
-    var xvmHBFill: MovieClip;
-    var xvmHBDamage: MovieClip;
-
     // TextFields
     var textFields: Object;
+
+    // Vehicle State
+    var vehicleState: VehicleState;
 
     // UI Components
     var actionMarkerComponent: ActionMarkerComponent;
     var clanIconComponent:ClanIconComponent;
     var contourIconComponent: ContourIconComponent;
+    var damageTextComponent: DamageTextComponent;
+    var healthBarComponent: HealthBarComponent;
     var levelIconComponent: LevelIconComponent;
     var turretStatusComponent: TurretStatusComponent;
     var vehicleTypeComponent: VehicleTypeComponent;
-
-    // Vehicle State
-    var vehicleState: VehicleState;
 
     // Parent proxy instance (assigned from proxy)
     private var _proxy:VehicleMarkerProxy;
@@ -170,7 +168,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
     public function formatDynamicColor(format:String, curHealth:Number):Number
     {
         var systemColor =  XvmHelper.getSystemColor(m_entityName, m_isDead,
-            Utils.indexOf(s_blowedUp, m_playerFullName) >= 0, s_isColorBlindMode);
+            s_blowedUp[m_playerFullName] != undefined, s_isColorBlindMode);
         try
         {
             if (!format)
@@ -248,5 +246,55 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
     {
         if (contourIconComponent != null && contourIconComponent.onEnterFrame != null)
             contourIconComponent.onEnterFrame();
+    }
+    
+    /**
+     * Create new TextField based on config
+     */
+    public function createTextField(cfg:Object):Object
+    {
+        try
+        {
+            var n = proxy.getNextHighestDepth();
+            var textField: TextField = proxy.createTextField("textField" + n, n, 0, 0, 140, 31);
+//            var textField: TextField = proxy.createTextField("textField" + n, n, 0, 0, 140 + 1, cfg.font.size + 4 + 1); // +1 because of ScaleForm bug
+            textField.html = false; // FIXIT: in html mode Font and Position are wrong.
+            textField.embedFonts = false;
+            textField.selectable = false;
+            textField.multiline = false;
+            textField.wordWrap = false;
+            textField.antiAliasType = "normal";
+            //textField.antiAliasType = "advanced";
+            //textField.gridFitType = "NONE";
+            textField._quality = "BEST";
+            //textField.border = true;
+            //textField.borderColor = 0xFFFFFF;
+            //textField.autoSize = "center"; // http://theolagendijk.com/2006/09/07/aligning-htmltext-inside-flash-textfield/
+            var textFormat: TextFormat = XvmHelper.createNewTextFormat(cfg.font);
+            textField.setNewTextFormat(textFormat);
+
+            if (cfg.shadow)
+            {
+                var sh_color:Number = formatDynamicColor(formatStaticColorText(cfg.shadow.color), m_curHealth);
+                var sh_alpha:Number = formatDynamicAlpha(cfg.shadow.alpha, m_curHealth);
+                textField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow.distance,
+                    cfg.shadow.angle, sh_color, sh_alpha, cfg.shadow.size, cfg.shadow.strength) ];
+            }
+
+            var staticColor = formatStaticColorText(cfg.color);
+            textField.textColor = formatDynamicColor(staticColor, m_curHealth);
+            textField._alpha = formatDynamicAlpha(cfg.alpha, m_curHealth);
+            textField._x = cfg.x - (textField._width / 2.0);
+            textField._y = cfg.y - (textField._height / 2.0);
+            textField._visible = cfg.visible;
+
+            return { field: textField, format: formatStaticText(cfg.format), alpha: cfg.alpha, color: staticColor };
+        }
+        catch (e)
+        {
+            ErrorHandler.setText("ERROR: XVMCreateTextField():" + String(e));
+        }
+
+        return null;
     }
 }
