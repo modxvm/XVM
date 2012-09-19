@@ -6,16 +6,18 @@ import com.greensock.TweenLite;
 import com.greensock.easing.Linear;
 import com.greensock.easing.Cubic;
 import wot.utils.Config;
-import wot.utils.Defines;
 import wot.utils.GlobalEventDispatcher;
 import wot.utils.GraphicsUtil;
 import wot.utils.StatData;
 import wot.utils.StatLoader;
 import wot.utils.Utils;
 import wot.utils.Logger;
-import wot.utils.PlayerInfo;
 import wot.VehicleMarkersManager.ErrorHandler;
 import wot.VehicleMarkersManager.VehicleMarkerProxy;
+import wot.VehicleMarkersManager.components.ActionMarkerComponent;
+import wot.VehicleMarkersManager.components.ActionMarkerProxy;
+import wot.VehicleMarkersManager.components.ClanIconComponent;
+import wot.VehicleMarkersManager.components.ClanIconProxy;
 import wot.VehicleMarkersManager.components.ContourIconComponent;
 import wot.VehicleMarkersManager.components.ContourIconProxy;
 import wot.VehicleMarkersManager.components.LevelIconComponent;
@@ -93,6 +95,8 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         // initMarkerLabel() handles color blind mode, squad and team killer.
         initMarkerLabel();
 
+        actionMarkerComponent = new ActionMarkerComponent(new ActionMarkerProxy(this));
+        clanIconComponent = new ClanIconComponent(new ClanIconProxy(this));
         contourIconComponent = new ContourIconComponent(new ContourIconProxy(this));
         levelIconComponent = new LevelIconComponent(new LevelIconProxy(this));
         turretStatusComponent = new TurretStatusComponent(new TurretStatusProxy(this));
@@ -219,7 +223,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
      */
     function showActionMarker(actionState)
     {
-        proxy.actionMarker.showAction(actionState);
+        actionMarkerComponent.showActionMarker(actionState);
     }
 
     /**
@@ -602,13 +606,6 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         }
     }
 
-    function XVMInitializeClanIcon(cfg)
-    {
-        if (m_clanIcon == null)
-            m_clanIcon = PlayerInfo.createIcon(proxy, cfg, cfg.x - (cfg.w / 2.0), cfg.y - (cfg.h / 2.0), Defines.TEAM_ALLY);
-        PlayerInfo.setSource(m_clanIcon, Utils.GetPlayerName(m_playerFullName), Utils.GetClanName(m_playerFullName));
-    }
-
     function XVMPopulateData()
     {
         try
@@ -624,8 +621,8 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
             // Initialize states and creating text fields
             XVMInitializeTextFields();
 
-            // Initialize clan icons
-            XVMInitializeClanIcon(cfg.clanIcon);
+            // Create clan icon and place to mc.
+            clanIconComponent.initialize(cfg.clanIcon, proxy);
         }
         catch (e)
         {
@@ -687,28 +684,10 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
             levelIconComponent.updateState(cfg);
 
             // Action Marker
-            visible = cfg.actionMarker.visible;
-            if (visible)
-            {
-                proxy.actionMarker._x = cfg.actionMarker.x;
-                proxy.actionMarker._y = cfg.actionMarker.y;
-            }
-            proxy.actionMarker._visible = visible;
+            actionMarkerComponent.updateState(cfg);
 
             // Clan Icon
-            if (m_clanIcon != null && m_clanIcon.source != "")
-            {
-                visible = cfg.clanIcon.visible;
-                if (visible)
-                {
-                    var holder = m_clanIcon["holder"];
-                    holder._x = cfg.clanIcon.x - (cfg.clanIcon.w / 2.0);
-                    holder._y = cfg.clanIcon.y - (cfg.clanIcon.h / 2.0);
-                    m_clanIcon.setSize(cfg.clanIcon.w, cfg.clanIcon.h);
-                    holder._alpha = formatDynamicAlpha(cfg.clanIcon.alpha, m_curHealth);
-                }
-                m_clanIcon._visible = visible;
-            }
+            clanIconComponent.updateState(cfg);
 
             // Damage Text
             visible = cfg.damageText.visible;

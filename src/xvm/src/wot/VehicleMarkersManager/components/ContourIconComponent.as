@@ -10,13 +10,13 @@ class wot.VehicleMarkersManager.components.ContourIconComponent
     private var proxy:ContourIconProxy;
     private var m_contourIconLoaded:Boolean;
     private var m_iconset: IconLoader;
-    
+
     public var onEnterFrame:Function;
-    
-    public function ContourIconComponent(proxy:ContourIconProxy) 
+
+    public function ContourIconComponent(proxy:ContourIconProxy)
     {
         this.proxy = proxy;
-        
+
         onEnterFrame = null;
 
         m_contourIconLoaded = false;
@@ -110,25 +110,5 @@ class wot.VehicleMarkersManager.components.ContourIconComponent
             ErrorHandler.setText("ERROR: updateContourIcon():" + String(e));
         }
     }
-    
-    /*
-    
-    public function updateState(cfg:Object)
-    {
-        var visible = cfg.levelIcon.visible;
-        
-        if (visible)
-            draw(cfg);
-            
-        proxy.levelIcon._visible = visible;
-    }
-    
-    private function draw(cfg:Object)
-    {
-        proxy.levelIcon._x = cfg.levelIcon.x;
-        proxy.levelIcon._y = cfg.levelIcon.y;
-        
-        //TODO: extract XVMFormatDynamicAlpha
-        proxy.levelIcon._alpha = proxy.XVMFormatDynamicAlpha(cfg.levelIcon.alpha);
-    }*/
 }
+

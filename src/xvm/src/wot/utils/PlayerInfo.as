@@ -16,6 +16,8 @@ class wot.utils.PlayerInfo extends MovieClip
         var holder:MovieClip = owner["xvm_icon_holder"];
         if (holder == undefined)
         {
+            if (team == undefined)
+                team = Defines.TEAM_ALLY;
             holder = owner.createEmptyMovieClip("xvm_icon_holder", owner.getNextHighestDepth());
             holder._x = dx + (team == Defines.TEAM_ALLY ? cfg.x : -cfg.xr);
             if (team == Defines.TEAM_ENEMY)

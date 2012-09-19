@@ -3,31 +3,33 @@ import wot.VehicleMarkersManager.components.LevelIconProxy;
 class wot.VehicleMarkersManager.components.LevelIconComponent
 {
     private var proxy:LevelIconProxy
-    
-    public function LevelIconComponent(proxy:LevelIconProxy) 
+
+    public function LevelIconComponent(proxy:LevelIconProxy)
     {
         this.proxy = proxy;
-        
+
         if (proxy.levelIcon != null)
             proxy.levelIcon.gotoAndStop(proxy.level);
     }
-     
-    public function updateState(cfg:Object)
+
+    public function updateState(state_cfg:Object)
     {
-        var visible = cfg.levelIcon.visible;
-        
+        var cfg = state_cfg.levelIcon;
+
+        var visible = cfg.visible;
+
         if (visible)
             draw(cfg);
-            
+
         proxy.levelIcon._visible = visible;
     }
-    
+
     private function draw(cfg:Object)
     {
-        proxy.levelIcon._x = cfg.levelIcon.x;
-        proxy.levelIcon._y = cfg.levelIcon.y;
-        
-        //TODO: extract XVMFormatDynamicAlpha
-        proxy.levelIcon._alpha = proxy.formatDynamicAlpha(cfg.levelIcon.alpha);
+        proxy.levelIcon._x = cfg.x;
+        proxy.levelIcon._y = cfg.y;
+
+        //TODO: extract formatDynamicAlpha
+        proxy.levelIcon._alpha = proxy.formatDynamicAlpha(cfg.alpha);
     }
 }

@@ -2,7 +2,6 @@
  * Base xvm class with varous basic functions (like macros substitutions).
  * Class don't contain any workflow logic.
  */
-import net.wargaming.controls.UILoaderAlt;
 import wot.utils.Defines;
 import wot.utils.GraphicsUtil;
 import wot.utils.Logger;
@@ -13,6 +12,8 @@ import wot.VehicleMarkersManager.ErrorHandler;
 import wot.VehicleMarkersManager.VehicleMarkerProxy;
 import wot.VehicleMarkersManager.VehicleState;
 import wot.VehicleMarkersManager.XvmHelper;
+import wot.VehicleMarkersManager.components.ActionMarkerComponent;
+import wot.VehicleMarkersManager.components.ClanIconComponent;
 import wot.VehicleMarkersManager.components.ContourIconComponent;
 import wot.VehicleMarkersManager.components.LevelIconComponent;
 import wot.VehicleMarkersManager.components.TurretStatusComponent;
@@ -59,7 +60,6 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
     var m_showMaxHealth: Boolean;
     var m_team: String; // TODO: is the same as m_entityType?
     var m_isDead: Boolean;
-    var m_clanIcon: UILoaderAlt;
     var m_defaultIconSource: String;
 
     // UI Elements
@@ -73,6 +73,8 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
     var textFields: Object;
 
     // UI Components
+    var actionMarkerComponent: ActionMarkerComponent;
+    var clanIconComponent:ClanIconComponent;
     var contourIconComponent: ContourIconComponent;
     var levelIconComponent: LevelIconComponent;
     var turretStatusComponent: TurretStatusComponent;

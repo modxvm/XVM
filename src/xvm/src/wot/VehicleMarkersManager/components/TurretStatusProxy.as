@@ -9,12 +9,12 @@ class wot.VehicleMarkersManager.components.TurretStatusProxy extends AbstractAcc
     * Model for TurretStatus.
     * Queries TurretStatusDatabase.
     */
-   
-    public function TurretStatusProxy(xvm:Xvm) 
+
+    public function TurretStatusProxy(xvm:Xvm)
     {
         super(xvm);
     }
-    
+
     public function defineVehicleStatus():Number
     {
         var vehInfo:Array = TurretStatusProxy.getInfo(vehicleName);
@@ -24,21 +24,20 @@ class wot.VehicleMarkersManager.components.TurretStatusProxy extends AbstractAcc
             /**
              * Current vehicle has stock turret.
              * Return vulnerability status.
-             */  
-            return vehInfo[1]; 
-          
+             */
+            return vehInfo[1];
+
         return 0; // Turret status unknown
     }
-    
+
     private function get vehicleName():String
     {
         return VehicleInfo.getVehicleId(xvm.m_defaultIconSource).toLowerCase();
     }
-    
+
     private static function getInfo(name:String):Array
     {
         var db = TurretStatusDatabase.getDb();
         return db[name];
     }
 }
-
