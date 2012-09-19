@@ -13,11 +13,6 @@ class wot.VehicleMarkersManager.VehicleStateProxy extends AbstractAccessProxy
         super(xvm);
     }
     
-    public function get vehicleDestroyed():Boolean
-    {
-        return xvm.vehicleDestroyed;
-    }
-    
     public function get isDead():Boolean
     {
         return xvm.m_isDead;
@@ -30,6 +25,6 @@ class wot.VehicleMarkersManager.VehicleStateProxy extends AbstractAccessProxy
     
     public function get team():String
     {
-        return xvm.m_team;
+        return xvm.proxy.m_team;
     }
 }

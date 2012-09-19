@@ -24,10 +24,11 @@ import wot.VehicleMarkersManager.components.LevelIconComponent;
 import wot.VehicleMarkersManager.components.LevelIconProxy;
 import wot.VehicleMarkersManager.components.TurretStatusComponent;
 import wot.VehicleMarkersManager.components.TurretStatusProxy;
+import wot.VehicleMarkersManager.components.VehicleTypeComponent;
+import wot.VehicleMarkersManager.components.VehicleTypeProxy;
 import wot.VehicleMarkersManager.VehicleState;
 import wot.VehicleMarkersManager.VehicleStateProxy;
 import wot.VehicleMarkersManager.XvmBase;
-import wot.VehicleMarkersManager.XvmHelper;
 
 /*
  * XVM() instance creates corresponding marker
@@ -48,16 +49,13 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     /**
      * .ctor()
      * @param	proxy Parent proxy class (for placing UI Components)
-     * @param	entityName Marker type (ally, enemy)
      */
-    function Xvm(proxy:VehicleMarkerProxy, entityName:String)
+    function Xvm(proxy:VehicleMarkerProxy)
     {
         super(); // gfx.core.UIComponent
         _proxy = proxy;
-        m_entityName = m_team = entityName;
         Utils.TraceXvmModule("XVM");
     }
-
 
     /**
      * IVehicleMarker implementation
@@ -78,36 +76,27 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
 
         m_defaultIconSource = vIconSource; // ../maps/icons/vehicle/contour/usa-M48A1.png
         m_source = vIconSource;
-        m_entityName = entityName; // ally, enemy, squadman, (teamkiller?)
+        m_entityName = entityName; // ally, enemy, squadman, teamKiller
         m_entityType = entityType; // ally, enemy
         m_maxHealth = maxHealth;
-        m_vehicleClass = vClass; //mediumTank
 
         m_vname = vType; // AMX50F155
         m_level = vLevel;
         m_speaking = speaking;
-        m_hunt = hunt;
 
         m_isDead    = curHealth <= 0; // -1 for ammunition storage explosion
         m_curHealth = curHealth >= 0 ? (curHealth) : (0);
         m_currentHealth = m_curHealth;
 
-        // initMarkerLabel() handles color blind mode, squad and team killer.
-        initMarkerLabel();
+        vehicleState = new VehicleState(new VehicleStateProxy(this));
 
         actionMarkerComponent = new ActionMarkerComponent(new ActionMarkerProxy(this));
         clanIconComponent = new ClanIconComponent(new ClanIconProxy(this));
         contourIconComponent = new ContourIconComponent(new ContourIconProxy(this));
         levelIconComponent = new LevelIconComponent(new LevelIconProxy(this));
         turretStatusComponent = new TurretStatusComponent(new TurretStatusProxy(this));
+        vehicleTypeComponent = new VehicleTypeComponent(new VehicleTypeProxy(this), vClass /*mediumTank*/, hunt);
 
-        vehicleState = new VehicleState(new VehicleStateProxy(this));
-
-        if (m_vehicleClass != null)
-            setVehicleClass();
-
-        if (m_markerState != null)
-            proxy.marker.gotoAndPlay(m_markerState);
 
         xvmHB = proxy.createEmptyMovieClip("xvmHB", proxy.marker.getDepth() - 1); // Put health Bar to back.
         xvmHBBorder = xvmHB.createEmptyMovieClip("border", 1);
@@ -133,7 +122,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     function update()
     {
         trace("Xvm::update()");
-        this.updateMarkerLabel();
+        //this.updateMarkerLabel(); // TODO: remove?
     }
 
     /**
@@ -156,9 +145,10 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
             return;
         m_speaking = value;
         if (initialized)
-            this.setVehicleClass();
-        if (proxy.marker._visible != m_speaking)
-            updateVehicleMarker(vehicleState.getCurrentStateConfigRoot());
+        {
+            vehicleTypeComponent.setVehicleClass();
+            vehicleTypeComponent.updateState(vehicleState.getCurrentStateConfigRoot());
+        }
     }
 
     /**
@@ -170,7 +160,8 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         if (value == m_entityName)
             return;
         m_entityName = value;
-        this.updateMarkerLabel();
+        vehicleTypeComponent.updateMarkerLabel();
+        XVMUpdateStyle();
     }
 
     /**
@@ -192,12 +183,15 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
      */
     function updateState(newState, isImmediate)
     {
-        trace("updateState(" + newState + ", " + isImmediate + "): " + vehicleState.getCurrent() + " markerState=" + m_markerState);
-        if (this.vehicleDestroyed)
-            return;
-        if (isImmediate && newState == "dead")
-            newState = "immediate_" + newState;
-        this.setMarkerState(newState);
+        trace("updateState(" + newState + ", " + isImmediate + "): " + vehicleState.getCurrent());
+
+//        if (!initialized)
+//            ErrorHandler.setText("updateState: !initialized");
+
+        m_isDead = newState == "dead";
+
+        vehicleTypeComponent.setMarkerState(isImmediate && m_isDead ? "immediate_dead" : newState);
+
         XVMUpdateStyle();
     }
 
@@ -238,86 +232,10 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         if (event)
           GlobalEventDispatcher.removeEventListener("stat_loaded", this, XVMInit);
         XVMPopulateData();
-        updateMarkerLabel();
         XVMUpdateStyle();
     }
 
     // CODE BELOW IS NOT CHECKED
-
-
-
-    function setMarkerState(value)
-    {
-        trace("Xvm::setMarkerState(" + value + ")");
-        m_markerState = value;
-        if (initialized)
-        {
-            if (this.vehicleDestroyed)
-            {
-                if (m_speaking)
-                    this.setVehicleClass();
-            }
-            proxy.marker.gotoAndPlay(m_markerState);
-        }
-    }
-
-    function setVehicleClass()
-    {
-        if (proxy.marker.marker.iconHunt != null)
-        {
-            proxy.marker.marker.icon._visible = !m_hunt;
-            proxy.marker.marker.iconHunt._visible = m_hunt;
-            if (m_hunt)
-                proxy.marker.marker.iconHunt.gotoAndStop(this._getVehicleClassName());
-            else
-                proxy.marker.marker.icon.gotoAndStop(this._getVehicleClassName());
-        }
-        else
-            proxy.marker.marker.icon.gotoAndStop(this._getVehicleClassName());
-    }
-
-    function initMarkerLabel()
-    {
-        trace("Xvm::initMarkerLabel()");
-
-        m_markerLabel = XvmHelper.getMarkerColorAlias(m_entityName, s_isColorBlindMode);
-        proxy.gotoAndStop(m_markerLabel);
-
-        updateColorBlindMode();
-        XVMUpdateUI(m_curHealth);
-    }
-
-    function updateMarkerLabel()
-    {
-        trace("Xvm::updateMarkerLabel(): " + vehicleState.getCurrent() + " markerLabel=" + m_markerLabel);
-
-        var aliasColor = XvmHelper.getMarkerColorAlias(m_entityName, s_isColorBlindMode);
-        if (m_markerLabel == aliasColor)
-            return;
-
-        m_markerLabel = aliasColor;
-        proxy.gotoAndStop(m_markerLabel);
-
-        if (m_vehicleClass != null)
-            this.setVehicleClass();
-
-        if (m_markerState != null)
-        {
-            if (this.vehicleDestroyed)
-                m_markerState = "immediate_dead";
-            proxy.marker.gotoAndPlay(m_markerState);
-        }
-
-        updateColorBlindMode();
-
-        // Update layout for the current marker state
-        XVMUpdateStyle();
-    }
-
-    function _getVehicleClassName()
-    {
-        return (m_speaking && !this.vehicleDestroyed()) ? "dynamic" : m_vehicleClass;
-    }
 
     /**
     * MAIN
@@ -632,36 +550,6 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
 
     function updateVehicleMarker(state_cfg)
     {
-        var cfg = state_cfg.vehicleIcon;
-
-        visible = cfg.visible || (m_speaking && cfg.showSpeaker);
-        if (visible)
-        {
-            // Vehicle Type Marker
-            var x = cfg.scaleX * cfg.maxScale / 100;
-            var y = cfg.scaleY * cfg.maxScale / 100;
-            for (var childName in proxy.marker.marker)
-            {
-                //if (childName == "marker_shadow")
-                //  return;
-
-                var icon: MovieClip = proxy.marker.marker[childName];
-                icon._x = x;
-                icon._y = y;
-                icon._xscale = icon._yscale = cfg.maxScale;
-
-                //var ms: MovieClip = icon.duplicateMovieClip("marker_shadow", icon.getNextHighestDepth());
-                //ms.gotoAndStop(icon._currentframe);
-                //ms.filters = [ new DropShadowFilter(0, 0, 0, 1, 1, 1, 10, 1, false, true) ];
-                //GraphicsUtil.setColor(icon, systemColor);
-            }
-
-            proxy.marker._x = cfg.x;
-            proxy.marker._y = cfg.y;
-            proxy.marker._alpha = formatDynamicAlpha(cfg.alpha, m_curHealth);
-        }
-        proxy.marker._visible = visible;
-
     }
 
     function XVMUpdateStyle()
@@ -675,7 +563,8 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
 
             var visible: Boolean;
 
-            updateVehicleMarker(cfg);
+            // Vehicle Type Marker
+            vehicleTypeComponent.updateState(cfg);
 
             // Contour Icon
             contourIconComponent.updateState(cfg);

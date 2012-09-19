@@ -23,7 +23,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
 
     // Used in child classes VehicleMarkerAlly and VehicleMarkerEnemy
     // TODO: can include to interface as property?
-    public var m_entityName:String; // protected
+    public var m_team:String; // values: ally, enemy (readonly)
 
     // Inherited from sprite
     // TODO: try to remove and create dynamically only with standard markers to improve performance
@@ -134,7 +134,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
             // Create Standard marker
             subject = new net.wargaming.ingame.VehicleMarker()
             // Translate entity name to subject
-            subject["m_entityName"] = m_entityName;
+            subject["m_entityName"] = m_team;
             // Save link to me in subject
             subject["_proxy"] = this;
             // Replace MovieClip.gotoAndStop (calling for changing marker type: squad, team killer, color blind, ...)
@@ -149,7 +149,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         else
         {
             // Create XVM marker
-            subject = new wot.VehicleMarkersManager.Xvm(this, m_entityName);
+            subject = new wot.VehicleMarkersManager.Xvm(this, m_team);
         }
 
         // Invoke all deferred method calls while config was loading

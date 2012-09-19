@@ -2,7 +2,7 @@
 {
   function VehicleMarkerAlly()
   {
-    m_entityName = "ally";
+    m_team = "ally";
     super();
   }
 }

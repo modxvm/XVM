@@ -2,7 +2,7 @@
 {
   function VehicleMarkerEnemy()
   {
-    m_entityName = "enemy";
+    m_team = "enemy";
     super();
   }
 }

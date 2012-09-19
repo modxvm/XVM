@@ -17,6 +17,7 @@ import wot.VehicleMarkersManager.components.ClanIconComponent;
 import wot.VehicleMarkersManager.components.ContourIconComponent;
 import wot.VehicleMarkersManager.components.LevelIconComponent;
 import wot.VehicleMarkersManager.components.TurretStatusComponent;
+import wot.VehicleMarkersManager.components.VehicleTypeComponent;
 
 class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
 {
@@ -37,28 +38,24 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
     // Private static members
     private static var s_showExInfo:Boolean = false; // Saved "Extended Info State" for markers that appeared when Alt pressed.
     private static var s_blowedUp: Array = []; // List of members that was ammoracked.
-    private static var s_isColorBlindMode = false;
+
+    public static var s_isColorBlindMode = false; // TODO: not implemented, always false
 
     // Private members
     var m_entityName;
     var m_playerFullName;
     var m_curHealth;
     var m_maxHealth;
-    var m_vehicleClass;
     var m_source;
     var m_vname;
     var m_level;
     var m_speaking;
-    var m_hunt;
-    var m_markerState;
-    var m_markerLabel;
-    var m_entityType;
+    var m_entityType; // TODO: is the same as proxy.m_team?
 
     // Private members
     var m_showExInfo: Boolean;
     var m_currentHealth: Number;
     var m_showMaxHealth: Boolean;
-    var m_team: String; // TODO: is the same as m_entityType?
     var m_isDead: Boolean;
     var m_defaultIconSource: String;
 
@@ -78,6 +75,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
     var contourIconComponent: ContourIconComponent;
     var levelIconComponent: LevelIconComponent;
     var turretStatusComponent: TurretStatusComponent;
+    var vehicleTypeComponent: VehicleTypeComponent;
 
     // Vehicle State
     var vehicleState: VehicleState;
@@ -85,24 +83,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
     // Parent proxy instance (assigned from proxy)
     private var _proxy:VehicleMarkerProxy;
     public function get proxy() { return _proxy; }
-
-    /**
-     * Guess color blind mode
-     */
-    function updateColorBlindMode()
-    {
-        if (m_markerLabel == "yellow" || m_markerLabel == "purple")
-            s_isColorBlindMode = true;
-        else if (m_markerLabel == "gold" || m_markerLabel == "red")
-            s_isColorBlindMode = false;
-    }
-
-    // TODO: Can be replaced with m_isDead?
-    function get vehicleDestroyed()
-    {
-        return (m_markerState == "dead" || m_markerState == "immediate_dead");
-    }
-
+    
     /**
      * Text formatting functions
      */
@@ -188,7 +169,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
 
     public function formatDynamicColor(format:String, curHealth:Number):Number
     {
-        var systemColor =  XvmHelper.getSystemColor(m_entityName, vehicleDestroyed || m_isDead,
+        var systemColor =  XvmHelper.getSystemColor(m_entityName, m_isDead,
             Utils.indexOf(s_blowedUp, m_playerFullName) >= 0, s_isColorBlindMode);
         try
         {
@@ -211,8 +192,11 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
             formatArr = format.split("{{c:vtype}}");
             if (formatArr.length > 1)
             {
-                format = formatArr.join(GraphicsUtil.GetVTypeColorValue(m_defaultIconSource,
-                    Utils.vehicleClassToVehicleType(m_vehicleClass), "0x"));
+                if (vehicleTypeComponent != null)
+                {
+                    format = formatArr.join(GraphicsUtil.GetVTypeColorValue(m_defaultIconSource,
+                        Utils.vehicleClassToVehicleType(vehicleTypeComponent.getVehicleClass()), "0x"));
+                }
             }
             return isFinite(format) ? Number(format) : systemColor;
         }

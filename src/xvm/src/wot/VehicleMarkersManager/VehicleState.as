@@ -21,7 +21,7 @@ class wot.VehicleMarkersManager.VehicleState
     public function getCurrent(): String
     {
         var result:String = proxy.team + "/";
-        result += (proxy.vehicleDestroyed || proxy.isDead) ? "dead/" : "alive/";
+        result += proxy.isDead ? "dead/" : "alive/";
         result += proxy.showExInfo ? "extended" : "normal";
         return result;
     }

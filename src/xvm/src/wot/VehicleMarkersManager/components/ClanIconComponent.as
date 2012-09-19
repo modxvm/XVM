@@ -33,7 +33,7 @@ class wot.VehicleMarkersManager.components.ClanIconComponent
         if (visible)
             draw(cfg);
 
-        m_clanIcon._visible = visible;
+        m_clanIcon["holder"]._visible = visible;
     }
 
     private function draw(cfg:Object)
