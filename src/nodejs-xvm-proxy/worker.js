@@ -378,7 +378,7 @@ processRequest = function(request, response) {
         var dtime = 0;
         var duration = (now - times[0].t);
         if (duration > settings.mongoMaxTime) {
-            delta = -5;
+            delta = -3;
             dtime = 200;
         } else if (duration < settings.mongoMinTime) {
             delta = 1;
