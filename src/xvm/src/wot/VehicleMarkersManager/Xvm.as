@@ -100,14 +100,15 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         // Initialize states and creating text fields
         initializeTextFields();
 
+        // Draw marker
+        XVMUpdateStyle();
+
         // Load stat
         if (Config.s_config.rating.showPlayersStatistics && !StatData.s_loaded)
         {
             GlobalEventDispatcher.addEventListener("stat_loaded", this, onStatLoaded);
             StatLoader.LoadLastStat();
         }
-        
-        XVMUpdateStyle();
     }
 
     /**
@@ -232,7 +233,9 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     {
         //trace("Xvm::onStatLoaded()");
         if (event)
-          GlobalEventDispatcher.removeEventListener("stat_loaded", this, onStatLoaded);
+            GlobalEventDispatcher.removeEventListener("stat_loaded", this, onStatLoaded);
+
+        initializeTextFields();
         XVMUpdateStyle();
     }
 
@@ -312,10 +315,6 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         {
             ErrorHandler.setText("ERROR: initializeTextFields():" + String(e));
         }
-    }
-
-    function updateVehicleMarker(state_cfg)
-    {
     }
 
     function XVMUpdateStyle()

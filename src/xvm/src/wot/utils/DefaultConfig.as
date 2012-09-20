@@ -610,10 +610,10 @@ class wot.utils.DefaultConfig
       visible: true,
       x: 0,
       y: -46,
-      alpha: 75,
-      color: "{{c:eff}}",
-      font: font_12,
-      shadow: shadow_200,
+      alpha: 100,
+      color: "{{c:rating}}",
+      font: font_11b,
+      shadow: shadow_150,
       format: "{{rating}}"
     }
   }
