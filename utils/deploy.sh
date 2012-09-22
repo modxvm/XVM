@@ -28,7 +28,7 @@ copy_file()
   [ -f "$SWF_DIR/$1" ] && rm -f "$SWF_DIR/$1"
   [ -f "../bin/$1" ] && {
     echo "=> $1"
-    cp -p ../bin/$1 "$SWF_DIR/${1##*/}"
+    cp -p "../bin/$1" "$SWF_DIR/${1##*/}"
   }
 }
 
