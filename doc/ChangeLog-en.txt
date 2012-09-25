@@ -1,4 +1,4 @@
-﻿XVM-3.0.0.test1:
+﻿XVM-3.0.0:
   * xvm was refactored
   * new tank marker {{turret}}:
     Displays symbol is tank has stock turret.
@@ -7,7 +7,7 @@
 	Stock turret can have weaker armor, lower sight distance or slower rotation speed.
 	Besides that, tank with stock turret can have weaker crew experience.
   * separate settings for all elements in all states
-  * adaptation to WoT 0.8.0.test3
+  * adaptation to WoT 0.8.0
 
 XVM-2.5.2:
   * clan icons was reworked. Now config have only one parameter:
