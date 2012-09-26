@@ -20,6 +20,7 @@ namespace wot
     public static string serverVersion = null;
     private static bool isNoAuto = false;
     public static bool isNoProxy = false;
+    public static bool isMaximized = false;
 
     private static Process wotProcess = null;
 
@@ -46,10 +47,12 @@ namespace wot
 
     private static void Usage()
     {
-      Log("Usage: wot-xvm-proxy.exe [/launcher] [/debug] [/server=(RU|EU|US|CN|SEA|VTC|CT)] [file.wotreplay]");
+      Log("Usage: wot-xvm-proxy.exe [options] [file.wotreplay]");
+      Log("Options:");
       Log("  /launcher - run launcher instead of game");
       Log("  /noauto - do not run game automatically");
       Log("  /noproxy - do not use IE proxy settings");
+      Log("  /maximized - maximized game window");
       Log("  /debug - run in debug mode (extended log)");
       Log("  /server=(RU|EU|US|CN|SEA|VTC|CT) - select server (disable autodetection)");
       Log("  file.wotreplay - play replay");
@@ -145,6 +148,13 @@ namespace wot
           if (String.Compare(args[i], "/noproxy", true) == 0)
           {
             isNoProxy = true;
+            args[i] = "";
+            continue;
+          }
+
+          if (String.Compare(args[i], "/maximized", true) == 0)
+          {
+            isMaximized = true;
             args[i] = "";
             continue;
           }
@@ -259,7 +269,7 @@ namespace wot
           Debug("Starting server thread");
           thread.Start(opt);
 
-          Thread.Sleep(1000);
+          Thread.Sleep(5000);
 
           if (!thread.IsAlive)
             Debug("Dokan thread is not alive. Exiting.");
@@ -272,7 +282,11 @@ namespace wot
               Log(String.Format("Starting game process: {0} {1}", wotExeFileName, arg));
               try
               {
-                wotProcess = Process.Start(wotExeFileName, arg);
+                ProcessStartInfo startInfo = new ProcessStartInfo(wotExeFileName);
+                startInfo.Arguments = arg;
+                if (!isLauncher && isMaximized)
+                  startInfo.WindowStyle = ProcessWindowStyle.Maximized;
+                wotProcess = Process.Start(startInfo);
                 Debug("Check game process");
                 if (wotProcess == null)
                   throw new Exception("Cannot start game: " + wotExeFileName);
