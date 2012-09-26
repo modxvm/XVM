@@ -8,13 +8,13 @@
  */
 {
   "configVersion": "1.5.0", // Версия конфига. Не удаляйте и не изменяйте её без необходимости.
-  "editorVersion": "0.2",   // Версия редактора. Пока не используется.
+  "editorVersion": "0.15",  // Версия редактора.
   // Блок общих параметров конфига. Все параметры информационные, в моде не используются.
   "definition": {
     "author": "sirmax2",                        // автор конфига
     "description": "Default settings for XVM",  // описание конфига
     "url": "http://code.google.com/p/wot-xvm/", // адрес, где выкладываеются обновления конфига
-    "date": "20.09.2012",                       // дата последней модификации конфига
+    "date": "26.09.2012",                       // дата последней модификации конфига
     "gameVersion": "0.8.0",                     // поддерживаемая версия игры
     "modMinVersion": "3.0.0"                    // минимально необходимая версия мода XVM
   },
@@ -1484,6 +1484,7 @@
     "germany_Ltraktor": null,
     "germany_Maus": null,
     "germany_Panther_II": null,
+    "germany_Panther_M10": null,
     "germany_PanzerJager_I": null,
     "germany_Pz35t": null,
     "germany_Pz38_NA": null,
@@ -1496,6 +1497,7 @@
     "germany_PzII_Luchs": null,
     "germany_PzIV": null,
     "germany_PzIV_Hydro": null,
+    "germany_PzIV_schmalturm": null,
     "germany_PzV": null,
     "germany_PzVI": null,
     "germany_PzVIB_Tiger_II": null,
@@ -1579,8 +1581,8 @@
     "ussr_BT_SV": null,
     "ussr_Churchill_LL": null,
     "ussr_GAZ_74b": null,
-    "ussr_IS": null,
     "ussr_IS8": null,
+    "ussr_IS": null,
     "ussr_ISU_152": null,
     "ussr_IS_3": null,
     "ussr_IS_4": null,
@@ -1598,21 +1600,26 @@
     "ussr_MS_1": null,
     "ussr_Matilda_II_LL": null,
     "ussr_Object252": null,
+    "ussr_Object263": null,
     "ussr_Object268": null,
     "ussr_Object_212": null,
     "ussr_Object_261": null,
     "ussr_Object_704": null,
     "ussr_ST_I": null,
+    "ussr_SU100M1": null,
+    "ussr_SU122_44": null,
+    "ussr_SU122_54": null,
     "ussr_SU_100": null,
+    "ussr_SU_101": null,
     "ussr_SU_14": null,
     "ussr_SU_152": null,
     "ussr_SU_18": null,
     "ussr_SU_26": null,
     "ussr_SU_5": null,
     "ussr_SU_76": null,
-    "ussr_SU_8": null,
     "ussr_SU_85": null,
     "ussr_SU_85I": null,
+    "ussr_SU_8": null,
     "ussr_S_51": null,
     "ussr_T150": null,
     "ussr_T62A": null,

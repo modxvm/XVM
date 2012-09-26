@@ -1,4 +1,7 @@
-﻿XVM-3.0.0:
+﻿XVM-3.0.1:
+  * Added information for tanks PzKpfwIV Schmalturm, Panther-M10 and СУ-122-44.
+
+XVM-3.0.0:
   * xvm was refactored
   * new tank marker {{turret}}:
     Displays symbol is tank has stock turret.

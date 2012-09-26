@@ -9,10 +9,8 @@ class wot.utils.VehicleInfoData
 /*
         france_AMX_50_68t:              { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
         germany_G47_E10:                { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
-        germany_Panther_M10:            { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
         germany_Pz_IV_AusfGH:           { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
         germany_PzIV_capt:              { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
-        germany_PzIV_schmalturm:        { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
         germany_PzV_capt:               { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
         Lorraine_155_51:                { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
         Lorraine155_50:                 { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
@@ -27,7 +25,6 @@ class wot.utils.VehicleInfoData
         ussr_R80_KV1:                   { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
         ussr_RBT_5:                     { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
         ussr_SU101:                     { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
-        ussr_SU122_44:                  { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
         ussr_T_24:                      { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
         ussr_T_70:                      { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
 */
@@ -137,6 +134,7 @@ class wot.utils.VehicleInfoData
         germany_VK3001H:                { level: 6,  type: "MT",  tiers: [ 6, 8 ],   premium: false, name: null },
         germany_VK3001P:                { level: 6,  type: "MT",  tiers: [ 6, 8 ],   premium: false, name: null },
         germany_VK3601H:                { level: 6,  type: "MT",  tiers: [ 6, 8 ],   premium: false, name: null },
+        germany_PzIV_schmalturm:        { level: 6,  type: "MT",  tiers: [ 6, 8 ],   premium: true,  name: null },
         france_ARL_44:                  { level: 6,  type: "HT",  tiers: [ 6, 8 ],   premium: false, name: null },
         ussr_KV2:                       { level: 6,  type: "HT",  tiers: [ 6, 8 ],   premium: false, name: null },
         ussr_KV_1s:                     { level: 6,  type: "HT",  tiers: [ 6, 8 ],   premium: false, name: null },
@@ -161,6 +159,7 @@ class wot.utils.VehicleInfoData
         usa_T20:                        { level: 7,  type: "MT",  tiers: [ 7, 9 ],   premium: false, name: null },
         ussr_T_43:                      { level: 7,  type: "MT",  tiers: [ 7, 9 ],   premium: false, name: null },
         germany_VK3002DB:               { level: 7,  type: "MT",  tiers: [ 7, 9 ],   premium: false, name: null },
+        germany_Panther_M10:            { level: 7,  type: "MT",  tiers: [ 7, 9 ],   premium: true,  name: null },
         france_AMX_M4_1945:             { level: 7,  type: "HT",  tiers: [ 7, 9 ],   premium: false, name: null },
         ussr_IS:                        { level: 7,  type: "HT",  tiers: [ 7, 9 ],   premium: false, name: null },
         ussr_KV_3:                      { level: 7,  type: "HT",  tiers: [ 7, 9 ],   premium: false, name: null },
@@ -177,6 +176,7 @@ class wot.utils.VehicleInfoData
         usa_T25_AT:                     { level: 7,  type: "TD",  tiers: [ 7, 9 ],   premium: false, name: null },
         ussr_SU_152:                    { level: 7,  type: "TD",  tiers: [ 7, 9 ],   premium: false, name: null },
         ussr_SU100M1:                   { level: 7,  type: "TD",  tiers: [ 7, 9 ],   premium: false, name: null },
+        ussr_SU122_44:                  { level: 7,  type: "TD",  tiers: [ 7, 9 ],   premium: true,  name: null },
 
         // level 8
         france_AMX_13_90:               { level: 8,  type: "LT",  tiers: [ 9, 12 ],  premium: false, name: null },
