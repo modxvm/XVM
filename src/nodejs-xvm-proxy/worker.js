@@ -449,7 +449,7 @@ var createWorker = function() {
             lastError: null,
             error_shown: false,
             connections: 0,
-            maxConnections: 30,
+            maxConnections: Math.floor(settings.statHostMaxConnections / 3),
             lastMaxConnectionUpdate: null
         });
     }

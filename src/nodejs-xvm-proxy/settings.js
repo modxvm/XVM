@@ -6,15 +6,15 @@ module.exports = (function()
     return {
         numNodes: numNodes,
         host: "127.0.0.1",
-        port: <port>,
+        port: 1333, // change if required
         maxSockets: Math.floor(1000 / numNodes), // per client
         cacheTtl: 7 * 24 * 60 * 60 * 1000, // 7 days
-        lastErrorTtl: 6 * 1000, // in msec
-        usageStatShowPeriod: 60 * 1000, // in msec
-        dbName: "<dbname>",
-        collectionName: "<collection>",
-        missedCollectionName: "<missed_collection>",
-        usersCollectionName: "<users_collection>",
+        lastErrorTtl: 3 * 1000, // in msec
+        usageStatShowPeriod: 20 * 1000, // in msec
+        dbName: "xvm",
+        collectionName: "players",
+        missedCollectionName: "missed",
+        usersCollectionName: "users",
         statHostMaxConnections: 100,
         mongoMaxConnections: Math.floor(200 / numNodes),
         mongoMinTime: 1000, // msec
@@ -24,7 +24,7 @@ module.exports = (function()
             "worldoftanks.eu",      // EU:    50000000 ..  99999999
             "worldoftanks.com",     // US:   100000000 .. 149999999
             "", // ???: 1500000000 .. 199999999 (disabled - unknown stat server)
-            "worldoftanks-sea.com", // SEA: 2000000000 .. 249999999
+            "", // "worldoftanks-sea.com", // SEA: 2000000000 .. 249999999 (disabled - stat server is not working)
             "" // "wot.go.vn"       // VTC: 2500000000 .. 299999999 (disabled - stat server is not working)
         ],
         statHostsTimeouts: [
