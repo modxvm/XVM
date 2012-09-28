@@ -11,7 +11,7 @@ static class FileBank
      */
 
     private const String VEHICLE_DIR_PATH = @"res\scripts\item_defs\vehicles\";
-    private const String GAME_PATH = @"D:\Program Files\World_of_Tanks\";
+    private const String GAME_PATH = @"D:\WoT\";
     private static readonly String[] COUNTRIES = new String[] { "ussr", "germany", "usa", "france", "china", "uk" };
 
     private static List<XmlNode> nodeFiles = new List<XmlNode>();
