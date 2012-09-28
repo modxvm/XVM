@@ -1,20 +1,19 @@
 {
   "configVersion": "1.5.0",
-  "editorVersion": "0.2",
+  "editorVersion": "0.15",
   "definition": {
     "author": "_Zver_",
     "description": "Winratio + floating damage",
     "url": "http://www.koreanrandom.com/forum/topic/1392-zver-config-for-xvm/",
-    "date": "02.08.2012",
-    "gameVersion": "0.7.5",
-    "modMinVersion": "2.5.2"
+    "date": "28.09.2012",
+    "gameVersion": "0.8.0",
+    "modMinVersion": "3.0.0"
   },
   "battle": {
     "mirroredVehicleIcons": true,
     "showPostmortemTips": false,
     "removePanelsModeSwitcher": true,
     "highlightVehicleIcon": true,
-    "drawGrid": false,
     "hideXVMVersion": false,
     "clockFormat": "H:N",
     "useStandardMarkers": false,
@@ -119,7 +118,8 @@
               "name": "$FieldFont",
               "size": 15,
               "align": "center",
-              "bold": true
+              "bold": true,
+              "italic": false
             },
      "shadow": {
               "alpha": 100,
@@ -173,7 +173,8 @@
                 "name": "$FieldFont",
                 "size": 12,
                 "align": "center",
-                "bold": true
+                "bold": true,
+                "italic": false
               },
               "shadow": {
                 "alpha": 150,
@@ -195,7 +196,8 @@
                 "name": "$FieldFont",
                 "size": 10,
                 "align": "center",
-                "bold": true
+                "bold": true,
+                "italic": false
               },
               "shadow": {
                 "alpha": 100,
@@ -217,7 +219,8 @@
                 "name": "$FieldFont",
                 "size": 10,
                 "align": "center",
-                "bold": true
+                "bold": true,
+                "italic": false
               },
               "shadow": {
                 "alpha": 150,
@@ -228,6 +231,29 @@
                 "size": 2
               },
               "format": "{{t-rating}} {{t-battles}}"
+            },
+             {
+   "visible": true,
+              "x": 8,
+              "y": -35,
+              "alpha": 100,
+              "color": "0xFFFFFF",
+              "font": {
+                "name": "$FieldFont",
+                "size": 20,
+                "align": "center",
+                "bold": true,
+                "italic": false
+              },
+              "shadow": {
+                "alpha": 150,
+                "color": "0x000000",
+                "angle": 45,
+                "strength": 200,
+                "distance": 1,
+                "size": 3
+              },
+              "format": "{{turret}}"
             }
           ]
         },
@@ -283,7 +309,8 @@
               "name": "$FieldFont",
               "size": 15,
               "align": "center",
-              "bold": true
+              "bold": true,
+              "italic": false
             },
             "shadow": {
               "alpha": 100,
@@ -337,7 +364,8 @@
                 "name": "$FieldFont",
                 "size": 12,
                 "align": "center",
-                "bold": true
+                "bold": true,
+                "italic": false
               },
               "shadow": {
                 "alpha": 150,
@@ -359,7 +387,8 @@
                 "name": "$FieldFont",
                 "size": 10,
                 "align": "center",
-                "bold": true
+                "bold": true,
+                "italic": false
               },
               "shadow": {
                 "alpha": 100,
@@ -381,7 +410,8 @@
                 "name": "$FieldFont",
                 "size": 10,
                 "align": "center",
-                "bold": true
+                "bold": true,
+                "italic": false
               },
               "shadow": {
                 "alpha": 150,
@@ -450,7 +480,8 @@
               "name": "$FieldFont",
               "size": 15,
               "align": "center",
-              "bold": true
+              "bold": true,
+              "italic": false
             },
             "shadow": {
               "alpha": 100,
@@ -504,7 +535,8 @@
                 "name": "$FieldFont",
                 "size": 12,
                 "align": "center",
-                "bold": true
+                "bold": true,
+                "italic": false
               },
               "shadow": {
                 "alpha": 150,
@@ -571,7 +603,8 @@
               "name": "$FieldFont",
               "size": 15,
               "align": "center",
-              "bold": true
+              "bold": true,
+              "italic": false
             },
             "shadow": {
               "alpha": 100,
@@ -625,7 +658,8 @@
                 "name": "$FieldFont",
                 "size": 12,
                 "align": "center",
-                "bold": true
+                "bold": true,
+                "italic": false
               },
               "shadow": {
                 "alpha": 150,
@@ -695,7 +729,8 @@
               "name": "$FieldFont",
               "size": 15,
               "align": "center",
-              "bold": true
+              "bold": true,
+              "italic": false
             },
             "shadow": {
               "alpha": 100,
@@ -749,7 +784,8 @@
                 "name": "$FieldFont",
                 "size": 12,
                 "align": "center",
-                "bold": true
+                "bold": true,
+                "italic": false
               },
               "shadow": {
                 "alpha": 150,
@@ -771,7 +807,8 @@
                 "name": "$FieldFont",
                 "size": 10,
                 "align": "center",
-                "bold": true
+                "bold": true,
+                "italic": false
               },
               "shadow": {
                 "alpha": 100,
@@ -793,7 +830,8 @@
                 "name": "$FieldFont",
                 "size": 10,
                 "align": "center",
-                "bold": true
+                "bold": true,
+                "italic": false
               },
               "shadow": {
                 "alpha": 150,
@@ -804,6 +842,29 @@
                 "size": 2
               },
               "format": "{{t-rating}} {{t-battles}}"
+            },
+             {
+   "visible": true,
+              "x": 8,
+              "y": -35,
+              "alpha": 100,
+              "color": "0xFFFFFF",
+              "font": {
+                "name": "$FieldFont",
+                "size": 20,
+                "align": "center",
+                "bold": true,
+                "italic": false
+              },
+              "shadow": {
+                "alpha": 150,
+                "color": "0x000000",
+                "angle": 45,
+                "strength": 200,
+                "distance": 1,
+                "size": 3
+              },
+              "format": "{{turret}}"
             }
           ]
         },
@@ -859,7 +920,8 @@
               "name": "$FieldFont",
               "size": 15,
               "align": "center",
-              "bold": true
+              "bold": true,
+              "italic": false
             },
             "shadow": {
               "alpha": 100,
@@ -913,7 +975,8 @@
                 "name": "$FieldFont",
                 "size": 12,
                 "align": "center",
-                "bold": true
+                "bold": true,
+                "italic": false
               },
               "shadow": {
                 "alpha": 150,
@@ -935,7 +998,8 @@
                 "name": "$FieldFont",
                 "size": 10,
                 "align": "center",
-                "bold": true
+                "bold": true,
+                "italic": false
               },
               "shadow": {
                 "alpha": 100,
@@ -957,7 +1021,8 @@
                 "name": "$FieldFont",
                 "size": 10,
                 "align": "center",
-                "bold": true
+                "bold": true,
+                "italic": false
               },
               "shadow": {
                 "alpha": 150,
@@ -1026,7 +1091,8 @@
               "name": "$FieldFont",
               "size": 15,
               "align": "center",
-              "bold": true
+              "bold": true,
+              "italic": false
             },
             "shadow": {
               "alpha": 100,
@@ -1080,7 +1146,8 @@
                 "name": "$FieldFont",
                 "size": 12,
                 "align": "center",
-                "bold": true
+                "bold": true,
+                "italic": false
               },
               "shadow": {
                 "alpha": 150,
@@ -1147,7 +1214,8 @@
               "name": "$FieldFont",
               "size": 15,
               "align": "center",
-              "bold": true
+              "bold": true,
+              "italic": false
             },
             "shadow": {
               "alpha": 100,
@@ -1201,7 +1269,8 @@
                 "name": "$FieldFont",
                 "size": 12,
                 "align": "center",
-                "bold": true
+                "bold": true,
+                "italic": false
               },
               "shadow": {
                 "alpha": 150,
@@ -1244,6 +1313,15 @@
       "enemy_dead_blind": "0x47407A",
       "enemy_blowedup_normal": "0x5A0401",
       "enemy_blowedup_blind": "0x3B365F"
+    },
+    "vtype": {
+      "LT":  "0xA2FF9A",
+      "MT":  "0xFFF198",
+      "HT":  "0xFFACAC",
+      "SPG": "0xEFAEFF",
+      "TD":  "0xA0CFFF",
+      "premium": "0xFFCC66",
+      "usePremiumColor": false
     },
     "hp": [
       { "value": 200,  "color": "0xDD0000" },
@@ -1332,5 +1410,225 @@
     "statisticForm": "../maps/icons/vehicle/contour",
     "playersPanel":  "../maps/icons/vehicle/contour",
     "vehicleMarker": "../maps/icons/vehicle/contour"
+  },
+  "vehicleNames": {
+    "china_Ch01_Type59": null,
+    "china_Ch02_Type62": null,
+    "china_Ch03_WZ_111": null,
+    "france_AMX38": null,
+    "france_AMX40": null,
+    "france_AMX50_Foch": "AMX 50 Foch",
+    "france_AMX_105AM": null,
+    "france_AMX_12t": "AMX 12t",
+    "france_AMX_13F3AM": "AMX 13 F3AM",
+    "france_AMX_13_75": null,
+    "france_AMX_13_90": null,
+    "france_AMX_50Fosh_155": "AMX 50 Fosh 155",
+    "france_AMX_50_100": "AMX 50 100",
+    "france_AMX_50_120": "AMX 50 120",
+    "france_AMX_AC_Mle1946": "AC Mle 1946",
+    "france_AMX_AC_Mle1948": "AC Mle 1948",
+    "france_AMX_M4_1945": null,
+    "france_ARL_44": null,
+    "france_ARL_V39": null,
+    "france_B1": "B1",
+    "france_BDR_G1B": null,
+    "france_Bat_Chatillon155": "Bat 155",
+    "france_Bat_Chatillon25t": "Bat 25t",
+    "france_D1": "D1",
+    "france_D2": "D2",
+    "france_ELC_AMX": null,
+    "france_F10_AMX_50B": "AMX 50B",
+    "france_FCM_36Pak40": null,
+    "france_Hotchkiss_H35": "Hotchkiss",
+    "france_Lorraine155_50": "Lor 155 50",
+    "france_Lorraine155_51": "Lor 155 51",
+    "france_Lorraine39_L_AM": null,
+    "france_Lorraine40t": "Lorraine 40t",
+    "france_RenaultBS": "Renault BS",
+    "france_RenaultFT": "Renault FT",
+    "france_RenaultFT_AC": "Ren. FT AC",
+    "france_RenaultUE57": "Ren. UE 57",
+    "france_S_35CA": null,
+    "france_Somua_Sau_40": null,
+    "france__105_leFH18B2": null,
+    "germany_B_1bis_captured": null,
+    "germany_Bison_I": null,
+    "germany_DickerMax": null,
+    "germany_E50_Ausf_M": null,
+    "germany_E_100": null,
+    "germany_E_50": null,
+    "germany_E_75": null,
+    "germany_Ferdinand": "Ferdi",
+    "germany_G20_Marder_II": null,
+    "germany_G_E": "Typ E",
+    "germany_G_Panther": "GW Panther",
+    "germany_G_Tiger": "GW Tiger",
+    "germany_Grille": null,
+    "germany_H39_captured": null,
+    "germany_Hetzer": null,
+    "germany_Hummel": null,
+    "germany_JagdPanther": "JgPanther",
+    "germany_JagdPantherII": null,
+    "germany_JagdPzIV": "JgPz IV",
+    "germany_JagdPz_E100": "JgPz E-100",
+    "germany_JagdTiger": "JgTiger",
+    "germany_JagdTiger_SdKfz_185": "JgTiger 88",
+    "germany_Lowe": null,
+    "germany_Ltraktor": null,
+    "germany_Maus": null,
+    "germany_Panther_II": null,
+    "germany_Panther_M10": null,
+    "germany_PanzerJager_I": null,
+    "germany_Pz35t": null,
+    "germany_Pz38_NA": "Pz 38 NA",
+    "germany_Pz38t": "Pz 38 (t)",
+    "germany_PzII": null,
+    "germany_PzIII": null,
+    "germany_PzIII_A": null,
+    "germany_PzIII_IV": "Pz III/IV",
+    "germany_PzII_J": null,
+    "germany_PzII_Luchs": null,
+    "germany_PzIV": "Pz IV",
+    "germany_PzIV_Hydro": null,
+    "germany_PzIV_schmalturm": null,
+    "germany_PzV": null,
+    "germany_PzVI": null,
+    "germany_PzVIB_Tiger_II": null,
+    "germany_PzVI_Tiger_P": null,
+    "germany_PzV_PzIV": null,
+    "germany_PzV_PzIV_ausf_Alfa": null,
+    "germany_S35_captured": null,
+    "germany_StuGIII": "StuG III",
+    "germany_Sturmpanzer_II": null,
+    "germany_T_15": null,
+    "germany_T_25": null,
+    "germany_VK1602": null,
+    "germany_VK2801": "VK 2801",
+    "germany_VK3001H": "VK 3001 H",
+    "germany_VK3001P": "VK 3001 P",
+    "germany_VK3002DB": "VK 3002DB",
+    "germany_VK3601H": "VK 3601H",
+    "germany_VK4502A": "VK 4502 A",
+    "germany_VK4502P": "VK 4502 P",
+    "germany_Wespe": null,
+    "uk_GB68_Matilda_Black_Prince": null,
+    "usa_M103": null,
+    "usa_M10_Wolverine": null,
+    "usa_M12": null,
+    "usa_M18_Hellcat": null,
+    "usa_M22_Locust": null,
+    "usa_M24_Chaffee": null,
+    "usa_M2_lt": null,
+    "usa_M2_med": null,
+    "usa_M36_Slagger": null,
+    "usa_M37": null,
+    "usa_M3_Grant": null,
+    "usa_M3_Stuart": null,
+    "usa_M40M43": null,
+    "usa_M41": null,
+    "usa_M46_Patton": null,
+    "usa_M48A1": null,
+    "usa_M4A2E4": null,
+    "usa_M4A3E8_Sherman": null,
+    "usa_M4_Sherman": null,
+    "usa_M5_Stuart": null,
+    "usa_M6": null,
+    "usa_M6A2E1": null,
+    "usa_M7_Priest": null,
+    "usa_M7_med": null,
+    "usa_M8A1": null,
+    "usa_MTLS_1G14": null,
+    "usa_Pershing": null,
+    "usa_Ram_II": null,
+    "usa_Sherman_Jumbo": null,
+    "usa_T110": "T110",
+    "usa_T110E3": "E3",
+    "usa_T110E4": "E4",
+    "usa_T14": null,
+    "usa_T18": null,
+    "usa_T1_Cunningham": null,
+    "usa_T1_hvy": null,
+    "usa_T20": null,
+    "usa_T25_2": null,
+    "usa_T25_AT": null,
+    "usa_T26_E4_SuperPershing": "SuperPershing",
+    "usa_T28": null,
+    "usa_T28_Prototype": "T28 Prot",
+    "usa_T29": null,
+    "usa_T2_lt": null,
+    "usa_T2_med": null,
+    "usa_T30": null,
+    "usa_T32": null,
+    "usa_T34_hvy": null,
+    "usa_T40": null,
+    "usa_T49": null,
+    "usa_T57": null,
+    "usa_T82": null,
+    "usa_T92": null,
+    "usa_T95": null,
+    "ussr_AT_1": null,
+    "ussr_A_20": null,
+    "ussr_A_32": null,
+    "ussr_BT_2": null,
+    "ussr_BT_7": null,
+    "ussr_BT_SV": null,
+    "ussr_Churchill_LL": null,
+    "ussr_GAZ_74b": null,
+    "ussr_IS8": null,
+    "ussr_IS": null,
+    "ussr_ISU_152": null,
+    "ussr_IS_3": null,
+    "ussr_IS_4": null,
+    "ussr_IS_7": null,
+    "ussr_KV1": null,
+    "ussr_KV2": null,
+    "ussr_KV4": null,
+    "ussr_KV_13": null,
+    "ussr_KV_1s": null,
+    "ussr_KV_220": null,
+    "ussr_KV_220_action": null,
+    "ussr_KV_3": null,
+    "ussr_KV_5": null,
+    "ussr_M3_Stuart_LL": null,
+    "ussr_MS_1": null,
+    "ussr_Matilda_II_LL": null,
+    "ussr_Object252": "Obj 252",
+    "ussr_Object263": "Obj 263",
+    "ussr_Object268": "Obj 268",
+    "ussr_Object_212": "Obj 212",
+    "ussr_Object_261": "Obj 261",
+    "ussr_Object_704": "Obj 704",
+    "ussr_ST_I": null,
+    "ussr_SU100M1": null,
+    "ussr_SU122_44": null,
+    "ussr_SU122_54": null,
+    "ussr_SU_100": null,
+    "ussr_SU_101": null,
+    "ussr_SU_14": null,
+    "ussr_SU_152": null,
+    "ussr_SU_18": null,
+    "ussr_SU_26": null,
+    "ussr_SU_5": null,
+    "ussr_SU_76": null,
+    "ussr_SU_85": null,
+    "ussr_SU_85I": null,
+    "ussr_SU_8": null,
+    "ussr_S_51": null,
+    "ussr_T150": null,
+    "ussr_T62A": null,
+    "ussr_T_127": null,
+    "ussr_T_26": null,
+    "ussr_T_28": null,
+    "ussr_T_34": null,
+    "ussr_T_34_85": null,
+    "ussr_T_43": null,
+    "ussr_T_44": null,
+    "ussr_T_46": null,
+    "ussr_T_50": null,
+    "ussr_T_50_2": null,
+    "ussr_T_54": null,
+    "ussr_Tetrarch_LL": null,
+    "ussr_Valentine_LL": null
   }
 }

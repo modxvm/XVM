@@ -1,5 +1,6 @@
 ﻿XVM-3.0.2:
   * Fixed color blind mode
+  * wot-xvm-proxy: added /maximized option (run client in maximized window)
 
 XVM-3.0.1:
   * added information for tanks PzKpfwIV Schmalturm, Panther-M10 and СУ-122-44
