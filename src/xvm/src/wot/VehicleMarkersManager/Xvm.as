@@ -174,13 +174,10 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
          * newHealth:
          *  1497, 499, 0 and -1 in case of ammo blow up
          * flag:
-         *  0 - damage by ally-tk to enemy; TODO: check for "to ally\anyone"
-         *  1 - damage by ally    to enemy;
-         *  2 - damage by enemy   to ally;
-         *  3 - damage by ally    to ally; friendly fire;
-         *  4 - damage by player including ff; TODO: including ram???
+         * 0 - "FROM_UNKNOWN", 1 - "FROM_ALLY", 2- "FROM_ENEMY", 3 - "FROM_SQUAD", 4 - "FROM_PLAYER"
+         * 
          * damageType:
-         *  "attack", "fire", "ramming", TODO: check for "fall"?
+         *  "attack", "fire", "ramming", "world_collision", "death_zone", "drowning", "explosion"
          */
         Logger.add("Xvm::updateHealth(" + flag + ", " + damageType + ", " + newHealth +")");
         
