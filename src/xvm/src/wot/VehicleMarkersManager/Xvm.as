@@ -168,21 +168,35 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     /**
      * @see IVehicleMarker
      */
-    function updateHealth(curHealth, flag, damageType) // TODO: use flag and damageType
+    function updateHealth(newHealth, flag, damageType) // TODO: use flag and damageType
     {
-        trace("Xvm::updateHealth(" + curHealth + ", " + flag + ", " + damageType +")");
-        if (curHealth < 0)
+        /* 
+         * newHealth:
+         *  1497, 499, 0 and -1 in case of ammo blow up
+         * flag:
+         *  0 - damage by ally-tk to enemy; TODO: check for "to ally\anyone"
+         *  1 - damage by ally    to enemy;
+         *  2 - damage by enemy   to ally;
+         *  3 - damage by ally    to ally; friendly fire;
+         *  4 - damage by player including ff; TODO: including ram???
+         * damageType:
+         *  "attack", "fire", "ramming", TODO: check for "fall"?
+         */
+        Logger.add("Xvm::updateHealth(" + flag + ", " + damageType + ", " + newHealth +")");
+        
+        if (newHealth < 0)
             s_blowedUp[m_playerFullName] = true;
-        m_isDead = curHealth <= 0;
+            
+        m_isDead = newHealth <= 0;
 
-        var delta: Number = curHealth - m_curHealth;
-        m_curHealth = m_isDead ? 0 : curHealth; // fix "-1"
+        var delta: Number = newHealth - m_curHealth;
+        m_curHealth = m_isDead ? 0 : newHealth; // fix "-1"
         if (delta < 0)
         {
             var cfg = vehicleState.getCurrentConfig();
             healthBarComponent.updateState(cfg);
-            healthBarComponent.showDamage(cfg, curHealth, m_maxHealth, -delta);
-            damageTextComponent.showDamage(vehicleState.getCurrentConfig(), curHealth, -delta);
+            healthBarComponent.showDamage(cfg, newHealth, m_maxHealth, -delta);
+            damageTextComponent.showDamage(vehicleState.getCurrentConfig(), newHealth, -delta);
         }
 
         XVMUpdateDynamicTextFields();
