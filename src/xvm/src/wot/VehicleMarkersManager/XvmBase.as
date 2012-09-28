@@ -8,6 +8,7 @@ import wot.utils.Logger;
 import wot.utils.StatFormat;
 import wot.utils.Utils;
 import wot.utils.VehicleInfo;
+import wot.VehicleMarkersManager.ColorsManager;
 import wot.VehicleMarkersManager.ErrorHandler;
 import wot.VehicleMarkersManager.VehicleMarkerProxy;
 import wot.VehicleMarkersManager.VehicleState;
@@ -44,8 +45,6 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
     private static var s_showExInfo:Boolean = false; // Saved "Extended Info State" for markers that appeared when Alt pressed.
     private static var s_blowedUp:Object = {}; // List of members that was ammoracked.
 
-    public static var s_isColorBlindMode = false; // TODO: not implemented, always false
-
     // Private members
     var m_entityName;
     var m_playerFullName;
@@ -81,7 +80,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
     // Parent proxy instance (assigned from proxy)
     private var _proxy:VehicleMarkerProxy;
     public function get proxy() { return _proxy; }
-    
+
     /**
      * Text formatting functions
      */
@@ -167,8 +166,8 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
 
     public function formatDynamicColor(format:String, curHealth:Number):Number
     {
-        var systemColor =  XvmHelper.getSystemColor(m_entityName, m_isDead,
-            s_blowedUp[m_playerFullName] != undefined, s_isColorBlindMode);
+        var systemColor =  ColorsManager.getSystemColor(m_entityName, m_isDead,
+            s_blowedUp[m_playerFullName] != undefined, ColorsManager.isColorBlindMode);
         try
         {
             if (!format)
@@ -237,7 +236,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
 
         return 100;
     }
-    
+
     /**
      * Components extension: MovieClip.onEnterFrame translation
      * TODO: Check performance & implementation
@@ -247,7 +246,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
         if (contourIconComponent != null && contourIconComponent.onEnterFrame != null)
             contourIconComponent.onEnterFrame();
     }
-    
+
     /**
      * Create new TextField based on config
      */

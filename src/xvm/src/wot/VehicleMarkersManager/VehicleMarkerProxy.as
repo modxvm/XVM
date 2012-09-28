@@ -38,7 +38,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     private var pNameField:TextField;
     private var healthBar:MovieClip;
     private var bgShadow:MovieClip;
-    
+
     /**
      * Instance of subject class with real implementation
      */
@@ -47,20 +47,21 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     /**
      * List of pending calls (missed while config is loading).
      * Records is object: { func:String, args:Array }
-     */ 
+     */
     private var pendingCalls:Array;
 
     private function trace(str:String):Void
     {
         //if (this["_playerName"] == "dosik_dai")
-        Logger.add(this["_playerName"] + "> " + str);
+        //Logger.add(this["_playerName"] + "> " + str);
     }
-    
+
     /**
      * ctor()
      */
     public function VehicleMarkerProxy()
     {
+
         //Logger.add("VehicleMarkerProxy::ctor()");
         // ScaleForm optimization // FIXIT: is required?
         if (!_global.noInvisibleAdvance)
@@ -249,7 +250,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
             }
         }
     }
-    
+
     /**
      * Call all skipped steps
      * subject must be created when this function is called
@@ -268,7 +269,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         }
         pendingCalls = null;
     }
-    
+
     /**
      * Translate function call to subject or save in pending calls if subject is not created yet
      * @param	func    Name of function
@@ -301,7 +302,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         wm._alpha = 50;
         wm.text = "XVM v" + Defines.XVM_VERSION;
     }
-    
+
     /**
      * IVehicleMarker implementation
      */
@@ -313,7 +314,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         this["_playerName"] = pFullName; // for debug
         call("init",   [ vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt, entityType ]);
     }
-    
+
     /**
      * called by Battle.pyc
      */
@@ -330,12 +331,12 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
 
     /**
      * Ingame original WG marker settings.
-     * 
+     *
      * Five methods below are called when player touches some marker setting
      * at ingame marker setting menu.
-     * 
+     *
      * settingsUpdate() is new method in 0.8.0.
-     * 
+     *
      * For XVM - do nothing.
      */
     public function settingsUpdate(flag) { call("settingsUpdate", [ flag ]); }
@@ -343,12 +344,12 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     public function set visible(value)  {   subject.visible  = value; }
     public function get disabled() { return subject.disabled; }
     public function set disabled(value) {   subject.disabled = value; }
-    
+
     // IUIComponent implementation
-    
+
     public function configUI()    { call("configUI"); }
     public function validateNow() { call("validateNow"); }
-    
+
     /**
      * TODO: not all is required, remove unused.
      */

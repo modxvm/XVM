@@ -7,6 +7,7 @@ import wot.utils.StatData;
 import wot.utils.StatLoader;
 import wot.utils.Utils;
 import wot.utils.Logger;
+import wot.VehicleMarkersManager.ColorsManager;
 import wot.VehicleMarkersManager.ErrorHandler;
 import wot.VehicleMarkersManager.VehicleMarkerProxy;
 import wot.VehicleMarkersManager.VehicleState;
@@ -51,6 +52,9 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         super(); // gfx.core.UIComponent
         _proxy = proxy;
         Utils.TraceXvmModule("XVM");
+
+        // initialize ColorsManager for detecting color blind mode
+        ColorsManager.initialize();
     }
 
     /**
@@ -180,7 +184,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
             healthBarComponent.showDamage(cfg, curHealth, m_maxHealth, -delta);
             damageTextComponent.showDamage(vehicleState.getCurrentConfig(), curHealth, -delta);
         }
-        
+
         XVMUpdateDynamicTextFields();
     }
 

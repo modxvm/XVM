@@ -1,4 +1,5 @@
 import wot.VehicleMarkersManager.AbstractAccessProxy;
+import wot.VehicleMarkersManager.ColorsManager;
 import wot.VehicleMarkersManager.Xvm;
 
 class wot.VehicleMarkersManager.components.DamageTextProxy extends AbstractAccessProxy
@@ -24,6 +25,6 @@ class wot.VehicleMarkersManager.components.DamageTextProxy extends AbstractAcces
 
     public function get isColorBlindMode():Boolean
     {
-        return Xvm.s_isColorBlindMode;
+        return ColorsManager.isColorBlindMode;
     }
 }

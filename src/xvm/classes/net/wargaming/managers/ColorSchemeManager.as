@@ -1,9 +1,9 @@
 ﻿intrinsic class net.wargaming.managers.ColorSchemeManager
 {
-    static function get instance();
-
-    //function getScheme(schemeName);
-    //function getAliasColor(schemeName);
-    //function getRGB(schemeName);
-    //function getTransform(schemeName);
+    static var _colors = {};
+    static function initialize();
+    static function get instance():ColorSchemeManager;
+    function update();
+    function addChangeCallBack(scope, func_name);
+    function getScheme(schemeName);
 }
