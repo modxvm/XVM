@@ -19,9 +19,9 @@
     * In-game players rating (only in xvm-full package)
 
   Project site:  http://code.google.com/p/wot-xvm/
-  Support:       http://forum.bulychev.net/viewforum.php?f=7
-  FAQ (Russian): http://www.koreanrandom.com/forum/topic/1381-faq-otveti-na-chastie-voprosi-po-xvm/
-  Ready configs: http://www.koreanrandom.com/forum/topic/1384-xvm-configurations/
+  Support:       http://www.koreanrandom.com/forum/topic/1383-xvm
+  FAQ (Russian): http://www.koreanrandom.com/forum/topic/1381-faq
+  Ready configs: http://www.koreanrandom.com/forum/topic/1384-configurations
   Сonfig editor: http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
 -----------------------------------------------------------

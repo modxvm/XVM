@@ -19,9 +19,10 @@
     * Рейтинг игроков в игре (только в пакете xvm-full)
 
   Сайт проекта: http://code.google.com/p/wot-xvm/
-  Поддержка:    http://forum.bulychev.net/viewforum.php?f=6
-  FAQ:          http://www.koreanrandom.com/forum/topic/1381-faq-otveti-na-chastie-voprosi-po-xvm/
+  Поддержка:    http://www.koreanrandom.com/forum/topic/1383-xvm
+  FAQ:          http://www.koreanrandom.com/forum/topic/1381-faq
   Редактор:     http://www.koreanrandom.com/forum/topic/1422-/#entry11316
+  Конфиги:      http://www.koreanrandom.com/forum/topic/1384-configurations
 
 -----------------------------------------------------------
 2. УСТАНОВКА

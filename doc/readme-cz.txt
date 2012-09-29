@@ -20,10 +20,10 @@ Obsah:
     * Statistika hráčů v průběhu bitvy (jen pro plnou verzi XVM módu- xvm-full package)
 
   Stránky projektu:  			http://code.google.com/p/wot-xvm/
-  Podpora:           			http://forum.bulychev.net/viewforum.php?f=7
-  Nejčastější dotazy (Rusky):		http://www.koreanrandom.com/forum/topic/1381-faq-otveti-na-chastie-voprosi-po-xvm/
-  Různá již připravená nastavení:  	http://www.koreanrandom.com/forum/topic/1384-xvm-configurations/
-  Online editor:     			https://sites.google.com/site/sirmaxwiki/xvm-editor
+  Podpora:           			http://www.koreanrandom.com/forum/topic/1383-xvm
+  Nejčastější dotazy (Rusky):		http://www.koreanrandom.com/forum/topic/1381-faq
+  Různá již připravená nastavení:  	http://www.koreanrandom.com/forum/topic/1384-configurations
+  Online editor:     			http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
 
 -----------------------------------------------------------
@@ -106,7 +106,7 @@ Obsah:
         "\xvm-doc\samples\" v adresáři hry
 
       Můžete si vytvořit vlastní nastavení v online editoru:
-        https://sites.google.com/site/sirmaxwiki/xvm-editor
+        http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
       Všechny možnosti nastavení můžete vidět v tomto souboru:
         "\xvm-doc\samples\Full config EN\XVM.xvmconf"
@@ -198,32 +198,32 @@ Obsah:
 
         "color": "{{c:eff}}" - barva závislá na efektivitě hráče
         "alpha": "{{a:hp}}" - průhlednost závislá na aktuálním počtu životů
-        
-      
+
+
       Ikony hráčů a klanů:
-      
+
         V nastavení je nutné v parametru "battle/clanIconsFolder" nastavit cestu do kořenového adresáře s ikonami klanů.
-        
+
         Všechny ikony se automaticky načtou ze složky příslušného regionu (RU/EN/US...).
-        
+
         Pro zobrazení své vlastní ikony ve hře stačí vložit vlastní ikonu do příslušné složky:
           "clanicons/[REGION]/clan/" pro klanovou ikonu nebo "clanicons/[REGION]/nick/" pro ikonu hráče
-        
+
         Můžete vytvořit výchozí ikonu klanu/hráče:
           "clanicons/[REGION]/clan/default.png" (výchozí ikona klanů)
           "clanicons/[REGION]/nick/default.png" (výchozí ikona hráčů)
-        
+
         Ikony se přiřazují dle následujících priorit:
           přezdívka -> klan -> výchozí ikona klanů -> výchozí ikonu hráčů
           (nick/<player>.png -> clan/<clan>.png -> clan/default.png -> nick/default.png)
-          
+
         Ikony nejlepších 100 klanů jsou součástí balíčku.
-        
+
         Archivy se všemi ikonami klanů je možné stáhnout zvlášť:
           Ruský server:     http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-ru.zip
           Evropský server:  http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-eu.zip
           Americký server:  http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-us.zip
-          
-          
+
+
 Přeložil: Shortik
 Kontakt:  vapokrleo@seznam.cz

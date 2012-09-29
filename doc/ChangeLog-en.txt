@@ -217,8 +217,7 @@ XVM-2.0:
     only for China servers)
   * added icon sets ("iconset" config section)
   * player/clan icons added
-  * Win chances calculation added.
-    Discussion: http://forum.bulychev.net/viewtopic.php?f=4&t=26 (Russian)
+  * Win chances calculation added
   * many other fixes
 
 XVM-1.7:

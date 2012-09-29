@@ -19,13 +19,10 @@
     * Рейтинг игроков в игре (только в пакете xvm-full)
 
   Сайт проекта: http://code.google.com/p/wot-xvm/
-  Поддержка:    http://forum.bulychev.net/viewforum.php?f=6
-  FAQ:          http://www.koreanrandom.com/forum/topic/1381-faq-otveti-na-chastie-voprosi-po-xvm/
-  Конфиги:      http://www.koreanrandom.com/forum/topic/1384-xvm-configurations/
+  Поддержка:    http://www.koreanrandom.com/forum/topic/1383-xvm
+  FAQ:          http://www.koreanrandom.com/forum/topic/1381-faq
+  Конфиги:      http://www.koreanrandom.com/forum/topic/1384-configurations
   Редактор:     http://www.koreanrandom.com/forum/topic/1422-/#entry11316
-
-  Всем, кто считает что мод грузит сервер статистики, сюда:
-  http://bulychev.net/blog/2012/02/pozitsiya-wg-v-otnoshenii-modov-so-statisti/
 
 -----------------------------------------------------------
 2. УСТАНОВКА
