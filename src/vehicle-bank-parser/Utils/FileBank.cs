@@ -20,10 +20,19 @@ static class FileBank
     {
         foreach (string onefile in fileList())
             saveToState(decode(onefile));
+
         sortBank(); // to simplify debug
     }
 
-    public static List<XmlNode> list()
+    public static void removeNonVehicleNodes()
+    {
+        for (int i = 0; i < nodeFiles.Count; i++)
+            // FirstChild is empty - "", Next is <crew>
+            if (nodeFiles[i].FirstChild.NextSibling.Name != "crew")
+                nodeFiles.RemoveAt(i--); // xmlNodeVehicleList numeration changes -> decrement
+    }
+
+    public static List<XmlNode> xmlNodeVehicleList()
     {
         return nodeFiles;
     }
@@ -48,7 +57,7 @@ static class FileBank
         foreach ( string country in COUNTRIES)
             pathList.Add(Path.Combine(GAME_PATH, VEHICLE_DIR_PATH, country));
         
-        // returns *\vehicle\ussr, *\vehicle\germany, *\vehicle\usa
+        // returns *\vehicles\ussr, *\vehicles\germany, *\vehicles\usa
         return pathList;
     }
 

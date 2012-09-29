@@ -7,14 +7,13 @@ using System.IO;
 static class Export
 {
     /**
-     * Metaprogramming.
      * Make actionscript 2 code file with predefined array of obtained name\hp\turret data.
      */
 
     //private const string EXPORT_FILEPATH = @"C:\temp\TurretStatusDatabase.as";
     private const string EXPORT_FILEPATH = @"D:\xvm\src\xvm\src\wot\VehicleMarkersManager\components\TurretStatusDatabase.as";
 
-    public static void AS2(List<Vehicle> vehList)
+    public static void generateAS2code(List<Vehicle> vehList)
     {
         StreamWriter file = new StreamWriter(EXPORT_FILEPATH, false, Encoding.GetEncoding(1250));
 

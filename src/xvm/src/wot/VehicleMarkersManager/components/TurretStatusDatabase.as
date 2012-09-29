@@ -6,7 +6,7 @@
 class wot.VehicleMarkersManager.components.TurretStatusDatabase
 {
     /**
-    * Vehicles in list has two turret modules.
+    * Vehicles in db has two turret modules.
     * Format:
     * vehicel name, stock max hp, turret status
     * Turret status: 2 - unable to mount top gun to stock turret, 1 - able
@@ -51,7 +51,7 @@ class wot.VehicleMarkersManager.components.TurretStatusDatabase
             db["m3_stuart"] = new Array(220, 2);
             db["m36_slagger"] = new Array(560, 1);
             db["m4_sherman"] = new Array(400, 2);
-            db["m46_patton"] = new Array(1600, 2);
+            db["m46_patton"] = new Array(1600, 1);
             db["m4a3e8_sherman"] = new Array(720, 2);
             db["m5_stuart"] = new Array(290, 2);
             db["m6"] = new Array(840, 2);
@@ -59,7 +59,7 @@ class wot.VehicleMarkersManager.components.TurretStatusDatabase
             db["m8a1"] = new Array(250, 2);
             db["ms-1"] = new Array(90, 2);
             db["panther_ii"] = new Array(1350, 2);
-            db["pershing"] = new Array(1350, 2);
+            db["pershing"] = new Array(1350, 1);
             db["pz35t"] = new Array(150, 1);
             db["pz38_na"] = new Array(300, 2);
             db["pz38t"] = new Array(200, 2);
