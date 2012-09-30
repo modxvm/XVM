@@ -88,7 +88,10 @@
       {{rlevel}}     - vehicle level (Roman numerals)
       {{dmg}}        - damage health points
       {{dmg-ratio}}  - damage health ratio (without '%' sign)
-	  {{turret}}     - stock turret marker; "*" symbol - cant mount top gun; "-" top gun is possible
+      {{turret}}     - stock turret marker:
+                          "*" symbol - stock turret, cannot mount top gun
+                          "-" symbol - stock turret, top gun is possible
+                          empty - top turret
 
     Dynamic colors macros:
       {{c:hp}}       - color depended from current health points (only in vehicle markers)
