@@ -1,6 +1,7 @@
 ﻿XVM-3.0.3:
   * fixed {{turret}} marker calculations for a-20, bt-7, d2, m7_med, pziv, t2_med
   * fixed {{turret}} marker significance for Patton and Pershing
+  * change sixth sense indicator (copy new image to res_mods/icons/SixthSense.png)
 
 XVM-3.0.2:
   * Fixed color blind mode

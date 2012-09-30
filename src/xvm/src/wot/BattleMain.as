@@ -2,20 +2,21 @@
  * ...
  * @author sirmax2
  */
-import net.wargaming.controls.UILoaderAlt;
 import wot.utils.Chance;
 import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.GlobalEventDispatcher;
-import wot.utils.IconLoader;
 import wot.utils.Logger;
 import wot.utils.StatData;
 import wot.utils.StatLoader;
 import wot.utils.Utils;
+import wot.SixthSenseIndicator;
 
 class wot.BattleMain
 {
     static var instance: BattleMain;
+    var sixthSenseIndicator:SixthSenseIndicator;
+
     //static var minimap;
     //static var timerBig;
     //static var leftPanel;
@@ -49,36 +50,16 @@ class wot.BattleMain
 
         GlobalEventDispatcher.removeEventListener("config_loaded", BattleMainConfigLoaded);
 
-/*        
-        // 6th sense lamp
-        var il:IconLoader = new IconLoader(instance, instance.completeLoad6thSenseIcon);
-        var icon:UILoaderAlt = (UILoaderAlt)(_root.sixthSenseIndicator.attachMovie("UILoaderAlt", "icon", 0));
-        icon["holder"] = _root.sixthSenseIndicator;
-        il.init(icon, [ "../../../icons/lamp.png", "" ], false);
-        icon.source = il.currentIcon;
+        // Sixth sense indicator
+        instance.sixthSenseIndicator = new SixthSenseIndicator();
 
-        // debug
-        setInterval(function() { _root.sixthSenseIndicator.gotoAndPlay("active") }, 1000);
-
-        //_root.timerBig.win.winText
-*/
-
+        // Panels Mode Switcher
         if (Config.s_config.battle.removePanelsModeSwitcher)
             _root.switcher_mc._visible = false;
 
         // Show Clocks
         ShowClock(Config.s_config.battle.clockFormat);
     }
-
-    /*public function completeLoad6thSenseIcon(event)
-    {
-        Logger.add("completeLoad6thSenseIcon");
-        var icon: MovieClip = event.target;
-        icon._x = icon._y = 0;
-        icon.setSize(100, 100);
-        icon.invalidate();
-        icon.visible = true;
-    }*/
 
     private static function ShowClock(format)
     {
@@ -87,7 +68,8 @@ class wot.BattleMain
         var fgMC = _root.debugPanel.fgMC;
         var lag = fgMC.lag;
         var fps = fgMC.fps;
-        var clock: TextField = fgMC.createTextField("clock", fgMC.getNextHighestDepth(), lag._x + lag._width, fps._y, 300, fps._height);
+        var clock: TextField = fgMC.createTextField("clock", fgMC.getNextHighestDepth(),
+            lag._x + lag._width, fps._y, 300, fps._height);
         clock.antiAliasType = "advanced";
         var tf: TextFormat = fps.getNewTextFormat();
         tf.align = "left";

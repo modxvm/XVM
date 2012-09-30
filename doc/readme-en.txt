@@ -182,3 +182,7 @@
     http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-ru.zip (RU)
     http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-eu.zip (EU)
     http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-us.zip (US)
+
+  Change sixth sense indicator.
+  You can replace sixth sense indicator. Copy file with new indicator image to
+    res_mods/icons/SixthSense.png

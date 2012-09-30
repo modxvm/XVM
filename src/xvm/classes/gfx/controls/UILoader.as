@@ -1,8 +1,11 @@
 ﻿intrinsic class gfx.controls.UILoader extends gfx.core.UIComponent
 {
   var contentHolder;
-  var source: String;
 
+  function set source(value:String);
+  function set autoSize(value:Boolean);
+  function get content():MovieClip;
+  
   function unload();
   function load(url);
 

@@ -186,3 +186,7 @@
     http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-ru.zip (RU)
     http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-eu.zip (EU)
     http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-us.zip (US)
+
+  Замена индикатора шестого чувства.
+  Можно заменить индикатор шестого чувства. Для этого необходимо положить картинку в
+    res_mods/icons/SixthSense.png

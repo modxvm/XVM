@@ -61,8 +61,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      */
     public function VehicleMarkerProxy()
     {
+        trace("VehicleMarkerProxy::ctor()");
 
-        //Logger.add("VehicleMarkerProxy::ctor()");
         // ScaleForm optimization // FIXIT: is required?
         if (!_global.noInvisibleAdvance)
             _global.noInvisibleAdvance = true;
@@ -107,7 +107,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      */
     private function onConfigLoaded():Void
     {
-        //trace("onConfigLoaded()");
+        trace("onConfigLoaded()");
 
         GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
 
@@ -127,13 +127,13 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      */
     private function initializeSubject():Void
     {
-        //trace("initializeSubject() st = " + Config.s_config.battle.useStandardMarkers);
+        trace("initializeSubject() st = " + Config.s_config.battle.useStandardMarkers);
 
         // Create marker class depending on config setting
         if (Config.s_config.battle.useStandardMarkers == true)
         {
             // Create Standard marker
-            subject = new net.wargaming.ingame.VehicleMarker()
+            subject = new net.wargaming.ingame.VehicleMarker();
             // Translate entity name to subject
             subject["m_entityName"] = m_team;
             // Save link to me in subject
@@ -257,7 +257,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      */
     private function processPendingCalls():Void
     {
-        //trace("processPendingCalls()");
+        trace("processPendingCalls()");
 
         // Calls order is important
         var len = pendingCalls.length;
@@ -277,8 +277,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      */
     private function call(func:String, args:Array):Void
     {
-        //if (func != "showExInfo")
-        //    trace("call(): " + func + (args ? " [" + args.join(", ") + "]" : ""));
+        if (func != "showExInfo")
+            trace("call(): " + func + (args ? " [" + args.join(", ") + "]" : ""));
 
         if (subject != null)
             subject[func].apply(subject, args);
@@ -310,7 +310,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     // called by Battle.pyc
     public function init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt, entityType)
     {
-        //Logger.add("init: " + pFullName);
+        trace("init: " + pFullName);
         this["_playerName"] = pFullName; // for debug
         call("init",   [ vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt, entityType ]);
     }
@@ -340,10 +340,10 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      * For XVM - do nothing.
      */
     public function settingsUpdate(flag) { call("settingsUpdate", [ flag ]); }
-    public function get visible()  { return subject.visible; }
-    public function set visible(value)  {   subject.visible  = value; }
-    public function get disabled() { return subject.disabled; }
-    public function set disabled(value) {   subject.disabled = value; }
+    public function get visible()  { return super.visible; }
+    public function set visible(value)  {   super.visible = subject.visible = value; }
+    public function get disabled() { return super.disabled; }
+    public function set disabled(value) {  super.disabled = subject.disabled = value; }
 
     // IUIComponent implementation
 
