@@ -1,4 +1,5 @@
 ﻿XVM-3.0.3:
+  * added possibility to change {{turret}} marker display string
   * fixed {{turret}} marker calculations for a-20, bt-7, d2, m7_med, pziv, t2_med
   * fixed {{turret}} marker significance for Patton and Pershing
   * added possibility to change sixth sense indicator.

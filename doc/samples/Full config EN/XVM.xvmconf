@@ -1632,5 +1632,10 @@
     "ussr_T_54": null,
     "ussr_Tetrarch_LL": null,
     "ussr_Valentine_LL": null
+  },
+  // {{turret}} marker display strings
+  "turretMarkers": {
+    "highVulerabilily": "*", // Subject has stock turret and top gun can not be mounted. Subject is highly vulnerbale.
+    "lowVulerabilily": "-"   // Subject has stock turret and top gun can be mounted. Subject is somewhat vulnerbale.
   }
 }
