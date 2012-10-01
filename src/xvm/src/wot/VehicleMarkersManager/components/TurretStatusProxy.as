@@ -2,6 +2,7 @@ import wot.VehicleMarkersManager.AbstractAccessProxy;
 import wot.VehicleMarkersManager.Xvm;
 import wot.VehicleMarkersManager.components.TurretStatusDatabase;
 import wot.utils.VehicleInfo;
+import wot.utils.Config
 
 class wot.VehicleMarkersManager.components.TurretStatusProxy extends AbstractAccessProxy
 {
@@ -28,6 +29,16 @@ class wot.VehicleMarkersManager.components.TurretStatusProxy extends AbstractAcc
             return vehInfo[1];
 
         return 0; // Turret status unknown
+    }
+    
+    public function getHighVulnDisplayMarker():String
+    {
+        return Config.s_config.turretMarkers.highVulerabilily;
+    }
+    
+    public function getLowVulnDisplayMarker():String
+    {
+        return Config.s_config.turretMarkers.lowVulerabilily;
     }
 
     private function get vehicleName():String

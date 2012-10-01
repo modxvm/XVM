@@ -13,7 +13,6 @@ class wot.VehicleMarkersManager.components.TurretStatusComponent
      * Top turret unlocks new gun.
      * Player with stock turret can not mount top gun.
      */
-    private static var HIGH_VULN_DISPLAY_MARKER: String = "*";
     private static var HIGH_VULN_DATABASE_VAL: Number = 2;
 
     /**
@@ -21,7 +20,6 @@ class wot.VehicleMarkersManager.components.TurretStatusComponent
      * Top turret does not unlock new gun.
      * Player with stock turret can mount top gun.
      */
-    private static var LOW_VULN_DISPLAY_MARKER: String = "-";
     private static var LOW_VULN_DATABASE_VAL: Number = 1;
 
     /**
@@ -52,10 +50,10 @@ class wot.VehicleMarkersManager.components.TurretStatusComponent
     {
         var status:Number = proxy.defineVehicleStatus();
 
-        if      ( status == HIGH_VULN_DATABASE_VAL )
-                  marker =  HIGH_VULN_DISPLAY_MARKER;
+        if      ( status == HIGH_VULN_DATABASE_VAL)
+                  marker =  proxy.getHighVulnDisplayMarker();
         else if ( status == LOW_VULN_DATABASE_VAL )
-                  marker =  LOW_VULN_DISPLAY_MARKER;
+                  marker =  proxy.getLowVulnDisplayMarker();
         else if ( status == UNKNOWN_VULN_DATABASE_VAL)
                   marker =  UNKNOWN_VULN_DISPLAY_MARKER;
     }

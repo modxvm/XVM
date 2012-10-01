@@ -312,7 +312,11 @@ class wot.utils.DefaultConfig
         vehicleMarker: "../maps/icons/vehicle/contour"
       },
       consts: consts,
-      vehicleNames: VehicleInfo.getVehicleNamesData()
+      vehicleNames: VehicleInfo.getVehicleNamesData(),
+      turretMarkers: {
+        highVulerabilily: "*",
+        lowVulerabilily: "-"
+      }
     };
 
     return a;
@@ -523,7 +527,7 @@ class wot.utils.DefaultConfig
       format: "{{nick}}"
     }
   }
-
+  
   public static function get playerName_dead(): Object
   {
     return {
