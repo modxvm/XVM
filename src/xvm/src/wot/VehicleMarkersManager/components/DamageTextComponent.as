@@ -19,30 +19,24 @@ class wot.VehicleMarkersManager.components.DamageTextComponent
         damage = proxy.createHolder();
     }
 
-    public function showDamage(state_cfg:Object, curHealth:Number, delta:Number)
+    public function showDamage(state_cfg:Object, newHealth:Number, delta:Number, flag:Number, damageType:Number)
     {
         var cfg = state_cfg.damageText;
 
         if (!cfg.visible)
             return;
 
-        var msg = (curHealth < 0) ? cfg.blowupMessage : cfg.damageMessage;
-        var text = proxy.formatDynamicText(proxy.formatStaticText(msg), curHealth, delta);
-
         var n = damage.getNextHighestDepth();
         var tf: TextField = damage.createTextField("txt" + n, n, 0, 0, 140, 20);
         var animation: TimelineLite = new TimelineLite({ onComplete:removeTextField, onCompleteParams:[ tf ] });
 
-        // For some reason, DropShadowFilter is not rendered when textfield contains only one character,
-        // so we're appending empty prefix and suffix to bypass this unexpected behavior
-        tf.text = " " + text + " ";
+        tf.text = defineText(cfg, newHealth, delta);
         tf.antiAliasType = "advanced";
         tf.autoSize = "left";
         tf.border = false;
         tf.embedFonts = true;
         tf.setTextFormat(XvmHelper.createNewTextFormat(cfg.font));
-        tf.textColor = isFinite(cfg.color) ? Number(cfg.color)
-            : Config.s_config.colors.system[proxy.entityName + "_alive_" + (proxy.isColorBlindMode ? "blind" : "normal")];
+        tf.textColor = defineTextColor(flag, damageType);
         tf._x = -(tf._width / 2.0);
 
         if (cfg.shadow)
@@ -69,6 +63,20 @@ class wot.VehicleMarkersManager.components.DamageTextComponent
     }
 
     // PRIVATE METHODS
+    
+    private function defineTextColor(flag:Number, damageType:Number):Number
+    {
+        return Config.s_config.dmgPalette[damageType][flag];
+    }
+    
+    private function defineText(cfg:Object, newHealth:Number, delta:Number):String
+    {
+        var msg = (newHealth < 0) ? cfg.blowupMessage : cfg.damageMessage;
+        var text = proxy.formatDynamicText(proxy.formatStaticText(msg), newHealth, delta);
+        // For some reason, DropShadowFilter is not rendered when textfield contains only one character,
+        // so we're appending empty prefix and suffix to bypass this unexpected behavior
+        return " " + text + " ";
+    }
     
     private function draw(cfg:Object)
     {

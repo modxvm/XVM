@@ -181,7 +181,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
          *  "attack", "fire", "ramming", "world_collision", "death_zone", "drowning", "explosion"
          */
         
-        Logger.add("Xvm::updateHealth(" + flag + ", " + damageTypeStr + ", " + newHealth +")");
+        //Logger.add("Xvm::updateHealth(" + flag + ", " + damageTypeStr + ", " + newHealth +")");
         
         var damageType:Number = XvmHelper.translateDmgToConst(damageTypeStr);
         
@@ -198,7 +198,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
             var cfg = vehicleState.getCurrentConfig();
             healthBarComponent.updateState(cfg);
             healthBarComponent.showDamage(cfg, newHealth, m_maxHealth, -delta);
-            damageTextComponent.showDamage(vehicleState.getCurrentConfig(), newHealth, -delta);
+            damageTextComponent.showDamage(vehicleState.getCurrentConfig(), newHealth, -delta, flag, damageType);
         }
 
         XVMUpdateDynamicTextFields();

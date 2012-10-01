@@ -317,16 +317,16 @@ class wot.utils.DefaultConfig
         highVulnerability: "*",
         lowVulnerability: "-"
       },
-      dmgPalette: {
-        //type          \from unknown     ally        enemy       squad       player
-        attack:          [ "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF" ],
-        fire:            [ "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF" ],
-        ramming:         [ "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF" ],
-        world_collision: [ "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF" ],
-        death_zone:      [ "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF" ],
-        drowning:        [ "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF" ],
-        explosion:       [ "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF" ]
-      }
+      dmgPalette: [
+        //  type \ from          unknown   ally      enemy     squad     player
+        /* attack          */ [ 0x000000, 0x55EE88, 0xEE5588, 0xFFCC00, 0xE0E0E0 ],
+        /* fire            */ [ 0x000000, 0x66FF88, 0xFF6688, 0xFFCC66, 0xFFFFFF ],
+        /* ramming         */ [ 0x000000, 0x33DD99, 0xDD3399, 0xEEBB44, 0x949494 ],
+        /* world_collision */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
+        /* death_zone      */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
+        /* drowning        */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
+        /* explosion       */ [ 0x000000, 0xBBF8CF, 0xFF6666, 0xFFCC66, 0xFFFFFF ]
+      ]
     };
 
     return a;
@@ -463,7 +463,7 @@ class wot.utils.DefaultConfig
       color: null,
       font: font_14b,
       shadow: shadow_200,
-      speed: 2,
+      speed: 0.5,
       maxRange: 40,
       damageMessage: "{{dmg}}",
       blowupMessage: "Blow-up!"
