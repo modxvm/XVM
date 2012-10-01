@@ -13,6 +13,7 @@ import wot.VehicleMarkersManager.VehicleMarkerProxy;
 import wot.VehicleMarkersManager.VehicleState;
 import wot.VehicleMarkersManager.VehicleStateProxy;
 import wot.VehicleMarkersManager.XvmBase;
+import wot.VehicleMarkersManager.XvmHelper;
 import wot.VehicleMarkersManager.components.ActionMarkerComponent;
 import wot.VehicleMarkersManager.components.ActionMarkerProxy;
 import wot.VehicleMarkersManager.components.ClanIconComponent;
@@ -168,18 +169,21 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     /**
      * @see IVehicleMarker
      */
-    function updateHealth(newHealth, flag, damageType) // TODO: use flag and damageType
+    function updateHealth(newHealth, flag, damageTypeStr)
     {
         /* 
          * newHealth:
          *  1497, 499, 0 and -1 in case of ammo blow up
-         * flag:
+         * flag - int:
          * 0 - "FROM_UNKNOWN", 1 - "FROM_ALLY", 2 - "FROM_ENEMY", 3 - "FROM_SQUAD", 4 - "FROM_PLAYER"
          * 
-         * damageType:
+         * damageType - string:
          *  "attack", "fire", "ramming", "world_collision", "death_zone", "drowning", "explosion"
          */
-        Logger.add("Xvm::updateHealth(" + flag + ", " + damageType + ", " + newHealth +")");
+        
+        Logger.add("Xvm::updateHealth(" + flag + ", " + damageTypeStr + ", " + newHealth +")");
+        
+        var damageType:Number = XvmHelper.translateDmgToConst(damageTypeStr);
         
         if (newHealth < 0)
             s_blowedUp[m_playerFullName] = true;
@@ -187,8 +191,9 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         m_isDead = newHealth <= 0;
 
         var delta: Number = newHealth - m_curHealth;
-        m_curHealth = m_isDead ? 0 : newHealth; // fix "-1"
-        if (delta < 0)
+        m_curHealth = m_isDead ? 0 : newHealth; // fixes "-1"
+        
+        if (delta < 0) // Damage has been done
         {
             var cfg = vehicleState.getCurrentConfig();
             healthBarComponent.updateState(cfg);

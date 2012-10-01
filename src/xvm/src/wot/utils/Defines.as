@@ -5,7 +5,7 @@
 class wot.utils.Defines
 {
   // Global versions
-  public static var XVM_VERSION: String = "3.0.3";
+  public static var XVM_VERSION: String = "3.0.4";
   public static var WOT_VERSION: String = "0.8.0";
   public static var CONFIG_VERSION: String = "1.5.0";
   public static var EDITOR_VERSION: String = "0.15";
@@ -59,4 +59,20 @@ class wot.utils.Defines
   public static var DYNAMIC_ALPHA_HP: Number = 4;
   public static var DYNAMIC_ALPHA_HP_RATIO: Number = 5;
   //public static var DYNAMIC_ALPHA_TBATTLES: Number = 6;
+  
+  // Damage flag at Xvm.as: updateHealth
+  public static var FROM_UNKNOWN: Number = 0;
+  public static var FROM_ALLY: Number = 1;
+  public static var FROM_ENEMY: Number = 2;
+  public static var FROM_SQUAD: Number = 3;
+  public static var FROM_PLAYER: Number = 4;
+  
+  // Damage type at Xvm.as: updateHealth
+  public static var ATTACK: Number = 0;
+  public static var FIRE: Number = 1;
+  public static var RAMMING: Number = 2;
+  public static var WORLD_COLLISION: Number = 3;
+  public static var DEATH_ZONE: Number = 4;
+  public static var DROWNING: Number = 5;
+  public static var EXPLOSION: Number = 6;
 }

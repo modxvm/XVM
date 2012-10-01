@@ -316,6 +316,16 @@ class wot.utils.DefaultConfig
       turretMarkers: {
         highVulnerability: "*",
         lowVulnerability: "-"
+      },
+      dmgPalette: {
+        //type          \from unknown     ally        enemy       squad       player
+        attack:          [ "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF" ],
+        fire:            [ "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF" ],
+        ramming:         [ "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF" ],
+        world_collision: [ "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF" ],
+        death_zone:      [ "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF" ],
+        drowning:        [ "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF" ],
+        explosion:       [ "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF", "0xFF00FF" ]
       }
     };
 

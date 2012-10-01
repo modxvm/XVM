@@ -2,6 +2,7 @@
  * Helper class with various xvm-related static functions
  */
 import wot.VehicleMarkersManager.ErrorHandler;
+import wot.utils.Defines;
 
 class wot.VehicleMarkersManager.XvmHelper
 {
@@ -31,5 +32,15 @@ class wot.VehicleMarkersManager.XvmHelper
         }
 
         return null;
+    }
+    
+    public static function translateDmgToConst(str: String): Number
+    {
+        if (str == "attack")  return Defines.FIRE;
+        if (str == "ramming") return Defines.RAMMING;
+        if (str == "world_collision") return Defines.WORLD_COLLISION;
+        if (str == "death_zone") return Defines.DEATH_ZONE;
+        if (str == "drowning")   return Defines.DROWNING;
+        if (str == "explosion")  return Defines.EXPLOSION;
     }
 }
