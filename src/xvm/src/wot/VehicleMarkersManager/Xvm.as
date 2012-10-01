@@ -174,7 +174,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
          * newHealth:
          *  1497, 499, 0 and -1 in case of ammo blow up
          * flag:
-         * 0 - "FROM_UNKNOWN", 1 - "FROM_ALLY", 2- "FROM_ENEMY", 3 - "FROM_SQUAD", 4 - "FROM_PLAYER"
+         * 0 - "FROM_UNKNOWN", 1 - "FROM_ALLY", 2 - "FROM_ENEMY", 3 - "FROM_SQUAD", 4 - "FROM_PLAYER"
          * 
          * damageType:
          *  "attack", "fire", "ramming", "world_collision", "death_zone", "drowning", "explosion"
