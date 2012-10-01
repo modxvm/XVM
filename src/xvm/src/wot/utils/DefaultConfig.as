@@ -314,8 +314,8 @@ class wot.utils.DefaultConfig
       consts: consts,
       vehicleNames: VehicleInfo.getVehicleNamesData(),
       turretMarkers: {
-        highVulerabilily: "*",
-        lowVulerabilily: "-"
+        highVulnerability: "*",
+        lowVulnerability: "-"
       }
     };
 
