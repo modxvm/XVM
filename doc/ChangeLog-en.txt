@@ -1,11 +1,11 @@
 ﻿XVM-3.0.3:
   * fixed {{turret}} marker calculations for a-20, bt-7, d2, m7_med, pziv, t2_med
   * fixed {{turret}} marker significance for Patton and Pershing
-  * added posibility to change sixth sense indicator.
+  * added possibility to change sixth sense indicator.
     Alternative PNG image should be placed at res_mods/icons/SixthSense.png
 
 XVM-3.0.2:
-  * Fixed color blind mode
+  * fixed color blind mode
   * wot-xvm-proxy: added /maximized option (run client in maximized window)
 
 XVM-3.0.1:
