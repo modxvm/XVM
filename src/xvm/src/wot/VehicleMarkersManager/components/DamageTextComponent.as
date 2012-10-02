@@ -26,17 +26,9 @@ class wot.VehicleMarkersManager.components.DamageTextComponent
             return;
 
         var text:String = defineText(newHealth, delta);
-        var color:Number = defineTextColor(flag, damageType);
-        var tf:TextField = createTextField(text, color);
-
-        if (cfg.shadow)
-        {
-            var sh_color:Number = proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.shadow.color));
-            var sh_alpha:Number = proxy.formatDynamicAlpha(cfg.shadow.alpha);
-            tf.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow.distance,
-                cfg.shadow.angle, sh_color, sh_alpha, cfg.shadow.size, cfg.shadow.strength) ];
-        }
-        
+        var textColor:Number = defineTextColor(flag, damageType);
+        var shadowColor:Number = defineShadowColor(flag, damageType);
+        var tf:TextField = createTextField(text, textColor, shadowColor);
         var animation = new DamageTextAnimation(tf, cfg); // defines and starts
     }
 
@@ -54,7 +46,7 @@ class wot.VehicleMarkersManager.components.DamageTextComponent
 
     // PRIVATE METHODS
     
-    private function createTextField(text:String, color:Number):TextField
+    private function createTextField(text:String, textColor:Number, shadowColor:Number):TextField
     {
         var n = damage.getNextHighestDepth();
         var tf: TextField = damage.createTextField("txt" + n, n, 0, 0, 140, 20);
@@ -65,15 +57,27 @@ class wot.VehicleMarkersManager.components.DamageTextComponent
         tf.border = false;
         tf.embedFonts = true;
         tf.setTextFormat(XvmHelper.createNewTextFormat(cfg.font));
-        tf.textColor = color;
+        tf.textColor = textColor;
         tf._x = -(tf._width / 2.0);
+        if (cfg.shadow)
+        {
+            //var sh_color:Number = proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.shadow.color));
+            var sh_alpha:Number = proxy.formatDynamicAlpha(cfg.shadow.alpha);
+            tf.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow.distance,
+                cfg.shadow.angle, shadowColor, sh_alpha, cfg.shadow.size, cfg.shadow.strength) ];
+        }
         
         return tf;
     }
     
     private function defineTextColor(flag:Number, damageType:Number):Number
     {
-        return Config.s_config.dmgPalette[damageType][flag];
+        return Config.s_config.colors.dmgTextPalette[damageType][flag];
+    }
+    
+    private function defineShadowColor(flag:Number, damageType:Number):Number
+    {
+        return Config.s_config.colors.dmgShadowPalette[damageType][flag];
     }
     
     private function defineText(newHealth:Number, delta:Number):String

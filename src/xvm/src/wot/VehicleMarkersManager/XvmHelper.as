@@ -36,8 +36,9 @@ class wot.VehicleMarkersManager.XvmHelper
     
     public static function translateDmgToConst(str: String): Number
     {
-        if (str == "attack")  return Defines.FIRE;
-        if (str == "ramming") return Defines.RAMMING;
+        if (str == "attack")     return Defines.ATTACK;
+        if (str == "fire")       return Defines.FIRE;
+        if (str == "ramming")    return Defines.RAMMING;
         if (str == "world_collision") return Defines.WORLD_COLLISION;
         if (str == "death_zone") return Defines.DEATH_ZONE;
         if (str == "drowning")   return Defines.DROWNING;

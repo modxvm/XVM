@@ -42,7 +42,7 @@ class wot.VehicleMarkersManager.components.DamageTextAnimation
             TweenLite.from(tf, WHITE_FLASH_DURATION, { tint:"0xFFFFFF", ease: Linear.easeNone} ),
             TweenLite.from(tf, WHITE_FLASH_DURATION,
             {
-                glowFilter: { color:0xFFFFFF, blurX:126, blurY:116, strength:118, alpha:1 },
+                glowFilter: { color:0xFFFFFF, blurX:100, blurY:100, strength:100, alpha:1 },
                 ease: Linear.easeNone
             })
         ]);

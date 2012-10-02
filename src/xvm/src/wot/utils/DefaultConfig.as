@@ -27,11 +27,11 @@ class wot.utils.DefaultConfig
         mirroredVehicleIcons: true,      // Set false for alternative tank icon mirroring.
         showPostmortemTips: true,        // Popup tooltip panel after death.
         removePanelsModeSwitcher: false, // Set true to hide mouse modes switcher.
-	highlightVehicleIcon: true,      // False - disable highlighting of selected vehicle icon and squad.
-	hideXVMVersion: false,           // Hide version label at upper left corner.
+        highlightVehicleIcon: true,      // False - disable highlighting of selected vehicle icon and squad.
+        hideXVMVersion: false,           // Hide version label at upper left corner.
         useStandardMarkers: false,       // Use original wot markers.
-	// Show the clock on the Debug Panel (near FPS).
-	// Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
+        // Show the clock on the Debug Panel (near FPS).
+        // Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
         clockFormat: "H:N",
         clanIconsFolder: "../../../clanicons" // Folder with clan icons
       },
@@ -273,6 +273,27 @@ class wot.utils.DefaultConfig
           { value: 500,  color: "0x99FF33" },
           { value: 800,  color: "0x33FF33" },
           { value: 9999, color: "0xCC66CC" }
+        ],
+        // {{dmg}} colors
+        dmgTextPalette: [
+        //  type \ from          unknown   ally      enemy     squad     player
+        /* attack          */ [ 0x000000, 0x55EE88, 0xEE5588, 0xFFCC00, 0xE0E0E0 ],
+        /* fire            */ [ 0x000000, 0x66FF88, 0xFF6688, 0xFFCC66, 0xFFFFFF ],
+        /* ramming         */ [ 0x000000, 0x33DD99, 0xDD3399, 0xEEBB44, 0x949494 ],
+        /* world_collision */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
+        /* death_zone      */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
+        /* drowning        */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
+        /* explosion       */ [ 0x000000, 0xBBF8CF, 0xFF6666, 0xFFCC66, 0xFFFFFF ]
+        ],
+        dmgShadowPalette: [
+        //  type \ from          unknown   ally      enemy     squad     player
+        /* attack          */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
+        /* fire            */ [ 0xFFFFFF, 0xFFFFFF, 0xFFFFFF, 0xFFFFFF, 0xFFFFFF ],
+        /* ramming         */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
+        /* world_collision */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
+        /* death_zone      */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
+        /* drowning        */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
+        /* explosion       */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ]
         ]
       },
       alpha: {
@@ -316,17 +337,7 @@ class wot.utils.DefaultConfig
       turretMarkers: {
         highVulnerability: " *",
         lowVulnerability: " '"
-      },
-      dmgPalette: [
-        //  type \ from          unknown   ally      enemy     squad     player
-        /* attack          */ [ 0x000000, 0x55EE88, 0xEE5588, 0xFFCC00, 0xE0E0E0 ],
-        /* fire            */ [ 0x000000, 0x66FF88, 0xFF6688, 0xFFCC66, 0xFFFFFF ],
-        /* ramming         */ [ 0x000000, 0x33DD99, 0xDD3399, 0xEEBB44, 0x949494 ],
-        /* world_collision */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
-        /* death_zone      */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
-        /* drowning        */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
-        /* explosion       */ [ 0x000000, 0xBBF8CF, 0xFF6666, 0xFFCC66, 0xFFFFFF ]
-      ]
+      }
     };
 
     return a;
