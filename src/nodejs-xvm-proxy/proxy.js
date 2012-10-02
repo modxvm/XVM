@@ -2,7 +2,7 @@ var cluster = require('cluster'),
     worker = require("./worker");
 
 // Create cluster
-if (!cluster.isMaster) {
+if(!cluster.isMaster) {
     worker.createWorker();
     return;
 }
@@ -17,10 +17,10 @@ var numCPUs = require('os').cpus().length,
 // String.lpad
 String.prototype.lpad = function(padString, length) {
     var str = this;
-    while (str.length < length)
+    while(str.length < length)
         str = padString + str;
     return str;
-}
+};
 
 utils.log("Starting server");
 
@@ -39,29 +39,32 @@ var usageStat = {
     maxConnections: []
 };
 
-    // Fork workers.
-for (var i = 0; i < settings.numNodes; i++) {
+// Fork workers.
+var workers = [ ];
+
+for(var i = 0; i < settings.numNodes; i++) {
     var w = cluster.fork();
 
+    workers.push(w);
     w.on('message', function(msg) {
-        if (msg.usage == 1) {
-            if (msg.requests) {
+        if(msg.usage == 1) {
+            if(msg.requests) {
                 usageStat.requests += msg.requests;
                 usageStat.requests_current += msg.requests;
             }
-            if (msg.players) usageStat.players += msg.players;
-            if (msg.cached) usageStat.cached += msg.cached;
-            if (msg.updated) usageStat.updated += msg.updated;
-            if (msg.missed) usageStat.missed += msg.missed;
-            if (msg.updatesFailed) usageStat.updatesFailed += msg.updatesFailed;
-            if (msg.mongorq) usageStat.mongorq += msg.mongorq;
-            if (msg.mongorq_max) {
-               usageStat.mongorq_max += msg.mongorq_max;
-               utils.log("mongorq_max: " + usageStat.mongorq_max);
+            if(msg.players) usageStat.players += msg.players;
+            if(msg.cached) usageStat.cached += msg.cached;
+            if(msg.updated) usageStat.updated += msg.updated;
+            if(msg.missed) usageStat.missed += msg.missed;
+            if(msg.updatesFailed) usageStat.updatesFailed += msg.updatesFailed;
+            if(msg.mongorq) usageStat.mongorq += msg.mongorq;
+            if(msg.mongorq_max) {
+                usageStat.mongorq_max += msg.mongorq_max;
+                utils.log("mongorq_max: " + usageStat.mongorq_max);
             }
-            if (msg.connections) usageStat.connections[msg.hostId] = msg.connections;
-            if (msg.maxConnections) usageStat.maxConnections[msg.hostId] = msg.maxConnections;
-        } else if (msg.cmd == "cmd") {
+            if(msg.connections) usageStat.connections[msg.hostId] = msg.connections;
+            if(msg.maxConnections) usageStat.maxConnections[msg.hostId] = msg.maxConnections;
+        } else if(msg.cmd == "cmd") {
             //w.send({ chat: 'Ok worker, Master got the message! Over and out!' });
         }
     });
@@ -86,3 +89,35 @@ setInterval(function() {
         " [" + usageStat.connections.join(", ") + "]/[" + usageStat.maxConnections.join(", ") + "]");
     usageStat.requests_current = 0;
 }, settings.usageStatShowPeriod);
+
+// setup "info" update interval
+var getInfoContent = function() {
+    var http = require("http");
+
+    var options = {
+        host: "wot-xvm.googlecode.com",
+        port: 80,
+        path: "/svn/wiki/ReleaseInfo.wiki"
+    };
+
+    var request = http.get(options, function(res) {
+        var responseData = "";
+        res.setEncoding("utf8");
+        res.on("data", function(chunk) {
+            responseData += chunk;
+        });
+        res.on("end", function() {
+            try {
+                var newInfo = JSON.parse(responseData);
+
+                workers.forEach(function(worker) {
+                    worker.send({ info: newInfo });
+                })
+            } catch(e) {
+                utils.debug("JSON.parse error: length=" + responseData.length + ", data=" + responseData.substr(0, 80).replace(/[\n\r]/g, ""));
+            }
+        });
+    });
+};
+
+getInfoContent();
