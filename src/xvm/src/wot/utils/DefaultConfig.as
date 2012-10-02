@@ -463,7 +463,7 @@ class wot.utils.DefaultConfig
       color: null,
       font: font_14b,
       shadow: shadow_200,
-      speed: 0.5,
+      speed: 2,
       maxRange: 40,
       damageMessage: "{{dmg}}",
       blowupMessage: "Blow-up!"
