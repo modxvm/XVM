@@ -76,6 +76,10 @@ private function RefreshCommonPage():void
         section = Config.s_config.rating;
         this.p_rating.v_showPlayersStatistics.value = section.showPlayersStatistics;
         this.p_rating.v_loadEnemyStatsInFogOfWar.value = section.loadEnemyStatsInFogOfWar;
+
+        section = Config.s_config.turretMarkers;
+        this.p_turret.v_highVulnerability.value = section.highVulnerability;
+        this.p_turret.v_lowVulnerability.value = section.lowVulnerability;
     }
     catch (ex:Error)
     {
@@ -318,13 +322,17 @@ private function RefreshIconsetPage():void
     }
 }
 
+private var needRefreshVehicleNamesPage:Boolean = true;
 private function RefreshVehicleNamesPage():void
 {
     debug("RefreshVehicleNamesPage()");
     try
     {
-        if (pgVehicleNames.updateCompletePendingFlag)
+        if (needRefreshVehicleNamesPage)
+        {
+            needRefreshVehicleNamesPage = false;
             p_vehicle_names.RefreshSource();
+        }
     }
     catch (ex:Error)
     {

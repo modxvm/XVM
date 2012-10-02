@@ -81,6 +81,8 @@ package utils
         public static const t_rating_3:Class;
         [Embed("images/macros/t_wins.png")]
         public static const t_wins:Class;
+        [Embed("images/macros/turret.png")]
+        public static const turret:Class;
         [Embed("images/macros/vehicle.png")]
         public static const vehicle:Class;
         [Embed("images/macros/wins.png")]

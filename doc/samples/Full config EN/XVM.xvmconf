@@ -228,7 +228,7 @@
                 "size": 6,                    //     Size
                 "strength": 200               //     Intensity
               },
-              "format": "{{vehicle}}"         // Text format (see description of macros in the readme-en.txt)
+              "format": "{{vehicle}}{{turret}}" // Text format (see description of macros in the readme-en.txt)
             },
             // Text field with the remaining / maximum health
             {
@@ -814,7 +814,7 @@
                 "size": 6,                    //     Size
                 "strength": 200               //     Intensity
               },
-              "format": "{{vehicle}}"         // Text format (see description of macros in the readme-en.txt)
+              "format": "{{vehicle}}{{turret}}" // Text format (see description of macros in the readme-en.txt)
             },
             // Text field with the remaining / maximum health
             {
@@ -1635,7 +1635,7 @@
   },
   // {{turret}} marker display strings
   "turretMarkers": {
-    "highVulnerability": "*", // Subject has stock turret and top gun can not be mounted. Subject is highly vulnerbale.
-    "lowVulnerability": "-"   // Subject has stock turret and top gun can be mounted. Subject is somewhat vulnerbale.
+    "highVulnerability": " *", // Subject has stock turret and top gun can not be mounted. Subject is highly vulnerable.
+    "lowVulnerability": " '"   // Subject has stock turret and top gun can be mounted. Subject is somewhat vulnerable.
   }
 }

@@ -64,8 +64,8 @@
                 <mx:PopUpMenuButton itemClick="onExtraButtonClick(event)">
                     <mx:dataProvider>
                         <fx:Array>
-                            <fx:Object value="newconfig" label="{_('newConfig')}" icon="@Embed(source='images/filenew.png')"/>
                             <fx:Object value="merge" label="{_('mergeConfigs')}" icon="@Embed(source='images/merge.png')" />
+                            <fx:Object value="newconfig" label="{_('newConfig')}" icon="@Embed(source='images/filenew.png')"/>
                         </fx:Array>
                     </mx:dataProvider>
                 </mx:PopUpMenuButton>
@@ -87,6 +87,7 @@
                             <p:PDefinition id="p_definition" config="definition" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                             <p:PBattle id="p_battle" config="battle" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                             <p:PRating id="p_rating" config="rating" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+                            <p:PTurret id="p_turret" config="turretMarkers" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                         </s:VGroup>
                     </s:Scroller>
                 </s:NavigatorContent>

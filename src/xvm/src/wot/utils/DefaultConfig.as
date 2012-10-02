@@ -314,8 +314,8 @@ class wot.utils.DefaultConfig
       consts: consts,
       vehicleNames: VehicleInfo.getVehicleNamesData(),
       turretMarkers: {
-        highVulnerability: "*",
-        lowVulnerability: "-"
+        highVulnerability: " *",
+        lowVulnerability: " '"
       },
       dmgPalette: [
         //  type \ from          unknown   ally      enemy     squad     player
@@ -447,7 +447,7 @@ class wot.utils.DefaultConfig
 
   public static function get hb_dead(): Object
   {
-    var hb = hb_alive;
+    var hb:Object = hb_alive;
     hb.visible = false;
     return hb;
   }
@@ -537,7 +537,7 @@ class wot.utils.DefaultConfig
       format: "{{nick}}"
     }
   }
-  
+
   public static function get playerName_dead(): Object
   {
     return {
@@ -565,7 +565,7 @@ class wot.utils.DefaultConfig
       color: null,
       font: font_13,
       shadow: shadow_200,
-      format: "{{vehicle}}"
+      format: "{{vehicle}}{{turret}}"
     }
   }
 

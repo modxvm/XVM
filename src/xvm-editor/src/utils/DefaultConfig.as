@@ -313,21 +313,25 @@ public class DefaultConfig
         vehicleMarker: "../maps/icons/vehicle/contour"
       },
       consts: consts,
-      vehicleNames: VehicleInfo.getVehicleNamesData()
+      vehicleNames: VehicleInfo.getVehicleNamesData(),
+      turretMarkers: {
+        highVulnerability: " *",
+        lowVulnerability: " '"
+      }
     };
 
     return a;
   }
 
-  public static function get shadow_100(): Object
+  public static function get shadow_150(): Object
   {
     return {
       alpha: 100,
       color: "0x000000",
-      angle: 45,
-      distance: 1,
-      size: 2,
-      strength: 100
+      angle: 90,
+      distance: 0,
+      size: 4,
+      strength: 150
     }
   }
 
@@ -336,22 +340,10 @@ public class DefaultConfig
     return {
       alpha: 100,
       color: "0x000000",
-      angle: 45,
-      distance: 1,
-      size: 2,
+      angle: 90,
+      distance: 0,
+      size: 6,
       strength: 200
-    }
-  }
-
-  public static function get shadow_250(): Object
-  {
-    return {
-      alpha: 100,
-      color: "0x000000",
-      angle: 45,
-      distance: 1,
-      size: 2,
-      strength: 250
     }
   }
 
@@ -366,13 +358,13 @@ public class DefaultConfig
     }
   }
 
-  public static function get font_12b(): Object
+  public static function get font_12(): Object
   {
     return {
       name: "$FieldFont",
       size: 12,
       align: "center",
-      bold: true,
+      bold: false,
       italic: false
     }
   }
@@ -384,17 +376,6 @@ public class DefaultConfig
       size: 13,
       align: "center",
       bold: false,
-      italic: false
-    }
-  }
-
-  public static function get font_13b(): Object
-  {
-    return {
-      name: "$FieldFont",
-      size: 13,
-      align: "center",
-      bold: true,
       italic: false
     }
   }
@@ -423,7 +404,7 @@ public class DefaultConfig
       maxScale: 100,
       scaleX: 0,
       scaleY: 16,
-      shadow: shadow_250
+      shadow: shadow_200
     }
   }
 
@@ -457,30 +438,9 @@ public class DefaultConfig
 
   public static function get hb_dead(): Object
   {
-    return {
-      visible: false,
-      x: -41,
-      y: -33,
-      alpha: 100,
-      color: null,
-      lcolor: null,
-      width: 80,
-      height: 12,
-      border: {
-        alpha: 30,
-        color: "0x000000",
-        size: 1
-      },
-      fill: {
-        alpha: 30,
-        color: null
-      },
-      damage: {
-        alpha: 80,
-        color: null,
-        fade: 1
-      }
-    }
+    var hb:Object = hb_alive;
+    hb.visible = false;
+    return hb;
   }
 
   // damageText
@@ -493,8 +453,8 @@ public class DefaultConfig
       alpha: 100,
       color: null,
       font: font_14b,
-      shadow: shadow_250,
-      speed: 2,
+      shadow: shadow_200,
+      speed: 0.5,
       maxRange: 40,
       damageMessage: "{{dmg}}",
       blowupMessage: "Blow-up!"
@@ -596,7 +556,7 @@ public class DefaultConfig
       color: null,
       font: font_13,
       shadow: shadow_200,
-      format: "{{vehicle}}"
+      format: "{{vehicle}}{{turret}}"
     }
   }
 
@@ -626,7 +586,7 @@ public class DefaultConfig
       alpha: 100,
       color: "0xFFFFFF",
       font: font_11b,
-      shadow: shadow_100,
+      shadow: shadow_150,
       format: "{{hp}} / {{hp-max}}"
     }
   }
@@ -642,7 +602,7 @@ public class DefaultConfig
       alpha: 100,
       color: "0xFFFFFF",
       font: font_11b,
-      shadow: shadow_100,
+      shadow: shadow_150,
       format: "{{hp-ratio}}%"
     }
   }
@@ -655,10 +615,10 @@ public class DefaultConfig
       visible: true,
       x: 0,
       y: -46,
-      alpha: 75,
-      color: "{{c:eff}}",
-      font: font_12b,
-      shadow: shadow_200,
+      alpha: 100,
+      color: "{{c:rating}}",
+      font: font_11b,
+      shadow: shadow_150,
       format: "{{rating}}"
     }
   }

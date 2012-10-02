@@ -10,15 +10,15 @@
     import flash.text.TextField;
     import flash.text.TextFormat;
     import flash.utils.Timer;
-    
+
     import mx.containers.Canvas;
     import mx.core.ScrollPolicy;
     import mx.core.UIComponent;
     import mx.events.FlexEvent;
     import mx.messaging.channels.StreamingAMFChannel;
-    
+
     import spark.components.Image;
-    
+
     import utils.ClassLoader;
     import utils.Config;
     import utils.Defines;
@@ -599,6 +599,8 @@
             var dmgRatio: Number = delta ? Math.ceil(delta / m_maxHealth * 100) : 0;
             format = format.split("{{dmg}}").join(delta ? String(delta) : "");
             format = format.split("{{dmg-ratio}}").join(delta ? String(dmgRatio) : "");
+
+            format = format.split("{{turret}}").join(Config.s_config.turretMarkers.highVulnerability);
 
             return format;
         }

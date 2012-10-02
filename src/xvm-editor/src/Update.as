@@ -117,6 +117,11 @@ protected function onSetDefaultValue(event:SetDefaultValueEvent):void
 				Config.SetDefaultValue("playersPanel.removeSquadIcon");
 				break;
 
+            case "vehicleNames":
+                needRefreshVehicleNamesPage = true;
+                Config.SetDefaultValue("vehicleNames");
+                break;
+
 			default:
 				if (!Config.SetDefaultValue(path))
 					debug("config not found: " + path);
