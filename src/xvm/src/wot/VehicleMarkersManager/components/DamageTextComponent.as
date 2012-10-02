@@ -1,16 +1,15 @@
-import com.greensock.TimelineLite;
-import com.greensock.TweenLite;
-import com.greensock.easing.Linear;
 import wot.utils.Config;
 import wot.utils.GraphicsUtil;
 import wot.VehicleMarkersManager.XvmHelper;
 import wot.VehicleMarkersManager.components.DamageTextProxy;
+import wot.VehicleMarkersManager.components.DamageTextAnimation;
 
 class wot.VehicleMarkersManager.components.DamageTextComponent
 {
     private var proxy:DamageTextProxy;
 
     private var damage:MovieClip;
+    private var cfg:Object;
     
     public function DamageTextComponent(proxy:DamageTextProxy)
     {
@@ -21,23 +20,14 @@ class wot.VehicleMarkersManager.components.DamageTextComponent
 
     public function showDamage(state_cfg:Object, newHealth:Number, delta:Number, flag:Number, damageType:Number)
     {
-        var cfg = state_cfg.damageText;
+        cfg = state_cfg.damageText;
 
         if (!cfg.visible)
             return;
 
-        var n = damage.getNextHighestDepth();
-        var tf: TextField = damage.createTextField("txt" + n, n, 0, 0, 140, 20);
-        var animation: TimelineLite = new TimelineLite({ onComplete:removeTextField, onCompleteParams:[ tf ] });
-
-        tf.text = defineText(cfg, newHealth, delta);
-        tf.antiAliasType = "advanced";
-        tf.autoSize = "left";
-        tf.border = false;
-        tf.embedFonts = true;
-        tf.setTextFormat(XvmHelper.createNewTextFormat(cfg.font));
-        tf.textColor = defineTextColor(flag, damageType);
-        tf._x = -(tf._width / 2.0);
+        var text:String = defineText(newHealth, delta);
+        var color:Number = defineTextColor(flag, damageType);
+        var tf:TextField = createTextField(text, color);
 
         if (cfg.shadow)
         {
@@ -46,8 +36,8 @@ class wot.VehicleMarkersManager.components.DamageTextComponent
             tf.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow.distance,
                 cfg.shadow.angle, sh_color, sh_alpha, cfg.shadow.size, cfg.shadow.strength) ];
         }
-
-        animation.insert(new TweenLite(tf, cfg.speed, { _y: -cfg.maxRange, ease: Linear.easeOut } ), 0);
+        
+        var animation = new DamageTextAnimation(tf, cfg); // defines and starts
     }
 
     public function updateState(state_cfg:Object)
@@ -64,12 +54,29 @@ class wot.VehicleMarkersManager.components.DamageTextComponent
 
     // PRIVATE METHODS
     
+    private function createTextField(text:String, color:Number):TextField
+    {
+        var n = damage.getNextHighestDepth();
+        var tf: TextField = damage.createTextField("txt" + n, n, 0, 0, 140, 20);
+
+        tf.text = text;
+        tf.antiAliasType = "advanced";
+        tf.autoSize = "left";
+        tf.border = false;
+        tf.embedFonts = true;
+        tf.setTextFormat(XvmHelper.createNewTextFormat(cfg.font));
+        tf.textColor = color;
+        tf._x = -(tf._width / 2.0);
+        
+        return tf;
+    }
+    
     private function defineTextColor(flag:Number, damageType:Number):Number
     {
         return Config.s_config.dmgPalette[damageType][flag];
     }
     
-    private function defineText(cfg:Object, newHealth:Number, delta:Number):String
+    private function defineText(newHealth:Number, delta:Number):String
     {
         var msg = (newHealth < 0) ? cfg.blowupMessage : cfg.damageMessage;
         var text = proxy.formatDynamicText(proxy.formatStaticText(msg), newHealth, delta);
@@ -82,12 +89,5 @@ class wot.VehicleMarkersManager.components.DamageTextComponent
     {
         damage._x = cfg.x;
         damage._y = cfg.y;
-    }
-
-    // Damage Visualization
-    private function removeTextField(f: TextField)
-    {
-        f.removeTextField();
-        delete f;
     }
 }
