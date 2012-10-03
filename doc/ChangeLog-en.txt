@@ -1,5 +1,7 @@
 ﻿XVM-3.0.4:
   * stock turret marker added to the default config (after vehicle name)
+  * wot-xvm-proxy renamed to xvm-stat
+  * xvm-stat is distributing separately from XVM.
 
 XVM-3.0.3:
   * added possibility to change {{turret}} marker display string

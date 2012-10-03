@@ -17,7 +17,7 @@ Obsah:
     * Hodiny na obrazovce při načítání bitvy
     * Ikona hráčů/klanů
     * Nastavení ikon vozidel
-    * Statistika hráčů v průběhu bitvy (jen pro plnou verzi XVM módu- xvm-full package)
+    * Statistika hráčů v průběhu bitvy (jen pro plnou verzi XVM módu- xvm-stat package)
 
   Stránky projektu:  			http://code.google.com/p/wot-xvm/
   Podpora:           			http://www.koreanrandom.com/forum/topic/1383-xvm
@@ -30,19 +30,11 @@ Obsah:
 2. Instalace
 -----------------------------------------------------------
 
-  1.  Hra musí být nainstalována na disku s NTFS souborovým systémem (výchozí Windows nastavení).
-
-  2.  Pro běh aplikace je nutné mít nainstalovaný Microsoft .NET Framework 2.0
-        Verzi Vašeho .NET Frameworku si můžete ověřit pomocí aplikace z odkazu níže:
-        http://www.tmgdevelopment.co.uk/versioncheck.htm
-
-  3.  Nainstalujte Dokan knihovnu ze stránky http://dokan-dev.net/en/download/#dokan
-
-  4.  Rozbalte archiv do složky s hrou:
+  1.  Rozbalte archiv do složky s hrou:
         Kliknout pravým tlačítkem myši na soubor, zvolit možnost "Extrahovat vše..."
         -> najít adresář se hrou (výchozí C:\Games\World of Tanks) -> "Extrahovat".
 
-  5.  Nemusíte nic nastavovat.
+  2.  Nemusíte nic nastavovat.
         Pokud chcete nějaké jiné, než výchozí nastavení, je nutné vytvořit soubor s nastavením:
         "\res_mods\[VERZE HRY]\gui\flash\XVM.xvmconf" v adresáři hry.
 
@@ -61,23 +53,6 @@ Obsah:
         ---------------
         Pokud budete ručně měnit soubor nastavení, použijte Poznámkový blok,
         NEPOUŽÍVEJTE Word, WordPad ani další podobné editory.
-
-  6.  Pokud nechcete používat statistiky, zapněte hru běžným způsobem.
-
-      Pokud chcete používat statistiky, spusťte hru pomocí souboru "wot-xvm-proxy.exe"
-      (hra se zapne automaticky). Mějte na paměti, že ve výchozím nastavení jsou
-      statistiky zakazane, je nutne je povolit v souboru s nastavenim.
-
-      Pokud chcete používat statistiky a zároveň spouštěč hry (WOTLauncher.exe), je nutné
-      vytvořit zástupce na soubor "wot-xvm-proxy.exe" a spouštět ho s parametrem
-      "/launcher" (vložit bez uvozovek na konec adresy v poli "Cíl:" ve vlastnostech zástupce).
-
-  7.  Pokud používáte Skype, je nutné v něm vypnout alternativní porty 80 a 443.
-      Nástroje -> Nastavení... -> Rozšířené -> Spojení
-      -> Odškrtnout "Používat porty 80 a 443 jako alternativní pro příchozí spojení".
-
-  8.  Pokud chcete poslat upozornění na chybu, spusťte soubor "wot-xvm-proxy.exe"
-      s parametrem "/debug" (vložit bez uvozovek na konec adresy v poli "Cíl:"ve vlastnostech zástupce).
 
 
 -----------------------------------------------------------
