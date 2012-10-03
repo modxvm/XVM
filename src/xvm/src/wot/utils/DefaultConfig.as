@@ -46,7 +46,7 @@ class wot.utils.DefaultConfig
 
 	// Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
         clockFormat: "H:N:S",
-        showChances: true,      // Show game round win chances percentage.
+        showChances: false,     // Show game round win chances percentage.
         showChancesExp: false,  // Show experimental "chance to win" formula.
         removeSquadIcon: false, // Hide squad icon.
         // Playes/clan icon parameters.
@@ -56,7 +56,7 @@ class wot.utils.DefaultConfig
         formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font> {{vehicle}}"
       },
       statisticForm: {
-        showChances: true,      // Show game round win chances percentage.
+        showChances: false,     // Show game round win chances percentage.
         showChancesExp: false,  // Show experimental "chance to win" formula.
         removeSquadIcon: false, // Hide squad icon.
         // Playes/clan icon parameters.
