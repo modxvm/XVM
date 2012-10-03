@@ -432,7 +432,7 @@ namespace wot
     private string[] GetProxyAddresses()
     {
       List<string> ps = new List<string>();
-      foreach (string server in Settings.Default.proxy_servers)
+      foreach (string server in Settings.Default.ProxyServers)
       {
         string[] s = server.Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
 

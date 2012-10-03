@@ -25,18 +25,6 @@ namespace wot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5")]
-        public int ServerUnavailableTimeout {
-            get {
-                return ((int)(this["ServerUnavailableTimeout"]));
-            }
-            set {
-                this["ServerUnavailableTimeout"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(".stat")]
         public string MountPoint {
             get {
@@ -60,12 +48,12 @@ namespace wot.Properties {
   <string>SEA	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC91Yy8/JTE=</string>
   <string>VTC	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC91Yy8/JTE=</string>
 </ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection proxy_servers {
+        public global::System.Collections.Specialized.StringCollection ProxyServers {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["proxy_servers"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["ProxyServers"]));
             }
             set {
-                this["proxy_servers"] = value;
+                this["ProxyServers"] = value;
             }
         }
         
