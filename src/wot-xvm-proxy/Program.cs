@@ -269,7 +269,7 @@ namespace wot
           Debug("Starting server thread");
           thread.Start(opt);
 
-          Thread.Sleep(5000);
+          Thread.Sleep(2000);
 
           if (!thread.IsAlive)
             Debug("Dokan thread is not alive. Exiting.");
@@ -290,7 +290,13 @@ namespace wot
                 Debug("Check game process");
                 if (wotProcess == null)
                   throw new Exception("Cannot start game: " + wotExeFileName);
-                Thread.Sleep(5000);
+
+                Debug("wotProcess: " + wotProcess.ToString());
+                Debug("Searching game process: " + WOT_PROCESS_NAME);
+                Thread.Sleep(2000);
+                Process[] wotProcesses1 = Process.GetProcessesByName(WOT_PROCESS_NAME);
+                Debug(String.Format("Found {0} process", wotProcesses1.Length));
+
                 Debug("Wait for process to exit");
                 wotProcess.WaitForExit();
                 if (isLauncher && wotProcess.ExitCode == 0)
