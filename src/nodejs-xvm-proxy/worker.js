@@ -7,7 +7,7 @@ module.exports = (function() {
         mongo = require("mongodb"),
         info = { };
 
-// Mongo
+    // Mongo
     var collection,
         missed_collection,
         users_collection,
@@ -16,22 +16,22 @@ module.exports = (function() {
             poolSize: settings.mongoMaxConnections
         };
 
-// Global vars
-    var hostData = [],
+    // Global vars
+    var hostData = [ ],
         mongorq = 0,
         mongorq_max,
         mongorq_max_lastupdate;
 
-// Main functions
+    // Main functions
 
     var getStatHostId = function(id) {
         var result = Math.floor(id / 500000000);
         return (result >= 0 && result < settings.statHosts.length) ? result : -1;
     };
 
-// WG Server Statistics retrieve
+    // WG Server Statistics retrieve
 
-// execute request for single player id
+    // execute request for single player id
     var makeSingleRequest = function(id, callback) {
         var now = new Date();
         var statHostId = getStatHostId(id);
@@ -47,7 +47,7 @@ module.exports = (function() {
         // Do not execute requests some time after error responce
         if(hd.lastError) {
             if((now - hd.lastError) < settings.lastErrorTtl) {
-                callback(null, {__code: "wait"});
+                callback(null, { __code: "wait" });
                 return;
             } else {
                 utils.debug("resuming Server_" + statHostId);
@@ -57,7 +57,7 @@ module.exports = (function() {
         }
 
         if(hd.connections >= hd.maxConnections) {
-            callback(null, {__code: "max_conn"});
+            callback(null, { __code: "max_conn" });
             return;
         }
 
@@ -65,14 +65,14 @@ module.exports = (function() {
         process.send({ usage: 1, hostId: statHostId, connections: hd.connections });
 
         var reqTimeout = setTimeout(function() {
-            callback(null, {__code: "error", __error: "Timeout"});
+            callback(null, { __code: "error", __error: "Timeout" });
         }, settings.statHostsTimeouts[statHostId]);
 
         var options = {
             host: settings.statHosts[statHostId],
             port: 80,
-            path: "/uc/accounts/" + id + "/api/" + settings.wotApiVersion + "/?source_token=Intellect_Soft-WoT_Mobile-unofficial_stats"//,
-            //       agent: agent
+            path: "/uc/accounts/" + id + "/api/" + settings.wotApiVersion + "/?source_token=Intellect_Soft-WoT_Mobile-unofficial_stats"
+            //      , agent: agent
         };
 
         var request = http.get(options, function(res) {
@@ -89,20 +89,20 @@ module.exports = (function() {
                     callback(null, result);
                 } catch(e) {
                     utils.debug("JSON.parse error: length=" + responseData.length + ", data=" + responseData.substr(0, 80).replace(/[\n\r]/g, ""));
-                    callback(null, {__code: "error", __error: "JSON.parse error"});
+                    callback(null, { __code: "error", __error: "JSON.parse error" });
                 }
             });
         });
         request.on("error", function(e) {
             clearTimeout(reqTimeout);
-            callback(null, {__code: "error", __error: "Http error: " + e});
+            callback(null, { __code: "error", __error: "Http error: " + e });
         });
 
         request.shouldKeepAlive = false;
     };
 
     var processRemotes = function(inCache, forUpdate, forUpdateVNames, request, response, times) {
-        times.push({"n": "process", "t": new Date()});
+        times.push({ "n": "process", "t": new Date() });
 
         var urls = { };
 
@@ -111,36 +111,37 @@ module.exports = (function() {
                 makeSingleRequest(id, callback);
             }
         });
-        times.push({"n": "prepared", "t": new Date()});
+        times.push({ "n": "prepared", "t": new Date() });
 
 //    async.series(urls, function(err, results) {
         async.parallel(urls, function(err, results) {
-            times.push({"n": "requestdone", "t": new Date()});
-            var now = new Date();
+            times.push({ "n": "requestdone", "t": new Date() });
 
+            var now = new Date();
             var result = {
                 players: [ ],
                 info: info
             };
-
             // process retrieved items
             var forUpdate_length = forUpdate.length;
+
             for(var i = 0; i < forUpdate_length; ++i) {
-                var id = forUpdate[i];
-                var statHostId = getStatHostId(id);
+                var id = forUpdate[i],
+                    statHostId = getStatHostId(id);
 
                 if(statHostId == -1)
                     continue;
 
-                var vname = forUpdateVNames[i];
-                var resultItem = { _id: id, st: "fail", dt: now };
+                var vname = forUpdateVNames[i],
+                    resultItem = { _id: id, st: "fail", dt: now },
+                    curResult = results[id];
 
-                var curResult = results[id];
                 if(curResult) {
                     if(curResult.__code && curResult.__code != "error") {
                         resultItem.st = curResult.__code;
                     } else {
                         var hd = hostData[statHostId];
+
                         hd.connections--;
                         if(hd.connections < 0)
                             hd.connections = 0;
