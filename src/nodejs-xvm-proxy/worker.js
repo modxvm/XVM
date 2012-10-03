@@ -313,7 +313,8 @@ module.exports = (function() {
         });
     };
 
-    processRequest = function(request, response) {
+    var processRequest = function(request, response) {
+        console.log("here");
         // parse request
         var ids = [ ];
         var ids_bad_id = [ ];
@@ -490,6 +491,9 @@ module.exports = (function() {
 
     // exports
     return {
-        createWorker: createWorker
+        createWorker: createWorker,
+        // only for test applications
+        http: http,
+        mongo: mongo
     }
 })();
