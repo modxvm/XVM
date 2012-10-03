@@ -1,4 +1,4 @@
-﻿/**
+/**
  * ...
  * @author sirmax2
  */
@@ -97,6 +97,22 @@ class wot.utils.DefaultConfig
           vehicleFormatLeft: "<font color='{{c:rating}}'>{{vehicle}}</font>",
           vehicleFormatRight: "<font color='{{c:rating}}'>{{vehicle}}</font>"
         }
+      },
+      turretMarkers: {
+        highVulnerability: " *",
+        lowVulnerability: " '"
+      },
+      hitLog: {
+        enabled: true,
+        x: 270,
+        y: 7,
+        w: 200,
+        h: 100,
+        lines: 1,
+        direction: "down",
+        align: "left",
+        format: "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <b>{{dmg}}</b>",
+        formatHistory: "{{dmg-total}} {{dmg}} {{vehicle}} {{rlevel}} {{nick}} {{hit-kind}}"
       },
       markers: {
         ally: {
@@ -333,11 +349,7 @@ class wot.utils.DefaultConfig
         vehicleMarker: "../maps/icons/vehicle/contour"
       },
       consts: consts,
-      vehicleNames: VehicleInfo.getVehicleNamesData(),
-      turretMarkers: {
-        highVulnerability: " *",
-        lowVulnerability: " '"
-      }
+      vehicleNames: VehicleInfo.getVehicleNamesData()
     };
 
     return a;

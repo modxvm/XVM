@@ -6,6 +6,9 @@ import wot.utils.Defines;
 
 class wot.VehicleMarkersManager.XvmHelper
 {
+    // Level in roman numerals
+    public static var rlevel: Array = [ "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" ];
+
     /**
      * Create TextFormat based on config
      */

@@ -100,6 +100,26 @@
       "vehicleFormatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
     }
   },
+  // {{turret}} marker display strings
+  "turretMarkers": {
+    "highVulnerability": " *", // Subject has stock turret and top gun can not be mounted. Subject is highly vulnerable.
+    "lowVulnerability": " '"   // Subject has stock turret and top gun can be mounted. Subject is somewhat vulnerable.
+  },
+  // Hit log (my hits calculator)
+  "hitLog": {
+    "enabled": true,     // on/off switch
+    "x": 270,            // X position
+    "y": 7,              // Y position
+    "w": 200,            // Width
+    "h": 100,            // Height
+    "lines": 1,          // Number of lines. Old lines will be pushed out
+    "direction": "down", // Log direction: up - lines will be added from up to down, down - from down to up.
+    "align": "left",     // text alignment (left/center/right)
+    // Last hit format (macros allowed, see readme-en.txt)
+    "format": "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <b>{{dmg}}</b>",
+    // Previous hits format (macros allowed, see readme-en.txt)
+    "formatHistory": "{{n}}: {{dmg-total}} {{dmg}} {{vehicle}} {{hit-kind}}"
+  },
   // OVER-TARGET MARKERS
   "markers": {
     // Ally
@@ -1632,10 +1652,5 @@
     "ussr_T_54": null,
     "ussr_Tetrarch_LL": null,
     "ussr_Valentine_LL": null
-  },
-  // {{turret}} marker display strings
-  "turretMarkers": {
-    "highVulnerability": " *", // Subject has stock turret and top gun can not be mounted. Subject is highly vulnerable.
-    "lowVulnerability": " '"   // Subject has stock turret and top gun can be mounted. Subject is somewhat vulnerable.
   }
 }

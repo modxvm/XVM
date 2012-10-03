@@ -38,9 +38,6 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
         //Logger.add(m_playerFullName + "> " + str);
     }
 
-    // Level in roman numerals
-    private static var rlevel: Array = [ "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" ];
-
     // Private static members
     private static var s_showExInfo:Boolean = false; // Saved "Extended Info State" for markers that appeared when Alt pressed.
     private static var s_blowedUp:Object = {}; // List of members that was ammoracked.
@@ -93,7 +90,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
             format = format.split("{{nick}}").join(m_playerFullName);
             format = format.split("{{vehicle}}").join(VehicleInfo.mapVehicleName(m_defaultIconSource, m_vname));
             format = format.split("{{level}}").join(String(m_level));
-            format = format.split("{{rlevel}}").join(String(rlevel[m_level - 1]));
+            format = format.split("{{rlevel}}").join(XvmHelper.rlevel[m_level - 1]);
             format = StatFormat.FormatText({ label: m_playerFullName }, format);
             format = Utils.trim(format);
         }

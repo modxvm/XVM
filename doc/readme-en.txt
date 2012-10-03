@@ -79,6 +79,16 @@
       {{nick}}        - player nickname
       {{vehicle}}     - vehicle name
 
+    In Hits Log:
+      {{n}}           - count of hits
+      {{dmg}}         - last hit value
+      {{dmg-total}}   - total sum of hits
+      {{nick}}        - player nickname
+      {{vehicle}}     - vehicle name
+      {{level}}       - vehicle level (Arabic numerals)
+      {{rlevel}}      - vehicle level (Roman numerals)
+      {{hit-kind}}    - hit kind (attack, fire, ramming, ...)
+
     In tank markers:
       {{hp}}          - current health points
       {{hp-ratio}}    - current health ratio (without '%' sign)

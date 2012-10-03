@@ -75,4 +75,8 @@ class wot.utils.Defines
   public static var DEATH_ZONE: Number = 4;
   public static var DROWNING: Number = 5;
   public static var EXPLOSION: Number = 6;
+
+  // Text direction
+  public static var DIRECTION_UP = 1;
+  public static var DIRECTION_DOWN = 2;
 }

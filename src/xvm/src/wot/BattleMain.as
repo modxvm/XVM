@@ -74,7 +74,7 @@ class wot.BattleMain
         var tf: TextFormat = fps.getNewTextFormat();
         tf.align = "left";
         clock.setNewTextFormat(tf);
-        clock.filters = [new flash.filters.DropShadowFilter(0, 0, 0, 100, 3, 3, 2, 3)];
+        clock.filters = [new flash.filters.DropShadowFilter(1, 90, 0, 100, 5, 5, 1.5, 3)];
         setInterval(function() { clock.text = Utils.FormatDate(format, new Date()) }, 1000);
     }
 

@@ -169,9 +169,9 @@ class wot.utils.Config
 
                 if (!config)
                 {
-                    GlobalEventDispatcher.dispatchEvent( {
-                        type: "set_info",
-                        error: "Error parsing config file. Using default settings." } );
+                    var text = "Error parsing config file. Using default settings.";
+                    GlobalEventDispatcher.dispatchEvent( { type: "set_info", error: text } );
+                    Logger.add(text);
                 }
                 else
                 {
@@ -198,9 +198,11 @@ class wot.utils.Config
                 while (tail.indexOf("  ") != -1)
                     tail = tail.split("  ").join(" ");
 
-                GlobalEventDispatcher.dispatchEvent({ type: "set_info", error: "Error loading config file: " +
+                var text:String = "Error loading config file: " +
                     "[" + ex.at + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " +
-                    head + ">>>" + str.charAt(ex.at) + "<<<" + tail });
+                    head + ">>>" + str.charAt(ex.at) + "<<<" + tail;
+                GlobalEventDispatcher.dispatchEvent( { type: "set_info", error: text } );
+                Logger.add(String(text).substr(0, 200));
             }
         }
         else
