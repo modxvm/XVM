@@ -64,12 +64,12 @@
     "enabled": true,
     "x": 270,
     "y": 7,
-    "w": 100,
+    "w": 150,
     "h": 20,
     "lines": 1,
     "direction": "down",
     "align": "left",
-    "format": "<font color=\"#CCCCCC\">Hits:</font> <font size=\"13\">#{{n}}</font> {{dmg-total}} <b>{{dmg}}</b>"
+    "format": "<font color=\"#CCCCCC\">Hits:</font> <font size=\"13\">#{{n}}</font> {{dmg-total}} <b>{{dmg}}</b>",
     "formatHistory": "{{dmg-total}} {{dmg}} {{vehicle}} {{rlevel}} {{nick}} {{hit-kind}}"
   },
   "markers": {
