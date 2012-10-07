@@ -52,6 +52,11 @@ class wot.VehicleMarkersManager.HitLog
         createControl();
     }
 
+    function setText(txt)
+    {
+        textField.htmlText = "<font face='$FieldFont' size='15' color='#F4EFE8'>" + txt + "</font>";
+    }
+    
     public function update(delta:Number, vehicleName:String, playerName:String, level:Number, damageType:String)
     {
         nHits++;
@@ -61,20 +66,20 @@ class wot.VehicleMarkersManager.HitLog
         var last:String = formatText(format, delta, vehicleName, playerName, level, damageType);
         if (lines <= 1)
         {
-            textField.htmlText = last;
+            setText(last);
             return;
         }
 
         var hist:String = formatText(formatHistory || format, delta, vehicleName, playerName, level, damageType);
         if (direction == Defines.DIRECTION_DOWN)
         {
-            textField.htmlText = last + "\n" + historyText.join("\n");
+            setText(last + "\n" + historyText.join("\n"));
             historyText.pop();
             historyText.unshift(hist);
         }
         else
         {
-            textField.htmlText = historyText.join("\n") + "\n" + last;
+            setText(historyText.join("\n") + "\n" + last);
             historyText.shift();
             historyText.push(hist);
         }
@@ -95,11 +100,9 @@ class wot.VehicleMarkersManager.HitLog
         textField.filters = [new flash.filters.DropShadowFilter(1, 90, 0, 100, 5, 5, 1.5, 3)];
 
         var txt = formatText(format, 0, "", "", 0, "");
-        if (direction == Defines.DIRECTION_DOWN)
-            textField.htmlText = txt;
-        else
-            textField.htmlText = historyText.join("\n") + "\n" + txt;
-        
+        if (direction != Defines.DIRECTION_DOWN)
+            txt = historyText.join("\n") + "\n" + txt;
+        setText(txt);
     }
 
     private function formatText(format:String,
@@ -127,6 +130,6 @@ class wot.VehicleMarkersManager.HitLog
             format = "Error: " + String(e);
         }
 
-        return '<font face="$FieldFont" size="15" color="#F4EFE8">' + format + '</font>';
+        return format + '</font>';
     }
 }
