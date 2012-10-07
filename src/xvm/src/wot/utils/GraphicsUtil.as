@@ -10,9 +10,11 @@ import wot.utils.Utils;
 
 class wot.utils.GraphicsUtil
 {
+    //TODO: remove createShadowFilter? 
     public static function createShadowFilter(distance:Number, angle:Number, color:Number,
         alpha:Number, size:Number, strength:Number):Object
     {
+        
         if (!alpha || !strength || !size)
             return null;
         return new DropShadowFilter(distance, angle, color, alpha * 0.01, size, size, strength * 0.01, 3);

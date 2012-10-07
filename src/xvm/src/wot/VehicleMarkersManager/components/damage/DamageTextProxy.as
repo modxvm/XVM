@@ -2,7 +2,7 @@ import wot.VehicleMarkersManager.AbstractAccessProxy;
 import wot.VehicleMarkersManager.ColorsManager;
 import wot.VehicleMarkersManager.Xvm;
 
-class wot.VehicleMarkersManager.components.DamageTextProxy extends AbstractAccessProxy
+class wot.VehicleMarkersManager.components.damage.DamageTextProxy extends AbstractAccessProxy
 {
    /**
     * This proxy class is only for access restriction to wot.VehicleMarkersManager.Xvm

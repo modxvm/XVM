@@ -16,7 +16,7 @@ import wot.VehicleMarkersManager.XvmHelper;
 import wot.VehicleMarkersManager.components.ActionMarkerComponent;
 import wot.VehicleMarkersManager.components.ClanIconComponent;
 import wot.VehicleMarkersManager.components.ContourIconComponent;
-import wot.VehicleMarkersManager.components.DamageTextComponent;
+import wot.VehicleMarkersManager.components.damage.DamageTextComponent;
 import wot.VehicleMarkersManager.components.HealthBarComponent;
 import wot.VehicleMarkersManager.components.LevelIconComponent;
 import wot.VehicleMarkersManager.components.TurretStatusComponent;

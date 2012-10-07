@@ -1,46 +1,55 @@
-import wot.utils.Config;
 import wot.utils.GraphicsUtil;
+import wot.VehicleMarkersManager.components.damage.DamageTextConfig;
 import wot.VehicleMarkersManager.XvmHelper;
-import wot.VehicleMarkersManager.components.DamageTextProxy;
-import wot.VehicleMarkersManager.components.DamageTextAnimation;
-
-class wot.VehicleMarkersManager.components.DamageTextComponent
+import wot.VehicleMarkersManager.components.damage.DamageTextProxy;
+import wot.VehicleMarkersManager.components.damage.DamageTextAnimation;
+class wot.VehicleMarkersManager.components.damage.DamageTextComponent
 {
     private var proxy:DamageTextProxy;
+    private var cfg:DamageTextConfig;
 
     private var damage:MovieClip;
-    private var cfg:Object;
+    private var dmgReceiverCfg:Object;
+    private var dmgSourceCfg:Object;
     
     public function DamageTextComponent(proxy:DamageTextProxy)
     {
         this.proxy = proxy;
-
         damage = proxy.createHolder();
     }
 
-    public function showDamage(state_cfg:Object, newHealth:Number, delta:Number, flag:Number, damageType:Number)
+    /**
+     * @param	dmgReceiverCfg
+     * Damage indicator configuration from markers section.
+     * Contains dmgText specs from enemy\alive\normal for example.
+     * 
+     * @param	dmgIndicatorCfg
+     * Damage indicator configuration from damageTextMajor first level section.
+     */
+    public function showDamage(dmgReceiverCfg:Object, dmgSourceCfg:Object, newHealth:Number, delta:Number, flag:Number, damageType:String)
     {
-        cfg = state_cfg.damageText;
-
+        this.cfg = new DamageTextConfig(dmgReceiverCfg, dmgSourceCfg, flag, damageType);
+        
         if (!cfg.visible)
             return;
-
+        
         var text:String = defineText(newHealth, delta);
-        var textColor:Number = defineTextColor(flag, damageType);
-        var shadowColor:Number = defineShadowColor(flag, damageType);
-        var tf:TextField = createTextField(text, textColor, shadowColor);
+        var tf:TextField = createTextField(text, cfg.textColor, cfg.shadowColor);
         var animation = new DamageTextAnimation(tf, cfg); // defines and starts
     }
 
     public function updateState(state_cfg:Object)
     {
+        // TODO: 
+        // Not adapted to new damage model
+        
         var cfg = state_cfg.damageText;
-
         var visible = cfg.visible;
-
         if (visible)
-            draw(cfg);
-
+        {
+            damage._x = cfg.x;
+            damage._y = cfg.y;
+        }
         damage._visible = visible;
     }
 
@@ -59,25 +68,22 @@ class wot.VehicleMarkersManager.components.DamageTextComponent
         tf.setTextFormat(XvmHelper.createNewTextFormat(cfg.font));
         tf.textColor = textColor;
         tf._x = -(tf._width / 2.0);
+        
         if (cfg.shadow)
         {
             //var sh_color:Number = proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.shadow.color));
-            var sh_alpha:Number = proxy.formatDynamicAlpha(cfg.shadow.alpha);
-            tf.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow.distance,
-                cfg.shadow.angle, shadowColor, sh_alpha, cfg.shadow.size, cfg.shadow.strength) ];
+            tf.filters = [ GraphicsUtil.createShadowFilter
+            (
+                cfg.shadow.distance,
+                cfg.shadow.angle,
+                shadowColor,
+                cfg.shadow.aplha,
+                cfg.shadow.size,
+                cfg.shadow.strength
+            ) ];
         }
-        
+
         return tf;
-    }
-    
-    private function defineTextColor(flag:Number, damageType:Number):Number
-    {
-        return Config.s_config.colors.dmgTextPalette[damageType][flag];
-    }
-    
-    private function defineShadowColor(flag:Number, damageType:Number):Number
-    {
-        return Config.s_config.colors.dmgShadowPalette[damageType][flag];
     }
     
     private function defineText(newHealth:Number, delta:Number):String
@@ -87,11 +93,5 @@ class wot.VehicleMarkersManager.components.DamageTextComponent
         // For some reason, DropShadowFilter is not rendered when textfield contains only one character,
         // so we're appending empty prefix and suffix to bypass this unexpected behavior
         return " " + text + " ";
-    }
-    
-    private function draw(cfg:Object)
-    {
-        damage._x = cfg.x;
-        damage._y = cfg.y;
     }
 }

@@ -13,15 +13,14 @@ import wot.VehicleMarkersManager.VehicleMarkerProxy;
 import wot.VehicleMarkersManager.VehicleState;
 import wot.VehicleMarkersManager.VehicleStateProxy;
 import wot.VehicleMarkersManager.XvmBase;
-import wot.VehicleMarkersManager.XvmHelper;
 import wot.VehicleMarkersManager.components.ActionMarkerComponent;
 import wot.VehicleMarkersManager.components.ActionMarkerProxy;
 import wot.VehicleMarkersManager.components.ClanIconComponent;
 import wot.VehicleMarkersManager.components.ClanIconProxy;
 import wot.VehicleMarkersManager.components.ContourIconComponent;
 import wot.VehicleMarkersManager.components.ContourIconProxy;
-import wot.VehicleMarkersManager.components.DamageTextComponent;
-import wot.VehicleMarkersManager.components.DamageTextProxy;
+import wot.VehicleMarkersManager.components.damage.DamageTextComponent;
+import wot.VehicleMarkersManager.components.damage.DamageTextProxy;
 import wot.VehicleMarkersManager.components.HealthBarComponent;
 import wot.VehicleMarkersManager.components.HealthBarProxy;
 import wot.VehicleMarkersManager.components.LevelIconComponent;
@@ -169,7 +168,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     /**
      * @see IVehicleMarker
      */
-    function updateHealth(newHealth, flag, damageTypeStr)
+    function updateHealth(newHealth, flag, damageType)
     {
         /* 
          * newHealth:
@@ -181,9 +180,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
          *  "attack", "fire", "ramming", "world_collision", "death_zone", "drowning", "explosion"
          */
         
-        //Logger.add("Xvm::updateHealth(" + flag + ", " + damageTypeStr + ", " + newHealth +")");
-        
-        var damageType:Number = XvmHelper.translateDmgToConst(damageTypeStr);
+        //Logger.add("Xvm::updateHealth(" + flag + ", " + damageType + ", " + newHealth +")");
         
         if (newHealth < 0)
             s_blowedUp[m_playerFullName] = true;
@@ -195,10 +192,18 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         
         if (delta < 0) // Damage has been done
         {
-            var cfg = vehicleState.getCurrentConfig();
-            healthBarComponent.updateState(cfg);
-            healthBarComponent.showDamage(cfg, newHealth, m_maxHealth, -delta);
-            damageTextComponent.showDamage(vehicleState.getCurrentConfig(), newHealth, -delta, flag, damageType);
+            // markers{ally{alive{normal{damageText
+            var vehicleStateCfg:Object = vehicleState.getCurrentConfig();
+            
+            // damage config node at root level
+            var dmgBySourceCfg:Object = Config.s_config.damage;       
+            
+            healthBarComponent.updateState(vehicleStateCfg);
+            healthBarComponent.showDamage(vehicleStateCfg, newHealth, m_maxHealth, -delta);
+            
+            // vehicleStateCfg.damageText - dmg config relative to receiver
+            // dmgIndicatorCfg            - dmg config relative to source and type
+            damageTextComponent.showDamage(vehicleStateCfg.damageText, dmgBySourceCfg, newHealth, -delta, flag, damageType);
         }
 
         XVMUpdateDynamicTextFields();

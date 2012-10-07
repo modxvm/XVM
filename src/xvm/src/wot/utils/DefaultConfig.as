@@ -208,6 +208,7 @@ class wot.utils.DefaultConfig
           }
         }
       },
+      damage: damageSectionContent,
       colors: {
         system: {
           ally_alive_normal: "0x96FF00",
@@ -289,27 +290,6 @@ class wot.utils.DefaultConfig
           { value: 500,  color: "0x99FF33" },
           { value: 800,  color: "0x33FF33" },
           { value: 9999, color: "0xCC66CC" }
-        ],
-        // {{dmg}} colors
-        dmgTextPalette: [
-        //  type \ from          unknown   ally      enemy     squad     player
-        /* attack          */ [ 0x000000, 0x55EE88, 0xEE5588, 0xFFCC00, 0xE0E0E0 ],
-        /* fire            */ [ 0x000000, 0x66FF88, 0xFF6688, 0xFFCC66, 0xFFFFFF ],
-        /* ramming         */ [ 0x000000, 0x33DD99, 0xDD3399, 0xEEBB44, 0x949494 ],
-        /* world_collision */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
-        /* death_zone      */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
-        /* drowning        */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
-        /* explosion       */ [ 0x000000, 0xBBF8CF, 0xFF6666, 0xFFCC66, 0xFFFFFF ]
-        ],
-        dmgShadowPalette: [
-        //  type \ from          unknown   ally      enemy     squad     player
-        /* attack          */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
-        /* fire            */ [ 0xFFFFFF, 0xFFFFFF, 0xFFFFFF, 0xFFFFFF, 0xFFFFFF ],
-        /* ramming         */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
-        /* world_collision */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
-        /* death_zone      */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
-        /* drowning        */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
-        /* explosion       */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ]
         ]
       },
       alpha: {
@@ -493,6 +473,41 @@ class wot.utils.DefaultConfig
     }
   }
 
+  // damage root level section
+  public static function get damageSectionContent(): Object
+  {
+    return
+    {
+        attack:  damageType,
+        fire:    damageType,
+        ramming: damageType,
+        world_collision: damageType,
+        other:
+        [
+            { color: "0x000000", shadow: {color: "0xB40097"}, speed: "", maxRange: "", damageMessage: "", 
+            font: { name: "", size: "20", bold: true, italic: false } }
+        ]
+    }
+  }
+  
+  // damage field
+  public static function get damageType():Array
+  {
+    return
+    [
+        { color: "0x33CCCC", shadow: {color: "0x000000"}, speed: "", maxRange: "", damageMessage: "", 
+                                 font: { name: "", size: "20", bold: true, italic: false } },
+        { color: "0x95F23C", shadow: {color: "0x000000"}, speed: "", maxRange: "", damageMessage: "", 
+                                 font: { name: "", size: "20", bold: true, italic: false } },
+        { color: "0xE1004C", shadow: {color: "0x000000"}, speed: "", maxRange: "", damageMessage: "", 
+                                 font: { name: "", size: "20", bold: true, italic: false } },
+        { color: "0xFFA900", shadow: {color: "0x000000"}, speed: "", maxRange: "", damageMessage: "", 
+                                 font: { name: "", size: "20", bold: true, italic: false } },
+        { color: "0xAAAAAA", shadow: {color: "0x000000"}, speed: "", maxRange: "", damageMessage: "", 
+                                 font: { name: "", size: "24", bold: true, italic: false } }
+    ]
+  }
+  
   // contourIcon
   public static function get ci(): Object
   {
