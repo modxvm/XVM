@@ -314,7 +314,6 @@ module.exports = (function() {
     };
 
     var processRequest = function(request, response) {
-        console.log("here");
         // parse request
         var ids = [ ];
         var ids_bad_id = [ ];
@@ -395,7 +394,6 @@ module.exports = (function() {
                 process.send({ usage: 1, mongorq_max: mongorq_max - oldvalue });
             }
 
-
             try {
                 times.push({"n": "find2", "t": now});
 
@@ -441,7 +439,11 @@ module.exports = (function() {
     };
 
 // Create http server
-    var createWorker = function() {
+    var createWorker = function(fakeMongo, fakeHttp) {
+        // for test applications only
+        mongo = fakeMongo || mongo;
+        http = fakeHttp || http;
+
         process.on("message", function(msg) {
             if(msg.info)
                 info = msg.info;
@@ -491,9 +493,6 @@ module.exports = (function() {
 
     // exports
     return {
-        createWorker: createWorker,
-        // only for test applications
-        http: http,
-        mongo: mongo
+        createWorker: createWorker
     }
 })();
