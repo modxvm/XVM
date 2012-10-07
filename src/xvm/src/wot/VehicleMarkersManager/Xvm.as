@@ -192,14 +192,14 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         
         if (delta < 0) // Damage has been done
         {
-            // markers{ally{alive{normal{damageText
+            // markers{ally{alive{normal
             var vehicleStateCfg:Object = vehicleState.getCurrentConfig();
-            
-            // damage config node at root level
-            var dmgBySourceCfg:Object = Config.s_config.damage;       
             
             healthBarComponent.updateState(vehicleStateCfg);
             healthBarComponent.showDamage(vehicleStateCfg, newHealth, m_maxHealth, -delta);
+
+            // damage config node at root level
+            var dmgBySourceCfg:Object = Config.s_config.damage;
             
             // vehicleStateCfg.damageText - dmg config relative to receiver
             // dmgIndicatorCfg            - dmg config relative to source and type

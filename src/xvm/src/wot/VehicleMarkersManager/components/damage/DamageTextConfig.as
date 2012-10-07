@@ -1,5 +1,3 @@
-import wot.utils.Logger;
-
 class wot.VehicleMarkersManager.components.damage.DamageTextConfig
 {
     private var primaryAttributes:Object;
@@ -16,8 +14,6 @@ class wot.VehicleMarkersManager.components.damage.DamageTextConfig
          * getAttributesBySourceAndType - damageText section at root level
          * dmgReceiverCfg - damageText sections at markers section
          */
-        Logger.add(" ");
-        Logger.add("DamageTextConfig");
         dmgSourceCfg = getAttributesBySourceAndType(dmgSourceCfg, flag, damageType);
         primaryAttributes   = dmgReceiverCfg;
         secondaryAttributes = dmgSourceCfg;
@@ -80,16 +76,16 @@ class wot.VehicleMarkersManager.components.damage.DamageTextConfig
     
     private function merge(primVal:Object, secVal:Object):Object
     {
-        Logger.add("");
-        Logger.add("  merge prim: " + primVal + " sec: " + secVal);
+        //Logger.add("");
+        //Logger.add("  merge prim: " + primVal + " sec: " + secVal);
         if (primVal == "" || primVal == null)
         {
-            Logger.add("  ret sec: " + secVal);
+            //Logger.add("  ret sec: " + secVal);
             return secVal;
         }
         else
         {
-            Logger.add("  ret prim: " + primVal);
+            //Logger.add("  ret prim: " + primVal);
             return primVal;
         }
     }
