@@ -86,7 +86,7 @@ class wot.VehicleMarkersManager.components.TurretStatusDatabase
             db["t25_2"] = new Array(800, 2);
             db["t-26"] = new Array(150, 1);
             db["t-28"] = new Array(320, 1);
-            db["t29"] = new Array(1150, 2);
+            db["t29"] = new Array(1150, 1); // XD TODO: clean fix
             db["t32"] = new Array(1400, 2);
             db["t-34"] = new Array(400, 2);
             db["t-34-85"] = new Array(670, 2);
