@@ -110,9 +110,8 @@ class wot.utils.DefaultConfig
         h: 100,
         lines: 1,
         direction: "down",
-        align: "left",
         format: "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <b>{{dmg}}</b>",
-        formatHistory: "{{dmg-total}} {{dmg}} {{vehicle}} {{rlevel}} {{nick}} {{hit-kind}}"
+        formatHistory: "{{n}}: {{dmg-total}} {{dmg}} {{vehicle}} {{hit-kind}}"
       },
       markers: {
         ally: {
@@ -484,30 +483,30 @@ class wot.utils.DefaultConfig
         world_collision: damageType,
         other:
         [
-            { color: "0x000000", shadow: {color: "0xB40097"}, speed: "", maxRange: "", damageMessage: "", 
+            { color: "0x000000", shadow: {color: "0xB40097"}, speed: "", maxRange: "", damageMessage: "",
             font: { name: "", size: "20", bold: true, italic: false } }
         ]
     }
   }
-  
+
   // damage field
   public static function get damageType():Array
   {
     return
     [
-        { color: "0x33CCCC", shadow: {color: "0x000000"}, speed: "", maxRange: "", damageMessage: "", 
+        { color: "0x33CCCC", shadow: {color: "0x000000"}, speed: "", maxRange: "", damageMessage: "",
                                  font: { name: "", size: "20", bold: true, italic: false } },
-        { color: "0x95F23C", shadow: {color: "0x000000"}, speed: "", maxRange: "", damageMessage: "", 
+        { color: "0x95F23C", shadow: {color: "0x000000"}, speed: "", maxRange: "", damageMessage: "",
                                  font: { name: "", size: "20", bold: true, italic: false } },
-        { color: "0xE1004C", shadow: {color: "0x000000"}, speed: "", maxRange: "", damageMessage: "", 
+        { color: "0xE1004C", shadow: {color: "0x000000"}, speed: "", maxRange: "", damageMessage: "",
                                  font: { name: "", size: "20", bold: true, italic: false } },
-        { color: "0xFFA900", shadow: {color: "0x000000"}, speed: "", maxRange: "", damageMessage: "", 
+        { color: "0xFFA900", shadow: {color: "0x000000"}, speed: "", maxRange: "", damageMessage: "",
                                  font: { name: "", size: "20", bold: true, italic: false } },
-        { color: "0xAAAAAA", shadow: {color: "0x000000"}, speed: "", maxRange: "", damageMessage: "", 
+        { color: "0xAAAAAA", shadow: {color: "0x000000"}, speed: "", maxRange: "", damageMessage: "",
                                  font: { name: "", size: "24", bold: true, italic: false } }
     ]
   }
-  
+
   // contourIcon
   public static function get ci(): Object
   {

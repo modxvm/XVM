@@ -106,7 +106,6 @@
     "h": 100,            // Height
     "lines": 1,          // Number of lines. Old lines will be pushed out
     "direction": "down", // Log direction: up - lines will be added from up to down, down - from down to up.
-    "align": "left",     // text alignment (left/center/right)
     // Last hit format (macros allowed, see readme-en.txt)
     "format": "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <b>{{dmg}}</b>",
     // Previous hits format (macros allowed, see readme-en.txt)

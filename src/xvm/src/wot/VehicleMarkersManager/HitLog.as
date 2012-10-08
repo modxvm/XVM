@@ -18,7 +18,6 @@ class wot.VehicleMarkersManager.HitLog
     private var h:Number;
     private var lines:Number;
     private var direction:Number;
-    private var align:String;
     private var format:String;
     private var formatHistory:String;
 
@@ -36,7 +35,6 @@ class wot.VehicleMarkersManager.HitLog
         h = cfg.h;
         lines = Math.min(100, Math.max(1, cfg.lines));
         direction = cfg.direction.toUpperCase() == "UP" ? Defines.DIRECTION_UP : Defines.DIRECTION_DOWN;
-        align = cfg.align;
         format = cfg.format;
         formatHistory = cfg.formatHistory;
 
@@ -54,7 +52,8 @@ class wot.VehicleMarkersManager.HitLog
 
     function setText(txt)
     {
-        textField.htmlText = "<font face='$FieldFont' size='15' color='#F4EFE8'>" + txt + "</font>";
+        textField.htmlText = "<body>" + txt + "</body>";
+        //Logger.add(textField.htmlText);
     }
     
     public function update(delta:Number, vehicleName:String, playerName:String, level:Number, damageType:String)
@@ -91,13 +90,14 @@ class wot.VehicleMarkersManager.HitLog
         // TODO: x,y < 0
         textField = _root.createTextField("xvmHitLog", _root.getNextHighestDepth(), x, y, w, h);
         textField.antiAliasType = "advanced";
-        var textFormat: TextFormat = _root.debugPanel.fgMC.fps.getNewTextFormat();
-        textFormat.align = align;
         textField.multiline = true;
         textField.wordWrap = false;
-        textField.html = true;
-        textField.setNewTextFormat(textFormat);
         textField.filters = [new flash.filters.DropShadowFilter(1, 90, 0, 100, 5, 5, 1.5, 3)];
+
+        textField.html = true;
+        var style:TextField.StyleSheet = new TextField.StyleSheet();
+        style.parseCSS("body {font-family:$FieldFont; font-size:15px; color:#F4EFE8;}");
+        textField.styleSheet = style;
 
         var txt = formatText(format, 0, "", "", 0, "");
         if (direction != Defines.DIRECTION_DOWN)
