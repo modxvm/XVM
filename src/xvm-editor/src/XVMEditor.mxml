@@ -87,7 +87,6 @@
                             <p:PDefinition id="p_definition" config="definition" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                             <p:PBattle id="p_battle" config="battle" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                             <p:PRating id="p_rating" config="rating" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
-                            <p:PTurret id="p_turret" config="turretMarkers" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                         </s:VGroup>
                     </s:Scroller>
                 </s:NavigatorContent>
@@ -237,9 +236,10 @@
                         </s:NavigatorContent>
                 </mx:Accordion>
                 </s:NavigatorContent>
-                <s:NavigatorContent label="{_('iconsetPage')}" width="100%" height="100%" id="pgIconset">
+                <s:NavigatorContent label="{_('miscPage')}" width="100%" height="100%" id="pgMisc">
                     <s:Scroller x="0" y="0" width="420" height="100%">
                         <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1" creationComplete="{RefreshCurrentPage()}">
+                            <p:PTurret id="p_turret" config="turretMarkers" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                             <p:PIconSet id="p_iconSet" config="iconset" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                         </s:VGroup>
                     </s:Scroller>

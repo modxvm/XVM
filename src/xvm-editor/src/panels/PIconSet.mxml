@@ -6,8 +6,8 @@
     xmlns:c="components.*"
     height="100%"
     title="{resourceManager.getString('panels', 'PIconSet')}">
-    <c:LabeledTextInput label="{resourceManager.getString('panels', 'iconset_battleLoading')}" labelWidth="100%" wrapTextField="true" height="40" id="v_battleLoading" config="iconset.battleLoading" change="onChange(event)"/>
-    <c:LabeledTextInput label="{resourceManager.getString('panels', 'iconset_statisticForm')}" labelWidth="100%" wrapTextField="true" height="40" id="v_statisticForm" config="iconset.statisticForm" change="onChange(event)"/>
-    <c:LabeledTextInput label="{resourceManager.getString('panels', 'iconset_playersPanel')}" labelWidth="100%" wrapTextField="true" height="40" id="v_playersPanel" config="iconset.playersPanel" change="onChange(event)"/>
-    <c:LabeledTextInput label="{resourceManager.getString('panels', 'iconset_vehicleMarker')}" labelWidth="100%" wrapTextField="true" height="40" id="v_vehicleMarker" config="iconset.vehicleMarker" change="onChange(event)"/>
+    <c:LabeledTextInput label="{resourceManager.getString('panels', 'iconset_battleLoading')}" labelWidth="180" id="v_battleLoading" config="iconset.battleLoading" change="onChange(event)"/>
+    <c:LabeledTextInput label="{resourceManager.getString('panels', 'iconset_statisticForm')}" labelWidth="180" id="v_statisticForm" config="iconset.statisticForm" change="onChange(event)"/>
+    <c:LabeledTextInput label="{resourceManager.getString('panels', 'iconset_playersPanel')}" labelWidth="180" id="v_playersPanel" config="iconset.playersPanel" change="onChange(event)"/>
+    <c:LabeledTextInput label="{resourceManager.getString('panels', 'iconset_vehicleMarker')}" labelWidth="180" id="v_vehicleMarker" config="iconset.vehicleMarker" change="onChange(event)"/>
 </c:PanelComponent>

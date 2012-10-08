@@ -30,8 +30,8 @@ protected function RefreshCurrentPage():void
             RefreshColorsPage();
         else if (pg == pgTransparency)
             RefreshTransparencyPage();
-        else if (pg == pgIconset)
-            RefreshIconsetPage();
+        else if (pg == pgMisc)
+            RefreshMiscPage();
         else if (pg == pgVehicleNames)
             RefreshVehicleNamesPage();
         else if (pg == pgMarkers)
@@ -76,10 +76,6 @@ private function RefreshCommonPage():void
         section = Config.s_config.rating;
         this.p_rating.v_showPlayersStatistics.value = section.showPlayersStatistics;
         this.p_rating.v_loadEnemyStatsInFogOfWar.value = section.loadEnemyStatsInFogOfWar;
-
-        section = Config.s_config.turretMarkers;
-        this.p_turret.v_highVulnerability.value = section.highVulnerability;
-        this.p_turret.v_lowVulnerability.value = section.lowVulnerability;
     }
     catch (ex:Error)
     {
@@ -303,12 +299,16 @@ private function RefreshTransparencyPage():void
     }
 }
 
-private function RefreshIconsetPage():void
+private function RefreshMiscPage():void
 {
-    debug("RefreshIconsetPage()");
+    debug("RefreshMiscPage()");
     try
     {
         var section:*;
+
+        section = Config.s_config.turretMarkers;
+        this.p_turret.v_highVulnerability.value = section.highVulnerability;
+        this.p_turret.v_lowVulnerability.value = section.lowVulnerability;
 
         section = Config.s_config.iconset;
         this.p_iconSet.v_battleLoading.value = section.battleLoading;
@@ -318,7 +318,7 @@ private function RefreshIconsetPage():void
     }
     catch (ex:Error)
     {
-        debug("ERROR: RefreshIconsetPage(): " + ex.toString());
+        debug("ERROR: RefreshMiscPage(): " + ex.toString());
     }
 }
 

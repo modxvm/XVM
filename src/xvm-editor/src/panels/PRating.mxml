@@ -4,6 +4,7 @@
     xmlns:s="library://ns.adobe.com/flex/spark"
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
+    height="100%"
     title="{resourceManager.getString('panels', 'PRating')}">
     <c:LabeledCheckBox label="{resourceManager.getString('panels', 'showPlayersStatistics')}" id="v_showPlayersStatistics" config="rating.showPlayersStatistics" change="onChange(event)"/>
     <c:LabeledCheckBox label="{resourceManager.getString('panels', 'loadEnemyStatsInFogOfWar')}" id="v_loadEnemyStatsInFogOfWar" config="rating.loadEnemyStatsInFogOfWar" change="onChange(event)"/>
