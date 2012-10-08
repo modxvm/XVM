@@ -87,7 +87,7 @@
       {{vehicle}}     - vehicle name
       {{level}}       - vehicle level (Arabic numerals)
       {{rlevel}}      - vehicle level (Roman numerals)
-      {{hit-kind}}    - hit kind (attack, fire, ramming, ...)
+      {{dmg-kind}}    - damage kind (attack, fire, ramming, ...)
 
     In tank markers:
       {{hp}}          - current health points

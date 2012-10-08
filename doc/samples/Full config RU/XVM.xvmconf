@@ -117,7 +117,7 @@
     // Формат последнего попадания (допускаются макроподстановки, см. readme-ru.txt)
     "format": "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <b>{{dmg}}</b>",
     // Формат предыдущих попаданий (допускаются макроподстановки, см. readme-ru.txt)
-    "formatHistory": "{{n}}: {{dmg-total}} {{dmg}} {{vehicle}} {{hit-kind}}"
+    "formatHistory": "{{n}}: {{dmg-total}} {{dmg}} {{vehicle}} {{dmg-kind}}"
   },
   // Блок маркеров над танками.
   "markers": {

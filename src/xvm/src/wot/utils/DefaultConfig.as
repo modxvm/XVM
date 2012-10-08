@@ -111,7 +111,7 @@ class wot.utils.DefaultConfig
         lines: 1,
         direction: "down",
         format: "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <b>{{dmg}}</b>",
-        formatHistory: "{{n}}: {{dmg-total}} {{dmg}} {{vehicle}} {{hit-kind}}"
+        formatHistory: "{{n}}: {{dmg-total}} {{dmg}} {{vehicle}} {{dmg-kind}}"
       },
       markers: {
         ally: {

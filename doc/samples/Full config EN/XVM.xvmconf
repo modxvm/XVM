@@ -117,7 +117,7 @@
     // Last hit format (macros allowed, see readme-en.txt)
     "format": "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <b>{{dmg}}</b>",
     // Previous hits format (macros allowed, see readme-en.txt)
-    "formatHistory": "{{n}}: {{dmg-total}} {{dmg}} {{vehicle}} {{hit-kind}}"
+    "formatHistory": "{{n}}: {{dmg-total}} {{dmg}} {{vehicle}} {{dmg-kind}}"
   },
   // OVER-TARGET MARKERS
   "markers": {
