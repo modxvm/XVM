@@ -233,7 +233,14 @@ class wot.utils.DefaultConfig
           enemy_dead_normal: "0x840500",
           enemy_dead_blind: "0x47407A",
           enemy_blowedup_normal: "0x5A0401",
-          enemy_blowedup_blind: "0x3B365F"
+          enemy_blowedup_blind: "0x3B365F",
+          // me - my damage. used only in markers//damageText when damageSource = 'player'
+          me_alive_normal: "0xFFCC00",
+          me_alive_blind: "0xFFFF00",
+          me_dead_normal: "0xDD9900",
+          me_dead_blind: "0xDDDD00",
+          me_blowedup_normal: "0xFFCC00",
+          me_blowedup_blind: "0xFFFF00"
         },
         vtype: {
           LT:  "0xA2FF9A",        // Color for light tanks
@@ -243,6 +250,13 @@ class wot.utils.DefaultConfig
           TD:  "0xA0CFFF",        // Color for tank destroyers
           premium: "0xFFCC66",    // Color for premium tanks
           usePremiumColor: false  // Enable/disable premium color usage
+        },
+        dmg_kind: {
+          attack: "0xFFAA55",
+          fire: "0xFF6655",
+          ramming: "0x998855",
+          world_collision: "0x228855",
+          other: "0xCCCCCC"
         },
         // values - from min to max, colors are for values 'lesser then ...'
         hp: [
@@ -321,6 +335,15 @@ class wot.utils.DefaultConfig
           { value: 101, alpha: 40 }
         ]
       },
+      images: {
+        dmg_kind: {
+          attack: "",
+          fire: "../../../icons/xvm/dmg_fire.png",
+          ramming: "../../../icons/xvm/dmg_ramming.png",
+          world_collision: "../../../icons/xvm/dmg_world_collision.png",
+          other: "../../../icons/xvm/dmg_other.png"
+        }
+      }
       iconset: {
         battleLoading: "../maps/icons/vehicle/contour",
         statisticForm: "../maps/icons/vehicle/contour",
