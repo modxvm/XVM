@@ -207,7 +207,6 @@ class wot.utils.DefaultConfig
           }
         }
       },
-      damage: damageSectionContent,
       colors: {
         system: {
           ally_alive_normal: "0x96FF00",
@@ -491,43 +490,23 @@ class wot.utils.DefaultConfig
       speed: 2,
       maxRange: 40,
       damageMessage: "{{dmg}}",
-      blowupMessage: "Blow-up!"
+      blowupMessage: "Blow-up!",
+      damageMessages: damageMessages,
+      blowupMessages: damageMessages
     }
   }
 
-  // damage root level section
-  public static function get damageSectionContent(): Object
+  // damageMessages section
+  public static function get damageMessages(): Object
   {
     return
     {
-        attack:  damageType,
-        fire:    damageType,
-        ramming: damageType,
-        world_collision: damageType,
-        other:
-        [
-            { color: "0x000000", shadow: {color: "0xB40097"}, speed: "", maxRange: "", damageMessage: "",
-            font: { name: "", size: "20", bold: true, italic: false } }
-        ]
+      unknown: null,
+      ally: null,
+      enemy: null,
+      squad: null,
+      player: null
     }
-  }
-
-  // damage field
-  public static function get damageType():Array
-  {
-    return
-    [
-        { color: "0x33CCCC", shadow: {color: "0x000000"}, speed: "", maxRange: "", damageMessage: "",
-                                 font: { name: "", size: "20", bold: true, italic: false } },
-        { color: "0x95F23C", shadow: {color: "0x000000"}, speed: "", maxRange: "", damageMessage: "",
-                                 font: { name: "", size: "20", bold: true, italic: false } },
-        { color: "0xE1004C", shadow: {color: "0x000000"}, speed: "", maxRange: "", damageMessage: "",
-                                 font: { name: "", size: "20", bold: true, italic: false } },
-        { color: "0xFFA900", shadow: {color: "0x000000"}, speed: "", maxRange: "", damageMessage: "",
-                                 font: { name: "", size: "20", bold: true, italic: false } },
-        { color: "0xAAAAAA", shadow: {color: "0x000000"}, speed: "", maxRange: "", damageMessage: "",
-                                 font: { name: "", size: "24", bold: true, italic: false } }
-    ]
   }
 
   // contourIcon

@@ -9,6 +9,32 @@ class wot.VehicleMarkersManager.XvmHelper
     public static var rlevel: Array = [ "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" ];
 
     /**
+     * Create CSS based on config
+     */
+    public static function createCSS(config_font:Object, color:Number, className:String):String
+    {
+        try
+        {
+            if (!config_font)
+                return null;
+
+            return "." + className + "{" +
+                "color:" + color + ";" +
+                "font-family:" + (config_font.name || "$FieldFont") + ";" +
+                "font-size:" + (config_font.size || 13) + ";" +
+                "font-weight:" + (config_font.bold ? "bold" : "normal") + ";" +
+                "font-style:" + (config_font.italic ? "italic" : "normal") + ";" +
+                "text-align:" + (config_font.align || "center") + ";";
+        }
+        catch (e)
+        {
+            ErrorHandler.setText("ERROR: createCSS():" + String(e));
+        }
+
+        return null;
+    }
+
+    /**
      * Create TextFormat based on config
      */
     public static function createNewTextFormat(config_font: Object): TextFormat
@@ -30,7 +56,7 @@ class wot.VehicleMarkersManager.XvmHelper
         }
         catch (e)
         {
-            ErrorHandler.setText("ERROR: XVMCreateNewTextFormat():" + String(e));
+            ErrorHandler.setText("ERROR: createNewTextFormat():" + String(e));
         }
 
         return null;

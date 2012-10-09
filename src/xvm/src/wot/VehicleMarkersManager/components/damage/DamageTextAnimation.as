@@ -38,7 +38,7 @@ class wot.VehicleMarkersManager.components.damage.DamageTextAnimation
       * Use GraphicsUtil.createShadowFilter and tween filter?
       */
     
-    public function DamageTextAnimation(tf:TextField, cfg:Object) 
+    public function DamageTextAnimation(cfg:Object, tf:TextField) 
     {
         this.tf = tf;
         this.cfg = cfg;
@@ -51,8 +51,8 @@ class wot.VehicleMarkersManager.components.damage.DamageTextAnimation
         
         timeline = new TimelineLite({onComplete:removeTextField});
         
-        timeline.insert(emerge(), 0);
-        timeline.insert(tint(), 0);
+        //timeline.insert(emerge(), 0);
+        //timeline.insert(tint(), 0);
         timeline.insert(moveUpward(movementDuration, distanceUpward), 0);
         timeline.append(fadeOut(), FADEOUT_TIME_OFFSET);
     }

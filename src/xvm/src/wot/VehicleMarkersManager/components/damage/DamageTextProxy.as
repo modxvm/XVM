@@ -23,6 +23,22 @@ class wot.VehicleMarkersManager.components.damage.DamageTextProxy extends Abstra
         return xvm.m_entityName;
     }
 
+    //   dst: ally, squadman, allytk, enemytk, enemy
+    public function get damageDest():String
+    {
+        return xvm.m_entityName == 'teamKiller' ? (xvm.proxy.m_team + "tk") : xvm.m_entityName;
+    }
+
+    public function get isDead():Boolean
+    {
+        return xvm.m_isDead;
+    }
+
+    public function get isBlowedUp():Boolean
+    {
+        return xvm.isBlowedUp;
+    }
+
     public function get isColorBlindMode():Boolean
     {
         return ColorsManager.isColorBlindMode;

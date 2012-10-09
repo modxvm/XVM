@@ -76,8 +76,10 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
 
     // Parent proxy instance (assigned from proxy)
     private var _proxy:VehicleMarkerProxy;
-    public function get proxy() { return _proxy; }
+    public function get proxy():VehicleMarkerProxy { return _proxy; }
 
+    public function get isBlowedUp():Boolean { return s_blowedUp[m_playerFullName] != undefined; }
+    
     /**
      * Text formatting functions
      */
@@ -162,8 +164,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
 
     public function formatDynamicColor(format:String, curHealth:Number):Number
     {
-        var systemColor =  ColorsManager.getSystemColor(m_entityName, m_isDead,
-            s_blowedUp[m_playerFullName] != undefined, ColorsManager.isColorBlindMode);
+        var systemColor =  ColorsManager.getSystemColor(m_entityName, m_isDead, isBlowedUp, ColorsManager.isColorBlindMode);
         try
         {
             if (!format)

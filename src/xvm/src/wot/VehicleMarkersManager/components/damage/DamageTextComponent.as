@@ -1,16 +1,18 @@
+import wot.utils.Config;
+import wot.utils.Defines;
 import wot.utils.GraphicsUtil;
-import wot.VehicleMarkersManager.components.damage.DamageTextConfig;
+import wot.VehicleMarkersManager.ColorsManager;
 import wot.VehicleMarkersManager.XvmHelper;
+import wot.VehicleMarkersManager.components.damage.DamageTextConfig;
 import wot.VehicleMarkersManager.components.damage.DamageTextProxy;
 import wot.VehicleMarkersManager.components.damage.DamageTextAnimation;
+
 class wot.VehicleMarkersManager.components.damage.DamageTextComponent
 {
     private var proxy:DamageTextProxy;
-    private var cfg:DamageTextConfig;
+    private var cfg:Object;// DamageTextConfig;
 
     private var damage:MovieClip;
-    private var dmgReceiverCfg:Object;
-    private var dmgSourceCfg:Object;
 
     public function DamageTextComponent(proxy:DamageTextProxy)
     {
@@ -19,30 +21,43 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
     }
 
     /**
-     * @param	dmgReceiverCfg
-     * Damage indicator configuration from markers section.
-     * Contains dmgText specs from enemy\alive\normal for example.
-     *
-     * @param	dmgIndicatorCfg
-     * Damage indicator configuration from damageTextMajor first level section.
+     * Show floating damage indicator
+     * @param	cfg damageText config section for current state
+     * @param	newHealth value of new health
+     * @param	delta absolute damage
+     * @param	flag  damage source: 0 - "FROM_UNKNOWN", 1 - "FROM_ALLY", 2 - "FROM_ENEMY", 3 - "FROM_SQUAD", 4 - "FROM_PLAYER"
+     * @param	damageType damage kind: "attack", "fire", "ramming", "world_collision", "death_zone", "drowning", "explosion"
      */
-    public function showDamage(dmgReceiverCfg:Object, dmgSourceCfg:Object, newHealth:Number, delta:Number, flag:Number, damageType:String)
+    public function showDamage(cfg:Object, newHealth:Number, delta:Number, flag:Number, damageType:String)
     {
-        this.cfg = new DamageTextConfig(dmgReceiverCfg, dmgSourceCfg, flag, damageType);
+        this.cfg = cfg;// new DamageTextConfig(dmgReceiverCfg, dmgSourceCfg, flag, damageType);
 
         if (!cfg.visible)
             return;
 
         var text:String = defineText(newHealth, delta);
-        var tf:TextField = createTextField(text, cfg.textColor, cfg.shadowColor);
-        var animation = new DamageTextAnimation(tf, cfg); // defines and starts
+
+        var color:Number;
+        if (cfg.color == null)
+        {
+            color = ColorsManager.getDamageSystemColor(flagToDamageSource(flag), proxy.damageDest,
+                proxy.entityName, proxy.isDead, proxy.isBlowedUp, proxy.isColorBlindMode);
+            //wot.utils.Logger.add("dmg: " + flagToDamageSource(flag) + ", " + proxy.damageDest + " - color=" + color);
+        }
+        else
+        {
+            color = proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.color));
+        }
+        
+        var tf:TextField = createTextField(flag);
+        
+        tf.htmlText = "<p class='xvm_damageText'>" + text + "</p>";
+
+        var animation = new DamageTextAnimation(cfg, tf); // defines and starts
     }
 
     public function updateState(state_cfg:Object)
     {
-        // TODO:
-        // Not adapted to new damage model
-
         var cfg = state_cfg.damageText;
         var visible = cfg.visible;
         if (visible)
@@ -55,20 +70,22 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
 
     // PRIVATE METHODS
 
-    private function createTextField(text:String, textColor:Number, shadowColor:Number):TextField
+    private function createTextField(color:Number):TextField
     {
-//TODO:getDamageSystemColor
-//TODO:css
         var n = damage.getNextHighestDepth();
         var tf: TextField = damage.createTextField("txt" + n, n, 0, 0, 140, 20);
 
-        tf.text = text;
         tf.antiAliasType = "advanced";
-        tf.autoSize = "left";
-        tf.border = false;
-        tf.embedFonts = true;
-        tf.setTextFormat(XvmHelper.createNewTextFormat(cfg.font));
-        tf.textColor = textColor;
+        tf.multiline = true;
+        tf.wordWrap = false;
+
+        tf.html = true;
+
+        var style:TextField.StyleSheet = new TextField.StyleSheet();
+        style.parseCSS(Config.s_css);
+        style.parseCSS(XvmHelper.createCSS(cfg.font, color, "xvm_damageText"));
+        tf.styleSheet = style;
+        
         tf._x = -(tf._width / 2.0);
 
         if (cfg.shadow)
@@ -78,8 +95,8 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
             (
                 cfg.shadow.distance,
                 cfg.shadow.angle,
-                shadowColor,
-                cfg.shadow.aplha,
+                cfg.shadow.color,
+                cfg.shadow.alpha,
                 cfg.shadow.size,
                 cfg.shadow.strength
             ) ];
@@ -95,5 +112,24 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
         // For some reason, DropShadowFilter is not rendered when textfield contains only one character,
         // so we're appending empty prefix and suffix to bypass this unexpected behavior
         return " " + text + " ";
+    }
+    
+    //   src: ally, squadman, enemy, unknown, player (allytk, enemytk - how to detect?)
+    private static function flagToDamageSource(flag:Number):String
+    {
+        switch (flag)
+        {
+            case Defines.FROM_ALLY:
+                return "ally";
+            case Defines.FROM_ENEMY:
+                return "enemy";
+            case Defines.FROM_PLAYER:
+                return "player";
+            case Defines.FROM_SQUAD:
+                return "squadman";
+            case Defines.FROM_UNKNOWN:
+            default:
+                return "unknown";
+        }
     }
 }

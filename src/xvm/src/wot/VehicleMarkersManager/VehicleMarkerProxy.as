@@ -164,7 +164,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         else
         {
             // Create XVM marker
-            subject = new wot.VehicleMarkersManager.Xvm(this, m_team);
+            subject = new wot.VehicleMarkersManager.Xvm(this);
         }
 
         // Invoke all deferred method calls while config was loading

@@ -198,12 +198,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
             healthBarComponent.updateState(vehicleStateCfg);
             healthBarComponent.showDamage(vehicleStateCfg, newHealth, m_maxHealth, -delta);
 
-            // damage config node at root level
-            var dmgBySourceCfg:Object = Config.s_config.damage;
-            
-            // vehicleStateCfg.damageText - dmg config relative to receiver
-            // dmgIndicatorCfg            - dmg config relative to source and type
-            damageTextComponent.showDamage(vehicleStateCfg.damageText, dmgBySourceCfg, newHealth, -delta, flag, damageType);
+            damageTextComponent.showDamage(vehicleStateCfg.damageText, newHealth, -delta, flag, damageType);
         }
 
         XVMUpdateDynamicTextFields();
