@@ -96,26 +96,23 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
         tf.multiline = true;
         tf.wordWrap = false;
 
-        if (cfg.shadow)
-        {
-            tf.filters = [ GraphicsUtil.createShadowFilter
-            (
-                cfg.shadow.distance,
-                cfg.shadow.angle,
-                shadowColor,
-                isNaN(parseInt(cfg.shadow.alpha)) ? 1 : cfg.shadow.alpha / 100.0, // TODO:dynamic alpha?
-                cfg.shadow.size,
-                cfg.shadow.strength
-            ) ];
-        }
-
         tf.html = true;
 
         var style:TextField.StyleSheet = new TextField.StyleSheet();
         style.parseCSS(Config.s_css);
         style.parseCSS(XvmHelper.createCSS(cfg.font, color, "xvm_damageText"));
         tf.styleSheet = style;
-        
+
+        tf.filters = [ GraphicsUtil.createShadowFilter
+        (
+            cfg.shadow.distance,
+            cfg.shadow.angle,
+            shadowColor,
+            isNaN(parseInt(cfg.shadow.alpha)) ? 100 : cfg.shadow.alpha, // TODO:dynamic alpha?
+            cfg.shadow.size,
+            cfg.shadow.strength
+        ) ];
+
         tf._x = -(tf._width / 2.0);
 
         return tf;
