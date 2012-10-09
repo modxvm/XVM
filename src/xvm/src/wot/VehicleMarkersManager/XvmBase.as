@@ -91,6 +91,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
             format = format.split("{{vehicle}}").join(VehicleInfo.mapVehicleName(m_defaultIconSource, m_vname));
             format = format.split("{{level}}").join(String(m_level));
             format = format.split("{{rlevel}}").join(XvmHelper.rlevel[m_level - 1]);
+            format = format.split("{{turret}}").join(turretStatusComponent.getMarker());
             format = StatFormat.FormatText({ label: m_playerFullName }, format);
             format = Utils.trim(format);
         }
@@ -131,8 +132,6 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
             var dmgRatio: Number = delta ? Math.ceil(delta / m_maxHealth * 100) : 0;
             format = format.split("{{dmg-ratio}}").join(delta ? String(dmgRatio) : "");
             format = format.split("{{dmg}}").join(delta ? String(delta) : "");
-
-            format = format.split("{{turret}}").join(turretStatusComponent.getMarker());
 
             format = Utils.trim(format);
         }
