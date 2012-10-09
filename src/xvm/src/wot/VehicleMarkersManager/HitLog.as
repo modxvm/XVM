@@ -19,6 +19,7 @@ class wot.VehicleMarkersManager.HitLog
     private var h:Number;
     private var lines:Number;
     private var direction:Number;
+    private var css:String;
     private var format:String;
     private var formatHistory:String;
 
@@ -36,6 +37,7 @@ class wot.VehicleMarkersManager.HitLog
         h = cfg.h;
         lines = Math.min(100, Math.max(1, cfg.lines));
         direction = cfg.direction.toUpperCase() == "UP" ? Defines.DIRECTION_UP : Defines.DIRECTION_DOWN;
+        css = cfg.css;
         format = cfg.format;
         formatHistory = cfg.formatHistory;
 
@@ -73,13 +75,13 @@ class wot.VehicleMarkersManager.HitLog
         var hist:String = formatText(formatHistory || format, delta, vehicleName, playerName, level, damageType);
         if (direction == Defines.DIRECTION_DOWN)
         {
-            setText(last + "\n" + historyText.join("\n"));
+            setText(last + "<br/>" + historyText.join("<br/>"));
             historyText.pop();
             historyText.unshift(hist);
         }
         else
         {
-            setText(historyText.join("\n") + "\n" + last);
+            setText(historyText.join("<br/>") + "<br/>" + last);
             historyText.shift();
             historyText.push(hist);
         }
@@ -98,11 +100,12 @@ class wot.VehicleMarkersManager.HitLog
         textField.html = true;
         var style:TextField.StyleSheet = new TextField.StyleSheet();
         style.parseCSS("body {font-family:$FieldFont; font-size:15px; color:#F4EFE8;}");
+        style.parseCSS(css);
         textField.styleSheet = style;
 
         var txt = formatText(format, 0, "", "", 0, "");
         if (direction != Defines.DIRECTION_DOWN)
-            txt = historyText.join("\n") + "\n" + txt;
+            txt = historyText.join("<br/>") + "<br/>" + txt;
         setText(txt);
     }
 

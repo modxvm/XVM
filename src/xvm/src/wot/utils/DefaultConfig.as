@@ -110,6 +110,7 @@ class wot.utils.DefaultConfig
         h: 100,
         lines: 1,
         direction: "down",
+        css: "",
         format: "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <b>{{dmg}}</b>",
         formatHistory: "{{n}}: {{dmg-total}} {{dmg}} {{vehicle}} {{dmg-kind}}"
       },

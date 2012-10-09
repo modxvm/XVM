@@ -59,15 +59,58 @@ class wot.utils.Defines
   public static var DYNAMIC_ALPHA_HP: Number = 4;
   public static var DYNAMIC_ALPHA_HP_RATIO: Number = 5;
   //public static var DYNAMIC_ALPHA_TBATTLES: Number = 6;
-  
+
   // Damage flag at Xvm.as: updateHealth
   public static var FROM_UNKNOWN: Number = 0;
   public static var FROM_ALLY: Number = 1;
   public static var FROM_ENEMY: Number = 2;
   public static var FROM_SQUAD: Number = 3;
   public static var FROM_PLAYER: Number = 4;
-  
+
   // Text direction
   public static var DIRECTION_UP = 1;
   public static var DIRECTION_DOWN = 2;
+
+  // damage source to system color mapping
+  // src_dst: sys
+  //   src: ally, squad, enemy, allytk, enemytk, unknown, player
+  //   dst: ally, squad, tk, allytk, enemytk, enemy
+  //   sys: ally, squadman, teamKiller, enemy, me
+  public static var damage_mapping:Object = {
+    ally_ally:		"teamKiller",
+    ally_squad:		"teamKiller",
+    ally_enemy:		"enemy",
+    ally_allytk:	"teamKiller",
+    ally_enemytk:	"enemy",
+    squad_ally:		"teamKiller",
+    squad_squad:	"teamKiller",
+    squad_enemy:	"enemy",
+    squad_allytk:	"teamKiller",
+    squad_enemytk:	"enemy",
+    allytk_ally:	"teamKiller",
+    allytk_squad:	"teamKiller",
+    allytk_enemy:	"enemy",
+    allytk_allytk:	"teamKiller",
+    allytk_enemytk:	"enemy",
+    enemytk_ally:	"ally",
+    enemytk_squad:	"squadman",
+    enemytk_enemy:	"enemy",
+    enemytk_allytk:	"ally",
+    enemytk_enemytk:	"enemy",
+    enemy_ally:		"ally",
+    enemy_squad:	"squadman",
+    enemy_enemy:	"enemy",
+    enemy_allytk:	"ally",
+    enemy_enemytk:	"enemy",
+    unknown_ally:	"ally",
+    unknown_squad:	"squadman",
+    unknown_enemy:	"enemy",
+    unknown_allytk:	"ally",
+    unknown_enemytk:	"enemy",
+    player_ally:	"me",
+    player_squad:	"me",
+    player_enemy:	"me",
+    player_allytk:	"me",
+    player_enemytk:	"me"
+  }
 }
