@@ -6,6 +6,7 @@
   * new feature: Hit Log (my hits calculation)
   * CSS: XVM.css contains global stylesheet, which can be used in any text
     field with html text
+  * highly customizable damage text independance of damage source
 
 XVM-3.0.3:
   * added possibility to change {{turret}} marker display string
