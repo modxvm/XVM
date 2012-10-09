@@ -54,7 +54,7 @@ class wot.VehicleMarkersManager.HitLog
 
     function setText(txt)
     {
-        textField.htmlText = "<p class='xvm_hitlog'>" + txt + "</class>";
+        textField.htmlText = "<p class='xvm_hitlog'>" + txt + "</p>";
         //Logger.add(textField.htmlText);
     }
 

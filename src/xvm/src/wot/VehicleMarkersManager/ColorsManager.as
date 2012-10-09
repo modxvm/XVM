@@ -60,7 +60,7 @@ class wot.VehicleMarkersManager.ColorsManager
         var systemColorName: String = entityName + "_";
         systemColorName += !isDead ? "alive_" : isBlowedUp ? "blowedup_" : "dead_";
         systemColorName += isColorBlindMode ? "blind" : "normal";
-        return Config.s_config.colors.system[systemColorName];
+        return parseInt(Config.s_config.colors.system[systemColorName]);
     }
 
     public static function getDamageSystemColor(damageSource:String, damageDest:String,

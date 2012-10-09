@@ -502,10 +502,10 @@ class wot.utils.DefaultConfig
     return
     {
       unknown: null,
+      player: null,
       ally: null,
-      enemy: null,
       squad: null,
-      player: null
+      enemy: null
     }
   }
 

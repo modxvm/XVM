@@ -42,16 +42,33 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
         {
             color = ColorsManager.getDamageSystemColor(flagToDamageSource(flag), proxy.damageDest,
                 proxy.entityName, proxy.isDead, proxy.isBlowedUp, proxy.isColorBlindMode);
-            //wot.utils.Logger.add("dmg: " + flagToDamageSource(flag) + ", " + proxy.damageDest + " - color=" + color);
         }
         else
         {
             color = proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.color));
         }
         
-        var tf:TextField = createTextField(flag);
+        var shadowColor:Number;
+        if (cfg.shadow.color == null)
+        {
+            shadowColor = ColorsManager.getDamageSystemColor(flagToDamageSource(flag), proxy.damageDest,
+                proxy.entityName, proxy.isDead, proxy.isBlowedUp, proxy.isColorBlindMode);
+        }
+        else
+        {
+            shadowColor = proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.shadow.color));
+        }
+
+        // TODO: dynamic alpha?
+        //var alpha = proxy.formatDynamicAlpha(cfg.alpha);
+        //var shadowAlpha = proxy.formatDynamicAlpha(cfg.shadow.alpha);
+        
+        var tf:TextField = createTextField(color, shadowColor);
         
         tf.htmlText = "<p class='xvm_damageText'>" + text + "</p>";
+        //wot.utils.Logger.add("dmg: " + flagToDamageSource(flag) + ", " + proxy.damageDest + " - color=" + color);
+        //wot.utils.Logger.add(tf.htmlText);
+        //wot.utils.Logger.add(XvmHelper.createCSS(cfg.font, color, "xvm_damageText"));
 
         var animation = new DamageTextAnimation(cfg, tf); // defines and starts
     }
@@ -70,14 +87,27 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
 
     // PRIVATE METHODS
 
-    private function createTextField(color:Number):TextField
+    private function createTextField(color:Number, shadowColor:Number):TextField
     {
         var n = damage.getNextHighestDepth();
-        var tf: TextField = damage.createTextField("txt" + n, n, 0, 0, 140, 20);
+        var tf: TextField = damage.createTextField("txt" + n, n, 0, 0, 200, 40);
 
         tf.antiAliasType = "advanced";
         tf.multiline = true;
         tf.wordWrap = false;
+
+        if (cfg.shadow)
+        {
+            tf.filters = [ GraphicsUtil.createShadowFilter
+            (
+                cfg.shadow.distance,
+                cfg.shadow.angle,
+                shadowColor,
+                isNaN(parseInt(cfg.shadow.alpha)) ? 1 : cfg.shadow.alpha / 100.0, // TODO:dynamic alpha?
+                cfg.shadow.size,
+                cfg.shadow.strength
+            ) ];
+        }
 
         tf.html = true;
 
@@ -87,20 +117,6 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
         tf.styleSheet = style;
         
         tf._x = -(tf._width / 2.0);
-
-        if (cfg.shadow)
-        {
-            //var sh_color:Number = proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.shadow.color));
-            tf.filters = [ GraphicsUtil.createShadowFilter
-            (
-                cfg.shadow.distance,
-                cfg.shadow.angle,
-                cfg.shadow.color,
-                cfg.shadow.alpha,
-                cfg.shadow.size,
-                cfg.shadow.strength
-            ) ];
-        }
 
         return tf;
     }
