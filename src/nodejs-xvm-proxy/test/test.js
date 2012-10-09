@@ -120,7 +120,7 @@ suite("Basic functionality", function() {
 
             assert.equal(player.id, 1);
             assert.equal(player.status, "ok");
-            assert.equal(player.name, "squall1989");
+            assert.equal(player.name, "vovaPupkin");
             assert.equal(player.battles, 1160);
             assert.equal(player.wins, 544);
             assert.equal(player.eff, 540);
@@ -172,7 +172,7 @@ suite("Basic functionality", function() {
 
             assert.equal(item._id, 1);
             assert.equal(item.st, "ok");
-            assert.equal(item.nm, "squall1989");
+            assert.equal(item.nm, "vovaPupkin");
             assert.equal(item.b, 1160);
             assert.equal(item.w, 544);
             assert.equal(item.e, 540);
