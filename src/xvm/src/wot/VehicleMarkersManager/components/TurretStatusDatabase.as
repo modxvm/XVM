@@ -6,7 +6,7 @@
 class wot.VehicleMarkersManager.components.TurretStatusDatabase
 {
     /**
-    * Vehicles in db has two turret modules.
+    * Vehicles in list has two turret modules.
     * Format:
     * vehicel name, stock max hp, turret status
     * Turret status: 2 - unable to mount top gun to stock turret, 1 - able
@@ -42,7 +42,7 @@ class wot.VehicleMarkersManager.components.TurretStatusDatabase
             db["kv-3"] = new Array(1300, 2);
             db["kv4"] = new Array(1600, 1);
             db["ltraktor"] = new Array(110, 2);
-            db["m10_wolverine"] = new Array(340, 2);
+            db["m10_wolverine"] = new Array(340, 1);
             db["m103"] = new Array(1750, 2);
             db["m18_hellcat"] = new Array(550, 2);
             db["m2_lt"] = new Array(140, 2);
@@ -63,7 +63,7 @@ class wot.VehicleMarkersManager.components.TurretStatusDatabase
             db["pz35t"] = new Array(150, 1);
             db["pz38_na"] = new Array(300, 2);
             db["pz38t"] = new Array(200, 2);
-            db["pzii"] = new Array(145, 2);
+            db["pzii"] = new Array(145, 1);
             db["pzii_luchs"] = new Array(190, 2);
             db["pziii"] = new Array(310, 2);
             db["pziii_a"] = new Array(200, 2);
@@ -72,7 +72,7 @@ class wot.VehicleMarkersManager.components.TurretStatusDatabase
             db["pzv"] = new Array(1200, 2);
             db["pzvi"] = new Array(1350, 2);
             db["pzvi_tiger_p"] = new Array(1350, 1);
-            db["pzvib_tiger_ii"] = new Array(1500, 2);
+            db["pzvib_tiger_ii"] = new Array(1500, 1);
             db["renaultft"] = new Array(105, 2);
             db["sherman_jumbo"] = new Array(730, 2);
             db["st_i"] = new Array(1800, 2);
@@ -86,8 +86,8 @@ class wot.VehicleMarkersManager.components.TurretStatusDatabase
             db["t25_2"] = new Array(800, 2);
             db["t-26"] = new Array(150, 1);
             db["t-28"] = new Array(320, 1);
-            db["t29"] = new Array(1150, 1); // XD TODO: clean fix
-            db["t32"] = new Array(1400, 2);
+            db["t29"] = new Array(1150, 1);
+            db["t32"] = new Array(1400, 1);
             db["t-34"] = new Array(400, 2);
             db["t-34-85"] = new Array(670, 2);
             db["t-43"] = new Array(1000, 2);
@@ -100,7 +100,7 @@ class wot.VehicleMarkersManager.components.TurretStatusDatabase
             db["vk3001p"] = new Array(610, 2);
             db["vk3002db"] = new Array(1180, 2);
             db["vk3601h"] = new Array(760, 2);
-            db["vk4502a"] = new Array(1470, 2);
+            db["vk4502a"] = new Array(1470, 1);
             db["vk4502p"] = new Array(1850, 2);
 
         }

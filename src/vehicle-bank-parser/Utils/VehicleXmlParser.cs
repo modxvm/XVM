@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 
-
 class VehicleXmlParser
 {
     /**
@@ -35,9 +34,9 @@ class VehicleXmlParser
         return turretsNode.ChildNodes.Count == 2;
     }
 
-    public Boolean turretUnlocksSomeGun()
+    public Boolean turretUnlocksSomething()
     {
-        return getSecondTurretUnlockNode() != null;
+        return getSecondTurretUnlocks() != null;
     }
 
     public string getVehicleName()
@@ -81,46 +80,65 @@ class VehicleXmlParser
     {
         XmlNodeList firstChassis = rootNode.SelectSingleNode("//chassis").ChildNodes.Item(1).ChildNodes;
 
-        XmlNode unlocks = null;
+        XmlNode secondChassis = null;
         foreach (XmlNode node in firstChassis)
         {
             if (node.Name == "unlocks")
-                unlocks = node; // <chassis>A-20_mod_1941<cost>\t840\t</cost></chassis>
+                secondChassis = node.ChildNodes.Item(1); // <chassis>A-20_mod_1941<cost>\t840\t</cost></chassis>
         }
-        if (unlocks == null)
-            throw new Exception("Error: no unlocks at chassis");
         
-        return getCostFromUnlockNode(unlocks);
+        if (secondChassis == null)
+            throw new Exception("Error: no secondChassis at chassis");
+
+        return getCostFromNode(secondChassis);
     }
 
-    public int getUnlockedGunCost()
-    {
-        return getCostFromUnlockNode(getSecondTurretUnlockNode());
-    }
-
-    // -- Private
-
-    private XmlNode getSecondTurretUnlockNode()
+    public XmlNodeList getSecondTurretUnlocks()
     {
         XmlNodeList secondTurretNodes = turretsNode.LastChild.ChildNodes;
         foreach (XmlNode node in secondTurretNodes)
         {
             if (node.Name == "unlocks")
-                return node;
+                return node.ChildNodes;
         }
         return null;
     }
 
-    private int getCostFromUnlockNode(XmlNode unlocks)
+    public List<XmlNode> separateGuns(XmlNodeList unlocks)
     {
-        XmlNode cost = unlocks.ChildNodes.Item(1).ChildNodes.Item(1);
+        List<XmlNode> guns = new List<XmlNode>();
+        for (int i = 1; i < unlocks.Count; i++)  // 1st item is empty
+        {
+            if (unlocks.Item(i).InnerText.Contains("mm_")) // _75mm_
+                guns.Add(unlocks.Item(i));
+        }
+
+        return guns;
+    }
+
+    public int mostExpensive(List<XmlNode> guns)
+    {
+        int maxCostValue = 0;
+        foreach (XmlNode gun in guns)
+            if (maxCostValue < getCostFromNode(gun))
+                maxCostValue = getCostFromNode(gun);
+
+        return maxCostValue;
+    }
+
+    // -- Private
+
+    private int getCostFromNode(XmlNode node)
+    {
+        XmlNode cost = node.ChildNodes.Item(1);
         return nodeToInt(cost);
     }
 
     private int nodeToInt(XmlNode node)
     {
-        if (node == null || node.InnerXml == "")
-            throw new Exception("Error: empty cost node");
+        if (node == null || node.InnerText == "")
+            throw new Exception("Error: no node");
+
         String str = node.InnerText.Replace("\t", "");
         string[] strArr = str.Split('.'); // 450.0 -> [450, 0]
         return Convert.ToInt32(strArr[0]);

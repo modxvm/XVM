@@ -20,7 +20,7 @@ class Vehicle
     public const short STOCK_TURRET_TOP_GUN_POSSIBLE = 1;
 
    /**
-    * Top turret unlocks new gun.
+    * Top turret secondChassis new gun.
     * Player with stock turret can not mount top gun.
     * High vulnerability.
     */
@@ -30,7 +30,7 @@ class Vehicle
     public int hpstock;
     public short status;
 
-    private VehicleXmlParser vehicleParser;
+    private VehicleXmlParser vehParser;
 
     /*
      * Tanks are subset of Vehicles.
@@ -39,29 +39,35 @@ class Vehicle
 
     public Vehicle(XmlNode vehicleXml)
     {
-        vehicleParser = new VehicleXmlParser(vehicleXml);
+        vehParser = new VehicleXmlParser(vehicleXml);
 
-        name = vehicleParser.getVehicleName();
-        hpstock = vehicleParser.getHpStock();
+        name = vehParser.getVehicleName();
+        hpstock = vehParser.getHpStock();
         status = defineStatus();
     }
 
     private short defineStatus()
     {
-        if (vehicleParser.hasOnlyOneTurret())
+        if (vehParser.hasOnlyOneTurret())
             return ONLY_ONE_TURRET;
 
-        if (vehicleParser.turretUnlocksSomeGun())
-            return unlockedGunIsTotalCrap();
+        if (vehParser.turretUnlocksSomething())
+        {
+            XmlNodeList unlocks = vehParser.getSecondTurretUnlocks();
+            List<XmlNode> guns = vehParser.separateGuns(unlocks);
+            int maxUnlockedGunCost = vehParser.mostExpensive(guns);
+            int chassisCost = vehParser.getChassisCost();
+            return unlockedGunIsTotalCrap(maxUnlockedGunCost, chassisCost);
+        }
         
         return STOCK_TURRET_TOP_GUN_POSSIBLE;
     }
 
-    private short unlockedGunIsTotalCrap()
+    private short unlockedGunIsTotalCrap(int maxUnlockedGunCost, int chassisCost)
     {
         // Looks like only Patton and Pershing are affected by this. Could be done manually.
         // Now have to switch T-50-2 manually to status-2
-        if (vehicleParser.getChassisCost() > vehicleParser.getUnlockedGunCost() * 4)
+        if (chassisCost > maxUnlockedGunCost * 4)
             /*
              * *3 <- low level tanks have top guns cost much less than chassis
              * if Gun unlocked by second turret is crap -> top gun is possible to mount at stock turret
