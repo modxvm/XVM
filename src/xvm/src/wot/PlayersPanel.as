@@ -43,11 +43,11 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 
   var _init:Boolean = false;
 
-  // Centered _y value of text field 
+  // Centered _y value of text field
   var centeredTextY:Number;
   var leadingNames:Number;
   var leadingVehicles:Number;
-  
+
   function setData2(data, sel, postmortemIndex, isColorBlind, knownPlayersCount)
   {
     //Logger.add("PlayersPanel.setData2()");
@@ -56,7 +56,9 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     var start = new Date();
 
     m_names.condenseWhite = true;
+    m_names.styleSheet = Config.s_style;
     m_vehicles.condenseWhite = true;
+    m_vehicles.styleSheet = Config.s_style;
 
     if (!_init)
     {
@@ -86,7 +88,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     // FIXIT: this code is not optimal. Find how to set default leading for text fields and remove this code.
     m_names.htmlText = m_names.htmlText.split('LEADING="9"').join('LEADING="' + leadingNames + '"');
     m_names._y = centeredTextY + leadingNames / 2.0; // centering on cell, because of align=top
-    
+
     m_vehicles.htmlText = m_vehicles.htmlText.split('LEADING="9"').join('LEADING="' + leadingVehicles + '"');
     m_vehicles._y = centeredTextY + leadingVehicles / 2.0; // centering on cell, because of align=top
 
@@ -153,7 +155,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     //Logger.add("PlayersPanel._getHTMLText()");
     if (m_fieldType == Defines.FIELDTYPE_NONE)
       return super._getHTMLText(colorScheme, text);
-    
+
     var format: String = null;
     switch (m_state)
     {

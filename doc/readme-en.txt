@@ -74,6 +74,11 @@
   All possible config options you can see in this file:
     \xvm-doc\samples\Full config EN\XVM.xvmconf
 
+  File \res_mods\[GAME VERSION]\gui\flash\XVM.css can contain CSS styles for html text.
+  Details:
+    http://help.adobe.com/en_US/AS2LCR/Flash_10.0/help.html?content=00001563.html
+  TODO: macros is not supported in CSS yet
+
   Macros available:
     In players panel, battle loading screen and statistic form:
       {{nick}}        - player nickname

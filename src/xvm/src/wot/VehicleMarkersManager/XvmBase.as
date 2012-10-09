@@ -96,7 +96,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
         }
         catch (e)
         {
-            ErrorHandler.setText("ERROR: XVMFormatStaticText(" + format + "):" + String(e));
+            ErrorHandler.setText("ERROR: formatStaticText(" + format + "):" + String(e));
         }
         return format;
     }
@@ -138,7 +138,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
         }
         catch (e)
         {
-            ErrorHandler.setText("ERROR: XVMFormatDynamicText(" + format + "):" + String(e));
+            ErrorHandler.setText("ERROR: formatDynamicText(" + format + "):" + String(e));
         }
 
         return format;
@@ -155,7 +155,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
         }
         catch (e)
         {
-            ErrorHandler.setText("ERROR: XVMFormatStaticColorText(" + format + "):" + String(e));
+            ErrorHandler.setText("ERROR: formatStaticColorText(" + format + "):" + String(e));
         }
 
         return format;
@@ -196,7 +196,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
         }
         catch (e)
         {
-            ErrorHandler.setText("ERROR: XVMFormatDynamicColor(" + format + "):" + String(e));
+            ErrorHandler.setText("ERROR: formatDynamicColor(" + format + "):" + String(e));
         }
 
         return systemColor;
@@ -228,7 +228,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
         }
         catch (e)
         {
-            ErrorHandler.setText("ERROR: XVMFormatDynamicAlpha(" + format + "):" + String(e));
+            ErrorHandler.setText("ERROR: formatDynamicAlpha(" + format + "):" + String(e));
         }
 
         return 100;
@@ -288,7 +288,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
         }
         catch (e)
         {
-            ErrorHandler.setText("ERROR: XVMCreateTextField():" + String(e));
+            ErrorHandler.setText("ERROR: createTextField():" + String(e));
         }
 
         return null;

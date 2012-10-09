@@ -4,9 +4,9 @@
     "author": "sirmax2",
     "description": "Sirmax's settings for XVM",
     "url": "http://code.google.com/p/wot-xvm/",
-    "date": "30.07.2012",
-    "gameVersion": "0.7.5",
-    "modMinVersion": "2.5"
+    "date": "10.10.2012",
+    "gameVersion": "0.8.0",
+    "modMinVersion": "3.0.4"
   },
   "battle": {
     "mirroredVehicleIcons": false,
@@ -26,15 +26,15 @@
     "showChancesExp": true,
     "removeSquadIcon": false,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft": "{{vehicle}} <font face='Consolas' size='11'><font color='{{c:t-battles}}'>{{t-hb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
-    "formatRight": "<font face='Consolas' size='11'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-battles}}'>{{t-hb:3}}</font></font> {{vehicle}}"
+    "formatLeft": "{{vehicle}} <span class='mono11'><font color='{{c:t-battles}}'>{{t-hb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></span>",
+    "formatRight": "<span class='mono11'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-battles}}'>{{t-hb:3}}</font></span> {{vehicle}}"
   },
   "statisticForm": {
     "showChances": true,
     "showChancesExp": true,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft": "{{vehicle}} <font face='Consolas' size='11'><font color='{{c:kb}}'>{{t-hb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
-    "formatRight": "<font face='Consolas' size='11'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{t-hb:3}}</font></font> {{vehicle}}"
+    "formatLeft": "{{vehicle}} <span class='mono11'><font color='{{c:kb}}'>{{t-hb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></span>",
+    "formatRight": "<span class='mono11'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{t-hb:3}}</font></span> {{vehicle}}"
   },
   "playersPanel": {
     "alpha": 50,
@@ -64,12 +64,13 @@
     "enabled": true,
     "x": 270,
     "y": 7,
-    "w": 150,
-    "h": 20,
+    "w": 200,
+    "h": 100,
     "lines": 1,
     "direction": "down",
-    "format": "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <b>{{dmg}}</b>",
-    "formatHistory": "{{dmg-total}} {{dmg}} {{vehicle}} {{rlevel}} {{nick}} {{dmg-kind}}"
+    "format": "<span class='lbl'>Hits:</span> <font size='13'>#{{n}}</font> {{dmg-total}} <b>{{dmg}}</b>",
+    "formatHistory": "<textformat tabstops='[30,80,160,250]'>{{n}}:\t{{dmg-total}} |\t{{dmg}} |\t{{dmg-kind}} |\t{{vehicle}}</textformat>"
+
   },
   "markers": {
     "ally": {

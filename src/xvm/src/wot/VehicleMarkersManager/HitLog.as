@@ -2,6 +2,7 @@
  * ...
  * @author Maxim Schedriviy
  */
+import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.Locale;
 import wot.utils.Logger;
@@ -19,7 +20,6 @@ class wot.VehicleMarkersManager.HitLog
     private var h:Number;
     private var lines:Number;
     private var direction:Number;
-    private var css:String;
     private var format:String;
     private var formatHistory:String;
 
@@ -37,7 +37,6 @@ class wot.VehicleMarkersManager.HitLog
         h = cfg.h;
         lines = Math.min(100, Math.max(1, cfg.lines));
         direction = cfg.direction.toUpperCase() == "UP" ? Defines.DIRECTION_UP : Defines.DIRECTION_DOWN;
-        css = cfg.css;
         format = cfg.format;
         formatHistory = cfg.formatHistory;
 
@@ -55,10 +54,10 @@ class wot.VehicleMarkersManager.HitLog
 
     function setText(txt)
     {
-        textField.htmlText = "<body>" + txt + "</body>";
+        textField.htmlText = "<p class='xvm_hitlog'>" + txt + "</class>";
         //Logger.add(textField.htmlText);
     }
-    
+
     public function update(delta:Number, vehicleName:String, playerName:String, level:Number, damageType:String)
     {
         nHits++;
@@ -99,8 +98,8 @@ class wot.VehicleMarkersManager.HitLog
 
         textField.html = true;
         var style:TextField.StyleSheet = new TextField.StyleSheet();
-        style.parseCSS("body {font-family:$FieldFont; font-size:15px; color:#F4EFE8;}");
-        style.parseCSS(css);
+        style.parseCSS(Config.s_css);
+        style.parseCSS(".xvm_hitlog {font-family:$FieldFont; font-size:15px; color:#F4EFE8;}");
         textField.styleSheet = style;
 
         var txt = formatText(format, 0, "", "", 0, "");

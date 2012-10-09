@@ -3,6 +3,7 @@
  * @author Maxim Schedriviy
  */
 import wot.utils.Config;
+import wot.utils.Defines;
 import net.wargaming.managers.ColorSchemeManager;
 
 class wot.VehicleMarkersManager.ColorsManager
@@ -62,8 +63,15 @@ class wot.VehicleMarkersManager.ColorsManager
         return Config.s_config.colors.system[systemColorName];
     }
 
+    public static function getDamageSystemColor(damageSource:String, damageDest:String,
+        entityName:String, isDead:Boolean, isBlowedUp:Boolean, isColorBlindMode:Boolean):Number
+    {
+        var key:String = damageSource + "_" + damageDest;
+        return getSystemColor(Defines.damage_mapping[key] || entityName, isDead, isBlowedUp, isColorBlindMode);
+    }
+
     // PRIVATE
-    
+
     private static var _instance = null;
 
     private function ColorsManager()

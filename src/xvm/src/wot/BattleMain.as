@@ -2,12 +2,9 @@
  * ...
  * @author sirmax2
  */
-import wot.utils.Chance;
 import wot.utils.Config;
-import wot.utils.Defines;
 import wot.utils.GlobalEventDispatcher;
 import wot.utils.Logger;
-import wot.utils.StatData;
 import wot.utils.StatLoader;
 import wot.utils.Utils;
 import wot.SixthSenseIndicator;
@@ -41,7 +38,7 @@ class wot.BattleMain
         gfx.io.GameDelegate.addCallBack("battle.showPostmortemTips", instance, "showPostmortemTips");
         gfx.io.GameDelegate.addCallBack("Stage.Update", instance, "onUpdateStage");
         gfx.io.GameDelegate.addCallBack("battle.arenaData", instance, "setArenaData");
-        gfx.io.GameDelegate.addCallBack("battle.showStatus", instance, "showFinalStatus");
+//        gfx.io.GameDelegate.addCallBack("battle.showStatus", instance, "showFinalStatus"); // dialog is not exist since WoT 0.8.0
     }
 
     private static function BattleMainConfigLoaded()
@@ -100,6 +97,7 @@ class wot.BattleMain
         //wot.utils.Logger.addObject(_root);
     }
 
+    /* DISABLED - final dialog is not exist since WoT 0.8.0
     var finalStatusShown = false;
     function showFinalStatus(statusText)
     {
@@ -158,8 +156,10 @@ class wot.BattleMain
         if (t)
         {
             t.html = true;
+            t.styleSheet = Config.s_style;
             t.text = "";
             Chance.ShowChance(t, Config.s_config.statisticForm.showChancesExp);
         }
     }
+    */
 }

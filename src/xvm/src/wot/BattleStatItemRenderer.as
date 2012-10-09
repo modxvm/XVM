@@ -39,8 +39,17 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
         col3.verticalAutoSize = true;
 
         GlobalEventDispatcher.addEventListener("config_loaded", StatLoader.LoadLastStat);
+        GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
         Config.LoadConfig("BattleStatItemRenderer.as");
     }
+
+    private function onConfigLoaded()
+    {
+        GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
+
+        col3.styleSheet = Config.s_style;
+    }
+
 
     private function get team(): Number
     {
@@ -137,6 +146,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
         {
             s_chanceField = _root.statsDialog.battleText;
             s_chanceField.html = true;
+            s_chanceField.styleSheet = Config.s_style;
             s_chanceField._width += 300;
             s_chanceField._x -= 150;
             s_chanceText = Chance.ShowChance(s_chanceField, Config.s_config.statisticForm.showChancesExp);
@@ -145,6 +155,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
         {
             //Logger.add(s_chanceField.htmlText);
             s_chanceField.html = true;
+            s_chanceField.styleSheet = Config.s_style;
             s_chanceField.htmlText = s_chanceText;
         }
     }

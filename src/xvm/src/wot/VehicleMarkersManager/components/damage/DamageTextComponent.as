@@ -11,7 +11,7 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
     private var damage:MovieClip;
     private var dmgReceiverCfg:Object;
     private var dmgSourceCfg:Object;
-    
+
     public function DamageTextComponent(proxy:DamageTextProxy)
     {
         this.proxy = proxy;
@@ -22,17 +22,17 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
      * @param	dmgReceiverCfg
      * Damage indicator configuration from markers section.
      * Contains dmgText specs from enemy\alive\normal for example.
-     * 
+     *
      * @param	dmgIndicatorCfg
      * Damage indicator configuration from damageTextMajor first level section.
      */
     public function showDamage(dmgReceiverCfg:Object, dmgSourceCfg:Object, newHealth:Number, delta:Number, flag:Number, damageType:String)
     {
         this.cfg = new DamageTextConfig(dmgReceiverCfg, dmgSourceCfg, flag, damageType);
-        
+
         if (!cfg.visible)
             return;
-        
+
         var text:String = defineText(newHealth, delta);
         var tf:TextField = createTextField(text, cfg.textColor, cfg.shadowColor);
         var animation = new DamageTextAnimation(tf, cfg); // defines and starts
@@ -40,9 +40,9 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
 
     public function updateState(state_cfg:Object)
     {
-        // TODO: 
+        // TODO:
         // Not adapted to new damage model
-        
+
         var cfg = state_cfg.damageText;
         var visible = cfg.visible;
         if (visible)
@@ -54,9 +54,11 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
     }
 
     // PRIVATE METHODS
-    
+
     private function createTextField(text:String, textColor:Number, shadowColor:Number):TextField
     {
+//TODO:getDamageSystemColor
+//TODO:css
         var n = damage.getNextHighestDepth();
         var tf: TextField = damage.createTextField("txt" + n, n, 0, 0, 140, 20);
 
@@ -68,7 +70,7 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
         tf.setTextFormat(XvmHelper.createNewTextFormat(cfg.font));
         tf.textColor = textColor;
         tf._x = -(tf._width / 2.0);
-        
+
         if (cfg.shadow)
         {
             //var sh_color:Number = proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.shadow.color));
@@ -85,7 +87,7 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
 
         return tf;
     }
-    
+
     private function defineText(newHealth:Number, delta:Number):String
     {
         var msg = (newHealth < 0) ? cfg.blowupMessage : cfg.damageMessage;

@@ -15,7 +15,7 @@ FILES="
   TrainingInfoForm.swf
   TrainingOwnerInfoForm.swf
   VehicleMarkersManager.swf
-  XVM.xvmconf OTMData.xml"
+  XVM.xvmconf XVM.css OTMData.xml"
 
 cd $(dirname $(realpath $(cygpath --unix $0)))
 

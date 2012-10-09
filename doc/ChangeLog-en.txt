@@ -4,6 +4,8 @@
   * wot-xvm-proxy renamed to xvm-stat
   * xvm-stat is distributing separately from XVM
   * new feature: Hit Log (my hits calculation)
+  * CSS: XVM.css contains global stylesheet, which can be used in any text
+    field with html text
 
 XVM-3.0.3:
   * added possibility to change {{turret}} marker display string

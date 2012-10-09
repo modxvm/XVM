@@ -110,7 +110,6 @@ class wot.utils.DefaultConfig
         h: 100,
         lines: 1,
         direction: "down",
-        css: "",
         format: "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <b>{{dmg}}</b>",
         formatHistory: "{{n}}: {{dmg-total}} {{dmg}} {{vehicle}} {{dmg-kind}}"
       },
@@ -236,12 +235,12 @@ class wot.utils.DefaultConfig
           enemy_blowedup_normal: "0x5A0401",
           enemy_blowedup_blind: "0x3B365F",
           // me - my damage. used only in markers//damageText when damageSource = 'player'
-          me_alive_normal: "0xFFCC00",
-          me_alive_blind: "0xFFFF00",
-          me_dead_normal: "0xDD9900",
-          me_dead_blind: "0xDDDD00",
-          me_blowedup_normal: "0xFFCC00",
-          me_blowedup_blind: "0xFFFF00"
+          me_alive_normal: "0xFFEE99",
+          me_alive_blind: "0xFFFFFF",
+          me_dead_normal: "0xFFDD33",
+          me_dead_blind: "0xDDDDDD",
+          me_blowedup_normal: "0xFFDD33",
+          me_blowedup_blind: "0xDDDDDD"
         },
         vtype: {
           LT:  "0xA2FF9A",        // Color for light tanks
@@ -344,7 +343,7 @@ class wot.utils.DefaultConfig
           world_collision: "../../../icons/xvm/dmg_world_collision.png",
           other: "../../../icons/xvm/dmg_other.png"
         }
-      }
+      },
       iconset: {
         battleLoading: "../maps/icons/vehicle/contour",
         statisticForm: "../maps/icons/vehicle/contour",

@@ -75,6 +75,11 @@
   который находится в папке документации в архиве мода:
     \xvm-doc\samples\Full config RU\XVM.xvmconf
 
+  Файл \res_mods\[ВЕРСИЯ ИГРЫ]\gui\flash\XVM.css может содержать CSS стили для html текста.
+  Подробнее:
+    http://help.adobe.com/en_US/AS2LCR/Flash_10.0/help.html?content=00001563.html
+  TODO: макросы в CSS пока не поддерживаются
+
   Используемые макросы:
     В ушах, на экране загрузги боя и в окне статистики боя по Tab:
       {{nick}}        - ник игрока

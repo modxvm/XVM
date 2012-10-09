@@ -34,6 +34,16 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
         vehicleField.html = true;
         vehicleField.verticalAlign = "center";
         vehicleField.verticalAutoSize = true;
+
+        GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
+        Config.LoadConfig("BattleLoadingItemRenderer.as");
+    }
+
+    private function onConfigLoaded()
+    {
+        GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
+
+        vehicleField.styleSheet = Config.s_style;
     }
 
     // override

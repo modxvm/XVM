@@ -10,14 +10,20 @@ import wot.utils.Utils;
 
 class wot.utils.Config
 {
-    public static var DEBUG_TIMES = false;
-    public static var DEBUG_TUNING = false;
-
-    // Private vars
+    // Public vars
     public static var s_config: Object;
+    public static var s_style:TextField.StyleSheet;
+    public static var s_css:String = null;
     public static var s_loaded: Boolean = false;
     public static var s_proxy_available: Boolean = true;
     public static var s_game_region: String = null;
+
+    private static var STYLE_FILENAME = "XVM.css";
+
+    private static var DEBUG_TIMES = false;
+    private static var DEBUG_TUNING = false;
+
+    // Private vars
     private static var s_loading: Boolean = false;
     private static var s_load_legacy_config: Boolean = false;
     private static var s_config_filename: String = "";
@@ -34,18 +40,51 @@ class wot.utils.Config
             GlobalEventDispatcher.dispatchEvent({type: "config_loaded"});
             return;
         }
+
+        if (s_loading)
+            return;
+        s_loading = true;
+
         s_src = src || "";
         s_config_filename = filename || Defines.DEFAULT_CONFIG_NAME;
         s_load_legacy_config = legacy ? true : false;
-        ReloadConfig();
+
+        ReloadCSS();
+    }
+
+    private static function ReloadCSS()
+    {
+        //Logger.add("TRACE: Config.ReloadCSS()");
+        Config.s_style = new TextField.StyleSheet();
+
+        var lv:LoadVars = new LoadVars();
+        lv.onData = function(str: String)
+        {
+//Logger.add("Config.ReloadCSS::onData::start");
+            var finallyBugWorkaround: Boolean = false;
+            try
+            {
+                Config.s_css = str;
+                if (!Config.s_style.parseCSS(str))
+                    GlobalEventDispatcher.dispatchEvent({ type: "set_info", warning: "Error parsing XVM.css" });
+            }
+            finally
+            {
+//Logger.add("Config.ReloadCSS::onData::finally:start");
+                if (finallyBugWorkaround)
+                    return;
+                finallyBugWorkaround = true;
+                Config.ReloadConfig();
+//Logger.add("Config.ReloadCSS::onData::finally::end");
+            }
+//Logger.add("Confige.ReloadCSS::onData::end");
+        };
+        lv.load(STYLE_FILENAME);
     }
 
     private static function ReloadConfig()
     {
         //Logger.add("TRACE: Config.ReloadConfig()");
-        if (s_loading)
-            return;
-        s_loading = true;
 
         Config.s_config = wot.utils.DefaultConfig.config;
         if (s_load_legacy_config)
@@ -182,7 +221,6 @@ class wot.utils.Config
                         var curr = Utils.elapsedMSec(start, new Date());
                         Logger.add("DEBUG TIME: ReloadXvmConfig(): Apply: " + (curr - diff) + " ms");
                     }
-                    GlobalEventDispatcher.dispatchEvent({ type: "set_info" }); // Just show version
                 }
             }
             catch (ex)
