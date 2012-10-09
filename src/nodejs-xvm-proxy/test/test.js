@@ -6,14 +6,17 @@ var dbName,
     makeRequest,
     req,
     res,
-    currentResponse,
-    lastResponse;
+    requestCounter,
+    currentWGResponse,
+    currentMongoResult,
+    lastResponse,
+    lastUpdateRequest;
 
 // Mock ups
 process.send = function() { };
 var fakeCursor = {
     toArray: function(callback) {
-        callback(undefined, [ ]);
+        callback(undefined, currentMongoResult || [ ]);
     },
     toString: function() {
         return "fakeCursor";
@@ -37,7 +40,11 @@ var fakeMongo = {
             find: function() {
                 return fakeCursor;
             },
-            update: function() { },
+            update: function(key, item, options) {
+                lastUpdateRequest.key = key;
+                lastUpdateRequest.item = item;
+                lastUpdateRequest.options = options;
+            },
             toString: function() {
                 return "fakeCollection";
             }
@@ -66,9 +73,11 @@ var fakeHttp = {
             }
         };
 
+        requestCounter++;
+
         callback(res);
 
-        callbacks.data(fs.readFileSync("./test/mock_responses/" + currentResponse, "utf8"));
+        callbacks.data(fs.readFileSync("./test/mock_responses/" + currentWGResponse, "utf8"));
         callbacks.end();
 
         return {
@@ -85,11 +94,13 @@ worker.createWorker(fakeMongo, fakeHttp);
 
 suite("Basic functionality", function() {
     setup(function() {
+        requestCounter = 0;
         lastResponse = { };
+        lastUpdateRequest = { };
+        currentMongoResult = null;
         req = { url: "" };
         res = {
             end: function(response) {
-                console.log(response);
                 lastResponse = JSON.parse(response);
             }
         };
@@ -99,10 +110,10 @@ suite("Basic functionality", function() {
 
     });
 
-    suite("content", function() {
-        test("Generic request", function() {
+    suite("responses", function() {
+        test("generic request", function() {
             req.url = "http://1.2.3.4/xxx/?1";
-            currentResponse = "default.json";
+            currentWGResponse = "defaultWGStat.json";
             makeRequest(req, res);
 
             var player = lastResponse.players[0];
@@ -114,5 +125,70 @@ suite("Basic functionality", function() {
             assert.equal(player.wins, 544);
             assert.equal(player.eff, 540);
         });
+        test("request with specific vehicle (update from WG)", function() {
+            req.url = "http://1.2.3.4/xxx/?1=T-28";
+            currentWGResponse = "defaultWGStat.json";
+            makeRequest(req, res);
+
+            var player = lastResponse.players[0],
+                vehicle = player.v;
+
+            assert.equal(player.vname, "T-28");
+            assert.equal(vehicle.name, "T-28");
+            assert.equal(vehicle.l, 4);
+            assert.equal(vehicle.b, 91);
+            assert.equal(vehicle.w, 48);
+
+            assert.equal(requestCounter, 1);
+        });
+        test("request with specific vehicle (update from DB)", function() {
+            setMongoResult("mongoItem.json");
+            req.url = "http://1.2.3.4/xxx/?1=T-28";
+            makeRequest(req, res);
+
+            var player = lastResponse.players[0],
+                vehicle = player.v;
+
+            assert.equal(player.vname, "T-28");
+            assert.equal(vehicle.name, "T-28");
+            assert.equal(vehicle.l, 4);
+            assert.equal(vehicle.b, 91);
+            assert.equal(vehicle.w, 48);
+
+            assert.equal(requestCounter, 0);
+        });
+    });
+
+    suite("mongo DB", function() {
+        test("update", function() {
+            req.url = "http://1.2.3.4/xxx/?1=T-28";
+            currentWGResponse = "defaultWGStat.json";
+            makeRequest(req, res);
+
+            assert.equal(lastUpdateRequest.key._id, 1);
+            assert.ok(lastUpdateRequest.options.upsert);
+
+            var item = lastUpdateRequest.item;
+
+            assert.equal(item._id, 1);
+            assert.equal(item.st, "ok");
+            assert.equal(item.nm, "squall1989");
+            assert.equal(item.b, 1160);
+            assert.equal(item.w, 544);
+            assert.equal(item.e, 540);
+            assert.equal(item.v.length, 26);
+            assert.deepEqual(item.v[0], {
+                name: "KV1",
+                l: 5,
+                b: 208,
+                w: 94
+            });
+        });
     });
 });
+
+var setMongoResult = function(result) {
+    currentMongoResult = JSON.parse(fs.readFileSync("./test/mock_responses/" + result, "utf8"));
+    currentMongoResult.dt = new Date();
+    currentMongoResult = [currentMongoResult];
+};
