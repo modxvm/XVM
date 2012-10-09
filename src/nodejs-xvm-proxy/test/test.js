@@ -185,6 +185,8 @@ suite("Basic functionality", function() {
             });
         });
     });
+
+    // TODO: error handling, statistics(?)
 });
 
 var setMongoResult = function(result) {
