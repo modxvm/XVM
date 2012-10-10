@@ -19,8 +19,11 @@
     * Рейтинг игроков в игре (только с пакетом xvm-stat)
 
   Сайт проекта: http://code.google.com/p/wot-xvm/
+  
+  Как написать в поддержку: http://www.koreanrandom.com/forum/topic/1644-readme
   Поддержка:    http://www.koreanrandom.com/forum/forum/43-xvm
   FAQ:          http://www.koreanrandom.com/forum/topic/1381-faq
+  http://www.koreanrandom.com/forum/topic/1644-readme/
   Конфиги:      http://www.koreanrandom.com/forum/topic/1384-configurations
   Редактор:     http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
