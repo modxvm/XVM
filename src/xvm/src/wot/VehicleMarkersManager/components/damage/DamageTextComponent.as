@@ -3,7 +3,7 @@ import wot.utils.Defines;
 import wot.utils.GraphicsUtil;
 import wot.VehicleMarkersManager.ColorsManager;
 import wot.VehicleMarkersManager.XvmHelper;
-import wot.VehicleMarkersManager.components.damage.DamageTextConfig;
+//import wot.VehicleMarkersManager.components.damage.DamageTextConfig;
 import wot.VehicleMarkersManager.components.damage.DamageTextProxy;
 import wot.VehicleMarkersManager.components.damage.DamageTextAnimation;
 

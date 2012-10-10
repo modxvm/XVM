@@ -501,6 +501,32 @@ class wot.utils.DefaultConfig
       shadow: shadow_200,
       speed: 2,
       maxRange: 40,
+      /**
+       *  Legend:
+       *   # : operation in progress
+       *   + : operation complete and result is visible
+       *
+       *              0s    0.5s  1s    1.5s  delay Xs
+       *  emerge      ###++ +++++ +++++ +++++ ~ ~ ~ -----
+       *  tint        ##### ##
+       *  moveUpward  ##### ##### ##### ##### ~ ~ ~ +++++
+       *  fadeOut     ----- ----- ----- ----- ~ ~ ~ #####
+       */
+      /**
+       * In case of whiteFlash coding:
+       * Tint recolors Glow? Recolors shadowFilter?
+       * Make two movieclips?
+       * Use GraphicsUtil.createShadowFilter and tween filter?
+       */
+      /**
+       * Available functions:
+       *   insert, append, fadeIn, fadeOut, tint, move
+       */
+      animation:
+        "insert(fadeIn(300),0);" +
+        "insert(tint(700, '0xFFFFFF'), 0);" +
+        "insert(move(2000, 40, 'up'), 0);" +
+        "append(fadeOut(500), -500);",
       damageMessage: "{{dmg}}",
       blowupMessage: "Blow-up!",
       damageMessages: damageMessages,
