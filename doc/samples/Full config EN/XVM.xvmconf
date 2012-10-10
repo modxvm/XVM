@@ -1433,7 +1433,14 @@
       "enemy_dead_normal": "0x840500",             // Enemy - dead
       "enemy_dead_blind": "0x47407A",              // Enemy – dead – color blind mode
       "enemy_blowedup_normal": "0x5A0401",         // Enemy – blow-up
-      "enemy_blowedup_blind": "0x3B365F"           // Enemy – blow-up – color blind mode
+      "enemy_blowedup_blind": "0x3B365F",          // Enemy – blow-up – color blind mode
+      // me - my damage. used only in markers//damageText when damageSource = 'player'
+      "me_alive_normal": "0xFFEE99",               // My damage to alive target
+      "me_alive_blind": "0xFFFFFF",                // My damage to alive target - color blind mode
+      "me_dead_normal": "0xFFDD33",                // My final damage
+      "me_dead_blind": "0xDDDDDD",                 // My final damage - color blind mode
+      "me_blowedup_normal": "0xFFDD33",            // My final damage with blowup
+      "me_blowedup_blind": "0xDDDDDD"              // My final damage with blowup - color blind mode
     },
     // Dynamic color for vehicle type
     "vtype": {
@@ -1444,6 +1451,14 @@
       "TD":  "0xA0CFFF",                           // Color for tank destroyers
       "premium": "0xFFCC66",                       // Color for premium tanks
       "usePremiumColor": false                     // Enable/disable premium color usage
+    },
+    // Damage kind
+    "dmg_kind": {
+      "attack": "0xFFAA55",                        // attack
+      "fire": "0xFF6655",                          // fire
+      "ramming": "0x998855",                       // ramming
+      "world_collision": "0x228855",               // world_collision
+      "other": "0xCCCCCC"                          // other
     },
     // Dynamic color for remaining health
     "hp": [

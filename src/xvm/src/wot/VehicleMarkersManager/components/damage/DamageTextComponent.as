@@ -47,7 +47,7 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
         {
             color = proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.color));
         }
-        
+
         var shadowColor:Number;
         if (cfg.shadow.color == null)
         {
@@ -62,9 +62,9 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
         // TODO: dynamic alpha?
         //var alpha = proxy.formatDynamicAlpha(cfg.alpha);
         //var shadowAlpha = proxy.formatDynamicAlpha(cfg.shadow.alpha);
-        
+
         var tf:TextField = createTextField(color, shadowColor);
-        
+
         tf.htmlText = "<p class='xvm_damageText'>" + text + "</p>";
         //wot.utils.Logger.add("dmg: " + flagToDamageSource(flag) + ", " + proxy.damageDest + " - color=" + color);
         //wot.utils.Logger.add(tf.htmlText);
@@ -126,7 +126,7 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
         // so we're appending empty prefix and suffix to bypass this unexpected behavior
         return " " + text + " ";
     }
-    
+
     //   src: ally, squadman, enemy, unknown, player (allytk, enemytk - how to detect?)
     private static function flagToDamageSource(flag:Number):String
     {

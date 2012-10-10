@@ -334,6 +334,7 @@ class wot.utils.DefaultConfig
           { value: 101, alpha: 40 }
         ]
       },
+      // TODO
       images: {
         dmg_kind: {
           attack: "",

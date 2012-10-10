@@ -51,8 +51,8 @@ class wot.VehicleMarkersManager.components.damage.DamageTextAnimation
         
         timeline = new TimelineLite({onComplete:removeTextField});
         
-        //timeline.insert(emerge(), 0);
-        //timeline.insert(tint(), 0);
+        timeline.insert(emerge(), 0);
+        timeline.insert(tint(), 0);
         timeline.insert(moveUpward(movementDuration, distanceUpward), 0);
         timeline.append(fadeOut(), FADEOUT_TIME_OFFSET);
     }

@@ -1,4 +1,8 @@
-﻿XVM-3.0.4:
+﻿XVM-3.0.4.alpha6:
+  * fix config (add system colors)
+  * enable flashing in damage animation
+
+XVM-3.0.4.alpha5:
   * fixed {{turret}} marker significance for t29, t32, m10_wolverine, pzii, pzvib_tiger_ii, vk4502a
   * stock turret marker added to the default config (after vehicle name)
   * wot-xvm-proxy renamed to xvm-stat
