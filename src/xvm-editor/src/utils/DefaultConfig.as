@@ -99,6 +99,21 @@ public class DefaultConfig
           vehicleFormatRight: "<font color='{{c:rating}}'>{{vehicle}}</font>"
         }
       },
+      turretMarkers: {
+        highVulnerability: " *",
+        lowVulnerability: " '"
+      },
+      hitLog: {
+        enabled: true,
+        x: 270,
+        y: 7,
+        w: 200,
+        h: 100,
+        lines: 1,
+        direction: "down",
+        format: "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <b>{{dmg}}</b>",
+        formatHistory: "{{n}}: {{dmg-total}} {{dmg}} {{vehicle}} {{dmg-kind}}"
+      },
       markers: {
         ally: {
           alive: {
@@ -218,7 +233,14 @@ public class DefaultConfig
           enemy_dead_normal: "0x840500",
           enemy_dead_blind: "0x47407A",
           enemy_blowedup_normal: "0x5A0401",
-          enemy_blowedup_blind: "0x3B365F"
+          enemy_blowedup_blind: "0x3B365F",
+          // me - my damage. used only in markers//damageText when damageSource = 'player'
+          me_alive_normal: "0xFFEE99",
+          me_alive_blind: "0xFFFFFF",
+          me_dead_normal: "0xFFDD33",
+          me_dead_blind: "0xDDDDDD",
+          me_blowedup_normal: "0xFFDD33",
+          me_blowedup_blind: "0xDDDDDD"
         },
         vtype: {
           LT:  "0xA2FF9A",        // Color for light tanks
@@ -228,6 +250,13 @@ public class DefaultConfig
           TD:  "0xA0CFFF",        // Color for tank destroyers
           premium: "0xFFCC66",    // Color for premium tanks
           usePremiumColor: false  // Enable/disable premium color usage
+        },
+        dmg_kind: {
+          attack: "0xFFAA55",
+          fire: "0xFF6655",
+          ramming: "0x998855",
+          world_collision: "0x228855",
+          other: "0xCCCCCC"
         },
         // values - from min to max, colors are for values 'lesser then ...'
         hp: [
@@ -313,11 +342,7 @@ public class DefaultConfig
         vehicleMarker: "../maps/icons/vehicle/contour"
       },
       consts: consts,
-      vehicleNames: VehicleInfo.getVehicleNamesData(),
-      turretMarkers: {
-        highVulnerability: " *",
-        lowVulnerability: " '"
-      }
+      vehicleNames: VehicleInfo.getVehicleNamesData()
     };
 
     return a;
@@ -391,6 +416,17 @@ public class DefaultConfig
     }
   }
 
+  public static function get font_18(): Object
+  {
+    return {
+      name: "$PartnerCondensed",
+      size: 18,
+      align: "center",
+      bold: false,
+      italic: false
+    }
+  }
+
   // vehicleIcon
   public static function get vi(): Object
   {
@@ -452,12 +488,27 @@ public class DefaultConfig
       y: -67,
       alpha: 100,
       color: null,
-      font: font_14b,
+      font: font_18,
       shadow: shadow_200,
       speed: 2,
       maxRange: 40,
       damageMessage: "{{dmg}}",
-      blowupMessage: "Blow-up!"
+      blowupMessage: "Blow-up!",
+      damageMessages: damageMessages,
+      blowupMessages: damageMessages
+    }
+  }
+
+  // damageMessages section
+  public static function get damageMessages(): Object
+  {
+    return
+    {
+      unknown: null,
+      player: null,
+      ally: null,
+      squad: null,
+      enemy: null
     }
   }
 

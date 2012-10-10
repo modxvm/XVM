@@ -2,6 +2,7 @@
  * Base xvm class with varous basic functions (like macros substitutions).
  * Class don't contain any workflow logic.
  */
+import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.GraphicsUtil;
 import wot.utils.Logger;
@@ -127,13 +128,45 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
                 return format;
 
             var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
-            format = format.split("{{hp-ratio}}").join(String(hpRatio));
-            format = format.split("{{hp}}").join(String(curHealth));
-            format = format.split("{{hp-max}}").join(String(m_maxHealth));
-
             var dmgRatio: Number = delta ? Math.ceil(delta / m_maxHealth * 100) : 0;
-            format = format.split("{{dmg-ratio}}").join(delta ? String(dmgRatio) : "");
-            format = format.split("{{dmg}}").join(delta ? String(delta) : "");
+            var formatArr:Array;
+
+            // Text
+            formatArr = format.split("{{hp-ratio}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(String(hpRatio));
+            formatArr = format.split("{{hp}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(String(curHealth));
+            formatArr = format.split("{{hp-max}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(String(m_maxHealth));
+            formatArr = format.split("{{dmg-ratio}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(delta ? String(dmgRatio) : "");
+            formatArr = format.split("{{dmg}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(delta ? String(delta) : "");
+
+            // Colors
+            formatArr = format.split("{{c:hp}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth))
+            formatArr = format.split("{{c:hp-ratio}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio))
+            formatArr = format.split("{{c:hp_ratio}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio))
+            formatArr = format.split("{{c:vtype}}");
+            if (formatArr.length > 1)
+            {
+                if (vehicleTypeComponent != null)
+                {
+                    format = formatArr.join(GraphicsUtil.GetVTypeColorValue(m_defaultIconSource,
+                        Utils.vehicleClassToVehicleType(vehicleTypeComponent.getVehicleClass())));
+                }
+            }
 
             format = Utils.trim(format);
         }
@@ -252,23 +285,29 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
         try
         {
             var n = proxy.getNextHighestDepth();
-            var textField: TextField = proxy.createTextField("textField" + n, n, 0, 0, 140, 31);
-//            var textField: TextField = proxy.createTextField("textField" + n, n, 0, 0, 140 + 1, cfg.font.size + 4 + 1); // +1 because of ScaleForm bug
-            textField.html = false; // FIXIT: in html mode Font and Position are wrong.
-            textField.embedFonts = false;
-            textField.selectable = false;
-            textField.multiline = false;
-            textField.wordWrap = false;
+            var textField: TextField = proxy.createTextField("textField" + n, n, 0, 0, 140, 100);
+
+            //textField._quality = "BEST";
             textField.antiAliasType = "normal";
             //textField.antiAliasType = "advanced";
             //textField.gridFitType = "NONE";
-            textField._quality = "BEST";
+
+            textField.multiline = true;
+            textField.wordWrap = false;
+
             //textField.border = true;
             //textField.borderColor = 0xFFFFFF;
             //textField.autoSize = "center"; // http://theolagendijk.com/2006/09/07/aligning-htmltext-inside-flash-textfield/
-            var textFormat: TextFormat = XvmHelper.createNewTextFormat(cfg.font);
-            textField.setNewTextFormat(textFormat);
+            
+            textField.html = true;
 
+            var style:TextField.StyleSheet = new TextField.StyleSheet();
+            style.parseCSS(Config.s_css);
+            style.parseCSS(XvmHelper.createCSS(cfg.font,
+                formatDynamicColor(formatStaticColorText(cfg.color), m_curHealth), "xvm_markerText"));
+            textField.styleSheet = style;
+
+            // TODO: replace shadow with TweenLite Shadow/Bevel (performance issue)
             if (cfg.shadow)
             {
                 var sh_color:Number = formatDynamicColor(formatStaticColorText(cfg.shadow.color), m_curHealth);
@@ -277,14 +316,12 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
                     cfg.shadow.angle, sh_color, sh_alpha, cfg.shadow.size, cfg.shadow.strength) ];
             }
 
-            var staticColor = formatStaticColorText(cfg.color);
-            textField.textColor = formatDynamicColor(staticColor, m_curHealth);
             textField._alpha = formatDynamicAlpha(cfg.alpha, m_curHealth);
             textField._x = cfg.x - (textField._width / 2.0);
-            textField._y = cfg.y - (textField._height / 2.0);
+            textField._y = cfg.y - (/*textField._height*/ 31 / 2.0); // FIXIT: 31 is used for compatibility
             textField._visible = cfg.visible;
 
-            return { field: textField, format: formatStaticText(cfg.format), alpha: cfg.alpha, color: staticColor };
+            return { field: textField, format: formatStaticText(cfg.format), alpha: cfg.alpha };
         }
         catch (e)
         {

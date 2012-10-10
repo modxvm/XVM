@@ -79,8 +79,10 @@
     \xvm-doc\samples\Full config RU\XVM.xvmconf
 
   Файл \res_mods\[ВЕРСИЯ ИГРЫ]\gui\flash\XVM.css может содержать CSS стили для html текста.
-  Подробнее:
-    http://help.adobe.com/en_US/AS2LCR/Flash_10.0/help.html?content=00001563.html
+  Поддерживаемые свойства CSS:
+    http://help.adobe.com/en_US/AS2LCR/Flash_10.0/help.html?content=00000293.html
+  Поддерживаемые теги HTML:
+    http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText
   TODO: макросы в CSS пока не поддерживаются
 
   Используемые макросы:

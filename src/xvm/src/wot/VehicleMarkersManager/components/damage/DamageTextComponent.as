@@ -65,7 +65,7 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
 
         var tf:TextField = createTextField(color, shadowColor);
 
-        tf.htmlText = "<p class='xvm_damageText'>" + text + "</p>";
+        tf.htmlText = "<textformat leading='-2'><p class='xvm_damageText'>" + text + "</p></textformat>";
         //wot.utils.Logger.add("dmg: " + flagToDamageSource(flag) + ", " + proxy.damageDest + " - color=" + color);
         //wot.utils.Logger.add(tf.htmlText);
         //wot.utils.Logger.add(XvmHelper.createCSS(cfg.font, color, "xvm_damageText"));
@@ -90,7 +90,7 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
     private function createTextField(color:Number, shadowColor:Number):TextField
     {
         var n = damage.getNextHighestDepth();
-        var tf: TextField = damage.createTextField("txt" + n, n, 0, 0, 200, 40);
+        var tf: TextField = damage.createTextField("txt" + n, n, 0, 0, 200, 100);
 
         tf.antiAliasType = "advanced";
         tf.multiline = true;
@@ -103,6 +103,7 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
         style.parseCSS(XvmHelper.createCSS(cfg.font, color, "xvm_damageText"));
         tf.styleSheet = style;
 
+        // TODO: replace shadow with TweenLite Shadow/Bevel (performance issue)
         tf.filters = [ GraphicsUtil.createShadowFilter
         (
             cfg.shadow.distance,

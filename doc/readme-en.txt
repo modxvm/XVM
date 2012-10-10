@@ -75,8 +75,10 @@
     \xvm-doc\samples\Full config EN\XVM.xvmconf
 
   File \res_mods\[GAME VERSION]\gui\flash\XVM.css can contain CSS styles for html text.
-  Details:
-    http://help.adobe.com/en_US/AS2LCR/Flash_10.0/help.html?content=00001563.html
+  Supported CSS properties documentation:
+    http://help.adobe.com/en_US/AS2LCR/Flash_10.0/help.html?content=00000293.html
+  Supported HTML tags:
+    http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText
   TODO: macros is not supported in CSS yet
 
   Macros available:
