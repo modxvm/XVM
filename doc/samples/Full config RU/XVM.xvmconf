@@ -195,18 +195,18 @@
             "damageMessage": "{{dmg}}",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
             "blowupMessage": "Blow-up!",      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
             "damageMessages": {               //   переопределение текста при обычном уроне по источнику урона (можно использовать HTML и CSS)
-               unknown: null,                 //     из кустов
-               player: null,                  //     от меня
-               ally: null,                    //     от союзника
-               squadman: null,                //     от взводного
-               enemy: null                    //     от врага
+               "unknown": null,               //     из кустов
+               "player": null,                //     от меня
+               "ally": null,                  //     от союзника
+               "squadman": null,              //     от взводного
+               "enemy": null                  //     от врага
             },
             "blowupMessages": {               //   переопределение текста при взрыве боеукладки по источнику урона (можно использовать HTML и CSS)
-               unknown: null,                 //     из кустов
-               player: null,                  //     от меня
-               ally: null,                    //     от союзника
-               squadman: null,                //     от взводного
-               enemy: null                    //     от врага
+               "unknown": null,               //     из кустов
+               "player": null,                //     от меня
+               "ally": null,                  //     от союзника
+               "squadman": null,              //     от взводного
+               "enemy": null                  //     от врага
             }
           },
           "contourIcon": {                    // иконки танка
@@ -361,18 +361,18 @@
             "damageMessage": "{{dmg}}",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
             "blowupMessage": "Blow-up!",      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
             "damageMessages": {               //   переопределение текста при обычном уроне по источнику урона (можно использовать HTML и CSS)
-               unknown: null,                 //     из кустов
-               player: null,                  //     от меня
-               ally: null,                    //     от союзника
-               squadman: null,                //     от взводного
-               enemy: null                    //     от врага
+               "unknown": null,               //     из кустов
+               "player": null,                //     от меня
+               "ally": null,                  //     от союзника
+               "squadman": null,              //     от взводного
+               "enemy": null                  //     от врага
             },
             "blowupMessages": {               //   переопределение текста при взрыве боеукладки по источнику урона (можно использовать HTML и CSS)
-               unknown: null,                 //     из кустов
-               player: null,                  //     от меня
-               ally: null,                    //     от союзника
-               squadman: null,                //     от взводного
-               enemy: null                    //     от врага
+               "unknown": null,               //     из кустов
+               "player": null,                //     от меня
+               "ally": null,                  //     от союзника
+               "squadman": null,              //     от взводного
+               "enemy": null                  //     от врага
             }
           },
           "contourIcon": {                    // иконки танка
@@ -556,18 +556,18 @@
             "damageMessage": "{{dmg}}",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
             "blowupMessage": "Blow-up!",      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
             "damageMessages": {               //   переопределение текста при обычном уроне по источнику урона (можно использовать HTML и CSS)
-               unknown: null,                 //     из кустов
-               player: null,                  //     от меня
-               ally: null,                    //     от союзника
-               squadman: null,                //     от взводного
-               enemy: null                    //     от врага
+               "unknown": null,               //     из кустов
+               "player": null,                //     от меня
+               "ally": null,                  //     от союзника
+               "squadman": null,              //     от взводного
+               "enemy": null                  //     от врага
             },
             "blowupMessages": {               //   переопределение текста при взрыве боеукладки по источнику урона (можно использовать HTML и CSS)
-               unknown: null,                 //     из кустов
-               player: null,                  //     от меня
-               ally: null,                    //     от союзника
-               squadman: null,                //     от взводного
-               enemy: null                    //     от врага
+               "unknown": null,               //     из кустов
+               "player": null,                //     от меня
+               "ally": null,                  //     от союзника
+               "squadman": null,              //     от взводного
+               "enemy": null                  //     от врага
             }
           },
           "contourIcon": {                    // иконки танка
@@ -671,18 +671,18 @@
             "damageMessage": "{{dmg}}",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
             "blowupMessage": "Blow-up!",      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
             "damageMessages": {               //   переопределение текста при обычном уроне по источнику урона (можно использовать HTML и CSS)
-               unknown: null,                 //     из кустов
-               player: null,                  //     от меня
-               ally: null,                    //     от союзника
-               squadman: null,                //     от взводного
-               enemy: null                    //     от врага
+               "unknown": null,               //     из кустов
+               "player": null,                //     от меня
+               "ally": null,                  //     от союзника
+               "squadman": null,              //     от взводного
+               "enemy": null                  //     от врага
             },
             "blowupMessages": {               //   переопределение текста при взрыве боеукладки по источнику урона (можно использовать HTML и CSS)
-               unknown: null,                 //     из кустов
-               player: null,                  //     от меня
-               ally: null,                    //     от союзника
-               squadman: null,                //     от взводного
-               enemy: null                    //     от врага
+               "unknown": null,               //     из кустов
+               "player": null,                //     от меня
+               "ally": null,                  //     от союзника
+               "squadman": null,              //     от взводного
+               "enemy": null                  //     от врага
             }
           },
           "contourIcon": {                    // иконки танка
@@ -843,18 +843,18 @@
             "damageMessage": "{{dmg}}",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
             "blowupMessage": "Blow-up!",      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
             "damageMessages": {               //   переопределение текста при обычном уроне по источнику урона (можно использовать HTML и CSS)
-               unknown: null,                 //     из кустов
-               player: null,                  //     от меня
-               ally: null,                    //     от союзника
-               squadman: null,                //     от взводного
-               enemy: null                    //     от врага
+               "unknown": null,               //     из кустов
+               "player": null,                //     от меня
+               "ally": null,                  //     от союзника
+               "squadman": null,              //     от взводного
+               "enemy": null                  //     от врага
             },
             "blowupMessages": {               //   переопределение текста при взрыве боеукладки по источнику урона (можно использовать HTML и CSS)
-               unknown: null,                 //     из кустов
-               player: null,                  //     от меня
-               ally: null,                    //     от союзника
-               squadman: null,                //     от взводного
-               enemy: null                    //     от врага
+               "unknown": null,               //     из кустов
+               "player": null,                //     от меня
+               "ally": null,                  //     от союзника
+               "squadman": null,              //     от взводного
+               "enemy": null                  //     от врага
             }
           },
           "contourIcon": {                    // иконки танка
@@ -1009,18 +1009,18 @@
             "damageMessage": "{{dmg}}",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
             "blowupMessage": "Blow-up!",      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
             "damageMessages": {               //   переопределение текста при обычном уроне по источнику урона (можно использовать HTML и CSS)
-               unknown: null,                 //     из кустов
-               player: null,                  //     от меня
-               ally: null,                    //     от союзника
-               squadman: null,                //     от взводного
-               enemy: null                    //     от врага
+               "unknown": null,               //     из кустов
+               "player": null,                //     от меня
+               "ally": null,                  //     от союзника
+               "squadman": null,              //     от взводного
+               "enemy": null                  //     от врага
             },
             "blowupMessages": {               //   переопределение текста при взрыве боеукладки по источнику урона (можно использовать HTML и CSS)
-               unknown: null,                 //     из кустов
-               player: null,                  //     от меня
-               ally: null,                    //     от союзника
-               squadman: null,                //     от взводного
-               enemy: null                    //     от врага
+               "unknown": null,               //     из кустов
+               "player": null,                //     от меня
+               "ally": null,                  //     от союзника
+               "squadman": null,              //     от взводного
+               "enemy": null                  //     от врага
             }
           },
           "contourIcon": {                    // иконки танка
@@ -1204,18 +1204,18 @@
             "damageMessage": "{{dmg}}",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
             "blowupMessage": "Blow-up!",      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
             "damageMessages": {               //   переопределение текста при обычном уроне по источнику урона (можно использовать HTML и CSS)
-               unknown: null,                 //     из кустов
-               player: null,                  //     от меня
-               ally: null,                    //     от союзника
-               squadman: null,                //     от взводного
-               enemy: null                    //     от врага
+               "unknown": null,               //     из кустов
+               "player": null,                //     от меня
+               "ally": null,                  //     от союзника
+               "squadman": null,              //     от взводного
+               "enemy": null                  //     от врага
             },
             "blowupMessages": {               //   переопределение текста при взрыве боеукладки по источнику урона (можно использовать HTML и CSS)
-               unknown: null,                 //     из кустов
-               player: null,                  //     от меня
-               ally: null,                    //     от союзника
-               squadman: null,                //     от взводного
-               enemy: null                    //     от врага
+               "unknown": null,               //     из кустов
+               "player": null,                //     от меня
+               "ally": null,                  //     от союзника
+               "squadman": null,              //     от взводного
+               "enemy": null                  //     от врага
             }
           },
           "contourIcon": {                    // иконки танка
@@ -1316,21 +1316,21 @@
             },
             "speed": 2,                       //   время отображения отлетающего урона
             "maxRange": 40,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "{{dmg}}",      //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
+            "damageMessage": "{{dmg}}",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
             "blowupMessage": "Blow-up!",      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
             "damageMessages": {               //   переопределение текста при обычном уроне по источнику урона (можно использовать HTML и CSS)
-               unknown: null,                 //     из кустов
-               player: null,                  //     от меня
-               ally: null,                    //     от союзника
-               squadman: null,                //     от взводного
-               enemy: null                    //     от врага
+               "unknown": null,               //     из кустов
+               "player": null,                //     от меня
+               "ally": null,                  //     от союзника
+               "squadman": null,              //     от взводного
+               "enemy": null                  //     от врага
             },
             "blowupMessages": {               //   переопределение текста при взрыве боеукладки по источнику урона (можно использовать HTML и CSS)
-               unknown: null,                 //     из кустов
-               player: null,                  //     от меня
-               ally: null,                    //     от союзника
-               squadman: null,                //     от взводного
-               enemy: null                    //     от врага
+               "unknown": null,               //     из кустов
+               "player": null,                //     от меня
+               "ally": null,                  //     от союзника
+               "squadman": null,              //     от взводного
+               "enemy": null                  //     от врага
             }
           },
           "contourIcon": {                    // иконки танка
