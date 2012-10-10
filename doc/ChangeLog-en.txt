@@ -1,4 +1,8 @@
-﻿XVM-3.0.4.alpha6:
+﻿XVM-3.0.4.alpha7:
+  * some optimization
+  * default floating damage font is the same as in default client
+
+XVM-3.0.4.alpha6:
   * fix config (add system colors)
   * enable flashing in damage animation
 

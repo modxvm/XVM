@@ -168,10 +168,10 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$FieldFont",           //     Font name
-              "size": 14,                     //     Font size
+              "name": "$PartnerCondensed",    //     Font name
+              "size": 18,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": true,                   //     Normal (false) or bold (true)
+              "bold": false,                  //     Normal (false) or bold (true)
               "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
@@ -332,10 +332,10 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$FieldFont",           //     Font name
-              "size": 14,                     //     Font size
+              "name": "$PartnerCondensed",    //     Font name
+              "size": 18,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": true,                   //     Normal (false) or bold (true)
+              "bold": false,                  //     Normal (false) or bold (true)
               "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
@@ -525,10 +525,10 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$FieldFont",           //     Font name
-              "size": 14,                     //     Font size
+              "name": "$PartnerCondensed",    //     Font name
+              "size": 18,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": true,                   //     Normal (false) or bold (true)
+              "bold": false,                  //     Normal (false) or bold (true)
               "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
@@ -640,10 +640,10 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$FieldFont",           //     Font name
-              "size": 14,                     //     Font size
+              "name": "$PartnerCondensed",    //     Font name
+              "size": 18,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": true,                   //     Normal (false) or bold (true)
+              "bold": false,                  //     Normal (false) or bold (true)
               "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
@@ -810,10 +810,10 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$FieldFont",           //     Font name
-              "size": 14,                     //     Font size
+              "name": "$PartnerCondensed",    //     Font name
+              "size": 18,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": true,                   //     Normal (false) or bold (true)
+              "bold": false,                  //     Normal (false) or bold (true)
               "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
@@ -974,10 +974,10 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$FieldFont",           //     Font name
-              "size": 14,                     //     Font size
+              "name": "$PartnerCondensed",    //     Font name
+              "size": 18,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": true,                   //     Normal (false) or bold (true)
+              "bold": false,                  //     Normal (false) or bold (true)
               "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
@@ -1167,10 +1167,10 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$FieldFont",           //     Font name
-              "size": 14,                     //     Font size
+              "name": "$PartnerCondensed",    //     Font name
+              "size": 18,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": true,                   //     Normal (false) or bold (true)
+              "bold": false,                  //     Normal (false) or bold (true)
               "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
@@ -1282,10 +1282,10 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$FieldFont",           //     Font name
-              "size": 14,                     //     Font size
+              "name": "$PartnerCondensed",    //     Font name
+              "size": 18,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": true,                   //     Normal (false) or bold (true)
+              "bold": false,                  //     Normal (false) or bold (true)
               "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options

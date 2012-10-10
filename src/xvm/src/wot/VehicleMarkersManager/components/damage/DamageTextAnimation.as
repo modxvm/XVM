@@ -54,22 +54,22 @@ class wot.VehicleMarkersManager.components.damage.DamageTextAnimation
     
     private function emerge():TweenLite
     {
-        return TweenLite.from(tf, EMERGE_DURATION, { _alpha:0, ease:Linear.easeNone } );
+        return TweenLite.from(tf, EMERGE_DURATION, { _alpha:0, ease:Linear.easeNone, cacheAsBitmap:true } );
     }
     
     private function tint():TweenLite
     {
-        return TweenLite.from(tf, TINT_DURATION, { tint:"0xFFFFFF", ease: Linear.easeNone } );
+        return TweenLite.from(tf, TINT_DURATION, { tint:"0xFFFFFF", ease: Linear.easeNone, cacheAsBitmap:true } );
     }
     
     private function moveUpward(movementDuration:Number, distanceUpward:Number):TweenLite
     {
-        return TweenLite.to(tf, movementDuration, { _y:distanceUpward, ease:Linear.easeNone } );
+        return TweenLite.to(tf, movementDuration, { _y:distanceUpward, ease:Linear.easeNone, cacheAsBitmap:true } );
     }
     
     private function fadeOut():TweenLite
     {
-        return TweenLite.to(tf, FADEOUT_DURATION, { _alpha:0, ease:Linear.easeNone } );
+        return TweenLite.to(tf, FADEOUT_DURATION, { _alpha:0, ease:Linear.easeNone, cacheAsBitmap:true } );
     }
     
     private function removeTextField():Void

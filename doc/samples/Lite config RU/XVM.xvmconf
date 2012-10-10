@@ -168,10 +168,10 @@
             "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
             "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
             "font": {                         //   параметры шрифта
-              "name": "$FieldFont",           //     название
-              "size": 14,                     //     размер
+              "name": "$PartnerCondensed",    //     название
+              "size": 18,                     //     размер
               "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": true,                   //     обычный (false) или жирный (true)
+              "bold": false,                  //     обычный (false) или жирный (true)
               "italic": false                 //     обычный (false) или курсив (true)
             },
             "shadow": {                       //   параметры тени
@@ -334,10 +334,10 @@
             "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
             "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
             "font": {                         //   параметры шрифта
-              "name": "$FieldFont",           //     название
-              "size": 14,                     //     размер
+              "name": "$PartnerCondensed",    //     название
+              "size": 18,                     //     размер
               "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": true,                   //     обычный (false) или жирный (true)
+              "bold": false,                  //     обычный (false) или жирный (true)
               "italic": false                 //     обычный (false) или курсив (true)
             },
             "shadow": {                       //   параметры тени
@@ -529,10 +529,10 @@
             "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
             "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
             "font": {                         //   параметры шрифта
-              "name": "$FieldFont",           //     название
-              "size": 14,                     //     размер
+              "name": "$PartnerCondensed",    //     название
+              "size": 18,                     //     размер
               "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": true,                   //     обычный (false) или жирный (true)
+              "bold": false,                  //     обычный (false) или жирный (true)
               "italic": false                 //     обычный (false) или курсив (true)
             },
             "shadow": {                       //   параметры тени
@@ -644,10 +644,10 @@
             "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
             "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
             "font": {                         //   параметры шрифта
-              "name": "$FieldFont",           //     название
-              "size": 14,                     //     размер
+              "name": "$PartnerCondensed",    //     название
+              "size": 18,                     //     размер
               "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": true,                   //     обычный (false) или жирный (true)
+              "bold": false,                  //     обычный (false) или жирный (true)
               "italic": false                 //     обычный (false) или курсив (true)
             },
             "shadow": {                       //   параметры тени
@@ -816,10 +816,10 @@
             "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
             "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
             "font": {                         //   параметры шрифта
-              "name": "$FieldFont",           //     название
-              "size": 14,                     //     размер
+              "name": "$PartnerCondensed",    //     название
+              "size": 18,                     //     размер
               "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": true,                   //     обычный (false) или жирный (true)
+              "bold": false,                  //     обычный (false) или жирный (true)
               "italic": false                 //     обычный (false) или курсив (true)
             },
             "shadow": {                       //   параметры тени
@@ -982,10 +982,10 @@
             "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
             "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
             "font": {                         //   параметры шрифта
-              "name": "$FieldFont",           //     название
-              "size": 14,                     //     размер
+              "name": "$PartnerCondensed",    //     название
+              "size": 18,                     //     размер
               "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": true,                   //     обычный (false) или жирный (true)
+              "bold": false,                  //     обычный (false) или жирный (true)
               "italic": false                 //     обычный (false) или курсив (true)
             },
             "shadow": {                       //   параметры тени
@@ -1177,10 +1177,10 @@
             "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
             "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
             "font": {                         //   параметры шрифта
-              "name": "$FieldFont",           //     название
-              "size": 14,                     //     размер
+              "name": "$PartnerCondensed",    //     название
+              "size": 18,                     //     размер
               "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": true,                   //     обычный (false) или жирный (true)
+              "bold": false,                  //     обычный (false) или жирный (true)
               "italic": false                 //     обычный (false) или курсив (true)
             },
             "shadow": {                       //   параметры тени
@@ -1292,10 +1292,10 @@
             "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
             "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
             "font": {                         //   параметры шрифта
-              "name": "$FieldFont",           //     название
-              "size": 14,                     //     размер
+              "name": "$PartnerCondensed",    //     название
+              "size": 18,                     //     размер
               "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": true,                   //     обычный (false) или жирный (true)
+              "bold": false,                  //     обычный (false) или жирный (true)
               "italic": false                 //     обычный (false) или курсив (true)
             },
             "shadow": {                       //   параметры тени

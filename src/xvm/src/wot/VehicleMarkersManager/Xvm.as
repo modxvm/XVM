@@ -61,6 +61,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         // initialize TweenLite
         OverwriteManager.init(OverwriteManager.AUTO);
         TweenPlugin.activate([TintPlugin]);
+        TweenPlugin.activate([CacheAsBitmapPlugin]);
     }
 
     /**

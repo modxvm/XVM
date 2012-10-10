@@ -64,8 +64,8 @@
     "enabled": true,
     "x": 270,
     "y": 7,
-    "w": 200,
-    "h": 100,
+    "w": 500,
+    "h": 200,
     "lines": 1,
     "direction": "down",
     "format": "<span class='lbl'>Hits:</span> <font size='13'>#{{n}}</font> {{dmg-total}} <b>{{dmg}}</b>",
@@ -88,6 +88,7 @@
             "amount": 30
           },
           "damageText": {
+            "y": -55,
             "damageMessage": "{{dmg}}"
           },
           "textFields": [
@@ -138,6 +139,7 @@
             "amount": 50
           },
           "damageText": {
+            "y": -55,
             "damageMessage": "{{dmg}}"
           },
           "clanIcon": {
@@ -153,7 +155,7 @@
             "maxScale": 80
           },
           "damageText": {
-            "color": "0x33FF33",
+            "y": -55,
             "damageMessage": "({{dmg}})",
             "blowupMessage": "Blow-up!"
           }
@@ -163,7 +165,7 @@
             "maxScale": 80
           },
           "damageText": {
-            "color": "0x33FF33",
+            "y": -55,
             "damageMessage": "({{dmg}})",
             "blowupMessage": "Blow-up!"
           }
@@ -185,6 +187,7 @@
             "amount": 50
           },
           "damageText": {
+            "y": -55,
             "damageMessage": "{{dmg}}"
           },
           "textFields": [
@@ -235,6 +238,7 @@
             "amount": 50
           },
           "damageText": {
+            "y": -55,
             "damageMessage": "{{dmg}}"
           },
           "clanIcon": {
@@ -250,7 +254,7 @@
             "maxScale": 80
           },
           "damageText": {
-            "color": "0xFF3333",
+            "y": -55,
             "damageMessage": "({{dmg}})",
             "blowupMessage": "Blow-up!"
           }
@@ -260,7 +264,7 @@
             "maxScale": 80
           },
           "damageText": {
-            "color": "0xFF3333",
+            "y": -55,
             "damageMessage": "({{dmg}})",
             "blowupMessage": "Blow-up!"
           }

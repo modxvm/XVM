@@ -425,6 +425,17 @@ class wot.utils.DefaultConfig
     }
   }
 
+  public static function get font_18(): Object
+  {
+    return {
+      name: "$PartnerCondensed",
+      size: 18,
+      align: "center",
+      bold: false,
+      italic: false
+    }
+  }
+
   // vehicleIcon
   public static function get vi(): Object
   {
@@ -486,7 +497,7 @@ class wot.utils.DefaultConfig
       y: -67,
       alpha: 100,
       color: null,
-      font: font_14b,
+      font: font_18,
       shadow: shadow_200,
       speed: 2,
       maxRange: 40,

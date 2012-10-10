@@ -7,16 +7,6 @@
   </definition>
   <components>
     <friend>
-      <combatScrollText>
-        <enabled value="true"/>
-        <speed value="2"/>
-        <maxRange value="40"/>
-        <textSize value="14"/>
-        <message>Готов</message>
-        <prefix>-</prefix>
-        <postfix/>
-        <filter type="DropShadowFilter" size="1" angle="45" distance="1" color="0x000000" alpha="100" strength="200"/>
-      </combatScrollText>
       <currentHealth>
         <format size="11" align="center" bold="true"/>
         <filter type="DropShadowFilter" size="1" angle="45" distance="1" color="0x000000" alpha="100" strength="60"/>
@@ -50,16 +40,6 @@
       </infoText>
     </friend>
     <enemy>
-      <combatScrollText>
-        <enabled value="true"/>
-        <speed value="2"/>
-        <maxRange value="40"/>
-        <textSize value="14"/>
-        <message>Готов</message>
-        <prefix>-</prefix>
-        <postfix/>
-        <filter type="DropShadowFilter" size="1" angle="45" distance="1" color="0x000000" alpha="100" strength="200"/>
-      </combatScrollText>
       <currentHealth>
         <format size="11" align="center" bold="true"/>
         <filter type="DropShadowFilter" size="1" angle="45" distance="1" color="0x000000" alpha="100" strength="60"/>
@@ -98,7 +78,6 @@
       <alive>
         <normal>
           <actionMarker x="0" y="-55"/>
-          <combatScrollText x="0" y="-55"/>
           <playerName x="-70" y="-42" alpha="100" visible="false"/>
           <vehicleName x="-70" y="-42" alpha="100" visible="true"/>
           <currentHealth x="-41" y="-57" alpha="100" visible="false"/>
@@ -109,7 +88,6 @@
         </normal>
         <extended>
           <actionMarker x="0" y="-55"/>
-          <combatScrollText x="0" y="-55"/>
           <playerName x="-70" y="-42" alpha="100" visible="true"/>
           <vehicleName x="-70" y="-42" alpha="100" visible="false"/>
           <currentHealth x="-41" y="-57" color="14286771" alpha="100" visible="true"/>
@@ -123,7 +101,6 @@
       <dead>
         <normal>
           <actionMarker x="0" y="-55"/>
-          <combatScrollText x="0" y="-55"/>
           <playerName x="-70" y="-73" color="11726391" alpha="100" visible="false"/>
           <vehicleName x="-70" y="-55" color="0x7BEC37" alpha="100" visible="false"/>
           <currentHealth x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="false"/>
@@ -134,7 +111,6 @@
         </normal>
         <extended>
           <actionMarker x="0" y="-55"/>
-          <combatScrollText x="0" y="-55"/>
           <playerName x="-70" y="-48" color="11726391" alpha="80" visible="true"/>
           <vehicleName x="-70" y="-34" color="0x7BEC37" alpha="80" visible="true"/>
           <currentHealth x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="false"/>
@@ -149,7 +125,6 @@
       <alive>
         <normal>
           <actionMarker x="0" y="-55"/>
-          <combatScrollText x="0" y="-55"/>
           <playerName x="-70" y="-42" alpha="100" visible="false"/>
           <vehicleName x="-70" y="-42" alpha="100" visible="true"/>
           <currentHealth x="-41" y="-57" color="{{c:hp-ratio}}" alpha="{{a:hp}}" visible="true"/>
@@ -160,7 +135,6 @@
         </normal>
         <extended>
           <actionMarker x="0" y="-55"/>
-          <combatScrollText x="0" y="-55"/>
           <playerName x="-70" y="-42" alpha="100" visible="true"/>
           <vehicleName x="-70" y="-42" alpha="100" visible="false"/>
           <currentHealth x="-41" y="-57" color="{{c:hp-ratio}}" alpha="100" visible="true"/>
@@ -174,7 +148,6 @@
       <dead>
         <normal>
           <actionMarker x="0" y="-55"/>
-          <combatScrollText x="0" y="-55"/>
           <playerName x="-70" y="-73" color="16739852" alpha="100" visible="false"/>
           <vehicleName x="-70" y="-55" color="0xEC3737" alpha="100" visible="false"/>
           <currentHealth x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="false"/>
@@ -185,7 +158,6 @@
         </normal>
         <extended>
           <actionMarker x="0" y="-55"/>
-          <combatScrollText x="0" y="-55"/>
           <playerName x="-70" y="-48" color="16739852" alpha="80" visible="true"/>
           <vehicleName x="-70" y="-34" color="0xEC3737" alpha="80" visible="true"/>
           <currentHealth x="-41" y="-38" color="0xFFFFFF" alpha="100" visible="false"/>
