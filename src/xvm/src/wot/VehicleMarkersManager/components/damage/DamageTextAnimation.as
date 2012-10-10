@@ -1,8 +1,6 @@
-import com.greensock.OverwriteManager;
 import com.greensock.TimelineLite;
 import com.greensock.TweenLite;
 import com.greensock.easing.*;
-import com.greensock.plugins.*;
 //import wot.utils.Logger;
 
 class wot.VehicleMarkersManager.components.damage.DamageTextAnimation
@@ -46,11 +44,8 @@ class wot.VehicleMarkersManager.components.damage.DamageTextAnimation
         var movementDuration:Number = cfg.speed; // TODO: alias config val to duration?
         var distanceUpward:Number = - cfg.maxRange;
         
-        OverwriteManager.init(OverwriteManager.AUTO);
-        TweenPlugin.activate([TintPlugin]);
-        
         timeline = new TimelineLite({onComplete:removeTextField});
-        
+
         timeline.insert(emerge(), 0);
         timeline.insert(tint(), 0);
         timeline.insert(moveUpward(movementDuration, distanceUpward), 0);

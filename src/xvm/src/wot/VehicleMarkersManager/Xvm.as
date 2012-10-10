@@ -1,6 +1,8 @@
 ﻿/**
  * Main XVM class, implements workflow logic.
  */
+import com.greensock.OverwriteManager;
+import com.greensock.plugins.*;
 import wot.utils.Config;
 import wot.utils.GlobalEventDispatcher;
 import wot.utils.StatData;
@@ -55,6 +57,10 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
 
         // initialize ColorsManager for detecting color blind mode
         ColorsManager.initialize();
+        
+        // initialize TweenLite
+        OverwriteManager.init(OverwriteManager.AUTO);
+        TweenPlugin.activate([TintPlugin]);
     }
 
     /**
