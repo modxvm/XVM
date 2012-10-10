@@ -14,7 +14,7 @@ class wot.utils.Animation implements IEvaluatorProvider
 {
     private function trace(str:String):Void
     {
-        Logger.add("[Animation]> " + str);
+        //Logger.add("[Animation]> " + str);
     }
 
     /**
@@ -44,17 +44,19 @@ class wot.utils.Animation implements IEvaluatorProvider
         this.target = target;
     }
 
-    public function evaluate(animation:String)
+    public function evaluate(animation:String, cfg: Object)
     {
-        this.timeline = timeline;
-        this.target = target;
-
         trace(animation);
         try
         {
-            var evaluator:Evaluator = new Evaluator(this);
-            var result = evaluator.evaluate(animation);
-            trace("result=" + result);
+            timeline.insert(fadeIn(0.3),0)
+            //timeline.insert(tint(0.7, '0xFFFFFF'), 0)
+            timeline.insert(move(cfg.speed, cfg.maxRange, 'up'), 0)
+            timeline.append(fadeOut(0.5), -0.5)
+
+//            var evaluator:Evaluator = new Evaluator(this);
+//            var result = evaluator.evaluate(animation);
+//            trace("result=" + result);
         }
         catch (e:Error)
         {

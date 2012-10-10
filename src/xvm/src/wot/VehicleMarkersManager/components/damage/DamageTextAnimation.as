@@ -13,7 +13,7 @@ class wot.VehicleMarkersManager.components.damage.DamageTextAnimation
 
         var timeline:TimelineLite = new TimelineLite( { onComplete:removeTextField } );
         var animation:Animation = new Animation(timeline, textField);
-        animation.evaluate(cfg.animation);
+        animation.evaluate(cfg.animation, cfg);
     }
 
     private function removeTextField():Void

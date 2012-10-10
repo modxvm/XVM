@@ -307,6 +307,8 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
                 formatDynamicColor(formatStaticColorText(cfg.color), m_curHealth), "xvm_markerText"));
             textField.styleSheet = style;
 
+//            Logger.add(XvmHelper.createCSS(cfg.font, formatDynamicColor(formatStaticColorText(cfg.color), m_curHealth), "xvm_markerText"));
+            
             // TODO: replace shadow with TweenLite Shadow/Bevel (performance issue)
             if (cfg.shadow)
             {

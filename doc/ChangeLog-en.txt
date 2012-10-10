@@ -3,7 +3,7 @@
 
 XVM-3.0.4.alpha7:
   * some optimization
-  * default floating damage font is the same as in default client
+  * the default font of floating damage is the same as in the default client
 
 XVM-3.0.4.alpha6:
   * fix config (add system colors)
@@ -13,11 +13,11 @@ XVM-3.0.4.alpha5:
   * fixed {{turret}} marker significance for t29, t32, m10_wolverine, pzii, pzvib_tiger_ii, vk4502a
   * stock turret marker added to the default config (after vehicle name)
   * wot-xvm-proxy renamed to xvm-stat
-  * xvm-stat is distributing separately from XVM
+  * xvm-stat is distributed separately from XVM
   * new feature: Hit Log (my hits calculation)
   * CSS: XVM.css contains global stylesheet, which can be used in any text
     field with html text
-  * highly customizable damage text independance of damage source
+  * flexible adjustment of the text of damage depending on the source of damage
 
 XVM-3.0.3:
   * added possibility to change {{turret}} marker display string

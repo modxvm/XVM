@@ -5,7 +5,7 @@
 /* used in BL and SF */
 .mono
 {
-  font-family: SSS, Droid Sans Mono, Consolas, Lucida Console, mono;
+  font-family: some_unknown_font, "Droid Sans Mono", Consolas, "Lucida Console", monospace;
   font-size: 11;
 }
 
