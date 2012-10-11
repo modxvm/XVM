@@ -50,7 +50,7 @@ class com.xvm.JSON {
 
   if (!indent)
     indent = "";
-  
+
   switch (typeof arg) {
   case 'movieclip':
   case 'object':
@@ -83,7 +83,7 @@ class com.xvm.JSON {
               }
               curDepth--;
               return '{' +
-                (arg instanceof MovieClip || arg instanceof TextField ? "// " + arg.toString() : "") + 
+                (arg instanceof MovieClip || arg instanceof TextField ? "// " + arg.toString() : "") +
                 '\n' + s + '\n' + indent + '}';
           }
       }

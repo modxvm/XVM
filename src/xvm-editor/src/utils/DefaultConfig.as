@@ -502,8 +502,7 @@ public class DefaultConfig
   // damageMessages section
   public static function get damageMessages(): Object
   {
-    return
-    {
+    return {
       unknown: null,
       player: null,
       ally: null,

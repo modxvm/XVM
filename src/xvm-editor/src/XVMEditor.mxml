@@ -31,6 +31,15 @@
 
             protected function onCreationComplete(event:Event):void
             {
+/*                Evaluator.evaluate("insert(alpha(100), 0);" +
+                 "insert(color(null), 0);" +
+                 "insert(shadow(100, '0x000000', 45, 1, 1, 2), 0);" +
+                 "insert(fadeIn(0.3),0);" +
+                 "insert(tint(0.7, '0xFFFFFF'), 0);" +
+                 "insert(move(3, 60, 'up'), 0);" +
+                 "insert(move(15, 200, 'up'), 3);" +
+                 "append(fadeOut(5), -5);", new Evaluator());*/
+
                 createNewConfig();
                 onVehicleStateChanged(event);
             }

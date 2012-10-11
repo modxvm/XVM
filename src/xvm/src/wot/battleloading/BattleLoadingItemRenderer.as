@@ -164,8 +164,18 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
         if (data)
             data.icon = saved_icon;
 
-        if (data && Config.s_config.rating.showPlayersStatistics)
-            vehicleField.htmlText = TextCache.Get("BL/" + data.label) || data.vehicle;
+        if (data)
+        {
+            var key = "BL/" + data.label;
+            var value = TextCache.Get(key);
+            if (!value)
+            {
+                vehicleField.condenseWhite = true;
+                value = TextCache.FormatNoCache(key, data,
+                    team == Defines.TEAM_ALLY ? Config.s_config.battleLoading.formatLeft : Config.s_config.battleLoading.formatRight);
+            }
+            vehicleField.htmlText = value;
+        }
     }
 
     // update delegate
@@ -180,6 +190,7 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
             return;
 
         var key = "BL/" + data.label;
+        vehicleField.condenseWhite = false;
         vehicleField.htmlText = TextCache.Get(key) || TextCache.Format(key, pdata,
             team == Defines.TEAM_ALLY ? Config.s_config.battleLoading.formatLeft : Config.s_config.battleLoading.formatRight);
         //Logger.add(vehicleField.htmlText);

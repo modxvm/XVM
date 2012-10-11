@@ -66,7 +66,9 @@ class wot.utils.Config
             {
                 Config.s_css = str;
                 if (!Config.s_style.parseCSS(str))
-                    GlobalEventDispatcher.dispatchEvent({ type: "set_info", warning: "Error parsing XVM.css" });
+                    GlobalEventDispatcher.dispatchEvent( { type: "set_info", warning: "Error parsing XVM.css" } );
+                else
+                    GlobalEventDispatcher.dispatchEvent( { type: "set_info" } );
             }
             finally
             {

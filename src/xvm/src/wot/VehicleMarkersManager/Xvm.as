@@ -60,8 +60,11 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         
         // initialize TweenLite
         OverwriteManager.init(OverwriteManager.AUTO);
-        TweenPlugin.activate([TintPlugin]);
-        TweenPlugin.activate([CacheAsBitmapPlugin]);
+        TweenPlugin.activate([AutoAlphaPlugin, BevelFilterPlugin, BezierPlugin, BezierThroughPlugin, BlurFilterPlugin,
+            CacheAsBitmapPlugin, ColorMatrixFilterPlugin, ColorTransformPlugin, DropShadowFilterPlugin, EndArrayPlugin,
+            FilterPlugin, FrameBackwardPlugin, FrameForwardPlugin, FrameLabelPlugin, FramePlugin, GlowFilterPlugin,
+            HexColorsPlugin, QuaternionsPlugin, RemoveTintPlugin, RoundPropsPlugin, ScalePlugin, ScrollRectPlugin,
+            SetSizePlugin, ShortRotationPlugin, TintPlugin, TransformMatrixPlugin, TweenPlugin, VisiblePlugin, VolumePlugin]);
     }
 
     /**

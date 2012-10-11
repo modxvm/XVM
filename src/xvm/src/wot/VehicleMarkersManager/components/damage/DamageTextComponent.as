@@ -70,7 +70,8 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
         //wot.utils.Logger.add(tf.htmlText);
         //wot.utils.Logger.add(XvmHelper.createCSS(cfg.font, color, "xvm_damageText"));
 
-        var animation = new DamageTextAnimation(cfg, tf); // defines and starts
+        var animation = proxy.formatDynamicText(proxy.formatStaticText(cfg.animation));
+        var dummy = new DamageTextAnimation(animation, tf); // defines and starts
     }
 
     public function updateState(state_cfg:Object)

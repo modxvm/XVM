@@ -1,12 +1,12 @@
-import wot.utils.Logger;
-
-class wot.utils.Evaluator
+package
 {
-    private static var dummy = Logger.dummy; // avoid import warning
-    private function trace(str:String):Void
+
+public class Evaluator
+{
+/*    private function trace(str:String):Void
     {
         Logger.add("[Evaluator]> " + str);
-    }
+    }*/
 
     /**
     * script - script
@@ -20,7 +20,7 @@ class wot.utils.Evaluator
 
         var _value:Function;
 
-        var _error:Function = function (m:String) {
+        var _error:Function = function (m:String):void {
             throw {
                 name: 'EvaluatorError',
                 message: m,
@@ -32,7 +32,7 @@ class wot.utils.Evaluator
         var _next:Function = function() {
             ch = ta[at];
             at += 1;
-//            trace(ch);
+            trace(ch);
             return ch;
         }
 
@@ -77,7 +77,7 @@ class wot.utils.Evaluator
 
             if (ch == '"' || ch == "'")
             {
-                var sc = ch;
+                var sc = ch; 
                 while (_next()) {
                     if (ch == sc) {
                         _next();
@@ -111,39 +111,24 @@ class wot.utils.Evaluator
         }
 
         var _number:Function = function() {
-            var n = '', v, h = false;
-            if (ch == '0') {
-                n = '0';
+            var n = '', v;
+
+            if (ch == '-') {
+                n = '-';
                 _next();
-                h = ch == "x" || ch == "X";
             }
-            if (h)
-            {
-                n += "x";
+            while (ch >= '0' && ch <= '9') {
+                n += ch;
                 _next();
-                while ((ch >= '0' && ch <= '9') || (ch >= 'A' && ch <= 'F') || (ch >= 'a' && ch <= 'f')) {
-                    n += ch;
-                    _next();
-                }
-                v = parseInt(n, 16);
-            } else {
-                if (ch == '-') {
-                    n = '-';
-                    _next();
-                }
-                while (ch >= '0' && ch <= '9') {
-                    n += ch;
-                    _next();
-                }
-                if (ch == '.') {
-                    n += '.';
-                    while (_next() && ch >= '0' && ch <= '9') {
-                        n += ch;
-                    }
-                }
-                //v = +n;
-                v = 1 * Number(n);
             }
+            if (ch == '.') {
+                n += '.';
+                while (_next() && ch >= '0' && ch <= '9') {
+                    n += ch;
+                }
+            }
+            //v = +n;
+            v = 1 * Number(n);
             if (!isFinite(v)) {
                 _error("Bad number");
             } else {
@@ -185,8 +170,8 @@ class wot.utils.Evaluator
                 _white();
                 if (ch == ')') {
                     _next();
-                    //if (!provider.hasOwnProperty(fn))
-                    //    _error("provider don't have function '" + fn + "'");
+                    if (!provider.hasOwnProperty(fn))
+                        _error("provider have no function '" + fn + "'");
                     return provider[fn].apply(provider, a);
                 }
                 while (ch) {
@@ -194,8 +179,8 @@ class wot.utils.Evaluator
                     _white();
                     if (ch == ')') {
                         _next();
-//                        if (!provider.hasOwnProperty(fn))
-//                            _error("provider have no function '" + fn + "'");
+                        if (!provider.hasOwnProperty(fn))
+                            _error("provider have no function '" + fn + "'");
                         return provider[fn].apply(provider, a);
                     } else if (ch != ',') {
                         break;
@@ -207,34 +192,7 @@ class wot.utils.Evaluator
             _error("Bad function");
         }
 
-        var _word:Function = function(wordOnly) {
-            if (ch == '_' || (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z'))
-            {
-                var n = '';
-                while (ch == '_' || (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || ch >= '0' && ch <= '9') {
-                    n += ch;
-                    _next();
-                }
-                _white();
-                if (wordOnly)
-                    return n;
-                if (n == 'true')
-                    return true;
-                if (n == 'false')
-                    return false;
-                if (n == 'null')
-                    return null;
-                if (ch == '(')
-                    return _function(n);
-                if (ch == '=') {
-                    provider[n] = _value(n);
-                    return;
-                }
-            }
-            _error("Bad word");
-        }
-
-        var _object:Function = function() {
+       var _object:Function = function() {
             var k, o = {};
 
             if (ch == '{') {
@@ -245,7 +203,7 @@ class wot.utils.Evaluator
                     return o;
                 }
                 while (ch) {
-                    k = _word(true);
+                    k = _string();
                     _white();
                     if (ch != ':') {
                         break;
@@ -279,7 +237,31 @@ class wot.utils.Evaluator
                 case '-':
                     return _number();
                 default:
-                    return (ch >= '0' && ch <= '9') ? _number() : _word();
+                    if (ch >= '0' && ch <= '9')
+                        return _number();
+                    if (ch == '_' || (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z'))
+                    {
+                        var n = '';
+                        while (ch == '_' || (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || ch >= '0' && ch <= '9') {
+                            n += ch;
+                            _next();
+                        }
+                        _white();
+                        if (ch == '=') {
+                            provider[n] = _value(n);
+                            return;
+                        }
+                        if (ch == '(') {
+                            return _function(n);
+                        }
+                        if (n == 'true')
+                            return true;
+                        if (n == 'false')
+                            return false;
+                        if (n == 'null')
+                            return null;
+                        _error("Bad char");
+                    }
             }
             _error("Bad char");
         }
@@ -291,7 +273,7 @@ class wot.utils.Evaluator
         return result;
     }
 
-/*
+
     public function insert(tl, time) {trace('insert:'+arguments.join(', '))}
     public function set(tl) {trace('set:'+arguments.join(', '))}
     public function append(tl, time) {trace('append:'+arguments.join(', '))}
@@ -303,5 +285,6 @@ class wot.utils.Evaluator
     public function fadeIn(value) {trace('fadeIn:'+arguments.join(', '))}
     public function fadeOut(value) {trace('fadeOut:'+arguments.join(', '))}
     public function move(value) {trace('move:'+arguments.join(', '))}
-*/
+}
+
 }

@@ -495,10 +495,8 @@ class wot.utils.DefaultConfig
       visible: true,
       x: 0,
       y: -67,
-      alpha: 100,
       color: null,
       font: font_18,
-      shadow: shadow_200,
       speed: 2,
       maxRange: 40,
       /**
@@ -523,12 +521,12 @@ class wot.utils.DefaultConfig
        *   insert, append, fadeIn, fadeOut, tint, move
        */
       animation:
-        "insert(alpha(100));" +
-        "insert(color(null));" +
-        "insert(shadow(...));" +
-        "insert(fadeIn(0.3),0);" +
-        "insert(tint(0.3, '0xFFFFFF'), 0);" +
+        "set(alpha(0.5));" +
+        "set(shadow({blurX:6, blurY:6, distance:0, strength:2}));" +
+        "insert(fadeIn(0.3), 0);" +
+        "insert(tint(0.7, 0xFFFFFF), 0);" +
         "insert(move(2, 40, 'up'), 0);" +
+        "append(to(1, {glowFilter:{color:0x00FF00, blurX:10, blurY:10, strength:1, alpha:1}}), 1);" +
         "append(fadeOut(0.5), -0.5);",
       damageMessage: "{{dmg}}",
       blowupMessage: "Blow-up!",
