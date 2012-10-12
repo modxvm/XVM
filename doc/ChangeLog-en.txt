@@ -1,5 +1,6 @@
 ﻿XVM-3.0.4.alpha9:
   * scripts for animation effects (file XVM.xs)
+  * added default SixthSense.png (thanks 7serafim7)
 
 XVM-3.0.4.alpha8:
   * support of HTML/CSS in any text field, including vehicle markers

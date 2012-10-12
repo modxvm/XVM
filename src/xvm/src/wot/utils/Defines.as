@@ -15,8 +15,8 @@ class wot.utils.Defines
   // MAX_PATH is 259 on NTFS
   public static var MAX_PATH: Number = 100;
 
-  // Path to Dokan MountPoint
-  public static var DOKAN_MP = "../../../.stat/";
+  // Path to Dokan MountPoint (WoT/xvm/.stat)
+  public static var DOKAN_MP = "../../../../xvm/.stat/";
 
   // WebDav commands
   public static var COMMAND_LOG: String = DOKAN_MP + "@LOG";
