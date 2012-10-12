@@ -30,8 +30,8 @@ protected function RefreshCurrentPage():void
             RefreshColorsPage();
         else if (pg == pgTransparency)
             RefreshTransparencyPage();
-        else if (pg == pgMisc)
-            RefreshMiscPage();
+        else if (pg == pgIconset)
+            RefreshIconsetPage();
         else if (pg == pgVehicleNames)
             RefreshVehicleNamesPage();
         else if (pg == pgMarkers)
@@ -299,16 +299,12 @@ private function RefreshTransparencyPage():void
     }
 }
 
-private function RefreshMiscPage():void
+private function RefreshIconsetPage():void
 {
-    debug("RefreshMiscPage()");
+    debug("RefreshIconsetPage()");
     try
     {
         var section:*;
-
-        section = Config.s_config.turretMarkers;
-        this.p_turret.v_highVulnerability.value = section.highVulnerability;
-        this.p_turret.v_lowVulnerability.value = section.lowVulnerability;
 
         section = Config.s_config.iconset;
         this.p_iconSet.v_battleLoading.value = section.battleLoading;
@@ -318,21 +314,17 @@ private function RefreshMiscPage():void
     }
     catch (ex:Error)
     {
-        debug("ERROR: RefreshMiscPage(): " + ex.toString());
+        debug("ERROR: RefreshIconsetPage(): " + ex.toString());
     }
 }
 
-private var needRefreshVehicleNamesPage:Boolean = true;
 private function RefreshVehicleNamesPage():void
 {
     debug("RefreshVehicleNamesPage()");
     try
     {
-        if (needRefreshVehicleNamesPage)
-        {
-            needRefreshVehicleNamesPage = false;
+        if (pgVehicleNames.updateCompletePendingFlag)
             p_vehicle_names.RefreshSource();
-        }
     }
     catch (ex:Error)
     {

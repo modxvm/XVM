@@ -2,9 +2,12 @@
  * ...
  * @author sirmax2
  */
+import wot.utils.Chance;
 import wot.utils.Config;
+import wot.utils.Defines;
 import wot.utils.GlobalEventDispatcher;
 import wot.utils.Logger;
+import wot.utils.StatData;
 import wot.utils.StatLoader;
 import wot.utils.Utils;
 import wot.SixthSenseIndicator;
@@ -38,7 +41,7 @@ class wot.BattleMain
         gfx.io.GameDelegate.addCallBack("battle.showPostmortemTips", instance, "showPostmortemTips");
         gfx.io.GameDelegate.addCallBack("Stage.Update", instance, "onUpdateStage");
         gfx.io.GameDelegate.addCallBack("battle.arenaData", instance, "setArenaData");
-//        gfx.io.GameDelegate.addCallBack("battle.showStatus", instance, "showFinalStatus"); // dialog is not exist since WoT 0.8.0
+        gfx.io.GameDelegate.addCallBack("battle.showStatus", instance, "showFinalStatus");
     }
 
     private static function BattleMainConfigLoaded()
@@ -71,7 +74,7 @@ class wot.BattleMain
         var tf: TextFormat = fps.getNewTextFormat();
         tf.align = "left";
         clock.setNewTextFormat(tf);
-        clock.filters = [new flash.filters.DropShadowFilter(1, 90, 0, 100, 5, 5, 1.5, 3)];
+        clock.filters = [new flash.filters.DropShadowFilter(0, 0, 0, 100, 3, 3, 2, 3)];
         setInterval(function() { clock.text = Utils.FormatDate(format, new Date()) }, 1000);
     }
 
@@ -97,7 +100,6 @@ class wot.BattleMain
         //wot.utils.Logger.addObject(_root);
     }
 
-    /* DISABLED - final dialog is not exist since WoT 0.8.0
     var finalStatusShown = false;
     function showFinalStatus(statusText)
     {
@@ -156,10 +158,8 @@ class wot.BattleMain
         if (t)
         {
             t.html = true;
-            t.styleSheet = Config.s_style;
             t.text = "";
             Chance.ShowChance(t, Config.s_config.statisticForm.showChancesExp);
         }
     }
-    */
 }

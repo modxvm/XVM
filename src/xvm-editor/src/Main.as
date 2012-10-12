@@ -18,7 +18,6 @@ protected function createNewConfig():void
 	lastFileName = "XVM.xvmconf";
 	Config.s_config = DefaultConfig.config;
 	Config.TuneupConfig();
-    needRefreshVehicleNamesPage = true;
     RefreshCurrentPage();
 }
 

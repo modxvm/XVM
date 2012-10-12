@@ -4,7 +4,7 @@
  * AS2
  * UPDATES AND DOCUMENTATION AT: http://www.TweenMax.com
  **/
-//import com.greensock.*;
+import com.greensock.*;
 import com.greensock.plugins.*;
 /**
  * Removes the tint of a MovieClip over time. <br /><br />

@@ -38,8 +38,8 @@ class wot.VehicleMarkersManager.components.VehicleTypeProxy extends AbstractAcce
         return ColorsManager.isColorBlindMode;
     }
 
-    public function setMarkerLabel(markerLabel:String):Void
+    public function setMarkerLabel(markerLabel:String):Boolean
     {
-        xvm.proxy.gotoAndStop(markerLabel);
+        return xvm.proxy.gotoAndStop(markerLabel);
     }
 }

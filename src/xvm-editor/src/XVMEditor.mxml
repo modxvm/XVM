@@ -31,15 +31,6 @@
 
             protected function onCreationComplete(event:Event):void
             {
-/*                Evaluator.evaluate("insert(alpha(100), 0);" +
-                 "insert(color(null), 0);" +
-                 "insert(shadow(100, '0x000000', 45, 1, 1, 2), 0);" +
-                 "insert(fadeIn(0.3),0);" +
-                 "insert(tint(0.7, '0xFFFFFF'), 0);" +
-                 "insert(move(3, 60, 'up'), 0);" +
-                 "insert(move(15, 200, 'up'), 3);" +
-                 "append(fadeOut(5), -5);", new Evaluator());*/
-
                 createNewConfig();
                 onVehicleStateChanged(event);
             }
@@ -73,8 +64,8 @@
                 <mx:PopUpMenuButton itemClick="onExtraButtonClick(event)">
                     <mx:dataProvider>
                         <fx:Array>
-                            <fx:Object value="merge" label="{_('mergeConfigs')}" icon="@Embed(source='images/merge.png')" />
                             <fx:Object value="newconfig" label="{_('newConfig')}" icon="@Embed(source='images/filenew.png')"/>
+                            <fx:Object value="merge" label="{_('mergeConfigs')}" icon="@Embed(source='images/merge.png')" />
                         </fx:Array>
                     </mx:dataProvider>
                 </mx:PopUpMenuButton>
@@ -245,10 +236,9 @@
                         </s:NavigatorContent>
                 </mx:Accordion>
                 </s:NavigatorContent>
-                <s:NavigatorContent label="{_('miscPage')}" width="100%" height="100%" id="pgMisc">
+                <s:NavigatorContent label="{_('iconsetPage')}" width="100%" height="100%" id="pgIconset">
                     <s:Scroller x="0" y="0" width="420" height="100%">
                         <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1" creationComplete="{RefreshCurrentPage()}">
-                            <p:PTurret id="p_turret" config="turretMarkers" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                             <p:PIconSet id="p_iconSet" config="iconset" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                         </s:VGroup>
                     </s:Scroller>

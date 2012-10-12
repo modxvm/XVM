@@ -16,7 +16,7 @@
     * Clock at battle loading screen
     * Player/clan icon
     * Vehicle icon sets
-    * In-game players rating (only with xvm-stat package)
+    * In-game players rating (only in xvm-full package)
 
   Project site:  http://code.google.com/p/wot-xvm/
   Support:       http://www.koreanrandom.com/forum/topic/1383-xvm
@@ -28,10 +28,18 @@
 2. INSTALL
 -----------------------------------------------------------
 
-  1. Unzip archive to game folder:
+  1. Game must be installed to disk with NTFS file system.
+
+  2. Microsoft .NET Framework 2.0 is required.
+     You can check your installed .NET versions using this utility:
+       http://www.tmgdevelopment.co.uk/versioncheck.htm
+
+  3. Install DokanLibrary: http://dokan-dev.net/en/download/#dokan
+
+  4. Unzip archive to game folder:
      Right click to archive -> "Extract all..." -> select game folder -> "Extract"
 
-  2. You do not need to setup anything by default.
+  5. You do not need to setup anything by default.
 
      If you want special settings, you need to create config file:
        \res_mods\[GAME VERSION]\gui\flash\XVM.xvmconf
@@ -47,6 +55,24 @@
 
      Note: If you changing config manually, use Notepad, DO NOT use MS Word,
      WordPad and such editors.
+
+  6. If you do not want statistics, run game as usual.
+
+     If you want statistics, run wot-xvm-proxy.exe (game will be started
+     automatically). Also make a note that statistics is turned off by default,
+     so you need to enable it in config file.
+
+     If you want statistics and game launcher, start with /launcher argument:
+       Create shortcut wot-xvm-proxy.exe
+       Open Properties
+       Write 'wot-xvm-proxy.exe /launcher' (without quotas) in Object field
+       Press OK
+
+  7. If you use Skype, in Tools -> Options -> Advanced -> Connection ->
+     REMOVE CHECK "Use port 80 and 443 as alternatives for incoming connections".
+
+  8. If you want to send bug report, run wot-xvm-proxy.exe with /debug argument
+     and add console output to report.
 
 -----------------------------------------------------------
 3. UPDATE
@@ -74,27 +100,10 @@
   All possible config options you can see in this file:
     \xvm-doc\samples\Full config EN\XVM.xvmconf
 
-  File \res_mods\[GAME VERSION]\gui\flash\XVM.css can contain CSS styles for html text.
-  Supported CSS properties documentation:
-    http://help.adobe.com/en_US/AS2LCR/Flash_10.0/help.html?content=00000293.html
-  Supported HTML tags:
-    http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText
-  TODO: macros is not supported in CSS yet
-
   Macros available:
     In players panel, battle loading screen and statistic form:
       {{nick}}        - player nickname
       {{vehicle}}     - vehicle name
-
-    In Hits Log:
-      {{n}}           - count of hits
-      {{dmg}}         - last hit value
-      {{dmg-total}}   - total sum of hits
-      {{nick}}        - player nickname
-      {{vehicle}}     - vehicle name
-      {{level}}       - vehicle level (Arabic numerals)
-      {{rlevel}}      - vehicle level (Roman numerals)
-      {{dmg-kind}}    - damage kind (attack, fire, ramming, ...)
 
     In tank markers:
       {{hp}}          - current health points

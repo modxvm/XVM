@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ...
  * @author sirmax2
  */
@@ -27,11 +27,11 @@ class wot.utils.DefaultConfig
         mirroredVehicleIcons: true,      // Set false for alternative tank icon mirroring.
         showPostmortemTips: true,        // Popup tooltip panel after death.
         removePanelsModeSwitcher: false, // Set true to hide mouse modes switcher.
-        highlightVehicleIcon: true,      // False - disable highlighting of selected vehicle icon and squad.
-        hideXVMVersion: false,           // Hide version label at upper left corner.
+	highlightVehicleIcon: true,      // False - disable highlighting of selected vehicle icon and squad.
+	hideXVMVersion: false,           // Hide version label at upper left corner.
         useStandardMarkers: false,       // Use original wot markers.
-        // Show the clock on the Debug Panel (near FPS).
-        // Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
+	// Show the clock on the Debug Panel (near FPS).
+	// Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
         clockFormat: "H:N",
         clanIconsFolder: "../../../clanicons" // Folder with clan icons
       },
@@ -46,7 +46,7 @@ class wot.utils.DefaultConfig
 
 	// Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
         clockFormat: "H:N:S",
-        showChances: false,     // Show game round win chances percentage.
+        showChances: true,      // Show game round win chances percentage.
         showChancesExp: false,  // Show experimental "chance to win" formula.
         removeSquadIcon: false, // Hide squad icon.
         // Playes/clan icon parameters.
@@ -56,7 +56,7 @@ class wot.utils.DefaultConfig
         formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font> {{vehicle}}"
       },
       statisticForm: {
-        showChances: false,     // Show game round win chances percentage.
+        showChances: true,      // Show game round win chances percentage.
         showChancesExp: false,  // Show experimental "chance to win" formula.
         removeSquadIcon: false, // Hide squad icon.
         // Playes/clan icon parameters.
@@ -97,21 +97,6 @@ class wot.utils.DefaultConfig
           vehicleFormatLeft: "<font color='{{c:rating}}'>{{vehicle}}</font>",
           vehicleFormatRight: "<font color='{{c:rating}}'>{{vehicle}}</font>"
         }
-      },
-      turretMarkers: {
-        highVulnerability: " *",
-        lowVulnerability: " '"
-      },
-      hitLog: {
-        enabled: true,
-        x: 270,
-        y: 7,
-        w: 200,
-        h: 100,
-        lines: 1,
-        direction: "down",
-        format: "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <b>{{dmg}}</b>",
-        formatHistory: "{{n}}: {{dmg-total}} {{dmg}} {{vehicle}} {{dmg-kind}}"
       },
       markers: {
         ally: {
@@ -232,14 +217,7 @@ class wot.utils.DefaultConfig
           enemy_dead_normal: "0x840500",
           enemy_dead_blind: "0x47407A",
           enemy_blowedup_normal: "0x5A0401",
-          enemy_blowedup_blind: "0x3B365F",
-          // me - my damage. used only in markers//damageText when damageSource = 'player'
-          me_alive_normal: "0xFFEE99",
-          me_alive_blind: "0xFFFFFF",
-          me_dead_normal: "0xFFDD33",
-          me_dead_blind: "0xDDDDDD",
-          me_blowedup_normal: "0xFFDD33",
-          me_blowedup_blind: "0xDDDDDD"
+          enemy_blowedup_blind: "0x3B365F"
         },
         vtype: {
           LT:  "0xA2FF9A",        // Color for light tanks
@@ -249,13 +227,6 @@ class wot.utils.DefaultConfig
           TD:  "0xA0CFFF",        // Color for tank destroyers
           premium: "0xFFCC66",    // Color for premium tanks
           usePremiumColor: false  // Enable/disable premium color usage
-        },
-        dmg_kind: {
-          attack: "0xFFAA55",
-          fire: "0xFF6655",
-          ramming: "0x998855",
-          world_collision: "0x228855",
-          other: "0xCCCCCC"
         },
         // values - from min to max, colors are for values 'lesser then ...'
         hp: [
@@ -334,16 +305,6 @@ class wot.utils.DefaultConfig
           { value: 101, alpha: 40 }
         ]
       },
-      // TODO
-      images: {
-        dmg_kind: {
-          attack: "",
-          fire: "../../../icons/xvm/dmg_fire.png",
-          ramming: "../../../icons/xvm/dmg_ramming.png",
-          world_collision: "../../../icons/xvm/dmg_world_collision.png",
-          other: "../../../icons/xvm/dmg_other.png"
-        }
-      },
       iconset: {
         battleLoading: "../maps/icons/vehicle/contour",
         statisticForm: "../maps/icons/vehicle/contour",
@@ -351,7 +312,21 @@ class wot.utils.DefaultConfig
         vehicleMarker: "../maps/icons/vehicle/contour"
       },
       consts: consts,
-      vehicleNames: VehicleInfo.getVehicleNamesData()
+      vehicleNames: VehicleInfo.getVehicleNamesData(),
+      turretMarkers: {
+        highVulnerability: "*",
+        lowVulnerability: "-"
+      },
+      dmgPalette: [
+        //  type \ from          unknown   ally      enemy     squad     player
+        /* attack          */ [ 0x000000, 0x55EE88, 0xEE5588, 0xFFCC00, 0xE0E0E0 ],
+        /* fire            */ [ 0x000000, 0x66FF88, 0xFF6688, 0xFFCC66, 0xFFFFFF ],
+        /* ramming         */ [ 0x000000, 0x33DD99, 0xDD3399, 0xEEBB44, 0x949494 ],
+        /* world_collision */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
+        /* death_zone      */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
+        /* drowning        */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
+        /* explosion       */ [ 0x000000, 0xBBF8CF, 0xFF6666, 0xFFCC66, 0xFFFFFF ]
+      ]
     };
 
     return a;
@@ -425,17 +400,6 @@ class wot.utils.DefaultConfig
     }
   }
 
-  public static function get font_18(): Object
-  {
-    return {
-      name: "$PartnerCondensed",
-      size: 18,
-      align: "center",
-      bold: false,
-      italic: false
-    }
-  }
-
   // vehicleIcon
   public static function get vi(): Object
   {
@@ -483,7 +447,7 @@ class wot.utils.DefaultConfig
 
   public static function get hb_dead(): Object
   {
-    var hb:Object = hb_alive;
+    var hb = hb_alive;
     hb.visible = false;
     return hb;
   }
@@ -495,26 +459,16 @@ class wot.utils.DefaultConfig
       visible: true,
       x: 0,
       y: -67,
-      // TODO: remove [
+      alpha: 100,
       color: null,
-      font: font_18,
-      speed: 2,
+      font: font_14b,
+      shadow: shadow_200,
+      speed: 0.5,
       maxRange: 40,
-      // ]
-      effects: "dmg", // name of script function with animation effects
       damageMessage: "{{dmg}}",
       blowupMessage: "Blow-up!"
     }
   }
-
-  public static var DefaultXS:String =
-    "dmg() {" +
-    "  set(shadow({blurX:6, blurY:6, strength:2}));" +
-    "  insert(fadeIn(0.3), 0);" +
-    "  insert(tint(0.5, 0xFFFFFF), 0);" +
-    "  insert(move(2, 40, 'up'), 0);" +
-    "  append(fadeOut(0.5), -0.5);" +
-    "}";
 
   // contourIcon
   public static function get ci(): Object
@@ -583,7 +537,7 @@ class wot.utils.DefaultConfig
       format: "{{nick}}"
     }
   }
-
+  
   public static function get playerName_dead(): Object
   {
     return {
@@ -611,7 +565,7 @@ class wot.utils.DefaultConfig
       color: null,
       font: font_13,
       shadow: shadow_200,
-      format: "{{vehicle}}{{turret}}"
+      format: "{{vehicle}}"
     }
   }
 

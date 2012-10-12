@@ -47,7 +47,7 @@ public class DefaultConfig
 
 	// Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
         clockFormat: "H:N:S",
-        showChances: false,     // Show game round win chances percentage.
+        showChances: true,      // Show game round win chances percentage.
         showChancesExp: false,  // Show experimental "chance to win" formula.
         removeSquadIcon: false, // Hide squad icon.
         // Playes/clan icon parameters.
@@ -57,7 +57,7 @@ public class DefaultConfig
         formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font> {{vehicle}}"
       },
       statisticForm: {
-        showChances: false,     // Show game round win chances percentage.
+        showChances: true,      // Show game round win chances percentage.
         showChancesExp: false,  // Show experimental "chance to win" formula.
         removeSquadIcon: false, // Hide squad icon.
         // Playes/clan icon parameters.
@@ -98,21 +98,6 @@ public class DefaultConfig
           vehicleFormatLeft: "<font color='{{c:rating}}'>{{vehicle}}</font>",
           vehicleFormatRight: "<font color='{{c:rating}}'>{{vehicle}}</font>"
         }
-      },
-      turretMarkers: {
-        highVulnerability: " *",
-        lowVulnerability: " '"
-      },
-      hitLog: {
-        enabled: true,
-        x: 270,
-        y: 7,
-        w: 200,
-        h: 100,
-        lines: 1,
-        direction: "down",
-        format: "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <b>{{dmg}}</b>",
-        formatHistory: "{{n}}: {{dmg-total}} {{dmg}} {{vehicle}} {{dmg-kind}}"
       },
       markers: {
         ally: {
@@ -233,14 +218,7 @@ public class DefaultConfig
           enemy_dead_normal: "0x840500",
           enemy_dead_blind: "0x47407A",
           enemy_blowedup_normal: "0x5A0401",
-          enemy_blowedup_blind: "0x3B365F",
-          // me - my damage. used only in markers//damageText when damageSource = 'player'
-          me_alive_normal: "0xFFEE99",
-          me_alive_blind: "0xFFFFFF",
-          me_dead_normal: "0xFFDD33",
-          me_dead_blind: "0xDDDDDD",
-          me_blowedup_normal: "0xFFDD33",
-          me_blowedup_blind: "0xDDDDDD"
+          enemy_blowedup_blind: "0x3B365F"
         },
         vtype: {
           LT:  "0xA2FF9A",        // Color for light tanks
@@ -250,13 +228,6 @@ public class DefaultConfig
           TD:  "0xA0CFFF",        // Color for tank destroyers
           premium: "0xFFCC66",    // Color for premium tanks
           usePremiumColor: false  // Enable/disable premium color usage
-        },
-        dmg_kind: {
-          attack: "0xFFAA55",
-          fire: "0xFF6655",
-          ramming: "0x998855",
-          world_collision: "0x228855",
-          other: "0xCCCCCC"
         },
         // values - from min to max, colors are for values 'lesser then ...'
         hp: [
@@ -348,15 +319,15 @@ public class DefaultConfig
     return a;
   }
 
-  public static function get shadow_150(): Object
+  public static function get shadow_100(): Object
   {
     return {
       alpha: 100,
       color: "0x000000",
-      angle: 90,
-      distance: 0,
-      size: 4,
-      strength: 150
+      angle: 45,
+      distance: 1,
+      size: 2,
+      strength: 100
     }
   }
 
@@ -365,10 +336,22 @@ public class DefaultConfig
     return {
       alpha: 100,
       color: "0x000000",
-      angle: 90,
-      distance: 0,
-      size: 6,
+      angle: 45,
+      distance: 1,
+      size: 2,
       strength: 200
+    }
+  }
+
+  public static function get shadow_250(): Object
+  {
+    return {
+      alpha: 100,
+      color: "0x000000",
+      angle: 45,
+      distance: 1,
+      size: 2,
+      strength: 250
     }
   }
 
@@ -383,13 +366,13 @@ public class DefaultConfig
     }
   }
 
-  public static function get font_12(): Object
+  public static function get font_12b(): Object
   {
     return {
       name: "$FieldFont",
       size: 12,
       align: "center",
-      bold: false,
+      bold: true,
       italic: false
     }
   }
@@ -405,6 +388,17 @@ public class DefaultConfig
     }
   }
 
+  public static function get font_13b(): Object
+  {
+    return {
+      name: "$FieldFont",
+      size: 13,
+      align: "center",
+      bold: true,
+      italic: false
+    }
+  }
+
   public static function get font_14b(): Object
   {
     return {
@@ -412,17 +406,6 @@ public class DefaultConfig
       size: 14,
       align: "center",
       bold: true,
-      italic: false
-    }
-  }
-
-  public static function get font_18(): Object
-  {
-    return {
-      name: "$PartnerCondensed",
-      size: 18,
-      align: "center",
-      bold: false,
       italic: false
     }
   }
@@ -440,7 +423,7 @@ public class DefaultConfig
       maxScale: 100,
       scaleX: 0,
       scaleY: 16,
-      shadow: shadow_200
+      shadow: shadow_250
     }
   }
 
@@ -474,9 +457,30 @@ public class DefaultConfig
 
   public static function get hb_dead(): Object
   {
-    var hb:Object = hb_alive;
-    hb.visible = false;
-    return hb;
+    return {
+      visible: false,
+      x: -41,
+      y: -33,
+      alpha: 100,
+      color: null,
+      lcolor: null,
+      width: 80,
+      height: 12,
+      border: {
+        alpha: 30,
+        color: "0x000000",
+        size: 1
+      },
+      fill: {
+        alpha: 30,
+        color: null
+      },
+      damage: {
+        alpha: 80,
+        color: null,
+        fade: 1
+      }
+    }
   }
 
   // damageText
@@ -488,26 +492,12 @@ public class DefaultConfig
       y: -67,
       alpha: 100,
       color: null,
-      font: font_18,
-      shadow: shadow_200,
+      font: font_14b,
+      shadow: shadow_250,
       speed: 2,
       maxRange: 40,
       damageMessage: "{{dmg}}",
-      blowupMessage: "Blow-up!",
-      damageMessages: damageMessages,
-      blowupMessages: damageMessages
-    }
-  }
-
-  // damageMessages section
-  public static function get damageMessages(): Object
-  {
-    return {
-      unknown: null,
-      player: null,
-      ally: null,
-      squad: null,
-      enemy: null
+      blowupMessage: "Blow-up!"
     }
   }
 
@@ -606,7 +596,7 @@ public class DefaultConfig
       color: null,
       font: font_13,
       shadow: shadow_200,
-      format: "{{vehicle}}{{turret}}"
+      format: "{{vehicle}}"
     }
   }
 
@@ -636,7 +626,7 @@ public class DefaultConfig
       alpha: 100,
       color: "0xFFFFFF",
       font: font_11b,
-      shadow: shadow_150,
+      shadow: shadow_100,
       format: "{{hp}} / {{hp-max}}"
     }
   }
@@ -652,7 +642,7 @@ public class DefaultConfig
       alpha: 100,
       color: "0xFFFFFF",
       font: font_11b,
-      shadow: shadow_150,
+      shadow: shadow_100,
       format: "{{hp-ratio}}%"
     }
   }
@@ -665,10 +655,10 @@ public class DefaultConfig
       visible: true,
       x: 0,
       y: -46,
-      alpha: 100,
-      color: "{{c:rating}}",
-      font: font_11b,
-      shadow: shadow_150,
+      alpha: 75,
+      color: "{{c:eff}}",
+      font: font_12b,
+      shadow: shadow_200,
       format: "{{rating}}"
     }
   }

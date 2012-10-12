@@ -36,8 +36,7 @@ package utils
                 { value: "{{level}}", label: "level", icon: Embed.level },
                 { value: "{{rlevel}}", label: "rlevel", icon: Embed.rlevel },
                 { value: "{{dmg}}", label: "dmg", icon: Embed.dmg },
-                { value: "{{dmg-ratio}}", label: "dmg_ratio", icon: Embed.dmg_ratio },
-                { value: "{{turret}}", label: "turret", icon: Embed.turret }
+                { value: "{{dmg-ratio}}", label: "dmg_ratio", icon: Embed.dmg_ratio }
             ],
             // Statistics
             stats: [

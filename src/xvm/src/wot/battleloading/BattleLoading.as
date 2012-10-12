@@ -34,11 +34,14 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
         realClock  = new RealClock(form_mc);  // Realworld time at right side of TipField.
 
         GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
+
         Config.LoadConfig("BattleLoading.as");
     }
 
     private function onConfigLoaded()
     {
+        // CANT GET HERE
+        
         GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
         traceToProxyTerminal();
 

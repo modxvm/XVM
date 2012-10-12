@@ -6,7 +6,7 @@
  * Instead, the percent symbol should be written: \ u0025
  */
 {
-  "configVersion": "1.6.0", // Version of the config. Do not remove or change it unnecessarily.
+  "configVersion": "1.5.0", // Version of the config. Do not remove or change it unnecessarily.
   "editorVersion": "0.15",  // Version of the editor.
   // Common config options. All settings information in the mod not being used.
   "definition": {
@@ -36,7 +36,7 @@
   // Parameters of the Battle Loading Screen
   "battleLoading": {
     "clockFormat": "H:N:S",                     // Show the clock on the Battle Loading Screen. Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds. "" - remove clock.
-    "showChances": false,                       // true – Enable display of "chance to win" (only with XVM-full) Read more: http://www.koreanrandom.com/forum/topic/1642-chance
+    "showChances": true,                        // true – Enable display of "chance to win" (only with XVM-full) Read more: http://www.koreanrandom.com/forum/topic/1642-chance
     "showChancesExp": false,                    // Show experimental "chance to win" formula
     "removeSquadIcon": false,                   // true – Disable Platoon icons. This blank space can house, for example, clan logos
     "clanIcon": {                               // Display options for Team/Clan logos
@@ -56,7 +56,7 @@
   },
   // Parameters of the Battle Statistics Form
   "statisticForm": {
-    "showChances": false,     // true - Enable display of "chance to win" (only with XVM-full).
+    "showChances": true,      // true - Enable display of "chance to win" (only with XVM-full).
     "showChancesExp": false,  // Show experimental "chance to win" formula
     "removeSquadIcon": false, // true - Disable Platoon icons. This blank space can house, for example, clan logos.
     // Display options for Team/Clan logos (see battleLoading above)
@@ -99,25 +99,6 @@
       "vehicleFormatLeft": "<font color='{{c:eff}}'>{{vehicle}}</font>",
       "vehicleFormatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
     }
-  },
-  // {{turret}} marker display strings
-  "turretMarkers": {
-    "highVulnerability": " *", // Subject has stock turret and top gun can not be mounted. Subject is highly vulnerable.
-    "lowVulnerability": " '"   // Subject has stock turret and top gun can be mounted. Subject is somewhat vulnerable.
-  },
-  // Hit log (my hits calculator)
-  "hitLog": {
-    "enabled": true,     // on/off switch
-    "x": 270,            // X position
-    "y": 7,              // Y position
-    "w": 200,            // Width
-    "h": 100,            // Height
-    "lines": 1,          // Number of lines. Old lines will be pushed out
-    "direction": "down", // Log direction: up - lines will be added from up to down, down - from down to up.
-    // Last hit format (macros allowed, see readme-en.txt)
-    "format": "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <b>{{dmg}}</b>",
-    // Previous hits format (macros allowed, see readme-en.txt)
-    "formatHistory": "{{n}}: {{dmg-total}} {{dmg}} {{vehicle}} {{dmg-kind}}"
   },
   // OVER-TARGET MARKERS
   "markers": {
@@ -173,14 +154,13 @@
             "visible": true,                  //   false - Disable
             "x": 0,                           //   Position on the X axis
             "y": -67,                         //   Position on the Y axis
-            "animation": "set(alpha(1));set(shadow({blurX:6, blurY:6, alpha:0, strength:2, addFilter:true}));insert(fadeIn(0.3), 0);insert(tint(0.7, 0xFFFFFF), 0);insert(move(2, 40, 'up'), 0);append(fadeOut(0.5), -0.5)",
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$PartnerCondensed",    //     Font name
-              "size": 18,                     //     Font size
+              "name": "$FieldFont",           //     Font name
+              "size": 14,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": false,                  //     Normal (false) or bold (true)
+              "bold": true,                   //     Normal (false) or bold (true)
               "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
@@ -194,21 +174,7 @@
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
             "damageMessage": "{{dmg}}",       //   Text for normal damage (see description of macros in the readme-en.txt)
-            "blowupMessage": "Blow-up!",      //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
-            "damageMessages": {               //   Damage messages override for damage source (HTML and CSS allowed)
-               "unknown": null,               //     from unknown
-               "player": null,                //     from me
-               "ally": null,                  //     from ally
-               "squadman": null,              //     from squadman
-               "enemy": null                  //     from enemy
-            },
-            "blowupMessages": {               //   Blow up messages override for damage source (HTML and CSS allowed)
-               "unknown": null,               //     from unknown
-               "player": null,                //     from me
-               "ally": null,                  //     from ally
-               "squad": null,                 //     from squadman
-               "enemy": null                  //     from enemy
-            }
+            "blowupMessage": "Blow-up!"       //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
           "contourIcon": {                    // Vehicle icon
             "visible": false,                 //   false - Disable
@@ -262,7 +228,7 @@
                 "size": 6,                    //     Size
                 "strength": 200               //     Intensity
               },
-              "format": "{{vehicle}}{{turret}}" // Text format (see description of macros in the readme-en.txt)
+              "format": "{{vehicle}}"         // Text format (see description of macros in the readme-en.txt)
             },
             // Text field with the remaining / maximum health
             {
@@ -341,10 +307,10 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$PartnerCondensed",    //     Font name
-              "size": 18,                     //     Font size
+              "name": "$FieldFont",           //     Font name
+              "size": 14,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": false,                  //     Normal (false) or bold (true)
+              "bold": true,                   //     Normal (false) or bold (true)
               "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
@@ -358,21 +324,7 @@
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
             "damageMessage": "{{dmg}}",       //   Text for normal damage (see description of macros in the readme-en.txt)
-            "blowupMessage": "Blow-up!",      //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
-            "damageMessages": {               //   Damage messages override for damage source (HTML and CSS allowed)
-               "unknown": null,               //     from unknown
-               "player": null,                //     from me
-               "ally": null,                  //     from ally
-               "squadman": null,              //     from squadman
-               "enemy": null                  //     from enemy
-            },
-            "blowupMessages": {               //   Blow up messages override for damage source (HTML and CSS allowed)
-               "unknown": null,               //     from unknown
-               "player": null,                //     from me
-               "ally": null,                  //     from ally
-               "squad": null,                 //     from squadman
-               "enemy": null                  //     from enemy
-            }
+            "blowupMessage": "Blow-up!"       //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
           "contourIcon": {                    // Vehicle icon
             "visible": false,                 //   false - Disable
@@ -534,10 +486,10 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$PartnerCondensed",    //     Font name
-              "size": 18,                     //     Font size
+              "name": "$FieldFont",           //     Font name
+              "size": 14,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": false,                  //     Normal (false) or bold (true)
+              "bold": true,                   //     Normal (false) or bold (true)
               "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
@@ -551,21 +503,7 @@
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
             "damageMessage": "{{dmg}}",       //   Text for normal damage (see description of macros in the readme-en.txt)
-            "blowupMessage": "Blow-up!",      //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
-            "damageMessages": {               //   Damage messages override for damage source (HTML and CSS allowed)
-               "unknown": null,               //     from unknown
-               "player": null,                //     from me
-               "ally": null,                  //     from ally
-               "squadman": null,              //     from squadman
-               "enemy": null                  //     from enemy
-            },
-            "blowupMessages": {               //   Blow up messages override for damage source (HTML and CSS allowed)
-               "unknown": null,               //     from unknown
-               "player": null,                //     from me
-               "ally": null,                  //     from ally
-               "squad": null,                 //     from squadman
-               "enemy": null                  //     from enemy
-            }
+            "blowupMessage": "Blow-up!"       //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
           "contourIcon": {                    // Vehicle icon
             "visible": false,                 //   false - Disable
@@ -649,10 +587,10 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$PartnerCondensed",    //     Font name
-              "size": 18,                     //     Font size
+              "name": "$FieldFont",           //     Font name
+              "size": 14,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": false,                  //     Normal (false) or bold (true)
+              "bold": true,                   //     Normal (false) or bold (true)
               "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
@@ -666,21 +604,7 @@
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
             "damageMessage": "{{dmg}}",       //   Text for normal damage (see description of macros in the readme-en.txt)
-            "blowupMessage": "Blow-up!",      //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
-            "damageMessages": {               //   Damage messages override for damage source (HTML and CSS allowed)
-               "unknown": null,               //     from unknown
-               "player": null,                //     from me
-               "ally": null,                  //     from ally
-               "squadman": null,              //     from squadman
-               "enemy": null                  //     from enemy
-            },
-            "blowupMessages": {               //   Blow up messages override for damage source (HTML and CSS allowed)
-               "unknown": null,               //     from unknown
-               "player": null,                //     from me
-               "ally": null,                  //     from ally
-               "squad": null,                 //     from squadman
-               "enemy": null                  //     from enemy
-            }
+            "blowupMessage": "Blow-up!"       //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
           "contourIcon": {                    // Vehicle icon
             "visible": false,                 //   false - Disable
@@ -819,10 +743,10 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$PartnerCondensed",    //     Font name
-              "size": 18,                     //     Font size
+              "name": "$FieldFont",           //     Font name
+              "size": 14,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": false,                  //     Normal (false) or bold (true)
+              "bold": true,                   //     Normal (false) or bold (true)
               "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
@@ -836,21 +760,7 @@
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
             "damageMessage": "{{dmg}}",       //   Text for normal damage (see description of macros in the readme-en.txt)
-            "blowupMessage": "Blow-up!",      //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
-            "damageMessages": {               //   Damage messages override for damage source (HTML and CSS allowed)
-               "unknown": null,               //     from unknown
-               "player": null,                //     from me
-               "ally": null,                  //     from ally
-               "squadman": null,              //     from squadman
-               "enemy": null                  //     from enemy
-            },
-            "blowupMessages": {               //   Blow up messages override for damage source (HTML and CSS allowed)
-               "unknown": null,               //     from unknown
-               "player": null,                //     from me
-               "ally": null,                  //     from ally
-               "squad": null,                 //     from squadman
-               "enemy": null                  //     from enemy
-            }
+            "blowupMessage": "Blow-up!"       //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
           "contourIcon": {                    // Vehicle icon
             "visible": false,                 //   false - Disable
@@ -904,7 +814,7 @@
                 "size": 6,                    //     Size
                 "strength": 200               //     Intensity
               },
-              "format": "{{vehicle}}{{turret}}" // Text format (see description of macros in the readme-en.txt)
+              "format": "{{vehicle}}"         // Text format (see description of macros in the readme-en.txt)
             },
             // Text field with the remaining / maximum health
             {
@@ -983,10 +893,10 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$PartnerCondensed",    //     Font name
-              "size": 18,                     //     Font size
+              "name": "$FieldFont",           //     Font name
+              "size": 14,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": false,                  //     Normal (false) or bold (true)
+              "bold": true,                   //     Normal (false) or bold (true)
               "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
@@ -1000,21 +910,7 @@
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
             "damageMessage": "{{dmg}}",       //   Text for normal damage (see description of macros in the readme-en.txt)
-            "blowupMessage": "Blow-up!",      //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
-            "damageMessages": {               //   Damage messages override for damage source (HTML and CSS allowed)
-               "unknown": null,               //     from unknown
-               "player": null,                //     from me
-               "ally": null,                  //     from ally
-               "squadman": null,              //     from squadman
-               "enemy": null                  //     from enemy
-            },
-            "blowupMessages": {               //   Blow up messages override for damage source (HTML and CSS allowed)
-               "unknown": null,               //     from unknown
-               "player": null,                //     from me
-               "ally": null,                  //     from ally
-               "squad": null,                 //     from squadman
-               "enemy": null                  //     from enemy
-            }
+            "blowupMessage": "Blow-up!"       //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
           "contourIcon": {                    // Vehicle icon
             "visible": false,                 //   false - Disable
@@ -1176,10 +1072,10 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$PartnerCondensed",    //     Font name
-              "size": 18,                     //     Font size
+              "name": "$FieldFont",           //     Font name
+              "size": 14,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": false,                  //     Normal (false) or bold (true)
+              "bold": true,                   //     Normal (false) or bold (true)
               "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
@@ -1193,21 +1089,7 @@
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
             "damageMessage": "{{dmg}}",       //   Text for normal damage (see description of macros in the readme-en.txt)
-            "blowupMessage": "Blow-up!",      //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
-            "damageMessages": {               //   Damage messages override for damage source (HTML and CSS allowed)
-               "unknown": null,               //     from unknown
-               "player": null,                //     from me
-               "ally": null,                  //     from ally
-               "squadman": null,              //     from squadman
-               "enemy": null                  //     from enemy
-            },
-            "blowupMessages": {               //   Blow up messages override for damage source (HTML and CSS allowed)
-               "unknown": null,               //     from unknown
-               "player": null,                //     from me
-               "ally": null,                  //     from ally
-               "squad": null,                 //     from squadman
-               "enemy": null                  //     from enemy
-            }
+            "blowupMessage": "Blow-up!"       //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
           "contourIcon": {                    // Vehicle icon
             "visible": false,                 //   false - Disable
@@ -1291,10 +1173,10 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$PartnerCondensed",    //     Font name
-              "size": 18,                     //     Font size
+              "name": "$FieldFont",           //     Font name
+              "size": 14,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": false,                  //     Normal (false) or bold (true)
+              "bold": true,                   //     Normal (false) or bold (true)
               "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
@@ -1308,21 +1190,7 @@
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
             "damageMessage": "{{dmg}}",       //   Text for normal damage (see description of macros in the readme-en.txt)
-            "blowupMessage": "Blow-up!",      //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
-            "damageMessages": {               //   Damage messages override for damage source (HTML and CSS allowed)
-               "unknown": null,               //     from unknown
-               "player": null,                //     from me
-               "ally": null,                  //     from ally
-               "squadman": null,              //     from squadman
-               "enemy": null                  //     from enemy
-            },
-            "blowupMessages": {               //   Blow up messages override for damage source (HTML and CSS allowed)
-               "unknown": null,               //     from unknown
-               "player": null,                //     from me
-               "ally": null,                  //     from ally
-               "squad": null,                 //     from squadman
-               "enemy": null                  //     from enemy
-            }
+            "blowupMessage": "Blow-up!"       //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
           "contourIcon": {                    // Vehicle icon
             "visible": false,                 //   false - Disable
@@ -1434,14 +1302,7 @@
       "enemy_dead_normal": "0x840500",             // Enemy - dead
       "enemy_dead_blind": "0x47407A",              // Enemy – dead – color blind mode
       "enemy_blowedup_normal": "0x5A0401",         // Enemy – blow-up
-      "enemy_blowedup_blind": "0x3B365F",          // Enemy – blow-up – color blind mode
-      // me - my damage. used only in markers//damageText when damageSource = 'player'
-      "me_alive_normal": "0xFFEE99",               // My damage to alive target
-      "me_alive_blind": "0xFFFFFF",                // My damage to alive target - color blind mode
-      "me_dead_normal": "0xFFDD33",                // My final damage
-      "me_dead_blind": "0xDDDDDD",                 // My final damage - color blind mode
-      "me_blowedup_normal": "0xFFDD33",            // My final damage with blowup
-      "me_blowedup_blind": "0xDDDDDD"              // My final damage with blowup - color blind mode
+      "enemy_blowedup_blind": "0x3B365F"           // Enemy – blow-up – color blind mode
     },
     // Dynamic color for vehicle type
     "vtype": {
@@ -1452,14 +1313,6 @@
       "TD":  "0xA0CFFF",                           // Color for tank destroyers
       "premium": "0xFFCC66",                       // Color for premium tanks
       "usePremiumColor": false                     // Enable/disable premium color usage
-    },
-    // Damage kind
-    "dmg_kind": {
-      "attack": "0xFFAA55",                        // attack
-      "fire": "0xFF6655",                          // fire
-      "ramming": "0x998855",                       // ramming
-      "world_collision": "0x228855",               // world_collision
-      "other": "0xCCCCCC"                          // other
     },
     // Dynamic color for remaining health
     "hp": [
@@ -1779,5 +1632,10 @@
     "ussr_T_54": null,
     "ussr_Tetrarch_LL": null,
     "ussr_Valentine_LL": null
+  },
+  // {{turret}} marker display strings
+  "turretMarkers": {
+    "highVulnerability": "*", // Subject has stock turret and top gun can not be mounted. Subject is highly vulnerbale.
+    "lowVulnerability": "-"   // Subject has stock turret and top gun can be mounted. Subject is somewhat vulnerbale.
   }
 }

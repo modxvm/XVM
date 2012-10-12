@@ -2,7 +2,6 @@
  * ...
  * @author Maxim Schedriviy
  */
-import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.GraphicsUtil;
 import wot.utils.StatFormat;
@@ -24,7 +23,7 @@ class wot.utils.TextCache
     return s_textCache[key];
   }
 
-  public static function FormatNoCache(key: String, data: Object, format: String, width: Number, tf: TextFormat, deadState: Number): String
+  public static function Format(key: String, data: Object, format: String, width: Number, tf: TextFormat, deadState: Number): String
   {
     TextCache.data = data;
     TextCache.state = state;
@@ -32,13 +31,9 @@ class wot.utils.TextCache
     TextCache.width = width;
     TextCache.tf = tf;
 
-    return FormatText(deadState == Defines.DEADSTATE_DEAD);
-  }
-
-  public static function Format(key: String, data: Object, format: String, width: Number, tf: TextFormat, deadState: Number): String
-  {
     if (!s_textCache.hasOwnProperty(key))
-      s_textCache[key] = FormatNoCache(key, data, format, width, tf, deadState);
+      s_textCache[key] = FormatText(deadState == Defines.DEADSTATE_DEAD);
+
     return s_textCache[key];
   }
 
@@ -63,7 +58,6 @@ class wot.utils.TextCache
           s_widthTester = _root.createTextField("widthTester", _root.getNextHighestDepth(), 0, 0, 268, 20);
           s_widthTester.autoSize = false;
           s_widthTester.html = true;
-          s_widthTester.styleSheet = Config.s_style;
           s_widthTester.condenseWhite = true;
           s_widthTester._visible = false;
           s_widthTester.setNewTextFormat(tf);

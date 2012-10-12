@@ -99,9 +99,13 @@ private function onLoadComplete2(e:Event):void
     }
     finally
     {
-        needRefreshVehicleNamesPage = true;
         mergeDialog = null;
     }
+}
+
+private function clenupConfig(config:*, data:XMLList):*
+{
+
 }
 
 private function onLoadError(e:IOErrorEvent):void

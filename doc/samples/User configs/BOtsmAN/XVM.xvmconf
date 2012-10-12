@@ -13,7 +13,7 @@
     "showPostmortemTips": false,
     "drawGrid": false,
     "hideXVMVersion": true,
-    "clockFormat": "",
+    "clockFormat": "",     
     "useStandardMarkers": false
   },
   "rating": {
@@ -21,24 +21,22 @@
     "loadEnemyStatsInFogOfWar": true
   },
   "battleLoading": {
-    "showChances": true,
-    "showChancesExp": true,
-    "clockFormat": "Potato Time - H:N",
+    "showChancesExp": true,   
+    "clockFormat": "Potato Time - H:N",     
     "clanIcon": { "show": true, "x": -348, "y": 2, "h": 20, "w": 20, "alpha": 100 },
     "formatLeft": "{{vehicle}} {{kb}} {{eff}} <font color='{{c:rating}}'>{{rating}}</font>",
     "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> {{eff}} {{kb}} {{vehicle}}"
   },
   "statisticForm": {
-    "showChances": true,
-    "showChancesExp": true,
+    "showChancesExp": true, 
     "clanIcon": { "show": true, "x": -348, "y": 2, "h": 20, "w": 20, "alpha": 100 },
     "formatLeft": "{{vehicle}} {{kb}} {{eff}} <font color='{{c:rating}}'>{{rating}}</font>",
     "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> {{eff}} {{kb}} {{vehicle}}"
   },
   "playersPanel": {
     "alpha": 80,
-    "removeSquadIcon": true,
-    "clanIcon": { "show": false, "x": 85, "y": 4, "h": 16, "w": 16, "alpha": 100 },
+    "removeSquadIcon": true, 
+    "clanIcon": { "show": false, "x": 85, "y": 4, "h": 16, "w": 16, "alpha": 100 },            
     "medium": {
      "width": 70,
       "formatLeft": "<font color='{{c:rating}}'>{{rating}}</font> {{vehicle}}",

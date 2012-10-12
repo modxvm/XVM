@@ -1,29 +1,4 @@
-﻿XVM-3.0.4.alpha9:
-  * scripts for animation effects (file XVM.xs)
-  * added default SixthSense.png (thanks 7serafim7)
-
-XVM-3.0.4.alpha8:
-  * support of HTML/CSS in any text field, including vehicle markers
-
-XVM-3.0.4.alpha7:
-  * some optimization
-  * the default font of floating damage is the same as in the default client
-
-XVM-3.0.4.alpha6:
-  * fix config (add system colors)
-  * enable flashing in damage animation
-
-XVM-3.0.4.alpha5:
-  * fixed {{turret}} marker significance for t29, t32, m10_wolverine, pzii, pzvib_tiger_ii, vk4502a
-  * stock turret marker added to the default config (after vehicle name)
-  * wot-xvm-proxy renamed to xvm-stat
-  * xvm-stat is distributed separately from XVM
-  * new feature: Hit Log (my hits calculation)
-  * CSS: XVM.css contains global stylesheet, which can be used in any text
-    field with html text
-  * flexible adjustment of the text of damage depending on the source of damage
-
-XVM-3.0.3:
+﻿XVM-3.0.3:
   * added possibility to change {{turret}} marker display string
   * fixed {{turret}} marker calculations for a-20, bt-7, d2, m7_med, pziv, t2_med
   * fixed {{turret}} marker significance for Patton and Pershing

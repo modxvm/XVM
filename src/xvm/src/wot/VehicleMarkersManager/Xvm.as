@@ -1,8 +1,6 @@
 ﻿/**
  * Main XVM class, implements workflow logic.
  */
-import com.greensock.OverwriteManager;
-import com.greensock.plugins.*;
 import wot.utils.Config;
 import wot.utils.GlobalEventDispatcher;
 import wot.utils.StatData;
@@ -15,14 +13,15 @@ import wot.VehicleMarkersManager.VehicleMarkerProxy;
 import wot.VehicleMarkersManager.VehicleState;
 import wot.VehicleMarkersManager.VehicleStateProxy;
 import wot.VehicleMarkersManager.XvmBase;
+import wot.VehicleMarkersManager.XvmHelper;
 import wot.VehicleMarkersManager.components.ActionMarkerComponent;
 import wot.VehicleMarkersManager.components.ActionMarkerProxy;
 import wot.VehicleMarkersManager.components.ClanIconComponent;
 import wot.VehicleMarkersManager.components.ClanIconProxy;
 import wot.VehicleMarkersManager.components.ContourIconComponent;
 import wot.VehicleMarkersManager.components.ContourIconProxy;
-import wot.VehicleMarkersManager.components.damage.DamageTextComponent;
-import wot.VehicleMarkersManager.components.damage.DamageTextProxy;
+import wot.VehicleMarkersManager.components.DamageTextComponent;
+import wot.VehicleMarkersManager.components.DamageTextProxy;
 import wot.VehicleMarkersManager.components.HealthBarComponent;
 import wot.VehicleMarkersManager.components.HealthBarProxy;
 import wot.VehicleMarkersManager.components.LevelIconComponent;
@@ -57,14 +56,6 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
 
         // initialize ColorsManager for detecting color blind mode
         ColorsManager.initialize();
-
-        // initialize TweenLite
-        OverwriteManager.init(OverwriteManager.AUTO);
-        TweenPlugin.activate([AutoAlphaPlugin, BevelFilterPlugin, BezierPlugin, BezierThroughPlugin, BlurFilterPlugin,
-            CacheAsBitmapPlugin, ColorMatrixFilterPlugin, ColorTransformPlugin, DropShadowFilterPlugin, EndArrayPlugin,
-            FrameBackwardPlugin, FrameForwardPlugin, FrameLabelPlugin, FramePlugin, GlowFilterPlugin,
-            HexColorsPlugin, QuaternionsPlugin, RemoveTintPlugin, RoundPropsPlugin, ScalePlugin, ScrollRectPlugin,
-            SetSizePlugin, ShortRotationPlugin, TintPlugin, TransformMatrixPlugin, VisiblePlugin, VolumePlugin]);
     }
 
     /**
@@ -178,37 +169,36 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     /**
      * @see IVehicleMarker
      */
-    function updateHealth(newHealth, flag, damageType)
+    function updateHealth(newHealth, flag, damageTypeStr)
     {
-        /*
+        /* 
          * newHealth:
          *  1497, 499, 0 and -1 in case of ammo blow up
          * flag - int:
          * 0 - "FROM_UNKNOWN", 1 - "FROM_ALLY", 2 - "FROM_ENEMY", 3 - "FROM_SQUAD", 4 - "FROM_PLAYER"
-         *
+         * 
          * damageType - string:
          *  "attack", "fire", "ramming", "world_collision", "death_zone", "drowning", "explosion"
          */
-
-        //Logger.add("Xvm::updateHealth(" + flag + ", " + damageType + ", " + newHealth +")");
-
+        
+        //Logger.add("Xvm::updateHealth(" + flag + ", " + damageTypeStr + ", " + newHealth +")");
+        
+        var damageType:Number = XvmHelper.translateDmgToConst(damageTypeStr);
+        
         if (newHealth < 0)
             s_blowedUp[m_playerFullName] = true;
-
+            
         m_isDead = newHealth <= 0;
 
         var delta: Number = newHealth - m_curHealth;
         m_curHealth = m_isDead ? 0 : newHealth; // fixes "-1"
-
+        
         if (delta < 0) // Damage has been done
         {
-            // markers{ally{alive{normal
-            var vehicleStateCfg:Object = vehicleState.getCurrentConfig();
-
-            healthBarComponent.updateState(vehicleStateCfg);
-            healthBarComponent.showDamage(vehicleStateCfg, newHealth, m_maxHealth, -delta);
-
-            damageTextComponent.showDamage(vehicleStateCfg.damageText, newHealth, -delta, flag, damageType);
+            var cfg = vehicleState.getCurrentConfig();
+            healthBarComponent.updateState(cfg);
+            healthBarComponent.showDamage(cfg, newHealth, m_maxHealth, -delta);
+            damageTextComponent.showDamage(vehicleState.getCurrentConfig(), newHealth, -delta, flag, damageType);
         }
 
         XVMUpdateDynamicTextFields();
@@ -287,11 +277,9 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
                 for (var i in textFields[st])
                 {
                     var tf = textFields[st][i];
-                    //tf.field.text = formatDynamicText(tf.format, m_curHealth);
-                    //tf.field.textColor = formatDynamicColor(tf.color, m_curHealth);
-                    tf.field.htmlText = "<textformat leading='-2'><p class='xvm_markerText'>" +
-                        formatDynamicText(tf.format, m_curHealth) + "</p></textformat>";
-
+                    tf.field.text = formatDynamicText(tf.format, m_curHealth);
+                    //tf.field.htmlText = "<p align='center'><font face='$FieldFont'>" + formatDynamicText(tf.format, curHealth) + "</font></p>";
+                    tf.field.textColor = formatDynamicColor(tf.color, m_curHealth);
                     tf.field._alpha = formatDynamicAlpha(tf.alpha, m_curHealth);
                 }
             }

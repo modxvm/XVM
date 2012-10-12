@@ -3,7 +3,6 @@
  * @author sirmax2
  */
 import wot.utils.Defines;
-import wot.utils.DefaultConfig;
 import wot.utils.GlobalEventDispatcher;
 import wot.utils.Locale;
 import wot.utils.Logger;
@@ -11,22 +10,14 @@ import wot.utils.Utils;
 
 class wot.utils.Config
 {
-    // Public vars
+    public static var DEBUG_TIMES = false;
+    public static var DEBUG_TUNING = false;
+
+    // Private vars
     public static var s_config: Object;
-    public static var s_style:TextField.StyleSheet;
-    public static var s_css:String = null;
-    public static var s_xs:String = null;
     public static var s_loaded: Boolean = false;
     public static var s_proxy_available: Boolean = true;
     public static var s_game_region: String = null;
-
-    private static var STYLE_FILENAME = "XVM.css";
-    private static var XS_FILENAME = "XVM.xs";
-
-    private static var DEBUG_TIMES = false;
-    private static var DEBUG_TUNING = false;
-
-    // Private vars
     private static var s_loading: Boolean = false;
     private static var s_load_legacy_config: Boolean = false;
     private static var s_config_filename: String = "";
@@ -43,77 +34,18 @@ class wot.utils.Config
             GlobalEventDispatcher.dispatchEvent({type: "config_loaded"});
             return;
         }
-
-        if (s_loading)
-            return;
-        s_loading = true;
-
         s_src = src || "";
         s_config_filename = filename || Defines.DEFAULT_CONFIG_NAME;
         s_load_legacy_config = legacy ? true : false;
-
-        ReloadCSS();
-    }
-
-    private static function ReloadCSS()
-    {
-        //Logger.add("TRACE: Config.ReloadCSS()");
-        Config.s_style = new TextField.StyleSheet();
-
-        var lv:LoadVars = new LoadVars();
-        lv.onData = function(str: String)
-        {
-//Logger.add("Config.ReloadCSS::onData::start");
-            var finallyBugWorkaround: Boolean = false;
-            try
-            {
-                Config.s_css = str;
-                if (!Config.s_style.parseCSS(str))
-                    GlobalEventDispatcher.dispatchEvent( { type: "set_info", warning: "Error parsing XVM.css" } );
-                else
-                    GlobalEventDispatcher.dispatchEvent( { type: "set_info" } );
-            }
-            finally
-            {
-//Logger.add("Config.ReloadCSS::onData::finally:start");
-                if (finallyBugWorkaround)
-                    return;
-                finallyBugWorkaround = true;
-                Config.ReloadXS();
-//Logger.add("Config.ReloadCSS::onData::finally::end");
-            }
-//Logger.add("Confige.ReloadCSS::onData::end");
-        };
-        lv.load(STYLE_FILENAME);
-    }
-
-    private static function ReloadXS()
-    {
-        //Logger.add("TRACE: Config.ReloadXS()");
-        Config.s_xs = "";
-
-        var lv:LoadVars = new LoadVars();
-        lv.onData = function(str: String)
-        {
-            var finallyBugWorkaround: Boolean = false;
-            try
-            {
-                Config.s_xs = str || DefaultConfig.DefaultXS;
-            }
-            finally
-            {
-                if (finallyBugWorkaround)
-                    return;
-                finallyBugWorkaround = true;
-                Config.ReloadConfig();
-            }
-        };
-        lv.load(XS_FILENAME);
+        ReloadConfig();
     }
 
     private static function ReloadConfig()
     {
         //Logger.add("TRACE: Config.ReloadConfig()");
+        if (s_loading)
+            return;
+        s_loading = true;
 
         Config.s_config = wot.utils.DefaultConfig.config;
         if (s_load_legacy_config)
@@ -237,9 +169,9 @@ class wot.utils.Config
 
                 if (!config)
                 {
-                    var text = "Error parsing config file. Using default settings.";
-                    GlobalEventDispatcher.dispatchEvent( { type: "set_info", error: text } );
-                    Logger.add(text);
+                    GlobalEventDispatcher.dispatchEvent( {
+                        type: "set_info",
+                        error: "Error parsing config file. Using default settings." } );
                 }
                 else
                 {
@@ -250,6 +182,7 @@ class wot.utils.Config
                         var curr = Utils.elapsedMSec(start, new Date());
                         Logger.add("DEBUG TIME: ReloadXvmConfig(): Apply: " + (curr - diff) + " ms");
                     }
+                    GlobalEventDispatcher.dispatchEvent({ type: "set_info" }); // Just show version
                 }
             }
             catch (ex)
@@ -265,11 +198,9 @@ class wot.utils.Config
                 while (tail.indexOf("  ") != -1)
                     tail = tail.split("  ").join(" ");
 
-                var text:String = "Error loading config file: " +
+                GlobalEventDispatcher.dispatchEvent({ type: "set_info", error: "Error loading config file: " +
                     "[" + ex.at + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " +
-                    head + ">>>" + str.charAt(ex.at) + "<<<" + tail;
-                GlobalEventDispatcher.dispatchEvent( { type: "set_info", error: text } );
-                Logger.add(String(text).substr(0, 200));
+                    head + ">>>" + str.charAt(ex.at) + "<<<" + tail });
             }
         }
         else

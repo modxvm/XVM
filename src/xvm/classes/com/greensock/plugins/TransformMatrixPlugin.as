@@ -7,7 +7,7 @@
 import com.greensock.*;
 import com.greensock.plugins.*;
 
-//import flash.display.*;
+import flash.display.*;
 import flash.geom.*;
 /**
  * TransformMatrixPlugin allows you to tween a MovieClip's transform.matrix values directly 

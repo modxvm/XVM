@@ -4,9 +4,9 @@
     "author": "sirmax2",
     "description": "Sirmax's settings for XVM",
     "url": "http://code.google.com/p/wot-xvm/",
-    "date": "10.10.2012",
-    "gameVersion": "0.8.0",
-    "modMinVersion": "3.0.4"
+    "date": "30.07.2012",
+    "gameVersion": "0.7.5",
+    "modMinVersion": "2.5"
   },
   "battle": {
     "mirroredVehicleIcons": false,
@@ -22,19 +22,18 @@
     "loadEnemyStatsInFogOfWar": true
   },
   "battleLoading": {
-    "showChances": true,
     "showChancesExp": true,
     "removeSquadIcon": false,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft": "{{vehicle}} <span class='mono'><font color='{{c:t-battles}}'>{{t-hb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></span>",
-    "formatRight": "<span class='mono'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-battles}}'>{{t-hb:3}}</font></span> {{vehicle}}"
+    "formatLeft": "{{vehicle}} <font face='Consolas' size='11'><font color='{{c:t-battles}}'>{{t-hb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
+    "formatRight": "<font face='Consolas' size='11'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-battles}}'>{{t-hb:3}}</font></font> {{vehicle}}"
   },
   "statisticForm": {
     "showChances": true,
     "showChancesExp": true,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft": "{{vehicle}} <span class='mono'><font color='{{c:kb}}'>{{t-hb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></span>",
-    "formatRight": "<span class='mono'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{t-hb:3}}</font></span> {{vehicle}}"
+    "formatLeft": "{{vehicle}} <font face='Consolas' size='11'><font color='{{c:kb}}'>{{t-hb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
+    "formatRight": "<font face='Consolas' size='11'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{t-hb:3}}</font></font> {{vehicle}}"
   },
   "playersPanel": {
     "alpha": 50,
@@ -56,22 +55,6 @@
       "vehicleFormatRight": ""
     }
   },
-  "turretMarkers": {
-    "highVulnerability": " *",
-    "lowVulnerability": " '"
-  },
-  "hitLog": {
-    "enabled": true,
-    "x": 270,
-    "y": 7,
-    "w": 500,
-    "h": 200,
-    "lines": 1,
-    "direction": "down",
-    "format": "<span class='lbl'>Hits:</span> <font size='13'>#{{n}}</font> {{dmg-total}} <b>{{dmg}}</b>",
-    "formatHistory": "<textformat tabstops='[30,80,160,250]'>{{n}}:\t{{dmg-total}} |\t{{dmg}} |\t{{dmg-kind}} |\t{{vehicle}}</textformat>"
-
-  },
   "markers": {
     "ally": {
       "alive": {
@@ -87,43 +70,41 @@
             "color": null,
             "amount": 30
           },
-          "healthBar": {
-            "visible": true,
-            "x": -21, "y": -23, "width": 40, "height": 3, "alpha": 100,
-            "border": { "color": "0x000000", "alpha": 50, "size": 1 },
-            "fill": { "alpha": 80 },
-            "damage": { "color": null, "alpha": 30, "fade": 1 }
-          },
           "damageText": {
-            "y": -55,
             "damageMessage": "{{dmg}}"
-          },
-          "actionMarker": {
-            "y": -55
           },
           "textFields": [
             {
               "visible": true,
               "name": "Vehicle Name",
-              "x": 0, "y": -26,
+              "x": 0, "y": -26, "alpha": 100, "color": null,
+              "font": { "name": "$FieldFont", "size": 13, "align": "center", "bold": false },
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-              "format": "<span class='m'>{{vehicle}}{{turret}}</span>"
+              "format": "{{vehicle}}"
             },
             {
               "visible": true,
-              "name": "Dynamic HP",
-              "x": 0, "y": -39, "alpha": "{{a:hp}}",
+              "name": "HP",
+              "x": 0, "y": -39, "alpha": "{{a:hp}}", "color": "{{c:hp}}",
+              "font": { "name": "$FieldFont", "size": 11, "align": "center", "bold": true },
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<span class='m_hp'><font color='{{c:hp}}'>{{hp}}</font></span>"
+              "format": "{{hp}}"
             },
+/*            {
+              "visible": true,
+              "name": "T-Rating mark",
+              "x": -3, "y": -11, "alpha": 100, "color": "{{c:t-rating}}",
+              "font": { "name": "Symbol", "size": 12, "align": "center", "bold": true },
+              "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 100, "distance": 0, "size": 1 },
+              "format": "·"
+            },*/
             {
               "visible": true,
-              "name": "Rating marks",
-              "x": 25, "y": -15,
-              "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<span class='m_stat_mark'><font color='{{c:eff}}'>·</font>"
-// miltiline example:
-//            "format": "<textformat leading='-7'><span class='m_stat_mark'><font color='{{c:eff}}'>·</font><br><font color='{{c:t-rating}}'>·</font><br><font color='{{c:t-battles}}'>·</font></span></textformat>"
+              "name": "Efficiency mark",
+              "x": 25, "y": -16, "alpha": 100, "color": "{{c:eff}}",
+              "font": { "name": "Symbol", "size": 12, "align": "center", "bold": true },
+              "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 100, "distance": 0, "size": 1 },
+              "format": "·"
             }
           ]
         },
@@ -139,48 +120,14 @@
             "color": null,
             "amount": 50
           },
-          "healthBar": {
-            "visible": true,
-            "x": -21, "y": -23, "width": 40, "height": 3, "alpha": 100,
-            "border": { "color": "0x000000", "alpha": 50, "size": 1 },
-            "fill": { "alpha": 80 },
-            "damage": { "color": null, "alpha": 30, "fade": 1 }
-          },
           "damageText": {
-            "y": -55,
             "damageMessage": "{{dmg}}"
-          },
-          "actionMarker": {
-            "y": -55
           },
           "clanIcon": {
             "visible": true,
             "x": 0,
             "y": -67
-          },
-          "textFields": [
-            {
-              "visible": true,
-              "name": "Player Name",
-              "x": 0, "y": -26,
-              "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-              "format": "<span class='m'>{{nick}}</span>"
-            },
-            {
-              "visible": true,
-              "name": "HP",
-              "x": 0, "y": -39, "color": "0xD9FFB3",
-              "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<span class='m_hp'>{{hp}} / {{hp-max}}</span>"
-            },
-            {
-              "visible": true,
-              "name": "Tank Rating",
-              "x": 0, "y": -50, "alpha": 75,
-              "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<span class='m_stat'><font color='{{c:eff}}'>{{t-rating}}</font>"
-            }
-          ]
+          }
         }
       },
       "dead": {
@@ -189,12 +136,9 @@
             "maxScale": 80
           },
           "damageText": {
-            "y": -55,
+            "color": "0x33FF33",
             "damageMessage": "({{dmg}})",
             "blowupMessage": "Blow-up!"
-          },
-          "actionMarker": {
-            "y": -55
           }
         },
         "extended": {
@@ -202,29 +146,10 @@
             "maxScale": 80
           },
           "damageText": {
-            "y": -55,
+            "color": "0x33FF33",
             "damageMessage": "({{dmg}})",
             "blowupMessage": "Blow-up!"
-          },
-          "actionMarker": {
-            "y": -55
-          },
-          "textFields": [
-            {
-              "visible": true,
-              "name": "Vehicle Name",
-              "x": 0, "y": -18, "alpha": 80,
-              "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-              "format": "<span class='m'><font color='#7BEC37'>{{vehicle}}</font></span>"
-            },
-            {
-              "visible": true,
-              "name": "Player Name",
-              "x": 0, "y": -32, "alpha": 80,
-              "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-              "format": "<span class='m'><font color='#B2EE37'>{{nick}}</font></span>"
-            }
-          ]
+          }
         }
       }
     },
@@ -242,41 +167,41 @@
             "color": null,
             "amount": 50
           },
-          "healthBar": {
-            "visible": true,
-            "x": -21, "y": -23, "width": 40, "height": 3, "alpha": 100,
-            "border": { "color": "0x000000", "alpha": 50, "size": 1 },
-            "fill": { "alpha": 80 },
-            "damage": { "color": null, "alpha": 30, "fade": 1 }
-          },
           "damageText": {
-            "y": -55,
             "damageMessage": "{{dmg}}"
-          },
-          "actionMarker": {
-            "y": -55
           },
           "textFields": [
             {
               "visible": true,
               "name": "Vehicle Name",
-              "x": 0, "y": -26,
+              "x": 0, "y": -26, "alpha": 100, "color": null,
+              "font": { "name": "$FieldFont", "size": 13, "align": "center", "bold": false },
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-              "format": "<span class='m'>{{vehicle}}{{turret}}</span>"
+              "format": "{{vehicle}}"
             },
             {
               "visible": true,
               "name": "HP",
-              "x": 0, "y": -39, "alpha": "{{a:hp}}",
+              "x": 0, "y": -39, "alpha": "{{a:hp}}", "color": "{{c:hp}}",
+              "font": { "name": "$FieldFont", "size": 11, "align": "center", "bold": true },
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<span class='m_hp'><font color='{{c:hp}}'>{{hp}}</font></span>"
+              "format": "{{hp}}"
             },
+/*            {
+              "visible": true,
+              "name": "T-Rating mark",
+              "x": -3, "y": -11, "alpha": 100, "color": "{{c:t-rating}}",
+              "font": { "name": "Symbol", "size": 12, "align": "center", "bold": true },
+              "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 100, "distance": 0, "size": 1 },
+              "format": "·"
+            },*/
             {
               "visible": true,
-              "name": "Rating marks",
-              "x": 25, "y": -15,
-              "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<span class='m_stat_mark'><font color='{{c:eff}}'>·</font>"
+              "name": "Efficiency mark",
+              "x": 25, "y": -16, "alpha": 100, "color": "{{c:eff}}",
+              "font": { "name": "Symbol", "size": 12, "align": "center", "bold": true },
+              "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 100, "distance": 0, "size": 1 },
+              "format": "·"
             }
           ]
         },
@@ -292,48 +217,14 @@
             "color": null,
             "amount": 50
           },
-          "healthBar": {
-            "visible": true,
-            "x": -21, "y": -23, "width": 40, "height": 3, "alpha": 100,
-            "border": { "color": "0x000000", "alpha": 50, "size": 1 },
-            "fill": { "alpha": 80 },
-            "damage": { "color": null, "alpha": 30, "fade": 1 }
-          },
           "damageText": {
-            "y": -55,
             "damageMessage": "{{dmg}}"
-          },
-          "actionMarker": {
-            "y": -55
           },
           "clanIcon": {
             "visible": true,
             "x": 0,
             "y": -67
-          },
-          "textFields": [
-            {
-              "visible": true,
-              "name": "Player Name",
-              "x": 0, "y": -26,
-              "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-              "format": "<span class='m'>{{nick}}</span>"
-            },
-            {
-              "visible": true,
-              "name": "HP",
-              "x": 0, "y": -39,
-              "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<span class='m_hp'><font color='{{c:hp-ratio}}'>{{hp}} / {{hp-max}}</font></span>"
-            },
-            {
-              "visible": true,
-              "name": "Tank Rating",
-              "x": 0, "y": -50, "alpha": 75,
-              "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<span class='m_stat'><font color='{{c:eff}}'>{{t-rating}}</font>"
-            }
-          ]
+          }
         }
       },
       "dead": {
@@ -342,12 +233,9 @@
             "maxScale": 80
           },
           "damageText": {
-            "y": -65,
-            "damageMessage": "<textformat leading='-5'>({{dmg}})<br>{{vehicle}}</textformat>",
-            "blowupMessage": "<textformat leading='-5'>Blow-up!<br>{{vehicle}}</textformat>"
-          },
-          "actionMarker": {
-            "y": -55
+            "color": "0xFF3333",
+            "damageMessage": "({{dmg}})",
+            "blowupMessage": "Blow-up!"
           }
         },
         "extended": {
@@ -355,29 +243,10 @@
             "maxScale": 80
           },
           "damageText": {
-            "y": -55,
+            "color": "0xFF3333",
             "damageMessage": "({{dmg}})",
             "blowupMessage": "Blow-up!"
-          },
-          "actionMarker": {
-            "y": -55
-          },
-          "textFields": [
-            {
-              "visible": true,
-              "name": "Vehicle Name",
-              "x": 0, "y": -18, "alpha": 80,
-              "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-              "format": "<span class='m'><font color='#EC3737'>{{vehicle}}</font></span>"
-            },
-            {
-              "visible": true,
-              "name": "Player Name",
-              "x": 0, "y": -32, "alpha": 80,
-              "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-              "format": "<span class='m'><font color='#FF6E0C'>{{nick}}</font></span>"
-            }
-          ]
+          }
         }
       }
     }

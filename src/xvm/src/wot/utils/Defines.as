@@ -5,9 +5,9 @@
 class wot.utils.Defines
 {
   // Global versions
-  public static var XVM_VERSION: String = "3.0.4.alpha9";
+  public static var XVM_VERSION: String = "3.0.4";
   public static var WOT_VERSION: String = "0.8.0";
-  public static var CONFIG_VERSION: String = "1.6.0";
+  public static var CONFIG_VERSION: String = "1.5.0";
   public static var EDITOR_VERSION: String = "0.15";
 
   public static var DEFAULT_CONFIG_NAME: String = "XVM.xvmconf";
@@ -15,8 +15,8 @@ class wot.utils.Defines
   // MAX_PATH is 259 on NTFS
   public static var MAX_PATH: Number = 100;
 
-  // Path to Dokan MountPoint (WoT/xvm/.stat)
-  public static var DOKAN_MP = "../../../../xvm/.stat/";
+  // Path to Dokan MountPoint
+  public static var DOKAN_MP = "../../../.stat/";
 
   // WebDav commands
   public static var COMMAND_LOG: String = DOKAN_MP + "@LOG";
@@ -59,58 +59,20 @@ class wot.utils.Defines
   public static var DYNAMIC_ALPHA_HP: Number = 4;
   public static var DYNAMIC_ALPHA_HP_RATIO: Number = 5;
   //public static var DYNAMIC_ALPHA_TBATTLES: Number = 6;
-
+  
   // Damage flag at Xvm.as: updateHealth
   public static var FROM_UNKNOWN: Number = 0;
   public static var FROM_ALLY: Number = 1;
   public static var FROM_ENEMY: Number = 2;
   public static var FROM_SQUAD: Number = 3;
   public static var FROM_PLAYER: Number = 4;
-
-  // Text direction
-  public static var DIRECTION_UP = 1;
-  public static var DIRECTION_DOWN = 2;
-
-  // damage source to system color mapping
-  // src_dst: sys
-  //   src: ally, squadman, enemy, unknown, player (allytk, enemytk - how to detect?)
-  //   dst: ally, squadman, allytk, enemytk, enemy
-  //   sys: ally, squadman, teamKiller, enemy, me
-  public static var damage_mapping:Object = {
-    ally_ally:		"teamKiller",
-    ally_squadman:	"teamKiller",
-    ally_enemy:		"enemy",
-    ally_allytk:	"teamKiller",
-    ally_enemytk:	"enemy",
-    squadman_ally:	"teamKiller",
-    squadman_squad:	"teamKiller",
-    squadman_enemy:	"enemy",
-    squadman_allytk:	"teamKiller",
-    squadman_enemytk:	"enemy",
-//    allytk_ally:	"teamKiller",
-//    allytk_squadman:	"teamKiller",
-//    allytk_enemy:	"enemy",
-//    allytk_allytk:	"teamKiller",
-//    allytk_enemytk:	"enemy",
-//    enemytk_ally:	"ally",
-//    enemytk_squadman:	"squadman",
-//    enemytk_enemy:	"enemy",
-//    enemytk_allytk:	"ally",
-//    enemytk_enemytk:	"enemy",
-    enemy_ally:		"ally",
-    enemy_squadman:	"squadman",
-    enemy_enemy:	"enemy",
-    enemy_allytk:	"ally",
-    enemy_enemytk:	"enemy",
-    unknown_ally:	"ally",
-    unknown_squadman:	"squadman",
-    unknown_enemy:	"enemy",
-    unknown_allytk:	"ally",
-    unknown_enemytk:	"enemy",
-    player_ally:	"me",
-    player_squadman:	"me",
-    player_enemy:	"me",
-    player_allytk:	"me",
-    player_enemytk:	"me"
-  }
+  
+  // Damage type at Xvm.as: updateHealth
+  public static var ATTACK: Number = 0;
+  public static var FIRE: Number = 1;
+  public static var RAMMING: Number = 2;
+  public static var WORLD_COLLISION: Number = 3;
+  public static var DEATH_ZONE: Number = 4;
+  public static var DROWNING: Number = 5;
+  public static var EXPLOSION: Number = 6;
 }
