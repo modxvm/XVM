@@ -98,6 +98,21 @@ class wot.utils.DefaultConfig
           vehicleFormatRight: "<font color='{{c:rating}}'>{{vehicle}}</font>"
         }
       },
+      turretMarkers: {
+        highVulnerability: " *",
+        lowVulnerability: " '"
+      },
+      hitLog: {
+        enabled: true,
+        x: 270,
+        y: 7,
+        w: 200,
+        h: 100,
+        lines: 1,
+        direction: "down",
+        format: "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <b>{{dmg}}</b>",
+        formatHistory: "{{n}}: {{dmg-total}} {{dmg}} {{vehicle}} {{dmg-kind}}"
+      },
       markers: {
         ally: {
           alive: {
@@ -298,6 +313,13 @@ class wot.utils.DefaultConfig
           player_enemytk_kill:		"0xFFDD33",
           player_enemytk_blowup:	"0xFFDD33"
         },
+        dmg_kind: {
+          attack: "0xFFAA55",
+          fire: "0xFF6655",
+          ramming: "0x998855",
+          world_collision: "0x228855",
+          other: "0xCCCCCC"
+        },
         vtype: {
           LT:  "0xA2FF9A",        // Color for light tanks
           MT:  "0xFFF198",        // Color for medium tanks
@@ -391,21 +413,7 @@ class wot.utils.DefaultConfig
         vehicleMarker: "../maps/icons/vehicle/contour"
       },
       consts: consts,
-      vehicleNames: VehicleInfo.getVehicleNamesData(),
-      turretMarkers: {
-        highVulnerability: "*",
-        lowVulnerability: "-"
-      },
-      dmgPalette: [
-        //  type \ from          unknown   ally      enemy     squad     player
-        /* attack          */ [ 0x000000, 0x55EE88, 0xEE5588, 0xFFCC00, 0xE0E0E0 ],
-        /* fire            */ [ 0x000000, 0x66FF88, 0xFF6688, 0xFFCC66, 0xFFFFFF ],
-        /* ramming         */ [ 0x000000, 0x33DD99, 0xDD3399, 0xEEBB44, 0x949494 ],
-        /* world_collision */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
-        /* death_zone      */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
-        /* drowning        */ [ 0x000000, 0x000000, 0x000000, 0x000000, 0x000000 ],
-        /* explosion       */ [ 0x000000, 0xBBF8CF, 0xFF6666, 0xFFCC66, 0xFFFFFF ]
-      ]
+      vehicleNames: VehicleInfo.getVehicleNamesData()
     };
 
     return a;
@@ -479,6 +487,17 @@ class wot.utils.DefaultConfig
     }
   }
 
+  public static function get font_18(): Object
+  {
+    return {
+      name: "$PartnerCondensed",
+      size: 18,
+      align: "center",
+      bold: false,
+      italic: false
+    }
+  }
+
   // vehicleIcon
   public static function get vi(): Object
   {
@@ -526,7 +545,7 @@ class wot.utils.DefaultConfig
 
   public static function get hb_dead(): Object
   {
-    var hb = hb_alive;
+    var hb:Object = hb_alive;
     hb.visible = false;
     return hb;
   }
@@ -540,9 +559,9 @@ class wot.utils.DefaultConfig
       y: -67,
       alpha: 100,
       color: null,
-      font: font_14b,
+      font: font_18,
       shadow: shadow_200,
-      speed: 0.5,
+      speed: 2,
       maxRange: 40,
       damageMessage: "{{dmg}}",
       blowupMessage: "Blow-up!"
@@ -644,7 +663,7 @@ class wot.utils.DefaultConfig
       color: null,
       font: font_13,
       shadow: shadow_200,
-      format: "{{vehicle}}"
+      format: "{{vehicle}}{{turret}}"
     }
   }
 
