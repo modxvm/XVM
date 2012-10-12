@@ -4,6 +4,8 @@
   * SixthSense.png added to samples
   * fixed text formatting with disabled statistics in battle loading screen
   * fixed {{turret}} marker for t29, t32, m10_wolverine, pzii, pzvib_tiger_ii, vk4502a
+  * added new section to config "colors"/"damage", which allows to adjust the color of
+    floating damage depending on the source of damage
 
 XVM-3.0.3:
   * added possibility to change {{turret}} marker display string
