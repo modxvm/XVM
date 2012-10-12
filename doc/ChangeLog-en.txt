@@ -13,6 +13,7 @@
   * win chahce is disabled by default
   * added macro {{c:dmg_kind}} for dynamic color in depend of damage kind
   * added config section "colors"/"dmg_kind"
+  * support of HTML in any text field, including vehicle markers
 
 XVM-3.0.3:
   * added possibility to change {{turret}} marker display string

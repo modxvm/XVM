@@ -134,6 +134,24 @@ class wot.utils.GraphicsUtil
         return prefix + "FFFEFE";
     }
 
+    public static function GetDmgKindValue(dmg_kind: String, prefix: String): String
+    {
+        if (!prefix)
+            prefix = "#";
+
+        try
+        {
+            if (!dmg_kind || !Config.s_config.colors.dmg_kind[dmg_kind])
+                return "";
+            return prefix + Utils.toInt(Config.s_config.colors.dmg_kind[dmg_kind], 0xFFFFFE).toString(16);
+        }
+        catch (ex:Error)
+        {
+            return prefix + "FFFEFE";
+        }
+        return prefix + "FFFEFE";
+    }
+
     public static function GetDynamicColorValueInt(type: Number, value: Number, darker: Boolean): Number
     {
         return Number(GetDynamicColorValue(type, value, "0x", darker));

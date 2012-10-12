@@ -4,12 +4,14 @@
  * Draws XVM version watermark
  */
 import gfx.core.UIComponent;
-import wot.VehicleMarkersManager.IVehicleMarker;
 import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.GlobalEventDispatcher;
 import wot.utils.Logger;
 import wot.utils.Utils;
+import wot.VehicleMarkersManager.IVehicleMarker;
+import wot.VehicleMarkersManager.HitLog;
+import wot.utils.VehicleInfo;
 
 /* TODO:
  * Check for performance boost with marker object caching
@@ -20,6 +22,16 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
 {
     // dummy var to avoid import warning
     private static var __dummy = Logger.dummy;
+
+    // Private members
+    var m_vehicleName:String;
+    var m_level:Number;
+    var m_playerName:String;
+    var m_curHealth:Number;
+    var m_defaultIconSource:String;
+
+    // Components
+    private static var hitLog:HitLog = null;
 
     // Used in child classes VehicleMarkerAlly and VehicleMarkerEnemy
     // TODO: can include to interface as property?
@@ -52,8 +64,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
 
     private function trace(str:String):Void
     {
-        //if (this["_playerName"] == "dosik_dai")
-        //Logger.add(this["_playerName"] + "> " + str);
+        //if (m_playerName == "dosik_dai")
+        //Logger.add(m_playerName + "> " + str);
     }
 
     /**
@@ -115,8 +127,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         if (!Config.s_config.battle.hideXVMVersion && !_global.xvmWatermark)
             DrawXvmWatermark();
 
-        // re-enable vehicle type marker (required only for standard marker)
-        marker._visible = true;
+        if (Config.s_config.hitLog.enabled && hitLog == null)
+            hitLog = new HitLog(Config.s_config.hitLog);
 
         // finalize initialization
         initializeSubject();
@@ -132,6 +144,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         // Create marker class depending on config setting
         if (Config.s_config.battle.useStandardMarkers == true)
         {
+            // re-enable vehicle type marker (required only for standard marker)
+            marker._visible = true;
             // Create Standard marker
             subject = new net.wargaming.ingame.VehicleMarker();
             // Translate entity name to subject
@@ -150,7 +164,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         else
         {
             // Create XVM marker
-            subject = new wot.VehicleMarkersManager.Xvm(this, m_team);
+            subject = new wot.VehicleMarkersManager.Xvm(this);
         }
 
         // Invoke all deferred method calls while config was loading
@@ -311,7 +325,11 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     public function init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt, entityType)
     {
         trace("init: " + pFullName);
-        this["_playerName"] = pFullName; // for debug
+        m_vehicleName = vType;
+        m_level = vLevel;
+        m_playerName = pFullName;
+        m_defaultIconSource = vIconSource;
+        m_curHealth = curHealth;
         call("init",   [ vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt, entityType ]);
     }
 
@@ -324,10 +342,18 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     public function setEntityName(value)          { call("setEntityName",    [ value ]); }
     public function showExInfo(show)              { call("showExInfo",       [ show ]); }
     public function showActionMarker(actionState) { call("showActionMarker", [ actionState ]); }
-    public function updateHealth(curHealth, flag, damageType)
-                                                  { call("updateHealth", [ curHealth, flag, damageType ]); }
     public function updateState(newState, isImmediate)
                                                   { call("updateState",  [ newState, isImmediate ]);}
+    public function updateHealth(curHealth, flag, damageType)
+    {
+        if (flag == Defines.FROM_PLAYER && hitLog != null)
+        {
+            var delta = m_curHealth - (curHealth < 0 ? 0 : curHealth);
+            hitLog.update(delta, VehicleInfo.mapVehicleName(m_defaultIconSource, m_vehicleName), m_playerName, m_level, damageType);
+        }
+        m_curHealth = curHealth < 0 ? 0 : curHealth;
+        call("updateHealth", [ curHealth, flag, damageType ]);
+    }
 
     /**
      * Ingame original WG marker settings.

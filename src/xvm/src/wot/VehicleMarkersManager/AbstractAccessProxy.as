@@ -24,14 +24,14 @@ class wot.VehicleMarkersManager.AbstractAccessProxy
         return xvm.formatStaticText(format);
     }
 
-    public function formatDynamicText(format:String, curHealth:Number, delta:Number):String
+    public function formatDynamicText(format:String, curHealth:Number, delta:Number, damageType:String):String
     {
-        return xvm.formatDynamicText(format, curHealth, delta);
+        return xvm.formatDynamicText(format, curHealth, delta, damageType);
     }
 
-    public function formatDynamicColor(format:String):Number
+    public function formatDynamicColor(format:String, damageType:String):Number
     {
-        return xvm.formatDynamicColor(format, xvm.m_curHealth);
+        return xvm.formatDynamicColor(format, xvm.m_curHealth, damageType);
     }
 
     public function formatStaticColorText(format:String):String

@@ -2,7 +2,6 @@
  * ...
  * @author Maxim Schedriviy
  */
-import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.GraphicsUtil;
 import wot.utils.StatFormat;

@@ -66,4 +66,8 @@ class wot.utils.Defines
   public static var FROM_ENEMY: Number = 2;
   public static var FROM_SQUAD: Number = 3;
   public static var FROM_PLAYER: Number = 4;
+
+  // Text direction
+  public static var DIRECTION_UP = 1;
+  public static var DIRECTION_DOWN = 2;
 }

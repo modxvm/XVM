@@ -236,7 +236,7 @@ class wot.utils.DefaultConfig
         },
         // src: ally, squadman, enemy, unknown, player
         // dst: ally, squadman, allytk, enemytk, enemy
-        damage:Object = {
+        damage: {
           ally_ally_hit:		"0x00EAFF",
           ally_ally_kill:		"0x00EAFF",
           ally_ally_blowup:		"0x00EAFF",
@@ -267,18 +267,18 @@ class wot.utils.DefaultConfig
           squadman_enemytk_hit:		"0xF50800",
           squadman_enemytk_kill:	"0xF50800",
           squadman_enemytk_blowup:	"0xF50800",
-          enemy_ally_hit:		"0xF50800",
-          enemy_ally_kill:		"0xF50800",
-          enemy_ally_blowup:		"0xF50800",
+          enemy_ally_hit:		"0x96FF00",
+          enemy_ally_kill:		"0x96FF00",
+          enemy_ally_blowup:		"0x96FF00",
           enemy_squadman_hit:		"0xFFB964",
           enemy_squadman_kill:		"0xFFB964",
           enemy_squadman_blowup:	"0xFFB964",
           enemy_enemy_hit:		"0xF50800",
           enemy_enemy_kill:		"0xF50800",
           enemy_enemy_blowup:		"0xF50800",
-          enemy_allytk_hit:		"0xF50800",
-          enemy_allytk_kill:		"0xF50800",
-          enemy_allytk_blowup:		"0xF50800",
+          enemy_allytk_hit:		"0x96FF00",
+          enemy_allytk_kill:		"0x96FF00",
+          enemy_allytk_blowup:		"0x96FF00",
           enemy_enemytk_hit:		"0xF50800",
           enemy_enemytk_kill:		"0xF50800",
           enemy_enemytk_blowup:		"0xF50800",

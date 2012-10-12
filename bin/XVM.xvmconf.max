@@ -26,15 +26,15 @@
     "showChancesExp": true,
     "removeSquadIcon": false,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft": "{{vehicle}} <span class='mono'><font color='{{c:t-battles}}'>{{t-hb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></span>",
-    "formatRight": "<span class='mono'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-battles}}'>{{t-hb:3}}</font></span> {{vehicle}}"
+    "formatLeft": "{{vehicle}} <font name='Consolas' size='11'>class='mono'><font color='{{c:t-battles}}'>{{t-hb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
+    "formatRight": "<font name='Consolas' size='11'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-battles}}'>{{t-hb:3}}</font></font> {{vehicle}}"
   },
   "statisticForm": {
     "showChances": true,
     "showChancesExp": true,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft": "{{vehicle}} <span class='mono'><font color='{{c:kb}}'>{{t-hb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></span>",
-    "formatRight": "<span class='mono'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{t-hb:3}}</font></span> {{vehicle}}"
+    "formatLeft": "{{vehicle}} <font name='Consolas' size='11'><font color='{{c:kb}}'>{{t-hb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
+    "formatRight": "<font name='Consolas' size='11'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{t-hb:3}}</font></font> {{vehicle}}"
   },
   "playersPanel": {
     "alpha": 50,
@@ -68,7 +68,7 @@
     "h": 200,
     "lines": 1,
     "direction": "down",
-    "format": "<span class='lbl'>Hits:</span> <font size='13'>#{{n}}</font> {{dmg-total}} <b>{{dmg}}</b>",
+    "format": "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <b>{{dmg}}</b>",
     "formatHistory": "<textformat tabstops='[30,80,160,250]'>{{n}}:\t{{dmg-total}} |\t{{dmg}} |\t{{dmg-kind}} |\t{{vehicle}}</textformat>"
 
   },
@@ -107,23 +107,21 @@
               "name": "Vehicle Name",
               "x": 0, "y": -26,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-              "format": "<span class='m'>{{vehicle}}{{turret}}</span>"
+              "format": "<font face='$FieldFont' size='13'>{{vehicle}}{{turret}}</font>"
             },
             {
               "visible": true,
               "name": "Dynamic HP",
               "x": 0, "y": -39, "alpha": "{{a:hp}}",
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<span class='m_hp'><font color='{{c:hp}}'>{{hp}}</font></span>"
+              "format": "<font face='$FieldFont' size='11' color='{{c:hp}}'><b>{{hp}}</b></font>"
             },
             {
               "visible": true,
               "name": "Rating marks",
               "x": 25, "y": -15,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<span class='m_stat_mark'><font color='{{c:eff}}'>·</font>"
-// miltiline example:
-//            "format": "<textformat leading='-7'><span class='m_stat_mark'><font color='{{c:eff}}'>·</font><br><font color='{{c:t-rating}}'>·</font><br><font color='{{c:t-battles}}'>·</font></span></textformat>"
+              "format": "<font face='Symbol' size='12' color='{{c:eff}}'><b>·</b></font>"
             }
           ]
         },
@@ -164,21 +162,21 @@
               "name": "Player Name",
               "x": 0, "y": -26,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-              "format": "<span class='m'>{{nick}}</span>"
+              "format": "<font face='$FieldFont' size='13'>{{nick}}</font>"
             },
             {
               "visible": true,
               "name": "HP",
               "x": 0, "y": -39, "color": "0xD9FFB3",
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<span class='m_hp'>{{hp}} / {{hp-max}}</span>"
+              "format": "<font face='$FieldFont' size='11'><b>{{hp}} / {{hp-max}}</b></font>"
             },
             {
               "visible": true,
               "name": "Tank Rating",
               "x": 0, "y": -50, "alpha": 75,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<span class='m_stat'><font color='{{c:eff}}'>{{t-rating}}</font>"
+              "format": "<font face='$PartnerCondensed' size='12' color='{{c:eff}}'><b>{{t-rating}}</b></font>"
             }
           ]
         }
@@ -215,14 +213,14 @@
               "name": "Vehicle Name",
               "x": 0, "y": -18, "alpha": 80,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-              "format": "<span class='m'><font color='#7BEC37'>{{vehicle}}</font></span>"
+              "format": "<font face='$FieldFont' size='13'><font color='#7BEC37'>{{vehicle}}</font></font>"
             },
             {
               "visible": true,
               "name": "Player Name",
               "x": 0, "y": -32, "alpha": 80,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-              "format": "<span class='m'><font color='#B2EE37'>{{nick}}</font></span>"
+              "format": "<font face='$FieldFont' size='13'><font color='#B2EE37'>{{nick}}</font></font>"
             }
           ]
         }
@@ -262,21 +260,21 @@
               "name": "Vehicle Name",
               "x": 0, "y": -26,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-              "format": "<span class='m'>{{vehicle}}{{turret}}</span>"
+              "format": "<font face='$FieldFont' size='13'>{{vehicle}}{{turret}}</font>"
             },
             {
               "visible": true,
               "name": "HP",
               "x": 0, "y": -39, "alpha": "{{a:hp}}",
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<span class='m_hp'><font color='{{c:hp}}'>{{hp}}</font></span>"
+              "format": "<font face='$FieldFont' size='11' color='{{c:hp}}'><b>{{hp}}</b></font>"
             },
             {
               "visible": true,
               "name": "Rating marks",
               "x": 25, "y": -15,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<span class='m_stat_mark'><font color='{{c:eff}}'>·</font>"
+              "format": "<font face='Symbol' size='12' color='{{c:eff}}'><b>·</b></font>"
             }
           ]
         },
@@ -317,21 +315,21 @@
               "name": "Player Name",
               "x": 0, "y": -26,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-              "format": "<span class='m'>{{nick}}</span>"
+              "format": "<font face='$FieldFont' size='13'>{{nick}}</font>"
             },
             {
               "visible": true,
               "name": "HP",
               "x": 0, "y": -39,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<span class='m_hp'><font color='{{c:hp-ratio}}'>{{hp}} / {{hp-max}}</font></span>"
+              "format": "<font face='$FieldFont' size='11' color='{{c:hp-ratio}}'><b>{{hp}} / {{hp-max}}</b></font>"
             },
             {
               "visible": true,
               "name": "Tank Rating",
               "x": 0, "y": -50, "alpha": 75,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<span class='m_stat'><font color='{{c:eff}}'>{{t-rating}}</font>"
+              "format": "<font face='$PartnerCondensed' size='12' color='{{c:eff}}'><b>{{t-rating}}</b></font>"
             }
           ]
         }
@@ -368,14 +366,14 @@
               "name": "Vehicle Name",
               "x": 0, "y": -18, "alpha": 80,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-              "format": "<span class='m'><font color='#EC3737'>{{vehicle}}</font></span>"
+              "format": "<font face='$FieldFont' size='13'><font color='#EC3737'>{{vehicle}}</font></font>"
             },
             {
               "visible": true,
               "name": "Player Name",
               "x": 0, "y": -32, "alpha": 80,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 200, "distance": 0, "size": 3 },
-              "format": "<span class='m'><font color='#FF6E0C'>{{nick}}</font></span>"
+              "format": "<font face='$FieldFont' size='13'><font color='#FF6E0C'>{{nick}}</font></font>"
             }
           ]
         }
