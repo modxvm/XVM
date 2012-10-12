@@ -19,6 +19,7 @@
     * In-game players rating (only with xvm-stat package)
 
   Project site:  http://code.google.com/p/wot-xvm/
+
   Support:       http://www.koreanrandom.com/forum/topic/1383-xvm
   FAQ (Russian): http://www.koreanrandom.com/forum/topic/1381-faq
   Ready configs: http://www.koreanrandom.com/forum/topic/1384-configurations

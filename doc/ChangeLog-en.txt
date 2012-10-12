@@ -6,6 +6,13 @@
   * fixed {{turret}} marker for t29, t32, m10_wolverine, pzii, pzvib_tiger_ii, vk4502a
   * added new section to config "colors"/"damage", which allows to adjust the color of
     floating damage depending on the source of damage
+  * added new section to config "hitLog", which allows to display the log of own hits
+  * stock turret marker added to the default config (after vehicle name)
+  * the default font of floating damage is the same as in the client
+  * damage animation was improved
+  * win chahce is disabled by default
+  * added macro {{c:dmg_kind}} for dynamic color in depend of damage kind
+  * added config section "colors"/"dmg_kind"
 
 XVM-3.0.3:
   * added possibility to change {{turret}} marker display string

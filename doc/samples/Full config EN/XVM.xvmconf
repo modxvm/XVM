@@ -13,9 +13,9 @@
     "author": "sirmax2",                        // Config author
     "description": "Default settings for XVM",  // Config description
     "url": "http://code.google.com/p/wot-xvm/", // Address to config updates
-    "date": "26.09.2012",                       // Config last modified
+    "date": "12.10.2012",                       // Config last modified
     "gameVersion": "0.8.0",                     // Supported version of the game
-    "modMinVersion": "3.0.0"                    // The minimum required version of the XVM mod
+    "modMinVersion": "3.0.4"                    // The minimum required version of the XVM mod
   },
   // General parameters for the battle interface
   "battle": {
@@ -28,7 +28,7 @@
     "useStandardMarkers": false,                // true - use standard client vehicle markers
     "clanIconsFolder": "../../../clanicons"     // path to clan icons folder relative to res_mods/[GAME VERSION]/gui/flash
   },
-  // Options for player statistics (only with XVM-full)
+  // Options for player statistics (only with xvm-stat)
   "rating": {
     "showPlayersStatistics": true,              // true - Toggle player statistics on/off. Global setting - without the statistics module, this is always disabled
     "loadEnemyStatsInFogOfWar": true            // true - Enable downloading of data on opponents in the "fog of war"
@@ -36,7 +36,7 @@
   // Parameters of the Battle Loading Screen
   "battleLoading": {
     "clockFormat": "H:N:S",                     // Show the clock on the Battle Loading Screen. Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds. "" - remove clock.
-    "showChances": true,                        // true – Enable display of "chance to win" (only with XVM-full) Read more: http://www.koreanrandom.com/forum/topic/1642-chance
+    "showChances": false,                       // true – Enable display of "chance to win" (only with xvm-stat) Read more: http://www.koreanrandom.com/forum/topic/1642-chance
     "showChancesExp": false,                    // Show experimental "chance to win" formula
     "removeSquadIcon": false,                   // true – Disable Platoon icons. This blank space can house, for example, clan logos
     "clanIcon": {                               // Display options for Team/Clan logos
@@ -56,7 +56,7 @@
   },
   // Parameters of the Battle Statistics Form
   "statisticForm": {
-    "showChances": true,      // true - Enable display of "chance to win" (only with XVM-full).
+    "showChances": false,     // true - Enable display of "chance to win" (only with xvm-stat).
     "showChancesExp": false,  // Show experimental "chance to win" formula
     "removeSquadIcon": false, // true - Disable Platoon icons. This blank space can house, for example, clan logos.
     // Display options for Team/Clan logos (see battleLoading above)
@@ -99,6 +99,25 @@
       "vehicleFormatLeft": "<font color='{{c:eff}}'>{{vehicle}}</font>",
       "vehicleFormatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
     }
+  },
+  // {{turret}} marker display strings
+  "turretMarkers": {
+    "highVulnerability": " *", // Subject has stock turret and top gun can not be mounted. Subject is highly vulnerable.
+    "lowVulnerability": " '"   // Subject has stock turret and top gun can be mounted. Subject is somewhat vulnerable.
+  },
+  // Hit log (my hits calculator)
+  "hitLog": {
+    "enabled": true,     // on/off switch
+    "x": 270,            // X position
+    "y": 7,              // Y position
+    "w": 200,            // Width
+    "h": 100,            // Height
+    "lines": 1,          // Number of lines. Old lines will be pushed out
+    "direction": "down", // Log direction: up - lines will be added from up to down, down - from down to up.
+    // Last hit format (macros allowed, see readme-en.txt)
+    "format": "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <b>{{dmg}}</b>",
+    // Previous hits format (macros allowed, see readme-en.txt)
+    "formatHistory": "{{n}}: {{dmg-total}} {{dmg}} {{vehicle}} {{dmg-kind}}"
   },
   // OVER-TARGET MARKERS
   "markers": {
@@ -157,10 +176,10 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$FieldFont",           //     Font name
-              "size": 14,                     //     Font size
+              "name": "$PartnerCondensed",    //     Font name
+              "size": 18,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": true,                   //     Normal (false) or bold (true)
+              "bold": false,                   //     Normal (false) or bold (true)
               "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
@@ -228,7 +247,7 @@
                 "size": 6,                    //     Size
                 "strength": 200               //     Intensity
               },
-              "format": "{{vehicle}}"         // Text format (see description of macros in the readme-en.txt)
+              "format": "{{vehicle}}{{turret}}" // Text format (see description of macros in the readme-en.txt)
             },
             // Text field with the remaining / maximum health
             {
@@ -307,10 +326,10 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$FieldFont",           //     Font name
-              "size": 14,                     //     Font size
+              "name": "$PartnerCondensed",    //     Font name
+              "size": 18,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": true,                   //     Normal (false) or bold (true)
+              "bold": false,                  //     Normal (false) or bold (true)
               "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
@@ -486,10 +505,10 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$FieldFont",           //     Font name
-              "size": 14,                     //     Font size
+              "name": "$PartnerCondensed",    //     Font name
+              "size": 18,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": true,                   //     Normal (false) or bold (true)
+              "bold": false,                  //     Normal (false) or bold (true)
               "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
@@ -587,10 +606,10 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$FieldFont",           //     Font name
-              "size": 14,                     //     Font size
+              "name": "$PartnerCondensed",    //     Font name
+              "size": 18,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": true,                   //     Normal (false) or bold (true)
+              "bold": false,                  //     Normal (false) or bold (true)
               "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
@@ -743,10 +762,10 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$FieldFont",           //     Font name
-              "size": 14,                     //     Font size
+              "name": "$PartnerCondensed",    //     Font name
+              "size": 18,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": true,                   //     Normal (false) or bold (true)
+              "bold": false,                  //     Normal (false) or bold (true)
               "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
@@ -814,7 +833,7 @@
                 "size": 6,                    //     Size
                 "strength": 200               //     Intensity
               },
-              "format": "{{vehicle}}"         // Text format (see description of macros in the readme-en.txt)
+              "format": "{{vehicle}}{{turret}}" // Text format (see description of macros in the readme-en.txt)
             },
             // Text field with the remaining / maximum health
             {
@@ -893,10 +912,10 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$FieldFont",           //     Font name
-              "size": 14,                     //     Font size
+              "name": "$PartnerCondensed",    //     Font name
+              "size": 18,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": true,                   //     Normal (false) or bold (true)
+              "bold": false,                  //     Normal (false) or bold (true)
               "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
@@ -1072,10 +1091,10 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$FieldFont",           //     Font name
-              "size": 14,                     //     Font size
+              "name": "$PartnerCondensed",    //     Font name
+              "size": 18,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": true,                   //     Normal (false) or bold (true)
+              "bold": false,                  //     Normal (false) or bold (true)
               "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
@@ -1173,10 +1192,10 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$FieldFont",           //     Font name
-              "size": 14,                     //     Font size
+              "name": "$PartnerCondensed",    //     Font name
+              "size": 18,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": true,                   //     Normal (false) or bold (true)
+              "bold": false,                  //     Normal (false) or bold (true)
               "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
@@ -1386,6 +1405,14 @@
       "player_enemytk_kill":		"0xFFDD33",
       "player_enemytk_blowup":		"0xFFDD33"
     },
+    // Damage kind
+    "dmg_kind": {
+      "attack": "0xFFAA55",                        // attack
+      "fire": "0xFF6655",                          // fire
+      "ramming": "0x998855",                       // ramming
+      "world_collision": "0x228855",               // world_collision
+      "other": "0xCCCCCC"                          // other
+    },
     // Dynamic color for vehicle type
     "vtype": {
       "LT":  "0xA2FF9A",                           // Color for light tanks
@@ -1410,7 +1437,7 @@
       { "value": 50,  "color": "0xFFCC33" },      // Color for health below 50 percent
       { "value": 101, "color": "0xFFFFFF" }       // Color for health up to 100 percent
     ],
-    // Dynamic color for effectiveness (only with XWM-full)
+    // Dynamic color for effectiveness (only with xvm-stat)
     "eff": [
       { "value": 600,  "color": "0xDD0000" },
       { "value": 900,  "color": "0xDD3333" },
@@ -1419,7 +1446,7 @@
       { "value": 1800, "color": "0x33FF33" },
       { "value": 9999, "color": "0xCC66CC" }
     ],
-    // Dynamic color for victory percentage (only with XWM-full)
+    // Dynamic color for victory percentage (only with xvm-stat)
     "rating": [
       { "value": 42,  "color": "0xDD0000" },
       { "value": 46,  "color": "0xDD3333" },
@@ -1429,7 +1456,7 @@
       { "value": 57,  "color": "0x33FF33" },
       { "value": 101, "color": "0xCC66CC" }
     ],
-    // Dynamic color for the number of thousands of battles ("kilo-battles") (only with XWM-full)
+    // Dynamic color for the number of thousands of battles ("kilo-battles") (only with xvm-stat)
     "kb": [
       { "value": 1,   "color": "0xDD0000" },
       { "value": 3,   "color": "0xDD3333" },
@@ -1438,7 +1465,7 @@
       { "value": 12,  "color": "0x33FF33" },
       { "value": 999, "color": "0xCC66CC" }
     ],
-    // Dynamic color for the number of battles for current tank (only with XWM-full)
+    // Dynamic color for the number of battles for current tank (only with xvm-stat)
     "t_battles": [
       { "value": 100,  "color": "0xDD0000" },
       { "value": 200,  "color": "0xDD3333" },
@@ -1464,19 +1491,19 @@
       { "value": 50,  "alpha": 60 },
       { "value": 101, "alpha": 40 }
     ],
-    // Dynamic transparency for effectiveness (only with XWM-full)
+    // Dynamic transparency for effectiveness (only with xvm-stat)
     "eff": [
       { "value": 900,  "alpha": 100 },
       { "value": 1200, "alpha": 100 },
       { "value": 9999, "alpha": 100 }
     ],
-    // Dynamic transparency for victory percentage (only with XWM-full)
+    // Dynamic transparency for victory percentage (only with xvm-stat)
     "rating": [
       { "value": 49,  "alpha": 100 },
       { "value": 53,  "alpha": 100 },
       { "value": 101, "alpha": 100 }
     ],
-    // Dynamic transparency for the number of thousands of battles ("kilo-battles") (only with XWM-full)
+    // Dynamic transparency for the number of thousands of battles ("kilo-battles") (only with xvm-stat)
     "kb": [
       { "value": 2,   "alpha": 100 },
       { "value": 10,  "alpha": 100 },
@@ -1714,10 +1741,5 @@
     "ussr_T_54": null,
     "ussr_Tetrarch_LL": null,
     "ussr_Valentine_LL": null
-  },
-  // {{turret}} marker display strings
-  "turretMarkers": {
-    "highVulnerability": "*", // Subject has stock turret and top gun can not be mounted. Subject is highly vulnerbale.
-    "lowVulnerability": "-"   // Subject has stock turret and top gun can be mounted. Subject is somewhat vulnerbale.
   }
 }
