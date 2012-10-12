@@ -8,6 +8,7 @@ class wot.utils.Locale
   private static var _region = "EN";
 
   private static var _translations = {
+    EN: { },
     RU: { },
     CN: { }
   }
@@ -21,12 +22,25 @@ class wot.utils.Locale
 
     var tr;
 
+    // EN
+    tr = _translations["EN"];
+    tr["attack"] = "attack";
+    tr["fire"] = "fire";
+    tr["ramming"] = "ramming";
+    tr["world_collision"] = "falling";
+
     // RU
     tr = _translations["RU"];
     tr["Chance error"] = "Ошибка расчета шансов";
     tr["Chance to win"] = "Шанс на победу";
     tr["Global"] = "Общий";
     tr["Per-vehicle"] = "По технике";
+
+    tr["attack"] = "атака";
+    tr["fire"] = "пожар";
+    tr["ramming"] = "таран";
+    tr["world_collision"] = "падение";
+
 //    tr["Using default settings."] = "Используются настройки по умолчанию.";
 //    tr["Error parsing config file."] = "Ошибка чтения конфигурации.";
 //    tr["Error loading config file."] = "Ошибка загрузки конфигурации.";
@@ -63,8 +77,6 @@ class wot.utils.Locale
 
   public static function get(text: String): String
   {
-    if (_region == "EN")
-      return text;
     return _translations[_region][text] || text;
   }
 }

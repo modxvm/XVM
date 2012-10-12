@@ -16,6 +16,7 @@ class wot.utils.Utils
         return str.lastIndexOf(substr) == (str.length - substr.length);
     }
 
+    // TODO: check performance, charAt is slow in ScaleForm
     public static function trim(str: String): String
     {
         var i, j;

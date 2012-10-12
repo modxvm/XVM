@@ -14,7 +14,6 @@ class wot.utils.Chance
 {
   private static var dummy = Logger.dummy; // avoid import warning
 
-  private static var showExp: Boolean = false;
   private static var battleTier: Number = 0;
 
   public static function ShowChance(tf: TextField, showExp: Boolean): String
@@ -24,7 +23,6 @@ class wot.utils.Chance
     if (teamsCount.ally != teamsCount.enemy || teamsCount.ally == 0)
       return tf.text;
 
-    Chance.showExp = showExp;
     Chance.battleTier = Chance.GuessBattleTier();
 
     var chG = GetChance(ChanceFuncG);
