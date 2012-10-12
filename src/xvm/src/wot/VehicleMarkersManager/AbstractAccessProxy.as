@@ -6,10 +6,10 @@ class wot.VehicleMarkersManager.AbstractAccessProxy
     * access control and restriction
     * to wot.VehicleMarkersManager.XVM data
     */
-   
+
     private var xvm:Xvm;
 
-    public function AbstractAccessProxy(xvm:Xvm) 
+    public function AbstractAccessProxy(xvm:Xvm)
     {
         this.xvm = xvm;
     }
@@ -18,7 +18,7 @@ class wot.VehicleMarkersManager.AbstractAccessProxy
     {
         return xvm.vehicleState.getCurrentConfig();
     }
-    
+
     public function formatStaticText(format:String):String
     {
         return xvm.formatStaticText(format);

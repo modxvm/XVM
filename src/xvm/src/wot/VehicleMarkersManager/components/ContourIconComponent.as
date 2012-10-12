@@ -111,4 +111,3 @@ class wot.VehicleMarkersManager.components.ContourIconComponent
         }
     }
 }
-

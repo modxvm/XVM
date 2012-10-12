@@ -33,7 +33,7 @@ class wot.VehicleMarkersManager.XvmHelper
 
         return null;
     }
-    
+
     public static function translateDmgToConst(str: String): Number
     {
         if (str == "attack")  return Defines.FIRE;

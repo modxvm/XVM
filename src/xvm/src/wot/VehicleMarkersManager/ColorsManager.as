@@ -63,7 +63,7 @@ class wot.VehicleMarkersManager.ColorsManager
     }
 
     // PRIVATE
-    
+
     private static var _instance = null;
 
     private function ColorsManager()

@@ -11,7 +11,7 @@ class wot.VehicleMarkersManager.components.DamageTextComponent
     private var proxy:DamageTextProxy;
 
     private var damage:MovieClip;
-    
+
     public function DamageTextComponent(proxy:DamageTextProxy)
     {
         this.proxy = proxy;
@@ -63,12 +63,12 @@ class wot.VehicleMarkersManager.components.DamageTextComponent
     }
 
     // PRIVATE METHODS
-    
+
     private function defineTextColor(flag:Number, damageType:Number):Number
     {
         return Config.s_config.dmgPalette[damageType][flag];
     }
-    
+
     private function defineText(cfg:Object, newHealth:Number, delta:Number):String
     {
         var msg = (newHealth < 0) ? cfg.blowupMessage : cfg.damageMessage;
@@ -77,7 +77,7 @@ class wot.VehicleMarkersManager.components.DamageTextComponent
         // so we're appending empty prefix and suffix to bypass this unexpected behavior
         return " " + text + " ";
     }
-    
+
     private function draw(cfg:Object)
     {
         damage._x = cfg.x;

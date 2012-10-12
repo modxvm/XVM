@@ -22,4 +22,3 @@ class wot.VehicleMarkersManager.components.LevelIconProxy extends AbstractAccess
         return xvm.m_level;
     }
 }
-

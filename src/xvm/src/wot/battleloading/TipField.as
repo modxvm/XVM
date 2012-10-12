@@ -5,13 +5,13 @@ import wot.utils.Utils;
 class wot.battleloading.TipField
 {
     private var form_mc:MovieClip;
-    
-    public function TipField(form_mc:MovieClip) 
+
+    public function TipField(form_mc:MovieClip)
     {
         this.form_mc = form_mc;
         GlobalEventDispatcher.addEventListener("set_info", this, setInfoFieldData);
     }
-    
+
     private function setInfoFieldData(event)
     {
         //Logger.addObject(event, "SetInfoFieldData(event)");

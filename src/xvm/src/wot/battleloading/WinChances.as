@@ -7,13 +7,13 @@ class wot.battleloading.WinChances
     private var form_mc:MovieClip;
     private static var s_chanceField: TextField = null;
     private static var s_chanceText: String;
-    
-    public function WinChances(form_mc) 
+
+    public function WinChances(form_mc)
     {
         this.form_mc = form_mc;
         GlobalEventDispatcher.addEventListener("stat_loaded", this, onStatLoaded);
     }
-    
+
     private function onStatLoaded()
     {
         GlobalEventDispatcher.removeEventListener("stat_loaded", this, onStatLoaded);
@@ -21,7 +21,7 @@ class wot.battleloading.WinChances
         if (Config.s_config.battleLoading.showChances)
             showWinChances();
     }
-    
+
     private function showWinChances()
     {
         if (!s_chanceField)

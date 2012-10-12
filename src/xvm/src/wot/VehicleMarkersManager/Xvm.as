@@ -171,28 +171,28 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
      */
     function updateHealth(newHealth, flag, damageTypeStr)
     {
-        /* 
+        /*
          * newHealth:
          *  1497, 499, 0 and -1 in case of ammo blow up
          * flag - int:
          * 0 - "FROM_UNKNOWN", 1 - "FROM_ALLY", 2 - "FROM_ENEMY", 3 - "FROM_SQUAD", 4 - "FROM_PLAYER"
-         * 
+         *
          * damageType - string:
          *  "attack", "fire", "ramming", "world_collision", "death_zone", "drowning", "explosion"
          */
-        
+
         //Logger.add("Xvm::updateHealth(" + flag + ", " + damageTypeStr + ", " + newHealth +")");
-        
+
         var damageType:Number = XvmHelper.translateDmgToConst(damageTypeStr);
-        
+
         if (newHealth < 0)
             s_blowedUp[m_playerFullName] = true;
-            
+
         m_isDead = newHealth <= 0;
 
         var delta: Number = newHealth - m_curHealth;
         m_curHealth = m_isDead ? 0 : newHealth; // fixes "-1"
-        
+
         if (delta < 0) // Damage has been done
         {
             var cfg = vehicleState.getCurrentConfig();

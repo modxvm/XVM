@@ -59,14 +59,14 @@ class wot.utils.Defines
   public static var DYNAMIC_ALPHA_HP: Number = 4;
   public static var DYNAMIC_ALPHA_HP_RATIO: Number = 5;
   //public static var DYNAMIC_ALPHA_TBATTLES: Number = 6;
-  
+
   // Damage flag at Xvm.as: updateHealth
   public static var FROM_UNKNOWN: Number = 0;
   public static var FROM_ALLY: Number = 1;
   public static var FROM_ENEMY: Number = 2;
   public static var FROM_SQUAD: Number = 3;
   public static var FROM_PLAYER: Number = 4;
-  
+
   // Damage type at Xvm.as: updateHealth
   public static var ATTACK: Number = 0;
   public static var FIRE: Number = 1;

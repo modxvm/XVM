@@ -5,7 +5,7 @@ class wot.VehicleMarkersManager.ErrorHandler
 {
     static var errorCounter: Number = 0;
     static var errorText: String = "";
-    
+
     public static function setText(str)
     {
         if (!_root.hasOwnProperty("xvmErrorText"))
@@ -16,7 +16,7 @@ class wot.VehicleMarkersManager.ErrorHandler
             errorText = errorText.slice(errorText.indexOf("\n") + 1, errorText.length - 1);
         _root.xvmErrorText.text = errorText;
     }
-    
+
     private static function createErrorField()
     {
         var et: TextField = _root.createTextField("xvmErrorText", _root.getNextHighestDepth(), 350, 40, 1000, 300);

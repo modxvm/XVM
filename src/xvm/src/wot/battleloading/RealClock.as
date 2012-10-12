@@ -5,19 +5,19 @@ import wot.utils.GlobalEventDispatcher;
 class wot.battleloading.RealClock
 {
     private var form_mc:MovieClip;
-    
-    public function RealClock(form_mc) 
+
+    public function RealClock(form_mc)
     {
         this.form_mc = form_mc;
         GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
     }
-    
+
     private function onConfigLoaded()
     {
         GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
         showClock(Config.s_config.battleLoading.clockFormat);
     }
-    
+
     private function showClock(format)
     {
         if (!format || format == "")

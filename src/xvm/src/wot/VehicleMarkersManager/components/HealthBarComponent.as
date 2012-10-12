@@ -11,7 +11,7 @@ class wot.VehicleMarkersManager.components.HealthBarComponent
     private var border: MovieClip;
     private var fill: MovieClip;
     private var damage: MovieClip;
-    
+
     public function HealthBarComponent(proxy:HealthBarProxy)
     {
         this.proxy = proxy;
@@ -33,7 +33,7 @@ class wot.VehicleMarkersManager.components.HealthBarComponent
         damage._alpha = proxy.formatDynamicAlpha(cfg.damage.alpha, curHealth);
         TweenLite.to(damage, cfg.damage.fade, {_xscale: 0, ease: Cubic.easeIn });
     }
-    
+
     public function updateState(state_cfg:Object)
     {
         var cfg = state_cfg.healthBar;

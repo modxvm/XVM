@@ -13,7 +13,7 @@ class wot.SixthSenseIndicator
 
     var icon:UILoaderAlt;
 
-    public function SixthSenseIndicator() 
+    public function SixthSenseIndicator()
     {
         var il:IconLoader = new IconLoader(_root.sixthSenseIndicator, completeLoadSixthSenseIcon);
         icon = (UILoaderAlt)(_root.sixthSenseIndicator.attachMovie("UILoaderAlt", "icon", 0));
@@ -26,12 +26,12 @@ class wot.SixthSenseIndicator
 
         icon["onLoadInit"] = icon_onLoadInit;
     }
-    
+
     function icon_onLoadInit(mc:MovieClip)
     {
         icon.setSize(mc._width, mc._height);
     }
-    
+
     public function completeLoadSixthSenseIcon(event)
     {
         //Logger.add("completeLoadSixthSenseIcon");
@@ -54,7 +54,7 @@ class wot.SixthSenseIndicator
             _root.sixthSenseIndicator.gotoAndPlay2(frame);
             return;
         }
-        
+
         switch (frame)
         {
             case "active":

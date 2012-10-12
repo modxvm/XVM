@@ -537,7 +537,7 @@ class wot.utils.DefaultConfig
       format: "{{nick}}"
     }
   }
-  
+
   public static function get playerName_dead(): Object
   {
     return {

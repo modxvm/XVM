@@ -17,12 +17,12 @@ class wot.VehicleMarkersManager.components.ContourIconProxy extends AbstractAcce
     {
         return xvm.proxy.iconLoader != null && xvm.proxy.iconLoader.initialized;
     }
-    
+
     public function get iconLoader():UILoaderAlt
     {
         return xvm.proxy.iconLoader;
     }
-    
+
     public function get source():String
     {
         return xvm.m_source;

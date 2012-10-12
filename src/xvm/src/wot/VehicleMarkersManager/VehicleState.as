@@ -7,17 +7,17 @@ class wot.VehicleMarkersManager.VehicleState
      * move isDead showExInfo team etc into this.
     */
     private var proxy:VehicleStateProxy;
-    
+
     public static var allAlly: Array = [
         "ally/alive/normal", "ally/alive/extended", "ally/dead/normal", "ally/dead/extended"]
     public static var allEnemy: Array = [
         "enemy/alive/normal", "enemy/alive/extended", "enemy/dead/normal", "enemy/dead/extended"]
-    
-    public function VehicleState(proxy:VehicleStateProxy) 
+
+    public function VehicleState(proxy:VehicleStateProxy)
     {
         this.proxy = proxy;
     }
-    
+
     public function getCurrentState(): String
     {
         var result:String = proxy.team + "/";

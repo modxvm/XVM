@@ -91,7 +91,7 @@ class wot.utils.PlayerInfo extends MovieClip
         //icon.visible = false;
         if (!s_playersIconSources.hasOwnProperty(icon["nick"]))
             s_playersIconSources[icon["nick"]] = icon.source;
-        
+
         icon["holder"].onEnterFrame = function()
         {
             if (icon.invalidationIntervalID)
