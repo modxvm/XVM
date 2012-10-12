@@ -1,6 +1,8 @@
 ﻿XVM-3.0.4.test1:
-  * XVM is distributed only in Lite version, without statistics module.
-  * Statistics module was renamed to xvm-stat and distributed in separate package.
+  * XVM is distributed only in Lite version, without statistics module
+  * statistics module was renamed to xvm-stat and distributed in separate package
+  * SixthSense.png added to samples
+  * fixed text formatting with disabled statistics in battle loading screen
 
 XVM-3.0.3:
   * added possibility to change {{turret}} marker display string
