@@ -80,7 +80,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
     public function get proxy():VehicleMarkerProxy { return _proxy; }
 
     public function get isBlowedUp():Boolean { return s_blowedUp[m_playerFullName] != undefined; }
-    
+
     /**
      * Text formatting functions
      */
@@ -298,7 +298,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
             //textField.border = true;
             //textField.borderColor = 0xFFFFFF;
             //textField.autoSize = "center"; // http://theolagendijk.com/2006/09/07/aligning-htmltext-inside-flash-textfield/
-            
+
             textField.html = true;
 
             var style:TextField.StyleSheet = new TextField.StyleSheet();
@@ -308,7 +308,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
             textField.styleSheet = style;
 
 //            Logger.add(XvmHelper.createCSS(cfg.font, formatDynamicColor(formatStaticColorText(cfg.color), m_curHealth), "xvm_markerText"));
-            
+
             // TODO: replace shadow with TweenLite Shadow/Bevel (performance issue)
             if (cfg.shadow)
             {

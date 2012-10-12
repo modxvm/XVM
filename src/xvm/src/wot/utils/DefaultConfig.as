@@ -495,58 +495,26 @@ class wot.utils.DefaultConfig
       visible: true,
       x: 0,
       y: -67,
+      // TODO: remove [
       color: null,
       font: font_18,
       speed: 2,
       maxRange: 40,
-      /**
-       *  Legend:
-       *   # : operation in progress
-       *   + : operation complete and result is visible
-       *
-       *          0s    0.5s  1s    1.5s  delay Xs
-       *  fadeIn  ###++ +++++ +++++ +++++ ~ ~ ~ -----
-       *  tint    ##### ##
-       *  move up ##### ##### ##### ##### ~ ~ ~ +++++
-       *  fadeOut ----- ----- ----- ----- ~ ~ ~ #####
-       */
-      /**
-       * In case of whiteFlash coding:
-       * Tint recolors Glow? Recolors shadowFilter?
-       * Make two movieclips?
-       * Use GraphicsUtil.createShadowFilter and tween filter?
-       */
-      /**
-       * Available functions:
-       *   insert, append, fadeIn, fadeOut, tint, move
-       */
-      animation:
-        "set(alpha(0.5));" +
-        "set(shadow({blurX:6, blurY:6, distance:0, strength:2}));" +
-        "insert(fadeIn(0.3), 0);" +
-        "insert(tint(0.7, 0xFFFFFF), 0);" +
-        "insert(move(2, 40, 'up'), 0);" +
-        "append(to(1, {glowFilter:{color:0x00FF00, blurX:10, blurY:10, strength:1, alpha:1}}), 1);" +
-        "append(fadeOut(0.5), -0.5);",
+      // ]
+      effects: "dmg", // name of script function with animation effects
       damageMessage: "{{dmg}}",
-      blowupMessage: "Blow-up!",
-      damageMessages: damageMessages,
-      blowupMessages: damageMessages
+      blowupMessage: "Blow-up!"
     }
   }
 
-  // damageMessages section
-  public static function get damageMessages(): Object
-  {
-    return
-    {
-      unknown: null,
-      player: null,
-      ally: null,
-      squad: null,
-      enemy: null
-    }
-  }
+  public static var DefaultXS:String =
+    "dmg() {" +
+    "  set(shadow({blurX:6, blurY:6, strength:2}));" +
+    "  insert(fadeIn(0.3), 0);" +
+    "  insert(tint(0.5, 0xFFFFFF), 0);" +
+    "  insert(move(2, 40, 'up'), 0);" +
+    "  append(fadeOut(0.5), -0.5);" +
+    "}";
 
   // contourIcon
   public static function get ci(): Object

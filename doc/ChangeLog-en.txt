@@ -1,4 +1,7 @@
-﻿XVM-3.0.4.alpha8:
+﻿XVM-3.0.4.alpha9:
+  * scripts for animation effects (file XVM.xs)
+
+XVM-3.0.4.alpha8:
   * support of HTML/CSS in any text field, including vehicle markers
 
 XVM-3.0.4.alpha7:

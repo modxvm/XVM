@@ -11,7 +11,7 @@ class wot.VehicleMarkersManager.components.HealthBarComponent
     private var border: MovieClip;
     private var fill: MovieClip;
     private var damage: MovieClip;
-    
+
     public function HealthBarComponent(proxy:HealthBarProxy)
     {
         this.proxy = proxy;
@@ -25,7 +25,7 @@ class wot.VehicleMarkersManager.components.HealthBarComponent
     public function showDamage(state_cfg:Object, curHealth:Number, maxHealth:Number, delta:Number)
     {
         var cfg = state_cfg.healthBar;
-        //Flow bar animation
+        // Flow bar animation
         TweenLite.killTweensOf(damage);
         damage._x = cfg.border.size + cfg.width * (curHealth / maxHealth) - 1;
         damage._xscale = damage._xscale + 100 * (delta / maxHealth);
@@ -33,7 +33,7 @@ class wot.VehicleMarkersManager.components.HealthBarComponent
         damage._alpha = proxy.formatDynamicAlpha(cfg.damage.alpha, curHealth);
         TweenLite.to(damage, cfg.damage.fade, {_xscale: 0, ease: Cubic.easeIn });
     }
-    
+
     public function updateState(state_cfg:Object)
     {
         var cfg = state_cfg.healthBar;

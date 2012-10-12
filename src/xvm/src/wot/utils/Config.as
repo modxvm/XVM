@@ -3,6 +3,7 @@
  * @author sirmax2
  */
 import wot.utils.Defines;
+import wot.utils.DefaultConfig;
 import wot.utils.GlobalEventDispatcher;
 import wot.utils.Locale;
 import wot.utils.Logger;
@@ -14,11 +15,13 @@ class wot.utils.Config
     public static var s_config: Object;
     public static var s_style:TextField.StyleSheet;
     public static var s_css:String = null;
+    public static var s_xs:String = null;
     public static var s_loaded: Boolean = false;
     public static var s_proxy_available: Boolean = true;
     public static var s_game_region: String = null;
 
     private static var STYLE_FILENAME = "XVM.css";
+    private static var XS_FILENAME = "XVM.xs";
 
     private static var DEBUG_TIMES = false;
     private static var DEBUG_TUNING = false;
@@ -76,12 +79,36 @@ class wot.utils.Config
                 if (finallyBugWorkaround)
                     return;
                 finallyBugWorkaround = true;
-                Config.ReloadConfig();
+                Config.ReloadXS();
 //Logger.add("Config.ReloadCSS::onData::finally::end");
             }
 //Logger.add("Confige.ReloadCSS::onData::end");
         };
         lv.load(STYLE_FILENAME);
+    }
+
+    private static function ReloadXS()
+    {
+        //Logger.add("TRACE: Config.ReloadXS()");
+        Config.s_xs = "";
+
+        var lv:LoadVars = new LoadVars();
+        lv.onData = function(str: String)
+        {
+            var finallyBugWorkaround: Boolean = false;
+            try
+            {
+                Config.s_xs = str || DefaultConfig.DefaultXS;
+            }
+            finally
+            {
+                if (finallyBugWorkaround)
+                    return;
+                finallyBugWorkaround = true;
+                Config.ReloadConfig();
+            }
+        };
+        lv.load(XS_FILENAME);
     }
 
     private static function ReloadConfig()

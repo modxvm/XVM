@@ -1,6 +1,5 @@
 import wot.utils.Config;
 import wot.utils.Defines;
-import wot.utils.GraphicsUtil;
 import wot.VehicleMarkersManager.ColorsManager;
 import wot.VehicleMarkersManager.XvmHelper;
 //import wot.VehicleMarkersManager.components.damage.DamageTextConfig;
@@ -70,8 +69,8 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
         //wot.utils.Logger.add(tf.htmlText);
         //wot.utils.Logger.add(XvmHelper.createCSS(cfg.font, color, "xvm_damageText"));
 
-        var animation = proxy.formatDynamicText(proxy.formatStaticText(cfg.animation));
-        var dummy = new DamageTextAnimation(animation, tf); // defines and starts
+        var effects = proxy.formatDynamicText(proxy.formatStaticText(cfg.effects));
+        var dummy = new DamageTextAnimation(effects, tf); // defines and starts
     }
 
     public function updateState(state_cfg:Object)
@@ -104,16 +103,8 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
         style.parseCSS(XvmHelper.createCSS(cfg.font, color, "xvm_damageText"));
         tf.styleSheet = style;
 
-        // TODO: replace shadow with TweenLite Shadow/Bevel (performance issue)
-        tf.filters = [ GraphicsUtil.createShadowFilter
-        (
-            cfg.shadow.distance,
-            cfg.shadow.angle,
-            shadowColor,
-            isNaN(parseInt(cfg.shadow.alpha)) ? 100 : cfg.shadow.alpha, // TODO:dynamic alpha?
-            cfg.shadow.size,
-            cfg.shadow.strength
-        ) ];
+        // Filters can be set using "effects" option
+        tf.filters = [ ];
 
         tf._x = -(tf._width / 2.0);
 

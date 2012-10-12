@@ -6,12 +6,12 @@ import wot.utils.Evaluator;
 import wot.utils.Logger;
 import wot.VehicleMarkersManager.ErrorHandler;
 
-class wot.VehicleMarkersManager.components.damage.DamageTextAnimation
+class wot.VehicleMarkersManager.EffectsProvider
 {
     private static var dummy = Logger.dummy; // avoid import warning
     private function trace(str:String):Void
     {
-        Logger.add("[DamageTextAnimation]> " + str);
+        Logger.add("[EffectsProvider]> " + str);
     }
 
     // Animates textField and cleans it up.

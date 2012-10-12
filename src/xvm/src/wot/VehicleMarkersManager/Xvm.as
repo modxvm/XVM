@@ -57,14 +57,14 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
 
         // initialize ColorsManager for detecting color blind mode
         ColorsManager.initialize();
-        
+
         // initialize TweenLite
         OverwriteManager.init(OverwriteManager.AUTO);
         TweenPlugin.activate([AutoAlphaPlugin, BevelFilterPlugin, BezierPlugin, BezierThroughPlugin, BlurFilterPlugin,
             CacheAsBitmapPlugin, ColorMatrixFilterPlugin, ColorTransformPlugin, DropShadowFilterPlugin, EndArrayPlugin,
-            FilterPlugin, FrameBackwardPlugin, FrameForwardPlugin, FrameLabelPlugin, FramePlugin, GlowFilterPlugin,
+            FrameBackwardPlugin, FrameForwardPlugin, FrameLabelPlugin, FramePlugin, GlowFilterPlugin,
             HexColorsPlugin, QuaternionsPlugin, RemoveTintPlugin, RoundPropsPlugin, ScalePlugin, ScrollRectPlugin,
-            SetSizePlugin, ShortRotationPlugin, TintPlugin, TransformMatrixPlugin, TweenPlugin, VisiblePlugin, VolumePlugin]);
+            SetSizePlugin, ShortRotationPlugin, TintPlugin, TransformMatrixPlugin, VisiblePlugin, VolumePlugin]);
     }
 
     /**
@@ -180,31 +180,31 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
      */
     function updateHealth(newHealth, flag, damageType)
     {
-        /* 
+        /*
          * newHealth:
          *  1497, 499, 0 and -1 in case of ammo blow up
          * flag - int:
          * 0 - "FROM_UNKNOWN", 1 - "FROM_ALLY", 2 - "FROM_ENEMY", 3 - "FROM_SQUAD", 4 - "FROM_PLAYER"
-         * 
+         *
          * damageType - string:
          *  "attack", "fire", "ramming", "world_collision", "death_zone", "drowning", "explosion"
          */
-        
+
         //Logger.add("Xvm::updateHealth(" + flag + ", " + damageType + ", " + newHealth +")");
-        
+
         if (newHealth < 0)
             s_blowedUp[m_playerFullName] = true;
-            
+
         m_isDead = newHealth <= 0;
 
         var delta: Number = newHealth - m_curHealth;
         m_curHealth = m_isDead ? 0 : newHealth; // fixes "-1"
-        
+
         if (delta < 0) // Damage has been done
         {
             // markers{ally{alive{normal
             var vehicleStateCfg:Object = vehicleState.getCurrentConfig();
-            
+
             healthBarComponent.updateState(vehicleStateCfg);
             healthBarComponent.showDamage(vehicleStateCfg, newHealth, m_maxHealth, -delta);
 
