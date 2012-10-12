@@ -10,14 +10,16 @@ import wot.utils.Utils;
 
 class wot.utils.Config
 {
-    public static var DEBUG_TIMES = false;
-    public static var DEBUG_TUNING = false;
-
-    // Private vars
+    // Public vars
     public static var s_config: Object;
     public static var s_loaded: Boolean = false;
     public static var s_proxy_available: Boolean = true;
     public static var s_game_region: String = null;
+
+    private static var DEBUG_TIMES = false;
+    private static var DEBUG_TUNING = false;
+
+    // Private vars
     private static var s_loading: Boolean = false;
     private static var s_load_legacy_config: Boolean = false;
     private static var s_config_filename: String = "";
@@ -169,9 +171,9 @@ class wot.utils.Config
 
                 if (!config)
                 {
-                    GlobalEventDispatcher.dispatchEvent( {
-                        type: "set_info",
-                        error: "Error parsing config file. Using default settings." } );
+                    var text = "Error parsing config file. Using default settings.";
+                    GlobalEventDispatcher.dispatchEvent( { type: "set_info", error: text } );
+                    Logger.add(text);
                 }
                 else
                 {
@@ -198,9 +200,11 @@ class wot.utils.Config
                 while (tail.indexOf("  ") != -1)
                     tail = tail.split("  ").join(" ");
 
-                GlobalEventDispatcher.dispatchEvent({ type: "set_info", error: "Error loading config file: " +
+                var text:String = "Error loading config file: " +
                     "[" + ex.at + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " +
-                    head + ">>>" + str.charAt(ex.at) + "<<<" + tail });
+                    head + ">>>" + str.charAt(ex.at) + "<<<" + tail;
+                GlobalEventDispatcher.dispatchEvent( { type: "set_info", error: text } );
+                Logger.add(String(text).substr(0, 200));
             }
         }
         else
