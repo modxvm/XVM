@@ -2,6 +2,7 @@
  * ...
  * @author Maxim Schedriviy
  */
+import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.Locale;
 import wot.utils.Logger;
@@ -53,7 +54,7 @@ class wot.VehicleMarkersManager.HitLog
 
     function setText(txt)
     {
-        textField.htmlText = "<p class='xvm_hitlog'>" + txt + "</p>";
+        textField.htmlText = "<span class='xvm_hitlog'>" + txt + "</span>";
         //Logger.add(textField.htmlText);
     }
 
@@ -88,8 +89,13 @@ class wot.VehicleMarkersManager.HitLog
     private function createControl()
     {
         //Logger.add("HitLog::createControl()");
-        // TODO: x,y < 0
+        var x = this.x >= 0 ? this.x : Config.s_vars.window_size[0] + this.x;
+        var y = this.y >= 0 ? this.y : Config.s_vars.window_size[1] + this.y;
+        
         textField = _root.createTextField("xvmHitLog", _root.getNextHighestDepth(), x, y, w, h);
+        //textField.border = true;
+        //textField.borderColor = 0xFFFFFF;
+        textField.verticalAlign = (direction == Defines.DIRECTION_DOWN) ? "top" : "bottom";
         textField.antiAliasType = "advanced";
         textField.multiline = true;
         textField.wordWrap = false;

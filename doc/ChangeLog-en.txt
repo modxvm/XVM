@@ -1,4 +1,8 @@
-﻿XVM-3.0.4.test1:
+﻿XVM-3.0.4.test2:
+  * negative x, y values in hit log settings allow to bind the text to the right
+    and bottom edges to the same config worked at different resolutions screen
+
+XVM-3.0.4.test1:
   * XVM is distributed only in Lite version, without statistics module
   * statistics module was renamed to xvm-stat and distributed in separate package
   * SixthSense.png added to samples

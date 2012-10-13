@@ -41,7 +41,7 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
     function setSize(width, height)
     {
         super.setSize(width, height);
-        (new LoadVars()).load(Defines.COMMAND_VAR + " resolution=" + width + "," + height);
+        (new LoadVars()).load(Defines.COMMAND_VAR + " window_size=" + width + "," + height);
     }
 
     private function onConfigLoaded()
