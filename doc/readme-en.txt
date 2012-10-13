@@ -75,10 +75,23 @@
   All possible config options you can see in this file:
     \xvm-doc\samples\Full config EN\XVM.xvmconf
 
+  Supported HTML tags:
+    http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText
+
   Macros available:
     In players panel, battle loading screen and statistic form:
       {{nick}}        - player nickname
       {{vehicle}}     - vehicle name
+
+    In Hits Log:
+      {{n}}           - count of hits
+      {{dmg}}         - last hit value
+      {{dmg-total}}   - total sum of hits
+      {{nick}}        - player nickname
+      {{vehicle}}     - vehicle name
+      {{level}}       - vehicle level (Arabic numerals)
+      {{rlevel}}      - vehicle level (Roman numerals)
+      {{dmg-kind}}    - damage kind (attack, fire, ramming, ...)
 
     In tank markers:
       {{hp}}          - current health points
