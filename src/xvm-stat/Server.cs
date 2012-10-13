@@ -85,6 +85,7 @@ namespace wot
     private int lastResultId = -1;
     private readonly String[] proxies;
     private Info modInfo;
+    private readonly Dictionary<string, string> vars = new Dictionary<string, string>();
 
     private readonly object _lock = new object();
     private readonly object _lockIngame = new object();
@@ -322,62 +323,84 @@ namespace wot
               ProcessLog(parameters);
               break;
 
+            case "@VAR": // args - variable=value
+              {
+                string[] v = parameters.Split(new char[] { '=' }, 2);
+                if (v.Length < 2)
+                  throw new Exception("Bad variable received: " + parameters);
+                Log("SET VAR: " + parameters);
+                vars[v[0].Trim()] = v[1];
+              }
+              break;
+
             case "@SET": // args - set of players
             case "@ADD": // args - set of players
-              if (command == "@SET")
-                requests.Add(new Request()
-                {
-                  players = new List<PlayerData>(),
-                  result = null,
-                  thread = null,
-                });
-              (new Thread(() => AddPendingPlayers(parameters))).Start();
-              _result = String.Format("{{\"resultId\":{0}}}", requests.Count - 1);
+              {
+                if (command == "@SET")
+                  requests.Add(new Request()
+                  {
+                    players = new List<PlayerData>(),
+                    result = null,
+                    thread = null,
+                  });
+                (new Thread(() => AddPendingPlayers(parameters))).Start();
+                _result = String.Format("{{\"resultId\":{0}}}", requests.Count - 1);
+              }
               break;
 
             case "@RUN": // no args
-              lastResultId = requests.Count - 1;
-              if (lastResultId < 0)
-                throw new Exception("No request");
-              _result = requests[lastResultId].result = GetStat(requests[lastResultId]); // this will start network operations
+              {
+                lastResultId = requests.Count - 1;
+                if (lastResultId < 0)
+                  throw new Exception("No request");
+                _result = requests[lastResultId].result = GetStat(requests[lastResultId]); // this will start network operations
+              }
               break;
 
             case "@GET_LAST_STAT": // no args
-              if (lastResultId < 0)
-                throw new Exception("No request");
-              _result = requests[lastResultId].result;
+              {
+                if (lastResultId < 0)
+                  throw new Exception("No request");
+                _result = requests[lastResultId].result;
+              }
               break;
 
             case "@RUN_ASYNC": // args - resultId
-              if (string.IsNullOrEmpty(parameters))
-                throw new Exception("Empty resultId");
-              int resultId;
-              string[] p = parameters.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-              if (!int.TryParse(p[0], out resultId) || resultId < 0 || resultId >= requests.Count)
-                throw new Exception("Invalid resultId: " + p[0]);
-
-              if (!string.IsNullOrEmpty(requests[resultId].result))
-                _result = requests[resultId].result;
-              else
               {
-                if (requests[resultId].thread == null)
+                if (string.IsNullOrEmpty(parameters))
+                  throw new Exception("Empty resultId");
+                int resultId;
+                string[] p = parameters.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                if (!int.TryParse(p[0], out resultId) || resultId < 0 || resultId >= requests.Count)
+                  throw new Exception("Invalid resultId: " + p[0]);
+
+                if (!string.IsNullOrEmpty(requests[resultId].result))
+                  _result = requests[resultId].result;
+                else
                 {
-                  requests[resultId].thread = new Thread(() =>
+                  if (requests[resultId].thread == null)
                   {
-                    lock (_lockIngame)
+                    requests[resultId].thread = new Thread(() =>
                     {
-                      requests[resultId].result = GetStat(requests[resultId]); // this will start network operations
-                      Debug("Loaded: " + resultId);
-                    }
-                  });
-                  requests[resultId].thread.Start();
+                      lock (_lockIngame)
+                      {
+                        requests[resultId].result = GetStat(requests[resultId]); // this will start network operations
+                        Debug("Loaded: " + resultId);
+                      }
+                    });
+                    requests[resultId].thread.Start();
+                  }
+                  _result = "{\"status\":\"NOT_READY\"}";
                 }
-                _result = "{\"status\":\"NOT_READY\"}";
               }
               break;
 
             case "@GET_VERSION":
-              _result = version + "\n" + Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+              {
+                _result = version + "\n" + Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+                foreach (var v in vars.Keys)
+                  _result += "\n" + v + "=" + vars[v];
+              }
               break;
 
             default:

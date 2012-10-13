@@ -64,7 +64,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
 
     private function trace(str:String):Void
     {
-        //if (m_playerName == "dosik_dai")
+        //if (m_playerName == "...")
         //Logger.add(m_playerName + "> " + str);
     }
 
