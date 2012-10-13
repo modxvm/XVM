@@ -352,8 +352,7 @@ class wot.utils.DefaultConfig
         ],
         rating: [
           { value: 45,  color: "0xDD0000" },
-          { value: 47,  color: "0xDD3333" },
-          { value: 49,  color: "0xDDDD33" },
+          { value: 48,  color: "0xDDDD33" },
           { value: 51,  color: "0xFFCC33" },
           { value: 53,  color: "0x99FF33" },
           { value: 57,  color: "0x33FF33" },
