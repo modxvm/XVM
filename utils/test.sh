@@ -9,8 +9,8 @@ CURRENT_DIRECTORY=`pwd`
 
 #SAMPLE_REPLAY=squad_tk.wotreplay
 #SAMPLE_REPLAY=6thsence.wotreplay
-#SAMPLE_REPLAY=tk.wotreplay
-SAMPLE_REPLAY=fire.wotreplay
+SAMPLE_REPLAY=tk.wotreplay
+#SAMPLE_REPLAY=fire.wotreplay
 #-SAMPLE_REPLAY=7x7.wotreplay
 #-SAMPLE_REPLAY=fogofwar.wotreplay
 #-SAMPLE_REPLAY=markers.wotreplay

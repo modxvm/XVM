@@ -28,6 +28,8 @@ class wot.VehicleMarkersManager.HitLog
     private var total:Number;
     private var fire_total:Number;
     private var fire_hist:String;
+    private var ramming_total:Number;
+    private var ramming_hist:String;
     private var historyText:Array;
     
     private var textField:TextField;
@@ -47,6 +49,8 @@ class wot.VehicleMarkersManager.HitLog
         total = 0;
         fire_total = 0;
         fire_hist = "";
+        ramming_total = 0;
+        ramming_hist = "";
         if (lines > 1)
         {
             historyText = [];
@@ -65,22 +69,23 @@ class wot.VehicleMarkersManager.HitLog
 
     public function update(delta:Number, vehicleName:String, playerName:String, level:Number, damageType:String, vtypeColor:String)
     {
-        if (damageType != "fire" || fire_total == 0)
+        if (damageType != "fire" && damageType != "ramming" || fire_total == 0 && ramming_total == 0)
             nHits++;
         total += delta;
         fire_total = damageType == "fire" ? fire_total + delta : 0;
+        ramming_total = damageType == "ramming" ? ramming_total + delta : 0;
         //wot.utils.Logger.add(delta + " " + vehicleName + " " + playerName + " " + level);
 
-        var last:String = formatText(format, damageType == "fire" ? fire_total : delta, vehicleName, playerName, level,
-            damageType, vtypeColor);
+        var dmg = damageType == "fire" ? fire_total : damageType == "ramming" ? ramming_total : delta;
+
+        var last:String = formatText(format, dmg, vehicleName, playerName, level, damageType, vtypeColor);
         if (lines <= 1)
         {
             setText(last);
             return;
         }
 
-        var hist:String = formatText(formatHistory || format, damageType == "fire" ? fire_total : delta,
-            vehicleName, playerName, level, damageType, vtypeColor);
+        var hist:String = formatText(formatHistory || format, dmg, vehicleName, playerName, level, damageType, vtypeColor);
         if (direction == Defines.DIRECTION_DOWN)
         {
             if (damageType == "fire")
@@ -91,8 +96,17 @@ class wot.VehicleMarkersManager.HitLog
                 fire_hist = "";
             }
 
+            if (damageType == "ramming")
+                ramming_hist = hist;
+            else if (ramming_hist != "")
+            {
+                historyText.unshift(ramming_hist);
+                ramming_hist = "";
+            }
+
             setText(last + "<br/>" + historyText.join("<br/>"));
-            if (damageType != "fire")
+
+            if (damageType != "fire" && damageType != "ramming")
             {
                 historyText.pop();
                 historyText.unshift(hist);
@@ -107,8 +121,17 @@ class wot.VehicleMarkersManager.HitLog
                 historyText.push(fire_hist);
                 fire_hist = "";
             }
+
+            if (damageType == "ramming")
+                ramming_hist = hist;
+            else if (ramming_hist != "")
+            {
+                historyText.push(ramming_hist);
+                ramming_hist = "";
+            }
+
             setText(historyText.join("<br/>") + "<br/>" + last);
-            if (damageType != "fire")
+            if (damageType != "fire" && damageType != "ramming")
             {
                 historyText.shift();
                 historyText.push(hist);

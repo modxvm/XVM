@@ -175,7 +175,7 @@
               "name": "Tank Rating",
               "x": 0, "y": -50, "alpha": 75,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<font face='$PartnerCondensed' size='12' color='{{c:eff}}'><b>{{t-rating}}</b></font>"
+              "format": "<font face='$FieldFont' size='12' color='{{c:eff}}'><b>{{t-rating}}</b></font>"
             }
           ]
         }
@@ -328,7 +328,7 @@
               "name": "Tank Rating",
               "x": 0, "y": -50, "alpha": 75,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<font face='$PartnerCondensed' size='12' color='{{c:eff}}'><b>{{t-rating}}</b></font>"
+              "format": "<font face='$FieldFont' size='12' color='{{c:eff}}'><b>{{t-rating}}</b></font>"
             }
           ]
         }

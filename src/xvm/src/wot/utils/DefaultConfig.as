@@ -489,7 +489,7 @@ class wot.utils.DefaultConfig
   public static function get font_18(): Object
   {
     return {
-      name: "$PartnerCondensed",
+      name: "$FieldFont",
       size: 18,
       align: "center",
       bold: false,

@@ -176,10 +176,10 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$PartnerCondensed",    //     Font name
+              "name": "$FieldFont",           //     Font name
               "size": 18,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
-              "bold": false,                   //     Normal (false) or bold (true)
+              "bold": false,                  //     Normal (false) or bold (true)
               "italic": false                 //     Normal (false) or italic (true)
             },
             "shadow": {                       //   Shadow options
@@ -326,7 +326,7 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$PartnerCondensed",    //     Font name
+              "name": "$FieldFont",           //     Font name
               "size": 18,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
               "bold": false,                  //     Normal (false) or bold (true)
@@ -505,7 +505,7 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$PartnerCondensed",    //     Font name
+              "name": "$FieldFont",           //     Font name
               "size": 18,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
               "bold": false,                  //     Normal (false) or bold (true)
@@ -606,7 +606,7 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$PartnerCondensed",    //     Font name
+              "name": "$FieldFont",           //     Font name
               "size": 18,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
               "bold": false,                  //     Normal (false) or bold (true)
@@ -762,7 +762,7 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$PartnerCondensed",    //     Font name
+              "name": "$FieldFont",           //     Font name
               "size": 18,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
               "bold": false,                  //     Normal (false) or bold (true)
@@ -912,7 +912,7 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$PartnerCondensed",    //     Font name
+              "name": "$FieldFont",           //     Font name
               "size": 18,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
               "bold": false,                  //     Normal (false) or bold (true)
@@ -1091,7 +1091,7 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$PartnerCondensed",    //     Font name
+              "name": "$FieldFont",           //     Font name
               "size": 18,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
               "bold": false,                  //     Normal (false) or bold (true)
@@ -1192,7 +1192,7 @@
             "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
             "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
             "font": {                         //   Font options
-              "name": "$PartnerCondensed",    //     Font name
+              "name": "$FieldFont",           //     Font name
               "size": 18,                     //     Font size
               "align": "center",              //     Text alignment (left, center, right)
               "bold": false,                  //     Normal (false) or bold (true)

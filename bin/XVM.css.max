@@ -34,7 +34,7 @@
 /* statistics text */
 .m_stat
 {
-  font-family: $PartnerCondensed;
+  font-family: $FieldFont;
   font-size: 12;
   text-align: center;
   font-weight: bold;

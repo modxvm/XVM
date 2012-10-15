@@ -176,7 +176,7 @@
             "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
             "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
             "font": {                         //   параметры шрифта
-              "name": "$PartnerCondensed",    //     название
+              "name": "$FieldFont",           //     название
               "size": 18,                     //     размер
               "align": "center",              //     выравнивание текста (left, center, right)
               "bold": false,                  //     обычный (false) или жирный (true)
@@ -328,7 +328,7 @@
             "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
             "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
             "font": {                         //   параметры шрифта
-              "name": "$PartnerCondensed",    //     название
+              "name": "$FieldFont",           //     название
               "size": 18,                     //     размер
               "align": "center",              //     выравнивание текста (left, center, right)
               "bold": false,                  //     обычный (false) или жирный (true)
@@ -509,7 +509,7 @@
             "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
             "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
             "font": {                         //   параметры шрифта
-              "name": "$PartnerCondensed",    //     название
+              "name": "$FieldFont",           //     название
               "size": 18,                     //     размер
               "align": "center",              //     выравнивание текста (left, center, right)
               "bold": false,                  //     обычный (false) или жирный (true)
@@ -610,7 +610,7 @@
             "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
             "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
             "font": {                         //   параметры шрифта
-              "name": "$PartnerCondensed",    //     название
+              "name": "$FieldFont",           //     название
               "size": 18,                     //     размер
               "align": "center",              //     выравнивание текста (left, center, right)
               "bold": false,                  //     обычный (false) или жирный (true)
@@ -696,7 +696,7 @@
                 "name": "$FieldFont",         //   название
                 "size": 13,                   //   размер
                 "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false,                 //   обычный (false) или жирный (true)
+                "bold": false,                //   обычный (false) или жирный (true)
                 "italic": false               //   обычный (false) или курсив (true)
               },
               "shadow": {                     // параметры тени
@@ -768,7 +768,7 @@
             "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
             "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
             "font": {                         //   параметры шрифта
-              "name": "$PartnerCondensed",    //     название
+              "name": "$FieldFont",           //     название
               "size": 18,                     //     размер
               "align": "center",              //     выравнивание текста (left, center, right)
               "bold": false,                  //     обычный (false) или жирный (true)
@@ -920,7 +920,7 @@
             "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
             "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
             "font": {                         //   параметры шрифта
-              "name": "$PartnerCondensed",    //     название
+              "name": "$FieldFont",           //     название
               "size": 18,                     //     размер
               "align": "center",              //     выравнивание текста (left, center, right)
               "bold": false,                  //     обычный (false) или жирный (true)
@@ -1101,7 +1101,7 @@
             "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
             "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
             "font": {                         //   параметры шрифта
-              "name": "$PartnerCondensed",    //     название
+              "name": "$FieldFont",           //     название
               "size": 18,                     //     размер
               "align": "center",              //     выравнивание текста (left, center, right)
               "bold": false,                  //     обычный (false) или жирный (true)
@@ -1202,7 +1202,7 @@
             "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
             "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
             "font": {                         //   параметры шрифта
-              "name": "$PartnerCondensed",    //     название
+              "name": "$FieldFont",           //     название
               "size": 18,                     //     размер
               "align": "center",              //     выравнивание текста (left, center, right)
               "bold": false,                  //     обычный (false) или жирный (true)
@@ -1218,7 +1218,7 @@
             },
             "speed": 2,                       //   время отображения отлетающего урона
             "maxRange": 40,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "{{dmg}}",      //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
+            "damageMessage": "{{dmg}}",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
             "blowupMessage": "Blow-up!"       //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
           },
           "contourIcon": {                    // иконки танка
