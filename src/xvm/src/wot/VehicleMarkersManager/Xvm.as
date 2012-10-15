@@ -172,6 +172,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
             return;
         m_entityName = value;
         vehicleTypeComponent.updateMarkerLabel();
+        initializeTextFields();
         XVMUpdateStyle();
     }
 
@@ -291,7 +292,6 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
                     //tf.field.textColor = formatDynamicColor(tf.color, m_curHealth);
                     tf.field.htmlText = "<textformat leading='-2'><p class='xvm_markerText'>" +
                         formatDynamicText(tf.format, m_curHealth) + "</p></textformat>";
-
                     tf.field._alpha = formatDynamicAlpha(tf.alpha, m_curHealth);
                 }
             }

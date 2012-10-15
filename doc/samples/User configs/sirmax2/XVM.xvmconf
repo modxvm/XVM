@@ -26,15 +26,15 @@
     "showChancesExp": true,
     "removeSquadIcon": false,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft": "{{vehicle}} <font name='Consolas' size='11'><font color='{{c:t-battles}}'>{{t-hb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
-    "formatRight": "<font name='Consolas' size='11'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-battles}}'>{{t-hb:3}}</font></font> {{vehicle}}"
+    "formatLeft": "{{vehicle}} <font face='Consolas' size='11'><font color='{{c:t-battles}}'>{{t-hb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
+    "formatRight": "<font face='Consolas' size='11'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-battles}}'>{{t-hb:3}}</font></font> {{vehicle}}"
   },
   "statisticForm": {
     "showChances": true,
     "showChancesExp": true,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft": "{{vehicle}} <font name='Consolas' size='11'><font color='{{c:kb}}'>{{t-hb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
-    "formatRight": "<font name='Consolas' size='11'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{t-hb:3}}</font></font> {{vehicle}}"
+    "formatLeft": "{{vehicle}} <font face='Consolas' size='11'><font color='{{c:kb}}'>{{t-hb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
+    "formatRight": "<font face='Consolas' size='11'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{t-hb:3}}</font></font> {{vehicle}}"
   },
   "playersPanel": {
     "alpha": 50,
@@ -68,10 +68,8 @@
     "h": 200,
     "lines": 1,
     "direction": "down",
-    "format": "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <b>{{dmg}}</b>",
-//    "format": "<textformat tabstops='[55,90,130,190]'><font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}:</font>\t{{dmg-total}}\t| <font color='#00FF00'><b>{{dmg}}</b></font>\t| {{dmg-kind}}\t| {{vehicle}}</textformat>",
-    "formatHistory": "<textformat tabstops='[55,90,130,190]'><font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}:</font>\t{{dmg-total}}\t| {{dmg}}\t| {{dmg-kind}}\t| {{vehicle}}</textformat>"
-
+    "format":        "<textformat tabstops='[55,90,130,190]'><font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}:</font>\t{{dmg-total}}\t| <font color='{{c:dmg-kind}}'><b>{{dmg}}</b></font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}}</font></textformat>",
+    "formatHistory": "<textformat tabstops='[55,90,130,190]'><font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}:</font>\t{{dmg-total}}\t| <font color='{{c:dmg-kind}}'>{{dmg}}</font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}}</font></textformat>"
   },
   "markers": {
     "ally": {

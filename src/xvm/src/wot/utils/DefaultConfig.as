@@ -110,8 +110,8 @@ class wot.utils.DefaultConfig
         h: 100,
         lines: 1,
         direction: "down",
-        format: "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <b>{{dmg}}</b>",
-        formatHistory: "{{n}}: {{dmg-total}} {{dmg}} {{vehicle}} {{dmg-kind}}"
+        format: "<font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <font color='{{c:dmg-kind}}'><b>{{dmg}}</b></font>",
+        formatHistory: "<textformat tabstops='[55,90,130,190]'><font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}:</font>\t{{dmg-total}}\t| <font color='{{c:dmg-kind}}'>{{dmg}}</font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}}</font></textformat>"
       },
       markers: {
         ally: {

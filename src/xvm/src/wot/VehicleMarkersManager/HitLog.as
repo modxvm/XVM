@@ -26,8 +26,10 @@ class wot.VehicleMarkersManager.HitLog
 
     private var nHits:Number;
     private var total:Number;
+    private var fire_total:Number;
+    private var fire_hist:String;
     private var historyText:Array;
-
+    
     private var textField:TextField;
 
     public function HitLog(cfg:Object)
@@ -43,6 +45,8 @@ class wot.VehicleMarkersManager.HitLog
 
         nHits = 0;
         total = 0;
+        fire_total = 0;
+        fire_hist = "";
         if (lines > 1)
         {
             historyText = [];
@@ -59,33 +63,56 @@ class wot.VehicleMarkersManager.HitLog
         //Logger.add(textField.htmlText);
     }
 
-    public function update(delta:Number, vehicleName:String, playerName:String, level:Number, damageType:String,
-        defaultIconSource:String, vtypeColor:String)
+    public function update(delta:Number, vehicleName:String, playerName:String, level:Number, damageType:String, vtypeColor:String)
     {
-        nHits++;
+        if (damageType != "fire" || fire_total == 0)
+            nHits++;
         total += delta;
+        fire_total = damageType == "fire" ? fire_total + delta : 0;
         //wot.utils.Logger.add(delta + " " + vehicleName + " " + playerName + " " + level);
 
-        var last:String = formatText(format, delta, vehicleName, playerName, level, damageType);
+        var last:String = formatText(format, damageType == "fire" ? fire_total : delta, vehicleName, playerName, level,
+            damageType, vtypeColor);
         if (lines <= 1)
         {
             setText(last);
             return;
         }
 
-        var hist:String = formatText(formatHistory || format, delta, vehicleName, playerName, level, damageType,
-            defaultIconSource, vtypeColor);
+        var hist:String = formatText(formatHistory || format, damageType == "fire" ? fire_total : delta,
+            vehicleName, playerName, level, damageType, vtypeColor);
         if (direction == Defines.DIRECTION_DOWN)
         {
+            if (damageType == "fire")
+                fire_hist = hist;
+            else if (fire_hist != "")
+            {
+                historyText.unshift(fire_hist);
+                fire_hist = "";
+            }
+
             setText(last + "<br/>" + historyText.join("<br/>"));
-            historyText.pop();
-            historyText.unshift(hist);
+            if (damageType != "fire")
+            {
+                historyText.pop();
+                historyText.unshift(hist);
+            }
         }
         else
         {
+            if (damageType == "fire")
+                fire_hist = hist;
+            else if (fire_hist != "")
+            {
+                historyText.push(fire_hist);
+                fire_hist = "";
+            }
             setText(historyText.join("<br/>") + "<br/>" + last);
-            historyText.shift();
-            historyText.push(hist);
+            if (damageType != "fire")
+            {
+                historyText.shift();
+                historyText.push(hist);
+            }
         }
     }
 
@@ -116,8 +143,7 @@ class wot.VehicleMarkersManager.HitLog
     }
 
     private function formatText(format:String,
-        delta:Number, vehicleName:String, playerName:String, level:Number, damageType:String,
-        defaultIconSource:String, vtypeColor:String):String
+        delta:Number, vehicleName:String, playerName:String, level:Number, damageType:String, vtypeColor:String):String
     {
         try
         {
@@ -155,8 +181,6 @@ class wot.VehicleMarkersManager.HitLog
             formatArr = format.split("{{c:vtype}}");
             if (formatArr.length > 1)
                 format = formatArr.join(vtypeColor);
-
-            // TODO: Stats macros
 
             format = Utils.trim(format);
         }
