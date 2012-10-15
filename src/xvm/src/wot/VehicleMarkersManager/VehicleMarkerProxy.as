@@ -7,6 +7,7 @@ import gfx.core.UIComponent;
 import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.GlobalEventDispatcher;
+import wot.utils.GraphicsUtil;
 import wot.utils.Logger;
 import wot.utils.Utils;
 import wot.VehicleMarkersManager.IVehicleMarker;
@@ -29,6 +30,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     var m_playerName:String;
     var m_curHealth:Number;
     var m_defaultIconSource:String;
+    var m_vehicleClass:String;
 
     // Components
     private static var hitLog:HitLog = null;
@@ -329,6 +331,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         m_level = vLevel;
         m_playerName = pFullName;
         m_defaultIconSource = vIconSource;
+        m_vehicleClass = vClass;
         m_curHealth = curHealth;
         call("init",   [ vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt, entityType ]);
     }
@@ -349,7 +352,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         if (flag == Defines.FROM_PLAYER && hitLog != null)
         {
             var delta = m_curHealth - (curHealth < 0 ? 0 : curHealth);
-            hitLog.update(delta, VehicleInfo.mapVehicleName(m_defaultIconSource, m_vehicleName), m_playerName, m_level, damageType);
+            hitLog.update(delta, VehicleInfo.mapVehicleName(m_defaultIconSource, m_vehicleName), m_playerName, m_level, damageType,
+                GraphicsUtil.GetVTypeColorValue(m_defaultIconSource, Utils.vehicleClassToVehicleType(m_vehicleClass)));
         }
         m_curHealth = curHealth < 0 ? 0 : curHealth;
         call("updateHealth", [ curHealth, flag, damageType ]);

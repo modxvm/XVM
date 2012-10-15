@@ -4,6 +4,7 @@
  */
 import wot.utils.Config;
 import wot.utils.Defines;
+import wot.utils.GraphicsUtil;
 import wot.utils.Locale;
 import wot.utils.Logger;
 import wot.utils.Utils;
@@ -58,7 +59,8 @@ class wot.VehicleMarkersManager.HitLog
         //Logger.add(textField.htmlText);
     }
 
-    public function update(delta:Number, vehicleName:String, playerName:String, level:Number, damageType:String)
+    public function update(delta:Number, vehicleName:String, playerName:String, level:Number, damageType:String,
+        defaultIconSource:String, vtypeColor:String)
     {
         nHits++;
         total += delta;
@@ -71,7 +73,8 @@ class wot.VehicleMarkersManager.HitLog
             return;
         }
 
-        var hist:String = formatText(formatHistory || format, delta, vehicleName, playerName, level, damageType);
+        var hist:String = formatText(formatHistory || format, delta, vehicleName, playerName, level, damageType,
+            defaultIconSource, vtypeColor);
         if (direction == Defines.DIRECTION_DOWN)
         {
             setText(last + "<br/>" + historyText.join("<br/>"));
@@ -91,7 +94,7 @@ class wot.VehicleMarkersManager.HitLog
         //Logger.add("HitLog::createControl()");
         var x = this.x >= 0 ? this.x : Config.s_vars.window_size[0] + this.x;
         var y = this.y >= 0 ? this.y : Config.s_vars.window_size[1] + this.y;
-        
+
         textField = _root.createTextField("xvmHitLog", _root.getNextHighestDepth(), x, y, w, h);
         //textField.border = true;
         //textField.borderColor = 0xFFFFFF;
@@ -113,20 +116,45 @@ class wot.VehicleMarkersManager.HitLog
     }
 
     private function formatText(format:String,
-        delta:Number, vehicleName:String, playerName:String, level:Number, damageType:String):String
+        delta:Number, vehicleName:String, playerName:String, level:Number, damageType:String,
+        defaultIconSource:String, vtypeColor:String):String
     {
         try
         {
-            format = format.split("{{n}}").join(String(nHits));
-            format = format.split("{{dmg}}").join(String(delta));
-            format = format.split("{{dmg-total}}").join(String(total));
-
-            format = format.split("{{nick}}").join(playerName);
-            format = format.split("{{vehicle}}").join(vehicleName);
-            format = format.split("{{level}}").join(String(level));
-            format = format.split("{{rlevel}}").join(XvmHelper.rlevel[level - 1]);
-
-            format = format.split("{{dmg-kind}}").join(Locale.get(damageType));
+            var formatArr:Array;
+            formatArr = format.split("{{n}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(String(nHits));
+            formatArr = format.split("{{dmg}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(String(delta));
+            formatArr = format.split("{{dmg-total}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(String(total));
+            formatArr = format.split("{{nick}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(playerName);
+            formatArr = format.split("{{vehicle}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(vehicleName);
+            formatArr = format.split("{{level}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(String(level));
+            formatArr = format.split("{{rlevel}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(XvmHelper.rlevel[level - 1]);
+            formatArr = format.split("{{dmg-kind}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(Locale.get(damageType));
+            formatArr = format.split("{{c:dmg-kind}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(delta ? GraphicsUtil.GetDmgKindValue(damageType) : "")
+            formatArr = format.split("{{c:dmg_kind}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(delta ? GraphicsUtil.GetDmgKindValue(damageType) : "")
+            formatArr = format.split("{{c:vtype}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(vtypeColor);
 
             // TODO: Stats macros
 

@@ -82,6 +82,31 @@
     In players panel, battle loading screen and statistic form:
       {{nick}}        - player nickname
       {{vehicle}}     - vehicle name
+      {{c:vtype}}     - color depended from vehicle type
+      + statistics macros (see below)
+
+    In tank markers:
+      {{nick}}        - player nickname
+      {{vehicle}}     - vehicle name
+      {{level}}       - vehicle level (Arabic numerals)
+      {{rlevel}}      - vehicle level (Roman numerals)
+      {{turret}}      - stock turret marker:
+                          "*" symbol - stock turret, cannot mount top gun
+                          "-" symbol - stock turret, top gun is possible
+                          empty - top turret
+      {{hp}}          - current health points
+      {{hp-ratio}}    - current health ratio (without '%' sign)
+      {{hp-max}}      - maximum health points
+      {{dmg}}         - damage health points
+      {{dmg-ratio}}   - damage health ratio (without '%' sign)
+      {{dmg-kind}}    - damage kind (attack, fire, ramming, ...)
+      {{c:hp}}        - color depended from current health points (only in vehicle markers)
+      {{c:hp-ratio}}  - color depended from current health ratio (only in vehicle markers)
+      {{c:dmg-kind}}  - color depended from damage kind
+      {{c:vtype}}     - color depended from vehicle type
+      {{a:hp}}        - transparency depended from current health points (only in vehicle markers)
+      {{a:hp-ratio}}  - transparency depended from current health ratio (only in vehicle markers)
+      + statistics macros (see below)
 
     In Hits Log:
       {{n}}           - count of hits
@@ -92,55 +117,33 @@
       {{level}}       - vehicle level (Arabic numerals)
       {{rlevel}}      - vehicle level (Roman numerals)
       {{dmg-kind}}    - damage kind (attack, fire, ramming, ...)
-
-    In tank markers:
-      {{hp}}          - current health points
-      {{hp-ratio}}    - current health ratio (without '%' sign)
-      {{hp-max}}      - maximum health points
-      {{nick}}        - player nickname
-      {{vehicle}}     - vehicle name
-      {{level}}       - vehicle level (Arabic numerals)
-      {{rlevel}}      - vehicle level (Roman numerals)
-      {{dmg}}         - damage health points
-      {{dmg-ratio}}   - damage health ratio (without '%' sign)
-      {{turret}}     - stock turret marker:
-                          "*" symbol - stock turret, cannot mount top gun
-                          "-" symbol - stock turret, top gun is possible
-                          empty - top turret
+      {{c:dmg-kind}}  - color depended from damage kind
+      {{c:vtype}}     - color depended from vehicle type
 
     Statistics macros ('rating/showPlayersStatistics' must be anabled):
-      {{rating}}      - GWR (Global Win Ratio)
-      {{eff}}         - player efficiency (http://wot-news.com/index.php/stat/calc/en/)
       {{kb}}          - number of kilo-battles (total battles count divided by 1000).
       {{battles}}     - total battles count
       {{wins}}        - total wins count
+      {{rating}}      - GWR (Global Win Ratio)
+      {{eff}}         - player efficiency (http://wot-news.com/index.php/stat/calc/en/)
+      {{kb:3}}        - number of kilo-battles aligned from left to 3 chars
       {{rating:3}}    - GWR aligned from left to 3 chars
       {{eff:4}}       - player efficiency aligned from left to 4 chars
-      {{kb:3}}        - number of kilo-battles aligned from left to 3 chars
-      {{t-rating}}    - vehicle win ratio
       {{t-kb}}        - number of kilo-battles for current vehicle
-      {{t-battles}}   - total battles count for current vehicle
-      {{t-wins}}      - total wins count for current vehicle
-      {{t-rating:3}}  - vehicle win ratio aligned from left to 3 chars
-      {{t-kb:4}}      - number of kilo-battles for current vehicle aligned from left to 4 chars
-      {{t-battles:4}} - number of battles for current vehicle aligned from left to 4 chars
       {{t-kb-0}}      - number of kilo-battles for current vehicle with leading zero
       {{t-hb}}        - number of hecto-battles for current vehicle (hecto = 100)
+      {{t-battles}}   - total battles count for current vehicle
+      {{t-wins}}      - total wins count for current vehicle
+      {{t-rating}}    - vehicle win ratio
+      {{t-kb:4}}      - number of kilo-battles for current vehicle aligned from left to 4 chars
       {{t-hb:3}}      - number of hecto-battles for current vehicle aligned from left to 3 chars
-
-    Dynamic colors macros:
-      {{c:hp}}        - color depended from current health points (only in vehicle markers)
-      {{c:hp-ratio}}  - color depended from current health ratio (only in vehicle markers)
-      {{c:vtype}}     - color depended from vehicle type (only in vehicle markers)
+      {{t-battles:4}} - number of battles for current vehicle aligned from left to 4 chars
+      {{t-rating:3}}  - vehicle win ratio aligned from left to 3 chars
       {{c:eff}}       - color depended from player efficiency
       {{c:rating}}    - color depended from GWR
       {{c:kb}}        - color depended from kilo-battles
       {{c:t-rating}}  - color depended from current vehicle win ratio
       {{c:t-battles}} - color depended from current vehicle battles
-
-    Dynamic transparency macros:
-      {{a:hp}}        - transparency depended from current health points (only in vehicle markers)
-      {{a:hp-ratio}}  - transparency depended from current health ratio (only in vehicle markers)
 
   "format" field examples:
     1. Show number of kilo-battles, efficiency and GWR without changing a color:

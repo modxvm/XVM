@@ -45,8 +45,14 @@ class wot.utils.TextCache
   {
     var name = data.label + ((data.clanAbbrev == "") ? "" : "[" + data.clanAbbrev + "]");
 
-    format = format.split("{{vehicle}}").join(VehicleInfo.mapVehicleName(data.icon, data.vehicle));
-    format = format.split("{{c:vtype}}").join(GraphicsUtil.GetVTypeColorValue(data.icon));
+    var formatArr:Array;
+
+    formatArr = format.split("{{vehicle}}");
+    if (formatArr.length > 1)
+      format = formatArr.join(VehicleInfo.mapVehicleName(data.icon, data.vehicle));
+    formatArr = format.split("{{c:vtype}}");
+    if (formatArr.length > 1)
+        format = formatArr.join(GraphicsUtil.GetVTypeColorValue(data.icon));
 
     format = StatFormat.FormatText(data, format, isDead);
 

@@ -89,12 +89,23 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
     {
         try
         {
-            // AS 2 doesn't have String.replace? Shame on them. Let's use our own square wheel.
-            format = format.split("{{nick}}").join(m_playerFullName);
-            format = format.split("{{vehicle}}").join(VehicleInfo.mapVehicleName(m_defaultIconSource, m_vname));
-            format = format.split("{{level}}").join(String(m_level));
-            format = format.split("{{rlevel}}").join(XvmHelper.rlevel[m_level - 1]);
-            format = format.split("{{turret}}").join(turretStatusComponent.getMarker());
+            var formatArr:Array;
+
+            formatArr = format.split("{{nick}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(m_playerFullName);
+            formatArr = format.split("{{vehicle}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(VehicleInfo.mapVehicleName(m_defaultIconSource, m_vname));
+            formatArr = format.split("{{level}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(String(m_level));
+            formatArr = format.split("{{rlevel}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(XvmHelper.rlevel[m_level - 1]);
+            formatArr = format.split("{{turret}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(turretStatusComponent.getMarker());
             format = StatFormat.FormatText({ label: m_playerFullName }, format);
             format = Utils.trim(format);
         }
@@ -132,21 +143,21 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
             var formatArr:Array;
 
             // Text
-            formatArr = format.split("{{hp-ratio}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(String(hpRatio));
             formatArr = format.split("{{hp}}");
             if (formatArr.length > 1)
                 format = formatArr.join(String(curHealth));
+            formatArr = format.split("{{hp-ratio}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(String(hpRatio));
             formatArr = format.split("{{hp-max}}");
             if (formatArr.length > 1)
                 format = formatArr.join(String(m_maxHealth));
-            formatArr = format.split("{{dmg-ratio}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(delta ? String(dmgRatio) : "");
             formatArr = format.split("{{dmg}}");
             if (formatArr.length > 1)
                 format = formatArr.join(delta ? String(delta) : "");
+            formatArr = format.split("{{dmg-ratio}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(delta ? String(dmgRatio) : "");
             formatArr = format.split("{{dmg-kind}}");
             if (formatArr.length > 1)
                 format = formatArr.join(delta ? Locale.get(damageType) : "");
