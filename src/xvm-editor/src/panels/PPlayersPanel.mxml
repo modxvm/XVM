@@ -10,7 +10,7 @@
             import utils.Macros;
         ]]>
     </fx:Script>
-    <c:LabeledMacrosNumberSelector label="{resourceManager.getString('panels', 'ppAlpha')}" id="v_alpha" config="playersPanel.alpha" minimum="0" maximum="100" allowedMacros="{Macros.get('transparency')}" change="onChange(event)"/>
-    <c:LabeledMacrosNumberSelector label="{resourceManager.getString('panels', 'ppIconAlpha')}" id="v_iconAlpha" config="playersPanel.iconAlpha" minimum="0" maximum="100" allowedMacros="{Macros.get('transparency')}" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'ppAlpha')}" id="v_alpha" config="playersPanel.alpha" minimum="0" maximum="100" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'ppIconAlpha')}" id="v_iconAlpha" config="playersPanel.iconAlpha" minimum="0" maximum="100" change="onChange(event)"/>
     <c:LabeledCheckBox label="{resourceManager.getString('panels', 'RemoveSquadIcon')}" id="v_removeSquadIcon" config="playersPanel.removeSquadIcon" change="onChange(event)"/>
 </c:PanelComponent>

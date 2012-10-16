@@ -10,7 +10,7 @@
             import mx.collections.SortField;
             import mx.events.FlexEvent;
 
-            private var internalFonts:Array = ["$FieldFont", "$TextFont"]; // TODO: Add all internal fonts
+            private var internalFonts:Array = ["$FieldFont", "$TextFont", ];
 
             protected function init():void
             {

@@ -92,6 +92,9 @@ package utils
     		    Config.s_config.playersPanel.clanIcon.yr = Config.s_config.playersPanel.clanIcon.y;
         }
 
+        /**
+         * Convert config to new format.
+         */
         public static function FixConfig(config:Object):Object
         {
             if (!config)

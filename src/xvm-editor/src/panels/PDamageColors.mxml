@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<c:BorderContainerComponent
+    xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:c="components.*"
+    width="100%" height="100%">
+    <mx:Image right="5" y="5" width="16" height="16" source="@Embed(source='images/revert.png')" toolTip="{resourceManager.getString('panels', 'DefaultSettings')}" useHandCursor="true" buttonMode="true" click="onSetDefault(event)"/>
+    <s:HGroup left="10" right="25" top="10" bottom="10">
+        <s:Scroller width="100%" height="100%">
+            <s:TileGroup id="container" width="100%" height="100%" rowHeight="20" columnWidth="85" verticalGap="0" horizontalGap="5">
+                <s:Label text="{resourceManager.getString('panels', 'dmg_src_ally')}..."/>
+                <s:Label text="{resourceManager.getString('panels', 'dmg_hit')}" verticalAlign="bottom"/>
+                <s:Label text="{resourceManager.getString('panels', 'dmg_kill')}" verticalAlign="bottom"/>
+                <s:Label text="{resourceManager.getString('panels', 'dmg_blowup')}" verticalAlign="bottom"/>
+                <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_ally')}"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_ally_ally_hit" config="colors.damage.ally_ally_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_ally_ally_kill" config="colors.damage.ally_ally_kill" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_ally_ally_blowup" config="colors.damage.ally_ally_blowup" change="onChange(event)"/>
+                <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_squadman')}"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_ally_squadman_hit" config="colors.damage.ally_squadman_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_ally_squadman_kill" config="colors.damage.ally_squadman_kill" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_ally_squadman_blowup" config="colors.damage.ally_squadman_blowup" change="onChange(event)"/>
+                <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_enemy')}"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_ally_enemy_hit" config="colors.damage.ally_enemy_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_ally_enemy_kill" config="colors.damage.ally_enemy_kill" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_ally_enemy_blowup" config="colors.damage.ally_enemy_blowup" change="onChange(event)"/>
+                <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_allytk')}"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_ally_allytk_hit" config="colors.damage.ally_allytk_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_ally_allytk_kill" config="colors.damage.ally_allytk_kill" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_ally_allytk_blowup" config="colors.damage.ally_allytk_blowup" change="onChange(event)"/>
+                <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_enemytk')}"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_ally_enemytk_hit" config="colors.damage.ally_enemytk_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_ally_enemytk_kill" config="colors.damage.ally_enemytk_kill" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_ally_enemytk_blowup" config="colors.damage.ally_enemytk_blowup" change="onChange(event)"/>
+                <s:Label height="2"/><s:Label height="2"/><s:Label height="2"/><s:Label height="2"/>
+
+                <s:Label text="{resourceManager.getString('panels', 'dmg_src_squadman')}..."/>
+                <s:Label text="{resourceManager.getString('panels', 'dmg_hit')}" verticalAlign="bottom"/>
+                <s:Label text="{resourceManager.getString('panels', 'dmg_kill')}" verticalAlign="bottom"/>
+                <s:Label text="{resourceManager.getString('panels', 'dmg_blowup')}" verticalAlign="bottom"/>
+                <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_ally')}"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_squadman_ally_hit" config="colors.damage.squadman_ally_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_squadman_ally_kill" config="colors.damage.squadman_ally_kill" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_squadman_ally_blowup" config="colors.damage.squadman_ally_blowup" change="onChange(event)"/>
+                <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_squadman')}"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_squadman_squadman_hit" config="colors.damage.squadman_squadman_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_squadman_squadman_kill" config="colors.damage.squadman_squadman_kill" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_squadman_squadman_blowup" config="colors.damage.squadman_squadman_blowup" change="onChange(event)"/>
+                <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_enemy')}"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_squadman_enemy_hit" config="colors.damage.asquadmanenemy_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_squadman_enemy_kill" config="colors.damage.squadman_enemy_kill" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_squadman_enemy_blowup" config="colors.damage.squadman_enemy_blowup" change="onChange(event)"/>
+                <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_allytk')}"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_squadman_allytk_hit" config="colors.damage.squadman_allytk_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_squadman_allytk_kill" config="colors.damage.squadman_allytk_kill" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_squadman_allytk_blowup" config="colors.damage.squadman_allytk_blowup" change="onChange(event)"/>
+                <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_enemytk')}"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_squadman_enemytk_hit" config="colors.damage.squadman_enemytk_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_squadman_enemytk_kill" config="colors.damage.squadman_enemytk_kill" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_squadman_enemytk_blowup" config="colors.damage.squadman_enemytk_blowup" change="onChange(event)"/>
+                <s:Label height="2"/><s:Label height="2"/><s:Label height="2"/><s:Label height="2"/>
+
+                <s:Label text="{resourceManager.getString('panels', 'dmg_src_enemy')}..."/>
+                <s:Label text="{resourceManager.getString('panels', 'dmg_hit')}" verticalAlign="bottom"/>
+                <s:Label text="{resourceManager.getString('panels', 'dmg_kill')}" verticalAlign="bottom"/>
+                <s:Label text="{resourceManager.getString('panels', 'dmg_blowup')}" verticalAlign="bottom"/>
+                <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_ally')}"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_enemy_ally_hit" config="colors.damage.enemy_ally_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_enemy_ally_kill" config="colors.damage.enemy_ally_kill" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_enemy_ally_blowup" config="colors.damage.enemy_ally_blowup" change="onChange(event)"/>
+                <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_squadman')}"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_enemy_squadman_hit" config="colors.damage.enemy_squadman_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_enemy_squadman_kill" config="colors.damage.enemy_squadman_kill" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_enemy_squadman_blowup" config="colors.damage.enemy_squadman_blowup" change="onChange(event)"/>
+                <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_enemy')}"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_enemy_enemy_hit" config="colors.damage.enemy_enemy_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_enemy_enemy_kill" config="colors.damage.enemy_enemy_kill" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_enemy_enemy_blowup" config="colors.damage.enemy_enemy_blowup" change="onChange(event)"/>
+                <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_allytk')}"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_enemy_allytk_hit" config="colors.damage.enemy_allytk_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_enemy_allytk_kill" config="colors.damage.enemy_allytk_kill" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_enemy_allytk_blowup" config="colors.damage.enemy_allytk_blowup" change="onChange(event)"/>
+                <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_enemytk')}"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_enemy_enemytk_hit" config="colors.damage.enemy_enemytk_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_enemy_enemytk_kill" config="colors.damage.enemy_enemytk_kill" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_enemy_enemytk_blowup" config="colors.damage.enemy_enemytk_blowup" change="onChange(event)"/>
+                <s:Label height="2"/><s:Label height="2"/><s:Label height="2"/><s:Label height="2"/>
+
+                <s:Label text="{resourceManager.getString('panels', 'dmg_src_unknown')}..."/>
+                <s:Label text="{resourceManager.getString('panels', 'dmg_hit')}" verticalAlign="bottom"/>
+                <s:Label text="{resourceManager.getString('panels', 'dmg_kill')}" verticalAlign="bottom"/>
+                <s:Label text="{resourceManager.getString('panels', 'dmg_blowup')}" verticalAlign="bottom"/>
+                <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_ally')}"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_unknown_ally_hit" config="colors.damage.unknown_ally_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_unknown_ally_kill" config="colors.damage.unknown_ally_kill" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_unknown_ally_blowup" config="colors.damage.unknown_ally_blowup" change="onChange(event)"/>
+                <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_squadman')}"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_unknown_squadman_hit" config="colors.damage.unknown_squadman_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_unknown_squadman_kill" config="colors.damage.unknown_squadman_kill" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_unknown_squadman_blowup" config="colors.damage.unknown_squadman_blowup" change="onChange(event)"/>
+                <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_enemy')}"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_unknown_enemy_hit" config="colors.damage.unknown_enemy_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_unknown_enemy_kill" config="colors.damage.unknown_enemy_kill" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_unknown_enemy_blowup" config="colors.damage.unknown_enemy_blowup" change="onChange(event)"/>
+                <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_allytk')}"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_unknown_allytk_hit" config="colors.damage.unknown_allytk_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_unknown_allytk_kill" config="colors.damage.unknown_allytk_kill" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_unknown_allytk_blowup" config="colors.damage.unknown_allytk_blowup" change="onChange(event)"/>
+                <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_enemytk')}"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_unknown_enemytk_hit" config="colors.damage.unknown_enemytk_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_unknown_enemytk_kill" config="colors.damage.unknown_enemytk_kill" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_unknown_enemytk_blowup" config="colors.damage.unknown_enemytk_blowup" change="onChange(event)"/>
+                <s:Label height="2"/><s:Label height="2"/><s:Label height="2"/><s:Label height="2"/>
+
+                <s:Label text="{resourceManager.getString('panels', 'dmg_src_player')}..."/>
+                <s:Label text="{resourceManager.getString('panels', 'dmg_hit')}" verticalAlign="bottom"/>
+                <s:Label text="{resourceManager.getString('panels', 'dmg_kill')}" verticalAlign="bottom"/>
+                <s:Label text="{resourceManager.getString('panels', 'dmg_blowup')}" verticalAlign="bottom"/>
+                <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_ally')}"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_player_ally_hit" config="colors.damage.player_ally_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_player_ally_kill" config="colors.damage.player_ally_kill" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_player_ally_blowup" config="colors.damage.player_ally_blowup" change="onChange(event)"/>
+                <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_squadman')}"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_player_squadman_hit" config="colors.damage.player_squadman_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_player_squadman_kill" config="colors.damage.player_squadman_kill" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_player_squadman_blowup" config="colors.damage.player_squadman_blowup" change="onChange(event)"/>
+                <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_enemy')}"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_player_enemy_hit" config="colors.damage.player_enemy_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_player_enemy_kill" config="colors.damage.player_enemy_kill" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_player_enemy_blowup" config="colors.damage.player_enemy_blowup" change="onChange(event)"/>
+                <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_allytk')}"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_player_allytk_hit" config="colors.damage.player_allytk_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_player_allytk_kill" config="colors.damage.player_allytk_kill" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_player_allytk_blowup" config="colors.damage.player_allytk_blowup" change="onChange(event)"/>
+                <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_enemytk')}"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_player_enemytk_hit" config="colors.damage.player_enemytk_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_player_enemytk_kill" config="colors.damage.player_enemytk_kill" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_player_enemytk_blowup" config="colors.damage.player_enemytk_blowup" change="onChange(event)"/>
+                <s:Label height="2"/><s:Label height="2"/><s:Label height="2"/><s:Label height="2"/>
+            </s:TileGroup>
+        </s:Scroller>
+    </s:HGroup>
+</c:BorderContainerComponent>

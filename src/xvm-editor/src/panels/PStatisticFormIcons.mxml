@@ -17,5 +17,5 @@
     <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'ciYR')}" id="v_yr" config="statisticForm.clanIcon.yr" minimum="-20" maximum="20" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'ciW')}" id="v_w" config="statisticForm.clanIcon.w" minimum="0" maximum="32" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'ciH')}" id="v_h" config="statisticForm.clanIcon.h" minimum="0" maximum="32" change="onChange(event)"/>
-    <c:LabeledMacrosNumberSelector label="{resourceManager.getString('panels', 'ciAlpha')}" id="v_alpha" config="statisticForm.clanIcon.alpha" minimum="0" maximum="100" allowedMacros="{Macros.get('transparency')}" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'ciAlpha')}" id="v_alpha" config="statisticForm.clanIcon.alpha" minimum="0" maximum="100" change="onChange(event)"/>
 </c:PanelComponent>

@@ -11,6 +11,6 @@
             import utils.Macros;
         ]]>
     </fx:Script>
-    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'FormatVehicleNameLeft')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatLeft" config="battleLoading.formatLeft" allowedMacros="{Macros.get('panels,stats,colors')}" change="onChange(event)"/>
-    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'FormatVehicleNameRight')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatRight" config="battleLoading.formatRight" allowedMacros="{Macros.get('panels,stats,colors')}" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'FormatVehicleNameLeft')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatLeft" config="battleLoading.formatLeft" allowedMacros="{Macros.get('panels,stats,colors,stat_colors')}" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'FormatVehicleNameRight')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatRight" config="battleLoading.formatRight" allowedMacros="{Macros.get('panels,stats,colors,stat_colors')}" change="onChange(event)"/>
 </c:PanelComponent>

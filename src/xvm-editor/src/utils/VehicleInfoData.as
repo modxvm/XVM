@@ -9,6 +9,28 @@ public class VehicleInfoData
 {
     public static var data:Object = {
         // unknown
+/*
+        france_AMX_50_68t:              { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
+        germany_G47_E10:                { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
+        germany_Pz_IV_AusfGH:           { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
+        germany_PzIV_capt:              { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
+        germany_PzV_capt:               { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
+        Lorraine_155_51:                { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
+        Lorraine155_50:                 { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
+        uk_Centurion_Mk3:               { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
+        usa_A59_T88:                    { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
+        usa_A74_T1_E6:                  { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
+        usa_T23:                        { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
+        ussr_62A:                       { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
+        ussr_A43:                       { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
+        ussr_GAZ75:                     { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
+        ussr_Observer:                  { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
+        ussr_R80_KV1:                   { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
+        ussr_RBT_5:                     { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
+        ussr_SU101:                     { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
+        ussr_T_24:                      { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
+        ussr_T_70:                      { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
+*/
 
         // level 1
         germany_Ltraktor:               { level: 1,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
@@ -115,6 +137,7 @@ public class VehicleInfoData
         germany_VK3001H:                { level: 6,  type: "MT",  tiers: [ 6, 8 ],   premium: false, name: null },
         germany_VK3001P:                { level: 6,  type: "MT",  tiers: [ 6, 8 ],   premium: false, name: null },
         germany_VK3601H:                { level: 6,  type: "MT",  tiers: [ 6, 8 ],   premium: false, name: null },
+        germany_PzIV_schmalturm:        { level: 6,  type: "MT",  tiers: [ 6, 8 ],   premium: true,  name: null },
         france_ARL_44:                  { level: 6,  type: "HT",  tiers: [ 6, 8 ],   premium: false, name: null },
         ussr_KV2:                       { level: 6,  type: "HT",  tiers: [ 6, 8 ],   premium: false, name: null },
         ussr_KV_1s:                     { level: 6,  type: "HT",  tiers: [ 6, 8 ],   premium: false, name: null },
@@ -139,6 +162,7 @@ public class VehicleInfoData
         usa_T20:                        { level: 7,  type: "MT",  tiers: [ 7, 9 ],   premium: false, name: null },
         ussr_T_43:                      { level: 7,  type: "MT",  tiers: [ 7, 9 ],   premium: false, name: null },
         germany_VK3002DB:               { level: 7,  type: "MT",  tiers: [ 7, 9 ],   premium: false, name: null },
+        germany_Panther_M10:            { level: 7,  type: "MT",  tiers: [ 7, 9 ],   premium: true,  name: null },
         france_AMX_M4_1945:             { level: 7,  type: "HT",  tiers: [ 7, 9 ],   premium: false, name: null },
         ussr_IS:                        { level: 7,  type: "HT",  tiers: [ 7, 9 ],   premium: false, name: null },
         ussr_KV_3:                      { level: 7,  type: "HT",  tiers: [ 7, 9 ],   premium: false, name: null },
@@ -149,11 +173,13 @@ public class VehicleInfoData
         usa_M40M43:                     { level: 7,  type: "SPG", tiers: [ 10, 12 ], premium: false, name: null },
         ussr_Object_212:                { level: 7,  type: "SPG", tiers: [ 10, 12 ], premium: false, name: null },
         france_Lorraine155_51:          { level: 7,  type: "SPG", tiers: [ 10, 12 ], premium: false, name: null },
+        france_AMX_AC_Mle1946:          { level: 7,  type: "TD",  tiers: [ 7, 9 ],   premium: false, name: null },
         germany_JagdPanther:            { level: 7,  type: "TD",  tiers: [ 7, 9 ],   premium: false, name: null },
-        ussr_SU_152:                    { level: 7,  type: "TD",  tiers: [ 7, 9 ],   premium: false, name: null },
         usa_T25_2:                      { level: 7,  type: "TD",  tiers: [ 7, 9 ],   premium: false, name: null },
         usa_T25_AT:                     { level: 7,  type: "TD",  tiers: [ 7, 9 ],   premium: false, name: null },
-        france_AMX_AC_Mle1946:          { level: 7,  type: "TD",  tiers: [ 7, 9 ],   premium: false, name: null },
+        ussr_SU_152:                    { level: 7,  type: "TD",  tiers: [ 7, 9 ],   premium: false, name: null },
+        ussr_SU100M1:                   { level: 7,  type: "TD",  tiers: [ 7, 9 ],   premium: false, name: null },
+        ussr_SU122_44:                  { level: 7,  type: "TD",  tiers: [ 7, 9 ],   premium: true,  name: null },
 
         // level 8
         france_AMX_13_90:               { level: 8,  type: "LT",  tiers: [ 9, 12 ],  premium: false, name: null },
@@ -174,12 +200,13 @@ public class VehicleInfoData
         ussr_Object_261:                { level: 8,  type: "SPG", tiers: [ 11, 12 ], premium: false, name: null },
         usa_T92:                        { level: 8,  type: "SPG", tiers: [ 11, 12 ], premium: false, name: null },
         france_Bat_Chatillon155:        { level: 8,  type: "SPG", tiers: [ 11, 12 ], premium: false, name: null },
+        france_AMX_AC_Mle1948:          { level: 8,  type: "TD",  tiers: [ 8, 10 ],  premium: false, name: null },
         germany_Ferdinand:              { level: 8,  type: "TD",  tiers: [ 8, 10 ],  premium: false, name: null },
         germany_JagdPantherII:          { level: 8,  type: "TD",  tiers: [ 8, 10 ],  premium: false, name: null },
-        ussr_ISU_152:                   { level: 8,  type: "TD",  tiers: [ 8, 10 ],  premium: false, name: null },
         usa_T28:                        { level: 8,  type: "TD",  tiers: [ 8, 10 ],  premium: false, name: null },
         usa_T28_Prototype:              { level: 8,  type: "TD",  tiers: [ 8, 10 ],  premium: false, name: null },
-        france_AMX_AC_Mle1948:          { level: 8,  type: "TD",  tiers: [ 8, 10 ],  premium: false, name: null },
+        ussr_ISU_152:                   { level: 8,  type: "TD",  tiers: [ 8, 10 ],  premium: false, name: null },
+        ussr_SU_101:                    { level: 8,  type: "TD",  tiers: [ 8, 10 ],  premium: false, name: null },
 
         // level 9
         france_Lorraine40t:             { level: 9,  type: "MT",  tiers: [ 9, 11 ],  premium: false, name: null },
@@ -192,11 +219,12 @@ public class VehicleInfoData
         usa_M103:                       { level: 9,  type: "HT",  tiers: [ 9, 11 ],  premium: false, name: null },
         ussr_ST_I:                      { level: 9,  type: "HT",  tiers: [ 9, 11 ],  premium: false, name: null },
         germany_VK4502P:                { level: 9,  type: "HT",  tiers: [ 9, 11 ],  premium: false, name: null },
+        france_AMX50_Foch:              { level: 9,  type: "TD",  tiers: [ 9, 11 ],  premium: false, name: null },
         germany_JagdTiger:              { level: 9,  type: "TD",  tiers: [ 9, 11 ],  premium: false, name: null },
-        ussr_Object_704:                { level: 9,  type: "TD",  tiers: [ 9, 11 ],  premium: false, name: null },
         usa_T30:                        { level: 9,  type: "TD",  tiers: [ 9, 11 ],  premium: false, name: null },
         usa_T95:                        { level: 9,  type: "TD",  tiers: [ 9, 11 ],  premium: false, name: null },
-        france_AMX50_Foch:              { level: 9,  type: "TD",  tiers: [ 9, 11 ],  premium: false, name: null },
+        ussr_Object_704:                { level: 9,  type: "TD",  tiers: [ 9, 11 ],  premium: false, name: null },
+        ussr_SU122_54:                  { level: 9,  type: "TD",  tiers: [ 9, 11 ],  premium: false, name: null },
 
         // level 10
         france_Bat_Chatillon25t:        { level: 10, type: "MT",  tiers: [ 10, 12 ], premium: false, name: null },
@@ -214,6 +242,7 @@ public class VehicleInfoData
         usa_T110E3:                     { level: 10, type: "TD",  tiers: [ 10, 12 ], premium: false, name: null },
         usa_T110E4:                     { level: 10, type: "TD",  tiers: [ 10, 12 ], premium: false, name: null },
         ussr_Object268:                 { level: 10, type: "TD",  tiers: [ 10, 12 ], premium: false, name: null },
+        ussr_Object263:                 { level: 10, type: "TD",  tiers: [ 10, 12 ], premium: false, name: null },
 
         // non-standard
         germany_Bison_I:                { level: 2,  type: "SPG", tiers: [ 3, 5 ],   premium: false, name: null },

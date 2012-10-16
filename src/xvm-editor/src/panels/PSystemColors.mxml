@@ -6,40 +6,44 @@
     xmlns:c="components.*"
     width="100%" height="100%">
     <mx:Image right="5" y="5" width="16" height="16" source="@Embed(source='images/revert.png')" toolTip="{resourceManager.getString('panels', 'DefaultSettings')}" useHandCursor="true" buttonMode="true" click="onSetDefault(event)"/>
-    <s:VGroup left="10" right="30" top="5" bottom="5" gap="2" variableRowHeight="true">
+    <s:VGroup left="10" right="25" top="5" bottom="5" gap="2" variableRowHeight="true">
         <c:LabeledCheckBox label="{resourceManager.getString('panels', 'ColorBlindMode')}" id="cb" change="vs.selectedChild = cb.value ? blind : normal"/>
         <mx:ViewStack id="vs" width="100%" height="100%" creationPolicy="all">
             <s:NavigatorContent width="100%" height="100%" id="normal">
-                <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-                    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'ally_alive')}" width="240" id="v_ally_alive_normal" config="colors.system.ally_alive_normal" change="onChange(event)"/>
-                    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'ally_dead')}" width="240" id="v_ally_dead_normal" config="colors.system.ally_dead_normal" change="onChange(event)"/>
-                    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'ally_blowedup')}" width="240" id="v_ally_blowedup_normal" config="colors.system.ally_blowedup_normal" change="onChange(event)"/>
-                    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'squadman_alive')}" width="240" id="v_squadman_alive_normal" config="colors.system.squadman_alive_normal" change="onChange(event)"/>
-                    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'squadman_dead')}" width="240" id="v_squadman_dead_normal" config="colors.system.squadman_dead_normal" change="onChange(event)"/>
-                    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'squadman_blowedup')}" width="240" id="v_squadman_blowedup_normal" config="colors.system.squadman_blowedup_normal" change="onChange(event)"/>
-                    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'teamKiller_alive')}" width="240" id="v_teamKiller_alive_normal" config="colors.system.teamKiller_alive_normal" change="onChange(event)"/>
-                    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'teamKiller_dead')}" width="240" id="v_teamKiller_dead_normal" config="colors.system.teamKiller_dead_normal" change="onChange(event)"/>
-                    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'teamKiller_blowedup')}" width="240" id="v_teamKiller_blowedup_normal" config="colors.system.teamKiller_blowedup_normal" change="onChange(event)"/>
-                    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'enemy_alive')}" width="240" id="v_enemy_alive_normal" config="colors.system.enemy_alive_normal" change="onChange(event)"/>
-                    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'enemy_dead')}" width="240" id="v_enemy_dead_normal" config="colors.system.enemy_dead_normal" change="onChange(event)"/>
-                    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'enemy_blowedup')}" width="240" id="v_enemy_blowedup_normal" config="colors.system.enemy_blowedup_normal" change="onChange(event)"/>
-                </s:VGroup>
+                <s:Scroller width="100%" height="100%">
+                    <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+                        <c:LabeledColorSelector label="{resourceManager.getString('panels', 'ally_alive')}" width="240" id="v_ally_alive_normal" config="colors.system.ally_alive_normal" change="onChange(event)"/>
+                        <c:LabeledColorSelector label="{resourceManager.getString('panels', 'ally_dead')}" width="240" id="v_ally_dead_normal" config="colors.system.ally_dead_normal" change="onChange(event)"/>
+                        <c:LabeledColorSelector label="{resourceManager.getString('panels', 'ally_blowedup')}" width="240" id="v_ally_blowedup_normal" config="colors.system.ally_blowedup_normal" change="onChange(event)"/>
+                        <c:LabeledColorSelector label="{resourceManager.getString('panels', 'squadman_alive')}" width="240" id="v_squadman_alive_normal" config="colors.system.squadman_alive_normal" change="onChange(event)"/>
+                        <c:LabeledColorSelector label="{resourceManager.getString('panels', 'squadman_dead')}" width="240" id="v_squadman_dead_normal" config="colors.system.squadman_dead_normal" change="onChange(event)"/>
+                        <c:LabeledColorSelector label="{resourceManager.getString('panels', 'squadman_blowedup')}" width="240" id="v_squadman_blowedup_normal" config="colors.system.squadman_blowedup_normal" change="onChange(event)"/>
+                        <c:LabeledColorSelector label="{resourceManager.getString('panels', 'teamKiller_alive')}" width="240" id="v_teamKiller_alive_normal" config="colors.system.teamKiller_alive_normal" change="onChange(event)"/>
+                        <c:LabeledColorSelector label="{resourceManager.getString('panels', 'teamKiller_dead')}" width="240" id="v_teamKiller_dead_normal" config="colors.system.teamKiller_dead_normal" change="onChange(event)"/>
+                        <c:LabeledColorSelector label="{resourceManager.getString('panels', 'teamKiller_blowedup')}" width="240" id="v_teamKiller_blowedup_normal" config="colors.system.teamKiller_blowedup_normal" change="onChange(event)"/>
+                        <c:LabeledColorSelector label="{resourceManager.getString('panels', 'enemy_alive')}" width="240" id="v_enemy_alive_normal" config="colors.system.enemy_alive_normal" change="onChange(event)"/>
+                        <c:LabeledColorSelector label="{resourceManager.getString('panels', 'enemy_dead')}" width="240" id="v_enemy_dead_normal" config="colors.system.enemy_dead_normal" change="onChange(event)"/>
+                        <c:LabeledColorSelector label="{resourceManager.getString('panels', 'enemy_blowedup')}" width="240" id="v_enemy_blowedup_normal" config="colors.system.enemy_blowedup_normal" change="onChange(event)"/>
+                    </s:VGroup>
+                </s:Scroller>
             </s:NavigatorContent>
             <s:NavigatorContent width="100%" height="100%" id="blind">
-                <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-                    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'ally_alive')}" width="240" id="v_ally_alive_blind" config="colors.system.ally_alive_blind" change="onChange(event)"/>
-                    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'ally_dead')}" width="240" id="v_ally_dead_blind" config="colors.system.ally_dead_blind" change="onChange(event)"/>
-                    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'ally_blowedup')}" width="240" id="v_ally_blowedup_blind" config="colors.system.ally_blowedup_blind" change="onChange(event)"/>
-                    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'squadman_alive')}" width="240" id="v_squadman_alive_blind" config="colors.system.squadman_alive_blind" change="onChange(event)"/>
-                    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'squadman_dead')}" width="240" id="v_squadman_dead_blind" config="colors.system.squadman_dead_blind" change="onChange(event)"/>
-                    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'squadman_blowedup')}" width="240" id="v_squadman_blowedup_blind" config="colors.system.squadman_blowedup_blind" change="onChange(event)"/>
-                    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'teamKiller_alive')}" width="240" id="v_teamKiller_alive_blind" config="colors.system.teamKiller_alive_blind" change="onChange(event)"/>
-                    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'teamKiller_dead')}" width="240" id="v_teamKiller_dead_blind" config="colors.system.teamKiller_dead_blind" change="onChange(event)"/>
-                    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'teamKiller_blowedup')}" width="240" id="v_teamKiller_blowedup_blind" config="colors.system.teamKiller_blowedup_blind" change="onChange(event)"/>
-                    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'enemy_alive')}" width="240" id="v_enemy_alive_blind" config="colors.system.enemy_alive_blind" change="onChange(event)"/>
-                    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'enemy_dead')}" width="240" id="v_enemy_dead_blind" config="colors.system.enemy_dead_blind" change="onChange(event)"/>
-                    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'enemy_blowedup')}" width="240" id="v_enemy_blowedup_blind" config="colors.system.enemy_blowedup_blind" change="onChange(event)"/>
-                </s:VGroup>
+                <s:Scroller width="100%" height="100%">
+                    <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+                        <c:LabeledColorSelector label="{resourceManager.getString('panels', 'ally_alive')}" width="240" id="v_ally_alive_blind" config="colors.system.ally_alive_blind" change="onChange(event)"/>
+                        <c:LabeledColorSelector label="{resourceManager.getString('panels', 'ally_dead')}" width="240" id="v_ally_dead_blind" config="colors.system.ally_dead_blind" change="onChange(event)"/>
+                        <c:LabeledColorSelector label="{resourceManager.getString('panels', 'ally_blowedup')}" width="240" id="v_ally_blowedup_blind" config="colors.system.ally_blowedup_blind" change="onChange(event)"/>
+                        <c:LabeledColorSelector label="{resourceManager.getString('panels', 'squadman_alive')}" width="240" id="v_squadman_alive_blind" config="colors.system.squadman_alive_blind" change="onChange(event)"/>
+                        <c:LabeledColorSelector label="{resourceManager.getString('panels', 'squadman_dead')}" width="240" id="v_squadman_dead_blind" config="colors.system.squadman_dead_blind" change="onChange(event)"/>
+                        <c:LabeledColorSelector label="{resourceManager.getString('panels', 'squadman_blowedup')}" width="240" id="v_squadman_blowedup_blind" config="colors.system.squadman_blowedup_blind" change="onChange(event)"/>
+                        <c:LabeledColorSelector label="{resourceManager.getString('panels', 'teamKiller_alive')}" width="240" id="v_teamKiller_alive_blind" config="colors.system.teamKiller_alive_blind" change="onChange(event)"/>
+                        <c:LabeledColorSelector label="{resourceManager.getString('panels', 'teamKiller_dead')}" width="240" id="v_teamKiller_dead_blind" config="colors.system.teamKiller_dead_blind" change="onChange(event)"/>
+                        <c:LabeledColorSelector label="{resourceManager.getString('panels', 'teamKiller_blowedup')}" width="240" id="v_teamKiller_blowedup_blind" config="colors.system.teamKiller_blowedup_blind" change="onChange(event)"/>
+                        <c:LabeledColorSelector label="{resourceManager.getString('panels', 'enemy_alive')}" width="240" id="v_enemy_alive_blind" config="colors.system.enemy_alive_blind" change="onChange(event)"/>
+                        <c:LabeledColorSelector label="{resourceManager.getString('panels', 'enemy_dead')}" width="240" id="v_enemy_dead_blind" config="colors.system.enemy_dead_blind" change="onChange(event)"/>
+                        <c:LabeledColorSelector label="{resourceManager.getString('panels', 'enemy_blowedup')}" width="240" id="v_enemy_blowedup_blind" config="colors.system.enemy_blowedup_blind" change="onChange(event)"/>
+                    </s:VGroup>
+                </s:Scroller>
             </s:NavigatorContent>
         </mx:ViewStack>
     </s:VGroup>

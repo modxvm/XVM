@@ -24,7 +24,8 @@ package utils
             // In players panel, battle loading screen and statistic form:
             panels: [
                 { value: "{{nick}}", label: "nick", icon: Embed.nick },
-                { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle }
+                { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
+                { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype }
             ],
             // In tank markers:
             markers: [
@@ -50,20 +51,23 @@ package utils
                 { value: "{{kb:3}}", label: "kb_3", icon: Embed.kb_3 },
                 { value: "{{t-rating}}", label: "t_rating", icon: Embed.t_rating },
                 { value: "{{t-kb}}", label: "t_kb", icon: Embed.t_kb },
+                { value: "{{t-kb-0}}", label: "t_kb_0", icon: Embed.t_kb_0 },
+                { value: "{{t-hb}}", label: "t_hb", icon: Embed.t_hb },
                 { value: "{{t-battles}}", label: "t_battles", icon: Embed.t_battles },
                 { value: "{{t-wins}}", label: "t_wins", icon: Embed.t_wins },
                 { value: "{{t-rating:3}}", label: "t_rating_3", icon: Embed.t_rating_3 },
                 { value: "{{t-kb:4}}", label: "t_kb_4", icon: Embed.t_kb_4 },
-                { value: "{{t-battles:4}}", label: "t_battles_4", icon: Embed.t_battles_4 },
-                { value: "{{t-kb-0}}", label: "t_kb_0", icon: Embed.t_kb_0 },
-                { value: "{{t-hb}}", label: "t_hb", icon: Embed.t_hb },
-                { value: "{{t-hb:3}}", label: "t_hb_3", icon: Embed.t_hb_3 }
+                { value: "{{t-hb:3}}", label: "t_hb_3", icon: Embed.t_hb_3 },
+                { value: "{{t-battles:4}}", label: "t_battles_4", icon: Embed.t_battles_4 }
             ],
             // Dynamic colors macros:
             colors: [
                 { value: "{{c:hp}}", label: "c_hp", icon: Embed.c_hp },
                 { value: "{{c:hp-ratio}}", label: "c_hp_ratio", icon: Embed.c_hp_ratio },
-                { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype },
+                { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype }
+            ],
+            // Dynamic colors macros:
+            stat_colors: [
                 { value: "{{c:eff}}", label: "c_eff", icon: Embed.c_eff },
                 { value: "{{c:rating}}", label: "c_rating", icon: Embed.c_rating },
                 { value: "{{c:kb}}", label: "c_kb", icon: Embed.c_kb },

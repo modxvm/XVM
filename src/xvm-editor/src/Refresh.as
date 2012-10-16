@@ -30,8 +30,8 @@ protected function RefreshCurrentPage():void
             RefreshColorsPage();
         else if (pg == pgTransparency)
             RefreshTransparencyPage();
-        else if (pg == pgIconset)
-            RefreshIconsetPage();
+        else if (pg == pgMisc)
+            RefreshMiscPage();
         else if (pg == pgVehicleNames)
             RefreshVehicleNamesPage();
         else if (pg == pgMarkers)
@@ -194,9 +194,10 @@ private function RefreshColorsPage():void
     debug("RefreshColorsPage()");
     try
     {
+        var section:Object;
         if (accColors.selectedChild == nc_systemColors && p_systemColors != null)
         {
-            var section:Object = Config.s_config.colors.system;
+            section = Config.s_config.colors.system;
             if (p_systemColors.v_ally_alive_normal != null)
                 p_systemColors.v_ally_alive_normal.value = section.ally_alive_normal;
             if (p_systemColors.v_ally_alive_blind != null)
@@ -246,23 +247,191 @@ private function RefreshColorsPage():void
             if (p_systemColors.v_enemy_blowedup_blind != null)
                 p_systemColors.v_enemy_blowedup_blind.value = section.enemy_blowedup_blind;
         }
-        if (accColors.selectedChild == nc_vtypeColors && p_vtypeColors != null)
+        else if (accColors.selectedChild == nc_damageColors && p_damageColors != null)
         {
-            var section2:Object = Config.s_config.colors.vtype;
+            section = Config.s_config.colors.damage;
+            if (p_damageColors.v_ally_ally_hit != null)
+                p_damageColors.v_ally_ally_hit.value = section.ally_ally_hit;
+            if (p_damageColors.v_ally_ally_kill != null)
+                p_damageColors.v_ally_ally_kill.value = section.ally_ally_kill;
+            if (p_damageColors.v_ally_ally_blowup != null)
+                p_damageColors.v_ally_ally_blowup.value = section.ally_ally_blowup;
+            if (p_damageColors.v_ally_squadman_hit != null)
+                p_damageColors.v_ally_squadman_hit.value = section.ally_squadman_hit;
+            if (p_damageColors.v_ally_squadman_kill != null)
+                p_damageColors.v_ally_squadman_kill.value = section.ally_squadman_kill;
+            if (p_damageColors.v_ally_squadman_blowup != null)
+                p_damageColors.v_ally_squadman_blowup.value = section.ally_squadman_blowup;
+            if (p_damageColors.v_ally_enemy_hit != null)
+                p_damageColors.v_ally_enemy_hit.value = section.ally_enemy_hit;
+            if (p_damageColors.v_ally_enemy_kill != null)
+                p_damageColors.v_ally_enemy_kill.value = section.ally_enemy_kill;
+            if (p_damageColors.v_ally_enemy_blowup != null)
+                p_damageColors.v_ally_enemy_blowup.value = section.ally_enemy_blowup;
+            if (p_damageColors.v_ally_allytk_hit != null)
+                p_damageColors.v_ally_allytk_hit.value = section.ally_allytk_hit;
+            if (p_damageColors.v_ally_allytk_kill != null)
+                p_damageColors.v_ally_allytk_kill.value = section.ally_allytk_kill;
+            if (p_damageColors.v_ally_allytk_blowup != null)
+                p_damageColors.v_ally_allytk_blowup.value = section.ally_allytk_blowup;
+            if (p_damageColors.v_ally_enemytk_hit != null)
+                p_damageColors.v_ally_enemytk_hit.value = section.ally_enemytk_hit;
+            if (p_damageColors.v_ally_enemytk_kill != null)
+                p_damageColors.v_ally_enemytk_kill.value = section.ally_enemytk_kill;
+            if (p_damageColors.v_ally_enemytk_blowup != null)
+                p_damageColors.v_ally_enemytk_blowup.value = section.ally_enemytk_blowup;
+            if (p_damageColors.v_squadman_ally_hit != null)
+                p_damageColors.v_squadman_ally_hit.value = section.squadman_ally_hit;
+            if (p_damageColors.v_squadman_ally_kill != null)
+                p_damageColors.v_squadman_ally_kill.value = section.squadman_ally_kill;
+            if (p_damageColors.v_squadman_ally_blowup != null)
+                p_damageColors.v_squadman_ally_blowup.value = section.squadman_ally_blowup;
+            if (p_damageColors.v_squadman_squadman_hit != null)
+                p_damageColors.v_squadman_squadman_hit.value = section.squadman_squadman_hit;
+            if (p_damageColors.v_squadman_squadman_kill != null)
+                p_damageColors.v_squadman_squadman_kill.value = section.squadman_squadman_kill;
+            if (p_damageColors.v_squadman_squadman_blowup != null)
+                p_damageColors.v_squadman_squadman_blowup.value = section.squadman_squadman_blowup;
+            if (p_damageColors.v_squadman_enemy_hit != null)
+                p_damageColors.v_squadman_enemy_hit.value = section.squadman_enemy_hit;
+            if (p_damageColors.v_squadman_enemy_kill != null)
+                p_damageColors.v_squadman_enemy_kill.value = section.squadman_enemy_kill;
+            if (p_damageColors.v_squadman_enemy_blowup != null)
+                p_damageColors.v_squadman_enemy_blowup.value = section.squadman_enemy_blowup;
+            if (p_damageColors.v_squadman_allytk_hit != null)
+                p_damageColors.v_squadman_allytk_hit.value = section.squadman_allytk_hit;
+            if (p_damageColors.v_squadman_allytk_kill != null)
+                p_damageColors.v_squadman_allytk_kill.value = section.squadman_allytk_kill;
+            if (p_damageColors.v_squadman_allytk_blowup != null)
+                p_damageColors.v_squadman_allytk_blowup.value = section.squadman_allytk_blowup;
+            if (p_damageColors.v_squadman_enemytk_hit != null)
+                p_damageColors.v_squadman_enemytk_hit.value = section.squadman_enemytk_hit;
+            if (p_damageColors.v_squadman_enemytk_kill != null)
+                p_damageColors.v_squadman_enemytk_kill.value = section.squadman_enemytk_kill;
+            if (p_damageColors.v_squadman_enemytk_blowup != null)
+                p_damageColors.v_squadman_enemytk_blowup.value = section.squadman_enemytk_blowup;
+            if (p_damageColors.v_enemy_ally_hit != null)
+                p_damageColors.v_enemy_ally_hit.value = section.enemy_ally_hit;
+            if (p_damageColors.v_enemy_ally_kill != null)
+                p_damageColors.v_enemy_ally_kill.value = section.enemy_ally_kill;
+            if (p_damageColors.v_enemy_ally_blowup != null)
+                p_damageColors.v_enemy_ally_blowup.value = section.enemy_ally_blowup;
+            if (p_damageColors.v_enemy_squadman_hit != null)
+                p_damageColors.v_enemy_squadman_hit.value = section.enemy_squadman_hit;
+            if (p_damageColors.v_enemy_squadman_kill != null)
+                p_damageColors.v_enemy_squadman_kill.value = section.enemy_squadman_kill;
+            if (p_damageColors.v_enemy_squadman_blowup != null)
+                p_damageColors.v_enemy_squadman_blowup.value = section.enemy_squadman_blowup;
+            if (p_damageColors.v_enemy_enemy_hit != null)
+                p_damageColors.v_enemy_enemy_hit.value = section.enemy_enemy_hit;
+            if (p_damageColors.v_enemy_enemy_kill != null)
+                p_damageColors.v_enemy_enemy_kill.value = section.enemy_enemy_kill;
+            if (p_damageColors.v_enemy_enemy_blowup != null)
+                p_damageColors.v_enemy_enemy_blowup.value = section.enemy_enemy_blowup;
+            if (p_damageColors.v_enemy_allytk_hit != null)
+                p_damageColors.v_enemy_allytk_hit.value = section.enemy_allytk_hit;
+            if (p_damageColors.v_enemy_allytk_kill != null)
+                p_damageColors.v_enemy_allytk_kill.value = section.enemy_allytk_kill;
+            if (p_damageColors.v_enemy_allytk_blowup != null)
+                p_damageColors.v_enemy_allytk_blowup.value = section.enemy_allytk_blowup;
+            if (p_damageColors.v_enemy_enemytk_hit != null)
+                p_damageColors.v_enemy_enemytk_hit.value = section.enemy_enemytk_hit;
+            if (p_damageColors.v_enemy_enemytk_kill != null)
+                p_damageColors.v_enemy_enemytk_kill.value = section.enemy_enemytk_kill;
+            if (p_damageColors.v_enemy_enemytk_blowup != null)
+                p_damageColors.v_enemy_enemytk_blowup.value = section.enemy_enemytk_blowup;
+            if (p_damageColors.v_unknown_ally_hit != null)
+                p_damageColors.v_unknown_ally_hit.value = section.unknown_ally_hit;
+            if (p_damageColors.v_unknown_ally_kill != null)
+                p_damageColors.v_unknown_ally_kill.value = section.unknown_ally_kill;
+            if (p_damageColors.v_unknown_ally_blowup != null)
+                p_damageColors.v_unknown_ally_blowup.value = section.unknown_ally_blowup;
+            if (p_damageColors.v_unknown_squadman_hit != null)
+                p_damageColors.v_unknown_squadman_hit.value = section.unknown_squadman_hit;
+            if (p_damageColors.v_unknown_squadman_kill != null)
+                p_damageColors.v_unknown_squadman_kill.value = section.unknown_squadman_kill;
+            if (p_damageColors.v_unknown_squadman_blowup != null)
+                p_damageColors.v_unknown_squadman_blowup.value = section.unknown_squadman_blowup;
+            if (p_damageColors.v_unknown_enemy_hit != null)
+                p_damageColors.v_unknown_enemy_hit.value = section.unknown_enemy_hit;
+            if (p_damageColors.v_unknown_enemy_kill != null)
+                p_damageColors.v_unknown_enemy_kill.value = section.unknown_enemy_kill;
+            if (p_damageColors.v_unknown_enemy_blowup != null)
+                p_damageColors.v_unknown_enemy_blowup.value = section.unknown_enemy_blowup;
+            if (p_damageColors.v_unknown_allytk_hit != null)
+                p_damageColors.v_unknown_allytk_hit.value = section.unknown_allytk_hit;
+            if (p_damageColors.v_unknown_allytk_kill != null)
+                p_damageColors.v_unknown_allytk_kill.value = section.unknown_allytk_kill;
+            if (p_damageColors.v_unknown_allytk_blowup != null)
+                p_damageColors.v_unknown_allytk_blowup.value = section.unknown_allytk_blowup;
+            if (p_damageColors.v_unknown_enemytk_hit != null)
+                p_damageColors.v_unknown_enemytk_hit.value = section.unknown_enemytk_hit;
+            if (p_damageColors.v_unknown_enemytk_kill != null)
+                p_damageColors.v_unknown_enemytk_kill.value = section.unknown_enemytk_kill;
+            if (p_damageColors.v_unknown_enemytk_blowup != null)
+                p_damageColors.v_unknown_enemytk_blowup.value = section.unknown_enemytk_blowup;
+            if (p_damageColors.v_player_ally_hit != null)
+                p_damageColors.v_player_ally_hit.value = section.player_ally_hit;
+            if (p_damageColors.v_player_ally_kill != null)
+                p_damageColors.v_player_ally_kill.value = section.player_ally_kill;
+            if (p_damageColors.v_player_ally_blowup != null)
+                p_damageColors.v_player_ally_blowup.value = section.player_ally_blowup;
+            if (p_damageColors.v_player_squadman_hit != null)
+                p_damageColors.v_player_squadman_hit.value = section.player_squadman_hit;
+            if (p_damageColors.v_player_squadman_kill != null)
+                p_damageColors.v_player_squadman_kill.value = section.player_squadman_kill;
+            if (p_damageColors.v_player_squadman_blowup != null)
+                p_damageColors.v_player_squadman_blowup.value = section.player_squadman_blowup;
+            if (p_damageColors.v_player_enemy_hit != null)
+                p_damageColors.v_player_enemy_hit.value = section.player_enemy_hit;
+            if (p_damageColors.v_player_enemy_kill != null)
+                p_damageColors.v_player_enemy_kill.value = section.player_enemy_kill;
+            if (p_damageColors.v_player_enemy_blowup != null)
+                p_damageColors.v_player_enemy_blowup.value = section.player_enemy_blowup;
+            if (p_damageColors.v_player_allytk_hit != null)
+                p_damageColors.v_player_allytk_hit.value = section.player_allytk_hit;
+            if (p_damageColors.v_player_allytk_kill != null)
+                p_damageColors.v_player_allytk_kill.value = section.player_allytk_kill;
+            if (p_damageColors.v_player_allytk_blowup != null)
+                p_damageColors.v_player_allytk_blowup.value = section.player_allytk_blowup;
+            if (p_damageColors.v_player_enemytk_hit != null)
+                p_damageColors.v_player_enemytk_hit.value = section.player_enemytk_hit;
+            if (p_damageColors.v_player_enemytk_kill != null)
+                p_damageColors.v_player_enemytk_kill.value = section.player_enemytk_kill;
+            if (p_damageColors.v_player_enemytk_blowup != null)
+                p_damageColors.v_player_enemytk_blowup.value = section.player_enemytk_blowup;
+        }
+        else if (accColors.selectedChild == nc_damageKindColors && p_damageKindColors != null)
+        {
+            section = Config.s_config.colors.dmg_kind;
+            if (p_damageKindColors.v_attack != null)
+            	p_damageKindColors.v_attack.value = section.attack;
+            if (p_damageKindColors.v_fire != null)
+            	p_damageKindColors.v_fire.value = section.fire;
+            if (p_damageKindColors.v_ramming != null)
+            	p_damageKindColors.v_ramming.value = section.ramming;
+            if (p_damageKindColors.v_world_collision != null)
+            	p_damageKindColors.v_world_collision.value = section.world_collision;
+            if (p_damageKindColors.v_other != null)
+            	p_damageKindColors.v_other.value = section.other;
+        }
+        else if (accColors.selectedChild == nc_vtypeColors && p_vtypeColors != null)
+        {
+            section = Config.s_config.colors.vtype;
             if (p_vtypeColors.v_LT != null)
-                p_vtypeColors.v_LT.value = section2.LT;
+                p_vtypeColors.v_LT.value = section.LT;
             if (p_vtypeColors.v_MT != null)
-                p_vtypeColors.v_MT.value = section2.MT;
+                p_vtypeColors.v_MT.value = section.MT;
             if (p_vtypeColors.v_HT != null)
-                p_vtypeColors.v_HT.value = section2.HT;
+                p_vtypeColors.v_HT.value = section.HT;
             if (p_vtypeColors.v_SPG != null)
-                p_vtypeColors.v_SPG.value = section2.SPG;
+                p_vtypeColors.v_SPG.value = section.SPG;
             if (p_vtypeColors.v_TD != null)
-                p_vtypeColors.v_TD.value = section2.TD;
+                p_vtypeColors.v_TD.value = section.TD;
             if (p_vtypeColors.v_premium != null)
-                p_vtypeColors.v_premium.value = section2.premium;
+                p_vtypeColors.v_premium.value = section.premium;
             if (p_vtypeColors.v_usePremiumColor != null)
-                p_vtypeColors.v_usePremiumColor.value = section2.usePremiumColor;
+                p_vtypeColors.v_usePremiumColor.value = section.usePremiumColor;
         }
         else if (accColors.selectedChild == nc_colors_hp && p_colors_hp != null)
             p_colors_hp.RefreshSource();
@@ -299,9 +468,9 @@ private function RefreshTransparencyPage():void
     }
 }
 
-private function RefreshIconsetPage():void
+private function RefreshMiscPage():void
 {
-    debug("RefreshIconsetPage()");
+    debug("RefreshMiscPage()");
     try
     {
         var section:*;
@@ -314,7 +483,7 @@ private function RefreshIconsetPage():void
     }
     catch (ex:Error)
     {
-        debug("ERROR: RefreshIconsetPage(): " + ex.toString());
+        debug("ERROR: RefreshMiscPage(): " + ex.toString());
     }
 }
 

@@ -203,6 +203,12 @@
                             <s:NavigatorContent id="nc_systemColors" label="{_('SystemColors')}" width="100%" height="100%">
                                 <p:PSystemColors id="p_systemColors" config="colors.system" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
                             </s:NavigatorContent>
+                            <s:NavigatorContent id="nc_damageColors" label="{_('DamageColors')}" width="100%" height="100%">
+                                <p:PDamageColors id="p_damageColors" config="colors.damage" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                            </s:NavigatorContent>
+                            <s:NavigatorContent id="nc_damageKindColors" label="{_('DamageKindColors')}" width="100%" height="100%">
+                                <p:PDamageKindColors id="p_damageKindColors" config="colors.dmg_kind" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                            </s:NavigatorContent>
                             <s:NavigatorContent id="nc_vtypeColors" label="{_('VTypeColors')}" width="100%" height="100%">
                                 <p:PVTypeColors id="p_vtypeColors" config="colors.vtype" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
                             </s:NavigatorContent>
@@ -236,7 +242,7 @@
                         </s:NavigatorContent>
                 </mx:Accordion>
                 </s:NavigatorContent>
-                <s:NavigatorContent label="{_('iconsetPage')}" width="100%" height="100%" id="pgIconset">
+                <s:NavigatorContent label="{_('miscPage')}" width="100%" height="100%" id="pgMisc">
                     <s:Scroller x="0" y="0" width="420" height="100%">
                         <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1" creationComplete="{RefreshCurrentPage()}">
                             <p:PIconSet id="p_iconSet" config="iconset" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>

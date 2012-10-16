@@ -47,7 +47,7 @@ public class DefaultConfig
 
 	// Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
         clockFormat: "H:N:S",
-        showChances: true,      // Show game round win chances percentage.
+        showChances: false,     // Show game round win chances percentage.
         showChancesExp: false,  // Show experimental "chance to win" formula.
         removeSquadIcon: false, // Hide squad icon.
         // Playes/clan icon parameters.
@@ -57,7 +57,7 @@ public class DefaultConfig
         formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font> {{vehicle}}"
       },
       statisticForm: {
-        showChances: true,      // Show game round win chances percentage.
+        showChances: false,     // Show game round win chances percentage.
         showChancesExp: false,  // Show experimental "chance to win" formula.
         removeSquadIcon: false, // Hide squad icon.
         // Playes/clan icon parameters.
@@ -98,6 +98,21 @@ public class DefaultConfig
           vehicleFormatLeft: "<font color='{{c:rating}}'>{{vehicle}}</font>",
           vehicleFormatRight: "<font color='{{c:rating}}'>{{vehicle}}</font>"
         }
+      },
+      turretMarkers: {
+        highVulnerability: " *",
+        lowVulnerability: " '"
+      },
+      hitLog: {
+        enabled: true,
+        x: 270,
+        y: 7,
+        w: 200,
+        h: 100,
+        lines: 1,
+        direction: "down",
+        format: "<font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <font color='{{c:dmg-kind}}'><b>{{dmg}}</b></font>",
+        formatHistory: "<textformat tabstops='[55,90,130,190]'><font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}:</font>\t{{dmg-total}}\t| <font color='{{c:dmg-kind}}'>{{dmg}}</font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}}</font></textformat>"
       },
       markers: {
         ally: {
@@ -195,30 +210,116 @@ public class DefaultConfig
       },
       colors: {
         system: {
-          ally_alive_normal: "0x96FF00",
-          ally_alive_blind: "0x96FF00",
-          ally_dead_normal: "0x009900",
-          ally_dead_blind: "0x009900",
-          ally_blowedup_normal: "0x007700",
-          ally_blowedup_blind: "0x007700",
-          squadman_alive_normal: "0xFFB964",
-          squadman_alive_blind: "0xFFFF00",
-          squadman_dead_normal: "0xCA7000",
-          squadman_dead_blind: "0xAAAA00",
-          squadman_blowedup_normal: "0xA45A00",
-          squadman_blowedup_blind: "0x888800",
-          teamKiller_alive_normal: "0x00EAFF",
-          teamKiller_alive_blind: "0x00EAFF",
-          teamKiller_dead_normal: "0x097783",
-          teamKiller_dead_blind: "0x097783",
-          teamKiller_blowedup_normal: "0x096A75",
-          teamKiller_blowedup_blind: "0x096A75",
-          enemy_alive_normal: "0xF50800",
-          enemy_alive_blind: "0x8379FE",
-          enemy_dead_normal: "0x840500",
-          enemy_dead_blind: "0x47407A",
-          enemy_blowedup_normal: "0x5A0401",
-          enemy_blowedup_blind: "0x3B365F"
+          ally_alive_normal:		"0x96FF00",
+          ally_alive_blind:		"0x96FF00",
+          ally_dead_normal:		"0x009900",
+          ally_dead_blind:		"0x009900",
+          ally_blowedup_normal:		"0x007700",
+          ally_blowedup_blind:		"0x007700",
+          squadman_alive_normal:	"0xFFB964",
+          squadman_alive_blind:		"0xFFFF00",
+          squadman_dead_normal:		"0xCA7000",
+          squadman_dead_blind:		"0xAAAA00",
+          squadman_blowedup_normal:	"0xA45A00",
+          squadman_blowedup_blind:	"0x888800",
+          teamKiller_alive_normal:	"0x00EAFF",
+          teamKiller_alive_blind:	"0x00EAFF",
+          teamKiller_dead_normal:	"0x097783",
+          teamKiller_dead_blind:	"0x097783",
+          teamKiller_blowedup_normal:	"0x096A75",
+          teamKiller_blowedup_blind:	"0x096A75",
+          enemy_alive_normal:		"0xF50800",
+          enemy_alive_blind:		"0x8379FE",
+          enemy_dead_normal:		"0x840500",
+          enemy_dead_blind:		"0x47407A",
+          enemy_blowedup_normal:	"0x5A0401",
+          enemy_blowedup_blind:		"0x3B365F"
+        },
+        // src: ally, squadman, enemy, unknown, player
+        // dst: ally, squadman, allytk, enemytk, enemy
+        damage: {
+          ally_ally_hit:		"0x00EAFF",
+          ally_ally_kill:		"0x00EAFF",
+          ally_ally_blowup:		"0x00EAFF",
+          ally_squadman_hit:		"0x00EAFF",
+          ally_squadman_kill:		"0x00EAFF",
+          ally_squadman_blowup:		"0x00EAFF",
+          ally_enemy_hit:		"0xF50800",
+          ally_enemy_kill:		"0xF50800",
+          ally_enemy_blowup:		"0xF50800",
+          ally_allytk_hit:		"0x00EAFF",
+          ally_allytk_kill:		"0x00EAFF",
+          ally_allytk_blowup:		"0x00EAFF",
+          ally_enemytk_hit:		"0xF50800",
+          ally_enemytk_kill:		"0xF50800",
+          ally_enemytk_blowup:		"0xF50800",
+          squadman_ally_hit:		"0x00EAFF",
+          squadman_ally_kill:		"0x00EAFF",
+          squadman_ally_blowup:		"0x00EAFF",
+          squadman_squadman_hit:	"0x00EAFF",
+          squadman_squadman_kill:	"0x00EAFF",
+          squadman_squadman_blowup:	"0x00EAFF",
+          squadman_enemy_hit:		"0xF50800",
+          squadman_enemy_kill:		"0xF50800",
+          squadman_enemy_blowup:	"0xF50800",
+          squadman_allytk_hit:		"0x00EAFF",
+          squadman_allytk_kill:		"0x00EAFF",
+          squadman_allytk_blowup:	"0x00EAFF",
+          squadman_enemytk_hit:		"0xF50800",
+          squadman_enemytk_kill:	"0xF50800",
+          squadman_enemytk_blowup:	"0xF50800",
+          enemy_ally_hit:		"0x96FF00",
+          enemy_ally_kill:		"0x96FF00",
+          enemy_ally_blowup:		"0x96FF00",
+          enemy_squadman_hit:		"0xFFB964",
+          enemy_squadman_kill:		"0xFFB964",
+          enemy_squadman_blowup:	"0xFFB964",
+          enemy_enemy_hit:		"0xF50800",
+          enemy_enemy_kill:		"0xF50800",
+          enemy_enemy_blowup:		"0xF50800",
+          enemy_allytk_hit:		"0x96FF00",
+          enemy_allytk_kill:		"0x96FF00",
+          enemy_allytk_blowup:		"0x96FF00",
+          enemy_enemytk_hit:		"0xF50800",
+          enemy_enemytk_kill:		"0xF50800",
+          enemy_enemytk_blowup:		"0xF50800",
+          unknown_ally_hit:		"0x96FF00",
+          unknown_ally_kill:		"0x96FF00",
+          unknown_ally_blowup:		"0x96FF00",
+          unknown_squadman_hit:		"0xFFB964",
+          unknown_squadman_kill:	"0xFFB964",
+          unknown_squadman_blowup:	"0xFFB964",
+          unknown_enemy_hit:		"0xF50800",
+          unknown_enemy_kill:		"0xF50800",
+          unknown_enemy_blowup:		"0xF50800",
+          unknown_allytk_hit:		"0x96FF00",
+          unknown_allytk_kill:		"0x96FF00",
+          unknown_allytk_blowup:	"0x96FF00",
+          unknown_enemytk_hit:		"0xF50800",
+          unknown_enemytk_kill:		"0xF50800",
+          unknown_enemytk_blowup:	"0xF50800",
+          player_ally_hit:		"0xFFDD33",
+          player_ally_kill:		"0xFFDD33",
+          player_ally_blowup:		"0xFFDD33",
+          player_squadman_hit:		"0xFFDD33",
+          player_squadman_kill:		"0xFFDD33",
+          player_squadman_blowup:	"0xFFDD33",
+          player_enemy_hit:		"0xFFDD33",
+          player_enemy_kill:		"0xFFDD33",
+          player_enemy_blowup:		"0xFFDD33",
+          player_allytk_hit:		"0xFFDD33",
+          player_allytk_kill:		"0xFFDD33",
+          player_allytk_blowup:		"0xFFDD33",
+          player_enemytk_hit:		"0xFFDD33",
+          player_enemytk_kill:		"0xFFDD33",
+          player_enemytk_blowup:	"0xFFDD33"
+        },
+        dmg_kind: {
+          attack: "0xFFAA55",
+          fire: "0xFF6655",
+          ramming: "0x998855",
+          world_collision: "0x228855",
+          other: "0xCCCCCC"
         },
         vtype: {
           LT:  "0xA2FF9A",        // Color for light tanks
@@ -251,8 +352,8 @@ public class DefaultConfig
           { value: 9999, color: "0xCC66CC" }
         ],
         rating: [
-          { value: 45,  color: "0xDD0000" },
-          { value: 48,  color: "0xDD3333" },
+          { value: 45,  color: "0xDD3333" },
+          { value: 48,  color: "0xDDDD33" },
           { value: 51,  color: "0xFFCC33" },
           { value: 53,  color: "0x99FF33" },
           { value: 57,  color: "0x33FF33" },
@@ -318,15 +419,15 @@ public class DefaultConfig
     return a;
   }
 
-  public static function get shadow_100(): Object
+  public static function get shadow_150(): Object
   {
     return {
       alpha: 100,
       color: "0x000000",
-      angle: 45,
-      distance: 1,
-      size: 2,
-      strength: 100
+      angle: 90,
+      distance: 0,
+      size: 4,
+      strength: 150
     }
   }
 
@@ -335,22 +436,10 @@ public class DefaultConfig
     return {
       alpha: 100,
       color: "0x000000",
-      angle: 45,
-      distance: 1,
-      size: 2,
+      angle: 90,
+      distance: 0,
+      size: 6,
       strength: 200
-    }
-  }
-
-  public static function get shadow_250(): Object
-  {
-    return {
-      alpha: 100,
-      color: "0x000000",
-      angle: 45,
-      distance: 1,
-      size: 2,
-      strength: 250
     }
   }
 
@@ -359,17 +448,6 @@ public class DefaultConfig
     return {
       name: "$FieldFont",
       size: 11,
-      align: "center",
-      bold: true,
-      italic: false
-    }
-  }
-
-  public static function get font_12b(): Object
-  {
-    return {
-      name: "$FieldFont",
-      size: 12,
       align: "center",
       bold: true,
       italic: false
@@ -387,24 +465,13 @@ public class DefaultConfig
     }
   }
 
-  public static function get font_13b(): Object
+  public static function get font_18(): Object
   {
     return {
       name: "$FieldFont",
-      size: 13,
+      size: 18,
       align: "center",
-      bold: true,
-      italic: false
-    }
-  }
-
-  public static function get font_14b(): Object
-  {
-    return {
-      name: "$FieldFont",
-      size: 14,
-      align: "center",
-      bold: true,
+      bold: false,
       italic: false
     }
   }
@@ -422,7 +489,7 @@ public class DefaultConfig
       maxScale: 100,
       scaleX: 0,
       scaleY: 16,
-      shadow: shadow_250
+      shadow: shadow_200
     }
   }
 
@@ -456,30 +523,9 @@ public class DefaultConfig
 
   public static function get hb_dead(): Object
   {
-    return {
-      visible: false,
-      x: -41,
-      y: -33,
-      alpha: 100,
-      color: null,
-      lcolor: null,
-      width: 80,
-      height: 12,
-      border: {
-        alpha: 30,
-        color: "0x000000",
-        size: 1
-      },
-      fill: {
-        alpha: 30,
-        color: null
-      },
-      damage: {
-        alpha: 80,
-        color: null,
-        fade: 1
-      }
-    }
+    var hb:Object = hb_alive;
+    hb.visible = false;
+    return hb;
   }
 
   // damageText
@@ -491,8 +537,8 @@ public class DefaultConfig
       y: -67,
       alpha: 100,
       color: null,
-      font: font_14b,
-      shadow: shadow_250,
+      font: font_18,
+      shadow: shadow_200,
       speed: 2,
       maxRange: 40,
       damageMessage: "{{dmg}}",
@@ -595,7 +641,7 @@ public class DefaultConfig
       color: null,
       font: font_13,
       shadow: shadow_200,
-      format: "{{vehicle}}"
+      format: "{{vehicle}}{{turret}}"
     }
   }
 
@@ -625,7 +671,7 @@ public class DefaultConfig
       alpha: 100,
       color: "0xFFFFFF",
       font: font_11b,
-      shadow: shadow_100,
+      shadow: shadow_150,
       format: "{{hp}} / {{hp-max}}"
     }
   }
@@ -641,7 +687,7 @@ public class DefaultConfig
       alpha: 100,
       color: "0xFFFFFF",
       font: font_11b,
-      shadow: shadow_100,
+      shadow: shadow_150,
       format: "{{hp-ratio}}%"
     }
   }
@@ -654,10 +700,10 @@ public class DefaultConfig
       visible: true,
       x: 0,
       y: -46,
-      alpha: 75,
-      color: "{{c:eff}}",
-      font: font_12b,
-      shadow: shadow_200,
+      alpha: 100,
+      color: "{{c:rating}}",
+      font: font_11b,
+      shadow: shadow_150,
       format: "{{rating}}"
     }
   }
