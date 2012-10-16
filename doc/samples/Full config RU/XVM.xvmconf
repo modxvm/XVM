@@ -102,12 +102,12 @@
   },
   // Отображаемые строки {{turret}} маркера
   "turretMarkers": {
-    "highVulnerability": " *", // Субъект имеет стоковую башню и топ орудие не может быть установлено. Субъект сильно уязвим.
-    "lowVulnerability": " '"   // Субъект имеет стоковую башню и топ орудие может быть установлено. Субъект немного уязвим.
+    "highVulnerability": "*", // Субъект имеет стоковую башню и топ орудие не может быть установлено. Субъект сильно уязвим.
+    "lowVulnerability": "'"   // Субъект имеет стоковую башню и топ орудие может быть установлено. Субъект немного уязвим.
   },
   // Лог попаданий (счетчик своих попаданий)
   "hitLog": {
-    "enabled": true,     // переключатель вкл/выкл
+    "visible": true,     // переключатель вкл/выкл
     "x": 270,            // Позиция X
     "y": 7,              // Позиция Y
     "w": 200,            // Ширина
@@ -1359,9 +1359,9 @@
       "squadman_ally_hit":	"0x00EAFF",
       "squadman_ally_kill":	"0x00EAFF",
       "squadman_ally_blowup":	"0x00EAFF",
-      "squadman_squad_hit":	"0x00EAFF",
-      "squadman_squad_kill":	"0x00EAFF",
-      "squadman_squad_blowup":	"0x00EAFF",
+      "squadman_squadman_hit":	"0x00EAFF",
+      "squadman_squadman_kill":	"0x00EAFF",
+      "squadman_squadman_blowup":	"0x00EAFF",
       "squadman_enemy_hit":	"0xF50800",
       "squadman_enemy_kill":	"0xF50800",
       "squadman_enemy_blowup":	"0xF50800",

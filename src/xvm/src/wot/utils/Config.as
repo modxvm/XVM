@@ -241,7 +241,7 @@ class wot.utils.Config
                 //   259 - "\res_mods\.stat\".length - 1 = 242
                 // 199 - ?
                 Defines.MAX_PATH = Math.min(199, Math.max(50, 242 - a[1].length));
-                
+
                 for (var i = 2; i < a.length; ++i)
                 {
                     try
@@ -412,7 +412,7 @@ class wot.utils.Config
     /**
      * Convert config to new format.
      */
-    private static function FixConfig(config):Object
+    private static function FixConfig(config:Object):Object
     {
         if (!config)
             return undefined;

@@ -129,7 +129,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         if (!Config.s_config.battle.hideXVMVersion && !_global.xvmWatermark)
             DrawXvmWatermark();
 
-        if (Config.s_config.hitLog.enabled && hitLog == null)
+        if (Config.s_config.hitLog.visible && hitLog == null)
             hitLog = new HitLog(Config.s_config.hitLog);
 
         // finalize initialization

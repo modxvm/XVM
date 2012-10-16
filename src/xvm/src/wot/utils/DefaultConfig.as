@@ -99,11 +99,11 @@ class wot.utils.DefaultConfig
         }
       },
       turretMarkers: {
-        highVulnerability: " *",
-        lowVulnerability: " '"
+        highVulnerability: "*",
+        lowVulnerability: "'"
       },
       hitLog: {
-        enabled: true,
+        visible: true,
         x: 270,
         y: 7,
         w: 200,
@@ -209,30 +209,30 @@ class wot.utils.DefaultConfig
       },
       colors: {
         system: {
-          ally_alive_normal: "0x96FF00",
-          ally_alive_blind: "0x96FF00",
-          ally_dead_normal: "0x009900",
-          ally_dead_blind: "0x009900",
-          ally_blowedup_normal: "0x007700",
-          ally_blowedup_blind: "0x007700",
-          squadman_alive_normal: "0xFFB964",
-          squadman_alive_blind: "0xFFFF00",
-          squadman_dead_normal: "0xCA7000",
-          squadman_dead_blind: "0xAAAA00",
-          squadman_blowedup_normal: "0xA45A00",
-          squadman_blowedup_blind: "0x888800",
-          teamKiller_alive_normal: "0x00EAFF",
-          teamKiller_alive_blind: "0x00EAFF",
-          teamKiller_dead_normal: "0x097783",
-          teamKiller_dead_blind: "0x097783",
-          teamKiller_blowedup_normal: "0x096A75",
-          teamKiller_blowedup_blind: "0x096A75",
-          enemy_alive_normal: "0xF50800",
-          enemy_alive_blind: "0x8379FE",
-          enemy_dead_normal: "0x840500",
-          enemy_dead_blind: "0x47407A",
-          enemy_blowedup_normal: "0x5A0401",
-          enemy_blowedup_blind: "0x3B365F"
+          ally_alive_normal:		"0x96FF00",
+          ally_alive_blind:		"0x96FF00",
+          ally_dead_normal:		"0x009900",
+          ally_dead_blind:		"0x009900",
+          ally_blowedup_normal:		"0x007700",
+          ally_blowedup_blind:		"0x007700",
+          squadman_alive_normal:	"0xFFB964",
+          squadman_alive_blind:		"0xFFFF00",
+          squadman_dead_normal:		"0xCA7000",
+          squadman_dead_blind:		"0xAAAA00",
+          squadman_blowedup_normal:	"0xA45A00",
+          squadman_blowedup_blind:	"0x888800",
+          teamKiller_alive_normal:	"0x00EAFF",
+          teamKiller_alive_blind:	"0x00EAFF",
+          teamKiller_dead_normal:	"0x097783",
+          teamKiller_dead_blind:	"0x097783",
+          teamKiller_blowedup_normal:	"0x096A75",
+          teamKiller_blowedup_blind:	"0x096A75",
+          enemy_alive_normal:		"0xF50800",
+          enemy_alive_blind:		"0x8379FE",
+          enemy_dead_normal:		"0x840500",
+          enemy_dead_blind:		"0x47407A",
+          enemy_blowedup_normal:	"0x5A0401",
+          enemy_blowedup_blind:		"0x3B365F"
         },
         // src: ally, squadman, enemy, unknown, player
         // dst: ally, squadman, allytk, enemytk, enemy
@@ -255,9 +255,9 @@ class wot.utils.DefaultConfig
           squadman_ally_hit:		"0x00EAFF",
           squadman_ally_kill:		"0x00EAFF",
           squadman_ally_blowup:		"0x00EAFF",
-          squadman_squad_hit:		"0x00EAFF",
-          squadman_squad_kill:		"0x00EAFF",
-          squadman_squad_blowup:	"0x00EAFF",
+          squadman_squadman_hit:	"0x00EAFF",
+          squadman_squadman_kill:	"0x00EAFF",
+          squadman_squadman_blowup:	"0x00EAFF",
           squadman_enemy_hit:		"0xF50800",
           squadman_enemy_kill:		"0xF50800",
           squadman_enemy_blowup:	"0xF50800",
@@ -351,7 +351,7 @@ class wot.utils.DefaultConfig
           { value: 9999, color: "0xCC66CC" }
         ],
         rating: [
-          { value: 45,  color: "0xDD0000" },
+          { value: 45,  color: "0xDD3333" },
           { value: 48,  color: "0xDDDD33" },
           { value: 51,  color: "0xFFCC33" },
           { value: 53,  color: "0x99FF33" },
@@ -453,17 +453,6 @@ class wot.utils.DefaultConfig
     }
   }
 
-  public static function get font_12(): Object
-  {
-    return {
-      name: "$FieldFont",
-      size: 12,
-      align: "center",
-      bold: false,
-      italic: false
-    }
-  }
-
   public static function get font_13(): Object
   {
     return {
@@ -471,17 +460,6 @@ class wot.utils.DefaultConfig
       size: 13,
       align: "center",
       bold: false,
-      italic: false
-    }
-  }
-
-  public static function get font_14b(): Object
-  {
-    return {
-      name: "$FieldFont",
-      size: 14,
-      align: "center",
-      bold: true,
       italic: false
     }
   }

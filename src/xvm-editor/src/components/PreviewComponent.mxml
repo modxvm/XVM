@@ -3,6 +3,7 @@
     xmlns:s="library://ns.adobe.com/flex/spark"
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
+    xmlns:p="preview.*"
     width="500" height="450"
     borderVisible="false" xmlns:ns1="*">
     <fx:Script>
@@ -87,9 +88,9 @@
         <s:NavigatorContent width="100%" height="100%" id="preview">
             <mx:Canvas x="0" y="0" width="500" height="400" backgroundColor="0xAACCBB" verticalScrollPolicy="off" horizontalScrollPolicy="off">
                 <mx:Image id="imgBG" x="0" y="0" width="500" height="400"/>
-                <c:Marker id="marker3" creationComplete="marker3.init('ally_dead','SPG',7)"/>
-                <c:Marker id="marker1" creationComplete="marker1.init('ally','heavyTank',8)"/>
-                <c:Marker id="marker2" creationComplete="marker2.init('enemy','AT-SPG',8)"/>
+                <p:Marker id="marker3" creationComplete="marker3.init('ally_dead','SPG',7)"/>
+                <p:Marker id="marker1" creationComplete="marker1.init('ally','heavyTank',8)"/>
+                <p:Marker id="marker2" creationComplete="marker2.init('enemy','AT-SPG',8)"/>
             </mx:Canvas>
             <s:BorderContainer y="400" width="100%" height="32" borderVisible="false">
                 <s:HGroup top="0" left="0" bottom="0" width="100%" gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="4">

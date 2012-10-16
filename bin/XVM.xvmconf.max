@@ -56,12 +56,8 @@
       "vehicleFormatRight": ""
     }
   },
-  "turretMarkers": {
-    "highVulnerability": " *",
-    "lowVulnerability": " '"
-  },
   "hitLog": {
-    "enabled": true,
+    "visible": true,
     "x": 270,
     "y": 7,
     "w": 500,

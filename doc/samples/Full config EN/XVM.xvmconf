@@ -102,8 +102,8 @@
   },
   // {{turret}} marker display strings
   "turretMarkers": {
-    "highVulnerability": " *", // Subject has stock turret and top gun can not be mounted. Subject is highly vulnerable.
-    "lowVulnerability": " '"   // Subject has stock turret and top gun can be mounted. Subject is somewhat vulnerable.
+    "highVulnerability": "*", // Subject has stock turret and top gun can not be mounted. Subject is highly vulnerable.
+    "lowVulnerability": "'"   // Subject has stock turret and top gun can be mounted. Subject is somewhat vulnerable.
   },
   // Hit log (my hits calculator)
   "hitLog": {
@@ -1347,9 +1347,9 @@
       "squadman_ally_hit":	"0x00EAFF",
       "squadman_ally_kill":	"0x00EAFF",
       "squadman_ally_blowup":	"0x00EAFF",
-      "squadman_squad_hit":	"0x00EAFF",
-      "squadman_squad_kill":	"0x00EAFF",
-      "squadman_squad_blowup":	"0x00EAFF",
+      "squadman_squadman_hit":	"0x00EAFF",
+      "squadman_squadman_kill":	"0x00EAFF",
+      "squadman_squadman_blowup":	"0x00EAFF",
       "squadman_enemy_hit":	"0xF50800",
       "squadman_enemy_kill":	"0xF50800",
       "squadman_enemy_blowup":	"0xF50800",
