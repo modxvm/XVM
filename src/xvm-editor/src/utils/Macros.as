@@ -27,17 +27,44 @@ package utils
                 { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
                 { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype }
             ],
-            // In tank markers:
-            markers: [
-                { value: "{{hp}}", label: "hp", icon: Embed.hp },
-                { value: "{{hp-ratio}}", label: "hp_ratio", icon: Embed.hp_ratio },
-                { value: "{{hp-max}}", label: "hp_max", icon: Embed.hp_max },
+            // In hit log:
+            hitlog: [
                 { value: "{{nick}}", label: "nick", icon: Embed.nick },
                 { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
                 { value: "{{level}}", label: "level", icon: Embed.level },
                 { value: "{{rlevel}}", label: "rlevel", icon: Embed.rlevel },
+                { value: "{{n}}", label: "n", icon: Embed.n },
                 { value: "{{dmg}}", label: "dmg", icon: Embed.dmg },
-                { value: "{{dmg-ratio}}", label: "dmg_ratio", icon: Embed.dmg_ratio }
+                { value: "{{dmg-total}}", label: "dmg_total", icon: Embed.dmg_total },
+                { value: "{{dmg-kind}}", label: "dmg_kind", icon: Embed.dmg_kind }
+            ],
+            hitlog_colors: [
+                { value: "{{c:dmg-kind}}", label: "c_dmg_kind", icon: Embed.c_dmg_kind },
+                { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype }
+            ],
+            // In tank markers:
+            markers: [
+                { value: "{{nick}}", label: "nick", icon: Embed.nick },
+                { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
+                { value: "{{level}}", label: "level", icon: Embed.level },
+                { value: "{{rlevel}}", label: "rlevel", icon: Embed.rlevel },
+                { value: "{{turret}}", label: "turret", icon: Embed.turret },
+                { value: "{{hp}}", label: "hp", icon: Embed.hp },
+                { value: "{{hp-ratio}}", label: "hp_ratio", icon: Embed.hp_ratio },
+                { value: "{{hp-max}}", label: "hp_max", icon: Embed.hp_max }
+            ],
+            markers_damage: [
+                { value: "{{nick}}", label: "nick", icon: Embed.nick },
+                { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
+                { value: "{{level}}", label: "level", icon: Embed.level },
+                { value: "{{rlevel}}", label: "rlevel", icon: Embed.rlevel },
+                { value: "{{turret}}", label: "turret", icon: Embed.turret },
+                { value: "{{hp}}", label: "hp", icon: Embed.hp },
+                { value: "{{hp-ratio}}", label: "hp_ratio", icon: Embed.hp_ratio },
+                { value: "{{hp-max}}", label: "hp_max", icon: Embed.hp_max },
+                { value: "{{dmg}}", label: "dmg", icon: Embed.dmg },
+                { value: "{{dmg-ratio}}", label: "dmg_ratio", icon: Embed.dmg_ratio },
+                { value: "{{dmg-kind}}", label: "dmg_kind", icon: Embed.dmg_kind }
             ],
             // Statistics
             stats: [
@@ -67,6 +94,12 @@ package utils
             colors_markers: [
                 { value: "{{c:hp}}", label: "c_hp", icon: Embed.c_hp },
                 { value: "{{c:hp-ratio}}", label: "c_hp_ratio", icon: Embed.c_hp_ratio },
+                { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype }
+            ],
+            colors_markers_damage: [
+                { value: "{{c:hp}}", label: "c_hp", icon: Embed.c_hp },
+                { value: "{{c:hp-ratio}}", label: "c_hp_ratio", icon: Embed.c_hp_ratio },
+                { value: "{{c:dmg-kind}}", label: "c_dmg_kind", icon: Embed.c_dmg_kind },
                 { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype }
             ],
             // Dynamic colors macros:

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<c:PanelComponent
+    xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:c="components.*"
+    title="{resourceManager.getString('panels', 'PHitLog')}">
+    <fx:Script>
+        <![CDATA[
+            import utils.Macros;
+        ]]>
+    </fx:Script>
+    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'Visible')}" labelWidth="180" id="v_visible" config="hitLog.visible" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'XPosition')}" labelWidth="180" id="v_x" config="hitLog.x" minimum="-10000" maximum="10000" sliderVisible="false" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'YPosition')}" labelWidth="180" id="v_y" config="hitLog.y" minimum="-10000" maximum="10000" sliderVisible="false" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Width')}" labelWidth="180" id="v_w" config="hitLog.w" minimum="-10000" maximum="10000" sliderVisible="false" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Height')}" labelWidth="180" id="v_h" config="hitLog.h" minimum="-10000" maximum="10000" sliderVisible="false" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'lines')}" labelWidth="180" id="v_lines" config="hitLog.lines" minimum="1" maximum="100" change="onChange(event)"/>
+    <c:LabeledDirectionSelector label="{resourceManager.getString('panels', 'direction')}" labelWidth="180" id="v_direction" config="hitLog.direction" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'format')}" labelWidth="180" id="v_format" config="hitLog.formatHistory" allowedMacros="{Macros.get('hitlog,hitlog_colors')}" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'formatHistory')}" labelWidth="180" id="v_formatHistory" config="hitLog.formatHistory" allowedMacros="{Macros.get('hitlog,hitlog_colors')}" change="onChange(event)"/>
+</c:PanelComponent>

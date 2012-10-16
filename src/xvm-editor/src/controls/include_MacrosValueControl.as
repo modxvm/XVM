@@ -40,5 +40,5 @@ public function set menuData(v:Array):void
 
 public function getLabel(item:Object):String
 {
-    return resourceManager.getString('components', item.label);
+    return resourceManager.getString('macros', item.label);
 }
