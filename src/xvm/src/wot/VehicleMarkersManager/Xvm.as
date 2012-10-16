@@ -287,7 +287,8 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
                 var st = vehicleState.getCurrentState();
                 for (var i in textFields[st])
                 {
-                    var tf = textFields[st][i];
+                    var tf:TextField = textFields[st][i];
+
                     //tf.field.text = formatDynamicText(tf.format, m_curHealth);
                     //tf.field.textColor = formatDynamicColor(tf.color, m_curHealth);
                     tf.field.htmlText = "<textformat leading='-2'><p class='xvm_markerText'>" +

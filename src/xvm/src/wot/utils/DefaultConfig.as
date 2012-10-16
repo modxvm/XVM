@@ -405,6 +405,15 @@ class wot.utils.DefaultConfig
           { value: 101, alpha: 40 }
         ]
       },
+/*      images: {
+        dmg_kind: {
+          attack: "",
+          fire: "../../../icons/xvm/dmg_fire.png",
+          ramming: "../../../icons/xvm/dmg_ramming.png",
+          world_collision: "../../../icons/xvm/dmg_world_collision.png",
+          other: "../../../icons/xvm/dmg_other.png"
+        }
+      },*/
       iconset: {
         battleLoading: "../maps/icons/vehicle/contour",
         statisticForm: "../maps/icons/vehicle/contour",

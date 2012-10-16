@@ -105,6 +105,11 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
 
         tf._x = -(tf._width / 2.0);
 
+/*        var b1:flash.display.BitmapData = new flash.display.BitmapData(16, 16);
+        var matrix:flash.geom.Matrix = new flash.geom.Matrix()
+        b1.draw(proxy.xvm.clanIconComponent.m_clanIcon, matrix);
+        tf.setImageSubstitutions([ { subString:"[", image:b1 } ]);*/
+
         return tf;
     }
 
