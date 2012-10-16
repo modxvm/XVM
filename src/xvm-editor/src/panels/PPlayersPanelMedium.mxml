@@ -11,6 +11,6 @@
         ]]>
     </fx:Script>
     <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'PlayerNameWidth')}" id="v_width" config="playersPanel.medium.width" minimum="0" maximum="250" change="onChange(event)"/>
-    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'FormatPlayerNameLeft')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatLeft" config="playersPanel.medium.formatLeft" allowedMacros="{Macros.get('panels,stats,colors,stat_colors')}" change="onChange(event)"/>
-    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'FormatPlayerNameRight')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatRight" config="playersPanel.medium.formatRight" allowedMacros="{Macros.get('panels,stats,colors,stat_colors')}" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'FormatPlayerNameLeft')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatLeft" config="playersPanel.medium.formatLeft" allowedMacros="{Macros.get('panels,stats,colors_panels,colors_stat')}" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'FormatPlayerNameRight')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatRight" config="playersPanel.medium.formatRight" allowedMacros="{Macros.get('panels,stats,colors_panels,colors_stat')}" change="onChange(event)"/>
 </c:PanelComponent>

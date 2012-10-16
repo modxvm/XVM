@@ -15,6 +15,6 @@
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'XPosition')}" id="v_x" config="x" minimum="-100" maximum="100" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'YPosition')}" id="v_y" config="y" minimum="-100" maximum="100" change="onChange(event)"/>
     <c:LabeledMacrosNumberSelector label="{resourceManager.getString('markers', 'Transparency')}" id="v_alpha" config="alpha" minimum="0" maximum="100" allowedMacros="{Macros.get('transparency')}" change="onChange(event)"/>
-    <c:LabeledMacrosColorSelector label="{resourceManager.getString('markers', 'TintColor')}" width="320" id="v_color" config="color" allowedMacros="{Macros.get('syscolors,colors_markers,stat_colors')}" change="onChange(event)"/>
+    <c:LabeledMacrosColorSelector label="{resourceManager.getString('markers', 'TintColor')}" width="320" id="v_color" config="color" allowedMacros="{Macros.get('syscolors,colors_markers,colors_stat')}" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'TintAmount')} (%)" id="v_amount" config="amount" minimum="0" maximum="100" change="onChange(event)"/>
 </c:PanelComponent>

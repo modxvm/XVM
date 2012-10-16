@@ -25,6 +25,8 @@ package utils
             panels: [
                 { value: "{{nick}}", label: "nick", icon: Embed.nick },
                 { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
+            ],
+            colors_panels: [
                 { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype }
             ],
             // In hit log:
@@ -38,7 +40,7 @@ package utils
                 { value: "{{dmg-total}}", label: "dmg_total", icon: Embed.dmg_total },
                 { value: "{{dmg-kind}}", label: "dmg_kind", icon: Embed.dmg_kind }
             ],
-            hitlog_colors: [
+            colors_hitlog: [
                 { value: "{{c:dmg-kind}}", label: "c_dmg_kind", icon: Embed.c_dmg_kind },
                 { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype }
             ],
@@ -53,6 +55,12 @@ package utils
                 { value: "{{hp-ratio}}", label: "hp_ratio", icon: Embed.hp_ratio },
                 { value: "{{hp-max}}", label: "hp_max", icon: Embed.hp_max }
             ],
+            colors_markers: [
+                { value: "{{c:hp}}", label: "c_hp", icon: Embed.c_hp },
+                { value: "{{c:hp-ratio}}", label: "c_hp_ratio", icon: Embed.c_hp_ratio },
+                { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype }
+            ],
+            // In floating damage text:
             markers_damage: [
                 { value: "{{nick}}", label: "nick", icon: Embed.nick },
                 { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
@@ -65,6 +73,12 @@ package utils
                 { value: "{{dmg}}", label: "dmg", icon: Embed.dmg },
                 { value: "{{dmg-ratio}}", label: "dmg_ratio", icon: Embed.dmg_ratio },
                 { value: "{{dmg-kind}}", label: "dmg_kind", icon: Embed.dmg_kind }
+            ],
+            colors_markers_damage: [
+                { value: "{{c:hp}}", label: "c_hp", icon: Embed.c_hp },
+                { value: "{{c:hp-ratio}}", label: "c_hp_ratio", icon: Embed.c_hp_ratio },
+                { value: "{{c:dmg-kind}}", label: "c_dmg_kind", icon: Embed.c_dmg_kind },
+                { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype }
             ],
             // Statistics
             stats: [
@@ -87,23 +101,7 @@ package utils
                 { value: "{{t-hb:3}}", label: "t_hb_3", icon: Embed.t_hb_3 },
                 { value: "{{t-battles:4}}", label: "t_battles_4", icon: Embed.t_battles_4 }
             ],
-            // Dynamic colors macros:
-            colors: [
-                { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype }
-            ],
-            colors_markers: [
-                { value: "{{c:hp}}", label: "c_hp", icon: Embed.c_hp },
-                { value: "{{c:hp-ratio}}", label: "c_hp_ratio", icon: Embed.c_hp_ratio },
-                { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype }
-            ],
-            colors_markers_damage: [
-                { value: "{{c:hp}}", label: "c_hp", icon: Embed.c_hp },
-                { value: "{{c:hp-ratio}}", label: "c_hp_ratio", icon: Embed.c_hp_ratio },
-                { value: "{{c:dmg-kind}}", label: "c_dmg_kind", icon: Embed.c_dmg_kind },
-                { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype }
-            ],
-            // Dynamic colors macros:
-            stat_colors: [
+            colors_stat: [
                 { value: "{{c:eff}}", label: "c_eff", icon: Embed.c_eff },
                 { value: "{{c:rating}}", label: "c_rating", icon: Embed.c_rating },
                 { value: "{{c:kb}}", label: "c_kb", icon: Embed.c_kb },

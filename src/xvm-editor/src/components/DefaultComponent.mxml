@@ -66,6 +66,7 @@
     <fx:Metadata>
         [Event(name="change", type="flash.events.Event")]
         [ResourceBundle("components")]
+	[ResourceBundle("macros")]
         [DefaultProperty("mxmlContent")]
     </fx:Metadata>
 </s:BorderContainer>
