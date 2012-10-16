@@ -62,6 +62,9 @@ package utils
             ],
             // Dynamic colors macros:
             colors: [
+                { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype }
+            ],
+            colors_markers: [
                 { value: "{{c:hp}}", label: "c_hp", icon: Embed.c_hp },
                 { value: "{{c:hp-ratio}}", label: "c_hp_ratio", icon: Embed.c_hp_ratio },
                 { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype }

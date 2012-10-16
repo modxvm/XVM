@@ -61,14 +61,16 @@
             <s:HGroup top="0" left="0" bottom="0" gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="4" width="361">
                 <s:Button label="{_('openButton')}" icon="@Embed(source='images/fileopen.png')" click="onLoadConfigClick()"/>
                 <s:Button label="{_('saveButton')}" icon="@Embed(source='images/filesave.png')" click="onSaveConfigClick()"/>
-                <mx:PopUpMenuButton itemClick="onExtraButtonClick(event)">
+                <s:Button label="{_('newConfig')}" icon="@Embed(source='images/filenew.png')" click="createNewConfig()"/>
+                <s:Button label="{_('mergeConfigs')}" icon="@Embed(source='images/merge.png')" click="LoadConfig(true)"/>
+<!--                <mx:PopUpMenuButton itemClick="onExtraButtonClick(event)">
                     <mx:dataProvider>
                         <fx:Array>
                             <fx:Object value="newconfig" label="{_('newConfig')}" icon="@Embed(source='images/filenew.png')"/>
                             <fx:Object value="merge" label="{_('mergeConfigs')}" icon="@Embed(source='images/merge.png')" />
                         </fx:Array>
                     </mx:dataProvider>
-                </mx:PopUpMenuButton>
+                </mx:PopUpMenuButton>-->
             </s:HGroup>
             <s:HGroup top="0" bottom="0" width="130" right="50" verticalAlign="middle" horizontalAlign="right">
                 <s:Label text="{_('editorVersion')}: {Defines.EDITOR_VERSION}"/>
@@ -245,12 +247,14 @@
                 <s:NavigatorContent label="{_('miscPage')}" width="100%" height="100%" id="pgMisc">
                     <s:Scroller x="0" y="0" width="420" height="100%">
                         <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1" creationComplete="{RefreshCurrentPage()}">
+                            <p:PTurretMarkers id="p_turretMarkers" config="turretMarkers" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+                            <p:PHitLog id="p_hitLog" config="hitLog" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                             <p:PIconSet id="p_iconSet" config="iconset" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                         </s:VGroup>
                     </s:Scroller>
                 </s:NavigatorContent>
                 <s:NavigatorContent label="{_('vehicleNames')}" width="100%" height="100%" id="pgVehicleNames">
-                    <p:PDynamicValues id="p_vehicle_names" config="vehicleNames" editorClass="DynamicVehicleNameEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                    <p:PDynamicValues id="p_vehicleNames" config="vehicleNames" editorClass="DynamicVehicleNameEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
                 </s:NavigatorContent>
             </mx:ViewStack>
             <c:PreviewComponent height="100%" id="preview"/>

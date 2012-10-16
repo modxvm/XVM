@@ -14,15 +14,15 @@
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'XPosition')}" id="v_x" config="x" minimum="-100" maximum="100" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'YPosition')}" id="v_y" config="y" minimum="-100" maximum="100" change="onChange(event)"/>
     <c:LabeledMacrosNumberSelector label="{resourceManager.getString('markers', 'Transparency')}" id="v_alpha" config="alpha" minimum="0" maximum="100" allowedMacros="{Macros.get('transparency')}" change="onChange(event)"/>
-    <c:LabeledMacrosColorSelector label="{resourceManager.getString('markers', 'Color')}" width="320" id="v_color" config="color" allowedMacros="{Macros.get('syscolors,colors,stat_colors')}" change="onChange(event)"/>
-    <c:LabeledMacrosColorSelector label="{resourceManager.getString('markers', 'Color2')}" width="320" id="v_lcolor" config="lcolor" allowedMacros="{Macros.get('syscolors,colors,stat_colors')}" change="onChange(event)"/>
+    <c:LabeledMacrosColorSelector label="{resourceManager.getString('markers', 'Color')}" width="320" id="v_color" config="color" allowedMacros="{Macros.get('syscolors,colors_markers,stat_colors')}" change="onChange(event)"/>
+    <c:LabeledMacrosColorSelector label="{resourceManager.getString('markers', 'Color2')}" width="320" id="v_lcolor" config="lcolor" allowedMacros="{Macros.get('syscolors,colors_markers,stat_colors')}" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'Width')}" id="v_width" config="width" minimum="0" maximum="200" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'Height')}" id="v_height" config="height" minimum="0" maximum="100" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'BorderSize')}" id="v_border_size" config="border.size" minimum="0" maximum="10" change="onChange(event)"/>
-    <c:LabeledMacrosColorSelector label="{resourceManager.getString('markers', 'BgColor')}" width="320" id="v_border_color" config="border.color" allowedMacros="{Macros.get('syscolors,colors,stat_colors')}" change="onChange(event)"/>
+    <c:LabeledMacrosColorSelector label="{resourceManager.getString('markers', 'BgColor')}" width="320" id="v_border_color" config="border.color" allowedMacros="{Macros.get('syscolors,colors_markers,stat_colors')}" change="onChange(event)"/>
     <c:LabeledMacrosNumberSelector label="{resourceManager.getString('markers', 'BgTransparency')}" id="v_border_alpha" config="border.alpha" minimum="0" maximum="100" allowedMacros="{Macros.get('transparency')}" change="onChange(event)"/>
     <c:LabeledMacrosNumberSelector label="{resourceManager.getString('markers', 'FillTransparency')}" id="v_fill_alpha" config="fill.alpha" minimum="0" maximum="100" allowedMacros="{Macros.get('transparency')}" change="onChange(event)"/>
-    <c:LabeledMacrosColorSelector label="{resourceManager.getString('markers', 'DamageColor')}" width="320" id="v_damage_color" config="damage.color" allowedMacros="{Macros.get('syscolors,colors,stat_colors')}" change="onChange(event)"/>
+    <c:LabeledMacrosColorSelector label="{resourceManager.getString('markers', 'DamageColor')}" width="320" id="v_damage_color" config="damage.color" allowedMacros="{Macros.get('syscolors,colors_markers,stat_colors')}" change="onChange(event)"/>
     <c:LabeledMacrosNumberSelector label="{resourceManager.getString('markers', 'DamageTransparency')}" id="v_damage_alpha" config="damage.alpha" minimum="0" maximum="100" allowedMacros="{Macros.get('transparency')}" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'DamageFadeTime')}" id="v_damage_fade" config="damage.fade" minimum="0" maximum="10" change="onChange(event)"/>
 </c:PanelComponent>

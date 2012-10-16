@@ -475,6 +475,21 @@ private function RefreshMiscPage():void
     {
         var section:*;
 
+        section = Config.s_config.turretMarkers;
+        this.p_turretMarkers.v_highVulnerability.value = section.highVulnerability;
+        this.p_turretMarkers.v_lowVulnerability.value = section.lowVulnerability;
+
+        section = Config.s_config.hitLog;
+        this.p_hitLog.v_visible.value = section.visible;
+        this.p_hitLog.v_x.value = section.x;
+        this.p_hitLog.v_y.value = section.y;
+        this.p_hitLog.v_h.value = section.h;
+        this.p_hitLog.v_w.value = section.w;
+        this.p_hitLog.v_lines.value = section.lines;
+        this.p_hitLog.v_direction.value = section.direction;
+        this.p_hitLog.v_format.value = section.format;
+        this.p_hitLog.v_formatHistory.value = section.formatHistory;
+
         section = Config.s_config.iconset;
         this.p_iconSet.v_battleLoading.value = section.battleLoading;
         this.p_iconSet.v_statisticForm.value = section.statisticForm;
@@ -493,7 +508,7 @@ private function RefreshVehicleNamesPage():void
     try
     {
         if (pgVehicleNames.updateCompletePendingFlag)
-            p_vehicle_names.RefreshSource();
+            p_vehicleNames.RefreshSource();
     }
     catch (ex:Error)
     {

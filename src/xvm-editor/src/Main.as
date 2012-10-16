@@ -32,6 +32,7 @@ protected function onSaveConfigClick():void
 	SaveConfig();
 }
 
+/*
 protected function onExtraButtonClick(event:MenuEvent):void
 {
     switch (event.item.value)
@@ -44,6 +45,7 @@ protected function onExtraButtonClick(event:MenuEvent):void
             break;
     }
 }
+*/
 
 protected function onVehicleStateChanged(event:Event):void
 {

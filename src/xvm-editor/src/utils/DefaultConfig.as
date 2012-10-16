@@ -100,11 +100,11 @@ public class DefaultConfig
         }
       },
       turretMarkers: {
-        highVulnerability: " *",
-        lowVulnerability: " '"
+        highVulnerability: "*",
+        lowVulnerability: "'"
       },
       hitLog: {
-        enabled: true,
+        visible: true,
         x: 270,
         y: 7,
         w: 200,
