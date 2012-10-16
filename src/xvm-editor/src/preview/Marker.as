@@ -1,63 +1,31 @@
-﻿package components
+﻿package preview
 {
-    import flash.display.DisplayObject;
-    import flash.display.MovieClip;
-    import flash.display.Sprite;
     import flash.events.Event;
-    import flash.events.TimerEvent;
-    import flash.text.AntiAliasType;
-    import flash.text.GridFitType;
-    import flash.text.TextField;
-    import flash.text.TextFormat;
-    import flash.utils.Timer;
-    
-    import mx.containers.Canvas;
-    import mx.core.ScrollPolicy;
+    import flash.display.MovieClip;
+
     import mx.core.UIComponent;
-    import mx.events.FlexEvent;
-    import mx.messaging.channels.StreamingAMFChannel;
-    
-    import spark.components.Image;
-    
-    import utils.ClassLoader;
-    import utils.Config;
-    import utils.Defines;
-    import utils.DisplayObjectWrapper;
-    import utils.GraphicsUtil;
-    import utils.Utils;
+
+    import preview.*;
+    import utils.*;
 
     public class Marker extends UIComponent
     {
-        [Embed(source="../assets/markers.swf", mimeType="application/octet-stream")]
-        private const markersSWF: Class;
-
-        [Embed(source="images/markers/clan1.png")]
-        private const IMG_clan1: Class;
-        [Embed(source="images/markers/clan2.png")]
-        private const IMG_clan2: Class;
-        [Embed(source="images/markers/ussr-IS-3.png")]
-        private const IMG_contour1: Class;
-        [Embed(source="images/markers/germany-Ferdinand.png")]
-        private const IMG_contour2: Class;
-        [Embed(source="images/markers/germany-Hummel.png")]
-        private const IMG_contour3: Class;
-
-        private var loader:ClassLoader;
-
-        private var vehicleLevel:Number;
-        private var vehicleClass:String;
-
-        private var s_isColorBlindMode:Boolean = false; // TODO
-
+        private var xvm:Xvm;
         private var isInitialized:Boolean = false;
 
-        private var _cfg: Object;
-        private var _vtype:String = "ally";
-        private var _vdead:Boolean = false;
+        private var vehicleIcon:MovieClip;
+        private var vehicleIconAlly:MovieClip;
+        private var vehicleIconEnemy:MovieClip;
+        private var levelIcon:MovieClip;
+        private var actionMarkerHelp:MovieClip;
+        private var actionMarkerVictim:MovieClip;
+        private var actionMarkerArta:MovieClip;
+
         private var _zoom:Number = 1;
         private var _extmode:Boolean = false;
-        private var m_maxHealth:Number = 1000;
-        private var m_curHealth:Number = 1000;
+        /*
+
+        private var _cfg: Object;
         private var _actionMarkerVisible:Boolean = true;
 
         private var xvmHB: Canvas;
@@ -66,17 +34,11 @@
         private var xvmHBDamage: Canvas;
         private var damageHolder: UIComponent;
 
-        private var vehicleIcon:MovieClip;
-        private var vehicleIconAlly:MovieClip;
-        private var vehicleIconEnemy:MovieClip;
+        private var clanIcon:Image = new Image();
         private var contourIcon:Image = new Image();
         private var contourIconHolder: UIComponent;
-        private var clanIcon:Image = new Image();
-        private var levelIcon:MovieClip;
-        private var actionMarkerHelp:MovieClip;
-        private var actionMarkerVictim:MovieClip;
-        private var actionMarkerArta:MovieClip;
         private var textFields: Array = [];
+*/
 
         public function Marker()
         {
@@ -84,11 +46,6 @@
 
         public function init(vtype:String, vclass:String, vlevel:Number):void
         {
-            this._vtype = vtype == "ally" || vtype == "ally_dead" ? "ally" : "enemy";
-            this._vdead = vtype == "ally_dead" || vtype == "enemy_dead";
-            this.vehicleClass = vclass;
-            this.vehicleLevel = vlevel;
-
             // draw grid
             graphics.beginFill(0xFFFF00, 0.1);
             graphics.drawRect(-75, 0, 150, 1);
@@ -97,36 +54,16 @@
             graphics.drawRect(0, -75, 1, 150);
             graphics.endFill();
 
-            xvmHB = new Canvas();
-            xvmHB.horizontalScrollPolicy = xvmHB.verticalScrollPolicy = ScrollPolicy.OFF;
-            xvmHBBorder = new Canvas();
-            xvmHB.addChild(xvmHBBorder);
-            xvmHBBorder.horizontalScrollPolicy = xvmHBBorder.verticalScrollPolicy = ScrollPolicy.OFF;
-            xvmHBDamage = new Canvas();
-            xvmHB.addChild(xvmHBDamage);
-            xvmHBDamage.horizontalScrollPolicy = xvmHBDamage.verticalScrollPolicy = ScrollPolicy.OFF;
-            xvmHBFill = new Canvas();
-            xvmHB.addChild(xvmHBFill);
-            xvmHBFill.horizontalScrollPolicy = xvmHBFill.verticalScrollPolicy = ScrollPolicy.OFF;
-            addChild(xvmHB);
-            xvmHB.includeInLayout = false;
+            // Create marker
+            xvm = new Xvm(this);
 
-            contourIconHolder = new UIComponent();
-            contourIconHolder.includeInLayout = false;
-            addChild(contourIconHolder);
+            var entity:String = vtype == "ally" || vtype == "ally_dead" ? "ally" : "enemy";
+            xvm.init(vclass, null, vtype, vlevel, '___Player___[CLAN]', 100, 100, entity, false, false, entity); 
 
-            contourIcon.includeInLayout = false;
-            contourIcon.source = _vdead ? new IMG_contour3()
-                : _vtype == "ally" ? new IMG_contour1() : new IMG_contour2();
-            contourIcon.width = 80;
-            contourIcon.height = 24;
-
-            contourIconHolder.visible = false;
-            contourIconHolder.addChild(contourIcon);
-
-            loadSWF(markersSWF);
+            loadSWF(Resources.markersSWF);
         }
 
+        private var loader:ClassLoader;
         private function loadSWF(swf_class:Class):void
         {
             loader = new ClassLoader();
@@ -148,15 +85,6 @@
             actionMarkerVictim = CreateMC("actionVictim");
             actionMarkerArta = CreateMC("actionArta");
 
-            clanIcon.includeInLayout = false;
-            clanIcon.source =  _vtype == "ally" ? new IMG_clan1() : new IMG_clan2();
-            clanIcon.visible = false;
-            addChild(clanIcon);
-
-            damageHolder = new UIComponent();
-            damageHolder.includeInLayout = false;
-            addChild(damageHolder);
-
             addEventListener(Event.ENTER_FRAME, PostInit);
         }
 
@@ -173,17 +101,17 @@
         {
             removeEventListener(Event.ENTER_FRAME, PostInit);
 
-            vehicleIconAlly.marker.icon.gotoAndStop(vehicleClass);
-            vehicleIconAlly.gotoAndPlay(_vdead == false ? "normal" : "immediate_dead");
+            vehicleIconAlly.marker.icon.gotoAndStop(xvm.vehicleTypeComponent.getVehicleClass());
+            vehicleIconAlly.gotoAndPlay(xvm.m_isDead == false ? "normal" : "immediate_dead");
             vehicleIconAlly.marker.scaleX = vehicleIconAlly.marker.scaleY = _zoom;
             vehicleIconAlly.visible = false;
 
-            vehicleIconEnemy.marker.icon.gotoAndStop(vehicleClass);
-            vehicleIconEnemy.gotoAndPlay(_vdead == false ? "normal" : "immediate_dead");
+            vehicleIconEnemy.marker.icon.gotoAndStop(xvm.vehicleTypeComponent.getVehicleClass());
+            vehicleIconEnemy.gotoAndPlay(xvm.m_isDead == false ? "normal" : "immediate_dead");
             vehicleIconEnemy.marker.scaleX = vehicleIconEnemy.marker.scaleY = _zoom;
             vehicleIconEnemy.visible = false;
 
-            vehicleIcon = _vtype == "ally" ? vehicleIconAlly : vehicleIconEnemy;
+            vehicleIcon = xvm.m_entityType == "ally" ? vehicleIconAlly : vehicleIconEnemy;
 
             actionMarkerHelp.stop();
             actionMarkerHelp.visible = false;
@@ -192,7 +120,7 @@
             actionMarkerArta.stop();
             actionMarkerArta.visible = false;
 
-            levelIcon.gotoAndStop(vehicleLevel);
+            levelIcon.gotoAndStop(xvm.m_level);
             levelIcon.visible = false;
 
             isInitialized = true;
@@ -200,7 +128,24 @@
             update();
         }
 
-        public function set zoom(value:Number):void
+        public function action():void
+        {
+        var mc:MovieClip;
+        if (xvm.m_entityType == "ally")
+        mc = actionMarkerHelp;
+        else
+        mc = Math.round(Math.random()) == 0 ? actionMarkerVictim : actionMarkerArta;
+        actionMarkerHelp.stop();
+        actionMarkerHelp.visible = false;
+        actionMarkerVictim.stop();
+        actionMarkerVictim.visible = false;
+        actionMarkerArta.stop();
+        actionMarkerArta.visible = false;
+        mc.visible = _actionMarkerVisible;
+        mc.gotoAndPlay(0);
+        }
+        
+/*        public function set zoom(value:Number):void
         {
             this._zoom = value;
             if (vehicleIcon)
@@ -221,23 +166,23 @@
 
         public function set deadType(value:Boolean):void
         {
-            this._vtype = value == true ? "enemy" : "ally";
+            xvm.m_entityType = xvm.m_entityName = value == true ? "enemy" : "ally";
             vehicleIcon.visible = false;
             vehicleIcon = value == true ? vehicleIconEnemy : vehicleIconAlly;
             vehicleIcon.marker.scaleX = vehicleIcon.marker.scaleY = _zoom;
-            clanIcon.source = value ? new IMG_clan2() : new IMG_clan1();
+            clanIcon.source = value ? new Resources.IMG_clan2() : new Resources.IMG_clan1();
             update();
         }
-
+*/
         public function update():void
         {
             if (!isInitialized)
                 return;
             if (!Config.s_config || !Config.s_config.markers)
                 return;
-            var cfg:Object = Config.s_config.markers;
-            cfg = _vtype == "ally" ? cfg.ally : cfg.enemy;
-            cfg = _vdead == false ? cfg.alive : cfg.dead;
+/*            var cfg:Object = Config.s_config.markers;
+            cfg = xvm.m_entityType == "ally" ? cfg.ally : cfg.enemy;
+            cfg = xvm.isDead == false ? cfg.alive : cfg.dead;
             cfg = _extmode ? cfg.extended : cfg.normal;
             _cfg = cfg;
 
@@ -310,8 +255,9 @@
             XVMUpdateHealthBar(m_curHealth);
             // Update Text Fields
             XVMUpdateUI(m_curHealth);
+*/
         }
-
+/*
         public function hit():void
         {
             var blowup:Boolean = Math.round(Math.random() * 5) == 0;
@@ -323,23 +269,6 @@
             //XVMUpdateUI(hp);
         }
 
-        public function action():void
-        {
-            var mc:MovieClip;
-            if (_vtype == "ally")
-                mc = actionMarkerHelp;
-            else
-                mc = Math.round(Math.random()) == 0 ? actionMarkerVictim : actionMarkerArta;
-            actionMarkerHelp.stop();
-            actionMarkerHelp.visible = false;
-            actionMarkerVictim.stop();
-            actionMarkerVictim.visible = false;
-            actionMarkerArta.stop();
-            actionMarkerArta.visible = false;
-            mc.visible = _actionMarkerVisible;
-            mc.gotoAndPlay(0);
-        }
-
         // Damage Visualization
         private function removeTextField(f: TextField):void
         {
@@ -349,7 +278,7 @@
         private function XVMShowDamage(curHealth:Number, delta:Number):void
         {
             var cfg:Object = Config.s_config.markers;
-            cfg = _vtype == "ally" ? cfg.ally : cfg.enemy;
+            cfg = xvm.m_entityType == "ally" ? cfg.ally : cfg.enemy;
             cfg = curHealth > 0 ? cfg.alive : cfg.dead;
             cfg = _extmode ? cfg.extended : cfg.normal;
 
@@ -374,7 +303,7 @@
             damageField.defaultTextFormat = XVMCreateNewTextFormat(cfg.font);
             damageField.text = " " + text + " ";
             damageField.textColor = !isNaN(parseInt(cfg.color)) ? int(cfg.color)
-                : Config.s_config.colors.system[_vtype + "_alive_" + (s_isColorBlindMode ? "blind" : "normal")];
+                : Config.s_config.colors.system[xvm.m_entityType + "_alive_" + (s_isColorBlindMode ? "blind" : "normal")];
             damageField.x = -(damageField.width / 2.0);
 
             if (cfg.shadow)
@@ -543,7 +472,7 @@
 
         private function get pname():String
         {
-            return "Player" + (_vtype == "ally" ? "Ally" : "Enemy");
+            return "Player" + (xvm.m_entityType == "ally" ? "Ally" : "Enemy");
         }
 
         private const rlevel:Array = [ "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" ];
@@ -551,10 +480,11 @@
         {
             // AS 2 doesn't have String.replace? Shame on them. Let's use our own square wheel.
             format = format.split("{{nick}}").join(pname);
-            format = format.split("{{vehicle}}").join(_vdead ? "Hummel" : _vtype == "ally" ? "ИС-3" : "Ferdinand");
+            format = format.split("{{vehicle}}").join(_vdead ? "Hummel" : xvm.m_entityType == "ally" ? "ИС-3" : "Ferdinand");
             var level:int = _vdead ? 5 : 8;
             format = format.split("{{level}}").join(String(level));
             format = format.split("{{rlevel}}").join(rlevel[level - 1]);
+            format = format.split("{{turret}}").join(Config.s_config.turretMarkers.highVulnerability);
 
             format = format.split("{{kb}}").join("4k");
             format = format.split("{{battles}}").join("4321");
@@ -599,6 +529,7 @@
             var dmgRatio: Number = delta ? Math.ceil(delta / m_maxHealth * 100) : 0;
             format = format.split("{{dmg}}").join(delta ? String(delta) : "");
             format = format.split("{{dmg-ratio}}").join(delta ? String(dmgRatio) : "");
+            format = format.split("{{dmg-kind}}").join(delta ? String("attack") : "");
 
             return format;
         }
@@ -658,7 +589,7 @@
 
         private function XVMFormatDynamicColor(format: String, curHealth: Number): Number
         {
-            var systemColorName: String = _vtype + "_";
+            var systemColorName: String = xvm.m_entityType + "_";
             systemColorName += !_vdead ? "alive_" : m_curHealth < 0 ? "blowedup_" : "dead_";
             systemColorName += s_isColorBlindMode ? "blind" : "normal";
             var systemColor:Number = Config.s_config.colors.system[systemColorName];
@@ -672,16 +603,22 @@
             var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
             var formatArr:Array = format.split("{{c:hp}}");
             if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth, "0x"))
+                format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth, "0x"));
             formatArr = format.split("{{c:hp-ratio}}");
             if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"))
+                format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"));
             formatArr = format.split("{{c:hp_ratio}}");
             if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"))
+                format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"));
+            formatArr = format.split("{{c:dmg-kind}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(Config.s_config.colors.dmg_kind.attack);
+            formatArr = format.split("{{c:dmg_kind}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(Config.s_config.colors.dmg_kind.attack);
             formatArr = format.split("{{c:vtype}}");
             if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetVTypeColorValue(Utils.vehicleClassToVehicleType(vehicleClass), "0x"))
+                format = formatArr.join(GraphicsUtil.GetVTypeColorValue(Utils.vehicleClassToVehicleType(vehicleClass), "0x"));
             return !isNaN(parseInt(format)) ? int(format) : systemColor;
         }
 
@@ -707,6 +644,6 @@
                 GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, 1234, "#", _vdead));
 
             return format;
-        }
+        }*/
     }
 }
