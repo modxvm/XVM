@@ -66,10 +66,10 @@
     "y": 7,
     "w": 500,
     "h": 200,
-    "lines": 1,
+    "lines": 3,
     "direction": "down",
-    "format":        "<textformat tabstops='[55,90,130,190]'><font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}</font><font alpha='#00{{vehicle}}'>:\t{{dmg-total}}\t| <font color='{{c:dmg-kind}}'><b>{{dmg}}</b></font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}}</font></font></textformat>",
-    "formatHistory": "<textformat tabstops='[55,90,130,190]'><font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}:</font>\t{{dmg-total}}\t| <font color='{{c:dmg-kind}}'>{{dmg}}</font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}}</font></textformat>"
+    "format":        "<textformat tabstops='[55,90,130,190]'><font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}</font><font size='1{{vehicle}}'>:\t{{dmg-total}}\t| <font color='{{c:dmg-kind}}'><b>{{dmg}}</b></font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}}</font></font></textformat>",
+    "formatHistory": "<textformat tabstops='[55,90,130,190]'><font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}</font><font size='1{{vehicle}}'>:\t{{dmg-total}}\t| <font color='{{c:dmg-kind}}'>{{dmg}}</font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}}</font></font></textformat>"
   },
   "markers": {
     "ally": {

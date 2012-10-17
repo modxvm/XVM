@@ -62,12 +62,24 @@ class wot.VehicleMarkersManager.ColorsManager
         return parseInt(Config.s_config.colors.system[key]);
     }
 
-    public static function getDamageSystemColor(damageSource:String, damageDest:String,
+    public static function getDamageSystemColor(damageSource:String, damageDest:String, damageType:String,
         isDead:Boolean, isBlowedUp:Boolean):Number
     {
-        var key:String = damageSource + "_" + damageDest + "_";
-        key += !isDead ? "hit" : isBlowedUp ? "blowup" : "kill";
-        return parseInt(Config.s_config.colors.damage[key]);
+        switch (damageType)
+        {
+            case "world_collision":
+            case "death_zone":
+            case "drowning":
+                return parseInt(Config.s_config.colors.dmg_kind[damageType]);
+
+            case "attack":
+            case "fire":
+            case "ramming":
+            default:
+                var key:String = damageSource + "_" + damageDest + "_";
+                key += !isDead ? "hit" : isBlowedUp ? "blowup" : "kill";
+                return parseInt(Config.s_config.colors.damage[key]);
+        }
     }
 
     // PRIVATE
