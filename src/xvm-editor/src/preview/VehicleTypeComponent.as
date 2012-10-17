@@ -1,6 +1,7 @@
 package preview
 {
 
+import flash.display.MovieClip;
 import utils.*;
 import preview.*;
 
@@ -22,63 +23,11 @@ public class VehicleTypeComponent
 
         m_vehicleClass = vehicleClass;
         m_hunt = hunt;
-
-        updateMarkerLabel();
-    }
-
-    public function setVehicleClass()
-    {
-        var className = (proxy.isSpeaking && !proxy.isDead) ? "dynamic" : m_vehicleClass;
-
-        if (proxy.marker.marker.iconHunt == null)
-        {
-            proxy.marker.marker.icon.gotoAndStop(className);
-        }
-        else
-        {
-            proxy.marker.marker.icon._visible = !m_hunt;
-            proxy.marker.marker.iconHunt._visible = m_hunt;
-            if (m_hunt)
-                proxy.marker.marker.iconHunt.gotoAndStop(className);
-            else
-                proxy.marker.marker.icon.gotoAndStop(className);
-        }
     }
 
     public function getVehicleClass():String
     {
         return m_vehicleClass;
-    }
-
-    function setMarkerState(value)
-    {
-        m_markerState = value;
-        proxy.marker.gotoAndPlay(m_markerState);
-
-        if (proxy.isDead && proxy.isSpeaking) // change dynamic to vehicle type marker for dead while speaking
-            this.setVehicleClass();
-    }
-
-    function updateMarkerLabel()
-    {
-        var aliasColor = ColorsManager.getMarkerColorAlias(proxy.entityName, proxy.isColorBlindMode);
-        if (m_markerLabel == aliasColor)
-            return;
-
-        m_markerLabel = aliasColor;
-        proxy.setMarkerLabel(m_markerLabel);
-
-        if (m_vehicleClass == null)
-            ErrorHandler.setText("INTERNAL ERROR: m_vehicleClass == null");
-
-        if (m_markerState != null)
-        {
-            if (proxy.isDead)
-                m_markerState = "immediate_dead";
-            proxy.marker.gotoAndPlay(m_markerState);
-        }
-
-        this.setVehicleClass();
     }
 
     public function updateState(state_cfg:Object)
@@ -89,8 +38,6 @@ public class VehicleTypeComponent
 
         if (visible)
             draw(cfg);
-
-        proxy.marker._visible = visible;
 
     }
 

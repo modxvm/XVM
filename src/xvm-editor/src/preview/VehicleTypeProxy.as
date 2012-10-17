@@ -2,8 +2,10 @@ package preview
 {
 
 import flash.display.MovieClip;
-import utils.*;
+
 import preview.*;
+
+import utils.*;
 
 public class VehicleTypeProxy extends AbstractAccessProxy
 {
@@ -16,19 +18,9 @@ public class VehicleTypeProxy extends AbstractAccessProxy
         super(xvm);
     }
 
-    public function get marker():MovieClip
-    {
-        return xvm.proxy.marker;
-    }
-
     public function get isSpeaking():Boolean
     {
         return xvm.m_speaking;
-    }
-
-    public function get isDead():Boolean
-    {
-        return xvm.m_isDead; // or xvm.vehicleDestroyed(); ?
     }
 
     public function get entityName():String
@@ -43,7 +35,12 @@ public class VehicleTypeProxy extends AbstractAccessProxy
 
     public function setMarkerLabel(markerLabel:String):void
     {
-        xvm.proxy.gotoAndStop(markerLabel);
+        xvm.proxy.vehicleIcon.gotoAndStop(markerLabel);
+    }
+
+    public function get marker():MovieClip
+    {
+        return xvm.proxy.vehicleIcon;
     }
 }
 

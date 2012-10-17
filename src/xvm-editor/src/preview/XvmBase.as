@@ -1,9 +1,13 @@
 package preview
 {
 
-import utils.*;
+import flash.text.StyleSheet;
+import flash.text.TextField;
+
 import preview.*;
 import preview.damage.*;
+
+import utils.*;
 
 public class XvmBase
 {
@@ -12,15 +16,15 @@ public class XvmBase
     private static var s_blowedUp:Object = {}; // List of members that was ammoracked.
 
     // Private members
-    var m_entityName;
-    var m_playerFullName;
-    var m_curHealth;
-    var m_maxHealth;
-    var m_source;
-    var m_vname;
-    var m_level;
-    var m_speaking;
-    var m_entityType; // TODO: is the same as proxy.m_team?
+    public var m_entityName;
+    public var m_playerFullName;
+    public var m_curHealth;
+    public var m_maxHealth;
+    public var m_source;
+    public var m_vname;
+    public var m_level;
+    public var m_speaking;
+    public var m_entityType; // TODO: is the same as proxy.m_team?
 
     // Private members
     var m_showExInfo: Boolean;
@@ -34,7 +38,6 @@ public class XvmBase
     var vehicleState: VehicleState;
 
     // UI Components
-    var actionMarkerComponent: ActionMarkerComponent;
     var clanIconComponent:ClanIconComponent;
     var contourIconComponent: ContourIconComponent;
     var damageTextComponent: DamageTextComponent;
@@ -43,7 +46,7 @@ public class XvmBase
     var vehicleTypeComponent: VehicleTypeComponent;
 
     // Parent proxy instance (assigned from proxy)
-    private var _proxy:Marker;
+    protected var _proxy:Marker;
     public function get proxy():Marker { return _proxy; }
 
     public function get isBlowedUp():Boolean { return s_blowedUp[m_playerFullName] != undefined; }
@@ -63,7 +66,7 @@ public class XvmBase
                 format = formatArr.join(m_playerFullName);
             formatArr = format.split("{{vehicle}}");
             if (formatArr.length > 1)
-                format = formatArr.join(VehicleInfo.mapVehicleName(m_defaultIconSource, m_vname));
+                format = formatArr.join(m_vname);
             formatArr = format.split("{{level}}");
             if (formatArr.length > 1)
                 format = formatArr.join(String(m_level));
@@ -72,18 +75,18 @@ public class XvmBase
                 format = formatArr.join(XvmHelper.rlevel[m_level - 1]);
             formatArr = format.split("{{turret}}");
             if (formatArr.length > 1)
-                format = formatArr.join(turretStatusComponent.getMarker());
-            format = StatFormat.FormatText({ label: m_playerFullName }, format);
+                format = formatArr.join(Config.s_config.turretMarker.highVulterability);
+            format = StatFormat.FormatText(format, m_isDead);
             format = Utils.trim(format);
         }
         catch (e)
         {
-            ErrorHandler.setText("ERROR: formatStaticText(" + format + "):" + String(e));
+            //ErrorHandler.setText("ERROR: formatStaticText(" + format + "):" + String(e));
         }
         return format;
     }
 
-    public function formatDynamicText(format:String, curHealth:Number, delta:Number, damageType:String):String
+    public function formatDynamicText(format:String, curHealth:Number, delta:Number = 0, damageType:String = null):String
     {
         /* Substitutes macroses with values
          *
@@ -127,7 +130,7 @@ public class XvmBase
                 format = formatArr.join(delta ? String(dmgRatio) : "");
             formatArr = format.split("{{dmg-kind}}");
             if (formatArr.length > 1)
-                format = formatArr.join(delta ? Locale.get(damageType) : "");
+                format = formatArr.join(delta ? damageType : "");
 
             // Colors
             formatArr = format.split("{{c:hp}}");
@@ -159,7 +162,7 @@ public class XvmBase
         }
         catch (e)
         {
-            ErrorHandler.setText("ERROR: formatDynamicText(" + format + "):" + String(e));
+//            ErrorHandler.setText("ERROR: formatDynamicText(" + format + "):" + String(e));
         }
 
         return format;
@@ -169,28 +172,28 @@ public class XvmBase
     {
         try
         {
-            if (!format || isFinite(format))
+            if (!format || !isNaN(parseInt(format)))
                 return format;
 
-            format = StatFormat.FormatText( { label: m_playerFullName }, format).split("#").join("0x");
+            format = StatFormat.FormatText(format, m_isDead).split("#").join("0x");
         }
         catch (e)
         {
-            ErrorHandler.setText("ERROR: formatStaticColorText(" + format + "):" + String(e));
+//            ErrorHandler.setText("ERROR: formatStaticColorText(" + format + "):" + String(e));
         }
 
         return format;
     }
 
-    public function formatDynamicColor(format:String, curHealth:Number, damageType:String):Number
+    public function formatDynamicColor(format:String, curHealth:Number, damageType:String = null):Number
     {
-        var systemColor =  ColorsManager.getSystemColor(m_entityName, m_isDead, isBlowedUp, ColorsManager.isColorBlindMode);
+        var systemColor =  ColorsManager.getSystemColor(m_entityName, m_isDead, isBlowedUp, false);
         try
         {
             if (!format)
                 return systemColor;
 
-            if (isFinite(format))
+            if (!isNaN(parseInt(format)))
                 return Number(format);
 
             var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
@@ -218,11 +221,11 @@ public class XvmBase
                         Utils.vehicleClassToVehicleType(vehicleTypeComponent.getVehicleClass()), "0x"));
                 }
             }
-            return isFinite(format) ? Number(format) : systemColor;
+            return !isNaN(parseInt(format)) ? Number(format) : systemColor;
         }
         catch (e)
         {
-            ErrorHandler.setText("ERROR: formatDynamicColor(" + format + "):" + String(e));
+//            ErrorHandler.setText("ERROR: formatDynamicColor(" + format + "):" + String(e));
         }
 
         return systemColor;
@@ -235,7 +238,7 @@ public class XvmBase
             if (!format)
                 return 100;
 
-            if (isFinite(format))
+            if (!isNaN(parseInt(format)))
                 return Number(format);
 
             var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
@@ -249,12 +252,12 @@ public class XvmBase
             if (formatArr.length > 1)
                 format = formatArr.join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hpRatio).toString());
 
-            var n = isFinite(format) ? Number(format) : 100;
+            var n = !isNaN(parseInt(format)) ? Number(format) : 100;
             return (n <= 0) ? 1 : (n > 100) ? 100 : n;
         }
         catch (e)
         {
-            ErrorHandler.setText("ERROR: formatDynamicAlpha(" + format + "):" + String(e));
+//            ErrorHandler.setText("ERROR: formatDynamicAlpha(" + format + "):" + String(e));
         }
 
         return 100;
@@ -264,7 +267,7 @@ public class XvmBase
      * Components extension: MovieClip.onEnterFrame translation
      * TODO: Check performance & implementation
      */
-    function onEnterFrame():Void
+    function onEnterFrame():void
     {
         if (contourIconComponent != null && contourIconComponent.onEnterFrame != null)
             contourIconComponent.onEnterFrame();
@@ -277,8 +280,9 @@ public class XvmBase
     {
         try
         {
-            var n = proxy.getNextHighestDepth();
-            var textField: TextField = proxy.createTextField("textField" + n, n, 0, 0, 140, 100);
+            var textField: TextField = new TextField();
+            textField.width = 140;
+            textField.height = 100;
 
             //textField._quality = "BEST";
             textField.antiAliasType = "normal";
@@ -292,9 +296,9 @@ public class XvmBase
             //textField.borderColor = 0xFFFFFF;
             //textField.autoSize = "center"; // http://theolagendijk.com/2006/09/07/aligning-htmltext-inside-flash-textfield/
 
-            textField.html = true;
+            //textField.html = true;
 
-            var style:TextField.StyleSheet = new TextField.StyleSheet();
+            var style:StyleSheet = new StyleSheet();
             style.parseCSS(XvmHelper.createCSS(cfg.font,
                 formatDynamicColor(formatStaticColorText(cfg.color), m_curHealth), "xvm_markerText"));
             textField.styleSheet = style;
@@ -310,16 +314,16 @@ public class XvmBase
                     cfg.shadow.angle, sh_color, sh_alpha, cfg.shadow.size, cfg.shadow.strength) ];
             }
 
-            textField._alpha = formatDynamicAlpha(cfg.alpha, m_curHealth);
-            textField._x = cfg.x - (textField._width / 2.0);
-            textField._y = cfg.y - (/*textField._height*/ 31 / 2.0); // FIXIT: 31 is used for compatibility
-            textField._visible = cfg.visible;
+            textField.alpha = formatDynamicAlpha(cfg.alpha, m_curHealth);
+            textField.x = cfg.x - (textField.width / 2.0);
+            textField.y = cfg.y - (/*textField._height*/ 31 / 2.0); // FIXIT: 31 is used for compatibility
+            textField.visible = cfg.visible;
 
             return { field: textField, format: formatStaticText(cfg.format), alpha: cfg.alpha };
         }
         catch (e)
         {
-            ErrorHandler.setText("ERROR: createTextField():" + String(e));
+//            ErrorHandler.setText("ERROR: createTextField():" + String(e));
         }
 
         return null;

@@ -2,6 +2,9 @@ package preview.damage
 {
 
 import flash.display.MovieClip;
+
+import mx.core.UIComponent;
+
 import preview.*;
 import preview.damage.*;
 
@@ -16,9 +19,12 @@ public class DamageTextProxy extends AbstractAccessProxy
         super(xvm);
     }
 
-    public function createHolder():MovieClip
+    public function createHolder():UIComponent
     {
-        return xvm.proxy.createEmptyMovieClip("xvm_damageHolder", xvm.proxy.getNextHighestDepth());
+        var damageHolder:UIComponent = new UIComponent();
+        damageHolder.includeInLayout = false;
+        addChild(damageHolder);
+        return damageHolder;
     }
 
     public function get entityName():String
@@ -29,22 +35,12 @@ public class DamageTextProxy extends AbstractAccessProxy
     //   dst: ally, squadman, allytk, enemytk, enemy
     public function get damageDest():String
     {
-        return xvm.m_entityName == 'teamKiller' ? (xvm.proxy.m_team + "tk") : xvm.m_entityName;
-    }
-
-    public function get isDead():Boolean
-    {
-        return xvm.m_isDead;
+        return xvm.m_entityName == 'teamKiller' ? (xvm.m_entityType + "tk") : xvm.m_entityName;
     }
 
     public function get isBlowedUp():Boolean
     {
         return xvm.isBlowedUp;
-    }
-
-    public function get isColorBlindMode():Boolean
-    {
-        return ColorsManager.isColorBlindMode;
     }
 }
 

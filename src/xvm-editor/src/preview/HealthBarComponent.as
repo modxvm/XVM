@@ -2,6 +2,8 @@ package preview
 {
 
 import flash.display.MovieClip;
+import mx.containers.Canvas;
+import mx.core.ScrollPolicy;
 import com.greensock.TweenLite;
 import com.greensock.easing.Cubic;
 import utils.*;
@@ -11,35 +13,28 @@ public class HealthBarComponent
 {
     private var proxy:HealthBarProxy;
 
-    private var healthBar: MovieClip;
-    private var border: MovieClip;
-    private var fill: MovieClip;
-    private var damage: MovieClip;
+    private var healthBar: Canvas;
+    private var border: Canvas;
+    private var fill: Canvas;
+    private var damage: Canvas;
 
     public function HealthBarComponent(proxy:HealthBarProxy)
     {
         this.proxy = proxy;
 
-        /*
-        xvmHB = new Canvas();
-        xvmHB.horizontalScrollPolicy = xvmHB.verticalScrollPolicy = ScrollPolicy.OFF;
-        xvmHBBorder = new Canvas();
-        xvmHB.addChild(xvmHBBorder);
-        xvmHBBorder.horizontalScrollPolicy = xvmHBBorder.verticalScrollPolicy = ScrollPolicy.OFF;
-        xvmHBDamage = new Canvas();
-        xvmHB.addChild(xvmHBDamage);
-        xvmHBDamage.horizontalScrollPolicy = xvmHBDamage.verticalScrollPolicy = ScrollPolicy.OFF;
-        xvmHBFill = new Canvas();
-        xvmHB.addChild(xvmHBFill);
-        xvmHBFill.horizontalScrollPolicy = xvmHBFill.verticalScrollPolicy = ScrollPolicy.OFF;
-        addChild(xvmHB);
-        xvmHB.includeInLayout = false;
-        */
-
-        healthBar = proxy.createHolder();
-        border = healthBar.createEmptyMovieClip("border", 1);
-        fill = healthBar.createEmptyMovieClip("fill", 2);
-        damage = healthBar.createEmptyMovieClip("damage", 3);
+        healthBar = new Canvas();
+        healthBar.horizontalScrollPolicy = healthBar.verticalScrollPolicy = ScrollPolicy.OFF;
+        border = new Canvas();
+        healthBar.addChild(border);
+        border.horizontalScrollPolicy = border.verticalScrollPolicy = ScrollPolicy.OFF;
+        damage = new Canvas();
+        healthBar.addChild(damage);
+        damage.horizontalScrollPolicy = damage.verticalScrollPolicy = ScrollPolicy.OFF;
+        fill = new Canvas();
+        healthBar.addChild(fill);
+        fill.horizontalScrollPolicy = fill.verticalScrollPolicy = ScrollPolicy.OFF;
+        proxy.addChild(healthBar);
+        healthBar.includeInLayout = false;
     }
 
     public function showDamage(state_cfg:Object, curHealth:Number, maxHealth:Number, delta:Number)
@@ -47,11 +42,12 @@ public class HealthBarComponent
         var cfg = state_cfg.healthBar;
         //Flow bar animation
         TweenLite.killTweensOf(damage);
-        damage._x = cfg.border.size + cfg.width * (curHealth / maxHealth) - 1;
-        damage._xscale = damage._xscale + 100 * (delta / maxHealth);
+        damage.x = cfg.border.size + cfg.width * (curHealth / maxHealth) - 1;
+        damage.width = cfg.border.size + cfg.width * (delta / maxHealth) - 1;
         GraphicsUtil.setColor(damage, proxy.formatDynamicColor(cfg.damage.color));
-        damage._alpha = proxy.formatDynamicAlpha(cfg.damage.alpha, curHealth);
-        TweenLite.to(damage, cfg.damage.fade, {_xscale: 0, ease: Cubic.easeIn });
+        damage.alpha = proxy.formatDynamicAlpha(cfg.damage.alpha);
+
+        TweenLite.to(damage, cfg.damage.fade, {_width: 0, ease: Cubic.easeIn });
     }
 
     public function updateState(state_cfg:Object)
@@ -63,28 +59,30 @@ public class HealthBarComponent
         if (visible)
             draw(cfg);
 
-        healthBar._visible = visible;
+        healthBar.visible = visible;
     }
 
     private function draw(cfg:Object)
     {
-        healthBar.clear();
-        border.clear();
-        fill.clear();
-        damage.clear();
+        healthBar.graphics.clear();
+        border.graphics.clear();
+        fill.graphics.clear();
+        damage.graphics.clear();
 
-        GraphicsUtil.fillRect(border, 0, 0, cfg.width + cfg.border.size * 2, cfg.height + cfg.border.size * 2);
-        GraphicsUtil.fillRect(fill, cfg.border.size, cfg.border.size, cfg.width, cfg.height);
-        GraphicsUtil.fillRect(damage, cfg.border.size, cfg.border.size, cfg.width, cfg.height);
+        border.graphics.beginFill(proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.border.color)), 1);
+        border.graphics.drawRect(0, 0, cfg.width + cfg.border.size * 2, cfg.height + cfg.border.size * 2);
+        border.graphics.endFill();
 
-        damage._xscale = 0;
+        fill.graphics.beginFill(currColor, 1);
+        fill.graphics.drawRect(cfg.border.size, cfg.border.size, cfg.width, cfg.height);
+        fill.graphics.endFill();
 
-        healthBar._x = cfg.x;
-        healthBar._y = cfg.y;
-        healthBar._alpha = proxy.formatDynamicAlpha(cfg.alpha);
+        healthBar.x = cfg.x;
+        healthBar.y = cfg.y;
+        healthBar.alpha = proxy.formatDynamicAlpha(cfg.alpha);
 
         GraphicsUtil.setColor(border, proxy.formatDynamicColor(cfg.border.color));
-        border._alpha = proxy.formatDynamicAlpha(cfg.border.alpha);
+        border.alpha = proxy.formatDynamicAlpha(cfg.border.alpha);
 
         var ct = proxy.formatStaticColorText(cfg.color);
         var lct = proxy.formatStaticColorText(cfg.lcolor);
@@ -94,11 +92,11 @@ public class HealthBarComponent
         var currColor = GraphicsUtil.colorByRatio(percent, lowColor, fullColor);
 
         GraphicsUtil.setColor(fill, currColor);
-        fill._alpha = proxy.formatDynamicAlpha(cfg.fill.alpha);
-        fill._xscale = Math.min(proxy.curHealth / proxy.maxHealth * 100.0, 100);
+        fill.alpha = proxy.formatDynamicAlpha(cfg.fill.alpha);
+//        fill.xscale = Math.min(proxy.curHealth / proxy.maxHealth * 100.0, 100);
 
         GraphicsUtil.setColor(damage, proxy.formatDynamicColor(cfg.damage.color));
-        damage._alpha = proxy.formatDynamicAlpha(cfg.damage.alpha);
+        damage.alpha = proxy.formatDynamicAlpha(cfg.damage.alpha);
     }
 }
 

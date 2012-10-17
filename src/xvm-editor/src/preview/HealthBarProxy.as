@@ -18,14 +18,6 @@ public class HealthBarProxy extends AbstractAccessProxy
         super(xvm);
     }
 
-    public function createHolder():MovieClip
-    {
-        var mc = new Canvas();
-        xvm.proxy.addChild(mc);
-        mc.includeInLayout = false;
-        return mc;
-    }
-
     public function get curHealth():Number
     {
         return xvm.m_curHealth;

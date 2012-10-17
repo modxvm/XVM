@@ -27,7 +27,7 @@ public class XvmHelper
         }
         catch (e)
         {
-            ErrorHandler.setText("ERROR: createCSS():" + String(e));
+//            ErrorHandler.setText("ERROR: createCSS():" + String(e));
         }
 
         return null;

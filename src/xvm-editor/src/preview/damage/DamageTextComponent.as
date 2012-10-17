@@ -2,26 +2,25 @@ package preview.damage
 {
 
 import flash.display.MovieClip;
-import flash.text.TextField;
 import flash.text.StyleSheet;
-import utils.*;
+import flash.text.TextField;
+
+import mx.core.UIComponent;
+
 import preview.*;
+
+import utils.*;
 
 public class DamageTextComponent
 {
     private var proxy:DamageTextProxy;
     private var cfg:Object;
 
-    private var damage:MovieClip;
+    private var damage:UIComponent;
 
     public function DamageTextComponent(proxy:DamageTextProxy)
     {
         this.proxy = proxy;
-        /*
-        damageHolder = new UIComponent();
-        damageHolder.includeInLayout = false;
-        addChild(damageHolder);
-        */
 
         damage = proxy.createHolder();
     }
@@ -46,8 +45,8 @@ public class DamageTextComponent
         var color:Number;
         if (cfg.color == null)
         {
-            color = ColorsManager.getDamageSystemColor(flagToDamageSource(flag), proxy.damageDest,
-                proxy.isDead, proxy.isBlowedUp, proxy.isColorBlindMode);
+            shadowColor = ColorsManager.getDamageSystemColor(flagToDamageSource(flag), proxy.damageDest,
+                proxy.isDead, proxy.isBlowedUp);
         }
         else
         {
@@ -58,7 +57,7 @@ public class DamageTextComponent
         if (cfg.shadow.color == null)
         {
             shadowColor = ColorsManager.getDamageSystemColor(flagToDamageSource(flag), proxy.damageDest,
-                proxy.isDead, proxy.isBlowedUp, proxy.isColorBlindMode);
+                proxy.isDead, proxy.isBlowedUp);
         }
         else
         {
@@ -85,24 +84,25 @@ public class DamageTextComponent
         var visible = cfg.visible;
         if (visible)
         {
-            damage._x = cfg.x;
-            damage._y = cfg.y;
+            damage.x = cfg.x;
+            damage.y = cfg.y;
         }
-        damage._visible = visible;
+        damage.visible = visible;
     }
 
     // PRIVATE METHODS
 
     private function createTextField(color:Number, shadowColor:Number, cfg):TextField
     {
-        var n = damage.getNextHighestDepth();
-        var tf: TextField = damage.createTextField("txt" + n, n, 0, 0, 200, 100);
+        var tf: TextField = new TextField();
+        tf.width = 200;
+        tf.height = 100;
 
         tf.antiAliasType = "advanced";
         tf.multiline = true;
         tf.wordWrap = false;
 
-        tf.html = true;
+        //tf.html = true;
 
         var style:StyleSheet = new StyleSheet();
         style.parseCSS(XvmHelper.createCSS(cfg.font, color, "xvm_damageText"));
@@ -111,7 +111,7 @@ public class DamageTextComponent
         tf.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow.distance, cfg.shadow.angle, shadowColor,
             cfg.shadow.alpha, cfg.shadow.size, cfg.shadow.strength) ];
 
-        tf._x = -(tf._width / 2.0);
+        tf.x = -(tf.width / 2.0);
 
         return tf;
     }

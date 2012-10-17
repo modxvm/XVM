@@ -1,14 +1,13 @@
 ﻿package preview
 {
 
-import utils.*;
-import preview.*;
-
-/**
- * Main XVM class, implements workflow logic.
- */
 import com.greensock.OverwriteManager;
 import com.greensock.plugins.*;
+
+import preview.*;
+import preview.damage.*;
+
+import utils.*;
 
 /*
  * XVM() instance creates corresponding marker
@@ -20,21 +19,14 @@ import com.greensock.plugins.*;
 
 public class Xvm extends XvmBase
 {
-    // dummy var to avoid import warning
-    private static var __dummy = Logger.dummy;
-
     /**
      * .ctor()
      * @param	proxy Parent proxy class (for placing UI Components)
      */
-    function Xvm(proxy:VehicleMarkerProxy)
+    function Xvm(proxy:Marker)
     {
         super(); // gfx.core.UIComponent
         _proxy = proxy;
-        Utils.TraceXvmModule("XVM");
-
-        // initialize ColorsManager for detecting color blind mode
-        ColorsManager.initialize();
 
         // initialize TweenLite
         OverwriteManager.init(OverwriteManager.AUTO);
@@ -59,9 +51,6 @@ public class Xvm extends XvmBase
 
         trace("Xvm::init(): " + entityName + ", " + entityType);
 
-        // Use currently remembered extended / normal status for new markers
-        m_showExInfo = s_showExInfo;
-
         m_defaultIconSource = vIconSource; // ../maps/icons/vehicle/contour/usa-M48A1.png
         m_source = vIconSource;
         m_entityName = entityName; // ally, enemy, squadman, teamKiller
@@ -78,29 +67,20 @@ public class Xvm extends XvmBase
         vehicleState = new VehicleState(new VehicleStateProxy(this));
 
         healthBarComponent = new HealthBarComponent(new HealthBarProxy(this));
-        actionMarkerComponent = new ActionMarkerComponent(new ActionMarkerProxy(this));
         clanIconComponent = new ClanIconComponent(new ClanIconProxy(this));
         contourIconComponent = new ContourIconComponent(new ContourIconProxy(this));
         levelIconComponent = new LevelIconComponent(new LevelIconProxy(this));
-        turretStatusComponent = new TurretStatusComponent(new TurretStatusProxy(this));
         vehicleTypeComponent = new VehicleTypeComponent(new VehicleTypeProxy(this), vClass /*mediumTank*/, hunt);
         damageTextComponent = new DamageTextComponent(new DamageTextProxy(this));
 
         // Create clan icon and place to mc.
-        clanIconComponent.initialize(vehicleState.getCurrentConfig(), proxy);
+        clanIconComponent.m_clanIcon.source = m_entityType == "enemy" ? new Resources.IMG_clan2() : new Resources.IMG_clan1();
 
         // Initialize states and creating text fields
         initializeTextFields();
 
         // Draw marker
         XVMUpdateStyle();
-
-        // Load stat
-        if (Config.s_config.rating.showPlayersStatistics && !StatData.s_loaded)
-        {
-            GlobalEventDispatcher.addEventListener("stat_loaded", this, onStatLoaded);
-            StatLoader.LoadLastStat();
-        }
     }
 
     /**
@@ -109,35 +89,7 @@ public class Xvm extends XvmBase
     function update()
     {
         trace("Xvm::update()");
-        // Update Color Blind mode
-        vehicleTypeComponent.updateMarkerLabel();
         XVMUpdateStyle();
-    }
-
-    /**
-     * @see IVehicleMarker
-     */
-    function updateMarkerSettings()
-    {
-        trace("Xvm::updateMarkerSettings()");
-        // do nothing
-        // We don't use in-game settings. Yet.
-    }
-
-    /**
-     * @see IVehicleMarker
-     */
-    function setSpeaking(value)
-    {
-        trace("Xvm::setSpeaking(" + value + ")");
-        if (m_speaking == value)
-            return;
-        m_speaking = value;
-        if (initialized)
-        {
-            vehicleTypeComponent.setVehicleClass();
-            vehicleTypeComponent.updateState(vehicleState.getCurrentConfig());
-        }
     }
 
     /**
@@ -149,7 +101,6 @@ public class Xvm extends XvmBase
         if (value == m_entityName)
             return;
         m_entityName = value;
-        vehicleTypeComponent.updateMarkerLabel();
         initializeTextFields();
         XVMUpdateStyle();
     }
@@ -157,7 +108,7 @@ public class Xvm extends XvmBase
     /**
      * @see IVehicleMarker
      */
-    function updateHealth(newHealth, flag, damageType)
+    function updateHealth(newHealth:Number, flag:Number, damageType:String):void
     {
         /*
          * newHealth:
@@ -170,9 +121,6 @@ public class Xvm extends XvmBase
          */
 
         //Logger.add("Xvm::updateHealth(" + flag + ", " + damageType + ", " + newHealth +")");
-
-        if (newHealth < 0)
-            s_blowedUp[m_playerFullName] = true;
 
         m_isDead = newHealth <= 0;
 
@@ -205,8 +153,6 @@ public class Xvm extends XvmBase
 
         m_isDead = newState == "dead";
 
-        vehicleTypeComponent.setMarkerState(isImmediate && m_isDead ? "immediate_dead" : newState);
-
         XVMUpdateStyle();
     }
 
@@ -220,37 +166,8 @@ public class Xvm extends XvmBase
             return;
         m_showExInfo = show;
 
-        // Save current extended / normal state flag to static variable, so
-        // new markers can refer to it when rendered initially
-        s_showExInfo = show;
-
         XVMUpdateStyle();
     }
-
-    /**
-     * @see IVehicleMarker
-     */
-    function showActionMarker(actionState)
-    {
-        actionMarkerComponent.showActionMarker(actionState);
-    }
-
-    /**
-     * Second stage of initialization
-     * @see init
-     * @see StatLoader
-     */
-    function onStatLoaded(event)
-    {
-        //trace("Xvm::onStatLoaded()");
-        if (event)
-            GlobalEventDispatcher.removeEventListener("stat_loaded", this, onStatLoaded);
-
-        initializeTextFields();
-        XVMUpdateStyle();
-    }
-
-    // CODE BELOW IS NOT CHECKED
 
     /**
     * MAIN
@@ -276,7 +193,7 @@ public class Xvm extends XvmBase
         }
         catch (e)
         {
-            ErrorHandler.setText("ERROR: XVMUpdateDynamicTextFields():" + String(e));
+//            ErrorHandler.setText("ERROR: XVMUpdateDynamicTextFields():" + String(e));
         }
     }
 
@@ -295,7 +212,7 @@ public class Xvm extends XvmBase
                         var tf = textFields[st][i];
                         tf.field.removeTextField();
                         tf.field = null;
-                        delete tf;
+//                        delete tf;
                     }
                 }
             }
@@ -325,7 +242,7 @@ public class Xvm extends XvmBase
         }
         catch (e)
         {
-            ErrorHandler.setText("ERROR: initializeTextFields():" + String(e));
+//            ErrorHandler.setText("ERROR: initializeTextFields():" + String(e));
         }
     }
 
@@ -348,7 +265,7 @@ public class Xvm extends XvmBase
             levelIconComponent.updateState(cfg);
 
             // Action Marker
-            actionMarkerComponent.updateState(cfg);
+//            actionMarkerComponent.updateState(cfg);
 
             // Clan Icon
             clanIconComponent.updateState(cfg);
@@ -375,7 +292,7 @@ public class Xvm extends XvmBase
         }
         catch (e)
         {
-            ErrorHandler.setText("ERROR: XVMUpdateStyle():" + String(e));
+//            ErrorHandler.setText("ERROR: XVMUpdateStyle():" + String(e));
         }
     }
 }

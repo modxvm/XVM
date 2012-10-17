@@ -1,47 +1,42 @@
 ﻿package preview
 {
-    import flash.events.Event;
     import flash.display.MovieClip;
-
+    import flash.events.Event;
+    
     import mx.core.UIComponent;
-
+    
     import preview.*;
+    
     import utils.*;
 
     public class Marker extends UIComponent
     {
-        private var xvm:Xvm;
+        public var xvm:Xvm;
         private var isInitialized:Boolean = false;
 
-        private var vehicleIcon:MovieClip;
+        public var vehicleIcon:MovieClip;
         private var vehicleIconAlly:MovieClip;
         private var vehicleIconEnemy:MovieClip;
-        private var levelIcon:MovieClip;
+        public var levelIcon:MovieClip;
         private var actionMarkerHelp:MovieClip;
         private var actionMarkerVictim:MovieClip;
         private var actionMarkerArta:MovieClip;
 
         private var _zoom:Number = 1;
         private var _extmode:Boolean = false;
+        private var _actionMarkerVisible:Boolean = true;
+
         /*
 
         private var _cfg: Object;
-        private var _actionMarkerVisible:Boolean = true;
 
-        private var xvmHB: Canvas;
-        private var xvmHBBorder: Canvas;
-        private var xvmHBFill: Canvas;
-        private var xvmHBDamage: Canvas;
-        private var damageHolder: UIComponent;
-
-        private var clanIcon:Image = new Image();
-        private var contourIcon:Image = new Image();
-        private var contourIconHolder: UIComponent;
         private var textFields: Array = [];
 */
 
         public function Marker()
         {
+            // Create marker
+            xvm = new Xvm(this);
         }
 
         public function init(vtype:String, vclass:String, vlevel:Number):void
@@ -53,9 +48,6 @@
             graphics.beginFill(0xFFFF00, 0.1);
             graphics.drawRect(0, -75, 1, 150);
             graphics.endFill();
-
-            // Create marker
-            xvm = new Xvm(this);
 
             var entity:String = vtype == "ally" || vtype == "ally_dead" ? "ally" : "enemy";
             xvm.init(vclass, null, vtype, vlevel, '___Player___[CLAN]', 100, 100, entity, false, false, entity); 
@@ -90,7 +82,7 @@
 
         private function CreateMC(className: String):MovieClip
         {
-            var mc:MovieClip = new (loader.getClass(className))() as MovieClip;
+            var mc:MovieClip = className != null ? new (loader.getClass(className))() as MovieClip : new MovieClip();
             var dow:DisplayObjectWrapper = new DisplayObjectWrapper(mc);
             dow.content.visible = false;
             addChild(dow);
@@ -130,63 +122,51 @@
 
         public function action():void
         {
-        var mc:MovieClip;
-        if (xvm.m_entityType == "ally")
-        mc = actionMarkerHelp;
-        else
-        mc = Math.round(Math.random()) == 0 ? actionMarkerVictim : actionMarkerArta;
-        actionMarkerHelp.stop();
-        actionMarkerHelp.visible = false;
-        actionMarkerVictim.stop();
-        actionMarkerVictim.visible = false;
-        actionMarkerArta.stop();
-        actionMarkerArta.visible = false;
-        mc.visible = _actionMarkerVisible;
-        mc.gotoAndPlay(0);
-        }
-        
-/*        public function set zoom(value:Number):void
-        {
-            this._zoom = value;
-            if (vehicleIcon)
-                vehicleIcon.marker.scaleX = vehicleIcon.marker.scaleY = value;
+            var mc:MovieClip;
+            if (xvm.m_entityType == "ally")
+                mc = actionMarkerHelp;
+            else
+                mc = Math.round(Math.random()) == 0 ? actionMarkerVictim : actionMarkerArta;
+            actionMarkerHelp.stop();
+            actionMarkerHelp.visible = false;
+            actionMarkerVictim.stop();
+            actionMarkerVictim.visible = false;
+            actionMarkerArta.stop();
+            actionMarkerArta.visible = false;
+            mc.visible = _actionMarkerVisible;
+            mc.gotoAndPlay(0);
         }
 
-        public function set maxHP(value:Number):void
-        {
-            m_maxHealth = m_curHealth = value;
-            update();
-        }
-
-        public function set extMode(value:Boolean):void
-        {
-            this._extmode = value;
-            update();
-        }
-
-        public function set deadType(value:Boolean):void
-        {
-            xvm.m_entityType = xvm.m_entityName = value == true ? "enemy" : "ally";
-            vehicleIcon.visible = false;
-            vehicleIcon = value == true ? vehicleIconEnemy : vehicleIconAlly;
-            vehicleIcon.marker.scaleX = vehicleIcon.marker.scaleY = _zoom;
-            clanIcon.source = value ? new Resources.IMG_clan2() : new Resources.IMG_clan1();
-            update();
-        }
-*/
         public function update():void
         {
             if (!isInitialized)
                 return;
             if (!Config.s_config || !Config.s_config.markers)
                 return;
-/*            var cfg:Object = Config.s_config.markers;
+
+            var cfg:Object = Config.s_config.markers;
             cfg = xvm.m_entityType == "ally" ? cfg.ally : cfg.enemy;
-            cfg = xvm.isDead == false ? cfg.alive : cfg.dead;
+            cfg = xvm.m_isDead == false ? cfg.alive : cfg.dead;
             cfg = _extmode ? cfg.extended : cfg.normal;
-            _cfg = cfg;
+//            _cfg = cfg;
 
             var c:Object;
+            
+            // actionMarker
+            c = cfg.actionMarker;
+            _actionMarkerVisible = c.visible;
+            if (actionMarkerHelp.isPlaying)
+                actionMarkerHelp.visible = _actionMarkerVisible;
+            if (actionMarkerVictim.isPlaying)
+                actionMarkerVictim.visible = _actionMarkerVisible;
+            if (actionMarkerArta.isPlaying)
+                actionMarkerArta.visible = _actionMarkerVisible;
+            actionMarkerHelp.x = actionMarkerVictim.x = actionMarkerArta.x = c.x;
+            actionMarkerHelp.y = actionMarkerVictim.y = actionMarkerArta.y = c.y;
+            actionMarkerHelp.alpha = actionMarkerVictim.alpha = actionMarkerArta.alpha = c.alpha / 100;
+
+            xvm.update();
+                /*                        var c:Object;
 
             // vehicleIcon
             c = cfg.vehicleIcon;
@@ -198,13 +178,6 @@
             vehicleIcon.marker.icon.x = c.scaleX * c.maxScale / 100;
             vehicleIcon.marker.icon.y = c.scaleY * c.maxScale / 100;
             vehicleIcon.marker.icon.scaleX = vehicleIcon.marker.icon.scaleY = c.maxScale / 100;
-
-            // healthBar
-            c = cfg.healthBar;
-            xvmHB.visible = c.visible;
-            xvmHB.x = c.x;
-            xvmHB.y = c.y;
-            xvmHB.alpha = XVMFormatDynamicAlpha(c.alpha, m_curHealth) / 100;
 
             // damageText
             c = cfg.damageText;
@@ -238,37 +211,52 @@
             levelIcon.y = c.y;
             levelIcon.alpha = XVMFormatDynamicAlpha(c.alpha, m_curHealth) / 100;
 
-            // actionMarker
-            c = cfg.actionMarker;
-            _actionMarkerVisible = c.visible;
-            if (actionMarkerHelp.isPlaying)
-                actionMarkerHelp.visible = _actionMarkerVisible;
-            if (actionMarkerVictim.isPlaying)
-                actionMarkerVictim.visible = _actionMarkerVisible;
-            if (actionMarkerArta.isPlaying)
-                actionMarkerArta.visible = _actionMarkerVisible;
-            actionMarkerHelp.x = actionMarkerVictim.x = actionMarkerArta.x = c.x;
-            actionMarkerHelp.y = actionMarkerVictim.y = actionMarkerArta.y = c.y;
-            actionMarkerHelp.alpha = actionMarkerVictim.alpha = actionMarkerArta.alpha = c.alpha / 100;
-
             // Update HB
             XVMUpdateHealthBar(m_curHealth);
             // Update Text Fields
             XVMUpdateUI(m_curHealth);
 */
         }
-/*
+
         public function hit():void
         {
             var blowup:Boolean = Math.round(Math.random() * 5) == 0;
-            var hp:Number = blowup ? -1 : m_curHealth - Math.min(m_curHealth, Math.round(Math.random() * 500) + 5);
-            if (m_curHealth <= 0)
-                hp = m_maxHealth;
-            XVMSetupNewHealth(hp);
-            update();
-            //XVMUpdateUI(hp);
+            var hp:Number = blowup ? -1 : xvm.m_curHealth - Math.min(xvm.m_curHealth, Math.round(Math.random() * 500) + 5);
+            if (xvm.m_curHealth <= 0)
+                hp = xvm.m_maxHealth;
+            xvm.updateHealth(hp, xvm.m_entityType == "ally" ? Defines.FROM_ENEMY : Defines.FROM_ALLY, "attack");
         }
 
+        public function set deadType(value:Boolean):void
+        {
+            xvm.m_entityType = xvm.m_entityName = value == true ? "enemy" : "ally";
+            vehicleIcon.visible = false;
+            vehicleIcon = value == true ? vehicleIconEnemy : vehicleIconAlly;
+            vehicleIcon.marker.scaleX = vehicleIcon.marker.scaleY = _zoom;
+            xvm.clanIconComponent.m_clanIcon.source = value ? new Resources.IMG_clan2() : new Resources.IMG_clan1();
+            update();
+        }
+
+        public function set extMode(value:Boolean):void
+        {
+            this._extmode = value;
+            update();
+        }
+
+        public function set maxHP(value:Number):void
+        {
+            xvm.m_maxHealth = xvm.m_curHealth = value;
+            update();
+        }
+
+        public function set zoom(value:Number):void
+        {
+            this._zoom = value;
+            if (vehicleIcon)
+                vehicleIcon.marker.scaleX = vehicleIcon.marker.scaleY = value;
+        }
+
+        /*
         // Damage Visualization
         private function removeTextField(f: TextField):void
         {
@@ -431,20 +419,6 @@
 
             // determ current (real-time) color
             var currColor:Number = GraphicsUtil.colorByRatio(percent, lowColor, fullColor);
-
-            xvmHBBorder.graphics.clear();
-            xvmHBFill.graphics.clear();
-            xvmHBDamage.graphics.clear();
-
-            xvmHBBorder.graphics.beginFill(XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.border.color), curHealth), 1);
-            xvmHBBorder.graphics.drawRect(0, 0, cfg.width + cfg.border.size * 2, cfg.height + cfg.border.size * 2);
-            xvmHBBorder.graphics.endFill();
-            xvmHBBorder.alpha = XVMFormatDynamicAlpha(cfg.border.alpha, curHealth) / 100;
-
-            xvmHBFill.graphics.beginFill(currColor, 1);
-            xvmHBFill.graphics.drawRect(cfg.border.size, cfg.border.size, cfg.width, cfg.height);
-            xvmHBFill.graphics.endFill();
-            xvmHBFill.alpha = XVMFormatDynamicAlpha(cfg.fill.alpha, curHealth) / 100;
         }
 
         private function XVMFormatDynamicAlpha(format: String, curHealth: Number): Number

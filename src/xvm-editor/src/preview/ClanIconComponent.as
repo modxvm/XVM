@@ -2,7 +2,7 @@ package preview
 {
 
 import flash.display.MovieClip;
-//import net.wargaming.controls.UILoaderAlt;
+import spark.components.Image;
 import utils.*;
 import preview.*;
 
@@ -10,25 +10,16 @@ public class ClanIconComponent
 {
     private var proxy:ClanIconProxy;
 
-    //private var m_clanIcon: UILoaderAlt;
+    public var m_clanIcon:Image = new Image();
 
     public function ClanIconComponent(proxy:ClanIconProxy)
     {
         this.proxy = proxy;
-        /*
-        clanIcon.includeInLayout = false;
-        clanIcon.source =  _vtype == "ally" ? new Resources.IMG_clan1() : new Resources.IMG_clan2();
-        clanIcon.visible = false;
-        addChild(clanIcon);
-        */
-    }
 
-    public function initialize(state_cfg:Object, mc:MovieClip)
-    {
-        var cfg = state_cfg.clanIcon;
-        if (m_clanIcon == null)
-            m_clanIcon = PlayerInfo.createIcon(mc, cfg, cfg.x - (cfg.w / 2.0), cfg.y - (cfg.h / 2.0));
-        PlayerInfo.setSource(m_clanIcon, Utils.GetPlayerName(proxy.playerName), Utils.GetClanName(proxy.playerName));
+        m_clanIcon.includeInLayout = false;
+//        m_clanIcon.source = proxy.team == "ally" ? new Resources.IMG_clan1() : new Resources.IMG_clan2();
+        m_clanIcon.visible = false;
+        proxy.addChild(m_clanIcon);
     }
 
     public function updateState(state_cfg:Object)
@@ -51,7 +42,8 @@ public class ClanIconComponent
         var holder = m_clanIcon["holder"];
         holder._x = cfg.x - (cfg.w / 2.0);
         holder._y = cfg.y - (cfg.h / 2.0);
-        m_clanIcon.setSize(cfg.w, cfg.h);
+        m_clanIcon.width = cfg.w;
+        m_clanIcon.height = cfg.h;
         holder._alpha = proxy.formatDynamicAlpha(cfg.alpha);
     }
 }

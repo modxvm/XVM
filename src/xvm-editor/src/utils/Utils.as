@@ -85,6 +85,17 @@ public class Utils
         }
     }
 
+    public static function padLeft(str: String, len: Number, char: String):String
+    {
+        if (!str)
+            str = "";
+        if (!char)
+            char = ' ';
+        while (str.length < len)
+            str = char + str;
+        return str;
+    }
+
     ///////////////////////
 
     public static function sortXMLByAttribute($xml:XML, $attribute:String,
