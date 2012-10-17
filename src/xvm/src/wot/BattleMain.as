@@ -26,6 +26,8 @@ class wot.BattleMain
 
     private static var dummy = Logger.dummy;
 
+    private static var width, height;
+    
     static function main()
     {
         Utils.TraceXvmModule("Battle:main");
@@ -47,17 +49,64 @@ class wot.BattleMain
 
         GlobalEventDispatcher.removeEventListener("config_loaded", BattleMainConfigLoaded);
 
-        // Sixth sense indicator
+        // Initialize Sixth Sense Indicator
         instance.sixthSenseIndicator = new SixthSenseIndicator();
 
-        // Panels Mode Switcher
-        if (Config.s_config.battle.removePanelsModeSwitcher)
-            _root.switcher_mc._visible = false;
+        // Setup Visual Elements
+        SetupElements();
 
         // Show Clocks
         ShowClock(Config.s_config.battle.clockFormat);
     }
 
+    private static function SetupElements()
+    {
+        if (!Config.s_loaded || !width || !height)
+            return;
+        var cfg = Config.s_config.battle.elements;
+        for (var i in cfg)
+        {
+            if (_root[i] != null)
+                SetupElement(_root[i], Config.s_config.battle.elements[i], i);
+            else
+                Logger.add("Warning: Visual Element not found: " + i);
+        }
+    }
+
+    private static var colors:Array = [ 0xFFFFFF, 0xFF0000, 0xFFFF00, 0x00FF00, 0x00FFFF, 0xFF00FF ];
+    private static function SetupElement(mc:MovieClip, cfg, name)
+    {
+        //Logger.add(width + "x" + height);
+        /*if (!isNaN(cfg.x))
+            mc._x = cfg.x;
+        if (!isNaN(cfg.y))
+            mc._y = cfg.y;*/
+        if (cfg.debug == true)
+        {
+            with (mc)
+            {
+                var x = mc._x;
+                var y = mc._y;
+                var w = mc._width;
+                var h = mc._height;
+                var c = colors[colors.length * Math.random()];
+                beginFill(0, 0);
+                lineStyle(1, c, 100);
+                moveTo(0, 0);
+                lineTo(w, 0);
+                lineTo(w, h);
+                lineTo(0, h);
+                lineTo(0, 0);
+                endFill();
+                var t: TextField = createTextField("t", getNextHighestDepth(), w / 2 - 50,  h / 2 - 10, 100, 40);
+                t.setNewTextFormat(new TextFormat("Small Fonts", 8, c, false, false, false, null, null, "center"));
+                t.filters = [new flash.filters.DropShadowFilter(0, 0, 0, 100, 4, 4, 2, 3)];
+                t.multiline = true;
+                t.text = name + "\n" + mc._x + "x" + mc._y + "+" + mc._width + "," + mc._height;
+            }
+        }
+    }
+    
     private static function ShowClock(format)
     {
         if (!format || format == "")
@@ -92,9 +141,9 @@ class wot.BattleMain
     {
         //Logger.add("Battle::onUpdateStage()");
         _root.onUpdateStage(width, height);
-        //_root.minimap.foreground._alpha = 30;
-        //_root.minimap.foregroundHR._alpha = 30;
-        //wot.utils.Logger.addObject(_root);
+        BattleMain.width = width;
+        BattleMain.height = height;
+        SetupElements();
     }
 
     /* DISABLED - final dialog is not exist since WoT 0.8.0

@@ -30,7 +30,7 @@ class wot.VehicleMarkersManager.components.HealthBarComponent
         damage._x = cfg.border.size + cfg.width * (curHealth / maxHealth) - 1;
         damage._xscale = damage._xscale + 100 * (delta / maxHealth);
         GraphicsUtil.setColor(damage, proxy.formatDynamicColor(cfg.damage.color));
-        damage._alpha = proxy.formatDynamicAlpha(cfg.damage.alpha, curHealth);
+        damage._alpha = proxy.formatDynamicAlpha(cfg.damage.alpha);
         TweenLite.to(damage, cfg.damage.fade, {_xscale: 0, ease: Cubic.easeIn });
     }
 

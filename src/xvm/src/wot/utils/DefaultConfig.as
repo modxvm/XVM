@@ -33,7 +33,36 @@ class wot.utils.DefaultConfig
 	// Show the clock on the Debug Panel (near FPS).
 	// Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
         clockFormat: "H:N",
-        clanIconsFolder: "../../../clanicons" // Folder with clan icons
+        clanIconsFolder: "../../../clanicons", // Folder with clan icons
+        // Visual elements
+        elements: {
+          // x, y can be:
+          //   null - use default client value
+          //   0..xxxx
+          //   -xxxx..0
+          //   xx.xx%
+          minimap: { x: null, y: null, w: null, h: null, alpha: null, debug: false },
+          leftPanel: { x: null, y: null, w: null, h: null, alpha: null, debug: false },
+          rightPanel: { x: null, y: null, w: null, h: null, alpha: null, debug: false },
+          debugPanel: { x: null, y: null, w: null, h: null, alpha: null, debug: false },
+          playerMessangersPanel: { x: null, y: null, w: null, h: null, alpha: null, debug: false },
+          vehicleMessagesPanel: { x: null, y: null, w: null, h: null, alpha: null, debug: false },
+          damagePanel: { x: null, y: null, w: null, h: null, alpha: null, debug: false },
+          switcher_mc: { x: null, y: null, w: null, h: null, alpha: null, debug: false },
+          timerBig: { x: null, y: null, w: null, h: null, alpha: null, debug: false },
+          sixthSenseIndicator: { x: null, y: null, w: null, h: null, alpha: null, debug: false },
+          damageInfoPanel: { x: null, y: null, w: null, h: null, alpha: null, debug: false },
+          deathZoneTimer: { x: null, y: null, w: null, h: null, alpha: null, debug: false },
+          overturnedTimer: { x: null, y: null, w: null, h: null, alpha: null, debug: false },
+          drownTimer: { x: null, y: null, w: null, h: null, alpha: null, debug: false },
+          langBarPanel: { x: null, y: null, w: null, h: null, alpha: null, debug: false },
+          fragCorrelationBar: { x: null, y: null, w: null, h: null, alpha: null, debug: false },
+          consumablesPanel: { x: null, y: null, w: null, h: null, alpha: null, debug: false },
+          battleTimer: { x: null, y: null, w: null, h: null, alpha: null, debug: false },
+          vehicleErrorsPanel: { x: null, y: null, w: null, h: null, alpha: null, debug: false },
+          messenger: { x: null, y: null, w: null, h: null, alpha: null, debug: false },
+          teamBasesPanel: { x: null, y: null, w: null, h: null, alpha: null, debug: false }
+        }
       },
       rating: {
         showPlayersStatistics: true,     // Global switch. Handles whole statisctics module.

@@ -1,5 +1,4 @@
 import wot.VehicleMarkersManager.AbstractAccessProxy;
-import wot.VehicleMarkersManager.ColorsManager;
 import wot.VehicleMarkersManager.Xvm;
 
 class wot.VehicleMarkersManager.components.damage.DamageTextProxy extends AbstractAccessProxy
@@ -37,10 +36,5 @@ class wot.VehicleMarkersManager.components.damage.DamageTextProxy extends Abstra
     public function get isBlowedUp():Boolean
     {
         return xvm.isBlowedUp;
-    }
-
-    public function get isColorBlindMode():Boolean
-    {
-        return ColorsManager.isColorBlindMode;
     }
 }

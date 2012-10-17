@@ -36,7 +36,7 @@ class wot.VehicleMarkersManager.AbstractAccessProxy
 
     public function formatStaticColorText(format:String):String
     {
-        return xvm.formatStaticColorText(format, xvm.m_curHealth);
+        return xvm.formatStaticColorText(format);
     }
 
     public function formatDynamicAlpha(format:String):Number

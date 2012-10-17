@@ -63,7 +63,7 @@ class wot.VehicleMarkersManager.ColorsManager
     }
 
     public static function getDamageSystemColor(damageSource:String, damageDest:String,
-        isDead:Boolean, isBlowedUp:Boolean, isColorBlindMode:Boolean):Number
+        isDead:Boolean, isBlowedUp:Boolean):Number
     {
         var key:String = damageSource + "_" + damageDest + "_";
         key += !isDead ? "hit" : isBlowedUp ? "blowup" : "kill";
