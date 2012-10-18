@@ -33,6 +33,8 @@ package utils
         // macros
         [Embed("images/macros/battles.png")]
         public static const battles:Class;
+        [Embed("images/macros/dead.png")]
+        public static const dead:Class;
         [Embed("images/macros/dmg.png")]
         public static const dmg:Class;
         [Embed("images/macros/dmg_kind.png")]

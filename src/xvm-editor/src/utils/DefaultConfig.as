@@ -111,8 +111,11 @@ public class DefaultConfig
         h: 100,
         lines: 1,
         direction: "down",
-        format: "<font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <font color='{{c:dmg-kind}}'><b>{{dmg}}</b></font>",
-        formatHistory: "<textformat tabstops='[55,90,130,190]'><font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}:</font>\t{{dmg-total}}\t| <font color='{{c:dmg-kind}}'>{{dmg}}</font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}}</font></textformat>"
+        // Substitution for {{dead}} macro when player is dead
+        deadMarker: "<font face='Arial Unicode MS'>\u2626</font>",
+        blowupMarker: "<font face='Arial Unicode MS'>\u2739</font>",
+        format: "<font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font>",
+        formatHistory: "<textformat tabstops='[55,90,130,190]'><font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}:</font>\t{{dmg-total}}\t| <font color='{{c:dmg-kind}}'>{{dmg}}</font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>"
       },
       markers: {
         ally: {
@@ -318,7 +321,7 @@ public class DefaultConfig
           attack: "0xFFAA55",
           fire: "0xFF6655",
           ramming: "0x998855",
-          world_collision: "0x228855",
+          world_collision: "0x998855",
           other: "0xCCCCCC"
         },
         vtype: {
