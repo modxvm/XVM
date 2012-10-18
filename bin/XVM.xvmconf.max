@@ -68,8 +68,10 @@
     "h": 200,
     "lines": 3,
     "direction": "down",
-    "format":        "<textformat tabstops='[55,90,130,190]'><font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}</font><font size='1{{vehicle}}'>:\t{{dmg-total}}\t| <font color='{{c:dmg-kind}}'><b>{{dmg}}</b></font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}}</font></font></textformat>",
-    "formatHistory": "<textformat tabstops='[55,90,130,190]'><font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}</font><font size='1{{vehicle}}'>:\t{{dmg-total}}\t| <font color='{{c:dmg-kind}}'>{{dmg}}</font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}}</font></font></textformat>"
+    "deadMarker": "<font face='Arial Unicode MS'>\u2626</font>",
+    "blowupMarker": "<font face='Arial Unicode MS'>\u2739</font>",
+    "format":        "<textformat tabstops='[55,90,130,190]'><font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}</font><font size='1{{vehicle}}'>:\t{{dmg-total}}\t| <font color='{{c:dmg-kind}}'><b>{{dmg}}</b></font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></font></textformat>",
+    "formatHistory": "<textformat tabstops='[55,90,130,190]'><font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}</font><font size='1{{vehicle}}'>:\t{{dmg-total}}\t| <font color='{{c:dmg-kind}}'>{{dmg}}</font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></font></textformat>"
   },
   "markers": {
     "ally": {

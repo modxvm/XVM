@@ -112,6 +112,7 @@
       {{n}}           - count of hits
       {{dmg}}         - last hit value
       {{dmg-total}}   - total sum of hits
+      {{dead}}        - tank's death marker
       {{nick}}        - player nickname
       {{vehicle}}     - vehicle name
       {{level}}       - vehicle level (Arabic numerals)

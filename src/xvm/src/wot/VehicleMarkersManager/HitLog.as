@@ -67,7 +67,8 @@ class wot.VehicleMarkersManager.HitLog
         //Logger.add(textField.htmlText);
     }
 
-    public function update(delta:Number, vehicleName:String, playerName:String, level:Number, damageType:String, vtypeColor:String)
+    public function update(delta:Number, curHealth:Number, vehicleName:String, playerName:String,
+        level:Number, damageType:String, vtypeColor:String)
     {
         if (damageType != "fire" && damageType != "ramming" || fire_total == 0 && ramming_total == 0)
             nHits++;
@@ -78,14 +79,14 @@ class wot.VehicleMarkersManager.HitLog
 
         var dmg = damageType == "fire" ? fire_total : damageType == "ramming" ? ramming_total : delta;
 
-        var last:String = formatText(format, dmg, vehicleName, playerName, level, damageType, vtypeColor);
+        var last:String = formatText(format, dmg, curHealth, vehicleName, playerName, level, damageType, vtypeColor);
         if (lines <= 1)
         {
             setText(last);
             return;
         }
 
-        var hist:String = formatText(formatHistory || format, dmg, vehicleName, playerName, level, damageType, vtypeColor);
+        var hist:String = formatText(formatHistory || format, dmg, curHealth, vehicleName, playerName, level, damageType, vtypeColor);
         if (direction == Defines.DIRECTION_DOWN)
         {
             if (damageType == "fire")
@@ -159,14 +160,14 @@ class wot.VehicleMarkersManager.HitLog
         style.parseCSS(".xvm_hitlog {font-family:$FieldFont; font-size:15px; color:#F4EFE8;}");
         textField.styleSheet = style;
 
-        var txt = formatText(format, 0, "", "", 0, "");
+        var txt = formatText(format, 0, 1, "", "", 0, "");
         if (direction != Defines.DIRECTION_DOWN)
             txt = historyText.join("<br/>") + "<br/>" + txt;
         setText(txt);
     }
 
-    private function formatText(format:String,
-        delta:Number, vehicleName:String, playerName:String, level:Number, damageType:String, vtypeColor:String):String
+    private function formatText(format:String, delta:Number, curHealth:Number, vehicleName:String, playerName:String, 
+        level:Number, damageType:String, vtypeColor:String):String
     {
         try
         {
@@ -180,6 +181,9 @@ class wot.VehicleMarkersManager.HitLog
             formatArr = format.split("{{dmg-total}}");
             if (formatArr.length > 1)
                 format = formatArr.join(String(total));
+            formatArr = format.split("{{dead}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(curHealth < 0 ? Config.s_config.hitLog.blowupMarker : curHealth == 0 ? Config.s_config.hitLog.deadMarker : "");
             formatArr = format.split("{{nick}}");
             if (formatArr.length > 1)
                 format = formatArr.join(playerName);

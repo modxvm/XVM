@@ -352,7 +352,9 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         if (flag == Defines.FROM_PLAYER && hitLog != null)
         {
             var delta = m_curHealth - (curHealth < 0 ? 0 : curHealth);
-            hitLog.update(delta, VehicleInfo.mapVehicleName(m_defaultIconSource, m_vehicleName), m_playerName, m_level, damageType,
+            hitLog.update(delta, curHealth,
+                VehicleInfo.mapVehicleName(m_defaultIconSource, m_vehicleName),
+                m_playerName, m_level, damageType,
                 GraphicsUtil.GetVTypeColorValue(m_defaultIconSource, Utils.vehicleClassToVehicleType(m_vehicleClass)));
         }
         m_curHealth = curHealth < 0 ? 0 : curHealth;

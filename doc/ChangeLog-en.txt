@@ -1,4 +1,7 @@
-﻿XVM-3.0.4.test3:
+﻿XVM-3.0.4.test4:
+  * added {{dead}} macro to hit log for dead tanks
+
+XVM-3.0.4.test3:
   * summation fire and ramming damage in hitlog
 
 XVM-3.0.4.test2:

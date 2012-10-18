@@ -3,7 +3,7 @@
  * default configuration.
  *
  * Attention! You must NOT use the percent symbol in this file.
- * Instead, the percent symbol should be written: \ u0025
+ * Instead, the percent symbol should be written: \u0025
  */
 {
   "configVersion": "1.5.0", // Version of the config. Do not remove or change it unnecessarily.
@@ -114,10 +114,13 @@
     "h": 100,            // Height
     "lines": 1,          // Number of lines. Old lines will be pushed out
     "direction": "down", // Log direction: up - lines will be added from up to down, down - from down to up.
+    // Substitution for {{dead}} macro when tank is dead
+    "deadMarker": "<font face='Arial Unicode MS'>\u2626</font>",
+    "blowupMarker": "<font face='Arial Unicode MS'>\u2739</font>",
     // Last hit format (macros allowed, see readme-en.txt)
-    "format": "<font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <font color='{{c:dmg-kind}}'><b>{{dmg}}</b></font>",
+    "format": "<font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font>",
     // Previous hits format (macros allowed, see readme-en.txt)
-    "formatHistory": "<textformat tabstops='[55,90,130,190]'><font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}:</font>\t{{dmg-total}}\t| <font color='{{c:dmg-kind}}'>{{dmg}}</font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}}</font></textformat>"
+    "formatHistory": "<textformat tabstops='[55,90,130,190]'><font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}:</font>\t{{dmg-total}}\t| <font color='{{c:dmg-kind}}'>{{dmg}}</font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>"
   },
   // OVER-TARGET MARKERS
   "markers": {
