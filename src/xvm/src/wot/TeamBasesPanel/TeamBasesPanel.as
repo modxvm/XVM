@@ -9,6 +9,8 @@ class wot.TeamBasesPanel.TeamBasesPanel extends net.wargaming.ingame.TeamBasesPa
     {
         super();
         
-        Utils.TraceXvmModule("TeamBasesPanel");
+        Logger.add("TeamBasesPanel()");
+        // TODO:
+        //Utils.TraceXvmModule("TeamBasesPanel");
     }
 }
