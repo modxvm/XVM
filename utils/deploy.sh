@@ -4,6 +4,7 @@
 [ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/home/games/WoT
 
 FILES="
+  TeamBasesPanel.swf
   libxvm.swf
   libxvmLoader.swf
   battle.swf
