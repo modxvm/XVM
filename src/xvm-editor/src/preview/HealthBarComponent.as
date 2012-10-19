@@ -1,13 +1,17 @@
 package preview
 {
 
-import flash.display.MovieClip;
-import mx.containers.Canvas;
-import mx.core.ScrollPolicy;
 import com.greensock.TweenLite;
 import com.greensock.easing.Cubic;
-import utils.*;
+
+import flash.display.MovieClip;
+
+import mx.containers.Canvas;
+import mx.core.ScrollPolicy;
+
 import preview.*;
+
+import utils.*;
 
 public class HealthBarComponent
 {
@@ -40,16 +44,25 @@ public class HealthBarComponent
     public function showDamage(state_cfg:Object, curHealth:Number, maxHealth:Number, delta:Number)
     {
         var cfg = state_cfg.healthBar;
+		if (!cfg.visible)
+			return;
         //Flow bar animation
         TweenLite.killTweensOf(damage);
 
-		damage.graphics.clear();
-		damage.graphics.beginFill(proxy.formatDynamicColor(cfg.damage.color), proxy.formatDynamicAlpha(cfg.damage.alpha) / 100.0);
-		damage.graphics.drawRect(cfg.border.size + cfg.width * (curHealth / maxHealth) - 1, cfg.border.size,
-		cfg.border.size + cfg.width * (delta / maxHealth), cfg.height);
-		damage.graphics.endFill();
+		var o = { delta: delta };
 		
-        TweenLite.to(damage, cfg.damage.fade, {width: 0, ease: Cubic.easeIn });
+		var onUpdate:Function = function()
+		{
+			damage.graphics.clear();
+			damage.graphics.beginFill(proxy.formatDynamicColor(cfg.damage.color), proxy.formatDynamicAlpha(cfg.damage.alpha) / 100.0);
+			damage.graphics.drawRect(cfg.border.size + cfg.width * (curHealth / maxHealth), cfg.border.size,
+				cfg.width * o.delta / maxHealth, cfg.height);
+			damage.graphics.endFill();
+		}
+
+		onUpdate();
+
+        TweenLite.to(o, cfg.damage.fade, {onUpdate:onUpdate, delta: 0, ease: Cubic.easeIn });
     }
 
     public function updateState(state_cfg:Object)

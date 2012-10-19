@@ -35,12 +35,12 @@ public class VehicleTypeProxy extends AbstractAccessProxy
 
     public function setMarkerLabel(markerLabel:String):void
     {
-        xvm.proxy.vehicleIcon.gotoAndStop(markerLabel);
+        marker.gotoAndStop(markerLabel);
     }
 
     public function get marker():MovieClip
     {
-        return xvm.proxy.vehicleIcon;
+        return xvm.m_entityType == "ally" ? xvm.proxy.vehicleIconAlly : xvm.proxy.vehicleIconEnemy;
     }
 }
 

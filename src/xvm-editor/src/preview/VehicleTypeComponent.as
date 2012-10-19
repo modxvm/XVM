@@ -47,6 +47,9 @@ public class VehicleTypeComponent
     private function draw(cfg:Object)
     {
 		proxy.marker.marker.icon.gotoAndStop(cfg.visible ? m_vehicleClass : "dynamic");
+		if (cfg.visible)
+			proxy.setMarkerLabel(proxy.isDead == false ? "normal" : "immediate_dead");
+		proxy.marker.marker.scaleX = proxy.marker.marker.scaleY = proxy.xvm.proxy._zoom;
 		proxy.marker.x = cfg.x;
 		proxy.marker.y = cfg.y;
 		proxy.marker.marker.alpha = proxy.formatDynamicAlpha(cfg.alpha) / 100.0;

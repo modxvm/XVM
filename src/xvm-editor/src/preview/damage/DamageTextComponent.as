@@ -45,7 +45,7 @@ public class DamageTextComponent
         var color:Number;
         if (cfg.color == null)
         {
-            shadowColor = ColorsManager.getDamageSystemColor(flagToDamageSource(flag), proxy.damageDest,
+            color = ColorsManager.getDamageSystemColor(flagToDamageSource(flag), proxy.damageDest,
                 proxy.isDead, proxy.isBlowedUp);
         }
         else
@@ -64,13 +64,11 @@ public class DamageTextComponent
             shadowColor = proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.shadow.color), damageType);
         }
 
-        // TODO: dynamic alpha?
-        //var alpha = proxy.formatDynamicAlpha(cfg.alpha);
-        //var shadowAlpha = proxy.formatDynamicAlpha(cfg.shadow.alpha);
-
         var tf:TextField = createTextField(color, shadowColor, cfg);
-
-        tf.htmlText = "<textformat leading='-2'><p class='xvm_damageText'>" + text + "</p></textformat>";
+		tf.alpha = proxy.formatDynamicAlpha(cfg.alpha) / 100.0;
+		damage.addChild(tf);
+		
+        tf.htmlText = "<p class='xvm_damageText'>" + text + "</p>";
         //wot.utils.Logger.add("dmg: " + flagToDamageSource(flag) + ", " + proxy.damageDest + " - color=" + color);
         //wot.utils.Logger.add(tf.htmlText);
         //wot.utils.Logger.add(XvmHelper.createCSS(cfg.font, color, "xvm_damageText"));
@@ -98,6 +96,7 @@ public class DamageTextComponent
         tf.multiline = true;
         tf.wordWrap = false;
 
+		tf.embedFonts = cfg.font.name == "$FieldFont";
         //tf.html = true;
 
         var style:StyleSheet = new StyleSheet();

@@ -14,15 +14,14 @@
         public var xvm:Xvm;
         private var isInitialized:Boolean = false;
 
-        public var vehicleIcon:MovieClip;
-        private var vehicleIconAlly:MovieClip;
-        private var vehicleIconEnemy:MovieClip;
+        public var vehicleIconAlly:MovieClip;
+        public var vehicleIconEnemy:MovieClip;
         public var levelIcon:MovieClip;
         private var actionMarkerHelp:MovieClip;
         private var actionMarkerVictim:MovieClip;
         private var actionMarkerArta:MovieClip;
 
-        private var _zoom:Number = 1;
+        public var _zoom:Number = 1;
         private var _extmode:Boolean = false;
         private var _actionMarkerVisible:Boolean = true;
 
@@ -103,8 +102,6 @@
             vehicleIconEnemy.marker.scaleX = vehicleIconEnemy.marker.scaleY = _zoom;
             vehicleIconEnemy.visible = false;
 
-            vehicleIcon = xvm.m_entityType == "ally" ? vehicleIconAlly : vehicleIconEnemy;
-
             actionMarkerHelp.stop();
             actionMarkerHelp.visible = false;
             actionMarkerVictim.stop();
@@ -178,10 +175,9 @@
 
         public function set deadType(value:Boolean):void
         {
+			vehicleIconAlly.visible = !value;
+			vehicleIconEnemy.visible = value;
             xvm.m_entityType = xvm.m_entityName = value == true ? "enemy" : "ally";
-            vehicleIcon.visible = false;
-            vehicleIcon = value == true ? vehicleIconEnemy : vehicleIconAlly;
-            vehicleIcon.marker.scaleX = vehicleIcon.marker.scaleY = _zoom;
             xvm.clanIconComponent.m_clanIcon.source = value ? new Resources.IMG_clan2() : new Resources.IMG_clan1();
             update();
         }
@@ -208,8 +204,6 @@
         public function set zoom(value:Number):void
         {
             this._zoom = value;
-            if (vehicleIcon)
-                vehicleIcon.marker.scaleX = vehicleIcon.marker.scaleY = value;
         }
 
         /*
