@@ -9,10 +9,8 @@ import preview.*;
 public class ContourIconComponent
 {
     private var proxy:ContourIconProxy;
-    private var m_contourIconLoaded:Boolean;
 
     private var contourIcon:Image = new Image();
-    private var contourIconHolder: UIComponent;
 
     public var onEnterFrame:Function;
 
@@ -20,18 +18,14 @@ public class ContourIconComponent
     {
         this.proxy = proxy;
 
-        contourIconHolder = new UIComponent();
-        contourIconHolder.includeInLayout = false;
-        proxy.addChild(contourIconHolder);
+		contourIcon.includeInLayout = false;
+		contourIcon.visible = false;
+        proxy.addChild(contourIcon);
 
-        contourIcon.includeInLayout = false;
         contourIcon.source = proxy.isDead ? new Resources.IMG_contour3()
             : proxy.team == "ally" ? new Resources.IMG_contour1() : new Resources.IMG_contour2();
         contourIcon.width = 80;
         contourIcon.height = 24;
-
-        contourIconHolder.visible = false;
-        contourIconHolder.addChild(contourIcon);
 
         //updateState(this.proxy.currentStateConfigRoot);
     }
@@ -44,34 +38,18 @@ public class ContourIconComponent
      */
     function updateState(state_cfg:Object)
     {
-        if (!m_contourIconLoaded)
-            return;
+        var cfg = state_cfg.contourIcon;
 
-        try
-        {
-            var cfg = state_cfg.contourIcon;
-
-            if (cfg.amount >= 0)
-            {
-                // TODO: Check performance, not necessary to execute every marker update
-                var tintColor: Number = proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.color));
-                var tintAmount: Number = Math.min(100, Math.max(0, cfg.amount)) * 0.01;
-                GraphicsUtil.setColor(contourIconHolder, tintColor, tintAmount);
-            }
-
-            var visible = cfg.visible;
-            if (visible)
-            {
-                contourIconHolder.x = cfg.x - (contourIcon.width / 2.0);
-                contourIconHolder.y = cfg.y - (contourIcon.height / 2.0);
-                contourIconHolder.alpha = proxy.formatDynamicAlpha(cfg.alpha);
-            }
-            contourIconHolder.visible = visible;
-        }
-        catch (e)
-        {
-//            ErrorHandler.setText("ERROR: updateContourIcon():" + String(e));
-        }
+		contourIcon.visible = cfg.visible;
+		if (cfg.visible)
+		{
+			contourIcon.x = cfg.x - contourIcon.width / 2.0;
+			contourIcon.y = cfg.y - contourIcon.height / 2.0;
+			var tintColor: Number = proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.color));
+			var tintAmount: Number = Math.min(100, Math.max(0, cfg.amount)) * 0.01;
+			GraphicsUtil.setColor(contourIcon, tintColor, tintAmount);
+			contourIcon.alpha = proxy.formatDynamicAlpha(cfg.alpha) / 100.0;
+		}
     }
 }
 

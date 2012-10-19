@@ -59,7 +59,7 @@ public class DamageTextAnimation
 
     private function emerge():TweenLite
     {
-        return TweenLite.from(tf, EMERGE_DURATION, { _alpha:0, ease:Linear.easeNone, cacheAsBitmap:true } );
+        return TweenLite.from(tf, EMERGE_DURATION, { alpha:0, ease:Linear.easeNone, cacheAsBitmap:true } );
     }
 
     private function tint():TweenLite
@@ -69,17 +69,18 @@ public class DamageTextAnimation
 
     private function moveUpward(movementDuration:Number, distanceUpward:Number):TweenLite
     {
-        return TweenLite.to(tf, movementDuration, { _y:distanceUpward, ease:Linear.easeNone, cacheAsBitmap:true } );
+        return TweenLite.to(tf, movementDuration, { y:distanceUpward, ease:Linear.easeNone, cacheAsBitmap:true } );
     }
 
     private function fadeOut():TweenLite
     {
-        return TweenLite.to(tf, FADEOUT_DURATION, { _alpha:0, ease:Linear.easeNone, cacheAsBitmap:true } );
+        return TweenLite.to(tf, FADEOUT_DURATION, { alpha:0, ease:Linear.easeNone, cacheAsBitmap:true } );
     }
 
     private function removeTextField():void
     {
-        tf.parent.removeChild(tf);
+		if (tf != null && tf.parent != null)
+			tf.parent.removeChild(tf);
     }
 }
 }

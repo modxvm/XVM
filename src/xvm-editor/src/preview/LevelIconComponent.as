@@ -24,16 +24,16 @@ public class LevelIconComponent
         if (visible)
             draw(cfg);
 
-        proxy.levelIcon._visible = visible;
+        proxy.levelIcon.visible = visible;
     }
 
     private function draw(cfg:Object)
     {
-        proxy.levelIcon._x = cfg.x;
-        proxy.levelIcon._y = cfg.y;
+        proxy.levelIcon.x = cfg.x;
+        proxy.levelIcon.y = cfg.y;
 
         //TODO: extract formatDynamicAlpha
-        proxy.levelIcon._alpha = proxy.formatDynamicAlpha(cfg.alpha);
+        proxy.levelIcon.alpha = proxy.formatDynamicAlpha(cfg.alpha) / 100.0;
     }
 }
 

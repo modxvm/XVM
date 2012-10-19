@@ -34,17 +34,17 @@ public class ClanIconComponent
         if (visible)
             draw(cfg);
 
-        m_clanIcon["holder"]._visible = visible;
+        m_clanIcon.visible = visible;
     }
 
     private function draw(cfg:Object)
     {
-        var holder = m_clanIcon["holder"];
-        holder._x = cfg.x - (cfg.w / 2.0);
-        holder._y = cfg.y - (cfg.h / 2.0);
-        m_clanIcon.width = cfg.w;
-        m_clanIcon.height = cfg.h;
-        holder._alpha = proxy.formatDynamicAlpha(cfg.alpha);
+		m_clanIcon.visible = cfg.visible;
+		m_clanIcon.x = cfg.x - cfg.w / 2.0;
+		m_clanIcon.y = cfg.y - cfg.h / 2.0;
+		m_clanIcon.width = cfg.w;
+		m_clanIcon.height = cfg.h;
+		m_clanIcon.alpha = proxy.formatDynamicAlpha(cfg.alpha) / 100.0;
     }
 }
 

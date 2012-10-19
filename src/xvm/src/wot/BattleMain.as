@@ -14,20 +14,10 @@ class wot.BattleMain
     static var instance: BattleMain;
     var sixthSenseIndicator:SixthSenseIndicator;
 
-    //static var minimap;
-    //static var timerBig;
-    //static var leftPanel;
-    //static var rightPanel;
-    //static var debugPanel;
-    //static var playerMessangersPanel;
-    //static var vehicleMessagesPanel;
-    //static var damagePanel;
-    //static var statHidden;
-
     private static var dummy = Logger.dummy;
 
     private static var width, height;
-    
+
     static function main()
     {
         Utils.TraceXvmModule("Battle:main");
@@ -55,6 +45,11 @@ class wot.BattleMain
         // Setup Visual Elements
         SetupElements();
 
+        // TODO: remove (replace by setup elements)
+        // Panels Mode Switcher
+        if (Config.s_config.battle.removePanelsModeSwitcher)
+            _root.switcher_mc._visible = false;
+
         // Show Clocks
         ShowClock(Config.s_config.battle.clockFormat);
     }
@@ -76,11 +71,29 @@ class wot.BattleMain
     private static var colors:Array = [ 0xFFFFFF, 0xFF0000, 0xFFFF00, 0x00FF00, 0x00FFFF, 0xFF00FF ];
     private static function SetupElement(mc:MovieClip, cfg, name)
     {
-        //Logger.add(width + "x" + height);
-        /*if (!isNaN(cfg.x))
-            mc._x = cfg.x;
-        if (!isNaN(cfg.y))
-            mc._y = cfg.y;*/
+        //Logger.addObject(cfg, name + " " + width + "x" + height, 2);
+        var v: Number;
+
+        v = getValue(cfg.x);
+        if (!isNaN(v))
+            mc._x = v;
+        v = getValue(cfg.y)
+        if (!isNaN(v))
+            mc._y = v;
+        v = getValue(cfg.w);
+        if (!isNaN(v))
+            mc._width = v;
+        v = getValue(cfg.h);
+        if (!isNaN(v))
+            mc._height = v;
+        v = getValue(cfg.a);
+        if (!isNaN(v))
+        {
+            mc._alpha = v / 100.0;
+            if (v <= 0)
+                mc._visible = false;
+        }
+
         if (cfg.debug == true)
         {
             with (mc)
@@ -103,10 +116,19 @@ class wot.BattleMain
                 t.filters = [new flash.filters.DropShadowFilter(0, 0, 0, 100, 4, 4, 2, 3)];
                 t.multiline = true;
                 t.text = name + "\n" + mc._x + "x" + mc._y + "+" + mc._width + "," + mc._height;
+                Logger.add("Element: " + name + ":" + mc._x + "x" + mc._y + "+" + mc._width + "," + mc._height;);
             }
         }
     }
-    
+
+    private static function getValue(v):Number
+    {
+        if (!isNaN(v))
+            return v;
+
+        return NaN;
+    }
+
     private static function ShowClock(format)
     {
         if (!format || format == "")

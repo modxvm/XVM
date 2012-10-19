@@ -34,38 +34,25 @@ public class VehicleTypeComponent
     {
         var cfg = state_cfg.vehicleIcon;
 
-        var visible = cfg.visible || (proxy.isSpeaking && cfg.showSpeaker);
+        var visible = cfg.visible || cfg.showSpeaker;
 
         if (visible)
             draw(cfg);
 
+		proxy.marker.visible = visible;
     }
 
     // PRIVATE FUNCTIONS
 
     private function draw(cfg:Object)
     {
-        var x = cfg.scaleX * cfg.maxScale / 100;
-        var y = cfg.scaleY * cfg.maxScale / 100;
-        for (var childName in proxy.marker.marker)
-        {
-            //if (childName == "marker_shadow")
-            //  return;
-
-            var icon: MovieClip = proxy.marker.marker[childName];
-            icon._x = x;
-            icon._y = y;
-            icon._xscale = icon._yscale = cfg.maxScale;
-
-            //var ms: MovieClip = icon.duplicateMovieClip("marker_shadow", icon.getNextHighestDepth());
-            //ms.gotoAndStop(icon._currentframe);
-            //ms.filters = [ new DropShadowFilter(0, 0, 0, 1, 1, 1, 10, 1, false, true) ];
-            //GraphicsUtil.setColor(icon, systemColor);
-        }
-
-        proxy.marker._x = cfg.x;
-        proxy.marker._y = cfg.y;
-        proxy.marker._alpha = proxy.formatDynamicAlpha(cfg.alpha);
+		proxy.marker.marker.icon.gotoAndStop(cfg.visible ? m_vehicleClass : "dynamic");
+		proxy.marker.x = cfg.x;
+		proxy.marker.y = cfg.y;
+		proxy.marker.marker.alpha = proxy.formatDynamicAlpha(cfg.alpha) / 100.0;
+		proxy.marker.marker.icon.x = cfg.scaleX * cfg.maxScale / 100;
+		proxy.marker.marker.icon.y = cfg.scaleY * cfg.maxScale / 100;
+		proxy.marker.marker.icon.scaleX = proxy.marker.marker.icon.scaleY = cfg.maxScale / 100;
     }
 }
 

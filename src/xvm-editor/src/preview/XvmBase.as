@@ -31,9 +31,6 @@ public class XvmBase
     var m_isDead: Boolean;
     var m_defaultIconSource: String;
 
-    // TextFields
-    var textFields: Object;
-
     // Vehicle State
     var vehicleState: VehicleState;
 
@@ -57,32 +54,26 @@ public class XvmBase
 
     public function formatStaticText(format:String):String
     {
-        try
-        {
-            var formatArr:Array;
+        var formatArr:Array;
 
-            formatArr = format.split("{{nick}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(m_playerFullName);
-            formatArr = format.split("{{vehicle}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(m_vname);
-            formatArr = format.split("{{level}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(String(m_level));
-            formatArr = format.split("{{rlevel}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(XvmHelper.rlevel[m_level - 1]);
-            formatArr = format.split("{{turret}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(Config.s_config.turretMarker.highVulterability);
-            format = StatFormat.FormatText(format, m_isDead);
-            format = Utils.trim(format);
-        }
-        catch (e)
-        {
-            //ErrorHandler.setText("ERROR: formatStaticText(" + format + "):" + String(e));
-        }
+        formatArr = format.split("{{nick}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(m_playerFullName);
+        formatArr = format.split("{{vehicle}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(m_vname);
+        formatArr = format.split("{{level}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(String(m_level));
+        formatArr = format.split("{{rlevel}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(XvmHelper.rlevel[m_level - 1]);
+        formatArr = format.split("{{turret}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(Config.s_config.turretMarkers.highVulnerability);
+        format = StatFormat.FormatText(format, m_isDead);
+        format = Utils.trim(format);
+
         return format;
     }
 
@@ -102,85 +93,71 @@ public class XvmBase
          * XVMUpdateUI(curHealth) with textField aspect
          */
 
-        try
+        // skip strings without macroses
+        if (format.indexOf("{{") == -1)
+            return format;
+
+        var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
+        var dmgRatio: Number = delta ? Math.ceil(delta / m_maxHealth * 100) : 0;
+        var formatArr:Array;
+
+        // Text
+        formatArr = format.split("{{hp}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(String(curHealth));
+        formatArr = format.split("{{hp-ratio}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(String(hpRatio));
+        formatArr = format.split("{{hp-max}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(String(m_maxHealth));
+        formatArr = format.split("{{dmg}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(delta ? String(delta) : "");
+        formatArr = format.split("{{dmg-ratio}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(delta ? String(dmgRatio) : "");
+        formatArr = format.split("{{dmg-kind}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(delta ? damageType : "");
+
+        // Colors
+        formatArr = format.split("{{c:hp}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth));
+        formatArr = format.split("{{c:hp-ratio}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio));
+        formatArr = format.split("{{c:hp_ratio}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio));
+        formatArr = format.split("{{c:dmg-kind}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(delta ? GraphicsUtil.GetDmgKindValue(damageType) : "")
+        formatArr = format.split("{{c:dmg_kind}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(delta ? GraphicsUtil.GetDmgKindValue(damageType) : "")
+        formatArr = format.split("{{c:vtype}}");
+        if (formatArr.length > 1)
         {
-            // skip strings without macroses
-            if (format.indexOf("{{") == -1)
-                return format;
-
-            var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
-            var dmgRatio: Number = delta ? Math.ceil(delta / m_maxHealth * 100) : 0;
-            var formatArr:Array;
-
-            // Text
-            formatArr = format.split("{{hp}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(String(curHealth));
-            formatArr = format.split("{{hp-ratio}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(String(hpRatio));
-            formatArr = format.split("{{hp-max}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(String(m_maxHealth));
-            formatArr = format.split("{{dmg}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(delta ? String(delta) : "");
-            formatArr = format.split("{{dmg-ratio}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(delta ? String(dmgRatio) : "");
-            formatArr = format.split("{{dmg-kind}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(delta ? damageType : "");
-
-            // Colors
-            formatArr = format.split("{{c:hp}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth));
-            formatArr = format.split("{{c:hp-ratio}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio));
-            formatArr = format.split("{{c:hp_ratio}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio));
-            formatArr = format.split("{{c:dmg-kind}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(delta ? GraphicsUtil.GetDmgKindValue(damageType) : "")
-            formatArr = format.split("{{c:dmg_kind}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(delta ? GraphicsUtil.GetDmgKindValue(damageType) : "")
-            formatArr = format.split("{{c:vtype}}");
-            if (formatArr.length > 1)
+            if (vehicleTypeComponent != null)
             {
-                if (vehicleTypeComponent != null)
-                {
-                    format = formatArr.join(GraphicsUtil.GetVTypeColorValue(m_defaultIconSource,
-                        Utils.vehicleClassToVehicleType(vehicleTypeComponent.getVehicleClass())));
-                }
+                format = formatArr.join(GraphicsUtil.GetVTypeColorValue(m_defaultIconSource,
+                    Utils.vehicleClassToVehicleType(vehicleTypeComponent.getVehicleClass())));
             }
+        }
 
-            format = Utils.trim(format);
-        }
-        catch (e)
-        {
-//            ErrorHandler.setText("ERROR: formatDynamicText(" + format + "):" + String(e));
-        }
+        format = Utils.trim(format);
 
         return format;
     }
 
     public function formatStaticColorText(format:String):String
     {
-        try
-        {
-            if (!format || !isNaN(parseInt(format)))
-                return format;
+        if (!format || !isNaN(parseInt(format)))
+            return format;
 
-            format = StatFormat.FormatText(format, m_isDead).split("#").join("0x");
-        }
-        catch (e)
-        {
-//            ErrorHandler.setText("ERROR: formatStaticColorText(" + format + "):" + String(e));
-        }
+        format = StatFormat.FormatText(format, m_isDead).split("#").join("0x");
 
         return format;
     }
@@ -188,77 +165,64 @@ public class XvmBase
     public function formatDynamicColor(format:String, curHealth:Number, damageType:String = null):Number
     {
         var systemColor =  ColorsManager.getSystemColor(m_entityName, m_isDead, isBlowedUp, false);
-        try
+
+        if (!format)
+            return systemColor;
+
+        if (!isNaN(parseInt(format)))
+            return Number(format);
+
+        var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
+        var formatArr = format.split("{{c:hp}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth, "0x"));
+        formatArr = format.split("{{c:hp-ratio}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"));
+        formatArr = format.split("{{c:hp_ratio}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"));
+        formatArr = format.split("{{c:dmg-kind}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(damageType ? GraphicsUtil.GetDmgKindValue(damageType, "0x") : "");
+        formatArr = format.split("{{c:dmg_kind}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(damageType ? GraphicsUtil.GetDmgKindValue(damageType, "0x") : "");
+        formatArr = format.split("{{c:vtype}}");
+        if (formatArr.length > 1)
         {
-            if (!format)
-                return systemColor;
-
-            if (!isNaN(parseInt(format)))
-                return Number(format);
-
-            var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
-            var formatArr = format.split("{{c:hp}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth, "0x"));
-            formatArr = format.split("{{c:hp-ratio}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"));
-            formatArr = format.split("{{c:hp_ratio}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"));
-            formatArr = format.split("{{c:dmg-kind}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(damageType ? GraphicsUtil.GetDmgKindValue(damageType, "0x") : "");
-            formatArr = format.split("{{c:dmg_kind}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(damageType ? GraphicsUtil.GetDmgKindValue(damageType, "0x") : "");
-            formatArr = format.split("{{c:vtype}}");
-            if (formatArr.length > 1)
+            if (vehicleTypeComponent != null)
             {
-                if (vehicleTypeComponent != null)
-                {
-                    format = formatArr.join(GraphicsUtil.GetVTypeColorValue(m_defaultIconSource,
-                        Utils.vehicleClassToVehicleType(vehicleTypeComponent.getVehicleClass()), "0x"));
-                }
+                format = formatArr.join(GraphicsUtil.GetVTypeColorValue(m_defaultIconSource,
+                    Utils.vehicleClassToVehicleType(vehicleTypeComponent.getVehicleClass()), "0x"));
             }
-            return !isNaN(parseInt(format)) ? Number(format) : systemColor;
         }
-        catch (e)
-        {
-//            ErrorHandler.setText("ERROR: formatDynamicColor(" + format + "):" + String(e));
-        }
+        return !isNaN(parseInt(format)) ? Number(format) : systemColor;
 
         return systemColor;
     }
 
     public function formatDynamicAlpha(format:String, curHealth:Number):Number
     {
-        try
-        {
-            if (!format)
-                return 100;
+        if (!format)
+            return 100;
 
-            if (!isNaN(parseInt(format)))
-                return Number(format);
+        if (!isNaN(parseInt(format)))
+            return Number(format);
 
-            var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
-            var formatArr = format.split("{{a:hp}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, curHealth).toString());
-            formatArr = format.split("{{a:hp-ratio}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hpRatio).toString());
-            formatArr = format.split("{{a:hp_ratio}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hpRatio).toString());
+        var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
+        var formatArr = format.split("{{a:hp}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, curHealth).toString());
+        formatArr = format.split("{{a:hp-ratio}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hpRatio).toString());
+        formatArr = format.split("{{a:hp_ratio}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hpRatio).toString());
 
-            var n = !isNaN(parseInt(format)) ? Number(format) : 100;
-            return (n <= 0) ? 1 : (n > 100) ? 100 : n;
-        }
-        catch (e)
-        {
-//            ErrorHandler.setText("ERROR: formatDynamicAlpha(" + format + "):" + String(e));
-        }
+        var n = !isNaN(parseInt(format)) ? Number(format) : 100;
+        return (n <= 0) ? 1 : (n > 100) ? 100 : n;
 
         return 100;
     }
@@ -276,57 +240,43 @@ public class XvmBase
     /**
      * Create new TextField based on config
      */
-    public function createTextField(cfg:Object):Object
+    public function createTextField(cfg:Object):TextField
     {
-        try
-        {
-            var textField: TextField = new TextField();
-            textField.width = 140;
-            textField.height = 100;
+        var textField: TextField = new TextField();
+        textField.width = 140;
+        textField.height = 100;
 
-            //textField._quality = "BEST";
-            textField.antiAliasType = "normal";
-            //textField.antiAliasType = "advanced";
-            //textField.gridFitType = "NONE";
+		textField.selectable = false;
 
-            textField.multiline = true;
-            textField.wordWrap = false;
+        textField.multiline = true;
+        textField.wordWrap = false;
 
-            //textField.border = true;
-            //textField.borderColor = 0xFFFFFF;
-            //textField.autoSize = "center"; // http://theolagendijk.com/2006/09/07/aligning-htmltext-inside-flash-textfield/
+		textField.embedFonts = !cfg.font || !cfg.font.name || cfg.font.name == "$FieldFont";
+		
+        //textField.html = true;
 
-            //textField.html = true;
-
-            var style:StyleSheet = new StyleSheet();
-            style.parseCSS(XvmHelper.createCSS(cfg.font,
-                formatDynamicColor(formatStaticColorText(cfg.color), m_curHealth), "xvm_markerText"));
-            textField.styleSheet = style;
+        var style:StyleSheet = new StyleSheet();
+        style.parseCSS(XvmHelper.createCSS(cfg.font,
+            formatDynamicColor(formatStaticColorText(cfg.color), m_curHealth), "xvm_markerText"));
+        textField.styleSheet = style;
 
 //            Logger.add(XvmHelper.createCSS(cfg.font, formatDynamicColor(formatStaticColorText(cfg.color), m_curHealth), "xvm_markerText"));
 
-            // TODO: replace shadow with TweenLite Shadow/Bevel (performance issue)
-            if (cfg.shadow)
-            {
-                var sh_color:Number = formatDynamicColor(formatStaticColorText(cfg.shadow.color), m_curHealth);
-                var sh_alpha:Number = formatDynamicAlpha(cfg.shadow.alpha, m_curHealth);
-                textField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow.distance,
-                    cfg.shadow.angle, sh_color, sh_alpha, cfg.shadow.size, cfg.shadow.strength) ];
-            }
-
-            textField.alpha = formatDynamicAlpha(cfg.alpha, m_curHealth);
-            textField.x = cfg.x - (textField.width / 2.0);
-            textField.y = cfg.y - (/*textField._height*/ 31 / 2.0); // FIXIT: 31 is used for compatibility
-            textField.visible = cfg.visible;
-
-            return { field: textField, format: formatStaticText(cfg.format), alpha: cfg.alpha };
-        }
-        catch (e)
+        // TODO: replace shadow with TweenLite Shadow/Bevel (performance issue)
+        if (cfg.shadow)
         {
-//            ErrorHandler.setText("ERROR: createTextField():" + String(e));
+            var sh_color:Number = formatDynamicColor(formatStaticColorText(cfg.shadow.color), m_curHealth);
+            var sh_alpha:Number = formatDynamicAlpha(cfg.shadow.alpha, m_curHealth);
+            textField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow.distance,
+                cfg.shadow.angle, sh_color, sh_alpha, cfg.shadow.size, cfg.shadow.strength) ];
         }
 
-        return null;
+        textField.alpha = formatDynamicAlpha(cfg.alpha, m_curHealth);
+        textField.x = cfg.x - (textField.width / 2.0);
+        textField.y = cfg.y - (/*textField._height*/ 31 / 2.0); // FIXIT: 31 is used for compatibility
+        textField.visible = cfg.visible;
+
+        return textField;
     }
 }
 

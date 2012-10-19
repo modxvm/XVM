@@ -47,14 +47,17 @@
                 marker1.y = s.m1[1];
                 marker1.zoom = s.m1[2];
                 marker1.maxHP = s.m1[3];
+				marker1.curHP = s.m1[3];
                 marker2.x = s.m2[0];
                 marker2.y = s.m2[1];
                 marker2.zoom = s.m2[2];
                 marker2.maxHP = s.m2[3];
+				marker2.curHP = s.m2[3];
                 marker3.x = s.m3[0];
                 marker3.y = s.m3[1];
                 marker3.zoom = s.m3[2];
                 marker3.maxHP = s.m3[3];
+				marker3.curHP = 0;
             }
 
             public function update():void
@@ -88,9 +91,9 @@
         <s:NavigatorContent width="100%" height="100%" id="preview">
             <mx:Canvas x="0" y="0" width="500" height="400" backgroundColor="0xAACCBB" verticalScrollPolicy="off" horizontalScrollPolicy="off">
                 <mx:Image id="imgBG" x="0" y="0" width="500" height="400"/>
-                <p:Marker id="marker3" creationComplete="marker3.init('ally_dead','SPG',7)"/>
-                <p:Marker id="marker1" creationComplete="marker1.init('ally','heavyTank',8)"/>
-                <p:Marker id="marker2" creationComplete="marker2.init('enemy','AT-SPG',8)"/>
+                <p:Marker id="marker3" creationComplete="marker3.init('ally_dead','SPG',7,'Hummel');cbBG_changeHandler(new ListEvent(''))"/>
+                <p:Marker id="marker1" creationComplete="marker1.init('ally','heavyTank',8,'IS-3');cbBG_changeHandler(new ListEvent(''))"/>
+                <p:Marker id="marker2" creationComplete="marker2.init('enemy','AT-SPG',8,'Ferdinand');cbBG_changeHandler(new ListEvent(''))"/>
             </mx:Canvas>
             <s:BorderContainer y="400" width="100%" height="32" borderVisible="false">
                 <s:HGroup top="0" left="0" bottom="0" width="100%" gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="4">

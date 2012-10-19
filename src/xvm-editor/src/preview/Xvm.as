@@ -4,6 +4,8 @@
 import com.greensock.OverwriteManager;
 import com.greensock.plugins.*;
 
+import flash.text.TextField;
+
 import preview.*;
 import preview.damage.*;
 
@@ -76,9 +78,6 @@ public class Xvm extends XvmBase
         // Create clan icon and place to mc.
         clanIconComponent.m_clanIcon.source = m_entityType == "enemy" ? new Resources.IMG_clan2() : new Resources.IMG_clan1();
 
-        // Initialize states and creating text fields
-        initializeTextFields();
-
         // Draw marker
         XVMUpdateStyle();
     }
@@ -89,6 +88,7 @@ public class Xvm extends XvmBase
     function update()
     {
         trace("Xvm::update()");
+
         XVMUpdateStyle();
     }
 
@@ -101,7 +101,6 @@ public class Xvm extends XvmBase
         if (value == m_entityName)
             return;
         m_entityName = value;
-        initializeTextFields();
         XVMUpdateStyle();
     }
 
@@ -127,18 +126,18 @@ public class Xvm extends XvmBase
         var delta: Number = newHealth - m_curHealth;
         m_curHealth = m_isDead ? 0 : newHealth; // fixes "-1"
 
+		update();
+
         if (delta < 0) // Damage has been done
         {
-            // markers{ally{alive{normal
+			// markers{ally{alive{normal
             var vehicleStateCfg:Object = vehicleState.getCurrentConfig();
 
-            healthBarComponent.updateState(vehicleStateCfg);
+            //healthBarComponent.updateState(vehicleStateCfg);
             healthBarComponent.showDamage(vehicleStateCfg, newHealth, m_maxHealth, -delta);
 
             damageTextComponent.showDamage(vehicleStateCfg.damageText, newHealth, -delta, flag, damageType);
         }
-
-        XVMUpdateDynamicTextFields();
     }
 
     /**
@@ -173,127 +172,66 @@ public class Xvm extends XvmBase
     * MAIN
     */
 
-    function XVMUpdateDynamicTextFields()
+	private var textFields:Array = [];
+    function UpdateTextFields(state_cfg:Object):void
     {
-        try
-        {
-            if (textFields)
-            {
-                var st = vehicleState.getCurrentState();
-                for (var i in textFields[st])
-                {
-                    var tf = textFields[st][i];
-                    //tf.field.text = formatDynamicText(tf.format, m_curHealth);
-                    //tf.field.textColor = formatDynamicColor(tf.color, m_curHealth);
-                    tf.field.htmlText = "<textformat leading='-2'><p class='xvm_markerText'>" +
-                        formatDynamicText(tf.format, m_curHealth) + "</p></textformat>";
-                    tf.field._alpha = formatDynamicAlpha(tf.alpha, m_curHealth);
-                }
-            }
-        }
-        catch (e)
-        {
-//            ErrorHandler.setText("ERROR: XVMUpdateDynamicTextFields():" + String(e));
-        }
-    }
+		if (!Config.s_config || !Config.s_config.markers)
+			return;
 
-    function initializeTextFields()
-    {
-        //trace("Xvm::initializeTextFields()");
-        try
-        {
-            // cleanup
-            if (textFields)
-            {
-                for (var st in textFields)
-                {
-                    for (var i in textFields[st])
-                    {
-                        var tf = textFields[st][i];
-                        tf.field.removeTextField();
-                        tf.field = null;
-//                        delete tf;
-                    }
-                }
-            }
-
-            textFields = { };
-            var allStates = vehicleState.getAllStates();
-            for (var stid in allStates)
-            {
-                var st = allStates[stid];
-                var cfg = vehicleState.getConfig(st);
-
-                // create text fields
-                var fields: Array = [];
-                for (var i in cfg.textFields)
-                {
-                    if (cfg.textFields[i].visible)
-                    {
-                        //if (m_team == "ally")
-                        //    Logger.addObject(cfg.textFields[i], m_vname + " " + m_playerFullName + " " + st);
-                        //if (m_team == "enemy")
-                        //    Logger.addObject(cfg.textFields[i], m_vname + " " + m_playerFullName + " " + st);
-                        fields.push(createTextField(cfg.textFields[i]));
-                    }
-                }
-                textFields[st] = fields;
-            }
-        }
-        catch (e)
-        {
-//            ErrorHandler.setText("ERROR: initializeTextFields():" + String(e));
-        }
+		while (textFields.length > 0)
+			proxy.removeChild(textFields.pop());
+		
+		textFields = [];
+		var len:Number = state_cfg.textFields.length;
+		for (var i:Number = 0; i < len; ++i)
+		{
+			var cfg:Object = state_cfg.textFields[i];
+			if (cfg.visible)
+			{
+				var tf:TextField = createTextField(cfg);
+				tf.htmlText = "<p class='xvm_markerText'>" +
+					formatDynamicText(formatStaticText(cfg.format), m_curHealth) + "</p>";
+				tf.y += 1; // TODO: why?
+				tf.textColor = formatDynamicColor(formatStaticColorText(cfg.color), m_curHealth);
+				tf.alpha = formatDynamicAlpha(cfg.alpha, m_curHealth) / 100;
+				proxy.addChild(tf);
+				tf.visible = true;
+				textFields.push(tf);
+			}
+		}
     }
 
     function XVMUpdateStyle()
     {
+		if (!Config.s_config || !Config.s_config.markers)
+			return;
         //trace("XVMUpdateStyle: " + m_playerFullName + m_vname + " " + " scale=" + proxy.marker._xscale);
-        try
-        {
-            //var start = new Date(); // for debug
 
-            var cfg = vehicleState.getCurrentConfig();
+        var cfg = vehicleState.getCurrentConfig();
 
-            // Vehicle Type Marker
-            vehicleTypeComponent.updateState(cfg);
+        // Vehicle Type Marker
+        vehicleTypeComponent.updateState(cfg);
 
-            // Contour Icon
-            contourIconComponent.updateState(cfg);
+        // Contour Icon
+        contourIconComponent.updateState(cfg);
 
-            // Level Icon
-            levelIconComponent.updateState(cfg);
+        // Level Icon
+        levelIconComponent.updateState(cfg);
 
-            // Action Marker
-//            actionMarkerComponent.updateState(cfg);
+        // Action Marker
+        //actionMarkerComponent.updateState(cfg);
 
-            // Clan Icon
-            clanIconComponent.updateState(cfg);
+        // Clan Icon
+        clanIconComponent.updateState(cfg);
 
-            // Damage Text
-            damageTextComponent.updateState(cfg);
+        // Damage Text
+        damageTextComponent.updateState(cfg);
 
-            // Health Bar
-            healthBarComponent.updateState(cfg);
+        // Health Bar
+        healthBarComponent.updateState(cfg);
 
-            // Text fields
-            if (textFields)
-            {
-                var st = vehicleState.getCurrentState();
-                for (var i in textFields)
-                {
-                    for (var j in textFields[i])
-                        textFields[i][j].field._visible = (i == st);
-                }
-            }
-
-            // Update Colors and Values
-            XVMUpdateDynamicTextFields();
-        }
-        catch (e)
-        {
-//            ErrorHandler.setText("ERROR: XVMUpdateStyle():" + String(e));
-        }
+        // Update Colors and Values
+        UpdateTextFields(cfg);
     }
 }
 

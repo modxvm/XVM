@@ -39,7 +39,7 @@
             xvm = new Xvm(this);
         }
 
-        public function init(vtype:String, vclass:String, vlevel:Number):void
+        public function init(vtype:String, vclass:String, vlevel:Number, vname:String):void
         {
             // draw grid
             graphics.beginFill(0xFFFF00, 0.1);
@@ -50,7 +50,7 @@
             graphics.endFill();
 
             var entity:String = vtype == "ally" || vtype == "ally_dead" ? "ally" : "enemy";
-            xvm.init(vclass, null, vtype, vlevel, '___Player___[CLAN]', 100, 100, entity, false, false, entity); 
+            xvm.init(vclass, null, vname, vlevel, '___Player___[CLAN]', vtype == "ally_dead" ? 0 : 1, 1, entity, false, false, entity); 
 
             loadSWF(Resources.markersSWF);
         }
@@ -148,7 +148,6 @@
             cfg = xvm.m_entityType == "ally" ? cfg.ally : cfg.enemy;
             cfg = xvm.m_isDead == false ? cfg.alive : cfg.dead;
             cfg = _extmode ? cfg.extended : cfg.normal;
-//            _cfg = cfg;
 
             var c:Object;
             
@@ -166,56 +165,6 @@
             actionMarkerHelp.alpha = actionMarkerVictim.alpha = actionMarkerArta.alpha = c.alpha / 100;
 
             xvm.update();
-                /*                        var c:Object;
-
-            // vehicleIcon
-            c = cfg.vehicleIcon;
-            vehicleIcon.visible = c.visible || c.showSpeaker;
-            vehicleIcon.marker.icon.gotoAndStop(c.visible ? vehicleClass : "dynamic");
-            vehicleIcon.x = c.x;
-            vehicleIcon.y = c.y;
-            vehicleIcon.marker.alpha = XVMFormatDynamicAlpha(c.alpha, m_curHealth) / 100;
-            vehicleIcon.marker.icon.x = c.scaleX * c.maxScale / 100;
-            vehicleIcon.marker.icon.y = c.scaleY * c.maxScale / 100;
-            vehicleIcon.marker.icon.scaleX = vehicleIcon.marker.icon.scaleY = c.maxScale / 100;
-
-            // damageText
-            c = cfg.damageText;
-            damageHolder.visible = c.visible;
-            damageHolder.x = c.x;
-            damageHolder.y = c.y;
-
-            // contourIcon
-            c = cfg.contourIcon;
-            contourIconHolder.visible = c.visible;
-            contourIcon.x = c.x - contourIcon.width / 2.0;
-            contourIcon.y = c.y - contourIcon.height / 2.0;
-            var tintColor: Number = XVMFormatDynamicColor(XVMFormatStaticColorText(c.color), m_curHealth);
-            var tintAmount: Number = Math.min(100, Math.max(0, c.amount)) * 0.01;
-            GraphicsUtil.setColor(contourIcon, tintColor, tintAmount);
-            contourIconHolder.alpha = XVMFormatDynamicAlpha(c.alpha, m_curHealth) / 100;
-
-            // clanIcon
-            c = cfg.clanIcon;
-            clanIcon.visible = c.visible;
-            clanIcon.x = c.x - c.w / 2.0;
-            clanIcon.y = c.y - c.h / 2.0;
-            clanIcon.width = c.w;
-            clanIcon.height = c.h;
-            clanIcon.alpha = XVMFormatDynamicAlpha(c.alpha, m_curHealth) / 100;
-
-            // levelIcon
-            c = cfg.levelIcon;
-            levelIcon.visible = c.visible;
-            levelIcon.x = c.x;
-            levelIcon.y = c.y;
-            levelIcon.alpha = XVMFormatDynamicAlpha(c.alpha, m_curHealth) / 100;
-
-            // Update HB
-            XVMUpdateHealthBar(m_curHealth);
-            // Update Text Fields
-            XVMUpdateUI(m_curHealth);
-*/
         }
 
         public function hit():void
@@ -239,15 +188,22 @@
 
         public function set extMode(value:Boolean):void
         {
-            this._extmode = value;
+            xvm.showExInfo(value);
             update();
         }
 
-        public function set maxHP(value:Number):void
+        public function set curHP(value:Number):void
         {
-            xvm.m_maxHealth = xvm.m_curHealth = value;
+			xvm.m_curHealth = value;
+			xvm.m_isDead = value <= 0;
             update();
         }
+
+		public function set maxHP(value:Number):void
+		{
+			xvm.m_maxHealth = value;
+			update();
+		}
 
         public function set zoom(value:Number):void
         {
@@ -258,11 +214,6 @@
 
         /*
         // Damage Visualization
-        private function removeTextField(f: TextField):void
-        {
-            damageHolder.removeChild(f);
-        }
-
         private function XVMShowDamage(curHealth:Number, delta:Number):void
         {
             var cfg:Object = Config.s_config.markers;
@@ -383,131 +334,6 @@
             }
         }
 
-        private function XVMUpdateUI(curHealth:Number):void
-        {
-            xvmHBFill.scaleX = Math.min(curHealth / m_maxHealth * 100, 100) / 100;
-
-            while (textFields.length > 0)
-                removeChild(textFields.pop());
-
-            textFields = [];
-            for (var i:String in _cfg.textFields)
-            {
-                var cfg:Object = _cfg.textFields[i];
-                if (cfg.visible)
-                {
-                    var tf:TextField = XVMCreateTextField(cfg);
-                    tf.text = XVMFormatDynamicText(XVMFormatStaticText(cfg.format), curHealth);
-                    tf.textColor = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.color), curHealth);
-                    tf.alpha = XVMFormatDynamicAlpha(cfg.alpha, curHealth) / 100;
-                    addChild(tf);
-                    textFields.push(tf);
-                }
-            }
-        }
-
-        private function XVMUpdateHealthBar(curHealth:Number):void
-        {
-            var cfg:Object = _cfg.healthBar;
-
-            xvmHB.alpha = XVMFormatDynamicAlpha(cfg.alpha, curHealth) / 100;
-
-            var fullColor: Number = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.color), curHealth);
-            var lowColor: Number = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.lcolor || cfg.color), curHealth);
-
-            var percent: Number = curHealth / m_maxHealth;
-
-            // determ current (real-time) color
-            var currColor:Number = GraphicsUtil.colorByRatio(percent, lowColor, fullColor);
-        }
-
-        private function XVMFormatDynamicAlpha(format: String, curHealth: Number): Number
-        {
-            if (!format || format == "0")
-                return 100;
-
-            if (!isNaN(parseInt(format)))
-                return int(format);
-
-            var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
-            var formatArr:Array = format.split("{{a:hp}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, curHealth).toString());
-            formatArr = format.split("{{a:hp-ratio}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hpRatio).toString());
-            formatArr = format.split("{{a:hp_ratio}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hpRatio).toString());
-
-            var n:Number = !isNaN(parseInt(format)) ? int(format) : 100;
-            return (n <= 0) ? 1 : (n > 100) ? 100 : n;
-        }
-
-        private function get pname():String
-        {
-            return "Player" + (xvm.m_entityType == "ally" ? "Ally" : "Enemy");
-        }
-
-        private const rlevel:Array = [ "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" ];
-        private function XVMFormatStaticText(format: String): String
-        {
-            // AS 2 doesn't have String.replace? Shame on them. Let's use our own square wheel.
-            format = format.split("{{nick}}").join(pname);
-            format = format.split("{{vehicle}}").join(_vdead ? "Hummel" : xvm.m_entityType == "ally" ? "ИС-3" : "Ferdinand");
-            var level:int = _vdead ? 5 : 8;
-            format = format.split("{{level}}").join(String(level));
-            format = format.split("{{rlevel}}").join(rlevel[level - 1]);
-            format = format.split("{{turret}}").join(Config.s_config.turretMarkers.highVulnerability);
-
-            format = format.split("{{kb}}").join("4k");
-            format = format.split("{{battles}}").join("4321");
-            format = format.split("{{wins}}").join("3210");
-            format = format.split("{{rating}}").join("48%");
-            format = format.split("{{eff}}").join("1234");
-
-            format = format.split("{{t-kb}}").join("1k");
-            format = format.split("{{t-kb-0}}").join("1.1k");
-            format = format.split("{{t-hb}}").join("12h");
-            format = format.split("{{t-battles}}").join("1234");
-            format = format.split("{{t-wins}}").join("1000");
-            format = format.split("{{t-rating}}").join("54%");
-
-            // This code is stupid, and needs to be rewritten
-            format = format.split("{{kb:3}}").join(" 4k");
-            format = format.split("{{rating:3}}").join("48%");
-            format = format.split("{{eff:4}}").join("1234");
-
-            format = format.split("{{t-kb:4}}").join("  1k");
-            format = format.split("{{t_kb:4}}").join("  1k");
-            format = format.split("{{t-hb:3}}").join("12h");
-            format = format.split("{{t_hb:3}}").join("12h");
-            format = format.split("{{t-battles:4}}").join("1234");
-            format = format.split("{{t_battles:4}}").join("1234");
-            format = format.split("{{t-rating:3}}").join("54%");
-            format = format.split("{{t_rating:3}}").join("54%");
-
-            return format;
-        }
-
-        private function XVMFormatDynamicText(format: String, curHealth: Number, delta: Number = 0): String
-        {
-            if (format.indexOf("{{") == -1)
-                return format;
-
-            var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
-            format = format.split("{{hp}}").join(String(curHealth));
-            format = format.split("{{hp-max}}").join(String(m_maxHealth));
-            format = format.split("{{hp-ratio}}").join(String(hpRatio));
-
-            var dmgRatio: Number = delta ? Math.ceil(delta / m_maxHealth * 100) : 0;
-            format = format.split("{{dmg}}").join(delta ? String(delta) : "");
-            format = format.split("{{dmg-ratio}}").join(delta ? String(dmgRatio) : "");
-            format = format.split("{{dmg-kind}}").join(delta ? String("attack") : "");
-
-            return format;
-        }
-
         private function XVMCreateNewTextFormat(config_font: Object): TextFormat
         {
             var name:String = config_font.name || "$FieldFont";
@@ -531,14 +357,9 @@
             textField.height = 30;
             //textField.height = cfg.font.size + 4;
 
-            textField.selectable = false;
-            textField.multiline = false;
-            textField.wordWrap = false;
-            //textField.antiAliasType = AntiAliasType.ADVANCED;
             //textField.gridFitType = GridFitType.SUBPIXEL;
             //textField.border = true;
             //textField.borderColor = 0xFFFFFF;
-            textField.embedFonts = !cfg.font.name || cfg.font.name == "$FieldFont";
             textField.defaultTextFormat = XVMCreateNewTextFormat(cfg.font);
 
             if (cfg.shadow)
@@ -559,65 +380,7 @@
             textField.visible = cfg.visible;
 
             return textField;
-        }
-
-        private function XVMFormatDynamicColor(format: String, curHealth: Number): Number
-        {
-            var systemColorName: String = xvm.m_entityType + "_";
-            systemColorName += !_vdead ? "alive_" : m_curHealth < 0 ? "blowedup_" : "dead_";
-            systemColorName += s_isColorBlindMode ? "blind" : "normal";
-            var systemColor:Number = Config.s_config.colors.system[systemColorName];
-
-            if (!format)
-                return systemColor;
-
-            if (!isNaN(parseInt(format)))
-                return int(format);
-
-            var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
-            var formatArr:Array = format.split("{{c:hp}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth, "0x"));
-            formatArr = format.split("{{c:hp-ratio}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"));
-            formatArr = format.split("{{c:hp_ratio}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio, "0x"));
-            formatArr = format.split("{{c:dmg-kind}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(Config.s_config.colors.dmg_kind.attack);
-            formatArr = format.split("{{c:dmg_kind}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(Config.s_config.colors.dmg_kind.attack);
-            formatArr = format.split("{{c:vtype}}");
-            if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetVTypeColorValue(Utils.vehicleClassToVehicleType(vehicleClass), "0x"));
-            return !isNaN(parseInt(format)) ? int(format) : systemColor;
-        }
-
-        private function XVMFormatStaticColorText(format: String): String
-        {
-            if (!format || !isNaN(parseInt(format)))
-                return format;
-
-            // Dynamic colors
-            format = format.split("{{c:eff}}").join(
-                GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, 1234, "#", _vdead));
-            format = format.split("{{c:rating}}").join(
-                GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 48, "#", _vdead));
-            format = format.split("{{c:kb}}").join(
-                GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, 1, "#", _vdead));
-            format = format.split("{{c:t-rating}}").join(
-                GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 54, "#", _vdead));
-            format = format.split("{{c:t_rating}}").join(
-                GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 54, "#", _vdead));
-            format = format.split("{{c:t-battles}}").join(
-                GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, 1234, "#", _vdead));
-            format = format.split("{{c:t_battles}}").join(
-                GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, 1234, "#", _vdead));
-
-            return format;
         }*/
+
     }
 }

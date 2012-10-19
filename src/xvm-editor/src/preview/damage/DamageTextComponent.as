@@ -80,14 +80,10 @@ public class DamageTextComponent
 
     public function updateState(state_cfg:Object)
     {
-        var cfg = state_cfg.damageText;
-        var visible = cfg.visible;
-        if (visible)
-        {
-            damage.x = cfg.x;
-            damage.y = cfg.y;
-        }
-        damage.visible = visible;
+		var cfg = state_cfg.damageText;
+		damage.visible = cfg.visible;
+		damage.x = cfg.x;
+		damage.y = cfg.y;
     }
 
     // PRIVATE METHODS

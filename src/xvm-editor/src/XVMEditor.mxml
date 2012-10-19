@@ -39,7 +39,7 @@
             {
                 resourceManager.localeChain = (event.target == lang_en) ? ['en_US', 'ru_RU'] : ['ru_RU', 'en_US'];
                 dispatchEvent(new Event('languageChanged'));
-                preview.cbBG.selectedIndex = preview.cbBG.selectedIndex; // refresh preview selected item
+                //preview.cbBG.selectedIndex = preview.cbBG.selectedIndex; // refresh preview selected item
             }
         ]]>
     </fx:Script>
