@@ -1,7 +1,9 @@
 ﻿intrinsic class gfx.core.UIComponent extends MovieClip
 {
     public var initialized:Boolean;
-
+    
+    static function createInstance(context, symbol, name, depth, initObj);
+    
     function get disabled();
     function set disabled(value);
     function get visible();

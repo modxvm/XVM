@@ -37,6 +37,7 @@
   </build>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
+    <compile path="src\wot\TeamBasesPanel\CaptureBar.as" />
     <compile path="src\wot\TeamBasesPanel\TeamBasesPanel.as" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->

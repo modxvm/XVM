@@ -1,4 +1,13 @@
-intrinsic class net.wargaming.ingame.TeamBasesPanel
+intrinsic class net.wargaming.ingame.TeamBasesPanel extends gfx.core.UIComponent
 {
-    
+    function add(id, sortWeight, colorFeature, title, points);
+    function remove(id);
+    function stopCapture(id, points);
+    function updatePoints(id, points);
+    function getPoints(id);
+    function setCaptured(id, title);
+    function clear();
+    function createCaptureBar(index, initProps);
+    function draw();
+    function updateColors();
 }
