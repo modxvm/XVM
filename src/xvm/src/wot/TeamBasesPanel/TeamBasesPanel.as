@@ -1,6 +1,7 @@
 /**
  * @author ilitvinov
  */
+import wot.TeamBasesPanel.InternalTimer;
 import wot.utils.Logger
 
 /**
@@ -15,8 +16,9 @@ class wot.TeamBasesPanel.TeamBasesPanel extends net.wargaming.ingame.TeamBasesPa
     {
         super();
         Logger.add("TeamBasesPanel()");
+        
         // TODO:
-        //Utils.TraceXvmModule("TeamBasesPanel");
+        // Utils.TraceXvmModule("TeamBasesPanel");
     }
     
     function add(id, sortWeight, colorFeature, title, points)
@@ -28,62 +30,8 @@ class wot.TeamBasesPanel.TeamBasesPanel extends net.wargaming.ingame.TeamBasesPa
         ", title = " + title +
         ", points = " + points +
         ")");
+        Logger.add("");
         super.add(id, sortWeight, colorFeature, title, points);
-    }
-    
-    function remove(id)
-    {
-        /**
-         * Real purpose unknown.
-         * Independently ticks every 0.5 seconds
-         * for vstre4nii battle type while capturing.
-         * TODO: check tick rate at standart battle type.
-         *
-         * Ticks when someone touches circle. 
-         * Capture can be still abcent at that moment.
-         */
-        Logger.add("* tick");
-        super.remove(id);
-    }
-    
-    function stopCapture(id, points)
-    {
-        /**
-         * Enemy tank blocks capture.
-         * Bar blinks white.
-         */
-        Logger.add("stopCapture(id = " + id + ", points = " + points + ")");
-        super.stopCapture(id, points);
-    }
-    
-    function updatePoints(id, points)
-    {
-        Logger.add("updatePoints(id = " + id + ", points = " + points + ")");
-        super.updatePoints(id, points);
-    }
-    
-    function getPoints(id)
-    {
-        Logger.add("getPoints(id = " + id + ")");
-        super.getPoints(id);
-    }
-    
-    function setCaptured(id, title)
-    {
-        Logger.add("setCaptured(id = " + id + ", title = " + title + ")");
-        super.setCaptured(id, title);
-    }
-    
-    function createCaptureBar(index, initProps)
-    {
-        Logger.add("createCaptureBar######");
-        return (gfx.core.UIComponent.createInstance(this, "CaptureBar", "bar" + index, index, initProps));
-    }
-    
-    // Called when bar should be reset to empty
-    function draw()
-    {
-        Logger.add("draw()");
-        super.draw();
+        captureBars[indexByID[id]].insertTimerRef(new InternalTimer());
     }
 }
