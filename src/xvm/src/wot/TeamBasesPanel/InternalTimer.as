@@ -21,7 +21,7 @@ class wot.TeamBasesPanel.InternalTimer
     {
         //Logger.add(" passed = " + timeNow);
         //Logger.add(" lastCapTime = " + prevCapTime);
-        var newCapTime:Number = round(timeNow);
+        var newCapTime:Number = timeNow;
         var capInterval:Number = newCapTime - prevCapTime;
         prevCapTime = newCapTime;
         Logger.add("capInterval = " + capInterval);
@@ -35,15 +35,10 @@ class wot.TeamBasesPanel.InternalTimer
     
     private function incTime()
     {
+        // TODO:
+        //  check for ticking while object deleted
+        
         //Logger.add(" * tick - " + secondsElapsed);
         timeNow = timeNow + TICK_INTERVAL_S;
-    }
-    
-    private static function round(num:Number):Number
-    {
-        num *= 100;
-        num = Math.round(num);
-        num /= 100;
-        return num;
     }
 }

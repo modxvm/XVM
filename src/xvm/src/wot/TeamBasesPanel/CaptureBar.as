@@ -5,6 +5,7 @@ import wot.utils.Logger;
 
 class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
 {
+    private static var TIME_ROUND:Number = 10; // 100 - 0.40999999 -> 0.41
     private var lastPointsIncome:Number;
     private var timeAtPrevUpdate:Number;
     private var timer:Object;
@@ -50,12 +51,12 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
     
     private function get capSecondsLeft():Number
     {
-        var capRate:Number = getCapRate(); // changes InternalTimer state!
+        var capRate:Number = round(getCapRate()); // changes InternalTimer state!
+        Logger.add("capRate = " + capRate);
+        
+        // In case of captureInterrupt
         if (capRate == 0)
-        {
-            Logger.add("capRate == 0");
             return 0;
-        } 
         
         var sLeft:Number = capPointsLeft / capRate;
         Logger.add("-> capSecondsLeft = " + sLeft);
@@ -64,10 +65,7 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
     
     private function getCapRate():Number
     {
-        var capUpdateInterval:Number = timer.getTimePassedSinceLastCap(); // changes InternalTimer state!
-        var capPerSec = lastPointsIncome / capUpdateInterval;
-        Logger.add("capRate = " + capPerSec);
-        return capPerSec;
+        return lastPointsIncome / timer.getTimePassedSinceLastCap(); // changes InternalTimer state!
     }
     
     private function get capPointsLeft():Number
@@ -76,4 +74,11 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
         return 100 - m_points;
     }
     
+    private static function round(num:Number):Number
+    {
+        num *= TIME_ROUND;
+        num = Math.round(num);
+        num /= TIME_ROUND;
+        return num;
+    }
 }
