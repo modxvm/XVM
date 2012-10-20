@@ -115,8 +115,8 @@
     "lines": 1,          // Количество строк. Устаревшие данные выталкиваются.
     "direction": "down", // Направление лога: up - строки добавляются сверху, down - снизу.
     // Подстановка для макроса {{dead}} когда танк умирает
-    "deadMarker": "<font face='Arial Unicode MS'>\u2626</font>",
-    "blowupMarker": "<font face='Arial Unicode MS'>\u2739</font>",
+    "deadMarker": "<font face='Wingdings'>N</font>",
+    "blowupMarker": "<font face='Wingdings'>M</font>",
     // Формат последнего попадания (допускаются макроподстановки, см. readme-ru.txt)
     "format": "<font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font>",
     // Формат предыдущих попаданий (допускаются макроподстановки, см. readme-ru.txt)

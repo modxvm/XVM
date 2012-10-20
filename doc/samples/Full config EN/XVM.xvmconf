@@ -115,8 +115,8 @@
     "lines": 1,          // Number of lines. Old lines will be pushed out
     "direction": "down", // Log direction: up - lines will be added from up to down, down - from down to up.
     // Substitution for {{dead}} macro when tank is dead
-    "deadMarker": "<font face='Arial Unicode MS'>\u2626</font>",
-    "blowupMarker": "<font face='Arial Unicode MS'>\u2739</font>",
+    "deadMarker": "<font face='Wingdings'>N</font>",
+    "blowupMarker": "<font face='Wingdings'>M</font>",
     // Last hit format (macros allowed, see readme-en.txt)
     "format": "<font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font>",
     // Previous hits format (macros allowed, see readme-en.txt)
