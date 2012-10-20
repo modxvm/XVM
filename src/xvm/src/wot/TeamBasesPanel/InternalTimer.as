@@ -5,8 +5,9 @@ class wot.TeamBasesPanel.InternalTimer
     public var timeNow:Number;
     private var interval;
     
-    private static var TICK_INTERVAL_MS:Number = 50; // 100ms
-    private static var TICK_INTERVAL_S:Number = TICK_INTERVAL_MS / 1000; // 0.1s
+    // High tick intervals increase +- calculation errors.
+    private static var TICK_INTERVAL_MS:Number = 50; // 50ms
+    private static var TICK_INTERVAL_S:Number = TICK_INTERVAL_MS / 1000; // 0.05s
     private var prevCapTime:Number;
 
     public function InternalTimer()

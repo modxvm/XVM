@@ -1,12 +1,14 @@
 /**
  * @author ilitvinov
  */
-import wot.TeamBasesPanel.InternalTimer;
-import wot.utils.Logger
 
-/**
+ import wot.utils.Logger
+
+/***
   * Creates and manages capture bar mc library instances.
- */
+  * 
+  * See CaptureBar class for implemented extra feature list.
+  */
 
 class wot.TeamBasesPanel.TeamBasesPanel extends net.wargaming.ingame.TeamBasesPanel
 {
@@ -32,6 +34,6 @@ class wot.TeamBasesPanel.TeamBasesPanel extends net.wargaming.ingame.TeamBasesPa
         ")");
         Logger.add("");
         super.add(id, sortWeight, colorFeature, title, points);
-        captureBars[indexByID[id]].insertTimerRef(new InternalTimer());
+        captureBars[indexByID[id]].timerStart();
     }
 }
