@@ -34,6 +34,6 @@ class wot.TeamBasesPanel.TeamBasesPanel extends net.wargaming.ingame.TeamBasesPa
         ")");
         Logger.add("");
         super.add(id, sortWeight, colorFeature, title, points);
-        captureBars[indexByID[id]].timerStart();
+        captureBars[indexByID[id]].init(colorFeature);
     }
 }
