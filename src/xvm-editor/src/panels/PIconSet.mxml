@@ -4,7 +4,6 @@
     xmlns:s="library://ns.adobe.com/flex/spark"
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
-    height="100%"
     title="{resourceManager.getString('panels', 'PIconSet')}">
     <c:LabeledTextInput label="{resourceManager.getString('panels', 'iconset_battleLoading')}" labelWidth="180" id="v_battleLoading" config="iconset.battleLoading" change="onChange(event)"/>
     <c:LabeledTextInput label="{resourceManager.getString('panels', 'iconset_statisticForm')}" labelWidth="180" id="v_statisticForm" config="iconset.statisticForm" change="onChange(event)"/>

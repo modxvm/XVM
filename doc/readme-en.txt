@@ -181,3 +181,8 @@
   6-th sence image.
   To change sixth sense indicator place alternative PNG image to
   res_mods/icons/SixthSense.png
+
+  Hit Log.
+  Negative x, y values allow to bind the text to the right and bottom edges for
+  the same behavior with different screen resolutions.
+  Will work only with running xvm-stat!!!

@@ -6,7 +6,7 @@ XVM-3.0.4.test3:
 
 XVM-3.0.4.test2:
   * negative x, y values in hit log settings allow to bind the text to the right
-    and bottom edges to the same config worked at different resolutions screen.
+    and bottom edges for the same behavior with different screen resolutions.
     Will work only with running xvm-stat!!!
 
 XVM-3.0.4.test1:

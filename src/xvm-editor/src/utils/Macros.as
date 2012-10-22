@@ -36,10 +36,12 @@ package utils
                 { value: "{{level}}", label: "level", icon: Embed.level },
                 { value: "{{rlevel}}", label: "rlevel", icon: Embed.rlevel },
                 { value: "{{n}}", label: "n", icon: Embed.n },
-                { value: "{{dead}}", label: "dead", icon: Embed.dead },
                 { value: "{{dmg}}", label: "dmg", icon: Embed.dmg },
                 { value: "{{dmg-total}}", label: "dmg_total", icon: Embed.dmg_total },
                 { value: "{{dmg-kind}}", label: "dmg_kind", icon: Embed.dmg_kind }
+            ],
+            dead: [
+                { value: "{{dead}}", label: "dead", icon: Embed.dead }
             ],
             colors_hitlog: [
                 { value: "{{c:dmg-kind}}", label: "c_dmg_kind", icon: Embed.c_dmg_kind },
