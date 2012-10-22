@@ -56,10 +56,6 @@
       "vehicleFormatRight": ""
     }
   },
-  "turretMarkers": {
-    "highVulnerability": "*",
-    "lowVulnerability": "'"
-  },
   "hitLog": {
     "visible": true,
     "x": 270,
@@ -70,8 +66,10 @@
     "direction": "down",
     "deadMarker": "<font face='Wingdings'>N</font>",
     "blowupMarker": "<font face='Wingdings'>M</font>",
-    "format":        "<textformat tabstops='[55,90,130,190]'><font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}</font><font size='1{{vehicle}}'>:\t{{dmg-total}}\t| <font color='{{c:dmg-kind}}'><b>{{dmg}}</b></font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></font></textformat>",
-    "formatHistory": "<textformat tabstops='[55,90,130,190]'><font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}</font><font size='1{{vehicle}}'>:\t{{dmg-total}}\t| <font color='{{c:dmg-kind}}'>{{dmg}}</font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></font></textformat>"
+//    "format":        "<textformat tabstops='[20,50,80,150]'><font size='13'>#9:</font>\t2000\t| <font color='{{c:dmg-kind}}'>2000</font>\t| ramming\t| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>",
+    "format":        "<textformat leading='-2'><font color='#CCCCCC'>Total:</font> <font size='1{{vehicle}}'><font size='13'>#{{n}}</font> <b>{{dmg-total}}</b>  <font color='#CCCCCC'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b></font> <font color='{{c:vtype}}'>{{vehicle}}</font></font><br><font size='1{{vehicle}}'><textformat leading='-4' tabstops='[20,50,80,150]'><font size='13'>#{{n-player}}:</font>\t{{dmg-player}}\t| <font color='{{c:dmg-kind}}'><b>{{dmg}}</b></font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat></font></textformat>",
+    "formatHistory": "<font size='1{{vehicle}}'><textformat leading='-4' tabstops='[20,50,80,150]'><font size='13'>#{{n-player}}:</font>\t{{dmg-player}}\t| <font color='{{c:dmg-kind}}'>{{dmg}}</font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat></font>",
+    "groupHitsByPlayer": true
   },
   "markers": {
     "ally": {

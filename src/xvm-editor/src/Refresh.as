@@ -491,6 +491,7 @@ private function RefreshMiscPage():void
         this.p_hitLog.v_blowupMarker.value = section.blowupMarker;
         this.p_hitLog.v_format.value = section.format;
         this.p_hitLog.v_formatHistory.value = section.formatHistory;
+        this.p_hitLog.v_groupHitsByPlayer.value = section.groupHitsByPlayer;
 
         section = Config.s_config.iconset;
         this.p_iconSet.v_battleLoading.value = section.battleLoading;

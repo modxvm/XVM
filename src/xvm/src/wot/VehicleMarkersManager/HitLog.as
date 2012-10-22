@@ -24,15 +24,11 @@ class wot.VehicleMarkersManager.HitLog
     private var format:String;
     private var formatHistory:String;
 
-    private var nHits:Number;
-    private var total:Number;
-    private var fire_total:Number;
-    private var fire_hist:String;
-    private var ramming_total:Number;
-    private var ramming_hist:String;
-    private var historyText:Array;
-
     private var textField:TextField;
+
+    private var total:Number;
+    private var players:Object;
+    private var hits:Array;
 
     public function HitLog(cfg:Object)
     {
@@ -45,18 +41,9 @@ class wot.VehicleMarkersManager.HitLog
         format = cfg.format;
         formatHistory = cfg.formatHistory;
 
-        nHits = 0;
         total = 0;
-        fire_total = 0;
-        fire_hist = "";
-        ramming_total = 0;
-        ramming_hist = "";
-        if (lines > 1)
-        {
-            historyText = [];
-            for (var i = 0; i < lines - 1; ++i)
-                historyText.push("");
-        }
+        hits = [];
+        players = {};
 
         createControl();
     }
@@ -70,14 +57,42 @@ class wot.VehicleMarkersManager.HitLog
     public function update(delta:Number, curHealth:Number, vehicleName:String, playerName:String,
         level:Number, damageType:String, vtypeColor:String)
     {
-        if (damageType != "fire" && damageType != "ramming" || fire_total == 0 && ramming_total == 0)
-            nHits++;
-        total += delta;
-        fire_total = damageType == "fire" ? fire_total + delta : 0;
-        ramming_total = damageType == "ramming" ? ramming_total + delta : 0;
         //wot.utils.Logger.add(delta + " " + vehicleName + " " + playerName + " " + level);
 
-        var dmg = damageType == "fire" ? fire_total : damageType == "ramming" ? ramming_total : delta;
+        total += delta;
+
+        var dmg = delta;
+        var lastHit:Object = hits.length == 0 ? { } : hits[hits.length - 1];
+        if ((damageType == "fire" || damageType == "ramming") && lastHit.damageType == damageType)
+        {
+            dmg += lastHit.delta;
+            hits.pop();
+        }
+
+        var n:Number = hits.push({
+            playerName:playerName,
+            dmg:dmg,
+            curHealth:curHealth,
+            damageType:damageType
+        });
+
+        if (!players[playerName])
+        {
+            players[playerName] = {
+                vehicleName:vehicleName,
+                level:level,
+                vtypeColor:vtypeColor,
+                total: 0,
+                hits: []
+            }
+        }
+
+        players[playerName].total += delta;
+
+        if (players[playerName].hits.length == 0 || players[playerName].hits[players[playerName].hits.length] != n)
+            players[playerName].hits.push(n);
+
+        //if (Config.s_config.hitLog.groupHitsByPlayer == false)
 
         var last:String = formatText(format, dmg, curHealth, vehicleName, playerName, level, damageType, vtypeColor);
         if (lines <= 1)
@@ -132,6 +147,7 @@ class wot.VehicleMarkersManager.HitLog
             }
 
             setText(historyText.join("<br/>") + "<br/>" + last);
+
             if (damageType != "fire" && damageType != "ramming")
             {
                 historyText.shift();
@@ -177,13 +193,19 @@ class wot.VehicleMarkersManager.HitLog
                 format = formatArr.join(curHealth < 0 ? Config.s_config.hitLog.blowupMarker : curHealth == 0 ? Config.s_config.hitLog.deadMarker : "");
             formatArr = format.split("{{n}}");
             if (formatArr.length > 1)
-                format = formatArr.join(String(nHits));
+                format = formatArr.join(String(hits.length));
+            formatArr = format.split("{{n-player}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(player[playerName] ? player[playerName].hits.length : "");
             formatArr = format.split("{{dmg}}");
             if (formatArr.length > 1)
                 format = formatArr.join(String(delta));
             formatArr = format.split("{{dmg-total}}");
             if (formatArr.length > 1)
                 format = formatArr.join(String(total));
+            formatArr = format.split("{{dmg-player}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(player[playerName] ? player[playerName].total : "");
             formatArr = format.split("{{nick}}");
             if (formatArr.length > 1)
                 format = formatArr.join(playerName);

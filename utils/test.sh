@@ -11,7 +11,8 @@ CURRENT_DIRECTORY=`pwd`
 #SAMPLE_REPLAY=6thsence.wotreplay
 #SAMPLE_REPLAY=tk.wotreplay
 #SAMPLE_REPLAY=fire.wotreplay
-SAMPLE_REPLAY=fall.wotreplay
+#SAMPLE_REPLAY=fall.wotreplay
+SAMPLE_REPLAY=hits.wotreplay
 #-SAMPLE_REPLAY=7x7.wotreplay
 #-SAMPLE_REPLAY=fogofwar.wotreplay
 

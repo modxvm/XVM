@@ -1,4 +1,9 @@
-﻿XVM-3.0.4.test4:
+﻿XVM-3.0.4.test5:
+  * added possibility to group hits by players in hit-log
+  * added macros {{n-player}} and {{dmg-player}} - count of hits and sum of
+    damage by players
+
+XVM-3.0.4.test4:
   * added {{dead}} macro to hit log for dead tanks
 
 XVM-3.0.4.test3:

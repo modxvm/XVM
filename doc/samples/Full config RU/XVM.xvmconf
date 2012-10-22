@@ -120,7 +120,8 @@
     // Формат последнего попадания (допускаются макроподстановки, см. readme-ru.txt)
     "format": "<font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font>",
     // Формат предыдущих попаданий (допускаются макроподстановки, см. readme-ru.txt)
-    "formatHistory": "<textformat tabstops='[55,90,130,190]'><font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}:</font>\t{{dmg-total}}\t| <font color='{{c:dmg-kind}}'>{{dmg}}</font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>"
+    "formatHistory": "<textformat tabstops='[55,90,130,190]'><font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}:</font>\t{{dmg-total}}\t| <font color='{{c:dmg-kind}}'>{{dmg}}</font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>",
+    "groupHitsByPlayer": false // группировать попадания по имени игрока
   },
   // Блок маркеров над танками.
   "markers": {

@@ -87,7 +87,7 @@
                 <c:LabeledColorSelector labelWidth="0" width="80" id="v_enemy_enemytk_blowup" config="colors.damage.enemy_enemytk_blowup" change="onChange(event)"/>
                 <s:Label height="2"/><s:Label height="2"/><s:Label height="2"/><s:Label height="2"/>
 
-                <s:Label text="{resourceManager.getString('panels', 'dmg_src_unknown')}..."/>
+                <s:Label text="{resourceManager.getString('panels', 'dmg_src_unknown')}*..." toolTip="{resourceManager.getString('panels', 'dmg_src_unknownTip')}"/>
                 <s:Label text="{resourceManager.getString('panels', 'dmg_hit')}" verticalAlign="bottom"/>
                 <s:Label text="{resourceManager.getString('panels', 'dmg_kill')}" verticalAlign="bottom"/>
                 <s:Label text="{resourceManager.getString('panels', 'dmg_blowup')}" verticalAlign="bottom"/>

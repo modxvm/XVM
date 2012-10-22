@@ -39,6 +39,8 @@ package utils
         public static const dmg:Class;
         [Embed("images/macros/dmg_kind.png")]
         public static const dmg_kind:Class;
+        [Embed("images/macros/dmg_player.png")]
+        public static const dmg_player:Class;
         [Embed("images/macros/dmg_ratio.png")]
         public static const dmg_ratio:Class;
         [Embed("images/macros/dmg_total.png")]
@@ -63,6 +65,8 @@ package utils
         public static const rlevel:Class;
         [Embed("images/macros/n.png")]
         public static const n:Class;
+        [Embed("images/macros/n_player.png")]
+        public static const n_player:Class;
         [Embed("images/macros/nick.png")]
         public static const nick:Class;
         [Embed("images/macros/rating.png")]

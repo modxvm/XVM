@@ -36,8 +36,10 @@ package utils
                 { value: "{{level}}", label: "level", icon: Embed.level },
                 { value: "{{rlevel}}", label: "rlevel", icon: Embed.rlevel },
                 { value: "{{n}}", label: "n", icon: Embed.n },
+                { value: "{{n-player}}", label: "n_player", icon: Embed.n_player },
                 { value: "{{dmg}}", label: "dmg", icon: Embed.dmg },
                 { value: "{{dmg-total}}", label: "dmg_total", icon: Embed.dmg_total },
+                { value: "{{dmg-player}}", label: "dmg_player", icon: Embed.dmg_player },
                 { value: "{{dmg-kind}}", label: "dmg_kind", icon: Embed.dmg_kind }
             ],
             dead: [

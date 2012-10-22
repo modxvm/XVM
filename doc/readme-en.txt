@@ -110,8 +110,10 @@
 
     In Hits Log:
       {{n}}           - count of hits
+      {{n-player}}    - count of hits by players
       {{dmg}}         - last hit value
       {{dmg-total}}   - total sum of hits
+      {{dmg-player}}  - sum of hits by players
       {{dead}}        - tank's death marker
       {{nick}}        - player nickname
       {{vehicle}}     - vehicle name
