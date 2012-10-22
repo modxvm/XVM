@@ -487,6 +487,8 @@ private function RefreshMiscPage():void
         this.p_hitLog.v_w.value = section.w;
         this.p_hitLog.v_lines.value = section.lines;
         this.p_hitLog.v_direction.value = section.direction;
+        this.p_hitLog.v_deadMarker.value = section.deadMarker;
+        this.p_hitLog.v_blowupMarker.value = section.blowupMarker;
         this.p_hitLog.v_format.value = section.format;
         this.p_hitLog.v_formatHistory.value = section.formatHistory;
 

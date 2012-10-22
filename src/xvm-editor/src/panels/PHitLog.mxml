@@ -17,6 +17,8 @@
     <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Height')}" labelWidth="180" id="v_h" config="hitLog.h" minimum="-10000" maximum="10000" sliderVisible="false" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'lines')}" labelWidth="180" id="v_lines" config="hitLog.lines" minimum="1" maximum="100" change="onChange(event)"/>
     <c:LabeledDirectionSelector label="{resourceManager.getString('panels', 'direction')}" labelWidth="180" id="v_direction" config="hitLog.direction" change="onChange(event)"/>
-    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'format')}" labelWidth="180" id="v_format" config="hitLog.formatHistory" allowedMacros="{Macros.get('hitlog,colors_hitlog')}" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'deadMarker')}" labelWidth="180" id="v_deadMarker" config="hitLog.deadMarker" allowedMacros="{Macros.get('hitlog,colors_hitlog')}" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'blowupMarker')}" labelWidth="180" id="v_blowupMarker" config="hitLog.blowupMarker" allowedMacros="{Macros.get('hitlog,colors_hitlog')}" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'format')}" labelWidth="180" id="v_format" config="hitLog.format" allowedMacros="{Macros.get('hitlog,colors_hitlog')}" change="onChange(event)"/>
     <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'formatHistory')}" labelWidth="180" id="v_formatHistory" config="hitLog.formatHistory" allowedMacros="{Macros.get('hitlog,colors_hitlog')}" change="onChange(event)"/>
 </c:PanelComponent>
