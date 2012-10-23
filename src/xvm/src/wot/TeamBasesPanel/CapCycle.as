@@ -1,5 +1,3 @@
-import wot.utils.Logger;
-
 /**
  * Capture cycle at capCycle class consists of two capture point updates
  * because server sends two updates with defferent intervals and cap points
@@ -39,16 +37,9 @@ class wot.TeamBasesPanel.CapCycle
 {
     private var m_prevSpeed:Number; // speed at previous update
     private var m_averageSpeed:Number; // average speed for two updates
-    private var m_log:Boolean;
-    
-    public function CapCycle(log:Boolean)
-    {
-        this.m_log = log;
-    }
     
     public function update(curSpeed:Number):Void
     {
-        //if (log) Logger.add("  CapCycle: curSpeed = " + curSpeed);
         if (m_prevSpeed == undefined)
         {
            /**
@@ -56,14 +47,11 @@ class wot.TeamBasesPanel.CapCycle
             * Lets do not try to calculate at that moment.
             * Just save a step.
             */
-            if (m_log) Logger.add("  CapCycle: m_prevSpeed == undefined; m_prevSpeed = curSpeed");
             m_prevSpeed = curSpeed;
         }
         else
         {
-            //TimeRound.round(
             m_averageSpeed = (m_prevSpeed + curSpeed) / 2;
-            //if (log) Logger.add("  CapCycle: update: m_averageSpeed = " + m_averageSpeed);
             m_prevSpeed = curSpeed;
         }
     }
@@ -75,6 +63,6 @@ class wot.TeamBasesPanel.CapCycle
     
     public function clear():Void
     {
-        m_prevSpeed = undefined
+        m_prevSpeed = undefined;
     }
 }

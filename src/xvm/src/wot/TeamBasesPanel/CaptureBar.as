@@ -1,18 +1,19 @@
 /**
  * @author ilitvinov
  */
-import wot.TeamBasesPanel.CapSpeed;
-import wot.utils.Logger;
+
+ import wot.TeamBasesPanel.CapSpeed;
 
 /**
  * Capture progress bar.
  * 
  * Extra features implemented:
  * ) Time left to capture point
+ * ) Number of capturibg tanks
  * 
  * TODO:
- * cap pattern recognition system
- * clear timer
+ * ) Clear timer ###
+ * ) Separate lines for each capturer.
  */
 
 class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
@@ -20,11 +21,11 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
     private var m_capSpeed:CapSpeed;
     private var m_log:Boolean;
     
-    /**
-     * CaptureBar() constructor is called once per battle.
-     * Not once per capture bar creation on stage.
-     */
-    
+   /**
+    * CaptureBar() constructor is called once per battle.
+    * Not once per capture bar creation on stage.
+    * see this.init()
+    */
     public function CaptureBar()
     {
         super();
@@ -34,27 +35,18 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
     
     public function updateProgress(newPointsVal:Number):Void
     {
-        if (m_log) Logger.add("");
-        //Logger.add("updateProgress(points = " + newPointsVal + ")");
-        
         m_capSpeed.calculate(newPointsVal, m_points);
+
+        super.updateProgress(newPointsVal); // modifies m_point;
         
-        super.updateProgress(newPointsVal);
+        m_titleTF.text = m_title;
         
-        m_titleTF.html = true;
-        m_titleTF.htmlText = "<b>" + m_title;
-        
-        if (m_log) Logger.add("Bar: capSpeed = " + m_capSpeed.getSpeed())
-        
-        // CapSpeed handles extreme conditions
         if (m_capSpeed.getSpeed() > 0 && capturersNum != undefined)
-            m_titleTF.htmlText += " / " + capturersNum;
+            m_titleTF.text += " / " + capturersNum;
         
         if (m_capSpeed.getSpeed() > 0)
-            m_titleTF.htmlText += " / " + capTimeLeft;
+            m_titleTF.text += " / " + capTimeLeft;
             
-        m_titleTF.htmlText += "</b>";
-        
         /**
          * Cap block.
          * 
@@ -72,11 +64,17 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
      * Cant be passed as argument externally easily.
      * Thus called straight by extended TeamBasesPanel class.
      */ 
-    public function init(colorFeature:String):Void
+    public function init():Void
     {
-        m_log = colorFeature == "red";
-        m_capSpeed = new CapSpeed(m_log);
-        if (m_log) Logger.add("init(): " + colorFeature);
+        m_capSpeed = new CapSpeed();
+    }
+    
+    public function setStyle(format:TextFormat, filters:Array):Void
+    {
+        m_titleTF.setNewTextFormat(format);
+        m_timerTF.setNewTextFormat(format);
+        m_titleTF.filters = filters;
+        m_timerTF.filters = filters;
     }
     
     // -- Private

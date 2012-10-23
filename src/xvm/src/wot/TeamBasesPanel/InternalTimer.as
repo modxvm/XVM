@@ -1,34 +1,39 @@
-//import wot.utils.Logger;
-
 class wot.TeamBasesPanel.InternalTimer
 {
     // High tick intervals increase +- calculation errors.
-    private static var TICK_INTERVAL_MS:Number = 100; // 50ms
-    private static var TICK_INTERVAL_S:Number = TICK_INTERVAL_MS / 1000; // 0.05s
-    private var prevTime:Number;
-    private var timeNow:Number;
-    private var flashTimer;
+    private static var TICK_INTERVAL_MS:Number = 100; // 100ms
+    private static var TICK_INTERVAL_S:Number = TICK_INTERVAL_MS / 1000; // 0.1s
+    private static var SELF_DESTRUCT_TICKS_THRESHOLD = TICK_INTERVAL_S * 10 * 5;
+    private var m_prevTime:Number;
+    private var m_timeNow:Number;
+    private var m_destructionTimer:Number;
+    private var m_flashTimer;
 
     public function InternalTimer()
     {
-        timeNow = 0;
-        prevTime = 0;
-        flashTimer = setInterval(this, "incTime", TICK_INTERVAL_MS);
+        m_timeNow = 0;
+        m_prevTime = 0;
+        m_destructionTimer = 0;
+        m_flashTimer = setInterval(this, "incTime", TICK_INTERVAL_MS);
     }
     
     public function getInterval():Number
     {
-        var newTime:Number = timeNow;
-        var interval:Number = newTime - prevTime;
-        prevTime = newTime;
+       /**
+        * Return time passed since last get.
+        */
+        var newTime:Number = m_timeNow;
+        var interval:Number = newTime - m_prevTime;
+        m_prevTime = newTime;
         interval = roundToWholeAndHalf(interval);
+        
+       /**
+        * Reset self-destruction timer.
+        * Timer is still in use.
+        */ 
+        m_destructionTimer = 0;
+        
         return interval;
-    }
-    
-    public function dispose()
-    {
-        // TODO: 1
-        clearInterval(flashTimer);
     }
     
     // -- Private
@@ -43,12 +48,15 @@ class wot.TeamBasesPanel.InternalTimer
         return interval /= 2;
     }
     
-    private function incTime()
+    private function incTime():Void
     {
-        // TODO:
-        //  check for ticking while object deleted
+        m_timeNow = m_timeNow + TICK_INTERVAL_S;
+        m_destructionTimer = m_destructionTimer + TICK_INTERVAL_S;
         
-        // Logger.add(" * tick - " + secondsElapsed);
-        timeNow = timeNow + TICK_INTERVAL_S;
+        /**
+         * Selfdestruct if timer have not been used for long time.
+         */
+        if (m_destructionTimer > SELF_DESTRUCT_TICKS_THRESHOLD)
+            clearInterval(m_flashTimer);
     }
 }

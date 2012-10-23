@@ -1,6 +1,5 @@
 import wot.TeamBasesPanel.CapCycle;
 import wot.TeamBasesPanel.InternalTimer;
-import wot.utils.Logger;
 import wot.TeamBasesPanel.TimeRound;
 
 /**
@@ -22,14 +21,11 @@ class wot.TeamBasesPanel.CapSpeed
     private var m_timer:InternalTimer;
 
     private var m_speed:Number;
-    private var m_log:Boolean;
     
-    public function CapSpeed(log:Boolean) 
+    public function CapSpeed() 
     {
-        this.m_log = log;
-        
         m_minimalCapSpeed = Infinity;
-        m_cycle = new CapCycle(log);
+        m_cycle = new CapCycle();
         m_timer = new InternalTimer();
     }
     
@@ -38,8 +34,7 @@ class wot.TeamBasesPanel.CapSpeed
         var interval:Number = m_timer.getInterval(); // Changes InternalTimer state!
         var rawSpeed:Number = (newPointsVal - prevPoints) / interval;
         
-        if (m_log) Logger.add(" CapSpeed: raw = " + rawSpeed);
-        if (rawSpeed <= 0.2 || rawSpeed > 8)
+        if (rawSpeed <= 0.2 || rawSpeed > 12)
         {
            /**
             * Capture points dropped.
@@ -52,7 +47,6 @@ class wot.TeamBasesPanel.CapSpeed
             */
             m_cycle.clear();
             m_speed = 0;
-            if (m_log) Logger.add(" CapSpeed: drop!");
             return;
         }
         
@@ -67,8 +61,6 @@ class wot.TeamBasesPanel.CapSpeed
         */
         m_cycle.update(rawSpeed);
         m_speed = m_cycle.getAverageSpeed();
-       
-        // if (m_log) Logger.add(" CapSpeed: av = " + m_speed + " raw = " + rawSpeed);
     }
     
     public function getSpeed():Number
