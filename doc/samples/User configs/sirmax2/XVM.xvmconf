@@ -58,17 +58,22 @@
   },
   "hitLog": {
     "visible": true,
-    "x": 270,
-    "y": 7,
+    "x": 235,
+    "y": -230,
     "w": 500,
-    "h": 200,
-    "lines": 5,
+    "h": 230,
+    "lines": 20,
     "direction": "down",
     "deadMarker": "<font face='Wingdings'>N</font>",
     "blowupMarker": "<font face='Wingdings'>M</font>",
-//    "format":        "<textformat tabstops='[20,50,80,150]'><font size='13'>#9:</font>\t2000\t| <font color='{{c:dmg-kind}}'>2000</font>\t| ramming\t| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>",
-    "format":        "<textformat leading='-2'><font color='#CCCCCC'>Total:</font> <font size='1{{vehicle}}'><font size='13'>#{{n}}</font> <b>{{dmg-total}}</b>  <font color='#CCCCCC'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b></font> <font color='{{c:vtype}}'>{{vehicle}}</font></font><br><font size='1{{vehicle}}'><textformat leading='-4' tabstops='[20,50,80,150]'><font size='13'>#{{n-player}}:</font>\t{{dmg-player}}\t| <font color='{{c:dmg-kind}}'><b>{{dmg}}</b></font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat></font></textformat>",
-    "formatHistory": "<font size='1{{vehicle}}'><textformat leading='-4' tabstops='[20,50,80,150]'><font size='13'>#{{n-player}}:</font>\t{{dmg-player}}\t| <font color='{{c:dmg-kind}}'>{{dmg}}</font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat></font>",
+//  TEST
+//    "format":        "<textformat tabstops='[20,50,90,150]'><font size='12'>#1</font>:\t1\t| 1\t| fire\t|</textformat>",
+//    "formatHistory": "<textformat tabstops='[20,50,90,150]'><font size='12'>#19</font>:\t9999\t| 2222\t| ramming\t| {{n}} {{n-player}} {{nick}}</textformat>",
+//  direction=up
+//    "format":        "<textformat leading='-4' tabstops='[20,50,90,150]'><font size='1{{nick}}'><font size='12'><font size='1{{nick}}'>\u00D7{{n-player}}:</font></font>\t{{dmg-player}}\t| <font color='{{c:dmg-kind}}'>{{dmg}}</font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></font></textformat><br/><textformat leading='-2'><font color='#CCCCCC'>Total:</font> <font size='1{{nick}}'><font size='13'>#{{n}}</font> <b>{{dmg-total}}</b>  <font color='#CCCCCC'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b></font></font></textformat>",
+//  direction=down
+    "format":        "<textformat leading='-2'><font color='#CCCCCC'>Total:</font> <font size='1{{nick}}'><font size='13'>#{{n}}</font> <b>{{dmg-total}}</b>  <font color='#CCCCCC'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b></font></font></textformat><br/><textformat leading='-4' tabstops='[20,50,90,150]'><font size='1{{nick}}'><font size='12'><font size='1{{nick}}'>\u00D7{{n-player}}:</font></font>\t{{dmg-player}}\t| <font color='{{c:dmg-kind}}'>{{dmg}}</font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></font></textformat>",
+    "formatHistory": "<textformat leading='-4' tabstops='[20,50,90,150]'><font size='12'>\u00D7{{n-player}}:</font>\t{{dmg-player}}\t| <font color='{{c:dmg-kind}}'>{{dmg}}</font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>",
     "groupHitsByPlayer": true
   },
   "markers": {

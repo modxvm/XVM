@@ -15,6 +15,8 @@ class wot.VehicleMarkersManager.HitLog
     // dummy var to avoid import warning
     private static var __dummy = Logger.dummy;
 
+    private static var groupHitsByPlayer:Boolean = false;
+    
     private var x:Number;
     private var y:Number;
     private var w:Number;
@@ -23,7 +25,7 @@ class wot.VehicleMarkersManager.HitLog
     private var direction:Number;
     private var format:String;
     private var formatHistory:String;
-
+    
     private var textField:TextField;
 
     private var total:Number;
@@ -32,6 +34,8 @@ class wot.VehicleMarkersManager.HitLog
 
     public function HitLog(cfg:Object)
     {
+        groupHitsByPlayer = Config.s_config.hitLog.groupHitsByPlayer == true;
+
         x = cfg.x;
         y = cfg.y;
         w = cfg.w;
@@ -65,16 +69,16 @@ class wot.VehicleMarkersManager.HitLog
         var lastHit:Object = hits.length == 0 ? { } : hits[hits.length - 1];
         if ((damageType == "fire" || damageType == "ramming") && lastHit.damageType == damageType)
         {
-            dmg += lastHit.delta;
+            dmg += lastHit.dmg;
             hits.pop();
         }
 
-        var n:Number = hits.push({
+        var id:Number = hits.push({
             playerName:playerName,
             dmg:dmg,
             curHealth:curHealth,
             damageType:damageType
-        });
+        }) - 1;
 
         if (!players[playerName])
         {
@@ -89,71 +93,37 @@ class wot.VehicleMarkersManager.HitLog
 
         players[playerName].total += delta;
 
-        if (players[playerName].hits.length == 0 || players[playerName].hits[players[playerName].hits.length] != n)
-            players[playerName].hits.push(n);
+        if (players[playerName].hits.length == 0 || players[playerName].hits[players[playerName].hits.length] != id)
+            players[playerName].hits.push(id);
 
-        //if (Config.s_config.hitLog.groupHitsByPlayer == false)
-
-        var last:String = formatText(format, dmg, curHealth, vehicleName, playerName, level, damageType, vtypeColor);
+        var last:String = formatText(format, playerName);
         if (lines <= 1)
         {
             setText(last);
             return;
         }
 
-        var hist:String = formatText(formatHistory || format, dmg, curHealth, vehicleName, playerName, level, damageType, vtypeColor);
-        if (direction == Defines.DIRECTION_DOWN)
+        var hist:String = formatText(formatHistory || format, playerName);
+        hits[hits.length - 1].hist = hist;
+
+        var skip:Array = [ playerName ];
+        var txt:String = "";
+        for (var i:Number = 0, n:Number = hits.length - 2; i < lines - 1, n >= 0; --n)
         {
-            if (damageType == "fire")
-                fire_hist = hist;
-            else if (fire_hist != "")
+            var data = hits[n];
+            if (groupHitsByPlayer)
             {
-                historyText.unshift(fire_hist);
-                fire_hist = "";
+                if (Utils.indexOf(skip, data.playerName) != -1)
+                    continue;
+                skip.push(data.playerName);
             }
 
-            if (damageType == "ramming")
-                ramming_hist = hist;
-            else if (ramming_hist != "")
-            {
-                historyText.unshift(ramming_hist);
-                ramming_hist = "";
-            }
-
-            setText(last + "<br/>" + historyText.join("<br/>"));
-
-            if (damageType != "fire" && damageType != "ramming")
-            {
-                historyText.pop();
-                historyText.unshift(hist);
-            }
+            var br = (txt == "") ? "" : "<br/>";
+            txt = (direction == Defines.DIRECTION_DOWN) ? txt + br + data.hist : data.hist + br + txt;
+            i++;
         }
-        else
-        {
-            if (damageType == "fire")
-                fire_hist = hist;
-            else if (fire_hist != "")
-            {
-                historyText.push(fire_hist);
-                fire_hist = "";
-            }
 
-            if (damageType == "ramming")
-                ramming_hist = hist;
-            else if (ramming_hist != "")
-            {
-                historyText.push(ramming_hist);
-                ramming_hist = "";
-            }
-
-            setText(historyText.join("<br/>") + "<br/>" + last);
-
-            if (damageType != "fire" && damageType != "ramming")
-            {
-                historyText.shift();
-                historyText.push(hist);
-            }
-        }
+        setText((direction == Defines.DIRECTION_DOWN) ? last + "<br/>" + txt : txt + "<br/>" + last);
     }
 
     private function createControl()
@@ -176,60 +146,83 @@ class wot.VehicleMarkersManager.HitLog
         style.parseCSS(".xvm_hitlog {font-family:$FieldFont; font-size:15px; color:#F4EFE8;}");
         textField.styleSheet = style;
 
-        var txt = formatText(format, 0, 1, "", "", 0, "");
-        if (direction != Defines.DIRECTION_DOWN)
-            txt = historyText.join("<br/>") + "<br/>" + txt;
-        setText(txt);
+        setText(formatText(format, ""));
     }
 
-    private function formatText(format:String, delta:Number, curHealth:Number, vehicleName:String, playerName:String,
-        level:Number, damageType:String, vtypeColor:String):String
+    private function formatText(format:String, playerName:String):String
     {
         try
         {
+            var data = players[playerName];
+            if (data)
+            {
+                var last_player_hit_data = hits[data.hits[data.hits.length - 1]];
+                data.dmg = last_player_hit_data.dmg;
+                data.curHealth = last_player_hit_data.curHealth;
+                data.damageType = last_player_hit_data.damageType;
+            }
+            else
+            {
+                data = {
+                    playerName:"",
+                    dmg:0,
+                    curHealth:1,
+                    damageType:"",
+                    vehicleName:"",
+                    level:0,
+                    vtypeColor:null,
+                    total: 0,
+                    hits: []
+                }
+            }
+
             var formatArr:Array;
             formatArr = format.split("{{dead}}");
             if (formatArr.length > 1)
-                format = formatArr.join(curHealth < 0 ? Config.s_config.hitLog.blowupMarker : curHealth == 0 ? Config.s_config.hitLog.deadMarker : "");
+            {
+                format = formatArr.join(data.curHealth < 0
+                    ? Config.s_config.hitLog.blowupMarker 
+                    : data.curHealth == 0 ? Config.s_config.hitLog.deadMarker : "");
+            }
             formatArr = format.split("{{n}}");
             if (formatArr.length > 1)
                 format = formatArr.join(String(hits.length));
             formatArr = format.split("{{n-player}}");
             if (formatArr.length > 1)
-                format = formatArr.join(player[playerName] ? player[playerName].hits.length : "");
+                format = formatArr.join(data.hits.length);
             formatArr = format.split("{{dmg}}");
             if (formatArr.length > 1)
-                format = formatArr.join(String(delta));
+                format = formatArr.join(data.dmg);
             formatArr = format.split("{{dmg-total}}");
             if (formatArr.length > 1)
                 format = formatArr.join(String(total));
             formatArr = format.split("{{dmg-player}}");
             if (formatArr.length > 1)
-                format = formatArr.join(player[playerName] ? player[playerName].total : "");
+                format = formatArr.join(data.total);
             formatArr = format.split("{{nick}}");
             if (formatArr.length > 1)
                 format = formatArr.join(playerName);
             formatArr = format.split("{{vehicle}}");
             if (formatArr.length > 1)
-                format = formatArr.join(vehicleName);
+                format = formatArr.join(data.vehicleName);
             formatArr = format.split("{{level}}");
             if (formatArr.length > 1)
-                format = formatArr.join(String(level));
+                format = formatArr.join(data.level);
             formatArr = format.split("{{rlevel}}");
             if (formatArr.length > 1)
-                format = formatArr.join(XvmHelper.rlevel[level - 1]);
+                format = formatArr.join(XvmHelper.rlevel[data.level - 1]);
             formatArr = format.split("{{dmg-kind}}");
             if (formatArr.length > 1)
-                format = formatArr.join(Locale.get(damageType));
+                format = formatArr.join(Locale.get(data.damageType));
             formatArr = format.split("{{c:dmg-kind}}");
             if (formatArr.length > 1)
-                format = formatArr.join(delta ? GraphicsUtil.GetDmgKindValue(damageType) : "")
+                format = formatArr.join(data.dmg ? GraphicsUtil.GetDmgKindValue(data.damageType) : "")
             formatArr = format.split("{{c:dmg_kind}}");
             if (formatArr.length > 1)
-                format = formatArr.join(delta ? GraphicsUtil.GetDmgKindValue(damageType) : "")
+                format = formatArr.join(data.dmg ? GraphicsUtil.GetDmgKindValue(data.damageType) : "")
             formatArr = format.split("{{c:vtype}}");
             if (formatArr.length > 1)
-                format = formatArr.join(vtypeColor);
+                format = formatArr.join(data.vtypeColor);
 
             format = Utils.trim(format);
         }
@@ -238,6 +231,6 @@ class wot.VehicleMarkersManager.HitLog
             format = "Error: " + String(e);
         }
 
-        return format + '</font>';
+        return format;
     }
 }
