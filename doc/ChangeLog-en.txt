@@ -1,4 +1,4 @@
-﻿XVM-3.0.4.test5:
+﻿XVM-3.0.4.pre1:
   * added possibility to group hits by players in hit-log
   * added macros {{n-player}} and {{dmg-player}} - count of hits and sum of
     damage by players

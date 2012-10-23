@@ -93,7 +93,7 @@ class wot.VehicleMarkersManager.HitLog
 
         players[playerName].total += delta;
 
-        if (players[playerName].hits.length == 0 || players[playerName].hits[players[playerName].hits.length] != id)
+        if (players[playerName].hits.length == 0 || players[playerName].hits[players[playerName].hits.length - 1] != id)
             players[playerName].hits.push(id);
 
         var last:String = formatText(format, playerName);
@@ -131,6 +131,7 @@ class wot.VehicleMarkersManager.HitLog
         //Logger.add("HitLog::createControl()");
         var x = this.x >= 0 ? this.x : Config.s_vars.window_size[0] + this.x;
         var y = this.y >= 0 ? this.y : Config.s_vars.window_size[1] + this.y;
+        //Logger.addObject(Config.s_vars);
 
         textField = _root.createTextField("xvmHitLog", _root.getNextHighestDepth(), x, y, w, h);
         //textField.border = true;

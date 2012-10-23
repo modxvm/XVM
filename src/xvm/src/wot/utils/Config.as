@@ -251,7 +251,7 @@ class wot.utils.Config
                         {
                             case "window_size":
                                 var sz = v[1].split(",");
-                                Config.s_vars.window_size = [ Math.max(1024, parseInt(sz[0])), Math.max(768, parseInt(sz[1])) ];
+                                Config.s_vars.window_size = [ Math.max(800, parseInt(sz[0])), Math.max(600, parseInt(sz[1])) ];
                                 break;
                         }
                     }

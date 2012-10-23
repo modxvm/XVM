@@ -57,26 +57,27 @@ class wot.utils.DefaultConfig
           //   1 - top
           //   2 - bottom
           minimap:               { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
+          playerMessangersPanel: { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
           leftPanel:             { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
           rightPanel:            { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-          debugPanel:            { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-          playerMessangersPanel: { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-          vehicleMessagesPanel:  { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-          damagePanel:           { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
           switcher_mc:           { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-          timerBig:              { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-          sixthSenseIndicator:   { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-          damageInfoPanel:       { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-          deathZoneTimer:        { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-          overturnedTimer:       { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-          drownTimer:            { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-          langBarPanel:          { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
           fragCorrelationBar:    { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-          consumablesPanel:      { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
+          debugPanel:            { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
           battleTimer:           { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-          vehicleErrorsPanel:    { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-          messenger:             { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-          teamBasesPanel:        { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false }
+          damagePanel:           { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
+          sixthSenseIndicator:   { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
+          vehicleErrorsPanel:    { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false }
+
+//          timerBig:              { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
+//          damageInfoPanel:       { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
+//          deathZoneTimer:        { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
+//          overturnedTimer:       { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
+//          drownTimer:            { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
+//          langBarPanel:          { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
+//          consumablesPanel:      { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
+//          vehicleMessagesPanel:  { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
+//          messenger:             { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
+//          teamBasesPanel:        { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false }
         }
       },
       rating: {
