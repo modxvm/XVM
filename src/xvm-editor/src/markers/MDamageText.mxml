@@ -4,7 +4,8 @@
     xmlns:s="library://ns.adobe.com/flex/spark"
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
-    title="{resourceManager.getString('markers', 'DamageText')}">
+    title="{resourceManager.getString('markers', 'DamageText')} *"
+    toolTip="{resourceManager.getString('markers', 'DamageTextTip')}">
     <fx:Script>
         <![CDATA[
             import utils.Macros;

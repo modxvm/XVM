@@ -6,6 +6,8 @@
 main()
 {
   i=$startclan
+  mkdir -p all/res_mods/clanicons/$dir/clan
+  mkdir -p all/res_mods/clanicons/$dir/nick
   while [ $i -le $lastclan ]; do
     update $i
     i=$((i+1))

@@ -21,7 +21,7 @@ parse_ivanerr()
     l="$clan $id"
 
     i=$((i+1))
-    if [ $i -gt 150 ]; then
+    if [ $i -gt 100 ]; then
       return
     fi
 
