@@ -48,7 +48,7 @@
                 <c:LabeledColorSelector labelWidth="0" width="80" id="v_squadman_squadman_kill" config="colors.damage.squadman_squadman_kill" change="onChange(event)"/>
                 <c:LabeledColorSelector labelWidth="0" width="80" id="v_squadman_squadman_blowup" config="colors.damage.squadman_squadman_blowup" change="onChange(event)"/>
                 <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_enemy')}"/>
-                <c:LabeledColorSelector labelWidth="0" width="80" id="v_squadman_enemy_hit" config="colors.damage.asquadmanenemy_hit" change="onChange(event)"/>
+                <c:LabeledColorSelector labelWidth="0" width="80" id="v_squadman_enemy_hit" config="colors.damage.squadman_enemy_hit" change="onChange(event)"/>
                 <c:LabeledColorSelector labelWidth="0" width="80" id="v_squadman_enemy_kill" config="colors.damage.squadman_enemy_kill" change="onChange(event)"/>
                 <c:LabeledColorSelector labelWidth="0" width="80" id="v_squadman_enemy_blowup" config="colors.damage.squadman_enemy_blowup" change="onChange(event)"/>
                 <s:Label textAlign="right" text="...{resourceManager.getString('panels', 'dmg_dst_allytk')}"/>
