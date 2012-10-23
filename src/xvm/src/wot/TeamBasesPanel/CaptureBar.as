@@ -18,6 +18,7 @@ import wot.utils.Logger;
 class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
 {
     private var m_capSpeed:CapSpeed;
+    private var m_log:Boolean;
     
     /**
      * CaptureBar() constructor is called once per battle.
@@ -31,16 +32,28 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
     
     // Called by TeamBasesPanel original WG class
     
-    public function updateProgress(newPointsVal:Number)
+    public function updateProgress(newPointsVal:Number):Void
     {
-        Logger.add("");
+        if (m_log) Logger.add("");
         //Logger.add("updateProgress(points = " + newPointsVal + ")");
         
         m_capSpeed.calculate(newPointsVal, m_points);
         
         super.updateProgress(newPointsVal);
         
-        m_titleTF.text = m_title;
+        m_titleTF.html = true;
+        m_titleTF.htmlText = "<b>" + m_title;
+        
+        if (m_log) Logger.add("Bar: capSpeed = " + m_capSpeed.getSpeed())
+        
+        // CapSpeed handles extreme conditions
+        if (m_capSpeed.getSpeed() > 0 && capturersNum != undefined)
+            m_titleTF.htmlText += " / " + capturersNum;
+        
+        if (m_capSpeed.getSpeed() > 0)
+            m_titleTF.htmlText += " / " + capTimeLeft;
+            
+        m_titleTF.htmlText += "</b>";
         
         /**
          * Cap block.
@@ -52,9 +65,6 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
          * is called twice in a seconds while block continues.
          * updateProgress() is also called twice a second.
          */
-        
-        //Logger.add("Bar: capSpeed = " + m_capSpeed.getSpeed())
-        // if (m_capSpeed.getSpeed() != 0) m_titleTF.text += " " + m_capSpeed.getSpeed();
     }
     
     /**
@@ -62,31 +72,19 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
      * Cant be passed as argument externally easily.
      * Thus called straight by extended TeamBasesPanel class.
      */ 
-    public function init(colorFeature:String)
+    public function init(colorFeature:String):Void
     {
-        var log = colorFeature == "green";
-        m_capSpeed = new CapSpeed(log);
-        Logger.add("init(): " + colorFeature);
+        m_log = colorFeature == "red";
+        m_capSpeed = new CapSpeed(m_log);
+        if (m_log) Logger.add("init(): " + colorFeature);
     }
     
     // -- Private
     
     private function get capturersNum():String
     {
-        /*
-        var tanks:Number;
-        
-        if (m_minimalCapRate == 0)
-            tanks = 1;
-        else
-            tanks = m_capRate / m_minimalCapRate;
-        
-        tanks = Math.round(tanks);
-        Logger.add("invadersNum: " + tanks);
+        var tanks:Number = Math.round(m_capSpeed.getSpeed() / m_capSpeed.getOneTankSpeed());
         return tanks.toString();
-        */
-        
-        return "X";
     }
     
     /**
@@ -95,7 +93,7 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
      */
     private function get capTimeLeft():String
     {
-        var secLeft:Number = capSecondsLeft;
+        var secLeft:Number = Math.round(capSecondsLeft);
         if (secLeft == 0)
             return "";
         var m:Number=Math.floor((secLeft%3600)/60);

@@ -1,5 +1,4 @@
 import wot.utils.Logger;
-import wot.TeamBasesPanel.TimeRound;
 
 /**
  * Capture cycle at capCycle class consists of two capture point updates
@@ -40,14 +39,14 @@ class wot.TeamBasesPanel.CapCycle
 {
     private var m_prevSpeed:Number; // speed at previous update
     private var m_averageSpeed:Number; // average speed for two updates
-    private var log:Boolean;
+    private var m_log:Boolean;
     
     public function CapCycle(log:Boolean)
     {
-        this.log = log;
+        this.m_log = log;
     }
     
-    public function update(curSpeed:Number)
+    public function update(curSpeed:Number):Void
     {
         //if (log) Logger.add("  CapCycle: curSpeed = " + curSpeed);
         if (m_prevSpeed == undefined)
@@ -57,7 +56,7 @@ class wot.TeamBasesPanel.CapCycle
             * Lets do not try to calculate at that moment.
             * Just save a step.
             */
-            if (log) Logger.add("  CapCycle: m_prevSpeed == undefined; m_prevSpeed = curSpeed");
+            if (m_log) Logger.add("  CapCycle: m_prevSpeed == undefined; m_prevSpeed = curSpeed");
             m_prevSpeed = curSpeed;
         }
         else
@@ -74,7 +73,7 @@ class wot.TeamBasesPanel.CapCycle
         return m_averageSpeed;
     }
     
-    public function clear()
+    public function clear():Void
     {
         m_prevSpeed = undefined
     }
