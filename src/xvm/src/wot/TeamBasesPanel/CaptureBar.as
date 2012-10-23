@@ -12,7 +12,6 @@
  * ) Number of capturibg tanks
  * 
  * TODO:
- * ) Clear timer ###
  * ) Separate lines for each capturer.
  */
 
