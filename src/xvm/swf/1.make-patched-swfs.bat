@@ -1,6 +1,6 @@
 @echo off
 
-set patch_swfs=battleloading.swf PlayersPanel.swf StatisticForm.swf VehicleMarkersManager.swf
+set patch_swfs=battleloading.swf PlayersPanel.swf StatisticForm.swf TeamBasesPanel.swf VehicleMarkersManager.swf
 set copy_swfs=battle.swf
 
 rem Copy SWFs without patching
