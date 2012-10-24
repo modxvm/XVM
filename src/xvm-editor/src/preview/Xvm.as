@@ -180,7 +180,7 @@ public class Xvm extends XvmBase
 
 		while (textFields.length > 0)
 			proxy.removeChild(textFields.pop());
-		
+
 		textFields = [];
 		var len:Number = state_cfg.textFields.length;
 		for (var i:Number = 0; i < len; ++i)
@@ -189,10 +189,11 @@ public class Xvm extends XvmBase
 			if (cfg.visible)
 			{
 				var tf:TextField = createTextField(cfg);
-				tf.htmlText = "<p class='xvm_markerText'>" +
-					formatDynamicText(formatStaticText(cfg.format), m_curHealth) + "</p>";
+                var color:String = "#" + 
+                    Utils.padLeft(formatDynamicColor(formatStaticColorText(cfg.color), m_curHealth).toString(16), 6, '0');
+				tf.htmlText = "<p class='xvm_markerText'><font color='" + color + "'>" +
+					formatDynamicText(formatStaticText(cfg.format), m_curHealth) + "</font></p>";
 				tf.y += 1; // TODO: why?
-				tf.textColor = formatDynamicColor(formatStaticColorText(cfg.color), m_curHealth);
 				tf.alpha = formatDynamicAlpha(cfg.alpha, m_curHealth) / 100;
 				proxy.addChild(tf);
 				tf.visible = true;

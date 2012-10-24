@@ -2,11 +2,10 @@
 {
     import flash.display.MovieClip;
     import flash.events.Event;
-    
+
     import mx.core.UIComponent;
-    
+
     import preview.*;
-    
     import utils.*;
 
     public class Marker extends UIComponent
@@ -24,13 +23,6 @@
         public var _zoom:Number = 1;
         private var _extmode:Boolean = false;
         private var _actionMarkerVisible:Boolean = true;
-
-        /*
-
-        private var _cfg: Object;
-
-        private var textFields: Array = [];
-*/
 
         public function Marker()
         {
@@ -147,7 +139,7 @@
             cfg = _extmode ? cfg.extended : cfg.normal;
 
             var c:Object;
-            
+
             // actionMarker
             c = cfg.actionMarker;
             _actionMarkerVisible = c.visible;
@@ -205,176 +197,6 @@
         {
             this._zoom = value;
         }
-
-        /*
-        // Damage Visualization
-        private function XVMShowDamage(curHealth:Number, delta:Number):void
-        {
-            var cfg:Object = Config.s_config.markers;
-            cfg = xvm.m_entityType == "ally" ? cfg.ally : cfg.enemy;
-            cfg = curHealth > 0 ? cfg.alive : cfg.dead;
-            cfg = _extmode ? cfg.extended : cfg.normal;
-
-            cfg = cfg.damageText;
-
-            if (!cfg.visible)
-                return;
-
-            var msg:String = (curHealth < 0) ? cfg.blowupMessage : cfg.damageMessage;
-            var text:String = XVMFormatDynamicText(XVMFormatStaticText(msg), curHealth, delta);
-
-            var damageField: TextField = new TextField();
-            damageHolder.addChild(damageField);
-
-            damageField.width = 140;
-            damageField.height = 20;
-
-            damageField.text = " " + text + " ";
-            damageField.antiAliasType = AntiAliasType.ADVANCED;
-            damageField.border = false;
-            damageField.embedFonts = cfg.font.name == "$FieldFont";
-            damageField.defaultTextFormat = XVMCreateNewTextFormat(cfg.font);
-            damageField.text = " " + text + " ";
-            damageField.textColor = !isNaN(parseInt(cfg.color)) ? int(cfg.color)
-                : Config.s_config.colors.system[xvm.m_entityType + "_alive_" + (s_isColorBlindMode ? "blind" : "normal")];
-            damageField.x = -(damageField.width / 2.0);
-
-            if (cfg.shadow)
-            {
-                var sh_color:Number = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.shadow.color), m_curHealth);
-                var sh_alpha:Number = XVMFormatDynamicAlpha(cfg.shadow.alpha, m_curHealth);
-                damageField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow.distance,
-                    cfg.shadow.angle, sh_color, sh_alpha, cfg.shadow.size, cfg.shadow.strength) ];
-            }
-
-            var st:Number = (new Date()).time;
-            var timer:Timer = new Timer(10);
-            var timerFunc:Function = function():void {
-                var d:Number = (new Date()).time - st;
-                if (d > cfg.speed * 1000)
-                {
-                    damageHolder.removeChild(damageField);
-                    timer.stop();
-                    timer.removeEventListener(TimerEvent.TIMER, timerFunc);
-                    timer = null;
-                    timerFunc = null;
-                    return;
-                }
-                damageField.y = cfg.maxRange * (cfg.speed * 1000 - d) / (cfg.speed * 1000) - cfg.maxRange;
-            };
-            timer.addEventListener(TimerEvent.TIMER, timerFunc);
-            timer.start();
-        }
-
-        // Health Visualization
-        private var dmgTimer:Timer = new Timer(10);
-        private var dmgTimerFunc:Function = null;
-        private function XVMSetupNewHealth(curHealth:Number):void
-        {
-            dmgTimer.stop();
-            if (dmgTimerFunc != null)
-            {
-                dmgTimer.removeEventListener(TimerEvent.TIMER, dmgTimerFunc);
-                dmgTimerFunc = null;
-            }
-
-            XVMUpdateHealthBar(curHealth); // colorizing health bar after taking damage
-
-            var delta: Number = curHealth - m_curHealth;
-            if (delta >= 0)
-            {
-                m_curHealth = curHealth;
-                xvmHBDamage.graphics.clear();
-                return;
-            }
-
-            XVMShowDamage(curHealth, -delta);
-
-            m_curHealth = curHealth;
-
-            //Flow bar animation
-            var cfg:Object = _cfg.healthBar;
-            if (cfg.damage.fade > 0)
-            {
-                var fade:Number = cfg.damage.fade * 1000;
-                var color:Number = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.damage.color), curHealth);
-                var alpha:Number = XVMFormatDynamicAlpha(cfg.damage.alpha, curHealth) / 100;
-                var st:Number = (new Date()).time;
-                var drawing: Boolean = false;
-                dmgTimerFunc = function():void
-                {
-                    if (drawing)
-                        return;
-                    drawing = true;
-                    var d:Number = (new Date()).time - st;
-                    var w:Number = cfg.width * (-delta / m_maxHealth) * (fade - d) / fade;
-                    xvmHBDamage.graphics.clear();
-                    if (w <= 0)
-                    {
-                        dmgTimer.stop();
-                        dmgTimer.removeEventListener(TimerEvent.TIMER, dmgTimerFunc);
-                        dmgTimerFunc = null;
-                        return;
-                    }
-                    xvmHBDamage.graphics.beginFill(color, alpha);
-                    xvmHBDamage.graphics.drawRect(
-                        cfg.border.size + cfg.width * (1.0 * curHealth / m_maxHealth) - 1, cfg.border.size,
-                        w, cfg.height);
-                    xvmHBDamage.graphics.endFill();
-                    drawing = false;
-                };
-                dmgTimer.addEventListener(TimerEvent.TIMER, dmgTimerFunc);
-                dmgTimer.start();
-            }
-        }
-
-        private function XVMCreateNewTextFormat(config_font: Object): TextFormat
-        {
-            var name:String = config_font.name || "$FieldFont";
-            if (name == "$TextFont")
-                name = "Tahoma";
-            return new TextFormat(
-                name,
-                config_font.size || 13,
-                0x000000,
-                config_font.bold,
-                config_font.italic,
-                false, null, null,
-                config_font.align || "center",
-                0, 0, 0, 0);
-        }
-
-        private function XVMCreateTextField(cfg:Object):TextField
-        {
-            var textField: TextField = new TextField();
-            textField.width = 140;
-            textField.height = 30;
-            //textField.height = cfg.font.size + 4;
-
-            //textField.gridFitType = GridFitType.SUBPIXEL;
-            //textField.border = true;
-            //textField.borderColor = 0xFFFFFF;
-            textField.defaultTextFormat = XVMCreateNewTextFormat(cfg.font);
-
-            if (cfg.shadow)
-            {
-                var sh_color:Number = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.shadow.color), m_curHealth);
-                var sh_alpha:Number = XVMFormatDynamicAlpha(cfg.shadow.alpha, m_curHealth);
-                textField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow.distance,
-                    cfg.shadow.angle, sh_color, sh_alpha, cfg.shadow.size, cfg.shadow.strength) ];
-            }
-
-            textField.textColor = XVMFormatDynamicColor(XVMFormatStaticColorText(cfg.color), m_curHealth);
-            textField.alpha = XVMFormatDynamicAlpha(cfg.alpha, m_curHealth) / 100;
-            textField.x = cfg.x - (textField.width / 2.0);
-            textField.y = cfg.y - (textField.height / 2.0);
-            if (cfg.font.name != "$FieldFont")
-                textField.y--; // -1 to be equal with ScaleForm renderer
-
-            textField.visible = cfg.visible;
-
-            return textField;
-        }*/
 
     }
 }

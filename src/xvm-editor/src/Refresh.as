@@ -511,7 +511,7 @@ private function RefreshVehicleNamesPage():void
     debug("RefreshVehicleNamesPage()");
     try
     {
-        if (pgVehicleNames.updateCompletePendingFlag)
+//        if (pgVehicleNames.updateCompletePendingFlag)
             p_vehicleNames.RefreshSource();
     }
     catch (ex:Error)

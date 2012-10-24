@@ -142,8 +142,9 @@ public class XvmBase
         {
             if (vehicleTypeComponent != null)
             {
-                format = formatArr.join(GraphicsUtil.GetVTypeColorValue(m_defaultIconSource,
-                    Utils.vehicleClassToVehicleType(vehicleTypeComponent.getVehicleClass())));
+                format = formatArr.join(GraphicsUtil.GetVTypeColorValue(
+                    Utils.vehicleClassToVehicleType(vehicleTypeComponent.getVehicleClass()),
+                    m_defaultIconSource));
             }
         }
 
@@ -193,8 +194,9 @@ public class XvmBase
         {
             if (vehicleTypeComponent != null)
             {
-                format = formatArr.join(GraphicsUtil.GetVTypeColorValue(m_defaultIconSource,
-                    Utils.vehicleClassToVehicleType(vehicleTypeComponent.getVehicleClass()), "0x"));
+                format = formatArr.join(GraphicsUtil.GetVTypeColorValue(
+                    Utils.vehicleClassToVehicleType(vehicleTypeComponent.getVehicleClass()),
+                    m_defaultIconSource, "0x"));
             }
         }
         return !isNaN(parseInt(format)) ? Number(format) : systemColor;
