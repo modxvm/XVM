@@ -73,6 +73,6 @@ class wot.utils.Defines
   public static var DIRECTION_UP = 2;
 
   // Text insert order
-  public static var INSERTORDER_END = 1;
-  public static var INSERTORDER_BEGIN = 2;
+  public static var INSERTORDER_BEGIN = DIRECTION_DOWN;
+  public static var INSERTORDER_END = DIRECTION_UP;
 }

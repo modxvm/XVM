@@ -108,9 +108,9 @@ class wot.VehicleMarkersManager.HitLog
         var hist:String = formatText(formatHistory, playerName);
         hits[hits.length - 1].hist = hist;
 
-        var skip:Array = [ playerName ];
+        var skip:Array = [ ];
         var txt:String = "";
-        for (var i:Number = 0, n:Number = hits.length - 1; i < lines - 1, n >= 0; --n)
+        for (var i:Number = 0, n:Number = hits.length - 1; i < lines, n >= 0; --n)
         {
             var data = hits[n];
             if (groupHitsByPlayer)
@@ -121,7 +121,7 @@ class wot.VehicleMarkersManager.HitLog
             }
 
             var br = (txt == "") ? "" : "<br/>";
-            txt = (direction == Defines.DIRECTION_DOWN) ? txt + br + data.hist : data.hist + br + txt;
+            txt = (direction == insertOrder) ? txt + br + data.hist : data.hist + br + txt;
             i++;
         }
 
