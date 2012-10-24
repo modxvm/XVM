@@ -5,10 +5,10 @@
 class wot.utils.Defines
 {
   // Global versions
-  public static var XVM_VERSION: String = "3.0.4.pre1";
+  public static var XVM_VERSION: String = "3.0.4.pre2";
   public static var WOT_VERSION: String = "0.8.0";
   public static var CONFIG_VERSION: String = "1.5.0";
-  public static var EDITOR_VERSION: String = "0.17";
+  public static var EDITOR_VERSION: String = "0.19";
 
   public static var DEFAULT_CONFIG_NAME: String = "XVM.xvmconf";
 
@@ -69,6 +69,10 @@ class wot.utils.Defines
   public static var FROM_PLAYER: Number = 4;
 
   // Text direction
-  public static var DIRECTION_UP = 1;
-  public static var DIRECTION_DOWN = 2;
+  public static var DIRECTION_DOWN = 1;
+  public static var DIRECTION_UP = 2;
+
+  // Text insert order
+  public static var INSERTORDER_END = 1;
+  public static var INSERTORDER_BEGIN = 2;
 }

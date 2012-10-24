@@ -1,4 +1,10 @@
-﻿XVM-3.0.4.pre1:
+﻿XVM-3.0.4.pre2:
+  * HitLog: "format" option was renamed to "formatHeader"
+  * HitLog: including last hit to "formatHistory"
+  * HitLog: added option "insertOrder" with values "begin"/"end" for adding
+    new value to begin or end of hit log
+
+XVM-3.0.4.pre1:
   * added possibility to group hits by players in hit-log
   * added macros {{n-player}} and {{dmg-player}} - count of hits and sum of
     damage by players

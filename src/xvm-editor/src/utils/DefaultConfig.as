@@ -154,14 +154,15 @@ public class DefaultConfig
         y: 7,
         w: 200,
         h: 100,
-        lines: 1,
+        lines: 0,
         direction: "down",
+        insertOrder: "end",
+        groupHitsByPlayer: false,
         // Substitution for {{dead}} macro when player is dead
         deadMarker: "<font face='Wingdings'>N</font>",
         blowupMarker: "<font face='Wingdings'>M</font>",
-        format: "<font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}</font> {{dmg-total}} <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font>",
-        formatHistory: "<textformat tabstops='[55,90,130,190]'><font color='#CCCCCC'>Hit:</font> <font size='13'>#{{n}}:</font>\t{{dmg-total}}\t| <font color='{{c:dmg-kind}}'>{{dmg}}</font>\t| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font>\t| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>",
-        groupHitsByPlayer: false
+        formatHeader: "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> <font size='1{{nick}}'><b>{{dmg-total}}</b>  <font color='#CCCCCC'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font></font>",
+        formatHistory: "<textformat leading='-4' tabstops='[20,50,90,150]'><font size='12'>\u00D7{{n-player}}:</font><tab>{{dmg-player}}<tab>| <font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab>| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>"
       },
       markers: {
         ally: {

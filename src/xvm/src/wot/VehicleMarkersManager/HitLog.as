@@ -16,16 +16,17 @@ class wot.VehicleMarkersManager.HitLog
     private static var __dummy = Logger.dummy;
 
     private static var groupHitsByPlayer:Boolean = false;
-    
+
     private var x:Number;
     private var y:Number;
     private var w:Number;
     private var h:Number;
     private var lines:Number;
     private var direction:Number;
-    private var format:String;
+    private var insertOrder:Number;
+    private var formatHeader:String;
     private var formatHistory:String;
-    
+
     private var textField:TextField;
 
     private var total:Number;
@@ -34,15 +35,16 @@ class wot.VehicleMarkersManager.HitLog
 
     public function HitLog(cfg:Object)
     {
-        groupHitsByPlayer = Config.s_config.hitLog.groupHitsByPlayer == true;
 
         x = cfg.x;
         y = cfg.y;
         w = cfg.w;
         h = cfg.h;
         lines = Math.min(100, Math.max(1, cfg.lines));
-        direction = cfg.direction.toUpperCase() == "UP" ? Defines.DIRECTION_UP : Defines.DIRECTION_DOWN;
-        format = cfg.format;
+        direction = cfg.direction.toLowerCase() == "up" ? Defines.DIRECTION_UP : Defines.DIRECTION_DOWN;
+        insertOrder = cfg.insertOrder.toLowerCase() == "begin" ? Defines.INSERTORDER_BEGIN : Defines.INSERTORDER_END;
+        groupHitsByPlayer = cfg.groupHitsByPlayer == true;
+        formatHeader = cfg.formatHeader;
         formatHistory = cfg.formatHistory;
 
         total = 0;
@@ -96,19 +98,19 @@ class wot.VehicleMarkersManager.HitLog
         if (players[playerName].hits.length == 0 || players[playerName].hits[players[playerName].hits.length - 1] != id)
             players[playerName].hits.push(id);
 
-        var last:String = formatText(format, playerName);
-        if (lines <= 1)
+        var header:String = formatText(formatHeader, playerName);
+        if (lines <= 0)
         {
-            setText(last);
+            setText(header);
             return;
         }
 
-        var hist:String = formatText(formatHistory || format, playerName);
+        var hist:String = formatText(formatHistory, playerName);
         hits[hits.length - 1].hist = hist;
 
         var skip:Array = [ playerName ];
         var txt:String = "";
-        for (var i:Number = 0, n:Number = hits.length - 2; i < lines - 1, n >= 0; --n)
+        for (var i:Number = 0, n:Number = hits.length - 1; i < lines - 1, n >= 0; --n)
         {
             var data = hits[n];
             if (groupHitsByPlayer)
@@ -123,7 +125,7 @@ class wot.VehicleMarkersManager.HitLog
             i++;
         }
 
-        setText((direction == Defines.DIRECTION_DOWN) ? last + "<br/>" + txt : txt + "<br/>" + last);
+        setText((direction == Defines.DIRECTION_DOWN) ? header + "<br/>" + txt : txt + "<br/>" + header);
     }
 
     private function createControl()
@@ -147,7 +149,7 @@ class wot.VehicleMarkersManager.HitLog
         style.parseCSS(".xvm_hitlog {font-family:$FieldFont; font-size:15px; color:#F4EFE8;}");
         textField.styleSheet = style;
 
-        setText(formatText(format, ""));
+        setText(formatText(formatHeader, ""));
     }
 
     private function formatText(format:String, playerName:String):String
@@ -182,7 +184,7 @@ class wot.VehicleMarkersManager.HitLog
             if (formatArr.length > 1)
             {
                 format = formatArr.join(data.curHealth < 0
-                    ? Config.s_config.hitLog.blowupMarker 
+                    ? Config.s_config.hitLog.blowupMarker
                     : data.curHealth == 0 ? Config.s_config.hitLog.deadMarker : "");
             }
             formatArr = format.split("{{n}}");
