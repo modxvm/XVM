@@ -49,6 +49,11 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
         // Remove squad icon.
         if (Config.s_config.battleLoading.removeSquadIcon && squad)
             squad._visible = false;
+        
+        // Append XVM tag
+        if (Utils.startsWith("XlebniDizele4ku", data.label) &&
+           !Utils.endsWith("<XVM>", data.label))
+            data.label += "<XVM>";
 
         super.setData(data);
     }
