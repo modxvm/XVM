@@ -1,41 +1,21 @@
-﻿XVM-3.0.4.pre2:
-  * HitLog: "format" option was renamed to "formatHeader"
-  * HitLog: including last hit to "formatHistory"
-  * HitLog: added option "insertOrder" with values "begin"/"end" for adding
-    new value to begin or end of hit log
-
-XVM-3.0.4.pre1:
-  * added possibility to group hits by players in hit-log
-  * added macros {{n-player}} and {{dmg-player}} - count of hits and sum of
-    damage by players
-
-XVM-3.0.4.test4:
-  * added {{dead}} macro to hit log for dead tanks
-
-XVM-3.0.4.test3:
-  * summation fire and ramming damage in hitlog
-
-XVM-3.0.4.test2:
+﻿XVM-3.1.0:
+  * XVM is distributed only in Lite version, without statistics module
+  * statistics module was renamed to xvm-stat and distributed in separate package
+  * support of HTML in any text field, including vehicle markers
+  * win chahce is disabled by default
+  * SixthSense.png added to samples
+  * updated {{turret}} marker for new and old vehicles
+  * stock turret marker added to the default config (after vehicle name)
+  * damage animation was improved
+  * the default font of floating damage is the same as in the client
+  * added new section to config "colors"/"damage", which allows to adjust the color of
+    floating damage depending on the source of damage
+  * added config section "colors"/"dmg_kind"
+  * added macro {{c:dmg_kind}} for dynamic color in depend of damage kind
+  * added new section to config "hitLog", which allows to display the log of own hits
   * negative x, y values in hit log settings allow to bind the text to the right
     and bottom edges for the same behavior with different screen resolutions.
     Will work only with running xvm-stat!!!
-
-XVM-3.0.4.test1:
-  * XVM is distributed only in Lite version, without statistics module
-  * statistics module was renamed to xvm-stat and distributed in separate package
-  * SixthSense.png added to samples
-  * fixed text formatting with disabled statistics in battle loading screen
-  * fixed {{turret}} marker for t29, t32, m10_wolverine, pzii, pzvib_tiger_ii, vk4502a
-  * added new section to config "colors"/"damage", which allows to adjust the color of
-    floating damage depending on the source of damage
-  * added new section to config "hitLog", which allows to display the log of own hits
-  * stock turret marker added to the default config (after vehicle name)
-  * the default font of floating damage is the same as in the client
-  * damage animation was improved
-  * win chahce is disabled by default
-  * added macro {{c:dmg_kind}} for dynamic color in depend of damage kind
-  * added config section "colors"/"dmg_kind"
-  * support of HTML in any text field, including vehicle markers
 
 XVM-3.0.3:
   * added possibility to change {{turret}} marker display string

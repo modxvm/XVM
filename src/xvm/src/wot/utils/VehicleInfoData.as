@@ -19,7 +19,6 @@ class wot.utils.VehicleInfoData
         usa_A74_T1_E6:                  { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
         usa_T23:                        { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
         ussr_62A:                       { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
-        ussr_A43:                       { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
         ussr_GAZ75:                     { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
         ussr_Observer:                  { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
         ussr_R80_KV1:                   { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
@@ -27,6 +26,33 @@ class wot.utils.VehicleInfoData
         ussr_SU101:                     { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
         ussr_T_24:                      { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
         ussr_T_70:                      { level: 0,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
+
+france-FCM_50t.png
+uk-GB01_Medium_Mark_I.png
+uk-GB03_Cruiser_Mk_I.png
+uk-GB04_Valentine.png
+uk-GB05_Vickers_Medium_Mk_II.png
+uk-GB06_Vickers_Medium_Mk_III.png
+uk-GB07_Matilda.png
+uk-GB08_Churchill_I.png
+uk-GB09_Churchill_VII.png
+uk-GB10_Black_Prince.png
+uk-GB11_Caernarvon.png
+uk-GB12_Conqueror.png
+uk-GB13_FV215b.png
+uk-GB20_Crusader.png
+uk-GB21_Cromwell.png
+uk-GB22_Comet.png
+uk-GB23_Centurion.png
+uk-GB24_Centurion_Mk3.png
+uk-GB58_Cruiser_Mk_III.png
+uk-GB59_Cruiser_Mk_IV.png
+uk-GB60_Covenanter.png
+uk-GB63_TOG_II.png
+uk-GB69_Cruiser_Mk_II.png
+uk-GB70_FV4202_105.png
+uk-GB71_AT_15A.png
+usa-T1_E6.png
 */
 
         // level 1
