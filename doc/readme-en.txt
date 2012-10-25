@@ -109,11 +109,11 @@
       + statistics macros (see below)
 
     In Hits Log:
-      {{n}}           - count of hits
-      {{n-player}}    - count of hits by players
+      {{n}}           - total number of hits
+      {{n-player}}    - number of hits for each player
       {{dmg}}         - last hit value
       {{dmg-total}}   - total sum of hits
-      {{dmg-player}}  - sum of hits by players
+      {{dmg-player}}  - sum of hits for each player
       {{dead}}        - tank's death marker
       {{nick}}        - player nickname
       {{vehicle}}     - vehicle name
