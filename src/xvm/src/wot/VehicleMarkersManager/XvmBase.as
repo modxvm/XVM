@@ -106,7 +106,18 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
             formatArr = format.split("{{turret}}");
             if (formatArr.length > 1)
                 format = formatArr.join(turretStatusComponent.getMarker());
+            formatArr = format.split("{{c:vtype}}");
+            if (formatArr.length > 1)
+            {
+                if (vehicleTypeComponent != null)
+                {
+                    format = formatArr.join(GraphicsUtil.GetVTypeColorValue(m_defaultIconSource,
+                        Utils.vehicleClassToVehicleType(vehicleTypeComponent.getVehicleClass())));
+                }
+            }
+
             format = StatFormat.FormatText({ label: m_playerFullName }, format);
+            
             format = Utils.trim(format);
         }
         catch (e)
@@ -178,15 +189,6 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
             formatArr = format.split("{{c:dmg_kind}}");
             if (formatArr.length > 1)
                 format = formatArr.join(delta ? GraphicsUtil.GetDmgKindValue(damageType) : "")
-            formatArr = format.split("{{c:vtype}}");
-            if (formatArr.length > 1)
-            {
-                if (vehicleTypeComponent != null)
-                {
-                    format = formatArr.join(GraphicsUtil.GetVTypeColorValue(m_defaultIconSource,
-                        Utils.vehicleClassToVehicleType(vehicleTypeComponent.getVehicleClass())));
-                }
-            }
 
             format = Utils.trim(format);
         }
@@ -204,6 +206,16 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
         {
             if (!format || isFinite(format))
                 return format;
+
+            var formatArr = format.split("{{c:vtype}}");
+            if (formatArr.length > 1)
+            {
+                if (vehicleTypeComponent != null)
+                {
+                    format = formatArr.join(GraphicsUtil.GetVTypeColorValue(m_defaultIconSource,
+                        Utils.vehicleClassToVehicleType(vehicleTypeComponent.getVehicleClass()), "0x"));
+                }
+            }
 
             format = StatFormat.FormatText( { label: m_playerFullName }, format).split("#").join("0x");
         }
@@ -242,15 +254,6 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
             formatArr = format.split("{{c:dmg_kind}}");
             if (formatArr.length > 1)
                 format = formatArr.join(damageType ? GraphicsUtil.GetDmgKindValue(damageType, "0x") : "");
-            formatArr = format.split("{{c:vtype}}");
-            if (formatArr.length > 1)
-            {
-                if (vehicleTypeComponent != null)
-                {
-                    format = formatArr.join(GraphicsUtil.GetVTypeColorValue(m_defaultIconSource,
-                        Utils.vehicleClassToVehicleType(vehicleTypeComponent.getVehicleClass()), "0x"));
-                }
-            }
             return isFinite(format) ? Number(format) : systemColor;
         }
         catch (e)
@@ -348,7 +351,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
             textField._y = cfg.y - (/*textField._height*/ 31 / 2.0); // FIXIT: 31 is used for compatibility
             textField._visible = cfg.visible;
 
-            return { field: textField, format: formatStaticText(cfg.format), alpha: cfg.alpha };
+            return { field: textField, format: formatStaticText(cfg.format), color: formatStaticColorText(cfg.color), alpha: cfg.alpha };
         }
         catch (e)
         {
