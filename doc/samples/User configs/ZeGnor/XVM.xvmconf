@@ -1,13 +1,13 @@
 ﻿{
   "configVersion": "1.5.0",
-  "editorVersion": "0.2",
+  "editorVersion": "0.15",
   "definition": {
     "author": "ZeGnor",
-    "description": "Релиз версия 0.7.5",
+    "description": "Релиз версия 0.8.0",
     "url": "http://www.koreanrandom.com/forum/topic/1384-xvm-configurations/",
-    "date": "28.08.2012",
-    "gameVersion": "0.7.5",
-    "modMinVersion": "2.5.2"
+    "date": "02.10.2012",
+    "gameVersion": "0.8.0",
+    "modMinVersion": "3.0.0"
   },
   "battle": {
     "mirroredVehicleIcons": false,
@@ -1288,18 +1288,30 @@
       "enemy_blowedup_normal": "0x5A0401",
       "enemy_blowedup_blind": "0x3B365F"
     },
+    "vtype": {
+      "LT":  "0xA2FF9A",                           // Цвет для легких танков
+      "MT":  "0xFFF198",                           // Цвет для средних танков
+      "HT":  "0xFFACAC",                           // Цвет для тяжелых танков
+      "SPG": "0xEFAEFF",                           // Цвет для арты
+      "TD":  "0xA0CFFF",                           // Цвет для ПТ
+      "premium": "0xFFCC66",                       // Цвет для премиумной техники
+      "usePremiumColor": false                     // Включить/выключить использование премиумного цвета
+    },
+    // Динамический цвет по оставшемуся здоровью. Значения от меньшего к большему.
     "hp": [
-      { "value": 200,  "color": "0xDD0000" },
-      { "value": 400,  "color": "0xDD3333" },
-      { "value": 1000, "color": "0xFFCC33" },
-      { "value": 9999, "color": "0xFFFFFF" }
+      { "value": 200,  "color": "0xDD0000" },      // Цвет для значений меньше 200
+      { "value": 400,  "color": "0xDD3333" },      // Цвет для значений меньше 400
+      { "value": 1000, "color": "0xFFCC33" },      // Цвет для значений меньше 1000
+      { "value": 9999, "color": "0xFFFFFF" }       // Цвет для остальных значений
     ],
+    // Динамический цвет по проценту оставшегося здоровья. Значения от меньшего к большему.
     "hp_ratio": [
-      { "value": 10,  "color": "0xDD0000" },
-      { "value": 25,  "color": "0xDD3333" },
-      { "value": 50,  "color": "0xFFCC33" },
-      { "value": 101, "color": "0xFFFFFF" }
+      { "value": 10,  "color": "0xDD0000" },      // Цвет для значений меньше 10 проц
+      { "value": 25,  "color": "0xDD3333" },      // Цвет для значений меньше 25 проц
+      { "value": 50,  "color": "0xFFCC33" },      // Цвет для значений меньше 50 проц
+      { "value": 101, "color": "0xFFFFFF" }       // Цвет для 100 проц
     ],
+    // Динамический цвет по эффективности (только в xvm-full). Значения от меньшего к большему.
     "eff": [
       { "value": 600,  "color": "0xDD0000" },
       { "value": 900,  "color": "0xDD3333" },
@@ -1308,6 +1320,7 @@
       { "value": 1800, "color": "0x33FF33" },
       { "value": 9999, "color": "0xCC66CC" }
     ],
+    // Динамический цвет по проценту побед (только в xvm-full). Значения от меньшего к большему.
     "rating": [
       { "value": 42,  "color": "0xDD0000" },
       { "value": 46,  "color": "0xDD3333" },
@@ -1317,6 +1330,7 @@
       { "value": 57,  "color": "0x33FF33" },
       { "value": 101, "color": "0xCC66CC" }
     ],
+    // Динамический цвет по количеству кило-боев (только в xvm-full). Значения от меньшего к большему.
     "kb": [
       { "value": 1,   "color": "0xDD0000" },
       { "value": 3,   "color": "0xDD3333" },
@@ -1325,13 +1339,14 @@
       { "value": 12,  "color": "0x33FF33" },
       { "value": 999, "color": "0xCC66CC" }
     ],
+    // Динамический цвет по количеству боев по текущему танку (только в xvm-full). Значения от меньшего к большему.
     "t_battles": [
-      { "value": 100,  "color": "0xC81103" },
-      { "value": 200,  "color": "0xFE7903" },
-      { "value": 300,  "color": "0xFCFA05" },
-      { "value": 500,  "color": "0x4FFD02" },
-      { "value": 800,  "color": "0x029615" },
-      { "value": 9999, "color": "0xCA02B1" }
+      { "value": 100,  "color": "0xDD0000" },
+      { "value": 200,  "color": "0xDD3333" },
+      { "value": 300,  "color": "0xFFCC33" },
+      { "value": 500,  "color": "0x99FF33" },
+      { "value": 800,  "color": "0x33FF33" },
+      { "value": 9999, "color": "0xCC66CC" }
     ]
   },
   "alpha": {
@@ -1373,7 +1388,6 @@
     "playersPanel":  "../../../contour",
     "vehicleMarker": "../../../contour"
   },
-  // Замена названий танков. Значение null - использовать стандартное название.
   "vehicleNames": {
     "china_Ch01_Type59": null,
     "china_Ch02_Type62": null,
@@ -1441,6 +1455,7 @@
     "germany_Ltraktor": null,
     "germany_Maus": null,
     "germany_Panther_II": null,
+    "germany_Panther_M10": null,
     "germany_PanzerJager_I": null,
     "germany_Pz35t": null,
     "germany_Pz38_NA": null,
@@ -1453,6 +1468,7 @@
     "germany_PzII_Luchs": null,
     "germany_PzIV": null,
     "germany_PzIV_Hydro": null,
+    "germany_PzIV_schmalturm": null,
     "germany_PzV": null,
     "germany_PzVI": null,
     "germany_PzVIB_Tiger_II": null,
@@ -1536,8 +1552,8 @@
     "ussr_BT_SV": null,
     "ussr_Churchill_LL": null,
     "ussr_GAZ_74b": null,
-    "ussr_IS": null,
     "ussr_IS8": null,
+    "ussr_IS": null,
     "ussr_ISU_152": null,
     "ussr_IS_3": null,
     "ussr_IS_4": null,
@@ -1555,21 +1571,26 @@
     "ussr_MS_1": null,
     "ussr_Matilda_II_LL": null,
     "ussr_Object252": null,
+    "ussr_Object263": null,
     "ussr_Object268": null,
     "ussr_Object_212": null,
     "ussr_Object_261": null,
     "ussr_Object_704": null,
     "ussr_ST_I": null,
+    "ussr_SU100M1": null,
+    "ussr_SU122_44": null,
+    "ussr_SU122_54": null,
     "ussr_SU_100": null,
+    "ussr_SU_101": null,
     "ussr_SU_14": null,
     "ussr_SU_152": null,
     "ussr_SU_18": null,
     "ussr_SU_26": null,
     "ussr_SU_5": null,
     "ussr_SU_76": null,
-    "ussr_SU_8": null,
     "ussr_SU_85": null,
     "ussr_SU_85I": null,
+    "ussr_SU_8": null,
     "ussr_S_51": null,
     "ussr_T150": null,
     "ussr_T62A": null,
@@ -1586,5 +1607,9 @@
     "ussr_T_54": null,
     "ussr_Tetrarch_LL": null,
     "ussr_Valentine_LL": null
+  },
+  "turretMarkers": {
+    "highVulnerability": "*",
+    "lowVulnerability": "-"
   }
 }

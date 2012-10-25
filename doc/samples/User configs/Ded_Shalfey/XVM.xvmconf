@@ -115,7 +115,7 @@
     "lines": 7,          // Количество строк. Устаревшие данные выталкиваются.
     "direction": "down", // Направление лога: up - строки добавляются сверху, down - снизу.
     // Формат последнего попадания (допускаются макроподстановки, см. readme-ru.txt)
-    "formatHeader":  "<font color='#96FF00'>Нанесенный урон:</font> <font size='16' face='Comic Sans MS' color='#E29344'>{{dmg-total}}</font> [последний: <font size='16' face='Comic Sans MS' color='{{c:dmg-kind}}'>{{dmg}}</font> (<font face='Comic Sans MS' size='12' color='#ff5a00'>{{vehicle}}</font>)]",
+    "format": "<font color='#96FF00'>Нанесенный урон:</font> <font size='16' face='Comic Sans MS' color='#E29344'>{{dmg-total}}</font> [последний: <font size='16' face='Comic Sans MS' color='{{c:dmg-kind}}'>{{dmg}}</font> (<font face='Comic Sans MS' size='12' color='#ff5a00'>{{vehicle}}</font>)]",
     // Формат предыдущих попаданий (допускаются макроподстановки, см. readme-ru.txt)
     "formatHistory": "<font face='Comic Sans MS' size='12'>{{n}}. По </font><font face='Comic Sans MS' size='12' color='#ff5a00'>{{vehicle}}</font> <font face='Comic Sans MS' size='12'>нанесено</font> <font face='Comic Sans MS' size='12' color='{{c:dmg-kind}}'>{{dmg}}</font> <font face='Comic Sans MS' size='12'>урона</font>"
   },
@@ -1094,7 +1094,7 @@
                 "strength": 1320
               },
               "format": "{{kb}} {{eff}} {{rating}}"
-            },
+            },			
 			// текстовое поле с рейтингом
             {
               "name": "Количество боев на данной технике",
