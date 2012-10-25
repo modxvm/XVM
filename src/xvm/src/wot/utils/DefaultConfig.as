@@ -600,7 +600,7 @@ class wot.utils.DefaultConfig
       speed: 2,
       maxRange: 40,
       damageMessage: "{{dmg}}",
-      blowupMessage: "Blow-up!"
+      blowupMessage: "Blown-up!"
     }
   }
 

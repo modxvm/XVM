@@ -148,7 +148,7 @@
         "speed": 2,
             "maxRange": 60,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "Blown-up!"
           },
           "contourIcon": {
             "visible": false,
@@ -339,7 +339,7 @@
             "speed": 2,
             "maxRange": 60,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "Blown-up!"
           },
           "contourIcon": {
             "visible": true,
@@ -533,7 +533,7 @@
             "speed": 2,
             "maxRange": 60,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "Blown-up!"
           },
           "contourIcon": {
             "visible": false,
@@ -656,7 +656,7 @@
             "speed": 2,
             "maxRange": 60,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "Blown-up!"
           },
           "contourIcon": {
             "visible": false,
@@ -782,7 +782,7 @@
             "speed": 2,
             "maxRange": 60,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "Blown-up!"
           },
           "contourIcon": {
             "visible": false,
@@ -973,7 +973,7 @@
             "speed": 2,
             "maxRange": 60,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "Blown-up!"
           },
           "contourIcon": {
             "visible": true,
@@ -1167,7 +1167,7 @@
             "speed": 2,
             "maxRange": 60,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "Blown-up!"
           },
           "contourIcon": {
             "visible": false,
@@ -1290,7 +1290,7 @@
             "speed": 2,
             "maxRange": 60,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "Blown-up!"
           },
           "contourIcon": {
             "visible": false,

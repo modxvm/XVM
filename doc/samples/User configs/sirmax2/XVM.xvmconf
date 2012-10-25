@@ -190,7 +190,7 @@
           "damageText": {
             "y": -55,
             "damageMessage": "({{dmg}})",
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "Blown-up!"
           },
           "actionMarker": {
             "y": -55
@@ -203,7 +203,7 @@
           "damageText": {
             "y": -55,
             "damageMessage": "({{dmg}})",
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "Blown-up!"
           },
           "actionMarker": {
             "y": -55
@@ -343,7 +343,7 @@
           "damageText": {
             "y": -65,
             "damageMessage": "<textformat leading='-5'>({{dmg}})<br>{{vehicle}}</textformat>",
-            "blowupMessage": "<textformat leading='-5'>Blow-up!<br>{{vehicle}}</textformat>"
+            "blowupMessage": "<textformat leading='-5'>Blown-up!<br>{{vehicle}}</textformat>"
           },
           "actionMarker": {
             "y": -55
@@ -356,7 +356,7 @@
           "damageText": {
             "y": -55,
             "damageMessage": "({{dmg}})",
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "Blown-up!"
           },
           "actionMarker": {
             "y": -55

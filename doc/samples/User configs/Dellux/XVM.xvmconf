@@ -228,7 +228,7 @@
             "visible": true,
             "x": 0,
             "alpha": 100,
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "Blown-up!"
           },
           "actionMarker": {
             "y": -67,
@@ -379,7 +379,7 @@
             "visible": true,
             "x": 0,
             "alpha": 100,
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "Blown-up!"
           },
           "actionMarker": {
             "y": -67,
@@ -484,7 +484,7 @@
             "visible": true,
             "x": 0,
             "alpha": 100,
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "Blown-up!"
           },
           "actionMarker": {
             "y": -67,
@@ -632,7 +632,7 @@
             "visible": true,
             "x": 0,
             "alpha": 100,
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "Blown-up!"
           },
           "actionMarker": {
             "y": -67,
@@ -787,7 +787,7 @@
             "visible": true,
             "x": 0,
             "alpha": 100,
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "Blown-up!"
           },
           "actionMarker": {
             "y": -67,
@@ -938,7 +938,7 @@
             "visible": true,
             "x": 0,
             "alpha": 100,
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "Blown-up!"
           },
           "actionMarker": {
             "y": -67,
@@ -1043,7 +1043,7 @@
             "visible": true,
             "x": 0,
             "alpha": 100,
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "Blown-up!"
           },
           "actionMarker": {
             "y": -67,
@@ -1191,7 +1191,7 @@
             "visible": true,
             "x": 0,
             "alpha": 100,
-            "blowupMessage": "Blow-up!"
+            "blowupMessage": "Blown-up!"
           },
           "actionMarker": {
             "y": -67,

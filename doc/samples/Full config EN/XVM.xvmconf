@@ -198,7 +198,7 @@
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
             "damageMessage": "{{dmg}}",       //   Text for normal damage (see description of macros in the readme-en.txt)
-            "blowupMessage": "Blow-up!"       //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
+            "blowupMessage": "Blown-up!"      //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
           "contourIcon": {                    // Vehicle icon
             "visible": false,                 //   false - Disable
@@ -348,7 +348,7 @@
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
             "damageMessage": "{{dmg}}",       //   Text for normal damage (see description of macros in the readme-en.txt)
-            "blowupMessage": "Blow-up!"       //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
+            "blowupMessage": "Blown-up!"      //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
           "contourIcon": {                    // Vehicle icon
             "visible": false,                 //   false - Disable
@@ -527,7 +527,7 @@
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
             "damageMessage": "{{dmg}}",       //   Text for normal damage (see description of macros in the readme-en.txt)
-            "blowupMessage": "Blow-up!"       //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
+            "blowupMessage": "Blown-up!"      //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
           "contourIcon": {                    // Vehicle icon
             "visible": false,                 //   false - Disable
@@ -628,7 +628,7 @@
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
             "damageMessage": "{{dmg}}",       //   Text for normal damage (see description of macros in the readme-en.txt)
-            "blowupMessage": "Blow-up!"       //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
+            "blowupMessage": "Blown-up!"      //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
           "contourIcon": {                    // Vehicle icon
             "visible": false,                 //   false - Disable
@@ -784,7 +784,7 @@
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
             "damageMessage": "{{dmg}}",       //   Text for normal damage (see description of macros in the readme-en.txt)
-            "blowupMessage": "Blow-up!"       //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
+            "blowupMessage": "Blown-up!"      //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
           "contourIcon": {                    // Vehicle icon
             "visible": false,                 //   false - Disable
@@ -934,7 +934,7 @@
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
             "damageMessage": "{{dmg}}",       //   Text for normal damage (see description of macros in the readme-en.txt)
-            "blowupMessage": "Blow-up!"       //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
+            "blowupMessage": "Blown-up!"      //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
           "contourIcon": {                    // Vehicle icon
             "visible": false,                 //   false - Disable
@@ -1113,7 +1113,7 @@
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
             "damageMessage": "{{dmg}}",       //   Text for normal damage (see description of macros in the readme-en.txt)
-            "blowupMessage": "Blow-up!"       //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
+            "blowupMessage": "Blown-up!"      //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
           "contourIcon": {                    // Vehicle icon
             "visible": false,                 //   false - Disable
@@ -1214,7 +1214,7 @@
             "speed": 2,                       //   Rising speed of displayed damage (float up speed)
             "maxRange": 40,                   //   Maximimum distance of target for which damage rises
             "damageMessage": "{{dmg}}",       //   Text for normal damage (see description of macros in the readme-en.txt)
-            "blowupMessage": "Blow-up!"       //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
+            "blowupMessage": "Blown-up!"      //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
           "contourIcon": {                    // Vehicle icon
             "visible": false,                 //   false - Disable
@@ -1307,26 +1307,26 @@
       "ally_alive_blind": "0x96FF00",              // Ally – alive – color blind mode
       "ally_dead_normal": "0x009900",              // Ally - dead
       "ally_dead_blind": "0x009900",               // Ally – dead – color blind mode
-      "ally_blowedup_normal": "0x007700",          // Ally – blow-up
-      "ally_blowedup_blind": "0x007700",           // Ally – blow-up – color blind mode
+      "ally_blowedup_normal": "0x007700",          // Ally – blown-up
+      "ally_blowedup_blind": "0x007700",           // Ally – blown-up – color blind mode
       "squadman_alive_normal": "0xFFB964",         // Platoon member - alive
       "squadman_alive_blind": "0xFFFF00",          // Platoon member – alive – color blind mode
       "squadman_dead_normal": "0xCA7000",          // Platoon member - dead
       "squadman_dead_blind": "0xAAAA00",           // Platoon member – dead – color blind mode
-      "squadman_blowedup_normal": "0xA45A00",      // Platoon member – blow-up
-      "squadman_blowedup_blind": "0x888800",       // Platoon member – blow-up – color blind mode
+      "squadman_blowedup_normal": "0xA45A00",      // Platoon member – blown-up
+      "squadman_blowedup_blind": "0x888800",       // Platoon member – blown-up – color blind mode
       "teamKiller_alive_normal": "0x00EAFF",       // Team killer - alive
       "teamKiller_alive_blind": "0x00EAFF",        // Team killer - alive – color blind mode
       "teamKiller_dead_normal": "0x097783",        // Team killer - dead
       "teamKiller_dead_blind": "0x097783",         // Team killer - dead – color blind mode
-      "teamKiller_blowedup_normal": "0x096A75",    // Team killer - blow-up
-      "teamKiller_blowedup_blind": "0x096A75",     // Team killer - blow-up – color blind mode
+      "teamKiller_blowedup_normal": "0x096A75",    // Team killer - blown-up
+      "teamKiller_blowedup_blind": "0x096A75",     // Team killer - blown-up – color blind mode
       "enemy_alive_normal": "0xF50800",            // Enemy – alive
       "enemy_alive_blind": "0x8379FE",             // Enemy – alive – color blind mode
       "enemy_dead_normal": "0x840500",             // Enemy - dead
       "enemy_dead_blind": "0x47407A",              // Enemy – dead – color blind mode
-      "enemy_blowedup_normal": "0x5A0401",         // Enemy – blow-up
-      "enemy_blowedup_blind": "0x3B365F"           // Enemy – blow-up – color blind mode
+      "enemy_blowedup_normal": "0x5A0401",         // Enemy – blown-up
+      "enemy_blowedup_blind": "0x3B365F"           // Enemy – blown-up – color blind mode
     },
     // Color for damage text animation
     //   src_dst_type
