@@ -207,6 +207,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
             subject["marker"] = marker;
             subject["levelIcon"] = levelIcon;
             subject["iconLoader"] = iconLoader;
+            iconLoader.addEventListener("complete", this, "_onCompleteLoad");
             subject["hp_mc"] = hp_mc;
             subject["actionMarker"] = actionMarker;
             subject["hitLbl"] = hitLbl;
@@ -265,6 +266,11 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
                 delete hp_mc;
             }
         }
+    }
+
+    private function _onCompleteLoad():Void
+    {
+        this.iconLoader.visible = this.subject["getPartVisibility"]("Icon");
     }
 
     /**
@@ -382,6 +388,38 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     public function configUI()    { call("configUI"); }
     public function validateNow() { call("validateNow"); }
 
+    // VehicleMarker wrappers for settings dialog with standard markers
+    public function invalidate()
+    {
+        if (Config.s_config.battle.useStandardMarkers == true && subject != null)
+            subject["invalidate"]();
+    }
+    private function setMarkerState(value)
+    {
+        if (Config.s_config.battle.useStandardMarkers == true && subject != null)
+            subject["setMarkerState"](value);
+    }
+    private function get exInfo()
+    {
+        if (Config.s_config.battle.useStandardMarkers == true && subject != null)
+            return subject["exInfo"];
+    }
+    private function set exInfo(value)
+    {
+        if (Config.s_config.battle.useStandardMarkers == true && subject != null)
+            subject["exInfo"] = value;
+    }
+    private function get markerSettings()
+    {
+        if (Config.s_config.battle.useStandardMarkers == true && subject != null)
+            return subject["markerSettings"];
+    }
+    private function set markerSettings(value)
+    {
+        if (Config.s_config.battle.useStandardMarkers == true && subject != null)
+            subject["markerSettings"] = value;
+    }
+    
     /**
      * TODO: not all is required, remove unused.
      */
@@ -432,11 +470,6 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         call("handleInput", [ details, pathToFocus ]);
     }
 
-    public function invalidate() {
-        trace("*** invalidate()");
-        call("invalidate");
-    }
-
     public function toString() {
         trace("*** toString()");
         return "[proxy]" + (subject != null ? subject.toString() : "[(null)]");
@@ -466,4 +499,88 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         trace("*** scrollWheel()");
         call("scrollWheel", [ delta ]);
     }
+
+    
+    
+    
+    
+    
+    function onSplashHidden(event)
+    {
+        trace("*** onSplashHidden()");
+    } // End of the function
+
+    function layoutParts(partsVisArray)
+    {
+        trace("*** layoutParts()");
+    } // End of the function
+
+    function get colorsManager()
+    {
+        trace("*** colorsManager()");
+    } // End of the function
+    function get colorSchemeName()
+    {
+        trace("*** colorSchemeName()");
+    } // End of the function
+    function get vehicleDestroyed()
+    {
+        trace("*** vehicleDestroyed()");
+    } // End of the function
+    function get isEnabledExInfo()
+    {
+        trace("*** isEnabledExInfo()");
+    } // End of the function
+    function isSpeaking()
+    {
+        trace("*** isSpeaking()");
+    } // End of the function
+    function getMarkerState()
+    {
+        trace("*** getMarkerState()");
+    } // End of the function
+    function getPartVisibility(part)
+    {
+        trace("*** getPartVisibility()");
+    } // End of the function
+    function getNameText(part)
+    {
+        trace("*** getNameText()");
+    } // End of the function
+    function getHelthText()
+    {
+        trace("*** getHelthText()");
+    } // End of the function
+    function getHealthPercents()
+    {
+        trace("*** getHealthPercents()");
+    } // End of the function
+    function setupIconLoader()
+    {
+        trace("*** setupIconLoader()");
+    } // End of the function
+    function populateData()
+    {
+        trace("*** populateData()");
+    } // End of the function
+    function setVehicleClass()
+    {
+        trace("*** setVehicleClass()");
+    } // End of the function
+    function initMarkerLabel()
+    {
+        trace("*** initMarkerLabel()");
+    } // End of the function
+    function updateMarkerLabel()
+    {
+        trace("*** updateMarkerLabel()");
+    } // End of the function
+    function _centeringIcon()
+    {
+        trace("*** _centeringIcon()");
+    } // End of the function
+    function _getVehicleClassName()
+    {
+        trace("*** _getVehicleClassName()");
+    } // End of the function
 }
