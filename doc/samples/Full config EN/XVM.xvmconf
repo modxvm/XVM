@@ -43,7 +43,7 @@
       "show": true,                             //   false – Disable Team/Clan logos in Battle Loading Screen
       "x": 0,                                   //   Position on the X axis, relative to the vehicle icon
       "y": 6,                                   //   Position on the Y axis, relative to the vehicle icon
-      "xr": 0,                                  //   Position on the X axis for right side
+      "xr": 0,                                  //   Position on the X axis for right side (positive values run to the *inside* of the table)
       "yr": 6,                                  //   Position on the Y axis for right side
       "w": 16,                                  //   Width of the Team/Clan logo
       "h": 16,                                  //   Height of the Team/Clan logo

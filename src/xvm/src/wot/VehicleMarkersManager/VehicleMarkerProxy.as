@@ -355,7 +355,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
                                                   { call("updateState",  [ newState, isImmediate ]);}
     public function updateHealth(curHealth, flag, damageType)
     {
-        if (flag == Defines.FROM_PLAYER && hitLog != null)
+        if (flag == Defines.FROM_PLAYER && m_team == Defines.TEAM_ENEMY && hitLog != null) // do not calculate friendly fire
         {
             var delta = m_curHealth - (curHealth < 0 ? 0 : curHealth);
             hitLog.update(delta, curHealth,
