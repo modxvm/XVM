@@ -1,6 +1,6 @@
-import wot.TeamBasesPanel.CapCycle;
-import wot.TeamBasesPanel.InternalTimer;
-import wot.TeamBasesPanel.TimeRound;
+import wot.TeamBasesPanel.CapBarModel.CapCycle;
+import wot.TeamBasesPanel.CapBarModel.InternalTimer;
+import wot.TeamBasesPanel.CapBarModel.TimeRound;
 
 /**
  * This class determines capture speed based on latest information
@@ -13,7 +13,7 @@ import wot.TeamBasesPanel.TimeRound;
  * Speed of 0.5 means one cap point is captured in two seconds.
  */
 
-class wot.TeamBasesPanel.CapSpeed
+class wot.TeamBasesPanel.CapBarModel.CapSpeed
 {
     private static var m_minimalCapSpeed:Number;
     

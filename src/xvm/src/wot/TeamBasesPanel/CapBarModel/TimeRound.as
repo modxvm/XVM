@@ -1,4 +1,4 @@
-class wot.TeamBasesPanel.TimeRound
+class wot.TeamBasesPanel.CapBarModel.TimeRound
 {
     /**
      * Without rounding speed values vary too much.

@@ -2,41 +2,48 @@
  * @author ilitvinov
  */
 
+import wot.TeamBasesPanel.CapConfig;
 import wot.utils.Utils;
 
 /**
  * Creates and manages capture bar mc library instances.
+ * Reads config and sends view formatting to CaptureBar instances.
  * See CaptureBar class for implemented extra feature list.
+ * 
+ * TODO:
+ * ) Localization
+ * ) Documentaion
+ * ) Clean up
+ * ) Deploy to test
  */
 
 class wot.TeamBasesPanel.TeamBasesPanel extends net.wargaming.ingame.TeamBasesPanel
 {
-    var m_textFormat:TextFormat;
-    var m_filters:Array;
+    var m_xvmCapEnabled:Boolean;
     
     public function TeamBasesPanel() 
     {
         Utils.TraceXvmModule("TeamBasesPanel");
         super();
-        defineStyle();
+        m_xvmCapEnabled = CapConfig.enabled;
     }
     
     function add(id, sortWeight, colorFeature, title, points)
     {
-        super.add(id, sortWeight, colorFeature, title, points);
-        
-        captureBars[indexByID[id]].init();
-        captureBars[indexByID[id]].setStyle(m_textFormat, m_filters);
+        if (m_xvmCapEnabled)
+        {
+            super.add(id, sortWeight, colorFeature, null, null);
+            captureBars[indexByID[id]].start(points);
+        }
+        else
+        {
+            super.add(id, sortWeight, colorFeature, title, points);
+        }
     }
     
    /**
-    * Define capture bar style here.
+    * Called when point becomes fully captured.
+    * No need to define behavior. updateProgress() handles full capture.
     */
-    private function defineStyle():Void
-    {
-        m_textFormat = _root.debugPanel.fgMC.fps.getNewTextFormat();
-        m_textFormat.align = "center";
-        m_textFormat.color = 0xF0F0F0;
-        m_filters = [new flash.filters.DropShadowFilter(0, 0, 0x000000, 100, 2, 2, 1.5, 3)];
-    }
+   function setCaptured(id, title){}
 }

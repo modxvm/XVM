@@ -1,4 +1,4 @@
-class wot.TeamBasesPanel.InternalTimer
+class wot.TeamBasesPanel.CapBarModel.InternalTimer
 {
     // High tick intervals increase +- calculation errors.
     private static var TICK_INTERVAL_MS:Number = 100; // 100ms

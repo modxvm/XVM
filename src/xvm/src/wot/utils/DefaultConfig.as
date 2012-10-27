@@ -147,6 +147,20 @@ class wot.utils.DefaultConfig
         highVulnerability: "*",
         lowVulnerability: "'"
       },
+      captureBar: {
+        enabled: true,
+        primaryTitleFormat:   "<font size='16' color='#000000'>Base capture! {{extra}}</font>",
+        secondaryTitleFormat: "<font size='16' color='#000000'>{{points}}</font>",
+        captureDoneFormat:    "<font size='16' color='#000000'>Captured!</font>",
+        extra: "Capturers:<b>{{tanks}}</b> Timeleft:<b>{{time}}<b>",
+        primaryTitleOffset: 6,
+        shadow: {
+          color: 0xFFFFFF,
+          alpha: 50,
+          blur: 15,
+          strength: 2
+        }
+      },
       hitLog: {
         visible: true,
         x: 270,
@@ -158,9 +172,9 @@ class wot.utils.DefaultConfig
         insertOrder: "end",
         groupHitsByPlayer: false,
         // Substitution for {{dead}} macro when player is dead
-        deadMarker: "<font face='Wingdings'>N</font>",
+        deadMarker:   "<font face='Wingdings'>N</font>",
         blowupMarker: "<font face='Wingdings'>M</font>",
-        formatHeader:  "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> <font size='1{{nick}}'><b>{{dmg-total}}</b>  <font color='#CCCCCC'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font></font>",
+        formatHeader: "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> <font size='1{{nick}}'><b>{{dmg-total}}</b>  <font color='#CCCCCC'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font></font>",
         formatHistory: "<textformat leading='-4' tabstops='[20,50,90,150]'><font size='12'>\u00D7{{n-player}}:</font><tab>{{dmg-player}}<tab>| <font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab>| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>"
       },
       markers: {

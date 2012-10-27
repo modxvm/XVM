@@ -33,7 +33,7 @@
  * 1p/1.5s  2p/1s (1p/1.5s  2p/1s)  ...
  */
 
-class wot.TeamBasesPanel.CapCycle
+class wot.TeamBasesPanel.CapBarModel.CapCycle
 {
     private var m_prevSpeed:Number; // speed at previous update
     private var m_averageSpeed:Number; // average speed for two updates
