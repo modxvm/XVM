@@ -176,9 +176,9 @@
     nick/<player>.png -> clan/<clan>.png -> clan/default.png -> nick/default.png
   TOP 100 clans are added to mod archive by default.
   Full archive with all clans can be downloaded separately:
-    http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-ru.zip (RU)
-    http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-eu.zip (EU)
-    http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-us.zip (US)
+    http://code.google.com/p/wot-xvm/downloads/list
+    Files: clanicons-full-ru-XXX.zip (RU), clanicons-full-eu-XXX.zip (EU),
+    clanicons-full-us-XXX.zip (US), clanicons-full-sea-XXX.zip (SEA)
 
   6-th sence image.
   To change sixth sense indicator place alternative PNG image to
