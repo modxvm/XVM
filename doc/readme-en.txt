@@ -17,6 +17,7 @@
     * Player/clan icon
     * Vehicle icon sets
     * In-game players rating (only with xvm-stat package)
+    * Capture bar additional information
 
   Project site:  http://code.google.com/p/wot-xvm/
 
@@ -122,6 +123,12 @@
       {{dmg-kind}}    - damage kind (attack, fire, ramming, ...)
       {{c:dmg-kind}}  - color depended from damage kind
       {{c:vtype}}     - color depended from vehicle type
+
+    In Capture bar:
+      {{points}}      - points already capture
+      {{tanks}}       - number of capturers;       can be placed only inside extra section
+      {{time}}        - time left to full capture; can be placed only inside extra section
+      {{extra}}       - extra text section; is shows only when timeleft and number of capturers was calculated successfully
 
     Statistics macros ('rating/showPlayersStatistics' must be anabled):
       {{kb}}          - number of kilo-battles (total battles count divided by 1000).

@@ -152,8 +152,8 @@ class wot.utils.DefaultConfig
         primaryTitleFormat:   "<font size='16' color='#000000'>Base capture! {{extra}}</font>",
         secondaryTitleFormat: "<font size='16' color='#000000'>{{points}}</font>",
         captureDoneFormat:    "<font size='16' color='#000000'>Captured!</font>",
-        extra: "Capturers:<b>{{tanks}}</b> Timeleft:<b>{{time}}<b>",
-        primaryTitleOffset: 6,
+        extra: "Capturers: <b>{{tanks}}</b> Timeleft: <b>{{time}}<b>",
+        primaryTitleOffset: 7,
         shadow: {
           color: 0xFFFFFF,
           alpha: 50,

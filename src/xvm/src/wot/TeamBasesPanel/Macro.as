@@ -1,5 +1,6 @@
 import wot.TeamBasesPanel.CapConfig;
 import wot.utils.Logger;
+import wot.utils.Locale;
 
 /**
  * Substitutes macroses like {{points}} with corresponding values
@@ -7,8 +8,8 @@ import wot.utils.Logger;
 
 class wot.TeamBasesPanel.Macro
 {
-    private static var WRONG_TAG_POSITIONING:String =
-    "{{tanks}} and {{time}} can only be placed in ExtraFormat config field!";
+    private static var WRONG_TAG_POSITIONING:String = Locale.get(
+    "{{tanks}} and {{time}} can only be placed in Extra config field!");
     
     private var m_primaryTitleFormat:String;
     private var m_secondaryTitleFormat:String;
@@ -23,10 +24,10 @@ class wot.TeamBasesPanel.Macro
     
     public function Macro(startingPoints:Number)
     {
-        m_primaryTitleFormat = CapConfig.primaryTitleFormat;
-        m_secondaryTitleFormat = CapConfig.secondaryTitleFormat;
-        m_captureDoneFormat = CapConfig.captureDoneFormat;
-        m_extra = CapConfig.extra;
+        m_primaryTitleFormat = Locale.get(CapConfig.primaryTitleFormat);
+        m_secondaryTitleFormat = Locale.get(CapConfig.secondaryTitleFormat);
+        m_captureDoneFormat = Locale.get(CapConfig.captureDoneFormat);
+        m_extra = Locale.get(CapConfig.extra);
         
        /**
         * Should be defined early because
