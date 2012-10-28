@@ -6,15 +6,7 @@ import wot.TeamBasesPanel.CapConfig;
 import wot.utils.Utils;
 
 /**
- * Creates and manages capture bar mc library instances.
- * Reads config and sends view formatting to CaptureBar instances.
- * See CaptureBar class for implemented extra feature list.
- * 
- * TODO:
- * ) Localization
- * ) Documentaion
- * ) Clean up
- * ) Deploy to test
+ * Creates and manages CaptureBar instances.
  */
 
 class wot.TeamBasesPanel.TeamBasesPanel extends net.wargaming.ingame.TeamBasesPanel
@@ -32,6 +24,13 @@ class wot.TeamBasesPanel.TeamBasesPanel extends net.wargaming.ingame.TeamBasesPa
     {
         if (m_xvmCapEnabled)
         {
+           /**
+            * null, null args somehow allow to set XVM-specific vals
+            * at the very first moment capture bar appears.
+            * 
+            * Passing original values make text properties original
+            * at that first moment.
+            */
             super.add(id, sortWeight, colorFeature, null, null);
             captureBars[indexByID[id]].start(points);
         }
@@ -41,9 +40,9 @@ class wot.TeamBasesPanel.TeamBasesPanel extends net.wargaming.ingame.TeamBasesPa
         }
     }
     
-   /**
-    * Called when point becomes fully captured.
-    * No need to define behavior. updateProgress() handles full capture.
-    */
+  /**
+   * Called when point becomes fully captured.
+   * No need to define behavior. updateProgress() handles full capture.
+   */
    function setCaptured(id, title){}
 }

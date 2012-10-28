@@ -128,10 +128,10 @@
   "captureBar": {
     "enabled": true, // Переключатель вкл/выкл
     // Формат захвата (допускаются макроподстановки, см. readme-ru.txt)
-    "primaryTitleFormat":   "<font size='16' color='#000000'>Base capture! {{extra}}</font>", // Верхнее текстовое поле
-    "secondaryTitleFormat": "<font size='16' color='#000000'>{{points}}</font>",              // Нижнее текстовое поле
-    "captureDoneFormat":    "<font size='16' color='#000000'>Captured!</font>",               // Текст полного захвата
-    "extra": "Capturers: <b>{{tanks}}</b> Timeleft: <b>{{time}}<b>",                          // Дополнительный текст после необходимого расчета
+    "primaryTitleFormat":   "<font size='16' color='#000000'>Захват базы! {{extra}}</font>", // Верхнее текстовое поле
+    "secondaryTitleFormat": "<font size='16' color='#000000'>{{points}}</font>",             // Нижнее текстовое поле
+    "captureDoneFormat":    "<font size='16' color='#000000'>Захвачено!</font>",             // Текст полного захвата
+    "extra": "Захватчиков: <b>{{tanks}}</b> Осталось времени: <b>{{time}}<b>",               // Дополнительный текст после необходимого расчета
     "primaryTitleOffset": 7, // Смещение верхнего поля вверх на случай больших размеров шрифтов
     "shadow": {          // Тень полей
       "color": 0xFFFFFF, // Цвет

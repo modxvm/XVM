@@ -41,13 +41,11 @@ class wot.utils.Locale
     tr["ramming"] = "таран";
     tr["world_collision"] = "падение";
     
-    tr["{{tanks}} and {{time}} can only be placed in Extra config field!"] = 
-       "{{tanks}} и {{time}} могут быть помещены только в Extra поле файла конфигурации!";
     tr["<font size='16' color='#000000'>Base capture! {{extra}}</font>"] = 
        "<font size='16' color='#000000'>Захват базы! {{extra}}</font>";
     tr["<font size='16' color='#000000'>Captured!</font>"] = 
        "<font size='16' color='#000000'>Захвачена!</font>";
-    tr["Capturers: <b>{{tanks}}</b> Timeleft: <b>{{time}}<b>"] = 
+    tr[  "Capturers: <b>{{tanks}}</b> Timeleft: <b>{{time}}<b>"] = 
        "Захватчиков: <b>{{tanks}}</b> Осталось времени: <b>{{time}}<b>";
 
 //    tr["Using default settings."] = "Используются настройки по умолчанию.";

@@ -1,16 +1,13 @@
 import wot.TeamBasesPanel.CapConfig;
-import wot.utils.Logger;
 import wot.utils.Locale;
 
 /**
- * Substitutes macroses like {{points}} with corresponding values
+ * Class prepares html formatted text.
+ * Substitutes {{}} macroses with corresponding values.
  */
 
 class wot.TeamBasesPanel.Macro
 {
-    private static var WRONG_TAG_POSITIONING:String = Locale.get(
-    "{{tanks}} and {{time}} can only be placed in Extra config field!");
-    
     private var m_primaryTitleFormat:String;
     private var m_secondaryTitleFormat:String;
     private var m_captureDoneFormat:String;
@@ -19,7 +16,7 @@ class wot.TeamBasesPanel.Macro
     // updated
     private var m_capTimeLeft:String;
     private var m_capturersNum:String
-    private var m_isExtraDefined:Boolean;
+    private var m_isSituationNormal:Boolean;
     private var m_points:String;
     
     public function Macro(startingPoints:Number)
@@ -32,16 +29,16 @@ class wot.TeamBasesPanel.Macro
        /**
         * Should be defined early because
         * TeamBasesPanel inits panel with "add" function
-        * and only then calls "updatePoints".
-        * We should be prepared.
+        * and only after some time passed calls "updatePoints".
+        * We already should be prepared to return text.
         */
-        this.m_isExtraDefined = false;
+        this.m_isSituationNormal = false;
         this.m_points = startingPoints.toString();
     }
     
-    public function update(isExtraDefined:Boolean, capTimeLeft:String, capturersNum:Number, points:Number):Void
+    public function update(isSituationNormal:Boolean, capTimeLeft:String, capturersNum:Number, points:Number):Void
     {
-        this.m_isExtraDefined = isExtraDefined;
+        this.m_isSituationNormal = isSituationNormal;
         this.m_capTimeLeft = capTimeLeft;
         this.m_capturersNum = capturersNum.toString();
         this.m_points = points.toString();
@@ -54,9 +51,7 @@ class wot.TeamBasesPanel.Macro
     
     public function getSecondaryText():String
     {
-        var s = format(m_secondaryTitleFormat);
-        Logger.add("Macro: getSecondaryText = " + s);
-        return s;
+        return format(m_secondaryTitleFormat);
     }
     
     public function getCaptureDoneText():String
@@ -68,20 +63,13 @@ class wot.TeamBasesPanel.Macro
     
     private function format(text:String):String
     {
-        /**
-         * {{tanks}} and {{time}} can only be placed in ExtraFormat.
-         * Ignoring this causes extreme values being returned.
-         * isExtraDefined var indicates normal values are being calculated.
-         */
-        if extraIntegrityBroken(text)
-            return WRONG_TAG_POSITIONING;
-        
-        /**
-         * Extra data is tanks capturing and time left
-         * Extra can not be defined at every possible tick in time. 
-         * Only stable capturing process defines extra.
-         */
-        if (m_isExtraDefined)
+       /**
+        * Extra data is tanks capturing and time left.
+        * Extra can not be defined at every possible tick in time. 
+        * And only stable capturing process defines presentable extra data.
+        * CaptureBar.isSituationNormal indicates normal values are being calculated.
+        */
+        if (m_isSituationNormal)
             text = stringReplace("{{extra}}", m_extra, text);
         else
             text = stringReplace("{{extra}}", "", text)
@@ -91,13 +79,6 @@ class wot.TeamBasesPanel.Macro
         text = stringReplace("{{points}}", m_points, text);
         
         return text;
-    }
-    
-    private function extraIntegrityBroken(text:String):Boolean
-    {
-        if (text.indexOf("{{tanks}}") == -1 && text.indexOf("{{time}}") == -1 )
-            return false;
-        return true;
     }
     
     private function stringReplace(what:String, to:String, where:String):String
