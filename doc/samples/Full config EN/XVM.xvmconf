@@ -133,11 +133,11 @@
     "captureDoneFormat":    "<font size='16' color='#000000'>Captured!</font>",               // Full capture text
     "extra": "Capturers: <b>{{tanks}}</b> Timeleft: <b>{{time}}<b>",                          // Extra text available after necessary calculations
     "primaryTitleOffset": 7, // Upper textfield offset in case of big font size
-    "shadow": {          // Fileds shadow
-      "color": "0xFFFFFF", // Color
-      "alpha": 50,       // Alpha 0-100
+    "shadow": {          // Fields shadow
+      "color": "0xEEEEEE", // Color
+      "alpha": 75,       // Alpha 0-100
       "blur": 15,        // Blur 0-255
-      "strength": 2      // Strength 0-255
+      "strength": 3      // Strength 0-255
     }
   },
   // OVER-TARGET MARKERS

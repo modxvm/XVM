@@ -155,10 +155,10 @@ class wot.utils.DefaultConfig
         extra: "Capturers: <b>{{tanks}}</b> Timeleft: <b>{{time}}<b>",
         primaryTitleOffset: 7,
         shadow: {
-          color: 0xFFFFFF,
-          alpha: 50,
+          color: "0xEEEEEE",
+          alpha: 75,
           blur: 15,
-          strength: 2
+          strength: 3
         }
       },
       hitLog: {

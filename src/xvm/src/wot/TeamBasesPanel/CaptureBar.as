@@ -18,6 +18,7 @@ import wot.TeamBasesPanel.CapConfig;
  * time passed between updates and number of captured points
  * 
  * possible todo:
+ * ) {{time:m:s}}, {{time:s}} 
  * ) Separate capture line for each capturer.
  */
 

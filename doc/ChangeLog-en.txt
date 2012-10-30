@@ -1,5 +1,8 @@
-﻿XVM-3.1.2.test2:
-  * fixed capture bar color at default configuration file
+﻿XVM-3.1.2.test3:
+  * fixed capture bar shadow color
+  
+XVM-3.1.2.test2:
+  * fixed capture bar shadow color at default configuration file
 
 XVM-3.1.2.test1:
   * added capture bar mod
