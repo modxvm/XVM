@@ -6,6 +6,7 @@ import flash.filters.DropShadowFilter;
 import wot.TeamBasesPanel.CapBarModel.CapSpeed;
 import wot.TeamBasesPanel.Macro;
 import wot.TeamBasesPanel.CapConfig;
+import wot.utils.Logger;
 
 /**
  * Capture progress bar.
@@ -42,12 +43,13 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
     */ 
     public function updateProgress(newPointsVal:Number):Void
     {
+        //Logger.add("CaptureBar.updateProgress: p = " + newPointsVal);
         m_capSpeed.calculate(newPointsVal, m_points);
 
         super.updateProgress(newPointsVal); // modifies m_point;
         
         //prepare text strings
-        m_macro.update(isSituationNormal, capTimeLeft, capturersNum, newPointsVal);
+        m_macro.update(isSituationNormal, capSecondsLeft.toString(), timeLeftMinSec, capturersNum, newPointsVal);
         
         m_titleTF.htmlText = m_macro.getPrimaryText();   // Upper text field relative to capture bar
         m_timerTF.htmlText = m_macro.getSecondaryText(); // Lower text field relative to capture bar
@@ -136,7 +138,7 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
     */
     private function get isSituationNormal():Boolean
     {
-        return (m_capSpeed.getSpeed() > 0 && capturersNum != undefined);
+        return (m_capSpeed.getSpeed() > 0 && capturersNum > 0);
     }
         
     private function get capturersNum():Number
@@ -148,7 +150,7 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
      * Time format
      * 125 -> 2:05
      */
-    private function get capTimeLeft():String
+    private function get timeLeftMinSec():String
     {
         var secLeft:Number = Math.round(capSecondsLeft);
         if (secLeft == 0)

@@ -126,8 +126,9 @@
 
     In Capture bar:
       {{points}}      - points already capture
-      {{tanks}}       - number of capturers;       can be placed only inside extra section
-      {{time}}        - time left to full capture; can be placed only inside extra section
+      {{tanks}}       - number of capturers; cant define if more than 3; can be placed only inside extra section
+      {{time}}        - time left to full capture; minutes and seconds;  can be placed only inside extra section
+      {{time-sec}}    - time left to full capture; seconds only;         can be placed only inside extra section
       {{extra}}       - extra text section; is shows only when timeleft and number of capturers was calculated successfully
 
     Statistics macros ('rating/showPlayersStatistics' must be anabled):

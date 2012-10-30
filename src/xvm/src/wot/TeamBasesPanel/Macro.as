@@ -14,7 +14,8 @@ class wot.TeamBasesPanel.Macro
     private var m_extra:String;
     
     // updated
-    private var m_capTimeLeft:String;
+    private var m_timeLeftSec:String;
+    private var m_timeLeftMinSec:String;
     private var m_capturersNum:String
     private var m_isSituationNormal:Boolean;
     private var m_points:String;
@@ -36,10 +37,11 @@ class wot.TeamBasesPanel.Macro
         this.m_points = startingPoints.toString();
     }
     
-    public function update(isSituationNormal:Boolean, capTimeLeft:String, capturersNum:Number, points:Number):Void
+    public function update(isSituationNormal:Boolean, timeLeftSec:String, timeLeftMinSec:String, capturersNum:Number, points:Number):Void
     {
         this.m_isSituationNormal = isSituationNormal;
-        this.m_capTimeLeft = capTimeLeft;
+        this.m_timeLeftSec = timeLeftSec;
+        this.m_timeLeftMinSec = timeLeftMinSec;
         this.m_capturersNum = capturersNum.toString();
         this.m_points = points.toString();
     }
@@ -75,7 +77,8 @@ class wot.TeamBasesPanel.Macro
             text = stringReplace("{{extra}}", "", text)
             
         text = stringReplace("{{tanks}}", m_capturersNum, text);
-        text = stringReplace("{{time}}", m_capTimeLeft, text);
+        text = stringReplace("{{time}}", m_timeLeftMinSec, text);
+        text = stringReplace("{{time-sec}}", m_timeLeftSec, text);
         text = stringReplace("{{points}}", m_points, text);
         
         return text;

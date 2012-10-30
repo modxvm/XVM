@@ -1,5 +1,6 @@
 ﻿XVM-3.1.2.test3:
   * fixed capture bar shadow color
+  * added {{time-sec}} macro to show cap time left in seconds only
   
 XVM-3.1.2.test2:
   * fixed capture bar shadow color at default configuration file

@@ -1,3 +1,4 @@
+import wot.utils.Logger;
 import wot.TeamBasesPanel.CapBarModel.CapCycle;
 import wot.TeamBasesPanel.CapBarModel.InternalTimer;
 import wot.TeamBasesPanel.CapBarModel.TimeRound;
@@ -15,7 +16,11 @@ import wot.TeamBasesPanel.CapBarModel.TimeRound;
 
 class wot.TeamBasesPanel.CapBarModel.CapSpeed
 {
-    private static var m_minimalCapSpeed:Number;
+   /**
+    * 0.5, 0.4 minimal for encounter battle type.
+    * 1 is minimal speed for other battle types.
+    */
+    private static var s_minimalCapSpeed:Number = 1; 
     
     private var m_cycle:CapCycle;
     private var m_timer:InternalTimer;
@@ -24,7 +29,6 @@ class wot.TeamBasesPanel.CapBarModel.CapSpeed
     
     public function CapSpeed() 
     {
-        m_minimalCapSpeed = Infinity;
         m_cycle = new CapCycle();
         m_timer = new InternalTimer();
     }
@@ -50,17 +54,15 @@ class wot.TeamBasesPanel.CapBarModel.CapSpeed
             return;
         }
         
-        rawSpeed = TimeRound.round(rawSpeed, 1000); // to 0.001 digit
-        var normalSpeed:Number = TimeRound.round(rawSpeed, 10); // to 0.1 digit
-        
-        defineMinimalSpeed(normalSpeed);
-        
        /**
         * Calculate average speed between two last updates.
         * See CapCycle class for details.
         */
         m_cycle.update(rawSpeed);
         m_speed = m_cycle.getAverageSpeed();
+        m_speed = TimeRound.round(m_speed, 10); // to 0.1 digit
+        
+        defineMinimalSpeed();
     }
     
     public function getSpeed():Number
@@ -70,19 +72,16 @@ class wot.TeamBasesPanel.CapBarModel.CapSpeed
         
     public function getOneTankSpeed():Number
     {
-        return m_minimalCapSpeed;
+        //Logger.add(" CapSpeed.getOneTankSpeed = " + s_minimalCapSpeed)
+        return s_minimalCapSpeed;
     }
     
     // -- Private
     
-    private function defineMinimalSpeed(normalSpeed):Void
+    private function defineMinimalSpeed():Void
     {
-        if (m_minimalCapSpeed == undefined)
-        {
-            if (normalSpeed == 0.4 || normalSpeed == 0.8) // Encounter battle type
-                m_minimalCapSpeed = 0.4;
-            if (normalSpeed == 1 || normalSpeed == 2) // Other types
-                m_minimalCapSpeed = 1;
-        }
+        Logger.add(" CapSpeed.m_speed = " + m_speed);
+        if (m_speed < s_minimalCapSpeed)
+            s_minimalCapSpeed = m_speed;
     }
 }
