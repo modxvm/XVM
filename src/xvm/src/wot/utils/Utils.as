@@ -118,6 +118,9 @@ class wot.utils.Utils
     {
         try
         {
+            v1 = v1.split("-").join(".");
+            v2 = v2.split("-").join(".");
+
             var a: Array = v1.split(".");
             while (a.length < 4)
                 a.push("0");

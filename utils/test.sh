@@ -12,10 +12,11 @@ CURRENT_DIRECTORY=`pwd`
 #SAMPLE_REPLAY=tk.wotreplay
 #SAMPLE_REPLAY=fire.wotreplay
 #SAMPLE_REPLAY=fall.wotreplay
-SAMPLE_REPLAY=hits.wotreplay
+#SAMPLE_REPLAY=hits.wotreplay
 #SAMPLE_REPLAY=hunt.wotreplay
-#-SAMPLE_REPLAY=7x7.wotreplay
+#SAMPLE_REPLAY=13x13.wotreplay
 #-SAMPLE_REPLAY=fogofwar.wotreplay
+SAMPLE_REPLAY=test.wotreplay
 
 cd "${WOT_DIRECTORY}"
 REPLAY=${CURRENT_DIRECTORY}/../test/replays/${SAMPLE_REPLAY}
