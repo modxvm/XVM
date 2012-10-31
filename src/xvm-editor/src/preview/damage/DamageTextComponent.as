@@ -67,8 +67,8 @@ public class DamageTextComponent
         var tf:TextField = createTextField(color, shadowColor, cfg);
 		tf.alpha = proxy.formatDynamicAlpha(cfg.alpha) / 100.0;
 		damage.addChild(tf);
-		
-        tf.htmlText = "<p class='xvm_damageText'>" + text + "</p>";
+
+        tf.htmlText = "<p class='xvm_damageText'>" + text.replace("$TextFont", "Tahoma") + "</p>";
         //wot.utils.Logger.add("dmg: " + flagToDamageSource(flag) + ", " + proxy.damageDest + " - color=" + color);
         //wot.utils.Logger.add(tf.htmlText);
         //wot.utils.Logger.add(XvmHelper.createCSS(cfg.font, color, "xvm_damageText"));

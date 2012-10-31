@@ -192,8 +192,8 @@ public class Xvm extends XvmBase
                 var color:String = "#" + 
                     Utils.padLeft(formatDynamicColor(formatStaticColorText(cfg.color), m_curHealth).toString(16), 6, '0');
 				tf.htmlText = "<p class='xvm_markerText'><font color='" + color + "'>" +
-					formatDynamicText(formatStaticText(cfg.format), m_curHealth) + "</font></p>";
-				tf.y += 1; // TODO: why?
+					formatDynamicText(formatStaticText(cfg.format.replace("$TextFont", "Tahoma")), m_curHealth) + "</font></p>";
+				tf.y += 0.5; // TODO: why?
 				tf.alpha = formatDynamicAlpha(cfg.alpha, m_curHealth) / 100;
 				proxy.addChild(tf);
 				tf.visible = true;

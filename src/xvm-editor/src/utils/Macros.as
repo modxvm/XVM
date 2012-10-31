@@ -27,6 +27,9 @@ package utils
             var alphaHpRatio:String = "#" +
                 Utils.padLeft((GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hp) / 100 * 255).toString(16), 2, '0');
 
+            // Fix font (ugly hack)
+            format = format.replace("$TextFont", "Tahoma")
+
             // Text
             format = format.replace("{{dead}}", Config.s_config.hitLog.deadMarker);
 

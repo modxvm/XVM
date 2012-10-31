@@ -254,7 +254,7 @@ public class XvmBase
         textField.wordWrap = false;
 
 		textField.embedFonts = !cfg.font || !cfg.font.name || cfg.font.name == "$FieldFont";
-		
+
         //textField.html = true;
 
         var style:StyleSheet = new StyleSheet();
