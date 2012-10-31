@@ -321,7 +321,9 @@ package utils
 //                delete root[valueElement];
             if (value === null || value === undefined) // FIXIT: why undefined presents?
     			root[valueElement] = null;
-    		else
+    		else if (typeof value == "object")
+                root[valueElement] = utils.JSON.parse(utils.JSON.stringify(value)); // dereference
+            else
                 root[valueElement] = value;
     	}
 
