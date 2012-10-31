@@ -17,6 +17,74 @@ package utils
             return res;
         }
 
+        public static function format(format:String):String
+        {
+            var hp:Number = 500;
+            var hpMax:Number = 2000;
+            var hpRatio:Number = 25;
+            var alphaHp:String = "#" +
+                Utils.padLeft((GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, hp) / 100 * 255).toString(16), 2, '0');
+            var alphaHpRatio:String = "#" +
+                Utils.padLeft((GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hp) / 100 * 255).toString(16), 2, '0');
+
+            // Text
+            format = format.replace("{{dead}}", Config.s_config.hitLog.deadMarker);
+
+            format = format.replace("{{nick}}", "Player[CLAN]");
+            format = format.replace("{{vehicle}}", "T-34");
+            format = format.replace("{{level}}", "5");
+            format = format.replace("{{rlevel}}", "V");
+            format = format.replace("{{turret}}", Config.s_config.turretMarkers.highVulnerability);
+            format = format.replace("{{hp}}", hp.toString());
+            format = format.replace("{{hp-ratio}}", hpRatio.toString());
+            format = format.replace("{{hp-max}}", hpMax.toString());
+            format = format.replace("{{dmg}}", "750");
+            format = format.replace("{{dmg-ratio}}", "27");
+            format = format.replace("{{dmg-kind}}", "attack");
+
+            format = format.replace("{{n}}", "11");
+            format = format.replace("{{n-player}}", "3");
+            format = format.replace("{{dmg-total}}", "2500");
+            format = format.replace("{{dmg-player}}", "1500");
+
+            // Colors
+            format = format.replace("{{c:hp}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, hp));
+            format = format.replace("{{c:hp-ratio}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio));
+            format = format.replace("{{c:dmg-kind}}", GraphicsUtil.GetDmgKindValue("attack"));
+            format = format.replace("{{c:vtype}}", GraphicsUtil.GetVTypeColorValue("MT"));
+
+            // Transparency
+            format = format.replace("{{a:hp}}", alphaHpRatio);
+            format = format.replace("{{a:hp-ratio}}", alphaHpRatio);
+
+            // Statistics
+            format = format.replace("{{rating}}", "66%");
+            format = format.replace("{{eff}}", "1800");
+            format = format.replace("{{kb}}", "11");
+            format = format.replace("{{battles}}", "11000");
+            format = format.replace("{{wins}}", "7260");
+            format = format.replace("{{rating:3}}", "66%");
+            format = format.replace("{{eff:4}}", "1800");
+            format = format.replace("{{kb:3}}", " 11");
+            format = format.replace("{{t-rating}}", "55%");
+            format = format.replace("{{t-kb}}", "5.5");
+            format = format.replace("{{t-kb-0}}", "05.5");
+            format = format.replace("{{t-hb}}", "55");
+            format = format.replace("{{t-battles}}", "5500");
+            format = format.replace("{{t-wins}}", "3025");
+            format = format.replace("{{t-rating:3}}", "55%");
+            format = format.replace("{{t-kb:4}}", " 5.5");
+            format = format.replace("{{t-hb:3}}", " 55");
+            format = format.replace("{{t-battles:4}}", "5500");
+            format = format.replace("{{c:eff}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, 1800));
+            format = format.replace("{{c:rating}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 66));
+            format = format.replace("{{c:kb}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, 11));
+            format = format.replace("{{c:t-rating}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 55));
+            format = format.replace("{{c:t-battles}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, 5500));
+
+            return Utils.trim(format);
+        }
+
         private static const MACROS: Object = {
             syscolors: [
                 { value: "(system)", label: "UseSystemColor", icon: Embed.syscolors }

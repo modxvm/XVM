@@ -12,5 +12,5 @@
         }
     </fx:Script>
     <a:DirectionComboBox id="edit" left="{labelWidth}" right="0" height="{height}"
-        value="{value}" change="onChange(event)"/>
+         value="{value}" change="onChange(event)"/>
 </c:LabeledComponent>

@@ -17,5 +17,5 @@
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'YPosition')}" id="v_y" config="y" minimum="-100" maximum="100" change="onChange(event)"/>
     <c:LabeledMacrosNumberSelector label="{resourceManager.getString('markers', 'Transparency')}" id="v_alpha" config="alpha" minimum="0" maximum="100" allowedMacros="{Macros.get('transparency')}" change="onChange(event)"/>
     <c:LabeledMacrosColorSelector label="{resourceManager.getString('markers', 'Color')}" toolTip="{resourceManager.getString('markers', 'DynamicColorTip')}" width="320" id="v_color" config="color" allowedMacros="{Macros.get('syscolors,colors_markers,colors_stat')}" change="onChange(event)"/>
-    <c:LabeledMacrosTextInput label="{resourceManager.getString('markers', 'TextFormat')}" id="v_format" config="format" allowedMacros="{Macros.get('markers,stats,colors_markers,colors_stat')}" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{resourceManager.getString('markers', 'TextFormat')}" id="v_format" config="format" allowedMacros="{Macros.get('markers,stats,colors_markers,colors_stat')}" preview="true" change="onChange(event)"/>
 </c:PanelComponent>

@@ -5,14 +5,16 @@
     xmlns:c="components.*"
     xmlns:a="controls.*">
     <fx:Script>
+        <![CDATA[
         [Bindable]
-        public var wrapTextField: Boolean = false;
+            public var wrapTextField: Boolean = false;
 
-        protected override function onChange(event:Event):void
-        {
-            value = edit.value;
-            super.onChange(event);
-        }
+            protected override function onChange(event:Event):void
+            {
+                value = edit.value;
+                super.onChange(event);
+            }
+        ]]>
     </fx:Script>
     <a:TextInput id="edit" left="{wrapTextField ? 0 : labelWidth}" right="0" bottom="0"
         height="{wrapTextField ? height/2 : height}"

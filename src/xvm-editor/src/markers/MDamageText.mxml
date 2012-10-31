@@ -18,6 +18,6 @@
     <c:LabeledMacrosColorSelector label="{resourceManager.getString('markers', 'Color')}" toolTip="{resourceManager.getString('markers', 'DynamicColorTip')}" width="320" id="v_color" config="color" allowedMacros="{Macros.get('syscolors,colors_markers_damage,colors_stat')}" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'DisplayTime')}" id="v_speed" config="speed" minimum="0" maximum="10" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'MoveRange')}" id="v_maxRange" config="maxRange" minimum="0" maximum="100" change="onChange(event)"/>
-    <c:LabeledMacrosTextInput label="{resourceManager.getString('markers', 'DamageMessage')}" id="v_damageMessage" config="damageMessage" allowedMacros="{Macros.get('markers_damage,stats,colors_markers_damage,colors_stat')}" change="onChange(event)"/>
-    <c:LabeledMacrosTextInput label="{resourceManager.getString('markers', 'BlowupMessage')}" id="v_blowupMessage" config="blowupMessage" allowedMacros="{Macros.get('markers_damage,stats,colors_markers_damage,colors_stat')}" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{resourceManager.getString('markers', 'DamageMessage')}" id="v_damageMessage" config="damageMessage" allowedMacros="{Macros.get('markers_damage,stats,colors_markers_damage,colors_stat')}" preview="true" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{resourceManager.getString('markers', 'BlowupMessage')}" id="v_blowupMessage" config="blowupMessage" allowedMacros="{Macros.get('markers_damage,stats,colors_markers_damage,colors_stat')}" preview="true" change="onChange(event)"/>
 </c:PanelComponent>
