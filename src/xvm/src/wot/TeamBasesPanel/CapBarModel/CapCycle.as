@@ -1,59 +1,30 @@
 /**
- * Capture cycle at capCycle class consists of two capture point updates
- * because server sends two updates with defferent intervals and cap points
- * in any case except one capturer present.
- * "a b a b a b a ..."
+ * Capture cycle consists of one, two or three capture point updates.
+ * Server sends one, two or three updates with defferent intervals and cap points.
+ * a, b and c are different cap speed values.
+ * "a a a a ..." - possibly one capturer.
+ * "a b a b a b ..." - possibly two capturers.
+ * "a b c a b c a b ..." - possibly three capturers.
  * 
  * Thus to calculate time left and number of capturers
- * we need to find average data between two updates which in many cases are different.
- * Calculating time left and number of capturers based on one update only
- * leads to different results for different updates ("a" and "b").
- * 
- * Two capturers timeline example below.
- * Two cycles, four updates.
- * "s" - seconds between updates. "p" - points captured.
- * ( cycle )
- * 
- * (1p/1.5s 1p/1s) (1p/1.5s 1p/1s) ...
- * 
- * Three capturers:
- *
- * (1p/1.5s 2p/1s) (1p/1.5s 2p/1s) ...
- * 
- * One capturer below:
- * One capterer at capCycle class is considered particular case
- * of many capturers with two identical steps.
- * 
- * (1p/2.5s 1p/2.5s) (1p/2.5s 1p/2.5s) ... 
- * 
- * Cycle boundaries are moving itself with new updates incoming
- * so average could be found at any update step.
- * 
- * 1p/1.5s (2p/1s  1p/1.5s) 2p/1s   ...
- * 1p/1.5s  2p/1s (1p/1.5s  2p/1s)  ...
+ * we need to define cycle and average speed between cycle updates.
  */
 
 class wot.TeamBasesPanel.CapBarModel.CapCycle
 {
-    private var m_prevSpeed:Number; // speed at previous update
-    private var m_averageSpeed:Number; // average speed for two updates
+    private static var ABSOLUTE_MINIMAL_SPEED:Number = 0.5;
     
-    public function update(curSpeed:Number):Void
+    private var m_averageSpeed:Number; // average speed for one cycle updates
+    
+   /**
+    * Speed sequence.
+    * Each element represents capture speed for one progress update.
+    */
+    private var m_sequence:Array;
+    
+    public function CapCycle()
     {
-        if (m_prevSpeed == undefined)
-        {
-           /**
-            * The very first update incoming.
-            * Lets do not try to calculate at that moment.
-            * Just save a step.
-            */
-            m_prevSpeed = curSpeed;
-        }
-        else
-        {
-            m_averageSpeed = (m_prevSpeed + curSpeed) / 2;
-            m_prevSpeed = curSpeed;
-        }
+        m_sequence = new Array();
     }
     
     public function getAverageSpeed():Number
@@ -63,6 +34,85 @@ class wot.TeamBasesPanel.CapBarModel.CapCycle
     
     public function clear():Void
     {
-        m_prevSpeed = undefined;
+        m_averageSpeed = undefined;
+        m_sequence = new Array();
+    }
+    
+    public function update(curSpeed:Number):Void
+    {
+        // Append to beginning of an array.
+        m_sequence.unshift(curSpeed);
+        
+       /**
+        * All cycle calculators try to redefine average speed one by one.
+        * If cycle calculation failed then previous cycle average speed persists.
+        * 
+        * Example sequences and cycle calc result:
+        *          1 2 3
+        * xxxxxx   v v v
+        * xy xy xy   v 
+        * xyz xyz      v
+        * xyx xyx      v
+        * xxy xxy      v
+        * 
+        * v - means cycle is found and average speed is redefined.
+        */
+        oneStepCycle();
+        twoStepCycle();
+        threeStepCycle();
+       /**
+        * More than three steps is not a cycle,
+        * because three tanks defines maximum capture speed.
+        * More capturing tanks cap with the same speed as four.
+        */
+       
+       /**
+        * Is is possible that cycle is not found at all
+        * and average speed have not been calculated for this.update().
+        * In this case previously calculated m_averageSpeed persists.
+        * This provides smooth transition to different cycle steps.
+        * And no irritating extra macro rejections occur
+        * while number of capturers change.
+        */ 
+    }
+    
+    // -- Private
+    
+    private function oneStepCycle():Void
+    {
+        if (m_sequence.length < 1 + 1)
+            return;
+        
+        if (m_sequence[0] == m_sequence[1])
+            redefineAverage(1);
+    }
+    
+    private function twoStepCycle():Void
+    {
+        if (m_sequence.length < 2 + 2)
+            return;
+            
+        if (m_sequence[0] == m_sequence[2] &&
+            m_sequence[1] == m_sequence[3])
+            redefineAverage(2);
+    }
+    
+    private function threeStepCycle():Void
+    {
+        if (m_sequence.length < 3 + 3)
+            return;
+        
+        if (m_sequence[0] == m_sequence[3] &&
+            m_sequence[1] == m_sequence[4] &&
+            m_sequence[2] == m_sequence[5])
+            redefineAverage(3);
+    }
+    
+    private function redefineAverage(stepSize:Number):Void
+    {
+        var summ:Number = 0;
+        for (var i = 0; i < stepSize; i++)
+            summ += m_sequence[i];
+        m_averageSpeed = summ / stepSize;
     }
 }

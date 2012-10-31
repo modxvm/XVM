@@ -1,12 +1,11 @@
 /**
  * @author ilitvinov
  */
-
+import wot.utils.Logger;
 import flash.filters.DropShadowFilter;
 import wot.TeamBasesPanel.CapBarModel.CapSpeed;
 import wot.TeamBasesPanel.Macro;
 import wot.TeamBasesPanel.CapConfig;
-import wot.utils.Logger;
 
 /**
  * Capture progress bar
@@ -20,8 +19,21 @@ import wot.utils.Logger;
  * time passed between updates and number of captured points.
  * 
  * possible todo:
+ * ) Fix 2->3 caps breaks cycle transion. Remove quick fix.
+ * ) Check if 1->2 caps breaks cycle transion.
  * ) Split ally\enemy bar configs
  * ) Separate capture line for each capturer
+ */
+
+/**
+ * Cap block.
+ * 
+ * updateProgress is also called when capture is blocked at Encounter battle type.
+ * Situation occurs when opposing tanks both stand on shared cap point.
+ * Сapture bar freezes and blinks white. Cap points already captured remain.
+ * captureInterrupt() function at original TeamBasesPanel class
+ * is called twice in a seconds while block continues.
+ * updateProgress() is also called twice a second.
  */
 
 class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
@@ -32,7 +44,7 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
    /**
     * CaptureBar() constructor is called once per battle.
     * Not once per capture bar creation on stage.
-    * see this.init()
+    * See this.start()
     */
     public function CaptureBar()
     {
@@ -40,52 +52,15 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
     }
     
    /**
-    * Called by TeamBasesPanel original WG class
-    */ 
-    public function updateProgress(newPointsVal:Number):Void
-    {
-        //Logger.add("CaptureBar.updateProgress: p = " + newPointsVal);
-        m_capSpeed.calculate(newPointsVal, m_points);
-
-        super.updateProgress(newPointsVal); // modifies m_point;
-        
-        //prepare text strings
-        m_macro.update(isSituationNormal, capSecondsLeft, timeLeftMinSec, capturersNum, newPointsVal);
-        
-        m_titleTF.htmlText = m_macro.getPrimaryText();   // Upper text field relative to capture bar
-        m_timerTF.htmlText = m_macro.getSecondaryText(); // Lower text field relative to capture bar
-        
-       /**
-        * Full capture reached.
-        *
-        * "TeamBasesPanel.setCaptured(id, title)" function
-        * is overriden with empty behavior to concentrate macro modding at CaptureBar
-        */
-        if (newPointsVal == 100)
-        {
-            m_titleTF.htmlText = m_macro.getCaptureDoneText();
-            m_timerTF.htmlText = "";
-        }
-        
-       /**
-        * Cap block.
-        * 
-        * updateProgress is also called when capture is blocked at Encounter battle type.
-        * Situation occurs when opposing tanks both stand on shared cap point.
-        * Сapture bar freezes and blinks white. Cap points already captured remain.
-        * captureInterrupt() function at original TeamBasesPanel class
-        * is called twice in a seconds while block continues.
-        * updateProgress() is also called twice a second.
-        */
-    }
-    
-   /**
     * Cant be inserted to constructor easily.
     * Cant be passed as argument externally easily.
     * Thus called straight by extended TeamBasesPanel class.
     */ 
-    public function start(startingPoints:Number):Void
+    public function start(startingPoints:Number, colorFeature:String):Void
     {
+        Logger.add("colorFeature = " + colorFeature);
+        // colorFeature respects color blind
+        
        /**
         * autoSize extends field vertically
         * so lower font parts are not being cut
@@ -113,6 +88,35 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
         m_timerTF.filters = getShadowFilter();
         m_titleTF.htmlText = m_macro.getPrimaryText();
         m_timerTF.htmlText = m_macro.getSecondaryText();
+    }
+    
+   /**
+    * Called by TeamBasesPanel original WG class
+    */ 
+    public function updateProgress(newPointsVal:Number):Void
+    {
+        if (newPointsVal == 100)
+        {
+           /**
+            * Full capture reached.
+            *
+            * "TeamBasesPanel.setCaptured(id, title)" function
+            * is overriden with empty behavior to concentrate macro modding at CaptureBar.
+            */
+            m_titleTF.htmlText = m_macro.getCaptureDoneText();
+            m_timerTF.htmlText = "";
+            return;
+        }
+        
+        m_capSpeed.calculate(newPointsVal, m_points);
+
+        super.updateProgress(newPointsVal); // modifies m_point;
+        
+        //prepare text strings
+        m_macro.update(isSituationNormal, capSecondsLeft, timeLeftMinSec, capturersNum, newPointsVal);
+        
+        m_titleTF.htmlText = m_macro.getPrimaryText();   // Upper text field relative to capture bar
+        m_timerTF.htmlText = m_macro.getSecondaryText(); // Lower text field relative to capture bar
     }
     
     // -- Private
@@ -144,7 +148,21 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
         
     private function get capturersNum():Number
     {
-        return Math.round(m_capSpeed.getSpeed() / m_capSpeed.getOneTankSpeed());
+        var caps:Number = Math.round(m_capSpeed.getSpeed() / m_capSpeed.getOneTankSpeed());
+        
+       /**
+        * Quick fix.
+        * 
+        * When number of capturers increase from 2 to 3
+        * cycles somehow conflict.
+        * 
+        * Tested for encounter battle type.
+        * See cap_encounter.wotreplay.
+        */
+        if (caps == 4)
+            caps = 3;
+            
+        return caps;
     }
     
     /**

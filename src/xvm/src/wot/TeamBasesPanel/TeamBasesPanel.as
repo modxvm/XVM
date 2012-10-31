@@ -34,7 +34,7 @@ class wot.TeamBasesPanel.TeamBasesPanel extends net.wargaming.ingame.TeamBasesPa
             * at that first moment.
             */
             super.add(id, sortWeight, colorFeature, null, null);
-            captureBars[indexByID[id]].start(points);
+            captureBars[indexByID[id]].start(points, colorFeature);
         }
         else
         {

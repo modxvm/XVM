@@ -1,16 +1,11 @@
-import wot.utils.Logger;
 import wot.TeamBasesPanel.CapBarModel.CapCycle;
 import wot.TeamBasesPanel.CapBarModel.InternalTimer;
 import wot.TeamBasesPanel.CapBarModel.TimeRound;
 
 /**
  * This class determines capture speed based on latest information
- * about points captured and time passed since last capture update.
+ * about points captured and time passed since last capture updates.
  *
- * Then this speed is sent to CapCycle which determines average
- * speed for two latest updates. Average speed returned is then used
- * at upper CaptureBar class.
- * 
  * Speed of 0.5 means one cap point is captured in two seconds.
  */
 
@@ -40,17 +35,18 @@ class wot.TeamBasesPanel.CapBarModel.CapSpeed
     {
         var interval:Number = m_timer.getInterval(); // Changes InternalTimer state!
         var rawSpeed:Number = (newPointsVal - prevPoints) / interval;
+        var approxSpeed:Number = TimeRound.round(rawSpeed, 10); // to 0.1 digit
         
-        if (rawSpeed <= 0.2 || rawSpeed > 12)
+        if (approxSpeed < MIN_SPEED_ENCOUNTER || approxSpeed > 8)
         {
            /**
-            * Capture points dropped.
-            * Capture is blocked.
-            * High speed due to replay rewind.
-            * Extremes conditions like infinity, negatives, NaN.
+            * Extremes conditions with infinity, negatives, NaN like
+            * capture points dropped,
+            * capture is blocked or
+            * high speed due to replay rewind.
             * 
             * Reset everything and bail out.
-            * Will recalculate in one cycle of normal capture flow.
+            * Will recalculate in two cycles of normal capture flow.
             */
             m_cycle.clear();
             m_speed = 0;
@@ -58,14 +54,17 @@ class wot.TeamBasesPanel.CapBarModel.CapSpeed
         }
         
        /**
-        * Calculate average speed between two last updates.
+        * One tank capturing speed is different for different battle types.
+        */
+        defineMinimalSpeed(approxSpeed);
+        
+       /**
+        * Define capturing cycle size and
+        * calculate average speed for last cycle.
         * See CapCycle class for details.
         */
-        m_cycle.update(rawSpeed);
+        m_cycle.update(approxSpeed);
         m_speed = m_cycle.getAverageSpeed();
-        m_speed = TimeRound.round(m_speed, 10); // to 0.1 digit
-        
-        defineMinimalSpeed();
     }
     
     public function getSpeed():Number
@@ -75,16 +74,14 @@ class wot.TeamBasesPanel.CapBarModel.CapSpeed
         
     public function getOneTankSpeed():Number
     {
-        //Logger.add(" CapSpeed.getOneTankSpeed = " + s_minimalCapSpeed)
         return s_minimalCapSpeed;
     }
     
     // -- Private
     
-    private function defineMinimalSpeed():Void
+    private function defineMinimalSpeed(approxSpeed:Number):Void
     {
-        Logger.add(" CapSpeed.m_speed = " + m_speed);
-        if (m_speed == MIN_SPEED_ENCOUNTER)
+        if (approxSpeed == MIN_SPEED_ENCOUNTER)
             s_minimalCapSpeed = MIN_SPEED_ENCOUNTER;
     }
 }
