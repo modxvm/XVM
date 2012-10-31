@@ -17,10 +17,13 @@ import wot.TeamBasesPanel.CapBarModel.TimeRound;
 class wot.TeamBasesPanel.CapBarModel.CapSpeed
 {
    /**
-    * 0.5, 0.4 minimal for encounter battle type.
-    * 1 is minimal speed for other battle types.
+    * Minimal capturing speed values for various battle types.
+    * Average for one cycle - two updates.
     */
-    private static var s_minimalCapSpeed:Number = 1; 
+    private static var MIN_SPEED_ENCOUNTER:Number = 0.5;
+    private static var MIN_SPEED_STANDART:Number = 1;
+    
+    private static var s_minimalCapSpeed:Number = MIN_SPEED_STANDART; 
     
     private var m_cycle:CapCycle;
     private var m_timer:InternalTimer;
@@ -81,7 +84,7 @@ class wot.TeamBasesPanel.CapBarModel.CapSpeed
     private function defineMinimalSpeed():Void
     {
         Logger.add(" CapSpeed.m_speed = " + m_speed);
-        if (m_speed < s_minimalCapSpeed)
-            s_minimalCapSpeed = m_speed;
+        if (m_speed == MIN_SPEED_ENCOUNTER)
+            s_minimalCapSpeed = MIN_SPEED_ENCOUNTER;
     }
 }

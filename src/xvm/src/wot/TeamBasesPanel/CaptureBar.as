@@ -9,18 +9,19 @@ import wot.TeamBasesPanel.CapConfig;
 import wot.utils.Logger;
 
 /**
- * Capture progress bar.
+ * Capture progress bar
  * 
  * Extra features implemented:
  * ) Time left to capture point
  * ) Number of capturing tanks
+ * ) Style customization
  * 
  * Features are based on
- * time passed between updates and number of captured points
+ * time passed between updates and number of captured points.
  * 
  * possible todo:
- * ) {{time:m:s}}, {{time:s}} 
- * ) Separate capture line for each capturer.
+ * ) Split ally\enemy bar configs
+ * ) Separate capture line for each capturer
  */
 
 class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
@@ -49,7 +50,7 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
         super.updateProgress(newPointsVal); // modifies m_point;
         
         //prepare text strings
-        m_macro.update(isSituationNormal, capSecondsLeft.toString(), timeLeftMinSec, capturersNum, newPointsVal);
+        m_macro.update(isSituationNormal, capSecondsLeft, timeLeftMinSec, capturersNum, newPointsVal);
         
         m_titleTF.htmlText = m_macro.getPrimaryText();   // Upper text field relative to capture bar
         m_timerTF.htmlText = m_macro.getSecondaryText(); // Lower text field relative to capture bar
@@ -152,18 +153,15 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
      */
     private function get timeLeftMinSec():String
     {
-        var secLeft:Number = Math.round(capSecondsLeft);
-        if (secLeft == 0)
-            return "";
-        var m:Number=Math.floor((secLeft%3600)/60);
-        var s:Number=Math.floor((secLeft%3600)%60);
-        return m.toString() + ":" +
-        (s < 10 ? "0" + s.toString() : s.toString());
+        var min:Number=Math.floor((capSecondsLeft%3600)/60);
+        var sec:Number=Math.floor((capSecondsLeft%3600)%60);
+        return min.toString() + ":" +
+        (sec < 10 ? "0" + sec.toString() : sec.toString());
     }
     
     private function get capSecondsLeft():Number
     {
-        return capPointsLeft / m_capSpeed.getSpeed();
+        return Math.round(capPointsLeft / m_capSpeed.getSpeed());
     }
     
     private function get capPointsLeft():Number

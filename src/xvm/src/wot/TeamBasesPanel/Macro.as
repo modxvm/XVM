@@ -37,10 +37,10 @@ class wot.TeamBasesPanel.Macro
         this.m_points = startingPoints.toString();
     }
     
-    public function update(isSituationNormal:Boolean, timeLeftSec:String, timeLeftMinSec:String, capturersNum:Number, points:Number):Void
+    public function update(isSituationNormal:Boolean, timeLeftSec:Number, timeLeftMinSec:String, capturersNum:Number, points:Number):Void
     {
         this.m_isSituationNormal = isSituationNormal;
-        this.m_timeLeftSec = timeLeftSec;
+        this.m_timeLeftSec = timeLeftSec.toString();
         this.m_timeLeftMinSec = timeLeftMinSec;
         this.m_capturersNum = capturersNum.toString();
         this.m_points = points.toString();
@@ -86,8 +86,9 @@ class wot.TeamBasesPanel.Macro
     
     private function stringReplace(what:String, to:String, where:String):String
     {
+        // as2 string replace hack
         var formatArr:Array;
-        formatArr = where.split(what); // what to search
+        formatArr = where.split(what);
             if (formatArr.length > 1)
         where = formatArr.join(to);
         
