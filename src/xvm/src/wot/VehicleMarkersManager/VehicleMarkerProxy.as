@@ -125,12 +125,16 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
 
         GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
 
-        // Draw watermark
-        if (!Config.s_config.battle.hideXVMVersion && !_global.xvmWatermark)
-            DrawXvmWatermark();
+        // Don't draw watermark and hitlog in hangar
+        if (_root.loadingName != "hangar")
+        {
+            // Draw watermark
+            if (!Config.s_config.battle.hideXVMVersion && !_global.xvmWatermark)
+                DrawXvmWatermark();
 
-        if (Config.s_config.hitLog.visible && hitLog == null)
-            hitLog = new HitLog(Config.s_config.hitLog);
+            if (Config.s_config.hitLog.visible && hitLog == null)
+                hitLog = new HitLog(Config.s_config.hitLog);
+        }
 
         // finalize initialization
         initializeSubject();
@@ -379,14 +383,15 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      */
     public function settingsUpdate(flag) { call("settingsUpdate", [ flag ]); }
     public function get visible()  { return super.visible; }
-    public function set visible(value)  {   super.visible = subject.visible = value; }
+    public function set visible(value)  { super.visible = subject.visible = value; }
     public function get disabled() { return super.disabled; }
-    public function set disabled(value) {  super.disabled = subject.disabled = value; }
+    public function set disabled(value) { super.disabled = subject.disabled = value; }
 
     // IUIComponent implementation
 
     public function configUI()    { call("configUI"); }
     public function validateNow() { call("validateNow"); }
+    public function setSize(width, height) { call("setSize", [ width, height ]); }
 
     // VehicleMarker wrappers for settings dialog with standard markers
     public function invalidate()
@@ -440,10 +445,6 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     public function set height(value){
         trace("*** set height()");
         subject.height = value;
-    }
-
-    public function setSize(width, height){
-        call("setSize", [ width, height ]);
     }
 
     public function get focused(){
