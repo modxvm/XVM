@@ -148,18 +148,32 @@ class wot.utils.DefaultConfig
         lowVulnerability: "'"
       },
       captureBar: {
-        enabled: true,
-        primaryTitleFormat:   "<font size='16' color='#000000'>Base capture! {{extra}}</font>",
-        secondaryTitleFormat: "<font size='16' color='#000000'>{{points}}</font>",
-        captureDoneFormat:    "<font size='16' color='#000000'>Captured!</font>",
-        extra: "Capturers: <b>{{tanks}}</b> Timeleft: <b>{{time}}<b>",
-        primaryTitleOffset: 7,
-        shadow: {
-          color: "0xEEEEEE",
-          alpha: 75,
-          blur: 15,
-          strength: 3
-        }
+          enabled: true,
+          primaryTitleOffset: 7,
+          enemy: {
+            primaryTitleFormat:   "<font size='16' color='#000000'>Enemy base capture! {{extra}}</font>",
+            secondaryTitleFormat: "<font size='16' color='#000000'>{{points}}</font>",
+            captureDoneFormat:    "<font size='16' color='#000000'>Enemy base captured!</font>",
+            extra: "Capturers: <b>{{tanks}}</b> Timeleft: <b>{{time}}<b>",
+            shadow: {
+              color: "0xEEEEEE",
+              alpha: 75,
+              blur: 15,
+              strength: 3
+            }
+          },
+          ally: {
+            primaryTitleFormat:   "<font size='16' color='#000000'>Ally base capture! {{extra}}</font>",
+            secondaryTitleFormat: "<font size='16' color='#000000'>{{points}}</font>",
+            captureDoneFormat:    "<font size='16' color='#000000'>Ally base captured!</font>",
+            extra: "Capturers: <b>{{tanks}}</b> Timeleft: <b>{{time}}<b>",
+            shadow: {
+              color: "0xEEEEEE",
+              alpha: 75,
+              blur: 15,
+              strength: 3
+            }
+          }
       },
       hitLog: {
         visible: true,

@@ -1,7 +1,6 @@
 /**
  * @author ilitvinov
  */
-import wot.utils.Logger;
 import flash.filters.DropShadowFilter;
 import wot.TeamBasesPanel.CapBarModel.CapSpeed;
 import wot.TeamBasesPanel.Macro;
@@ -40,6 +39,7 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
 {
     private var m_capSpeed:CapSpeed; // calculates capture speed
     private var m_macro:Macro;       // defines user presentable html text
+    private var m_capColor:String;
     
    /**
     * CaptureBar() constructor is called once per battle.
@@ -56,9 +56,9 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
     * Cant be passed as argument externally easily.
     * Thus called straight by extended TeamBasesPanel class.
     */ 
-    public function start(startingPoints:Number, colorFeature:String):Void
+    public function start(startingPoints:Number, capColor:String):Void
     {
-        Logger.add("colorFeature = " + colorFeature);
+        m_capColor = capColor;
         // colorFeature respects color blind
         
        /**
@@ -77,15 +77,15 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
         
         m_capSpeed = new CapSpeed();
         
-        m_macro = new Macro(startingPoints);
+        m_macro = new Macro(startingPoints, m_capColor);
         
        /**
         * At this moment TeamBasesPanel called "add".
         * Shadow style and new macro should be defined already.
         * If not, than original WG data will be displayed to user before first update tick.
         */
-        m_titleTF.filters = getShadowFilter();
-        m_timerTF.filters = getShadowFilter();
+        m_titleTF.filters = getShadowFilter(capColor);
+        m_timerTF.filters = getShadowFilter(capColor);
         m_titleTF.htmlText = m_macro.getPrimaryText();
         m_timerTF.htmlText = m_macro.getSecondaryText();
     }
@@ -126,13 +126,13 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
         return [new DropShadowFilter(
                 0, // distance
                 0, // angle
-                CapConfig.shadowColor,
+                CapConfig.shadowColor(m_capColor),
                 // DropShadowFilter accepts alpha be from 0 to 1.
                 // 90 at default config.
-                CapConfig.shadowAlpha / 100, 
-                CapConfig.shadowBlur,
-                CapConfig.shadowBlur,
-                CapConfig.shadowStrength,
+                CapConfig.shadowAlpha(m_capColor) / 100, 
+                CapConfig.shadowBlur(m_capColor),
+                CapConfig.shadowBlur(m_capColor),
+                CapConfig.shadowStrength(m_capColor),
                 3 // quality
             )];
     }

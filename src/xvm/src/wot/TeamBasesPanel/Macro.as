@@ -20,21 +20,24 @@ class wot.TeamBasesPanel.Macro
     private var m_isSituationNormal:Boolean;
     private var m_points:String;
     
-    public function Macro(startingPoints:Number)
+    private var m_capColor:String;
+    
+    public function Macro(startingPoints:Number, capColor:String)
     {
-        m_primaryTitleFormat = Locale.get(CapConfig.primaryTitleFormat);
-        m_secondaryTitleFormat = Locale.get(CapConfig.secondaryTitleFormat);
-        m_captureDoneFormat = Locale.get(CapConfig.captureDoneFormat);
-        m_extra = Locale.get(CapConfig.extra);
-        
-       /**
+        /**
         * Should be defined early because
         * TeamBasesPanel inits panel with "add" function
         * and only after some time passed calls "updatePoints".
         * We already should be prepared to return text.
         */
-        this.m_isSituationNormal = false;
-        this.m_points = startingPoints.toString();
+        m_isSituationNormal = false;
+        m_points = startingPoints.toString();
+        m_capColor = capColor;
+        
+        m_primaryTitleFormat = Locale.get(CapConfig.primaryTitleFormat(m_capColor));
+        m_secondaryTitleFormat = Locale.get(CapConfig.secondaryTitleFormat(m_capColor));
+        m_captureDoneFormat = Locale.get(CapConfig.captureDoneFormat(m_capColor));
+        m_extra = Locale.get(CapConfig.extra(m_capColor));
     }
     
     public function update(isSituationNormal:Boolean, timeLeftSec:Number, timeLeftMinSec:String, capturersNum:Number, points:Number):Void

@@ -21,7 +21,7 @@ class wot.TeamBasesPanel.TeamBasesPanel extends net.wargaming.ingame.TeamBasesPa
         m_xvmCapEnabled = CapConfig.enabled;
     }
     
-    function add(id, sortWeight, colorFeature, title, points)
+    function add(id, sortWeight, capColor, title, points)
     {
         Logger.add("TeamBasesPanel.add: p = " + points);
         if (m_xvmCapEnabled)
@@ -33,12 +33,12 @@ class wot.TeamBasesPanel.TeamBasesPanel extends net.wargaming.ingame.TeamBasesPa
             * Passing original values make text properties original
             * at that first moment.
             */
-            super.add(id, sortWeight, colorFeature, null, null);
-            captureBars[indexByID[id]].start(points, colorFeature);
+            super.add(id, sortWeight, capColor, null, null);
+            captureBars[indexByID[id]].start(points, capColor);
         }
         else
         {
-            super.add(id, sortWeight, colorFeature, title, points);
+            super.add(id, sortWeight, capColor, title, points);
         }
     }
     

@@ -41,10 +41,16 @@ class wot.utils.Locale
     tr["ramming"] = "таран";
     tr["world_collision"] = "падение";
     
-    tr["<font size='16' color='#000000'>Base capture! {{extra}}</font>"] = 
-       "<font size='16' color='#000000'>Захват базы! {{extra}}</font>";
-    tr["<font size='16' color='#000000'>Captured!</font>"] = 
-       "<font size='16' color='#000000'>Захвачена!</font>";
+    tr["<font size='16' color='#000000'>Enemy base capture! {{extra}}</font>"] = 
+       "<font size='16' color='#000000'>Захват вражеской базы! {{extra}}</font>";
+    tr["<font size='16' color='#000000'>Enemy base captured!</font>"] = 
+       "<font size='16' color='#000000'>Вражеская база захвачена!</font>";
+       
+    tr["<font size='16' color='#000000'>Ally base capture! {{extra}}</font>"] = 
+       "<font size='16' color='#000000'>Захват нашей базы! {{extra}}</font>";
+    tr["<font size='16' color='#000000'>Ally base captured!</font>"] = 
+       "<font size='16' color='#000000'>Наша база захвачена!</font>";
+       
     tr[  "Capturers: <b>{{tanks}}</b> Timeleft: <b>{{time}}<b>"] = 
        "Захватчиков: <b>{{tanks}}</b> Осталось времени: <b>{{time}}<b>";
 
