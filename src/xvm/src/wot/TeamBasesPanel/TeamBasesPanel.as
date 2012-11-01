@@ -4,7 +4,6 @@
 
 import wot.TeamBasesPanel.CapConfig;
 import wot.utils.Utils;
-import wot.utils.Logger;
 
 /**
  * Creates and manages CaptureBar instances.
@@ -23,7 +22,6 @@ class wot.TeamBasesPanel.TeamBasesPanel extends net.wargaming.ingame.TeamBasesPa
     
     function add(id, sortWeight, capColor, title, points)
     {
-        Logger.add("TeamBasesPanel.add: p = " + points);
         if (m_xvmCapEnabled)
         {
            /**
