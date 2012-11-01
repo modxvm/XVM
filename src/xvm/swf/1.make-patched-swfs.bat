@@ -1,7 +1,7 @@
 @echo off
 
-set patch_swfs=battleloading.swf PlayersPanel.swf StatisticForm.swf TeamBasesPanel.swf VehicleMarkersManager.swf
-set copy_swfs=battle.swf
+set patch_swfs=battle.swf battleloading.swf PlayersPanel.swf StatisticForm.swf TeamBasesPanel.swf VehicleMarkersManager.swf
+set copy_swfs=
 
 rem Copy SWFs without patching
 for %%i in (%copy_swfs%) do call :do_copy_file %%~ni

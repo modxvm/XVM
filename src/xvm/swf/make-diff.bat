@@ -1,6 +1,6 @@
 @echo off
 
-set swfs=battleloading.swf PlayersPanel.swf StatisticForm.swf TeamBasesPanel.swf VehicleMarkersManager.swf
+set swfs=battle.swf battleloading.swf PlayersPanel.swf StatisticForm.swf TeamBasesPanel.swf VehicleMarkersManager.swf
 
 for %%i in (%swfs%) do call :do_file %%~ni
 
