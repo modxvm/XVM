@@ -20,7 +20,6 @@ import wot.TeamBasesPanel.CapConfig;
  * possible todo:
  * ) Fix 2->3 caps breaks cycle transion. Remove quick fix.
  * ) Check if 1->2 caps breaks cycle transion.
- * ) Split ally\enemy bar configs
  * ) Separate capture line for each capturer
  */
 
