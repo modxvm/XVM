@@ -1,0 +1,44 @@
+<avatar_input_handler.xml>
+  <postMortemMode>
+    <camera>
+      <keySensitivity>0.025</keySensitivity>
+      <sensitivity>0.0025</sensitivity>
+      <scrollSensitivity>	50	</scrollSensitivity>
+      <angleRange>10 110</angleRange>
+      <distRange>2 100</distRange>
+    </camera>
+  </postMortemMode>
+  <arcadeMode>
+    <aim>arcade</aim>
+    <numScrolls>	1	</numScrolls>
+    <camera>
+      <keySensitivity>0.025</keySensitivity>
+      <sensitivity>0.0025</sensitivity>
+      <scrollSensitivity>	50	</scrollSensitivity>
+      <angleRange>10 110</angleRange>
+      <distRange>2 50</distRange>
+    </camera>
+  </arcadeMode>
+  <strategicMode>
+    <aim>strategic</aim>
+    <camera>
+      <keySensitivity>0.5</keySensitivity>
+      <sensitivity>0.05</sensitivity>
+      <scrollSensitivity>1</scrollSensitivity>
+      <distRange>40 1000</distRange>
+    </camera>
+  </strategicMode>
+  <sniperMode>
+    <aim>sniper</aim>
+    <binoculars>
+      <background>gui/maps/ingame/aim/binoculars.dds</background>
+    </binoculars>
+    <numScrolls>	1	</numScrolls>
+    <camera>
+      <keySensitivity>0.01</keySensitivity>
+      <sensitivity>0.005</sensitivity>
+      <scrollSensitivity>0.0025</scrollSensitivity>
+      <zooms>2 4 8</zooms>
+    </camera>
+  </sniperMode>
+</avatar_input_handler.xml>
