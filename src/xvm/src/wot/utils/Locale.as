@@ -46,8 +46,8 @@ class wot.utils.Locale
     tr["<font size='17' color='#FFCC66'>Enemy base captured!</font>"] = 
        "<font size='17' color='#FFCC66'>Вражеская база захвачена!</font>";
        
-    tr["<font size='15' color='#000000'>Ally base capture! {{extra}}</font>"] = 
-       "<font size='15' color='#000000'>Захват нашей базы! {{extra}}</font>";
+    tr["<font size='15' color='#FFFFFF'>Ally base capture! {{extra}}</font>"] = 
+       "<font size='15' color='#FFFFFF'>Захват нашей базы! {{extra}}</font>";
     tr["<font size='17' color='#FFCC66'>Ally base captured!</font>"] = 
        "<font size='17' color='#FFCC66'>Наша база захвачена!</font>";
        
