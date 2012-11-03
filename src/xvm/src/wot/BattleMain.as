@@ -2,6 +2,9 @@
  * ...
  * @author sirmax2
  */
+import com.greensock.OverwriteManager;
+import com.greensock.plugins.TweenPlugin;
+import com.greensock.plugins.TintPlugin;
 import wot.utils.Config;
 import wot.utils.GlobalEventDispatcher;
 import wot.utils.Logger;
@@ -25,6 +28,10 @@ class wot.BattleMain
         GlobalEventDispatcher.addEventListener("config_loaded", BattleMainConfigLoaded);
         GlobalEventDispatcher.addEventListener("config_loaded", StatLoader.LoadLastStat);
         Config.LoadConfig("BattleMain.as");
+
+        // initialize TweenLite
+        OverwriteManager.init(OverwriteManager.AUTO);
+        TweenPlugin.activate([TintPlugin]);
 
         instance = new BattleMain();
         gfx.io.GameDelegate.addCallBack("battle.showPostmortemTips", instance, "showPostmortemTips");

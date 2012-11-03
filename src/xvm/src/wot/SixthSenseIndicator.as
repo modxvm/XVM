@@ -3,6 +3,8 @@
  * @author ...
  */
 import com.greensock.TweenLite;
+import com.greensock.TimelineLite;
+import com.greensock.easing.Linear;
 import net.wargaming.controls.UILoaderAlt;
 import wot.utils.IconLoader;
 import wot.utils.Logger;
@@ -42,7 +44,8 @@ class wot.SixthSenseIndicator
         icon.content._alpha = 0;
 
         // DEBUG
-        //setInterval(function() { _root.sixthSenseIndicator.gotoAndPlay("active") }, 5000);
+        //var a = "fade";
+        //setInterval(function() { a = a == "fade" ? "active" : "fade"; _root.sixthSenseIndicator.gotoAndPlay(a) }, 3000);
     }
 
     public function sixthSenseIndicator_gotoAndPlay(frame)
@@ -58,13 +61,15 @@ class wot.SixthSenseIndicator
         switch (frame)
         {
             case "active":
- 		TweenLite.to(icon.content, 1.0, { _alpha:100 } );
+                var timeline = new TimelineLite();
+                timeline.insert(TweenLite.to(icon.content, 0.2, { _alpha:100, ease:Linear.easeNone } ), 0);
+                timeline.append(TweenLite.from(icon.content, 0.2, { tint:"0xFFFFFF", ease: Linear.easeNone } ), 0);
                 break;
             case "inactive":
- 		TweenLite.to(icon.content, 1.0, {_alpha:70});
+ 		TweenLite.to(icon.content, 0.2, {_alpha:70});
                 break;
             case "fade":
- 		TweenLite.to(icon.content, 1.0, {_alpha:0});
+ 		TweenLite.to(icon.content, 0.5, {_alpha:0});
                 break;
         }
     }
