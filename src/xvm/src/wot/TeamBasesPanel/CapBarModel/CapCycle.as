@@ -12,7 +12,7 @@
 
 class wot.TeamBasesPanel.CapBarModel.CapCycle
 {
-    private static var ABSOLUTE_MINIMAL_SPEED:Number = 0.5;
+    private static var ABSOLUTE_MINIMAL_SPEED:Number = 0.4;
     
     private var m_averageSpeed:Number; // average speed for one cycle updates
     

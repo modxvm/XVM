@@ -14,8 +14,12 @@ class wot.TeamBasesPanel.CapBarModel.CapSpeed
    /**
     * Minimal capturing speed values for various battle types.
     * Average for one cycle - two updates.
+    * 
+    * Cap speed may differ by map.
+    * El halloof 0.4, 0.835
+    * Any other map 0.5, 1
     */
-    private static var MIN_SPEED_ENCOUNTER:Number = 0.5;
+    private static var MIN_SPEED_ENCOUNTER:Number = 0.4;
     private static var MIN_SPEED_STANDART:Number = 1;
     
     private static var s_minimalCapSpeed:Number = MIN_SPEED_STANDART; 
@@ -35,8 +39,7 @@ class wot.TeamBasesPanel.CapBarModel.CapSpeed
     {
         var interval:Number = m_timer.getInterval(); // Changes InternalTimer state!
         var rawSpeed:Number = (newPointsVal - prevPoints) / interval;
-        var approxSpeed:Number = TimeRound.round(rawSpeed, 10); // to 0.1 digit
-        
+        var approxSpeed:Number = TimeRound.round(rawSpeed, 100); // to 0.1 digit
         if (approxSpeed < MIN_SPEED_ENCOUNTER || approxSpeed > 8)
         {
            /**

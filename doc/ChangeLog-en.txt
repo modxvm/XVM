@@ -1,4 +1,7 @@
-﻿XVM-3.1.2.test3:
+﻿XVM-3.1.2.test4:
+  * implemented special capture speed for encounter battle type at exceptional maps like El halloof 
+
+XVM-3.1.2.test3:
   * enemy\ally capture configuration split
   * time and capturers computation algorythm rewrite
   * fixed capture bar shadow color
