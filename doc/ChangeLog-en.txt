@@ -1,5 +1,6 @@
 ﻿XVM-3.1.2.test4:
-  * implemented special capture speed for encounter battle type at exceptional maps like El halloof 
+  * implemented special capture speed for encounter battle type at exceptional maps like El halloof
+  * capture mod default acceptable config defined
 
 XVM-3.1.2.test3:
   * enemy\ally capture configuration split
