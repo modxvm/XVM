@@ -128,6 +128,7 @@
   "captureBar": {
     "enabled": true, // On/off switch
     "primaryTitleOffset": 7, // Upper textfield offset in case of big font size
+    "appendPlus" : true, // append plus to three capturers. Cant calculate more than three.
     // Capture format (macros allowed, see readme-en.txt)
     "enemy": {
       "primaryTitleFormat":   "<font size='16' color='#000000'>Enemy base capture! {{extra}}</font>", // Upper textfield
@@ -1487,9 +1488,9 @@
     // Dynamic color by win percent (only with xvm-stat)
     "rating": [
       { "value": 47,  "color": "0xFF0000" },   //  * - 46
-      { "value": 48,  "color": "0xDD4444" },   // 47
-      { "value": 49,  "color": "0xFF8844" },   // 48
-      { "value": 51,  "color": "0xFFCC22" },   // 49 - 50
+      { "value": 49,  "color": "0xDD4444" },   // 47 - 48
+      { "value": 50,  "color": "0xFF8844" },   // 49
+      { "value": 51,  "color": "0xFFCC22" },   // 50
           
       { "value": 54,  "color": "0x99FF44" },   // 51 - 53 // good player
       { "value": 58,  "color": "0x33FF88" },   // 54 - 57 // great

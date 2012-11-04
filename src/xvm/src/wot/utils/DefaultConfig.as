@@ -150,6 +150,7 @@ class wot.utils.DefaultConfig
       captureBar: {
           enabled: true,
           primaryTitleOffset: 7,
+          appendPlus: true,
           enemy: {
             primaryTitleFormat:   "<font size='15' color='#FFFFFF'>Enemy base capture! {{extra}}</font>",
             secondaryTitleFormat: "<font size='15' color='#FFFFFF'>{{points}}</font>",
@@ -433,9 +434,9 @@ class wot.utils.DefaultConfig
         ],
         rating: [
           { value: 47,  color: ColorPalette.redBright },   //  * - 46
-          { value: 48,  color: ColorPalette.redSmooth },   // 47
-          { value: 49,  color: ColorPalette.orange },      // 48
-          { value: 51,  color: ColorPalette.yellow },      // 49 - 50
+          { value: 49,  color: ColorPalette.redSmooth },   // 47 - 48
+          { value: 50,  color: ColorPalette.orange },      // 49
+          { value: 51,  color: ColorPalette.yellow },      // 50
           
           { value: 54,  color: ColorPalette.greenyellow }, // 51 - 53
           { value: 58,  color: ColorPalette.green },       // 54 - 57

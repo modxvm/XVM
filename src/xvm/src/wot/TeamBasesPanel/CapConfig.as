@@ -13,6 +13,11 @@ class wot.TeamBasesPanel.CapConfig
     {
         return Config.s_config.captureBar.primaryTitleOffset;
     }
+        
+    public static function get appendPlus():Boolean
+    {
+        return Config.s_config.captureBar.appendPlus;
+    }
     
     // -- Team dependent
     

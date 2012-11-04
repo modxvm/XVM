@@ -46,11 +46,13 @@ class wot.TeamBasesPanel.Macro
         this.m_timeLeftSec = timeLeftSec.toString();
         this.m_timeLeftMinSec = timeLeftMinSec;
         this.m_points = points.toString();
-        
-        if (capturersNum == 3)
-            this.m_capturersNum = "3+";
-        else
-            this.m_capturersNum = capturersNum.toString() + " "; // space to keep atleast some alignment
+        this.m_capturersNum = capturersNum.toString();
+
+        // Print "3" or "3+" capturers depending on config.
+        if (CapConfig.appendPlus && m_capturersNum == "3")
+            this.m_capturersNum += "+";
+        if (CapConfig.appendPlus && m_capturersNum != "3")
+            this.m_capturersNum += " "; // space to keep atleast some alignment
     }
     
     public function getPrimaryText():String
