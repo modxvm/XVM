@@ -1,4 +1,4 @@
-﻿{
+{
   "configVersion": "1.5.0",
   "definition": {
     "author": "sirmax2",
@@ -26,15 +26,15 @@
     "showChancesExp": true,
     "removeSquadIcon": false,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft": "{{vehicle}} <font face='Consolas' size='11'><font color='{{c:t-battles}}'>{{t-hb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
-    "formatRight": "<font face='Consolas' size='11'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-battles}}'>{{t-hb:3}}</font></font> {{vehicle}}"
+    "formatLeft": "{{vehicle}} <font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
+    "formatRight": "<font face='Consolas' size='11'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font> {{vehicle}}"
   },
   "statisticForm": {
     "showChances": true,
     "showChancesExp": true,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft": "{{vehicle}} <font face='Consolas' size='11'><font color='{{c:kb}}'>{{t-hb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
-    "formatRight": "<font face='Consolas' size='11'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{t-hb:3}}</font></font> {{vehicle}}"
+    "formatLeft": "{{vehicle}} <font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
+    "formatRight": "<font face='Consolas' size='11'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font> {{vehicle}}"
   },
   "playersPanel": {
     "alpha": 50,
@@ -177,7 +177,7 @@
               "name": "Tank Rating",
               "x": 0, "y": -50, "alpha": 75,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<font face='$FieldFont' size='12' color='{{c:eff}}'><b>{{t-rating}}</b></font>"
+              "format": "<font face='$FieldFont' size='12' color='{{c:eff}}'><b>{{rating}}</b></font>"
             }
           ]
         }
@@ -330,7 +330,7 @@
               "name": "Tank Rating",
               "x": 0, "y": -50, "alpha": 75,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<font face='$FieldFont' size='12' color='{{c:eff}}'><b>{{t-rating}}</b></font>"
+              "format": "<font face='$FieldFont' size='12' color='{{c:eff}}'><b>{{rating}}</b></font>"
             }
           ]
         }

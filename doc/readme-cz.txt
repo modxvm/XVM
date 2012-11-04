@@ -1,4 +1,4 @@
-Obsah:
+﻿Obsah:
   1. Základní informace
   2. Instalace
   3. Aktualizace
@@ -86,6 +86,9 @@ Obsah:
       Všechny možnosti nastavení můžete vidět v tomto souboru:
         "\xvm-doc\samples\Full config EN\XVM.xvmconf"
 
+      Podporované HTML tagy:
+        http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText
+
 
   2.  Dostupná makra:
       ---------------
@@ -95,20 +98,49 @@ Obsah:
 
         {{nick}}        - jméno hráče
         {{vehicle}}     - název vozidla
+        {{c:vtype}}     - barva závislá na barvě vozidla
+        + makra statistik (více informací níže)
 
 
       V ikonách nad vozidly:
 
+        {{nick}}        - jméno hráče
+        {{vehicle}}     - název vozidla
+        {{level}}       - úroveň (tier) vozidla (aravskými číslicemi)
+        {{rlevel}}      - úroveň (tier) vozidla (římskými číslicemi)
+        {{turret}}      - ikona základní věže:
+                          "*" symbol - základní věž, nemůže mít namontovanou nejlepší zbraň
+                          "-" symbol - základní věž, může mít namontovanou nejlepší zbraň
+                          prázdné - vozidlo má nejlepší věž
         {{hp}}          - aktuální počet životů
         {{hp-ratio}}    - aktuální počet životů v % (zobrazeno bez '%')
         {{hp-max}}      - maximální počet životů
-        {{nick}}        - jméno hráče
-        {{vehicle}}     - název vozidla
-        {{level}}       - úroveň (tier) vozidla (arabskými číslicemi)
-        {{rlevel}}      - úroveň (tier) vozidla (římskými číslicemi)
-        {{dmg}}         - pocet ubraných zivotu
+        {{dmg}}         - pocet ubraných zivotů
         {{dmg-ratio}}   - počet ubraných životů v % (zobrazeno bez '%')
-      	{{turret}}	    - ikona základní věže- symbol '*' znamená, že tank nemůže mít nejlepší dělo, symbol '-' znamená, že tank může mít namontované nejlepší dělo
+        {{dmg-kind}}    - typ poškození (útok, oheň, náraz, ...)
+      	{{c:hp}}        - barva závislá na aktuálním počtu životů (pouze v ikoně nad vozidlem)
+        {{c:hp-ratio}}  - barva závislá na poměru aktuálního počtu životů k celkovému počtu životů- v % (pouze v ikoně nad vozidlem)
+	{{c:dmg-kind}}  - barva závislá na typu poškození
+        {{c:vtype}}	- barva závislá na typu vozidla (pouze v ikoně nad vozidlem)
+        {{a:hp}}        - průhlednost závislá na aktuálním počtu životů (pouze v ikonách tanků)
+        {{a:hp-ratio}}  - průhlednost závislá na poměru počtu aktuálního počtu životů k celkovému počtu životů (pouze v ikonách tanků)
+        + makra statistik (více informací níže)
+
+
+      Záznam zásahů:
+        {{n}}           - celkový počet zásahů
+        {{n-player}}    - počet zásahů pro každého hráče
+        {{dmg}}         - velikost posledního zásahu
+        {{dmg-total}}   - součet všech zásahů
+        {{dmg-player}}  - součet všech zásahů pro každého hráče
+        {{dead}}        - značka zničeného vozidla
+        {{nick}}        - přezdívka hráče
+        {{vehicle}}     - název vozidla
+        {{level}}       - úroveň (tier) vozidla (aravskými číslicemi)
+        {{rlevel}}      - úroveň (tier) vozidla (římskými číslicemi)
+        {{dmg-kind}}    - typ poškození (útok, oheň, náraz, ...)
+        {{c:dmg-kind}}  - barva závislá na typu poškození
+        {{c:vtype}}     - barva závislá na typu vozidla (pouze v ikoně nad vozidlem)
 
 
       Statistická makra:
@@ -123,8 +155,9 @@ Obsah:
         {{rating:3}}    - celkový poměr výher k celkovému počtu bitev zaokrouhlený na 3 místa zleva
         {{eff:4}}       - efektivita hráče zaokrouhlená na 4 místa zleva
         {{kb:3}}        - celkový počet bitev v tisících zaokrouhlený na 3 místa zleva
-	      {{t-rating}}	  - poměr výher na daném vozidle k celkovému počtu bitev s daným vozidlem
+        {{t-rating}}	- poměr výher na daném vozidle k celkovému počtu bitev s daným vozidlem
         {{t-kb}}        - počet bitev v tisících na daném vozidle
+        {{t-kb-0}}      - počet bitev v tisících na daném vozidle s nulou na začátku
         {{t-battles}}   - celkový počet bitev na daném vozidle
         {{t-wins}}      - celkový počet výher na daném vozidle
         {{t-rating:3}}  - poměr výher na daném vozidle k celkovému počtu bitev s daným vozidlem zaokrouhlený na 3 místa zleva
@@ -137,9 +170,6 @@ Obsah:
 
       Makra pro dynamickou změnu barvy:
 
-        {{c:hp}}        - barva závislá na aktuálním počtu životů (pouze v ikoně nad vozidlem)
-        {{c:hp-ratio}}  - barva závislá na poměru aktuálního počtu životů k celkovému počtu životů- v % (pouze v ikoně nad vozidlem)
-	{{c:vtype}}	- barva závislá na typu vozidla (pouze v ikoně nad vozidlem)
         {{c:eff}}       - barva závislá na efektivitě hráče
         {{c:rating}}    - barva závislá na poměru celkového počtu výher k celkovému počtu bitev
         {{c:kb}}        - barva závislá na celkovém počtu bitev v tisicích
@@ -198,6 +228,14 @@ Obsah:
           Ruský server:     http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-ru.zip
           Evropský server:  http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-eu.zip
           Americký server:  http://code.google.com/p/wot-xvm/downloads/detail?name=clanicons-full-us.zip
+
+  Obrázek šestého smyslu:
+    Chcete-li změnit ikonu šestého smyslu, vložte uložte svůj obrázek takto:
+    res_mods/icons/SixthSense.png
+
+    Hit Log.
+      Záporné hodnoty x, y umístí text k pravé dolní hranici 
+      Will work only with running xvm-stat!!!
 
 
 Přeložil: Shortik
