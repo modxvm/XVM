@@ -45,8 +45,12 @@ class wot.TeamBasesPanel.Macro
         this.m_isSituationNormal = isSituationNormal;
         this.m_timeLeftSec = timeLeftSec.toString();
         this.m_timeLeftMinSec = timeLeftMinSec;
-        this.m_capturersNum = capturersNum.toString();
         this.m_points = points.toString();
+        
+        if (capturersNum == 3)
+            this.m_capturersNum = "3+";
+        else
+            this.m_capturersNum = capturersNum.toString() + " "; // space to keep atleast some alignment
     }
     
     public function getPrimaryText():String
