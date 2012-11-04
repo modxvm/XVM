@@ -1,4 +1,5 @@
 ﻿XVM-3.1.2.test4:
+  * improved default major color palette
   * implemented special capture speed for encounter battle type at exceptional maps like El halloof
   * capture mod default acceptable config defined
 

@@ -6,7 +6,7 @@ package utils
 {
 import utils.Defines;
 
-public class DefaultConfig
+class DefaultConfig
 {
   public static function get config(): Object
   {
@@ -148,18 +148,32 @@ public class DefaultConfig
         lowVulnerability: "'"
       },
       captureBar: {
-        enabled: true,
-        primaryTitleFormat:   "<font size='16' color='#000000'>Base capture! {{extra}}</font>",
-        secondaryTitleFormat: "<font size='16' color='#000000'>{{points}}</font>",
-        captureDoneFormat:    "<font size='16' color='#000000'>Captured!</font>",
-        extra: "Capturers: <b>{{tanks}}</b> Timeleft: <b>{{time}}<b>",
-        primaryTitleOffset: 7,
-        shadow: {
-          color: "0xEEEEEE",
-          alpha: 75,
-          blur: 15,
-          strength: 3
-        }
+          enabled: true,
+          primaryTitleOffset: 7,
+          enemy: {
+            primaryTitleFormat:   "<font size='15' color='#FFFFFF'>Enemy base capture! {{extra}}</font>",
+            secondaryTitleFormat: "<font size='15' color='#FFFFFF'>{{points}}</font>",
+            captureDoneFormat:    "<font size='17' color='#FFCC66'>Enemy base captured!</font>",
+            extra: "Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>",
+            shadow: {
+              color: "0x000000",
+              alpha: 50,
+              blur: 6,
+              strength: 3
+            }
+          },
+          ally: {
+            primaryTitleFormat:   "<font size='15' color='#FFFFFF'>Ally base capture! {{extra}}</font>",
+            secondaryTitleFormat: "<font size='15' color='#FFFFFF'>{{points}}</font>",
+            captureDoneFormat:    "<font size='17' color='#FFCC66'>Ally base captured!</font>",
+            extra: "Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>",
+            shadow: {
+              color: "0x000000",
+              alpha: 50,
+              blur: 6,
+              strength: 3
+            }
+          }
       },
       hitLog: {
         visible: true,
@@ -172,7 +186,7 @@ public class DefaultConfig
         insertOrder: "end",
         groupHitsByPlayer: false,
         // Substitution for {{dead}} macro when player is dead
-        deadMarker: "<font face='Wingdings'>N</font>",
+        deadMarker:   "<font face='Wingdings'>N</font>",
         blowupMarker: "<font face='Wingdings'>M</font>",
         formatHeader: "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> <font size='1{{nick}}'><b>{{dmg-total}}</b>  <font color='#CCCCCC'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font></font>",
         formatHistory: "<textformat leading='-4' tabstops='[20,50,90,150]'><font size='12'>\u00D7{{n-player}}:</font><tab>{{dmg-player}}<tab>| <font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab>| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>"
@@ -395,48 +409,60 @@ public class DefaultConfig
         },
         // values - from min to max, colors are for values 'lesser then ...'
         hp: [
-          { value: 200,  color: "0xDD0000" },
-          { value: 400,  color: "0xDD3333" },
-          { value: 1000, color: "0xFFCC33" },
-          { value: 9999, color: "0xFFFFFF" }
+          { value: 201,  color: ColorPalette.redBright }, //    * - 199
+          { value: 401,  color: ColorPalette.redSmooth }, //  201 - 399
+          { value: 1001, color: ColorPalette.orange },    //  401 - 999
+          { value: 9999, color: ColorPalette.white }      // 1001 -   *
         ],
         hp_ratio: [
-          { value: 10,  color: "0xDD0000" },
-          { value: 25,  color: "0xDD3333" },
-          { value: 50,  color: "0xFFCC33" },
-          { value: 101, color: "0xFFFFFF" }
+          { value: 10,  color: ColorPalette.redBright },  //  * -  9
+          { value: 25,  color: ColorPalette.redSmooth },  // 11 - 24
+          { value: 50,  color: ColorPalette.orange },     // 25 - 49
+          { value: 101, color: ColorPalette.white }       // 51 -  *
         ],
         eff: [
-          { value: 600,  color: "0xDD0000" },
-          { value: 900,  color: "0xDD3333" },
-          { value: 1200, color: "0xFFCC33" },
-          { value: 1500, color: "0x99FF33" },
-          { value: 1800, color: "0x33FF33" },
-          { value: 9999, color: "0xCC66CC" }
+          { value: 800,  color: ColorPalette.redBright },   //    * -  799
+          { value: 900,  color: ColorPalette.redSmooth },   //  800 -  899
+          { value: 1000, color: ColorPalette.orange },      //  900 -  999
+          { value: 1200, color: ColorPalette.yellow },      // 1000 - 1199
+          
+          { value: 1400, color: ColorPalette.greenyellow }, // 1200 - 1399 // good
+          { value: 1800, color: ColorPalette.green },       // 1400 - 1799 // great
+          { value: 2009, color: ColorPalette.purple },      // 1800 - 1999 // unique
+          { value: 9999, color: ColorPalette.magenta }      // 2000 -    *
         ],
         rating: [
-          { value: 45,  color: "0xDD3333" },
-          { value: 48,  color: "0xDDDD33" },
-          { value: 51,  color: "0xFFCC33" },
-          { value: 53,  color: "0x99FF33" },
-          { value: 57,  color: "0x33FF33" },
-          { value: 101, color: "0xCC66CC" }
+          { value: 47,  color: ColorPalette.redBright },   //  * - 46
+          { value: 48,  color: ColorPalette.redSmooth },   // 47
+          { value: 49,  color: ColorPalette.orange },      // 48
+          { value: 51,  color: ColorPalette.yellow },      // 49 - 50
+          
+          { value: 54,  color: ColorPalette.greenyellow }, // 51 - 53
+          { value: 58,  color: ColorPalette.green },       // 54 - 57
+          { value: 60,  color: ColorPalette.purple },      // 58 - 59
+          { value: 101, color: ColorPalette.magenta }      // 60 -  *
         ],
         kb: [
-          { value: 1,   color: "0xDD0000" },
-          { value: 3,   color: "0xDD3333" },
-          { value: 5,   color: "0xFFCC33" },
-          { value: 8,   color: "0x99FF33" },
-          { value: 12,  color: "0x33FF33" },
-          { value: 999, color: "0xCC66CC" }
+          { value: 2,   color: ColorPalette.redBright },   //  0 - 1
+          { value: 3,   color: ColorPalette.redSmooth },   //  2
+          { value: 4,   color: ColorPalette.orange },      //  3
+          { value: 6,   color: ColorPalette.yellow },      //  4 - 5
+          
+          { value: 9,   color: ColorPalette.greenyellow }, //  6 -  8
+          { value: 13,  color: ColorPalette.green },       //  9 - 12
+          { value: 20,  color: ColorPalette.purple },      // 13 - 19
+          { value: 999, color: ColorPalette.magenta }      // 20 -  *
         ],
         t_battles: [
-          { value: 100,  color: "0xDD0000" },
-          { value: 200,  color: "0xDD3333" },
-          { value: 300,  color: "0xFFCC33" },
-          { value: 500,  color: "0x99FF33" },
-          { value: 800,  color: "0x33FF33" },
-          { value: 9999, color: "0xCC66CC" }
+          { value: 100,   color: ColorPalette.redBright },
+          { value: 200,   color: ColorPalette.redSmooth },
+          { value: 300,   color: ColorPalette.orange },
+          { value: 500,   color: ColorPalette.yellow },
+          
+          { value: 800,   color: ColorPalette.greenyellow },
+          { value: 1200,  color: ColorPalette.green },
+          { value: 1800,  color: ColorPalette.purple },
+          { value: 9999,  color: ColorPalette.magenta }
         ]
       },
       alpha: {
@@ -469,6 +495,15 @@ public class DefaultConfig
           { value: 101, alpha: 40 }
         ]
       },
+/*      images: {
+        dmg_kind: {
+          attack: "",
+          fire: "../../../icons/xvm/dmg_fire.png",
+          ramming: "../../../icons/xvm/dmg_ramming.png",
+          world_collision: "../../../icons/xvm/dmg_world_collision.png",
+          other: "../../../icons/xvm/dmg_other.png"
+        }
+      },*/
       iconset: {
         battleLoading: "../maps/icons/vehicle/contour",
         statisticForm: "../maps/icons/vehicle/contour",
@@ -732,7 +767,7 @@ public class DefaultConfig
       x: 0,
       y: -20,
       alpha: 100,
-      color: "0xFFFFFF",
+      color: ColorPalette.white,
       font: font_11b,
       shadow: shadow_150,
       format: "{{hp}} / {{hp-max}}"
@@ -748,7 +783,7 @@ public class DefaultConfig
       x: 0,
       y: -20,
       alpha: 100,
-      color: "0xFFFFFF",
+      color: ColorPalette.white,
       font: font_11b,
       shadow: shadow_150,
       format: "{{hp-ratio}}%"

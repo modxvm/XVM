@@ -1448,7 +1448,7 @@
       "world_collision": "0x228855",               // world_collision
       "other": "0xCCCCCC"                          // other
     },
-    // Dynamic color for vehicle type
+    // Dynamic color by vehicle type
     "vtype": {
       "LT":  "0xA2FF9A",                           // Color for light tanks
       "MT":  "0xFFF198",                           // Color for medium tanks
@@ -1458,87 +1458,98 @@
       "premium": "0xFFCC66",                       // Color for premium tanks
       "usePremiumColor": false                     // Enable/disable premium color usage
     },
-    // Dynamic color for remaining health
+    // Dynamic color by remaining absolute health
     "hp": [
-      { "value": 200,  "color": "0xDD0000" },      // Color for health below 200
-      { "value": 400,  "color": "0xDD3333" },      // Color for health below 400
-      { "value": 1000, "color": "0xFFCC33" },      // Color for health below 1000
-      { "value": 9999, "color": "0xFFFFFF" }       // Color for health from 1000 and above
+      { "value": 200,  "color": "0xEE1133" },    // Color for health less than 200
+      { "value": 400,  "color": "0xDD4444" },    // Color for health less than 400
+      { "value": 1000, "color": "0xFFCC22" },    // Color for health less than 1000
+      { "value": 9999, "color": "0xFFFFFF" }     // Color for health 1000 and more
     ],
-    // Dynamic color for percentage of remaining health
+    // Dynamic color by remaining health percent
     "hp_ratio": [
-      { "value": 10,  "color": "0xDD0000" },      // Color for health below 10 percent
-      { "value": 25,  "color": "0xDD3333" },      // Color for health below 25 percent
-      { "value": 50,  "color": "0xFFCC33" },      // Color for health below 50 percent
-      { "value": 101, "color": "0xFFFFFF" }       // Color for health up to 100 percent
+      { "value": 10,  "color": "0xEE1133" },    // Color for health less than 10 prercent
+      { "value": 25,  "color": "0xDD4444" },    // Color for health less than 25 prercent
+      { "value": 50,  "color": "0xFFCC22" },    // Color for health less than 50 prercent
+      { "value": 101, "color": "0xFFFFFF" }     // Color for health 50 prercent and more
     ],
-    // Dynamic color for effectiveness (only with xvm-stat)
+    // Dynamic color by efficiency (only with xvm-stat)
     "eff": [
-      { "value": 600,  "color": "0xDD0000" },
-      { "value": 900,  "color": "0xDD3333" },
-      { "value": 1200, "color": "0xFFCC33" },
-      { "value": 1500, "color": "0x99FF33" },
-      { "value": 1800, "color": "0x33FF33" },
-      { "value": 9999, "color": "0xCC66CC" }
+      { "value": 800,  "color": "0xEE1133" },   //    * -  799
+      { "value": 900,  "color": "0xDD4444" },   //  800 -  899
+      { "value": 1000, "color": "0xFF8844" },   //  900 -  999
+      { "value": 1200, "color": "0xFFCC22" },   // 1000 - 1199
+          
+      { "value": 1400, "color": "0x99FF44" },   // 1200 - 1399 // good player
+      { "value": 1800, "color": "0x33FF88" },   // 1400 - 1799 // great
+      { "value": 2000, "color": "0xAA66FF" },   // 1800 - 1999 // unique
+      { "value": 9999, "color": "0xEE33FF" }    // 2000 -    *
     ],
-    // Dynamic color for victory percentage (only with xvm-stat)
+    // Dynamic color by win percent (only with xvm-stat)
     "rating": [
-      { "value": 42,  "color": "0xDD0000" },
-      { "value": 46,  "color": "0xDD3333" },
-      { "value": 49,  "color": "0xDDDD33" },
-      { "value": 51,  "color": "0xFFCC33" },
-      { "value": 53,  "color": "0x99FF33" },
-      { "value": 57,  "color": "0x33FF33" },
-      { "value": 101, "color": "0xCC66CC" }
+      { "value": 47,  "color": "0xEE1133" },   //  * - 46
+      { "value": 48,  "color": "0xDD4444" },   // 47
+      { "value": 49,  "color": "0xFF8844" },   // 48
+      { "value": 51,  "color": "0xFFCC22" },   // 49 - 50
+          
+      { "value": 54,  "color": "0x99FF44" },   // 51 - 53 // good player
+      { "value": 58,  "color": "0x33FF88" },   // 54 - 57 // great
+      { "value": 60,  "color": "0xAA66FF" },   // 58 - 59 // unique
+      { "value": 101, "color": "0xEE33FF" }    // 60 -  *
     ],
-    // Dynamic color for the number of thousands of battles ("kilo-battles") (only with xvm-stat)
+    // Dynamic color by kilo-battles (only with xvm-stat)
     "kb": [
-      { "value": 1,   "color": "0xDD0000" },
-      { "value": 3,   "color": "0xDD3333" },
-      { "value": 5,   "color": "0xFFCC33" },
-      { "value": 8,   "color": "0x99FF33" },
-      { "value": 12,  "color": "0x33FF33" },
-      { "value": 999, "color": "0xCC66CC" }
+      { "value": 2,   "color": "0xEE1133" },   //  0 - 1
+      { "value": 3,   "color": "0xDD4444" },   //  2
+      { "value": 4,   "color": "0xFF8844" },   //  3
+      { "value": 6,   "color": "0xFFCC22" },   //  4 - 5
+          
+      { "value": 9,   "color": "0x99FF44" },   //  6 -  8
+      { "value": 13,  "color": "0x33FF88" },   //  9 - 12
+      { "value": 20,  "color": "0xAA66FF" },   // 13 - 19
+      { "value": 999, "color": "0xEE33FF" }    // 20 -  *
     ],
-    // Dynamic color for the number of battles for current tank (only with xvm-stat)
+    // Dynamic color by battles on current tank (only with xvm-stat)
     "t_battles": [
-      { "value": 100,  "color": "0xDD0000" },
-      { "value": 200,  "color": "0xDD3333" },
-      { "value": 300,  "color": "0xFFCC33" },
-      { "value": 500,  "color": "0x99FF33" },
-      { "value": 800,  "color": "0x33FF33" },
-      { "value": 9999, "color": "0xCC66CC" }
+      { "value": 100,   "color": "0xEE1133" },
+      { "value": 200,   "color": "0xDD4444" },
+      { "value": 300,   "color": "0xFF8844" },
+      { "value": 500,   "color": "0xFFCC22" },
+          
+      { "value": 800,   "color": "0x99FF44" },
+      { "value": 1200,  "color": "0x33FF88" },
+      { "value": 1800,  "color": "0xAA66FF" },
+      { "value": 9999,  "color": "0xEE33FF" }
     ]
   },
   // OPTIONS FOR DYNAMIC TRANSPARENCY
   "alpha": {
-    // Dynamic transparency for remaining health
+    // Dynamic transparency by remaining health
     "hp": [
       { "value": 200,  "alpha": 100 },
       { "value": 400,  "alpha": 80 },
       { "value": 1000, "alpha": 60 },
       { "value": 9999, "alpha": 40 }
     ],
-    // Dynamic transparency for percentage of remaining health
+    // Dynamic transparency by percentage of remaining health
     "hp_ratio": [
       { "value": 10,  "alpha": 100 },
       { "value": 25,  "alpha": 80 },
       { "value": 50,  "alpha": 60 },
       { "value": 101, "alpha": 40 }
     ],
-    // Dynamic transparency for effectiveness (only with xvm-stat)
+    // Dynamic transparency by effectiveness (only with xvm-stat)
     "eff": [
       { "value": 900,  "alpha": 100 },
       { "value": 1200, "alpha": 100 },
       { "value": 9999, "alpha": 100 }
     ],
-    // Dynamic transparency for victory percentage (only with xvm-stat)
+    // Dynamic transparency by victory percentage (only with xvm-stat)
     "rating": [
       { "value": 49,  "alpha": 100 },
       { "value": 53,  "alpha": 100 },
       { "value": 101, "alpha": 100 }
     ],
-    // Dynamic transparency for the number of thousands of battles ("kilo-battles") (only with xvm-stat)
+    // Dynamic transparency by the number of thousands of battles ("kilo-battles") (only with xvm-stat)
     "kb": [
       { "value": 2,   "alpha": 100 },
       { "value": 10,  "alpha": 100 },
