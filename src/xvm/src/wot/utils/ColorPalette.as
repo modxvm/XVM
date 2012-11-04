@@ -37,7 +37,7 @@ class wot.utils.ColorPalette
   
   public static function get redBright():String
   {
-      return "0xEE1133";
+      return "0xFF0000";
   }
         
   public static function get white():String
