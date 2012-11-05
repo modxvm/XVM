@@ -3,7 +3,6 @@
  * @author sirmax2
  */
 import wot.utils.Defines;
-import wot.utils.Locale;
 import wot.utils.VehicleInfo;
 import wot.utils.ColorPalette;
 
@@ -153,9 +152,9 @@ class wot.utils.DefaultConfig
           primaryTitleOffset: 7,
           appendPlus: true,
           enemy: {
-            primaryTitleFormat:   "<font size='15' color='#FFFFFF'>" + Locale.get("Enemy base capture!") + " {{extra}}</font>",
+            primaryTitleFormat:   "<font size='15' color='#FFFFFF'>Enemy base capture! {{extra}}</font>",
             secondaryTitleFormat: "<font size='15' color='#FFFFFF'>{{points}}</font>",
-            captureDoneFormat:    "<font size='17' color='#FFCC66'>" + Locale.get("Enemy base captured!") + "</font>",
+            captureDoneFormat:    "<font size='17' color='#FFCC66'>Enemy base captured!</font>",
             extra: "Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>",
             shadow: {
               color: "0x000000",
@@ -165,11 +164,10 @@ class wot.utils.DefaultConfig
             }
           },
           ally: {
-            primaryTitleFormat:   "<font size='15' color='#FFFFFF'>" + Locale.get("Ally base capture!") + " {{extra}}</font>",
+            primaryTitleFormat:   "<font size='15' color='#FFFFFF'>Ally base capture! {{extra}}</font>",
             secondaryTitleFormat: "<font size='15' color='#FFFFFF'>{{points}}</font>",
-            captureDoneFormat:    "<font size='17' color='#FFCC66'>" + Locale.get("Ally base captured!") + "</font>",
-            extra: Locale.get("Capturers") + ": <b><font color='#FFCC66'>{{tanks}}</font></b> " +
-                   Locale.get("Timeleft") +  ": <b><font color='#FFCC66'>{{time}}</font><b>",
+            captureDoneFormat:    "<font size='17' color='#FFCC66'>Ally base captured!</font>",
+            extra: "Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>",
             shadow: {
               color: "0x000000",
               alpha: 50,

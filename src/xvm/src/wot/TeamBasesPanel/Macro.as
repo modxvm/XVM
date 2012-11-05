@@ -1,4 +1,5 @@
 import wot.TeamBasesPanel.CapConfig;
+import wot.utils.Locale;
 
 /**
  * Class prepares html formatted text.
@@ -33,10 +34,10 @@ class wot.TeamBasesPanel.Macro
         m_points = startingPoints.toString();
         m_capColor = capColor;
         
-        m_primaryTitleFormat = CapConfig.primaryTitleFormat(m_capColor);
-        m_secondaryTitleFormat = CapConfig.secondaryTitleFormat(m_capColor);
-        m_captureDoneFormat = CapConfig.captureDoneFormat(m_capColor);
-        m_extra = CapConfig.extra(m_capColor);
+        m_primaryTitleFormat = Locale.get(CapConfig.primaryTitleFormat(m_capColor));
+        m_secondaryTitleFormat = Locale.get(CapConfig.secondaryTitleFormat(m_capColor));
+        m_captureDoneFormat = Locale.get(CapConfig.captureDoneFormat(m_capColor));
+        m_extra = Locale.get(CapConfig.extra(m_capColor));
     }
     
     public function update(isSituationNormal:Boolean, timeLeftSec:Number, timeLeftMinSec:String, capturersNum:Number, points:Number):Void
