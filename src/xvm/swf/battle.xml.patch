@@ -1,13 +1,22 @@
---- orig\battle.xml	2012-11-01 18:06:30.855954000 +0200
-+++ battle.xml	2012-11-01 18:06:31.795972800 +0200
+--- orig\battle.xml	2012-11-05 20:55:40.575542800 +0400
++++ battle.xml	2012-11-05 20:55:41.315543900 +0400
 @@ -127308,8 +127308,8 @@
                <String value="charAt"/>
                <String value=" "/>
                <String value="\"/>
 -              <String value=""/>
 -              <String value=""/>
-+              <String value=" "/>
-+              <String value=" "/>
++              <String value=""/>
++              <String value=""/>
                <String value="&#10;"/>
                <String value="&#13;"/>
                <String value="&#9;"/>
+@@ -222550,7 +222550,7 @@
+         <actions>
+           <PushData>
+             <items>
+-              <StackString value="net.wargaming.ingame.Minimap"/>
++              <StackString value="Broken.to.force.minimap.load.from.Minimap.swf"/>
+             </items>
+           </PushData>
+           <GetVariable/>
