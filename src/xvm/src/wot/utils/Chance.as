@@ -13,7 +13,7 @@ import wot.utils.VehicleInfo;
 
 class wot.utils.Chance
 {
-    private static var DEBUG_EXP = true;
+    private static var DEBUG_EXP = false;
 
     private static var dummy = Logger.dummy; // avoid import warning
 
