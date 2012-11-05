@@ -41,18 +41,12 @@ class wot.utils.Locale
     tr["ramming"] = "таран";
     tr["world_collision"] = "падение";
 
-    tr["<font size='15' color='#FFFFFF'>Enemy base capture! {{extra}}</font>"] =
-       "<font size='15' color='#FFFFFF'>Захват вражеской базы! {{extra}}</font>";
-    tr["<font size='17' color='#FFCC66'>Enemy base captured!</font>"] =
-       "<font size='17' color='#FFCC66'>Вражеская база захвачена!</font>";
-
-    tr["<font size='15' color='#FFFFFF'>Ally base capture! {{extra}}</font>"] =
-       "<font size='15' color='#FFFFFF'>Захват нашей базы! {{extra}}</font>";
-    tr["<font size='17' color='#FFCC66'>Ally base captured!</font>"] =
-       "<font size='17' color='#FFCC66'>Наша база захвачена!</font>";
-
-    tr["Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>"] =
-       "Захватчиков: <b><font color='#FFCC66'>{{tanks}}</font></b> Осталось: <b><font color='#FFCC66'>{{time}}</font><b>";
+    tr["Enemy base capture!"] = "Захват вражеской базы!";
+    tr["Enemy base captured!"] = "Вражеская база захвачена!";
+    tr["Ally base capture!"] = "Захват нашей базы!";
+    tr["Ally base captured!"] = "Наша база захвачена!";
+    tr["Capturers"] = "Захватчиков";
+    tr["Timeleft"] = "Осталось";
 
     tr["Sir Max"] = "Сэр Макс";
 

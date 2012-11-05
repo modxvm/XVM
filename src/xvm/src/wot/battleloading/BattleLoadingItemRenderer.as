@@ -192,7 +192,7 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
     private function modXvmDevLabel():Void
     {
         var label = Utils.GetPlayerName(data.label);
-        switch (s_game_region)
+        switch (Config.s_game_region)
         {
             case "RU":
                 if (label == "XlebniDizele4ku")
