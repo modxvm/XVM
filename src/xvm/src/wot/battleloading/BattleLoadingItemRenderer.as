@@ -6,6 +6,7 @@ import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.GlobalEventDispatcher;
 import wot.utils.IconLoader;
+import wot.utils.Locale;
 import wot.utils.Logger;
 import wot.utils.StatData;
 import wot.utils.StatLoader;
@@ -178,23 +179,42 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
         var pdata = StatData.s_data[Utils.GetNormalizedPlayerName(data.label)];
         if (!pdata)
             return;
-        
+
         modXvmDevLabel();
-        
+
         var key = "BL/" + data.label;
         vehicleField.condenseWhite = false;
         vehicleField.htmlText = TextCache.Get(key) || TextCache.Format(key, pdata,
             team == Defines.TEAM_ALLY ? Config.s_config.battleLoading.formatLeft : Config.s_config.battleLoading.formatRight);
         //Logger.add(vehicleField.htmlText);
     }
-    
+
     private function modXvmDevLabel():Void
     {
-        if (Utils.startsWith("sirmax2", data.label))
-            data.label = "Сэр Макс<XVM>";
-        if (Utils.startsWith("0x01", data.label))
-            data.label = "Сэр Макс<XVM>";
-        if (Utils.startsWith("XlebniDizele4ku", data.label))
-            data.label = "Хлебни Дизелёчку!<XVM>";
+        var label = Utils.GetPlayerName(data.label);
+        switch (s_game_region)
+        {
+            case "RU":
+                if (label == "XlebniDizele4ku")
+                    data.label = "Хлебни Дизелёчку! <XVM>";
+                else if (label == "sirmax2" || label == "0x01")
+                    data.label = Locale.get("Sir Max") + " <XVM>";
+                break;
+
+            case "CT":
+                if (label == "sirmax2_RU" || label == "0x01_RU")
+                    data.label = Locale.get("Sir Max") + " <XVM>";
+                break;
+
+            case "EU":
+                if (label == "sirmax2" || label == "0x01")
+                    data.label = Locale.get("Sir Max") + " <XVM>";
+                break;
+
+            case "US":
+                if (label == "sirmax" || label == "0x01")
+                    data.label = Locale.get("Sir Max") + " <XVM>";
+                break;
+        }
     }
 }

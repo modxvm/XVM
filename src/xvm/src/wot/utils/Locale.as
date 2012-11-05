@@ -40,19 +40,21 @@ class wot.utils.Locale
     tr["fire"] = "пожар";
     tr["ramming"] = "таран";
     tr["world_collision"] = "падение";
-    
-    tr["<font size='15' color='#FFFFFF'>Enemy base capture! {{extra}}</font>"] = 
+
+    tr["<font size='15' color='#FFFFFF'>Enemy base capture! {{extra}}</font>"] =
        "<font size='15' color='#FFFFFF'>Захват вражеской базы! {{extra}}</font>";
-    tr["<font size='17' color='#FFCC66'>Enemy base captured!</font>"] = 
+    tr["<font size='17' color='#FFCC66'>Enemy base captured!</font>"] =
        "<font size='17' color='#FFCC66'>Вражеская база захвачена!</font>";
-       
-    tr["<font size='15' color='#FFFFFF'>Ally base capture! {{extra}}</font>"] = 
+
+    tr["<font size='15' color='#FFFFFF'>Ally base capture! {{extra}}</font>"] =
        "<font size='15' color='#FFFFFF'>Захват нашей базы! {{extra}}</font>";
-    tr["<font size='17' color='#FFCC66'>Ally base captured!</font>"] = 
+    tr["<font size='17' color='#FFCC66'>Ally base captured!</font>"] =
        "<font size='17' color='#FFCC66'>Наша база захвачена!</font>";
-       
-    tr["Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>"] = 
+
+    tr["Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>"] =
        "Захватчиков: <b><font color='#FFCC66'>{{tanks}}</font></b> Осталось: <b><font color='#FFCC66'>{{time}}</font><b>";
+
+    tr["Sir Max"] = "Сэр Макс";
 
 //    tr["Using default settings."] = "Используются настройки по умолчанию.";
 //    tr["Error parsing config file."] = "Ошибка чтения конфигурации.";
