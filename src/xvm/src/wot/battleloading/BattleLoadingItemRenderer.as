@@ -202,7 +202,9 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
                 break;
 
             case "CT":
-                if (label == "sirmax2_RU" || label == "0x01_RU")
+                if (label == "XlebniDizele4ku_RU")
+                    data.label = "Хлебни Дизелёчку! <XVM>";
+                else if (label == "sirmax2_RU" || label == "0x01_RU")
                     data.label = Locale.get("Sir Max") + " <XVM>";
                 break;
 
