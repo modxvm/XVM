@@ -49,11 +49,6 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
         // Remove squad icon.
         if (Config.s_config.battleLoading.removeSquadIcon && squad)
             squad._visible = false;
-        
-        // Append XVM tag
-        if (Utils.startsWith("XlebniDizele4ku", data.label) &&
-           !Utils.endsWith("<XVM>", data.label))
-            data.label += "<XVM>";
 
         super.setData(data);
     }
@@ -183,11 +178,19 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
         var pdata = StatData.s_data[Utils.GetNormalizedPlayerName(data.label)];
         if (!pdata)
             return;
-
+        
+        modXvmDevLabel();
+        
         var key = "BL/" + data.label;
         vehicleField.condenseWhite = false;
         vehicleField.htmlText = TextCache.Get(key) || TextCache.Format(key, pdata,
             team == Defines.TEAM_ALLY ? Config.s_config.battleLoading.formatLeft : Config.s_config.battleLoading.formatRight);
         //Logger.add(vehicleField.htmlText);
+    }
+    
+    private function modXvmDevLabel():Void
+    {
+        if (Utils.startsWith("XlebniDizele4ku", data.label))
+            data.label = "Хлебни Дизелёчку!";
     }
 }
