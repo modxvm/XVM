@@ -1,6 +1,6 @@
 package utils {
 
-class wot.utils.ColorPalette
+public class ColorPalette
 {
   public static function get magenta():String
   {

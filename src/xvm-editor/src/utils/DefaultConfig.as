@@ -1,12 +1,9 @@
-﻿/**
- * ...
- * @author sirmax2
- */
-import Defines;
+﻿package utils {
 
-package utils {
-class DefaultConfig
+public class DefaultConfig
 {
+  import utils.Defines;
+
   public static function get config(): Object
   {
     var d:Date = new Date();
