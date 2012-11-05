@@ -8,6 +8,7 @@ import wot.utils.GraphicsUtil;
 import wot.utils.Locale;
 import wot.utils.Logger;
 import wot.utils.StatData;
+import wot.utils.Utils;
 import wot.utils.VehicleInfo;
 
 class wot.utils.Chance
@@ -78,12 +79,12 @@ class wot.utils.Chance
             if (!_x1Logged && chanceFunc == ChanceFuncX1)
             {
                 _x1Logged = true;
-                Logger.add("X1: K = " + Ka + " / " + Ke);
+                Logger.add("X1: K = " + Ka + " / " + Ke + " => " + String(Math.round((Ka / (Ka + Ke) * 1000)) / 10) + "%");
             }
             else if (!_x2Logged && chanceFunc == ChanceFuncX2)
             {
                 _x2Logged = true;
-                Logger.add("X2: K = " + Ka + " / " + Ke);
+                Logger.add("X2: K = " + Ka + " / " + Ke + " => " + String(Math.round((Ka / (Ka + Ke) * 1000)) / 10) + "%");
             }
         }
 
@@ -95,12 +96,15 @@ class wot.utils.Chance
         var Td = (vi.tiers[0] + vi.tiers[1]) / 2.0 - battleTier;
 
         var E: Number = stat.e || Config.s_config.consts.AVG_EFF;
-        var Rg: Number = (stat.r || Config.s_config.consts.AVG_GWR) / 100.0;
+        var R: Number = stat.b ? stat.w / stat.b : Config.s_config.consts.AVG_GWR / 100.0;
 
         var B: Number = stat.b || Config.s_config.consts.AVG_BATTLES;
-        var Bn = (B < 10000) ? (B - 2000) / 10000.0 : 0.8 + (B - 10000) / 100000.0;
+        var Bn = (B < 2000) ? B / 5000               // 0k .. 2k  => 0.0 .. 0.4
+            : (B < 5000) ? 0.4 + (B - 2000) / 15000  // 2k .. 5k  => 0.4 .. 0.6
+            : (B < 10000) ? 0.6 + (B - 5000) / 25000 // 5k .. 10k => 0.6 .. 0.8 
+            : 0.8 + (B - 10000) / 100000;            // 10k..    => 0.8 .. ...
 
-        return E * (1 + Rg - (Config.s_config.consts.AVG_GWR / 100.0)) * (1 + 0.25 * Td) * (1 + Bn);
+        return E * (1 + R - (Config.s_config.consts.AVG_GWR / 100.0)) * (1 + 0.25 * Td) * (1 + Bn);
     }
 
     private static function ChanceFuncT(vi, team, stat): Number
@@ -109,7 +113,8 @@ class wot.utils.Chance
 
         var E: Number = stat.e || Config.s_config.consts.AVG_EFF;
 
-        var Rt_pre: Number = Math.max(-10, Math.min(10, (stat.tr || Config.s_config.consts.AVG_GWR) - Config.s_config.consts.AVG_GWR));
+        var r = stat.tb ? stat.tw / stat.tb * 100 : Config.s_config.consts.AVG_GWR;
+        var Rt_pre: Number = Math.max(-10, Math.min(10, (r - Config.s_config.consts.AVG_GWR)));
         var Rt = Rt_pre / 100.0 * 4;
 
         return E * (1 + Rt) * (1 + 0.25 * Td);
@@ -117,18 +122,21 @@ class wot.utils.Chance
 
     private static function ChanceFuncX1(vi, team, stat): Number
     {
-        var R = Math.max(-10, Math.min(10, stat.r ? stat.r - Config.s_config.consts.AVG_GWR : 0)) + 10;
-        //var T = vi.tiers[0];
         var Td = (vi.tiers[0] + vi.tiers[1]) / 2.0 - battleTier;
-        var K = R * (1 + 0.25 * Td);
+
+        var r = stat.b ? stat.w / stat.b * 100 : Config.s_config.consts.AVG_GWR;
+        var R = Math.max(-10, Math.min(10, r - Config.s_config.consts.AVG_GWR)) + 10;
+
+        var K = (R - 7) * (1 + 0.25 * Td);
 
         if (DEBUG_EXP)
         {
-            Logger.add("X1: " +
-                wot.utils.Utils.padLeft(stat.r + "%", 3) + " " +
-                wot.utils.Utils.padLeft(String(Math.round(stat.b / 100) / 10), 4) + "k " +
-                wot.utils.Utils.padLeft(String((vi.tiers[0] + vi.tiers[1]) / 2.0 - battleTier), 4) +
-                " = " + K);
+            Logger.add("team=" + team +
+                " l=" + Utils.padLeft(String(vi.level), 2) + " " + Utils.padLeft(vi.type, 3) +
+                " r=" + Utils.padLeft(String(Math.round(r * 10) / 10), 4) +
+                " R=" + Utils.padLeft(String(Math.round(R * 10) / 10), 4) +
+                " Td=" + Utils.padLeft(String(Td), 4) +
+                " K=" + String(Math.round(K * 10) / 10));
         }
 
         return K;
@@ -138,12 +146,28 @@ class wot.utils.Chance
     {
         var Td = (vi.tiers[0] + vi.tiers[1]) / 2.0 - battleTier;
 
-        var R = Math.max(-10, Math.min(10, stat.r ? stat.r - Config.s_config.consts.AVG_GWR : 0)) + 10;
+        var r = stat.b ? stat.w / stat.b * 100 : Config.s_config.consts.AVG_GWR;
+        var R = Math.max(-10, Math.min(10, r - Config.s_config.consts.AVG_GWR)) + 10;
 
         var B: Number = stat.b || Config.s_config.consts.AVG_BATTLES;
-        var Bn = (B < 10000) ? (B - 2000) / 10000.0 : 0.8 + (B - 10000) / 100000.0;
+        var Bn = (B < 2000) ? B / 5000               // 0k .. 2k  => 0.0 .. 0.4
+            : (B < 5000) ? 0.4 + (B - 2000) / 15000  // 2k .. 5k  => 0.4 .. 0.6
+            : (B < 10000) ? 0.6 + (B - 5000) / 25000 // 5k .. 10k => 0.6 .. 0.8 
+            : 0.8 + (B - 10000) / 100000;            // 10k..    => 0.8 .. ...
 
-        var K = R * (1 + 0.25 * Td) * (1 + Bn);
+        var K = (R - 7) * (1 + 0.25 * Td) * (1 + Bn);
+
+        if (DEBUG_EXP)
+        {
+            Logger.add("team=" + team +
+                " l=" + Utils.padLeft(String(vi.level), 2) + " " + Utils.padLeft(vi.type, 3) +
+                " r=" + Utils.padLeft(String(Math.round(r * 10) / 10), 4) +
+                " R=" + Utils.padLeft(String(Math.round(R * 10) / 10), 4) +
+                " b=" + Utils.padLeft(String(Math.round(stat.b / 100) / 10), 4) +
+                " B=" + Utils.padLeft(String(Math.round(Bn * 100) / 100), 5) +
+                " Td=" + Utils.padLeft(String(Td), 4) +
+                " K=" + String(Math.round(K * 10) / 10));
+        }
 
         return K;
     }

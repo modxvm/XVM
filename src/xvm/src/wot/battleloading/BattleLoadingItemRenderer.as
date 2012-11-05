@@ -18,8 +18,6 @@ import wot.utils.Utils;
 
 class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRenderer
 {
-    private static var s_logShown = false;
-
     private static var dummy = Logger.dummy; // avoid import warning
 
     private var m_iconset: IconLoader = null;

@@ -19,6 +19,7 @@ class wot.BattleMain
 
     private static var dummy = Logger.dummy;
 
+    private static var soundManager = new net.wargaming.managers.SoundManager();
     private static var width, height;
 
     static function main()
