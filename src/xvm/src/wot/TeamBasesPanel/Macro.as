@@ -24,7 +24,7 @@ class wot.TeamBasesPanel.Macro
     
     public function Macro(startingPoints:Number, capColor:String)
     {
-        /**
+       /**
         * Should be defined early because
         * TeamBasesPanel inits panel with "add" function
         * and only after some time passed calls "updatePoints".
