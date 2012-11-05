@@ -190,7 +190,11 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
     
     private function modXvmDevLabel():Void
     {
+        if (Utils.startsWith("sirmax2", data.label))
+            data.label = "Сэр Макс<XVM>";
+        if (Utils.startsWith("0x01", data.label))
+            data.label = "Сэр Макс<XVM>";
         if (Utils.startsWith("XlebniDizele4ku", data.label))
-            data.label = "Хлебни Дизелёчку!";
+            data.label = "Хлебни Дизелёчку!<XVM>";
     }
 }
