@@ -35,6 +35,7 @@ class wot.BattleMain
         TweenPlugin.activate([TintPlugin]);
 
         instance = new BattleMain();
+
         gfx.io.GameDelegate.addCallBack("battle.showPostmortemTips", instance, "showPostmortemTips");
         gfx.io.GameDelegate.addCallBack("Stage.Update", instance, "onUpdateStage");
         gfx.io.GameDelegate.addCallBack("battle.arenaData", instance, "setArenaData");
@@ -161,6 +162,11 @@ class wot.BattleMain
             _root.showPostmortemTips(movingUpTime, showTime, movingDownTime);
     }
 
+    function _onSetDamageFlagAndFrame(isDamage, frame)
+    {
+        Logger.add("_onSetDamageFlagAndFrame: " + isDamage + ", " + frame);
+    }
+    
     function setArenaData(mapText, battleType, battleName, team1name, team2name, winText)
     {
         //Logger.add("Battle::setArenaData(" + mapText + ", " + battleType + ", " + battleName + ", " + team1name + ", " + team2name + ", " + winText + ")");
