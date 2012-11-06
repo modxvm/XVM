@@ -4,18 +4,12 @@
 [ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/home/games/WoT
 
 FILES="
-  Minimap.swf
-  TeamBasesPanel.swf
-  libxvm.swf
-  libxvmLoader.swf
   battle.swf
   battleloading.swf
-  ComponentsLib.swf
-  FinalStatisticForm.swf
+  Minimap.swf
   PlayersPanel.swf
   StatisticForm.swf
-  TrainingInfoForm.swf
-  TrainingOwnerInfoForm.swf
+  TeamBasesPanel.swf
   VehicleMarkersManager.swf
   XVM.xvmconf XVM.css OTMData.xml"
 

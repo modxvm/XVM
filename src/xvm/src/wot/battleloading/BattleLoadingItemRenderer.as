@@ -146,6 +146,8 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
             m_iconset.init(iconLoader,
                 [ data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.battleLoading), data.icon ]);
             data.icon = m_iconset.currentIcon;
+
+            modXvmDevLabel();
         }
 
         super.update();
