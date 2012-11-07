@@ -1,17 +1,26 @@
 @echo off
 
+set copy_files=
 set patch_swfs=battle.swf battleloading.swf PlayersPanel.swf StatisticForm.swf TeamBasesPanel.swf VehicleMarkersManager.swf Minimap.swf
-set copy_swfs=
+set patch_xmls=gui_sounds_new.xml
 
-rem Copy SWFs without patching
-for %%i in (%copy_swfs%) do call :do_copy_file %%~ni
+rem Copy files without patching
+for %%i in (%copy_files%) do call :do_copy_file %%i
 
 rem Patch SWFs
-for %%i in (%patch_swfs%) do call :do_patch_file %%~ni
+for %%i in (%patch_swfs%) do call :do_patch_swf %%~ni
+
+rem Patch XMLs
+for %%i in (%patch_xmls%) do call :do_patch_xml %%~ni
 
 goto :EOF
 
-:do_patch_file
+:do_copy_file
+echo copying file %1
+copy /Y orig\%1 %1 > nul
+goto :EOF
+
+:do_patch_swf
 set n=%1
 swfmill swf2xml orig\%n%.swf orig\%n%.xml
 copy /Y orig\%n%.xml %n%.xml > nul
@@ -25,7 +34,11 @@ if "%ok%" == "ok" (
 )
 goto :EOF
 
-:do_copy_file
-echo copying file %1.swf
-copy /Y orig\%1.swf %1.swf > nul
+:do_patch_xml
+set n=%1
+copy /Y orig\%n%.xml %n%.xml > nul
+set ok=failed
+patch < %n%.xml.patch && set ok=ok
+echo patch result: %ok% (%n%.xml)
+if exist %n%.xml.orig del %n%.xml.orig
 goto :EOF
