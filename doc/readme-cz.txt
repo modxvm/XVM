@@ -110,7 +110,7 @@
         {{rlevel}}      - úroveň (tier) vozidla (římskými číslicemi)
         {{turret}}      - ikona základní věže:
                           "*" symbol - základní věž, nemůže mít namontovanou nejlepší zbraň
-                          "-" symbol - základní věž, může mít namontovanou nejlepší zbraň
+                          "'" symbol - základní věž, může mít namontovanou nejlepší zbraň
                           prázdné - vozidlo má nejlepší věž
         {{hp}}          - aktuální počet životů
         {{hp-ratio}}    - aktuální počet životů v % (zobrazeno bez '%')
@@ -234,7 +234,7 @@
     res_mods/icons/SixthSense.png
 
     Hit Log.
-      Záporné hodnoty x, y umístí text k pravé dolní hranici 
+      Záporné hodnoty x, y umístí text k pravé dolní hranici
       Will work only with running xvm-stat!!!
 
 

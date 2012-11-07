@@ -93,7 +93,7 @@
       {{rlevel}}      - vehicle level (Roman numerals)
       {{turret}}      - stock turret marker:
                           "*" symbol - stock turret, cannot mount top gun
-                          "-" symbol - stock turret, top gun is possible
+                          "'" symbol - stock turret, top gun is possible
                           empty - top turret
       {{hp}}          - current health points
       {{hp-ratio}}    - current health ratio (without '%' sign)
