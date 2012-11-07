@@ -52,6 +52,9 @@ class wot.SixthSenseIndicator
     {
         //Logger.add("sixthSenseIndicator_gotoAndPlay: " + frame);
 
+        if (frame == "active")
+            net.wargaming.managers.SoundManager.playSound("sixthsense", "normal", "");
+        
         if (icon.source == "")
         {
             _root.sixthSenseIndicator.gotoAndPlay2(frame);
@@ -64,7 +67,6 @@ class wot.SixthSenseIndicator
                 var timeline = new TimelineLite();
                 timeline.insert(TweenLite.to(icon.content, 0.2, { _alpha:100, ease:Linear.easeNone } ), 0);
                 timeline.append(TweenLite.from(icon.content, 0.2, { tint:"0xFFFFFF", ease: Linear.easeNone } ), 0);
-                net.wargaming.managers.SoundManager.playSound("sixthsense", "normal", "");
                 break;
             case "inactive":
  		TweenLite.to(icon.content, 0.2, {_alpha:70});
