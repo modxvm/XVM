@@ -88,7 +88,7 @@ module.exports = (function() {
 //                utils.debug("responseData.length = " + responseData.length);
                     callback(null, result);
                 } catch(e) {
-                    utils.debug("JSON.parse error: length=" + responseData.length + ", data=" + responseData.substr(0, 80).replace(/[\n\r]/g, ""));
+                    utils.debug("JSON.parse error: id=" + id + " length=" + responseData.length + ", data=" + responseData.substr(0, 75).replace(/[\n\r]/g, ""));
                     callback(null, { __code: "error", __error: "JSON.parse error" });
                 }
             });
@@ -197,6 +197,9 @@ module.exports = (function() {
                                 case "ACCOUNTS_PROFILE_CLOSED":
                                     resultItem.st = "closed";
                                     break;
+                                case "ACCOUNTS_ACCOUNT_MISSING_OR_UNINITIALIZED":
+                                    resultItem.st = "not_init";
+                                    break;
                             }
                         }
                     }
@@ -235,8 +238,14 @@ module.exports = (function() {
                 for(var i = 0; i < players_length; ++i) {
                     if(result.players[i].id == pl.id) {
                         if(result.players[i].status != "ok") {
-                            if(result.players[i].status == "bad_id" || result.players[i].status == "wait" || result.players[i].status == "max_conn" || result.players[i].status == "api_error")
+                            if (result.players[i].status == "bad_id" ||
+                                result.players[i].status == "wait" ||
+                                result.players[i].status == "max_conn" ||
+                                result.players[i].status == "api_error" ||
+                                result.players[i].status == "closed" ||
+                                result.players[i].status == "not_init") {
                                 pl.status = result.players[i].status;
+                            }
                             result.players[i] = pl;
                             if(pl.status != "bad_id") {
                                 process.send({ usage: 1, cached: 1, updatesFailed: 1 });
@@ -283,6 +292,7 @@ module.exports = (function() {
             process.send({ usage: 1, missed: missed_count });
 
             // return response to client
+            result.server = settings.serverName;
             response.end(JSON.stringify(result));
 
             var now2 = new Date();
@@ -303,7 +313,7 @@ module.exports = (function() {
 
                 times.push({"n": "end", "t": now2});
                 var str = "";
-                for(i = 1; i < times.length; ++i) {
+                for(var i = 1; i < times.length; ++i) {
                     if(str != "")
                         str += " ";
                     str += times[i].n + ":" + String(times[i].t - times[i - 1].t);
@@ -327,7 +337,7 @@ module.exports = (function() {
                 throw "query match error: " + query;
 
             if(query == "001" || query == "test") {
-                response.end('{"players":[{"id":1,"status":"ok"}]}');
+                response.end('{"players":[{"id":1,"status":"ok"}],"server":"' + settings.serverName + '"}');
                 return;
             }
 
@@ -351,7 +361,7 @@ module.exports = (function() {
             var errText = "wrong request: " + e;
             if(request.url.toLowerCase() != "/favicon.ico")
                 errText += " url=" + request.url;
-            response.end(errText);
+            response.end(errText + "\nserver=" + settings.serverName);
             return;
         }
 
@@ -362,8 +372,8 @@ module.exports = (function() {
         if(mongorq >= mongorq_max) {
             response.statusCode = 503; // Service Unavailable
             var errText = "db overloaded: " + mongorq + "/" + mongorq_max;
-            response.end('{"error":"' + errText + '"}');
-//        utils.log(errText);
+            response.end('{"error":"' + errText + '","server":"' + settings.serverName + '"}');
+//            utils.log(errText);
             return;
         }
 
@@ -432,7 +442,7 @@ module.exports = (function() {
                 processRemotes(inCache, forUpdate, forUpdateVNames, request, response, times);
             } catch(e) {
                 response.statusCode = 500;
-                response.end("Error: " + e);
+                response.end("Error: " + e + "\nserver=" + settings.serverName);
                 utils.debug("Error: " + e);
             }
         });

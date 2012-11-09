@@ -112,7 +112,7 @@ var getInfoContent = function() {
 
                 workers.forEach(function(worker) {
                     worker.send({ info: newInfo });
-                })
+                });
             } catch(e) {
                 utils.debug("JSON.parse error: length=" + responseData.length + ", data=" + responseData.substr(0, 80).replace(/[\n\r]/g, ""));
             }

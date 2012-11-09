@@ -24,8 +24,8 @@ module.exports = (function()
             "worldoftanks.eu",      // EU:    50000000 ..  99999999
             "worldoftanks.com",     // US:   100000000 .. 149999999
             "", // ???: 1500000000 .. 199999999 (disabled - unknown stat server)
-            "", // "worldoftanks-sea.com", // SEA: 2000000000 .. 249999999 (disabled - stat server is not working)
-            "" // "wot.go.vn"       // VTC: 2500000000 .. 299999999 (disabled - stat server is not working)
+            "worldoftanks-sea.com", // SEA: 2000000000 .. 249999999
+            "portal-wot.go.vn"      // VTC: 2500000000 .. 299999999
         ],
         statHostsTimeouts: [
             5000,      // RU
@@ -33,8 +33,9 @@ module.exports = (function()
             5000,      // US
             6000,      // ???
             6000,      // SEA
-            19000      // VTC
+            12000      // VTC
         ],
-        wotApiVersion: "1.5"
+        wotApiVersion: "1.5",
+        serverName: ""
     }
 })();
