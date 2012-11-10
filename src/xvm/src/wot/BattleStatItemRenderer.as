@@ -84,6 +84,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
 
         var cacheKey = data ? "SF/" + data.label + "/" + data.vehicle : null;
         var saved_icon = data ? data.icon : null;
+        var saved_label = data? data.label : null;
         if (data)
         {
             var pname = data.label.toUpperCase();
@@ -102,7 +103,9 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
                 m_iconset = new IconLoader(this, completeLoad);
             m_iconset.init(iconLoader,
                 [ data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.statisticForm), data.icon ]);
+
             data.icon = m_iconset.currentIcon;
+            data.label = TextCache.modXvmDevLabel(data.label);
 
             // Player/clan icons
             attachClanIconToPlayer(data);
@@ -116,6 +119,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
         if (data)
         {
             data.icon = saved_icon;
+            data.label = saved_label;
 
             col3.htmlText = TextCache.Get(cacheKey) || TextCache.Format(cacheKey, data,
                 team == Defines.TEAM_ALLY ? Config.s_config.statisticForm.formatLeft : Config.s_config.statisticForm.formatRight);

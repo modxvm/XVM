@@ -7,6 +7,7 @@ intrinsic class net.wargaming.controls.LobbyPlayerListItemRenderer extends UICom
   var iconLoader: UILoaderAlt;
   var owner: Object;
   var vehicleField: TextField;
+  var textField: TextField;
   var squad;
   var self_bg;
 

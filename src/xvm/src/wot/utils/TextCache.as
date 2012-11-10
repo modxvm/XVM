@@ -2,10 +2,13 @@
  * ...
  * @author Maxim Schedriviy
  */
+import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.GraphicsUtil;
+import wot.utils.Locale;
 import wot.utils.StatFormat;
 import wot.utils.VehicleInfo;
+import wot.utils.Utils;
 
 class wot.utils.TextCache
 {
@@ -43,7 +46,7 @@ class wot.utils.TextCache
 
   private static function FormatText(isDead: Boolean): String
   {
-    var name = data.label + ((data.clanAbbrev == "") ? "" : "[" + data.clanAbbrev + "]");
+    var name = modXvmDevLabel(data.label + ((data.clanAbbrev == "") ? "" : "[" + data.clanAbbrev + "]"));
 
     var formatArr:Array;
 
@@ -85,9 +88,43 @@ class wot.utils.TextCache
         }
       }
       format = format.split("{{nick}}").join(pname.length == 0 ? "" : str);
-    }
+
+  }
 
     return format;
   }
+
+    public static function modXvmDevLabel(nick):String
+    {
+        var label = Utils.GetPlayerName(nick);
+        switch (Config.s_game_region)
+        {
+            case "RU":
+                if (label == "XlebniDizele4ku")
+                    return "Хлебни Дизелёчку! (XVM)";
+                if (label == "sirmax2" || label == "0x01")
+                    return Locale.get("Sir Max") + " (XVM)";
+                break;
+
+            case "CT":
+                if (label == "XlebniDizele4ku_RU")
+                    return "Хлебни Дизелёчку! (XVM";
+                if (label == "sirmax2_RU" || label == "0x01_RU")
+                    return Locale.get("Sir Max") + " (XVM)";
+                break;
+
+            case "EU":
+                if (label == "sirmax2" || label == "0x01")
+                    return Locale.get("Sir Max") + " (XVM)";
+                break;
+
+            case "US":
+                if (label == "sirmax" || label == "0x01")
+                    return Locale.get("Sir Max") + " (XVM)";
+                break;
+        }
+        
+        return nick;
+    }
 
 }

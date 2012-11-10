@@ -6,7 +6,6 @@ import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.GlobalEventDispatcher;
 import wot.utils.IconLoader;
-import wot.utils.Locale;
 import wot.utils.Logger;
 import wot.utils.StatData;
 import wot.utils.StatLoader;
@@ -138,6 +137,8 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
     {
         //Logger.add("update2");
         var saved_icon = data ? data.icon : null;
+        var saved_label = data? data.label : null;
+
         if (data)
         {
             // Alternative icon set
@@ -145,18 +146,18 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
                 m_iconset = new IconLoader(this, completeLoad);
             m_iconset.init(iconLoader,
                 [ data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.battleLoading), data.icon ]);
-            data.icon = m_iconset.currentIcon;
 
-            modXvmDevLabel();
+            data.icon = m_iconset.currentIcon;
+            data.label = TextCache.modXvmDevLabel(data.label);
         }
 
         super.update();
 
         if (data)
-            data.icon = saved_icon;
-
-        if (data)
         {
+            data.icon = saved_icon;
+            data.label = saved_label;
+
             var key = "BL/" + data.label;
             var value = TextCache.Get(key);
             if (!value)
@@ -180,8 +181,6 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
         if (!pdata)
             return;
 
-        modXvmDevLabel();
-
         var key = "BL/" + data.label;
         vehicleField.condenseWhite = false;
         vehicleField.htmlText = TextCache.Get(key) || TextCache.Format(key, pdata,
@@ -189,34 +188,4 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
         //Logger.add(vehicleField.htmlText);
     }
 
-    private function modXvmDevLabel():Void
-    {
-        var label = Utils.GetPlayerName(data.label);
-        switch (Config.s_game_region)
-        {
-            case "RU":
-                if (label == "XlebniDizele4ku")
-                    data.label = "Хлебни Дизелёчку! <XVM>";
-                else if (label == "sirmax2" || label == "0x01")
-                    data.label = Locale.get("Sir Max") + " <XVM>";
-                break;
-
-            case "CT":
-                if (label == "XlebniDizele4ku_RU")
-                    data.label = "Хлебни Дизелёчку! <XVM>";
-                else if (label == "sirmax2_RU" || label == "0x01_RU")
-                    data.label = Locale.get("Sir Max") + " <XVM>";
-                break;
-
-            case "EU":
-                if (label == "sirmax2" || label == "0x01")
-                    data.label = Locale.get("Sir Max") + " <XVM>";
-                break;
-
-            case "US":
-                if (label == "sirmax" || label == "0x01")
-                    data.label = Locale.get("Sir Max") + " <XVM>";
-                break;
-        }
-    }
 }
