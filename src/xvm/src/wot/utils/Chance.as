@@ -127,7 +127,7 @@ class wot.utils.Chance
         var r = stat.b ? stat.w / stat.b * 100 : Config.s_config.consts.AVG_GWR;
         var R = Math.max(-10, Math.min(10, r - Config.s_config.consts.AVG_GWR)) + 10;
 
-        var K = (R - 7) * (1 + 0.25 * Td);
+        var K = (R - 5) * (1 + 0.25 * Td);
 
         if (DEBUG_EXP)
         {
@@ -155,7 +155,7 @@ class wot.utils.Chance
             : (B < 10000) ? 0.6 + (B - 5000) / 25000 // 5k .. 10k => 0.6 .. 0.8 
             : 0.8 + (B - 10000) / 100000;            // 10k..    => 0.8 .. ...
 
-        var K = (R - 7) * (1 + 0.25 * Td) * (1 + Bn);
+        var K = (R - 5) * (1 + 0.25 * Td) * (1 + Bn);
 
         if (DEBUG_EXP)
         {

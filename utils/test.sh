@@ -14,7 +14,7 @@ SAMPLE_REPLAY=fire.wotreplay
 #SAMPLE_REPLAY=fall.wotreplay
 #SAMPLE_REPLAY=hits.wotreplay
 #SAMPLE_REPLAY=hunt.wotreplay
-SAMPLE_REPLAY=13x13.wotreplay
+#SAMPLE_REPLAY=13x13.wotreplay
 #-SAMPLE_REPLAY=fogofwar.wotreplay
 #SAMPLE_REPLAY=test.wotreplay
 
