@@ -96,6 +96,26 @@ public class Utils
         return str;
     }
 
+    public static function GetPlayerName(fullplayername: String): String
+    {
+        var pos = fullplayername.indexOf("[");
+        return (pos < 0) ? fullplayername : fullplayername.slice(0, pos);
+    }
+    public static function GetClanName(fullplayername: String): String
+    {
+        var pos = fullplayername.indexOf("[");
+        if (pos < 0)
+            return "";
+        var n = fullplayername.slice(pos + 1);
+        return n.slice(0, n.indexOf("]"));
+    }
+
+    public static function GetClanNameWithBrackets(fullplayername: String): String
+    {
+        var clan = GetClanName(fullplayername);
+        return clan ? "[" + clan + "]" : "";
+    }
+
     ///////////////////////
 
     public static function sortXMLByAttribute($xml:XML, $attribute:String,

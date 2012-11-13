@@ -94,6 +94,12 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
             formatArr = format.split("{{nick}}");
             if (formatArr.length > 1)
                 format = formatArr.join(m_playerFullName);
+            formatArr = format.split("{{name}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(Utils.GetPlayerName(m_playerFullName));
+            formatArr = format.split("{{clan}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(Utils.GetClanNameWithBrackets(m_playerFullName));
             formatArr = format.split("{{vehicle}}");
             if (formatArr.length > 1)
                 format = formatArr.join(VehicleInfo.mapVehicleName(m_defaultIconSource, m_vname));
@@ -117,7 +123,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
             }
 
             format = StatFormat.FormatText({ label: m_playerFullName }, format);
-            
+
             format = Utils.trim(format);
         }
         catch (e)

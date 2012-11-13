@@ -33,6 +33,8 @@ package utils
         // macros
         [Embed("images/macros/battles.png")]
         public static const battles:Class;
+        [Embed("images/macros/clan.png")]
+        public static const clan:Class;
         [Embed("images/macros/dead.png")]
         public static const dead:Class;
         [Embed("images/macros/dmg.png")]
@@ -67,6 +69,8 @@ package utils
         public static const n:Class;
         [Embed("images/macros/n_player.png")]
         public static const n_player:Class;
+        [Embed("images/macros/name.png")]
+        public static const name:Class;
         [Embed("images/macros/nick.png")]
         public static const nick:Class;
         [Embed("images/macros/rating.png")]

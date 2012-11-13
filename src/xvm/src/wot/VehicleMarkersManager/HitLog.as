@@ -205,6 +205,12 @@ class wot.VehicleMarkersManager.HitLog
             formatArr = format.split("{{nick}}");
             if (formatArr.length > 1)
                 format = formatArr.join(playerName);
+            formatArr = format.split("{{name}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(Utils.GetPlayerName(playerName));
+            formatArr = format.split("{{clan}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(Utils.GetClanNameWithBrackets(playerName));
             formatArr = format.split("{{vehicle}}");
             if (formatArr.length > 1)
                 format = formatArr.join(data.vehicleName);

@@ -34,6 +34,8 @@ package utils
             format = format.replace("{{dead}}", Config.s_config.hitLog.deadMarker);
 
             format = format.replace("{{nick}}", "Player[CLAN]");
+            format = format.replace("{{name}}", "Player");
+            format = format.replace("{{clan}}", "[CLAN]");
             format = format.replace("{{vehicle}}", "T-34");
             format = format.replace("{{level}}", "5");
             format = format.replace("{{rlevel}}", "V");
@@ -95,6 +97,8 @@ package utils
             // In players panel, battle loading screen and statistic form:
             panels: [
                 { value: "{{nick}}", label: "nick", icon: Embed.nick },
+                { value: "{{name}}", label: "name", icon: Embed.name },
+                { value: "{{clan}}", label: "clan", icon: Embed.clan },
                 { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
             ],
             colors_panels: [
@@ -103,6 +107,8 @@ package utils
             // In hit log:
             hitlog: [
                 { value: "{{nick}}", label: "nick", icon: Embed.nick },
+                { value: "{{name}}", label: "name", icon: Embed.name },
+                { value: "{{clan}}", label: "clan", icon: Embed.clan },
                 { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
                 { value: "{{level}}", label: "level", icon: Embed.level },
                 { value: "{{rlevel}}", label: "rlevel", icon: Embed.rlevel },
@@ -123,6 +129,8 @@ package utils
             // In tank markers:
             markers: [
                 { value: "{{nick}}", label: "nick", icon: Embed.nick },
+                { value: "{{name}}", label: "name", icon: Embed.name },
+                { value: "{{clan}}", label: "clan", icon: Embed.clan },
                 { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
                 { value: "{{level}}", label: "level", icon: Embed.level },
                 { value: "{{rlevel}}", label: "rlevel", icon: Embed.rlevel },
@@ -139,6 +147,8 @@ package utils
             // In floating damage text:
             markers_damage: [
                 { value: "{{nick}}", label: "nick", icon: Embed.nick },
+                { value: "{{name}}", label: "name", icon: Embed.name },
+                { value: "{{clan}}", label: "clan", icon: Embed.clan },
                 { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
                 { value: "{{level}}", label: "level", icon: Embed.level },
                 { value: "{{rlevel}}", label: "rlevel", icon: Embed.rlevel },

@@ -429,7 +429,6 @@ class wot.utils.DefaultConfig
           { value: 900,  color: ColorPalette.redSmooth },   //  800 -  899
           { value: 1000, color: ColorPalette.orange },      //  900 -  999
           { value: 1200, color: ColorPalette.yellow },      // 1000 - 1199
-          
           { value: 1400, color: ColorPalette.greenyellow }, // 1200 - 1399 // good
           { value: 1800, color: ColorPalette.green },       // 1400 - 1799 // great
           { value: 2009, color: ColorPalette.purple },      // 1800 - 1999 // unique
@@ -440,7 +439,6 @@ class wot.utils.DefaultConfig
           { value: 49,  color: ColorPalette.redSmooth },   // 47 - 48
           { value: 50,  color: ColorPalette.orange },      // 49
           { value: 51,  color: ColorPalette.yellow },      // 50
-          
           { value: 54,  color: ColorPalette.greenyellow }, // 51 - 53
           { value: 58,  color: ColorPalette.green },       // 54 - 57
           { value: 60,  color: ColorPalette.purple },      // 58 - 59
@@ -451,7 +449,6 @@ class wot.utils.DefaultConfig
           { value: 3,   color: ColorPalette.redSmooth },   //  2
           { value: 4,   color: ColorPalette.orange },      //  3
           { value: 6,   color: ColorPalette.yellow },      //  4 - 5
-          
           { value: 9,   color: ColorPalette.greenyellow }, //  6 -  8
           { value: 13,  color: ColorPalette.green },       //  9 - 12
           { value: 20,  color: ColorPalette.purple },      // 13 - 19
@@ -462,7 +459,6 @@ class wot.utils.DefaultConfig
           { value: 200,   color: ColorPalette.redSmooth },
           { value: 300,   color: ColorPalette.orange },
           { value: 500,   color: ColorPalette.yellow },
-          
           { value: 800,   color: ColorPalette.greenyellow },
           { value: 1200,  color: ColorPalette.green },
           { value: 1800,  color: ColorPalette.purple },

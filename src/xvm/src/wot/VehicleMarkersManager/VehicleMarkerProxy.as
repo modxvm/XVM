@@ -27,7 +27,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     // Private members
     var m_vehicleName:String;
     var m_level:Number;
-    var m_playerName:String;
+    var m_playerFullName:String;
     var m_curHealth:Number;
     var m_defaultIconSource:String;
     var m_vehicleClass:String;
@@ -66,8 +66,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
 
     private function trace(str:String):Void
     {
-        //if (m_playerName == "...")
-        //Logger.add(m_playerName + "> " + str);
+        //if (m_playerFullName == "...")
+        //Logger.add(m_playerFullName + "> " + str);
     }
 
     /**
@@ -339,7 +339,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         trace("init: " + pFullName);
         m_vehicleName = vType;
         m_level = vLevel;
-        m_playerName = pFullName;
+        m_playerFullName = pFullName;
         m_defaultIconSource = vIconSource;
         m_vehicleClass = vClass;
         m_curHealth = curHealth;
@@ -364,7 +364,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
             var delta = m_curHealth - (curHealth < 0 ? 0 : curHealth);
             hitLog.update(delta, curHealth,
                 VehicleInfo.mapVehicleName(m_defaultIconSource, m_vehicleName),
-                m_playerName, m_level, damageType,
+                m_playerFullName, m_level, damageType,
                 GraphicsUtil.GetVTypeColorValue(m_defaultIconSource, Utils.vehicleClassToVehicleType(m_vehicleClass)));
         }
         m_curHealth = curHealth < 0 ? 0 : curHealth;

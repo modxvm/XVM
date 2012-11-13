@@ -174,6 +174,12 @@ class wot.utils.Utils
         return n.slice(0, n.indexOf("]"));
     }
 
+    public static function GetClanNameWithBrackets(fullplayername: String): String
+    {
+        var clan = GetClanName(fullplayername);
+        return clan ? "[" + clan + "]" : "";
+    }
+
     private static var xvmModules: Array = [];
     public static function TraceXvmModule(moduleName: String)
     {

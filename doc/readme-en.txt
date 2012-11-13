@@ -81,13 +81,17 @@
 
   Macros available:
     In players panel, battle loading screen and statistic form:
-      {{nick}}        - player nickname
+      {{nick}}        - player nickname with clan name
+      {{name}}        - player nickname without clan name
+      {{clan}}        - clan name with brackets (empty if no clan)
       {{vehicle}}     - vehicle name
       {{c:vtype}}     - color depended from vehicle type
       + statistics macros (see below)
 
     In tank markers:
-      {{nick}}        - player nickname
+      {{nick}}        - player nickname with clan name
+      {{name}}        - player nickname without clan name
+      {{clan}}        - clan name with brackets (empty if no clan)
       {{vehicle}}     - vehicle name
       {{level}}       - vehicle level (Arabic numerals)
       {{rlevel}}      - vehicle level (Roman numerals)
@@ -116,7 +120,9 @@
       {{dmg-total}}   - total sum of hits
       {{dmg-player}}  - sum of hits for each player
       {{dead}}        - tank's death marker
-      {{nick}}        - player nickname
+      {{nick}}        - player nickname with clan name
+      {{name}}        - player nickname without clan name
+      {{clan}}        - clan name with brackets (empty if no clan)
       {{vehicle}}     - vehicle name
       {{level}}       - vehicle level (Arabic numerals)
       {{rlevel}}      - vehicle level (Roman numerals)
