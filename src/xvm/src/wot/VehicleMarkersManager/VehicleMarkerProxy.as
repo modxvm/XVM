@@ -365,7 +365,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
             hitLog.update(delta, curHealth,
                 VehicleInfo.mapVehicleName(m_defaultIconSource, m_vehicleName),
                 m_playerFullName, m_level, damageType,
-                GraphicsUtil.GetVTypeColorValue(m_defaultIconSource, Utils.vehicleClassToVehicleType(m_vehicleClass)));
+                VehicleInfo.GetVTypeValue(m_defaultIconSource),
+                GraphicsUtil.GetVTypeColorValue(m_defaultIconSource));
         }
         m_curHealth = curHealth < 0 ? 0 : curHealth;
         call("updateHealth", [ curHealth, flag, damageType ]);
@@ -424,7 +425,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         if (Config.s_config.battle.useStandardMarkers == true && subject != null)
             subject["markerSettings"] = value;
     }
-    
+
     /**
      * TODO: not all is required, remove unused.
      */
@@ -501,11 +502,11 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         call("scrollWheel", [ delta ]);
     }
 
-    
-    
-    
-    
-    
+
+
+
+
+
     function onSplashHidden(event)
     {
         trace("*** onSplashHidden()");

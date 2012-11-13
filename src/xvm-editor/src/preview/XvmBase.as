@@ -68,6 +68,9 @@ public class XvmBase
         formatArr = format.split("{{vehicle}}");
         if (formatArr.length > 1)
             format = formatArr.join(m_vname);
+        formatArr = format.split("{{vtype}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(VehicleInfo.GetVTypeValue(m_defaultIconSource));
         formatArr = format.split("{{level}}");
         if (formatArr.length > 1)
             format = formatArr.join(String(m_level));

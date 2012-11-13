@@ -85,6 +85,7 @@
       {{name}}        - player nickname without clan name
       {{clan}}        - clan name with brackets (empty if no clan)
       {{vehicle}}     - vehicle name
+      {{vtype}}       - vehicle type
       {{c:vtype}}     - color depended from vehicle type
       + statistics macros (see below)
 
@@ -93,6 +94,7 @@
       {{name}}        - player nickname without clan name
       {{clan}}        - clan name with brackets (empty if no clan)
       {{vehicle}}     - vehicle name
+      {{vtype}}       - vehicle type
       {{level}}       - vehicle level (Arabic numerals)
       {{rlevel}}      - vehicle level (Roman numerals)
       {{turret}}      - stock turret marker:
@@ -124,6 +126,7 @@
       {{name}}        - player nickname without clan name
       {{clan}}        - clan name with brackets (empty if no clan)
       {{vehicle}}     - vehicle name
+      {{vtype}}       - vehicle type
       {{level}}       - vehicle level (Arabic numerals)
       {{rlevel}}      - vehicle level (Roman numerals)
       {{dmg-kind}}    - damage kind (attack, fire, ramming, ...)

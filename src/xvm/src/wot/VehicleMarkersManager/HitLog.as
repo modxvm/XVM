@@ -61,7 +61,7 @@ class wot.VehicleMarkersManager.HitLog
     }
 
     public function update(delta:Number, curHealth:Number, vehicleName:String, playerName:String,
-        level:Number, damageType:String, vtypeColor:String)
+        level:Number, damageType:String, vtype:String, vtypeColor:String)
     {
         //wot.utils.Logger.add(delta + " " + vehicleName + " " + playerName + " " + level);
 
@@ -87,6 +87,7 @@ class wot.VehicleMarkersManager.HitLog
             players[playerName] = {
                 vehicleName:vehicleName,
                 level:level,
+                vtype:vtype,
                 vtypeColor:vtypeColor,
                 total: 0,
                 hits: []
@@ -173,6 +174,7 @@ class wot.VehicleMarkersManager.HitLog
                     damageType:"",
                     vehicleName:"",
                     level:0,
+                    vtype:"",
                     vtypeColor:null,
                     total: 0,
                     hits: []
@@ -214,6 +216,9 @@ class wot.VehicleMarkersManager.HitLog
             formatArr = format.split("{{vehicle}}");
             if (formatArr.length > 1)
                 format = formatArr.join(data.vehicleName);
+            formatArr = format.split("{{vtype}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(data.vtype);
             formatArr = format.split("{{level}}");
             if (formatArr.length > 1)
                 format = formatArr.join(data.level);

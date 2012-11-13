@@ -103,6 +103,9 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
             formatArr = format.split("{{vehicle}}");
             if (formatArr.length > 1)
                 format = formatArr.join(VehicleInfo.mapVehicleName(m_defaultIconSource, m_vname));
+            formatArr = format.split("{{vtype}}");
+            if (formatArr.length > 1 && vehicleTypeComponent != null)
+                format = formatArr.join(VehicleInfo.GetVTypeValue(m_defaultIconSource));
             formatArr = format.split("{{level}}");
             if (formatArr.length > 1)
                 format = formatArr.join(String(m_level));
@@ -113,13 +116,10 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
             if (formatArr.length > 1)
                 format = formatArr.join(turretStatusComponent.getMarker());
             formatArr = format.split("{{c:vtype}}");
-            if (formatArr.length > 1)
+            if (formatArr.length > 1 && vehicleTypeComponent != null)
             {
-                if (vehicleTypeComponent != null)
-                {
-                    format = formatArr.join(GraphicsUtil.GetVTypeColorValue(m_defaultIconSource,
-                        Utils.vehicleClassToVehicleType(vehicleTypeComponent.getVehicleClass())));
-                }
+                format = formatArr.join(GraphicsUtil.GetVTypeColorValue(m_defaultIconSource,
+                    Utils.vehicleClassToVehicleType(vehicleTypeComponent.getVehicleClass())));
             }
 
             format = StatFormat.FormatText({ label: m_playerFullName }, format);

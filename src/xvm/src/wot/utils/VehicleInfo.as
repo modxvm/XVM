@@ -67,4 +67,15 @@ class wot.utils.VehicleInfo
             return originalName;
         }
     }
+
+    public static function GetVTypeValue(iconSource:String): String
+    {
+        var vi = wot.utils.VehicleInfo.getInfo(iconSource);
+        if (vi == null)
+            return "";
+        var vtype = vi.type;
+        if (!vtype || !Config.s_config.texts.vtype[vtype])
+            return "";
+        return Config.s_config.texts.vtype[vtype];
+    }
 }

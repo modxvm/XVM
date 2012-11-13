@@ -80,7 +80,7 @@
                 <mx:Image id="lang_ru" width="16" height="16" source="@Embed(source='images/lang_ru_icon.png')" toolTip="Русский" useHandCursor="true" buttonMode="true" click="onLanguageButtonClick(event)"/>
             </s:HGroup>
         </s:BorderContainer>
-        <s:TabBar width="920" height="20" dataProvider="{vsTabs}"/>
+        <s:TabBar  width="920" height="20" dataProvider="{vsTabs}"/>
         <s:HGroup width="920" height="100%" gap="0">
             <mx:ViewStack width="420" height="100%" backgroundColor="0xFFFFFF" id="vsTabs" creationPolicy="auto" change="{RefreshCurrentPage()}">
                 <s:NavigatorContent label="{_('commonPage')}" width="100%" height="100%" id="pgCommon">
@@ -171,6 +171,13 @@
                         </s:VGroup>
                     </s:Scroller>
                 </s:NavigatorContent>
+                <s:NavigatorContent label="{_('hitLogPage')}" width="100%" height="100%" id="pgHitLog">
+                    <s:Scroller x="0" y="0" width="420" height="100%">
+                        <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1" creationComplete="{RefreshCurrentPage()}">
+                            <p:PHitLog id="p_hitLog" config="hitLog" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+                        </s:VGroup>
+                    </s:Scroller>
+                </s:NavigatorContent>
                 <s:NavigatorContent label="{_('LoadingScreen')}" width="100%" height="100%" id="pgBattleLoading">
                     <s:Scroller x="0" y="0" width="420" height="100%">
                         <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1" creationComplete="{RefreshCurrentPage()}">
@@ -244,17 +251,23 @@
                         </s:NavigatorContent>
                 </mx:Accordion>
                 </s:NavigatorContent>
-                <s:NavigatorContent label="{_('miscPage')}" width="100%" height="100%" id="pgMisc">
+                <s:NavigatorContent label="{_('textsPage')}" width="100%" height="100%" id="pgTexts">
                     <s:Scroller x="0" y="0" width="420" height="100%">
                         <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1" creationComplete="{RefreshCurrentPage()}">
                             <p:PTurretMarkers id="p_turretMarkers" config="turretMarkers" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
-                            <p:PHitLog id="p_hitLog" config="hitLog" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
-                            <p:PIconSet id="p_iconSet" config="iconset" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+                            <p:PVTypeTexts id="p_vtypeTexts" config="texts.vtype" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                         </s:VGroup>
                     </s:Scroller>
                 </s:NavigatorContent>
                 <s:NavigatorContent label="{_('vehicleNames')}" width="100%" height="100%" id="pgVehicleNames">
                     <p:PDynamicValues id="p_vehicleNames" config="vehicleNames" editorClass="DynamicVehicleNameEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                </s:NavigatorContent>
+                <s:NavigatorContent label="{_('miscPage')}" width="100%" height="100%" id="pgMisc">
+                    <s:Scroller x="0" y="0" width="420" height="100%">
+                        <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1" creationComplete="{RefreshCurrentPage()}">
+                            <p:PIconSet id="p_iconSet" config="iconset" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+                        </s:VGroup>
+                    </s:Scroller>
                 </s:NavigatorContent>
             </mx:ViewStack>
             <c:PreviewComponent height="100%" id="preview"/>

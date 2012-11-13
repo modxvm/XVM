@@ -101,6 +101,8 @@ package utils
         public static const turret:Class;
         [Embed("images/macros/vehicle.png")]
         public static const vehicle:Class;
+        [Embed("images/macros/vtype.png")]
+        public static const vtype:Class;
         [Embed("images/macros/wins.png")]
         public static const wins:Class;
 

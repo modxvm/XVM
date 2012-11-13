@@ -2,6 +2,8 @@
   * new macros:
       {{name}} - player nickname without clan name
       {{clan}} - clan name with brackets (empty if no clan)
+      {{vtype}} - vehicle type
+  * new config section texts/vtype for changing vehicle types text
 
 XVM-3.1.2.test4:
   * improved default major color palette

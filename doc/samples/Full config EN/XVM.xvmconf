@@ -1479,7 +1479,7 @@
       { "value": 900,  "color": "0xDD4444" },   //  800 -  899
       { "value": 1000, "color": "0xFF8844" },   //  900 -  999
       { "value": 1200, "color": "0xFFCC22" },   // 1000 - 1199
-          
+
       { "value": 1400, "color": "0x99FF44" },   // 1200 - 1399 // good player
       { "value": 1800, "color": "0x33FF88" },   // 1400 - 1799 // great
       { "value": 2000, "color": "0xAA66FF" },   // 1800 - 1999 // unique
@@ -1491,7 +1491,7 @@
       { "value": 49,  "color": "0xDD4444" },   // 47 - 48
       { "value": 50,  "color": "0xFF8844" },   // 49
       { "value": 51,  "color": "0xFFCC22" },   // 50
-          
+
       { "value": 54,  "color": "0x99FF44" },   // 51 - 53 // good player
       { "value": 58,  "color": "0x33FF88" },   // 54 - 57 // great
       { "value": 60,  "color": "0xAA66FF" },   // 58 - 59 // unique
@@ -1503,7 +1503,7 @@
       { "value": 3,   "color": "0xDD4444" },   //  2
       { "value": 4,   "color": "0xFF8844" },   //  3
       { "value": 6,   "color": "0xFFCC22" },   //  4 - 5
-          
+
       { "value": 9,   "color": "0x99FF44" },   //  6 -  8
       { "value": 13,  "color": "0x33FF88" },   //  9 - 12
       { "value": 20,  "color": "0xAA66FF" },   // 13 - 19
@@ -1515,7 +1515,7 @@
       { "value": 200,   "color": "0xDD4444" },
       { "value": 300,   "color": "0xFF8844" },
       { "value": 500,   "color": "0xFFCC22" },
-          
+
       { "value": 800,   "color": "0x99FF44" },
       { "value": 1200,  "color": "0x33FF88" },
       { "value": 1800,  "color": "0xAA66FF" },
@@ -1556,6 +1556,17 @@
       { "value": 10,  "alpha": 100 },
       { "value": 999, "alpha": 100 }
     ]
+  },
+  // Text substitutions
+  "texts": {
+    // Text for {{vtype}} macro
+    "vtype": {
+      "LT":  "LT",        // Text for light tanks
+      "MT":  "MT",        // Text for medium tanks
+      "HT":  "HT",        // Text for heavy tanks
+      "SPG": "SPG",       // Text for arty
+      "TD":  "TD"         // Text for tank destroyers
+    }
   },
   // ICON SETS
   "iconset": {

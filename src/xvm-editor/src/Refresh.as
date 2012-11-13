@@ -20,6 +20,8 @@ protected function RefreshCurrentPage():void
 
         if (pg == pgCommon)
             RefreshCommonPage();
+        else if (pg == pgHitLog)
+            RefreshHitLogPage();
         else if (pg == pgBattleLoading)
             RefreshBattleLoadingPage();
         else if (pg == pgStatisticForm)
@@ -30,6 +32,8 @@ protected function RefreshCurrentPage():void
             RefreshColorsPage();
         else if (pg == pgTransparency)
             RefreshTransparencyPage();
+        else if (pg == pgTexts)
+            RefreshTextsPage();
         else if (pg == pgMisc)
             RefreshMiscPage();
         else if (pg == pgVehicleNames)
@@ -80,6 +84,34 @@ private function RefreshCommonPage():void
     catch (ex:Error)
     {
         debug("ERROR: RefreshCommonPage(): " + ex.toString());
+    }
+}
+
+private function RefreshHitLogPage():void
+{
+    debug("RefreshHitLogPage()");
+    try
+    {
+        var section:*;
+
+        section = Config.s_config.hitLog;
+        this.p_hitLog.v_visible.value = section.visible;
+        this.p_hitLog.v_x.value = section.x;
+        this.p_hitLog.v_y.value = section.y;
+        this.p_hitLog.v_h.value = section.h;
+        this.p_hitLog.v_w.value = section.w;
+        this.p_hitLog.v_lines.value = section.lines;
+        this.p_hitLog.v_direction.value = section.direction;
+        this.p_hitLog.v_insertOrder.value = section.insertOrder;
+        this.p_hitLog.v_groupHitsByPlayer.value = section.groupHitsByPlayer;
+        this.p_hitLog.v_deadMarker.value = section.deadMarker;
+        this.p_hitLog.v_blowupMarker.value = section.blowupMarker;
+        this.p_hitLog.v_formatHeader.value = section.formatHeader;
+        this.p_hitLog.v_formatHistory.value = section.formatHistory;
+    }
+    catch (ex:Error)
+    {
+        debug("ERROR: RefreshHitLogPage(): " + ex.toString());
     }
 }
 
@@ -468,9 +500,9 @@ private function RefreshTransparencyPage():void
     }
 }
 
-private function RefreshMiscPage():void
+private function RefreshTextsPage():void
 {
-    debug("RefreshMiscPage()");
+    debug("RefreshTextsPage()");
     try
     {
         var section:*;
@@ -479,20 +511,25 @@ private function RefreshMiscPage():void
         this.p_turretMarkers.v_highVulnerability.value = section.highVulnerability;
         this.p_turretMarkers.v_lowVulnerability.value = section.lowVulnerability;
 
-        section = Config.s_config.hitLog;
-        this.p_hitLog.v_visible.value = section.visible;
-        this.p_hitLog.v_x.value = section.x;
-        this.p_hitLog.v_y.value = section.y;
-        this.p_hitLog.v_h.value = section.h;
-        this.p_hitLog.v_w.value = section.w;
-        this.p_hitLog.v_lines.value = section.lines;
-        this.p_hitLog.v_direction.value = section.direction;
-        this.p_hitLog.v_insertOrder.value = section.insertOrder;
-        this.p_hitLog.v_groupHitsByPlayer.value = section.groupHitsByPlayer;
-        this.p_hitLog.v_deadMarker.value = section.deadMarker;
-        this.p_hitLog.v_blowupMarker.value = section.blowupMarker;
-        this.p_hitLog.v_formatHeader.value = section.formatHeader;
-        this.p_hitLog.v_formatHistory.value = section.formatHistory;
+        section = Config.s_config.texts.vtype;
+        this.p_vtypeTexts.v_LT.value = section.LT;
+        this.p_vtypeTexts.v_MT.value = section.MT;
+        this.p_vtypeTexts.v_HT.value = section.HT;
+        this.p_vtypeTexts.v_TD.value = section.TD;
+        this.p_vtypeTexts.v_SPG.value = section.SPG;
+    }
+    catch (ex:Error)
+    {
+        debug("ERROR: RefreshTextsPage(): " + ex.toString());
+    }
+}
+
+private function RefreshMiscPage():void
+{
+    debug("RefreshMiscPage()");
+    try
+    {
+        var section:*;
 
         section = Config.s_config.iconset;
         this.p_iconSet.v_battleLoading.value = section.battleLoading;

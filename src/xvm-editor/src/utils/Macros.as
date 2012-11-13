@@ -37,6 +37,7 @@ package utils
             format = format.replace("{{name}}", "Player");
             format = format.replace("{{clan}}", "[CLAN]");
             format = format.replace("{{vehicle}}", "T-34");
+            format = format.replace("{{vtype}}", Config.s_config.texts.vtype.MT);
             format = format.replace("{{level}}", "5");
             format = format.replace("{{rlevel}}", "V");
             format = format.replace("{{turret}}", Config.s_config.turretMarkers.highVulnerability);
@@ -100,6 +101,7 @@ package utils
                 { value: "{{name}}", label: "name", icon: Embed.name },
                 { value: "{{clan}}", label: "clan", icon: Embed.clan },
                 { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
+                { value: "{{vtype}}", label: "vtype", icon: Embed.vtype },
             ],
             colors_panels: [
                 { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype }
@@ -110,6 +112,7 @@ package utils
                 { value: "{{name}}", label: "name", icon: Embed.name },
                 { value: "{{clan}}", label: "clan", icon: Embed.clan },
                 { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
+                { value: "{{vtype}}", label: "vtype", icon: Embed.vtype },
                 { value: "{{level}}", label: "level", icon: Embed.level },
                 { value: "{{rlevel}}", label: "rlevel", icon: Embed.rlevel },
                 { value: "{{n}}", label: "n", icon: Embed.n },
@@ -132,6 +135,7 @@ package utils
                 { value: "{{name}}", label: "name", icon: Embed.name },
                 { value: "{{clan}}", label: "clan", icon: Embed.clan },
                 { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
+                { value: "{{vtype}}", label: "vtype", icon: Embed.vtype },
                 { value: "{{level}}", label: "level", icon: Embed.level },
                 { value: "{{rlevel}}", label: "rlevel", icon: Embed.rlevel },
                 { value: "{{turret}}", label: "turret", icon: Embed.turret },
@@ -150,6 +154,7 @@ package utils
                 { value: "{{name}}", label: "name", icon: Embed.name },
                 { value: "{{clan}}", label: "clan", icon: Embed.clan },
                 { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
+                { value: "{{vtype}}", label: "vtype", icon: Embed.vtype },
                 { value: "{{level}}", label: "level", icon: Embed.level },
                 { value: "{{rlevel}}", label: "rlevel", icon: Embed.rlevel },
                 { value: "{{turret}}", label: "turret", icon: Embed.turret },

@@ -504,6 +504,17 @@ class wot.utils.DefaultConfig
           other: "../../../icons/xvm/dmg_other.png"
         }
       },*/
+      // Text substitutions
+      texts: {
+        // Text for {{vtype}} macro
+        vtype: {
+          LT:  "LT",        // Text for light tanks
+          MT:  "MT",        // Text for medium tanks
+          HT:  "HT",        // Text for heavy tanks
+          SPG: "SPG",       // Text for arty
+          TD:  "TD"         // Text for tank destroyers
+        }
+      },
       iconset: {
         battleLoading: "../maps/icons/vehicle/contour",
         statisticForm: "../maps/icons/vehicle/contour",

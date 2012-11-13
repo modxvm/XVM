@@ -53,6 +53,9 @@ class wot.utils.TextCache
         formatArr = format.split("{{vehicle}}");
         if (formatArr.length > 1)
             format = formatArr.join(VehicleInfo.mapVehicleName(data.icon, data.vehicle));
+        formatArr = format.split("{{vtype}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(VehicleInfo.GetVTypeValue(data.icon));
         formatArr = format.split("{{name}}");
         if (formatArr.length > 1)
             format = formatArr.join(Utils.GetPlayerName(name));
