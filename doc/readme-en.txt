@@ -146,9 +146,11 @@
       {{wins}}        - total wins count
       {{rating}}      - GWR (Global Win Ratio)
       {{eff}}         - player efficiency (http://wot-news.com/index.php/stat/calc/en/)
+      {{e}}           - player efficiency divided by 10 (save 1 char)
       {{kb:3}}        - number of kilo-battles aligned from left to 3 chars
       {{rating:3}}    - GWR aligned from left to 3 chars
       {{eff:4}}       - player efficiency aligned from left to 4 chars
+      {{e:3}}         - player efficiency divided by 10 aligned to 3 chars
       {{t-kb}}        - number of kilo-battles for current vehicle
       {{t-kb-0}}      - number of kilo-battles for current vehicle with leading zero
       {{t-hb}}        - number of hecto-battles for current vehicle (hecto = 100)

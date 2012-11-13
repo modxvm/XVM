@@ -1,5 +1,6 @@
 ﻿XVM-3.1.2.test5:
   * new macros:
+      {{e}}, {{e:3}} - efficiency / 10 (save 1 char)
       {{name}} - player nickname without clan name
       {{clan}} - clan name with brackets (empty if no clan)
       {{vtype}} - vehicle type

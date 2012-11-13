@@ -22,6 +22,7 @@ class wot.utils.StatFormat
         var sKb: String = "";
         var sRating: String = "";
         var sEff: String = "";
+        var sE: String = "";
         var sTWins: String = "";
         var sTBattles: String = "";
         var sTKb: String = "";
@@ -30,6 +31,7 @@ class wot.utils.StatFormat
         var sTRating: String = "";
 
         var eff: Number = 0;
+        var e: Number = 0;
         var rating: Number = 0;
         var kb: Number = -1;
         var t_rating: Number = 0;
@@ -62,6 +64,9 @@ class wot.utils.StatFormat
 
                     eff = Utils.toInt(stat.e);
                     sEff = eff ? String(eff) : "--";
+
+                    e = Utils.toInt(stat.e / 10);
+                    sE = e ? String(e) : "--";
 
                     if (rating)
                     {
@@ -96,6 +101,7 @@ class wot.utils.StatFormat
         format = format.split("{{wins}}").join(sWins);
         format = format.split("{{rating}}").join(sRating);
         format = format.split("{{eff}}").join(sEff);
+        format = format.split("{{e}}").join(sE);
 
         format = format.split("{{t-kb}}").join(sTKbWithout0);
         format = format.split("{{t-kb-0}}").join(Utils.padLeft(sTKb, 4));
@@ -108,6 +114,7 @@ class wot.utils.StatFormat
         format = format.split("{{kb:3}}").join(Utils.padLeft(sKb, 3));
         format = format.split("{{rating:3}}").join(Utils.padLeft(sRating, 3));
         format = format.split("{{eff:4}}").join(Utils.padLeft(sEff, 4));
+        format = format.split("{{e:3}}").join(Utils.padLeft(sE, 3));
 
         format = format.split("{{t-kb:4}}").join(Utils.padLeft(sTKbWithout0, 4));
         format = format.split("{{t_kb:4}}").join(Utils.padLeft(sTKbWithout0, 4));

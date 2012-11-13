@@ -47,6 +47,10 @@ package utils
         public static const dmg_ratio:Class;
         [Embed("images/macros/dmg_total.png")]
         public static const dmg_total:Class;
+		[Embed("images/macros/e.png")]
+		public static const e:Class;
+		[Embed("images/macros/e_3.png")]
+		public static const e_3:Class;
         [Embed("images/macros/eff.png")]
         public static const eff:Class;
         [Embed("images/macros/eff_4.png")]
