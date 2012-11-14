@@ -1,0 +1,37 @@
+<gui_settings.xml>
+  <eulaURL>http://worldoftanks.ru/user_agreement?language={0}</eulaURL>
+  <registrationURL>http://worldoftanks.ru/registration/new/</registrationURL>
+  <paymentURL>https://worldoftanks.ru/personal/payment/?user=%(userEncoded)s</paymentURL>
+  <finPasswordURL>
+  </finPasswordURL>
+  <migrationURL>http://wot.kongzhong.com/jihuo/jihuo.html?%s</migrationURL>
+  <nations_order>
+    <_1>	ussr	</_1>
+    <_2>germany</_2>
+    <_3>usa</_3>
+    <_4>france</_4>
+    <_5>uk</_5>
+    <_6>china</_6>
+  </nations_order>
+  <minimapSize>	True	</minimapSize>
+  <goldTransfer>False</goldTransfer>
+  <voiceChat>	True	</voiceChat>
+  <technicalInfo>	True	</technicalInfo>
+  <nationHangarSpace>False</nationHangarSpace>
+  <customizationCamouflages>	True	</customizationCamouflages>
+  <customizationHorns>False</customizationHorns>
+  <customizationEmblems>	True	</customizationEmblems>
+  <customizationInscriptions>	True	</customizationInscriptions>
+  <showMinimapSuperHeavy>True</showMinimapSuperHeavy>
+  <showMinimapDeath>	True	</showMinimapDeath>
+  <permanentMinimapDeath>False</permanentMinimapDeath>
+  <markerHitSplashDuration>	1000	</markerHitSplashDuration>
+  <sixthSenseDuration>	2000	</sixthSenseDuration>
+  <minimapDeathDuration>	22000	</minimapDeathDuration>
+  <markerScaleSettings>40 100 100 3.0</markerScaleSettings>
+  <markerBgSettings>40 100 100 3.0</markerBgSettings>
+  <rememberPassVisible>	True	</rememberPassVisible>
+  <clearLoginValue>False</clearLoginValue>
+  <specPrebatlesVisible>	True	</specPrebatlesVisible>
+  <battleStatsInHangar>	True	</battleStatsInHangar>
+</gui_settings.xml>
