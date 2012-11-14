@@ -888,9 +888,13 @@ namespace wot
         {
           byte b = Convert.ToByte(logString.Substring(i, 2), 16);
           if (b < 32 && b != 10 && b != 13 && b != 9) // '\n', '\r', '\t'
-            b = 63; // '?'
+          {
+            //Console.WriteLine(logString.Substring(i, 2));
+            b = 126; // '~'
+          }
           buf.Add(b);
         }
+        //Log(Encoding.GetEncoding("KOI8-R").GetString(buf.ToArray()));
         Log(Encoding.ASCII.GetString(buf.ToArray()));
       }
       catch (Exception ex)

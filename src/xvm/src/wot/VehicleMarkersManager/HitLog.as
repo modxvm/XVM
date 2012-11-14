@@ -61,7 +61,7 @@ class wot.VehicleMarkersManager.HitLog
     }
 
     public function update(delta:Number, curHealth:Number, vehicleName:String, playerName:String,
-        level:Number, damageType:String, vtype:String, vtypeColor:String)
+        level:Number, damageType:String, vtype:String, vtypeColor:String, dead:Boolean)
     {
         //wot.utils.Logger.add(delta + " " + vehicleName + " " + playerName + " " + level);
 
@@ -79,6 +79,7 @@ class wot.VehicleMarkersManager.HitLog
             playerName:playerName,
             dmg:dmg,
             curHealth:curHealth,
+            dead:dead,
             damageType:damageType
         }) - 1;
 
@@ -163,6 +164,7 @@ class wot.VehicleMarkersManager.HitLog
                 var last_player_hit_data = hits[data.hits[data.hits.length - 1]];
                 data.dmg = last_player_hit_data.dmg;
                 data.curHealth = last_player_hit_data.curHealth;
+                data.dead = last_player_hit_data.dead;
                 data.damageType = last_player_hit_data.damageType;
             }
             else
@@ -171,6 +173,7 @@ class wot.VehicleMarkersManager.HitLog
                     playerName:"",
                     dmg:0,
                     curHealth:1,
+                    dead:false,
                     damageType:"",
                     vehicleName:"",
                     level:0,
@@ -187,7 +190,7 @@ class wot.VehicleMarkersManager.HitLog
             {
                 format = formatArr.join(data.curHealth < 0
                     ? Config.s_config.hitLog.blowupMarker
-                    : data.curHealth == 0 ? Config.s_config.hitLog.deadMarker : "");
+                    : (data.curHealth == 0 || data.dead) ? Config.s_config.hitLog.deadMarker : "");
             }
             formatArr = format.split("{{n}}");
             if (formatArr.length > 1)

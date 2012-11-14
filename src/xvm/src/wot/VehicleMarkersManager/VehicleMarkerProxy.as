@@ -31,6 +31,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     var m_curHealth:Number;
     var m_defaultIconSource:String;
     var m_vehicleClass:String;
+    var m_dead:Boolean;
 
     // Components
     private static var hitLog:HitLog = null;
@@ -343,6 +344,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         m_defaultIconSource = vIconSource;
         m_vehicleClass = vClass;
         m_curHealth = curHealth;
+        m_dead = m_curHealth <= 0;
         call("init",   [ vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt, entityType ]);
     }
 
@@ -355,10 +357,19 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     public function setEntityName(value)          { call("setEntityName",    [ value ]); }
     public function showExInfo(show)              { call("showExInfo",       [ show ]); }
     public function showActionMarker(actionState) { call("showActionMarker", [ actionState ]); }
+
     public function updateState(newState, isImmediate)
-                                                  { call("updateState",  [ newState, isImmediate ]);}
+    {
+        if (newState == "dead")
+            m_dead = true;
+        call("updateState",  [ newState, isImmediate ]);
+    }
+
     public function updateHealth(curHealth, flag, damageType)
     {
+        if (curHealth <= 0)
+            m_dead = true;
+
         if (flag == Defines.FROM_PLAYER && m_team == "enemy" && hitLog != null) // do not calculate friendly fire
         {
             var delta = m_curHealth - (curHealth < 0 ? 0 : curHealth);
@@ -366,7 +377,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
                 VehicleInfo.mapVehicleName(m_defaultIconSource, m_vehicleName),
                 m_playerFullName, m_level, damageType,
                 VehicleInfo.GetVTypeValue(m_defaultIconSource),
-                GraphicsUtil.GetVTypeColorValue(m_defaultIconSource));
+                GraphicsUtil.GetVTypeColorValue(m_defaultIconSource),
+                m_dead);
         }
         m_curHealth = curHealth < 0 ? 0 : curHealth;
         call("updateHealth", [ curHealth, flag, damageType ]);

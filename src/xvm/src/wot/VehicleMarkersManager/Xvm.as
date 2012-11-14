@@ -196,7 +196,9 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         if (newHealth < 0)
             s_blowedUp[m_playerFullName] = true;
 
-        m_isDead = newHealth <= 0;
+        // can be dead with newHealth > 0 if crew is dead
+        if (newHealth <= 0)
+            m_isDead = true;
 
         var delta: Number = newHealth - m_curHealth;
         m_curHealth = m_isDead ? 0 : newHealth; // fixes "-1"
