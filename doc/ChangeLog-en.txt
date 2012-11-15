@@ -1,4 +1,8 @@
-﻿XVM-3.1.2.test5:
+﻿XVM-3.1.2-pre1:
+  * added capture bar mod
+  * fixed standard markers mode
+  * do not calculate friendly fire in hit-log
+  * improved default major color palette
   * new macros:
       {{e}}, {{e:3}} - efficiency / 10 (save 1 char)
       {{name}} - player nickname without clan name
@@ -6,25 +10,6 @@
       {{vtype}} - vehicle type
   * new config section texts/vtype for changing vehicle types text
   * fixed display a marker for the tank with the dead crew
-
-XVM-3.1.2.test4:
-  * improved default major color palette
-  * implemented special capture speed for encounter battle type at exceptional maps like El halloof
-  * capture mod default acceptable config defined
-
-XVM-3.1.2.test3:
-  * enemy\ally capture configuration split
-  * time and capturers computation algorythm rewrite
-  * fixed capture bar shadow color
-  * added {{time-sec}} macro to show cap time left in seconds only
-
-XVM-3.1.2.test2:
-  * fixed capture bar shadow color at default configuration file
-
-XVM-3.1.2.test1:
-  * added capture bar mod
-  * do not calculate friendly fire in hit-log
-  * fixed standard markers mode
 
 XVM-3.1.1:
   * bugfix
