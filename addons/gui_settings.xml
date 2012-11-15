@@ -1,37 +1,37 @@
-<gui_settings.xml>
-  <eulaURL>http://worldoftanks.ru/user_agreement?language={0}</eulaURL>
-  <registrationURL>http://worldoftanks.ru/registration/new/</registrationURL>
-  <paymentURL>https://worldoftanks.ru/personal/payment/?user=%(userEncoded)s</paymentURL>
-  <finPasswordURL>
-  </finPasswordURL>
-  <migrationURL>http://wot.kongzhong.com/jihuo/jihuo.html?%s</migrationURL>
-  <nations_order>
-    <_1>	ussr	</_1>
-    <_2>germany</_2>
-    <_3>usa</_3>
-    <_4>france</_4>
-    <_5>uk</_5>
-    <_6>china</_6>
-  </nations_order>
-  <minimapSize>	True	</minimapSize>
-  <goldTransfer>False</goldTransfer>
-  <voiceChat>	True	</voiceChat>
-  <technicalInfo>	True	</technicalInfo>
-  <nationHangarSpace>False</nationHangarSpace>
-  <customizationCamouflages>	True	</customizationCamouflages>
-  <customizationHorns>False</customizationHorns>
-  <customizationEmblems>	True	</customizationEmblems>
-  <customizationInscriptions>	True	</customizationInscriptions>
-  <showMinimapSuperHeavy>True</showMinimapSuperHeavy>
-  <showMinimapDeath>	True	</showMinimapDeath>
-  <permanentMinimapDeath>False</permanentMinimapDeath>
-  <markerHitSplashDuration>	1000	</markerHitSplashDuration>
-  <sixthSenseDuration>	2000	</sixthSenseDuration>
-  <minimapDeathDuration>	22000	</minimapDeathDuration>
-  <markerScaleSettings>40 100 100 3.0</markerScaleSettings>
-  <markerBgSettings>40 100 100 3.0</markerBgSettings>
-  <rememberPassVisible>	True	</rememberPassVisible>
-  <clearLoginValue>False</clearLoginValue>
-  <specPrebatlesVisible>	True	</specPrebatlesVisible>
-  <battleStatsInHangar>	True	</battleStatsInHangar>
+<gui_settings.xml>										<!--Настройки игры-->
+<eulaURL>http://worldoftanks.ru/user_agreement?language={0}</eulaURL>				<!--Лицензионное соглашение ссылка-->
+<registrationURL>http://worldoftanks.ru/registration/new/</registrationURL>			<!--регистрация ссылка-->
+<paymentURL>https://worldoftanks.ru/personal/payment/?user=%(userEncoded)s</paymentURL>		<!--оплата ссылка-->
+<finPasswordURL>										<!--Найти пароль, ссылка-->
+</finPasswordURL>
+<migrationURL>http://wot.kongzhong.com/jihuo/jihuo.html?%s</migrationURL>			<!--миграция ссылка-->
+<nations_order>							<!--Выбор страны-->
+<_1> ussr </_1>							<!--Россия-->
+<_2>germany</_2>						<!--Германия-->
+<_3>usa</_3>							<!--Америка-->
+<_4>france</_4>							<!--Франция-->
+<_5>uk</_5>							<!--Великобритания-->
+<_6>china</_6>							<!--Китай-->
+</nations_order>
+<minimapSize> True </minimapSize>				<!--Увеличение/уменьшение миникарты-->
+<goldTransfer> False </goldTransfer>				<!--Перевод голды с акаунта на акаунт(пока не реализовано в игре)-->
+<voiceChat> True </voiceChat>					<!--Отображать расширенные настройки голосового чата-->
+<technicalInfo> True </technicalInfo>				<!--техническая информация о танке при выборе в ангаре-->
+<nationHangarSpace>False</nationHangarSpace>			<!--национальный ангар(пока не реализовано в игре, при включении перестает работать игра)-->
+<customizationCamouflages> True </customizationCamouflages>	<!--Отображать настройку внешнего вида, камуфляжей-->
+<customizationHorns> False </customizationHorns>		<!--Отображать настройку внешнего вида, Клаксон (В "Внешний вид" появляется графа "Клаксон" с выбором гудков за 1000000 голды)(пока не реализовано в игре)-->
+<customizationEmblems> True </customizationEmblems>		<!--Отображать настройку внешнего вида, Эмблемы-->
+<customizationInscriptions> True </customizationInscriptions>	<!--Отображать настройку внешнего вида, надписей-->
+<showMinimapSuperHeavy> True </showMinimapSuperHeavy>		<!--На миникарте ТТ 10 уровня отображать как четыре квадрата, для отличия-->
+<showMinimapDeath> True </showMinimapDeath>			<!--Отображать убитые танки на миникарте(показывает значек убитого танка 2,2 секунды-"minimapDeathDuration")-->
+<permanentMinimapDeath> False </permanentMinimapDeath>		<!--Не скрывать убитые танки на миникарте(должен быть включен "showMinimapDeath")-->
+<markerHitSplashDuration> 1000 </markerHitSplashDuration>	<!--Маркер Хит Всплеск Длительность(?)-->
+<sixthSenseDuration> 5000 </sixthSenseDuration>			<!--Шестое чувство таймер лампочки(сколько будет светится секунд) расчет 1000=1 секунда, по умолчанию зделал 10000=10 секунд-->
+<minimapDeathDuration> 5000 </minimapDeathDuration>		<!--Длительность показа убитых танков на миникарте(должен быть включен "showMinimapDeath")-->
+<markerScaleSettings>40 100 100 3.0</markerScaleSettings>	<!--Параметры маркеров шкалы(?)-->
+<markerBgSettings>40 100 100 3.0</markerBgSettings>		<!--Маркер Bg Настройки(?)-->
+<rememberPassVisible> True </rememberPassVisible>		<!--сохранять пароль-->(надо вводить пароль при каждом входе или сохранить)
+<clearLoginValue>False</clearLoginValue>			<!--Очищать Логин(надо вводить логин при каждом входе или сохранить)-->
+<specPrebatlesVisible> True </specPrebatlesVisible>		<!--Предварительная спецификация сражений видимого(?)-->
+<battleStatsInHangar> True </battleStatsInHangar>		<!--Отображать расширенную статистику после боя-->
 </gui_settings.xml>
