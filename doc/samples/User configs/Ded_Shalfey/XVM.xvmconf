@@ -1,436 +1,467 @@
 ﻿/**
- * Полный конфигурационный файл (далее - конфиг) со всеми возможными опциями,
- * настроенными по умолчанию.
+ * Full configuration file (hereinafter - the configuration) with all possible options,
+ * default configuration.
  *
- * Внимание! Использование символа процента в данном файле не допустимо.
- * Вместо символа процента следует писать: \u0025
+ * Attention! You must NOT use the percent symbol in this file.
+ * Instead, the percent symbol should be written: \u0025
  */
 {
-  "configVersion": "1.5.0", // Версия конфига. Не удаляйте и не изменяйте её без необходимости.
-  "editorVersion": "0.15",  // Версия редактора.
-  // Блок общих параметров конфига. Все параметры информационные, в моде не используются.
+  "configVersion": "1.5.0", // Version of the config. Do not remove or change it unnecessarily.
+  "editorVersion": "0.15",  // Version of the editor.
+  // Common config options. All settings information in the mod not being used.
   "definition": {
-    "author": "Ded_Shalfey",                    // автор конфига
-    "description": "Версия 2",  				// описание конфига
-    "url": "http://www.koreanrandom.com/forum/topic/1384-xvm-configurations/#entry11760", // адрес, где выкладываеются обновления конфига
-    "date": "21.10.2012",                       // дата последней модификации конфига
-    "gameVersion": "0.8.0",                     // поддерживаемая версия игры
-    "modMinVersion": "3.0.4"                    // минимально необходимая версия мода XVM
+    "author": "Ded_Shalfey",                        // Config author
+    "description": "version 2.1",  					// Config description
+    "url": "http://www.koreanrandom.com/forum/topic/1384-xvm-configurations/#entry11760/", // Address to config updates
+    "date": "03.11.2012",                       // Config last modified
+    "gameVersion": "0.8.1",                     // Supported version of the game
+    "modMinVersion": "3.1.1"                    // The minimum required version of the XVM mod
   },
-  // Блок общих параметров боевого интерфейса
+  // General parameters for the battle interface
   "battle": {
-    "mirroredVehicleIcons": false,              // false - отключить зеркалирования иконок танков (полезно для альтернативных иконок). По умолчанию включено.
-    "showPostmortemTips": true,                 // false - отключить всплывающую внизу панель после смерти. По умолчанию включено.
-    "removePanelsModeSwitcher": false,          // true - убрать переключатель режимов ушей мышкой
-    "highlightVehicleIcon": true,               // false - отключить подсветку иконки выбранного танка и взвода
-    "hideXVMVersion": true,                     // true - отключить отображение версии xvm в верхнем левом углу экрана
-    "clockFormat": "H:N",                       // Показать часы на экране панели отладки (возле FPS). Формат: Y:год, M:месяц, D:день, H:часы, N:минуты, S:секунды. "" - убрать часы.
-    "useStandardMarkers": false,                // true - использовать стандартные маркеры клиента
-    "clanIconsFolder": "../../../clanicons"     // путь к папке иконок кланов относительно res_mods/[ВЕРСИЯ ИГРЫ]/gui/flash
+    "mirroredVehicleIcons": true,               // false - Disable tank icon mirroring (good for alternative icons). True by default.
+    "showPostmortemTips": false,                 // false - Disable pop-up panel at the bottom after death. True by default.
+    "removePanelsModeSwitcher": true,          // true - Remove the Players Panel mode switcher (buttons for changing size)
+    "highlightVehicleIcon": true,               // false - disable highlighting of selected vehicle icon and squad
+    "hideXVMVersion": true,                    // true - hide xvm version at top left corner of screen
+    "clockFormat": "H:N",                       // Show the clock on the Debug Panel (near FPS). Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds. "" - remove clock.
+    "useStandardMarkers": false,                // true - use standard client vehicle markers
+    "clanIconsFolder": "../../../clanicons"     // path to clan icons folder relative to res_mods/[GAME VERSION]/gui/flash
   },
-  // Блок управлением статистикой (только с xvm-stat)
+  // Options for player statistics (only with xvm-stat)
   "rating": {
-    "showPlayersStatistics": true,              // true - включить отображение статистики. Глобальный переключатель - без него модуль статистики будет везде отключен.
-    "loadEnemyStatsInFogOfWar": true            // true - включить загрузку данных по противникам в "тумане войны"
+    "showPlayersStatistics": true,              // true - Toggle player statistics on/off. Global setting - without the statistics module, this is always disabled
+    "loadEnemyStatsInFogOfWar": true            // true - Enable downloading of data on opponents in the "fog of war"
   },
-  // Параметры экрана загрузки боя
+  // Parameters of the Battle Loading Screen
   "battleLoading": {
-    "clockFormat": "H:N:S   конфиг - Дед Шалфей", // Показать часы на экране загрузки боя. Формат: Y:год, M:месяц, D:день, H:часы, N:минуты, S:секунды. "" - убрать часы.
-    "showChances": true,                          // true - включить отображение шансов на победу (только с xvm-stat) Прочитать подробней: http://www.koreanrandom.com/forum/topic/1642-chance
-    "showChancesExp": true,                       // Показывать экспериментальную формулу расчета шансов
-    "removeSquadIcon": false,                     // true - убрать отображение иконки взвода. На пустое поле можно вывести, например, иконку клана.
-    "clanIcon": {                                 // параметры отображения иконки игрока/клана
-      "show": true,                               //   false - не отображать иконки игрока/клана в окне загрузки боя
-      "x": 490,                                   //   положение по оси X оносительно иконки танка
-      "y": 6,                                     //   положение по оси Y оносительно иконки танка
-      "xr": 490,                                  //   положение по оси X для правых ушей
-      "yr": 6,                                    //   положение по оси Y для правых ушей
-      "w": 16,                                    //   ширина иконки игрока/клана
-      "h": 16,                                    //   высота иконки игрока/клана
-      "alpha": 90                                 //   прозрачность иконки игрока/клана
+    "clockFormat": "H:N:S   config - Дед Шалфей",                     // Show the clock on the Battle Loading Screen. Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds. "" - remove clock.
+    "showChances": true,                       // true – Enable display of "chance to win" (only with xvm-stat) Read more: http://www.koreanrandom.com/forum/topic/1642-chance
+    "showChancesExp": true,                    // Show experimental "chance to win" formula
+    "removeSquadIcon": false,                   // true – Disable Platoon icons. This blank space can house, for example, clan logos
+    "clanIcon": {                               // Display options for Team/Clan logos
+      "show": true,                             //   false – Disable Team/Clan logos in Battle Loading Screen
+      "x": -340,                                   //   Position on the X axis, relative to the vehicle icon
+      "y": 6,                                   //   Position on the Y axis, relative to the vehicle icon
+      "xr": -340,                                  //   Position on the X axis for right side (positive values run to the *inside* of the table)
+      "yr": 6,                                  //   Position on the Y axis for right side
+      "w": 16,                                  //   Width of the Team/Clan logo
+      "h": 16,                                  //   Height of the Team/Clan logo
+      "alpha": 90                               //   Transparency of the Team/Clan logo
     },
-    // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
+    // Display format for the left Players Panel (macros allowed, see readme-en.txt)
     "formatLeft": "<font face='Comic Sans MS' size='11'><font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font></font> | <font face='Comic Sans MS' size='11'><font color='{{c:t-battles}}'>{{t-battles:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
-    // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
+    // Display format for the right Players Panel (macros allowed, see readme-en.txt)
     "formatRight": "<font face='Comic Sans MS' size='11'><font color='{{c:t-battles}}'>{{t-battles:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font> | <font face='Comic Sans MS'><font face='Comic Sans MS' size='11'><font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font></font>"
   },
-  // Параметры окна статистики по клавише Tab
+  // Parameters of the Battle Statistics Form
   "statisticForm": {
-    "showChances": true,      // true - включить отображение шансов на победу (только с xvm-stat, пока работает только в боях 15x15)
-    "showChancesExp": true,   // Показывать экспериментальную формулу расчета шансов
-    "removeSquadIcon": false, // true - убрать отображение иконки взвода
-    // параметры отображения иконки игрока/клана (см. battleLoading выше)
+    "showChances": true,     // true - Enable display of "chance to win" (only with xvm-stat).
+    "showChancesExp": true,  // Show experimental "chance to win" formula
+    "removeSquadIcon": false, // true - Disable Platoon icons. This blank space can house, for example, clan logos.
+    // Display options for Team/Clan logos (see battleLoading above)
     "clanIcon": { "show": true, "x": 81, "y": 6, "xr": 81, "yr": 6, "h": 16, "w": 16, "alpha": 90 },
-    // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
+    // Display format for the left column (macros allowed, see readme-en.txt)
     "formatLeft": "<font face='Comic Sans MS' size='11'><font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font></font> | <font face='Comic Sans MS' size='11'><font color='{{c:t-battles}}'>{{t-battles:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
-    // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
+    // Display format for the right column (macros allowed, see readme-en.txt)
     "formatRight": "<font face='Comic Sans MS' size='11'><font color='{{c:t-battles}}'>{{t-battles:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font> | <font face='Comic Sans MS' size='11'><font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font></font> "
-   },
-  // Параметры панелей игроков ("ушей")
+  },
+  // Parameters of the Players Panels
   "playersPanel": {
-    "alpha": 80,       // 0..100 - задает прозрачность "ушей". 0 - прозрачные, 100 - не прозрачные
-    "iconAlpha": 100,  // 0..100 - задает прозрачность иконок в "ушах". 0 - прозрачные, 100 - не прозрачные
-    "removeSquadIcon": false, // true - убрать отображение иконки взвода
-    // параметры отображения иконки игрока/клана (см. battleLoading выше).
+    "alpha": 80,       // Opacity percentage of the panels. (0 – transparent ... 100 – opaque)
+    "iconAlpha": 100,  // Opacity percentage of icons in the panels. (0 – transparent ... 100 – opaque)
+    "removeSquadIcon": false, // true - Disable Platoon icons.
+    // Display options for Team/Clan logos (see battleLoading above).
     "clanIcon": { "show": true, "x": 82, "y": 6, "xr": 82, "yr": 6, "h": 16, "w": 16, "alpha": 90 },
-    // режим ушей "medium" - первые средние уши в игре
+    // Options for the "medium" panels - the first of the medium panels
     "medium": {
-      "width": 80,    // 0..250 - задает ширину поля имени игрока. По умолчанию: 46
-      // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
+      "width": 80,    // 0..250 - Width of the player's name column. Default is 46.
+      // Display format for the left panel (macros allowed, see readme-en.txt)
       "formatLeft": "<font color='{{c:eff}}'>{{nick}}</font>",
-      // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
+      // Display format for the right panel (macros allowed, see readme-en.txt)
       "formatRight": "<font color='{{c:eff}}'>{{nick}}</font>"
     },
-    // режим ушей "medium2" - вторые средние уши в игре
+    // Options for the "medium2" panels - the second of the medium panels
     "medium2": {
-      "width": 75,    // 0..250 - задает ширину поля названия танка. По умолчанию: 65
-      // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
+      "width": 75,    // 0..250 - Width of the player's name column. Default is 65.
+      // Display format for the left panel (macros allowed, see readme-en.txt)
       "formatLeft": "<font color='{{c:t-battles}}'>{{vehicle}}</font>",
-      // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
+      // Display format for the right panel (macros allowed, see readme-en.txt)
       "formatRight": "<font color='{{c:t-battles}}'>{{vehicle}}</font>"
     },
-    // режим ушей "large" - широкие уши в игре
+    // Options for the "large" panels - the widest panels
     "large": {
-      "width": 130,  // 0..250 - задает ширину поля имени игрока. По умолчанию: 170
-      // формат отображения имени игрока (допускаются макроподстановки, см. readme-ru.txt)
+      "width": 130,  // 0..250 - Width of the player's name column. Default is 170.
+      // Display format for player nickname (macros allowed, see readme-en.txt)
       "nickFormatLeft": "<font color='{{c:eff}}'>{{nick}}</font>",
       "nickFormatRight": "<font color='{{c:eff}}'>{{nick}}</font>",
-      // формат отображения названия танка (допускаются макроподстановки, см. readme-ru.txt)
+      // Display format for vehicle name (macros allowed, see readme-en.txt)
       "vehicleFormatLeft": "<font color='{{c:t-battles}}'>{{vehicle}}</font>",
       "vehicleFormatRight": "<font color='{{c:t-battles}}'>{{vehicle}}</font>"
     }
   },
-  // Отображаемые строки {{turret}} маркера
+  // {{turret}} marker display strings
   "turretMarkers": {
-    "highVulnerability": "*", // Субъект имеет стоковую башню и топ орудие не может быть установлено. Субъект сильно уязвим.
-    "lowVulnerability": "'"   // Субъект имеет стоковую башню и топ орудие может быть установлено. Субъект немного уязвим.
+    "highVulnerability": "*", // Subject has stock turret and top gun can not be mounted. Subject is highly vulnerable.
+    "lowVulnerability": "'"   // Subject has stock turret and top gun can be mounted. Subject is somewhat vulnerable.
   },
-  // Лог попаданий (счетчик своих попаданий)
+  // Hit log (my hits calculator)
   "hitLog": {
-    "enabled": true,     // переключатель вкл/выкл
-    "x": 360,            // Позиция X
-    "y": 20,             // Позиция Y
-    "w": 500,            // Ширина
-    "h": 200,            // Высота
-    "lines": 7,          // Количество строк. Устаревшие данные выталкиваются.
-    "direction": "down", // Направление лога: up - строки добавляются сверху, down - снизу.
-    // Формат последнего попадания (допускаются макроподстановки, см. readme-ru.txt)
-    "format": "<font color='#96FF00'>Нанесенный урон:</font> <font size='16' face='Comic Sans MS' color='#E29344'>{{dmg-total}}</font> [последний: <font size='16' face='Comic Sans MS' color='{{c:dmg-kind}}'>{{dmg}}</font> (<font face='Comic Sans MS' size='12' color='#ff5a00'>{{vehicle}}</font>)]",
-    // Формат предыдущих попаданий (допускаются макроподстановки, см. readme-ru.txt)
-    "formatHistory": "<font face='Comic Sans MS' size='12'>{{n}}. По </font><font face='Comic Sans MS' size='12' color='#ff5a00'>{{vehicle}}</font> <font face='Comic Sans MS' size='12'>нанесено</font> <font face='Comic Sans MS' size='12' color='{{c:dmg-kind}}'>{{dmg}}</font> <font face='Comic Sans MS' size='12'>урона</font>"
+    "enabled": true,      // on/off switch
+    "x": 202,             // X position (negative values - bind to right side of screen)
+    "y": 25,               // Y position (negative values - bind to bottom side of screen)
+    "w": 500,             // Width
+    "h": 200,             // Height
+    "lines": 7,           // Number of lines. Old lines will be pushed out
+    "direction": "down",  // Log direction: up - lines will be added from up to down, down - from down to up.
+    "insertOrder": "end", // Insert order: begin - insert new values to begin, end - add to end
+    "groupHitsByPlayer": true, // group hits by players name
+    // Substitution for {{dead}} macro when tank is dead
+    "deadMarker": "<font face='Wingdings'>N</font>",
+    "blowupMarker": "<font face='Wingdings'>M</font>",
+    // Hits header format, including last hit (macros allowed, see readme-en.txt)
+    "formatHeader":  "<font color='#FFFFFF'>Damage Done:</font> <font size='14'></font> <font size='1{{nick}}'><b><font color='#fd0000'>{{dmg-total}} hp</font></b>  <font color='#FFFFFF'>Last Damage:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}} hp</b> {{dead}}</font><font color='{{c:vtype}}'>({{vehicle}})</font></font>",
+    // List of hits format (macros allowed, see readme-en.txt)
+    "formatHistory": "<textformat leading='-4' tabstops='[20,50,90,150]'><font size='12' face='Comic Sans MS'>\u00D7{{n-player}}:</font><tab>{{dmg-player}}<tab>| <font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab>| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>"
   },
-  // Блок маркеров над танками.
+  // Capture bar
+  "captureBar": {
+    "enabled": true, // On/off switch
+    "primaryTitleOffset": 7, // Upper textfield offset in case of big font size
+    // Capture format (macros allowed, see readme-en.txt)
+    "enemy": { // Enemy (Capture the enemy base)
+      "primaryTitleFormat":   "<font size='15' color='#FFFFFF'><b>Enemy base capture!<b> {{extra}}</font>", // Upper textfield
+      "secondaryTitleFormat": "<font size='15' color='#FFFFFF'><b>{{points}}\u0025<b></font>",              // Lower textfield
+      "captureDoneFormat":    "<font size='15' color='#014017'><b>Enemy base captured!<b></font>",    // Full capture text
+    "extra": "<font size='15' color='#1bc858'><b>Invaders:</b></font> <font size='15' color='#d9c700'><b>{{tanks}}</b></font> <font size='15' color='#FFFFFF'><b>Time Left:</b></font> <font size='14' color='#ffffff'><b>{{time}}<b></font>",        // Additional text after the necessary calculations
+      "shadow": {          // Fields shadow
+        "color": "0x000000", // Color
+        "alpha": 80,       // Alpha 0-100
+        "blur": 100,        // Blur 0-255
+        "strength": 100      // Strength 0-255
+      }
+    },
+    "ally": { // Ally (capture our base)
+      "primaryTitleFormat":   "<font size='15' color='#ed0616'><b>Ally base capture!<b> {{extra}}</font>",
+      "secondaryTitleFormat": "<font size='15' color='#000000'><b>{{points}}\u0025<b></font>",
+      "captureDoneFormat":    "<font size='15' color='#5c050b'><b>Ally base captured!<b></font>",
+    "extra": "<font size='15' color='#0f04eb'><b>Invaders:</b></font> <font size='15' color='#FFFF00'><b>{{tanks}}</b></font> <font size='15' color='#e2012b'><b>Time Left:</b></font> <font size='14' color='#FFFF00'><b>{{time}}<b></font>",               
+      "shadow": {
+        "color": "0xFFFFFF",
+        "alpha": 80,
+        "blur": 100,
+        "strength": 100
+      }
+    }
+  },
+  // OVER-TARGET MARKERS
   "markers": {
-    // союзник
+    // Ally
     "ally": {
-      // союзник/живой
+      // Ally - alive
       "alive": {
-// союзник/живой/нормальный режим (без Alt)
+        // Ally - alive - normal mode (without 'Alt')
         "normal": {
-          "vehicleIcon": {                    // иконка типа танка (тт/ст/лт/пт/арта)
-            "visible": true,                  //   false - не отображать
-            "showSpeaker": false,             //   true - Показывать спикер даже если visible=false
-            "x": 0,                           //   положение по оси X
-            "y": -16,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность
-            "color": null,                    //   цвет (в данный момент не используется)
-            "maxScale": 100,                  //   максимальный масштаб (по умолчанию 100)
-            "scaleX": 0,                      //   смещение по оси X (?)
-            "scaleY": 16,                     //   смещение по оси Y (?)
-            "shadow": {                       //   параметры тени
-              "alpha": 100,                   //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 0,                  //     дистанция смещение
-              "size": 6,                      //     размер
-              "strength": 200                 //     интенсивность
+          "vehicleIcon": {                    // "Type of vehicle" icon (HT / MT / LT / TD / Arty)
+            "visible": true,                  //   false - Disable
+            "showSpeaker": false,             //   true - Show speaker even if visible=false
+            "x": 0,                           //   Position on the X axis
+            "y": -16,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity
+            "color": null,                    //   Color (currently not in use)
+            "maxScale": 100,                  //   Maximum scale (default is 100)
+            "scaleX": 0,                      //   Offset along the X axis (?)
+            "scaleY": 16,                     //   Offset along the Y axis (?)
+            "shadow": {                       //   Shadow options
+              "alpha": 100,                   //     Opacity
+              "color": "0x000000",            //     Color
+              "angle": 45,                    //     Offset angle
+              "distance": 0,                  //     Offset distance
+              "size": 6,                      //     Size
+              "strength": 200                 //     Intensity
             }
           },
-          "healthBar": {                      // индикатор здоровья
-            "visible": true,                  //   false - не отображать
-            "x": -29,                         //   положение по оси X
-            "y": -34,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет основной (допускается использование динамического цвета, см. readme-ru.txt)
-            "lcolor": null,                   //   цвет дополнительный (для градиента)
-            "width": 56,                      //   ширина полосы здоровья
-            "height": 2,                      //   высота полосы здоровья
-            "border": {                       //   параметры подложки и рамки
-              "alpha": 80,                    //     прозрачность
-              "color": "0x000000",            //     цвет
-              "size": 2                       //     размер рамки
+          "healthBar": {                      // Health indicator
+            "visible": true,                  //   false - Disable
+            "x": -29,                         //   Position on the X axis
+            "y": -34,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
+            "color": null,                    //   Primary color (dynamic colors allowed, see readme-en.txt)
+            "lcolor": null,                   //   Optional color (for the gradient)
+            "width": 56,                      //   Width of health bar
+            "height": 2,                     //   Height of health bar
+            "border": {                       //   Options for substrate and border
+              "alpha": 80,                    //     Opacity
+              "color": "0x000000",            //     Color
+              "size": 2                       //     Border size
             },
-            "fill": {                         //   параметры оставшегося здоровья
-              "alpha": 80                     //     прозрачность
+            "fill": {                         //   Options for remaining health
+              "alpha": 80                     //     Opacity
             },                                //
-            "damage": {                       //   параметры анимации отнимаемого здоровья
-              "alpha": 80,                    //     прозрачность
-              "color": "0xFFFFFF",            //     цвет
-              "fade": 2                       //     время затухания в секундах
+            "damage": {                       //   Options for animation of health loss
+              "alpha": 80,                    //     Opacity
+              "color": "0xFFFFFF",                  //     Color
+              "fade": 2                       //     Fade time in seconds
             }
           },
-          "damageText": {                     // всплывающий урон
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -80,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "font": {                         //   параметры шрифта
-              "name": "Comic Sans MS",        //     название
-              "size": 12,                     //     размер
-              "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": false,                  //     обычный (false) или жирный (true)
-              "italic": false                 //     обычный (false) или курсив (true)
+          "damageText": {                     // Floating damage values
+            "visible": true,                  //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -80,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
+            "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
+            "font": {                         //   Font options
+              "name": "Comic Sans MS",           //     Font name
+              "size": 12,                     //     Font size
+              "align": "center",              //     Text alignment (left, center, right)
+              "bold": false,                  //     Normal (false) or bold (true)
+              "italic": false                 //     Normal (false) or italic (true)
             },
-            "shadow": {                       //   параметры тени
-              "alpha": 70,                    //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 1,                  //     дистанция смещение
-              "size": 10,                     //     размер
-              "strength": 1320                //     интенсивность
+            "shadow": {                       //   Shadow options
+              "alpha": 70,                   //     Opacity
+              "color": "0x000000",            //     Color
+              "angle": 45,                    //     Offset angle
+              "distance": 1,                  //     Offset distance
+              "size": 10,                      //     Size
+              "strength": 1320                 //     Intensity
             },
-            "speed": 3,                       //   время отображения отлетающего урона
-            "maxRange": 80,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "={{dmg}}=",     //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "-1 Союзник (БК)"//   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+            "speed": 3,                       //   Rising speed of displayed damage (float up speed)
+            "maxRange": 80,                   //   Maximimum distance of target for which damage rises
+            "damageMessage": "={{dmg}}=",       //   Text for normal damage (see description of macros in the readme-en.txt)
+            "blowupMessage": "-1 Ally(Blow-up!)"      //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
-          "contourIcon": {                    // иконки танка
-            "visible": false,                 //   false - не отображать
-            "x": 6,                           //   положение по оси X
-            "y": -65,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "amount": 0                       //   интенсивность цвета от 0 до 100. По умолчанию 0, т.е. выключено.
+          "contourIcon": {                    // Vehicle icon
+            "visible": false,                 //   false - Disable
+            "x": 6,                           //   Position on the X axis
+            "y": -65,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
+            "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
+            "amount": 0                       //   Color intensity from 0 to 100. The default is 0 (off).
           },
-          "clanIcon": {                       // Иконка игрока/клана
-            "visible": false,                 //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -67,                         //   положение по оси Y
-            "w": 16,                          //   ширина
-            "h": 16,                          //   высота
-            "alpha": 100                      //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+          "clanIcon": {                       // Player/clan icon
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "w": 16,                          //   Width
+            "h": 16,                          //   Height
+            "alpha": 100                      //   Opacity (dynamic transparency allowed, see readme-en.txt)
           },
-          "levelIcon": {                      // уровень танка
-            "visible": false,                 //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -21,                         //   положение по оси Y
-            "alpha": 100                      //   прозрачность
+          "levelIcon": {                      // Vehicle tier
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -21,                         //   Position on the Y axis
+            "alpha": 100                      //   Opacity
           },
-          "actionMarker": {                   // маркеры "Нужна помощь" и "Атакую"
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -77,                         //   положение по оси Y
-            "alpha": 100                      //   прозрачность
+          "actionMarker": {                   // Markers "Help!" and "Attack!"
+            "visible": true,                  //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -77,                         //   Position on the Y axis
+            "alpha": 100                      //   Opacity
           },
-          // Блок текстовых полей
+          // Block of text fields
           "textFields": [
-            // Текстовое поле с названием танка
+            // Text field with the name of the tank
             {
-              "name": "Название танка",       // название текстового поля, ни на что не влияет
-              "visible": true,                // false - не отображать
-              "x": 0,                         // положение по оси X
-              "y": -37,                       // положение по оси Y
-              "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-              "color": null,                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
-              "font": {                       // параметры шрифта
-                "name": "Comic Sans MS",      //   название
-                "size": 12,                   //   размер
-                "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false,                //   обычный (false) или жирный (true)
-                "italic": false               //   обычный (false) или курсив (true)
+              "visible": true,                // false - Disable
+              "x": 0,                         // Position on the X axis
+              "y": -37,                       // Position on the Y axis
+              "alpha": 100,                   // Opacity (dynamic transparency allowed, see readme-en.txt)
+              "color": null,                  // Color (dynamic colors allowed, see readme-en.txt)
+              "font": {                       // Font options
+                "name": "Comic Sans MS",         //   Font name
+                "size": 12,                   //   Font size
+                "align": "center",            //   Text alignment (left, center, right)
+                "bold": false,                //   Normal (false) or bold (true)
+                "italic": false               //   Normal (false) or italic (true)
               },
-              "shadow": {                     // параметры тени
-                "alpha": 50,                  //   прозрачность
-                "color": "0x000000",          //   цвет
-                "angle": 45,                  //   угол смещения
-                "distance": 1,                //   дистанция смещение
-                "size": 5,                    //   размер
-                "strength": 1320              //   интенсивность
+              "shadow": {                     // Shadow options
+                "alpha": 50,                 //   Opacity
+                "color": "0x000000",          //   Color
+                "angle": 45,                  //   Offset angle
+                "distance": 1,                //     Offset distance
+                "size": 5,                    //     Size
+                "strength": 1320               //     Intensity
               },
-              "format": "{{vehicle}}" // формат текста. См. описание макросов в readme-ru.txt
+              "format": "{{vehicle}}" // Text format (see description of macros in the readme-en.txt)
             },
-            // Текстовое поле с оставшимся / максимальным здоровьем
+            // Text field with the remaining / maximum health
             {
-              "name": "Здоровье",             // название текстового поля, ни на что не влияет
-              "visible": true,                // false - не отображать
-              "x": 0,                         // положение по оси X
-              "y": -16,                       // положение по оси Y
-              "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-              "color": "0xFFFFFF",            // цвет (допускается использование динамического цвета, см. readme-ru.txt)
-              "font": {                       // параметры шрифта
-                "name": "Comic Sans MS",      //   название
-                "size": 11,                   //   размер
-                "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false,                //   обычный (false) или жирный (true)
-                "italic": false               //   обычный (false) или курсив (true)
+              "visible": true,                // false - Disable
+              "x": 0,                         // Position on the X axis
+              "y": -16,                       // Position on the Y axis
+              "alpha": 100,                   // Opacity (dynamic transparency allowed, see readme-en.txt)
+              "color": "0xFFFFFF",            // Color (dynamic colors allowed, see readme-en.txt)
+              "font": {                       // Font options
+                "name": "Comic Sans MS",         //   Font name
+                "size": 11,                   //   Font size
+                "align": "center",            //   Text alignment (left, center, right)
+                "bold": false,                 //   Normal (false) or bold (true)
+                "italic": false               //   Normal (false) or italic (true)
               },
-              "shadow": {                     // параметры тени
-                "alpha": 60,                  //   прозрачность
-                "color": "0x000000",          //   цвет
-                "angle": 45,                  //   угол смещения
-                "distance": 1,                //   дистанция смещение
-                "size": 5,                    //   размер
-                "strength": 1320              //   интенсивность
+              "shadow": {                     // Shadow options
+                "alpha": 60,                 //   Opacity
+                "color": "0x000000",          //   Color
+                "angle": 45,                  //   Offset angle
+                "distance": 1,                //   Offset distance
+                "size": 5,                    //   Size
+                "strength": 1320               //   Intensity
               },
-              "format": "{{hp}} / {{hp-max}}" // формат текста. См. описание макросов в readme-ru.txt
+              "format": "{{hp}} / {{hp-max}}" // Text format (see description of macros in the readme-en.txt)
             }
           ]
         },
-// союзник/живой/расширенный режим (c Alt)
+        // Ally - alive - alternative mode (pressing 'Alt')
         "extended": {
-          "vehicleIcon": {                    // иконка типа танка (тт/ст/лт/пт/арта)
-            "visible": true,                  //   false - не отображать
-            "showSpeaker": false,             //   true - Показывать спикер даже если visible=false
-            "x": 0,                           //   положение по оси X
-            "y": -16,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность
-            "color": null,                    //   цвет (в данный момент не используется)
-            "maxScale": 100,                  //   максимальный масштаб (по умолчанию 100)
-            "scaleX": 0,                      //   смещение по оси X (?)
-            "scaleY": 16,                     //   смещение по оси Y (?)
-            "shadow": {                       //   параметры тени
-              "alpha": 100,                   //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 0,                  //     дистанция смещение
-              "size": 6,                      //     размер
-              "strength": 200                 //     интенсивность
+          "vehicleIcon": {                    // "Type of vehicle" icon (HT / MT / LT / TD / Arty)
+            "visible": true,                  //   false - Disable
+            "showSpeaker": false,             //   true - Show speaker even if visible=false
+            "x": 0,                           //   Position on the X axis
+            "y": -16,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity
+            "color": null,                    //   Color (currently not in use)
+            "maxScale": 100,                  //   Maximum scale (default is 100)
+            "scaleX": 0,                      //   Offset along the X axis (?)
+            "scaleY": 16,                     //   Offset along the Y axis (?)
+            "shadow": {                       //   Shadow options
+              "alpha": 100,                   //     Opacity
+              "color": "0x000000",            //     Color
+              "angle": 45,                    //     Offset angle
+              "distance": 0,                  //     Offset distance
+              "size": 6,                      //     Size
+              "strength": 200                 //     Intensity
             }
           },
-          "healthBar": {                      // индикатор здоровья
-            "visible": true,                  //   false - не отображать
-            "x": -29,                         //   положение по оси X
-            "y": -34,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет основной (допускается использование динамического цвета, см. readme-ru.txt)
-            "lcolor": null,                   //   цвет дополнительный (для градиента)
-            "width": 56,                      //   ширина полосы здоровья
-            "height": 2,                      //   высота полосы здоровья
-            "border": {                       //   параметры подложки и рамки
-              "alpha": 80,                    //     прозрачность
-              "color": "0x000000",            //     цвет
-              "size": 2                       //     размер рамки
+          "healthBar": {                      // Health indicator
+            "visible": true,                  //   false - Disable
+            "x": -29,                         //   Position on the X axis
+            "y": -34,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
+            "color": null,                    //   Primary color (dynamic colors allowed, see readme-en.txt)
+            "lcolor": null,                   //   Optional color (for the gradient)
+            "width": 56,                      //   Width of health bar
+            "height": 2,                     //   Height of health bar
+            "border": {                       //   Options for substrate and border
+              "alpha": 80,                    //     Opacity
+              "color": "0x000000",            //     Color
+              "size": 2                       //     Border size
             },
-            "fill": {                         //   параметры оставшегося здоровья
-              "alpha": 80                     //     прозрачность
+            "fill": {                         //   Options for remaining health
+              "alpha": 80                     //     Opacity
             },                                //
-            "damage": {                       //   параметры анимации отнимаемого здоровья
-              "alpha": 80,                    //     прозрачность
-              "color": "0xFFFFFF",                  //     цвет
-              "fade": 2                       //     время затухания в секундах
+            "damage": {                       //   Options for animation of health loss
+              "alpha": 80,                    //     Opacity
+              "color": "0xFFFFFF",                  //     Color
+              "fade": 2                       //     Fade time in seconds
             }
           },
-          "damageText": {                     // всплывающий урон
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -80,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "font": {                         //   параметры шрифта
-              "name": "Comic Sans MS",        //     название
-              "size": 12,                     //     размер
-              "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": false,                  //     обычный (false) или жирный (true)
-              "italic": false                 //     обычный (false) или курсив (true)
+          "damageText": {                     // Floating damage values
+            "visible": true,                  //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -80,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
+            "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
+            "font": {                         //   Font options
+              "name": "Comic Sans MS",           //     Font name
+              "size": 12,                     //     Font size
+              "align": "center",              //     Text alignment (left, center, right)
+              "bold": false,                  //     Normal (false) or bold (true)
+              "italic": false                 //     Normal (false) or italic (true)
             },
-            "shadow": {                       //   параметры тени
-              "alpha": 70,                    //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 1,                  //     дистанция смещение
-              "size": 10,                     //     размер
-              "strength": 1320                //     интенсивность
+            "shadow": {                       //   Shadow options
+              "alpha": 70,                   //     Opacity
+              "color": "0x000000",            //     Color
+              "angle": 45,                    //     Offset angle
+              "distance": 1,                  //     Offset distance
+              "size": 10,                      //     Size
+              "strength": 1320                 //     Intensity
             },
-            "speed": 3,                       //   время отображения отлетающего урона
-            "maxRange": 80,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "={{dmg}}=",     //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "-1 Союзник (БК)"//   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+            "speed": 3,                       //   Rising speed of displayed damage (float up speed)
+            "maxRange": 80,                   //   Maximimum distance of target for which damage rises
+            "damageMessage": "={{dmg}}=",       //   Text for normal damage (see description of macros in the readme-en.txt)
+            "blowupMessage": "-1 Ally(Blow-up!)"      //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
-          "contourIcon": {                    // иконки танка
-            "visible": false,                 //   false - не отображать
-            "x": 6,                           //   положение по оси X
-            "y": -65,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "amount": 0                       //   интенсивность цвета от 0 до 100. По умолчанию 0, т.е. выключено.
+          "contourIcon": {                    // Vehicle icon
+            "visible": false,                 //   false - Disable
+            "x": 6,                           //   Position on the X axis
+            "y": -65,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
+            "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
+            "amount": 0                       //   Color intensity from 0 to 100. The default is 0 (off).
           },
-          "clanIcon": {                       // Иконка игрока/клана
-            "visible": false,                 //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -67,                         //   положение по оси Y
-            "w": 16,                          //   ширина
-            "h": 16,                          //   высота
-            "alpha": 100                      //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+          "clanIcon": {                       // Player/clan icon
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "w": 16,                          //   Width
+            "h": 16,                          //   Height
+            "alpha": 100                      //   Opacity (dynamic transparency allowed, see readme-en.txt)
           },
-          "levelIcon": {                      // уровень танка
-            "visible": false,                 //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -21,                         //   положение по оси Y
-            "alpha": 100                      //   прозрачность
+          "levelIcon": {                      // Vehicle tier
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -21,                         //   Position on the Y axis
+            "alpha": 100                      //   Opacity
           },
-          "actionMarker": {                   // маркеры "Нужна помощь" и "Атакую"
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -77,                         //   положение по оси Y
-            "alpha": 100                      //   прозрачность
+          "actionMarker": {                   // Markers "Help!" and "Attack!"
+            "visible": true,                  //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -77,                         //   Position on the Y axis
+            "alpha": 100                      //   Opacity
           },
-          // Блок текстовых полей
+          // Block of text fields
           "textFields": [
-            // Текстовое поле с именем игрока
+            // Text field with the name of the player
             {
-              "name": "Имя игрока",           // название текстового поля, ни на что не влияет
-              "visible": true,                // false - не отображать
-              "x": 0,                         // положение по оси X
-              "y": -37,                       // положение по оси Y
-              "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-              "color": null,                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
-              "font": {                       // параметры шрифта
-                "name": "Comic Sans MS",      //   название
-                "size": 12,                   //   размер
-                "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false,                //   обычный (false) или жирный (true)
-                "italic": false               //   обычный (false) или курсив (true)
+              "visible": true,                // false - Disable
+              "x": 0,                         // Position on the X axis
+              "y": -37,                       // Position on the Y axis
+              "alpha": 100,                   // Opacity (dynamic transparency allowed, see readme-en.txt)
+              "color": null,                  // Color (dynamic colors allowed, see readme-en.txt)
+              "font": {                       // Font options
+                "name": "Comic Sans MS",         //   Font name
+                "size": 12,                   //   Font size
+                "align": "center",            //   Text alignment (left, center, right)
+                "bold": false,                //   Normal (false) or bold (true)
+                "italic": false               //   Normal (false) or italic (true)
               },
-              "shadow": {                     // параметры тени
-                "alpha": 50,                  //   прозрачность
-                "color": "0x000000",          //   цвет
-                "angle": 45,                  //   угол смещения
-                "distance": 1,                //   дистанция смещение
-                "size": 5,                    //   размер
-                "strength": 1320              //   интенсивность
+              "shadow": {                     // Shadow options
+                "alpha": 50,                 //   Opacity
+                "color": "0x000000",          //   Color
+                "angle": 45,                  //   Offset angle
+                "distance": 1,                //   Offset distance
+                "size": 5,                    //   Size
+                "strength": 1320               //   Intensity
               },
-              "format": "{{nick}}"            // формат текста. См. описание макросов в readme-ru.txt
+              "format": "{{nick}}"            // Text format (see description of macros in the readme-en.txt)
             },
-            // Текстовое поле с процентом оставшегося здоровьем
+            // Text field with the percentage of remaining health
             {
-              "name": "Процент здоровья",     // название текстового поля, ни на что не влияет
-              "visible": true,                // false - не отображать
-              "x": 0,                         // положение по оси X
-              "y": -16,                       // положение по оси Y
-              "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-              "color": "0xFFFFFF",            // цвет (допускается использование динамического цвета, см. readme-ru.txt)
-              "font": {                       // параметры шрифта
-                "name": "Comic Sans MS",      //   название
-                "size": 11,                   //   размер
-                "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false,                //   обычный (false) или жирный (true)
-                "italic": false               //   обычный (false) или курсив (true)
+              "visible": true,                // false - Disable
+              "x": 0,                         // Position on the X axis
+              "y": -16,                       // Position on the Y axis
+              "alpha": 100,                   // Opacity (dynamic transparency allowed, see readme-en.txt)
+              "color": "0xFFFFFF",            // Color (dynamic colors allowed, see readme-en.txt)
+              "font": {                       // Font options
+                "name": "Comic Sans MS",         //   Font name
+                "size": 11,                   //   Font size
+                "align": "center",            //   Text alignment (left, center, right)
+                "bold": false,                 //   Normal (false) or bold (true)
+                "italic": false               //   Normal (false) or italic (true)
               },
-              "shadow": {                     // параметры тени
-                "alpha": 60,                  //   прозрачность
-                "color": "0x000000",          //   цвет
-                "angle": 45,                  //   угол смещения
-                "distance": 1,                //   дистанция смещение
-                "size": 5,                    //   размер
-                "strength": 1320              //   интенсивность
+              "shadow": {                     // Shadow options
+                "alpha": 60,                 //   Opacity
+                "color": "0x000000",          //   Color
+                "angle": 45,                  //   Offset angle
+                "distance": 1,                //   Offset distance
+                "size": 5,                    //   Size
+                "strength": 1320               //   Intensity
               },
-              // символ процента - \u0025
-              "format": "{{hp-ratio}}\u0025"  // формат текста. См. описание макросов в readme-ru.txt
+              // Percent symbol - \u0025
+              "format": "{{hp-ratio}}\u0025"  // Text format (see description of macros in the readme-en.txt)
             },
-            // текстовое поле с рейтингом
+			// text box with a rating
             {
-              "name": "Общий рейтинг по всей технике",
+              "name": "Overall rating for all appliances",
               "visible": true,
               "x": 0,
               "y": -48,
@@ -453,9 +484,9 @@
               },
               "format": "{{kb}} {{eff}} {{rating}}"
             },
-			// текстовое поле с рейтингом
+			// text box with a rating
             {
-              "name": "Количество боев на данной технике",
+              "name": "Number of fights on this technique",
               "visible": true,
               "x": -28,
               "y": 0,
@@ -478,9 +509,9 @@
               },
               "format": "{{t-battles}}"
             },
-			// текстовое поле с рейтингом
+			// text box with a rating
             {
-              "name": "Процент побед на данной технике",
+              "name": "Winning percentage for this technique",
               "visible": true,
               "x": 28,
               "y": 0,
@@ -506,573 +537,567 @@
           ]
         }
       },
-      // союзник/мертвый
+      // Ally - dead
       "dead": {
-// союзник/мертвый/нормальный режим (без Alt)
+        // Ally - dead - normal mode (without 'Alt')
         "normal": {
-          "vehicleIcon": {                    // иконка типа танка (тт/ст/лт/пт/арта)
-            "visible": true,                  //   false - не отображать
-            "showSpeaker": false,             //   true - Показывать спикер даже если visible=false
-            "x": 0,                           //   положение по оси X
-            "y": -16,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность
-            "color": null,                    //   цвет (в данный момент не используется)
-            "maxScale": 100,                  //   максимальный масштаб (по умолчанию 100)
-            "scaleX": 0,                      //   смещение по оси X (?)
-            "scaleY": 16,                     //   смещение по оси Y (?)
-            "shadow": {                       //   параметры тени
-              "alpha": 100,                   //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 0,                  //     дистанция смещение
-              "size": 6,                      //     размер
-              "strength": 200                 //     интенсивность
+          "vehicleIcon": {                    // "Type of vehicle" icon (HT / MT / LT / TD / Arty)
+            "visible": true,                  //   false - Disable
+            "showSpeaker": false,             //   true - Show speaker even if visible=false
+            "x": 0,                           //   Position on the X axis
+            "y": -16,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity
+            "color": null,                    //   Color (currently not in use)
+            "maxScale": 100,                  //   Maximum scale (default is 100)
+            "scaleX": 0,                      //   Offset along the X axis (?)
+            "scaleY": 16,                     //   Offset along the Y axis (?)
+            "shadow": {                       //   Shadow options
+              "alpha": 100,                   //     Opacity
+              "color": "0x000000",            //     Color
+              "angle": 45,                    //     Offset angle
+              "distance": 0,                  //     Offset distance
+              "size": 6,                      //     Size
+              "strength": 200                 //     Intensity
             }
           },
-          "healthBar": {                      // индикатор здоровья
-            "visible": false,                 //   false - не отображать
-            "x": -41,                         //   положение по оси X
-            "y": -33,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет основной (допускается использование динамического цвета, см. readme-ru.txt)
-            "lcolor": null,                   //   цвет дополнительный (для градиента)
-            "width": 80,                      //   ширина полосы здоровья
-            "height": 12,                     //   высота полосы здоровья
-            "border": {                       //   параметры подложки и рамки
-              "alpha": 30,                    //     прозрачность
-              "color": "0x000000",            //     цвет
-              "size": 1                       //     размер рамки
+          "healthBar": {                      // Health indicator
+            "visible": false,                 //   false - Disable
+            "x": -41,                         //   Position on the X axis
+            "y": -33,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
+            "color": null,                    //   Primary color (dynamic colors allowed, see readme-en.txt)
+            "lcolor": null,                   //   Optional color (for the gradient)
+            "width": 80,                      //   Width of health bar
+            "height": 12,                     //   Height of health bar
+            "border": {                       //   Options for substrate and border
+              "alpha": 30,                    //     Opacity
+              "color": "0x000000",            //     Color
+              "size": 1                       //     Border size
             },
-            "fill": {                         //   параметры оставшегося здоровья
-              "alpha": 30                     //     прозрачность
+            "fill": {                         //   Options for remaining health
+              "alpha": 30                     //     Opacity
             },                                //
-            "damage": {                       //   параметры анимации отнимаемого здоровья
-              "alpha": 80,                    //     прозрачность
-              "color": null,                  //     цвет
-              "fade": 1                       //     время затухания в секундах
+            "damage": {                       //   Options for animation of health loss
+              "alpha": 80,                    //     Opacity
+              "color": null,                  //     Color
+              "fade": 1                       //     Fade time in seconds
             }
           },
-          "damageText": {                     // всплывающий урон
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -80,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "font": {                         //   параметры шрифта
-              "name": "Comic Sans MS",        //     название
-              "size": 12,                     //     размер
-              "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": false,                  //     обычный (false) или жирный (true)
-              "italic": false                 //     обычный (false) или курсив (true)
+          "damageText": {                     // Floating damage values
+            "visible": true,                  //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -80,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
+            "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
+            "font": {                         //   Font options
+              "name": "Comic Sans MS",           //     Font name
+              "size": 12,                     //     Font size
+              "align": "center",              //     Text alignment (left, center, right)
+              "bold": false,                  //     Normal (false) or bold (true)
+              "italic": false                 //     Normal (false) or italic (true)
             },
-            "shadow": {                       //   параметры тени
-              "alpha": 70,                    //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 1,                  //     дистанция смещение
-              "size": 10,                     //     размер
-              "strength": 1320                //     интенсивность
+            "shadow": {                       //   Shadow options
+              "alpha": 70,                   //     Opacity
+              "color": "0x000000",            //     Color
+              "angle": 45,                    //     Offset angle
+              "distance": 1,                  //     Offset distance
+              "size": 10,                      //     Size
+              "strength": 1320                 //     Intensity
             },
-            "speed": 3,                       //   время отображения отлетающего урона
-            "maxRange": 80,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "-1 Союзник",    //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "-1 Союзник (БК)"//   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+            "speed": 3,                       //   Rising speed of displayed damage (float up speed)
+            "maxRange": 80,                   //   Maximimum distance of target for which damage rises
+            "damageMessage": "-1 Ally",       //   Text for normal damage (see description of macros in the readme-en.txt)
+            "blowupMessage": "-1 Ally(Blow-up!)"      //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
-          "contourIcon": {                    // иконки танка
-            "visible": false,                 //   false - не отображать
-            "x": 6,                           //   положение по оси X
-            "y": -65,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "amount": 0                       //   интенсивность цвета от 0 до 100. По умолчанию 0, т.е. выключено.
+          "contourIcon": {                    // Vehicle icon
+            "visible": false,                 //   false - Disable
+            "x": 6,                           //   Position on the X axis
+            "y": -65,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
+            "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
+            "amount": 0                       //   Color intensity from 0 to 100. The default is 0 (off).
           },
-          "clanIcon": {                       // Иконка игрока/клана
-            "visible": false,                 //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -67,                         //   положение по оси Y
-            "w": 16,                          //   ширина
-            "h": 16,                          //   высота
-            "alpha": 100                      //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+          "clanIcon": {                       // Player/clan icon
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "w": 16,                          //   Width
+            "h": 16,                          //   Height
+            "alpha": 100                      //   Opacity (dynamic transparency allowed, see readme-en.txt)
           },
-          "levelIcon": {                      // уровень танка
-            "visible": false,                 //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -21,                         //   положение по оси Y
-            "alpha": 100                      //   прозрачность
+          "levelIcon": {                      // Vehicle tier
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -21,                         //   Position on the Y axis
+            "alpha": 100                      //   Opacity
           },
-          "actionMarker": {                   // маркеры "Нужна помощь" и "Атакую"
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -77,                         //   положение по оси Y
-            "alpha": 100                      //   прозрачность
+          "actionMarker": {                   // Markers "Help!" and "Attack!"
+            "visible": true,                  //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -77,                         //   Position on the Y axis
+            "alpha": 100                      //   Opacity
           },
-          // Блок текстовых полей
-          "textFields": [  ]                  // Не отображать текст в этом режиме
+          // Block of text fields
+          "textFields": [  ]                  // Disable text in this mode
         },
-// союзник/мертвый/расширенный режим (c Alt)
+        // Ally - dead - alternative mode (pressing 'Alt')
         "extended": {
-          "vehicleIcon": {                    // иконка типа танка (тт/ст/лт/пт/арта)
-            "visible": true,                  //   false - не отображать
-            "showSpeaker": false,             //   true - Показывать спикер даже если visible=false
-            "x": 0,                           //   положение по оси X
-            "y": -16,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность
-            "color": null,                    //   цвет (в данный момент не используется)
-            "maxScale": 100,                  //   максимальный масштаб (по умолчанию 100)
-            "scaleX": 0,                      //   смещение по оси X (?)
-            "scaleY": 16,                     //   смещение по оси Y (?)
-            "shadow": {                       //   параметры тени
-              "alpha": 100,                   //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 0,                  //     дистанция смещение
-              "size": 6,                      //     размер
-              "strength": 200                 //     интенсивность
+          "vehicleIcon": {                    // "Type of vehicle" icon (HT / MT / LT / TD / Arty)
+            "visible": true,                  //   false - Disable
+            "showSpeaker": false,             //   true - Show speaker even if visible=false
+            "x": 0,                           //   Position on the X axis
+            "y": -16,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity
+            "color": null,                    //   Color (currently not in use)
+            "maxScale": 100,                  //   Maximum scale (default is 100)
+            "scaleX": 0,                      //   Offset along the X axis (?)
+            "scaleY": 16,                     //   Offset along the Y axis (?)
+            "shadow": {                       //   Shadow options
+              "alpha": 100,                   //     Opacity
+              "color": "0x000000",            //     Color
+              "angle": 45,                    //     Offset angle
+              "distance": 0,                  //     Offset distance
+              "size": 6,                      //     Size
+              "strength": 200                 //     Intensity
             }
           },
-          "healthBar": {                      // индикатор здоровья
-            "visible": false,                 //   false - не отображать
-            "x": -41,                         //   положение по оси X
-            "y": -33,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет основной (допускается использование динамического цвета, см. readme-ru.txt)
-            "lcolor": null,                   //   цвет дополнительный (для градиента)
-            "width": 80,                      //   ширина полосы здоровья
-            "height": 12,                     //   высота полосы здоровья
-            "border": {                       //   параметры подложки и рамки
-              "alpha": 30,                    //     прозрачность
-              "color": "0x000000",            //     цвет
-              "size": 1                       //     размер рамки
+          "healthBar": {                      // Health indicator
+            "visible": false,                 //   false - Disable
+            "x": -41,                         //   Position on the X axis
+            "y": -33,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
+            "color": null,                    //   Primary color (dynamic colors allowed, see readme-en.txt)
+            "lcolor": null,                   //   Optional color (for the gradient)
+            "width": 80,                      //   Width of health bar
+            "height": 12,                     //   Height of health bar
+            "border": {                       //   Options for substrate and border
+              "alpha": 30,                    //     Opacity
+              "color": "0x000000",            //     Color
+              "size": 1                       //     Border size
             },
-            "fill": {                         //   параметры оставшегося здоровья
-              "alpha": 30                     //     прозрачность
+            "fill": {                         //   Options for remaining health
+              "alpha": 30                     //     Opacity
             },                                //
-            "damage": {                       //   параметры анимации отнимаемого здоровья
-              "alpha": 80,                    //     прозрачность
-              "color": null,                  //     цвет
-              "fade": 2                       //     время затухания в секундах
+            "damage": {                       //   Options for animation of health loss
+              "alpha": 80,                    //     Opacity
+              "color": null,                  //     Color
+              "fade": 1                       //     Fade time in seconds
             }
           },
-          "damageText": {                     // всплывающий урон
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -80,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "font": {                         //   параметры шрифта
-              "name": "Comic Sans MS",        //     название
-              "size": 12,                     //     размер
-              "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": false,                  //     обычный (false) или жирный (true)
-              "italic": false                 //     обычный (false) или курсив (true)
+          "damageText": {                     // Floating damage values
+            "visible": true,                  //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
+            "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
+            "font": {                         //   Font options
+              "name": "Comic Sans MS",           //     Font name
+              "size": 12,                     //     Font size
+              "align": "center",              //     Text alignment (left, center, right)
+              "bold": false,                  //     Normal (false) or bold (true)
+              "italic": false                 //     Normal (false) or italic (true)
             },
-            "shadow": {                       //   параметры тени
-              "alpha": 70,                    //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 1,                  //     дистанция смещение
-              "size": 10,                     //     размер
-              "strength": 1320                //     интенсивность
+            "shadow": {                       //   Shadow options
+              "alpha": 70,                   //     Opacity
+              "color": "0x000000",            //     Color
+              "angle": 45,                    //     Offset angle
+              "distance": 1,                  //     Offset distance
+              "size": 10,                      //     Size
+              "strength": 1320                 //     Intensity
             },
-            "speed": 3,                       //   время отображения отлетающего урона
-            "maxRange": 80,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "-1 Враг",     //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "-1 Союзник (БК)"//   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+            "speed": 3,                       //   Rising speed of displayed damage (float up speed)
+            "maxRange": 80,                   //   Maximimum distance of target for which damage rises
+            "damageMessage": "-1 Ally",       //   Text for normal damage (see description of macros in the readme-en.txt)
+            "blowupMessage": "-1 Ally(Blow-up!)"      //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
-          "contourIcon": {                    // иконки танка
-            "visible": false,                 //   false - не отображать
-            "x": 6,                           //   положение по оси X
-            "y": -65,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "amount": 0                       //   интенсивность цвета от 0 до 100. По умолчанию 0, т.е. выключено.
+          "contourIcon": {                    // Vehicle icon
+            "visible": false,                 //   false - Disable
+            "x": 6,                           //   Position on the X axis
+            "y": -65,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
+            "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
+            "amount": 0                       //   Color intensity from 0 to 100. The default is 0 (off).
           },
-          "clanIcon": {                       // Иконка игрока/клана
-            "visible": false,                 //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -67,                         //   положение по оси Y
-            "w": 16,                          //   ширина
-            "h": 16,                          //   высота
-            "alpha": 100                      //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+          "clanIcon": {                       // Player/clan icon
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "w": 16,                          //   Width
+            "h": 16,                          //   Height
+            "alpha": 100                      //   Opacity (dynamic transparency allowed, see readme-en.txt)
           },
-          "levelIcon": {                      // уровень танка
-            "visible": false,                 //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -21,                         //   положение по оси Y
-            "alpha": 100                      //   прозрачность
+          "levelIcon": {                      // Vehicle tier
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -21,                         //   Position on the Y axis
+            "alpha": 100                      //   Opacity
           },
-          "actionMarker": {                   // маркеры "Нужна помощь" и "Атакую"
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -77,                         //   положение по оси Y
-            "alpha": 100                      //   прозрачность
+          "actionMarker": {                   // Markers "Help!" and "Attack!"
+            "visible": true,                  //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "alpha": 100                      //   Opacity
           },
-          // Блок текстовых полей
+          // Block of text fields
           "textFields": [
-            // Имя игрока
+            // Text field with the name of the player
             {
-              "name": "Имя игрока",           // название текстового поля, ни на что не влияет
-              "visible": true,                // false - не отображать
-              "x": 0,                         // положение по оси X
-              "y": -34,                       // положение по оси Y
-              "alpha": 80,                    // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-              "color": null,                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
-              "font": {                       // параметры шрифта
-                "name": "Comic Sans MS",      //   название
-                "size": 13,                   //   размер
-                "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false,                //   обычный (false) или жирный (true)
-                "italic": false               //   обычный (false) или курсив (true)
+              "visible": true,                // false - Disable
+              "x": 0,                         // Position on the X axis
+              "y": -34,                       // Position on the Y axis
+              "alpha": 80,                    // Opacity (dynamic transparency allowed, see readme-en.txt)
+              "color": null,                  // Color (dynamic colors allowed, see readme-en.txt)
+              "font": {                       // Font options
+                "name": "Comic Sans MS",         //   Font name
+                "size": 13,                   //   Font size
+                "align": "center",            //   Text alignment (left, center, right)
+                "bold": false,                //   Normal (false) or bold (true)
+                "italic": false               //   Normal (false) or italic (true)
               },
-              "shadow": {                     // параметры тени
-                "alpha": 100,                 //   прозрачность
-                "color": "0x000000",          //   цвет
-                "angle": 45,                  //   угол смещения
-                "distance": 0,                //   дистанция смещение
-                "size": 6,                    //   размер
-                "strength": 200               //   интенсивность
+              "shadow": {                     //   Shadow options
+                "alpha": 100,                 //     Opacity
+                "color": "0x000000",          //     Color
+                "angle": 45,                  //     Offset angle
+                "distance": 0,                //     Offset distance
+                "size": 6,                    //     Size
+                "strength": 200               //     Intensity
               },
-              "format": "{{nick}}"            // формат текста. См. описание макросов в readme-ru.txt
+              "format": "{{nick}}"            // Text format (see description of macros in the readme-en.txt)
             },
-            // Текстовое поле с названием танка
+            // Text field with the name of the tank
             {
-              "name": "Название танка",       // название текстового поля, ни на что не влияет
-              "visible": true,                // false - не отображать
-              "x": 0,                         // положение по оси X
-              "y": -20,                       // положение по оси Y
-              "alpha": 80,                    // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-              "color": null,                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
-              "font": {                       // параметры шрифта
-                "name": "Comic Sans MS",      //   название
-                "size": 13,                   //   размер
-                "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false,                //   обычный (false) или жирный (true)
-                "italic": false               //   обычный (false) или курсив (true)
+              "visible": true,                // false - Disable
+              "x": 0,                         // Position on the X axis
+              "y": -20,                       // Position on the Y axis
+              "alpha": 80,                    // Opacity (dynamic transparency allowed, see readme-en.txt)
+              "color": null,                  // Color (dynamic colors allowed, see readme-en.txt)
+              "font": {                       // Font options
+                "name": "Comic Sans MS",         //   Font name
+                "size": 13,                   //   Font size
+                "align": "center",            //   Text alignment (left, center, right)
+                "bold": false,                //   Normal (false) or bold (true)
+                "italic": false               //   Normal (false) or italic (true)
               },
-              "shadow": {                     // параметры тени
-                "alpha": 100,                 //   прозрачность
-                "color": "0x000000",          //   цвет
-                "angle": 45,                  //   угол смещения
-                "distance": 0,                //   дистанция смещение
-                "size": 6,                    //   размер
-                "strength": 200               //   интенсивность
+              "shadow": {                     //   Shadow options
+                "alpha": 100,                 //     Opacity
+                "color": "0x000000",          //     Color
+                "angle": 45,                  //     Offset angle
+                "distance": 0,                //     Offset distance
+                "size": 6,                    //     Size
+                "strength": 200               //     Intensity
               },
-              "format": "{{vehicle}}"         // формат текста. См. описание макросов в readme-ru.txt
+              "format": "{{vehicle}}"         // Text format (see description of macros in the readme-en.txt)
             }
           ]
         }
       }
     },
-    // противник
+    // Enemy
     "enemy": {
-      // противник/живой
+      // Enemy - alive
       "alive": {
-// противник/живой/нормальный режим (без Alt)
+        // Enemy - alive - normal mode (without 'Alt')
         "normal": {
-          "vehicleIcon": {                    // иконка типа танка (тт/ст/лт/пт/арта)
-            "visible": true,                  //   false - не отображать
-            "showSpeaker": false,             //   true - Показывать спикер даже если visible=false
-            "x": 0,                           //   положение по оси X
-            "y": -16,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность
-            "color": null,                    //   цвет (в данный момент не используется)
-            "maxScale": 100,                  //   максимальный масштаб (по умолчанию 100)
-            "scaleX": 0,                      //   смещение по оси X (?)
-            "scaleY": 16,                     //   смещение по оси Y (?)
-            "shadow": {                       //   параметры тени
-              "alpha": 100,                   //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 0,                  //     дистанция смещение
-              "size": 6,                      //     размер
-              "strength": 200                 //     интенсивность
+          "vehicleIcon": {                    // "Type of vehicle" icon (HT / MT / LT / TD / Arty)
+            "visible": true,                  //   false - Disable
+            "showSpeaker": false,             //   true - Show speaker even if visible=false
+            "x": 0,                           //   Position on the X axis
+            "y": -16,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity
+            "color": null,                    //   Color (currently not in use)
+            "maxScale": 100,                  //   Maximum scale (default is 100)
+            "scaleX": 0,                      //   Offset along the X axis (?)
+            "scaleY": 16,                     //   Offset along the Y axis (?)
+            "shadow": {                       //   Shadow options
+              "alpha": 100,                   //     Opacity
+              "color": "0x000000",            //     Color
+              "angle": 45,                    //     Offset angle
+              "distance": 0,                  //     Offset distance
+              "size": 6,                      //     Size
+              "strength": 200                 //     Intensity
             }
           },
-          "healthBar": {                      // индикатор здоровья
-            "visible": true,                  //   false - не отображать
-            "x": -29,                         //   положение по оси X
-            "y": -34,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет основной (допускается использование динамического цвета, см. readme-ru.txt)
-            "lcolor": null,                   //   цвет дополнительный (для градиента)
-            "width": 56,                      //   ширина полосы здоровья
-            "height": 2,                      //   высота полосы здоровья
-            "border": {                       //   параметры подложки и рамки
-              "alpha": 80,                    //     прозрачность
-              "color": "0x000000",            //     цвет
-              "size": 2                       //     размер рамки
+          "healthBar": {                      // Health indicator
+            "visible": true,                  //   false - Disable
+            "x": -29,                         //   Position on the X axis
+            "y": -34,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
+            "color": null,                    //   Primary color (dynamic colors allowed, see readme-en.txt)
+            "lcolor": null,                   //   Optional color (for the gradient)
+            "width": 56,                      //   Width of health bar
+            "height": 2,                     //   Height of health bar
+            "border": {                       //   Options for substrate and border
+              "alpha": 80,                    //     Opacity
+              "color": "0x000000",            //     Color
+              "size": 2                       //     Border size
             },
-            "fill": {                         //   параметры оставшегося здоровья
-              "alpha": 80                     //     прозрачность
+            "fill": {                         //   Options for remaining health
+              "alpha": 80                     //     Opacity
             },                                //
-            "damage": {                       //   параметры анимации отнимаемого здоровья
-              "alpha": 80,                    //     прозрачность
-              "color": "0xFFFFFF",            //     цвет
-              "fade": 2                       //     время затухания в секундах
+            "damage": {                       //   Options for animation of health loss
+              "alpha": 80,                    //     Opacity
+              "color": null,                  //     Color
+              "fade": 2                       //     Fade time in seconds
             }
           },
-          "damageText": {                     // всплывающий урон
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -80,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "font": {                         //   параметры шрифта
-              "name": "Comic Sans MS",        //     название
-              "size": 12,                     //     размер
-              "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": false,                  //     обычный (false) или жирный (true)
-              "italic": false                 //     обычный (false) или курсив (true)
+          "damageText": {                     // Floating damage values
+            "visible": true,                  //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -80,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
+            "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
+            "font": {                         //   Font options
+              "name": "Comic Sans MS",           //     Font name
+              "size": 12,                     //     Font size
+              "align": "center",              //     Text alignment (left, center, right)
+              "bold": false,                  //     Normal (false) or bold (true)
+              "italic": false                 //     Normal (false) or italic (true)
             },
-            "shadow": {                       //   параметры тени
-              "alpha": 70,                    //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 1,                  //     дистанция смещение
-              "size": 10,                     //     размер
-              "strength": 1320                //     интенсивность
+            "shadow": {                       //   Shadow options
+              "alpha": 70,                   //     Opacity
+              "color": "0x000000",            //     Color
+              "angle": 45,                    //     Offset angle
+              "distance": 1,                  //     Offset distance
+              "size": 10,                      //     Size
+              "strength": 1320                 //     Intensity
             },
-            "speed": 3,                       //   время отображения отлетающего урона
-            "maxRange": 80,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "={{dmg}}=",     //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "-1 Враг (БК)"   //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+            "speed": 3,                       //   Rising speed of displayed damage (float up speed)
+            "maxRange": 80,                   //   Maximimum distance of target for which damage rises
+            "damageMessage": "={{dmg}}=",       //   Text for normal damage (see description of macros in the readme-en.txt)
+            "blowupMessage": "-1 Enemy(Blow-up!)"      //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
-          "contourIcon": {                    // иконки танка
-            "visible": false,                 //   false - не отображать
-            "x": 6,                           //   положение по оси X
-            "y": -65,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "amount": 0                       //   интенсивность цвета от 0 до 100. По умолчанию 0, т.е. выключено.
+          "contourIcon": {                    // Vehicle icon
+            "visible": false,                 //   false - Disable
+            "x": 6,                           //   Position on the X axis
+            "y": -65,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
+            "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
+            "amount": 0                       //   Color intensity from 0 to 100. The default is 0 (off).
           },
-          "clanIcon": {                       // Иконка игрока/клана
-            "visible": false,                 //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -67,                         //   положение по оси Y
-            "w": 16,                          //   ширина
-            "h": 16,                          //   высота
-            "alpha": 100                      //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+          "clanIcon": {                       // Player/clan icon
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "w": 16,                          //   Width
+            "h": 16,                          //   Height
+            "alpha": 100                      //   Opacity (dynamic transparency allowed, see readme-en.txt)
           },
-          "levelIcon": {                      // уровень танка
-            "visible": false,                 //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -21,                         //   положение по оси Y
-            "alpha": 100                      //   прозрачность
+          "levelIcon": {                      // Vehicle tier
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -21,                         //   Position on the Y axis
+            "alpha": 100                      //   Opacity
           },
-          "actionMarker": {                   // маркеры "Нужна помощь" и "Атакую"
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -77,                         //   положение по оси Y
-            "alpha": 100                      //   прозрачность
+          "actionMarker": {                   // Markers "Help!" and "Attack!"
+            "visible": true,                  //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -77,                         //   Position on the Y axis
+            "alpha": 100                      //   Opacity
           },
-          // Блок текстовых полей
+          // Block of text fields
           "textFields": [
-            // Текстовое поле с названием танка
+            // Text field with the name of the tank
             {
-              "name": "Название танка",       // название текстового поля, ни на что не влияет
-              "visible": true,                // false - не отображать
-              "x": 0,                         // положение по оси X
-              "y": -37,                       // положение по оси Y
-              "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-              "color": null,                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
-              "font": {                       // параметры шрифта
-                "name": "Comic Sans MS",      //   название
-                "size": 12,                   //   размер
-                "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false,                //   обычный (false) или жирный (true)
-                "italic": false               //   обычный (false) или курсив (true)
+              "visible": true,                // false - Disable
+              "x": 0,                         // Position on the X axis
+              "y": -37,                       // Position on the Y axis
+              "alpha": 100,                   // Opacity (dynamic transparency allowed, see readme-en.txt)
+              "color": null,                  // Color (dynamic colors allowed, see readme-en.txt)
+              "font": {                       // Font options
+                "name": "Comic Sans MS",         //   Font name
+                "size": 12,                   //   Font size
+                "align": "center",            //   Text alignment (left, center, right)
+                "bold": false,                //   Normal (false) or bold (true)
+                "italic": false               //   Normal (false) or italic (true)
               },
-              "shadow": {                     // параметры тени
-                "alpha": 50,                  //   прозрачность
-                "color": "0x000000",          //   цвет
-                "angle": 45,                  //   угол смещения
-                "distance": 1,                //   дистанция смещение
-                "size": 5,                    //   размер
-                "strength": 1320              //   интенсивность
+              "shadow": {                     //   Shadow options
+                "alpha": 50,                 //     Opacity
+                "color": "0x000000",          //     Color
+                "angle": 45,                  //     Offset angle
+                "distance": 1,                //     Offset distance
+                "size": 5,                    //     Size
+                "strength": 1320               //     Intensity
               },
-              "format": "{{vehicle}}" // формат текста. См. описание макросов в readme-ru.txt
+              "format": "{{vehicle}}" // Text format (see description of macros in the readme-en.txt)
             },
-            // Текстовое поле с оставшимся / максимальным здоровьем
+            // Text field with the remaining / maximum health
             {
-              "name": "Здоровье",             // название текстового поля, ни на что не влияет
-              "visible": true,                // false - не отображать
-              "x": 0,                         // положение по оси X
-              "y": -16,                       // положение по оси Y
-              "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-              "color": "0xFFFFFF",            // цвет (допускается использование динамического цвета, см. readme-ru.txt)
-              "font": {                       // параметры шрифта
-                "name": "Comic Sans MS",      //   название
-                "size": 11,                   //   размер
-                "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false,                //   обычный (false) или жирный (true)
-                "italic": false               //   обычный (false) или курсив (true)
+              "visible": true,                // false - Disable
+              "x": 0,                         // Position on the X axis
+              "y": -16,                       // Position on the Y axis
+              "alpha": 100,                   // Opacity (dynamic transparency allowed, see readme-en.txt)
+              "color": "0xFFFFFF",            // Color (dynamic colors allowed, see readme-en.txt)
+              "font": {                       // Font options
+                "name": "Comic Sans MS",         //   Font name
+                "size": 11,                   //   Font size
+                "align": "center",            //   Text alignment (left, center, right)
+                "bold": false,                 //   Normal (false) or bold (true)
+                "italic": false               //   Normal (false) or italic (true)
               },
-              "shadow": {                     // параметры тени
-                "alpha": 60,                  //   прозрачность
-                "color": "0x000000",          //   цвет
-                "angle": 45,                  //   угол смещения
-                "distance": 1,                //   дистанция смещение
-                "size": 5,                    //   размер
-                "strength": 1320              //   интенсивность
+              "shadow": {                     //   Shadow options
+                "alpha": 60,                 //     Opacity
+                "color": "0x000000",          //     Color
+                "angle": 45,                  //     Offset angle
+                "distance": 1,                //     Offset distance
+                "size": 5,                    //     Size
+                "strength": 1320               //     Intensity
               },
-              "format": "{{hp}} / {{hp-max}}" // формат текста. См. описание макросов в readme-ru.txt
+              "format": "{{hp}} / {{hp-max}}" // Text format (see description of macros in the readme-en.txt)
             }
           ]
         },
-// противник/живой/расширенный режим (c Alt)
+        // Enemy - alive - alternative mode (pressing 'Alt')
         "extended": {
-          "vehicleIcon": {                    // иконка типа танка (тт/ст/лт/пт/арта)
-            "visible": true,                  //   false - не отображать
-            "showSpeaker": false,             //   true - Показывать спикер даже если visible=false
-            "x": 0,                           //   положение по оси X
-            "y": -16,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность
-            "color": null,                    //   цвет (в данный момент не используется)
-            "maxScale": 100,                  //   максимальный масштаб (по умолчанию 100)
-            "scaleX": 0,                      //   смещение по оси X (?)
-            "scaleY": 16,                     //   смещение по оси Y (?)
-            "shadow": {                       //   параметры тени
-              "alpha": 100,                   //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 0,                  //     дистанция смещение
-              "size": 6,                      //     размер
-              "strength": 200                 //     интенсивность
+          "vehicleIcon": {                    // "Type of vehicle" icon (HT / MT / LT / TD / Arty)
+            "visible": true,                  //   false - Disable
+            "showSpeaker": false,             //   true - Show speaker even if visible=false
+            "x": 0,                           //   Position on the X axis
+            "y": -16,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity
+            "color": null,                    //   Color (currently not in use)
+            "maxScale": 100,                  //   Maximum scale (default is 100)
+            "scaleX": 0,                      //   Offset along the X axis (?)
+            "scaleY": 16,                     //   Offset along the Y axis (?)
+            "shadow": {                       //   Shadow options
+              "alpha": 100,                   //     Opacity
+              "color": "0x000000",            //     Color
+              "angle": 45,                    //     Offset angle
+              "distance": 0,                  //     Offset distance
+              "size": 6,                      //     Size
+              "strength": 200                 //     Intensity
             }
           },
-          "healthBar": {                      // индикатор здоровья
-            "visible": true,                  //   false - не отображать
-            "x": -29,                         //   положение по оси X
-            "y": -34,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет основной (допускается использование динамического цвета, см. readme-ru.txt)
-            "lcolor": null,                   //   цвет дополнительный (для градиента)
-            "width": 56,                      //   ширина полосы здоровья
-            "height": 2,                      //   высота полосы здоровья
-            "border": {                       //   параметры подложки и рамки
-              "alpha": 80,                    //     прозрачность
-              "color": "0x000000",            //     цвет
-              "size": 2                       //     размер рамки
+          "healthBar": {                      // Health indicator
+            "visible": true,                  //   false - Disable
+            "x": -29,                         //   Position on the X axis
+            "y": -34,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
+            "color": null,                    //   Primary color (dynamic colors allowed, see readme-en.txt)
+            "lcolor": null,                   //   Optional color (for the gradient)
+            "width": 56,                      //   Width of health bar
+            "height": 2,                     //   Height of health bar
+            "border": {                       //   Options for substrate and border
+              "alpha": 80,                    //     Opacity
+              "color": "0x000000",            //     Color
+              "size": 2                       //     Border size
             },
-            "fill": {                         //   параметры оставшегося здоровья
-              "alpha": 80                     //     прозрачность
+            "fill": {                         //   Options for remaining health
+              "alpha": 80                     //     Opacity
             },                                //
-            "damage": {                       //   параметры анимации отнимаемого здоровья
-              "alpha": 80,                    //     прозрачность
-              "color": "0xFFFFFF",            //     цвет
-              "fade": 2                       //     время затухания в секундах
+            "damage": {                       //   Options for animation of health loss
+              "alpha": 80,                    //     Opacity
+              "color": "0xFFFFFF",                  //     Color
+              "fade": 2                       //     Fade time in seconds
             }
           },
-          "damageText": {                     // всплывающий урон
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -80,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "font": {                         //   параметры шрифта
-              "name": "Comic Sans MS",        //     название
-              "size": 12,                     //     размер
-              "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": false,                  //     обычный (false) или жирный (true)
-              "italic": false                 //     обычный (false) или курсив (true)
+          "damageText": {                     // Floating damage values
+            "visible": true,                  //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -80,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
+            "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
+            "font": {                         //   Font options
+              "name": "Comic Sans MS",           //     Font name
+              "size": 12,                     //     Font size
+              "align": "center",              //     Text alignment (left, center, right)
+              "bold": false,                  //     Normal (false) or bold (true)
+              "italic": false                 //     Normal (false) or italic (true)
             },
-            "shadow": {                       //   параметры тени
-              "alpha": 70,                    //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 1,                  //     дистанция смещение
-              "size": 10,                     //     размер
-              "strength": 1320                //     интенсивность
+            "shadow": {                       //   Shadow options
+              "alpha": 70,                   //     Opacity
+              "color": "0x000000",            //     Color
+              "angle": 45,                    //     Offset angle
+              "distance": 1,                  //     Offset distance
+              "size": 10,                      //     Size
+              "strength": 1320                 //     Intensity
             },
-            "speed": 3,                       //   время отображения отлетающего урона
-            "maxRange": 80,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "={{dmg}}=",     //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "-1 Враг (боеукладка)"       //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+            "speed": 3,                       //   Rising speed of displayed damage (float up speed)
+            "maxRange": 80,                   //   Maximimum distance of target for which damage rises
+            "damageMessage": "={{dmg}}=",       //   Text for normal damage (see description of macros in the readme-en.txt)
+            "blowupMessage": "-1 Enemy(Blow-up!)"      //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
-          "contourIcon": {                    // иконки танка
-            "visible": false,                 //   false - не отображать
-            "x": 6,                           //   положение по оси X
-            "y": -65,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "amount": 0                       //   интенсивность цвета от 0 до 100. По умолчанию 0, т.е. выключено.
+          "contourIcon": {                    // Vehicle icon
+            "visible": false,                 //   false - Disable
+            "x": 6,                           //   Position on the X axis
+            "y": -65,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
+            "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
+            "amount": 0                       //   Color intensity from 0 to 100. The default is 0 (off).
           },
-          "clanIcon": {                       // Иконка игрока/клана
-            "visible": false,                 //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -67,                         //   положение по оси Y
-            "w": 16,                          //   ширина
-            "h": 16,                          //   высота
-            "alpha": 100                      //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+          "clanIcon": {                       // Player/clan icon
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "w": 16,                          //   Width
+            "h": 16,                          //   Height
+            "alpha": 100                      //   Opacity (dynamic transparency allowed, see readme-en.txt)
           },
-          "levelIcon": {                      // уровень танка
-            "visible": false,                 //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -21,                         //   положение по оси Y
-            "alpha": 100                      //   прозрачность
+          "levelIcon": {                      // Vehicle tier
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -21,                         //   Position on the Y axis
+            "alpha": 100                      //   Opacity
           },
-          "actionMarker": {                   // маркеры "Нужна помощь" и "Атакую"
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -77,                         //   положение по оси Y
-            "alpha": 100                      //   прозрачность
+          "actionMarker": {                   // Markers "Help!" and "Attack!"
+            "visible": true,                  //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -77,                         //   Position on the Y axis
+            "alpha": 100                      //   Opacity
           },
-          // Блок текстовых полей
+          // Block of text fields
           "textFields": [
-            // Текстовое поле с именем игрока
+            // Text field with the name of the player
             {
-              "name": "Имя игрока",           // название текстового поля, ни на что не влияет
-              "visible": true,                // false - не отображать
-              "x": 0,                         // положение по оси X
-              "y": -37,                       // положение по оси Y
-              "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-              "color": null,                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
-              "font": {                       // параметры шрифта
-                "name": "Comic Sans MS",      //   название
-                "size": 12,                   //   размер
-                "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false,                //   обычный (false) или жирный (true)
-                "italic": false               //   обычный (false) или курсив (true)
+              "visible": true,                // false - Disable
+              "x": 0,                         // Position on the X axis
+              "y": -37,                       // Position on the Y axis
+              "alpha": 100,                   // Opacity (dynamic transparency allowed, see readme-en.txt)
+              "color": null,                  // Color (dynamic colors allowed, see readme-en.txt)
+              "font": {                       // Font options
+                "name": "Comic Sans MS",         //   Font name
+                "size": 12,                   //   Font size
+                "align": "center",            //   Text alignment (left, center, right)
+                "bold": false,                //   Normal (false) or bold (true)
+                "italic": false               //   Normal (false) or italic (true)
               },
-              "shadow": {                     // параметры тени
-                "alpha": 50,                  //   прозрачность
-                "color": "0x000000",          //   цвет
-                "angle": 45,                  //   угол смещения
-                "distance": 1,                //   дистанция смещение
-                "size": 5,                    //   размер
-                "strength": 1320              //   интенсивность
+              "shadow": {                     //   Shadow options
+                "alpha": 50,                 //     Opacity
+                "color": "0x000000",          //     Color
+                "angle": 45,                  //     Offset angle
+                "distance": 1,                //     Offset distance
+                "size": 5,                    //     Size
+                "strength": 1320               //     Intensity
               },
-              "format": "{{nick}}"            // формат текста. См. описание макросов в readme-ru.txt
+              "format": "{{nick}}"            // Text format (see description of macros in the readme-en.txt)
             },
-            // Текстовое поле с процентом оставшегося здоровьем
+            // Text field with the percentage of remaining health
             {
-              "name": "Процент здоровья",     // название текстового поля, ни на что не влияет
-              "visible": true,                // false - не отображать
-              "x": 0,                         // положение по оси X
-              "y": -16,                       // положение по оси Y
-              "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-              "color": "0xFFFFFF",            // цвет (допускается использование динамического цвета, см. readme-ru.txt)
-              "font": {                       // параметры шрифта
-                "name": "Comic Sans MS",      //   название
-                "size": 11,                   //   размер
-                "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false,                //   обычный (false) или жирный (true)
-                "italic": false               //   обычный (false) или курсив (true)
+              "visible": true,                // false - Disable
+              "x": 0,                         // Position on the X axis
+              "y": -16,                       // Position on the Y axis
+              "alpha": 100,                   // Opacity (dynamic transparency allowed, see readme-en.txt)
+              "color": "0xFFFFFF",            // Color (dynamic colors allowed, see readme-en.txt)
+              "font": {                       // Font options
+                "name": "Comic Sans MS",         //   Font name
+                "size": 11,                   //   Font size
+                "align": "center",            //   Text alignment (left, center, right)
+                "bold": false,                 //   Normal (false) or bold (true)
+                "italic": false               //   Normal (false) or italic (true)
               },
-              "shadow": {                     // параметры тени
-                "alpha": 60,                  //   прозрачность
-                "color": "0x000000",          //   цвет
-                "angle": 45,                  //   угол смещения
-                "distance": 1,                //   дистанция смещение
-                "size": 5,                    //   размер
-                "strength": 1320              //   интенсивность
+              "shadow": {                     //   Shadow options
+                "alpha": 60,                 //     Opacity
+                "color": "0x000000",          //     Color
+                "angle": 45,                  //     Offset angle
+                "distance": 1,                //     Offset distance
+                "size": 5,                    //     Size
+                "strength": 1320               //     Intensity
               },
-              // символ процента - \u0025
-              "format": "{{hp-ratio}}\u0025"  // формат текста. См. описание макросов в readme-ru.txt
+              // Percent symbol - \u0025
+              "format": "{{hp-ratio}}\u0025"  // Text format (see description of macros in the readme-en.txt)
             },
-            // текстовое поле с рейтингом
+			// text box with a rating
             {
-              "name": "Общий рейтинг по всей технике",
+              "name": "Overall rating for all appliances",
               "visible": true,
               "x": 0,
               "y": -48,
@@ -1095,9 +1120,9 @@
               },
               "format": "{{kb}} {{eff}} {{rating}}"
             },			
-			// текстовое поле с рейтингом
+			// text box with a rating
             {
-              "name": "Количество боев на данной технике",
+              "name": "Number of fights on this technique",
               "visible": true,
               "x": -28,
               "y": 0,
@@ -1120,9 +1145,9 @@
               },
               "format": "{{t-battles}}"
             },
-			// текстовое поле с рейтингом
+			// text box with a rating
             {
-              "name": "Процент побед на данной технике",
+              "name": "Winning percentage for this technique",
               "visible": true,
               "x": 28,
               "y": 0,
@@ -1148,298 +1173,296 @@
           ]
         }
       },
-      // противник/мертвый
+      // Enemy - dead
       "dead": {
-// противник/мертвый/нормальный режим (без Alt)
+        // Enemy - dead - normal mode (without 'Alt')
         "normal": {
-          "vehicleIcon": {                    // иконка типа танка (тт/ст/лт/пт/арта)
-            "visible": true,                  //   false - не отображать
-            "showSpeaker": false,             //   true - Показывать спикер даже если visible=false
-            "x": 0,                           //   положение по оси X
-            "y": -16,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность
-            "color": null,                    //   цвет (в данный момент не используется)
-            "maxScale": 100,                  //   максимальный масштаб (по умолчанию 100)
-            "scaleX": 0,                      //   смещение по оси X (?)
-            "scaleY": 16,                     //   смещение по оси Y (?)
-            "shadow": {                       //   параметры тени
-              "alpha": 100,                   //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 0,                  //     дистанция смещение
-              "size": 6,                      //     размер
-              "strength": 200                 //     интенсивность
+          "vehicleIcon": {                    // "Type of vehicle" icon (HT / MT / LT / TD / Arty)
+            "visible": true,                  //   false - Disable
+            "showSpeaker": false,             //   true - Show speaker even if visible=false
+            "x": 0,                           //   Position on the X axis
+            "y": -16,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity
+            "color": null,                    //   Color (currently not in use)
+            "maxScale": 100,                  //   Maximum scale (default is 100)
+            "scaleX": 0,                      //   Offset along the X axis (?)
+            "scaleY": 16,                     //   Offset along the Y axis (?)
+            "shadow": {                       //   Shadow options
+              "alpha": 100,                   //     Opacity
+              "color": "0x000000",            //     Color
+              "angle": 45,                    //     Offset angle
+              "distance": 0,                  //     Offset distance
+              "size": 6,                      //     Size
+              "strength": 200                 //     Intensity
             }
           },
-          "healthBar": {                      // индикатор здоровья
-            "visible": false,                 //   false - не отображать
-            "x": -41,                         //   положение по оси X
-            "y": -33,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет основной (допускается использование динамического цвета, см. readme-ru.txt)
-            "lcolor": null,                   //   цвет дополнительный (для градиента)
-            "width": 80,                      //   ширина полосы здоровья
-            "height": 12,                     //   высота полосы здоровья
-            "border": {                       //   параметры подложки и рамки
-              "alpha": 30,                    //     прозрачность
-              "color": "0x000000",            //     цвет
-              "size": 1                       //     размер рамки
+          "healthBar": {                      // Health indicator
+            "visible": false,                 //   false - Disable
+            "x": -41,                         //   Position on the X axis
+            "y": -33,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
+            "color": null,                    //   Primary color (dynamic colors allowed, see readme-en.txt)
+            "lcolor": null,                   //   Optional color (for the gradient)
+            "width": 80,                      //   Width of health bar
+            "height": 12,                     //   Height of health bar
+            "border": {                       //   Options for substrate and border
+              "alpha": 30,                    //     Opacity
+              "color": "0x000000",            //     Color
+              "size": 1                       //     Border size
             },
-            "fill": {                         //   параметры оставшегося здоровья
-              "alpha": 30                     //     прозрачность
+            "fill": {                         //   Options for remaining health
+              "alpha": 30                     //     Opacity
             },                                //
-            "damage": {                       //   параметры анимации отнимаемого здоровья
-              "alpha": 80,                    //     прозрачность
-              "color": null,                  //     цвет
-              "fade": 1                       //     время затухания в секундах
+            "damage": {                       //   Options for animation of health loss
+              "alpha": 80,                    //     Opacity
+              "color": null,                  //     Color
+              "fade": 1                       //     Fade time in seconds
             }
           },
-          "damageText": {                     // всплывающий урон
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -80,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "font": {                         //   параметры шрифта
-              "name": "Comic Sans MS",        //     название
-              "size": 12,                     //     размер
-              "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": false,                  //     обычный (false) или жирный (true)
-              "italic": false                 //     обычный (false) или курсив (true)
+          "damageText": {                     // Floating damage values
+            "visible": true,                  //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -80,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
+            "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
+            "font": {                         //   Font options
+              "name": "Comic Sans MS",           //     Font name
+              "size": 12,                     //     Font size
+              "align": "center",              //     Text alignment (left, center, right)
+              "bold": false,                  //     Normal (false) or bold (true)
+              "italic": false                 //     Normal (false) or italic (true)
             },
-            "shadow": {                       //   параметры тени
-              "alpha": 70,                    //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 1,                  //     дистанция смещение
-              "size": 10,                     //     размер
-              "strength": 1320                //     интенсивность
+            "shadow": {                       //   Shadow options
+              "alpha": 70,                   //     Opacity
+              "color": "0x000000",            //     Color
+              "angle": 45,                    //     Offset angle
+              "distance": 1,                  //     Offset distance
+              "size": 10,                      //     Size
+              "strength": 1320                 //     Intensity
             },
-            "speed": 3,                       //   время отображения отлетающего урона
-            "maxRange": 80,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "-1 Враг",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "-1 Враг (БК)"   //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+            "speed": 3,                       //   Rising speed of displayed damage (float up speed)
+            "maxRange": 80,                   //   Maximimum distance of target for which damage rises
+            "damageMessage": "-1 Enemy",       //   Text for normal damage (see description of macros in the readme-en.txt)
+            "blowupMessage": "-1 Enemy(Blow-up!)"      //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
-          "contourIcon": {                    // иконки танка
-            "visible": false,                 //   false - не отображать
-            "x": 6,                           //   положение по оси X
-            "y": -65,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "amount": 0                       //   интенсивность цвета от 0 до 100. По умолчанию 0, т.е. выключено.
+          "contourIcon": {                    // Vehicle icon
+            "visible": false,                 //   false - Disable
+            "x": 6,                           //   Position on the X axis
+            "y": -65,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
+            "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
+            "amount": 0                       //   Color intensity from 0 to 100. The default is 0 (off).
           },
-          "clanIcon": {                       // Иконка игрока/клана
-            "visible": false,                 //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -67,                         //   положение по оси Y
-            "w": 16,                          //   ширина
-            "h": 16,                          //   высота
-            "alpha": 100                      //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+          "clanIcon": {                       // Player/clan icon
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "w": 16,                          //   Width
+            "h": 16,                          //   Height
+            "alpha": 100                      //   Opacity (dynamic transparency allowed, see readme-en.txt)
           },
-          "levelIcon": {                      // уровень танка
-            "visible": false,                 //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -21,                         //   положение по оси Y
-            "alpha": 100                      //   прозрачность
+          "levelIcon": {                      // Vehicle tier
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -21,                         //   Position on the Y axis
+            "alpha": 100                      //   Opacity
           },
-          "actionMarker": {                   // маркеры "Нужна помощь" и "Атакую"
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -77,                         //   положение по оси Y
-            "alpha": 100                      //   прозрачность
+          "actionMarker": {                   // Markers "Help!" and "Attack!"
+            "visible": true,                  //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -77,                         //   Position on the Y axis
+            "alpha": 100                      //   Opacity
           },
-          // Блок текстовых полей
-          "textFields": [  ]                  // Не отображать текст в этом режиме
+          // Block of text fields
+          "textFields": [  ]                  // Disable text in this mode
         },
-// противник/мертвый/расширенный режим (c Alt)
+        // Enemy - dead - alternative mode (pressing 'Alt')
         "extended": {
-          "vehicleIcon": {                    // иконка типа танка (тт/ст/лт/пт/арта)
-            "visible": true,                  //   false - не отображать
-            "showSpeaker": false,             //   true - Показывать спикер даже если visible=false
-            "x": 0,                           //   положение по оси X
-            "y": -16,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность
-            "color": null,                    //   цвет (в данный момент не используется)
-            "maxScale": 100,                  //   максимальный масштаб (по умолчанию 100)
-            "scaleX": 0,                      //   смещение по оси X (?)
-            "scaleY": 16,                     //   смещение по оси Y (?)
-            "shadow": {                       //   параметры тени
-              "alpha": 100,                   //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 0,                  //     дистанция смещение
-              "size": 6,                      //     размер
-              "strength": 200                 //     интенсивность
+          "vehicleIcon": {                    // "Type of vehicle" icon (HT / MT / LT / TD / Arty)
+            "visible": true,                  //   false - Disable
+            "showSpeaker": false,             //   true - Show speaker even if visible=false
+            "x": 0,                           //   Position on the X axis
+            "y": -16,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity
+            "color": null,                    //   Color (currently not in use)
+            "maxScale": 100,                  //   Maximum scale (default is 100)
+            "scaleX": 0,                      //   Offset along the X axis (?)
+            "scaleY": 16,                     //   Offset along the Y axis (?)
+            "shadow": {                       //   Shadow options
+              "alpha": 100,                   //     Opacity
+              "color": "0x000000",            //     Color
+              "angle": 45,                    //     Offset angle
+              "distance": 0,                  //     Offset distance
+              "size": 6,                      //     Size
+              "strength": 200                 //     Intensity
             }
           },
-          "healthBar": {                      // индикатор здоровья
-            "visible": false,                 //   false - не отображать
-            "x": -41,                         //   положение по оси X
-            "y": -33,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет основной (допускается использование динамического цвета, см. readme-ru.txt)
-            "lcolor": null,                   //   цвет дополнительный (для градиента)
-            "width": 80,                      //   ширина полосы здоровья
-            "height": 12,                     //   высота полосы здоровья
-            "border": {                       //   параметры подложки и рамки
-              "alpha": 30,                    //     прозрачность
-              "color": "0x000000",            //     цвет
-              "size": 1                       //     размер рамки
+          "healthBar": {                      // Health indicator
+            "visible": false,                 //   false - Disable
+            "x": -41,                         //   Position on the X axis
+            "y": -33,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
+            "color": null,                    //   Primary color (dynamic colors allowed, see readme-en.txt)
+            "lcolor": null,                   //   Optional color (for the gradient)
+            "width": 80,                      //   Width of health bar
+            "height": 12,                     //   Height of health bar
+            "border": {                       //   Options for substrate and border
+              "alpha": 30,                    //     Opacity
+              "color": "0x000000",            //     Color
+              "size": 1                       //     Border size
             },
-            "fill": {                         //   параметры оставшегося здоровья
-              "alpha": 30                     //     прозрачность
+            "fill": {                         //   Options for remaining health
+              "alpha": 30                     //     Opacity
             },                                //
-            "damage": {                       //   параметры анимации отнимаемого здоровья
-              "alpha": 80,                    //     прозрачность
-              "color": null,                  //     цвет
-              "fade": 1                       //     время затухания в секундах
+            "damage": {                       //   Options for animation of health loss
+              "alpha": 80,                    //     Opacity
+              "color": null,                  //     Color
+              "fade": 1                       //     Fade time in seconds
             }
           },
-          "damageText": {                     // всплывающий урон
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -80,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "font": {                         //   параметры шрифта
-              "name": "Comic Sans MS",        //     название
-              "size": 12,                     //     размер
-              "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": false,                  //     обычный (false) или жирный (true)
-              "italic": false                 //     обычный (false) или курсив (true)
+          "damageText": {                     // Floating damage values
+            "visible": true,                  //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -80,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
+            "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
+            "font": {                         //   Font options
+              "name": "Comic Sans MS",           //     Font name
+              "size": 12,                     //     Font size
+              "align": "center",              //     Text alignment (left, center, right)
+              "bold": false,                  //     Normal (false) or bold (true)
+              "italic": false                 //     Normal (false) or italic (true)
             },
-            "shadow": {                       //   параметры тени
-              "alpha": 70,                   //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 1,                  //     дистанция смещение
-              "size": 10,                      //     размер
-              "strength": 1320                 //     интенсивность
+            "shadow": {                       //   Shadow options
+              "alpha": 70,                   //     Opacity
+              "color": "0x000000",            //     Color
+              "angle": 45,                    //     Offset angle
+              "distance": 1,                  //     Offset distance
+              "size": 10,                      //     Size
+              "strength": 1320                 //     Intensity
             },
-            "speed": 3,                       //   время отображения отлетающего урона
-            "maxRange": 80,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "-1 Враг",     //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "-1 Враг (БК)"   //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+            "speed": 3,                       //   Rising speed of displayed damage (float up speed)
+            "maxRange": 80,                   //   Maximimum distance of target for which damage rises
+            "damageMessage": "-1 Enemy",       //   Text for normal damage (see description of macros in the readme-en.txt)
+            "blowupMessage": "-1 Enemy(Blow-up!)"      //   Text for ammo rack explosion (see description of macros in the readme-en.txt)
           },
-          "contourIcon": {                    // иконки танка
-            "visible": false,                 //   false - не отображать
-            "x": 6,                           //   положение по оси X
-            "y": -65,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "amount": 0                       //   интенсивность цвета от 0 до 100. По умолчанию 0, т.е. выключено.
+          "contourIcon": {                    // Vehicle icon
+            "visible": false,                 //   false - Disable
+            "x": 6,                           //   Position on the X axis
+            "y": -65,                         //   Position on the Y axis
+            "alpha": 100,                     //   Opacity (dynamic transparency allowed, see readme-en.txt)
+            "color": null,                    //   Color (dynamic colors allowed, see readme-en.txt)
+            "amount": 0                       //   Color intensity from 0 to 100. The default is 0 (off).
           },
-          "clanIcon": {                       // Иконка игрока/клана
-            "visible": false,                 //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -67,                         //   положение по оси Y
-            "w": 16,                          //   ширина
-            "h": 16,                          //   высота
-            "alpha": 100                      //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+          "clanIcon": {                       // Player/clan icon
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -67,                         //   Position on the Y axis
+            "w": 16,                          //   Width
+            "h": 16,                          //   Height
+            "alpha": 100                      //   Opacity (dynamic transparency allowed, see readme-en.txt)
           },
-          "levelIcon": {                      // уровень танка
-            "visible": false,                 //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -21,                         //   положение по оси Y
-            "alpha": 100                      //   прозрачность
+          "levelIcon": {                      // Vehicle tier
+            "visible": false,                 //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -21,                         //   Position on the Y axis
+            "alpha": 100                      //   Opacity
           },
-          "actionMarker": {                   // маркеры "Нужна помощь" и "Атакую"
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -77,                         //   положение по оси Y
-            "alpha": 100                      //   прозрачность
+          "actionMarker": {                   // Markers "Help!" and "Attack!"
+            "visible": true,                  //   false - Disable
+            "x": 0,                           //   Position on the X axis
+            "y": -77,                         //   Position on the Y axis
+            "alpha": 100                      //   Opacity
           },
-          // Блок текстовых полей
+          // Block of text fields
           "textFields": [
-            // Имя игрока
+            // Text field with the name of the player
             {
-              "name": "Имя игрока",           // название текстового поля, ни на что не влияет
-              "visible": true,                // false - не отображать
-              "x": 0,                         // положение по оси X
-              "y": -34,                       // положение по оси Y
-              "alpha": 80,                    // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-              "color": null,                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
-              "font": {                       // параметры шрифта
-                "name": "Comic Sans MS",      //   название
-                "size": 13,                   //   размер
-                "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false,                //   обычный (false) или жирный (true)
-                "italic": false               //   обычный (false) или курсив (true)
+              "visible": true,                // false - Disable
+              "x": 0,                         // Position on the X axis
+              "y": -34,                       // Position on the Y axis
+              "alpha": 80,                    // Opacity (dynamic transparency allowed, see readme-en.txt)
+              "color": null,                  // Color (dynamic colors allowed, see readme-en.txt)
+              "font": {                       // Font options
+                "name": "Comic Sans MS",         //   Font name
+                "size": 13,                   //   Font size
+                "align": "center",            //   Text alignment (left, center, right)
+                "bold": false,                //   Normal (false) or bold (true)
+                "italic": false               //   Normal (false) or italic (true)
               },
-              "shadow": {                     // параметры тени
-                "alpha": 100,                 //   прозрачность
-                "color": "0x000000",          //   цвет
-                "angle": 45,                  //   угол смещения
-                "distance": 0,                //   дистанция смещение
-                "size": 6,                    //   размер
-                "strength": 200               //   интенсивность
+              "shadow": {                     //   Shadow options
+                "alpha": 100,                 //     Opacity
+                "color": "0x000000",          //     Color
+                "angle": 45,                  //     Offset angle
+                "distance": 0,                //     Offset distance
+                "size": 6,                    //     Size
+                "strength": 200               //     Intensity
               },
-              "format": "{{nick}}"            // формат текста. См. описание макросов в readme-ru.txt
+              "format": "{{nick}}"            // Text format (see description of macros in the readme-en.txt)
             },
-            // Текстовое поле с названием танка
+            // Text field with the name of the tank
             {
-              "name": "Название танка",       // название текстового поля, ни на что не влияет
-              "visible": true,                // false - не отображать
-              "x": 0,                         // положение по оси X
-              "y": -20,                       // положение по оси Y
-              "alpha": 80,                    // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-              "color": null,                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
-              "font": {                       // параметры шрифта
-                "name": "Comic Sans MS",      //   название
-                "size": 13,                   //   размер
-                "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false,                //   обычный (false) или жирный (true)
-                "italic": false               //   обычный (false) или курсив (true)
+              "visible": true,                // false - Disable
+              "x": 0,                         // Position on the X axis
+              "y": -20,                       // Position on the Y axis
+              "alpha": 80,                    // Opacity (dynamic transparency allowed, see readme-en.txt)
+              "color": null,                  // Color (dynamic colors allowed, see readme-en.txt)
+              "font": {                       // Font options
+                "name": "Comic Sans MS",         //   Font name
+                "size": 13,                   //   Font size
+                "align": "center",            //   Text alignment (left, center, right)
+                "bold": false,                //   Normal (false) or bold (true)
+                "italic": false               //   Normal (false) or italic (true)
               },
-              "shadow": {                     // параметры тени
-                "alpha": 100,                 //   прозрачность
-                "color": "0x000000",          //   цвет
-                "angle": 45,                  //   угол смещения
-                "distance": 0,                //   дистанция смещение
-                "size": 6,                    //   размер
-                "strength": 200               //   интенсивность
+              "shadow": {                     //   Shadow options
+                "alpha": 100,                 //     Opacity
+                "color": "0x000000",          //     Color
+                "angle": 45,                  //     Offset angle
+                "distance": 0,                //     Offset distance
+                "size": 6,                    //     Size
+                "strength": 200               //     Intensity
               },
-              "format": "{{vehicle}}"         // формат текста. См. описание макросов в readme-ru.txt
+              "format": "{{vehicle}}"         // Text format (see description of macros in the readme-en.txt)
             }
           ]
         }
       }
     }
   },
-  // Настройки цветов
+  // COLOR SETTINGS
   "colors": {
-    // Системные цвета
+    // System colors
     "system": {
-      "ally_alive_normal": "0x96FF00",             // Цвет для живого союзника
-      "ally_alive_blind": "0x96FF00",              // Цвет для живого союзника в режиме цветовой слепоты
-      "ally_dead_normal": "0x009900",              // Цвет для мертвого союзника
-      "ally_dead_blind": "0x009900",               // Цвет для мертвого союзника в режиме цветовой слепоты
-      "ally_blowedup_normal": "0x007700",          // Цвет для взрыва БК у союзника
-      "ally_blowedup_blind": "0x007700",           // Цвет для взрыва БК у союзника в режиме цветовой слепоты
-      "squadman_alive_normal": "0xFFB964",         // Цвет для живого взводного
-      "squadman_alive_blind": "0xFFFF00",          // Цвет для живого взводного в режиме цветовой слепоты
-      "squadman_dead_normal": "0xCA7000",          // Цвет для мертвого взводного
-      "squadman_dead_blind": "0xAAAA00",           // Цвет для мертвого взводного в режиме цветовой слепоты
-      "squadman_blowedup_normal": "0xA45A00",      // Цвет для взрыва БК у взводного
-      "squadman_blowedup_blind": "0x888800",       // Цвет для взрыва БК у взводного в режиме цветовой слепоты
-      "teamKiller_alive_normal": "0x00EAFF",       // Цвет для живого тимкиллера
-      "teamKiller_alive_blind": "0x00EAFF",        // Цвет для живого тимкиллера в режиме цветовой слепоты
-      "teamKiller_dead_normal": "0x097783",        // Цвет для мертвого тимкиллера
-      "teamKiller_dead_blind": "0x097783",         // Цвет для мертвого тимкиллера в режиме цветовой слепоты
-      "teamKiller_blowedup_normal": "0x096A75",    // Цвет для взрыва БК у тимкиллера
-      "teamKiller_blowedup_blind": "0x096A75",     // Цвет для взрыва БК у тимкиллера в режиме цветовой слепоты
-      "enemy_alive_normal": "0xF50800",            // Цвет для живого противника
-      "enemy_alive_blind": "0x8379FE",             // Цвет для живого противника в режиме цветовой слепоты
-      "enemy_dead_normal": "0x840500",             // Цвет для мертвого противника
-      "enemy_dead_blind": "0x47407A",              // Цвет для мертвого противника в режиме цветовой слепоты
-      "enemy_blowedup_normal": "0x5A0401",         // Цвет для взрыва БК у противника
-      "enemy_blowedup_blind": "0x3B365F"           // Цвет для взрыва БК у противника в режиме цветовой слепоты
+      "ally_alive_normal": "0x96FF00",             // Ally – alive
+      "ally_alive_blind": "0x96FF00",              // Ally – alive – color blind mode
+      "ally_dead_normal": "0x009900",              // Ally - dead
+      "ally_dead_blind": "0x009900",               // Ally – dead – color blind mode
+      "ally_blowedup_normal": "0x007700",          // Ally – blown-up
+      "ally_blowedup_blind": "0x007700",           // Ally – blown-up – color blind mode
+      "squadman_alive_normal": "0xFFB964",         // Platoon member - alive
+      "squadman_alive_blind": "0xFFFF00",          // Platoon member – alive – color blind mode
+      "squadman_dead_normal": "0xCA7000",          // Platoon member - dead
+      "squadman_dead_blind": "0xAAAA00",           // Platoon member – dead – color blind mode
+      "squadman_blowedup_normal": "0xA45A00",      // Platoon member – blown-up
+      "squadman_blowedup_blind": "0x888800",       // Platoon member – blown-up – color blind mode
+      "teamKiller_alive_normal": "0x00EAFF",       // Team killer - alive
+      "teamKiller_alive_blind": "0x00EAFF",        // Team killer - alive – color blind mode
+      "teamKiller_dead_normal": "0x097783",        // Team killer - dead
+      "teamKiller_dead_blind": "0x097783",         // Team killer - dead – color blind mode
+      "teamKiller_blowedup_normal": "0x096A75",    // Team killer - blown-up
+      "teamKiller_blowedup_blind": "0x096A75",     // Team killer - blown-up – color blind mode
+      "enemy_alive_normal": "0xF50800",            // Enemy – alive
+      "enemy_alive_blind": "0x8379FE",             // Enemy – alive – color blind mode
+      "enemy_dead_normal": "0x840500",             // Enemy - dead
+      "enemy_dead_blind": "0x47407A",              // Enemy – dead – color blind mode
+      "enemy_blowedup_normal": "0x5A0401",         // Enemy – blown-up
+      "enemy_blowedup_blind": "0x3B365F"           // Enemy – blown-up – color blind mode
     },
-    // Цвет для отлетающего урона
-    //   источник_получатель_тип
-    //   источник:   ally, squadman, enemy, unknown, player
-    //   получатель: ally, squadman, allytk, enemytk, enemy
-    //   тип:        hit, kill, blowup
+    // Color for damage text animation
+    //   src_dst_type
+    //   src: ally, squadman, enemy, unknown, player
+    //   dst: ally, squadman, allytk, enemytk, enemy
+    //   type: hit, kill, blowup
     "damage": {
       "ally_ally_hit":		"0x00EAFF",
       "ally_ally_kill":		"0x00EAFF",
@@ -1517,39 +1540,39 @@
       "player_enemytk_kill":	"0xFFDD33",
       "player_enemytk_blowup":	"0xFFDD33"
     },
-    // Динамический цвет по типу урона
+    // Damage kind
     "dmg_kind": {
-      "attack": "0xFFAA55",                        // атака
-      "fire": "0xFF6655",                          // пожар
-      "ramming": "0x998855",                       // таран
-      "world_collision": "0x228855",               // столкновение с объектами, падение
-      "other": "0xCCCCCC"                          // другое
+      "attack": "0xFFAA55",                        // attack
+      "fire": "0xFF6655",                          // fire
+      "ramming": "0x998855",                       // ramming
+      "world_collision": "0x228855",               // world_collision
+      "other": "0xCCCCCC"                          // other
     },
-    // Динамический цвет по типу техники
+    // Dynamic color for vehicle type
     "vtype": {
-      "LT":  "0xA2FF9A",                           // Цвет для легких танков
-      "MT":  "0xFFF198",                           // Цвет для средних танков
-      "HT":  "0xFFACAC",                           // Цвет для тяжелых танков
-      "SPG": "0xEFAEFF",                           // Цвет для арты
-      "TD":  "0xA0CFFF",                           // Цвет для ПТ
-      "premium": "0xFFCC66",                       // Цвет для премиумной техники
-      "usePremiumColor": false                     // Включить/выключить использование премиумного цвета
+      "LT":  "0xA2FF9A",                           // Color for light tanks
+      "MT":  "0xFFF198",                           // Color for medium tanks
+      "HT":  "0xFFACAC",                           // Color for heavy tanks
+      "SPG": "0xEFAEFF",                           // Color for arty
+      "TD":  "0xA0CFFF",                           // Color for tank destroyers
+      "premium": "0xFFCC66",                       // Color for premium tanks
+      "usePremiumColor": false                     // Enable/disable premium color usage
     },
-    // Динамический цвет по оставшемуся здоровью. Значения от меньшего к большему.
+    // Dynamic color for remaining health
     "hp": [
-      { "value": 200,  "color": "0xDD0000" },      // Цвет для значений меньше 200
-      { "value": 400,  "color": "0xDD3333" },      // Цвет для значений меньше 400
-      { "value": 1000, "color": "0xFFCC33" },      // Цвет для значений меньше 1000
-      { "value": 9999, "color": "0xFFFFFF" }       // Цвет для остальных значений
+      { "value": 200,  "color": "0xDD0000" },      // Color for health below 200
+      { "value": 400,  "color": "0xDD3333" },      // Color for health below 400
+      { "value": 1000, "color": "0xFFCC33" },      // Color for health below 1000
+      { "value": 9999, "color": "0xFFFFFF" }       // Color for health from 1000 and above
     ],
-    // Динамический цвет по проценту оставшегося здоровья. Значения от меньшего к большему.
+    // Dynamic color for percentage of remaining health
     "hp_ratio": [
-      { "value": 10,  "color": "0xDD0000" },      // Цвет для значений меньше 10 проц
-      { "value": 25,  "color": "0xDD3333" },      // Цвет для значений меньше 25 проц
-      { "value": 50,  "color": "0xFFCC33" },      // Цвет для значений меньше 50 проц
-      { "value": 101, "color": "0xFFFFFF" }       // Цвет для 100 проц
+      { "value": 10,  "color": "0xDD0000" },      // Color for health below 10 percent
+      { "value": 25,  "color": "0xDD3333" },      // Color for health below 25 percent
+      { "value": 50,  "color": "0xFFCC33" },      // Color for health below 50 percent
+      { "value": 101, "color": "0xFFFFFF" }       // Color for health up to 100 percent
     ],
-    // Динамический цвет по эффективности (только с xvm-stat). Значения от меньшего к большему.
+    // Dynamic color for effectiveness (only with xvm-stat)
     "eff": [
       { "value": 600,  "color": "0xDD0000" },
       { "value": 900,  "color": "0xDD3333" },
@@ -1558,7 +1581,7 @@
       { "value": 1800, "color": "0x33FF33" },
       { "value": 9999, "color": "0xCC66CC" }
     ],
-    // Динамический цвет по проценту побед (только с xvm-stat). Значения от меньшего к большему.
+    // Dynamic color for victory percentage (only with xvm-stat)
     "rating": [
       { "value": 42,  "color": "0xDD0000" },
       { "value": 46,  "color": "0xDD3333" },
@@ -1568,7 +1591,7 @@
       { "value": 57,  "color": "0x33FF33" },
       { "value": 101, "color": "0xCC66CC" }
     ],
-    // Динамический цвет по количеству кило-боев (только с xvm-stat). Значения от меньшего к большему.
+    // Dynamic color for the number of thousands of battles ("kilo-battles") (only with xvm-stat)
     "kb": [
       { "value": 1,   "color": "0xDD0000" },
       { "value": 3,   "color": "0xDD3333" },
@@ -1577,7 +1600,7 @@
       { "value": 12,  "color": "0x33FF33" },
       { "value": 999, "color": "0xCC66CC" }
     ],
-    // Динамический цвет по количеству боев по текущему танку (только с xvm-stat). Значения от меньшего к большему.
+    // Dynamic color for the number of battles for current tank (only with xvm-stat)
     "t_battles": [
       { "value": 100,  "color": "0xDD0000" },
       { "value": 200,  "color": "0xDD3333" },
@@ -1587,53 +1610,53 @@
       { "value": 9999, "color": "0xCC66CC" }
     ]
   },
-  // Настройки динамической прозрачности
+  // OPTIONS FOR DYNAMIC TRANSPARENCY
   "alpha": {
-    // Динамическая прозрачность по оставшемуся здоровью. Значения от меньшего к большему.
+    // Dynamic transparency for remaining health
     "hp": [
       { "value": 200,  "alpha": 100 },
       { "value": 400,  "alpha": 80 },
       { "value": 1000, "alpha": 60 },
       { "value": 9999, "alpha": 40 }
     ],
-    // Динамическая прозрачность по проценту оставшегося здоровья. Значения от меньшего к большему.
+    // Dynamic transparency for percentage of remaining health
     "hp_ratio": [
       { "value": 10,  "alpha": 100 },
       { "value": 25,  "alpha": 80 },
       { "value": 50,  "alpha": 60 },
       { "value": 101, "alpha": 40 }
     ],
-    // Динамическая прозрачность по эффективности (только с xvm-stat). Значения от меньшего к большему.
+    // Dynamic transparency for effectiveness (only with xvm-stat)
     "eff": [
       { "value": 900,  "alpha": 100 },
       { "value": 1200, "alpha": 100 },
       { "value": 9999, "alpha": 100 }
     ],
-    // Динамическая прозрачность по проценту побед (только с xvm-stat). Значения от меньшего к большему.
+    // Dynamic transparency for victory percentage (only with xvm-stat)
     "rating": [
       { "value": 49,  "alpha": 100 },
       { "value": 53,  "alpha": 100 },
       { "value": 101, "alpha": 100 }
     ],
-    // Динамическая прозрачность по количеству кило-боев (только с xvm-stat). Значения от меньшего к большему.
+    // Dynamic transparency for the number of thousands of battles ("kilo-battles") (only with xvm-stat)
     "kb": [
       { "value": 2,   "alpha": 100 },
       { "value": 10,  "alpha": 100 },
       { "value": 999, "alpha": 100 }
     ]
   },
-  // Наборы иконок
+  // ICON SETS
   "iconset": {
-    // набор иконок для экрана загрузки боя
+    // Folder containing the icon set for Battle Loading Screen
     "battleLoading": "../maps/icons/vehicle/contour",
-    // набор иконок для формы статистики (по Tab)
+    // Folder containing the icon set for Battle Statistics Form (pressing 'Tab')
     "statisticForm": "../maps/icons/vehicle/contour",
-    // набор иконок для ушей
+    // Folder containing the icon set for the Players Panels
     "playersPanel":  "../maps/icons/vehicle/contour",
-    // набор иконок для маркеров над танками
+    // Folder containing the icon set for the Over-target markers
     "vehicleMarker": "../maps/icons/vehicle/contour"
   },
-  // Замена названий танков. Значение null - использовать стандартное название.
+  // Vehicle names mapping. null value for standard name.
   "vehicleNames": {
     "china_Ch01_Type59": null,
     "china_Ch02_Type62": null,

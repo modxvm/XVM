@@ -3,11 +3,11 @@
   "editorVersion": "0.15",
   "definition": {
     "author": "ZeGnor",
-    "description": "Релиз версия 0.8.0",
+    "description": "Релиз версия 0.8.1",
     "url": "http://www.koreanrandom.com/forum/topic/1384-xvm-configurations/",
-    "date": "02.10.2012",
-    "gameVersion": "0.8.0",
-    "modMinVersion": "3.0.0"
+    "date": "26.10.2012",
+    "gameVersion": "0.8.1",
+    "modMinVersion": "3.1.1"
   },
   "battle": {
     "mirroredVehicleIcons": false,
@@ -62,6 +62,30 @@
       "vehicleFormatLeft": "<font color='{{c:rating}}'>{{vehicle}}</font>",
       "vehicleFormatRight": "<font color='{{c:rating}}'>{{vehicle}}</font>"
     }
+  },
+  // Отображаемые строки {{turret}} маркера
+  "turretMarkers": {
+    "highVulnerability": "*", // Субъект имеет стоковую башню и топ орудие не может быть установлено. Субъект сильно уязвим.
+    "lowVulnerability": "'"   // Субъект имеет стоковую башню и топ орудие может быть установлено. Субъект немного уязвим.
+  },
+  // Лог попаданий (счетчик своих попаданий)
+  "hitLog": {
+    "visible": true,      // переключатель вкл/выкл
+    "x": 270,             // Позиция X (отрицательные значения - привязать к правой стороне экрана)
+    "y": 7,               // Позиция Y (отрицательные значения - привязать к нижней стороне экрана)
+    "w": 400,             // Ширина
+    "h": 200,             // Высота
+    "lines": 5,           // Количество строк. Устаревшие данные выталкиваются.
+    "direction": "down",  // Направление лога: up - строки добавляются сверху, down - снизу.
+    "insertOrder": "end", // Insert order: begin - insert new values to begin, end - add to end
+    "groupHitsByPlayer": false, // группировать попадания по имени игрока
+    // Подстановка для макроса {{dead}} когда танк умирает
+    "deadMarker": "<font face='Wingdings'>N</font>",
+    "blowupMarker": "<font face='Wingdings'>M</font>",
+    // Формат последнего попадания (допускаются макроподстановки, см. readme-ru.txt)
+    "formatHeader":  "<font color='#CCCCCC'>Total damage:</font> <b><font color='#FFCC66'>{{dmg-total}}</font>:<font color='#FFCC66'>{{n}}</font></b> <font color='#CCCCCC'>Last damage:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b></font>",
+    // Формат предыдущих попаданий (допускаются макроподстановки, см. readme-ru.txt)
+    "formatHistory": "<textformat tabstops='[17,50,200,20,100]'><font size='12'><font color='#FFFFFF'>{{n}}:\t<font color='{{c:dmg-kind}}'>{{dmg}}</font>\t({{level}}) <b><font color='{{c:vtype}}'>{{vehicle}}</b></font>\t<font size='12'><font color='#FFFFFF'>{{n-player}}:\t<font color='#FFCC66''>{{dmg-player}}</font> <b><font color='#E80F0F'>{{dead}}</b></font></textformat>"
   },
   "markers": {
     "ally": {
@@ -186,7 +210,7 @@
                 "distance": 1,
                 "size": 1
               },
-              "format": "{{vehicle}}"
+              "format": "{{vehicle}}{{turret}}"
             },
             {
               "name": "Здоровье",
@@ -656,7 +680,7 @@
                 "distance": 1,
                 "size": 1
               },
-              "format": "{{vehicle}}"
+              "format": "{{vehicle}}{{turret}}"
             }
           ]
         }
@@ -784,7 +808,7 @@
                 "distance": 1,
                 "size": 1
               },
-              "format": "{{vehicle}}"
+              "format": "{{vehicle}}{{turret}}"
             },
             {
               "name": "Здоровье",
@@ -1254,7 +1278,7 @@
                 "distance": 1,
                 "size": 1
               },
-              "format": "{{vehicle}}"
+              "format": "{{vehicle}}{{turret}}"
             }
           ]
         }
@@ -1288,11 +1312,95 @@
       "enemy_blowedup_normal": "0x5A0401",
       "enemy_blowedup_blind": "0x3B365F"
     },
+    "damage": {
+      "ally_ally_hit":		"0x00EAFF",
+      "ally_ally_kill":		"0x00EAFF",
+      "ally_ally_blowup":	"0x00EAFF",
+      "ally_squadman_hit":	"0x00EAFF",
+      "ally_squadman_kill":	"0x00EAFF",
+      "ally_squadman_blowup":	"0x00EAFF",
+      "ally_enemy_hit":		"0xF50800",
+      "ally_enemy_kill":	"0xF50800",
+      "ally_enemy_blowup":	"0xF50800",
+      "ally_allytk_hit":	"0x00EAFF",
+      "ally_allytk_kill":	"0x00EAFF",
+      "ally_allytk_blowup":	"0x00EAFF",
+      "ally_enemytk_hit":	"0xF50800",
+      "ally_enemytk_kill":	"0xF50800",
+      "ally_enemytk_blowup":	"0xF50800",
+      "squadman_ally_hit":	"0x00EAFF",
+      "squadman_ally_kill":	"0x00EAFF",
+      "squadman_ally_blowup":	"0x00EAFF",
+      "squadman_squadman_hit":	"0x00EAFF",
+      "squadman_squadman_kill":	"0x00EAFF",
+      "squadman_squadman_blowup":	"0x00EAFF",
+      "squadman_enemy_hit":	"0xF50800",
+      "squadman_enemy_kill":	"0xF50800",
+      "squadman_enemy_blowup":	"0xF50800",
+      "squadman_allytk_hit":	"0x00EAFF",
+      "squadman_allytk_kill":	"0x00EAFF",
+      "squadman_allytk_blowup":	"0x00EAFF",
+      "squadman_enemytk_hit":	"0xF50800",
+      "squadman_enemytk_kill":	"0xF50800",
+      "squadman_enemytk_blowup":"0xF50800",
+      "enemy_ally_hit":		"0x96FF00",
+      "enemy_ally_kill":	"0x96FF00",
+      "enemy_ally_blowup":	"0x96FF00",
+      "enemy_squadman_hit":	"0xFFB964",
+      "enemy_squadman_kill":	"0xFFB964",
+      "enemy_squadman_blowup":	"0xFFB964",
+      "enemy_enemy_hit":	"0xF50800",
+      "enemy_enemy_kill":	"0xF50800",
+      "enemy_enemy_blowup":	"0xF50800",
+      "enemy_allytk_hit":	"0x96FF00",
+      "enemy_allytk_kill":	"0x96FF00",
+      "enemy_allytk_blowup":	"0x96FF00",
+      "enemy_enemytk_hit":	"0xF50800",
+      "enemy_enemytk_kill":	"0xF50800",
+      "enemy_enemytk_blowup":	"0xF50800",
+      "unknown_ally_hit":	"0x96FF00",
+      "unknown_ally_kill":	"0x96FF00",
+      "unknown_ally_blowup":	"0x96FF00",
+      "unknown_squadman_hit":	"0xFFB964",
+      "unknown_squadman_kill":	"0xFFB964",
+      "unknown_squadman_blowup":"0xFFB964",
+      "unknown_enemy_hit":	"0xF50800",
+      "unknown_enemy_kill":	"0xF50800",
+      "unknown_enemy_blowup":	"0xF50800",
+      "unknown_allytk_hit":	"0x96FF00",
+      "unknown_allytk_kill":	"0x96FF00",
+      "unknown_allytk_blowup":	"0x96FF00",
+      "unknown_enemytk_hit":	"0xF50800",
+      "unknown_enemytk_kill":	"0xF50800",
+      "unknown_enemytk_blowup":	"0xF50800",
+      "player_ally_hit":	"0xFFDD33",
+      "player_ally_kill":	"0xFFDD33",
+      "player_ally_blowup":	"0xFFDD33",
+      "player_squadman_hit":	"0xFFDD33",
+      "player_squadman_kill":	"0xFFDD33",
+      "player_squadman_blowup":	"0xFFDD33",
+      "player_enemy_hit":	"0xFFDD33",
+      "player_enemy_kill":	"0xFFDD33",
+      "player_enemy_blowup":	"0xFFDD33",
+      "player_allytk_hit":	"0xFFDD33",
+      "player_allytk_kill":	"0xFFDD33",
+      "player_allytk_blowup":	"0xFFDD33",
+      "player_enemytk_hit":	"0xFFDD33",
+      "player_enemytk_kill":	"0xFFDD33",
+      "player_enemytk_blowup":	"0xFFDD33"
+    },
+    "dmg_kind": {
+      "attack": "0xFFAA55",                        // атака
+      "fire": "0xFF6655",                          // пожар
+      "ramming": "0x998855",                       // таран
+      "world_collision": "0x228855",               // столкновение с объектами, падение
+      "other": "0xCCCCCC"                          // другое
+    },
     "vtype": {
-      "LT":  "0xA2FF9A",                           // Цвет для легких танков
-      "MT":  "0xFFF198",                           // Цвет для средних танков
-      "HT":  "0xFFACAC",                           // Цвет для тяжелых танков
-      "SPG": "0xEFAEFF",                           // Цвет для арты
+      "LT":  "0x88785b",                           // Цвет для легких танков
+      "MT":  "0x6f7b4f",                           // Цвет для средних танков
+      "HT":  "0x725545",                           // Цвет для тяжелых танков
+      "SPG": "0x894642",                           // Цвет для арты
       "TD":  "0xA0CFFF",                           // Цвет для ПТ
       "premium": "0xFFCC66",                       // Цвет для премиумной техники
       "usePremiumColor": false                     // Включить/выключить использование премиумного цвета

@@ -1,14 +1,15 @@
-{
+﻿{
   "configVersion": "1.5.0",
   "editorVersion": "0.15",
   "definition": {
     "author": "_Zver_",
     "description": "Winratio + floating damage",
     "url": "http://www.koreanrandom.com/forum/topic/1392-zver-config-for-xvm/",
-    "date": "15.10.2012",
-    "gameVersion": "0.8.0",
+    "date": "01.11.2012",
+    "gameVersion": "0.8.1",
     "modMinVersion": "3.0.4"
   },
+
   "battle": {
     "mirroredVehicleIcons": true,
     "showPostmortemTips": false,
@@ -19,27 +20,31 @@
     "useStandardMarkers": false,
     "clanIconsFolder": "../../../clanicons"
   },
+
   "rating": {
     "showPlayersStatistics": true,
     "loadEnemyStatsInFogOfWar": true
   },
+
   "battleLoading": {
     "clockFormat": "H:N:S",
     "showChances": true,
     "showChancesExp": true,
     "removeSquadIcon": false,
     "clanIcon": { "show": true, "x": 54, "y": 0, "xr": 55, "yr": 0, "h": 24, "w": 24, "alpha": 100 },
-    "formatLeft": "{{vehicle}} <font face='Consolas' size='12' color='{{c:eff}}'>{{eff:4}}</font> <font face='Consolas' size='12' color='{{c:kb}}'>{{kb:3}}</font> <font face='Consolas' size='12' color='{{c:rating}}'>{{rating:3}}</font>",
-    "formatRight": "<font face='Consolas' size='12' color='{{c:rating}}'>{{rating:3}}</font> <font face='Consolas' size='12' color='{{c:kb}}'>{{kb:3}}</font> <font face='Consolas' size='12' color='{{c:eff}}'>{{eff:4}}</font> {{vehicle}}"
+    "formatLeft": "{{vehicle}} <font face='Consolas' size='12' color='{{c:kb}}'>{{kb:3}}</font> <font face='Consolas' size='12' color='{{c:rating}}'>{{rating:3}}</font> <font face='Consolas' size='12' color='{{c:eff}}'>{{eff:4}}</font>",
+    "formatRight": "<font face='Consolas' size='12' color='{{c:eff}}'>{{eff:4}}</font> <font face='Consolas' size='12' color='{{c:rating}}'>{{rating:3}}</font> <font face='Consolas' size='12' color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
   },
+
   "statisticForm": {
     "showChances": true,
     "showChancesExp": true,
     "removeSquadIcon": false,
     "clanIcon": { "show": true, "x": 60, "y": 0, "xr": 62, "yr": 0, "h": 24, "w": 24, "alpha": 100 },
-    "formatLeft": "{{vehicle}} <font face='Consolas' size='11' color='{{c:eff}}'>{{eff:4}}</font> <font face='Consolas' size='11' color='{{c:t-rating}}'>{{t-rating:3}}</font> <font face='Consolas' size='11' color='{{c:t-battles}}'>{{t-battles:4}}</font>",
-    "formatRight": "<font face='Consolas' size='11' color='{{c:t-battles}}'>{{t-battles:4}}</font> <font face='Consolas' size='11' color='{{c:t-rating}}'>{{t-rating:3}}</font> <font face='Consolas' size='11' color='{{c:eff}}'>{{eff:4}}</font> {{vehicle}}"
+    "formatLeft": "{{vehicle}} <font face='Consolas' size='11' color='{{c:t-battles}}'>{{t-battles:4}}</font> <font face='Consolas' size='11' color='{{c:t-rating}}'>{{t-rating:3}}</font> <font face='Consolas' size='11' color='{{c:eff}}'>{{eff:4}}</font>",
+    "formatRight": "<font face='Consolas' size='11' color='{{c:eff}}'>{{eff:4}}</font> <font face='Consolas' size='11' color='{{c:t-rating}}'>{{t-rating:3}}</font> <font face='Consolas' size='11' color='{{c:t-battles}}'>{{t-battles:4}}</font> {{vehicle}}"
   },
+
   "playersPanel": {
     "alpha": 50,
     "iconAlpha": 70,
@@ -63,22 +68,57 @@
       "vehicleFormatRight": "{{vehicle}}"
     }
   },
+
   "turretMarkers": {
     "highVulnerability": "*",
     "lowVulnerability": "'"
   },
+
   "hitLog": {
-    "enabled": true,
+    "visible": true,
     "x": 265,
     "y": -40,
     "w": 200,
     "h": 100,
-    "lines": 1,
+    "lines": 0,
     "direction": "down",
-    "align": "left",
-    "format": "Hits   {{n}}   {{dmg-total}}   {{dmg}}",
-    "formatHistory": "{{n}}: {{dmg-total}} {{dmg}} {{vehicle}} {{hit-kind}}"
+    "insertOrder": "end",
+    "groupHitsByPlayer": false,
+    "deadMarker": "<font face='Wingdings'>N</font>",
+    "blowupMarker": "<font face='Wingdings'>M</font>",
+    "formatHeader": "Hits   {{n}}   {{dmg-total}}   {{dmg}}",
+    "formatHistory": "<textformat leading='-4' tabstops='[20,50,90,150]'><font size='12'>\u00D7{{n-player}}:</font><tab>{{dmg-player}}<tab>| <font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab>| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>"
   },
+
+  "captureBar": {
+    "enabled": true,
+    "primaryTitleOffset": 7,
+    "enemy": {
+      "primaryTitleFormat":   "<font size='14' color='#FFFFFF'>Enemy base capture! {{extra}}</font>",
+      "secondaryTitleFormat": "<font size='14' color='#FFFFFF'>{{points}}</font>",
+      "captureDoneFormat":    "<font size='14' color='#FFFFFF'>Enemy base captured!</font>",
+      "extra": "Capturers: <b>{{tanks}}</b> Timeleft: <b>{{time}}<b>",
+      "shadow": {
+        "color": "0x000000",
+        "alpha": 75,
+        "blur": 15,
+        "strength": 2
+      }
+    },
+    "ally": {
+      "primaryTitleFormat":   "<font size='14' color='#FFFFFF'>Ally base capture! {{extra}}</font>",
+      "secondaryTitleFormat": "<font size='14' color='#FFFFFF'>{{points}}</font>",
+      "captureDoneFormat":    "<font size='14' color='#FFFFFF'>Ally base captured!</font>",
+      "extra": "Capturers: <b>{{tanks}}</b> Timeleft: <b>{{time}}<b>",
+      "shadow": {
+        "color": "0x000000",
+        "alpha": 75,
+        "blur": 15,
+        "strength": 2
+      }
+    }
+  },
+
   "markers": {
     "ally": {
       "alive": {
@@ -148,7 +188,7 @@
         "speed": 2,
             "maxRange": 60,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Blown-up!"
+            "blowupMessage": "Blow-up!"
           },
           "contourIcon": {
             "visible": false,
@@ -339,7 +379,7 @@
             "speed": 2,
             "maxRange": 60,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Blown-up!"
+            "blowupMessage": "Blow-up!"
           },
           "contourIcon": {
             "visible": true,
@@ -421,7 +461,7 @@
               "x": 0,
               "y": -1,
               "alpha": 100,
-              "color": "{{c:eff}}",
+              "color": null,
               "font": {
                 "name": "$FieldFont",
                 "size": 10,
@@ -533,7 +573,7 @@
             "speed": 2,
             "maxRange": 60,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Blown-up!"
+            "blowupMessage": "Blow-up!"
           },
           "contourIcon": {
             "visible": false,
@@ -656,7 +696,7 @@
             "speed": 2,
             "maxRange": 60,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Blown-up!"
+            "blowupMessage": "Blow-up!"
           },
           "contourIcon": {
             "visible": false,
@@ -782,7 +822,7 @@
             "speed": 2,
             "maxRange": 60,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Blown-up!"
+            "blowupMessage": "Blow-up!"
           },
           "contourIcon": {
             "visible": false,
@@ -973,7 +1013,7 @@
             "speed": 2,
             "maxRange": 60,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Blown-up!"
+            "blowupMessage": "Blow-up!"
           },
           "contourIcon": {
             "visible": true,
@@ -1055,7 +1095,7 @@
               "x": 0,
               "y": -1,
               "alpha": 100,
-              "color": "{{c:eff}}",
+              "color": null,
               "font": {
                 "name": "$FieldFont",
                 "size": 10,
@@ -1167,7 +1207,7 @@
             "speed": 2,
             "maxRange": 60,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Blown-up!"
+            "blowupMessage": "Blow-up!"
           },
           "contourIcon": {
             "visible": false,
@@ -1290,7 +1330,7 @@
             "speed": 2,
             "maxRange": 60,
             "damageMessage": "-{{dmg}}",
-            "blowupMessage": "Blown-up!"
+            "blowupMessage": "Blow-up!"
           },
           "contourIcon": {
             "visible": false,
@@ -1565,38 +1605,39 @@
     "china_Ch03_WZ_111": null,
     "france_AMX38": null,
     "france_AMX40": null,
-    "france_AMX50_Foch": "AMX 50 Foch",
+    "france_AMX50_Foch": null,
     "france_AMX_105AM": null,
-    "france_AMX_12t": "AMX 12t",
-    "france_AMX_13F3AM": "AMX 13 F3AM",
+    "france_AMX_12t": null,
+    "france_AMX_13F3AM": null,
     "france_AMX_13_75": null,
     "france_AMX_13_90": null,
-    "france_AMX_50Fosh_155": "AMX 50 F 155",
-    "france_AMX_50_100": "AMX 50 100",
-    "france_AMX_50_120": "AMX 50 120",
-    "france_AMX_AC_Mle1946": "AC Mle 1946",
-    "france_AMX_AC_Mle1948": "AC Mle 1948",
+    "france_AMX_50Fosh_155": null,
+    "france_AMX_50_100": null,
+    "france_AMX_50_120": null,
+    "france_AMX_AC_Mle1946": null,
+    "france_AMX_AC_Mle1948": null,
     "france_AMX_M4_1945": null,
     "france_ARL_44": null,
     "france_ARL_V39": null,
-    "france_B1": "B1",
+    "france_B1": null,
     "france_BDR_G1B": null,
-    "france_Bat_Chatillon155": "Bat 155",
-    "france_Bat_Chatillon25t": "Bat 25t",
-    "france_D1": "D1",
-    "france_D2": "D2",
+    "france_Bat_Chatillon155": null,
+    "france_Bat_Chatillon25t": null,
+    "france_D1": null,
+    "france_D2": null,
     "france_ELC_AMX": null,
-    "france_F10_AMX_50B": "AMX 50B",
+    "france_F10_AMX_50B": null,
     "france_FCM_36Pak40": null,
-    "france_Hotchkiss_H35": "Hotchkiss",
-    "france_Lorraine155_50": "Lor 155 50",
-    "france_Lorraine155_51": "Lor 155 51",
+    "france_FCM_50t": null,
+    "france_Hotchkiss_H35": null,
+    "france_Lorraine155_50": null,
+    "france_Lorraine155_51": null,
     "france_Lorraine39_L_AM": null,
-    "france_Lorraine40t": "Lorraine 40t",
-    "france_RenaultBS": "! Renault BS !",
-    "france_RenaultFT": "! Renault FT !",
-    "france_RenaultFT_AC": "! Ren. FT AC !",
-    "france_RenaultUE57": "! Ren. UE 57 !",
+    "france_Lorraine40t": null,
+    "france_RenaultBS": null,
+    "france_RenaultFT": null,
+    "france_RenaultFT_AC": null,
+    "france_RenaultUE57": null,
     "france_S_35CA": null,
     "france_Somua_Sau_40": null,
     "france__105_leFH18B2": null,
@@ -1607,21 +1648,21 @@
     "germany_E_100": null,
     "germany_E_50": null,
     "germany_E_75": null,
-    "germany_Ferdinand": "Ferdi",
+    "germany_Ferdinand": null,
     "germany_G20_Marder_II": null,
-    "germany_G_E": "Typ E",
-    "germany_G_Panther": "GW Panther",
-    "germany_G_Tiger": "GW Tiger",
+    "germany_G_E": null,
+    "germany_G_Panther": null,
+    "germany_G_Tiger": null,
     "germany_Grille": null,
     "germany_H39_captured": null,
     "germany_Hetzer": null,
     "germany_Hummel": null,
-    "germany_JagdPanther": "JgPanther",
+    "germany_JagdPanther": null,
     "germany_JagdPantherII": null,
-    "germany_JagdPzIV": "JgPz IV",
-    "germany_JagdPz_E100": "JgPz E-100",
-    "germany_JagdTiger": "JgTiger",
-    "germany_JagdTiger_SdKfz_185": "JgTiger 88",
+    "germany_JagdPzIV": null,
+    "germany_JagdPz_E100": null,
+    "germany_JagdTiger": null,
+    "germany_JagdTiger_SdKfz_185": null,
     "germany_Lowe": null,
     "germany_Ltraktor": null,
     "germany_Maus": null,
@@ -1629,15 +1670,15 @@
     "germany_Panther_M10": null,
     "germany_PanzerJager_I": null,
     "germany_Pz35t": null,
-    "germany_Pz38_NA": "Pz 38 NA",
-    "germany_Pz38t": "Pz 38 (t)",
+    "germany_Pz38_NA": null,
+    "germany_Pz38t": null,
     "germany_PzII": null,
     "germany_PzIII": null,
     "germany_PzIII_A": null,
-    "germany_PzIII_IV": "Pz III/IV",
+    "germany_PzIII_IV": null,
     "germany_PzII_J": null,
     "germany_PzII_Luchs": null,
-    "germany_PzIV": "Pz IV",
+    "germany_PzIV": null,
     "germany_PzIV_Hydro": null,
     "germany_PzIV_schmalturm": null,
     "germany_PzV": null,
@@ -1647,20 +1688,44 @@
     "germany_PzV_PzIV": null,
     "germany_PzV_PzIV_ausf_Alfa": null,
     "germany_S35_captured": null,
-    "germany_StuGIII": "StuG III",
+    "germany_StuGIII": null,
     "germany_Sturmpanzer_II": null,
     "germany_T_15": null,
     "germany_T_25": null,
     "germany_VK1602": null,
-    "germany_VK2801": "VK 2801",
-    "germany_VK3001H": "VK 3001 H",
-    "germany_VK3001P": "VK 3001 P",
-    "germany_VK3002DB": "VK 3002DB",
-    "germany_VK3601H": "VK 3601H",
-    "germany_VK4502A": "VK 4502 A",
-    "germany_VK4502P": "VK 4502 P",
+    "germany_VK2801": null,
+    "germany_VK3001H": null,
+    "germany_VK3001P": null,
+    "germany_VK3002DB": null,
+    "germany_VK3601H": null,
+    "germany_VK4502A": null,
+    "germany_VK4502P": null,
     "germany_Wespe": null,
+    "uk_GB01_Medium_Mark_I": null,
+    "uk_GB03_Cruiser_Mk_I": null,
+    "uk_GB04_Valentine": null,
+    "uk_GB05_Vickers_Medium_Mk_II": null,
+    "uk_GB06_Vickers_Medium_Mk_III": null,
+    "uk_GB07_Matilda": null,
+    "uk_GB08_Churchill_I": null,
+    "uk_GB09_Churchill_VII": null,
+    "uk_GB10_Black_Prince": null,
+    "uk_GB11_Caernarvon": null,
+    "uk_GB12_Conqueror": null,
+    "uk_GB13_FV215b": null,
+    "uk_GB20_Crusader": null,
+    "uk_GB21_Cromwell": null,
+    "uk_GB22_Comet": null,
+    "uk_GB23_Centurion": null,
+    "uk_GB24_Centurion_Mk3": null,
+    "uk_GB58_Cruiser_Mk_III": null,
+    "uk_GB59_Cruiser_Mk_IV": null,
+    "uk_GB60_Covenanter": null,
+    "uk_GB63_TOG_II": null,
     "uk_GB68_Matilda_Black_Prince": null,
+    "uk_GB69_Cruiser_Mk_II": null,
+    "uk_GB70_FV4202_105": null,
+    "uk_GB71_AT_15A": null,
     "usa_M103": null,
     "usa_M10_Wolverine": null,
     "usa_M12": null,
@@ -1687,22 +1752,23 @@
     "usa_M7_med": null,
     "usa_M8A1": null,
     "usa_MTLS_1G14": null,
-    "usa_Pershing": "Pershing",
+    "usa_Pershing": null,
     "usa_Ram_II": null,
     "usa_Sherman_Jumbo": null,
-    "usa_T110": "T110",
-    "usa_T110E3": "E3",
-    "usa_T110E4": "E4",
+    "usa_T110": null,
+    "usa_T110E3": null,
+    "usa_T110E4": null,
     "usa_T14": null,
     "usa_T18": null,
     "usa_T1_Cunningham": null,
+    "usa_T1_E6": null,
     "usa_T1_hvy": null,
     "usa_T20": null,
     "usa_T25_2": null,
     "usa_T25_AT": null,
-    "usa_T26_E4_SuperPershing": "SuperPershing",
+    "usa_T26_E4_SuperPershing": null,
     "usa_T28": null,
-    "usa_T28_Prototype": "T28 Prot",
+    "usa_T28_Prototype": null,
     "usa_T29": null,
     "usa_T2_lt": null,
     "usa_T2_med": null,
@@ -1723,8 +1789,8 @@
     "ussr_BT_SV": null,
     "ussr_Churchill_LL": null,
     "ussr_GAZ_74b": null,
-    "ussr_IS8": null,
     "ussr_IS": null,
+    "ussr_IS8": null,
     "ussr_ISU_152": null,
     "ussr_IS_3": null,
     "ussr_IS_4": null,
@@ -1742,26 +1808,26 @@
     "ussr_MS_1": null,
     "ussr_Matilda_II_LL": null,
     "ussr_Object252": null,
-    "ussr_Object263": "Obj 263",
-    "ussr_Object268": "Obj 268",
-    "ussr_Object_212": "Obj 212",
-    "ussr_Object_261": "Obj 261",
-    "ussr_Object_704": "Obj 704",
+    "ussr_Object263": null,
+    "ussr_Object268": null,
+    "ussr_Object_212": null,
+    "ussr_Object_261": null,
+    "ussr_Object_704": null,
     "ussr_ST_I": null,
-    "ussr_SU100M1": "SU-100 M1",
+    "ussr_SU100M1": null,
     "ussr_SU122_44": null,
-    "ussr_SU122_54": "SU-122 54",
+    "ussr_SU122_54": null,
     "ussr_SU_100": null,
-    "ussr_SU_101": "SU-101",
+    "ussr_SU_101": null,
     "ussr_SU_14": null,
     "ussr_SU_152": null,
     "ussr_SU_18": null,
     "ussr_SU_26": null,
     "ussr_SU_5": null,
     "ussr_SU_76": null,
+    "ussr_SU_8": null,
     "ussr_SU_85": null,
     "ussr_SU_85I": null,
-    "ussr_SU_8": null,
     "ussr_S_51": null,
     "ussr_T150": null,
     "ussr_T62A": null,

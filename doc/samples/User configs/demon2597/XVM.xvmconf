@@ -5,9 +5,9 @@
     "author": "demon2597",                        // автор конфига
     "description": "My settings for XVM",         // описание конфига
     "url": "http://www.koreanrandom.com/forum/topic/1384-xvm-configurations/", // адрес, где выкладываеются обновления конфига
-    "date": "24.10.2012",                       // дата последней модификации конфига
-    "gameVersion": "0.8.0",                     // поддерживаемая версия игры
-    "modMinVersion": "3.0.4"                    // минимально необходимая версия мода XVM
+    "date": "05.11.2012",                       // дата последней модификации конфига
+    "gameVersion": "0.8.1",                     // поддерживаемая версия игры
+    "modMinVersion": "3.1.1"                    // минимально необходимая версия мода XVM
   },
   // Блок общих параметров боевого интерфейса
   "battle": {
@@ -94,8 +94,8 @@
   },
   // Отображаемые строки {{turret}} маркера
   "turretMarkers": {
-    "highVulnerability": "\u1403", // Субъект имеет стоковую башню и топ орудие не может быть установлено. Субъект сильно уязвим.
-    "lowVulnerability": "\u1404"   // Субъект имеет стоковую башню и топ орудие может быть установлено. Субъект немного уязвим.
+    "highVulnerability": "\u0023", // Субъект имеет стоковую башню и топ орудие не может быть установлено. Субъект сильно уязвим.
+    "lowVulnerability": "\u0024"   // Субъект имеет стоковую башню и топ орудие может быть установлено. Субъект немного уязвим.
   },
   // Лог попаданий (счетчик своих попаданий)
   "hitLog": {
@@ -106,15 +106,46 @@
     "h": 500,            // Высота
     "lines": 20,          // Количество строк. Устаревшие данные выталкиваются.
     "direction": "down", // Направление лога: up - строки добавляются сверху поля, down - снизу
-    "insertOrder": "end", // begin - строки добавляются вначале лога, end - в конце
+    "insertOrder": "begin", // begin - строки добавляются вначале лога, end - в конце
     "groupHitsByPlayer": false, // группировать попадания по имени игрока
     // Подстановка для макроса {{dead}} когда танк умирает
-    "deadMarker": "<font face='XVM Symbol' size='19' color='#CCCCCC'>\u1409</font>",
-    "blowupMarker": "<font face='XVM Symbol' size='19' color='#CCCCCC'>\u1408</font>",
+    "deadMarker": "\u0029",
+    "blowupMarker": "\u0028",
     // Формат последнего попадания (допускаются макроподстановки, см. readme-ru.txt)
     "formatHeader": "<font color='#CCCCCC'>Hits:</font> {{n}}  <font color='#CCCCCC'>Total:</font> <b><font color='#FFCC66'>{{dmg-total}}</font></b>  <font color='#CCCCCC'>Last:</font> {{dmg}}",
     // Формат предыдущих попаданий (допускаются макроподстановки, см. readme-ru.txt)
-    "formatHistory": "<textformat leading='0' tabstops='[20,55,85,120]'><font color='#CCCCCC' size='13'>\u00D7{{n-player}}<tab>{{dmg-kind}}<tab>-{{dmg}}<tab>({{dmg-player}})<tab>{{vehicle}}</font>  {{dead}}</textformat>"
+    "formatHistory": "<textformat leading='0' tabstops='[20,55,90,130,175]'><font color='#CCCCCC{{dead}}' size='13'><b></b{{dead}}>\u00D7{{n-player}}<tab>{{dmg-kind}}<tab>-{{dmg}}<tab>({{dmg-player}})</b></b><tab><font face='XVM Symbol'><font size='19'><font size='1{{dead}}'>{{dead}}</font></font><font size='1'><font size='19{{dead}}'>\u002A</font></font></font><tab><b></b{{dead}}>{{vehicle}}</b></b></font></textformat>"
+  },
+  // Полоса захвата
+  "captureBar": {
+    "enabled": true, // Переключатель вкл/выкл
+    "primaryTitleOffset": 7, // Смещение верхнего поля вверх на случай больших размеров шрифтов
+    "appendPlus" : false, // дописывать плюс к тройке захватчиков. Невозможно расчитать более трёх.
+    // Формат захвата (допускаются макроподстановки, см. readme-ru.txt)
+    "enemy": { // Враг
+      "primaryTitleFormat":   "<font size='15' color='#FFFFFF'>Захват базы врага!   {{extra}}</font>", // Верхнее текстовое поле
+      "secondaryTitleFormat": "<font size='15' color='#FFFFFF'>{{points}}</font>",              // Нижнее текстовое поле
+      "captureDoneFormat":    "<font size='17' color='#FFCC66'>Вражеская база захвачена!</font>",    // Текст полного захвата
+      "extra": "Захватчиков: <b><font color='#FFCC66'>{{tanks}}</font></b>  Осталось: <b><font color='#FFCC66'>{{time}}</font><b>",                          // Дополнительный текст после необходимого расчета
+      "shadow": {          // Тень полей
+        "color": "0x000000", // Цвет
+        "alpha": 50,       // Прозрачность 0-100
+        "blur": 4,        // Размытие 0-255
+        "strength": 2      // Сила 0-255
+      }
+    },
+    "ally": { // Союзник
+      "primaryTitleFormat":   "<font size='15' color='#FFFFFF'>Захват нашей базы!  {{extra}}</font>",
+      "secondaryTitleFormat": "<font size='15' color='#FFFFFF'>{{points}}</font>",
+      "captureDoneFormat":    "<font size='17' color='#FFCC66'>Наша база захвачена!</font>",
+      "extra": "Захватчиков: <b><font color='#FFCC66'>{{tanks}}</font></b>  Осталось: <b><font color='#FFCC66'>{{time}}</font><b>",
+      "shadow": {
+        "color": "0x000000",
+        "alpha": 50,
+        "blur": 4,
+        "strength": 2
+      }
+    }
   },
   // Блок маркеров над танками.
   "markers": {
@@ -246,7 +277,7 @@
               "name": "Сток башня",       // название текстового поля, ни на что не влияет
               "visible": true,                // false - не отображать
               "x": 44,                         // положение по оси X
-              "y": -32,                       // положение по оси Y
+              "y": -33,                       // положение по оси Y
               "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
               "color": "0x000000",                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
               "font": {                       // параметры шрифта
@@ -289,7 +320,7 @@
                 "distance": 1,                //   дистанция смещение
                 "size": 1                     //   размер
               },
-              "format": "\u1401"         // формат текста. См. описание макросов в readme-ru.txt
+              "format": "\u0021"         // формат текста. См. описание макросов в readme-ru.txt
             },
             // Текстовое поле с текущим здоровьем
             {
@@ -631,8 +662,8 @@
             },
             "speed": 3,                       //   время отображения отлетающего урона
             "maxRange": 80,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "<font face='XVM Symbol' size='24'>\u140B</font>\n<b>{{vehicle}}</b>",      //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "<font face='XVM Symbol' size='24'>\u140C</font>\n<b>{{vehicle}}</b>"       //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+            "damageMessage": "<font face='XVM Symbol' size='24'>\u002B</font>\n<b>{{vehicle}}</b>",      //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
+            "blowupMessage": "<font face='XVM Symbol' size='24'>\u002C</font>\n<b>{{vehicle}}</b>"       //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -726,8 +757,8 @@
             },
             "speed": 3,                       //   время отображения отлетающего урона
             "maxRange": 80,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "<font face='XVM Symbol' size='24'>\u140B</font>\n<b>{{vehicle}}</b>",      //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "<font face='XVM Symbol' size='24'>\u140C</font>\n<b>{{vehicle}}</b>"       //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+            "damageMessage": "<font face='XVM Symbol' size='24'>\u002B</font>\n<b>{{vehicle}}</b>",      //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
+            "blowupMessage": "<font face='XVM Symbol' size='24'>\u002C</font>\n<b>{{vehicle}}</b>"       //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -935,7 +966,7 @@
               "name": "Сток башня",       // название текстового поля, ни на что не влияет
               "visible": true,                // false - не отображать
               "x": 44,                         // положение по оси X
-              "y": -32,                       // положение по оси Y
+              "y": -33,                       // положение по оси Y
               "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
               "color": "0x000000",                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
               "font": {                       // параметры шрифта
@@ -960,12 +991,12 @@
               "name": "Символ эффект.",       // название текстового поля, ни на что не влияет
               "visible": true,                // false - не отображать
               "x": 0,                         // положение по оси X
-              "y": -58,                       // положение по оси Y
+              "y": -56,                       // положение по оси Y
               "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
               "color": "{{c:eff}}",                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
               "font": {                       // параметры шрифта
                 "name": "XVM Symbol",         //   название
-                "size": 21,                   //   размер
+                "size": 17,                   //   размер
                 "align": "center",            //   выравнивание текста (left, center, right)
                 "bold": false,                 //   обычный (false) или жирный (true)
                 "italic": false                 //     обычный (false) или курсив (true)
@@ -978,7 +1009,7 @@
                 "distance": 1,                //   дистанция смещение
                 "size": 1                     //   размер
               },
-              "format": "\u1402"         // формат текста. См. описание макросов в readme-ru.txt
+              "format": "\u0022"         // формат текста. См. описание макросов в readme-ru.txt
             },
             // Текстовое поле с текущим здоровьем
             {
@@ -1320,8 +1351,8 @@
             },
             "speed": 3,                       //   время отображения отлетающего урона
             "maxRange": 80,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "<font face='XVM Symbol' size='24'>\u140B</font>\n<b>{{vehicle}}</b>",      //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "<font face='XVM Symbol' size='24'>\u140C</font>\n<b>{{vehicle}}</b>"       //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+            "damageMessage": "<font face='XVM Symbol' size='24'>\u002B</font>\n<b>{{vehicle}}</b>",      //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
+            "blowupMessage": "<font face='XVM Symbol' size='24'>\u002C</font>\n<b>{{vehicle}}</b>"       //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -1415,8 +1446,8 @@
             },
             "speed": 3,                       //   время отображения отлетающего урона
             "maxRange": 80,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "<font face='XVM Symbol' size='24'>\u140B</font>\n<b>{{vehicle}}</b>",      //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "<font face='XVM Symbol' size='24'>\u140C</font>\n<b>{{vehicle}}</b>"       //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+            "damageMessage": "<font face='XVM Symbol' size='24'>\u002B</font>\n<b>{{vehicle}}</b>",      //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
+            "blowupMessage": "<font face='XVM Symbol' size='24'>\u002C</font>\n<b>{{vehicle}}</b>"       //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
