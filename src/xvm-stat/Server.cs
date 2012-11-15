@@ -397,9 +397,9 @@ namespace wot
 
             case "@GET_VERSION":
               {
-                _result = version + "\n" + Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+                _result = String.Format("{0}\n{1}", version, Path.GetDirectoryName(Assembly.GetEntryAssembly().Location));
                 foreach (var v in vars.Keys)
-                  _result += "\n" + v + "=" + vars[v];
+                  _result += String.Format("\n{0}={1}", v, vars[v]);
               }
               break;
 
@@ -440,7 +440,7 @@ namespace wot
 
           if (filename + ":" + offset != _lastReadFileFilenameAndOffset)
           {
-            _lastReadFileFilenameAndOffset = filename + ":" + offset; // Avoid double requests
+            _lastReadFileFilenameAndOffset = String.Format("{0}:{1}", filename, offset); // Avoid double requests
             Log(String.Format("Read {0} bytes", readBytes));
           }
         }
@@ -882,20 +882,15 @@ namespace wot
     private void DecodeAndPrintLogString()
     {
       List<byte> buf = new List<byte>();
+      //Log(logString);
       try
       {
         for (int i = 0; i < logString.Length - 1; i += 2)
         {
           byte b = Convert.ToByte(logString.Substring(i, 2), 16);
-          if (b < 32 && b != 10 && b != 13 && b != 9) // '\n', '\r', '\t'
-          {
-            //Console.WriteLine(logString.Substring(i, 2));
-            b = 126; // '~'
-          }
           buf.Add(b);
         }
-        //Log(Encoding.GetEncoding("KOI8-R").GetString(buf.ToArray()));
-        Log(Encoding.ASCII.GetString(buf.ToArray()));
+        Log(Encoding.UTF8.GetString(buf.ToArray()));
       }
       catch (Exception ex)
       {

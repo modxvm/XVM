@@ -13,16 +13,20 @@ class wot.utils.Logger
 
   public static function add(str: String)
   {
-    var a: Array = ("[" + Utils.padLeft(String(counter++), 3, '0') + "] " + str).split("");
-    var s: String = "";
-    var a_length = a.length;
+    var a:Array = ("[" + Utils.padLeft(String(counter++), 3, '0') + "] " + str).split("");
+    var s:String = "";
+    var a_length:Number = a.length;
     for (var i = 0; i < a_length; ++i)
-      s += Utils.padLeft(a[i].charCodeAt(0).toString(16), 2, '0');
+    {
+      var b:Number = a[i].charCodeAt(0);
+      var c:String = (b < 128) ? b.toString(16) : escape(a[i].charAt(0)).split("%").join("");
+      s += (c.length % 2 == 0 ? "" : "0") + c;
+    }
     s = s.length.toString(16) + "," + s;
 
-    var command = Defines.COMMAND_LOG + " ";
-    var max_len = Defines.MAX_PATH - command.length;
-    var p = new LoadVars();
+    var command:String = Defines.COMMAND_LOG + " ";
+    var max_len:Number = Defines.MAX_PATH - command.length;
+    var p:LoadVars = new LoadVars();
     while (s.length > max_len)
     {
       p.load(command + s.slice(0, max_len));
