@@ -2,7 +2,7 @@
 
 [ "$host" = "" ] && exit
 
-tmpfn=".top.html.~"
+tmpfn=".top.$host.html.~"
 
 get()
 {
