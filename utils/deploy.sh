@@ -6,6 +6,7 @@
 FILES="
   battle.swf
   battleloading.swf
+  FinalStatistic.swf
   Minimap.swf
   PlayersPanel.swf
   StatisticForm.swf
