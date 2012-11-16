@@ -100,6 +100,9 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
             formatArr = format.split("{{clan}}");
             if (formatArr.length > 1)
                 format = formatArr.join(Utils.GetClanNameWithBrackets(m_playerFullName));
+            formatArr = format.split("{{squad}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(m_entityName == "squadman" ? "1" : "");
             formatArr = format.split("{{vehicle}}");
             if (formatArr.length > 1)
                 format = formatArr.join(VehicleInfo.mapVehicleName(m_defaultIconSource, m_vname));

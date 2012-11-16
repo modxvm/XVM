@@ -1,4 +1,4 @@
-﻿XVM-3.1.2-pre1:
+﻿XVM-3.1.2-pre2:
   * added capture bar mod
   * fixed standard markers mode
   * do not calculate friendly fire in hit-log
@@ -8,6 +8,7 @@
       {{name}} - player nickname without clan name
       {{clan}} - clan name with brackets (empty if no clan)
       {{vtype}} - vehicle type
+      {{squad}} - value '1' for squadmans, empty for others (in markers)
   * new config section texts/vtype for changing vehicle types text
   * fixed display a marker for the tank with the dead crew
 

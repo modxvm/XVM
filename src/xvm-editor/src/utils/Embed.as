@@ -47,10 +47,10 @@ package utils
         public static const dmg_ratio:Class;
         [Embed("images/macros/dmg_total.png")]
         public static const dmg_total:Class;
-		[Embed("images/macros/e.png")]
-		public static const e:Class;
-		[Embed("images/macros/e_3.png")]
-		public static const e_3:Class;
+        [Embed("images/macros/e.png")]
+        public static const e:Class;
+        [Embed("images/macros/e_3.png")]
+        public static const e_3:Class;
         [Embed("images/macros/eff.png")]
         public static const eff:Class;
         [Embed("images/macros/eff_4.png")]
@@ -81,6 +81,8 @@ package utils
         public static const rating:Class;
         [Embed("images/macros/rating_3.png")]
         public static const rating_3:Class;
+        [Embed("images/macros/squad.png")]
+        public static const squad:Class;
         [Embed("images/macros/t_battles.png")]
         public static const t_battles:Class;
         [Embed("images/macros/t_battles_4.png")]
