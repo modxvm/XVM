@@ -1,37 +1,37 @@
-<gui_settings.xml>										<!--Настройки игры-->
-<eulaURL>http://worldoftanks.ru/user_agreement?language={0}</eulaURL>				<!--Лицензионное соглашение ссылка-->
-<registrationURL>http://worldoftanks.ru/registration/new/</registrationURL>			<!--регистрация ссылка-->
-<paymentURL>https://worldoftanks.ru/personal/payment/?user=%(userEncoded)s</paymentURL>		<!--оплата ссылка-->
-<finPasswordURL>										<!--Найти пароль, ссылка-->
+п»ї<gui_settings.xml>										<!--РќР°СЃС‚СЂРѕР№РєРё РёРіСЂС‹-->
+<eulaURL>http://worldoftanks.ru/user_agreement?language={0}</eulaURL>				<!--Р›РёС†РµРЅР·РёРѕРЅРЅРѕРµ СЃРѕРіР»Р°С€РµРЅРёРµ СЃСЃС‹Р»РєР°-->
+<registrationURL>http://worldoftanks.ru/registration/new/</registrationURL>			<!--СЂРµРіРёСЃС‚СЂР°С†РёСЏ СЃСЃС‹Р»РєР°-->
+<paymentURL>https://worldoftanks.ru/personal/payment/?user=%(userEncoded)s</paymentURL>		<!--РѕРїР»Р°С‚Р° СЃСЃС‹Р»РєР°-->
+<finPasswordURL>										<!--РќР°Р№С‚Рё РїР°СЂРѕР»СЊ, СЃСЃС‹Р»РєР°-->
 </finPasswordURL>
-<migrationURL>http://wot.kongzhong.com/jihuo/jihuo.html?%s</migrationURL>			<!--миграция ссылка-->
-<nations_order>							<!--Выбор страны-->
-<_1> ussr </_1>							<!--Россия-->
-<_2>germany</_2>						<!--Германия-->
-<_3>usa</_3>							<!--Америка-->
-<_4>france</_4>							<!--Франция-->
-<_5>uk</_5>							<!--Великобритания-->
-<_6>china</_6>							<!--Китай-->
+<migrationURL>http://wot.kongzhong.com/jihuo/jihuo.html?%s</migrationURL>			<!--РјРёРіСЂР°С†РёСЏ СЃСЃС‹Р»РєР°-->
+<nations_order>							<!--РџРѕСЂСЏРґРѕРє С‚РµС…РЅРёРєРё РІ Р°РЅРіР°СЂРµ-->
+<_1> ussr </_1>							<!--Р РѕСЃСЃРёСЏ-->
+<_2>germany</_2>						<!--Р“РµСЂРјР°РЅРёСЏ-->
+<_3>usa</_3>							<!--РђРјРµСЂРёРєР°-->
+<_4>france</_4>							<!--Р¤СЂР°РЅС†РёСЏ-->
+<_5>uk</_5>							<!--Р’РµР»РёРєРѕР±СЂРёС‚Р°РЅРёСЏ-->
+<_6>china</_6>							<!--РљРёС‚Р°Р№-->
 </nations_order>
-<minimapSize> True </minimapSize>				<!--Увеличение/уменьшение миникарты-->
-<goldTransfer> False </goldTransfer>				<!--Перевод голды с акаунта на акаунт(пока не реализовано в игре)-->
-<voiceChat> True </voiceChat>					<!--Отображать расширенные настройки голосового чата-->
-<technicalInfo> True </technicalInfo>				<!--техническая информация о танке при выборе в ангаре-->
-<nationHangarSpace>False</nationHangarSpace>			<!--национальный ангар(пока не реализовано в игре, при включении перестает работать игра)-->
-<customizationCamouflages> True </customizationCamouflages>	<!--Отображать настройку внешнего вида, камуфляжей-->
-<customizationHorns> False </customizationHorns>		<!--Отображать настройку внешнего вида, Клаксон (В "Внешний вид" появляется графа "Клаксон" с выбором гудков за 1000000 голды)(пока не реализовано в игре)-->
-<customizationEmblems> True </customizationEmblems>		<!--Отображать настройку внешнего вида, Эмблемы-->
-<customizationInscriptions> True </customizationInscriptions>	<!--Отображать настройку внешнего вида, надписей-->
-<showMinimapSuperHeavy> True </showMinimapSuperHeavy>		<!--На миникарте ТТ 10 уровня отображать как четыре квадрата, для отличия-->
-<showMinimapDeath> True </showMinimapDeath>			<!--Отображать убитые танки на миникарте(показывает значек убитого танка 2,2 секунды-"minimapDeathDuration")-->
-<permanentMinimapDeath> False </permanentMinimapDeath>		<!--Не скрывать убитые танки на миникарте(должен быть включен "showMinimapDeath")-->
-<markerHitSplashDuration> 1000 </markerHitSplashDuration>	<!--Маркер Хит Всплеск Длительность(?)-->
-<sixthSenseDuration> 5000 </sixthSenseDuration>			<!--Шестое чувство таймер лампочки(сколько будет светится секунд) расчет 1000=1 секунда, по умолчанию зделал 10000=10 секунд-->
-<minimapDeathDuration> 5000 </minimapDeathDuration>		<!--Длительность показа убитых танков на миникарте(должен быть включен "showMinimapDeath")-->
-<markerScaleSettings>40 100 100 3.0</markerScaleSettings>	<!--Параметры маркеров шкалы(?)-->
-<markerBgSettings>40 100 100 3.0</markerBgSettings>		<!--Маркер Bg Настройки(?)-->
-<rememberPassVisible> True </rememberPassVisible>		<!--сохранять пароль-->(надо вводить пароль при каждом входе или сохранить)
-<clearLoginValue>False</clearLoginValue>			<!--Очищать Логин(надо вводить логин при каждом входе или сохранить)-->
-<specPrebatlesVisible> True </specPrebatlesVisible>		<!--Предварительная спецификация сражений видимого(?)-->
-<battleStatsInHangar> True </battleStatsInHangar>		<!--Отображать расширенную статистику после боя-->
+<minimapSize> True </minimapSize>				<!--РЈРІРµР»РёС‡РµРЅРёРµ/СѓРјРµРЅСЊС€РµРЅРёРµ РјРёРЅРёРєР°СЂС‚С‹-->
+<goldTransfer> False </goldTransfer>				<!--РџРµСЂРµРІРѕРґ РіРѕР»РґС‹ СЃ Р°РєР°СѓРЅС‚Р° РЅР° Р°РєР°СѓРЅС‚(РїРѕРєР° РЅРµ СЂРµР°Р»РёР·РѕРІР°РЅРѕ РІ РёРіСЂРµ)-->
+<voiceChat> True </voiceChat>					<!--РћС‚РѕР±СЂР°Р¶Р°С‚СЊ СЂР°СЃС€РёСЂРµРЅРЅС‹Рµ РЅР°СЃС‚СЂРѕР№РєРё РіРѕР»РѕСЃРѕРІРѕРіРѕ С‡Р°С‚Р°-->
+<technicalInfo> True </technicalInfo>				<!--С‚РµС…РЅРёС‡РµСЃРєР°СЏ РёРЅС„РѕСЂРјР°С†РёСЏ Рѕ С‚Р°РЅРєРµ РїСЂРё РІС‹Р±РѕСЂРµ РІ Р°РЅРіР°СЂРµ-->
+<nationHangarSpace>False</nationHangarSpace>			<!--РЅР°С†РёРѕРЅР°Р»СЊРЅС‹Р№ Р°РЅРіР°СЂ(РїРѕРєР° РЅРµ СЂРµР°Р»РёР·РѕРІР°РЅРѕ РІ РёРіСЂРµ, РїСЂРё РІРєР»СЋС‡РµРЅРёРё РїРµСЂРµСЃС‚Р°РµС‚ СЂР°Р±РѕС‚Р°С‚СЊ РёРіСЂР°)-->
+<customizationCamouflages> True </customizationCamouflages>	<!--РћС‚РѕР±СЂР°Р¶Р°С‚СЊ РЅР°СЃС‚СЂРѕР№РєСѓ РІРЅРµС€РЅРµРіРѕ РІРёРґР°, РєР°РјСѓС„Р»СЏР¶РµР№-->
+<customizationHorns> False </customizationHorns>		<!--РћС‚РѕР±СЂР°Р¶Р°С‚СЊ РЅР°СЃС‚СЂРѕР№РєСѓ РІРЅРµС€РЅРµРіРѕ РІРёРґР°, РљР»Р°РєСЃРѕРЅ (Р’ "Р’РЅРµС€РЅРёР№ РІРёРґ" РїРѕСЏРІР»СЏРµС‚СЃСЏ РіСЂР°С„Р° "РљР»Р°РєСЃРѕРЅ" СЃ РІС‹Р±РѕСЂРѕРј РіСѓРґРєРѕРІ Р·Р° 1000000 РіРѕР»РґС‹)(РїРѕРєР° РЅРµ СЂРµР°Р»РёР·РѕРІР°РЅРѕ РІ РёРіСЂРµ)-->
+<customizationEmblems> True </customizationEmblems>		<!--РћС‚РѕР±СЂР°Р¶Р°С‚СЊ РЅР°СЃС‚СЂРѕР№РєСѓ РІРЅРµС€РЅРµРіРѕ РІРёРґР°, Р­РјР±Р»РµРјС‹-->
+<customizationInscriptions> True </customizationInscriptions>	<!--РћС‚РѕР±СЂР°Р¶Р°С‚СЊ РЅР°СЃС‚СЂРѕР№РєСѓ РІРЅРµС€РЅРµРіРѕ РІРёРґР°, РЅР°РґРїРёСЃРµР№-->
+<showMinimapSuperHeavy> True </showMinimapSuperHeavy>		<!--РќР° РјРёРЅРёРєР°СЂС‚Рµ РўРў 10 СѓСЂРѕРІРЅСЏ РѕС‚РѕР±СЂР°Р¶Р°С‚СЊ РєР°Рє С‡РµС‚С‹СЂРµ РєРІР°РґСЂР°С‚Р°, РґР»СЏ РѕС‚Р»РёС‡РёСЏ-->
+<showMinimapDeath> True </showMinimapDeath>			<!--РћС‚РѕР±СЂР°Р¶Р°С‚СЊ СѓР±РёС‚С‹Рµ С‚Р°РЅРєРё РЅР° РјРёРЅРёРєР°СЂС‚Рµ(РїРѕРєР°Р·С‹РІР°РµС‚ Р·РЅР°С‡РµРє СѓР±РёС‚РѕРіРѕ С‚Р°РЅРєР° 2,2 СЃРµРєСѓРЅРґС‹-"minimapDeathDuration")-->
+<permanentMinimapDeath> False </permanentMinimapDeath>		<!--РќРµ СЃРєСЂС‹РІР°С‚СЊ СѓР±РёС‚С‹Рµ С‚Р°РЅРєРё РЅР° РјРёРЅРёРєР°СЂС‚Рµ(РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РІРєР»СЋС‡РµРЅ "showMinimapDeath")-->
+<markerHitSplashDuration> 1000 </markerHitSplashDuration>	<!--РњР°СЂРєРµСЂ РҐРёС‚ Р’СЃРїР»РµСЃРє Р”Р»РёС‚РµР»СЊРЅРѕСЃС‚СЊ(?)-->
+<sixthSenseDuration> 5000 </sixthSenseDuration>			<!--РЁРµСЃС‚РѕРµ С‡СѓРІСЃС‚РІРѕ С‚Р°Р№РјРµСЂ Р»Р°РјРїРѕС‡РєРё(СЃРєРѕР»СЊРєРѕ Р±СѓРґРµС‚ СЃРІРµС‚РёС‚СЃСЏ СЃРµРєСѓРЅРґ) СЂР°СЃС‡РµС‚ 1000=1 СЃРµРєСѓРЅРґР°, РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ Р·РґРµР»Р°Р» 10000=10 СЃРµРєСѓРЅРґ-->
+<minimapDeathDuration> 5000 </minimapDeathDuration>		<!--Р”Р»РёС‚РµР»СЊРЅРѕСЃС‚СЊ РїРѕРєР°Р·Р° СѓР±РёС‚С‹С… С‚Р°РЅРєРѕРІ РЅР° РјРёРЅРёРєР°СЂС‚Рµ(РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РІРєР»СЋС‡РµРЅ "showMinimapDeath")-->
+<markerScaleSettings>40 100 100 3.0</markerScaleSettings>	<!--РџР°СЂР°РјРµС‚СЂС‹ РјР°СЂРєРµСЂРѕРІ С€РєР°Р»С‹(?)-->
+<markerBgSettings>40 100 100 3.0</markerBgSettings>		<!--РњР°СЂРєРµСЂ Bg РќР°СЃС‚СЂРѕР№РєРё(?)-->
+<rememberPassVisible> True </rememberPassVisible>		<!--СЃРѕС…СЂР°РЅСЏС‚СЊ РїР°СЂРѕР»СЊ (РЅР°РґРѕ РІРІРѕРґРёС‚СЊ РїР°СЂРѕР»СЊ РїСЂРё РєР°Р¶РґРѕРј РІС…РѕРґРµ РёР»Рё СЃРѕС…СЂР°РЅРёС‚СЊ)-->
+<clearLoginValue>False</clearLoginValue>			<!--РћС‡РёС‰Р°С‚СЊ Р›РѕРіРёРЅ(РЅР°РґРѕ РІРІРѕРґРёС‚СЊ Р»РѕРіРёРЅ РїСЂРё РєР°Р¶РґРѕРј РІС…РѕРґРµ РёР»Рё СЃРѕС…СЂР°РЅРёС‚СЊ)-->
+<specPrebatlesVisible> True </specPrebatlesVisible>		<!--РџСЂРµРґРІР°СЂРёС‚РµР»СЊРЅР°СЏ СЃРїРµС†РёС„РёРєР°С†РёСЏ СЃСЂР°Р¶РµРЅРёР№ РІРёРґРёРјРѕРіРѕ(?)-->
+<battleStatsInHangar> True </battleStatsInHangar>		<!--РћС‚РѕР±СЂР°Р¶Р°С‚СЊ СЂР°СЃС€РёСЂРµРЅРЅСѓСЋ СЃС‚Р°С‚РёСЃС‚РёРєСѓ РїРѕСЃР»Рµ Р±РѕСЏ-->
 </gui_settings.xml>
