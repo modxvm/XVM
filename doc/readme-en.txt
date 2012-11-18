@@ -121,6 +121,7 @@
       {{n-player}}    - number of hits for each player
       {{dmg}}         - last hit value
       {{dmg-total}}   - total sum of hits
+      {{dmg-avg}}     - average damage during the battle
       {{dmg-player}}  - sum of hits for each player
       {{dead}}        - tank's death marker
       {{nick}}        - player nickname with clan name

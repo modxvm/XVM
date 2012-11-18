@@ -48,9 +48,10 @@ package utils
             format = format.replace("{{dmg-ratio}}", "27");
             format = format.replace("{{dmg-kind}}", "attack");
 
-            format = format.replace("{{n}}", "11");
+            format = format.replace("{{n}}", "10");
             format = format.replace("{{n-player}}", "3");
             format = format.replace("{{dmg-total}}", "2500");
+            format = format.replace("{{dmg-avg}}", "250");
             format = format.replace("{{dmg-player}}", "1500");
 
             // Colors
@@ -121,6 +122,7 @@ package utils
                 { value: "{{n-player}}", label: "n_player", icon: Embed.n_player },
                 { value: "{{dmg}}", label: "dmg", icon: Embed.dmg },
                 { value: "{{dmg-total}}", label: "dmg_total", icon: Embed.dmg_total },
+                { value: "{{dmg-avg}}", label: "dmg_avg", icon: Embed.dmg_avg },
                 { value: "{{dmg-player}}", label: "dmg_player", icon: Embed.dmg_player },
                 { value: "{{dmg-kind}}", label: "dmg_kind", icon: Embed.dmg_kind }
             ],

@@ -39,6 +39,8 @@ package utils
         public static const dead:Class;
         [Embed("images/macros/dmg.png")]
         public static const dmg:Class;
+        [Embed("images/macros/dmg_avg.png")]
+        public static const dmg_avg:Class;
         [Embed("images/macros/dmg_kind.png")]
         public static const dmg_kind:Class;
         [Embed("images/macros/dmg_player.png")]

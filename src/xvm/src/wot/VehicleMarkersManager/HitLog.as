@@ -204,6 +204,9 @@ class wot.VehicleMarkersManager.HitLog
             formatArr = format.split("{{dmg-total}}");
             if (formatArr.length > 1)
                 format = formatArr.join(String(total));
+            formatArr = format.split("{{dmg-avg}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(String(hits.length == 0 ? 0 : Math.round(total / hits.length)));
             formatArr = format.split("{{dmg-player}}");
             if (formatArr.length > 1)
                 format = formatArr.join(data.total);
