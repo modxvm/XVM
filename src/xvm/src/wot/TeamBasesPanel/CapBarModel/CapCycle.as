@@ -1,13 +1,15 @@
 /**
- * Capture cycle consists of one, two or three capture point updates.
- * Server sends one, two or three updates with defferent intervals and cap points.
+ * Capture cycle consists of many capture point updates.
+ * This class looks for pattern repetitions and calculates average speed for it.
+ * Average capture speed is used for time left and number of capturers calculations.
+ * Server sends many updates with defferent intervals and cap points.
  * a, b and c are different cap speed values.
  * "a a a a ..." - possibly one capturer.
  * "a b a b a b ..." - possibly two capturers.
  * "a b c a b c a b ..." - possibly three capturers.
  * 
- * Thus to calculate time left and number of capturers
- * we need to define cycle and average speed between cycle updates.
+ * More complex capture patten is possible in encounter battle type.
+ * For that cases we have larger cycle steps - 4 and 5.
  */
 
 class wot.TeamBasesPanel.CapBarModel.CapCycle
@@ -55,15 +57,26 @@ class wot.TeamBasesPanel.CapBarModel.CapCycle
         * xyx xyx      v
         * xxy xxy      v
         * 
+        * xyxyx xyxyx is for 4 tanks at encounter battle type
+        * 
         * v - means cycle is found and average speed is redefined.
         */
-        oneStepCycle();
-        twoStepCycle();
-        threeStepCycle();
+       // TODO: translate to generic algorythm
+        stepCycle(1);
+        stepCycle(2);
+        stepCycle(3);
+        
+        /**
+         * Extra patterns greatly stabilize -speed- when more than 3 capturers.
+         * But calculating more than 4 capturers is still too complicated.
+         */
+        stepCycle(4); /** Not sure if used */
+        stepCycle(5); /** Used for 4 tanks at encounter. */
+        
        /**
         * More than three steps is not a cycle,
         * because three tanks defines maximum capture speed.
-        * More capturing tanks cap with the same speed as four.
+        * At standart More capturing tanks cap with the same speed as four.
         */
        
        /**
@@ -78,34 +91,23 @@ class wot.TeamBasesPanel.CapBarModel.CapCycle
     
     // -- Private
     
-    private function oneStepCycle():Void
+    private function stepCycle(size:Number):Void
     {
-        if (m_sequence.length < 1 + 1)
+        if (m_sequence.length < size * 2)
             return;
         
-        if (m_sequence[0] == m_sequence[1])
-            redefineAverage(1);
-    }
-    
-    private function twoStepCycle():Void
-    {
-        if (m_sequence.length < 2 + 2)
-            return;
-            
-        if (m_sequence[0] == m_sequence[2] &&
-            m_sequence[1] == m_sequence[3])
-            redefineAverage(2);
-    }
-    
-    private function threeStepCycle():Void
-    {
-        if (m_sequence.length < 3 + 3)
-            return;
+        var cycleIsPresent:Boolean = true;
+        for (var i:Number = 0; i < size; i++)
+        {
+            if (m_sequence[i] != m_sequence[i + size])
+            {
+                cycleIsPresent = false;
+                break;
+            }
+        }
         
-        if (m_sequence[0] == m_sequence[3] &&
-            m_sequence[1] == m_sequence[4] &&
-            m_sequence[2] == m_sequence[5])
-            redefineAverage(3);
+        if (cycleIsPresent)
+            redefineAverage(size);
     }
     
     private function redefineAverage(stepSize:Number):Void

@@ -5,7 +5,7 @@ import flash.filters.DropShadowFilter;
 import wot.TeamBasesPanel.CapBarModel.CapSpeed;
 import wot.TeamBasesPanel.Macro;
 import wot.TeamBasesPanel.CapConfig;
-import wot.utils.Logger;
+import wot.TeamBasesPanel.CapBarModel.OneTankSpeed;
 
 /**
  * Capture progress bar
@@ -16,7 +16,7 @@ import wot.utils.Logger;
  * ) Style customization
  * 
  * Features are based on
- * time passed between updates and number of captured points.
+ * time passed and number of captured points between updates.
  * 
  * possible todo:
  * ) Fix 2->3 caps breaks cycle transion. Remove quick fix.
@@ -41,6 +41,9 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
     private var m_macro:Macro;       // defines user presentable html text
     private var m_capColor:String;
     
+    /** Ugly hack to allow one tick earlier speed calculation */
+    private var m_startPoints:Number
+    
    /**
     * CaptureBar() constructor is called once per battle.
     * Not once per capture bar creation on stage.
@@ -56,11 +59,14 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
     * Cant be passed as argument externally easily.
     * Thus called straight by extended TeamBasesPanel class.
     */
-    public function start(startingPoints:Number, capColor:String):Void
+    public function start(startPoints:Number, capColor:String):Void
     {
-        m_capColor = capColor;
-        // colorFeature respects color blind
+        /** Ugly hack to allow one tick earlier speed calculation */
+        m_startPoints = startPoints;
         
+       /** colorFeature respects color blind */
+        m_capColor = capColor;
+       
        /**
         * autoSize extends field vertically
         * so lower font parts are not being cut
@@ -75,12 +81,14 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
         */
         m_titleTF._y -= CapConfig.primaryTitleOffset;
         
+        /** Calculates capture speed */
         m_capSpeed = new CapSpeed();
         
-        m_macro = new Macro(startingPoints, m_capColor);
+        /** Substitutes macro text like {{speed}} with corresponding value to present at user interface */
+        m_macro = new Macro(startPoints, m_capColor);
         
        /**
-        * At this moment TeamBasesPanel called "add".
+        * At this moment TeamBasesPanel called "add" method.
         * Shadow style and new macro should be defined already.
         * If not, than original WG data will be displayed to user before first update tick.
         */
@@ -108,7 +116,7 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
             return;
         }
         
-        m_capSpeed.calculate(newPointsVal, m_points);
+        m_capSpeed.calculate(newPointsVal, m_points || m_startPoints);
 
         super.updateProgress(newPointsVal); // modifies m_point;
         
@@ -148,18 +156,13 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
         
     private function get capturersNum():Number
     {
-        var caps:Number = Math.round(m_capSpeed.getSpeed() / m_capSpeed.getOneTankSpeed());
+        var caps:Number = Math.round(m_capSpeed.getSpeed() / OneTankSpeed.speed);
         
        /**
-        * Quick fix.
-        * 
-        * When number of capturers increase from 2 to 3
-        * cycles somehow conflict.
-        * 
-        * Tested for encounter battle type.
-        * See cap_encounter.wotreplay.
+        * Maximum capturers number at standart battle type is 3.
+        * Calculating more than 3 caps at encounter battle type is complicated.
         */
-        if (caps == 4)
+        if (caps > 3)
             caps = 3;
             
         return caps;

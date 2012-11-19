@@ -6,8 +6,8 @@ import wot.TeamBasesPanel.CapConfig;
 import wot.utils.Utils;
 
 /**
- * Creates and manages CaptureBar instances.
- */
+* Creates and manages CaptureBar instances.
+*/
 
 class wot.TeamBasesPanel.TeamBasesPanel extends net.wargaming.ingame.TeamBasesPanel
 {
@@ -24,7 +24,7 @@ class wot.TeamBasesPanel.TeamBasesPanel extends net.wargaming.ingame.TeamBasesPa
     {
         if (m_xvmCapEnabled)
         {
-           /**
+            /**
             * null, null args somehow allow to set XVM-specific vals
             * at the very first moment capture bar appears.
             * 
@@ -32,6 +32,10 @@ class wot.TeamBasesPanel.TeamBasesPanel extends net.wargaming.ingame.TeamBasesPa
             * at that first moment.
             */
             super.add(id, sortWeight, capColor, null, null);
+            /**
+            * This array is defined at parent original WG class.
+            * start() is XVMs method at CaptureBar class.
+            */
             captureBars[indexByID[id]].start(points, capColor);
         }
         else
@@ -43,6 +47,7 @@ class wot.TeamBasesPanel.TeamBasesPanel extends net.wargaming.ingame.TeamBasesPa
   /**
    * Called when point becomes fully captured.
    * No need to define behavior. updateProgress() handles full capture.
+   * Leave empty.
    */
    function setCaptured(id, title){}
 }

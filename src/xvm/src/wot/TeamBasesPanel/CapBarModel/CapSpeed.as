@@ -1,29 +1,17 @@
 import wot.TeamBasesPanel.CapBarModel.CapCycle;
 import wot.TeamBasesPanel.CapBarModel.InternalTimer;
-import wot.TeamBasesPanel.CapBarModel.TimeRound;
+import wot.TeamBasesPanel.CapBarModel.OneTankSpeed;
+import wot.utils.Round;
 
 /**
- * This class determines capture speed based on latest information
- * about points captured and time passed since last capture updates.
- *
- * Speed of 0.5 means one cap point is captured in two seconds.
- */
+* This class determines capture speed based on latest information
+* about points captured and time passed since last capture updates.
+*
+* Speed of 0.5 means one cap point is captured in two seconds.
+*/
 
 class wot.TeamBasesPanel.CapBarModel.CapSpeed
 {
-   /**
-    * Minimal capturing speed values for various battle types.
-    * Average for one cycle - two updates.
-    * 
-    * Cap speed may differ by map.
-    * El halloof 0.4, 0.835
-    * Any other map 0.5, 1
-    */
-    private static var MIN_SPEED_ENCOUNTER:Number = 0.4;
-    private static var MIN_SPEED_STANDART:Number = 1;
-    
-    private static var s_minimalCapSpeed:Number = MIN_SPEED_STANDART; 
-    
     private var m_cycle:CapCycle;
     private var m_timer:InternalTimer;
 
@@ -39,8 +27,8 @@ class wot.TeamBasesPanel.CapBarModel.CapSpeed
     {
         var interval:Number = m_timer.getInterval(); // Changes InternalTimer state!
         var rawSpeed:Number = (newPointsVal - prevPoints) / interval;
-        var approxSpeed:Number = TimeRound.round(rawSpeed, 100); // to 0.1 digit
-        if (approxSpeed < MIN_SPEED_ENCOUNTER || approxSpeed > 8)
+        var approxSpeed:Number = Round.round(rawSpeed, 100); // to 0.01 digit
+        if (approxSpeed < OneTankSpeed.MIN_SPEED_ENCOUNTER || approxSpeed > 8)
         {
            /**
             * Extremes conditions with infinity, negatives, NaN like
@@ -56,10 +44,8 @@ class wot.TeamBasesPanel.CapBarModel.CapSpeed
             return;
         }
         
-       /**
-        * One tank capturing speed is different for different battle types.
-        */
-        defineMinimalSpeed(approxSpeed);
+        /** One tank capturing speed is different for different battle types and maps */
+        OneTankSpeed.checkSpeed(approxSpeed);
         
        /**
         * Define capturing cycle size and
@@ -73,18 +59,5 @@ class wot.TeamBasesPanel.CapBarModel.CapSpeed
     public function getSpeed():Number
     {
         return m_speed;
-    }
-        
-    public function getOneTankSpeed():Number
-    {
-        return s_minimalCapSpeed;
-    }
-    
-    // -- Private
-    
-    private function defineMinimalSpeed(approxSpeed:Number):Void
-    {
-        if (approxSpeed == MIN_SPEED_ENCOUNTER)
-            s_minimalCapSpeed = MIN_SPEED_ENCOUNTER;
     }
 }
