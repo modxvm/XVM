@@ -120,7 +120,7 @@
     "deadMarker": "<font face='Wingdings'>N</font>",
     "blowupMarker": "<font face='Wingdings'>M</font>",
     // Hits header format, including last hit (macros allowed, see readme-en.txt)
-    "formatHeader":  "<font color='#FFFFFF'>Damage Done:</font> <font size='14'></font> <font size='1{{nick}}'><b><font color='#fd0000'>{{dmg-total}} hp</font></b>  <font color='#FFFFFF'>Last Damage:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}} hp</b> {{dead}}</font><font color='{{c:vtype}}'>({{vehicle}})</font></font>",
+    "formatHeader":  "<font color='#FFFFFF'>Damage Done:</font> <font size='14'></font> <font size='0{{nick}}'><b><font color='#fd0000'>{{dmg-total}} hp</font></b>  <font color='#FFFFFF'>Last Damage:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}} hp</b> {{dead}}</font><font color='{{c:vtype}}'>({{vehicle}})</font></font>",
     // List of hits format (macros allowed, see readme-en.txt)
     "formatHistory": "<textformat leading='-4' tabstops='[20,50,90,150]'><font size='12' face='Comic Sans MS'>\u00D7{{n-player}}:</font><tab>{{dmg-player}}<tab>| <font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab>| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>"
   },
@@ -145,7 +145,7 @@
       "primaryTitleFormat":   "<font size='15' color='#ed0616'><b>Ally base capture!<b> {{extra}}</font>",
       "secondaryTitleFormat": "<font size='15' color='#000000'><b>{{points}}\u0025<b></font>",
       "captureDoneFormat":    "<font size='15' color='#5c050b'><b>Ally base captured!<b></font>",
-    "extra": "<font size='15' color='#0f04eb'><b>Invaders:</b></font> <font size='15' color='#FFFF00'><b>{{tanks}}</b></font> <font size='15' color='#e2012b'><b>Time Left:</b></font> <font size='14' color='#FFFF00'><b>{{time}}<b></font>",               
+    "extra": "<font size='15' color='#0f04eb'><b>Invaders:</b></font> <font size='15' color='#FFFF00'><b>{{tanks}}</b></font> <font size='15' color='#e2012b'><b>Time Left:</b></font> <font size='14' color='#FFFF00'><b>{{time}}<b></font>",
       "shadow": {
         "color": "0xFFFFFF",
         "alpha": 80,
@@ -1119,7 +1119,7 @@
                 "strength": 1320
               },
               "format": "{{kb}} {{eff}} {{rating}}"
-            },			
+            },
 			// text box with a rating
             {
               "name": "Number of fights on this technique",

@@ -14,7 +14,7 @@
     "drawGrid": false,
     "highlightVehicleIcon": true,
     "hideXVMVersion": true,
-    "clockFormat": "",     
+    "clockFormat": "",
     "useStandardMarkers": false
   },
   "rating": {
@@ -22,22 +22,22 @@
     "loadEnemyStatsInFogOfWar": true
   },
   "battleLoading": {
-    "showChances": true,   
-    "clockFormat": "Potato Time - H:N",     
+    "showChances": true,
+    "clockFormat": "Potato Time - H:N",
     "clanIcon": { "show": true, "x": -348, "y": 2, "h": 20, "w": 20, "alpha": 100 },
     "formatLeft": "{{vehicle}} {{kb}} {{eff}} <font color='{{c:rating}}'>{{rating}}</font>",
     "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> {{eff}} {{kb}} {{vehicle}}"
   },
   "statisticForm": {
-    "showChances": true, 
+    "showChances": true,
     "clanIcon": { "show": true, "x": -348, "y": 2, "h": 20, "w": 20, "alpha": 100 },
     "formatLeft": "{{vehicle}} {{kb}} {{eff}} <font color='{{c:rating}}'>{{rating}}</font>",
     "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> {{eff}} {{kb}} {{vehicle}}"
   },
   "playersPanel": {
     "alpha": 80,
-    "removeSquadIcon": true, 
-    "clanIcon": { "show": false, "x": 85, "y": 4, "h": 16, "w": 16, "alpha": 100 },            
+    "removeSquadIcon": true,
+    "clanIcon": { "show": false, "x": 85, "y": 4, "h": 16, "w": 16, "alpha": 100 },
     "medium": {
      "width": 70,
       "formatLeft": "<font color='{{c:rating}}'>{{rating}}</font> {{vehicle}}",
@@ -56,40 +56,40 @@
     }
   },
   "turretMarkers": {
-    "highVulnerability": "*", 
-    "lowVulnerability": "'"  
+    "highVulnerability": "*",
+    "lowVulnerability": "'"
   },
   "hitLog": {
-    "visible": true,     
+    "visible": true,
     "x": 275,
     "y": 8,
     "w": 250,
     "h": 20,
     "lines": 1,
     "direction": "down",
-    "insertOrder": "begin", 
-    "groupHitsByPlayer": false, 
+    "insertOrder": "begin",
+    "groupHitsByPlayer": false,
     "deadMarker": "\u0029",
     "blowupMarker": "\u0028",
     "formatHeader": "<font color='#CCCCCC'>Hits:</font> {{n}}  <font color='#CCCCCC'>Total:</font> <b><font color='#FFD072'>{{dmg-total}}</font></b>  <font color='#CCCCCC'>Last:</font> {{dmg}}",
-    "formatHistory": "<textformat leading='0' tabstops='[20,55,90,130,175]'><font color='#CCCCCC' size='13'>\u00D7{{n-player}}<tab>{{dmg-kind}}<tab>-{{dmg}}<tab>({{dmg-player}})<tab><font face='XVM Symbol'><font color='#FFD072'><font size='19'><font size='1{{dead}}'>{{dead}}</font></font></font><font size='1'><font size='19{{dead}}'>\u002A</font></font></font><tab>{{vehicle}}</font></textformat>"
+    "formatHistory": "<textformat leading='0' tabstops='[20,55,90,130,175]'><font color='#CCCCCC' size='13'>\u00D7{{n-player}}<tab>{{dmg-kind}}<tab>-{{dmg}}<tab>({{dmg-player}})<tab><font face='XVM Symbol'><font color='#FFD072'><font size='19'><font size='0{{dead}}'>{{dead}}</font></font></font><font size='1'><font size='19{{dead}}'>\u002A</font></font></font><tab>{{vehicle}}</font></textformat>"
   },
   "captureBar": {
-    "enabled": true, 
-    "primaryTitleOffset": 7, 
-    "enemy": { 
-      "primaryTitleFormat":   "<font size='15' color='#FFFFFF'>Захват базы врага!  {{extra}}</font>", 
-      "secondaryTitleFormat": "<font size='15' color='#FFFFFF'>{{points}}</font>",              
-      "captureDoneFormat":    "<font size='17' color='#FFCC66'>Вражеская база захвачена!</font>",    
-      "extra": "Захватчиков: <b><font color='#FFCC66'>{{tanks}}</font></b>  Осталось: <b><font color='#FFCC66'>{{time}}</font><b>",                          
-      "shadow": {          
-        "color": "0x000000", 
-        "alpha": 50,       
-        "blur": 4,        
-        "strength": 2      
+    "enabled": true,
+    "primaryTitleOffset": 7,
+    "enemy": {
+      "primaryTitleFormat":   "<font size='15' color='#FFFFFF'>Захват базы врага!  {{extra}}</font>",
+      "secondaryTitleFormat": "<font size='15' color='#FFFFFF'>{{points}}</font>",
+      "captureDoneFormat":    "<font size='17' color='#FFCC66'>Вражеская база захвачена!</font>",
+      "extra": "Захватчиков: <b><font color='#FFCC66'>{{tanks}}</font></b>  Осталось: <b><font color='#FFCC66'>{{time}}</font><b>",
+      "shadow": {
+        "color": "0x000000",
+        "alpha": 50,
+        "blur": 4,
+        "strength": 2
       }
     },
-    "ally": { 
+    "ally": {
       "primaryTitleFormat":   "<font size='15' color='#FFFFFF'>Захват нашей базы!  {{extra}}</font>",
       "secondaryTitleFormat": "<font size='15' color='#FFFFFF'>{{points}}</font>",
       "captureDoneFormat":    "<font size='17' color='#FFCC66'>Наша база захвачена!</font>",

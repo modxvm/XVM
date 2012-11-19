@@ -24,6 +24,8 @@ class wot.utils.Logger
     }
     s = s.length.toString(16) + "," + s;
 
+    //s = LZW.compress(s);
+    
     var command:String = Defines.COMMAND_LOG + " ";
     var max_len:Number = Defines.MAX_PATH - command.length;
     var p:LoadVars = new LoadVars();
