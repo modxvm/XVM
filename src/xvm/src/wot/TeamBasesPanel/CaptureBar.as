@@ -5,6 +5,7 @@ import flash.filters.DropShadowFilter;
 import wot.TeamBasesPanel.CapBarModel.CapSpeed;
 import wot.TeamBasesPanel.Macro;
 import wot.TeamBasesPanel.CapConfig;
+import wot.utils.Logger;
 
 /**
  * Capture progress bar
@@ -20,7 +21,7 @@ import wot.TeamBasesPanel.CapConfig;
  * possible todo:
  * ) Fix 2->3 caps breaks cycle transion. Remove quick fix.
  * ) Check if 1->2 caps breaks cycle transion.
- * ) Separate capture line for each capturer
+ * ) Separate capture line for each capturer. Hard.
  */
 
 /**
@@ -54,7 +55,7 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
     * Cant be inserted to constructor easily.
     * Cant be passed as argument externally easily.
     * Thus called straight by extended TeamBasesPanel class.
-    */ 
+    */
     public function start(startingPoints:Number, capColor:String):Void
     {
         m_capColor = capColor;
@@ -112,7 +113,7 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
         super.updateProgress(newPointsVal); // modifies m_point;
         
         //prepare text strings
-        m_macro.update(isSituationNormal, capSecondsLeft, timeLeftMinSec, capturersNum, newPointsVal);
+        m_macro.update(isSituationNormal, capSecondsLeft, timeLeftMinSec, capturersNum, newPointsVal, m_capSpeed.getSpeed());
         
         m_titleTF.htmlText = m_macro.getPrimaryText();   // Upper text field relative to capture bar
         m_timerTF.htmlText = m_macro.getSecondaryText(); // Lower text field relative to capture bar

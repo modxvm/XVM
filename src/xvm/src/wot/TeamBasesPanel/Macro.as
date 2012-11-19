@@ -16,7 +16,8 @@ class wot.TeamBasesPanel.Macro
     // updated
     private var m_timeLeftSec:String;
     private var m_timeLeftMinSec:String;
-    private var m_capturersNum:String
+    private var m_capturersNum:String;
+    private var m_speed:String;
     private var m_isSituationNormal:Boolean;
     private var m_points:String;
     
@@ -40,13 +41,16 @@ class wot.TeamBasesPanel.Macro
         m_extra = Locale.get(CapConfig.extra(m_capColor));
     }
     
-    public function update(isSituationNormal:Boolean, timeLeftSec:Number, timeLeftMinSec:String, capturersNum:Number, points:Number):Void
+    public function update(isSituationNormal:Boolean, timeLeftSec:Number, timeLeftMinSec:String,
+                            capturersNum:Number, points:Number, speed:Number):Void
     {
         this.m_isSituationNormal = isSituationNormal;
         this.m_timeLeftSec = timeLeftSec.toString();
         this.m_timeLeftMinSec = timeLeftMinSec;
         this.m_points = points.toString();
         this.m_capturersNum = capturersNum.toString();
+        speed = Math.round(speed * 10) / 10; // 1.333333333 -> 1.3
+        this.m_speed = speed.toString();
 
         // Print "3" or "3+" capturers depending on config.
         if (CapConfig.appendPlus && m_capturersNum == "3")
@@ -88,6 +92,7 @@ class wot.TeamBasesPanel.Macro
         text = stringReplace("{{tanks}}", m_capturersNum, text);
         text = stringReplace("{{time}}", m_timeLeftMinSec, text);
         text = stringReplace("{{time-sec}}", m_timeLeftSec, text);
+        text = stringReplace("{{speed}}", m_speed, text);
         text = stringReplace("{{points}}", m_points, text);
         
         return text;
