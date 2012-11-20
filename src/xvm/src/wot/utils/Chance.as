@@ -19,6 +19,8 @@ class wot.utils.Chance
 
     private static var battleTier: Number = 0;
 
+	public static var lastChances: Object;
+	
     public static function ShowChance(tf: TextField, showExp: Boolean): String
     {
         var teamsCount: Object = CalculateTeamPlayersCount();
@@ -47,6 +49,8 @@ class wot.utils.Chance
                 var chX2 = GetChance(ChanceFuncX2);
                 htmlText += " | Exp: " + FormatChangeText("", chX1) + ", " + FormatChangeText("", chX2) + " T=" + battleTier;
             }
+			lastChances = { g: chG.percentF, t: chT.percentF };
+			
         }
 
         tf.htmlText = htmlText;
@@ -199,7 +203,8 @@ class wot.utils.Chance
             ally_value: Math.round(ally),
             enemy_value: Math.round(enemy),
             percent: Chance.NormalizeResult(ally, enemy),
-            raw: ally / (ally + enemy) * 100
+            raw: ally / (ally + enemy) * 100,
+			percentF: Chance.NormalizeResultF(ally, enemy)
         };
     }
 
@@ -207,6 +212,11 @@ class wot.utils.Chance
     private static function NormalizeResult(a, b)
     {
         return Math.round(Math.max(0.05, Math.min(0.95, (0.5 + (a / (a + b) - 0.5) * 5.0))) * 100);
+    }
+	
+	private static function NormalizeResultF(a, b)
+    {
+        return Math.round(1000*Math.max(0.05, Math.min(0.95, (0.5 + (a / (a + b) - 0.5) * 5.0))) * 100)/1000;
     }
 
     private static function GuessBattleTier(): Number

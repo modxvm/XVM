@@ -44,7 +44,9 @@ class com.xvm.JSON {
     return s;
   }
 
-  public static function stringify(arg, indent:String):String {
+  public static function stringify(arg, indent:String, compact:Boolean):String {
+
+  if (compact == undefined) compact = false;
 
   var c, i, l, s = '', v;
 
@@ -55,36 +57,38 @@ class com.xvm.JSON {
   case 'movieclip':
   case 'object':
       if (maxDepth && maxDepth > 0 && curDepth >= maxDepth)
-        return stringify(arg.toString());
+        return stringify(arg.toString(), "", compact);
 
       curDepth++;
       if (arg) {
           if (arg instanceof Array) {
               var len = arg.length;
               for (i = 0; i < len; ++i) {
-                  v = stringify(arg[i], indent + "  ");
+                  v = stringify(arg[i], compact ? "" : indent + "  ", compact);
                   if (s) {
-                      s += ',\n';
+                      s += compact ? ',' : ',\n';
                   }
-                  s += indent + "  " + v;
+                  s += compact ? v : indent + "  " + v;
               }
               curDepth--;
-              return '[\n' + s + '\n' + indent + ']';
+              return compact ? '[' + s + ']' : '[\n' + s + '\n' + indent + ']';
           } else if (typeof arg.toString != 'undefined') {
               for (i in arg) {
                   v = arg[i];
                   if (typeof v != 'undefined' && typeof v != 'function') {
-                      v = stringify(v, indent + "  ");
+                      v = stringify(v, compact ? "" : indent + "  ", compact);
                       if (s) {
-                          s += ',\n';
+                          s += compact ? ',' : ',\n';
                       }
-                      s += indent + "  " + stringify(i, indent + "  ") + ': ' + v;
+                      s += compact ?
+					       stringify(i, "", true) + ':' + v :
+						   indent + "  " + stringify(i, indent + "  ") + ': ' + v;
                   }
               }
               curDepth--;
               return '{' +
                 (arg instanceof MovieClip || arg instanceof TextField ? "// " + arg.toString() : "") +
-                '\n' + s + '\n' + indent + '}';
+			    (compact ? s + '}' : '\n' + s + '\n' + indent + '}');
           }
       }
       curDepth--;

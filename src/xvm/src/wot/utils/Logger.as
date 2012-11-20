@@ -11,9 +11,13 @@ class wot.utils.Logger
 
   public static var dummy; // avoid import warning
 
-  public static function add(str: String)
+  public static function add(str: String) {
+	send("[" + Utils.padLeft(String(counter++), 3, '0') + "] " + str, Defines.COMMAND_LOG);
+  }
+
+  public static function send(str: String, cmd: String)
   {
-    var a:Array = ("[" + Utils.padLeft(String(counter++), 3, '0') + "] " + str).split("");
+    var a:Array = str.split("");
     var s:String = "";
     var a_length:Number = a.length;
     for (var i = 0; i < a_length; ++i)
@@ -24,9 +28,7 @@ class wot.utils.Logger
     }
     s = s.length.toString(16) + "," + s;
 
-    //s = LZW.compress(s);
-    
-    var command:String = Defines.COMMAND_LOG + " ";
+    var command:String = cmd + " ";
     var max_len:Number = Defines.MAX_PATH - command.length;
     var p:LoadVars = new LoadVars();
     while (s.length > max_len)
@@ -45,4 +47,5 @@ class wot.utils.Logger
       depth = 10;
     add((name || "[obj]") + ": " + com.xvm.JSON.stringifyDepth(obj, depth));
   }
+  
 }

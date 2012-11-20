@@ -118,6 +118,11 @@ namespace wot
       Program.Debug(message);
     }
 
+    private static void LogStat(string message)
+    {
+        Program.LogStat(message);
+    }
+
     private static string GetVersion()
     {
       string wotVersion = "RU";
@@ -293,6 +298,7 @@ namespace wot
 
           // XP send filename in lowercase, W7 in uppercase. Make them both the same.
           String command = Path.GetFileName(filename).ToUpper();
+
           if (_command == command)
           {
             if (!string.IsNullOrEmpty(_result))
@@ -320,6 +326,12 @@ namespace wot
           switch (command)
           {
             case "@LOG": // args - encoded log string
+              logDestination = LogDestination.Log;
+              ProcessLog(parameters);
+              break;
+
+            case "@LOGSTAT": // args - encoded log string
+              logDestination = LogDestination.Stats;
               ProcessLog(parameters);
               break;
 
@@ -847,6 +859,9 @@ namespace wot
 
     private int logLength = 0;
     private string logString = "";
+    
+    enum LogDestination {Log, Stats};
+    private LogDestination logDestination;
 
     private void ProcessLog(string parameters)
     {
@@ -890,11 +905,15 @@ namespace wot
           byte b = Convert.ToByte(logString.Substring(i, 2), 16);
           buf.Add(b);
         }
-        Log(Encoding.UTF8.GetString(buf.ToArray()));
+
+        if (logDestination == LogDestination.Log)
+            Log(Encoding.UTF8.GetString(buf.ToArray()));
+        else
+            LogStat(Encoding.UTF8.GetString(buf.ToArray()));
       }
       catch (Exception ex)
       {
-        Log("Error decoding @LOG string: " + Encoding.ASCII.GetString(buf.ToArray()));
+        Log("Error decoding " + (logDestination == LogDestination.Stats ? @"LOGSTAT" : "@LOG") + " string: " + Encoding.ASCII.GetString(buf.ToArray()));
         Debug(logString);
         Debug(ex.ToString());
       }

@@ -1,6 +1,7 @@
 import wot.utils.Config;
 import wot.utils.Chance;
 import wot.utils.GlobalEventDispatcher;
+import wot.utils.StatsLogger;
 
 class wot.battleloading.WinChances
 {
@@ -31,6 +32,7 @@ class wot.battleloading.WinChances
             s_chanceField._width += 300;
             s_chanceField._x -= 150;
             s_chanceText = Chance.ShowChance(s_chanceField, Config.s_config.battleLoading.showChancesExp);
+			StatsLogger.saveStatistics("chance", Chance.lastChances);
         }
         if (s_chanceField.htmlText != s_chanceText)
         {

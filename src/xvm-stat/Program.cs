@@ -80,6 +80,11 @@ namespace wot
       Log(message, true);
     }
 
+    public static void LogStat(string message)
+    {
+        File.AppendAllText("XVM-stat.log", message + Environment.NewLine);
+    }
+
     private static bool CheckArgs(string[] args)
     {
       Debug("Processing command line arguments: " + String.Join(" ", args));

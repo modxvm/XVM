@@ -1,4 +1,4 @@
-﻿import wot.utils.Logger;
+﻿import wot.utils.StatsLogger;
 
 class wot.FinalStatistic.FinalStatisticForm extends net.wargaming.hangar.FinalStatistic.FinalStatisticForm
 {
@@ -6,11 +6,11 @@ class wot.FinalStatistic.FinalStatisticForm extends net.wargaming.hangar.FinalSt
     function FinalStatisticForm()
     {
         super();
-        Logger.add("FinalStatisticForm::ctor()");
     }
+	
     function setCommonData(data)
     {
-        Logger.addObject(data, "FinalStatisticForm::setCommonData(data)", 3);
+		StatsLogger.saveStatistics("results", data);
         super.setCommonData(data);
     }
 }
