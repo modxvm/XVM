@@ -1,6 +1,7 @@
 ﻿import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.GlobalEventDispatcher;
+import wot.utils.StatData;
 import wot.utils.StatLoader;
 import wot.utils.StatsLogger;
 import wot.utils.Utils;
@@ -21,6 +22,7 @@ class wot.FinalStatistic.FinalStatisticForm extends net.wargaming.hangar.FinalSt
 
         save_data_pending = false;
 
+        StatData.s_loaded = false;
         winChances = new WinChances(this);
         GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
         Config.LoadConfig("FinalStatisticForm.as");

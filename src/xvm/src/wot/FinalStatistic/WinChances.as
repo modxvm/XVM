@@ -29,7 +29,7 @@ class wot.FinalStatistic.WinChances
         s_chanceField = form_mc.createTextField("s_chanceField", form_mc.getNextHighestDepth(), 0, -26, form_mc._width, 26);
         s_chanceField.antiAliasType = "advanced";
         s_chanceField.html = true;
-        s_chanceField.filters = [new flash.filters.DropShadowFilter(1, 90, 0, 100, 5, 5, 1, 3) ];
+        s_chanceField.filters = [new flash.filters.DropShadowFilter(1, 90, 0, 100, 3, 3, 2, 3) ];
 
         s_chanceField.htmlText = "<p align='center'><font face='$TitleFont' size='18' color='#D8D8C8'>" +
             Chance.GetChanceText(Config.s_config.statisticForm.showChancesExp) +
