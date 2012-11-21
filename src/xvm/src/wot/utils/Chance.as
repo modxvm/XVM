@@ -19,7 +19,7 @@ class wot.utils.Chance
 
     private static var battleTier: Number = 0;
 
-	public static var lastChances: Object;
+    public static var lastChances: Object = null;
 	
     public static function ShowChance(tf: TextField, showExp: Boolean): String
     {
@@ -40,6 +40,7 @@ class wot.utils.Chance
             htmlText += "<font color='#FF8080'>" + Locale.get("Chance error") + "[T]: " + chG.error + "</font>";
         else
         {
+            lastChances = { g: chG.percentF, t: chT.percentF };
             htmlText += Locale.get("Chance to win") + ": " +
                 FormatChangeText(Locale.get("Global"), chG) + ", " +
                 FormatChangeText(Locale.get("Per-vehicle"), chT);
@@ -48,9 +49,9 @@ class wot.utils.Chance
                 var chX1 = GetChance(ChanceFuncX1);
                 var chX2 = GetChance(ChanceFuncX2);
                 htmlText += " | Exp: " + FormatChangeText("", chX1) + ", " + FormatChangeText("", chX2) + " T=" + battleTier;
+                lastChances.X1 = chX1.percentF;
+                lastChances.X2 = chX2.percentF;
             }
-			lastChances = { g: chG.percentF, t: chT.percentF };
-			
         }
 
         tf.htmlText = htmlText;
@@ -204,7 +205,7 @@ class wot.utils.Chance
             enemy_value: Math.round(enemy),
             percent: Chance.NormalizeResult(ally, enemy),
             raw: ally / (ally + enemy) * 100,
-			percentF: Chance.NormalizeResultF(ally, enemy)
+            percentF: Chance.NormalizeResultF(ally, enemy)
         };
     }
 

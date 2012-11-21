@@ -1,7 +1,7 @@
+import flash.filters.DropShadowFilter;
 import wot.utils.Config;
 import wot.utils.Chance;
 import wot.utils.GlobalEventDispatcher;
-import wot.utils.StatsLogger;
 
 class wot.FinalStatistic.WinChances
 {
@@ -19,28 +19,26 @@ class wot.FinalStatistic.WinChances
     {
         GlobalEventDispatcher.removeEventListener("stat_loaded", this, onStatLoaded);
 
-        if (Config.s_config.battleLoading.showChances)
+        if (Config.s_config.statisticForm.showChances)
             showWinChances();
     }
 
     private function showWinChances()
     {
-        //wot.utils.Logger.addObject(form_mc, "form_mc", 2);
-/*        if (!s_chanceField)
-        {
-            s_chanceField = form_mc.battleText;
-            s_chanceField.html = true;
-            s_chanceField._width += 300;
-            s_chanceField._x -= 150;
-            s_chanceText = Chance.ShowChance(s_chanceField, Config.s_config.battleLoading.showChancesExp);
-            if (Config.s_config.rating.enableStatisticsLog == true)
-                StatsLogger.saveStatistics("chance", Chance.lastChances);
-        }
-        if (s_chanceField.htmlText != s_chanceText)
-        {
-            //wot.utils.Logger.add(s_chanceField.htmlText);
-            s_chanceField.html = true;
-            s_chanceField.htmlText = s_chanceText;
-        }*/
+        //wot.utils.Logger.addObject(_root.windowLayout, "_root.windowLayout", 3);
+        //wot.utils.Logger.addObject(wot.utils.StatData.s_data, "s_data(2)", 3);
+        if (s_chanceField)
+            return;
+
+        s_chanceField = form_mc.createTextField("s_chanceField", form_mc.getNextHighestDepth(), 0, -30, form_mc._width, 30);
+        s_chanceField.antiAliasType = "advanced";
+        var tf: TextFormat = new TextFormat("$TextFont", 20, 0xEBEBEB, false, false, false, "", "", "center");
+        s_chanceField.setNewTextFormat(tf);
+        s_chanceField.filters = [ new DropShadowFilter(0, 0, 0, 1, 5, 5, 3, 3) ];
+
+        s_chanceField.text = "ABCDE 012345 >>>";
+        s_chanceText = Chance.ShowChance(s_chanceField, Config.s_config.statisticForm.showChancesExp);
+        
+        //wot.utils.Logger.add("s_chanceText: " + s_chanceText);
     }
 }

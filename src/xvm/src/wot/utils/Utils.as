@@ -157,7 +157,7 @@ class wot.utils.Utils
     public static function GetPlayerName(fullplayername: String): String
     {
         var pos = fullplayername.indexOf("[");
-        return (pos < 0) ? fullplayername : fullplayername.slice(0, pos);
+        return (pos < 0) ? fullplayername : Utils.trim(fullplayername.slice(0, pos));
     }
 
     public static function GetNormalizedPlayerName(fullplayername: String): String

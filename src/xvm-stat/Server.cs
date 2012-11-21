@@ -669,13 +669,13 @@ namespace wot
           CacheEntry currentMember = cache[cacheKey];
           if (currentMember.notInDb)
             Log(string.Format("NOT IN DB - {0} {1} {2}", pd.id, pd.name, pd.vn));
-          else
+/*          else
           {
             Log(string.Format("CACHE - {0} {1} {2}: eff={3} battles={4} wins={5} t-battles={6} t-wins={7}",
               pd.id, pd.name, pd.vn,
               currentMember.stat.e, currentMember.stat.b, currentMember.stat.w,
               currentMember.stat.tb, currentMember.stat.tw));
-          }
+          }*/
           continue;
         }
 
@@ -859,7 +859,7 @@ namespace wot
 
     private int logLength = 0;
     private string logString = "";
-    
+
     enum LogDestination {Log, Stats};
     private LogDestination logDestination;
 

@@ -42,7 +42,7 @@ class wot.utils.StatLoader
       s_players_count++;
     StatData.s_data[pname] = {
       playerId: playerId,
-      fullPlayerName: playerName,
+      fullPlayerName: playerName.split(" ").join(""),
       label: pname,
       clanAbbrev: clan,
       vehicle: vehicle,

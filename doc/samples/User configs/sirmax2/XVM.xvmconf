@@ -20,7 +20,7 @@
   "rating": {
     "showPlayersStatistics": true,
     "loadEnemyStatsInFogOfWar": true,
-    "enableStatisticsLog": false
+    "enableStatisticsLog": true
   },
   "battleLoading": {
     "showChances": true,
