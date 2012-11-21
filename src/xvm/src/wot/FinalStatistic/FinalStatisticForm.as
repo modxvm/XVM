@@ -58,9 +58,6 @@ class wot.FinalStatistic.FinalStatisticForm extends net.wargaming.hangar.FinalSt
                 StatLoader.AddPlayerData(d.playerId, d.playerName, d.vehicleName, d.tankIcon, Defines.TEAM_ENEMY, false);
             }
 
-            //wot.utils.Logger.addObject(data, "data", 2);
-            //wot.utils.Logger.addObject(wot.utils.StatData.s_data, "s_data(1)", 3);
-
             StatLoader.StartLoadData(Defines.COMMAND_RUN);
         }
     }

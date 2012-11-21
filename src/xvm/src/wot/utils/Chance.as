@@ -23,39 +23,47 @@ class wot.utils.Chance
 	
     public static function ShowChance(tf: TextField, showExp: Boolean): String
     {
+        var text = GetChanceText(showExp);
+        if (text == null)
+            return tf.text;
+        tf.htmlText = tf.text == "" ? "" : tf.text + " | " + text;
+        return tf.htmlText;
+    }
+
+    public static function GetChanceText(showExp: Boolean):String
+    {
         var teamsCount: Object = CalculateTeamPlayersCount();
         // only equal and non empty team supported
         if (teamsCount.ally != teamsCount.enemy || teamsCount.ally == 0)
-            return tf.text;
+            return null;
 
         Chance.battleTier = Chance.GuessBattleTier();
 
         var chG = GetChance(ChanceFuncG);
         var chT = GetChance(ChanceFuncT);
 
-        var htmlText = tf.text == "" ? "" : tf.text + " | ";
+        var text = "";
         if (chG.error)
-            htmlText += "<font color='#FF8080'>" + Locale.get("Chance error") + "[G]: " + chG.error + "</font>";
+            text += "<font color='#FF8080'>" + Locale.get("Chance error") + "[G]: " + chG.error + "</font>";
         else if (chT.error)
-            htmlText += "<font color='#FF8080'>" + Locale.get("Chance error") + "[T]: " + chG.error + "</font>";
+            text += "<font color='#FF8080'>" + Locale.get("Chance error") + "[T]: " + chG.error + "</font>";
         else
         {
             lastChances = { g: chG.percentF, t: chT.percentF };
-            htmlText += Locale.get("Chance to win") + ": " +
+            text += Locale.get("Chance to win") + ": " +
                 FormatChangeText(Locale.get("Global"), chG) + ", " +
                 FormatChangeText(Locale.get("Per-vehicle"), chT);
             if (showExp)
             {
                 var chX1 = GetChance(ChanceFuncX1);
                 var chX2 = GetChance(ChanceFuncX2);
-                htmlText += " | Exp: " + FormatChangeText("", chX1) + ", " + FormatChangeText("", chX2) + " T=" + battleTier;
+                text += " | Exp: " + FormatChangeText("", chX1) + ", " + FormatChangeText("", chX2) + " T=" + battleTier;
                 lastChances.X1 = chX1.percentF;
                 lastChances.X2 = chX2.percentF;
             }
         }
 
-        tf.htmlText = htmlText;
-        return tf.htmlText;
+        return text;
     }
 
     // PRIVATE

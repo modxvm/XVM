@@ -1,4 +1,3 @@
-import flash.filters.DropShadowFilter;
 import wot.utils.Config;
 import wot.utils.Chance;
 import wot.utils.GlobalEventDispatcher;
@@ -7,7 +6,6 @@ class wot.FinalStatistic.WinChances
 {
     private var form_mc:MovieClip;
     private static var s_chanceField: TextField = null;
-    private static var s_chanceText: String;
 
     public function WinChances(form_mc)
     {
@@ -25,20 +23,16 @@ class wot.FinalStatistic.WinChances
 
     private function showWinChances()
     {
-        //wot.utils.Logger.addObject(_root.windowLayout, "_root.windowLayout", 3);
-        //wot.utils.Logger.addObject(wot.utils.StatData.s_data, "s_data(2)", 3);
         if (s_chanceField)
             return;
 
-        s_chanceField = form_mc.createTextField("s_chanceField", form_mc.getNextHighestDepth(), 0, -30, form_mc._width, 30);
+        s_chanceField = form_mc.createTextField("s_chanceField", form_mc.getNextHighestDepth(), 0, -26, form_mc._width, 26);
         s_chanceField.antiAliasType = "advanced";
-        var tf: TextFormat = new TextFormat("$TextFont", 20, 0xEBEBEB, false, false, false, "", "", "center");
-        s_chanceField.setNewTextFormat(tf);
-        s_chanceField.filters = [ new DropShadowFilter(0, 0, 0, 1, 5, 5, 3, 3) ];
+        s_chanceField.html = true;
+        s_chanceField.filters = [new flash.filters.DropShadowFilter(1, 90, 0, 100, 5, 5, 1, 3) ];
 
-        s_chanceField.text = "ABCDE 012345 >>>";
-        s_chanceText = Chance.ShowChance(s_chanceField, Config.s_config.statisticForm.showChancesExp);
-        
-        //wot.utils.Logger.add("s_chanceText: " + s_chanceText);
+        s_chanceField.htmlText = "<p align='center'><font face='$TitleFont' size='18' color='#D8D8C8'>" +
+            Chance.GetChanceText(Config.s_config.statisticForm.showChancesExp) +
+            "</font></p>";
     }
 }
