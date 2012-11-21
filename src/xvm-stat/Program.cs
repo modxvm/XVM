@@ -82,7 +82,7 @@ namespace wot
 
     public static void LogStat(string message)
     {
-        File.AppendAllText("XVM-stat.log", message + Environment.NewLine);
+        File.AppendAllText("xvm-stat.log", message + Environment.NewLine);
     }
 
     private static bool CheckArgs(string[] args)
@@ -231,7 +231,7 @@ namespace wot
     {
       try
       {
-        AssemblyInformationalVersionAttribute attribute = 
+        AssemblyInformationalVersionAttribute attribute =
            (AssemblyInformationalVersionAttribute)Assembly.GetExecutingAssembly()
            .GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute), false)[0];
 

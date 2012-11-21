@@ -80,6 +80,7 @@ private function RefreshCommonPage():void
         section = Config.s_config.rating;
         this.p_rating.v_showPlayersStatistics.value = section.showPlayersStatistics;
         this.p_rating.v_loadEnemyStatsInFogOfWar.value = section.loadEnemyStatsInFogOfWar;
+        this.p_rating.v_enableStatisticsLog.value = section.enableStatisticsLog;
     }
     catch (ex:Error)
     {

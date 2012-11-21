@@ -78,7 +78,8 @@ public class DefaultConfig
       },
       rating: {
         showPlayersStatistics: true,     // Global switch. Handles whole statisctics module.
-        loadEnemyStatsInFogOfWar: true   // Load players data in "fog of war".
+        loadEnemyStatsInFogOfWar: true,  // Load players data in "fog of war".
+        enableStatisticsLog: false       // Enable saving statistics to "xvm-stat.log" file
       },
       battleLoading: {
         // Show clock at Battle Loading Screen.

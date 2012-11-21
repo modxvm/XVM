@@ -1,7 +1,9 @@
 ﻿intrinsic class net.wargaming.hangar.FinalStatistic.FinalStatisticForm extends gfx.core.UIComponent
 {
+    function get data();
     function FinalStatisticForm();
     function setCommonData(data);
+
 /*    var _parent, __arenaUniqueId, tabs_mc, view_mc, vehicleSelector, __get__arenaUniqueId, __get__data;
     function FinalStatisticForm()
     {

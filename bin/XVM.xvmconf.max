@@ -19,7 +19,8 @@
   },
   "rating": {
     "showPlayersStatistics": true,
-    "loadEnemyStatsInFogOfWar": true
+    "loadEnemyStatsInFogOfWar": true,
+    "enableStatisticsLog": true
   },
   "battleLoading": {
     "showChances": true,

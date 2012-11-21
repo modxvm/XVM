@@ -7,13 +7,13 @@ cd $(dirname $(realpath $(cygpath --unix $0)))
 [ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/home/games/WoT
 CURRENT_DIRECTORY=`pwd`
 
-#SAMPLE_REPLAY=squad_tk.wotreplay
+SAMPLE_REPLAY=squad_tk.wotreplay
 #SAMPLE_REPLAY=6thsence.wotreplay
 #SAMPLE_REPLAY=tk.wotreplay
 #SAMPLE_REPLAY=fire.wotreplay
 #SAMPLE_REPLAY=fall.wotreplay
 #SAMPLE_REPLAY=hits.wotreplay
-SAMPLE_REPLAY=hunt.wotreplay
+#SAMPLE_REPLAY=hunt.wotreplay
 #SAMPLE_REPLAY=13x13.wotreplay
 #SAMPLE_REPLAY=dead_with_hp.wotreplay
 #-SAMPLE_REPLAY=fogofwar.wotreplay

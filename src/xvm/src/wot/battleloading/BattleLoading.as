@@ -28,7 +28,7 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
         super();
 
         Utils.TraceXvmModule("BattleLoading");
-		
+
         // Components
         winChances = new WinChances(form_mc); // Winning chance info above players list.
         tipField   = new TipField(form_mc);   // Information field below players list.
@@ -36,13 +36,14 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
 
         GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
         Config.LoadConfig("BattleLoading.as");
-		GlobalEventDispatcher.addEventListener("stat_loaded", this, onStatLoaded);
+        GlobalEventDispatcher.addEventListener("stat_loaded", this, onStatLoaded);
     }
-	
+
     private function onStatLoaded()
     {
         GlobalEventDispatcher.removeEventListener("stat_loaded", this, onStatLoaded);
-		StatsLogger.saveStatistics("setup", StatData.s_data);
+        if (Config.s_config.rating.enableStatisticsLog == true)
+            StatsLogger.saveStatistics("setup", StatData.s_data);
     }
 
     // override

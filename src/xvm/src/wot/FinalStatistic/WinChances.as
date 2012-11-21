@@ -3,7 +3,7 @@ import wot.utils.Chance;
 import wot.utils.GlobalEventDispatcher;
 import wot.utils.StatsLogger;
 
-class wot.battleloading.WinChances
+class wot.FinalStatistic.WinChances
 {
     private var form_mc:MovieClip;
     private static var s_chanceField: TextField = null;
@@ -25,7 +25,8 @@ class wot.battleloading.WinChances
 
     private function showWinChances()
     {
-        if (!s_chanceField)
+        //wot.utils.Logger.addObject(form_mc, "form_mc", 2);
+/*        if (!s_chanceField)
         {
             s_chanceField = form_mc.battleText;
             s_chanceField.html = true;
@@ -40,6 +41,6 @@ class wot.battleloading.WinChances
             //wot.utils.Logger.add(s_chanceField.htmlText);
             s_chanceField.html = true;
             s_chanceField.htmlText = s_chanceText;
-        }
+        }*/
     }
 }

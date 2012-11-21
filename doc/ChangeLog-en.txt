@@ -1,4 +1,8 @@
-﻿XVM-3.1.2-pre2:
+﻿XVM-3.1.2-pre3:
+  * new option: "rating"/"enableStatisticsLog" allow to enable saving statistics
+    to "xvm-stat.log" file
+
+XVM-3.1.2-pre2:
   * added capture bar mod
   * fixed standard markers mode
   * do not calculate friendly fire in hit-log
