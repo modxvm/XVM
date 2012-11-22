@@ -28,14 +28,24 @@ class wot.FinalStatistic.WinChances
             if (!Utils.startsWith("battleResultsWnd", i))
                 continue;
             var s_chanceField = _root.windowLayout[i].titleBtn.textField;
+            var s_text = null;
             form_mc.onEnterFrame = function()
             {
                 if (s_chanceField.htmlText == undefined)
                     continue;
-                delete this.onEnterFrame;
-                s_chanceField.html = true;
-                s_chanceField.htmlText += " | <font face='$TitleFont' size='18' color='#D8D8C8'>" +
-                    Chance.GetChanceText(Config.s_config.statisticForm.showChancesExp) + "</font>";
+                //delete this.onEnterFrame;
+                if (s_text == null)
+                {
+                    s_chanceField.html = true;
+                    s_chanceField.htmlText += "<tab><tab><tab><font face='$TitleFont' size='18' color='#E9E7D6'>" +
+                        Chance.GetChanceText(Config.s_config.statisticForm.showChancesExp) + "</font>";
+                    s_text = s_chanceField.htmlText;
+                }
+                if (s_chanceField.htmlText != s_text)
+                {
+                    s_chanceField.htmlText = s_text;
+                    s_text = s_chanceField.htmlText;
+                }
             }
         }
     }
