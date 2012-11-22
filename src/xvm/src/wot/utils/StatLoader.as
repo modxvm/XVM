@@ -28,7 +28,7 @@ class wot.utils.StatLoader
   private static var timeouts = [ 300, 500, 700, 1500, 2000 ];
 
   public static function AddPlayerData(playerId: Number, playerName: String, vehicle: String, icon: String,
-    team: Number, selected: Boolean)
+    team: Number, selected: Boolean, realVehicleId: Number)
   {
     if (playerId <= 0 || !playerName)
       return;
@@ -49,6 +49,7 @@ class wot.utils.StatLoader
       vehicleId: VehicleInfo.getVehicleId(icon),
       icon: icon,
       team: team,
+	  realVehicleId: realVehicleId ? realVehicleId : 0,
       selected: selected,
       loaded: StatData.s_data[pname] ? true : false,
       stat: StatData.s_data[pname] ? StatData.s_data[pname].stat : undefined

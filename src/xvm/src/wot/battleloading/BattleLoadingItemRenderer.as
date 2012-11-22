@@ -55,7 +55,7 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
     {
         if (Config.s_config.rating.showPlayersStatistics)
         {
-            StatLoader.AddPlayerData(data.id, data.label, data.vehicle, data.icon, team, selected);
+            StatLoader.AddPlayerData(data.id, data.label, data.vehicle, data.icon, team, selected, data.playerID);
             GlobalEventDispatcher.addEventListener("stat_loaded", this, StatLoadedCallback);
             if (!StatData.s_loaded && StatLoader.s_players_count === 30)
                 StatLoader.StartLoadData(Defines.COMMAND_RUN);
