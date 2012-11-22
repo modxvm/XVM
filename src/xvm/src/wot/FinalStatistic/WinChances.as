@@ -34,7 +34,7 @@ class wot.FinalStatistic.WinChances
                     continue;
                 delete this.onEnterFrame;
                 s_chanceField.html = true;
-                s_chanceField.htmlText += " | <font size='18'>" +
+                s_chanceField.htmlText += " | <font face='$TitleFont' size='18' color='#D8D8C8'>" +
                     Chance.GetChanceText(Config.s_config.statisticForm.showChancesExp) + "</font>";
             }
         }
