@@ -1,11 +1,11 @@
 import wot.utils.Config;
 import wot.utils.Chance;
 import wot.utils.GlobalEventDispatcher;
+import wot.utils.Utils;
 
 class wot.FinalStatistic.WinChances
 {
     private var form_mc:MovieClip;
-    private static var s_chanceField: TextField = null;
 
     public function WinChances(form_mc)
     {
@@ -23,16 +23,20 @@ class wot.FinalStatistic.WinChances
 
     private function showWinChances()
     {
-        if (s_chanceField)
-            return;
-
-        s_chanceField = form_mc.createTextField("s_chanceField", form_mc.getNextHighestDepth(), 0, -26, form_mc._width, 26);
-        s_chanceField.antiAliasType = "advanced";
-        s_chanceField.html = true;
-        s_chanceField.filters = [new flash.filters.DropShadowFilter(1, 90, 0, 100, 3, 3, 2, 3) ];
-
-        s_chanceField.htmlText = "<p align='center'><font face='$TitleFont' size='18' color='#D8D8C8'>" +
-            Chance.GetChanceText(Config.s_config.statisticForm.showChancesExp) +
-            "</font></p>";
+        for (var i in _root.windowLayout)
+        {
+            if (!Utils.startsWith("battleResultsWnd", i))
+                continue;
+            var s_chanceField = _root.windowLayout[i].titleBtn.textField;
+            form_mc.onEnterFrame = function()
+            {
+                if (s_chanceField.htmlText == undefined)
+                    continue;
+                delete this.onEnterFrame;
+                s_chanceField.html = true;
+                s_chanceField.htmlText += " | <font size='18'>" +
+                    Chance.GetChanceText(Config.s_config.statisticForm.showChancesExp) + "</font>";
+            }
+        }
     }
 }
