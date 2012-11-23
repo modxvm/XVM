@@ -1,6 +1,6 @@
---- orig\PlayersPanel.xml	2012-10-24 22:02:24.094954800 +0300
-+++ PlayersPanel.xml	2012-10-24 22:02:24.313355200 +0300
-@@ -60639,8 +60639,8 @@
+--- orig\PlayersPanel.xml	2012-11-23 13:52:44.393494400 +0200
++++ PlayersPanel.xml	2012-11-23 13:52:44.763498100 +0200
+@@ -60822,8 +60822,8 @@
                <String value="charAt"/>
                <String value=" "/>
                <String value="\"/>
@@ -11,7 +11,7 @@
                <String value="&#10;"/>
                <String value="&#13;"/>
                <String value="&#9;"/>
-@@ -64645,7 +64645,7 @@
+@@ -64828,7 +64828,7 @@
          <actions>
            <PushData>
              <items>
@@ -20,7 +20,7 @@
              </items>
            </PushData>
            <GetVariable/>
-@@ -64671,7 +64671,7 @@
+@@ -64854,7 +64854,7 @@
          <actions>
            <PushData>
              <items>
@@ -29,7 +29,7 @@
              </items>
            </PushData>
            <GetVariable/>
-@@ -64801,7 +64801,7 @@
+@@ -64984,7 +64984,7 @@
          <actions>
            <PushData>
              <items>

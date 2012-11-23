@@ -1,7 +1,7 @@
---- orig\gui_sounds_new.xml	2012-11-07 17:08:37.452910200 +0200
-+++ gui_sounds_new.xml	2012-11-07 17:09:37.431110800 +0200
+--- orig\gui_sounds.xml	2012-11-07 17:08:37.452910200 +0200
++++ gui_sounds.xml	2012-11-07 17:09:37.431110800 +0200
 @@ -1,6 +1,7 @@
- <gui_sounds_new.xml>
+ <gui_sounds.xml>
    <controls>
      <default>
 +      <sixthsense>/xvm/xvm/sixthsense</sixthsense>
