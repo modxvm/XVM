@@ -4,7 +4,7 @@ cd $(dirname $(realpath $(cygpath --unix $0)))
 
 ./deploy.sh
 
-[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/home/games/WoT
+[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/home/games/WoT-CT
 CURRENT_DIRECTORY=`pwd`
 
 #SAMPLE_REPLAY=squad_tk.wotreplay
@@ -17,6 +17,8 @@ CURRENT_DIRECTORY=`pwd`
 #SAMPLE_REPLAY=13x13.wotreplay
 #SAMPLE_REPLAY=dead_with_hp.wotreplay
 #-SAMPLE_REPLAY=fogofwar.wotreplay
+#SAMPLE_REPLAY=cap.wotreplay
+SAMPLE_REPLAY=markers.wotreplay
 #SAMPLE_REPLAY=test.wotreplay
 
 cd "${WOT_DIRECTORY}"

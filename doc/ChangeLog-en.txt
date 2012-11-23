@@ -1,4 +1,7 @@
-﻿XVM-3.1.2:
+﻿XVM-3.2.0-test1:
+  * recompiled for WoT 0.8.2.CT1
+
+XVM-3.1.2:
   * added capture bar mod
   * fixed standard markers mode
   * do not calculate friendly fire in hit-log

@@ -6,6 +6,32 @@ class wot.utils.VehicleInfoData
 {
     public static var data:Object = {
         // unknown
+/*
+china_Ch04_T34_1
+china_Ch05_T34_2
+china_Ch06_Renault_NC31
+china_Ch07_Vickers_MkE_Type_BT26
+china_Ch08_Type97_Chi_Ha
+china_Ch09_M5
+china_Ch10_IS2
+china_Ch11_110
+china_Ch12_111_1_2_3
+china_Ch13_111_4_5
+china_Ch15_59_16
+china_Ch16_WZ_131
+china_Ch17_WZ131_1_WZ132
+china_Ch18_WZ_120
+china_Ch19_121
+china_Ch20_Type58
+china_Ch21_T34
+usa_A74_T1_E6
+usa_T21
+usa_T54E1
+usa_T57_58
+usa_T69
+usa_T71
+ussr_SU100Y
+*/
 
         // level 1
         germany_Ltraktor:               { level: 1,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
