@@ -23,6 +23,8 @@ class wot.FinalStatistic.FinalStatisticForm extends net.wargaming.hangar.FinalSt
         save_data_pending = false;
 
         StatData.s_loaded = false;
+        StatData.s_data = {};
+
         winChances = new WinChances(this);
         GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
         Config.LoadConfig("FinalStatisticForm.as");

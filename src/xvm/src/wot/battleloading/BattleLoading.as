@@ -29,6 +29,9 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
 
         Utils.TraceXvmModule("BattleLoading");
 
+        StatData.s_loaded = false;
+        StatData.s_data = {};
+
         // Components
         winChances = new WinChances(form_mc); // Winning chance info above players list.
         tipField   = new TipField(form_mc);   // Information field below players list.
