@@ -1,6 +1,3 @@
-/**
- * ...
- */
 class wot.TeamBasesPanel.CapBarModel.OneTankSpeed
 {
    /**

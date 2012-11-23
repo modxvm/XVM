@@ -1,11 +1,20 @@
---- orig\Minimap.xml	2012-11-05 20:55:45.725550000 +0400
-+++ Minimap.xml	2012-11-05 20:55:46.155550700 +0400
+--- orig\Minimap.xml	2012-11-24 03:05:22.872483200 +0400
++++ Minimap.xml	2012-11-24 03:05:23.368511600 +0400
 @@ -64172,7 +64172,7 @@
          <actions>
            <PushData>
              <items>
 -              <StackString value="net.wargaming.ingame.Minimap"/>
 +              <StackString value="wot.Minimap.Minimap"/>
+             </items>
+           </PushData>
+           <GetVariable/>
+@@ -64198,7 +64198,7 @@
+         <actions>
+           <PushData>
+             <items>
+-              <StackString value="net.wargaming.ingame.MinimapEntry"/>
++              <StackString value="wot.Minimap.MinimapEntry"/>
              </items>
            </PushData>
            <GetVariable/>

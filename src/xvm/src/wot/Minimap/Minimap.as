@@ -18,7 +18,7 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     function Minimap()
     {
         super();
-        //MARKERS_SCALING = MapConfig.iconScale;
+        MARKERS_SCALING = MapConfig.iconScale;
         Utils.TraceXvmModule("Minimap");
     }
 }
