@@ -72,7 +72,6 @@ private function RefreshCommonPage():void
         this.p_battle.v_showPostmortemTips.value = section.showPostmortemTips;
         this.p_battle.v_removePanelsModeSwitcher.value = section.removePanelsModeSwitcher;
         this.p_battle.v_highlightVehicleIcon.value = section.highlightVehicleIcon;
-        this.p_battle.v_hideXVMVersion.value = section.hideXVMVersion;
         this.p_battle.v_useStandardMarkers.value = section.useStandardMarkers;
         this.p_battle.v_clockFormat.value = section.clockFormat;
         this.p_battle.v_clanIconsFolder.value = section.clanIconsFolder;

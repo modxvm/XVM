@@ -14,7 +14,6 @@
     "showPostmortemTips": false,
     "removePanelsModeSwitcher": false,
     "highlightVehicleIcon": true,
-    "hideXVMVersion": false,
     "clockFormat": "",
     "useStandardMarkers": false,
     "clanIconsFolder": "../../../clanicons"

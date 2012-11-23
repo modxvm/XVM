@@ -1,7 +1,6 @@
 ﻿/**
  * Proxy class for vehicle marker components
  * Dispatches event for config loading if it is not loaded
- * Draws XVM version watermark
  */
 import gfx.core.UIComponent;
 import wot.utils.Config;
@@ -126,13 +125,9 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
 
         GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
 
-        // Don't draw watermark and hitlog in hangar
+        // Don't draw hitlog in hangar
         if (_root.loadingName != "hangar")
         {
-            // Draw watermark
-            if (!Config.s_config.battle.hideXVMVersion && !_global.xvmWatermark)
-                DrawXvmWatermark();
-
             if (Config.s_config.hitLog.visible && hitLog == null)
                 hitLog = new HitLog(Config.s_config.hitLog);
         }
@@ -315,19 +310,6 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
                 pendingCalls = [];
             pendingCalls.push( { func:func, args:args } );
         }
-    }
-
-    /**
-     * Draw XVM version at top left corner
-     */
-    function DrawXvmWatermark()
-    {
-        _global.xvmWatermark = true;
-        var wm = _root.createTextField("xvmWatermark", _root.getNextHighestDepth(), -1, -2, 100, 16);
-        wm.antiAliasType = "advanced";
-        wm.setNewTextFormat(new TextFormat("$FieldFont", 8, 0x808080, false, false, false, null, null, "left"));
-        wm._alpha = 50;
-        wm.text = "XVM v" + Defines.XVM_VERSION;
     }
 
     /**

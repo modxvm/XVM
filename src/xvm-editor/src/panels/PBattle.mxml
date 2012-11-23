@@ -9,7 +9,6 @@
     <c:LabeledCheckBox label="{resourceManager.getString('panels', 'showPostmortemTips')}" id="v_showPostmortemTips" config="battle.showPostmortemTips" change="onChange(event)"/>
     <c:LabeledCheckBox label="{resourceManager.getString('panels', 'removePanelsModeSwitcher')}" id="v_removePanelsModeSwitcher" config="battle.removePanelsModeSwitcher" change="onChange(event)"/>
     <c:LabeledCheckBox label="{resourceManager.getString('panels', 'highlightVehicleIcon')}" id="v_highlightVehicleIcon" config="battle.highlightVehicleIcon" change="onChange(event)"/>
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'hideXVMVersion')}" toolTip="{resourceManager.getString('panels', 'hideXVMVersionToolTip')}" id="v_hideXVMVersion" config="battle.hideXVMVersion" change="onChange(event)"/>
     <c:LabeledCheckBox label="{resourceManager.getString('panels', 'useStandardMarkers')}" id="v_useStandardMarkers" config="battle.useStandardMarkers" change="onChange(event)"/>
     <c:LabeledTextInput label="{resourceManager.getString('panels', 'clockFormat')}" toolTip="{resourceManager.getString('panels', 'clockFormatToolTip')}" id="v_clockFormat" config="battle.clockFormat" change="onChange(event)"/>
     <c:LabeledTextInput label="{resourceManager.getString('panels', 'clanIconsFolder')}" toolTip="{resourceManager.getString('panels', 'clanIconsFolderToolTip')}" id="v_clanIconsFolder" config="battle.clanIconsFolder" change="onChange(event)"/>

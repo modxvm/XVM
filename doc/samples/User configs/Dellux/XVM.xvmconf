@@ -98,7 +98,6 @@
   "editorVersion": "0.1.alpha1",
   "battle": {
     "mirroredVehicleIcons": false,
-    "hideXVMVersion": true,
     "showPostmortemTips": false,
     "useStandardMarkers": false,
     "removePanelsModeSwitcher": false

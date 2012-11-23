@@ -1,21 +1,19 @@
-﻿XVM-3.1.2-pre3:
-  * new option: "rating"/"enableStatisticsLog" allow to enable saving statistics
-    to "xvm-stat.log" file
-  * show chance to win on final statistic form
-
-XVM-3.1.2-pre2:
+﻿XVM-3.1.2:
   * added capture bar mod
   * fixed standard markers mode
   * do not calculate friendly fire in hit-log
   * improved default major color palette
   * new macros:
-      {{e}}, {{e:3}} - efficiency / 10 (save 1 char)
       {{name}} - player nickname without clan name
       {{clan}} - clan name with brackets (empty if no clan)
       {{vtype}} - vehicle type
       {{squad}} - value '1' for squadmates, empty for others (in markers)
+      {{e}}, {{e:3}} - efficiency / 10 (save 1 char)
   * new config section texts/vtype for changing vehicle types text
   * fixed display a marker for the tank with the dead crew
+  * new option: "rating"/"enableStatisticsLog" allow to enable saving statistics
+    to "xvm-stat.log" file
+  * show chance to win on final statistic form
 
 XVM-3.1.1:
   * bugfix
