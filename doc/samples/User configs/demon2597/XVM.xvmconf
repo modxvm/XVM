@@ -5,9 +5,9 @@
     "author": "demon2597",                        // автор конфига
     "description": "My settings for XVM",         // описание конфига
     "url": "http://www.koreanrandom.com/forum/topic/1384-xvm-configurations/", // адрес, где выкладываеются обновления конфига
-    "date": "05.11.2012",                       // дата последней модификации конфига
+    "date": "17.11.2012",                       // дата последней модификации конфига
     "gameVersion": "0.8.1",                     // поддерживаемая версия игры
-    "modMinVersion": "3.1.1"                    // минимально необходимая версия мода XVM
+    "modMinVersion": "3.1.2"                    // минимально необходимая версия мода XVM
   },
   // Блок общих параметров боевого интерфейса
   "battle": {
@@ -93,15 +93,15 @@
   },
   // Отображаемые строки {{turret}} маркера
   "turretMarkers": {
-    "highVulnerability": "\u0023", // Субъект имеет стоковую башню и топ орудие не может быть установлено. Субъект сильно уязвим.
-    "lowVulnerability": "\u0024"   // Субъект имеет стоковую башню и топ орудие может быть установлено. Субъект немного уязвим.
+    "highVulnerability": "<font face='XVM Symbol' size='23'>\u0023</font>", // Субъект имеет стоковую башню и топ орудие не может быть установлено. Субъект сильно уязвим.
+    "lowVulnerability": "<font face='XVM Symbol' size='23'>\u0024</font>"   // Субъект имеет стоковую башню и топ орудие может быть установлено. Субъект немного уязвим.
   },
   // Лог попаданий (счетчик своих попаданий)
   "hitLog": {
     "visible": true,     // переключатель вкл/выкл
     "x": 295,            // Позиция X
     "y": 7,              // Позиция Y
-    "w": 250,            // Ширина
+    "w": 280,            // Ширина
     "h": 500,            // Высота
     "lines": 20,          // Количество строк. Устаревшие данные выталкиваются.
     "direction": "down", // Направление лога: up - строки добавляются сверху поля, down - снизу
@@ -111,9 +111,9 @@
     "deadMarker": "\u0029",
     "blowupMarker": "\u0028",
     // Формат последнего попадания (допускаются макроподстановки, см. readme-ru.txt)
-    "formatHeader": "<font color='#CCCCCC'>Hits:</font> {{n}}  <font color='#CCCCCC'>Total:</font> <b><font color='#FFCC66'>{{dmg-total}}</font></b>  <font color='#CCCCCC'>Last:</font> {{dmg}}",
+    "formatHeader": "<font size='1{{vehicle}}' alpha='#00{{vehicle}}'><font color='#CCCCCC'>Атак:</font> {{n}}  <font color='#CCCCCC'>Урона:</font> <b><font color='#FFCC66'>{{dmg-total}}</font></b>  <font color='#CCCCCC'>Последний:</font> {{dmg}}</font>",
     // Формат предыдущих попаданий (допускаются макроподстановки, см. readme-ru.txt)
-    "formatHistory": "<textformat leading='0' tabstops='[20,55,90,130,175]'><font color='#CCCCCC{{dead}}' size='13'><b></b{{dead}}>\u00D7{{n-player}}<tab>{{dmg-kind}}<tab>-{{dmg}}<tab>({{dmg-player}})</b></b><tab><font face='XVM Symbol'><font size='19'><font size='0{{dead}}'>{{dead}}</font></font><font size='1'><font size='19{{dead}}'>\u002A</font></font></font><tab><b></b{{dead}}>{{vehicle}}</b></b></font></textformat>"
+    "formatHistory": "<textformat leading='0' tabstops='[20,55,90,130,175]'><font color='#CCCCCC{{dead}}' size='13'><b></b{{dead}}>\u00D7{{n-player}}<tab>{{dmg-kind}}<tab>-{{dmg}}<tab>({{dmg-player}})</b></b><tab><font face='XVM Symbol'><font size='19'><font size='1{{dead}}' alpha='#00{dead}}'>{{dead}}</font></font><font size='1' alpha='#00'><font size='19{{dead}}' alpha='#FF{{dead}}'>\u002A</font></font></font><tab>{{vtype}}  <b></b{{dead}}>{{vehicle}}</b></b></font></textformat>"
   },
   // Полоса захвата
   "captureBar": {
@@ -121,11 +121,11 @@
     "primaryTitleOffset": 7, // Смещение верхнего поля вверх на случай больших размеров шрифтов
     "appendPlus" : false, // дописывать плюс к тройке захватчиков. Невозможно расчитать более трёх.
     // Формат захвата (допускаются макроподстановки, см. readme-ru.txt)
-    "enemy": { // Враг
-      "primaryTitleFormat":   "<font size='15' color='#FFFFFF'>Захват базы врага!   {{extra}}</font>", // Верхнее текстовое поле
+    "enemy": { // Наши захватывают
+      "primaryTitleFormat":   "<font size='15' color='#FFFFFF'>База атакована!  {{extra}}</font>", // Верхнее текстовое поле
       "secondaryTitleFormat": "<font size='15' color='#FFFFFF'>{{points}}</font>",              // Нижнее текстовое поле
-      "captureDoneFormat":    "<font size='17' color='#FFCC66'>Вражеская база захвачена!</font>",    // Текст полного захвата
-      "extra": "Захватчиков: <b><font color='#FFCC66'>{{tanks}}</font></b>  Осталось: <b><font color='#FFCC66'>{{time}}</font><b>",                          // Дополнительный текст после необходимого расчета
+      "captureDoneFormat":    "<font size='17' color='#FFCC66'>Наши захватили базу!</font>",    // Текст полного захвата
+      "extra":"Наших на захвате: <b><font color='#FFCC66'>{{tanks}}</font></b>  Осталось: <b><font color='#FFCC66'>{{time}}</font><b>",                          // Дополнительный текст после необходимого расчета
       "shadow": {          // Тень полей
         "color": "0x000000", // Цвет
         "alpha": 50,       // Прозрачность 0-100
@@ -133,11 +133,11 @@
         "strength": 2      // Сила 0-255
       }
     },
-    "ally": { // Союзник
-      "primaryTitleFormat":   "<font size='15' color='#FFFFFF'>Захват нашей базы!  {{extra}}</font>",
+    "ally": { // Враги захватывают
+      "primaryTitleFormat":   "<font size='15' color='#FFFFFF'>База атакована!  {{extra}}</font>",
       "secondaryTitleFormat": "<font size='15' color='#FFFFFF'>{{points}}</font>",
-      "captureDoneFormat":    "<font size='17' color='#FFCC66'>Наша база захвачена!</font>",
-      "extra": "Захватчиков: <b><font color='#FFCC66'>{{tanks}}</font></b>  Осталось: <b><font color='#FFCC66'>{{time}}</font><b>",
+      "captureDoneFormat":    "<font size='17' color='#FFCC66'>Враги захватили базу!</font>",
+      "extra":"Врагов на захвате: <b><font color='#FFCC66'>{{tanks}}</font></b>  Осталось: <b><font color='#FFCC66'>{{time}}</font><b>",
       "shadow": {
         "color": "0x000000",
         "alpha": 50,
@@ -279,13 +279,6 @@
               "y": -33,                       // положение по оси Y
               "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
               "color": "0x000000",                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
-              "font": {                       // параметры шрифта
-                "name": "XVM Symbol",         //   название
-                "size": 23,                   //   размер
-                "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false,                 //   обычный (false) или жирный (true)
-                "italic": false                 //     обычный (false) или курсив (true)
-              },
               "shadow": {                     // параметры тени
                 "alpha": 100,                 //   прозрачность
                 "color": "0xFFBD00",          //   цвет
@@ -968,13 +961,6 @@
               "y": -33,                       // положение по оси Y
               "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
               "color": "0x000000",                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
-              "font": {                       // параметры шрифта
-                "name": "XVM Symbol",         //   название
-                "size": 23,                   //   размер
-                "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false,                 //   обычный (false) или жирный (true)
-                "italic": false                 //     обычный (false) или курсив (true)
-              },
               "shadow": {                     // параметры тени
                 "alpha": 100,                 //   прозрачность
                 "color": "0xFFBD00",          //   цвет
@@ -1642,7 +1628,7 @@
     "dmg_kind": {
       "attack": "0xFFBD00",                        // атака
       "fire": "0xFF0066",                          // пожар
-      "ramming": "0x0099FF",                       // таран
+      "ramming": "0x228855",                       // таран
       "world_collision": "0x998855",               // столкновение с объектами, падение
       "other": "0xCCCCCC"                          // другое
     },
@@ -1677,7 +1663,7 @@
       { "value": 1200, "color": "0xF8F400" },
       { "value": 1500, "color": "0x60FF00" },
       { "value": 1800, "color": "0x02C9B3" },
-      { "value": 9999, "color": "0xCf3AF4" }
+      { "value": 9999, "color": "0xCF3AF4" }
     ],
     // Динамический цвет по проценту побед (только с xvm-stat). Значения от меньшего к большему.
     "rating": [
@@ -1687,7 +1673,7 @@
       { "value": 51,  "color": "0xF8F400" },
       { "value": 53,  "color": "0x60FF00" },
       { "value": 57,  "color": "0x02C9B3" },
-      { "value": 101, "color": "0xCf3AF4" }
+      { "value": 101, "color": "0xCF3AF4" }
     ],
     // Динамический цвет по количеству кило-боев (только с xvm-stat). Значения от меньшего к большему.
     "kb": [
@@ -1696,7 +1682,7 @@
       { "value": 5,   "color": "0xF8F400" },
       { "value": 8,   "color": "0x60FF00" },
       { "value": 12,  "color": "0x02C9B3" },
-      { "value": 999, "color": "0xCf3AF4" }
+      { "value": 999, "color": "0xCF3AF4" }
     ],
     // Динамический цвет по количеству боев по текущему танку (только с xvm-stat). Значения от меньшего к большему.
     "t_battles": [
@@ -1705,7 +1691,7 @@
       { "value": 300,  "color": "0xF8F400" },
       { "value": 500,  "color": "0x60FF00" },
       { "value": 800,  "color": "0x02C9B3" },
-      { "value": 9999, "color": "0xCf3AF4" }
+      { "value": 9999, "color": "0xCF3AF4" }
     ]
   },
   // Настройки динамической прозрачности
@@ -1742,6 +1728,17 @@
       { "value": 10,  "alpha": 100 },
       { "value": 999, "alpha": 100 }
     ]
+  },
+  // Текстовые подстановки
+  "texts": {
+    // Текст для макроса {{vtype}}
+    "vtype": {
+      "LT":  "<font face='XVM Symbol' size='19'>\u003A</font>",        // текст для легких танков
+      "MT":  "<font face='XVM Symbol' size='19'>\u003B</font>",        // текст для средних танков
+      "HT":  "<font face='XVM Symbol' size='19'>\u003F</font>",        // текст для тяжелых танков
+      "SPG": "<font face='XVM Symbol' size='19'>\u002D</font>",       // текст для арты
+      "TD":  "<font face='XVM Symbol' size='19'>\u002E</font>"         // текст для ПТ
+    }
   },
   // Наборы иконок
   "iconset": {

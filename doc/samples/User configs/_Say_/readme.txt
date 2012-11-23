@@ -9,9 +9,6 @@ INSTALATION:
 - Extract files XVM.xvmconf to res_mods\0.8.1\gui\flash, confirm overwrite
 - Start game with xvm-stat.exe installed from xvm-stat
 
-gameplay preview of setting:
-  http://forum.worldoftanks.eu/index.php?/topic/172729-081-say-s-xvm-configuration/
-
 Enjoy the game=)
 
 _Say_
