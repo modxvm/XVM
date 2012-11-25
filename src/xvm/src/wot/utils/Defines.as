@@ -53,6 +53,9 @@ class wot.utils.Defines
   public static var DYNAMIC_COLOR_HP: Number = 4;
   public static var DYNAMIC_COLOR_HP_RATIO: Number = 5;
   public static var DYNAMIC_COLOR_TBATTLES: Number = 6;
+  public static var DYNAMIC_COLOR_TDB: Number = 7;
+  public static var DYNAMIC_COLOR_TFB: Number = 8;
+  public static var DYNAMIC_COLOR_TDV: Number = 9;
 
   // Dynamic alpha types
   //public static var DYNAMIC_ALPHA_EFF: Number = 1;

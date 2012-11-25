@@ -33,8 +33,8 @@ class Program
             if (veh.name == "t_50_2")
                 veh.status = Vehicle.STOCK_TURRET_NO_TOP_GUN;
 
-            if (veh.status != Vehicle.ONLY_ONE_TURRET)
-                tanks.Add(veh);
+            //if (veh.status != Vehicle.ONLY_ONE_TURRET)
+            tanks.Add(veh);
         }
 
         Export.generateAS2code(tanks);

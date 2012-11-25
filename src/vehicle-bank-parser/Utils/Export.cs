@@ -17,7 +17,7 @@ static class Export
         //StreamWriter file = new StreamWriter(EXPORT_FILEPATH);
 
         writeHeader(file);
-        writeCsv(file, vehList);
+        writeLines(file, vehList);
         writeFooter(file);
 
         file.Close();
@@ -40,29 +40,25 @@ class wot.utils.VehicleInfoData2
     * Turret status: 2 - unable to mount top gun to stock turret, 1 - able
     */
 
-    private static var db:Array;
-
-    public static function getDb():Array
-    {
-        if(db == null)
-        {
-            db = [];
-            // [ hpstock, hptop, turretstatus ]");
+    public static var data:Object = {
+        //vname: { hpstock: #, hptop: #, turretstatus: # }");
     }
 
-    private static void writeCsv(StreamWriter file, List<Vehicle> vehList)
+    private static void writeLines(StreamWriter file, List<Vehicle> vehList)
     {
         foreach (Vehicle veh in vehList)
-            file.WriteLine("            db[\"" + veh.name + "\"] = [" + veh.hpstock + ", " + veh.hptop + ", " + veh.status + "];");
-        //         = new Array()
-
+        {
+            file.WriteLine("        " + veh.name.Replace("-", "_").ToLower() +
+                ": { hpstock: " + veh.hpstock + 
+                ", hptop: " + veh.hptop + 
+                ", turretstatus: " + veh.status + "},");
+        }
     }
 
     private static void writeFooter(StreamWriter file)
     {
 file.WriteLine(@"
-        }
-        return db;
+      __end__: null
     }
 }
     ");
