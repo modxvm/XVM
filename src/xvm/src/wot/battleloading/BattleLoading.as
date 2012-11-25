@@ -31,6 +31,7 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
 
         StatData.s_loaded = false;
         StatData.s_data = {};
+        StatLoader.s_players_count = 0;
 
         // Components
         winChances = new WinChances(form_mc); // Winning chance info above players list.
