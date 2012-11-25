@@ -7,30 +7,7 @@ class wot.utils.VehicleInfoData
     public static var data:Object = {
         // unknown
 /*
-china_Ch04_T34_1
-china_Ch05_T34_2
-china_Ch06_Renault_NC31
-china_Ch07_Vickers_MkE_Type_BT26
-china_Ch08_Type97_Chi_Ha
-china_Ch09_M5
-china_Ch10_IS2
-china_Ch11_110
-china_Ch12_111_1_2_3
-china_Ch13_111_4_5
-china_Ch15_59_16
-china_Ch16_WZ_131
-china_Ch17_WZ131_1_WZ132
-china_Ch18_WZ_120
-china_Ch19_121
-china_Ch20_Type58
-china_Ch21_T34
-usa_A74_T1_E6
-usa_T21
-usa_T54E1
-usa_T57_58
-usa_T69
-usa_T71
-ussr_SU100Y
+        usa_A74_T1_E6:                  { level: 0,  type: "LT",  tiers: [ 0, 0 ],   premium: false, name: null },
 */
 
         // level 1
@@ -39,6 +16,7 @@ ussr_SU100Y
         france_RenaultFT:               { level: 1,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
         usa_T1_Cunningham:              { level: 1,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
         uk_GB01_Medium_Mark_I:          { level: 1,  type: "MT",  tiers: [ 1, 2 ],   premium: false, name: null },
+        china_Ch06_Renault_NC31:        { level: 1,  type: "LT",  tiers: [ 1, 2 ],   premium: false, name: null },
 
         // level 2
         ussr_BT_2:                      { level: 2,  type: "LT",  tiers: [ 2, 3 ],   premium: false, name: null },
@@ -52,6 +30,7 @@ ussr_SU100Y
         ussr_Tetrarch_LL:               { level: 2,  type: "LT",  tiers: [ 2, 3 ],   premium: true,  name: null },
         uk_GB03_Cruiser_Mk_I:           { level: 2,  type: "LT",  tiers: [ 2, 3 ],   premium: false, name: null },
         uk_GB58_Cruiser_Mk_III:         { level: 2,  type: "LT",  tiers: [ 2, 3 ],   premium: false, name: null },
+        china_Ch07_Vickers_MkE_Type_BT26: { level: 2,  type: "LT",  tiers: [ 2, 3 ],   premium: false, name: null },
         usa_T2_med:                     { level: 2,  type: "MT",  tiers: [ 2, 3 ],   premium: false, name: null },
         uk_GB05_Vickers_Medium_Mk_II:   { level: 2,  type: "MT",  tiers: [ 2, 3 ],   premium: false, name: null },
         france_RenaultBS:               { level: 2,  type: "SPG", tiers: [ 3, 4 ],   premium: false, name: null },
@@ -75,6 +54,7 @@ ussr_SU100Y
         ussr_T_46:                      { level: 3,  type: "LT",  tiers: [ 3, 5 ],   premium: false, name: null },
         uk_GB69_Cruiser_Mk_II:          { level: 3,  type: "LT",  tiers: [ 3, 5 ],   premium: false, name: null },
         uk_GB59_Cruiser_Mk_IV:          { level: 3,  type: "LT",  tiers: [ 3, 5 ],   premium: false, name: null },
+        china_Ch08_Type97_Chi_Ha:       { level: 3,  type: "LT",  tiers: [ 3, 5 ],   premium: false, name: null },
         france_D2:                      { level: 3,  type: "MT",  tiers: [ 3, 5 ],   premium: false, name: null },
         usa_M2_med:                     { level: 3,  type: "MT",  tiers: [ 3, 5 ],   premium: false, name: null },
         germany_S35_captured:           { level: 3,  type: "MT",  tiers: [ 3, 5 ],   premium: true,  name: null },
@@ -96,6 +76,7 @@ ussr_SU100Y
         germany_Pz38_NA:                { level: 4,  type: "LT",  tiers: [ 4, 8 ],   premium: false, name: null },
         uk_GB04_Valentine:              { level: 4,  type: "LT",  tiers: [ 4, 8 ],   premium: false, name: null },
         uk_GB60_Covenanter:             { level: 4,  type: "LT",  tiers: [ 4, 8 ],   premium: false, name: null },
+        china_Ch09_M5:                  { level: 4,  type: "LT",  tiers: [ 4, 8 ],   premium: false, name: null },
         usa_M3_Grant:                   { level: 4,  type: "MT",  tiers: [ 4, 6 ],   premium: false, name: null },
         germany_PzIII:                  { level: 4,  type: "MT",  tiers: [ 4, 6 ],   premium: false, name: null },
         ussr_T_28:                      { level: 4,  type: "MT",  tiers: [ 4, 6 ],   premium: false, name: null },
@@ -123,6 +104,7 @@ ussr_SU100Y
         usa_Ram_II:                     { level: 5,  type: "MT",  tiers: [ 5, 7 ],   premium: true,  name: null },
         germany_T_25:                   { level: 5,  type: "MT",  tiers: [ 5, 7 ],   premium: true,  name: null },
         ussr_T_34:                      { level: 5,  type: "MT",  tiers: [ 5, 7 ],   premium: false, name: null },
+        china_Ch21_T34:                 { level: 5,  type: "MT",  tiers: [ 5, 7 ],   premium: false, name: null },
         france_BDR_G1B:                 { level: 5,  type: "HT",  tiers: [ 5, 7 ],   premium: false, name: null },
         usa_T1_hvy:                     { level: 5,  type: "HT",  tiers: [ 5, 7 ],   premium: false, name: null },
         ussr_KV1:                       { level: 5,  type: "HT",  tiers: [ 5, 7 ],   premium: false, name: null },
@@ -141,6 +123,8 @@ ussr_SU100Y
 
         // level 6
         france_AMX_12t:                 { level: 6,  type: "LT",  tiers: [ 7, 11 ],  premium: false, name: null },
+        usa_T21:                        { level: 6,  type: "LT",  tiers: [ 7, 11 ],  premium: false, name: null },
+        china_Ch15_59_16:               { level: 6,  type: "LT",  tiers: [ 7, 11 ],  premium: false, name: null },
         usa_M4A3E8_Sherman:             { level: 6,  type: "MT",  tiers: [ 6, 8 ],   premium: false, name: null },
         usa_Sherman_Jumbo:              { level: 6,  type: "MT",  tiers: [ 6, 8 ],   premium: false, name: null },
         ussr_T_34_85:                   { level: 6,  type: "MT",  tiers: [ 6, 8 ],   premium: false, name: null },
@@ -148,6 +132,7 @@ ussr_SU100Y
         germany_VK3001P:                { level: 6,  type: "MT",  tiers: [ 6, 8 ],   premium: false, name: null },
         germany_VK3601H:                { level: 6,  type: "MT",  tiers: [ 6, 8 ],   premium: false, name: null },
         uk_GB21_Cromwell:               { level: 6,  type: "MT",  tiers: [ 6, 8 ],   premium: false, name: null },
+        china_Ch20_Type58:              { level: 6,  type: "MT",  tiers: [ 6, 8 ],   premium: false, name: null },
         france_ARL_44:                  { level: 6,  type: "HT",  tiers: [ 6, 8 ],   premium: false, name: null },
         ussr_KV2:                       { level: 6,  type: "HT",  tiers: [ 6, 8 ],   premium: false, name: null },
         ussr_KV_1s:                     { level: 6,  type: "HT",  tiers: [ 6, 8 ],   premium: false, name: null },
@@ -168,12 +153,15 @@ ussr_SU100Y
 
         // level 7
         france_AMX_13_75:               { level: 7,  type: "LT",  tiers: [ 8, 11 ],  premium: false, name: null },
+        usa_T71:                        { level: 7,  type: "LT",  tiers: [ 8, 11 ],  premium: false, name: null },
+        china_Ch16_WZ_131:              { level: 7,  type: "LT",  tiers: [ 8, 11 ],  premium: false, name: null },
         ussr_KV_13:                     { level: 7,  type: "MT",  tiers: [ 7, 9 ],   premium: false, name: null },
         germany_PzV:                    { level: 7,  type: "MT",  tiers: [ 7, 9 ],   premium: false, name: null },
         usa_T20:                        { level: 7,  type: "MT",  tiers: [ 7, 9 ],   premium: false, name: null },
         ussr_T_43:                      { level: 7,  type: "MT",  tiers: [ 7, 9 ],   premium: false, name: null },
         germany_VK3002DB:               { level: 7,  type: "MT",  tiers: [ 7, 9 ],   premium: false, name: null },
         uk_GB22_Comet:                  { level: 7,  type: "MT",  tiers: [ 7, 9 ],   premium: false, name: null },
+        china_Ch04_T34_1:               { level: 7,  type: "MT",  tiers: [ 7, 9 ],   premium: false, name: null },
         france_AMX_M4_1945:             { level: 7,  type: "HT",  tiers: [ 7, 9 ],   premium: false, name: null },
         ussr_IS:                        { level: 7,  type: "HT",  tiers: [ 7, 9 ],   premium: false, name: null },
         ussr_KV_3:                      { level: 7,  type: "HT",  tiers: [ 7, 9 ],   premium: false, name: null },
@@ -181,6 +169,7 @@ ussr_SU100Y
         germany_PzVI_Tiger_P:           { level: 7,  type: "HT",  tiers: [ 7, 9 ],   premium: false, name: null },
         usa_T29:                        { level: 7,  type: "HT",  tiers: [ 7, 9 ],   premium: false, name: null },
         uk_GB10_Black_Prince:           { level: 7,  type: "HT",  tiers: [ 7, 9 ],   premium: false, name: null },
+        china_Ch10_IS2:                 { level: 7,  type: "HT",  tiers: [ 7, 9 ],   premium: false, name: null },
         germany_G_Tiger:                { level: 7,  type: "SPG", tiers: [ 10, 11 ], premium: false, name: null },
         usa_M40M43:                     { level: 7,  type: "SPG", tiers: [ 10, 11 ], premium: false, name: null },
         ussr_Object_212:                { level: 7,  type: "SPG", tiers: [ 10, 11 ], premium: false, name: null },
@@ -194,10 +183,13 @@ ussr_SU100Y
 
         // level 8
         france_AMX_13_90:               { level: 8,  type: "LT",  tiers: [ 9, 12 ],  premium: false, name: null },
+        china_Ch17_WZ131_1_WZ132:       { level: 8,  type: "LT",  tiers: [ 9, 12 ],  premium: false, name: null },
         germany_Panther_II:             { level: 8,  type: "MT",  tiers: [ 8, 10 ],  premium: false, name: null },
         usa_Pershing:                   { level: 8,  type: "MT",  tiers: [ 8, 10 ],  premium: false, name: null },
+        usa_T69:                        { level: 8,  type: "MT",  tiers: [ 8, 10 ],  premium: false, name: null },
         ussr_T_44:                      { level: 8,  type: "MT",  tiers: [ 8, 10 ],  premium: false, name: null },
         uk_GB23_Centurion:              { level: 8,  type: "MT",  tiers: [ 8, 10 ],  premium: false, name: null },
+        china_Ch05_T34_2:               { level: 8,  type: "MT",  tiers: [ 8, 10 ],  premium: false, name: null },
         france_AMX_50_100:              { level: 8,  type: "HT",  tiers: [ 8, 10 ],  premium: false, name: null },
         china_Ch03_WZ_111:              { level: 8,  type: "HT",  tiers: [ 8, 10 ],  premium: true,  name: null },
         ussr_IS_3:                      { level: 8,  type: "HT",  tiers: [ 8, 10 ],  premium: false, name: null },
@@ -209,6 +201,7 @@ ussr_SU100Y
         usa_T34_hvy:                    { level: 8,  type: "HT",  tiers: [ 8, 10 ],  premium: true,  name: null },
         germany_VK4502A:                { level: 8,  type: "HT",  tiers: [ 8, 10 ],  premium: false, name: null },
         uk_GB11_Caernarvon:             { level: 8,  type: "HT",  tiers: [ 8, 10 ],  premium: false, name: null },
+        china_Ch11_110:                 { level: 8,  type: "HT",  tiers: [ 8, 10 ],  premium: false, name: null },
         germany_G_E:                    { level: 8,  type: "SPG", tiers: [ 11, 12 ], premium: false, name: null },
         ussr_Object_261:                { level: 8,  type: "SPG", tiers: [ 11, 12 ], premium: false, name: null },
         usa_T92:                        { level: 8,  type: "SPG", tiers: [ 11, 12 ], premium: false, name: null },
@@ -225,8 +218,10 @@ ussr_SU100Y
         france_Lorraine40t:             { level: 9,  type: "MT",  tiers: [ 9, 11 ],  premium: false, name: null },
         germany_E_50:                   { level: 9,  type: "MT",  tiers: [ 9, 11 ],  premium: false, name: null },
         usa_M46_Patton:                 { level: 9,  type: "MT",  tiers: [ 9, 11 ],  premium: false, name: null },
+        usa_T54E1:                      { level: 9,  type: "MT",  tiers: [ 9, 11 ],  premium: false, name: null },
         ussr_T_54:                      { level: 9,  type: "MT",  tiers: [ 9, 11 ],  premium: false, name: null },
         uk_GB24_Centurion_Mk3:          { level: 9,  type: "MT",  tiers: [ 9, 11 ],  premium: false, name: null },
+        china_Ch18_WZ_120:              { level: 9,  type: "MT",  tiers: [ 9, 11 ],  premium: false, name: null },
         france_AMX_50_120:              { level: 9,  type: "HT",  tiers: [ 9, 11 ],  premium: false, name: null },
         germany_E_75:                   { level: 9,  type: "HT",  tiers: [ 9, 11 ],  premium: false, name: null },
         ussr_IS8:                       { level: 9,  type: "HT",  tiers: [ 9, 11 ],  premium: false, name: null },
@@ -234,6 +229,7 @@ ussr_SU100Y
         ussr_ST_I:                      { level: 9,  type: "HT",  tiers: [ 9, 11 ],  premium: false, name: null },
         germany_VK4502P:                { level: 9,  type: "HT",  tiers: [ 9, 11 ],  premium: false, name: null },
         uk_GB12_Conqueror:              { level: 9,  type: "HT",  tiers: [ 9, 11 ],  premium: false, name: null },
+        china_Ch12_111_1_2_3:           { level: 9,  type: "HT",  tiers: [ 9, 11 ],  premium: false, name: null },
         france_AMX50_Foch:              { level: 9,  type: "TD",  tiers: [ 9, 11 ],  premium: false, name: null },
         germany_JagdTiger:              { level: 9,  type: "TD",  tiers: [ 9, 11 ],  premium: false, name: null },
         usa_T30:                        { level: 9,  type: "TD",  tiers: [ 9, 11 ],  premium: false, name: null },
@@ -247,13 +243,16 @@ ussr_SU100Y
         usa_M48A1:                      { level: 10, type: "MT",  tiers: [ 10, 12 ], premium: false, name: null },
         ussr_T62A:                      { level: 10, type: "MT",  tiers: [ 10, 12 ], premium: false, name: null },
         uk_GB70_FV4202_105:             { level: 10, type: "MT",  tiers: [ 10, 12 ], premium: false, name: null },
+        china_Ch19_121:                 { level: 10, type: "MT",  tiers: [ 10, 12 ], premium: false, name: null },
         germany_E_100:                  { level: 10, type: "HT",  tiers: [ 10, 12 ], premium: false, name: null },
         france_F10_AMX_50B:             { level: 10, type: "HT",  tiers: [ 10, 12 ], premium: false, name: null },
         ussr_IS_4:                      { level: 10, type: "HT",  tiers: [ 10, 12 ], premium: false, name: null },
         ussr_IS_7:                      { level: 10, type: "HT",  tiers: [ 10, 12 ], premium: false, name: null },
         germany_Maus:                   { level: 10, type: "HT",  tiers: [ 10, 12 ], premium: false, name: null },
         usa_T110:                       { level: 10, type: "HT",  tiers: [ 10, 12 ], premium: false, name: null },
+        usa_T57_58:                     { level: 10, type: "HT",  tiers: [ 10, 12 ], premium: false, name: null },
         uk_GB13_FV215b:                 { level: 10, type: "HT",  tiers: [ 10, 12 ], premium: false, name: null },
+        china_Ch13_111_4_5:             { level: 10, type: "HT",  tiers: [ 10, 12 ], premium: false, name: null },
         france_AMX_50Fosh_155:          { level: 10, type: "TD",  tiers: [ 10, 12 ], premium: false, name: null },
         germany_JagdPz_E100:            { level: 10, type: "TD",  tiers: [ 10, 12 ], premium: false, name: null },
         usa_T110E3:                     { level: 10, type: "TD",  tiers: [ 10, 12 ], premium: false, name: null },
@@ -289,6 +288,7 @@ ussr_SU100Y
         germany_PzV_PzIV_ausf_Alfa:     { level: 6,  type: "MT",  tiers: [ 6, 7 ],   premium: true,  name: null },
         germany_PzIV_schmalturm:        { level: 6,  type: "MT",  tiers: [ 6, 7 ],   premium: true,  name: null },
         uk_GB63_TOG_II:                 { level: 6,  type: "HT",  tiers: [ 6, 7 ],   premium: true,  name: null },
+        ussr_SU100Y:                    { level: 6,  type: "TD",  tiers: [ 6, 7 ],   premium: true,  name: null },
         germany_Panther_M10:            { level: 7,  type: "MT",  tiers: [ 7, 8 ],   premium: true,  name: null },
         ussr_SU122_44:                  { level: 7,  type: "TD",  tiers: [ 7, 8 ],   premium: true,  name: null },
         uk_GB71_AT_15A:                 { level: 7,  type: "TD",  tiers: [ 7, 8 ],   premium: true,  name: null },
