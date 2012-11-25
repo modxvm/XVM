@@ -177,11 +177,11 @@ module.exports = (function() {
                                     name: vdata.name,
                                     l: vdata.level,
                                     b: vdata.battle_count,
-                                    w: vdata.win_count//,
+                                    w: vdata.win_count,
+                                    d: vdata.damageDealt,
+                                    f: vdata.frags//,
                                     //s: vdata.spotted,
-                                    //d: vdata.damageDealt,
                                     //survivedBattles: vdata.survivedBattles,
-                                    //f: vdata.frags,
                                     //cl: vdata.class
                                 });
                             }
