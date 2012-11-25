@@ -76,6 +76,36 @@ class VehicleXmlParser
         return nodeToInt(hullHpNode) + nodeToInt(stockTurretHpNode);
     }
 
+    public int getHpTop()
+    {
+        /**
+         * Hull HP
+         * a-20 hull HP - 272
+         */
+        XmlNode hullHpNode = rootNode.SelectSingleNode("//hull/maxHealth");
+        if (hullHpNode == null)
+            throw new Exception("hullHpNode == null");
+
+        /**
+         * Top turret HP
+         * a-20 top turret HP - 68
+         */
+        XmlNode topTurretNode = turretsNode.LastChild;
+        XmlNodeList topTurretNodes = topTurretNode.ChildNodes;
+        XmlNode topTurretHpNode = null;
+        foreach (XmlNode node in topTurretNodes)
+            if (node.Name == "maxHealth")
+            {
+                topTurretHpNode = node;
+                break;
+            }
+
+        if (topTurretHpNode == null)
+            throw new Exception("topTurretHpNode == null");
+
+        return nodeToInt(hullHpNode) + nodeToInt(topTurretHpNode);
+    }
+
     public int getChassisCost()
     {
         XmlNodeList firstChassis = rootNode.SelectSingleNode("//chassis").ChildNodes.Item(1).ChildNodes;
@@ -86,7 +116,7 @@ class VehicleXmlParser
             if (node.Name == "unlocks")
                 secondChassis = node.ChildNodes.Item(1); // <chassis>A-20_mod_1941<cost>\t840\t</cost></chassis>
         }
-        
+
         if (secondChassis == null)
             throw new Exception("Error: no secondChassis at chassis");
 
@@ -144,4 +174,3 @@ class VehicleXmlParser
         return Convert.ToInt32(strArr[0]);
     }
 }
-

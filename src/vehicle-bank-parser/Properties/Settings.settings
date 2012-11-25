@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="VehicleBankParser.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="EXPORT_FILEPATH" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\home\max\wot-xvm\src\xvm\src\wot\Utils\VehicleInfoData2.as</Value>
+    </Setting>
+    <Setting Name="VEHICLE_DIR_PATH" Type="System.String" Scope="User">
+      <Value Profile="(Default)">res\scripts\item_defs\vehicles\</Value>
+    </Setting>
+    <Setting Name="GAME_PATH" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\home\max\WoT-CT\</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

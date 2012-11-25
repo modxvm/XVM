@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+using VehicleBankParser.Properties;
 
 static class FileBank
 {
@@ -10,8 +11,6 @@ static class FileBank
      * Author: ilitvinov87@gmail.com
      */
 
-    private const String VEHICLE_DIR_PATH = @"res\scripts\item_defs\vehicles\";
-    private const String GAME_PATH = @"D:\WoT\";
     private static readonly String[] COUNTRIES = new String[] { "ussr", "germany", "usa", "france", "china", "uk" };
 
     private static List<XmlNode> nodeFiles = new List<XmlNode>();
@@ -55,7 +54,7 @@ static class FileBank
     {
         List<string> pathList = new List<string>();
         foreach ( string country in COUNTRIES)
-            pathList.Add(Path.Combine(GAME_PATH, VEHICLE_DIR_PATH, country));
+            pathList.Add(Path.Combine(Settings.Default.GAME_PATH, Settings.Default.VEHICLE_DIR_PATH, country));
         
         // returns *\vehicles\ussr, *\vehicles\germany, *\vehicles\usa
         return pathList;

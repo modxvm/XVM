@@ -28,13 +28,14 @@ class Vehicle
 
     public string name;
     public int hpstock;
+    public int hptop;
     public short status;
 
     private VehicleXmlParser vehParser;
 
     /*
      * Tanks are subset of Vehicles.
-     * Tanks has turrets rotation and are subject of interest. 
+     * Tanks has turrets rotation and are subject of interest.
      */
 
     public Vehicle(XmlNode vehicleXml)
@@ -43,6 +44,7 @@ class Vehicle
 
         name = vehParser.getVehicleName();
         hpstock = vehParser.getHpStock();
+        hptop = vehParser.getHpTop();
         status = defineStatus();
     }
 
@@ -59,7 +61,7 @@ class Vehicle
             int chassisCost = vehParser.getChassisCost();
             return unlockedGunIsTotalCrap(maxUnlockedGunCost, chassisCost);
         }
-        
+
         return STOCK_TURRET_TOP_GUN_POSSIBLE;
     }
 
@@ -73,8 +75,7 @@ class Vehicle
              * if Gun unlocked by second turret is crap -> top gun is possible to mount at stock turret
              */
             return STOCK_TURRET_TOP_GUN_POSSIBLE;
-        
+
         return STOCK_TURRET_NO_TOP_GUN;
     }
 }
-
