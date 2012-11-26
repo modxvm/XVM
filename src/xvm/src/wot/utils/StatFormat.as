@@ -99,9 +99,9 @@ class wot.utils.StatFormat
                         tdb = stat.tdb;
                         sTDB = stat.tdb > 0 ? String(tdb) : "";
                         tfb = stat.tfb;
-                        sTFB = stat.tfb > 0 ? String(tfb) : "";
+                        sTFB = stat.tfb > 0 ? Sprintf.format("%.1f", tfb) : "";
                         tdv = stat.tdv;
-                        sTDV = stat.tdv > 0 ? String(tdv) : "";
+                        sTDV = stat.tdv > 0 ? Sprintf.format("%.1f", tdv) : "";
                     }
                 }
             }

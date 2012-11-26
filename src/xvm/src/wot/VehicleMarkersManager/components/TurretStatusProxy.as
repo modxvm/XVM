@@ -42,6 +42,6 @@ class wot.VehicleMarkersManager.components.TurretStatusProxy extends AbstractAcc
 
     private function get vehicleName():String
     {
-        return VehicleInfo.getVehicleId(xvm.m_defaultIconSource).toLowerCase();
+        return VehicleInfo.getVehicleId(xvm.m_defaultIconSource);
     }
 }

@@ -1,4 +1,11 @@
-﻿XVM-3.2.0-test1:
+﻿XVM-3.2.0-test2:
+  * new vehicles added
+  * new macros:
+      {{tdb}}, {{tdb:4}} - average damage for current tank - damage/battles
+      {{tfb}}, {{tfb:3}} - average frags for current tank - frags/battles
+      {{tdv}}, {{tdv:3}} - average damage efficiency for tank - damage/(battles*maxHP)
+
+XVM-3.2.0-test1:
   * recompiled for WoT 0.8.2.CT1
 
 XVM-3.1.2:

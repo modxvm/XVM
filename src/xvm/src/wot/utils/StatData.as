@@ -16,17 +16,45 @@
     selected: Boolean,
     loaded: Boolean
     stat:
-      b - battles
-      w - wins
-      r - global win ratio
-      e - eff
-      tb - tank battles
-      tw - tank wins
-      tr - tank win ratio
-      tl - tank level
-      ts - tank spotted
-      td - tank damage
-      tf - tank frags
+        id - player id
+        name - player name
+        clan - player clan
+        vn - vehicle name
+        b - battles
+        w - wins
+        r - global win ratio (*)
+        e - eff
+        tb - tank battles
+        tw - tank wins
+        tr - tank win ratio (*)
+        tl - tank level
+        td - tank damage
+        tf - tank frags
+        ts - tank spotted
+        tdb - average tank damage per battle (*)
+        tdf - average tank frags per battle (*)
+        tdv - average tank damage efficiency per battle (*)
+            (*) - calculated in StatLoader.as
+*/
+
+/*
+stat: {
+  "id": 1797665,
+  "name": "GRANDCHERROKI_RU",
+  "clan": "",
+  "vn": "CH15_59_16",
+  "b": 16568,
+  "w": 9200,
+  "r": 56,
+  "e": 1400
+  "tb": 0,
+  "tw": 0,
+  "tr": 56,
+  "tl": 0,
+  "td": 0,
+  "tf": 0,
+  "ts": 0,
+}
 */
 
 class wot.utils.StatData

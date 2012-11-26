@@ -31,7 +31,6 @@ class wot.utils.VehicleInfo
         {
             str = str.slice(str.lastIndexOf("/") + 1, str.lastIndexOf("."));
             str = str.slice(str.indexOf("-") + 1);
-            str = str.split("-").join("_");
             str = Utils.trim(str);
             return str.toUpperCase();
             // return:
@@ -50,7 +49,7 @@ class wot.utils.VehicleInfo
 
     public static function getInfo2(vehicleName: String): Object
     {
-        return VehicleInfoData2.data[vehicleName] || null;
+        return VehicleInfoData2.data[vehicleName.split("-").join("_").toLowerCase()] || null;
     }
 
     public static function getVehicleNamesData():Object
