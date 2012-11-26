@@ -464,6 +464,35 @@ class wot.utils.DefaultConfig
           { value: 1200,  color: ColorPalette.green },
           { value: 1800,  color: ColorPalette.purple },
           { value: 9999,  color: ColorPalette.magenta }
+        ],
+        tdb: [
+          { value: 500,  color: ColorPalette.redBright },
+          { value: 1000, color: ColorPalette.yellow },
+          { value: 2000, color: ColorPalette.green }
+        ],
+        tdv: [
+          { value: 0.6,  color: ColorPalette.redBright },
+          { value: 0.8,  color: ColorPalette.redSmooth },
+          { value: 1.0,  color: ColorPalette.yellow },
+          { value: 1.3,  color: ColorPalette.green },
+          { value: 2.0,  color: ColorPalette.purple },
+          { value: 15,   color: ColorPalette.magenta }
+        ],
+        tfb: [
+          { value: 0.6,  color: ColorPalette.redBright },
+          { value: 0.8,  color: ColorPalette.redSmooth },
+          { value: 1.0,  color: ColorPalette.yellow },
+          { value: 1.3,  color: ColorPalette.green },
+          { value: 2.0,  color: ColorPalette.purple },
+          { value: 15,   color: ColorPalette.magenta }
+        ],
+        tsb: [
+          { value: 0.6,  color: ColorPalette.redBright },
+          { value: 0.8,  color: ColorPalette.redSmooth },
+          { value: 1.0,  color: ColorPalette.yellow },
+          { value: 1.3,  color: ColorPalette.green },
+          { value: 2.0,  color: ColorPalette.purple },
+          { value: 15,   color: ColorPalette.magenta }
         ]
       },
       alpha: {

@@ -5,7 +5,7 @@
 class wot.utils.Defines
 {
   // Global versions
-  public static var XVM_VERSION: String = "3.2.0-test2";
+  public static var XVM_VERSION: String = "3.2.0-test3";
   public static var WOT_VERSION: String = "0.8.2";
   public static var CONFIG_VERSION: String = "1.5.0";
   public static var EDITOR_VERSION: String = "0.27";
@@ -54,8 +54,9 @@ class wot.utils.Defines
   public static var DYNAMIC_COLOR_HP_RATIO: Number = 5;
   public static var DYNAMIC_COLOR_TBATTLES: Number = 6;
   public static var DYNAMIC_COLOR_TDB: Number = 7;
-  public static var DYNAMIC_COLOR_TFB: Number = 8;
-  public static var DYNAMIC_COLOR_TDV: Number = 9;
+  public static var DYNAMIC_COLOR_TDV: Number = 8;
+  public static var DYNAMIC_COLOR_TFB: Number = 9;
+  public static var DYNAMIC_COLOR_TSB: Number = 10;
 
   // Dynamic alpha types
   //public static var DYNAMIC_ALPHA_EFF: Number = 1;

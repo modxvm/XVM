@@ -30,8 +30,9 @@ class wot.utils.StatFormat
         var sTHb: String = "";
         var sTRating: String = "";
         var sTDB: String = "";
-        var sTFB: String = "";
         var sTDV: String = "";
+        var sTFB: String = "";
+        var sTSB: String = "";
 
         var eff: Number = 0;
         var e: Number = 0;
@@ -41,8 +42,9 @@ class wot.utils.StatFormat
         var t_kb: Number = -1;
         var t_battles: Number = -1;
         var tdb: Number = 0;
-        var tfb: Number = 0;
         var tdv: Number = 0;
+        var tfb: Number = 0;
+        var tsb: Number = 0;
 
         //Logger.addObject(StatData.s_data);
         if (StatData.s_loaded)
@@ -98,10 +100,12 @@ class wot.utils.StatFormat
                         sTWins = bn > 0 ? String(Utils.toInt(stat.tw)) : "";
                         tdb = stat.tdb;
                         sTDB = stat.tdb > 0 ? String(tdb) : "";
-                        tfb = stat.tfb;
-                        sTFB = stat.tfb > 0 ? Sprintf.format("%.1f", tfb) : "";
                         tdv = stat.tdv;
                         sTDV = stat.tdv > 0 ? Sprintf.format("%.1f", tdv) : "";
+                        tfb = stat.tfb;
+                        sTFB = stat.tfb > 0 ? Sprintf.format("%.1f", tfb) : "";
+                        tsb = stat.tsb;
+                        sTSB = stat.tsb > 0 ? Sprintf.format("%.1f", tsb) : "";
                     }
                 }
             }
@@ -122,8 +126,9 @@ class wot.utils.StatFormat
         format = format.split("{{t-wins}}").join(sTWins);
         format = format.split("{{t-rating}}").join(sTRating);
         format = format.split("{{tdb}}").join(sTDB);
-        format = format.split("{{tfb}}").join(sTFB);
         format = format.split("{{tdv}}").join(sTDV);
+        format = format.split("{{tfb}}").join(sTFB);
+        format = format.split("{{tsb}}").join(sTSB);
 
         // This code is stupid, and needs to be rewritten
         format = format.split("{{kb:3}}").join(Utils.padLeft(sKb, 3));
@@ -140,8 +145,9 @@ class wot.utils.StatFormat
         format = format.split("{{t-rating:3}}").join(Utils.padLeft(sTRating, 3));
         format = format.split("{{t_rating:3}}").join(Utils.padLeft(sTRating, 3));
         format = format.split("{{tdb:4}}").join(Utils.padLeft(sTDB, 4));
-        format = format.split("{{tfb:3}}").join(Utils.padLeft(sTFB, 3));
         format = format.split("{{tdv:3}}").join(Utils.padLeft(sTDV, 3));
+        format = format.split("{{tfb:3}}").join(Utils.padLeft(sTFB, 3));
+        format = format.split("{{tsb:3}}").join(Utils.padLeft(sTSB, 3));
 
         // Dynamic colors
         format = format.split("{{c:eff}}").join(eff < 0 ? ""
@@ -161,10 +167,12 @@ class wot.utils.StatFormat
         GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, t_battles, "#", isDead));
         format = format.split("{{c:tdb}}").join(
         GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, tdb, "#", isDead));
-        format = format.split("{{c:tfb}}").join(
-        GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, tfb, "#", isDead));
         format = format.split("{{c:tdv}}").join(
         GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, tdv, "#", isDead));
+        format = format.split("{{c:tfb}}").join(
+        GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, tfb, "#", isDead));
+        format = format.split("{{c:tsb}}").join(
+        GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, tsb, "#", isDead));
 
         //format = Utils.trim(format);
 

@@ -181,6 +181,18 @@ class wot.utils.GraphicsUtil
             case Defines.DYNAMIC_COLOR_TBATTLES:
                 cfg = cfg_root.t_battles;
                 break;
+            case Defines.DYNAMIC_COLOR_TDB:
+                cfg = cfg_root.tdb;
+                break;
+            case Defines.DYNAMIC_COLOR_TDV:
+                cfg = cfg_root.tdv;
+                break;
+            case Defines.DYNAMIC_COLOR_TFB:
+                cfg = cfg_root.tfb;
+                break;
+            case Defines.DYNAMIC_COLOR_TSB:
+                cfg = cfg_root.tsb;
+                break;
             case Defines.DYNAMIC_COLOR_HP:
                 cfg = cfg_root.hp;
                 break;
