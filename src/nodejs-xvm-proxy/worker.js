@@ -179,8 +179,8 @@ module.exports = (function() {
                                     b: vdata.battle_count,
                                     w: vdata.win_count,
                                     d: vdata.damageDealt,
-                                    f: vdata.frags//,
-                                    //s: vdata.spotted,
+                                    f: vdata.frags,
+                                    s: vdata.spotted//,
                                     //survivedBattles: vdata.survivedBattles,
                                     //cl: vdata.class
                                 });
