@@ -225,7 +225,7 @@ class wot.utils.StatLoader
     //Logger.addObject(stat);
 
     stat.tdb = stat.td <= 0 ? 0 : Math.round(stat.td / stat.tb);
-    stat.tfb = stat.tf <= 0 ? 0 : Math.round(stat.tf / stat.tb);
+    stat.tfb = stat.tf <= 0 ? 0 : Math.round(stat.tf / stat.tb * 10) / 10;
     var info = VehicleInfo.getInfo2(stat.vn.toLowerCase());
     if (info == null)
         Logger.add("Warning: no data for " + stat.vn);

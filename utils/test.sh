@@ -10,7 +10,7 @@ CURRENT_DIRECTORY=`pwd`
 #SAMPLE_REPLAY=squad_tk.wotreplay
 #SAMPLE_REPLAY=6thsence.wotreplay
 #SAMPLE_REPLAY=tk.wotreplay
-#SAMPLE_REPLAY=fire.wotreplay
+SAMPLE_REPLAY=fire.wotreplay
 #SAMPLE_REPLAY=fall.wotreplay
 #SAMPLE_REPLAY=hits.wotreplay
 #SAMPLE_REPLAY=hunt.wotreplay
@@ -18,7 +18,6 @@ CURRENT_DIRECTORY=`pwd`
 #SAMPLE_REPLAY=dead_with_hp.wotreplay
 #-SAMPLE_REPLAY=fogofwar.wotreplay
 #SAMPLE_REPLAY=cap.wotreplay
-SAMPLE_REPLAY=markers.wotreplay
 #SAMPLE_REPLAY=test.wotreplay
 
 cd "${WOT_DIRECTORY}"
