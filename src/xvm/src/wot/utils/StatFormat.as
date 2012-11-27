@@ -33,6 +33,9 @@ class wot.utils.StatFormat
         var sTDV: String = "";
         var sTFB: String = "";
         var sTSB: String = "";
+        var sD: String = "";
+        var sF: String = "";
+        var sS: String = "";
 
         var eff: Number = 0;
         var e: Number = 0;
@@ -102,10 +105,13 @@ class wot.utils.StatFormat
                         sTDB = stat.tdb > 0 ? String(tdb) : "";
                         tdv = stat.tdv;
                         sTDV = stat.tdv > 0 ? Sprintf.format("%.1f", tdv) : "";
+                        sD = Utils.padLeft(stat.tdv > 0 ? String(Math.round(tdv * 10)) : "", 2);
                         tfb = stat.tfb;
                         sTFB = stat.tfb > 0 ? Sprintf.format("%.1f", tfb) : "";
+                        sF = Utils.padLeft(stat.tfb > 0 ? String(Math.round(tfb * 10)) : "", 2);
                         tsb = stat.tsb;
                         sTSB = stat.tsb > 0 ? Sprintf.format("%.1f", tsb) : "";
+                        sS = Utils.padLeft(stat.tsb > 0 ? String(Math.round(tsb * 10)) : "", 2);
                     }
                 }
             }
@@ -129,6 +135,9 @@ class wot.utils.StatFormat
         format = format.split("{{tdv}}").join(sTDV);
         format = format.split("{{tfb}}").join(sTFB);
         format = format.split("{{tsb}}").join(sTSB);
+        format = format.split("{{d}}").join(sD);
+        format = format.split("{{f}}").join(sF);
+        format = format.split("{{s}}").join(sS);
 
         // This code is stupid, and needs to be rewritten
         format = format.split("{{kb:3}}").join(Utils.padLeft(sKb, 3));

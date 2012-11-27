@@ -1,4 +1,10 @@
-﻿XVM-3.2.0-test3:
+﻿XVM-3.2.0-test4:
+  * new macros:
+     {{d}} - {{tdv}}*10, aligned to 2 chars
+     {{f}} - {{tfb}}*10, aligned to 2 chars
+     {{s}} - {{tsb}}*10, aligned to 2 chars
+
+XVM-3.2.0-test3:
   * new vehicles added
   * new macros:
       {{tdb}}, {{tdb:4}} - average damage for current tank - damage/battles
