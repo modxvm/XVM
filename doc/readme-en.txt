@@ -168,6 +168,7 @@
       {{c:kb}}        - color depended from kilo-battles
       {{c:t-rating}}  - color depended from current vehicle win ratio
       {{c:t-battles}} - color depended from current vehicle battles
+      {{c:e}}         - color depended from player per-vehicle efficiency
 
   "format" field examples:
     1. Show number of kilo-battles, efficiency and GWR without changing a color:

@@ -493,10 +493,10 @@ class wot.utils.DefaultConfig
                 e: [
                     { value: 0.01, color: ColorPalette.white },
                     { value: 2,    color: ColorPalette.red },
-                    { value: 4,    color: ColorPalette.orange },
+                    { value: 3,    color: ColorPalette.orange },
                     { value: 5,    color: ColorPalette.yellow },
-                    { value: 6,    color: ColorPalette.green },
-                    { value: 8,    color: ColorPalette.blue },
+                    { value: 7,    color: ColorPalette.green },
+                    { value: 9,    color: ColorPalette.blue },
                     { value: 10,   color: ColorPalette.purple }
                 ]
             },

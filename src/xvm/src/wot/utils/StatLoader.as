@@ -229,7 +229,7 @@ class wot.utils.StatLoader
     stat.tsb = stat.ts <= 0 ? 0 : Math.round(stat.ts / stat.tb * 10) / 10;
 
     stat.tdv = 0;
-    stat.te = 0;
+    stat.te = null;
 
     var info = VehicleInfo.getInfo2(stat.vn);
     if (info == null)
@@ -237,23 +237,27 @@ class wot.utils.StatLoader
     else
     {
         stat.tdv = stat.td <= 0 ? 0 : stat.td / stat.tb / info.hptop;
-        stat.te = stat.tdv * 5;
 
-        var vi = VehicleInfo.getInfoFromMappedName(stat.vn);
-        if (vi == null)
-            Logger.add("ERROR: vehicle info missed: " + stat.vn + ". Please notify XVM support.");
-        else
+        if (stat.tdv > 0)
         {
-            if (vi.type == "SPG")
-                stat.te /= 2.5;
-            else if (vi.type == "LT" && vi.level >= 5)
-                stat.te *= 1.75;
+            stat.te = stat.tdv * 5 / 0.9;
+
+            var vi = VehicleInfo.getInfoFromMappedName(stat.vn);
+            if (vi == null)
+                Logger.add("ERROR: vehicle info missed: " + stat.vn + ". Please notify XVM support.");
+            else
+            {
+                if (vi.type == "SPG")
+                    stat.te /= 2.5;
+                else if (vi.type == "LT" && vi.level >= 5)
+                    stat.te *= 1.75;
+            }
+            stat.te_raw = stat.te;
+            stat.te = stat.tdv == 0 ? null : Math.max(0, Math.min(9, Math.round(stat.te)));
         }
 
         // Normalize result
         stat.tdv = Math.round(stat.tdv * 10) / 10;
-        stat.te_raw = stat.te;
-        stat.te = Math.max(0, Math.min(9, Math.round(stat.te)));
 
         //Logger.add(stat.vn + " " + stat.te + " " + stat.tdv)
         //Logger.addObject(stat);

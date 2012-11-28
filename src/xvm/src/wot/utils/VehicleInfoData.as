@@ -6,7 +6,6 @@ class wot.utils.VehicleInfoData
 {
     public static var data:Object = {
         // unknown
-        unknown:                        { level: 0,  type: "",  tiers: [ 0, 0 ],   premium: false, name: null },
 /*
         usa_A74_T1_E6:                  { level: 0,  type: "LT",  tiers: [ 0, 0 ],   premium: false, name: null },
 */
@@ -298,6 +297,9 @@ class wot.utils.VehicleInfoData
         france_FCM_50t:                 { level: 8,  type: "HT",  tiers: [ 8, 9 ],   premium: true,  name: null },
         usa_T26_E4_SuperPershing:       { level: 8,  type: "MT",  tiers: [ 8, 9 ],   premium: true,  name: null },
         china_Ch01_Type59:              { level: 8,  type: "MT",  tiers: [ 8, 9 ],   premium: true,  name: null },
-        germany_JagdTiger_SdKfz_185:    { level: 8,  type: "TD",  tiers: [ 8, 9 ],   premium: true,  name: null }
+        germany_JagdTiger_SdKfz_185:    { level: 8,  type: "TD",  tiers: [ 8, 9 ],   premium: true,  name: null },
+
+        // DO NOT REMOVE
+        unknown:                        { level: 0,  type: "",  tiers: [ 0, 0 ],   premium: false, name: null }
     }
 }

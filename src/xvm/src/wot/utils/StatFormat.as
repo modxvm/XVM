@@ -77,7 +77,7 @@ class wot.utils.StatFormat
                     sEff = eff ? String(eff) : "--";
 
                     e = stat.te;
-                    sE = e ? String(e) : "-";
+                    sE = e != null ? String(e) : "-";
 
                     if (rating)
                     {
