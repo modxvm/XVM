@@ -240,7 +240,7 @@ class wot.utils.StatLoader
 
         if (stat.tdv > 0)
         {
-            stat.te = stat.tdv * 5 / 0.9;
+            stat.te = stat.tdv * 5 /* / 0.9 */;
 
             var vi = VehicleInfo.getInfoFromMappedName(stat.vn);
             if (vi == null)
@@ -248,7 +248,7 @@ class wot.utils.StatLoader
             else
             {
                 if (vi.type == "SPG")
-                    stat.te /= 2.5;
+                    stat.te /= 3;
                 else if (vi.type == "LT" && vi.level >= 5)
                     stat.te *= 1.75;
             }
