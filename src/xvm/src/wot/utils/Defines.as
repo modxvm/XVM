@@ -57,6 +57,7 @@ class wot.utils.Defines
   public static var DYNAMIC_COLOR_TDV: Number = 8;
   public static var DYNAMIC_COLOR_TFB: Number = 9;
   public static var DYNAMIC_COLOR_TSB: Number = 10;
+  public static var DYNAMIC_COLOR_E: Number = 11;
 
   // Dynamic alpha types
   //public static var DYNAMIC_ALPHA_EFF: Number = 1;

@@ -1,4 +1,12 @@
-﻿XVM-3.2.0-test4:
+﻿XVM-3.2.0-test5:
+  * new value of macros:
+      {{e}} - new per-vehicle efficiency.
+              Discussion: http://www.koreanrandom.com/forum/topic/1643-
+  * removed macros:
+      {{e:3}} - not required
+  * color palette revised
+
+XVM-3.2.0-test4:
   * new macros:
       {{d}} - {{tdv}}*10, aligned to 2 chars
       {{f}} - {{tfb}}*10, aligned to 2 chars

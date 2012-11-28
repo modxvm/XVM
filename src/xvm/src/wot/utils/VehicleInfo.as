@@ -5,6 +5,7 @@ import wot.utils.Config;
 import wot.utils.Utils;
 import wot.utils.VehicleInfoData;
 import wot.utils.VehicleInfoData2;
+import wot.utils.VehicleInfoDataMapping;
 
 class wot.utils.VehicleInfo
 {
@@ -45,6 +46,11 @@ class wot.utils.VehicleInfo
         // iconSource:
         // ../maps/icons/vehicle/contour/ussr-KV-5.png
         return VehicleInfoData.data[getName(iconSource)] || null;
+    }
+
+    public static function getInfoFromMappedName(vehicleName: String): Object
+    {
+        return VehicleInfoDataMapping.data2toData[vehicleName.split("-").join("_").toLowerCase()] || null;
     }
 
     public static function getInfo2(vehicleName: String): Object

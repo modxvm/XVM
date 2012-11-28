@@ -76,8 +76,8 @@ class wot.utils.StatFormat
                     eff = Utils.toInt(stat.e);
                     sEff = eff ? String(eff) : "--";
 
-                    e = Utils.toInt(stat.e / 10);
-                    sE = e ? String(e) : "--";
+                    e = stat.te;
+                    sE = e ? String(e) : "-";
 
                     if (rating)
                     {
@@ -143,7 +143,6 @@ class wot.utils.StatFormat
         format = format.split("{{kb:3}}").join(Utils.padLeft(sKb, 3));
         format = format.split("{{rating:3}}").join(Utils.padLeft(sRating, 3));
         format = format.split("{{eff:4}}").join(Utils.padLeft(sEff, 4));
-        format = format.split("{{e:3}}").join(Utils.padLeft(sE, 3));
 
         format = format.split("{{t-kb:4}}").join(Utils.padLeft(sTKbWithout0, 4));
         format = format.split("{{t_kb:4}}").join(Utils.padLeft(sTKbWithout0, 4));
@@ -160,28 +159,30 @@ class wot.utils.StatFormat
 
         // Dynamic colors
         format = format.split("{{c:eff}}").join(eff < 0 ? ""
-        : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff, "#", isDead));
+            : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff, "#", isDead));
         format = format.split("{{c:rating}}").join(rating < 0 ? ""
-        : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, rating, "#", isDead));
+            : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, rating, "#", isDead));
         format = format.split("{{c:kb}}").join(
-        GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, kb, "#", isDead));
+            GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, kb, "#", isDead));
 
         format = format.split("{{c:t-rating}}").join(rating < 0 ? ""
-        : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, t_rating, "#", isDead));
+            : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, t_rating, "#", isDead));
         format = format.split("{{c:t_rating}}").join(rating < 0 ? ""
-        : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, t_rating, "#", isDead));
+            : GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, t_rating, "#", isDead));
         format = format.split("{{c:t-battles}}").join(
-        GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, t_battles, "#", isDead));
+            GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, t_battles, "#", isDead));
         format = format.split("{{c:t_battles}}").join(
-        GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, t_battles, "#", isDead));
+            GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, t_battles, "#", isDead));
         format = format.split("{{c:tdb}}").join(
-        GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, tdb, "#", isDead));
+            GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, tdb, "#", isDead));
         format = format.split("{{c:tdv}}").join(
-        GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, tdv, "#", isDead));
+            GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, tdv, "#", isDead));
         format = format.split("{{c:tfb}}").join(
-        GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, tfb, "#", isDead));
+            GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, tfb, "#", isDead));
         format = format.split("{{c:tsb}}").join(
-        GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, tsb, "#", isDead));
+            GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, tsb, "#", isDead));
+        format = format.split("{{c:e}}").join(
+            GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, e, "#", isDead));
 
         //format = Utils.trim(format);
 

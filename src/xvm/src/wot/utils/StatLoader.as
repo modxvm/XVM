@@ -166,8 +166,8 @@ class wot.utils.StatLoader
           for (var i = 0; i < players_length; ++i)
           {
             var stat = response.players[i];
-            stat = StatLoader.CalculateRating(stat);
             var name = stat.name.toUpperCase();
+            stat = StatLoader.CalculateRating(stat, name);
             if (!StatData.s_data[name])
             {
               StatLoader.s_players_count++;
@@ -208,7 +208,7 @@ class wot.utils.StatLoader
     requestCounter++;
   }
 
-  private static function CalculateRating(stat): Object
+  private static function CalculateRating(stat, name): Object
   {
     stat.r = stat.b > 0 ? Math.round(stat.w / stat.b * 100) : 0;
 
@@ -225,13 +225,40 @@ class wot.utils.StatLoader
 
     //Logger.addObject(stat);
     stat.tdb = stat.td <= 0 ? 0 : Math.round(stat.td / stat.tb);
-    var info = VehicleInfo.getInfo2(stat.vn);
-    if (info == null)
-        Logger.add("Warning: no data for " + stat.vn);
-    stat.tdv = (info == null || stat.td <= 0) ? 0 : Math.round(stat.td / stat.tb / info.hptop * 10) / 10;
     stat.tfb = stat.tf <= 0 ? 0 : Math.round(stat.tf / stat.tb * 10) / 10;
     stat.tsb = stat.ts <= 0 ? 0 : Math.round(stat.ts / stat.tb * 10) / 10;
 
+    stat.tdv = 0;
+    stat.te = 0;
+
+    var info = VehicleInfo.getInfo2(stat.vn);
+    if (info == null)
+        Logger.add("Warning: no data for " + stat.vn + ". Check for new XVM version.");
+    else
+    {
+        stat.tdv = stat.td <= 0 ? 0 : stat.td / stat.tb / info.hptop;
+        stat.te = stat.tdv * 5;
+
+        var vi = VehicleInfo.getInfoFromMappedName(stat.vn);
+        if (vi == null)
+            Logger.add("ERROR: vehicle info missed: " + stat.vn + ". Please notify XVM support.");
+        else
+        {
+            if (vi.type == "SPG")
+                stat.te /= 2.5;
+            else if (vi.type == "LT" && vi.level >= 5)
+                stat.te *= 1.75;
+        }
+
+        // Normalize result
+        stat.tdv = Math.round(stat.tdv * 10) / 10;
+        stat.te_raw = stat.te;
+        stat.te = Math.max(0, Math.min(9, Math.round(stat.te)));
+
+        //Logger.add(stat.vn + " " + stat.te + " " + stat.tdv)
+        //Logger.addObject(stat);
+    }
+    
     return stat;
   }
 

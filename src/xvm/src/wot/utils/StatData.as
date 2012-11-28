@@ -35,6 +35,7 @@
         tdf - average tank frags per battle (*)
         tdv - average tank damage efficiency per battle (*)
             (*) - calculated in StatLoader.as
+        te - per-vehicle efficiency (http://www.koreanrandom.com/forum/topic/1643-)
 */
 
 /*

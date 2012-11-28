@@ -6,6 +6,7 @@ class wot.utils.VehicleInfoData
 {
     public static var data:Object = {
         // unknown
+        unknown:                        { level: 0,  type: "",  tiers: [ 0, 0 ],   premium: false, name: null },
 /*
         usa_A74_T1_E6:                  { level: 0,  type: "LT",  tiers: [ 0, 0 ],   premium: false, name: null },
 */

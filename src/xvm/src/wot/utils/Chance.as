@@ -20,7 +20,7 @@ class wot.utils.Chance
     private static var battleTier: Number = 0;
 
     public static var lastChances: Object = null;
-	
+
     public static function ShowChance(tf: TextField, showExp: Boolean): String
     {
         var text = GetChanceText(showExp);
@@ -114,7 +114,7 @@ class wot.utils.Chance
         var B: Number = stat.b || Config.s_config.consts.AVG_BATTLES;
         var Bn = (B < 2000) ? B / 5000               // 0k .. 2k  => 0.0 .. 0.4
             : (B < 5000) ? 0.4 + (B - 2000) / 15000  // 2k .. 5k  => 0.4 .. 0.6
-            : (B < 10000) ? 0.6 + (B - 5000) / 25000 // 5k .. 10k => 0.6 .. 0.8 
+            : (B < 10000) ? 0.6 + (B - 5000) / 25000 // 5k .. 10k => 0.6 .. 0.8
             : 0.8 + (B - 10000) / 100000;            // 10k..    => 0.8 .. ...
 
         return E * (1 + R - (Config.s_config.consts.AVG_GWR / 100.0)) * (1 + 0.25 * Td) * (1 + Bn);
@@ -165,7 +165,7 @@ class wot.utils.Chance
         var B: Number = stat.b || Config.s_config.consts.AVG_BATTLES;
         var Bn = (B < 2000) ? B / 5000               // 0k .. 2k  => 0.0 .. 0.4
             : (B < 5000) ? 0.4 + (B - 2000) / 15000  // 2k .. 5k  => 0.4 .. 0.6
-            : (B < 10000) ? 0.6 + (B - 5000) / 25000 // 5k .. 10k => 0.6 .. 0.8 
+            : (B < 10000) ? 0.6 + (B - 5000) / 25000 // 5k .. 10k => 0.6 .. 0.8
             : 0.8 + (B - 10000) / 100000;            // 10k..    => 0.8 .. ...
 
         var K = (R - 5) * (1 + 0.25 * Td) * (1 + Bn);
@@ -222,7 +222,7 @@ class wot.utils.Chance
     {
         return Math.round(Math.max(0.05, Math.min(0.95, (0.5 + (a / (a + b) - 0.5) * 5.0))) * 100);
     }
-	
+
 	private static function NormalizeResultF(a, b)
     {
         return Math.round(1000*Math.max(0.05, Math.min(0.95, (0.5 + (a / (a + b) - 0.5) * 5.0))) * 100)/1000;

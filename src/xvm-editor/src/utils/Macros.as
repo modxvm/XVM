@@ -67,13 +67,12 @@ package utils
             // Statistics
             format = format.replace("{{rating}}", "66%");
             format = format.replace("{{eff}}", "1800");
-            format = format.replace("{{e}}", "180");
+            format = format.replace("{{e}}", "5");
             format = format.replace("{{kb}}", "11k");
             format = format.replace("{{battles}}", "11000");
             format = format.replace("{{wins}}", "7260");
             format = format.replace("{{rating:3}}", "66%");
             format = format.replace("{{eff:4}}", "1800");
-            format = format.replace("{{e:3}}", "180");
             format = format.replace("{{kb:3}}", " 11k");
             format = format.replace("{{t-rating}}", "55%");
             format = format.replace("{{t-kb}}", ".5k");
@@ -187,7 +186,6 @@ package utils
                 { value: "{{wins}}", label: "wins", icon: Embed.wins },
                 { value: "{{rating:3}}", label: "rating_3", icon: Embed.rating_3 },
                 { value: "{{eff:4}}", label: "eff_4", icon: Embed.eff_4 },
-                { value: "{{e:3}}", label: "e_3", icon: Embed.e_3 },
                 { value: "{{kb:3}}", label: "kb_3", icon: Embed.kb_3 },
                 { value: "{{t-rating}}", label: "t_rating", icon: Embed.t_rating },
                 { value: "{{t-kb}}", label: "t_kb", icon: Embed.t_kb },

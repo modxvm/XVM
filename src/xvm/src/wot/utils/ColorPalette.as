@@ -1,47 +1,15 @@
 class wot.utils.ColorPalette
 {
-  public static function get magenta():String
-  {
-      return "0xEE33FF";
-  }
-  
-  public static function get purple():String
-  {
-      return "0xAA66FF";
-  }
-  
-  public static function get green():String
-  {
-      return "0x33FF88";
-  } 
-  
-  public static function get greenyellow():String
-  {
-      return "0x99FF44";
-  }
-  
-  public static function get yellow():String
-  {
-      return "0xFFCC22";
-  }
-    
-  public static function get orange():String
-  {
-      return "0xFF8844";
-  }
-    
-  public static function get redSmooth():String
-  {
-      return "0xDD4444";
-  }
-  
-  public static function get redBright():String
-  {
-      return "0xFF0000";
-  }
-        
-  public static function get white():String
-  {
-      return "0xFCFCFC";
-  }
+  public static var white:String = "0xFCFCFC";
+  public static var red:String = "0xFE0E00";
+  public static var orange:String = "0xFE7903";
+  public static var yellow:String = "0xF8F400";
+  public static var green:String = "0x60FF00";
+  public static var blue:String = "0x02C9B3";
+  public static var purple:String = "0xCF3AF4";
+
+  public static var magenta:String = "0xEE33FF";
+  public static var greenyellow:String = "0x99FF44";
+  public static var redSmooth:String = "0xDD4444";
+  public static var redBright:String = "0xFF0000";
 }

@@ -14,7 +14,7 @@ public class StatFormat
         format = format.split("{{wins}}").join("5678");
         format = format.split("{{rating}}").join("48%");
         format = format.split("{{eff}}").join("1230");
-        format = format.split("{{e}}").join("123");
+        format = format.split("{{e}}").join("5");
 
         format = format.split("{{t-kb}}").join("2.3");
         format = format.split("{{t-kb-0}}").join("02.3");
@@ -27,7 +27,6 @@ public class StatFormat
         format = format.split("{{kb:3}}").join(" 10");
         format = format.split("{{rating:3}}").join("48%");
         format = format.split("{{eff:4}}").join("1230");
-        format = format.split("{{e:3}}").join("123");
 
         format = format.split("{{t-kb:4}}").join(" 2.3");
         format = format.split("{{t_kb:4}}").join(" 2.3");
