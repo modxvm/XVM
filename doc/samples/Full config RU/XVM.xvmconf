@@ -1492,7 +1492,7 @@
       { "value": 1200, "color": "0xF8F400" },   //  900 - 1199 - normal
       { "value": 1500, "color": "0x60FF00" },   // 1200 - 1499 - good
       { "value": 1800, "color": "0x02C9B3" },   // 1500 - 1799 - very good
-      { "value": 9999, "color": "0xCF3AF4" }    // 1800 - *    - unique
+      { "value": 9999, "color": "0xD042F3" }    // 1800 - *    - unique
     ],
     // Динамический цвет по проценту побед (только с xvm-stat). Значения от меньшего к большему.
     "rating": [
@@ -1501,7 +1501,7 @@
       { "value": 51,  "color": "0xF8F400" },   // 48 - 50  - normal
       { "value": 54,  "color": "0x60FF00" },   // 51 - 53  - good
       { "value": 57,  "color": "0x02C9B3" },   // 54 - 56  - very good
-      { "value": 101, "color": "0xCF3AF4" }    // 57 - 100 - unique
+      { "value": 101, "color": "0xD042F3" }    // 57 - 100 - unique
     ],
     // Динамический цвет по количеству кило-боев (только с xvm-stat). Значения от меньшего к большему.
     "kb": [
@@ -1510,7 +1510,7 @@
       { "value": 9,   "color": "0xF8F400" },   //  5 - 8
       { "value": 14,  "color": "0x60FF00" },   //  9 - 13
       { "value": 20,  "color": "0x02C9B3" },   // 14 - 19
-      { "value": 999, "color": "0xCF3AF4" }    // 20 - *
+      { "value": 999, "color": "0xD042F3" }    // 20 - *
     ],
     // Динамический цвет по количеству боев по текущему танку (только с xvm-stat). Значения от меньшего к большему.
     "t_battles": [
@@ -1519,7 +1519,7 @@
       { "value": 500,   "color": "0xF8F400" }, //  250 - 499
       { "value": 1000,  "color": "0x60FF00" }, //  500 - 999
       { "value": 1800,  "color": "0x02C9B3" }, // 1000 - 1799
-      { "value": 99999, "color": "0xCF3AF4" }  // 1800 - *
+      { "value": 99999, "color": "0xD042F3" }  // 1800 - *
     ],
     "tdb": [
       { "value": 1,    "color": "0xFCFCFC" },
@@ -1534,7 +1534,7 @@
       { "value": 1.0,  "color": "0xF8F400" },
       { "value": 1.3,  "color": "0x60FF00" },
       { "value": 2.0,  "color": "0x02C9B3" },
-      { "value": 15,   "color": "0xCF3AF4" }
+      { "value": 15,   "color": "0xD042F3" }
     ],
     "tfb": [
       { "value": 0.01, "color": "0xFCFCFC" },
@@ -1543,7 +1543,7 @@
       { "value": 1.0,  "color": "0xF8F400" },
       { "value": 1.3,  "color": "0x60FF00" },
       { "value": 2.0,  "color": "0x02C9B3" },
-      { "value": 15,   "color": "0xCF3AF4" }
+      { "value": 15,   "color": "0xD042F3" }
     ],
     "tsb": [
       { "value": 0.01, "color": "0xFCFCFC" },
@@ -1552,7 +1552,7 @@
       { "value": 1.0,  "color": "0xF8F400" },
       { "value": 1.3,  "color": "0x60FF00" },
       { "value": 2.0,  "color": "0x02C9B3" },
-      { "value": 15,   "color": "0xCF3AF4" }
+      { "value": 15,   "color": "0xD042F3" }
     ],
     "e": [
       { "value": 0.01, "color": "0xFCFCFC" },
@@ -1561,7 +1561,7 @@
       { "value": 5,    "color": "0xF8F400" },
       { "value": 7,    "color": "0x60FF00" },
       { "value": 9,    "color": "0x02C9B3" },
-      { "value": 10,   "color": "0xCF3AF4" }
+      { "value": 10,   "color": "0xD042F3" }
     ]
   },
   // Настройки динамической прозрачности

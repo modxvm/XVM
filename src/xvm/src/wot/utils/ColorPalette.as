@@ -6,7 +6,7 @@ class wot.utils.ColorPalette
   public static var yellow:String = "0xF8F400";
   public static var green:String = "0x60FF00";
   public static var blue:String = "0x02C9B3";
-  public static var purple:String = "0xCF3AF4";
+  public static var purple:String = "0xD042F3";
 
   public static var magenta:String = "0xEE33FF";
   public static var greenyellow:String = "0x99FF44";
