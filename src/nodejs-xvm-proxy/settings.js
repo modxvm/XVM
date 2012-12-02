@@ -1,6 +1,6 @@
 module.exports = (function()
 {
-    var numNodes = 1; // use X CPU core(s)
+    var numNodes = 2; // use X CPU core(s)
 
     // exports
     return {
@@ -11,6 +11,8 @@ module.exports = (function()
         cacheTtl: 5 * 24 * 60 * 60 * 1000, // 7 days
         lastErrorTtl: 1 * 1000, // in msec
         usageStatShowPeriod: 20 * 1000, // in msec
+        mongoServer: "localhost",
+        mongoPort: 27017,
         dbName: "xvm",
         collectionName: "players",
         missedCollectionName: "missed",

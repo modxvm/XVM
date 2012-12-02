@@ -174,7 +174,7 @@ module.exports = (function() {
                             for(var j = 0; j < vehicles_length; ++j) {
                                 var vdata = curResult.data.vehicles[j];
                                 resultItem.v.push({
-                                    name: vdata.name,
+                                    name: vdata.name.toUpperCase(),
                                     l: vdata.level,
                                     b: vdata.battle_count,
                                     w: vdata.win_count,
@@ -485,7 +485,7 @@ module.exports = (function() {
         }, 60000);
 
         // Connect to database
-        var db = new mongo.Db(settings.dbName, new mongo.Server("localhost", 27017, mongoOptions));
+        var db = new mongo.Db(settings.dbName, new mongo.Server(settings.mongoServer, settings.mongoPort, mongoOptions));
         db.open(function(error, client) {
             if(error) {
                 utils.log("DB connection error!");
