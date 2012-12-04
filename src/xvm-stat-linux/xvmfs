@@ -23,7 +23,9 @@ from xml.dom import minidom
 """ Global constants and variables section.
 """
 
-XVMFS_VERSION = '0.1.0'
+# Based on XVM 3.1.2, SVN rev. 1104
+
+XVMFS_VERSION = '0.1.1'
 fuse.fuse_python_api = (0, 2)
 
 # Logging configuration.
@@ -337,7 +339,7 @@ class XvmFS(Fuse):
         return wotVersion
 
     def GetProxyAddresses(self):
-        """ Actually, this method is (and should) be used to parse
+        """ Actually, this method is (and should be) used to parse
             XVM config file.
         """
         if not os.path.isfile(self.xvm_cfg):
@@ -658,30 +660,30 @@ def main():
 
     server.parse(values=server, errex=1)
 
-    if (server.fuse_args.mount_expected()
-            and len(sys.argv) <= 1):
-        print >> sys.stderr, "xvmfs: missing mountpoint parameter." + \
-                "\nSee `xvmfs -h' for usage"
-        sys.exit(1)
-        
-    configureLoggers(server.log_dir,
-            logging.DEBUG if server.debug else logging.INFO)
+    if server.fuse_args.mount_expected():
+        if len(sys.argv) <= 1:
+            print >> sys.stderr, "xvmfs: missing mountpoint parameter." + \
+                    "\nSee `xvmfs -h' for usage"
+            sys.exit(1)
 
-    server.init()
+        configureLoggers(server.log_dir,
+                logging.DEBUG if server.debug else logging.INFO)
+        server.init()
+
     server.main()
 
 def configureLoggers(logDir, level):
     global Log, LogStat
 
     formatter = logging.Formatter("%(asctime)s %(levelname)-7s: %(message)s")
-    handler = logging.FileHandler(os.path.join(logDir, XVM_LOG), mode='a')
+    handler = logging.FileHandler(os.path.join(logDir, XVM_LOG), mode='w')
     handler.setFormatter(formatter)
 
     Log = logging.getLogger('XVM')
     Log.setLevel(level)
     Log.addHandler(handler)
 
-    handler = logging.FileHandler(os.path.join(logDir, XVM_STAT_LOG), mode='a')
+    handler = logging.FileHandler(os.path.join(logDir, XVM_STAT_LOG), mode='w')
     handler.setFormatter(formatter)
 
     LogStat = logging.getLogger('XVM-STAT')

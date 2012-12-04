@@ -1,4 +1,4 @@
-This is XVM FUSE driver implementation with additional features
+XvmFS is XVM FUSE driver implementation with additional features
 required for XVM mod.
 
 XVM is popular mod for 'Worls of Tanks' MMO game.
