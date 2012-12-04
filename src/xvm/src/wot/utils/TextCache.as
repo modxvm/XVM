@@ -56,12 +56,6 @@ class wot.utils.TextCache
         formatArr = format.split("{{vtype}}");
         if (formatArr.length > 1)
             format = formatArr.join(VehicleInfo.GetVTypeValue(data.icon));
-        formatArr = format.split("{{name}}");
-        if (formatArr.length > 1)
-            format = formatArr.join(Utils.GetPlayerName(name));
-        formatArr = format.split("{{clan}}");
-        if (formatArr.length > 1)
-            format = formatArr.join(Utils.GetClanNameWithBrackets(name));
         formatArr = format.split("{{c:vtype}}");
         if (formatArr.length > 1)
             format = formatArr.join(GraphicsUtil.GetVTypeColorValue(data.icon));
@@ -69,39 +63,55 @@ class wot.utils.TextCache
         format = StatFormat.FormatText(data, format, isDead);
 
         // cut player name for field width
-        if (format.indexOf("{{nick}}") > -1)
+        if (format.indexOf("{{nick}}") > -1 || format.indexOf("{{name}}") > -1 || format.indexOf("{{clan}}") > -1)
         {
-            var str: String = name;
-            var pname: String = name;
+            var pname: String = Utils.GetPlayerName(name);
+            var cname: String = Utils.GetClanNameWithBrackets(name);
             if (width >= 0 && tf)
             {
                 if (s_widthTester == null)
+                    createWidthTester();
+                while (pname + cname != "")
                 {
-                    s_widthTester = _root.createTextField("widthTester", _root.getNextHighestDepth(), 0, 0, 268, 20);
-                    s_widthTester.autoSize = false;
-                    s_widthTester.html = true;
-                    s_widthTester.condenseWhite = true;
-                    s_widthTester._visible = false;
-                    s_widthTester.setNewTextFormat(tf);
-                }
-                while (pname.length > 0)
-                {
-                    str = (pname == name || state != "pp_large") ? pname : pname + "...";
-                    s_widthTester.htmlText = format.split("{{nick}}").join(str);
+                    s_widthTester.htmlText = format
+                        .split("{{nick}}").join(pname + cname)
+                        .split("{{name}}").join(pname)
+                        .split("{{clan}}").join(cname);
                     if (Math.round(s_widthTester.getLineMetrics(0).width) + 4 <= width) // 4 is a size of gutters
                     {
                         //Logger.add("width=" + width + " _width=" + s_widthTester._width + " lineWidth=" + Math.round(s_widthTester.getLineMetrics(0).width) + " " + str);
                         break;
                     }
-                    pname = pname.substr(0, pname.length - 1);
+                    if (cname != "")
+                        cname = cname.substr(0, cname.length - 1);
+                    else
+                        pname = pname.substr(0, pname.length - 1);
                 }
             }
-            format = format.split("{{nick}}").join(pname.length == 0 ? "" : str);
+            formatArr = format.split("{{nick}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(pname + cname);
+            formatArr = format.split("{{name}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(pname);
+            formatArr = format.split("{{clan}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(cname);
         }
 
         return format;
     }
 
+    private static function createWidthTester()
+    {
+        s_widthTester = _root.createTextField("widthTester", _root.getNextHighestDepth(), 0, 0, 268, 20);
+        s_widthTester.autoSize = false;
+        s_widthTester.html = true;
+        s_widthTester.condenseWhite = true;
+        s_widthTester._visible = false;
+        s_widthTester.setNewTextFormat(tf);
+    }
+    
     public static function modXvmDevLabel(nick):String
     {
         var label = Utils.GetPlayerName(nick);
