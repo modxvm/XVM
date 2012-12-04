@@ -143,6 +143,11 @@
       {{speed}}       - capture speed in points per second;              can be placed only inside extra section
       {{extra}}       - extra text section; is shows only when timeleft and number of capturers was calculated successfully
 
+    In Minimap:
+      {{level}}        - subject level
+      {{short-nick}}   - subject shortened nickname
+      {{vehicle}}      - subject full vehicle type
+
     Statistics macros ('rating/showPlayersStatistics' must be anabled):
       {{kb}}          - number of kilo-battles (total battles count divided by 1000).
       {{battles}}     - total battles count

@@ -155,13 +155,33 @@
       }
     }
   },
+  // Миникарта
+  "minimap": {
+    "enabled": true,  // Переключатель модификации вкл/выкл
+    "iconScale": 1,   // Увеличение иконок техники на миникарте и прикреплённого текста
+    "nickShrink": 4,  // Размер урезки ника для макроса {{short-nick}}
+    "textOffsetX": 0, // Смещение прикреплённого текста по X относительно иконки
+    "textOffsetY": 0, // Смещение прикреплённого текста по Y относительно иконки
+    "format": {       // Формат прикреплённого текста. Макросы {{level}}, {{vehicle}}, {{short-nick}}
+      "ally":  "{{level}}", // Для союзников
+      "enemy": "{{level}}", // Для врагов
+      "squad": "{{level}} <i>{{short-nick}}</i>", // Для совзводных
+      "oneself": "<b>{{level}}</b>" // Для себя и приемника камеры в случае смерти
+    },
+    "css": { // Стиль прикреплённого текста
+      "ally":    "font-family:$FieldFont; font-size:6px; color:#BBEEBB;", // Для союзников
+      "enemy":   "font-family:$FieldFont; font-size:6px; color:#EEBBBB;", // Для врагов
+      "squad":   "font-family:$FieldFont; font-size:6px; color:#FFEE44;", // Для совзводных
+      "oneself": "font-family:$FieldFont; font-size:6px; color:#EEEEEE;"  // Для себя
+    }
+  },
   // Блок маркеров над танками.
   "markers": {
     // союзник
     "ally": {
       // союзник/живой
       "alive": {
-// союзник/живой/нормальный режим (без Alt)
+        // союзник/живой/нормальный режим (без Alt)
         "normal": {
           "vehicleIcon": {                    // иконка типа танка (тт/ст/лт/пт/арта)
             "visible": true,                  //   false - не отображать
@@ -313,7 +333,7 @@
             }
           ]
         },
-// союзник/живой/расширенный режим (c Alt)
+        // союзник/живой/расширенный режим (c Alt)
         "extended": {
           "vehicleIcon": {                    // иконка типа танка (тт/ст/лт/пт/арта)
             "visible": true,                  //   false - не отображать

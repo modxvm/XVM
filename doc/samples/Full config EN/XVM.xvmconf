@@ -155,6 +155,26 @@
       }
     }
   },
+  // Minimap
+  "minimap": {
+    "enabled": true,  // On/off modification switch
+    "iconScale": 1,   // Minimap icon and attached text scaling factor
+    "nickShrink": 4,  // Nickname shrink value for {{short-nick}} macro
+    "textOffsetX": 0, // Attached text X offset relative to icon
+    "textOffsetY": 0, // Attached text Y offset relative to icon
+    "format": {       // Attached text format. Macroses {{level}}, {{vehicle}}, {{short-nick}}
+      "ally":  "{{level}}", // Ally
+      "enemy": "{{level}}", // Enemy
+      "squad": "{{level}} <i>{{short-nick}}</i>", // Squadmates
+      "oneself": "<b>{{level}}</b>" // For oneself and camera receiver in case of death
+    },
+    "css": { // Attached text style
+      "ally":    "font-family:$FieldFont; font-size:6px; color:#BBEEBB;", // Ally
+      "enemy":   "font-family:$FieldFont; font-size:6px; color:#EEBBBB;", // Enemy
+      "squad":   "font-family:$FieldFont; font-size:6px; color:#FFEE44;", // Squadmates
+      "oneself": "font-family:$FieldFont; font-size:6px; color:#EEEEEE;"  // For oneself and camera receiver in case of death
+    }
+  },
   // OVER-TARGET MARKERS
   "markers": {
     // Ally

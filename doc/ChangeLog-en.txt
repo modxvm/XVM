@@ -1,4 +1,6 @@
-﻿XVM-3.2.0-test5:
+﻿  * minimap mod
+
+XVM-3.2.0-test5:
   * new value of macros:
       {{e}} - new per-vehicle efficiency.
               Discussion: http://www.koreanrandom.com/forum/topic/1643-
