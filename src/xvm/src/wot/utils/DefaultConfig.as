@@ -148,8 +148,24 @@ class wot.utils.DefaultConfig
                 lowVulnerability: "'"
             },
             minimap: {
+                enabled: true,
                 iconScale: 1,
-                isDeadPermanent: true
+                nickShrink: 4,
+                isDeadPermanent: true,
+                textOffsetX: 0,
+                textOffsetY: 0,
+                format: {
+                  ally:  "{{level}} {{vehicle}}",
+                  enemy: "{{level}} {{vehicle}}",
+                  squad: "{{level}} {{vehicle}} <i>{{short-nick}}</i>",
+                  oneself: "<b>{{level}} {{vehicle}}</b>"
+                },
+                css: {
+                  ally:  "font-family:$FieldFont; font-size:6px; color:#BBEEBB;",
+                  enemy: "font-family:$FieldFont; font-size:6px; color:#EEBBBB;",
+                  squad: "font-family:$FieldFont; font-size:6px; color:#FFEE44;",
+                  oneself: "font-family:$FieldFont; font-size:6px; color:#FFFFFF;"
+                }
             },
             captureBar: {
                 enabled: true,
