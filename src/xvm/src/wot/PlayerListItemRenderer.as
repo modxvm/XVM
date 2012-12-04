@@ -100,4 +100,10 @@ class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRend
         PlayerInfo.setSource(m_clanIcon, data.label, data.clanAbbrev);
         m_clanIcon["holder"]._alpha = ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0) ? 100 : 50;
     }
+    
+    /**
+     * Empty behaviour unsures no lighting event is sent by RollOver.
+     */ 
+    function onItemRollOver()
+    {}
 }

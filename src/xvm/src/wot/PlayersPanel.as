@@ -1,14 +1,23 @@
 ﻿/**
  * @author sirmax2
  */
+
 import wot.utils.Config;
 import wot.utils.Defines;
-import wot.utils.Logger;
 import wot.utils.TextCache;
 import wot.utils.Utils;
+import wot.utils.GlobalEventDispatcher
+import wot.Minimap.MinimapEvent;
+import wot.utils.Logger;
 
 class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 {
+    /**
+     * Sorted list of all UIDs in panel.
+     * Used for Minimap syncronization.
+     */
+    public var m_uids:Array;
+    
     static var DEBUG_TIMES = false;
 
     private var m_fieldType: Number = 0;
@@ -20,10 +29,9 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     function PlayersPanel()
     {
         super();
-
         Utils.TraceXvmModule("PlayersPanel");
-
         Config.LoadConfig("PlayersPanel.as");
+        checkLoading();
     }
 
     // override
@@ -292,5 +300,28 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
                 max_height = w;
         }
         return max_height;
+    }
+    
+    /**
+     * ----------------------------------
+     * Code for Minimap interaction below
+     */
+    
+    private function checkLoading():Void
+    {
+        m_list.onEnterFrame = function()
+        {
+            if (this._dataProvider.length > 1)
+            {
+                delete this.onEnterFrame;
+                
+                this._parent.updateUids();
+                
+                if (this._itemRenderer == "RightItemRendererIcon")
+                    GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENEMY_PLAYERS_PANEL_READY));
+                else
+                    GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ALLY_PLAYERS_PANEL_READY));
+            }
+        }
     }
 }

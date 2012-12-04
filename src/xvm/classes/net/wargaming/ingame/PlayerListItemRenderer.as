@@ -5,6 +5,7 @@
   var owner: Object;
   var data: Object;
   var squadIcon: MovieClip;
+  var visibility;
 
   function __getColorTransform(schemeName);
   function get selected();
@@ -13,4 +14,6 @@
   function setState();
   function update();
   function invalidate();
+  
+  function dispatchLightPlayer(visibility);
 }
