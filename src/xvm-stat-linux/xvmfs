@@ -25,7 +25,7 @@ from xml.dom import minidom
 
 # Based on XVM 3.1.2, SVN rev. 1104
 
-XVMFS_VERSION = '0.1.1'
+XVMFS_VERSION = '0.1.2'
 fuse.fuse_python_api = (0, 2)
 
 # Logging configuration.
@@ -312,7 +312,10 @@ class XvmFS(Fuse):
             xmldoc = minidom.parse(self.wot_cfg)
             xnl = xmldoc.documentElement.getElementsByTagName('patch_info_urls')[0].childNodes
 
-            for url in [x.firstChild.wholeText for x in xnl]:
+            for url in [x.firstChild.wholeText for x in xnl
+                    if x.nodeType == x.ELEMENT_NODE
+                        and x.firstChild.nodeType == x.TEXT_NODE]:
+
                 if (url.rfind('http://update.wot.ru.wargaming.net') > -1
                         or url.rfind('http://update.worldoftanks.ru') > -1):
                     wotVersion = 'RU'
@@ -353,7 +356,9 @@ class XvmFS(Fuse):
                     if x.getAttribute('name') == 'ProxyServers'][0]
             xv = xs.getElementsByTagName('value')[0]
             allProxies = [x.firstChild.wholeText
-                    for x in xv.getElementsByTagName('string')]
+                    for x in xv.getElementsByTagName('string')
+                        if x.nodeType == x.ELEMENT_NODE
+                            and x.firstChild.nodeType == x.TEXT_NODE]
 
             # Also read timeout value from the same config file.
             xs = [x for x in xmldoc.getElementsByTagName('setting')
