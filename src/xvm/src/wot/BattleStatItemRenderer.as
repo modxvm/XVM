@@ -53,10 +53,10 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
             return;
         m_iconLoaded = true;
 
-        col3._width += 80;
+        col3._width += 100;
         if (team == Defines.TEAM_ALLY)
         {
-            col3._x -= 80;
+            col3._x -= 100;
             //Logger.addObject(event.target);
         }
         if (!Config.s_config.battle.mirroredVehicleIcons)
