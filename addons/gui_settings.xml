@@ -1,65 +1,40 @@
-﻿<!--Настройки игры-->
 <gui_settings.xml>
-  <eulaURL>
-  </eulaURL>
+  <eulaURL>http://worldoftanks.ru/user_agreement?language={0}</eulaURL>
   <registrationURL>http://worldoftanks.ru/registration/new/</registrationURL>
   <paymentURL>https://worldoftanks.ru/personal/payment/?user=%(userEncoded)s</paymentURL>
   <finPasswordURL>
   </finPasswordURL>
   <migrationURL>http://wot.kongzhong.com/jihuo/jihuo.html?%s</migrationURL>
-  <!--Порядок техники в ангаре-->
   <nations_order>
-    <_1> ussr </_1>		<!-- СССР -->
-    <_2>germany</_2>		<!-- Германия -->
-    <_3>usa</_3>		<!-- США -->
-    <_4>france</_4>		<!-- Франция -->
-    <_5>uk</_5>			<!-- Великобритания -->
-    <_6>china</_6>		<!-- Китай -->
+    <_1>	ussr	</_1>
+    <_2>germany</_2>
+    <_3>usa</_3>
+    <_4>france</_4>
+    <_5>uk</_5>
+    <_6>china</_6>
   </nations_order>
-  <!-- Увеличение/уменьшение миникарты -->
-  <minimapSize> True </minimapSize>
-  <!-- Перевод голды с акаунта на акаунт (пока не реализовано в игре) -->
-  <goldTransfer> False </goldTransfer>
-  <!-- Отображать расширенные настройки голосового чата -->
-  <voiceChat> True </voiceChat>
-  <!-- Техническая информация о танке при выборе в ангаре -->
-  <technicalInfo> True </technicalInfo>
-  <!-- Национальный ангар (пока не реализовано в игре, при включении перестает работать игра) -->
+  <minimapSize>	True	</minimapSize>
+  <goldTransfer>False</goldTransfer>
+  <voiceChat>	True	</voiceChat>
+  <technicalInfo>	True	</technicalInfo>
   <nationHangarSpace>False</nationHangarSpace>
-  <!-- Отображать настройку внешнего вида, камуфляжей -->
-  <customizationCamouflages> True </customizationCamouflages>
-  <!-- Отображать настройку внешнего вида, Клаксон (В "Внешний вид" появляется графа "Клаксон" с выбором гудков за 1000000 голды)(пока не реализовано в игре) -->
-  <customizationHorns> False </customizationHorns>
-  <!-- Отображать настройку внешнего вида, Эмблемы -->
-  <customizationEmblems> True </customizationEmblems>
-  <!-- Отображать настройку внешнего вида, надписей -->
-  <customizationInscriptions> True </customizationInscriptions>
-  <!-- На миникарте ТТ 10 уровня отображать как четыре квадрата, для отличия -->
+  <customizationCamouflages>	True	</customizationCamouflages>
+  <customizationHorns>False</customizationHorns>
+  <customizationEmblems>	True	</customizationEmblems>
+  <customizationInscriptions>	True	</customizationInscriptions>
   <showMinimapSuperHeavy>False</showMinimapSuperHeavy>
-  <!-- Отображать убитые танки на миникарте(показывает значек убитого танка 2,2 секунды-"minimapDeathDuration") -->
-  <showMinimapDeath> True </showMinimapDeath>
-  <!-- Не скрывать убитые танки на миникарте(должен быть включен "showMinimapDeath") -->
-  <permanentMinimapDeath> False </permanentMinimapDeath>
-  <!-- Маркер Хит Всплеск Длительность(?) -->
-  <markerHitSplashDuration> 1000 </markerHitSplashDuration>
-  <!-- Шестое чувство таймер лампочки(сколько будет светится секунд) расчет 1000=1 секунда, по умолчанию зделал 10000=10 секунд -->
-  <sixthSenseDuration> 2000 </sixthSenseDuration>
-  <!-- Длительность показа убитых танков на миникарте(должен быть включен "showMinimapDeath") -->
-  <minimapDeathDuration> 2200 </minimapDeathDuration>
-  <!-- Параметры маркеров шкалы(?) -->
+  <showMinimapDeath>	True	</showMinimapDeath>
+  <permanentMinimapDeath>False</permanentMinimapDeath>
+  <markerHitSplashDuration>	1000	</markerHitSplashDuration>
+  <sixthSenseDuration>	2000	</sixthSenseDuration>
+  <minimapDeathDuration>	2200	</minimapDeathDuration>
   <markerScaleSettings>40 100 100 3.0</markerScaleSettings>
-  <!-- Маркер Bg Настройки(?) -->
   <markerBgSettings>40 100 100 3.0</markerBgSettings>
-  <!-- Сохранять пароль (надо вводить пароль при каждом входе или сохранить) -->
-  <rememberPassVisible> True </rememberPassVisible>
-  <!-- Очищать Логин(надо вводить логин при каждом входе или сохранить) -->
+  <rememberPassVisible>	True	</rememberPassVisible>
   <clearLoginValue>False</clearLoginValue>
-  <!-- Предварительная спецификация сражений видимого(?) -->
-  <specPrebatlesVisible> True </specPrebatlesVisible>
-  <!-- Отображать расширенную статистику после боя -->
-  <battleStatsInHangar> True </battleStatsInHangar>
-  <rssUrl>
-  </rssUrl>
+  <specPrebatlesVisible>	True	</specPrebatlesVisible>
+  <battleStatsInHangar>	True	</battleStatsInHangar>
+  <rssUrl>http://worldoftanks.ru/news/rss/ru/</rssUrl>
   <language_bar>
     <lang>zh_cn</lang>
     <lang>zh_tw</lang>

@@ -2,7 +2,7 @@
 
 set copy_files=
 set patch_swfs=battle.swf battleloading.swf PlayersPanel.swf StatisticForm.swf TeamBasesPanel.swf VehicleMarkersManager.swf Minimap.swf FinalStatistic.swf
-set patch_xmls=gui_sounds.xml
+set patch_xmls=
 
 rem Patch XMLs
 for %%i in (%patch_xmls%) do call :do_patch_xml %%~ni
