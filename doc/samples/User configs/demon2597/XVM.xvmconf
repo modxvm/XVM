@@ -5,9 +5,9 @@
     "author": "demon2597",                        // автор конфига
     "description": "My settings for XVM",         // описание конфига
     "url": "http://www.koreanrandom.com/forum/topic/1384-xvm-configurations/", // адрес, где выкладываеются обновления конфига
-    "date": "17.11.2012",                       // дата последней модификации конфига
+    "date": "5.12.2012",                       // дата последней модификации конфига
     "gameVersion": "0.8.1",                     // поддерживаемая версия игры
-    "modMinVersion": "3.1.2"                    // минимально необходимая версия мода XVM
+    "modMinVersion": "3.1.3"                    // минимально необходимая версия мода XVM
   },
   // Блок общих параметров боевого интерфейса
   "battle": {
@@ -15,6 +15,7 @@
     "showPostmortemTips": false,                // false - отключить всплывающую внизу панель после смерти. По умолчанию включено.
     "removePanelsModeSwitcher": false,          // true - убрать переключатель режимов ушей мышкой
     "highlightVehicleIcon": false,              // false - отключить подсветку иконки выбранного танка и взвода
+    "hideXVMVersion": true,                    // true - отключить отображение версии xvm в верхнем левом углу экрана
     "clockFormat": "H:N",                       // Показать часы на экране панели отладки (возле FPS). Формат: Y:год, M:месяц, D:день, H:часы, N:минуты, S:секунды. "" - убрать часы.
     "useStandardMarkers": false,                // true - использовать стандартные маркеры клиента
     "clanIconsFolder": "../../../clanicons"     // путь к папке иконок кланов относительно res_mods/[ВЕРСИЯ ИГРЫ]/gui/flash
@@ -22,12 +23,13 @@
   // Блок управлением статистикой (только с xvm-stat)
   "rating": {
     "showPlayersStatistics": true,              // true - включить отображение статистики. Глобальный переключатель - без него модуль статистики будет везде отключен.
-    "loadEnemyStatsInFogOfWar": true            // true - включить загрузку данных по противникам в "тумане войны"
+    "loadEnemyStatsInFogOfWar": true,           // true - включить загрузку данных по противникам в "тумане войны"
+    "enableStatisticsLog": false                // true - включить сохранение статистики в файл "xvm-stat.log"
   },
   // Параметры экрана загрузки боя
   "battleLoading": {
     "clockFormat": "H:N:S",                     // Показать часы на экране загрузки боя. Формат: Y:год, M:месяц, D:день, H:часы, N:минуты, S:секунды. "" - убрать часы.
-    "showChances": true,                        // true - включить отображение шансов на победу (только в XVM Full) Прочитать подробней: http://forum.bulychev.net/viewtopic.php?f=4&t=26
+    "showChances": true,                        // true - включить отображение шансов на победу (только с xvm-stat)
     "showChancesExp": false,                    // Показывать экспериментальную формулу расчета шансов
     "removeSquadIcon": false,                   // true - убрать отображение иконки взвода. На пустое поле можно вывести, например, иконку клана.
     "clanIcon": {                               // параметры отображения иконки игрока/клана
@@ -41,9 +43,9 @@
       "alpha": 90                               //   прозрачность иконки игрока/клана
     },
     // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatLeft": "<font face='Droid Sans Mono' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font>  <font color='{{c:rating}}'>{{rating:3}}</font></font>",
+    "formatLeft": "<font face='Droid Sans Mono' size='12'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font>  <font color='{{c:rating}}'>{{rating:3}}</font> | <font color='{{c:e}}'>{{e}}</font></font>",
     // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatRight": "<font face='Droid Sans Mono' size='11'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>"
+    "formatRight": "<font face='Droid Sans Mono' size='12'><font color='{{c:e}}'>{{e}}</font> | <font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>"
   },
   // Параметры окна статистики по клавише Tab
   "statisticForm": {
@@ -53,9 +55,9 @@
     // параметры отображения иконки игрока/клана (см. battleLoading выше)
     "clanIcon": { "show": false, "x": 0, "y": 6, "xr": 0, "yr": 6, "h": 16, "w": 16, "alpha": 90 },
     // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatLeft": "<font face='Droid Sans Mono' size='12'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font>  <font color='{{c:rating}}'>{{rating:3}}</font></font>",
+    "formatLeft": "<font face='Droid Sans Mono' size='12'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font>  <font color='{{c:rating}}'>{{rating:3}}</font>  {{vtype}} <font color='{{c:e}}'>{{e}}</font></font>",
     // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatRight": "<font face='Droid Sans Mono' size='12'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>"
+    "formatRight": "<font face='Droid Sans Mono' size='12'><font color='{{c:e}}'>{{e}}</font> {{vtype}}  <font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>"
   },
   // Параметры панелей игроков ("ушей")
   "playersPanel": {
@@ -68,9 +70,9 @@
     "medium": {
       "width": 65,    // 0..250 - задает ширину поля имени игрока. По умолчанию: 46
       // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-      "formatLeft": "<font color='{{c:eff}}'>{{nick}}</font>",
+      "formatLeft": "<font color='{{c:eff}}'>{{name}}</font> <font size='13' color='#FFFFFF'>{{clan}}</font>",
       // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-      "formatRight": "<font color='{{c:eff}}'>{{nick}}</font>"
+      "formatRight": "<font size='13' color='#FFFFFF'>{{clan}}</font> <font color='{{c:eff}}'>{{name}}</font>"
     },
     // режим ушей "medium2" - вторые средние уши в игре
     "medium2": {
@@ -84,8 +86,8 @@
     "large": {
       "width": 120,  // 0..250 - задает ширину поля имени игрока. По умолчанию: 170
       // формат отображения имени игрока (допускаются макроподстановки, см. readme-ru.txt)
-      "nickFormatLeft": "<font color='{{c:kb}}'>{{kb:3}}</font> {{nick}}",
-      "nickFormatRight": "{{nick}} <font color='{{c:kb}}'>{{kb:3}}</font>",
+      "nickFormatLeft": "<font color='{{c:kb}}'>{{kb:3}}</font> {{name}} <font size='13' color='#FFCC66'>{{clan}}</font>",
+      "nickFormatRight": "<font size='13' color='#FFCC66'>{{clan}}</font> {{name}} <font color='{{c:kb}}'>{{kb:3}}</font>",
       // формат отображения названия танка (допускаются макроподстановки, см. readme-ru.txt)
       "vehicleFormatLeft": "<font color='{{c:eff}}'>{{eff}}</font>",
       "vehicleFormatRight": "<font color='{{c:eff}}'>{{eff}}</font>"
@@ -111,9 +113,9 @@
     "deadMarker": "\u0029",
     "blowupMarker": "\u0028",
     // Формат последнего попадания (допускаются макроподстановки, см. readme-ru.txt)
-    "formatHeader": "<font size='1{{vehicle}}' alpha='#00{{vehicle}}'><font color='#CCCCCC'>Атак:</font> {{n}}  <font color='#CCCCCC'>Урона:</font> <b><font color='#FFCC66'>{{dmg-total}}</font></b>  <font color='#CCCCCC'>Последний:</font> {{dmg}}</font>",
+    "formatHeader": "<font size='0{{vehicle}}{{nick}}'><font color='#CCCCCC'>Атак:</font> {{n}}  <font color='#CCCCCC'>Урона:</font> <b><font color='#FFCC66'>{{dmg-total}}</font></b>  <font color='#CCCCCC'>Последний:</font> {{dmg}}</font>",
     // Формат предыдущих попаданий (допускаются макроподстановки, см. readme-ru.txt)
-    "formatHistory": "<textformat leading='0' tabstops='[20,55,90,130,175]'><font color='#CCCCCC{{dead}}' size='13'><b></b{{dead}}>\u00D7{{n-player}}<tab>{{dmg-kind}}<tab>-{{dmg}}<tab>({{dmg-player}})</b></b><tab><font face='XVM Symbol'><font size='19'><font size='1{{dead}}' alpha='#00{dead}}'>{{dead}}</font></font><font size='1' alpha='#00'><font size='19{{dead}}' alpha='#FF{{dead}}'>\u002A</font></font></font><tab>{{vtype}}  <b></b{{dead}}>{{vehicle}}</b></b></font></textformat>"
+    "formatHistory": "<textformat leading='0' tabstops='[20,55,90,130,175]'><font color='#CCCCCC{{dead}}' size='13'><b></b{{dead}}>\u00D7{{n-player}}<tab>{{dmg-kind}}<tab>-{{dmg}}<tab>({{dmg-player}})</b></b><tab><font face='XVM Symbol'><font size='19'><font size='0{{dead}}'>{{dead}}</font></font><font size='0'><font size='19{{dead}}'>\u002A</font></font></font><tab>{{vtype}}  <b></b{{dead}}>{{vehicle}}</b></b></font></textformat>"
   },
   // Полоса захвата
   "captureBar": {
@@ -122,9 +124,9 @@
     "appendPlus" : false, // дописывать плюс к тройке захватчиков. Невозможно расчитать более трёх.
     // Формат захвата (допускаются макроподстановки, см. readme-ru.txt)
     "enemy": { // Наши захватывают
-      "primaryTitleFormat":   "<font size='15' color='#FFFFFF'>База атакована!  {{extra}}</font>", // Верхнее текстовое поле
+      "primaryTitleFormat":   "<font size='15' color='#FFFFFF'><font color='#60FF00'>База атакована!</font>  <font size='15'>{{extra}}</font></font>", // Верхнее текстовое поле
       "secondaryTitleFormat": "<font size='15' color='#FFFFFF'>{{points}}</font>",              // Нижнее текстовое поле
-      "captureDoneFormat":    "<font size='17' color='#FFCC66'>Наши захватили базу!</font>",    // Текст полного захвата
+      "captureDoneFormat":    "<font size='17' color='#FFCC66'>База захвачена! Победа наша!<font size='19'>\n\n\n\n</font><font face='XVM Symbol' size='130' color='#D7AE5B'>\u0040               <font size='0'>\u0040</font></font></font>",    // Текст полного захвата
       "extra":"Наших на захвате: <b><font color='#FFCC66'>{{tanks}}</font></b>  Осталось: <b><font color='#FFCC66'>{{time}}</font><b>",                          // Дополнительный текст после необходимого расчета
       "shadow": {          // Тень полей
         "color": "0x000000", // Цвет
@@ -134,9 +136,9 @@
       }
     },
     "ally": { // Враги захватывают
-      "primaryTitleFormat":   "<font size='15' color='#FFFFFF'>База атакована!  {{extra}}</font>",
+      "primaryTitleFormat":   "<font size='15' color='#FFFFFF'><font color='#FE0E00'>База атакована!</font>  <font size='15'>{{extra}}</font></font>",
       "secondaryTitleFormat": "<font size='15' color='#FFFFFF'>{{points}}</font>",
-      "captureDoneFormat":    "<font size='17' color='#FFCC66'>Враги захватили базу!</font>",
+      "captureDoneFormat":    "<font size='17' color='#FFCC66'>База захвачена! Враг победил\n\n<font face='XVM Symbol'  size='130' color='#D7AE5B'>                \u0041</font></font>",
       "extra":"Врагов на захвате: <b><font color='#FFCC66'>{{tanks}}</font></b>  Осталось: <b><font color='#FFCC66'>{{time}}</font><b>",
       "shadow": {
         "color": "0x000000",
@@ -199,7 +201,7 @@
           "damageText": {                     // всплывающий урон
             "visible": true,                  //   false - не отображать
             "x": 0,                           //   положение по оси X
-            "y": -87,                         //   положение по оси Y
+            "y": -100,                         //   положение по оси Y
             "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
             "color": "0xFFFFFF",                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
             "font": {                         //   параметры шрифта
@@ -241,7 +243,7 @@
           "actionMarker": {                   // маркеры "Нужна помощь" и "Атакую"
             "visible": true,                  //   false - не отображать
             "x": 0,                           //   положение по оси X
-            "y": -87,                         //   положение по оси Y
+            "y": -100,                         //   положение по оси Y
             "alpha": 100                      //   прозрачность
           },
           // Блок текстовых полей
@@ -269,50 +271,7 @@
                 "distance": 1,                //   дистанция смещение
                 "size": 1                     //   размер
               },
-              "format": "{{vehicle}}"         // формат текста. См. описание макросов в readme-ru.txt
-            },
-            // Текстовое поле стоковой башни
-            {
-              "name": "Сток башня",       // название текстового поля, ни на что не влияет
-              "visible": true,                // false - не отображать
-              "x": 44,                         // положение по оси X
-              "y": -33,                       // положение по оси Y
-              "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-              "color": "0x000000",                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
-              "shadow": {                     // параметры тени
-                "alpha": 100,                 //   прозрачность
-                "color": "0xFFBD00",          //   цвет
-                "angle": 0,                  //   угол смещения
-                "strength": 300,              //   интенсивность
-                "distance": 0,                //   дистанция смещение
-                "size": 10                     //   размер
-              },
-              "format": "{{turret}}"         // формат текста. См. описание макросов в readme-ru.txt
-            },
-            // Текстовое поле с символом эффективности
-            {
-              "name": "Cимвол эффект.",       // название текстового поля, ни на что не влияет
-              "visible": true,                // false - не отображать
-              "x": 0,                         // положение по оси X
-              "y": -56,                       // положение по оси Y
-              "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-              "color": "{{c:eff}}",                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
-              "font": {                       // параметры шрифта
-                "name": "XVM Symbol",         //   название
-                "size": 17,                   //   размер
-                "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false,                 //   обычный (false) или жирный (true)
-                "italic": false                 //     обычный (false) или курсив (true)
-              },
-              "shadow": {                     // параметры тени
-                "alpha": 100,                 //   прозрачность
-                "color": "0x000000",          //   цвет
-                "angle": 45,                  //   угол смещения
-                "strength": 150,              //   интенсивность
-                "distance": 1,                //   дистанция смещение
-                "size": 1                     //   размер
-              },
-              "format": "\u0021"         // формат текста. См. описание макросов в readme-ru.txt
+              "format": "<font size='14'><font size='0{{clan}}'>[</font></font> {{vehicle}} <font size='14'><font size='0{{clan}}'>]</font></font>"         // формат текста. См. описание макросов в readme-ru.txt
             },
             // Текстовое поле с текущим здоровьем
             {
@@ -338,6 +297,124 @@
                 "size": 1                     //   размер
               },
               "format": "{{hp}}" // формат текста. См. описание макросов в readme-ru.txt
+            },
+            // Текстовое поле стоковой башни
+            {
+              "name": "Сток башня",       // название текстового поля, ни на что не влияет
+              "visible": true,                // false - не отображать
+              "x": 44,                         // положение по оси X
+              "y": -33,                       // положение по оси Y
+              "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+              "color": "0x000000",                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
+              "shadow": {                     // параметры тени
+                "alpha": 100,                 //   прозрачность
+                "color": "0xFFBD00",          //   цвет
+                "angle": 0,                  //   угол смещения
+                "strength": 300,              //   интенсивность
+                "distance": 0,                //   дистанция смещение
+                "size": 10                     //   размер
+              },
+              "format": "{{turret}}"         // формат текста. См. описание макросов в readme-ru.txt
+            },
+            // Звезда
+            {
+              "name": "Звезда",       // название текстового поля, ни на что не влияет
+              "visible": true,                // false - не отображать
+              "x": 0,                         // положение по оси X
+              "y": -61,                       // положение по оси Y
+              "alpha": "{{a:hp-ratio}}",                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+              "color": "{{c:eff}}",                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
+              "font": {                       // параметры шрифта
+                "name": "XVM Symbol",         //   название
+                "size": 17,                   //   размер
+                "align": "center",            //   выравнивание текста (left, center, right)
+                "bold": false,                 //   обычный (false) или жирный (true)
+                "italic": false                 //     обычный (false) или курсив (true)
+              },
+              "shadow": {                     // параметры тени
+                "alpha": "{{a:hp-ratio}}",                 //   прозрачность
+                "color": "0x000000",          //   цвет
+                "angle": 0,                  //   угол смещения
+                "strength": 0,              //   интенсивность
+                "distance": 0,                //   дистанция смещение
+                "size": 0                     //   размер
+              },
+              "format": "\u0021"         // формат текста. См. описание макросов в readme-ru.txt
+            },
+            // Щит 
+            {
+              "name": "Щит",       // название текстового поля, ни на что не влияет
+              "visible": true,                // false - не отображать
+              "x": 0,                         // положение по оси X
+              "y": -65,                       // положение по оси Y
+              "alpha": "{{a:hp-ratio}}",                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+              "color": null,                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
+              "font": {                       // параметры шрифта
+                "name": "XVM Symbol",         //   название
+                "size": 26,                   //   размер
+                "align": "center",            //   выравнивание текста (left, center, right)
+                "bold": false,                 //   обычный (false) или жирный (true)
+                "italic": false                 //     обычный (false) или курсив (true)
+              },
+              "shadow": {                     // параметры тени
+                "alpha": "{{a:hp-ratio}}",                 //   прозрачность
+                "color": "0x000000",          //   цвет
+                "angle": 0,                  //   угол смещения
+                "strength": 150,              //   интенсивность
+                "distance": 1,                //   дистанция смещение
+                "size": 1                     //   размер
+              },
+              "format": "\u0043"         // формат текста. См. описание макросов в readme-ru.txt
+            },
+            // Щит внутр.
+            {
+              "name": "Щит внутр.",       // название текстового поля, ни на что не влияет
+              "visible": true,                // false - не отображать
+              "x": 0,                         // положение по оси X
+              "y": -65,                       // положение по оси Y
+              "alpha": "{{a:hp-ratio}}",                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+              "color": "0x000000",                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
+              "font": {                       // параметры шрифта
+                "name": "XVM Symbol",         //   название
+                "size": 26,                   //   размер
+                "align": "center",            //   выравнивание текста (left, center, right)
+                "bold": false,                 //   обычный (false) или жирный (true)
+                "italic": false                 //     обычный (false) или курсив (true)
+              },
+              "shadow": {                     // параметры тени
+                "alpha": "{{a:hp-ratio}}",                 //   прозрачность
+                "color": "0x000000",          //   цвет
+                "angle": 0,                  //   угол смещения
+                "strength": 0,              //   интенсивность
+                "distance": 0,                //   дистанция смещение
+                "size": 0                     //   размер
+              },
+              "format": "\u0045"         // формат текста. См. описание макросов в readme-ru.txt
+            },
+            // Звезда норм
+            {
+              "name": "Звезда норм",       // название текстового поля, ни на что не влияет
+              "visible": true,                // false - не отображать
+              "x": 0,                         // положение по оси X
+              "y": -56,                       // положение по оси Y
+              "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+              "color": "{{c:eff}}",                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
+              "font": {                       // параметры шрифта
+                "name": "XVM Symbol",         //   название
+                "size": 17,                   //   размер
+                "align": "center",            //   выравнивание текста (left, center, right)
+                "bold": false,                 //   обычный (false) или жирный (true)
+                "italic": false                 //     обычный (false) или курсив (true)
+              },
+              "shadow": {                     // параметры тени
+                "alpha": 100,                 //   прозрачность
+                "color": "0x000000",          //   цвет
+                "angle": 45,                  //   угол смещения
+                "strength": 150,              //   интенсивность
+                "distance": 1,                //   дистанция смещение
+                "size": 1                     //   размер
+              },
+              "format": "\u0021"         // формат текста. См. описание макросов в readme-ru.txt
             }
           ]
         },
@@ -505,7 +582,7 @@
                 "distance": 1,                //   дистанция смещение
                 "size": 1                     //   размер
               },
-              "format": "{{nick}}"            // формат текста. См. описание макросов в readme-ru.txt
+              "format": "{{name}} <font size='13' color='#FFCC66'>{{clan}}</font>"            // формат текста. См. описание макросов в readme-ru.txt
             },
             // Текстовое поле с процентом оставшегося здоровья
             {
@@ -799,7 +876,7 @@
                 "distance": 1,                //   дистанция смещение
                 "size": 1                     //   размер
               },
-              "format": "{{nick}}"            // формат текста. См. описание макросов в readme-ru.txt
+              "format": "{{name}} <font size='13' color='#D4A953'>{{clan}}"            // формат текста. См. описание макросов в readme-ru.txt
             },
             // Текстовое поле с названием танка
             {
@@ -881,7 +958,7 @@
           "damageText": {                     // всплывающий урон
             "visible": true,                  //   false - не отображать
             "x": 0,                           //   положение по оси X
-            "y": -87,                         //   положение по оси Y
+            "y": -100,                         //   положение по оси Y
             "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
             "color": "0xFFFFFF",                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
             "font": {                         //   параметры шрифта
@@ -923,7 +1000,7 @@
           "actionMarker": {                   // маркеры "Нужна помощь" и "Атакую"
             "visible": true,                  //   false - не отображать
             "x": 0,                           //   положение по оси X
-            "y": -87,                         //   положение по оси Y
+            "y": -100,                         //   положение по оси Y
             "alpha": 100                      //   прозрачность
           },
           // Блок текстовых полей
@@ -951,50 +1028,7 @@
                 "distance": 1,                //   дистанция смещение
                 "size": 1                     //   размер
               },
-              "format": "{{vehicle}}"         // формат текста. См. описание макросов в readme-ru.txt
-            },
-            // Текстовое поле стоковой башни
-            {
-              "name": "Сток башня",       // название текстового поля, ни на что не влияет
-              "visible": true,                // false - не отображать
-              "x": 44,                         // положение по оси X
-              "y": -33,                       // положение по оси Y
-              "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-              "color": "0x000000",                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
-              "shadow": {                     // параметры тени
-                "alpha": 100,                 //   прозрачность
-                "color": "0xFFBD00",          //   цвет
-                "angle": 0,                  //   угол смещения
-                "strength": 300,              //   интенсивность
-                "distance": 0,                //   дистанция смещение
-                "size": 10                     //   размер
-              },
-              "format": "{{turret}}"         // формат текста. См. описание макросов в readme-ru.txt
-            },
-            // Текстовое поле с символом эффективности
-            {
-              "name": "Символ эффект.",       // название текстового поля, ни на что не влияет
-              "visible": true,                // false - не отображать
-              "x": 0,                         // положение по оси X
-              "y": -56,                       // положение по оси Y
-              "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-              "color": "{{c:eff}}",                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
-              "font": {                       // параметры шрифта
-                "name": "XVM Symbol",         //   название
-                "size": 17,                   //   размер
-                "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false,                 //   обычный (false) или жирный (true)
-                "italic": false                 //     обычный (false) или курсив (true)
-              },
-              "shadow": {                     // параметры тени
-                "alpha": 100,                 //   прозрачность
-                "color": "0x000000",          //   цвет
-                "angle": 45,                  //   угол смещения
-                "strength": 150,              //   интенсивность
-                "distance": 1,                //   дистанция смещение
-                "size": 1                     //   размер
-              },
-              "format": "\u0022"         // формат текста. См. описание макросов в readme-ru.txt
+              "format": "<font size='14'><font size='0{{clan}}'>[</font></font> {{vehicle}} <font size='14'><font size='0{{clan}}'>]</font></font>"         // формат текста. См. описание макросов в readme-ru.txt
             },
             // Текстовое поле с текущим здоровьем
             {
@@ -1020,6 +1054,124 @@
                 "size": 1                     //   размер
               },
               "format": "{{hp}}" // формат текста. См. описание макросов в readme-ru.txt
+            },
+            // Текстовое поле стоковой башни
+            {
+              "name": "Сток башня",       // название текстового поля, ни на что не влияет
+              "visible": true,                // false - не отображать
+              "x": 44,                         // положение по оси X
+              "y": -33,                       // положение по оси Y
+              "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+              "color": "0x000000",                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
+              "shadow": {                     // параметры тени
+                "alpha": 100,                 //   прозрачность
+                "color": "0xFFBD00",          //   цвет
+                "angle": 0,                  //   угол смещения
+                "strength": 300,              //   интенсивность
+                "distance": 0,                //   дистанция смещение
+                "size": 10                     //   размер
+              },
+              "format": "{{turret}}"         // формат текста. См. описание макросов в readme-ru.txt
+            },
+            // Крест
+            {
+              "name": "Крест",       // название текстового поля, ни на что не влияет
+              "visible": true,                // false - не отображать
+              "x": 0,                         // положение по оси X
+              "y": -61,                       // положение по оси Y
+              "alpha": "{{a:hp-ratio}}",                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+              "color": "{{c:eff}}",                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
+              "font": {                       // параметры шрифта
+                "name": "XVM Symbol",         //   название
+                "size": 17,                   //   размер
+                "align": "center",            //   выравнивание текста (left, center, right)
+                "bold": false,                 //   обычный (false) или жирный (true)
+                "italic": false                 //     обычный (false) или курсив (true)
+              },
+              "shadow": {                     // параметры тени
+                "alpha": "{{a:hp-ratio}}",                 //   прозрачность
+                "color": "0x000000",          //   цвет
+                "angle": 0,                  //   угол смещения
+                "strength": 0,              //   интенсивность
+                "distance": 0,                //   дистанция смещение
+                "size": 0                     //   размер
+              },
+              "format": "\u0022"         // формат текста. См. описание макросов в readme-ru.txt
+            },
+            // Прицел 
+            {
+              "name": "Прицел",       // название текстового поля, ни на что не влияет
+              "visible": true,                // false - не отображать
+              "x": 0,                         // положение по оси X
+              "y": -71,                       // положение по оси Y
+              "alpha": "{{a:hp-ratio}}",                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+              "color": null,                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
+              "font": {                       // параметры шрифта
+                "name": "XVM Symbol",         //   название
+                "size": 37,                   //   размер
+                "align": "center",            //   выравнивание текста (left, center, right)
+                "bold": false,                 //   обычный (false) или жирный (true)
+                "italic": false                 //     обычный (false) или курсив (true)
+              },
+              "shadow": {                     // параметры тени
+                "alpha": "{{a:hp-ratio}}",                 //   прозрачность
+                "color": "0x000000",          //   цвет
+                "angle": 0,                  //   угол смещения
+                "strength": 150,              //   интенсивность
+                "distance": 1,                //   дистанция смещение
+                "size": 1                     //   размер
+              },
+              "format": "\u0042"         // формат текста. См. описание макросов в readme-ru.txt
+            },
+            // Прицел внутр.
+            {
+              "name": "Прицел внутр.",       // название текстового поля, ни на что не влияет
+              "visible": true,                // false - не отображать
+              "x": 0,                         // положение по оси X
+              "y": -71,                       // положение по оси Y
+              "alpha": "{{a:hp-ratio}}",                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+              "color": "0x000000",                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
+              "font": {                       // параметры шрифта
+                "name": "XVM Symbol",         //   название
+                "size": 37,                   //   размер
+                "align": "center",            //   выравнивание текста (left, center, right)
+                "bold": false,                 //   обычный (false) или жирный (true)
+                "italic": false                 //     обычный (false) или курсив (true)
+              },
+              "shadow": {                     // параметры тени
+                "alpha": "{{a:hp-ratio}}",                 //   прозрачность
+                "color": "0x000000",          //   цвет
+                "angle": 0,                  //   угол смещения
+                "strength": 0,              //   интенсивность
+                "distance": 0,                //   дистанция смещение
+                "size": 0                     //   размер
+              },
+              "format": "\u0044"         // формат текста. См. описание макросов в readme-ru.txt
+            },
+            // Крест норм
+            {
+              "name": "Крест норм",       // название текстового поля, ни на что не влияет
+              "visible": true,                // false - не отображать
+              "x": 0,                         // положение по оси X
+              "y": -56,                       // положение по оси Y
+              "alpha": 100,                   // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+              "color": "{{c:eff}}",                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
+              "font": {                       // параметры шрифта
+                "name": "XVM Symbol",         //   название
+                "size": 17,                   //   размер
+                "align": "center",            //   выравнивание текста (left, center, right)
+                "bold": false,                 //   обычный (false) или жирный (true)
+                "italic": false                 //     обычный (false) или курсив (true)
+              },
+              "shadow": {                     // параметры тени
+                "alpha": 100,                 //   прозрачность
+                "color": "0x000000",          //   цвет
+                "angle": 45,                  //   угол смещения
+                "strength": 150,              //   интенсивность
+                "distance": 1,                //   дистанция смещение
+                "size": 1                     //   размер
+              },
+              "format": "\u0022"         // формат текста. См. описание макросов в readme-ru.txt
             }
           ]
         },
@@ -1187,7 +1339,7 @@
                 "distance": 1,                //   дистанция смещение
                 "size": 1                     //   размер
               },
-              "format": "{{nick}}"            // формат текста. См. описание макросов в readme-ru.txt
+              "format": "{{name}} <font size='13' color='#FFCC66'>{{clan}}</font>"            // формат текста. См. описание макросов в readme-ru.txt
             },
             // Текстовое поле с процентом оставшегося здоровья
             {
@@ -1481,7 +1633,7 @@
                 "distance": 1,                //   дистанция смещение
                 "size": 1                     //   размер
               },
-              "format": "{{nick}}"            // формат текста. См. описание макросов в readme-ru.txt
+              "format": "{{name}} <font size='13' color='#D4A953'>{{clan}}"            // формат текста. См. описание макросов в readme-ru.txt
             },
             // Текстовое поле с названием танка
             {
@@ -1520,8 +1672,8 @@
       "ally_alive_normal": "0x60FF00",             // Цвет для живого союзника
       "ally_alive_blind": "0x60FF00",              // Цвет для живого союзника в режиме цветовой слепоты
       "ally_dead_normal": "0x009900",              // Цвет для мертвого союзника
-      "ally_dead_blind": "0x009900",               // Цвет для мертвого союзника в режиме цветовой слепоты
-      "ally_blowedup_normal": "0x007700",          // Цвет для взрыва БК у союзника
+      "ally_dead_blind": "0x007700",               // Цвет для мертвого союзника в режиме цветовой слепоты
+      "ally_blowedup_normal": "0x009900",          // Цвет для взрыва БК у союзника
       "ally_blowedup_blind": "0x007700",           // Цвет для взрыва БК у союзника в режиме цветовой слепоты
       "squadman_alive_normal": "0xFF914C",         // Цвет для живого взводного
       "squadman_alive_blind": "0xFFFF00",          // Цвет для живого взводного в режиме цветовой слепоты
@@ -1537,9 +1689,9 @@
       "teamKiller_blowedup_blind": "0x096A75",     // Цвет для взрыва БК у тимкиллера в режиме цветовой слепоты
       "enemy_alive_normal": "0xFE0E00",            // Цвет для живого противника
       "enemy_alive_blind": "0x8379FE",             // Цвет для живого противника в режиме цветовой слепоты
-      "enemy_dead_normal": "0x840500",             // Цвет для мертвого противника
+      "enemy_dead_normal": "0xC10C02",             // Цвет для мертвого противника
       "enemy_dead_blind": "0x47407A",              // Цвет для мертвого противника в режиме цветовой слепоты
-      "enemy_blowedup_normal": "0x5A0401",         // Цвет для взрыва БК у противника
+      "enemy_blowedup_normal": "0xC10C02",         // Цвет для взрыва БК у противника
       "enemy_blowedup_blind": "0x3B365F"           // Цвет для взрыва БК у противника в режиме цветовой слепоты
     },
     // Цвет для отлетающего урона
@@ -1656,42 +1808,88 @@
       { "value": 50,  "color": "0xFFCC33" },      // Цвет для значений меньше 50 проц
       { "value": 101, "color": "0xFFFFFF" }       // Цвет для 100 проц
     ],
-    // Динамический цвет по эффективности (только с xvm-stat). Значения от меньшего к большему.
+    // Динамический цвет по эффективности (только с xvm-stat). Условие- "меньше, чем"
     "eff": [
       { "value": 600,  "color": "0xFE0E00" },
       { "value": 900,  "color": "0xFE7903" },
       { "value": 1200, "color": "0xF8F400" },
       { "value": 1500, "color": "0x60FF00" },
       { "value": 1800, "color": "0x02C9B3" },
-      { "value": 9999, "color": "0xCF3AF4" }
+      { "value": 9999, "color": "0xD042F3" }
     ],
-    // Динамический цвет по проценту побед (только с xvm-stat). Значения от меньшего к большему.
+    // Динамический цвет по проценту побед (только с xvm-stat). Условие- "меньше, чем"
     "rating": [
-      { "value": 42,  "color": "0xA23D29" },
       { "value": 46,  "color": "0xFE0E00" },
-      { "value": 49,  "color": "0xFE7903" },
+      { "value": 48,  "color": "0xFE7903" },
       { "value": 51,  "color": "0xF8F400" },
-      { "value": 53,  "color": "0x60FF00" },
+      { "value": 54,  "color": "0x60FF00" },
       { "value": 57,  "color": "0x02C9B3" },
-      { "value": 101, "color": "0xCF3AF4" }
+      { "value": 101, "color": "0xD042F3" }
     ],
-    // Динамический цвет по количеству кило-боев (только с xvm-stat). Значения от меньшего к большему.
+    // Динамический цвет по количеству кило-боев (только с xvm-stat). Условие- "меньше, чем"
     "kb": [
       { "value": 1,   "color": "0xFE0E00" },
       { "value": 3,   "color": "0xFE7903" },
       { "value": 5,   "color": "0xF8F400" },
       { "value": 8,   "color": "0x60FF00" },
       { "value": 12,  "color": "0x02C9B3" },
-      { "value": 999, "color": "0xCF3AF4" }
+      { "value": 999, "color": "0xD042F3" }
     ],
-    // Динамический цвет по количеству боев по текущему танку (только с xvm-stat). Значения от меньшего к большему.
+    // Динамический цвет по количеству боев по текущему танку (только с xvm-stat). Условие- "меньше, чем"
     "t_battles": [
       { "value": 100,  "color": "0xFE0E00" },
       { "value": 200,  "color": "0xFE7903" },
       { "value": 300,  "color": "0xF8F400" },
       { "value": 500,  "color": "0x60FF00" },
       { "value": 800,  "color": "0x02C9B3" },
-      { "value": 9999, "color": "0xCF3AF4" }
+      { "value": 99999, "color": "0xD042F3" }
+    ],
+    // d - средний дамаг = damageDealt / battle_count
+    "tdb": [
+      { "value": 1,    "color": "0xFCFCFC" },
+      { "value": 500,  "color": "0xFE0E00" },
+      { "value": 1000, "color": "0xF8F400" },
+      { "value": 2000, "color": "0x60FF00" }
+    ],
+    // D - эффективный дамаг = d / HP
+    "tdv": [
+      { "value": 0.01, "color": "0xFCFCFC" },
+      { "value": 0.6,  "color": "0xFE0E00" },
+      { "value": 0.8,  "color": "0xFE7903" },
+      { "value": 1.0,  "color": "0xF8F400" },
+      { "value": 1.3,  "color": "0x60FF00" },
+      { "value": 2.0,  "color": "0x02C9B3" },
+      { "value": 15,   "color": "0xD042F3" }
+    ],
+    // F - средний фраг = frags / battle_count
+    "tfb": [
+      { "value": 0.01, "color": "0xFCFCFC" },
+      { "value": 0.6,  "color": "0xFE0E00" },
+      { "value": 0.8,  "color": "0xFE7903" },
+      { "value": 1.0,  "color": "0xF8F400" },
+      { "value": 1.3,  "color": "0x60FF00" },
+      { "value": 2.0,  "color": "0x02C9B3" },
+      { "value": 15,   "color": "0xD042F3" }
+    ],
+    // S - средний засвет = spotted / battle_count
+    "tsb": [
+      { "value": 0.01, "color": "0xFCFCFC" },
+      { "value": 0.6,  "color": "0xFE0E00" },
+      { "value": 0.8,  "color": "0xFE7903" },
+      { "value": 1.0,  "color": "0xF8F400" },
+      { "value": 1.3,  "color": "0x60FF00" },
+      { "value": 2.0,  "color": "0x02C9B3" },
+      { "value": 15,   "color": "0xD042F3" }
+    ],
+    // E - эффективность для танка
+    "e": [
+      { "value": 0.01, "color": "0xFCFCFC" },
+      { "value": 2,    "color": "0xFE0E00" },
+      { "value": 3,    "color": "0xFE7903" },
+      { "value": 5,    "color": "0xF8F400" },
+      { "value": 7,    "color": "0x60FF00" },
+      { "value": 9,    "color": "0x02C9B3" },
+      { "value": 10,   "color": "0xD042F3" }
     ]
   },
   // Настройки динамической прозрачности
@@ -1705,10 +1903,8 @@
     ],
     // Динамическая прозрачность по проценту оставшегося здоровья. Значения от меньшего к большему.
     "hp_ratio": [
-      { "value": 10,  "alpha": 100 },
-      { "value": 25,  "alpha": 80 },
-      { "value": 50,  "alpha": 60 },
-      { "value": 101, "alpha": 40 }
+      { "value": 25,  "alpha": 100 },
+      { "value": 101, "alpha": 0 }
     ],
     // Динамическая прозрачность по эффективности (только с xvm-stat). Значения от меньшего к большему.
     "eff": [

@@ -157,10 +157,6 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
             // Replace MovieClip.gotoAndStop (calling for changing marker type: squad, team killer, color blind, ...)
             subject["gotoAndStop"] = function(frame) {
                 this["_proxy"].gotoAndStop(frame);
-
-                // FIXIT: this is required for properly working of dead's markers. Is there another way to do it?
-                if (this["m_markerState"] != null)
-                    this["marker"].gotoAndPlay(this["m_markerState"]);
             };
         }
         else
@@ -385,6 +381,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     // IUIComponent implementation
 
     public function configUI()    { call("configUI"); }
+    public function onLoad() { call("onLoad"); }
     public function validateNow() { call("validateNow"); }
     public function setSize(width, height) { call("setSize", [ width, height ]); }
 
@@ -397,7 +394,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     private function setMarkerState(value)
     {
         if (Config.s_config.battle.useStandardMarkers == true && subject != null)
-            subject["setMarkerState"](value);
+            subject["setMarkerState2"](value);
     }
     private function get exInfo()
     {

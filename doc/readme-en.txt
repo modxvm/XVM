@@ -154,7 +154,7 @@
       {{wins}}        - total wins count
       {{rating}}      - GWR (Global Win Ratio)
       {{eff}}         - player efficiency (http://wot-news.com/index.php/stat/calc/en/)
-      {{e}}           - player per-vehicle efficiency
+      {{teff}}, {{e}} - player per-vehicle efficiency
       {{kb:3}}        - number of kilo-battles aligned from left to 3 chars
       {{rating:3}}    - GWR aligned from left to 3 chars
       {{eff:4}}       - player efficiency aligned from left to 4 chars

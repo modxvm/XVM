@@ -26,23 +26,23 @@
     "showChancesExp": true,
     "removeSquadIcon": false,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft":  "<font face='Consolas' size='11'><font color='{{c:e}}'>{{e}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:tdv}}'>{{d}}</font> <font color='{{c:tfb}}'>{{f}}</font> <font color='{{c:tsb}}'>{{s}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
-    "formatRight": "<font face='Consolas' size='11'><font color='{{c:e}}'>{{e}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:tdv}}'>{{d}}</font> <font color='{{c:tfb}}'>{{f}}</font> <font color='{{c:tsb}}'>{{s}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>"
+    "formatLeft":  "<font face='Consolas' size='11'><font color='{{c:e}}'>{{teff}} {{e}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:tdv}}'>{{tdv:3}}</font> <font color='{{c:tfb}}'>{{tfb:3}}</font> <font color='{{c:tsb}}'>{{tsb:3}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
+    "formatRight": "<font face='Consolas' size='11'><font color='{{c:e}}'>{{teff}} {{e}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:tdv}}'>{{tdv:3}}</font> <font color='{{c:tfb}}'>{{tfb:3}}</font> <font color='{{c:tsb}}'>{{tsb:3}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>"
   },
   "statisticForm": {
     "showChances": true,
     "showChancesExp": true,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft":  "<font face='Consolas' size='11'><font color='{{c:e}}'>{{e}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:tdv}}'>{{d}}</font> <font color='{{c:tfb}}'>{{f}}</font> <font color='{{c:tsb}}'>{{s}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
-    "formatRight": "<font face='Consolas' size='11'><font color='{{c:e}}'>{{e}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:tdv}}'>{{d}}</font> <font color='{{c:tfb}}'>{{f}}</font> <font color='{{c:tsb}}'>{{s}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>"
+    "formatLeft":  "<font face='Consolas' size='11'><font color='{{c:e}}'>{{teff}} {{e}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:tdv}}'>{{tdv:3}}</font> <font color='{{c:tfb}}'>{{tfb:3}}</font> <font color='{{c:tsb}}'>{{tsb:3}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
+    "formatRight": "<font face='Consolas' size='11'><font color='{{c:e}}'>{{teff}} {{e}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:tdv}}'>{{tdv:3}}</font> <font color='{{c:tfb}}'>{{tfb:3}}</font> <font color='{{c:tsb}}'>{{tsb:3}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>"
   },
   "playersPanel": {
     "alpha": 50,
     "removeSquadIcon": true,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
     "medium": {
-      "formatLeft": "<font color='{{c:e}}'>{{nick}}</font>",
-      "formatRight": "<font color='{{c:e}}'>{{nick}}</font>"
+      "formatLeft": "<font color='{{c:e}}'>{{name}}</font><font color='#cccccc'>{{clan}}</font>",
+      "formatRight": "<font color='{{c:e}}'>{{name}}</font><font color='#cccccc'>{{clan}}</font>"
     },
     "medium2": {
       "formatLeft": "<font color='{{c:e}}'>{{vehicle}}</font>",
@@ -50,8 +50,8 @@
     },
     "large": {
       "width": 120,
-      "nickFormatLeft": "<font color='{{c:e}}'>{{rating}}</font> {{nick}}",
-      "nickFormatRight": "{{nick}} <font color='{{c:e}}'>{{rating}}</font>",
+      "nickFormatLeft": "<font color='{{c:e}}'>{{rating}}</font> {{name}}<font color='#cccccc'>{{clan}}</font>",
+      "nickFormatRight": "{{name}}<font color='#cccccc'>{{clan}}</font> <font color='{{c:e}}'>{{rating}}</font>",
       "vehicleFormatLeft": "",
       "vehicleFormatRight": ""
     }

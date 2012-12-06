@@ -50,9 +50,6 @@ class wot.BattleMain
         // Initialize Sixth Sense Indicator
         instance.sixthSenseIndicator = new SixthSenseIndicator();
 
-        // Setup Visual Elements
-        SetupElements();
-
         // TODO: remove (replace by setup elements)
         // Panels Mode Switcher
         if (Config.s_config.battle.removePanelsModeSwitcher)
@@ -60,6 +57,9 @@ class wot.BattleMain
 
         // Show Clocks
         ShowClock(Config.s_config.battle.clockFormat);
+
+        // Setup Visual Elements
+        SetupElements();
     }
 
     private static function SetupElements()
@@ -133,7 +133,6 @@ class wot.BattleMain
     {
         if (!isNaN(v))
             return v;
-
         return NaN;
     }
 
@@ -141,17 +140,19 @@ class wot.BattleMain
     {
         if (!format || format == "")
             return;
-        var fgMC = _root.debugPanel.fgMC;
-        var lag = fgMC.lag;
-        var fps = fgMC.fps;
-        var clock: TextField = fgMC.createTextField("clock", fgMC.getNextHighestDepth(),
+        var debugPanel = _root.debugPanel;
+        var lag = debugPanel.lag;
+        var fps = debugPanel.fps;
+        var clock: TextField = debugPanel.createTextField("clock", debugPanel.getNextHighestDepth(),
             lag._x + lag._width, fps._y, 300, fps._height);
         clock.antiAliasType = "advanced";
         var tf: TextFormat = fps.getNewTextFormat();
         tf.align = "left";
         clock.setNewTextFormat(tf);
         clock.filters = [new flash.filters.DropShadowFilter(1, 90, 0, 100, 5, 5, 1.5, 3)];
-        setInterval(function() { clock.text = Utils.FormatDate(format, new Date()) }, 1000);
+        setInterval(function() {
+            clock.text = Utils.FormatDate(format, new Date());
+        }, 1000);
     }
 
     function showPostmortemTips(movingUpTime, showTime, movingDownTime)

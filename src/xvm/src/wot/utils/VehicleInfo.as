@@ -5,6 +5,7 @@ import wot.utils.Config;
 import wot.utils.Utils;
 import wot.utils.VehicleInfoData;
 import wot.utils.VehicleInfoData2;
+import wot.utils.VehicleInfoData3;
 import wot.utils.VehicleInfoDataMapping;
 
 class wot.utils.VehicleInfo
@@ -56,6 +57,11 @@ class wot.utils.VehicleInfo
     public static function getInfo2(vehicleName: String): Object
     {
         return VehicleInfoData2.data[vehicleName.split("-").join("_").toLowerCase()] || null;
+    }
+
+    public static function getInfo3(vehicleName: String): Object
+    {
+        return VehicleInfoData3.data[vehicleName.split("-").join("_").toLowerCase()] || null;
     }
 
     public static function getVehicleNamesData():Object

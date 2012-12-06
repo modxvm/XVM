@@ -14,8 +14,8 @@
     "description": "Default settings for XVM",  // описание конфига
     "url": "http://code.google.com/p/wot-xvm/", // адрес, где выкладываеются обновления конфига
     "date": "12.10.2012",                       // дата последней модификации конфига
-    "gameVersion": "0.8.0",                     // поддерживаемая версия игры
-    "modMinVersion": "3.0.4"                    // минимально необходимая версия мода XVM
+    "gameVersion": "0.8.2",                     // поддерживаемая версия игры
+    "modMinVersion": "3.2.0"                    // минимально необходимая версия мода XVM
   },
   // Блок общих параметров боевого интерфейса
   "battle": {
@@ -50,9 +50,9 @@
       "alpha": 90                               //   прозрачность иконки игрока/клана
     },
     // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatLeft": "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:e}}'>{{e}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatLeft": "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
     // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:e}}'>{{e}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
+    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
   },
   // Параметры окна статистики по клавише Tab
   "statisticForm": {
@@ -62,9 +62,9 @@
     // параметры отображения иконки игрока/клана (см. battleLoading выше)
     "clanIcon": { "show": true, "x": 0, "y": 6, "xr": 0, "yr": 6, "h": 16, "w": 16, "alpha": 90 },
     // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatLeft": "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:e}}'>{{e}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatLeft": "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
     // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:e}}'>{{e}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
+    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
   },
   // Параметры панелей игроков ("ушей")
   "playersPanel": {
@@ -77,17 +77,17 @@
     "medium": {
       "width": 46,    // 0..250 - задает ширину поля имени игрока. По умолчанию: 46
       // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-      "formatLeft": "<font color='{{c:e}}'>{{nick}}</font>",
+      "formatLeft": "<font color='{{c:eff}}'>{{nick}}</font>",
       // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-      "formatRight": "<font color='{{c:e}}'>{{nick}}</font>"
+      "formatRight": "<font color='{{c:eff}}'>{{nick}}</font>"
     },
     // режим ушей "medium2" - вторые средние уши в игре
     "medium2": {
       "width": 65,    // 0..250 - задает ширину поля названия танка. По умолчанию: 65
       // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-      "formatLeft": "<font color='{{c:e}}'>{{vehicle}}</font>",
+      "formatLeft": "<font color='{{c:eff}}'>{{vehicle}}</font>",
       // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-      "formatRight": "<font color='{{c:e}}'>{{vehicle}}</font>"
+      "formatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
     },
     // режим ушей "large" - широкие уши в игре
     "large": {
@@ -96,8 +96,8 @@
       "nickFormatLeft": "<font color='{{c:rating}}'>{{rating}}</font> {{nick}}",
       "nickFormatRight": "{{nick}} <font color='{{c:rating}}'>{{rating}}</font>",
       // формат отображения названия танка (допускаются макроподстановки, см. readme-ru.txt)
-      "vehicleFormatLeft": "<font color='{{c:e}}'>{{vehicle}}</font>",
-      "vehicleFormatRight": "<font color='{{c:e}}'>{{vehicle}}</font>"
+      "vehicleFormatLeft": "<font color='{{c:eff}}'>{{vehicle}}</font>",
+      "vehicleFormatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
     }
   },
   // Отображаемые строки {{turret}} маркера

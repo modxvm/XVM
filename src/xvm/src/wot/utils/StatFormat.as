@@ -23,6 +23,7 @@ class wot.utils.StatFormat
         var sRating: String = "";
         var sEff: String = "";
         var sE: String = "";
+        var sTEff: String = "";
         var sTWins: String = "";
         var sTBattles: String = "";
         var sTKb: String = "";
@@ -33,12 +34,10 @@ class wot.utils.StatFormat
         var sTDV: String = "";
         var sTFB: String = "";
         var sTSB: String = "";
-        var sD: String = "";
-        var sF: String = "";
-        var sS: String = "";
 
         var eff: Number = 0;
         var e: Number = 0;
+        var teff: Number = 0;
         var rating: Number = 0;
         var kb: Number = -1;
         var t_rating: Number = 0;
@@ -79,6 +78,9 @@ class wot.utils.StatFormat
                     e = stat.te;
                     sE = e != null ? String(e) : "-";
 
+                    teff = stat.teff;
+                    sTEff = teff != null ? String(teff) : "--";
+
                     if (rating)
                     {
                         var bn: Number = Utils.toInt(stat.b);
@@ -105,13 +107,10 @@ class wot.utils.StatFormat
                         sTDB = stat.tdb > 0 ? String(tdb) : "";
                         tdv = stat.tdv;
                         sTDV = stat.tdv > 0 ? Sprintf.format("%.1f", tdv) : "";
-                        sD = Utils.padLeft(stat.tdv > 0 ? String(Math.round(tdv * 10)) : "", 2);
                         tfb = stat.tfb;
                         sTFB = stat.tfb > 0 ? Sprintf.format("%.1f", tfb) : "";
-                        sF = Utils.padLeft(stat.tfb > 0 ? String(Math.round(tfb * 10)) : "", 2);
                         tsb = stat.tsb;
                         sTSB = stat.tsb > 0 ? Sprintf.format("%.1f", tsb) : "";
-                        sS = Utils.padLeft(stat.tsb > 0 ? String(Math.round(tsb * 10)) : "", 2);
                     }
                 }
             }
@@ -124,6 +123,7 @@ class wot.utils.StatFormat
         format = format.split("{{rating}}").join(sRating);
         format = format.split("{{eff}}").join(sEff);
         format = format.split("{{e}}").join(sE);
+        format = format.split("{{teff}}").join(Utils.padLeft(sTEff, 4));
 
         format = format.split("{{t-kb}}").join(sTKbWithout0);
         format = format.split("{{t-kb-0}}").join(Utils.padLeft(sTKb, 4));
@@ -135,9 +135,6 @@ class wot.utils.StatFormat
         format = format.split("{{tdv}}").join(sTDV);
         format = format.split("{{tfb}}").join(sTFB);
         format = format.split("{{tsb}}").join(sTSB);
-        format = format.split("{{d}}").join(sD);
-        format = format.split("{{f}}").join(sF);
-        format = format.split("{{s}}").join(sS);
 
         // This code is stupid, and needs to be rewritten
         format = format.split("{{kb:3}}").join(Utils.padLeft(sKb, 3));

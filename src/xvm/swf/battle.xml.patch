@@ -1,6 +1,6 @@
 --- orig\battle.xml	2012-11-23 13:52:42.023470700 +0200
 +++ battle.xml	2012-11-23 13:52:43.183482300 +0200
-@@ -133799,8 +133799,8 @@
+@@ -133801,8 +133801,8 @@
                <String value="charAt"/>
                <String value=" "/>
                <String value="\"/>
@@ -11,7 +11,7 @@
                <String value="&#10;"/>
                <String value="&#13;"/>
                <String value="&#9;"/>
-@@ -234926,7 +234926,7 @@
+@@ -261510,7 +261510,7 @@
          <actions>
            <PushData>
              <items>

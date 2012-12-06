@@ -14,8 +14,8 @@
     "description": "Default settings for XVM",  // Config description
     "url": "http://code.google.com/p/wot-xvm/", // Address to config updates
     "date": "12.10.2012",                       // Config last modified
-    "gameVersion": "0.8.0",                     // Supported version of the game
-    "modMinVersion": "3.0.4"                    // The minimum required version of the XVM mod
+    "gameVersion": "0.8.2",                     // Supported version of the game
+    "modMinVersion": "3.2.0"                    // The minimum required version of the XVM mod
   },
   // General parameters for the battle interface
   "battle": {
@@ -50,9 +50,9 @@
       "alpha": 90                               //   Transparency of the Team/Clan logo
     },
     // Display format for the left Players Panel (macros allowed, see readme-en.txt)
-    "formatLeft": "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:e}}'>{{e}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatLeft": "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
     // Display format for the right Players Panel (macros allowed, see readme-en.txt)
-    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:e}}'>{{e}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
+    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
   },
   // Parameters of the Battle Statistics Form
   "statisticForm": {
@@ -62,9 +62,9 @@
     // Display options for Team/Clan logos (see battleLoading above)
     "clanIcon": { "show": true, "x": 0, "y": 6, "xr": 0, "yr": 6, "h": 16, "w": 16, "alpha": 90 },
     // Display format for the left column (macros allowed, see readme-en.txt)
-    "formatLeft": "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:e}}'>{{e}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatLeft": "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
     // Display format for the right column (macros allowed, see readme-en.txt)
-    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:e}}'>{{e}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
+    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
   },
   // Parameters of the Players Panels
   "playersPanel": {
@@ -77,17 +77,17 @@
     "medium": {
       "width": 46,    // 0..250 - Width of the player's name column. Default is 46.
       // Display format for the left panel (macros allowed, see readme-en.txt)
-      "formatLeft": "<font color='{{c:e}}'>{{nick}}</font>",
+      "formatLeft": "<font color='{{c:eff}}'>{{nick}}</font>",
       // Display format for the right panel (macros allowed, see readme-en.txt)
-      "formatRight": "<font color='{{c:e}}'>{{nick}}</font>"
+      "formatRight": "<font color='{{c:eff}}'>{{nick}}</font>"
     },
     // Options for the "medium2" panels - the second of the medium panels
     "medium2": {
       "width": 65,    // 0..250 - Width of the player's name column. Default is 65.
       // Display format for the left panel (macros allowed, see readme-en.txt)
-      "formatLeft": "<font color='{{c:e}}'>{{vehicle}}</font>",
+      "formatLeft": "<font color='{{c:eff}}'>{{vehicle}}</font>",
       // Display format for the right panel (macros allowed, see readme-en.txt)
-      "formatRight": "<font color='{{c:e}}'>{{vehicle}}</font>"
+      "formatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
     },
     // Options for the "large" panels - the widest panels
     "large": {
@@ -96,8 +96,8 @@
       "nickFormatLeft": "<font color='{{c:rating}}'>{{rating}}</font> {{nick}}",
       "nickFormatRight": "{{nick}} <font color='{{c:rating}}'>{{rating}}</font>",
       // Display format for vehicle name (macros allowed, see readme-en.txt)
-      "vehicleFormatLeft": "<font color='{{c:e}}'>{{vehicle}}</font>",
-      "vehicleFormatRight": "<font color='{{c:e}}'>{{vehicle}}</font>"
+      "vehicleFormatLeft": "<font color='{{c:eff}}'>{{vehicle}}</font>",
+      "vehicleFormatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
     }
   },
   // {{turret}} marker display strings

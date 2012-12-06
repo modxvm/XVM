@@ -873,7 +873,69 @@ class wot.utils.DefaultConfig
         return {
             AVG_GWR: 48,  // Average GWR. Source: http://wot-news.com/stat/server/ru/norm/en
             AVG_EFF: 900, // Average Efficiency. Source: http://wot-news.com/index.php/stat/calc/en
-            AVG_BATTLES: 1000 // Averate number of battles. Source: http://wot-news.com/stat/server/ru/norm/en
+            AVG_BATTLES: 1000, // Averate number of battles. Source: http://wot-news.com/stat/server/ru/norm/en
+            E: {
+                LT: [ // lightTank
+                    { CD: 1, CF: 1, CS: 1 }, // level 1
+                    { CD: 1, CF: 1, CS: 1 }, // level 2
+                    { CD: 1, CF: 1, CS: 1 }, // level 3
+                    { CD: 1, CF: 1, CS: 1 }, // level 4
+                    { CD: 1, CF: 1, CS: 5 }, // level 5
+                    { CD: 1, CF: 1, CS: 5 }, // level 6
+                    { CD: 1, CF: 1, CS: 5 }, // level 7
+                    { CD: 1, CF: 1, CS: 5 }, // level 8
+                    { CD: 1, CF: 1, CS: 5 }, // level 9
+                    { CD: 1, CF: 1, CS: 5 }  // level 10
+                ],
+                MT: [ // mediumTank
+                    { CD: 5, CF: 1, CS: 2 }, // level 1
+                    { CD: 5, CF: 1, CS: 2 }, // level 2
+                    { CD: 5, CF: 1, CS: 2 }, // level 3
+                    { CD: 5, CF: 1, CS: 2 }, // level 4
+                    { CD: 5, CF: 1, CS: 2 }, // level 5
+                    { CD: 5, CF: 1, CS: 2 }, // level 6
+                    { CD: 5, CF: 1, CS: 2 }, // level 7
+                    { CD: 5, CF: 1, CS: 2 }, // level 8
+                    { CD: 5, CF: 1, CS: 2 }, // level 9
+                    { CD: 5, CF: 1, CS: 2 }  // level 10
+                ],
+                HT: [ // heavyTank
+                    { CD: 5, CF: 1, CS: 1 }, // level 1
+                    { CD: 5, CF: 1, CS: 1 }, // level 2
+                    { CD: 5, CF: 1, CS: 1 }, // level 3
+                    { CD: 5, CF: 1, CS: 1 }, // level 4
+                    { CD: 5, CF: 1, CS: 1 }, // level 5
+                    { CD: 5, CF: 1, CS: 1 }, // level 6
+                    { CD: 5, CF: 1, CS: 1 }, // level 7
+                    { CD: 5, CF: 1, CS: 1 }, // level 8
+                    { CD: 5, CF: 1, CS: 1 }, // level 9
+                    { CD: 5, CF: 1, CS: 1 }  // level 10
+                ],
+                TD: [ // tank destroyer
+                    { CD: 5, CF: 1, CS: 1 }, // level 1
+                    { CD: 5, CF: 1, CS: 1 }, // level 2
+                    { CD: 5, CF: 1, CS: 1 }, // level 3
+                    { CD: 5, CF: 1, CS: 1 }, // level 4
+                    { CD: 5, CF: 1, CS: 1 }, // level 5
+                    { CD: 5, CF: 1, CS: 1 }, // level 6
+                    { CD: 5, CF: 1, CS: 1 }, // level 7
+                    { CD: 5, CF: 1, CS: 1 }, // level 8
+                    { CD: 5, CF: 1, CS: 1 }, // level 9
+                    { CD: 5, CF: 1, CS: 1 }  // level 10
+                ],
+                SPG: [ // Arty
+                    { CD: 3, CF: 1, CS: 0 }, // level 1
+                    { CD: 3, CF: 1, CS: 0 }, // level 2
+                    { CD: 3, CF: 1, CS: 0 }, // level 3
+                    { CD: 3, CF: 1, CS: 0 }, // level 4
+                    { CD: 3, CF: 1, CS: 0 }, // level 5
+                    { CD: 3, CF: 1, CS: 0 }, // level 6
+                    { CD: 3, CF: 1, CS: 0 }, // level 7
+                    { CD: 3, CF: 1, CS: 0 }, // level 8
+                    { CD: 3, CF: 1, CS: 0 }, // level 9
+                    { CD: 3, CF: 1, CS: 0 }  // level 10
+                ]
+            }
         };
     }
 }
