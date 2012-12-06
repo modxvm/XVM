@@ -181,7 +181,10 @@ suite("Basic functionality", function() {
                 name: "KV1",
                 l: 5,
                 b: 208,
-                w: 94
+                w: 94,
+                d: null,
+                f: null,
+                s: null
             });
         });
     });

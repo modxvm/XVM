@@ -102,26 +102,25 @@ module.exports = (function() {
     };
 
     var processRemotes = function(inCache, forUpdate, forUpdateVNames, request, response, times) {
-        times.push({ "n": "process", "t": new Date() });
-
         var urls = { };
 
+        times.push({ n: "process", t: new Date() });
         forUpdate.forEach(function(id) {
             urls[id] = function(callback) {
                 makeSingleRequest(id, callback);
             }
         });
-        times.push({ "n": "prepared", "t": new Date() });
+        times.push({ n: "prepared", t: new Date() });
 
 //    async.series(urls, function(err, results) {
         async.parallel(urls, function(err, results) {
-            times.push({ "n": "requestdone", "t": new Date() });
+            times.push({ n: "requestdone", t: new Date() });
 
-            var now = new Date();
-            var result = {
-                players: [ ],
-                info: info
-            };
+            var now = new Date(),
+                result = {
+                    players: [ ],
+                    info: info
+                };
             // process retrieved items
             var forUpdate_length = forUpdate.length;
 
@@ -137,7 +136,7 @@ module.exports = (function() {
                     curResult = results[id];
 
                 if(curResult) {
-                    if(curResult.__code && curResult.__code != "error") {
+                    if(curResult.__code && curResult.__code !== "error") {
                         resultItem.st = curResult.__code;
                     } else {
                         var hd = hostData[statHostId];
@@ -262,12 +261,12 @@ module.exports = (function() {
                     process.send({ usage: 1, cached: 1 });
                 }
             });
-            times.push({"n": "processed", "t": new Date()});
+            times.push({ n: "processed", t: new Date() });
 
             // print debug info & remove useless data from result
             var missed_count = 0;
             result.players.forEach(function(player) {
-                if(player.status == "error" || player.status == "fail") {
+                if(player.status === "error" || player.status === "fail") {
                     missed_count++;
                     missed_collection.update({ _id: player.id }, { _id: player.id, missed: true }, { upsert: true });
                 } else {
@@ -287,7 +286,7 @@ module.exports = (function() {
                     }
                 }
             });
-            times.push({"n": "debug", "t": new Date()});
+            times.push({ n: "debug", t: new Date() });
 
             process.send({ usage: 1, missed: missed_count });
 
@@ -295,15 +294,16 @@ module.exports = (function() {
             result.server = settings.serverName;
             response.end(JSON.stringify(result));
 
-            var now2 = new Date();
-            var duration = String(now2 - times[0].t);
+            var now2 = new Date(),
+                duration = String(now2 - times[0].t);
+
             if(duration > 6000) {
                 while(duration.length < 4)
                     duration = " " + duration;
 
-                //ip_address = request.connection.remoteAddress;
+                /*ip_address = request.connection.remoteAddress;
 
-                /*            utils.debug(
+                            utils.debug(
                  "S" + (statHostId == undefined ? "c" : statHostId) + " " + duration + " ms" +
                  "  total: " + (result.players.length < 10 ? " " : "") + result.players.length +
                  "  cache: " + (inCache.length < 10 ? " " : "") + inCache.length +
@@ -311,9 +311,11 @@ module.exports = (function() {
                  "  failed: " + (failed_count < 10 ? " " : "") + failed_count +
                  "  missed: " + (missed_count < 10 ? " " : "") + missed_count);*/
 
-                times.push({"n": "end", "t": now2});
+                times.push({ n: "end", t: now2 });
+
                 var str = "";
-                for(var i = 1; i < times.length; ++i) {
+
+                for(i = 1; i < times.length; ++i) {
                     if(str != "")
                         str += " ";
                     str += times[i].n + ":" + String(times[i].t - times[i - 1].t);
@@ -325,28 +327,33 @@ module.exports = (function() {
 
     var processRequest = function(request, response) {
         // parse request
-        var ids = [ ];
-        var ids_bad_id = [ ];
-        var vehicles = [ ];
-        var times = [
-            { "n": "start", "t": new Date() }
-        ];
+        var ids = [ ],
+            ids_bad_id = [ ],
+            vehicles = [ ],
+            times = [
+                { "n": "start", "t": new Date() }
+            ];
+
         try {
             var query = url.parse(request.url).query;
+
+            // TODO it seems like using throw as GOTO. M.b. eliminate try..catch block?
             if(!query || !query.match(/^((\d)|(\d[\dA-Z_\-,=]*))$/))
                 throw "query match error: " + query;
 
-            if(query == "001" || query == "test") {
+            // TODO test it
+            if(query === "001" || query === "test") {
                 response.end('{"players":[{"id":1,"status":"ok"}],"server":"' + settings.serverName + '"}');
                 return;
             }
 
             var qarr = query.split(",");
-            qarr.forEach(function(a) {
-                var x = a.split("=");
-                var id = parseInt(x[0]);
 
-                var statHostId = getStatHostId(id);
+            qarr.forEach(function(a) {
+                var x = a.split("="),
+                    id = parseInt(x[0]),
+                    statHostId = getStatHostId(id);
+
                 // Skip wrong id and non-working servers
                 if(statHostId == -1 || settings.statHosts[statHostId] == "")
                     ids_bad_id.push(id);
@@ -359,19 +366,19 @@ module.exports = (function() {
         } catch(e) {
             response.statusCode = 403; // Forbidden
             var errText = "wrong request: " + e;
-            if(request.url.toLowerCase() != "/favicon.ico")
+            if(request.url.toLowerCase() !== "/favicon.ico")
                 errText += " url=" + request.url;
             response.end(errText + "\nserver=" + settings.serverName);
             return;
         }
 
         process.send({ usage: 1, requests: 1, players: ids.length + ids_bad_id.length });
-        times.push({"n": "urlparsed", "t": new Date()});
+        times.push({ n: "urlparsed", t: new Date() });
 
         // Select required data from cache
         if(mongorq >= mongorq_max) {
             response.statusCode = 503; // Service Unavailable
-            var errText = "db overloaded: " + mongorq + "/" + mongorq_max;
+            errText = "db overloaded: " + mongorq + "/" + mongorq_max;
             response.end('{"error":"' + errText + '","server":"' + settings.serverName + '"}');
 //            utils.log(errText);
             return;
@@ -379,16 +386,19 @@ module.exports = (function() {
 
         mongorq++;
         process.send({ usage: 1, mongorq: 1 });
+
         var cursor = collection.find({ _id: { $in: ids }}, { _id: 1, st: 1, dt: 1, nm: 1, b: 1, w: 1, e: 1, v: 1 });
-        times.push({"n": "find", "t": new Date()});
+
+        times.push({ n: "find", t: new Date() });
         cursor.toArray(function(error, inCache) {
             mongorq--;
             process.send({ usage: 1, mongorq: -1 });
 
-            var now = new Date();
-            var delta = 0;
-            var dtime = 0;
-            var duration = (now - times[0].t);
+            var now = new Date(),
+                delta = 0,
+                dtime = 0,
+                duration = now - times[0].t;
+
             if(duration > settings.mongoMaxTime) {
                 delta = -3;
                 dtime = 200;
@@ -398,30 +408,31 @@ module.exports = (function() {
             }
 
             if(!mongorq_max_lastupdate || (now - mongorq_max_lastupdate) > dtime) {
-                mongorq_max_lastupdate = now;
                 var oldvalue = mongorq_max;
+
+                mongorq_max_lastupdate = now;
                 mongorq_max = Math.max(1, Math.min(settings.mongoMaxConnections, mongorq_max + delta));
                 process.send({ usage: 1, mongorq_max: mongorq_max - oldvalue });
             }
 
             try {
-                times.push({"n": "find2", "t": now});
+                times.push({ n: "find2", t: now });
 
                 if(error)
                     throw "MongoDB find error: " + error;
 
-                var forUpdate = [ ];
-                var forUpdateVNames = [ ];
+                var forUpdate = [ ],
+                    forUpdateVNames = [ ];
 
                 ids = ids.concat(ids_bad_id);
-                var ids_length = ids.length;
-                for(var a = 0; a < ids_length; ++a) {
-                    var id = ids[a];
-                    var vname = vehicles[a] ? vehicles[a].toUpperCase() : null;
+                for(var a = 0; a < ids.length; ++a) {
+                    var id = ids[a],
+                        vname = vehicles[a] ? vehicles[a].toUpperCase() : null;
 
                     // Check cache data
-                    var found = false;
-                    var inCache_length = inCache.length;
+                    var found = false,
+                        inCache_length = inCache.length;
+
                     for(var i = 0; i < inCache_length; ++i) {
                         if(inCache[i]._id != id)
                             continue;
@@ -438,7 +449,7 @@ module.exports = (function() {
                         forUpdateVNames.push(vname);
                     }
                 }
-                times.push({"n": "beforeprocess", "t": new Date()});
+                times.push({ n: "beforeprocess", t: new Date() });
                 processRemotes(inCache, forUpdate, forUpdateVNames, request, response, times);
             } catch(e) {
                 response.statusCode = 500;
