@@ -1,0 +1,22 @@
+--- orig\login.xml	2012-11-11 14:10:53.093262200 +0200
++++ login.xml	2012-11-11 14:10:53.342276400 +0200
+@@ -64294,8 +64294,8 @@
+               <String value="charAt"/>
+               <String value=" "/>
+               <String value="\"/>
+-              <String value=""/>
+-              <String value=""/>
++              <String value=" "/>
++              <String value=" "/>
+               <String value="&#10;"/>
+               <String value="&#13;"/>
+               <String value="&#9;"/>
+@@ -72548,7 +72548,7 @@
+         <actions>
+           <PushData>
+             <items>
+-              <StackString value="net.wargaming.login.Login"/>
++              <StackString value="Login"/>
+             </items>
+           </PushData>
+           <GetVariable/>
