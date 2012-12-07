@@ -81,6 +81,11 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
 
     public function get isBlowedUp():Boolean { return s_blowedUp[m_playerFullName] != undefined; }
 
+    private function getCurrentSystemColor():Number
+    {
+        return ColorsManager.getSystemColor(m_entityName, m_isDead, isBlowedUp, ColorsManager.isColorBlindMode);
+    }
+    
     /**
      * Text formatting functions
      */
@@ -194,10 +199,13 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
                 format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio));
             formatArr = format.split("{{c:dmg-kind}}");
             if (formatArr.length > 1)
-                format = formatArr.join(delta ? GraphicsUtil.GetDmgKindValue(damageType) : "")
+                format = formatArr.join(delta ? GraphicsUtil.GetDmgKindValue(damageType) : "");
             formatArr = format.split("{{c:dmg_kind}}");
             if (formatArr.length > 1)
-                format = formatArr.join(delta ? GraphicsUtil.GetDmgKindValue(damageType) : "")
+                format = formatArr.join(delta ? GraphicsUtil.GetDmgKindValue(damageType) : "");
+            formatArr = format.split("{{c:system}}");
+            if (formatArr.length > 1)
+                format = formatArr.join("#" + Utils.padLeft(getCurrentSystemColor().toString(16), 6, "0"));
 
             format = Utils.trim(format);
         }
@@ -238,11 +246,10 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
 
     public function formatDynamicColor(format:String, curHealth:Number, damageType:String):Number
     {
-        var systemColor =  ColorsManager.getSystemColor(m_entityName, m_isDead, isBlowedUp, ColorsManager.isColorBlindMode);
         try
         {
             if (!format)
-                return systemColor;
+                return getCurrentSystemColor();
 
             if (isFinite(format))
                 return Number(format);
@@ -263,14 +270,18 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
             formatArr = format.split("{{c:dmg_kind}}");
             if (formatArr.length > 1)
                 format = formatArr.join(damageType ? GraphicsUtil.GetDmgKindValue(damageType, "0x") : "");
-            return isFinite(format) ? Number(format) : systemColor;
+            formatArr = format.split("{{c:system}}");
+            if (formatArr.length > 1)
+                format = formatArr.join("0x" + Utils.padLeft(getCurrentSystemColor().toString(16), 6, "0"));
+
+            return isFinite(format) ? Number(format) : getCurrentSystemColor();
         }
         catch (e)
         {
             ErrorHandler.setText("ERROR: formatDynamicColor(" + format + "):" + String(e));
         }
 
-        return systemColor;
+        return getCurrentSystemColor();
     }
 
     public function formatDynamicAlpha(format:String, curHealth:Number):Number

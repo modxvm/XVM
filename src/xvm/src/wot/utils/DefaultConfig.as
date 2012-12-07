@@ -210,7 +210,15 @@ class wot.utils.DefaultConfig
                 deadMarker:   "<font face='Wingdings'>N</font>",
                 blowupMarker: "<font face='Wingdings'>M</font>",
                 formatHeader: "<font color='#FFFFFF'>Hits:</font> <font size='13'>#{{n}}</font> <font size='0{{nick}}'><b>{{dmg-total}}</b>  <font color='#FFFFFF'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font></font>",
-                formatHistory: "<textformat leading='-4' tabstops='[20,50,90,150]'><font size='12'>\u00D7{{n-player}}:</font><tab>{{dmg-player}}<tab>| <font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab>| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>"
+                formatHistory: "<textformat leading='-4' tabstops='[20,50,90,150]'><font size='12'>\u00D7{{n-player}}:</font><tab>{{dmg-player}}<tab>| <font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab>| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>",
+                shadow: {
+                  alpha: 100,
+                  color: "0x000000",
+                  angle: 45,
+                  distance: 0,
+                  size: 5,
+                  strength: 150
+                }
             },
             markers: {
                 ally: {

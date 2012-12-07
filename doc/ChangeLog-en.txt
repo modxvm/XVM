@@ -1,6 +1,9 @@
-﻿  * fixed minimap icon highlighting by mouse over player at side player panels
+﻿XVM-3.2.0-rc3:
+  * fixed minimap icon highlighting by mouse over player at side player panels
   * HTML in clock in battle
   * dynamic color and transparency for shadow
+  * added macro {{c:system}} for use system color instead of override
+  * shadow settings in hit-log
 
 XVM-3.2.0-rc2:
   * fixed clock in battle

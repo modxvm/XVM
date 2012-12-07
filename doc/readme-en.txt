@@ -112,6 +112,7 @@
       {{c:hp-ratio}}  - color depended from current health ratio (only in vehicle markers)
       {{c:dmg-kind}}  - color depended from damage kind
       {{c:vtype}}     - color depended from vehicle type
+      {{c:system}}    - system color (disable override color)
       {{a:hp}}        - transparency depended from current health points (only in vehicle markers)
       {{a:hp-ratio}}  - transparency depended from current health ratio (only in vehicle markers)
       + statistics macros (see below)

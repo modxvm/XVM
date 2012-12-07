@@ -122,7 +122,15 @@
     // Hits header format, including last hit (macros allowed, see readme-en.txt)
     "formatHeader":  "<font color='#FFFFFF'>Hits:</font> <font size='13'>#{{n}}</font> <font size='0{{vehicle}}'><b>{{dmg-total}}</b>  <font color='#FFFFFF'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font></font>",
     // List of hits format (macros allowed, see readme-en.txt)
-    "formatHistory": "<textformat leading='-4' tabstops='[20,50,90,150]'><font size='12'>\u00D7{{n-player}}:</font><tab>{{dmg-player}}<tab>| <font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab>| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>"
+    "formatHistory": "<textformat leading='-4' tabstops='[20,50,90,150]'><font size='12'>\u00D7{{n-player}}:</font><tab>{{dmg-player}}<tab>| <font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab>| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>",
+    "shadow": {                       //   Shadow options
+      "alpha": 100,                   //     Opacity
+      "color": "0x000000",            //     Color
+      "angle": 45,                    //     Offset angle
+      "distance": 0,                  //     Offset distance
+      "size": 5,                      //     Size
+      "strength": 150                 //     Intensity
+    }
   },
   // Capture bar
   "captureBar": {

@@ -26,6 +26,7 @@ class wot.VehicleMarkersManager.HitLog
     private var insertOrder:Number;
     private var formatHeader:String;
     private var formatHistory:String;
+    private var shadow:Object;
 
     private var textField:TextField;
 
@@ -46,6 +47,7 @@ class wot.VehicleMarkersManager.HitLog
         groupHitsByPlayer = cfg.groupHitsByPlayer == true;
         formatHeader = cfg.formatHeader;
         formatHistory = cfg.formatHistory;
+        shadow = cfg.shadow;
 
         total = 0;
         hits = [];
@@ -144,7 +146,11 @@ class wot.VehicleMarkersManager.HitLog
         textField.antiAliasType = "advanced";
         textField.multiline = true;
         textField.wordWrap = false;
-        textField.filters = [new flash.filters.DropShadowFilter(1, 90, 0, 100, 5, 5, 1.5, 3)];
+        if (shadow)
+        {
+            textField.filters = [ GraphicsUtil.createShadowFilter(shadow.distance, shadow.angle,
+                parseInt(shadow.color), shadow.alpha, shadow.size, shadow.strength) ];
+        }
 
         textField.html = true;
         var style:TextField.StyleSheet = new TextField.StyleSheet();

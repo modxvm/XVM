@@ -125,7 +125,7 @@ class wot.utils.GraphicsUtil
             }
             if (!vtype || !Config.s_config.colors.vtype[vtype])
                 return "";
-            return prefix + Utils.toInt(Config.s_config.colors.vtype[vtype], 0xFFFFFE).toString(16);
+            return prefix + Utils.padLeft(Utils.toInt(Config.s_config.colors.vtype[vtype], 0xFFFFFE).toString(16), 6, "0");
         }
         catch (ex:Error)
         {
@@ -143,7 +143,7 @@ class wot.utils.GraphicsUtil
         {
             if (!dmg_kind || !Config.s_config.colors.dmg_kind[dmg_kind])
                 return "";
-            return prefix + Utils.toInt(Config.s_config.colors.dmg_kind[dmg_kind], 0xFFFFFE).toString(16);
+            return prefix + Utils.padLeft(Utils.toInt(Config.s_config.colors.dmg_kind[dmg_kind], 0xFFFFFE).toString(16), 6, "0");
         }
         catch (ex:Error)
         {
@@ -217,7 +217,7 @@ class wot.utils.GraphicsUtil
             var color: Number = Utils.toInt(cfg[0].color, 0xFFFFFF);
             if (darker)
                 color = GraphicsUtil.darkenColor(color, 50);
-            return prefix + color.toString(16);
+            return prefix + Utils.padLeft(color.toString(16), 6, "0");
         }
 
         for (var i:Number = 0; i < cfg_len; ++i)
@@ -228,7 +228,7 @@ class wot.utils.GraphicsUtil
             {
                 if (darker)
                     color2 = GraphicsUtil.darkenColor(color2, 50);
-                return prefix + color2.toString(16);
+                return prefix + Utils.padLeft(color2.toString(16), 6, "0");
             }
         }
 
