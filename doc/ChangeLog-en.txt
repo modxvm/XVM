@@ -1,4 +1,6 @@
-﻿XVM-3.2.0-rc2:
+﻿  * fixed minimap icon highlighting by mouse over player at side player panels
+
+XVM-3.2.0-rc2:
   * fixed clock in battle
 
 XVM-3.2.0-rc1:
