@@ -1,11 +1,11 @@
-#!/usr/bin/python
+#!/usr/bin/env python2
 
 """ This is XVM FUSE driver implementation with additional features
     required for XVM mod.
 
     XVM is popular mod for 'Worls of Tanks' MMO game.
     Original mod is located at http://code.google.com/p/wot-xvm/
-    
+
     This code is distributed under GNU GPL v3 public license.
 """
 
@@ -24,16 +24,18 @@ from xml.dom import minidom
 """
 
 # Based on XVM 3.1.2, SVN rev. 1104
+# Last change of xvm-stat: SVN rev. 1056
 
-XVMFS_VERSION = '0.1.2'
+XVMFS_VERSION = '0.1.3'
 fuse.fuse_python_api = (0, 2)
 
 # Logging configuration.
 # Log level is set to logging.INFO by default.
-# Use mount option 'debug' to get more detailed log.
-# The log file is created in the current directory.
+# Use mount option 'debug' to get more detailed logs.
+# The log files are created in the current directory by default.
+# Use '-o log_dir=...' option to override it.
 # Example:
-# $ xvmfs -o debug res_mods/.stat
+# $ xvmfs -o debug -o log_dir=/tmp/xvm res_mods/.stat
 LOG_DIR = '.'
 XVM_LOG = 'xvmfs.log'
 XVM_STAT_LOG = 'xvmfs-stat.log'
@@ -45,7 +47,7 @@ DEFAULT_XVM_CFG = 'xvm-stat.exe.config'
 DEFAULT_WOT_CFG = 'WOTLauncher.cfg'
 
 # Original xvm-stat.exe tells the name of its current folder (which should be the folder
-# with WoT binaries) to it's ingame components. Since 
+# with WoT binaries) to it's ingame components.
 # Make them happy.
 WINE_GAME_DIR = 'C:\\Games\\World_of_Tanks'
 
@@ -110,15 +112,15 @@ class XvmFS(Fuse):
     def init(self):
         try:
             Log.info('')
-            Log.info("XvmFS %s is started.\n" % XVMFS_VERSION)
+            Log.info("XvmFS %s is started." % XVMFS_VERSION)
 
+            self.check_params()
             self.version = self.GetVersion()
             self.proxies = self.GetProxyAddresses()
 
         except Exception, ex:
-            print "Log: " + str(Log)
             Log.debug('XvmFS init exception:\n' + traceback.format_exc(ex))
-            raise ex
+            raise
 
     def fsinit(self):
         Log.debug('xvm_cfg is ' + str(self.xvm_cfg))
@@ -231,7 +233,7 @@ class XvmFS(Fuse):
                     self.result = json.dumps(self.result)
 
                 except Exception, ex:
-                    Log.error("Exception during @RUN command: %s" + str(ex))
+                    Log.error("Exception during @RUN command: " + str(ex))
                     Log.debug("\n" + traceback.format_exc(ex))
 
             elif command == '@GET_LAST_STAT':
@@ -303,9 +305,6 @@ class XvmFS(Fuse):
 
     def GetVersion(self):
         Log.debug('GetVersion: current dir is ' + os.path.abspath('.'))
-        if not os.path.isfile(self.wot_cfg):
-            raise Exception('WOT config file was not found.')
-
         wotVersion = 'RU'
 
         try:
@@ -516,16 +515,6 @@ class XvmFS(Fuse):
 
                 if currentMember['notInDb']:
                     Log.info("NOT IN DB - %(id)d %(name)s %(vn)s" % pd)
-                """ Disabled in svn rev.1102
-                else:
-                    Log.info("CACHE - %d %s %s: eff=%d battles=%d wins=%d t-battles=%d t-wins=%d"
-                            % (pd['id'], pd['name'], pd['vn']
-                                , currentMember['stat']['e']
-                                , currentMember['stat']['b']
-                                , currentMember['stat']['w']
-                                , currentMember['stat']['tb']
-                                , currentMember['stat']['tw'])
-                """
                 continue
 
             if pd['vn'] in [None, '']:
@@ -632,9 +621,26 @@ class XvmFS(Fuse):
             cmd = '@LOG' if logger.name == 'XVM' else '@LOGSTAT'
             Log.error("Error decoding %s string %s" % (cmd, self.logString))
             Log.debug('\n' + traceback.format_exc(ex))
+
         finally:
             self.logLength = 0
             self.logString = ''
+
+    """ Compatibility support
+    """
+
+    def check_params(self):
+        """Validate XvmFS properties after arguments were parsed"""
+        wot_cfg = locate_file(self.wot_cfg)
+        xvm_cfg = locate_file(self.xvm_cfg)
+
+        if wot_cfg is None:
+            raise Exception("WoT config file '%s' was not found." % self.wot_cfg)
+        elif xvm_cfg is None:
+            raise Exception("XVM config file '%s' was not found." % self.xvm_cfg)
+
+        self.wot_cfg = wot_cfg
+        self.xvm_cfg = xvm_cfg
 
 
 """ Entry point
@@ -657,7 +663,7 @@ def main():
                 + " Default is '%s'" % WINE_GAME_DIR,
             default=WINE_GAME_DIR)
 
-    server.parser.add_option(mountopt='log_dir', metavar='FILE', default=LOG_DIR,
+    server.parser.add_option(mountopt='log_dir', metavar='DIR', default=LOG_DIR,
             help="Directory for log files. Default is current directory.")
 
     server.parser.add_option(mountopt='debug', action='store_true',
@@ -678,7 +684,11 @@ def main():
     server.main()
 
 def configureLoggers(logDir, level):
+    """Create and customize logger objects"""
     global Log, LogStat
+
+    if not os.path.isfile(logDir) and not os.path.isdir(logDir):
+        os.makedirs(logDir)
 
     formatter = logging.Formatter("%(asctime)s %(levelname)-7s: %(message)s")
     handler = logging.FileHandler(os.path.join(logDir, XVM_LOG), mode='w')
@@ -694,6 +704,26 @@ def configureLoggers(logDir, level):
     LogStat = logging.getLogger('XVM-STAT')
     LogStat.setLevel(level)
     LogStat.addHandler(handler)
+
+def locate_file(filename):
+    """Treat config file names in case-insensitive way"""
+
+    if filename is None or os.path.isfile(filename):
+        return filename
+
+    fpath = os.path.abspath(filename)
+    fdir, fname = os.path.split(fpath)
+
+    if os.path.isfile(fpath):
+        return fpath
+
+    if not os.path.isdir(fdir):
+        return None
+
+    fname = fname.lower()
+    found = next((x for x in os.listdir(fdir) if x.lower() == fname), None)
+
+    return found
 
 if __name__ == '__main__':
     main()
