@@ -109,18 +109,18 @@
   "hitLog": {
     "enabled": true,      // on/off switch
     "x": 270,             // X position (negative values - bind to right side of screen)
-    "y": 7,               // Y position (negative values - bind to bottom side of screen)
-    "w": 200,             // Width
-    "h": 100,             // Height
+    "y": 5,               // Y position (negative values - bind to bottom side of screen)
+    "w": 500,             // Width
+    "h": 1000,            // Height
     "lines": 0,           // Number of lines. Old lines will be pushed out
     "direction": "down",  // Log direction: up - lines will be added from up to down, down - from down to up.
     "insertOrder": "end", // Insert order: begin - insert new values to begin, end - add to end
-    "groupHitsByPlayer": false, // group hits by players name
+    "groupHitsByPlayer": true, // group hits by players name
     // Substitution for {{dead}} macro when tank is dead
     "deadMarker": "<font face='Wingdings'>N</font>",
     "blowupMarker": "<font face='Wingdings'>M</font>",
     // Hits header format, including last hit (macros allowed, see readme-en.txt)
-    "formatHeader":  "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> <font size='0{{vehicle}}'><b>{{dmg-total}}</b>  <font color='#CCCCCC'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font></font>",
+    "formatHeader":  "<font color='#FFFFFF'>Hits:</font> <font size='13'>#{{n}}</font> <font size='0{{vehicle}}'><b>{{dmg-total}}</b>  <font color='#FFFFFF'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font></font>",
     // List of hits format (macros allowed, see readme-en.txt)
     "formatHistory": "<textformat leading='-4' tabstops='[20,50,90,150]'><font size='12'>\u00D7{{n-player}}:</font><tab>{{dmg-player}}<tab>| <font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab>| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>"
   },

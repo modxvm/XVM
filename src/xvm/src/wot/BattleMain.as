@@ -37,8 +37,6 @@ class wot.BattleMain
         instance = new BattleMain();
         gfx.io.GameDelegate.addCallBack("battle.showPostmortemTips", instance, "showPostmortemTips");
         gfx.io.GameDelegate.addCallBack("Stage.Update", instance, "onUpdateStage");
-        gfx.io.GameDelegate.addCallBack("battle.arenaData", instance, "setArenaData");
-//        gfx.io.GameDelegate.addCallBack("battle.showStatus", instance, "showFinalStatus"); // dialog is not exist since WoT 0.8.0
     }
 
     private static function BattleMainConfigLoaded()
@@ -146,12 +144,14 @@ class wot.BattleMain
         var clock: TextField = debugPanel.createTextField("clock", debugPanel.getNextHighestDepth(),
             lag._x + lag._width, fps._y, 300, fps._height);
         clock.antiAliasType = "advanced";
+        clock.html = true;
         var tf: TextFormat = fps.getNewTextFormat();
-        tf.align = "left";
-        clock.setNewTextFormat(tf);
+        clock.styleSheet = Utils.createStyleSheet(Utils.createCSS("xvm_clock", 
+            tf.color, tf.font, tf.size, "left", tf.bold, tf.italic));
         clock.filters = [new flash.filters.DropShadowFilter(1, 90, 0, 100, 5, 5, 1.5, 3)];
+
         setInterval(function() {
-            clock.text = Utils.FormatDate(format, new Date());
+            clock.htmlText = "<span class='xvm_clock'>" + Utils.FormatDate(format, new Date()) + "</span>";
         }, 1000);
     }
 
@@ -162,12 +162,6 @@ class wot.BattleMain
             _root.showPostmortemTips(movingUpTime, showTime, movingDownTime);
     }
 
-    function setArenaData(mapText, battleType, battleName, team1name, team2name, winText)
-    {
-        //Logger.add("Battle::setArenaData(" + mapText + ", " + battleType + ", " + battleName + ", " + team1name + ", " + team2name + ", " + winText + ")");
-        _root.setArenaData(mapText, battleType, battleName, team1name, team2name, winText);
-    }
-
     function onUpdateStage(width, height)
     {
         //Logger.add("Battle::onUpdateStage()");
@@ -176,69 +170,4 @@ class wot.BattleMain
         BattleMain.height = height;
         SetupElements();
     }
-
-    /* DISABLED - final dialog is not exist since WoT 0.8.0
-    var finalStatusShown = false;
-    function showFinalStatus(statusText)
-    {
-        if (finalStatusShown)
-            return;
-
-        //Logger.add("Battle::showFinalStatus(): " + statusText);
-
-        _root.showFinalStatus(statusText);
-
-        if (!_root.finalDialog || !_root.finalDialog.form)
-            return;
-
-        finalStatusShown = true;
-
-        if (!StatData.s_loaded || !Config.s_config.rating.showPlayersStatistics || !Config.s_config.statisticForm.showChances)
-            return;
-
-        for (var i = 0; i < _root.statsData.team1.length; ++i)
-        {
-            var data = _root.statsData.team1[i];
-            var pname = data.label.toUpperCase();
-            if (!StatData.s_data[pname] || !StatData.s_data[pname].playerId)
-            {
-                StatLoader.AddPlayerData(data.uid, data.label, data.vehicle, data.icon,
-                    _root.statsData.playerTeam == "team1" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
-            }
-        }
-
-        for (var i = 0; i < _root.statsData.team2.length; ++i)
-        {
-            var data = _root.statsData.team2[i];
-            var pname = data.label.toUpperCase();
-            if (!StatData.s_data[pname] || !StatData.s_data[pname].playerId)
-            {
-                StatLoader.AddPlayerData(data.uid, data.label, data.vehicle, data.icon,
-                    _root.statsData.playerTeam == "team1" ? Defines.TEAM_ENEMY : Defines.TEAM_ALLY);
-            }
-        }
-
-        //Logger.addObject(_root.finalDialog.form.form, "form", 2);
-
-        var t: TextField = null;
-        for (var i in _root.finalDialog.form.form)
-        {
-            if (!Utils.startsWith("instance", i))
-                continue;
-            var v = _root.finalDialog.form.form[i];
-            if (v instanceof TextField)
-            {
-                t = v;
-                break;
-            }
-        }
-
-        if (t)
-        {
-            t.html = true;
-            t.text = "";
-            Chance.ShowChance(t, Config.s_config.statisticForm.showChancesExp);
-        }
-    }
-    */
 }

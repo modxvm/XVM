@@ -1,5 +1,6 @@
 import wot.utils.Defines;
 import wot.utils.GraphicsUtil;
+import wot.utils.Utils;
 import wot.VehicleMarkersManager.ColorsManager;
 import wot.VehicleMarkersManager.XvmHelper;
 import wot.VehicleMarkersManager.components.damage.DamageTextProxy;
@@ -95,10 +96,7 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
         tf.wordWrap = false;
 
         tf.html = true;
-
-        var style:TextField.StyleSheet = new TextField.StyleSheet();
-        style.parseCSS(XvmHelper.createCSS(cfg.font, color, "xvm_damageText"));
-        tf.styleSheet = style;
+        tf.styleSheet = Utils.createStyleSheet(XvmHelper.createCSS(cfg.font, color, "xvm_damageText"));
 
         tf.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow.distance, cfg.shadow.angle, shadowColor,
             cfg.shadow.alpha, cfg.shadow.size, cfg.shadow.strength) ];

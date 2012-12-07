@@ -109,18 +109,18 @@
   "hitLog": {
     "visible": true,      // переключатель вкл/выкл
     "x": 270,             // Позиция X (отрицательные значения - привязать к правой стороне экрана)
-    "y": 7,               // Позиция Y (отрицательные значения - привязать к нижней стороне экрана)
-    "w": 200,             // Ширина
-    "h": 100,             // Высота
-    "lines": 1,           // Количество строк. Устаревшие данные выталкиваются.
+    "y": 5,               // Позиция Y (отрицательные значения - привязать к нижней стороне экрана)
+    "w": 500,             // Ширина
+    "h": 1000,            // Высота
+    "lines": 0,           // Количество строк. Устаревшие данные выталкиваются.
     "direction": "down",  // Направление лога: up - строки добавляются сверху, down - снизу.
     "insertOrder": "end", // Insert order: begin - insert new values to begin, end - add to end
-    "groupHitsByPlayer": false, // группировать попадания по имени игрока
+    "groupHitsByPlayer": true, // группировать попадания по имени игрока
     // Подстановка для макроса {{dead}} когда танк умирает
     "deadMarker": "<font face='Wingdings'>N</font>",
     "blowupMarker": "<font face='Wingdings'>M</font>",
     // Формат заголовка (допускаются макроподстановки, см. readme-ru.txt)
-    "formatHeader":  "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> <font size='0{{vehicle}}'><b>{{dmg-total}}</b>  <font color='#CCCCCC'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font></font>",
+    "formatHeader":  "<font color='#FFFFFF'>Hits:</font> <font size='13'>#{{n}}</font> <font size='0{{vehicle}}'><b>{{dmg-total}}</b>  <font color='#FFFFFF'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font></font>",
     // Формат лога попаданий (допускаются макроподстановки, см. readme-ru.txt)
     "formatHistory": "<textformat leading='-4' tabstops='[20,50,90,150]'><font size='12'>\u00D7{{n-player}}:</font><tab>{{dmg-player}}<tab>| <font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab>| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>"
   },

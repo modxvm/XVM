@@ -148,7 +148,7 @@ class wot.VehicleMarkersManager.HitLog
 
         textField.html = true;
         var style:TextField.StyleSheet = new TextField.StyleSheet();
-        style.parseCSS(".xvm_hitlog {font-family:$FieldFont; font-size:15px; color:#F4EFE8;}");
+        style.parseCSS(".xvm_hitlog{font-family:$FieldFont;font-size:15px;color:#f4efe8;}");
         textField.styleSheet = style;
 
         setText(formatText(formatHeader, ""));

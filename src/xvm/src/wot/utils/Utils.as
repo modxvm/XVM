@@ -216,7 +216,7 @@ class wot.utils.Utils
         }
         return str;
     }
-    
+
     public static function getChildrenOf(target:MovieClip, recursive:Boolean):Array
     {
         var result:Array = [];
@@ -225,7 +225,7 @@ class wot.utils.Utils
             if (target[i] instanceof MovieClip)
             {
                 result.push(target[i]);
-                
+
                 /** Concatenate children of clips at this level,recurse */
                 if (recursive)
                     result = result.concat(getChildrenOf(target[i],true));
@@ -233,7 +233,7 @@ class wot.utils.Utils
         }
         return result;
     }
-    
+
     /**
      * c[] − b[] = a[]
      * minuend (c) − subtrahend (b) = difference (a)
@@ -244,7 +244,7 @@ class wot.utils.Utils
         var difference:Array = [];
         //Logger.addObject(minuend, "Utils.minuend", 3);
         //Logger.addObject(subtrahend, "Utils.subtrahend", 3);
-        
+
         for (var i in minuend)
         {
             var testVal = minuend[i];
@@ -262,5 +262,28 @@ class wot.utils.Utils
         }
         //Logger.addObject(difference, "Utils.difference", 3);
         return difference;
+    }
+
+    /**
+     * Create CSS based on config
+     */
+    public static function createCSS(className:String, color: Number,
+        fontName: String, fontSize: Number, align: String, bold: Boolean, italic: Boolean):String
+    {
+        return "." + className + " {" +
+            "color:#" + Utils.padLeft(color.toString(16), 6, '0') + ";" +
+            "font-family:" + fontName + ";" +
+            "font-size:" + fontSize + ";" +
+            "text-align:" + align + ";" +
+            "font-weight:" + (bold ? "bold" : "normal") + ";" +
+            "font-style:" + (italic ? "italic" : "normal") + ";" +
+            "}";
+    }
+
+    public static function createStyleSheet(css: String):TextField.StyleSheet
+    {
+        var style:TextField.StyleSheet = new TextField.StyleSheet();
+        style.parseCSS(css);
+        return style;
     }
 }

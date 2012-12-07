@@ -338,21 +338,20 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
             //textField.autoSize = "center"; // http://theolagendijk.com/2006/09/07/aligning-htmltext-inside-flash-textfield/
 
             textField.html = true;
-
-            var style:TextField.StyleSheet = new TextField.StyleSheet();
-            style.parseCSS(XvmHelper.createCSS(cfg.font,
+            textField.styleSheet = Utils.createStyleSheet(XvmHelper.createCSS(cfg.font,
                 formatDynamicColor(formatStaticColorText(cfg.color), m_curHealth), "xvm_markerText"));
-            textField.styleSheet = style;
 
 //            Logger.add(XvmHelper.createCSS(cfg.font, formatDynamicColor(formatStaticColorText(cfg.color), m_curHealth), "xvm_markerText"));
 
             // TODO: replace shadow with TweenLite Shadow/Bevel (performance issue)
+            var shadow: flash.filters.DropShadowFilter = null;
             if (cfg.shadow)
             {
                 var sh_color:Number = formatDynamicColor(formatStaticColorText(cfg.shadow.color), m_curHealth);
                 var sh_alpha:Number = formatDynamicAlpha(cfg.shadow.alpha, m_curHealth);
-                textField.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow.distance,
-                    cfg.shadow.angle, sh_color, sh_alpha, cfg.shadow.size, cfg.shadow.strength) ];
+                shadow = GraphicsUtil.createShadowFilter(cfg.shadow.distance,
+                    cfg.shadow.angle, sh_color, sh_alpha, cfg.shadow.size, cfg.shadow.strength)
+                textField.filters = [ shadow ];
             }
 
             textField._alpha = formatDynamicAlpha(cfg.alpha, m_curHealth);
@@ -360,7 +359,15 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
             textField._y = cfg.y - (/*textField._height*/ 31 / 2.0); // FIXIT: 31 is used for compatibility
             textField._visible = cfg.visible;
 
-            return { field: textField, format: formatStaticText(cfg.format), color: formatStaticColorText(cfg.color), alpha: cfg.alpha };
+            return {
+                field: textField,
+                format: formatStaticText(cfg.format),
+                color: formatStaticColorText(cfg.color),
+                alpha: cfg.alpha,
+                shadow: shadow,
+                sh_color: cfg.shadow.color,
+                sh_alpha: cfg.shadow.alpha
+            };
         }
         catch (e)
         {

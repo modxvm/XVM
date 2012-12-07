@@ -1,4 +1,6 @@
 ﻿  * fixed minimap icon highlighting by mouse over player at side player panels
+  * HTML in clock in battle
+  * dynamic color and transparency for shadow
 
 XVM-3.2.0-rc2:
   * fixed clock in battle

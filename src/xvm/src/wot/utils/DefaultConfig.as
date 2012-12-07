@@ -199,17 +199,17 @@ class wot.utils.DefaultConfig
             hitLog: {
                 visible: true,
                 x: 270,
-                y: 7,
-                w: 200,
-                h: 100,
+                y: 5,
+                w: 500,
+                h: 1000,
                 lines: 0,
                 direction: "down",
                 insertOrder: "end",
-                groupHitsByPlayer: false,
+                groupHitsByPlayer: true,
                 // Substitution for {{dead}} macro when player is dead
                 deadMarker:   "<font face='Wingdings'>N</font>",
                 blowupMarker: "<font face='Wingdings'>M</font>",
-                formatHeader: "<font color='#CCCCCC'>Hits:</font> <font size='13'>#{{n}}</font> <font size='0{{nick}}'><b>{{dmg-total}}</b>  <font color='#CCCCCC'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font></font>",
+                formatHeader: "<font color='#FFFFFF'>Hits:</font> <font size='13'>#{{n}}</font> <font size='0{{nick}}'><b>{{dmg-total}}</b>  <font color='#FFFFFF'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font></font>",
                 formatHistory: "<textformat leading='-4' tabstops='[20,50,90,150]'><font size='12'>\u00D7{{n-player}}:</font><tab>{{dmg-player}}<tab>| <font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab>| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>"
             },
             markers: {

@@ -289,11 +289,15 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
                 var st = vehicleState.getCurrentState();
                 for (var i in textFields[st])
                 {
-                    var tf:TextField = textFields[st][i];
-                    tf.field.htmlText = "<textformat leading='-2'><p class='xvm_markerText'>" +
-                        "<font color='#" + Utils.padLeft(formatDynamicColor(tf.color, m_curHealth).toString(16), 6, '0') + "'>" +
-                        formatDynamicText(tf.format, m_curHealth) + "</font></p></textformat>";
-                    tf.field._alpha = formatDynamicAlpha(tf.alpha, m_curHealth);
+                    var tfi = textFields[st][i];
+                    tfi.field.htmlText = "<textformat leading='-2'><p class='xvm_markerText'>" +
+                        "<font color='#" + Utils.padLeft(formatDynamicColor(tfi.color, m_curHealth).toString(16), 6, '0') + "'>" +
+                        formatDynamicText(tfi.format, m_curHealth) + "</font></p></textformat>";
+                    tfi.field._alpha = formatDynamicAlpha(tfi.alpha, m_curHealth);
+
+                    tfi.shadow.color = formatDynamicColor(tfi.sh_color, m_curHealth);
+                    tfi.shadow.alpha = formatDynamicAlpha(tfi.sh_alpha, m_curHealth) / 100;
+                    tfi.field.filters = [  tfi.shadow ];
                 }
             }
         }

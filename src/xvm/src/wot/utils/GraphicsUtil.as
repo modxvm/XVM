@@ -11,7 +11,7 @@ import wot.utils.Utils;
 class wot.utils.GraphicsUtil
 {
     public static function createShadowFilter(distance:Number, angle:Number, color:Number,
-        alpha:Number, size:Number, strength:Number):Object
+        alpha:Number, size:Number, strength:Number):DropShadowFilter
     {
         if (!alpha || !strength || !size)
             return null;
