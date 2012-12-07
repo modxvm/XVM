@@ -26,15 +26,15 @@
     "showChancesExp": true,
     "removeSquadIcon": false,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft":  "<font face='Consolas' size='11'><font color='{{c:e}}'>{{teff}} {{e}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:tdv}}'>{{tdv:3}}</font> <font color='{{c:tfb}}'>{{tfb:3}}</font> <font color='{{c:tsb}}'>{{tsb:3}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
-    "formatRight": "<font face='Consolas' size='11'><font color='{{c:e}}'>{{teff}} {{e}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:tdv}}'>{{tdv:3}}</font> <font color='{{c:tfb}}'>{{tfb:3}}</font> <font color='{{c:tsb}}'>{{tsb:3}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>"
+    "formatLeft":  "<font face='Consolas' size='11'><font color='{{c:e}}'>{{teff}} {{e}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:tdv}}'>{{tdv}}</font> <font color='{{c:tfb}}'>{{tfb}}</font> <font color='{{c:tsb}}'>{{tsb}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
+    "formatRight": "<font face='Consolas' size='11'><font color='{{c:e}}'>{{teff}} {{e}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:tdv}}'>{{tdv}}</font> <font color='{{c:tfb}}'>{{tfb}}</font> <font color='{{c:tsb}}'>{{tsb}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>"
   },
   "statisticForm": {
     "showChances": true,
     "showChancesExp": true,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft":  "<font face='Consolas' size='11'><font color='{{c:e}}'>{{teff}} {{e}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:tdv}}'>{{tdv:3}}</font> <font color='{{c:tfb}}'>{{tfb:3}}</font> <font color='{{c:tsb}}'>{{tsb:3}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
-    "formatRight": "<font face='Consolas' size='11'><font color='{{c:e}}'>{{teff}} {{e}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:tdv}}'>{{tdv:3}}</font> <font color='{{c:tfb}}'>{{tfb:3}}</font> <font color='{{c:tsb}}'>{{tsb:3}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>"
+    "formatLeft":  "<font face='Consolas' size='11'><font color='{{c:e}}'>{{teff}} {{e}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:tdv}}'>{{tdv}}</font> <font color='{{c:tfb}}'>{{tfb}}</font> <font color='{{c:tsb}}'>{{tsb}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
+    "formatRight": "<font face='Consolas' size='11'><font color='{{c:e}}'>{{teff}} {{e}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:tdv}}'>{{tdv}}</font> <font color='{{c:tfb}}'>{{tfb}}</font> <font color='{{c:tsb}}'>{{tsb}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>"
   },
   "playersPanel": {
     "alpha": 50,
