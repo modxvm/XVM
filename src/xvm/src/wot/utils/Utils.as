@@ -272,7 +272,7 @@ class wot.utils.Utils
     {
         return "." + className + " {" +
             "color:#" + Utils.padLeft(color.toString(16), 6, '0') + ";" +
-            "font-family:" + fontName + ";" +
+            "font-family:\"" + fontName + "\";" +
             "font-size:" + fontSize + ";" +
             "text-align:" + align + ";" +
             "font-weight:" + (bold ? "bold" : "normal") + ";" +
