@@ -19,24 +19,40 @@ class wot.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
     public var uid:Number;
     
     private var macro:MinimapMacro;
-    private var player:Object;
+    private var playerInfo:Object;
     
+    private var _isDeadPermanent:Boolean;
+    private var _isPostmortem:Boolean;
+    
+    /*
     function setDead(isPermanent)
     {
-        // If MinimapConfig.enabled
-        /** Does not work. No idea why */
-        //Logger.add("- MinimapEntry.setDead(" + MapConfig.isDeadPermanent + ")");
-        //MapConfig.isDeadPermanent
         //Logger.addObject(_root, "_root", 2);
-        //super.setDead(MapConfig.isDeadPermanent);
+        super.setDead(isPermanent);
     }
+    
+    function updateIfEntryIsPlayer()
+    {
+        super.updateIfEntryIsPlayer();
+        Logger.add("- isPostmortem = " + isPostmortem);
+        Logger.add("- isDeadPermanent = " + isDeadPermanent);
+    }
+    */
     
     function lightPlayer(visibility)
     {
-        uid = _root.minimap.sync.getTestUid();
-        player = PlayersPanelProxy.getPlayerInfo(uid);
-        
-        appendText();
+        /** Behavior is altered temporarily so original icon highlighting works */
+        if (syncProcedureInProgress)
+        {
+            uid = _root.minimap.sync.getTestUid();
+            playerInfo = PlayersPanelProxy.getPlayerInfo(uid);
+            
+            appendText();
+        }
+        else
+        {
+            super.lightPlayer(visibility);
+        }
     }
     
     // -- Private
@@ -100,6 +116,37 @@ class wot.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
                 text = MapConfig.formatOneself;
         }
         
-        return MinimapMacro.process(text, player);
+        return MinimapMacro.process(text, playerInfo);
+    }
+    
+    /*
+    public function get isDeadPermanent():Boolean
+    {
+        //Logger.add("get isDeadPermanent");
+        return _isDeadPermanent;
+    }
+    
+    public function get isPostmortem():Boolean
+    {
+        //Logger.add("get isPostmortem");
+        return _isPostmortem;
+    }
+    
+    public function set isDeadPermanent(val:Boolean):Void
+    {
+        _isDeadPermanent = false;
+        //Logger.add("set isDeadPermanent");
+    }
+    
+    public function set isPostmortem(val:Boolean):Void
+    {
+        _isPostmortem = false;
+        //Logger.add("set isPostmortem");
+    }
+    */
+    
+    private function get syncProcedureInProgress():Boolean
+    {
+        return _root.minimap.sync.syncProcedureInProgress
     }
 }
