@@ -28,8 +28,10 @@ protected function RefreshCurrentPage():void
             RefreshStatisticFormPage();
         else if (pg == pgPlayersPanel)
             RefreshPlayersPanelPage();
-        else if (pg == pgColors)
-            RefreshColorsPage();
+        else if (pg == pgColors1)
+            RefreshColorsPage1();
+        else if (pg == pgColors2)
+            RefreshColorsPage2();
         else if (pg == pgTransparency)
             RefreshTransparencyPage();
         else if (pg == pgTexts)
@@ -108,6 +110,12 @@ private function RefreshHitLogPage():void
         this.p_hitLog.v_blowupMarker.value = section.blowupMarker;
         this.p_hitLog.v_formatHeader.value = section.formatHeader;
         this.p_hitLog.v_formatHistory.value = section.formatHistory;
+        this.p_hitLog.v_shadow_size.value = section.shadow.size;
+        this.p_hitLog.v_shadow_strength.value = section.shadow.strength;
+        this.p_hitLog.v_shadow_angle.value = section.shadow.angle;
+        this.p_hitLog.v_shadow_distance.value = section.shadow.distance;
+        this.p_hitLog.v_shadow_color.value = section.shadow.color;
+        this.p_hitLog.v_shadow_alpha.value = section.shadow.alpha;
     }
     catch (ex:Error)
     {
@@ -221,13 +229,13 @@ private function RefreshPlayersPanelPage():void
     }
 }
 
-private function RefreshColorsPage():void
+private function RefreshColorsPage1():void
 {
-    debug("RefreshColorsPage()");
+    debug("RefreshColorsPage1()");
     try
     {
         var section:Object;
-        if (accColors.selectedChild == nc_systemColors && p_systemColors != null)
+        if (accColors1.selectedChild == nc_systemColors && p_systemColors != null)
         {
             section = Config.s_config.colors.system;
             if (p_systemColors.v_ally_alive_normal != null)
@@ -279,7 +287,7 @@ private function RefreshColorsPage():void
             if (p_systemColors.v_enemy_blowedup_blind != null)
                 p_systemColors.v_enemy_blowedup_blind.value = section.enemy_blowedup_blind;
         }
-        else if (accColors.selectedChild == nc_damageColors && p_damageColors != null)
+        else if (accColors1.selectedChild == nc_damageColors && p_damageColors != null)
         {
             section = Config.s_config.colors.damage;
             if (p_damageColors.v_ally_ally_hit != null)
@@ -433,7 +441,7 @@ private function RefreshColorsPage():void
             if (p_damageColors.v_player_enemytk_blowup != null)
                 p_damageColors.v_player_enemytk_blowup.value = section.player_enemytk_blowup;
         }
-        else if (accColors.selectedChild == nc_damageKindColors && p_damageKindColors != null)
+        else if (accColors1.selectedChild == nc_damageKindColors && p_damageKindColors != null)
         {
             section = Config.s_config.colors.dmg_kind;
             if (p_damageKindColors.v_attack != null)
@@ -447,7 +455,7 @@ private function RefreshColorsPage():void
             if (p_damageKindColors.v_other != null)
             	p_damageKindColors.v_other.value = section.other;
         }
-        else if (accColors.selectedChild == nc_vtypeColors && p_vtypeColors != null)
+        else if (accColors1.selectedChild == nc_vtypeColors && p_vtypeColors != null)
         {
             section = Config.s_config.colors.vtype;
             if (p_vtypeColors.v_LT != null)
@@ -465,22 +473,45 @@ private function RefreshColorsPage():void
             if (p_vtypeColors.v_usePremiumColor != null)
                 p_vtypeColors.v_usePremiumColor.value = section.usePremiumColor;
         }
-        else if (accColors.selectedChild == nc_colors_hp && p_colors_hp != null)
+        else if (accColors1.selectedChild == nc_colors_hp && p_colors_hp != null)
             p_colors_hp.RefreshSource();
-        else if (accColors.selectedChild == nc_colors_hp_ratio && p_colors_hp_ratio != null)
+        else if (accColors1.selectedChild == nc_colors_hp_ratio && p_colors_hp_ratio != null)
             p_colors_hp_ratio.RefreshSource();
-        else if (accColors.selectedChild == nc_colors_eff && p_colors_eff != null)
-            p_colors_eff.RefreshSource();
-        else if (accColors.selectedChild == nc_colors_rating && p_colors_rating != null)
-            p_colors_rating.RefreshSource();
-        else if (accColors.selectedChild == nc_colors_kb && p_colors_kb != null)
-            p_colors_kb.RefreshSource();
-        else if (accColors.selectedChild == nc_colors_tbattles && p_colors_tbattles != null)
-            p_colors_tbattles.RefreshSource();
     }
     catch (ex:Error)
     {
-        debug("ERROR: RefreshColorsPage(): " + ex.toString());
+        debug("ERROR: RefreshColorsPage1(): " + ex.toString());
+    }
+}
+
+private function RefreshColorsPage2():void
+{
+    debug("RefreshColorsPage2()");
+    try
+    {
+        var section:Object;
+        if (accColors2.selectedChild == nc_colors_eff && p_colors_eff != null)
+            p_colors_eff.RefreshSource();
+        else if (accColors2.selectedChild == nc_colors_rating && p_colors_rating != null)
+            p_colors_rating.RefreshSource();
+        else if (accColors2.selectedChild == nc_colors_kb && p_colors_kb != null)
+            p_colors_kb.RefreshSource();
+        else if (accColors2.selectedChild == nc_colors_tbattles && p_colors_tbattles != null)
+            p_colors_tbattles.RefreshSource();
+        else if (accColors2.selectedChild == nc_colors_e && p_colors_e != null)
+            p_colors_e.RefreshSource();
+        else if (accColors2.selectedChild == nc_colors_tdb && p_colors_tdb != null)
+            p_colors_tdb.RefreshSource();
+        else if (accColors2.selectedChild == nc_colors_tdv && p_colors_tdv != null)
+            p_colors_tdv.RefreshSource();
+        else if (accColors2.selectedChild == nc_colors_tfb && p_colors_tfb != null)
+            p_colors_tfb.RefreshSource();
+        else if (accColors2.selectedChild == nc_colors_tsb && p_colors_tsb != null)
+            p_colors_tsb.RefreshSource();
+    }
+    catch (ex:Error)
+    {
+        debug("ERROR: RefreshColorsPage2(): " + ex.toString());
     }
 }
 

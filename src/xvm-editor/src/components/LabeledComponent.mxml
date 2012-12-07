@@ -10,7 +10,7 @@
             [Bindable]
             public var preview:Boolean = false;
 
-            private var changing = false;
+            private var changing:Boolean = false;
             protected override function onChange(event:Event):void
             {
                 if (changing)

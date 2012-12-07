@@ -41,6 +41,10 @@
         [Bindable]
         public var maximum:Number = 100;
 
+        // stepSize
+        [Bindable]
+        public var stepSize:Number = 1;
+
         // value
         private var _value:*;
         [Bindable]

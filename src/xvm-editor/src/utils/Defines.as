@@ -9,9 +9,9 @@ public final class Defines
 {
     // Global versions
     public static const XVM_VERSION: String = "3.1.2";
-    public static const WOT_VERSION: String = "0.8.1";
+    public static const WOT_VERSION: String = "0.8.2";
     public static const CONFIG_VERSION: String = "1.5.0";
-    public static const EDITOR_VERSION: String = "0.27";
+    public static const EDITOR_VERSION: String = "0.28";
 
     // Dynamic color types
     public static const DYNAMIC_COLOR_EFF: Number = 1;
@@ -20,6 +20,11 @@ public final class Defines
     public static const DYNAMIC_COLOR_HP: Number = 4;
     public static const DYNAMIC_COLOR_HP_RATIO: Number = 5;
     public static const DYNAMIC_COLOR_TBATTLES: Number = 6;
+    public static const DYNAMIC_COLOR_TDB: Number = 7;
+    public static const DYNAMIC_COLOR_TDV: Number = 8;
+    public static const DYNAMIC_COLOR_TFB: Number = 9;
+    public static const DYNAMIC_COLOR_TSB: Number = 10;
+    public static const DYNAMIC_COLOR_E: Number = 11;
 
     // Dynamic alpha types
     //public static const DYNAMIC_ALPHA_EFF: Number = 1;

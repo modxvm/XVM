@@ -150,9 +150,6 @@ class wot.utils.StatFormat
         format = format.split("{{t-rating:3}}").join(Utils.padLeft(sTRating, 3));
         format = format.split("{{t_rating:3}}").join(Utils.padLeft(sTRating, 3));
         format = format.split("{{tdb:4}}").join(Utils.padLeft(sTDB, 4));
-        format = format.split("{{tdv:3}}").join(Utils.padLeft(sTDV, 3));
-        format = format.split("{{tfb:3}}").join(Utils.padLeft(sTFB, 3));
-        format = format.split("{{tsb:3}}").join(Utils.padLeft(sTSB, 3));
 
         // Dynamic colors
         format = format.split("{{c:eff}}").join(eff < 0 ? ""

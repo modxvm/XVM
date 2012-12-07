@@ -59,6 +59,7 @@ package utils
             format = format.replace("{{c:hp-ratio}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio));
             format = format.replace("{{c:dmg-kind}}", GraphicsUtil.GetDmgKindValue("attack"));
             format = format.replace("{{c:vtype}}", GraphicsUtil.GetVTypeColorValue("MT"));
+            format = format.replace("{{c:system}}", "#FBFBFB");
 
             // Transparency
             format = format.replace("{{a:hp}}", alphaHpRatio);
@@ -68,6 +69,12 @@ package utils
             format = format.replace("{{rating}}", "66%");
             format = format.replace("{{eff}}", "1800");
             format = format.replace("{{e}}", "5");
+            format = format.replace("{{teff}}", "1024");
+            format = format.replace("{{tdb}}", "1010");
+            format = format.replace("{{tdb:4}}", "1010");
+            format = format.replace("{{tdv}}", "0.9");
+            format = format.replace("{{tfb}}", "1.0");
+            format = format.replace("{{tsb}}", "1.1");
             format = format.replace("{{kb}}", "11k");
             format = format.replace("{{battles}}", "11000");
             format = format.replace("{{wins}}", "7260");
@@ -87,6 +94,11 @@ package utils
             format = format.replace("{{c:eff}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, 1800));
             format = format.replace("{{c:rating}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 66));
             format = format.replace("{{c:kb}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, 11));
+            format = format.replace("{{c:e}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, 5));
+            format = format.replace("{{c:tdb}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, 1010));
+            format = format.replace("{{c:tdv}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, 0.9));
+            format = format.replace("{{c:tfb}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, 1.0));
+            format = format.replace("{{c:tsb}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, 1.1));
             format = format.replace("{{c:t-rating}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 55));
             format = format.replace("{{c:t-battles}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, 5500));
 
@@ -150,7 +162,8 @@ package utils
             colors_markers: [
                 { value: "{{c:hp}}", label: "c_hp", icon: Embed.c_hp },
                 { value: "{{c:hp-ratio}}", label: "c_hp_ratio", icon: Embed.c_hp_ratio },
-                { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype }
+                { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype },
+                { value: "{{c:system}}", label: "c_system", icon: Embed.c_system }
             ],
             // In floating damage text:
             markers_damage: [
@@ -174,13 +187,19 @@ package utils
                 { value: "{{c:hp}}", label: "c_hp", icon: Embed.c_hp },
                 { value: "{{c:hp-ratio}}", label: "c_hp_ratio", icon: Embed.c_hp_ratio },
                 { value: "{{c:dmg-kind}}", label: "c_dmg_kind", icon: Embed.c_dmg_kind },
-                { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype }
+                { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype },
+                { value: "{{c:system}}", label: "c_system", icon: Embed.c_system }
             ],
             // Statistics
             stats: [
                 { value: "{{rating}}", label: "rating", icon: Embed.rating },
                 { value: "{{eff}}", label: "eff", icon: Embed.eff },
                 { value: "{{e}}", label: "e", icon: Embed.e },
+                { value: "{{teff}}", label: "teff", icon: Embed.teff },
+                { value: "{{tdb}}", label: "tdb", icon: Embed.tdb },
+                { value: "{{tdv}}", label: "tdv", icon: Embed.tdv },
+                { value: "{{tfb}}", label: "tfb", icon: Embed.tfb },
+                { value: "{{tsb}}", label: "tsb", icon: Embed.tsb },
                 { value: "{{kb}}", label: "kb", icon: Embed.kb },
                 { value: "{{battles}}", label: "battles", icon: Embed.battles },
                 { value: "{{wins}}", label: "wins", icon: Embed.wins },
@@ -200,6 +219,11 @@ package utils
             ],
             colors_stat: [
                 { value: "{{c:eff}}", label: "c_eff", icon: Embed.c_eff },
+                { value: "{{c:e}}", label: "c_e", icon: Embed.c_e },
+                { value: "{{c:tdb}}", label: "c_tdb", icon: Embed.c_tdb },
+                { value: "{{c:tdv}}", label: "c_tdv", icon: Embed.c_tdv },
+                { value: "{{c:tfb}}", label: "c_tfb", icon: Embed.c_tfb },
+                { value: "{{c:tsb}}", label: "c_tsb", icon: Embed.c_tsb },
                 { value: "{{c:rating}}", label: "c_rating", icon: Embed.c_rating },
                 { value: "{{c:kb}}", label: "c_kb", icon: Embed.c_kb },
                 { value: "{{c:t-rating}}", label: "c_t_rating", icon: Embed.c_t_rating },

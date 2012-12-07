@@ -57,6 +57,7 @@
                         instance = new DynamicColorEdit();
                         instance.minimum = minimum;
                         instance.maximum = maximum;
+                        instance.stepSize = stepSize;
                         break;
                     case "DynamicVehicleNameEdit":
                         instance = new DynamicVehicleNameEdit();
@@ -142,11 +143,15 @@
 
             // minimum
             [Bindable]
-            public var minimum:int = 0;
+            public var minimum:Number = 0;
 
             // maximum
             [Bindable]
-            public var maximum:int = 10;
+            public var maximum:Number = 100;
+
+            // stepSize
+            [Bindable]
+            public var stepSize:Number = 1;
 
             // renderer
             [Bindable]

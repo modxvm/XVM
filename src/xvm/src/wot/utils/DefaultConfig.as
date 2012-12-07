@@ -488,7 +488,7 @@ class wot.utils.DefaultConfig
                     { value: 2000, color: ColorPalette.green }
                 ],
                 tdv: [
-                    { value: 0.01, color: ColorPalette.white },
+                    { value: 0.1,  color: ColorPalette.white },
                     { value: 0.6,  color: ColorPalette.red },
                     { value: 0.8,  color: ColorPalette.orange },
                     { value: 1.0,  color: ColorPalette.yellow },
@@ -497,7 +497,7 @@ class wot.utils.DefaultConfig
                     { value: 15,   color: ColorPalette.purple }
                 ],
                 tfb: [
-                    { value: 0.01, color: ColorPalette.white },
+                    { value: 0.1,  color: ColorPalette.white },
                     { value: 0.6,  color: ColorPalette.red },
                     { value: 0.8,  color: ColorPalette.orange },
                     { value: 1.0,  color: ColorPalette.yellow },
@@ -506,7 +506,7 @@ class wot.utils.DefaultConfig
                     { value: 15,   color: ColorPalette.purple }
                 ],
                 tsb: [
-                    { value: 0.01, color: ColorPalette.white },
+                    { value: 0.1,  color: ColorPalette.white },
                     { value: 0.6,  color: ColorPalette.red },
                     { value: 0.8,  color: ColorPalette.orange },
                     { value: 1.0,  color: ColorPalette.yellow },
@@ -515,7 +515,7 @@ class wot.utils.DefaultConfig
                     { value: 15,   color: ColorPalette.purple }
                 ],
                 e: [
-                    { value: 0.01, color: ColorPalette.white },
+                    { value: 0.1,  color: ColorPalette.white },
                     { value: 2,    color: ColorPalette.red },
                     { value: 3,    color: ColorPalette.orange },
                     { value: 5,    color: ColorPalette.yellow },

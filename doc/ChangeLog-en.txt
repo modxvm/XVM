@@ -14,9 +14,9 @@ XVM-3.2.0-rc1:
   * color palette revised
   * new macros:
       {{tdb}}, {{tdb:4}} - average damage for current tank - damage/battles
-      {{tdv}}, {{tdv:3}} - average damage efficiency for tank - damage/(battles*maxHP)
-      {{tfb}}, {{tfb:3}} - average frags per battle for current tank
-      {{tsb}}, {{tsb:3}} - average number of spotted enemies per battle for current tank
+      {{tdv}} - average damage efficiency for tank - damage/(battles*maxHP)
+      {{tfb}} - average frags per battle for current tank
+      {{tsb}} - average number of spotted enemies per battle for current tank
       {{c:tdb}}, {{c:tdv}}, {{c:tfb}}, {{c:tsb}} - dynamic colors for this macros
       {{teff}} - new per-vehicle efficiency
         Discussion: http://www.koreanrandom.com/forum/topic/1643-

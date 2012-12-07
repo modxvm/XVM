@@ -103,6 +103,16 @@ package utils
         public static const t_rating_3:Class;
         [Embed("images/macros/t_wins.png")]
         public static const t_wins:Class;
+        [Embed("images/macros/teff.png")]
+        public static const teff:Class;
+        [Embed("images/macros/tdb.png")]
+        public static const tdb:Class;
+        [Embed("images/macros/tdv.png")]
+        public static const tdv:Class;
+        [Embed("images/macros/tfb.png")]
+        public static const tfb:Class;
+        [Embed("images/macros/tsb.png")]
+        public static const tsb:Class;
         [Embed("images/macros/turret.png")]
         public static const turret:Class;
         [Embed("images/macros/vehicle.png")]
@@ -121,16 +131,28 @@ package utils
         public static const c_hp_ratio:Class;
         [Embed("images/macros/c_vtype.png")]
         public static const c_vtype:Class;
+        [Embed("images/macros/c_e.png")]
+        public static const c_e:Class;
         [Embed("images/macros/c_eff.png")]
         public static const c_eff:Class;
         [Embed("images/macros/c_rating.png")]
         public static const c_rating:Class;
         [Embed("images/macros/c_kb.png")]
         public static const c_kb:Class;
+        [Embed("images/macros/c_system.png")]
+        public static const c_system:Class;
         [Embed("images/macros/c_t_rating.png")]
         public static const c_t_rating:Class;
         [Embed("images/macros/c_t_battles.png")]
         public static const c_t_battles:Class;
+        [Embed("images/macros/c_tdb.png")]
+        public static const c_tdb:Class;
+        [Embed("images/macros/c_tdv.png")]
+        public static const c_tdv:Class;
+        [Embed("images/macros/c_tfb.png")]
+        public static const c_tfb:Class;
+        [Embed("images/macros/c_tsb.png")]
+        public static const c_tsb:Class;
 
         // alpha
         [Embed("images/macros/a_hp.png")]

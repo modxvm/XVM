@@ -155,7 +155,7 @@
       {{wins}}        - total wins count
       {{rating}}      - GWR (Global Win Ratio)
       {{eff}}         - player efficiency (http://wot-news.com/index.php/stat/calc/en/)
-      {{teff}}, {{e}} - player per-vehicle efficiency
+      {{teff}}, {{e}} - player per-vehicle efficiency (http://www.koreanrandom.com/forum/topic/1643-)
       {{kb:3}}        - number of kilo-battles aligned from left to 3 chars
       {{rating:3}}    - GWR aligned from left to 3 chars
       {{eff:4}}       - player efficiency aligned from left to 4 chars
@@ -175,6 +175,12 @@
       {{c:t-rating}}  - color depended from current vehicle win ratio
       {{c:t-battles}} - color depended from current vehicle battles
       {{c:e}}         - color depended from player per-vehicle efficiency
+
+      {{tdb}}, {{tdb:4}} - average damage for current tank - damage/battles
+      {{tdv}} - average damage efficiency for tank - damage/(battles*maxHP)
+      {{tfb}} - average frags per battle for current tank
+      {{tsb}} - average number of spotted enemies per battle for current tank
+      {{c:tdb}}, {{c:tdv}}, {{c:tfb}}, {{c:tsb}} - dynamic colors for this macros
 
   "format" field examples:
     1. Show number of kilo-battles, efficiency and GWR without changing a color:

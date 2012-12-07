@@ -23,4 +23,12 @@
     <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'blowupMarker')}" labelWidth="100%" wrapTextField="true" height="40" id="v_blowupMarker" config="hitLog.blowupMarker" allowedMacros="{Macros.get('hitlog,colors_hitlog')}" preview="true" change="onChange(event)"/>
     <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'formatHeader')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatHeader" config="hitLog.formatHeader" allowedMacros="{Macros.get('hitlog,dead,colors_hitlog')}" preview="true" change="onChange(event)"/>
     <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'formatHistory')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatHistory" config="hitLog.formatHistory" allowedMacros="{Macros.get('hitlog,dead,colors_hitlog')}" preview="true" change="onChange(event)"/>
+    <s:Label text="" height="20"/>
+    <s:Label text="{resourceManager.getString('panels', 'Shadow')}:" width="100%" backgroundColor="0xCCCCCC"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Size')}" id="v_shadow_size" config="hitLog.shadow.size" minimum="0" maximum="10" stepSize="0.1" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Strength')}" id="v_shadow_strength" config="hitLog.shadow.strength" minimum="0" maximum="1000" isLogarithmic="true" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Angle')}" id="v_shadow_angle" config="hitLog.shadow.angle" minimum="0" maximum="359" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Distance')}" id="v_shadow_distance" config="hitLog.shadow.distance" minimum="0" maximum="10" change="onChange(event)"/>
+    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'Color')}" width="320" id="v_shadow_color" config="hitLog.shadow.color" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Transparency')}" id="v_shadow_alpha" config="hitLog.shadow.alpha" minimum="0" maximum="100" change="onChange(event)"/>
 </c:PanelComponent>

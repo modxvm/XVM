@@ -6,7 +6,7 @@
     <fx:Script>
         <![CDATA[
             [Bindable]
-            public var v_value:int = 0;
+            public var v_value:Number = 0;
 
             [Bindable]
             public var v_alpha:int = 100;

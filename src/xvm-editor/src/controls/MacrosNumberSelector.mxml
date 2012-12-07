@@ -46,7 +46,7 @@
             }
             public override function set value(v:*):void
             {
-                if (isNaN(parseInt(v)))
+                if (isNaN(parseFloat(v)))
                 {
                     _value = v;
                     ti.text = _value;
@@ -54,10 +54,10 @@
                 }
                 else
                 {
-                    _value = Math.max(minimum, Math.min(maximum, parseInt(v))).toString();
+                    _value = Math.max(minimum, Math.min(maximum, parseFloat(v))).toString();
                     ti.text = _value;
                     slider.alpha = 1;
-                    slider.value = parseInt(_value);
+                    slider.value = parseFloat(_value);
                 }
             }
 

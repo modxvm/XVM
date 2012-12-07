@@ -15,6 +15,13 @@ public class StatFormat
         format = format.split("{{rating}}").join("48%");
         format = format.split("{{eff}}").join("1230");
         format = format.split("{{e}}").join("5");
+        format = format.split("{{teff}}").join("1024");
+
+        format = format.split("{{tdb}}").join("1010");
+        format = format.split("{{tdb:4}}").join("1010");
+        format = format.split("{{tdv}}").join("0.9");
+        format = format.split("{{tfb}}").join("1.0");
+        format = format.split("{{tsb}}").join("1.1");
 
         format = format.split("{{t-kb}}").join("2.3");
         format = format.split("{{t-kb-0}}").join("02.3");
@@ -41,6 +48,12 @@ public class StatFormat
         format = format.split("{{c:eff}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, 1234, "#", isDead));
         format = format.split("{{c:rating}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 48, "#", isDead));
         format = format.split("{{c:kb}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, 10, "#", isDead));
+
+        format = format.split("{{c:e}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, 5, "#", isDead));
+        format = format.split("{{c:tdb}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, 1010, "#", isDead));
+        format = format.split("{{c:tdv}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, 0.9, "#", isDead));
+        format = format.split("{{c:tfb}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, 1.0, "#", isDead));
+        format = format.split("{{c:tsb}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, 1.1, "#", isDead));
 
         format = format.split("{{c:t-rating}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 55, "#", isDead));
         format = format.split("{{c:t_rating}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 55, "#", isDead));

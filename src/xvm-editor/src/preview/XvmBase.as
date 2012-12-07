@@ -83,6 +83,7 @@ public class XvmBase
         formatArr = format.split("{{turret}}");
         if (formatArr.length > 1)
             format = formatArr.join(Config.s_config.turretMarkers.highVulnerability);
+
         format = StatFormat.FormatText(format, m_isDead);
         format = Utils.trim(format);
 
@@ -149,6 +150,9 @@ public class XvmBase
         formatArr = format.split("{{c:dmg_kind}}");
         if (formatArr.length > 1)
             format = formatArr.join(delta ? GraphicsUtil.GetDmgKindValue(damageType) : "")
+        formatArr = format.split("{{c:system}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(ColorsManager.getSystemColor(m_entityName, m_isDead, isBlowedUp, false));
         formatArr = format.split("{{c:vtype}}");
         if (formatArr.length > 1)
         {
@@ -201,6 +205,9 @@ public class XvmBase
         formatArr = format.split("{{c:dmg_kind}}");
         if (formatArr.length > 1)
             format = formatArr.join(damageType ? GraphicsUtil.GetDmgKindValue(damageType, "0x") : "");
+        formatArr = format.split("{{c:system}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(systemColor);
         formatArr = format.split("{{c:vtype}}");
         if (formatArr.length > 1)
         {

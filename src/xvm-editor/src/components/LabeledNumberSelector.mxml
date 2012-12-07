@@ -6,9 +6,6 @@
     xmlns:a="controls.*">
     <fx:Script>
         [Bindable]
-        public var stepSize:Number = 1;
-
-        [Bindable]
         public var isLogarithmic:Boolean = false;
 
         [Bindable]
