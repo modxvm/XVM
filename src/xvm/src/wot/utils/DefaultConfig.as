@@ -121,16 +121,16 @@ class wot.utils.DefaultConfig
                     // 0..250 - player name field width.
                     width: 46,
                     // Dispay format.
-                    formatLeft: "<font color='{{c:e}}'>{{nick}}</font>",
-                    formatRight: "<font color='{{c:e}}'>{{nick}}</font>"
+                    formatLeft: "<font color='{{c:eff}}'>{{nick}}</font>",
+                    formatRight: "<font color='{{c:eff}}'>{{nick}}</font>"
                 },
                 // Medium2 mode.
                 medium2: {
                     // 0..250 - player name field width.
                     width: 65,
                     // Dispay format.
-                    formatLeft: "<font color='{{c:e}}'>{{vehicle}}</font>",
-                    formatRight: "<font color='{{c:e}}'>{{vehicle}}</font>"
+                    formatLeft: "<font color='{{c:eff}}'>{{vehicle}}</font>",
+                    formatRight: "<font color='{{c:eff}}'>{{vehicle}}</font>"
                 },
                 // Large mode.
                 large: {
@@ -139,8 +139,8 @@ class wot.utils.DefaultConfig
                     // Dispay format.
                     nickFormatLeft: "<font color='{{c:rating}}'>{{rating}}</font> {{nick}}",
                     nickFormatRight: "{{nick}} <font color='{{c:rating}}'>{{rating}}</font>",
-                    vehicleFormatLeft: "<font color='{{c:e}}'>{{vehicle}}</font>",
-                    vehicleFormatRight: "<font color='{{c:e}}'>{{vehicle}}</font>"
+                    vehicleFormatLeft: "<font color='{{c:eff}}'>{{vehicle}}</font>",
+                    vehicleFormatRight: "<font color='{{c:eff}}'>{{vehicle}}</font>"
                 }
             },
             turretMarkers: {
