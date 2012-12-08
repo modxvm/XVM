@@ -1,6 +1,7 @@
 /**
  * Helper class with various xvm-related static functions
  */
+import wot.utils.Defines;
 import wot.utils.Utils;
 import wot.VehicleMarkersManager.ErrorHandler;
 
@@ -30,5 +31,24 @@ class wot.VehicleMarkersManager.XvmHelper
         }
 
         return null;
+    }
+
+    //   src: ally, squadman, enemy, unknown, player (allytk, enemytk - how to detect?)
+    public static function damageFlagToDamageSource(damageFlag:Number):String
+    {
+        switch (damageFlag)
+        {
+            case Defines.FROM_ALLY:
+                return "ally";
+            case Defines.FROM_ENEMY:
+                return "enemy";
+            case Defines.FROM_PLAYER:
+                return "player";
+            case Defines.FROM_SQUAD:
+                return "squadman";
+            case Defines.FROM_UNKNOWN:
+            default:
+                return "unknown";
+        }
     }
 }

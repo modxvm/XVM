@@ -134,6 +134,28 @@ class wot.utils.GraphicsUtil
         return prefix + "FFFEFE";
     }
 
+    public static function GetDmgSrcValue(damageSource:String, damageDest:String, isDead:Boolean, isBlowedUp:Boolean, prefix: String): String
+    {
+        if (!prefix)
+            prefix = "#";
+
+        try
+        {
+            if (!damageSource || !damageDest)
+                return "";
+            var key:String = damageSource + "_" + damageDest + "_";
+            key += !isDead ? "hit" : isBlowedUp ? "blowup" : "kill";
+            if (!Config.s_config.colors.damage[key])
+                return "";
+            return prefix + Utils.padLeft(Utils.toInt(Config.s_config.colors.damage[key], 0xFFFFFE).toString(16), 6, "0");
+        }
+        catch (ex:Error)
+        {
+            return prefix + "FFFEFE";
+        }
+        return prefix + "FFFEFE";
+    }
+
     public static function GetDmgKindValue(dmg_kind: String, prefix: String): String
     {
         if (!prefix)

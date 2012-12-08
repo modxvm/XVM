@@ -110,6 +110,7 @@
       {{dmg-kind}}    - damage kind (attack, fire, ramming, ...)
       {{c:hp}}        - color depended from current health points (only in vehicle markers)
       {{c:hp-ratio}}  - color depended from current health ratio (only in vehicle markers)
+      {{c:dmg}}       - color depended from damage source
       {{c:dmg-kind}}  - color depended from damage kind
       {{c:vtype}}     - color depended from vehicle type
       {{c:system}}    - system color (disable override color)

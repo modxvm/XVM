@@ -1,4 +1,6 @@
-﻿XVM-3.2.0-rc4:
+﻿  * туцnew macro {{c:dmg}} - color depended from damage source
+
+XVM-3.2.0-rc4:
   * fixed bug with fonts
 
 XVM-3.2.0-rc3:

@@ -1,4 +1,3 @@
-import wot.utils.Defines;
 import wot.utils.GraphicsUtil;
 import wot.utils.Utils;
 import wot.VehicleMarkersManager.ColorsManager;
@@ -34,28 +33,28 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
         if (!cfg.visible)
             return;
 
-        var text:String = defineText(newHealth, delta, damageType);
+        var text:String = defineText(newHealth, delta, flag, damageType);
 
         var color:Number;
         if (cfg.color == null)
         {
-            color = ColorsManager.getDamageSystemColor(flagToDamageSource(flag), proxy.damageDest, damageType,
-                proxy.isDead, proxy.isBlowedUp);
+            color = ColorsManager.getDamageSystemColor(XvmHelper.damageFlagToDamageSource(flag), proxy.damageDest,
+                damageType, proxy.isDead, proxy.isBlowedUp);
         }
         else
         {
-            color = proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.color), damageType);
+            color = proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.color), flag, damageType);
         }
 
         var shadowColor:Number;
         if (cfg.shadow.color == null)
         {
-            shadowColor = ColorsManager.getDamageSystemColor(flagToDamageSource(flag), proxy.damageDest, damageType,
-                proxy.isDead, proxy.isBlowedUp);
+            shadowColor = ColorsManager.getDamageSystemColor(XvmHelper.damageFlagToDamageSource(flag), proxy.damageDest,
+                damageType, proxy.isDead, proxy.isBlowedUp);
         }
         else
         {
-            shadowColor = proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.shadow.color), damageType);
+            shadowColor = proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.shadow.color), flag, damageType);
         }
 
         // TODO: dynamic alpha?
@@ -111,31 +110,12 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
         return tf;
     }
 
-    private function defineText(newHealth:Number, delta:Number, damageType:String):String
+    private function defineText(newHealth:Number, delta:Number, damageFlag:Number, damageType:String):String
     {
         var msg = (newHealth < 0) ? cfg.blowupMessage : cfg.damageMessage;
-        var text = proxy.formatDynamicText(proxy.formatStaticText(msg), newHealth, delta, damageType);
+        var text = proxy.formatDynamicText(proxy.formatStaticText(msg), newHealth, delta, damageFlag, damageType);
         // For some reason, DropShadowFilter is not rendered when textfield contains only one character,
         // so we're appending empty prefix and suffix to bypass this unexpected behavior
         return " " + text + " ";
-    }
-
-    //   src: ally, squadman, enemy, unknown, player (allytk, enemytk - how to detect?)
-    private static function flagToDamageSource(flag:Number):String
-    {
-        switch (flag)
-        {
-            case Defines.FROM_ALLY:
-                return "ally";
-            case Defines.FROM_ENEMY:
-                return "enemy";
-            case Defines.FROM_PLAYER:
-                return "player";
-            case Defines.FROM_SQUAD:
-                return "squadman";
-            case Defines.FROM_UNKNOWN:
-            default:
-                return "unknown";
-        }
     }
 }
