@@ -64,6 +64,30 @@ class wot.utils.VehicleInfo
         return VehicleInfoData3.data[vehicleName.split("-").join("_").toLowerCase()] || null;
     }
 
+/*    public static function getInfo4(vehicleName: String): Object
+    {
+        var vn = vehicleName.split("-").join("_").toLowerCase();
+        var vi = VehicleInfoDataMapping.data2toData[vn] || null;
+        if (!vi)
+            return null;
+        var l = vi.level;
+        var t = vi.type;
+        var res = { b: 0, d: 0, f: 0, s: 0, w: 0 };
+        for (var i in VehicleInfoData3.data)
+        {
+            vi = VehicleInfoDataMapping.data2toData[i];
+            if (!vi || vi.level != l || vi.type != t)
+                continue;
+            var vi3 = VehicleInfoData3.data[i];
+            res.b += vi3.b;
+            res.d += vi3.d;
+            res.f += vi3.f;
+            res.s += vi3.s;
+            res.w += vi3.w;
+        }
+        return res;
+    }*/
+
     public static function getVehicleNamesData():Object
     {
         var result:Object = {};

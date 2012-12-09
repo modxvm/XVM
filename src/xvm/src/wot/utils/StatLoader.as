@@ -259,7 +259,17 @@ class wot.utils.StatLoader
                 }
             }
             stat.teff = Math.round(stat.te * 1000);
-            stat.te = stat.tdv == 0 ? null : Math.max(0, Math.min(9, Math.round(stat.te * 5)));
+            stat.te = (stat.tdv == 0) ? null
+                : (stat.teff < 500) ? 1
+                : (stat.teff < 800) ? 2
+                : (stat.teff < 1000) ? 3
+                : (stat.teff < 1200) ? 4
+                : (stat.teff < 1400) ? 5
+                : (stat.teff < 1600) ? 6
+                : (stat.teff < 1800) ? 7
+                : (stat.teff < 2000) ? 8
+                : (stat.teff < 2500) ? 9 : 10;
+            //stat.te = stat.tdv == 0 ? null : Math.max(0, Math.min(9, Math.round(stat.te * 5)));
         }
 
         // Normalize result

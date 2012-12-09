@@ -76,7 +76,7 @@ class wot.utils.StatFormat
                     sEff = eff ? String(eff) : "--";
 
                     e = stat.te;
-                    sE = e != null ? String(e) : "-";
+                    sE = e == null ? "-" : e >= 10 ? "E" : String(e);
 
                     teff = stat.teff;
                     sTEff = teff != null ? String(teff) : "--";
