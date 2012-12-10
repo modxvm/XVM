@@ -1,19 +1,4 @@
-﻿  * туцnew macro {{c:dmg}} - color depended from damage source
-
-XVM-3.2.0-rc4:
-  * fixed bug with fonts
-
-XVM-3.2.0-rc3:
-  * fixed minimap icon highlighting by mouse over player at side player panels
-  * HTML in clock in battle
-  * dynamic color and transparency for shadow
-  * added macro {{c:system}} for use system color instead of override
-  * shadow settings in hit-log
-
-XVM-3.2.0-rc2:
-  * fixed clock in battle
-
-XVM-3.2.0-rc1:
+﻿XVM-3.2.0:
   * adaptation to WoT 0.8.2
   * new vehicles added
   * color palette revised
@@ -25,8 +10,13 @@ XVM-3.2.0-rc1:
       {{c:tdb}}, {{c:tdv}}, {{c:tfb}}, {{c:tsb}} - dynamic colors for this macros
       {{teff}} - new per-vehicle efficiency
         Discussion: http://www.koreanrandom.com/forum/topic/1643-
+      {{c:system}} - use system color instead of override
+      {{c:dmg}} - color depended from damage source
   * new value of macro {{e}} (new per-vehicle efficiency in range 0..9)
   * removed macro {{e:3}} (not required)
+  * HTML in clock in battle
+  * dynamic color and transparency for shadow
+  * shadow settings in hit-log
 
 XVM-3.1.2:
   * added capture bar mod
