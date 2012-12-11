@@ -151,37 +151,36 @@
       {{vehicle}}      - subject full vehicle type
 
     Statistics macros ('rating/showPlayersStatistics' must be anabled):
-      {{kb}}          - number of kilo-battles (total battles count divided by 1000).
+      {{eff}}         - player efficiency (http://wot-news.com/index.php/stat/calc/en/)
+      {{eff:4}}       - player efficiency aligned from left to 4 chars
+      {{teff}}, {{e}} - player per-vehicle efficiency (http://www.koreanrandom.com/forum/topic/1643-)
+      {{rating}}      - GWR (Global Win Ratio)
+      {{rating:3}}    - GWR aligned from left to 3 chars
       {{battles}}     - total battles count
       {{wins}}        - total wins count
-      {{rating}}      - GWR (Global Win Ratio)
-      {{eff}}         - player efficiency (http://wot-news.com/index.php/stat/calc/en/)
-      {{teff}}, {{e}} - player per-vehicle efficiency (http://www.koreanrandom.com/forum/topic/1643-)
+      {{kb}}          - number of kilo-battles (total battles count divided by 1000).
       {{kb:3}}        - number of kilo-battles aligned from left to 3 chars
-      {{rating:3}}    - GWR aligned from left to 3 chars
-      {{eff:4}}       - player efficiency aligned from left to 4 chars
+      {{t-rating}}    - vehicle win ratio
+      {{t-rating:3}}  - vehicle win ratio aligned from left to 3 chars
+      {{t-battles}}   - total battles count for current vehicle
+      {{t-battles:4}} - number of battles for current vehicle aligned from left to 4 chars
+      {{t-wins}}      - total wins count for current vehicle
       {{t-kb}}        - number of kilo-battles for current vehicle
       {{t-kb-0}}      - number of kilo-battles for current vehicle with leading zero
-      {{t-hb}}        - number of hecto-battles for current vehicle (hecto = 100)
-      {{t-battles}}   - total battles count for current vehicle
-      {{t-wins}}      - total wins count for current vehicle
-      {{t-rating}}    - vehicle win ratio
       {{t-kb:4}}      - number of kilo-battles for current vehicle aligned from left to 4 chars
+      {{t-hb}}        - number of hecto-battles for current vehicle (hecto = 100)
       {{t-hb:3}}      - number of hecto-battles for current vehicle aligned from left to 3 chars
-      {{t-battles:4}} - number of battles for current vehicle aligned from left to 4 chars
-      {{t-rating:3}}  - vehicle win ratio aligned from left to 3 chars
-      {{c:eff}}       - color depended from player efficiency
-      {{c:rating}}    - color depended from GWR
-      {{c:kb}}        - color depended from kilo-battles
-      {{c:t-rating}}  - color depended from current vehicle win ratio
-      {{c:t-battles}} - color depended from current vehicle battles
-      {{c:e}}         - color depended from player per-vehicle efficiency
-
       {{tdb}}, {{tdb:4}} - average damage for current tank - damage/battles
       {{tdv}} - average damage efficiency for tank - damage/(battles*maxHP)
       {{tfb}} - average frags per battle for current tank
       {{tsb}} - average number of spotted enemies per battle for current tank
       {{c:tdb}}, {{c:tdv}}, {{c:tfb}}, {{c:tsb}} - dynamic colors for this macros
+      {{c:eff}}       - color depended from player efficiency
+      {{c:e}}         - color depended from player per-vehicle efficiency
+      {{c:rating}}    - color depended from GWR
+      {{c:kb}}        - color depended from kilo-battles
+      {{c:t-rating}}  - color depended from current vehicle win ratio
+      {{c:t-battles}} - color depended from current vehicle battles
 
   "format" field examples:
     1. Show number of kilo-battles, efficiency and GWR without changing a color:

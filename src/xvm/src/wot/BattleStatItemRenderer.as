@@ -3,16 +3,17 @@
  * @author sirmax2
  */
 import net.wargaming.controls.UILoaderAlt;
+import wot.utils.Cache;
 import wot.utils.Config;
 import wot.utils.Chance;
 import wot.utils.Defines;
 import wot.utils.GlobalEventDispatcher;
 import wot.utils.IconLoader;
 import wot.utils.Logger;
+import wot.utils.Macros;
 import wot.utils.PlayerInfo;
 import wot.utils.StatData;
 import wot.utils.StatLoader;
-import wot.utils.TextCache;
 import wot.utils.Utils;
 
 class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
@@ -39,6 +40,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
         col3.verticalAutoSize = true;
 
         GlobalEventDispatcher.addEventListener("config_loaded", StatLoader.LoadLastStat);
+        GlobalEventDispatcher.addEventListener("config_loaded", onConfigLoaded);
         Config.LoadConfig("BattleStatItemRenderer.as");
     }
 
@@ -68,11 +70,24 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
                 col3._x += 5;
             }
         }
-      }
+    }
 
-      // override
+    public function onConfigLoaded(event)
+    {
+        GlobalEventDispatcher.removeEventListener("config_loaded", onConfigLoaded);
+        col3.condenseWhite = !Config.s_config.rating.showPlayersStatistics;
+    }
+
+    // override
+    private static var s_setChanceFieldDataAdded = false;
     function updateData()
     {
+        if (!data)
+        {
+            super.updateData();
+            return;
+        }
+
         var start = new Date();
 
         // Chance
@@ -82,48 +97,44 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
             var timer = _global.setTimeout(function() { BattleStatItemRenderer.SetChanceFieldData(); }, 50);
         }
 
-        var cacheKey = data ? "SF/" + data.label + "/" + data.vehicle : null;
-        var saved_icon = data ? data.icon : null;
-        var saved_label = data? data.label : null;
-        if (data)
+        Macros.RegisterPlayerData(data.label, data);
+
+        var key = "SF/" + data.label + "/" + data.vehicle;
+        var saved_icon = data.icon;
+        var saved_label = data.label;
+
+        var pname = data.label.toUpperCase();
+
+        if (Config.s_config.rating.showPlayersStatistics && (!StatData.s_data[pname] || !StatData.s_data[pname].playerId))
         {
-            var pname = data.label.toUpperCase();
-
-            col3.condenseWhite = !Config.s_config.rating.showPlayersStatistics;
-
-            if (Config.s_config.rating.showPlayersStatistics && (!StatData.s_data[pname] || !StatData.s_data[pname].playerId))
-            {
-                //Logger.add("StatLoader.AddPlayerData(): " + cacheKey);
-                StatLoader.AddPlayerData(data.uid, data.label, data.vehicle, data.icon, team);
-                //GlobalEventDispatcher.addEventListener("stat_loaded", this, function() { delete this.m_textCache[cacheKey]; } );
-            }
-
-            // Alternative icon set
-            if (!m_iconset)
-                m_iconset = new IconLoader(this, completeLoad);
-            m_iconset.init(iconLoader,
-                [ data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.statisticForm), data.icon ]);
-
-            data.icon = m_iconset.currentIcon;
-            data.label = TextCache.modXvmDevLabel(data.label);
-
-            // Player/clan icons
-            attachClanIconToPlayer(data);
+            //Logger.add("StatLoader.AddPlayerData(): " + cacheKey);
+            StatLoader.AddPlayerData(data.uid, data.label, data.vehicle, data.icon, team);
+            GlobalEventDispatcher.addEventListener("stat_loaded", this, StatLoadedCallback());
         }
+
+        // Alternative icon set
+        if (!m_iconset)
+            m_iconset = new IconLoader(this, completeLoad);
+        m_iconset.init(iconLoader,
+            [ data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.statisticForm), data.icon ]);
+
+        data.icon = m_iconset.currentIcon;
+        data.label = Cache.Get(saved_label, function() { return Macros.Format(saved_label, "{{nick}}") });
+
+        // Player/clan icons
+        attachClanIconToPlayer(data);
 
         if (Config.s_config.statisticForm.removeSquadIcon && squad)
             squad._visible = false;
 
         super.updateData();
 
-        if (data)
-        {
-            data.icon = saved_icon;
-            data.label = saved_label;
-
-            col3.htmlText = TextCache.Get(cacheKey) || TextCache.Format(cacheKey, data,
-                team == Defines.TEAM_ALLY ? Config.s_config.statisticForm.formatLeft : Config.s_config.statisticForm.formatRight);
-        }
+        data.icon = saved_icon;
+        data.label = saved_label;
+        var team = this.team;
+        col3.htmlText = Cache.Get(key, function() { return Macros.Format(saved_label,
+            team == Defines.TEAM_ALLY ? Config.s_config.statisticForm.formatLeft : Config.s_config.statisticForm.formatRight,
+            { }) } );
 
         if (DEBUG_TIMES)
         {
@@ -132,7 +143,6 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
         }
     }
 
-    private static var s_setChanceFieldDataAdded = false;
     private static function SetChanceFieldData()
     {
         //Logger.add("SetChanceFieldData()");
@@ -180,5 +190,22 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
         }
         PlayerInfo.setSource(m_clanIcon, data.label, data.clanAbbrev);
         m_clanIcon["holder"]._alpha = ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0) ? 100 : 50;
+    }
+
+    // update delegate
+    function StatLoadedCallback()
+    {
+        //Logger.add("StatLoaded(): " + data.label);
+
+        GlobalEventDispatcher.removeEventListener("stat_loaded", this, StatLoadedCallback);
+
+        var label = data.label;
+        var team = this.team;
+        var key = "SF/" + label + "/" + data.vehicle;
+        Cache.Remove(key);
+        col3.htmlText = Cache.Get(key, function() { return Macros.Format(label,
+            team == Defines.TEAM_ALLY ? Config.s_config.statisticForm.formatLeft : Config.s_config.statisticForm.formatRight,
+            { }) } );
+        //Logger.add(vehicleField.htmlText);
     }
 }

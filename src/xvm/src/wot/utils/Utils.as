@@ -57,11 +57,6 @@ class wot.utils.Utils
         return defaultValue ? value != "false" : value == "true";
     }
 
-    public static function toString(value: Object, defaultValue: String): String
-    {
-        return value ? String(value) : defaultValue;
-    }
-
     public static function elapsedMSec(start, end): Number
     {
         return end - start;
@@ -265,7 +260,7 @@ class wot.utils.Utils
     }
 
     /**
-     * Create CSS based on config
+     * Create CSS
      */
     public static function createCSS(className:String, color: Number,
         fontName: String, fontSize: Number, align: String, bold: Boolean, italic: Boolean):String
@@ -280,6 +275,20 @@ class wot.utils.Utils
             "}";
     }
 
+    /**
+     * Create CSS based on config
+     */
+    public static function createCSSFromConfig(config_font:Object, color:Number, className:String):String
+    {
+        return createCSS(className,
+            Utils.padLeft(color.toString(16), 6, '0'),
+            config_font && config_font.name ? config_font.name : "$FieldFont",
+            config_font && config_font.size ? config_font.size : 13,
+            config_font && config_font.align ? config_font.align : "center",
+            config_font && config_font.bold ? true : false,
+            config_font && config_font.italic ? true : false);
+    }
+    
     public static function createStyleSheet(css: String):TextField.StyleSheet
     {
         var style:TextField.StyleSheet = new TextField.StyleSheet();

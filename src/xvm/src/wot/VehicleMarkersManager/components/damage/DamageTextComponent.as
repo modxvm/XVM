@@ -1,7 +1,7 @@
 import wot.utils.GraphicsUtil;
+import wot.utils.Macros;
 import wot.utils.Utils;
 import wot.VehicleMarkersManager.ColorsManager;
-import wot.VehicleMarkersManager.XvmHelper;
 import wot.VehicleMarkersManager.components.damage.DamageTextProxy;
 import wot.VehicleMarkersManager.components.damage.DamageTextAnimation;
 
@@ -38,23 +38,23 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
         var color:Number;
         if (cfg.color == null)
         {
-            color = ColorsManager.getDamageSystemColor(XvmHelper.damageFlagToDamageSource(flag), proxy.damageDest,
+            color = ColorsManager.getDamageSystemColor(Macros.damageFlagToDamageSource(flag), proxy.damageDest,
                 damageType, proxy.isDead, proxy.isBlowedUp);
         }
         else
         {
-            color = proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.color), flag, damageType);
+            color = proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.color), delta, flag, damageType);
         }
 
         var shadowColor:Number;
         if (cfg.shadow.color == null)
         {
-            shadowColor = ColorsManager.getDamageSystemColor(XvmHelper.damageFlagToDamageSource(flag), proxy.damageDest,
+            shadowColor = ColorsManager.getDamageSystemColor(Macros.damageFlagToDamageSource(flag), proxy.damageDest,
                 damageType, proxy.isDead, proxy.isBlowedUp);
         }
         else
         {
-            shadowColor = proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.shadow.color), flag, damageType);
+            shadowColor = proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.shadow.color), delta, flag, damageType);
         }
 
         // TODO: dynamic alpha?
@@ -95,7 +95,7 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
         tf.wordWrap = false;
 
         tf.html = true;
-        tf.styleSheet = Utils.createStyleSheet(XvmHelper.createCSS(cfg.font, color, "xvm_damageText"));
+        tf.styleSheet = Utils.createStyleSheet(Utils.createCSSFromConfig(cfg.font, color, "xvm_damageText"));
 
         tf.filters = [ GraphicsUtil.createShadowFilter(cfg.shadow.distance, cfg.shadow.angle, shadowColor,
             cfg.shadow.alpha, cfg.shadow.size, cfg.shadow.strength) ];

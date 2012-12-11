@@ -181,7 +181,10 @@ class wot.utils.GraphicsUtil
 
     public static function GetDynamicColorValue(type: Number, value: Number, prefix: String, darker: Boolean): String
     {
-        if (!prefix)
+        if (value == null)
+            return "";
+
+            if (!prefix)
             prefix = "#";
 
         if (isNaN(value))
@@ -191,66 +194,30 @@ class wot.utils.GraphicsUtil
         var cfg: Array;
         switch (type)
         {
-            case Defines.DYNAMIC_COLOR_EFF:
-                cfg = cfg_root.eff;
-                break;
-            case Defines.DYNAMIC_COLOR_RATING:
-                cfg = cfg_root.rating;
-                break;
-            case Defines.DYNAMIC_COLOR_KB:
-                cfg = cfg_root.kb;
-                break;
-            case Defines.DYNAMIC_COLOR_TBATTLES:
-                cfg = cfg_root.t_battles;
-                break;
-            case Defines.DYNAMIC_COLOR_TDB:
-                cfg = cfg_root.tdb;
-                break;
-            case Defines.DYNAMIC_COLOR_TDV:
-                cfg = cfg_root.tdv;
-                break;
-            case Defines.DYNAMIC_COLOR_TFB:
-                cfg = cfg_root.tfb;
-                break;
-            case Defines.DYNAMIC_COLOR_TSB:
-                cfg = cfg_root.tsb;
-                break;
-            case Defines.DYNAMIC_COLOR_E:
-                cfg = cfg_root.e;
-                break;
-            case Defines.DYNAMIC_COLOR_HP:
-                cfg = cfg_root.hp;
-                break;
-            case Defines.DYNAMIC_COLOR_HP_RATIO:
-                cfg = cfg_root.hp_ratio;
-                break;
-            default:
-                return prefix + "FFFEFE";
+            case Defines.DYNAMIC_COLOR_HP:              cfg = cfg_root.hp; break;
+            case Defines.DYNAMIC_COLOR_HP_RATIO:        cfg = cfg_root.hp_ratio; break;
+            case Defines.DYNAMIC_COLOR_EFF:             cfg = cfg_root.eff; break;
+            case Defines.DYNAMIC_COLOR_E:               cfg = cfg_root.e; break;
+            case Defines.DYNAMIC_COLOR_RATING:          cfg = cfg_root.rating; break;
+            case Defines.DYNAMIC_COLOR_KB:              cfg = cfg_root.kb; break;
+            case Defines.DYNAMIC_COLOR_TBATTLES:        cfg = cfg_root.t_battles; break;
+            case Defines.DYNAMIC_COLOR_TDB:             cfg = cfg_root.tdb; break;
+            case Defines.DYNAMIC_COLOR_TDV:             cfg = cfg_root.tdv; break;
+            case Defines.DYNAMIC_COLOR_TFB:             cfg = cfg_root.tfb; break;
+            case Defines.DYNAMIC_COLOR_TSB:             cfg = cfg_root.tsb; break;
+            default: return prefix + "FFFEFE";
         }
 
         var cfg_len:Number = cfg.length;
-        if (value == 0 && (type == Defines.DYNAMIC_COLOR_EFF || type == Defines.DYNAMIC_COLOR_RATING))
-        {
-            if (cfg_len == 0)
-                return "";
-            var cvalue: Number = cfg[0].value;
-            if (cvalue != 0)
-                return "";
-            var color: Number = Utils.toInt(cfg[0].color, 0xFFFFFF);
-            if (darker)
-                color = GraphicsUtil.darkenColor(color, 50);
-            return prefix + Utils.padLeft(color.toString(16), 6, "0");
-        }
-
         for (var i:Number = 0; i < cfg_len; ++i)
         {
-            var cvalue2: Number = cfg[i].value;
-            var color2: Number = Utils.toInt(cfg[i].color, 0xFFFFFF);
-            if (value < cvalue2)
+            var cvalue: Number = cfg[i].value;
+            var color: Number = Utils.toInt(cfg[i].color, 0xFFFFFF);
+            if (value < cvalue)
             {
                 if (darker)
-                    color2 = GraphicsUtil.darkenColor(color2, 50);
-                return prefix + Utils.padLeft(color2.toString(16), 6, "0");
+                    color = GraphicsUtil.darkenColor(color, 50);
+                return prefix + Utils.padLeft(color.toString(16), 6, "0");
             }
         }
 

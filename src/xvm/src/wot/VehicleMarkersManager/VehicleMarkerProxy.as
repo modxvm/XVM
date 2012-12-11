@@ -64,18 +64,18 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      */
     private var pendingCalls:Array;
 
-    private function trace(str:String):Void
-    {
-        //if (m_playerFullName == "...")
-        //Logger.add(m_playerFullName + "> " + str);
-    }
+//    private function trace(str:String):Void
+//    {
+//        //if (m_playerFullName == "...")
+//        //Logger.add(m_playerFullName + "> " + str);
+//    }
 
     /**
      * ctor()
      */
     public function VehicleMarkerProxy()
     {
-        trace("VehicleMarkerProxy::ctor()");
+        //trace("VehicleMarkerProxy::ctor()");
 
         // ScaleForm optimization // FIXIT: is required?
         if (!_global.noInvisibleAdvance)
@@ -121,7 +121,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      */
     private function onConfigLoaded():Void
     {
-        trace("onConfigLoaded()");
+        //trace("onConfigLoaded()");
 
         GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
 
@@ -141,7 +141,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      */
     private function initializeSubject():Void
     {
-        trace("initializeSubject() st = " + Config.s_config.battle.useStandardMarkers);
+        //trace("initializeSubject() st = " + Config.s_config.battle.useStandardMarkers);
 
         // Create marker class depending on config setting
         if (Config.s_config.battle.useStandardMarkers == true)
@@ -174,7 +174,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     // TODO: Check performance
     function onEnterFrame():Void
     {
-        if (subject == null)
+        if (subject != null)
             return;
 
         var mc:MovieClip = MovieClip(subject);
@@ -275,7 +275,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      */
     private function processPendingCalls():Void
     {
-        trace("processPendingCalls()");
+        //trace("processPendingCalls()");
 
         // Calls order is important
         var len = pendingCalls.length;
@@ -295,8 +295,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      */
     private function call(func:String, args:Array):Void
     {
-        if (func != "showExInfo")
-            trace("call(): " + func + (args ? " [" + args.join(", ") + "]" : ""));
+        //if (func != "showExInfo")
+        //    trace("call(): " + func + (args ? " [" + args.join(", ") + "]" : ""));
 
         if (subject != null)
             subject[func].apply(subject, args);
@@ -315,7 +315,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     // called by Battle.pyc
     public function init(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt, entityType)
     {
-        trace("init: " + pFullName);
+        //trace("init: " + pFullName);
         m_vehicleName = vType;
         m_level = vLevel;
         m_playerFullName = pFullName;
@@ -323,7 +323,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         m_vehicleClass = vClass;
         m_curHealth = curHealth;
         m_dead = m_curHealth <= 0;
-        call("init",   [ vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt, entityType ]);
+        call("init", [ vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt, entityType ]);
     }
 
     /**
@@ -422,74 +422,74 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
      */
 
     public function get width(){
-        trace("*** get width()");
+        //trace("*** get width()");
         return subject.width;
     }
     public function set width(value){
-        trace("*** set width()");
+        //trace("*** set width()");
         subject.width = value;
     }
 
     public function get height(){
-        trace("*** get height()");
+        //trace("*** get height()");
         return subject.height;
     }
     public function set height(value){
-        trace("*** set height()");
+        //trace("*** set height()");
         subject.height = value;
     }
 
     public function get focused(){
-        trace("*** get focused()");
+        //trace("*** get focused()");
         return subject.focused;
     }
     public function set focused(value){
-        trace("*** set focused()");
+        //trace("*** set focused()");
         subject.focused = value;
     }
 
     public function get displayFocus(){
-        trace("*** get displayFocus()");
+        //trace("*** get displayFocus()");
         return subject.displayFocus;
     }
     public function set displayFocus(value)
     {
-        trace("*** set displayFocus()");
+        //trace("*** set displayFocus()");
         subject.displayFocus = value;
     }
 
     public function handleInput(details, pathToFocus) {
-        trace("*** handleInput()");
+        //trace("*** handleInput()");
         call("handleInput", [ details, pathToFocus ]);
     }
 
     public function toString() {
-        trace("*** toString()");
+        //trace("*** toString()");
         return "[proxy]" + (subject != null ? subject.toString() : "[(null)]");
     }
 
     public function initSize() {
-        trace("*** initSize()");
+        //trace("*** initSize()");
         call("initSize");
     }
 
     public function draw() {
-        trace("*** draw()");
+        //trace("*** draw()");
         call("draw");
     }
 
     public function changeFocus() {
-        trace("*** changeFocus()");
+        //trace("*** changeFocus()");
         call("changeFocus");
     }
 
     public function onMouseWheel(delta, target) {
-        trace("*** onMouseWheel()");
+        //trace("*** onMouseWheel()");
         call("onMouseWheel", [ delta, target ]);
     }
 
     public function scrollWheel(delta) {
-        trace("*** scrollWheel()");
+        //trace("*** scrollWheel()");
         call("scrollWheel", [ delta ]);
     }
 
@@ -497,7 +497,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
 
 
 
-
+/*
     function onSplashHidden(event)
     {
         trace("*** onSplashHidden()");
@@ -576,4 +576,5 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     {
         trace("*** _getVehicleClassName()");
     } // End of the function
+*/
 }

@@ -1,14 +1,15 @@
 ﻿/**
  * @author sirmax2
  */
-
+import wot.utils.Cache;
 import wot.utils.Config;
 import wot.utils.Defines;
-import wot.utils.TextCache;
-import wot.utils.Utils;
 import wot.utils.GlobalEventDispatcher
-import wot.Minimap.MinimapEvent;
 import wot.utils.Logger;
+import wot.utils.Macros;
+import wot.utils.StatLoader;
+import wot.utils.Utils;
+import wot.Minimap.MinimapEvent;
 
 class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 {
@@ -30,7 +31,10 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     {
         super();
         Utils.TraceXvmModule("PlayersPanel");
+
+        GlobalEventDispatcher.addEventListener("config_loaded", StatLoader.LoadLastStat);
         Config.LoadConfig("PlayersPanel.as");
+
         checkLoading();
     }
 
@@ -71,6 +75,13 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
             centeredTextY = m_names._y - 5;
             m_names.verticalAlign = "top"; // for incomplete team - cannot set to "center"
             m_vehicles.verticalAlign = "top"; // for incomplete team - cannot set to "center"
+
+        }
+
+        if (data)
+        {
+            for (var i in data)
+                Macros.RegisterPlayerData(data[i].label, data[i]);
         }
 
         super.setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount);
@@ -201,12 +212,18 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
             //Logger.add("before: " + text);
             var data = m_data[m_item++];
             var deadState = Utils.endsWith("dead", colorScheme) ? Defines.DEADSTATE_DEAD : Defines.DEADSTATE_ALIVE;
-            var key = "PP/" + deadState + "/" + data.label + "/" + data.vehicle + "/" +
-                m_state + "/" + m_fieldType;
-            text = TextCache.Get(key) || TextCache.Format(key, data, format,
-                (m_state == "medium" || m_state == "medium2" || m_state == "large") ? Config.s_config.playersPanel[m_state].width : -1,
-                (m_state == "medium" || m_state == "medium2" || m_state == "large") ? m_names.getNewTextFormat() : null,
-                deadState);
+            var state = m_state;
+            var names = m_names;
+            var key = "PP/" + deadState + "/" + data.label + "/" + data.vehicle + "/" + state + "/" + m_fieldType;
+            text = Cache.Get(key, function()
+            {
+                return Macros.Format(data.label, format,
+                    {
+                        width: (state == "medium" || state == "medium2" || state == "large") ? Config.s_config.playersPanel[state].width : -1,
+                        textFormat: (state == "medium" || state == "medium2" || state == "large") ? names.getNewTextFormat() : null,
+                        darken: deadState == Defines.DEADSTATE_DEAD
+                    });
+            });
             //Logger.add("after: " + text);
         }
 

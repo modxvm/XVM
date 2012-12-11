@@ -7,8 +7,8 @@ import wot.utils.Defines;
 import wot.utils.GraphicsUtil;
 import wot.utils.Locale;
 import wot.utils.Logger;
+import wot.utils.Macros;
 import wot.utils.Utils;
-import wot.VehicleMarkersManager.XvmHelper;
 
 class wot.VehicleMarkersManager.HitLog
 {
@@ -162,6 +162,11 @@ class wot.VehicleMarkersManager.HitLog
 
     private function formatText(format:String, playerName:String):String
     {
+        // TODO: Macros optimization
+
+        if (format.indexOf("{{") == -1)
+            return format;
+
         try
         {
             var data = players[playerName];
@@ -216,6 +221,7 @@ class wot.VehicleMarkersManager.HitLog
             formatArr = format.split("{{dmg-player}}");
             if (formatArr.length > 1)
                 format = formatArr.join(data.total);
+                
             formatArr = format.split("{{nick}}");
             if (formatArr.length > 1)
                 format = formatArr.join(playerName);
@@ -236,7 +242,7 @@ class wot.VehicleMarkersManager.HitLog
                 format = formatArr.join(data.level);
             formatArr = format.split("{{rlevel}}");
             if (formatArr.length > 1)
-                format = formatArr.join(XvmHelper.rlevel[data.level - 1]);
+                format = formatArr.join(Macros.rlevel[data.level - 1]);
             formatArr = format.split("{{dmg-kind}}");
             if (formatArr.length > 1)
                 format = formatArr.join(Locale.get(data.damageType));

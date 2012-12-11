@@ -29,9 +29,9 @@ class wot.VehicleMarkersManager.AbstractAccessProxy
         return xvm.formatDynamicText(format, curHealth, delta, damageFlag, damageType);
     }
 
-    public function formatDynamicColor(format:String, damageFlag:Number, damageType:String):Number
+    public function formatDynamicColor(format:String, delta:Number, damageFlag:Number, damageType:String):Number
     {
-        return xvm.formatDynamicColor(format, xvm.m_curHealth, damageFlag, damageType);
+        return xvm.formatDynamicColor(format, xvm.m_curHealth, delta, damageFlag, damageType);
     }
 
     public function formatStaticColorText(format:String):String
