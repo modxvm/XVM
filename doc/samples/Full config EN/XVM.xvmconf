@@ -139,27 +139,27 @@
     "appendPlus" : true, // append plus to three capturers. Cant calculate more than three.
     // Capture format (macros allowed, see readme-en.txt)
     "enemy": {
-      "primaryTitleFormat":   "<font size='16' color='#000000'>Enemy base capture! {{extra}}</font>", // Upper textfield
-      "secondaryTitleFormat": "<font size='16' color='#000000'>{{points}}</font>",              // Lower textfield
-      "captureDoneFormat":    "<font size='16' color='#000000'>Enemy base captured!</font>",    // Full capture text
-      "extra": "Capturers: <b>{{tanks}}</b> Timeleft: <b>{{time}}<b>",                          // Extra text available after necessary calculations
-      "shadow": {          // Fields shadow
-        "color": "0xEEEEEE", // Color
-        "alpha": 75,       // Alpha 0-100
-        "blur": 15,        // Blur 0-255
-        "strength": 3      // Strength 0-255
+      "primaryTitleFormat":   "<font size='15' color='#FFFFFF'>Enemy base capture! {{extra}}</font>", // Upper textfield
+      "secondaryTitleFormat": "<font size='15' color='#FFFFFF'>{{points}}</font>",                    // Lower textfield
+      "captureDoneFormat":    "<font size='17' color='#FFCC66'>Enemy base captured!</font>",          // Full capture text
+      "extra": "Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>", // Extra text available after necessary calculations
+      "shadow": {            // Fields shadow
+        "color": "0x000000", // Color
+        "alpha": 50,         // Alpha 0-100
+        "blur": 6,           // Blur 0-255
+        "strength": 3        // Strength 0-255
       }
     },
     "ally": {
-      "primaryTitleFormat":   "<font size='16' color='#000000'>Ally base capture! {{extra}}</font>", // Upper textfield
-      "secondaryTitleFormat": "<font size='16' color='#000000'>{{points}}</font>",              // Lower textfield
-      "captureDoneFormat":    "<font size='16' color='#000000'>Ally base captured!</font>",     // Full capture text
-      "extra": "Capturers: <b>{{tanks}}</b> Timeleft: <b>{{time}}<b>",                          // Extra text available after necessary calculations
-      "shadow": {          // Fields shadow
-        "color": "0xEEEEEE", // Color
-        "alpha": 75,       // Alpha 0-100
-        "blur": 15,        // Blur 0-255
-        "strength": 3      // Strength 0-255
+      "primaryTitleFormat":   "<font size='15' color='#FFFFFF'>Ally base capture! {{extra}}</font>",
+      "secondaryTitleFormat": "<font size='15' color='#FFFFFF'>{{points}}</font>",
+      "captureDoneFormat":    "<font size='17' color='#FFCC66'>Ally base captured!</font>",
+      "extra": "Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>",
+      "shadow": {
+        "color": "0x000000",
+        "alpha": 50,
+        "blur": 15,
+        "strength": 3
       }
     }
   },

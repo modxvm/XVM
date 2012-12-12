@@ -139,26 +139,26 @@
     "appendPlus" : true, // дописывать плюс к тройке захватчиков. Невозможно расчитать более трёх.
     // Формат захвата (допускаются макроподстановки, см. readme-ru.txt)
     "enemy": { // Враг
-      "primaryTitleFormat":   "<font size='16' color='#000000'>Захват вражеской базы! {{extra}}</font>", // Верхнее текстовое поле
-      "secondaryTitleFormat": "<font size='16' color='#000000'>{{points}}</font>",                       // Нижнее текстовое поле
-      "captureDoneFormat":    "<font size='16' color='#000000'>Вражеская база захвачена!</font>",        // Текст полного захвата
-      "extra": "Захватчиков: <b>{{tanks}}</b> Осталось времени: <b>{{time}}<b>",                         // Дополнительный текст после необходимого расчета
-      "shadow": {          // Тень полей
-        "color": "0xEEEEEE", // Цвет
-        "alpha": 75,       // Прозрачность 0-100
-        "blur": 15,        // Размытие 0-255
-        "strength": 3      // Сила 0-255
+      "primaryTitleFormat":   "<font size='15' color='#FFFFFF'>Захват вражеской базы! {{extra}}</font>",    // Верхнее текстовое поле
+      "secondaryTitleFormat": "<font size='15' color='#FFFFFF'>{{points}}</font>",                       // Нижнее текстовое поле
+      "captureDoneFormat":    "<font size='17' color='#FFCC66'>Вражеская база захвачена!</font>",             // Текст полного захвата
+      "extra": "Захватчиков: <b><font color='#FFCC66'>{{tanks}}</font></b> Осталось времени: <b><font color='#FFCC66'>{{time}}</font><b>", // Дополнительный текст после необходимого расчета
+      "shadow": {            // Тень полей
+        "color": "0x000000", // Цвет
+        "alpha": 50,         // Прозрачность 0-100
+        "blur": 6,           // Размытие 0-255
+        "strength": 3        // Сила 0-255
       }
     },
     "ally": { // Союзник
-      "primaryTitleFormat":   "<font size='16' color='#000000'>Захват нашей базы! {{extra}}</font>",
-      "secondaryTitleFormat": "<font size='16' color='#000000'>{{points}}</font>",
-      "captureDoneFormat":    "<font size='16' color='#000000'>Наша база захвачена!</font>",
-      "extra": "Захватчиков: <b>{{tanks}}</b> Осталось времени: <b>{{time}}<b>",
+      "primaryTitleFormat":   "<font size='15' color='#FFFFFF'>Захват нашей базы! {{extra}}</font>",
+      "secondaryTitleFormat": "<font size='15' color='#FFFFFF'>{{points}}</font>",
+      "captureDoneFormat":    "<font size='17' color='#FFCC66'>Наша база захвачена!</font>",
+      "extra": "Захватчиков: <b><font color='#FFCC66'>{{tanks}}</font></b> Осталось времени: <b><font color='#FFCC66'>{{time}}</font><b>",
       "shadow": {
-        "color": "0xEEEEEE",
-        "alpha": 75,
-        "blur": 15,
+        "color": "0x000000",
+        "alpha": 50,
+        "blur": 6,
         "strength": 3
       }
     }
