@@ -11,13 +11,16 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
     private var m_markerState;  // [proxy.marker] "dead", "immediate_dead", ...
     private var m_vehicleClass; // [proxy.marker.marker.icon] "lightTank", "mediumTank", ..., "dynamic" (speaker)
 
-    public function VehicleTypeComponent(proxy:VehicleTypeProxy, vehicleClass, hunt)
+    public function VehicleTypeComponent(proxy:VehicleTypeProxy)
     {
         this.proxy = proxy;
 
         m_markerLabel = null;
         m_markerState = null;
+    }
 
+    public function init(vehicleClass, hunt)
+    {
         m_vehicleClass = vehicleClass;
         m_hunt = hunt;
 

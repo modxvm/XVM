@@ -61,6 +61,17 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         super(); // gfx.core.UIComponent
         _proxy = proxy;
         initialize();
+
+        vehicleState = new VehicleState(new VehicleStateProxy(this));
+        healthBarComponent = new HealthBarComponent(new HealthBarProxy(this));
+        actionMarkerComponent = new ActionMarkerComponent(new ActionMarkerProxy(this));
+        clanIconComponent = new ClanIconComponent(new ClanIconProxy(this));
+        contourIconComponent = new ContourIconComponent(new ContourIconProxy(this));
+        levelIconComponent = new LevelIconComponent(new LevelIconProxy(this));
+        turretStatusComponent = new TurretStatusComponent(new TurretStatusProxy(this));
+        vehicleTypeComponent = new VehicleTypeComponent(new VehicleTypeProxy(this));
+        damageTextComponent = new DamageTextComponent(new DamageTextProxy(this));
+
     }
     
     private static var initialized:Boolean = false;
@@ -114,16 +125,12 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         m_isDead    = curHealth <= 0; // -1 for ammunition storage explosion
         m_curHealth = curHealth >= 0 ? (curHealth) : (0);
 
-        vehicleState = new VehicleState(new VehicleStateProxy(this));
-
-        healthBarComponent = new HealthBarComponent(new HealthBarProxy(this));
-        actionMarkerComponent = new ActionMarkerComponent(new ActionMarkerProxy(this));
-        clanIconComponent = new ClanIconComponent(new ClanIconProxy(this));
-        contourIconComponent = new ContourIconComponent(new ContourIconProxy(this));
-        levelIconComponent = new LevelIconComponent(new LevelIconProxy(this));
-        turretStatusComponent = new TurretStatusComponent(new TurretStatusProxy(this));
-        vehicleTypeComponent = new VehicleTypeComponent(new VehicleTypeProxy(this), vClass /*mediumTank*/, hunt);
-        damageTextComponent = new DamageTextComponent(new DamageTextProxy(this));
+        healthBarComponent.init();
+        contourIconComponent.init();
+        levelIconComponent.init();
+        turretStatusComponent.init();
+        vehicleTypeComponent.init(vClass /*mediumTank*/, hunt);
+        damageTextComponent.init();
 
         Macros.RegisterPlayerData(m_playerFullName,
             {

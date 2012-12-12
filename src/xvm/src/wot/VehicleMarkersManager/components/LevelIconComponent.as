@@ -7,7 +7,10 @@ class wot.VehicleMarkersManager.components.LevelIconComponent
     public function LevelIconComponent(proxy:LevelIconProxy)
     {
         this.proxy = proxy;
-
+    }
+    
+    public function init()
+    {
         if (proxy.levelIcon != null)
             proxy.levelIcon.gotoAndStop(proxy.level);
     }

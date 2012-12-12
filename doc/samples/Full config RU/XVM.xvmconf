@@ -1589,7 +1589,7 @@
       { "value": 5,    "color": "0xF8F400" },
       { "value": 7,    "color": "0x60FF00" },
       { "value": 9,    "color": "0x02C9B3" },
-      { "value": 10,   "color": "0xD042F3" }
+      { "value": 20,   "color": "0xD042F3" }
     ]
   },
   // Настройки динамической прозрачности

@@ -61,7 +61,8 @@ class wot.utils.Macros
             var pdata = Macros.data_provider[pname];
 
             // vars
-            var nick = Macros.modXvmDevLabel(data.label + (!data.clanAbbrev ? "" : "[" + data.clanAbbrev + "]"));
+            var nick = Macros.modXvmDevLabel(data.label +
+                (data.label.indexOf("[") >= 0 || !data.clanAbbrev ? "" : "[" + data.clanAbbrev + "]"));
 
             // {{nick}}
             pdata["nick"] = nick;

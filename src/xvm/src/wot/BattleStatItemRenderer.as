@@ -119,7 +119,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
             [ data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.statisticForm), data.icon ]);
 
         data.icon = m_iconset.currentIcon;
-        data.label = Cache.Get(saved_label, function() { return Macros.Format(saved_label, "{{nick}}") });
+        data.label = Cache.Get("SF." + saved_label, function() { return Macros.Format(saved_label, "{{name}}") });
 
         // Player/clan icons
         attachClanIconToPlayer(data);

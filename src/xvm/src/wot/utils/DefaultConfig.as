@@ -521,7 +521,7 @@ class wot.utils.DefaultConfig
                     { value: 5,    color: ColorPalette.yellow },
                     { value: 7,    color: ColorPalette.green },
                     { value: 9,    color: ColorPalette.blue },
-                    { value: 11,   color: ColorPalette.purple }
+                    { value: 20,   color: ColorPalette.purple }
                 ]
             },
             alpha: {

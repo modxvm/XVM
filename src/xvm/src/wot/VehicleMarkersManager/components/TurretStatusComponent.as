@@ -36,6 +36,10 @@ class wot.VehicleMarkersManager.components.TurretStatusComponent
     public function TurretStatusComponent(proxy:TurretStatusProxy)
     {
         this.proxy = proxy;
+    }
+    
+    public function init()
+    {
         defineMarker();
     }
 

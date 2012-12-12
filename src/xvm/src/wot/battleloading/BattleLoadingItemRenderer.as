@@ -154,7 +154,7 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
             [ data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.battleLoading), data.icon ]);
 
         data.icon = m_iconset.currentIcon;
-        data.label = Cache.Get(saved_label, function() { return Macros.Format(saved_label, "{{nick}}") });
+        data.label = Cache.Get("BL." + saved_label, function() { return Macros.Format(saved_label, "{{nick}}") });
 
         super.update();
 

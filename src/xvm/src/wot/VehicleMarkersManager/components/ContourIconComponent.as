@@ -16,7 +16,10 @@ class wot.VehicleMarkersManager.components.ContourIconComponent
     public function ContourIconComponent(proxy:ContourIconProxy)
     {
         this.proxy = proxy;
+    }
 
+    public function init()
+    {
         onEnterFrame = null;
 
         m_contourIconLoaded = false;

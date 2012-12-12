@@ -38,7 +38,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     // Used in child classes VehicleMarkerAlly and VehicleMarkerEnemy
     // TODO: can include to interface as property?
     public var m_team:String; // values: ally, enemy (readonly)
-
+    
     // Inherited from sprite
     // TODO: try to remove and create dynamically only with standard markers to improve performance
     public var levelIcon:MovieClip;
@@ -52,6 +52,9 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     private var pNameField:TextField;
     private var healthBar:MovieClip;
     private var bgShadow:MovieClip;
+
+//    private static var subjects_free:Array = null;
+//    private static var subjects:Object;
 
     /**
      * Instance of subject class with real implementation
@@ -73,8 +76,10 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     /**
      * ctor()
      */
+    var start;
     public function VehicleMarkerProxy()
     {
+        start = new Date();
         //trace("VehicleMarkerProxy::ctor()");
 
         // ScaleForm optimization // FIXIT: is required?
@@ -111,7 +116,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         else
         {
             // if already loaded, skip config loading steps
-            initializeSubject();
+            //if (m_playerFullName)
+            //    initializeSubject();
         }
     }
 
@@ -132,9 +138,23 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
                 hitLog = new HitLog(Config.s_config.hitLog);
         }
 
+        //if (!subjects_free && Config.s_config.battle.useStandardMarkers != true)
+        //    createSubjects();
+
         // finalize initialization
-        initializeSubject();
+        if (m_playerFullName && !subject)
+            initializeSubject();
     }
+
+    /*
+    private function createSubjects()
+    {
+        subjects_free = [];
+        subjects = { };
+        for (var i = 0; i < 29; ++i)
+            subjects_free.push(new wot.VehicleMarkersManager.Xvm());
+    }
+    */
 
     /**
      * Create subject class in depend of config setting
@@ -161,7 +181,17 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         }
         else
         {
+            //Logger.addObject(this, "this", 2);
             // Create XVM marker
+/*
+            if (!subjects.hasOwnProperty(m_playerFullName))
+            {
+                subjects[m_playerFullName] = subjects_free.length > 0 ? subjects_free.pop()
+                    : new wot.VehicleMarkersManager.Xvm();
+            }
+            subject = subjects[m_playerFullName];
+            subject["_proxy"] = this;
+*/
             subject = new wot.VehicleMarkersManager.Xvm(this);
         }
 
@@ -174,7 +204,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     // TODO: Check performance
     function onEnterFrame():Void
     {
-        if (subject != null)
+        if (subject == null)
             return;
 
         var mc:MovieClip = MovieClip(subject);
@@ -219,47 +249,47 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
             if (pNameField)
             {
                 pNameField._visible = false;
-                pNameField.removeTextField();
-                delete pNameField;
+//                pNameField.removeTextField();
+//                delete pNameField;
             }
 
             if (vNameField)
             {
                 vNameField._visible = false;
-                vNameField.removeTextField();
-                delete vNameField;
+//                vNameField.removeTextField();
+//                delete vNameField;
             }
 
             if (healthBar)
             {
                 healthBar.stop();
                 healthBar._visible = false;
-                healthBar.removeMovieClip();
-                delete healthBar;
+//                healthBar.removeMovieClip();
+//                delete healthBar;
             }
 
             if (hp_mc)
             {
                 hp_mc.stop();
                 hp_mc._visible = false;
-                hp_mc.removeMovieClip();
-                delete hp_mc;
+//                hp_mc.removeMovieClip();
+//                delete hp_mc;
             }
 
             if (hitLbl)
             {
                 hitLbl.stop();
                 hitLbl._visible = false;
-                hitLbl.removeMovieClip();
-                delete hitLbl;
+//                hitLbl.removeMovieClip();
+//                delete hitLbl;
             }
 
             if (hp_mc)
             {
                 hp_mc.stop();
                 hp_mc._visible = false;
-                hp_mc.removeMovieClip();
-                delete hp_mc;
+//                hp_mc.removeMovieClip();
+//                delete hp_mc;
             }
         }
     }
@@ -323,6 +353,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
         m_vehicleClass = vClass;
         m_curHealth = curHealth;
         m_dead = m_curHealth <= 0;
+        if (Config.s_loaded == true && !subject)
+            initializeSubject();
         call("init", [ vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt, entityType ]);
     }
 
@@ -381,7 +413,10 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     // IUIComponent implementation
 
     public function configUI()    { call("configUI"); }
-    public function onLoad() { call("onLoad"); }
+    public function onLoad() {
+//Logger.add("onLoad: " + Utils.elapsedMSec(start, new Date()) + " ms");
+        call("onLoad");
+    }
     public function validateNow() { call("validateNow"); }
     public function setSize(width, height) { call("setSize", [ width, height ]); }
 

@@ -15,7 +15,10 @@ class wot.VehicleMarkersManager.components.HealthBarComponent
     public function HealthBarComponent(proxy:HealthBarProxy)
     {
         this.proxy = proxy;
-
+    }
+    
+    public function init()
+    {
         healthBar = proxy.createHolder();
         border = healthBar.createEmptyMovieClip("border", 1);
         fill = healthBar.createEmptyMovieClip("fill", 2);

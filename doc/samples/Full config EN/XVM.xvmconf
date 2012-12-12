@@ -36,11 +36,11 @@
   // Parameters of the Battle Loading Screen
   "battleLoading": {
     "clockFormat": "H:N:S",                     // Show the clock on the Battle Loading Screen. Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds. "" - remove clock.
-    "showChances": false,                       // true – Enable display of "chance to win" (only with xvm-stat) Read more: http://www.koreanrandom.com/forum/topic/1642-chance
+    "showChances": false,                       // true - Enable display of "chance to win" (only with xvm-stat) Read more: http://www.koreanrandom.com/forum/topic/1642-chance
     "showChancesExp": false,                    // Show experimental "chance to win" formula
-    "removeSquadIcon": false,                   // true – Disable Platoon icons. This blank space can house, for example, clan logos
+    "removeSquadIcon": false,                   // true - Disable Platoon icons. This blank space can house, for example, clan logos
     "clanIcon": {                               // Display options for Team/Clan logos
-      "show": true,                             //   false – Disable Team/Clan logos in Battle Loading Screen
+      "show": true,                             //   false - Disable Team/Clan logos in Battle Loading Screen
       "x": 0,                                   //   Position on the X axis, relative to the vehicle icon
       "y": 6,                                   //   Position on the Y axis, relative to the vehicle icon
       "xr": 0,                                  //   Position on the X axis for right side (positive values run to the *inside* of the table)
@@ -68,8 +68,8 @@
   },
   // Parameters of the Players Panels
   "playersPanel": {
-    "alpha": 60,       // Opacity percentage of the panels. (0 – transparent ... 100 – opaque)
-    "iconAlpha": 100,  // Opacity percentage of icons in the panels. (0 – transparent ... 100 – opaque)
+    "alpha": 60,       // Opacity percentage of the panels. (0 - transparent ... 100 - opaque)
+    "iconAlpha": 100,  // Opacity percentage of icons in the panels. (0 - transparent ... 100 - opaque)
     "removeSquadIcon": false, // true - Disable Platoon icons.
     // Display options for Team/Clan logos (see battleLoading above).
     "clanIcon": { "show": true, "x": 0, "y": 6, "xr": 0, "yr": 6, "h": 16, "w": 16, "alpha": 90 },
@@ -1362,30 +1362,30 @@
   "colors": {
     // System colors
     "system": {
-      "ally_alive_normal": "0x96FF00",             // Ally – alive
-      "ally_alive_blind": "0x96FF00",              // Ally – alive – color blind mode
+      "ally_alive_normal": "0x96FF00",             // Ally - alive
+      "ally_alive_blind": "0x96FF00",              // Ally - alive - color blind mode
       "ally_dead_normal": "0x009900",              // Ally - dead
-      "ally_dead_blind": "0x009900",               // Ally – dead – color blind mode
-      "ally_blowedup_normal": "0x007700",          // Ally – blown-up
-      "ally_blowedup_blind": "0x007700",           // Ally – blown-up – color blind mode
+      "ally_dead_blind": "0x009900",               // Ally - dead - color blind mode
+      "ally_blowedup_normal": "0x007700",          // Ally - blown-up
+      "ally_blowedup_blind": "0x007700",           // Ally - blown-up - color blind mode
       "squadman_alive_normal": "0xFFB964",         // Platoon member - alive
-      "squadman_alive_blind": "0xFFFF00",          // Platoon member – alive – color blind mode
+      "squadman_alive_blind": "0xFFFF00",          // Platoon member - alive - color blind mode
       "squadman_dead_normal": "0xCA7000",          // Platoon member - dead
-      "squadman_dead_blind": "0xAAAA00",           // Platoon member – dead – color blind mode
-      "squadman_blowedup_normal": "0xA45A00",      // Platoon member – blown-up
-      "squadman_blowedup_blind": "0x888800",       // Platoon member – blown-up – color blind mode
+      "squadman_dead_blind": "0xAAAA00",           // Platoon member - dead - color blind mode
+      "squadman_blowedup_normal": "0xA45A00",      // Platoon member - blown-up
+      "squadman_blowedup_blind": "0x888800",       // Platoon member - blown-up - color blind mode
       "teamKiller_alive_normal": "0x00EAFF",       // Team killer - alive
-      "teamKiller_alive_blind": "0x00EAFF",        // Team killer - alive – color blind mode
+      "teamKiller_alive_blind": "0x00EAFF",        // Team killer - alive - color blind mode
       "teamKiller_dead_normal": "0x097783",        // Team killer - dead
-      "teamKiller_dead_blind": "0x097783",         // Team killer - dead – color blind mode
+      "teamKiller_dead_blind": "0x097783",         // Team killer - dead - color blind mode
       "teamKiller_blowedup_normal": "0x096A75",    // Team killer - blown-up
-      "teamKiller_blowedup_blind": "0x096A75",     // Team killer - blown-up – color blind mode
-      "enemy_alive_normal": "0xF50800",            // Enemy – alive
-      "enemy_alive_blind": "0x8379FE",             // Enemy – alive – color blind mode
+      "teamKiller_blowedup_blind": "0x096A75",     // Team killer - blown-up - color blind mode
+      "enemy_alive_normal": "0xF50800",            // Enemy - alive
+      "enemy_alive_blind": "0x8379FE",             // Enemy - alive - color blind mode
       "enemy_dead_normal": "0x840500",             // Enemy - dead
-      "enemy_dead_blind": "0x47407A",              // Enemy – dead – color blind mode
-      "enemy_blowedup_normal": "0x5A0401",         // Enemy – blown-up
-      "enemy_blowedup_blind": "0x3B365F"           // Enemy – blown-up – color blind mode
+      "enemy_dead_blind": "0x47407A",              // Enemy - dead - color blind mode
+      "enemy_blowedup_normal": "0x5A0401",         // Enemy - blown-up
+      "enemy_blowedup_blind": "0x3B365F"           // Enemy - blown-up - color blind mode
     },
     // Color for damage text animation
     //   src_dst_type
@@ -1577,7 +1577,7 @@
       { "value": 5,    "color": "0xF8F400" },
       { "value": 7,    "color": "0x60FF00" },
       { "value": 9,    "color": "0x02C9B3" },
-      { "value": 10,   "color": "0xD042F3" }
+      { "value": 20,   "color": "0xD042F3" }
     ]
   },
   // OPTIONS FOR DYNAMIC TRANSPARENCY
