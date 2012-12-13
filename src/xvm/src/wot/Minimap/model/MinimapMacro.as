@@ -7,7 +7,7 @@ class wot.Minimap.model.MinimapMacro
         if (format.indexOf("{{") == -1)
             return format;
 
-        // TODO: format = StatFormat.FormatText({ label: m_playerFullName }, format);
+        // TODO: StatFormat
         var formatArr:Array
 
         /** Level */

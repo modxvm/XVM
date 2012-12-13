@@ -1,7 +1,9 @@
+import wot.Minimap.model.PlayersPanelProxy;
 import wot.utils.GlobalEventDispatcher;
 import wot.Minimap.MinimapEvent;
 import wot.Minimap.model.UnitPositionTracking;
 import wot.Minimap.model.MapConfig;
+import wot.Minimap.model.MinimapMacro;
 
 class wot.Minimap.MinimapLabels
 {
@@ -69,9 +71,10 @@ class wot.Minimap.MinimapLabels
         style.parseCSS(".xvm_mm{" + MapConfig.cssLostenemy + "}");
         textField.styleSheet = style;
         
-        //var text:String = MapConfig.formatLostenemy + " " + player.uid;
-        //MinimapMacro.process(text, player)
-        textField.htmlText = "<span class='xvm_mm'>" + player.uid + "</span>";
+        var format:String = MapConfig.formatLostenemy;
+        var playerInfo = PlayersPanelProxy.getPlayerInfo(player.uid);
+        var text:String = MinimapMacro.process(format, playerInfo);
+        textField.htmlText = "<span class='xvm_mm'>" + text + "</span>";
         
         return textField;
     }

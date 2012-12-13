@@ -162,11 +162,11 @@ class wot.utils.DefaultConfig
                   lostenemy: "<i>{{level}}</i>"
                 },
                 css: {
-                  ally:  "font-family:$FieldFont; font-size:6px; color:#BBEEBB;",
-                  enemy: "font-family:$FieldFont; font-size:6px; color:#EEBBBB;",
-                  squad: "font-family:$FieldFont; font-size:6px; color:#FFEE44;",
-                  oneself: "font-family:$FieldFont; font-size:6px; color:#FFFFFF;",
-                  lostenemy: "font-family:$FieldFont; font-size:6px; color:#EEAACC;"
+                  ally:  "font-family:$FieldFont; font-size:8px; color:#BBEEBB;",
+                  enemy: "font-family:$FieldFont; font-size:8px; color:#EEBBBB;",
+                  squad: "font-family:$FieldFont; font-size:8px; color:#FFEE44;",
+                  oneself: "font-family:$FieldFont; font-size:8px; color:#FFFFFF;",
+                  lostenemy: "font-family:$FieldFont; font-size:8px; color:#EEAACC;"
                 }
             },
             captureBar: {

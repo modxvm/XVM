@@ -175,12 +175,13 @@
       "enemy": "{{level}}", // Enemy
       "squad": "{{level}} <i>{{short-nick}}</i>", // Squadmates
       "oneself": "<b>{{level}}</b>" // For oneself and camera receiver in case of death
+      "lostenemy": "<i>{{level}}</i>" // Lost enemy last position marker format
     },
     "css": { // Attached text style
-      "ally":    "font-family:$FieldFont; font-size:6px; color:#BBEEBB;", // Ally
-      "enemy":   "font-family:$FieldFont; font-size:6px; color:#EEBBBB;", // Enemy
-      "squad":   "font-family:$FieldFont; font-size:6px; color:#FFEE44;", // Squadmates
-      "oneself": "font-family:$FieldFont; font-size:6px; color:#EEEEEE;"  // For oneself and camera receiver in case of death
+      "ally":    "font-family:$FieldFont; font-size:8px; color:#BBEEBB;", // Ally
+      "enemy":   "font-family:$FieldFont; font-size:8px; color:#EEBBBB;", // Enemy
+      "squad":   "font-family:$FieldFont; font-size:8px; color:#FFEE44;", // Squadmates
+      "oneself": "font-family:$FieldFont; font-size:8px; color:#EEEEEE;"  // For oneself and camera receiver in case of death
     }
   },
   // OVER-TARGET MARKERS

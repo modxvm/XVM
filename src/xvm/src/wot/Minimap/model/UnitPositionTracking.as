@@ -1,4 +1,3 @@
-import wot.utils.Logger;
 import wot.Minimap.MinimapEvent;
 import wot.utils.GlobalEventDispatcher;
 import wot.Minimap.model.IconsProxy;
@@ -9,10 +8,10 @@ import wot.utils.Utils;
  * Minimap icon position tracking to show disappeared vehicles last position
  */
 
-class wot.Minimap.model.VehiclePositionTracking
+class wot.Minimap.model.UnitPositionTracking
 {
-    private static var TICK_INTERVAL_MS:Number = 300; // 500ms
-    private static var SELF_DESTRUCT_TICKS_THRESHOLD:Number = 16 * 60 * 1000;
+    private static var TICK_INTERVAL_MS:Number = 300; // 300ms
+    private static var SELF_DESTRUCT_TICKS_THRESHOLD:Number = 16 * 60 * 1000; /** Maximum battle duration */
     
     private var flashTimer;
     private var destructionTimer:Number;
@@ -22,11 +21,12 @@ class wot.Minimap.model.VehiclePositionTracking
     
     /**
      * Position tracking array.
+     * uid -> minimap coordinates
      * posTrack[1234567] = Point(50, 60)
      */
     private var posTrack:Array;
     
-    public function VehiclePositionTracking() 
+    public function UnitPositionTracking() 
     {
         posTrack = [];
         destructionTimer = 0;
@@ -35,6 +35,7 @@ class wot.Minimap.model.VehiclePositionTracking
     
     // -- Private
     
+    /** Touched by timer */
     private function tick():Void
     {
         timeSelfDestruct();
@@ -45,8 +46,8 @@ class wot.Minimap.model.VehiclePositionTracking
     }
     
     /**
-     * Store curretly drawn vehicles position.
-     * Later is used as last seen position.
+     * Store curretly drawn enemy units position.
+     * Later can be used to show last position enemy unit has been seen.
      */
     private function updatePositions():Void
     {
@@ -84,19 +85,17 @@ class wot.Minimap.model.VehiclePositionTracking
     }
     
     /**
-     * Players seen atleast once but lost out of sight.
+     * Find enemy units seen atleast once but lost out of sight.
      * Theese are the candidates to mark last position at map.
      */
     private function findLostPlayers():Void
     {
-        /** All the vehicles not present at minimap */
-        var hiddenUids = Utils.subtractArray(PlayersPanelProxy.getAllUids(), IconsProxy.getSyncedUids());
+        /** All the units not revealed at minimap */
+        var hiddenUids = Utils.subtractArray(PlayersPanelProxy.getEnemyUids(), IconsProxy.getSyncedUids());
         
+        /** Lost player are the players that has position tracked and are hidden(currently not revealed) on minimap */
         var lost:Array = [];
-        /** Lost player are the players that has position tracked and are hidden on minimap*/
         
-        // This loops is extreme heavyweight 
-        // TODO: optimize
         for (var i in hiddenUids)
         {
             var uid:Number = hiddenUids[i];
@@ -111,7 +110,7 @@ class wot.Minimap.model.VehiclePositionTracking
             }
         }
         
-        lost = filterDead(lost);
+        lost = filterDead(lost); /** Ally units are already excluded at updatePositions() */
         
         /** Keep track of previously lost players to avoid unnecessary event dispatch */
         if (lostPrev == undefined)

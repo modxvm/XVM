@@ -175,12 +175,13 @@
       "enemy": "{{level}}", // Для врагов
       "squad": "{{level}} <i>{{short-nick}}</i>", // Для совзводных
       "oneself": "<b>{{level}}</b>" // Для себя и приемника камеры в случае смерти
+      "lostenemy": "<i>{{level}}</i>" // Формат маркера последней позиции потерянного врага
     },
     "css": { // Стиль прикреплённого текста
-      "ally":    "font-family:$FieldFont; font-size:6px; color:#BBEEBB;", // Для союзников
-      "enemy":   "font-family:$FieldFont; font-size:6px; color:#EEBBBB;", // Для врагов
-      "squad":   "font-family:$FieldFont; font-size:6px; color:#FFEE44;", // Для совзводных
-      "oneself": "font-family:$FieldFont; font-size:6px; color:#EEEEEE;"  // Для себя
+      "ally":    "font-family:$FieldFont; font-size:8px; color:#BBEEBB;", // Для союзников
+      "enemy":   "font-family:$FieldFont; font-size:8px; color:#EEBBBB;", // Для врагов
+      "squad":   "font-family:$FieldFont; font-size:8px; color:#FFEE44;", // Для совзводных
+      "oneself": "font-family:$FieldFont; font-size:8px; color:#EEEEEE;"  // Для себя
     }
   },
   // Блок маркеров над танками.
