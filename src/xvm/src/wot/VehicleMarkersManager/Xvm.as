@@ -146,7 +146,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
             });
 
         // Create clan icon and place to mc.
-        clanIconComponent.initialize(vehicleState.getCurrentConfig(), proxy);
+        clanIconComponent.initialize(proxy);
 
         // Initialize states and creating text fields
         initializeTextFields();
