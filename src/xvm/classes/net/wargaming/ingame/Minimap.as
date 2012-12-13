@@ -1,8 +1,12 @@
-intrinsic class net.wargaming.ingame.Minimap
+import gfx.core.UIComponent;
+
+intrinsic class net.wargaming.ingame.Minimap extends UIComponent
 {
     static var MARKERS_SCALING:Number;
     
     var icons:MovieClip;
+    var foreground:MovieClip;
+    var foregroundHR:MovieClip;
     
     function Minimap();
     function scaleMarkers(val:Number);

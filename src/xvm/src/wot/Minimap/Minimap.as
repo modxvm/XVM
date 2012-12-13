@@ -1,8 +1,9 @@
+import wot.Minimap.MinimapEvent;
+import wot.utils.GlobalEventDispatcher;
+import wot.Minimap.MinimapLabels;
 import wot.Minimap.model.SyncModel;
 import wot.utils.Utils;
 import wot.Minimap.model.MapConfig;
-import wot.utils.GlobalEventDispatcher;
-import wot.Minimap.MinimapEvent
 
 /**
  * Original Minimap manages all kinds size, border, drawing and clicking.
@@ -17,12 +18,6 @@ import wot.Minimap.MinimapEvent
  *    Any individual user linked data is now available at Minimap.
  * ) Free marker scaling adjusts tank and base icon size.
  * 
- * ) Distance marker <- minimap distance
- * 
- * TODO: highlight T-50-2 etc automatically
- * Weapon line
- * Horizontal weapon angle
- * 
  * @author ilitvinov87@gmail.com
  */
 
@@ -30,6 +25,8 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
 {
     /** Used at MinimapEntry to get testUid */
     public var sync:SyncModel;
+    
+    private var labels:MinimapLabels;
     
     private var isMinimapReady:Boolean = false;
     private var isAllyPlayersPanelReady:Boolean = false;
@@ -55,7 +52,7 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
         super.onEntryInited();
         
         if (sync && MapConfig.enabled)
-            sync.updateIconsExtension();
+           sync.updateIconsExtension();
     }
     
     // -- Private
@@ -108,5 +105,7 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
         
         sync = new SyncModel();
         sync.updateIconsExtension();
+        
+        labels = new MinimapLabels(icons);
     }
 }

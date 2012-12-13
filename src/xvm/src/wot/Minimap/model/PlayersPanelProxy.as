@@ -20,7 +20,7 @@
   "icon": "../maps/icons/vehicle/contour/usa-M18_Hellcat.png",
   "vipKilled": 0,
   "muted": false,
-  "vehicleState": 3,
+  "vehicleState": 3,   3 - alive; 2 - dead
   "speaking": false,
   "roster": 0,
   "isPostmortemView": true,
@@ -34,7 +34,7 @@
 
 class wot.Minimap.model.PlayersPanelProxy
 {
-    public static function getPlayerInfo(uid):Object
+    public static function getPlayerInfo(uid:Number):Object
     {
         var playerInfo:Object = getPlayerInfoFrom(getAllyPlayers(), uid);
         if (playerInfo)
@@ -49,6 +49,12 @@ class wot.Minimap.model.PlayersPanelProxy
         var allEnemyUids:Array = allUidsOfTeam(getEnemyPlayers());
             
         return allAllyUids.concat(allEnemyUids);
+    }
+    
+    public static function isDead(uid:Number):Boolean
+    {
+        var player:Object = getPlayerInfo(uid);
+        return player.vehicleState == 2;
     }
     
     // -- Private

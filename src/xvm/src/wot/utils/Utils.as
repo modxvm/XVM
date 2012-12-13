@@ -212,6 +212,9 @@ class wot.utils.Utils
         return str;
     }
 
+    /**
+     * Get children MovieClips of MovieClip
+     */
     public static function getChildrenOf(target:MovieClip, recursive:Boolean):Array
     {
         var result:Array = [];
@@ -230,16 +233,14 @@ class wot.utils.Utils
     }
 
     /**
-     * c[] − b[] = a[]
-     * minuend (c) − subtrahend (b) = difference (a)
-     * [1,2,3], [1,2,3,4,5,6] -> return [4, 5, 6]
+     * Array subtraction
+     * [1,2,3,4,5,6] - [1,2,3] = [4,5,6]
+     * minuend − subtrahend = difference
      */
     public static function subtractArray(minuend, subtrahend)
     {
         var difference:Array = [];
-        //Logger.addObject(minuend, "Utils.minuend", 3);
-        //Logger.addObject(subtrahend, "Utils.subtrahend", 3);
-
+    
         for (var i in minuend)
         {
             var testVal = minuend[i];
@@ -255,7 +256,7 @@ class wot.utils.Utils
             if (testIsAbcentInSubtrahend)
                 difference.push(minuend[i])
         }
-        //Logger.addObject(difference, "Utils.difference", 3);
+        
         return difference;
     }
 

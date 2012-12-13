@@ -50,7 +50,7 @@ class wot.Minimap.model.SyncModel
     /** Defines current unassigned uid-s at Minimaps icons */
     private function getUnassignedUids():Array
     {
-        return Utils.subtractArray(PlayersPanelProxy.getAllUids(), IconsProxy.getAssignedUids());
+        return Utils.subtractArray(PlayersPanelProxy.getAllUids(), IconsProxy.getSyncedUids());
     }
     
     /** Touched players MinimapEntry receives event */

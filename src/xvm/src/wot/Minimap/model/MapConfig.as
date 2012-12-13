@@ -23,6 +23,8 @@ class wot.Minimap.model.MapConfig
         return Config.s_config.minimap.format.squad;    }
     public static function get formatOneself():String    {
         return Config.s_config.minimap.format.oneself;    }
+    public static function get formatLostenemy():String    {
+        return Config.s_config.minimap.format.lostenemy;    }
         
     public static function get cssAlly():String    {
         return Config.s_config.minimap.css.ally;    }
@@ -32,6 +34,8 @@ class wot.Minimap.model.MapConfig
         return Config.s_config.minimap.css.squad;    }
     public static function get cssOneself():String    {
         return Config.s_config.minimap.css.oneself;    }
+    public static function get cssLostenemy():String    {
+        return Config.s_config.minimap.css.lostenemy;    }
         
     public static function get textOffset():Point    {
         return new Point(Config.s_config.minimap.textOffsetX, Config.s_config.minimap.textOffsetY);}

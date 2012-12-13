@@ -3,6 +3,7 @@ class wot.Minimap.MinimapEvent
     public static var MINIMAP_READY:String = "MINIMAP_READY";
     public static var ENEMY_PLAYERS_PANEL_READY:String = "ENEMY_PLAYERS_PANEL_READY";
     public static var ALLY_PLAYERS_PANEL_READY:String = "ALLY_PLAYERS_PANEL_READY";
+    public static var LOST_PLAYERS_UPDATE:String = "LOST_PLAYERS_UPDATE";
     
     private var _type:String;
     private var _payload:Object;
@@ -17,6 +18,11 @@ class wot.Minimap.MinimapEvent
     public function get type():String
     {
         return _type;
+    }
+    
+    public function get payload():Object
+    {
+        return _payload;
     }
     
 }

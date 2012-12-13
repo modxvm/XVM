@@ -24,21 +24,6 @@ class wot.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
     private var _isDeadPermanent:Boolean;
     private var _isPostmortem:Boolean;
     
-    /*
-    function setDead(isPermanent)
-    {
-        //Logger.addObject(_root, "_root", 2);
-        super.setDead(isPermanent);
-    }
-    
-    function updateIfEntryIsPlayer()
-    {
-        super.updateIfEntryIsPlayer();
-        Logger.add("- isPostmortem = " + isPostmortem);
-        Logger.add("- isDeadPermanent = " + isDeadPermanent);
-    }
-    */
-    
     function lightPlayer(visibility)
     {
         /** Behavior is altered temporarily so original icon highlighting works */
@@ -118,32 +103,6 @@ class wot.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
         
         return MinimapMacro.process(text, playerInfo);
     }
-    
-    /*
-    public function get isDeadPermanent():Boolean
-    {
-        //Logger.add("get isDeadPermanent");
-        return _isDeadPermanent;
-    }
-    
-    public function get isPostmortem():Boolean
-    {
-        //Logger.add("get isPostmortem");
-        return _isPostmortem;
-    }
-    
-    public function set isDeadPermanent(val:Boolean):Void
-    {
-        _isDeadPermanent = false;
-        //Logger.add("set isDeadPermanent");
-    }
-    
-    public function set isPostmortem(val:Boolean):Void
-    {
-        _isPostmortem = false;
-        //Logger.add("set isPostmortem");
-    }
-    */
     
     private function get syncProcedureInProgress():Boolean
     {

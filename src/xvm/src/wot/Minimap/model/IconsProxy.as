@@ -10,15 +10,28 @@ import wot.utils.Utils;
 
 class wot.Minimap.model.IconsProxy
 {
-    public static function getAssignedUids():Array
+    /** Used by SyncModel to calculate unassigned uids for subsequent syncrinization */
+    public static function getSyncedUids():Array
     {
-        var minimapEntries:Array = Utils.getChildrenOf(getIcons(), false);
+        var syncedEntries:Array = getSyncedEntries();
+        var syncedUids:Array = [];
         
+        for (var i in syncedEntries)
+            syncedUids.push(syncedEntries[i].uid);
+        
+        return syncedUids;
+    }
+    
+    /** Used by VehiclePositionTracking to get vehicle positions */
+    public static function getSyncedEntries():Array
+    {
+        var minimapEntries:Array = getMinimapEntries();
         var assigned:Array = [];
+        
         for (var i:Number = 0; i < minimapEntries.length; i++)
         {
             if (minimapEntries[i].uid)
-                assigned.push(minimapEntries[i].uid);
+                assigned.push(minimapEntries[i]);
         }
         
         return assigned;
@@ -26,8 +39,8 @@ class wot.Minimap.model.IconsProxy
     
     // -- Private
     
-    private static function getIcons():MovieClip
+    private static function getMinimapEntries():Array
     {
-        return _root.minimap.icons;
+        return Utils.getChildrenOf(_root.minimap.icons, false)
     }
 }
