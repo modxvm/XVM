@@ -155,10 +155,10 @@ class wot.utils.DefaultConfig
                 textOffsetX: 0,
                 textOffsetY: 0,
                 format: {
-                  ally:  "{{level}} {{vehicle}}",
-                  enemy: "{{level}} {{vehicle}}",
-                  squad: "{{level}} {{vehicle}} <i>{{short-nick}}</i>",
-                  oneself: "<b>{{level}} {{vehicle}}</b>",
+                  ally:  "{{level}}",
+                  enemy: "{{level}}",
+                  squad: "{{level}} <i>{{short-nick}}</i>",
+                  oneself: "<b>{{level}}</b>",
                   lostenemy: "<i>{{level}}</i>"
                 },
                 css: {

@@ -51,6 +51,11 @@ class wot.Minimap.model.PlayersPanelProxy
         return allAllyUids.concat(allEnemyUids);
     }
     
+    public static function getEnemyUids():Array
+    {
+        return allUidsOfTeam(getEnemyPlayers());
+    }
+    
     public static function isDead(uid:Number):Boolean
     {
         var player:Object = getPlayerInfo(uid);

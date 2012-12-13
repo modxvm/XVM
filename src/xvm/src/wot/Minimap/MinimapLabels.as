@@ -1,47 +1,36 @@
 import wot.utils.GlobalEventDispatcher;
 import wot.Minimap.MinimapEvent;
-import wot.Minimap.model.VehiclePositionTracking;
-import wot.utils.Logger;
+import wot.Minimap.model.UnitPositionTracking;
 import wot.Minimap.model.MapConfig;
 
-/**
- * TODO: separate ally\enemy alive\dead
- */
 class wot.Minimap.MinimapLabels
 {
-    /** Sends event when lost player take place */
-    private var tracking:VehiclePositionTracking;
+    /** Sends event when some unit is lost */
+    private var tracking:UnitPositionTracking;
     
-    /** TextFiels are attached to this. Returns Minimap.icons MovieClip */
+    /** TextFiels are attached to this. Actually this is Minimap.icons:MovieClip */
     private var labelsContainer:MovieClip;
     
-    /**
-     * Accounting is essential for invalid labels remove and
-     * avoiding redundant new labels attach.
-     */
+    /** Keeps pointers to all created minimap extra labels */
     private var labelTracking:Array;
-    
-    private var lost:Array;
         
     public function MinimapLabels(cont:MovieClip) 
     {
         labelsContainer = cont;
         labelTracking = [];
-        tracking = new VehiclePositionTracking();
         
+        /** Just keep link alive. Sends position update events. */
+        tracking = new UnitPositionTracking();
+        
+        /** Position update event */
         GlobalEventDispatcher.addEventListener(MinimapEvent.LOST_PLAYERS_UPDATE, this, onLostPlayersUpdate);
     }
         
     private function onLostPlayersUpdate(event:MinimapEvent):Void
     {
-        //Logger.addObject(event, "mm.mlabels.onLostPlayersUpdate.event", 3);
-        lost = Array(event.payload);
-        
-        //Logger.add("");
-        //Logger.add("ml.upd");
-        
+        /** No optimization needed. Performance is acceptable. */
         removeAllLabels();
-        createAllLabels();
+        createAllLabels(Array(event.payload)); /** Array of lost players by UnitPositionTracking */
     }
     
     private function removeAllLabels():Void
@@ -53,14 +42,12 @@ class wot.Minimap.MinimapLabels
         }
     }
     
-    private function createAllLabels():Void
+    private function createAllLabels(lost:Array):Void
     {
         /** Find UIDs that present in lost but are absent in labels */
         for (var i in lost)
         {
-            /*
-             * New TextField is attached to Minimap at this moment.
-             */
+            /* New TextField is attached to Minimap at this moment */
             var tf:TextField = createLabel(lost[i]);
             
             /**

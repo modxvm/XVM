@@ -24,5 +24,4 @@ class wot.Minimap.MinimapEvent
     {
         return _payload;
     }
-    
 }
