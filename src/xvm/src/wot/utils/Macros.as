@@ -30,7 +30,7 @@ class wot.utils.Macros
         for (var i = 1; i < len; ++i)
         {
             var arr2:Array = formatArr[i].split("}}", 2);
-            if (arr2.length == 1)
+            if (arr2.length == 1 || (options && options.skip && options.skip[arr2[0]]))
                 res += "{{" + formatArr[i];
             else
             {
@@ -129,43 +129,6 @@ class wot.utils.Macros
             pdata["a:hp_ratio"] = pdata["a:hp-ratio"];
 
             return true;
-
-/*        // cut player name for field width
-            if (format.indexOf("{{nick}}") > -1 || format.indexOf("{{name}}") > -1 || format.indexOf("{{clan}}") > -1)
-            {
-                var pname: String = Utils.GetPlayerName(name);
-                var cname: String = Utils.GetClanNameWithBrackets(name);
-                if (width >= 0 && tf)
-                {
-                    if (s_widthTester == null)
-                        createWidthTester();
-                    while (pname + cname != "")
-                    {
-                        s_widthTester.htmlText = format
-                            .split("{{nick}}").join(pname + cname)
-                            .split("{{name}}").join(pname)
-                            .split("{{clan}}").join(cname);
-                        if (Math.round(s_widthTester.getLineMetrics(0).width) + 4 <= width) // 4 is a size of gutters
-                        {
-                            //Logger.add("width=" + width + " _width=" + s_widthTester._width + " lineWidth=" + Math.round(s_widthTester.getLineMetrics(0).width) + " " + str);
-                            break;
-                        }
-                        if (cname != "")
-                            cname = cname.substr(0, cname.length - 1);
-                        else
-                            pname = pname.substr(0, pname.length - 1);
-                    }
-                }
-                formatArr = format.split("{{nick}}");
-                if (formatArr.length > 1)
-                    format = formatArr.join(pname + cname);
-                formatArr = format.split("{{name}}");
-                if (formatArr.length > 1)
-                    format = formatArr.join(pname);
-                formatArr = format.split("{{clan}}");
-                if (formatArr.length > 1)
-                    format = formatArr.join(cname);
-            }*/
         });
     }
 
@@ -323,15 +286,4 @@ class wot.utils.Macros
                 return "unknown";
         }
     }
-/*
-    private static function createWidthTester()
-    {
-        s_widthTester = _root.createTextField("widthTester", _root.getNextHighestDepth(), 0, 0, 268, 20);
-        s_widthTester.autoSize = false;
-        s_widthTester.html = true;
-        s_widthTester.condenseWhite = true;
-        s_widthTester._visible = false;
-        s_widthTester.setNewTextFormat(tf);
-    }
-*/
 }

@@ -75,7 +75,6 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
             centeredTextY = m_names._y - 5;
             m_names.verticalAlign = "top"; // for incomplete team - cannot set to "center"
             m_vehicles.verticalAlign = "top"; // for incomplete team - cannot set to "center"
-
         }
 
         if (data)
@@ -217,12 +216,23 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
             var key = "PP/" + deadState + "/" + data.label + "/" + data.vehicle + "/" + state + "/" + m_fieldType;
             text = Cache.Get(key, function()
             {
-                return Macros.Format(data.label, format,
+                if ((state != "medium" && state != "medium2" && state != "large") ||
+                    (format.indexOf("{{nick}}") == -1 && format.indexOf("{{name}}") == -1 && format.indexOf("{{clan}}") == -1))
+                {
+                    return Macros.Format(data.label, format, { darken: deadState == Defines.DEADSTATE_DEAD });
+                }
+
+                var fmt = Macros.Format(data.label, format,
                     {
-                        width: (state == "medium" || state == "medium2" || state == "large") ? Config.s_config.playersPanel[state].width : -1,
-                        textFormat: (state == "medium" || state == "medium2" || state == "large") ? names.getNewTextFormat() : null,
+                        skip: { nick:1, name:1, clan:1 },
                         darken: deadState == Defines.DEADSTATE_DEAD
                     });
+                return PlayersPanel.formatNamesForWidth(
+                    fmt,
+                    Macros.Format(data.label, "{{nick}}"),
+                    Config.s_config.playersPanel[state].width,
+                    names.getNewTextFormat());
+                
             });
             //Logger.add("after: " + text);
         }
@@ -234,6 +244,57 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
      * XVM
      */
 
+    private static var s_widthTester:TextField;
+    private static function createWidthTester(textFormat:TextFormat)
+    {
+        s_widthTester = _root.createTextField("widthTester", _root.getNextHighestDepth(), 0, 0, 268, 20);
+        s_widthTester.autoSize = false;
+        s_widthTester.html = true;
+        s_widthTester.condenseWhite = true;
+        s_widthTester._visible = false;
+        s_widthTester.setNewTextFormat(textFormat);
+    }
+
+    private static function formatNamesForWidth(format:String, playerName: String, width:Number, textFormat:TextFormat):String
+    {
+        if (width < 0 || !textFormat)
+            return format;
+
+        var pname:String = "";
+        var cname:String = "";
+        if (width > 0)
+        {
+            // cut player name for field width
+            pname = Utils.GetPlayerName(playerName);
+            cname = Utils.GetClanNameWithBrackets(playerName);
+            {
+                if (s_widthTester == null)
+                    createWidthTester();
+                while (pname + cname != "")
+                {
+                    s_widthTester.htmlText = format
+                        .split("{{nick}}").join(pname + cname)
+                        .split("{{name}}").join(pname)
+                        .split("{{clan}}").join(cname);
+                    if (Math.round(s_widthTester.getLineMetrics(0).width) + 4 <= width) // 4 is a size of gutters
+                    {
+                        //Logger.add("width=" + width + " _width=" + s_widthTester._width + " lineWidth=" + Math.round(s_widthTester.getLineMetrics(0).width) + " " + str);
+                        break;
+                    }
+                    if (cname != "")
+                        cname = cname.substr(0, cname.length - 1);
+                    else
+                        pname = pname.substr(0, pname.length - 1);
+                }
+            }
+        }
+
+        format = format.split("{{nick}}").join(pname + cname);
+        format = format.split("{{name}}").join(pname);
+        format = format.split("{{clan}}").join(cname);
+        return format;
+    }     
+     
     function XVMAdjustPanelSize()
     {
         //Logger.add("PlayersPanel.XVMAdjustPanelSize()");
