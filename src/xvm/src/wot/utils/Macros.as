@@ -242,14 +242,14 @@ class wot.utils.Macros
         {
             case "RU":
                 if (label == "XlebniDizele4ku")
-                    return "Хлебни Дизелёчку! (XVM)";
+                    return "ХлебниДизелёчку!-XVM";
                 if (label == "sirmax2" || label == "0x01")
                     return "Сэр Макс (XVM)";
                 break;
 
             case "CT":
                 if (label == "XlebniDizele4ku_RU")
-                    return "Хлебни Дизелёчку! (XVM";
+                    return "XlebniDizele4ku_XVM";
                 if (label == "sirmax2_RU" || label == "0x01_RU")
                     return "Sir Max (XVM)";
                 break;
