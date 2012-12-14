@@ -1,4 +1,17 @@
 ﻿  * capmod: fixed capture bar fill at 100%
+  * code optimization
+  * updating per-vehicle efficiency formula:
+      TEFF: E
+      0..499: 1 - very bad player
+      500..799: 2 - bad player
+      800..999: 3 - below average
+      1000..1149: 4 - average
+      1150..1299: 5 - above average
+      1300..1449: 6 - good
+      1450..1599: 7 - very good
+      1600..1799: 8 - great
+      1800..1999: 9 - master
+      2000+: E - Expert (top-100 players on this vehicle)
 
 XVM-3.2.0:
   * adaptation to WoT 0.8.2

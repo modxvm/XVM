@@ -251,11 +251,14 @@ class wot.utils.StatLoader
                     var vi3 = VehicleInfo.getInfo3(stat.vn);
                     if (vi3 == null)
                         Logger.add("ERROR: vehicle info (3) missed: " + stat.vn + ". Please notify XVM support.");
-                    else
+                    else if (stat.tdb > 0 && stat.tfb > 0 && stat.tsb > 0)
                     {
-                        var s = vi3.b > 0 && vi3.s > 0 && stat.tsb > 0 ? stat.tsb / (vi3.s / vi3.b) : 1;
-                        var d = vi3.b > 0 && vi3.d > 0 && stat.tdb > 0 ? stat.tdb / (vi3.d / vi3.b) : 1;
-                        var f = vi3.b > 0 && vi3.f > 0 && stat.tfb > 0 ? stat.tfb / (vi3.f / vi3.b) : 1;
+                        var d = Math.max(0, 1 + (stat.tdb - vi3.avgD) / (vi3.topD - vi3.avgD));
+                        var f = Math.max(0, 1 + (stat.tfb - vi3.avgF) / (vi3.topF - vi3.avgF));
+                        var s = Math.max(0, 1 + (stat.tsb - vi3.avgS) / (vi3.topS - vi3.avgS));
+/*                        var d = stat.tdb < vi3.avgD ? stat.tdb / vi3.avgD : 1 + (stat.tdb - vi3.avgD) / (vi3.topD - vi3.avgD);
+                        var f = stat.tfb < vi3.avgF ? stat.tfb / vi3.avgF : 1 + (stat.tfb - vi3.avgF) / (vi3.topF - vi3.avgF);
+                        var s = stat.tsb < vi3.avgS ? stat.tsb / vi3.avgS : 1 + (stat.tsb - vi3.avgS) / (vi3.topS - vi3.avgS);*/
                         var EC = Config.s_config.consts.E[vi.type][vi.level - 1];
                         stat.te = (d * EC.CD + f * EC.CF + s * EC.CS) / (EC.CD + EC.CF + EC.CS);
                     }
@@ -265,11 +268,11 @@ class wot.utils.StatLoader
                     : (stat.teff < 500) ? 1
                     : (stat.teff < 800) ? 2
                     : (stat.teff < 1000) ? 3
-                    : (stat.teff < 1200) ? 4
-                    : (stat.teff < 1400) ? 5
-                    : (stat.teff < 1600) ? 6
-                    : (stat.teff < 1800) ? 7
-                    : (stat.teff < 2000) ? 8
+                    : (stat.teff < 1150) ? 4
+                    : (stat.teff < 1300) ? 5
+                    : (stat.teff < 1450) ? 6
+                    : (stat.teff < 1600) ? 7
+                    : (stat.teff < 1800) ? 8
                     : (stat.teff < 2500) ? 9 : 10;
                 //stat.te = stat.tdv == 0 ? null : Math.max(0, Math.min(9, Math.round(stat.te * 5)));
             }

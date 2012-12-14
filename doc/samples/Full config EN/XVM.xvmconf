@@ -1575,7 +1575,7 @@
     "e": [
       { "value": 0.01, "color": "0xFCFCFC" },
       { "value": 2,    "color": "0xFE0E00" },
-      { "value": 3,    "color": "0xFE7903" },
+      { "value": 4,    "color": "0xFE7903" },
       { "value": 5,    "color": "0xF8F400" },
       { "value": 7,    "color": "0x60FF00" },
       { "value": 9,    "color": "0x02C9B3" },
