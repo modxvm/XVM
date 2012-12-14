@@ -146,8 +146,8 @@
       "shadow": {            // Тень полей
         "color": "0x000000", // Цвет
         "alpha": 50,         // Прозрачность 0-100
-        "blur": 6,           // Размытие 0-255
-        "strength": 3        // Сила 0-255
+        "blur": 6,           // Размытие 0-255; 6 рекомендовано
+        "strength": 3        // Сила 0-255; 3 рекомендовано
       }
     },
     "ally": { // Союзник
@@ -181,7 +181,8 @@
       "ally":    "font-family:$FieldFont; font-size:8px; color:#BBEEBB;", // Для союзников
       "enemy":   "font-family:$FieldFont; font-size:8px; color:#EEBBBB;", // Для врагов
       "squad":   "font-family:$FieldFont; font-size:8px; color:#FFEE44;", // Для совзводных
-      "oneself": "font-family:$FieldFont; font-size:8px; color:#EEEEEE;"  // Для себя
+      "oneself": "font-family:$FieldFont; font-size:8px; color:#EEEEEE;",  // Для себя и приёмника камеры в случае переключения при смерти
+      "lostenemy":"font-family:$FieldFont; font-size:8px; color:#EEEEEE;"  // Для пропавших врагов; не зависит от iconScale
     }
   },
   // Блок маркеров над танками.

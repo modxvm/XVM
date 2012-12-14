@@ -146,8 +146,8 @@
       "shadow": {            // Fields shadow
         "color": "0x000000", // Color
         "alpha": 50,         // Alpha 0-100
-        "blur": 6,           // Blur 0-255
-        "strength": 3        // Strength 0-255
+        "blur": 6,           // Blur 0-255; 6 is recommended
+        "strength": 3        // Strength 0-255; 3 is recommended
       }
     },
     "ally": {
@@ -181,7 +181,8 @@
       "ally":    "font-family:$FieldFont; font-size:8px; color:#BBEEBB;", // Ally
       "enemy":   "font-family:$FieldFont; font-size:8px; color:#EEBBBB;", // Enemy
       "squad":   "font-family:$FieldFont; font-size:8px; color:#FFEE44;", // Squadmates
-      "oneself": "font-family:$FieldFont; font-size:8px; color:#EEEEEE;"  // For oneself and camera receiver in case of death
+      "oneself": "font-family:$FieldFont; font-size:8px; color:#EEEEEE;", // For oneself and camera receiver in case of death
+      "lostenemy":"font-family:$FieldFont; font-size:8px; color:#EEEEEE;" // Lost enemy positions; does not depend on iconScale
     }
   },
   // OVER-TARGET MARKERS
