@@ -181,8 +181,8 @@
       "ally":    "font-family:$FieldFont; font-size:8px; color:#BBEEBB;", // Для союзников
       "enemy":   "font-family:$FieldFont; font-size:8px; color:#EEBBBB;", // Для врагов
       "squad":   "font-family:$FieldFont; font-size:8px; color:#FFEE44;", // Для совзводных
-      "oneself": "font-family:$FieldFont; font-size:8px; color:#EEEEEE;",  // Для себя и приёмника камеры в случае переключения при смерти
-      "lostenemy":"font-family:$FieldFont; font-size:8px; color:#EEEEEE;"  // Для пропавших врагов; не зависит от iconScale
+      "oneself": "font-family:$FieldFont; font-size:8px; color:#EEEEEE;", // Для себя и приёмника камеры в случае переключения при смерти
+      "lostenemy":"font-family:$FieldFont; font-size:8px; color:#EEEEEE;" // Для пропавших врагов; не зависит от iconScale
     }
   },
   // Блок маркеров над танками.

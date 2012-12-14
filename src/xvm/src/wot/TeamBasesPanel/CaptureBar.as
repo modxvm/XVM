@@ -111,8 +111,13 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
             * "TeamBasesPanel.setCaptured(id, title)" function
             * is overriden with empty behavior to concentrate macro modding at CaptureBar.
             */
+           
+            /** Called so cap bar is filled completely to 100% */
+            super.updateProgress(newPointsVal);
+            
             m_titleTF.htmlText = m_macro.getCaptureDoneText();
             m_timerTF.htmlText = "";
+            
             return;
         }
         

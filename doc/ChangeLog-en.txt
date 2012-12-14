@@ -1,4 +1,6 @@
-﻿XVM-3.2.0:
+﻿  * capmod: fixed capture bar fill at 100%
+
+XVM-3.2.0:
   * adaptation to WoT 0.8.2
   * new vehicles added
   * color palette revised
