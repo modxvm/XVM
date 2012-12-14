@@ -34,7 +34,7 @@ var updateTopData = function(top, value) {
 var go = function() {
     var n = 0;
 
-    db.players.find({_id:{$lt:5000000000}}).sort({_id:1}).limit(limit).forEach(function(doc) {
+    db.players.find({_id:{$lt:500000000}}).sort({_id:1}).limit(limit).forEach(function(doc) {
         n++;
         if (n % 1000 == 0)
             print(n + ": " + doc._id);
