@@ -1,6 +1,6 @@
 #!/bin/bash
 
-port=27020
+port=27017
 limit=50
 limitHi=50
 limitLo=1
@@ -139,11 +139,11 @@ prepare()
 	    cnt=$(($cnt + 1))
 	    [ $cnt -ge $limit ] && break
 	done
-	if [ "$3" = "1" ]; then
+#	if [ "$3" = "1" ]; then
 	    echo -n "[$limit] $1/$2: $last..$first "
-	else
-	    echo -n "[$limit] $1/$2: $first..$last "
-	fi
+#	else
+#	    echo -n "[$limit] $1/$2: $first..$last "
+#	fi
 	update
     done
 }
@@ -159,5 +159,5 @@ for id in $(cat $fn); do
     ids[$id]=$id
     prepare $pos $total 1
 done
-prepare $pos $total
+prepare $pos $total 1
 rm -f $fn

@@ -36,6 +36,17 @@ module.exports = (function()
         }
     };
 
+    var getVehicleType = function(vclass) {
+        switch(vclass.toLowerCase()) {
+            case "lighttank": return "LT";
+            case "mediumtank": return "MT";
+            case "heavytank": return "HT";
+            case "at-spg": return "TD";
+            case "spg": return "SPG";
+            default: return "unknown";
+        }
+    }
+
     // log
     var log = function(str) {
         var now = new Date();
@@ -54,6 +65,7 @@ module.exports = (function()
     // exports
     return {
         calculateEfficiency: calculateEfficiency,
+        getVehicleType: getVehicleType,
         log: log,
         debug: debug
     }
