@@ -26,32 +26,32 @@
     "showChancesExp": true,
     "removeSquadIcon": false,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft": "{{vehicle}} <font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{e:3}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
-    "formatRight": "<font face='Consolas' size='11'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:eff}}'>{{e:3}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font> {{vehicle}}"
+    "formatLeft":  "<font face='Consolas' size='11'><font color='{{c:e}}'>{{teff}} {{e}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:tdv}}'>{{tdv}}</font> <font color='{{c:tfb}}'>{{tfb}}</font> <font color='{{c:tsb}}'>{{tsb}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
+    "formatRight": "<font face='Consolas' size='11'><font color='{{c:e}}'>{{teff}} {{e}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:tdv}}'>{{tdv}}</font> <font color='{{c:tfb}}'>{{tfb}}</font> <font color='{{c:tsb}}'>{{tsb}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>"
   },
   "statisticForm": {
     "showChances": true,
     "showChancesExp": true,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft": "{{vehicle}} <font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{e:3}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
-    "formatRight": "<font face='Consolas' size='11'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:eff}}'>{{e:3}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font> {{vehicle}}"
+    "formatLeft":  "<font face='Consolas' size='11'><font color='{{c:e}}'>{{teff}} {{e}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:tdv}}'>{{tdv}}</font> <font color='{{c:tfb}}'>{{tfb}}</font> <font color='{{c:tsb}}'>{{tsb}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
+    "formatRight": "<font face='Consolas' size='11'><font color='{{c:e}}'>{{teff}} {{e}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:tdv}}'>{{tdv}}</font> <font color='{{c:tfb}}'>{{tfb}}</font> <font color='{{c:tsb}}'>{{tsb}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>"
   },
   "playersPanel": {
     "alpha": 50,
     "removeSquadIcon": true,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
     "medium": {
-      "formatLeft": "<font color='{{c:eff}}'>{{nick}}</font>",
-      "formatRight": "<font color='{{c:eff}}'>{{nick}}</font>"
+      "formatLeft": "<font color='{{c:e}}'>{{name}}</font><font color='#cccccc'>{{clan}}</font>",
+      "formatRight": "<font color='{{c:e}}'>{{name}}</font><font color='#cccccc'>{{clan}}</font>"
     },
     "medium2": {
-      "formatLeft": "<font color='{{c:eff}}'>{{vehicle}}</font>",
-      "formatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
+      "formatLeft": "<font color='{{c:e}}'>{{vehicle}}</font>",
+      "formatRight": "<font color='{{c:e}}'>{{vehicle}}</font>"
     },
     "large": {
       "width": 120,
-      "nickFormatLeft": "<font color='{{c:eff}}'>{{rating}}</font> {{nick}}",
-      "nickFormatRight": "{{nick}} <font color='{{c:eff}}'>{{rating}}</font>",
+      "nickFormatLeft": "<font color='{{c:e}}'>{{rating}}</font> {{name}}<font color='#cccccc'>{{clan}}</font>",
+      "nickFormatRight": "{{name}}<font color='#cccccc'>{{clan}}</font> <font color='{{c:e}}'>{{rating}}</font>",
       "vehicleFormatLeft": "",
       "vehicleFormatRight": ""
     }
@@ -112,17 +112,17 @@
             },
             {
               "visible": true,
-              "name": "Dynamic HP",
-              "x": 0, "y": -39, "alpha": "{{a:hp}}",
+              "name": "Rating marks",
+              "x": 0, "y": -35,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<font face='$FieldFont' size='11' color='{{c:hp}}'><b>{{hp}}</b></font>"
+              "format": "<font face='Symbol' color='#CCCCCC' size='11'><font color='{{c:e}}'><b>·</b> </font><font color='{{c:tdv}}'><b>·</b></font><font color='{{c:tfb}}'><b>·</b></font><font color='{{c:tsb}}'><b>·</b></font></font>"
             },
             {
               "visible": true,
-              "name": "Rating marks",
-              "x": 25, "y": -15,
+              "name": "Dynamic HP",
+              "x": 0, "y": -43, "alpha": "{{a:hp}}",
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<font face='Symbol' size='11' color='{{c:eff}}'><b>·</b></font>"
+              "format": "<font face='$FieldFont' size='11' color='{{c:hp}}'><b>{{hp}}</b></font>"
             }
           ]
         },
@@ -131,7 +131,7 @@
             "maxScale": 80
           },
           "contourIcon": {
-            "visible": true,
+            "visible": false,
             "x": 0,
             "y": -65,
             "alpha": 100,
@@ -265,17 +265,17 @@
             },
             {
               "visible": true,
-              "name": "HP",
-              "x": 0, "y": -39, "alpha": "{{a:hp}}",
+              "name": "Rating marks",
+              "x": 0, "y": -35,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<font face='$FieldFont' size='11' color='{{c:hp}}'><b>{{hp}}</b></font>"
+              "format": "<font face='Symbol' color='#CCCCCC' size='11'><font color='{{c:e}}'><b>·</b> </font><font color='{{c:tdv}}'><b>·</b></font><font color='{{c:tfb}}'><b>·</b></font><font color='{{c:tsb}}'><b>·</b></font></font>"
             },
             {
               "visible": true,
-              "name": "Rating marks",
-              "x": 25, "y": -15,
+              "name": "HP",
+              "x": 0, "y": -43, "alpha": "{{a:hp}}",
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<font face='Symbol' size='11' color='{{c:eff}}'><b>·</b></font>"
+              "format": "<font face='$FieldFont' size='11' color='{{c:hp}}'><b>{{hp}}</b></font>"
             }
           ]
         },
@@ -284,7 +284,7 @@
             "maxScale": 80
           },
           "contourIcon": {
-            "visible": true,
+            "visible": false,
             "x": 0,
             "y": -65,
             "alpha": 100,

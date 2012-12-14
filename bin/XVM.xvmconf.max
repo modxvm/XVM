@@ -115,7 +115,7 @@
               "name": "Rating marks",
               "x": 0, "y": -35,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<font face='Symbol' size='11'><font color='{{c:e}}'><b>·</b> </font><font color='{{c:tdv}}'><b>·</b></font><font color='{{c:tfb}}'><b>·</b></font><font color='{{c:tsb}}'><b>·</b></font></font>"
+              "format": "<font face='Symbol' color='#CCCCCC' size='11'><font color='{{c:e}}'><b>·</b> </font><font color='{{c:tdv}}'><b>·</b></font><font color='{{c:tfb}}'><b>·</b></font><font color='{{c:tsb}}'><b>·</b></font></font>"
             },
             {
               "visible": true,
@@ -131,7 +131,7 @@
             "maxScale": 80
           },
           "contourIcon": {
-            "visible": true,
+            "visible": false,
             "x": 0,
             "y": -65,
             "alpha": 100,
@@ -268,7 +268,7 @@
               "name": "Rating marks",
               "x": 0, "y": -35,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<font face='Symbol' size='11'><font color='{{c:e}}'><b>·</b> </font><font color='{{c:tdv}}'><b>·</b></font><font color='{{c:tfb}}'><b>·</b></font><font color='{{c:tsb}}'><b>·</b></font></font>"
+              "format": "<font face='Symbol' color='#CCCCCC' size='11'><font color='{{c:e}}'><b>·</b> </font><font color='{{c:tdv}}'><b>·</b></font><font color='{{c:tfb}}'><b>·</b></font><font color='{{c:tsb}}'><b>·</b></font></font>"
             },
             {
               "visible": true,
@@ -284,7 +284,7 @@
             "maxScale": 80
           },
           "contourIcon": {
-            "visible": true,
+            "visible": false,
             "x": 0,
             "y": -65,
             "alpha": 100,

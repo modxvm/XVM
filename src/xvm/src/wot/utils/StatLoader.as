@@ -273,8 +273,7 @@ class wot.utils.StatLoader
                     : (stat.teff < 1450) ? 6
                     : (stat.teff < 1600) ? 7
                     : (stat.teff < 1800) ? 8
-                    : (stat.teff < 2500) ? 9 : 10;
-                //stat.te = stat.tdv == 0 ? null : Math.max(0, Math.min(9, Math.round(stat.te * 5)));
+                    : (stat.teff < 2000) ? 9 : 10;
             }
 
             // Normalize result
