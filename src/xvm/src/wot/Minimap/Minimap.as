@@ -1,6 +1,5 @@
 import wot.Minimap.MinimapEvent;
 import wot.utils.GlobalEventDispatcher;
-import wot.Minimap.MinimapLabels;
 import wot.Minimap.model.SyncModel;
 import wot.utils.Utils;
 import wot.Minimap.model.MapConfig;
@@ -10,7 +9,7 @@ import wot.Minimap.model.MapConfig;
  * 
  * Minimap extends MinimapEntity.
  * 
- * Extra functionality implemented:
+ * Extra functionality implemented at M:
  * ) Level\type\nick\etc at icon on Minimap.
  *    Achieved exploiting WG highlighting feature.
  *    Original light behaviour was Ctrl + mouseOver at PlayersPanel -> icon highlight at Minimap.
@@ -25,8 +24,6 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
 {
     /** Used at MinimapEntry to get testUid */
     public var sync:SyncModel;
-    
-    private var labels:MinimapLabels;
     
     private var isMinimapReady:Boolean = false;
     private var isAllyPlayersPanelReady:Boolean = false;
@@ -105,7 +102,5 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
         
         sync = new SyncModel();
         sync.updateIconsExtension();
-        
-        labels = new MinimapLabels(icons);
     }
 }
