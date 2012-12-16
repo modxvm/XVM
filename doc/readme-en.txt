@@ -222,3 +222,10 @@
   Negative x, y values allow to bind the text to the right and bottom edges for
   the same behavior with different screen resolutions.
   Will work only with running xvm-stat!!!
+
+  Clock in battle and in battle loading screen.
+  Format: Y:year, M:month, D:day, H:hour, N:minute, S:second. "" - remove clock.
+  For example:
+  "clockFormat": "H:N"          => 01:23
+  "clockFormat": "Y-M-D H:N:S"  => 2012-12-31 01:23:45
+  Also possible to use HTML in clock in battle.
