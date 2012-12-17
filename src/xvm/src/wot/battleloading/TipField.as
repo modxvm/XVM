@@ -10,6 +10,7 @@ class wot.battleloading.TipField
     {
         this.form_mc = form_mc;
         GlobalEventDispatcher.addEventListener("set_info", this, setInfoFieldData);
+        setInfoFieldData( { } );
     }
 
     private function setInfoFieldData(event)
