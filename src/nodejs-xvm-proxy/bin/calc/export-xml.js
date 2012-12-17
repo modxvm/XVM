@@ -19,9 +19,9 @@ var doExport = function(x){
     s /= x.topS.length;*/
 
     d = parseInt(x.topD[0]);
-    ed = parseInt(x.topED[0]);
-    f = parseInt(x.topF[0]);
-    s = parseInt(x.topS[0]);
+    ed = parseFloat(x.topED[0]);
+    f = parseFloat(x.topF[0]);
+    s = parseFloat(x.topS[0]);
 
     print("<v>" +
         "<vname>" + x.vname.toLowerCase() + "</vname>" +
