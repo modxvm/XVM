@@ -4,7 +4,8 @@ var doExport = function(x){
     if (x.region != "RU")
         return;
     var d = 0, ed = 0, f = 0, s = 0;
-    for (var i in x.topD)
+
+/*    for (var i in x.topD)
         d += x.topD[i];
     d /= x.topD.length;
     for (var i in x.topED)
@@ -15,9 +16,17 @@ var doExport = function(x){
     f /= x.topF.length;
     for (var i in x.topS)
         s += x.topS[i];
-    s /= x.topS.length;
+    s /= x.topS.length;*/
+
+    d = parseInt(x.topD[0]);
+    ed = parseInt(x.topED[0]);
+    f = parseInt(x.topF[0]);
+    s = parseInt(x.topS[0]);
+
     print("<v>" +
         "<vname>" + x.vname.toLowerCase() + "</vname>" +
+        "<level>" + x.l + "</level>" +
+        "<class>" + x.cl + "</class>" +
         "<hp>" + x.hp + "</hp>" +
         "<b>" + x.b + "</b>" +
         "<w>" + x.w + "</w>" +

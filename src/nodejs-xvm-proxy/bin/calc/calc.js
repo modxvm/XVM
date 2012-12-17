@@ -1,6 +1,7 @@
 limit = 0
 //limit = 10000
 toplen = 100
+minB = 100
 
 var region = [ "RU", "EU", "US" ];
 var data = [ {}, {}, {} ];
@@ -48,7 +49,7 @@ var go = function() {
             var v = doc.v[i];
 
             // skip items without data
-            if (!v.d)
+            if (!v.l || !v.b || v.b < (minB*v.l/10) || !v.w || !v.d || !v.f || ! v.s)
                 continue;
 
             var key = {
@@ -70,21 +71,26 @@ var go = function() {
 
             var d = data[key.region][key.vname];
             d.cnt++;
-            d.b += v.b || 0;
-            d.w += v.w || 0;
-            d.d += v.d || 0;
-            d.f += v.f || 0;
-            d.s += v.s || 0;
-            if (v.b > 100)
+            d.b += v.b;
+            d.w += v.w;
+            d.d += v.d;
+            d.f += v.f;
+            d.s += v.s;
+
+            if (v.b > minB)
             {
-//                if (d.vname == "T1_E6") {
-                updateTopData(d.topD, (v.d || 0) / v.b);
+//            if (d.vname == "T1_E6") {
+                var D = v.d / v.b;
+                if (D > 4000)
+                    print(doc._id + "[" + v.name + "]: D=" + D.toFixed(0) + " B=" + v.b);
+
+                updateTopData(d.topD, D);
                 if (d.hp > 0)
-                    updateTopData(d.topED, (v.d || 0) / v.b / d.hp);
-                updateTopData(d.topF, (v.f || 0) / v.b);
-                updateTopData(d.topS, (v.s || 0) / v.b);
+                    updateTopData(d.topED, D / d.hp);
+                updateTopData(d.topF, v.f / v.b);
+                updateTopData(d.topS, v.s / v.b);
 //                printjson(d.topD);
-//                }
+//            }
             }
         }
     });
