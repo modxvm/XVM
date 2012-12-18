@@ -8,6 +8,7 @@ import wot.utils.GlobalEventDispatcher
 import wot.utils.Logger;
 import wot.utils.Macros;
 import wot.utils.StatLoader;
+import wot.utils.StatData;
 import wot.utils.Utils;
 import wot.Minimap.MinimapEvent;
 
@@ -66,8 +67,8 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 
         var start = new Date();
 
-        m_names.condenseWhite = true;
-        m_vehicles.condenseWhite = true;
+        m_names.condenseWhite = !StatData.s_loaded;
+        m_vehicles.condenseWhite = !StatData.s_loaded;
 
         if (!_init)
         {
@@ -250,7 +251,6 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         s_widthTester = _root.createTextField("widthTester", _root.getNextHighestDepth(), 0, 0, 268, 20);
         s_widthTester.autoSize = false;
         s_widthTester.html = true;
-        s_widthTester.condenseWhite = true;
         s_widthTester._visible = false;
         s_widthTester.setNewTextFormat(textFormat);
     }
@@ -270,6 +270,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
             {
                 if (s_widthTester == null)
                     createWidthTester();
+                s_widthTester.condenseWhite = !StatData.s_loaded;
                 while (pname + cname != "")
                 {
                     s_widthTester.htmlText = format
