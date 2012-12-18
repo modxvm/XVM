@@ -145,8 +145,6 @@ class wot.utils.Macros
         // vars
         var r:Number = Utils.toInt(stat.r, 0);
         var eff:Number = Utils.toInt(stat.e, 0);
-        var e:Number = Utils.toInt(stat.te, 0);
-        var teff:Number = Utils.toInt(stat.teff, 0);
         var b:Number = Utils.toInt(stat.b, 0);
         var w:Number = Utils.toInt(stat.w, 0);
         var tr:Number = Utils.toInt(stat.tr, 0);
@@ -158,9 +156,9 @@ class wot.utils.Macros
         pdata["eff"] = eff <= 0 ? "--" : String(eff);
         pdata["eff:4"] = eff <= 0 ? " -- " : Utils.padLeft(pdata["eff"], 4);
         // {{e}}
-        pdata["e"] = e <= 0 ? "-" : e >= 10 ? "E" : String(e);
+        pdata["e"] = stat.te == null ? "-" : stat.te >= 10 ? "E" : String(stat.te);
         // {{teff}}
-        pdata["teff"] = teff <= 0 ? " -- " : Utils.padLeft(String(teff), 4);
+        pdata["teff"] = stat.teff == null ? " -- " : Utils.padLeft(String(stat.teff), 4);
 
         // {{rating}}, {{rating:3}}
         pdata["rating"] = r <= 0 ? "--%" : String(r) + "%";
@@ -189,22 +187,22 @@ class wot.utils.Macros
         pdata["t-hb"] = tb <= 0 ? "" : String(Math.round(tb / 100)) + "h";
         pdata["t-hb:3"] = Utils.padLeft(pdata["t-hb"], 3);
         // {{tdb}}, {{tdb:4}}
-        pdata["tdb"] = stat.tdb <= 0 ? "" : String(stat.tdb);
+        pdata["tdb"] = stat.tdb == null ? "   " : String(stat.tdb);
         pdata["tdb:4"] = Utils.padLeft(pdata["tdb"], 4);
         // {{tdv}}
-        pdata["tdv"] = stat.tdv <= 0 ? "" : Sprintf.format("%.1f", stat.tdv);
+        pdata["tdv"] = stat.tdv == null ? "   " : Sprintf.format("%.1f", stat.tdv);
         // {{tfb}}
-        pdata["tfb"] = stat.tfb <= 0 ? "" : Sprintf.format("%.1f", stat.tfb);
+        pdata["tfb"] = stat.tfb == null ? "   " : Sprintf.format("%.1f", stat.tfb);
         // {{tsb}}
-        pdata["tsb"] = stat.tsb <= 0 ? "" : Sprintf.format("%.1f", stat.tsb);
+        pdata["tsb"] = stat.tsb == null ? "   " : Sprintf.format("%.1f", stat.tsb);
 
         // Dynamic colors
         // {{c:eff}}
         pdata["c:eff"] = eff <= 0 ? ""
             : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff, "#", o.darken) };
         // {{c:e}}
-        pdata["c:e"] = e <= 0 ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, e, "#", o.darken); }
+        pdata["c:e"] = stat.te == null ? ""
+            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.te, "#", o.darken); }
         // {{c:rating}}
         pdata["c:rating"] = r <= 0 ? ""
             : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, r, "#", o.darken); }

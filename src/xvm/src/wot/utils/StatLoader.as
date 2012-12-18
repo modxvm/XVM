@@ -225,63 +225,62 @@ class wot.utils.StatLoader
             stat.tr = Math.round(Or - (Or - Tr) * Tb / Tl);
         }
 
+        stat.tdb = null;
+        stat.tfb = null;
+        stat.tsb = null;
+        stat.tdv = null;
+        stat.te = null;
+        stat.teff = null;
+        if (stat.tb == null || stat.tb <= 0)
+            return stat;
+        
+        stat.tdb = stat.td == null || stat.td < 0 ? null : Math.round(stat.td / stat.tb);
+        stat.tfb = stat.tf == null || stat.tf < 0 ? null : Math.round(stat.tf / stat.tb * 10) / 10;
+        stat.tsb = stat.ts == null || stat.ts < 0 ? null : Math.round(stat.ts / stat.tb * 10) / 10;
         //Logger.addObject(stat);
-        stat.tdb = stat.td <= 0 ? 0 : Math.round(stat.td / stat.tb);
-        stat.tfb = stat.tf <= 0 ? 0 : Math.round(stat.tf / stat.tb * 10) / 10;
-        stat.tsb = stat.ts <= 0 ? 0 : Math.round(stat.ts / stat.tb * 10) / 10;
 
-        stat.tdv = 0;
-        stat.te = 0;
-
-        var info = VehicleInfo.getInfo2(stat.vn);
-        if (info == null)
-            Logger.add("Warning: no data for " + stat.vn + ". Check for new XVM version.");
-        else
+        var vi3 = VehicleInfo.getInfo3(stat.vn);
+        if (!vi3 || !vi3.cl || !vi3.l)
         {
-            stat.tdv = stat.td <= 0 ? 0 : stat.td / stat.tb / info.hptop;
-
-            if (stat.tdv > 0)
-            {
-                stat.te = 0;
-                var vi = VehicleInfo.getInfoFromMappedName(stat.vn);
-                if (vi == null || !vi.level || !vi.type)
-                    Logger.add("ERROR: vehicle info (1) missed: " + stat.vn + ". Please notify XVM support.");
-                else
-                {
-                    var vi3 = VehicleInfo.getInfo3(stat.vn);
-                    if (vi3 == null)
-                        Logger.add("ERROR: vehicle info (3) missed: " + stat.vn + ". Please notify XVM support.");
-                    else if (stat.tdb > 0 && stat.tfb > 0 && stat.tsb > 0)
-                    {
-                        var d = Math.max(0, 1 + (stat.tdb - vi3.avgD) / (vi3.topD - vi3.avgD));
-                        var f = Math.max(0, 1 + (stat.tfb - vi3.avgF) / (vi3.topF - vi3.avgF));
-                        var s = Math.max(0, 1 + (stat.tsb - vi3.avgS) / (vi3.topS - vi3.avgS));
-/*                        var d = stat.tdb < vi3.avgD ? stat.tdb / vi3.avgD : 1 + (stat.tdb - vi3.avgD) / (vi3.topD - vi3.avgD);
-                        var f = stat.tfb < vi3.avgF ? stat.tfb / vi3.avgF : 1 + (stat.tfb - vi3.avgF) / (vi3.topF - vi3.avgF);
-                        var s = stat.tsb < vi3.avgS ? stat.tsb / vi3.avgS : 1 + (stat.tsb - vi3.avgS) / (vi3.topS - vi3.avgS);*/
-                        var EC = Config.s_config.consts.E[vi.type][vi.level - 1];
-                        stat.te = (d * EC.CD + f * EC.CF + s * EC.CS) / (EC.CD + EC.CF + EC.CS);
-                    }
-                }
-                stat.teff = Math.round(stat.te * 1000);
-                stat.te = (stat.tdv == 0) ? 0
-                    : (stat.teff < 300) ? 1
-                    : (stat.teff < 500) ? 2
-                    : (stat.teff < 700) ? 3
-                    : (stat.teff < 900) ? 4
-                    : (stat.teff < 1100) ? 5
-                    : (stat.teff < 1300) ? 6
-                    : (stat.teff < 1550) ? 7
-                    : (stat.teff < 1800) ? 8
-                    : (stat.teff < 2000) ? 9 : 10;
-            }
-
-            // Normalize result
-            stat.tdv = Math.round(stat.tdv * 10) / 10;
-
-            //Logger.add(stat.vn + " " + stat.te + " " + stat.tdv)
-            //Logger.addObject(stat);
+            Logger.add("ERROR: vehicle info (3) missed: " + stat.vn + ". Please notify XVM support.");
+            return stat;
         }
+
+        stat.tdv = stat.td == null || stat.td < 0 ? null : Math.round(stat.td / stat.tb / vi3.hp * 10) / 10;
+
+        var EC = Config.s_config.consts.E[vi3.cl][vi3.l - 1];
+//        Logger.addObject(stat);
+//        Logger.addObject(EC);
+        if (EC.CD != null && EC.CD > 0 && (stat.tdb == null || stat.tdb <= 0))
+            return stat;
+        if (EC.CF != null && EC.CF > 0 && (stat.tfb == null || stat.tfb <= 0))
+            return stat;
+        if (EC.CS != null && EC.CS > 0 && (stat.tsb == null || stat.tsb <= 0))
+            return stat;
+        
+        var d = Math.max(0, 1 + (stat.tdb - vi3.avgD) / (vi3.topD - vi3.avgD)) || 0;
+        var f = Math.max(0, 1 + (stat.tfb - vi3.avgF) / (vi3.topF - vi3.avgF)) || 0;
+        var s = Math.max(0, 1 + (stat.tsb - vi3.avgS) / (vi3.topS - vi3.avgS)) || 0;
+/*        var d = stat.tdb < vi3.avgD ? stat.tdb / vi3.avgD : 1 + (stat.tdb - vi3.avgD) / (vi3.topD - vi3.avgD);
+        var f = stat.tfb < vi3.avgF ? stat.tfb / vi3.avgF : 1 + (stat.tfb - vi3.avgF) / (vi3.topF - vi3.avgF);
+        var s = stat.tsb < vi3.avgS ? stat.tsb / vi3.avgS : 1 + (stat.tsb - vi3.avgS) / (vi3.topS - vi3.avgS);*/
+        stat.te = (d * EC.CD + f * EC.CF + s * EC.CS) / (EC.CD + EC.CF + EC.CS);
+//        Logger.add(stat.vn + " D:" + d + " F:" + f + " S:" + s);
+
+        stat.teff = Math.round(stat.te * 1000);
+        stat.te = (stat.teff == 0) ? 0
+            : (stat.teff < 300) ? 1
+            : (stat.teff < 500) ? 2
+            : (stat.teff < 700) ? 3
+            : (stat.teff < 900) ? 4
+            : (stat.teff < 1100) ? 5
+            : (stat.teff < 1300) ? 6
+            : (stat.teff < 1550) ? 7
+            : (stat.teff < 1800) ? 8
+            : (stat.teff < 2000) ? 9 : 10;
+
+//        Logger.add(stat.vn + " teff=" + stat.teff + " e:" + stat.te);
+//        Logger.addObject(stat);
 
         return stat;
     }
