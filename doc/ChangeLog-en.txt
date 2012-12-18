@@ -1,4 +1,5 @@
-﻿  * capmod: fixed capture bar fill at 100%
+﻿XVM-3.2.1-test1:
+  * capmod: fixed capture bar fill at 100%
   * code optimization
   * updating per-vehicle efficiency formula:
       TEFF: E
