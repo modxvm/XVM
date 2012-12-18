@@ -79,40 +79,24 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
             m_names.verticalAlign = "top"; // for incomplete team - cannot set to "center"
             m_vehicles.verticalAlign = "top"; // for incomplete team - cannot set to "center"
 
-            // fix WG bug - this function is slow, don't call it if not required.
-            /*m_list["invalidateData2"] = m_list["invalidateData"];
-            m_list["invalidateData"] = function() {
-                Logger.add(this["invalidateDataRequired"]);
-                if (this["invalidateDataRequired"] == true)
-                {
-                    this["invalidateData2"]();
-                    //this["invalidateDataRequired"] = false;
-                }
-            };*/
+            // [1/3] fix WG bug - this function is slow, don't call it if not required.
+            m_list["invalidateData2"] = m_list["invalidateData"];
         }
 
-        /*var pmidx = -1;
-        for (var i = 0; i < data.length; ++i)
-        {
-            if (data[i].isPostmortemView == true)
-            {
-                pmidx = i;
-                break;
-            }
-        }
-
-        m_list["invalidateDataRequired"] = !data || m_knownPlayersCount != data.length || m_postmortemIndex != pmidx;
-        Logger.add(m_postmortemIndex + " " + pmidx);
-        m_postmortemIndex = pmidx;*/
-        
         if (data)
         {
             for (var i in data)
                 Macros.RegisterPlayerData(data[i].label, data[i]);
         }
 
+        // [2/3] fix WG bug - this function is slow, don't call it if not required.
+        m_list["invalidateData"] = function() {}
+
         super.setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount);
 
+        // [3/3] fix WG bug - this function is slow, don't call it if not required.
+        m_list["invalidateData"] = m_list["invalidateData2"];
+        
         players_bg._alpha = Config.s_config.playersPanel.alpha;
         m_list._alpha = Config.s_config.playersPanel.iconAlpha;
 
