@@ -265,13 +265,13 @@ class wot.utils.StatLoader
                 }
                 stat.teff = Math.round(stat.te * 1000);
                 stat.te = (stat.tdv == 0) ? 0
-                    : (stat.teff < 500) ? 1
-                    : (stat.teff < 800) ? 2
-                    : (stat.teff < 1000) ? 3
-                    : (stat.teff < 1150) ? 4
-                    : (stat.teff < 1300) ? 5
-                    : (stat.teff < 1450) ? 6
-                    : (stat.teff < 1600) ? 7
+                    : (stat.teff < 300) ? 1
+                    : (stat.teff < 500) ? 2
+                    : (stat.teff < 700) ? 3
+                    : (stat.teff < 900) ? 4
+                    : (stat.teff < 1100) ? 5
+                    : (stat.teff < 1300) ? 6
+                    : (stat.teff < 1550) ? 7
                     : (stat.teff < 1800) ? 8
                     : (stat.teff < 2000) ? 9 : 10;
             }

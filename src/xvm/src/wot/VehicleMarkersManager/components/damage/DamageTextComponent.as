@@ -120,6 +120,7 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
         var text = proxy.formatDynamicText(proxy.formatStaticText(msg), newHealth, delta, damageFlag, damageType);
         // For some reason, DropShadowFilter is not rendered when textfield contains only one character,
         // so we're appending empty prefix and suffix to bypass this unexpected behavior
-        return " " + text + " ";
+        // UPD: But with .html=true all is OK.
+        return /* " " + */ text /* + " "*/;
     }
 }
