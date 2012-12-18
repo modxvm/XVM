@@ -93,7 +93,7 @@
       {{nick}}        - player nickname with clan name
       {{name}}        - player nickname without clan name
       {{clan}}        - clan name with brackets (empty if no clan)
-      {{squad}}       - value '1' for squadmans, empty for others
+      {{squad}}       - value '1' for own squad, empty for others
       {{vehicle}}     - vehicle name
       {{vtype}}       - vehicle type
       {{level}}       - vehicle level (Arabic numerals)
