@@ -22,12 +22,13 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     
     static var DEBUG_TIMES = false;
 
-    private var m_fieldType: Number = 0;
-    private var m_data: Object = null;
-    private var m_item: Number = 0;
+    private var m_fieldType:Number = 0;
+    private var m_data:Object = null;
+    private var m_item:Number = 0;
 
-    private var m_knownPlayersCount = 0; // for Fog of War mode.
-
+    private var m_knownPlayersCount:Number = 0; // for Fog of War mode.
+    private var m_postmortemIndex:Number = 0;
+    
     function PlayersPanel()
     {
         super();
@@ -40,20 +41,23 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     }
 
     // override
-    private var _initialized = false;
-    private var _lastAdjustedState = "";
+
     function setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount)
     {
         //Logger.add("PlayersPanel.setData()");
         // fix WG bug - double redrawing panels on kill
         onEnterFrame = function()
         {
+            var start = new Date();
             delete this.onEnterFrame;
             this.setData2(data, sel, postmortemIndex, isColorBlind, knownPlayersCount);
+            if (PlayersPanel.DEBUG_TIMES)
+                Logger.add("DEBUG TIME: PlayersPanel: setData2(" + this.m_type + "): " + Utils.elapsedMSec(start, new Date()) + " ms");
         }
     }
 
-    var _init:Boolean = false;
+    private var _init:Boolean = false;
+    private var _lastAdjustedState = "";
 
     // Centered _y value of text field
     var centeredTextY:Number;
@@ -65,8 +69,6 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         //Logger.add("PlayersPanel.setData2()");
         //Logger.add(data);
 
-        var start = new Date();
-
         m_names.condenseWhite = !StatData.s_loaded;
         m_vehicles.condenseWhite = !StatData.s_loaded;
 
@@ -76,8 +78,33 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
             centeredTextY = m_names._y - 5;
             m_names.verticalAlign = "top"; // for incomplete team - cannot set to "center"
             m_vehicles.verticalAlign = "top"; // for incomplete team - cannot set to "center"
+
+            // fix WG bug - this function is slow, don't call it if not required.
+            /*m_list["invalidateData2"] = m_list["invalidateData"];
+            m_list["invalidateData"] = function() {
+                Logger.add(this["invalidateDataRequired"]);
+                if (this["invalidateDataRequired"] == true)
+                {
+                    this["invalidateData2"]();
+                    //this["invalidateDataRequired"] = false;
+                }
+            };*/
         }
 
+        /*var pmidx = -1;
+        for (var i = 0; i < data.length; ++i)
+        {
+            if (data[i].isPostmortemView == true)
+            {
+                pmidx = i;
+                break;
+            }
+        }
+
+        m_list["invalidateDataRequired"] = !data || m_knownPlayersCount != data.length || m_postmortemIndex != pmidx;
+        Logger.add(m_postmortemIndex + " " + pmidx);
+        m_postmortemIndex = pmidx;*/
+        
         if (data)
         {
             for (var i in data)
@@ -107,9 +134,6 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 
         m_vehicles.htmlText = m_vehicles.htmlText.split('LEADING="9"').join('LEADING="' + leadingVehicles + '"');
         m_vehicles._y = centeredTextY + leadingVehicles / 2.0; // centering on cell, because of align=top
-
-        if (DEBUG_TIMES)
-            Logger.add("DEBUG TIME: PlayersPanel: setData2(): " + Utils.elapsedMSec(start, new Date()) + " ms");
     }
 
     // override
