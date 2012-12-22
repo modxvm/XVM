@@ -1,3 +1,6 @@
+import wot.utils.Logger;
+import wot.utils.VehicleInfo;
+import wot.utils.VehicleInfoData;
 import wot.Minimap.model.MapConfig;
 
 class wot.Minimap.model.MinimapMacro
@@ -10,11 +13,20 @@ class wot.Minimap.model.MinimapMacro
         // TODO: StatFormat
         var formatArr:Array
 
-        /** Level */
+        /**
+         * Level
+         * player.level is undefined when Show Level at Game Menu is not checked.
+         * PlayersPanel does not populate itself with level in that case.
+         * Alternative level definition is used here.
+         */
         formatArr = format.split("{{level}}");
         if (formatArr.length > 1)
-            format = formatArr.join(player.level);
-
+        {
+            var veh:String = VehicleInfo.getName(player.icon);
+            var vehData:Object = VehicleInfoData.data[veh];
+            format = formatArr.join(vehData.level);
+        }
+            
         /** Vehicle type */
         formatArr = format.split("{{vehicle}}");
         if (formatArr.length > 1)
