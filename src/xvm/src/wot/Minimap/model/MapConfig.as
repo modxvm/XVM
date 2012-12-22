@@ -9,9 +9,6 @@ class wot.Minimap.model.MapConfig
     public static function get iconScale():Number    {
         return Config.s_config.minimap.iconScale;    }
     
-    public static function get isDeadPermanent():Boolean    {
-        return Config.s_config.minimap.isDeadPermanent;    }
-        
     public static function get nickShrink():Number    {
         return Config.s_config.minimap.nickShrink;    }
         
@@ -38,5 +35,22 @@ class wot.Minimap.model.MapConfig
         return Config.s_config.minimap.css.lostenemy;    }
         
     public static function get textOffset():Point    {
-        return new Point(Config.s_config.minimap.textOffsetX, Config.s_config.minimap.textOffsetY);}
+        return new Point(Config.s_config.minimap.textOffsetX, Config.s_config.minimap.losttextOffsetY); }
+        
+    /** Lost */
+    /** Enabled */
+    public static function get lostEnemyEnabled():Boolean    {
+        return Config.s_config.minimap.lostEnemy.enabled;    }
+    /** Alpha */
+    public static function get lostEnemyAlpha():Number    {
+        return Config.s_config.minimap.lostEnemy.alpha;    }
+    /** Icon w/h */
+    public static function get lostEnemyIconWidth():Number    {
+        return Config.s_config.minimap.lostEnemy.iconWidth;    }
+    public static function get lostEnemyIconHeight():Number    {
+        return Config.s_config.minimap.lostEnemy.iconHeight;    }
+    /** Text offset */
+    public static function get losttextOffset():Point    {
+        return new Point(Config.s_config.minimap.lostEnemy.textOffsetX, Config.s_config.minimap.lostEnemy.textOffsetY); }
+    /** ---- */
 }

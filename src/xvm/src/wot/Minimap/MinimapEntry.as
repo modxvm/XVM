@@ -1,10 +1,8 @@
-import flash.geom.Point;
-import wot.Minimap.MinimapEvent;
-import wot.Minimap.model.MinimapMacro;
-import wot.Minimap.model.PlayersPanelProxy;
 import wot.Minimap.model.MapConfig;
+import wot.Minimap.MinimapEvent;
+import wot.Minimap.model.PlayersPanelProxy;
+import wot.Minimap.staticUtils.LabelAppend;
 import wot.utils.GlobalEventDispatcher;
-import wot.utils.Logger;
 
 /**
  * MinimapEntry represent individual object on map.
@@ -23,18 +21,29 @@ import wot.utils.Logger;
 
 class wot.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
 {
+    /** Entry type: enemy, ally, squadman, empty possible */
+    public static var MINIMAP_ENTRY_TYPE_ENEMY:String = "enemy";
+    public static var MINIMAP_ENTRY_TYPE_ALLY:String = "ally";
+    public static var MINIMAP_ENTRY_TYPE_SQUAD:String = "squadman";
+    public static var MINIMAP_ENTRY_TYPE_SELF:String = ""; /** Type of player himself and ? */
+    public static var MINIMAP_ENTRY_TYPE_LOST:String = "lostenemy"; /** New type for last enemy position markers */
+    public static var MINIMAP_ENTRY_VEH_CLASS_LIGHT:String = "lightTank";
+    public static var MINIMAP_ENTRY_VEH_CLASS_MEDIUM:String = "mediumTank";
+    public static var MINIMAP_ENTRY_VEH_CLASS_HEAVY:String = "heavyTank";
+    public static var MINIMAP_ENTRY_VEH_CLASS_TD:String = "AT-SPG";
+    public static var MINIMAP_ENTRY_VEH_CLASS_SPG:String = "SPG";
+    
     /**
      * Subject of PlayersPanel <-> Minimap syncronization.
      * Syncronized during light delegate event.
      */
     public var uid:Number;
     
-    /** Link to macro parser */
-    private var macro:MinimapMacro;
-    private var playerInfo:Object;
+    private var player:Object;
     
     function lightPlayer(visibility)
     {
+        
         /** Behavior is altered temporarily so original icon highlighting works */
         if (syncProcedureInProgress)
         {
@@ -46,149 +55,39 @@ class wot.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
         }
     }
     
-    function setDead(isPermanent)
-    {
-        Logger.add("setDead " + uid);
-        isDead = true;
-        isDeadPermanent = isPermanent;
-        this.invalidate();
-    }
-    
-    function setPostmortem(isPostmortem)
-    {
-        Logger.add("setPostmortem(" + isPostmortem + ")");
-        this.isPostmortem = isPostmortem;
-        this.invalidate();
-    } // End of the function
-    
     /**
      * Unit remove invoked by Python.
-     * Possibly enemy disappear\loose from view event
-     * or very far out of sight position change.
-     * XVM extension dont want icons to disappear.
-     * Let them be to indicate last enemy position.
+     * Possibly enemy disappear\loose from view event or very far out of sight position change.
+     * XVM extension dont want icons to disappear. Save them at LostEnemyMarkers.
      */
     function removeMovieClip()
     {
-        if (uid && entryName == "enemy")
+        if (entryName == MINIMAP_ENTRY_TYPE_ENEMY && uid && !isDead) /** isDead state is handled by PlayersPanel */
         {
-            /**
-             * This icon should remain until subject appears in new place or dies.
-             * Shows last enemy position with info attached.
-             */
-            fadeOut();
+            var payload:Object = { player:player, vehClass:this.vehicleClass, x:this._x, y:this._y };
+            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENEMY_ICON_REMOVE, payload));
         }
-        else
-        {
-            super.removeMovieClip();
-        }
+        
+        super.removeMovieClip();
     }
     
     // -- Private
     
-    private function fadeOut():Void
-    {
-        this._alpha = 30;
-        Logger.add("removeMovieClip " + uid % 100 + " at " + _x + "/" + _y);
-    }
-    
     private function initExtendedBehaviour():Void
     {
         uid = _root.minimap.sync.getTestUid();
-        playerInfo = PlayersPanelProxy.getPlayerInfo(uid);
-        appendExtraInfoToUI();
+        player = PlayersPanelProxy.getPlayerInfo(uid);
         
-        if (entryName == "enemy")
+        LabelAppend.append(markMC, player, this.entryName, MapConfig.textOffset);
+        
+        if (entryName == MINIMAP_ENTRY_TYPE_ENEMY && uid && !isDead)
         {
-            /**
-             * Remove obsolete icon:MinimapEntry showing last enemy unit position with the same uid,
-             * because this icon is its actual position and represents moving unit curretnly revealed.
-             * Nothing is removed by event in case no icon at last position present.
-             */
-            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.REMOVE_OBSOLETE_ICON, uid));
-            
-            /** Get ready to be removed when icon with the same uid appears at new position or dies */
-            GlobalEventDispatcher.addEventListener(MinimapEvent.REMOVE_OBSOLETE_ICON, this, onRemoveObsoleteIcon);
+            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENEMY_ICON_INIT, { uid:uid } ));
         }
-    }
-    
-    private function onRemoveObsoleteIcon(event:MinimapEvent):Void
-    {
-        if (uid == event.payload.uid)// && isLost == true)
-        {
-            Logger.add("onRemoveObsoleteIcon(e) " + uid);
-            /**
-             * This icon in lost state is obsolete.
-             * Subject appeared with new icon or dead.
-             */
-            super.removeMovieClip();
-        }
-    }
-    
-    private function appendExtraInfoToUI():Void
-    {
-        // TODO: {{vehicle-short}}
-        var offset:Point = MapConfig.textOffset;
-        
-        var textField:TextField = markMC.createTextField("textField", 1, offset.x, offset.y, 100, 20);
-        textField.antiAliasType = "advanced";
-        textField.html = true;
-       
-        var style:TextField.StyleSheet = new TextField.StyleSheet();
-        style.parseCSS(getCSS());
-        textField.styleSheet = style;
-        
-        textField.htmlText = "<span class='xvm_mm'>" + uid % 100 + "</span>"; //getText()
-    }
-    
-    private function getCSS():String
-    {
-        var style:String;
-
-        switch (this.entryName)
-        {
-            case "ally":
-                style = MapConfig.cssAlly;
-                break;
-            case "enemy":
-                style = MapConfig.cssEnemy;
-                break;
-            case "squadman":
-                style = MapConfig.cssSquad;
-                break;
-            default:
-                style = MapConfig.cssOneself;
-        }
-        
-        style = ".xvm_mm{" + style + "}"
-
-        return style;
-    }
-    
-    private function getText():String
-    {
-        var text:String;
-        
-        switch (this.entryName)
-        {
-            case "ally":
-                text = MapConfig.formatAlly;
-                break;
-            case "enemy":
-                text = MapConfig.formatEnemy;
-                break;
-            case "squadman":
-                text = MapConfig.formatSquad;
-                break;
-            default:
-                text = MapConfig.formatOneself;
-        }
-        
-        return MinimapMacro.process(text, playerInfo);
     }
     
     private function get syncProcedureInProgress():Boolean
     {
-        return _root.minimap.sync.syncProcedureInProgress
+        return _root.minimap.sync.syncProcedureInProgress;
     }
 }

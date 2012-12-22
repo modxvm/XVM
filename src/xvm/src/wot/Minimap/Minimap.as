@@ -3,6 +3,7 @@ import wot.utils.GlobalEventDispatcher;
 import wot.Minimap.model.SyncModel;
 import wot.utils.Utils;
 import wot.Minimap.model.MapConfig;
+import wot.Minimap.model.LostEnemyMarkersManager;
 
 /**
  * Original Minimap manages all kinds size, border, drawing and clicking.
@@ -24,12 +25,15 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
 {
     /** Used at MinimapEntry to get testUid */
     public var sync:SyncModel;
+
+    /** Places and removes lost evemy positions on minimap */
+    private var lost:LostEnemyMarkersManager;
     
     private var isMinimapReady:Boolean = false;
     private var isAllyPlayersPanelReady:Boolean = false;
     private var isEnemyPlayersPanelReady:Boolean = false;
     private var loadComplete:Boolean = false;
-    
+   
     // override
     function Minimap()
     {
@@ -50,6 +54,13 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
         
         if (sync && MapConfig.enabled)
            sync.updateIconsExtension();
+    }
+    
+    // override
+    
+    function correctSizeIndex(sizeIndex:Number, stageHeight:Number):Number
+    {
+        return sizeIndex;
     }
     
     // -- Private
@@ -102,5 +113,7 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
         
         sync = new SyncModel();
         sync.updateIconsExtension();
+        
+        lost = new LostEnemyMarkersManager(icons);
     }
 }

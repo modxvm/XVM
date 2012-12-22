@@ -166,7 +166,7 @@
   // Minimap
   "minimap": {
     "enabled": true,  // On/off modification switch
-    "iconScale": 1,   // Minimap icon and attached text scaling factor
+    "iconScale": 1,   // Minimap icon and attached text scaling factor; 0.5 0.75 1.25
     "nickShrink": 4,  // Nickname shrink value for {{short-nick}} macro
     "textOffsetX": 0, // Attached text X offset relative to icon
     "textOffsetY": 0, // Attached text Y offset relative to icon

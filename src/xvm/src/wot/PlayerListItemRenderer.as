@@ -2,6 +2,7 @@
  * ...
  * @author sirmax2
  */
+import wot.utils.Logger;
 import net.wargaming.controls.UILoaderAlt;
 import wot.utils.Config;
 import wot.utils.IconLoader;
@@ -11,6 +12,8 @@ import wot.utils.Utils;
 
 class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRenderer
 {
+    private static var IS_ALIVE:Number = 1;
+    
     var m_clanIcon: UILoaderAlt = null;
     var m_iconset: IconLoader = null;
     var m_iconLoaded: Boolean = false;
@@ -100,5 +103,4 @@ class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRend
         PlayerInfo.setSource(m_clanIcon, data.label, data.clanAbbrev);
         m_clanIcon["holder"]._alpha = ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0) ? 100 : 50;
     }
-    
 }

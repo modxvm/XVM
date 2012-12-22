@@ -240,7 +240,7 @@ class wot.utils.Macros
         {
             case "RU":
                 if (label == "XlebniDizele4ku")
-                    return "ХлебниДизелёчку!-XVM";
+                    return "Привет, танкисты. С вами";
                 if (label == "sirmax2" || label == "0x01")
                     return "Сэр Макс (XVM)";
                 break;

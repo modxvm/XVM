@@ -7,7 +7,9 @@ intrinsic class net.wargaming.ingame.MinimapEntry extends UIComponent
     var isPostmortem;
     var isDeadPermanent;
     var isDead;
+    var vehicleClass;
     
+    function init(markerType, entryName, vehicleClass, markLabel);
     function MinimapEntry();
     function lightPlayer(visibility);
     function setDead(isPermanent);

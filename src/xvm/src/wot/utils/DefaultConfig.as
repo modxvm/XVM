@@ -151,7 +151,6 @@ class wot.utils.DefaultConfig
                 enabled: true,
                 iconScale: 1,
                 nickShrink: 4,
-                isDeadPermanent: true,
                 textOffsetX: 0,
                 textOffsetY: 0,
                 format: {
@@ -167,6 +166,14 @@ class wot.utils.DefaultConfig
                   squad: "font-family:$FieldFont; font-size:8px; color:#FFEE44;",
                   oneself: "font-family:$FieldFont; font-size:8px; color:#FFFFFF;",
                   lostenemy: "font-family:$FieldFont; font-size:8px; color:#EEAACC;"
+                },
+                lostEnemy: {
+                  enabled: true,
+                  alpha: 50,
+                  iconWidth: 15,
+                  iconHeight: 19,
+                  textOffsetX: 11,
+                  textOffsetY: 11
                 }
             },
             captureBar: {
