@@ -183,6 +183,15 @@
       "squad":   "font-family:$FieldFont; font-size:8px; color:#FFEE44;", // Для совзводных
       "oneself": "font-family:$FieldFont; font-size:8px; color:#EEEEEE;", // Для себя и приёмника камеры в случае переключения при смерти
       "lostenemy":"font-family:$FieldFont; font-size:8px; color:#EEEEEE;" // Для пропавших врагов; не зависит от iconScale
+    },
+    "lostEnemy": { // Параметры для иконок потерянных вражеских юнитов
+      // Иконки потерянных подгружаются из res_mods/minimapicons
+      "enabled": true,   // Переключатель для модификации иконок потерянных врагов вкл/выкл
+      "alpha": 50,       // Прозрачность
+      "iconWidth": 15,   // Ширина в img HTML теге изображения для потерянного вражеского юнита
+      "iconHeight": 19,  // Высота в img HTML теге изображения для потерянного вражеского юнита
+      "textOffsetX": 11, // Горизонтальное смещение текста относительно HTML img изображения
+      "textOffsetY": 11  // Вертикальное   смещение текста относительно HTML img изображения
     }
   },
   // Блок маркеров над танками.
