@@ -170,7 +170,7 @@
     "nickShrink": 4,  // Nickname shrink value for {{short-nick}} macro
     "textOffsetX": 0, // Attached text X offset relative to icon
     "textOffsetY": 0, // Attached text Y offset relative to icon
-    "format": {       // Attached text format. Macroses {{level}}, {{vehicle}}, {{short-nick}}
+    "format": {       // Attached text format. Macroses {{level}}, {{vehicle}}, {{short-nick}}, {{short-vehicle}}
       "ally":  "{{level}}", // Ally
       "enemy": "{{level}}", // Enemy
       "squad": "{{level}} <i>{{short-nick}}</i>", // Squadmates

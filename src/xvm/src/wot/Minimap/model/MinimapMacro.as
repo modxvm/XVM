@@ -1,4 +1,4 @@
-import wot.utils.Logger;
+import wot.utils.VehicleTypeShort;
 import wot.utils.VehicleInfo;
 import wot.utils.VehicleInfoData;
 import wot.Minimap.model.MapConfig;
@@ -25,6 +25,14 @@ class wot.Minimap.model.MinimapMacro
             var veh:String = VehicleInfo.getName(player.icon);
             var vehData:Object = VehicleInfoData.data[veh];
             format = formatArr.join(vehData.level);
+        }
+        
+        /** Vehicle short type */
+        formatArr = format.split("{{short-vehicle}}");
+        if (formatArr.length > 1)
+        {
+            var type:String = VehicleInfo.getName(player.icon);
+            format = formatArr.join(VehicleTypeShort.translate(type));
         }
             
         /** Vehicle type */
