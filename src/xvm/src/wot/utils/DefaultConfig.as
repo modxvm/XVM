@@ -148,7 +148,7 @@ class wot.utils.DefaultConfig
                 lowVulnerability: "'"
             },
             minimap: {
-                enabled: true,
+                enabled: false,
                 iconScale: 1,
                 nickShrink: 4,
                 textOffsetX: 0,
