@@ -35,7 +35,7 @@ class wot.Minimap.model.MapConfig
         return Config.s_config.minimap.css.lostenemy;    }
         
     public static function get textOffset():Point    {
-        return new Point(Config.s_config.minimap.textOffsetX, Config.s_config.minimap.losttextOffsetY); }
+        return new Point(Config.s_config.minimap.textOffsetX, Config.s_config.minimap.textOffsetY); }
         
     /** Lost */
     /** Enabled */
