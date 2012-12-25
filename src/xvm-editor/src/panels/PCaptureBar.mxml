@@ -21,7 +21,7 @@
     <s:Label text="{resourceManager.getString('panels', 'AlliesShadow')}:" width="100%" height="20" verticalAlign="middle" backgroundColor="0xCCCCCC"/>
     <c:LabeledColorSelector label="{resourceManager.getString('panels', 'Color')}" width="320" id="v_ally_shadow_color" config="captureBar.ally.shadow.color" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Transparency')}" id="v_ally_shadow_alpha" config="captureBar.ally.shadow.alpha" minimum="0" maximum="100" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Size')}" id="v_ally_shadow_blur" config="captureBar.ally.shadow.size" minimum="0" maximum="255" stepSize="1" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Size')}" id="v_ally_shadow_blur" config="captureBar.ally.shadow.blur" minimum="0" maximum="255" stepSize="1" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Strength')}" id="v_ally_shadow_strength" config="captureBar.ally.shadow.strength" minimum="0" maximum="255" isLogarithmic="true" change="onChange(event)"/>
     <s:Label text="{resourceManager.getString('panels', 'Enemies')}:" width="100%" height="20" verticalAlign="middle" backgroundColor="0xCCCCCC"/>
     <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'cbPrimaryTitleFormat')}" labelWidth="100%" wrapTextField="true" height="40" id="v_enemy_primaryTitleFormat" config="captureBar.enemy.primaryTitleFormat" allowedMacros="{Macros.get('captureBar')}" preview="true" change="onChange(event)"/>
@@ -31,6 +31,6 @@
     <s:Label text="{resourceManager.getString('panels', 'EnemiesShadow')}:" width="100%" height="20" verticalAlign="middle" backgroundColor="0xCCCCCC"/>
     <c:LabeledColorSelector label="{resourceManager.getString('panels', 'Color')}" width="320" id="v_enemy_shadow_color" config="captureBar.enemy.shadow.color" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Transparency')}" id="v_enemy_shadow_alpha" config="captureBar.enemy.shadow.alpha" minimum="0" maximum="100" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Size')}" id="v_enemy_shadow_blur" config="captureBar.enemy.shadow.size" minimum="0" maximum="255" stepSize="1" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Size')}" id="v_enemy_shadow_blur" config="captureBar.enemy.shadow.blur" minimum="0" maximum="255" stepSize="1" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Strength')}" id="v_enemy_shadow_strength" config="captureBar.enemy.shadow.strength" minimum="0" maximum="255" isLogarithmic="true" change="onChange(event)"/>
 </c:PanelComponent>

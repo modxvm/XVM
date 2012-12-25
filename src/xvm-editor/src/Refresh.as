@@ -22,6 +22,10 @@ protected function RefreshCurrentPage():void
             RefreshCommonPage();
         else if (pg == pgHitLog)
             RefreshHitLogPage();
+        else if (pg == pgCaptureBar)
+            RefreshCaptureBarPage();
+        else if (pg == pgMinimap)
+            RefreshMinimapPage();
         else if (pg == pgBattleLoading)
             RefreshBattleLoadingPage();
         else if (pg == pgStatisticForm)
@@ -120,6 +124,56 @@ private function RefreshHitLogPage():void
     catch (ex:Error)
     {
         debug("ERROR: RefreshHitLogPage(): " + ex.toString());
+    }
+}
+
+private function RefreshCaptureBarPage():void
+{
+    debug("RefreshCaptureBarPage()");
+    try
+    {
+        var section:*;
+
+        section = Config.s_config.captureBar;
+        this.p_captureBar.v_enabled.value = section.enabled;
+        this.p_captureBar.v_primaryTitleOffset.value = section.primaryTitleOffset;
+        this.p_captureBar.v_appendPlus.value = section.appendPlus;
+        this.p_captureBar.v_ally_primaryTitleFormat.value = section.ally.primaryTitleFormat;
+        this.p_captureBar.v_ally_secondaryTitleFormat.value = section.ally.secondaryTitleFormat;
+        this.p_captureBar.v_ally_captureDoneFormat.value = section.ally.captureDoneFormat;
+        this.p_captureBar.v_ally_extra.value = section.ally.extra;
+        this.p_captureBar.v_ally_shadow_color.value = section.ally.shadow.color;
+        this.p_captureBar.v_ally_shadow_alpha.value = section.ally.shadow.alpha;
+        this.p_captureBar.v_ally_shadow_blur.value = section.ally.shadow.blur;
+        this.p_captureBar.v_ally_shadow_strength.value = section.ally.shadow.strength;
+        this.p_captureBar.v_enemy_primaryTitleFormat.value = section.enemy.primaryTitleFormat;
+        this.p_captureBar.v_enemy_secondaryTitleFormat.value = section.enemy.secondaryTitleFormat;
+        this.p_captureBar.v_enemy_captureDoneFormat.value = section.enemy.captureDoneFormat;
+        this.p_captureBar.v_enemy_extra.value = section.enemy.extra;
+        this.p_captureBar.v_enemy_shadow_color.value = section.enemy.shadow.color;
+        this.p_captureBar.v_enemy_shadow_alpha.value = section.enemy.shadow.alpha;
+        this.p_captureBar.v_enemy_shadow_blur.value = section.enemy.shadow.blur;
+        this.p_captureBar.v_enemy_shadow_strength.value = section.enemy.shadow.strength;
+    }
+    catch (ex:Error)
+    {
+        debug("ERROR: RefreshCaptureBarPage(): " + ex.toString());
+    }
+}
+
+private function RefreshMinimapPage():void
+{
+    debug("RefreshMinimapPage()");
+    try
+    {
+        var section:*;
+
+        section = Config.s_config.minimap;
+//        this.p_hitLog.v_visible.value = section.visible;
+    }
+    catch (ex:Error)
+    {
+        debug("ERROR: RefreshMinimapPage(): " + ex.toString());
     }
 }
 

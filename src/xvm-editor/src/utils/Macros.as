@@ -19,6 +19,9 @@ package utils
 
         public static function format(format:String):String
         {
+            if (!format)
+                return "";
+
             var hp:Number = 500;
             var hpMax:Number = 2000;
             var hpRatio:Number = 25;
@@ -33,10 +36,19 @@ package utils
             // Text
             format = format.replace("{{dead}}", Config.s_config.hitLog.deadMarker);
 
+            format = format.replace("{{extra}}", Config.s_config.captureBar.ally.extra);
+            format = format.replace("{{points}}", "5");
+            format = format.replace("{{tanks}}", "3" + (Config.s_config.captureBar.appendPlus ? "+" : ""));
+            format = format.replace("{{time}}", "1:15");
+            format = format.replace("{{time-sec}}", "75");
+            format = format.replace("{{speed}}", "3");
+
             format = format.replace("{{nick}}", "Player[CLAN]");
             format = format.replace("{{name}}", "Player");
+            format = format.replace("{{short-nick}}", "Player".slice(0, Config.s_config.minimap.nickShrink));
             format = format.replace("{{clan}}", "[CLAN]");
             format = format.replace("{{vehicle}}", "T-34");
+            format = format.replace("{{short-vehicle}}", "t34");
             format = format.replace("{{vtype}}", Config.s_config.texts.vtype.MT);
             format = format.replace("{{level}}", "5");
             format = format.replace("{{rlevel}}", "V");
