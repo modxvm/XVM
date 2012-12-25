@@ -137,6 +137,23 @@ package utils
                 { value: "{{dmg-player}}", label: "dmg_player", icon: Embed.dmg_player },
                 { value: "{{dmg-kind}}", label: "dmg_kind", icon: Embed.dmg_kind }
             ],
+            captureBar: [
+                { value: "{{points}}", label: "cb_points", icon: Embed.points },
+                { value: "{{extra}}", label: "cb_extra", icon: Embed.extra }
+            ],
+            captureBarExtra: [
+                { value: "{{points}}", label: "cb_points", icon: Embed.points },
+                { value: "{{tanks}}", label: "cb_tanks", icon: Embed.tanks },
+                { value: "{{time}}", label: "cb_time", icon: Embed.time },
+                { value: "{{time-sec}}", label: "cb_time_sec", icon: Embed.time_sec },
+                { value: "{{speed}}", label: "cb_speed", icon: Embed.speed }
+            ],
+            minimap: [
+                { value: "{{short-nick}}", label: "short_nick", icon: Embed.short_nick },
+                { value: "{{short-vehicle}}", label: "short_vehicle", icon: Embed.short_vehicle },
+                { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
+                { value: "{{level}}", label: "level", icon: Embed.level }
+            ],
             dead: [
                 { value: "{{dead}}", label: "dead", icon: Embed.dead }
             ],

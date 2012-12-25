@@ -2,7 +2,7 @@
 
 public class DefaultConfig
 {
-  import utils.Defines;
+    import utils.Defines;
 
     public static function get config(): Object
     {
@@ -144,23 +144,32 @@ public class DefaultConfig
                 lowVulnerability: "'"
             },
             minimap: {
-                enabled: true,
+                enabled: false,
                 iconScale: 1,
                 nickShrink: 4,
-                isDeadPermanent: true,
                 textOffsetX: 0,
                 textOffsetY: 0,
                 format: {
-                  ally:  "{{level}} {{vehicle}}",
-                  enemy: "{{level}} {{vehicle}}",
-                  squad: "{{level}} {{vehicle}} <i>{{short-nick}}</i>",
-                  oneself: "<b>{{level}} {{vehicle}}</b>"
+                  ally:  "{{level}}",
+                  enemy: "{{level}}",
+                  squad: "{{level}} <i>{{short-nick}}</i>",
+                  oneself: "<b>{{level}}</b>",
+                  lostenemy: "<i>{{level}}</i>"
                 },
                 css: {
-                  ally:  "font-family:$FieldFont; font-size:6px; color:#BBEEBB;",
-                  enemy: "font-family:$FieldFont; font-size:6px; color:#EEBBBB;",
-                  squad: "font-family:$FieldFont; font-size:6px; color:#FFEE44;",
-                  oneself: "font-family:$FieldFont; font-size:6px; color:#FFFFFF;"
+                  ally:  "font-family:$FieldFont; font-size:8px; color:#BBEEBB;",
+                  enemy: "font-family:$FieldFont; font-size:8px; color:#EEBBBB;",
+                  squad: "font-family:$FieldFont; font-size:8px; color:#FFEE44;",
+                  oneself: "font-family:$FieldFont; font-size:8px; color:#FFFFFF;",
+                  lostenemy: "font-family:$FieldFont; font-size:8px; color:#EEAACC;"
+                },
+                lostEnemy: {
+                  enabled: true,
+                  alpha: 50,
+                  iconWidth: 15,
+                  iconHeight: 19,
+                  textOffsetX: 11,
+                  textOffsetY: 11
                 }
             },
             captureBar: {
@@ -513,11 +522,11 @@ public class DefaultConfig
                 e: [
                     { value: 0.1,  color: ColorPalette.white },
                     { value: 2,    color: ColorPalette.red },
-                    { value: 3,    color: ColorPalette.orange },
+                    { value: 4,    color: ColorPalette.orange },
                     { value: 5,    color: ColorPalette.yellow },
                     { value: 7,    color: ColorPalette.green },
                     { value: 9,    color: ColorPalette.blue },
-                    { value: 10,   color: ColorPalette.purple }
+                    { value: 20,   color: ColorPalette.purple }
                 ]
             },
             alpha: {
@@ -884,60 +893,60 @@ public class DefaultConfig
                     { CD: 1, CF: 1, CS: 1 }, // level 2
                     { CD: 1, CF: 1, CS: 1 }, // level 3
                     { CD: 1, CF: 1, CS: 1 }, // level 4
-                    { CD: 1, CF: 1, CS: 5 }, // level 5
-                    { CD: 1, CF: 1, CS: 5 }, // level 6
-                    { CD: 1, CF: 1, CS: 5 }, // level 7
-                    { CD: 1, CF: 1, CS: 5 }, // level 8
-                    { CD: 1, CF: 1, CS: 5 }, // level 9
-                    { CD: 1, CF: 1, CS: 5 }  // level 10
+                    { CD: 1, CF: 1, CS: 3 }, // level 5
+                    { CD: 1, CF: 1, CS: 3 }, // level 6
+                    { CD: 1, CF: 1, CS: 3 }, // level 7
+                    { CD: 1, CF: 1, CS: 3 }, // level 8
+                    { CD: 1, CF: 1, CS: 3 }, // level 9
+                    { CD: 1, CF: 1, CS: 3 }  // level 10
                 ],
                 MT: [ // mediumTank
-                    { CD: 5, CF: 1, CS: 2 }, // level 1
-                    { CD: 5, CF: 1, CS: 2 }, // level 2
-                    { CD: 5, CF: 1, CS: 2 }, // level 3
-                    { CD: 5, CF: 1, CS: 2 }, // level 4
-                    { CD: 5, CF: 1, CS: 2 }, // level 5
-                    { CD: 5, CF: 1, CS: 2 }, // level 6
-                    { CD: 5, CF: 1, CS: 2 }, // level 7
-                    { CD: 5, CF: 1, CS: 2 }, // level 8
-                    { CD: 5, CF: 1, CS: 2 }, // level 9
-                    { CD: 5, CF: 1, CS: 2 }  // level 10
+                    { CD: 4, CF: 1, CS: 2 }, // level 1
+                    { CD: 4, CF: 1, CS: 2 }, // level 2
+                    { CD: 4, CF: 1, CS: 2 }, // level 3
+                    { CD: 4, CF: 1, CS: 2 }, // level 4
+                    { CD: 4, CF: 1, CS: 2 }, // level 5
+                    { CD: 4, CF: 1, CS: 2 }, // level 6
+                    { CD: 4, CF: 1, CS: 2 }, // level 7
+                    { CD: 4, CF: 1, CS: 2 }, // level 8
+                    { CD: 4, CF: 1, CS: 2 }, // level 9
+                    { CD: 4, CF: 1, CS: 2 }  // level 10
                 ],
                 HT: [ // heavyTank
-                    { CD: 5, CF: 1, CS: 1 }, // level 1
-                    { CD: 5, CF: 1, CS: 1 }, // level 2
-                    { CD: 5, CF: 1, CS: 1 }, // level 3
-                    { CD: 5, CF: 1, CS: 1 }, // level 4
-                    { CD: 5, CF: 1, CS: 1 }, // level 5
-                    { CD: 5, CF: 1, CS: 1 }, // level 6
-                    { CD: 5, CF: 1, CS: 1 }, // level 7
-                    { CD: 5, CF: 1, CS: 1 }, // level 8
-                    { CD: 5, CF: 1, CS: 1 }, // level 9
-                    { CD: 5, CF: 1, CS: 1 }  // level 10
+                    { CD: 4, CF: 2, CS: 1 }, // level 1
+                    { CD: 4, CF: 2, CS: 1 }, // level 2
+                    { CD: 4, CF: 2, CS: 1 }, // level 3
+                    { CD: 4, CF: 2, CS: 1 }, // level 4
+                    { CD: 4, CF: 2, CS: 1 }, // level 5
+                    { CD: 4, CF: 2, CS: 1 }, // level 6
+                    { CD: 4, CF: 2, CS: 1 }, // level 7
+                    { CD: 4, CF: 2, CS: 1 }, // level 8
+                    { CD: 4, CF: 2, CS: 1 }, // level 9
+                    { CD: 4, CF: 2, CS: 1 }  // level 10
                 ],
                 TD: [ // tank destroyer
-                    { CD: 5, CF: 1, CS: 1 }, // level 1
-                    { CD: 5, CF: 1, CS: 1 }, // level 2
-                    { CD: 5, CF: 1, CS: 1 }, // level 3
-                    { CD: 5, CF: 1, CS: 1 }, // level 4
-                    { CD: 5, CF: 1, CS: 1 }, // level 5
-                    { CD: 5, CF: 1, CS: 1 }, // level 6
-                    { CD: 5, CF: 1, CS: 1 }, // level 7
-                    { CD: 5, CF: 1, CS: 1 }, // level 8
-                    { CD: 5, CF: 1, CS: 1 }, // level 9
-                    { CD: 5, CF: 1, CS: 1 }  // level 10
+                    { CD: 3, CF: 2, CS: 1 }, // level 1
+                    { CD: 3, CF: 2, CS: 1 }, // level 2
+                    { CD: 3, CF: 2, CS: 1 }, // level 3
+                    { CD: 3, CF: 2, CS: 1 }, // level 4
+                    { CD: 3, CF: 2, CS: 1 }, // level 5
+                    { CD: 3, CF: 2, CS: 1 }, // level 6
+                    { CD: 3, CF: 2, CS: 1 }, // level 7
+                    { CD: 3, CF: 2, CS: 1 }, // level 8
+                    { CD: 3, CF: 2, CS: 1 }, // level 9
+                    { CD: 3, CF: 2, CS: 1 }  // level 10
                 ],
                 SPG: [ // Arty
-                    { CD: 3, CF: 1, CS: 0 }, // level 1
-                    { CD: 3, CF: 1, CS: 0 }, // level 2
-                    { CD: 3, CF: 1, CS: 0 }, // level 3
-                    { CD: 3, CF: 1, CS: 0 }, // level 4
-                    { CD: 3, CF: 1, CS: 0 }, // level 5
-                    { CD: 3, CF: 1, CS: 0 }, // level 6
-                    { CD: 3, CF: 1, CS: 0 }, // level 7
-                    { CD: 3, CF: 1, CS: 0 }, // level 8
-                    { CD: 3, CF: 1, CS: 0 }, // level 9
-                    { CD: 3, CF: 1, CS: 0 }  // level 10
+                    { CD: 2, CF: 1, CS: 0 }, // level 1
+                    { CD: 2, CF: 1, CS: 0 }, // level 2
+                    { CD: 2, CF: 1, CS: 0 }, // level 3
+                    { CD: 2, CF: 1, CS: 0 }, // level 4
+                    { CD: 2, CF: 1, CS: 0 }, // level 5
+                    { CD: 2, CF: 1, CS: 0 }, // level 6
+                    { CD: 2, CF: 1, CS: 0 }, // level 7
+                    { CD: 2, CF: 1, CS: 0 }, // level 8
+                    { CD: 2, CF: 1, CS: 0 }, // level 9
+                    { CD: 2, CF: 1, CS: 0 }  // level 10
                 ]
             }
         };

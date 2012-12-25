@@ -55,6 +55,8 @@ package utils
         public static const eff:Class;
         [Embed("images/macros/eff_4.png")]
         public static const eff_4:Class;
+        [Embed("images/macros/extra.png")]
+        public static const extra:Class;
         [Embed("images/macros/hp.png")]
         public static const hp:Class;
         [Embed("images/macros/hp_max.png")]
@@ -77,10 +79,18 @@ package utils
         public static const name:Class;
         [Embed("images/macros/nick.png")]
         public static const nick:Class;
+        [Embed("images/macros/points.png")]
+        public static const points:Class;
         [Embed("images/macros/rating.png")]
         public static const rating:Class;
         [Embed("images/macros/rating_3.png")]
         public static const rating_3:Class;
+        [Embed("images/macros/short_nick.png")]
+        public static const short_nick:Class;
+        [Embed("images/macros/short_vehicle.png")]
+        public static const short_vehicle:Class;
+        [Embed("images/macros/speed.png")]
+        public static const speed:Class;
         [Embed("images/macros/squad.png")]
         public static const squad:Class;
         [Embed("images/macros/t_battles.png")]
@@ -103,6 +113,12 @@ package utils
         public static const t_rating_3:Class;
         [Embed("images/macros/t_wins.png")]
         public static const t_wins:Class;
+        [Embed("images/macros/tanks.png")]
+        public static const tanks:Class;
+        [Embed("images/macros/time.png")]
+        public static const time:Class;
+        [Embed("images/macros/time_sec.png")]
+        public static const time_sec:Class;
         [Embed("images/macros/teff.png")]
         public static const teff:Class;
         [Embed("images/macros/tdb.png")]

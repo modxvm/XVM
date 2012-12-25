@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<c:PanelComponent
+    xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:c="components.*"
+    title="{resourceManager.getString('panels', 'PMinimap')}">
+    <fx:Script>
+        <![CDATA[
+            import utils.Macros;
+        ]]>
+    </fx:Script>
+<!--
+            minimap: {
+                enabled: false,
+                iconScale: 1,
+                nickShrink: 4,
+                textOffsetX: 0,
+                textOffsetY: 0,
+                format: {
+                  ally:  "{{level}}",
+                  enemy: "{{level}}",
+                  squad: "{{level}} <i>{{short-nick}}</i>",
+                  oneself: "<b>{{level}}</b>",
+                  lostenemy: "<i>{{level}}</i>"
+                },
+                css: {
+                  ally:  "font-family:$FieldFont; font-size:8px; color:#BBEEBB;",
+                  enemy: "font-family:$FieldFont; font-size:8px; color:#EEBBBB;",
+                  squad: "font-family:$FieldFont; font-size:8px; color:#FFEE44;",
+                  oneself: "font-family:$FieldFont; font-size:8px; color:#FFFFFF;",
+                  lostenemy: "font-family:$FieldFont; font-size:8px; color:#EEAACC;"
+                },
+                lostEnemy: {
+                  enabled: true,
+                  alpha: 50,
+                  iconWidth: 15,
+                  iconHeight: 19,
+                  textOffsetX: 11,
+                  textOffsetY: 11
+                }
+            },
+-->
+<!--
+    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'Visible')}" labelWidth="180" id="v_visible" config="hitLog.visible" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'XPosition')}" toolTip="{resourceManager.getString('panels', 'hitLogXTip')}" labelWidth="180" id="v_x" config="hitLog.x" minimum="-9999" maximum="9999" sliderVisible="false" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'YPosition')}" toolTip="{resourceManager.getString('panels', 'hitLogYTip')}" labelWidth="180" id="v_y" config="hitLog.y" minimum="-9999" maximum="9999" sliderVisible="false" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Width')}" labelWidth="180" id="v_w" config="hitLog.w" minimum="0" maximum="9999" sliderVisible="false" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Height')}" labelWidth="180" id="v_h" config="hitLog.h" minimum="0" maximum="9999" sliderVisible="false" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'lines')}" labelWidth="180" id="v_lines" config="hitLog.lines" minimum="0" maximum="100" change="onChange(event)"/>
+    <c:LabeledDirectionSelector label="{resourceManager.getString('panels', 'direction')}" labelWidth="180" id="v_direction" config="hitLog.direction" change="onChange(event)"/>
+    <c:LabeledInsertOrderSelector label="{resourceManager.getString('panels', 'insertOrder')}" toolTip="{resourceManager.getString('panels', 'insertOrderTip')}" labelWidth="180" id="v_insertOrder" config="hitLog.insertOrder" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'groupHitsByPlayer')}" labelWidth="180" id="v_groupHitsByPlayer" config="hitLog.groupHitsByPlayer" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'deadMarker')}" labelWidth="100%" wrapTextField="true" height="40" id="v_deadMarker" config="hitLog.deadMarker" allowedMacros="{Macros.get('hitlog,colors_hitlog')}" preview="true" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'blowupMarker')}" labelWidth="100%" wrapTextField="true" height="40" id="v_blowupMarker" config="hitLog.blowupMarker" allowedMacros="{Macros.get('hitlog,colors_hitlog')}" preview="true" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'formatHeader')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatHeader" config="hitLog.formatHeader" allowedMacros="{Macros.get('hitlog,dead,colors_hitlog')}" preview="true" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'formatHistory')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatHistory" config="hitLog.formatHistory" allowedMacros="{Macros.get('hitlog,dead,colors_hitlog')}" preview="true" change="onChange(event)"/>
+    <s:Label text="" height="20"/>
+    <s:Label text="{resourceManager.getString('panels', 'Shadow')}:" width="100%" backgroundColor="0xCCCCCC"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Size')}" id="v_shadow_size" config="hitLog.shadow.size" minimum="0" maximum="10" stepSize="0.1" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Strength')}" id="v_shadow_strength" config="hitLog.shadow.strength" minimum="0" maximum="1000" isLogarithmic="true" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Angle')}" id="v_shadow_angle" config="hitLog.shadow.angle" minimum="0" maximum="359" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Distance')}" id="v_shadow_distance" config="hitLog.shadow.distance" minimum="0" maximum="10" change="onChange(event)"/>
+    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'Color')}" width="320" id="v_shadow_color" config="hitLog.shadow.color" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Transparency')}" id="v_shadow_alpha" config="hitLog.shadow.alpha" minimum="0" maximum="100" change="onChange(event)"/>
+-->
+</c:PanelComponent>
