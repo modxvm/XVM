@@ -263,13 +263,15 @@ class wot.utils.StatLoader
         var d = Math.max(0, 1 + (stat.tdb - vi3.avgD) / (vi3.topD - vi3.avgD)) || 0;
         var f = Math.max(0, 1 + (stat.tfb - vi3.avgF) / (vi3.topF - vi3.avgF)) || 0;
         var s = Math.max(0, 1 + (stat.tsb - vi3.avgS) / (vi3.topS - vi3.avgS)) || 0;
-/*        var d = stat.tdb < vi3.avgD ? stat.tdb / vi3.avgD : 1 + (stat.tdb - vi3.avgD) / (vi3.topD - vi3.avgD);
-        var f = stat.tfb < vi3.avgF ? stat.tfb / vi3.avgF : 1 + (stat.tfb - vi3.avgF) / (vi3.topF - vi3.avgF);
-        var s = stat.tsb < vi3.avgS ? stat.tsb / vi3.avgS : 1 + (stat.tsb - vi3.avgS) / (vi3.topS - vi3.avgS);*/
+        var d2 = stat.tdb < vi3.avgD ? stat.tdb / vi3.avgD : 1 + (stat.tdb - vi3.avgD) / (vi3.topD - vi3.avgD);
+        var f2 = stat.tfb < vi3.avgF ? stat.tfb / vi3.avgF : 1 + (stat.tfb - vi3.avgF) / (vi3.topF - vi3.avgF);
+        var s2 = stat.tsb < vi3.avgS ? stat.tsb / vi3.avgS : 1 + (stat.tsb - vi3.avgS) / (vi3.topS - vi3.avgS);
         stat.te = (d * EC.CD + f * EC.CF + s * EC.CS) / (EC.CD + EC.CF + EC.CS);
+        stat.teff2 = (d2 * EC.CD + f2 * EC.CF + s2 * EC.CS) / (EC.CD + EC.CF + EC.CS);
 //        Logger.add(stat.vn + " D:" + d + " F:" + f + " S:" + s);
 
         stat.teff = Math.round(stat.te * 1000);
+        stat.teff2 = Math.round(stat.teff2 * 1000);
         stat.te = (stat.teff == 0) ? 0
             : (stat.teff < 300) ? 1
             : (stat.teff < 500) ? 2

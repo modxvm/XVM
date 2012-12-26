@@ -941,16 +941,16 @@ class wot.utils.DefaultConfig
                     { CD: 3, CF: 2, CS: 1 }  // level 10
                 ],
                 SPG: [ // Arty
-                    { CD: 2, CF: 1, CS: 0 }, // level 1
-                    { CD: 2, CF: 1, CS: 0 }, // level 2
-                    { CD: 2, CF: 1, CS: 0 }, // level 3
-                    { CD: 2, CF: 1, CS: 0 }, // level 4
-                    { CD: 2, CF: 1, CS: 0 }, // level 5
-                    { CD: 2, CF: 1, CS: 0 }, // level 6
-                    { CD: 2, CF: 1, CS: 0 }, // level 7
-                    { CD: 2, CF: 1, CS: 0 }, // level 8
-                    { CD: 2, CF: 1, CS: 0 }, // level 9
-                    { CD: 2, CF: 1, CS: 0 }  // level 10
+                    { CD: 3, CF: 1, CS: 0 }, // level 1
+                    { CD: 3, CF: 1, CS: 0 }, // level 2
+                    { CD: 3, CF: 1, CS: 0 }, // level 3
+                    { CD: 3, CF: 1, CS: 0 }, // level 4
+                    { CD: 3, CF: 1, CS: 0 }, // level 5
+                    { CD: 3, CF: 1, CS: 0 }, // level 6
+                    { CD: 3, CF: 1, CS: 0 }, // level 7
+                    { CD: 3, CF: 1, CS: 0 }, // level 8
+                    { CD: 3, CF: 1, CS: 0 }, // level 9
+                    { CD: 3, CF: 1, CS: 0 }  // level 10
                 ]
             }
         };

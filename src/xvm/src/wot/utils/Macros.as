@@ -159,6 +159,8 @@ class wot.utils.Macros
         pdata["e"] = stat.te == null ? "-" : stat.te >= 10 ? "E" : String(stat.te);
         // {{teff}}
         pdata["teff"] = stat.teff == null ? " -- " : Utils.padLeft(String(stat.teff), 4);
+        // {{teff2}}
+        pdata["teff2"] = stat.teff2 == null ? " -- " : Utils.padLeft(String(stat.teff2), 4);
 
         // {{rating}}, {{rating:3}}
         pdata["rating"] = r <= 0 ? "--%" : String(r) + "%";
