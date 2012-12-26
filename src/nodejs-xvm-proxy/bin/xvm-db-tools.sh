@@ -10,9 +10,23 @@ fn=/tmp/xvm-db-tools.tmp
 
 ###
 
+cmd=$1
+
 if [ "$1" = "expired" ]; then
+limitRows=1000000
+limit=100
+limitHi=100
     # expired
-    echo "db.missed.find({missed:false}).forEach(function(x){print(x._id);})" | \
+    echo "db.missed.find({missed:false}).limit($limitRows).forEach(function(x){print(x._id);})" | \
+	mongo --port $port --quiet xvm | grep -v "bye" | \
+	sort -n > $fn
+#	sort -n -r > $fn
+elif [ "$1" = "checkcache" ]; then
+limitRows=3000000
+limit=100
+limitHi=100
+    # expired
+    echo "db.missed.find({}).limit($limitRows).forEach(function(x){print(x._id);})" | \
 	mongo --port $port --quiet xvm | grep -v "bye" | \
 	sort -n > $fn
 #	sort -n -r > $fn
@@ -74,7 +88,7 @@ update()
 	}'`)
 	id=${arr[0]}
 	st=${arr[1]}
-	statuses[$st]=$st
+	statuses[$st]=$((${statuses[$st]} + 1))
 	case "$st" in
 	    cache|ok|bad_id|closed|not_init)
 		[ "$rmids" != "" ] && rmids="$rmids,"
@@ -85,7 +99,7 @@ update()
 		unset ids[$id]
 		;;
 	    fail|expired|error)
-		echo -n " $st:$id"
+		echo -n "$st:$id "
 		slp=1
 		;;
 	    wait|max_conn|fail)
@@ -96,9 +110,10 @@ update()
 		exit
 		;;
 	esac
+	[ "$cmd" = "checkcache" ] && unset ids[$id]
     done
 
-    [ "$slp" = "1" ] && sleep 1
+    [ "$slp" = "1" -a "$cmd" != "checkcache" ] && sleep 1
 
     IFS=$OIFS
 
@@ -106,20 +121,25 @@ update()
 	echo "db.missed.remove({_id: { \$in: [ $rmids ] }})" | mongo --port $port --quiet xvm >/dev/null
     fi
 
-    echo "${statuses[*]}"
-    if [ "${statuses[wait]}" != "" ]; then
-	if [ $((`date +%s` - $last_limit_update)) -ge 2 ]; then
-	    [ $limit -gt $limitLo ] && limit=$(($limit-1))
+    for i in ${!statuses[@]}; do
+	echo -n "$i(${statuses[$i]}) "
+    done
+    echo
+    if [ "$cmd" != "checkcache" ]; then
+        if [ "${statuses[wait]}" != "" ]; then
+	    if [ $((`date +%s` - $last_limit_update)) -ge 2 ]; then
+		[ $limit -gt $limitLo ] && limit=$(($limit-1))
+		last_limit_update=`date +%s`
+	    fi
+	elif [ "${statuses[max_conn]}" != "" ]; then
+	    if [ $((`date +%s` - $last_limit_update)) -ge 2 ]; then
+		[ $limit -gt $limitLo ] && limit=$(($limit-1))
+		last_limit_update=`date +%s`
+	    fi
+	elif [ "${statuses[ok]}" != "" -o "${statuses[bad_id]}" != "" ]; then
+	    [ $limit -lt $limitHi ] && limit=$(($limit+1))
 	    last_limit_update=`date +%s`
 	fi
-    elif [ "${statuses[max_conn]}" != "" ]; then
-	if [ $((`date +%s` - $last_limit_update)) -ge 2 ]; then
-	    [ $limit -gt $limitLo ] && limit=$(($limit-1))
-	    last_limit_update=`date +%s`
-	fi
-    elif [ "${statuses[ok]}" != "" -o "${statuses[bad_id]}" != "" ]; then
-	[ $limit -lt $limitHi ] && limit=$(($limit+1))
-	last_limit_update=`date +%s`
     fi
 }
 
@@ -154,7 +174,7 @@ total=$(wc -l $fn)
 echo Total: $total
 pos=0
 ids=()
-for id in $(cat $fn); do
+cat $fn | while read id; do
     pos=$((pos+1))
     ids[$id]=$id
     prepare $pos $total 1
