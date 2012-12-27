@@ -257,21 +257,29 @@ class wot.utils.StatLoader
             return stat;
         if (EC.CF != null && EC.CF > 0 && (stat.tfb == null || stat.tfb <= 0))
             return stat;
-        if (EC.CS != null && EC.CS > 0 && (stat.tsb == null || stat.tsb <= 0))
-            return stat;
         
-        var d = Math.max(0, 1 + (stat.tdb - vi3.avgD) / (vi3.topD - vi3.avgD)) || 0;
-        var f = Math.max(0, 1 + (stat.tfb - vi3.avgF) / (vi3.topF - vi3.avgF)) || 0;
-        var s = Math.max(0, 1 + (stat.tsb - vi3.avgS) / (vi3.topS - vi3.avgS)) || 0;
-        var d2 = stat.tdb < vi3.avgD ? stat.tdb / vi3.avgD : 1 + (stat.tdb - vi3.avgD) / (vi3.topD - vi3.avgD);
-        var f2 = stat.tfb < vi3.avgF ? stat.tfb / vi3.avgF : 1 + (stat.tfb - vi3.avgF) / (vi3.topF - vi3.avgF);
-        var s2 = stat.tsb < vi3.avgS ? stat.tsb / vi3.avgS : 1 + (stat.tsb - vi3.avgS) / (vi3.topS - vi3.avgS);
-        stat.te = (d * EC.CD + f * EC.CF + s * EC.CS) / (EC.CD + EC.CF + EC.CS);
-        stat.teff2 = (d2 * EC.CD + f2 * EC.CF + s2 * EC.CS) / (EC.CD + EC.CF + EC.CS);
+        var dD = stat.tdb - vi3.avgD;
+        var dF = stat.tfb - vi3.avgF;
+        var minD = vi3.avgD * Config.s_config.consts.E.Kmin;
+        var minF = vi3.avgF * Config.s_config.consts.E.Kmin;
+        var d = 1 + dD / (vi3.topD - vi3.avgD);
+        var f = 1 + dF / (vi3.topF - vi3.avgF);
+        var d2 = stat.tdb < vi3.avgD ? stat.tdb / vi3.avgD : d;
+        var f2 = stat.tfb < vi3.avgF ? stat.tfb / vi3.avgF : f;
+        d = stat.tdb < vi3.avgD ? 1 + dD / (vi3.avgD - minD) : d;
+        f = stat.tfb < vi3.avgF ? 1 + dF / (vi3.avgF - minF) : f;
+
+        d = Math.max(0, d);
+        f = Math.max(0, f);
+        d2 = Math.max(0, d2);
+        f2 = Math.max(0, f2);
+
+        stat.te = (d * EC.CD + f * EC.CF) / (EC.CD + EC.CF);
+        stat.teff2 = (d2 * EC.CD + f2 * EC.CF) / (EC.CD + EC.CF);
 //        Logger.add(stat.vn + " D:" + d + " F:" + f + " S:" + s);
 
-        stat.teff = Math.round(stat.te * 1000);
-        stat.teff2 = Math.round(stat.teff2 * 1000);
+        stat.teff = Math.max(1, Math.round(stat.te * 1000));
+        stat.teff2 = Math.max(1, Math.round(stat.teff2 * 1000));
         stat.te = (stat.teff == 0) ? 0
             : (stat.teff < 300) ? 1
             : (stat.teff < 500) ? 2

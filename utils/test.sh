@@ -19,7 +19,10 @@ CURRENT_DIRECTORY=`pwd`
 #-SAMPLE_REPLAY=fogofwar.wotreplay
 #-SAMPLE_REPLAY=cap.wotreplay
 #SAMPLE_REPLAY=microfreeze.wotreplay
-SAMPLE_REPLAY=markers.wotreplay
+#SAMPLE_REPLAY=markers.wotreplay
+SAMPLE_REPLAY=teff1.wotreplay
+#SAMPLE_REPLAY=teff2.wotreplay
+#SAMPLE_REPLAY=test.wotreplay
 
 cd "${WOT_DIRECTORY}"
 REPLAY=${CURRENT_DIRECTORY}/../test/replays/${SAMPLE_REPLAY}
