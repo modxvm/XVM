@@ -7,10 +7,11 @@ class wot.Minimap.staticUtils.LabelAppend
 {
     public static function append(mc:MovieClip, player:Object, entryName:String, offset:Point):TextField
     {
-        var textField:TextField = mc.createTextField("textField-" + player.uid + entryName, mc.getNextHighestDepth(), offset.x, offset.y, 100, 50);
+        var textField:TextField = mc.createTextField("textField-" + player.uid + entryName, mc.getNextHighestDepth(), offset.x, offset.y, 100, 40);
         textField.antiAliasType = "advanced";
         textField.html = true;
         textField.multiline = true;
+        textField.selectable = false;
         
         var style:TextField.StyleSheet = new TextField.StyleSheet();
         style.parseCSS(getCSS(entryName));

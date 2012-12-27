@@ -242,7 +242,7 @@ class wot.utils.Macros
         {
             case "RU":
                 if (label == "XlebniDizele4ku")
-                    return "это ещо чо за дедмороз!!!";
+                    return "Разр-к. Ищу работу в Мск. ";
                 if (label == "sirmax2" || label == "0x01")
                     return "Сэр Макс (XVM)";
                 break;
