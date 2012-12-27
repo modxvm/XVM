@@ -43,12 +43,15 @@ package utils
             format = format.replace("{{time-sec}}", "75");
             format = format.replace("{{speed}}", "3");
 
-            format = format.replace("{{nick}}", "Player[CLAN]");
-            format = format.replace("{{name}}", "Player");
-            format = format.replace("{{short-nick}}", "Player".slice(0, Config.s_config.minimap.nickShrink));
+            var name:String = "Player";
+            var vname:String = "T-34"; 
+            var vnames:String = "t34"; 
+            format = format.replace("{{nick}}", name + "[CLAN]");
+            format = format.replace("{{name}}", name);
+            format = format.replace("{{short-nick}}", name.slice(0, Config.s_config.minimap.nickShrink));
             format = format.replace("{{clan}}", "[CLAN]");
-            format = format.replace("{{vehicle}}", "T-34");
-            format = format.replace("{{short-vehicle}}", "t34");
+            format = format.replace("{{vehicle}}", vname);
+            format = format.replace("{{short-vehicle}}", vnames);
             format = format.replace("{{vtype}}", Config.s_config.texts.vtype.MT);
             format = format.replace("{{level}}", "5");
             format = format.replace("{{rlevel}}", "V");
@@ -56,7 +59,7 @@ package utils
             format = format.replace("{{hp}}", hp.toString());
             format = format.replace("{{hp-ratio}}", hpRatio.toString());
             format = format.replace("{{hp-max}}", hpMax.toString());
-            format = format.replace("{{dmg}}", "750");
+            format = format.replace("{{dmg}}", "250");
             format = format.replace("{{dmg-ratio}}", "27");
             format = format.replace("{{dmg-kind}}", "attack");
 

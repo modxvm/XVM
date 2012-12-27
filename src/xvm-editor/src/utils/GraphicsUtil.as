@@ -15,7 +15,7 @@ public class GraphicsUtil
         alpha:Number, size:Number, strength:Number):Object
     {
         if (!alpha || !strength || !size)
-            return null;
+            return new DropShadowFilter(0, 0, 0, 0, 0, 0, 0, 0);
         return new DropShadowFilter(distance, angle, color, alpha * 0.01, size, size, strength * 0.01, 3);
     }
 

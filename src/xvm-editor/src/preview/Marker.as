@@ -2,10 +2,11 @@
 {
     import flash.display.MovieClip;
     import flash.events.Event;
-
+    
     import mx.core.UIComponent;
-
+    
     import preview.*;
+    
     import utils.*;
 
     public class Marker extends UIComponent

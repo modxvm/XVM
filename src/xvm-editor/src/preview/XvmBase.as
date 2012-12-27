@@ -29,7 +29,7 @@ public class XvmBase
     // Private members
     var m_showExInfo: Boolean;
     var m_isDead: Boolean;
-    var m_defaultIconSource: String;
+    var m_vclass:String;
 
     // Vehicle State
     var vehicleState: VehicleState;
@@ -73,7 +73,7 @@ public class XvmBase
             format = formatArr.join(m_vname);
         formatArr = format.split("{{vtype}}");
         if (formatArr.length > 1)
-            format = formatArr.join(VehicleInfo.GetVTypeValue(m_defaultIconSource));
+            format = formatArr.join(Config.s_config.texts.vtype[Utils.vehicleClassToVehicleType(m_vclass)]);
         formatArr = format.split("{{level}}");
         if (formatArr.length > 1)
             format = formatArr.join(String(m_level));
@@ -159,8 +159,7 @@ public class XvmBase
             if (vehicleTypeComponent != null)
             {
                 format = formatArr.join(GraphicsUtil.GetVTypeColorValue(
-                    Utils.vehicleClassToVehicleType(vehicleTypeComponent.getVehicleClass()),
-                    m_defaultIconSource));
+                    Utils.vehicleClassToVehicleType(m_vclass)));
             }
         }
 
@@ -214,8 +213,7 @@ public class XvmBase
             if (vehicleTypeComponent != null)
             {
                 format = formatArr.join(GraphicsUtil.GetVTypeColorValue(
-                    Utils.vehicleClassToVehicleType(vehicleTypeComponent.getVehicleClass()),
-                    m_defaultIconSource, "0x"));
+                    Utils.vehicleClassToVehicleType(m_vclass)));
             }
         }
         return !isNaN(parseInt(format)) ? Number(format) : systemColor;

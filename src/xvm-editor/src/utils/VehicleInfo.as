@@ -12,6 +12,8 @@ public class VehicleInfo
 	{
 		// incoming str:
 		// ../maps/icons/vehicle/contour/germany-PzVIB_Tiger_II.png
+        if (!str)
+            return null;
 		if (Utils.endsWith(".png", str))
 			str = str.slice(str.lastIndexOf("/") + 1, str.lastIndexOf("."));
 		str = str.split("-").join("_");

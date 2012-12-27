@@ -53,7 +53,8 @@ public class Xvm extends XvmBase
 
         trace("Xvm::init(): " + entityName + ", " + entityType);
 
-        m_defaultIconSource = vIconSource; // ../maps/icons/vehicle/contour/usa-M48A1.png
+        //m_defaultIconSource = vIconSource; // ../maps/icons/vehicle/contour/usa-M48A1.png
+        m_vclass = vClass;
         m_source = vIconSource;
         m_entityName = entityName; // ally, enemy, squadman, teamKiller
         m_entityType = entityType; // ally, enemy

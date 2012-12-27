@@ -36,7 +36,7 @@
             ];
 
             private static var s_taTestHtml:TextArea = null;
-            public static function set testHtml(value:String)
+            public static function testHtml(value:String)
             {
                 if (s_taTestHtml == null)
                     return;

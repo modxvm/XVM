@@ -20,7 +20,7 @@
                     changing = true;
                     super.onChange(event);
                     if (preview)
-                        PreviewComponent.testHtml = value;
+                        PreviewComponent.testHtml(value);
                 }
                 finally
                 {
@@ -31,13 +31,13 @@
             protected function onMouseOver(event:MouseEvent):void
             {
                 if (preview)
-                    PreviewComponent.testHtml = value;
+                    PreviewComponent.testHtml(value);
             }
 
             protected function onMouseOut(event:MouseEvent):void
             {
                 if (preview)
-                    PreviewComponent.testHtml = "";
+                    PreviewComponent.testHtml("");
             }
         ]]>
     </fx:Script>
