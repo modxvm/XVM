@@ -38,6 +38,7 @@
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
     <compile path="src\wot\FinalStatistic\FinalStatisticForm.as" />
+    <compile path="src\wot\FinalStatistic\TeamStats.as" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>
