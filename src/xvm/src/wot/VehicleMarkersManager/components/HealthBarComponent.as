@@ -25,14 +25,20 @@ class wot.VehicleMarkersManager.components.HealthBarComponent
         damage = healthBar.createEmptyMovieClip("damage", 3);
     }
 
-    public function showDamage(state_cfg:Object, curHealth:Number, maxHealth:Number, delta:Number)
+    /**
+     * Show floating damage indicator
+     * @param	delta absolute damage
+     * @param	flag  damage source: 0 - "FROM_UNKNOWN", 1 - "FROM_ALLY", 2 - "FROM_ENEMY", 3 - "FROM_SQUAD", 4 - "FROM_PLAYER"
+     * @param	damageType damage kind: "attack", "fire", "ramming", "world_collision", "death_zone", "drowning", "explosion"
+     */
+    public function showDamage(state_cfg:Object, curHealth:Number, maxHealth:Number, delta:Number, flag:Number, damageType:String)
     {
         var cfg = state_cfg.healthBar;
         //Flow bar animation
         TweenLite.killTweensOf(damage);
         damage._x = cfg.border.size + cfg.width * (curHealth / maxHealth) - 1;
         damage._xscale = damage._xscale + 100 * (delta / maxHealth);
-        GraphicsUtil.setColor(damage, proxy.formatDynamicColor(cfg.damage.color));
+        GraphicsUtil.setColor(damage, proxy.formatDynamicColor(cfg.damage.color, delta, flag, damageType));
         damage._alpha = proxy.formatDynamicAlpha(cfg.damage.alpha);
         TweenLite.to(damage, cfg.damage.fade, {_xscale: 0, ease: Cubic.easeIn });
     }
