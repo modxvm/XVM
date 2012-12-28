@@ -10,5 +10,5 @@ sleep 5
 
 su -m mongodb -c "/usr/bin/mongod -f /xvm/db/sharddb.conf --slowms 5000 &"
 su -m mongodb -c "/usr/bin/mongod --configsvr --dbpath /xvm/db/configdb --port 27019 --logpath /var/log/mongodb/configsvr.log &"
-sleep 5
-su -m mongodb -c "/usr/bin/mongos --configdb bulychev.net:27019 --port 27020 --logpath /var/log/mongodb/mongos.log --pidfilepath $mongos_pid &"
+sleep 10
+su -m mongodb -c "/usr/bin/mongos --configdb proxy.bulychev.net:27019 --port 27017 --noMoveParanoia --logpath /var/log/mongodb/mongos.log --pidfilepath $mongos_pid &"

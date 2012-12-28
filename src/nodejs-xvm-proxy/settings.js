@@ -4,6 +4,8 @@ module.exports = (function()
 
     // exports
     return {
+        updateMissed: true,
+        updateUsers: true,
         numNodes: numNodes,
         host: "127.0.0.1",
         port: 1333,

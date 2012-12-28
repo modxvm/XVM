@@ -181,7 +181,8 @@ module.exports = (function() {
                                     w: vdata.win_count,
                                     d: vdata.damageDealt,
                                     f: vdata.frags,
-                                    s: vdata.spotted
+                                    s: vdata.spotted,
+                                    u: vdata.survivedBattles
                                 });
                             }
 
@@ -248,7 +249,8 @@ module.exports = (function() {
                             result.players[i] = pl;
                             if(pl.status != "bad_id") {
                                 process.send({ usage: 1, cached: 1, updatesFailed: 1 });
-                                missed_collection.update({ _id: pl.id }, { _id: pl.id, missed: false }, { upsert: true });
+                                if (settings.updateMissed == true)
+                                    missed_collection.update({ _id: pl.id }, { _id: pl.id, missed: false }, { upsert: true });
                                 failed_count++;
                             }
                         }
@@ -268,7 +270,8 @@ module.exports = (function() {
             result.players.forEach(function(player) {
                 if(player.status == "error" || player.status == "fail") {
                     missed_count++;
-                    missed_collection.update({ _id: player.id }, { _id: player.id, missed: true }, { upsert: true });
+                    if (settings.updateMissed == true)
+                        missed_collection.update({ _id: player.id }, { _id: player.id, missed: true }, { upsert: true });
                 } else {
                     // Return only one vehicle data
                     if(player.v) {
@@ -322,6 +325,54 @@ module.exports = (function() {
         });
     };
 
+    var processCommand = function(response, args) {
+        try {
+            cmd = args.shift();
+            if (!cmd)
+                throw "Empty command";
+            switch (cmd) {
+                case "PLAYERINFO":
+                    if (mongorq >= mongorq_max) {
+                        response.statusCode = 503; // Service Unavailable
+                        throw "db overloaded: " + mongorq + "/" + mongorq_max;
+                    }
+
+                    var pl = args.shift();
+                    if (!pl)
+                        throw "[" + cmd + "]: empty player name";
+
+                    var vn = args.shift();
+
+                    var cursor = collection.find({ nm: pl });
+                    cursor.toArray(function(error, data) {
+                        if(error)
+                            throw "[" + cmd + "]: MongoDB find error: " + error;
+                        utils.log(vn);
+                        if (vn) {
+                            for (var id in data) {
+                                var d = data[id];
+                                for (var i in d.v) {
+                                    var v = d.v[i];
+                                    if (v.name.toUpperCase() == vn.toUpperCase()) {
+                                        d.v = v;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        response.end(JSON.stringify(data));
+                        ok = true;
+                    });
+                    break;
+
+                default:
+                    throw "Unknown command: " + cmd;
+            }
+        } catch(e) {
+            response.end('{"error":"' + e + '","server":"' + settings.serverName + '"}');
+        }
+    }
+
     var processRequest = function(request, response) {
         // parse request
         var ids = [ ];
@@ -332,7 +383,7 @@ module.exports = (function() {
         ];
         try {
             var query = url.parse(request.url).query;
-            if(!query || !query.match(/^((\d)|(\d[\dA-Z_\-,=]*))$/))
+            if(!query || !query.match(/^((\d)|(\d[\dA-Za-z_\-,=/]*))$/))
                 throw "query match error: " + query;
 
             if(query == "001" || query == "test") {
@@ -341,20 +392,26 @@ module.exports = (function() {
             }
 
             var qarr = query.split(",");
-            qarr.forEach(function(a) {
-                var x = a.split("=");
-                var id = parseInt(x[0]);
+            if (qarr[0] == "0") {
+                qarr.shift();
+                processCommand(response, qarr);
+                return;
+            } else {
+                qarr.forEach(function(a) {
+                    var x = a.split("=");
+                    var id = parseInt(x[0]);
 
-                var statHostId = getStatHostId(id);
-                // Skip wrong id and non-working servers
-                if(statHostId == -1 || settings.statHosts[statHostId] == "")
-                    ids_bad_id.push(id);
-                else
-                    ids.push(id);
-                vehicles.push(x[1]);
-                if(x[2] == "1")
-                    users_collection.update({ _id: id }, { $inc: { counter: 1 } }, { upsert: true });
-            });
+                    var statHostId = getStatHostId(id);
+                    // Skip wrong id and non-working servers
+                    if(statHostId == -1 || settings.statHosts[statHostId] == "")
+                        ids_bad_id.push(id);
+                    else
+                        ids.push(id);
+                    vehicles.push(x[1]);
+                    if(x[2] == "1" && settings.updateUsers == true)
+                        users_collection.update({ _id: id }, { $inc: { counter: 1 } }, { upsert: true });
+                });
+            }
         } catch(e) {
             response.statusCode = 403; // Forbidden
             var errText = "wrong request: " + e;
