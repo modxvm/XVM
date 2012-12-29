@@ -149,7 +149,7 @@ class wot.utils.Macros
         var w:Number = Utils.toInt(stat.w, 0);
         var tr:Number = Utils.toInt(stat.tr, 0);
         var tb:Number = Utils.toInt(stat.tb, 0);
-        var tw:Number = Utils.toInt(stat.tb, 0);
+        var tw:Number = Utils.toInt(stat.tw, 0);
         var tbK:Number = Math.round(tb / 100) / 10;
 
         // {{eff}}, {{eff:4}}
