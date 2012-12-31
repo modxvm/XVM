@@ -328,17 +328,17 @@ module.exports = (function() {
     var processCommand = function(response, args) {
         try {
             cmd = args.shift();
-            if (!cmd)
+            if(!cmd)
                 throw "Empty command";
-            switch (cmd) {
+            switch(cmd) {
                 case "PLAYERINFO":
-                    if (mongorq >= mongorq_max) {
+                    if(mongorq >= mongorq_max) {
                         response.statusCode = 503; // Service Unavailable
                         throw "db overloaded: " + mongorq + "/" + mongorq_max;
                     }
 
                     var pl = args.shift();
-                    if (!pl)
+                    if(!pl)
                         throw "[" + cmd + "]: empty player name";
 
                     var vn = args.shift();
@@ -348,12 +348,12 @@ module.exports = (function() {
                         if(error)
                             throw "[" + cmd + "]: MongoDB find error: " + error;
                         utils.log(vn);
-                        if (vn) {
-                            for (var id in data) {
+                        if(vn) {
+                            for(var id in data) {
                                 var d = data[id];
-                                for (var i in d.v) {
+                                for(var i in d.v) {
                                     var v = d.v[i];
-                                    if (v.name.toUpperCase() == vn.toUpperCase()) {
+                                    if(v.name.toUpperCase() == vn.toUpperCase()) {
                                         d.v = v;
                                         break;
                                     }
@@ -371,7 +371,7 @@ module.exports = (function() {
         } catch(e) {
             response.end('{"error":"' + e + '","server":"' + settings.serverName + '"}');
         }
-    }
+    };
 
     var processRequest = function(request, response) {
         // parse request
