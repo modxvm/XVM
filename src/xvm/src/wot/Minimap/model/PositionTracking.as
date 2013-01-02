@@ -48,7 +48,7 @@ class wot.Minimap.model.PositionTracking
             if (!exist)
             {
                 /** Does not exist -> new track */
-                posTrack.push(new Icon(entry.uid, entry._x, entry._y));
+                posTrack.push(new Icon(entry.uid, entry._x, entry._y, entry.vehicleClass));
             }
         }
     }

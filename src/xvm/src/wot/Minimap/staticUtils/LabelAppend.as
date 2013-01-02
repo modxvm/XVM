@@ -7,7 +7,7 @@ import wot.Minimap.model.PlayersPanelProxy;
 
 class wot.Minimap.staticUtils.LabelAppend
 {
-    public static function append(mc:MovieClip, uid:Number, entryName:String, offset:Point):TextField
+    public static function append(mc:MovieClip, uid:Number, entryName:String, offset:Point, vehicleClass:String):TextField
     {
         var player:Player = PlayersPanelProxy.getPlayerInfo(uid);
         
@@ -21,7 +21,7 @@ class wot.Minimap.staticUtils.LabelAppend
         style.parseCSS(getCSS(entryName));
         textField.styleSheet = style;
         
-        textField.htmlText = "<span class='xvm_mm'>" + getText(entryName, player) + "</span>"; //getText()
+        textField.htmlText = "<span class='xvm_mm'>" + getText(entryName, player, vehicleClass) + "</span>"; //getText()
         
         return textField;
     }
@@ -55,7 +55,7 @@ class wot.Minimap.staticUtils.LabelAppend
         return style;
     }
     
-    private static function getText(entryName:String, player:Player):String
+    private static function getText(entryName:String, player:Player, vehicleClass:String):String
     {
         var text:String;
         
@@ -77,6 +77,6 @@ class wot.Minimap.staticUtils.LabelAppend
                 text = MapConfig.formatOneself;
         }
         
-        return MinimapMacro.process(text, player);
+        return MinimapMacro.process(text, player, vehicleClass);
     }
 }

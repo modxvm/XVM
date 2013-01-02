@@ -1,4 +1,5 @@
 import wot.utils.Utils;
+import wot.Minimap.MinimapEntry;
 
 /**
  * IconsProxy class
@@ -35,6 +36,21 @@ class wot.Minimap.model.IconsProxy
         }
         
         return assigned;
+    }
+    
+    /** Used by VehiclePositionTracking to get vehicle positions */
+    public static function getEntry(uid:Number):MinimapEntry
+    {
+        var minimapEntries:Array = getMinimapEntries();
+        var assigned:Array = [];
+        
+        for (var i:Number = 0; i < minimapEntries.length; i++)
+        {
+            if (minimapEntries[i].uid == uid)
+                return minimapEntries[i];
+        }
+        
+        return null;
     }
     
     // -- Private

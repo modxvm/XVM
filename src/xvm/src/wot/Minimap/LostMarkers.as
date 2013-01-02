@@ -54,6 +54,6 @@ class wot.Minimap.LostMarkers
     
     private function createLabel(lost:Icon):TextField
     {
-        return LabelAppend.append(container, lost.uid, MinimapEntry.MINIMAP_ENTRY_TYPE_LOST, lost.pos);
+        return LabelAppend.append(container, lost.uid, MinimapEntry.MINIMAP_ENTRY_TYPE_LOST, lost.pos, lost.vehicleClass);
     }
 }
