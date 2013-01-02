@@ -77,7 +77,9 @@ module.exports = (function() {
 
         // if trusted tank or not worse then similar tanks
         if ((damage(vdata) * (vdata.l + 10) + vdata.link.acc * (21 - vdata.l)) / 31 > 1 - 0.1 * step ||
-            (cutter(vdata.same[0].vdata) + cutter(vdata.same[1].vdata) + cutter(vdata.same[2].vdata)) / m > vdata.rate
+            ((vdata.same[0] ? cutter(vdata.same[0].vdata) : 0) +
+             (vdata.same[1] ? cutter(vdata.same[1].vdata) : 0) +
+             (vdata.same[2] ? cutter(vdata.same[2].vdata) : 0)) / m > vdata.rate
         ) {
             vdata.rate_plus = rate;
             log += indent + "Return cutted rate for " + vdata.name + ": " + vdata.rate_plus.toFixed(2) + "\n";
