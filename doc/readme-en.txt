@@ -149,6 +149,7 @@
       {{level}}        - subject level
       {{short-nick}}   - subject shortened nickname
       {{vehicle}}      - subject full vehicle type
+      {{ifspg}}        - place special square symbol if subject is artillery
 
     Statistics macros ('rating/showPlayersStatistics' must be anabled):
       {{eff}}         - player efficiency (http://wot-news.com/index.php/stat/calc/en/)
