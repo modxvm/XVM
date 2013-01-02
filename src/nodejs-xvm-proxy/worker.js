@@ -5,6 +5,8 @@ module.exports = (function() {
         utils = require("./utils"),
         settings = require("./settings"),
         mongo = require("mongodb"),
+        tcalc = require("./tcalc/tcalc.js"),
+        tcalc_base = require("./tcalc/tcalc_base.js"),
         info = { };
 
     // Mongo
@@ -328,32 +330,33 @@ module.exports = (function() {
     var processCommand = function(response, args) {
         try {
             cmd = args.shift();
-            if(!cmd)
+            if (!cmd)
                 throw "Empty command";
-            switch(cmd) {
+            utils.log(cmd + ": " + args.join(","));
+            switch (cmd) {
                 case "PLAYERINFO":
-                    if(mongorq >= mongorq_max) {
+                    if (mongorq >= mongorq_max) {
                         response.statusCode = 503; // Service Unavailable
                         throw "db overloaded: " + mongorq + "/" + mongorq_max;
                     }
 
                     var pl = args.shift();
-                    if(!pl)
+                    if (!pl)
                         throw "[" + cmd + "]: empty player name";
 
                     var vn = args.shift();
 
-                    var cursor = collection.find({ nm: pl });
+                    var cursor = collection.find({$or:[{nm:pl},{_id:parseInt(pl)}]});
                     cursor.toArray(function(error, data) {
                         if(error)
                             throw "[" + cmd + "]: MongoDB find error: " + error;
-                        utils.log(vn);
-                        if(vn) {
-                            for(var id in data) {
+                        utils.log(pl + "," + vn);
+                        if (vn) {
+                            for (var id in data) {
                                 var d = data[id];
-                                for(var i in d.v) {
+                                for (var i in d.v) {
                                     var v = d.v[i];
-                                    if(v.name.toUpperCase() == vn.toUpperCase()) {
+                                    if (v.name.toUpperCase() == vn.toUpperCase()) {
                                         d.v = v;
                                         break;
                                     }
@@ -361,7 +364,27 @@ module.exports = (function() {
                             }
                         }
                         response.end(JSON.stringify(data));
-                        ok = true;
+                    });
+                    break;
+
+                case "TWR":
+                    if (mongorq >= mongorq_max) {
+                        response.statusCode = 503; // Service Unavailable
+                        throw "db overloaded: " + mongorq + "/" + mongorq_max;
+                    }
+
+                    var pl = args.shift();
+                    if (!pl)
+                        throw "[" + cmd + "]: empty player name";
+
+                    var cursor = collection.find({nm: pl});
+                    cursor.toArray(function(error, data) {
+                        if(error)
+                            response.end('[' + cmd + ']: MongoDB find error: ' + error);
+                        else if (data.length == 0)
+                            response.end('[' + cmd + ']: Player not found: ' + pl);
+                        else
+                            response.end("<pre>" + tcalc.calc(data[0]).log + "</pre>");
                     });
                     break;
 
@@ -371,7 +394,7 @@ module.exports = (function() {
         } catch(e) {
             response.end('{"error":"' + e + '","server":"' + settings.serverName + '"}');
         }
-    };
+    }
 
     var processRequest = function(request, response) {
         // parse request
@@ -509,6 +532,9 @@ module.exports = (function() {
         // for test applications only
         mongo = fakeMongo || mongo;
         http = fakeHttp || http;
+
+        // initialize tcalc
+        tcalc_base.parseBaseCsv();
 
         process.on("message", function(msg) {
             if(msg.info)

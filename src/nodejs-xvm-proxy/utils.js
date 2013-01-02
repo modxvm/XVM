@@ -45,7 +45,7 @@ module.exports = (function()
             case "spg": return "SPG";
             default: return "unknown";
         }
-    };
+    }
 
     // log
     var log = function(str) {
