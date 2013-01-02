@@ -89,8 +89,6 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
                 Macros.RegisterPlayerData(data[i].label, data[i]);
         }
         
-        minimapUnitDeathInformator(data);
-
         // [2/3] fix WG bug - this function is slow, don't call it if not required.
         m_list["invalidateData"] = function() {}
 
@@ -415,21 +413,4 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
             }
         }
     }
-    
-    /**
-     * Inform Minimap when player becomes dead.
-     * Enemy unit death invokes its last position marker removal.
-     * Originally unit can die without event at Minimap.
-     * Death event handling is essential for reliable last enemy unit position marker removal.
-     */
-    
-     private function minimapUnitDeathInformator(data):Void
-     {
-         for (var i in data)
-         {
-             /** 2 - dead and avatar-ready state. Bitfield. See PlayersPanel\net\wargaming\ingame\VehicleStateInBattle.as */
-             if (data[i].vehicleState == 2)
-                GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENEMY_DIES, { uid: data[i].uid }));
-         }
-     }
 }

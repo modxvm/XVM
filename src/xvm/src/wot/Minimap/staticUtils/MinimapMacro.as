@@ -2,10 +2,11 @@ import wot.utils.VehicleTypeShort;
 import wot.utils.VehicleInfo;
 import wot.utils.VehicleInfoData;
 import wot.Minimap.model.MapConfig;
+import wot.Minimap.dto.Player;
 
-class wot.Minimap.model.MinimapMacro
+class wot.Minimap.staticUtils.MinimapMacro
 {
-    public static function process(format:String, player:Object):String
+    public static function process(format:String, player:Player):String
     {
         if (format.indexOf("{{") == -1)
             return format;

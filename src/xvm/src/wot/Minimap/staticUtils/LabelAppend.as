@@ -1,12 +1,16 @@
 import wot.Minimap.MinimapEntry;
-import wot.Minimap.model.MinimapMacro;
+import wot.Minimap.staticUtils.MinimapMacro;
 import wot.Minimap.model.MapConfig;
 import flash.geom.Point;
+import wot.Minimap.dto.Player;
+import wot.Minimap.model.PlayersPanelProxy;
 
 class wot.Minimap.staticUtils.LabelAppend
 {
-    public static function append(mc:MovieClip, player:Object, entryName:String, offset:Point):TextField
+    public static function append(mc:MovieClip, uid:Number, entryName:String, offset:Point):TextField
     {
+        var player:Player = PlayersPanelProxy.getPlayerInfo(uid);
+        
         var textField:TextField = mc.createTextField("textField-" + player.uid + entryName, mc.getNextHighestDepth(), offset.x, offset.y, 100, 40);
         textField.antiAliasType = "advanced";
         textField.html = true;
@@ -51,7 +55,7 @@ class wot.Minimap.staticUtils.LabelAppend
         return style;
     }
     
-    private static function getText(entryName:String, player:Object):String
+    private static function getText(entryName:String, player:Player):String
     {
         var text:String;
         

@@ -1,3 +1,4 @@
+import wot.Minimap.dto.Player;
 /**
  * PlayersPanelProxy class
  * provides simple wrapper to PlayersPanel.m_list._dataProvider Array
@@ -34,9 +35,9 @@
 
 class wot.Minimap.model.PlayersPanelProxy
 {
-    public static function getPlayerInfo(uid:Number):Object
+    public static function getPlayerInfo(uid:Number):Player
     {
-        var playerInfo:Object = getPlayerInfoFrom(getAllyPlayers(), uid);
+        var playerInfo:Player = getPlayerInfoFrom(getAllyPlayers(), uid);
         if (playerInfo)
             return playerInfo;
         
@@ -64,7 +65,7 @@ class wot.Minimap.model.PlayersPanelProxy
     
     // -- Private
         
-    private static function getPlayerInfoFrom(players:Array, uid:Number):Object
+    private static function getPlayerInfoFrom(players:Array, uid:Number):Player
     {
         for (var i:Number = 0; i < players.length; i++)
             if (players[i].uid == uid)

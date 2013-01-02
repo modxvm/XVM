@@ -1,9 +1,10 @@
+import wot.Minimap.LostMarkers;
 import wot.Minimap.MinimapEvent;
 import wot.utils.GlobalEventDispatcher;
 import wot.Minimap.model.SyncModel;
 import wot.utils.Utils;
 import wot.Minimap.model.MapConfig;
-import wot.Minimap.model.LostEnemyMarkersManager;
+import wot.Minimap.model.AutoUpdate;
 
 /**
  * Original Minimap manages all kinds size, border, drawing and clicking.
@@ -26,13 +27,17 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     /** Used at MinimapEntry to get testUid */
     public var sync:SyncModel;
 
-    /** Places and removes lost evemy positions on minimap */
-    private var lost:LostEnemyMarkersManager;
+    /** Defines lost enemy positions */
+    private var autoUpdate:AutoUpdate;
+    
+    /** Places and removes lost enemy positions on minimap */
+    private var lostMarkers:LostMarkers;
     
     private var isMinimapReady:Boolean = false;
     private var isAllyPlayersPanelReady:Boolean = false;
     private var isEnemyPlayersPanelReady:Boolean = false;
     private var loadComplete:Boolean = false;
+    
    
     // override
     function Minimap()
@@ -114,6 +119,12 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
         sync = new SyncModel();
         sync.updateIconsExtension();
         
-        lost = new LostEnemyMarkersManager(icons);
+        /**
+         * Defines lost enemy units and
+         * sends event on lost units change.
+         */
+        autoUpdate = new AutoUpdate();
+        
+        lostMarkers = new LostMarkers(icons);
     }
 }

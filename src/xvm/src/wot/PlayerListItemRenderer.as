@@ -2,7 +2,6 @@
  * ...
  * @author sirmax2
  */
-import wot.utils.Logger;
 import net.wargaming.controls.UILoaderAlt;
 import wot.utils.Config;
 import wot.utils.IconLoader;

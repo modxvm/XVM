@@ -1,8 +1,5 @@
 import wot.Minimap.model.MapConfig;
-import wot.Minimap.MinimapEvent;
-import wot.Minimap.model.PlayersPanelProxy;
 import wot.Minimap.staticUtils.LabelAppend;
-import wot.utils.GlobalEventDispatcher;
 
 /**
  * MinimapEntry represent individual object on map.
@@ -43,7 +40,6 @@ class wot.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
     
     function lightPlayer(visibility)
     {
-        
         /** Behavior is altered temporarily so original icon highlighting works */
         if (syncProcedureInProgress)
         {
@@ -55,35 +51,13 @@ class wot.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
         }
     }
     
-    /**
-     * Unit remove invoked by Python.
-     * Possibly enemy disappear\loose from view event or very far out of sight position change.
-     * XVM extension dont want icons to disappear. Save them at LostEnemyMarkers.
-     */
-    function removeMovieClip()
-    {
-        if (entryName == MINIMAP_ENTRY_TYPE_ENEMY && uid && !isDead) /** isDead state is handled by PlayersPanel */
-        {
-            var payload:Object = { player:player, vehClass:this.vehicleClass, x:this._x, y:this._y };
-            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENEMY_ICON_REMOVE, payload));
-        }
-        
-        super.removeMovieClip();
-    }
-    
     // -- Private
     
     private function initExtendedBehaviour():Void
     {
         uid = _root.minimap.sync.getTestUid();
-        player = PlayersPanelProxy.getPlayerInfo(uid);
         
-        LabelAppend.append(markMC, player, this.entryName, MapConfig.textOffset);
-        
-        if (entryName == MINIMAP_ENTRY_TYPE_ENEMY && uid && !isDead)
-        {
-            GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENEMY_ICON_INIT, { uid:uid } ));
-        }
+        LabelAppend.append(markMC, uid, this.entryName, MapConfig.textOffset);
     }
     
     private function get syncProcedureInProgress():Boolean
