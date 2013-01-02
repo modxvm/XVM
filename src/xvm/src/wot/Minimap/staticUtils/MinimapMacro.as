@@ -3,7 +3,6 @@ import wot.utils.VehicleInfo;
 import wot.utils.VehicleInfoData;
 import wot.Minimap.model.MapConfig;
 import wot.Minimap.dto.Player;
-import wot.Minimap.model.IconsProxy;
 import wot.Minimap.MinimapEntry;
 
 class wot.Minimap.staticUtils.MinimapMacro

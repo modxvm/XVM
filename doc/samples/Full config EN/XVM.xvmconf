@@ -187,11 +187,7 @@
     "lostEnemy": { // Parameters for icons of lost enemy units
       // Lost icons are loaded from res_mods/minimapicons
       "enabled": true,   // On/off lost icon modification switch
-      "alpha": 50,       // Transparency 
-      "iconWidth": 15,   // Lost icon width  by HTML img tag
-      "iconHeight": 19,  // Lost icon height by HTML img tag
-      "textOffsetX": 11, // Horizontal text offset relative to HTML img
-      "textOffsetY": 11  // Vertical   text offset relative to HTML img
+      "alpha": 90,       // Transparency 
     }
   },
   // OVER-TARGET MARKERS

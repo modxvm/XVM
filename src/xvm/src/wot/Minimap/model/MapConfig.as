@@ -38,19 +38,10 @@ class wot.Minimap.model.MapConfig
         return new Point(Config.s_config.minimap.textOffsetX, Config.s_config.minimap.textOffsetY); }
         
     /** Lost */
-    /** Enabled */
+     /** Enabled */
     public static function get lostEnemyEnabled():Boolean    {
         return Config.s_config.minimap.lostEnemy.enabled;    }
-    /** Alpha */
+     /** Alpha */
     public static function get lostEnemyAlpha():Number    {
         return Config.s_config.minimap.lostEnemy.alpha;    }
-    /** Icon w/h */
-    public static function get lostEnemyIconWidth():Number    {
-        return Config.s_config.minimap.lostEnemy.iconWidth;    }
-    public static function get lostEnemyIconHeight():Number    {
-        return Config.s_config.minimap.lostEnemy.iconHeight;    }
-    /** Text offset */
-    public static function get losttextOffset():Point    {
-        return new Point(Config.s_config.minimap.lostEnemy.textOffsetX, Config.s_config.minimap.lostEnemy.textOffsetY); }
-    /** ---- */
 }

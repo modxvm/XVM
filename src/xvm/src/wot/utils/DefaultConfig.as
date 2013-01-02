@@ -169,11 +169,7 @@ class wot.utils.DefaultConfig
                 },
                 lostEnemy: {
                   enabled: true,
-                  alpha: 50,
-                  iconWidth: 15,
-                  iconHeight: 19,
-                  textOffsetX: 11,
-                  textOffsetY: 11
+                  alpha: 90
                 }
             },
             captureBar: {

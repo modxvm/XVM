@@ -118,13 +118,15 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
         
         sync = new SyncModel();
         sync.updateIconsExtension();
-        
-        /**
-         * Defines lost enemy units and
-         * sends event on lost units change.
-         */
-        autoUpdate = new AutoUpdate();
-        
-        lostMarkers = new LostMarkers(icons);
+
+        if (MapConfig.lostEnemyEnabled)
+        {
+            /**
+             * Defines lost enemy units and
+             * sends event on lost units change.
+             */
+            autoUpdate = new AutoUpdate();
+            lostMarkers = new LostMarkers(icons);
+        }
     }
 }
