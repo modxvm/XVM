@@ -348,22 +348,26 @@ module.exports = (function() {
 
                     var cursor = collection.find({$or:[{nm:pl},{_id:parseInt(pl)}]});
                     cursor.toArray(function(error, data) {
-                        if(error)
-                            throw "[" + cmd + "]: MongoDB find error: " + error;
-                        utils.log(pl + "," + vn);
-                        if (vn) {
-                            for (var id in data) {
-                                var d = data[id];
-                                for (var i in d.v) {
-                                    var v = d.v[i];
-                                    if (v.name.toUpperCase() == vn.toUpperCase()) {
-                                        d.v = v;
-                                        break;
+                        try {
+                            if(error)
+                                throw "[" + cmd + "]: MongoDB find error: " + error;
+                            utils.log(pl + "," + vn);
+                            if (vn) {
+                                for (var id in data) {
+                                    var d = data[id];
+                                    for (var i in d.v) {
+                                        var v = d.v[i];
+                                        if (v.name.toUpperCase() == vn.toUpperCase()) {
+                                            d.v = v;
+                                            break;
+                                        }
                                     }
                                 }
                             }
+                            response.end(JSON.stringify(data));
+                        } catch(e) {
+                            response.end('{"error":"' + e + '","server":"' + settings.serverName + '"}');
                         }
-                        response.end(JSON.stringify(data));
                     });
                     break;
 
@@ -379,12 +383,16 @@ module.exports = (function() {
 
                     var cursor = collection.find({nm: pl});
                     cursor.toArray(function(error, data) {
-                        if(error)
-                            response.end('[' + cmd + ']: MongoDB find error: ' + error);
-                        else if (data.length == 0)
-                            response.end('[' + cmd + ']: Player not found: ' + pl);
-                        else
-                            response.end("<pre>" + tcalc.calc(data[0]).log + "</pre>");
+                        try {
+                            if(error)
+                                response.end('[' + cmd + ']: MongoDB find error: ' + error);
+                            else if (data.length == 0)
+                                response.end('[' + cmd + ']: Player not found: ' + pl);
+                            else
+                                response.end("<pre>" + tcalc.calc(data[0]).log + "</pre>");
+                        } catch(e) {
+                            response.end('{"error":"' + e + '","server":"' + settings.serverName + '"}');
+                        }
                     });
                     break;
 
