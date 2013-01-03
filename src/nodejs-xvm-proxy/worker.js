@@ -113,7 +113,6 @@ module.exports = (function() {
                 makeSingleRequest(id, callback);
             }
         });
-        times.push({ "n": "prepared", "t": new Date() });
 
 //    async.series(urls, function(err, results) {
         async.parallel(urls, function(err, results) {
@@ -124,9 +123,9 @@ module.exports = (function() {
                 players: [ ],
                 info: info
             };
+
             // process retrieved items
             var forUpdate_length = forUpdate.length;
-
             for(var i = 0; i < forUpdate_length; ++i) {
                 var id = forUpdate[i],
                     statHostId = getStatHostId(id);
@@ -223,8 +222,8 @@ module.exports = (function() {
 
             // add cached items and set expired data for players with error stat
             var failed_count = 0;
+            var rm_ids = [];
             inCache.forEach(function(player) {
-                var skip = false;
                 var pl = {
                     id: player._id,
                     date: player.dt,
@@ -236,29 +235,43 @@ module.exports = (function() {
                     eff: player.e,
                     v: player.v
                 };
+
+                var skip = false;
                 var players_length = result.players.length;
                 for(var i = 0; i < players_length; ++i) {
-                    if(result.players[i].id == pl.id) {
-                        if(result.players[i].status != "ok") {
-                            if (result.players[i].status == "bad_id" ||
-                                result.players[i].status == "wait" ||
-                                result.players[i].status == "max_conn" ||
-                                result.players[i].status == "api_error" ||
-                                result.players[i].status == "closed" ||
-                                result.players[i].status == "not_init") {
-                                pl.status = result.players[i].status;
-                            }
-                            result.players[i] = pl;
-                            if(pl.status != "bad_id") {
-                                process.send({ usage: 1, cached: 1, updatesFailed: 1 });
-                                if (settings.updateMissed == true)
-                                    missed_collection.update({ _id: pl.id }, { _id: pl.id, missed: false }, { upsert: true });
-                                failed_count++;
-                            }
-                        }
-                        skip = true;
+                    if(result.players[i].id != pl.id)
+                        continue;
+
+                    skip = true;
+
+                    if(result.players[i].status == "ok") {
+                        rm_ids.push(pl.id);
                         break;
                     }
+
+                    if (result.players[i].status == "bad_id" ||
+                        result.players[i].status == "wait" ||
+                        result.players[i].status == "error" ||
+                        result.players[i].status == "max_conn" ||
+                        result.players[i].status == "api_error" ||
+                        result.players[i].status == "closed" ||
+                        result.players[i].status == "not_init") {
+                        pl.status = result.players[i].status;
+                    } else {
+//                        utils.log(result.players[i].status);
+                    }
+                    result.players[i] = pl;
+                    if(pl.status != "bad_id" && pl.status != "closed" && pl.status != "not_init") {
+                        process.send({ usage: 1, cached: 1, updatesFailed: 1 });
+                        failed_count++;
+
+                        if (pl.status != "max_conn" && pl.status != "wait" && pl.status!="error")
+                            utils.log("missed: " + pl.status);
+
+                        if (settings.updateMissed == true)
+                            missed_collection.insert({ _id: pl.id, missed: false });
+                    }
+                    break;
                 }
                 if(!skip) {
                     result.players.push(pl);
@@ -267,13 +280,18 @@ module.exports = (function() {
             });
             times.push({"n": "processed", "t": new Date()});
 
+            if (rm_ids.length > 0 && settings.updateMissed == true) {
+                missed_collection.remove({_id: { $in: rm_ids }});
+//                utils.log("removed: " + rm_ids.length + " missed records");
+            }
+
             // print debug info & remove useless data from result
             var missed_count = 0;
             result.players.forEach(function(player) {
                 if(player.status == "error" || player.status == "fail") {
                     missed_count++;
                     if (settings.updateMissed == true)
-                        missed_collection.update({ _id: player.id }, { _id: player.id, missed: true }, { upsert: true });
+                        missed_collection.insert({ _id: pl.id, missed: true });
                 } else {
                     // Return only one vehicle data
                     if(player.v) {
@@ -453,7 +471,6 @@ module.exports = (function() {
         }
 
         process.send({ usage: 1, requests: 1, players: ids.length + ids_bad_id.length });
-        times.push({"n": "urlparsed", "t": new Date()});
 
         // Select required data from cache
         if(mongorq >= mongorq_max) {
@@ -467,7 +484,6 @@ module.exports = (function() {
         mongorq++;
         process.send({ usage: 1, mongorq: 1 });
         var cursor = collection.find({ _id: { $in: ids }}, { _id: 1, st: 1, dt: 1, nm: 1, b: 1, w: 1, e: 1, v: 1 });
-        times.push({"n": "find", "t": new Date()});
         cursor.toArray(function(error, inCache) {
             mongorq--;
             process.send({ usage: 1, mongorq: -1 });
@@ -492,7 +508,7 @@ module.exports = (function() {
             }
 
             try {
-                times.push({"n": "find2", "t": now});
+                times.push({"n": "find", "t": now});
 
                 if(error)
                     throw "MongoDB find error: " + error;
@@ -523,9 +539,9 @@ module.exports = (function() {
                     if(!found) {
                         forUpdate.push(id);
                         forUpdateVNames.push(vname);
+//utils.log("Update count:" + forUpdate.length)
                     }
                 }
-                times.push({"n": "beforeprocess", "t": new Date()});
                 processRemotes(inCache, forUpdate, forUpdateVNames, request, response, times);
             } catch(e) {
                 response.statusCode = 500;

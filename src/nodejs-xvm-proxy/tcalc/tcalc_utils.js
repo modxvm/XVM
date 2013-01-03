@@ -20,7 +20,7 @@ module.exports = (function() {
                 continue;
             }
             data.battles += vdata.b;
-            vdata.damage = vdata.d / vdata.b;
+            vdata.damage = (vdata.d || 0) / vdata.b;
             vd.push(vdata);
         }
         // replace original array with filtered array
