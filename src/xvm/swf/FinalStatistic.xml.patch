@@ -1,6 +1,6 @@
 --- orig\FinalStatistic.xml	2012-12-27 16:13:00.877685600 +0200
 +++ FinalStatistic.xml	2012-12-27 16:13:01.487685600 +0200
-@@ -84973,8 +84973,8 @@
+@@ -85008,8 +85008,8 @@
                <String value="charAt"/>
                <String value=" "/>
                <String value="\"/>
@@ -11,7 +11,7 @@
                <String value="&#10;"/>
                <String value="&#13;"/>
                <String value="&#9;"/>
-@@ -103513,7 +103513,7 @@
+@@ -103548,7 +103548,7 @@
          <actions>
            <PushData>
              <items>
@@ -20,7 +20,7 @@
              </items>
            </PushData>
            <GetVariable/>
-@@ -103851,7 +103851,7 @@
+@@ -103886,7 +103886,7 @@
          <actions>
            <PushData>
              <items>
