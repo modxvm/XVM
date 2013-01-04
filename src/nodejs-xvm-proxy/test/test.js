@@ -45,6 +45,9 @@ var fakeMongo = {
                 lastUpdateRequest.item = item;
                 lastUpdateRequest.options = options;
             },
+            remove: function(id, callback) {
+
+            },
             toString: function() {
                 return "fakeCollection";
             }
@@ -101,7 +104,11 @@ suite("Basic functionality", function() {
         req = { url: "" };
         res = {
             end: function(response) {
-                lastResponse = JSON.parse(response);
+                try {
+                    lastResponse = JSON.parse(response);
+                } catch(e) {
+                    lastResponse = response;
+                }
             }
         };
     });
@@ -111,6 +118,24 @@ suite("Basic functionality", function() {
     });
 
     suite("responses", function() {
+
+        test("test request", function() {
+            req.url = "http://1.2.3.4/xxx/?001";
+            makeRequest(req, res);
+
+            var player = lastResponse.players[0];
+
+            assert.equal(player.id, 1);
+            assert.equal(player.status, "ok");
+        });
+
+        test("wrong request", function() {
+            req.url = "http://1.2.3.4/xxx/?wrong_request";
+            makeRequest(req, res);
+
+            assert.equal(lastResponse, "wrong request: query match error: wrong_request url=http://1.2.3.4/xxx/?wrong_request\nserver=");
+        });
+
         test("generic request", function() {
             req.url = "http://1.2.3.4/xxx/?1";
             currentWGResponse = "defaultWGStat.json";
@@ -179,12 +204,14 @@ suite("Basic functionality", function() {
             assert.equal(item.v.length, 26);
             assert.deepEqual(item.v[0], {
                 name: "KV1",
+                cl: "HT",
                 l: 5,
                 b: 208,
                 w: 94,
                 d: null,
                 f: null,
-                s: null
+                s: null,
+                u: null
             });
         });
     });

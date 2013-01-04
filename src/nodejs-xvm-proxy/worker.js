@@ -398,7 +398,7 @@ module.exports = (function() {
         } catch(e) {
             response.end('{"error":"' + e + '","server":"' + settings.serverName + '"}');
         }
-    }
+    };
 
     var processRequest = function(request, response) {
         // parse request
