@@ -187,9 +187,12 @@ module.exports = (function() {
                                 });
                             }
 
-                            // updating db
-                            collection.update({ _id: id }, resultItem, { upsert: true });
+                            // updating db (skip empty data)
+                            if (resultItem.b && resultItem.v.length > 0)
+                                collection.update({ _id: id }, resultItem, { upsert: true });
                             process.send({ usage: 1, updated: 1 });
+                            if (settings.updateMissed == true)
+                                missed_collection.remove({_id: id }, function(err) { if (err) utils.log("remove error: " + err); });
                         } else if(curResult.status === "error") {
                             switch(curResult.status_code) {
                                 case "API_UNKNOWN_SERVER_ERROR":
@@ -221,8 +224,6 @@ module.exports = (function() {
             }
 
             // add cached items and set expired data for players with error stat
-            var failed_count = 0;
-            var rm_ids = [];
             inCache.forEach(function(player) {
                 var pl = {
                     id: player._id,
@@ -236,54 +237,39 @@ module.exports = (function() {
                     v: player.v
                 };
 
-                var skip = false;
+                var cached = true;
                 var players_length = result.players.length;
                 for(var i = 0; i < players_length; ++i) {
                     if(result.players[i].id != pl.id)
                         continue;
 
-                    skip = true;
+                    cached = false;
 
-                    if(result.players[i].status == "ok") {
-                        rm_ids.push(pl.id);
+                    if(result.players[i].status == "ok")
                         break;
-                    }
 
-                    if (result.players[i].status == "bad_id" ||
-                        result.players[i].status == "wait" ||
-                        result.players[i].status == "error" ||
-                        result.players[i].status == "max_conn" ||
-                        result.players[i].status == "api_error" ||
-                        result.players[i].status == "closed" ||
-                        result.players[i].status == "not_init") {
-                        pl.status = result.players[i].status;
-                    } else {
-//                        utils.log(result.players[i].status);
-                    }
+                    pl.status = result.players[i].status;
                     result.players[i] = pl;
-                    if(pl.status != "bad_id" && pl.status != "closed" && pl.status != "not_init") {
-                        process.send({ usage: 1, cached: 1, updatesFailed: 1 });
-                        failed_count++;
 
-                        if (pl.status != "max_conn" && pl.status != "wait" && pl.status!="error")
-                            utils.log("missed: " + pl.status);
+                    if(pl.status == "bad_id" || pl.status == "closed" || pl.status == "not_init")
+                        break;
 
-                        if (settings.updateMissed == true)
-                            missed_collection.insert({ _id: pl.id, missed: false });
-                    }
+                    process.send({ usage: 1, updatesFailed: 1 });
+
+//                    if (pl.status != "max_conn" && pl.status != "wait" && pl.status!="error")
+//                        utils.log("missed: " + pl.status);
+
+                    if (settings.updateMissed == true)
+                        missed_collection.insert({ _id: pl.id, missed: false });
+
                     break;
                 }
-                if(!skip) {
+                if(cached) {
                     result.players.push(pl);
                     process.send({ usage: 1, cached: 1 });
                 }
             });
             times.push({"n": "processed", "t": new Date()});
-
-            if (rm_ids.length > 0 && settings.updateMissed == true) {
-                missed_collection.remove({_id: { $in: rm_ids }});
-//                utils.log("removed: " + rm_ids.length + " missed records");
-            }
 
             // print debug info & remove useless data from result
             var missed_count = 0;
@@ -324,14 +310,6 @@ module.exports = (function() {
                     duration = " " + duration;
 
                 //ip_address = request.connection.remoteAddress;
-
-                /*            utils.debug(
-                 "S" + (statHostId == undefined ? "c" : statHostId) + " " + duration + " ms" +
-                 "  total: " + (result.players.length < 10 ? " " : "") + result.players.length +
-                 "  cache: " + (inCache.length < 10 ? " " : "") + inCache.length +
-                 "  retrieve: " + (forUpdate.length < 10 ? " " : "") + forUpdate.length +
-                 "  failed: " + (failed_count < 10 ? " " : "") + failed_count +
-                 "  missed: " + (missed_count < 10 ? " " : "") + missed_count);*/
 
                 times.push({"n": "end", "t": now2});
                 var str = "";
