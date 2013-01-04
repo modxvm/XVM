@@ -1375,7 +1375,7 @@
     "direction": "down",
     "blowupMarker": "<font face='Wingdings'>M</font>",
     "groupHitsByPlayer": false,
-    "formatHeader": "<font size='10'><font color='#CCCCCC'>Hits:</font> <font size='10'>×{{n}}</font> | <font size='10{{nick}}'><b>{{dmg-total}}</b> | <font color='#CCCCCC'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font></font>",
+    "formatHeader": "<font size='10'><font color='#CCCCCC'>Hits:</font> <font size='10'>×{{n}}</font> | <font size='10{{dmg-kind}}'><b>{{dmg-total}}</b> | <font color='#CCCCCC'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font></font>",
     "lines": 25,
     "w": 200
   },
