@@ -17,7 +17,7 @@ class wot.VehicleMarkersManager.components.TurretStatusProxy extends AbstractAcc
 
     public function defineVehicleStatus():Number
     {
-        var vehInfo:Object = VehicleInfo.getInfo2(vehicleName);
+        var vehInfo:Object = VehicleInfo.getInfo2(xvm.m_defaultIconSource);
 
         // If database stock max hp == current vehicle max hp
         if (vehInfo.hpstock == xvm.m_maxHealth)
@@ -25,7 +25,7 @@ class wot.VehicleMarkersManager.components.TurretStatusProxy extends AbstractAcc
              * Current vehicle has stock turret.
              * Return vulnerability status.
              */
-            return vehInfo.turretstatus;
+            return vehInfo.turret;
 
         return 0; // Turret status unknown
     }
@@ -38,10 +38,5 @@ class wot.VehicleMarkersManager.components.TurretStatusProxy extends AbstractAcc
     public function getLowVulnDisplayMarker():String
     {
         return Config.s_config.turretMarkers.lowVulnerability;
-    }
-
-    private function get vehicleName():String
-    {
-        return VehicleInfo.getVehicleId(xvm.m_defaultIconSource);
     }
 }

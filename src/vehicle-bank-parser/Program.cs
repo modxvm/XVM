@@ -21,65 +21,77 @@ class Program
 
     private static string getVehicleType(string tags)
     {
-        if (tags.Contains("lightTank"))
+        List<string> t = new List<string>(tags.Split(new char[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries));
+        if (t.Contains("lightTank"))
             return "LT";
-        if (tags.Contains("mediumTank"))
+        if (t.Contains("mediumTank"))
             return "MT";
-        if (tags.Contains("heavyTank"))
+        if (t.Contains("heavyTank"))
             return "HT";
-        if (tags.Contains("AT-SPG"))
+        if (t.Contains("AT-SPG"))
             return "TD";
-        if (tags.Contains("SPG"))
+        if (t.Contains("SPG"))
             return "SPG";
         throw new Exception("Cannot find vehicle class:\n  " + tags);
     }
 
     static void Main(string[] args)
     {
-        List<Vehicle> vehicles = new List<Vehicle>();
-        foreach (string country in Defines.COUNTRIES)
+        try
         {
-            string fn = Path.Combine(Settings.Default.GAME_PATH,
-                Settings.Default.VEHICLE_DIR_PATH, country, "list.xml");
-            XmlNodeList nodes = decode(fn).ChildNodes;
-            foreach (XmlNode node in nodes)
+            List<Vehicle> vehicles = new List<Vehicle>();
+            foreach (string country in Defines.COUNTRIES)
             {
-                XmlNode tags = node.SelectSingleNode("tags");
-                if (tags == null)
-                    continue;
-                if (tags.InnerText.Contains("observer"))
-                    continue;
-                XmlNode level = node.SelectSingleNode("level");
-                if (level == null)
-                    continue;
-
-                XmlNode vdata = decode(Path.Combine(Settings.Default.GAME_PATH,
-                    Settings.Default.VEHICLE_DIR_PATH, country, node.Name + ".xml"));
-                if (vdata == null)
-                    continue;
-
-                Vehicle vehicle = new Vehicle(vdata)
+                string fn = Path.Combine(Settings.Default.GAME_PATH,
+                    Settings.Default.VEHICLE_DIR_PATH, country, "list.xml");
+                XmlNodeList nodes = decode(fn).ChildNodes;
+                foreach (XmlNode node in nodes)
                 {
-                    name = node.Name,
-                    nation = country,
-                    level = int.Parse(level.InnerText),
-                    type = getVehicleType(tags.InnerText),
-                };
-                vehicles.Add(vehicle);
+                    XmlNode tags = node.SelectSingleNode("tags");
+                    if (tags == null)
+                        continue;
+                    if (tags.InnerText.Contains("observer"))
+                        continue;
+                    XmlNode level = node.SelectSingleNode("level");
+                    if (level == null)
+                        continue;
+
+                    XmlNode vdata = decode(Path.Combine(Settings.Default.GAME_PATH,
+                        Settings.Default.VEHICLE_DIR_PATH, country, node.Name + ".xml"));
+                    if (vdata == null)
+                        continue;
+
+                    Vehicle vehicle = new Vehicle(vdata)
+                    {
+                        name = node.Name,
+                        nation = country,
+                        level = int.Parse(level.InnerText),
+                        type = getVehicleType(tags.InnerText),
+                    };
+                    vehicles.Add(vehicle);
+                }
             }
+
+            // sort order: level -> type -> nation -> name
+            vehicles.Sort((a, b) =>
+            {
+                var n = a.level - b.level;
+                if (n != 0)
+                    return n;
+                n = Defines.TYPES.IndexOf(a.type) - Defines.TYPES.IndexOf(b.type);
+                if (n != 0)
+                    return n;
+                n = Defines.COUNTRIES.IndexOf(a.nation) - Defines.COUNTRIES.IndexOf(b.nation);
+                if (n != 0)
+                    return n;
+                return String.Compare(a.name, b.name, true);
+            });
+
+            Export.generateAS2code(vehicles);
         }
-
-        vehicles.Sort((a, b) =>
+        catch (Exception ex)
         {
-            var n = a.level - b.level;
-            if (n != 0)
-                return n;
-            n = String.Compare(a.nation, b.nation, true);
-            if (n != 0)
-                return n;
-            return String.Compare(a.name, b.name, true);
-        });
-
-        Export.generateAS2code(vehicles);
+            Console.WriteLine("Error:\n" + ex.ToString());
+        }
     }
 }

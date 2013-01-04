@@ -6,87 +6,35 @@ import wot.utils.Utils;
 import wot.utils.VehicleInfoData;
 import wot.utils.VehicleInfoData2;
 import wot.utils.VehicleInfoData3;
-import wot.utils.VehicleInfoDataMapping;
 
 class wot.utils.VehicleInfo
 {
-    // icon = ../maps/icons/vehicle/contour/usa-M24_Chaffee.tga
-    public static function getName(str: String): String
+    // icon = "../maps/icons/vehicle/contour/usa-M24_Chaffee.tga"
+    // return: "usa-M24_Chaffee"
+    public static function getVehicleName(icon: String): String
     {
-        // incoming str:
-        // ../maps/icons/vehicle/contour/germany-PzVIB_Tiger_II.png
-        if (Utils.endsWith(".png", str))
-            str = str.slice(str.lastIndexOf("/") + 1, str.lastIndexOf("."));
-        str = str.split("-").join("_");
-        str = Utils.trim(str);
-        return str;
-        // return:
-        // germany_PzVIB_Tiger_II
+        icon = icon.slice(icon.lastIndexOf("/") + 1, icon.lastIndexOf("."));
+        icon = Utils.trim(icon);
+        return icon;
     }
 
-    public static function getVehicleId(str: String): String
+    // icon = "../maps/icons/vehicle/contour/usa-M24_Chaffee.tga"
+    public static function getInfo1(icon: String): Object
     {
-        // incoming str:
-        // ../maps/icons/vehicle/contour/usa-M46_Patton.png
-        // ../maps/icons/vehicle/contour/ussr-KV-5.png
-        if (Utils.endsWith(".png", str))
-        {
-            str = str.slice(str.lastIndexOf("/") + 1, str.lastIndexOf("."));
-            str = str.slice(str.indexOf("-") + 1);
-            str = Utils.trim(str);
-            return str.toUpperCase();
-            // return:
-            // M46_Patton
-            // KV-5
-        }
-        return null;
+        return VehicleInfoData.data[getName1(icon)] || null;
     }
 
-    public static function getInfo(iconSource: String): Object
+    // icon = "../maps/icons/vehicle/contour/usa-M24_Chaffee.tga"
+    public static function getInfo2(icon: String): Object
     {
-        // iconSource:
-        // ../maps/icons/vehicle/contour/ussr-KV-5.png
-        return VehicleInfoData.data[getName(iconSource)] || null;
+        return VehicleInfoData2.data[getName2(icon)] || null;
     }
 
-    public static function getInfoFromMappedName(vehicleName: String): Object
-    {
-        return VehicleInfoDataMapping.data2toData[vehicleName.split("-").join("_").toLowerCase()] || null;
-    }
-
-    public static function getInfo2(vehicleName: String): Object
-    {
-        return VehicleInfoData2.data[vehicleName.split("-").join("_").toLowerCase()] || null;
-    }
-
+    // vehicleName = "usa-M24_Chaffee"
     public static function getInfo3(vehicleName: String): Object
     {
         return VehicleInfoData3.data[vehicleName.split("-").join("_").toLowerCase()] || null;
     }
-
-/*    public static function getInfo4(vehicleName: String): Object
-    {
-        var vn = vehicleName.split("-").join("_").toLowerCase();
-        var vi = VehicleInfoDataMapping.data2toData[vn] || null;
-        if (!vi)
-            return null;
-        var l = vi.level;
-        var t = vi.type;
-        var res = { b: 0, d: 0, f: 0, s: 0, w: 0 };
-        for (var i in VehicleInfoData3.data)
-        {
-            vi = VehicleInfoDataMapping.data2toData[i];
-            if (!vi || vi.level != l || vi.type != t)
-                continue;
-            var vi3 = VehicleInfoData3.data[i];
-            res.b += vi3.b;
-            res.d += vi3.d;
-            res.f += vi3.f;
-            res.s += vi3.s;
-            res.w += vi3.w;
-        }
-        return res;
-    }*/
 
     public static function getVehicleNamesData():Object
     {
@@ -100,7 +48,7 @@ class wot.utils.VehicleInfo
     {
         try
         {
-            return Config.s_config.vehicleNames[getName(iconSource)] || originalName;
+            return Config.s_config.vehicleNames[getName1(iconSource)] || originalName;
         }
         catch (ex:Error)
         {
@@ -110,12 +58,35 @@ class wot.utils.VehicleInfo
 
     public static function GetVTypeValue(iconSource:String): String
     {
-        var vi = wot.utils.VehicleInfo.getInfo(iconSource);
-        if (vi == null)
+        var vi2 = wot.utils.VehicleInfo.getInfo2(iconSource);
+        if (vi2 == null)
             return "";
-        var vtype = vi.type;
+        var vtype = vi2.type;
         if (!vtype || !Config.s_config.texts.vtype[vtype])
             return "";
         return Config.s_config.texts.vtype[vtype];
+    }
+    
+    // PRIVATE
+
+    // icon = "../maps/icons/vehicle/contour/usa-M24_Chaffee.tga"
+    // return: "usa_M24_Chaffee"
+    private static function getName1(icon: String): String
+    {
+        icon = icon.slice(icon.lastIndexOf("/") + 1, icon.lastIndexOf("."));
+        icon = icon.split("-").join("_");
+        icon = Utils.trim(icon);
+        return icon;
+    }
+
+    // icon = "../maps/icons/vehicle/contour/usa-M24_Chaffee.tga"
+    // return: "m24_chaffee"
+    private static function getName2(icon: String): String
+    {
+        icon = icon.slice(icon.lastIndexOf("/") + 1, icon.lastIndexOf("."));
+        icon = icon.slice(icon.indexOf("-") + 1);
+        icon = Utils.trim(icon);
+        icon = icon.split("-").join("_").toLowerCase();
+        return icon;
     }
 }

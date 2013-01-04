@@ -77,11 +77,15 @@ class wot.utils.Chance
         {
             var pdata = StatData.s_data[pname];
 
-            var vi = VehicleInfo.getInfo(pdata.icon);
-            if (!vi || vi.level == 0)
-              return { error: "No data for: " + VehicleInfo.getName(pdata.icon) };
+            var vi1 = VehicleInfo.getInfo1(pdata.icon);
+            if (!vi1)
+              return { error: "No data for: " + VehicleInfo.getVehicleName(pdata.icon) };
 
-            var K = chanceFunc(vi, pdata.team, pdata.stat);
+            var vi2 = VehicleInfo.getInfo2(pdata.icon);
+            if (!vi2)
+              return { error: "No data for: " + VehicleInfo.getVehicleName(pdata.icon) };
+
+            var K = chanceFunc(vi1, vi2, pdata.team, pdata.stat);
 
             Ka += (pdata.team == Defines.TEAM_ALLY) ? K : 0;
             Ke += (pdata.team == Defines.TEAM_ENEMY) ? K : 0;
@@ -104,9 +108,9 @@ class wot.utils.Chance
         return PrepareChanceResults(Ka, Ke);
     }
 
-    private static function ChanceFuncG(vi, team, stat): Number
+    private static function ChanceFuncG(vi1, vi2, team, stat): Number
     {
-        var Td = (vi.tiers[0] + vi.tiers[1]) / 2.0 - battleTier;
+        var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
 
         var E: Number = stat.e || Config.s_config.consts.AVG_EFF;
         var R: Number = stat.b ? stat.w / stat.b : Config.s_config.consts.AVG_GWR / 100.0;
@@ -120,9 +124,9 @@ class wot.utils.Chance
         return E * (1 + R - (Config.s_config.consts.AVG_GWR / 100.0)) * (1 + 0.25 * Td) * (1 + Bn);
     }
 
-    private static function ChanceFuncT(vi, team, stat): Number
+    private static function ChanceFuncT(vi1, vi2, team, stat): Number
     {
-        var Td = (vi.tiers[0] + vi.tiers[1]) / 2.0 - battleTier;
+        var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
 
         var E: Number = stat.e || Config.s_config.consts.AVG_EFF;
 
@@ -133,9 +137,9 @@ class wot.utils.Chance
         return E * (1 + Rt) * (1 + 0.25 * Td);
     }
 
-    private static function ChanceFuncX1(vi, team, stat): Number
+    private static function ChanceFuncX1(vi1, vi2, team, stat): Number
     {
-        var Td = (vi.tiers[0] + vi.tiers[1]) / 2.0 - battleTier;
+        var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
 
         var r = stat.b ? stat.w / stat.b * 100 : Config.s_config.consts.AVG_GWR;
         var R = Math.max(-10, Math.min(10, r - Config.s_config.consts.AVG_GWR)) + 10;
@@ -145,7 +149,7 @@ class wot.utils.Chance
         if (DEBUG_EXP)
         {
             Logger.add("team=" + team +
-                " l=" + Utils.padLeft(String(vi.level), 2) + " " + Utils.padLeft(vi.type, 3) +
+                " l=" + Utils.padLeft(String(vi2.level), 2) + " " + Utils.padLeft(vi2.type, 3) +
                 " r=" + Utils.padLeft(String(Math.round(r * 10) / 10), 4) +
                 " R=" + Utils.padLeft(String(Math.round(R * 10) / 10), 4) +
                 " Td=" + Utils.padLeft(String(Td), 4) +
@@ -155,9 +159,9 @@ class wot.utils.Chance
         return K;
     }
 
-    private static function ChanceFuncX2(vi, team, stat): Number
+    private static function ChanceFuncX2(vi1, vi2, team, stat): Number
     {
-        var Td = (vi.tiers[0] + vi.tiers[1]) / 2.0 - battleTier;
+        var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
 
         var r = stat.b ? stat.w / stat.b * 100 : Config.s_config.consts.AVG_GWR;
         var R = Math.max(-10, Math.min(10, r - Config.s_config.consts.AVG_GWR)) + 10;
@@ -173,7 +177,7 @@ class wot.utils.Chance
         if (DEBUG_EXP)
         {
             Logger.add("team=" + team +
-                " l=" + Utils.padLeft(String(vi.level), 2) + " " + Utils.padLeft(vi.type, 3) +
+                " l=" + Utils.padLeft(String(vi2.level), 2) + " " + Utils.padLeft(vi2.type, 3) +
                 " r=" + Utils.padLeft(String(Math.round(r * 10) / 10), 4) +
                 " R=" + Utils.padLeft(String(Math.round(R * 10) / 10), 4) +
                 " b=" + Utils.padLeft(String(Math.round(stat.b / 100) / 10), 4) +
@@ -193,7 +197,7 @@ class wot.utils.Chance
         for (var pname in StatData.s_data)
         {
             var pdata = StatData.s_data[pname];
-            if (VehicleInfo.getName(pdata.icon).toUpperCase() == "UNKNOWN") // skip unknown tanks in Fog of War mode
+            if (VehicleInfo.getVehicleName(pdata.icon).toUpperCase() == "UNKNOWN") // skip unknown tanks in Fog of War mode
                 continue;
             if (pdata.team == Defines.TEAM_ALLY) ++nally else ++nenemy;
         }
@@ -235,13 +239,16 @@ class wot.utils.Chance
         for (var pname in StatData.s_data)
         {
             var pdata = StatData.s_data[pname];
-            var vi = VehicleInfo.getInfo(pdata.icon);
-            if (!vi || vi == 0)
+            var vi1 = VehicleInfo.getInfo1(pdata.icon);
+            if (!vi1)
+                return 0;
+            var vi2 = VehicleInfo.getInfo2(pdata.icon);
+            if (!vi2)
                 return 0;
             vis.push( {
-                level: vi.level,
-                Tmin: vi.tiers[0],
-                Tmax: vi.tiers[1]
+                level: vi2.level,
+                Tmin: vi1.tiers[0],
+                Tmax: vi1.tiers[1]
             });
         }
 

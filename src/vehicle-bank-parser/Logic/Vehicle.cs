@@ -80,13 +80,14 @@ class Vehicle
 
     public string ToJsonString()
     {
-        return (name.Replace("-", "_").ToLower() + ": { " +
-            "nation: \"" + nation + "\", " +
-            "level: " + level + ", " +
-            "type: \"" + type + "\", " +
-            "hpstock: " + hpstock + ", " +
-            "hptop: " + hptop + ", " +
-            "turretstatus: " + status +
+        return ((name.Replace("-", "_").ToLower() + ":").PadRight(27) + " { " +
+            ("level: " + level + ",").PadRight(11) +
+            ("type: \"" + type + "\", ").PadRight(13) +
+            ("hpstock: " + hpstock + ", ").PadRight(15) +
+            ("hptop: " + hptop + ", ").PadRight(13) +
+            "turret: " + status + ", " +
+            ("nation: \"" + nation + "\", ").PadRight(19) +
+            "name: \"" + name + "\"" +
             " }");
     }
 }

@@ -1,6 +1,5 @@
 import wot.utils.VehicleTypeShort;
 import wot.utils.VehicleInfo;
-import wot.utils.VehicleInfoData;
 import wot.Minimap.model.MapConfig;
 import wot.Minimap.dto.Player;
 import wot.Minimap.MinimapEntry;
@@ -32,16 +31,15 @@ class wot.Minimap.staticUtils.MinimapMacro
         formatArr = format.split(LEVEL_MACRO);
         if (formatArr.length > 1)
         {
-            var veh:String = VehicleInfo.getName(player.icon);
-            var vehData:Object = VehicleInfoData.data[veh];
-            format = formatArr.join(vehData.level);
+            var vi2 = VehicleInfo.getInfo2(player.icon);
+            format = formatArr.join(vi2.level);
         }
         
         /** Vehicle short type */
         formatArr = format.split(SHORT_VEH__MACRO);
         if (formatArr.length > 1)
         {
-            var type:String = VehicleInfo.getName(player.icon);
+            var type:String = VehicleInfo.getVehicleName(player.icon).split("-").join("_");
             format = formatArr.join(VehicleTypeShort.translate(type));
         }
             

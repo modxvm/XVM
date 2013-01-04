@@ -47,10 +47,10 @@ class wot.utils.StatLoader
             label: pname,
             clanAbbrev: clan,
             vehicle: vehicle,
-            vehicleId: VehicleInfo.getVehicleId(icon),
+            vehicleId: VehicleInfo.getInfo2(icon).name,
             icon: icon,
             team: team,
-      	  realVehicleId: realVehicleId ? realVehicleId : 0,
+      	    realVehicleId: realVehicleId ? realVehicleId : 0,
             selected: selected,
             loaded: StatData.s_data[pname] ? true : false,
             stat: StatData.s_data[pname] ? StatData.s_data[pname].stat : undefined
