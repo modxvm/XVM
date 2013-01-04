@@ -44,9 +44,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Utils\Defines.cs" />
     <Compile Include="Utils\Decoder\BxmlReader.cs" />
     <Compile Include="Utils\Export.cs" />
-    <Compile Include="Utils\FileBank.cs" />
     <Compile Include="Utils\Decoder\Packed_Section.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

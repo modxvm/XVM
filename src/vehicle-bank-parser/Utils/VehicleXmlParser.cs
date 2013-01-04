@@ -21,6 +21,7 @@ class VehicleXmlParser
 
         if (turretsNode == null)
             throw new Exception("Error: not a vehicles XML file.");
+
         this.rootNode = rootNode;
     }
 
@@ -37,13 +38,6 @@ class VehicleXmlParser
     public Boolean turretUnlocksSomething()
     {
         return getSecondTurretUnlocks() != null;
-    }
-
-    public string getVehicleName()
-    {
-        // from  <a-20.xml><crew>...
-        // to    a-20
-        return rootNode.Name.ToString().Replace(".xml", "");
     }
 
     public int getHpStock()

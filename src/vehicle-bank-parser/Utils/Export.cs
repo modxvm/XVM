@@ -41,24 +41,21 @@ class wot.utils.VehicleInfoData2
     */
 
     public static var data:Object = {
-        //vname: { hpstock: #, hptop: #, turretstatus: # }");
+        //vname: { nation: #, level: #, type: #, hpstock: #, hptop: #, turretstatus: # }");
     }
 
     private static void writeLines(StreamWriter file, List<Vehicle> vehList)
     {
         foreach (Vehicle veh in vehList)
         {
-            file.WriteLine("        " + veh.name.Replace("-", "_").ToLower() +
-                ": { hpstock: " + veh.hpstock + 
-                ", hptop: " + veh.hptop + 
-                ", turretstatus: " + veh.status + "},");
+            file.WriteLine("        " + veh.ToJsonString() + ",");
         }
     }
 
     private static void writeFooter(StreamWriter file)
     {
 file.WriteLine(@"
-      __end__: null
+        __end__: null
     }
 }
     ");

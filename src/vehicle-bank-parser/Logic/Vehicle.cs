@@ -27,38 +27,37 @@ class Vehicle
     public const short STOCK_TURRET_NO_TOP_GUN = 2;
 
     public string name;
+    public string nation;
+    public int level;
+    public string type;
     public int hpstock;
     public int hptop;
     public short status;
-
-    private VehicleXmlParser vehParser;
 
     /*
      * Tanks are subset of Vehicles.
      * Tanks has turrets rotation and are subject of interest.
      */
 
-    public Vehicle(XmlNode vehicleXml)
+    public Vehicle(XmlNode vdata)
     {
-        vehParser = new VehicleXmlParser(vehicleXml);
-
-        name = vehParser.getVehicleName();
-        hpstock = vehParser.getHpStock();
-        hptop = vehParser.getHpTop();
-        status = defineStatus();
+        VehicleXmlParser parser = new VehicleXmlParser(vdata);
+        hpstock = parser.getHpStock();
+        hptop = parser.getHpTop();
+        status = defineStatus(parser);
     }
 
-    private short defineStatus()
+    private short defineStatus(VehicleXmlParser parser)
     {
-        if (vehParser.hasOnlyOneTurret())
+        if (parser.hasOnlyOneTurret())
             return ONLY_ONE_TURRET;
 
-        if (vehParser.turretUnlocksSomething())
+        if (parser.turretUnlocksSomething())
         {
-            XmlNodeList unlocks = vehParser.getSecondTurretUnlocks();
-            List<XmlNode> guns = vehParser.separateGuns(unlocks);
-            int maxUnlockedGunCost = vehParser.mostExpensive(guns);
-            int chassisCost = vehParser.getChassisCost();
+            XmlNodeList unlocks = parser.getSecondTurretUnlocks();
+            List<XmlNode> guns = parser.separateGuns(unlocks);
+            int maxUnlockedGunCost = parser.mostExpensive(guns);
+            int chassisCost = parser.getChassisCost();
             return unlockedGunIsTotalCrap(maxUnlockedGunCost, chassisCost);
         }
 
@@ -77,5 +76,17 @@ class Vehicle
             return STOCK_TURRET_TOP_GUN_POSSIBLE;
 
         return STOCK_TURRET_NO_TOP_GUN;
+    }
+
+    public string ToJsonString()
+    {
+        return (name.Replace("-", "_").ToLower() + ": { " +
+            "nation: \"" + nation + "\", " +
+            "level: " + level + ", " +
+            "type: \"" + type + "\", " +
+            "hpstock: " + hpstock + ", " +
+            "hptop: " + hptop + ", " +
+            "turretstatus: " + status +
+            " }");
     }
 }
