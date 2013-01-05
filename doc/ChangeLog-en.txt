@@ -1,4 +1,5 @@
-﻿  * macro {{c:dmg}} can be used in health bar
+﻿  * capture bar: fixed wrong capturers number calculation for encounter
+  * macro {{c:dmg}} can be used in health bar
   * default sorting by exp in Final Statistics
 
 XVM-3.2.1-test1:

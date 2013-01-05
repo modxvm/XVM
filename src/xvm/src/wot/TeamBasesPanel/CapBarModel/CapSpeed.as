@@ -44,9 +44,6 @@ class wot.TeamBasesPanel.CapBarModel.CapSpeed
             return;
         }
         
-        /** One tank capturing speed is different for different battle types and maps */
-        OneTankSpeed.checkSpeed(approxSpeed);
-        
        /**
         * Define capturing cycle size and
         * calculate average speed for last cycle.
