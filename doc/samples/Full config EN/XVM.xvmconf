@@ -166,18 +166,18 @@
   // Minimap
   "minimap": {
     "enabled": false,  // On/off modification switch
-    "iconScale": 1,   // Minimap icon and attached text scaling factor; 0.5 0.75 1.25
-    "nickShrink": 4,  // Nickname shrink value for {{short-nick}} macro
-    "textOffsetX": 0, // Attached text X offset relative to icon
-    "textOffsetY": 0, // Attached text Y offset relative to icon
-    "format": {       // Attached text format. Macroses {{level}}, {{vehicle}}, {{short-nick}}, {{short-vehicle}}
+    "iconScale": 1,    // Minimap icon and attached label scaling factor; example: 0.5 0.75 1.25
+    "nickShrink": 4,   // Nickname shrink value for {{short-nick}} macro
+    "labelOffsetX": 0, // Attached label offset relative to alive enemy icon bottom right
+    "labelOffsetY": 0,
+    "format": {        // Attached label format. Macroses {{level}}, {{vehicle}}, {{short-nick}}, {{short-vehicle}}
       "ally":  "{{level}}", // Ally
       "enemy": "{{level}}", // Enemy
       "squad": "{{level}} <i>{{short-nick}}</i>", // Squadmates
       "oneself": "<b>{{level}}</b>", // For oneself and camera receiver in case of death
       "lostenemy": "{{ifspg}}<i>{{level}}</i>" // Lost enemy last position marker format
     },
-    "css": { // Attached text style
+    "css": { // Attached label style
       "ally":    "font-family:$FieldFont; font-size:8px; color:#BBEEBB;", // Ally
       "enemy":   "font-family:$FieldFont; font-size:8px; color:#EEBBBB;", // Enemy
       "squad":   "font-family:$FieldFont; font-size:8px; color:#FFEE44;", // Squadmates
@@ -185,8 +185,10 @@
       "lostenemy":"font-family:$FieldFont; font-size:8px; color:#EEEEEE;" // Lost enemy positions; does not depend on iconScale
     },
     "lostEnemy": { // Parameters for markers of lost enemy units
-      "enabled": true,   // On/off lost icon modification switch
-      "alpha": 90,       // Transparency
+      "enabled": true,    // On/off lost icon modification switch
+      "alpha": 90,        // Transparency
+      "labelOffsetX": -4, // Lost enemy label offset
+      "labelOffsetY": -4
     }
   },
   // OVER-TARGET MARKERS

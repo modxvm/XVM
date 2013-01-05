@@ -151,8 +151,8 @@ class wot.utils.DefaultConfig
                 enabled: false,
                 iconScale: 1,
                 nickShrink: 4,
-                textOffsetX: 0,
-                textOffsetY: 0,
+                labelOffsetX: 0,
+                labelOffsetY: 0,
                 format: {
                   ally:  "{{level}}",
                   enemy: "{{level}}",
@@ -169,7 +169,9 @@ class wot.utils.DefaultConfig
                 },
                 lostEnemy: {
                   enabled: true,
-                  alpha: 90
+                  alpha: 90,
+                  labelOffsetX: -4,
+                  labelOffsetY: -4
                 }
             },
             captureBar: {

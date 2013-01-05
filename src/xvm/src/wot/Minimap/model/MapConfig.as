@@ -34,8 +34,8 @@ class wot.Minimap.model.MapConfig
     public static function get cssLostenemy():String    {
         return Config.s_config.minimap.css.lostenemy;    }
         
-    public static function get textOffset():Point    {
-        return new Point(Config.s_config.minimap.textOffsetX, Config.s_config.minimap.textOffsetY); }
+    public static function get labelOffset():Point    {
+        return new Point(Config.s_config.minimap.labelOffsetX, Config.s_config.minimap.labelOffsetY); }
         
     /** Lost */
      /** Enabled */
@@ -44,4 +44,7 @@ class wot.Minimap.model.MapConfig
      /** Alpha */
     public static function get lostEnemyAlpha():Number    {
         return Config.s_config.minimap.lostEnemy.alpha;    }
+     /** Alpha */
+    public static function get lostEnemyLabelOffset():Point    {
+        return new Point(Config.s_config.minimap.lostEnemy.labelOffsetX, Config.s_config.minimap.lostEnemy.labelOffsetY); }
 }
