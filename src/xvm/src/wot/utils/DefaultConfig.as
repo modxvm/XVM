@@ -149,6 +149,7 @@ class wot.utils.DefaultConfig
             },
             minimap: {
                 enabled: false,
+                mapAlpha: 100,
                 iconScale: 1,
                 nickShrink: 4,
                 labelOffsetX: 0,

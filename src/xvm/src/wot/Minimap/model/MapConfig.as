@@ -5,6 +5,8 @@ class wot.Minimap.model.MapConfig
 {
     public static function get enabled():Boolean    {
         return Config.s_config.minimap.enabled;    }
+    public static function get mapAlpha():Number    {
+        return Config.s_config.minimap.mapAlpha;    }
     
     public static function get iconScale():Number    {
         return Config.s_config.minimap.iconScale;    }

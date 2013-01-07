@@ -1,3 +1,4 @@
+import wot.utils.Logger;
 import wot.Minimap.LostMarkers;
 import wot.Minimap.MinimapEvent;
 import wot.utils.GlobalEventDispatcher;
@@ -128,5 +129,15 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
             autoUpdate = new AutoUpdate();
             lostMarkers = new LostMarkers(icons);
         }
+        
+        //var qq:MovieClip;
+        
+        //Logger.addObject(this.backgrnd, "this.backgrnd", 3);
+
+        /**
+         * Set alpha of background map image.
+         * Does not affect markers
+         */
+        this.backgrnd._alpha = MapConfig.mapAlpha;
     }
 }

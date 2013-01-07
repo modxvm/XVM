@@ -166,6 +166,7 @@
   // Minimap
   "minimap": {
     "enabled": false,  // On/off modification switch
+    "mapAlpha": 100,   // Set alpha of background map image; does not affect icons
     "iconScale": 1,    // Minimap icon and attached label scaling factor; example: 0.5 0.75 1.25
     "nickShrink": 4,   // Nickname shrink value for {{short-nick}} macro
     "labelOffsetX": 0, // Attached label offset relative to alive enemy icon bottom right
