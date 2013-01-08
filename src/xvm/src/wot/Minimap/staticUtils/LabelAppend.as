@@ -44,7 +44,7 @@ class wot.Minimap.staticUtils.LabelAppend
                 style = MapConfig.cssSquad;
                 break;
             case MinimapEntry.MINIMAP_ENTRY_TYPE_LOST:
-                style = MapConfig.cssLostenemy;
+                style = MapConfig.lostEnemyCss;
                 break;
             default:
                 style = MapConfig.cssOneself;
@@ -71,7 +71,7 @@ class wot.Minimap.staticUtils.LabelAppend
                 text = MapConfig.formatSquad;
                 break;
             case "lostenemy":
-                text = MapConfig.formatLostenemy;
+                text = MapConfig.lostEnemyFormat;
                 break;
             default:
                 text = MapConfig.formatOneself;

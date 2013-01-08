@@ -1,4 +1,3 @@
-import wot.utils.Logger;
 import wot.Minimap.LostMarkers;
 import wot.Minimap.MinimapEvent;
 import wot.utils.GlobalEventDispatcher;
@@ -6,6 +5,8 @@ import wot.Minimap.model.SyncModel;
 import wot.utils.Utils;
 import wot.Minimap.model.MapConfig;
 import wot.Minimap.model.AutoUpdate;
+import wot.Minimap.model.MapSizeModel;
+import wot.Minimap.MapSizeLabel;
 
 /**
  * Original Minimap manages all kinds size, border, drawing and clicking.
@@ -33,6 +34,13 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     
     /** Places and removes lost enemy positions on minimap */
     private var lostMarkers:LostMarkers;
+    
+    /**
+     * Defines real map size in meters.
+     * Common values are 1km^2, 600m^2
+     */
+    private var mapSizeModel:MapSizeModel;
+    private var mapSizeLabel:MapSizeLabel;
     
     private var isMinimapReady:Boolean = false;
     private var isAllyPlayersPanelReady:Boolean = false;
@@ -130,14 +138,19 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
             lostMarkers = new LostMarkers(icons);
         }
         
-        //var qq:MovieClip;
-        
-        //Logger.addObject(this.backgrnd, "this.backgrnd", 3);
-
         /**
          * Set alpha of background map image.
          * Does not affect markers
          */
-        this.backgrnd._alpha = MapConfig.mapAlpha;
+        this.backgrnd._alpha = MapConfig.mapBackgroundImageAlpha;
+        
+        /**
+         * Defines real map size in meters.
+         */
+        mapSizeModel = new MapSizeModel();
+        if (MapConfig.mapSizeLabelEnabled && mapSizeModel.getSide())
+        {
+            mapSizeLabel = new MapSizeLabel(this.backgrnd, mapSizeModel);
+        }
     }
 }

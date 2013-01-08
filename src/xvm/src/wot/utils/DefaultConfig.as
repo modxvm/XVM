@@ -149,30 +149,43 @@ class wot.utils.DefaultConfig
             },
             minimap: {
                 enabled: false,
-                mapAlpha: 100,
+                mapBackgroundImageAlpha: 100,
                 iconScale: 1,
                 nickShrink: 4,
-                labelOffsetX: 0,
-                labelOffsetY: 0,
-                format: {
-                  ally:  "{{level}}",
-                  enemy: "{{level}}",
-                  squad: "{{level}} <i>{{short-nick}}</i>",
-                  oneself: "<b>{{level}}</b>",
-                  lostenemy: "<i>{{level}}</i>"
-                },
-                css: {
-                  ally:  "font-family:$FieldFont; font-size:8px; color:#BBEEBB;",
-                  enemy: "font-family:$FieldFont; font-size:8px; color:#EEBBBB;",
-                  squad: "font-family:$FieldFont; font-size:8px; color:#FFEE44;",
-                  oneself: "font-family:$FieldFont; font-size:8px; color:#FFFFFF;",
-                  lostenemy: "font-family:$FieldFont; font-size:8px; color:#EEAACC;"
-                },
-                lostEnemy: {
-                  enabled: true,
-                  alpha: 90,
-                  labelOffsetX: -4,
-                  labelOffsetY: -4
+                labels: {
+                  allRevealedUnits: {
+                    enabled: true,
+                    format: {
+                      ally:  "{{level}}",
+                      enemy: "{{level}}",
+                      squad: "{{level}} <i>{{short-nick}}</i>",
+                      oneself: "<b>{{level}}</b>"
+                    },
+                    css: {
+                      ally:  "font-family:$FieldFont; font-size:8px; color:#BBEEBB;",
+                      enemy: "font-family:$FieldFont; font-size:8px; color:#EEBBBB;",
+                      squad: "font-family:$FieldFont; font-size:8px; color:#FFEE44;",
+                      oneself: "font-family:$FieldFont; font-size:8px; color:#FFFFFF;"
+                    },
+                    offsetX: 0,
+                    offsetY: 0
+                  },
+                  lostEnemyUnits: {
+                    enabled: true,
+                    format: "<i>{{level}}</i>",
+                    css: "font-family:$FieldFont; font-size:8px; color:#EEAACC;",
+                    alpha: 90,
+                    offsetX: -4,
+                    offsetY: -4
+                  },
+                  mapSize: {
+                    enabled: true,
+                    format: "<b>{{cellsize}}0m²</b>",
+                    css: "font-size:12px; color:#000000;",
+                    alpha: 75,
+                    offsetX: 0,
+                    offsetY: 0
+                  }
                 }
             },
             captureBar: {

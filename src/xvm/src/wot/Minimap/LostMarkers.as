@@ -58,7 +58,7 @@ class wot.Minimap.LostMarkers
     private function createLabel(lost:Icon):TextField
     {
         var pos:Point = lost.pos; /** Major lost label position */
-        pos = pos.add(MapConfig.lostEnemyLabelOffset);  /** Minor offset to place label at removed icon position */
+        pos = pos.add(MapConfig.lostEnemyOffset);  /** Minor offset to place label at removed icon position */
         return LabelAppend.append(container, lost.uid, MinimapEntry.MINIMAP_ENTRY_TYPE_LOST, pos, lost.vehicleClass);
     }
 }

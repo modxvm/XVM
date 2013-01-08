@@ -66,7 +66,7 @@ class wot.Minimap.staticUtils.MinimapMacro
             else
                 format = formatArr.join("")
         }
-
+        
         return format;
     }
 }
