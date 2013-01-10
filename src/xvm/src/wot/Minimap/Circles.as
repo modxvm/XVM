@@ -5,7 +5,6 @@ import wot.Minimap.model.MapConfig;
 import wot.Minimap.model.IconsProxy;
 import wot.Minimap.MinimapEntry;
 import wot.Minimap.dto.CircleCfg;
-import wot.utils.Logger;
 
 class wot.Minimap.Circles
 {

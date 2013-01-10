@@ -150,7 +150,7 @@ class wot.utils.DefaultConfig
             minimap: {
                 enabled: false,
                 mapBackgroundImageAlpha: 100,
-                iconScale: 1,
+                markerScale: 1,
                 nickShrink: 4,
                 labels: {
                   allRevealedUnits: {

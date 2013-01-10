@@ -7,8 +7,8 @@ class wot.Minimap.model.MapConfig
         return Config.s_config.minimap.enabled;    }
     public static function get mapBackgroundImageAlpha():Number    {
         return Config.s_config.minimap.mapBackgroundImageAlpha;    }
-    public static function get iconScale():Number    {
-        return Config.s_config.minimap.iconScale;    }
+    public static function get markerScale():Number    {
+        return Config.s_config.minimap.markerScale;    }
     public static function get nickShrink():Number    {
         return Config.s_config.minimap.nickShrink;    }
     

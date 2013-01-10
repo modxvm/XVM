@@ -125,7 +125,7 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
          * TODO:
          * Default at XVM config is 0.5.
          */
-        MARKERS_SCALING = MapConfig.iconScale;
+        MARKERS_SCALING = MapConfig.markerScale;
         scaleMarkers(MARKERS_SCALING);
         
         sync = new SyncModel();
