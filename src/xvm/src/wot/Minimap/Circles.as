@@ -10,9 +10,9 @@ import wot.utils.Logger;
 class wot.Minimap.Circles
 {
     private var CIRCLE_SIDES:Number = 350; /** Defines circle smoothness\angularity */
-    private var MAP_SIZE:Number = 211; /** Minimap size in points without scaling */
+    private var MAP_SIZE_IN_POINTS:Number = 211; /** Minimap size in points without scaling */
     
-    public function Circles(mapSize:Number) 
+    public function Circles(mapSizeInMeters:Number) 
     {
         /**
          * Get oneself icon.
@@ -21,7 +21,7 @@ class wot.Minimap.Circles
          */
         var icon:MinimapEntry = IconsProxy.getSelf();
         
-        var metersPerPoint:Number = (MAP_SIZE / mapSize) / icon._xscale * 100;
+        var metersPerPoint:Number = (MAP_SIZE_IN_POINTS / mapSizeInMeters) / icon._xscale * 100;
         
         var player:Player = PlayersPanelProxy.getSelf();
         var vehType:String = VehicleInfo.getName2(player.icon);
