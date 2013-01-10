@@ -151,8 +151,8 @@ class wot.utils.DefaultConfig
                 enabled: false,
                 mapBackgroundImageAlpha: 100,
                 markerScale: 1,
-                nickShrink: 4,
                 labels: {
+                  nickShrink: 4,
                   allRevealedUnits: {
                     enabled: true,
                     format: {

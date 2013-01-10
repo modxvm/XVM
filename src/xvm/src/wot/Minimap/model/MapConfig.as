@@ -9,10 +9,10 @@ class wot.Minimap.model.MapConfig
         return Config.s_config.minimap.mapBackgroundImageAlpha;    }
     public static function get markerScale():Number    {
         return Config.s_config.minimap.markerScale;    }
-    public static function get nickShrink():Number    {
-        return Config.s_config.minimap.nickShrink;    }
-    
+   
     /** Labels */
+        public static function get nickShrink():Number    {
+        return Config.s_config.minimap.nickShrink;    }
         /** allRevealedUnits */
             public static function get revealedEnabled():Boolean    {
                 return Config.s_config.minimap.enabled;    }
