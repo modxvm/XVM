@@ -1,3 +1,4 @@
+import wot.Minimap.Lines;
 import wot.Minimap.Circles;
 import wot.Minimap.LostMarkers;
 import wot.Minimap.MinimapEvent;
@@ -43,7 +44,12 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     private var mapSizeModel:MapSizeModel;
     private var mapSizeLabel:MapSizeLabel;
     
+    /**
+     * Shape to icon attachments.
+     * Shows game related distances and direction.
+     */
     private var circles:Circles;
+    private var lines:Lines;
     
     private var isMinimapReady:Boolean = false;
     private var isAllyPlayersPanelReady:Boolean = false;
@@ -164,7 +170,13 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
             /** Draw customized circles */
             if (MapConfig.circlesEnabled)
             {
-                circles = new Circles(mapSizeModel.getSide() * 10); /** Total map square distance */
+                circles = new Circles(mapSizeModel.getSide() * 10); /** Total map square distance in meters */
+            }
+            
+            /** Draw customized lines */
+            if (MapConfig.linesEnabled)
+            {
+                lines = new Lines(mapSizeModel.getSide() * 10); /** Total map square distance in meters  */
             }
         }
     }

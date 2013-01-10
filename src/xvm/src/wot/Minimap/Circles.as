@@ -2,25 +2,21 @@ import wot.utils.VehicleInfo;
 import wot.Minimap.model.PlayersPanelProxy;
 import wot.Minimap.dto.Player;
 import wot.Minimap.model.MapConfig;
-import wot.Minimap.model.IconsProxy;
-import wot.Minimap.MinimapEntry;
 import wot.Minimap.dto.CircleCfg;
+import wot.Minimap.ShapeAttach;
 
-class wot.Minimap.Circles
+/**
+ * Draws circles around player to indicate distances.
+ * Distance of sight or artillery range.
+ */
+
+class wot.Minimap.Circles extends ShapeAttach
 {
     private var CIRCLE_SIDES:Number = 350; /** Defines circle smoothness\angularity */
-    private var MAP_SIZE_IN_POINTS:Number = 211; /** Minimap size in points without scaling */
     
     public function Circles(mapSizeInMeters:Number) 
     {
-        /**
-         * Get oneself icon.
-         * Used as a center of circles.
-         * Will carry attached circles with itself automatically.
-         */
-        var icon:MinimapEntry = IconsProxy.getSelf();
-        
-        var metersPerPoint:Number = (MAP_SIZE_IN_POINTS / mapSizeInMeters) / icon._xscale * 100;
+        super(mapSizeInMeters);
         
         var player:Player = PlayersPanelProxy.getSelf();
         var vehType:String = VehicleInfo.getName2(player.icon);
@@ -32,9 +28,8 @@ class wot.Minimap.Circles
             
             if (circleCfg.enabled)
             {
-                var mc:MovieClip = icon.createEmptyMovieClip("circle" + i, icon.getNextHighestDepth());
                 var radius:Number =  metersPerPoint * circleCfg.distance;
-                drawCircle(mc, radius, circleCfg.thickness, circleCfg.color, circleCfg.alpha);
+                drawCircle(radius, circleCfg.thickness, circleCfg.color, circleCfg.alpha);
             }
         }
     }
@@ -62,8 +57,10 @@ class wot.Minimap.Circles
         return cfg;
     }
     
-    private function drawCircle(mc:MovieClip, radius:Number, thickness:Number, color:Number, alpha:Number)
+    private function drawCircle(radius:Number, thickness:Number, color:Number, alpha:Number)
     {
+        var depth:Number = icon.getNextHighestDepth();
+        var mc:MovieClip = icon.createEmptyMovieClip("circle" + depth, depth);
         mc.lineStyle(thickness, color, alpha);
         
         var centerX:Number = 0;

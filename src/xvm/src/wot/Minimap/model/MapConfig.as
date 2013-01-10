@@ -80,4 +80,12 @@ class wot.Minimap.model.MapConfig
         public static function get circlesSpecial():Array     {
             return Config.s_config.minimap.circles.special
         }
+        
+    /** Lines */
+        public static function get linesEnabled():Boolean     {
+            return Config.s_config.minimap.lines.enabled
+        }
+        public static function get linesVehicle():Array     {
+            return Config.s_config.minimap.lines.vehicle
+        }
 }

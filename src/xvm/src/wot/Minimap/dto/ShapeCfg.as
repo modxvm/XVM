@@ -1,7 +1,6 @@
-class wot.Minimap.dto.CircleCfg
+class wot.Minimap.dto.ShapeCfg
 {
     public var enabled:Boolean;
-    public var distance:Number;
     public var thickness:Number;
     public var alpha:Number;
     public var color:Number;

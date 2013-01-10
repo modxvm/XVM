@@ -191,11 +191,9 @@ class wot.utils.DefaultConfig
                   enabled: true,
                   major: [
                     { enabled: true, distance: 445, thickness: 1, alpha: 40, color: 0x000000 },
-                    { enabled: true, distance: 50, thickness: 2.5, alpha: 100, color: 0xFFFFFF }
+                    { enabled: false, distance: 50, thickness: 2.5, alpha: 100, color: 0xFFFFFF }
                   ],
                   special: [
-                    { t_50_2:              { enabled: true, distance: 500, thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { t_50_2:              { enabled: true, distance: 550, thickness: 1, alpha: 60, color: 0xEE4444 } },
                     { g_e:              { enabled: true, distance: 1172, thickness: 1, alpha: 60, color: 0xEE4444 } },
                     { object_261:       { enabled: true, distance: 1463, thickness: 1, alpha: 60, color: 0xEE4444 } },
                     { bat_chatillon155: { enabled: true, distance: 1296, thickness: 1, alpha: 60, color: 0xEE4444 } },
@@ -227,6 +225,17 @@ class wot.utils.DefaultConfig
                     { su_18:            { enabled: true, distance: 552,  thickness: 1, alpha: 60, color: 0xEE4444 } },
                     { t57:              { enabled: true, distance: 552,  thickness: 1, alpha: 60, color: 0xEE4444 } },
                     { bison_i:          { enabled: true, distance: 605,  thickness: 1, alpha: 60, color: 0xEE4444 } }
+                  ]
+                },
+                lines: {
+                  enabled: false,
+                  vehicle: [
+                    { enabled: true, from: 50,  to: 90,  inmeters: true, thickness: 2,   alpha: 60, color: 0x44EE44},
+                    { enabled: true, from: 100, to: 140, inmeters: true, thickness: 1.5, alpha: 45, color: 0x44EE44},
+                    { enabled: true, from: 150, to: 190, inmeters: true, thickness: 1,   alpha: 30, color: 0x44EE44}
+                  ],
+                  camera: [
+                  
                   ]
                 }
             },
