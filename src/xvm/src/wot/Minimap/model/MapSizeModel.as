@@ -1,5 +1,4 @@
 import wot.Minimap.model.MapSizeBase;
-import wot.utils.Logger;
 
 /**
  * Defines real map size in meters.

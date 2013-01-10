@@ -53,6 +53,19 @@ class wot.Minimap.model.IconsProxy
         return null;
     }
     
+    public static function getSelf():MinimapEntry
+    {
+        var minimapEntries:Array = getMinimapEntries();
+        
+        for (var i:Number = 0; i < minimapEntries.length; i++)
+        {
+            if (minimapEntries[i].selfIcon)
+                return minimapEntries[i]; /** Looks like it is always the first one */
+        }
+        
+        return null;
+    }
+    
     // -- Private
     
     private static function getMinimapEntries():Array

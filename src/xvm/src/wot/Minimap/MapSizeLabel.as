@@ -1,16 +1,15 @@
 import flash.geom.Point;
-import wot.Minimap.model.MapSizeModel;
 import wot.Minimap.model.MapConfig;
 
 class wot.Minimap.MapSizeLabel
 {
     private static var CELLSIZE_MACRO:String = "{{cellsize}}";
     
-    private var model:MapSizeModel;
+    private var side:Number;
         
-    public function MapSizeLabel(mc:MovieClip, model:MapSizeModel)
+    public function MapSizeLabel(mc:MovieClip, side:Number)
     {
-        this.model = model;
+        this.side = side;
         
         var offset:Point = MapConfig.mapSizeLabelOffset;
         var tf:TextField = mc.createTextField("mapSize", mc.getNextHighestDepth(), offset.x, offset.y, 100, 40);
@@ -35,7 +34,7 @@ class wot.Minimap.MapSizeLabel
         var formatArr:Array = format.split(CELLSIZE_MACRO);
         if (formatArr.length > 1)
         {
-            format = formatArr.join(model.getSide().toString());
+            format = formatArr.join(side.toString());
         }
         
         return format;

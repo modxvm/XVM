@@ -67,6 +67,17 @@ class wot.utils.VehicleInfo
         return Config.s_config.texts.vtype[vtype];
     }
     
+    // icon = "../maps/icons/vehicle/contour/usa-M24_Chaffee.tga"
+    // return: "m24_chaffee"
+    public static function getName2(icon: String): String
+    {
+        icon = icon.slice(icon.lastIndexOf("/") + 1, icon.lastIndexOf("."));
+        icon = icon.slice(icon.indexOf("-") + 1);
+        icon = Utils.trim(icon);
+        icon = icon.split("-").join("_").toLowerCase();
+        return icon;
+    }
+    
     // PRIVATE
 
     // icon = "../maps/icons/vehicle/contour/usa-M24_Chaffee.tga"
@@ -76,17 +87,6 @@ class wot.utils.VehicleInfo
         icon = icon.slice(icon.lastIndexOf("/") + 1, icon.lastIndexOf("."));
         icon = icon.split("-").join("_");
         icon = Utils.trim(icon);
-        return icon;
-    }
-
-    // icon = "../maps/icons/vehicle/contour/usa-M24_Chaffee.tga"
-    // return: "m24_chaffee"
-    private static function getName2(icon: String): String
-    {
-        icon = icon.slice(icon.lastIndexOf("/") + 1, icon.lastIndexOf("."));
-        icon = icon.slice(icon.indexOf("-") + 1);
-        icon = Utils.trim(icon);
-        icon = icon.split("-").join("_").toLowerCase();
         return icon;
     }
 }

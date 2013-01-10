@@ -1,5 +1,6 @@
 import wot.Minimap.model.MapConfig;
 import wot.Minimap.staticUtils.LabelAppend;
+import wot.Minimap.dto.Player;
 
 /**
  * MinimapEntry represent individual object on map.
@@ -36,7 +37,7 @@ class wot.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
      */
     public var uid:Number;
     
-    private var player:Object;
+    public var player:Player;
     
     function lightPlayer(visibility)
     {

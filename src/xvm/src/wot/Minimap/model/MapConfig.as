@@ -69,5 +69,15 @@ class wot.Minimap.model.MapConfig
                 
             public static function get mapSizeLabelOffset():Point    {
                 return new Point(Config.s_config.minimap.labels.mapSize.offsetX,
-                                 Config.s_config.minimap.labels.mapSize.offsetY); }   
+                                 Config.s_config.minimap.labels.mapSize.offsetY); }
+     /** Circles */
+        public static function get circlesEnabled():Boolean     {
+            return Config.s_config.minimap.circles.enabled
+        }
+        public static function get circlesMajor():Array     {
+            return Config.s_config.minimap.circles.major
+        }
+        public static function get circlesSpecial():Array     {
+            return Config.s_config.minimap.circles.special
+        }
 }

@@ -63,6 +63,19 @@ class wot.Minimap.model.PlayersPanelProxy
         return player.vehicleState == 2;
     }
     
+    public static function getSelf():Player
+    {
+        var myTeam:Array = getAllyPlayers();
+        for (var i in myTeam)
+        {
+            var player:Player = myTeam[i];
+            if (player.himself == true)
+                return player;
+        }
+        
+        return null;
+    }
+    
     // -- Private
         
     private static function getPlayerInfoFrom(players:Array, uid:Number):Player
