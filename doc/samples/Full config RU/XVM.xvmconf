@@ -210,8 +210,9 @@
             { "enabled": true, "distance": 445, "thickness": 1, "alpha": 40, "color": 0x000000 }, // 445 max disclosure distance
             { "enabled": false, "distance": 50, "thickness": 2.5, "alpha": 100, "color": 0xFFFFFF }
         ],
+        // Artillery range circle by type. Top gun range is used by default.
         "special": [
-            // Artillery top gun max range
+            // Copy lines in case many special circles wanted for one type.
             { "su_18":            { "enabled": true, "distance": 552,  "thickness": 1, "alpha": 60, "color": 0xEE4444 } },
             { "su_26":            { "enabled": true, "distance": 638,  "thickness": 1, "alpha": 60, "color": 0xEE4444 } },
             { "su_5":             { "enabled": true, "distance": 605,  "thickness": 1, "alpha": 60, "color": 0xEE4444 } },

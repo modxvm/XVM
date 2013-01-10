@@ -1,11 +1,11 @@
 import wot.utils.VehicleInfo;
 import wot.Minimap.model.PlayersPanelProxy;
 import wot.Minimap.dto.Player;
-import wot.utils.Logger;
 import wot.Minimap.model.MapConfig;
 import wot.Minimap.model.IconsProxy;
 import wot.Minimap.MinimapEntry;
 import wot.Minimap.dto.CircleCfg;
+import wot.utils.Logger;
 
 class wot.Minimap.Circles
 {
@@ -14,14 +14,14 @@ class wot.Minimap.Circles
     
     public function Circles(mapSize:Number) 
     {
-        var metersPerPoint:Number = MAP_SIZE / mapSize;
-        
         /**
          * Get oneself icon.
          * Used as a center of circles.
          * Will carry attached circles with itself automatically.
          */
         var icon:MinimapEntry = IconsProxy.getSelf();
+        
+        var metersPerPoint:Number = (MAP_SIZE / mapSize) / icon._xscale * 100;
         
         var player:Player = PlayersPanelProxy.getSelf();
         var vehType:String = VehicleInfo.getName2(player.icon);
