@@ -297,7 +297,7 @@ class wot.utils.VehicleInfoData2
         t57_58:                     { level: 10, type: "HT",  hpstock: 2250, hptop: 2250, turret: 0, nation: "usa",     name: "T57_58" },
         f10_amx_50b:                { level: 10, type: "HT",  hpstock: 2100, hptop: 2100, turret: 0, nation: "france",  name: "F10_AMX_50B" },
         gb13_fv215b:                { level: 10, type: "HT",  hpstock: 2500, hptop: 2500, turret: 0, nation: "uk",      name: "GB13_FV215b" },
-        ch22_113:                   { level: 10, type: "HT",  hpstock: 2500, hptop: 2500, turret: 0, nation: "china",   name: "Ch22_113" },
+        ch22_113:                   { level: 10, type: "HT",  hpstock: 2300, hptop: 2300, turret: 0, nation: "china",   name: "Ch22_113" },
         object263:                  { level: 10, type: "TD",  hpstock: 1900, hptop: 1900, turret: 0, nation: "ussr",    name: "Object263" },
         object268:                  { level: 10, type: "TD",  hpstock: 1950, hptop: 1950, turret: 0, nation: "ussr",    name: "Object268" },
         jagdpz_e100:                { level: 10, type: "TD",  hpstock: 2200, hptop: 2200, turret: 0, nation: "germany", name: "JagdPz_E100" },

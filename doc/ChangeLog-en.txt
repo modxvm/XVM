@@ -1,6 +1,8 @@
-﻿  * capture bar: fixed wrong capturers number calculation for encounter
+﻿XVM-3.3.0-test1:
+  * capture bar: fixed wrong capturers number calculation for encounter
   * macro {{c:dmg}} can be used in health bar
   * default sorting by exp in Final Statistics
+  * adaptation to WoT 0.8.3.CT2
 
 XVM-3.2.1-test1:
   * capmod: fixed capture bar fill at 100%
