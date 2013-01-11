@@ -41,7 +41,7 @@ class wot.utils.VehicleInfoData2
     */
 
     public static var data:Object = {
-        //vname: { level,  type, hpstock, hptop, turret, nation, name }");
+        //vname: { level, type, hpstock, hptop, turret, premium, nation, name }");
     }
 
     private static void writeLines(StreamWriter file, List<Vehicle> vehList)

@@ -119,13 +119,9 @@ class wot.utils.GraphicsUtil
         {
             if (!vtype || Config.s_config.colors.vtype.usePremiumColor == true)
             {
-                var vi1 = wot.utils.VehicleInfo.getInfo1(iconSource);
-                if (vi1 != null)
-                {
-                    var vi2 = wot.utils.VehicleInfo.getInfo2(iconSource);
-                    if (vi2 != null)
-                        vtype = (Config.s_config.colors.vtype.usePremiumColor == true && vi1.premium == true) ? "premium" : vi2.type;
-                }
+                var vi2 = wot.utils.VehicleInfo.getInfo2(iconSource);
+                if (vi2 != null)
+                    vtype = (Config.s_config.colors.vtype.usePremiumColor == true && vi2.premium == 1) ? "premium" : vi2.type;
             }
             if (!vtype || !Config.s_config.colors.vtype[vtype])
                 return "";

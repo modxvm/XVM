@@ -55,6 +55,9 @@ class Program
                     XmlNode level = node.SelectSingleNode("level");
                     if (level == null)
                         continue;
+                    XmlNode price = node.SelectSingleNode("price");
+                    if (price == null)
+                        continue;
 
                     XmlNode vdata = decode(Path.Combine(Settings.Default.GAME_PATH,
                         Settings.Default.VEHICLE_DIR_PATH, country, node.Name + ".xml"));
@@ -67,6 +70,7 @@ class Program
                         nation = country,
                         level = int.Parse(level.InnerText),
                         type = getVehicleType(tags.InnerText),
+                        premium = price.InnerXml.ToLower().Contains("<gold>"),
                     };
                     vehicles.Add(vehicle);
                 }

@@ -30,6 +30,7 @@ class Vehicle
     public string nation;
     public int level;
     public string type;
+    public bool premium;
     public int hpstock;
     public int hptop;
     public short status;
@@ -86,6 +87,7 @@ class Vehicle
             ("hpstock: " + hpstock + ", ").PadRight(15) +
             ("hptop: " + hptop + ", ").PadRight(13) +
             "turret: " + status + ", " +
+            "premium: " + (premium ? "1" : "0") + ", " +
             ("nation: \"" + nation + "\", ").PadRight(19) +
             "name: \"" + name + "\"" +
             " }");
