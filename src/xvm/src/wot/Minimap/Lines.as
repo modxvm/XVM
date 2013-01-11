@@ -48,12 +48,11 @@ class wot.Minimap.Lines extends ShapeAttach
     
     private function drawLine(from:Number, to:Number, thickness:Number, color:Number, alpha:Number):Void
     {
-        Logger.add("##### drawLine");
         var depth:Number = icon.getNextHighestDepth();
         var mc:MovieClip = icon.createEmptyMovieClip("line" + depth, depth);
         mc.lineStyle(thickness, color, alpha);
         
-        mc.moveTo(from,  0);
-        mc.lineTo(to,  0);
+        mc.moveTo(0, -from);
+        mc.lineTo(0, -to);
     }
 }
