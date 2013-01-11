@@ -1,3 +1,5 @@
+import wot.Minimap.MinimapEntry;
+import wot.Minimap.model.IconsProxy;
 import wot.Minimap.Lines;
 import wot.Minimap.Circles;
 import wot.Minimap.LostMarkers;
@@ -152,6 +154,14 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
          * Does not affect markers
          */
         this.backgrnd._alpha = MapConfig.mapBackgroundImageAlpha;
+        
+        /**
+         * Setup alpha for icon of player himself.
+         * Looks like white arrow.
+         * Does not affect attached shapes.
+         */
+        var selfIcon:MinimapEntry = IconsProxy.getSelf();
+        selfIcon.selfIcon._alpha = MapConfig.selfIconAlpha;
         
         /**
          * Defines real map size in meters.

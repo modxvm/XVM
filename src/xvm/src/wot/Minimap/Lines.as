@@ -16,8 +16,6 @@ class wot.Minimap.Lines extends ShapeAttach
         
         var linesCfg:Array = defineLinesCfg();
         
-        Logger.addObject(icon, "icon", 3);
-        
         for (var i in linesCfg)
         {
             var lineCfg:LineCfg = linesCfg[i];
