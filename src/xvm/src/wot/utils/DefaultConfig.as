@@ -230,7 +230,7 @@ class wot.utils.DefaultConfig
                 lines: {
                   enabled: false,
                   vehicle: [
-                    { enabled: true, from: 50,  to: 100,  inmeters: true, thickness: 2,   alpha: 60, color: 0x44EE44},
+                    { enabled: true, from: 50,  to: 100, inmeters: true, thickness: 2,   alpha: 60, color: 0x44EE44},
                     { enabled: true, from: 200, to: 300, inmeters: true, thickness: 1.5, alpha: 45, color: 0x44EE44},
                     { enabled: true, from: 350, to: 445, inmeters: true, thickness: 1,   alpha: 30, color: 0x44EE44}
                   ],
