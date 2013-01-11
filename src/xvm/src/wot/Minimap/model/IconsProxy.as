@@ -53,6 +53,7 @@ class wot.Minimap.model.IconsProxy
         return null;
     }
     
+    /** Looks like white arrow */
     public static function getSelf():MinimapEntry
     {
         var minimapEntries:Array = getMinimapEntries();
@@ -61,6 +62,29 @@ class wot.Minimap.model.IconsProxy
         {
             if (minimapEntries[i].selfIcon)
                 return minimapEntries[i]; /** Looks like it is always the first one */
+        }
+        
+        return null;
+    }
+    
+    /** Looks like green highlighted corner */
+    public static function getCamera():MinimapEntry
+    {
+        var minimapEntries:Array = getMinimapEntries();
+        
+        for (var i:Number = 0; i < minimapEntries.length; i++)
+        {
+            var entry:MinimapEntry = minimapEntries[i];
+            
+            /**
+             * Camera does not have any distinguishable fields.
+             * But other minimap entries have.
+             * Find by exclusion method.
+             */
+            if (entry.m_type != "ally" && !entry.selfIcon && !entry.teamPoint)
+            {
+                return entry;
+            }
         }
         
         return null;

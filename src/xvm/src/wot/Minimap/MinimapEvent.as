@@ -5,6 +5,9 @@ class wot.Minimap.MinimapEvent
     public static var ALLY_PLAYERS_PANEL_READY:String = "ALLY_PLAYERS_PANEL_READY";
     public static var LOST_PLAYERS_UPDATE:String = "LOST_PLAYERS_UPDATE";
     
+    /** Used for camera atachments redraw */
+    public static var ON_ENTRY_INITED:String = "ON_ENTRY_INITED";
+    
     private var _type:String;
     private var _payload:Object;
     

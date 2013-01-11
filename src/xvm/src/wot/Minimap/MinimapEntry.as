@@ -39,6 +39,9 @@ class wot.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
     
     public var player:Player;
     
+    /** Used only for camera entry to define if entry is processed with Lines class */
+    public var cameraExtendedToken:Boolean;
+    
     function lightPlayer(visibility)
     {
         /** Behavior is altered temporarily so original icon highlighting works */

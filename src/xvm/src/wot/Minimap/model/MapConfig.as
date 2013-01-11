@@ -9,6 +9,8 @@ class wot.Minimap.model.MapConfig
         return Config.s_config.minimap.mapBackgroundImageAlpha;    }
     public static function get selfIconAlpha():Number    {
         return Config.s_config.minimap.selfIconAlpha;    }
+    public static function get cameraAlpha():Number    {
+        return Config.s_config.minimap.cameraAlpha;    }
     public static function get markerScale():Number    {
         return Config.s_config.minimap.markerScale;    }
    
@@ -89,5 +91,8 @@ class wot.Minimap.model.MapConfig
         }
         public static function get linesVehicle():Array     {
             return Config.s_config.minimap.lines.vehicle
+        }
+        public static function get linesCamera():Array     {
+            return Config.s_config.minimap.lines.camera
         }
 }

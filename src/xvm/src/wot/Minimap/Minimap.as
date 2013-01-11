@@ -79,13 +79,22 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
         
         if (sync && MapConfig.enabled)
            sync.updateIconsExtension();
+           
+       GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ON_ENTRY_INITED));
     }
     
+    /** Disables minimap size limitation */
     // override
-    
     function correctSizeIndex(sizeIndex:Number, stageHeight:Number):Number
     {
         return sizeIndex;
+    }
+    
+    /** Good for manual debug tracing by pushing "+" button */
+    // override
+    function sizeUp()
+    {
+        IconsProxy.getCamera();
     }
     
     // -- Private
@@ -162,6 +171,14 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
          */
         var selfIcon:MinimapEntry = IconsProxy.getSelf();
         selfIcon.selfIcon._alpha = MapConfig.selfIconAlpha;
+        
+        /**
+         * Setup alpha for camera of player himself.
+         * Looks like green highlighted corner.
+         * Does not affect attached shapes.
+         */
+        var camera:MinimapEntry = IconsProxy.getCamera();
+        camera.markMC._alpha = MapConfig.cameraAlpha;
         
         /**
          * Defines real map size in meters.
