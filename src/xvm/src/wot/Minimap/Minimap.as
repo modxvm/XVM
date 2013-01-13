@@ -1,16 +1,17 @@
+import wot.utils.Utils;
+import wot.utils.GlobalEventDispatcher;
 import wot.Minimap.MinimapEntry;
-import wot.Minimap.model.IconsProxy;
-import wot.Minimap.Lines;
-import wot.Minimap.Circles;
+import wot.Minimap.MapSizeLabel;
 import wot.Minimap.LostMarkers;
 import wot.Minimap.MinimapEvent;
-import wot.utils.GlobalEventDispatcher;
-import wot.Minimap.model.SyncModel;
-import wot.utils.Utils;
-import wot.Minimap.model.MapConfig;
-import wot.Minimap.model.AutoUpdate;
-import wot.Minimap.model.MapSizeModel;
-import wot.Minimap.MapSizeLabel;
+import wot.Minimap.shapes.Lines;
+import wot.Minimap.shapes.Circles;
+import wot.Minimap.model.iconTracker.SyncModel;
+import wot.Minimap.model.iconTracker.AutoUpdate;
+import wot.Minimap.model.mapSize.MapSizeModel;
+import wot.Minimap.model.externalProxy.IconsProxy;
+import wot.Minimap.model.externalProxy.MapConfig;
+
 
 /**
  * Original Minimap manages all kinds size, border, drawing and clicking.
@@ -94,7 +95,7 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     // override
     function sizeUp()
     {
-        IconsProxy.getCamera();
+        //Logger.add("");
     }
     
     // -- Private

@@ -1,11 +1,11 @@
-import wot.Minimap.model.PositionTracking;
-import wot.Minimap.model.LostPlayers;
+import wot.Minimap.model.iconTracker.PositionTracking;
+import wot.Minimap.model.iconTracker.LostPlayers;
 
 /**
  * Minimap icon position tracking to show disappeared vehicles last position
  */
 
-class wot.Minimap.model.AutoUpdate
+class wot.Minimap.model.iconTracker.AutoUpdate
 {
     private static var TICK_INTERVAL_MS:Number = 300; // 300ms
     private static var SELF_DESTRUCT_TICKS_THRESHOLD:Number = 16 * 60 * 1000; /** Maximum battle duration */

@@ -4,7 +4,7 @@ import wot.utils.Logger;
  * Chineese by adri1
  */
 
-class wot.Minimap.model.MapSizeBase
+class wot.Minimap.model.mapSize.MapSizeBase
 {
     public static function define(localizedMapName:String):Number
     {

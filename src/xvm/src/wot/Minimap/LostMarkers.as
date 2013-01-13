@@ -1,11 +1,10 @@
-
 import flash.geom.Point;
-import wot.Minimap.dto.Icon;
+import wot.Minimap.dataTypes.Icon;
 import wot.Minimap.MinimapEntry;
 import wot.utils.GlobalEventDispatcher;
 import wot.Minimap.MinimapEvent;
 import wot.Minimap.staticUtils.LabelAppend;
-import wot.Minimap.model.MapConfig;
+import wot.Minimap.model.externalProxy.MapConfig;
 
 class wot.Minimap.LostMarkers
 {

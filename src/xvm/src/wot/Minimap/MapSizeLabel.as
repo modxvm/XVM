@@ -1,5 +1,5 @@
 import flash.geom.Point;
-import wot.Minimap.model.MapConfig;
+import wot.Minimap.model.externalProxy.MapConfig;
 
 class wot.Minimap.MapSizeLabel
 {

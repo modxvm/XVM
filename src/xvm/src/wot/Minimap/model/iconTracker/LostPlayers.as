@@ -1,10 +1,10 @@
 import wot.utils.Utils;
 import wot.Minimap.MinimapEvent;
 import wot.utils.GlobalEventDispatcher;
-import wot.Minimap.model.IconsProxy;
-import wot.Minimap.model.PlayersPanelProxy;
+import wot.Minimap.model.externalProxy.IconsProxy;
+import wot.Minimap.model.externalProxy.PlayersPanelProxy;
 
-class wot.Minimap.model.LostPlayers
+class wot.Minimap.model.iconTracker.LostPlayers
 {
     
     /** Keep track of previously lost players to avoid unnecessary event dispatch */

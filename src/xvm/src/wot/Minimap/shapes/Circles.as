@@ -1,16 +1,16 @@
 import wot.utils.VehicleInfo;
-import wot.Minimap.model.PlayersPanelProxy;
-import wot.Minimap.dto.Player;
-import wot.Minimap.model.MapConfig;
-import wot.Minimap.dto.CircleCfg;
-import wot.Minimap.ShapeAttach;
+import wot.Minimap.model.externalProxy.PlayersPanelProxy;
+import wot.Minimap.dataTypes.Player;
+import wot.Minimap.model.externalProxy.MapConfig;
+import wot.Minimap.dataTypes.cfg.CircleCfg;
+import wot.Minimap.shapes.ShapeAttach;
 
 /**
  * Draws circles around player to indicate distances.
  * Distance of sight or artillery range.
  */
 
-class wot.Minimap.Circles extends ShapeAttach
+class wot.Minimap.shapes.Circles extends ShapeAttach
 {
     private var CIRCLE_SIDES:Number = 350; /** Defines circle smoothness\angularity */
     

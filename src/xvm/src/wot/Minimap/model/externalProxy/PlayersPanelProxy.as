@@ -1,4 +1,4 @@
-import wot.Minimap.dto.Player;
+import wot.Minimap.dataTypes.Player;
 /**
  * PlayersPanelProxy class
  * provides simple wrapper to PlayersPanel.m_list._dataProvider Array
@@ -33,7 +33,7 @@ import wot.Minimap.dto.Player;
  * @author ilitvinov87@gmail.com
  */
 
-class wot.Minimap.model.PlayersPanelProxy
+class wot.Minimap.model.externalProxy.PlayersPanelProxy
 {
     public static function getPlayerInfo(uid:Number):Player
     {

@@ -1,4 +1,4 @@
-class wot.Minimap.dto.ShapeCfg
+class wot.Minimap.dataTypes.cfg.ShapeCfg
 {
     public var enabled:Boolean;
     public var thickness:Number;

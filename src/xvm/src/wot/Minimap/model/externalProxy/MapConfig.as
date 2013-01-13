@@ -1,7 +1,7 @@
 import flash.geom.Point;
 import wot.utils.Config;
 
-class wot.Minimap.model.MapConfig
+class wot.Minimap.model.externalProxy.MapConfig
 {
     public static function get enabled():Boolean    {
         return Config.s_config.minimap.enabled;    }
@@ -94,5 +94,8 @@ class wot.Minimap.model.MapConfig
         }
         public static function get linesCamera():Array     {
             return Config.s_config.minimap.lines.camera
+        }
+        public static function get linesTraverseAngle():Array     {
+            return Config.s_config.minimap.lines.traverseAngle
         }
 }

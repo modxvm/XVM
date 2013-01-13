@@ -1,11 +1,11 @@
-import wot.Minimap.model.IconsProxy;
+import wot.Minimap.model.externalProxy.IconsProxy;
 
 /**
  * Handles circles and lines scaling aspect.
  * Defines icon to attach to.
  */
 
-class wot.Minimap.ShapeAttach
+class wot.Minimap.shapes.ShapeAttach
 {
     private var MAP_SIZE_IN_POINTS:Number = 211; /** Minimap size in points without scaling */
     

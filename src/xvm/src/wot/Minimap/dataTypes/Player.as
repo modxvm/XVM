@@ -26,7 +26,7 @@
   "label": "Zohan11981",
   "vehAction": 0
  */
-class wot.Minimap.dto.Player
+class wot.Minimap.dataTypes.Player
 {
     public var uid:Number;
     public var vehicle:String;

@@ -1,8 +1,8 @@
-import wot.Minimap.dto.Icon;
+import wot.Minimap.dataTypes.Icon;
 import wot.Minimap.MinimapEntry;
-import wot.Minimap.model.IconsProxy;
+import wot.Minimap.model.externalProxy.IconsProxy;
 
-class wot.Minimap.model.PositionTracking
+class wot.Minimap.model.iconTracker.PositionTracking
 {
     /**
      * Store curretly drawn enemy units position.

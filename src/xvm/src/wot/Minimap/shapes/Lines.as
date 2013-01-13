@@ -1,23 +1,25 @@
+import flash.geom.Point;
 import wot.Minimap.MinimapEvent;
 import wot.utils.GlobalEventDispatcher;
 import wot.utils.Logger;
 import wot.Minimap.MinimapEntry;
-import wot.Minimap.model.IconsProxy;
-import wot.Minimap.model.MapConfig;
-import wot.Minimap.ShapeAttach;
-import wot.Minimap.dto.LineCfg;
+import wot.Minimap.model.externalProxy.IconsProxy;
+import wot.Minimap.model.externalProxy.MapConfig;
+import wot.Minimap.shapes.ShapeAttach;
+import wot.Minimap.dataTypes.cfg.LineCfg;
 
 /**
  * Draws lines of sight and horizontal focusing angles
  */
 
-class wot.Minimap.Lines extends ShapeAttach
+class wot.Minimap.shapes.Lines extends ShapeAttach
 {
     public function Lines(mapSizeInMeters:Number) 
     {
         super(mapSizeInMeters);
         
-        attachVehicleLines();
+        attachVehicleDirectionLines();
+        attachVehicleTraverseAngle();
         attachCameraLines();
         
         /**
@@ -29,11 +31,29 @@ class wot.Minimap.Lines extends ShapeAttach
     
     // -- Private
     
-    private function attachVehicleLines():Void
+    private function attachVehicleDirectionLines():Void
     {
         var depth:Number = icon.getNextHighestDepth();
         var self:MovieClip = icon.createEmptyMovieClip("vehLine" + depth, depth);
         attachLines(self, MapConfig.linesVehicle);
+    }
+    
+    private function attachVehicleTraverseAngle():Void
+    {
+        Logger.add("attachVehicleTraverseAngle");
+        var from:Point = horAnglePoint(50, leftAngle);
+        var to:Point   = horAnglePoint(100, leftAngle);
+        
+        icon.lineStyle(2, 0x00FFFF, 90);
+        
+        icon.moveTo(from.x, -from.y);
+        icon.lineTo(to.x, -to.y);
+    }
+    
+    private function horAnglePoint(R:Number, angle:Number):Point
+    {
+        angle = (90 - angle) * (Math.PI / 180);
+        return new Point(R * Math.cos(angle), R * Math.sin(angle));
     }
     
     private function attachCameraLines():Void
@@ -86,5 +106,15 @@ class wot.Minimap.Lines extends ShapeAttach
         {
             attachCameraLines();
         }
+    }
+    
+    private function get leftAngle():Number
+    {
+        return _root.damagePanel.tankIndicator.hull.gunConstraints.left.angle._currentframe;
+    }
+    
+    private function get rightAngle():Number
+    {
+        return _root.damagePanel.tankIndicator.hull.gunConstraints.right.angle._currentframe;
     }
 }

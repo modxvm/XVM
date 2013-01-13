@@ -1,4 +1,4 @@
-import wot.Minimap.model.MapSizeBase;
+import wot.Minimap.model.mapSize.MapSizeBase;
 
 /**
  * Defines real map size in meters.
@@ -10,7 +10,7 @@ import wot.Minimap.model.MapSizeBase;
  * Did not find any generalized map name at _root flash resources. Working around locale.
  */
 
-class wot.Minimap.model.MapSizeModel
+class wot.Minimap.model.mapSize.MapSizeModel
 {
     private var cellSide:Number;
     

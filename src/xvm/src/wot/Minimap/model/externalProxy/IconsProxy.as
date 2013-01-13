@@ -9,7 +9,7 @@ import wot.Minimap.MinimapEntry;
  * @author ilitvinov87@gmail.com
  */
 
-class wot.Minimap.model.IconsProxy
+class wot.Minimap.model.externalProxy.IconsProxy
 {
     /** Used by SyncModel to calculate unassigned uids for subsequent syncrinization */
     public static function getSyncedUids():Array

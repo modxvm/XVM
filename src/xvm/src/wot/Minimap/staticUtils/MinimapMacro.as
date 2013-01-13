@@ -1,7 +1,7 @@
 import wot.utils.VehicleTypeShort;
 import wot.utils.VehicleInfo;
-import wot.Minimap.model.MapConfig;
-import wot.Minimap.dto.Player;
+import wot.Minimap.model.externalProxy.MapConfig;
+import wot.Minimap.dataTypes.Player;
 import wot.Minimap.MinimapEntry;
 
 class wot.Minimap.staticUtils.MinimapMacro

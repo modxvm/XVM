@@ -1,6 +1,6 @@
-import wot.Minimap.model.MapConfig;
+import wot.Minimap.model.externalProxy.MapConfig;
 import wot.Minimap.staticUtils.LabelAppend;
-import wot.Minimap.dto.Player;
+import wot.Minimap.dataTypes.Player;
 
 /**
  * MinimapEntry represent individual object on map.

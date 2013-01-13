@@ -240,6 +240,11 @@ class wot.utils.DefaultConfig
                     { enabled: true, from: 50,  to: 100, inmeters: true, thickness: 2,   alpha: 60, color: 0xEE0044},
                     { enabled: true, from: 200, to: 300, inmeters: true, thickness: 1.5, alpha: 45, color: 0xEE0044},
                     { enabled: true, from: 350, to: 445, inmeters: true, thickness: 1,   alpha: 30, color: 0xEE0044}
+                  ],
+                  traverseAngle: [
+                    { enabled: true, from: 50,  to: 100, inmeters: true, thickness: 2,   alpha: 60, color: 0xFFFFFF},
+                    { enabled: true, from: 200, to: 300, inmeters: true, thickness: 1.5, alpha: 45, color: 0xFFFFFF},
+                    { enabled: true, from: 350, to: 445, inmeters: true, thickness: 1,   alpha: 30, color: 0xFFFFFF}
                   ]
                 }
             },

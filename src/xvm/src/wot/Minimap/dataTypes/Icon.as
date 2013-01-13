@@ -1,6 +1,6 @@
 import flash.geom.Point;
 
-class wot.Minimap.dto.Icon
+class wot.Minimap.dataTypes.Icon
 {
     public var uid:Number;
     public var pos:Point;

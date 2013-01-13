@@ -1,6 +1,6 @@
 import wot.utils.Utils;
-import wot.Minimap.model.PlayersPanelProxy;
-import wot.Minimap.model.IconsProxy;
+import wot.Minimap.model.externalProxy.PlayersPanelProxy;
+import wot.Minimap.model.externalProxy.IconsProxy;
 
 /**
  * SyncModel class
@@ -10,7 +10,7 @@ import wot.Minimap.model.IconsProxy;
  * @author ilitvinov87@gmail.com
  */
 
-class wot.Minimap.model.SyncModel
+class wot.Minimap.model.iconTracker.SyncModel
 {
     /**
      * Testing uid during delegate event lighting cycle stored here.
