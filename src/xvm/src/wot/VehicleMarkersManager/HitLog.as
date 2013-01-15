@@ -58,8 +58,6 @@ class wot.VehicleMarkersManager.HitLog
 
     function setText(txt)
     {
-        txt = quickFix(txt);
-        
         textField.htmlText = "<span class='xvm_hitlog'>" + txt + "</span>";
     }
     
@@ -153,9 +151,14 @@ class wot.VehicleMarkersManager.HitLog
             players[playerName].hits.push(id);
 
         var header:String = formatText(formatHeader, playerName);
+        /*****************
+         * Quickfix here *
+         *****************/
+        header = quickFix(header);
         if (lines <= 0)
         {
             setText(header);
+
             return;
         }
 
