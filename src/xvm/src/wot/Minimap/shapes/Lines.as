@@ -1,7 +1,6 @@
 import flash.geom.Point;
 import wot.Minimap.MinimapEvent;
 import wot.utils.GlobalEventDispatcher;
-import wot.utils.Logger;
 import wot.Minimap.MinimapEntry;
 import wot.Minimap.model.externalProxy.IconsProxy;
 import wot.Minimap.model.externalProxy.MapConfig;
@@ -33,27 +32,17 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
     
     private function attachVehicleDirectionLines():Void
     {
-        var depth:Number = icon.getNextHighestDepth();
-        var self:MovieClip = icon.createEmptyMovieClip("vehLine" + depth, depth);
-        attachLines(self, MapConfig.linesVehicle);
+        var depth:Number = self.getNextHighestDepth();
+        var vehLines:MovieClip = self.createEmptyMovieClip("vehLine" + depth, depth);
+        attachLines(vehLines, MapConfig.linesVehicle, 0);
     }
     
     private function attachVehicleTraverseAngle():Void
     {
-        Logger.add("attachVehicleTraverseAngle");
-        var from:Point = horAnglePoint(50, leftAngle);
-        var to:Point   = horAnglePoint(100, leftAngle);
-        
-        icon.lineStyle(2, 0x00FFFF, 90);
-        
-        icon.moveTo(from.x, -from.y);
-        icon.lineTo(to.x, -to.y);
-    }
-    
-    private function horAnglePoint(R:Number, angle:Number):Point
-    {
-        angle = (90 - angle) * (Math.PI / 180);
-        return new Point(R * Math.cos(angle), R * Math.sin(angle));
+        var depth:Number = self.getNextHighestDepth();
+        var traverseAgnle:MovieClip = self.createEmptyMovieClip("traverseAgnle" + depth, depth);
+        attachLines(traverseAgnle, MapConfig.linesTraverseAngle, rightAngle);
+        attachLines(traverseAgnle, MapConfig.linesTraverseAngle, -leftAngle);
     }
     
     private function attachCameraLines():Void
@@ -62,10 +51,10 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
         cameraEntry.cameraExtendedToken = true;
         var depth:Number = cameraEntry.getNextHighestDepth();
         var vehLines:MovieClip = cameraEntry.createEmptyMovieClip("cameraLine" + depth, 10000);
-        attachLines(vehLines, MapConfig.linesCamera);
+        attachLines(vehLines, MapConfig.linesCamera, 0);
     }
     
-    private function attachLines(mc:MovieClip, linesCfg:Array):Void
+    private function attachLines(mc:MovieClip, linesCfg:Array, angle:Number):Void
     {
         for (var i in linesCfg)
         {
@@ -73,12 +62,14 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
             
             if (lineCfg.enabled)
             {
-                var from:Number = lineCfg.from;
-                var to  :Number = lineCfg.to;
+                var from:Point = horAnglePoint(lineCfg.from, angle);
+                var to  :Point = horAnglePoint(lineCfg.to, angle);
                 if (lineCfg.inmeters)
                 {
-                    from *= metersPerPoint;
-                    to   *= metersPerPoint;
+                    from.y *= metersPerPoint;
+                    to.y   *= metersPerPoint;
+                    from.x *= metersPerPoint;
+                    to.x   *= metersPerPoint;
                 }
                 
                 drawLine(mc, from, to, lineCfg.thickness, lineCfg.color, lineCfg.alpha);
@@ -86,12 +77,18 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
         }
     }
     
-    private function drawLine(mc:MovieClip, from:Number, to:Number, thickness:Number, color:Number, alpha:Number):Void
+    private function horAnglePoint(R:Number, angle:Number):Point
+    {
+        angle = angle * (Math.PI / 180);
+        return new Point(R * Math.sin(angle), R * Math.cos(angle));
+    }
+    
+    private function drawLine(mc:MovieClip, from:Point, to:Point, thickness:Number, color:Number, alpha:Number):Void
     {
         mc.lineStyle(thickness, color, alpha);
         
-        mc.moveTo(0, -from);
-        mc.lineTo(0, -to);
+        mc.moveTo(from.x, -from.y);
+        mc.lineTo(to.x, -to.y);
     }
     
     private function onEntryInited(event:MinimapEvent):Void

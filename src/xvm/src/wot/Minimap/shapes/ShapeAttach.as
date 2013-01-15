@@ -10,7 +10,7 @@ class wot.Minimap.shapes.ShapeAttach
     private var MAP_SIZE_IN_POINTS:Number = 211; /** Minimap size in points without scaling */
     
     private var metersPerPoint:Number;
-    private var icon:Object; // :MinimapEntry
+    private var self:Object; // :MinimapEntry
         
     public function ShapeAttach(mapSizeInMeters:Number) 
     {
@@ -19,8 +19,8 @@ class wot.Minimap.shapes.ShapeAttach
          * Used as a center of circles.
          * Will carry attached circles with itself automatically.
          */
-        icon = IconsProxy.getSelf();
+        self = IconsProxy.getSelf();
         
-        metersPerPoint = (MAP_SIZE_IN_POINTS / mapSizeInMeters) / icon._xscale * 100;
+        metersPerPoint = (MAP_SIZE_IN_POINTS / mapSizeInMeters) / self._xscale * 100;
     }
 }
