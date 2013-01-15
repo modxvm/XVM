@@ -1,4 +1,7 @@
-﻿XVM-3.3.0
+﻿XVM-3.3.1
+  * hitlog extremely oversized symbols fix
+  
+XVM-3.3.0
   * release for WoT 0.8.3
   
 XVM-3.3.0-test1:

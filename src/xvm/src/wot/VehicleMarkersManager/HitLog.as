@@ -58,8 +58,60 @@ class wot.VehicleMarkersManager.HitLog
 
     function setText(txt)
     {
+        txt = quickFix(txt);
+        
         textField.htmlText = "<span class='xvm_hitlog'>" + txt + "</span>";
         //Logger.add(textField.htmlText);
+    }
+    
+    /**
+     * Quick fix!
+     * 
+     * <font size='0атака'> expression is not ignored by html parser
+     * and produces extremely oversized fonts.
+     * 
+     * <font size=''> expression is successfully ignored by internal flash 8 html parser.
+     * 
+     * Method translates '0атака' macro outputs to empty ''.
+     */
+    private function quickFix(text):String
+    {
+        if (text.indexOf("<font size='0'>") != -1)
+        {
+            /**
+             * <font size='0'> expression successfully makes subsequent text invisible
+             * This string should be left untouched.
+             */
+            return text;
+        }
+        /**
+         * Other case is when size value contains macro insertion.
+         */
+        
+        var strArr:Array = text.split("<font size='0");
+        if (strArr.length == 2)
+        {
+            /**
+             * <font size='0атака'> type expression found
+             */
+            
+            while (strArr[1].charAt(0) != ">")
+            {
+                /**
+                 * Cutting out any macro outputs from <font size='0атака'> expression
+                 */
+                strArr[1] = strArr[1].substring(1, strArr[1].length) // cut(start, end)
+                Logger.add("strArr[1] " + strArr[1]);
+            } 
+            
+            text = strArr.join("<font size=''");
+            /**
+             * Empty value done.
+             * HTML parser now should ignore this HTML tag and show subsequent text.
+             */
+        }
+        
+        return text;
     }
 
     public function update(delta:Number, curHealth:Number, vehicleName:String, playerName:String,
