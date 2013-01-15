@@ -74,6 +74,21 @@ class wot.Minimap.model.externalProxy.MapConfig
             public static function get mapSizeLabelOffset():Point    {
                 return new Point(Config.s_config.minimap.labels.mapSize.offsetX,
                                  Config.s_config.minimap.labels.mapSize.offsetY); }
+            /** Shadow */
+                public static function get mapSizeLabelShadowEnabled():Boolean    {
+                    return Config.s_config.minimap.labels.mapSize.shadow.enabled;    }
+                public static function get mapSizeLabelShadowColor():Number    {
+                    return Config.s_config.minimap.labels.mapSize.shadow.color;    }
+                public static function get mapSizeLabelShadowDistance():Number    {
+                    return Config.s_config.minimap.labels.mapSize.shadow.distance;    }
+                public static function get mapSizeLabelShadowAngle():Number    {
+                    return Config.s_config.minimap.labels.mapSize.shadow.angle;    }
+                public static function get mapSizeLabelShadowAlpha():Number    {
+                    return Config.s_config.minimap.labels.mapSize.shadow.alpha;    }
+                public static function get mapSizeLabelShadowBlur():Number    {
+                    return Config.s_config.minimap.labels.mapSize.shadow.blur;    }
+                public static function get mapSizeLabelShadowStrength():Number    {
+                    return Config.s_config.minimap.labels.mapSize.shadow.strength;    }
      /** Circles */
         public static function get circlesEnabled():Boolean     {
             return Config.s_config.minimap.circles.enabled

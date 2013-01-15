@@ -186,7 +186,16 @@ class wot.utils.DefaultConfig
                     css: "font-size:12px; color:#000000;",
                     alpha: 75,
                     offsetX: 0,
-                    offsetY: 0
+                    offsetY: 0,
+                    shadow: {
+                      enabled: true,
+                      color: 0xAAAAAA,
+                      distance: 0,
+                      angle: 0,
+                      alpha: 60,
+                      blur: 5,
+                      strength: 3
+                    }
                   }
                 },
                 circles: {

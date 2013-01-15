@@ -1,4 +1,5 @@
 import flash.geom.Point;
+import flash.filters.DropShadowFilter;
 import wot.Minimap.model.externalProxy.MapConfig;
 
 class wot.Minimap.MapSizeLabel
@@ -25,6 +26,22 @@ class wot.Minimap.MapSizeLabel
         tf.htmlText = "<span class='mapsize'>" + defineLabelText(MapConfig.mapSizeLabelFormat) + "</span>";
         
         tf._alpha = MapConfig.mapSizeLabelAlpha;
+        
+        if (MapConfig.mapSizeLabelEnabled)
+        {
+            tf.filters = [new DropShadowFilter(
+                    MapConfig.mapSizeLabelShadowDistance, // distance
+                    MapConfig.mapSizeLabelShadowAngle, // angle
+                    MapConfig.mapSizeLabelShadowColor,
+                    // DropShadowFilter accepts alpha be from 0 to 1.
+                    // 90 at default config.
+                    MapConfig.mapSizeLabelShadowAlpha / 100, 
+                    MapConfig.mapSizeLabelShadowBlur,
+                    MapConfig.mapSizeLabelShadowBlur,
+                    MapConfig.mapSizeLabelShadowStrength,
+                    3 // quality
+                )];
+        }
     }
     
     /** -- Private */
