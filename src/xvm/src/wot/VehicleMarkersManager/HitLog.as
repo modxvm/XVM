@@ -100,7 +100,6 @@ class wot.VehicleMarkersManager.HitLog
                  * Cutting out any macro outputs from <font size='0атака'> expression
                  */
                 strArr[1] = strArr[1].substring(1, strArr[1].length) // cut(start, end)
-                Logger.add("strArr[1] " + strArr[1]);
             } 
             
             text = strArr.join("size='");
