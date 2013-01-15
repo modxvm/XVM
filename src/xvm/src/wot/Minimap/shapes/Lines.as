@@ -64,6 +64,8 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
             {
                 var from:Point = horAnglePoint(lineCfg.from, angle);
                 var to  :Point = horAnglePoint(lineCfg.to, angle);
+                
+                /** Translate absolute minimap distance in points to game meters */
                 if (lineCfg.inmeters)
                 {
                     from.y *= metersPerPoint;
