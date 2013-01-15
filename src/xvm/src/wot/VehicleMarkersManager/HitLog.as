@@ -61,7 +61,6 @@ class wot.VehicleMarkersManager.HitLog
         txt = quickFix(txt);
         
         textField.htmlText = "<span class='xvm_hitlog'>" + txt + "</span>";
-        //Logger.add(textField.htmlText);
     }
     
     /**
@@ -76,7 +75,7 @@ class wot.VehicleMarkersManager.HitLog
      */
     private function quickFix(text):String
     {
-        if (text.indexOf("<font size='0'>") != -1)
+        if (text.indexOf("size='0'") != -1)
         {
             /**
              * <font size='0'> expression successfully makes subsequent text invisible
@@ -88,14 +87,14 @@ class wot.VehicleMarkersManager.HitLog
          * Other case is when size value contains macro insertion.
          */
         
-        var strArr:Array = text.split("<font size='0");
+        var strArr:Array = text.split("size='0");
         if (strArr.length == 2)
         {
             /**
              * <font size='0атака'> type expression found
              */
             
-            while (strArr[1].charAt(0) != ">")
+            while (strArr[1].charAt(0) != "'")
             {
                 /**
                  * Cutting out any macro outputs from <font size='0атака'> expression
@@ -104,7 +103,7 @@ class wot.VehicleMarkersManager.HitLog
                 Logger.add("strArr[1] " + strArr[1]);
             } 
             
-            text = strArr.join("<font size=''");
+            text = strArr.join("size='");
             /**
              * Empty value done.
              * HTML parser now should ignore this HTML tag and show subsequent text.
