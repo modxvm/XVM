@@ -17,9 +17,16 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
     {
         super(mapSizeInMeters);
         
-        attachVehicleDirectionLines();
-        attachVehicleTraverseAngle();
         attachCameraLines();
+        attachVehicleDirectionLines();
+        if (rightAngle != 1)
+        {
+            /**
+             * Tanks without hull gun constraints has 1 angle degree for each side.
+             * No need to attach traverse angle
+             */
+            attachVehicleTraverseAngle();
+        }
         
         /**
          * Warning! Workaround!

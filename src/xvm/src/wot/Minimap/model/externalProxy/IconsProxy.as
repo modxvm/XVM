@@ -1,4 +1,3 @@
-import wot.utils.Logger;
 import wot.utils.Utils;
 import wot.Minimap.MinimapEntry;
 
