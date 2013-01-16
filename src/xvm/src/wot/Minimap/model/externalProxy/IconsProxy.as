@@ -82,7 +82,7 @@ class wot.Minimap.model.externalProxy.IconsProxy
              * Warning! Size values may change with scale. TODO: check.
              */
             var self:MinimapEntry = getSelf();
-            if (self._x == entry._x && self._y == entry._y)
+            if (self._x == entry._x && self._y == entry._y && !entry.selfIcon)
             {
                 return entry;
             }

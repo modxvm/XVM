@@ -1,3 +1,4 @@
+import wot.utils.Logger;
 import wot.utils.Utils;
 import wot.utils.GlobalEventDispatcher;
 import wot.Minimap.MinimapEntry;
@@ -180,7 +181,7 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
          * Does not affect attached shapes.
          */
         var camera:MinimapEntry = IconsProxy.getCamera();
-        camera.markMC._alpha = MapConfig.cameraAlpha;
+        camera._alpha = MapConfig.cameraAlpha;
         
         /**
          * Defines real map size in meters.
