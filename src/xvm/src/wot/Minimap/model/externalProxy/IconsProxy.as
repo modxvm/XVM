@@ -1,3 +1,4 @@
+import wot.utils.Logger;
 import wot.utils.Utils;
 import wot.Minimap.MinimapEntry;
 
@@ -78,10 +79,11 @@ class wot.Minimap.model.externalProxy.IconsProxy
             
             /**
              * Camera does not have any distinguishable fields.
-             * But other minimap entries have.
-             * Find by exclusion method.
+             * Cameras coordinates are the same relative to player himself.
+             * Warning! Size values may change with scale. TODO: check.
              */
-            if (entry.m_type != "ally" && !entry.selfIcon && !entry.teamPoint)
+            var self:MinimapEntry = getSelf();
+            if (self._x == entry._x && self._y == entry._y)
             {
                 return entry;
             }

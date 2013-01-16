@@ -224,7 +224,7 @@
         "special": [
             // Copy lines in case many special circles wanted for one type.
             { "su_18":            { "enabled": true, "distance": 552,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "su_26":            { "enabled": true, "distance": 638,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "su_26":            { "enabled": true, "distance": 578,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
             { "su_5":             { "enabled": true, "distance": 605,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
             { "su_8":             { "enabled": true, "distance": 920,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
             { "s_51":             { "enabled": true, "distance": 1229, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
@@ -237,7 +237,7 @@
             { "wespe":            { "enabled": true, "distance": 1000, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
             { "grille":           { "enabled": true, "distance": 1210, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
             { "hummel":           { "enabled": true, "distance": 1264, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "g_panther":        { "enabled": true, "distance": 1408, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "g_panther":        { "enabled": true, "distance": 1407, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
             { "g_tiger":          { "enabled": true, "distance": 1172, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
             { "g_e":              { "enabled": true, "distance": 1172, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
 
