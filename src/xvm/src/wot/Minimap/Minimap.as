@@ -95,6 +95,7 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     // override
     function sizeUp()
     {
+        super.sizeUp();
         //Logger.add("");
     }
     
