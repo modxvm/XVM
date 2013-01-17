@@ -182,7 +182,7 @@ class wot.utils.DefaultConfig
                   },
                   mapSize: {
                     enabled: true,
-                    format: "<b>{{cellsize}}0m²</b>",
+                    format: "<b>{{cellsize}}0 m</b>",
                     css: "font-size:12px; color:#000000;",
                     alpha: 75,
                     offsetX: 0,
