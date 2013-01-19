@@ -41,8 +41,8 @@ class wot.Minimap.model.externalProxy.MapConfig
                 public static function get cssOneself():String    {
                     return Config.s_config.minimap.labels.allRevealedUnits.css.oneself;    }
             public static function get revealedOffset():Point    {
-                return new Point(Config.s_config.minimap.labelOffsetX,
-                                 Config.s_config.minimap.labelOffsetY); }
+                return new Point(Config.s_config.minimap.labels.allRevealedUnits.offsetX,
+                                 Config.s_config.minimap.labels.allRevealedUnits.offsetY); }
         /** lostEnemyUnits*/
             public static function get lostEnemyEnabled():Boolean    {
                 return Config.s_config.minimap.labels.lostEnemyUnits.enabled;    }
