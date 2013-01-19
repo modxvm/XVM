@@ -155,6 +155,7 @@ class wot.utils.DefaultConfig
                 markerScale: 1,
                 labels: {
                   nickShrink: 4,
+                  ifspgsymbol: "█",
                   allRevealedUnits: {
                     enabled: true,
                     format: {
@@ -174,7 +175,7 @@ class wot.utils.DefaultConfig
                   },
                   lostEnemyUnits: {
                     enabled: true,
-                    format: "<i>{{level}}</i>",
+                    format: "{{ifspg}}<i>{{level}}</i>",
                     css: "font-family:$FieldFont; font-size:8px; color:#EEAACC;",
                     alpha: 90,
                     offsetX: -4,

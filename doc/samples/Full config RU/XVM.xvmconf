@@ -171,6 +171,7 @@
     "markerScale": 1,
     "labels": {
       "nickShrink": 4,
+      "ifspgsymbol": "█", // output symbol for {{ifspg}} macro; works if subject is artillery type
       "allRevealedUnits": {
         "enabled": true,
         "format": {
@@ -190,7 +191,7 @@
       },
       "lostEnemyUnits": {
         "enabled": true,
-        "format": "<i>{{level}}</i>",
+        "format": "{{ifspg}}<i>{{level}}</i>",
         "css": "font-family:$FieldFont; font-size:8px; color:#EEAACC;",
         "alpha": 90,
         "offsetX": -4,

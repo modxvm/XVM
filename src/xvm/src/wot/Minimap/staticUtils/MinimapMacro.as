@@ -11,7 +11,6 @@ class wot.Minimap.staticUtils.MinimapMacro
     private static var VEH_MACRO:String = "{{vehicle}}";
     private static var NICK_MACRO:String = "{{short-nick}}";
     private static var IFSPG_MACRO:String = "{{ifspg}}";
-    private static var IFSPG_SYMBOL:String = "█";
     
     public static function process(format:String, player:Player, vehicleClass:String):String
     {
@@ -62,7 +61,7 @@ class wot.Minimap.staticUtils.MinimapMacro
         if (formatArr.length > 1)
         {
             if (vehicleClass == MinimapEntry.MINIMAP_ENTRY_VEH_CLASS_SPG)
-                format = formatArr.join(IFSPG_SYMBOL);
+                format = formatArr.join(MapConfig.ifSpgSymbol);
             else
                 format = formatArr.join("")
         }

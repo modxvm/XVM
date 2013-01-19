@@ -16,7 +16,9 @@ class wot.Minimap.model.externalProxy.MapConfig
    
     /** Labels */
         public static function get nickShrink():Number    {
-        return Config.s_config.minimap.nickShrink;    }
+            return Config.s_config.minimap.labels.nickShrink;    }
+        public static function get ifSpgSymbol():String    {
+            return Config.s_config.minimap.labels.ifspgsymbol;    }
         /** allRevealedUnits */
             public static function get revealedEnabled():Boolean    {
                 return Config.s_config.minimap.enabled;    }
