@@ -7,7 +7,7 @@ import wot.Minimap.model.externalProxy.PlayersPanelProxy;
 
 class wot.Minimap.staticUtils.LabelAppend
 {
-    public static function append(mc:MovieClip, uid:Number, entryName:String, offset:Point, vehicleClass:String):TextField
+    public static function append(mc:MovieClip, uid:Number, entryName:String, offset:Point, vehicleClass:String, scale:Number):TextField
     {
         var player:Player = PlayersPanelProxy.getPlayerInfo(uid);
         
@@ -20,6 +20,16 @@ class wot.Minimap.staticUtils.LabelAppend
         var style:TextField.StyleSheet = new TextField.StyleSheet();
         style.parseCSS(getCSS(entryName));
         textField.styleSheet = style;
+        
+        /**
+         * LostMarkers does not have scaling applied by parent.
+         * Applying manually.
+         */
+        if (scale)
+        {
+            textField._xscale = scale;
+            textField._yscale = scale;
+        }
         
         textField.htmlText = "<span class='xvm_mm'>" + getText(entryName, player, vehicleClass) + "</span>"; //getText()
         

@@ -5,6 +5,7 @@ import wot.utils.GlobalEventDispatcher;
 import wot.Minimap.MinimapEvent;
 import wot.Minimap.staticUtils.LabelAppend;
 import wot.Minimap.model.externalProxy.MapConfig;
+import wot.Minimap.model.externalProxy.IconsProxy;
 
 class wot.Minimap.LostMarkers
 {
@@ -39,11 +40,19 @@ class wot.Minimap.LostMarkers
     
     private function createAllLabels(lost:Array):Void
     {
+        /**
+         * LostMarkers does not have scaling applied by parent.
+         * Applying manually.
+         * Should not be in constructor.
+         */
+        var self:MinimapEntry = IconsProxy.getSelf();
+        var scale:Number = self._xscale;
+        
         /** Find UIDs that present in lost but are absent in labels */
         for (var i in lost)
         {
             /* New TextField is attached to Minimap at this moment */
-            var tf:TextField = createLabel(lost[i]);
+            var tf:TextField = createLabel(lost[i], scale);
             tf._alpha = MapConfig.lostEnemyAlpha;
             
             /**
@@ -54,10 +63,11 @@ class wot.Minimap.LostMarkers
         }
     }
     
-    private function createLabel(lost:Icon):TextField
+    private function createLabel(lost:Icon, scale:Number):TextField
     {
         var pos:Point = lost.pos; /** Major lost label position */
         pos = pos.add(MapConfig.lostEnemyOffset);  /** Minor offset to place label at removed icon position */
-        return LabelAppend.append(container, lost.uid, MinimapEntry.MINIMAP_ENTRY_TYPE_LOST, pos, lost.vehicleClass);
+        
+        return LabelAppend.append(container, lost.uid, MinimapEntry.MINIMAP_ENTRY_TYPE_LOST, pos, lost.vehicleClass, scale);
     }
 }
