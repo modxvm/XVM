@@ -1,4 +1,6 @@
-﻿XVM-3.3.1
+﻿  * capture bar: fixed number of tanks capturing for Tank Company encounter battles
+
+XVM-3.3.1
   * hitlog extremely oversized symbols fix
   
 XVM-3.3.0
