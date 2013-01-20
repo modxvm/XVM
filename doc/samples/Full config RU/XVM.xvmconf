@@ -165,46 +165,50 @@
   },
   // Миникарта
   "minimap": {
-    "enabled": false,
-    "mapBackgroundImageAlpha": 100,
-    "selfIconAlpha": 100,
-    "markerScale": 1,
-    "labels": {
-      "nickShrink": 4,
-      "ifspgsymbol": "█", // output symbol for {{ifspg}} macro; works if subject is artillery type
-      "allRevealedUnits": {
+    "enabled": false, // Включение\выключение всего мода миникарты в целом.
+    "mapBackgroundImageAlpha": 100, // Прозрачность изображения карты.
+    "selfIconAlpha": 100,           // Прозрачность своей иконки. Белая стрелка
+    "markerScale": 1,               // Размер всех маркеров.
+                                    // Влияет, и на все иконки, и на все надписи юнитов,
+                                    // и на всю прикрепленную к иконкам геометрию.
+                                    // Можно дробные 0.7 1.4.
+                                    
+    "labels": {                     // Текстовые надписи. Поддерживают HTML.
+      "nickShrink": 4,                // Максимальные размер ника для макроса {{short-nick}}.
+      "ifspgsymbol": "█",             // Символ для макроса {{ifspg}}. Выводится только если субъект типа артиллерии
+      "allRevealedUnits": { // Видимые на миникарте юниты.
         "enabled": true,
-        "format": {
+        "format": { // Формат поля.
           "ally":  "{{level}}",
           "enemy": "{{level}}",
-          "squad": "{{level}} <i>{{short-nick}}</i>",
-          "oneself": "<b>{{level}}</b>"
+          "squad": "{{level}} <i>{{short-nick}}</i>", // Совзводный.
+          "oneself": "<b>{{level}}</b>" // Для своего маркера и маркера приёмника камеры наблюдения в случае смерти.
         },
-        "css": {
+        "css": { // CSS стиль.
           "ally":  "font-family:$FieldFont; font-size:8px; color:#BBEEBB;",
           "enemy": "font-family:$FieldFont; font-size:8px; color:#EEBBBB;",
           "squad": "font-family:$FieldFont; font-size:8px; color:#FFEE44;",
           "oneself": "font-family:$FieldFont; font-size:8px; color:#FFFFFF;"
         },
-        "offsetX": 0,
+        "offsetX": 0, // Смещение поля относительно текущей иконки.
         "offsetY": 0
       },
-      "lostEnemyUnits": {
+      "lostEnemyUnits": { // Настройки поля для потерянных с миникарты врагов. 
         "enabled": true,
         "format": "{{ifspg}}<i>{{level}}</i>",
         "css": "font-family:$FieldFont; font-size:8px; color:#EEAACC;",
         "alpha": 90,
-        "offsetX": -4,
+        "offsetX": -4, // Смещение относительно последних координат видимой позиции.
         "offsetY": -4
       },
-      "mapSize": {
+      "mapSize": { // Поле размера стороны карты. Например 1000м, 700м, 600м.
         "enabled": true,
         "format": "<b>{{cellsize}}0 м</b>",
         "css": "font-size:12px; color:#000000;",
         "alpha": 75,
         "offsetX": 0,
         "offsetY": 0,
-        "shadow": {
+        "shadow": { // Тень.
           "enabled": true,
           "color": "0xAAAAAA",
           "distance": 0,
@@ -215,15 +219,18 @@
         }
       }
     },
-    "circles": {
+    "circles": { // Круги дальности. Дистанция только в реальных метрах карты. Только для своей техники.
         "enabled": true,
-        "major": [
-            { "enabled": true, "distance": 445, "thickness": 1, "alpha": 40, "color": "0x000000" }, // 445 max disclosure distance
+        "major": [ // Основные круги. thickness - толщина. 445 метров - максимальная дистанция засвета.
+            { "enabled": true, "distance": 445, "thickness": 1, "alpha": 40, "color": "0x000000" },
             { "enabled": false, "distance": 50, "thickness": 2.5, "alpha": 100, "color": "0xFFFFFF" }
         ],
-        // Artillery range circle by type. Top gun range is used by default.
+        // Специальные круги, зависящие от модели техники.
+        // Несколько строк для одной техники делают несколько кругов.
+        // По умолчанию в списке только круги дальнобойности артиллерии с топ орудиями.
+        // Типы для дополнения брать по ссылке
+        // http://code.google.com/p/wot-xvm/source/browse/trunk/src/xvm/src/wot/utils/VehicleInfoData2.as
         "special": [
-            // Copy lines in case many special circles wanted for one type.
             { "su_18":            { "enabled": true, "distance": 552,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
             { "su_26":            { "enabled": true, "distance": 578,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
             { "su_5":             { "enabled": true, "distance": 605,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
@@ -260,19 +267,21 @@
             { "bat_chatillon155": { "enabled": true, "distance": 1296, "thickness": 1, "alpha": 60, "color": "0xEE4444" } }
         ]
     },
-    "lines": {
+    "lines": { // Линии. Только для своей техники.
        "enabled": true,
-       "vehicle": [
+       // "inmeters": true  - дистанция отрезка в метрах реальной карты.
+       // "inmeters": false - дистанция отрезка в точках миникарты. Сторона миникарты 211 точек.
+       "vehicle": [ // Направление корпуса своей техники.
          { "enabled": true, "from": 50,  "to": 100, "inmeters": true, "thickness": 2,   "alpha": 60, "color": "0x44EE44"},
          { "enabled": true, "from": 200, "to": 300, "inmeters": true, "thickness": 1.5, "alpha": 45, "color": "0x44EE44"},
          { "enabled": true, "from": 350, "to": 445, "inmeters": true, "thickness": 1,   "alpha": 30, "color": "0x44EE44"}
        ],
-       "camera": [
+       "camera": [ // Направление камеры от своей техники.
          { "enabled": true, "from": 50,  "to": 100, "inmeters": true, "thickness": 2,   "alpha": 60, "color": "0xEE0044"},
          { "enabled": true, "from": 200, "to": 300, "inmeters": true, "thickness": 1.5, "alpha": 45, "color": "0xEE0044"},
          { "enabled": true, "from": 350, "to": 445, "inmeters": true, "thickness": 1,   "alpha": 30, "color": "0xEE0044"}
        ],
-       "traverseAngle": [
+       "traverseAngle": [ // Углы горизонтальной наводки. Срабатывают только, если углы есть.
          { "enabled": true, "from": 50,  "to": 100, "inmeters": true, "thickness": 2,   "alpha": 60, "color": "0xFFFFFF"},
          { "enabled": true, "from": 200, "to": 300, "inmeters": true, "thickness": 1.5, "alpha": 45, "color": "0xFFFFFF"},
          { "enabled": true, "from": 350, "to": 445, "inmeters": true, "thickness": 1,   "alpha": 30, "color": "0xFFFFFF"}
