@@ -21,11 +21,9 @@ parse_ivanerr()
     l="$clan $id"
 
     i=$((i+1))
-    if [ $i -gt 100 ]; then
-      return
-    fi
+    [ $i -gt $top_count ] && return
 
-    if ! grep -E "^$l\$" $topfile > /dev/null; then
+    if ! grep -E "^$l\$" $topfile $topfile_persist > /dev/null; then
       echo
       echo "$i: $l"
       echo "$l" >> $topfile
@@ -42,7 +40,7 @@ parse_null()
   echo "Searching clans ids..."
   rm -f "$tmpfn"
   i=0
-  cat "$topfile" | while read line; do
+  cat $topfile $topfile_persist | while read line; do
     i=$((i+1))
     clan=`echo $line | cut -d' ' -f1`
     id=`echo "$line " | cut -d' ' -f2`
@@ -64,14 +62,14 @@ parse_null()
     echo "$clan $id" >> "$tmpfn"
   done
 
-  mv -f "$tmpfn" "$topfile"
+  mv -f "$tmpfn" $topfile
   echo
 }
 
 sort_topfile()
 {
   echo "Sorting..."
-  cat "$topfile" | sort | uniq > "$topfile"
+  cat $topfile | sort | uniq > $topfile
 }
 
 update()
@@ -79,7 +77,7 @@ update()
   echo "Updating icons..."
   rm -f top/res_mods/clanicons/$dir/clan/*
   i=0
-  cat "$topfile" | while read line; do
+  cat $topfile $topfile_persist | while read line; do
     i=$((i+1))
     clan=`echo $line | cut -d' ' -f1`
     id=`echo $line | cut -d' ' -f2`
