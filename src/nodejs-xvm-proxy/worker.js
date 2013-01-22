@@ -70,8 +70,16 @@ module.exports = (function() {
             callback(null, { __code: "error", __error: "Timeout" });
         }, settings.statHostsTimeouts[statHostId]);
 
+        var host = settings.statHosts[statHostId];
+// DEBUG
+        if (host == "api.worldoftanks.ru" && Math.round(Math.random()) == 1)
+        {
+            host = "worldoftanks.ru";
+//            utils.log("host = worldoftanks.ru");
+        }
+// /DEBUG
         var options = {
-            host: settings.statHosts[statHostId],
+            host: host,
             port: 80,
             path: "/uc/accounts/" + id + "/api/" + settings.wotApiVersion + "/?source_token=Intellect_Soft-WoT_Mobile-unofficial_stats"
             //      , agent: agent
@@ -90,7 +98,8 @@ module.exports = (function() {
 //                utils.debug("responseData.length = " + responseData.length);
                     callback(null, result);
                 } catch(e) {
-                    utils.debug("JSON.parse error: id=" + id + " length=" + responseData.length + ", data=" + responseData.substr(0, 75).replace(/[\n\r]/g, ""));
+                    utils.debug("JSON.parse error: id=" + id + " length=" + responseData.length +
+                        ", data=" + responseData.substr(0, 75).replace(/[\n\r\x00-\x1F]/g, ""));
                     callback(null, { __code: "error", __error: "JSON.parse error" });
                 }
             });
@@ -167,32 +176,49 @@ module.exports = (function() {
                             resultItem.nm = curResult.data.name;
                             resultItem.b = curResult.data.summary.battles_count;
                             resultItem.w = curResult.data.summary.wins;
-                            resultItem.e = utils.calculateEfficiency(curResult.data);
 
-                            // fill vehicle data
                             resultItem.v = [];
                             var vehicles_length = curResult.data.vehicles.length;
-                            for(var j = 0; j < vehicles_length; ++j) {
-                                var vdata = curResult.data.vehicles[j];
-                                resultItem.v.push({
-                                    name: vdata.name.toUpperCase(),
-                                    cl: utils.getVehicleType(vdata.class),
-                                    l: vdata.level,
-                                    b: vdata.battle_count,
-                                    w: vdata.win_count,
-                                    d: vdata.damageDealt,
-                                    f: vdata.frags,
-                                    s: vdata.spotted,
-                                    u: vdata.survivedBattles
-                                });
+
+                            // skip empty items (no battles or vehicles)
+                            if (resultItem.b > 0 && vehicles_length > 0) {
+                                // fill vehicle data
+                                for(var j = 0; j < vehicles_length; ++j) {
+                                    var vdata = curResult.data.vehicles[j];
+                                    resultItem.v.push({
+                                        name: vdata.name.toUpperCase(),
+                                        cl: utils.getVehicleType(vdata.class),
+                                        l: vdata.level,
+                                        b: vdata.battle_count,
+                                        w: vdata.win_count,
+                                        d: vdata.damageDealt,
+                                        f: vdata.frags,
+                                        s: vdata.spotted,
+                                        u: vdata.survivedBattles
+                                    });
+                                }
+
+                                // EFF - wot-news efficiency rating
+                                resultItem.e = utils.calculateEfficiency(curResult.data);
+
+                                // TWR - tourist1984 win rate (aka T-Calc)
+                                try {
+//                                    utils.log("start calc twr: " + resultItem._id);
+//                                    resultItem.twr = tcalc.calc(utils.clone(resultItem)).result.toFixed(2);
+//                                    utils.log("resultItem.twr=" + resultItem.twr + "%" +
+//                                        ", GWR=" + (resultItem.w / resultItem.b * 100).toFixed(2) + "%" +
+//                                        ", bc=" + resultItem.b +
+//                                        ", id=" + resultItem._id);
+                                } catch (e) { utils.log(e); }
+
+                                // updating db
+                                collection.update({ _id: id }, resultItem, { upsert: true });
                             }
 
-                            // updating db (skip empty data)
-                            if (resultItem.b && resultItem.v.length > 0)
-                                collection.update({ _id: id }, resultItem, { upsert: true });
                             process.send({ usage: 1, updated: 1 });
+
                             if (settings.updateMissed == true)
-                                missed_collection.remove({_id: id }, function(err) { if (err) utils.log("remove error: " + err); });
+                                missed_collection.remove({ _id: id }, function(err) { if (err) utils.log("remove error: " + err); });
                         } else if(curResult.status === "error") {
                             switch(curResult.status_code) {
                                 case "API_UNKNOWN_SERVER_ERROR":
@@ -218,6 +244,7 @@ module.exports = (function() {
                     battles: resultItem.b,
                     wins: resultItem.w,
                     eff: resultItem.e,
+                    twr: resultItem.twr,
                     v: resultItem.v
                 };
                 result.players.push(pl);
@@ -234,6 +261,7 @@ module.exports = (function() {
                     battles: player.b,
                     wins: player.w,
                     eff: player.e,
+                    twr: player.twr,
                     v: player.v
                 };
 
@@ -286,10 +314,12 @@ module.exports = (function() {
                         if(player.vname) {
                             var vs_length = vs.length;
                             for(var i = 0; i < vs_length; ++i) {
+try {
                                 if(vs[i].name.toUpperCase() == player.vname) {
                                     player.v = vs[i];
                                     break;
                                 }
+} catch (e) { utils.log(">>>  " + e + " id=" + player.id); }
                             }
                         }
                     }
@@ -398,7 +428,7 @@ module.exports = (function() {
         } catch(e) {
             response.end('{"error":"' + e + '","server":"' + settings.serverName + '"}');
         }
-    };
+    }
 
     var processRequest = function(request, response) {
         // parse request
@@ -461,7 +491,7 @@ module.exports = (function() {
 
         mongorq++;
         process.send({ usage: 1, mongorq: 1 });
-        var cursor = collection.find({ _id: { $in: ids }}, { _id: 1, st: 1, dt: 1, nm: 1, b: 1, w: 1, e: 1, v: 1 });
+        var cursor = collection.find({ _id: { $in: ids }}, { _id: 1, st: 1, dt: 1, nm: 1, b: 1, w: 1, e: 1, twr:1, v: 1 });
         cursor.toArray(function(error, inCache) {
             mongorq--;
             process.send({ usage: 1, mongorq: -1 });

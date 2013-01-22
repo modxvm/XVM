@@ -69,6 +69,7 @@ update()
     data=`wget -q -T 20 -O - "${url}${ids_str}" | tr -s '[]' '\n\n' | grep "id" | sed "s/},{/\n/g" | tr -d '"{}'`
     echo -n ". "
     [ "$data" = "" ] && { echo -n "[no data] "; sleep 1; }
+
     slp=0
     for line in $data; do
 	IFS=$OIFS
@@ -100,20 +101,19 @@ update()
 		;;
 	    fail|expired|error)
 		echo -n "$st:$id "
-		slp=1
+		[ "$cmd" = "checkcache" ] && unset ids[$id] || slp=1
 		;;
 	    wait|max_conn|fail)
-		slp=1
+		[ "$cmd" = "checkcache" ] && unset ids[$id] || slp=1
 		;;
 	    *)
 		echo "UNKNOWN STATUS: $st"
 		exit
 		;;
 	esac
-	[ "$cmd" = "checkcache" ] && unset ids[$id]
     done
 
-    [ "$slp" = "1" -a "$cmd" != "checkcache" ] && sleep 1
+    [ "$slp" = "1" ] && sleep 1
 
     IFS=$OIFS
 
@@ -145,11 +145,13 @@ update()
 
 # $1 - pos
 # $2 - total
+# $3 - 2 for last update
 prepare()
 {
     local first last i cnt
     while :; do
 	[ ${#ids[@]} -lt $limit ] && break
+#	[ ${#ids[@]} -lt $limit -a "$3" != "2" ] && break
 	last=0
 	first=0
 	cnt=0
@@ -159,25 +161,22 @@ prepare()
 	    cnt=$(($cnt + 1))
 	    [ $cnt -ge $limit ] && break
 	done
-#	if [ "$3" = "1" ]; then
-	    echo -n "[$limit] $1/$2: $last..$first "
-#	else
-#	    echo -n "[$limit] $1/$2: $first..$last "
-#	fi
+	echo -n "[$limit] $1/$2: $last..$first "
 	update
     done
 }
 
 # main loop
 
-total=$(wc -l $fn)
+total=$(wc -l $fn | xargs echo | cut -d' ' -f1)
 echo Total: $total
 pos=0
 ids=()
 cat $fn | while read id; do
     pos=$((pos+1))
     ids[$id]=$id
-    prepare $pos $total 1
+    prepare $pos $total "1"
 done
-prepare $pos $total 1
+prepare $pos $total "2"
+
 rm -f $fn

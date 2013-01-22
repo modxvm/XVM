@@ -2,6 +2,8 @@ module.exports = (function()
 {
     // calculateEfficiency
     var calculateEfficiency = function(data) {
+        var start = new Date();
+
         var battlesCount = data.summary.battles_count,
             tankLvl = { },
             mid = 0;
@@ -21,6 +23,7 @@ module.exports = (function()
             mid += j * tankLvl[j].battle_count / tankLvl.battle_count;
         }
 
+        var res = 0;
         if(battlesCount !== 0) {
             var battles = data.battles,
                 dmg = battles.damage_dealt / battlesCount,
@@ -29,11 +32,12 @@ module.exports = (function()
                 cap = battles.capture_points / battlesCount,
                 def = battles.dropped_capture_points / battlesCount;
 
-            return Math.round((dmg * (10 / mid) * (0.15 + mid / 50) + des * (0.35 - mid / 50)
+            res = Math.round((dmg * (10 / mid) * (0.15 + mid / 50) + des * (0.35 - mid / 50)
                 * 1000 + det * 200 + cap * 150 + def * 150) / 10, 0) * 10;
-        } else {
-            return 0;
         }
+
+//        console.log("eff: " + (new Date() - start) + " ms (" + JSON.stringify(data).length + " bytes)");
+        return res;
     };
 
     var getVehicleType = function(vclass) {
@@ -45,7 +49,15 @@ module.exports = (function()
             case "spg": return "SPG";
             default: return "unknown";
         }
-    };
+    }
+
+    // deep-copy of object (only simple type values supported)
+    var clone = function(obj) {
+        var copy = {};
+        for(var i in obj)
+            copy[i] = (typeof(obj[i])=="object") ? clone(obj[i]) : obj[i];
+        return copy;
+    }
 
     // log
     var log = function(str) {
@@ -66,6 +78,7 @@ module.exports = (function()
     return {
         calculateEfficiency: calculateEfficiency,
         getVehicleType: getVehicleType,
+        clone: clone,
         log: log,
         debug: debug
     }

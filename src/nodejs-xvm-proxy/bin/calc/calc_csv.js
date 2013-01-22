@@ -1,4 +1,4 @@
-limit=10000
+limit=1000000
 print("id;name;battles;wins;tank;Tlevel;Tclass;Tbattles;Twins;Tdamage;Tfrags")
 
 var go = function() {

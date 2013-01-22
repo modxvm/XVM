@@ -6,11 +6,11 @@ module.exports = (function() {
     // PUBLIC
 
     calc = function(data) {
+        var start = new Date();
+
         var log = "ID: " + data._id +
             ", Nick: <a href='http://worldoftanks.ru/community/accounts/" + data._id + "-" + data.nm + "/'>" + data.nm + "</a>\n";
         log += "--------------------------\n\n";
-
-        var start = new Date();;
 
         log += parseStatData(data);
 
@@ -48,6 +48,8 @@ module.exports = (function() {
         log += "\nCorrected winrate is: " + (result || 0).toFixed(2) + "\n";
 
         log += "\ncalculate() duration: " + (new Date() - start) + "ms\n";
+
+//        console.log("twr: " + (new Date() - start) + " ms (" + JSON.stringify(data).length + " bytes)");
 
         return { log: log, result: result || 0 };
     }
@@ -183,7 +185,9 @@ module.exports = (function() {
             var same = 0;
             if (vdata.cl == vd.cl)
                 same++;
-            else if (vdata.cl == "SPG" || vd.type == "SPG")
+            else if (vdata.cl == "SPG" || vd.cl == "SPG")
+                same -= 2;
+            else if (vdata.cl == "LT" && (vd.cl != "MT" || vd.level < 8))
                 same--;
             same += 1 - Math.abs(vdata.link.hp - vd.link.hp) / (vdata.link.hp + vd.link.hp) * 2;
             same += 1 - Math.abs(vdata.link.speed - vd.link.speed) / (vdata.link.speed + vd.link.speed) * 2;
@@ -197,8 +201,10 @@ module.exports = (function() {
 
         sames.sort(function(a,b){ return b.same-a.same; });
         vdata.same = [];
-        for (var i = 0; i < Math.min(3, sames.length); ++i)
-            vdata.same.push(sames[i]);
+        for (var i = 0; i < Math.min(3, sames.length); ++i) {
+            if (sames[i].same >= 0.5)
+                vdata.same.push(sames[i]);
+        }
 
         return vdata.same.length;
     }
