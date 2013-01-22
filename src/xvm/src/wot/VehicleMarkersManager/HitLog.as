@@ -103,13 +103,14 @@ class wot.VehicleMarkersManager.HitLog
         if (players[playerName].hits.length == 0 || players[playerName].hits[players[playerName].hits.length - 1] != id)
             players[playerName].hits.push(id);
 
+        var header:String = formatText(formatHeader, playerName);
+
         if (lines <= 0)
         {
-            setText(defaultHeader);
+            setText(header);
             return;
         }
 
-        var header:String = formatText(formatHeader, playerName);
         var hist:String = formatText(formatHistory, playerName);
         hits[hits.length - 1].hist = hist;
 
@@ -158,7 +159,7 @@ class wot.VehicleMarkersManager.HitLog
         style.parseCSS(".xvm_hitlog{font-family:$FieldFont;font-size:15px;color:#f4efe8;}");
         textField.styleSheet = style;
 
-        setText(formatText(formatHeader, ""));
+        setText(defaultHeader);
     }
 
     private function formatText(format:String, playerName:String):String
