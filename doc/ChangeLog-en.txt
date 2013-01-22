@@ -1,11 +1,12 @@
 ﻿  * capture bar: fixed number of tanks capturing for Tank Company encounter battles
+  * added parameter: hitLog/defaultHeader - default header format (before first hit)
 
 XVM-3.3.1
   * hitlog extremely oversized symbols fix
-  
+
 XVM-3.3.0
   * release for WoT 0.8.3
-  
+
 XVM-3.3.0-test1:
   * capture bar: fixed wrong capturers number calculation for encounter
   * macro {{c:dmg}} can be used in health bar

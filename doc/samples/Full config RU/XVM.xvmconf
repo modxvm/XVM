@@ -119,6 +119,8 @@
     // Подстановка для макроса {{dead}} когда танк умирает
     "deadMarker": "<font face='Wingdings'>N</font>",
     "blowupMarker": "<font face='Wingdings'>M</font>",
+    // Формат заголовка по умолчанию (до первого попадания). Макросы НЕ допускаются.
+    "defaultHeader":  "<font color='#FFFFFF'>Hits:</font> <font size='13'>#0</font>",
     // Формат заголовка (допускаются макроподстановки, см. readme-ru.txt)
     "formatHeader":  "<font color='#FFFFFF'>Hits:</font> <font size='13'>#{{n}}</font> <font size='0{{dmg-kind}}'><b>{{dmg-total}}</b>  <font color='#FFFFFF'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font></font>",
     // Формат лога попаданий (допускаются макроподстановки, см. readme-ru.txt)
@@ -172,7 +174,7 @@
                                     // Влияет, и на все иконки, и на все надписи юнитов,
                                     // и на всю прикрепленную к иконкам геометрию.
                                     // Можно дробные 0.7 1.4.
-                                    
+
     "labels": {                     // Текстовые надписи. Поддерживают HTML.
       "nickShrink": 4,                // Максимальные размер ника для макроса {{short-nick}}.
       "ifspgsymbol": "█",             // Символ для макроса {{ifspg}}. Выводится только если субъект типа артиллерии
@@ -193,7 +195,7 @@
         "offsetX": 0, // Смещение поля относительно текущей иконки.
         "offsetY": 0
       },
-      "lostEnemyUnits": { // Настройки поля для потерянных с миникарты врагов. 
+      "lostEnemyUnits": { // Настройки поля для потерянных с миникарты врагов.
         "enabled": true,
         "format": "{{ifspg}}<i>{{level}}</i>",
         "css": "font-family:$FieldFont; font-size:8px; color:#EEAACC;",

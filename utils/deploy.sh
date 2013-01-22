@@ -1,7 +1,7 @@
 #!/bin/sh
 
-[ "$GAME_VER" = "" ] && GAME_VER="0.8.3 Common Test"
-[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/home/games/WoT-CT
+[ "$GAME_VER" = "" ] && GAME_VER="0.8.3"
+[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/home/games/WoT
 
 FILES="
   battle.swf

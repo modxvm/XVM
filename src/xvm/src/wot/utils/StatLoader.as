@@ -235,7 +235,7 @@ class wot.utils.StatLoader
         // http://www.koreanrandom.com/forum/topic/1643-per-vehicle-efficiency-/page-19#entry26189
         if (stat.tb == null || stat.tb < 10)
             return stat;
-        
+
         stat.tdb = stat.td == null || stat.td < 0 ? null : Math.round(stat.td / stat.tb);
         stat.tfb = stat.tf == null || stat.tf < 0 ? null : Math.round(stat.tf / stat.tb * 10) / 10;
         stat.tsb = stat.ts == null || stat.ts < 0 ? null : Math.round(stat.ts / stat.tb * 10) / 10;
@@ -244,7 +244,7 @@ class wot.utils.StatLoader
         var vi3 = VehicleInfo.getInfo3(stat.vn);
         if (!vi3 || !vi3.cl || !vi3.l)
         {
-            Logger.add("ERROR: vehicle info (3) missed: " + stat.vn + ". Please notify XVM support.");
+            Logger.add("WARNING: vehicle info (3) missed: " + stat.vn + ". Please notify XVM support.");
             return stat;
         }
 
@@ -257,7 +257,7 @@ class wot.utils.StatLoader
             return stat;
         if (EC.CF != null && EC.CF > 0 && (stat.tfb == null || stat.tfb <= 0))
             return stat;
-        
+
         var dD = stat.tdb - vi3.avgD;
         var dF = stat.tfb - vi3.avgF;
         var minD = vi3.avgD * Config.s_config.consts.E.Kmin;

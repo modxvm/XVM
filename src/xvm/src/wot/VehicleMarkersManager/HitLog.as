@@ -24,6 +24,7 @@ class wot.VehicleMarkersManager.HitLog
     private var lines:Number;
     private var direction:Number;
     private var insertOrder:Number;
+    private var defaultHeader:String;
     private var formatHeader:String;
     private var formatHistory:String;
     private var shadow:Object;
@@ -45,6 +46,7 @@ class wot.VehicleMarkersManager.HitLog
         direction = cfg.direction.toLowerCase() == "up" ? Defines.DIRECTION_UP : Defines.DIRECTION_DOWN;
         insertOrder = cfg.insertOrder.toLowerCase() == "begin" ? Defines.INSERTORDER_BEGIN : Defines.INSERTORDER_END;
         groupHitsByPlayer = cfg.groupHitsByPlayer == true;
+        defaultHeader = cfg.defaultHeader;
         formatHeader = cfg.formatHeader;
         formatHistory = cfg.formatHistory;
         shadow = cfg.shadow;
@@ -61,55 +63,6 @@ class wot.VehicleMarkersManager.HitLog
         textField.htmlText = "<span class='xvm_hitlog'>" + txt + "</span>";
     }
     
-    /**
-     * Quick fix!
-     * 
-     * <font size='0атака'> expression is not ignored by html parser
-     * and produces extremely oversized fonts.
-     * 
-     * <font size=''> expression is successfully ignored by internal flash 8 html parser.
-     * 
-     * Method translates '0атака' macro outputs to empty ''.
-     */
-    private function quickFix(text):String
-    {
-        if (text.indexOf("size='0'") != -1)
-        {
-            /**
-             * <font size='0'> expression successfully makes subsequent text invisible
-             * This string should be left untouched.
-             */
-            return text;
-        }
-        /**
-         * Other case is when size value contains macro insertion.
-         */
-        
-        var strArr:Array = text.split("size='0");
-        if (strArr.length == 2)
-        {
-            /**
-             * <font size='0атака'> type expression found
-             */
-            
-            while (strArr[1].charAt(0) != "'")
-            {
-                /**
-                 * Cutting out any macro outputs from <font size='0атака'> expression
-                 */
-                strArr[1] = strArr[1].substring(1, strArr[1].length) // cut(start, end)
-            } 
-            
-            text = strArr.join("size='");
-            /**
-             * Empty value done.
-             * HTML parser now should ignore this HTML tag and show subsequent text.
-             */
-        }
-        
-        return text;
-    }
-
     public function update(delta:Number, curHealth:Number, vehicleName:String, playerName:String,
         level:Number, damageType:String, vtype:String, vtypeColor:String, dead:Boolean)
     {
@@ -150,18 +103,13 @@ class wot.VehicleMarkersManager.HitLog
         if (players[playerName].hits.length == 0 || players[playerName].hits[players[playerName].hits.length - 1] != id)
             players[playerName].hits.push(id);
 
-        var header:String = formatText(formatHeader, playerName);
-        /*****************
-         * Quickfix here *
-         *****************/
-        header = quickFix(header);
         if (lines <= 0)
         {
-            setText(header);
-
+            setText(defaultHeader);
             return;
         }
 
+        var header:String = formatText(formatHeader, playerName);
         var hist:String = formatText(formatHistory, playerName);
         hits[hits.length - 1].hist = hist;
 

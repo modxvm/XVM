@@ -145,31 +145,113 @@ public class DefaultConfig
             },
             minimap: {
                 enabled: false,
-                iconScale: 1,
-                nickShrink: 4,
-                textOffsetX: 0,
-                textOffsetY: 0,
-                format: {
-                  ally:  "{{level}}",
-                  enemy: "{{level}}",
-                  squad: "{{level}} <i>{{short-nick}}</i>",
-                  oneself: "<b>{{level}}</b>",
-                  lostenemy: "<i>{{level}}</i>"
+                mapBackgroundImageAlpha: 100,
+                selfIconAlpha: 100,
+                cameraAlpha: 100,
+                markerScale: 1,
+                labels: {
+                  nickShrink: 4,
+                  ifspgsymbol: "█",
+                  allRevealedUnits: {
+                    enabled: true,
+                    format: {
+                      ally:  "{{level}}",
+                      enemy: "{{level}}",
+                      squad: "{{level}} <i>{{short-nick}}</i>",
+                      oneself: "<b>{{level}}</b>"
+                    },
+                    css: {
+                      ally:  "font-family:$FieldFont; font-size:8px; color:#BBEEBB;",
+                      enemy: "font-family:$FieldFont; font-size:8px; color:#EEBBBB;",
+                      squad: "font-family:$FieldFont; font-size:8px; color:#FFEE44;",
+                      oneself: "font-family:$FieldFont; font-size:8px; color:#FFFFFF;"
+                    },
+                    offsetX: 0,
+                    offsetY: 0
+                  },
+                  lostEnemyUnits: {
+                    enabled: true,
+                    format: "{{ifspg}}<i>{{level}}</i>",
+                    css: "font-family:$FieldFont; font-size:8px; color:#EEAACC;",
+                    alpha: 90,
+                    offsetX: -4,
+                    offsetY: -4
+                  },
+                  mapSize: {
+                    enabled: true,
+                    format: "<b>{{cellsize}}0 m</b>",
+                    css: "font-size:12px; color:#000000;",
+                    alpha: 75,
+                    offsetX: 0,
+                    offsetY: 0,
+                    shadow: {
+                      enabled: true,
+                      color: 0xAAAAAA,
+                      distance: 0,
+                      angle: 0,
+                      alpha: 60,
+                      blur: 5,
+                      strength: 3
+                    }
+                  }
                 },
-                css: {
-                  ally:  "font-family:$FieldFont; font-size:8px; color:#BBEEBB;",
-                  enemy: "font-family:$FieldFont; font-size:8px; color:#EEBBBB;",
-                  squad: "font-family:$FieldFont; font-size:8px; color:#FFEE44;",
-                  oneself: "font-family:$FieldFont; font-size:8px; color:#FFFFFF;",
-                  lostenemy: "font-family:$FieldFont; font-size:8px; color:#EEAACC;"
-                },
-                lostEnemy: {
+                circles: {
                   enabled: true,
-                  alpha: 50,
-                  iconWidth: 15,
-                  iconHeight: 19,
-                  textOffsetX: 11,
-                  textOffsetY: 11
+                  major: [
+                    { enabled: true, distance: 445, thickness: 1, alpha: 40, color: 0x000000 },
+                    { enabled: false, distance: 50, thickness: 2.5, alpha: 100, color: 0xFFFFFF }
+                  ],
+                  special: [
+                    { g_e:              { enabled: true, distance: 1172, thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { object_261:       { enabled: true, distance: 1463, thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { bat_chatillon155: { enabled: true, distance: 1296, thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { t92:              { enabled: true, distance: 1248, thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { g_tiger:          { enabled: true, distance: 1172, thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { m40m43:           { enabled: true, distance: 1179, thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { object_212:       { enabled: true, distance: 1229, thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { lorraine155_51:   { enabled: true, distance: 1296, thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { su_14:            { enabled: true, distance: 1229, thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { s_51:             { enabled: true, distance: 1229, thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { lorraine155_50:   { enabled: true, distance: 1202, thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { m12:              { enabled: true, distance: 1316, thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { g_panther:        { enabled: true, distance: 1407, thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { amx_13f3am:       { enabled: true, distance: 1250, thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { su_8:             { enabled: true, distance: 920,  thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { m41:              { enabled: true, distance: 1210, thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { hummel:           { enabled: true, distance: 1264, thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { amx_105am:        { enabled: true, distance: 1000, thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { _105_lefh18b2:    { enabled: true, distance: 1000, thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { su_5:             { enabled: true, distance: 605,  thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { m7_priest:        { enabled: true, distance: 1047, thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { grille:           { enabled: true, distance: 1210, thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { lorraine39_l_am:  { enabled: true, distance: 844,  thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { su_26:            { enabled: true, distance: 578,  thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { wespe:            { enabled: true, distance: 1000, thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { sturmpanzer_ii:   { enabled: true, distance: 605,  thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { m37:              { enabled: true, distance: 969,  thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { renaultbs:        { enabled: true, distance: 450,  thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { su_18:            { enabled: true, distance: 552,  thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { t57:              { enabled: true, distance: 552,  thickness: 1, alpha: 60, color: 0xEE4444 } },
+                    { bison_i:          { enabled: true, distance: 605,  thickness: 1, alpha: 60, color: 0xEE4444 } }
+                  ]
+                },
+                lines: {
+                  enabled: false,
+                  vehicle: [
+                    { enabled: true, from: 50,  to: 100, inmeters: true, thickness: 2,   alpha: 60, color: 0x44EE44},
+                    { enabled: true, from: 200, to: 300, inmeters: true, thickness: 1.5, alpha: 45, color: 0x44EE44},
+                    { enabled: true, from: 350, to: 445, inmeters: true, thickness: 1,   alpha: 30, color: 0x44EE44}
+                  ],
+                  camera: [
+                    { enabled: true, from: 50,  to: 100, inmeters: true, thickness: 2,   alpha: 60, color: 0xEE0044},
+                    { enabled: true, from: 200, to: 300, inmeters: true, thickness: 1.5, alpha: 45, color: 0xEE0044},
+                    { enabled: true, from: 350, to: 445, inmeters: true, thickness: 1,   alpha: 30, color: 0xEE0044}
+                  ],
+                  traverseAngle: [
+                    { enabled: true, from: 50,  to: 100, inmeters: true, thickness: 2,   alpha: 60, color: 0xFFFFFF},
+                    { enabled: true, from: 200, to: 300, inmeters: true, thickness: 1.5, alpha: 45, color: 0xFFFFFF},
+                    { enabled: true, from: 350, to: 445, inmeters: true, thickness: 1,   alpha: 30, color: 0xFFFFFF}
+                  ]
                 }
             },
             captureBar: {
@@ -214,7 +296,8 @@ public class DefaultConfig
                 // Substitution for {{dead}} macro when player is dead
                 deadMarker:   "<font face='Wingdings'>N</font>",
                 blowupMarker: "<font face='Wingdings'>M</font>",
-                formatHeader: "<font color='#FFFFFF'>Hits:</font> <font size='13'>#{{n}}</font> <font size='0{{dmg-kind}}'><b>{{dmg-total}}</b>  <font color='#FFFFFF'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font></font>",
+                defaultHeader: "<font color='#FFFFFF'>Hits:</font> <font size='13'>#0</font>",
+                formatHeader:  "<font color='#FFFFFF'>Hits:</font> <font size='13'>#{{n}}</font> <b>{{dmg-total}}</b>  <font color='#FFFFFF'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font>",
                 formatHistory: "<textformat leading='-4' tabstops='[20,50,90,150]'><font size='12'>\u00D7{{n-player}}:</font><tab>{{dmg-player}}<tab>| <font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab>| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>",
                 shadow: {
                   alpha: 100,
@@ -888,65 +971,66 @@ public class DefaultConfig
             AVG_EFF: 900, // Average Efficiency. Source: http://wot-news.com/index.php/stat/calc/en
             AVG_BATTLES: 1000, // Averate number of battles. Source: http://wot-news.com/stat/server/ru/norm/en
             E: {
+                Kmin: 0.4,
                 LT: [ // lightTank
-                    { CD: 1, CF: 1, CS: 1 }, // level 1
-                    { CD: 1, CF: 1, CS: 1 }, // level 2
-                    { CD: 1, CF: 1, CS: 1 }, // level 3
-                    { CD: 1, CF: 1, CS: 1 }, // level 4
-                    { CD: 1, CF: 1, CS: 3 }, // level 5
-                    { CD: 1, CF: 1, CS: 3 }, // level 6
-                    { CD: 1, CF: 1, CS: 3 }, // level 7
-                    { CD: 1, CF: 1, CS: 3 }, // level 8
-                    { CD: 1, CF: 1, CS: 3 }, // level 9
-                    { CD: 1, CF: 1, CS: 3 }  // level 10
+                    { CD: 3, CF: 1 }, // level 1
+                    { CD: 3, CF: 1 }, // level 2
+                    { CD: 3, CF: 1 }, // level 3
+                    { CD: 3, CF: 1 }, // level 4
+                    { CD: 3, CF: 1 }, // level 5
+                    { CD: 3, CF: 1 }, // level 6
+                    { CD: 3, CF: 1 }, // level 7
+                    { CD: 3, CF: 1 }, // level 8
+                    { CD: 3, CF: 1 }, // level 9
+                    { CD: 3, CF: 1 }  // level 10
                 ],
                 MT: [ // mediumTank
-                    { CD: 4, CF: 1, CS: 2 }, // level 1
-                    { CD: 4, CF: 1, CS: 2 }, // level 2
-                    { CD: 4, CF: 1, CS: 2 }, // level 3
-                    { CD: 4, CF: 1, CS: 2 }, // level 4
-                    { CD: 4, CF: 1, CS: 2 }, // level 5
-                    { CD: 4, CF: 1, CS: 2 }, // level 6
-                    { CD: 4, CF: 1, CS: 2 }, // level 7
-                    { CD: 4, CF: 1, CS: 2 }, // level 8
-                    { CD: 4, CF: 1, CS: 2 }, // level 9
-                    { CD: 4, CF: 1, CS: 2 }  // level 10
+                    { CD: 3, CF: 1 }, // level 1
+                    { CD: 3, CF: 1 }, // level 2
+                    { CD: 3, CF: 1 }, // level 3
+                    { CD: 3, CF: 1 }, // level 4
+                    { CD: 3, CF: 1 }, // level 5
+                    { CD: 3, CF: 1 }, // level 6
+                    { CD: 3, CF: 1 }, // level 7
+                    { CD: 3, CF: 1 }, // level 8
+                    { CD: 3, CF: 1 }, // level 9
+                    { CD: 3, CF: 1 }  // level 10
                 ],
                 HT: [ // heavyTank
-                    { CD: 4, CF: 2, CS: 1 }, // level 1
-                    { CD: 4, CF: 2, CS: 1 }, // level 2
-                    { CD: 4, CF: 2, CS: 1 }, // level 3
-                    { CD: 4, CF: 2, CS: 1 }, // level 4
-                    { CD: 4, CF: 2, CS: 1 }, // level 5
-                    { CD: 4, CF: 2, CS: 1 }, // level 6
-                    { CD: 4, CF: 2, CS: 1 }, // level 7
-                    { CD: 4, CF: 2, CS: 1 }, // level 8
-                    { CD: 4, CF: 2, CS: 1 }, // level 9
-                    { CD: 4, CF: 2, CS: 1 }  // level 10
+                    { CD: 3, CF: 1 }, // level 1
+                    { CD: 3, CF: 1 }, // level 2
+                    { CD: 3, CF: 1 }, // level 3
+                    { CD: 3, CF: 1 }, // level 4
+                    { CD: 3, CF: 1 }, // level 5
+                    { CD: 3, CF: 1 }, // level 6
+                    { CD: 3, CF: 1 }, // level 7
+                    { CD: 3, CF: 1 }, // level 8
+                    { CD: 3, CF: 1 }, // level 9
+                    { CD: 3, CF: 1 }  // level 10
                 ],
                 TD: [ // tank destroyer
-                    { CD: 3, CF: 2, CS: 1 }, // level 1
-                    { CD: 3, CF: 2, CS: 1 }, // level 2
-                    { CD: 3, CF: 2, CS: 1 }, // level 3
-                    { CD: 3, CF: 2, CS: 1 }, // level 4
-                    { CD: 3, CF: 2, CS: 1 }, // level 5
-                    { CD: 3, CF: 2, CS: 1 }, // level 6
-                    { CD: 3, CF: 2, CS: 1 }, // level 7
-                    { CD: 3, CF: 2, CS: 1 }, // level 8
-                    { CD: 3, CF: 2, CS: 1 }, // level 9
-                    { CD: 3, CF: 2, CS: 1 }  // level 10
+                    { CD: 3, CF: 1 }, // level 1
+                    { CD: 3, CF: 1 }, // level 2
+                    { CD: 3, CF: 1 }, // level 3
+                    { CD: 3, CF: 1 }, // level 4
+                    { CD: 3, CF: 1 }, // level 5
+                    { CD: 3, CF: 1 }, // level 6
+                    { CD: 3, CF: 1 }, // level 7
+                    { CD: 3, CF: 1 }, // level 8
+                    { CD: 3, CF: 1 }, // level 9
+                    { CD: 3, CF: 1 }  // level 10
                 ],
                 SPG: [ // Arty
-                    { CD: 2, CF: 1, CS: 0 }, // level 1
-                    { CD: 2, CF: 1, CS: 0 }, // level 2
-                    { CD: 2, CF: 1, CS: 0 }, // level 3
-                    { CD: 2, CF: 1, CS: 0 }, // level 4
-                    { CD: 2, CF: 1, CS: 0 }, // level 5
-                    { CD: 2, CF: 1, CS: 0 }, // level 6
-                    { CD: 2, CF: 1, CS: 0 }, // level 7
-                    { CD: 2, CF: 1, CS: 0 }, // level 8
-                    { CD: 2, CF: 1, CS: 0 }, // level 9
-                    { CD: 2, CF: 1, CS: 0 }  // level 10
+                    { CD: 3, CF: 1 }, // level 1
+                    { CD: 3, CF: 1 }, // level 2
+                    { CD: 3, CF: 1 }, // level 3
+                    { CD: 3, CF: 1 }, // level 4
+                    { CD: 3, CF: 1 }, // level 5
+                    { CD: 3, CF: 1 }, // level 6
+                    { CD: 3, CF: 1 }, // level 7
+                    { CD: 3, CF: 1 }, // level 8
+                    { CD: 3, CF: 1 }, // level 9
+                    { CD: 3, CF: 1 }  // level 10
                 ]
             }
         };
