@@ -122,7 +122,7 @@
     // Формат заголовка по умолчанию (до первого попадания). Макросы НЕ допускаются.
     "defaultHeader":  "<font color='#FFFFFF'>Hits:</font> <font size='13'>#0</font>",
     // Формат заголовка (допускаются макроподстановки, см. readme-ru.txt)
-    "formatHeader":  "<font color='#FFFFFF'>Hits:</font> <font size='13'>#{{n}}</font> <font size='0{{dmg-kind}}'><b>{{dmg-total}}</b>  <font color='#FFFFFF'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font></font>",
+    "formatHeader":  "<font color='#FFFFFF'>Hits:</font> <font size='13'>#{{n}}</font> <b>{{dmg-total}}</b>  <font color='#FFFFFF'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font>",
     // Формат лога попаданий (допускаются макроподстановки, см. readme-ru.txt)
     "formatHistory": "<textformat leading='-4' tabstops='[20,50,90,150]'><font size='12'>\u00D7{{n-player}}:</font><tab>{{dmg-player}}<tab>| <font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab>| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>",
     "shadow": {                       //   параметры тени

@@ -113,7 +113,8 @@
     "deadMarker": "\u0029",
     "blowupMarker": "\u0028",
     // Формат последнего попадания (допускаются макроподстановки, см. readme-ru.txt)
-    "formatHeader": "<font size='0{{dmg-kind}}'><font color='#CCCCCC'>Атак:</font> {{n}}  <font color='#CCCCCC'>Урона:</font> <b><font color='#FFCC66'>{{dmg-total}}</font></b>  <font color='#CCCCCC'>Последний:</font> {{dmg}}</font>",
+    "defaultHeader": "",
+    "formatHeader": "<font color='#CCCCCC'>Атак:</font> {{n}}  <font color='#CCCCCC'>Урона:</font> <b><font color='#FFCC66'>{{dmg-total}}</font></b>  <font color='#CCCCCC'>Последний:</font> {{dmg}}",
     // Формат предыдущих попаданий (допускаются макроподстановки, см. readme-ru.txt)
     "formatHistory": "<textformat leading='0' tabstops='[20,55,90,130,175]'><font color='#CCCCCC{{dead}}' size='13'><b></b{{dead}}>\u00D7{{n-player}}<tab>{{dmg-kind}}<tab>-{{dmg}}<tab>({{dmg-player}})</b></b><tab><font face='XVM Symbol'><font size='19'><font size='0{{dead}}'>{{dead}}</font></font><font size='0'><font size='19{{dead}}'>\u002A</font></font></font><tab>{{vtype}}  <b></b{{dead}}>{{vehicle}}</b></b></font></textformat>"
   },

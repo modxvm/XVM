@@ -119,7 +119,7 @@
     "deadMarker": "<font face='Wingdings'>N</font>",
     "blowupMarker": "<font face='Wingdings'>M</font>",
     // Hits header format, including last hit (macros allowed, see readme-en.txt)
-    "formatHeader":  "<font color='#FFFFFF'>Damage Done:</font> <font size='14'></font> <font size='0{{dmg-kind}}'><b><font color='#fd0000'>{{dmg-total}} hp</font></b>  <font color='#FFFFFF'>Last Damage:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}} hp</b> {{dead}}</font><font color='{{c:vtype}}'>({{vehicle}})</font></font>",
+    "formatHeader":  "<font color='#FFFFFF'>Damage Done:</font> <font size='14'></font> <b><font color='#fd0000'>{{dmg-total}} hp</font></b>  <font color='#FFFFFF'>Last Damage:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}} hp</b> {{dead}}</font><font color='{{c:vtype}}'>({{vehicle}})</font>",
     // List of hits format (macros allowed, see readme-en.txt)
     "formatHistory": "<textformat leading='-4' tabstops='[20,50,90,150]'><font size='12' face='Comic Sans MS'>\u00D7{{n-player}}:</font><tab>{{dmg-player}}<tab>| <font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab>| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>"
   },
