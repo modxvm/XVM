@@ -6,46 +6,46 @@
     xmlns:a="controls.*">
     <fx:Script>
         <![CDATA[
-            private var focused:Boolean = false; 
+            private var focused:Boolean = false;
 
             [Bindable]
-            public var v_name:String;
+            private var m_name:String;
 
-            private var _v_value:String;
+            private var _m_value:String;
             [Bindable]
-            public function get v_value():String
+            private function get m_value():String
             {
-                return _v_value || (focused ? "" : "(default)");
+                return _m_value || (focused ? "" : "(default)");
             }
-            public function set v_value(v:String):void
+            public function set m_value(v:String):void
             {
-                _v_value = v == "(default)" ? null : v;
+                _m_value = v == "(default)" ? null : v;
             }
 
             public override function get value():*
             {
-                return { name: v_name, value: !v_value || v_value == "(default)" ? null : v_value };
+                return { name: m_name, value: !m_value || m_value == "(default)" ? null : m_value };
             }
             public override function set value(v:*):void
             {
-                v_name = v.name;
-                v_value = v.value;
-                edit.value = v_value;
-                edit.alpha = v_value == '(default)' ? 0.5 : 1;
+                m_name = v.name;
+                m_value = v.value;
+                edit.value = m_value;
+                edit.alpha = m_value == '(default)' ? 0.5 : 1;
             }
 
             protected function edit_focusInHandler(event:Event):void
             {
                 focused = true;
-                edit.value = v_value;
+                edit.value = m_value;
                 edit.alpha = 1;
             }
 
             protected function edit_focusOutHandler(event:Event):void
             {
                 focused = false;
-                edit.value = v_value;
-                edit.alpha = v_value == '(default)' ? 0.5 : 1;
+                edit.value = m_value;
+                edit.alpha = m_value == '(default)' ? 0.5 : 1;
             }
 
         ]]>
@@ -54,8 +54,8 @@
         [Event(name="click", type="flash.events.MouseEvent")]
     </fx:Metadata>
     <s:HGroup width="100%" height="100%" verticalAlign="middle">
-        <s:Label id="lbl" x="0" text="{v_name}" width="{200}" height="22" verticalAlign="middle"/>
-        <a:TextInput id="edit" width="{150}" change="{v_value=edit.value; onChange(event)}"
+        <s:Label id="lbl" x="0" text="{m_name}" width="215" height="22" verticalAlign="middle"/>
+        <a:TextInput id="edit" width="140" change="{m_value=edit.value; onChange(event)}"
             focusIn="edit_focusInHandler(event)" focusOut="edit_focusOutHandler(event)"/>
     </s:HGroup>
 </c:DefaultComponent>

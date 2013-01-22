@@ -112,6 +112,7 @@ private function RefreshHitLogPage():void
         this.p_hitLog.v_groupHitsByPlayer.value = section.groupHitsByPlayer;
         this.p_hitLog.v_deadMarker.value = section.deadMarker;
         this.p_hitLog.v_blowupMarker.value = section.blowupMarker;
+        this.p_hitLog.v_defaultHeader.value = section.defaultHeader;
         this.p_hitLog.v_formatHeader.value = section.formatHeader;
         this.p_hitLog.v_formatHistory.value = section.formatHistory;
         this.p_hitLog.v_shadow_size.value = section.shadow.size;
