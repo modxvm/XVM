@@ -65,16 +65,27 @@ module.exports = (function() {
     }
 
     // calculate average corrected win rate
-    getAvgRatePlus = function(data) {
-        var b = 0, w = 0;
+    getAvgRatePlus = function(data, log) {
+        var b = 0, w = 0, b7 = 0, b8 = 0, b9 = 0;
         for (var vname in data.v)
         {
             var vdata = data.v[vname];
             b += vdata.b;
             w += vdata.rate_plus * vdata.b / 100;
+            if (vdata.l >= 7) b7 += vdata.b;
+            if (vdata.l >= 8) b8 += vdata.b;
+            if (vdata.l >= 9) b9 += vdata.b;
         }
 
-        return w / b * 100;
+        var res = w / b * 100;
+        if (res > 53 && b7 < 300)
+            return { result: 53, log: "\nWARNING: Not enough battles on level 7+, maximum rate is 53%\n" };
+        if (res > 55 && b8 < 300)
+            return { result: 55, log: "\nWARNING: Not enough battles on level 8+, maximum rate is 55%\n" };
+        if (res > 57 && b9 < 300)
+            return { result: 57, log: "\nWARNING: Not enough battles on level 9+, maximum rate is 57%\n" };
+
+        return { result: res, log: "" };
     }
 
     return {

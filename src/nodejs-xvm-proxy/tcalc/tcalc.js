@@ -44,7 +44,9 @@ module.exports = (function() {
                 damage(vdata).toFixed(2) + "\t" + 
                 vdata.name + "\n";
         }
-        var result = tcalc_utils.getAvgRatePlus(data);
+        var ro = tcalc_utils.getAvgRatePlus(data);
+        log += ro.log;
+        var result = ro.result;
         log += "\nCorrected winrate is: " + (result || 0).toFixed(2) + "\n";
 
         log += "\ncalculate() duration: " + (new Date() - start) + "ms\n";
@@ -187,7 +189,7 @@ module.exports = (function() {
                 same++;
             else if (vdata.cl == "SPG" || vd.cl == "SPG")
                 same -= 2;
-            else if (vdata.cl == "LT" && (vd.cl != "MT" || vd.level < 8))
+            else if (vdata.cl == "LT" && (vd.cl != "MT" || vd.l < 8))
                 same--;
             same += 1 - Math.abs(vdata.link.hp - vd.link.hp) / (vdata.link.hp + vd.link.hp) * 2;
             same += 1 - Math.abs(vdata.link.speed - vd.link.speed) / (vdata.link.speed + vd.link.speed) * 2;

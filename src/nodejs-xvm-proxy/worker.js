@@ -198,8 +198,19 @@ module.exports = (function() {
                                     });
                                 }
 
+                                // summary parameters
+                                resultItem.spo = curResult.data.battles.spotted;
+                                resultItem.hip = curResult.data.battles.hits_percents;
+                                resultItem.cap = curResult.data.battles.capture_points;
+                                resultItem.dmg = curResult.data.battles.damage_dealt;
+                                resultItem.frg = curResult.data.battles.frags;
+                                resultItem.def = curResult.data.battles.dropped_capture_points;
+
                                 // EFF - wot-news efficiency rating
                                 resultItem.e = utils.calculateEfficiency(curResult.data);
+
+                                // WN - WN rating http://forum.worldoftanks.com/index.php?/topic/184017-
+//                                resultItem.wn = utils.calculateWN(resultItem);
 
                                 // TWR - tourist1984 win rate (aka T-Calc)
                                 try {
@@ -243,7 +254,14 @@ module.exports = (function() {
                     name: resultItem.nm,
                     battles: resultItem.b,
                     wins: resultItem.w,
+                    spo: resultItem.spo,
+                    hip: resultItem.hip,
+                    cap: resultItem.cap,
+                    dmg: resultItem.dmg,
+                    frg: resultItem.frg,
+                    def: resultItem.def,
                     eff: resultItem.e,
+                    wn: resultItem.wn,
                     twr: resultItem.twr,
                     v: resultItem.v
                 };
@@ -260,7 +278,14 @@ module.exports = (function() {
                     name: player.nm,
                     battles: player.b,
                     wins: player.w,
+                    spo: player.spo,
+                    hip: player.hip,
+                    cap: player.cap,
+                    dmg: player.dmg,
+                    frg: player.frg,
+                    def: player.def,
                     eff: player.e,
+                    wn: player.wn,
                     twr: player.twr,
                     v: player.v
                 };
@@ -397,6 +422,44 @@ try {
                     });
                     break;
 
+                case "WN":
+                    if (mongorq >= mongorq_max) {
+                        response.statusCode = 503; // Service Unavailable
+                        throw "db overloaded: " + mongorq + "/" + mongorq_max;
+                    }
+
+                    var pl = args.shift();
+                    if (!pl)
+                        throw "[" + cmd + "]: empty player name";
+
+                    var cursor = collection.find({nm: pl});
+                    cursor.toArray(function(error, data) {
+                        try {
+                            if(error)
+                                response.end('[' + cmd + ']: MongoDB find error: ' + error);
+                            else if (data.length == 0)
+                                response.end('[' + cmd + ']: Player not found: ' + pl);
+                            else {
+                                var s = "";
+                                for (var i = 0; i < data.length; ++i) {
+                                    var start = new Date();
+                                    var d = data[i];
+                                    s += "<pre>";
+                                    s += "ID: " + d._id +
+                                        ", Nick: <a href='http://worldoftanks.ru/community/accounts/" + d._id + "-" + d.nm + "/'>" + d.nm + "</a>\n";
+                                    s += "--------------------------\n";
+                                    s += "WN6: " + utils.calculateWN(d) + "\n";
+                                    s += "duration: " + (new Date() - start) + " ms\n";
+                                    s += "</pre><hr>";
+                                }
+                                response.end(s);
+                            }
+                        } catch(e) {
+                            response.end('{"error":"' + e + '","server":"' + settings.serverName + '"}');
+                        }
+                    });
+                    break;
+
                 case "TWR":
                     if (mongorq >= mongorq_max) {
                         response.statusCode = 503; // Service Unavailable
@@ -414,8 +477,12 @@ try {
                                 response.end('[' + cmd + ']: MongoDB find error: ' + error);
                             else if (data.length == 0)
                                 response.end('[' + cmd + ']: Player not found: ' + pl);
-                            else
-                                response.end("<pre>" + tcalc.calc(data[0]).log + "</pre>");
+                            else {
+                                var s = "";
+                                for (var i = 0; i < data.length; ++i)
+                                    s += "<pre>" + tcalc.calc(data[i]).log + "</pre><hr>";
+                                response.end(s);
+                            }
                         } catch(e) {
                             response.end('{"error":"' + e + '","server":"' + settings.serverName + '"}');
                         }
@@ -491,7 +558,8 @@ try {
 
         mongorq++;
         process.send({ usage: 1, mongorq: 1 });
-        var cursor = collection.find({ _id: { $in: ids }}, { _id: 1, st: 1, dt: 1, nm: 1, b: 1, w: 1, e: 1, twr:1, v: 1 });
+        var cursor = collection.find({ _id: { $in: ids }},
+            { _id: 1, st: 1, dt: 1, nm: 1, b: 1, w: 1, spo: 1, hip: 1, cap: 1, dmg: 1, frg: 1, def: 1, e: 1, wn:1, twr:1, v: 1 });
         cursor.toArray(function(error, inCache) {
             mongorq--;
             process.send({ usage: 1, mongorq: -1 });

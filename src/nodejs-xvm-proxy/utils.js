@@ -8,6 +8,9 @@ module.exports = (function()
             tankLvl = { },
             mid = 0;
 
+        if (battlesCount == 0)
+            return 0;
+
         tankLvl.battle_count = 0;
 
         for(var i = 1; i <= 10; i++) {
@@ -23,21 +26,60 @@ module.exports = (function()
             mid += j * tankLvl[j].battle_count / tankLvl.battle_count;
         }
 
-        var res = 0;
-        if(battlesCount !== 0) {
-            var battles = data.battles,
-                dmg = battles.damage_dealt / battlesCount,
-                des = battles.frags / battlesCount,
-                det = battles.spotted / battlesCount,
-                cap = battles.capture_points / battlesCount,
-                def = battles.dropped_capture_points / battlesCount;
+        var battles = data.battles,
+            dmg = battles.damage_dealt / battlesCount,
+            des = battles.frags / battlesCount,
+            det = battles.spotted / battlesCount,
+            cap = battles.capture_points / battlesCount,
+            def = battles.dropped_capture_points / battlesCount;
 
-            res = Math.round((dmg * (10 / mid) * (0.15 + mid / 50) + des * (0.35 - mid / 50)
-                * 1000 + det * 200 + cap * 150 + def * 150) / 10, 0) * 10;
-        }
+        var res = Math.round((dmg * (10 / mid) * (0.15 + mid / 50) + des * (0.35 - mid / 50)
+            * 1000 + det * 200 + cap * 150 + def * 150) / 10, 0) * 10;
 
 //        console.log("eff: " + (new Date() - start) + " ms (" + JSON.stringify(data).length + " bytes)");
         return res;
+    };
+
+    // WN rating
+    // Current: WN6
+    // http://forum.worldoftanks.com/index.php?/topic/184017-/page__st__1080__pid__3542824#entry3542824
+    // WN6 formula:
+    // (1240-1040/(MIN(TIER,6))^0.164)*FRAGS
+    // +DAMAGE*530/(184*e^(0.24*TIER)+130)
+    // +SPOT*125
+    // +MIN(DEF,2.2)*100
+    // +((185/(0.17+e^((WINRATE-35)*-0.134)))-500)*0.45
+    // +(6-MIN(TIER,6))*-60
+    var calculateWN = function(data) {
+        if (!data || !data.b || data.b <= 0)
+            return 0;
+
+        var lvls = { battles: 0 };
+        for(var i = 1; i <= 10; ++i)
+            lvls[i] = { battles: 0 };
+        data.v.forEach(function(item) {
+            lvls[item.l].battles += item.b;
+            lvls.battles += item.b;
+        });
+        var TIER = 0;
+        for(var i = 1; i <= 10; ++i)
+            TIER += i * lvls[i].battles / lvls.battles;
+        if (TIER > 6)
+            TIER = 6;
+
+        var FRAGS = data.frg / data.b;
+        var DAMAGE = data.dmg / data.b;
+        var SPOT = data.spo / data.b;
+        var DEF = Math.min(2.2, data.def / data.b);
+        var WINRATE = data.w / data.b;
+
+        return Math.round(
+            (1240 - 1040 / Math.pow(TIER, 0.164)) * FRAGS +
+            DAMAGE * 530 / (184 * Math.exp(0.24 * TIER) + 130) +
+            SPOT * 125 +
+            DEF * 100 +
+            ((185/(0.17 + Math.exp((WINRATE - 35) * -0.134))) - 500) * 0.45 +
+            (6 - TIER) * -60) || 0;
     };
 
     var getVehicleType = function(vclass) {
@@ -77,6 +119,7 @@ module.exports = (function()
     // exports
     return {
         calculateEfficiency: calculateEfficiency,
+        calculateWN: calculateWN,
         getVehicleType: getVehicleType,
         clone: clone,
         log: log,
