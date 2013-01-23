@@ -1,4 +1,6 @@
-﻿XVM-3.3.2-test1:
+﻿  * capture bar: fixed "enabled":false
+
+XVM-3.3.2-test1:
   * capture bar: fixed number of tanks capturing for Tank Company encounter battles
   * added parameter: hitLog/defaultHeader - default header format (before first hit)
   * updated statistic data for new vehicles

@@ -101,6 +101,12 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
     */ 
     public function updateProgress(newPointsVal:Number):Void
     {
+        if (!CapConfig.enabled)
+        {
+            super.updateProgress(newPointsVal);
+            return;
+        }
+        
         if (newPointsVal == 100)
         {
            /**

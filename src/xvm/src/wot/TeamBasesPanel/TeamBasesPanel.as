@@ -11,18 +11,15 @@ import wot.utils.Utils;
 
 class wot.TeamBasesPanel.TeamBasesPanel extends net.wargaming.ingame.TeamBasesPanel
 {
-    var m_xvmCapEnabled:Boolean;
-    
     public function TeamBasesPanel() 
     {
         Utils.TraceXvmModule("TeamBasesPanel");
         super();
-        m_xvmCapEnabled = CapConfig.enabled;
     }
     
     function add(id, sortWeight, capColor, title, points)
     {
-        if (m_xvmCapEnabled)
+        if (CapConfig.enabled)
         {
             /**
             * null, null args somehow allow to set XVM-specific vals
@@ -46,8 +43,19 @@ class wot.TeamBasesPanel.TeamBasesPanel extends net.wargaming.ingame.TeamBasesPa
     
   /**
    * Called when point becomes fully captured.
-   * No need to define behavior. updateProgress() handles full capture.
-   * Leave empty.
    */
-   function setCaptured(id, title){}
+   function setCaptured(id, title)
+   {
+       if (CapConfig.enabled)
+       {
+           /**
+            * No need to define behavior. updateProgress() handles full capture.
+            * Leave empty.
+            */
+       }
+       else
+       {
+           super.setCaptured(id, title);
+       }
+   }
 }
