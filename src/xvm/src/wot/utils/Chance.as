@@ -78,12 +78,16 @@ class wot.utils.Chance
             var pdata = StatData.s_data[pname];
 
             var vi1 = VehicleInfo.getInfo1(pdata.icon);
-            if (!vi1)
-              return { error: "No data for: " + VehicleInfo.getVehicleName(pdata.icon) };
+            if (!vi1) {
+                var vn = VehicleInfo.getVehicleName(pdata.icon);
+                if (vn == "ussr-Observer")
+                    continue;
+                return { error: "[1] No data for: " + vn };
+            }
 
             var vi2 = VehicleInfo.getInfo2(pdata.icon);
             if (!vi2)
-              return { error: "No data for: " + VehicleInfo.getVehicleName(pdata.icon) };
+              return { error: "[2] No data for: " + VehicleInfo.getVehicleName(pdata.icon) };
 
             var K = chanceFunc(vi1, vi2, pdata.team, pdata.stat);
 
@@ -197,7 +201,8 @@ class wot.utils.Chance
         for (var pname in StatData.s_data)
         {
             var pdata = StatData.s_data[pname];
-            if (VehicleInfo.getVehicleName(pdata.icon).toUpperCase() == "UNKNOWN") // skip unknown tanks in Fog of War mode
+            var vn = VehicleInfo.getVehicleName(pdata.icon).toLowerCase();
+            if (vn == "unknown" || vn == "ussr-observer") // skip unknown tanks in Fog of War mode and observer
                 continue;
             if (pdata.team == Defines.TEAM_ALLY) ++nally else ++nenemy;
         }
@@ -240,8 +245,12 @@ class wot.utils.Chance
         {
             var pdata = StatData.s_data[pname];
             var vi1 = VehicleInfo.getInfo1(pdata.icon);
-            if (!vi1)
+            if (!vi1) {
+                var vn = VehicleInfo.getVehicleName(pdata.icon);
+                if (vn == "ussr-Observer")
+                    continue;
                 return 0;
+            }
             var vi2 = VehicleInfo.getInfo2(pdata.icon);
             if (!vi2)
                 return 0;
