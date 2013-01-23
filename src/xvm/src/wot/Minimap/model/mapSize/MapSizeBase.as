@@ -11,11 +11,11 @@ class wot.Minimap.model.mapSize.MapSizeBase
         switch(localizedMapName)
         {
             case "Аэродром":
-                return 80;
+                return 100;
             case "Airfield":
-                return 80;
+                return 100;
             case "阿拉曼机场":
-                return 80;
+                return 100;
                 
             case "Уайдпарк":
                 return 60; 
@@ -186,18 +186,18 @@ class wot.Minimap.model.mapSize.MapSizeBase
                 return 100; 
                 
             case "Фьорды":
-                return 85; 
+                return 100; 
             case "Fjords":
-                return 85; 
+                return 100; 
             case "北欧峡湾":
-                return 85; 
+                return 100; 
                 
             case "Хайвей":
-                return 85; 
+                return 100; 
             case "Highway":
-                return 85; 
+                return 100; 
             case "州际公路":
-                return 85; 
+                return 100; 
                 
             case "Химмельсдорф":
                 return 70; 
