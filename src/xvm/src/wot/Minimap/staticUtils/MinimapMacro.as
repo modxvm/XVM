@@ -10,7 +10,7 @@ class wot.Minimap.staticUtils.MinimapMacro
     private static var SHORT_VEH__MACRO:String = "{{short-vehicle}}";
     private static var VEH_MACRO:String = "{{vehicle}}";
     private static var NICK_MACRO:String = "{{short-nick}}";
-    private static var IFSPG_MACRO:String = "{{ifspg}}";
+    private static var VEHCLASS_MACRO:String = "{{vehicle-class}}";
     
     public static function process(format:String, player:Player, vehicleClass:String):String
     {
@@ -56,14 +56,29 @@ class wot.Minimap.staticUtils.MinimapMacro
             format = formatArr.join(shortNick);
         }
         
-        /** Returns special symbol if subject is artillery */
-        formatArr = format.split(IFSPG_MACRO);
+        //Logger.addObject(format, "format", 3);
+        /** {{vehicle-class}} returns special symbol depending on class */
+        formatArr = format.split(VEHCLASS_MACRO);
         if (formatArr.length > 1)
         {
-            if (vehicleClass == MinimapEntry.MINIMAP_ENTRY_VEH_CLASS_SPG)
-                format = formatArr.join(MapConfig.ifSpgSymbol);
-            else
-                format = formatArr.join("")
+            switch (vehicleClass)
+            {
+                case MinimapEntry.MINIMAP_ENTRY_VEH_CLASS_LIGHT:
+                    format = formatArr.join(MapConfig.lightSymbol);
+                    break;
+                case MinimapEntry.MINIMAP_ENTRY_VEH_CLASS_MEDIUM:
+                    format = formatArr.join(MapConfig.mediumSymbol);
+                    break;
+                case MinimapEntry.MINIMAP_ENTRY_VEH_CLASS_HEAVY:
+                    format = formatArr.join(MapConfig.heavySymbol);
+                    break;
+                case MinimapEntry.MINIMAP_ENTRY_VEH_CLASS_TD:
+                    format = formatArr.join(MapConfig.tdSymbol);
+                    break;
+                case MinimapEntry.MINIMAP_ENTRY_VEH_CLASS_SPG:
+                    format = formatArr.join(MapConfig.spgSymbol);
+                    break;
+            }
         }
         
         return format;

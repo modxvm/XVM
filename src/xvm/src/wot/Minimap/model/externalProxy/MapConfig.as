@@ -17,8 +17,17 @@ class wot.Minimap.model.externalProxy.MapConfig
     /** Labels */
         public static function get nickShrink():Number    {
             return Config.s_config.minimap.labels.nickShrink;    }
-        public static function get ifSpgSymbol():String    {
-            return Config.s_config.minimap.labels.ifspgsymbol;    }
+        /** Vehicle class macro */
+            public static function get lightSymbol():String    {
+                return Config.s_config.minimap.labels.vehicleclassmacro.light;    }
+            public static function get mediumSymbol():String    {
+                return Config.s_config.minimap.labels.vehicleclassmacro.medium;    }
+            public static function get heavySymbol():String    {
+                return Config.s_config.minimap.labels.vehicleclassmacro.heavy;    }
+            public static function get tdSymbol():String    {
+                return Config.s_config.minimap.labels.vehicleclassmacro.td;    }
+            public static function get spgSymbol():String    {
+                return Config.s_config.minimap.labels.vehicleclassmacro.spg;    }
         /** allRevealedUnits */
             public static function get revealedEnabled():Boolean    {
                 return Config.s_config.minimap.enabled;    }

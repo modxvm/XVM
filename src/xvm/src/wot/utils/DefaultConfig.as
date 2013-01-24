@@ -155,7 +155,13 @@ class wot.utils.DefaultConfig
                 markerScale: 1,
                 labels: {
                   nickShrink: 4,
-                  ifspgsymbol: "█",
+                  vehicleclassmacro: {
+                    light: "L",
+                    medium: "M",
+                    heavy: "H",
+                    td: "T",
+                    spg: "█"
+                  },
                   allRevealedUnits: {
                     enabled: true,
                     format: {
@@ -175,7 +181,7 @@ class wot.utils.DefaultConfig
                   },
                   lostEnemyUnits: {
                     enabled: true,
-                    format: "{{ifspg}}<i>{{level}}</i>",
+                    format: "<i>{{vehicle-class}}{{level}}</i>",
                     css: "font-family:$FieldFont; font-size:8px; color:#EEAACC;",
                     alpha: 90,
                     offsetX: -4,

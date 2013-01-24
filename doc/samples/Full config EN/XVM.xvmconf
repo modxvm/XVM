@@ -173,7 +173,13 @@
     "markerScale": 1,
     "labels": {
       "nickShrink": 4,
-      "ifspgsymbol": "█", // output symbol for {{ifspg}} macro; works if subject is artillery type
+      "vehicleclassmacro": {        // Подстановки макроса {{vehicle-class}}
+        "light": "L",
+        "medium": "M",
+        "heavy": "H",
+        "td": "T",
+        "spg": "█"
+      },
       "allRevealedUnits": {
         "enabled": true,
         "format": {
@@ -193,7 +199,7 @@
       },
       "lostEnemyUnits": {
         "enabled": true,
-        "format": "{{ifspg}}<i>{{level}}</i>",
+        "format": "{{vehicle-class}}<i>{{level}}</i>",
         "css": "font-family:$FieldFont; font-size:8px; color:#EEAACC;",
         "alpha": 90,
         "offsetX": -4,

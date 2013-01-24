@@ -179,8 +179,14 @@
                                     // Можно дробные 0.7 1.4.
 
     "labels": {                     // Текстовые надписи. Поддерживают HTML.
-      "nickShrink": 4,                // Максимальные размер ника для макроса {{short-nick}}.
-      "ifspgsymbol": "█",             // Символ для макроса {{ifspg}}. Выводится только если субъект типа артиллерии
+      "nickShrink": 4,              // Максимальные размер ника для макроса {{short-nick}}.
+      "vehicleclassmacro": {        // Подстановки макроса {{vehicle-class}}
+        "light": "L",
+        "medium": "M",
+        "heavy": "H",
+        "td": "T",
+        "spg": "█"
+      },
       "allRevealedUnits": { // Видимые на миникарте юниты.
         "enabled": true,
         "format": { // Формат поля.
@@ -200,7 +206,7 @@
       },
       "lostEnemyUnits": { // Настройки поля для потерянных с миникарты врагов.
         "enabled": true,
-        "format": "{{ifspg}}<i>{{level}}</i>",
+        "format": "{{vehicle-class}}<i>{{level}}</i>",
         "css": "font-family:$FieldFont; font-size:8px; color:#EEAACC;",
         "alpha": 90,
         "offsetX": -4, // Смещение относительно последних координат видимой позиции.
