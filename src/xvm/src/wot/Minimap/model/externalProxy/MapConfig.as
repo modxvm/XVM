@@ -30,7 +30,7 @@ class wot.Minimap.model.externalProxy.MapConfig
                 return Config.s_config.minimap.labels.vehicleclassmacro.spg;    }
         /** allRevealedUnits */
             public static function get revealedEnabled():Boolean    {
-                return Config.s_config.minimap.enabled;    }
+                return Config.s_config.minimap.labels.allRevealedUnits.enabled;    }
             /** Format*/
                 public static function get formatAlly():String    {
                     return Config.s_config.minimap.labels.allRevealedUnits.format.ally;    }
