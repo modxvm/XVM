@@ -6,176 +6,194 @@ import wot.Minimap.MinimapEntry;
 class wot.Minimap.model.externalProxy.MapConfig
 {
     public static function get enabled():Boolean    {
-        return Config.s_config.minimap.enabled;    }
+        return minimap.enabled;        }
     public static function get mapBackgroundImageAlpha():Number    {
-        return Config.s_config.minimap.mapBackgroundImageAlpha;    }
+        return minimap.mapBackgroundImageAlpha;    }
     public static function get selfIconAlpha():Number    {
-        return Config.s_config.minimap.selfIconAlpha;    }
+        return minimap.selfIconAlpha;  }
     public static function get cameraAlpha():Number    {
-        return Config.s_config.minimap.cameraAlpha;    }
+        return minimap.cameraAlpha;    }
     public static function get markerScale():Number    {
-        return Config.s_config.minimap.markerScale;    }
+        return minimap.markerScale;    }
    
     /** Labels */
         public static function get nickShrink():Number    {
-            return Config.s_config.minimap.labels.nickShrink;    }
+            return labels.nickShrink;    }
         /** Vehicle class macro */
             public static function get lightSymbol():String    {
-                return Config.s_config.minimap.labels.vehicleclassmacro.light;    }
+                return vehicleclassmacro.light; }
             public static function get mediumSymbol():String    {
-                return Config.s_config.minimap.labels.vehicleclassmacro.medium;    }
+                return vehicleclassmacro.medium;}
             public static function get heavySymbol():String    {
-                return Config.s_config.minimap.labels.vehicleclassmacro.heavy;    }
+                return vehicleclassmacro.heavy; }
             public static function get tdSymbol():String    {
-                return Config.s_config.minimap.labels.vehicleclassmacro.td;    }
+                return vehicleclassmacro.td;    }
             public static function get spgSymbol():String    {
-                return Config.s_config.minimap.labels.vehicleclassmacro.spg;    }
-        /** allRevealedUnits */
+                return vehicleclassmacro.spg;   }
+        /** Units */
             public static function get revealedEnabled():Boolean    {
-                return Config.s_config.minimap.labels.allRevealedUnits.enabled;    }
-            /** Format*/
-                public static function get formatAlly():String    {
-                    return Config.s_config.minimap.labels.allRevealedUnits.format.ally;    }
-                public static function get formatEnemy():String    {
-                    return Config.s_config.minimap.labels.allRevealedUnits.format.enemy;    }
-                public static function get formatSquad():String    {
-                    return Config.s_config.minimap.labels.allRevealedUnits.format.squad;    }
-                public static function get formatOneself():String    {
-                    return Config.s_config.minimap.labels.allRevealedUnits.format.oneself;    }
-            /** CSS */
-                public static function get cssAlly():String    {
-                    return Config.s_config.minimap.labels.allRevealedUnits.css.ally;    }
-                public static function get cssEnemy():String    {
-                    return Config.s_config.minimap.labels.allRevealedUnits.css.enemy;    }
-                public static function get cssSquad():String    {
-                    return Config.s_config.minimap.labels.allRevealedUnits.css.squad;    }
-                public static function get cssOneself():String    {
-                    return Config.s_config.minimap.labels.allRevealedUnits.css.oneself;    }
-            /** Shadow */
-                public static function unitShadowEnabled(entryType:String):Boolean
-                {
-                    var shadowObject:Object = unitShadowObject(entryType);
-                    return shadowObject.enabled;
-                }
-                
-                public static function unitShadow(entryType:String):DropShadowFilter
-                {
-                    var shadowObject:Object = unitShadowObject(entryType);
-                    return getShadowFilter(shadowObject);
-                }
-                
-                private static function unitShadowObject(entryType:String):Object
-                {
-                    switch (entryType)
-                    {   
-                        case MinimapEntry.MINIMAP_ENTRY_TYPE_ALLY:
-                            return Config.s_config.minimap.labels.allRevealedUnits.shadow.ally;
-                            break;
-                        case MinimapEntry.MINIMAP_ENTRY_TYPE_ENEMY:
-                            return Config.s_config.minimap.labels.allRevealedUnits.shadow.enemy;
-                            break;
-                        case MinimapEntry.MINIMAP_ENTRY_TYPE_SQUAD:
-                            return Config.s_config.minimap.labels.allRevealedUnits.shadow.squad;
-                            break;
-                        case MinimapEntry.MINIMAP_ENTRY_TYPE_SELF:
-                            return Config.s_config.minimap.labels.allRevealedUnits.shadow.oneself;
-                            break;
-                        case MinimapEntry.MINIMAP_ENTRY_TYPE_LOST:
-                            return Config.s_config.minimap.labels.lostEnemyUnits.shadow;
-                            break;
-                    }
-                    return null;
-                }
-                    
-            public static function get revealedOffset():Point    {
-                return new Point(Config.s_config.minimap.labels.allRevealedUnits.offsetX,
-                                 Config.s_config.minimap.labels.allRevealedUnits.offsetY); }
-             
-            
-            
-        /** lostEnemyUnits*/
+                return labels.units.revealedEnabled;    }
             public static function get lostEnemyEnabled():Boolean    {
-                return Config.s_config.minimap.labels.lostEnemyUnits.enabled;    }
-                
-            public static function get lostEnemyFormat():String    {
-                return Config.s_config.minimap.labels.lostEnemyUnits.format;    } 
-                
-            public static function get lostEnemyCss():String    {
-                return Config.s_config.minimap.labels.lostEnemyUnits.css;    }
+                return labels.units.lostEnemyEnabled;   }
+                    
+            /** Format */
+            public static function unitLabelFormat(entryName:String)
+            {
+                var unitType:String = entryType(entryName);
+                return labels.units.format[unitType];
+            }
+            /** CSS */
+            public static function unitLabelCss(entryName:String)
+            {
+                var unitType:String = entryType(entryName);
+                return labels.units.css[unitType];
+            }
+            /** Alpha */
+            public static function unitLabelAlpha(entryName:String)
+            {
+                var unitType:String = entryType(entryName);
+                return labels.units.alpha[unitType];
+            }
+            /** Shadow enabled */
+            public static function unitShadowEnabled(entryName:String):Boolean
+            {
+                var unitType:String = entryType(entryName);
+                return labels.units.shadow[unitType].enabled;
+            }
+            /** Shadow filter */
+            public static function unitShadow(entryName:String):DropShadowFilter
+            {
+                var unitType:String = entryType(entryName);
+                return extractShadowFilter(labels.units.shadow[unitType]);
+            }
+            /** Offset */
+            public static function unitLabelOffset(entryName:String)
+            {
+                var unitType:String = entryType(entryName);
+                return new Point(labels.units.offset[unitType].x,
+                                 labels.units.offset[unitType].y);
+            }
 
-            public static function get lostEnemyAlpha():Number    {
-                return Config.s_config.minimap.labels.lostEnemyUnits.alpha;    }
-            
-            public static function get lostEnemyOffset():Point    {
-                return new Point(Config.s_config.minimap.labels.lostEnemyUnits.offsetX,
-                                 Config.s_config.minimap.labels.lostEnemyUnits.offsetY); }               
-            
         /** Map size label */
-            public static function get mapSizeLabelEnabled():Boolean    {
-                return Config.s_config.minimap.labels.mapSize.enabled;    }
+            public static function get mapSizeLabelEnabled():Boolean  {
+                return mapSize.enabled;    }
                 
             public static function get mapSizeLabelFormat():String    {
-                return Config.s_config.minimap.labels.mapSize.format;    }
+                return mapSize.format;     }
                 
-            public static function get mapSizeLabelCss():String    {
-                return Config.s_config.minimap.labels.mapSize.css;    }
+            public static function get mapSizeLabelCss():String       {
+                return mapSize.css;        }
                 
-            public static function get mapSizeLabelAlpha():Number    {
-                return Config.s_config.minimap.labels.mapSize.alpha;    }
+            public static function get mapSizeLabelAlpha():Number     {
+                return mapSize.alpha;      }
                 
-            public static function get mapSizeLabelOffset():Point    {
-                return new Point(Config.s_config.minimap.labels.mapSize.offsetX,
-                                 Config.s_config.minimap.labels.mapSize.offsetY); }
+            public static function get mapSizeLabelOffset():Point     {
+                return new Point(mapSize.offsetX,
+                                 mapSize.offsetY); }
             /** Shadow */
                 public static function get mapSizeLabelShadowEnabled(vehicleClass):Boolean    {
-                    return Config.s_config.minimap.labels.mapSize.shadow.enabled;    }
+                    return mapSize.shadow.enabled;    }
                 public static function get mapSizeLabelShadow():DropShadowFilter    {
-                    return getShadowFilter(Config.s_config.minimap.labels.mapSize.shadow);    }
+                    return extractShadowFilter(labels.mapSize.shadow);    }
             
-            public static function get mapSizeLabelWidth():Number    {
-                return Config.s_config.minimap.labels.mapSize.width;    }
-            public static function get mapSizeLabelHeight():Number    {
-                return Config.s_config.minimap.labels.mapSize.height;    }
+            public static function get mapSizeLabelWidth() :Number   {
+                return mapSize.width;     }
+            public static function get mapSizeLabelHeight():Number   {
+                return mapSize.height;    }
      /** Circles */
-        public static function get circlesEnabled():Boolean     {
-            return Config.s_config.minimap.circles.enabled
+        public static function get circlesEnabled():Boolean {
+            return circles.enabled;
         }
         public static function get circlesMajor():Array     {
-            return Config.s_config.minimap.circles.major
+            return circles.major;
         }
-        public static function get circlesSpecial():Array     {
-            return Config.s_config.minimap.circles.special
+        public static function get circlesSpecial():Array   {
+            return circles.special;
         }
         
     /** Lines */
-        public static function get linesEnabled():Boolean     {
-            return Config.s_config.minimap.lines.enabled
+        public static function get linesEnabled():Boolean   {
+            return lines.enabled;
         }
         public static function get linesVehicle():Array     {
-            return Config.s_config.minimap.lines.vehicle
+            return lines.vehicle;
         }
-        public static function get linesCamera():Array     {
-            return Config.s_config.minimap.lines.camera
+        public static function get linesCamera():Array      {
+            return lines.camera;
         }
-        public static function get linesTraverseAngle():Array     {
-            return Config.s_config.minimap.lines.traverseAngle
+        public static function get linesTraverseAngle():Array{
+            return lines.traverseAngle;
         }
         
     // -- Private
     
-    private static function getShadowFilter(of:Object):DropShadowFilter
+    private static function extractShadowFilter(source:Object):DropShadowFilter
     {
         return new DropShadowFilter(
-            of.distance, // distance
-            of.angle, // angle
-            parseInt(of.color),
+            source.distance, // distance
+            source.angle, // angle
+            parseInt(source.color),
             // DropShadowFilter accepts alpha be from 0 to 1.
             // 90 at default config.
-            of.alpha / 100, 
-            of.blur,
-            of.blur,
-            of.strength,
+            source.alpha / 100, 
+            source.blur,
+            source.blur,
+            source.strength,
             3 // quality
         )
+    }
+    
+    /** Translate internal WG entryName to minimap config file marker type*/
+    private static function entryType(entryName:String):String
+    {
+        switch (entryName)
+        {   
+            case MinimapEntry.MINIMAP_ENTRY_NAME_ALLY:
+                return "ally";
+                break;
+            case MinimapEntry.MINIMAP_ENTRY_NAME_ENEMY:
+                return "enemy";
+                break;
+            case MinimapEntry.MINIMAP_ENTRY_NAME_SQUAD:
+                return "squad"; // originally "squadman"
+                break;
+            case MinimapEntry.MINIMAP_ENTRY_NAME_SELF:
+                return "oneself";  // originally ""
+                break;
+            case MinimapEntry.MINIMAP_ENTRY_NAME_LOST:
+                return "lost";
+                break;
+        }
+        return null;
+    }
+    
+    private static function get labels():Object
+    {
+        return minimap.labels;
+    }
+    
+    private static function get lines():Object
+    {
+        return minimap.lines;
+    }
+    
+    private static function get circles():Object
+    {
+        return minimap.circles;
+    }
+    
+    private static function get mapSize():Object
+    {
+        return labels.mapSize;
+    }
+    
+    private static function get vehicleclassmacro():Object
+    {
+        return labels.vehicleclassmacro;
+    }
+    
+    private static function get minimap():Object
+    {
+        return Config.s_config.minimap;
     }
 }

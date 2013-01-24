@@ -20,11 +20,11 @@ import wot.Minimap.dataTypes.Player;
 class wot.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
 {
     /** Entry type: enemy, ally, squadman, empty possible */
-    public static var MINIMAP_ENTRY_TYPE_ENEMY:String = "enemy";
-    public static var MINIMAP_ENTRY_TYPE_ALLY:String = "ally";
-    public static var MINIMAP_ENTRY_TYPE_SQUAD:String = "squadman";
-    public static var MINIMAP_ENTRY_TYPE_SELF:String = ""; /** Type of player himself and ? */
-    public static var MINIMAP_ENTRY_TYPE_LOST:String = "lostenemy"; /** New type for last enemy position markers */
+    public static var MINIMAP_ENTRY_NAME_ENEMY:String = "enemy";
+    public static var MINIMAP_ENTRY_NAME_ALLY:String = "ally";
+    public static var MINIMAP_ENTRY_NAME_SQUAD:String = "squadman";
+    public static var MINIMAP_ENTRY_NAME_SELF:String = ""; /** Type of player himself and ? */
+    public static var MINIMAP_ENTRY_NAME_LOST:String = "lostenemy"; /** New type for last enemy position markers */
     public static var MINIMAP_ENTRY_VEH_CLASS_LIGHT:String = "lightTank";
     public static var MINIMAP_ENTRY_VEH_CLASS_MEDIUM:String = "mediumTank";
     public static var MINIMAP_ENTRY_VEH_CLASS_HEAVY:String = "heavyTank";
@@ -63,7 +63,7 @@ class wot.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
         
         if (MapConfig.revealedEnabled)
         {
-            LabelAppend.append(markMC, uid, this.entryName, MapConfig.revealedOffset, this.vehicleClass, null);
+            LabelAppend.append(markMC, uid, this.entryName, this.vehicleClass, null, null);
         }
     }
     

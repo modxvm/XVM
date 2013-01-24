@@ -187,30 +187,84 @@
         "td": "T",
         "spg": "█"
       },
-      "allRevealedUnits": { // Видимые на миникарте юниты.
-        "enabled": true,
+      "units": { // Текстовые надписи для танков на миникарте.
+        "revealedEnabled": true, // Выключатель добавочных текстовых полей для видимых юнитов
+        "lostEnemyEnabled": true,// Выключатель текстовых полей, помечивающих последние позиции потерянных врагов
         "format": { // Формат поля.
           "ally":  "{{level}}",
           "enemy": "{{level}}",
           "squad": "{{level}} <i>{{short-nick}}</i>", // Совзводный.
+          "lost":  "<i>{{vehicle-class}}{{level}}</i>", // Для потерянных с миникарты врагов
           "oneself": "<b>{{level}}</b>" // Для своего маркера и маркера приёмника камеры наблюдения в случае смерти.
         },
         "css": { // CSS стиль.
           "ally":  "font-family:$FieldFont; font-size:8px; color:#BBEEBB;",
           "enemy": "font-family:$FieldFont; font-size:8px; color:#EEBBBB;",
           "squad": "font-family:$FieldFont; font-size:8px; color:#FFEE44;",
+          "lost":  "font-family:$FieldFont; font-size:8px; color:#EEAACC;",
           "oneself": "font-family:$FieldFont; font-size:8px; color:#FFFFFF;"
         },
-        "offsetX": 0, // Смещение поля относительно текущей иконки.
-        "offsetY": 0
-      },
-      "lostEnemyUnits": { // Настройки поля для потерянных с миникарты врагов.
-        "enabled": true,
-        "format": "{{vehicle-class}}<i>{{level}}</i>",
-        "css": "font-family:$FieldFont; font-size:8px; color:#EEAACC;",
-        "alpha": 90,
-        "offsetX": -4, // Смещение относительно последних координат видимой позиции.
-        "offsetY": -4
+        "shadow": {
+          "ally": {
+            "enabled": true,
+            "color": "0x00FF00",
+            "distance": 0,
+            "angle": 0,
+            "alpha": 40,
+            "blur": 8,
+            "strength": 4
+          },
+          "enemy": {
+            "enabled": true,
+            "color": "0xFF0000",
+            "distance": 0,
+            "angle": 0,
+            "alpha": 40,
+            "blur": 8,
+            "strength": 4
+          },
+          "squad": {
+            "enabled": true,
+            "color": "0x00CCCC",
+            "distance": 0,
+            "angle": 0,
+            "alpha": 40,
+            "blur": 8,
+            "strength": 4
+          },
+          "lost": {
+            "enabled": true,
+            "color": "0xFF0000",
+            "distance": 0,
+            "angle": 0,
+            "alpha": 40,
+            "blur": 8,
+            "strength": 4
+          },
+          "oneself": {
+            "enabled": true,
+            "color": "0xFFFFFF",
+            "distance": 0,
+            "angle": 0,
+            "alpha": 40,
+            "blur": 8,
+            "strength": 4
+          }
+        },
+        "offset": {
+          "ally":  {"x": 0, "y": 0},   // Смещение поля относительно текущей иконки.
+          "enemy": {"x": 0, "y": 0},   // Смещение поля относительно текущей иконки.
+          "squad": {"x": 0, "y": 0},   // Смещение поля относительно текущей иконки.
+          "lost":  {"x": -4, "y": -4}, // Смещение относительно последних координат видимой позиции.
+          "oneself": {"x": 0, "y": 0}  // Смещение поля относительно текущей иконки.
+        },
+        "alpha" : {
+          "ally":  100,
+          "enemy": 100,
+          "squad": 100,
+          "lost":  80,
+          "oneself": 100
+        }
       },
       "mapSize": { // Поле размера стороны карты. Например 1000м, 700м, 600м.
         "enabled": true,

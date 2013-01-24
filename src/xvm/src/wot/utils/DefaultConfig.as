@@ -162,18 +162,21 @@ class wot.utils.DefaultConfig
                     td: "T",
                     spg: "█"
                   },
-                  allRevealedUnits: {
-                    enabled: true,
+                  units: {
+                    revealedEnabled: true,
+                    lostEnemyEnabled: true,
                     format: {
                       ally:  "{{level}}",
                       enemy: "{{level}}",
                       squad: "{{level}} <i>{{short-nick}}</i>",
+                      lost:  "<i>{{vehicle-class}}{{level}}</i>",
                       oneself: "<b>{{level}}</b>"
                     },
                     css: {
                       ally:  "font-family:$FieldFont; font-size:8px; color:#BBEEBB;",
                       enemy: "font-family:$FieldFont; font-size:8px; color:#EEBBBB;",
                       squad: "font-family:$FieldFont; font-size:8px; color:#FFEE44;",
+                      lost:  "font-family:$FieldFont; font-size:8px; color:#EEAACC;",
                       oneself: "font-family:$FieldFont; font-size:8px; color:#FFFFFF;"
                     },
                     shadow: {
@@ -214,24 +217,19 @@ class wot.utils.DefaultConfig
                         strength: 4
                       }
                     },
-                    offsetX: 0,
-                    offsetY: 0
-                  },
-                  lostEnemyUnits: {
-                    enabled: true,
-                    format: "<i>{{vehicle-class}}{{level}}</i>",
-                    css: "font-family:$FieldFont; font-size:8px; color:#EEAACC;",
-                    alpha: 90,
-                    offsetX: -4,
-                    offsetY: -4,
-                    shadow: {
-                      enabled: true,
-                      color: "0xFF0000",
-                      distance: 0,
-                      angle: 0,
-                      alpha: 40,
-                      blur: 8,
-                      strength: 4
+                    offset: {
+                      ally:  {x: 0, y: 0},
+                      enemy: {x: 0, y: 0},
+                      squad: {x: 0, y: 0},
+                      lost:  {x: -4, y: -4},
+                      oneself: {x: 0, y: 0}
+                    },
+                    alpha : {
+                      ally:  100,
+                      enemy: 100,
+                      squad: 100,
+                      lost:  80,
+                      oneself: 100
                     }
                   },
                   mapSize: {

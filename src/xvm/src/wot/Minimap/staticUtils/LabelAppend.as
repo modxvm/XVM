@@ -1,5 +1,3 @@
-import flash.filters.DropShadowFilter;
-import wot.Minimap.MinimapEntry;
 import wot.Minimap.staticUtils.MinimapMacro;
 import wot.Minimap.model.externalProxy.MapConfig;
 import flash.geom.Point;
@@ -8,8 +6,19 @@ import wot.Minimap.model.externalProxy.PlayersPanelProxy;
 
 class wot.Minimap.staticUtils.LabelAppend
 {
-    public static function append(mc:MovieClip, uid:Number, entryName:String, offset:Point, vehicleClass:String, scale:Number, shadow:DropShadowFilter):TextField
+    public static function append(mc:MovieClip, uid:Number, entryName:String, vehicleClass:String, scale:Number, extraOffset:Point):TextField
     {
+        var offset:Point = MapConfig.unitLabelOffset(entryName);
+        if (extraOffset)
+        {
+            /**
+             * Used for lost markers.
+             * Large values transferred in comparison to config offset.
+             * (-4; -4) - config offset for lost. (-50; 30) - major offset for lost to present lost position.
+             */
+            offset = offset.add(extraOffset);
+        }
+        
         var player:Player = PlayersPanelProxy.getPlayerInfo(uid);
         
         var textField:TextField = mc.createTextField("textField-" + player.uid + entryName, mc.getNextHighestDepth(), offset.x, offset.y, 100, 40);
@@ -46,26 +55,8 @@ class wot.Minimap.staticUtils.LabelAppend
     
     private static function getCSS(entryName:String):String
     {
-        var style:String;
+        var style:String = MapConfig.unitLabelCss(entryName);
 
-        switch (entryName)
-        {
-            case MinimapEntry.MINIMAP_ENTRY_TYPE_ALLY:
-                style = MapConfig.cssAlly;
-                break;
-            case MinimapEntry.MINIMAP_ENTRY_TYPE_ENEMY:
-                style = MapConfig.cssEnemy;
-                break;
-            case MinimapEntry.MINIMAP_ENTRY_TYPE_SQUAD:
-                style = MapConfig.cssSquad;
-                break;
-            case MinimapEntry.MINIMAP_ENTRY_TYPE_LOST:
-                style = MapConfig.lostEnemyCss;
-                break;
-            default:
-                style = MapConfig.cssOneself;
-        }
-        
         style = ".xvm_mm{" + style + "}";
 
         return style;
@@ -73,26 +64,8 @@ class wot.Minimap.staticUtils.LabelAppend
     
     private static function getText(entryName:String, player:Player, vehicleClass:String):String
     {
-        var text:String;
+        var format:String = MapConfig.unitLabelFormat(entryName);
         
-        switch (entryName)
-        {
-            case "ally":
-                text = MapConfig.formatAlly;
-                break;
-            case "enemy":
-                text = MapConfig.formatEnemy;
-                break;
-            case "squadman":
-                text = MapConfig.formatSquad;
-                break;
-            case "lostenemy":
-                text = MapConfig.lostEnemyFormat;
-                break;
-            default:
-                text = MapConfig.formatOneself;
-        }
-        
-        return MinimapMacro.process(text, player, vehicleClass);
+        return MinimapMacro.process(format, player, vehicleClass);
     }
 }

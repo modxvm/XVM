@@ -1,6 +1,5 @@
 import flash.geom.Point;
 import wot.Minimap.model.externalProxy.MapConfig;
-import wot.utils.Logger;
 
 class wot.Minimap.MapSizeLabel
 {
@@ -30,7 +29,6 @@ class wot.Minimap.MapSizeLabel
         
         if (MapConfig.mapSizeLabelShadowEnabled)
         {
-            Logger.addObject(MapConfig.mapSizeLabelShadow, "MapConfig.mapSizeLabelShadow", 3);
             tf.filters = [MapConfig.mapSizeLabelShadow];
         }
     }
