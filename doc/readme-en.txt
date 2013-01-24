@@ -152,9 +152,11 @@
       {{ifspg}}        - place special square symbol if subject is artillery
 
     Statistics macros ('rating/showPlayersStatistics' must be anabled):
-      {{eff}}         - player efficiency (http://wot-news.com/index.php/stat/calc/en/)
+      {{eff}}         - player efficiency: http://wot-news.com/index.php/stat/calc/en/
       {{eff:4}}       - player efficiency aligned from left to 4 chars
-      {{teff}}, {{e}} - player per-vehicle efficiency (http://www.koreanrandom.com/forum/topic/1643-)
+      {{teff}}, {{e}} - player per-vehicle efficiency: http://www.koreanrandom.com/forum/topic/1643-
+      {{twr}}         - TWR (T-Calc): http://www.koreanrandom.com/forum/topic/2389-
+      {{wn}}          - WN6 rating: http://www.koreanrandom.com/forum/topic/2575-
       {{rating}}      - GWR (Global Win Ratio)
       {{rating:3}}    - GWR aligned from left to 3 chars
       {{battles}}     - total battles count
@@ -178,6 +180,8 @@
       {{c:tdb}}, {{c:tdv}}, {{c:tfb}}, {{c:tsb}} - dynamic colors for this macros
       {{c:eff}}       - color depended from player efficiency
       {{c:e}}         - color depended from player per-vehicle efficiency
+      {{c:twr}}       - color depended from TWR (T-Calc)
+      {{c:wn}}        - color depended from WN6 rating
       {{c:rating}}    - color depended from GWR
       {{c:kb}}        - color depended from kilo-battles
       {{c:t-rating}}  - color depended from current vehicle win ratio

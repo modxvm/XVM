@@ -1,6 +1,11 @@
 XVM-3.3.2-test2:
   * исправлен макрос {{c:system}}
   * полоса захвата: исправлено "enabled":false
+  * добавлены макросы:
+      {{wn}}, {{c:wn}} - WN6 рейтинг: http://www.koreanrandom.com/forum/topic/2575-
+      {{twr}}, {{c:twr}} - эффективный процент побед (T-Calc от tourist1984):
+        http://www.koreanrandom.com/forum/topic/2389- (пока не работает)
+  * добавлены секции настройки цветов: colors/wn, colors/twr
 
 XVM-3.3.2-test1:
   * исправлена скорость захвата ротного встречного боя

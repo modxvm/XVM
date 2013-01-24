@@ -1,6 +1,11 @@
 XVM-3.3.2-test2:
   * fixed {{c:system}} macro
   * capture bar: fixed "enabled":false
+  * added macros:
+      {{wn}}, {{c:wn}} - WN6 rating: http://www.koreanrandom.com/forum/topic/2575-
+      {{twr}}, {{c:twr}} - tourist1984 win rate:
+        http://www.koreanrandom.com/forum/topic/2389- (not working yet)
+  * added colors setup sections: colors/wn, colors/twr
 
 XVM-3.3.2-test1:
   * capture bar: fixed number of tanks capturing for Tank Company encounter battles
