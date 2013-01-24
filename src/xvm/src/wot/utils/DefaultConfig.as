@@ -176,6 +176,44 @@ class wot.utils.DefaultConfig
                       squad: "font-family:$FieldFont; font-size:8px; color:#FFEE44;",
                       oneself: "font-family:$FieldFont; font-size:8px; color:#FFFFFF;"
                     },
+                    shadow: {
+                      ally: {
+                        enabled: true,
+                        color: "0x00FF00",
+                        distance: 0,
+                        angle: 0,
+                        alpha: 40,
+                        blur: 8,
+                        strength: 4
+                      },
+                      enemy: {
+                        enabled: true,
+                        color: "0xFF0000",
+                        distance: 0,
+                        angle: 0,
+                        alpha: 40,
+                        blur: 8,
+                        strength: 4
+                      },
+                      squad: {
+                        enabled: true,
+                        color: "0x00CCCC",
+                        distance: 0,
+                        angle: 0,
+                        alpha: 40,
+                        blur: 8,
+                        strength: 4
+                      },
+                      oneself: {
+                        enabled: true,
+                        color: "0xFFFFFF",
+                        distance: 0,
+                        angle: 0,
+                        alpha: 40,
+                        blur: 8,
+                        strength: 4
+                      }
+                    },
                     offsetX: 0,
                     offsetY: 0
                   },
@@ -185,7 +223,16 @@ class wot.utils.DefaultConfig
                     css: "font-family:$FieldFont; font-size:8px; color:#EEAACC;",
                     alpha: 90,
                     offsetX: -4,
-                    offsetY: -4
+                    offsetY: -4,
+                    shadow: {
+                      enabled: true,
+                      color: "0xFF0000",
+                      distance: 0,
+                      angle: 0,
+                      alpha: 40,
+                      blur: 8,
+                      strength: 4
+                    }
                   },
                   mapSize: {
                     enabled: true,
@@ -202,7 +249,9 @@ class wot.utils.DefaultConfig
                       alpha: 80,
                       blur: 8,
                       strength: 4
-                    }
+                    },
+                    width: 100,
+                    height: 30
                   }
                 },
                 circles: {

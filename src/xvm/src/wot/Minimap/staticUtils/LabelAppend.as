@@ -1,3 +1,4 @@
+import flash.filters.DropShadowFilter;
 import wot.Minimap.MinimapEntry;
 import wot.Minimap.staticUtils.MinimapMacro;
 import wot.Minimap.model.externalProxy.MapConfig;
@@ -7,7 +8,7 @@ import wot.Minimap.model.externalProxy.PlayersPanelProxy;
 
 class wot.Minimap.staticUtils.LabelAppend
 {
-    public static function append(mc:MovieClip, uid:Number, entryName:String, offset:Point, vehicleClass:String, scale:Number):TextField
+    public static function append(mc:MovieClip, uid:Number, entryName:String, offset:Point, vehicleClass:String, scale:Number, shadow:DropShadowFilter):TextField
     {
         var player:Player = PlayersPanelProxy.getPlayerInfo(uid);
         
@@ -32,6 +33,11 @@ class wot.Minimap.staticUtils.LabelAppend
         }
         
         textField.htmlText = "<span class='xvm_mm'>" + getText(entryName, player, vehicleClass) + "</span>"; //getText()
+            
+        if (MapConfig.unitShadowEnabled(entryName))
+        {
+            textField.filters = [MapConfig.unitShadow(entryName)];
+        }
         
         return textField;
     }

@@ -62,7 +62,9 @@ class wot.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
         uid = _root.minimap.sync.getTestUid();
         
         if (MapConfig.revealedEnabled)
-            LabelAppend.append(markMC, uid, this.entryName, MapConfig.revealedOffset, this.vehicleClass);
+        {
+            LabelAppend.append(markMC, uid, this.entryName, MapConfig.revealedOffset, this.vehicleClass, null);
+        }
     }
     
     private function get syncProcedureInProgress():Boolean

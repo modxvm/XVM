@@ -1,5 +1,7 @@
+import flash.filters.DropShadowFilter;
 import flash.geom.Point;
 import wot.utils.Config;
+import wot.Minimap.MinimapEntry;
 
 class wot.Minimap.model.externalProxy.MapConfig
 {
@@ -49,9 +51,48 @@ class wot.Minimap.model.externalProxy.MapConfig
                     return Config.s_config.minimap.labels.allRevealedUnits.css.squad;    }
                 public static function get cssOneself():String    {
                     return Config.s_config.minimap.labels.allRevealedUnits.css.oneself;    }
+            /** Shadow */
+                public static function unitShadowEnabled(entryType:String):Boolean
+                {
+                    var shadowObject:Object = unitShadowObject(entryType);
+                    return shadowObject.enabled;
+                }
+                
+                public static function unitShadow(entryType:String):DropShadowFilter
+                {
+                    var shadowObject:Object = unitShadowObject(entryType);
+                    return getShadowFilter(shadowObject);
+                }
+                
+                private static function unitShadowObject(entryType:String):Object
+                {
+                    switch (entryType)
+                    {   
+                        case MinimapEntry.MINIMAP_ENTRY_TYPE_ALLY:
+                            return Config.s_config.minimap.labels.allRevealedUnits.shadow.ally;
+                            break;
+                        case MinimapEntry.MINIMAP_ENTRY_TYPE_ENEMY:
+                            return Config.s_config.minimap.labels.allRevealedUnits.shadow.enemy;
+                            break;
+                        case MinimapEntry.MINIMAP_ENTRY_TYPE_SQUAD:
+                            return Config.s_config.minimap.labels.allRevealedUnits.shadow.squad;
+                            break;
+                        case MinimapEntry.MINIMAP_ENTRY_TYPE_SELF:
+                            return Config.s_config.minimap.labels.allRevealedUnits.shadow.oneself;
+                            break;
+                        case MinimapEntry.MINIMAP_ENTRY_TYPE_LOST:
+                            return Config.s_config.minimap.labels.lostEnemyUnits.shadow;
+                            break;
+                    }
+                    return null;
+                }
+                    
             public static function get revealedOffset():Point    {
                 return new Point(Config.s_config.minimap.labels.allRevealedUnits.offsetX,
                                  Config.s_config.minimap.labels.allRevealedUnits.offsetY); }
+             
+            
+            
         /** lostEnemyUnits*/
             public static function get lostEnemyEnabled():Boolean    {
                 return Config.s_config.minimap.labels.lostEnemyUnits.enabled;    }
@@ -86,20 +127,15 @@ class wot.Minimap.model.externalProxy.MapConfig
                 return new Point(Config.s_config.minimap.labels.mapSize.offsetX,
                                  Config.s_config.minimap.labels.mapSize.offsetY); }
             /** Shadow */
-                public static function get mapSizeLabelShadowEnabled():Boolean    {
+                public static function get mapSizeLabelShadowEnabled(vehicleClass):Boolean    {
                     return Config.s_config.minimap.labels.mapSize.shadow.enabled;    }
-                public static function get mapSizeLabelShadowColor():Number    {
-                    return parseInt(Config.s_config.minimap.labels.mapSize.shadow.color);    }
-                public static function get mapSizeLabelShadowDistance():Number    {
-                    return Config.s_config.minimap.labels.mapSize.shadow.distance;    }
-                public static function get mapSizeLabelShadowAngle():Number    {
-                    return Config.s_config.minimap.labels.mapSize.shadow.angle;    }
-                public static function get mapSizeLabelShadowAlpha():Number    {
-                    return Config.s_config.minimap.labels.mapSize.shadow.alpha;    }
-                public static function get mapSizeLabelShadowBlur():Number    {
-                    return Config.s_config.minimap.labels.mapSize.shadow.blur;    }
-                public static function get mapSizeLabelShadowStrength():Number    {
-                    return Config.s_config.minimap.labels.mapSize.shadow.strength;    }
+                public static function get mapSizeLabelShadow():DropShadowFilter    {
+                    return getShadowFilter(Config.s_config.minimap.labels.mapSize.shadow);    }
+            
+            public static function get mapSizeLabelWidth():Number    {
+                return Config.s_config.minimap.labels.mapSize.width;    }
+            public static function get mapSizeLabelHeight():Number    {
+                return Config.s_config.minimap.labels.mapSize.height;    }
      /** Circles */
         public static function get circlesEnabled():Boolean     {
             return Config.s_config.minimap.circles.enabled
@@ -124,4 +160,22 @@ class wot.Minimap.model.externalProxy.MapConfig
         public static function get linesTraverseAngle():Array     {
             return Config.s_config.minimap.lines.traverseAngle
         }
+        
+    // -- Private
+    
+    private static function getShadowFilter(of:Object):DropShadowFilter
+    {
+        return new DropShadowFilter(
+            of.distance, // distance
+            of.angle, // angle
+            parseInt(of.color),
+            // DropShadowFilter accepts alpha be from 0 to 1.
+            // 90 at default config.
+            of.alpha / 100, 
+            of.blur,
+            of.blur,
+            of.strength,
+            3 // quality
+        )
+    }
 }
