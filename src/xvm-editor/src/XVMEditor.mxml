@@ -269,6 +269,12 @@
                             <s:NavigatorContent id="nc_colors_tsb" label="{_('DynamicColorTSB')}" width="100%" height="100%">
                                 <p:PDynamicValues id="p_colors_tsb" config="colors.tsb" minimum="0" maximum="3" stepSize="0.1" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
                             </s:NavigatorContent>
+                            <s:NavigatorContent id="nc_colors_twr" label="{_('DynamicColorTWR')}" width="100%" height="100%">
+                                <p:PDynamicValues id="p_colors_twr" config="colors.twr" minimum="0" maximum="101" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                            </s:NavigatorContent>
+                            <s:NavigatorContent id="nc_colors_wn" label="{_('DynamicColorWN')}" width="100%" height="100%">
+                                <p:PDynamicValues id="p_colors_wn" config="colors.wn" minimum="0" maximum="3000" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                            </s:NavigatorContent>
                         </mx:Accordion>
                 </s:NavigatorContent>
                 <s:NavigatorContent label="{_('transparencyPage')}" width="100%" height="100%" id="pgTransparency">

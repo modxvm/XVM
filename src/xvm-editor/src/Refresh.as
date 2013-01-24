@@ -563,6 +563,10 @@ private function RefreshColorsPage2():void
             p_colors_tfb.RefreshSource();
         else if (accColors2.selectedChild == nc_colors_tsb && p_colors_tsb != null)
             p_colors_tsb.RefreshSource();
+        else if (accColors2.selectedChild == nc_colors_twr && p_colors_twr != null)
+            p_colors_twr.RefreshSource();
+        else if (accColors2.selectedChild == nc_colors_wn && p_colors_wn != null)
+            p_colors_wn.RefreshSource();
     }
     catch (ex:Error)
     {
