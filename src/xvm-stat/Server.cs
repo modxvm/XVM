@@ -38,6 +38,14 @@ namespace wot
       public int b;           // total battles
       public int w;           // total wins
       public int e;           // global efficiency
+      public int spo;         // spotted
+      public int hip;         // hits percent
+      public int cap;         // capture points
+      public int dmg;         // damage dealt
+      public int frg;         // frags
+      public int def;         // dropped capture points
+      public int wn;          // WN rating: http://www.koreanrandom.com/forum/topic/2575-
+      public int twr;         // tourist1984 win rate: http://www.koreanrandom.com/forum/topic/2389-
       public int tb;          // tank battles
       public int tw;          // tank wins
       public int tl;          // tank level
@@ -814,6 +822,14 @@ namespace wot
               b = ParseInt(data, "battles"),
               w = ParseInt(data, "wins"),
               e = ParseInt(data, "eff"),
+              spo = ParseInt(data, "spo"),
+              hip = ParseInt(data, "hip"),
+              cap = ParseInt(data, "cap"),
+              dmg = ParseInt(data, "dmg"),
+              frg = ParseInt(data, "frg"),
+              def = ParseInt(data, "def"),
+              wn = ParseInt(data, "wn"),
+              twr = ParseInt(data, "twr"),
               tb = ParseInt(data, "v", "b"),
               tw = ParseInt(data, "v", "w"),
               tl = ParseInt(data, "v", "l"),
