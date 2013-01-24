@@ -27,7 +27,7 @@ class wot.Minimap.MapSizeLabel
         
         tf._alpha = MapConfig.mapSizeLabelAlpha;
         
-        if (MapConfig.mapSizeLabelEnabled)
+        if (MapConfig.mapSizeLabelShadowEnabled)
         {
             tf.filters = [new DropShadowFilter(
                     MapConfig.mapSizeLabelShadowDistance, // distance

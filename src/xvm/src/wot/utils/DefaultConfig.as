@@ -191,7 +191,7 @@ class wot.utils.DefaultConfig
                     enabled: true,
                     format: "<b>{{cellsize}}0 m</b>",
                     css: "font-size:12px; color:#000000;",
-                    alpha: 75,
+                    alpha: 80,
                     offsetX: 0,
                     offsetY: 0,
                     shadow: {
@@ -199,9 +199,9 @@ class wot.utils.DefaultConfig
                       color: 0xAAAAAA,
                       distance: 0,
                       angle: 0,
-                      alpha: 60,
-                      blur: 5,
-                      strength: 3
+                      alpha: 80,
+                      blur: 8,
+                      strength: 4
                     }
                   }
                 },
