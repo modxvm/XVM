@@ -89,7 +89,7 @@ class wot.Minimap.model.externalProxy.MapConfig
                 public static function get mapSizeLabelShadowEnabled():Boolean    {
                     return Config.s_config.minimap.labels.mapSize.shadow.enabled;    }
                 public static function get mapSizeLabelShadowColor():Number    {
-                    return Config.s_config.minimap.labels.mapSize.shadow.color;    }
+                    return parseInt(Config.s_config.minimap.labels.mapSize.shadow.color);    }
                 public static function get mapSizeLabelShadowDistance():Number    {
                     return Config.s_config.minimap.labels.mapSize.shadow.distance;    }
                 public static function get mapSizeLabelShadowAngle():Number    {

@@ -196,7 +196,7 @@ class wot.utils.DefaultConfig
                     offsetY: 0,
                     shadow: {
                       enabled: true,
-                      color: 0xAAAAAA,
+                      color: "0xAAAAAA",
                       distance: 0,
                       angle: 0,
                       alpha: 80,
