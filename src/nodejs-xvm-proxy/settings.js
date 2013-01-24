@@ -24,7 +24,7 @@ module.exports = (function()
         mongoMinTime: 1000, // msec
         mongoMaxTime: 5000, // msec
         statHosts: [
-            "api.worldoftanks.ru",      // RU:           0 ..  499999999
+            [ "api.worldoftanks.ru", "worldoftanks.ru" ],      // RU:           0 ..  499999999
             "api.worldoftanks.eu",      // EU:   500000000 ..  999999999
             "api.worldoftanks.com",     // US:  1000000000 .. 1499999999
             "",                         // ???: 1500000000 .. 1999999999 (disabled - unknown stat server)

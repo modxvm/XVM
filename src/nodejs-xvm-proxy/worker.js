@@ -71,13 +71,9 @@ module.exports = (function() {
         }, settings.statHostsTimeouts[statHostId]);
 
         var host = settings.statHosts[statHostId];
-// DEBUG
-        if (host == "api.worldoftanks.ru" && Math.round(Math.random()) == 1)
-        {
-            host = "worldoftanks.ru";
-//            utils.log("host = worldoftanks.ru");
-        }
-// /DEBUG
+        if (typeof host == "object")
+            host = host[Math.round(Math.random() * (host.length - 1))];
+
         var options = {
             host: host,
             port: 80,
