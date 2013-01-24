@@ -156,9 +156,9 @@ class wot.utils.Macros
         pdata["eff"] = eff <= 0 ? "--" : String(eff);
         pdata["eff:4"] = eff <= 0 ? " -- " : Utils.padLeft(pdata["eff"], 4);
         // {{wn}}
-        pdata["wn"] = stat.wn == null ? " -- " : Utils.padLeft(String(stat.wn), 4);
+        pdata["wn"] = stat.wn <= 0 ? " -- " : Utils.padLeft(String(stat.wn), 4);
         // {{twr}}
-        pdata["twr"] = stat.twr == null ? "--%" : Utils.padLeft(String(stat.twr) + "%", 3);
+        pdata["twr"] = stat.twr <= 0 ? "--%" : Utils.padLeft(String(stat.twr) + "%", 3);
         // {{e}}
         pdata["e"] = stat.te == null ? "-" : stat.te >= 10 ? "E" : String(stat.te);
         // {{teff}}
