@@ -44,8 +44,8 @@ package utils
             format = format.replace("{{speed}}", "3");
 
             var name:String = "Player";
-            var vname:String = "T-34"; 
-            var vnames:String = "t34"; 
+            var vname:String = "T-34";
+            var vnames:String = "t34";
             format = format.replace("{{nick}}", name + "[CLAN]");
             format = format.replace("{{name}}", name);
             format = format.replace("{{short-nick}}", name.slice(0, Config.s_config.minimap.nickShrink));
@@ -84,6 +84,8 @@ package utils
             format = format.replace("{{rating}}", "66%");
             format = format.replace("{{eff}}", "1800");
             format = format.replace("{{e}}", "5");
+            format = format.replace("{{wn}}", "1001");
+            format = format.replace("{{twr}}", "61%");
             format = format.replace("{{teff}}", "1024");
             format = format.replace("{{tdb}}", "1010");
             format = format.replace("{{tdb:4}}", "1010");
@@ -107,6 +109,8 @@ package utils
             format = format.replace("{{t-hb:3}}", " 5h");
             format = format.replace("{{t-battles:4}}", "5500");
             format = format.replace("{{c:eff}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, 1800));
+            format = format.replace("{{c:wn}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, 1600));
+            format = format.replace("{{c:twr}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TWR, 61));
             format = format.replace("{{c:rating}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 66));
             format = format.replace("{{c:kb}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, 11));
             format = format.replace("{{c:e}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, 5));
@@ -228,6 +232,8 @@ package utils
                 { value: "{{eff}}", label: "eff", icon: Embed.eff },
                 { value: "{{e}}", label: "e", icon: Embed.e },
                 { value: "{{teff}}", label: "teff", icon: Embed.teff },
+                { value: "{{twr}}", label: "twr", icon: Embed.twr },
+                { value: "{{wn}}", label: "wn", icon: Embed.wn },
                 { value: "{{tdb}}", label: "tdb", icon: Embed.tdb },
                 { value: "{{tdv}}", label: "tdv", icon: Embed.tdv },
                 { value: "{{tfb}}", label: "tfb", icon: Embed.tfb },
@@ -252,6 +258,8 @@ package utils
             colors_stat: [
                 { value: "{{c:eff}}", label: "c_eff", icon: Embed.c_eff },
                 { value: "{{c:e}}", label: "c_e", icon: Embed.c_e },
+                { value: "{{c:twr}}", label: "c_twr", icon: Embed.c_twr },
+                { value: "{{c:wn}}", label: "c_wn", icon: Embed.c_wn },
                 { value: "{{c:tdb}}", label: "c_tdb", icon: Embed.c_tdb },
                 { value: "{{c:tdv}}", label: "c_tdv", icon: Embed.c_tdv },
                 { value: "{{c:tfb}}", label: "c_tfb", icon: Embed.c_tfb },

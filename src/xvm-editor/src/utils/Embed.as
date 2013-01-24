@@ -131,12 +131,16 @@ package utils
         public static const tsb:Class;
         [Embed("images/macros/turret.png")]
         public static const turret:Class;
+        [Embed("images/macros/twr.png")]
+        public static const twr:Class;
         [Embed("images/macros/vehicle.png")]
         public static const vehicle:Class;
         [Embed("images/macros/vtype.png")]
         public static const vtype:Class;
         [Embed("images/macros/wins.png")]
         public static const wins:Class;
+        [Embed("images/macros/wn.png")]
+        public static const wn:Class;
 
         // color
         [Embed("images/macros/c_dmg_kind.png")]
@@ -169,6 +173,10 @@ package utils
         public static const c_tfb:Class;
         [Embed("images/macros/c_tsb.png")]
         public static const c_tsb:Class;
+        [Embed("images/macros/c_twr.png")]
+        public static const c_twr:Class;
+        [Embed("images/macros/c_wn.png")]
+        public static const c_wn:Class;
 
         // alpha
         [Embed("images/macros/a_hp.png")]
