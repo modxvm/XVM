@@ -54,32 +54,28 @@ module.exports = (function()
         if (!data || !data.b || data.b <= 0)
             return 0;
 
-        var lvls = { battles: 0 };
-        for(var i = 1; i <= 10; ++i)
-            lvls[i] = { battles: 0 };
+        var level_battles = 0
+        var total_battles = 0;
         data.v.forEach(function(item) {
-            lvls[item.l].battles += item.b;
-            lvls.battles += item.b;
+            level_battles += (item.l + (item.cl == "SPG" ? 2 : 0)) * item.b;
+            total_battles += item.b;
         });
-        var TIER = 0;
-        for(var i = 1; i <= 10; ++i)
-            TIER += i * lvls[i].battles / lvls.battles;
-        if (TIER > 6)
-            TIER = 6;
+        var TIER = level_battles / total_battles;
+        var TIER_N = Math.min(6, TIER);
 
         var FRAGS = data.frg / data.b;
         var DAMAGE = data.dmg / data.b;
         var SPOT = data.spo / data.b;
         var DEF = Math.min(2.2, data.def / data.b);
-        var WINRATE = data.w / data.b;
+        var WINRATE = data.w / data.b * 100;
 
         return Math.round(
-            (1240 - 1040 / Math.pow(TIER, 0.164)) * FRAGS +
+            (1240 - 1040 / Math.pow(TIER_N, 0.164)) * FRAGS +
             DAMAGE * 530 / (184 * Math.exp(0.24 * TIER) + 130) +
             SPOT * 125 +
             DEF * 100 +
-            ((185/(0.17 + Math.exp((WINRATE - 35) * -0.134))) - 500) * 0.45 +
-            (6 - TIER) * -60) || 0;
+            ((185 / (0.17 + Math.exp((WINRATE - 35) * -0.134))) - 500) * 0.45 +
+            (6 - TIER_N) * -60) || 0;
     };
 
     var getVehicleType = function(vclass) {

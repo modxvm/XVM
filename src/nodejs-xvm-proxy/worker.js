@@ -210,7 +210,7 @@ module.exports = (function() {
                                 resultItem.e = utils.calculateEfficiency(curResult.data);
 
                                 // WN - WN rating http://forum.worldoftanks.com/index.php?/topic/184017-
-//                                resultItem.wn = utils.calculateWN(resultItem);
+                                resultItem.wn = utils.calculateWN(resultItem);
 
                                 // TWR - tourist1984 win rate (aka T-Calc)
                                 try {
