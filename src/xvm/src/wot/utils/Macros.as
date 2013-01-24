@@ -54,7 +54,7 @@ class wot.utils.Macros
             return;
 
         var pname:String = Utils.GetNormalizedPlayerName(playerName);
-        Cache.Get("_m/" + pname + "/" + data.vehicle, function() 
+        Cache.Get("_m/" + pname + "/" + data.vehicle, function()
         {
             if (!Macros.data_provider.hasOwnProperty(pname))
                 Macros.data_provider[pname] = { };
@@ -82,9 +82,9 @@ class wot.utils.Macros
             pdata["squad"] = data.squad || "";
             // {{level}}
             pdata["level"] = data.level ? String(data.level) : "";
-            // {{rlevel}} 
+            // {{rlevel}}
             pdata["rlevel"] = data.level ? Macros.rlevel[data.level - 1] : "";
-            // {{hp-max}} 
+            // {{hp-max}}
             pdata["hp-max"] = data.maxHealth ? String(data.maxHealth) : "";
             // {{turret}}
             pdata["turret"] = data.turret || "";
@@ -119,7 +119,7 @@ class wot.utils.Macros
             pdata["c:dmg-kind"] = function(o) { return o.delta ? GraphicsUtil.GetDmgKindValue(o.damageType) : ""; }
             pdata["c:dmg_kind"] = pdata["c:dmg-kind"];
             // {{c:system}}
-            pdata["c:system"] = function(o) { return "#" + Utils.padLeft(o.getCurrentSystemColor().toString(16), 6, "0"); }
+            pdata["c:system"] = function(o) { return "#" + Utils.padLeft(o.getSystemColor(o).toString(16), 6, "0"); }
 
             // {{a:hp}}
             pdata["a:hp"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, o.curHealth); }
@@ -234,7 +234,7 @@ class wot.utils.Macros
     }
 
     // PRIVATE
-    
+
     private static function modXvmDevLabel(nick:String):String
     {
         var label = Utils.GetPlayerName(nick);
@@ -267,7 +267,7 @@ class wot.utils.Macros
 
         return nick;
     }
-    
+
     //   src: ally, squadman, enemy, unknown, player (allytk, enemytk - how to detect?)
     public static function damageFlagToDamageSource(damageFlag:Number):String
     {

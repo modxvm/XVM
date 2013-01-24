@@ -83,6 +83,11 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
         return ColorsManager.getSystemColor(m_entityName, m_isDead, isBlowedUp, ColorsManager.isColorBlindMode);
     }
 
+    private static function getSystemColor(o:Object):Number
+    {
+        return ColorsManager.getSystemColor(o.entityName, o.dead, o.blowedUp, ColorsManager.isColorBlindMode);
+    }
+    
     /**
      * Text formatting functions
      */
@@ -119,7 +124,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
                 entityName:m_entityName,
                 dead:m_isDead,
                 blowedUp:isBlowedUp,
-                getCurrentSystemColor:getCurrentSystemColor
+                getSystemColor:getSystemColor
             }));
     }
 

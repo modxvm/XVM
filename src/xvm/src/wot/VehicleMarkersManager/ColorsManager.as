@@ -59,6 +59,7 @@ class wot.VehicleMarkersManager.ColorsManager
         var key: String = entityName + "_";
         key += !isDead ? "alive_" : isBlowedUp ? "blowedup_" : "dead_";
         key += isColorBlindMode ? "blind" : "normal";
+        //wot.utils.Logger.add("getSystemColor():" + key + " " + Config.s_config.colors.system[key]);
         return parseInt(Config.s_config.colors.system[key]);
     }
 

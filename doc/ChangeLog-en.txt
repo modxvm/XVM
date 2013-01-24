@@ -1,4 +1,6 @@
-﻿  * capture bar: fixed "enabled":false
+XVM-3.3.2-test2:
+  * fixed {{c:system}} macro
+  * capture bar: fixed "enabled":false
 
 XVM-3.3.2-test1:
   * capture bar: fixed number of tanks capturing for Tank Company encounter battles

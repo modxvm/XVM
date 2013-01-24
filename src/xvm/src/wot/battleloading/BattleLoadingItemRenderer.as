@@ -165,7 +165,7 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
         var team = this.team;
         vehicleField.htmlText = Cache.Get(key, function() { return Macros.Format(saved_label,
             team == Defines.TEAM_ALLY ? Config.s_config.battleLoading.formatLeft : Config.s_config.battleLoading.formatRight,
-            {}) } );
+            { }) } );
     }
 
     // update delegate
