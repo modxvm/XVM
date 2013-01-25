@@ -234,3 +234,17 @@
   "clockFormat": "H:N"          => 01:23
   "clockFormat": "Y-M-D H:N:S"  => 2012-12-31 01:23:45
   Also possible to use HTML in clock in battle.
+
+  Efficiency ranges for {{teff}}, {{e}}.
+    TEFF       E
+    0..299     1 - very bad player
+    300..499   2 - bad player
+    500..699   3 - poor
+    700..899   4 - below average
+    900..1099  5 - average
+    1100..1299 6 - above average
+    1300..1549 7 - good
+    1550..1799 8 - great
+    1800..1999 9 - master
+    2000+      E - Expert (top-100 players on this vehicle)
+  This ranges also can be used for {{eff}} and {{wn}}.
