@@ -1,3 +1,4 @@
+import wot.Minimap.ExternalDeveloperInterface;
 import wot.utils.Utils;
 import wot.utils.GlobalEventDispatcher;
 import wot.Minimap.MinimapEntry;
@@ -31,6 +32,9 @@ import wot.Minimap.model.externalProxy.MapConfig;
 
 class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
 {
+    /** Simplified minimap interface for communication with other Python or Flash mods */
+    public var externalDeveloperInterface:ExternalDeveloperInterface;
+    
     /** Used at MinimapEntry to get testUid */
     public var sync:SyncModel;
 
@@ -59,7 +63,6 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     private var isEnemyPlayersPanelReady:Boolean = false;
     private var loadComplete:Boolean = false;
     
-   
     // override
     function Minimap()
     {
@@ -81,7 +84,7 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
         if (sync && MapConfig.enabled)
            sync.updateIconsExtension();
            
-       GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ON_ENTRY_INITED));
+        GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ON_ENTRY_INITED));
     }
     
     /** Disables minimap size limitation */
@@ -130,8 +133,15 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
         
         loadComplete = isMinimapReady && isAllyPlayersPanelReady && isEnemyPlayersPanelReady;
         
-        if (loadComplete && MapConfig.enabled)
-            startExtendedProcedure();
+        if (loadComplete)
+        {
+            externalDeveloperInterface = new ExternalDeveloperInterface();
+            
+            if (MapConfig.enabled)
+            {
+                startExtendedProcedure();
+            }
+        }
     }
     
     private function startExtendedProcedure():Void
