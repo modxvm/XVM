@@ -207,6 +207,15 @@ class wot.utils.DefaultConfig
                         blur: 8,
                         strength: 4
                       },
+                      lost: {
+                        enabled: true,
+                        color: "0xFF0000",
+                        distance: 0,
+                        angle: 0,
+                        alpha: 40,
+                        blur: 8,
+                        strength: 4
+                      },
                       oneself: {
                         enabled: true,
                         color: "0xFFFFFF",

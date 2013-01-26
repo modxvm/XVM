@@ -1,8 +1,7 @@
 /**
  * Simplified minimap interface for communication with other Python or Flash mods.
  * 
- * TODO:
- * ) make forum topic
+ * http://www.koreanrandom.com/forum/topic/2601-pythonflash-coders-interface/
  */
 class wot.Minimap.ExternalDeveloperInterface
 {

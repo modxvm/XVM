@@ -13,7 +13,6 @@ import wot.Minimap.model.mapSize.MapSizeModel;
 import wot.Minimap.model.externalProxy.IconsProxy;
 import wot.Minimap.model.externalProxy.MapConfig;
 
-
 /**
  * Original Minimap manages all kinds size, border, drawing and clicking.
  * 

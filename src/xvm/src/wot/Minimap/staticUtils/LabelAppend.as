@@ -42,7 +42,7 @@ class wot.Minimap.staticUtils.LabelAppend
         }
         
         textField.htmlText = "<span class='xvm_mm'>" + getText(entryName, player, vehicleClass) + "</span>"; //getText()
-            
+        
         if (MapConfig.unitShadowEnabled(entryName))
         {
             textField.filters = [MapConfig.unitShadow(entryName)];
