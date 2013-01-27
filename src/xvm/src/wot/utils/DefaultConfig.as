@@ -156,28 +156,28 @@ class wot.utils.DefaultConfig
                 labels: {
                   nickShrink: 4,
                   vehicleclassmacro: {
-                    light: "L",
-                    medium: "M",
-                    heavy: "H",
-                    td: "T",
-                    spg: "█"
+                    light: "♦",
+                    medium: "",
+                    heavy: "",
+                    td: "▼",
+                    spg: "■"
                   },
                   units: {
                     revealedEnabled: true,
                     lostEnemyEnabled: true,
                     format: {
-                      ally:  "{{level}}",
-                      enemy: "{{level}}",
-                      squad: "{{level}} <i>{{short-nick}}</i>",
-                      lost:  "<i>{{vehicle-class}}{{level}}</i>",
-                      oneself: "<b>{{level}}</b>"
+                      ally:  "<span class='mm_a'>{{level}}</span>",
+                      enemy: "<span class='mm_e'>{{level}}</span>",
+                      squad: "<span class='mm_s'>{{level}} <i>{{short-nick}}</i></span>",
+                      lost:  "<span class='mm_lclass'>{{vehicle-class}}</span><span class='mm_l'><i>{{level}}</i></span>",
+                      oneself: "<span class='mm_o'><b>{{level}}</b></span>"
                     },
                     css: {
-                      ally:  "font-family:$FieldFont; font-size:8px; color:#BBEEBB;",
-                      enemy: "font-family:$FieldFont; font-size:8px; color:#EEBBBB;",
-                      squad: "font-family:$FieldFont; font-size:8px; color:#FFEE44;",
-                      lost:  "font-family:$FieldFont; font-size:8px; color:#EEAACC;",
-                      oneself: "font-family:$FieldFont; font-size:8px; color:#FFFFFF;"
+                      ally:  ".mm_a{font-family:$FieldFont; font-size:8px; color:#BBEEBB;}",
+                      enemy: ".mm_e{font-family:$FieldFont; font-size:8px; color:#EEBBBB;}",
+                      squad: ".mm_s{font-family:$FieldFont; font-size:8px; color:#FFEE44;}",
+                      lost:  ".mm_l{font-family:$FieldFont; font-size:8px; color:#EEAACC;} .mm_lclass{font-family:Arial; font-size:10px; color:#FFBBDD;}",
+                      oneself: ".mm_o{font-family:$FieldFont; font-size:8px; color:#FFFFFF;}"
                     },
                     shadow: {
                       ally: {

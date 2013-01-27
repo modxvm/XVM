@@ -181,28 +181,30 @@
     "labels": {                     // Текстовые надписи. Поддерживают HTML.
       "nickShrink": 4,              // Максимальные размер ника для макроса {{short-nick}}.
       "vehicleclassmacro": {        // Подстановки макроса {{vehicle-class}}
-        "light": "L",
-        "medium": "M",
-        "heavy": "H",
-        "td": "T",
-        "spg": "█"
+        "light": "♦",
+        "medium": "",
+        "heavy": "",
+        "td": "▼",
+        "spg": "■"
       },
       "units": { // Текстовые надписи для танков на миникарте.
         "revealedEnabled": true, // Выключатель добавочных текстовых полей для видимых юнитов
         "lostEnemyEnabled": true,// Выключатель текстовых полей, помечивающих последние позиции потерянных врагов
         "format": { // Формат поля.
-          "ally":  "{{level}}",
-          "enemy": "{{level}}",
-          "squad": "{{level}} <i>{{short-nick}}</i>", // Совзводный.
-          "lost":  "<i>{{vehicle-class}}{{level}}</i>", // Для потерянных с миникарты врагов
-          "oneself": "<b>{{level}}</b>" // Для своего маркера и маркера приёмника камеры наблюдения в случае смерти.
+          "ally":  "<span class='mm_a'>{{level}}</span>",
+          "enemy": "<span class='mm_e'>{{level}}</span>",
+          "squad": "<span class='mm_s'>{{level}} <i>{{short-nick}}</i></span>", // Совзводный.
+          // Для потерянных с миникарты врагов
+          "lost":  "<span class='mm_lclass'>{{vehicle-class}}</span><span class='mm_l'><i>{{level}}</i></span>",
+          // Для своего маркера и маркера приёмника камеры наблюдения в случае смерти.
+          "oneself": "<span class='mm_o'><b>{{level}}</b></span>"
         },
         "css": { // CSS стиль.
-          "ally":  "font-family:$FieldFont; font-size:8px; color:#BBEEBB;",
-          "enemy": "font-family:$FieldFont; font-size:8px; color:#EEBBBB;",
-          "squad": "font-family:$FieldFont; font-size:8px; color:#FFEE44;",
-          "lost":  "font-family:$FieldFont; font-size:8px; color:#EEAACC;",
-          "oneself": "font-family:$FieldFont; font-size:8px; color:#FFFFFF;"
+          "ally":  ".mm_a{font-family:$FieldFont; font-size:8px; color:#BBEEBB;}",
+          "enemy": ".mm_e{font-family:$FieldFont; font-size:8px; color:#EEBBBB;}",
+          "squad": ".mm_s{font-family:$FieldFont; font-size:8px; color:#FFEE44;}",
+          "lost":  ".mm_l{font-family:$FieldFont; font-size:8px; color:#EEAACC;} .mm_lclass{font-family:Arial; font-size:10px; color:#FFBBDD;}",
+          "oneself": ".mm_o{font-family:$FieldFont; font-size:8px; color:#FFFFFF;}"
         },
         "shadow": {
           "ally": {

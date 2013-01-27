@@ -28,7 +28,7 @@ class wot.Minimap.staticUtils.LabelAppend
         textField.selectable = false;
         
         var style:TextField.StyleSheet = new TextField.StyleSheet();
-        style.parseCSS(getCSS(entryName));
+        style.parseCSS(MapConfig.unitLabelCss(entryName));
         textField.styleSheet = style;
         
         /**
@@ -41,7 +41,7 @@ class wot.Minimap.staticUtils.LabelAppend
             textField._yscale = scale;
         }
         
-        textField.htmlText = "<span class='xvm_mm'>" + getText(entryName, player, vehicleClass) + "</span>"; //getText()
+        textField.htmlText = getText(entryName, player, vehicleClass);
         
         if (MapConfig.unitShadowEnabled(entryName))
         {
@@ -52,15 +52,6 @@ class wot.Minimap.staticUtils.LabelAppend
     }
     
     // -- Private
-    
-    private static function getCSS(entryName:String):String
-    {
-        var style:String = MapConfig.unitLabelCss(entryName);
-
-        style = ".xvm_mm{" + style + "}";
-
-        return style;
-    }
     
     private static function getText(entryName:String, player:Player, vehicleClass:String):String
     {
