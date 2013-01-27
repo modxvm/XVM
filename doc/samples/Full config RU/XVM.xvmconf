@@ -264,7 +264,7 @@
           "ally":  100,
           "enemy": 100,
           "squad": 100,
-          "lost":  80,
+          "lost":  75,
           "oneself": 100
         }
       },

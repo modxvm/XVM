@@ -48,6 +48,8 @@ class wot.Minimap.staticUtils.LabelAppend
             textField.filters = [MapConfig.unitShadow(entryName)];
         }
         
+        textField._alpha = MapConfig.unitLabelAlpha(entryName);
+        
         return textField;
     }
     

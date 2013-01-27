@@ -3,7 +3,6 @@ import wot.Minimap.MinimapEntry;
 import wot.utils.GlobalEventDispatcher;
 import wot.Minimap.MinimapEvent;
 import wot.Minimap.staticUtils.LabelAppend;
-import wot.Minimap.model.externalProxy.MapConfig;
 import wot.Minimap.model.externalProxy.IconsProxy;
 
 class wot.Minimap.LostMarkers
@@ -52,7 +51,6 @@ class wot.Minimap.LostMarkers
         {
             /* New TextField is attached to Minimap at this moment */
             var tf:TextField = createLabel(lost[i], scale);
-            tf._alpha = MapConfig.unitLabelAlpha("lost");
             
             /**
              * Pointer to its address is tracked to handle proper remove
