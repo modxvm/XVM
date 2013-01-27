@@ -84,6 +84,12 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
            sync.updateIconsExtension();
            
         GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ON_ENTRY_INITED));
+        
+        /**
+         * Camera object reconstruction occurs sometimes and all its previous props are lost.
+         * Check if alpha is set.
+         */
+        setCameraAlpha();
     }
     
     /** Disables minimap size limitation */
@@ -188,8 +194,7 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
          * Looks like green highlighted corner.
          * Does not affect attached shapes.
          */
-        var camera:MinimapEntry = IconsProxy.getCamera();
-        camera._alpha = MapConfig.cameraAlpha;
+        setCameraAlpha();
         
         /**
          * Defines real map size in meters.
@@ -216,6 +221,15 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
             {
                 lines = new Lines(mapSizeModel.getSide() * 10); /** Total map square distance in meters  */
             }
+        }
+    }
+    
+    private function setCameraAlpha():Void
+    {
+        var camera:MinimapEntry = IconsProxy.getCamera();
+        if (camera._alpha != MapConfig.cameraAlpha)
+        {
+            camera._alpha = MapConfig.cameraAlpha
         }
     }
 }

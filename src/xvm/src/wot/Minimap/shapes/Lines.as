@@ -104,7 +104,7 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
     {
         /**
          * Check if camera has lines attached.
-         * Camera entry could be reinitialized.
+         * Camera object reconstruction occurs sometimes and all its previous props are lost.
          * Reattach lines in that case.
          */
         var cam:Object = IconsProxy.getCamera();
