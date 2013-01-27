@@ -160,7 +160,8 @@ class wot.utils.DefaultConfig
                     medium: "",
                     heavy: "",
                     td: "▼",
-                    spg: "■"
+                    spg: "■",
+                    superh: "s"
                   },
                   units: {
                     revealedEnabled: true,

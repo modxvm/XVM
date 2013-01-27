@@ -78,6 +78,9 @@ class wot.Minimap.staticUtils.MinimapMacro
                 case MinimapEntry.MINIMAP_ENTRY_VEH_CLASS_SPG:
                     format = formatArr.join(MapConfig.spgSymbol);
                     break;
+                case MinimapEntry.MINIMAP_ENTRY_VEH_CLASS_SUPER:
+                    format = formatArr.join(MapConfig.superSymbol);
+                    break;
             }
         }
         

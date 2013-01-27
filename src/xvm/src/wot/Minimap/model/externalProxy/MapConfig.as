@@ -30,6 +30,8 @@ class wot.Minimap.model.externalProxy.MapConfig
                 return vehicleclassmacro.td;    }
             public static function get spgSymbol():String    {
                 return vehicleclassmacro.spg;   }
+            public static function get superSymbol():String    {
+                return vehicleclassmacro.superh;   }
         /** Units */
             public static function get revealedEnabled():Boolean    {
                 return labels.units.revealedEnabled;    }

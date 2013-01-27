@@ -185,7 +185,8 @@
         "medium": "",
         "heavy": "",
         "td": "▼",
-        "spg": "■"
+        "spg": "■",
+        "superh": "s" // superHeavyTank - gui_settings.xml
       },
       "units": { // Текстовые надписи для танков на миникарте.
         "revealedEnabled": true, // Выключатель добавочных текстовых полей для видимых юнитов

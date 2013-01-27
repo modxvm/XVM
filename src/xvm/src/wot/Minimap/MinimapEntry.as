@@ -30,6 +30,7 @@ class wot.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
     public static var MINIMAP_ENTRY_VEH_CLASS_HEAVY:String = "heavyTank";
     public static var MINIMAP_ENTRY_VEH_CLASS_TD:String = "AT-SPG";
     public static var MINIMAP_ENTRY_VEH_CLASS_SPG:String = "SPG";
+    public static var MINIMAP_ENTRY_VEH_CLASS_SUPER:String = "superheavyTank";
     
     /**
      * Subject of PlayersPanel <-> Minimap syncronization.
