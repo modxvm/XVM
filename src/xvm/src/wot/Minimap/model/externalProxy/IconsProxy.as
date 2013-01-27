@@ -71,18 +71,21 @@ class wot.Minimap.model.externalProxy.IconsProxy
     public static function getCamera():MinimapEntry
     {
         var minimapEntries:Array = getMinimapEntries();
+        var self:MinimapEntry = getSelf();        
         
-        for (var i:Number = 0; i < minimapEntries.length; i++)
+        for (var i:Number = minimapEntries.length - 1; i >= 0 ; i--)
         {
-            var entry:MinimapEntry = minimapEntries[i];
+            var entry:MinimapEntry = minimapEntries[i]; 
             
             /**
              * Camera does not have any distinguishable fields.
-             * Cameras coordinates are the same relative to player himself.
-             * Warning! Size values may change with scale. TODO: check.
+             * 
+             * Camera is always inited with MinimapEntry0 _name.
+             * 
+             * Artillery camera has _rotation == 0
+             * Attached camera has _rotation != 0
              */
-            var self:MinimapEntry = getSelf();
-            if (self._x == entry._x && self._y == entry._y && !entry.selfIcon)
+            if (entry._name == "MinimapEntry0" && entry._rotation)
             {
                 return entry;
             }
