@@ -232,8 +232,8 @@ class wot.utils.StatLoader
         stat.te = null;
         stat.teff = null;
         // skip tb less then 10, because of WG bug:
-        // http://www.koreanrandom.com/forum/topic/1643-per-vehicle-efficiency-/page-19#entry26189
-        if (stat.tb == null || stat.tb < 10)
+        // http://www.koreanrandom.com/forum/topic/1643-/page-19#entry26189
+        if (stat.tb == null || stat.tl == null || stat.tb < 10 + stat.tl * 2)
             return stat;
 
         stat.tdb = stat.td == null || stat.td < 0 ? null : Math.round(stat.td / stat.tb);
