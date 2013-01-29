@@ -1,11 +1,12 @@
 #!/bin/bash
 
 port=27017
-limit=50
+limit=2
 limitHi=50
 limitLo=1
 
 url="http://127.0.0.1:1334/?"
+#url="http://proxy.bulychev.net:1303/?"
 fn=/tmp/xvm-db-tools.tmp
 
 ###
@@ -14,11 +15,11 @@ cmd=$1
 
 if [ "$1" = "expired" ]; then
 limitRows=1000000
-limit=100
+#limit=100
 limitHi=100
     # expired
     echo "db.missed.find({missed:false}).limit($limitRows).forEach(function(x){print(x._id);})" | \
-	mongo --port $port --quiet xvm | grep -v "bye" | \
+	mongo --port $port --quiet xvm2 | grep -v "bye" | \
 	sort -n > $fn
 #	sort -n -r > $fn
 elif [ "$1" = "checkcache" ]; then
@@ -27,19 +28,19 @@ limit=100
 limitHi=100
     # expired
     echo "db.missed.find({}).limit($limitRows).forEach(function(x){print(x._id);})" | \
-	mongo --port $port --quiet xvm | grep -v "bye" | \
+	mongo --port $port --quiet xvm2 | grep -v "bye" | \
 	sort -n > $fn
 #	sort -n -r > $fn
 elif [ "$1" = "missed" ]; then
     # missed
     echo "db.missed.find({missed:true}).forEach(function(x){print(x._id);})" | \
-	mongo --port $port --quiet xvm | grep -v "bye" | \
+	mongo --port $port --quiet xvm2 | grep -v "bye" | \
 	sort -n > $fn
 #	sort -n -r > $fn
 elif [ "$1" = "query" ]; then
     # query
     shift
-    echo "$*" | mongo --port $port --quiet xvm | grep -v "bye" | sort -n > $fn
+    echo "$*" | mongo --port $port --quiet xvm2 | grep -v "bye" | sort -n > $fn
     exit
 else
     echo "Unknown command: $1"
@@ -52,8 +53,11 @@ last_limit_update=`date +%s`
 
 update()
 {
-    local arr id st ids_str="" rmids="" fail=0 i cnt
+    local arr id st ids_str="" rmids="" fail=0 i cnt st_ok st_err
     declare -A statuses
+
+    st_ok=0
+    st_err=0
 
     cnt=0
     for i in ${ids[@]}; do
@@ -92,6 +96,7 @@ update()
 	statuses[$st]=$((${statuses[$st]} + 1))
 	case "$st" in
 	    cache|ok|bad_id|closed|not_init)
+		st_ok=1
 		[ "$rmids" != "" ] && rmids="$rmids,"
 		rmids="$rmids$id"
 		unset ids[$id]
@@ -99,11 +104,13 @@ update()
 	    api_error)
 		unset ids[$id]
 		;;
-	    fail|expired|error)
-		echo -n "$st:$id "
+	    wait|max_conn|error|timeout|503|parse)
+		st_err=1
 		[ "$cmd" = "checkcache" ] && unset ids[$id] || slp=1
 		;;
-	    wait|max_conn|fail)
+	    fail)
+		st_err=1
+		echo -n "$st:$id "
 		[ "$cmd" = "checkcache" ] && unset ids[$id] || slp=1
 		;;
 	    *)
@@ -118,7 +125,7 @@ update()
     IFS=$OIFS
 
     if [ "$rmids" != "" ]; then
-	echo "db.missed.remove({_id: { \$in: [ $rmids ] }})" | mongo --port $port --quiet xvm >/dev/null
+	echo "db.missed.remove({_id: { \$in: [ $rmids ] }})" | mongo --port $port --quiet xvm2 >/dev/null
     fi
 
     for i in ${!statuses[@]}; do
@@ -126,17 +133,12 @@ update()
     done
     echo
     if [ "$cmd" != "checkcache" ]; then
-        if [ "${statuses[wait]}" != "" ]; then
+        if [ "$st_err" = "1" ]; then
 	    if [ $((`date +%s` - $last_limit_update)) -ge 2 ]; then
 		[ $limit -gt $limitLo ] && limit=$(($limit-1))
 		last_limit_update=`date +%s`
 	    fi
-	elif [ "${statuses[max_conn]}" != "" ]; then
-	    if [ $((`date +%s` - $last_limit_update)) -ge 2 ]; then
-		[ $limit -gt $limitLo ] && limit=$(($limit-1))
-		last_limit_update=`date +%s`
-	    fi
-	elif [ "${statuses[ok]}" != "" -o "${statuses[bad_id]}" != "" ]; then
+	elif [ "$st_ok" = "1" ]; then
 	    [ $limit -lt $limitHi ] && limit=$(($limit+1))
 	    last_limit_update=`date +%s`
 	fi
