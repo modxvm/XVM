@@ -37,6 +37,7 @@ var usageStat = {
     updated: 0,
     missed: 0,
     updatesFailed: 0,
+    max_conn: 0,
     mongorq: 0,
     mongorq_max: settings.dbMaxConnections * settings.numNodes,
     connections: []
@@ -59,6 +60,8 @@ var processWorkerMessage = function(msg) {
             usageStat.missed += msg.missed;
         if(msg.updatesFailed)
             usageStat.updatesFailed += msg.updatesFailed;
+        if(msg.max_conn)
+            usageStat.max_conn += msg.max_conn;
         if(msg.mongorq)
             usageStat.mongorq += msg.mongorq;
         if(msg.mongorq_max) {
@@ -105,7 +108,7 @@ var showUsageStat = function() {
     var d = (uptime / (60 * 60 * 24)).toFixed();
     var h = lpad(((uptime / 3600) % 24).toFixed(), "0", 2);
     var m = lpad(((uptime / 60) % 60).toFixed(), "0", 2);
-    utils.log("> uptime  requests    rq/s   players  pl/s  cached updated  missed updfail mongorq");
+    utils.log("> uptime  requests     rq/s   players  pl/s  cached updated  missed updfail max_conn mongorq");
 
     var s = (d > 9 ? "" : ">");
     // uptime
@@ -113,7 +116,7 @@ var showUsageStat = function() {
     // requests
     s += lpad(usageStat.requests, " ", 10) + " ";
     // rq/s
-    s += lpad((usageStat.requests_current / settings.usageStatShowPeriod * 1000).toFixed() + "(" + (usageStat.requests / uptime).toFixed() + ")", " ", 7);
+    s += lpad((usageStat.requests_current / settings.usageStatShowPeriod * 1000).toFixed() + "(" + (usageStat.requests / uptime).toFixed() + ")", " ", 8);
     // players
     s += lpad(usageStat.players, " ", 10) + " ";
     // pl/s
@@ -126,6 +129,8 @@ var showUsageStat = function() {
     s += lpad((usageStat.missed / usageStat.players * 100).toFixed(2) + "%", " ", 8);
     // updfail
     s += lpad((usageStat.updatesFailed / usageStat.players * 100).toFixed(2) + "%", " ", 8);
+    // max_conn
+    s += lpad((usageStat.max_conn / usageStat.players * 100).toFixed(2) + "%", " ", 9);
     // mongorq
     s += lpad(usageStat.mongorq + "/" + usageStat.mongorq_max, " ", 8);
     utils.log(s);

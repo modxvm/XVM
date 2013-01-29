@@ -30,6 +30,7 @@ exports.processRemotes = function(cached, update, response, times) {
                 pdata.cache = {_id:id,st:srv.error};
             cached[id] = pdata.cache;
             delete update[id];
+            process.send({usage:1, max_conn:1});
             return;
         }
 
@@ -62,7 +63,8 @@ var getFreeConnection = function(servers) {
                 srv.avail = 0;
                 continue;
             }
-            utils.log("INFO:  [" + sst.host + "] resumed");
+            if (settings.lastErrorTtl > 1000)
+                utils.log("INFO:  [" + sst.host + "] resumed");
             sst.lastErrorDate = null;
             sst.error_shown = false;
         }
@@ -149,9 +151,14 @@ var makeSingleRequest = function(id, server, callback) {
             try {
                 var result = JSON.parse(responseData);
             } catch(e) {
-                var str = responseData.replace(/[ \t\n\r\x00-\x1F]/g, "");
-                var err = "[" + server.host + "] JSON.parse: id=" + id + " l=" + responseData.length +
-                    ", d=\"" + str.substr(0, 45) + "~" + str.substr(str.length - 11, 10) + "\"";
+                var str;
+                if (responseData[0] != "{")
+                    str = "(binary)";
+                else {
+                    str = responseData.replace(/[ \t\n\r\x00-\x1F]/g, "");
+                    str = str.substr(0, 45) + "~" + str.substr(str.length - 11, 10);
+                }
+                var err = "[" + server.host + "] JSON.parse: id=" + id + " l=" + responseData.length + ", d=\"" + str + "\"";
                 onRequestDone(server, err);
 //                utils.debug(err);
                 callback(null, { __status: "parse" });
@@ -331,7 +338,7 @@ var _cacheToResult = function(item)
         wn: item.wn,
         twr: item.twr
     }
-    if (item.vname)
+    if (item.vname && item.v)
         res.v = item.v.name ? item.v : utils.filterVehicleData(item, item.vname);
     return res;
 }

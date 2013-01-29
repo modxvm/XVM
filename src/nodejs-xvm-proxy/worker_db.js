@@ -66,8 +66,8 @@ exports.updatePlayersData = function(id, data) {
     players.update({ _id: id }, data, { upsert: true });
 }
 
-exports.insertMissed = function(id, missed) {
-    missed.insert({ _id: item.id, missed: missed });
+exports.insertMissed = function(id, miss) {
+    missed.insert({ _id: id, missed: miss });
 }
 
 exports.removeMissed = function(id) {
