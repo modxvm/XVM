@@ -105,10 +105,10 @@ var onOpen = function(error, client) {
         poolSize: settings.dbMaxConnections2
     }
     var db = new _mongo.Db(settings.dbName2, new _mongo.Server(settings.mongoServer, settings.mongoPort, options), { w:0 });
-    db.open(function() {
+    db.open(function(error2, client2) {
         utils.log("MongoDB connected: " + settings.dbName2);
-        missed = new _mongo.Collection(client, settings.missedCollectionName);
-        users = new _mongo.Collection(client, settings.usersCollectionName);
+        missed = new _mongo.Collection(client2, settings.missedCollectionName);
+        users = new _mongo.Collection(client2, settings.usersCollectionName);
         _open_callback();
     });
 }
