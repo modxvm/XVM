@@ -43,6 +43,9 @@ var usageStat = {
     connections: []
 }
 
+var _lastLogMsg = "";
+var _skipLogMsgCounter = 0;
+
 var processWorkerMessage = function(msg) {
 //utils.log(JSON.stringify(msg));
     if(msg.usage == 1) {
@@ -83,6 +86,16 @@ var processWorkerMessage = function(msg) {
             if (!usageStat.connections[msg.serverId])
                 usageStat.connections[msg.serverId] = {cur:0, max:settings.servers[msg.serverId].maxconn, total:0, fail:0};
             usageStat.connections[msg.serverId].max += msg.maxConnections;
+        }
+    } else if(msg.log == 1) {
+        if (msg.msg != _lastLogMsg) {
+            if (_skipLogMsgCounter > 0)
+                utils.log("(skipped " + _skipLogMsgCounter + " message" + (_skipLogMsgCounter == 1 ? "" : "s") +")");
+            utils.log(msg.msg);
+            _lastLogMsg = msg.msg;
+            _skipLogMsgCounter = 0;
+        } else {
+            _skipLogMsgCounter++;
         }
     } else if(msg.cmd == "cmd") {
         //w.send({ chat: 'Ok worker, Master got the message! Over and out!' });

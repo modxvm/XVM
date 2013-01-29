@@ -158,7 +158,7 @@ var makeSingleRequest = function(id, server, callback) {
                     str = responseData.replace(/[ \t\n\r\x00-\x1F]/g, "");
                     str = str.substr(0, 45) + "~" + str.substr(str.length - 11, 10);
                 }
-                var err = "[" + server.host + "] JSON.parse: id=" + id + " l=" + responseData.length + ", d=\"" + str + "\"";
+                var err = "[" + server.host + "] JSON.parse:  l=" + responseData.length + ", d=\"" + str + "\"";
                 onRequestDone(server, err);
 //                utils.debug(err);
                 callback(null, { __status: "parse" });
@@ -199,7 +199,8 @@ var onRequestDone = function(server, error) {
         sst.lastErrorDate = now;
         if(!sst.error_shown) {
             sst.error_shown = true;
-            utils.log("ERROR: " + error);
+            //utils.log("ERROR: " + error);
+            process.send({log:1, msg:"ERROR: "+error});
         }
     }
 }
