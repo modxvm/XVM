@@ -5,7 +5,6 @@ exports.settings = {
     numNodes: numNodes,
     updateMissed: false,
     updateUsers: false,
-    numNodes: numNodes,
     host: "127.0.0.1",
     port: 1333,
     maxSockets: Math.floor(1000 / numNodes), // per client
