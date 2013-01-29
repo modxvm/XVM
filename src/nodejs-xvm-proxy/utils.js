@@ -57,7 +57,7 @@ module.exports = (function()
         var level_battles = 0
         var total_battles = 0;
         data.v.forEach(function(item) {
-            level_battles += (item.l + (item.cl == "SPG" ? 2 : 0)) * item.b;
+            level_battles += item.l * item.b;
             total_battles += item.b;
         });
         var TIER = level_battles / total_battles;

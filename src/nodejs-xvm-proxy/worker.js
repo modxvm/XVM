@@ -77,8 +77,12 @@ module.exports = (function() {
         var options = {
             host: host,
             port: 80,
-            path: "/uc/accounts/" + id + "/api/" + settings.wotApiVersion + "/?source_token=Intellect_Soft-WoT_Mobile-unofficial_stats"
-            //      , agent: agent
+            path: "/uc/accounts/" + id + "/api/" + settings.wotApiVersion + "/?source_token=Intellect_Soft-WoT_Mobile-unofficial_stats",
+            //      agent: agent,
+            headers: {
+//                'connection': 'keep-alive'
+                'connection': 'close'
+            }
         };
 
         var request = http.get(options, function(res) {
@@ -94,8 +98,8 @@ module.exports = (function() {
 //                utils.debug("responseData.length = " + responseData.length);
                     callback(null, result);
                 } catch(e) {
-                    utils.debug("JSON.parse error: id=" + id + " length=" + responseData.length +
-                        ", data=" + responseData.substr(0, 75).replace(/[\n\r\x00-\x1F]/g, ""));
+                    utils.debug("[" + res.statusCode + "] JSON.parse error: id=" + id + " length=" + responseData.length +
+                        ", data=" + responseData.substr(0, 70).replace(/[\n\r\x00-\x1F]/g, ""));
                     callback(null, { __code: "error", __error: "JSON.parse error" });
                 }
             });
@@ -104,8 +108,6 @@ module.exports = (function() {
             clearTimeout(reqTimeout);
             callback(null, { __code: "error", __error: "Http error: " + e });
         });
-
-        request.shouldKeepAlive = false;
     };
 
     var processRemotes = function(inCache, forUpdate, forUpdateVNames, request, response, times) {
@@ -671,12 +673,22 @@ try {
             }
             utils.log("MongoDB Connected");
             collection = new mongo.Collection(client, settings.collectionName);
-            missed_collection = new mongo.Collection(client, settings.missedCollectionName);
-            users_collection = new mongo.Collection(client, settings.usersCollectionName);
 
-            http.createServer(processRequest).listen(settings.port, settings.host);
-            utils.log("Server running at http://" + settings.host + ":" + settings.port + "/");
+            var db2 = new mongo.Db(settings.dbName2, new mongo.Server(settings.mongoServer, settings.mongoPort, mongoOptions), {w:0})
+            db2.open(function(error, client) {
+                if(error) {
+                    utils.log("DB2 connection error!");
+                    return;
+                }
+                utils.log("MongoDB2 Connected");
+                missed_collection = new mongo.Collection(client, settings.missedCollectionName);
+                users_collection = new mongo.Collection(client, settings.usersCollectionName);
+
+                http.createServer(processRequest).listen(settings.port, settings.host);
+                utils.log("Server running at http://" + settings.host + ":" + settings.port + "/");
+            });
         });
+
     };
 
     // exports
