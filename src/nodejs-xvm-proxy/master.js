@@ -43,7 +43,7 @@ var usageStat = {
 }
 
 var processWorkerMessage = function(msg) {
-    utils.log(JSON.stringify(msg));
+//utils.log(JSON.stringify(msg));
     if(msg.usage == 1) {
         if(msg.requests) {
             usageStat.requests += msg.requests;
@@ -67,12 +67,18 @@ var processWorkerMessage = function(msg) {
         }
         if(msg.connections) {
             if (!usageStat.connections[msg.serverId])
-                usageStat.connections[msg.serverId] = {cur:0, max:settings.servers[msg.serverId].maxconn};
+                usageStat.connections[msg.serverId] = {cur:0, max:settings.servers[msg.serverId].maxconn, total:0, fail:0};
             usageStat.connections[msg.serverId].cur += msg.connections;
+            //if (usageStat.connections[msg.serverId].cur < 0)
+            //    utils.log("ERROR: conn<0 " + JSON.stringify(msg));
+            if (msg.connections > 0)
+                usageStat.connections[msg.serverId].total += msg.connections;
+            if (msg.fail)
+                usageStat.connections[msg.serverId].fail -= msg.connections;
         }
         if(msg.maxConnections) {
             if (!usageStat.connections[msg.serverId])
-                usageStat.connections[msg.serverId] = {cur:0, max:settings.servers[msg.serverId].maxconn};
+                usageStat.connections[msg.serverId] = {cur:0, max:settings.servers[msg.serverId].maxconn, total:0, fail:0};
             usageStat.connections[msg.serverId].max += msg.maxConnections;
         }
     } else if(msg.cmd == "cmd") {
@@ -124,12 +130,19 @@ var showUsageStat = function() {
     s += lpad(usageStat.mongorq + "/" + usageStat.mongorq_max, " ", 8);
     utils.log(s);
 
-    utils.log("> connections:             cur max");
+    utils.log("> connections:             cur max    total     fail");
     //        "  api.worldoftanks-sea.com   0  52"
     for (var i = 0; i < usageStat.connections.length; ++i) {
         var cs = usageStat.connections[i];
-        if (cs)
-            utils.log("  " + rpad(settings.servers[i].host, " ", 24) + " " + lpad(cs.cur, " ", 3) + " " + lpad(cs.max, " ", 3));
+        if (cs) {
+            utils.log("  " +
+                rpad(settings.servers[i].host, " ", 24) + " " +
+                lpad(cs.cur, " ", 3) + " " +
+                lpad(cs.max, " ", 3) + " " +
+                lpad(cs.total, " ", 8) + " " +
+                lpad(cs.fail, " ", 8) + " " +
+                lpad((cs.fail / cs.total * 100).toFixed(), " ", 2) + "%");
+        }
     }
 
     usageStat.requests_current = 0;

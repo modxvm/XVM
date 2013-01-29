@@ -11,7 +11,7 @@ exports.processRemotes = function(cached, update, response, times) {
 
     var urls = { };
 
-utils.debug("processRemotes()");
+//utils.debug("processRemotes()");
 
     // FIXIT: why this don't work?
     //    for (var id in update) ...
@@ -28,6 +28,8 @@ utils.debug("processRemotes()");
                 pdata.cache.st = srv.error;
             else
                 pdata.cache = {_id:id,st:srv.error};
+            cached[id] = pdata.cache;
+            delete update[id];
             return;
         }
 
@@ -60,8 +62,8 @@ var getFreeConnection = function(servers) {
                 srv.avail = 0;
                 continue;
             }
-            utils.debug("resuming server: " + sst.host);
-            sst.lastError = null;
+            utils.log("INFO:  [" + sst.host + "] resumed");
+            sst.lastErrorDate = null;
             sst.error_shown = false;
         }
 
@@ -87,7 +89,7 @@ var getFreeConnection = function(servers) {
         n -= srv.avail;
     }
 
-    utils.log("internal error");
+    utils.log("getFreeConnection(): internal error");
     return {error:"fail"};
 }
 
@@ -109,7 +111,9 @@ var makeSingleRequest = function(id, server, callback) {
         }
     }
 
+    var done = false;
     var reqTimeout = setTimeout(function() {
+        done = true;
         var err = "[" + server.host + "] Http timeout: " + server.timeout;
         onRequestDone(server, err);
 //        utils.debug(err);
@@ -117,10 +121,12 @@ var makeSingleRequest = function(id, server, callback) {
     }, server.timeout);
 
 //callback(null, { __status: "debug" }); return;
-utils.debug("START: " + id);
+//utils.debug("START: " + id);
     http.get(options, function(res) {
         if (res.statusCode != 200) {
             clearTimeout(reqTimeout);
+            if (done)
+                return;
             var err = "[" + server.host + "] Http error: bad status code: " + res.statusCode;
             onRequestDone(server, err);
             //utils.debug(err);
@@ -138,6 +144,8 @@ utils.debug("START: " + id);
         });
         res.on("end", function() {
             clearTimeout(reqTimeout);
+            if (done)
+                return;
             try {
                 var result = JSON.parse(responseData);
             } catch(e) {
@@ -151,11 +159,14 @@ utils.debug("START: " + id);
             }
             //utils.debug("responseData.length = " + responseData.length);
             onRequestDone(server);
-            utils.debug("OK: " + id);
+//            utils.debug("DONE: " + id);
             callback(null, result);
         });
     }).on("error", function(e) {
         clearTimeout(reqTimeout);
+        if (done)
+            return;
+        done = true;
         var err = "[" + server.host + "] Http error: " + e
         onRequestDone(server, err);
 //        utils.debug(err);
@@ -167,7 +178,7 @@ var onRequestDone = function(server, error) {
     var now = new Date();
     var sst = status.serverStatus[server.id];
     sst.connections--;
-    process.send({usage:1, serverId:server.id, connections:-1});
+    process.send({usage:1, serverId:server.id, connections:-1, fail:error?true:false});
 
     // HTTP connections balancer
     if(!sst.lastMaxConnectionUpdate || (now - sst.lastMaxConnectionUpdate) > (error ? 1000 : 5000)) {
@@ -178,9 +189,9 @@ var onRequestDone = function(server, error) {
     }
 
     if (error) {
-        sst.lastError = now;
+        sst.lastErrorDate = now;
         if(!sst.error_shown) {
-//            sst.error_shown = true;
+            sst.error_shown = true;
             utils.log("ERROR: " + error);
         }
     }
@@ -213,7 +224,7 @@ var asyncCallback = function(err, results, cached, update, response, times) {
     for (var id in update) {
         var item = results[id];
         if (!item) {
-            utils.log("internal error in worker_get.js:asyncCallback(): !item, id=" + id + ", err= " + err + ", results: " + JSON.stringify(results));
+            utils.log("internal error in worker_get.js:asyncCallback(): !item, id=" + id + ", err= " + err);
             result.players.push({id:id, status:"fail", date:now});
             continue;
         }
@@ -292,7 +303,7 @@ var asyncCallback = function(err, results, cached, update, response, times) {
 
     _printDebugInfo(result.players, times);
 
-utils.debug("response.end()");
+//utils.debug("response.end()");
 
     // return response to client
     response.end(JSON.stringify(result));
