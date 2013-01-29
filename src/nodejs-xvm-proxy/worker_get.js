@@ -403,7 +403,7 @@ var _prepareFallbackRes = function(item, id, status) {
     if (!item.cache) {
         process.send({usage:1, missed:1});
         if (settings.updateMissed == true)
-            db.insertMissed(item.id, true);
+            db.insertMissed(id, true);
         return {id:id, date:new Date(), status:status};
     }
 
