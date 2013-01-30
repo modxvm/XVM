@@ -40,7 +40,7 @@ module.exports = (function() {
             var vdata = data.v[i];
             log += vdata.rate.toFixed(2) + "\t" + 
                 vdata.rate_plus.toFixed(2) + "\t" + 
-                vdata.link.acc.toFixed(2) + "\t" + 
+                vdata.acc.toFixed(2) + "\t" + 
                 damage(vdata).toFixed(2) + "\t" + 
                 vdata.name + "\n";
         }
@@ -66,7 +66,11 @@ module.exports = (function() {
         var indent = Array(step).join("  ");
 
         var log = indent + "Begin for " + vdata.name + " b=" + vdata.b + " r=" + vdata.rate.toFixed(2) +
-            " acc=" + vdata.link.acc + " dmg=" + damage(vdata).toFixed(2) + "\n";
+            " acc=" + vdata.acc.toFixed(2) + " dmg=" + damage(vdata).toFixed(2) + "\n";
+
+        // do not cut rate lower 45%
+        if (vdata.rate < 45)
+            vdata.rate_plus = vdata.rate;
 
         // check for already actualized data
         if (vdata.rate_plus) {
@@ -79,12 +83,19 @@ module.exports = (function() {
 
         var m = search(data, vdata);
 
+        var c = cutter(vdata);
+        var c0 = vdata.same[0] ? cutter(vdata.same[0].vdata) : 0;
+        var c1 = vdata.same[1] ? cutter(vdata.same[1].vdata) : 0;
+        var c2 = vdata.same[2] ? cutter(vdata.same[2].vdata) : 0;
+        var cd = m ? (c0 + c1 + c2) / m : 0;
+
+        if (m && vdata.b < 300 && cd > c) {
+            vdata.rate += Math.min(5 - vdata.b / 100, cd - c);
+            log += indent + "  Rate of " + vdata.name + " increased to " + vdata.rate.toFixed(2) + "\n";
+        }
+
         // if trusted tank or not worse then similar tanks
-        if ((damage(vdata) * (vdata.l + 10) + vdata.link.acc * (21 - vdata.l)) / 31 > 1 - 0.1 * step ||
-            ((vdata.same[0] ? cutter(vdata.same[0].vdata) : 0) +
-             (vdata.same[1] ? cutter(vdata.same[1].vdata) : 0) +
-             (vdata.same[2] ? cutter(vdata.same[2].vdata) : 0)) / m > vdata.rate
-        ) {
+        if ((damage(vdata) * (vdata.l + 10) + vdata.acc * (21 - vdata.l)) / 31 > 1 - 0.1 * step || (cd > vdata.rate)) {
             vdata.rate_plus = rate;
             log += indent + "Return cutted rate for " + vdata.name + ": " + vdata.rate_plus.toFixed(2) + "\n";
             return log;
@@ -118,7 +129,7 @@ module.exports = (function() {
                     rate += vd.rate_plus;
                     n++;
                 }
-                else if ((damage(vdata) * (vdata.l + 10) + vdata.link.acc * (21 - vdata.l)) / 31 > 1 - 0.1 * step) {
+                else if ((damage(vdata) * (vdata.l + 10) + vdata.acc * (21 - vdata.l)) / 31 > 1 - 0.1 * step) {
                     // if not calculated deeper and trunt their stat - also summ, but cut before
                     var cr = cutter(vdata);
                     rate += cr;
@@ -169,7 +180,7 @@ module.exports = (function() {
         if (!vdata)
             return 0;
         if (vdata.__cutter == undefined) {
-            var rate = (vdata.rate - 45) * (damage(vdata) * (vdata.l + 10) + vdata.link.acc * (21 - vdata.l)) / 31 + 45;
+            var rate = (vdata.rate - 45) * (damage(vdata) * (vdata.l + 10) + vdata.acc * (21 - vdata.l)) / 31 + 45;
             vdata.__cutter = (rate > vdata.rate) ? vdata.rate : rate;
         }
         return vdata.__cutter;
@@ -195,7 +206,7 @@ module.exports = (function() {
             same += 1 - Math.abs(vdata.link.speed - vd.link.speed) / (vdata.link.speed + vd.link.speed) * 2;
             same += 1 - Math.abs(vdata.link.turn - vd.link.turn) / (vdata.link.turn + vd.link.turn) * 2;
             same += 1 - Math.abs(vdata.link.see - vd.link.see) / (vdata.link.see + vd.link.see) * 2;
-            same += vdata.link.acc;
+            same += vdata.acc;
             same = same / 6;
 
             sames.push({ same: same, vdata: vd });

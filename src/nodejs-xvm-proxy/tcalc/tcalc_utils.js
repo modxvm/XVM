@@ -10,18 +10,36 @@ module.exports = (function() {
         var vd = []; // filtered array of vehicles data
         for (var i in data.v) {
             var vdata = data.v[i];
+
+            var vname = vdata.name.toLowerCase();
+
+            if (vname == "a-20" || vname == "m103") {
+                log += "WARNING: Skip dubious tank: " + vdata.name + "\n";
+                continue;
+            }
+
             if (!vdata.b || vdata.b <= def.MIN_VEHICLE_BATTLES)
                 continue;
-            vdata.link = tcalc_base.tanks[vdata.name.toLowerCase()];
+
+            vdata.link = tcalc_base.tanks[vname];
             vdata.rate = vdata.w / vdata.b * 100;
             if (!vdata.link) {
                 log += "WARNING: No data in base.csv for " + vdata.name +
                     " (b=" + vdata.b + " r=" + vdata.rate.toFixed(2) + "). This tank is skipped.\n";
                 continue;
             }
+            // fix acc in depend of count of battles
+            vdata.acc = vdata.link.acc * (1 - 1 / Math.sqrt(vdata.b));
+
             data.battles += vdata.b;
             vdata.damage = (vdata.d || 0) / vdata.b;
             vd.push(vdata);
+
+            // limit of calculated tanks
+            if (vd.length >= 30) {
+                log += "Tanks limit is reached: 30. Skip other tanks.\n";
+                break;
+            }
         }
         // replace original array with filtered array
         data.v = vd;
