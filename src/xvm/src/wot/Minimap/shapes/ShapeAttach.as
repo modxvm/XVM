@@ -1,3 +1,4 @@
+import wot.utils.Logger;
 import wot.Minimap.model.externalProxy.IconsProxy;
 
 /**
@@ -7,7 +8,7 @@ import wot.Minimap.model.externalProxy.IconsProxy;
 
 class wot.Minimap.shapes.ShapeAttach
 {
-    private var MAP_SIZE_IN_POINTS:Number = 211; /** Minimap size in points without scaling */
+    private var MAP_SIZE_IN_POINTS:Number = 211; /** Internal MoviecLip minimap size in points without scaling */
     
     private var metersPerPoint:Number;
     private var self:Object; // :MinimapEntry

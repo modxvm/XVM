@@ -1,3 +1,4 @@
+import flash.display.BitmapData;
 import wot.Minimap.model.mapSize.MapSizeBase;
 
 /**

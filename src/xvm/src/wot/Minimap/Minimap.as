@@ -1,3 +1,4 @@
+import wot.utils.Logger;
 import wot.Minimap.ExternalDeveloperInterface;
 import wot.utils.Utils;
 import wot.utils.GlobalEventDispatcher;
@@ -99,12 +100,12 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
         return sizeIndex;
     }
     
-    /** Good for manual debug tracing by pushing "+" button */
+    /** Suitable for manual debug tracing by pushing "=" button */
     // override
     function sizeUp()
     {
         super.sizeUp();
-        //Logger.add("");
+        //Logger.add("icons._width " + icons._width);
     }
     
     // -- Private
@@ -213,13 +214,13 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
             /** Draw customized circles */
             if (MapConfig.circlesEnabled)
             {
-                circles = new Circles(mapSizeModel.getSide() * 10); /** Total map square distance in meters */
+                circles = new Circles(mapSizeModel.getSide() * 10); /** Total map side distance in meters */
             }
             
             /** Draw customized lines */
             if (MapConfig.linesEnabled)
             {
-                lines = new Lines(mapSizeModel.getSide() * 10); /** Total map square distance in meters  */
+                lines = new Lines(mapSizeModel.getSide() * 10); /** Total map side distance in meters  */
             }
         }
     }
