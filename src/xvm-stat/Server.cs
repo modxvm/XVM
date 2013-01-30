@@ -664,6 +664,7 @@ namespace wot
       }
       Array.Resize<Stat>(ref res.players, pos);
 
+      Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
       return JsonMapper.ToJson(res);
     }
 
@@ -706,6 +707,7 @@ namespace wot
 
         string responseFromServer = loadUrl(proxies[(new Random()).Next(proxies.Length)], updateRequest);
 
+        Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
         Response res = JsonDataToResponse(JsonMapper.ToObject(responseFromServer));
         if (res == null || res.players == null)
         {

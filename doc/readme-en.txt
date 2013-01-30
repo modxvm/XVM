@@ -152,6 +152,7 @@
       {{ifspg}}        - place special square symbol if subject is artillery
 
     Statistics macros ('rating/showPlayersStatistics' must be anabled):
+      {{avglvl}}      - average level (tier) of tanks
       {{eff}}         - player efficiency: http://wot-news.com/index.php/stat/calc/en/
       {{eff:4}}       - player efficiency aligned from left to 4 chars
       {{teff}}, {{e}} - player per-vehicle efficiency: http://www.koreanrandom.com/forum/topic/1643-

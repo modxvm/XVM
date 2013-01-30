@@ -1,3 +1,7 @@
+XVM-3.3.2-test3:
+  * added macro:
+      {{avglvl}} - average level of tanks
+
 XVM-3.3.2-test2:
   * fixed {{c:system}} macro
   * capture bar: fixed "enabled":false
