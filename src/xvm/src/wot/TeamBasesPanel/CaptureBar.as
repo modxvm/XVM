@@ -36,6 +36,7 @@ import wot.TeamBasesPanel.CapBarModel.OneTankSpeed;
 class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
 {
     private var m_capSpeed:CapSpeed; // calculates capture speed
+    private var m_oneTankSpeed:OneTankSpeed; // define cap min cap speed based on map type
     private var m_macro:Macro;       // defines user presentable html text
     private var m_capColor:String;
     
@@ -49,6 +50,7 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
     */
     public function CaptureBar()
     {
+        m_oneTankSpeed = new OneTankSpeed();
         super();
     }
     
@@ -165,7 +167,7 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
         
     private function get capturersNum():Number
     {
-        var caps:Number = Math.round(m_capSpeed.getSpeed() / OneTankSpeed.speed);
+        var caps:Number = Math.round(m_capSpeed.getSpeed() / m_oneTankSpeed.getSpeed());
         
        /**
         * Maximum capturers number at standart battle type is 3.

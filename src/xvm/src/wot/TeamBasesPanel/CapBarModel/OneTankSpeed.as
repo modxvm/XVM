@@ -1,3 +1,5 @@
+import wot.utils.Utils;
+
 class wot.TeamBasesPanel.CapBarModel.OneTankSpeed
 {
    /**
@@ -12,26 +14,41 @@ class wot.TeamBasesPanel.CapBarModel.OneTankSpeed
     public static var MIN_SPEED_ENCOUNTER:Number = 0.4;
     public static var MIN_SPEED_OTHER:Number = 1; /** For Standart battle type and Assault */
     
-    private static var ENCOUNTER_INTERNAL_TYPE_ST:String = "#arenas:type/domination/name"; // standart
-    private static var ENCOUNTER_INTERNAL_TYPE_TC:String = "#menu:loading/battleTypes/3";  // tank company/рота
+    private var m_speed:Number;
     
-    public static function get speed():Number
+    public function OneTankSpeed()
     {
+        m_speed = defineOneTankCapSpeed();
+    }
+    
+    public function getSpeed():Number
+    {
+        return m_speed;
+    }
+    
+    // -- Private
+    
+    private function defineOneTankCapSpeed():Number
+    {
+        var entries:Array = Utils.getChildrenOf(icons);
         /**
-         * _root.statsData.arenaData.battleName values are
-         * "#arenas:type/domination/name" for encounter battle type
-         * "#arenas:type/ctf/name" for standart battle type
-         * Battle types for Tank Company/Рота differ
-         * #menu:loading/battleTypes/3 for encounter battle type
-         * Did not test Assault type
+         * Search for white cap point.
+         * It has "teamPoint" field and "vehicleClass": "empty".
          */
-        
-        if (_root.statsData.arenaData.battleName == ENCOUNTER_INTERNAL_TYPE_ST
-        ||  _root.statsData.arenaData.battleName == ENCOUNTER_INTERNAL_TYPE_TC)
+        for (var i in entries)
         {
-            return MIN_SPEED_ENCOUNTER;
+            var entry:MovieClip = entries[i];
+            if (entry.teamPoint && entry.vehicleClass == "empty")
+            {
+                return MIN_SPEED_ENCOUNTER;
+            }
         }
         
         return MIN_SPEED_OTHER;
+    }
+    
+    private function get icons():MovieClip
+    {
+        return _root.minimap.icons;
     }
 }

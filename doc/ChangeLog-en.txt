@@ -1,3 +1,5 @@
+  * capmod: second fix for number of tanks capturing for Tank Company encounter battles
+
 XVM-3.3.2-test3:
   * added macro:
       {{avglvl}} - average level of tanks
