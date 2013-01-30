@@ -31,6 +31,8 @@ package utils
         public static const macros:Class;
 
         // macros
+        [Embed("images/macros/avglvl.png")]
+        public static const avglvl:Class;
         [Embed("images/macros/battles.png")]
         public static const battles:Class;
         [Embed("images/macros/clan.png")]

@@ -82,6 +82,7 @@ package utils
 
             // Statistics
             format = format.replace("{{rating}}", "66%");
+            format = format.replace("{{avglvl}}", "5.5");
             format = format.replace("{{eff}}", "1800");
             format = format.replace("{{e}}", "5");
             format = format.replace("{{wn}}", "1001");
@@ -229,11 +230,12 @@ package utils
             // Statistics
             stats: [
                 { value: "{{rating}}", label: "rating", icon: Embed.rating },
+                { value: "{{avglvl}}", label: "avglvl", icon: Embed.avglvl },
                 { value: "{{eff}}", label: "eff", icon: Embed.eff },
+                { value: "{{wn}}", label: "wn", icon: Embed.wn },
+                { value: "{{twr}}", label: "twr", icon: Embed.twr },
                 { value: "{{e}}", label: "e", icon: Embed.e },
                 { value: "{{teff}}", label: "teff", icon: Embed.teff },
-                { value: "{{twr}}", label: "twr", icon: Embed.twr },
-                { value: "{{wn}}", label: "wn", icon: Embed.wn },
                 { value: "{{tdb}}", label: "tdb", icon: Embed.tdb },
                 { value: "{{tdv}}", label: "tdv", icon: Embed.tdv },
                 { value: "{{tfb}}", label: "tfb", icon: Embed.tfb },
