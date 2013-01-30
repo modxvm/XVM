@@ -50,8 +50,8 @@ exports.getPlayersData = function(ids, callback) {
     process.send({ usage: 1, mongorq: 1 });
     var start = new Date();
     var cursor = players.find(
-        { _id: { $in: ids } },
-        { _id: 1, st: 1, dt: 1, nm: 1, b: 1, w: 1, spo: 1, hip: 1, cap: 1, dmg: 1, frg: 1, def: 1, e: 1, wn:1, twr:1, v: 1 });
+        {_id:{$in:ids}},
+        {_id:1, st: 1, dt:1, nm:1, b:1, w:1, spo:1, hip:1, cap:1, dmg:1, frg:1, def:1, lvl:1, e:1, wn:1, twr:1, v:1 });
     cursor.toArray(function(error, result) {
         _mongoRq--;
         process.send({ usage: 1, mongorq: -1 });

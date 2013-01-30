@@ -1,10 +1,20 @@
+// calculate average level of tanks
+var calculateAvgLvl = exports.calculateAvgLevel = function(vehicles) {
+    var level_battles = 0
+    var total_battles = 0;
+    vehicles.forEach(function(item) {
+        level_battles += item.l * item.b;
+        total_battles += item.b;
+    });
+    return total_battles <= 0 ? 0 : level_battles / total_battles;
+}
+
 // calculateEfficiency
 exports.calculateEfficiency = function(data) {
     if (!data || !data.b || data.b <= 0)
         return 0;
 
-    var TIER = calculateAvgTier(data.v);
-
+    var TIER = data.lvl;
     var FRAGS = data.frg / data.b;
     var DAMAGE = data.dmg / data.b;
     var SPOT = data.spo / data.b;
@@ -37,9 +47,8 @@ exports.calculateWN = function(data) {
     if (!data || !data.b || data.b <= 0)
         return 0;
 
-    var TIER = calculateAvgTier(data.v);
+    var TIER = data.lvl;
     var TIER_N = Math.min(6, TIER);
-
     var FRAGS = data.frg / data.b;
     var DAMAGE = data.dmg / data.b;
     var SPOT = data.spo / data.b;
@@ -103,16 +112,4 @@ exports.filterVehicleData = function(item, vname) {
         }
     }
     return null;
-}
-
-// PRIVATE
-
-var calculateAvgTier = function(vehicles) {
-    var level_battles = 0
-    var total_battles = 0;
-    vehicles.forEach(function(item) {
-        level_battles += item.l * item.b;
-        total_battles += item.b;
-    });
-    return total_battles <= 0 ? 0 : level_battles / total_battles;
 }

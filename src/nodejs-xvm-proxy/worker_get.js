@@ -335,6 +335,7 @@ var _cacheToResult = function(item)
         dmg: item.dmg,
         frg: item.frg,
         def: item.def,
+        lvl: item.lvl,
         eff: item.e,
         wn: item.wn,
         twr: item.twr
@@ -378,6 +379,9 @@ var _parseNewPlayerData = function(id, data) {
         });
     }
 
+    // Average Tier
+    pdata.lvl = utils.calculateAvgLevel(pdata.v);
+
     // EFF - wot-news efficiency rating
     pdata.e = utils.calculateEfficiency(pdata);
 
@@ -393,6 +397,8 @@ var _parseNewPlayerData = function(id, data) {
 //            ", bc=" + pdata.b +
 //            ", id=" + pdata._id);
     } catch (e) { utils.log(e); }
+
+    pdata.lvl = parseFloat(pdata.lvl.toFixed(1));
 
     return pdata;
 }
