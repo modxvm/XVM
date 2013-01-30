@@ -77,7 +77,12 @@ class wot.utils.VehicleInfo
         icon = icon.split("-").join("_").toLowerCase();
         return icon;
     }
-    
+
+    public static function getName3(icon: String): String
+    {
+        return getName2(icon);
+    }
+
     // PRIVATE
 
     // icon = "../maps/icons/vehicle/contour/usa-M24_Chaffee.tga"

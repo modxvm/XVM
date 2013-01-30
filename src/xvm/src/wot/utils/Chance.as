@@ -89,7 +89,11 @@ class wot.utils.Chance
             if (!vi2)
               return { error: "[2] No data for: " + VehicleInfo.getVehicleName(pdata.icon) };
 
-            var K = chanceFunc(vi1, vi2, pdata.team, pdata.stat);
+            var vi3 = VehicleInfo.getInfo3(VehicleInfo.getName3(pdata.icon));
+            if (!vi3)
+              return { error: "[3] No data for: " + VehicleInfo.getVehicleName(pdata.icon) };
+
+            var K = chanceFunc(vi1, vi2, vi3, pdata.team, pdata.stat);
 
             Ka += (pdata.team == Defines.TEAM_ALLY) ? K : 0;
             Ke += (pdata.team == Defines.TEAM_ENEMY) ? K : 0;
@@ -109,10 +113,13 @@ class wot.utils.Chance
             }
         }
 
+        if (chanceFunc == ChanceFuncX2)
+            return PrepareChanceResultsX2(Ka, Ke);
+        
         return PrepareChanceResults(Ka, Ke);
     }
 
-    private static function ChanceFuncG(vi1, vi2, team, stat): Number
+    private static function ChanceFuncG(vi1, vi2, vi3, team, stat): Number
     {
         var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
 
@@ -128,7 +135,7 @@ class wot.utils.Chance
         return E * (1 + R - (Config.s_config.consts.AVG_GWR / 100.0)) * (1 + 0.25 * Td) * (1 + Bn);
     }
 
-    private static function ChanceFuncT(vi1, vi2, team, stat): Number
+    private static function ChanceFuncT(vi1, vi2, vi3, team, stat): Number
     {
         var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
 
@@ -141,7 +148,7 @@ class wot.utils.Chance
         return E * (1 + Rt) * (1 + 0.25 * Td);
     }
 
-    private static function ChanceFuncX1(vi1, vi2, team, stat): Number
+    private static function ChanceFuncX1(vi1, vi2, vi3, team, stat): Number
     {
         var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
 
@@ -163,22 +170,44 @@ class wot.utils.Chance
         return K;
     }
 
-    private static function ChanceFuncX2(vi1, vi2, team, stat): Number
+    // http://www.koreanrandom.com/forum/topic/2598-/#entry31429
+    private static function ChanceFuncX2(vi1, vi2, vi3, team, stat): Number
     {
         var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
 
-        var r = stat.b ? stat.w / stat.b * 100 : Config.s_config.consts.AVG_GWR;
-        var R = Math.max(-10, Math.min(10, r - Config.s_config.consts.AVG_GWR)) + 10;
+        var Tmin = vi1.tiers[0];
+        var Tmax = vi1.tiers[1];
+        var T = battleTier;
+        var Bt = stat.tb || 0;
+        var Ba = stat.b || 0;
+        var Et = stat.teff || 0;
+        var Rt = stat.tr || 0;
+        var AvgW = vi3.w / vi3.b * 100;
+        var WNa = stat.wn || 0;
+        var Ra = stat.r || 0;
+        
+        // 1
+        var Klvl = (Tmax + Tmin) / 2 - T;
+        
+        // 2
+        var Ktb = (Bt <= 100) ? 0                               //    0..100  => 0
+            : (Bt <= 500) ? (Bt - 100) / 500                    //  101..500  => 0..0.8
+            : (Bt <= 1000) ? 0.8 + (Bt - 500) / 2000            //  501..1000 => 0.8..1.05
+            : (Bt <= 2000) ? 1.05 + (Bt - 1000) / 4000          // 1001..2000 => 1.05..1.3
+            : 1.3 + (Bt - 2000) / 8000;                         // 2000..     => 1.3..
+        
+        // 3
+        var Kab = (Ba <= 1000) ? 0                              //   0..1k  => 0
+            : (Ba <= 10000) ? (Ba - 1000) / 10000               //  1k..10k => 0..0.9
+            : (Ba <= 20000) ? 0.9 + (Ba - 10000) / 50000        // 10k..20k => 0.9..1.1
+            : 1.1 + (Ba - 20000) / 100000                       // 20k..    => 1.1..
 
-        var B: Number = stat.b || Config.s_config.consts.AVG_BATTLES;
-        var Bn = (B < 2000) ? B / 5000               // 0k .. 2k  => 0.0 .. 0.4
-            : (B < 5000) ? 0.4 + (B - 2000) / 15000  // 2k .. 5k  => 0.4 .. 0.6
-            : (B < 10000) ? 0.6 + (B - 5000) / 25000 // 5k .. 10k => 0.6 .. 0.8
-            : 0.8 + (B - 10000) / 100000;            // 10k..    => 0.8 .. ...
-
-        var K = (R - 5) * (1 + 0.25 * Td) * (1 + Bn);
-
-        if (DEBUG_EXP)
+        // 4
+        var Eb = (Et > 0) ? (((2 / 3 * Et * (100 + Rt - AvgW) / 100 ) * (1 + Ktb)) + 
+                ((1 / 3 * WNa * (100 + Ra - 48) / 100) * (1 + Kab))) * (1 + 0.25 * Klvl)
+            : ((WNa * (100 + Ra - 48) / 100) * (1 + Kab)) * (1 + 0.25 * Klvl);
+            
+/*        if (DEBUG_EXP)
         {
             Logger.add("team=" + team +
                 " l=" + Utils.padLeft(String(vi2.level), 2) + " " + Utils.padLeft(vi2.type, 3) +
@@ -188,9 +217,9 @@ class wot.utils.Chance
                 " B=" + Utils.padLeft(String(Math.round(Bn * 100) / 100), 5) +
                 " Td=" + Utils.padLeft(String(Td), 4) +
                 " K=" + String(Math.round(K * 10) / 10));
-        }
+        }*/
 
-        return K;
+        return Eb;
     }
 
     // return: { ally: Number, enemy: Number }
@@ -232,9 +261,18 @@ class wot.utils.Chance
         return Math.round(Math.max(0.05, Math.min(0.95, (0.5 + (a / (a + b) - 0.5) * 5.0))) * 100);
     }
 
-	private static function NormalizeResultF(a, b)
+    private static function NormalizeResultF(a, b)
     {
         return Math.round(1000*Math.max(0.05, Math.min(0.95, (0.5 + (a / (a + b) - 0.5) * 5.0))) * 100)/1000;
+    }
+
+    private static function PrepareChanceResultsX2(Ea, Ee)
+    {
+        var result = PrepareChanceResults(Ea, Ee);
+        var p = Math.max(0.05, Math.min(0.95, Ea / (Ea + Ee))) * 100;
+        result.percent = Math.round(p);
+        result.percentF = Math.round(1000 * p) / 1000;
+        return result;
     }
 
     private static function GuessBattleTier(): Number
