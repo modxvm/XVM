@@ -44,6 +44,7 @@ namespace wot
       public int dmg;         // damage dealt
       public int frg;         // frags
       public int def;         // dropped capture points
+      public double avglvl;   // average level of tanks
       public int wn;          // WN rating: http://www.koreanrandom.com/forum/topic/2575-
       public int twr;         // tourist1984 win rate: http://www.koreanrandom.com/forum/topic/2389-
       public int tb;          // tank battles
@@ -785,6 +786,20 @@ namespace wot
       }
     }
 
+    private static double ParseDouble(JsonData data, params String[] path)
+    {
+      try
+      {
+        for (int i = 0; i < path.Length - 1; ++i)
+          data = data[path[i]];
+        return data[path[path.Length - 1]].IsDouble ? double.Parse(data[path[path.Length - 1]].ToString()) : 0;
+      }
+      catch
+      {
+        return 0;
+      }
+    }
+
     private static string ParseString(JsonData data, params String[] path)
     {
       try
@@ -828,6 +843,7 @@ namespace wot
               dmg = ParseInt(data, "dmg"),
               frg = ParseInt(data, "frg"),
               def = ParseInt(data, "def"),
+              avglvl = ParseDouble(data, "lvl"),
               wn = ParseInt(data, "wn"),
               twr = ParseInt(data, "twr"),
               tb = ParseInt(data, "v", "b"),
