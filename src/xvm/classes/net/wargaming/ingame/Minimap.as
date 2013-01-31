@@ -13,4 +13,5 @@ intrinsic class net.wargaming.ingame.Minimap extends UIComponent
     function scaleMarkers(val:Number);
     function onEntryInited();
     function sizeUp();
+    function sizeDown();
 }

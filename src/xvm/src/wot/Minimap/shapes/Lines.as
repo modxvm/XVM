@@ -39,15 +39,15 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
     
     private function attachVehicleDirectionLines():Void
     {
-        var depth:Number = self.getNextHighestDepth();
-        var vehLines:MovieClip = self.createEmptyMovieClip("vehLine" + depth, depth);
+        var depth:Number = attachments.getNextHighestDepth();
+        var vehLines:MovieClip = attachments.createEmptyMovieClip("vehLine" + depth, depth);
         attachLines(vehLines, MapConfig.linesVehicle, 0);
     }
     
     private function attachVehicleTraverseAngle():Void
     {
-        var depth:Number = self.getNextHighestDepth();
-        var traverseAgnle:MovieClip = self.createEmptyMovieClip("traverseAgnle" + depth, depth);
+        var depth:Number = attachments.getNextHighestDepth();
+        var traverseAgnle:MovieClip = attachments.createEmptyMovieClip("traverseAgnle" + depth, depth);
         attachLines(traverseAgnle, MapConfig.linesTraverseAngle, rightAngle);
         attachLines(traverseAgnle, MapConfig.linesTraverseAngle, -leftAngle);
     }
@@ -75,10 +75,10 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
                 /** Translate absolute minimap distance in points to game meters */
                 if (lineCfg.inmeters)
                 {
-                    from.y *= metersPerPoint;
-                    to.y   *= metersPerPoint;
-                    from.x *= metersPerPoint;
-                    to.x   *= metersPerPoint;
+                    from.y *= scaleFactor;
+                    to.y   *= scaleFactor;
+                    from.x *= scaleFactor;
+                    to.x   *= scaleFactor;
                 }
                 
                 drawLine(mc, from, to, lineCfg.thickness, lineCfg.color, lineCfg.alpha);

@@ -63,6 +63,9 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     private var isEnemyPlayersPanelReady:Boolean = false;
     private var loadComplete:Boolean = false;
     
+    /** Used to tweak minimap resize */
+    private var prefactorSelfScale:Number; 
+    
     // override
     function Minimap()
     {
@@ -104,11 +107,45 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     // override
     function sizeUp()
     {
+        prefactorScale();
         super.sizeUp();
-        //Logger.add("icons._width " + icons._width);
+        refactorScale();
+    }
+    
+    function sizeDown()
+    {
+        prefactorScale();
+        super.sizeDown();
+        refactorScale();
     }
     
     // -- Private
+    
+    /**
+     * Minimap python internal resizing slightly tweaks icons scaling depending on minimap size.
+     * So icons scaling at minimap is not linearly dependent on minimap scale.
+     * Icons scale on big minimap is decreased. Icons scale on small minimap is increased.
+     * 
+     * This makes shape attachment wrong sizing. Working around.
+     */
+    private function refactorScale():Void
+    {
+        var self:MinimapEntry = IconsProxy.getSelf();
+        
+        self.attachments._xscale = 100 / (self._xscale / 100);
+        self.attachments._yscale = 100 / (self._yscale / 100);
+        
+        Logger.add("");
+        Logger.add("icons._xscale " + icons._xscale);
+        Logger.add("self._xscale " + self._xscale);
+        Logger.add("attachments._xscale " + self.attachments._xscale);
+    }
+    
+    private function prefactorScale():Void
+    {
+        var self:MinimapEntry = IconsProxy.getSelf();
+        prefactorSelfScale = self._xscale;
+    }
     
     private function checkLoading():Void
     {
@@ -222,6 +259,8 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
             {
                 lines = new Lines(mapSizeModel.getSide() * 10); /** Total map side distance in meters  */
             }
+            
+            refactorScale();
         }
     }
     

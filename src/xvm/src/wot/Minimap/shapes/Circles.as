@@ -28,7 +28,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
             
             if (circleCfg.enabled)
             {
-                var radius:Number =  metersPerPoint * circleCfg.distance;
+                var radius:Number =  scaleFactor * circleCfg.distance;
                 drawCircle(radius, circleCfg.thickness, circleCfg.color, circleCfg.alpha);
             }
         }
@@ -59,8 +59,8 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
     
     private function drawCircle(radius:Number, thickness:Number, color:Number, alpha:Number)
     {
-        var depth:Number = self.getNextHighestDepth();
-        var mc:MovieClip = self.createEmptyMovieClip("circle" + depth, depth);
+        var depth:Number = attachments.getNextHighestDepth();
+        var mc:MovieClip = attachments.createEmptyMovieClip("circle" + depth, depth);
         mc.lineStyle(thickness, color, alpha);
         
         var centerX:Number = 0;

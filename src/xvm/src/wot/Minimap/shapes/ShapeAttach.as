@@ -1,4 +1,3 @@
-import wot.utils.Logger;
 import wot.Minimap.model.externalProxy.IconsProxy;
 
 /**
@@ -10,18 +9,34 @@ class wot.Minimap.shapes.ShapeAttach
 {
     private var MAP_SIZE_IN_POINTS:Number = 211; /** Internal MoviecLip minimap size in points without scaling */
     
-    private var metersPerPoint:Number;
-    private var self:Object; // :MinimapEntry
-        
+    private var scaleFactor:Number;
+    
     public function ShapeAttach(mapSizeInMeters:Number) 
     {
+        var metersPerPoint:Number = MAP_SIZE_IN_POINTS / mapSizeInMeters;
+        
         /**
          * Get oneself icon.
          * Used as a center of circles.
          * Will carry attached circles with itself automatically.
          */
-        self = IconsProxy.getSelf();
+        var self = IconsProxy.getSelf();
         
-        metersPerPoint = (MAP_SIZE_IN_POINTS / mapSizeInMeters) / self._xscale * 100;
+        scaleFactor = metersPerPoint;
+    }
+    
+    // -- Private
+    
+    /** Shapes container */
+    private function get attachments():MovieClip
+    {
+        var self:MovieClip = IconsProxy.getSelf();
+        
+        if (!self.attachments)
+        {
+            self.createEmptyMovieClip("attachments", self.getNextHighestDepth());
+        }
+        
+        return self.attachments;
     }
 }
