@@ -12,6 +12,18 @@ module.exports = (function() {
             ", Nick: <a href='http://worldoftanks.ru/community/accounts/" + data._id + "-" + data.nm + "/'>" + data.nm + "</a>\n";
         log += "--------------------------\n\n";
 
+        // TODO: remove this legacy code
+        if (data.v instanceof Array) {
+            var v = {};
+            for (var i in data.v) {
+                var a = data.v[i];
+                v[a.name] = a;
+                delete v[a.name].name;
+            }
+            data.v = v;
+        }
+        // [/TODO]
+
         log += parseStatData(data);
 
         log += "\nparseStatData() duration: " + (new Date() - start) + "ms\n\n";
@@ -22,12 +34,13 @@ module.exports = (function() {
         if (data.battles > def.FILTER_BATTLES_LOW_LIMIT)
             log += delFirst(data, def.DEL_FIRST_COUNT);
 
-        data.v.sort(function(a,b){ return b.b-a.b; });
+        data.v.sort(function(a,b){ return b.b - a.b; });
 
         log += "\ndelFirst() duration: " + (new Date() - start) + "ms\n\n";
         start = new Date();
 
         log += "\nCalculation:\n";
+
 
         for (var i in data.v)
             log += calculate(data, data.v[i]) + "\n";

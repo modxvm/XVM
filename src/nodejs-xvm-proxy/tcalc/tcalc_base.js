@@ -18,7 +18,7 @@ module.exports = (function() {
                 if (line.length != 12)
                     return console.log("Error: format error in base.csv:\n  " + lines[lineId]);
 
-                tanks[line[3].toLowerCase()] = {
+                tanks[line[3].toUpperCase()] = {
                     // skip [0] - vehicle country
                     // skip [1] - vehicle type
                     // skip [2] - vehicle level

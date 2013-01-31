@@ -8,23 +8,24 @@ module.exports = (function() {
         var log = "";
         data.battles = 0; // total count of "good" battles (more 100 battles for tank)
         var vd = []; // filtered array of vehicles data
-        for (var i in data.v) {
-            var vdata = data.v[i];
-
-            var vname = vdata.name.toLowerCase();
-
-            if (vname == "a-20" || vname == "m103") {
-                log += "WARNING: Skip dubious tank: " + vdata.name + "\n";
+        for (var vname in data.v) {
+            if (vname == "A-20" || vname == "M103") {
+                log += "WARNING: Skip dubious tank: " + vname + "\n";
                 continue;
             }
 
-            if (!vdata.b || vdata.b <= def.MIN_VEHICLE_BATTLES)
+            var vdata = data.v[vname];
+            vdata.name = vname;
+
+            if (!vdata.b || vdata.b <= def.MIN_VEHICLE_BATTLES) {
+                log += "WARNING: Not enough battles for tank: " + vname + " (" + vdata.b + "). This tank is skipped.\n";
                 continue;
+            }
 
             vdata.link = tcalc_base.tanks[vname];
             vdata.rate = vdata.w / vdata.b * 100;
             if (!vdata.link) {
-                log += "WARNING: No data in base.csv for " + vdata.name +
+                log += "WARNING: No data in base.csv for " + vname +
                     " (b=" + vdata.b + " r=" + vdata.rate.toFixed(2) + "). This tank is skipped.\n";
                 continue;
             }
@@ -34,13 +35,15 @@ module.exports = (function() {
             data.battles += vdata.b;
             vdata.damage = (vdata.d || 0) / vdata.b;
             vd.push(vdata);
-
-            // limit of calculated tanks
-            if (vd.length >= 30) {
-                log += "Tanks limit is reached: 30. Skip other tanks.\n";
-                break;
-            }
         }
+
+        // limit of calculated tanks
+        vd.sort(function(a,b){ return b.b - a.b; });
+        if (vd.length >= 30) {
+            log += "Tanks limit is reached: 30. Skip some tanks (" + (vd.length - 30) + ").\n";
+            vd = vd.slice(0, 30);
+        }
+
         // replace original array with filtered array
         data.v = vd;
         return log;

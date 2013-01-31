@@ -2,10 +2,11 @@
 var calculateAvgLvl = exports.calculateAvgLevel = function(vehicles) {
     var level_battles = 0
     var total_battles = 0;
-    vehicles.forEach(function(item) {
+    for (var vname in vehicles) {
+        var item = vehicles[vname];
         level_battles += item.l * item.b;
         total_battles += item.b;
-    });
+    }
     return total_battles <= 0 ? 0 : level_battles / total_battles;
 }
 
@@ -103,12 +104,29 @@ exports.filterVehicleData = function(item, vname) {
     if (!vname || !item.v)
         return null;
 
-    for(var i in item.v) {
-        try {
-            if (item.v[i].name.toUpperCase() == vname) 
-                return item.v[i];
-        } catch (e) {
-            log("[ERROR]>  " + e + " id=" + item._id + " " + JSON.stringify(item));
+    if (item.v instanceof Array) {
+        // TODO: remove legacy code
+        for(var i in item.v) {
+            try {
+                if (item.v[i].name.toUpperCase() == vname) 
+                    return item.v[i];
+            } catch (e) {
+                log("[ERROR]>  " + e + " id=" + item._id + " " + JSON.stringify(item));
+            }
+        }
+        // [/TODO]
+    } else {
+        // NEW
+        for (var vn in item.v) {
+            try {
+                if (vn == vname) {
+                    var res = item.v[vn];
+                    res["name"] = vn;
+                    return res;
+                }
+            } catch (e) {
+                log("[ERROR]>  " + e + " id=" + item._id + " " + JSON.stringify(item));
+            }
         }
     }
     return null;

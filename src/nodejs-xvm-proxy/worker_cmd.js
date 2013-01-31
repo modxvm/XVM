@@ -51,12 +51,14 @@ var cmd_INFO = function(response, pl, args) {
             var vn = args.shift();
 //            utils.log(pl + "," + vn);
             if (vn) {
+                vn = vn.toUpperCase();
                 for (var id in data) {
                     var d = data[id];
-                    for (var i in d.v) {
-                        var v = d.v[i];
-                        if (v.name.toUpperCase() == vn.toUpperCase()) {
-                            d.v = v;
+                    for (var vname in d.v) {
+                        if (vname == vn) {
+                            var v = d.v[vname];
+                            v.name = vname;
+                            d.v = [ v ];
                             break;
                         }
                     }

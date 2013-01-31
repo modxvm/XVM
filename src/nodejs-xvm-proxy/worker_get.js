@@ -360,14 +360,13 @@ var _parseNewPlayerData = function(id, data) {
         dmg: data.battles.damage_dealt,
         frg: data.battles.frags,
         def: data.battles.dropped_capture_points,
-        v: []
+        v: {}
     }
 
     // fill vehicle data
     for (var i in data.vehicles) {
         var vdata = data.vehicles[i];
-        pdata.v.push({
-            name: vdata.name.toUpperCase(),
+        pdata.v[vdata.name.toUpperCase()] = {
             cl: utils.getVehicleType(vdata.class),
             l: vdata.level,
             b: vdata.battle_count,
@@ -376,7 +375,7 @@ var _parseNewPlayerData = function(id, data) {
             f: vdata.frags,
             s: vdata.spotted,
             u: vdata.survivedBattles
-        });
+        }
     }
 
     // Average Tier
