@@ -48,6 +48,7 @@ exports.processRemotes = function(cached, update, response, times) {
 // PRIVATE
 
 // find free connection (connections balancer)
+// TODO: make single instance for all threads
 var getFreeConnection = function(servers) {
     var now = new Date();
     var totalAvail = 0;

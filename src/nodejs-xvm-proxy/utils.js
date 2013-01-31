@@ -56,7 +56,7 @@ exports.calculateWN = function(data) {
     var DEF = Math.min(2.2, data.def / data.b);
     var WINRATE = data.w / data.b * 100;
 
-    return Math.max(0, Math.round(
+    return Math.max(1, Math.round(
         (1240 - 1040 / Math.pow(TIER_N, 0.164)) * FRAGS +
         DAMAGE * 530 / (184 * Math.exp(0.24 * TIER) + 130) +
         SPOT * 125 +
