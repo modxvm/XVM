@@ -1,6 +1,9 @@
 var settings = require("./settings").settings,
     utils = require("./utils"),
-    db = require("./worker_db");
+    db = require("./worker_db"),
+    url = require("url"),
+    worker_cmd = require("./worker_cmd"),
+    worker_get = require("./worker_get");
 
 // Get stat command:
 //   111111
@@ -11,7 +14,6 @@ var settings = require("./settings").settings,
 //   0,WN=nick
 //   0,TWR=nick
 exports.processRequest = function(request, response) {
-    var url = require("url");
     var times = [ { "n": "start", "t": new Date() } ];
 
     try {
@@ -27,7 +29,7 @@ exports.processRequest = function(request, response) {
         var qarr = query.split(",");
         if (qarr[0] == "0") {
             qarr.shift();
-            require("./worker_cmd").processCommand(response, qarr);
+            worker_cmd.processCommand(response, qarr);
             return;
         }
 
@@ -137,7 +139,7 @@ var onPlayersData = function(error, db_data, rq_data, response, times) {
 
         // db_data - cached items
         // rq_data - items for update from statistics host
-        require("./worker_get").processRemotes(db_data, rq_data, response, times);
+        worker_get.processRemotes(db_data, rq_data, response, times);
     } catch(e) {
 //        response.statusCode = 500;
         response.end('{"error":"' + e + '","server":"' + settings.serverName + '"}');

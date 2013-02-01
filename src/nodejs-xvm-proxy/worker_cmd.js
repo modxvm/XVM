@@ -1,6 +1,7 @@
 var settings = require("./settings").settings,
     utils = require("./utils"),
-    db = require("./worker_db");
+    db = require("./worker_db"),
+    tcalc = require("./tcalc/tcalc");
 
 exports.processCommand = function(response, args) {
     try {
@@ -109,7 +110,6 @@ var cmd_TWR = function(response, pl, args) {
             else if (data.length == 0)
                 response.end('[' + cmd + ']: Player not found: ' + pl);
             else {
-                var tcalc = require("./tcalc/tcalc");
                 var s = "";
                 for (var i = 0; i < data.length; ++i)
                     s += "<pre>" + tcalc.calc(data[i]).log + "</pre><hr>";

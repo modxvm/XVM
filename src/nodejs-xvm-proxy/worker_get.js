@@ -53,9 +53,10 @@ var getFreeConnection = function(servers) {
     var now = new Date();
     var totalAvail = 0;
     var wait = true;
-    for (var i in servers)
+    var srvs = utils.clone(servers);
+    for (var i in srvs)
     {
-        var srv = servers[i];
+        var srv = srvs[i];
         var sst = status.serverStatus[srv.id];
 
         // Do not execute requests some time after error response
@@ -82,9 +83,9 @@ var getFreeConnection = function(servers) {
         return {error:"max_conn"};
 
     var n = Math.floor(Math.random()*totalAvail);
-    for (var i in servers)
+    for (var i in srvs)
     {
-        var srv = servers[i];
+        var srv = srvs[i];
         if (srv.avail > n) {
             status.serverStatus[srv.id].connections++;
             return srv;

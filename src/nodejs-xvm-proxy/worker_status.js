@@ -16,6 +16,7 @@ exports.initialize = function() {
         });
     }
 
+/*
     // fix connection counter sticking
     setInterval(function() {
         for(var i = 0; i < serverStatus.length; ++i) {
@@ -25,4 +26,5 @@ exports.initialize = function() {
         }
 //    utils.log("conn[worker]: " + serverStatus[0].connections + "/" + serverStatus[0].maxConnections);
     }, 60000);
+*/
 }
