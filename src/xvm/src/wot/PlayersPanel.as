@@ -221,8 +221,9 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
             var data = m_data[m_item++];
             var deadState = Utils.endsWith("dead", colorScheme) ? Defines.DEADSTATE_DEAD : Defines.DEADSTATE_ALIVE;
             var state = m_state;
-            var names = m_names;
+            var field = state == "medium2" ? m_vehicles : m_names;
             var key = "PP/" + deadState + "/" + data.label + "/" + data.vehicle + "/" + state + "/" + m_fieldType;
+            //Logger.add(key);
             text = Cache.Get(key, function()
             {
                 if ((state != "medium" && state != "medium2" && state != "large") ||
@@ -240,8 +241,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
                     fmt,
                     Macros.Format(data.label, "{{nick}}"),
                     Config.s_config.playersPanel[state].width,
-                    names.getNewTextFormat());
-                
+                    field.getNewTextFormat());
             });
             //Logger.add("after: " + text);
         }

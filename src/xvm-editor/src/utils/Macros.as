@@ -82,7 +82,7 @@ package utils
 
             // Statistics
             format = format.replace("{{rating}}", "66%");
-            format = format.replace("{{avglvl}}", "5.5");
+            format = format.replace("{{avglvl}}", "5");
             format = format.replace("{{eff}}", "1800");
             format = format.replace("{{e}}", "5");
             format = format.replace("{{wn}}", "1001");

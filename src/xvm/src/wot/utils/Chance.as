@@ -183,7 +183,7 @@ class wot.utils.Chance
         var Et = stat.teff || 0;
         var Rt = stat.tr || 0;
         var AvgW = vi3.w / vi3.b * 100;
-        var WNa = stat.wn || 0;
+        var Ea = stat.wn || 0;
         var Ra = stat.r || 0;
         
         // 1
@@ -203,9 +203,9 @@ class wot.utils.Chance
             : 1.1 + (Ba - 20000) / 100000                       // 20k..    => 1.1..
 
         // 4
-        var Eb = (Et > 0) ? (((2 / 3 * Et * (100 + Rt - AvgW) / 100 ) * (1 + Ktb)) + 
-                ((1 / 3 * WNa * (100 + Ra - 48) / 100) * (1 + Kab))) * (1 + 0.25 * Klvl)
-            : ((WNa * (100 + Ra - 48) / 100) * (1 + Kab)) * (1 + 0.25 * Klvl);
+        var Eb = (Et > 0) ? (((3 / 5 * Et * (100 + Rt - AvgW) / 100 ) * (1 + Ktb)) + 
+                ((2 / 5 * Ea * (100 + Ra - 48) / 100) * (1 + Kab))) * (1 + 0.25 * Klvl)
+            : ((Ea * (100 + Ra - 48) / 100) * (1 + Kab)) * (1 + 0.25 * Klvl);
             
 /*        if (DEBUG_EXP)
         {
@@ -258,18 +258,18 @@ class wot.utils.Chance
     // return: 5..95
     private static function NormalizeResult(a, b)
     {
-        return Math.round(Math.max(0.05, Math.min(0.95, (0.5 + (a / (a + b) - 0.5) * 5.0))) * 100);
+        return Math.round(Math.max(0.05, Math.min(0.95, (0.5 + (a / (a + b) - 0.5) * 3.0))) * 100);
     }
 
     private static function NormalizeResultF(a, b)
     {
-        return Math.round(1000*Math.max(0.05, Math.min(0.95, (0.5 + (a / (a + b) - 0.5) * 5.0))) * 100)/1000;
+        return Math.round(1000*Math.max(0.05, Math.min(0.95, (0.5 + (a / (a + b) - 0.5) * 3.0))) * 100)/1000;
     }
 
     private static function PrepareChanceResultsX2(Ea, Ee)
     {
         var result = PrepareChanceResults(Ea, Ee);
-        var p = Math.max(0.05, Math.min(0.95, Ea / (Ea + Ee))) * 100;
+        var p = Math.max(0.05, Math.min(0.95, (0.5 + (Ea / (Ea + Ee) - 0.5) * 1.5))) * 100;
         result.percent = Math.round(p);
         result.percentF = Math.round(1000 * p) / 1000;
         return result;

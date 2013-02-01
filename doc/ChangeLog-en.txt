@@ -1,4 +1,8 @@
+XVM-3.3.2-test4:
   * capmod: second fix for number of tanks capturing for Tank Company encounter battles
+  * fixed {{nick}} macro in the medium2 players panel mode
+  * new experimental win chance formula by TurinDeNar:
+      http://www.koreanrandom.com/forum/topic/2598-/
 
 XVM-3.3.2-test3:
   * added macro:

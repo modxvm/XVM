@@ -153,8 +153,8 @@ class wot.utils.Macros
         var tbK:Number = Math.round(tb / 100) / 10;
 
         // {{avglvl}}
-        var avglvl = Utils.toFloat(stat.avglvl, 0);
-        pdata["avglvl"] = avglvl < 1 ? "   " : Utils.padLeft(Sprintf.format("%.1f", avglvl, 3));
+        var avglvl = Math.round(Utils.toFloat(stat.avglvl, 0));
+        pdata["avglvl"] = avglvl < 1 ? " " : avglvl == 10 ? "X" : avglvl;
         // {{eff}}, {{eff:4}}
         pdata["eff"] = eff <= 0 ? "--" : String(eff);
         pdata["eff:4"] = eff <= 0 ? " -- " : Utils.padLeft(pdata["eff"], 4);

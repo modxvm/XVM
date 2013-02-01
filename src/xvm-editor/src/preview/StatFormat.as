@@ -13,7 +13,7 @@ public class StatFormat
         format = format.split("{{battles}}").join("10123");
         format = format.split("{{wins}}").join("5678");
         format = format.split("{{rating}}").join("48%");
-        format = format.split("{{avglvl}}").join("5.5%");
+        format = format.split("{{avglvl}}").join("5%");
         format = format.split("{{eff}}").join("1230");
         format = format.split("{{e}}").join("5");
         format = format.split("{{wn}}").join("1001");
