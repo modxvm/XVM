@@ -24,9 +24,9 @@ from xml.dom import minidom
 """
 
 # Based on XVM 3.1.2, SVN rev. 1104
-# Last change of xvm-stat: SVN rev. 1056
+# Last change of xvm-stat: SVN rev. 1315
 
-XVMFS_VERSION = '0.1.3'
+XVMFS_VERSION = '0.2.0'
 fuse.fuse_python_api = (0, 2)
 
 # Logging configuration.
@@ -425,6 +425,7 @@ class XvmFS(Fuse):
         duration = None
         responseFromServer = ''
         startTime = datetime.now()
+        response = None
 
         try:
             response = urlopen(url=url, timeout=self.timeout / 1000)
@@ -433,10 +434,12 @@ class XvmFS(Fuse):
             if code in [200, 202]:
                 # 200 OK, 202 Accepted
                 responseFromServer = response.read()
-            response.close()
 
         except Exception, ex:
             Log.error('loadUrl failed: ' + str(ex))
+        finally:
+            if response != None:
+                response.close()
 
         elapsed = datetime.now() - startTime
         msec = elapsed.seconds * 1000 + elapsed.microseconds / 1000
@@ -527,6 +530,10 @@ class XvmFS(Fuse):
         if len(updateRequest) <= 0:
             return
 
+        if self.proxies is None or len(self.proxies) <= 0:
+            Log.warning('Cannot read statistics: no suitable proxy was found.')
+            return
+
         try:
             updateRequest = updateRequest.replace('?', '%3F')
             proxy = self.proxies[randint(0, len(self.proxies) - 1)]
@@ -537,6 +544,10 @@ class XvmFS(Fuse):
                 return
 
             data = json.loads(responseFromServer.replace('\n', '\\n'))
+            if not data.has_key('players'):
+                Log.warning('Stat request failed: ' + str(responseFromServer))
+                return
+
             info = data['info'][self.version] if data.has_key('info') else None
             res = dict(players=data['players'], info=None)
 
@@ -553,15 +564,39 @@ class XvmFS(Fuse):
 
                 """ Convert tree-ish data structure to flat, and modify key names.
                     The same job does 'JsonDataToResponse' method in original XVM.
-                    The order of keys in the following lists should be relevant.
+                    Item conversion format is: (JSON key, XVM key, default value)
                 """
-                keys1 = ['id', 'name', 'vname', 'battles', 'wins', 'eff']
-                keys2 = ['b', 'w', 'l', 's', 'd', 'f']
-                keys3 = ['id', 'name', 'vn', 'b', 'w', 'e', 'tb', 'tw', 'tl', 'ts', 'td', 'tf']
-                vals = [stat[x] for x in keys1] + [stat['v'][x] for x in keys2]
-                stat = dict(zip(keys3, vals))
+                keys1 = (('id', 'id', 0)
+                    , ('name', 'name', '')
+                    , ('vname', 'vn', '')
+                    , ('battles', 'b', 0)
+                    , ('wins', 'w', 0)
+                    , ('eff', 'e', 0)
+                    , ('spo', 'spo', 0)
+                    , ('hip', 'hip', 0)
+                    , ('cap', 'cap', 0)
+                    , ('dmg', 'dmg', 0)
+                    , ('frg', 'frg', 0)
+                    , ('def', 'def', 0)
+                    , ('lvl', 'avglvl', 0)
+                    , ('wr', 'wn', 0)
+                    , ('twr', 'twr', 0)
+                )
 
-                cacheKey = "%(id)d=%(vn)s" % stat
+                keys2 = (('b', 'tb', 0)
+                    , ('w', 'tw', 0)
+                    , ('l', 'tl', 0)
+                    , ('s', 'ts', 0)
+                    , ('d', 'td', 0)
+                    , ('f', 'tf', 0)
+                )
+
+                stat = dict([(y, stat[x]) if stat.has_key(x) else (y, z)
+                                for (x,y,z) in keys1]
+                    + [(y, stat['v'][x]) if stat['v'].has_key(x) else (y, z)
+                                for (x,y,z) in keys2])
+
+                cacheKey = "%d=%s" % (stat['id'], stat['vn'] or '')
                 self.cache[cacheKey] = dict(stat=stat, notInDb=False)
 
                 pd = next((x for x in req['players'] if x['id'] == stat['id']), None)
@@ -582,7 +617,7 @@ class XvmFS(Fuse):
                         clan=pd['clan']))
 
         except Exception, ex:
-            Log.error('PrepareStat exception: %s' + str(ex))
+            Log.error('PrepareStat exception: ' + str(ex))
             Log.debug("\n" + traceback.format_exc(ex))
 
     """ Log processing
