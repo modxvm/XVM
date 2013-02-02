@@ -19,7 +19,7 @@ class wot.battleloading.TipField
         var info: TextField = form_mc.helpTip;
         var tip: TextField = form_mc.tipText;
 
-        info.text = "XVM v" + Defines.XVM_VERSION + " ";
+        info.text = "XVM v" + Defines.XVM_VERSION + "     " + Defines.XVM_INTRO;
 
         if (event.ver && Utils.compareVersions(String(event.ver), Defines.XVM_VERSION) == 1)
         {

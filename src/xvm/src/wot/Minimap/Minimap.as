@@ -15,18 +15,6 @@ import wot.Minimap.model.externalProxy.IconsProxy;
 import wot.Minimap.model.externalProxy.MapConfig;
 
 /**
- * Original Minimap manages all kinds size, border, drawing and clicking.
- * 
- * Minimap extends MinimapEntity.
- * 
- * Extra functionality implemented at M:
- * ) Level\type\nick\etc at icon on Minimap.
- *    Achieved exploiting WG highlighting feature.
- *    Original light behaviour was Ctrl + mouseOver at PlayersPanel -> icon highlight at Minimap.
- *    Feature is modded to allow PlayersPanel <-> Minimap syncronization.
- *    Any individual user linked data is now available at Minimap.
- * ) Free marker scaling adjusts tank and base icon size.
- * 
  * @author ilitvinov87@gmail.com
  */
 
@@ -45,8 +33,8 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     private var lostMarkers:LostMarkers;
     
     /**
-     * Defines real map size in meters.
-     * Common values are 1km^2, 600m^2
+     * Defines real map side size in meters.
+     * Common values are 1km, 600m
      */
     private var mapSizeModel:MapSizeModel;
     private var mapSizeLabel:MapSizeLabel;
@@ -107,14 +95,12 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     // override
     function sizeUp()
     {
-        prefactorScale();
         super.sizeUp();
         refactorScale();
     }
     
     function sizeDown()
     {
-        prefactorScale();
         super.sizeDown();
         refactorScale();
     }
@@ -248,13 +234,20 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
                 mapSizeLabel = new MapSizeLabel(this.backgrnd, mapSizeModel.getSide());
             }
             
-            /** Draw customized circles */
+            /**
+             * Draw customized circles.
+             * Outlines distance in meters.
+             */
             if (MapConfig.circlesEnabled)
             {
                 circles = new Circles(mapSizeModel.getSide() * 10); /** Total map side distance in meters */
             }
             
-            /** Draw customized lines */
+            /**
+             * Draw customized lines.
+             * Outlines vehicle direction, gun horizontal traverse angle
+             * and possibly distance in meters.
+             */
             if (MapConfig.linesEnabled)
             {
                 lines = new Lines(mapSizeModel.getSide() * 10); /** Total map side distance in meters  */

@@ -260,7 +260,7 @@ class wot.utils.Macros
                     return "Сэр Макс (XVM)";
                 /** Придурки */
                 if (label == "6eC_IIaHuKu") //26.01.13
-                    return "kassit macdonalds";
+                    return "kassir macdonalds";
                 break;
 
             case "CT":

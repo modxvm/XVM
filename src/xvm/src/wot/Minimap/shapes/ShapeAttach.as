@@ -7,14 +7,19 @@ import wot.Minimap.model.externalProxy.IconsProxy;
 
 class wot.Minimap.shapes.ShapeAttach
 {
-    private var MAP_SIZE_IN_POINTS:Number = 211; /** Internal MoviecLip minimap size in points without scaling */
+    /**
+     * Internal MoviecLip minimap size in points without scaling.
+     * 
+     * scripts/client/gui/Scaleform/Minimap.py
+     *   class Minimap(object):
+     *     __MINIMAP_SIZE = (210, 210)
+     */
+    private var MAP_SIZE_IN_POINTS:Number = 210;
     
     private var scaleFactor:Number;
     
     public function ShapeAttach(mapSizeInMeters:Number) 
     {
-        var metersPerPoint:Number = MAP_SIZE_IN_POINTS / mapSizeInMeters;
-        
         /**
          * Get oneself icon.
          * Used as a center of circles.
@@ -22,6 +27,7 @@ class wot.Minimap.shapes.ShapeAttach
          */
         var self = IconsProxy.getSelf();
         
+        var metersPerPoint:Number = MAP_SIZE_IN_POINTS / mapSizeInMeters;
         scaleFactor = metersPerPoint;
     }
     
