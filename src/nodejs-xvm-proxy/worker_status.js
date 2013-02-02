@@ -7,7 +7,7 @@ exports.initialize = function() {
     // http status and balancer
     for(var i = 0; i < settings.servers.length; ++i) {
         serverStatus.push({
-            host: settings.servers[i].host,
+            name: settings.servers[i].name,
             lastErrorDate: null,
             error_shown: false,
             connections: 0,

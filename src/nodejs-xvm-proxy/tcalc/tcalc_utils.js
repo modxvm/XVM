@@ -4,13 +4,14 @@ module.exports = (function() {
         tcalc_base = require("./tcalc_base.js");
 
     // Parse user stats
-    parseStatData = function(data) {
+    parseStatData = function(data, isLog) {
         var log = "";
         data.battles = 0; // total count of "good" battles (more 100 battles for tank)
         var vd = []; // filtered array of vehicles data
         for (var vname in data.v) {
             if (vname == "A-20" || vname == "M103") {
-                log += "WARNING: Skip dubious tank: " + vname + "\n";
+                if (isLog)
+                    log += "WARNING: Skip dubious tank: " + vname + "\n";
                 continue;
             }
 
@@ -18,15 +19,18 @@ module.exports = (function() {
             vdata.name = vname;
 
             if (!vdata.b || vdata.b <= def.MIN_VEHICLE_BATTLES) {
-                log += "WARNING: Not enough battles for tank: " + vname + " (" + vdata.b + "). This tank is skipped.\n";
+                if (isLog)
+                    log += "WARNING: Not enough battles for tank: " + vname + " (" + vdata.b + "). This tank is skipped.\n";
                 continue;
             }
 
             vdata.link = tcalc_base.tanks[vname];
             vdata.rate = vdata.w / vdata.b * 100;
             if (!vdata.link) {
-                log += "WARNING: No data in base.csv for " + vname +
-                    " (b=" + vdata.b + " r=" + vdata.rate.toFixed(2) + "). This tank is skipped.\n";
+                if (isLog) {
+                    log += "WARNING: No data in base.csv for " + vname +
+                        " (b=" + vdata.b + " r=" + vdata.rate.toFixed(2) + "). This tank is skipped.\n";
+                }
                 continue;
             }
             // fix acc in depend of count of battles
@@ -40,7 +44,8 @@ module.exports = (function() {
         // limit of calculated tanks
         vd.sort(function(a,b){ return b.b - a.b; });
         if (vd.length >= 30) {
-            log += "Tanks limit is reached: 30. Skip some tanks (" + (vd.length - 30) + ").\n";
+            if (isLog)
+                log += "Tanks limit is reached: 30. Skip some tanks (" + (vd.length - 30) + ").\n";
             vd = vd.slice(0, 30);
         }
 
@@ -50,7 +55,7 @@ module.exports = (function() {
     }
 
     // remove battles with bad stats (teaching)
-    delFirst = function(data, battles) {
+    delFirst = function(data, battles, isLog) {
         var log = "";
         data.v.sort(function(a,b){ return b.rate-a.rate; });
         for (var i = data.v.length - 1; i >= 0 && battles > 0; --i) {
@@ -65,7 +70,8 @@ module.exports = (function() {
                 continue;
 
             battles -= vdata.b;
-            log += "Deleted: b=" + vdata.b + "\t%=" + Math.round(vdata.rate) + "\t" + vdata.name + "\n";
+            if (isLog)
+                log += "Deleted: b=" + vdata.b + "\t%=" + Math.round(vdata.rate) + "\t" + vdata.name + "\n";
             delete data.v[i];
         }
 
@@ -86,7 +92,7 @@ module.exports = (function() {
     }
 
     // calculate average corrected win rate
-    getAvgRatePlus = function(data, log) {
+    getAvgRatePlus = function(data, isLog) {
         var b = 0, w = 0, b7 = 0, b8 = 0, b9 = 0;
         for (var vname in data.v)
         {
@@ -100,11 +106,11 @@ module.exports = (function() {
 
         var res = w / b * 100;
         if (res > 53 && b7 < 300)
-            return { result: 53, log: "\nWARNING: Not enough battles on level 7+, maximum rate is 53%\n" };
+            return { result: 53, log: isLog ? "\nWARNING: Not enough battles on level 7+, maximum rate is 53%\n" : "" };
         if (res > 55 && b8 < 300)
-            return { result: 55, log: "\nWARNING: Not enough battles on level 8+, maximum rate is 55%\n" };
+            return { result: 55, log: isLog ? "\nWARNING: Not enough battles on level 8+, maximum rate is 55%\n" : "" };
         if (res > 57 && b9 < 300)
-            return { result: 57, log: "\nWARNING: Not enough battles on level 9+, maximum rate is 57%\n" };
+            return { result: 57, log: isLog ? "\nWARNING: Not enough battles on level 9+, maximum rate is 57%\n" : "" };
 
         return { result: res, log: "" };
     }

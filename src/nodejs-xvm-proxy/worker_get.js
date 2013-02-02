@@ -66,7 +66,7 @@ var getFreeConnection = function(servers) {
                 continue;
             }
             if (settings.lastErrorTtl > 1000)
-                utils.log("INFO:  [" + sst.host + "] resumed");
+                utils.log("INFO:  [" + sst.name + "] resumed");
             sst.lastErrorDate = null;
             sst.error_shown = false;
         }
@@ -104,21 +104,16 @@ var makeSingleRequest = function(id, server, callback) {
     //utils.debug("id:"+ id + " server:" + server.id);
     process.send({usage:1, serverId:server.id, connections:1});
 
-    var options = {
-        host: server.host,
-        port: server.port,
-        path: "/uc/accounts/" + id + "/api/" + server.api + "/?source_token=Intellect_Soft-WoT_Mobile-unofficial_stats",
-        //agent: agent,
-        headers: {
-            // 'connection': 'keep-alive'
-            'connection': 'close'
-        }
-    }
+    var options = server.options;
+    options.path = (options.path || "") + "/uc/accounts/" + id + "/api/" + server.api + "/?source_token=Intellect_Soft-WoT_Mobile-unofficial_stats";
+    if (!options.headers)
+        options.headers = {};
+    options.headers.connection = "close"; // "keep-alive"
 
     var done = false;
     var reqTimeout = setTimeout(function() {
         done = true;
-        var err = "[" + server.host + "] Http timeout: " + server.timeout;
+        var err = "[" + server.name + "] Http timeout: " + server.timeout;
         onRequestDone(server, err);
 //        utils.debug(err);
         callback(null, { __status: "timeout" });
@@ -131,7 +126,7 @@ var makeSingleRequest = function(id, server, callback) {
             clearTimeout(reqTimeout);
             if (done)
                 return;
-            var err = "[" + server.host + "] Http error: bad status code: " + res.statusCode;
+            var err = "[" + server.name + "] Http error: bad status code: " + res.statusCode;
             onRequestDone(server, err);
             //utils.debug(err);
             callback(null, { __status: res.statusCode });
@@ -160,7 +155,7 @@ var makeSingleRequest = function(id, server, callback) {
                     str = responseData.replace(/[ \t\n\r\x00-\x1F]/g, "");
                     str = str.substr(0, 45) + "~" + str.substr(str.length - 11, 10);
                 }
-                var err = "[" + server.host + "] JSON.parse:  l=" + responseData.length + ", d=\"" + str + "\"";
+                var err = "[" + server.name + "] JSON.parse:  l=" + responseData.length + ", d=\"" + str + "\"";
                 onRequestDone(server, err);
 //                utils.debug(err);
                 callback(null, { __status: "parse" });
@@ -176,7 +171,7 @@ var makeSingleRequest = function(id, server, callback) {
         if (done)
             return;
         done = true;
-        var err = "[" + server.host + "] Http error: " + e
+        var err = "[" + server.name + "] Http error: " + e
         onRequestDone(server, err);
 //        utils.debug(err);
         callback(null, { __status: "error" });
@@ -392,7 +387,7 @@ var _parseNewPlayerData = function(id, data) {
     // TWR - tourist1984 win rate (aka T-Calc)
     try {
 //        utils.log("start calc twr: " + resultItem._id);
-//        pdata.twr = tcalc.calc(utils.clone(pdata)).result.toFixed(2);
+//        pdata.twr = tcalc.calc(utils.clone(pdata), false).result.toFixed(2);
 //        utils.log("pdata.twr=" + pdata.twr + "%" +
 //            ", GWR=" + (resultItem.w / pdata.b * 100).toFixed(2) + "%" +
 //            ", bc=" + pdata.b +

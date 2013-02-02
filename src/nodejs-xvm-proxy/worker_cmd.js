@@ -112,7 +112,7 @@ var cmd_TWR = function(response, pl, args) {
             else {
                 var s = "";
                 for (var i = 0; i < data.length; ++i)
-                    s += "<pre>" + tcalc.calc(data[i]).log + "</pre><hr>";
+                    s += "<pre>" + tcalc.calc(data[i], true).log + "</pre><hr>";
                 response.end(s);
             }
         } catch(e) {

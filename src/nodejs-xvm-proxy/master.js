@@ -148,13 +148,13 @@ var showUsageStat = function() {
     s += lpad(usageStat.mongorq + "/" + usageStat.mongorq_max, " ", 8);
     utils.log(s);
 
-    utils.log("> connections:             cur max    total     fail");
+    utils.log("> connections: cur max    total     fail");
     //        "  api.worldoftanks-sea.com   0  52"
     for (var i = 0; i < usageStat.connections.length; ++i) {
         var cs = usageStat.connections[i];
         if (cs) {
             utils.log("  " +
-                rpad(settings.servers[i].host, " ", 24) + " " +
+                rpad(settings.servers[i].name, " ", 12) + " " +
                 lpad(cs.cur, " ", 3) + " " +
                 lpad(cs.max, " ", 3) + " " +
                 lpad(cs.total, " ", 8) + " " +
