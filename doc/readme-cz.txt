@@ -22,7 +22,7 @@
   Stránky projektu:  			http://code.google.com/p/wot-xvm/
   Podpora:           			http://www.koreanrandom.com/forum/topic/1383-xvm
   Nejčastější dotazy (Rusky):		http://www.koreanrandom.com/forum/topic/1381-faq
-  Různá již připravená nastavení:  	http://www.koreanrandom.com/forum/topic/1384-configurations
+  Různá již připravená nastavení:  	http://www.koreanrandom.com/forum/forum/50-custom-configurations
   Online editor:     			http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
 

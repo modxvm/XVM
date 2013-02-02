@@ -23,7 +23,7 @@
 
   Support:       http://www.koreanrandom.com/forum/topic/1383-xvm
   FAQ (Russian): http://www.koreanrandom.com/forum/topic/1381-faq
-  Ready configs: http://www.koreanrandom.com/forum/topic/1384-configurations
+  Ready configs: http://www.koreanrandom.com/forum/forum/50-custom-configurations
   Сonfig editor: http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
 -----------------------------------------------------------
