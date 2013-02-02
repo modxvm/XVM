@@ -123,7 +123,7 @@ class wot.utils.Chance
     {
         var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
 
-        var E: Number = stat.e || Config.s_config.consts.AVG_EFF;
+        var E: Number = stat.wn || Config.s_config.consts.AVG_EFF;
         var R: Number = stat.b ? stat.w / stat.b : Config.s_config.consts.AVG_GWR / 100.0;
 
         var B: Number = stat.b || Config.s_config.consts.AVG_BATTLES;
@@ -139,7 +139,7 @@ class wot.utils.Chance
     {
         var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
 
-        var E: Number = stat.e || Config.s_config.consts.AVG_EFF;
+        var E: Number = stat.wn || Config.s_config.consts.AVG_EFF;
 
         var r = stat.tb ? stat.tw / stat.tb * 100 : Config.s_config.consts.AVG_GWR;
         var Rt_pre: Number = Math.max(-10, Math.min(10, (r - Config.s_config.consts.AVG_GWR)));
