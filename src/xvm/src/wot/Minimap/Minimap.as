@@ -1,4 +1,3 @@
-import wot.utils.Logger;
 import wot.Minimap.ExternalDeveloperInterface;
 import wot.utils.Utils;
 import wot.utils.GlobalEventDispatcher;
@@ -120,11 +119,12 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
         
         self.attachments._xscale = 100 / (self._xscale / 100);
         self.attachments._yscale = 100 / (self._yscale / 100);
-        
+        /*
         Logger.add("");
         Logger.add("icons._xscale " + icons._xscale);
         Logger.add("self._xscale " + self._xscale);
         Logger.add("attachments._xscale " + self.attachments._xscale);
+        */
     }
     
     private function prefactorScale():Void
@@ -260,9 +260,9 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     private function setCameraAlpha():Void
     {
         var camera:MinimapEntry = IconsProxy.getCamera();
-        if (camera._alpha != MapConfig.cameraAlpha)
+        if (camera.markMC._alpha != MapConfig.cameraAlpha)
         {
-            camera._alpha = MapConfig.cameraAlpha
+            camera.markMC._alpha = MapConfig.cameraAlpha;
         }
     }
 }
