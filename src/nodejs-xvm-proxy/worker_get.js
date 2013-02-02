@@ -335,7 +335,7 @@ var _cacheToResult = function(item)
         lvl: item.lvl,
         eff: item.e,
         wn: item.wn,
-        twr: item.twr
+        twr: Math.round(item.twr)
     }
     if (item.vname && item.v)
         res.v = item.v.name ? item.v : utils.filterVehicleData(item, item.vname);
@@ -387,9 +387,9 @@ var _parseNewPlayerData = function(id, data) {
     // TWR - tourist1984 win rate (aka T-Calc)
     try {
 //        utils.log("start calc twr: " + resultItem._id);
-//        pdata.twr = tcalc.calc(utils.clone(pdata), false).result.toFixed(2);
+        pdata.twr = parseFloat(tcalc.calc(utils.clone(pdata), false).result.toFixed(2));
 //        utils.log("pdata.twr=" + pdata.twr + "%" +
-//            ", GWR=" + (resultItem.w / pdata.b * 100).toFixed(2) + "%" +
+//            ", GWR=" + (pdata.w / pdata.b * 100).toFixed(2) + "%" +
 //            ", bc=" + pdata.b +
 //            ", id=" + pdata._id);
     } catch (e) { utils.log(e); }
