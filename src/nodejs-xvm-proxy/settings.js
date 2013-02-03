@@ -40,4 +40,4 @@ exports.settings = {
         [ 5 ],      // KR:  3000000000 .. 3499999999
     ],
     serverName: "?"
-}
+};

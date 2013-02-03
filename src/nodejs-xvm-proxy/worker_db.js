@@ -9,14 +9,15 @@ exports.initialize = function(callback, mongo) {
     var options = {
         auto_reconnect: true,
         poolSize: settings.dbMaxConnections
-    }
+    };
+
     var db = new _mongo.Db(settings.dbName, new _mongo.Server(settings.mongoServer, settings.mongoPort, options), { w:0 });
     db.open(onOpen);
-}
+};
 
 var isOverloaded = exports.isOverloaded = function() {
     return _mongoRq >= _mongoMaxRq;
-}
+};
 
 exports.find = function(collectionName, query) {
     var col = null;
@@ -34,7 +35,7 @@ exports.find = function(collectionName, query) {
             throw "[DB] Bad collectionName: " + collectionName;
     }
     return col.find(query);
-}
+};
 
 exports.getPlayersData = function(ids, callback) {
     if (isOverloaded()) {
@@ -60,25 +61,25 @@ exports.getPlayersData = function(ids, callback) {
 
         callback(error ? { statusCode:500, text:error } : null, result);
     });
-}
+};
 
 exports.updatePlayersData = function(id, data) {
     players.update({ _id: id }, data, { upsert: true });
-}
+};
 
 exports.insertMissed = function(id, miss) {
     missed.insert({ _id: id, missed: miss });
-}
+};
 
 exports.removeMissed = function(id) {
     missed.remove({ _id: id }, function(err) {
         if (err) utils.log("[DB] removeMissed(" + id + ") error: " + err);
     });
-}
+};
 
 exports.updateUsers = function(id) {
     users.update({ _id: id }, { $inc: { counter: 1 } }, { upsert: true });
-}
+};
 
 // PRIVATE
 var _open_callback = null;
@@ -103,7 +104,8 @@ var onOpen = function(error, client) {
     var options = {
         auto_reconnect: true,
         poolSize: settings.dbMaxConnections2
-    }
+    };
+
     var db = new _mongo.Db(settings.dbName2, new _mongo.Server(settings.mongoServer, settings.mongoPort, options), { w:0 });
     db.open(function(error2, client2) {
         utils.log("MongoDB connected: " + settings.dbName2);
@@ -111,7 +113,7 @@ var onOpen = function(error, client) {
         users = new _mongo.Collection(client2, settings.usersCollectionName);
         _open_callback();
     });
-}
+};
 
 // DB connections balancer
 var updateDbBalancer = function(start) {
@@ -134,4 +136,4 @@ var updateDbBalancer = function(start) {
         if (_mongoMaxRq != oldvalue)
             process.send({ usage: 1, mongorq_max: _mongoMaxRq - oldvalue });
     }
-}
+};

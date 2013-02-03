@@ -18,7 +18,7 @@ exports.main = function() {
 
     getInfoContent();
     setInterval(getInfoContent, 3600 * 1000); // every 1 hour
-}
+};
 
 // PRIVATE
 
@@ -41,7 +41,7 @@ var usageStat = {
     mongorq: 0,
     mongorq_max: settings.dbMaxConnections * settings.numNodes,
     connections: []
-}
+};
 
 var _lastLogMsg = "";
 var _skipLogMsgCounter = 0;
@@ -100,21 +100,21 @@ var processWorkerMessage = function(msg) {
     } else if(msg.cmd == "cmd") {
         //w.send({ chat: 'Ok worker, Master got the message! Over and out!' });
     }
-}
+};
 
 var lpad = function(str, padString, length) {
     str = String(str);
     while(str.length < length)
         str = padString + str;
     return str;
-}
+};
 
 var rpad = function(str, padString, length) {
     str = String(str);
     while(str.length < length)
         str += padString;
     return str;
-}
+};
 
 var showUsageStat = function() {
     var uptime = Math.round((new Date() - usageStat.start) / 1000);
@@ -164,7 +164,7 @@ var showUsageStat = function() {
     }
 
     usageStat.requests_current = 0;
-}
+};
 
 // setup "info" update interval
 var getInfoContent = function() {
@@ -176,7 +176,7 @@ var getInfoContent = function() {
         path: "/svn/wiki/ReleaseInfo.wiki"
     };
 
-    var request = http.get(options, function(res) {
+    http.get(options, function(res) {
         var responseData = "";
         res.setEncoding("utf8");
         res.on("data", function(chunk) {
@@ -195,4 +195,4 @@ var getInfoContent = function() {
             }
         });
     });
-}
+};

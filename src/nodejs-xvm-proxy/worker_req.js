@@ -42,7 +42,7 @@ exports.processRequest = function(request, response) {
         response.end(errText + "\nserver=" + settings.serverName);
         return;
     }
-}
+};
 
 // PRIVATE
 
@@ -53,7 +53,7 @@ var processStatRequest = function(qarr, response, times)
     process.send({ usage: 1, requests: 1, players: rq.ids.length });
 
     db.getPlayersData(rq.ids, function(error, db_data) { return onPlayersData(error, db_data, rq.data, response, times); });
-}
+};
 
 var getStatServers = function(id) {
     var serverId = Math.floor(id / 500000000);
@@ -69,7 +69,7 @@ var getStatServers = function(id) {
         res.push(srv);
     }
     return res;
-}
+};
 
 var parseStatRequest = function(qarr)
 {
@@ -91,7 +91,7 @@ var parseStatRequest = function(qarr)
         }
     });
     return { ids: ids, data: data };
-}
+};
 
 // response from db
 var onPlayersData = function(error, db_data, rq_data, response, times) {
@@ -145,4 +145,4 @@ var onPlayersData = function(error, db_data, rq_data, response, times) {
         response.end('{"error":"' + e + '","server":"' + settings.serverName + '"}');
         utils.log("Error: " + e);
     }
-}
+};
