@@ -1,7 +1,6 @@
 import wot.Minimap.model.externalProxy.MapConfig;
 import wot.Minimap.staticUtils.LabelAppend;
 import wot.Minimap.dataTypes.Player;
-import wot.utils.Logger;
 
 /**
  * MinimapEntry represent individual object on map.
@@ -70,9 +69,6 @@ class wot.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
     public function rescaleAttachments():Void
     {
         attachments._xscale = attachments._yscale = (1 / (this._xscale / 100)) * 100;
-        Logger.add("label._xscale " + label._xscale);
-        Logger.add("attachments._xscale " + attachments._xscale);
-        Logger.add("this._xscale " + this._xscale);
     }
     
     function lightPlayer(visibility)

@@ -1,4 +1,3 @@
-import wot.utils.Logger;
 import wot.Minimap.ExternalDeveloperInterface;
 import wot.utils.Utils;
 import wot.utils.GlobalEventDispatcher;
@@ -51,9 +50,13 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     private var isEnemyPlayersPanelReady:Boolean = false;
     private var loadComplete:Boolean = false;
     
-    /** Used to tweak minimap resize */
-    private var prefactorSelfScale:Number; 
-    
+    function scaleMarkers(percent)
+    {
+        super.scaleMarkers(percent);
+        rescaleAttachments();
+        /** See MinimapEntry.rescaleAttachments() */
+    }
+
     // override
     function Minimap()
     {
@@ -95,39 +98,12 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     // override
     function sizeUp()
     {
-        Logger.add(" backgrnd._xscale " + backgrnd._xscale);
-        Logger.add(" icons._xscale " + icons._xscale);
         super.sizeUp();
-        rescaleAttachments();
-        Logger.add("sizeUp");
-        Logger.add(" backgrnd._xscale " + backgrnd._xscale);
-        Logger.add(" icons._xscale " + icons._xscale);
-        Logger.add("");
-    }
-    
-    function sizeDown()
-    {
-        Logger.add(" backgrnd._xscale " + backgrnd._xscale);
-        Logger.add(" icons._xscale " + icons._xscale);
-        super.sizeDown();
-        rescaleAttachments();
-        Logger.add("sizeDown");
-        Logger.add(" backgrnd._xscale " + backgrnd._xscale);
-        Logger.add(" icons._xscale " + icons._xscale);
-        Logger.add("");
+        //Logger.add("");
     }
     
     // -- Private
     
-    /**
-     * Minimap python internal resizing slightly tweaks icons scaling depending on minimap size.
-     * So icons scaling at minimap is not linearly dependent on minimap scale.
-     * Icons scale on big minimap is decreased. Icons scale on small minimap is increased.
-     * 
-     * This makes shape attachment wrong sizing. Working around.
-     * 
-     * TODO: REVERT CHILDREN SCALE
-     */
     private function rescaleAttachments():Void
     {
         var entries:Array = IconsProxy.getAllEntries();
@@ -135,6 +111,7 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
         {
             entries[i].rescaleAttachments();
         }
+        /** See MinimapEntry.rescaleAttachments() */
     }
     
     private function checkLoading():Void

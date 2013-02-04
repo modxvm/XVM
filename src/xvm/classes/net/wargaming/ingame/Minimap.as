@@ -14,4 +14,10 @@ intrinsic class net.wargaming.ingame.Minimap extends UIComponent
     function onEntryInited();
     function sizeUp();
     function sizeDown();
+    function setupSize(size, stageHeight);
+    function onRecreateDevice(width, height);
+    function defaultScaleSprite(destinationSprite, ethaloneSprite);
+    function updateContentBeforeDraw(leftBorderSpace, topBorderSpace, rightBorderSpace, bottomBorderSpace);
+    function updateContent();
+    function draw();
 }
