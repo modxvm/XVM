@@ -26,6 +26,10 @@ class wot.Minimap.ExternalDeveloperInterface
      * Increase in case field content does not fit its frame and gets partially cut off
      * Decrease in case whole background map image shrinks.
      * 
+     * @param scale
+     * Field scaling in percent. Good for external images size changing.
+     * 200 - 200% of objects original size.
+     * 
      * Flash example:
      * 
      * Place code anywhere inside battle interface flash files. PlayersPanel.swf, DamagePanel.swf etc.
@@ -55,7 +59,8 @@ class wot.Minimap.ExternalDeveloperInterface
         styleConfig:String,
         alpha:Number,
         width:Number,
-        height:Number
+        height:Number,
+        scale:Number
     )
     {
         /**
@@ -88,6 +93,11 @@ class wot.Minimap.ExternalDeveloperInterface
             height = 30;
         }
         
+        if (!scale)
+        {
+            scale = 100;
+        }
+        
         /** ------------- */
         
         /**
@@ -107,6 +117,7 @@ class wot.Minimap.ExternalDeveloperInterface
         tf.htmlText = "<span class='custom'>" + format + "</span>";
         
         tf._alpha = alpha;
+        tf._xscale = tf._yscale = scale;
     }
     
     // -- Private
