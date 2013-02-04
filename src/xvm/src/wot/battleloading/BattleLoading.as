@@ -16,7 +16,7 @@ import wot.utils.Utils;
 
 class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
 {
-    private static var STAT_PRELOAD_DELAY:Number = 3000; // TODO - sometimes it happens before all items added in BattleLoadingItemRenderer7
+    private static var STAT_PRELOAD_DELAY:Number = 100;
 
     // Components
     private var winChances:WinChances;
@@ -66,14 +66,28 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
             loadStatistics();
     }
 
-    private function loadStatistics()
+    private static function loadStatistics(loop)
     {
+        if (!loop)
+          loop = 0;
         // Force stats loading after 0.5 sec if enabled (for 12x12 battles, FogOfWar, ...)
         _global.setTimeout
         (
             function() {
-                if (!StatData.s_loaded)
-                    StatLoader.StartLoadData(Defines.COMMAND_RUN);
+                if (!StatData.s_loaded) {
+                    if (StatLoader.s_players_count == 0) {
+                        if (loop * BattleLoading.STAT_PRELOAD_DELAY > 10000) { // 10 sec
+                            Logger.add("WARNING: no players data after 10 sec, skip stats loading");
+                        } else {
+                            Logger.add("[" + loop  + "] no players data, waiting more");
+                            BattleLoading.loadStatistics(loop + 1);
+                        }
+                    }
+                    else {
+                        Logger.add("[BattleLoading] loading stat data (" + StatLoader.s_players_count + " players)");
+                        StatLoader.StartLoadData(Defines.COMMAND_RUN);
+                    }
+                }
             },
             STAT_PRELOAD_DELAY
         );
