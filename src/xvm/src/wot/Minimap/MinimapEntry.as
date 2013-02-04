@@ -43,8 +43,18 @@ class wot.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
     /** Used only for camera entry to define if entry is processed with Lines class */
     public var cameraExtendedToken:Boolean;
     
-    /** Shapes container. Circles and lines. */
-    public var attachments:MovieClip;
+    /** 
+     * All attachments container: TextFiels(Labels), Shapes.
+     */
+    public function get attachments():MovieClip
+    {
+        if (!this.attachments)
+        {
+            this.createEmptyMovieClip("attachments", this.getNextHighestDepth());
+        }
+        
+        return this.attachments;
+    }
     
     function lightPlayer(visibility)
     {
@@ -67,7 +77,8 @@ class wot.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
         
         if (MapConfig.revealedEnabled)
         {
-            LabelAppend.append(markMC, uid, this.entryName, this.vehicleClass, null, null);
+            /** Attach revealed icon info */
+            LabelAppend.append(attachments, uid, this.entryName, this.vehicleClass, null, null);
         }
     }
     

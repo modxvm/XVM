@@ -3,17 +3,18 @@ import wot.Minimap.MinimapEntry;
 import wot.utils.GlobalEventDispatcher;
 import wot.Minimap.MinimapEvent;
 import wot.Minimap.staticUtils.LabelAppend;
-import wot.Minimap.model.externalProxy.IconsProxy;
 
 class wot.Minimap.LostMarkers
 {
-    private var container:MovieClip;
+    private var markersContainer:MovieClip;
+    private var icons:MovieClip;
     
     private var lostMarkersTracking:Array;
     
-    public function LostMarkers(container:MovieClip) 
+    public function LostMarkers(icons:MovieClip) 
     {
-        this.container = container; /** Minimap.icons */
+        this.icons = icons;
+        this.markersContainer = icons.createEmptyMovieClip("lostMarkers", icons.getNextHighestDepth());
         GlobalEventDispatcher.addEventListener(MinimapEvent.LOST_PLAYERS_UPDATE, this, onLost);
         lostMarkersTracking = [];
     }
@@ -38,19 +39,19 @@ class wot.Minimap.LostMarkers
     
     private function createAllLabels(lost:Array):Void
     {
-        /**
-         * LostMarkers does not have scaling applied by parent.
-         * Applying manually.
-         * Should not be in constructor.
-         */
-        var self:MinimapEntry = IconsProxy.getSelf();
-        var scale:Number = self._xscale;
+        var scale:Number = 100;
         
         /** Find UIDs that present in lost but are absent in labels */
         for (var i in lost)
         {
+            var lostGuy:Icon = lost[i];
+            var depth:Number = markersContainer.getNextHighestDepth();
+            var marker:MovieClip = markersContainer.createEmptyMovieClip("marker" + depth, depth);
+            /** Set lost position */
+            marker._x = lostGuy.pos.x;
+            marker._y = lostGuy.pos.y;
             /* New TextField is attached to Minimap at this moment */
-            var tf:TextField = createLabel(lost[i], scale);
+            var tf:TextField = LabelAppend.append(marker, lostGuy.uid, MinimapEntry.MINIMAP_ENTRY_NAME_LOST, lostGuy.vehicleClass, scale);
             
             /**
              * Pointer to its address is tracked to handle proper remove
@@ -58,10 +59,5 @@ class wot.Minimap.LostMarkers
              */
             lostMarkersTracking.push(tf);
         }
-    }
-    
-    private function createLabel(lost:Icon, scale:Number):TextField
-    {
-        return LabelAppend.append(container, lost.uid, MinimapEntry.MINIMAP_ENTRY_NAME_LOST, lost.vehicleClass, scale, lost.pos);
     }
 }

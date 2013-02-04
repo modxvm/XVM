@@ -6,22 +6,22 @@ import wot.Minimap.model.externalProxy.PlayersPanelProxy;
 
 class wot.Minimap.staticUtils.LabelAppend
 {
-    public static function append(mc:MovieClip, uid:Number, entryName:String, vehicleClass:String, scale:Number, extraOffset:Point):TextField
+    public static function append(container:MovieClip, uid:Number, entryName:String, vehicleClass:String, scale:Number):TextField
     {
-        var offset:Point = MapConfig.unitLabelOffset(entryName);
-        if (extraOffset)
+        /**
+         * Skip creation of textFields with "undefined" string.
+         * Happens for oneSelf icon at replay rewind.
+         */
+        if (!(entryName && uid && vehicleClass))
         {
-            /**
-             * Used for lost markers.
-             * Large values transferred in comparison to config offset.
-             * (-4; -4) - config offset for lost. (-50; 30) - major offset for lost to present lost position.
-             */
-            offset = offset.add(extraOffset);
+            return null;
         }
+            
+        var offset:Point = MapConfig.unitLabelOffset(entryName);
         
         var player:Player = PlayersPanelProxy.getPlayerInfo(uid);
         
-        var textField:TextField = mc.createTextField("textField-" + player.uid + entryName, mc.getNextHighestDepth(), offset.x, offset.y, 100, 40);
+        var textField:TextField = container.createTextField("textField-" + player.uid + entryName, container.getNextHighestDepth(), offset.x, offset.y, 100, 40);
         textField.antiAliasType = "advanced";
         textField.html = true;
         textField.multiline = true;

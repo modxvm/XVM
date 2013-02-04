@@ -59,8 +59,8 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
     
     private function drawCircle(radius:Number, thickness:Number, color:Number, alpha:Number)
     {
-        var depth:Number = attachments.getNextHighestDepth();
-        var mc:MovieClip = attachments.createEmptyMovieClip("circle" + depth, depth);
+        var depth:Number = selfAttachments.getNextHighestDepth();
+        var mc:MovieClip = selfAttachments.createEmptyMovieClip("circle" + depth, depth);
         mc.lineStyle(thickness, color, alpha);
         
         var centerX:Number = 0;

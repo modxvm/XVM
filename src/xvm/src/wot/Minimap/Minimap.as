@@ -1,3 +1,4 @@
+import wot.utils.Logger;
 import wot.Minimap.ExternalDeveloperInterface;
 import wot.utils.Utils;
 import wot.utils.GlobalEventDispatcher;
@@ -94,14 +95,26 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     // override
     function sizeUp()
     {
+        Logger.add(" backgrnd._xscale " + backgrnd._xscale);
+        Logger.add(" icons._xscale " + icons._xscale);
         super.sizeUp();
         refactorScale();
+        Logger.add("sizeUp");
+        Logger.add(" backgrnd._xscale " + backgrnd._xscale);
+        Logger.add(" icons._xscale " + icons._xscale);
+        Logger.add("");
     }
     
     function sizeDown()
     {
+        Logger.add(" backgrnd._xscale " + backgrnd._xscale);
+        Logger.add(" icons._xscale " + icons._xscale);
         super.sizeDown();
         refactorScale();
+        Logger.add("sizeDown");
+        Logger.add(" backgrnd._xscale " + backgrnd._xscale);
+        Logger.add(" icons._xscale " + icons._xscale);
+        Logger.add("");
     }
     
     // -- Private
@@ -112,9 +125,13 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
      * Icons scale on big minimap is decreased. Icons scale on small minimap is increased.
      * 
      * This makes shape attachment wrong sizing. Working around.
+     * 
+     * TODO: REVERT CHILDREN SCALE
      */
     private function refactorScale():Void
     {
+        //**********************!@!@!!&^*%&$%$%$%&*$&(FYFHHHFGUI*TT*
+        return;
         var self:MinimapEntry = IconsProxy.getSelf();
         
         self.attachments._xscale = 100 / (self._xscale / 100);
@@ -185,6 +202,7 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
          */
         MARKERS_SCALING = MapConfig.markerScale;
         scaleMarkers(MARKERS_SCALING);
+        //scaleMarkers = null;
         
         sync = new SyncModel();
         sync.updateIconsExtension();
