@@ -39,8 +39,6 @@ class wot.Minimap.LostMarkers
     
     private function createAllLabels(lost:Array):Void
     {
-        var scale:Number = 100;
-        
         /** Find UIDs that present in lost but are absent in labels */
         for (var i in lost)
         {
@@ -51,7 +49,7 @@ class wot.Minimap.LostMarkers
             marker._x = lostGuy.pos.x;
             marker._y = lostGuy.pos.y;
             /* New TextField is attached to Minimap at this moment */
-            var tf:TextField = LabelAppend.append(marker, lostGuy.uid, MinimapEntry.MINIMAP_ENTRY_NAME_LOST, lostGuy.vehicleClass, scale);
+            var tf:TextField = LabelAppend.append(marker, lostGuy.uid, MinimapEntry.MINIMAP_ENTRY_NAME_LOST, lostGuy.vehicleClass);
             
             /**
              * Pointer to its address is tracked to handle proper remove

@@ -1,6 +1,7 @@
 import wot.Minimap.model.externalProxy.MapConfig;
 import wot.Minimap.staticUtils.LabelAppend;
 import wot.Minimap.dataTypes.Player;
+import wot.utils.Logger;
 
 /**
  * MinimapEntry represent individual object on map.
@@ -43,6 +44,8 @@ class wot.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
     /** Used only for camera entry to define if entry is processed with Lines class */
     public var cameraExtendedToken:Boolean;
     
+    public var label:TextField;
+    
     /** 
      * All attachments container: TextFiels(Labels), Shapes.
      */
@@ -54,6 +57,22 @@ class wot.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
         }
         
         return this.attachments;
+    }
+    
+    /**
+     * Minimap resize procedures break attachments scale.
+     * Workaround.
+     * Reverts parent entry scaling.
+     * For example: icon scaling of 62% produces attachment scaling of 159
+     * so resulting attachment size becomes as if both icons and attachments scale were 100%.
+     * This makes attachments size virtually independent of icon scale.
+     */
+    public function rescaleAttachments():Void
+    {
+        attachments._xscale = attachments._yscale = (1 / (this._xscale / 100)) * 100;
+        Logger.add("label._xscale " + label._xscale);
+        Logger.add("attachments._xscale " + attachments._xscale);
+        Logger.add("this._xscale " + this._xscale);
     }
     
     function lightPlayer(visibility)
@@ -78,8 +97,10 @@ class wot.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
         if (MapConfig.revealedEnabled)
         {
             /** Attach revealed icon info */
-            LabelAppend.append(attachments, uid, this.entryName, this.vehicleClass, null, null);
+            label = LabelAppend.append(attachments, uid, this.entryName, this.vehicleClass);
         }
+        
+        rescaleAttachments();
     }
     
     private function get syncProcedureInProgress():Boolean

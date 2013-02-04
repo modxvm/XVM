@@ -98,7 +98,7 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
         Logger.add(" backgrnd._xscale " + backgrnd._xscale);
         Logger.add(" icons._xscale " + icons._xscale);
         super.sizeUp();
-        refactorScale();
+        rescaleAttachments();
         Logger.add("sizeUp");
         Logger.add(" backgrnd._xscale " + backgrnd._xscale);
         Logger.add(" icons._xscale " + icons._xscale);
@@ -110,7 +110,7 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
         Logger.add(" backgrnd._xscale " + backgrnd._xscale);
         Logger.add(" icons._xscale " + icons._xscale);
         super.sizeDown();
-        refactorScale();
+        rescaleAttachments();
         Logger.add("sizeDown");
         Logger.add(" backgrnd._xscale " + backgrnd._xscale);
         Logger.add(" icons._xscale " + icons._xscale);
@@ -128,26 +128,13 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
      * 
      * TODO: REVERT CHILDREN SCALE
      */
-    private function refactorScale():Void
+    private function rescaleAttachments():Void
     {
-        //**********************!@!@!!&^*%&$%$%$%&*$&(FYFHHHFGUI*TT*
-        return;
-        var self:MinimapEntry = IconsProxy.getSelf();
-        
-        self.attachments._xscale = 100 / (self._xscale / 100);
-        self.attachments._yscale = 100 / (self._yscale / 100);
-        /*
-        Logger.add("");
-        Logger.add("icons._xscale " + icons._xscale);
-        Logger.add("self._xscale " + self._xscale);
-        Logger.add("attachments._xscale " + self.attachments._xscale);
-        */
-    }
-    
-    private function prefactorScale():Void
-    {
-        var self:MinimapEntry = IconsProxy.getSelf();
-        prefactorSelfScale = self._xscale;
+        var entries:Array = IconsProxy.getAllEntries();
+        for (var i in entries)
+        {
+            entries[i].rescaleAttachments();
+        }
     }
     
     private function checkLoading():Void
@@ -270,8 +257,6 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
             {
                 lines = new Lines(mapSizeModel.getSide() * 10); /** Total map side distance in meters  */
             }
-            
-            refactorScale();
         }
     }
     
