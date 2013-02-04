@@ -152,7 +152,7 @@ class wot.utils.DefaultConfig
                 mapBackgroundImageAlpha: 100,
                 selfIconAlpha: 100,
                 cameraAlpha: 100,
-                markerScale: 1,
+                iconScale: 1,
                 labels: {
                   nickShrink: 4,
                   vehicleclassmacro: {
