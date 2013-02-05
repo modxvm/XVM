@@ -10,7 +10,7 @@ module.exports = (function() {
             if (err)
                 return console.log(err);
 
-            lines = data.split(/\r?\n/g);
+            var lines = data.split(/\r?\n/g);
             for (var lineId in lines) {
                 var line = lines[lineId].trim().split(";");
                 if (line.length <= 1)
@@ -33,7 +33,7 @@ module.exports = (function() {
                 };
             }
         });
-    }
+    };
     return {
         tanks: tanks,
         parseBaseCsv: parseBaseCsv

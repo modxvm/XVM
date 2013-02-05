@@ -1,16 +1,16 @@
 ////////////////////
 // Worker thread
 
+module.exports = (function() {
 var settings = require("./settings").settings,
     utils = require("./utils"),
     status = require("./worker_status"),
     db = require("./worker_db"),
-    http = require("http");
+        http;
 
-exports.createWorker = function(fakeMongo, fakeHttp) {
-    // fakeHttp is for test applications only
-    if (fakeHttp)
-        http = fakeHttp;
+    var createWorker = function(fakeMongo, fakeHttp) {
+        // fakes is for test applications only
+        http = fakeHttp || require("http");
 
     //handler for messages from master thread
     process.on("message", function(msg) {
@@ -22,7 +22,7 @@ exports.createWorker = function(fakeMongo, fakeHttp) {
     status.initialize();
     db.initialize(createHttpServer, fakeMongo);
     require("./tcalc/tcalc_base").parseBaseCsv();
-}
+};
 
 // PRIVATE
 
@@ -33,4 +33,8 @@ var createHttpServer = function() {
     var worker_req = require("./worker_req");
     http.createServer(worker_req.processRequest).listen(settings.port, settings.host);
     utils.log("Server running at http://" + settings.host + ":" + settings.port + "/");
-}
+};
+    return {
+        createWorker: createWorker
+    }
+})();

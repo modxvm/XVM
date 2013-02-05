@@ -32,7 +32,6 @@ exports.processRequest = function(request, response) {
             worker_cmd.processCommand(response, qarr);
             return;
         }
-
         processStatRequest(qarr, response, times);
     } catch(e) {
         response.statusCode = 403; // Forbidden

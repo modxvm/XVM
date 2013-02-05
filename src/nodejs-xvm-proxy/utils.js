@@ -8,7 +8,7 @@ var calculateAvgLvl = exports.calculateAvgLevel = function(vehicles) {
         total_battles += item.b;
     }
     return total_battles <= 0 ? 0 : level_battles / total_battles;
-}
+};
 
 // calculateEfficiency
 exports.calculateEfficiency = function(data) {
@@ -31,8 +31,8 @@ exports.calculateEfficiency = function(data) {
         ) / 10) * 10;
 
 //        console.log("eff: " + (new Date() - start) + " ms (" + JSON.stringify(data).length + " bytes)");
-        return res;
-}
+    return res;
+};
 
 // WN rating
 // Current: WN6
@@ -63,7 +63,7 @@ exports.calculateWN = function(data) {
         DEF * 100 +
         ((185 / (0.17 + Math.exp((WINRATE - 35) * -0.134))) - 500) * 0.45 +
         (6 - TIER_N) * -60)) || 0;
-}
+};
 
 exports.getVehicleType = function(vclass) {
     switch(vclass.toLowerCase()) {
@@ -74,21 +74,15 @@ exports.getVehicleType = function(vclass) {
         case "spg":             return "SPG";
         default:                return "unknown";
     }
-}
+};
 
 // deep-copy of object (only simple type values supported)
 var clone = exports.clone = function(obj) {
-    // TODO: use FASTER implementation
-    return JSON.parse(JSON.stringify(obj));
-//    var copy = {};
-//    for(var i in obj) {
-//        var v = obj[i];
-//        copy[i] = v == null ? null
-//            : typeof v == "object" ? clone(v)
-//            : v;
-//    }
-//    return copy;
-}
+    var copy = {};
+    for(var i in obj)
+        copy[i] = (typeof(obj[i])=="object") ? clone(obj[i]) : obj[i];
+    return copy;
+};
 
 // log
 var log = exports.log = function(str) {
@@ -98,12 +92,12 @@ var log = exports.log = function(str) {
         (now.getDate() < 10 ? "0" : "") + now.getDate() + " " +
         now.toLocaleTimeString();
     console.log(s + ": " + str);
-}
+};
 
 // debug
 exports.debug = function(str) {
     log("DEBUG: " + str);
-}
+};
 
 // Filter vehicle data
 exports.filterVehicleData = function(item, vname) {
@@ -136,4 +130,4 @@ exports.filterVehicleData = function(item, vname) {
         }
     }
     return null;
-}
+};
