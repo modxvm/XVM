@@ -167,7 +167,7 @@
   },
   // Minimap
   // Not released
-  
+
   // OVER-TARGET MARKERS
   "markers": {
     // Ally
@@ -1498,11 +1498,11 @@
     // Dynamic color by win percent (only with xvm-stat)
     "rating": [
       { "value": 46,  "color": "0xFE0E00" },   //  0 - 45  - very bad
-      { "value": 48,  "color": "0xFE7903" },   // 46 - 47  - bad
-      { "value": 51,  "color": "0xF8F400" },   // 48 - 50  - normal
-      { "value": 54,  "color": "0x60FF00" },   // 51 - 53  - good
-      { "value": 57,  "color": "0x02C9B3" },   // 54 - 56  - very good
-      { "value": 101, "color": "0xD042F3" }    // 57 - 100 - unique
+      { "value": 49,  "color": "0xFE7903" },   // 46 - 48  - bad
+      { "value": 52,  "color": "0xF8F400" },   // 49 - 51  - normal
+      { "value": 55,  "color": "0x60FF00" },   // 52 - 54  - good
+      { "value": 60,  "color": "0x02C9B3" },   // 55 - 61  - very good
+      { "value": 101, "color": "0xD042F3" }    // 60 - 100 - unique
     ],
     // Dynamic color by kilo-battles (only with xvm-stat)
     "kb": [

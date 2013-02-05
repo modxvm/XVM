@@ -613,12 +613,12 @@ class wot.utils.DefaultConfig
                     { value: 9999, color: ColorPalette.purple }     // 1800 - *    - unique
                 ],
                 rating: [
-                    { value: 46,  color: ColorPalette.red },        //  0 - 45  - very bad
-                    { value: 48,  color: ColorPalette.orange },     // 46 - 47  - bad
-                    { value: 51,  color: ColorPalette.yellow },     // 48 - 50  - normal
-                    { value: 54,  color: ColorPalette.green },      // 51 - 53  - good
-                    { value: 57,  color: ColorPalette.blue },       // 54 - 56  - very good
-                    { value: 101, color: ColorPalette.purple }      // 57 - 100 - unique
+                    { value: 46,  color: ColorPalette.red },   //  0 - 45  - very bad
+                    { value: 49,  color: ColorPalette.orange },   // 46 - 48  - bad
+                    { value: 52,  color: ColorPalette.yellow },   // 49 - 51  - normal
+                    { value: 55,  color: ColorPalette.green },   // 52 - 54  - good
+                    { value: 60,  color: ColorPalette.blue },   // 55 - 61  - very good
+                    { value: 101, color: ColorPalette.purple }    // 60 - 100 - unique
                 ],
                 kb: [
                     { value: 2,   color: ColorPalette.red },        //  0 - 1
