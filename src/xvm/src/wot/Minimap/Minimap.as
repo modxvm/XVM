@@ -19,6 +19,20 @@ import wot.Minimap.model.externalProxy.MapConfig;
 
 class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
 {
+    /**
+     * icons Z indexes from Minimap.pyc:
+     *  _BACK_ICONS_RANGE = (25, 49)
+     *  _DEAD_VEHICLE_RANGE = (50, 99)
+     *  _VEHICLE_RANGE = (101, 150)
+     *  _FIXED_INDEXES = {'cameraNormal': 100,
+     *  'self': 151,
+     *  'cameraStrategic': 152,
+     *  'cell': 153 }
+     */
+    public static var MAX_DEAD_ZINDEX:Number = 99;
+    public static var CAMERA_NORMAL_ZINDEX:Number = 100;
+    public static var SELF_ZINDEX:Number = 151;
+    
     /** Simplified minimap interface for communication with other Python or Flash mods */
     public var externalDeveloperInterface:ExternalDeveloperInterface;
     

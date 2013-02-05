@@ -1,3 +1,4 @@
+import wot.Minimap.Minimap;
 import wot.utils.Utils;
 import wot.Minimap.MinimapEntry;
 
@@ -61,48 +62,26 @@ class wot.Minimap.model.externalProxy.IconsProxy
     /** Looks like white arrow */
     public static function getSelf():MinimapEntry
     {
-        var minimapEntries:Array = getMinimapEntries();
-        
-        for (var i:Number = 0; i < minimapEntries.length; i++)
-        {
-            if (minimapEntries[i].selfIcon)
-                return minimapEntries[i]; /** Looks like it is always the first one */
-        }
-        
-        return null;
+        var icons:MovieClip = getIcons();
+        return MinimapEntry(icons.getInstanceAtDepth(Minimap.SELF_ZINDEX));
     }
     
     /** Looks like green highlighted corner */
     public static function getCamera():MinimapEntry
     {
-        var minimapEntries:Array = getMinimapEntries();
-        var self:MinimapEntry = getSelf();        
-        
-        for (var i:Number = minimapEntries.length - 1; i >= 0 ; i--)
-        {
-            var entry:MinimapEntry = minimapEntries[i]; 
-            
-            /**
-             * Camera does not have any distinguishable fields.
-             * 
-             * Camera is always inited with MinimapEntry0 _name.
-             * 
-             * Artillery camera has _rotation == 0
-             * Attached camera has _rotation != 0
-             */
-            if (entry._name == "MinimapEntry0" && entry._rotation)
-            {
-                return entry;
-            }
-        }
-        
-        return null;
+        var icons:MovieClip = getIcons();
+        return MinimapEntry(icons.getInstanceAtDepth(Minimap.CAMERA_NORMAL_ZINDEX));
     }
     
     // -- Private
     
     private static function getMinimapEntries():Array
     {
-        return Utils.getChildrenOf(_root.minimap.icons, false)
+        return Utils.getChildrenOf(getIcons(), false);
+    }
+    
+    private static function getIcons():MovieClip
+    {
+        return _root.minimap.icons;
     }
 }
