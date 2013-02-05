@@ -13,8 +13,8 @@ class wot.Minimap.model.externalProxy.MapConfig
         return minimap.selfIconAlpha;  }
     public static function get cameraAlpha():Number    {
         return minimap.cameraAlpha;    }
-    public static function get markerScale():Number    {
-        return minimap.markerScale;    }
+    public static function get iconScale():Number    {
+        return minimap.iconScale;    }
    
     /** Labels */
         public static function get nickShrink():Number    {

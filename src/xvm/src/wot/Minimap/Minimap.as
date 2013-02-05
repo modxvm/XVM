@@ -160,11 +160,8 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
          * Setup minimap icon size.
          * Read val from config.
          * Default by WG is 0.5.
-         * 
-         * TODO:
-         * Default at XVM config is 0.5.
          */
-        MARKERS_SCALING = MapConfig.markerScale;
+        MARKERS_SCALING = MapConfig.iconScale;
         scaleMarkers(MARKERS_SCALING);
         //scaleMarkers = null;
         

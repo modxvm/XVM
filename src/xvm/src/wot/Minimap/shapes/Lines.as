@@ -56,8 +56,9 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
     {
         var cameraEntry:MinimapEntry = IconsProxy.getCamera();
         cameraEntry.cameraExtendedToken = true;
-        var depth:Number = cameraEntry.getNextHighestDepth();
-        var vehLines:MovieClip = cameraEntry.createEmptyMovieClip("cameraLine" + depth, 10000);
+        var camAttach:MovieClip = cameraEntry.attachments;
+        var depth:Number = camAttach.getNextHighestDepth();
+        var vehLines:MovieClip = camAttach.createEmptyMovieClip("cameraLine" + depth, 10000);
         attachLines(vehLines, MapConfig.linesCamera, 0);
     }
     
