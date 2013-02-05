@@ -39,7 +39,7 @@ exports.processCommand = function(response, args) {
     } catch(e) {
         response.end('{"error":"' + e + '","server":"' + settings.serverName + '"}');
     }
-};
+}
 
 // PRIVATE
 
@@ -70,7 +70,7 @@ var cmd_INFO = function(response, pl, args) {
             response.end('{"error":"' + e + '","server":"' + settings.serverName + '"}');
         }
     });
-};
+}
 
 var cmd_WN = function(response, pl, args) {
     var cursor = db.find("players", {nm: pl});
@@ -99,7 +99,7 @@ var cmd_WN = function(response, pl, args) {
             response.end('{"error":"' + e + '","server":"' + settings.serverName + '"}');
         }
     });
-};
+}
 
 var cmd_TWR = function(response, pl, args) {
     var cursor = db.find("players", {nm: pl});
@@ -119,4 +119,4 @@ var cmd_TWR = function(response, pl, args) {
             response.end('{"error":"' + e + '","server":"' + settings.serverName + '"}');
         }
     });
-};
+}

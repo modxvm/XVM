@@ -27,4 +27,4 @@ exports.initialize = function() {
 //    utils.log("conn[worker]: " + serverStatus[0].connections + "/" + serverStatus[0].maxConnections);
     }, 60000);
 */
-};
+}

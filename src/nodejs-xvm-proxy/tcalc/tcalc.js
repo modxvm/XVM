@@ -1,87 +1,95 @@
-module.exports = (function() {
+var def = require('./tcalc_defines.js'),
+    tcalc_utils = require('./tcalc_utils.js'),
+    utils = require('../utils.js');
 
-    var def = require('./tcalc_defines.js'),
-        tcalc_utils = require('./tcalc_utils.js');
+// PUBLIC
 
-    // PUBLIC
+exports.calc = function(data_orig, isLog) {
+   var start = new Date();
 
-    calc = function(data, isLog) {
-        var start = new Date();
+    var log = "";
 
-        var log = "";
+    var data = utils.clone(data_orig);
+//    return {log: JSON.stringify(data_orig) + "\n" + JSON.stringify(data)};
 
-        if (isLog) {
-            log = "ID: " + data._id +
-                ", Nick: <a href='http://worldoftanks.ru/community/accounts/" + data._id + "-" + data.nm + "/'>" + data.nm + "</a>\n";
-            log += "--------------------------\n\n";
-        }
-
-        // TODO: remove this legacy code
-        if (data.v instanceof Array) {
-            var v = {};
-            for (var i in data.v) {
-                var a = data.v[i];
-                v[a.name] = a;
-                delete v[a.name].name;
-            }
-            data.v = v;
-        }
-        // [/TODO]
-
-        log += parseStatData(data, isLog);
-
-        if (isLog) {
-            log += "--------------------------\n\n";
-            log += "Battles: " + data.battles + "\n\n";
-        }
-        if (data.battles > def.FILTER_BATTLES_LOW_LIMIT)
-            log += delFirst(data, def.DEL_FIRST_COUNT, isLog);
-
-        data.v.sort(function(a,b){ return b.b - a.b; });
-
-        if (isLog)
-            log += "\nCalculation:\n";
-
-        for (var i in data.v)
-            log += calculate(data, data.v[i], 0, isLog) + "\n";
-        if (isLog) {
-            log += "--------------------------\n\n";
-
-            log += "\n\nBegin winrate is: " + (tcalc_utils.getAvgRate(data) || 0).toFixed(2) + "\n";
-            log += "rate\tT-rate\tKa\tKd\tTank\n";
-            for (var i in data.v)
-            {
-                var vdata = data.v[i];
-                log += vdata.rate.toFixed(2) + "\t" + 
-                    vdata.rate_plus.toFixed(2) + "\t" + 
-                    vdata.acc.toFixed(2) + "\t" + 
-                    damage(vdata).toFixed(2) + "\t" + 
-                    vdata.name + "\n";
-            }
-        }
-
-        var ro = tcalc_utils.getAvgRatePlus(data, isLog);
-        var result = ro.result;
-
-//        if (isLog) {
-            log += ro.log;
-            log += "\nCorrected winrate is: " + (result || 0).toFixed(2) + "\n";
-
-            log += "\ncalculate() duration: " + (new Date() - start) + "ms\n";
-
-//        console.log("twr: " + (new Date() - start) + " ms (" + JSON.stringify(data).length + " bytes)");
-//        }
-
-        return { log: log, result: result || 0 };
+    if (isLog) {
+        log = "ID: " + data._id +
+            ", Nick: <a href='http://worldoftanks.ru/community/accounts/" + data._id + "-" + data.nm + "/'>" + data.nm + "</a>\n";
+        log += "--------------------------\n\n";
     }
 
-    //////////////////////////////////////////////////////////////////
-    // MAIN CALCULATION
+    // TODO: remove this legacy code
+    if (data.v instanceof Array) {
+        var v = {};
+        for (var i in data.v) {
+            var a = data.v[i];
+            v[a.name] = a;
+            delete v[a.name].name;
+        }
+        data.v = v;
+    }
+    // [/TODO]
+
+    log += parseStatData(data, isLog);
+
+    if (isLog) {
+        log += "--------------------------\n\n";
+        log += "Battles: " + data.battles + "\n\n";
+    }
+    if (data.battles > def.FILTER_BATTLES_LOW_LIMIT)
+        log += delFirst(data, def.DEL_FIRST_COUNT, isLog);
+
+    data.v.sort(function(a,b){ return b.b - a.b; });
+
+    if (isLog)
+        log += "\nCalculation:\n";
+
+    for (var i in data.v)
+        log += calculate(data, data.v[i], 0, isLog) + "\n";
+    if (isLog) {
+        log += "--------------------------\n\n";
+
+        log += "\n\nBegin winrate is: " + (tcalc_utils.getAvgRate(data) || 0).toFixed(2) + "\n";
+        log += "rate\tT-rate\tKa\tKd\tTank\n";
+        for (var i in data.v)
+        {
+            var vdata = data.v[i];
+            log += vdata.rate.toFixed(2) + "\t" + 
+                vdata.rate_plus.toFixed(2) + "\t" + 
+                vdata.acc.toFixed(2) + "\t" + 
+                damage(vdata).toFixed(2) + "\t" + 
+                vdata.name + "\n";
+        }
+    }
+
+    var ro = tcalc_utils.getAvgRatePlus(data, isLog);
+    var result = ro.result;
+
+//    if (isLog) {
+        log += ro.log;
+        log += "\nCorrected winrate is: " + (result || 0).toFixed(2) + "\n";
+        log += "\ncalculate() duration: " + (new Date() - start) + "ms\n";
+//        console.log("twr: " + (new Date() - start) + " ms (" + JSON.stringify(data).length + " bytes)");
+//    }
+
+    var dur = new Date() - start;
+    if (dur > 10)
+        console.log("twr: " + dur + " ms, id: " + data._id + ", name: " + data.nm);
+    return { log: log, result: result || 0 };
+}
+
+//////////////////////////////////////////////////////////////////
+// MAIN CALCULATION
 
     // recursive engine
-    calculate = function(data, vdata, step, isLog) {
+    var calculate = function(data, vdata, step, isLog) {
         if (!step)
             step = 1;
+
+        if (step > 8) {
+            console.log("WARNING: [TCALC]: too deep recursion: step: " + step + ", id: " + data._id + ", name: " + data.nm + ", vname: " + vdata.name);
+        }
+
         var indent = Array(step).join("  ");
 
         var log = "";
@@ -187,7 +195,7 @@ module.exports = (function() {
     }
 
     // calculate sufficient damage
-    damage = function(vdata) {
+    var damage = function(vdata) {
         if (vdata.__damage == undefined) {
             var dmg = 0;
             if (vdata.link.dam55)
@@ -209,7 +217,7 @@ module.exports = (function() {
     }
 
     // cutter by damage
-    cutter = function(vdata) {
+    var cutter = function(vdata) {
         if (!vdata)
             return 0;
         if (vdata.__cutter == undefined) {
@@ -220,7 +228,7 @@ module.exports = (function() {
     }
 
     // search similar tanks
-    search = function(data, vdata) {
+    var search = function(data, vdata) {
         var sames = [];
         for (var i in data.v) {
             var vd = data.v[i];
@@ -254,9 +262,3 @@ module.exports = (function() {
 
         return vdata.same.length;
     }
-
-
-    return {
-        calc: calc
-    }
-})();

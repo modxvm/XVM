@@ -16,8 +16,7 @@ exports.processRemotes = function(cached, update, response, times) {
     // FIXIT: why this don't work?
     //    for (var id in update) ...
     // symptoms: makeSingleRequest args are wrong (always the last item values)
-    // iBat: "for ... in" is dangerous operation. It is possible iteration over unexpected members. M.b. "hasOwnProperty" required?
-    var up = [ ];
+    var up = [];
     for (var id in update)
         up.push(id);
     up.forEach(function(id) {
@@ -44,7 +43,7 @@ exports.processRemotes = function(cached, update, response, times) {
 
 //    async.series(urls, function(err, results) { asyncCallback(err, results, cached, update, response, times) });
     async.parallel(urls, function(err, results) { asyncCallback(err, results, cached, update, response, times) });
-};
+}
 
 // PRIVATE
 
@@ -96,7 +95,7 @@ var getFreeConnection = function(servers) {
 
     utils.log("getFreeConnection(): internal error");
     return {error:"fail"};
-};
+}
 
 
 // execute request for single player id
@@ -177,7 +176,7 @@ var makeSingleRequest = function(id, server, callback) {
 //        utils.debug(err);
         callback(null, { __status: "error" });
     });
-};
+}
 
 var onRequestDone = function(server, error) {
     var now = new Date();
@@ -201,7 +200,7 @@ var onRequestDone = function(server, error) {
             process.send({log:1, msg:"ERROR: "+error});
         }
     }
-};
+}
 
 // process received data, update db
 var asyncCallback = function(err, results, cached, update, response, times) {
@@ -276,7 +275,6 @@ var asyncCallback = function(err, results, cached, update, response, times) {
 
         // check for correct id
         var _id = parseInt(id);
-
         if (!_id || _id <= 0) {
             var res = _prepareFallbackRes(update[id], id, "ok");
             res.status = "bad_id";
@@ -314,11 +312,12 @@ var asyncCallback = function(err, results, cached, update, response, times) {
 
     // return response to client
     response.end(JSON.stringify(result));
-};
+}
 
 // service functions
 
-var _cacheToResult = function(item) {
+var _cacheToResult = function(item)
+{
     var res = {
         id: item._id,
         date: item.dt,
@@ -337,12 +336,11 @@ var _cacheToResult = function(item) {
         eff: item.e,
         wn: item.wn,
         twr: Math.round(item.twr)
-    };
-
+    }
     if (item.vname && item.v)
         res.v = item.v.name ? item.v : utils.filterVehicleData(item, item.vname);
     return res;
-};
+}
 
 var _parseNewPlayerData = function(id, data) {
     // fill global info
@@ -360,7 +358,7 @@ var _parseNewPlayerData = function(id, data) {
         frg: data.battles.frags,
         def: data.battles.dropped_capture_points,
         v: {}
-    };
+    }
 
     // fill vehicle data
     for (var i in data.vehicles) {
@@ -389,7 +387,9 @@ var _parseNewPlayerData = function(id, data) {
     // TWR - tourist1984 win rate (aka T-Calc)
     try {
 //        utils.log("start calc twr: " + resultItem._id);
-        pdata.twr = parseFloat(tcalc.calc(utils.clone(pdata), false).result.toFixed(2));
+
+//        pdata.twr = parseFloat(tcalc.calc(pdata, false).result.toFixed(2));
+
 //        utils.log("pdata.twr=" + pdata.twr + "%" +
 //            ", GWR=" + (pdata.w / pdata.b * 100).toFixed(2) + "%" +
 //            ", bc=" + pdata.b +
@@ -399,7 +399,7 @@ var _parseNewPlayerData = function(id, data) {
     pdata.lvl = parseFloat(pdata.lvl.toFixed(1));
 
     return pdata;
-};
+}
 
 var _prepareFallbackRes = function(item, id, status) {
     id = parseInt(id);
@@ -417,7 +417,7 @@ var _prepareFallbackRes = function(item, id, status) {
     var res = _cacheToResult(item.cache);
     res.status = status;
     return res;
-};
+}
 
 var _printDebugInfo = function(items, times) {
     var now = new Date();
@@ -432,4 +432,4 @@ var _printDebugInfo = function(items, times) {
         }
         utils.debug("times: " + str);
     }
-};
+}
