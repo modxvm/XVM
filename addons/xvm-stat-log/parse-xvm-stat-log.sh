@@ -1,6 +1,7 @@
 #!/bin/sh
 
 declare -A players
+declare -A results
 results_counter=0
 
 # $1 - name
@@ -43,7 +44,7 @@ get()
 # },...]
 process_setup()
 {
-  local pl id vehicle c
+  local pl id vehicle x b c
   echo $1 | sed "s/},{/\n/g" | while read pl; do
     id=$(get a "$pl")
     vehicle=$(get d "$pl")
@@ -57,15 +58,21 @@ process_setup()
 #    players[$key]=1
 #    echo ${players[$key]}
 
+    c=$(get c "$pl")
+    b=$(get b "$c")
+
+    if [ "$b" = "" ]; then
+      echo "no battles: $id/$vehicle"
+      continue
+    fi
+
     echo -n "  <player" >> players.xml
     echo -n " "id=\"$id\" >> players.xml
     echo -n " "name=\"$(get name "$pl")\" >> players.xml
     echo -n " "vehicle=\"$vehicle\" >> players.xml
     echo -n " "vehId=\"$(get g "$pl")\" >> players.xml
 
-    c=$(get c "$pl")
-
-    echo -n " "battles=\"$(get b "$c")\" >> players.xml
+    echo -n " "battles=\"$b\" >> players.xml
     echo -n " "gwr=\"$(get r "$c")\" >> players.xml
     echo -n " "level=\"$(get tl "$c")\" >> players.xml
     echo -n " "tbattles=\"$(get tb "$c")\" >> players.xml
@@ -74,6 +81,10 @@ process_setup()
     echo -n " "wn6=\"$(get wn "$c")\" >> players.xml
     echo -n " "twr=\"$(get twr "$c")\" >> players.xml
     echo -n " "wins=\"$(get w "$c")\" >> players.xml
+    echo -n " "twins=\"$(get tw "$c")\" >> players.xml
+    x=$(get teff "$c")
+    [ "$x" = "null" ] && x=""
+    echo -n " "teff=\"$x\" >> players.xml
     echo "/>" >> players.xml
   done
 }
@@ -97,6 +108,13 @@ process_results()
   c=$(get c "$1" "{")
   w=$(get b "$c")
   c=$(get c "$c")
+
+  if [ "${results[$c]}" = "1" ]; then
+    echo "skip duplicate result: $c"
+    continue
+  fi
+  results[$c]=1
+
   echo "  <result created=\"$c\" winTeam=\"$w\">" >> results.xml
   a=$(get a "$1" "[")
   a=$(process_results_2 "$a")
@@ -177,31 +195,6 @@ for i in log/*.log; do
     echo "  [$curr/$total] $typ"
     curr=$(($curr+1))
     process_$typ "$data"
-#    if [ ${}
-#    case $stage in
-#      win)
-#        win=${line##* }
-#        if [ "$win" = "-1" ]; then
-#          win="defeat"
-#        elif [ "$win" = "1" ]; then
-#          win="win"
-#        else
-#          win="draw"
-#        fi
-#        echo -n " win=\"$win\">" >> result.xml
-#        stage="name"
-#        ;;
-#      name)
-#        name=${line%\"}
-#        name=${name##*\"}
-#        stage="team"
-#        ;;
-#      team)
-#        team=${line##* }
-#        echo -n "<player name=\"$name\" team=\"$team\"/>" >> result.xml
-#        stage="name"
-#        ;;
-#     esac
   done
 done
 echo "</results>" >> results.xml
