@@ -56,16 +56,16 @@
                 req.url = "http://1.2.3.4/xxx/?1";
 
                 fakeHttp.setWgResponse("defaultWGStat.json");
-                makeRequest(req, res);
+                makeRequest(req, res, fakeHttp);
 
-                /*var player = lastResponse.players[0];
+                var player = lastResponse.players[0];
 
                 assert.equal(player.id, 1);
                 assert.equal(player.status, "ok");
                 assert.equal(player.name, "vovaPupkin");
                 assert.equal(player.battles, 1160);
                 assert.equal(player.wins, 544);
-                assert.equal(player.eff, 540);*/
+                assert.equal(player.eff, 540);
             });
 
             /*test("request with specific vehicle (update from WG)", function() {

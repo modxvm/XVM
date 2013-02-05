@@ -23,12 +23,12 @@ exports.settings = {
     dbMinTime: 1000, // msec
     dbMaxTime: 5000, // msec
     servers: [
-        { name:"RU",  options: { host:"api.worldoftanks.ru",      port:80 }, maxconn:maxConnPerNode, api:"1.5", timeout:5000 },  // 0
-        { name:"EU",  options: { host:"api.worldoftanks.eu",      port:80 }, maxconn:maxConnPerNode, api:"1.5", timeout:5000 },  // 1
-        { name:"US",  options: { host:"api.worldoftanks.com",     port:80 }, maxconn:maxConnPerNode, api:"1.5", timeout:5000 },  // 2
-        { name:"SEA", options: { host:"api.worldoftanks-sea.com", port:80 }, maxconn:maxConnPerNode, api:"1.5", timeout:6000 },  // 3
-        { name:"VTC", options: { host:"portal-wot.go.vn",         port:80 }, maxconn:maxConnPerNode, api:"1.5", timeout:12000 }, // 4
-        { name:"KR",  options: { host:"worldoftanks.kr",          port:80 }, maxconn:maxConnPerNode, api:"1.5", timeout:6000 },  // 5
+        { name: "RU", options: { host: "api.worldoftanks.ru", port: 80 }, maxconn: maxConnPerNode, api: "1.5", timeout: 5000 },         // 0
+        { name: "EU", options: { host: "api.worldoftanks.eu", port: 80 }, maxconn: maxConnPerNode, api: "1.5", timeout: 5000 },         // 1
+        { name: "US", options: { host: "api.worldoftanks.com", port: 80 }, maxconn: maxConnPerNode, api: "1.5", timeout: 5000 },        // 2
+        { name: "SEA", options: { host: "api.worldoftanks-sea.com", port: 80 }, maxconn: maxConnPerNode, api: "1.5", timeout: 6000 },   // 3
+        { name: "VTC", options: { host: "portal-wot.go.vn", port: 80 }, maxconn: maxConnPerNode, api: "1.5", timeout: 12000 },          // 4
+        { name: "KR", options: { host: "worldoftanks.kr", port: 80 }, maxconn: maxConnPerNode, api: "1.5", timeout: 6000 }              // 5
     ],
     statServers: [
         [ 0 ],      // RU:           0 ..  499999999
@@ -37,7 +37,7 @@ exports.settings = {
         [   ],      // ???: 1500000000 .. 1999999999 (disabled - unknown stat server)
         [ 3 ],      // SEA: 2000000000 .. 2499999999
         [ 4 ],      // VTC: 2500000000 .. 2999999999
-        [ 5 ]      // KR:  3000000000 .. 3499999999
+    [ 5 ]           // KR:  3000000000 .. 3499999999
     ],
     serverName: "?"
 };
