@@ -12,10 +12,6 @@ class wot.Minimap.staticUtils.LabelAppend
          * Skip creation of textFields with "undefined" string.
          * Happens for oneSelf icon at replay rewind.
          */
-        if (!(entryName && uid && vehicleClass))
-        {
-            return null;
-        }
             
         var offset:Point = MapConfig.unitLabelOffset(entryName);
         
@@ -31,7 +27,12 @@ class wot.Minimap.staticUtils.LabelAppend
         style.parseCSS(MapConfig.unitLabelCss(entryName));
         textField.styleSheet = style;
         
-        textField.htmlText = getText(entryName, player, vehicleClass);
+        var text:String = getText(entryName, player, vehicleClass);
+        if (text == "undefined" || !text)
+        {
+            text = "";
+        }
+        textField.htmlText = text;
         
         if (MapConfig.unitShadowEnabled(entryName))
         {

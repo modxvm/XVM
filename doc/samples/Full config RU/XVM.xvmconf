@@ -204,7 +204,7 @@
           "enemy": ".mm_e{font-family:$FieldFont; font-size:8px; color:#FCA9A4;}",
           "squad": ".mm_s{font-family:$FieldFont; font-size:8px; color:#FFD0B2;}",
           "lost":  ".mm_l{font-family:$FieldFont; font-size:8px; color:#FCA9A4;} .mm_lclass{font-family:Arial; font-size:17px; color:#FCA9A4;}",
-          "oneself": ".mm_o{font-family:$FieldFont; font-size:8px; color:#FFFFFF;}"
+          "oneself": ""
         },
         "shadow": {
           "ally": {

@@ -171,14 +171,14 @@ class wot.utils.DefaultConfig
                       enemy: "<span class='mm_e'>{{level}}</span>",
                       squad: "<span class='mm_s'>{{level}} <i>{{short-nick}}</i></span>",
                       lost:  "<span class='mm_lclass'>{{vehicle-class}}</span><span class='mm_l'><i>{{level}}</i></span>",
-                      oneself: "<span class='mm_o'><b>{{level}}</b></span>"
+                      oneself: ""
                     },
                     css: {
                       ally:  ".mm_a{font-family:$FieldFont; font-size:8px; color:#BBEEBB;}",
                       enemy: ".mm_e{font-family:$FieldFont; font-size:8px; color:#EEBBBB;}",
                       squad: ".mm_s{font-family:$FieldFont; font-size:8px; color:#FFEE44;}",
                       lost:  ".mm_l{font-family:$FieldFont; font-size:8px; color:#EEAACC;} .mm_lclass{font-family:Arial; font-size:10px; color:#FFBBDD;}",
-                      oneself: ".mm_o{font-family:$FieldFont; font-size:8px; color:#FFFFFF;}"
+                      oneself: ""
                     },
                     shadow: {
                       ally: {
