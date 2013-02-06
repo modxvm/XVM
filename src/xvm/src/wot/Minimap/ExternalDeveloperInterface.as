@@ -7,6 +7,8 @@ class wot.Minimap.ExternalDeveloperInterface
 {
     /**
      * Creates custom HTML text field at minimap.
+     * Can be used for example to set a projectile trace source
+     * or world object destruction position by Python modding.
      * Respects minimap scaling.
      * 
      * @param x - field coordinates.
