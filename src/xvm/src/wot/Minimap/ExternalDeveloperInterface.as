@@ -1,3 +1,5 @@
+import wot.Minimap.Minimap;
+
 /**
  * Simplified minimap interface for communication with other Python or Flash mods.
  * 
@@ -5,6 +7,13 @@
  */
 class wot.Minimap.ExternalDeveloperInterface
 {
+    var customContainer:MovieClip;
+    
+    public function ExternalDeveloperInterface()
+    {
+        customContainer = icons.createEmptyMovieClip("customContainer", Minimap.EXTERNAL_CUSTOM_INDEX);
+    }
+    
     /**
      * Creates custom HTML text field at minimap.
      * Can be used for example to set a projectile trace source
@@ -106,7 +115,7 @@ class wot.Minimap.ExternalDeveloperInterface
          * MovieClip.createTextField method manual
          * http://help.adobe.com/en_US/AS2LCR/Flash_10.0/help.html?content=00001286.html
          */
-        var tf:TextField = icons.createTextField(instanceName, icons.getNextHighestDepth(), x, y, width, height);
+        var tf:TextField = customContainer.createTextField(instanceName, customContainer.getNextHighestDepth(), x, y, width, height);
         tf.antiAliasType = "advanced";
         tf.html = true;
         tf.multiline = true;

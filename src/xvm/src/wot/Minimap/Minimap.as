@@ -1,3 +1,4 @@
+import wot.utils.Logger;
 import wot.Minimap.ExternalDeveloperInterface;
 import wot.utils.Utils;
 import wot.utils.GlobalEventDispatcher;
@@ -30,6 +31,8 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
      *  'cell': 153 }
      */
     public static var MAX_DEAD_ZINDEX:Number = 99;
+    public static var LOST_UNITS_INDEX:Number = MAX_DEAD_ZINDEX;
+    public static var EXTERNAL_CUSTOM_INDEX:Number = MAX_DEAD_ZINDEX - 1;
     public static var CAMERA_NORMAL_ZINDEX:Number = 100;
     public static var SELF_ZINDEX:Number = 151;
     
@@ -113,7 +116,6 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     function sizeUp()
     {
         super.sizeUp();
-        //Logger.add("");
     }
     
     // -- Private

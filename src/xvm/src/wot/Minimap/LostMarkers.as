@@ -15,7 +15,7 @@ class wot.Minimap.LostMarkers
     public function LostMarkers(icons:MovieClip) 
     {
         this.icons = icons;
-        this.markersContainer = icons.createEmptyMovieClip("lostMarkers", Minimap.MAX_DEAD_ZINDEX)//);
+        this.markersContainer = icons.createEmptyMovieClip("lostMarkers", Minimap.LOST_UNITS_INDEX)//);
         GlobalEventDispatcher.addEventListener(MinimapEvent.LOST_PLAYERS_UPDATE, this, onLost);
         lostMarkersTracking = [];
     }
