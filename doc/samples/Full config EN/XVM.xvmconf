@@ -166,8 +166,255 @@
     }
   },
   // Minimap
-  // Not released
+  "minimap": {
+    // Hint: minimap size can be changed by "-" and "=" keyboard buttons.
+    // Fields can load images from disk by HTML:
+    //   "format": { "ally": "<img src='img://../icons/bzz.png' width='8' height='8'>"}, ...
+    //   While file is at WoT\res_mods\icons\bzz.png
+    // On\off minimap mod switch as a whole.
+    // Turned off by default.
+    "enabled": false,
+    "mapBackgroundImageAlpha": 100, // Map image transparency.
+    "selfIconAlpha": 100,           // Self icon transparency. White pointing arrow.
+    "iconScale": 1,                 // Vehicles icon size.
+                                    // Does not affect attached geometry and textfields.
+                                    // Floating point allowed: 0.7 1.4.
 
+    "labels": {                     // textfields. Basic HTML\CSS supported.
+      "nickShrink": 5,              // Maximum nickname size for {{short-nick}} macro.
+      "vehicleclassmacro": {        // {{vehicle-class}} macro substitutions by vehicle class.
+        "light": "", // ♦
+        "medium": "",
+        "heavy": "",
+        "td": "",    // ▼
+        "spg": "■",  // Artillery
+        "superh": "" // superHeavyTank extra class by gui_settings.xml
+        // Special symbols website:
+        //   http://www.fileformat.info/info/unicode/char/25a0/index.htm
+        // Great symbolic font by Andrey_Hard for {{vehicle-class}}:
+        //   http://goo.gl/d2KIj
+      },
+      "units": { // Textfields for tanks on minimap.
+        "revealedEnabled":  true, // Textfields switch for revealed units.
+        "lostEnemyEnabled": true, // Textfields switch for lost enemy units. Show last seen position.
+        "format": { // Формат поля.
+          "ally":  "<span class='mm_a'>{{vehicle}}</span>", // Ally
+          "enemy": "<span class='mm_e'>{{vehicle}}</span>", // Enemy
+          "squad": "<textformat leading='-1'><span class='mm_s'><i>{{short-nick}}</i>\n{{vehicle}}</span><textformat>", // Squadmates
+          // Lost enemy units
+          "lost":  "<span class='mm_dot'>\u2022</span><span class='mm_l'><i>{{vehicle}}</i></span>",
+          // For your own marker or spectated subject.
+          "oneself": ""
+        },
+        "css": { // CSS style.
+          "ally":  ".mm_a{font-family:$FieldFont; font-size:8px; color:#C8FFA6;}",
+          "enemy": ".mm_e{font-family:$FieldFont; font-size:8px; color:#FCA9A4;}",
+          "squad": ".mm_s{font-family:$FieldFont; font-size:8px; color:#FFC099;}",
+          "lost":  ".mm_l{font-family:$FieldFont; font-size:8px; color:#FCA9A4;} .mm_dot{font-family:Arial; font-size:17px; color:#FCA9A4;}",
+          "oneself": ".mm_o{font-family:$FieldFont; font-size:8px; color:#FFFFFF;}"
+        },
+        "shadow": { // Fields shadow.
+          "ally": {
+            "enabled": true,
+            "color": "0x000000",
+            "distance": 0,
+            "angle": 0,
+            "alpha": 80,
+            "blur": 3, 
+            "strength": 4
+          },
+          "enemy": {
+            "enabled": true,
+            "color": "0x000000",
+            "distance": 0,
+            "angle": 0,
+            "alpha": 80,
+            "blur": 3,
+            "strength": 4
+          },
+          "squad": {
+            "enabled": true,
+            "color": "0x000000",
+            "distance": 0,
+            "angle": 0,
+            "alpha": 80,
+            "blur": 3,
+            "strength": 4
+          },
+          "lost": {
+            "enabled": true,
+            "color": "0x000000",
+            "distance": 0,
+            "angle": 0,
+            "alpha": 80,
+            "blur": 6,
+            "strength": 4
+          },
+          "oneself": {
+            "enabled": true,
+            "color": "0x000000",
+            "distance": 0,
+            "angle": 0,
+            "alpha": 80,
+            "blur": 3,
+            "strength": 4
+          }
+        },
+        "offset": {
+          "ally":  {"x": 3, "y": -1},   // Field offset ralative to current icon.
+          "enemy": {"x": 3, "y": -1},   // Field offset ralative to current icon.
+          "squad": {"x": 3, "y": -2},   // Field offset ralative to current icon.
+          "lost":  {"x": -6, "y": -10}, // Field offset ralative to enemy last seen position.
+          "oneself": {"x": 0, "y": 0}   // Field offset ralative to current icon.
+        },
+        "alpha" : { // Transparency
+          "ally":  100,
+          "enemy": 100,
+          "squad": 100,
+          "lost":  70,
+          "oneself": 100
+        }
+      },
+      "mapSize": { // Textfield for map side size. 1000m, 700m, 600m.
+        "enabled": true,
+        "format": "<b>{{cellsize}}0 m</b>",
+        "css": "font-size:10px; color:#FFCC66;",
+        "alpha": 80,
+        "offsetX": 0,
+        "offsetY": 0,
+        "shadow": {
+          "enabled": true,
+          "color": "0x000000",
+          "distance": 0,
+          "angle": 0,
+          "alpha": 80,
+          "blur": 2,
+          "strength": 3
+        },
+        // Decrease sizes in case of map image weird shrinking while map resize.
+        // Increase sizes in case of field being partially cut off.
+        "width": 100,
+        "height": 30
+      }
+    },
+    "circles": { // Distance circles. Only real map meters. Only for owned unit.
+        "enabled": true,
+        "major": [
+            // 445 meters - maximum reveal distance.
+            { "enabled": true, "distance": 445, "thickness": 0.75, "alpha": 35, "color": "0xFFCC66" },
+            { "enabled": false, "distance": 50, "thickness": 1, "alpha": 30, "color": "0xFFFFFF" }
+        ],
+        // Special circles dependent on vehicle type.
+        // Many configuration lines for the same vehicle make many circles.
+        // Only artillery top gun range by default.
+        // See other vehicle types at:
+        // http://code.google.com/p/wot-xvm/source/browse/trunk/src/xvm/src/wot/utils/VehicleInfoData2.as
+        "special": [
+            { "su_18":            { "enabled": true, "distance": 552,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "su_26":            { "enabled": true, "distance": 578,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "su_5":             { "enabled": true, "distance": 605,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "su_8":             { "enabled": true, "distance": 920,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "s_51":             { "enabled": true, "distance": 1229, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "su_14":            { "enabled": true, "distance": 1229, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "object_212":       { "enabled": true, "distance": 1229, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "object_261":       { "enabled": true, "distance": 1463, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+
+            { "bison_i":          { "enabled": true, "distance": 605,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "sturmpanzer_ii":   { "enabled": true, "distance": 605,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "wespe":            { "enabled": true, "distance": 1000, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "grille":           { "enabled": true, "distance": 1210, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "hummel":           { "enabled": true, "distance": 1264, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "g_panther":        { "enabled": true, "distance": 1407, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "g_tiger":          { "enabled": true, "distance": 1172, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "g_e":              { "enabled": true, "distance": 1172, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+
+            { "t57":              { "enabled": true, "distance": 552,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "m37":              { "enabled": true, "distance": 969,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "m7_priest":        { "enabled": true, "distance": 1047, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "m41":              { "enabled": true, "distance": 1210, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "m12":              { "enabled": true, "distance": 1316, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "m40m43":           { "enabled": true, "distance": 1179, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "t92":              { "enabled": true, "distance": 1248, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+
+            { "renaultbs":        { "enabled": true, "distance": 450,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "lorraine39_l_am":  { "enabled": true, "distance": 844,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "amx_105am":        { "enabled": true, "distance": 1000, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "_105_lefh18b2":    { "enabled": true, "distance": 1000, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "amx_13f3am":       { "enabled": true, "distance": 1250, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "lorraine155_50":   { "enabled": true, "distance": 1202, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "lorraine155_51":   { "enabled": true, "distance": 1296, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "bat_chatillon155": { "enabled": true, "distance": 1296, "thickness": 1, "alpha": 60, "color": "0xEE4444" } }
+        ]
+    },
+    "lines": { // Only for owned vehicle.
+       "enabled": true,
+       // "inmeters": true  - make line size to be in real map meters.
+       // "inmeters": false - make line size to be in minimap interface clip points. Minimap interface clip side is 210 points.
+       // Distance between farthest corners at 1km map is somewhat more than 1400 meters.
+       // Sections can contain any number of lines.
+       // To set a point try setting line with length of one and large thickness.
+       
+       // You can leave one line for simplicity. Remember comma positioning rules.
+       "vehicle": [ // Own vehicle direction.
+         { "enabled": true, "from": 50,  "to": 95,  "inmeters": true, "thickness": 1.5, "alpha": 45, "color": "0x60FF00"},
+         { "enabled": true, "from": 100, "to": 145, "inmeters": true, "thickness": 1.4, "alpha": 40, "color": "0x60FF00"},
+         { "enabled": true, "from": 150, "to": 196, "inmeters": true, "thickness": 1.3, "alpha": 35, "color": "0x60FF00"},
+         { "enabled": true, "from": 200, "to": 246, "inmeters": true, "thickness": 1.2, "alpha": 33, "color": "0x60FF00"},
+         { "enabled": true, "from": 250, "to": 296, "inmeters": true, "thickness": 1.1, "alpha": 30, "color": "0x60FF00"},
+         { "enabled": true, "from": 300, "to": 397, "inmeters": true, "thickness": 1,   "alpha": 30, "color": "0x60FF00"},
+         { "enabled": true, "from": 400, "to": 497, "inmeters": true, "thickness": 0.9, "alpha": 30, "color": "0x60FF00"},
+         { "enabled": true, "from": 500, "to": 2000,"inmeters": true, "thickness": 0.75, "alpha": 30, "color": "0x60FF00"}
+       ],
+       "camera": [ // Camera direction.
+         { "enabled": true, "from": 50,  "to": 80,   "inmeters": true, "thickness": 1.3,  "alpha": 45, "color": "0xFFCC66"},
+         { "enabled": true, "from": 120, "to": 180,  "inmeters": true, "thickness": 1.2,  "alpha": 40, "color": "0xFFCC66"},
+         { "enabled": true, "from": 220, "to": 280,  "inmeters": true, "thickness": 1.1,  "alpha": 35, "color": "0xFFCC66"},
+         { "enabled": true, "from": 320, "to": 380,  "inmeters": true, "thickness": 1,    "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 420, "to": 480,  "inmeters": true, "thickness": 0.9,  "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 520, "to": 580,  "inmeters": true, "thickness": 0.8,  "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 620, "to": 680,  "inmeters": true, "thickness": 0.75, "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 720, "to": 780,  "inmeters": true, "thickness": 0.75, "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 820, "to": 880,  "inmeters": true, "thickness": 0.75, "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 920, "to": 980,  "inmeters": true, "thickness": 0.75, "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 1020,"to": 1080, "inmeters": true, "thickness": 0.75, "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 1120,"to": 1180, "inmeters": true, "thickness": 0.75,  "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 1220,"to": 1280, "inmeters": true, "thickness": 0.75,  "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 1320,"to": 1380, "inmeters": true, "thickness": 0.75,  "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 1420,"to": 1480, "inmeters": true, "thickness": 0.75,  "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 1520,"to": 1580, "inmeters": true, "thickness": 0.75,  "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 1620,"to": 1680, "inmeters": true, "thickness": 0.75,  "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 1720,"to": 1780, "inmeters": true, "thickness": 0.75,  "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 1820,"to": 1880, "inmeters": true, "thickness": 0.75,  "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 1920,"to": 2000, "inmeters": true, "thickness": 0.75,  "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 99,  "to": 100,  "inmeters": true, "thickness": 2.2,   "alpha": 45, "color": "0xFFCC66"},
+           // Dots
+         { "enabled": true, "from": 199, "to": 200,  "inmeters": true, "thickness": 2.1,   "alpha": 40, "color": "0xFFCC66"},
+         { "enabled": true, "from": 299, "to": 300,  "inmeters": true, "thickness": 2,     "alpha": 35, "color": "0xFFCC66"},
+         { "enabled": true, "from": 399, "to": 400,  "inmeters": true, "thickness": 1.9,   "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 499, "to": 500,  "inmeters": true, "thickness": 1.8,   "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 599, "to": 600,  "inmeters": true, "thickness": 1.7,   "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 699, "to": 700,  "inmeters": true, "thickness": 1.6,   "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 799, "to": 800,  "inmeters": true, "thickness": 1.6,   "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 899, "to": 900,  "inmeters": true, "thickness": 1.6,   "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 999, "to": 1000, "inmeters": true, "thickness": 1.6,   "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 1099,"to": 1100, "inmeters": true, "thickness": 1.6,   "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 1199,"to": 1200, "inmeters": true, "thickness": 1.6,   "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 1299,"to": 1300, "inmeters": true, "thickness": 1.6,   "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 1399,"to": 1400, "inmeters": true, "thickness": 1.6,   "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 1499,"to": 1500, "inmeters": true, "thickness": 1.6,   "alpha": 30, "color": "0xFFCC66"}
+       ],
+       "traverseAngle": [ // Horizontal gun traverse angle lines for ATs and SPGs.
+         { "enabled": true, "from": 50,  "to": 95,  "inmeters": true, "thickness": 1.5,   "alpha": 50, "color": "0xCCCCCC"},
+         { "enabled": true, "from": 100, "to": 145, "inmeters": true, "thickness": 1.4,   "alpha": 48, "color": "0xCCCCCC"},
+         { "enabled": true, "from": 150, "to": 196, "inmeters": true, "thickness": 1.3,   "alpha": 46, "color": "0xCCCCCC"},
+         { "enabled": true, "from": 200, "to": 246, "inmeters": true, "thickness": 1.2, "alpha": 44, "color": "0xCCCCCC"},
+         { "enabled": true, "from": 250, "to": 296, "inmeters": true, "thickness": 1.1, "alpha": 42, "color": "0xCCCCCC"},
+         { "enabled": true, "from": 300, "to": 397, "inmeters": true, "thickness": 1,   "alpha": 40, "color": "0xCCCCCC"},
+         { "enabled": true, "from": 400, "to": 497, "inmeters": true, "thickness": 0.9,   "alpha": 40, "color": "0xCCCCCC"},
+         { "enabled": true, "from": 500, "to": 2000,"inmeters": true, "thickness": 0.75,   "alpha": 40, "color": "0xCCCCCC"}
+       ]
+    }
+  },
   // OVER-TARGET MARKERS
   "markers": {
     // Ally
