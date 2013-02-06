@@ -32,8 +32,11 @@ get()
 #   b: "team",
 #         "b":1
 #   c: "stat",
-#         "c":{"tl":6,"vn":"SU-100","tf":0,"r":50,"td":0,"tb":63,"w":2527,"id":6260143,"b":5021,
-#              "tw":37,"clan":"","ts":0,"tr":56,"name":"INSI74","e":1100}
+#         "c":{"te":3,"cap":21607,"hip":51,"twr":0,"teff":560,"dmg":7337686,"tw":186,"teff2":736,
+#              "def":6369,"ts":341,"tsb":0.8,"vn":"IS-3","tl":8,"wn":573,"td":339744,"tf":249,
+#              "r":47,"tdb":786,"frg":8834,"tfb":0.6,"tb":432,"w":9153,"spo":19022,"id":5435596,
+#              "b":19587,"tr":43,"clan":"G_S_A","avglvl":5.8,"tdv":0.5,"name":"ZINNURTIGER",
+#              "e":690}
 #   d: "vehicleId",
 #         "d":"SU-100"
 #   e: "label",
@@ -85,6 +88,11 @@ process_setup()
     x=$(get teff "$c")
     [ "$x" = "null" ] && x=""
     echo -n " "teff=\"$x\" >> players.xml
+    echo -n " "dmg=\"$(get dmg "$c")\" >> players.xml
+    echo -n " "frg=\"$(get frg "$c")\" >> players.xml
+    echo -n " "spo=\"$(get spo "$c")\" >> players.xml
+    echo -n " "def=\"$(get def "$c")\" >> players.xml
+    echo -n " "avgl=\"$(get avglvl "$c")\" >> players.xml
     echo "/>" >> players.xml
   done
 }
