@@ -16,7 +16,7 @@ import wot.utils.Utils;
 
 class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
 {
-    private static var STAT_PRELOAD_DELAY:Number = 100;
+    private static var STAT_PRELOAD_DELAY:Number = 1000;
 
     // Components
     private var winChances:WinChances;
@@ -32,6 +32,7 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
         StatData.s_loaded = false;
         StatData.s_data = {};
         StatLoader.s_players_count = 0;
+        StatLoader.teams = { t1:0, t2:0 };
 
         // Components
         winChances = new WinChances(form_mc); // Winning chance info above players list.
@@ -75,7 +76,7 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
         (
             function() {
                 if (!StatData.s_loaded) {
-                    if (StatLoader.s_players_count == 0) {
+                    if (StatLoader.teams.t1 == 0 || StatLoader.teams.t2 == 0) {
                         if (loop * BattleLoading.STAT_PRELOAD_DELAY > 10000) { // 10 sec
                             Logger.add("WARNING: no players data after 10 sec, skip stats loading");
                         } else {

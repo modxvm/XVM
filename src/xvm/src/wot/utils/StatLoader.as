@@ -16,6 +16,7 @@ import wot.utils.VehicleInfo;
 class wot.utils.StatLoader
 {
     public static var s_players_count = 0;
+    public static var teams = { t1:0, t2:0 };
     public static var s_loadDataStarted = false;
     private static var s_loading = false;
     private static var dirty: Boolean = false;
@@ -38,6 +39,11 @@ class wot.utils.StatLoader
         var clan = Utils.GetClanName(playerName);
 
         //Logger.add("AddPlayerData(" + playerName + "): " + pname);
+
+        if (team == Defines.TEAM_ALLY)
+            teams.t1 = 1;
+        else
+            teams.t2 = 1;
 
         if (!StatData.s_data[pname])
             s_players_count++;
