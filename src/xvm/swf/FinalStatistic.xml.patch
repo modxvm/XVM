@@ -1,5 +1,5 @@
---- orig\FinalStatistic.xml	2012-12-27 16:13:00.877685600 +0200
-+++ FinalStatistic.xml	2012-12-27 16:13:01.487685600 +0200
+--- orig\FinalStatistic.xml	2013-02-07 14:44:48.678372400 +0200
++++ FinalStatistic.xml	2013-02-07 14:44:49.364441000 +0200
 @@ -85008,8 +85008,8 @@
                <String value="charAt"/>
                <String value=" "/>
@@ -17,6 +17,33 @@
              <items>
 -              <StackString value="net.wargaming.hangar.FinalStatistic.TeamStats"/>
 +              <StackString value="wot.FinalStatistic.TeamStats"/>
+             </items>
+           </PushData>
+           <GetVariable/>
+@@ -103626,7 +103626,7 @@
+         <actions>
+           <PushData>
+             <items>
+-              <StackString value="net.wargaming.hangar.FinalStatistic.view.TeamMemberItemRenderer"/>
++              <StackString value="wot.FinalStatistic.TeamMemberItemRenderer"/>
+             </items>
+           </PushData>
+           <GetVariable/>
+@@ -103652,7 +103652,7 @@
+         <actions>
+           <PushData>
+             <items>
+-              <StackString value="net.wargaming.hangar.FinalStatistic.view.TeamMemberItemRenderer"/>
++              <StackString value="wot.FinalStatistic.TeamMemberItemRenderer"/>
+             </items>
+           </PushData>
+           <GetVariable/>
+@@ -103730,7 +103730,7 @@
+         <actions>
+           <PushData>
+             <items>
+-              <StackString value="net.wargaming.hangar.FinalStatistic.view.DetailsBlock"/>
++              <StackString value="wot.FinalStatistic.DetailsBlock"/>
              </items>
            </PushData>
            <GetVariable/>
