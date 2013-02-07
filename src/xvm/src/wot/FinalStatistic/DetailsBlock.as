@@ -35,6 +35,7 @@ class wot.FinalStatistic.DetailsBlock extends net.wargaming.hangar.FinalStatisti
             f._x, f._y + f._height * yOffset + 10, f._width, f._height);
         res.antiAliasType = "advanced";
         res.html = true;
+        res.autoSize = "right"; // http://theolagendijk.com/2006/09/07/aligning-htmltext-inside-flash-textfield/
         var tf: TextFormat = f.getNewTextFormat();
         res.styleSheet = Utils.createStyleSheet(Utils.createCSS("xvm_" + name, 
             tf.color, tf.font, tf.size, align, tf.bold, tf.italic));
