@@ -69,31 +69,31 @@ process_setup()
       continue
     fi
 
-    echo -n "  <player" >> players.xml
-    echo -n " "id=\"$id\" >> players.xml
-    echo -n " "name=\"$(get name "$pl")\" >> players.xml
-    echo -n " "vehicle=\"$vehicle\" >> players.xml
-    echo -n " "vehId=\"$(get g "$pl")\" >> players.xml
+    echo -n "  <player" >> players.new.xml
+    echo -n " "id=\"$id\" >> players.new.xml
+    echo -n " "name=\"$(get name "$pl")\" >> players.new.xml
+    echo -n " "vehicle=\"$vehicle\" >> players.new.xml
+    echo -n " "vehId=\"$(get g "$pl")\" >> players.new.xml
 
-    echo -n " "battles=\"$b\" >> players.xml
-    echo -n " "gwr=\"$(get r "$c")\" >> players.xml
-    echo -n " "level=\"$(get tl "$c")\" >> players.xml
-    echo -n " "tbattles=\"$(get tb "$c")\" >> players.xml
-    echo -n " "tr=\"$(get tr "$c")\" >> players.xml
-    echo -n " "eff=\"$(get e "$c")\" >> players.xml
-    echo -n " "wn6=\"$(get wn "$c")\" >> players.xml
-    echo -n " "twr=\"$(get twr "$c")\" >> players.xml
-    echo -n " "wins=\"$(get w "$c")\" >> players.xml
-    echo -n " "twins=\"$(get tw "$c")\" >> players.xml
+    echo -n " "battles=\"$b\" >> players.new.xml
+    echo -n " "gwr=\"$(get r "$c")\" >> players.new.xml
+    echo -n " "level=\"$(get tl "$c")\" >> players.new.xml
+    echo -n " "tbattles=\"$(get tb "$c")\" >> players.new.xml
+    echo -n " "tr=\"$(get tr "$c")\" >> players.new.xml
+    echo -n " "eff=\"$(get e "$c")\" >> players.new.xml
+    echo -n " "wn6=\"$(get wn "$c")\" >> players.new.xml
+    echo -n " "twr=\"$(get twr "$c")\" >> players.new.xml
+    echo -n " "wins=\"$(get w "$c")\" >> players.new.xml
+    echo -n " "twins=\"$(get tw "$c")\" >> players.new.xml
     x=$(get teff "$c")
     [ "$x" = "null" ] && x=""
-    echo -n " "teff=\"$x\" >> players.xml
-    echo -n " "dmg=\"$(get dmg "$c")\" >> players.xml
-    echo -n " "frg=\"$(get frg "$c")\" >> players.xml
-    echo -n " "spo=\"$(get spo "$c")\" >> players.xml
-    echo -n " "def=\"$(get def "$c")\" >> players.xml
-    echo -n " "avgl=\"$(get avglvl "$c")\" >> players.xml
-    echo "/>" >> players.xml
+    echo -n " "teff=\"$x\" >> players.new.xml
+    echo -n " "dmg=\"$(get dmg "$c")\" >> players.new.xml
+    echo -n " "frg=\"$(get frg "$c")\" >> players.new.xml
+    echo -n " "spo=\"$(get spo "$c")\" >> players.new.xml
+    echo -n " "def=\"$(get def "$c")\" >> players.new.xml
+    echo -n " "avgl=\"$(get avglvl "$c")\" >> players.new.xml
+    echo "/>" >> players.new.xml
   done
 }
 
@@ -123,14 +123,14 @@ process_results()
   fi
   results[$c]=1
 
-  echo "  <result created=\"$c\" winTeam=\"$w\">" >> results.xml
+  echo "  <result created=\"$c\" winTeam=\"$w\">" >> results.new.xml
   a=$(get a "$1" "[")
   a=$(process_results_2 "$a")
-  echo "    <team$a/>" >> results.xml
+  echo "    <team$a/>" >> results.new.xml
   a=$(get b "$1" "[")
   a=$(process_results_2 "$a")
-  echo "    <team$a/>" >> results.xml
-  echo "  </result>" >> results.xml
+  echo "    <team$a/>" >> results.new.xml
+  echo "  </result>" >> results.new.xml
 }
 
 #      [{
@@ -188,8 +188,8 @@ process_chance()
   return
 }
 
-echo "<results>" > results.xml
-echo "<players>" > players.xml
+echo "<results>" > results.new.xml
+echo "<players>" > players.new.xml
 for i in log/*.log; do
   total=$(wc -l $i | cut -d' ' -f1)
   curr=1
@@ -205,5 +205,5 @@ for i in log/*.log; do
     process_$typ "$data"
   done
 done
-echo "</results>" >> results.xml
-echo "</players>" >> players.xml
+echo "</results>" >> results.new.xml
+echo "</players>" >> players.new.xml
