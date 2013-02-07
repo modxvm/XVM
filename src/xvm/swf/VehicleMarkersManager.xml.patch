@@ -2028,60 +2028,6 @@
              </transform>
            </PlaceObject2>
            <ShowFrame/>
-@@ -53376,7 +53376,7 @@
-               <GetMember/>
-               <PushData>
-                 <items>
--                  <StackDouble value="nan"/>
-+                  <StackDouble value="2.996191851635971e-307"/>
-                 </items>
-               </PushData>
-               <EqualTyped/>
-@@ -53401,7 +53401,7 @@
-               <GetMember/>
-               <PushData>
-                 <items>
--                  <StackDouble value="nan"/>
-+                  <StackDouble value="2.996191851635971e-307"/>
-                 </items>
-               </PushData>
-               <EqualTyped/>
-@@ -54796,7 +54796,7 @@
-             <items>
-               <StackRegister reg="2"/>
-               <StackDictionaryLookup index="11"/>
--              <StackDouble value="nan"/>
-+              <StackDouble value="2.996191851636003e-307"/>
-             </items>
-           </PushData>
-           <SetMember/>
-@@ -54804,7 +54804,7 @@
-             <items>
-               <StackRegister reg="2"/>
-               <StackDictionaryLookup index="13"/>
--              <StackDouble value="nan"/>
-+              <StackDouble value="2.996191851636003e-307"/>
-             </items>
-           </PushData>
-           <SetMember/>
-@@ -67891,7 +67891,7 @@
-             <items>
-               <StackRegister reg="2"/>
-               <StackDictionaryLookup index="11"/>
--              <StackDouble value="nan"/>
-+              <StackDouble value="2.996191851636003e-307"/>
-             </items>
-           </PushData>
-           <SetMember/>
-@@ -67899,7 +67899,7 @@
-             <items>
-               <StackRegister reg="2"/>
-               <StackDictionaryLookup index="15"/>
--              <StackDouble value="nan"/>
-+              <StackDouble value="2.996191851636003e-307"/>
-             </items>
-           </PushData>
-           <SetMember/>
 @@ -80544,7 +80544,7 @@
          <actions>
            <PushData>
