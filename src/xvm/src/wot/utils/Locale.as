@@ -55,8 +55,8 @@ class wot.utils.Locale
        "Захватчиков: <b><font color='#FFCC66'>{{tanks}}</font></b> Осталось: <b><font color='#FFCC66'>{{time}}</font><b>";
 
     tr["Hit percent"] = "Процент попаданий";
-    tr["Damage upon detecting"] = "Урон по разведданым";
-    tr["Damage dealt"] = "Нанесенный Урон";
+    tr["Damage upon detecting"] = "Урон по разведданным";
+    tr["Damage dealt"] = "Нанесенный урон";
 
 //    tr["Using default settings."] = "Используются настройки по умолчанию.";
 //    tr["Error parsing config file."] = "Ошибка чтения конфигурации.";
