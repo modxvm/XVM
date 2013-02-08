@@ -26,7 +26,7 @@ from xml.dom import minidom
 # Based on XVM 3.1.2, SVN rev. 1104
 # Last change of xvm-stat: SVN rev. 1315
 
-XVMFS_VERSION = '0.2.0'
+XVMFS_VERSION = '0.2.1'
 fuse.fuse_python_api = (0, 2)
 
 # Logging configuration.
@@ -167,6 +167,7 @@ class XvmFS(Fuse):
         elif path[:2] == BEGIN_CMD:
             data = self.result
         else:
+
             return -errno.ENOENT
 
         if data is None:
@@ -579,7 +580,7 @@ class XvmFS(Fuse):
                     , ('frg', 'frg', 0)
                     , ('def', 'def', 0)
                     , ('lvl', 'avglvl', 0)
-                    , ('wr', 'wn', 0)
+                    , ('wn', 'wn', 0)
                     , ('twr', 'twr', 0)
                 )
 
