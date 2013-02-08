@@ -68,12 +68,12 @@ exports.calc = function(data_orig, isLog) {
 //    if (isLog) {
         log += ro.log;
         log += "\nCorrected winrate is: " + (result || 0).toFixed(2) + "\n";
-        log += "\ncalculate() duration: " + (new Date() - start) + "ms\n";
+        log += "\ncalculate() duration: " + (new Date() - start) + " ms\n";
 //        console.log("twr: " + (new Date() - start) + " ms (" + JSON.stringify(data).length + " bytes)");
 //    }
 
     var dur = new Date() - start;
-    if (dur > 10)
+    if (dur > 50)
         console.log("twr: " + dur + " ms, id: " + data._id + ", name: " + data.nm);
     return { log: log, result: result || 0 };
 }
@@ -86,7 +86,7 @@ exports.calc = function(data_orig, isLog) {
         if (!step)
             step = 1;
 
-        if (step > 8) {
+        if (step > 9) {
             console.log("WARNING: [TCALC]: too deep recursion: step: " + step + ", id: " + data._id + ", name: " + data.nm + ", vname: " + vdata.name);
         }
 

@@ -5,6 +5,7 @@ module.exports = (function() {
         url = require("url"),
         worker_cmd = require("./worker_cmd"),
         worker_get = require("./worker_get"),
+        tcalc = require("./tcalc/tcalc"),
         fakeHttp; // for test application
 
     // Get stat command:
@@ -20,19 +21,19 @@ module.exports = (function() {
             { "n": "start", "t": new Date() }
         ];
 
-        fakeHttp = fakeHttp;
+        fakeHttp = fakeHttp; // sirmax: ???
         try {
             var query = url.parse(request.url).query;
-            if(!query || !query.match(/^((\d)|(\d[\dA-Za-z_\-,=/]*))$/))
+            if (!query || !query.match(/^((\d)|(\d[\dA-Za-z_\-,=/]*))$/))
                 throw "query match error: " + query;
 
-            if(query == "001" || query == "test") {
+            if (query == "001" || query == "test") {
                 response.end('{"players":[{"id":1,"status":"ok"}],"server":"' + settings.serverName + '"}');
                 return;
             }
 
             var qarr = query.split(",");
-            if(qarr[0] == "0") {
+            if (qarr[0] == "0") {
                 qarr.shift();
                 worker_cmd.processCommand(response, qarr);
                 return;
@@ -70,13 +71,13 @@ module.exports = (function() {
 
     var _getStatServers = function(id) {
         var serverId = Math.floor(id / 500000000);
-        if(serverId < 0 || serverId >= settings.statServers.length)
+        if (serverId < 0 || serverId >= settings.statServers.length)
             return null;
         var servers = settings.statServers[serverId];
-        if(!servers || servers.length == 0)
+        if (!servers || servers.length == 0)
             return null;
         var res = [ ];
-        for(var i in servers) {
+        for (var i in servers) {
             var srv = settings.servers[servers[i]];
             srv.id = servers[i];
             res.push(srv);
@@ -93,7 +94,7 @@ module.exports = (function() {
 
             // Skip wrong id and non-working servers
             var servers = _getStatServers(id);
-            if(servers) {
+            if (servers) {
                 ids.push(id);
                 data[id] = { vname: x[1] ? x[1].toUpperCase() : null, servers: servers };
                 if(x[2] == "1" && settings.updateUsers == true)
@@ -105,10 +106,51 @@ module.exports = (function() {
         return { ids: ids, data: data };
     };
 
+    var _fixData = function(data) {
+    //    if (Math.floor(Math.random()*30) != 0)
+    //        return;
+
+        var ok = false;
+        var lvl = false;
+        if (data.lvl == undefined) {
+            // Average Tier
+            lvl = true;
+            data.lvl = utils.calculateAvgLevel(data.v);
+        }
+
+        if (data.wn == undefined) {
+            // WN - WN rating http://forum.worldoftanks.com/index.php?/topic/184017-
+            data.wn = utils.calculateWN(data);
+            ok = true;
+            utils.log("id=" + data._id + " wn=" + data.wn);
+        }
+
+        if (data.twr == undefined) {
+            // TWR - tourist1984 win rate (aka T-Calc)
+            try {
+                data.twr = parseFloat(tcalc.calc(data, false).result.toFixed(2));
+                ok = true;
+    //            utils.log("id=" + data._id + " twr=" + data.twr);
+            } catch (e) { utils.log(e); }
+        }
+
+        if (lvl) {
+            data.lvl = parseFloat(data.lvl.toFixed(1));
+            ok = true;
+            utils.log("id=" + data._id + " lvl=" + data.lvl);
+        }
+
+        // updating db
+        if (ok && Math.floor(Math.random()*1) == 0) {
+    //        utils.log("update id=" + data._id);
+            db.updatePlayersData(data._id, data);
+        }
+    };
+
     // response from db
     var _onPlayersData = function(error, processData) {
-        if(error) {
-    //        response.statusCode = error.statusCode;
+        if (error) {
+    //        processData.response.statusCode = error.statusCode;
             processData.response.end('{"error":"' + error.text + '","server":"' + settings.serverName + '"}');
             //utils.log(error.text);
             return;
@@ -117,18 +159,25 @@ module.exports = (function() {
         try {
             var now = new Date();
 
-            processData.times.push({"n": "find", "t": now});
+            processData.times.push({"n":"find","t":now});
 
             for(var dbi in processData.dbData) {
                 var item = processData.dbData[dbi],
                     pdata = processData.rqData[item._id];
 
+                // check expire date
+                var cache = (now - item.dt) < settings.cacheTtl;
+
+                if (cache) {
+                    // fix data (recalculate missed items)
+                    if (settings.fixData == true)
+                        _fixData(item);
+                }
+
                 // Filter vehicle data
                 item.vname = pdata.vname;
                 item.v = utils.filterVehicleData(item, pdata.vname);
-
-                // check expire date
-                if((now - item.dt) < settings.cacheTtl) {
+                if (cache) {
                     item.st = "cache";
                     // remove cached item from request
                     delete processData.rqData[item._id];
@@ -139,11 +188,14 @@ module.exports = (function() {
                 }
             }
 
+            if (settings.fixData == true)
+                processData.times.push({"n":"fix","t":now});
+
             // process items with bad id
             for(var rqi in processData.rqData) {
                 var pdata = processData.rqData[rqi];
-                if(pdata.status == "bad_id") {
-                    processData.dbData.push({_id: rqi, st: pdata.status});
+                if (pdata.status == "bad_id") {
+                    processData.dbData.push({_id: rqi, st:pdata.status});
                     delete processData.rqData[rqi];
                 }
             }

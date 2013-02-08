@@ -11,6 +11,12 @@ var calculateAvgLvl = exports.calculateAvgLevel = function(vehicles) {
 };
 
 // calculateEfficiency
+// EFF formula:
+// DAMAGE * (10/TIER) * (0.21 + TIER / 100)
+// + FRAGS * 0.25 * 1000
+// + SPOT * 0.15 * 1000 +
+// + LOG((CAP + 1), 1.732) * 0.15 * 1000
+// + DEF * 0.15 * 1000
 exports.calculateEfficiency = function(data) {
     if (!data || !data.b || data.b <= 0)
         return 0;
@@ -23,15 +29,15 @@ exports.calculateEfficiency = function(data) {
     var DEF = data.def / data.b;
 
     var res = Math.round((
-        DAMAGE * (10 / TIER) * (0.15 + TIER / 50) +
-        FRAGS * (0.35 - TIER / 50) * 1000 +
-        SPOT * 200 +
-        CAP * 150 +
+        DAMAGE * (10 / TIER) * (0.21 + TIER / 100) +
+        FRAGS * 250 +
+        SPOT * 150 +
+        Math.log(CAP + 1) / Math.log(1.732) * 150 +
         DEF * 150
         ) / 10) * 10;
 
 //        console.log("eff: " + (new Date() - start) + " ms (" + JSON.stringify(data).length + " bytes)");
-    return res;
+        return res;
 };
 
 // WN rating
@@ -78,10 +84,8 @@ exports.getVehicleType = function(vclass) {
 
 // deep-copy of object (only simple type values supported)
 var clone = exports.clone = function(obj) {
-    var copy = {};
-    for(var i in obj)
-        copy[i] = (typeof(obj[i])=="object") ? clone(obj[i]) : obj[i];
-    return copy;
+    // TODO: use FASTER implementation
+    return JSON.parse(JSON.stringify(obj));
 };
 
 // log
@@ -108,7 +112,7 @@ exports.filterVehicleData = function(item, vname) {
         // TODO: remove legacy code
         for(var i in item.v) {
             try {
-                if (item.v[i].name.toUpperCase() == vname) 
+                if (item.v[i].name.toUpperCase() == vname)
                     return item.v[i];
             } catch (e) {
                 log("[ERROR]>  " + e + " id=" + item._id + " " + JSON.stringify(item));

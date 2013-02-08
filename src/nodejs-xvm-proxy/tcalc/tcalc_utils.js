@@ -43,11 +43,11 @@ module.exports = (function() {
 
         // limit of calculated tanks
         vd.sort(function(a,b){ return b.b - a.b; });
-        if (vd.length >= 30) {
+/*        if (vd.length >= 30) {
             if (isLog)
                 log += "Tanks limit is reached: 30. Skip some tanks (" + (vd.length - 30) + ").\n";
             vd = vd.slice(0, 30);
-        }
+        }*/
 
         // replace original array with filtered array
         data.v = vd;

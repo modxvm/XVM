@@ -25,8 +25,9 @@ exports.processCommand = function(response, args) {
                 cmd_INFO(response, pl, args);
                 break;
 
+            case "EFF":
             case "WN":
-                cmd_WN(response, pl, args);
+                cmd_EFF(response, pl, args);
                 break;
 
             case "TWR":
@@ -48,7 +49,7 @@ var cmd_INFO = function(response, pl, args) {
     cursor.toArray(function(error, data) {
         try {
             if(error)
-                throw "[" + cmd + "]: MongoDB find error: " + error;
+                throw "[INFO]: MongoDB find error: " + error;
             var vn = args.shift();
 //            utils.log(pl + "," + vn);
             if (vn) {
@@ -72,14 +73,14 @@ var cmd_INFO = function(response, pl, args) {
     });
 }
 
-var cmd_WN = function(response, pl, args) {
-    var cursor = db.find("players", {nm: pl});
+var cmd_EFF = function(response, pl, args) {
+    var cursor = db.find("players", {$or:[{nm:pl},{_id:parseInt(pl)}]});
     cursor.toArray(function(error, data) {
         try {
             if(error)
-                response.end('[' + cmd + ']: MongoDB find error: ' + error);
+                response.end('[EFF]: MongoDB find error: ' + error);
             else if (data.length == 0)
-                response.end('[' + cmd + ']: Player not found: ' + pl);
+                response.end('[EFF]: Player not found: ' + pl);
             else {
                 var s = "";
                 for (var i = 0; i < data.length; ++i) {
@@ -89,7 +90,22 @@ var cmd_WN = function(response, pl, args) {
                     s += "ID: " + d._id +
                         ", Nick: <a href='http://worldoftanks.ru/community/accounts/" + d._id + "-" + d.nm + "/'>" + d.nm + "</a>\n";
                     s += "--------------------------\n";
+                    s += "LVL: " + d.lvl + "\n";
+                    s += "EFF: " + utils.calculateEfficiency(d) + "\n";
                     s += "WN6: " + utils.calculateWN(d) + "\n";
+                    s += "GWR: " + (d.w / d.b * 100).toFixed(2) + "%\n";
+                    s += "TWR: " + tcalc.calc(d, false).result.toFixed(2) + "%\n";
+                    s += "--------------------------\n";
+                    s += "battles: " + d.b + "\n";
+                    s += "wins: " + d.w + "\n";
+                    s += "hit_percent: " + d.hip + "%\n";
+                    s += "damage: " + d.dmg + " (" + (d.dmg / d.b).toFixed(0) + ")\n";
+                    s += "frags: " + d.frg + " (" + (d.frg / d.b).toFixed(1) + ")\n";
+                    s += "spotted: " + d.spo + " (" + (d.spo / d.b).toFixed(1) + ")\n";
+                    s += "defence: " + d.def + " (" + (d.def / d.b).toFixed(1) + ")\n";
+                    s += "capture: " + d.cap + " (" + (d.cap / d.b).toFixed(1) + ")\n";
+                    s += "--------------------------\n";
+                    s += "data date: " + d.dt + " ms\n";
                     s += "duration: " + (new Date() - start) + " ms\n";
                     s += "</pre><hr>";
                 }
@@ -106,9 +122,9 @@ var cmd_TWR = function(response, pl, args) {
     cursor.toArray(function(error, data) {
         try {
             if(error)
-                response.end('[' + cmd + ']: MongoDB find error: ' + error);
+                response.end('[TWR]: MongoDB find error: ' + error);
             else if (data.length == 0)
-                response.end('[' + cmd + ']: Player not found: ' + pl);
+                response.end('[TWR]: Player not found: ' + pl);
             else {
                 var s = "";
                 for (var i = 0; i < data.length; ++i)

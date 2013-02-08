@@ -10,7 +10,8 @@ module.exports = (function() {
     var processRemotes = function(processData) {
         processData.times.push({ "n":"process","t":new Date() });
         http = processData.fakeHttp || http;
-        console.log("fakeHttp: ", processData);
+        //console.log("fakeHttp: ", processData);
+
         // FIXIT: why this don't work?
         //    for (var id in processData.rqData) ...
         // symptoms: makeSingleRequest args are wrong (always the last item values)
@@ -23,14 +24,14 @@ module.exports = (function() {
             var pdata = processData.rqData[id];
             var srv = _getFreeConnection(pdata.servers);
 
-            if(srv.error) {
-                if(pdata.cache)
+            if (srv.error) {
+                if (pdata.cache)
                     pdata.cache.st = srv.error;
                 else
-                    pdata.cache = {_id: id, st: srv.error};
+                    pdata.cache = {_id:id,st:srv.error};
                 processData.dbData[id] = pdata.cache;
                 delete processData.rqData[id];
-                process.send({usage: 1, max_conn: 1});
+                process.send({usage:1, max_conn:1});
                 return;
             }
 
@@ -50,7 +51,7 @@ module.exports = (function() {
         var wait = true;
         var srvs = utils.clone(servers);
 
-        for(var srvId in srvs)
+        for (var srvId in srvs)
         {
             var srv = srvs[srvId];
             var sst = status.serverStatus[srv.id];
@@ -116,9 +117,9 @@ module.exports = (function() {
         }, server.timeout);
 
         http.get(options, function(res) {
-            if(res.statusCode != 200) {
+            if (res.statusCode != 200) {
                 clearTimeout(reqTimeout);
-                if(done)
+                if (done)
                     return;
 
                 var err = "[" + server.name + "] Http error: bad status code: " + res.statusCode;
@@ -214,20 +215,20 @@ module.exports = (function() {
         // process retrieved items
         for(var id in processData.rqData) {
             var item = results[id];
-            if(!item) {
+            if (!item) {
                 utils.log("internal error in worker_get.js:asyncCallback(): !item, id=" + id + ", err= " + err);
                 result.players.push({id:id, status:"fail", date:now});
                 continue;
             }
 
             // check for errors
-            if(item.__status) {
+            if (item.__status) {
                 result.players.push(_prepareFallbackRes(processData.rqData[id], id, item.__status));
                 continue;
             }
 
             // check for errors from stat server
-            if(item.status == "error") {
+            if (item.status == "error") {
                 var res = _prepareFallbackRes(processData.rqData[id], id, "error");
                 switch(item.status_code) {
                     case "API_UNKNOWN_SERVER_ERROR":
@@ -250,7 +251,7 @@ module.exports = (function() {
             }
 
             // check for no error
-            if(item.status != "ok" || item.status_code != "NO_ERROR") {
+            if (item.status != "ok" || item.status_code != "NO_ERROR") {
                 var res = _prepareFallbackRes(processData.rqData[id], id, "ok");
                 res.status = item.status;
                 res.status_code = item.status_code;
@@ -262,7 +263,7 @@ module.exports = (function() {
             // check for correct id
             var _id = parseInt(id);
 
-            if(!_id || _id <= 0) {
+            if (!_id || _id <= 0) {
                 var res = _prepareFallbackRes(processData.rqData[id], id, "ok");
                 res.status = "bad_id";
                 result.players.push(res);
@@ -276,7 +277,7 @@ module.exports = (function() {
             db.updatePlayersData(_id, pdata);
             process.send({usage:1, updated:1});
 
-            if(settings.updateMissed == true)
+            if (settings.updateMissed == true)
                 db.removeMissed(_id);
 
             if(processData.rqData[id].vname)
@@ -365,14 +366,7 @@ module.exports = (function() {
 
         // TWR - tourist1984 win rate (aka T-Calc)
         try {
-    //        utils.log("start calc twr: " + resultItem._id);
-
-    //        pdata.twr = parseFloat(tcalc.calc(pdata, false).result.toFixed(2));
-
-    //        utils.log("pdata.twr=" + pdata.twr + "%" +
-    //            ", GWR=" + (pdata.w / pdata.b * 100).toFixed(2) + "%" +
-    //            ", bc=" + pdata.b +
-    //            ", id=" + pdata._id);
+            pdata.twr = parseFloat(tcalc.calc(pdata, false).result.toFixed(2));
         } catch (e) { utils.log(e); }
 
         pdata.lvl = parseFloat(pdata.lvl.toFixed(1));

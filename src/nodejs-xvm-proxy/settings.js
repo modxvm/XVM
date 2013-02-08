@@ -5,11 +5,12 @@ exports.settings = {
     numNodes: numNodes,
     updateMissed: false,
     updateUsers: false,
+    fixData: true,
     host: "127.0.0.1",
     port: 1333,
     maxSockets: Math.floor(1000 / numNodes), // per client
     cacheTtl: 7 * 24 * 60 * 60 * 1000, // 7 days
-    lastErrorTtl: 1 * 1000, // in msec
+    lastErrorTtl: 60 * 1000, // in msec
     usageStatShowPeriod: 20 * 1000, // in msec
     mongoServer: "localhost",
     mongoPort: 27017,
