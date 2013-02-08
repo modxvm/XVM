@@ -93,6 +93,7 @@ process_setup()
     echo -n " "spo=\"$(get spo "$c")\" >> players.new.xml
     echo -n " "def=\"$(get def "$c")\" >> players.new.xml
     echo -n " "avgl=\"$(get avglvl "$c")\" >> players.new.xml
+    echo -n " "cap=\"$(get cap "$c")\" >> players.new.xml
     echo "/>" >> players.new.xml
   done
 }
