@@ -8,7 +8,6 @@ import wot.utils.GraphicsUtil;
 import wot.utils.Locale;
 import wot.utils.Logger;
 import wot.utils.StatData;
-import wot.utils.Utils;
 import wot.utils.VehicleInfo;
 
 class wot.utils.Chance
@@ -113,7 +112,7 @@ class wot.utils.Chance
             }
         }
 
-        if (chanceFunc == ChanceFuncX2)
+        if (chanceFunc == ChanceFuncX1 || chanceFunc == ChanceFuncX2)
             return PrepareChanceResultsX2(Ka, Ke);
         
         return PrepareChanceResults(Ka, Ke);
@@ -152,22 +151,26 @@ class wot.utils.Chance
     {
         var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
 
-        var r = stat.b ? stat.w / stat.b * 100 : Config.s_config.consts.AVG_GWR;
-        var R = Math.max(-10, Math.min(10, r - Config.s_config.consts.AVG_GWR)) + 10;
+        var Tmin = vi1.tiers[0];
+        var Tmax = vi1.tiers[1];
+        var T = battleTier;
+        var Ba = stat.b || 0;
+        var Ea = stat.wn || 0;
+        var Ra = stat.r || 0;
+        
+        // 1
+        var Klvl = (Tmax + Tmin) / 2 - T;
+        
+        // 3
+        var Kab = (Ba <= 1000) ? 0                              //   0..1k  => 0
+            : (Ba <= 10000) ? (Ba - 1000) / 10000               //  1k..10k => 0..0.9
+            : (Ba <= 20000) ? 0.9 + (Ba - 10000) / 50000        // 10k..20k => 0.9..1.1
+            : 1.1 + (Ba - 20000) / 100000                       // 20k..    => 1.1..
 
-        var K = (R - 5) * (1 + 0.25 * Td);
+        // 4
+        var Eb = ((Ea * (100 + Ra - 48) / 100) * (1 + Kab)) * (1 + 0.25 * Klvl);
 
-        if (DEBUG_EXP)
-        {
-            Logger.add("team=" + team +
-                " l=" + Utils.padLeft(String(vi2.level), 2) + " " + Utils.padLeft(vi2.type, 3) +
-                " r=" + Utils.padLeft(String(Math.round(r * 10) / 10), 4) +
-                " R=" + Utils.padLeft(String(Math.round(R * 10) / 10), 4) +
-                " Td=" + Utils.padLeft(String(Td), 4) +
-                " K=" + String(Math.round(K * 10) / 10));
-        }
-
-        return K;
+        return Eb;
     }
 
     // http://www.koreanrandom.com/forum/topic/2598-/#entry31429
