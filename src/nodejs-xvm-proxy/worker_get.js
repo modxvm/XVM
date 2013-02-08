@@ -288,7 +288,7 @@ module.exports = (function() {
 
         processData.times.push({"n":"processed","t":new Date()});
 
-        _printDebugInfo(result.players, times);
+        _printDebugInfo(result.players, processData.times);
 
         // return response to client
         processData.response.end(JSON.stringify(result));
