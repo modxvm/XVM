@@ -38,7 +38,7 @@ class wot.FinalStatistic.DetailsBlock extends net.wargaming.hangar.FinalStatisti
         res.selectable = false;
         res.autoSize = align; // http://theolagendijk.com/2006/09/07/aligning-htmltext-inside-flash-textfield/
         var tf: TextFormat = f.getNewTextFormat();
-        res.styleSheet = Utils.createStyleSheet(Utils.createCSS("xvm_" + name, 
+        res.styleSheet = Utils.createStyleSheet(Utils.createCSS("xvm_" + name,
             tf.color, tf.font, tf.size, align, tf.bold, tf.italic));
 
         return res;
@@ -63,7 +63,7 @@ class wot.FinalStatistic.DetailsBlock extends net.wargaming.hangar.FinalStatisti
             var cr = data.personal.creditsData;
             creditsLbl.htmlText = cr[cr.length - 1].col1;
             premCreditsLbl.htmlText = cr[cr.length - 1].col3;
-            
+
             var pos = 0;
             for (var i = 0; i < 15; ++i)
             {
@@ -85,7 +85,8 @@ class wot.FinalStatistic.DetailsBlock extends net.wargaming.hangar.FinalStatisti
 
             shotsTitle.htmlText = "<span class='xvm_shotsTitle'><font color='#C9C9B6'>" + Locale.get("Hit percent") + "</font></span>";
             shotsCount.htmlText = "<span class='xvm_shotsCount'><font color='#C9C9B6'>" + pdata.hits + " / " + pdata.shots + "</font></span>";
-            shotsPercent.htmlText = "<span class='xvm_shotsPercent'><font color='#eeeeee'>" + Math.round(pdata.hits / pdata.shots * 100) + "%" + "</font></span>";
+            shotsPercent.htmlText = "<span class='xvm_shotsPercent'><font color='#eeeeee'>" +
+                (pdata.shots > 0 ? Math.round(pdata.hits / pdata.shots * 100) : "0") + "%" + "</font></span>";
             damageAssistedTitle.htmlText = "<span class='xvm_damageAssistedTitle'><font color='#C9C9B6'>" + Locale.get("Damage upon detecting") + "</font></span>";
             damageAssistedValue.htmlText = "<span class='xvm_damageAssistedValue'><font color='#408ccf'>" + dmgAss + "</font></span>";
             damageTitle.htmlText = "<span class='xvm_damageTitle'><font color='#C9C9B6'>" + Locale.get("Damage dealt") + "</font></span>";
