@@ -794,7 +794,8 @@ namespace wot
       {
         for (int i = 0; i < path.Length - 1; ++i)
           data = data[path[i]];
-        return data[path[path.Length - 1]].IsDouble ? double.Parse(data[path[path.Length - 1]].ToString()) : 0;
+        return (data[path[path.Length - 1]].IsDouble || data[path[path.Length - 1]].IsInt) ?
+          double.Parse(data[path[path.Length - 1]].ToString()) : 0;
       }
       catch
       {
