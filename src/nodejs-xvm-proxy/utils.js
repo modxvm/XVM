@@ -12,7 +12,7 @@ var calculateAvgLvl = exports.calculateAvgLevel = function(vehicles) {
 
 // calculateEfficiency
 // EFF formula:
-// DAMAGE * (10/TIER) * (0.21 + TIER / 100)
+// DAMAGE * (10 / (TIER + 2)) * (0.21 + 3 * TIER / 100)
 // + FRAGS * 0.25 * 1000
 // + SPOT * 0.15 * 1000 +
 // + LOG((CAP + 1), 1.732) * 0.15 * 1000
@@ -29,7 +29,7 @@ exports.calculateEfficiency = function(data) {
     var DEF = data.def / data.b;
 
     var res = Math.round((
-        DAMAGE * (10 / TIER) * (0.21 + TIER / 100) +
+        DAMAGE * (10 / (TIER + 2)) * (0.21 + 3*TIER / 100) +
         FRAGS * 250 +
         SPOT * 150 +
         Math.log(CAP + 1) / Math.log(1.732) * 150 +
