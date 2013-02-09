@@ -86,7 +86,7 @@ process_setup()
     echo -n " "wins=\"$(get w "$c")\" >> players.new.xml
     echo -n " "twins=\"$(get tw "$c")\" >> players.new.xml
     x=$(get teff "$c")
-    [ "$x" = "null" ] && x=""
+    [ "$x" = "null" ] && x="0"
     echo -n " "teff=\"$x\" >> players.new.xml
     echo -n " "dmg=\"$(get dmg "$c")\" >> players.new.xml
     echo -n " "frg=\"$(get frg "$c")\" >> players.new.xml
