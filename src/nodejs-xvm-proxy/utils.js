@@ -29,7 +29,7 @@ exports.calculateEfficiency = function(data) {
     var DEF = data.def / data.b;
 
     var res = Math.round((
-        DAMAGE * (10 / (TIER + 2)) * (0.21 + 3*TIER / 100) +
+        DAMAGE * (10 / (TIER + 2)) * (0.23 + 2 * TIER / 100) +
         FRAGS * 250 +
         SPOT * 150 +
         Math.log(CAP + 1) / Math.log(1.732) * 150 +

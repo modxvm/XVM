@@ -300,6 +300,8 @@ module.exports = (function() {
         var res = {
             id: item._id,
             date: item.dt,
+            cr: item.cr,
+            up: item.up,
             vname: item.vname,
             status: item.st,
             name: item.nm,
@@ -326,8 +328,10 @@ module.exports = (function() {
         // fill global info
         var pdata = {
             _id: parseInt(id),
-            dt: new Date(),
             st: "ok",
+            dt: new Date(),
+            cr: parseInt(data.created_at),
+            up: parseInt(data.updated_at),
             nm: data.name,
             b: data.summary.battles_count,
             w: data.summary.wins,
