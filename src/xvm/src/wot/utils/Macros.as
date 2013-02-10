@@ -261,6 +261,8 @@ class wot.utils.Macros
                 /** Придурки */
                 if (label == "6eC_IIaHuKu") //26.01.13
                     return "kassir macdonalds";
+                if (label == "6AMs6AM") //08.02.13
+                    return "popa4as2500";
                 break;
 
             case "CT":

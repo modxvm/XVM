@@ -176,6 +176,7 @@
     "enabled": false,
     "mapBackgroundImageAlpha": 100, // Map image transparency.
     "selfIconAlpha": 100,           // Self icon transparency. White pointing arrow.
+    "cameraAlpha": 100,              // Camera transparency and its attached geometry. Green triangle.
     "iconScale": 1,                 // Vehicles icon size.
                                     // Does not affect attached geometry and textfields.
                                     // Floating point allowed: 0.7 1.4.

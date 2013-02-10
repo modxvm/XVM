@@ -1,4 +1,3 @@
-import wot.utils.Logger;
 import wot.Minimap.ExternalDeveloperInterface;
 import wot.utils.Utils;
 import wot.utils.GlobalEventDispatcher;
@@ -116,6 +115,7 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     function sizeUp()
     {
         super.sizeUp();
+        //Logger.add("backgrnd getBytesLoaded " + backgrnd.getBytesTotal());
     }
     
     // -- Private
@@ -253,9 +253,6 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     private function setCameraAlpha():Void
     {
         var camera:MinimapEntry = IconsProxy.getCamera();
-        if (camera.markMC._alpha != MapConfig.cameraAlpha)
-        {
-            camera.markMC._alpha = MapConfig.cameraAlpha;
-        }
+        camera._alpha = MapConfig.cameraAlpha;
     }
 }
