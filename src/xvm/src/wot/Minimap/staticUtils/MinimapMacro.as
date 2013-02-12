@@ -7,10 +7,10 @@ import wot.Minimap.MinimapEntry;
 class wot.Minimap.staticUtils.MinimapMacro
 {
     private static var LEVEL_MACRO:String = "{{level}}";
-    private static var SHORT_VEH__MACRO:String = "{{short-vehicle}}";
-    private static var VEH_MACRO:String = "{{vehicle}}";
     private static var NICK_MACRO:String = "{{short-nick}}";
     private static var VEHCLASS_MACRO:String = "{{vehicle-class}}";
+    private static var VEH_MACRO:String = "{{vehicle-type}}";
+    private static var SHORT_VEH__MACRO:String = "{{vehicle-type-short}}"; // TODO
     
     public static function process(format:String, player:Player, vehicleClass:String):String
     {

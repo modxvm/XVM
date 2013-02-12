@@ -154,109 +154,109 @@ class wot.utils.DefaultConfig
                 cameraAlpha: 100,
                 iconScale: 1,
                 labels: {
-                  nickShrink: 4,
+                  nickShrink: 5,
                   vehicleclassmacro: {
-                    light: "♦",
+                    light: "",
                     medium: "",
                     heavy: "",
                     td: "▼",
                     spg: "■",
-                    superh: "s"
+                    superh: ""
                   },
                   units: {
                     revealedEnabled: true,
                     lostEnemyEnabled: true,
                     format: {
-                      ally:  "<span class='mm_a'>{{level}}</span>",
-                      enemy: "<span class='mm_e'>{{level}}</span>",
-                      squad: "<span class='mm_s'>{{level}} <i>{{short-nick}}</i></span>",
-                      lost:  "<span class='mm_lclass'>{{vehicle-class}}</span><span class='mm_l'><i>{{level}}</i></span>",
+                      ally:  "<span class='mm_a'>{{vehicle-type}}</span>",
+                      enemy: "<span class='mm_e'>{{vehicle-type}}</span>",
+                      squad: "<textformat leading='-1'><span class='mm_s'><i>{{short-nick}}</i>\n{{vehicle-type}}</span><textformat>",
+                      lost:  "<span class='mm_dot'>\u2022</span><span class='mm_l'><i>{{vehicle-type}}</i></span>",
                       oneself: ""
                     },
                     css: {
-                      ally:  ".mm_a{font-family:$FieldFont; font-size:8px; color:#BBEEBB;}",
-                      enemy: ".mm_e{font-family:$FieldFont; font-size:8px; color:#EEBBBB;}",
-                      squad: ".mm_s{font-family:$FieldFont; font-size:8px; color:#FFEE44;}",
-                      lost:  ".mm_l{font-family:$FieldFont; font-size:8px; color:#EEAACC;} .mm_lclass{font-family:Arial; font-size:10px; color:#FFBBDD;}",
-                      oneself: ""
+                      ally:  ".mm_a{font-family:$FieldFont; font-size:8px; color:#C8FFA6;}",
+                      enemy: ".mm_e{font-family:$FieldFont; font-size:8px; color:#FCA9A4;}",
+                      squad: ".mm_s{font-family:$FieldFont; font-size:8px; color:#FFC099;}",
+                      lost:  ".mm_l{font-family:$FieldFont; font-size:8px; color:#FCA9A4;} .mm_dot{font-family:Arial; font-size:17px; color:#FCA9A4;}",
+                      oneself: ".mm_o{font-family:$FieldFont; font-size:8px; color:#FFFFFF;}"
                     },
                     shadow: {
                       ally: {
                         enabled: true,
-                        color: "0x00FF00",
+                        color: "0x000000",
                         distance: 0,
                         angle: 0,
-                        alpha: 40,
-                        blur: 8,
-                        strength: 4
+                        alpha: 80,
+                        blur: 3,
+                        strength: 3
                       },
                       enemy: {
                         enabled: true,
-                        color: "0xFF0000",
+                        color: "0x000000",
                         distance: 0,
                         angle: 0,
-                        alpha: 40,
-                        blur: 8,
-                        strength: 4
+                        alpha: 80,
+                        blur: 3,
+                        strength: 3
                       },
                       squad: {
                         enabled: true,
-                        color: "0x00CCCC",
+                        color: "0x000000",
                         distance: 0,
                         angle: 0,
-                        alpha: 40,
-                        blur: 8,
-                        strength: 4
+                        alpha: 80,
+                        blur: 3,
+                        strength: 3
                       },
                       lost: {
                         enabled: true,
-                        color: "0xFF0000",
+                        color: "0x000000",
                         distance: 0,
                         angle: 0,
-                        alpha: 40,
-                        blur: 8,
-                        strength: 4
+                        alpha: 80,
+                        blur: 3,
+                        strength: 3
                       },
                       oneself: {
                         enabled: true,
-                        color: "0xFFFFFF",
+                        color: "0x000000",
                         distance: 0,
                         angle: 0,
-                        alpha: 40,
-                        blur: 8,
-                        strength: 4
+                        alpha: 80,
+                        blur: 3,
+                        strength: 3
                       }
                     },
                     offset: {
-                      ally:  {x: 0, y: 0},
-                      enemy: {x: 0, y: 0},
-                      squad: {x: 0, y: 0},
-                      lost:  {x: -4, y: -4},
+                      ally:  {x: 3, y: -1},
+                      enemy: {x: 3, y: -1},
+                      squad: {x: 3, y: -2},
+                      lost:  {x: -6, y: -10},
                       oneself: {x: 0, y: 0}
                     },
                     alpha : {
                       ally:  100,
                       enemy: 100,
                       squad: 100,
-                      lost:  80,
+                      lost:  70,
                       oneself: 100
                     }
                   },
                   mapSize: {
                     enabled: true,
                     format: "<b>{{cellsize}}0 m</b>",
-                    css: "font-size:12px; color:#000000;",
+                    css: "font-size:10px; color:#FFCC66;",
                     alpha: 80,
                     offsetX: 0,
                     offsetY: 0,
                     shadow: {
                       enabled: true,
-                      color: "0xAAAAAA",
+                      color: "0x000000",
                       distance: 0,
                       angle: 0,
                       alpha: 80,
-                      blur: 8,
-                      strength: 4
+                      blur: 2,
+                      strength: 3
                     },
                     width: 100,
                     height: 30

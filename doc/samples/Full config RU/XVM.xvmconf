@@ -203,11 +203,11 @@
         "revealedEnabled": true, // Выключатель добавочных текстовых полей для видимых юнитов.
         "lostEnemyEnabled": true,// Выключатель текстовых полей, помечивающих последние позиции потерянных врагов.
         "format": { // Формат поля.
-          "ally":  "<span class='mm_a'>{{vehicle}}</span>", // Союзник
-          "enemy": "<span class='mm_e'>{{vehicle}}</span>", // Враг
-          "squad": "<textformat leading='-1'><span class='mm_s'><i>{{short-nick}}</i>\n{{vehicle}}</span><textformat>", // Совзводный.
+          "ally":  "<span class='mm_a'>{{vehicle-type}}</span>", // Союзник
+          "enemy": "<span class='mm_e'>{{vehicle-type}}</span>", // Враг
+          "squad": "<textformat leading='-1'><span class='mm_s'><i>{{short-nick}}</i>\n{{vehicle-type}}</span><textformat>", // Совзводный.
           // Для потерянных с миникарты врагов.
-          "lost":  "<span class='mm_dot'>\u2022</span><span class='mm_l'><i>{{vehicle}}</i></span>",
+          "lost":  "<span class='mm_dot'>\u2022</span><span class='mm_l'><i>{{vehicle-type}}</i></span>",
           // Для своего маркера и маркера приёмника камеры наблюдения в случае смерти.
           "oneself": ""
         },
@@ -558,7 +558,7 @@
                 "size": 6,                    //   размер
                 "strength": 200               //   интенсивность
               },
-              "format": "{{vehicle}}{{turret}}" // формат текста. См. описание макросов в readme-ru.txt
+              "format": "{{vehicle-type}}{{turret}}" // формат текста. См. описание макросов в readme-ru.txt
             },
             // Текстовое поле с оставшимся / максимальным здоровьем
             {
@@ -1017,7 +1017,7 @@
                 "size": 6,                    //   размер
                 "strength": 200               //   интенсивность
               },
-              "format": "{{vehicle}}"         // формат текста. См. описание макросов в readme-ru.txt
+              "format": "{{vehicle-type}}"         // формат текста. См. описание макросов в readme-ru.txt
             }
           ]
         }
@@ -1150,7 +1150,7 @@
                 "size": 6,                    //   размер
                 "strength": 200               //   интенсивность
               },
-              "format": "{{vehicle}}{{turret}}" // формат текста. См. описание макросов в readme-ru.txt
+              "format": "{{vehicle-type}}{{turret}}" // формат текста. См. описание макросов в readme-ru.txt
             },
             // Текстовое поле с оставшимся / максимальным здоровьем
             {
@@ -1609,7 +1609,7 @@
                 "size": 6,                    //   размер
                 "strength": 200               //   интенсивность
               },
-              "format": "{{vehicle}}"         // формат текста. См. описание макросов в readme-ru.txt
+              "format": "{{vehicle-type}}"         // формат текста. См. описание макросов в readme-ru.txt
             }
           ]
         }

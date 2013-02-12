@@ -199,11 +199,11 @@
         "revealedEnabled":  true, // Textfields switch for revealed units.
         "lostEnemyEnabled": true, // Textfields switch for lost enemy units. Show last seen position.
         "format": { // Формат поля.
-          "ally":  "<span class='mm_a'>{{vehicle}}</span>", // Ally
-          "enemy": "<span class='mm_e'>{{vehicle}}</span>", // Enemy
-          "squad": "<textformat leading='-1'><span class='mm_s'><i>{{short-nick}}</i>\n{{vehicle}}</span><textformat>", // Squadmates
+          "ally":  "<span class='mm_a'>{{vehicle-type}}</span>", // Ally
+          "enemy": "<span class='mm_e'>{{vehicle-type}}</span>", // Enemy
+          "squad": "<textformat leading='-1'><span class='mm_s'><i>{{short-nick}}</i>\n{{vehicle-type}}</span><textformat>", // Squadmates
           // Lost enemy units
-          "lost":  "<span class='mm_dot'>\u2022</span><span class='mm_l'><i>{{vehicle}}</i></span>",
+          "lost":  "<span class='mm_dot'>\u2022</span><span class='mm_l'><i>{{vehicle-type}}</i></span>",
           // For your own marker or spectated subject.
           "oneself": ""
         },
@@ -552,7 +552,7 @@
                 "size": 6,                    //     Size
                 "strength": 200               //     Intensity
               },
-              "format": "{{vehicle}}{{turret}}" // Text format (see description of macros in the readme-en.txt)
+              "format": "{{vehicle-type}}{{turret}}" // Text format (see description of macros in the readme-en.txt)
             },
             // Text field with the remaining / maximum health
             {
@@ -1006,7 +1006,7 @@
                 "size": 6,                    //     Size
                 "strength": 200               //     Intensity
               },
-              "format": "{{vehicle}}"         // Text format (see description of macros in the readme-en.txt)
+              "format": "{{vehicle-type}}"         // Text format (see description of macros in the readme-en.txt)
             }
           ]
         }
@@ -1138,7 +1138,7 @@
                 "size": 6,                    //     Size
                 "strength": 200               //     Intensity
               },
-              "format": "{{vehicle}}{{turret}}" // Text format (see description of macros in the readme-en.txt)
+              "format": "{{vehicle-type}}{{turret}}" // Text format (see description of macros in the readme-en.txt)
             },
             // Text field with the remaining / maximum health
             {
@@ -1592,7 +1592,7 @@
                 "size": 6,                    //     Size
                 "strength": 200               //     Intensity
               },
-              "format": "{{vehicle}}"         // Text format (see description of macros in the readme-en.txt)
+              "format": "{{vehicle-type}}"         // Text format (see description of macros in the readme-en.txt)
             }
           ]
         }
