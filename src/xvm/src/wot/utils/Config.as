@@ -248,11 +248,16 @@ class wot.utils.Config
                     try
                     {
                         var v = a[i].split("=");
+                        Logger.addObject(v, "########v", 3);
                         switch (v[0].toLowerCase())
                         {
                             case "window_size":
                                 var sz = v[1].split(",");
                                 Config.s_vars.window_size = [ Math.max(800, parseInt(sz[0])), Math.max(600, parseInt(sz[1])) ];
+                                break;
+                            case "map_name":
+                                var mapName:String = v[1];
+                                Config.s_vars.map_name = mapName;
                                 break;
                         }
                     }

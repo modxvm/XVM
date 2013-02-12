@@ -62,7 +62,7 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
     function setMapBG(imgsource:String)
     {
         /**
-         * imgsource example:
+         * imgsource arg:
          * ../maps/icons/map/screen/19_monastery.png
          */
         
@@ -75,15 +75,7 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
          * Save map name for Minimap mod.
          * Best method to define map size without Python so far.
          */
-        Logger.add("setMapBGbattleloading.as2proj########################## " + mapName);
-        // 2013.02.12 14:26:21 [i] [002] setMapBGbattleloading.as2proj########################## monastery
-        
         (new LoadVars()).load(Defines.COMMAND_VAR + " map_name=" + mapName);
-        // 2013.02.12 14:26:21 [i] => @VAR MAP_NAME=MONASTERY
-        // 2013.02.12 14:26:21 [i] SET VAR: MAP_NAME=MONASTERY
-        
-        Logger.add("##### " + Config.s_vars.mapName)
-        // 2013.02.12 14:26:21 [i] [003] ##### undefined
         
         super.setMapBG(imgsource);
     }
