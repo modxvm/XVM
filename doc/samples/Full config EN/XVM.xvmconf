@@ -1753,12 +1753,21 @@
     ],
     // Dynamic color by efficiency (only with xvm-stat)
     "eff": [
-      { "value": 600,  "color": "0xFE0E00" },   //    0 - 599  - very bad
-      { "value": 900,  "color": "0xFE7903" },   //  600 - 899  - bad
-      { "value": 1200, "color": "0xF8F400" },   //  900 - 1199 - normal
-      { "value": 1500, "color": "0x60FF00" },   // 1200 - 1499 - good
-      { "value": 1800, "color": "0x02C9B3" },   // 1500 - 1799 - very good
-      { "value": 9999, "color": "0xD042F3" }    // 1800 - *    - unique
+      { "value": 640,  "color": "0xFE0E00" },   //    0 - 639  - very bad
+      { "value": 880,  "color": "0xFE7903" },   //  640 - 879  - bad
+      { "value": 1160, "color": "0xF8F400" },   //  880 - 1159 - normal
+      { "value": 1460, "color": "0x60FF00" },   // 1160 - 1459 - good
+      { "value": 1740, "color": "0x02C9B3" },   // 1460 - 1739 - very good
+      { "value": 9999, "color": "0xD042F3" }    // 1740 - *    - unique
+    ],
+    // Dynamic color by WN6 rating (only with xvm-stat)
+    "wn": [
+      { "value": 400,  "color": "0xFE0E00" },   //    0 - 399  - very bad
+      { "value": 750,  "color": "0xFE7903" },   //  400 - 749  - bad
+      { "value": 1140, "color": "0xF8F400" },   //  750 - 1139 - normal
+      { "value": 1510, "color": "0x60FF00" },   // 1140 - 1509 - good
+      { "value": 1850, "color": "0x02C9B3" },   // 1510 - 1849 - very good
+      { "value": 9999, "color": "0xD042F3" }    // 1850 - *    - unique
     ],
     // Dynamic color by win percent (only with xvm-stat)
     "rating": [
@@ -1837,15 +1846,6 @@
       { "value": 54,  "color": "0x60FF00" },   // 51 - 53  - good
       { "value": 57,  "color": "0x02C9B3" },   // 54 - 56  - very good
       { "value": 101, "color": "0xD042F3" }    // 57 - 100 - unique
-    ],
-    // Dynamic color by WN6 rating (only with xvm-stat)
-    "wn": [
-      { "value": 600,  "color": "0xFE0E00" },   //    0 - 599  - very bad
-      { "value": 900,  "color": "0xFE7903" },   //  600 - 899  - bad
-      { "value": 1200, "color": "0xF8F400" },   //  900 - 1199 - normal
-      { "value": 1500, "color": "0x60FF00" },   // 1200 - 1499 - good
-      { "value": 1800, "color": "0x02C9B3" },   // 1500 - 1799 - very good
-      { "value": 9999, "color": "0xD042F3" }    // 1800 - *    - unique
     ]
   },
   // OPTIONS FOR DYNAMIC TRANSPARENCY

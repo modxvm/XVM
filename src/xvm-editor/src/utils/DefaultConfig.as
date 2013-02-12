@@ -609,12 +609,20 @@ public class DefaultConfig
                     { value: 999, color: ColorPalette.purple }    // 83 - XX - unique     (better then 99.5% of players)
                 ],
                 eff: [
-                    { value: 640,  color: ColorPalette.red },       //    0 - 630  - very bad
-                    { value: 880,  color: ColorPalette.orange },    //  640 - 870  - bad
-                    { value: 1160, color: ColorPalette.yellow },    //  880 - 1150 - normal
-                    { value: 1450, color: ColorPalette.green },     // 1160 - 1440 - good
-                    { value: 1740, color: ColorPalette.blue },      // 1450 - 1730 - very good
-                    { value: 9999, color: ColorPalette.purple }     // 1740 - *    - unique
+                    { value: 640,  color: ColorPalette.red },     //    0 - 639  - very bad
+                    { value: 880,  color: ColorPalette.orange },  //  640 - 879  - bad
+                    { value: 1160, color: ColorPalette.yellow },  //  880 - 1159 - normal
+                    { value: 1460, color: ColorPalette.green },   // 1160 - 1459 - good
+                    { value: 1740, color: ColorPalette.blue },    // 1460 - 1739 - very good
+                    { value: 9999, color: ColorPalette.purple }   // 1740 - *    - unique
+                ],
+                wn: [
+                    { value: 400,  color: ColorPalette.red },     //    0 - 399  - very bad
+                    { value: 750,  color: ColorPalette.orange },  //  400 - 749  - bad
+                    { value: 1140, color: ColorPalette.yellow },  //  750 - 1139 - normal
+                    { value: 1510, color: ColorPalette.green },   // 1140 - 1509 - good
+                    { value: 1850, color: ColorPalette.blue },    // 1510 - 1849 - very good
+                    { value: 9999, color: ColorPalette.purple }   // 1850 - *    - unique
                 ],
                 rating: [
                     { value: 46,  color: ColorPalette.red },   //  0 - 45  - very bad
@@ -689,14 +697,6 @@ public class DefaultConfig
                     { value: 54,  color: ColorPalette.green },      // 51 - 53  - good
                     { value: 57,  color: ColorPalette.blue },       // 54 - 56  - very good
                     { value: 101, color: ColorPalette.purple }      // 57 - 100 - unique
-                ],
-                wn: [
-                    { value: 600,  color: ColorPalette.red },       //    0 - 599  - very bad
-                    { value: 900,  color: ColorPalette.orange },    //  600 - 899  - bad
-                    { value: 1200, color: ColorPalette.yellow },    //  900 - 1199 - normal
-                    { value: 1500, color: ColorPalette.green },     // 1200 - 1499 - good
-                    { value: 1800, color: ColorPalette.blue },      // 1500 - 1799 - very good
-                    { value: 9999, color: ColorPalette.purple }     // 1800 - *    - unique
                 ]
             },
             alpha: {
