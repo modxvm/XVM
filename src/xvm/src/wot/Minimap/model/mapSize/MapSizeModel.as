@@ -1,3 +1,4 @@
+import wot.utils.Logger;
 import wot.Minimap.model.mapSize.MapSizeBase;
 
 /**
@@ -17,6 +18,11 @@ class wot.Minimap.model.mapSize.MapSizeModel
     public function MapSizeModel() 
     {
         cellSide = MapSizeBase.define(_root.statsData.arenaData.mapText);
+        
+        /**
+         * TODO:
+         * imgsource read *
+         */
     }
     
     public function getSide():Number

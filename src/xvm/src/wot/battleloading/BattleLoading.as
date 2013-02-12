@@ -57,6 +57,16 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
         super.setSize(width, height);
         (new LoadVars()).load(Defines.COMMAND_VAR + " window_size=" + width + "," + height);
     }
+    
+    // override
+    function setMapBG(imgsource)
+    {
+        /**
+         * TODO:
+         * write read *
+         */
+        super.setMapBG(imgsource);
+    }
 
     private function onConfigLoaded()
     {

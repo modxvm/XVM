@@ -312,8 +312,11 @@
         // Специальные круги, зависящие от модели техники.
         // Несколько строк для одной техники делают несколько кругов.
         // По умолчанию в списке только круги дальнобойности артиллерии с топ орудиями.
-        // Типы для дополнения брать по ссылке
+        //   Типы для дополнения брать по ссылке
         // http://code.google.com/p/wot-xvm/source/browse/trunk/src/xvm/src/wot/utils/VehicleInfoData2.as
+        //   Дальнобойность арты може менятся в зависимости от углов постановки машины на склонах местности
+        // и высоте расположения машины относительно цели. на миникарте эти факторы не учитываются.
+        // Подробнее по ссылке: http://goo.gl/ZqlPa
         "special": [
             { "su_18":            { "enabled": true, "distance": 552,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
             { "su_26":            { "enabled": true, "distance": 578,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
@@ -409,6 +412,8 @@
          { "enabled": true, "from": 1399,"to": 1400, "inmeters": true, "thickness": 1.6,   "alpha": 30, "color": "0xFFCC66"},
          { "enabled": true, "from": 1499,"to": 1500, "inmeters": true, "thickness": 1.6,   "alpha": 30, "color": "0xFFCC66"}
        ],
+       // Углы горизонтальной наводки могут меняться в зависимости от углов постановки машины на склонах местности.
+       // Подробнее по ссылке: http://goo.gl/ZqlPa
        "traverseAngle": [ // Углы горизонтальной наводки. Срабатывают только, если углы есть.
          { "enabled": true, "from": 50,  "to": 95,  "inmeters": true, "thickness": 1.5,   "alpha": 50, "color": "0xCCCCCC"},
          { "enabled": true, "from": 100, "to": 145, "inmeters": true, "thickness": 1.4,   "alpha": 48, "color": "0xCCCCCC"},

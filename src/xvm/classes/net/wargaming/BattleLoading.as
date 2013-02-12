@@ -2,6 +2,6 @@
 {
   var form_mc;
 
-  //function configUI();
   function setSize(width, height);
+  function setMapBG(imgsource)
 }
