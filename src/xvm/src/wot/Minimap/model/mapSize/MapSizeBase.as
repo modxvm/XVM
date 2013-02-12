@@ -1,9 +1,5 @@
 import wot.utils.Logger;
 
-/**
- * Chineese by adri1
- */
-
 class wot.Minimap.model.mapSize.MapSizeBase
 {
     public static function define(mapName:String):Number

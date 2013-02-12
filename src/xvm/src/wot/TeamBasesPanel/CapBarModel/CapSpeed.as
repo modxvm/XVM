@@ -28,7 +28,7 @@ class wot.TeamBasesPanel.CapBarModel.CapSpeed
         var interval:Number = m_timer.getInterval(); // Changes InternalTimer state!
         var rawSpeed:Number = (newPointsVal - prevPoints) / interval;
         var approxSpeed:Number = Round.round(rawSpeed, 100); // to 0.01 digit
-        if (approxSpeed < OneTankSpeed.MIN_SPEED_ENCOUNTER || approxSpeed > 8)
+        if (approxSpeed < OneTankSpeed.APPROX_MIN_SPEED_ENCOUNTER || approxSpeed > 8)
         {
            /**
             * Extremes conditions with infinity, negatives, NaN like

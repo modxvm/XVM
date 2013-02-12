@@ -171,7 +171,7 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
         
        /**
         * Maximum capturers number at standart battle type is 3.
-        * Calculating more than 3 caps at encounter battle type is complicated.
+        * Calculating more than 3 caps at encounter battle type is too complicated.
         */
         if (caps > 3)
             caps = 3;

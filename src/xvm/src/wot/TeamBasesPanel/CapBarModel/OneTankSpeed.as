@@ -11,8 +11,12 @@ class wot.TeamBasesPanel.CapBarModel.OneTankSpeed
     * Any other map 0.5, 1
     */
     
-    public static var MIN_SPEED_ENCOUNTER:Number = 0.4;
-    public static var MIN_SPEED_OTHER:Number = 1; /** For Standart battle type and Assault */
+    /**
+     * Can be either 0.4 or 0.5 and 0.8 or 1 accordingly.
+     * Approximated to allow smoother capturers number calculation.
+     */
+    public static var APPROX_MIN_SPEED_ENCOUNTER:Number = 0.45;
+    public static var APPROX_MIN_SPEED_OTHER:Number = 0.9; /** For Standart battle type and Assault */
     
     private var m_speed:Number;
     
@@ -40,11 +44,11 @@ class wot.TeamBasesPanel.CapBarModel.OneTankSpeed
             var entry:MovieClip = entries[i];
             if (entry.teamPoint && entry.vehicleClass == "empty")
             {
-                return MIN_SPEED_ENCOUNTER;
+                return APPROX_MIN_SPEED_ENCOUNTER;
             }
         }
         
-        return MIN_SPEED_OTHER;
+        return APPROX_MIN_SPEED_OTHER;
     }
     
     private function get icons():MovieClip
