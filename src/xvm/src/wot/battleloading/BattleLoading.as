@@ -67,9 +67,9 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
          */
         
         /** Extract map name from image source */
-        var arr:Array = imgsource.split("_");
-        arr = arr[1].split(".");
-        var mapName:String = arr[0]; // monastery
+        var arr:Array = imgsource.split("/");
+        arr = arr[5].split(".");
+        var mapName:String = arr[0]; // 45_north_america
         
         /**
          * Save map name for Minimap mod.

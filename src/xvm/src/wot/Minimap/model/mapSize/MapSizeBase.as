@@ -11,71 +11,69 @@ class wot.Minimap.model.mapSize.MapSizeBase
         mapName = mapName.toLowerCase();
         switch(mapName)
         {
-            case "airfield":
+            case "31_airfield":    // Аэропорт
                 return 100;
-            case "arctic region":
+            case "38_mannerheim_line": // Заполярье
                 return 100; 
-            case "cliff":
-                return 100; // Утёс
-            case "dragon ridge":
+            case "18_cliff": // Утёс
+                return 100; 
+            case "51_asia":   // Хребет дракона
                 return 100;
-            case "el Halluf":
+            case "29_el_hallouf": // Халлуф
                 return 100; 
-            case "ensk":
+            case "06_ensk":       // Энас
                 return 60;
-            case "erlenberg":
+            case "13_erlenberg":   // Эрленберг
                 return 100; 
-            case "fishermans bay":
+            case "36_fishing_bay":  // Рыбацкая бхута
                 return 100; 
-            case "fjords":
+            case "33_fjord":        // Фьёрды
                 return 100; 
-            case "highway":
+            case "45_north_america": // Хайвей
                 return 100; 
-            case "himmelsdorf":
+            case "04_himmelsdorf":  // Химмельсдорф
                 return 70; 
-            case "karelia":
-                return 100; 
-            case "komarin":
+            case "01_karelia":  // Карелия
+                return 100;  
+            case "15_komarin": // Комарин
                 return 80; 
-            case "lakeville":
-                return 80; // Ласвилль 
-            case "live oaks":
-                return 100; 
-            case "malinovka":
-                return 100; 
-            case "mines":
-                return 80; // Рудиник
-            case "mountain pass":
-                return 100; // Перевал
-            case "monastery":
-                return 100; // Монастырь 
-            case "murovanka":
+            case "07_lakeville": // Ласвилль 
                 return 80; 
-            case "port":
+            case "44_north_america": // Лайвокс
+                return 100; 
+            case "02_malinovka":    // Малиновка
+                return 100; 
+            case "10_hills":       // Рудники
+                return 80; 
+            case "37_caucasus":  // Перевал
+                return 100;
+            case "19_monastery": // Монастырь 
+                return 100; 
+            case "11_murovanka": // Мурованка
+                return 80; 
+            case "42_north_america": // Порт
                 return 83; 
-            case "prokhorovka":
+            case "05_prohorovka": // Прохоровка
                 return 100; 
-            case "province":
+            case "03_campania":  // Провинция
                 return 60; 
-            case "redshire":
+            case "34_redshire": // Редшир
                 return 100; 
-            case "ruinberg":
+            case "08_ruinberg": // Руинберг
                 return 80; 
-            case "sand river":
+            case "28_desert":   // Песчанная река
                 return 100; 
-            case "serene coast":
-                return 100; // Тихий берег
-            case "siegfried line":
+            case "47_canada_a": // Тихий берег
                 return 100; 
-            case "south Coast":
+            case "14_siegfried_line": // Зигфрида
                 return 100; 
-            case "steppes":
-                return 100; // Степи
-            case "swamp":
-                return 100; // Топь
-            case "westfield":
+            case "39_crimea": // Южный берег
                 return 100; 
-            case "widepark":
+            case "35_steppes": // Степи
+                return 100; 
+            case "23_westfeld": // Вестфилд
+                return 100; 
+            case "17_munchen": // Вайдпарк
                 return 60;      
             default: 
                 Logger.add("Minimap ERROR: MapSizeBase mapName not recognized: " + mapName)
