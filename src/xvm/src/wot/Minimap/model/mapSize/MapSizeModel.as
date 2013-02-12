@@ -1,4 +1,3 @@
-import wot.utils.Logger;
 import wot.utils.Config;
 import wot.Minimap.model.mapSize.MapSizeBase;
 
@@ -18,14 +17,11 @@ class wot.Minimap.model.mapSize.MapSizeModel
     
     public function MapSizeModel() 
     {
-        cellSide = MapSizeBase.define(_root.statsData.arenaData.mapText);
-        
         /**
          * Read map name previously written by Battleloading.setMapBG(). 
          * Best method to define map size without Python so far.
          */
-        Logger.add("#####################Config.s_vars.map_name " + Config.s_vars.map_name);
-        // 2013.02.12 14:26:31 [i] [007] #####################Config.s_vars.map_name notset123
+        cellSide = MapSizeBase.define(Config.s_vars.map_name);
     }
     
     public function getSide():Number

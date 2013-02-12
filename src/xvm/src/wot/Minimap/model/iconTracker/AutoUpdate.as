@@ -45,7 +45,6 @@ class wot.Minimap.model.iconTracker.AutoUpdate
     /** Selfdestruct if timer have not been used for long time */
     private function timeSelfDestruct():Void
     {
-        // TODO: check minimap existence
         destructionTimer += TICK_INTERVAL_MS;
         if (destructionTimer > SELF_DESTRUCT_TICKS_THRESHOLD)
             clearInterval(flashTimer);

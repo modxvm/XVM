@@ -248,7 +248,6 @@ class wot.utils.Config
                     try
                     {
                         var v = a[i].split("=");
-                        Logger.addObject(v, "########v", 3);
                         switch (v[0].toLowerCase())
                         {
                             case "window_size":

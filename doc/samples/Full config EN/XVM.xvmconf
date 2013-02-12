@@ -176,7 +176,7 @@
     "enabled": false,
     "mapBackgroundImageAlpha": 100, // Map image transparency.
     "selfIconAlpha": 100,           // Self icon transparency. White pointing arrow.
-    "cameraAlpha": 100,              // Camera transparency and its attached geometry. Green triangle.
+    "cameraAlpha": 100,             // Camera transparency and its attached geometry. Green triangle.
     "iconScale": 1,                 // Vehicles icon size.
                                     // Does not affect attached geometry and textfields.
                                     // Floating point allowed: 0.7 1.4.
@@ -277,6 +277,7 @@
         }
       },
       "mapSize": { // Textfield for map side size. 1000m, 700m, 600m.
+        // Works only with xvm-stat.exe
         "enabled": true,
         "format": "<b>{{cellsize}}0 m</b>",
         "css": "font-size:10px; color:#FFCC66;",
@@ -299,6 +300,7 @@
       }
     },
     "circles": { // Distance circles. Only real map meters. Only for owned unit.
+        // Works only with xvm-stat.exe
         "enabled": true,
         "major": [
             // 445 meters - maximum reveal distance.
@@ -351,6 +353,7 @@
         ]
     },
     "lines": { // Only for owned vehicle.
+       // Works only with xvm-stat.exe
        "enabled": true,
        // "inmeters": true  - make line size to be in real map meters.
        // "inmeters": false - make line size to be in minimap interface clip points. Minimap interface clip side is 210 points.
