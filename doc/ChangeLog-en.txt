@@ -1,4 +1,5 @@
 XVM-3.3.2-test6:
+  * minimap mod
   * capmod: capturers number fix
   * added macros:
       {{xeff}}, {{xwn}}, {{c:xeff}}, {{c:xwn}} - two-digits ratinf value
