@@ -16,7 +16,8 @@ class wot.utils.Config
     public static var s_proxy_available: Boolean = true;
     public static var s_game_region: String = null;
     public static var s_vars: Object = {
-        window_size: [ 1024, 768 ]
+        window_size: [ 1024, 768 ],
+        map_name: "notset123"
     }
 
     private static var DEBUG_TIMES = false;
