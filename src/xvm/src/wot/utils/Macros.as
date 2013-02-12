@@ -155,6 +155,10 @@ class wot.utils.Macros
         // {{avglvl}}
         var avglvl = Math.round(Utils.toFloat(stat.avglvl, 0));
         pdata["avglvl"] = avglvl < 1 ? " " : avglvl == 10 ? "X" : avglvl;
+        // {{xeff}}
+        pdata["xeff"] = stat.xeff;
+        // {{xwn}}
+        pdata["xwn"] = stat.xwn;
         // {{eff}}, {{eff:4}}
         pdata["eff"] = eff <= 0 ? "--" : String(eff);
         pdata["eff:4"] = eff <= 0 ? " -- " : Utils.padLeft(pdata["eff"], 4);
@@ -208,14 +212,22 @@ class wot.utils.Macros
         pdata["tsb"] = stat.tsb == null ? "   " : Sprintf.format("%.1f", stat.tsb);
 
         // Dynamic colors
+        // {{c:xeff}}
+        pdata["c:xeff"] = isNaN(parseInt(stat.xeff)) ? ""
+            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff == "XX" ? 100 : stat.xeff, "#", o.darken) };
+        // {{c:xwn}}
+        pdata["c:xwn"] = isNaN(parseInt(stat.xwn)) ? ""
+            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn, "#", o.darken) };
         // {{c:eff}}
         pdata["c:eff"] = eff <= 0 ? ""
             : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff, "#", o.darken) };
+        // {{c:wn}}
+        pdata["c:wn"] = !stat.wn ? ""
+            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, stat.wn, "#", o.darken) };
         // {{c:e}}
         pdata["c:e"] = stat.te == null ? ""
             : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.te, "#", o.darken); }
-        pdata["c:wn"] = !stat.wn ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, stat.wn, "#", o.darken) };
+        // {{c:twr}}
         pdata["c:twr"] = !stat.twr ? ""
             : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TWR, stat.twr, "#", o.darken) };
         // {{c:rating}}

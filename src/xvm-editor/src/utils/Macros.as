@@ -31,96 +31,100 @@ package utils
                 Utils.padLeft((GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hp) / 100 * 255).toString(16), 2, '0');
 
             // Fix font (ugly hack)
-            format = format.replace("$TextFont", "Tahoma")
+            format = format.split("$TextFont").join("Tahoma")
 
             // Text
-            format = format.replace("{{dead}}", Config.s_config.hitLog.deadMarker);
+            format = format.split("{{dead}}").join(Config.s_config.hitLog.deadMarker);
 
-            format = format.replace("{{extra}}", Config.s_config.captureBar.ally.extra);
-            format = format.replace("{{points}}", "5");
-            format = format.replace("{{tanks}}", "3" + (Config.s_config.captureBar.appendPlus ? "+" : ""));
-            format = format.replace("{{time}}", "1:15");
-            format = format.replace("{{time-sec}}", "75");
-            format = format.replace("{{speed}}", "3");
+            format = format.split("{{extra}}").join(Config.s_config.captureBar.ally.extra);
+            format = format.split("{{points}}").join("5");
+            format = format.split("{{tanks}}").join("3" + (Config.s_config.captureBar.appendPlus ? "+" : ""));
+            format = format.split("{{time}}").join("1:15");
+            format = format.split("{{time-sec}}").join("75");
+            format = format.split("{{speed}}").join("3");
 
             var name:String = "Player";
             var vname:String = "T-34";
             var vnames:String = "t34";
-            format = format.replace("{{nick}}", name + "[CLAN]");
-            format = format.replace("{{name}}", name);
-            format = format.replace("{{short-nick}}", name.slice(0, Config.s_config.minimap.nickShrink));
-            format = format.replace("{{clan}}", "[CLAN]");
-            format = format.replace("{{vehicle}}", vname);
-            format = format.replace("{{short-vehicle}}", vnames);
-            format = format.replace("{{vtype}}", Config.s_config.texts.vtype.MT);
-            format = format.replace("{{level}}", "5");
-            format = format.replace("{{rlevel}}", "V");
-            format = format.replace("{{turret}}", Config.s_config.turretMarkers.highVulnerability);
-            format = format.replace("{{hp}}", hp.toString());
-            format = format.replace("{{hp-ratio}}", hpRatio.toString());
-            format = format.replace("{{hp-max}}", hpMax.toString());
-            format = format.replace("{{dmg}}", "250");
-            format = format.replace("{{dmg-ratio}}", "27");
-            format = format.replace("{{dmg-kind}}", "attack");
+            format = format.split("{{nick}}").join(name + "[CLAN]");
+            format = format.split("{{name}}").join(name);
+            format = format.split("{{short-nick}}").join(name.slice(0, Config.s_config.minimap.nickShrink));
+            format = format.split("{{clan}}").join("[CLAN]");
+            format = format.split("{{vehicle}}").join(vname);
+            format = format.split("{{short-vehicle}}").join(vnames);
+            format = format.split("{{vtype}}").join(Config.s_config.texts.vtype.MT);
+            format = format.split("{{level}}").join("5");
+            format = format.split("{{rlevel}}").join("V");
+            format = format.split("{{turret}}").join(Config.s_config.turretMarkers.highVulnerability);
+            format = format.split("{{hp}}").join(hp.toString());
+            format = format.split("{{hp-ratio}}").join(hpRatio.toString());
+            format = format.split("{{hp-max}}").join(hpMax.toString());
+            format = format.split("{{dmg}}").join("250");
+            format = format.split("{{dmg-ratio}}").join("27");
+            format = format.split("{{dmg-kind}}").join("attack");
 
-            format = format.replace("{{n}}", "10");
-            format = format.replace("{{n-player}}", "3");
-            format = format.replace("{{dmg-total}}", "2500");
-            format = format.replace("{{dmg-avg}}", "250");
-            format = format.replace("{{dmg-player}}", "1500");
+            format = format.split("{{n}}").join("10");
+            format = format.split("{{n-player}}").join("3");
+            format = format.split("{{dmg-total}}").join("2500");
+            format = format.split("{{dmg-avg}}").join("250");
+            format = format.split("{{dmg-player}}").join("1500");
 
             // Colors
-            format = format.replace("{{c:hp}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, hp));
-            format = format.replace("{{c:hp-ratio}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio));
-            format = format.replace("{{c:dmg-kind}}", GraphicsUtil.GetDmgKindValue("attack"));
-            format = format.replace("{{c:vtype}}", GraphicsUtil.GetVTypeColorValue("MT"));
-            format = format.replace("{{c:system}}", "#FBFBFB");
+            format = format.split("{{c:hp}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, hp));
+            format = format.split("{{c:hp-ratio}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP_RATIO, hpRatio));
+            format = format.split("{{c:dmg-kind}}").join(GraphicsUtil.GetDmgKindValue("attack"));
+            format = format.split("{{c:vtype}}").join(GraphicsUtil.GetVTypeColorValue("MT"));
+            format = format.split("{{c:system}}").join("#FBFBFB");
 
             // Transparency
-            format = format.replace("{{a:hp}}", alphaHpRatio);
-            format = format.replace("{{a:hp-ratio}}", alphaHpRatio);
+            format = format.split("{{a:hp}}").join(alphaHpRatio);
+            format = format.split("{{a:hp-ratio}}").join(alphaHpRatio);
 
             // Statistics
-            format = format.replace("{{rating}}", "66%");
-            format = format.replace("{{avglvl}}", "5");
-            format = format.replace("{{eff}}", "1800");
-            format = format.replace("{{e}}", "5");
-            format = format.replace("{{wn}}", "1001");
-            format = format.replace("{{twr}}", "61%");
-            format = format.replace("{{teff}}", "1024");
-            format = format.replace("{{tdb}}", "1010");
-            format = format.replace("{{tdb:4}}", "1010");
-            format = format.replace("{{tdv}}", "0.9");
-            format = format.replace("{{tfb}}", "1.0");
-            format = format.replace("{{tsb}}", "1.1");
-            format = format.replace("{{kb}}", "11k");
-            format = format.replace("{{battles}}", "11000");
-            format = format.replace("{{wins}}", "7260");
-            format = format.replace("{{rating:3}}", "66%");
-            format = format.replace("{{eff:4}}", "1800");
-            format = format.replace("{{kb:3}}", " 11k");
-            format = format.replace("{{t-rating}}", "55%");
-            format = format.replace("{{t-kb}}", ".5k");
-            format = format.replace("{{t-kb-0}}", "0.5k");
-            format = format.replace("{{t-hb}}", "5h");
-            format = format.replace("{{t-battles}}", "5500");
-            format = format.replace("{{t-wins}}", "3025");
-            format = format.replace("{{t-rating:3}}", "55%");
-            format = format.replace("{{t-kb:4}}", " .5k");
-            format = format.replace("{{t-hb:3}}", " 5h");
-            format = format.replace("{{t-battles:4}}", "5500");
-            format = format.replace("{{c:eff}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, 1800));
-            format = format.replace("{{c:wn}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, 1600));
-            format = format.replace("{{c:twr}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TWR, 61));
-            format = format.replace("{{c:rating}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 66));
-            format = format.replace("{{c:kb}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, 11));
-            format = format.replace("{{c:e}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, 5));
-            format = format.replace("{{c:tdb}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, 1010));
-            format = format.replace("{{c:tdv}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, 0.9));
-            format = format.replace("{{c:tfb}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, 1.0));
-            format = format.replace("{{c:tsb}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, 1.1));
-            format = format.replace("{{c:t-rating}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 55));
-            format = format.replace("{{c:t-battles}}", GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, 5500));
+            format = format.split("{{avglvl}}").join("5");
+            format = format.split("{{xeff}}").join("XX");
+            format = format.split("{{xwn}}").join("77");
+            format = format.split("{{eff}}").join("1800");
+            format = format.split("{{wn}}").join("1600");
+            format = format.split("{{e}}").join("5");
+            format = format.split("{{rating}}").join("66%");
+            format = format.split("{{twr}}").join("61%");
+            format = format.split("{{teff}}").join("1024");
+            format = format.split("{{tdb}}").join("1010");
+            format = format.split("{{tdb:4}}").join("1010");
+            format = format.split("{{tdv}}").join("0.9");
+            format = format.split("{{tfb}}").join("1.0");
+            format = format.split("{{tsb}}").join("1.1");
+            format = format.split("{{kb}}").join("11k");
+            format = format.split("{{battles}}").join("11000");
+            format = format.split("{{wins}}").join("7260");
+            format = format.split("{{rating:3}}").join("66%");
+            format = format.split("{{eff:4}}").join("1800");
+            format = format.split("{{kb:3}}").join(" 11k");
+            format = format.split("{{t-rating}}").join("55%");
+            format = format.split("{{t-kb}}").join(".5k");
+            format = format.split("{{t-kb-0}}").join("0.5k");
+            format = format.split("{{t-hb}}").join("5h");
+            format = format.split("{{t-battles}}").join("5500");
+            format = format.split("{{t-wins}}").join("3025");
+            format = format.split("{{t-rating:3}}").join("55%");
+            format = format.split("{{t-kb:4}}").join(" .5k");
+            format = format.split("{{t-hb:3}}").join(" 5h");
+            format = format.split("{{t-battles:4}}").join("5500");
+            format = format.split("{{c:xeff}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, 100));
+            format = format.split("{{c:xwn}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, 77));
+            format = format.split("{{c:eff}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, 1800));
+            format = format.split("{{c:wn}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, 1600));
+            format = format.split("{{c:twr}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TWR, 61));
+            format = format.split("{{c:rating}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 66));
+            format = format.split("{{c:kb}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, 11));
+            format = format.split("{{c:e}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, 5));
+            format = format.split("{{c:tdb}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDB, 1010));
+            format = format.split("{{c:tdv}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, 0.9));
+            format = format.split("{{c:tfb}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TFB, 1.0));
+            format = format.split("{{c:tsb}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, 1.1));
+            format = format.split("{{c:t-rating}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 55));
+            format = format.split("{{c:t-battles}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TBATTLES, 5500));
 
             return Utils.trim(format);
         }
@@ -229,11 +233,13 @@ package utils
             ],
             // Statistics
             stats: [
-                { value: "{{rating}}", label: "rating", icon: Embed.rating },
                 { value: "{{avglvl}}", label: "avglvl", icon: Embed.avglvl },
+                { value: "{{rating}}", label: "rating", icon: Embed.rating },
+                { value: "{{twr}}", label: "twr", icon: Embed.twr },
+                { value: "{{xeff}}", label: "xeff", icon: Embed.xeff },
+                { value: "{{xwn}}", label: "xwn", icon: Embed.xwn },
                 { value: "{{eff}}", label: "eff", icon: Embed.eff },
                 { value: "{{wn}}", label: "wn", icon: Embed.wn },
-                { value: "{{twr}}", label: "twr", icon: Embed.twr },
                 { value: "{{e}}", label: "e", icon: Embed.e },
                 { value: "{{teff}}", label: "teff", icon: Embed.teff },
                 { value: "{{tdb}}", label: "tdb", icon: Embed.tdb },
@@ -258,18 +264,20 @@ package utils
                 { value: "{{t-battles:4}}", label: "t_battles_4", icon: Embed.t_battles_4 }
             ],
             colors_stat: [
+                { value: "{{c:xeff}}", label: "c_xeff", icon: Embed.c_xeff },
+                { value: "{{c:xwn}}", label: "c_xwn", icon: Embed.c_xwn },
                 { value: "{{c:eff}}", label: "c_eff", icon: Embed.c_eff },
-                { value: "{{c:e}}", label: "c_e", icon: Embed.c_e },
-                { value: "{{c:twr}}", label: "c_twr", icon: Embed.c_twr },
                 { value: "{{c:wn}}", label: "c_wn", icon: Embed.c_wn },
+                { value: "{{c:e}}", label: "c_e", icon: Embed.c_e },
+                { value: "{{c:rating}}", label: "c_rating", icon: Embed.c_rating },
+                { value: "{{c:twr}}", label: "c_twr", icon: Embed.c_twr },
+                { value: "{{c:t-rating}}", label: "c_t_rating", icon: Embed.c_t_rating },
+                { value: "{{c:t-battles}}", label: "c_t_battles", icon: Embed.c_t_battles },
                 { value: "{{c:tdb}}", label: "c_tdb", icon: Embed.c_tdb },
                 { value: "{{c:tdv}}", label: "c_tdv", icon: Embed.c_tdv },
                 { value: "{{c:tfb}}", label: "c_tfb", icon: Embed.c_tfb },
                 { value: "{{c:tsb}}", label: "c_tsb", icon: Embed.c_tsb },
-                { value: "{{c:rating}}", label: "c_rating", icon: Embed.c_rating },
-                { value: "{{c:kb}}", label: "c_kb", icon: Embed.c_kb },
-                { value: "{{c:t-rating}}", label: "c_t_rating", icon: Embed.c_t_rating },
-                { value: "{{c:t-battles}}", label: "c_t_battles", icon: Embed.c_t_battles }
+                { value: "{{c:kb}}", label: "c_kb", icon: Embed.c_kb }
             ],
             // Dynamic transparency macros:
             transparency: [

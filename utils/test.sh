@@ -10,8 +10,8 @@ CURRENT_DIRECTORY=`pwd`
 #SAMPLE_REPLAY=observer.wotreplay
 #SAMPLE_REPLAY=teff.wotreplay
 #SAMPLE_REPLAY=teff2.wotreplay
-#SAMPLE_REPLAY=markers.wotreplay
-SAMPLE_REPLAY=test.wotreplay
+SAMPLE_REPLAY=markers.wotreplay
+#SAMPLE_REPLAY=test.wotreplay
 
 cd "${WOT_DIRECTORY}"
 REPLAY=${CURRENT_DIRECTORY}/../test/replays/${SAMPLE_REPLAY}

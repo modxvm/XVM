@@ -63,9 +63,9 @@ class wot.utils.StatData
 {
     public static var s_loaded = false;
     public static var s_data = {};
-  
 
-    
+
+
     // dummy var to avoid import warning
     private static var __dummy = Logger.dummy;
 

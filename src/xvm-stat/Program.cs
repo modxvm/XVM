@@ -235,6 +235,9 @@ namespace wot
            (AssemblyInformationalVersionAttribute)Assembly.GetExecutingAssembly()
            .GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute), false)[0];
 
+        var a = Assembly..GetExecutingAssembly().GetName();
+        var p = a.GetPublicKey();
+
         Console.Title = "XVM Stat v" + Assembly.GetExecutingAssembly().GetName().Version +
           " for XVM " + attribute.InformationalVersion + "+";
         Log(Console.Title);

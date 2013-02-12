@@ -242,11 +242,20 @@
                 </s:NavigatorContent>
                 <s:NavigatorContent label="{_('colorsPage2')}" width="100%" height="100%" id="pgColors2">
                         <mx:Accordion id="accColors2" width="420" height="100%" change="{RefreshCurrentPage()}">
+                            <s:NavigatorContent id="nc_colors_x" label="{_('DynamicColorXVMSCALE')}" width="100%" height="100%">
+                                <p:PDynamicValues id="p_colors_x" config="colors.x" minimum="0" maximum="101" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                            </s:NavigatorContent>
                             <s:NavigatorContent id="nc_colors_eff" label="{_('DynamicColorByEfficiency')}" width="100%" height="100%">
                                 <p:PDynamicValues id="p_colors_eff" config="colors.eff" minimum="0" maximum="3000" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
                             </s:NavigatorContent>
+                            <s:NavigatorContent id="nc_colors_wn" label="{_('DynamicColorWN')}" width="100%" height="100%">
+                                <p:PDynamicValues id="p_colors_wn" config="colors.wn" minimum="0" maximum="3000" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                            </s:NavigatorContent>
                             <s:NavigatorContent id="nc_colors_rating" label="{_('DynamicColorByWinRate')}" width="100%" height="100%">
                                 <p:PDynamicValues id="p_colors_rating" config="colors.rating" minimum="0" maximum="101" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                            </s:NavigatorContent>
+                            <s:NavigatorContent id="nc_colors_twr" label="{_('DynamicColorTWR')}" width="100%" height="100%">
+                                <p:PDynamicValues id="p_colors_twr" config="colors.twr" minimum="0" maximum="101" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
                             </s:NavigatorContent>
                             <s:NavigatorContent id="nc_colors_kb" label="{_('DynamicColorByKiloBattles')}" width="100%" height="100%">
                                 <p:PDynamicValues id="p_colors_kb" config="colors.kb" minimum="0" maximum="100" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
@@ -268,12 +277,6 @@
                             </s:NavigatorContent>
                             <s:NavigatorContent id="nc_colors_tsb" label="{_('DynamicColorTSB')}" width="100%" height="100%">
                                 <p:PDynamicValues id="p_colors_tsb" config="colors.tsb" minimum="0" maximum="3" stepSize="0.1" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
-                            </s:NavigatorContent>
-                            <s:NavigatorContent id="nc_colors_twr" label="{_('DynamicColorTWR')}" width="100%" height="100%">
-                                <p:PDynamicValues id="p_colors_twr" config="colors.twr" minimum="0" maximum="101" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
-                            </s:NavigatorContent>
-                            <s:NavigatorContent id="nc_colors_wn" label="{_('DynamicColorWN')}" width="100%" height="100%">
-                                <p:PDynamicValues id="p_colors_wn" config="colors.wn" minimum="0" maximum="3000" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
                             </s:NavigatorContent>
                         </mx:Accordion>
                 </s:NavigatorContent>

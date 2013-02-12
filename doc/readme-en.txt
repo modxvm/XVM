@@ -159,6 +159,8 @@
       {{teff}}, {{e}} - player per-vehicle efficiency: http://www.koreanrandom.com/forum/topic/1643-
       {{twr}}         - TWR (T-Calc): http://www.koreanrandom.com/forum/topic/2389-
       {{wn}}          - WN6 rating: http://www.koreanrandom.com/forum/topic/2575-
+      {{xeff}}        - XVM Scale for efficiency (values 00-99, XX for Tops)
+      {{xwn}}         - XVM Scale for WN6 (values 00-99, XX for Tops)
       {{rating}}      - GWR (Global Win Ratio)
       {{rating:3}}    - GWR aligned from left to 3 chars
       {{battles}}     - total battles count
@@ -184,6 +186,8 @@
       {{c:e}}         - color depended from player per-vehicle efficiency
       {{c:twr}}       - color depended from TWR (T-Calc)
       {{c:wn}}        - color depended from WN6 rating
+      {{c:xeff}}      - color depended from XVM Scale for efficiency
+      {{c:xwn}}       - color depended from XVM Scale for WN6
       {{c:rating}}    - color depended from GWR
       {{c:kb}}        - color depended from kilo-battles
       {{c:t-rating}}  - color depended from current vehicle win ratio
@@ -191,17 +195,17 @@
 
   "format" field examples:
     1. Show number of kilo-battles, efficiency and GWR without changing a color:
-      "{{kb}} {{eff}} {{rating}}"
+      "{{kb}} {{xwn}} {{rating}}"
     2. The same, but with each number colored by its value:
-      "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>"
+      "<font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font>"
     3. Same as 2, but with aligned columns:
-      "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff:4}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>"
-    4. Show GWR colored by efficiency:
-      "<font color='{{c:eff}}'>{{rating}}</font>"
+      "<font face='Consolas' size='11'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>"
+    4. Show GWR colored by xwn:
+      "<font color='{{c:xwn}}'>{{rating}}</font>"
 
   Dynamic color and transparency usage examples:
   In XVM.xvmconf:
-    "color": "{{c:eff}}" - color depended from efficiency
+    "color": "{{c:xwn}}" - color depended from xwn
     "alpha": "{{a:hp}}" - transparency depended from current health
 
   Clan and players icons.
@@ -249,4 +253,3 @@
     1550..1799 8 - great
     1800..1999 9 - master
     2000+      E - Expert (top-100 players on this vehicle)
-  This ranges also can be used for {{eff}} and {{wn}}.

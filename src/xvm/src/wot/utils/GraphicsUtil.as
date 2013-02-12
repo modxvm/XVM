@@ -184,7 +184,7 @@ class wot.utils.GraphicsUtil
         if (value == null)
             return "";
 
-            if (!prefix)
+        if (!prefix)
             prefix = "#";
 
         if (isNaN(value))
@@ -199,6 +199,7 @@ class wot.utils.GraphicsUtil
             case Defines.DYNAMIC_COLOR_EFF:             cfg = cfg_root.eff; break;
             case Defines.DYNAMIC_COLOR_E:               cfg = cfg_root.e; break;
             case Defines.DYNAMIC_COLOR_WN:              cfg = cfg_root.wn; break;
+            case Defines.DYNAMIC_COLOR_X:               cfg = cfg_root.x; break;
             case Defines.DYNAMIC_COLOR_TWR:             cfg = cfg_root.twr; break;
             case Defines.DYNAMIC_COLOR_RATING:          cfg = cfg_root.rating; break;
             case Defines.DYNAMIC_COLOR_KB:              cfg = cfg_root.kb; break;

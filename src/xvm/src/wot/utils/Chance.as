@@ -114,7 +114,7 @@ class wot.utils.Chance
 
         if (chanceFunc == ChanceFuncX1 || chanceFunc == ChanceFuncX2)
             return PrepareChanceResultsX2(Ka, Ke);
-        
+
         return PrepareChanceResults(Ka, Ke);
     }
 
@@ -122,7 +122,7 @@ class wot.utils.Chance
     {
         var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
 
-        var E: Number = stat.wn || Config.s_config.consts.AVG_EFF;
+        var E: Number = stat.xwn || Config.s_config.consts.AVG_XVMSCALE;
         var R: Number = stat.b ? stat.w / stat.b : Config.s_config.consts.AVG_GWR / 100.0;
 
         var B: Number = stat.b || Config.s_config.consts.AVG_BATTLES;
@@ -138,7 +138,7 @@ class wot.utils.Chance
     {
         var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
 
-        var E: Number = stat.wn || Config.s_config.consts.AVG_EFF;
+        var E: Number = stat.xwn || Config.s_config.consts.AVG_XVMSCALE;
 
         var r = stat.tb ? stat.tw / stat.tb * 100 : Config.s_config.consts.AVG_GWR;
         var Rt_pre: Number = Math.max(-10, Math.min(10, (r - Config.s_config.consts.AVG_GWR)));
@@ -154,13 +154,13 @@ class wot.utils.Chance
         var Tmin = vi1.tiers[0];
         var Tmax = vi1.tiers[1];
         var T = battleTier;
-        var Ba = stat.b || 0;
-        var Ea = stat.wn || 0;
-        var Ra = stat.r || 0;
-        
+        var Ea = stat.xwn || Config.s_config.consts.AVG_XVMSCALE;
+        var Ra = stat.r || Config.s_config.consts.AVG_GWR;
+        var Ba = stat.b || Config.s_config.consts.AVG_BATTLES;
+
         // 1
         var Klvl = (Tmax + Tmin) / 2 - T;
-        
+
         // 3
         var Kab = (Ba <= 1000) ? 0                              //   0..1k  => 0
             : (Ba <= 10000) ? (Ba - 1000) / 10000               //  1k..10k => 0..0.9
@@ -182,23 +182,23 @@ class wot.utils.Chance
         var Tmax = vi1.tiers[1];
         var T = battleTier;
         var Bt = stat.tb || 0;
-        var Ba = stat.b || 0;
         var Et = stat.teff || 0;
         var Rt = stat.tr || 0;
         var AvgW = vi3.w / vi3.b * 100;
-        var Ea = stat.wn || 0;
-        var Ra = stat.r || 0;
-        
+        var Ea = stat.xwn || Config.s_config.consts.AVG_XVMSCALE;
+        var Ra = stat.r || Config.s_config.consts.AVG_GWR;
+        var Ba = stat.b || Config.s_config.consts.AVG_BATTLES;
+
         // 1
         var Klvl = (Tmax + Tmin) / 2 - T;
-        
+
         // 2
         var Ktb = (Bt <= 100) ? 0                               //    0..100  => 0
             : (Bt <= 500) ? (Bt - 100) / 500                    //  101..500  => 0..0.8
             : (Bt <= 1000) ? 0.8 + (Bt - 500) / 2000            //  501..1000 => 0.8..1.05
             : (Bt <= 2000) ? 1.05 + (Bt - 1000) / 4000          // 1001..2000 => 1.05..1.3
             : 1.3 + (Bt - 2000) / 8000;                         // 2000..     => 1.3..
-        
+
         // 3
         var Kab = (Ba <= 1000) ? 0                              //   0..1k  => 0
             : (Ba <= 10000) ? (Ba - 1000) / 10000               //  1k..10k => 0..0.9
@@ -206,10 +206,10 @@ class wot.utils.Chance
             : 1.1 + (Ba - 20000) / 100000                       // 20k..    => 1.1..
 
         // 4
-        var Eb = (Et > 0) ? (((3 / 5 * Et * (100 + Rt - AvgW) / 100 ) * (1 + Ktb)) + 
+        var Eb = (Et > 0) ? (((3 / 5 * Et * (100 + Rt - AvgW) / 100 ) * (1 + Ktb)) +
                 ((2 / 5 * Ea * (100 + Ra - 48) / 100) * (1 + Kab))) * (1 + 0.25 * Klvl)
             : ((Ea * (100 + Ra - 48) / 100) * (1 + Kab)) * (1 + 0.25 * Klvl);
-            
+
 /*        if (DEBUG_EXP)
         {
             Logger.add("team=" + team +

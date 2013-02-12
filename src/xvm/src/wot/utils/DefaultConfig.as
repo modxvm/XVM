@@ -97,8 +97,8 @@ class wot.utils.DefaultConfig
                 // Playes/clan icon parameters.
                 clanIcon: { show: true, x: 0, y: 6, xr: NaN, yr: NaN, h: 16, w: 16, alpha: 90 },
                 // Dispay format. Macro-substitutiones allowed.
-                formatLeft: "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
-                formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
+                formatLeft: "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+                formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
             },
             statisticForm: {
                 showChances: false,     // Show game round win chances percentage.
@@ -107,8 +107,8 @@ class wot.utils.DefaultConfig
                 // Playes/clan icon parameters.
                 clanIcon: { show: true, x: 0, y: 6, xr: NaN, yr: NaN, h: 16, w: 16, alpha: 90 },
                 // Dispay format.
-                formatLeft: "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
-                formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
+                formatLeft: "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+                formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
             },
             playersPanel: {
                 alpha: 60,              // Side panel transparency. 0 - transparent, 100 - opaque.
@@ -121,16 +121,16 @@ class wot.utils.DefaultConfig
                     // 0..250 - player name field width.
                     width: 46,
                     // Dispay format.
-                    formatLeft: "<font color='{{c:eff}}'>{{nick}}</font>",
-                    formatRight: "<font color='{{c:eff}}'>{{nick}}</font>"
+                    formatLeft: "<font color='{{c:xwn}}'>{{nick}}</font>",
+                    formatRight: "<font color='{{c:xwn}}'>{{nick}}</font>"
                 },
                 // Medium2 mode.
                 medium2: {
                     // 0..250 - player name field width.
                     width: 65,
                     // Dispay format.
-                    formatLeft: "<font color='{{c:eff}}'>{{vehicle}}</font>",
-                    formatRight: "<font color='{{c:eff}}'>{{vehicle}}</font>"
+                    formatLeft: "<font color='{{c:xwn}}'>{{vehicle}}</font>",
+                    formatRight: "<font color='{{c:xwn}}'>{{vehicle}}</font>"
                 },
                 // Large mode.
                 large: {
@@ -139,8 +139,8 @@ class wot.utils.DefaultConfig
                     // Dispay format.
                     nickFormatLeft: "<font color='{{c:rating}}'>{{rating}}</font> {{nick}}",
                     nickFormatRight: "{{nick}} <font color='{{c:rating}}'>{{rating}}</font>",
-                    vehicleFormatLeft: "<font color='{{c:eff}}'>{{vehicle}}</font>",
-                    vehicleFormatRight: "<font color='{{c:eff}}'>{{vehicle}}</font>"
+                    vehicleFormatLeft: "<font color='{{c:xwn}}'>{{vehicle}}</font>",
+                    vehicleFormatRight: "<font color='{{c:xwn}}'>{{vehicle}}</font>"
                 }
             },
             turretMarkers: {
@@ -604,13 +604,21 @@ class wot.utils.DefaultConfig
                     { value: 50,  color: ColorPalette.orange },     // 25 - 49
                     { value: 101, color: ColorPalette.white }       // 51 -  *
                 ],
+                x: [
+                    { value: 15,  color: ColorPalette.red },   // 00 - 14 - very bad   (15% of players)
+                    { value: 30,  color: ColorPalette.orange },   // 15 - 29 - bad        (better then 15% of players)
+                    { value: 47,  color: ColorPalette.yellow },   // 30 - 46 - normal     (better then 50% of players)
+                    { value: 65,  color: ColorPalette.green },   // 47 - 64 - good       (better then 83% of players)
+                    { value: 83,  color: ColorPalette.blue },   // 65 - 82 - very good  (better then 96.5% of players)
+                    { value: 999, color: ColorPalette.purple }    // 83 - XX - unique     (better then 99.5% of players)
+                ],
                 eff: [
-                    { value: 600,  color: ColorPalette.red },       //    0 - 599  - very bad
-                    { value: 900,  color: ColorPalette.orange },    //  600 - 899  - bad
-                    { value: 1200, color: ColorPalette.yellow },    //  900 - 1199 - normal
-                    { value: 1500, color: ColorPalette.green },     // 1200 - 1499 - good
-                    { value: 1800, color: ColorPalette.blue },      // 1500 - 1799 - very good
-                    { value: 9999, color: ColorPalette.purple }     // 1800 - *    - unique
+                    { value: 640,  color: ColorPalette.red },       //    0 - 630  - very bad
+                    { value: 880,  color: ColorPalette.orange },    //  640 - 870  - bad
+                    { value: 1160, color: ColorPalette.yellow },    //  880 - 1150 - normal
+                    { value: 1450, color: ColorPalette.green },     // 1160 - 1440 - good
+                    { value: 1740, color: ColorPalette.blue },      // 1450 - 1730 - very good
+                    { value: 9999, color: ColorPalette.purple }     // 1740 - *    - unique
                 ],
                 rating: [
                     { value: 46,  color: ColorPalette.red },   //  0 - 45  - very bad
@@ -1050,9 +1058,9 @@ class wot.utils.DefaultConfig
     public static function get consts(): Object
     {
         return {
-            AVG_GWR: 48,  // Average GWR. Source: http://wot-news.com/stat/server/ru/norm/en
-            AVG_EFF: 900, // Average Efficiency. Source: http://wot-news.com/index.php/stat/calc/en
-            AVG_BATTLES: 1000, // Averate number of battles. Source: http://wot-news.com/stat/server/ru/norm/en
+            AVG_GWR: 49,  // Average GWR. Source: http://wot-news.com/stat/server/ru/norm/en
+            AVG_XVMSCALE: 30, // Average XVM Scale. Source: http://www.koreanrandom.com/forum/topic/2625-/
+            AVG_BATTLES: 2000, // Averate number of battles. Source: http://wot-news.com/stat/server/ru/norm/en
             E: {
                 Kmin: 0.4,
                 LT: [ // lightTank

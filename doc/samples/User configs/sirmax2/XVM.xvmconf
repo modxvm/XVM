@@ -26,15 +26,15 @@
     "showChancesExp": true,
     "removeSquadIcon": false,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft":  "<font face='Consolas' size='11'>{{avglvl}} <font color='{{c:e}}'>{{e}}</font> <font face='Symbol' color='#111111'><b><font color='{{c:tdv}}'>·</font><font color='{{c:tfb}}'>·</font><font color='{{c:tsb}}'>·</font></b></font> <font color='{{c:wn}}'>{{wn}}</font> <font color='{{c:twr}}'>{{twr}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>",
-    "formatRight": "<font face='Consolas' size='11'>{{avglvl}} <font color='{{c:e}}'>{{e}}</font> <font face='Symbol' color='#111111'><b><font color='{{c:tdv}}'>·</font><font color='{{c:tfb}}'>·</font><font color='{{c:tsb}}'>·</font></b></font> <font color='{{c:wn}}'>{{wn}}</font> <font color='{{c:twr}}'>{{twr}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>"
+    "formatLeft":  "<font face='Consolas' size='11'>{{avglvl}} <font face='Symbol' color='#111111'><b><font color='{{c:tdv}}'>·</font><font color='{{c:tfb}}'>·</font><font color='{{c:tsb}}'>·</font></b></font> <font color='{{c:e}}'>{{e}}</font>|<font color='{{c:xeff}}'>{{xeff}}</font>|<font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:twr}}'>{{twr}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>",
+    "formatRight": "<font face='Consolas' size='11'>{{avglvl}} <font face='Symbol' color='#111111'><b><font color='{{c:tdv}}'>·</font><font color='{{c:tfb}}'>·</font><font color='{{c:tsb}}'>·</font></b></font> <font color='{{c:e}}'>{{e}}</font>|<font color='{{c:xeff}}'>{{xeff}}</font>|<font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:twr}}'>{{twr}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>"
   },
   "statisticForm": {
     "showChances": true,
     "showChancesExp": true,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft":  "<font face='Consolas' size='11'>{{avglvl}} <font color='{{c:e}}'>{{e}}</font> <font face='Symbol' color='#111111'><b><font color='{{c:tdv}}'>·</font><font color='{{c:tfb}}'>·</font><font color='{{c:tsb}}'>·</font></b></font> <font color='{{c:wn}}'>{{wn}}</font> <font color='{{c:twr}}'>{{twr}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>",
-    "formatRight": "<font face='Consolas' size='11'>{{avglvl}} <font color='{{c:e}}'>{{e}}</font> <font face='Symbol' color='#111111'><b><font color='{{c:tdv}}'>·</font><font color='{{c:tfb}}'>·</font><font color='{{c:tsb}}'>·</font></b></font> <font color='{{c:wn}}'>{{wn}}</font> <font color='{{c:twr}}'>{{twr}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>"
+    "formatLeft":  "<font face='Consolas' size='11'>{{avglvl}} <font face='Symbol' color='#111111'><b><font color='{{c:tdv}}'>·</font><font color='{{c:tfb}}'>·</font><font color='{{c:tsb}}'>·</font></b></font> <font color='{{c:e}}'>{{e}}</font>|<font color='{{c:xeff}}'>{{xeff}}</font>|<font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:twr}}'>{{twr}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>",
+    "formatRight": "<font face='Consolas' size='11'>{{avglvl}} <font face='Symbol' color='#111111'><b><font color='{{c:tdv}}'>·</font><font color='{{c:tfb}}'>·</font><font color='{{c:tsb}}'>·</font></b></font> <font color='{{c:e}}'>{{e}}</font>|<font color='{{c:xeff}}'>{{xeff}}</font>|<font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:twr}}'>{{twr}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>"
   },
   "playersPanel": {
     "alpha": 50,
@@ -183,7 +183,7 @@
               "name": "Tank Rating",
               "x": 0, "y": -52, "alpha": 75,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<font face='$FieldFont' size='12'><b><font color='{{c:wn}}'>{{wn}}</font> <font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:e}}'>{{teff}}</font></b></font>"
+              "format": "<font face='$FieldFont' size='12'><b><font color='{{c:xeff}}'>{{xeff}}</font>|<font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:e}}'>{{teff}}</font></b></font>"
             }
           ]
         }
@@ -336,7 +336,7 @@
               "name": "Tank Rating",
               "x": 0, "y": -52, "alpha": 75,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<font face='$FieldFont' size='12'><b><font color='{{c:wn}}'>{{wn}}</font> <font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:e}}'>{{teff}}</font></b></font>"
+              "format": "<font face='$FieldFont' size='12'><b><font color='{{c:xeff}}'>{{xeff}}</font>|<font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:e}}'>{{teff}}</font></b></font>"
             }
           ]
         }

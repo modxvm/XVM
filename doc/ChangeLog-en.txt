@@ -1,3 +1,12 @@
+XVM-3.3.2-test6:
+  * added macros:
+      {{xeff}}, {{xwn}}, {{c:xeff}}, {{c:xwn}} - two-digits ratinf value
+    using "XVM Scale"
+    explanation: http://www.koreanrandom.com/forum/topic/2625-/page-15#entry35340 (in Russian)
+  * added colors setup section: colors/x for XVM Scale colors
+  * cnanged efficiency in the default config:
+      was: {{eff:4}}, now: {{xwn}}
+
 XVM-3.3.2-test5:
   * replace "hp left" to "damage dealt" in Final Statistic window
   * default sorting by damage in Final Statistics

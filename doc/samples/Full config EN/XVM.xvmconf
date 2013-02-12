@@ -50,9 +50,9 @@
       "alpha": 90                               //   Transparency of the Team/Clan logo
     },
     // Display format for the left Players Panel (macros allowed, see readme-en.txt)
-    "formatLeft": "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatLeft": "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
     // Display format for the right Players Panel (macros allowed, see readme-en.txt)
-    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
+    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
   },
   // Parameters of the Battle Statistics Form
   "statisticForm": {
@@ -62,9 +62,9 @@
     // Display options for Team/Clan logos (see battleLoading above)
     "clanIcon": { "show": true, "x": 0, "y": 6, "xr": 0, "yr": 6, "h": 16, "w": 16, "alpha": 90 },
     // Display format for the left column (macros allowed, see readme-en.txt)
-    "formatLeft": "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatLeft": "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
     // Display format for the right column (macros allowed, see readme-en.txt)
-    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
+    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
   },
   // Parameters of the Players Panels
   "playersPanel": {
@@ -77,17 +77,17 @@
     "medium": {
       "width": 46,    // 0..250 - Width of the player's name column. Default is 46.
       // Display format for the left panel (macros allowed, see readme-en.txt)
-      "formatLeft": "<font color='{{c:eff}}'>{{nick}}</font>",
+      "formatLeft": "<font color='{{c:xwn}}'>{{nick}}</font>",
       // Display format for the right panel (macros allowed, see readme-en.txt)
-      "formatRight": "<font color='{{c:eff}}'>{{nick}}</font>"
+      "formatRight": "<font color='{{c:xwn}}'>{{nick}}</font>"
     },
     // Options for the "medium2" panels - the second of the medium panels
     "medium2": {
       "width": 65,    // 0..250 - Width of the player's name column. Default is 65.
       // Display format for the left panel (macros allowed, see readme-en.txt)
-      "formatLeft": "<font color='{{c:eff}}'>{{vehicle}}</font>",
+      "formatLeft": "<font color='{{c:xwn}}'>{{vehicle}}</font>",
       // Display format for the right panel (macros allowed, see readme-en.txt)
-      "formatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
+      "formatRight": "<font color='{{c:xwn}}'>{{vehicle}}</font>"
     },
     // Options for the "large" panels - the widest panels
     "large": {
@@ -96,8 +96,8 @@
       "nickFormatLeft": "<font color='{{c:rating}}'>{{rating}}</font> {{nick}}",
       "nickFormatRight": "{{nick}} <font color='{{c:rating}}'>{{rating}}</font>",
       // Display format for vehicle name (macros allowed, see readme-en.txt)
-      "vehicleFormatLeft": "<font color='{{c:eff}}'>{{vehicle}}</font>",
-      "vehicleFormatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
+      "vehicleFormatLeft": "<font color='{{c:xwn}}'>{{vehicle}}</font>",
+      "vehicleFormatRight": "<font color='{{c:xwn}}'>{{vehicle}}</font>"
     }
   },
   // {{turret}} marker display strings
@@ -221,7 +221,7 @@
             "distance": 0,
             "angle": 0,
             "alpha": 80,
-            "blur": 3, 
+            "blur": 3,
             "strength": 4
           },
           "enemy": {
@@ -360,7 +360,7 @@
        // Distance between farthest corners at 1km map is somewhat more than 1400 meters.
        // Sections can contain any number of lines.
        // To set a point try setting line with length of one and large thickness.
-       
+
        // You can leave one line for simplicity. Remember comma positioning rules.
        "vehicle": [ // Own vehicle direction.
          { "enabled": true, "from": 50,  "to": 95,  "inmeters": true, "thickness": 1.5, "alpha": 45, "color": "0x60FF00"},
@@ -1741,6 +1741,15 @@
       { "value": 25,  "color": "0xDD4444" },    // Color for health less than 25 prercent
       { "value": 50,  "color": "0xFFCC22" },    // Color for health less than 50 prercent
       { "value": 101, "color": "0xFCFCFC" }     // Color for health 50 prercent and more
+    ],
+    // Dynamic color for XVM Scale (only with xvm-stat)
+    "x": [
+      { "value": 15,  "color": "0xFE0E00" },   // 00 - 14 - very bad   (15% of players)
+      { "value": 30,  "color": "0xFE7903" },   // 15 - 29 - bad        (better then 15% of players)
+      { "value": 47,  "color": "0xF8F400" },   // 30 - 46 - normal     (better then 50% of players)
+      { "value": 65,  "color": "0x60FF00" },   // 47 - 64 - good       (better then 83% of players)
+      { "value": 83,  "color": "0x02C9B3" },   // 65 - 82 - very good  (better then 96.5% of players)
+      { "value": 999, "color": "0xD042F3" }    // 83 - XX - unique     (better then 99.5% of players)
     ],
     // Dynamic color by efficiency (only with xvm-stat)
     "eff": [

@@ -143,6 +143,10 @@ package utils
         public static const wins:Class;
         [Embed("images/macros/wn.png")]
         public static const wn:Class;
+        [Embed("images/macros/xeff.png")]
+        public static const xeff:Class;
+        [Embed("images/macros/xwn.png")]
+        public static const xwn:Class;
 
         // color
         [Embed("images/macros/c_dmg_kind.png")]
@@ -179,6 +183,10 @@ package utils
         public static const c_twr:Class;
         [Embed("images/macros/c_wn.png")]
         public static const c_wn:Class;
+        [Embed("images/macros/c_xeff.png")]
+        public static const c_xeff:Class;
+        [Embed("images/macros/c_xwn.png")]
+        public static const c_xwn:Class;
 
         // alpha
         [Embed("images/macros/a_hp.png")]

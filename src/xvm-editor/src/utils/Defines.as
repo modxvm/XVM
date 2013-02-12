@@ -11,7 +11,7 @@ public final class Defines
     public static const XVM_VERSION: String = "3.3.2";
     public static const WOT_VERSION: String = "0.8.3";
     public static const CONFIG_VERSION: String = "1.5.0";
-    public static const EDITOR_VERSION: String = "0.33";
+    public static const EDITOR_VERSION: String = "0.34";
 
     // Dynamic color types
     public static const DYNAMIC_COLOR_EFF: Number = 1;
@@ -27,6 +27,7 @@ public final class Defines
     public static const DYNAMIC_COLOR_E: Number = 11;
     public static const DYNAMIC_COLOR_TWR: Number = 12;
     public static const DYNAMIC_COLOR_WN: Number = 13;
+    public static const DYNAMIC_COLOR_X: Number = 14;
 
     // Dynamic alpha types
     //public static const DYNAMIC_ALPHA_EFF: Number = 1;

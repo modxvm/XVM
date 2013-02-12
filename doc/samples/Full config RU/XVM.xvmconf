@@ -50,9 +50,9 @@
       "alpha": 90                               //   прозрачность иконки игрока/клана
     },
     // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatLeft": "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatLeft": "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
     // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
+    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
   },
   // Параметры окна статистики по клавише Tab
   "statisticForm": {
@@ -62,9 +62,9 @@
     // параметры отображения иконки игрока/клана (см. battleLoading выше)
     "clanIcon": { "show": true, "x": 0, "y": 6, "xr": 0, "yr": 6, "h": 16, "w": 16, "alpha": 90 },
     // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatLeft": "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatLeft": "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
     // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
+    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
   },
   // Параметры панелей игроков ("ушей")
   "playersPanel": {
@@ -77,17 +77,17 @@
     "medium": {
       "width": 46,    // 0..250 - задает ширину поля имени игрока. По умолчанию: 46
       // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-      "formatLeft": "<font color='{{c:eff}}'>{{nick}}</font>",
+      "formatLeft": "<font color='{{c:xwn}}'>{{nick}}</font>",
       // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-      "formatRight": "<font color='{{c:eff}}'>{{nick}}</font>"
+      "formatRight": "<font color='{{c:xwn}}'>{{nick}}</font>"
     },
     // режим ушей "medium2" - вторые средние уши в игре
     "medium2": {
       "width": 65,    // 0..250 - задает ширину поля названия танка. По умолчанию: 65
       // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-      "formatLeft": "<font color='{{c:eff}}'>{{vehicle}}</font>",
+      "formatLeft": "<font color='{{c:xwn}}'>{{vehicle}}</font>",
       // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-      "formatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
+      "formatRight": "<font color='{{c:xwn}}'>{{vehicle}}</font>"
     },
     // режим ушей "large" - широкие уши в игре
     "large": {
@@ -96,8 +96,8 @@
       "nickFormatLeft": "<font color='{{c:rating}}'>{{rating}}</font> {{nick}}",
       "nickFormatRight": "{{nick}} <font color='{{c:rating}}'>{{rating}}</font>",
       // формат отображения названия танка (допускаются макроподстановки, см. readme-ru.txt)
-      "vehicleFormatLeft": "<font color='{{c:eff}}'>{{vehicle}}</font>",
-      "vehicleFormatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
+      "vehicleFormatLeft": "<font color='{{c:xwn}}'>{{vehicle}}</font>",
+      "vehicleFormatRight": "<font color='{{c:xwn}}'>{{vehicle}}</font>"
     }
   },
   // Отображаемые строки {{turret}} маркера
@@ -173,7 +173,7 @@
     // Через все поля можно подкачивать изображения с диска:
     //   "format": { "ally": "<img src='img://../icons/bzz.png' width='8' height='8'>"}, ...
     //   Файлы в WoT\res_mods\icons\bzz.png
-    
+
     // Включение\выключение всего мода миникарты в целом.
     // По умолчанию выключено.
     // Поставить в true для включения.
@@ -362,7 +362,7 @@
        // "inmeters": true  - дистанция линии в метрах реальной карты.
        // "inmeters": false - дистанция линии в точках миникарты. Сторона миникарты 210 точек.
        // "thickness" - толщина отрезка.
-       // "from" - начало отрезка; "to" - конец. 
+       // "from" - начало отрезка; "to" - конец.
        // Дистанция из угла в угол на километровой карте получается немногим более 1400 метров.
        // В секциях располагается произвольное кол-во отрезков.
        // Для постановки точки попробуйте отрезок длиной в единицу и с большой толщиной.
@@ -1758,6 +1758,15 @@
       { "value": 25,  "color": "0xDD4444" },    // Цвет для значений менее 25 проц
       { "value": 50,  "color": "0xFFCC22" },    // Цвет для значений менее 50 проц
       { "value": 101, "color": "0xFCFCFC" }     // Цвет для остальных значений
+    ],
+    // Динамический цвет по шкале XVM (только с xvm-stat). Значения от меньшего к большему.
+    "x": [
+      { "value": 15,  "color": "0xFE0E00" },   // 00 - 14 - very bad   (15% of players)
+      { "value": 30,  "color": "0xFE7903" },   // 15 - 29 - bad        (better then 15% of players)
+      { "value": 47,  "color": "0xF8F400" },   // 30 - 46 - normal     (better then 50% of players)
+      { "value": 65,  "color": "0x60FF00" },   // 47 - 64 - good       (better then 83% of players)
+      { "value": 83,  "color": "0x02C9B3" },   // 65 - 82 - very good  (better then 96.5% of players)
+      { "value": 999, "color": "0xD042F3" }    // 83 - XX - unique     (better then 99.5% of players)
     ],
     // Динамический цвет по эффективности (только с xvm-stat). Значения от меньшего к большему.
     "eff": [

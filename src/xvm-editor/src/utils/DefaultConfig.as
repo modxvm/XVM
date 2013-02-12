@@ -93,8 +93,8 @@ public class DefaultConfig
                 // Playes/clan icon parameters.
                 clanIcon: { show: true, x: 0, y: 6, xr: NaN, yr: NaN, h: 16, w: 16, alpha: 90 },
                 // Dispay format. Macro-substitutiones allowed.
-                formatLeft: "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
-                formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
+                formatLeft: "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+                formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
             },
             statisticForm: {
                 showChances: false,     // Show game round win chances percentage.
@@ -103,8 +103,8 @@ public class DefaultConfig
                 // Playes/clan icon parameters.
                 clanIcon: { show: true, x: 0, y: 6, xr: NaN, yr: NaN, h: 16, w: 16, alpha: 90 },
                 // Dispay format.
-                formatLeft: "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
-                formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
+                formatLeft: "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+                formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
             },
             playersPanel: {
                 alpha: 60,              // Side panel transparency. 0 - transparent, 100 - opaque.
@@ -117,16 +117,16 @@ public class DefaultConfig
                     // 0..250 - player name field width.
                     width: 46,
                     // Dispay format.
-                    formatLeft: "<font color='{{c:eff}}'>{{nick}}</font>",
-                    formatRight: "<font color='{{c:eff}}'>{{nick}}</font>"
+                    formatLeft: "<font color='{{c:xwn}}'>{{nick}}</font>",
+                    formatRight: "<font color='{{c:xwn}}'>{{nick}}</font>"
                 },
                 // Medium2 mode.
                 medium2: {
                     // 0..250 - player name field width.
                     width: 65,
                     // Dispay format.
-                    formatLeft: "<font color='{{c:eff}}'>{{vehicle}}</font>",
-                    formatRight: "<font color='{{c:eff}}'>{{vehicle}}</font>"
+                    formatLeft: "<font color='{{c:xwn}}'>{{vehicle}}</font>",
+                    formatRight: "<font color='{{c:xwn}}'>{{vehicle}}</font>"
                 },
                 // Large mode.
                 large: {
@@ -135,8 +135,8 @@ public class DefaultConfig
                     // Dispay format.
                     nickFormatLeft: "<font color='{{c:rating}}'>{{rating}}</font> {{nick}}",
                     nickFormatRight: "{{nick}} <font color='{{c:rating}}'>{{rating}}</font>",
-                    vehicleFormatLeft: "<font color='{{c:eff}}'>{{vehicle}}</font>",
-                    vehicleFormatRight: "<font color='{{c:eff}}'>{{vehicle}}</font>"
+                    vehicleFormatLeft: "<font color='{{c:xwn}}'>{{vehicle}}</font>",
+                    vehicleFormatRight: "<font color='{{c:xwn}}'>{{vehicle}}</font>"
                 }
             },
             turretMarkers: {
@@ -148,51 +148,114 @@ public class DefaultConfig
                 mapBackgroundImageAlpha: 100,
                 selfIconAlpha: 100,
                 cameraAlpha: 100,
-                markerScale: 1,
+                iconScale: 1,
                 labels: {
                   nickShrink: 4,
-                  ifspgsymbol: "█",
-                  allRevealedUnits: {
-                    enabled: true,
+                  vehicleclassmacro: {
+                    light: "♦",
+                    medium: "",
+                    heavy: "",
+                    td: "▼",
+                    spg: "■",
+                    superh: "s"
+                  },
+                  units: {
+                    revealedEnabled: true,
+                    lostEnemyEnabled: true,
                     format: {
-                      ally:  "{{level}}",
-                      enemy: "{{level}}",
-                      squad: "{{level}} <i>{{short-nick}}</i>",
-                      oneself: "<b>{{level}}</b>"
+                      ally:  "<span class='mm_a'>{{level}}</span>",
+                      enemy: "<span class='mm_e'>{{level}}</span>",
+                      squad: "<span class='mm_s'>{{level}} <i>{{short-nick}}</i></span>",
+                      lost:  "<span class='mm_lclass'>{{vehicle-class}}</span><span class='mm_l'><i>{{level}}</i></span>",
+                      oneself: ""
                     },
                     css: {
-                      ally:  "font-family:$FieldFont; font-size:8px; color:#BBEEBB;",
-                      enemy: "font-family:$FieldFont; font-size:8px; color:#EEBBBB;",
-                      squad: "font-family:$FieldFont; font-size:8px; color:#FFEE44;",
-                      oneself: "font-family:$FieldFont; font-size:8px; color:#FFFFFF;"
+                      ally:  ".mm_a{font-family:$FieldFont; font-size:8px; color:#BBEEBB;}",
+                      enemy: ".mm_e{font-family:$FieldFont; font-size:8px; color:#EEBBBB;}",
+                      squad: ".mm_s{font-family:$FieldFont; font-size:8px; color:#FFEE44;}",
+                      lost:  ".mm_l{font-family:$FieldFont; font-size:8px; color:#EEAACC;} .mm_lclass{font-family:Arial; font-size:10px; color:#FFBBDD;}",
+                      oneself: ""
                     },
-                    offsetX: 0,
-                    offsetY: 0
-                  },
-                  lostEnemyUnits: {
-                    enabled: true,
-                    format: "{{ifspg}}<i>{{level}}</i>",
-                    css: "font-family:$FieldFont; font-size:8px; color:#EEAACC;",
-                    alpha: 90,
-                    offsetX: -4,
-                    offsetY: -4
+                    shadow: {
+                      ally: {
+                        enabled: true,
+                        color: "0x00FF00",
+                        distance: 0,
+                        angle: 0,
+                        alpha: 40,
+                        blur: 8,
+                        strength: 4
+                      },
+                      enemy: {
+                        enabled: true,
+                        color: "0xFF0000",
+                        distance: 0,
+                        angle: 0,
+                        alpha: 40,
+                        blur: 8,
+                        strength: 4
+                      },
+                      squad: {
+                        enabled: true,
+                        color: "0x00CCCC",
+                        distance: 0,
+                        angle: 0,
+                        alpha: 40,
+                        blur: 8,
+                        strength: 4
+                      },
+                      lost: {
+                        enabled: true,
+                        color: "0xFF0000",
+                        distance: 0,
+                        angle: 0,
+                        alpha: 40,
+                        blur: 8,
+                        strength: 4
+                      },
+                      oneself: {
+                        enabled: true,
+                        color: "0xFFFFFF",
+                        distance: 0,
+                        angle: 0,
+                        alpha: 40,
+                        blur: 8,
+                        strength: 4
+                      }
+                    },
+                    offset: {
+                      ally:  {x: 0, y: 0},
+                      enemy: {x: 0, y: 0},
+                      squad: {x: 0, y: 0},
+                      lost:  {x: -4, y: -4},
+                      oneself: {x: 0, y: 0}
+                    },
+                    alpha : {
+                      ally:  100,
+                      enemy: 100,
+                      squad: 100,
+                      lost:  80,
+                      oneself: 100
+                    }
                   },
                   mapSize: {
                     enabled: true,
                     format: "<b>{{cellsize}}0 m</b>",
                     css: "font-size:12px; color:#000000;",
-                    alpha: 75,
+                    alpha: 80,
                     offsetX: 0,
                     offsetY: 0,
                     shadow: {
                       enabled: true,
-                      color: 0xAAAAAA,
+                      color: "0xAAAAAA",
                       distance: 0,
                       angle: 0,
-                      alpha: 60,
-                      blur: 5,
-                      strength: 3
-                    }
+                      alpha: 80,
+                      blur: 8,
+                      strength: 4
+                    },
+                    width: 100,
+                    height: 30
                   }
                 },
                 circles: {
@@ -537,21 +600,29 @@ public class DefaultConfig
                     { value: 50,  color: ColorPalette.orange },     // 25 - 49
                     { value: 101, color: ColorPalette.white }       // 51 -  *
                 ],
+                x: [
+                    { value: 15,  color: ColorPalette.red },   // 00 - 14 - very bad   (15% of players)
+                    { value: 30,  color: ColorPalette.orange },   // 15 - 29 - bad        (better then 15% of players)
+                    { value: 47,  color: ColorPalette.yellow },   // 30 - 46 - normal     (better then 50% of players)
+                    { value: 65,  color: ColorPalette.green },   // 47 - 64 - good       (better then 83% of players)
+                    { value: 83,  color: ColorPalette.blue },   // 65 - 82 - very good  (better then 96.5% of players)
+                    { value: 999, color: ColorPalette.purple }    // 83 - XX - unique     (better then 99.5% of players)
+                ],
                 eff: [
-                    { value: 600,  color: ColorPalette.red },       //    0 - 599  - very bad
-                    { value: 900,  color: ColorPalette.orange },    //  600 - 899  - bad
-                    { value: 1200, color: ColorPalette.yellow },    //  900 - 1199 - normal
-                    { value: 1500, color: ColorPalette.green },     // 1200 - 1499 - good
-                    { value: 1800, color: ColorPalette.blue },      // 1500 - 1799 - very good
-                    { value: 9999, color: ColorPalette.purple }     // 1800 - *    - unique
+                    { value: 640,  color: ColorPalette.red },       //    0 - 630  - very bad
+                    { value: 880,  color: ColorPalette.orange },    //  640 - 870  - bad
+                    { value: 1160, color: ColorPalette.yellow },    //  880 - 1150 - normal
+                    { value: 1450, color: ColorPalette.green },     // 1160 - 1440 - good
+                    { value: 1740, color: ColorPalette.blue },      // 1450 - 1730 - very good
+                    { value: 9999, color: ColorPalette.purple }     // 1740 - *    - unique
                 ],
                 rating: [
-                    { value: 46,  color: ColorPalette.red },        //  0 - 45  - very bad
-                    { value: 48,  color: ColorPalette.orange },     // 46 - 47  - bad
-                    { value: 51,  color: ColorPalette.yellow },     // 48 - 50  - normal
-                    { value: 54,  color: ColorPalette.green },      // 51 - 53  - good
-                    { value: 57,  color: ColorPalette.blue },       // 54 - 56  - very good
-                    { value: 101, color: ColorPalette.purple }      // 57 - 100 - unique
+                    { value: 46,  color: ColorPalette.red },   //  0 - 45  - very bad
+                    { value: 49,  color: ColorPalette.orange },   // 46 - 48  - bad
+                    { value: 52,  color: ColorPalette.yellow },   // 49 - 51  - normal
+                    { value: 55,  color: ColorPalette.green },   // 52 - 54  - good
+                    { value: 60,  color: ColorPalette.blue },   // 55 - 61  - very good
+                    { value: 101, color: ColorPalette.purple }    // 60 - 100 - unique
                 ],
                 kb: [
                     { value: 2,   color: ColorPalette.red },        //  0 - 1
@@ -983,9 +1054,9 @@ public class DefaultConfig
     public static function get consts(): Object
     {
         return {
-            AVG_GWR: 48,  // Average GWR. Source: http://wot-news.com/stat/server/ru/norm/en
-            AVG_EFF: 900, // Average Efficiency. Source: http://wot-news.com/index.php/stat/calc/en
-            AVG_BATTLES: 1000, // Averate number of battles. Source: http://wot-news.com/stat/server/ru/norm/en
+            AVG_GWR: 49,  // Average GWR. Source: http://wot-news.com/stat/server/ru/norm/en
+            AVG_XVMSCALE: 30, // Average XVM Scale. Source: http://www.koreanrandom.com/forum/topic/2625-/
+            AVG_BATTLES: 2000, // Averate number of battles. Source: http://wot-news.com/stat/server/ru/norm/en
             E: {
                 Kmin: 0.4,
                 LT: [ // lightTank

@@ -137,11 +137,20 @@ public class GraphicsUtil
         var cfg: Array;
         switch (type)
         {
+            case Defines.DYNAMIC_COLOR_X:
+                cfg = cfg_root.x;
+                break;
             case Defines.DYNAMIC_COLOR_EFF:
                 cfg = cfg_root.eff;
                 break;
+            case Defines.DYNAMIC_COLOR_WN:
+                cfg = cfg_root.wn;
+                break;
             case Defines.DYNAMIC_COLOR_RATING:
                 cfg = cfg_root.rating;
+                break;
+            case Defines.DYNAMIC_COLOR_TWR:
+                cfg = cfg_root.twr;
                 break;
             case Defines.DYNAMIC_COLOR_KB:
                 cfg = cfg_root.kb;

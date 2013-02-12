@@ -218,6 +218,7 @@ class wot.utils.StatLoader
 
     private static function CalculateStatValues(stat, name): Object
     {
+        // rating (GWR)
         stat.r = stat.b > 0 ? Math.round(stat.w / stat.b * 100) : 0;
 
         if (!stat.tb || stat.tb <= 0 || !stat.tl || stat.tl <= 0)
@@ -231,6 +232,29 @@ class wot.utils.StatLoader
             stat.tr = Math.round(Or - (Or - Tr) * Tb / Tl);
         }
 
+        // xeff
+        stat.xeff = "--";
+        if (stat.e != null)
+        {
+            stat.xeff = Math.round(Math.max(0, Math.min(100,
+              6.17 * 0.000000001 * Math.pow(stat.e, 3) -
+              1.975 * 0.00001 * Math.pow(stat.e, 2) +
+              0.08125 * stat.e - 31.04)));
+            stat.xeff = String(stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff);
+        }
+
+        // xwn
+        stat.xwn = "--";
+        if (stat.wn != null)
+        {
+            stat.xwn = Math.round(Math.max(0, Math.min(100,
+              4.116 * 0.000000001 * Math.pow(stat.wn, 3) -
+              8.189 * 0.000001 * Math.pow(stat.wn, 2) +
+              0.048 * stat.wn - 3.146)));
+            stat.xwn = String(stat.xwn == 100 ? "XX" : (stat.xwn < 10 ? "0" : "") + stat.xwn);
+        }
+
+        // tdb, tfb, tsb, tdv, te, teff (last)
         stat.tdb = null;
         stat.tfb = null;
         stat.tsb = null;
