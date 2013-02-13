@@ -18,6 +18,9 @@ exports.main = function() {
 
     getInfoContent();
     setInterval(getInfoContent, 3600 * 1000); // every 1 hour
+
+    getTWRBaseContent();
+    setInterval(getTWRBaseContent, 3600 * 1000); // every 1 hour
 }
 
 // PRIVATE
@@ -192,6 +195,42 @@ var getInfoContent = function() {
             } catch(e) {
                 utils.debug("> [getInfoContent] JSON.parse error:" + e +
                     "\nlength=" + responseData.length + ", data=" + responseData.replace(/[\n\r]/g, ""));
+            }
+        });
+    });
+}
+
+// setup "info" update interval
+var getTWRBaseContent = function() {
+    var http = require("http");
+
+    var options = {
+        host: "wot-xvm.googlecode.com",
+        port: 80,
+        path: "/svn/wiki/TWRBase.wiki"
+    };
+
+    var request = http.get(options, function(res) {
+        if (res.statusCode != 200) {
+            utils.log("[getTWRBaseContent] ERROR: bad status code: " + res.statusCode);
+            return;
+        }
+        var responseData = "";
+        res.setEncoding("utf8");
+        res.on("data", function(chunk) {
+            responseData += chunk;
+        });
+        res.on("end", function() {
+            try {
+                if (responseData) {
+                    utils.log("[getTWRBaseContent] TWR Base updated");
+                    workers.forEach(function(worker) {
+                        worker.send({ twrbase: responseData });
+                    });
+                }
+            } catch(e) {
+                utils.debug("> [getTWRBaseContent] ERROR: " + e +
+                    "\nlength=" + responseData.length + ", data=" + responseData, "");
             }
         });
     });

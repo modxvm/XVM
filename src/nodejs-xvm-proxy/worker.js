@@ -6,6 +6,7 @@ module.exports = (function() {
         utils = require("./utils"),
         status = require("./worker_status"),
         db = require("./worker_db"),
+        tcalc_base = require("./tcalc/tcalc_base"),
         http;
 
     var createWorker = function(fakeMongo, fakeHttp) {
@@ -16,12 +17,13 @@ module.exports = (function() {
         process.on("message", function(msg) {
             if(msg.info)
                 status.info = msg.info;
+            else if(msg.twrbase)
+                tcalc_base.parseTWRBase(msg.twrbase);
         });
 
         // initialize submodules
         status.initialize();
         db.initialize(_createHttpServer, fakeMongo);
-        require("./tcalc/tcalc_base").parseBaseCsv();
     };
 
     var _createHttpServer = function() {

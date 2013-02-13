@@ -28,7 +28,7 @@ module.exports = (function() {
             vdata.rate = vdata.w / vdata.b * 100;
             if (!vdata.link) {
                 if (isLog) {
-                    log += "WARNING: No data in base.csv for " + vname +
+                    log += "WARNING: No configuration data for tank: " + vname +
                         " (b=" + vdata.b + " r=" + vdata.rate.toFixed(2) + "). This tank is skipped.\n";
                 }
                 continue;
