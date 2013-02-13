@@ -233,25 +233,23 @@ class wot.utils.StatLoader
         }
 
         // xeff
-        stat.xeff = "--";
+        stat.xeff = null;
         if (stat.e != null)
         {
             stat.xeff = Math.round(Math.max(0, Math.min(100,
               6.17 * 0.000000001 * Math.pow(stat.e, 3) -
               1.975 * 0.00001 * Math.pow(stat.e, 2) +
               0.08125 * stat.e - 31.04)));
-            stat.xeff = String(stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff);
         }
 
         // xwn
-        stat.xwn = "--";
+        stat.xwn = null;
         if (stat.wn != null)
         {
             stat.xwn = Math.round(Math.max(0, Math.min(100,
               4.116 * 0.000000001 * Math.pow(stat.wn, 3) -
               8.189 * 0.000001 * Math.pow(stat.wn, 2) +
               0.048 * stat.wn - 3.146)));
-            stat.xwn = String(stat.xwn == 100 ? "XX" : (stat.xwn < 10 ? "0" : "") + stat.xwn);
         }
 
         // tdb, tfb, tsb, tdv, te, teff (last)

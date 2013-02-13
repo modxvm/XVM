@@ -156,9 +156,9 @@ class wot.utils.Macros
         var avglvl = Math.round(Utils.toFloat(stat.avglvl, 0));
         pdata["avglvl"] = avglvl < 1 ? " " : avglvl == 10 ? "X" : avglvl;
         // {{xeff}}
-        pdata["xeff"] = stat.xeff;
+        pdata["xeff"] = stat.xeff == null ? "--" : stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff;
         // {{xwn}}
-        pdata["xwn"] = stat.xwn;
+        pdata["xwn"] = stat.xwn == null ? "--" : stat.xwn == 100 ? "XX" : (stat.xwn < 10 ? "0" : "") + stat.xwn;
         // {{eff}}, {{eff:4}}
         pdata["eff"] = eff <= 0 ? "--" : String(eff);
         pdata["eff:4"] = eff <= 0 ? " -- " : Utils.padLeft(pdata["eff"], 4);
@@ -214,7 +214,7 @@ class wot.utils.Macros
         // Dynamic colors
         // {{c:xeff}}
         pdata["c:xeff"] = isNaN(parseInt(stat.xeff)) ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff == "XX" ? 100 : stat.xeff, "#", o.darken) };
+            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#", o.darken) };
         // {{c:xwn}}
         pdata["c:xwn"] = isNaN(parseInt(stat.xwn)) ? ""
             : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn, "#", o.darken) };

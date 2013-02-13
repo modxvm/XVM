@@ -122,7 +122,7 @@ class wot.utils.Chance
     {
         var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
 
-        var E: Number = stat.xwn || Config.s_config.consts.AVG_XVMSCALE;
+        var E: Number = stat.xwn == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn;
         var R: Number = stat.b ? stat.w / stat.b : Config.s_config.consts.AVG_GWR / 100.0;
 
         var B: Number = stat.b || Config.s_config.consts.AVG_BATTLES;
@@ -138,7 +138,7 @@ class wot.utils.Chance
     {
         var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
 
-        var E: Number = stat.xwn || Config.s_config.consts.AVG_XVMSCALE;
+        var E: Number = stat.xwn == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn;
 
         var r = stat.tb ? stat.tw / stat.tb * 100 : Config.s_config.consts.AVG_GWR;
         var Rt_pre: Number = Math.max(-10, Math.min(10, (r - Config.s_config.consts.AVG_GWR)));
@@ -154,7 +154,7 @@ class wot.utils.Chance
         var Tmin = vi1.tiers[0];
         var Tmax = vi1.tiers[1];
         var T = battleTier;
-        var Ea = stat.xwn || Config.s_config.consts.AVG_XVMSCALE;
+        var Ea = stat.xwn == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn;
         var Ra = stat.r || Config.s_config.consts.AVG_GWR;
         var Ba = stat.b || Config.s_config.consts.AVG_BATTLES;
 
@@ -185,7 +185,7 @@ class wot.utils.Chance
         var Et = stat.teff || 0;
         var Rt = stat.tr || 0;
         var AvgW = vi3.w / vi3.b * 100;
-        var Ea = stat.xwn || Config.s_config.consts.AVG_XVMSCALE;
+        var Ea = stat.xwn == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn;
         var Ra = stat.r || Config.s_config.consts.AVG_GWR;
         var Ba = stat.b || Config.s_config.consts.AVG_BATTLES;
 
