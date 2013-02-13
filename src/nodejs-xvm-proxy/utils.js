@@ -12,7 +12,7 @@ var calculateAvgLvl = exports.calculateAvgLevel = function(vehicles) {
 
 // calculateEfficiency
 // EFF formula:
-// DAMAGE * (10 / (TIER + 2)) * (0.21 + 3 * TIER / 100)
+// DAMAGE * (10 / (TIER + 2)) * (0.23 + 2 * TIER / 100)
 // + FRAGS * 0.25 * 1000
 // + SPOT * 0.15 * 1000 +
 // + LOG((CAP + 1), 1.732) * 0.15 * 1000
@@ -28,16 +28,23 @@ exports.calculateEfficiency = function(data) {
     var CAP = data.cap / data.b;
     var DEF = data.def / data.b;
 
-    var res = Math.round((
+    var res = Math.round(
         DAMAGE * (10 / (TIER + 2)) * (0.23 + 2 * TIER / 100) +
         FRAGS * 250 +
         SPOT * 150 +
         Math.log(CAP + 1) / Math.log(1.732) * 150 +
-        DEF * 150
-        ) / 10) * 10;
+        DEF * 150);
 
 //        console.log("eff: " + (new Date() - start) + " ms (" + JSON.stringify(data).length + " bytes)");
         return res;
+};
+
+// normalized EFF
+// MAX(MIN(6,17*10^(-9)*eff^3 - 1,975*10^(-5)*eff^2 + 0,08125*eff - 31,04 ; 100) ; 0)
+exports.calculateNEFF = function(value) {
+    var res = Math.round(Math.max(0, Math.min(100,
+        0.00000000617*Math.pow(value, 3) - 0.00001975*Math.pow(value, 2) + 0.08125*value - 31.04)));
+    return res == 100 ? "XX" : (res < 10 ? "0" : "") + res;
 };
 
 // WN rating
@@ -69,6 +76,14 @@ exports.calculateWN = function(data) {
         DEF * 100 +
         ((185 / (0.17 + Math.exp((WINRATE - 35) * -0.134))) - 500) * 0.45 +
         (6 - TIER_N) * -60)) || 0;
+};
+
+// normalized WN6
+// MAX(MIN(4,116*10^(-9)*wn6^3 - 8,189*10^(-6)*wn6^2 + 0,048*WN6-3,146 ; 100) ; 0)
+exports.calculateNWN = function(value) {
+    var res = Math.round(Math.max(0, Math.min(100,
+        0.000000004116*Math.pow(value, 3) - 0.000008189 * Math.pow(value, 2) + 0.048*value - 3.146)));
+    return res == 100 ? "XX" : (res < 10 ? "0" : "") + res;
 };
 
 exports.getVehicleType = function(vclass) {

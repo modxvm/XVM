@@ -118,6 +118,11 @@ module.exports = (function() {
             data.lvl = utils.calculateAvgLevel(data.v);
         }
 
+        // fix eff FIXIT: REMOVE after 14.02.2013
+        if (data.dt < new Date("2013-02-09 14:50")) {
+            data.e = utils.calculateEfficiency(data);
+        }
+
         if (data.wn == undefined) {
             // WN - WN rating http://forum.worldoftanks.com/index.php?/topic/184017-
             data.wn = utils.calculateWN(data);

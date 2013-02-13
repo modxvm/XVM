@@ -373,7 +373,7 @@ module.exports = (function() {
             pdata.twr = parseFloat(tcalc.calc(pdata, false).result.toFixed(2));
         } catch (e) { utils.log(e); }
 
-        pdata.lvl = parseFloat(pdata.lvl.toFixed(1));
+        pdata.lvl = parseFloat(pdata.lvl.toFixed(3));
 
         return pdata;
     };

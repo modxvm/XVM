@@ -34,13 +34,17 @@ exports.processCommand = function(response, args) {
                 cmd_TWR(response, pl, args);
                 break;
 
+            case "XVMSCALE":
+                cmd_XVMSCALE(response, pl, args);
+                break;
+
             default:
                 throw "Unknown command: " + cmd;
         }
     } catch(e) {
         response.end('{"error":"' + e + '","server":"' + settings.serverName + '"}');
     }
-}
+};
 
 // PRIVATE
 
@@ -71,7 +75,7 @@ var cmd_INFO = function(response, pl, args) {
             response.end('{"error":"' + e + '","server":"' + settings.serverName + '"}');
         }
     });
-}
+};
 
 var cmd_EFF = function(response, pl, args) {
     var cursor = db.find("players", {$or:[{nm:pl},{_id:parseInt(pl)}]});
@@ -91,8 +95,10 @@ var cmd_EFF = function(response, pl, args) {
                         ", Nick: <a href='http://worldoftanks.ru/community/accounts/" + d._id + "-" + d.nm + "/'>" + d.nm + "</a>\n";
                     s += "--------------------------\n";
                     s += "LVL: " + d.lvl + "\n";
-                    s += "EFF: " + utils.calculateEfficiency(d) + "\n";
-                    s += "WN6: " + utils.calculateWN(d) + "\n";
+                    var eff = utils.calculateEfficiency(d);
+                    s += "EFF: " + utils.calculateNEFF(eff) + " | " + eff + "\n";
+                    var wn6 = utils.calculateWN(d);
+                    s += "WN6: " + utils.calculateNWN(wn6) + " | " + wn6 + "\n";
                     s += "GWR: " + (d.w / d.b * 100).toFixed(2) + "%\n";
                     s += "TWR: " + tcalc.calc(d, false).result.toFixed(2) + "%\n";
                     s += "--------------------------\n";
@@ -105,7 +111,10 @@ var cmd_EFF = function(response, pl, args) {
                     s += "defence: " + d.def + " (" + (d.def / d.b).toFixed(1) + ")\n";
                     s += "capture: " + d.cap + " (" + (d.cap / d.b).toFixed(1) + ")\n";
                     s += "--------------------------\n";
-                    s += "data date: " + d.dt + " ms\n";
+                    s += "created: " + (new Date(d.cr * 1000)) + "\n";
+                    s += "updated: " + (new Date(d.up * 1000)) + "\n";
+                    s += "cached:  " + d.dt + "\n";
+                    s += "--------------------------\n";
                     s += "duration: " + (new Date() - start) + " ms\n";
                     s += "</pre><hr>";
                 }
@@ -115,7 +124,7 @@ var cmd_EFF = function(response, pl, args) {
             response.end('{"error":"' + e + '","server":"' + settings.serverName + '"}');
         }
     });
-}
+};
 
 var cmd_TWR = function(response, pl, args) {
     var cursor = db.find("players", {nm: pl});
@@ -135,4 +144,13 @@ var cmd_TWR = function(response, pl, args) {
             response.end('{"error":"' + e + '","server":"' + settings.serverName + '"}');
         }
     });
-}
+};
+
+var cmd_XVMSCALE = function(response, pl, args) {
+    var value = parseInt(pl);
+    var s = "<pre>";
+    s += "XEFF: " + utils.calculateNEFF(value) + " (" + value + ")\n";
+    s += "XWN:  " + utils.calculateNWN(value) + " (" + value + ")\n";
+    s += "</pre>"
+    response.end(s);
+};
