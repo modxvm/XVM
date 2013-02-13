@@ -589,64 +589,82 @@ public class DefaultConfig
                 },
                 // values - from min to max, colors are for values 'lesser then ...'
                 hp: [
-                    { value: 201,  color: ColorPalette.redBright }, //    * - 200
-                    { value: 401,  color: ColorPalette.redSmooth }, //  201 - 400
-                    { value: 1001, color: ColorPalette.orange },    //  401 - 1000
-                    { value: 9999, color: ColorPalette.white }      // 1001 -   *
+                    { value: 201,  color: ColorPalette.redBright },
+                    { value: 401,  color: ColorPalette.redSmooth },
+                    { value: 1001, color: ColorPalette.orange },
+                    { value: 9999, color: ColorPalette.white }
                 ],
                 hp_ratio: [
-                    { value: 10,  color: ColorPalette.redBright },  //  * -  9
-                    { value: 25,  color: ColorPalette.redSmooth },  // 11 - 24
-                    { value: 50,  color: ColorPalette.orange },     // 25 - 49
-                    { value: 101, color: ColorPalette.white }       // 51 -  *
+                    { value: 10,  color: ColorPalette.redBright },
+                    { value: 25,  color: ColorPalette.redSmooth },
+                    { value: 50,  color: ColorPalette.orange },
+                    { value: 101, color: ColorPalette.white }
                 ],
+                // XVM Scale: http://www.koreanrandom.com/forum/topic/2625-xvm-scale
                 x: [
-                    { value: 15,  color: ColorPalette.red },   // 00 - 14 - very bad   (15% of players)
-                    { value: 30,  color: ColorPalette.orange },   // 15 - 29 - bad        (better then 15% of players)
-                    { value: 47,  color: ColorPalette.yellow },   // 30 - 46 - normal     (better then 50% of players)
-                    { value: 65,  color: ColorPalette.green },   // 47 - 64 - good       (better then 83% of players)
-                    { value: 83,  color: ColorPalette.blue },   // 65 - 82 - very good  (better then 96.5% of players)
-                    { value: 999, color: ColorPalette.purple }    // 83 - XX - unique     (better then 99.5% of players)
+                    { value: 17,  color: ColorPalette.red },      // 00 - 16 - very bad   (20% of players)
+                    { value: 34,  color: ColorPalette.orange },   // 17 - 33 - bad        (better then 20% of players)
+                    { value: 53,  color: ColorPalette.yellow },   // 34 - 52 - normal     (better then 60% of players)
+                    { value: 76,  color: ColorPalette.green },    // 53 - 75 - good       (better then 90% of players)
+                    { value: 93,  color: ColorPalette.blue },     // 76 - 92 - very good  (better then 99% of players)
+                    { value: 999, color: ColorPalette.purple }    // 93 - XX - unique     (better then 99.9% of players)
                 ],
                 eff: [
-                    { value: 640,  color: ColorPalette.red },     //    0 - 639  - very bad
-                    { value: 880,  color: ColorPalette.orange },  //  640 - 879  - bad
-                    { value: 1160, color: ColorPalette.yellow },  //  880 - 1159 - normal
-                    { value: 1460, color: ColorPalette.green },   // 1160 - 1459 - good
-                    { value: 1740, color: ColorPalette.blue },    // 1460 - 1739 - very good
-                    { value: 9999, color: ColorPalette.purple }   // 1740 - *    - unique
+                    { value: 645,  color: ColorPalette.red },     // very bad
+                    { value: 870,  color: ColorPalette.orange },  // bad
+                    { value: 1150, color: ColorPalette.yellow },  // normal
+                    { value: 1465, color: ColorPalette.green },   // good
+                    { value: 1725, color: ColorPalette.blue },    // very good
+                    { value: 9999, color: ColorPalette.purple }   // unique
                 ],
                 wn: [
-                    { value: 400,  color: ColorPalette.red },     //    0 - 399  - very bad
-                    { value: 750,  color: ColorPalette.orange },  //  400 - 749  - bad
-                    { value: 1140, color: ColorPalette.yellow },  //  750 - 1139 - normal
-                    { value: 1510, color: ColorPalette.green },   // 1140 - 1509 - good
-                    { value: 1850, color: ColorPalette.blue },    // 1510 - 1849 - very good
-                    { value: 9999, color: ColorPalette.purple }   // 1850 - *    - unique
+                    { value: 435,  color: ColorPalette.red },     // very bad
+                    { value: 800,  color: ColorPalette.orange },  // bad
+                    { value: 1195, color: ColorPalette.yellow },  // normal
+                    { value: 1585, color: ColorPalette.green },   // good
+                    { value: 1880, color: ColorPalette.blue },    // very good
+                    { value: 9999, color: ColorPalette.purple }   // unique
                 ],
                 rating: [
-                    { value: 46,  color: ColorPalette.red },   //  0 - 45  - very bad
-                    { value: 49,  color: ColorPalette.orange },   // 46 - 48  - bad
-                    { value: 52,  color: ColorPalette.yellow },   // 49 - 51  - normal
-                    { value: 55,  color: ColorPalette.green },   // 52 - 54  - good
-                    { value: 60,  color: ColorPalette.blue },   // 55 - 61  - very good
-                    { value: 101, color: ColorPalette.purple }    // 60 - 100 - unique
+                    { value: 47,  color: ColorPalette.red },      // very bad
+                    { value: 49,  color: ColorPalette.orange },   // bad
+                    { value: 52,  color: ColorPalette.yellow },   // normal
+                    { value: 57,  color: ColorPalette.green },    // good
+                    { value: 64,  color: ColorPalette.blue },     // very good
+                    { value: 101, color: ColorPalette.purple }    // unique
+                ],
+                twr: [
+                    { value: 47,  color: ColorPalette.red },      // very bad
+                    { value: 49,  color: ColorPalette.orange },   // bad
+                    { value: 52,  color: ColorPalette.yellow },   // normal
+                    { value: 57,  color: ColorPalette.green },    // good
+                    { value: 64,  color: ColorPalette.blue },     // very good
+                    { value: 101, color: ColorPalette.purple }    // unique
+                ],
+                e: [
+                    { value: 0.1,  color: ColorPalette.white },
+                    { value: 2,    color: ColorPalette.red },     // very bad
+                    { value: 4,    color: ColorPalette.orange },  // bad
+                    { value: 5,    color: ColorPalette.yellow },  // normal
+                    { value: 7,    color: ColorPalette.green },   // good
+                    { value: 9,    color: ColorPalette.blue },    // very good
+                    { value: 20,   color: ColorPalette.purple }   // unique
                 ],
                 kb: [
-                    { value: 2,   color: ColorPalette.red },        //  0 - 1
-                    { value: 5,   color: ColorPalette.orange },     //  2 - 4
-                    { value: 9,   color: ColorPalette.yellow },     //  5 - 8
-                    { value: 14,  color: ColorPalette.green },      //  9 - 13
-                    { value: 20,  color: ColorPalette.blue },       // 14 - 19
-                    { value: 999, color: ColorPalette.purple }      // 20 - *
+                    { value: 2,   color: ColorPalette.red },
+                    { value: 5,   color: ColorPalette.orange },
+                    { value: 9,   color: ColorPalette.yellow },
+                    { value: 14,  color: ColorPalette.green },
+                    { value: 20,  color: ColorPalette.blue },
+                    { value: 999, color: ColorPalette.purple }
                 ],
                 t_battles: [
-                    { value: 100,   color: ColorPalette.red },      //    0 - 99
-                    { value: 250,   color: ColorPalette.orange },   //  100 - 249
-                    { value: 500,   color: ColorPalette.yellow },   //  250 - 499
-                    { value: 1000,  color: ColorPalette.green },    //  500 - 999
-                    { value: 1800,  color: ColorPalette.blue },     // 1000 - 1799
-                    { value: 99999, color: ColorPalette.purple }    // 1800 - *
+                    { value: 100,   color: ColorPalette.red },
+                    { value: 250,   color: ColorPalette.orange },
+                    { value: 500,   color: ColorPalette.yellow },
+                    { value: 1000,  color: ColorPalette.green },
+                    { value: 1800,  color: ColorPalette.blue },
+                    { value: 99999, color: ColorPalette.purple }
                 ],
                 tdb: [
                     { value: 1,    color: ColorPalette.white },
@@ -680,23 +698,6 @@ public class DefaultConfig
                     { value: 1.3,  color: ColorPalette.green },
                     { value: 2.0,  color: ColorPalette.blue },
                     { value: 15,   color: ColorPalette.purple }
-                ],
-                e: [
-                    { value: 0.1,  color: ColorPalette.white },
-                    { value: 2,    color: ColorPalette.red },
-                    { value: 4,    color: ColorPalette.orange },
-                    { value: 5,    color: ColorPalette.yellow },
-                    { value: 7,    color: ColorPalette.green },
-                    { value: 9,    color: ColorPalette.blue },
-                    { value: 20,   color: ColorPalette.purple }
-                ],
-                twr: [
-                    { value: 46,  color: ColorPalette.red },        //  0 - 45  - very bad
-                    { value: 48,  color: ColorPalette.orange },     // 46 - 47  - bad
-                    { value: 51,  color: ColorPalette.yellow },     // 48 - 50  - normal
-                    { value: 54,  color: ColorPalette.green },      // 51 - 53  - good
-                    { value: 57,  color: ColorPalette.blue },       // 54 - 56  - very good
-                    { value: 101, color: ColorPalette.purple }      // 57 - 100 - unique
                 ]
             },
             alpha: {

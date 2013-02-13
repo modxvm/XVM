@@ -1,3 +1,6 @@
+XVM-3.3.2-test7:
+  * XVM Scale recalculated using RU players database
+
 XVM-3.3.2-test6:
   * minimap mod
   * capmod: capturers number fix

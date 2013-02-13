@@ -232,14 +232,17 @@ class wot.utils.StatLoader
             stat.tr = Math.round(Or - (Or - Tr) * Tb / Tl);
         }
 
+        // XVM Scale: http://www.koreanrandom.com/forum/topic/2625-xvm-scale
+
         // xeff
         stat.xeff = null;
         if (stat.e != null)
         {
             stat.xeff = Math.round(Math.max(0, Math.min(100,
-              6.17 * 0.000000001 * Math.pow(stat.e, 3) -
-              1.975 * 0.00001 * Math.pow(stat.e, 2) +
-              0.08125 * stat.e - 31.04)));
+              -0.000000002523 * Math.pow(stat.e, 3) +
+              0.000003351 * Math.pow(stat.e, 2) +
+              0.07331 * stat.e -
+              31.57)));
         }
 
         // xwn
@@ -247,9 +250,10 @@ class wot.utils.StatLoader
         if (stat.wn != null)
         {
             stat.xwn = Math.round(Math.max(0, Math.min(100,
-              4.116 * 0.000000001 * Math.pow(stat.wn, 3) -
-              8.189 * 0.000001 * Math.pow(stat.wn, 2) +
-              0.048 * stat.wn - 3.146)));
+              0.000000001984 * Math.pow(stat.wn, 3) -
+              0.00000191 * Math.pow(stat.wn, 2) +
+              0.04803 * stat.wn -
+              4.638)));
         }
 
         // tdb, tfb, tsb, tdv, te, teff (last)

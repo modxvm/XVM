@@ -1743,40 +1743,59 @@
       { "value": 101, "color": "0xFCFCFC" }     // Color for health 50 prercent and more
     ],
     // Dynamic color for XVM Scale (only with xvm-stat)
+    // http://www.koreanrandom.com/forum/topic/2625-xvm-scale
     "x": [
-      { "value": 15,  "color": "0xFE0E00" },   // 00 - 14 - very bad   (15% of players)
-      { "value": 30,  "color": "0xFE7903" },   // 15 - 29 - bad        (better then 15% of players)
-      { "value": 47,  "color": "0xF8F400" },   // 30 - 46 - normal     (better then 50% of players)
-      { "value": 65,  "color": "0x60FF00" },   // 47 - 64 - good       (better then 83% of players)
-      { "value": 83,  "color": "0x02C9B3" },   // 65 - 82 - very good  (better then 96.5% of players)
-      { "value": 999, "color": "0xD042F3" }    // 83 - XX - unique     (better then 99.5% of players)
+      { "value": 17,  "color": "0xFE0E00" },   // 00 - 16 - very bad   (20% of players)
+      { "value": 34,  "color": "0xFE7903" },   // 17 - 33 - bad        (better then 20% of players)
+      { "value": 53,  "color": "0xF8F400" },   // 34 - 52 - normal     (better then 60% of players)
+      { "value": 76,  "color": "0x60FF00" },   // 53 - 75 - good       (better then 90% of players)
+      { "value": 93,  "color": "0x02C9B3" },   // 76 - 92 - very good  (better then 99% of players)
+      { "value": 999, "color": "0xD042F3" }    // 93 - XX - unique     (better then 99.9% of players)
     ],
     // Dynamic color by efficiency (only with xvm-stat)
     "eff": [
-      { "value": 640,  "color": "0xFE0E00" },   //    0 - 639  - very bad
-      { "value": 880,  "color": "0xFE7903" },   //  640 - 879  - bad
-      { "value": 1160, "color": "0xF8F400" },   //  880 - 1159 - normal
-      { "value": 1460, "color": "0x60FF00" },   // 1160 - 1459 - good
-      { "value": 1740, "color": "0x02C9B3" },   // 1460 - 1739 - very good
-      { "value": 9999, "color": "0xD042F3" }    // 1740 - *    - unique
+      { "value": 645,  "color": "0xFE0E00" },   //    0 - 644  - very bad
+      { "value": 870,  "color": "0xFE7903" },   //  645 - 869  - bad
+      { "value": 1150, "color": "0xF8F400" },   //  870 - 1149 - normal
+      { "value": 1465, "color": "0x60FF00" },   // 1150 - 1464 - good
+      { "value": 1725, "color": "0x02C9B3" },   // 1465 - 1724 - very good
+      { "value": 9999, "color": "0xD042F3" }    // 1725 - *    - unique
     ],
     // Dynamic color by WN6 rating (only with xvm-stat)
     "wn": [
-      { "value": 400,  "color": "0xFE0E00" },   //    0 - 399  - very bad
-      { "value": 750,  "color": "0xFE7903" },   //  400 - 749  - bad
-      { "value": 1140, "color": "0xF8F400" },   //  750 - 1139 - normal
-      { "value": 1510, "color": "0x60FF00" },   // 1140 - 1509 - good
-      { "value": 1850, "color": "0x02C9B3" },   // 1510 - 1849 - very good
-      { "value": 9999, "color": "0xD042F3" }    // 1850 - *    - unique
+      { "value": 435,  "color": "0xFE0E00" },   //    0 - 434  - very bad
+      { "value": 800,  "color": "0xFE7903" },   //  435 - 799  - bad
+      { "value": 1195, "color": "0xF8F400" },   //  800 - 1194 - normal
+      { "value": 1585, "color": "0x60FF00" },   // 1195 - 1584 - good
+      { "value": 1880, "color": "0x02C9B3" },   // 1585 - 1879 - very good
+      { "value": 9999, "color": "0xD042F3" }    // 1880 - *    - unique
+    ],
+    "e": [
+      { "value": 0.01, "color": "0xFCFCFC" },
+      { "value": 2,    "color": "0xFE0E00" },
+      { "value": 4,    "color": "0xFE7903" },
+      { "value": 5,    "color": "0xF8F400" },
+      { "value": 7,    "color": "0x60FF00" },
+      { "value": 9,    "color": "0x02C9B3" },
+      { "value": 20,   "color": "0xD042F3" }
     ],
     // Dynamic color by win percent (only with xvm-stat)
     "rating": [
-      { "value": 46,  "color": "0xFE0E00" },   //  0 - 45  - very bad
-      { "value": 49,  "color": "0xFE7903" },   // 46 - 48  - bad
+      { "value": 47,  "color": "0xFE0E00" },   //  0 - 46  - very bad
+      { "value": 49,  "color": "0xFE7903" },   // 47 - 48  - bad
       { "value": 52,  "color": "0xF8F400" },   // 49 - 51  - normal
-      { "value": 55,  "color": "0x60FF00" },   // 52 - 54  - good
-      { "value": 60,  "color": "0x02C9B3" },   // 55 - 61  - very good
-      { "value": 101, "color": "0xD042F3" }    // 60 - 100 - unique
+      { "value": 57,  "color": "0x60FF00" },   // 52 - 56  - good
+      { "value": 64,  "color": "0x02C9B3" },   // 57 - 63  - very good
+      { "value": 101, "color": "0xD042F3" }    // 64 - 100 - unique
+    ],
+    // Dynamic color by TWR (T-Calc) (only with xvm-stat)
+    "twr": [
+      { "value": 47,  "color": "0xFE0E00" },   //  0 - 46  - very bad
+      { "value": 49,  "color": "0xFE7903" },   // 47 - 48  - bad
+      { "value": 52,  "color": "0xF8F400" },   // 49 - 51  - normal
+      { "value": 57,  "color": "0x60FF00" },   // 52 - 56  - good
+      { "value": 64,  "color": "0x02C9B3" },   // 57 - 63  - very good
+      { "value": 101, "color": "0xD042F3" }    // 64 - 100 - unique
     ],
     // Dynamic color by kilo-battles (only with xvm-stat)
     "kb": [
@@ -1828,24 +1847,6 @@
       { "value": 1.3,  "color": "0x60FF00" },
       { "value": 2.0,  "color": "0x02C9B3" },
       { "value": 15,   "color": "0xD042F3" }
-    ],
-    "e": [
-      { "value": 0.01, "color": "0xFCFCFC" },
-      { "value": 2,    "color": "0xFE0E00" },
-      { "value": 4,    "color": "0xFE7903" },
-      { "value": 5,    "color": "0xF8F400" },
-      { "value": 7,    "color": "0x60FF00" },
-      { "value": 9,    "color": "0x02C9B3" },
-      { "value": 20,   "color": "0xD042F3" }
-    ],
-    // Dynamic color by TWR (T-Calc) (only with xvm-stat)
-    "twr": [
-      { "value": 46,  "color": "0xFE0E00" },   //  0 - 45  - very bad
-      { "value": 48,  "color": "0xFE7903" },   // 46 - 47  - bad
-      { "value": 51,  "color": "0xF8F400" },   // 48 - 50  - normal
-      { "value": 54,  "color": "0x60FF00" },   // 51 - 53  - good
-      { "value": 57,  "color": "0x02C9B3" },   // 54 - 56  - very good
-      { "value": 101, "color": "0xD042F3" }    // 57 - 100 - unique
     ]
   },
   // OPTIONS FOR DYNAMIC TRANSPARENCY
