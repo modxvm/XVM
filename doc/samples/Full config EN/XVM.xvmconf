@@ -552,7 +552,7 @@
                 "size": 6,                    //     Size
                 "strength": 200               //     Intensity
               },
-              "format": "{{vehicle-type}}{{turret}}" // Text format (see description of macros in the readme-en.txt)
+              "format": "{{vehicle}}{{turret}}" // Text format (see description of macros in the readme-en.txt)
             },
             // Text field with the remaining / maximum health
             {
@@ -1006,7 +1006,7 @@
                 "size": 6,                    //     Size
                 "strength": 200               //     Intensity
               },
-              "format": "{{vehicle-type}}"         // Text format (see description of macros in the readme-en.txt)
+              "format": "{{vehicle}}"         // Text format (see description of macros in the readme-en.txt)
             }
           ]
         }
@@ -1138,7 +1138,7 @@
                 "size": 6,                    //     Size
                 "strength": 200               //     Intensity
               },
-              "format": "{{vehicle-type}}{{turret}}" // Text format (see description of macros in the readme-en.txt)
+              "format": "{{vehicle}}{{turret}}" // Text format (see description of macros in the readme-en.txt)
             },
             // Text field with the remaining / maximum health
             {
@@ -1592,7 +1592,7 @@
                 "size": 6,                    //     Size
                 "strength": 200               //     Intensity
               },
-              "format": "{{vehicle-type}}"         // Text format (see description of macros in the readme-en.txt)
+              "format": "{{vehicle}}"         // Text format (see description of macros in the readme-en.txt)
             }
           ]
         }
