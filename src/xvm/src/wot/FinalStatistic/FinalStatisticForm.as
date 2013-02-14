@@ -71,7 +71,7 @@ class wot.FinalStatistic.FinalStatisticForm extends net.wargaming.hangar.FinalSt
         super.setCommonData(data);
 		var page = parseInt(Config.s_config.finalStatistic.startPage);
 		if (!isNaN(page) && page >= 0 && page <= 2)
-			tabs_mc.selectedIndex = page;
+			tabs_mc.selectedIndex = page - 1;
         save_data_pending = true;
         processData();
     }
