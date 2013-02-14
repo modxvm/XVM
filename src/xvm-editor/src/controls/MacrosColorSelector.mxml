@@ -17,7 +17,7 @@
 
             private function onCreationComplete():void
             {
-                ti.restrict = '#0-9A-Za-z\{\}\-_:';
+                ti.restrict = '#0-9A-Za-z\{\}_:\\-';
                 ti.maxChars = 20;
                 BindingUtils.bindProperty(tv, "allowedValues", this, [ "allowedValues" ]);
             }
@@ -30,10 +30,10 @@
             }
             public override function set value(v:*):void
             {
-                _value = (v == "(system)" || typeof v != "string") ? null : v;
+                _value = (v == "(system)" || v == "" || typeof v != "string") ? null : v;
                 if (_value == null)
                 {
-                    ti.text = "(system)";
+                    ti.text = /*focusManager.getFocus() == ti ? "" :*/ "(system)";
                     ti.alpha = 0.5;
                     cp.selectedColor = 1;
                     cp.alpha = 0.5;
@@ -46,6 +46,20 @@
                     cp.alpha = isNaN(parseInt(v)) ? 0.5 : 1;
                 }
             }
+
+/*
+            protected override function onFocusIn():void
+            {
+                if (ti.text == "(system)")
+                    ti.text = "";
+            }
+
+            protected override function onFocusOut():void
+            {
+                if (!ti.text)
+                    ti.text = "(system)";
+            }
+*/
 
             protected override function textChanged():void
             {

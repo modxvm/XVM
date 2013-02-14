@@ -25,6 +25,8 @@ package validators
 
             if (_allowedValues)
             {
+                if (value == "")
+                    return results;
                 for each (var v:Object in _allowedValues)
                 {
                     if (value == null && v == null)
@@ -37,8 +39,8 @@ package validators
             var text:String = String(value).toUpperCase();
             if (!/^#[0-9A-F]{6}$/.test(text))
             {
-                results.push(new ValidationResult(true, null, "Format",
-                    resourceManager.getString("validators", "colorHint")));
+                results = [ new ValidationResult(true, null, "Format",
+                    resourceManager.getString("validators", "colorHint")) ];
                 return results;
             }
 

@@ -46,7 +46,7 @@ class wot.FinalStatistic.FinalStatisticForm extends net.wargaming.hangar.FinalSt
         if (Config.s_config.rating.enableStatisticsLog == true)
             StatsLogger.saveStatistics("results", data);
 
-        if (Config.s_config.rating.showPlayersStatistics && Config.s_config.statisticForm.showChances)
+        if (Config.s_config.rating.showPlayersStatistics && Config.s_config.finalStatistic.showChances)
         {
             var len = data.team1.length;
             for (var i = 0; i < len; ++i)
@@ -69,6 +69,9 @@ class wot.FinalStatistic.FinalStatisticForm extends net.wargaming.hangar.FinalSt
     function setCommonData(data)
     {
         super.setCommonData(data);
+		var page = parseInt(Config.s_config.finalStatistic.startPage);
+		if (!isNaN(page) && page >= 0 && page <= 2)
+			tabs_mc.selectedIndex = page;
         save_data_pending = true;
         processData();
     }

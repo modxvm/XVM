@@ -1,3 +1,9 @@
+XVM-3.3.2-test8:
+  * added macro {{vehiclename}} for internal vehicle name like "usa-M24_Chaffee"
+    can be used in the text fields:
+      "<img src='img://gui/maps/icons/vehicle/contour/{{vehiclename}}.png'>"
+  * added section finalStatistic for final statistic window settings
+
 XVM-3.3.2-test7:
   * XVM Scale recalculated using RU players database
 

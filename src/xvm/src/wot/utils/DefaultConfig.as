@@ -143,6 +143,12 @@ class wot.utils.DefaultConfig
                     vehicleFormatRight: "<font color='{{c:xwn}}'>{{vehicle}}</font>"
                 }
             },
+            finalStatistic: {
+                startPage: 1,
+                sortColumn: 6, // XP
+                showChances: false,
+                showChancesExp: false
+            },
             turretMarkers: {
                 highVulnerability: "*",
                 lowVulnerability: "'"

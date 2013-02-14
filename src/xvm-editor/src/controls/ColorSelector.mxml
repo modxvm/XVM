@@ -53,11 +53,21 @@
                     super.onChange(event);
                 }
             }
+
+            protected function onFocusIn():void
+            {
+                // virtual
+            }
+
+            protected function onFocusOut():void
+            {
+                // virtual
+            }
         ]]>
     </fx:Script>
     <fx:Declarations>
         <validators:TextColorValidator id="tv" source="{ti}" property="text" valid="onChange(event)" invalid="{cp.selectedColor=1}"/>
     </fx:Declarations>
-    <s:TextInput id="ti" width="100%" maxChars="7" restrict="#0-9A-Fa-f" change="textChanged()"/>
+    <s:TextInput id="ti" width="100%" maxChars="7" restrict="#0-9A-Fa-f" change="textChanged()" focusIn="onFocusIn()" focusOut="onFocusOut()"/>
     <mx:ColorPicker id="cp" change="onChange(event)" useHandCursor="true" buttonMode="true"/>
 </a:ValueControl>

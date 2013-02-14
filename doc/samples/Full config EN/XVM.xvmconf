@@ -100,6 +100,12 @@
       "vehicleFormatRight": "<font color='{{c:xwn}}'>{{vehicle}}</font>"
     }
   },
+  "finalStatistic": {
+    "startPage": 1,           // initial page (1, 2, 3)
+    "sortColumn": 6,          // number of column for sorting (1 - 7)
+    "showChances": false,     // true - Enable display of "chance to win" (only with xvm-stat)
+    "showChancesExp": false,  // Show experimental "chance to win" formula
+  },
   // {{turret}} marker display strings
   "turretMarkers": {
     "highVulnerability": "*", // Subject has stock turret and top gun can not be mounted. Subject is highly vulnerable.

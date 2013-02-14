@@ -51,6 +51,7 @@ package utils
             format = format.split("{{short-nick}}").join(name.slice(0, Config.s_config.minimap.nickShrink));
             format = format.split("{{clan}}").join("[CLAN]");
             format = format.split("{{vehicle}}").join(vname);
+            format = format.split("{{vehiclename}}").join("ussr-T-34");
             format = format.split("{{short-vehicle}}").join(vnames);
             format = format.split("{{vtype}}").join(Config.s_config.texts.vtype.MT);
             format = format.split("{{level}}").join("5");

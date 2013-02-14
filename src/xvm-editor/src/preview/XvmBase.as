@@ -71,6 +71,9 @@ public class XvmBase
         formatArr = format.split("{{vehicle}}");
         if (formatArr.length > 1)
             format = formatArr.join(m_vname);
+        formatArr = format.split("{{vehiclename}}");
+        if (formatArr.length > 1)
+            format = formatArr.join(m_source);
         formatArr = format.split("{{vtype}}");
         if (formatArr.length > 1)
             format = formatArr.join(Config.s_config.texts.vtype[Utils.vehicleClassToVehicleType(m_vclass)]);

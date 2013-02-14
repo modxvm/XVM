@@ -9,6 +9,7 @@ import wot.utils.Locale;
 import wot.utils.Logger;
 import wot.utils.Macros;
 import wot.utils.Utils;
+import wot.utils.VehicleInfo;
 
 class wot.VehicleMarkersManager.HitLog
 {
@@ -62,7 +63,7 @@ class wot.VehicleMarkersManager.HitLog
     {
         textField.htmlText = "<span class='xvm_hitlog'>" + txt + "</span>";
     }
-    
+
     public function update(delta:Number, curHealth:Number, vehicleName:String, playerName:String,
         level:Number, damageType:String, vtype:String, vtypeColor:String, dead:Boolean)
     {
@@ -164,7 +165,7 @@ class wot.VehicleMarkersManager.HitLog
 
     private function formatText(format:String, playerName:String):String
     {
-        // TODO: Macros optimization
+        // TODO: Macros optimization - use wot.utils.Macros class
 
         if (format.indexOf("{{") == -1)
             return format;
@@ -223,7 +224,7 @@ class wot.VehicleMarkersManager.HitLog
             formatArr = format.split("{{dmg-player}}");
             if (formatArr.length > 1)
                 format = formatArr.join(data.total);
-                
+
             formatArr = format.split("{{nick}}");
             if (formatArr.length > 1)
                 format = formatArr.join(playerName);
@@ -236,6 +237,9 @@ class wot.VehicleMarkersManager.HitLog
             formatArr = format.split("{{vehicle}}");
             if (formatArr.length > 1)
                 format = formatArr.join(data.vehicleName);
+            formatArr = format.split("{{vehiclename}}");
+            if (formatArr.length > 1)
+                format = formatArr.join(VehicleInfo.getVehicleName(data.icon));
             formatArr = format.split("{{vtype}}");
             if (formatArr.length > 1)
                 format = formatArr.join(data.vtype);

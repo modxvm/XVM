@@ -17,7 +17,7 @@ class wot.FinalStatistic.WinChances
     {
         GlobalEventDispatcher.removeEventListener("stat_loaded", this, onStatLoaded);
 
-        if (Config.s_config.statisticForm.showChances)
+        if (Config.s_config.finalStatistic.showChances)
             showWinChances();
     }
 
@@ -38,7 +38,7 @@ class wot.FinalStatistic.WinChances
                 {
                     s_chanceField.html = true;
                     s_chanceField.htmlText += "<tab><tab><tab><font face='$TitleFont' size='18' color='#E9E7D6'>" +
-                        Chance.GetChanceText(Config.s_config.statisticForm.showChancesExp) + "</font>";
+                        Chance.GetChanceText(Config.s_config.finalStatistic.showChancesExp) + "</font>";
                     s_text = s_chanceField.htmlText;
                 }
                 if (s_chanceField.htmlText != s_text)

@@ -4,7 +4,7 @@ cd $(dirname $(realpath $(cygpath --unix $0)))
 
 ./deploy.sh
 
-[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/home/games/WoT
+[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/work/games/WoT
 CURRENT_DIRECTORY=`pwd`
 
 #SAMPLE_REPLAY=observer.wotreplay

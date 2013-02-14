@@ -1,3 +1,9 @@
+XVM-3.3.2-test8:
+  * добавлен макрос {{vehiclename}} для внутреннего названия танка, вроде "usa-M24_Chaffee"
+    может использоваться в текстовых полях:
+      "<img src='img://gui/maps/icons/vehicle/contour/{{vehiclename}}.png'>"
+  * добавлена секция finalStatistic для настроек статистики после боя
+
 XVM-3.3.2-test7:
   * шкала XVM пересчитана по базе игроков RU региона
 
