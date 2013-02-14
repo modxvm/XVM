@@ -1,12 +1,12 @@
 module.exports = (function() {
-    var settings = require("./settings").settings,
-        utils = require("./utils"),
-        db = require("./worker_db"),
-        url = require("url"),
-        worker_cmd = require("./worker_cmd"),
-        worker_get = require("./worker_get"),
-        tcalc = require("./tcalc/tcalc"),
-        fakeHttp; // for test application
+    var includer = require("./includer"),
+        settings = includer.settings(),
+        utils = includer.utils(),
+        db = includer.db(),
+        url = includer.url(),
+        worker_cmd = includer.cmd(),
+        worker_get = includer.get(),
+        tcalc = includer.tcalc();
 
     // Get stat command:
     //   111111
@@ -16,12 +16,11 @@ module.exports = (function() {
     // Custom commands:
     //   0,WN=nick
     //   0,TWR=nick
-    var processRequest = function(request, response, fakeHttp) {
+    var processRequest = function(request, response) {
         var times = [
             { "n": "start", "t": new Date() }
         ];
 
-        fakeHttp = fakeHttp; // sirmax: ???
         try {
             var query = url.parse(request.url).query;
             if (!query || !query.match(/^((\d)|(\d[\dA-Za-z_\-,=/]*))$/))
@@ -61,8 +60,7 @@ module.exports = (function() {
                 dbData: db_data,
                 rqData: rq.data,
                 response: response,
-                times: times,
-                fakeHttp: fakeHttp
+                times: times
             };
 
             return _onPlayersData(error, processData);

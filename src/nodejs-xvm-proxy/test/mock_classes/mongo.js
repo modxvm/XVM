@@ -1,6 +1,7 @@
 module.exports = (function(undefined) {
-    var currentMongoResult,
-        lastUpdateRequest;
+    var fs = require('fs'),
+        currentMongoResult,
+        lastUpdateRequest = { };
 
     var cursor = {
         toArray: function(callback) {
@@ -52,7 +53,10 @@ module.exports = (function(undefined) {
         Server: Server,
         Db: Db,
         Collection: Collection,
-        SetMongoResult: setMongoResult,
+        getLastUpdateRequest: function() {
+            return lastUpdateRequest;
+        },
+        setMongoResult: setMongoResult,
         toString: function() {
             return "fakeMongo";
         }

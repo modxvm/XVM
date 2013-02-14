@@ -1,16 +1,15 @@
 module.exports = (function() {
-    var http = require("http"),
-        async = require("async"),
-        utils = require("./utils"),
-        settings = require("./settings").settings,
-        db = require("./worker_db"),
-        tcalc = require("./tcalc/tcalc"),
-        status = require("./worker_status");
+    var includer = require("./includer"),
+        http = includer.http(),
+        async = includer.async(),
+        utils = includer.utils(),
+        settings = includer.settings(),
+        db = includer.db(),
+        tcalc = includer.tcalc(),
+        status = includer.status();
 
     var processRemotes = function(processData) {
         processData.times.push({ "n":"process","t":new Date() });
-        http = processData.fakeHttp || http;
-        //console.log("fakeHttp: ", processData);
 
         // FIXIT: why this don't work?
         //    for (var id in processData.rqData) ...

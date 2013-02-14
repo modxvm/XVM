@@ -1,6 +1,6 @@
-module.exports = (function(undefined) {
+module.exports = (function() {
     var fs = require('fs'),
-        requestCounter,
+        requestCounter = 0,
         currentWgResponse,
         globalAgent = { },
         makeRequest;
@@ -8,9 +8,7 @@ module.exports = (function(undefined) {
     var createServer = function(eventListener) {
         makeRequest = eventListener;
         return {
-            listen: function() {
-
-            }
+            listen: function() { }
         }
     };
 
@@ -20,7 +18,8 @@ module.exports = (function(undefined) {
             setEncoding: function() { },
             on: function(eventName, callback) {
                 callbacks[eventName] = callback;
-            }
+            },
+            statusCode: 200
         };
 
         requestCounter++;
@@ -39,6 +38,12 @@ module.exports = (function(undefined) {
         createServer: createServer,
         get: get,
         globalAgent: globalAgent,
+        getTotalRequests: function() {
+            return requestCounter;
+        },
+        resetCounter: function() {
+            requestCounter = 0;
+        },
         makeRequest: function() {
             return makeRequest;
         },

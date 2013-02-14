@@ -1,7 +1,8 @@
 // calculate average level of tanks
 var calculateAvgLvl = exports.calculateAvgLevel = function(vehicles) {
-    var level_battles = 0
-    var total_battles = 0;
+    var level_battles = 0,
+        total_battles = 0;
+
     for (var vname in vehicles) {
         var item = vehicles[vname];
         level_battles += item.l * item.b;
