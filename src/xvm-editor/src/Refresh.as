@@ -32,6 +32,8 @@ protected function RefreshCurrentPage():void
             RefreshStatisticFormPage();
         else if (pg == pgPlayersPanel)
             RefreshPlayersPanelPage();
+        else if (pg == pgFinalStatistic)
+            RefreshFinalStatisticPage();
         else if (pg == pgColors1)
             RefreshColorsPage1();
         else if (pg == pgColors2)
@@ -281,6 +283,25 @@ private function RefreshPlayersPanelPage():void
     catch (ex:Error)
     {
         debug("ERROR: RefreshPlayersPanelPage(): " + ex.toString());
+    }
+}
+
+private function RefreshFinalStatisticPage():void
+{
+    debug("RefreshFinalStatisticPage()");
+    try
+    {
+        var section:*;
+
+        section = Config.s_config.finalStatistic;
+        this.p_finalStatistic.v_startPage.value = section.startPage;
+        this.p_finalStatistic.v_sortColumn.value = section.sortColumn;
+        this.p_finalStatistic.v_showChances.value = section.showChances;
+        this.p_finalStatistic.v_showChancesExp.value = section.showChancesExp;
+    }
+    catch (ex:Error)
+    {
+        debug("ERROR: RefreshFinalStatisticPage(): " + ex.toString());
     }
 }
 

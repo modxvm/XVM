@@ -117,6 +117,13 @@ protected function onSetDefaultValue(event:SetDefaultValueEvent):void
 				Config.SetDefaultValue("playersPanel.removeSquadIcon");
 				break;
 
+			case "finalStatistic":
+				Config.SetDefaultValue("finalStatistic.startPage");
+				Config.SetDefaultValue("finalStatistic.sortColumn");
+				Config.SetDefaultValue("finalStatistic.showChances");
+				Config.SetDefaultValue("finalStatistic.showChancesExp");
+				break;
+
 			default:
 				if (!Config.SetDefaultValue(path))
 					debug("config not found: " + path);
