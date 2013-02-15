@@ -191,16 +191,19 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         var xeff = Utils.XEFF(eff) || "--";
         var xwn = Utils.XWN(wn) || "--";
         var twr = userData.twr || "--";
+        var dt = userData.dt.split("T").join(" ").substr(0, 16);
         statisticsField.htmlText = "<textformat leading='0'><span class='xvm_statisticsField'>" +
             Locale.get("EFF") + ": <font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, xeff) + "'>" + xeff + "</font> " +
             "(<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff) + "'>" + eff + "</font>) " +
             "WN6: <font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, xwn) + "'>" + xwn + "</font> " +
             "(<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, wn) + "'>" + wn + "</font>) " +
-            "TWR: <font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TWR, twr) + "'>" + twr + "%</font>\n" + 
+            "TWR: <font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TWR, twr) + "'>" + twr + "%</font> " + 
+            "\n" +
             Locale.get("Avg Level") + ": <font color='#ffc133'>" + userData.lvl + "</font> " +
             Locale.get("Spotted") + ": <font color='#ffc133'>" + Sprintf.format("%.2f", userData.spo / b) + "</font> " +
             Locale.get("Defence") + ": <font color='#ffc133'>" + Sprintf.format("%.2f", userData.def / b) + "</font> " +
             Locale.get("Capture") + ": <font color='#ffc133'>" + Sprintf.format("%.2f", userData.cap / b) + "</font> " +
+            "<font size='10'>" + Locale.get("updated") + ":</font> <font size='11' color='#cccccc'>" + dt + "</font>" +
             "</span></textformat>";
     }
 }
