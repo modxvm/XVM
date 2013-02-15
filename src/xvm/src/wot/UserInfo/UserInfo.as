@@ -172,7 +172,7 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         if (!statisticsField)
         {
             statisticsField = Utils.duplicateTextField(blocksArea.blockcredits.itemmaxXP, "statisticsField",
-                blocksArea.blockcredits.itemmaxXP.label, blocksArea.blockcredits.itemmaxXP.label._height, "left");
+                blocksArea.blockcredits.itemmaxXP.label, blocksArea.blockcredits.itemmaxXP.label._height + 3, "left");
             statisticsField._width += 100;
             blocksArea.blockcommon.itembattlesCount.extra._width += 30;
         }
@@ -191,16 +191,16 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         var xeff = Utils.XEFF(eff) || "--";
         var xwn = Utils.XWN(wn) || "--";
         var twr = userData.twr || "--";
-        statisticsField.htmlText = "<span class='xvm_statisticsField'>" +
+        statisticsField.htmlText = "<textformat leading='0'><span class='xvm_statisticsField'>" +
             Locale.get("EFF") + ": <font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, xeff) + "'>" + xeff + "</font> " +
             "(<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff) + "'>" + eff + "</font>) " +
             "WN6: <font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, xwn) + "'>" + xwn + "</font> " +
-            "(<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, eff) + "'>" + wn + "</font>) " +
+            "(<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, wn) + "'>" + wn + "</font>) " +
             "TWR: <font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TWR, twr) + "'>" + twr + "%</font>\n" + 
             Locale.get("Avg Level") + ": <font color='#ffc133'>" + userData.lvl + "</font> " +
             Locale.get("Spotted") + ": <font color='#ffc133'>" + Sprintf.format("%.2f", userData.spo / b) + "</font> " +
             Locale.get("Defence") + ": <font color='#ffc133'>" + Sprintf.format("%.2f", userData.def / b) + "</font> " +
             Locale.get("Capture") + ": <font color='#ffc133'>" + Sprintf.format("%.2f", userData.cap / b) + "</font> " +
-            "</span>";
+            "</span></textformat>";
     }
 }
