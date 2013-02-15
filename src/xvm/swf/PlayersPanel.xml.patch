@@ -1,5 +1,5 @@
---- orig\PlayersPanel.xml	2012-11-23 13:52:44.393494400 +0200
-+++ PlayersPanel.xml	2012-11-23 13:52:44.763498100 +0200
+--- orig\PlayersPanel.xml	2013-02-15 10:02:45.431630900 +0200
++++ PlayersPanel.xml	2013-02-15 10:02:45.631632900 +0200
 @@ -60822,8 +60822,8 @@
                <String value="charAt"/>
                <String value=" "/>

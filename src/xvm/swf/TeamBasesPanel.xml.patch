@@ -1,5 +1,5 @@
---- orig\TeamBasesPanel.xml	2012-10-19 18:20:35.904870200 +0400
-+++ TeamBasesPanel.xml	2012-10-19 18:20:36.071879700 +0400
+--- orig\TeamBasesPanel.xml	2013-02-15 10:02:46.211638700 +0200
++++ TeamBasesPanel.xml	2013-02-15 10:02:46.321639800 +0200
 @@ -18273,7 +18273,7 @@
          <actions>
            <PushData>
