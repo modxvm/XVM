@@ -1,51 +1,41 @@
-XVM-3.3.2-test8:
-  * added macro {{vehiclename}} for internal vehicle name like "usa-M24_Chaffee"
-    can be used in the text fields:
-      "<img src='img://gui/maps/icons/vehicle/contour/{{vehiclename}}.png'>"
-  * added section finalStatistic for final statistic window settings
-
-XVM-3.3.2-test7:
-  * XVM Scale recalculated using RU players database
-
-XVM-3.3.2-test6:
-  * minimap mod
-  * capmod: capturers number fix
-  * added macros:
+XVM-3.4.0-test1:
+  [MACROS]
+  * new macros:
+      {{avglvl}} - average level of tanks
+      {{wn}}, {{c:wn}} - WN6 rating: http://www.koreanrandom.com/forum/topic/2575-/
       {{xeff}}, {{xwn}}, {{c:xeff}}, {{c:xwn}} - two-digits ratinf value
-    using "XVM Scale"
-    explanation: http://www.koreanrandom.com/forum/topic/2625-/page-15#entry35340 (in Russian)
-  * added colors setup section: colors/x for XVM Scale colors
-  * cnanged efficiency in the default config:
-      was: {{eff:4}}, now: {{xwn}}
+        using "XVM Scale"
+        explanation: http://www.koreanrandom.com/forum/topic/2625-/page-15#entry35340 (in Russian)
+      {{twr}}, {{c:twr}} - tourist1984 win rate:
+        http://www.koreanrandom.com/forum/topic/2389-/
+      {{vehiclename}} for internal vehicle name like "usa-M24_Chaffee"
+        can be used in the text fields:
+        "<img src='img://gui/maps/icons/vehicle/contour/{{vehiclename}}.png'>"
 
-XVM-3.3.2-test5:
-  * replace "hp left" to "damage dealt" in Final Statistic window
-  * default sorting by damage in Final Statistics
-  * add personal hit percent, damage and damage upon detecting to the
-    first page of Final Statistic window
-
-XVM-3.3.2-test4:
-  * capmod: second fix for number of tanks capturing for Tank Company encounter battles
-  * fixed {{nick}} macro in the medium2 players panel mode
+  [NEW FUNCTIONS]
+  * minimap mod
+  * FinalStatistic includes functions from morotopitek's mod.
   * new experimental win chance formula by TurinDeNar:
       http://www.koreanrandom.com/forum/topic/2598-/
 
-XVM-3.3.2-test3:
-  * added macro:
-      {{avglvl}} - average level of tanks
-
-XVM-3.3.2-test2:
-  * fixed {{c:system}} macro
-  * capture bar: fixed "enabled":false
-  * added macros:
-      {{wn}}, {{c:wn}} - WN6 rating: http://www.koreanrandom.com/forum/topic/2575-
-      {{twr}}, {{c:twr}} - tourist1984 win rate:
-        http://www.koreanrandom.com/forum/topic/2389- (not working yet)
+  [CONFIG]
   * added colors setup sections: colors/wn, colors/twr
-
-XVM-3.3.2-test1:
-  * capture bar: fixed number of tanks capturing for Tank Company encounter battles
+  * added colors setup section: colors/x for XVM Scale colors
+  * added section finalStatistic for final statistic window settings
   * added parameter: hitLog/defaultHeader - default header format (before first hit)
+  * cnanged efficiency in the default config:
+      was: {{eff:4}}, now: {{xwn}}
+
+  [FIXES]
+  * fixed {{c:system}} macro
+  * fixed {{nick}} macro in the medium2 players panel mode
+
+  [CAPTURE BAR]
+  * capture bar: fixed "enabled":false
+  * capture bar: fixed number of tanks capturing for Tank Company encounter battles
+  * capture bar: capturers number fix
+
+  [OTHER]
   * updated statistic data for new vehicles
 
 XVM-3.3.1:
