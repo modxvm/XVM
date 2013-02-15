@@ -1,4 +1,5 @@
 ﻿import wot.utils.Config;
+import wot.utils.Locale;
 
 class wot.FinalStatistic.TeamStats extends net.wargaming.hangar.FinalStatistic.TeamStats // gfx.core.UIComponent
 {
@@ -6,6 +7,7 @@ class wot.FinalStatistic.TeamStats extends net.wargaming.hangar.FinalStatistic.T
     {
         super();
         iconTypeToKey.health.key = "damageDealt";
+		healthHead1.helpText = healthHead2.helpText = Locale.get("Damage dealt");
     }
 
     function configUI()
@@ -13,6 +15,7 @@ class wot.FinalStatistic.TeamStats extends net.wargaming.hangar.FinalStatistic.T
         super.configUI();
 
 		tankHead1.selected = tankHead2.selected = false;
+
 		switch (Config.s_config.finalStatistic.sortColumn)
 		{
 			case 1:

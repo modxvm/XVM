@@ -20,28 +20,13 @@ class wot.FinalStatistic.DetailsBlock extends net.wargaming.hangar.FinalStatisti
         GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
         Config.LoadConfig("DetailsBlock.as");
 
-        shotsTitle = _createTextField("shotsTitle", xpTitleLbl, 1, "left");
-        shotsCount = _createTextField("shotsCount", xpLbl, 1, "right");
-        shotsPercent = _createTextField("shotsPercent", premXpLbl, 1, "right");
-        damageAssistedTitle = _createTextField("damageAssistedTitle", xpTitleLbl, 2, "left");
-        damageAssistedValue = _createTextField("damageAssistedValue", premXpLbl, 2, "right");
-        damageTitle = _createTextField("damageTitle", xpTitleLbl, 3, "left");
-        damageValue = _createTextField("damageValue", premXpLbl, 3, "right");
-    }
-
-    private function _createTextField(name, f, yOffset, align)
-    {
-        var res:TextField = this.createTextField("name", this.getNextHighestDepth(),
-            f._x, f._y + f._height * yOffset + 10, f._width, f._height);
-        res.antiAliasType = "advanced";
-        res.html = true;
-        res.selectable = false;
-        res.autoSize = align; // http://theolagendijk.com/2006/09/07/aligning-htmltext-inside-flash-textfield/
-        var tf: TextFormat = f.getNewTextFormat();
-        res.styleSheet = Utils.createStyleSheet(Utils.createCSS("xvm_" + name,
-            tf.color, tf.font, tf.size, align, tf.bold, tf.italic));
-
-        return res;
+        shotsTitle = Utils.duplicateTextField(this, "shotsTitle", xpTitleLbl, 1, "left");
+        shotsCount = Utils.duplicateTextField(this, "shotsCount", xpLbl, 1, "right");
+        shotsPercent = Utils.duplicateTextField(this, "shotsPercent", premXpLbl, 1, "right");
+        damageAssistedTitle = Utils.duplicateTextField(this, "damageAssistedTitle", xpTitleLbl, 2, "left");
+        damageAssistedValue = Utils.duplicateTextField(this, "damageAssistedValue", premXpLbl, 2, "right");
+        damageTitle = Utils.duplicateTextField(this, "damageTitle", xpTitleLbl, 3, "left");
+        damageValue = Utils.duplicateTextField(this, "damageValue", premXpLbl, 3, "right");
     }
 
     private function onConfigLoaded()

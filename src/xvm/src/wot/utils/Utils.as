@@ -296,4 +296,20 @@ class wot.utils.Utils
         style.parseCSS(css);
         return style;
     }
+	
+	// Duplicate text field
+	public static function duplicateTextField(mc, name, textField, yOffset, align)
+    {
+        var res:TextField = mc.createTextField("name", mc.getNextHighestDepth(),
+            textField._x, textField._y + textField._height * yOffset + 10, textField._width, textField._height);
+        res.antiAliasType = "advanced";
+        res.html = true;
+        res.selectable = false;
+        res.autoSize = align; // http://theolagendijk.com/2006/09/07/aligning-htmltext-inside-flash-textfield/
+        var tf: TextFormat = textField.getNewTextFormat();
+        res.styleSheet = Utils.createStyleSheet(Utils.createCSS("xvm_" + name,
+            tf.color, tf.font, tf.size, align, tf.bold, tf.italic));
+
+        return res;
+    }
 }
