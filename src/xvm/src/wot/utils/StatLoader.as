@@ -237,24 +237,12 @@ class wot.utils.StatLoader
         // xeff
         stat.xeff = null;
         if (stat.e != null)
-        {
-            stat.xeff = Math.round(Math.max(0, Math.min(100,
-              -0.000000002523 * Math.pow(stat.e, 3) +
-              0.000003351 * Math.pow(stat.e, 2) +
-              0.07331 * stat.e -
-              31.57)));
-        }
+            stat.xeff = Utils.XEFF(stat.e);
 
         // xwn
         stat.xwn = null;
         if (stat.wn != null)
-        {
-            stat.xwn = Math.round(Math.max(0, Math.min(100,
-              0.000000001984 * Math.pow(stat.wn, 3) -
-              0.00000191 * Math.pow(stat.wn, 2) +
-              0.04803 * stat.wn -
-              4.638)));
-        }
+            stat.xwn = Utils.XWN(stat.wn);
 
         // tdb, tfb, tsb, tdv, te, teff (last)
         stat.tdb = null;
@@ -352,5 +340,36 @@ class wot.utils.StatLoader
             data.team == "team1" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
 
         var timer = _global.setTimeout(function() { StatLoader.StartLoadData(Defines.COMMAND_RUN_ASYNC); }, 50);
+    }
+
+    public static function LoadUserData(nick)
+    {
+        var a:Array = (nick + "," + Config.s_game_region).split("");
+        var s:String = "";
+        var a_length:Number = a.length;
+        for (var i = 0; i < a_length; ++i)
+        {
+          var b:Number = a[i].charCodeAt(0);
+          var c:String = (b < 128) ? b.toString(16) : escape(a[i].charAt(0)).split("%").join("");
+          s += (c.length % 2 == 0 ? "" : "0") + c;
+        }
+
+        var lv:LoadVars = new LoadVars();
+        lv.onData = function(str: String)
+        {
+            var data = null;
+            if (str) {
+                try
+                {
+                    data = JSON.parse(str);
+                }
+                catch (ex)
+                {
+                    data = {error:ex};
+                }
+            }
+            GlobalEventDispatcher.dispatchEvent( { type: "userdata_loaded", data: data } );
+        }
+        lv.load(Defines.COMMAND_INFO + " " + s);
     }
 }

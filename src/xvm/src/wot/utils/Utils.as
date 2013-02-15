@@ -301,7 +301,7 @@ class wot.utils.Utils
 	public static function duplicateTextField(mc, name, textField, yOffset, align)
     {
         var res:TextField = mc.createTextField("name", mc.getNextHighestDepth(),
-            textField._x, textField._y + textField._height * yOffset + 10, textField._width, textField._height);
+            textField._x, textField._y + yOffset, textField._width, textField._height);
         res.antiAliasType = "advanced";
         res.html = true;
         res.selectable = false;
@@ -311,5 +311,23 @@ class wot.utils.Utils
             tf.color, tf.font, tf.size, align, tf.bold, tf.italic));
 
         return res;
+    }
+    
+    public static function XEFF(value)
+    {
+        return Math.round(Math.max(0, Math.min(100,
+          -0.000000002523 * Math.pow(value, 3) +
+          0.000003351 * Math.pow(value, 2) +
+          0.07331 * value -
+          31.57)));
+    }
+    
+    public static function XWN(value)
+    {
+        return Math.round(Math.max(0, Math.min(100,
+          0.000000001984 * Math.pow(value, 3) -
+          0.00000191 * Math.pow(value, 2) +
+          0.04803 * value -
+          4.638)));
     }
 }

@@ -20,13 +20,14 @@ class wot.FinalStatistic.DetailsBlock extends net.wargaming.hangar.FinalStatisti
         GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
         Config.LoadConfig("DetailsBlock.as");
 
-        shotsTitle = Utils.duplicateTextField(this, "shotsTitle", xpTitleLbl, 1, "left");
-        shotsCount = Utils.duplicateTextField(this, "shotsCount", xpLbl, 1, "right");
-        shotsPercent = Utils.duplicateTextField(this, "shotsPercent", premXpLbl, 1, "right");
-        damageAssistedTitle = Utils.duplicateTextField(this, "damageAssistedTitle", xpTitleLbl, 2, "left");
-        damageAssistedValue = Utils.duplicateTextField(this, "damageAssistedValue", premXpLbl, 2, "right");
-        damageTitle = Utils.duplicateTextField(this, "damageTitle", xpTitleLbl, 3, "left");
-        damageValue = Utils.duplicateTextField(this, "damageValue", premXpLbl, 3, "right");
+        var h = xpTitleLbl._height;
+        shotsTitle = Utils.duplicateTextField(this, "shotsTitle", xpTitleLbl, h + 10, "left");
+        shotsCount = Utils.duplicateTextField(this, "shotsCount", xpLbl, h + 10, "right");
+        shotsPercent = Utils.duplicateTextField(this, "shotsPercent", premXpLbl, h + 10, "right");
+        damageAssistedTitle = Utils.duplicateTextField(this, "damageAssistedTitle", xpTitleLbl, 2 * h + 10, "left");
+        damageAssistedValue = Utils.duplicateTextField(this, "damageAssistedValue", premXpLbl, 2 * h + 10, "right");
+        damageTitle = Utils.duplicateTextField(this, "damageTitle", xpTitleLbl, 3 * h + 10, "left");
+        damageValue = Utils.duplicateTextField(this, "damageValue", premXpLbl, 3 * h + 10, "right");
     }
 
     private function onConfigLoaded()

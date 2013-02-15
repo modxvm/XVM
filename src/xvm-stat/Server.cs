@@ -88,6 +88,8 @@ namespace wot
       public bool notInDb;
     }
 
+    // local info cache for user data
+    private readonly Dictionary<string, string> infocache = new Dictionary<string, string>();
     // local cache (key => "id=vname")
     private readonly Dictionary<string, CacheEntry> cache = new Dictionary<string, CacheEntry>();
     private readonly List<Request> requests = new List<Request>();
@@ -422,6 +424,10 @@ namespace wot
                 foreach (var v in vars.Keys)
                   _result += String.Format("\n{0}={1}", v, vars[v]);
               }
+              break;
+
+            case "@INFO":
+              _result = GetInfo(parameters); // this will start network operations
               break;
 
             default:
@@ -890,6 +896,56 @@ namespace wot
 
     #endregion
 
+    #region @INFO
+    private string GetInfo(string req)
+    {
+      if (string.IsNullOrEmpty(req))
+        return "";
+
+      List<byte> buf = new List<byte>();
+      string s = "";
+      try
+      {
+        for (int i = 0; i < req.Length - 1; i += 2)
+        {
+          byte b = Convert.ToByte(req.Substring(i, 2), 16);
+          buf.Add(b);
+        }
+
+        s = Encoding.UTF8.GetString(buf.ToArray());
+      }
+      catch (Exception ex)
+      {
+        Log("Error decoding @INFO string: " + Encoding.ASCII.GetString(buf.ToArray()));
+        Debug(req);
+        Debug(ex.ToString());
+        return "";
+      }
+      
+      string key = "@INFO," + s;
+      if (infocache.ContainsKey(key))
+        return infocache[key];
+
+      try
+      {
+        // The character "?" may be used in china server as the username,
+        // for example  "?ABC" . So it's must be replace to "%3F" for search.
+        s = s.Replace("?", "%3F");
+
+        string response = loadUrl(proxies[(new Random()).Next(proxies.Length)], "0,INFO," + s);
+        if (string.IsNullOrEmpty(response))
+          return "";
+        infocache[key] = response;
+        return response;
+      }
+      catch (Exception ex)
+      {
+        Log(string.Format("Exception: {0}", ex));
+        return "";
+      }
+    }
+    #endregion
+
     #region Log processing
 
     private int logLength = 0;
@@ -948,7 +1004,9 @@ namespace wot
       }
       catch (Exception ex)
       {
-        Log("Error decoding " + (logDestination == LogDestination.Stats ? @"LOGSTAT" : "@LOG") + " string: " + Encoding.ASCII.GetString(buf.ToArray()));
+        Log(String.Format("Error decoding {0} string: {1}", 
+          logDestination == LogDestination.Stats ? @"LOGSTAT" : "@LOG",
+          Encoding.ASCII.GetString(buf.ToArray())));
         Debug(logString);
         Debug(ex.ToString());
       }

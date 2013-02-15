@@ -40,7 +40,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>xvm-stat.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>xvm-stat.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -105,7 +105,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="xvm-stat.pfx" />
     <None Include="xvm-stat.snk" />
   </ItemGroup>
   <ItemGroup>

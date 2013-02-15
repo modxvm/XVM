@@ -58,8 +58,13 @@ class wot.utils.Locale
     tr["Damage upon detecting"] = "Урон по разведданным";
     tr["Damage dealt"] = "Нанесенный урон";
 
-	tr[" to "] = " до ";
-	
+    tr[" to "] = " до ";
+    tr["EFF"] = "РЭ";
+    tr["Avg Level"] = "Ср. уровень";
+    tr["Spotted"] = "Засвет";
+    tr["Defence"] = "Защита";
+    tr["Capture"] = "Захват";
+    
 //    tr["Using default settings."] = "Используются настройки по умолчанию.";
 //    tr["Error parsing config file."] = "Ошибка чтения конфигурации.";
 //    tr["Error loading config file."] = "Ошибка загрузки конфигурации.";
