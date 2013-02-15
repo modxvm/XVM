@@ -34,13 +34,26 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
     {
         if (Config.s_config.rating.showPlayersStatistics != true)
 			return;
+        GlobalEventDispatcher.addEventListener("stat_loaded", this, onStatLoaded);
+
+		Logger.addObject(this, "UserInfo", 5);
 
 		//StatLoader.LoadUserData(Config.s_game_region, );
 	}
 
+    private function onStatLoaded()
+    {
+        GlobalEventDispatcher.removeEventListener("stat_loaded", this, onStatLoaded);
+
+        //if (Config.s_config.finalStatistic.showChances)
+        //    showWinChances();
+    }
+
 	// override
     function setCommonInfo()
     {
+		Logger.addObject(arguments, "setCommonInfo.arguments", 5);
+
 		super.setCommonInfo.apply(this, arguments);
 		//Logger.addObject(_root, "_root", 5);
 		//Logger.addObject(this, "UserInfo", 5);
@@ -67,17 +80,17 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
 	// override
     function setStat()
     {
-		//Logger.addObject(arguments, "setStat", 5);
+		Logger.addObject(arguments, "setStat.arguments", 5);
+
 		var battles = 0;
 		var battlesExtraId = 0;
 		var xp = 0;
-		
+
 		for (var i = 0; i < arguments.length; ++i)
 		{
 			switch (arguments[i]) {
 				case "battlesCount":
 					battles = extractNumber(arguments[i + 1]);
-					Logger.add("battles=" + battles);
 					battlesExtraId = i + 2;
 					i += 2;
 					break;
@@ -85,17 +98,12 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
 				case "wins":
 					// battles
 					var wins = extractNumber(arguments[i + 1]);
-					Logger.add("wins=" + wins);
 					var gwr = wins / battles * 100;
 					var r1 = Math.round(gwr) / 100 + 0.005;
-					Logger.add("r1=" + r1);
 					var r2 = int(gwr) / 100 + 0.01;
-					Logger.add("r2=" + r2);
 					var b1 = (battles * r1 - wins) / (1 - r1);
-					Logger.add("b1=" + b1);
 					var b2 = (battles * r2 - wins) / (1 - r2);
-					Logger.add("b2=" + b2);
-					b1 = b1 % 1 == 0 ? b1 : (int(b1) + 1);
+ 					b1 = b1 % 1 == 0 ? b1 : (int(b1) + 1);
 					b2 = b2 % 1 == 0 ? b2 : (int(b2) + 1);
 					b1 = Math.max(0, b1);
 					b2 = Math.max(0, b2);

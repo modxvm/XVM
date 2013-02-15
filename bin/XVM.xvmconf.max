@@ -58,6 +58,12 @@
       "vehicleFormatRight": ""
     }
   },
+  "finalStatistic": {
+    "startPage": 2,
+    "sortColumn": 6,
+    "showChances": true,
+    "showChancesExp": true
+  },
   "minimap": {
     "enabled": true
   },
