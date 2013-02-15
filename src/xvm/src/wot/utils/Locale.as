@@ -61,7 +61,7 @@ class wot.utils.Locale
     tr[" to "] = " до ";
     tr["EFF"] = "РЭ";
     tr["updated"] = "обновлено";
-    tr["Avg Level"] = "Ср. уровень";
+    tr["Avg level"] = "Ср. уровень";
     tr["Spotted"] = "Засвет";
     tr["Defence"] = "Защита";
     tr["Capture"] = "Захват";

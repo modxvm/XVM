@@ -199,7 +199,7 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
             "(<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, wn) + "'>" + wn + "</font>) " +
             "TWR: <font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TWR, twr) + "'>" + twr + "%</font> " + 
             "\n" +
-            Locale.get("Avg Level") + ": <font color='#ffc133'>" + userData.lvl + "</font> " +
+            Locale.get("Avg level") + ": <font color='#ffc133'>" + Sprintf.format("%.1f", userData.lvl) + "</font> " +
             Locale.get("Spotted") + ": <font color='#ffc133'>" + Sprintf.format("%.2f", userData.spo / b) + "</font> " +
             Locale.get("Defence") + ": <font color='#ffc133'>" + Sprintf.format("%.2f", userData.def / b) + "</font> " +
             Locale.get("Capture") + ": <font color='#ffc133'>" + Sprintf.format("%.2f", userData.cap / b) + "</font> " +
