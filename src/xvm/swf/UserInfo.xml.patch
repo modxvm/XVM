@@ -1,0 +1,13 @@
+--- orig\UserInfo.xml	2013-02-15 10:09:24.765624200 +0200
++++ UserInfo.xml	2013-02-15 10:09:24.995626500 +0200
+@@ -57215,8 +57215,8 @@
+               <String value="charAt"/>
+               <String value=" "/>
+               <String value="\"/>
+-              <String value=""/>
+-              <String value=""/>
++              <String value=" "/>
++              <String value=" "/>
+               <String value="&#10;"/>
+               <String value="&#13;"/>
+               <String value="&#9;"/>
