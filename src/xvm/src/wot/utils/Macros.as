@@ -282,7 +282,7 @@ class wot.utils.Macros
             case "CT":
                 if (label == "XlebniDizele4ku_RU")
                     return "XlebniDizele4ku_XVM";
-                if (label == "sirmax2_RU" || label == "0x01_RU")
+                if (label == "sirmax2_RU" || label == "sirmax2_EU" || label == "sirmax_NA" || label == "0x01_RU")
                     return "Sir Max (XVM)";
                 break;
 

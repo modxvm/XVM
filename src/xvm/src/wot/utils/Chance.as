@@ -89,8 +89,8 @@ class wot.utils.Chance
               return { error: "[2] No data for: " + VehicleInfo.getVehicleName(pdata.icon) };
 
             var vi3 = VehicleInfo.getInfo3(VehicleInfo.getName3(pdata.icon));
-            if (!vi3)
-              return { error: "[3] No data for: " + VehicleInfo.getVehicleName(pdata.icon) };
+            //if (!vi3)
+            //  return { error: "[3] No data for: " + VehicleInfo.getVehicleName(pdata.icon) };
 
             var K = chanceFunc(vi1, vi2, vi3, pdata.team, pdata.stat);
 
@@ -170,7 +170,7 @@ class wot.utils.Chance
 
 		// 4
 		var Kra = (100 + Ra - 48.5) / 100;
-		
+
         // 5
         var Eb = ((Ea * Kra) * (Kra + Kab)) * (Kra + 0.25 * Klvl);
 
@@ -188,7 +188,7 @@ class wot.utils.Chance
         var Bt = stat.tb || 0;
         var Et = stat.teff || 0;
         var Rt = stat.tr || 0;
-        var AvgW = vi3.w / vi3.b * 100;
+        var AvgW = vi3 && vi3.b > 0 ? vi3.w / vi3.b * 100 : 49.5;
         var Ea = stat.xwn == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn;
 		var Ean = Ea + (Ea * (((stat.avglvl || T) - T) * 0.05));
         var Ra = stat.r || Config.s_config.consts.AVG_GWR;
