@@ -155,6 +155,7 @@ class wot.utils.Chance
         var Tmax = vi1.tiers[1];
         var T = battleTier;
         var Ea = stat.xwn == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn;
+		var Ean = Ea + (Ea * (((stat.avglvl || T) - T) * 0.05));
         var Ra = stat.r || Config.s_config.consts.AVG_GWR;
         var Ba = stat.b || Config.s_config.consts.AVG_BATTLES;
 
@@ -167,8 +168,11 @@ class wot.utils.Chance
             : (Ba <= 20000) ? 0.9 + (Ba - 10000) / 50000        // 10k..20k => 0.9..1.1
             : 1.1 + (Ba - 20000) / 100000                       // 20k..    => 1.1..
 
-        // 4
-        var Eb = ((Ea * (100 + Ra - 48) / 100) * (1 + Kab)) * (1 + 0.25 * Klvl);
+		// 4
+		var Kra = (100 + Ra - 48.5) / 100;
+		
+        // 5
+        var Eb = ((Ea * Kra) * (Kra + Kab)) * (Kra + 0.25 * Klvl);
 
         return Eb;
     }
@@ -186,6 +190,7 @@ class wot.utils.Chance
         var Rt = stat.tr || 0;
         var AvgW = vi3.w / vi3.b * 100;
         var Ea = stat.xwn == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn;
+		var Ean = Ea + (Ea * (((stat.avglvl || T) - T) * 0.05));
         var Ra = stat.r || Config.s_config.consts.AVG_GWR;
         var Ba = stat.b || Config.s_config.consts.AVG_BATTLES;
 
@@ -205,10 +210,15 @@ class wot.utils.Chance
             : (Ba <= 20000) ? 0.9 + (Ba - 10000) / 50000        // 10k..20k => 0.9..1.1
             : 1.1 + (Ba - 20000) / 100000                       // 20k..    => 1.1..
 
-        // 4
-        var Eb = (Et > 0) ? (((3 / 5 * Et * (100 + Rt - AvgW) / 100 ) * (1 + Ktb)) +
-                ((2 / 5 * Ea * (100 + Ra - 48) / 100) * (1 + Kab))) * (1 + 0.25 * Klvl)
-            : ((Ea * (100 + Ra - 48) / 100) * (1 + Kab)) * (1 + 0.25 * Klvl);
+		// 4
+		var Krt = (100 + Rt - AvgW) / 100;
+		var Kra = (100 + Ra - 48.5) / 100;
+
+        // 5
+        var Eb = (Et > 0)
+			? (((3 / 5 * Et * Krt) * (Krt + Ktb)) +
+                ((2 / 5 * Ea * Kra) * (Kra + Kab))) * (Kra + 0.25 * Klvl)
+            : ((Ea * Kra) * (Kra + Kab)) * (Kra + 0.25 * Klvl);
 
 /*        if (DEBUG_EXP)
         {

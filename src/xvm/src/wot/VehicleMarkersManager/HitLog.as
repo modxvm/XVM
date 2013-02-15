@@ -64,7 +64,7 @@ class wot.VehicleMarkersManager.HitLog
         textField.htmlText = "<span class='xvm_hitlog'>" + txt + "</span>";
     }
 
-    public function update(delta:Number, curHealth:Number, vehicleName:String, playerName:String,
+    public function update(delta:Number, curHealth:Number, vehicleName:String, icon:String, playerName:String,
         level:Number, damageType:String, vtype:String, vtypeColor:String, dead:Boolean)
     {
         //wot.utils.Logger.add(delta + " " + vehicleName + " " + playerName + " " + level);
@@ -91,6 +91,7 @@ class wot.VehicleMarkersManager.HitLog
         {
             players[playerName] = {
                 vehicleName:vehicleName,
+				icon:icon,
                 level:level,
                 vtype:vtype,
                 vtypeColor:vtypeColor,
@@ -190,6 +191,7 @@ class wot.VehicleMarkersManager.HitLog
                     dead:false,
                     damageType:"",
                     vehicleName:"",
+					icon:"",
                     level:0,
                     vtype:"",
                     vtypeColor:null,
