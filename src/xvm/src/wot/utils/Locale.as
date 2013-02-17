@@ -69,7 +69,7 @@ class wot.utils.Locale
     tr["Type"] = "Тип";
     tr["Nation"] = "Нация";
     tr["Name"] = "Имя";
-    tr["Battles"] = "Боёв";
+    tr["Fights"] = "Боёв";
     tr["Wins"] = "Побед";
     
 //    tr["Using default settings."] = "Используются настройки по умолчанию.";

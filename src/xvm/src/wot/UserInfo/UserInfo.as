@@ -11,6 +11,12 @@ import wot.utils.Utils;
 
 class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
 {
+    static var lastSort = {
+        name: "bBat",
+        type: [ "fights" ],
+        dir: [ "1" ]
+    };
+
     var m_statisticsField1:TextField;
     var m_statisticsField2:TextField;
     var m_nick:String;
@@ -71,94 +77,6 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
             StatLoader.LoadUserData(m_nick);
 
         super.setCommonInfo.apply(this, arguments);
-    }
-
-    // override
-    function setList()
-    {
-        super.setList.apply(this, arguments);
-        fixList();
-    }
-    
-    private function fixList()
-    {
-        var data = list.dataProvider.slice();
-        for (var i = 0; i < data.length; ++i)
-        {
-            var vi2 = VehicleInfo.getInfo2(data[i].icon);
-            if (!vi2) {
-                data[i].type = 0;
-                continue;
-            }
-            data[i].type = !vi2 ? 0
-                : vi2.type == "SPG" ? 1
-                : vi2.type == "LT" ? 2
-                : vi2.type == "MT" ? 3
-                : vi2.type == "TD" ? 4
-                : 5;
-            if (m_userData)
-            {
-                var vn = VehicleInfo.getVehicleName(data[i].icon);
-                vn = vn.slice(vn.indexOf("-") + 1).toUpperCase();
-                var vdata = m_userData.v[vn];
-                var stat = { };
-                if (vdata)
-                {
-                    stat = {
-                        b: m_userData.b,
-                        w: m_userData.w,
-                        tb: vdata.b,
-                        tw: vdata.w,
-                        tl: vdata.l,
-                        e: m_userData.e,
-                        wn: m_userData.wn,
-                        vn: vn,
-                        td: vdata.d,
-                        tf: vdata.f,
-                        ts: vdata.s
-                    };
-                    stat = StatLoader.CalculateStatValues(stat);
-                }
-                data[i].e = stat.te || 0;
-                data[i].teff = stat.teff || 0;
-            }
-        }
-
-        for (var i in list.renderers)
-        {
-            if (list.renderers[i].setup != rendererSetup)
-            {
-                list.renderers[i].setup2 = list.renderers[i].setup;
-                list.renderers[i].setup = rendererSetup;
-            }
-        }
-    }
-
-    function rendererSetup()
-    {
-        this["setup2"].apply(this, arguments);
-        var data = this["data"];
-        var teff = this["teff"];
-        var fights = this["fights"];
-
-        if (!teff)
-        {
-            teff = Utils.duplicateTextField(this, "teff", fights, 0, "center");
-            teff._x -= 50;
-            this["teff"] = teff;
-        }
-
-        if (!data || !data.e || !data.teff)
-            teff.htmlText = "";
-        else 
-        {
-            var color = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, data.e);
-            teff.htmlText =
-                "<span class='xvm_teff'>" +
-                "<font color='" + color + "'>" + (data.e < 10 ? data.e : "X") + "</font>" +
-                //" (<font color='" + color + "'>" + data.teff + "</font>)" +
-                "</span>";
-        }
     }
 
     private function extractNumber(str)
@@ -287,16 +205,123 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
             "TWR: <font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TWR, twr) + "'>" + twr + "%</font> " + 
             "  <font size='10'>" + Locale.get("updated") + ":</font> <font size='11' color='#cccccc'>" + dt + "</font>" +
             "</span></textformat>";
-        m_statisticsField2.htmlText = "<textformat leading='0'><span class='xvm_statisticsField'>" +
-            Locale.get("Avg level") + ": <font color='#ffc133'>" + Sprintf.format("%.1f", m_userData.lvl) + "</font> " +
-            Locale.get("Spotted") + ": <font color='#ffc133'>" + Sprintf.format("%.2f", m_userData.spo / b) + "</font> " +
-            Locale.get("Defence") + ": <font color='#ffc133'>" + Sprintf.format("%.2f", m_userData.def / b) + "</font> " +
-            Locale.get("Capture") + ": <font color='#ffc133'>" + Sprintf.format("%.2f", m_userData.cap / b) + "</font> " +
-            "</span></textformat>";
+        //Logger.addObject(list, "list", 2);
+        if (list.selectedIndex == 0)
+        {
+            m_statisticsField2.htmlText = "<textformat leading='0'><span class='xvm_statisticsField'>" +
+                Locale.get("Avg level") + ": <font color='#ffc133'>" + Sprintf.format("%.1f", m_userData.lvl) + "</font> " +
+                Locale.get("Spotted") + ": <font color='#ffc133'>" + Sprintf.format("%.2f", m_userData.spo / b) + "</font> " +
+                Locale.get("Defence") + ": <font color='#ffc133'>" + Sprintf.format("%.2f", m_userData.def / b) + "</font> " +
+                Locale.get("Capture") + ": <font color='#ffc133'>" + Sprintf.format("%.2f", m_userData.cap / b) + "</font> " +
+                "</span></textformat>";
+        }
+        else
+        {
+            m_statisticsField2.htmlText = "<textformat leading='0'><span class='xvm_statisticsField'>" +
+                //Locale.get("Avg level") + ": <font color='#ffc133'>" + Sprintf.format("%.1f", m_userData.lvl) + "</font> " +
+                //Locale.get("Spotted") + ": <font color='#ffc133'>" + Sprintf.format("%.2f", m_userData.spo / b) + "</font> " +
+                //Locale.get("Defence") + ": <font color='#ffc133'>" + Sprintf.format("%.2f", m_userData.def / b) + "</font> " +
+                //Locale.get("Capture") + ": <font color='#ffc133'>" + Sprintf.format("%.2f", m_userData.cap / b) + "</font> " +
+                "</span></textformat>";
+        }
+    }
+
+    // list
+    
+    // override
+    function setList()
+    {
+        super.setList.apply(this, arguments);
+        fixList();
+        if (lastSort.type)
+            sortList(lastSort.type, lastSort.dir);
+        //Logger.addObject(lastSort, "", 2);
+    }
+    
+    private function fixList()
+    {
+        var data = list.dataProvider.slice();
+        for (var i = 0; i < data.length; ++i)
+        {
+            var vi2 = VehicleInfo.getInfo2(data[i].icon);
+            if (!vi2) {
+                data[i].type = 0;
+                continue;
+            }
+            data[i].type = !vi2 ? 0
+                : vi2.type == "SPG" ? 1
+                : vi2.type == "LT" ? 2
+                : vi2.type == "MT" ? 3
+                : vi2.type == "TD" ? 4
+                : 5;
+            if (m_userData)
+            {
+                var vn = VehicleInfo.getVehicleName(data[i].icon);
+                vn = vn.slice(vn.indexOf("-") + 1).toUpperCase();
+                var vdata = m_userData.v[vn];
+                var stat = { };
+                if (vdata)
+                {
+                    stat = {
+                        b: m_userData.b,
+                        w: m_userData.w,
+                        tb: vdata.b,
+                        tw: vdata.w,
+                        tl: vdata.l,
+                        e: m_userData.e,
+                        wn: m_userData.wn,
+                        vn: vn,
+                        td: vdata.d,
+                        tf: vdata.f,
+                        ts: vdata.s
+                    };
+                    stat = StatLoader.CalculateStatValues(stat);
+                }
+                data[i].e = stat.te || 0;
+                data[i].teff = stat.teff || 0;
+            }
+        }
+
+        for (var i in list.renderers)
+        {
+            if (list.renderers[i].setup != rendererSetup)
+            {
+                list.renderers[i].setup2 = list.renderers[i].setup;
+                list.renderers[i].setup = rendererSetup;
+            }
+        }
+    }
+
+    function rendererSetup()
+    {
+        this["setup2"].apply(this, arguments);
+        var data = this["data"];
+        var teff = this["teff"];
+        var fights = this["fights"];
+
+        if (!teff)
+        {
+            teff = Utils.duplicateTextField(this, "teff", fights, 0, "center");
+            this["teff"] = teff;
+            teff._x -= 37;
+            //Logger.add("t=" + teff._x + ", f=" + fights._x);
+        }
+
+        if (!data || !data.e || !data.teff)
+            teff.htmlText = "";
+        else 
+        {
+            var color = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, data.e);
+            teff.htmlText =
+                "<span class='xvm_teff'>" +
+                "<font color='" + color + "'>" + (data.e < 10 ? data.e : "X") + "</font>" +
+                //" (<font color='" + color + "'>" + data.teff + "</font>)" +
+                "</span>";
+        }
     }
 
     // sorting
-    
+
     private function createButtons()
     {
         var hdr:MovieClip = null;
@@ -321,22 +346,22 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         if (hdr == null)
             return;
 
-        m_button1 = createButton(hdr, fld, "b1", 10, Locale.get("Level"), "left", 1, false);
-        m_button2 = createButton(hdr, fld, "b2", 124, Locale.get("Type"), "right", 1, false);
-        m_button3 = createButton(hdr, fld, "b3", 135, Locale.get("Nation"), "left", 2, false);
-        m_button4 = createButton(hdr, fld, "b4", 200, Locale.get("Name"), "left", 2, false);
-        m_button5 = createButton(hdr, fld, "b5", 295, "E", "right", 1, false);
+        m_button1 = createButton(hdr, fld, "bLvl", 10, Locale.get("Level"), "left", 1);
+        m_button2 = createButton(hdr, fld, "bTyp", 124, Locale.get("Type"), "right", 1);
+        m_button3 = createButton(hdr, fld, "bNat", 135, Locale.get("Nation"), "left", 2);
+        m_button4 = createButton(hdr, fld, "bNam", 200, Locale.get("Name"), "left", 2);
+        m_button5 = createButton(hdr, fld, "bEff", 305, "E", "right", 1);
         if (Config.s_config.rating.showPlayersStatistics != true)
         {
             m_button5.enabled = false;
             m_button5._alpha = 30;
         }
-        m_button6 = createButton(hdr, fld, "b6", 360, Locale.get("Battles"), "right", 1, true);
-        m_button7 = createButton(hdr, fld, "b7", 430, Locale.get("Wins"), "right", 1, false);
-        m_button8 = createButton(hdr, fld, "b8", 440, "M", "left", 1, false);
+        m_button6 = createButton(hdr, fld, "bBat", 365, Locale.get("Fights"), "right", 1);
+        m_button7 = createButton(hdr, fld, "bWin", 435, Locale.get("Wins"), "right", 1);
+        m_button8 = createButton(hdr, fld, "bMed", 440, "M", "left", 1);
     }
 
-    private function createButton(hdr:MovieClip, fld, name, x, txt, align, defaultSort, active):MovieClip
+    private function createButton(hdr:MovieClip, fld, name, x, txt, align, defaultSort):MovieClip
     {
         var b:MovieClip = hdr.attachMovie("Button", name, hdr.getNextHighestDepth());
         b._x = x;
@@ -352,11 +377,12 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
 
         b.defaultSort = defaultSort;
         b.sortDir = 0;
-        if (active)
+        if (name == lastSort.name)
         {
-            b.sortDir = defaultSort;
+            b.sortDir = lastSort.dir[0];
             b.selected = true;
         }
+
         return b;
     }
     
@@ -385,16 +411,18 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
             : [ b.sortDir, 1, 1, 2, 2 ];
 
         sortList(sortType, sortDir);
+        lastSort.name = b._name;
 
         list.selectedIndex = 0;
     }
 
     function sortList(sortType, sortDir)
     {
+        lastSort.type = sortType.slice();
+        lastSort.dir = sortDir.slice();
         for (var i = 0; i < sortDir.length; ++i)
             sortDir[i] = (sortDir[i] == 1 ? Array.DESCENDING : 0) | Array.CASEINSENSITIVE | Array.NUMERIC;
         var data = list.dataProvider.slice();
-        //Logger.addObject(data, "data", 3);
         var first = data.shift();
         data.sortOn(sortType, sortDir);
         data.unshift(first);

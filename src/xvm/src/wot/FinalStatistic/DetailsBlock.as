@@ -72,7 +72,7 @@ class wot.FinalStatistic.DetailsBlock extends net.wargaming.hangar.FinalStatisti
             shotsTitle.htmlText = "<span class='xvm_shotsTitle'><font color='#C9C9B6'>" + Locale.get("Hit percent") + "</font></span>";
             shotsCount.htmlText = "<span class='xvm_shotsCount'><font color='#C9C9B6'>" + pdata.hits + " / " + pdata.shots + "</font></span>";
             shotsPercent.htmlText = "<span class='xvm_shotsPercent'><font color='#eeeeee'>" +
-                (pdata.shots > 0 ? Math.round(pdata.hits / pdata.shots * 100) : "0") + "%" + "</font></span>";
+                (pdata.shots > 0 ? Math.round(pdata.hits / pdata.shots * 100, 2) : "0") + "%" + "</font></span>";
             damageAssistedTitle.htmlText = "<span class='xvm_damageAssistedTitle'><font color='#C9C9B6'>" + Locale.get("Damage upon detecting") + "</font></span>";
             damageAssistedValue.htmlText = "<span class='xvm_damageAssistedValue'><font color='#408CCF'>" + dmgAss + "</font></span>";
             damageTitle.htmlText = "<span class='xvm_damageTitle'><font color='#C9C9B6'>" + Locale.get("Damage dealt") + "</font></span>";
