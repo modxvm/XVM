@@ -327,7 +327,10 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         m_button4 = createButton(hdr, fld, "b4", 200, Locale.get("Name"), "left", 2, false);
         m_button5 = createButton(hdr, fld, "b5", 295, "E", "right", 1, false);
         if (Config.s_config.rating.showPlayersStatistics != true)
-            m_button5._visible = false;
+        {
+            m_button5.enabled = false;
+            m_button5._alpha = 30;
+        }
         m_button6 = createButton(hdr, fld, "b6", 360, Locale.get("Battles"), "right", 1, true);
         m_button7 = createButton(hdr, fld, "b7", 430, Locale.get("Wins"), "right", 1, false);
         m_button8 = createButton(hdr, fld, "b8", 440, "M", "left", 1, false);
