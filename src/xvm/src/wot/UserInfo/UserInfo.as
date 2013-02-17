@@ -276,6 +276,7 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
     private function fixList()
     {
         var data = list.dataProvider;
+        //Logger.addObject(data, "", 3);
         for (var i = 0; i < data.length; ++i)
         {
             var vi2 = VehicleInfo.getInfo2(data[i].icon);
@@ -474,7 +475,18 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
             sortDir[i] = (sortDir[i] == 1 ? Array.DESCENDING : 0) | Array.CASEINSENSITIVE | Array.NUMERIC;
         var data = list.dataProvider.slice();
         var first = data.shift();
+        var isWins = Utils.indexOf(sortType, "wins") != -1;
+        if (isWins)
+        {
+            for (var i = 0; i < data.length; ++i)
+                data[i].wins = extractNumber(data[i].wins);
+        }
         data.sortOn(sortType, sortDir);
+        if (isWins)
+        {
+            for (var i = 0; i < data.length; ++i)
+                data[i].wins += "%";
+        }
         data.unshift(first);
         list.dataProvider = data;
     }
