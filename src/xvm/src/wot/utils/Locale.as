@@ -65,6 +65,12 @@ class wot.utils.Locale
     tr["Spotted"] = "Засвет";
     tr["Defence"] = "Защита";
     tr["Capture"] = "Захват";
+    tr["Level"] = "Уровень";
+    tr["Type"] = "Тип";
+    tr["Nation"] = "Нация";
+    tr["Name"] = "Имя";
+    tr["Battles"] = "Боёв";
+    tr["Wins"] = "Побед";
     
 //    tr["Using default settings."] = "Используются настройки по умолчанию.";
 //    tr["Error parsing config file."] = "Ошибка чтения конфигурации.";

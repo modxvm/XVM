@@ -174,7 +174,7 @@ class wot.utils.StatLoader
                     {
                         var stat = response.players[i];
                         var name = stat.name.toUpperCase();
-                        stat = StatLoader.CalculateStatValues(stat, name);
+                        stat = StatLoader.CalculateStatValues(stat);
                         if (!StatData.s_data[name])
                         {
                             StatLoader.s_players_count++;
@@ -216,7 +216,7 @@ class wot.utils.StatLoader
         requestCounter++;
     }
 
-    private static function CalculateStatValues(stat, name): Object
+    public static function CalculateStatValues(stat): Object
     {
         // rating (GWR)
         stat.r = stat.b > 0 ? Math.round(stat.w / stat.b * 100) : 0;
