@@ -98,6 +98,8 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         var battlesExtraId = 0;
         var xp = 0;
 
+        var data = (list.selectedIndex > 0) ? list.dataProvider[list.selectedIndex] : null;
+        
         for (var i = 0; i < arguments.length; ++i)
         {
             switch (arguments[i]) {
@@ -140,6 +142,11 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
                 
                 case "frags":
                     arguments[i + 2] = Sprintf.format("%.2f", extractNumber(arguments[i + 1]) / battles);
+                    if (data && data.avgF && data.topF)
+                    {
+                        arguments[i + 2] += " (" + Locale.get("mid") + ": " + Sprintf.format("%.2f", data.avgF) +
+                            ", " + Locale.get("top") + ": " + Sprintf.format("%.2f", data.topF) + ")";
+                    }
                     i += 2;
                     break;
         
@@ -151,6 +158,11 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
                 
                 case "damageDealt":
                     arguments[i + 2] = Math.round(extractNumber(arguments[i + 1]) / battles);
+                    if (data && data.avgD && data.topD)
+                    {
+                        arguments[i + 2] += " (" + Locale.get("mid") + ": " + data.avgD +
+                            ", " + Locale.get("top") + ": " + data.topD + ")";
+                    }
                     i += 2;
                     break;
                 
@@ -179,7 +191,9 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
             m_statisticsField2 = Utils.duplicateTextField(blocksArea.blockbattleeffect.itemdamageDealt, "statisticsField",
                 blocksArea.blockbattleeffect.itemdamageDealt.label, blocksArea.blockbattleeffect.itemdamageDealt.label._height, "left");
             m_statisticsField2._width += 100;
-            blocksArea.blockcommon.itembattlesCount.extra._width += 30;
+            blocksArea.blockcommon.itembattlesCount.extra._width += 45;
+            blocksArea.blockbattleeffect.itemfrags.extra._width += 45;
+            blocksArea.blockbattleeffect.itemdamageDealt.extra._width += 45;
         }
 
         setXVMStat();
@@ -198,14 +212,13 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         var twr = m_userData.twr || "--";
         var dt = m_userData.dt.split("T").join(" ").substr(0, 16);
         m_statisticsField1.htmlText = "<textformat leading='0'><span class='xvm_statisticsField'>" +
-            Locale.get("EFF") + ": <font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, xeff) + "'>" + xeff + "</font> " +
+            Locale.get("EFF") + ": <font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, xeff) + "'>" + (xeff < 100 ? xeff : "XX")  + "</font> " +
             "(<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff) + "'>" + eff + "</font>) " +
-            "WN6: <font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, xwn) + "'>" + xwn + "</font> " +
+            "WN6: <font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, xwn) + "'>" + (xwn < 100 ? xwn : "XX") + "</font> " +
             "(<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, wn) + "'>" + wn + "</font>) " +
             "TWR: <font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TWR, twr) + "'>" + twr + "%</font> " + 
             "  <font size='10'>" + Locale.get("updated") + ":</font> <font size='11' color='#cccccc'>" + dt + "</font>" +
             "</span></textformat>";
-        //Logger.addObject(list, "list", 2);
         if (list.selectedIndex == 0)
         {
             m_statisticsField2.htmlText = "<textformat leading='0'><span class='xvm_statisticsField'>" +
@@ -217,12 +230,18 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         }
         else
         {
-            m_statisticsField2.htmlText = "<textformat leading='0'><span class='xvm_statisticsField'>" +
-                //Locale.get("Avg level") + ": <font color='#ffc133'>" + Sprintf.format("%.1f", m_userData.lvl) + "</font> " +
-                //Locale.get("Spotted") + ": <font color='#ffc133'>" + Sprintf.format("%.2f", m_userData.spo / b) + "</font> " +
-                //Locale.get("Defence") + ": <font color='#ffc133'>" + Sprintf.format("%.2f", m_userData.def / b) + "</font> " +
-                //Locale.get("Capture") + ": <font color='#ffc133'>" + Sprintf.format("%.2f", m_userData.cap / b) + "</font> " +
-                "</span></textformat>";
+            var data = list.dataProvider[list.selectedIndex];
+            //Logger.addObject(data);
+            m_statisticsField2.htmlText = !data ? "" :
+                "<textformat leading='0'><span class='xvm_statisticsField'>" +
+                    Locale.get("Eff damage") + ": <font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, data.tdv) + "'>" + Sprintf.format("%.2f", data.tdv) + "</font> " +
+                    "(<font color='#ffc133'>" + Sprintf.format("%.2f", data.avgED) + "</font>" +
+                    "/<font color='#ffc133'>" + Sprintf.format("%.2f", data.topED) + "</font>) " +
+                    Locale.get("Spotted") + ": <font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, data.tsb) + "'>" + Sprintf.format("%.2f", data.tsb) + "</font> " +
+                    "(<font color='#ffc133'>" + Sprintf.format("%.2f", data.avgS) + "</font>" +
+                    "/<font color='#ffc133'>" + Sprintf.format("%.2f", data.topS) + "</font>) " +
+                    "TEFF: <font color='#ffc133'><font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, data.e) + "'>" + data.teff + "</font>" +
+                    "</span></textformat>";
         }
     }
 
@@ -240,7 +259,7 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
     
     private function fixList()
     {
-        var data = list.dataProvider.slice();
+        var data = list.dataProvider;
         for (var i = 0; i < data.length; ++i)
         {
             var vi2 = VehicleInfo.getInfo2(data[i].icon);
@@ -277,8 +296,25 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
                     };
                     stat = StatLoader.CalculateStatValues(stat);
                 }
+                data[i].tdb = stat.td / stat.tb || 0;
+                data[i].tfb = stat.tf / stat.tb || 0;
+                data[i].tsb = stat.ts / stat.tb || 0;
+                data[i].ts = stat.ts || 0;
                 data[i].e = stat.te || 0;
                 data[i].teff = stat.teff || 0;
+                var vi3 = VehicleInfo.getInfo3(VehicleInfo.getName3(data[i].icon));
+                if (vi3 != null)
+                {
+                    data[i].tdv = stat.td / stat.tb / vi3.hp;
+                    data[i].avgD = vi3.avgD;
+                    data[i].avgED = vi3.avgED;
+                    data[i].avgF = vi3.avgF;
+                    data[i].avgS = vi3.avgS;
+                    data[i].topD = vi3.topD;
+                    data[i].topED = vi3.topED;
+                    data[i].topF = vi3.topF;
+                    data[i].topS = vi3.topS;
+                }
             }
         }
 

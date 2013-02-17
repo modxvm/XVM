@@ -65,6 +65,9 @@ class wot.utils.Locale
     tr["Spotted"] = "Засвет";
     tr["Defence"] = "Защита";
     tr["Capture"] = "Захват";
+    tr["mid"] = "ср";
+    tr["top"] = "топ";
+    tr["Eff damage"] = "Эф. дамаг";
     tr["Level"] = "Уровень";
     tr["Type"] = "Тип";
     tr["Nation"] = "Нация";
