@@ -326,6 +326,8 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         m_button3 = createButton(hdr, fld, "b3", 135, Locale.get("Nation"), "left", 2, false);
         m_button4 = createButton(hdr, fld, "b4", 200, Locale.get("Name"), "left", 2, false);
         m_button5 = createButton(hdr, fld, "b5", 295, "E", "right", 1, false);
+        if (Config.s_config.rating.showPlayersStatistics != true)
+            m_button5._visible = false;
         m_button6 = createButton(hdr, fld, "b6", 360, Locale.get("Battles"), "right", 1, true);
         m_button7 = createButton(hdr, fld, "b7", 430, Locale.get("Wins"), "right", 1, false);
         m_button8 = createButton(hdr, fld, "b8", 440, "M", "left", 1, false);
@@ -400,7 +402,7 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
     {
         var b = e.target;
         if (b.selected)
-            b.textField.textColor = b.sortDir == 1 ? 0xFFC133 : 0x408CCF;
+            b.textField.textColor = b.sortDir == b.defaultSort ? 0xFFC133 : 0x408CCF;
         else {
             b.sortDir = 0;
             b.textField.textColor = 0xF2F1E1;

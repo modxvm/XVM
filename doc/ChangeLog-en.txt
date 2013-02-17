@@ -1,3 +1,6 @@
+XVM-3.4.0-test3:
+  * UserInfo mod (sorting, per-vehicle efficiency)
+
 XVM-3.4.0-test1:
   * adaptation to WoT 0.8.4.CT1
 
