@@ -65,49 +65,44 @@ class wot.BattleMain
         if (!Config.s_loaded || !width || !height)
             return;
         var cfg = Config.s_config.battle.elements;
+        //Logger.addObject(_root);
         for (var i in cfg)
         {
             if (_root[i] != null)
-                SetupElement(_root[i], Config.s_config.battle.elements[i], i);
+                SetupElement(_root[i], Config.s_config.battle.elements[i]);
             else
                 Logger.add("Warning: Visual Element not found: " + i);
         }
     }
 
     private static var colors:Array = [ 0xFFFFFF, 0xFF0000, 0xFFFF00, 0x00FF00, 0x00FFFF, 0xFF00FF ];
-    private static function SetupElement(mc:MovieClip, cfg, name)
+    private static function SetupElement(mc:MovieClip, cfg)
     {
         //Logger.addObject(cfg, name + " " + width + "x" + height, 2);
-        var v: Number;
 
-        v = getValue(cfg.x);
-        if (!isNaN(v))
-            mc._x = v;
-        v = getValue(cfg.y)
-        if (!isNaN(v))
-            mc._y = v;
-        v = getValue(cfg.w);
-        if (!isNaN(v))
-            mc._width = v;
-        v = getValue(cfg.h);
-        if (!isNaN(v))
-            mc._height = v;
-        v = getValue(cfg.a);
-        if (!isNaN(v))
-        {
-            mc._alpha = v / 100.0;
-            if (v <= 0)
-                mc._visible = false;
-        }
+        var ha = getValue(cfg.ha, 0);
+        var va = getValue(cfg.va, 0);
+        var x = getValue(cfg.x, mc._x, width);
+        var y = getValue(cfg.y, mc._y, height);
+        var w = getValue(cfg.w, mc._width, width);
+        var h = getValue(cfg.h, mc._height, height);
+        var a = getValue(cfg.a, mc._alpha, 100);
+
+        if (ha == 2)
+            x = width - x - w;
+        if (va == 2)
+            y = width - y - h;
+        
+        mc._x = x;
+        mc._y = y;
+        mc.height = h;
+        mc.width = w;
+        mc._alpha = a;
 
         if (cfg.debug == true)
         {
             with (mc)
             {
-                var x = mc._x;
-                var y = mc._y;
-                var w = mc._width;
-                var h = mc._height;
                 var c = colors[colors.length * Math.random()];
                 beginFill(0, 0);
                 lineStyle(1, c, 100);
@@ -121,17 +116,22 @@ class wot.BattleMain
                 t.setNewTextFormat(new TextFormat("Small Fonts", 8, c, false, false, false, null, null, "center"));
                 t.filters = [new flash.filters.DropShadowFilter(0, 0, 0, 100, 4, 4, 2, 3)];
                 t.multiline = true;
-                t.text = name + "\n" + mc._x + "x" + mc._y + "+" + mc._width + "," + mc._height;
-                Logger.add("Element: " + name + ":" + mc._x + "x" + mc._y + "+" + mc._width + "," + mc._height;);
+                t.text = mc._name + "\n" + mc._x + "x" + mc._y + "+" + mc._width + "," + mc._height;
+                Logger.add("Element: " + mc._name + ":" + mc._x + "x" + mc._y + "+" + mc._width + "," + mc._height + " a=" + a);
             }
         }
     }
 
-    private static function getValue(v):Number
+    private static function getValue(v:String, defaultValue:Number, range:Number):Number
     {
-        if (!isNaN(v))
-            return v;
-        return NaN;
+        if (v == null || v == "")
+            return defaultValue;
+        if (Utils.endsWith("%", v))
+        {
+            v = v.substring(0, v.length - 1);
+            return parseFloat(v) * range / 100 || defaultValue;
+        }
+        return parseInt(v) || defaultValue;
     }
 
     private static function ShowClock(format)

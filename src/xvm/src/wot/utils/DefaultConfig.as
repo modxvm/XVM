@@ -49,13 +49,11 @@ class wot.utils.DefaultConfig
                     //   -xxxx..xxxx
                     //   xx.xx%
                     // ha values can be:
-                    //   null - use default client value
                     //   1 - left
-                    //   2 - right
+                    //   2 - right (x = [width .. 0])
                     // va values can be:
-                    //   null - use default client value
                     //   1 - top
-                    //   2 - bottom
+                    //   2 - bottom (y = [height .. 0])
                     minimap:               { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
                     playerMessangersPanel: { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
                     leftPanel:             { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },

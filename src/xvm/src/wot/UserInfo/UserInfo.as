@@ -67,12 +67,10 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
 
         m_userData = event.data ? event.data[0] : null;
 
-        var dt = m_userData.dt.split("T").join(" ").substr(0, 10);
         if (!m_button1.disabled)
         {
-            m_button5.tooltipText =
-                Locale.get("UserInfoEHint") + "\n" +
-                Locale.get("Data was updated at") + ": <font color='#CCCCCC'>" + dt + "</font>";
+            var dt = m_userData.dt.split("T").join(" ").substr(0, 10);
+            m_button5.tooltipText = Locale.get("UserInfoEHint").split("%DATE%").join("<font color='#CCCCCC'>" + dt + "</font>");
         }
         
         fixList();

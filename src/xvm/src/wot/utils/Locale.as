@@ -28,7 +28,9 @@ class wot.utils.Locale
     tr["fire"] = "fire";
     tr["ramming"] = "ramming";
     tr["world_collision"] = "falling";
-    tr["UserInfoEHint"] = "Per-vehicle efficiency can be not actual.\nYou can see actual E value in the detailed vehicle info.";
+    tr["UserInfoEHint"] = "Per-vehicle efficiency.\n" +
+        "The value shown for the last data scan moment: %DATE%\n" +
+        "See actual E value for present moment in the detailed vehicle info.";
     
     // RU
     tr = _translations["RU"];
@@ -59,7 +61,9 @@ class wot.utils.Locale
     tr["Damage upon detecting"] = "Урон по разведданным";
     tr["Damage dealt"] = "Нанесенный урон";
 
-    tr["UserInfoEHint"] = "Данные по эффективности по танку могут быть устаревшими.\nАктуальную эффективность по танку можно посмотреть в детальной информации по танку.";
+    tr["UserInfoEHint"] = "Эффективность по танку.\n" +
+        "Значение указано на момент последнего обновления данных: %DATE%\n" +
+        "Актуальное значение на текущий момент - в детальной информации по технике.";
     tr["Data was updated at"] = "Данные были обновлены";
     tr[" to "] = " до ";
     tr["EFF"] = "РЭ";
