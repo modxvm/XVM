@@ -216,7 +216,7 @@ class wot.utils.StatLoader
         requestCounter++;
     }
 
-    public static function CalculateStatValues(stat): Object
+    public static function CalculateStatValues(stat, forceTeff): Object
     {
         // rating (GWR)
         stat.r = stat.b > 0 ? Math.round(stat.w / stat.b * 100) : 0;
@@ -253,7 +253,8 @@ class wot.utils.StatLoader
         stat.teff = null;
         // skip tb less then 10, because of WG bug:
         // http://www.koreanrandom.com/forum/topic/1643-/page-19#entry26189
-        if (stat.tb == null || stat.tl == null || stat.tb < 10 + stat.tl * 2)
+        // forceTeff used in UserInfo, there is not this bug there.
+        if (stat.tb == null || stat.tl == null || (forceTeff != true && stat.tb < 10 + stat.tl * 2))
             return stat;
 
         stat.tdb = stat.td == null || stat.td < 0 ? null : Math.round(stat.td / stat.tb);

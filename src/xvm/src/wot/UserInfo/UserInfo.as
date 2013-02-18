@@ -237,25 +237,43 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         {
             m_statisticsHeaderField.htmlText = "<span class='xvm_statisticsHeader'>" + Locale.get("player (average / top)") + "</span>";
             var data = list.dataProvider[list.selectedIndex];
-            //Logger.addObject(data);
             if (!data)
                 m_statisticsField2.htmlText = "";
             else
             {
+                //Logger.addObject(blocksArea, "blocksArea", 3);
+                //Logger.addObject(data);
+                var tb = extractNumber(blocksArea.blockcommon.itembattlesCount.value.text);
+                var tw = extractNumber(blocksArea.blockcommon.itemwins.value.text);
+                var td = extractNumber(blocksArea.blockbattleeffect.itemdamageDealt.value.text);
+                var tf = extractNumber(blocksArea.blockbattleeffect.itemfrags.value.text);
+                var vn = VehicleInfo.getVehicleName(data.icon);
+                vn = vn.slice(vn.indexOf("-") + 1).toUpperCase();
+                var stat = {
+                    tb: tb,
+                    tw: data.w,
+                    tl: data.level,
+                    vn: vn,
+                    td: td,
+                    tf: tf,
+                    ts: data.ts
+                };
+                stat = StatLoader.CalculateStatValues(stat, true);
+                //Logger.addObject(stat);
+
+                var effd = td / tb / data.hp || 0;
+                var e_color = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.te);
                 var s = "";
-                var d2 = extractNumber(blocksArea.blockbattleeffect.itemdamageDealt.value.text);
-                var b2 = extractNumber(blocksArea.blockcommon.itembattlesCount.value.text);
-                var effd = d2 / b2 / data.hp || 0;
+                s += "E: " + (!stat.teff ? "-" :
+                    "<font color='" + e_color + "'>" + stat.te + "</font> (<font color='" + e_color + "'>" + stat.teff + "</font>)") + "  ";
                 s += Locale.get("Eff damage") + ": " + (!effd ? "-" :
                     "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, effd) + "'>" + Sprintf.format("%.2f", effd) + "</font>") + " ";
                 s += "(<font color='#ffc133'>" + (data.avgED ? Sprintf.format("%.2f", data.avgED) : "-") + "</font>" +
-                    " / <font color='#ffc133'>" + (data.topED ? Sprintf.format("%.2f", data.topED) : "-") + "</font>)   ";
+                    " / <font color='#ffc133'>" + (data.topED ? Sprintf.format("%.2f", data.topED) : "-") + "</font>)  ";
                 s += Locale.get("Spotted") + ": " + (!data.tsb ? "-" :
                     "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, data.tsb) + "'>" + Sprintf.format("%.2f", data.tsb) + "</font>") + " ";
                 s += "(<font color='#ffc133'>" + (data.avgS ? Sprintf.format("%.2f", data.avgS) : "-") + "</font>" +
-                    " / <font color='#ffc133'>" + (data.topS ? Sprintf.format("%.2f", data.topS) : "-") + "</font>) ";
-                //s += "TEFF: " + (!data.teff ? "-" :
-                //    "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, data.e) + "'>" + data.teff + "</font>");
+                    " / <font color='#ffc133'>" + (data.topS ? Sprintf.format("%.2f", data.topS) : "-") + "</font>)  ";
                 m_statisticsField2.htmlText = "<span class='xvm_statisticsField'>" + s + "</span>";
             }
         }
