@@ -50,7 +50,12 @@ exports.processCommand = function(response, args) {
 
 var cmd_INFO = function(response, pl, args) {
     var region = args.shift();
-    var query = {$or:[{nm:pl},]};
+    // Handle Common Test
+    if (region && region.toUpperCase() == "CT") {
+        region = pl.substr(-2);
+        pl = pl.slice(0, pl.length-3);
+    }
+    var query = {$or:[{nm:pl}]};
     // search only by name if region present
     if (!region)
         query.$or.push({_id:isFinite(pl) ? parseInt(pl) : 0});
@@ -59,7 +64,6 @@ var cmd_INFO = function(response, pl, args) {
         try {
             if(error)
                 throw "[INFO]: MongoDB find error: " + error;
-            var region = args.shift();
             if (region)
                 data = utils.filterByRegion(data, region);
             response.end(JSON.stringify(data));

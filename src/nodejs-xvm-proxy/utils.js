@@ -160,10 +160,6 @@ exports.filterByRegion = function(data, region) {
         var d = data[i];
         var id = d._id;
         switch (region) {
-            case "CT":
-                // TODO: What to do with Common Test?
-                res.push(d);
-                break;
             case "RU":
                 if (id >= 2 && id <= 499999999)
                     res.push(d);
@@ -173,6 +169,7 @@ exports.filterByRegion = function(data, region) {
                     res.push(d);
                 break;
             case "US":
+            case "NA":
                 if (id >= 1000000000 && id <= 1499999999)
                     res.push(d);
                 break;
