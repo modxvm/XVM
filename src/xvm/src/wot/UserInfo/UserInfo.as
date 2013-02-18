@@ -66,6 +66,15 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         GlobalEventDispatcher.removeEventListener("userdata_loaded", this, onUserDataLoaded);
 
         m_userData = event.data ? event.data[0] : null;
+
+        var dt = m_userData.dt.split("T").join(" ").substr(0, 10);
+        if (!m_button1.disabled)
+        {
+            m_button5.tooltipText =
+                Locale.get("UserInfoEHint") + "\n" +
+                Locale.get("Data was updated at") + ": <font color='#CCCCCC'>" + dt + "</font>";
+        }
+        
         fixList();
         setXVMStat();
     }
@@ -213,14 +222,14 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         var xeff = Utils.XEFF(eff) || "--";
         var xwn = Utils.XWN(wn) || "--";
         var twr = m_userData.twr || "--";
-        var dt = m_userData.dt.split("T").join(" ").substr(0, 16);
+        var dt = m_userData.dt.split("T").join(" ").substr(0, 10);
         m_statisticsField1.htmlText = "<span class='xvm_statisticsField'>" +
             Locale.get("EFF") + ": <font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, xeff) + "'>" + (xeff < 100 ? xeff : "XX")  + "</font> " +
             "(<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff) + "'>" + eff + "</font>) " +
             "WN6: <font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, xwn) + "'>" + (xwn < 100 ? xwn : "XX") + "</font> " +
             "(<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, wn) + "'>" + wn + "</font>) " +
             "TWR: <font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TWR, twr) + "'>" + twr + "%</font> " + 
-            "  <font size='10'>" + Locale.get("updated") + ":</font> <font size='11' color='#cccccc'>" + dt + "</font>" +
+            "  <font size='11'>" + Locale.get("updated") + ":</font> <font size='12' color='#CCCCCC'>" + dt + "</font>" +
             "</span>";
 
         if (list.selectedIndex == 0)
@@ -265,7 +274,7 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
                 var e_color = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.te);
                 var s = "";
                 s += "E: " + (!stat.teff ? "-" :
-                    "<font color='" + e_color + "'>" + stat.te + "</font> (<font color='" + e_color + "'>" + stat.teff + "</font>)") + "  ";
+                    "<font color='" + e_color + "'>" + (stat.te < 10 ? stat.te : "X") + "</font> (<font color='" + e_color + "'>" + stat.teff + "</font>)") + "  ";
                 s += Locale.get("Eff damage") + ": " + (!effd ? "-" :
                     "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, effd) + "'>" + Sprintf.format("%.2f", effd) + "</font>") + " ";
                 s += "(<font color='#ffc133'>" + (data.avgED ? Sprintf.format("%.2f", data.avgED) : "-") + "</font>" +
@@ -437,6 +446,8 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         b._y = fld._y;
         b.addEventListener("click", this, "onSortClick");
         b.addEventListener("stateChange", this, "onButtonStateChangeClick");
+        b.addEventListener("rollOver", this, "onShowTooltip");
+        b.addEventListener("rollOut", this, "onHideTooltip");
         b.group = "sort";
         b.autoSize = true;
         b.label = txt;
@@ -460,13 +471,14 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         var b = e.target;
         b.selected = true;
         b.sortDir = !b.sortDir ? b.defaultSort : b.sortDir == 2 ? 1 : 2;
+        onHideTooltip(e);
         onButtonStateChangeClick(e);
 
         var sortType = b == m_button1 ? [ "level", "nation", "name" ]
             : b == m_button2 ? [ "type", "level", "name" ]
             : b == m_button3 ? [ "nation", "level", "type", "name" ]
             : b == m_button4 ? [ "name" ]
-            : b == m_button5 ? [ "e", "level", "type", "name" ]
+            : b == m_button5 ? [ "e", "fights" ]
             : b == m_button6 ? [ "fights" ]
             : b == m_button7 ? [ "wins" ]
             : [ "vehicleClass", "level", "type", "nation", "name" ];
@@ -474,7 +486,7 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
             : b == m_button2 ? [ b.sortDir, 1, 2 ]
             : b == m_button3 ? [ b.sortDir, 1, 1, 2 ]
             : b == m_button4 ? [ b.sortDir ]
-            : b == m_button5 ? [ b.sortDir, 1, 1, 2 ]
+            : b == m_button5 ? [ b.sortDir, b.sortDir ]
             : b == m_button6 ? [ b.sortDir ]
             : b == m_button7 ? [ b.sortDir ]
             : [ b.sortDir, 1, 1, 2, 2 ];
@@ -518,5 +530,17 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
             b.sortDir = 0;
             b.textField.textColor = 0xF2F1E1;
         }
+    }
+
+    private function onShowTooltip(e)
+    {
+        var b = e.target;
+        if (b.tooltipText)
+            net.wargaming.managers.ToolTipManager.instance.show(b.tooltipText);
+    }
+    
+    private function onHideTooltip(e)
+    {
+        net.wargaming.managers.ToolTipManager.instance.hide();
     }
 }
