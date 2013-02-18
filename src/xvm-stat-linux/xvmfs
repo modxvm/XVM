@@ -1,4 +1,5 @@
 #!/usr/bin/env python2
+# -*- coding: utf-8 -*-
 
 """ This is XVM FUSE driver implementation with additional features
     required for XVM mod.
@@ -24,9 +25,9 @@ from xml.dom import minidom
 """
 
 # Based on XVM 3.1.2, SVN rev. 1104
-# Last change of xvm-stat: SVN rev. 1315
+# Last change of xvm-stat: SVN rev. 1409
 
-XVMFS_VERSION = '0.2.1'
+XVMFS_VERSION = '0.2.2'
 fuse.fuse_python_api = (0, 2)
 
 # Logging configuration.
@@ -102,6 +103,7 @@ class XvmFS(Fuse):
         self.wot_cfg = DEFAULT_WOT_CFG
         self.game_dir = WINE_GAME_DIR
         self.cache = {}
+        self.infocache = {}
         self.modInfo = None
         self.debug = False
         self.log_dir = LOG_DIR
@@ -167,7 +169,6 @@ class XvmFS(Fuse):
         elif path[:2] == BEGIN_CMD:
             data = self.result
         else:
-
             return -errno.ENOENT
 
         if data is None:
@@ -270,6 +271,10 @@ class XvmFS(Fuse):
                         for (key, value) in self.vars.items()]
 
                 self.result = '\n'.join(result)
+
+            elif command == '@INFO':
+                """ this will start network operations in main thread """
+                self.result = self.GetInfo(parameters)
 
             else:
                 Log.info('Unknown command: ' + command)
@@ -620,6 +625,39 @@ class XvmFS(Fuse):
         except Exception, ex:
             Log.error('PrepareStat exception: ' + str(ex))
             Log.debug("\n" + traceback.format_exc(ex))
+
+    def GetInfo(self, req):
+        if self.proxies is None or len(self.proxies) <= 0:
+            Log.warning('Unable to query user info: no proxy found.')
+            return ''
+
+        try:
+            s = req.decode('hex')
+        except:
+            Log.error("Error decoding @INFO string: " + req)
+            Log.debug(traceback.format_exc())
+            return ''
+
+        key = "@INFO," + s
+        if self.infocache.has_key(key):
+            return self.infocache[key]
+
+        request = "0,INFO," + s.replace('?', '%3F')
+        proxy = self.proxies[randint(0, len(self.proxies) - 1)]
+
+        try:
+            response, duration = self.loadUrl(proxy, request)
+        except:
+            Log.warning('User info query failed.')
+            Log.debug(traceback.format_exc())
+            return ''
+
+        if len(response) <= 0:
+            Log.warning('Empty response or parsing error')
+            return ''
+
+        self.infocache[key] = response
+        return response
 
     """ Log processing
     """
