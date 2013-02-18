@@ -215,29 +215,43 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
             return;
 
         var b = m_userData.b;
-        var eff = m_userData.e || "----";
-        var wn = m_userData.wn || "----";
-        var xeff = Utils.XEFF(eff) || "--";
-        var xwn = Utils.XWN(wn) || "--";
-        var twr = m_userData.twr || "--";
-        var dt = m_userData.dt.split("T").join(" ").substr(0, 10);
-        m_statisticsField1.htmlText = "<span class='xvm_statisticsField'>" +
-            Locale.get("EFF") + ": <font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, xeff) + "'>" + (xeff < 100 ? xeff : "XX")  + "</font> " +
-            "(<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff) + "'>" + eff + "</font>) " +
-            "WN6: <font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, xwn) + "'>" + (xwn < 100 ? xwn : "XX") + "</font> " +
-            "(<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, wn) + "'>" + wn + "</font>) " +
-            "TWR: <font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TWR, twr) + "'>" + twr + "%</font> " + 
-            "  <font size='11'>" + Locale.get("updated") + ":</font> <font size='12' color='#CCCCCC'>" + dt + "</font>" +
-            "</span>";
+        var eff = m_userData.e;
+        var wn = m_userData.wn;
+        var xeff = Utils.XEFF(eff);
+        var xwn = Utils.XWN(wn);
+        var twr = m_userData.twr;
+        var dt = m_userData.dt ? m_userData.dt.split("T").join(" ").substr(0, 10) : Locale.get("unknown");
+
+        var s = "";
+        s += Locale.get("EFF") + ": " + (!eff ? "--" :
+            "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, xeff) + "'>" + (xeff == 100 ? "XX" : (xeff < 10 ? "0" : "") + xeff) + "</font>") + " ";
+        s += "(" + (!eff ? "-" :
+            "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff) + "'>" + eff + "</font>") + ") ";
+        s += "WN6: " + (!wn ? "--" :
+            "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, xwn) + "'>" + (xwn == 100 ? "XX" : (xwn < 10 ? "0" : "") + xwn) + "</font>") + " ";
+        s += "(" + (!wn ? "-" :
+            "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, wn) + "'>" + wn + "</font>") + ") ";
+        s += "TWR: " + (!twr ? "-" :
+            "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TWR, twr) + "'>" + twr + "%</font>") + " ";
+        s += "  <font size='11'>" + Locale.get("updated") + ":</font> <font size='12' color='#CCCCCC'>" + dt + "</font>";
+
+        m_statisticsField1.htmlText = "<span class='xvm_statisticsField'>" + s + "</span>";
 
         if (list.selectedIndex == 0)
         {
             m_statisticsHeaderField.htmlText = "";
+            var spo = m_userData.spo / b;
+            var def = m_userData.def / b;
+            var cap = m_userData.cap / b;
             m_statisticsField2.htmlText = "<span class='xvm_statisticsField'>" +
-                Locale.get("Avg level") + ": <font color='#ffc133'>" + Sprintf.format("%.1f", m_userData.lvl) + "</font> " +
-                Locale.get("Spotted") + ": <font color='#ffc133'>" + Sprintf.format("%.2f", m_userData.spo / b) + "</font> " +
-                Locale.get("Defence") + ": <font color='#ffc133'>" + Sprintf.format("%.2f", m_userData.def / b) + "</font> " +
-                Locale.get("Capture") + ": <font color='#ffc133'>" + Sprintf.format("%.2f", m_userData.cap / b) + "</font> " +
+                Locale.get("Avg level") + ": <font color='#ffc133'>" +
+                    (m_userData.lvl ? Sprintf.format("%.1f", m_userData.lvl) : "-") + "</font> " +
+                Locale.get("Spotted") + ": <font color='#ffc133'>" +
+                    (spo ? Sprintf.format("%.2f", spo) : "-") + "</font> " +
+                Locale.get("Defence") + ": <font color='#ffc133'>" +
+                    (def ? Sprintf.format("%.2f", def) : "-") + "</font> " +
+                Locale.get("Capture") + ": <font color='#ffc133'>" +
+                    (cap ? Sprintf.format("%.2f", cap) : "-") + "</font> " +
                 "</span>";
         }
         else
@@ -270,18 +284,18 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
 
                 var effd = td / tb / data.hp || 0;
                 var e_color = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.te);
-                var s = "";
-                s += "E: " + (!stat.teff ? "-" :
+                var s2 = "";
+                s2 += "E: " + (!stat.teff ? "-" :
                     "<font color='" + e_color + "'>" + (stat.te < 10 ? stat.te : "X") + "</font> (<font color='" + e_color + "'>" + stat.teff + "</font>)") + "  ";
-                s += Locale.get("Eff damage") + ": " + (!effd ? "-" :
+                s2 += Locale.get("Eff damage") + ": " + (!effd ? "-" :
                     "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, effd) + "'>" + Sprintf.format("%.2f", effd) + "</font>") + " ";
-                s += "(<font color='#ffc133'>" + (data.avgED ? Sprintf.format("%.2f", data.avgED) : "-") + "</font>" +
+                s2 += "(<font color='#ffc133'>" + (data.avgED ? Sprintf.format("%.2f", data.avgED) : "-") + "</font>" +
                     " / <font color='#ffc133'>" + (data.topED ? Sprintf.format("%.2f", data.topED) : "-") + "</font>)  ";
-                s += Locale.get("Spotted") + ": " + (!data.tsb ? "-" :
+                s2 += Locale.get("Spotted") + ": " + (!data.tsb ? "-" :
                     "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, data.tsb) + "'>" + Sprintf.format("%.2f", data.tsb) + "</font>") + " ";
-                s += "(<font color='#ffc133'>" + (data.avgS ? Sprintf.format("%.2f", data.avgS) : "-") + "</font>" +
+                s2 += "(<font color='#ffc133'>" + (data.avgS ? Sprintf.format("%.2f", data.avgS) : "-") + "</font>" +
                     " / <font color='#ffc133'>" + (data.topS ? Sprintf.format("%.2f", data.topS) : "-") + "</font>)  ";
-                m_statisticsField2.htmlText = "<span class='xvm_statisticsField'>" + s + "</span>";
+                m_statisticsField2.htmlText = "<span class='xvm_statisticsField'>" + s2 + "</span>";
             }
         }
     }
