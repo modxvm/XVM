@@ -49,27 +49,19 @@ exports.processCommand = function(response, args) {
 // PRIVATE
 
 var cmd_INFO = function(response, pl, args) {
-    var cursor = db.find("players", {$or:[{nm:pl},{_id:parseInt(pl)}]});
+    var region = args.shift();
+    var query = {$or:[{nm:pl},]};
+    // search only by name if region present
+    if (!region)
+        query.$or.push({_id:isFinite(pl) ? parseInt(pl) : 0});
+    var cursor = db.find("players", query);
     cursor.toArray(function(error, data) {
         try {
             if(error)
                 throw "[INFO]: MongoDB find error: " + error;
-            var vn = args.shift();
-//            utils.log(pl + "," + vn);
-            if (vn) {
-                vn = vn.toUpperCase();
-                for (var id in data) {
-                    var d = data[id];
-                    for (var vname in d.v) {
-                        if (vname == vn) {
-                            var v = d.v[vname];
-                            v.name = vname;
-                            d.v = [ v ];
-                            break;
-                        }
-                    }
-                }
-            }
+            var region = args.shift();
+            if (region)
+                data = utils.filterByRegion(data, region);
             response.end(JSON.stringify(data));
         } catch(e) {
             response.end('{"error":"' + e + '","server":"' + settings.serverName + '"}');
@@ -78,7 +70,7 @@ var cmd_INFO = function(response, pl, args) {
 };
 
 var cmd_EFF = function(response, pl, args) {
-    var cursor = db.find("players", {$or:[{nm:pl},{_id:parseInt(pl)}]});
+    var cursor = db.find("players", {$or:[{nm:pl},{_id:isFinite(pl) ? parseInt(pl) : 0}]});
     cursor.toArray(function(error, data) {
         try {
             if(error)
@@ -86,6 +78,9 @@ var cmd_EFF = function(response, pl, args) {
             else if (data.length == 0)
                 response.end('[EFF]: Player not found: ' + pl);
             else {
+                var region = args.shift();
+                if (region)
+                    data = utils.filterByRegion(data, region);
                 var s = "";
                 for (var i = 0; i < data.length; ++i) {
                     var start = new Date();
@@ -127,7 +122,7 @@ var cmd_EFF = function(response, pl, args) {
 };
 
 var cmd_TWR = function(response, pl, args) {
-    var cursor = db.find("players", {nm: pl});
+    var cursor = db.find("players", {$or:[{nm:pl},{_id:isFinite(pl) ? parseInt(pl) : 0}]});
     cursor.toArray(function(error, data) {
         try {
             if(error)
@@ -135,6 +130,9 @@ var cmd_TWR = function(response, pl, args) {
             else if (data.length == 0)
                 response.end('[TWR]: Player not found: ' + pl);
             else {
+                var region = args.shift();
+                if (region)
+                    data = utils.filterByRegion(data, region);
                 var s = "";
                 for (var i = 0; i < data.length; ++i)
                     s += "<pre>" + tcalc.calc(data[i], true).log + "</pre><hr>";

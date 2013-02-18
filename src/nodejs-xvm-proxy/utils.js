@@ -1,8 +1,7 @@
 // calculate average level of tanks
 var calculateAvgLvl = exports.calculateAvgLevel = function(vehicles) {
-    var level_battles = 0,
-        total_battles = 0;
-
+    var level_battles = 0
+    var total_battles = 0;
     for (var vname in vehicles) {
         var item = vehicles[vname];
         level_battles += item.l * item.b;
@@ -40,14 +39,6 @@ exports.calculateEfficiency = function(data) {
         return res;
 };
 
-// normalized EFF
-// MAX(MIN(6,17*10^(-9)*eff^3 - 1,975*10^(-5)*eff^2 + 0,08125*eff - 31,04 ; 100) ; 0)
-exports.calculateNEFF = function(value) {
-    var res = Math.round(Math.max(0, Math.min(100,
-        0.00000000617*Math.pow(value, 3) - 0.00001975*Math.pow(value, 2) + 0.08125*value - 31.04)));
-    return res == 100 ? "XX" : (res < 10 ? "0" : "") + res;
-};
-
 // WN rating
 // Current: WN6
 // http://forum.worldoftanks.com/index.php?/topic/184017-/page__st__1080__pid__3542824#entry3542824
@@ -79,11 +70,19 @@ exports.calculateWN = function(data) {
         (6 - TIER_N) * -60)) || 0;
 };
 
+// normalized EFF
+// MAX(MIN(-2,523*10^(-9)*eff^3 + 3,351*10^(-6)*eff^2 + 0,07331*eff - 31,57; 100); 0)
+exports.calculateNEFF = function(value) {
+    var res = Math.round(Math.max(0, Math.min(100,
+        -0.000000002523*Math.pow(value, 3) + 0.000003351*Math.pow(value, 2) + 0.07331*value - 31.57)));
+    return res == 100 ? "XX" : (res < 10 ? "0" : "") + res;
+};
+
 // normalized WN6
-// MAX(MIN(4,116*10^(-9)*wn6^3 - 8,189*10^(-6)*wn6^2 + 0,048*WN6-3,146 ; 100) ; 0)
+// MAX(MIN(1,984*10^(-9)*wn6^3 - 1,91*10^(-6)*wn6^2 + 0,04803*wn6 - 4,638; 100); 0)
 exports.calculateNWN = function(value) {
     var res = Math.round(Math.max(0, Math.min(100,
-        0.000000004116*Math.pow(value, 3) - 0.000008189 * Math.pow(value, 2) + 0.048*value - 3.146)));
+        0.000000001984*Math.pow(value, 3) - 0.00000191*Math.pow(value, 2) + 0.04803*value - 4.638)));
     return res == 100 ? "XX" : (res < 10 ? "0" : "") + res;
 };
 
@@ -150,4 +149,46 @@ exports.filterVehicleData = function(item, vname) {
         }
     }
     return null;
+};
+
+exports.filterByRegion = function(data, region) {
+    if (!region)
+        return data;
+    region = region.toUpperCase();
+    var res = [];
+    for (var i in data) {
+        var d = data[i];
+        var id = d._id;
+        switch (region) {
+            case "CT":
+                // TODO: What to do with Common Test?
+                res.push(d);
+                break;
+            case "RU":
+                if (id >= 2 && id <= 499999999)
+                    res.push(d);
+                break;
+            case "EU":
+                if (id >= 500000000 && id <= 999999999)
+                    res.push(d);
+                break;
+            case "US":
+                if (id >= 1000000000 && id <= 1499999999)
+                    res.push(d);
+                break;
+            case "SEA":
+                if (id >= 2000000000 && id <= 2499999999)
+                    res.push(d);
+                break;
+            case "VTC":
+                if (id >= 2500000000 && id <= 2999999999)
+                    res.push(d);
+                break;
+            case "KR":
+                if (id >= 3000000000 && id <= 3499999999)
+                    res.push(d);
+                break;
+        }
+    }
+    return res;
 };
