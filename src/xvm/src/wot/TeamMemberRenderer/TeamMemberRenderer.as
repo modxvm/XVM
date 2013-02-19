@@ -34,6 +34,15 @@ class wot.TeamMemberRenderer.TeamMemberRenderer extends net.wargaming.messenger.
     // override
     function configUI()
     {
+        var wnd = this["owner"]._parent;
+        if (wnd)
+        {
+            if (wnd.crewStuffField && !wnd.crewStuffFieldXVM)
+                wnd.crewStuffFieldXVM = createXVMHeaderLabel(wnd, "crewStuffField", vehicleLevelField);
+            if (wnd.queueLabel && !wnd.queueLabelXVM)
+                wnd.queueLabelXVM = createXVMHeaderLabel(wnd, "queueLabel", vehicleLevelField);
+        }
+
         textField._x -= 10;
         vehicle_type_icon._x -= 10;
         vehicleNameField._x -= 10;
@@ -43,6 +52,30 @@ class wot.TeamMemberRenderer.TeamMemberRenderer extends net.wargaming.messenger.
 
         m_effField = Utils.duplicateTextField(this, "eff", vehicleLevelField, 0, "center");
         m_effField._x += 20;
+    }
+
+    function createXVMHeaderLabel(wnd:MovieClip, name, fld)
+    {
+        var res = Utils.duplicateTextField(wnd, name + "XVM", fld, 0, "left");
+        res._x = wnd[name]._x + 187;
+        res._y = wnd[name]._y + 2;
+        res.htmlText = "<span class='xvm_" + name + "XVM'><font color='#" +
+            wnd[name].textColor.toString(16) + "'>xwn</font></span>";
+
+        var b = wnd.attachMovie("Button", name + "XVMHolder", wnd.getNextHighestDepth());
+        b._x = res._x - 5;
+        b._y = res._y;
+        b.setSize(30, 20);
+        b._alpha = 0;
+        b.addEventListener("rollOver", function() {
+            net.wargaming.managers.ToolTipManager.instance.show("Рейтинг xwn.\n" +
+                "Чтобы увидеть более подробную информацию, наведите курсор мыши на значение рейтинга интересующего игрока.");
+        });
+        b.addEventListener("rollOut", function() {
+            net.wargaming.managers.ToolTipManager.instance.hide();
+        });
+
+        return res;
     }
 
     // override
