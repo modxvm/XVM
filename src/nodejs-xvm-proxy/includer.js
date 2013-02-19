@@ -1,18 +1,4 @@
-module.exports = /*{
-    http: require("http"),
-    async: require("async"),
-    utils: require("./utils"),
-    settings: require("./settings").settings,
-    status: require("./worker_status"),
-    db: require("./worker_db"),
-    req: require("./worker_req"),
-    tcalc: require("./tcalc/tcalc"),
-    tcalcBase: require("./tcalc/tcalc_base")
-};*/
-
-
-
-(function() {
+module.exports = (function() {
     var http;
     this.http = function() {
         if(!http) {
@@ -22,6 +8,17 @@ module.exports = /*{
     };
     this.setHttp = function(newHttp) {
         http = newHttp;
+    };
+
+    var mongo;
+    this.mongo = function() {
+        if(!mongo) {
+            mongo = require("mongodb");
+        }
+        return mongo;
+    };
+    this.setMongo = function(newMongo) {
+        mongo = newMongo;
     };
 
     var async;

@@ -26,12 +26,16 @@ module.exports = (function() {
 
         callback(res);
 
-        callbacks.data(fs.readFileSync("./test/mock_responses/" + currentWgResponse, "utf8"));
+        callbacks.data(fs.readFileSync("./test/mock_responses/" + _getPlayerId(options) + ".json", "utf8"));
         callbacks.end();
 
         return {
             on: function() { }
         }
+    };
+
+    var _getPlayerId = function(httpOptions) {
+        return httpOptions.path.split("/")[3];
     };
 
     return {

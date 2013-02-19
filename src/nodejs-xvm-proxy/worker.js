@@ -9,7 +9,7 @@ module.exports = (function() {
         db = includer.db(),
         tcalc_base = includer.tcalcBase();
 
-    var createWorker = function(fakeMongo, fakeHttp) {
+    var createWorker = function() {
         //handler for messages from master thread
         process.on("message", function(msg) {
             if(msg.info)
@@ -20,7 +20,7 @@ module.exports = (function() {
 
         // initialize submodules
         status.initialize();
-        db.initialize(_createHttpServer, fakeMongo);
+        db.initialize(_createHttpServer);
     };
 
     var _createHttpServer = function() {

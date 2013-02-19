@@ -26,7 +26,13 @@ module.exports = (function(undefined) {
 
     var Collection = function(client, collectionName) {
         return {
-            find: function() {
+            find: function(query) {
+                if(query && query.$or) {
+                    var playerId = query.$or[1]._id;
+
+                    setMongoResult("mongo_" + playerId + ".json");
+                }
+
                 return cursor;
             },
             update: function(key, item, options) {
@@ -57,6 +63,9 @@ module.exports = (function(undefined) {
             return lastUpdateRequest;
         },
         setMongoResult: setMongoResult,
+        resetMongoResult: function() {
+            currentMongoResult = undefined;
+        },
         toString: function() {
             return "fakeMongo";
         }
