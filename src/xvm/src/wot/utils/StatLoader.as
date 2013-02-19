@@ -343,9 +343,9 @@ class wot.utils.StatLoader
         var timer = _global.setTimeout(function() { StatLoader.StartLoadData(Defines.COMMAND_RUN_ASYNC); }, 50);
     }
 
-    public static function LoadUserData(nick)
+    public static function LoadUserData(value, isId)
     {
-        var a:Array = (nick + "," + Config.s_game_region).split("");
+        var a:Array = (String(value) + "," + (isId == true ? "ID" : Config.s_game_region)).split("");
         var s:String = "";
         var a_length:Number = a.length;
         for (var i = 0; i < a_length; ++i)

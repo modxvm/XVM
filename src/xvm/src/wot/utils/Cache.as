@@ -2,9 +2,14 @@ class wot.utils.Cache
 {
     private static var s_cache = {};
 
+    public static function Exist(key:String)
+    {
+        return key && s_cache[key] != undefined;
+    }
+    
     public static function Get(key:String, populateFunc:Function)
     {
-        if (!key || !s_cache.hasOwnProperty(key))
+        if (!Exist(key))
         {
             if (!populateFunc)
                 return null;
@@ -25,5 +30,4 @@ class wot.utils.Cache
     {
         delete s_cache[key];
     }
-
 }

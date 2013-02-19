@@ -1,0 +1,22 @@
+--- orig\TeamMemberRenderer.xml	2013-02-18 23:38:54.077632700 +0200
++++ TeamMemberRenderer.xml	2013-02-18 23:38:54.332647200 +0200
+@@ -38939,8 +38939,8 @@
+               <String value="charAt"/>
+               <String value=" "/>
+               <String value="\"/>
+-              <String value=""/>
+-              <String value=""/>
++              <String value=" "/>
++              <String value=" "/>
+               <String value="&#10;"/>
+               <String value="&#13;"/>
+               <String value="&#9;"/>
+@@ -47792,7 +47792,7 @@
+         <actions>
+           <PushData>
+             <items>
+-              <StackString value="net.wargaming.messenger.controls.TeamMemberRenderer"/>
++              <StackString value="wot.TeamMemberRenderer.TeamMemberRenderer"/>
+             </items>
+           </PushData>
+           <GetVariable/>

@@ -24,6 +24,11 @@ class wot.utils.GlobalEventDispatcher
     return -1;
   }
 
+  public static function getEventListenersCount(event)
+  {
+    return _listeners[event] ? _listeners[event].length : 0;
+  }
+
   public static function addEventListener(event, scope, callBack)
   {
     if (!_listeners[event])

@@ -1,3 +1,6 @@
+XVM-3.4.0-test5:
+  * TeamMemberRenderer mod
+
 XVM-3.4.0-test4:
   * UserInfo mod (sorting, per-vehicle efficiency)
 
@@ -20,6 +23,7 @@ XVM-3.4.0-test1:
   [NEW FUNCTIONS]
   * minimap mod
   * UserInfo mod (with functions from morotopitek's mod)
+  * TeamMemberRenderer mod
   * FinalStatistic mod (with functions from morotopitek's mod).
   * new experimental win chance formula by TurinDeNar:
       http://www.koreanrandom.com/forum/topic/2598-/

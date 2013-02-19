@@ -12,6 +12,7 @@ FILES="
   PlayersPanel.swf
   StatisticForm.swf
   TeamBasesPanel.swf
+  TeamMemberRenderer.swf
   UserInfo.swf
   VehicleMarkersManager.swf
   XVM.xvmconf XVM.css OTMData.xml"
