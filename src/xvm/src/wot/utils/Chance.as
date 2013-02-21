@@ -155,7 +155,7 @@ class wot.utils.Chance
         var Tmax = vi1.tiers[1];
         var T = battleTier;
         var Ea = stat.xwn == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn;
-		var Ean = Ea + (Ea * (((stat.avglvl || T) - T) * 0.05));
+        var Ean = Ea + (Ea * (((stat.avglvl || T) - T) * 0.05));
         var Ra = stat.r || Config.s_config.consts.AVG_GWR;
         var Ba = stat.b || Config.s_config.consts.AVG_BATTLES;
 
@@ -163,16 +163,17 @@ class wot.utils.Chance
         var Klvl = (Tmax + Tmin) / 2 - T;
 
         // 3
-        var Kab = (Ba <= 1000) ? 0                              //   0..1k  => 0
-            : (Ba <= 10000) ? (Ba - 1000) / 10000               //  1k..10k => 0..0.9
-            : (Ba <= 20000) ? 0.9 + (Ba - 10000) / 50000        // 10k..20k => 0.9..1.1
-            : 1.1 + (Ba - 20000) / 100000                       // 20k..    => 1.1..
+        var Kab = (Ba <= 500) ? 0                          //   0..0.5k  => 0
+            : (Ba <= 5000) ? (Ba - 500) / 10000            //  1k..5k => 0..0.45
+            : (Ba <= 10000) ? 0.45 + (Ba - 5000) / 20000   //  5k..10k => 0.45..0.7
+            : (Ba <= 20000) ? 0.7 + (Ba - 10000) / 40000   // 10k..20k => 0.7..0.95
+            : 0.95 + (Ba - 20000) / 80000                  // 20k..    => 0.95..
 
-		// 4
-		var Kra = (100 + Ra - 48.5) / 100;
+        // 4
+        var Kra = (100 + Ra - 48.5) / 100;
 
         // 5
-        var Eb = ((Ea * Kra) * (Kra + Kab)) * (Kra + 0.25 * Klvl);
+        var Eb = ((Ean * Kra) * (Kra + Kab)) * (Kra + 0.25 * Klvl);
 
         return Eb;
     }
@@ -198,39 +199,28 @@ class wot.utils.Chance
         var Klvl = (Tmax + Tmin) / 2 - T;
 
         // 2
-        var Ktb = (Bt <= 100) ? 0                               //    0..100  => 0
-            : (Bt <= 500) ? (Bt - 100) / 500                    //  101..500  => 0..0.8
-            : (Bt <= 1000) ? 0.8 + (Bt - 500) / 2000            //  501..1000 => 0.8..1.05
-            : (Bt <= 2000) ? 1.05 + (Bt - 1000) / 4000          // 1001..2000 => 1.05..1.3
-            : 1.3 + (Bt - 2000) / 8000;                         // 2000..     => 1.3..
+        var Ktb = (Bt <= 100) ? 0                          //    0..100  => 0
+            : (Bt <= 500) ? (Bt - 100) / 500               //  101..500  => 0..0.8
+            : (Bt <= 1000) ? 0.8 + (Bt - 500) / 2000       //  501..1000 => 0.8..1.05
+            : (Bt <= 2000) ? 1.05 + (Bt - 1000) / 4000     // 1001..2000 => 1.05..1.3
+            : 1.3 + (Bt - 2000) / 8000;                    // 2000..     => 1.3..
 
         // 3
-        var Kab = (Ba <= 1000) ? 0                              //   0..1k  => 0
-            : (Ba <= 10000) ? (Ba - 1000) / 10000               //  1k..10k => 0..0.9
-            : (Ba <= 20000) ? 0.9 + (Ba - 10000) / 50000        // 10k..20k => 0.9..1.1
-            : 1.1 + (Ba - 20000) / 100000                       // 20k..    => 1.1..
+        var Kab = (Ba <= 500) ? 0                          //   0..0.5k  => 0
+            : (Ba <= 5000) ? (Ba - 500) / 10000            //  1k..5k => 0..0.45
+            : (Ba <= 10000) ? 0.45 + (Ba - 5000) / 20000   //  5k..10k => 0.45..0.7
+            : (Ba <= 20000) ? 0.7 + (Ba - 10000) / 40000   // 10k..20k => 0.7..0.95
+            : 0.95 + (Ba - 20000) / 80000                  // 20k..    => 0.95..
 
-		// 4
-		var Krt = (100 + Rt - AvgW) / 100;
-		var Kra = (100 + Ra - 48.5) / 100;
+        // 4
+        var Krt = (100 + Rt - AvgW) / 100;
+        var Kra = (100 + Ra - 48.5) / 100;
 
         // 5
         var Eb = (Et > 0)
-			? (((3 / 5 * Et * Krt) * (Krt + Ktb)) +
-                ((2 / 5 * Ea * Kra) * (Kra + Kab))) * (Kra + 0.25 * Klvl)
-            : ((Ea * Kra) * (Kra + Kab)) * (Kra + 0.25 * Klvl);
-
-/*        if (DEBUG_EXP)
-        {
-            Logger.add("team=" + team +
-                " l=" + Utils.padLeft(String(vi2.level), 2) + " " + Utils.padLeft(vi2.type, 3) +
-                " r=" + Utils.padLeft(String(Math.round(r * 10) / 10), 4) +
-                " R=" + Utils.padLeft(String(Math.round(R * 10) / 10), 4) +
-                " b=" + Utils.padLeft(String(Math.round(stat.b / 100) / 10), 4) +
-                " B=" + Utils.padLeft(String(Math.round(Bn * 100) / 100), 5) +
-                " Td=" + Utils.padLeft(String(Td), 4) +
-                " K=" + String(Math.round(K * 10) / 10));
-        }*/
+            ? (((3 / 5 * (Et / 20) * Krt) * (Krt + Ktb)) +
+                ((2 / 5 * Ean * Kra) * (Kra + Kab))) * (Kra + 0.25 * Klvl)
+            : ((Ean * Kra) * (Kra + Kab)) * (Kra + 0.25 * Klvl);
 
         return Eb;
     }
