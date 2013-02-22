@@ -20,12 +20,7 @@ class wot.utils.Cache
         }
         return s_cache[key];
     }
-/*
-    public static function Set(key:String, value:Object)
-    {
-        s_cache[key] = value;
-    }
-*/
+
     public static function Remove(key:String)
     {
         delete s_cache[key];

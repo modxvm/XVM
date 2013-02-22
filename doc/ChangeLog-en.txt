@@ -1,3 +1,7 @@
+XVM-3.4.0-test6:
+  * adaptation to WoT 0.8.4.CT2
+  * TeamRenderer mod
+
 XVM-3.4.0-test5:
   * TeamMemberRenderer mod
 
@@ -5,8 +9,6 @@ XVM-3.4.0-test4:
   * UserInfo mod (sorting, per-vehicle efficiency)
 
 XVM-3.4.0-test1:
-  * adaptation to WoT 0.8.4.CT1
-
   [MACROS]
   * new macros:
       {{avglvl}} - average level of tanks

@@ -2,7 +2,8 @@
 
 set patch_swfs=battleloading.swf PlayersPanel.swf StatisticForm.swf FinalStatistic.swf
 set patch_swfs=%patch_swfs% battle.swf TeamBasesPanel.swf Minimap.swf VehicleMarkersManager.swf
-set patch_swfs=%patch_swfs% TeamMemberRenderer.swf UserInfo.swf
+set patch_swfs=%patch_swfs% TeamMemberRenderer.swf TeamRenderer.swf
+set patch_swfs=%patch_swfs% UserInfo.swf
 
 for %%i in (%patch_swfs%) do call :do_file %%~ni
 

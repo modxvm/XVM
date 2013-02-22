@@ -27,4 +27,10 @@
     function changeFocus();
     function onMouseWheel(delta, target);
     function scrollWheel(delta);
+
+    // gfx.events.EventDispatcher inherits
+    function addEventListener(event, scope, callBack);
+    function removeEventListener(event, scope, callBack);
+    function dispatchEvent(event);
+    function hasEventListener(event);
 }

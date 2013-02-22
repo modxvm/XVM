@@ -31,6 +31,8 @@ class wot.utils.Locale
     tr["UserInfoEHint"] = "Per-vehicle efficiency.\n" +
         "The value shown for the last data scan moment: %DATE%\n" +
         "See actual E value for present moment in the detailed vehicle info.";
+    tr["TeamRenderersHeaderTip"] = "xwn rating.\n" +
+        "To see detailed information, move mouse cursor to the player's name.";
     
     // RU
     tr = _translations["RU"];
@@ -64,6 +66,8 @@ class wot.utils.Locale
     tr["UserInfoEHint"] = "Эффективность по танку.\n" +
         "Значение указано на момент последнего обновления данных: %DATE%\n" +
         "Актуальное значение на текущий момент - в детальной информации по технике.";
+    tr["TeamRenderersHeaderTip"] = "Рейтинг xwn.\n" +
+        "Чтобы увидеть более подробную информацию, наведите курсор мыши на значение рейтинга интересующего игрока.";
     tr["Data was updated at"] = "Данные были обновлены";
     tr[" to "] = " до ";
     tr["EFF"] = "РЭ";

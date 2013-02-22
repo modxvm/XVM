@@ -8,6 +8,7 @@
     var textField;
     var vehicleNameField;
     var numberField;
+    var owner;
 
     function configUI();
     function afterSetData();

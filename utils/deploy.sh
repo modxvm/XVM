@@ -13,6 +13,7 @@ FILES="
   StatisticForm.swf
   TeamBasesPanel.swf
   TeamMemberRenderer.swf
+  TeamRenderer.swf
   UserInfo.swf
   VehicleMarkersManager.swf
   XVM.xvmconf XVM.css OTMData.xml"

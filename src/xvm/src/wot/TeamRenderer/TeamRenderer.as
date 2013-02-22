@@ -1,3 +1,4 @@
+﻿import net.wargaming.managers.ToolTipManager;
 import wot.utils.Cache;
 import wot.utils.Config;
 import wot.utils.GlobalEventDispatcher;
@@ -6,28 +7,28 @@ import wot.utils.Utils;
 import wot.Helpers.TeamRendererHelper;
 import wot.Helpers.UserDataLoaderHelper;
 
-class wot.TeamMemberRenderer.TeamMemberRenderer extends net.wargaming.messenger.controls.TeamMemberRenderer
+class wot.TeamRenderer.TeamRenderer extends net.wargaming.messenger.controls.TeamRenderer
 {
     private var configured:Boolean;
-    private var uid:Number;
+    private var m_name:String;
     private var m_effField:TextField;
     private var stat:Object;
 
     private static var dummy = Logger.dummy;
 
-    function TeamMemberRenderer()
+    function TeamRenderer()
     {
         super();
 
-        Utils.TraceXvmModule("TeamMemberRenderer");
+        Utils.TraceXvmModule("TeamRenderer");
 
         configured = false;
-        uid = 0;
+        m_name = null;
         m_effField = null;
         stat = null;
 
         GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
-        Config.LoadConfig("TeamMemberRenderer.as");
+        Config.LoadConfig("TeamRenderer.as");
     }
 
     private function onConfigLoaded()
@@ -39,33 +40,33 @@ class wot.TeamMemberRenderer.TeamMemberRenderer extends net.wargaming.messenger.
     // override
     function configUI()
     {
-        textField._x -= 10;
-        vehicle_type_icon._x -= 10;
-        vehicleNameField._x -= 10;
-        vehicleLevelField._x -= 15;
-
         super.configUI();
-
         configured = true;
         configXVM();
     }
-    
+
     private function configXVM()
     {
         if (!configured || !Config.s_loaded || Config.s_config.rating.showPlayersStatistics != true)
             return;
 
-        var wnd = owner._parent;
-        if (wnd)
+        this.onRollOver = function()
         {
-            wnd.crewStuffFieldXVM = TeamRendererHelper.CreateXVMHeaderLabel(wnd, "crewStuffField", vehicleLevelField, 
-                187, 2, "TeamRenderersHeaderTip");
-            wnd.queueLabelXVM = TeamRendererHelper.CreateXVMHeaderLabel(wnd, "queueLabel", vehicleLevelField, 
-                187, 2, "TeamRenderersHeaderTip");
+            if (this.stat)
+                ToolTipManager.instance.show(TeamRendererHelper.GetToolTipData(this.stat));
+            else
+            {
+                if (this.toolTip)
+                    ToolTipManager.instance.show(this.toolTip);
+            }
         }
 
-        m_effField = Utils.duplicateTextField(this, "eff", vehicleLevelField, 0, "center");
-        m_effField._x += 20;
+        if (m_effField == null)
+        {
+            m_effField = Utils.duplicateTextField(this, "eff", textField, 0, "left");
+            m_effField._x = textField._x + textField._width - 20;
+        }
+        m_effField.htmlText = "";
 
         afterSetDataXVM();
     }
@@ -74,6 +75,7 @@ class wot.TeamMemberRenderer.TeamMemberRenderer extends net.wargaming.messenger.
     function afterSetData()
     {
         super.afterSetData();
+        //Logger.addObject(data);
         afterSetDataXVM();
     }
 
@@ -83,27 +85,21 @@ class wot.TeamMemberRenderer.TeamMemberRenderer extends net.wargaming.messenger.
             return;
         if (!configured || !Config.s_loaded || Config.s_config.rating.showPlayersStatistics != true)
             return;
-            
-        uid = data.uid;
-        if (Cache.Exist("INFO#" + uid))
+
+        m_name = Utils.GetPlayerName(data.owner);
+        if (Cache.Exist("INFO@" + m_name))
             setXVMStat();
         else
         {
             m_effField.htmlText = "";
             GlobalEventDispatcher.addEventListener("userdata_cached", this, setXVMStat);
-            UserDataLoaderHelper.LoadUserData(uid, true);
+            UserDataLoaderHelper.LoadUserData(m_name, false);
         }
     }
 
     private function setXVMStat()
     {
-        var key = "INFO#" + uid;
+        var key = "INFO@" + m_name;
         stat = TeamRendererHelper.setXVMStat(key, m_effField);
-    }
-
-    // override
-    function getToolTipData()
-    {
-        return (!stat) ? super.getToolTipData() : TeamRendererHelper.GetToolTipData(stat);
     }
 }
