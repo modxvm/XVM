@@ -117,11 +117,16 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
     
     private function get leftAngle():Number
     {
-        return _root.damagePanel.tankIndicator.hull.gunConstraints.left.angle._currentframe;
+        return gunConstraints.left.angle._currentframe;
     }
     
     private function get rightAngle():Number
     {
-        return _root.damagePanel.tankIndicator.hull.gunConstraints.right.angle._currentframe;
+        return gunConstraints.right.angle._currentframe;
+    }
+    
+    private function get gunConstraints():Object
+    {
+        return _root.damagePanel.componentsContainer.tankIndicator.hull.gunConstraints;
     }
 }
