@@ -16,6 +16,7 @@ FILES="
   TeamRenderer.swf
   UserInfo.swf
   VehicleMarkersManager.swf
+  lobby_messenger.swf
   XVM.xvmconf XVM.css OTMData.xml"
 
 cd $(dirname $(realpath $(cygpath --unix $0)))
