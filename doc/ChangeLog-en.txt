@@ -27,7 +27,7 @@ XVM-3.4.0-test1:
   * UserInfo mod (with functions from morotopitek's mod)
   * TeamMemberRenderer mod
   * FinalStatistic mod (with functions from morotopitek's mod).
-  * new experimental win chance formula by TurinDeNar:
+  * new win chance formula by TurinDeNar:
       http://www.koreanrandom.com/forum/topic/2598-/
 
   [CONFIG]

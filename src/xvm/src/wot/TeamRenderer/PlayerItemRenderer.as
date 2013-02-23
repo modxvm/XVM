@@ -66,10 +66,14 @@ class wot.TeamRenderer.PlayerItemRenderer extends net.wargaming.messenger.contro
 
     private function afterSetDataXVM()
     {
-        if (!data || !data.label)
-            return;
         if (!configured || !Config.s_loaded || Config.s_config.rating.showPlayersStatistics != true)
             return;
+        if (!data || !data.label)
+        {
+            m_name = null;
+            m_effField.htmlText = "";
+            return;
+        }
             
         m_name = Utils.GetPlayerName(data.label);
         if (Cache.Exist("INFO@" + m_name))

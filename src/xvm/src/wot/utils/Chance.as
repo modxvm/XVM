@@ -112,39 +112,85 @@ class wot.utils.Chance
             }
         }
 
-        if (chanceFunc == ChanceFuncX1 || chanceFunc == ChanceFuncX2)
-            return PrepareChanceResultsX2(Ka, Ke);
-
-        return PrepareChanceResults(Ka, Ke);
+        return PrepareChanceResults(Ka, Ke, chanceFunc);
     }
 
+    // http://www.koreanrandom.com/forum/topic/2598-/#entry31429
     private static function ChanceFuncG(vi1, vi2, vi3, team, stat): Number
     {
         var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
 
-        var E: Number = stat.xwn == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn;
-        var R: Number = stat.b ? stat.w / stat.b : Config.s_config.consts.AVG_GWR / 100.0;
+        var Tmin = vi1.tiers[0];
+        var Tmax = vi1.tiers[1];
+        var T = battleTier;
+        var Ea = stat.xwn == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn;
+        var Ean = Ea + (Ea * (((stat.avglvl || T) - T) * 0.05));
+        var Ra = stat.r || Config.s_config.consts.AVG_GWR;
+        var Ba = stat.b || Config.s_config.consts.AVG_BATTLES;
 
-        var B: Number = stat.b || Config.s_config.consts.AVG_BATTLES;
-        var Bn = (B < 2000) ? B / 5000               // 0k .. 2k  => 0.0 .. 0.4
-            : (B < 5000) ? 0.4 + (B - 2000) / 15000  // 2k .. 5k  => 0.4 .. 0.6
-            : (B < 10000) ? 0.6 + (B - 5000) / 25000 // 5k .. 10k => 0.6 .. 0.8
-            : 0.8 + (B - 10000) / 100000;            // 10k..    => 0.8 .. ...
+        // 1
+        var Klvl = (Tmax + Tmin) / 2 - T;
 
-        return E * (1 + R - (Config.s_config.consts.AVG_GWR / 100.0)) * (1 + 0.25 * Td) * (1 + Bn);
+        // 2
+        var Kab = (Ba <= 500) ? 0                          //   0..0.5k  => 0
+            : (Ba <= 5000) ? (Ba - 500) / 10000            //  1k..5k => 0..0.45
+            : (Ba <= 10000) ? 0.45 + (Ba - 5000) / 20000   //  5k..10k => 0.45..0.7
+            : (Ba <= 20000) ? 0.7 + (Ba - 10000) / 40000   // 10k..20k => 0.7..0.95
+            : 0.95 + (Ba - 20000) / 80000                  // 20k..    => 0.95..
+
+        // 3
+        var Kra = (100 + Ra - 48.5) / 100;
+
+        // 4
+        var Eb = ((Ean * Kra) * (Kra + Kab)) * (Kra + 0.25 * Klvl);
+
+        // 5
+        return Math.max(0, Math.min(Config.s_config.consts.MAX_EBN, Eb));
     }
 
     private static function ChanceFuncT(vi1, vi2, vi3, team, stat): Number
     {
         var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
 
-        var E: Number = stat.xwn == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn;
+        var Tmin = vi1.tiers[0];
+        var Tmax = vi1.tiers[1];
+        var T = battleTier;
+        var Bt = stat.tb || 0;
+        var Et = stat.teff || 0;
+        var Rt = stat.tr || 0;
+        var AvgW = vi3 && vi3.b > 0 ? vi3.w / vi3.b * 100 : 49.5;
+        var Ea = stat.xwn == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn;
+		var Ean = Ea + (Ea * (((stat.avglvl || T) - T) * 0.05));
+        var Ra = stat.r || Config.s_config.consts.AVG_GWR;
+        var Ba = stat.b || Config.s_config.consts.AVG_BATTLES;
 
-        var r = stat.tb ? stat.tw / stat.tb * 100 : Config.s_config.consts.AVG_GWR;
-        var Rt_pre: Number = Math.max(-10, Math.min(10, (r - Config.s_config.consts.AVG_GWR)));
-        var Rt = Rt_pre / 100.0 * 4;
+        // 1
+        var Klvl = (Tmax + Tmin) / 2 - T;
 
-        return E * (1 + Rt) * (1 + 0.25 * Td);
+        // 2
+        var Ktb = (Bt <= 50) ? 0                           //    0..50  => 0
+            : (Bt <= 500) ? (Bt - 50) / 1000               //  51..500  => 0..0.45
+            : (Bt <= 1000) ? 0.45 + (Bt - 500) / 2000      //  501..1000 => 0.45..0.7
+            : (Bt <= 2000) ? 0.7 + (Bt - 1000) / 4000      // 1001..2000 => 0.7..0.95
+            : 0.95 + (Bt - 2000) / 8000;                   // 2000..     => 0.95..
+        var Kab = (Ba <= 500) ? 0                          //   0..0.5k  => 0
+            : (Ba <= 5000) ? (Ba - 500) / 10000            //  1k..5k => 0..0.45
+            : (Ba <= 10000) ? 0.45 + (Ba - 5000) / 20000   //  5k..10k => 0.45..0.7
+            : (Ba <= 20000) ? 0.7 + (Ba - 10000) / 40000   // 10k..20k => 0.7..0.95
+            : 0.95 + (Ba - 20000) / 80000                  // 20k..    => 0.95..
+
+        // 3
+        var Krt = (100 + Rt - AvgW) / 100;
+        var Kra = (100 + Ra - 48.5) / 100;
+
+        // 4
+        var Eb = (Et > 0)
+            ? (((3 / 5 * (Et / 20) * Krt) * (Krt + Ktb)) +
+                ((2 / 5 * Ean * Kra) * (Kra + Kab))) * (Kra + 0.25 * Klvl)
+            : ((Ean * Kra) * (Kra + Kab)) * (Kra + 0.25 * Klvl);
+
+        // 5
+        return Math.max(0, Math.min(Config.s_config.consts.MAX_EBN, Eb));
     }
 
     private static function ChanceFuncX1(vi1, vi2, vi3, team, stat): Number
@@ -162,23 +208,23 @@ class wot.utils.Chance
         // 1
         var Klvl = (Tmax + Tmin) / 2 - T;
 
-        // 3
+        // 2
         var Kab = (Ba <= 500) ? 0                          //   0..0.5k  => 0
             : (Ba <= 5000) ? (Ba - 500) / 10000            //  1k..5k => 0..0.45
             : (Ba <= 10000) ? 0.45 + (Ba - 5000) / 20000   //  5k..10k => 0.45..0.7
             : (Ba <= 20000) ? 0.7 + (Ba - 10000) / 40000   // 10k..20k => 0.7..0.95
             : 0.95 + (Ba - 20000) / 80000                  // 20k..    => 0.95..
 
-        // 4
+        // 3
         var Kra = (100 + Ra - 48.5) / 100;
 
-        // 5
+        // 4
         var Eb = ((Ean * Kra) * (Kra + Kab)) * (Kra + 0.25 * Klvl);
 
-        return Eb;
+        // 5
+        return Math.max(0, Math.min(Config.s_config.consts.MAX_EBN, Eb));
     }
 
-    // http://www.koreanrandom.com/forum/topic/2598-/#entry31429
     private static function ChanceFuncX2(vi1, vi2, vi3, team, stat): Number
     {
         var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
@@ -204,25 +250,24 @@ class wot.utils.Chance
             : (Bt <= 1000) ? 0.45 + (Bt - 500) / 2000      //  501..1000 => 0.45..0.7
             : (Bt <= 2000) ? 0.7 + (Bt - 1000) / 4000      // 1001..2000 => 0.7..0.95
             : 0.95 + (Bt - 2000) / 8000;                   // 2000..     => 0.95..
-
-        // 3
         var Kab = (Ba <= 500) ? 0                          //   0..0.5k  => 0
             : (Ba <= 5000) ? (Ba - 500) / 10000            //  1k..5k => 0..0.45
             : (Ba <= 10000) ? 0.45 + (Ba - 5000) / 20000   //  5k..10k => 0.45..0.7
             : (Ba <= 20000) ? 0.7 + (Ba - 10000) / 40000   // 10k..20k => 0.7..0.95
             : 0.95 + (Ba - 20000) / 80000                  // 20k..    => 0.95..
 
-        // 4
+        // 3
         var Krt = (100 + Rt - AvgW) / 100;
         var Kra = (100 + Ra - 48.5) / 100;
 
-        // 5
+        // 4
         var Eb = (Et > 0)
             ? (((3 / 5 * (Et / 20) * Krt) * (Krt + Ktb)) +
                 ((2 / 5 * Ean * Kra) * (Kra + Kab))) * (Kra + 0.25 * Klvl)
             : ((Ean * Kra) * (Kra + Kab)) * (Kra + 0.25 * Klvl);
 
-        return Eb;
+        // 5
+        return Math.max(0, Math.min(Config.s_config.consts.MAX_EBN, Eb));
     }
 
     // return: { ally: Number, enemy: Number }
@@ -241,41 +286,23 @@ class wot.utils.Chance
         return { ally: nally, enemy: nenemy };
     }
 
-    private static function PrepareChanceResults(ally, enemy)
+    private static function PrepareChanceResults(Ea, Ee, chanceFunc)
     {
-        if (ally == 0 && enemy == 0) ally = enemy = 1;
-        if (ally == 0) ally = enemy;
-        if (enemy == 0) enemy = ally;
-        //Logger.add("ally=" + Math.round(ally) + " enemy=" + Math.round(enemy));
+        if (Ea == 0 && Ee == 0) Ea = Ee = 1;
+        if (Ea == 0) Ea = Ee;
+        if (Ee == 0) Ee = Ea;
+        //Logger.add("Ea=" + Math.round(Ea) + " Ee=" + Math.round(Ee));
 
-        return
-        {
-            ally_value: Math.round(ally),
-            enemy_value: Math.round(enemy),
-            percent: Chance.NormalizeResult(ally, enemy),
-            raw: ally / (ally + enemy) * 100,
-            percentF: Chance.NormalizeResultF(ally, enemy)
-        };
-    }
-
-    // return: 5..95
-    private static function NormalizeResult(a, b)
-    {
-        return Math.round(Math.max(0.05, Math.min(0.95, (0.5 + (a / (a + b) - 0.5) * 3.0))) * 100);
-    }
-
-    private static function NormalizeResultF(a, b)
-    {
-        return Math.round(1000*Math.max(0.05, Math.min(0.95, (0.5 + (a / (a + b) - 0.5) * 3.0))) * 100)/1000;
-    }
-
-    private static function PrepareChanceResultsX2(Ea, Ee)
-    {
-        var result = PrepareChanceResults(Ea, Ee);
         var p = Math.max(0.05, Math.min(0.95, (0.5 + (Ea / (Ea + Ee) - 0.5) * 1.5))) * 100;
-        result.percent = Math.round(p);
-        result.percentF = Math.round(1000 * p) / 1000;
-        return result;
+
+        // Normalize (5..95)
+        return {
+            ally_value: Math.round(Ea),
+            enemy_value: Math.round(Ee),
+            percent: Math.round(p),
+            raw: Ea / (Ea + Ee) * 100,
+            percentF: Math.round(1000 * p) / 1000
+        };
     }
 
     private static function GuessBattleTier(): Number

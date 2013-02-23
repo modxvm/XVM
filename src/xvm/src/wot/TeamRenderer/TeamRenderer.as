@@ -5,7 +5,6 @@ import wot.utils.GlobalEventDispatcher;
 import wot.utils.Logger;
 import wot.utils.Utils;
 import wot.Helpers.TeamRendererHelper;
-import wot.Helpers.UserDataLoaderHelper;
 
 class wot.TeamRenderer.TeamRenderer extends net.wargaming.messenger.controls.TeamRenderer
 {
@@ -93,13 +92,18 @@ class wot.TeamRenderer.TeamRenderer extends net.wargaming.messenger.controls.Tea
         {
             m_effField.htmlText = "";
             GlobalEventDispatcher.addEventListener("userdata_cached", this, setXVMStat);
-            UserDataLoaderHelper.LoadUserData(m_name, false);
+            // Disabled because of slow loading and client freezing.
+            //UserDataLoaderHelper.LoadUserData(m_name, false);
         }
     }
 
     private function setXVMStat()
     {
         var key = "INFO@" + m_name;
-        stat = TeamRendererHelper.setXVMStat(key, m_effField);
+        if (Cache.Exist("INFO@" + m_name))
+        {
+            GlobalEventDispatcher.removeEventListener("userdata_cached", this, setXVMStat);
+            stat = TeamRendererHelper.setXVMStat(key, m_effField);
+        }
     }
 }
