@@ -46,6 +46,8 @@ class wot.TeamRenderer.PlayerItemRenderer extends net.wargaming.messenger.contro
     {
         if (!configured || !Config.s_loaded || Config.s_config.rating.showPlayersStatistics != true)
             return;
+        if (Config.s_config.rating.enableCompanyStatistics != true)
+            return;
 
         if (m_effField == null)
         {
@@ -68,6 +70,9 @@ class wot.TeamRenderer.PlayerItemRenderer extends net.wargaming.messenger.contro
     {
         if (!configured || !Config.s_loaded || Config.s_config.rating.showPlayersStatistics != true)
             return;
+        if (Config.s_config.rating.enableCompanyStatistics != true)
+            return;
+
         if (!data || !data.label)
         {
             m_name = null;

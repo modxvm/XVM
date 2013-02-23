@@ -271,7 +271,7 @@ class wot.utils.StatLoader
 
         stat.tdv = stat.td == null || stat.td < 0 ? null : Math.round(stat.td / stat.tb / vi3.hp * 10) / 10;
 
-        var EC = Config.s_config.consts.E[vi3.cl][vi3.l - 1];
+        var EC = { CD: 3, CF: 1 };
 //        Logger.addObject(stat);
 //        Logger.addObject(EC);
         if (EC.CD != null && EC.CD > 0 && (stat.tdb == null || stat.tdb <= 0))
@@ -281,8 +281,8 @@ class wot.utils.StatLoader
 
         var dD = stat.tdb - vi3.avgD;
         var dF = stat.tfb - vi3.avgF;
-        var minD = vi3.avgD * Config.s_config.consts.E.Kmin;
-        var minF = vi3.avgF * Config.s_config.consts.E.Kmin;
+        var minD = vi3.avgD * 0.4;
+        var minF = vi3.avgF * 0.4;
         var d = 1 + dD / (vi3.topD - vi3.avgD);
         var f = 1 + dF / (vi3.topF - vi3.avgF);
         var d2 = stat.tdb < vi3.avgD ? stat.tdb / vi3.avgD : d;

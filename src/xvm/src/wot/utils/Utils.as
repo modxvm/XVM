@@ -312,22 +312,33 @@ class wot.utils.Utils
 
         return res;
     }
-    
+
+    // http://www.koreanrandom.com/forum/topic/2625-/
     public static function XEFF(value)
     {
-        return Math.round(Math.max(0, Math.min(100,
-          -0.000000002523 * Math.pow(value, 3) +
-          0.000003351 * Math.pow(value, 2) +
-          0.07331 * value -
-          31.57)));
+        return value < 440 ? 0 :
+            Math.round(Math.max(0, Math.min(100,
+                value * (value * (value * (value * (value * (value * 
+                0.00000000000000004787
+                - 0.00000000000035544)
+                + 0.00000000102606)
+                - 0.0000014665)
+                + 0.0010827)
+                - 0.3133)
+                + 20.49
+            )));
     }
     
     public static function XWN(value)
     {
-        return Math.round(Math.max(0, Math.min(100,
-          0.000000001984 * Math.pow(value, 3) -
-          0.00000191 * Math.pow(value, 2) +
-          0.04803 * value -
-          4.638)));
+        return value > 2140 ? 100 :
+            Math.round(Math.max(0, Math.min(100,
+                value * (value * (value * (value *
+                - 0.00000000001334
+                + 0.00000005673)
+                - 0.00007575)
+                + 0.08392)
+                - 9.362
+            )));
     }
 }

@@ -88,6 +88,8 @@ private function RefreshCommonPage():void
         this.p_rating.v_showPlayersStatistics.value = section.showPlayersStatistics;
         this.p_rating.v_loadEnemyStatsInFogOfWar.value = section.loadEnemyStatsInFogOfWar;
         this.p_rating.v_enableStatisticsLog.value = section.enableStatisticsLog;
+        this.p_rating.v_enableUserInfoStatistics.value = section.enableUserInfoStatistics;
+        this.p_rating.v_enableCompanyStatistics.value = section.enableCompanyStatistics;
     }
     catch (ex:Error)
     {

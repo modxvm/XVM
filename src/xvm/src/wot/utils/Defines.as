@@ -5,11 +5,11 @@
 class wot.utils.Defines
 {
     // Global versions
-    public static var XVM_VERSION: String = "3.4.0-test4";
+    public static var XVM_VERSION: String = "3.4.0-test5";
     public static var XVM_INTRO: String = "www.modxvm.com";
     public static var WOT_VERSION: String = "0.8.4";
     public static var CONFIG_VERSION: String = "1.5.0";
-    public static var EDITOR_VERSION: String = "0.36";
+    public static var EDITOR_VERSION: String = "0.37";
 
     public static var DEFAULT_CONFIG_NAME: String = "XVM.xvmconf";
 

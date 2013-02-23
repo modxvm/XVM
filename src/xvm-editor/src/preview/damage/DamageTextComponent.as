@@ -86,7 +86,7 @@ public class DamageTextComponent
 
     // PRIVATE METHODS
 
-    private function createTextField(color:Number, shadowColor:Number, cfg):TextField
+    private function createTextField(color:Number, shadowColor:Number, cfg:Object):TextField
     {
         var tf: TextField = new TextField();
         tf.width = 200;

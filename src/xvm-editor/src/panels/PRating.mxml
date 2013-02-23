@@ -9,4 +9,6 @@
     <c:LabeledCheckBox label="{resourceManager.getString('panels', 'showPlayersStatistics')}" id="v_showPlayersStatistics" config="rating.showPlayersStatistics" change="onChange(event)"/>
     <c:LabeledCheckBox label="{resourceManager.getString('panels', 'loadEnemyStatsInFogOfWar')}" id="v_loadEnemyStatsInFogOfWar" config="rating.loadEnemyStatsInFogOfWar" change="onChange(event)"/>
     <c:LabeledCheckBox label="{resourceManager.getString('panels', 'enableStatisticsLog')}" id="v_enableStatisticsLog" config="rating.enableStatisticsLog" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'enableUserInfoStatistics')}" id="v_enableUserInfoStatistics" config="rating.enableUserInfoStatistics" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'enableCompanyStatistics')}" id="v_enableCompanyStatistics" config="rating.enableCompanyStatistics" change="onChange(event)"/>
 </c:PanelComponent>

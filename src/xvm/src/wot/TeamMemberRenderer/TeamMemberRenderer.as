@@ -54,6 +54,8 @@ class wot.TeamMemberRenderer.TeamMemberRenderer extends net.wargaming.messenger.
     {
         if (!configured || !Config.s_loaded || Config.s_config.rating.showPlayersStatistics != true)
             return;
+        if (Config.s_config.rating.enableUserInfoStatistics != true)
+            return;
 
         var wnd = owner._parent;
         if (wnd)
@@ -82,6 +84,8 @@ class wot.TeamMemberRenderer.TeamMemberRenderer extends net.wargaming.messenger.
         if (!data || !data.uid)
             return;
         if (!configured || !Config.s_loaded || Config.s_config.rating.showPlayersStatistics != true)
+            return;
+        if (Config.s_config.rating.enableUserInfoStatistics != true)
             return;
             
         uid = data.uid;

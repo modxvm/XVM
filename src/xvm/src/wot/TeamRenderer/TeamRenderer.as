@@ -48,6 +48,8 @@ class wot.TeamRenderer.TeamRenderer extends net.wargaming.messenger.controls.Tea
     {
         if (!configured || !Config.s_loaded || Config.s_config.rating.showPlayersStatistics != true)
             return;
+        if (Config.s_config.rating.enableCompanyStatistics != true)
+            return;
 
         this.onRollOver = function()
         {
@@ -83,6 +85,8 @@ class wot.TeamRenderer.TeamRenderer extends net.wargaming.messenger.controls.Tea
         if (!data || !data.uid)
             return;
         if (!configured || !Config.s_loaded || Config.s_config.rating.showPlayersStatistics != true)
+            return;
+        if (Config.s_config.rating.enableCompanyStatistics != true)
             return;
 
         m_name = Utils.GetPlayerName(data.owner);

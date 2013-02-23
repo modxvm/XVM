@@ -70,19 +70,33 @@ exports.calculateWN = function(data) {
         (6 - TIER_N) * -60)) || 0;
 };
 
-// normalized EFF
-// MAX(MIN(-2,523*10^(-9)*eff^3 + 3,351*10^(-6)*eff^2 + 0,07331*eff - 31,57; 100); 0)
+// normalized EFF (xeff)
 exports.calculateNEFF = function(value) {
-    var res = Math.round(Math.max(0, Math.min(100,
-        -0.000000002523*Math.pow(value, 3) + 0.000003351*Math.pow(value, 2) + 0.07331*value - 31.57)));
+    var res = value < 440 ? 0 :
+        Math.round(Math.max(0, Math.min(100,
+            value * (value * (value * (value * (value * (value *
+            0.00000000000000004787
+            - 0.00000000000035544)
+            + 0.00000000102606)
+            - 0.0000014665)
+            + 0.0010827)
+            - 0.3133)
+            + 20.49
+        )));
     return res == 100 ? "XX" : (res < 10 ? "0" : "") + res;
 };
 
-// normalized WN6
-// MAX(MIN(1,984*10^(-9)*wn6^3 - 1,91*10^(-6)*wn6^2 + 0,04803*wn6 - 4,638; 100); 0)
+// normalized WN6 (xwn))
 exports.calculateNWN = function(value) {
-    var res = Math.round(Math.max(0, Math.min(100,
-        0.000000001984*Math.pow(value, 3) - 0.00000191*Math.pow(value, 2) + 0.04803*value - 4.638)));
+    var res = value > 2140 ? 100 :
+        Math.round(Math.max(0, Math.min(100,
+            value * (value * (value * (value *
+            - 0.00000000001334
+            + 0.00000005673)
+            - 0.00007575)
+            + 0.08392)
+            - 9.362
+        )));
     return res == 100 ? "XX" : (res < 10 ? "0" : "") + res;
 };
 

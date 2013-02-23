@@ -228,18 +228,6 @@ public class GraphicsUtil
         return 100;
     }
 
-    public static function fillRect(target:MovieClip, x:Number, y:Number,
-        width: Number, height: Number, color: Number, alpha: Number)
-    {
-        target.moveTo(x, y);
-        target.beginFill(color, alpha);
-        target.lineTo(x + width, y);
-        target.lineTo(x + width, y + height);
-        target.lineTo(x, y + height);
-        target.lineTo(x, y);
-        target.endFill();
-    }
-
     public static function GetDmgKindValue(dmg_kind: String, prefix: String = '#'): String
     {
         try

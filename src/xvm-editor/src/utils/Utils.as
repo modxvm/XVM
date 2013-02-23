@@ -4,6 +4,7 @@
  */
 package utils
 {
+	import mx.messaging.channels.StreamingAMFChannel;
 
 public class Utils
 {
@@ -98,21 +99,21 @@ public class Utils
 
     public static function GetPlayerName(fullplayername: String): String
     {
-        var pos = fullplayername.indexOf("[");
+        var pos:Number = fullplayername.indexOf("[");
         return (pos < 0) ? fullplayername : fullplayername.slice(0, pos);
     }
     public static function GetClanName(fullplayername: String): String
     {
-        var pos = fullplayername.indexOf("[");
+        var pos:Number = fullplayername.indexOf("[");
         if (pos < 0)
             return "";
-        var n = fullplayername.slice(pos + 1);
+        var n:String = fullplayername.slice(pos + 1);
         return n.slice(0, n.indexOf("]"));
     }
 
     public static function GetClanNameWithBrackets(fullplayername: String): String
     {
-        var clan = GetClanName(fullplayername);
+        var clan:String = GetClanName(fullplayername);
         return clan ? "[" + clan + "]" : "";
     }
 

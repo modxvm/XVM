@@ -45,13 +45,11 @@ public class DefaultConfig
                     //   -xxxx..xxxx
                     //   xx.xx%
                     // ha values can be:
-                    //   null - use default client value
                     //   1 - left
-                    //   2 - right
+                    //   2 - right (x = [width .. 0])
                     // va values can be:
-                    //   null - use default client value
                     //   1 - top
-                    //   2 - bottom
+                    //   2 - bottom (y = [height .. 0])
                     minimap:               { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
                     playerMessangersPanel: { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
                     leftPanel:             { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
@@ -78,7 +76,9 @@ public class DefaultConfig
             rating: {
                 showPlayersStatistics: true,     // Global switch. Handles whole statisctics module.
                 loadEnemyStatsInFogOfWar: true,  // Load players data in "fog of war".
-                enableStatisticsLog: false       // Enable saving statistics to "xvm-stat.log" file
+                enableStatisticsLog: false,      // Enable saving statistics to "xvm-stat.log" file
+                enableUserInfoStatistics: true,  // Enable statistics in the user info window
+                enableCompanyStatistics: true    // Enable statistics in the company window
             },
             battleLoading: {
                 // Show clock at Battle Loading Screen.
@@ -608,27 +608,27 @@ public class DefaultConfig
                 ],
                 // XVM Scale: http://www.koreanrandom.com/forum/topic/2625-xvm-scale
                 x: [
-                    { value: 17,  color: ColorPalette.red },      // 00 - 16 - very bad   (20% of players)
-                    { value: 34,  color: ColorPalette.orange },   // 17 - 33 - bad        (better then 20% of players)
-                    { value: 53,  color: ColorPalette.yellow },   // 34 - 52 - normal     (better then 60% of players)
-                    { value: 76,  color: ColorPalette.green },    // 53 - 75 - good       (better then 90% of players)
-                    { value: 93,  color: ColorPalette.blue },     // 76 - 92 - very good  (better then 99% of players)
-                    { value: 999, color: ColorPalette.purple }    // 93 - XX - unique     (better then 99.9% of players)
+                    { value: 17,  color: ColorPalette.red },      // 00   - 16.5 - very bad   (20% of players)
+                    { value: 34,  color: ColorPalette.orange },   // 16.5 - 33.5 - bad        (better then 20% of players)
+                    { value: 53,  color: ColorPalette.yellow },   // 33.5 - 52.5 - normal     (better then 60% of players)
+                    { value: 76,  color: ColorPalette.green },    // 52.5 - 75.5 - good       (better then 90% of players)
+                    { value: 93,  color: ColorPalette.blue },     // 75.5 - 92.5 - very good  (better then 99% of players)
+                    { value: 999, color: ColorPalette.purple }    // 92.5 - XX   - unique     (better then 99.9% of players)
                 ],
                 eff: [
                     { value: 645,  color: ColorPalette.red },     // very bad
-                    { value: 870,  color: ColorPalette.orange },  // bad
-                    { value: 1150, color: ColorPalette.yellow },  // normal
-                    { value: 1465, color: ColorPalette.green },   // good
-                    { value: 1725, color: ColorPalette.blue },    // very good
+                    { value: 875,  color: ColorPalette.orange },  // bad
+                    { value: 1155, color: ColorPalette.yellow },  // normal
+                    { value: 1470, color: ColorPalette.green },   // good
+                    { value: 1740, color: ColorPalette.blue },    // very good
                     { value: 9999, color: ColorPalette.purple }   // unique
                 ],
                 wn: [
                     { value: 435,  color: ColorPalette.red },     // very bad
-                    { value: 800,  color: ColorPalette.orange },  // bad
-                    { value: 1195, color: ColorPalette.yellow },  // normal
-                    { value: 1585, color: ColorPalette.green },   // good
-                    { value: 1880, color: ColorPalette.blue },    // very good
+                    { value: 805,  color: ColorPalette.orange },  // bad
+                    { value: 1200, color: ColorPalette.yellow },  // normal
+                    { value: 1595, color: ColorPalette.green },   // good
+                    { value: 1900, color: ColorPalette.blue },    // very good
                     { value: 9999, color: ColorPalette.purple }   // unique
                 ],
                 rating: [
@@ -644,7 +644,7 @@ public class DefaultConfig
                     { value: 49,  color: ColorPalette.orange },   // bad
                     { value: 52,  color: ColorPalette.yellow },   // normal
                     { value: 57,  color: ColorPalette.green },    // good
-                    { value: 64,  color: ColorPalette.blue },     // very good
+                    { value: 62,  color: ColorPalette.blue },     // very good
                     { value: 101, color: ColorPalette.purple }    // unique
                 ],
                 e: [
@@ -1061,72 +1061,10 @@ public class DefaultConfig
     public static function get consts(): Object
     {
         return {
-            AVG_GWR: 49,  // Average GWR. Source: http://wot-news.com/stat/server/ru/norm/en
+            AVG_GWR: 48,  // Average GWR. Source: http://wot-news.com/stat/server/ru/norm/en
             AVG_XVMSCALE: 30, // Average XVM Scale. Source: http://www.koreanrandom.com/forum/topic/2625-/
             AVG_BATTLES: 2000, // Averate number of battles. Source: http://wot-news.com/stat/server/ru/norm/en
-            E: {
-                Kmin: 0.4,
-                LT: [ // lightTank
-                    { CD: 3, CF: 1 }, // level 1
-                    { CD: 3, CF: 1 }, // level 2
-                    { CD: 3, CF: 1 }, // level 3
-                    { CD: 3, CF: 1 }, // level 4
-                    { CD: 3, CF: 1 }, // level 5
-                    { CD: 3, CF: 1 }, // level 6
-                    { CD: 3, CF: 1 }, // level 7
-                    { CD: 3, CF: 1 }, // level 8
-                    { CD: 3, CF: 1 }, // level 9
-                    { CD: 3, CF: 1 }  // level 10
-                ],
-                MT: [ // mediumTank
-                    { CD: 3, CF: 1 }, // level 1
-                    { CD: 3, CF: 1 }, // level 2
-                    { CD: 3, CF: 1 }, // level 3
-                    { CD: 3, CF: 1 }, // level 4
-                    { CD: 3, CF: 1 }, // level 5
-                    { CD: 3, CF: 1 }, // level 6
-                    { CD: 3, CF: 1 }, // level 7
-                    { CD: 3, CF: 1 }, // level 8
-                    { CD: 3, CF: 1 }, // level 9
-                    { CD: 3, CF: 1 }  // level 10
-                ],
-                HT: [ // heavyTank
-                    { CD: 3, CF: 1 }, // level 1
-                    { CD: 3, CF: 1 }, // level 2
-                    { CD: 3, CF: 1 }, // level 3
-                    { CD: 3, CF: 1 }, // level 4
-                    { CD: 3, CF: 1 }, // level 5
-                    { CD: 3, CF: 1 }, // level 6
-                    { CD: 3, CF: 1 }, // level 7
-                    { CD: 3, CF: 1 }, // level 8
-                    { CD: 3, CF: 1 }, // level 9
-                    { CD: 3, CF: 1 }  // level 10
-                ],
-                TD: [ // tank destroyer
-                    { CD: 3, CF: 1 }, // level 1
-                    { CD: 3, CF: 1 }, // level 2
-                    { CD: 3, CF: 1 }, // level 3
-                    { CD: 3, CF: 1 }, // level 4
-                    { CD: 3, CF: 1 }, // level 5
-                    { CD: 3, CF: 1 }, // level 6
-                    { CD: 3, CF: 1 }, // level 7
-                    { CD: 3, CF: 1 }, // level 8
-                    { CD: 3, CF: 1 }, // level 9
-                    { CD: 3, CF: 1 }  // level 10
-                ],
-                SPG: [ // Arty
-                    { CD: 3, CF: 1 }, // level 1
-                    { CD: 3, CF: 1 }, // level 2
-                    { CD: 3, CF: 1 }, // level 3
-                    { CD: 3, CF: 1 }, // level 4
-                    { CD: 3, CF: 1 }, // level 5
-                    { CD: 3, CF: 1 }, // level 6
-                    { CD: 3, CF: 1 }, // level 7
-                    { CD: 3, CF: 1 }, // level 8
-                    { CD: 3, CF: 1 }, // level 9
-                    { CD: 3, CF: 1 }  // level 10
-                ]
-            }
+            MAX_EBN: 300 // Maximum Ebn value for win-chance formula
         };
     }
 }
