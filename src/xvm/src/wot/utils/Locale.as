@@ -32,7 +32,7 @@ class wot.utils.Locale
             "The value shown for the last data scan moment: %DATE%\n" +
             "See actual E value for present moment in the detailed vehicle info.";
         tr["TeamRenderersHeaderTip"] =
-            "xwn rating.\n" +
+            "Xwn rating.\n" +
             "To see detailed information, move mouse cursor to the player's name.";
 
         // RU

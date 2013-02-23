@@ -369,7 +369,7 @@ class wot.utils.StatLoader
                     data = {error:ex};
                 }
             }
-            GlobalEventDispatcher.dispatchEvent( { type: "userdata_loaded", data: data } );
+            GlobalEventDispatcher.dispatchEvent( { type: "userdata_loaded", data: data, request: { value: value, isId: isId } } );
         }
         lv.load(Defines.COMMAND_INFO + " " + s);
     }

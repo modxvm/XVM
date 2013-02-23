@@ -40,7 +40,7 @@ class wot.Helpers.UserDataLoaderHelper
         var fixedData = UserDataLoaderHelper.FixData(event.data[0]);
 
         Cache.Get("INFO#" + event.data[0]._id, function() { return fixedData; });
-        Cache.Get("INFO@" + event.data[0].nm, function() { return fixedData; });
+        Cache.Get("INFO@" + (event.request.isId == true ? event.data[0].nm : event.request.value), function() { return fixedData; });
         GlobalEventDispatcher.dispatchEvent( { type: "userdata_cached" } );
 
         //Logger.addObject(stat, "stat", 3);
