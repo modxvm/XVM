@@ -87,9 +87,9 @@ var process_setup = function(data)
  *   a: "finishReason",
  *   b: "winnerTeam",
  *   c: "arenaCreateTime",
- *   d: "resultShortStr",
+ *   d: "resultShortStr", "win|lose|tie"
  *   e: "arenaTypeID",
- *   f: "playerNameStr",
+ *   f: "playerNameStr", "name [CLAN]"
  *   g: "vehicleName"
  * d: "dailyXPFactor"
  *   "d":2
@@ -103,12 +103,24 @@ var process_results = function(data)
     return;
   }
 
-  var w = data.c.b;
+  var w = data.c.d;
 
-  var t1 = process_results_2(w == 2 ? data.b : data.a, 1);
-  var t2 = process_results_2(w == 2 ? data.a : data.b, 16);
+  var pname = data.c.f.split(" ").shift().toUpperCase();
 
-  var draw = w == 0 ? 1 : 0;
+  var team1 = "b";
+  var team2 = "a";
+  for (var i = 0; i < data.a.length; ++i) {
+    if (data.a[i].d.toUpperCase() == pname) {
+      team1 = "a";
+      team2 = "b";
+      break;
+    }
+  }
+
+  var t1 = process_results_2(w != "lose" ? data[team1] : data[team2], 1);
+  var t2 = process_results_2(w != "lose" ? data[team2] : data[team1], 16);
+
+  var draw = w == "tie" ? 1 : 0;
 
   results[ctime] = {
     res: '  <result' + t1.res + t2.res + ' draw="' + draw + '" created="' + ctime + '"/>\n',
