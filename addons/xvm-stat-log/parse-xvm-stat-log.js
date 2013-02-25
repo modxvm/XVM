@@ -63,7 +63,8 @@ var process_setup = function(data)
     s += ' tbattles="' + pdata.c.tb + '"';
     s += ' twins="' + pdata.c.tw + '"';
     s += ' level="' + pdata.c.tl + '"';
-//    s += ' eff="' + pdata.c.e + '"';
+    s += ' avgl="' + avglvl + '"';
+    s += ' eff="' + pdata.c.e + '"';
     s += ' wn6="' + pdata.c.wn + '"';
     s += ' twr="' + pdata.c.twr + '"';
     var teff = pdata.c.teff || 0;
@@ -72,7 +73,6 @@ var process_setup = function(data)
 //    s += ' frg="' + pdata.c.frg + '"';
 //    s += ' spo="' + pdata.c.spo + '"';
 //    s += ' def="' + pdata.c.def + '"';
-//    s += ' avgl="' + avglvl + '"';
 //    s += ' cap="' + pdata.c.cap + '"';
     s += '/>\n';
     players[vehicleId] = s;
@@ -111,7 +111,7 @@ var process_results = function(data)
   var draw = w == 0 ? 1 : 0;
 
   results[ctime] = {
-    res: '  <result' + t1.res + t2.res + ' draw="' + draw + '" created="' + ctime + '"/>',
+    res: '  <result' + t1.res + t2.res + ' draw="' + draw + '" created="' + ctime + '"/>\n',
     ids: t1.ids.concat(t2.ids)
   }
 }
@@ -211,5 +211,5 @@ for (var i in results) {
     fs.appendFileSync(plFN, players[result.ids[j]]);
 }
 
-fs.appendFileSync(resFN, '<results>\n');
-fs.appendFileSync(plFN, '<players>\n');
+fs.appendFileSync(resFN, '</results>\n');
+fs.appendFileSync(plFN, '</players>\n');
