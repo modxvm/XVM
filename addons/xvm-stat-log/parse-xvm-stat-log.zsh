@@ -104,7 +104,7 @@ process_setup()
 #   "d":2
 process_results()
 {
-  local pl a b c w t1 t2
+  local pl a b c w t1 t2 draw
   c=$(get c "$1" "{")
   w=$(get b "$c")
   c=$(get c "$c")
@@ -115,7 +115,7 @@ process_results()
   fi
   results[$c]=1
 
-  if [ "$w" = "1" ]; then
+  if [ "$w" = "0" -o "$w" = "1" ]; then
     t1=$(get a "$1" "[")
     t2=$(get b "$1" "[")
   else
@@ -126,7 +126,9 @@ process_results()
   t1=$(process_results_2 "$t1" 1)
   t2=$(process_results_2 "$t2" 16)
 
-  echo "  <result$t1$t2 created=\"$c\"/>" >> results.new.xml
+  [ "$w" = "0" ] && draw=1 || draw=0
+
+  echo "  <result$t1$t2 draw=\"$draw\" created=\"$c\"/>" >> results.new.xml
 }
 
 #      [{
