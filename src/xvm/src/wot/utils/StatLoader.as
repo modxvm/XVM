@@ -188,7 +188,7 @@ class wot.utils.StatLoader
                         StatData.s_data[name].loadstate = (StatData.s_data[name].vehicleKey == "UNKNOWN")
                             ? Defines.LOADSTATE_UNKNOWN : Defines.LOADSTATE_DONE;
                         Macros.RegisterStatMacros(stat.name, stat);
-                        Logger.addObject(StatData.s_data[name], "s_data[" + name + "]");
+                        //Logger.addObject(StatData.s_data[name], "s_data[" + name + "]");
                     }
                 }
             }
@@ -338,7 +338,7 @@ class wot.utils.StatLoader
         var pname: String = Utils.GetNormalizedPlayerName(data.label);
         if (StatData.s_data[pname] && StatData.s_data[pname].loadstate != Defines.LOADSTATE_NONE)
             return;
-        
+
         var fullPlayerName = data.label + (data.clanAbbrev ? "[" + data.clanAbbrev + "]" : "");
         AddPlayerData(data.uid, fullPlayerName, data.vehicle, data.icon,
             data.team == "team1" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY, data.himself, data.vehId);
