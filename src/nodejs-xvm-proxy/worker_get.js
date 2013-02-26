@@ -105,6 +105,7 @@ module.exports = (function() {
         if (!options.headers)
             options.headers = {};
         options.headers.connection = "close"; // "keep-alive"
+        //options.headers.Accept = "application/x-javascript"; // don't work
 
         var done = false;
         var reqTimeout = setTimeout(function() {
@@ -116,12 +117,19 @@ module.exports = (function() {
         }, server.timeout);
 
         http.get(options, function(res) {
-            if (res.statusCode != 200) {
+            var ct = res.headers['content-type'].split(';').shift();
+            if (res.statusCode != 200 || ct != 'application/x-javascript') {
                 clearTimeout(reqTimeout);
                 if (done)
                     return;
 
-                var err = "[" + server.name + "] Http error: bad status code: " + res.statusCode;
+                var err = "[" + server.name + "] Http error: ";
+                if (res.statusCode != 200)
+                    err += "bad status code: " + res.statusCode + " ";
+                if (ct != 'application/x-javascript') {
+                    err += "bad content-type: '" + ct + "' (required: 'application/x-javascript')";
+                    res.statusCode = 406; // Not Acceptable
+                }
 
                 _onRequestDone(server, err);
                 callback(null, { __status: res.statusCode });
