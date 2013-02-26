@@ -37,6 +37,8 @@ package utils
         public static const battles:Class;
         [Embed("images/macros/clan.png")]
         public static const clan:Class;
+        [Embed("images/macros/clannb.png")]
+        public static const clannb:Class;
         [Embed("images/macros/dead.png")]
         public static const dead:Class;
         [Embed("images/macros/dmg.png")]

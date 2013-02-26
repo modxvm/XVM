@@ -21,6 +21,7 @@ XVM-3.4.0-test1:
       {{vehiclename}} для внутреннего названия танка, вроде "usa-M24_Chaffee"
         может использоваться в текстовых полях:
         "<img src='img://gui/maps/icons/vehicle/contour/{{vehiclename}}.png'>"
+      {{clannb}} - клан игрока без скобок
 
   [НОВЫЕ ФУНКЦИИ]
   * мод миникарты

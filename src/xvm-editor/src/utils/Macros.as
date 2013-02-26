@@ -50,6 +50,7 @@ package utils
             format = format.split("{{name}}").join(name);
             format = format.split("{{short-nick}}").join(name.slice(0, Config.s_config.minimap.nickShrink));
             format = format.split("{{clan}}").join("[CLAN]");
+            format = format.split("{{clannb}}").join("CLAN");
             format = format.split("{{vehicle}}").join(vname);
             format = format.split("{{vehiclename}}").join("ussr-T-34");
             format = format.split("{{short-vehicle}}").join(vnames);
@@ -139,6 +140,7 @@ package utils
                 { value: "{{nick}}", label: "nick", icon: Embed.nick },
                 { value: "{{name}}", label: "name", icon: Embed.name },
                 { value: "{{clan}}", label: "clan", icon: Embed.clan },
+                { value: "{{clannb}}", label: "clannb", icon: Embed.clannb },
                 { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
                 { value: "{{vtype}}", label: "vtype", icon: Embed.vtype },
             ],
@@ -150,6 +152,7 @@ package utils
                 { value: "{{nick}}", label: "nick", icon: Embed.nick },
                 { value: "{{name}}", label: "name", icon: Embed.name },
                 { value: "{{clan}}", label: "clan", icon: Embed.clan },
+                { value: "{{clannb}}", label: "clannb", icon: Embed.clannb },
                 { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
                 { value: "{{vtype}}", label: "vtype", icon: Embed.vtype },
                 { value: "{{level}}", label: "level", icon: Embed.level },
@@ -191,6 +194,7 @@ package utils
                 { value: "{{nick}}", label: "nick", icon: Embed.nick },
                 { value: "{{name}}", label: "name", icon: Embed.name },
                 { value: "{{clan}}", label: "clan", icon: Embed.clan },
+                { value: "{{clannb}}", label: "clannb", icon: Embed.clannb },
                 { value: "{{squad}}", label: "squad", icon: Embed.squad },
                 { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
                 { value: "{{vtype}}", label: "vtype", icon: Embed.vtype },
@@ -212,6 +216,7 @@ package utils
                 { value: "{{nick}}", label: "nick", icon: Embed.nick },
                 { value: "{{name}}", label: "name", icon: Embed.name },
                 { value: "{{clan}}", label: "clan", icon: Embed.clan },
+                { value: "{{clannb}}", label: "clannb", icon: Embed.clannb },
                 { value: "{{squad}}", label: "squad", icon: Embed.squad },
                 { value: "{{vehicle}}", label: "vehicle", icon: Embed.vehicle },
                 { value: "{{vtype}}", label: "vtype", icon: Embed.vtype },

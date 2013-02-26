@@ -21,6 +21,7 @@ XVM-3.4.0-test1:
       {{vehiclename}} for internal vehicle name like "usa-M24_Chaffee"
         can be used in the text fields:
         "<img src='img://gui/maps/icons/vehicle/contour/{{vehiclename}}.png'>"
+      {{clannb}} - clan name without brackets
 
   [NEW FUNCTIONS]
   * minimap mod

@@ -84,6 +84,7 @@
       {{nick}}        - player nickname with clan name
       {{name}}        - player nickname without clan name
       {{clan}}        - clan name with brackets (empty if no clan)
+      {{clannb}}      - clan name without brackets
       {{vehicle}}     - vehicle name
       {{vehiclename}} - internal vehicle name (usa-M24_Chaffee)
       {{vtype}}       - vehicle type
@@ -94,6 +95,7 @@
       {{nick}}        - player nickname with clan name
       {{name}}        - player nickname without clan name
       {{clan}}        - clan name with brackets (empty if no clan)
+      {{clannb}}      - clan name without brackets
       {{squad}}       - value '1' for own squad, empty for others
       {{vehicle}}     - vehicle name
       {{vehiclename}} - internal vehicle name (usa-M24_Chaffee)
@@ -131,6 +133,7 @@
       {{nick}}        - player nickname with clan name
       {{name}}        - player nickname without clan name
       {{clan}}        - clan name with brackets (empty if no clan)
+      {{clannb}}      - clan name without brackets
       {{vehicle}}     - vehicle name
       {{vehiclename}} - internal vehicle name (usa-M24_Chaffee)
       {{vtype}}       - vehicle type

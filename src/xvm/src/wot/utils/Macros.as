@@ -91,6 +91,8 @@ class wot.utils.Macros
             pdata["name"] = Utils.GetPlayerName(nick);
             // {{clan}}
             pdata["clan"] = Utils.GetClanNameWithBrackets(nick);
+            // {{clannb}}
+            pdata["clannb"] = Utils.GetClanName(nick);
             // {{vehicle}}
             pdata["vehicle"] = VehicleInfo.mapVehicleName(data.icon, data.vehicle);
             // {{vehiclename}} - usa-M24_Chaffee
