@@ -126,8 +126,8 @@ module.exports = (function() {
                 var err = "[" + server.name + "] Http error: ";
                 if (res.statusCode != 200)
                     err += "bad status code: " + res.statusCode + " ";
-                if (ct != 'application/x-javascript') {
-                    err += "bad content-type: '" + ct + "' (required: 'application/x-javascript')";
+                else if (ct != 'application/x-javascript') {
+                    err += "bad content-type: '" + ct + "'";
                     res.statusCode = 406; // Not Acceptable
                 }
 
