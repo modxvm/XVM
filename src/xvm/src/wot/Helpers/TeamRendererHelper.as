@@ -1,6 +1,7 @@
 /**
  * Helper class for shared functions used in the players lists renderers in the hangar
  */
+import net.wargaming.messenger.MessengerUtils;
 import net.wargaming.managers.ToolTipManager;
 import wot.utils.Cache;
 import wot.utils.Defines;
@@ -16,16 +17,17 @@ class wot.Helpers.TeamRendererHelper
         if (!wnd[name] || wnd[name + "XVM"])
             return;
 
-        var res = Utils.duplicateTextField(wnd, name + "XVM", styleFld, 0, "left");
-        res._x = wnd[name]._x + offsetX;
+        var res = Utils.duplicateTextField(wnd, name + "XVM", styleFld, 0, "right");
+        res._width = 25;
+        res._x = wnd[name]._x + offsetX + 25;
         res._y = wnd[name]._y + offsetY;
         res.htmlText = "<span class='xvm_" + name + "XVM'><font color='#" +
             wnd[name].textColor.toString(16) + "'>xwn</font></span>";
 
         var b = wnd.attachMovie("Button", name + "XVMHolder", wnd.getNextHighestDepth());
-        b._x = res._x - 5;
+        b._x = res._x;
         b._y = res._y;
-        b.setSize(30, 20);
+        b.setSize(res._width, res._height);
         b._alpha = 0;
         b.addEventListener("rollOver", function() {
             ToolTipManager.instance.show(Locale.get(tipName));
@@ -37,8 +39,12 @@ class wot.Helpers.TeamRendererHelper
         return res;
     }
 
-    public static function GetToolTipData(stat)
+    public static function GetToolTipData(data, stat)
     {
+        var prefix =
+            MessengerUtils.isFriend(data) ? '<font color="#66FF66">' + Locale.get("Friend") + '</font><br>' :
+            MessengerUtils.isIgnored(data) ? '<font color="#FF6666">' + Locale.get("Ignored") + '</font><br>' : "";
+
         var dt = stat.dt ? stat.dt.split("T").join(" ").substr(0, 10) : Locale.get("unknown");
 
         var s = "";
@@ -124,7 +130,7 @@ class wot.Helpers.TeamRendererHelper
             }
         }
 */
-        return s;
+        return prefix + s;
     }
 
     public static function setXVMStat(key, textField)

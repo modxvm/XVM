@@ -7,4 +7,5 @@
 
     function configUI();
     function afterSetData();
+    function updateAfterStateChange();
 }

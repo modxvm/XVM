@@ -13,4 +13,5 @@
     function configUI();
     function afterSetData();
     function getToolTipData();
+    function updateAfterStateChange();
 }

@@ -54,7 +54,7 @@ class wot.TeamRenderer.TeamRenderer extends net.wargaming.messenger.controls.Tea
         this.onRollOver = function()
         {
             if (this.stat)
-                ToolTipManager.instance.show(TeamRendererHelper.GetToolTipData(this.stat));
+                ToolTipManager.instance.show(TeamRendererHelper.GetToolTipData(this.data, this.stat));
             else
             {
                 if (this.toolTip)
