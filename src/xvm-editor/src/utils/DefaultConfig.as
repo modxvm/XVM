@@ -1064,7 +1064,7 @@ public class DefaultConfig
             AVG_GWR: 48,  // Average GWR. Source: http://wot-news.com/stat/server/ru/norm/en
             AVG_XVMSCALE: 30, // Average XVM Scale. Source: http://www.koreanrandom.com/forum/topic/2625-/
             AVG_BATTLES: 2000, // Averate number of battles. Source: http://wot-news.com/stat/server/ru/norm/en
-            MAX_EBN: 300 // Maximum Ebn value for win-chance formula
+            MAX_EBN: 200 // Maximum Ebn value for win-chance formula
         };
     }
 }
