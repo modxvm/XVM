@@ -1,7 +1,7 @@
 #!/bin/bash
 
 port=27017
-limit=2
+limit=50
 limitHi=50
 limitLo=1
 
@@ -32,8 +32,9 @@ limitHi=100
 	sort -n > $fn
 #	sort -n -r > $fn
 elif [ "$1" = "missed" ]; then
+limitRows=3000000
     # missed
-    echo "db.missed.find({missed:true}).forEach(function(x){print(x._id);})" | \
+    echo "db.missed.find({missed:true}).limit($limitRows).forEach(function(x){print(x._id);})" | \
 	mongo --port $port --quiet xvm2 | grep -v "bye" | \
 	sort -n > $fn
 #	sort -n -r > $fn
@@ -104,9 +105,9 @@ update()
 	    api_error)
 		unset ids[$id]
 		;;
-	    wait|max_conn|error|timeout|503|parse)
+	    wait|max_conn|error|timeout|502|503|400|403|404|406|parse)
 		st_err=1
-		[ "$cmd" = "checkcache" ] && unset ids[$id] || slp=1
+#		[ "$cmd" = "checkcache" ] && unset ids[$id] || slp=1
 		;;
 	    fail)
 		st_err=1
