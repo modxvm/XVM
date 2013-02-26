@@ -19,7 +19,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
      * Used for Minimap syncronization.
      */
     public var m_uids:Array;
-    
+
     static var DEBUG_TIMES = false;
 
     private var m_fieldType:Number = 0;
@@ -28,20 +28,20 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 
     private var m_knownPlayersCount:Number = 0; // for Fog of War mode.
     private var m_postmortemIndex:Number = 0;
-    
+
     function PlayersPanel()
     {
         super();
         Utils.TraceXvmModule("PlayersPanel");
 
         GlobalEventDispatcher.addEventListener("config_loaded", StatLoader.LoadLastStat);
+        GlobalEventDispatcher.addEventListener("stat_loaded", this, update);
         Config.LoadConfig("PlayersPanel.as");
 
         checkLoading();
     }
 
     // override
-
     function setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount)
     {
         //Logger.add("PlayersPanel.setData()");
@@ -69,6 +69,8 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         //Logger.add("PlayersPanel.setData2()");
         //Logger.add(data);
 
+        m_data = data;
+
         m_names.condenseWhite = !StatData.s_loaded;
         m_vehicles.condenseWhite = !StatData.s_loaded;
 
@@ -86,9 +88,9 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         if (data)
         {
             for (var i in data)
-                Macros.RegisterPlayerData(data[i].label, data[i]);
+                Macros.RegisterPlayerData(Utils.GetNormalizedPlayerName(data[i].label), data[i]);
         }
-        
+
         // [2/3] fix WG bug - this function is slow, don't call it if not required.
         m_list["invalidateData"] = function() {}
 
@@ -96,7 +98,7 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 
         // [3/3] fix WG bug - this function is slow, don't call it if not required.
         m_list["invalidateData"] = m_list["invalidateData2"];
-        
+
         players_bg._alpha = Config.s_config.playersPanel.alpha;
         m_list._alpha = Config.s_config.playersPanel.iconAlpha;
 
@@ -135,14 +137,12 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         try
         {
             m_fieldType = Defines.FIELDTYPE_VEHICLE;
-            m_data = data;
             m_item = 0;
             super._setVehiclesStr(data, sel, isColorBlind, knownPlayersCount);
         }
         finally
         {
             m_fieldType = Defines.FIELDTYPE_NONE;
-            m_data = null;
             m_item = 0;
         }
     }
@@ -154,14 +154,12 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         try
         {
             m_fieldType = Defines.FIELDTYPE_NICK;
-            m_data = data;
             m_item = 0;
             super._setNamesStr(data, sel, isColorBlind, knownPlayersCount);
         }
         finally
         {
             m_fieldType = Defines.FIELDTYPE_NONE;
-            m_data = null;
             m_item = 0;
         }
     }
@@ -222,7 +220,9 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
             var deadState = Utils.endsWith("dead", colorScheme) ? Defines.DEADSTATE_DEAD : Defines.DEADSTATE_ALIVE;
             var state = m_state;
             var field = state == "medium2" ? m_vehicles : m_names;
-            var key = "PP/" + deadState + "/" + data.label + "/" + data.vehicle + "/" + state + "/" + m_fieldType;
+            var pname = Utils.GetNormalizedPlayerName(data.label);
+            var key = "PP/" + deadState + "/" + pname + "/" + state + "/" + m_fieldType + "/" +
+                (StatData.s_data[pname] ? StatData.s_data[pname].loadstate : "0");
             //Logger.add(key);
             text = Cache.Get(key, function()
             {
@@ -302,8 +302,8 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         format = format.split("{{name}}").join(pname);
         format = format.split("{{clan}}").join(cname);
         return format;
-    }     
-     
+    }
+
     function XVMAdjustPanelSize()
     {
         //Logger.add("PlayersPanel.XVMAdjustPanelSize()");
@@ -388,14 +388,14 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         }
         return max_height;
     }
-    
+
     /**
      * ----------------------------------
      * Code for Minimap interaction below
      */
-    
+
     /** Informs Minimap when both panel are loaded */
-    
+
     private function checkLoading():Void
     {
         m_list.onEnterFrame = function()
@@ -403,9 +403,9 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
             if (this._dataProvider.length > 1)
             {
                 delete this.onEnterFrame;
-                
+
                 this._parent.updateUids();
-                
+
                 if (this._itemRenderer == "RightItemRendererIcon")
                     GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENEMY_PLAYERS_PANEL_READY));
                 else

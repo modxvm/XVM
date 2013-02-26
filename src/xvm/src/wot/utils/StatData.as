@@ -1,9 +1,3 @@
-import wot.utils.Config;
-import wot.utils.GlobalEventDispatcher;
-import wot.utils.Logger;
-import wot.utils.Utils;
-import wot.utils.Macros;
-
 /*
   s_data members:
     playerId: Number,
@@ -11,11 +5,11 @@ import wot.utils.Macros;
     label: String,
     clanAbbrev: String,
     vehicle: String,
-    vehicleId: String,
+    vehicleKey: String,
     icon: String,
     team: Defines.TEAM_ALLY | Defines.TEAM_ENEMY,
     selected: Boolean,
-    loaded: Boolean
+    loadstate: LOADSTATE_NONE, LOADSTATE_UNKNOWN, LOADSTATE_DONE
     stat:
         id - player id
         name - player name
@@ -63,35 +57,4 @@ class wot.utils.StatData
 {
     public static var s_loaded = false;
     public static var s_data = {};
-
-
-
-    // dummy var to avoid import warning
-    private static var __dummy = Logger.dummy;
-
-    public static function FormatText(data:Object, format:String, isDead:Boolean):String
-    {
-        //Logger.addObject(s_data);
-        if (s_loaded)
-        {
-            var pname: String = Utils.GetNormalizedPlayerName(data.label);
-            if (!data.uid)
-                data.uid = s_data[pname].playerId;
-            var stat = s_data[pname].stat;
-            //Logger.addObject(s_data[pname]);
-            //Logger.add("pname=" + pname + " uid=" + data.uid + " r=" + stat.r + " e=" + stat.e);
-            if (!stat)
-            {
-                if (Config.s_config.rating.loadEnemyStatsInFogOfWar)
-                    GlobalEventDispatcher.dispatchEvent( { type: "process_fow", data: data } );
-            }
-            else
-            {
-                if (Config.s_config.rating.loadEnemyStatsInFogOfWar && !s_data[pname].loaded && data.vehicleId != "UNKNOWN")
-                    GlobalEventDispatcher.dispatchEvent( { type: "process_fow", data: data } );
-            }
-        }
-
-        return Macros.Format(data.label, format, { darken:isDead } );
-    }
 }

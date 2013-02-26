@@ -142,7 +142,7 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
 
         //Logger.add("update2");
 
-        Macros.RegisterPlayerData(data.label, data);
+        Macros.RegisterPlayerData(Utils.GetNormalizedPlayerName(data.label), data);
 
         var saved_icon = data.icon;
         var saved_label = data.label;

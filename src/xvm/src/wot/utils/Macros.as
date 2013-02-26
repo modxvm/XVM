@@ -2,11 +2,13 @@ import com.natecook.Sprintf;
 import wot.utils.Cache;
 import wot.utils.Config;
 import wot.utils.Defines;
+import wot.utils.GlobalEventDispatcher;
 import wot.utils.GraphicsUtil;
 import wot.utils.Locale;
 import wot.utils.Logger;
 import wot.utils.Utils;
 import wot.utils.VehicleInfo;
+import wot.utils.StatData;
 
 class wot.utils.Macros
 {
@@ -48,12 +50,31 @@ class wot.utils.Macros
         return res;
     }
 
-    public static function RegisterPlayerData(playerName:String, data:Object)
+    /**
+     * @param pname !!!NORMALIZED player name (Utils.GetNormalizedPlayerName(playerName))!!!
+     */
+    public static function RegisterPlayerData(pname:String, data:Object)
     {
         if (!data)
             return;
 
-        var pname:String = Utils.GetNormalizedPlayerName(playerName);
+        // Load stat in ForOfWar
+        if (StatData.s_loaded && Config.s_config.rating.loadEnemyStatsInFogOfWar)
+        {
+            if (!data.uid)
+                data.uid = StatData.s_data[pname].playerId;
+            var stat = StatData.s_data[pname].stat;
+            //Logger.addObject(s_data[pname]);
+            //Logger.add("pname=" + pname + " uid=" + data.uid + " r=" + stat.r + " e=" + stat.e);
+            if (!stat || (StatData.s_data[pname].loadstate == Defines.LOADSTATE_UNKNOWN && VehicleInfo.getInfo2(data.icon).name != "UNKNOWN"))
+            {
+                //Logger.addObject(data);
+                StatData.s_data[pname].vehicleKey = VehicleInfo.getInfo2(data.icon).name;
+                StatData.s_data[pname].loadstate = Defines.LOADSTATE_NONE;
+                GlobalEventDispatcher.dispatchEvent( { type: "process_fow", data: data } );
+            }
+        }
+
         Cache.Get("_m/" + pname + "/" + data.vehicle, function()
         {
             if (!Macros.data_provider.hasOwnProperty(pname))

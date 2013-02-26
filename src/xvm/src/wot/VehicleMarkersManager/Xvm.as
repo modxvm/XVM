@@ -73,7 +73,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         damageTextComponent = new DamageTextComponent(new DamageTextProxy(this));
 
     }
-    
+
     private static var initialized:Boolean = false;
     private static function initialize()
     {
@@ -132,7 +132,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         vehicleTypeComponent.init(vClass /*mediumTank*/, hunt);
         damageTextComponent.init();
 
-        Macros.RegisterPlayerData(m_playerFullName,
+        Macros.RegisterPlayerData(Utils.GetNormalizedPlayerName(m_playerFullName),
             {
                 label: m_playerFullName,
                 vehicle: m_vname,

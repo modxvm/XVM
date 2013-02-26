@@ -98,7 +98,7 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
         (
             function() {
                 if (!StatData.s_loaded) {
-                    if (StatLoader.teams.t1 == 0 || StatLoader.teams.t2 == 0) {
+                    if (StatLoader.teams.t1 == 0 /*&& StatLoader.teams.t2 == 0*/) { // t2 disabled because of FogOfWar 
                         if (loop * BattleLoading.STAT_PRELOAD_DELAY > 10000) { // 10 sec
                             Logger.add("WARNING: no players data after 10 sec, skip stats loading");
                         } else {

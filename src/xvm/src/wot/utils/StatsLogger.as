@@ -131,10 +131,10 @@ class wot.utils.StatsLogger
         a: "playerId",
         b: "team",
         c: "stat",
-        d: "vehicleId",
+        d: "vehicleKey",
         e: "label",
         f: "clanAbbrev",
-        g: "realVehicleId"
+        g: "vehicleId"
     }
 
 }

@@ -41,6 +41,7 @@ XVM-3.4.0-test1:
   [FIXES]
   * fixed {{c:system}} macro
   * fixed {{nick}} macro in the medium2 players panel mode
+  * fixed statistics loading in the Fog Of War mode
 
   [CAPTURE BAR]
   * capture bar: fixed "enabled":false

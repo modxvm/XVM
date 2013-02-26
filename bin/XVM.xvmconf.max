@@ -42,18 +42,18 @@
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
     "medium": {
       "width": 120,
-      "formatLeft": "{{vehicle}} <font color='{{c:e}}'>{{nick}}</font>",
-      "formatRight": "{{vehicle}} <font color='{{c:e}}'>{{nick}}</font>"
+      "formatLeft": "{{vehicle}} <font color='{{c:xwn}}'>{{nick}}</font>",
+      "formatRight": "{{vehicle}} <font color='{{c:xwn}}'>{{nick}}</font>"
     },
     "medium2": {
       "width": 120,
-      "formatLeft": "{{nick}} <font color='{{c:e}}'>{{vehicle}}</font>",
-      "formatRight": "{{nick}} <font color='{{c:e}}'>{{vehicle}}</font>"
+      "formatLeft": "{{nick}} <font color='{{c:xwn}}'>{{vehicle}}</font>",
+      "formatRight": "{{nick}} <font color='{{c:xwn}}'>{{vehicle}}</font>"
     },
     "large": {
       "width": 120,
-      "nickFormatLeft": "<font color='{{c:e}}'>{{rating}}</font> {{name}}<font color='#cccccc'>{{clan}}</font>",
-      "nickFormatRight": "{{name}}<font color='#cccccc'>{{clan}}</font> <font color='{{c:e}}'>{{rating}}</font>",
+      "nickFormatLeft": "<font color='{{c:xwn}}'>{{xwn}}</font> {{name}}<font color='#cccccc'>{{clan}}</font>",
+      "nickFormatRight": "{{name}}<font color='#cccccc'>{{clan}}</font> <font color='{{c:xwn}}'>{{xwn}}</font>",
       "vehicleFormatLeft": "",
       "vehicleFormatRight": ""
     }
@@ -127,7 +127,7 @@
               "name": "Rating marks",
               "x": 0, "y": -35,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<font face='Symbol' color='#CCCCCC' size='11'><font color='{{c:e}}'><b>·</b> </font><font color='{{c:tdv}}'><b>·</b></font><font color='{{c:tfb}}'><b>·</b></font><font color='{{c:tsb}}'><b>·</b> <font color='{{c:twr}}'><b>·</b></font></font>"
+              "format": "<font face='Symbol' color='#CCCCCC' size='11'><font color='{{c:e}}'><b>·</b> </font><font color='{{c:tdv}}'><b>·</b></font><font color='{{c:tfb}}'><b>·</b></font><font color='{{c:tsb}}'><b>·</b> <font color='{{c:xwn}}'><b>·</b></font></font>"
             },
             {
               "visible": true,
@@ -189,7 +189,7 @@
               "name": "Tank Rating",
               "x": 0, "y": -52, "alpha": 75,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<font face='$FieldFont' size='12'><b><font color='{{c:xeff}}'>{{xeff}}</font>|<font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:e}}'>{{teff}}</font></b></font>"
+              "format": "<font face='$FieldFont' size='12'><b><font color='{{c:e}}'>{{teff}}</font> <font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:twr}}'>{{twr}}</font> <font color='{{c:xeff}}'>{{xeff}} <font color='{{c:xwn}}'>{{xwn}}</font></font></b></font>"
             }
           ]
         }
@@ -280,7 +280,7 @@
               "name": "Rating marks",
               "x": 0, "y": -35,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<font face='Symbol' color='#CCCCCC' size='11'><font color='{{c:e}}'><b>·</b> </font><font color='{{c:tdv}}'><b>·</b></font><font color='{{c:tfb}}'><b>·</b></font><font color='{{c:tsb}}'><b>·</b> <font color='{{c:twr}}'><b>·</b></font></font>"
+              "format": "<font face='Symbol' color='#CCCCCC' size='11'><font color='{{c:e}}'><b>·</b> </font><font color='{{c:tdv}}'><b>·</b></font><font color='{{c:tfb}}'><b>·</b></font><font color='{{c:tsb}}'><b>·</b> <font color='{{c:xwn}}'><b>·</b></font></font>"
             },
             {
               "visible": true,
@@ -342,7 +342,7 @@
               "name": "Tank Rating",
               "x": 0, "y": -52, "alpha": 75,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<font face='$FieldFont' size='12'><b><font color='{{c:xeff}}'>{{xeff}}</font>|<font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:e}}'>{{teff}}</font></b></font>"
+              "format": "<font face='$FieldFont' size='12'><b><font color='{{c:xeff}}'>{{xeff}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:twr}}'>{{twr}}</font> <font color='{{c:e}}'>{{teff}}</font></b></font>"
             }
           ]
         }

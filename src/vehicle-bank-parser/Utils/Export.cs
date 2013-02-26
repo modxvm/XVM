@@ -61,8 +61,8 @@ class wot.utils.VehicleInfoData2
     private static void writeFooter(StreamWriter file)
     {
 file.WriteLine(@"
-        // stub
-        __end__: null
+        // unknown (FogOfWar)
+        unknown: { level: 0, name: ""UNKNOWN"" }
     }
 }
     ");

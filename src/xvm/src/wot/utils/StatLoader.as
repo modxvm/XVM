@@ -30,7 +30,7 @@ class wot.utils.StatLoader
     private static var timeouts = [ 300, 500, 700, 1500, 2000 ];
 
     public static function AddPlayerData(playerId: Number, playerName: String, vehicle: String, icon: String,
-        team: Number, selected: Boolean, realVehicleId: Number)
+        team: Number, selected: Boolean, vehicleId: Number)
     {
         if (playerId <= 0 || !playerName)
             return;
@@ -53,15 +53,15 @@ class wot.utils.StatLoader
             label: pname,
             clanAbbrev: clan,
             vehicle: vehicle,
-            vehicleId: VehicleInfo.getInfo2(icon).name,
+            vehicleKey: VehicleInfo.getInfo2(icon).name,
             icon: icon,
             team: team,
-      	    realVehicleId: realVehicleId ? realVehicleId : 0,
+      	    vehicleId: vehicleId || 0,
             selected: selected,
-            loaded: StatData.s_data[pname] ? true : false,
+            loadstate: !StatData.s_data[pname].loadstate ? Defines.LOADSTATE_NONE : StatData.s_data[pname].loadstate,
             stat: StatData.s_data[pname] ? StatData.s_data[pname].stat : undefined
         };
-        if (!StatData.s_data[pname].loaded)
+        if (StatData.s_data[pname].loadstate == Defines.LOADSTATE_NONE)
             dirty = true;
     }
 
@@ -81,14 +81,18 @@ class wot.utils.StatLoader
         for (var pname in StatData.s_data)
         {
             var pdata = StatData.s_data[pname];
-            if (!pdata.loaded)
+            if (pdata.loadstate == Defines.LOADSTATE_NONE)
             {
                 //Logger.addObject(pdata, pname);
-                var str: String = String(pdata.playerId) + "=" + pdata.fullPlayerName +
-                    "&" + pdata.vehicleId + (pdata.selected ? "&1" : "");
+                var str: String = String(pdata.playerId) + "=" + pdata.fullPlayerName;
+                if (pdata.vehicleKey) {
+                    str += "&" + pdata.vehicleKey;
+                    if (pdata.selected)
+                        str += "&1";
+                }
                 if (len + str.length > Defines.MAX_PATH - command.length)
                     break;
-                pdata.loaded = true;
+                pdata.loadstate = Defines.LOADSTATE_LOADING;
                 players_to_load.push(str);
                 len += str.length + 1;
             }
@@ -178,13 +182,13 @@ class wot.utils.StatLoader
                         if (!StatData.s_data[name])
                         {
                             StatLoader.s_players_count++;
-                            StatData.s_data[name] = { loaded: true };
+                            StatData.s_data[name] = { };
                         }
                         StatData.s_data[name].stat = stat;
-                        if (StatData.s_data[name].vehicleId == "UNKNOWN")
-                            StatData.s_data[name].loaded = false;
+                        StatData.s_data[name].loadstate = (StatData.s_data[name].vehicleKey == "UNKNOWN")
+                            ? Defines.LOADSTATE_UNKNOWN : Defines.LOADSTATE_DONE;
                         Macros.RegisterStatMacros(stat.name, stat);
-                        //Logger.addObject(stat, stat.name);
+                        Logger.addObject(StatData.s_data[name], "s_data[" + name + "]");
                     }
                 }
             }
@@ -331,14 +335,13 @@ class wot.utils.StatLoader
         //Logger.add("ProcessForFogOfWar(): " + data.label);
         //Logger.addObject(data);
 
-        var fullPlayerName = data.label + (data.clanAbbrev ? "[" + data.clanAbbrev + "]" : "");
-        var pname: String = Utils.GetNormalizedPlayerName(fullPlayerName);
-
-        if (StatData.s_data[pname])
+        var pname: String = Utils.GetNormalizedPlayerName(data.label);
+        if (StatData.s_data[pname] && StatData.s_data[pname].loadstate != Defines.LOADSTATE_NONE)
             return;
-
+        
+        var fullPlayerName = data.label + (data.clanAbbrev ? "[" + data.clanAbbrev + "]" : "");
         AddPlayerData(data.uid, fullPlayerName, data.vehicle, data.icon,
-            data.team == "team1" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
+            data.team == "team1" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY, data.himself, data.vehId);
 
         var timer = _global.setTimeout(function() { StatLoader.StartLoadData(Defines.COMMAND_RUN_ASYNC); }, 50);
     }

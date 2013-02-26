@@ -86,4 +86,10 @@ class wot.utils.Defines
     // Text insert order
     public static var INSERTORDER_BEGIN = DIRECTION_DOWN;
     public static var INSERTORDER_END = DIRECTION_UP;
+
+    // Load states
+    public static var LOADSTATE_NONE = 1;    // not loaded
+    public static var LOADSTATE_LOADING = 2; // loading
+    public static var LOADSTATE_DONE = 3;    // statistics loaded
+    public static var LOADSTATE_UNKNOWN = 4; // unknown vehicle in FogOfWar
 }

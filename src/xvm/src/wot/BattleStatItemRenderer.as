@@ -40,7 +40,8 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
         col3.verticalAutoSize = true;
 
         GlobalEventDispatcher.addEventListener("config_loaded", StatLoader.LoadLastStat);
-        GlobalEventDispatcher.addEventListener("config_loaded", onConfigLoaded);
+        GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
+        GlobalEventDispatcher.addEventListener("stat_loaded", this, updateData);
         Config.LoadConfig("BattleStatItemRenderer.as");
     }
 
@@ -74,7 +75,7 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
 
     public function onConfigLoaded(event)
     {
-        GlobalEventDispatcher.removeEventListener("config_loaded", onConfigLoaded);
+        GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
         col3.condenseWhite = !Config.s_config.rating.showPlayersStatistics;
     }
 
@@ -97,20 +98,12 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
             var timer = _global.setTimeout(function() { BattleStatItemRenderer.SetChanceFieldData(); }, 50);
         }
 
-        Macros.RegisterPlayerData(data.label, data);
+        var pname = Utils.GetNormalizedPlayerName(data.label);
+        Macros.RegisterPlayerData(pname, data);
 
-        var key = "SF/" + data.label + "/" + data.vehicle;
+        var key = "SF/" + pname + "/" + (StatData.s_data[pname] ? StatData.s_data[pname].loadstate : "0");
         var saved_icon = data.icon;
         var saved_label = data.label;
-
-        var pname = data.label.toUpperCase();
-
-        if (Config.s_config.rating.showPlayersStatistics && (!StatData.s_data[pname] || !StatData.s_data[pname].playerId))
-        {
-            //Logger.add("StatLoader.AddPlayerData(): " + cacheKey);
-            StatLoader.AddPlayerData(data.uid, data.label, data.vehicle, data.icon, team);
-            GlobalEventDispatcher.addEventListener("stat_loaded", this, StatLoadedCallback());
-        }
 
         // Alternative icon set
         if (!m_iconset)
@@ -190,22 +183,5 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
         }
         PlayerInfo.setSource(m_clanIcon, data.label, data.clanAbbrev);
         m_clanIcon["holder"]._alpha = ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0) ? 100 : 50;
-    }
-
-    // update delegate
-    function StatLoadedCallback()
-    {
-        //Logger.add("StatLoaded(): " + data.label);
-
-        GlobalEventDispatcher.removeEventListener("stat_loaded", this, StatLoadedCallback);
-
-        var label = data.label;
-        var team = this.team;
-        var key = "SF/" + label + "/" + data.vehicle;
-        Cache.Remove(key);
-        col3.htmlText = Cache.Get(key, function() { return Macros.Format(label,
-            team == Defines.TEAM_ALLY ? Config.s_config.statisticForm.formatLeft : Config.s_config.statisticForm.formatRight,
-            { }) } );
-        //Logger.add(vehicleField.htmlText);
     }
 }

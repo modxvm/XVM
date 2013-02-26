@@ -325,8 +325,7 @@ class wot.utils.VehicleInfoData2
         amx_50fosh_155:             { level: 10, type: "TD",  hpstock: 1850, hptop: 1850, turret: 0, premium: 0, nation: "france",  name: "AMX_50Fosh_155" },
         gb48_fv215b_183:            { level: 10, type: "TD",  hpstock: 1960, hptop: 1960, turret: 0, premium: 0, nation: "uk",      name: "GB48_FV215b_183" },
 
-        // stub
-        __end__: null
+        // unknown (FogOfWar)
+        unknown: { level: 0, name: "UNKNOWN" }
     }
 }
-    
