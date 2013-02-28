@@ -105,6 +105,10 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
         var saved_icon = data.icon;
         var saved_label = data.label;
 
+        // Add data for Win Chance calculation
+        if (Config.s_config.rating.showPlayersStatistics && (!StatData.s_data[pname] || !StatData.s_data[pname].playerId))
+            StatLoader.AddPlayerData(data.uid, data.label, data.vehicle, data.icon, team);
+
         // Alternative icon set
         if (!m_iconset)
             m_iconset = new IconLoader(this, completeLoad);
