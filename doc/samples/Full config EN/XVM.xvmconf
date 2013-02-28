@@ -33,7 +33,7 @@
     "loadEnemyStatsInFogOfWar": true,           // true - Enable downloading of data on opponents in the "fog of war"
     "enableStatisticsLog": false,               // true - Enable saving statistics to "xvm-stat.log" file
     "enableUserInfoStatistics": true,           // true - Enable statistics in the user info window
-    "enableCompanyStatistics": true             // true - Enable statistics in the company window
+    "enableCompanyStatistics": false            // true - Enable statistics in the company window
   },
   // Parameters of the Battle Loading Screen
   "battleLoading": {

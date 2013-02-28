@@ -1,4 +1,4 @@
-﻿/**
+/**
  * ...
  * @author sirmax2
  */
@@ -19,7 +19,6 @@ class wot.utils.VehicleInfoData
         ussr_Tetrarch_LL:               { tiers: [ 2, 3 ],   name: null, short: "" },
         germany_H39_captured:           { tiers: [ 2, 3 ],   name: null, short: "" },
         germany_Pz35t:                  { tiers: [ 2, 3 ],   name: null, short: "" },
-        germany_PzI:                    { tiers: [ 2, 3 ],   name: null, short: "" },
         germany_PzII:                   { tiers: [ 2, 3 ],   name: null, short: "" },
         usa_M2_lt:                      { tiers: [ 2, 3 ],   name: null, short: "" },
         usa_T1_E6:                      { tiers: [ 2, 3 ],   name: null, short: "" },
@@ -68,7 +67,6 @@ class wot.utils.VehicleInfoData
         germany_Sturmpanzer_II:         { tiers: [ 4, 6 ],   name: null, short: "" },
         germany_Wespe:                  { tiers: [ 4, 6 ],   name: null, short: "" },
         usa_M37:                        { tiers: [ 4, 6 ],   name: null, short: "" },
-        usa_Sexton_I:                   { tiers: [ 4, 6 ],   name: null, short: "" },
         france_Lorraine39_L_AM:         { tiers: [ 4, 6 ],   name: null, short: "" },
 
         // level 4
@@ -77,7 +75,6 @@ class wot.utils.VehicleInfoData
         germany_PzII_Luchs:             { tiers: [ 4, 8 ],   name: null, short: "" },
         usa_M5_Stuart:                  { tiers: [ 4, 8 ],   name: null, short: "" },
         china_Ch09_M5:                  { tiers: [ 4, 8 ],   name: null, short: "" },
-        ussr_A_32:                      { tiers: [ 4, 6 ],   name: null, short: "" },
         ussr_T_28:                      { tiers: [ 4, 6 ],   name: null, short: "" },
         germany_PzIII:                  { tiers: [ 4, 6 ],   name: null, short: "" },
         germany_PzIII_training:         { tiers: [ 4, 6 ],   name: null, short: "" },
@@ -97,13 +94,11 @@ class wot.utils.VehicleInfoData
         france_AMX_105AM:               { tiers: [ 5, 8 ],   name: null, short: "" },
 
         // level 5
-        ussr_T_50_2:                    { tiers: [ 7, 12 ],  name: null, short: "" },
-        germany_VK1602:                 { tiers: [ 7, 12 ],  name: null, short: "" },
-        usa_M24_Chaffee:                { tiers: [ 7, 12 ],  name: null, short: "" },
+        germany_VK1602:                 { tiers: [ 6, 9 ],   name: null, short: "" },
+        france_ELC_AMX:                 { tiers: [ 6, 9 ],   name: null, short: "" },
         ussr_T_34:                      { tiers: [ 5, 7 ],   name: null, short: "" },
         germany_PzIII_IV:               { tiers: [ 5, 7 ],   name: null, short: "" },
         germany_PzIV:                   { tiers: [ 5, 7 ],   name: null, short: "" },
-        germany_PzV_training:           { tiers: [ 5, 7 ],   name: null, short: "" },
         germany_T_25:                   { tiers: [ 5, 7 ],   name: null, short: "" },
         usa_M4_Sherman:                 { tiers: [ 5, 7 ],   name: null, short: "" },
         usa_M7_med:                     { tiers: [ 5, 7 ],   name: null, short: "" },
@@ -111,7 +106,6 @@ class wot.utils.VehicleInfoData
         china_Ch21_T34:                 { tiers: [ 5, 7 ],   name: null, short: "" },
         ussr_KV:                        { tiers: [ 5, 7 ],   name: null, short: "" },
         ussr_KV1:                       { tiers: [ 5, 7 ],   name: null, short: "" },
-        germany_PzVIB_Tiger_II_training:{ tiers: [ 5, 7 ],   name: null, short: "" },
         usa_T1_hvy:                     { tiers: [ 5, 7 ],   name: null, short: "" },
         france_BDR_G1B:                 { tiers: [ 5, 7 ],   name: null, short: "" },
         uk_GB08_Churchill_I:            { tiers: [ 5, 7 ],   name: null, short: "" },
@@ -172,6 +166,7 @@ class wot.utils.VehicleInfoData
         ussr_KV_13:                     { tiers: [ 7, 9 ],   name: null, short: "" },
         ussr_T_43:                      { tiers: [ 7, 9 ],   name: null, short: "" },
         germany_PzV:                    { tiers: [ 7, 9 ],   name: null, short: "" },
+        germany_PzV_training:           { tiers: [ 7, 9 ],   name: null, short: "" },
         germany_VK3002DB:               { tiers: [ 7, 9 ],   name: null, short: "" },
         usa_T20:                        { tiers: [ 7, 9 ],   name: null, short: "" },
         uk_GB22_Comet:                  { tiers: [ 7, 9 ],   name: null, short: "" },
@@ -213,6 +208,7 @@ class wot.utils.VehicleInfoData
         ussr_KV4:                       { tiers: [ 8, 10 ],  name: null, short: "" },
         germany_Lowe:                   { tiers: [ 8, 10 ],  name: null, short: "" },
         germany_PzVIB_Tiger_II:         { tiers: [ 8, 10 ],  name: null, short: "" },
+        germany_PzVIB_Tiger_II_training:{ tiers: [ 8, 10 ],  name: null, short: "" },
         germany_VK4502A:                { tiers: [ 8, 10 ],  name: null, short: "" },
         usa_M6A2E1:                     { tiers: [ 8, 10 ],  name: null, short: "" },
         usa_T32:                        { tiers: [ 8, 10 ],  name: null, short: "" },
@@ -287,17 +283,19 @@ class wot.utils.VehicleInfoData
         // non-standard
         germany_Bison_I:                { tiers: [ 3, 5 ],   name: null, short: "" },
         usa_T2_lt:                      { tiers: [ 2, 4 ],   name: null, short: "" },
+        germany_PzI:                    { tiers: [ 2, 2 ],   name: null, short: "" },
         ussr_M3_Stuart_LL:              { tiers: [ 3, 4 ],   name: null, short: "" },
         ussr_BT_SV:                     { tiers: [ 3, 4 ],   name: null, short: "" },
         germany_PzII_J:                 { tiers: [ 3, 4 ],   name: null, short: "" },
         ussr_T_127:                     { tiers: [ 3, 4 ],   name: null, short: "" },
+        usa_Sexton_I:                   { tiers: [ 4, 5 ],   name: null, short: "" },
         ussr_T_50:                      { tiers: [ 5, 9 ],   name: null, short: "" },
         ussr_Valentine_LL:              { tiers: [ 4, 4 ],   name: null, short: "" },
         germany_B_1bis_captured:        { tiers: [ 4, 4 ],   name: null, short: "" },
+        ussr_A_32:                      { tiers: [ 4, 5 ],   name: null, short: "" },
         france_AMX40:                   { tiers: [ 4, 6 ],   name: null, short: "" },
         uk_GB04_Valentine:              { tiers: [ 4, 6 ],   name: null, short: "" },
         uk_GB60_Covenanter:             { tiers: [ 4, 6 ],   name: null, short: "" },
-        france_ELC_AMX:                 { tiers: [ 6, 9 ],   name: null, short: "" },
         germany_PzIV_Hydro:             { tiers: [ 5, 6 ],   name: null, short: "" },
         ussr_Churchill_LL:              { tiers: [ 5, 6 ],   name: null, short: "" },
         ussr_Matilda_II_LL:             { tiers: [ 5, 6 ],   name: null, short: "" },
@@ -307,6 +305,8 @@ class wot.utils.VehicleInfoData
         usa_M4A2E4:                     { tiers: [ 5, 6 ],   name: null, short: "" },
         uk_GB68_Matilda_Black_Prince:   { tiers: [ 5, 6 ],   name: null, short: "" },
         uk_GB20_Crusader:               { tiers: [ 5, 7 ],   name: null, short: "" },
+        ussr_T_50_2:                    { tiers: [ 7, 12 ],  name: null, short: "" },
+        usa_M24_Chaffee:                { tiers: [ 7, 12 ],  name: null, short: "" },
         germany_PzV_PzIV:               { tiers: [ 6, 7 ],   name: null, short: "" },
         germany_PzV_PzIV_ausf_Alfa:     { tiers: [ 6, 7 ],   name: null, short: "" },
         uk_GB63_TOG_II:                 { tiers: [ 6, 7 ],   name: null, short: "" },

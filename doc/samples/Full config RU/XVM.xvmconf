@@ -33,7 +33,7 @@
     "loadEnemyStatsInFogOfWar": true,           // true - включить загрузку данных по противникам в "тумане войны"
     "enableStatisticsLog": false,               // true - включить сохранение статистики в файл "xvm-stat.log"
     "enableUserInfoStatistics": true,           // true - включить отображение статистики в достижениях пользователя
-    "enableCompanyStatistics": true             // true - включить отображение статистики при наборе роты
+    "enableCompanyStatistics": false            // true - включить отображение статистики при наборе роты
   },
   // Параметры экрана загрузки боя
   "battleLoading": {

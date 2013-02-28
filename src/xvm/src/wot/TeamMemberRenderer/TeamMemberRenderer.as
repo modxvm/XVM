@@ -62,7 +62,7 @@ class wot.TeamMemberRenderer.TeamMemberRenderer extends net.wargaming.messenger.
         if (wnd)
         {
             wnd.queueLabelXVM = TeamRendererHelper.CreateXVMHeaderLabel(wnd, "queueLabel", vehicleLevelField, 
-                185, 2, "TeamRenderersHeaderTip");
+                183, 2, "TeamRenderersHeaderTip");
             //wnd.crewStuffFieldXVM = TeamRendererHelper.CreateXVMHeaderLabel(wnd, "crewStuffField", vehicleLevelField, 
             //    185, 2, "TeamRenderersHeaderTip");
         }

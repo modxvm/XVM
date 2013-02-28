@@ -78,7 +78,7 @@ public class DefaultConfig
                 loadEnemyStatsInFogOfWar: true,  // Load players data in "fog of war".
                 enableStatisticsLog: false,      // Enable saving statistics to "xvm-stat.log" file
                 enableUserInfoStatistics: true,  // Enable statistics in the user info window
-                enableCompanyStatistics: true    // Enable statistics in the company window
+                enableCompanyStatistics: false   // Enable statistics in the company window
             },
             battleLoading: {
                 // Show clock at Battle Loading Screen.

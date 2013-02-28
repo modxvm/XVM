@@ -129,7 +129,6 @@ class wot.utils.VehicleInfoData2
         pziii_iv:                   { level: 5,  type: "MT",  hpstock: 380,  hptop: 440,  turret: 1, premium: 0, nation: "germany", name: "PzIII_IV" },
         pziv:                       { level: 5,  type: "MT",  hpstock: 420,  hptop: 460,  turret: 2, premium: 0, nation: "germany", name: "PzIV" },
         pziv_hydro:                 { level: 5,  type: "MT",  hpstock: 580,  hptop: 580,  turret: 0, premium: 1, nation: "germany", name: "PzIV_Hydro" },
-        pzv_training:               { level: 5,  type: "MT",  hpstock: 480,  hptop: 480,  turret: 0, premium: 0, nation: "germany", name: "PzV_training" },
         t_25:                       { level: 5,  type: "MT",  hpstock: 610,  hptop: 610,  turret: 0, premium: 1, nation: "germany", name: "T-25" },
         m4_sherman:                 { level: 5,  type: "MT",  hpstock: 400,  hptop: 460,  turret: 2, premium: 0, nation: "usa",     name: "M4_Sherman" },
         m4a2e4:                     { level: 5,  type: "MT",  hpstock: 480,  hptop: 480,  turret: 0, premium: 1, nation: "usa",     name: "M4A2E4" },
@@ -142,7 +141,6 @@ class wot.utils.VehicleInfoData2
         kv1:                        { level: 5,  type: "HT",  hpstock: 590,  hptop: 640,  turret: 2, premium: 0, nation: "ussr",    name: "KV1" },
         kv_220:                     { level: 5,  type: "HT",  hpstock: 690,  hptop: 690,  turret: 0, premium: 1, nation: "ussr",    name: "KV-220" },
         kv_220_action:              { level: 5,  type: "HT",  hpstock: 690,  hptop: 690,  turret: 0, premium: 1, nation: "ussr",    name: "KV-220_action" },
-        pzvib_tiger_ii_training:    { level: 5,  type: "HT",  hpstock: 800,  hptop: 800,  turret: 0, premium: 0, nation: "germany", name: "PzVIB_Tiger_II_training" },
         t1_hvy:                     { level: 5,  type: "HT",  hpstock: 600,  hptop: 660,  turret: 2, premium: 0, nation: "usa",     name: "T1_hvy" },
         t14:                        { level: 5,  type: "HT",  hpstock: 690,  hptop: 690,  turret: 0, premium: 1, nation: "usa",     name: "T14" },
         bdr_g1b:                    { level: 5,  type: "HT",  hpstock: 600,  hptop: 650,  turret: 2, premium: 0, nation: "france",  name: "BDR_G1B" },
@@ -173,7 +171,7 @@ class wot.utils.VehicleInfoData2
         vk3001p:                    { level: 6,  type: "MT",  hpstock: 610,  hptop: 710,  turret: 2, premium: 0, nation: "germany", name: "VK3001P" },
         vk3601h:                    { level: 6,  type: "MT",  hpstock: 760,  hptop: 850,  turret: 2, premium: 0, nation: "germany", name: "VK3601H" },
         m4a3e8_sherman:             { level: 6,  type: "MT",  hpstock: 720,  hptop: 750,  turret: 2, premium: 0, nation: "usa",     name: "M4A3E8_Sherman" },
-        m4a3e8_sherman_training:    { level: 6,  type: "MT",  hpstock: 90,   hptop: 90,   turret: 0, premium: 0, nation: "usa",     name: "M4A3E8_Sherman_training" },
+        m4a3e8_sherman_training:    { level: 6,  type: "MT",  hpstock: 830,  hptop: 830,  turret: 0, premium: 0, nation: "usa",     name: "M4A3E8_Sherman_training" },
         sherman_jumbo:              { level: 6,  type: "MT",  hpstock: 730,  hptop: 760,  turret: 2, premium: 0, nation: "usa",     name: "Sherman_Jumbo" },
         gb21_cromwell:              { level: 6,  type: "MT",  hpstock: 700,  hptop: 750,  turret: 2, premium: 0, nation: "uk",      name: "GB21_Cromwell" },
         ch20_type58:                { level: 6,  type: "MT",  hpstock: 720,  hptop: 750,  turret: 2, premium: 0, nation: "china",   name: "Ch20_Type58" },
@@ -208,11 +206,12 @@ class wot.utils.VehicleInfoData2
         t_43:                       { level: 7,  type: "MT",  hpstock: 1000, hptop: 1100, turret: 2, premium: 0, nation: "ussr",    name: "T-43" },
         panther_m10:                { level: 7,  type: "MT",  hpstock: 1300, hptop: 1300, turret: 0, premium: 1, nation: "germany", name: "Panther_M10" },
         pzv:                        { level: 7,  type: "MT",  hpstock: 1200, hptop: 1270, turret: 2, premium: 0, nation: "germany", name: "PzV" },
+        pzv_training:               { level: 7,  type: "MT",  hpstock: 480,  hptop: 480,  turret: 0, premium: 0, nation: "germany", name: "PzV_training" },
         vk3002db:                   { level: 7,  type: "MT",  hpstock: 1180, hptop: 1250, turret: 2, premium: 0, nation: "germany", name: "VK3002DB" },
         t20:                        { level: 7,  type: "MT",  hpstock: 1000, hptop: 1100, turret: 2, premium: 0, nation: "usa",     name: "T20" },
         gb22_comet:                 { level: 7,  type: "MT",  hpstock: 1050, hptop: 1150, turret: 2, premium: 0, nation: "uk",      name: "GB22_Comet" },
         ch04_t34_1:                 { level: 7,  type: "MT",  hpstock: 960,  hptop: 1050, turret: 2, premium: 0, nation: "china",   name: "Ch04_T34_1" },
-        ch04_t34_1_training:        { level: 7,  type: "MT",  hpstock: 90,   hptop: 90,   turret: 0, premium: 0, nation: "china",   name: "Ch04_T34_1_training" },
+        ch04_t34_1_training:        { level: 7,  type: "MT",  hpstock: 830,  hptop: 830,  turret: 0, premium: 0, nation: "china",   name: "Ch04_T34_1_training" },
         is:                         { level: 7,  type: "HT",  hpstock: 1130, hptop: 1230, turret: 2, premium: 0, nation: "ussr",    name: "IS" },
         kv_3:                       { level: 7,  type: "HT",  hpstock: 1300, hptop: 1400, turret: 2, premium: 0, nation: "ussr",    name: "KV-3" },
         pzvi:                       { level: 7,  type: "HT",  hpstock: 1350, hptop: 1450, turret: 2, premium: 0, nation: "germany", name: "PzVI" },
@@ -254,6 +253,7 @@ class wot.utils.VehicleInfoData2
         object252:                  { level: 8,  type: "HT",  hpstock: 1550, hptop: 1550, turret: 0, premium: 1, nation: "ussr",    name: "Object252" },
         lowe:                       { level: 8,  type: "HT",  hpstock: 1650, hptop: 1650, turret: 0, premium: 1, nation: "germany", name: "Lowe" },
         pzvib_tiger_ii:             { level: 8,  type: "HT",  hpstock: 1500, hptop: 1600, turret: 1, premium: 0, nation: "germany", name: "PzVIB_Tiger_II" },
+        pzvib_tiger_ii_training:    { level: 8,  type: "HT",  hpstock: 800,  hptop: 800,  turret: 0, premium: 0, nation: "germany", name: "PzVIB_Tiger_II_training" },
         vk4502a:                    { level: 8,  type: "HT",  hpstock: 1470, hptop: 1570, turret: 1, premium: 0, nation: "germany", name: "VK4502A" },
         m6a2e1:                     { level: 8,  type: "HT",  hpstock: 1500, hptop: 1500, turret: 0, premium: 1, nation: "usa",     name: "M6A2E1" },
         t32:                        { level: 8,  type: "HT",  hpstock: 1400, hptop: 1550, turret: 1, premium: 0, nation: "usa",     name: "T32" },
@@ -323,9 +323,10 @@ class wot.utils.VehicleInfoData2
         t110e3:                     { level: 10, type: "TD",  hpstock: 2050, hptop: 2050, turret: 0, premium: 0, nation: "usa",     name: "T110E3" },
         t110e4:                     { level: 10, type: "TD",  hpstock: 2000, hptop: 2000, turret: 0, premium: 0, nation: "usa",     name: "T110E4" },
         amx_50fosh_155:             { level: 10, type: "TD",  hpstock: 1850, hptop: 1850, turret: 0, premium: 0, nation: "france",  name: "AMX_50Fosh_155" },
-        gb48_fv215b_183:            { level: 10, type: "TD",  hpstock: 1960, hptop: 1960, turret: 0, premium: 0, nation: "uk",      name: "GB48_FV215b_183" },
+        gb48_fv215b_183:            { level: 10, type: "TD",  hpstock: 2000, hptop: 2000, turret: 0, premium: 0, nation: "uk",      name: "GB48_FV215b_183" },
 
         // unknown (FogOfWar)
         unknown: { level: 0, name: "UNKNOWN" }
     }
 }
+    

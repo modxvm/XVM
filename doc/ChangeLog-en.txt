@@ -1,19 +1,11 @@
-XVM-3.4.0-test6:
-  * adaptation to WoT 0.8.4.CT2
-  * TeamRenderer mod
+XVM-3.4.0:
+  * adaptation to WoT 0.8.4
 
-XVM-3.4.0-test5:
-  * TeamMemberRenderer mod
-
-XVM-3.4.0-test4:
-  * UserInfo mod (sorting, per-vehicle efficiency)
-
-XVM-3.4.0-test1:
   [MACROS]
   * new macros:
       {{avglvl}} - average level of tanks
       {{wn}}, {{c:wn}} - WN6 rating: http://www.koreanrandom.com/forum/topic/2575-/
-      {{xeff}}, {{xwn}}, {{c:xeff}}, {{c:xwn}} - two-digits ratinf value
+      {{xeff}}, {{xwn}}, {{c:xeff}}, {{c:xwn}} - two-digits rating value
         using "XVM Scale"
         explanation: http://www.koreanrandom.com/forum/topic/2625-/page-15#entry35340 (in Russian)
       {{twr}}, {{c:twr}} - tourist1984 win rate:
