@@ -27,6 +27,7 @@ class wot.utils.Locale
         tr["fire"] = "fire";
         tr["ramming"] = "ramming";
         tr["world_collision"] = "falling";
+
         tr["UserInfoEHint"] =
             "Per-vehicle efficiency.\n" +
             "The value shown for the last data scan moment: %DATE%\n" +
@@ -61,7 +62,7 @@ class wot.utils.Locale
             "Захватчиков: <b><font color='#FFCC66'>{{tanks}}</font></b> Осталось: <b><font color='#FFCC66'>{{time}}</font><b>";
 
         tr["Hit percent"] = "Процент попаданий";
-        tr["Damage upon detecting"] = "Урон по разведданным";
+        tr["Damage upon detecting"] = "Урон по вашим разведданным";
         tr["Damage dealt"] = "Нанесенный урон";
 
         // TeamRenderers
