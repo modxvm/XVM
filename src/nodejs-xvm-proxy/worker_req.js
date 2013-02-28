@@ -109,17 +109,6 @@ module.exports = (function() {
     //        return;
 
         var ok = false;
-        var lvl = false;
-        if (data.lvl == undefined) {
-            // Average Tier
-            lvl = true;
-            data.lvl = utils.calculateAvgLevel(data.v);
-        }
-
-        // fix eff FIXIT: REMOVE after 14.02.2013
-        if (data.dt < new Date("2013-02-09 14:50")) {
-            data.e = utils.calculateEfficiency(data);
-        }
 
         if (data.wn == undefined) {
             // WN - WN rating http://forum.worldoftanks.com/index.php?/topic/184017-
@@ -128,24 +117,9 @@ module.exports = (function() {
             utils.log("id=" + data._id + " wn=" + data.wn);
         }
 
-        if (data.twr == undefined) {
-            // TWR - tourist1984 win rate (aka T-Calc)
-            try {
-                data.twr = parseFloat(tcalc.calc(data, false).result.toFixed(2));
-                ok = true;
-    //            utils.log("id=" + data._id + " twr=" + data.twr);
-            } catch (e) { utils.log(e); }
-        }
-
-        if (lvl) {
-            data.lvl = parseFloat(data.lvl.toFixed(1));
-            ok = true;
-            utils.log("id=" + data._id + " lvl=" + data.lvl);
-        }
-
         // updating db
-        if (ok && Math.floor(Math.random()*1) == 0) {
-    //        utils.log("update id=" + data._id);
+        if (ok) {
+            utils.log("Fix Data: update id=" + data._id);
             db.updatePlayersData(data._id, data);
         }
     };

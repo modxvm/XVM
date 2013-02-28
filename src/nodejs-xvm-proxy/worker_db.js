@@ -51,6 +51,7 @@ module.exports = (function() {
 
     var getPlayersData = function(ids, callback) {
         if (isOverloaded()) {
+            process.send({usage:1, max_db:1});
             callback({
                 statusCode: 503, // Service Unavailable
                 text: "db overloaded: " + _mongoRq + "/" + _mongoMaxRq

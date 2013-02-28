@@ -7,6 +7,7 @@ exports.processCommand = function(response, args) {
     try {
         if (db.isOverloaded()) {
             response.statusCode = 503; // Service Unavailable
+            process.send({usage:1, max_db:1});
             throw "db overloaded";
         }
 
@@ -18,23 +19,25 @@ exports.processCommand = function(response, args) {
         if (!pl)
             throw "[" + cmd + "]: empty player name";
 
-        utils.log(cmd + ": " + pl + " " + args.join(","));
-
         switch (cmd) {
             case "INFO":
+                process.send({usage:1, cmd_info:1});
                 cmd_INFO(response, pl, args);
                 break;
 
             case "EFF":
             case "WN":
+                utils.log(cmd + ": " + pl + " " + args.join(","));
                 cmd_EFF(response, pl, args);
                 break;
 
             case "TWR":
+                utils.log(cmd + ": " + pl + " " + args.join(","));
                 cmd_TWR(response, pl, args);
                 break;
 
             case "XVMSCALE":
+                utils.log(cmd + ": " + pl + " " + args.join(","));
                 cmd_XVMSCALE(response, pl, args);
                 break;
 
@@ -51,14 +54,28 @@ exports.processCommand = function(response, args) {
 var cmd_INFO = function(response, pl, args) {
     var region = args.shift();
     // Handle Common Test
-    if (region && region.toUpperCase() == "CT") {
-        region = pl.substr(-2);
-        pl = pl.slice(0, pl.length-3);
+    if (region) {
+        region = region.toUpperCase();
+        if (region == "CT") {
+            region = pl.substr(-2);
+            pl = pl.slice(0, pl.length - 3);
+        }
     }
-    var query = {$or:[{nm:pl}]};
-    // search only by name if region present
-    if (!region)
-        query.$or.push({_id:isFinite(pl) ? parseInt(pl) : 0});
+
+    var query = {$or:[]};
+    var itemName = {nm:pl};
+    var itemId = {_id:isFinite(pl) ? parseInt(pl) : 0};
+    // search only by name if region present, or only id if region == "ID"
+    if (!region) {
+        query.$or.push(itemName);
+        query.$or.push(itemId);
+    } else if (region == "ID") {
+        region = null;
+        query.$or.push(itemId);
+    } else {
+        query.$or.push(itemName);
+    }
+
     var cursor = db.find("players", query);
     cursor.toArray(function(error, data) {
         try {

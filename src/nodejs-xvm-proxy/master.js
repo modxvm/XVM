@@ -41,8 +41,10 @@ var usageStat = {
     missed: 0,
     updatesFailed: 0,
     max_conn: 0,
+    max_db: 0,
     mongorq: 0,
     mongorq_max: settings.dbMaxConnections * settings.numNodes,
+    cmd_info: 0,
     connections: []
 };
 
@@ -68,12 +70,16 @@ var processWorkerMessage = function(msg) {
             usageStat.updatesFailed += msg.updatesFailed;
         if(msg.max_conn)
             usageStat.max_conn += msg.max_conn;
+        if(msg.max_db)
+            usageStat.max_db += msg.max_db;
         if(msg.mongorq)
             usageStat.mongorq += msg.mongorq;
         if(msg.mongorq_max) {
             usageStat.mongorq_max += msg.mongorq_max;
             utils.log("mongorq_max: " + usageStat.mongorq_max);
         }
+        if(msg.cmd_info)
+            usageStat.cmd_info += msg.cmd_info;
         if(msg.connections) {
             if (!usageStat.connections[msg.serverId])
                 usageStat.connections[msg.serverId] = {cur:0, max:settings.servers[msg.serverId].maxconn, total:0, fail:0};
@@ -124,7 +130,7 @@ var showUsageStat = function() {
     var d = (uptime / (60 * 60 * 24)).toFixed();
     var h = lpad(((uptime / 3600) % 24).toFixed(), "0", 2);
     var m = lpad(((uptime / 60) % 60).toFixed(), "0", 2);
-    utils.log("> uptime  requests     rq/s   players  pl/s  cached updated  missed updfail max_conn mongorq");
+    utils.log("> uptime  requests     rq/s   players  pl/s  cached updated  missed updfail max_conn max_db mongorq cmd_info");
 
     var s = (d > 9 ? "" : ">");
     // uptime
@@ -147,8 +153,12 @@ var showUsageStat = function() {
     s += lpad((usageStat.updatesFailed / usageStat.players * 100).toFixed(2) + "%", " ", 8);
     // max_conn
     s += lpad((usageStat.max_conn / usageStat.players * 100).toFixed(2) + "%", " ", 9);
+    // max_db
+    s += lpad((usageStat.max_db / usageStat.requests * 100).toFixed(2) + "%", " ", 7);
     // mongorq
     s += lpad(usageStat.mongorq + "/" + usageStat.mongorq_max, " ", 8);
+    // cmd_info
+    s += lpad((usageStat.cmd_info / usageStat.requests * 100).toFixed(2) + "%", " ", 9);
     utils.log(s);
 
     utils.log("> connections: cur max    total     fail");
