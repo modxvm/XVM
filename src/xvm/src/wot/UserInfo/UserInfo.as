@@ -356,7 +356,8 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
                         tb: vdata.b,
                         tw: vdata.w,
                         tl: vdata.l,
-                        e: m_userData.e,
+                        // FIXIT: Disabled until WG will provide correct per-vehicle stat
+                        //e: m_userData.e,
                         wn: m_userData.wn,
                         vn: vn,
                         td: vdata.d,
@@ -454,7 +455,8 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         m_button3 = createButton(hdr, fld, "bNat", 135, Locale.get("Nation"), "left", 2);
         m_button4 = createButton(hdr, fld, "bNam", 200, Locale.get("Name"), "left", 2);
         m_button5 = createButton(hdr, fld, "bEff", 305, "E", "right", 1);
-        if (Config.s_config.rating.showPlayersStatistics != true)
+        // FIXIT: Disabled until WG will provide correct per-vehicle stat
+        //if (Config.s_config.rating.showPlayersStatistics != true)
         {
             m_button5.enabled = false;
             m_button5._alpha = 30;

@@ -110,6 +110,7 @@ class wot.utils.StatLoader
                 {
                     var response = JSON.parse(str);
                     StatLoader.requestId = response.resultId;
+                    StatLoader.requestCounter = 1;
                     StatLoader.StartLoadData(cmd, true);
                 }
                 catch (ex)
@@ -210,7 +211,7 @@ class wot.utils.StatLoader
                     //Logger.add("Stat Loaded");
                     GlobalEventDispatcher.dispatchEvent( { type: "stat_loaded" } );
 
-                    if (StatLoader.dirty)
+                    if (StatLoader.dirty && StatLoader.requestCounter < 100)
                         var timer = _global.setTimeout(function() { StatLoader.StartLoadData(Defines.COMMAND_RUN_ASYNC); }, 50);
                 }
             }
