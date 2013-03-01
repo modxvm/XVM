@@ -8,8 +8,8 @@ class wot.utils.VehicleTypeShort
     {
         return data[type].short;
     }
-    
-    private static var data:Object = 
+
+    private static var data:Object =
     {
         china_Ch01_Type59: { short:"59" },
         china_Ch02_Type62: { short:"62" },
@@ -154,6 +154,18 @@ class wot.utils.VehicleTypeShort
         uk_GB69_Cruiser_Mk_II: { short:"cruis2" },
         uk_GB70_FV4202_105: { short:"4202" },
         uk_GB71_AT_15A: { short:"at15a" },
+
+        uk_GB39_Universal_CarrierQF2: { short: "qf2" },
+        uk_GB42_Valentine_AT: { short: "valAT" },
+        uk_GB57_Alecto: { short: "ale" },
+        uk_GB73_AT2: { short: "at2" },
+        uk_GB40_Gun_Carrier_Churchill: { short: "GunChrch" },
+        uk_GB74_AT8: { short: "at8" },
+        uk_GB75_AT7: { short: "at7" },
+        uk_GB72_AT15: { short: "at15" },
+        uk_GB32_Tortoise: { short: "Tort" },
+        uk_GB48_FV215b_183: { short: "183" },
+
         usa_M103: { short:"103" },
         usa_M10_Wolverine: { short:"wolv" },
         usa_M12: { short:"m12" },
