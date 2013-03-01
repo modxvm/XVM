@@ -1,3 +1,6 @@
+XVM-3.4.1:
+  * bugfix
+
 XVM-3.4.0:
   * adaptation to WoT 0.8.4
 
