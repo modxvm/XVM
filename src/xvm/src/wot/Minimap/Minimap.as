@@ -107,6 +107,11 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     // override
     function correctSizeIndex(sizeIndex:Number, stageHeight:Number):Number
     {
+        if (sizeIndex < 0)
+        {
+            sizeIndex = 0;
+        }
+        
         return sizeIndex;
     }
     
