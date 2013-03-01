@@ -255,4 +255,11 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
         var camera:MinimapEntry = IconsProxy.getCamera();
         camera._alpha = MapConfig.cameraAlpha;
     }
+    
+    function onUpdateStage(width, height)
+    {
+        /** Fix minimap size glitch when program window is resized */
+        sizeUp();
+        sizeDown();
+    }
 }

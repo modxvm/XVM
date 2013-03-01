@@ -164,10 +164,10 @@ class wot.BattleMain
 
     function onUpdateStage(width, height)
     {
-        //Logger.add("Battle::onUpdateStage()");
         _root.onUpdateStage(width, height);
         BattleMain.width = width;
         BattleMain.height = height;
         SetupElements();
+        _root.minimap.onUpdateStage(width, height);
     }
 }
