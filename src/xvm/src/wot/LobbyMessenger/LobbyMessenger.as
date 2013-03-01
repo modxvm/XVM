@@ -61,7 +61,7 @@ class wot.LobbyMessenger.LobbyMessenger extends net.wargaming.messenger.LobbyMes
         if (isPrivateChat(memberList) && !isFriendChat(memberList))
         {
             Logger.add("## private");
-            if ()
+            if (true)
             {
                 Logger.add("#### friend");
             }
