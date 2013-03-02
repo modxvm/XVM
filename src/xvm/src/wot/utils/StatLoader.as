@@ -19,8 +19,8 @@ class wot.utils.StatLoader
     public static var teams = { t1:0, t2:0 };
     public static var s_loadDataStarted = false;
     private static var s_loading = false;
-    private static var dirty: Boolean = false;
-    private static var requestId: Number = -1;
+    private static var dirty:Boolean = false;
+    private static var requestId:Number = -1;
 
     private static var dummy = Logger.dummy; // avoid import warning
 

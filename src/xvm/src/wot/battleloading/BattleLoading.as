@@ -57,7 +57,7 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
         super.setSize(width, height);
         (new LoadVars()).load(Defines.COMMAND_VAR + " window_size=" + width + "," + height);
     }
-    
+
     // override
     function setMapBG(imgsource:String)
     {
@@ -65,18 +65,18 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
          * imgsource arg:
          * ../maps/icons/map/screen/19_monastery.png
          */
-        
+
         /** Extract map name from image source */
         var arr:Array = imgsource.split("/");
         arr = arr[5].split(".");
         var mapName:String = arr[0]; // 45_north_america
-        
+
         /**
          * Save map name for Minimap mod.
          * Best method to define map size without Python so far.
          */
         (new LoadVars()).load(Defines.COMMAND_VAR + " map_name=" + mapName);
-        
+
         super.setMapBG(imgsource);
     }
 
@@ -98,7 +98,7 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
         (
             function() {
                 if (!StatData.s_loaded) {
-                    if (StatLoader.teams.t1 == 0 /*&& StatLoader.teams.t2 == 0*/) { // t2 disabled because of FogOfWar 
+                    if (StatLoader.teams.t1 == 0 /*&& StatLoader.teams.t2 == 0*/) { // t2 disabled because of FogOfWar
                         if (loop * BattleLoading.STAT_PRELOAD_DELAY > 10000) { // 10 sec
                             Logger.add("WARNING: no players data after 10 sec, skip stats loading");
                         } else {

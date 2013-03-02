@@ -88,7 +88,7 @@ class wot.utils.Locale
         tr["Capture"] = "Захват";
         tr["player (average / top)"] = "игрок (средний / топ)";
         tr["top"] = "топ";
-        tr["Eff damage"] = "Эф. дамаг";
+        tr["Spec dmg"] = "Уд. дамаг";
         tr["Level"] = "Уровень";
         tr["Type"] = "Тип";
         tr["Nation"] = "Нация";
