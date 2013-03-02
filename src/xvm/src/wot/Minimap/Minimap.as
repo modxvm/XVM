@@ -103,10 +103,13 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
         setCameraAlpha();
     }
     
-    /** Disables minimap size limitation */
+    /** Disables maximum minimap size limitation */
     // override
     function correctSizeIndex(sizeIndex:Number, stageHeight:Number):Number
     {
+        /** super.correctSizeIndex code is omitted to drop limits */
+        
+        /** Do not allow size less than map border */
         if (sizeIndex < 0)
         {
             sizeIndex = 0;
@@ -259,12 +262,5 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     {
         var camera:MinimapEntry = IconsProxy.getCamera();
         camera._alpha = MapConfig.cameraAlpha;
-    }
-    
-    function onUpdateStage(width, height)
-    {
-        /** Fix minimap size glitch when program window is resized */
-        sizeUp();
-        sizeDown();
     }
 }

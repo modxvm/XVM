@@ -168,6 +168,22 @@ class wot.BattleMain
         BattleMain.width = width;
         BattleMain.height = height;
         SetupElements();
-        _root.minimap.onUpdateStage(width, height);
+        
+        fixMinimapSize();
+    }
+    
+    private function fixMinimapSize():Void
+    {
+        /**
+         * Fix minimap size glitch when program window is resized.
+         * Fix is detached from minimap to allow other minimap mods
+         * to be compatible with XVMs hacked battle.swf
+         */
+        var isMinimalSize:Boolean = _root.minimap.m_sizeIndex == 0;
+        _root.minimap.sizeDown();
+        if (!isMinimalSize)
+        {
+            _root.minimap.sizeUp();
+        }
     }
 }
