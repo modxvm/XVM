@@ -40,7 +40,7 @@ namespace wot
       Log("  /noproxy - do not use IE proxy settings");
       Log("  /maximized - maximized game window");
       Log("  /debug - run in debug mode (extended log)");
-      Log("  /server=(RU|EU|US|CN|SEA|VTC|CT) - select server (disable autodetection)");
+      Log("  /server=(RU|EU|US|CN|SEA|VTC|KR|CT) - select server (disable autodetection)");
       Log("  file.wotreplay - play replay");
       Log("Press any key to exit.");
       Console.ReadKey(true);

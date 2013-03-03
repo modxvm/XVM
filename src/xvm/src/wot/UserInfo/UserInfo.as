@@ -1,4 +1,4 @@
-﻿import com.natecook.Sprintf;
+import com.natecook.Sprintf;
 import wot.utils.Cache;
 import wot.utils.Config;
 import wot.utils.Defines;
@@ -67,6 +67,8 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
     function loadData()
     {
         if (!Config.s_loaded || Config.s_config.rating.showPlayersStatistics != true)
+            return;
+        if (Config.s_config.rating.enableUserInfoStatistics != true)
             return;
 
         if (!m_name)
@@ -210,6 +212,11 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
     private function onUserDataLoaded()
     {
         var key = "INFO@" + m_name;
+        if (!Cache.Exist(key))
+            return;
+
+        GlobalEventDispatcher.removeEventListener("userdata_cached", this, onUserDataLoaded);
+
         m_userData = Cache.Get(key);
 
         if (!m_button1.disabled)
@@ -238,14 +245,14 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         var dt = m_userData.dt ? m_userData.dt.split("T").join(" ").substr(0, 10) : Locale.get("unknown");
 
         var s = "";
-        s += Locale.get("EFF") + ": " + (!eff ? "--" :
-            "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, xeff) + "'>" + (xeff == 100 ? "XX" : (xeff < 10 ? "0" : "") + xeff) + "</font>") + " ";
-        s += "(" + (!eff ? "-" :
-            "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff) + "'>" + eff + "</font>") + ") ";
         s += "WN6: " + (!wn ? "--" :
             "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, xwn) + "'>" + (xwn == 100 ? "XX" : (xwn < 10 ? "0" : "") + xwn) + "</font>") + " ";
         s += "(" + (!wn ? "-" :
             "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, wn) + "'>" + wn + "</font>") + ") ";
+        s += Locale.get("EFF") + ": " + (!eff ? "--" :
+            "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, xeff) + "'>" + (xeff == 100 ? "XX" : (xeff < 10 ? "0" : "") + xeff) + "</font>") + " ";
+        s += "(" + (!eff ? "-" :
+            "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff) + "'>" + eff + "</font>") + ") ";
         s += "TWR: " + (!twr ? "-" :
             "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TWR, twr) + "'>" + twr + "%</font>") + " ";
         s += "  <font size='11'>" + Locale.get("updated") + ":</font> <font size='12' color='#CCCCCC'>" + dt + "</font>";
@@ -321,7 +328,7 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
             }
         }
     }
-    
+
     // list
 
     // override
@@ -466,7 +473,7 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         m_button5 = createButton(hdr, fld, "bEff", 305, "E", "right", 1);
         // FIXIT: Disabled until WG will provide correct per-vehicle stat
         m_button5._visible = false;
-        if (Config.s_config.rating.showPlayersStatistics != true)
+        if (Config.s_config.rating.showPlayersStatistics != true || Config.s_config.rating.enableUserInfoStatistics != true)
         {
             m_button5.enabled = false;
             m_button5._alpha = 30;

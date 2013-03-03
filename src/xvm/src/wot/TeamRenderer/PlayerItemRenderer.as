@@ -94,6 +94,9 @@ class wot.TeamRenderer.PlayerItemRenderer extends net.wargaming.messenger.contro
     private function setXVMStat()
     {
         var key = "INFO@" + m_name;
+        if (!Cache.Exist(key))
+            return;
+        GlobalEventDispatcher.removeEventListener("userdata_cached", this, setXVMStat);
         TeamRendererHelper.setXVMStat(key, m_effField);
     }
 }

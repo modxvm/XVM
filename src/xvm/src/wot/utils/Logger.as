@@ -30,13 +30,13 @@ class wot.utils.Logger
 
     var command:String = cmd + " ";
     var max_len:Number = Defines.MAX_PATH - command.length;
-    var p:LoadVars = new LoadVars();
+    var lv:LoadVars = new LoadVars();
     while (s.length > max_len)
     {
-      p.load(command + s.slice(0, max_len));
+      lv.load(command + s.slice(0, max_len));
       s = s.slice(max_len);
     }
-    p.load(command + s);
+    lv.load(command + s);
   }
 
   public static function addObject(obj: Object, name: String, depth: Number)
@@ -47,5 +47,5 @@ class wot.utils.Logger
       depth = 10;
     add((name || "[obj]") + ": " + com.xvm.JSON.stringifyDepth(obj, depth));
   }
-  
+
 }

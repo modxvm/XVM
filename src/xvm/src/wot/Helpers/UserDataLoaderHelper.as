@@ -8,27 +8,37 @@ import wot.utils.Utils;
 
 class wot.Helpers.UserDataLoaderHelper
 {
-    public static function LoadUserData(value, isId, loop)
+    private static var queue:Array = [];
+        
+    public static function LoadUserData(value, isId)
     {
-        if (!loop)
-          loop = 0;
-        // start loading after random period 50..100 ms
-        _global.setTimeout
-        (
-            function() {
-                // avoid concurrent loading
-                if (GlobalEventDispatcher.getEventListenersCount("userdata_loaded") == 0)
-                {
-                    GlobalEventDispatcher.addEventListener("userdata_loaded",  UserDataLoaderHelper.onUserDataLoaded);
-                    StatLoader.LoadUserData(value, isId);
-                }
-                else
-                {
-                    UserDataLoaderHelper.LoadUserData(value, isId, loop + 1);
-                }
-            },
-            50 + Math.random() * 50;
-        );
+        //wot.utils.Logger.add("add queue: " + value);
+        var found = false;
+        for (var i = 0; i < queue.length; ++i)
+        {
+            if (queue[i].value == value && queue[i].isId == isId)
+            {
+                found = true;
+                break;
+            }
+        }
+        if (!found)
+            queue.push({value:value, isId:isId});
+        processQueue();
+    }
+
+    private static function processQueue()
+    {
+        if (queue.length == 0)
+            return;
+        // avoid concurrent loading
+        if (GlobalEventDispatcher.getEventListenersCount("userdata_loaded") > 0)
+            return;
+
+        var item = queue.shift();
+        //wot.utils.Logger.add("process queue: " + item.value);
+        GlobalEventDispatcher.addEventListener("userdata_loaded",  UserDataLoaderHelper.onUserDataLoaded);
+        StatLoader.LoadUserData(item.value, item.isId);
     }
 
     private static function onUserDataLoaded(event)
@@ -44,6 +54,8 @@ class wot.Helpers.UserDataLoaderHelper
         GlobalEventDispatcher.dispatchEvent( { type: "userdata_cached" } );
 
         //Logger.addObject(stat, "stat", 3);
+
+        processQueue();
     }
 
     private static function FixData(ud)

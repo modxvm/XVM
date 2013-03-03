@@ -16,6 +16,7 @@
   &lt;string&gt;CN	aHR0cDovL3dvdHJhdGUudmljcC5jby9Xb3RSYXRlWFZNMS8lMQ==&lt;/string&gt;
   &lt;string&gt;SEA	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC91Yy8/JTE=&lt;/string&gt;
   &lt;string&gt;VTC	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC91Yy8/JTE=&lt;/string&gt;
+  &lt;string&gt;KR	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC91Yy8/JTE=&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="Timeout" Type="System.Int32" Scope="User">

@@ -1,10 +1,4 @@
-﻿/**
- * ...
- * @author sirmax2
- */
-import wot.battleloading.TipField;
-import wot.battleloading.RealClock;
-import wot.battleloading.WinChances;
+﻿import wot.utils.Comm;
 import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.GlobalEventDispatcher;
@@ -13,6 +7,9 @@ import wot.utils.StatsLogger;
 import wot.utils.StatData;
 import wot.utils.StatLoader;
 import wot.utils.Utils;
+import wot.battleloading.TipField;
+import wot.battleloading.RealClock;
+import wot.battleloading.WinChances;
 
 class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
 {
@@ -55,7 +52,7 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
     function setSize(width, height)
     {
         super.setSize(width, height);
-        (new LoadVars()).load(Defines.COMMAND_VAR + " window_size=" + width + "," + height);
+        Comm.SetVar("window_size", width + "," + height);
     }
 
     // override
@@ -75,7 +72,7 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
          * Save map name for Minimap mod.
          * Best method to define map size without Python so far.
          */
-        (new LoadVars()).load(Defines.COMMAND_VAR + " map_name=" + mapName);
+        Comm.SetVar("map_name", mapName);
 
         super.setMapBG(imgsource);
     }
@@ -108,7 +105,7 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
                     }
                     else {
                         Logger.add("[BattleLoading] loading stat data (" + StatLoader.s_players_count + " players)");
-                        StatLoader.StartLoadData(Defines.COMMAND_RUN);
+                        StatLoader.StartLoadData();
                     }
                 }
             },

@@ -36,51 +36,57 @@ class wot.utils.Comm
      */
     public static function Async(command:String, resultId:Number, arg:String, target:Object, callback:Function, _recursiveData:Object):Void
     {
-        Logger.add(command + " " + arg);
-        var rData = _recursiveData || { resultId: resultId, timeoutId: -1 };
-        
+        //if (!_recursiveData)
+        //    Logger.add(command + " " + arg);
+        var rData = _recursiveData || { resultId: resultId, timeoutId: -1 }
+
+        var cmd = command + " " + rData.resultId + " " + (rData.timeoutId + 1) + (rData.resultId != -1 ? "" : " " + arg);
+        Logger.add(cmd);
+
         var lv:LoadVars = new LoadVars();
-        lv.onData = function(str: String)
+        lv.onData = function(str) { Comm.onAsyncData(str, command, resultId, arg, target, callback, rData); };
+        lv.load(cmd);
+    }
+
+    private static function onAsyncData(str:String, command, resultId, arg, target, callback, rData)
+    {
+        //Logger.add(">> " + str)
+        try
         {
-            //Logger.add(">> " + str)
-            try
+            if (str == "" && callback)
+                callback.call(target, { str:"", error:"no data" } );
+
+            var response = JSON.parse(str);
+
+            if (response.status == "ERROR")
             {
-                if (str == "" && callback)
-                    callback.call(target, { str:"", error:"no data" } );
+                if (callback)
+                    callback.call(target, { error:response.error } );
+                return;
+            }
 
-                var response = JSON.parse(str);
-
-                if (response.status == "ERROR")
-                {
+            if (response.status == "NOT_READY")
+            {
+                rData.resultId = response.resultId;
+                rData.timeoutId++;
+                if (rData.timeoutId >= Comm.timeouts.length) {
                     if (callback)
-                        callback.call(target, { error:response.error } );
+                        callback.call(target, { resultId:rData.resultId, str:str, error: "timeout" } );
                     return;
                 }
-
-                if (response.status == "NOT_READY")
-                {
-                    rData.resultId = response.resultId;
-                    rData.timeoutId++;
-                    if (rData.timeoutId >= Comm.timeouts.length) {
-                        if (callback)
-                            callback.call(target, { resultId:rData.resultId, str:str, error: "timeout" } );
-                        return;
-                    }
-                    var timer:Function = _global.setTimeout(function()
-                        { Comm.Async(command, resultId, arg, target, callback, rData); },
-                        Comm.timeouts[rData.timeoutId]);
-                    return;
-                }
-
-                if (callback)
-                    callback.call(target, { str:str } );
+                var timer:Function = _global.setTimeout(function()
+                    { Comm.Async(command, rData.resultId, arg, target, callback, rData); },
+                    Comm.timeouts[rData.timeoutId]);
+                return;
             }
-            catch (ex)
-            {
-                if (callback)
-                    callback.call(target, { str:str, error:ex } );
-            }
+
+            if (callback)
+                callback.call(target, { str:str } );
         }
-        lv.load(command + " " + rData.resultId + " " + (rData.timeoutId + 1) + (rData.resultId != -1 ? "" : " " + arg));
+        catch (ex)
+        {
+            if (callback)
+                callback.call(target, { str:str, error:ex } );
+        }
     }
 }

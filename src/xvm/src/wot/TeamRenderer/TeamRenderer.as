@@ -94,6 +94,7 @@ class wot.TeamRenderer.TeamRenderer extends net.wargaming.messenger.controls.Tea
             setXVMStat();
         else
         {
+            stat = null;
             m_effField.htmlText = "";
             GlobalEventDispatcher.addEventListener("userdata_cached", this, setXVMStat);
             // Disabled because of slow loading and client freezing.

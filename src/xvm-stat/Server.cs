@@ -75,11 +75,12 @@ namespace wot
       public Info info;
     }
 
-    public class Request
+    public class Result
     {
-      public List<PlayerData> players;
-      public Thread thread;
       public string result;
+      public Thread thread;
+      // optional
+      public List<PlayerData> players;
     }
 
     public class CacheEntry
@@ -92,14 +93,14 @@ namespace wot
     private readonly Dictionary<string, string> infocache = new Dictionary<string, string>();
     // local cache (key => "id=vname")
     private readonly Dictionary<string, CacheEntry> cache = new Dictionary<string, CacheEntry>();
-    private readonly List<Request> requests = new List<Request>();
+    private readonly List<Result> results = new List<Result>();
     private int lastResultId = -1;
     private readonly String[] proxies;
     private Info modInfo;
     private readonly Dictionary<string, string> vars = new Dictionary<string, string>();
 
     private readonly object _lock = new object();
-    private readonly object _lockIngame = new object();
+    private readonly object _lockAsync = new object();
     public String version;
     #endregion
 
@@ -165,6 +166,8 @@ namespace wot
             wotVersion = "SEA";
           else if (s.LastIndexOf("http://update.worldoftanks.vn") > -1)
             wotVersion = "VTC";
+          else if (s.LastIndexOf("http://update.worldoftanks.kr") > -1)
+            wotVersion = "KR";
           else if (s.LastIndexOf("http://update-ct.wargaming.net/") > -1)
             wotVersion = "CT";
         }
@@ -318,7 +321,7 @@ namespace wot
           }
 
           _command = command;
-          _result = "";
+          _result = null;
 
           if (String.IsNullOrEmpty(command) || command[0] != '@')
             return 0;
@@ -336,14 +339,14 @@ namespace wot
 
           switch (command)
           {
+            // SYNC
+
             case "@LOG": // args - encoded log string
-              logDestination = LogDestination.Log;
-              ProcessLog(parameters);
+              ProcessLog(parameters, LogDestination.Log);
               break;
 
             case "@LOGSTAT": // args - encoded log string
-              logDestination = LogDestination.Stats;
-              ProcessLog(parameters);
+              ProcessLog(parameters, LogDestination.Stats);
               break;
 
             case "@VAR": // args - variable=value
@@ -356,68 +359,6 @@ namespace wot
               }
               break;
 
-            case "@SET": // args - set of players
-            case "@ADD": // args - set of players
-              {
-                if (command == "@SET")
-                  requests.Add(new Request()
-                  {
-                    players = new List<PlayerData>(),
-                    result = null,
-                    thread = null,
-                  });
-                (new Thread(() => AddPendingPlayers(parameters))).Start();
-                _result = String.Format("{{\"resultId\":{0}}}", requests.Count - 1);
-              }
-              break;
-
-            case "@RUN": // no args
-              {
-                lastResultId = requests.Count - 1;
-                if (lastResultId < 0)
-                  throw new Exception("No request");
-                _result = requests[lastResultId].result = GetStat(requests[lastResultId]); // this will start network operations
-              }
-              break;
-
-            case "@GET_LAST_STAT": // no args
-              {
-                if (lastResultId < 0)
-                  throw new Exception("No request");
-                _result = requests[lastResultId].result;
-              }
-              break;
-
-            case "@RUN_ASYNC": // args - resultId
-              {
-                if (string.IsNullOrEmpty(parameters))
-                  throw new Exception("Empty resultId");
-                int resultId;
-                string[] p = parameters.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                if (!int.TryParse(p[0], out resultId) || resultId < 0 || resultId >= requests.Count)
-                  throw new Exception("Invalid resultId: " + p[0]);
-
-                if (!string.IsNullOrEmpty(requests[resultId].result))
-                  _result = requests[resultId].result;
-                else
-                {
-                  if (requests[resultId].thread == null)
-                  {
-                    requests[resultId].thread = new Thread(() =>
-                    {
-                      lock (_lockIngame)
-                      {
-                        requests[resultId].result = GetStat(requests[resultId]); // this will start network operations
-                        Debug("Loaded: " + resultId);
-                      }
-                    });
-                    requests[resultId].thread.Start();
-                  }
-                  _result = "{\"status\":\"NOT_READY\"}";
-                }
-              }
-              break;
-
             case "@GET_VERSION":
               {
                 _result = String.Format("{0}\n{1}", version, Path.GetDirectoryName(Assembly.GetEntryAssembly().Location));
@@ -426,8 +367,57 @@ namespace wot
               }
               break;
 
-            case "@INFO":
-              _result = GetInfo(parameters); // this will start network operations
+            case "@SET": // args - set of players
+            case "@ADD": // args - set of players
+              {
+                if (command == "@SET")
+                {
+                  results.Add(new Result() { result = null, thread = null, players = new List<PlayerData>() });
+                  lastResultId = results.Count - 1;
+                }
+                (new Thread(() => AddPendingPlayers(parameters))).Start();
+                _result = String.Format("{{\"resultId\":{0}}}", lastResultId);
+              }
+              break;
+
+            case "@GET_LAST_STAT": // no args
+              {
+                if (lastResultId < 0)
+                  throw new Exception("No last result: " + lastResultId);
+                _result = results[lastResultId].result;
+                if (string.IsNullOrEmpty(_result))
+                  throw new Exception("No result: " + lastResultId);
+              }
+              break;
+
+            // ASYNC
+
+            case "@RUN_ASYNC": // args - resultId requestCount
+              _result = AsyncWrapper(parameters, (resultId, arg) =>
+              {
+                lock (_lockAsync)
+                {
+                  results[resultId].result = GetStat(results[resultId]); // this will start network operations
+                  if (string.IsNullOrEmpty(_result))
+                    _result = String.Format("{{\"status\":\"ERROR\",\"error\":\"no result: {0}\"}}", resultId);
+                  results[resultId].thread = null;
+                  Debug("Loaded: " + resultId);
+                }
+              });
+              break;
+
+            case "@INFO_ASYNC": // args - resultId requestCount params
+              _result = AsyncWrapper(parameters, (resultId, arg) =>
+              {
+                lock (_lockAsync)
+                {
+                  results[resultId].result = GetInfo(arg); // this will start network operations
+                  if (string.IsNullOrEmpty(_result))
+                    _result = String.Format("{{\"status\":\"ERROR\",\"error\":\"no result: {0}\"}}", resultId);
+                  results[resultId].thread = null;
+                  Debug("Loaded: " + resultId);
+                }
+              });
               break;
 
             default:
@@ -435,17 +425,18 @@ namespace wot
               break;
           }
 
-          if (_result == null)
-            _result = "";
-
-          if (_result != "")
+          if (_result != null)
             Debug("_result: " + _result);
 
+          if (string.IsNullOrEmpty(_result))
+            _result = "{\"status\":\"EMPTY\"}";
+          
           fileinfo.Length = _result.Length;
         }
         catch (Exception ex)
         {
           Log("GetFileInformation(): Error: " + ex);
+          _result = String.Format("{{\"status\":\"ERROR\",\"error\":\"EXCEPTION: {0}\"}}", ex.Message);
         }
 
         return 0;
@@ -465,16 +456,50 @@ namespace wot
             readBytes = (uint)ms.Read(buffer, 0, buffer.Length);
           }
 
-          if (filename + ":" + offset != _lastReadFileFilenameAndOffset)
+          // Avoid double requests
+          string filenameAndOffset = String.Format("{0}:{1}", filename, offset);
+          if (filenameAndOffset != _lastReadFileFilenameAndOffset)
           {
-            _lastReadFileFilenameAndOffset = String.Format("{0}:{1}", filename, offset); // Avoid double requests
-            Log(String.Format("Read {0} bytes", readBytes));
+            _lastReadFileFilenameAndOffset = filenameAndOffset;
+            if (_command.Contains("_ASYNC") && !_result.Contains("\"NOT_READY\"") ||
+              _command.StartsWith("@GET_LAST_STAT "
+            ))
+            {
+              Log(String.Format("Read {0} bytes {1}", readBytes, _command));
+            }
           }
         }
         return 0;
       }
     }
     #endregion
+
+    private string AsyncWrapper(string parameters, Action<int, string> threadFunc)
+    {
+      if (string.IsNullOrEmpty(parameters))
+        throw new Exception("Empty resultId");
+      int resultId;
+      string[] p = parameters.Split(new char[] { ' ' }, 3, StringSplitOptions.RemoveEmptyEntries);
+      if (!int.TryParse(p[0], out resultId) || resultId < -1 || resultId > results.Count - 1)
+        throw new Exception("Invalid resultId: " + p[0]);
+
+      if (resultId == -1)
+      {
+        results.Add(new Result() { result = null, thread = null });
+        resultId = results.Count - 1;
+      }
+
+      if (results[resultId].result != null)
+        return results[resultId].result;
+
+      if (results[resultId].thread == null)
+      {
+        results[resultId].thread = new Thread(() => { threadFunc(resultId, p.Length < 3 ? "" : p[2]); });
+        results[resultId].thread.Start();
+      }
+      return String.Format("{{\"status\":\"NOT_READY\",\"resultId\":{0}}}", results.Count - 1);
+    }
+
 
     #region Network operations
 
@@ -590,12 +615,12 @@ namespace wot
 
     #region Stat operations
 
-    // id=name[clan]&vehicle,id=name&vehicle
+    // id=name[clan]&vehicle&1,id=name&vehicle
     private void AddPendingPlayers(String parameters)
     {
       try
       {
-        lock (_lockIngame)
+        lock (_lockAsync)
         {
           String[] chunks = parameters.Split(',');
           foreach (String chunk in chunks)
@@ -605,7 +630,7 @@ namespace wot
               continue;
 
             long id = long.Parse(param[0]);
-            if (requests[requests.Count - 1].players.Exists(x => x.id == id))
+            if (results[results.Count - 1].players.Exists(x => x.id == id))
               continue;
 
             String[] param2 = param[1].Split(new char[] { '&' }, StringSplitOptions.RemoveEmptyEntries);
@@ -629,7 +654,7 @@ namespace wot
               me = 0;
             }
 
-            requests[requests.Count - 1].players.Add(new PlayerData()
+            results[results.Count - 1].players.Add(new PlayerData()
             {
               id = id,
               name = name,
@@ -642,44 +667,51 @@ namespace wot
       }
       catch (Exception ex)
       {
-        Log("Error: " + ex.ToString());
+        Log("Error: " + ex);
       }
     }
 
-    private string GetStat(Request req)
+    private string GetStat(Result req)
     {
-      PrepareStat(req);
-
-      Response res = new Response()
+      try
       {
-        players = new Stat[req.players.Count],
-        info = modInfo,
-      };
+        PrepareStat(req);
 
-      int pos = 0;
-      foreach (PlayerData pd in req.players)
-      {
-        string cacheKey = pd.id + "=" + pd.vn;
-        if (cache.ContainsKey(cacheKey))
+        Response res = new Response()
         {
-          res.players[pos] = cache[cacheKey].stat;
-          // fix player names (for CT)
-          res.players[pos].name = pd.name;
-          pos++;
-        }
-      }
-      Array.Resize<Stat>(ref res.players, pos);
+          players = new Stat[req.players.Count],
+          info = modInfo,
+        };
 
-      Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
-      return JsonMapper.ToJson(res);
+        int pos = 0;
+        foreach (PlayerData pd in req.players)
+        {
+          string cacheKey = String.Format("{0}={1}", pd.id, pd.vn);
+          if (cache.ContainsKey(cacheKey))
+          {
+            res.players[pos] = cache[cacheKey].stat;
+            // fix player names (for CT)
+            res.players[pos].name = pd.name;
+            pos++;
+          }
+        }
+        Array.Resize<Stat>(ref res.players, pos);
+
+        Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
+        return JsonMapper.ToJson(res);
+      }
+      catch
+      {
+        return "{{\"status\":\"ERROR\",\"error\":\"EXCEPTION\"}}";
+      }
     }
 
-    private void PrepareStat(Request req)
+    private void PrepareStat(Result req)
     {
       string updateRequest = "";
       foreach (PlayerData pd in req.players)
       {
-        string cacheKey = pd.id + "=" + pd.vn;
+        string cacheKey = String.Format("{0}={1}", pd.id, pd.vn);
         if (cache.ContainsKey(cacheKey))
         {
           CacheEntry currentMember = cache[cacheKey];
@@ -729,7 +761,7 @@ namespace wot
         {
           if (String.IsNullOrEmpty(stat.name))
             continue;
-          string cacheKey = stat.id + "=" + stat.vn;
+          string cacheKey = String.Format("{0}={1}", stat.id, stat.vn);
           cache[cacheKey] = new CacheEntry()
           {
             stat = stat,
@@ -742,7 +774,7 @@ namespace wot
         // disable stat retrieving for people in cache, but not in server db
         foreach (PlayerData pd in req.players)
         {
-          string cacheKey = pd.id + "=" + pd.vn;
+          string cacheKey = String.Format("{0}={1}", pd.id, pd.vn);
           if (cache.ContainsKey(cacheKey))
             continue;
           Debug(String.Format("Player [{0}] {1} not in Database", pd.id, pd.name));
@@ -764,6 +796,9 @@ namespace wot
         Log(string.Format("Exception: {0}", ex));
       }
     }
+    #endregion
+
+    #region Stat parsing
 
     private static int ParseInt(JsonData data, params String[] path)
     {
@@ -900,7 +935,7 @@ namespace wot
     private string GetInfo(string req)
     {
       if (string.IsNullOrEmpty(req))
-        return "";
+        return "{{\"status\":\"ERROR\",\"error\":\"NO_REQ\"}}";
 
       List<byte> buf = new List<byte>();
       string s = "";
@@ -919,7 +954,7 @@ namespace wot
         Log("Error decoding @INFO string: " + Encoding.ASCII.GetString(buf.ToArray()));
         Debug(req);
         Debug(ex.ToString());
-        return "";
+        return "{{\"status\":\"ERROR\",\"error\":\"EXCEPTION\"}}";
       }
       
       string key = "@INFO," + s;
@@ -934,14 +969,14 @@ namespace wot
 
         string response = loadUrl(proxies[(new Random()).Next(proxies.Length)], "0,INFO," + s);
         if (string.IsNullOrEmpty(response))
-          return "";
+          return "{{\"status\":\"ERROR\",\"error\":\"NO_DATA\"}}";
         infocache[key] = response;
         return response;
       }
       catch (Exception ex)
       {
         Log(string.Format("Exception: {0}", ex));
-        return "";
+        return "{{\"status\":\"ERROR\",\"error\":\"EXCEPTION\"}}";
       }
     }
     #endregion
@@ -952,16 +987,15 @@ namespace wot
     private string logString = "";
 
     enum LogDestination {Log, Stats};
-    private LogDestination logDestination;
 
-    private void ProcessLog(string parameters)
+    private void ProcessLog(string parameters, LogDestination logDestination)
     {
       if (parameters.Contains(","))
       {
         if (!String.IsNullOrEmpty(logString))
         {
           Log("Warning: incomplete @LOG string");
-          DecodeAndPrintLogString();
+          DecodeAndPrintLogString(logDestination);
         }
         logString = "";
         try
@@ -982,10 +1016,10 @@ namespace wot
 
       logString += parameters;
       if (logLength <= logString.Length)
-        DecodeAndPrintLogString();
+        DecodeAndPrintLogString(logDestination);
     }
 
-    private void DecodeAndPrintLogString()
+    private void DecodeAndPrintLogString(LogDestination logDestination)
     {
       List<byte> buf = new List<byte>();
       //Log(logString);

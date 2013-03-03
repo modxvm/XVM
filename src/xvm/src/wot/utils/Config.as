@@ -2,6 +2,7 @@
  * ...
  * @author sirmax2
  */
+import wot.utils.Comm;
 import wot.utils.Defines;
 import wot.utils.GlobalEventDispatcher;
 import wot.utils.Locale;
@@ -17,11 +18,8 @@ class wot.utils.Config
     public static var s_game_region: String = null;
     public static var s_vars: Object = {
         window_size: [ 1024, 768 ],
-        map_name: "notset123"
+        map_name: "notset123" // (sirmax) FIXIT: bad value
     }
-
-    private static var DEBUG_TIMES = false;
-    private static var DEBUG_TUNING = false;
 
     // Private vars
     private static var s_loading: Boolean = false;
@@ -63,24 +61,13 @@ class wot.utils.Config
     private static function ReloadLegacyConfig()
     {
         //Logger.add("TRACE: Config.ReloadLegacyConfig()");
-        var start = new Date();
-        if (Config.DEBUG_TIMES)
-            Logger.add("DEBUG TIME: ReloadLegacyConfig(): Start " + s_src);
         var xml:XML = new XML();
         xml.ignoreWhite = true;
         xml.onLoad = function(success: Boolean)
         {
-            var finallyBugWorkaround: Boolean = false; // Workaround: finally block have a bug - it can be called twice. Why? How? F*ck!
+            var finallyBugWorkaround: Boolean = false; // Workaround: finally block have a bug - it can be called twice.
             try
             {
-                var diff = 0;
-                if (Config.DEBUG_TIMES)
-                {
-                    var curr = Utils.elapsedMSec(start, new Date());
-                    Logger.add("DEBUG TIME: ReloadLegacyConfig(): Load:  " + (curr - diff) + " ms");
-                    diff = curr;
-                }
-
                 if (!success)
                     return;
 
@@ -89,21 +76,9 @@ class wot.utils.Config
                 if (!config)
                     return;
 
-                if (Config.DEBUG_TIMES)
-                {
-                    var curr = Utils.elapsedMSec(start, new Date());
-                    Logger.add("DEBUG TIME: ReloadLegacyConfig(): Parse: " + (curr - diff) + " ms");
-                    diff = curr;
-                }
-
                 config = wot.utils.OTMConfigConverter.convert(config);
                 Config.s_config = Config.MergeConfigs(Config.FixConfig(config), Config.s_config);
                 //Logger.addObject(Config.s_config.markers.enemy.dead);
-                if (Config.DEBUG_TIMES)
-                {
-                    var curr = Utils.elapsedMSec(start, new Date());
-                    Logger.add("DEBUG TIME: ReloadLegacyConfig(): Apply: " + (curr - diff) + " ms");
-                }
             }
             finally
             {
@@ -119,23 +94,20 @@ class wot.utils.Config
     private static function ReloadXvmConfig()
     {
         //Logger.add("TRACE: Config.ReloadXvmConfig()");
-        var start = new Date();
-        if (Config.DEBUG_TIMES)
-            Logger.add("DEBUG TIME: ReloadXvmConfig(): Start " + s_src);
+        Comm.Sync(s_config_filename, null, null, ReloadXvmConfigCallback);
+    }
 
-        var lv:LoadVars = new LoadVars();
-        lv.onData = function(str: String)
-        {
-//Logger.add("ReloadXvmConfig::onData::start");
-            var finallyBugWorkaround: Boolean = false; // Workaround: finally block have a bug - it can be called twice times. Why? How? F*ck!
+    private static function ReloadXvmConfigCallback(event) {
+//Logger.add("ReloadXvmConfigCallback::start");
+            var finallyBugWorkaround: Boolean = false; // Workaround: finally block have a bug - it can be called twice times.
             try
             {
-                Config.ProcessXvmConfig(str, start);
+                Config.ProcessXvmConfig(event.str);
                 Config.TuneupConfig();
             }
             finally
             {
-//Logger.add("ReloadXvmConfig::onData::finally:start");
+//Logger.add("ReloadXvmConfigCallback::finally:start");
                 if (finallyBugWorkaround)
                     return;
                 finallyBugWorkaround = true;
@@ -143,35 +115,18 @@ class wot.utils.Config
                     Config.ReloadGameRegion();
                 else
                     Config.GetGameRegionFromWOTLauncherCfg();
-//Logger.add("ReloadXvmConfig::onData::finally::end");
+//Logger.add("ReloadXvmConfigCallback::finally::end");
             }
-//Logger.add("ReloadXvmConfig::onData::end");
-        };
-        lv.load(s_config_filename);
-    }
+//Logger.add("ReloadXvmConfigCallback::end");
+        }
 
-    private static function ProcessXvmConfig(str: String, start: Date)
+    private static function ProcessXvmConfig(str: String)
     {
         if (str)
         {
-            var diff = 0;
-            if (Config.DEBUG_TIMES)
-            {
-                var curr = Utils.elapsedMSec(start, new Date());
-                Logger.add("DEBUG TIME: ReloadXvmConfig(): Load:  " + (curr - diff) + " ms");
-                diff = curr;
-            }
-
             try
             {
                 var config = com.xvm.JSON.parse(str);
-
-                if (Config.DEBUG_TIMES)
-                {
-                    var curr = Utils.elapsedMSec(start, new Date());
-                    Logger.add("DEBUG TIME: ReloadXvmConfig(): Parse: " + (curr - diff) + " ms");
-                    diff = curr;
-                }
 
                 if (!config)
                 {
@@ -183,11 +138,6 @@ class wot.utils.Config
                 {
                     Config.s_config = Config.MergeConfigs(Config.FixConfig(config), Config.s_config);
                     //Logger.addObject(Config.s_config);
-                    if (Config.DEBUG_TIMES)
-                    {
-                        var curr = Utils.elapsedMSec(start, new Date());
-                        Logger.add("DEBUG TIME: ReloadXvmConfig(): Apply: " + (curr - diff) + " ms");
-                    }
                     GlobalEventDispatcher.dispatchEvent({ type: "set_info" }); // Just show version
                 }
             }
@@ -220,10 +170,8 @@ class wot.utils.Config
     private static function ReloadGameRegion()
     {
         //Logger.add("TRACE: Config.ReloadGameRegion()");
-        var lv: LoadVars = new LoadVars();
-        lv.onData = function(str: String)
-        {
-            if (!str) // proxy is not running
+        Comm.Sync(Defines.COMMAND_GET_VERSION, null, null, function(event) {
+            if (!event.str) // proxy is not running
             {
                 Config.s_proxy_available = false;
                 Config.GetGameRegionFromWOTLauncherCfg();
@@ -233,7 +181,7 @@ class wot.utils.Config
             var finallyBugWorkaround: Boolean = false; // Workaround: finally block have a bug - it can be called twice times. Why? How? F*ck!
             try
             {
-                var a: Array = str.split("\n");
+                var a: Array = event.str.split("\n");
                 Config.s_game_region = a[0].toUpperCase();
                 Locale.setRegion(Config.s_game_region);
 
@@ -273,8 +221,7 @@ class wot.utils.Config
                 finallyBugWorkaround = true;
                 Config.SetConfigLoaded();
             }
-        }
-        lv.load(Defines.COMMAND_GET_VERSION);
+        });
     }
 
     private static function GetGameRegionFromWOTLauncherCfg()

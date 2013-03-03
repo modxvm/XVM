@@ -49,14 +49,14 @@ class wot.Helpers.TeamRendererHelper
 
         var s = "";
         // line 1
-        s += Locale.get("EFF") + ": " + (!stat.e ? "--" :
-            "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff) + "'>" + (stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff) + "</font>") + " ";
-        s += "(" + (!stat.e ? "-" :
-            "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.e) + "'>" + stat.e + "</font>") + ") ";
         s += "WN6: " + (!stat.wn ? "--" :
             "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn) + "'>" + (stat.xwn == 100 ? "XX" : (stat.xwn < 10 ? "0" : "") + stat.xwn) + "</font>") + " ";
         s += "(" + (!stat.wn ? "-" :
             "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, stat.wn) + "'>" + stat.wn + "</font>") + ")\n";
+        s += Locale.get("EFF") + ": " + (!stat.e ? "--" :
+            "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff) + "'>" + (stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff) + "</font>") + " ";
+        s += "(" + (!stat.e ? "-" :
+            "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.e) + "'>" + stat.e + "</font>") + ") ";
         // line 2
         s += Locale.get("Fights") + ": " + (!stat.b ? "-" :
             "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, stat.b / 1000) + "'>" + stat.b + "</font>") + " ";

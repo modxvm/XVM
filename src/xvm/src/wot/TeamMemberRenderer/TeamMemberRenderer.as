@@ -120,6 +120,9 @@ class wot.TeamMemberRenderer.TeamMemberRenderer extends net.wargaming.messenger.
     private function setXVMStat()
     {
         var key = "INFO#" + uid;
+        if (!Cache.Exist(key))
+            return;
+        GlobalEventDispatcher.removeEventListener("userdata_cached", this, setXVMStat);
         stat = TeamRendererHelper.setXVMStat(key, m_effField);
     }
 

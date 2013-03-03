@@ -129,9 +129,9 @@ class wot.BattleMain
         if (Utils.endsWith("%", v))
         {
             v = v.substring(0, v.length - 1);
-            return parseFloat(v) * range / 100 || defaultValue;
+            return parseFloat(v) * range / 100;
         }
-        return parseInt(v) || defaultValue;
+        return parseInt(v);
     }
 
     private static function ShowClock(format)
