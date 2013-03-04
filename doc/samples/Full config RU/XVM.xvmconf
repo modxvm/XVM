@@ -447,6 +447,12 @@
          { "enabled": true, "from": 400, "to": 497, "inmeters": true, "thickness": 0.9,   "alpha": 40, "color": "0xCCCCCC"},
          { "enabled": true, "from": 500, "to": 2000,"inmeters": true, "thickness": 0.75,   "alpha": 40, "color": "0xCCCCCC"}
        ]
+    },
+    "square" : { // Квадрат со стороной 1000м. Показывает границы максимальной отрисовка юнитов.
+      "enabled": true,
+      "thickness": 0.7,
+      "alpha": 40,
+      "color": "0xFFFFFF"
     }
   },
   // Блок маркеров над танками.

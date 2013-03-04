@@ -47,7 +47,7 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
     private function attachVehicleTraverseAngle():Void
     {
         var depth:Number = selfAttachments.getNextHighestDepth();
-        var traverseAgnle:MovieClip = selfAttachments.createEmptyMovieClip("traverseAgnle" + depth, depth);
+        var traverseAgnle:MovieClip = selfAttachments.createEmptyMovieClip("traverseAngle" + depth, depth);
         attachLines(traverseAgnle, MapConfig.linesTraverseAngle, rightAngle);
         attachLines(traverseAgnle, MapConfig.linesTraverseAngle, -leftAngle);
     }

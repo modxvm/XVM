@@ -309,7 +309,10 @@ class wot.utils.DefaultConfig
                   ]
                 },
                 square: {
-                  enabled: true  
+                  enabled: true,
+                  thickness: 0.5,
+                  alpha: 30,
+                  color: "0xFFFFFF"
                 },
                 lines: {
                   enabled: true,
