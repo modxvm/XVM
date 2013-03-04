@@ -113,6 +113,11 @@ class wot.Minimap.model.externalProxy.MapConfig
             return circles.special;
         }
         
+    /** Squarea*/
+        public static function get squareEnabled():Boolean {
+            return square.enabled;
+        }
+        
     /** Lines */
         public static function get linesEnabled():Boolean   {
             return lines.enabled;
@@ -182,6 +187,11 @@ class wot.Minimap.model.externalProxy.MapConfig
     private static function get circles():Object
     {
         return minimap.circles;
+    }
+    
+    private static function get square():Object
+    {
+        return minimap.square;
     }
     
     private static function get mapSize():Object

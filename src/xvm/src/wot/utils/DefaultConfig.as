@@ -308,6 +308,9 @@ class wot.utils.DefaultConfig
                     { bison_i:          { enabled: true, distance: 605,  thickness: 1, alpha: 60, color: 0xEE4444 } }
                   ]
                 },
+                square: {
+                  enabled: true  
+                },
                 lines: {
                   enabled: true,
                   vehicle: [

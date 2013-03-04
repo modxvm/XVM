@@ -1,3 +1,4 @@
+import wot.Minimap.shapes.Square;
 import wot.Minimap.ExternalDeveloperInterface;
 import wot.utils.Utils;
 import wot.utils.GlobalEventDispatcher;
@@ -59,6 +60,7 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
      * Shows game related distances and direction.
      */
     private var circles:Circles;
+    private var square:Square;
     private var lines:Lines;
     
     private var isMinimapReady:Boolean = false;
@@ -121,7 +123,7 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     function sizeUp()
     {
         super.sizeUp();
-        //Logger.add("backgrnd getBytesLoaded " + backgrnd.getBytesTotal());
+        //Logger.addObject(icons, "icons", 3);
     }
     
     // -- Private
@@ -239,6 +241,15 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
             if (MapConfig.circlesEnabled)
             {
                 circles = new Circles(mapSizeModel.getSide() * 10); /** Total map side distance in meters */
+            }
+            
+            /**
+             * Draw customized circles.
+             * Outlines distance in meters.
+             */
+            if (MapConfig.squareEnabled)
+            {
+                square = new Square(mapSizeModel.getSide() * 10); /** Total map side distance in meters */
             }
             
             /**
