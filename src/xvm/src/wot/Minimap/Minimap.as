@@ -63,7 +63,6 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     
     private var isMinimapReady:Boolean = false;
     private var isAllyPlayersPanelReady:Boolean = false;
-    private var isEnemyPlayersPanelReady:Boolean = false;
     private var loadComplete:Boolean = false;
     
     function scaleMarkers(percent)
@@ -81,7 +80,6 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
         
         GlobalEventDispatcher.addEventListener(MinimapEvent.MINIMAP_READY, this, onReady);
         GlobalEventDispatcher.addEventListener(MinimapEvent.ALLY_PLAYERS_PANEL_READY, this, onReady);
-        GlobalEventDispatcher.addEventListener(MinimapEvent.ENEMY_PLAYERS_PANEL_READY, this, onReady);
         
         checkLoading();
     }
@@ -160,12 +158,9 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
             case MinimapEvent.ALLY_PLAYERS_PANEL_READY:
                 isAllyPlayersPanelReady = true;
                 break;
-            case MinimapEvent.ENEMY_PLAYERS_PANEL_READY:
-                isEnemyPlayersPanelReady = true;
-                break;
         }
         
-        loadComplete = isMinimapReady && isAllyPlayersPanelReady && isEnemyPlayersPanelReady;
+        loadComplete = isMinimapReady && isAllyPlayersPanelReady;
         
         if (loadComplete)
         {

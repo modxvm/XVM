@@ -1,5 +1,6 @@
 XVM-3.4.3:
-  * миникарта: xvm-stat.exe is not necessary for map recongnition for RU, NA/EN, CH locales
+  * minimap: xvm-stat.exe is not necessary for map recongnition for RU, NA/EN, CH locales
+  * minimap: world map battle fix
 
 XVM-3.4.2:
   * minimap fix: minimal map size
