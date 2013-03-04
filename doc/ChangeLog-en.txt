@@ -1,3 +1,6 @@
+XVM-3.4.3:
+  * миникарта: xvm-stat.exe is not necessary for map recongnition for RU, NA/EN, CH locales
+
 XVM-3.4.2:
   * minimap fix: minimal map size
   * minimap fix: map size glitched when WoT window was resized or Alt+Tab-ed

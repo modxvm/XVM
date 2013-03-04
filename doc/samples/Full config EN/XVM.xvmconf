@@ -292,7 +292,7 @@
         }
       },
       "mapSize": { // Textfield for map side size. 1000m, 700m, 600m.
-        // Works only with xvm-stat.exe
+        // Works only with xvm-stat.exe if locale is not RU, EN or CH
         "enabled": true,
         "format": "<b>{{cellsize}}0 m</b>",
         "css": "font-size:10px; color:#FFCC66;",
@@ -315,7 +315,7 @@
       }
     },
     "circles": { // Distance circles. Only real map meters. Only for owned unit.
-        // Works only with xvm-stat.exe
+        // Works only with xvm-stat.exe if locale is not RU, EN or CH
         "enabled": true,
         "major": [
             // 445 meters - maximum reveal distance.
@@ -368,7 +368,7 @@
         ]
     },
     "lines": { // Only for owned vehicle.
-       // Works only with xvm-stat.exe
+       // Works only with xvm-stat.exe if locale is not RU, EN or CH
        "enabled": true,
        // "inmeters": true  - make line size to be in real map meters.
        // "inmeters": false - make line size to be in minimap interface clip points. Minimap interface clip side is 210 points.

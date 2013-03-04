@@ -18,7 +18,8 @@ class wot.Minimap.model.mapSize.MapSizeModel
          * Method does not depend on locale,
          * but depends on 
          */
-        cellSide = MapSizeBase.sizeBySytemMapName(Config.s_vars.map_name)
+        
+        cellSide = MapSizeBase.sizeBySytemMapName(Config.s_vars.map_name);
         
         if (!cellSide)
         {
@@ -26,8 +27,10 @@ class wot.Minimap.model.mapSize.MapSizeModel
              * Method does not depend on xvm-stat.exe,
              * but depends on localilized map names in Base.
              */
-            MapSizeBase.sizeByLocalizedMapName(_root.statsData.arenaData.mapText);
+            cellSide = MapSizeBase.sizeByLocalizedMapName(_root.statsData.arenaData.mapText);
         }
+        
+
     }
     
     public function getSide():Number
