@@ -11,7 +11,14 @@ class wot.utils.Logger
 
     public static function add(str: String)
     {
-        Comm.SyncEncoded(Defines.COMMAND_LOG, "[" + Sandbox.GetCurrentSandboxPrefix() + ":" + Utils.padLeft(String(counter++), 3, '0') + "] " + str);
+        try
+        {
+            Comm.SyncEncoded(Defines.COMMAND_LOG, "[" + Sandbox.GetCurrentSandboxPrefix() + ":" + Utils.padLeft(String(counter++), 3, '0') + "] " + str);
+        }
+        catch (e)
+        {
+            // quiet
+        }
     }
 
     public static function addObject(obj: Object, name: String, depth: Number)

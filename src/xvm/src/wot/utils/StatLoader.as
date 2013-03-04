@@ -85,17 +85,19 @@ class wot.utils.StatLoader
         for (var i = 0; i < rq.length; ++i)
         {
             Comm.SyncEncoded(i == 0 ? Defines.COMMAND_SET : Defines.COMMAND_ADD, rq[i], null, function(event) {
+                    n--;
                     try
                     {
-                        n--;
                         var response = JSON.parse(event.str);
-                        if (n == 0 && response.resultId > -1)
+                        if (n == 0)
                             Comm.Async(Defines.COMMAND_GET_ASYNC, response.resultId, null, null, StatLoader.LoadStatDataCallback);
                         // TODO: what if bad resultId?
                     }
                     catch (e)
                     {
                         Logger.add("Error parsing response: " + e);
+                        if (n == 0)
+                            StatLoader.LoadStatDataCallback({error:e});
                     }
                 });
         }

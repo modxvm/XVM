@@ -93,14 +93,17 @@ class wot.utils.Comm
         try
         {
             if (str == "" && callback)
+            {
                 callback.call(target, { str:"", error:"no data" } );
+                return;
+            }
 
             var response = JSON.parse(str);
 
             if (response.status == "ERROR")
             {
                 if (callback)
-                    callback.call(target, { error:response.error } );
+                    callback.call(target, { str:str, error:response.error } );
                 return;
             }
 
@@ -121,11 +124,13 @@ class wot.utils.Comm
 
             if (callback)
                 callback.call(target, { str:str } );
+            return;
         }
         catch (ex)
         {
             if (callback)
                 callback.call(target, { str:str, error:ex } );
+            return;
         }
     }
 }

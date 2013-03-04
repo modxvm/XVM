@@ -35,12 +35,18 @@ class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         Utils.TraceXvmModule("PlayersPanel");
 
         GlobalEventDispatcher.addEventListener("config_loaded", StatLoader.LoadLastStat);
-        GlobalEventDispatcher.addEventListener("stat_loaded", this, update);
+        GlobalEventDispatcher.addEventListener("stat_loaded", this, onStatLoaded);
         Config.LoadConfig("PlayersPanel.as");
 
         checkLoading();
     }
 
+    private function onStatLoaded()
+    {
+        _lastAdjustedState = "";
+        update();
+    }
+    
     // override
     function setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount)
     {

@@ -145,6 +145,8 @@ class com.xvm.JSON {
 }
 
   static function parse(text:String):Object {
+    if (!text || text == "")
+        return null;
     var ta: Array = text.split('');
     var at = 0;
     var ch = ' ';
