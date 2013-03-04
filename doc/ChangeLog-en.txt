@@ -1,6 +1,7 @@
-XVM-3.4.3:
+XVM-3.4.3-aplha1:
   * minimap: xvm-stat.exe is not necessary for map recongnition for RU, NA/EN, CH locales
   * minimap: world map battle fix
+  * xvm-stat protocol reworked
 
 XVM-3.4.2:
   * minimap fix: minimal map size

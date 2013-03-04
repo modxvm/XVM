@@ -80,7 +80,7 @@ class wot.utils.Comm
         var rData = _recursiveData || { resultId: resultId, timeoutId: -1 }
 
         var cmd = command + " " + rData.resultId + " " + (rData.timeoutId + 1) + (rData.resultId != -1 ? "" : " " + arg);
-        Logger.add(cmd);
+        //Logger.add(cmd);
 
         var lv:LoadVars = new LoadVars();
         lv.onData = function(str) { Comm.onAsyncData(str, command, resultId, arg, target, callback, rData); };
