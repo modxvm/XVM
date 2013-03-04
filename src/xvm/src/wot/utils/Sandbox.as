@@ -6,14 +6,14 @@ class wot.utils.Sandbox
         // VehicleMarkersManager.swf
         if (_root["vehicleMarkersCanvas"] != undefined)
             return "V";
-            
+
         // battle.swf, PlayersPanel.swf, StatisticForm.swf, Minimap.swf, TeamBasesPanel.swf
         if (_root["sixthSenseIndicator"] != undefined)
             return "B";
-            
-        // battleloading.swf, (?) FinalStatistic.swf, other hangar SWFs
-        if (_root["loadingName"] == "battleloading")
-            return "L";
+
+        // hangar SWFs + battleloading.swf
+        if (_root["invitesHandler"] != undefined)
+            return "H";
 
         // unknown sand box
         var s = "\nunknown sand box\n\n";
