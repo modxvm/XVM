@@ -44,7 +44,10 @@ class wot.Minimap.staticUtils.MinimapMacro
         }
             
         /** Vehicle type */
-        formatArr = format.split(VEH_MACRO || VEH_MACRO_ALT);
+        formatArr = format.split(VEH_MACRO);
+        if (formatArr.length > 1)
+            format = formatArr.join(player.vehicle);
+        formatArr = format.split(VEH_MACRO_ALT);
         if (formatArr.length > 1)
             format = formatArr.join(player.vehicle);
 
