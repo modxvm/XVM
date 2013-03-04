@@ -12,7 +12,7 @@ import wot.utils.StatData;
 import wot.utils.Utils;
 import wot.Minimap.MinimapEvent;
 
-class wot.PlayersPanel extends net.wargaming.ingame.PlayersPanel
+class wot.PlayersPanel.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 {
     /**
      * Sorted list of all UIDs in panel.

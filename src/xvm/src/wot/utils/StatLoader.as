@@ -131,6 +131,7 @@ class wot.utils.StatLoader
                     StatData.s_data[name].stat = stat;
                     StatData.s_data[name].loadstate = (StatData.s_data[name].vehicleKey == "UNKNOWN")
                         ? Defines.LOADSTATE_UNKNOWN : Defines.LOADSTATE_DONE;
+                    StatData.s_empty = false;
                     Macros.RegisterStatMacros(stat.name, stat);
                     //Logger.addObject(StatData.s_data[name], "s_data[" + name + "]");
                 }
@@ -280,7 +281,7 @@ class wot.utils.StatLoader
                 AddPlayerData(p.id, p.n,
                     vi2 ? vi2.name : p.v,
                     "../maps/icons/vehicle/contour/" + (vi2 ? vi2.nation + "-" + vi2.name : "unknown-" + p.v) + ".png",
-                    players.t, players.s, 0);
+                    p.t, p.s, 0);
             }
             var timer = _global.setTimeout(function() { StatLoader.StartLoadData(); }, 50);
         }

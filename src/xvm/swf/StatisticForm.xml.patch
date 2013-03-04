@@ -5,7 +5,7 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.BattleStatItemRenderer"/>
-+              <StackString value="wot.BattleStatItemRenderer"/>
++              <StackString value="wot.StatisticForm.BattleStatItemRenderer"/>
              </items>
            </PushData>
            <GetVariable/>
@@ -14,7 +14,7 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.BattleStatItemRenderer"/>
-+              <StackString value="wot.BattleStatItemRenderer"/>
++              <StackString value="wot.StatisticForm.BattleStatItemRenderer"/>
              </items>
            </PushData>
            <GetVariable/>

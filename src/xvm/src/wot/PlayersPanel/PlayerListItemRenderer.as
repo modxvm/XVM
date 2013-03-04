@@ -9,7 +9,7 @@ import wot.utils.Defines;
 import wot.utils.PlayerInfo;
 import wot.utils.Utils;
 
-class wot.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRenderer
+class wot.PlayersPanel.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRenderer
 {
     private static var IS_ALIVE:Number = 1;
     

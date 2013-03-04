@@ -10,9 +10,9 @@ import wot.utils.GlobalEventDispatcher;
 import wot.utils.Logger;
 import wot.utils.StatLoader;
 import wot.utils.Utils;
-import wot.SixthSenseIndicator;
+import wot.battle.SixthSenseIndicator;
 
-class wot.BattleMain
+class wot.battle.BattleMain
 {
     static var instance: BattleMain;
     var sixthSenseIndicator:SixthSenseIndicator;

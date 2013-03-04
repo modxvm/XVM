@@ -9,7 +9,7 @@ import net.wargaming.controls.UILoaderAlt;
 import wot.utils.IconLoader;
 import wot.utils.Logger;
 
-class wot.SixthSenseIndicator
+class wot.battle.SixthSenseIndicator
 {
     private static var dummy = Logger.dummy;
 

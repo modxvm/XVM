@@ -16,7 +16,7 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.ingame.PlayerListItemRenderer"/>
-+              <StackString value="wot.PlayerListItemRenderer"/>
++              <StackString value="wot.PlayersPanel.PlayerListItemRenderer"/>
              </items>
            </PushData>
            <GetVariable/>
@@ -25,7 +25,7 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.ingame.PlayerListItemRenderer"/>
-+              <StackString value="wot.PlayerListItemRenderer"/>
++              <StackString value="wot.PlayersPanel.PlayerListItemRenderer"/>
              </items>
            </PushData>
            <GetVariable/>
@@ -34,7 +34,7 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.ingame.PlayersPanel"/>
-+              <StackString value="wot.PlayersPanel"/>
++              <StackString value="wot.PlayersPanel.PlayersPanel"/>
              </items>
            </PushData>
            <GetVariable/>

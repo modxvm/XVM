@@ -5,7 +5,6 @@
 import net.wargaming.controls.UILoaderAlt;
 import wot.utils.Cache;
 import wot.utils.Config;
-import wot.utils.Chance;
 import wot.utils.Defines;
 import wot.utils.GlobalEventDispatcher;
 import wot.utils.IconLoader;
@@ -15,13 +14,13 @@ import wot.utils.PlayerInfo;
 import wot.utils.StatData;
 import wot.utils.StatLoader;
 import wot.utils.Utils;
+import wot.StatisticForm.WinChances;
 
-class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
+class wot.StatisticForm.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
 {
     static var DEBUG_TIMES = false;
 
-    public static var s_chanceField: TextField = null;
-    public static var s_chanceText: String;
+    public static var winChances:WinChances = null;
 
     var m_clanIcon: UILoaderAlt = null;
     var m_iconset: IconLoader = null;
@@ -32,7 +31,10 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
         super();
 
         Utils.TraceXvmModule("BattleStatItemRenderer");
-        
+
+        if (winChances == null)
+            winChances = new WinChances();
+
         col3.html = true;
         col3._y = 0;
         col3._height = _height;
@@ -76,13 +78,17 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
     public function onConfigLoaded(event)
     {
         GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
-        col3.condenseWhite = !Config.s_config.rating.showPlayersStatistics;
+
+        winChances.showChances = Config.s_config.statisticForm.showChances;
+        winChances.showExp = Config.s_config.statisticForm.showChancesExp;
+
+        col3.condenseWhite = true;
     }
 
     // override
-    private static var s_setChanceFieldDataAdded = false;
     function updateData()
     {
+        //Logger.add("updateData()");
         if (!data)
         {
             super.updateData();
@@ -91,13 +97,8 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
 
         var start = new Date();
 
-        // Chance
-        if (StatData.s_loaded && Config.s_config.statisticForm.showChances && !s_setChanceFieldDataAdded)
-        {
-            s_setChanceFieldDataAdded = true;
-            var timer = _global.setTimeout(function() { BattleStatItemRenderer.SetChanceFieldData(); }, 50);
-        }
-
+        col3.condenseWhite = StatData.s_empty;
+        
         var pname = Utils.GetNormalizedPlayerName(data.label);
         Macros.RegisterPlayerData(pname, data);
 
@@ -108,6 +109,9 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
         // Add data for Win Chance calculation
         if (Config.s_config.rating.showPlayersStatistics && (!StatData.s_data[pname] || !StatData.s_data[pname].playerId))
             StatLoader.AddPlayerData(data.uid, data.label, data.vehicle, data.icon, team);
+        // Chance
+        if (!StatData.s_empty && Config.s_config.statisticForm.showChances && this.selected == true)
+            winChances.showWinChances();
 
         // Alternative icon set
         if (!m_iconset)
@@ -137,26 +141,6 @@ class wot.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer
         {
             Logger.add("DEBUG TIME: BattleStatItemRenderer[" + data.label + "]: updateData(): " +
                 Utils.elapsedMSec(start, new Date()) + " ms");
-        }
-    }
-
-    private static function SetChanceFieldData()
-    {
-        //Logger.add("SetChanceFieldData()");
-        s_setChanceFieldDataAdded = false;
-        if (!s_chanceField)
-        {
-            s_chanceField = _root.statsDialog.battleText;
-            s_chanceField.html = true;
-            s_chanceField._width += 300;
-            s_chanceField._x -= 150;
-            s_chanceText = Chance.ShowChance(s_chanceField, Config.s_config.statisticForm.showChancesExp);
-        }
-        if (s_chanceField.htmlText != s_chanceText)
-        {
-            //Logger.add(s_chanceField.htmlText);
-            s_chanceField.html = true;
-            s_chanceField.htmlText = s_chanceText;
         }
     }
 

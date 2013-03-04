@@ -9,6 +9,7 @@ import wot.utils.GlobalEventDispatcher;
 import wot.utils.IconLoader;
 import wot.utils.Logger;
 import wot.utils.Macros;
+import wot.utils.StatData;
 import wot.utils.StatLoader;
 import wot.utils.PlayerInfo;
 import wot.utils.Utils;
@@ -177,7 +178,7 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
 
         var label = data.label;
         var team = this.team;
-        vehicleField.condenseWhite = false;
+        vehicleField.condenseWhite = StatData.s_empty;
         var key = "BL/" + label;
         Cache.Remove(key);
         vehicleField.htmlText = Cache.Get(key, function() { return Macros.Format(label,

@@ -82,6 +82,10 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
         GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
         traceToProxyTerminal();
 
+        winChances.showChances = Config.s_config.battleLoading.showChances;
+        winChances.showExp = Config.s_config.battleLoading.showChancesExp;
+        winChances.enableLog = Config.s_config.rating.enableStatisticsLog;
+
         if (Config.s_config.rating.showPlayersStatistics)
             loadStatistics();
     }

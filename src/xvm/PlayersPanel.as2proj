@@ -37,9 +37,9 @@
   </build>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="src\wot\PlayersPanel.as" />
     <compile path="src\Mouse.as" />
-    <compile path="src\wot\PlayerListItemRenderer.as" />
+    <compile path="src\wot\PlayersPanel\PlayerListItemRenderer.as" />
+    <compile path="src\wot\PlayersPanel\PlayersPanel.as" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>

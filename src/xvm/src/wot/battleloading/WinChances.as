@@ -1,10 +1,14 @@
-import wot.utils.Config;
 import wot.utils.Chance;
 import wot.utils.GlobalEventDispatcher;
 import wot.utils.StatsLogger;
+import wot.utils.Utils;
 
 class wot.battleloading.WinChances
 {
+    public var showChances = false;
+    public var showExp = false;
+    public var enableLog = false;
+
     private var form_mc:MovieClip;
     private static var s_chanceField: TextField = null;
     private static var s_chanceText: String;
@@ -19,7 +23,7 @@ class wot.battleloading.WinChances
     {
         GlobalEventDispatcher.removeEventListener("stat_loaded", this, onStatLoaded);
 
-        if (Config.s_config.battleLoading.showChances)
+        if (showChances)
             showWinChances();
     }
 
@@ -27,12 +31,14 @@ class wot.battleloading.WinChances
     {
         if (!s_chanceField)
         {
-            s_chanceField = form_mc.battleText;
-            s_chanceField.html = true;
+            s_chanceField = Utils.duplicateTextField(form_mc, "battleText", form_mc.battleText, 21, "center");
             s_chanceField._width += 300;
             s_chanceField._x -= 150;
-            s_chanceText = Chance.ShowChance(s_chanceField, Config.s_config.battleLoading.showChancesExp);
-            if (Config.s_config.rating.enableStatisticsLog == true)
+            s_chanceText = '<span class="xvm_battleText">' +
+                (Chance.ShowChance(s_chanceField, showExp) || "") +
+                '</span>';
+            //wot.utils.Logger.add(s_chanceText);
+            if (enableLog == true)
                 StatsLogger.saveStatistics("chance", Chance.lastChances);
         }
         if (s_chanceField.htmlText != s_chanceText)
