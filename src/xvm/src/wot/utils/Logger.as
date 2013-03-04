@@ -1,51 +1,25 @@
-﻿/**
- * ...
- * @author sirmax2
- */
+﻿import wot.utils.Comm;
 import wot.utils.Defines;
+import wot.utils.Sandbox;
 import wot.utils.Utils;
 
 class wot.utils.Logger
 {
-  public static var counter: Number = 0;
+    public static var counter: Number = 0;
 
-  public static var dummy; // avoid import warning
+    public static var dummy; // avoid import warning
 
-  public static function add(str: String) {
-	send("[" + Utils.padLeft(String(counter++), 3, '0') + "] " + str, Defines.COMMAND_LOG);
-  }
-
-  public static function send(str: String, cmd: String)
-  {
-    var a:Array = str.split("");
-    var s:String = "";
-    var a_length:Number = a.length;
-    for (var i = 0; i < a_length; ++i)
+    public static function add(str: String)
     {
-      var b:Number = a[i].charCodeAt(0);
-      var c:String = (b < 128) ? b.toString(16) : escape(a[i].charAt(0)).split("%").join("");
-      s += (c.length % 2 == 0 ? "" : "0") + c;
+        Comm.SyncEncoded(Defines.COMMAND_LOG, "[" + Sandbox.GetCurrentSandboxPrefix() + ":" + Utils.padLeft(String(counter++), 3, '0') + "] " + str);
     }
-    s = s.length.toString(16) + "," + s;
 
-    var command:String = cmd + " ";
-    var max_len:Number = Defines.MAX_PATH - command.length;
-    var lv:LoadVars = new LoadVars();
-    while (s.length > max_len)
+    public static function addObject(obj: Object, name: String, depth: Number)
     {
-      lv.load(command + s.slice(0, max_len));
-      s = s.slice(max_len);
+        if (isNaN(depth) || depth < 1)
+            depth = 1;
+        if (depth > 10)
+            depth = 10;
+        add((name || "[obj]") + ": " + com.xvm.JSON.stringifyDepth(obj, depth));
     }
-    lv.load(command + s);
-  }
-
-  public static function addObject(obj: Object, name: String, depth: Number)
-  {
-    if (isNaN(depth) || depth < 1)
-      depth = 1;
-    if (depth > 10)
-      depth = 10;
-    add((name || "[obj]") + ": " + com.xvm.JSON.stringifyDepth(obj, depth));
-  }
-
 }

@@ -1,16 +1,16 @@
-﻿using System;
+﻿using Dokan;
+using LitJson;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Xml;
-using Dokan;
-using LitJson;
 using wot.Properties;
-using System.Reflection;
 
 namespace wot
 {
@@ -19,22 +19,25 @@ namespace wot
     #region Private Members
 
     [Serializable]
-    public class PlayerDataBase
+    public class PlayerData
     {
       public long id;         // player id
-      public String name;     // player name
-      public String clan;     // clan
-      public String vn;       // vehicle name
-    }
+      public string n;        // full player name
+      public string v;        // vehicle key
+      public byte s;          // selected
+      public byte t;          // team
 
-    public class PlayerData : PlayerDataBase
-    {
-      public int me;          // me
+      internal string _label { get { return n.GetNormalizedPlayerName(); } }
+      internal string _clan { get { return n.GetClanName(); } }
     }
 
     [Serializable]
-    public class Stat : PlayerDataBase
+    public class Stat
     {
+      public long id;         // player id
+      public string name;     // normalized player name
+      public string clan;     // clan
+      public string vn;       // vehicle key
       public int b;           // total battles
       public int w;           // total wins
       public int e;           // global efficiency
@@ -83,16 +86,10 @@ namespace wot
       public List<PlayerData> players;
     }
 
-    public class CacheEntry
-    {
-      public Stat stat;
-      public bool notInDb;
-    }
-
     // local info cache for user data
     private readonly Dictionary<string, string> infocache = new Dictionary<string, string>();
     // local cache (key => "id=vname")
-    private readonly Dictionary<string, CacheEntry> cache = new Dictionary<string, CacheEntry>();
+    private readonly Dictionary<string, Stat> cache = new Dictionary<string, Stat>();
     private readonly List<Result> results = new List<Result>();
     private int lastResultId = -1;
     private readonly String[] proxies;
@@ -100,7 +97,8 @@ namespace wot
     private readonly Dictionary<string, string> vars = new Dictionary<string, string>();
 
     private readonly object _lock = new object();
-    private readonly object _lockAsync = new object();
+    private readonly object _lockNetwork = new object();
+    private readonly object _lockResults = new object();
     public String version;
     #endregion
 
@@ -128,6 +126,11 @@ namespace wot
     private static void Debug(string message)
     {
       Program.Debug(message);
+    }
+
+    private static void DebugFS(string message)
+    {
+      Program.DebugFS(message);
     }
 
     private static void LogStat(string message)
@@ -194,6 +197,7 @@ namespace wot
     public int CreateFile(String filename, FileAccess access, FileShare share,
       FileMode mode, FileOptions options, DokanFileInfo info)
     {
+      //DebugFS("CREATE_FILE");
       return 0;
     }
 
@@ -214,6 +218,7 @@ namespace wot
 
     public int WriteFile(String filename, Byte[] buffer, ref uint writtenBytes, long offset, DokanFileInfo info)
     {
+      DebugFS("WRITE_FILE");
       return -1;
     }
 
@@ -294,10 +299,13 @@ namespace wot
 
     #region Dokan overrides
 
-    private string _command = null;
-    private string _result = null;
+    private string _command = "";
+    private const string EMPTY_RESULT = "{\"status\":\"EMPTY\"}";
+    private const string BAD_REQUEST_RESULT = "{\"status\":\"BAD_REQUEST\"}";
+    private string _result = EMPTY_RESULT;
     public int GetFileInformation(String filename, FileInformation fileinfo, DokanFileInfo info)
     {
+      DebugFS("GetFileInformation(): " + filename);
       lock (_lock)
       {
         try
@@ -315,16 +323,24 @@ namespace wot
 
           if (_command == command)
           {
-            if (!string.IsNullOrEmpty(_result))
-              fileinfo.Length = _result.Length;
+            fileinfo.Length = _result.Length;
             return 0;
           }
 
           _command = command;
-          _result = null;
+
+          // TODO: Client is freezing when no data received
+          //fileinfo.Length = _result.Length; return 0;
 
           if (String.IsNullOrEmpty(command) || command[0] != '@')
+          {
+            _result = BAD_REQUEST_RESULT;
+            fileinfo.Length = _result.Length;
             return 0;
+          }
+
+          _result = EMPTY_RESULT;
+          fileinfo.Length = _result.Length;
 
           String parameters = "";
           if (command.Contains(" "))
@@ -334,12 +350,14 @@ namespace wot
             parameters = cmd[1];
           }
 
-          if (!command.StartsWith("@LOG"))
+          if (!command.StartsWith("@LOG") && command != "@SET" && command != "@ADD")
             Log(String.Format("=> {0} {1}", command, parameters));
 
           switch (command)
           {
             // SYNC
+
+            // Encoded
 
             case "@LOG": // args - encoded log string
               ProcessLog(parameters, LogDestination.Log);
@@ -348,6 +366,29 @@ namespace wot
             case "@LOGSTAT": // args - encoded log string
               ProcessLog(parameters, LogDestination.Stats);
               break;
+
+            case "@SET": // args - set of players
+            case "@ADD": // args - set of players
+              {
+                string value = CollectParts(parameters);
+                if (!String.IsNullOrEmpty(value))
+                {
+                  Debug(String.Format("{0} {1}", command, value));
+                  if (command == "@SET")
+                  {
+                    lock (_lockResults)
+                    {
+                      results.Add(new Result() { result = null, thread = null, players = new List<PlayerData>() });
+                      lastResultId = results.Count - 1;
+                    }
+                  }
+                  AddPendingPlayers(value, lastResultId);
+                }
+                _result = String.Format("{{\"resultId\":{0}}}", lastResultId);
+              }
+              break;
+
+            // Flat
 
             case "@VAR": // args - variable=value
               {
@@ -362,81 +403,82 @@ namespace wot
             case "@GET_VERSION":
               {
                 _result = String.Format("{0}\n{1}", version, Path.GetDirectoryName(Assembly.GetEntryAssembly().Location));
-                foreach (var v in vars.Keys)
+                foreach (string v in vars.Keys)
                   _result += String.Format("\n{0}={1}", v, vars[v]);
               }
+              Debug("_result: " + _result);
               break;
 
-            case "@SET": // args - set of players
-            case "@ADD": // args - set of players
-              {
-                if (command == "@SET")
-                {
-                  results.Add(new Result() { result = null, thread = null, players = new List<PlayerData>() });
-                  lastResultId = results.Count - 1;
-                }
-                (new Thread(() => AddPendingPlayers(parameters))).Start();
-                _result = String.Format("{{\"resultId\":{0}}}", lastResultId);
-              }
-              break;
-
-            case "@GET_LAST_STAT": // no args
+            case "@GET_PLAYERS": // no args
               {
                 if (lastResultId < 0)
                   throw new Exception("No last result: " + lastResultId);
-                _result = results[lastResultId].result;
-                if (string.IsNullOrEmpty(_result))
-                  throw new Exception("No result: " + lastResultId);
+                lock (_lockResults)
+                {
+                  if (results[lastResultId].players == null)
+                    throw new Exception("No players: " + lastResultId);
+                  _result = JsonMapper.ToJson(results[lastResultId].players);
+                }
               }
+              Debug("_result: " + _result);
               break;
 
             // ASYNC
 
-            case "@RUN_ASYNC": // args - resultId requestCount
+            case "@GET_ASYNC": // args - resultId requestCount
               _result = AsyncWrapper(parameters, (resultId, arg) =>
               {
-                lock (_lockAsync)
+                lock (_lockNetwork)
                 {
-                  results[resultId].result = GetStat(results[resultId]); // this will start network operations
-                  if (string.IsNullOrEmpty(_result))
-                    _result = String.Format("{{\"status\":\"ERROR\",\"error\":\"no result: {0}\"}}", resultId);
-                  results[resultId].thread = null;
-                  Debug("Loaded: " + resultId);
+                  Result r;
+                  lock (_lockResults)
+                  {
+                    r = results[resultId];
+                  }
+                  string res = GetStat(r); // this will start network operations
+                  lock (_lockResults)
+                  {
+                    results[resultId].result = !string.IsNullOrEmpty(res) ? res
+                      : String.Format("{{\"status\":\"ERROR\",\"error\":\"no result: {0}\"}}", resultId);
+                    results[resultId].thread = null;
+                  }
+                  //Debug("Loaded: " + resultId);
                 }
               });
+              Debug("_result: " + _result);
               break;
 
             case "@INFO_ASYNC": // args - resultId requestCount params
               _result = AsyncWrapper(parameters, (resultId, arg) =>
               {
-                lock (_lockAsync)
+                lock (_lockNetwork)
                 {
-                  results[resultId].result = GetInfo(arg); // this will start network operations
-                  if (string.IsNullOrEmpty(_result))
-                    _result = String.Format("{{\"status\":\"ERROR\",\"error\":\"no result: {0}\"}}", resultId);
-                  results[resultId].thread = null;
-                  Debug("Loaded: " + resultId);
+                  string res = GetInfo(arg); // this will start network operations
+                  lock (_lockResults)
+                  {
+                    results[resultId].result = !string.IsNullOrEmpty(res) ? res
+                      : String.Format("{{\"status\":\"ERROR\",\"error\":\"no result: {0}\"}}", resultId);
+                    results[resultId].thread = null;
+                  }
+                  //Debug("Loaded: " + resultId);
                 }
               });
+              Debug("_result: " + _result);
               break;
 
             default:
               Log("Unknown command: " + command);
               break;
           }
-
-          if (_result != null)
-            Debug("_result: " + _result);
-
-          if (string.IsNullOrEmpty(_result))
-            _result = "{\"status\":\"EMPTY\"}";
-          
-          fileinfo.Length = _result.Length;
         }
         catch (Exception ex)
         {
           Log("GetFileInformation(): Error: " + ex);
           _result = String.Format("{{\"status\":\"ERROR\",\"error\":\"EXCEPTION: {0}\"}}", ex.Message);
+        }
+        finally
+        {
+          fileinfo.Length = _result.Length;
         }
 
         return 0;
@@ -446,33 +488,36 @@ namespace wot
     private string _lastReadFileFilenameAndOffset = "";
     public int ReadFile(String filename, Byte[] buffer, ref uint readBytes, long offset, DokanFileInfo info)
     {
+      DebugFS(String.Format("ReadFile(): {0}:{1} {2}", offset, buffer.Length, filename));
       lock (_lock)
       {
-        if (!String.IsNullOrEmpty(_result))
-        {
-          using (MemoryStream ms = new MemoryStream(Encoding.ASCII.GetBytes(_result)))
-          {
-            ms.Seek(offset, SeekOrigin.Begin);
-            readBytes = (uint)ms.Read(buffer, 0, buffer.Length);
-          }
+        if (String.IsNullOrEmpty(_result))
+          return 0;
 
-          // Avoid double requests
-          string filenameAndOffset = String.Format("{0}:{1}", filename, offset);
-          if (filenameAndOffset != _lastReadFileFilenameAndOffset)
+        using (MemoryStream ms = new MemoryStream(Encoding.ASCII.GetBytes(_result)))
+        {
+          ms.Seek(offset, SeekOrigin.Begin);
+          readBytes = (uint)ms.Read(buffer, 0, buffer.Length);
+        }
+
+        // Avoid double requests
+        string filenameAndOffset = String.Format("{0}:{1}", filename, offset);
+        if (filenameAndOffset != _lastReadFileFilenameAndOffset)
+        {
+          _lastReadFileFilenameAndOffset = filenameAndOffset;
+          if (_command.Contains("_ASYNC") && !_result.Contains("\"NOT_READY\"") ||
+            _command.StartsWith("@GET_PLAYERS "
+          ))
           {
-            _lastReadFileFilenameAndOffset = filenameAndOffset;
-            if (_command.Contains("_ASYNC") && !_result.Contains("\"NOT_READY\"") ||
-              _command.StartsWith("@GET_LAST_STAT "
-            ))
-            {
-              Log(String.Format("Read {0} bytes {1}", readBytes, _command));
-            }
+            Log(String.Format("Read {0} bytes {1}", readBytes, _command));
           }
         }
-        return 0;
       }
+      return 0;
     }
     #endregion
+
+    #region        AsyncWrapper
 
     private string AsyncWrapper(string parameters, Action<int, string> threadFunc)
     {
@@ -483,23 +528,27 @@ namespace wot
       if (!int.TryParse(p[0], out resultId) || resultId < -1 || resultId > results.Count - 1)
         throw new Exception("Invalid resultId: " + p[0]);
 
-      if (resultId == -1)
+      lock (_lockResults)
       {
-        results.Add(new Result() { result = null, thread = null });
-        resultId = results.Count - 1;
-      }
+        if (resultId == -1)
+        {
+          results.Add(new Result() { result = null, thread = null });
+          resultId = results.Count - 1;
+        }
 
-      if (results[resultId].result != null)
-        return results[resultId].result;
+        if (results[resultId].result != null)
+          return results[resultId].result;
 
-      if (results[resultId].thread == null)
-      {
-        results[resultId].thread = new Thread(() => { threadFunc(resultId, p.Length < 3 ? "" : p[2]); });
-        results[resultId].thread.Start();
+        if (results[resultId].thread == null)
+        {
+          results[resultId].thread = new Thread(() => { threadFunc(resultId, p.Length < 3 ? "" : p[2]); });
+          results[resultId].thread.Start();
+        }
+        return String.Format("{{\"status\":\"NOT_READY\",\"resultId\":{0}}}", results.Count - 1);
       }
-      return String.Format("{{\"status\":\"NOT_READY\",\"resultId\":{0}}}", results.Count - 1);
     }
 
+    #endregion
 
     #region Network operations
 
@@ -527,7 +576,7 @@ namespace wot
       List<string> proxyUrl = new List<string>();
       Dictionary<string, long> proxyUrls = new Dictionary<string, long>();
 
-      foreach (var addr in ps)
+      foreach (string addr in ps)
       {
         string tempUrl = Encoding.ASCII.GetString(Convert.FromBase64String(addr));
 
@@ -569,7 +618,7 @@ namespace wot
     {
       if (!test)
         Log("HTTP: " + members);
-      url = url.Replace("%1", members);
+      url = url.Replace("%1", members).Replace("%2", Program.PublicKeyToken);
       duration = long.MaxValue;
 
       Stopwatch sw = new Stopwatch();
@@ -613,63 +662,30 @@ namespace wot
 
     #endregion
 
-    #region Stat operations
+    #region AddPendingPlayers
 
-    // id=name[clan]&vehicle&1,id=name&vehicle
-    private void AddPendingPlayers(String parameters)
+    private void AddPendingPlayers(String value, int resultId)
     {
-      try
-      {
-        lock (_lockAsync)
+        JsonData jd = JsonMapper.ToObject(value);
+        long id = jd.ToLong("id");
+
+        // Check duplicate result
+        if (results[resultId].players.Exists(x => x.id == id))
+          return;
+
+        results[resultId].players.Add(new PlayerData()
         {
-          String[] chunks = parameters.Split(',');
-          foreach (String chunk in chunks)
-          {
-            String[] param = chunk.Split(new char[] { '=' }, 2, StringSplitOptions.RemoveEmptyEntries);
-            if (param.Length != 2)
-              continue;
-
-            long id = long.Parse(param[0]);
-            if (results[results.Count - 1].players.Exists(x => x.id == id))
-              continue;
-
-            String[] param2 = param[1].Split(new char[] { '&' }, StringSplitOptions.RemoveEmptyEntries);
-
-            string name = param2[0];
-            string clan = "";
-            if (name.Contains("["))
-            {
-              clan = name.Split(new char[] { '[', ']' }, 3)[1];
-              name = name.Remove(name.IndexOf("["));
-            }
-
-            string vname = param2.Length > 1 ? param2[1] : "";
-            int me;
-            try
-            {
-              me = param2.Length > 2 ? int.Parse(param2[2]) : 0;
-            }
-            catch
-            {
-              me = 0;
-            }
-
-            results[results.Count - 1].players.Add(new PlayerData()
-            {
-              id = id,
-              name = name,
-              clan = clan,
-              vn = vname,
-              me = me,
-            });
-          }
-        }
-      }
-      catch (Exception ex)
-      {
-        Log("Error: " + ex);
-      }
+          id = id,
+          n = jd.ToString("n"),
+          v = jd.ToString("v"),
+          t = (byte)jd.ToInt("t"),
+          s = (byte)jd.ToInt("s"),
+        });
     }
+
+    #endregion
+
+    #region Stat operations
 
     private string GetStat(Result req)
     {
@@ -686,12 +702,12 @@ namespace wot
         int pos = 0;
         foreach (PlayerData pd in req.players)
         {
-          string cacheKey = String.Format("{0}={1}", pd.id, pd.vn);
+          string cacheKey = String.Format("{0}={1}", pd.id, pd.v);
           if (cache.ContainsKey(cacheKey))
           {
-            res.players[pos] = cache[cacheKey].stat;
+            res.players[pos] = cache[cacheKey];
             // fix player names (for CT)
-            res.players[pos].name = pd.name;
+            res.players[pos].name = pd._label;
             pos++;
           }
         }
@@ -711,27 +727,15 @@ namespace wot
       string updateRequest = "";
       foreach (PlayerData pd in req.players)
       {
-        string cacheKey = String.Format("{0}={1}", pd.id, pd.vn);
+        string cacheKey = String.Format("{0}={1}", pd.id, pd.v);
         if (cache.ContainsKey(cacheKey))
-        {
-          CacheEntry currentMember = cache[cacheKey];
-          if (currentMember.notInDb)
-            Log(string.Format("NOT IN DB - {0} {1} {2}", pd.id, pd.name, pd.vn));
-/*          else
-          {
-            Log(string.Format("CACHE - {0} {1} {2}: eff={3} battles={4} wins={5} t-battles={6} t-wins={7}",
-              pd.id, pd.name, pd.vn,
-              currentMember.stat.e, currentMember.stat.b, currentMember.stat.w,
-              currentMember.stat.tb, currentMember.stat.tw));
-          }*/
           continue;
-        }
 
         // playerId=vname,... || playerId,...
         if (!string.IsNullOrEmpty(updateRequest))
           updateRequest += ",";
-        updateRequest += String.IsNullOrEmpty(pd.vn) ? pd.id.ToString()
-          : String.Format("{0}={1}{2}", pd.id, pd.vn, pd.me == 1 ? "=1" : "");
+        updateRequest += String.IsNullOrEmpty(pd.v) ? pd.id.ToString()
+          : String.Format("{0}={1}{2}", pd.id, pd.v, pd.s == 1 ? "=1" : "");
       }
 
       if (string.IsNullOrEmpty(updateRequest))
@@ -762,33 +766,30 @@ namespace wot
           if (String.IsNullOrEmpty(stat.name))
             continue;
           string cacheKey = String.Format("{0}={1}", stat.id, stat.vn);
-          cache[cacheKey] = new CacheEntry()
-          {
-            stat = stat,
-          };
+          cache[cacheKey] = stat;
           PlayerData pd = req.players.Find(x => x.id == stat.id);
           if (pd != null)
-            cache[cacheKey].stat.clan = pd.clan;
+          {
+            cache[cacheKey].name = pd._label;
+            cache[cacheKey].vn = pd.v;
+            cache[cacheKey].clan = pd._clan;
+          }
         };
 
         // disable stat retrieving for people in cache, but not in server db
         foreach (PlayerData pd in req.players)
         {
-          string cacheKey = String.Format("{0}={1}", pd.id, pd.vn);
+          string cacheKey = String.Format("{0}={1}", pd.id, pd.v);
           if (cache.ContainsKey(cacheKey))
             continue;
-          Debug(String.Format("Player [{0}] {1} not in Database", pd.id, pd.name));
-          cache[cacheKey] = new CacheEntry()
-          {
-            stat = new Stat()
+          Debug(String.Format("Player {0} {1} {2} not in Database", pd.id, pd.v, pd.n));
+          cache[cacheKey] = new Stat()
             {
               id = pd.id,
-              name = pd.name,
-              vn = pd.vn,
-              clan = pd.clan,
-            },
-            notInDb = true,
-          };
+              vn = pd.v,
+              name = pd._label,
+              clan = pd._clan,
+            };
         };
       }
       catch (Exception ex)
@@ -799,64 +800,6 @@ namespace wot
     #endregion
 
     #region Stat parsing
-
-    private static int ParseInt(JsonData data, params String[] path)
-    {
-      try
-      {
-        for (int i = 0; i < path.Length - 1; ++i)
-          data = data[path[i]];
-        return data[path[path.Length - 1]].IsInt ? int.Parse(data[path[path.Length - 1]].ToString()) : 0;
-      }
-      catch
-      {
-        return 0;
-      }
-    }
-
-    private static long ParseLong(JsonData data, params String[] path)
-    {
-      try
-      {
-        for (int i = 0; i < path.Length - 1; ++i)
-          data = data[path[i]];
-        return (data[path[path.Length - 1]].IsInt || data[path[path.Length - 1]].IsLong)
-            ? long.Parse(data[path[path.Length - 1]].ToString()) : 0;
-      }
-      catch
-      {
-        return 0;
-      }
-    }
-
-    private static double ParseDouble(JsonData data, params String[] path)
-    {
-      try
-      {
-        for (int i = 0; i < path.Length - 1; ++i)
-          data = data[path[i]];
-        return (data[path[path.Length - 1]].IsDouble || data[path[path.Length - 1]].IsInt) ?
-          double.Parse(data[path[path.Length - 1]].ToString()) : 0;
-      }
-      catch
-      {
-        return 0;
-      }
-    }
-
-    private static string ParseString(JsonData data, params String[] path)
-    {
-      try
-      {
-        for (int i = 0; i < path.Length - 1; ++i)
-          data = data[path[i]];
-        return data[path[path.Length - 1]].IsString ? data[path[path.Length - 1]].ToString() : "";
-      }
-      catch
-      {
-        return "";
-      }
-    }
 
     private Response JsonDataToResponse(JsonData jd)
     {
@@ -875,27 +818,27 @@ namespace wot
           {
             res.players[pos++] = new Stat()
             {
-              id = ParseLong(data, "id"),
-              name = ParseString(data, "name"),
-              vn = ParseString(data, "vname"),
-              b = ParseInt(data, "battles"),
-              w = ParseInt(data, "wins"),
-              e = ParseInt(data, "eff"),
-              spo = ParseInt(data, "spo"),
-              hip = ParseInt(data, "hip"),
-              cap = ParseInt(data, "cap"),
-              dmg = ParseInt(data, "dmg"),
-              frg = ParseInt(data, "frg"),
-              def = ParseInt(data, "def"),
-              avglvl = ParseDouble(data, "lvl"),
-              wn = ParseInt(data, "wn"),
-              twr = ParseInt(data, "twr"),
-              tb = ParseInt(data, "v", "b"),
-              tw = ParseInt(data, "v", "w"),
-              tl = ParseInt(data, "v", "l"),
-              ts = ParseInt(data, "v", "s"),
-              td = ParseInt(data, "v", "d"),
-              tf = ParseInt(data, "v", "f"),
+              id = data.ToLong("id"),
+              name = data.ToString("name"),
+              vn = data.ToString("vname"),
+              b = data.ToInt("battles"),
+              w = data.ToInt("wins"),
+              e = data.ToInt("eff"),
+              spo = data.ToInt("spo"),
+              hip = data.ToInt("hip"),
+              cap = data.ToInt("cap"),
+              dmg = data.ToInt("dmg"),
+              frg = data.ToInt("frg"),
+              def = data.ToInt("def"),
+              avglvl = data.ToDouble("lvl"),
+              wn = data.ToInt("wn"),
+              twr = data.ToInt("twr"),
+              tb = data.ToInt("v", "b"),
+              tw = data.ToInt("v", "w"),
+              tl = data.ToInt("v", "l"),
+              ts = data.ToInt("v", "s"),
+              td = data.ToInt("v", "d"),
+              tf = data.ToInt("v", "f"),
             };
           }
         }
@@ -983,73 +926,114 @@ namespace wot
 
     #region Log processing
 
-    private int logLength = 0;
-    private string logString = "";
-
     enum LogDestination {Log, Stats};
 
     private void ProcessLog(string parameters, LogDestination logDestination)
     {
-      if (parameters.Contains(","))
-      {
-        if (!String.IsNullOrEmpty(logString))
-        {
-          Log("Warning: incomplete @LOG string");
-          DecodeAndPrintLogString(logDestination);
-        }
-        logString = "";
-        try
-        {
-          string[] strArray = parameters.Split(',');
-          logLength = int.Parse(strArray[0], System.Globalization.NumberStyles.HexNumber);
-          parameters = strArray[1];
-        }
-        catch
-        {
-          logLength = 0;
-          Log("Error parsing @LOG command parameters");
-        }
-      }
-
-      if (logLength == 0)
+      string value = CollectParts(parameters);
+      if (String.IsNullOrEmpty(value))
         return;
-
-      logString += parameters;
-      if (logLength <= logString.Length)
-        DecodeAndPrintLogString(logDestination);
+      if (logDestination == LogDestination.Log)
+        Log(value);
+      else
+        LogStat(value);
     }
 
-    private void DecodeAndPrintLogString(LogDestination logDestination)
+    #endregion
+
+    #region DecodeString
+
+    private class Parts
     {
-      List<byte> buf = new List<byte>();
-      //Log(logString);
+      public string value;
+      public int len;
+      public List<string> parts;
+      
+      public Parts()
+      {
+        value = null;
+        len = -1;
+        parts = new List<string>();
+      }
+
+      public bool IsComplete()
+      {
+        if (value != null)
+          return true;
+        string v = "";
+        for (int i = 0; i < parts.Count; ++i)
+        {
+          if (String.IsNullOrEmpty(parts[i]))
+            return false;
+          v += parts[i];
+        }
+        if (v.Length == len)
+          value = DecodeString(v);
+        return value != null;
+      }
+
+      public void SetPart(int id, string value)
+      {
+        while (parts.Count - 1 < id)
+          parts.Add(String.Empty);
+        parts[id] = value;
+      }
+    }
+
+    private readonly Dictionary<string, Parts> parts = new Dictionary<string, Parts>();
+
+    private string CollectParts(String parameters)
+    {
       try
       {
-        for (int i = 0; i < logString.Length - 1; i += 2)
+        string[] pa = parameters.Split(new char[] { ',' }, 3); // cmdid, partid, data
+        string cmdId = pa[0];
+        int partId = int.Parse(pa[1], System.Globalization.NumberStyles.HexNumber);
+        parameters = pa[2];
+
+        if (cmdId.StartsWith("_"))
+          Log("Warning: unknown SWF sandbox");
+
+        if (!parts.ContainsKey(cmdId))
+          parts[cmdId] = new Parts();
+
+        Parts part = parts[cmdId];
+
+        if (partId == 0)
         {
-          byte b = Convert.ToByte(logString.Substring(i, 2), 16);
-          buf.Add(b);
+          string[] pb = parameters.Split(',');
+          part.len = int.Parse(pb[0], System.Globalization.NumberStyles.HexNumber);
+          parameters = pb[1];
         }
 
-        if (logDestination == LogDestination.Log)
-            Log(Encoding.UTF8.GetString(buf.ToArray()));
-        else
-            LogStat(Encoding.UTF8.GetString(buf.ToArray()));
+        part.SetPart(partId, parameters);
+
+        if (!part.IsComplete())
+          return null;
+
+        string res = part.value;
+        parts.Remove(cmdId);
+        return res;
       }
       catch (Exception ex)
       {
-        Log(String.Format("Error decoding {0} string: {1}", 
-          logDestination == LogDestination.Stats ? @"LOGSTAT" : "@LOG",
-          Encoding.ASCII.GetString(buf.ToArray())));
-        Debug(logString);
-        Debug(ex.ToString());
+        Log("Error: " + ex);
       }
-      finally
-      {
-        logLength = 0;
-        logString = "";
-      }
+
+      return null;
     }
+
+    private static string DecodeString(string str)
+    {
+      List<byte> buf = new List<byte>();
+      for (int i = 0; i < str.Length - 1; i += 2)
+      {
+        byte b = Convert.ToByte(str.Substring(i, 2), 16);
+        buf.Add(b);
+      }
+      return Encoding.UTF8.GetString(buf.ToArray());
+    }
+
     #endregion
 
   }

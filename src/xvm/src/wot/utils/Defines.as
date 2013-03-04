@@ -25,8 +25,8 @@ class wot.utils.Defines
     public static var COMMAND_ADD: String = DOKAN_MP + "@ADD";
     public static var COMMAND_VAR: String = DOKAN_MP + "@VAR";
     public static var COMMAND_LOGSTAT: String = DOKAN_MP + "@LOGSTAT";
-    public static var COMMAND_RUN_ASYNC: String = DOKAN_MP + "@RUN_ASYNC";
-    public static var COMMAND_GET_LAST_STAT: String = DOKAN_MP + "@GET_LAST_STAT";
+    public static var COMMAND_GET_ASYNC: String = DOKAN_MP + "@GET_ASYNC";
+    public static var COMMAND_GET_PLAYERS: String = DOKAN_MP + "@GET_PLAYERS";
     public static var COMMAND_GET_VERSION: String = DOKAN_MP + "@GET_VERSION";
     public static var COMMAND_INFO_ASYNC: String = DOKAN_MP + "@INFO_ASYNC";
 

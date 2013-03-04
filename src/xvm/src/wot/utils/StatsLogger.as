@@ -1,9 +1,4 @@
-/**
- * ...
- * @author levevg
- */
-
-import wot.utils.Logger;
+import wot.utils.Comm;
 import wot.utils.Defines;
 
 class wot.utils.StatsLogger
@@ -12,8 +7,8 @@ class wot.utils.StatsLogger
     {
         var out: Object = mapData(data, key);
         var d: Date = new Date();
-        Logger.send(d.getTime() + ":" + key + ":" +
-            com.xvm.JSON.stringify(out, "", true), Defines.COMMAND_LOGSTAT);
+        Comm.SyncEncoded(Defines.COMMAND_LOGSTAT,
+            d.getTime() + ":" + key + ":" + com.xvm.JSON.stringify(out, "", true));
     }
 
     private static function mapData(data: Object, fieldName: String)

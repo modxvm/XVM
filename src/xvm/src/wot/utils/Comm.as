@@ -1,6 +1,7 @@
 import com.xvm.JSON;
 import wot.utils.Defines;
 import wot.utils.Logger;
+import wot.utils.Sandbox;
 
 class wot.utils.Comm
 {
@@ -13,7 +14,7 @@ class wot.utils.Comm
     {
         (new LoadVars()).load(Defines.COMMAND_VAR + " " + name + "=" + value);
     }
-    
+ 
     public static function Sync(command:String, arg:String, target:Object, callback:Function):Void
     {
         var lv:LoadVars = new LoadVars();
@@ -23,6 +24,44 @@ class wot.utils.Comm
                 callback.call(target, { str:str } );
         }
         lv.load(command + (arg && arg != "" ? " " + arg : ""));
+    }
+
+    public static var commandId = 0;
+    public static function SyncEncoded(command:String, arg:String, target:Object, callback:Function):Void
+    {
+        var a:Array = arg.split("");
+        var s:String = "";
+        var a_length:Number = a.length;
+        for (var i = 0; i < a_length; ++i)
+        {
+            var b:Number = a[i].charCodeAt(0);
+            var c:String = (b < 128) ? b.toString(16) : escape(a[i].charAt(0)).split("%").join("");
+           s += (c.length % 2 == 0 ? "" : "0") + c;
+        }
+
+        command += " " + Sandbox.GetCurrentSandboxPrefix() + (commandId++).toString(16) + ",";
+        var partId = 0;
+        s = s.length.toString(16) + "," + s;
+
+        var sa:Array = [];
+        while (s.length > 0)
+        {
+            var c = command + (partId++).toString(16) + ",";
+            var m = Math.min(s.length, Defines.MAX_PATH - c.length);
+            sa.push(c + s.slice(0, m))
+            s = s.slice(m);
+        }
+
+        var lv:LoadVars = new LoadVars();
+        var n = sa.length;
+        lv.onData = function(str: String)
+        {
+            n--;
+            if (n == 0 && callback)
+                callback.call(target, { str:str } );
+        }
+        for (var i = 0; i < sa.length; ++i)
+            lv.load(sa[i]);
     }
 
     /**

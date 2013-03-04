@@ -69,7 +69,7 @@ class wot.utils.Macros
             if (!stat || (StatData.s_data[pname].loadstate == Defines.LOADSTATE_UNKNOWN && VehicleInfo.getInfo2(data.icon).name != "UNKNOWN"))
             {
                 //Logger.addObject(data);
-                StatData.s_data[pname].vehicleKey = VehicleInfo.getInfo2(data.icon).name;
+                StatData.s_data[pname].vehicleKey = VehicleInfo.getInfo2(data.icon).name.toUpperCase();
                 StatData.s_data[pname].loadstate = Defines.LOADSTATE_NONE;
                 GlobalEventDispatcher.dispatchEvent( { type: "process_fow", data: data } );
             }
