@@ -11,52 +11,195 @@
         ]]>
     </fx:Script>
 <!--
-            minimap: {
-                enabled: false,
-                iconScale: 1,
-                nickShrink: 4,
-                textOffsetX: 0,
-                textOffsetY: 0,
-                format: {
-                  ally:  "{{level}}",
-                  enemy: "{{level}}",
-                  squad: "{{level}} <i>{{short-nick}}</i>",
-                  oneself: "<b>{{level}}</b>",
-                  lostenemy: "<i>{{level}}</i>"
-                },
-                css: {
-                  ally:  "font-family:$FieldFont; font-size:8px; color:#BBEEBB;",
-                  enemy: "font-family:$FieldFont; font-size:8px; color:#EEBBBB;",
-                  squad: "font-family:$FieldFont; font-size:8px; color:#FFEE44;",
-                  oneself: "font-family:$FieldFont; font-size:8px; color:#FFFFFF;",
-                  lostenemy: "font-family:$FieldFont; font-size:8px; color:#EEAACC;"
-                },
-                lostEnemy: {
-                  enabled: true,
-                  alpha: 50,
-                  iconWidth: 15,
-                  iconHeight: 19,
-                  textOffsetX: 11,
-                  textOffsetY: 11
-                }
+    minimap: {
++        enabled: false,
++        mapBackgroundImageAlpha: 100,
++        selfIconAlpha: 100,
++        cameraAlpha: 100,
++        iconScale: 1,
+        labels: {
+          nickShrink: 5,
+          vehicleclassmacro: {
+            light: "",
+            medium: "",
+            heavy: "",
+            td: "▼",
+            spg: "■",
+            superh: ""
+          },
+          units: {
+            revealedEnabled: true,
+            lostEnemyEnabled: true,
+            format: {
+              ally:  "<span class='mm_a'>{{vehicle-type}}</span>",
+              enemy: "<span class='mm_e'>{{vehicle-type}}</span>",
+              squad: "<textformat leading='-1'><span class='mm_s'><i>{{short-nick}}</i>\n{{vehicle-type}}</span><textformat>",
+              lost:  "<span class='mm_dot'>\u2022</span><span class='mm_l'><i>{{vehicle-type}}</i></span>",
+              oneself: ""
             },
+            css: {
+              ally:  ".mm_a{font-family:$FieldFont; font-size:8px; color:#C8FFA6;}",
+              enemy: ".mm_e{font-family:$FieldFont; font-size:8px; color:#FCA9A4;}",
+              squad: ".mm_s{font-family:$FieldFont; font-size:8px; color:#FFC099;}",
+              lost:  ".mm_l{font-family:$FieldFont; font-size:8px; color:#FCA9A4;} .mm_dot{font-family:Arial; font-size:17px; color:#FCA9A4;}",
+              oneself: ".mm_o{font-family:$FieldFont; font-size:8px; color:#FFFFFF;}"
+            },
+            shadow: {
+              ally: {
+                enabled: true,
+                color: "0x000000",
+                distance: 0,
+                angle: 0,
+                alpha: 80,
+                blur: 3,
+                strength: 3
+              },
+              enemy: {
+                enabled: true,
+                color: "0x000000",
+                distance: 0,
+                angle: 0,
+                alpha: 80,
+                blur: 3,
+                strength: 3
+              },
+              squad: {
+                enabled: true,
+                color: "0x000000",
+                distance: 0,
+                angle: 0,
+                alpha: 80,
+                blur: 3,
+                strength: 3
+              },
+              lost: {
+                enabled: true,
+                color: "0x000000",
+                distance: 0,
+                angle: 0,
+                alpha: 80,
+                blur: 3,
+                strength: 3
+              },
+              oneself: {
+                enabled: true,
+                color: "0x000000",
+                distance: 0,
+                angle: 0,
+                alpha: 80,
+                blur: 3,
+                strength: 3
+              }
+            },
+            offset: {
+              ally:  {x: 3, y: -1},
+              enemy: {x: 3, y: -1},
+              squad: {x: 3, y: -2},
+              lost:  {x: -6, y: -10},
+              oneself: {x: 0, y: 0}
+            },
+            alpha : {
+              ally:  100,
+              enemy: 100,
+              squad: 100,
+              lost:  70,
+              oneself: 100
+            }
+          },
+          mapSize: {
+            enabled: true,
+            format: "<b>{{cellsize}}0 m</b>",
+            css: "font-size:10px; color:#FFCC66;",
+            alpha: 80,
+            offsetX: 0,
+            offsetY: 0,
+            shadow: {
+              enabled: true,
+              color: "0x000000",
+              distance: 0,
+              angle: 0,
+              alpha: 80,
+              blur: 2,
+              strength: 3
+            },
+            width: 100,
+            height: 30
+          }
+        },
+        circles: {
+          enabled: true,
+          major: [
+            { enabled: true, distance: 445, thickness: 1, alpha: 40, color: 0x000000 },
+            { enabled: false, distance: 50, thickness: 2.5, alpha: 100, color: 0xFFFFFF }
+          ],
+          special: [
+            { g_e:              { enabled: true, distance: 1172, thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { object_261:       { enabled: true, distance: 1463, thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { bat_chatillon155: { enabled: true, distance: 1296, thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { t92:              { enabled: true, distance: 1248, thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { g_tiger:          { enabled: true, distance: 1172, thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { m40m43:           { enabled: true, distance: 1179, thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { object_212:       { enabled: true, distance: 1229, thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { lorraine155_51:   { enabled: true, distance: 1296, thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { su_14:            { enabled: true, distance: 1229, thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { s_51:             { enabled: true, distance: 1229, thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { lorraine155_50:   { enabled: true, distance: 1202, thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { m12:              { enabled: true, distance: 1316, thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { g_panther:        { enabled: true, distance: 1407, thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { amx_13f3am:       { enabled: true, distance: 1250, thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { su_8:             { enabled: true, distance: 920,  thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { m41:              { enabled: true, distance: 1210, thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { hummel:           { enabled: true, distance: 1264, thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { amx_105am:        { enabled: true, distance: 1000, thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { _105_lefh18b2:    { enabled: true, distance: 1000, thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { su_5:             { enabled: true, distance: 605,  thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { m7_priest:        { enabled: true, distance: 1047, thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { grille:           { enabled: true, distance: 1210, thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { lorraine39_l_am:  { enabled: true, distance: 844,  thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { su_26:            { enabled: true, distance: 578,  thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { wespe:            { enabled: true, distance: 1000, thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { sturmpanzer_ii:   { enabled: true, distance: 605,  thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { m37:              { enabled: true, distance: 969,  thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { renaultbs:        { enabled: true, distance: 450,  thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { su_18:            { enabled: true, distance: 552,  thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { t57:              { enabled: true, distance: 552,  thickness: 1, alpha: 60, color: 0xEE4444 } },
+            { bison_i:          { enabled: true, distance: 605,  thickness: 1, alpha: 60, color: 0xEE4444 } }
+          ]
+        },
+        lines: {
+          enabled: true,
+          vehicle: [
+            { enabled: true, from: 50,  to: 100, inmeters: true, thickness: 2,   alpha: 60, color: 0x44EE44},
+            { enabled: true, from: 200, to: 300, inmeters: true, thickness: 1.5, alpha: 45, color: 0x44EE44},
+            { enabled: true, from: 350, to: 445, inmeters: true, thickness: 1,   alpha: 30, color: 0x44EE44}
+          ],
+          camera: [
+            { enabled: true, from: 50,  to: 100, inmeters: true, thickness: 2,   alpha: 60, color: 0xEE0044},
+            { enabled: true, from: 200, to: 300, inmeters: true, thickness: 1.5, alpha: 45, color: 0xEE0044},
+            { enabled: true, from: 350, to: 445, inmeters: true, thickness: 1,   alpha: 30, color: 0xEE0044}
+          ],
+          traverseAngle: [
+            { enabled: true, from: 50,  to: 100, inmeters: true, thickness: 2,   alpha: 60, color: 0xFFFFFF},
+            { enabled: true, from: 200, to: 300, inmeters: true, thickness: 1.5, alpha: 45, color: 0xFFFFFF},
+            { enabled: true, from: 350, to: 445, inmeters: true, thickness: 1,   alpha: 30, color: 0xFFFFFF}
+          ]
+        }
+    },
 -->
+    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'Enabled')}" labelWidth="180" id="v_enabled" config="minimap.enabled" change="onChange(event)"/>
+    <c:LabeledNumberSelector labelWidth="200" label="{resourceManager.getString('panels', 'mapBackgroundImageAlpha')}" id="v_mapBackgroundImageAlpha" config="minimap.mapBackgroundImageAlpha" minimum="0" maximum="100" change="onChange(event)"/>
+    <c:LabeledNumberSelector labelWidth="200" label="{resourceManager.getString('panels', 'selfIconAlpha')}" id="v_selfIconAlpha" config="minimap.selfIconAlpha" minimum="0" maximum="100" change="onChange(event)"/>
+    <c:LabeledNumberSelector labelWidth="200" label="{resourceManager.getString('panels', 'cameraAlpha')}" id="v_cameraAlpha" config="minimap.cameraAlpha" minimum="0" maximum="100" change="onChange(event)"/>
+    <c:LabeledNumberSelector labelWidth="200" label="{resourceManager.getString('panels', 'iconScale')}" id="v_iconScale" config="minimap.iconScale" minimum="0" maximum="5" stepSize="0.1" change="onChange(event)"/>
+    <s:Label text="" height="20"/>
+    <s:Label text="{resourceManager.getString('panels', 'minimapUnderConstruction')}" width="100%" height="100%" backgroundColor="0xFFDDDD"/>
 <!--
     <c:LabeledCheckBox label="{resourceManager.getString('panels', 'Visible')}" labelWidth="180" id="v_visible" config="hitLog.visible" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'XPosition')}" toolTip="{resourceManager.getString('panels', 'hitLogXTip')}" labelWidth="180" id="v_x" config="hitLog.x" minimum="-9999" maximum="9999" sliderVisible="false" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'YPosition')}" toolTip="{resourceManager.getString('panels', 'hitLogYTip')}" labelWidth="180" id="v_y" config="hitLog.y" minimum="-9999" maximum="9999" sliderVisible="false" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Width')}" labelWidth="180" id="v_w" config="hitLog.w" minimum="0" maximum="9999" sliderVisible="false" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Height')}" labelWidth="180" id="v_h" config="hitLog.h" minimum="0" maximum="9999" sliderVisible="false" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'lines')}" labelWidth="180" id="v_lines" config="hitLog.lines" minimum="0" maximum="100" change="onChange(event)"/>
     <c:LabeledDirectionSelector label="{resourceManager.getString('panels', 'direction')}" labelWidth="180" id="v_direction" config="hitLog.direction" change="onChange(event)"/>
     <c:LabeledInsertOrderSelector label="{resourceManager.getString('panels', 'insertOrder')}" toolTip="{resourceManager.getString('panels', 'insertOrderTip')}" labelWidth="180" id="v_insertOrder" config="hitLog.insertOrder" change="onChange(event)"/>
     <c:LabeledCheckBox label="{resourceManager.getString('panels', 'groupHitsByPlayer')}" labelWidth="180" id="v_groupHitsByPlayer" config="hitLog.groupHitsByPlayer" change="onChange(event)"/>
-    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'deadMarker')}" labelWidth="100%" wrapTextField="true" height="40" id="v_deadMarker" config="hitLog.deadMarker" allowedMacros="{Macros.get('hitlog,colors_hitlog')}" preview="true" change="onChange(event)"/>
-    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'blowupMarker')}" labelWidth="100%" wrapTextField="true" height="40" id="v_blowupMarker" config="hitLog.blowupMarker" allowedMacros="{Macros.get('hitlog,colors_hitlog')}" preview="true" change="onChange(event)"/>
-    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'formatHeader')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatHeader" config="hitLog.formatHeader" allowedMacros="{Macros.get('hitlog,dead,colors_hitlog')}" preview="true" change="onChange(event)"/>
     <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'formatHistory')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatHistory" config="hitLog.formatHistory" allowedMacros="{Macros.get('hitlog,dead,colors_hitlog')}" preview="true" change="onChange(event)"/>
-    <s:Label text="" height="20"/>
-    <s:Label text="{resourceManager.getString('panels', 'Shadow')}:" width="100%" backgroundColor="0xCCCCCC"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Size')}" id="v_shadow_size" config="hitLog.shadow.size" minimum="0" maximum="10" stepSize="0.1" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Strength')}" id="v_shadow_strength" config="hitLog.shadow.strength" minimum="0" maximum="1000" isLogarithmic="true" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Angle')}" id="v_shadow_angle" config="hitLog.shadow.angle" minimum="0" maximum="359" change="onChange(event)"/>

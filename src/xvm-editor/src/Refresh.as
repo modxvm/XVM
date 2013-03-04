@@ -174,7 +174,11 @@ private function RefreshMinimapPage():void
         var section:*;
 
         section = Config.s_config.minimap;
-//        this.p_hitLog.v_visible.value = section.visible;
+        this.p_minimap.v_enabled.value = section.enabled;
+        this.p_minimap.v_mapBackgroundImageAlpha.value = section.mapBackgroundImageAlpha;
+        this.p_minimap.v_selfIconAlpha.value = section.selfIconAlpha;
+        this.p_minimap.v_cameraAlpha.value = section.cameraAlpha;
+        this.p_minimap.v_iconScale.value = section.iconScale;
     }
     catch (ex:Error)
     {
