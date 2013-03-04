@@ -438,7 +438,7 @@
          { "enabled": true, "from": 500, "to": 2000,"inmeters": true, "thickness": 0.75,   "alpha": 40, "color": "0xCCCCCC"}
        ]
     },
-    "square" : { // Square with 1000m side. Shows maximum unit draw distance.
+    "square" : { // Square with 500m side. Shows maximum unit draw distance.
       "enabled": true,
       "thickness": 0.7,
       "alpha": 40,
