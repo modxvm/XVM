@@ -206,7 +206,7 @@ class wot.utils.StatLoader
         var vi3 = VehicleInfo.getInfo3(stat.vn);
         if (!vi3 || !vi3.cl || !vi3.l)
         {
-            Logger.add("WARNING: vehicle info (3) missed: " + stat.vn);
+            //Logger.add("WARNING: vehicle info (3) missed: " + stat.vn);
             return stat;
         }
 

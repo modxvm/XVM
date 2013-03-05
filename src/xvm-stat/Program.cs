@@ -303,8 +303,7 @@ namespace wot
         // Clear log file
         ClearLogFile();
 
-        string mp = String.Format("res_mods{0}{1}", Path.DirectorySeparatorChar,
-          Settings.Default.MountPoint);
+        string mp = Settings.Default.MountPoint;
         DokanOptions opt = new DokanOptions()
         {
           VolumeLabel = "XVMfs",

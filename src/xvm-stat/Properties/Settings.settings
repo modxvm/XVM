@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="MountPoint" Type="System.String" Scope="User">
-      <Value Profile="(Default)">.stat</Value>
+      <Value Profile="(Default)">res_mods\.stat</Value>
     </Setting>
     <Setting Name="ProxyServers" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
