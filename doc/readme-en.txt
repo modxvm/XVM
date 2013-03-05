@@ -158,6 +158,8 @@
       {{vehicle-type}}  - subject full vehicle type
       {{vehicle-class}} - places special symbol depending on subject vehicle class
       {{cellsize}}     - minimap cell side size
+      {{vehicle-name}} - returns vehicle system name - usa-M24_Chaffee
+      {{vehiclename}}  - returns vehicle system name - usa-M24_Chaffee
 
     Statistics macros ('rating/showPlayersStatistics' must be anabled):
       {{avglvl}}      - average level (tier) of tanks

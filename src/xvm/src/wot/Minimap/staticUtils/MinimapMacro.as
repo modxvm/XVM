@@ -11,6 +11,8 @@ class wot.Minimap.staticUtils.MinimapMacro
     private static var VEHCLASS_MACRO:String = "{{vehicle-class}}";
     private static var VEH_MACRO:String = "{{vehicle}}";
     private static var VEH_MACRO_ALT:String = "{{vehicle-type}}";
+    private static var VEH_NAME:String = "{{vehiclename}}";
+    private static var VEH_NAME_ALT:String = "{{vehicle-name}}";
     private static var SHORT_VEH__MACRO:String = "{{vehicle-type-short}}"; // TODO
     
     public static function process(format:String, player:Player, vehicleClass:String):String
@@ -43,13 +45,21 @@ class wot.Minimap.staticUtils.MinimapMacro
             format = formatArr.join(VehicleTypeShort.translate(type));
         }
             
-        /** Vehicle type */
+        /** Vehicle type readable - Чаффи */
         formatArr = format.split(VEH_MACRO);
         if (formatArr.length > 1)
             format = formatArr.join(player.vehicle);
         formatArr = format.split(VEH_MACRO_ALT);
         if (formatArr.length > 1)
             format = formatArr.join(player.vehicle);
+            
+        /** Vehicle system name - usa-M24_Chaffee */
+        formatArr = format.split(VEH_NAME);
+        if (formatArr.length > 1)
+            format = formatArr.join(VehicleInfo.getVehicleName(player.icon));
+        formatArr = format.split(VEH_NAME_ALT);
+        if (formatArr.length > 1)
+            format = formatArr.join(VehicleInfo.getVehicleName(player.icon));
 
         /** Nickname shortened */
         formatArr = format.split(NICK_MACRO);
