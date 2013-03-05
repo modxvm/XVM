@@ -1,3 +1,5 @@
+import wot.Minimap.Minimap;
+import wot.Minimap.model.externalProxy.IconsProxy;
 import wot.Minimap.shapes.ShapeAttach;
 import wot.Minimap.model.externalProxy.MapConfig;
 
@@ -18,14 +20,14 @@ class wot.Minimap.shapes.Square extends ShapeAttach
         var mc:MovieClip = createSquareClip();
         defineStyle(mc);
         drawLines(mc);
-        cancelRotation(mc);
+        updatePosition(mc);
     }
     
     //--Private
     
     private function createSquareClip():MovieClip
     {
-        return selfAttachments.createEmptyMovieClip("square", selfAttachments.getNextHighestDepth());
+        return icons.createEmptyMovieClip("square", Minimap.SQUARE_1KM_INDEX);
     }
     
     private function defineStyle(mc:MovieClip):Void
@@ -56,11 +58,18 @@ class wot.Minimap.shapes.Square extends ShapeAttach
         mc.lineTo( -offset, -offset);
     }
     
-    private function cancelRotation(mc:MovieClip):Void
+    private function updatePosition(mc:MovieClip):Void
     {
-        mc.onEnterFrame = function()
+        icons.onEnterFrame = function()
         {
-            this._rotation = -this._parent._parent._rotation;
+            var self:MovieClip = IconsProxy.getSelf();
+            this.square._x = self._x;
+            this.square._y = self._y;
         }
+    }
+    
+    private function get icons():MovieClip
+    {
+        return IconsProxy.getIcons();
     }
 }

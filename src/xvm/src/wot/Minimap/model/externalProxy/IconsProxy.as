@@ -73,15 +73,15 @@ class wot.Minimap.model.externalProxy.IconsProxy
         return MinimapEntry(icons.getInstanceAtDepth(Minimap.CAMERA_NORMAL_ZINDEX));
     }
     
+    public static function getIcons():MovieClip
+    {
+        return _root.minimap.icons;
+    }
+    
     // -- Private
     
     private static function getMinimapEntries():Array
     {
         return Utils.getChildrenOf(getIcons(), false);
-    }
-    
-    private static function getIcons():MovieClip
-    {
-        return _root.minimap.icons;
     }
 }
