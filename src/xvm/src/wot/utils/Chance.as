@@ -98,7 +98,7 @@ class wot.utils.Chance
             //if (!vi3)
             //  return { error: "[3] No data for: " + VehicleInfo.getVehicleName(pdata.icon) };
 
-            var K = chanceFunc(vi1, vi2, vi3, pdata.team, pdata.stat);
+            var K = chanceFunc(vi1, vi2, vi3, pdata.team, pdata.stat, (pdata.vehicleState & 1) == 0);
 
             Ka += (pdata.team == Defines.TEAM_ALLY) ? K : 0;
             Ke += (pdata.team == Defines.TEAM_ENEMY) ? K : 0;
@@ -122,7 +122,7 @@ class wot.utils.Chance
     }
 
     // http://www.koreanrandom.com/forum/topic/2598-/#entry31429
-    private static function ChanceFuncG(vi1, vi2, vi3, team, stat): Number
+    private static function ChanceFuncG(vi1, vi2, vi3, team, stat, dead): Number
     {
         var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
 
@@ -154,7 +154,7 @@ class wot.utils.Chance
         return Math.max(0, Math.min(Config.s_config.consts.MAX_EBN, Eb));
     }
 
-    private static function ChanceFuncT(vi1, vi2, vi3, team, stat): Number
+    private static function ChanceFuncT(vi1, vi2, vi3, team, stat, dead): Number
     {
         var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
 
@@ -199,8 +199,11 @@ class wot.utils.Chance
         return Math.max(0, Math.min(Config.s_config.consts.MAX_EBN, Eb));
     }
 
-    private static function ChanceFuncX1(vi1, vi2, vi3, team, stat): Number
+    private static function ChanceFuncX1(vi1, vi2, vi3, team, stat, dead): Number
     {
+        if (dead)
+            return 0;
+
         var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
 
         var Tmin = vi1.tiers[0];
@@ -231,8 +234,11 @@ class wot.utils.Chance
         return Math.max(0, Math.min(Config.s_config.consts.MAX_EBN, Eb));
     }
 
-    private static function ChanceFuncX2(vi1, vi2, vi3, team, stat): Number
+    private static function ChanceFuncX2(vi1, vi2, vi3, team, stat, dead): Number
     {
+        if (dead)
+            return 0;
+
         var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
 
         var Tmin = vi1.tiers[0];

@@ -52,14 +52,14 @@ class wot.FinalStatistic.FinalStatisticForm extends net.wargaming.hangar.FinalSt
             for (var i = 0; i < len; ++i)
             {
                 var d = data.team1[i];
-                StatLoader.AddPlayerData(d.playerId, d.playerName, d.vehicleName, d.tankIcon, Defines.TEAM_ALLY, false);
+                StatLoader.AddPlayerData(d, Defines.TEAM_ALLY);
             }
 
             len = data.team2.length;
             for (var i = 0; i < len; ++i)
             {
                 var d = data.team2[i];
-                StatLoader.AddPlayerData(d.playerId, d.playerName, d.vehicleName, d.tankIcon, Defines.TEAM_ENEMY, false);
+                StatLoader.AddPlayerData(d, Defines.TEAM_ENEMY);
             }
 
             StatLoader.StartLoadData();

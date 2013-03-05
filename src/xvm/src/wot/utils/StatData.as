@@ -8,6 +8,8 @@
     vehicleKey: String,
     icon: String,
     team: Defines.TEAM_ALLY | Defines.TEAM_ENEMY,
+    vehicleId: Number,
+    vehicleState: Number, // IS_ALIVE = 1, IS_AVATAR_READY = 2, IS_UNKNOWN = 4
     selected: Boolean,
     loadstate: LOADSTATE_NONE, LOADSTATE_UNKNOWN, LOADSTATE_DONE
     stat:

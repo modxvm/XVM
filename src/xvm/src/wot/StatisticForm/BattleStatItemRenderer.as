@@ -107,8 +107,13 @@ class wot.StatisticForm.BattleStatItemRenderer extends net.wargaming.BattleStatI
         var saved_label = data.label;
 
         // Add data for Win Chance calculation
-        if (Config.s_config.rating.showPlayersStatistics && (!StatData.s_data[pname] || !StatData.s_data[pname].playerId))
-            StatLoader.AddPlayerData(data.uid, data.label, data.vehicle, data.icon, team);
+        //Logger.addObject(data);
+        if (Config.s_config.rating.showPlayersStatistics) {
+            if (!StatData.s_data[pname] || !StatData.s_data[pname].playerId)
+                StatLoader.AddPlayerData(data, team);
+            else
+                StatData.s_data[pname].vehicleState = data.vehicleState;
+        }
         // Chance
         if (!StatData.s_empty && Config.s_config.statisticForm.showChances && this.selected == true)
             winChances.showWinChances();

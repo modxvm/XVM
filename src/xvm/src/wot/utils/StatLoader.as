@@ -18,16 +18,34 @@ class wot.utils.StatLoader
 
     private static var __dummy = Logger.dummy; // avoid import warning
 
-    public static function AddPlayerData(playerId: Number, playerName: String, vehicle: String, icon: String,
-        team: Number, selected: Boolean, vehicleId: Number)
+    // data: {
+    //   uid|id|playerId,
+    //   label|playerName,
+    //   vehicle|vehicleName,
+    //   icon|tankIcon,
+    //   himself,
+    //   vehId|playerID,
+    //   vehicleState
+    // }
+    public static function AddPlayerData(data:Object, team:Number)
     {
+        var id = data.uid || data.id || data.playerId || 0;
+        var label = data.label || data.playerName;
+        var vehicle = data.vehicle || data.vehicleName;
+        var icon = data.icon || data.tankIcon;
+        var vehId = data.vehId || data.playerID || 0;
+        var vehicleState = data.vehicleState || 3; // IS_ALIVE = 1, IS_AVATAR_READY = 2, IS_UNKNOWN = 4
+
         //Logger.add("AddPlayerData: " + playerName + ", " + vehicle + ", " + icon);
 
-        if (playerId <= 0 || !playerName)
+        if (id <= 0 || !label)
             return;
 
-        var pname = Utils.GetNormalizedPlayerName(playerName);
-        var clan = Utils.GetClanName(playerName);
+        if (data.clanAbbrev)
+            label += "[" + data.clanAbbrev + "]";
+
+        var pname = Utils.GetNormalizedPlayerName(label);
+        var clan = Utils.GetClanName(label);
 
         if (team == Defines.TEAM_ALLY)
             teams.t1 = 1;
@@ -37,16 +55,17 @@ class wot.utils.StatLoader
         if (!StatData.s_data[pname])
             s_players_count++;
         StatData.s_data[pname] = {
-            playerId: playerId,
-            fullPlayerName: playerName.split(" ").join(""),
+            playerId: id,
+            fullPlayerName: label.split(" ").join(""),
             label: pname,
             clanAbbrev: clan,
             vehicle: vehicle,
             vehicleKey: VehicleInfo.getInfo2(icon).name.toUpperCase(),
             icon: icon,
             team: team,
-      	    vehicleId: vehicleId || 0,
-            selected: selected,
+      	    vehicleId: vehId,
+            vehicleState: vehicleState,
+            selected: data.himself,
             loadstate: !StatData.s_data[pname].loadstate ? Defines.LOADSTATE_NONE : StatData.s_data[pname].loadstate,
             stat: StatData.s_data[pname] ? StatData.s_data[pname].stat : undefined
         };
@@ -278,10 +297,15 @@ class wot.utils.StatLoader
             {
                 var p = players[i];
                 var vi2 = VehicleInfo.getInfo2("/-" + p.v + ".");
-                AddPlayerData(p.id, p.n,
-                    vi2 ? vi2.name : p.v,
-                    "../maps/icons/vehicle/contour/" + (vi2 ? vi2.nation + "-" + vi2.name : "unknown-" + p.v) + ".png",
-                    p.t, p.s, 0);
+                AddPlayerData({
+                   uid: p.id,
+                   label: p.n,
+                   vehicle: vi2 ? vi2.name : p.v,
+                   icon: "../maps/icons/vehicle/contour/" + (vi2 ? vi2.nation + "-" + vi2.name : "unknown-" + p.v) + ".png",
+                   himself: p.s,
+                   vehId: 0,
+                   vehicleState: 3
+                }, p.t);
             }
             var timer = _global.setTimeout(function() { StatLoader.StartLoadData(); }, 50);
         }
@@ -308,9 +332,7 @@ class wot.utils.StatLoader
         if (StatData.s_data[pname] && StatData.s_data[pname].loadstate != Defines.LOADSTATE_NONE)
             return;
 
-        var fullPlayerName = data.label + (data.clanAbbrev ? "[" + data.clanAbbrev + "]" : "");
-        AddPlayerData(data.uid, fullPlayerName, data.vehicle, data.icon,
-            data.team == "team1" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY, data.himself, data.vehId);
+        AddPlayerData(data, data.team == "team1" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
 
         var timer = _global.setTimeout(function() { StatLoader.StartLoadData(); }, 50);
     }

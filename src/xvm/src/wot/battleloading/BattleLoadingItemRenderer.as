@@ -57,7 +57,7 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
     {
         if (Config.s_config.rating.showPlayersStatistics)
         {
-            StatLoader.AddPlayerData(data.id, data.label, data.vehicle, data.icon, team, selected, data.playerID);
+            StatLoader.AddPlayerData(data, team);
             GlobalEventDispatcher.addEventListener("stat_loaded", this, StatLoadedCallback);
         }
     }
