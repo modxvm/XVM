@@ -38,8 +38,10 @@ class wot.utils.Chance
     {
         var teamsCount: Object = CalculateTeamPlayersCount();
         // only equal and non empty team supported
-        if (teamsCount.ally != teamsCount.enemy || teamsCount.ally == 0)
-            return ChanceError(Locale.get("Not equal count of players") + ": " + teamsCount.ally + " / " + teamsCount.enemy);
+        if (teamsCount.ally == 0 || teamsCount.enemy == 0)
+            return "";
+        if (Math.abs(teamsCount.ally - teamsCount.enemy) > 2)
+            return "";
 
         Chance.battleTier = Chance.GuessBattleTier();
 

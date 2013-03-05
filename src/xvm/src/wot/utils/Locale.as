@@ -44,7 +44,6 @@ class wot.utils.Locale
         tr["Chance to win"] = "Шанс на победу";
         tr["Global"] = "общий";
         tr["Per-vehicle"] = "по технике";
-        tr["Not equal count of players"] = "Неравное число игроков";
 
         // damage type
         tr["attack"] = "атака";
