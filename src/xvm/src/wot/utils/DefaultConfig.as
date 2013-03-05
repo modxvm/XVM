@@ -154,7 +154,7 @@ class wot.utils.DefaultConfig
                 lowVulnerability: "'"
             },
             minimap: {
-                enabled: false,
+                enabled: true,
                 mapBackgroundImageAlpha: 100,
                 selfIconAlpha: 100,
                 cameraAlpha: 100,
@@ -309,7 +309,7 @@ class wot.utils.DefaultConfig
                   ]
                 },
                 square: {
-                  enabled: true,
+                  enabled: false,
                   thickness: 0.7,
                   alpha: 40,
                   color: "0xFFFFFF"

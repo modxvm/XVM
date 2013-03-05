@@ -104,6 +104,8 @@ class wot.utils.Chance
             Ke += (pdata.team == Defines.TEAM_ENEMY) ? K : 0;
         }
 
+        //Logger.add("Ka=" + Ka + " Ke=" + Ke);
+/*
         if (DEBUG_EXP)
         {
             if (!_x1Logged && chanceFunc == ChanceFuncX1)
@@ -117,6 +119,7 @@ class wot.utils.Chance
                 Logger.add("X2: K = " + Ka + " / " + Ke + " => " + String(Math.round((Ka / (Ka + Ke) * 1000)) / 10) + "%");
             }
         }
+*/
 
         return PrepareChanceResults(Ka, Ke, chanceFunc);
     }
@@ -300,8 +303,6 @@ class wot.utils.Chance
     private static function PrepareChanceResults(Ea, Ee, chanceFunc)
     {
         if (Ea == 0 && Ee == 0) Ea = Ee = 1;
-        if (Ea == 0) Ea = Ee;
-        if (Ee == 0) Ee = Ea;
         //Logger.add("Ea=" + Math.round(Ea) + " Ee=" + Math.round(Ee));
 
         var p = Math.max(0.05, Math.min(0.95, (0.5 + (Ea / (Ea + Ee) - 0.5) * 1.5))) * 100;

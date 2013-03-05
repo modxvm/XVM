@@ -150,7 +150,7 @@ public class DefaultConfig
                 lowVulnerability: "'"
             },
             minimap: {
-                enabled: false,
+                enabled: true,
                 mapBackgroundImageAlpha: 100,
                 selfIconAlpha: 100,
                 cameraAlpha: 100,
@@ -304,8 +304,14 @@ public class DefaultConfig
                     { bison_i:          { enabled: true, distance: 605,  thickness: 1, alpha: 60, color: 0xEE4444 } }
                   ]
                 },
-                lines: {
+                square: {
                   enabled: false,
+                  thickness: 0.7,
+                  alpha: 40,
+                  color: "0xFFFFFF"
+                },
+                lines: {
+                  enabled: true,
                   vehicle: [
                     { enabled: true, from: 50,  to: 100, inmeters: true, thickness: 2,   alpha: 60, color: 0x44EE44},
                     { enabled: true, from: 200, to: 300, inmeters: true, thickness: 1.5, alpha: 45, color: 0x44EE44},

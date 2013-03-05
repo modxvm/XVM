@@ -188,7 +188,7 @@
     //   While file is at WoT\res_mods\icons\bzz.png
     // On\off minimap mod switch as a whole.
     // Turned off by default.
-    "enabled": false,
+    "enabled": true,
     "mapBackgroundImageAlpha": 100, // Map image transparency.
     "selfIconAlpha": 100,           // Self icon transparency. White pointing arrow.
     "cameraAlpha": 100,             // Camera transparency and its attached geometry. Green triangle.
@@ -439,7 +439,7 @@
        ]
     },
     "square" : { // Square with 1000m side. Shows maximum unit draw distance.
-      "enabled": true,
+      "enabled": false,
       "thickness": 0.7,
       "alpha": 40,
       "color": "0xFFFFFF"
