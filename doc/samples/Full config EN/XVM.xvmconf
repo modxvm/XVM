@@ -214,11 +214,11 @@
         "revealedEnabled":  true, // Textfields switch for revealed units.
         "lostEnemyEnabled": true, // Textfields switch for lost enemy units. Show last seen position.
         "format": { // Формат поля.
-          "ally":  "<span class='mm_a'>{{vehicle-type}}</span>", // Ally
-          "enemy": "<span class='mm_e'>{{vehicle-type}}</span>", // Enemy
-          "squad": "<textformat leading='-1'><span class='mm_s'><i>{{short-nick}}</i>\n{{vehicle-type}}</span><textformat>", // Squadmates
+          "ally":  "<span class='mm_a'>{{vehicle}}</span>", // Ally
+          "enemy": "<span class='mm_e'>{{vehicle}}</span>", // Enemy
+          "squad": "<textformat leading='-1'><span class='mm_s'><i>{{short-nick}}</i>\n{{vehicle}}</span><textformat>", // Squadmates
           // Lost enemy units
-          "lost":  "<span class='mm_dot'>\u2022</span><span class='mm_l'><i>{{vehicle-type}}</i></span>",
+          "lost":  "<span class='mm_dot'>\u2022</span><span class='mm_l'><i>{{vehicle}}</i></span>",
           // For your own marker or spectated subject.
           "oneself": ""
         },
