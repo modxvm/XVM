@@ -1,3 +1,4 @@
+XVM-3.4.3-alpha2:
   * minimap: {{vehicle-name}} macro returns vehicle system name - usa-M24_Chaffee
   * minimap: smoothed superHeavyTank and all tank wrecks icons
   * minimap: 1000m square implemented

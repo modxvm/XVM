@@ -36,8 +36,8 @@
     "showPlayersStatistics": true,              // true - включить отображение статистики. Глобальный переключатель - без него модуль статистики будет везде отключен.
     "loadEnemyStatsInFogOfWar": true,           // true - включить загрузку данных по противникам в "тумане войны"
     "enableStatisticsLog": false,               // true - включить сохранение статистики в файл "xvm-stat.log"
-    "enableUserInfoStatistics": false,          // true - включить отображение статистики в достижениях пользователя
-    "enableCompanyStatistics": false            // true - включить отображение статистики при наборе роты
+    "enableUserInfoStatistics": true,           // true - включить отображение статистики в достижениях пользователя
+    "enableCompanyStatistics": true             // true - включить отображение статистики при наборе роты
   },
   // Параметры экрана загрузки боя
   "battleLoading": {
