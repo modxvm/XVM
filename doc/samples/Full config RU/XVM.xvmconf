@@ -418,8 +418,8 @@
          { "enabled": true, "from": 1720,"to": 1780, "inmeters": true, "thickness": 0.75,  "alpha": 30, "color": "0xFFCC66"},
          { "enabled": true, "from": 1820,"to": 1880, "inmeters": true, "thickness": 0.75,  "alpha": 30, "color": "0xFFCC66"},
          { "enabled": true, "from": 1920,"to": 2000, "inmeters": true, "thickness": 0.75,  "alpha": 30, "color": "0xFFCC66"},
-         { "enabled": true, "from": 99,  "to": 100,  "inmeters": true, "thickness": 2.2,   "alpha": 45, "color": "0xFFCC66"},
            //Точки
+         { "enabled": true, "from": 99,  "to": 100,  "inmeters": true, "thickness": 2.2,   "alpha": 45, "color": "0xFFCC66"},
          { "enabled": true, "from": 199, "to": 200,  "inmeters": true, "thickness": 2.1,   "alpha": 40, "color": "0xFFCC66"},
          { "enabled": true, "from": 299, "to": 300,  "inmeters": true, "thickness": 2,     "alpha": 35, "color": "0xFFCC66"},
          { "enabled": true, "from": 399, "to": 400,  "inmeters": true, "thickness": 1.9,   "alpha": 30, "color": "0xFFCC66"},
