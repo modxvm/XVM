@@ -1,3 +1,4 @@
+import wot.utils.Logger;
 import wot.utils.Config;
 import wot.Minimap.model.mapSize.MapSizeBase;
 
@@ -16,18 +17,27 @@ class wot.Minimap.model.mapSize.MapSizeModel
          * Read map name previously written by Battleloading.setMapBG().
          * Best method to define map size without Python so far.
          * Method does not depend on locale,
-         * but depends on 
+         * but depends on xvm-stat.exe presence.
          */
-        
         cellSide = MapSizeBase.sizeBySytemMapName(Config.s_vars.map_name);
         
         if (!cellSide)
         {
-            /*
+            Logger.add("Minimap: system map name not set: " + Config.s_vars.map_name);
+            /**
+             * Map is not recognized with xvm-stat.exe.
+             * Possibly due to xvm-stat.exe absence or new map name with old XVM.
              * Method does not depend on xvm-stat.exe,
              * but depends on localilized map names in Base.
              */
             cellSide = MapSizeBase.sizeByLocalizedMapName(_root.statsData.arenaData.mapText);
+            Logger.add("Minimap: localized map name: " + _root.statsData.arenaData.mapText);
+            
+            if (!cellSide)
+            {
+                /** This can be seen only for new maps */
+                Logger.add("Minimap ERROR: map no recognized");
+            }
         }
         
 

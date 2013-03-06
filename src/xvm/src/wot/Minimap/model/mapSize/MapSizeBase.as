@@ -1,5 +1,3 @@
-import wot.utils.Logger;
-
 class wot.Minimap.model.mapSize.MapSizeBase
 {
     public static function sizeBySytemMapName(mapName:String):Number
@@ -72,7 +70,6 @@ class wot.Minimap.model.mapSize.MapSizeBase
             case "17_munchen": // Вайдпарк
                 return 60;      
             default: 
-                Logger.add("Minimap ERROR: MapSizeBase mapName not recognized: " + mapName)
                 return undefined;
         }
     }
@@ -313,7 +310,6 @@ class wot.Minimap.model.mapSize.MapSizeBase
                 return 100;
            
             default:
-                Logger.add("Minimap ERROR: MapSize.localizedMapName not recognized: " + localizedMapName)
                 return undefined;
         }
     

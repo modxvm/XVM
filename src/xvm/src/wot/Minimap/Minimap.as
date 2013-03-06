@@ -1,4 +1,3 @@
-import wot.utils.Logger;
 import wot.Minimap.MinimapEntry;
 import wot.Minimap.shapes.Square;
 import wot.Minimap.ExternalDeveloperInterface;
