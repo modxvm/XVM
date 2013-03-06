@@ -111,10 +111,7 @@ class wot.utils.Config
                 if (finallyBugWorkaround)
                     return;
                 finallyBugWorkaround = true;
-                if (Config.s_config.rating.showPlayersStatistics)
-                    Config.ReloadGameRegion();
-                else
-                    Config.GetGameRegionFromWOTLauncherCfg();
+                Config.ReloadGameRegion();
 //Logger.add("ReloadXvmConfigCallback::finally::end");
             }
 //Logger.add("ReloadXvmConfigCallback::end");
