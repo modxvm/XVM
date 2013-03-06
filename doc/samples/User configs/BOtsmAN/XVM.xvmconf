@@ -4,91 +4,108 @@
     "author": "BOtsmAN",
     "description": "Settings for XVM",
     "url": "http://code.google.com/p/wot-xvm/",
-    "date": "07.11.2012",
-    "gameVersion": "0.8.1",
-    "modMinVersion": "3.1.1"
+    "date": "09.12.2012",
+    "gameVersion": "0.8.4",
+    "modMinVersion": "3.4.0"
   },
   "battle": {
     "mirroredVehicleIcons": true,
     "showPostmortemTips": false,
     "drawGrid": false,
     "highlightVehicleIcon": true,
-    "clockFormat": "",
+    "hideXVMVersion": true,
+    "clockFormat": "",     
     "useStandardMarkers": false
   },
   "rating": {
     "showPlayersStatistics": true,
-    "loadEnemyStatsInFogOfWar": true
+    "loadEnemyStatsInFogOfWar": true,
+    "enableStatisticsLog": false,              
+    "enableUserInfoStatistics": true,         
+    "enableCompanyStatistics": true    
   },
   "battleLoading": {
-    "showChances": true,
-    "clockFormat": "Potato Time - H:N",
+    "showChances": true,   
+    "clockFormat": "H:N",     
     "clanIcon": { "show": true, "x": -348, "y": 2, "h": 20, "w": 20, "alpha": 100 },
-    "formatLeft": "{{vehicle}} {{kb}} {{eff}} <font color='{{c:rating}}'>{{rating}}</font>",
-    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> {{eff}} {{kb}} {{vehicle}}"
+    "formatLeft": "<font color='{{c:eff}}'>{{vehicle}}</font>  {{kb}}  {{eff}} <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font>  {{eff}}  {{kb}}  <font color='{{c:eff}}'>{{vehicle}}</font>"
   },
   "statisticForm": {
-    "showChances": true,
+    "showChances": true, 
     "clanIcon": { "show": true, "x": -348, "y": 2, "h": 20, "w": 20, "alpha": 100 },
-    "formatLeft": "{{vehicle}} {{kb}} {{eff}} <font color='{{c:rating}}'>{{rating}}</font>",
-    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> {{eff}} {{kb}} {{vehicle}}"
+    "formatLeft": "<font color='{{c:eff}}'>{{vehicle}}</font>  {{kb}}  {{eff}}  <font color='{{c:rating}}'>{{rating}}</font>",
+    "formatRight": "<font color='{{c:rating}}'>{{rating}}</font>  {{eff}}  {{kb}}  <font color='{{c:eff}}'>{{vehicle}}</font>"
   },
   "playersPanel": {
     "alpha": 80,
-    "removeSquadIcon": true,
-    "clanIcon": { "show": false, "x": 85, "y": 4, "h": 16, "w": 16, "alpha": 100 },
+    "removeSquadIcon": true, 
+    "clanIcon": { "show": false, "x": 85, "y": 4, "h": 16, "w": 16, "alpha": 100 },            
     "medium": {
      "width": 70,
-      "formatLeft": "<font color='{{c:rating}}'>{{rating}}</font> {{vehicle}}",
-      "formatRight": "{{vehicle}} <font color='{{c:rating}}'>{{rating}}</font>"
+      "formatLeft": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{vehicle}}</font>",
+      "formatRight": "<font color='{{c:eff}}'>{{vehicle}}</font> <font color='{{c:rating}}'>{{rating}}</font>"
     },
     "medium2": {
-      "formatLeft": "{{vehicle}}",
-      "formatRight": "{{vehicle}}"
+      "formatLeft": "<font color='{{c:eff}}'>{{vehicle}}</font>",
+      "formatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
     },
     "large": {
       "width": 130,
       "nickFormatLeft": "<font color='{{c:rating}}'>{{rating}}</font> {{nick}}",
       "nickFormatRight": "{{nick}} <font color='{{c:rating}}'>{{rating}}</font>",
-      "vehicleFormatLeft": "{{vehicle}}",
-      "vehicleFormatRight": "{{vehicle}}"
+      "vehicleFormatLeft": "<font color='{{c:eff}}'>{{vehicle}}</font>",
+      "vehicleFormatRight": "<font color='{{c:eff}}'>{{vehicle}}</font>"
     }
   },
+  "finalStatistic": {
+    "startPage": 1,           // номер начальной страницы (1, 2, 3)
+    // 1 - взвод
+    // 2 - имя игрока
+    // 3 - модель танка
+    // 4 - урон нанесенный за бой
+    // 5 - фраги за бой
+    // 6 - опыт за бой
+    // 7 - медали за бой
+    "sortColumn": 4,          // номер колонки для сортировки (1 - 7)
+    "showChances": false,    
+    "showChancesExp": false  
+  },
   "turretMarkers": {
-    "highVulnerability": "*",
-    "lowVulnerability": "'"
+    "highVulnerability": "*", 
+    "lowVulnerability": "'"  
   },
   "hitLog": {
-    "visible": true,
-    "x": 275,
+    "visible": true,     
+    "x": 240,
     "y": 8,
     "w": 250,
     "h": 20,
     "lines": 1,
     "direction": "down",
-    "insertOrder": "begin",
-    "groupHitsByPlayer": false,
+    "insertOrder": "begin", 
+    "groupHitsByPlayer": false, 
     "deadMarker": "\u0029",
     "blowupMarker": "\u0028",
-    "formatHeader": "<font color='#CCCCCC'>Hits:</font> {{n}}  <font color='#CCCCCC'>Total:</font> <b><font color='#FFD072'>{{dmg-total}}</font></b>  <font color='#CCCCCC'>Last:</font> {{dmg}}",
-    "formatHistory": "<textformat leading='0' tabstops='[20,55,90,130,175]'><font color='#CCCCCC' size='13'>\u00D7{{n-player}}<tab>{{dmg-kind}}<tab>-{{dmg}}<tab>({{dmg-player}})<tab><font face='XVM Symbol'><font color='#FFD072'><font size='19'><font size='0{{dead}}'>{{dead}}</font></font></font><font size='1'><font size='19{{dead}}'>\u002A</font></font></font><tab>{{vehicle}}</font></textformat>"
+    "formatHeader": "<font color='0xFFFFFF'>Hits:</font> {{n}}  <font color='0xFFFFFF'>Total:</font> <b><font color='#FFCC66'>{{dmg-total}}</font></b>  <font color='0xFFFFFF'>Last:</font> {{dmg}}",
+    "formatHistory": "<textformat leading='0' tabstops='[20,55,90,130,175]'><font color='#CCCCCC' size='13'>\u00D7{{n-player}}<tab>{{dmg-kind}}<tab>-{{dmg}}<tab>({{dmg-player}})<tab><font face='XVM Symbol'><font color='#FFD072'><font size='19'><font size='1{{dead}}'>{{dead}}</font></font></font><font size='1'><font size='19{{dead}}'>\u002A</font></font></font><tab>{{vehicle}}</font></textformat>"
   },
   "captureBar": {
-    "enabled": true,
-    "primaryTitleOffset": 7,
-    "enemy": {
-      "primaryTitleFormat":   "<font size='15' color='#FFFFFF'>Захват базы врага!  {{extra}}</font>",
-      "secondaryTitleFormat": "<font size='15' color='#FFFFFF'>{{points}}</font>",
-      "captureDoneFormat":    "<font size='17' color='#FFCC66'>Вражеская база захвачена!</font>",
-      "extra": "Захватчиков: <b><font color='#FFCC66'>{{tanks}}</font></b>  Осталось: <b><font color='#FFCC66'>{{time}}</font><b>",
-      "shadow": {
-        "color": "0x000000",
-        "alpha": 50,
-        "blur": 4,
-        "strength": 2
+    "enabled": true, 
+    "primaryTitleOffset": 7, 
+    "enemy": { 
+      "primaryTitleFormat":   "<font size='15' color='#FFFFFF'>Захват базы врага!  {{extra}}</font>", 
+      "secondaryTitleFormat": "<font size='15' color='#FFFFFF'>{{points}}</font>",              
+      "captureDoneFormat":    "<font size='17' color='#FFCC66'>Вражеская база захвачена!</font>",    
+      "extra": "Захватчиков: <b><font color='#FFCC66'>{{tanks}}</font></b>  Осталось: <b><font color='#FFCC66'>{{time}}</font><b>",                          
+      "shadow": {          
+        "color": "0x000000", 
+        "alpha": 50,       
+        "blur": 4,        
+        "strength": 2      
       }
     },
-    "ally": {
+    "ally": { 
       "primaryTitleFormat":   "<font size='15' color='#FFFFFF'>Захват нашей базы!  {{extra}}</font>",
       "secondaryTitleFormat": "<font size='15' color='#FFFFFF'>{{points}}</font>",
       "captureDoneFormat":    "<font size='17' color='#FFCC66'>Наша база захвачена!</font>",
@@ -101,14 +118,199 @@
       }
     }
   },
+  "minimap": {
+    "enabled": true, 
+
+    "mapBackgroundImageAlpha": 100, 
+    "selfIconAlpha": 100,           
+
+    "iconScale": 0.6,                                                   
+    "labels": {                     
+      "nickShrink": 5,              
+      "vehicleclassmacro": {       
+        "light": "\u2022",
+        "medium": "\u2022",
+        "heavy": "\u2022",
+        "td": "\u2022",
+        "spg": "\u2022",
+        "superh": "\u2022"
+      },
+      "units": { 
+       "revealedEnabled": true, 
+        "lostEnemyEnabled": true,
+        "format": {          
+          "ally":  "<span class='mm_a'>{{vehicle}}</span>",
+          "enemy": "<span class='mm_e'>{{vehicle}}</span>",
+          "squad": "<textformat leading='-1'><span class='mm_s'><i>{{short-nick}}</i></span><textformat>", 
+          "lost":  "<span class='mm_lclass'>{{vehicle-class}}</span><span class='mm_l'><i>{{vehicle}}</i></span>",
+          "oneself": ""
+       },
+        "css": { 
+          "ally":  ".mm_a{font-family:$FieldFont; font-size:6px; color:#C8FFA6;}",
+          "enemy": ".mm_e{font-family:$FieldFont; font-size:6px; color:#FCA9A4;}",
+          "squad": ".mm_s{font-family:$FieldFont; font-size:6px; color:#FFD0B2;}",
+          "lost":  ".mm_l{font-family:$FieldFont; font-size:6px; color:#FCA9A4;} .mm_lclass{font-family:Arial; font-size:17px; color:#FCA9A4;}",
+          "oneself": ".mm_o{font-family:$FieldFont; font-size:6px; color:#FFFFFF;}"
+      },
+        "shadow": {
+          "ally": {
+            "enabled": true,
+            "color": "0x000000",
+            "distance": 0,
+            "angle": 0,
+            "alpha": 80,
+            "blur": 3,
+            "strength": 4
+          },
+          "enemy": {
+            "enabled": true,
+            "color": "0x000000",
+            "distance": 0,
+            "angle": 0,
+            "alpha": 80,
+            "blur": 3,
+            "strength": 4
+          },
+          "squad": {
+            "enabled": true,
+            "color": "0x000000",
+            "distance": 0,
+            "angle": 0,
+            "alpha": 80,
+            "blur": 3,
+            "strength": 4
+          },
+          "lost": {
+            "enabled": true,
+            "color": "0x000000",
+            "distance": 0,
+            "angle": 0,
+            "alpha": 80,
+            "blur": 6,
+            "strength": 4
+          },
+          "oneself": {
+            "enabled": true,
+            "color": "0x000000",
+            "distance": 0,
+            "angle": 0,
+            "alpha": 80,
+            "blur": 3,
+            "strength": 4
+          }
+        },
+        "offset": {
+          "ally":  {"x": 3, "y": -1},   
+          "enemy": {"x": 3, "y": -1},   
+          "squad": {"x": 3, "y": -2},   
+          "lost":  {"x": -6, "y": -10}, 
+          "oneself": {"x": 0, "y": 0}  
+        },
+        "alpha" : {
+          "ally":  100,
+          "enemy": 100,
+          "squad": 100,
+          "lost":  70,
+          "oneself": 100
+        }
+     },
+      
+        "mapSize": { 
+        "enabled": false,
+        "format": "<b>{{cellsize}}0 м</b>",
+        "css": "font-size:12px; color:#000000;",
+        "alpha": 80,
+        "offsetX": 0,
+        "offsetY": 0,
+        "shadow": {
+          "enabled": true,
+          "color": "0xAAAAAA",
+          "distance": 0,
+          "angle": 0,
+          "alpha": 80,
+          "blur": 8,
+          "strength": 4
+        },
+        "width": 100, 
+        "height": 30 
+      }
+    
+      },
+    "circles": { 
+        "enabled": false,
+        "major": [ 
+            { "enabled": true, "distance": 445, "thickness": 1, "alpha": 40, "color": "0x000000" },
+            { "enabled": false, "distance": 50, "thickness": 2.5, "alpha": 100, "color": "0xFFFFFF" }
+        ],
+        "special": [
+            { "su_18":            { "enabled": true, "distance": 552,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "su_26":            { "enabled": true, "distance": 578,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "su_5":             { "enabled": true, "distance": 605,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "su_8":             { "enabled": true, "distance": 920,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "s_51":             { "enabled": true, "distance": 1229, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "su_14":            { "enabled": true, "distance": 1229, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "object_212":       { "enabled": true, "distance": 1229, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "object_261":       { "enabled": true, "distance": 1463, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+
+            { "bison_i":          { "enabled": true, "distance": 605,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "sturmpanzer_ii":   { "enabled": true, "distance": 605,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "wespe":            { "enabled": true, "distance": 1000, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "grille":           { "enabled": true, "distance": 1210, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "hummel":           { "enabled": true, "distance": 1264, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "g_panther":        { "enabled": true, "distance": 1407, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "g_tiger":          { "enabled": true, "distance": 1172, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "g_e":              { "enabled": true, "distance": 1172, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+
+            { "t57":              { "enabled": true, "distance": 552,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "m37":              { "enabled": true, "distance": 969,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "m7_priest":        { "enabled": true, "distance": 1047, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "m41":              { "enabled": true, "distance": 1210, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "m12":              { "enabled": true, "distance": 1316, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "m40m43":           { "enabled": true, "distance": 1179, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "t92":              { "enabled": true, "distance": 1248, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+
+            { "renaultbs":        { "enabled": true, "distance": 450,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "lorraine39_l_am":  { "enabled": true, "distance": 844,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "amx_105am":        { "enabled": true, "distance": 1000, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "_105_lefh18b2":    { "enabled": true, "distance": 1000, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "amx_13f3am":       { "enabled": true, "distance": 1250, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "lorraine155_50":   { "enabled": true, "distance": 1202, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "lorraine155_51":   { "enabled": true, "distance": 1296, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "bat_chatillon155": { "enabled": true, "distance": 1296, "thickness": 1, "alpha": 60, "color": "0xEE4444" } }
+        ]
+    },
+    "lines": { 
+       "enabled": false,
+       "vehicle": [ 
+         { "enabled": true, "from": 50,  "to": 115, "inmeters": true, "thickness": 1.5,   "alpha": 50, "color": "0x96FF00"},
+         { "enabled": true, "from": 150,  "to": 215, "inmeters": true, "thickness": 1.3,   "alpha": 40, "color": "0x96FF00"},
+         { "enabled": true, "from": 250, "to": 320, "inmeters": true, "thickness": 1, "alpha": 35, "color": "0x96FF00"},
+         { "enabled": true, "from": 350, "to": 445, "inmeters": true, "thickness": 0.75,   "alpha": 25, "color": "0x96FF00"}
+       ],
+       "camera": [ 
+         { "enabled": true, "from": 50,  "to": 115, "inmeters": true, "thickness": 1.5,   "alpha": 50, "color": "0xCCCCCC"},
+         { "enabled": true, "from": 150,  "to": 215, "inmeters": true, "thickness": 1.3,   "alpha": 40, "color": "0xCCCCCC"},
+         { "enabled": true, "from": 250, "to": 320, "inmeters": true, "thickness": 1, "alpha": 35, "color": "0xCCCCCC"},
+         { "enabled": true, "from": 350, "to": 445, "inmeters": true, "thickness": 0.75,   "alpha": 25, "color": "0xCCCCCC"}
+       ],
+       "traverseAngle": [ 
+         { "enabled": true, "from": 50,  "to": 95, "inmeters": true, "thickness": 1.5,   "alpha": 50, "color": "0xFE7903"},
+         { "enabled": true, "from": 100,  "to": 145, "inmeters": true, "thickness": 1.4,   "alpha": 45, "color": "0xFE7903"},
+         { "enabled": true, "from": 150,  "to": 196, "inmeters": true, "thickness": 1.3,   "alpha": 40, "color": "0xFE7903"},
+         { "enabled": true, "from": 200, "to": 247, "inmeters": true, "thickness": 1.25, "alpha": 37, "color": "0xFE7903"},
+         { "enabled": true, "from": 250, "to": 298, "inmeters": true, "thickness": 1, "alpha": 35, "color": "0xFE7903"},
+         { "enabled": true, "from": 300, "to": 445, "inmeters": true, "thickness": 0.75,   "alpha": 30, "color": "0xFE7903"}
+       ]
+    }
+  },
   "colors": {
      "eff": [
-      { "value": 600, "color": "0xDD0000" },
-      { "value": 900, "color": "0xDD3333" },
-      { "value": 1200, "color": "0xFFCC33" },
-      { "value": 1500, "color": "0x99FF33" },
-      { "value": 1800, "color": "0x33FF33" },
-      { "value": 9999, "color": "0xCC66CC" }
+      { "value": 0, "color": "0xFFFFFF" },
+      { "value": 900, "color": "0xFFFFFF" },
+      { "value": 1200, "color": "0xFFFFFF" },
+      { "value": 1500, "color": "0xFFFFFF" },
+      { "value": 1800, "color": "0xFFFFFF" },
+      { "value": 9999, "color": "0xFFFFFF" }
    ],
      "rating": [
       { "value": 42, "color": "0xDD0000" },
