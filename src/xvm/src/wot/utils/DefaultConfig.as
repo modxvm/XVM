@@ -310,6 +310,7 @@ class wot.utils.DefaultConfig
                 },
                 square: {
                   enabled: false,
+                  artilleryEnabled: false,
                   thickness: 0.7,
                   alpha: 40,
                   color: "0xFFFFFF"

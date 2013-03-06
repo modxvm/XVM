@@ -1,3 +1,4 @@
+  * minimap: 1km square switch for artillery
   * minimap: iconScale now does not affect capture bases
   
 XVM-3.5.0-test1:

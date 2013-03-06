@@ -1,5 +1,9 @@
-import wot.Minimap.Minimap;
+import wot.Minimap.dataTypes.Player;
+import wot.utils.VehicleInfo;
+import wot.utils.VehicleInfoData2;
+import wot.Minimap.model.externalProxy.PlayersPanelProxy;
 import wot.Minimap.model.externalProxy.IconsProxy;
+import wot.Minimap.Minimap;
 import wot.Minimap.shapes.ShapeAttach;
 import wot.Minimap.model.externalProxy.MapConfig;
 
@@ -15,6 +19,12 @@ class wot.Minimap.shapes.Square extends ShapeAttach
     
     public function Square(mapSizeInMeters:Number)
     {
+        /** Disable square mod if user is artillery class*/
+        if (!MapConfig.artiEnabled && isArtillery())
+        {
+            return;
+        }
+        
         super(mapSizeInMeters);
         
         var mc:MovieClip = createSquareClip();
@@ -66,6 +76,14 @@ class wot.Minimap.shapes.Square extends ShapeAttach
             this.square._x = self._x;
             this.square._y = self._y;
         }
+    }
+    
+    private function isArtillery():Boolean
+    {
+        var self:Player = PlayersPanelProxy.getSelf();
+        var systemVehType:String =  VehicleInfo.getName2(self.icon);
+        
+        return VehicleInfoData2.data[systemVehType].type == "SPG"
     }
     
     private function get icons():MovieClip

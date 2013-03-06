@@ -117,6 +117,9 @@ class wot.Minimap.model.externalProxy.MapConfig
         public static function get squareEnabled():Boolean {
             return square.enabled;
         }
+        public static function get artiEnabled():Boolean {
+            return square.artilleryEnabled;
+        }
         public static function get squareConfig():Object {
             return square;
         }

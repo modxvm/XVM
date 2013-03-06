@@ -122,7 +122,7 @@
   },
   // Hit log (my hits calculator)
   "hitLog": {
-    "visible": true,      // on/off switch
+    "enabled": true,      // on/off switch
     "x": 270,             // X position (negative values - bind to right side of screen)
     "y": 5,               // Y position (negative values - bind to bottom side of screen)
     "w": 500,             // Width
@@ -440,6 +440,7 @@
     },
     "square" : { // Square with 1000m side. Shows maximum unit draw distance.
       "enabled": false,
+      "artilleryEnabled": false, // Show square if using artillery\SPG vehicle 
       "thickness": 0.7,
       "alpha": 40,
       "color": "0xFFFFFF"
