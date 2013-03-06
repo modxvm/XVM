@@ -122,7 +122,7 @@
   },
   // Hit log (my hits calculator)
   "hitLog": {
-    "enabled": true,      // on/off switch
+    "visible": true,      // on/off switch
     "x": 270,             // X position (negative values - bind to right side of screen)
     "y": 5,               // Y position (negative values - bind to bottom side of screen)
     "w": 500,             // Width
