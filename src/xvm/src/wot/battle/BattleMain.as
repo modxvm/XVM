@@ -38,11 +38,13 @@ class wot.battle.BattleMain
         gfx.io.GameDelegate.addCallBack("battle.showPostmortemTips", instance, "showPostmortemTips");
         gfx.io.GameDelegate.addCallBack("Stage.Update", instance, "onUpdateStage");
     }
-
+    
     private static function BattleMainConfigLoaded()
     {
         //Logger.add("BattleMainConfigLoaded()");
 
+        //Logger.addObject(_root, "_root", 2);
+        
         GlobalEventDispatcher.removeEventListener("config_loaded", BattleMainConfigLoaded);
 
         // Initialize Sixth Sense Indicator

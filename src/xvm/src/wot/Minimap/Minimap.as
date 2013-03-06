@@ -276,9 +276,33 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
             {
                 lines = new Lines(mapSizeModel.getSide() * 10); /** Total map side distance in meters  */
             }
+
+            /**
+             * TODO: make configurable
+             */
+            net.wargaming.managers.BattleInputHandler.instance.addHandler(88, false, this, "onZoomKeyClick");
+            net.wargaming.managers.BattleInputHandler.instance.addHandler(88, true, this, "onZoomKeyClick");
         }
     }
-    
+
+    private function onZoomKeyClick(event)
+    {
+        //wot.utils.Logger.add("onZoomKeyClick: '" + com.xvm.JSON.stringify(event));
+        // TODO make logic
+        if (event.details.value == "keyDown")
+        {
+            sizeUp();
+            sizeUp();
+            sizeUp();
+        }
+        else
+        {
+            sizeDown();
+            sizeDown();
+            sizeDown();
+        }
+    }
+
     private function setCameraAlpha():Void
     {
         var camera:MinimapEntry = IconsProxy.getCamera();
