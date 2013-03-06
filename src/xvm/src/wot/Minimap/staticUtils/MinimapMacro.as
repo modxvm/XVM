@@ -45,6 +45,21 @@ class wot.Minimap.staticUtils.MinimapMacro
             format = formatArr.join(VehicleTypeShort.translate(type));
         }
             
+
+        
+        
+        //var info:MovieClip = PlayersPanelProxy.getPlayerInfo(player.uid);
+        //Logger.addObject(info._parent, "info", 2);
+            
+        /** Vehicle system name - usa-M24_Chaffee */
+        var systemVehName:String = VehicleInfo.getName1(player.icon);
+        formatArr = format.split(VEH_NAME);
+        if (formatArr.length > 1)
+            format = formatArr.join(systemVehName);
+        formatArr = format.split(VEH_NAME_ALT);
+        if (formatArr.length > 1)
+            format = formatArr.join(systemVehName);
+            
         /** Vehicle type readable - Чаффи */
         formatArr = format.split(VEH_MACRO);
         if (formatArr.length > 1)
@@ -52,15 +67,9 @@ class wot.Minimap.staticUtils.MinimapMacro
         formatArr = format.split(VEH_MACRO_ALT);
         if (formatArr.length > 1)
             format = formatArr.join(player.vehicle);
-            
-        /** Vehicle system name - usa-M24_Chaffee */
-        formatArr = format.split(VEH_NAME);
-        if (formatArr.length > 1)
-            format = formatArr.join(VehicleInfo.getVehicleName(player.icon));
-        formatArr = format.split(VEH_NAME_ALT);
-        if (formatArr.length > 1)
-            format = formatArr.join(VehicleInfo.getVehicleName(player.icon));
 
+            
+            
         /** Nickname shortened */
         formatArr = format.split(NICK_MACRO);
         if (formatArr.length > 1)

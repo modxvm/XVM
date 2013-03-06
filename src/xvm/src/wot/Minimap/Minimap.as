@@ -1,8 +1,9 @@
+import wot.utils.Logger;
+import wot.Minimap.MinimapEntry;
 import wot.Minimap.shapes.Square;
 import wot.Minimap.ExternalDeveloperInterface;
 import wot.utils.Utils;
 import wot.utils.GlobalEventDispatcher;
-import wot.Minimap.MinimapEntry;
 import wot.Minimap.MapSizeLabel;
 import wot.Minimap.LostMarkers;
 import wot.Minimap.MinimapEvent;
@@ -71,8 +72,22 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     function scaleMarkers(percent)
     {
         super.scaleMarkers(percent);
+        XvmRescaleBase(percent);
         rescaleAttachments();
-        /** See MinimapEntry.rescaleAttachments() */
+    }
+    
+    private function XvmRescaleBase(percent:Number):Void
+    {
+        /**
+         * Revert capture base icon size.
+         */
+        for (var i in icons)
+        {
+            if (icons[i].entryName == "base")
+            {
+                icons[i]._xscale = icons[i]._yscale = 100;
+            }
+        }
     }
 
     // override

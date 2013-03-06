@@ -18,7 +18,7 @@ class wot.utils.Config
     public static var s_game_region: String = null;
     public static var s_vars: Object = {
         window_size: [ 1024, 768 ],
-        map_name: "notset123" // (sirmax) FIXIT: bad value
+        map_name: ""
     }
 
     // Private vars
