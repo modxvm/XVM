@@ -35,14 +35,19 @@ class wot.PlayersPanel.PlayerListItemRenderer extends net.wargaming.ingame.Playe
             return;
         m_iconLoaded = true;
 
+        mirrorEnemyIcons();
+        
+        iconLoader._visible = true;
+    }
+    
+    private function mirrorEnemyIcons():Void
+    {
         if (!Config.s_config.battle.mirroredVehicleIcons && team == Defines.TEAM_ENEMY)
         {
             iconLoader._xscale = -iconLoader._xscale;
             iconLoader._x -= 80;
             this.vehicleLevel._x = iconLoader._x + 15;
         }
-
-        iconLoader._visible = true;
     }
 
     // override
@@ -76,6 +81,9 @@ class wot.PlayersPanel.PlayerListItemRenderer extends net.wargaming.ingame.Playe
 
             // Player/clan icons
             attachClanIconToPlayer(data);
+            
+            // Hidden enemy icon
+            fadeHiddenEnemyIcon(data);
         }
 
         if (Config.s_config.playersPanel.removeSquadIcon && squadIcon)
@@ -87,7 +95,7 @@ class wot.PlayersPanel.PlayerListItemRenderer extends net.wargaming.ingame.Playe
             data.icon = saved_icon;
     }
 
-    function attachClanIconToPlayer(data)
+    private function attachClanIconToPlayer(data):Void
     {
         var cfg = Config.s_config.playersPanel.clanIcon;
         if (!cfg.show)
@@ -101,5 +109,24 @@ class wot.PlayersPanel.PlayerListItemRenderer extends net.wargaming.ingame.Playe
         }
         PlayerInfo.setSource(m_clanIcon, data.label, data.clanAbbrev);
         m_clanIcon["holder"]._alpha = ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0) ? 100 : 50;
+    }
+    
+    /**
+     * Revealed enemies feature.
+     * 
+     * This method sets all enemies semitransparent.
+     * Enemies transparency will be set back to 100
+     * when one is revealed atleast once.
+     */
+    private function fadeHiddenEnemyIcon(data):Void
+    {
+        var cfg = Config.s_config.playersPanel.hiddenEnemy;
+        
+        if (!cfg.enabled || team != Defines.TEAM_ENEMY)
+            return;
+        
+        this._alpha = cfg.alpha;
+
+        //if ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0);
     }
 }

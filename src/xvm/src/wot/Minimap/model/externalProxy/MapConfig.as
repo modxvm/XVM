@@ -15,6 +15,15 @@ class wot.Minimap.model.externalProxy.MapConfig
         return minimap.cameraAlpha;    }
     public static function get iconScale():Number    {
         return minimap.iconScale;    }
+    public static function get zoomEnabled():Boolean    {
+        return minimap.zoom.enabled;
+    }
+    public static function get zoomStepsBack():Number    {
+        return minimap.zoom.stepsBack;
+    }
+    public static function get zoomHold():Boolean    {
+        return minimap.zoom.byKeyHold;
+    }
    
     /** Labels */
         public static function get nickShrink():Number    {

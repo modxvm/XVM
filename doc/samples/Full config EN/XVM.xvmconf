@@ -195,7 +195,10 @@
     "iconScale": 1,                 // Vehicles icon size.
                                     // Does not affect attached geometry and textfields.
                                     // Floating point allowed: 0.7 1.4.
-
+    "zoom": { // Map zoom by pressing X button
+      "zoomStepsBack": 2,  // Number of pixels to keep above and below 
+      "byKeyHold": false
+    },
     "labels": {                     // textfields. Basic HTML\CSS supported.
       "nickShrink": 5,              // Maximum nickname size for {{short-nick}} macro.
       "vehicleclassmacro": {        // {{vehicle-class}} macro substitutions by vehicle class.

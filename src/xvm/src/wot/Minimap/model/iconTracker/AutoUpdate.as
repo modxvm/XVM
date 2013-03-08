@@ -1,3 +1,4 @@
+import wot.utils.Logger;
 import wot.Minimap.model.iconTracker.PositionTracking;
 import wot.Minimap.model.iconTracker.LostPlayers;
 
@@ -24,6 +25,7 @@ class wot.Minimap.model.iconTracker.AutoUpdate
     
     public function AutoUpdate() 
     {
+        Logger.add("AutoUpdate: AutoUpdate()");
         posTrack = new PositionTracking();
         lost = new LostPlayers(posTrack.getArray());
         destructionTimer = 0;

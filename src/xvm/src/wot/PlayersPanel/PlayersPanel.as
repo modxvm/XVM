@@ -1,6 +1,7 @@
 ﻿/**
- * @author sirmax2
+ * @author sirmax2, ilitvinov87
  */
+import wot.PlayersPanel.EnemyRevealed;
 import wot.utils.Cache;
 import wot.utils.Config;
 import wot.utils.Defines;
@@ -28,6 +29,8 @@ class wot.PlayersPanel.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 
     private var m_knownPlayersCount:Number = 0; // for Fog of War mode.
     private var m_postmortemIndex:Number = 0;
+    
+    private var enemyRevealed:EnemyRevealed;
 
     function PlayersPanel()
     {
@@ -38,7 +41,14 @@ class wot.PlayersPanel.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         GlobalEventDispatcher.addEventListener("stat_loaded", this, onStatLoaded);
         Config.LoadConfig("PlayersPanel.as");
 
+        /** Minimap needs to know loaded status */
         checkLoading();
+        
+        /** Enemy revealed marker feature for enemy PlayersPanel */
+        if (m_type == "right")
+        {
+            enemyRevealed = new EnemyRevealed(this);
+        }
     }
 
     private function onStatLoaded()
@@ -412,10 +422,7 @@ class wot.PlayersPanel.PlayersPanel extends net.wargaming.ingame.PlayersPanel
 
                 this._parent.updateUids();
 
-                if (this._itemRenderer == "RightItemRendererIcon")
-                    GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENEMY_PLAYERS_PANEL_READY));
-                else
-                    GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ALLY_PLAYERS_PANEL_READY));
+                GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.PANEL_READY));
             }
         }
     }

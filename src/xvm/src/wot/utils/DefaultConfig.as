@@ -116,6 +116,11 @@ class wot.utils.DefaultConfig
                 removeSquadIcon: false, // Hide squad icon.
                 // Playes/clan icon parameters.
                 clanIcon: { show: true, x: 0, y: 6, xr: NaN, yr: NaN, h: 16, w: 16, alpha: 90 },
+                // Display options for icons of never seen enemies
+                hiddenEnemy: {
+                  enabled: false,
+                  alpha: 40
+                },
                 // Medium1 mode.
                 medium: {
                     // 0..250 - player name field width.
@@ -159,6 +164,11 @@ class wot.utils.DefaultConfig
                 selfIconAlpha: 100,
                 cameraAlpha: 100,
                 iconScale: 1,
+                zoom: {
+                  enabled: false,
+                  stepsBack: 4,
+                  byKeyHold: false
+                },
                 labels: {
                   nickShrink: 5,
                   vehicleclassmacro: {

@@ -1,3 +1,5 @@
+import wot.utils.Logger;
+import wot.Minimap.Zoom;
 import wot.Minimap.MinimapEntry;
 import wot.Minimap.shapes.Square;
 import wot.Minimap.ExternalDeveloperInterface;
@@ -64,9 +66,12 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     private var square:Square;
     private var lines:Lines;
     
+    private var zoom:Zoom;
+    
     private var isMinimapReady:Boolean = false;
-    private var isAllyPlayersPanelReady:Boolean = false;
+    private var isPanelReady:Boolean = false;
     private var loadComplete:Boolean = false;
+    private var mapExtended:Boolean = false;
     
     function scaleMarkers(percent)
     {
@@ -96,7 +101,7 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
         super();
         
         GlobalEventDispatcher.addEventListener(MinimapEvent.MINIMAP_READY, this, onReady);
-        GlobalEventDispatcher.addEventListener(MinimapEvent.ALLY_PLAYERS_PANEL_READY, this, onReady);
+        GlobalEventDispatcher.addEventListener(MinimapEvent.PANEL_READY, this, onReady);
         
         checkLoading();
     }
@@ -167,19 +172,20 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
         
     private function onReady(event:MinimapEvent):Void
     {
+        Logger.addObject(event, "Minimap: event", 2);
         switch (event.type)
         {
             case MinimapEvent.MINIMAP_READY:
                 isMinimapReady = true;
                 break;
-            case MinimapEvent.ALLY_PLAYERS_PANEL_READY:
-                isAllyPlayersPanelReady = true;
+            case MinimapEvent.PANEL_READY:
+                isPanelReady = true;
                 break;
         }
         
-        loadComplete = isMinimapReady && isAllyPlayersPanelReady;
+        loadComplete = isMinimapReady && isPanelReady;
         
-        if (loadComplete)
+        if (loadComplete && !mapExtended)
         {
             externalDeveloperInterface = new ExternalDeveloperInterface();
             
@@ -187,6 +193,8 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
             {
                 startExtendedProcedure();
             }
+            
+            mapExtended = true;
         }
     }
     
@@ -199,7 +207,14 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
          */
         MARKERS_SCALING = MapConfig.iconScale;
         scaleMarkers(MARKERS_SCALING);
-        //scaleMarkers = null;
+        
+        /** Zoom map on key press */
+        if (MapConfig.zoomEnabled)
+        {
+            zoom = new Zoom(this);
+            net.wargaming.managers.BattleInputHandler.instance.addHandler(88, false, zoom, "onZoomKeyClick");
+            net.wargaming.managers.BattleInputHandler.instance.addHandler(88, true, zoom, "onZoomKeyClick");
+        }
         
         sync = new SyncModel();
         sync.updateIconsExtension();
@@ -276,30 +291,6 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
             {
                 lines = new Lines(mapSizeModel.getSide() * 10); /** Total map side distance in meters  */
             }
-
-            /**
-             * TODO: make configurable
-             */
-            net.wargaming.managers.BattleInputHandler.instance.addHandler(88, false, this, "onZoomKeyClick");
-            net.wargaming.managers.BattleInputHandler.instance.addHandler(88, true, this, "onZoomKeyClick");
-        }
-    }
-
-    private function onZoomKeyClick(event)
-    {
-        //wot.utils.Logger.add("onZoomKeyClick: '" + com.xvm.JSON.stringify(event));
-        // TODO make logic
-        if (event.details.value == "keyDown")
-        {
-            sizeUp();
-            sizeUp();
-            sizeUp();
-        }
-        else
-        {
-            sizeDown();
-            sizeDown();
-            sizeDown();
         }
     }
 

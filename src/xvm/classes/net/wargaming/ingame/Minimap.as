@@ -9,6 +9,8 @@ intrinsic class net.wargaming.ingame.Minimap extends UIComponent
     var foregroundHR:MovieClip;
     var backgrnd:MovieClip;
     
+    var m_sizeIndex:Number;
+    
     function Minimap();
     function scaleMarkers(val:Number);
     function onEntryInited();

@@ -1,3 +1,5 @@
+import wot.Minimap.MinimapEvent;
+import wot.utils.GlobalEventDispatcher;
 import wot.Minimap.dataTypes.Icon;
 import wot.Minimap.MinimapEntry;
 import wot.Minimap.model.externalProxy.IconsProxy;
@@ -47,8 +49,14 @@ class wot.Minimap.model.iconTracker.PositionTracking
             
             if (!exist)
             {
-                /** Does not exist -> new track */
+                /** Does not exist -> guy revealed first time */
+                
+                /** Track this guy position for LostMarkers */
                 posTrack.push(new Icon(entry.uid, entry._x, entry._y, entry.vehicleClass));
+                
+                /** Inform PlayersPanel about this first time seen guy */
+                var event:MinimapEvent = new MinimapEvent(MinimapEvent.ENEMY_REVEALED, entry.uid);
+                GlobalEventDispatcher.dispatchEvent(event);
             }
         }
     }
