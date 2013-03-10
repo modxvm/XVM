@@ -1,4 +1,3 @@
-import wot.utils.Logger;
 import wot.Minimap.Zoom;
 import wot.Minimap.MinimapEntry;
 import wot.Minimap.shapes.Square;
@@ -172,7 +171,6 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
         
     private function onReady(event:MinimapEvent):Void
     {
-        Logger.addObject(event, "Minimap: event", 2);
         switch (event.type)
         {
             case MinimapEvent.MINIMAP_READY:

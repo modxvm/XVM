@@ -25,10 +25,23 @@ class wot.TeamBasesPanel.CapBarModel.CapSpeed
     
     public function calculate(newPointsVal:Number, prevPoints:Number):Void
     {
+        if (newPointsVal == prevPoints)
+        {
+            /**
+             * Update without points change breaks.
+             * Omit cycle calculation.
+             * 
+             * TODO: Check capture block at encounter battle.
+             * 
+             * Useless update without block once has been seen:
+             * http://www.koreanrandom.com/forum/topic/1760-полоса-захвата/?p=45650
+             */
+            return;
+        }
         var interval:Number = m_timer.getInterval(); // Changes InternalTimer state!
         var rawSpeed:Number = (newPointsVal - prevPoints) / interval;
         var approxSpeed:Number = Round.round(rawSpeed, 100); // to 0.01 digit
-        if (approxSpeed < OneTankSpeed.APPROX_MIN_SPEED_ENCOUNTER || approxSpeed > 8)
+        if (approxSpeed < OneTankSpeed.ABSOLUTE_MIN_SPEED_ENCOUNTER || approxSpeed > 8)
         {
            /**
             * Extremes conditions with infinity, negatives, NaN like

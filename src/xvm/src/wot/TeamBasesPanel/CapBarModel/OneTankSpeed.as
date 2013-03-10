@@ -16,6 +16,7 @@ class wot.TeamBasesPanel.CapBarModel.OneTankSpeed
      * Approximated to allow smoother capturers number calculation.
      */
     public static var APPROX_MIN_SPEED_ENCOUNTER:Number = 0.45;
+    public static var ABSOLUTE_MIN_SPEED_ENCOUNTER:Number = 0.4;
     public static var APPROX_MIN_SPEED_OTHER:Number = 0.9; /** For Standart battle type and Assault */
     
     private var m_speed:Number;

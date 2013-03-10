@@ -26,7 +26,7 @@ class wot.TeamBasesPanel.CapBarModel.CapCycle
     
     public function CapCycle()
     {
-        m_sequence = new Array();
+        m_sequence = [];
     }
     
     public function getAverageSpeed():Number
@@ -37,13 +37,23 @@ class wot.TeamBasesPanel.CapBarModel.CapCycle
     public function clear():Void
     {
         m_averageSpeed = undefined;
-        m_sequence = new Array();
+        m_sequence = [];
     }
     
     public function update(curSpeed:Number):Void
     {
-        // Append to beginning of an array.
+        /** Append to beginning of an array */
         m_sequence.unshift(curSpeed);
+        
+        /**
+         * Assume second tick will be the same as the very first.
+         * Produces first full 2-step cycle out of one tick.
+         * Allows to guess earlier probable cap speed and capturers number.
+         */
+        if (m_sequence.length == 1)
+        {
+            m_sequence.unshift(curSpeed);
+        }
         
        /**
         * All cycle calculators try to redefine average speed one by one.
