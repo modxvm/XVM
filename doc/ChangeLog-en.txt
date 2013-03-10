@@ -1,4 +1,5 @@
-  * minimap: zoom minimap by pressing X key
+  * capture bar: tweak
+  Исправить' * minimap: zoom minimap by pressing X key
   * minimap: 1km square switch for artillery
   * minimap: iconScale now does not affect capture bases
   
