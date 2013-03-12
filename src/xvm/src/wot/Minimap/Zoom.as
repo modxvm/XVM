@@ -1,5 +1,6 @@
 import wot.Minimap.Minimap;
 import wot.Minimap.model.externalProxy.MapConfig;
+import wot.utils.Logger;
 
 /**
  * Handles minimap windows zoom and center positioning
@@ -29,6 +30,8 @@ class wot.Minimap.Zoom
          * or switch zoom when key is pressed
          */
         var isKeyDown:Boolean = event.details.value == "keyDown";
+        
+        Logger.addObject(event, "event", 3);
         
         if (MapConfig.zoomHold)
         {
@@ -71,13 +74,16 @@ class wot.Minimap.Zoom
     private function zoomIn():Void
     {
         increaseSize();
-        centerPosition();
+        if (MapConfig.zoomCentered)
+        {
+            centerPosition();
+        }
     }
     
     private function zoomOut():Void
     {
-        restoreSize();
         bottomRightPosition();
+        restoreSize();
     }
     
     private function centerPosition():Void

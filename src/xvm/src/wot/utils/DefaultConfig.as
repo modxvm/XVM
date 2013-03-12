@@ -84,6 +84,16 @@ class wot.utils.DefaultConfig
                 enableUserInfoStatistics: true,  // Enable statistics in the user info window
                 enableCompanyStatistics: true    // Enable statistics in the company window
             },
+            hotkeys: {
+                minimapZoom: { enabled: true, onHold: false, keyCode: 88 }
+                /*
+                minimapExtended: { enabled: true, onHold: true, keycode: 16 } // 16 - Alt?
+                messages: [
+                  {  enabled: true, keycode: 113, text: "ШАНСЫ 5% АЙДА ТАПИЦА" }, // F2
+                  {  enabled: true, keycode: 114, text: "☆\nhey!\n☆" } // .split("\n")
+                ]
+                */
+            },
             battleLoading: {
                 // Show clock at Battle Loading Screen.
                 // ### Is there a clock:on\off switch variable supposed to be? ###
@@ -165,9 +175,8 @@ class wot.utils.DefaultConfig
                 cameraAlpha: 100,
                 iconScale: 1,
                 zoom: {
-                  enabled: false,
                   stepsBack: 4,
-                  byKeyHold: false
+                  centered: true
                 },
                 labels: {
                   nickShrink: 5,

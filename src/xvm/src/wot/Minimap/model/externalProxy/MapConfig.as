@@ -15,15 +15,18 @@ class wot.Minimap.model.externalProxy.MapConfig
         return minimap.cameraAlpha;    }
     public static function get iconScale():Number    {
         return minimap.iconScale;    }
-    public static function get zoomEnabled():Boolean    {
-        return minimap.zoom.enabled;
-    }
-    public static function get zoomStepsBack():Number    {
-        return minimap.zoom.stepsBack;
-    }
-    public static function get zoomHold():Boolean    {
-        return minimap.zoom.byKeyHold;
-    }
+    
+    /** Zoom */
+        public static function get zoomEnabled():Boolean    {
+            return Config.s_config.hotkeys.minimapZoom.enabled;        }
+        public static function get zoomHold():Boolean    {
+            return Config.s_config.hotkeys.minimapZoom.onHold;        }
+        public static function get zoomKey():Number    {
+            return Config.s_config.hotkeys.minimapZoom.keyCode;        }
+        public static function get zoomCentered():Boolean    {
+            return minimap.zoom.centered;        }
+        public static function get zoomStepsBack():Number    {
+            return minimap.zoom.stepsBack;        }
    
     /** Labels */
         public static function get nickShrink():Number    {

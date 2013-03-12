@@ -2,8 +2,8 @@
  * @author ilitvinov
  */
 
-import wot.utils.Logger;
-import wot.utils.Utils;
+//import wot.utils.Logger;
+//import wot.utils.Utils;
 
 /**
  * LobbyMessenger
@@ -14,20 +14,20 @@ class wot.LobbyMessenger.LobbyMessenger extends net.wargaming.messenger.LobbyMes
 {
     public function LobbyMessenger() 
     {
-        Utils.TraceXvmModule("LobbyMessenger");
+        //Utils.TraceXvmModule("LobbyMessenger");
         super();
     }
     
     function handleToggleContacsWindow(event)
     {
-        Logger.addObject(_root.lobbyMessengerLoader, "_root.lobbyMessengerLoader", 1);
+        //Logger.addObject(_root.lobbyMessengerLoader, "_root.lobbyMessengerLoader", 1);
 
         super.handleToggleContacsWindow(event);
     }
     
     function onRecieveChannelMessage(cid, message, blinking)
     {
-        Logger.add("onRecieveChannelMessage" + " cid " + cid + " message " + message + " blinking " + blinking);
+        //Logger.add("onRecieveChannelMessage" + " cid " + cid + " message " + message + " blinking " + blinking);
         super.onRecieveChannelMessage(cid, message, blinking);
     }
     
@@ -60,10 +60,10 @@ class wot.LobbyMessenger.LobbyMessenger extends net.wargaming.messenger.LobbyMes
         
         if (isPrivateChat(memberList) && !isFriendChat(memberList))
         {
-            Logger.add("## private");
+            //Logger.add("## private");
             if (true)
             {
-                Logger.add("#### friend");
+                //Logger.add("#### friend");
             }
         }
         
