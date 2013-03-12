@@ -19,6 +19,7 @@ exports.settings = {
     playersCollectionName: "players",
     missedCollectionName: "missed",
     usersCollectionName: "users",
+    performanceLogCollectionName: "performance",
     dbMaxConnections: Math.floor(20 / numNodes),
     dbMaxConnections2: Math.floor(10 / numNodes),
     dbMinTime: 1000, // msec
@@ -38,7 +39,7 @@ exports.settings = {
         [   ],      // ???: 1500000000 .. 1999999999 (disabled - unknown stat server)
         [ 3 ],      // SEA: 2000000000 .. 2499999999
         [ 4 ],      // VTC: 2500000000 .. 2999999999
-    [ 5 ]           // KR:  3000000000 .. 3499999999
+        [ 5 ]       // KR:  3000000000 .. 3499999999
     ],
     serverName: "?"
 };

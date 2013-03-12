@@ -1,9 +1,8 @@
 //////////////////////////////
 // Master thread
+var cluster = require('cluster');
 
 exports.main = function() {
-    var cluster = require('cluster');
-
     utils.log("Starting server");
 
     // Fork workers.
@@ -13,8 +12,7 @@ exports.main = function() {
         w.on('message', processWorkerMessage);
     }
 
-    //showUsageStat();
-    setInterval(showUsageStat, settings.usageStatShowPeriod);
+    setInterval(saveUsageStat, settings.usageStatShowPeriod);
 
     getInfoContent();
     setInterval(getInfoContent, 3600 * 1000); // every 1 hour
@@ -36,30 +34,30 @@ var usageStat = {
     requests: 0,
     requests_current: 0,
     players: 0,
+    players_current: 0,
     cached: 0,
     updated: 0,
     missed: 0,
     updatesFailed: 0,
     max_conn: 0,
-    max_db: 0,
     mongorq: 0,
     mongorq_max: settings.dbMaxConnections * settings.numNodes,
-    cmd_info: 0,
-    connections: []
+    connections: [ ]
 };
 
-var _lastLogMsg = "";
-var _skipLogMsgCounter = 0;
+var _lastLogMsg = "",
+    _skipLogMsgCounter = 0;
 
 var processWorkerMessage = function(msg) {
-//utils.log(JSON.stringify(msg));
     if(msg.usage == 1) {
         if(msg.requests) {
             usageStat.requests += msg.requests;
             usageStat.requests_current += msg.requests;
         }
-        if(msg.players)
+        if(msg.players) {
             usageStat.players += msg.players;
+            usageStat.players_current += msg.players;
+        }
         if(msg.cached)
             usageStat.cached += msg.cached;
         if(msg.updated)
@@ -84,8 +82,6 @@ var processWorkerMessage = function(msg) {
             if (!usageStat.connections[msg.serverId])
                 usageStat.connections[msg.serverId] = {cur:0, max:settings.servers[msg.serverId].maxconn, total:0, fail:0};
             usageStat.connections[msg.serverId].cur += msg.connections;
-            //if (usageStat.connections[msg.serverId].cur < 0)
-            //    utils.log("ERROR: conn<0 " + JSON.stringify(msg));
             if (msg.connections > 0)
                 usageStat.connections[msg.serverId].total += msg.connections;
             if (msg.fail)
@@ -106,77 +102,13 @@ var processWorkerMessage = function(msg) {
         } else {
             _skipLogMsgCounter++;
         }
-    } else if(msg.cmd == "cmd") {
-        //w.send({ chat: 'Ok worker, Master got the message! Over and out!' });
     }
 };
 
-var lpad = function(str, padString, length) {
-    str = String(str);
-    while(str.length < length)
-        str = padString + str;
-    return str;
-};
-
-var rpad = function(str, padString, length) {
-    str = String(str);
-    while(str.length < length)
-        str += padString;
-    return str;
-};
-
-var showUsageStat = function() {
-    var uptime = Math.round((new Date() - usageStat.start) / 1000);
-    var d = (uptime / (60 * 60 * 24)).toFixed();
-    var h = lpad(((uptime / 3600) % 24).toFixed(), "0", 2);
-    var m = lpad(((uptime / 60) % 60).toFixed(), "0", 2);
-    utils.log("> uptime  requests     rq/s   players  pl/s  cached updated  missed updfail max_conn max_db mongorq cmd_info");
-
-    var s = (d > 9 ? "" : ">");
-    // uptime
-    s += lpad((d == 0 ? "" : d + "d") + h + "h" + m, " ", 7);
-    // requests
-    s += lpad(usageStat.requests, " ", 10) + " ";
-    // rq/s
-    s += lpad((usageStat.requests_current / settings.usageStatShowPeriod * 1000).toFixed() + "(" + (usageStat.requests / uptime).toFixed() + ")", " ", 8);
-    // players
-    s += lpad(usageStat.players, " ", 10) + " ";
-    // pl/s
-    s += lpad((usageStat.players / uptime).toFixed(), " ", 5);
-    // cached
-    s += lpad((usageStat.cached / usageStat.players * 100).toFixed(2) + "%", " ", 8);
-    // updated
-    s += lpad((usageStat.updated / usageStat.players * 100).toFixed(2) + "%", " ", 8);
-    // missed
-    s += lpad((usageStat.missed / usageStat.players * 100).toFixed(2) + "%", " ", 8);
-    // updfail
-    s += lpad((usageStat.updatesFailed / usageStat.players * 100).toFixed(2) + "%", " ", 8);
-    // max_conn
-    s += lpad((usageStat.max_conn / usageStat.players * 100).toFixed(2) + "%", " ", 9);
-    // max_db
-    s += lpad((usageStat.max_db / usageStat.requests * 100).toFixed(2) + "%", " ", 7);
-    // mongorq
-    s += lpad(usageStat.mongorq + "/" + usageStat.mongorq_max, " ", 8);
-    // cmd_info
-    s += lpad((usageStat.cmd_info / usageStat.requests * 100).toFixed(2) + "%", " ", 9);
-    utils.log(s);
-
-    utils.log("> connections: cur max    total     fail");
-    //        "  api.worldoftanks-sea.com   0  52"
-    for (var i = 0; i < usageStat.connections.length; ++i) {
-        var cs = usageStat.connections[i];
-        if (cs) {
-            utils.log("  " +
-                rpad(settings.servers[i].name, " ", 12) + " " +
-                lpad(cs.cur, " ", 3) + " " +
-                lpad(cs.max, " ", 3) + " " +
-                lpad(cs.total, " ", 8) + " " +
-                lpad(cs.fail, " ", 8) + " " +
-                lpad((cs.fail / cs.total * 100).toFixed(), " ", 2) + "%");
-        }
-    }
-
+var saveUsageStat = function() {
+    utils.performanceReport(usageStat);
     usageStat.requests_current = 0;
+    usageStat.players_current = 0;
 };
 
 // setup "info" update interval
@@ -189,7 +121,7 @@ var getInfoContent = function() {
         path: "/svn/wiki/ReleaseInfo.wiki"
     };
 
-    var request = http.get(options, function(res) {
+    http.get(options, function(res) {
         var responseData = "";
         res.setEncoding("utf8");
         res.on("data", function(chunk) {
@@ -220,7 +152,7 @@ var getTWRBaseContent = function() {
         path: "/svn/wiki/TWRBase.wiki"
     };
 
-    var request = http.get(options, function(res) {
+    http.get(options, function(res) {
         if (res.statusCode != 200) {
             utils.log("[getTWRBaseContent] ERROR: bad status code: " + res.statusCode);
             return;

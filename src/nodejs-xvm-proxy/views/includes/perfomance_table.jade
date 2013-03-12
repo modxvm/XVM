@@ -1,0 +1,48 @@
+//table.table.table-striped.table-bordered.table-hover.table-condensed
+
+div.row
+    div.span1 interval
+    div.span1 uptime
+    div.span1 requests
+    div.span1 rq/s
+    div.span1 players
+    div.span1 pl/s
+    div.span1 cached
+    div.span1 updated
+    div.span1 missed
+    div.span1 updfail
+    div.span1 max_conn
+    div.span1 mongorq
+
+each record in db
+    div(data-toggle="collapse", data-target=".i"+record.index).row.record
+        div.span1 20s
+        div.span1 #{record.uptime}
+        div.span1 #{record.requests}
+        div.span1 #{record.req_s_now} (#{record.req_s_total})
+        div.span1 #{record.players}
+        div.span1 #{record.pl_s_now} (#{record.pl_s_total})
+        div.span1 #{record.cached}%
+        div.span1 #{record.updated}%
+        div.span1 #{record.missed}%
+        div.span1 #{record.updfail}%
+        div.span1 #{record.max_conn}%
+        div.span1 #{record.mongorq} / #{record.mongorq_max}
+
+    div(class="i"+record.index).row.collapse
+        div.span6
+            div.row
+                div.span1 server
+                div.span1 cur
+                div.span1 max
+                div.span1 total
+                div.span1 fail
+                div.span1 rate
+            each connection in record.connections
+                div.row
+                    div.span1: strong #{connection.server}
+                    div.span1 #{connection.current}
+                    div.span1 #{connection.max}
+                    div.span1 #{connection.total}
+                    div.span1 #{connection.fail}
+                    div.span1 #{connection.rate}%

@@ -211,9 +211,8 @@ exports.calc = function(data_orig, isLog) {
                     default:    dmg = 0; break;
                 }
             }
-            vdata.__damage = Math.max(0.33, dmg);
+            vdata.__damage = dmg;
         }
-
         return vdata.__damage;
     }
 
