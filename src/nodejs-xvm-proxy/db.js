@@ -1,49 +1,51 @@
-var mongodb,
+var cluster = require("cluster"),
+    mongodb,
     settings = require("./settings").settings,
     utils = require("./utils");
 
 var options = {
         auto_reconnect: true,
-        poolSize: settings.dbMaxConnections
+        poolSize: cluster.isMaster ? 5 : settings.dbMaxConnections
     };
+
 var db,
     players,
     users,
     missed,
-    performanceLog;
+    performanceLog,
+    initialized = false;
 
-module.exports = function(fakeMongo) {
-    mongodb = mongodb || fakeMongo || require("mongodb");
+exports.ctor = function(initCallback, fakeMongo) {
+    if(initialized) {
+        if(initCallback) {
+            initCallback();
+        }
 
-    if(!db) {
-        db = new mongodb.Db(settings.dbName, new mongodb.Server(settings.mongoServer, settings.mongoPort, options), { w: 0 });
-
-        db.open(function(error, client) {
-            if(error) {
-                utils.log("DB connection error!");
-                return;
-            }
-            players = new mongodb.Collection(client, settings.playersCollectionName);
-            users = new mongodb.Collection(client, settings.usersCollectionName);
-            missed = new mongodb.Collection(client, settings.missedCollectionName);
-            performanceLog = new mongodb.Collection(client, settings.performanceLogCollectionName);
-        });
+        return;
     }
 
-    return {
-        getPerformanceReport: getPerformanceReport,
-        getPlayerByName: getPlayerByName,
-        getPlayerByNameId: getPlayerByNameId,
-        getPlayersData: getPlayersData,
-        insertMissed: insertMissed,
-        insertPerformanceReport: insertPerformanceReport,
-        removeMissed: removeMissed,
-        updatePlayersData: updatePlayersData,
-        updateUsers: updateUsers
-    }
+    initialized = true;
+    mongodb = fakeMongo || require("mongodb");
+
+    db = new mongodb.Db(settings.dbName, new mongodb.Server(settings.mongoServer, settings.mongoPort, options), { w: 0 });
+
+    db.open(function(error, client) {
+        if(error) {
+            utils.log("DB connection error!");
+            return;
+        }
+        players = new mongodb.Collection(client, settings.playersCollectionName);
+        users = new mongodb.Collection(client, settings.usersCollectionName);
+        missed = new mongodb.Collection(client, settings.missedCollectionName);
+        performanceLog = new mongodb.Collection(client, settings.performanceLogCollectionName);
+
+        if(initCallback) {
+            initCallback();
+        }
+    });
 };
 
-var getPlayersData = function(ids, callback) {
+exports.getPlayersData = function(ids, callback) {
     var cursor = players.find(
             { _id: { $in: ids } },
             { _id: 1, st: 1, dt: 1, cr: 1, up: 1, nm: 1, b: 1, w: 1, spo: 1, hip: 1, cap: 1, dmg: 1, frg: 1, def: 1, lvl: 1, e: 1, wn: 1, twr: 1, v: 1 }
@@ -64,7 +66,7 @@ var getPlayersData = function(ids, callback) {
      });*/
 };
 
-var getPlayerByName = function(name, region, callback) {
+exports.getPlayerByName = function(name, region, callback) {
     var minId,
         maxId;
 
@@ -104,7 +106,7 @@ var getPlayerByName = function(name, region, callback) {
     _executeDbQuery(cursor, callback);
 };
 
-var getPlayerByNameId = function(nameId, callback) {
+exports.getPlayerByNameId = function(nameId, callback) {
     var query = { };
 
     if(/^\d+$/.test("" + nameId)) {
@@ -134,18 +136,18 @@ var _executeDbQuery = function(cursor, callback) {
     });
 };
 
-var updatePlayersData = function(id, data) {
+exports.updatePlayersData = function(id, data) {
     players.update({ _id: id }, data, { upsert: true });
 };
 
-var removeMissed = function(id) {
+exports.removeMissed = function(id) {
     missed.remove({ _id: id }, function(err) {
         if(err)
             utils.log("[DB] removeMissed(" + id + ") error: " + err);
     });
 };
 
-var insertMissed = function(id, miss) {
+exports.insertMissed = function(id, miss) {
     missed.insert({ _id: id, missed: miss });
 };
 
@@ -174,17 +176,18 @@ var updateDbBalancer = function(startStamp) {
             process.send({ usage: 1, mongorq_max: _mongoMaxRq - oldvalue });
     }
 };
+exports.updateDbBalancer = updateDbBalancer;
 
-var insertPerformanceReport = function(perfStat) {
+exports.insertPerformanceReport = function(perfStat) {
     performanceLog.insert(perfStat);
 };
 
-var getPerformanceReport = function(callback) {
+exports.getPerformanceReport = function(callback) {
     var cursor = performanceLog.find().sort({ _id: -1 }).limit(25);
 
     cursor.toArray(callback);
 };
 
-var updateUsers = function(id) {
+exports.updateUsers = function(id) {
     users.update({ _id: id }, { $inc: { counter: 1 } }, { upsert: true });
 };

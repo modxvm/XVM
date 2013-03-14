@@ -1,4 +1,4 @@
-var db = require("./db")(),
+var db = require("./db"),
     settings = require("./settings").settings,
     utils = require("./utils");
 

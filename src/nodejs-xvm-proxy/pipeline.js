@@ -1,12 +1,14 @@
-var db = require("./db")(),
+var db = require("./db"),
     factoryDb = require("./factoryDb"),
-    factoryHttp = require("./factoryHttp")(),
+    factoryHttp = require("./factoryHttp"),
     httpPool = require("./httpPool"),
     settings = require("./settings").settings,
     utils = require("./utils");
 
 var processData,
     responseCallback;
+
+factoryHttp.ctor();
 
 exports.generic = function(ids, callback) {
     var parsedIds = _parseStatRequest(ids);
@@ -67,8 +69,11 @@ var httpCallback = function(err, results) {
     // process retrieved items
     for(var id in processData.rqData) {
         var item = results[id];
+
         if(!item) {
+            // TODO _prepareFallbackRes?
             result.players.push({id: id, status: "fail", date: now});
+            process.send({usage: 1, updatesFailed: 1});
             continue;
         }
 

@@ -3,8 +3,9 @@
  */
 
 var cluster = require('cluster')
+    , db = require("./db")
     , express = require("express")
-    //, routes = require("./routes")
+    , routes = require("./routes")
     , generic = require("./routes/generic")
     , command = require("./routes/command")
     , http = require("http")
@@ -15,7 +16,9 @@ var cluster = require('cluster')
     , tcalcBase = require("./tcalc/tcalc_base");
 
 if(cluster.isMaster) {
-    require("./master").main();
+    db.ctor(function() {
+        require("./master").main();
+    });
     return;
 }
 
@@ -72,6 +75,7 @@ app.param(function(name, fn) {
 });
 
 app.get("/TEST", generic.test);
+app.get("/001", generic.test);
 
 // TODO is it optimal?
 app.param("ids", /(\d+(?:=[\w-]*(?:=[\w-]*)?)?)/g);
@@ -81,8 +85,8 @@ app.param("playerId", /^\d+$/);
 app.get("/WN/:playerId", command.wn);
 app.get("/INFO/ID/:playerId", command.infoById);
 
-app.param("playerName", /^\w+/);
-app.param("region", /(RU)|(EU)|(US)|(NA)|(SEA)|(VTC)|(KR)$/);
+app.param("playerName", /^\w+$/);
+app.param("region", /^(RU)|(EU)|(US)|(NA)|(SEA)|(VTC)|(KR)$/);
 app.get("/INFO/:region/:playerName", command.infoByName);
 app.get("/INFO/:playerName", command.infoByNameId);
 
@@ -95,6 +99,8 @@ process.on("message", function(msg) {
         tcalcBase.parseTWRBase(msg.twrbase);
 });
 
-http.createServer(app).listen(app.get("port"), function() {
-    console.log("Express server listening on port " + app.get("port"));
+db.ctor(function() {
+    http.createServer(app).listen(app.get("port"), function() {
+        console.log("Express server listening on port " + app.get("port"));
+    });
 });

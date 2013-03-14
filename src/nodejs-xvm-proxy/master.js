@@ -1,6 +1,6 @@
 //////////////////////////////
 // Master thread
-var cluster = require('cluster');
+var cluster = require("cluster");
 
 exports.main = function() {
     utils.log("Starting server");
@@ -9,8 +9,14 @@ exports.main = function() {
     for(var i = 0; i < settings.numNodes; i++) {
         var w = cluster.fork();
         workers.push(w);
-        w.on('message', processWorkerMessage);
+        w.on("message", processWorkerMessage);
     }
+
+    cluster.on("exit", function(worker, code, signal) {
+        var exitCode = worker.process.exitCode;
+        utils.log("worker " + worker.process.pid + " died (" +exitCode+ "). restarting...");
+        cluster.fork();
+    });
 
     setInterval(saveUsageStat, settings.usageStatShowPeriod);
 
@@ -42,7 +48,9 @@ var usageStat = {
     max_conn: 0,
     mongorq: 0,
     mongorq_max: settings.dbMaxConnections * settings.numNodes,
-    connections: [ ]
+    connections: [ ],
+    req_in: 0,
+    req_out: 0
 };
 
 var _lastLogMsg = "",
@@ -91,6 +99,12 @@ var processWorkerMessage = function(msg) {
             if (!usageStat.connections[msg.serverId])
                 usageStat.connections[msg.serverId] = {cur:0, max:settings.servers[msg.serverId].maxconn, total:0, fail:0};
             usageStat.connections[msg.serverId].max += msg.maxConnections;
+        }
+        if(msg.req_in) {
+            usageStat.req_in += msg.req_in;
+        }
+        if(msg.req_out) {
+            usageStat.req_out += msg.req_out;
         }
     } else if(msg.log == 1) {
         if (msg.msg != _lastLogMsg) {

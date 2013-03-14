@@ -1,4 +1,4 @@
-var db,
+var db = require("./db"),
     settings = require("./settings").settings,
     tcalc = require("./tcalc/tcalc");
 
@@ -120,9 +120,6 @@ var log = exports.log = function(str) {
 };
 
 exports.performanceReport = function(perfStat) {
-    if(!db)
-        db = require("./db")();
-
     var now = new Date(),
         stat = clone(perfStat);
 

@@ -2,8 +2,11 @@
     var assert = require("assert"),
         fakeMongo = require("./mock_classes/mongo"),
         fakeHttp = require("./mock_classes/http"),
-        db = require("../db")(fakeMongo),
-        http = require("../factoryHttp")(fakeHttp);
+        db = require("../db"),
+        http = require("../factoryHttp");
+
+    db.ctor(undefined, fakeMongo);
+    http.ctor(fakeHttp);
 
     var req,
         res,
