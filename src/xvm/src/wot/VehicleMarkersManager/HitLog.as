@@ -38,7 +38,6 @@ class wot.VehicleMarkersManager.HitLog
 
     public function HitLog(cfg:Object)
     {
-
         x = cfg.x;
         y = cfg.y;
         w = cfg.w;
@@ -73,7 +72,7 @@ class wot.VehicleMarkersManager.HitLog
 
         var dmg = delta;
         var lastHit:Object = hits.length == 0 ? { } : hits[hits.length - 1];
-        if ((damageType == "fire" || damageType == "ramming") && lastHit.damageType == damageType)
+        if ((damageType == "fire" || damageType == "ramming") && lastHit.damageType == damageType && lastHit.playerName == playerName)
         {
             dmg += lastHit.dmg;
             hits.pop();
@@ -91,7 +90,7 @@ class wot.VehicleMarkersManager.HitLog
         {
             players[playerName] = {
                 vehicleName:vehicleName,
-				icon:icon,
+                icon:icon,
                 level:level,
                 vtype:vtype,
                 vtypeColor:vtypeColor,
@@ -191,7 +190,7 @@ class wot.VehicleMarkersManager.HitLog
                     dead:false,
                     damageType:"",
                     vehicleName:"",
-					icon:"",
+                    icon:"",
                     level:0,
                     vtype:"",
                     vtypeColor:null,
