@@ -36,12 +36,12 @@
     "enableCompanyStatistics": true             // true - Enable statistics in the company window
   },
   // Special XVM hotkeys
-  "hotkeys": { 
-    // onHold: take action by key click or while key is remains pressed 
+  "hotkeys": {
+    // onHold: take action by key click or while key is remains pressed
     // Keycode values a be found here:
     // http://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
     // Common keys are Shift - 16, Ctrl - 17, Alt - 18, Q - 81, E - 69, Z - 90, X - 99, C - 67
-    "minimapZoom": { "enabled": true, "onHold": false, "keyCode": 192 }
+    "minimapZoom": { "enabled": true, "onHold": false, "keyCode": 17 }
   },
   // Parameters of the Battle Loading Screen
   "battleLoading": {
@@ -451,7 +451,7 @@
     },
     "square" : { // Square with 1000m side. Shows maximum unit draw distance.
       "enabled": false,
-      "artilleryEnabled": false, // Show square if using artillery\SPG vehicle 
+      "artilleryEnabled": false, // Show square if using artillery\SPG vehicle
       "thickness": 0.7,
       "alpha": 40,
       "color": "0xFFFFFF"
