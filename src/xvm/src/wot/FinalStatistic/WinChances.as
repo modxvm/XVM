@@ -1,7 +1,6 @@
 import wot.utils.Config;
 import wot.utils.Chance;
 import wot.utils.GlobalEventDispatcher;
-import wot.utils.Utils;
 
 class wot.FinalStatistic.WinChances
 {
@@ -23,29 +22,24 @@ class wot.FinalStatistic.WinChances
 
     private function showWinChances()
     {
-        for (var i in _root.windowLayout)
+        var s_chanceField = form_mc._parent._parent.titleBtn.textField;
+        var s_text = null;
+        form_mc.onEnterFrame = function()
         {
-            if (!Utils.startsWith("battleResultsWnd", i))
+            if (s_chanceField.htmlText == undefined)
                 continue;
-            var s_chanceField = _root.windowLayout[i].titleBtn.textField;
-            var s_text = null;
-            form_mc.onEnterFrame = function()
+            //delete this.onEnterFrame;
+            if (s_text == null)
             {
-                if (s_chanceField.htmlText == undefined)
-                    continue;
-                //delete this.onEnterFrame;
-                if (s_text == null)
-                {
-                    s_chanceField.html = true;
-                    s_chanceField.htmlText += "<tab><tab><tab><font face='$TitleFont' size='18' color='#E9E7D6'>" +
-                        Chance.GetChanceText(Config.s_config.finalStatistic.showChancesExp) + "</font>";
-                    s_text = s_chanceField.htmlText;
-                }
-                if (s_chanceField.htmlText != s_text)
-                {
-                    s_chanceField.htmlText = s_text;
-                    s_text = s_chanceField.htmlText;
-                }
+                s_chanceField.html = true;
+                s_chanceField.htmlText += "<tab><tab><tab><font face='$TitleFont' size='18' color='#E9E7D6'>" +
+                    Chance.GetChanceText(Config.s_config.finalStatistic.showChancesExp) + "</font>";
+                s_text = s_chanceField.htmlText;
+            }
+            if (s_chanceField.htmlText != s_text)
+            {
+                s_chanceField.htmlText = s_text;
+                s_text = s_chanceField.htmlText;
             }
         }
     }
