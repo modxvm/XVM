@@ -41,6 +41,9 @@ class wot.battle.BattleMain
     
     private static function BattleMainConfigLoaded()
     {
+        net.wargaming.managers.BattleInputHandler.instance.addHandler(87, false, _root.minimap.zoom, "onZoomKeyClick");
+        net.wargaming.managers.BattleInputHandler.instance.addHandler(87, true, _root.minimap.zoom, "onZoomKeyClick");
+            
         //Logger.add("BattleMainConfigLoaded()");
 
         //Logger.addObject(_root, "_root", 2);

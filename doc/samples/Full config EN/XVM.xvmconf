@@ -40,8 +40,8 @@
     // onHold: take action by key click or while key is remains pressed
     // Keycode values a be found here:
     // http://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
-    // Common keys are Shift - 16, Ctrl - 17, Alt - 18, Q - 81, E - 69, Z - 90, X - 99, C - 67
-    "minimapZoom": { "enabled": true, "onHold": false, "keyCode": 17 }
+    // Common keys are Ctrl - 17, X - 99, C - 67
+    "minimapZoom": { "enabled": false, "onHold": false, "keyCode": 17 }
   },
   // Parameters of the Battle Loading Screen
   "battleLoading": {
