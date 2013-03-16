@@ -1,4 +1,3 @@
-  * hotkeys at xvm configuration "keys" section
   * capture bar: tweak
   * minimap: zoom minimap by key pressing; see sections "minimap":{"zoom" and "hotkeys":{ at XVM.xvmconf
   * minimap: 1km square switch for artillery
