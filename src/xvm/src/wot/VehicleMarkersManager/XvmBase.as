@@ -191,7 +191,8 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
 
             //textField.border = true;
             //textField.borderColor = 0xFFFFFF;
-            //textField.autoSize = "center"; // http://theolagendijk.com/2006/09/07/aligning-htmltext-inside-flash-textfield/
+            // http://theolagendijk.com/2006/09/07/aligning-htmltext-inside-flash-textfield/
+            textField.autoSize = cfg.font.align || "center";
 
             var cfg_color_format_static = formatStaticColorText(cfg.color);
             var sh_color_format_static = formatStaticColorText(cfg.shadow.color);
