@@ -7,6 +7,7 @@
 FILES="
   battle.swf
   battleloading.swf
+  crew.swf
   FinalStatistic.swf
   Minimap.swf
   PlayersPanel.swf
