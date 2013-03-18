@@ -37,8 +37,8 @@ class wot.utils.Locale
             "To see detailed information, move mouse cursor to the player's name.";
 
         // crew
-        tr["PutOwnCrew"] = "Put crew by competence";
-        tr["PutBestCrew"] = "Put crew by skills";
+        tr["PutOwnCrew"] = "Put own crew";
+        tr["PutBestCrew"] = "Put best crew";
 
         // RU
         tr = _translations["RU"];
@@ -109,8 +109,8 @@ class wot.utils.Locale
         tr["Wins"] = "Побед";
 
         // crew
-        tr["PutOwnCrew"] = "Экипаж по специализации";
-        tr["PutBestCrew"] = "Экипаж по навыкам";
+        tr["PutOwnCrew"] = "Родной экипаж";
+        tr["PutBestCrew"] = "Лучший экипаж";
     }
 
     public static function setRegion(value: String)
