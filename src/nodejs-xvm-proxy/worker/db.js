@@ -1,7 +1,7 @@
 var cluster = require("cluster"),
     mongodb,
-    settings = require("./settings").settings,
-    utils = require("./utils");
+    settings = require("./../settings"),
+    utils = require("./../utils");
 
 var options = {
         auto_reconnect: true,
@@ -172,7 +172,7 @@ var updateDbBalancer = function(startStamp) {
         _mongoMaxRqLastUpdate = now;
         var oldvalue = _mongoMaxRq;
         _mongoMaxRq = Math.max(1, Math.min(settings.dbMaxConnections, _mongoMaxRq + delta));
-        if (_mongoMaxRq != oldvalue)
+        if (_mongoMaxRq !== oldvalue)
             process.send({ usage: 1, mongorq_max: _mongoMaxRq - oldvalue });
     }
 };

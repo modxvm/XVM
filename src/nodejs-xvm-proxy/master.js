@@ -1,24 +1,34 @@
 //////////////////////////////
 // Master thread
-var cluster = require("cluster");
+var cluster = require("cluster"),
+    db = require("./worker/db"),
+    http = require("http"),
+    settings = require("./settings"),
+    utils = require("./utils");
+
+var updater;
 
 exports.main = function() {
     utils.log("Starting server");
 
+    updater = createWorker({type: "updater"});
     // Fork workers.
     for(var i = 0; i < settings.numNodes; i++) {
-        var w = cluster.fork();
-        workers.push(w);
-        w.on("message", processWorkerMessage);
+        createWorker({type: "worker"});
     }
 
     cluster.on("exit", function(worker, code, signal) {
-        var exitCode = worker.process.exitCode;
-        utils.log("worker " + worker.process.pid + " died (" +exitCode+ "). restarting...");
-        cluster.fork();
+        utils.log("worker " + worker.process.pid + " died (code:" + code + ", signal:" + signal + "). restarting...");
+        var wt = worker.process.env.type,
+            w = createWorker({type: wt});
+
+        if(wt === "updater")
+            updater = w;
     });
 
-    setInterval(saveUsageStat, settings.usageStatShowPeriod);
+    db.ctor(function() {
+        setInterval(saveUsageStat, settings.usageStatShowPeriod);
+    });
 
     getInfoContent();
     setInterval(getInfoContent, 3600 * 1000); // every 1 hour
@@ -27,12 +37,12 @@ exports.main = function() {
     setInterval(getTWRBaseContent, 3600 * 1000); // every 1 hour
 };
 
-// PRIVATE
+var createWorker = function(env) {
+    var w = cluster.fork(env);
 
-var settings = require("./settings").settings,
-    utils = require("./utils");
-
-var workers = [ ];
+    w.on("message", messageHandler);
+    return w;
+};
 
 // usage stat
 var usageStat = {
@@ -48,74 +58,29 @@ var usageStat = {
     max_conn: 0,
     mongorq: 0,
     mongorq_max: settings.dbMaxConnections * settings.numNodes,
-    connections: [ ],
-    req_in: 0,
-    req_out: 0
+    connections: [ ]
 };
 
 var _lastLogMsg = "",
     _skipLogMsgCounter = 0;
 
-var processWorkerMessage = function(msg) {
-    if(msg.usage == 1) {
-        if(msg.requests) {
-            usageStat.requests += msg.requests;
-            usageStat.requests_current += msg.requests;
-        }
-        if(msg.players) {
-            usageStat.players += msg.players;
-            usageStat.players_current += msg.players;
-        }
-        if(msg.cached)
-            usageStat.cached += msg.cached;
-        if(msg.updated)
-            usageStat.updated += msg.updated;
-        if(msg.missed)
-            usageStat.missed += msg.missed;
-        if(msg.updatesFailed)
-            usageStat.updatesFailed += msg.updatesFailed;
-        if(msg.max_conn)
-            usageStat.max_conn += msg.max_conn;
-        if(msg.max_db)
-            usageStat.max_db += msg.max_db;
-        if(msg.mongorq)
-            usageStat.mongorq += msg.mongorq;
-        if(msg.mongorq_max) {
-            usageStat.mongorq_max += msg.mongorq_max;
-            utils.log("mongorq_max: " + usageStat.mongorq_max);
-        }
-        if(msg.cmd_info)
-            usageStat.cmd_info += msg.cmd_info;
-        if(msg.connections) {
-            if (!usageStat.connections[msg.serverId])
-                usageStat.connections[msg.serverId] = {cur:0, max:settings.servers[msg.serverId].maxconn, total:0, fail:0};
-            usageStat.connections[msg.serverId].cur += msg.connections;
-            if (msg.connections > 0)
-                usageStat.connections[msg.serverId].total += msg.connections;
-            if (msg.fail)
-                usageStat.connections[msg.serverId].fail -= msg.connections;
-        }
-        if(msg.maxConnections) {
-            if (!usageStat.connections[msg.serverId])
-                usageStat.connections[msg.serverId] = {cur:0, max:settings.servers[msg.serverId].maxconn, total:0, fail:0};
-            usageStat.connections[msg.serverId].max += msg.maxConnections;
-        }
-        if(msg.req_in) {
-            usageStat.req_in += msg.req_in;
-        }
-        if(msg.req_out) {
-            usageStat.req_out += msg.req_out;
-        }
-    } else if(msg.log == 1) {
-        if (msg.msg != _lastLogMsg) {
-            if (_skipLogMsgCounter > 0)
-                utils.log("(skipped " + _skipLogMsgCounter + " message" + (_skipLogMsgCounter == 1 ? "" : "s") +")");
-            utils.log(msg.msg);
-            _lastLogMsg = msg.msg;
-            _skipLogMsgCounter = 0;
-        } else {
-            _skipLogMsgCounter++;
-        }
+var messageHandler = function(msg) {
+    if(!msg.type) {
+        console.log("!!!!!!!!!!!!!! no msg.type - ", msg);
+        return;
+    }
+    switch(msg.type) {
+        case "cmd":
+            processCommand(msg);
+            break;
+    }
+};
+
+var processCommand = function(command) {
+    switch(command.cmd) {
+        case "renewPlayer":
+            updater.send(command.id);
+            break;
     }
 };
 
@@ -127,8 +92,6 @@ var saveUsageStat = function() {
 
 // setup "info" update interval
 var getInfoContent = function() {
-    var http = require("http");
-
     var options = {
         host: "wot-xvm.googlecode.com",
         port: 80,
@@ -158,8 +121,6 @@ var getInfoContent = function() {
 
 // setup "info" update interval
 var getTWRBaseContent = function() {
-    var http = require("http");
-
     var options = {
         host: "wot-xvm.googlecode.com",
         port: 80,
@@ -167,7 +128,7 @@ var getTWRBaseContent = function() {
     };
 
     http.get(options, function(res) {
-        if (res.statusCode != 200) {
+        if(res.statusCode !== 200) {
             utils.log("[getTWRBaseContent] ERROR: bad status code: " + res.statusCode);
             return;
         }
@@ -178,11 +139,12 @@ var getTWRBaseContent = function() {
         });
         res.on("end", function() {
             try {
-                if (responseData) {
+                if(responseData) {
                     utils.log("[getTWRBaseContent] TWR Base updated");
-                    workers.forEach(function(worker) {
+                    // TODO
+                    /*workers.forEach(function(worker) {
                         worker.send({ twrbase: responseData });
-                    });
+                    });*/
                 }
             } catch(e) {
                 utils.debug("> [getTWRBaseContent] ERROR: " + e +

@@ -1,5 +1,6 @@
-var db = require("./db"),
-    settings = require("./settings").settings,
+var cluster = require('cluster'),
+    db = require("./worker/db"),
+    settings = require("./settings"),
     tcalc = require("./tcalc/tcalc");
 
 // calculate average level of tanks
@@ -108,6 +109,11 @@ exports.getVehicleType = function(vclass) {
 var clone = exports.clone = function(obj) {
     // TODO: use FASTER implementation
     return JSON.parse(JSON.stringify(obj));
+};
+
+exports.send = function(message) {
+    message.src = cluster.worker.id;
+    process.send(message);
 };
 
 var log = exports.log = function(str) {

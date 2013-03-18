@@ -1,47 +1,74 @@
-var db = require("./db"),
+var cluster = require("cluster"),
+    db = require("./db"),
     factoryDb = require("./factoryDb"),
-    factoryHttp = require("./factoryHttp"),
-    httpPool = require("./httpPool"),
-    settings = require("./settings").settings,
-    utils = require("./utils");
+    settings = require("./../settings"),
+    utils = require("./../utils");
 
-var processData,
-    responseCallback;
-
-factoryHttp.ctor();
+var httpInfo;
 
 exports.generic = function(ids, callback) {
-    var parsedIds = _parseStatRequest(ids);
-
-    responseCallback = callback;
+    var parsedIds = _parseStatRequest(ids),
+        responseCallback = callback;
 
     factoryDb.getPlayersData(parsedIds, function(error, procData) {
-        processData = procData;
-        processData.rqData = parsedIds.data;
+
+        /*processData = procData;
+        processData.rqData = parsedIds.data;*/
+        var processData = procData;
 
         if(error) {
             responseCallback(error, processData);
             return;
         }
 
-        factoryHttp.processRemotes(processData, httpCallback);
+        if(!Object.keys(procData.rqData).length) {
+            console.log("[WORKER:" + cluster.worker.id + "] " + "no http update required");
+            httpCallback([ ], processData, responseCallback);
+            return;
+        }
+
+        var httpResults = [ ],
+            pendingPlayers = [ ];
+
+        var messageHandler = function(msg) {
+            console.log("[WORKER:" + cluster.worker.id + "] " + JSON.stringify(msg));
+            if(msg.type !== "response")
+                return;
+
+            // TODO
+        };
+
+        process.on("message", messageHandler);
+
+        for(var id in procData.rqData) {
+            pendingPlayers.push(id);
+            utils.send({ type: "cmd", cmd: "renewPlayer", id: id });
+        }
+
+        setTimeout(function() {
+            httpCallback(httpResults, processData, responseCallback);
+        }, settings.httpMaxTime);
+
+        //server.removeListener("connection", callback);
     });
 };
 
 var _parseStatRequest = function(ids) {
-    var parsedIds = [ ];
-    var data = { };
+    var parsedIds = [ ],
+        data = { };
+
     ids.forEach(function(a) {
-        var x = a.split("=");
-        var id = parseInt(x[0]);
+        var x = a.split("="),
+            id = parseInt(x[0], 10);
 
         // Skip wrong id and non-working servers
         var servers = utils.getStatServers(id);
         if(servers) {
             parsedIds.push(id);
             data[id] = { vname: x[1] ? x[1].toUpperCase() : null, servers: servers };
-            if(x[2] == "1" && settings.updateUsers == true)
+            if(x[2] === "1" && settings.updateUsers) {
                 db.updateUsers(id);
+            }
         } else {
             data[id] = { vname: x[1] ? x[1].toUpperCase() : null, status: "bad_id" };
         }
@@ -50,11 +77,11 @@ var _parseStatRequest = function(ids) {
     return { ids: parsedIds, data: data };
 };
 
-var httpCallback = function(err, results) {
+var httpCallback = function(results, processData, responseCallback) {
     var now = new Date();
     var result = {
         players: [ ],
-        info: httpPool.info,
+        info: httpInfo,
         server: settings.serverName
     };
 
@@ -115,7 +142,7 @@ var httpCallback = function(err, results) {
         }
 
         // check for correct id
-        var _id = parseInt(id);
+        var _id = parseInt(id, 10);
 
         if(!_id || _id <= 0) {
             res = _prepareFallbackRes(processData.rqData[id], id, "ok");
@@ -172,17 +199,17 @@ var _cacheToResult = function(item) {
 };
 
 var _prepareFallbackRes = function(item, id, status) {
-    id = parseInt(id);
+    id = parseInt(id, 10);
 
     if(!item.cache) {
         process.send({usage: 1, missed: 1});
-        if(settings.updateMissed == true)
+        if(settings.updateMissed)
             db.insertMissed(id, true);
         return {id: id, date: new Date(), status: status};
     }
 
     process.send({usage: 1, updatesFailed: 1});
-    if(settings.updateMissed == true)
+    if(settings.updateMissed)
         db.insertMissed(id, false);
     var res = _cacheToResult(item.cache);
     res.status = status;
@@ -243,4 +270,8 @@ var _parseNewPlayerData = function(id, data) {
     pdata.lvl = parseFloat(pdata.lvl.toFixed(3));
 
     return pdata;
+};
+
+exports.setHttpInfo = function(newHttpInfo) {
+    httpInfo = newHttpInfo;
 };

@@ -1,5 +1,5 @@
-var db = require("../db"),
-    settings = require("../settings").settings;
+var db = require("../worker/db"),
+    settings = require("../settings");
 
 exports.performance = function(req, res) {
 
@@ -29,7 +29,7 @@ exports.performance = function(req, res) {
 
             return {
                 index: index,
-                uptime: (d == 0 ? "" : d + "d") + h + "h" + m,
+                uptime: (d === 0 ? "" : d + "d") + h + "h" + m,
                 requests: item.requests,
                 req_s_now: (item.requests_current / settings.usageStatShowPeriod * 1000).toFixed(),
                 req_s_total: (item.requests / uptime).toFixed(),

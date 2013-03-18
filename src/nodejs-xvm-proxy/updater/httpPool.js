@@ -1,5 +1,5 @@
-var settings = require("./settings").settings,
-    utils = require("./utils");
+var settings = require("./../settings"),
+    utils = require("./../utils");
 
 var serverStatus = [ ];
 

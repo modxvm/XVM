@@ -1,4 +1,4 @@
-var db = require("../db"),
+var db = require("../worker/db"),
     utils = require("../utils");
 
 exports.wn = function(req, res) {

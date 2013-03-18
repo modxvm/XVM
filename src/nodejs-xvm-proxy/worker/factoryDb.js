@@ -1,6 +1,6 @@
 var db = require("./db"),
-    settings = require("./settings").settings,
-    utils = require("./utils");
+    settings = require("./../settings"),
+    utils = require("./../utils");
 
 exports.getPlayersData = function(parsedIds, callback) {
     process.send({ usage: 1, requests: 1, players: parsedIds.ids.length });
@@ -47,7 +47,7 @@ var _onPlayersData = function(processData, callback) {
         // process items with bad id
         for(var rqi in processData.rqData) {
             pdata = processData.rqData[rqi];
-            if(pdata.status == "bad_id") {
+            if(pdata.status === "bad_id") {
                 processData.dbData.push({_id: rqi, st: pdata.status});
                 delete processData.rqData[rqi];
             }
