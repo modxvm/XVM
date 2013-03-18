@@ -100,7 +100,7 @@ class wot.StatisticForm.BattleStatItemRenderer extends net.wargaming.BattleStatI
         col3.condenseWhite = StatData.s_empty;
         
         var pname = Utils.GetNormalizedPlayerName(data.label);
-        Macros.RegisterPlayerData(pname, data);
+        Macros.RegisterPlayerData(pname, data, team);
 
         var key = "SF/" + pname + "/" + (StatData.s_data[pname] ? StatData.s_data[pname].loadstate : "0");
         var saved_icon = data.icon;

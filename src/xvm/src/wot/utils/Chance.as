@@ -36,7 +36,8 @@ class wot.utils.Chance
 
     public static function GetChanceText(showExp:Boolean) : String
     {
-        var teamsCount: Object = CalculateTeamPlayersCount();
+        var teamsCount:Object = CalculateTeamPlayersCount();
+        //Logger.addObject(teamsCount);
         // only equal and non empty team supported
         if (teamsCount.ally == 0 || teamsCount.enemy == 0)
             return "";
@@ -85,18 +86,18 @@ class wot.utils.Chance
             var vi1 = VehicleInfo.getInfo1(pdata.icon);
             if (!vi1) {
                 var vn = VehicleInfo.getVehicleName(pdata.icon);
-                if (vn == "ussr-Observer")
+                if (vn == "ussr-Observer" || vn == "noImage")
                     continue;
                 return { error: "[1] No data for: " + vn };
             }
 
             var vi2 = VehicleInfo.getInfo2(pdata.icon);
             if (!vi2)
-              return { error: "[2] No data for: " + VehicleInfo.getVehicleName(pdata.icon) };
+                return { error: "[2] No data for: " + VehicleInfo.getVehicleName(pdata.icon) };
 
             var vi3 = VehicleInfo.getInfo3(VehicleInfo.getName3(pdata.icon));
             //if (!vi3)
-            //  return { error: "[3] No data for: " + VehicleInfo.getVehicleName(pdata.icon) };
+            //    return { error: "[3] No data for: " + VehicleInfo.getVehicleName(pdata.icon) };
 
             var K = chanceFunc(vi1, vi2, vi3, pdata.team, pdata.stat, (pdata.vehicleState & 1) == 0);
 
@@ -169,7 +170,7 @@ class wot.utils.Chance
         var Rt = stat.tr || 0;
         var AvgW = vi3 && vi3.b > 0 ? vi3.w / vi3.b * 100 : 49.5;
         var Ea = stat.xwn == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn;
-		var Ean = Ea + (Ea * (((stat.avglvl || T) - T) * 0.05));
+        var Ean = Ea + (Ea * (((stat.avglvl || T) - T) * 0.05));
         var Ra = stat.r || Config.s_config.consts.AVG_GWR;
         var Ba = stat.b || Config.s_config.consts.AVG_BATTLES;
 
@@ -252,7 +253,7 @@ class wot.utils.Chance
         var Rt = stat.tr || 0;
         var AvgW = vi3 && vi3.b > 0 ? vi3.w / vi3.b * 100 : 49.5;
         var Ea = stat.xwn == null ? Config.s_config.consts.AVG_XVMSCALE : stat.xwn;
-		var Ean = Ea + (Ea * (((stat.avglvl || T) - T) * 0.05));
+        var Ean = Ea + (Ea * (((stat.avglvl || T) - T) * 0.05));
         var Ra = stat.r || Config.s_config.consts.AVG_GWR;
         var Ba = stat.b || Config.s_config.consts.AVG_BATTLES;
 
@@ -370,15 +371,15 @@ class wot.utils.Chance
 
     private static function FormatChangeText(txt, chance)
     {
-      var htmlText = (txt && txt != "") ? txt + ": " : "";
-      if (!chance)
-        htmlText += "xx%";
-      else
-      {
-        var color = GraphicsUtil.brightenColor(GraphicsUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, chance.raw), 50);
-        htmlText += "<font color='#" + color.toString(16) + "'>" + chance.percent + "%</font>";
-      }
+        var htmlText = (txt && txt != "") ? txt + ": " : "";
+        if (!chance)
+            htmlText += "xx%";
+        else
+        {
+            var color = GraphicsUtil.brightenColor(GraphicsUtil.GetDynamicColorValueInt(Defines.DYNAMIC_COLOR_RATING, chance.raw), 50);
+            htmlText += "<font color='#" + color.toString(16) + "'>" + chance.percent + "%</font>";
+        }
 
-      return htmlText;
+        return htmlText;
     }
 }

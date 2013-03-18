@@ -43,6 +43,10 @@ class wot.utils.Locale
         // RU
         tr = _translations["RU"];
 
+        // common
+        tr["enabled"] = "включено";
+        tr["disabled"] = "выключено";
+        
         // win chance
         tr["Chance error"] = "Ошибка расчета шансов";
         tr["Chance to win"] = "Шанс на победу";
@@ -78,6 +82,7 @@ class wot.utils.Locale
             "Чтобы увидеть более подробную информацию, наведите курсор мыши на значение рейтинга интересующего игрока.";
         tr["Friend"] = "Друг";
         tr["Ignored"] = "Игнор";
+        tr["Load statistics"] = "Загрузить статистику";
 
         // UserInfo
         tr["UserInfoEHint"] =
@@ -104,8 +109,8 @@ class wot.utils.Locale
         tr["Wins"] = "Побед";
 
         // crew
-        tr["PutOwnCrew"] = "Основной экипаж";
-        tr["PutBestCrew"] = "Лучший экипаж";
+        tr["PutOwnCrew"] = "Экипаж по специализации";
+        tr["PutBestCrew"] = "Экипаж по навыкам";
     }
 
     public static function setRegion(value: String)

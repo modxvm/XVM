@@ -4,6 +4,7 @@
 import com.greensock.OverwriteManager;
 import com.greensock.plugins.*;
 import wot.utils.Config;
+import wot.utils.Defines;
 import wot.utils.GlobalEventDispatcher;
 import wot.utils.Logger;
 import wot.utils.Macros;
@@ -141,9 +142,8 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
                 level: m_level,
                 turret: turretStatusComponent.getMarker(),
                 vtype: Utils.vehicleClassToVehicleType(vClass),
-                maxHealth: m_maxHealth,
-                team: proxy.m_team
-            });
+                maxHealth: m_maxHealth
+            }, proxy.m_team == "ally" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
 
         // Create clan icon and place to mc.
         clanIconComponent.initialize(proxy);

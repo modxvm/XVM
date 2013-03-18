@@ -53,7 +53,7 @@ class wot.utils.Macros
     /**
      * @param pname !!!NORMALIZED player name (Utils.GetNormalizedPlayerName(playerName))!!!
      */
-    public static function RegisterPlayerData(pname:String, data:Object)
+    public static function RegisterPlayerData(pname:String, data:Object, team:Number)
     {
         if (!data)
             return;
@@ -71,7 +71,7 @@ class wot.utils.Macros
                 //Logger.addObject(data);
                 StatData.s_data[pname].vehicleKey = VehicleInfo.getInfo2(data.icon).name.toUpperCase();
                 StatData.s_data[pname].loadstate = Defines.LOADSTATE_NONE;
-                GlobalEventDispatcher.dispatchEvent( { type: "process_fow", data: data } );
+                GlobalEventDispatcher.dispatchEvent( { type: "process_fow", data: data, team: team } );
             }
         }
 

@@ -1,5 +1,4 @@
 import wot.PlayersPanel.PlayersPanel;
-import wot.utils.Logger;
 import wot.utils.GlobalEventDispatcher;
 import wot.Minimap.MinimapEvent;
 

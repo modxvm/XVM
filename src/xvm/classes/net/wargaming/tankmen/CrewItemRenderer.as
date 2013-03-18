@@ -3,5 +3,4 @@
     var onMouseDownFunc;
     var data;
     var _disabled;
-    function close();
 }

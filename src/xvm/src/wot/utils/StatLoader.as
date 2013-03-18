@@ -332,7 +332,7 @@ class wot.utils.StatLoader
         if (StatData.s_data[pname] && StatData.s_data[pname].loadstate != Defines.LOADSTATE_NONE)
             return;
 
-        AddPlayerData(data, data.team == "team1" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
+        AddPlayerData(data, event.team);
 
         var timer = _global.setTimeout(function() { StatLoader.StartLoadData(); }, 50);
     }

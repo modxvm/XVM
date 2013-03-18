@@ -297,8 +297,8 @@ class wot.utils.Utils
         return style;
     }
 	
-	// Duplicate text field
-	public static function duplicateTextField(mc, name, textField, yOffset, align)
+    // Duplicate text field
+    public static function duplicateTextField(mc, name, textField, yOffset, align)
     {
         var res:TextField = mc.createTextField("name", mc.getNextHighestDepth(),
             textField._x, textField._y + yOffset, textField._width, textField._height);
@@ -311,6 +311,61 @@ class wot.utils.Utils
             tf.color, tf.font, tf.size, align, tf.bold, tf.italic));
 
         return res;
+    }
+
+    public static function createButton(mc:MovieClip, name, x, y, txt, align:String):MovieClip
+    {
+        var b:MovieClip = mc.attachMovie("Button", name, mc.getNextHighestDepth());
+        b._x = x;
+        b._y = y;
+        b.autoSize = true;
+        b.label = txt;
+
+        if (align == "right")
+            b._x -= Math.round(b.textField.textWidth + 21);
+
+        b.addEventListener("rollOver", onShowTooltip);
+        b.addEventListener("rollOut", onHideTooltip);
+
+        return b;
+    }
+
+    public static function duplicateButton(src:Object, name:String, offsetX:Number, offsetY:Number,
+        text:String, iconSource:String, toolTip:String):MovieClip
+    {
+        var mc = src.duplicateMovieClip(name, 0);
+        mc._x = src._x + offsetX;
+        mc._y = src._y + offsetY;
+        mc._autoSize = true;
+        mc._iconSource = iconSource;
+        mc.tooltipText = toolTip;
+        
+        mc.addEventListener("rollOver", onShowTooltip);
+        mc.addEventListener("rollOut", onHideTooltip);
+
+        mc.configUI();
+
+        return mc;
+    }
+    
+    public static function addEventListeners(obj:Object, target:Object, handlers:Object)
+    {
+        if (!obj || !target || !handlers)
+            return;
+        for (var name in handlers)
+            obj.addEventListener(name, target, handlers[name]);
+    }
+
+    private static function onShowTooltip(e)
+    {
+        var b = e.target;
+        if (b.tooltipText)
+            net.wargaming.managers.ToolTipManager.instance.show(b.tooltipText);
+    }
+
+    private static function onHideTooltip(e)
+    {
+        net.wargaming.managers.ToolTipManager.instance.hide();
     }
 
     // http://www.koreanrandom.com/forum/topic/2625-/

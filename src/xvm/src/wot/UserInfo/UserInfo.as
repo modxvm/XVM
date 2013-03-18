@@ -339,6 +339,7 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         if (lastSort.type)
             sortList(lastSort.type, lastSort.dir);
         //Logger.addObject(lastSort, "", 2);
+        //Logger.addObject(_root, "_root", 2);
     }
 
     private function fixList()
@@ -445,7 +446,7 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
     private function createButtons()
     {
         var hdr:MovieClip = null;
-        var fld = null;
+        var y = 0;
         for (var i in this)
         {
             if (!Utils.startsWith("instance", i))
@@ -455,7 +456,7 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
                 if (Utils.startsWith("instance", j))
                 {
                     hdr = this[i];
-                    fld = this[i][j];
+                    y = this[i][j]._y;
                     this[i][j].text = "";
                 }
             }
@@ -466,11 +467,11 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         if (hdr == null)
             return;
 
-        m_button1 = createButton(hdr, fld, "bLvl", 10, Locale.get("Level"), "left", 1);
-        m_button2 = createButton(hdr, fld, "bTyp", 124, Locale.get("Type"), "right", 1);
-        m_button3 = createButton(hdr, fld, "bNat", 135, Locale.get("Nation"), "left", 2);
-        m_button4 = createButton(hdr, fld, "bNam", 200, Locale.get("Name"), "left", 2);
-        m_button5 = createButton(hdr, fld, "bEff", 305, "E", "right", 1);
+        m_button1 = createButton(hdr, "bLvl", 10,  y, Locale.get("Level"), "left", 1);
+        m_button2 = createButton(hdr, "bTyp", 124, y, Locale.get("Type"), "right", 1);
+        m_button3 = createButton(hdr, "bNat", 135, y, Locale.get("Nation"), "left", 2);
+        m_button4 = createButton(hdr, "bNam", 200, y, Locale.get("Name"), "left", 2);
+        m_button5 = createButton(hdr, "bEff", 305, y, "E", "right", 1);
         // FIXIT: Disabled until WG will provide correct per-vehicle stat
         m_button5._visible = false;
         if (Config.s_config.rating.showPlayersStatistics != true || Config.s_config.rating.enableUserInfoStatistics != true)
@@ -478,27 +479,20 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
             m_button5.enabled = false;
             m_button5._alpha = 30;
         }
-        m_button6 = createButton(hdr, fld, "bBat", 365, Locale.get("Fights"), "right", 1);
-        m_button7 = createButton(hdr, fld, "bWin", 435, Locale.get("Wins"), "right", 1);
-        m_button8 = createButton(hdr, fld, "bMed", 440, "M", "left", 1);
+        m_button6 = createButton(hdr, "bBat", 365, y, Locale.get("Fights"), "right", 1);
+        m_button7 = createButton(hdr, "bWin", 435, y, Locale.get("Wins"), "right", 1);
+        m_button8 = createButton(hdr, "bMed", 440, y, "M", "left", 1);
     }
 
-    private function createButton(hdr:MovieClip, fld, name, x, txt, align, defaultSort):MovieClip
+    private function createButton(hdr:MovieClip, name, x, y, txt, align, defaultSort):MovieClip
     {
-        var b:MovieClip = hdr.attachMovie("Button", name, hdr.getNextHighestDepth());
-        b._x = x;
-        b._y = fld._y;
-        b.addEventListener("click", this, "onSortClick");
-        b.addEventListener("stateChange", this, "onButtonStateChangeClick");
-        b.addEventListener("rollOver", this, "onShowTooltip");
-        b.addEventListener("rollOut", this, "onHideTooltip");
+        var b = Utils.createButton(hdr, name, x, y, txt, align);
+        Utils.addEventListeners(b, this, {
+            click: "onSortClick",
+            stateChange: "onButtonStateChangeClick"
+        });
+            
         b.group = "sort";
-        b.autoSize = true;
-        b.label = txt;
-
-        if (align == "right")
-            b._x -= Math.round(b.textField.textWidth + 21);
-
         b.defaultSort = defaultSort;
         b.sortDir = 0;
         if (name == lastSort.name)
@@ -515,7 +509,7 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         var b = e.target;
         b.selected = true;
         b.sortDir = !b.sortDir ? b.defaultSort : b.sortDir == 2 ? 1 : 2;
-        onHideTooltip(e);
+        net.wargaming.managers.ToolTipManager.instance.hide();
         onButtonStateChangeClick(e);
 
         var sortType = b == m_button1 ? [ "level", "nation", "name" ]
@@ -574,17 +568,5 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
             b.sortDir = 0;
             b.textField.textColor = 0xF2F1E1;
         }
-    }
-
-    private function onShowTooltip(e)
-    {
-        var b = e.target;
-        if (b.tooltipText)
-            net.wargaming.managers.ToolTipManager.instance.show(b.tooltipText);
-    }
-
-    private function onHideTooltip(e)
-    {
-        net.wargaming.managers.ToolTipManager.instance.hide();
     }
 }

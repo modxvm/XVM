@@ -2,9 +2,11 @@
 import wot.utils.Cache;
 import wot.utils.Config;
 import wot.utils.GlobalEventDispatcher;
+import wot.utils.Locale;
 import wot.utils.Logger;
 import wot.utils.Utils;
 import wot.Helpers.TeamRendererHelper;
+import wot.Helpers.UserDataLoaderHelper;
 
 class wot.TeamRenderer.TeamRenderer extends net.wargaming.messenger.controls.TeamRenderer
 {
@@ -69,7 +71,29 @@ class wot.TeamRenderer.TeamRenderer extends net.wargaming.messenger.controls.Tea
         }
         m_effField.htmlText = "";
 
+        var updateButton = this["owner"]._parent.updateButton;
+        if (updateButton == null)
+        {
+            //Logger.add("updateButton");
+            updateButton = Utils.duplicateButton(this["owner"]._parent.refreshButton, "updateButton", 135, 0, "", "icons/allUp.tga");
+            updateButton.toggle = true;
+            updateButton.addEventListener("select", function(e) {
+                updateButton._iconSource = e.selected ? "icons/allDown.tga" : "icons/allUp.tga";
+                updateButton.tooltipText = Locale.get("Load statistics") + ": " + Locale.get(e.selected ? "enabled" : "disabled");
+                updateButton._autoSize = false; // WG bug 
+                updateButton.configUI();
+            });
+            updateButton.selected = false;
+            updateButton.tooltipText = Locale.get("Load statistics") + ": " + Locale.get("disabled");
+        }
+        updateButton.addEventListener("click", this, "onUpdateClick");
+        
         afterSetDataXVM();
+    }
+
+    private function onUpdateClick()
+    {
+        UserDataLoaderHelper.LoadUserData(m_name, false);
     }
 
     // override
@@ -97,8 +121,8 @@ class wot.TeamRenderer.TeamRenderer extends net.wargaming.messenger.controls.Tea
             stat = null;
             m_effField.htmlText = "";
             GlobalEventDispatcher.addEventListener("userdata_cached", this, setXVMStat);
-            // Disabled because of slow loading and client freezing.
-            //UserDataLoaderHelper.LoadUserData(m_name, false);
+            if (this["owner"]._parent.updateButton != null && this["owner"]._parent.updateButton.selected)
+                onUpdateClick();
         }
     }
 
