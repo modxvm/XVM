@@ -1,3 +1,6 @@
+XVM-3.5.0-test3:
+  * bugs fixed
+
 XVM-3.5.0-test2:
   * capture bar: tweak
   * minimap: zoom minimap by key pressing; see sections "minimap":{"zoom" and "hotkeys":{ at XVM.xvmconf

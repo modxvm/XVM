@@ -6,7 +6,6 @@ import net.wargaming.controls.UILoaderAlt;
 import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.IconLoader;
-import wot.utils.Macros;
 import wot.utils.PlayerInfo;
 import wot.utils.Utils;
 
@@ -65,13 +64,6 @@ class wot.PlayersPanel.PlayerListItemRenderer extends net.wargaming.ingame.Playe
         }
 
         return super.__getColorTransform(schemeName);
-    }
-
-    // override
-    function setData(data)
-    {
-        super.setData(data);
-        Macros.RegisterPlayerData(Utils.GetNormalizedPlayerName(data.label), data, team);
     }
 
     // override

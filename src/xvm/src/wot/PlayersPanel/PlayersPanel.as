@@ -101,6 +101,15 @@ class wot.PlayersPanel.PlayersPanel extends net.wargaming.ingame.PlayersPanel
             m_list["invalidateData2"] = m_list["invalidateData"];
         }
 
+        if (data)
+        {
+            for (var i in data)
+            {
+                Macros.RegisterPlayerData(Utils.GetNormalizedPlayerName(data[i].label), data[i],
+                    m_type == "left" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
+            }
+        }
+
         // [2/3] fix WG bug - this function is slow, don't call it if not required.
         m_list["invalidateData"] = function() {}
 
