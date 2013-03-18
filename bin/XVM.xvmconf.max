@@ -23,6 +23,9 @@
     "enableUserInfoStatistics": true,
     "enableCompanyStatistics": true
   },
+  "hotkeys": {
+    "minimapZoom": { "enabled": true, "onHold": true, "keyCode": 17 }
+  },
   "battleLoading": {
     "showChances": true,
     "showChancesExp": true,

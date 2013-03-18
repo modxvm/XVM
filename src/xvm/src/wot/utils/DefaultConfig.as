@@ -85,7 +85,7 @@ class wot.utils.DefaultConfig
                 enableCompanyStatistics: true    // Enable statistics in the company window
             },
             hotkeys: {
-                minimapZoom: { enabled: true, onHold: false, keyCode: 17 } // 17 - Ctrl
+                minimapZoom: { enabled: false, onHold: true, keyCode: 17 } // 17 - Ctrl
                 /*
                 minimapExtended: { enabled: true, onHold: true, keycode: 16 } // 16 - Alt?
                 messages: [
