@@ -74,27 +74,45 @@ class wot.crew.CrewLoader
      */
     private static function CheckBest(actualTankman:Object, bestTankman:Object, theTank:Object):Boolean
     {
+		//No bestTankman : select first tankman met
         if (bestTankman == null)
             return true;
 
         var current = getPenality(actualTankman, theTank);
         var best = getPenality(bestTankman, theTank);
-
+		
+		//CASE 1 : bestTankman is better than actual
+		//conserve the bestTankman
         if (best > current)
             return false;
+			
+		//CASE 2 : bestTankman's capacity is equal with the actualTankman's skill
+		//Need deeper analysis
+        else if (best == current)
+		{
+			//CASE 2.1 : bestTankman has more skills than actualTankman
+			//conserve the bestTankman
+			if (bestTankman["skills"].length > actualTankman["skills"].length)
+				return false;
+			
+			//CASE 2.2 : bestTankman has less skills than actualTankman
+			//select the actualTankman
+			if (bestTankman["skills"].length < actualTankman["skills"].length)
+				return true;
+			
+			//CASE 2.3 : bestTankman has the same number of skills that the actualTankman
+			//if the bestTankman's lastskilllevel is < that actualTankman's
+			//select the actualTankman
+			if (bestTankman["lastSkillLevel"] < actualTankman["lastSkillLevel"])
+				return true;
+			
+		}
+		//CASE 3 : actual tankman is better than bestTankman
+		//select the actualTankman
+        else if (best < current)
+            return true;
         
-        if (best < current)
-            return true;
-
-        if (bestTankman["skills"].length > actualTankman["skills"].length)
-            return false;
-
-        if (bestTankman["skills"].length < actualTankman["skills"].length)
-            return true;
-
-        if (bestTankman["lastSkillLevel"] < actualTankman["lastSkillLevel"])
-            return true;
-        
+			
         return false;
     }
     
