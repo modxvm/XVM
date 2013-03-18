@@ -37,8 +37,8 @@ class wot.utils.Locale
             "To see detailed information, move mouse cursor to the player's name.";
 
         // crew
-        tr["PutOwnCrew"] = "Put own crew";
-        tr["PutBestCrew"] = "Put best crew";
+        tr["PutOwnCrew"] = "Put crew by competence";
+        tr["PutBestCrew"] = "Put crew by skills";
 
         // RU
         tr = _translations["RU"];
