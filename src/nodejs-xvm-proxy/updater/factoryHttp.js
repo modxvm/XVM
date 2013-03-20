@@ -1,5 +1,4 @@
-var async = require("async"),
-    http,
+var http,
     httpPool = require("./httpPool"),
     initialized = false;
 
@@ -11,43 +10,7 @@ exports.ctor = function(fakeHttp) {
     http = fakeHttp || require("http");
 };
 
-exports.processRemotes = function(processData, httpCallback) {
-    // FIXIT: why this don't work?
-    //    for (var id in processData.rqData) ...
-    // symptoms: makeSingleRequest args are wrong (always the last item values)
-    var urls = { },
-        up = [ ];
-
-    for(var id in processData.rqData)
-        up.push(id);
-    up.forEach(function(id) {
-        var pdata = processData.rqData[id];
-        var srv = httpPool.getFreeConnection(pdata.servers);
-
-        if(srv.error) {
-            if(pdata.cache)
-                pdata.cache.st = srv.error;
-            else
-                pdata.cache = {_id: id, st: srv.error};
-            processData.dbData[id] = pdata.cache;
-            delete processData.rqData[id];
-
-            process.send({usage: 1, max_conn: 1});
-
-            return;
-        }
-
-        delete pdata.servers;
-        pdata.server = srv;
-        urls[id] = function(callback) {
-            _makeSingleRequest(id, srv, callback);
-        }
-    });
-
-    async.parallel(urls, httpCallback);
-};
-
-var _makeSingleRequest = function(id, server, callback) {
+exports.makeSingleRequest = function(id, server, callback) {
     var options = server.options;
 
     options.path = [(options.path || ""), "/uc/accounts/", id, "/api/", server.api, "/?source_token=Intellect_Soft-WoT_Mobile-unofficial_stats"].join("");
@@ -66,7 +29,7 @@ var _makeSingleRequest = function(id, server, callback) {
 
     process.send({usage: 1, serverId: server.id, connections: 1});
     http.get(options,function(res) {
-        if(res.statusCode != 200) {
+        if(res.statusCode !== 200) {
             clearTimeout(reqTimeout);
             if(done)
                 return;
@@ -92,7 +55,7 @@ var _makeSingleRequest = function(id, server, callback) {
                 var result = JSON.parse(responseData);
             } catch(e) {
                 var str;
-                if(responseData[0] != "{")
+                if(responseData[0] !== "{")
                     str = "(binary)";
                 else {
                     str = responseData.replace(/[ \t\n\r\x00-\x1F]/g, "");

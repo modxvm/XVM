@@ -1,4 +1,4 @@
-var db = require("./db"),
+var db = require("./../db"),
     settings = require("./../settings"),
     utils = require("./../utils");
 
@@ -31,8 +31,8 @@ var _onPlayersData = function(processData, callback) {
             item.v = utils.filterVehicleData(item, pdata.vname);
 
             if((now - item.dt) < settings.cacheTtl) {
-                if(settings.fixData)
-                    _recalculateMissed(item);
+                /*if(settings.fixData)
+                    _recalculateMissed(item);*/
 
                 item.st = "cache";
                 // remove cached item from request
@@ -98,6 +98,7 @@ var _recalculateMissed = function(data) {
 
     // updating db
     if(ok && Math.floor(Math.random() * 1) === 0) {
+        console.log("HERE2!!!");
         db.updatePlayersData(data._id, data);
     }
 };

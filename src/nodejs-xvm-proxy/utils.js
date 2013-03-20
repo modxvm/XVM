@@ -1,5 +1,5 @@
 var cluster = require('cluster'),
-    db = require("./worker/db"),
+    db = require("./db"),
     settings = require("./settings"),
     tcalc = require("./tcalc/tcalc");
 

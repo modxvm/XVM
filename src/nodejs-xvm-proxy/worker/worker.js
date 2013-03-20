@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 
-var db = require("./db"),
+var db = require("./../db"),
     express = require("express"),
     generic = require("./../routes/generic"),
     command = require("./../routes/command"),
@@ -27,7 +27,7 @@ app.configure(function() {
 });
 
 app.configure("development", function() {
-    app.use(express.logger("dev"));
+    app.use(express.logger());
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 

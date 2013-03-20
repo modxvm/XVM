@@ -1,13 +1,17 @@
-var cluster = require('cluster');
+var cluster = require("cluster"),
+    factoryHttp = require("./factoryHttp"),
+    httpPool = require("./httpPool");
 
-var queue = [],
+var queue = [ ],
     queue_process_counter = 0,
     process_now = false;
 
+factoryHttp.ctor();
+
 var processQueue = function() {
-    queue_process_counter = (queue_process_counter + 1) % 100;
+    /*queue_process_counter = (queue_process_counter + 1) % 100;
     if(queue_process_counter !== 0 && !process_now)
-        return;
+        return;*/
     process_now = false;
     queue_process_counter = 0;
     if(queue.length === 0)
@@ -16,8 +20,23 @@ var processQueue = function() {
     console.log("[UPDATER:" + cluster.worker.id + "] processQueue");
     while(queue.length > 0) {
         var msg = queue.shift();
-        if(msg.cmd == "update")
-            process.send({cmd: "update_done", src: msg.src, data: { id: msg.id, name: "XXX" }});
+
+        if(msg.cmd === "update") {
+            var server = httpPool.getFreeConnection(msg.rqData.servers);
+
+            if(server.error) {
+                // TODO
+                return;
+            }
+            factoryHttp.makeSingleRequest(msg.id, server, function(error, result) {
+                if(error) {
+                    // TODO
+                    return;
+                }
+
+                process.send({type: "cmd", cmd: "update_done", src: msg.src, id: msg.id, data: result});
+            });
+        }
     }
 };
 

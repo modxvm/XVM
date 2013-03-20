@@ -1,5 +1,5 @@
 var cluster = require("cluster"),
-    db = require("./db"),
+    db = require("./../db"),
     factoryDb = require("./factoryDb"),
     settings = require("./../settings"),
     utils = require("./../utils");
@@ -22,34 +22,46 @@ exports.generic = function(ids, callback) {
         }
 
         if(!Object.keys(procData.rqData).length) {
-            console.log("[WORKER:" + cluster.worker.id + "] " + "no http update required");
-            httpCallback([ ], processData, responseCallback);
+            console.log("[WORKER:" + cluster.worker.id + "] " + JSON.stringify(processData));
+            httpCallback({ }, processData, responseCallback);
             return;
         }
 
-        var httpResults = [ ],
-            pendingPlayers = [ ];
+        var httpResults = { },
+            pendingPlayers = [ ],
+            httpTimeout;
 
         var messageHandler = function(msg) {
-            console.log("[WORKER:" + cluster.worker.id + "] " + JSON.stringify(msg));
-            if(msg.type !== "response")
+            //console.log("[WORKER:" + cluster.worker.id + "] " + JSON.stringify(msg));
+            if(msg.cmd !== "update_done")
                 return;
 
-            // TODO
+            var indexOfPlayer = pendingPlayers.indexOf(msg.id);
+//console.log("[WORKER:" + cluster.worker.id + "] " + pendingPlayers, indexOfPlayer);
+            if(indexOfPlayer === -1)
+                return;
+
+            pendingPlayers.splice(indexOfPlayer, 1);
+            httpResults[msg.id] = msg.data;
+
+            if(pendingPlayers.length === 0) {
+                clearTimeout(httpTimeout);
+                process.removeListener("message", messageHandler);
+                httpCallback(httpResults, processData, responseCallback);
+            }
         };
 
         process.on("message", messageHandler);
 
         for(var id in procData.rqData) {
             pendingPlayers.push(id);
-            utils.send({ type: "cmd", cmd: "renewPlayer", id: id });
+            utils.send({ type: "cmd", cmd: "update", id: id, rqData: procData.rqData[id] });
         }
 
-        setTimeout(function() {
+        httpTimeout = setTimeout(function() {
+            process.removeListener("message", messageHandler);
             httpCallback(httpResults, processData, responseCallback);
         }, settings.httpMaxTime);
-
-        //server.removeListener("connection", callback);
     });
 };
 
@@ -95,6 +107,7 @@ var httpCallback = function(results, processData, responseCallback) {
 
     // process retrieved items
     for(var id in processData.rqData) {
+        console.log("ALARM!!!! processData.rqData", processData.rqData);
         var item = results[id];
 
         if(!item) {
@@ -154,6 +167,7 @@ var httpCallback = function(results, processData, responseCallback) {
         var pdata = _parseNewPlayerData(_id, item.data);
 
         // updating db
+        console.log("HERE1!!!");
         db.updatePlayersData(_id, pdata);
         process.send({usage: 1, updated: 1});
 

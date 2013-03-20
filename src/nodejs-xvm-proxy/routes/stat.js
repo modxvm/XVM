@@ -1,4 +1,4 @@
-var db = require("../worker/db"),
+var db = require("../db"),
     settings = require("../settings");
 
 exports.performance = function(req, res) {

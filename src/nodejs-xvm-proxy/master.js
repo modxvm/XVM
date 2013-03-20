@@ -1,7 +1,7 @@
 //////////////////////////////
 // Master thread
 var cluster = require("cluster"),
-    db = require("./worker/db"),
+    db = require("./db"),
     http = require("http"),
     settings = require("./settings"),
     utils = require("./utils");
@@ -78,9 +78,14 @@ var messageHandler = function(msg) {
 
 var processCommand = function(command) {
     switch(command.cmd) {
-        case "renewPlayer":
-            updater.send(command.id);
+        case "update":
+            updater.send(command);
             break;
+        case "update_done":
+            cluster.workers[command.src].send(command);
+            break;
+        default:
+            console.log("[MASTER] unhandled command " +command);
     }
 };
 

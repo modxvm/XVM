@@ -1,7 +1,7 @@
 var cluster = require("cluster"),
     mongodb,
-    settings = require("./../settings"),
-    utils = require("./../utils");
+    settings = require("./settings"),
+    utils = require("./utils");
 
 var options = {
         auto_reconnect: true,
@@ -137,6 +137,7 @@ var _executeDbQuery = function(cursor, callback) {
 };
 
 exports.updatePlayersData = function(id, data) {
+    console.log("UPDATE : " + JSON.stringify(data));
     players.update({ _id: id }, data, { upsert: true });
 };
 
