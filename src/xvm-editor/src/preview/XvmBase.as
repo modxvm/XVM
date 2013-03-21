@@ -268,7 +268,7 @@ public class XvmBase
     public function createTextField(cfg:Object):TextField
     {
         var textField: TextField = new TextField();
-        textField.width = 140;
+        //textField.width = 140;
         textField.height = 100;
 
 		textField.selectable = false;
@@ -276,6 +276,8 @@ public class XvmBase
         textField.multiline = true;
         textField.wordWrap = false;
 
+		textField.autoSize = cfg.font.align;
+		
 		textField.embedFonts = !cfg.font || !cfg.font.name || cfg.font.name == "$FieldFont";
 
         //textField.html = true;
