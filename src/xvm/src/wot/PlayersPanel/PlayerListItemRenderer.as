@@ -2,7 +2,9 @@
  * ...
  * @author sirmax2
  */
+import wot.utils.Logger;
 import net.wargaming.controls.UILoaderAlt;
+import wot.PlayersPanel.SpotStatusView;
 import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.IconLoader;
@@ -17,16 +19,20 @@ class wot.PlayersPanel.PlayerListItemRenderer extends net.wargaming.ingame.Playe
     var m_iconset: IconLoader = null;
     var m_iconLoaded: Boolean = false;
 
+    var spotStatusView:SpotStatusView;
+
     function PlayerListItemRenderer()
     {
         super();
+        
+        Logger.add("this.owner._itemRenderer " + this.owner._itemRenderer);
+        if (team == Defines.TEAM_ENEMY)
+        {
+            Logger.add("Rend: team " + team);
+            spotStatusView = new SpotStatusView(this);
+        }
 
         Utils.TraceXvmModule("PlayerListItemRenderer");
-    }
-
-    private function get team(): Number
-    {
-        return (this.owner._itemRenderer == "LeftItemRendererIcon") ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
     }
 
     function completeLoad()
@@ -82,8 +88,10 @@ class wot.PlayersPanel.PlayerListItemRenderer extends net.wargaming.ingame.Playe
             // Player/clan icons
             attachClanIconToPlayer(data);
             
-            // Hidden enemy icon
-            fadeHiddenEnemyIcon(data);
+            if (spotStatusView) /** spotStatusView == null is panel is allied */
+            {
+                spotStatusView.tryCreateSpotMarker();
+            }
         }
 
         if (Config.s_config.playersPanel.removeSquadIcon && squadIcon)
@@ -111,22 +119,12 @@ class wot.PlayersPanel.PlayerListItemRenderer extends net.wargaming.ingame.Playe
         m_clanIcon["holder"]._alpha = ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0) ? 100 : 50;
     }
     
-    /**
-     * Revealed enemies feature.
-     * 
-     * This method sets all enemies semitransparent.
-     * Enemies transparency will be set back to 100
-     * when one is revealed atleast once.
-     */
-    private function fadeHiddenEnemyIcon(data):Void
+    private function get team(): Number
     {
-        var cfg = Config.s_config.playersPanel.hiddenEnemy;
-        
-        if (!cfg.enabled || team != Defines.TEAM_ENEMY)
-            return;
-        
-        this._alpha = cfg.alpha;
-
-        //if ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0);
+        if (this.owner._itemRenderer == undefined)
+        {
+            Logger.add("## PlayerListItemRenderer ERROR: this.owner._itemRenderer == undefined");
+        }
+        return (this.owner._itemRenderer == "LeftItemRendererIcon") ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
     }
 }

@@ -380,7 +380,7 @@
     },
     "lines": { // Only for owned vehicle.
        // Works only with xvm-stat.exe if locale is not RU, EN or CH
-       "enabled": true,
+       "enabled": false,
        // "inmeters": true  - make line size to be in real map meters.
        // "inmeters": false - make line size to be in minimap interface clip points. Minimap interface clip side is 210 points.
        // Distance between farthest corners at 1km map is somewhat more than 1400 meters.

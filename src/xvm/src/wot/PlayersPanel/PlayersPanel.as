@@ -1,7 +1,7 @@
 ﻿/**
  * @author sirmax2, ilitvinov87
  */
-import wot.PlayersPanel.EnemyRevealed;
+import wot.PlayersPanel.SpotStatusModel;
 import wot.utils.Cache;
 import wot.utils.Config;
 import wot.utils.Defines;
@@ -30,7 +30,7 @@ class wot.PlayersPanel.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     private var m_knownPlayersCount:Number = 0; // for Fog of War mode.
     private var m_postmortemIndex:Number = 0;
     
-    private var enemyRevealed:EnemyRevealed;
+    private var spotStatusModel:SpotStatusModel;
 
     function PlayersPanel()
     {
@@ -47,7 +47,8 @@ class wot.PlayersPanel.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         /** Enemy revealed marker feature for enemy PlayersPanel */
         if (m_type == "right")
         {
-            enemyRevealed = new EnemyRevealed(this);
+            Logger.add("PP: MTYPE " + m_type );
+            spotStatusModel = new SpotStatusModel(this);
         }
     }
 
@@ -408,13 +409,7 @@ class wot.PlayersPanel.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         return max_height;
     }
 
-    /**
-     * ----------------------------------
-     * Code for Minimap interaction below
-     */
-
-    /** Informs Minimap when both panel are loaded */
-
+    /** Informs Minimap when PlayersPanel is loaded */
     private function checkLoading():Void
     {
         m_list.onEnterFrame = function()

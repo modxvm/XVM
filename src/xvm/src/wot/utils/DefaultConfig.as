@@ -127,9 +127,8 @@ class wot.utils.DefaultConfig
                 // Playes/clan icon parameters.
                 clanIcon: { show: true, x: 0, y: 6, xr: NaN, yr: NaN, h: 16, w: 16, alpha: 90 },
                 // Display options for icons of never seen enemies
-                hiddenEnemy: {
-                  enabled: false,
-                  alpha: 40
+                enemySpottedMarker: {
+                  enabled: false
                 },
                 // Medium1 mode.
                 medium: {
@@ -335,7 +334,7 @@ class wot.utils.DefaultConfig
                   color: "0xFFFFFF"
                 },
                 lines: {
-                  enabled: true,
+                  enabled: false,
                   vehicle: [
                     { enabled: true, from: 50,  to: 100, inmeters: true, thickness: 2,   alpha: 60, color: 0x44EE44},
                     { enabled: true, from: 200, to: 300, inmeters: true, thickness: 1.5, alpha: 45, color: 0x44EE44},
