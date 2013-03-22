@@ -25,8 +25,8 @@ class wot.Minimap.model.externalProxy.MapConfig
             return Config.s_config.hotkeys.minimapZoom.keyCode;        }
         public static function get zoomCentered():Boolean    {
             return minimap.zoom.centered;        }
-        public static function get zoomStepsBack():Number    {
-            return minimap.zoom.stepsBack;        }
+        public static function get zoomPixelsBack():Number    {
+            return minimap.zoom.pixelsBack;        }
    
     /** Labels */
         public static function get nickShrink():Number    {

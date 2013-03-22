@@ -175,7 +175,7 @@ class wot.utils.DefaultConfig
                 cameraAlpha: 100,
                 iconScale: 1,
                 zoom: {
-                  stepsBack: 4,
+                  pixelsBack: 160,
                   centered: true
                 },
                 labels: {

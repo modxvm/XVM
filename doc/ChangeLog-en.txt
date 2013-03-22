@@ -1,3 +1,5 @@
+  * minimap: zoom size memory fixed
+
 XVM-3.5.0-test3:
   * bugs fixed
 

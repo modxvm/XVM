@@ -204,8 +204,8 @@
                                     // Does not affect attached geometry and textfields.
                                     // Floating point allowed: 0.7 1.4.
     "zoom": { // Map zoom by key pressing. Keys are defined at "keys" upper level section
-      "stepsBack": 4,  // Number of zoom steps to get back from maximum size
-      "centered": false // Center zoomed minimap at display center
+      "pixelsBack": 160,  // Number of pixels to get back from maximum size
+      "centered": true // Center zoomed minimap at display center
     },
     "labels": {                     // textfields. Basic HTML\CSS supported.
       "nickShrink": 5,              // Maximum nickname size for {{short-nick}} macro.

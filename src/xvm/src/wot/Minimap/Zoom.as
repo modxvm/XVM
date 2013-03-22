@@ -1,6 +1,5 @@
 import wot.Minimap.Minimap;
 import wot.Minimap.model.externalProxy.MapConfig;
-import wot.utils.Logger;
 
 /**
  * Handles minimap windows zoom and center positioning
@@ -30,8 +29,6 @@ class wot.Minimap.Zoom
          * or switch zoom when key is pressed
          */
         var isKeyDown:Boolean = event.details.value == "keyDown";
-        
-        Logger.addObject(event, "event", 3);
         
         if (MapConfig.zoomHold)
         {
@@ -106,27 +103,12 @@ class wot.Minimap.Zoom
     
     private function increaseSize():Void
     {
-        prevSizeIndex = minimap.m_sizeIndex;
-        
-        /** Set maximum size fitting on screen */
-        while (minimap.height < Stage.height)
-        {
-            minimap.sizeUp();
-        }
-        
-        /**
-         * Decrease size by a few steps.
-         * Client decides number of steps.
-         * Makes maximized map no so huge.
-         */
-        for (var i:Number = MapConfig.zoomStepsBack; i != 0; i--)
-        {
-            minimap.sizeDown();
-        }
+        var side:Number = Stage.height - MapConfig.zoomPixelsBack;
+        minimap.setSize(side, side);
     }
     
     private function restoreSize():Void
     {
-        minimap.setupSize(prevSizeIndex, Stage.height);
+        minimap.setupSize(minimap.m_sizeIndex, Stage.height);
     }
 }
