@@ -5,7 +5,8 @@ import wot.utils.Config;
 import wot.utils.Utils;
 import wot.utils.VehicleInfoData;
 import wot.utils.VehicleInfoData2;
-import wot.utils.VehicleInfoData3;
+import wot.utils.VehicleInfoDataAvg;
+import wot.utils.VehicleInfoDataTop;
 
 class wot.utils.VehicleInfo
 {
@@ -27,13 +28,13 @@ class wot.utils.VehicleInfo
     // icon = "../maps/icons/vehicle/contour/usa-M24_Chaffee.tga"
     public static function getInfo2(icon: String): Object
     {
-        return VehicleInfoData2.data[getName2(icon)] || null;
-    }
-
-    // vehicleName = "usa-M24_Chaffee"
-    public static function getInfo3(vehicleName: String): Object
-    {
-        return VehicleInfoData3.data[vehicleName.split("-").join("_").toLowerCase()] || null;
+        var vn = getName2(icon);
+        var res = VehicleInfoData2.data[vn];
+        if (!res)
+            return null
+        res.avg = VehicleInfoDataAvg.data[vn] || null;
+        res.top = VehicleInfoDataTop.data[vn] || null;
+        return res;
     }
 
     public static function getVehicleNamesData():Object
@@ -78,11 +79,6 @@ class wot.utils.VehicleInfo
         return icon;
     }
 
-    public static function getName3(icon: String): String
-    {
-        return getName2(icon);
-    }
-
     // icon = "../maps/icons/vehicle/contour/usa-M24_Chaffee.tga"
     // return: "usa_M24_Chaffee"
     public static function getName1(icon: String): String
@@ -93,3 +89,4 @@ class wot.utils.VehicleInfo
         return icon;
     }
 }
+

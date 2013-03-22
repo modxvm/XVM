@@ -13,7 +13,7 @@ class wot.utils.VehicleInfoData2
     */
 
     public static var data:Object = {
-        //vname: { level, type, hpstock, hptop, turret, premium, nation, name }
+        //vname: { level, type, hpstock, hptop, turret, premium, nation, name, [avg, top] }
 
         // level 1
         ms_1:                       { level: 1,  type: "LT",  hpstock: 90,   hptop: 100,  turret: 2, premium: 0, nation: "ussr",    name: "MS-1" },

@@ -222,14 +222,14 @@ class wot.utils.StatLoader
         stat.tsb = stat.ts == null || stat.ts < 0 ? null : Math.round(stat.ts / stat.tb * 10) / 10;
         //Logger.addObject(stat);
 
-        var vi3 = VehicleInfo.getInfo3(stat.vn);
-        if (!vi3 || !vi3.cl || !vi3.l)
+        var vi2 = VehicleInfo.getInfo2("/-" + stat.vn + ".");
+        if (!vi2 || !vi2.type || !vi2.level)
         {
             //Logger.add("WARNING: vehicle info (3) missed: " + stat.vn);
             return stat;
         }
 
-        stat.tdv = stat.td == null || stat.td < 0 ? null : Math.round(stat.td / stat.tb / vi3.hp * 10) / 10;
+        stat.tdv = stat.td == null || stat.td < 0 ? null : Math.round(stat.td / stat.tb / vi2.hp * 10) / 10;
 
         var EC = { CD: 3, CF: 1 };
 //        Logger.addObject(stat);
@@ -239,16 +239,16 @@ class wot.utils.StatLoader
         if (EC.CF != null && EC.CF > 0 && (stat.tfb == null || stat.tfb <= 0))
             return stat;
 
-        var dD = stat.tdb - vi3.avgD;
-        var dF = stat.tfb - vi3.avgF;
-        var minD = vi3.avgD * 0.4;
-        var minF = vi3.avgF * 0.4;
-        var d = 1 + dD / (vi3.topD - vi3.avgD);
-        var f = 1 + dF / (vi3.topF - vi3.avgF);
-        var d2 = stat.tdb < vi3.avgD ? stat.tdb / vi3.avgD : d;
-        var f2 = stat.tfb < vi3.avgF ? stat.tfb / vi3.avgF : f;
-        d = stat.tdb < vi3.avgD ? 1 + dD / (vi3.avgD - minD) : d;
-        f = stat.tfb < vi3.avgF ? 1 + dF / (vi3.avgF - minF) : f;
+        var dD = stat.tdb - vi2.avg.D;
+        var dF = stat.tfb - vi2.avg.F;
+        var minD = vi2.avg.D * 0.4;
+        var minF = vi2.avg.F * 0.4;
+        var d = 1 + dD / (vi2.top.D - vi2.avg.D);
+        var f = 1 + dF / (vi2.top.F - vi2.avg.F);
+        var d2 = stat.tdb < vi2.avg.D ? stat.tdb / vi2.avg.D : d;
+        var f2 = stat.tfb < vi2.avg.F ? stat.tfb / vi2.avg.F : f;
+        d = stat.tdb < vi2.avg.D ? 1 + dD / (vi2.avg.D - minD) : d;
+        f = stat.tfb < vi2.avg.F ? 1 + dF / (vi2.avg.F - minF) : f;
 
         d = Math.max(0, d);
         f = Math.max(0, f);

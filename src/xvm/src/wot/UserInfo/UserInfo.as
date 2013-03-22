@@ -134,6 +134,8 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
 
                     // wins
                     arguments[i + 2] = Sprintf.format("%.2f", wins / battles * 100) + "%";
+                    if (data && data.avgR && data.topR)
+                        arguments[i + 2] += " (" + Sprintf.format("%.2f", data.avgR * 100) + " / " + Sprintf.format("%.2f", data.topR * 100) + ")";
                     i += 2;
                     break;
 
@@ -144,6 +146,8 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
 
                 case "survivedBattles":
                     arguments[i + 2] = Sprintf.format("%.2f", extractNumber(arguments[i + 1]) / battles * 100) + "%";
+                    if (data && data.avgU && data.topU)
+                        arguments[i + 2] += " (" + Sprintf.format("%.2f", data.avgU * 100) + " / " + Sprintf.format("%.2f", data.topU * 100) + ")";
                     i += 2;
                     break;
 
@@ -200,9 +204,12 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
                 blocksArea.blockbattleeffect.title.blockName, 0, "left");
             m_statisticsHeaderField._x = 330;
             blocksArea.blockcommon.itembattlesCount.extra._width += 45;
+            blocksArea.blockcommon.itemwins.extra._width += 45;
+            blocksArea.blockcommon.itemlosses.extra._width += 45;
+            blocksArea.blockcommon.itemsurvivedBattles.extra._width += 45;
             blocksArea.blockbattleeffect.itemfrags.extra._width += 45;
             blocksArea.blockbattleeffect.itemdamageDealt.extra._width += 45;
-            //Logger.addObject(blocksArea, "blocksArea", 3);
+            //Logger.addObject(blocksArea.blockcommon, "blocksArea", 1);
         }
 
         setXVMStat1();
@@ -226,6 +233,7 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         }
 
         fixList();
+        list.invalidate();
 
         setXVMStat1();
         setXVMStat2();
@@ -291,7 +299,6 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
             {
                 //Logger.addObject(blocksArea, "blocksArea", 3);
                 //Logger.addObject(data);
-                var vi3 = VehicleInfo.getInfo3(VehicleInfo.getName3(data.icon));
                 var tb = extractNumber(blocksArea.blockcommon.itembattlesCount.value.text);
                 var tw = extractNumber(blocksArea.blockcommon.itemwins.value.text);
                 var td = extractNumber(blocksArea.blockbattleeffect.itemdamageDealt.value.text);
@@ -310,20 +317,21 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
                 stat = StatLoader.CalculateStatValues(stat, true);
                 //Logger.addObject(stat);
 
-                var specD = td / tb / vi3.hp || 0;
+                var specD = td / tb / data.hp || 0;
                 var e_color = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.te);
                 var s2 = "";
                 s2 += "E: " + (!stat.teff ? "-" :
                     "<font color='" + e_color + "'>" + (stat.te < 10 ? stat.te : "X") + "</font> (<font color='" + e_color + "'>" + stat.teff + "</font>)") + "  ";
                 s2 += Locale.get("Spec dmg") + ": " + (!specD ? "-" :
                     "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, specD) + "'>" + Sprintf.format("%.2f", specD) + "</font>") + " ";
-                s2 += "(<font color='#ffc133'>" + (vi3.avgED ? Sprintf.format("%.2f", vi3.avgED) : "-") + "</font>" +
-                    " / <font color='#ffc133'>" + (vi3.topED ? Sprintf.format("%.2f", vi3.topED) : "-") + "</font>)  ";
+                s2 += "(<font color='#ffc133'>" + (data.avgE ? Sprintf.format("%.2f", data.avgE) : "-") + "</font>" +
+                    " / <font color='#ffc133'>" + (data.topE ? Sprintf.format("%.2f", data.topE) : "-") + "</font>)  ";
                 // FIXIT: Disabled until WG will provide correct per-vehicle stat
-                /*s2 += Locale.get("Spotted") + ": " + (!data.tsb ? "-" :
+                s2 += Locale.get("Spotted") + ": " + (!data.tsb ? "-" :
                     "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, data.tsb) + "'>" + Sprintf.format("%.2f", data.tsb) + "</font>") + " ";
                 s2 += "(<font color='#ffc133'>" + (data.avgS ? Sprintf.format("%.2f", data.avgS) : "-") + "</font>" +
-                    " / <font color='#ffc133'>" + (data.topS ? Sprintf.format("%.2f", data.topS) : "-") + "</font>)  ";*/
+                    " / <font color='#ffc133'>" + (data.topS ? Sprintf.format("%.2f", data.topS) : "-") + "</font>)  ";
+                // END FIXIT
                 m_statisticsField2.htmlText = "<span class='xvm_statisticsField'>" + s2 + "</span>";
             }
         }
@@ -385,21 +393,22 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
                 data[i].tsb = stat.ts / stat.tb || 0;
                 data[i].ts = stat.ts || 0;
                 // FIXIT: Disabled until WG will provide correct per-vehicle stat
-                //data[i].e = stat.te || 0;
-                //data[i].teff = stat.teff || 0;
-                var vi3 = VehicleInfo.getInfo3(VehicleInfo.getName3(data[i].icon));
-                if (vi3 != null)
-                {
-                    data[i].hp = vi3.hp;
-                    data[i].avgD = vi3.avgD;
-                    data[i].avgED = vi3.avgED;
-                    data[i].avgF = vi3.avgF;
-                    data[i].avgS = vi3.avgS;
-                    data[i].topD = vi3.topD;
-                    data[i].topED = vi3.topED;
-                    data[i].topF = vi3.topF;
-                    data[i].topS = vi3.topS;
-                }
+                data[i].e = stat.te || 0;
+                data[i].teff = stat.teff || 0;
+                // END FIXIT
+                data[i].hp = vi2.hotop;
+                data[i].avgR = vi2.avg.R;
+                data[i].avgD = vi2.avg.D;
+                data[i].avgE = vi2.avg.E;
+                data[i].avgF = vi2.avg.F;
+                data[i].avgS = vi2.avg.S;
+                data[i].avgU = vi2.avg.U;
+                data[i].topR = vi2.top.R;
+                data[i].topD = vi2.top.D;
+                data[i].topE = vi2.top.E;
+                data[i].topF = vi2.top.F;
+                data[i].topS = vi2.top.S;
+                data[i].topU = vi2.top.U;
             }
         }
 
@@ -473,7 +482,8 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         m_button4 = createButton(hdr, "bNam", 200, y, Locale.get("Name"), "left", 2);
         m_button5 = createButton(hdr, "bEff", 305, y, "E", "right", 1);
         // FIXIT: Disabled until WG will provide correct per-vehicle stat
-        m_button5._visible = false;
+        //m_button5._visible = false;
+        // END FIXIT
         if (Config.s_config.rating.showPlayersStatistics != true || Config.s_config.rating.enableUserInfoStatistics != true)
         {
             m_button5.enabled = false;
