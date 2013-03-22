@@ -108,25 +108,7 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
             super.updateProgress(newPointsVal);
             return;
         }
-        
-        if (newPointsVal == 100)
-        {
-           /**
-            * Full capture reached.
-            *
-            * "TeamBasesPanel.setCaptured(id, title)" function
-            * is overriden with empty behavior to concentrate macro modding at CaptureBar.
-            */
-           
-            /** Called so cap bar is filled completely to 100% */
-            super.updateProgress(newPointsVal);
-            
-            m_titleTF.htmlText = m_macro.getCaptureDoneText();
-            m_timerTF.htmlText = "";
-            
-            return;
-        }
-        
+
         m_capSpeed.calculate(newPointsVal, m_points || m_startPoints);
 
         super.updateProgress(newPointsVal); // modifies m_point;
@@ -137,9 +119,20 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
         m_titleTF.htmlText = m_macro.getPrimaryText();   // Upper text field relative to capture bar
         m_timerTF.htmlText = m_macro.getSecondaryText(); // Lower text field relative to capture bar
     }
-    
+
+    /**
+     * OVERRIDE
+     * Called from TeamBasesPanel.setCaptured, when point becomes fully captured (3-5 seconds after 100 percent).
+     * @param value
+     */
+    function updateTitle(value)
+    {
+        m_titleTF.htmlText = m_macro.getCaptureDoneText();
+        m_timerTF.htmlText = "";
+    }
+
     // -- Private
-    
+
     private function getShadowFilter():Array
     {
         return [new DropShadowFilter(

@@ -57,11 +57,11 @@ class wot.crew.CrewLoader
         return tankmanList;
     }
 
-    private static function CheckOwn(actualCandidate:Object, bestChoice:Object, theTank:Object)
+    private static function CheckOwn(actualTankman:Object, bestTankman:Object, theTank:Object)
     {
-        if (actualCandidate["vehicleType"] != s_defaultCrew[0]["curVehicleName"])
-            return;
-        return CheckBest(actualCandidate, bestChoice, theTank);
+        if (actualTankman["vehicleType"] != s_defaultCrew[0]["curVehicleName"])
+            return false;
+        return CheckBest(actualTankman, bestTankman, theTank);
     }
     
     /**

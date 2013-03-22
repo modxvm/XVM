@@ -40,22 +40,4 @@ class wot.TeamBasesPanel.TeamBasesPanel extends net.wargaming.ingame.TeamBasesPa
             super.add(id, sortWeight, capColor, title, points);
         }
     }
-    
-  /**
-   * Called when point becomes fully captured.
-   */
-   function setCaptured(id, title)
-   {
-       if (CapConfig.enabled)
-       {
-           /**
-            * No need to define behavior. updateProgress() handles full capture.
-            * Leave empty.
-            */
-       }
-       else
-       {
-           super.setCaptured(id, title);
-       }
-   }
 }

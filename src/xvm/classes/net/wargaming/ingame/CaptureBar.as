@@ -5,5 +5,6 @@ intrinsic class net.wargaming.ingame.CaptureBar
     public function CaptureBar();
     function updateProgress(points);
     function stopCapture();
+    function updateTitle(value);
     function configUI();
 }
