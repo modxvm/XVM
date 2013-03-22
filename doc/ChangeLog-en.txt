@@ -1,4 +1,6 @@
+XVM-3.5.0-test4:
   * minimap: zoom size memory fixed
+  * updated per-vehicle statistics data (added new tanks)
 
 XVM-3.5.0-test3:
   * bugs fixed

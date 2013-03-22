@@ -25,10 +25,10 @@ class wot.PlayersPanel.PlayerListItemRenderer extends net.wargaming.ingame.Playe
     {
         super();
         
-        Logger.add("this.owner._itemRenderer " + this.owner._itemRenderer);
+        //Logger.add("this.owner._itemRenderer " + this.owner._itemRenderer);
         if (team == Defines.TEAM_ENEMY)
         {
-            Logger.add("Rend: team " + team);
+            //Logger.add("Rend: team " + team);
             spotStatusView = new SpotStatusView(this);
         }
 
@@ -123,7 +123,7 @@ class wot.PlayersPanel.PlayerListItemRenderer extends net.wargaming.ingame.Playe
     {
         if (this.owner._itemRenderer == undefined)
         {
-            Logger.add("## PlayerListItemRenderer ERROR: this.owner._itemRenderer == undefined");
+            //Logger.add("## PlayerListItemRenderer ERROR: this.owner._itemRenderer == undefined");
         }
         return (this.owner._itemRenderer == "LeftItemRendererIcon") ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
     }

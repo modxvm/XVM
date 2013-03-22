@@ -47,7 +47,7 @@ class wot.PlayersPanel.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         /** Enemy revealed marker feature for enemy PlayersPanel */
         if (m_type == "right")
         {
-            Logger.add("PP: MTYPE " + m_type );
+            //Logger.add("PP: MTYPE " + m_type );
             spotStatusModel = new SpotStatusModel(this);
         }
     }
