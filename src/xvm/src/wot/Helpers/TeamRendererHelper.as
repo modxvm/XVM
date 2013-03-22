@@ -49,24 +49,29 @@ class wot.Helpers.TeamRendererHelper
 
         var s = "";
         // line 1
+        var pname = data.displayName || data.owner;
+        s += Utils.GetPlayerName(pname) + "<font color='#CCCCCC'>" + Utils.GetClanNameWithBrackets(pname) + "</font>";
+        s += "<br>";
+        // line 2
         s += "WN6: " + (!stat.wn ? "--" :
             "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn) + "'>" + (stat.xwn == 100 ? "XX" : (stat.xwn < 10 ? "0" : "") + stat.xwn) + "</font>") + " ";
         s += "(" + (!stat.wn ? "-" :
-            "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, stat.wn) + "'>" + stat.wn + "</font>") + ")\n";
+            "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, stat.wn) + "'>" + stat.wn + "</font>") + ") ";
         s += Locale.get("EFF") + ": " + (!stat.e ? "--" :
             "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff) + "'>" + (stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff) + "</font>") + " ";
         s += "(" + (!stat.e ? "-" :
-            "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.e) + "'>" + stat.e + "</font>") + ") ";
-        // line 2
+            "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, stat.e) + "'>" + stat.e + "</font>") + ")";
+        s += "<br>";
+        // line 3
         s += Locale.get("Fights") + ": " + (!stat.b ? "-" :
             "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, stat.b / 1000) + "'>" + stat.b + "</font>") + " ";
         s += Locale.get("Wins") + ": " + (!stat.r ? "-" :
             "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.r) + "'>" + stat.r + "%</font>") + " ";
         s += "TWR: " + (!stat.twr ? "-" :
-            "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TWR, stat.twr) + "'>" + stat.twr + "%</font>") + "\n";
-        // line 3
+            "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TWR, stat.twr) + "'>" + stat.twr + "%</font>");
+        s += "<br>";
         // line 4
-        s += "<hr>" + Locale.get("Data was updated at") + ": <font color='#CCCCCC'>" + dt + "</font>";
+        s += Locale.get("Data was updated at") + ": <font color='#CCCCCC'>" + dt + "</font>";
 
 /*        if (list.selectedIndex == 0)
         {
