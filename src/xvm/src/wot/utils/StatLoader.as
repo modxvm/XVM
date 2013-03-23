@@ -229,7 +229,7 @@ class wot.utils.StatLoader
             return stat;
         }
 
-        stat.tdv = stat.td == null || stat.td < 0 ? null : Math.round(stat.td / stat.tb / vi2.hp * 10) / 10;
+        stat.tdv = stat.td == null || stat.td < 0 ? null : Math.round(stat.td / stat.tb / vi2.hptop * 10) / 10;
 
         var EC = { CD: 3, CF: 1 };
 //        Logger.addObject(stat);
