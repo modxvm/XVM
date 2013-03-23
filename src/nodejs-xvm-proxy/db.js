@@ -126,10 +126,10 @@ exports.getPlayerByNameId = function(nameId, callback) {
 var _executeDbQuery = function(cursor, callback) {
     var startStamp = new Date();
 
-    process.send({ usage: 1, mongorq: 1 });
+    utils.send({ type: "usage", mongorq: 1 });
 
     cursor.toArray(function(error, result) {
-        process.send({ usage: 1, mongorq: -1 });
+        utils.send({ type: "usage", mongorq: -1 });
         updateDbBalancer(startStamp);
 
         callback(error ? { statusCode: 500, text: error } : undefined, result);
@@ -174,7 +174,7 @@ var updateDbBalancer = function(startStamp) {
         var oldvalue = _mongoMaxRq;
         _mongoMaxRq = Math.max(1, Math.min(settings.dbMaxConnections, _mongoMaxRq + delta));
         if (_mongoMaxRq !== oldvalue)
-            process.send({ usage: 1, mongorq_max: _mongoMaxRq - oldvalue });
+            utils.send({ type: "usage", mongorq_max: _mongoMaxRq - oldvalue });
     }
 };
 exports.updateDbBalancer = updateDbBalancer;

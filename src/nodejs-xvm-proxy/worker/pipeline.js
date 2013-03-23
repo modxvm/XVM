@@ -100,7 +100,7 @@ var httpCallback = function(results, processData, responseCallback) {
     // add processData.dbData items to result
     for(var i in processData.dbData) {
         result.players.push(_cacheToResult(processData.dbData[i]));
-        process.send({usage: 1, cached: 1});
+        utils.send({ type: "usage", cached: 1 });
     }
     // TODO for why?
     processData.dbData = null;
@@ -113,7 +113,7 @@ var httpCallback = function(results, processData, responseCallback) {
         if(!item) {
             // TODO _prepareFallbackRes?
             result.players.push({id: id, status: "fail", date: now});
-            process.send({usage: 1, updatesFailed: 1});
+            utils.send({ type: "usage", updatesFailed: 1 });
             continue;
         }
 
@@ -169,7 +169,7 @@ var httpCallback = function(results, processData, responseCallback) {
         // updating db
         console.log("HERE1!!!");
         db.updatePlayersData(_id, pdata);
-        process.send({usage: 1, updated: 1});
+        utils.send({ type: "usage", updated: 1 });
 
         if(settings.updateMissed === true)
             db.removeMissed(_id);
@@ -216,13 +216,13 @@ var _prepareFallbackRes = function(item, id, status) {
     id = parseInt(id, 10);
 
     if(!item.cache) {
-        process.send({usage: 1, missed: 1});
+        utils.send({ type: "usage", missed: 1 });
         if(settings.updateMissed)
             db.insertMissed(id, true);
         return {id: id, date: new Date(), status: status};
     }
 
-    process.send({usage: 1, updatesFailed: 1});
+    utils.send({ type: "usage", updatesFailed: 1 });
     if(settings.updateMissed)
         db.insertMissed(id, false);
     var res = _cacheToResult(item.cache);

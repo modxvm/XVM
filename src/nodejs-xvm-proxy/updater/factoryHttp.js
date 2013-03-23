@@ -1,5 +1,6 @@
 var http,
     httpPool = require("./httpPool"),
+    utils = require("./../utils"),
     initialized = false;
 
 exports.ctor = function(fakeHttp) {
@@ -27,7 +28,7 @@ exports.makeSingleRequest = function(id, server, callback) {
         callback(null, { __status: "timeout" });
     }, server.timeout);
 
-    process.send({usage: 1, serverId: server.id, connections: 1});
+    utils.send({ type: "usage", serverId: server.id, connections: 1 });
     http.get(options,function(res) {
         if(res.statusCode !== 200) {
             clearTimeout(reqTimeout);
@@ -87,7 +88,7 @@ var _onRequestDone = function(server, error) {
         sst = httpPool.serverStatus[server.id];
 
     sst.connections--;
-    process.send({ usage: 1, serverId: server.id, connections: -1, fail: !!error });
+    utils.send({ type: "usage", serverId: server.id, connections: -1, fail: !!error });
 
     // HTTP connections balancer
     if(!sst.lastMaxConnectionUpdate || (now - sst.lastMaxConnectionUpdate) > (error ? 1000 : 5000)) {
@@ -95,14 +96,14 @@ var _onRequestDone = function(server, error) {
 
         sst.lastMaxConnectionUpdate = now;
         sst.maxConnections = Math.max(1, Math.min(server.maxconn, sst.maxConnections + (error ? -5 : 1)));
-        process.send({usage: 1, serverId: server.id, maxConnections: sst.maxConnections - oldMaxConn});
+        utils.send({ type: "usage", serverId: server.id, maxConnections: sst.maxConnections - oldMaxConn });
     }
 
     if(error) {
         sst.lastErrorDate = now;
         if(!sst.error_shown) {
             sst.error_shown = true;
-            process.send({log: 1, msg: "ERROR: " + error});
+            utils.send({ type: "log", msg: "ERROR: " + error });
         }
     }
 };

@@ -34,7 +34,7 @@ var processQueue = function() {
                     return;
                 }
 
-                process.send({type: "cmd", cmd: "update_done", src: msg.src, id: msg.id, data: result});
+                process.send({ type: "cmd", cmd: "update_done", src: msg.src, id: msg.id, data: result });
             });
         }
     }

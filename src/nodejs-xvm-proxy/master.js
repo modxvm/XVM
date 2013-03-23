@@ -44,6 +44,39 @@ var createWorker = function(env) {
     return w;
 };
 
+var _lastLogMsg = "",
+    _skipLogMsgCounter = 0;
+
+var messageHandler = function(msg) {
+    if(!msg.type) {
+        console.log("!!!!!!!!!!!!!! no msg.type - ", msg);
+        return;
+    }
+    switch(msg.type) {
+        case "cmd":
+            processCommand(msg);
+            break;
+        case "usage":
+            processUsageReport(msg);
+            break;
+        default:
+            console.log("[MASTER] unknown msg type " + msg);
+    }
+};
+
+var processCommand = function(command) {
+    switch(command.cmd) {
+        case "update":
+            updater.send(command);
+            break;
+        case "update_done":
+            cluster.workers[command.src].send(command);
+            break;
+        default:
+            console.log("[MASTER] unhandled command " + command);
+    }
+};
+
 // usage stat
 var usageStat = {
     start: new Date(),
@@ -61,31 +94,49 @@ var usageStat = {
     connections: [ ]
 };
 
-var _lastLogMsg = "",
-    _skipLogMsgCounter = 0;
-
-var messageHandler = function(msg) {
-    if(!msg.type) {
-        console.log("!!!!!!!!!!!!!! no msg.type - ", msg);
-        return;
+var processUsageReport = function(report) {
+    if(report.requests) {
+        usageStat.requests += report.requests;
+        usageStat.requests_current += report.requests;
     }
-    switch(msg.type) {
-        case "cmd":
-            processCommand(msg);
-            break;
+    if(report.players)
+        usageStat.players += report.players;
+    if(report.cached)
+        usageStat.cached += report.cached;
+    if(report.updated)
+        usageStat.updated += report.updated;
+    if(report.missed)
+        usageStat.missed += report.missed;
+    if(report.updatesFailed)
+        usageStat.updatesFailed += report.updatesFailed;
+    // TODO all to camelCase
+    if(report.max_conn)
+        usageStat.max_conn += report.max_conn;
+    if(report.max_db)
+        usageStat.max_db += report.max_db;
+    if(report.mongorq)
+        usageStat.mongorq += report.mongorq;
+    if(report.mongorq_max) {
+        usageStat.mongorq_max += report.mongorq_max;
+        utils.log("mongorq_max: " + usageStat.mongorq_max);
     }
-};
-
-var processCommand = function(command) {
-    switch(command.cmd) {
-        case "update":
-            updater.send(command);
-            break;
-        case "update_done":
-            cluster.workers[command.src].send(command);
-            break;
-        default:
-            console.log("[MASTER] unhandled command " +command);
+    if(report.cmd_info)
+        usageStat.cmd_info += report.cmd_info;
+    if(report.connections) {
+        if (!usageStat.connections[report.serverId])
+            usageStat.connections[report.serverId] = {cur:0, max:settings.servers[report.serverId].maxconn, total:0, fail:0};
+        usageStat.connections[report.serverId].cur += report.connections;
+        //if (usageStat.connections[msg.serverId].cur < 0)
+        //    utils.log("ERROR: conn<0 " + JSON.stringify(msg));
+        if (report.connections > 0)
+            usageStat.connections[report.serverId].total += report.connections;
+        if (report.fail)
+            usageStat.connections[report.serverId].fail -= report.connections;
+    }
+    if(report.maxConnections) {
+        if (!usageStat.connections[report.serverId])
+            usageStat.connections[report.serverId] = {cur:0, max:settings.servers[report.serverId].maxconn, total:0, fail:0};
+        usageStat.connections[report.serverId].max += report.maxConnections;
     }
 };
 

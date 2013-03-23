@@ -3,7 +3,7 @@ var db = require("./../db"),
     utils = require("./../utils");
 
 exports.getPlayersData = function(parsedIds, callback) {
-    process.send({ usage: 1, requests: 1, players: parsedIds.ids.length });
+    utils.send({ type: "usage", requests: 1, players: parsedIds.ids.length });
     db.getPlayersData(parsedIds.ids, function(error, dbData) {
         if(error) {
             callback(500, '{"error":"' + error.text + '","server":"' + settings.serverName + '"}');
