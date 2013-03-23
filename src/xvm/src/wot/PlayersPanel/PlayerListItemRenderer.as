@@ -1,8 +1,6 @@
 ﻿/**
- * ...
  * @author sirmax2
  */
-import wot.utils.Logger;
 import net.wargaming.controls.UILoaderAlt;
 import wot.PlayersPanel.SpotStatusView;
 import wot.utils.Config;
@@ -18,23 +16,18 @@ class wot.PlayersPanel.PlayerListItemRenderer extends net.wargaming.ingame.Playe
     var m_clanIcon: UILoaderAlt = null;
     var m_iconset: IconLoader = null;
     var m_iconLoaded: Boolean = false;
-
-    var spotStatusView:SpotStatusView;
+    
+    public var spotStatusView:SpotStatusView;
 
     function PlayerListItemRenderer()
     {
         super();
-        
-        //Logger.add("this.owner._itemRenderer " + this.owner._itemRenderer);
-        if (team == Defines.TEAM_ENEMY)
-        {
-            //Logger.add("Rend: team " + team);
-            spotStatusView = new SpotStatusView(this);
-        }
 
         Utils.TraceXvmModule("PlayerListItemRenderer");
+        
+        spotStatusView = new SpotStatusView(this);
     }
-
+    
     function completeLoad()
     {
         if (m_iconLoaded)
@@ -87,11 +80,6 @@ class wot.PlayersPanel.PlayerListItemRenderer extends net.wargaming.ingame.Playe
 
             // Player/clan icons
             attachClanIconToPlayer(data);
-            
-            if (spotStatusView) /** spotStatusView == null is panel is allied */
-            {
-                spotStatusView.tryCreateSpotMarker();
-            }
         }
 
         if (Config.s_config.playersPanel.removeSquadIcon && squadIcon)
@@ -121,10 +109,6 @@ class wot.PlayersPanel.PlayerListItemRenderer extends net.wargaming.ingame.Playe
     
     private function get team(): Number
     {
-        if (this.owner._itemRenderer == undefined)
-        {
-            //Logger.add("## PlayerListItemRenderer ERROR: this.owner._itemRenderer == undefined");
-        }
-        return (this.owner._itemRenderer == "LeftItemRendererIcon") ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
+        return (this._parent._parent._itemRenderer == "LeftItemRendererIcon") ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
     }
 }

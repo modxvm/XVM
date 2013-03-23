@@ -1,6 +1,7 @@
 ﻿/**
  * @author sirmax2, ilitvinov87
  */
+import wot.PlayersPanel.PlayerListItemRenderer;
 import wot.PlayersPanel.SpotStatusModel;
 import wot.utils.Cache;
 import wot.utils.Config;
@@ -45,10 +46,10 @@ class wot.PlayersPanel.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         checkLoading();
         
         /** Enemy revealed marker feature for enemy PlayersPanel */
-        if (m_type == "right")
+        if (isEnemyPanel)
         {
             //Logger.add("PP: MTYPE " + m_type );
-            spotStatusModel = new SpotStatusModel(this);
+            spotStatusModel = new SpotStatusModel();
         }
     }
 
@@ -56,6 +57,31 @@ class wot.PlayersPanel.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     {
         _lastAdjustedState = "";
         update();
+    }
+    
+    function update()
+    {
+        super.update();
+        
+        /** Enemy revealed marker feature for enemy PlayersPanel */
+        if (isEnemyPanel && Config.s_config.playersPanel.enemySpottedMarker.enabled)
+        {
+            updateSpotStatusMarkers();
+        }
+    }
+    
+    private function updateSpotStatusMarkers():Void
+    {
+        Logger.add("");
+        Logger.add("pp.updateSpotStatusMarkers()");
+        for (var i in m_list.renderers)
+        {
+            var renderer:PlayerListItemRenderer = m_list.renderers[i];
+            var uid:Number = renderer.data.uid;
+            var text:String = spotStatusModel.defineMarkerText(uid);
+            //Logger.addObject(renderer, "rend", 2);
+            renderer.spotStatusView.update(text);
+        }
     }
     
     // override
@@ -423,5 +449,10 @@ class wot.PlayersPanel.PlayersPanel extends net.wargaming.ingame.PlayersPanel
                 GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.PANEL_READY));
             }
         }
+    }
+    
+    private function get isEnemyPanel():Boolean
+    {
+        return m_type == "right";
     }
 }

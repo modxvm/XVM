@@ -1,5 +1,7 @@
 import wot.utils.GlobalEventDispatcher;
 import wot.Minimap.MinimapEvent;
+import wot.utils.Logger;
+import wot.PlayersPanel.PlayersPanel;
 
 /**
  * @author ilitvinov87@gmail.com
@@ -14,14 +16,26 @@ class wot.PlayersPanel.SpotStatusModel
         GlobalEventDispatcher.addEventListener(MinimapEvent.ENEMY_REVEALED, this, onRevealed);
     }
     
+    public function defineMarkerText(uid):String
+    {
+        var text:String = revealed[uid] ? "" : "█";
+        
+        Logger.add("ssmodel.uid " + uid + " text " + text);
+        
+        return text;
+    }
+    
     private function onRevealed(event:MinimapEvent):Void
     {
         var uid:Number = Number(event.payload);
-        revealed.push(uid);
+        revealed[uid] = true;
+        
+        Logger.add("panel.update() invoke by Model");
+        panel.update();
     }
     
-    private function defineMarkerText(uid):String
+    private function get panel():PlayersPanel
     {
-        return "text";
+        return _root.rightPanel;
     }
 }

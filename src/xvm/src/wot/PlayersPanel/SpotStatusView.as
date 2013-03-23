@@ -8,59 +8,52 @@ import wot.utils.Config;
  */
 class wot.PlayersPanel.SpotStatusView
 {
-    var renderer:PlayerListItemRenderer;
+    public static var SPOT_STATUS_TF_NAME:String = "spotStatusTF";
     
-    var spotStatusMarker:TextField = null;
+    private var renderer:PlayerListItemRenderer;
+    private var spotStatusMarker:TextField;
     
     public function SpotStatusView(renderer:PlayerListItemRenderer) 
     {
         this.renderer = renderer;
     }
     
-    public function tryCreateSpotMarker():Void
+    public function update(text:String):Void
     {
-        if (!cfg.enabled)
-            return;
-            
-        if (spotStatusMarker == null)
+        if (renderer[SPOT_STATUS_TF_NAME] == undefined)
         {
-            createMarker();
+            createMarker(renderer);
         }
         
-        //if ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0);
+        spotStatusMarker.text = text;
+        
+        /**
+         * TODO:
+             * 
+             * sdsdsdsdsdsdsdsdss
+         * if ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0);
+         */
     }
     
     // -- Private
     
-    private function createMarker():Void
+    private function createMarker(renderer:PlayerListItemRenderer):Void
     {
         Logger.add("ssv.createMarker()");
         
         /** Define point relative to which marker is set  */
-        var baseX:Number = renderer.vehicleLevel._x; // 8
+        var baseX:Number = renderer.vehicleLevel._x + 15; // 8
         var baseY:Number = renderer.vehicleLevel._y; // -445.05
         
         spotStatusMarker = renderer.createTextField
         (
-            "spotStatusTF",
+            SPOT_STATUS_TF_NAME,
             renderer.getNextHighestDepth(),
             baseX, baseY, 25, 25
         );
         
-        spotStatusMarker.text = "@";
         spotStatusMarker.textColor = 0x00FFBB;
         spotStatusMarker.html = true;
-    }
-    
-    private function updateText():Void
-    {
-        Logger.add("ssv.updateText()");
-        spotStatusMarker.text = getText(0);;
-    }
-    
-    private function getText(uid):String
-    {
-        return "text " + uid;
     }
     
     // -- Getters
