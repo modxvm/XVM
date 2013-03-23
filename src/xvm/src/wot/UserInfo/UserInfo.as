@@ -396,7 +396,7 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
                 data[i].e = stat.te || 0;
                 data[i].teff = stat.teff || 0;
                 // END FIXIT
-                data[i].hp = vi2.hotop;
+                data[i].hp = vi2.hptop;
                 data[i].avgR = vi2.avg.R;
                 data[i].avgD = vi2.avg.D;
                 data[i].avgE = vi2.avg.E;
