@@ -78,7 +78,6 @@ class wot.utils.StatLoader
         if (s_loading)
             return;
         s_loading= true;
-        //Logger.add("StatLoader.StartLoadData()");
         StartLoadDataInternal();
     }
 
@@ -90,6 +89,7 @@ class wot.utils.StatLoader
             var pdata = StatData.s_data[pname];
             if (pdata.loadstate != Defines.LOADSTATE_NONE)
                 continue;
+            pdata.loadstate = Defines.LOADSTATE_LOADING;
             var pd = {
                 id:pdata.playerId,
                 n:pdata.fullPlayerName,
@@ -101,24 +101,25 @@ class wot.utils.StatLoader
         }
 
         var n = rq.length;
-        for (var i = 0; i < rq.length; ++i)
+        Logger.add("StatLoader: Loading data: " + s_players_count + " total, " + n + " to load");
+        for (var i = 0; i < n; ++i)
         {
             Comm.SyncEncoded(i == 0 ? Defines.COMMAND_SET : Defines.COMMAND_ADD, rq[i], null, function(event) {
-                    n--;
-                    try
-                    {
-                        var response = JSON.parse(event.str);
-                        if (n == 0)
-                            Comm.Async(Defines.COMMAND_GET_ASYNC, response.resultId, null, null, StatLoader.LoadStatDataCallback);
-                        // TODO: what if bad resultId?
-                    }
-                    catch (e)
-                    {
-                        Logger.add("Error parsing response: " + e);
-                        if (n == 0)
-                            StatLoader.LoadStatDataCallback({error:e});
-                    }
-                });
+                n--;
+                try
+                {
+                    var response = JSON.parse(event.str);
+                    if (n == 0)
+                        Comm.Async(Defines.COMMAND_GET_ASYNC, response.resultId, null, null, StatLoader.LoadStatDataCallback);
+                    // TODO: what if bad resultId?
+                }
+                catch (e)
+                {
+                    Logger.add("Error parsing response: " + e);
+                    if (n == 0)
+                        StatLoader.LoadStatDataCallback({error:e});
+                }
+            });
         }
 
         dirty = false;

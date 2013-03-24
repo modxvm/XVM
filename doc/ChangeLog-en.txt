@@ -1,3 +1,6 @@
+XVM-3.5.0-test5:
+  * fixed endless loop when stat is not available
+
 XVM-3.5.0-test4:
   * minimap: zoom size memory fixed
   * updated per-vehicle statistics data (added new tanks)

@@ -63,10 +63,11 @@ class wot.utils.Macros
         {
             if (!data.uid)
                 data.uid = StatData.s_data[pname].playerId;
-            var stat = StatData.s_data[pname].stat;
-            //Logger.addObject(s_data[pname]);
+            var pdata = StatData.s_data[pname];
+            //Logger.addObject(pdata);
             //Logger.add("pname=" + pname + " uid=" + data.uid + " r=" + stat.r + " e=" + stat.e);
-            if (!stat || (StatData.s_data[pname].loadstate == Defines.LOADSTATE_UNKNOWN && VehicleInfo.getInfo2(data.icon).name != "UNKNOWN"))
+            if ((!pdata || (!pdata.stat && pdata.loadstate == Defines.LOADSTATE_NONE)) ||
+                (StatData.s_data[pname].loadstate == Defines.LOADSTATE_UNKNOWN && VehicleInfo.getInfo2(data.icon).name != "UNKNOWN"))
             {
                 //Logger.addObject(data);
                 StatData.s_data[pname].vehicleKey = VehicleInfo.getInfo2(data.icon).name.toUpperCase();
