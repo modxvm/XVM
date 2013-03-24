@@ -72,8 +72,8 @@ class wot.PlayersPanel.PlayersPanel extends net.wargaming.ingame.PlayersPanel
     
     private function updateSpotStatusMarkers():Void
     {
-        Logger.add("");
-        Logger.add("pp.updateSpotStatusMarkers()");
+        //Logger.add("");
+        //Logger.add("pp.updateSpotStatusMarkers()");
         for (var i in m_list.renderers)
         {
             var renderer:PlayerListItemRenderer = m_list.renderers[i];

@@ -39,7 +39,7 @@ class wot.PlayersPanel.SpotStatusView
     
     private function createMarker(renderer:PlayerListItemRenderer):Void
     {
-        Logger.add("ssv.createMarker()");
+        //Logger.add("ssv.createMarker()");
         
         /** Define point relative to which marker is set  */
         var baseX:Number = renderer.vehicleLevel._x + 15; // 8

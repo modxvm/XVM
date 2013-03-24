@@ -20,7 +20,7 @@ class wot.PlayersPanel.SpotStatusModel
     {
         var text:String = revealed[uid] ? "" : "█";
         
-        Logger.add("ssmodel.uid " + uid + " text " + text);
+        //Logger.add("ssmodel.uid " + uid + " text " + text);
         
         return text;
     }
@@ -30,7 +30,7 @@ class wot.PlayersPanel.SpotStatusModel
         var uid:Number = Number(event.payload);
         revealed[uid] = true;
         
-        Logger.add("panel.update() invoke by Model");
+        //Logger.add("panel.update() invoke by Model");
         panel.update();
     }
     
