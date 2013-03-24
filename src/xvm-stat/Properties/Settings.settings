@@ -5,22 +5,22 @@
     <Setting Name="MountPoint" Type="System.String" Scope="User">
       <Value Profile="(Default)">res_mods\.stat</Value>
     </Setting>
+    <Setting Name="Timeout" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10000</Value>
+    </Setting>
     <Setting Name="ProxyServers" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;RU	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC91Yy8/JTEmdG9rZW49JTI=&lt;/string&gt;
-  &lt;string&gt;EU	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC91Yy8/JTEmdG9rZW49JTI=&lt;/string&gt;
-  &lt;string&gt;US	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC91Yy8/JTEmdG9rZW49JTI=&lt;/string&gt;
+  &lt;string&gt;RU	aHR0cDovL3Byb3h5Mi5idWx5Y2hldi5uZXQvJTE/dG9rZW49JTI=&lt;/string&gt;
+  &lt;string&gt;EU	aHR0cDovL3Byb3h5Mi5idWx5Y2hldi5uZXQvJTE/dG9rZW49JTI=&lt;/string&gt;
+  &lt;string&gt;US	aHR0cDovL3Byb3h5Mi5idWx5Y2hldi5uZXQvJTE/dG9rZW49JTI=&lt;/string&gt;
   &lt;string&gt;CN	aHR0cDovL2dhcnBoeS5jb20vdG9vbC93b3QvRUZGMi8lMS5qc29u&lt;/string&gt;
   &lt;string&gt;CN	aHR0cDovL3RpcHMuY3MwMzA5LmltdHQucXEuY29tL2dldFVzZXI/bmFtZT0lMSZ6b25lPW5vcnRoJmxjPTIwMTIwMzA4JndheT1uZXc=&lt;/string&gt;
   &lt;string&gt;CN	aHR0cDovL3dvdHJhdGUudmljcC5jby9Xb3RSYXRlWFZNMS8lMQ==&lt;/string&gt;
-  &lt;string&gt;SEA	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC91Yy8/JTEmdG9rZW49JTI=&lt;/string&gt;
-  &lt;string&gt;VTC	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC91Yy8/JTEmdG9rZW49JTI=&lt;/string&gt;
-  &lt;string&gt;KR	aHR0cDovL3Byb3h5LmJ1bHljaGV2Lm5ldC91Yy8/JTEmdG9rZW49JTI=&lt;/string&gt;
+  &lt;string&gt;SEA	aHR0cDovL3Byb3h5Mi5idWx5Y2hldi5uZXQvJTE/dG9rZW49JTI=&lt;/string&gt;
+  &lt;string&gt;VTC	aHR0cDovL3Byb3h5Mi5idWx5Y2hldi5uZXQvJTE/dG9rZW49JTI=&lt;/string&gt;
+  &lt;string&gt;KR	aHR0cDovL3Byb3h5Mi5idWx5Y2hldi5uZXQvJTE/dG9rZW49JTI=&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
-    </Setting>
-    <Setting Name="Timeout" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">10000</Value>
     </Setting>
   </Settings>
 </SettingsFile>

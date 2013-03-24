@@ -26,7 +26,7 @@ namespace wot
 
     private static Process wotProcess = null;
 
-    private static bool logFileInitialized = false;
+    private static Logger logger;
 
     static Program()
     {
@@ -53,27 +53,25 @@ namespace wot
     {
       if (!debug || isDebug)
       Console.WriteLine((debug ? "DEBUG: " : "") + message);
-      if (!logFileInitialized)
+      if (logger == null)
         return;
-      lock (_logLock)
+     
+      try
       {
-        try
-        {
-          string timestamp = DateTime.Now.ToString("yyyy.MM.dd HH:mm:ss");
-          string prefix = debug ? "[D]" : "[i]";
-          string logstr = String.Format("{0} {1} ", timestamp, prefix);
+        string timestamp = DateTime.Now.ToString("yyyy.MM.dd HH:mm:ss");
+        string prefix = debug ? "[D]" : "[i]";
+        string logstr = String.Format("{0} {1} ", timestamp, prefix);
 
-          string[] lines = message.Split(new string[] { "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
-          for (int i = 1; i < lines.Length; i++)
-            lines[i] = lines[i].PadLeft(lines[i].Length + logstr.Length);
-          logstr += string.Join(Environment.NewLine, lines);
+        string[] lines = message.Split(new string[] { "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+        for (int i = 1; i < lines.Length; i++)
+          lines[i] = lines[i].PadLeft(lines[i].Length + logstr.Length);
+        logstr += string.Join(Environment.NewLine, lines);
 
-          File.AppendAllText("XVM.log", logstr + Environment.NewLine);
-        }
-        catch
-        {
-          // do nothing
-        }
+        logger.LogAsync(logstr + Environment.NewLine);          
+      }
+      catch
+      {
+        // do nothing
       }
     }
 
@@ -189,9 +187,8 @@ namespace wot
     {
       try
       {
-        File.WriteAllText("XVM.log", String.Format(
-          "{0:yyyy.MM.dd HH:mm:ss} {1}{2}", DateTime.Now, Console.Title, Environment.NewLine));
-        logFileInitialized = true;
+          logger = new Logger("XVM.log");
+          logger.Log(String.Format("{0:yyyy.MM.dd HH:mm:ss} {1}{2}", DateTime.Now, Console.Title, Environment.NewLine));       
       }
       catch
       {
