@@ -85,10 +85,11 @@ app.get("/INFO/:playerName", command.infoByNameId);
 app.get("/STAT", stat.performance);
 
 process.on("message", function(msg) {
-    if(msg.info)
+    if(msg.info) {
         pipeline.setHttpInfo(msg.info);
-    else if(msg.twrbase)
+    } else if(msg.twrbase) {
         tcalcBase.parseTWRBase(msg.twrbase);
+    }
 });
 
 db.ctor(function() {

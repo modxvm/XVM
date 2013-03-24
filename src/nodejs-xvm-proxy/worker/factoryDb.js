@@ -98,7 +98,6 @@ var _recalculateMissed = function(data) {
 
     // updating db
     if(ok && Math.floor(Math.random() * 1) === 0) {
-        console.log("HERE2!!!");
         db.updatePlayersData(data._id, data);
     }
 };

@@ -7,11 +7,13 @@ exports.getFreeConnection = function(srvs) {
     var now = new Date(),
         totalAvail = 0,
         wait = true,
-        servers = utils.clone(srvs);
+        servers = utils.clone(srvs),
+        server;
 
     for(var serverId in servers) {
-        var server = servers[serverId],
-            serverStatus = statServersStatus[server.id];
+        server = servers[serverId];
+
+        var serverStatus = statServersStatus[server.id];
 
         // Do not execute requests some time after error response
         if(serverStatus.lastErrorDate) {

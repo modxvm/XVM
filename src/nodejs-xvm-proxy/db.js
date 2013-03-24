@@ -137,7 +137,6 @@ var _executeDbQuery = function(cursor, callback) {
 };
 
 exports.updatePlayersData = function(id, data) {
-    console.log("UPDATE : " + JSON.stringify(data));
     players.update({ _id: id }, data, { upsert: true });
 };
 

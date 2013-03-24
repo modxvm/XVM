@@ -22,7 +22,7 @@ exports.generic = function(ids, callback) {
         }
 
         if(!Object.keys(procData.rqData).length) {
-            console.log("[WORKER:" + cluster.worker.id + "] " + JSON.stringify(processData));
+            //console.log("[WORKER:" + cluster.worker.id + "] " + JSON.stringify(processData));
             httpCallback({ }, processData, responseCallback);
             return;
         }
@@ -37,11 +37,12 @@ exports.generic = function(ids, callback) {
                 return;
 
             var indexOfPlayer = pendingPlayers.indexOf(msg.id);
-//console.log("[WORKER:" + cluster.worker.id + "] " + pendingPlayers, indexOfPlayer);
+            //console.log("[WORKER:" + cluster.worker.id + "] " + pendingPlayers, indexOfPlayer);
             if(indexOfPlayer === -1)
                 return;
 
             pendingPlayers.splice(indexOfPlayer, 1);
+            // TODO special case for failed result?
             httpResults[msg.id] = msg.data;
 
             if(pendingPlayers.length === 0) {
@@ -107,7 +108,6 @@ var httpCallback = function(results, processData, responseCallback) {
 
     // process retrieved items
     for(var id in processData.rqData) {
-        console.log("ALARM!!!! processData.rqData", processData.rqData);
         var item = results[id];
 
         if(!item) {
@@ -167,7 +167,6 @@ var httpCallback = function(results, processData, responseCallback) {
         var pdata = _parseNewPlayerData(_id, item.data);
 
         // updating db
-        console.log("HERE1!!!");
         db.updatePlayersData(_id, pdata);
         utils.send({ type: "usage", updated: 1 });
 

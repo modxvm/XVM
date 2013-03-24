@@ -59,8 +59,11 @@ var messageHandler = function(msg) {
         case "usage":
             processUsageReport(msg);
             break;
+        case "log":
+            utils.log(msg.msg);
+            break;
         default:
-            console.log("[MASTER] unknown msg type " + msg);
+            console.log("[MASTER] unknown msg type ", msg);
     }
 };
 
@@ -73,7 +76,7 @@ var processCommand = function(command) {
             cluster.workers[command.src].send(command);
             break;
         default:
-            console.log("[MASTER] unhandled command " + command);
+            console.log("[MASTER] unknown command ", command);
     }
 };
 
@@ -164,9 +167,14 @@ var getInfoContent = function() {
             try {
                 var newInfo = JSON.parse(responseData);
                 utils.log("[getInfoContent] Info updated");
-                workers.forEach(function(worker) {
+                for(var workerId in cluster.workers) {
+                    if(workerId === updater.id)
+                        continue;
+
+                    var worker = cluster.workers[workerId];
+
                     worker.send({ info: newInfo });
-                });
+                }
             } catch(e) {
                 utils.debug("> [getInfoContent] JSON.parse error:" + e +
                     "\nlength=" + responseData.length + ", data=" + responseData.replace(/[\n\r]/g, ""));
@@ -197,10 +205,14 @@ var getTWRBaseContent = function() {
             try {
                 if(responseData) {
                     utils.log("[getTWRBaseContent] TWR Base updated");
-                    // TODO
-                    /*workers.forEach(function(worker) {
+                    for(var workerId in cluster.workers) {
+                        if(workerId === updater.id)
+                            continue;
+
+                        var worker = cluster.workers[workerId];
+
                         worker.send({ twrbase: responseData });
-                    });*/
+                    }
                 }
             } catch(e) {
                 utils.debug("> [getTWRBaseContent] ERROR: " + e +

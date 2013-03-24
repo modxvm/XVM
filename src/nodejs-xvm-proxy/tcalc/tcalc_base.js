@@ -9,7 +9,7 @@ module.exports = (function() {
             var line = lines[lineId].trim().split(";");
             if (line.length <= 1)
                 continue;
-            if (line.length != 12)
+            if (line.length !== 12)
                 return console.log("Error: format error in TWR Base:\n  " + lines[lineId]);
 
             res[line[3].toUpperCase()] = {
@@ -28,8 +28,9 @@ module.exports = (function() {
         }
         this.tanks = res;
     };
+
     return {
         tanks: tanks,
         parseTWRBase: parseTWRBase
-    }
+    };
 })();

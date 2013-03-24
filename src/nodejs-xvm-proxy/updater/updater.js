@@ -17,8 +17,8 @@ var processQueue = function() {
     if(queue.length === 0)
         return;
 
-    console.log("[UPDATER:" + cluster.worker.id + "] processQueue");
-    while(queue.length > 0) {
+    //console.log("[UPDATER:" + cluster.worker.id + "] processQueue");
+    //while(queue.length > 0) {
         var msg = queue.shift();
 
         if(msg.cmd === "update") {
@@ -26,22 +26,23 @@ var processQueue = function() {
 
             if(server.error) {
                 // TODO
+                process.send({ type: "cmd", cmd: "update_done", src: msg.src, id: msg.id, error: true });
                 return;
             }
             factoryHttp.makeSingleRequest(msg.id, server, function(error, result) {
                 if(error) {
                     // TODO
+                    process.send({ type: "cmd", cmd: "update_done", src: msg.src, id: msg.id, error: true });
                     return;
                 }
 
                 process.send({ type: "cmd", cmd: "update_done", src: msg.src, id: msg.id, data: result });
             });
         }
-    }
+   // }
 };
 
 var messageHandler = function(msg) {
-    console.log("[UPDATER:" + cluster.worker.id + "] " + JSON.stringify(msg));
     switch(msg.cmd) {
         case "queue":
             queue.push(msg);
