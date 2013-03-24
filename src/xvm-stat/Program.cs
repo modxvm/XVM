@@ -426,15 +426,22 @@ namespace wot
           if (wotProcess == null)
             throw new Exception("Cannot start game: " + wotExeFileName);
 
-          Thread.Sleep(1000);
-          try
+          // Waiting process info 20 sec
+          string processInfo = "";
+          for (int i = 0; i < 20; ++i)
           {
-            Debug("wotProcess: \n" + wotProcess.MainModule.FileVersionInfo);
+            Thread.Sleep(1000);
+            try
+            {
+              processInfo = "wotProcess: \n" + wotProcess.MainModule.FileVersionInfo;
+              break;
+            }
+            catch (Exception ex)
+            {
+              processInfo = "wotProcess: Error: " + ex;
+            }
           }
-          catch (Exception ex)
-          {
-            Debug("wotProcess: Error: " + ex);
-          }
+          Debug(processInfo);
 
           Debug("Wait for process to exit");
           wotProcess.WaitForExit();
