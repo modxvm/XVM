@@ -151,6 +151,8 @@ package utils
         public static const xwn:Class;
 
         // color
+		[Embed("images/macros/c_dmg.png")]
+		public static const c_dmg:Class;
         [Embed("images/macros/c_dmg_kind.png")]
         public static const c_dmg_kind:Class;
         [Embed("images/macros/c_hp.png")]

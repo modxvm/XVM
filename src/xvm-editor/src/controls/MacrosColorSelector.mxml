@@ -81,10 +81,10 @@
                 var v:String = null;
                 if (event.target == tv)
                     v = ti.text.charAt(0) == "#" ? "0x" + ti.text.substr(1) : ti.text;
-                else if (event.target == pm)
+                else if (event.target == macro)
                 {
-                    v = (event as MenuEvent).item.value;
-                    (pm.popUp as Menu).selectedIndex = 0;
+                    v = macro.selectedItem.value;
+					macro.selectedItem = null;
                 } else
                     return;
 
@@ -97,6 +97,10 @@
         ]]>
     </fx:Script>
     <mx:Spacer width="5"/>
-    <mx:PopUpMenuButton id="pm" width="40" dataProvider="{menuData}" label="" icon="{Embed.syscolors}" labelFunction="getLabel"
-        toolTip="{resourceManager.getString('components', 'UseSystemColor')}" itemClick="onChange(event)"/>
+    <!--<mx:PopUpMenuButton id="pm" width="40" dataProvider="{menuData}" label="" icon="{Embed.syscolors}" labelFunction="getLabel"
+        toolTip="{resourceManager.getString('components', 'UseSystemColor')}" itemClick="onChange(event)"/>-->
+	<mx:ComboBox right="0" id="macro" width="40" dataProvider="{menuData}" labelFunction="getLabel"
+				 toolTip="{resourceManager.getString('components', 'SelectMacro')}" change="onChange(event)"
+				 dropdownFactory="controls.ComboBoxList" itemRenderer="controls.ComboBoxItemRenderer"
+				 dropdownWidth="420" rowCount="10"/>
 </a:ColorSelector>

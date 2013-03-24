@@ -233,6 +233,7 @@ package utils
             colors_markers_damage: [
                 { value: "{{c:hp}}", label: "c_hp", icon: Embed.c_hp },
                 { value: "{{c:hp-ratio}}", label: "c_hp_ratio", icon: Embed.c_hp_ratio },
+                { value: "{{c:dmg}}", label: "c_dmg", icon: Embed.c_dmg },
                 { value: "{{c:dmg-kind}}", label: "c_dmg_kind", icon: Embed.c_dmg_kind },
                 { value: "{{c:vtype}}", label: "c_vtype", icon: Embed.c_vtype },
                 { value: "{{c:system}}", label: "c_system", icon: Embed.c_system }
