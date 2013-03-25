@@ -1,3 +1,4 @@
+//import wot.utils.Logger;
 import wot.Minimap.MinimapEvent;
 import wot.utils.GlobalEventDispatcher;
 import wot.Minimap.dataTypes.Icon;
@@ -20,45 +21,70 @@ class wot.Minimap.model.iconTracker.PositionTracking
     
     public function update():Void
     {
-        var entries:Array = IconsProxy.getSyncedEntries();
+        var entries:Array = IconsProxy.getAllSyncedEntries();
         /** entry is MinimapEntry */
         for (var i in entries)
         {
             var entry:MinimapEntry = entries[i];
             
-            /** We dont need to track allied units. Omit. */
             if (entry.entryName != "enemy")
-                continue;
-                
-            /** Check if already exist -> update track position */
-            var exist:Boolean = false;
-            for (var j in posTrack)
             {
-                var track:Icon = posTrack[j];
-                
-                if (entry.uid == track.uid)
-                {
-                    exist = true;
-                    
-                    track.pos.x = entry._x;
-                    track.pos.y = entry._y;
-
-                    break;
-                }
+                continue;
             }
             
-            if (!exist)
+            if (trackThisOne(entry))
             {
-                /** Does not exist -> guy revealed first time */
-                
-                /** Track this guy position for LostMarkers */
-                posTrack.push(new Icon(entry.uid, entry._x, entry._y, entry.vehicleClass));
-                
-                /** Inform PlayersPanel about this first time seen guy */
-                var event:MinimapEvent = new MinimapEvent(MinimapEvent.ENEMY_REVEALED, entry.uid);
-                GlobalEventDispatcher.dispatchEvent(event);
+                rememberLost(entry);
+                informPlayersPanel(entry.uid);
             }
         }
+    }
+    
+    private function rememberLost(entry):Void
+    {
+        posTrack.push(new Icon(entry.uid, entry._x, entry._y, entry.vehicleClass));
+    }
+    
+    private function informPlayersPanel(uid:Number):Void
+    {
+        //Logger.add("informPlayersPanel(" + uid +")");
+        /** Inform PlayersPanel about this first time seen guy */
+        var event:MinimapEvent = new MinimapEvent(MinimapEvent.ENEMY_REVEALED);
+        
+        /**
+         * ***********************************************
+         * TODO: Gets shot too many times
+         * FIX
+         * ******************************************
+         */
+        
+        GlobalEventDispatcher.dispatchEvent(event);
+        /**
+         * Invokes PlayersPanel.update()
+         * This will update marker for enemySpotted feature at playersPanel.
+         */
+    }
+    
+    private function trackThisOne(entry):Boolean
+    {
+        var firstTimeSeen:Boolean = true;
+        
+        for (var j in posTrack)
+        {
+            var track:Icon = posTrack[j];
+            
+            if (entry.uid == track.uid)
+            {
+                firstTimeSeen = false;
+                
+                track.pos.x = entry._x;
+                track.pos.y = entry._y;
+
+                break;
+            }
+        }
+        
+        return firstTimeSeen;
     }
     
     public function getArray():Array

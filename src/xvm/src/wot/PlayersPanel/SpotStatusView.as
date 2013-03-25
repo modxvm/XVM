@@ -1,4 +1,4 @@
-import wot.utils.Logger;
+//import wot.utils.Logger;
 import wot.PlayersPanel.PlayerListItemRenderer;
 import net.wargaming.ingame.PlayersPanel;
 import wot.utils.Config;
@@ -26,13 +26,6 @@ class wot.PlayersPanel.SpotStatusView
         }
         
         spotStatusMarker.text = text;
-        
-        /**
-         * TODO:
-             * 
-             * sdsdsdsdsdsdsdsdss
-         * if ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0);
-         */
     }
     
     // -- Private

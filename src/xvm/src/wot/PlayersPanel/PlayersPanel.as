@@ -1,6 +1,7 @@
 ﻿/**
  * @author sirmax2, ilitvinov87
  */
+import wot.PlayersPanel.PlayersPanelEvent;
 import wot.PlayersPanel.PlayerListItemRenderer;
 import wot.PlayersPanel.SpotStatusModel;
 import wot.utils.Cache;
@@ -48,9 +49,21 @@ class wot.PlayersPanel.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         /** Enemy revealed marker feature for enemy PlayersPanel */
         if (isEnemyPanel)
         {
-            //Logger.add("PP: MTYPE " + m_type );
+            GlobalEventDispatcher.addEventListener(PlayersPanelEvent.ENEMY_DIED, this, onEnemyDied);
+            GlobalEventDispatcher.addEventListener(PlayersPanelEvent.ENEMY_REVEALED, this, onEnemyRevealed);
+            
             spotStatusModel = new SpotStatusModel();
         }
+    }
+    
+    function onEnemyDied(e):Void
+    {
+        //Logger.add("pp.onEnemyDied");
+    }
+    
+    function onEnemyRevealed(e):Void
+    {
+        //Logger.add("pp.onEnemyRevealed");
     }
 
     private function onStatLoaded()

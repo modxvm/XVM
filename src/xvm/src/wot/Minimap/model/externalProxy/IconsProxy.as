@@ -15,7 +15,7 @@ class wot.Minimap.model.externalProxy.IconsProxy
     /** Used by SyncModel to calculate unassigned uids for subsequent syncrinization */
     public static function getSyncedUids():Array
     {
-        var syncedEntries:Array = getSyncedEntries();
+        var syncedEntries:Array = getAllSyncedEntries();
         var syncedUids:Array = [];
         
         for (var i in syncedEntries)
@@ -25,7 +25,7 @@ class wot.Minimap.model.externalProxy.IconsProxy
     }
     
     /** Used by VehiclePositionTracking to get vehicle positions */
-    public static function getSyncedEntries():Array
+    public static function getAllSyncedEntries():Array
     {
         var minimapEntries:Array = getMinimapEntries();
         var assigned:Array = [];
