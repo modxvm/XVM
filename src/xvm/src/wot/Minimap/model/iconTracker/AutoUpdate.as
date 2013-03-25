@@ -27,7 +27,7 @@ class wot.Minimap.model.iconTracker.AutoUpdate
         posTrack = new PositionTracking();
         lost = new LostPlayers(posTrack.getArray());
         destructionTimer = 0;
-        flashTimer = setInterval(this, "update", TICK_INTERVAL_MS);
+        flashTimer = _global.setInterval(this, "update", TICK_INTERVAL_MS);
     }
     
     // -- Private
@@ -47,6 +47,6 @@ class wot.Minimap.model.iconTracker.AutoUpdate
     {
         destructionTimer += TICK_INTERVAL_MS;
         if (destructionTimer > SELF_DESTRUCT_TICKS_THRESHOLD)
-            clearInterval(flashTimer);
+            _global.clearInterval(flashTimer);
     }
 }

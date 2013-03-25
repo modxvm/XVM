@@ -30,6 +30,6 @@ class wot.battleloading.RealClock
         tf.align = "right";
         clock.setNewTextFormat(tf);
         clock.filters = f.filters;
-        setInterval(function() { clock.text = Utils.FormatDate(format, new Date()); }, 1000);
+        _global.setInterval(function() { clock.text = Utils.FormatDate(format, new Date()); }, 1000);
     }
 }

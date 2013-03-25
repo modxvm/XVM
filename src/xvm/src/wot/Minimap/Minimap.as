@@ -205,7 +205,7 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
          */
         MARKERS_SCALING = MapConfig.iconScale;
         scaleMarkers(MARKERS_SCALING);
-        
+
         /** Zoom map on key press */
         wot.utils.Logger.add("### MapConfig.zoomEnabled " + MapConfig.zoomEnabled);
         if (MapConfig.zoomEnabled)
@@ -217,7 +217,7 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
             net.wargaming.managers.BattleInputHandler.instance.addHandler(key, false, zoom, "onZoomKeyClick");
             net.wargaming.managers.BattleInputHandler.instance.addHandler(key, true, zoom, "onZoomKeyClick");
         }
-        
+
         sync = new SyncModel();
         sync.updateIconsExtension();
 
@@ -251,7 +251,7 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
          * Does not affect attached shapes.
          */
         setCameraAlpha();
-        
+
         /**
          * Defines real map size in meters.
          */

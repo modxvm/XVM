@@ -14,7 +14,7 @@ class wot.TeamBasesPanel.CapBarModel.InternalTimer
         m_timeNow = 0;
         m_prevTime = 0;
         m_destructionTimer = 0;
-        m_flashTimer = setInterval(this, "incTime", TICK_INTERVAL_MS);
+        m_flashTimer = _global.setInterval(this, "incTime", TICK_INTERVAL_MS);
     }
     
     public function getInterval():Number
@@ -57,6 +57,6 @@ class wot.TeamBasesPanel.CapBarModel.InternalTimer
          * Selfdestruct if timer have not been used for long time.
          */
         if (m_destructionTimer > SELF_DESTRUCT_TICKS_THRESHOLD)
-            clearInterval(m_flashTimer);
+            _global.clearInterval(m_flashTimer);
     }
 }

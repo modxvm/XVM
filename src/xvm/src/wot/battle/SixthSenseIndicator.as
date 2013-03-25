@@ -45,7 +45,7 @@ class wot.battle.SixthSenseIndicator
 
         // DEBUG
         //var a = "fade";
-        //setInterval(function() { a = a == "fade" ? "active" : "fade"; _root.sixthSenseIndicator.gotoAndPlay(a) }, 3000);
+        //_global.setInterval(function() { a = a == "fade" ? "active" : "fade"; _root.sixthSenseIndicator.gotoAndPlay(a) }, 3000);
     }
 
     public function sixthSenseIndicator_gotoAndPlay(frame)

@@ -1,3 +1,6 @@
+XVM-3.5.0-test6:
+  * bugs fixed
+
 XVM-3.5.0-test5:
   * fixed endless loop when stat is not available
 
