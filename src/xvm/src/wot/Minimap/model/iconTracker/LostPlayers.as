@@ -27,6 +27,8 @@ class wot.Minimap.model.iconTracker.LostPlayers
         /** All the units not revealed at minimap */
         var hiddenUids = Utils.subtractArray(PlayersPanelProxy.getEnemyUids(), IconsProxy.getSyncedUids());
         
+        hiddenUids = filterDead(hiddenUids);
+        
         /** Lost player are the players that has position tracked and are hidden(currently not revealed) on minimap */
         var lost:Array = [];
         
@@ -43,8 +45,6 @@ class wot.Minimap.model.iconTracker.LostPlayers
                 }
             }
         }
-        
-        lost = filterDead(lost); /** Ally units are already excluded at updatePositions() */
         
         /** Keep track of previously lost players to avoid unnecessary event dispatch */
         if (lostPrev == undefined)
@@ -65,8 +65,10 @@ class wot.Minimap.model.iconTracker.LostPlayers
         var alive:Array = [];
         for (var i in all)
         {
-            if (!PlayersPanelProxy.isDead(all[i].uid))
+            if (!PlayersPanelProxy.isDead(all[i]))
+            {
                 alive.push(all[i]);
+            }
         }
         
         return alive;

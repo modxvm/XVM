@@ -22,7 +22,7 @@ class wot.Minimap.model.iconTracker.AutoUpdate
      */
     private var posTrack:PositionTracking;
     
-    public function AutoUpdate() 
+    public function AutoUpdate()
     {
         posTrack = new PositionTracking();
         lost = new LostPlayers(posTrack.getArray());
@@ -40,6 +40,9 @@ class wot.Minimap.model.iconTracker.AutoUpdate
         posTrack.update();
         
         lost.find();
+        
+        /** Refreshes enemy spotted feature */
+        _root.rightPanel.updateSpotStatusMarkers();
     }
     
     /** Selfdestruct if timer have not been used for long time */

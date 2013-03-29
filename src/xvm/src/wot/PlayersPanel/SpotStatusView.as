@@ -1,10 +1,11 @@
-//import wot.utils.Logger;
 import wot.PlayersPanel.PlayerListItemRenderer;
-import net.wargaming.ingame.PlayersPanel;
 import wot.utils.Config;
+import wot.PlayersPanel.SpotStatusModel;
 
 /**
  * @author ilitvinov87@gmail.com
+ * 
+ * Handles Enemy Spotted presentation level (View)
  */
 class wot.PlayersPanel.SpotStatusView
 {
@@ -18,25 +19,23 @@ class wot.PlayersPanel.SpotStatusView
         this.renderer = renderer;
     }
     
-    public function update(text:String):Void
+    public function update(status:Number, isArti:Boolean):Void
     {
         if (renderer[SPOT_STATUS_TF_NAME] == undefined)
         {
             createMarker(renderer);
         }
         
-        spotStatusMarker.text = text;
+        spotStatusMarker.htmlText = getFormat(status, isArti);
     }
     
     // -- Private
     
     private function createMarker(renderer:PlayerListItemRenderer):Void
     {
-        //Logger.add("ssv.createMarker()");
-        
         /** Define point relative to which marker is set  */
-        var baseX:Number = renderer.vehicleLevel._x + 15; // 8
-        var baseY:Number = renderer.vehicleLevel._y; // -445.05
+        var baseX:Number = renderer.vehicleLevel._x + cfg.Xoffset; // vehicleLevel._x is 8 for example
+        var baseY:Number = renderer.vehicleLevel._y + cfg.Yoffset; // vehicleLevel._y is -445.05 for example
         
         spotStatusMarker = renderer.createTextField
         (
@@ -45,16 +44,46 @@ class wot.PlayersPanel.SpotStatusView
             baseX, baseY, 25, 25
         );
         
-        spotStatusMarker.textColor = 0x00FFBB;
+        spotStatusMarker.antiAliasType = "advanced";
         spotStatusMarker.html = true;
     }
     
-    // -- Getters
-    
-    private function get panel():PlayersPanel
+    /** Return HTML text from config file */
+    private function getFormat(status:Number, isArti:Boolean):String
     {
-        return _root.rightPanel;
+        if (isArti)
+        {
+            switch (status)
+            {
+                case SpotStatusModel.NEVER_SEEN:
+                    return cfg.format.artillery.neverSeen;
+                case SpotStatusModel.SEEN:
+                    return cfg.format.artillery.seen;
+                case SpotStatusModel.REVEALED:
+                    return cfg.format.artillery.revealed;
+                case SpotStatusModel.DEAD:
+                    return cfg.format.artillery.dead;
+            }
+        }
+        else
+        {
+            switch (status)
+            {
+                case SpotStatusModel.NEVER_SEEN:
+                    return cfg.format.neverSeen;
+                case SpotStatusModel.SEEN:
+                    return cfg.format.seen;
+                case SpotStatusModel.REVEALED:
+                    return cfg.format.revealed;
+                case SpotStatusModel.DEAD:
+                    return cfg.format.dead;
+            }
+        }
+        
+        return "#undefined#";
     }
+    
+    // -- Getters
     
     private function get cfg():Object
     {

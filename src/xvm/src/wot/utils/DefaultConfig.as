@@ -128,7 +128,21 @@ class wot.utils.DefaultConfig
                 clanIcon: { show: true, x: 0, y: 6, xr: NaN, yr: NaN, h: 16, w: 16, alpha: 90 },
                 // Display options for icons of never seen enemies
                 enemySpottedMarker: {
-                  enabled: false
+                  enabled: false,
+                  Xoffset: 15,
+                  Yoffset: 0,
+                  format: {
+                    neverSeen: "<FONT FACE=\"$FieldFont\" SIZE=\"20\" COLOR=\"#DEDEDE\">*</FONT>",
+                    seen: "",
+                    revealed: "",
+                    dead: "",
+                    artillery: {
+                      neverSeen: "",
+                      seen: "",
+                      revealed: "",
+                      dead: ""
+                    }
+                  }
                 },
                 // Medium1 mode.
                 medium: {

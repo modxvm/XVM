@@ -143,6 +143,8 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     {
         super.sizeUp();
         //Logger.addObject(icons, "icons", 3);
+        //Logger.addObject(_root.rightPanel.m_list._dataProvider, "_root.rightPanel.m_list._dataProvider", 3);
+        //Logger.addObject(_root.rightPanel.m_list.renderers, "_root.rightPanel.m_list.renderers", 3);
     }
     
     // -- Private
@@ -207,12 +209,10 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
         scaleMarkers(MARKERS_SCALING);
 
         /** Zoom map on key press */
-        wot.utils.Logger.add("### MapConfig.zoomEnabled " + MapConfig.zoomEnabled);
         if (MapConfig.zoomEnabled)
         {
             zoom = new Zoom(this);
             var key:Number = MapConfig.zoomKey;
-            wot.utils.Logger.add("### key " + key);
             
             net.wargaming.managers.BattleInputHandler.instance.addHandler(key, false, zoom, "onZoomKeyClick");
             net.wargaming.managers.BattleInputHandler.instance.addHandler(key, true, zoom, "onZoomKeyClick");

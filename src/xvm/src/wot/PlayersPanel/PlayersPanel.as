@@ -1,7 +1,6 @@
 ﻿/**
  * @author sirmax2, ilitvinov87
  */
-import wot.PlayersPanel.PlayersPanelEvent;
 import wot.PlayersPanel.PlayerListItemRenderer;
 import wot.PlayersPanel.SpotStatusModel;
 import wot.utils.Cache;
@@ -40,30 +39,20 @@ class wot.PlayersPanel.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         Utils.TraceXvmModule("PlayersPanel");
 
         GlobalEventDispatcher.addEventListener("config_loaded", StatLoader.LoadLastStat);
+        GlobalEventDispatcher.addEventListener("config_loaded", this, initEnemySpotterMarkers);
         GlobalEventDispatcher.addEventListener("stat_loaded", this, onStatLoaded);
         Config.LoadConfig("PlayersPanel.as");
 
         /** Minimap needs to know loaded status */
         checkLoading();
-        
-        /** Enemy revealed marker feature for enemy PlayersPanel */
-        if (isEnemyPanel)
+    }
+     
+    function initEnemySpotterMarkers(event):Void
+    {
+        if (isEnemyPanel && Config.s_config.playersPanel.enemySpottedMarker.enabled)
         {
-            GlobalEventDispatcher.addEventListener(PlayersPanelEvent.ENEMY_DIED, this, onEnemyDied);
-            GlobalEventDispatcher.addEventListener(PlayersPanelEvent.ENEMY_REVEALED, this, onEnemyRevealed);
-            
             spotStatusModel = new SpotStatusModel();
         }
-    }
-    
-    function onEnemyDied(e):Void
-    {
-        //Logger.add("pp.onEnemyDied");
-    }
-    
-    function onEnemyRevealed(e):Void
-    {
-        //Logger.add("pp.onEnemyRevealed");
     }
 
     private function onStatLoaded()
@@ -72,28 +61,23 @@ class wot.PlayersPanel.PlayersPanel extends net.wargaming.ingame.PlayersPanel
         update();
     }
     
-    function update()
+    /**
+     * Refreshes Enemy Spotted Marker.
+     * Invoked by Minimap.AutoUpdate each 300ms.
+     */
+    public function updateSpotStatusMarkers():Void
     {
-        super.update();
-        
-        /** Enemy revealed marker feature for enemy PlayersPanel */
         if (isEnemyPanel && Config.s_config.playersPanel.enemySpottedMarker.enabled)
         {
-            updateSpotStatusMarkers();
-        }
-    }
-    
-    private function updateSpotStatusMarkers():Void
-    {
-        //Logger.add("");
-        //Logger.add("pp.updateSpotStatusMarkers()");
-        for (var i in m_list.renderers)
-        {
-            var renderer:PlayerListItemRenderer = m_list.renderers[i];
-            var uid:Number = renderer.data.uid;
-            var text:String = spotStatusModel.defineMarkerText(uid);
-            //Logger.addObject(renderer, "rend", 2);
-            renderer.spotStatusView.update(text);
+            /** Redraw every renderer */
+            for (var i in m_list.renderers)
+            {
+                var renderer:PlayerListItemRenderer = m_list.renderers[i];
+                var uid:Number = renderer.data.uid;
+                var status:Number = spotStatusModel.defineStatus(uid, renderer.data.vehicleState);
+                var subjectIsArtillery:Boolean = spotStatusModel.isArti(uid);
+                renderer.spotStatusView.update(status, subjectIsArtillery);
+            }
         }
     }
     

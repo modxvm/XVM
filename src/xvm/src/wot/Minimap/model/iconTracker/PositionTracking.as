@@ -1,6 +1,5 @@
-//import wot.utils.Logger;
-import wot.Minimap.MinimapEvent;
 import wot.utils.GlobalEventDispatcher;
+import wot.Minimap.MinimapEvent;
 import wot.Minimap.dataTypes.Icon;
 import wot.Minimap.MinimapEntry;
 import wot.Minimap.model.externalProxy.IconsProxy;
@@ -35,10 +34,13 @@ class wot.Minimap.model.iconTracker.PositionTracking
             if (trackThisOne(entry))
             {
                 rememberLost(entry);
+                
                 informPlayersPanel(entry.uid);
             }
         }
     }
+    
+    // -- Private
     
     private function rememberLost(entry):Void
     {
@@ -47,22 +49,7 @@ class wot.Minimap.model.iconTracker.PositionTracking
     
     private function informPlayersPanel(uid:Number):Void
     {
-        //Logger.add("informPlayersPanel(" + uid +")");
-        /** Inform PlayersPanel about this first time seen guy */
-        var event:MinimapEvent = new MinimapEvent(MinimapEvent.ENEMY_REVEALED);
-        
-        /**
-         * ***********************************************
-         * TODO: Gets shot too many times
-         * FIX
-         * ******************************************
-         */
-        
-        GlobalEventDispatcher.dispatchEvent(event);
-        /**
-         * Invokes PlayersPanel.update()
-         * This will update marker for enemySpotted feature at playersPanel.
-         */
+        GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENEMY_REVEALED, uid));
     }
     
     private function trackThisOne(entry):Boolean

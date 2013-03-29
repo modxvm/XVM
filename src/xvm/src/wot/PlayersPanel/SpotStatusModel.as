@@ -1,45 +1,85 @@
-import wot.PlayersPanel.PlayersPanelEvent;
 import wot.utils.GlobalEventDispatcher;
 import wot.Minimap.MinimapEvent;
-//import wot.utils.Logger;
 import wot.PlayersPanel.PlayersPanel;
+import wot.Minimap.model.externalProxy.IconsProxy;
 import wot.Minimap.model.externalProxy.PlayersPanelProxy;
+import wot.utils.VehicleInfo;
 
 /**
  * @author ilitvinov87@gmail.com
  */
 class wot.PlayersPanel.SpotStatusModel
 {
-    var revealed:Array;
+    public static var DEAD:Number = 0;
+    public static var NEVER_SEEN:Number = 1;
+    public static var SEEN:Number = 2;
+    public static var REVEALED:Number = 3;
+        
+    private var seen:Array;
     
-    public function SpotStatusModel() 
+    public function SpotStatusModel()
     {
-        revealed = [];
-        GlobalEventDispatcher.addEventListener(MinimapEvent.ENEMY_REVEALED, this, onRevealed);
+        seen = [];
+        GlobalEventDispatcher.addEventListener(MinimapEvent.ENEMY_REVEALED, this, onRevealed)
     }
     
-    public function defineMarkerText(uid):String
+    public function defineStatus(uid:Number, vehicleState:Number):Number
     {
-        if (PlayersPanelProxy.isDead(uid))
+        if (vehicleState == 2)
         {
-            //Logger.add("idDead " + uid);
-            return "d";
+            return DEAD;
         }
         
-        var text:String = revealed[uid] ? "+" : "█";
-        
-        //Logger.add("ssmodel.uid " + uid + " text " + text);
-        
-        return text;
+        if (isRevealedRightNow(uid))
+        {
+            return REVEALED;
+        }
+
+        return wasSeen(uid) ? SEEN : NEVER_SEEN;
     }
     
-    private function onRevealed(mmevent:MinimapEvent):Void
+    public function isArti(uid:Number):Boolean
     {
-        var uid:Number = Number(mmevent.payload);
-        revealed[uid] = true;
+        var info:Object = PlayersPanelProxy.getPlayerInfo(uid); // "../maps/icons/vehicle/contour/ussr-SU-18.png"
+        var info2:Object = VehicleInfo.getInfo2(info.icon);
         
-        var ppevent:PlayersPanelEvent = new PlayersPanelEvent(PlayersPanelEvent.ENEMY_REVEALED);
-        GlobalEventDispatcher.dispatchEvent(ppevent);
+        return info2.type == "SPG";
+    }
+    
+    // -- Private
+    
+    private function isRevealedRightNow(subjUid):Boolean
+    {
+        var uids:Array = IconsProxy.getSyncedUids();
+        for (var i in uids)
+        {
+            if (uids[i] == subjUid)
+            {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    private function onRevealed(mmevent:MinimapEvent)
+    {
+        /** Save a guy to revealed enemies list */
+        var uid:Number = Number(mmevent.payload);
+        seen.push(uid);
+    }
+    
+    private function wasSeen(uid:Number):Boolean
+    {
+        for (var i in seen)
+        {
+            if (seen[i] == uid)
+            {
+                return true;
+            }
+        }
+        
+        return false;
     }
     
     private function get panel():PlayersPanel
