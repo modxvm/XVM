@@ -30,9 +30,9 @@ class wot.utils.Locale
 
         tr["UserInfoEHint"] =
             "Per-vehicle efficiency.\n" +
-            "The value shown for the last statistics refresh moment: %DATE%\n" +
-            "See actual E value for present moment in the detailed vehicle info.\n" +
-            "Correctness of the column values depends on quality of source data.";
+            "The values shown are as of the last statistics update: %DATE%\n" +
+            "See actual current values in the detailed vehicle info.\n" +
+            "Accuracy of the column values depends on the quality of the feed data.";
         tr["TeamRenderersHeaderTip"] =
             "Xwn rating.\n" +
             "To see detailed information, move mouse cursor to the player's name.";
