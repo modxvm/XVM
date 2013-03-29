@@ -84,6 +84,12 @@ class wot.utils.DefaultConfig
                 enableUserInfoStatistics: true,  // Enable statistics in the user info window
                 enableCompanyStatistics: true    // Enable statistics in the company window
             },
+			squad: {
+				enabled: false, 	// Global switch
+				romanNumb: true,	// Roman level numbers
+				showClan: true,		// Show player clan
+				leftLvlBorder: ""	// Grille [4
+			},
             hotkeys: {
                 minimapZoom: { enabled: false, onHold: true, keyCode: 17 } // 17 - Ctrl
                 /*
