@@ -135,16 +135,16 @@ class wot.utils.DefaultConfig
                 // Display options for icons of never seen enemies
                 enemySpottedMarker: {
                   enabled: false,
-                  Xoffset: 15,
-                  Yoffset: 0,
+                  Xoffset: -22,
+                  Yoffset: -2,
                   format: {
-                    neverSeen: "<FONT FACE=\"$FieldFont\" SIZE=\"20\" COLOR=\"#DEDEDE\">*</FONT>",
-                    seen: "",
+                    neverSeen: "<FONT FACE=\"$FieldFont\" SIZE=\"24\" COLOR=\"#DDDDDD\">*</FONT>",
+                    lost: "",
                     revealed: "",
                     dead: "",
                     artillery: {
                       neverSeen: "",
-                      seen: "",
+                      lost: "",
                       revealed: "",
                       dead: ""
                     }

@@ -1,3 +1,6 @@
+XVM-3.5.0-test7:
+  * new feature: enemy spotted status at right side panel
+  
 XVM-3.5.0-test6:
   * bugs fixed
 

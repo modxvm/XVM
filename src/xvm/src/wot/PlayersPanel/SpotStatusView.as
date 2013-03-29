@@ -58,7 +58,7 @@ class wot.PlayersPanel.SpotStatusView
                 case SpotStatusModel.NEVER_SEEN:
                     return cfg.format.artillery.neverSeen;
                 case SpotStatusModel.SEEN:
-                    return cfg.format.artillery.seen;
+                    return cfg.format.artillery.lost;
                 case SpotStatusModel.REVEALED:
                     return cfg.format.artillery.revealed;
                 case SpotStatusModel.DEAD:

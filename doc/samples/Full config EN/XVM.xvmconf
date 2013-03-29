@@ -83,6 +83,28 @@
     "removeSquadIcon": false, // true - Disable Platoon icons.
     // Display options for Team/Clan logos (see battleLoading above).
     "clanIcon": { "show": true, "x": 0, "y": 6, "xr": 0, "yr": 6, "h": 16, "w": 16, "alpha": 90 },
+    // Enemy spotted status marker at right side panel
+    "enemySpottedMarker": {
+      "enabled": true,
+      "Xoffset": 15, // offset relative to level icon
+      "Yoffset": 0,
+      "format": {
+        // never seen this enemy
+        "neverSeen": "<FONT FACE=\"$FieldFont\" SIZE=\"24\" COLOR=\"#DEDEDE\">*</FONT>",
+        // this enemy was seen atleast once
+        "lost": "",
+        // enemy currently revealed at minimap
+        "revealed": "",
+        "dead": "",
+        // Artillery specific values
+        "artillery": {
+          "neverSeen": "",
+          "lost": "",
+          "revealed": "",
+          "dead": ""
+        }
+      }
+    },
     // Options for the "medium" panels - the first of the medium panels
     "medium": {
       "width": 46,    // 0..250 - Width of the player's name column. Default is 46.
