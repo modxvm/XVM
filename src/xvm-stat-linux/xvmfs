@@ -24,10 +24,10 @@ from xml.dom import minidom
 """ Global constants and variables section.
 """
 
-# Based on XVM 3.1.2, SVN rev. 1104
-# Last change of xvm-stat: SVN rev. 1409
+# Based on XVM 3.5.0, SVN rev. 1604
+# Last change of xvm-stat: SVN rev. 1604
 
-XVMFS_VERSION = '0.2.2'
+XVMFS_VERSION = '0.3.0'
 fuse.fuse_python_api = (0, 2)
 
 # Logging configuration.
@@ -36,7 +36,7 @@ fuse.fuse_python_api = (0, 2)
 # The log files are created in the current directory by default.
 # Use '-o log_dir=...' option to override it.
 # Example:
-# $ xvmfs -o debug -o log_dir=/tmp/xvm res_mods/.stat
+# $ ./xvmfs -o debug -o log_dir=/tmp/xvm res_mods/.stat
 LOG_DIR = '.'
 XVM_LOG = 'xvmfs.log'
 XVM_STAT_LOG = 'xvmfs-stat.log'
@@ -47,9 +47,8 @@ LogStat = None
 DEFAULT_XVM_CFG = 'xvm-stat.exe.config'
 DEFAULT_WOT_CFG = 'WOTLauncher.cfg'
 
-# Original xvm-stat.exe tells the name of its current folder (which should be the folder
-# with WoT binaries) to it's ingame components.
-# Make them happy.
+# Required only if the game is installed on NTFS partition because of
+# NTFS filename limit to 255 chars.
 WINE_GAME_DIR = 'C:\\Games\\World_of_Tanks'
 
 # Components of virtual FS
@@ -71,7 +70,13 @@ BEGIN_CMD = '/@'
 PING_THRESHOLD = 500
 
 lock = threading.RLock()
-lockIngame = threading.RLock()
+# remove lockIngame
+lockNetwork = threading.RLock()
+lockResults = threading.RLock()
+
+EMPTY_RESULT = '{"status":"EMPTY"}'
+BAD_REQUEST_RESULT = '{"status":"BAD_REQUEST"}'
+PUBLIC_TOKEN = 'linux'
 
 """ Classes definition section.
 """
@@ -98,7 +103,7 @@ class XvmFS(Fuse):
         self.logString = None
         self.logLength = 0
         self.vars = {}
-        self.requests = []
+        self.results = []
         self.xvm_cfg = DEFAULT_XVM_CFG
         self.wot_cfg = DEFAULT_WOT_CFG
         self.game_dir = WINE_GAME_DIR
@@ -190,121 +195,114 @@ class XvmFS(Fuse):
     def xvm_exec_cmd(self, command):
         if command == self.command:
             return
+        with lock:
+            self.command = command
+            self.result = ''
+            cmd = command.split(' ', 1)
+            command = cmd[0]
+            parameters = cmd[1] if len(cmd) > 1 else ''
 
-        lock.acquire()
+            if command == '':
+                self.result = BAD_REQUEST_RESULT
+                return
 
-        self.command = command
-        self.result = ''
+            if command not in ['@LOG', '@LOGSTAT', '@SET', '@ADD']:
+                Log.info("=> %s %s" % (command, parameters))
 
-        cmd = command.split()
-        command = cmd[0]
-        parameters = cmd[1] if len(cmd) > 1 else ''
+            try:
+                if command == '@LOG':
+                    self.ProcessLog(parameters, Log)
+                elif command == '@LOGSTAT':
+                    self.ProcessLog(parameters, LogStat)
 
-        if not command.startswith('@LOG'):
-            Log.info("=> %s %s" % (command, parameters))
+                elif command in ['@SET', '@ADD']:
+                    value = CollectParts(parameters)
+                    if value:
+                        Log.debug('%s %s' % (command, value))
+                        if command == '@SET':
+                            with lockResults:
+                                self.results.append(dict(result=None, thread=None, players=[]))
+                        self.AddPendingPlayers(value)
+                    self.result = '{"resultId":%d}' % (len(self.results) - 1)
 
+                elif command == '@VAR':
+                    v = parameters.split('=', 1)
+                    if len(v) < 2:
+                        raise Exception('Bad variable received: ' + parameters)
+                    Log.info("SET VAR: " + parameters)
+                    self.vars[v[0].strip()] = v[1]
+
+                elif command == '@GET_VERSION':
+                    result = [self.version, self.game_dir]
+                    result = result + ["%s=%s" % (key, value)
+                            for (key, value) in self.vars.items()]
+                    self.result = '\n'.join(result)
+                    Log.debug('result: ' + str(self.result))
+
+                elif command == '@GET_PLAYERS':
+                    if len(self.results) <= 0:
+                        raise Exception('No last result: -1')
+                    with lockResults:
+                        if self.results[-1]['players'] is None:
+                            raise Exception('No players: %d' + len(self.results))
+                        self.result = json.dumps(self.results[-1]['players'])
+                    Log.debug('result: ' + str(self.result))
+
+                elif command == '@GET_ASYNC':
+                    def target(resultId, arg):
+                        with lockNetwork:
+                            with lockResults:
+                                r = self.results[resultId]
+                            res = self.GetStat(r)
+                            with lockResults:
+                                if not res:
+                                    res = '{"status":"ERROR","error":"no result: %d"}' % (resultId)
+                                self.results[resultId]['result'] = res
+                                self.results[resultId]['thread'] = None
+                    self.result = self.AsyncWrapper(parameters, target)
+                    Log.debug('result: ' + str(self.result))
+
+                elif command == '@INFO_ASYNC':
+                    def target(resultId, arg):
+                        with lockNetwork:
+                            res = self.GetInfo(r)
+                            with lockResults:
+                                if not res:
+                                    res = '{"status":"ERROR","error":"no result: %d"}' % (resultId)
+                                self.results[resultId]['result'] = res
+                                self.results[resultId]['thread'] = None
+                    self.result = self.AsyncWrapper(parameters, target)
+                    Log.debug('result: ' + str(self.result))
+            except Exception, ex:
+                Log.error("Exception during %s: %s" % (str(command), str(ex)))
+                Log.debug('\n' + traceback.format_exc(ex))
+
+    def AsyncWrapper(self, parameters, target):
+        if parameters in ['', None]:
+            raise Exception('Empty resultId')
+
+        p = re.split('\s+', parameters, 2)
         try:
-            if command == '@LOG':
-                self.ProcessLog(parameters, Log)
+            resultId = int(p[0])
+            if not -1 <= resultId < len(self.results):
+                raise Exception()
+        except:
+            raise Exception('Invalid resultId: ' + p[0])
 
-            elif command == '@LOGSTAT':
-                self.ProcessLog(parameters, LogStat)
+        with lockResults:
+            if resultId == -1:
+                self.results.append(dict(result=None, thread=None))
+                resultId = len(self.results) - 1
+            res = self.results[resultId]
+            if res['result']:
+                return res['result']
+            if res['thread'] is None:
+                args = p[2] if len(p) > 2 else ''
+                t = threading.Thread(target=target, args=(resultId, args))
+                res['thread'] = t
+                t.start()
 
-            elif command == '@VAR':
-                v = parameters.split('=')
-                if len(v) < 2:
-                    raise Exception('Bad variable received: ' + parameters)
-
-                Log.info("SET VAR: " + parameters)
-                self.vars[v[0].strip()] = v[1]
-
-            elif command in ['@SET', '@ADD']:
-                if command == '@SET':
-                    self.requests.append(dict(players=[], result=None, thread=None))
-
-                threading.Thread(target=self.AddPendingPlayers,
-                        args=(parameters,)).start()
-                self.result = """{"resultId":%d}""" % (len(self.requests) - 1)
-
-            elif command == '@RUN':
-                if len(self.requests) <= 0:
-                    raise Exception('No request')
-                try:
-                    self.result = self.requests[-1]['result'] = self.GetStat(
-                            self.requests[-1])
-                    self.result = json.dumps(self.result)
-
-                except Exception, ex:
-                    Log.error("Exception during @RUN command: " + str(ex))
-                    Log.debug("\n" + traceback.format_exc(ex))
-
-            elif command == '@GET_LAST_STAT':
-                if len(self.requests) <= 0:
-                    raise Exception('No request')
-                self.result = json.dumps(self.requests[-1]['result'])
-
-            elif command == '@RUN_ASYNC':
-                if parameters in [None, '']:
-                    raise Exception('Empty resultId')
-
-                resultId = int(parameters.split()[0])
-                if not 0 <= resultId < len(self.requests):
-                   raise Exception("Invalid resultId %d" % resultId)
-
-                request = self.requests[resultId]
-
-                if request['result'] not in [None, '']:
-                    self.result = json.dumps(request['result'])
-                else:
-                    if request['thread'] is None:
-                        t = threading.Thread(target=self.xvm_run_async, args=(resultId,))
-                        self.requests[resultId]['thread'] = t
-                        Log.debug('Starting new thread for xvm_run_async')
-                        t.start()
-                        Log.debug('New thread for xvm_run_async is started')
-
-                    self.result = """{"status":"NOT_READY"}"""
-
-            elif command == '@GET_VERSION':
-                result = [self.version, self.game_dir]
-                result = result + ["%s=%s" % (key, value)
-                        for (key, value) in self.vars.items()]
-
-                self.result = '\n'.join(result)
-
-            elif command == '@INFO':
-                """ this will start network operations in main thread """
-                self.result = self.GetInfo(parameters)
-
-            else:
-                Log.info('Unknown command: ' + command)
-
-            if self.result == None:
-                self.result = ''
-            elif self.result != '':
-                Log.debug("result: " + self.result)
-
-        except Exception,ex:
-            Log.error("xvm_exec_cmd: exception during %s: %s" % (str(command), str(ex)))
-            Log.debug('\n' + traceback.format_exc(ex))
-        finally:
-            lock.release()
-
-    def xvm_run_async(self, resultId):
-        Log.debug('Executing xvm_run_async, obtaining lockIngame...')
-        lockIngame.acquire()
-        Log.debug('Got lockIngame for xvm_run_async')
-        try:
-            self.requests[resultId]['result'] = self.GetStat(self.requests[resultId])
-            Log.debug('Loaded: %d' % resultId )
-
-        except Exception, ex:
-            Log.error('Exception in xvm_run_async: ' + str(ex))
-            Log.debug('\n' + traceback.format_exc(ex))
-
-        finally:
-            Log.debug('Releasing lockIngame from xvm_run_async')
-            lockIngame.release()
+            return '{"status":"NOT_READY","resultId":%d}' % (resultId)
 
     """ Network operations
     """
@@ -334,6 +332,8 @@ class XvmFS(Fuse):
                     wotVersion = 'SEA'
                 elif url.rfind('http://update.worldoftanks.vn') > -1:
                     wotVersion = 'VTC'
+                elif url.rfind('http://update.worldoftanks.kr') > -1:
+                    wotVersion = 'KR'
                 elif url.rfind('http://update-ct.wargaming.net/') > -1:
                     wotVersion = 'CT'
 
@@ -397,8 +397,7 @@ class XvmFS(Fuse):
             tmpTime = None
 
             try:
-                testId = 'test' if self.version.startswith('CN') else '001'
-                data, tmpTime = self.loadUrl(tempUrl, testId, True)
+                data, tmpTime = self.loadUrl(tempUrl, 'test', True)
             except:
                 Log.info("Exception: " + str(ex))
 
@@ -425,7 +424,7 @@ class XvmFS(Fuse):
         if not test:
             Log.info('HTTP: ' + str(members))
 
-        url = url.replace('%1', members)
+        url = url.replace('%1', members).replace('%2', PUBLIC_TOKEN)
         Log.debug('loadUrl: ' + url )
 
         duration = None
@@ -460,77 +459,45 @@ class XvmFS(Fuse):
     """ Stat operations
     """
 
-    def AddPendingPlayers(self, parameters):
-        try:
-            Log.debug('Executing AddPendingPlayer, obtaining lockIngame...')
-            lockIngame.acquire()
-            Log.debug('Got lockIngame for AddPendingPlayers')
-
-            for chunk in parameters.split(','):
-                param = [i for i in chunk.split('=') if len(i) > 0]
-                if len(param) != 2:
-                    continue
-
-                id = long(param[0])
-                found = next((x for x in self.requests[-1]['players']
-                        if x['id'] == id), None)
-
-                if found is not None:
-                    continue
-
-                param2 = [i for i in param[1].split('&') if len(i) > 0]
-                full_name = re.split('\[|\]', param2[0])
-                name = full_name[0]
-                clan = full_name[1] if len(full_name) > 1 else ''
-                vname = param2[1] if len(param2) > 1 else ''
-
-                try:
-                    me = int(param2[2])
-                except Exception, ex:
-                    me = 0
-
-                self.requests[-1]['players'].append(dict(id=id, name=name,
-                        clan=clan, vn=vname, me=me))
-
-        except Exception, ex:
-            Log.error(str(ex))
-            Log.debug("\n" + traceback.format_exc(ex))
-        finally:
-            Log.debug('Releasing lockIngame from AddPendingPlayers')
-            lockIngame.release()
+    def AddPendingPlayers(self, value):
+        pd = json.loads(value.replace('\n', '\\n'))
+        found = next((True for x in self.results[-1]['players']
+                if x['id'] == pd['id']), False)
+        if found:
+            return
+        n = re.split('[\[\] ]+', pd['n'])
+        pd['_label'] = n[0].upper()
+        pd['_clan'] = n[1].upper() if len(n) > 1 else ''
+        self.results[-1]['players'].append(pd)
 
     def GetStat(self, req):
         self.PrepareStat(req)
         res = dict(players=[], info=dict(xvm=self.modInfo))
 
         for pd in req['players']:
-            cacheKey = "%d=%s" % (pd['id'], pd['vn'])
+            cacheKey = "%d=%s" % (pd['id'], pd['v'])
 
             if self.cache.has_key(cacheKey):
-                item = self.cache[cacheKey]['stat']
-                item['name'] = pd['name']
+                item = self.cache[cacheKey]
+                item['name'] = pd['_label']
                 res['players'].append(item)
 
-        return res
+        return json.dumps(res)
 
     def PrepareStat(self, req):
         requestList = []
 
         for pd in req['players']:
-            cacheKey = "%(id)d=%(vn)s" % pd
+            cacheKey = "%(id)d=%(v)s" % pd
 
             if self.cache.has_key(cacheKey):
-                currentMember = self.cache[cacheKey]
-
-                if currentMember['notInDb']:
-                    Log.info("NOT IN DB - %(id)d %(name)s %(vn)s" % pd)
                 continue
 
-            if pd['vn'] in [None, '']:
+            if pd['v'] in [None, '']:
                 requestList.append(str(pd['id']))
             else:
-                requestList.append("%d=%s%s" % (pd['id'], pd['vn'],
-                        '=1' if pd['me'] == 1 else ''))
+                requestList.append("%d=%s%s" % (pd['id'], pd['v'],
+                        '=1' if pd['s'] == 1 else ''))
 
         updateRequest = ','.join(requestList)
         if len(updateRequest) <= 0:
@@ -549,7 +516,18 @@ class XvmFS(Fuse):
                 Log.warning('Empty response or parsing error')
                 return
 
-            data = json.loads(responseFromServer.replace('\n', '\\n'))
+            try:
+                data = json.loads(responseFromServer)
+            except ValueError:
+                try:
+                    data = json.loads(responseFromServer.replace('\n', '\\n'))
+                except ValueError:
+                    try:
+                        data = json.loads(responseFromServer.replace('\\n', '\\\\n'))
+                    except ValueError:
+                        Log.error('Failed to parse stat data')
+                        return
+
             if not data.has_key('players'):
                 Log.warning('Stat request failed: ' + str(responseFromServer))
                 return
@@ -603,24 +581,27 @@ class XvmFS(Fuse):
                                 for (x,y,z) in keys2])
 
                 cacheKey = "%d=%s" % (stat['id'], stat['vn'] or '')
-                self.cache[cacheKey] = dict(stat=stat, notInDb=False)
+                self.cache[cacheKey] = stat
 
                 pd = next((x for x in req['players'] if x['id'] == stat['id']), None)
                 if pd is not None:
-                    self.cache[cacheKey]['stat']['clan'] = pd['clan']
+                    stat['name'] = pd['_label']
+                    stat['vn'] = pd['v']
+                    stat['clan'] = pd['_clan']
 
             for pd in req['players']:
-                cacheKey = "%(id)d=%(vn)s" % pd
+                cacheKey = "%(id)d=%(v)s" % pd
                 if self.cache.has_key(cacheKey):
                     continue
 
-                Log.debug("Player [%(id)s] %(vn)s not in Database" % pd)
+                Log.debug("Player %(id)s %(v)s %(n)s not in Database" % pd)
 
-                self.cache[cacheKey] = dict(notInDB=True, stat=dict(
-                        id=pd['id'],
-                        name=pd['name'],
-                        vname=pd['vn'],
-                        clan=pd['clan']))
+                self.cache[cacheKey] = dict(
+                        id=pd['id']
+                        , vn=pd['v']
+                        , name=pd['_label']
+                        , clan=pd['_clan']
+                )
 
         except Exception, ex:
             Log.error('PrepareStat exception: ' + str(ex))
@@ -629,76 +610,47 @@ class XvmFS(Fuse):
     def GetInfo(self, req):
         if self.proxies is None or len(self.proxies) <= 0:
             Log.warning('Unable to query user info: no proxy found.')
-            return ''
+            return '{"status":"ERROR","error":"NO_DATA"}'
 
         try:
             s = req.decode('hex')
         except:
             Log.error("Error decoding @INFO string: " + req)
             Log.debug(traceback.format_exc())
-            return ''
+            return '{"status":"ERROR","error":"EXCEPTION"}'
 
-        key = "@INFO," + s
+        sa = s.split(',')
+        if len(sa) > 1:
+            s = sa[1] + '/' + sa[0]
+
+        key = "@INFO/" + s
         if self.infocache.has_key(key):
             return self.infocache[key]
 
-        request = "0,INFO," + s.replace('?', '%3F')
+        request = "INFO/" + s.replace('?', '%3F')
         proxy = self.proxies[randint(0, len(self.proxies) - 1)]
 
         try:
             response, duration = self.loadUrl(proxy, request)
         except:
-            Log.warning('User info query failed.')
+            Log.error('User info query failed.')
             Log.debug(traceback.format_exc())
-            return ''
+            return '{"status":"ERROR","error":"EXCEPTION"}'
 
         if len(response) <= 0:
-            Log.warning('Empty response or parsing error')
-            return ''
+            Log.error('Empty response or parsing error')
+            return '{"status":"ERROR","error":"NO_DATA"}'
 
         self.infocache[key] = response
         return response
 
     """ Log processing
     """
-
     def ProcessLog(self, parameters, logger):
-        if parameters.find(',') >= 0:
-            if self.logString not in [None, '']:
-                Log.warning('Incomplete @LOG string')
-                self.DecodeAndPrintLogString(logger)
-
-            self.logString = ''
-
-            try:
-                strArray = parameters.split(',')
-                self.logLength = int(strArray[0], 16)
-                parameters = strArray[1]
-
-            except Exception,ex:
-                self.logLength = 0
-                Log.error('Error parsing @LOG command parameters')
-
-        if self.logLength == 0:
+        value = CollectParts(parameters)
+        if not value:
             return
-
-        self.logString = self.logString + parameters
-        if self.logLength <= len(self.logString):
-            self.DecodeAndPrintLogString(logger)
-
-    def DecodeAndPrintLogString(self, logger):
-        try:
-            msg = self.logString.decode('hex')
-            logger.info(msg)
-
-        except Exception, ex:
-            cmd = '@LOG' if logger.name == 'XVM' else '@LOGSTAT'
-            Log.error("Error decoding %s string %s" % (cmd, self.logString))
-            Log.debug('\n' + traceback.format_exc(ex))
-
-        finally:
-            self.logLength = 0
-            self.logString = ''
+        logger.info(value)
 
     """ Compatibility support
     """
@@ -733,8 +685,8 @@ def main():
             default=DEFAULT_WOT_CFG)
 
     server.parser.add_option(mountopt='game_dir', metavar='DIR',
-            help='The path to the game folder as it is displayed into Wine.'
-                + " Default is '%s'" % WINE_GAME_DIR,
+            help='(Obsolete) The path to the game folder as it is displayed'
+                + " into Wine. Default is '%s'" % WINE_GAME_DIR,
             default=WINE_GAME_DIR)
 
     server.parser.add_option(mountopt='log_dir', metavar='DIR', default=LOG_DIR,
@@ -798,6 +750,71 @@ def locate_file(filename):
     found = next((x for x in os.listdir(fdir) if x.lower() == fname), None)
 
     return found
+
+class Parts:
+    """    Join together parts of a message and decode it.
+    Usage example:
+        p = Parts()
+        p.SetPart(0,'6c6f72656d2069707')
+        p.SetPart(1,'3756d20646f6c6f72207369')
+        p.SetPart(2,'7420616d6574')
+        p.length = 52
+        p.IsComplete()
+        print p.value
+    The output should be 'lorem ipsum dolor sit amet'
+    """
+    def __init__(self):
+        self.value = None
+        self.length = -1
+        self.parts = []
+
+    def IsComplete(self):
+        if self.value is not None:
+            return True
+        if None in self.parts:
+            return False
+
+        v = ''.join(self.parts)
+        self.value = v.decode('hex') if len(v) == self.length else None
+        return self.value != None
+
+    def SetPart(self, id, value):
+        if len(self.parts) <= id:
+            self.parts.extend((id - len(self.parts) + 1) * [None])
+        self.parts[id] = value
+
+parts = {}
+def CollectParts(parameters):
+    param_list = parameters.split(',', 2)
+    if len(param_list) != 3:
+        Log.error('Malformed parameters: ' + str(parameters))
+        return None
+
+    (cmdId, partId, params) = param_list
+    try:
+        partId = int(partId)
+    except ValueError, ve:
+        Log.error(str(ve))
+        return None
+    if cmdId[0] == '_':
+        Log.warning('Unknown SWF sandbox ' + cmdId)
+    if not parts.has_key(cmdId):
+        parts[cmdId] = Parts()
+
+    part = parts[cmdId]
+    if partId == 0:
+        try:
+            (length, params) = params.split(',', 1)
+            part.length = int(length, 16)
+        except ValueError, ve:
+            Log.error(str(ve))
+            return None
+    part.SetPart(partId, params)
+    if not part.IsComplete():
+        return None
+
+    del parts[cmdId]
+    return part.value
 
 if __name__ == '__main__':
     main()
