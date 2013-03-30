@@ -265,7 +265,7 @@ class XvmFS(Fuse):
                 elif command == '@INFO_ASYNC':
                     def target(resultId, arg):
                         with lockNetwork:
-                            res = self.GetInfo(r)
+                            res = self.GetInfo(arg)
                             with lockResults:
                                 if not res:
                                     res = '{"status":"ERROR","error":"no result: %d"}' % (resultId)
