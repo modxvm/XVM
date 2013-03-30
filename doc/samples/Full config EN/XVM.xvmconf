@@ -2,28 +2,34 @@
  * Full configuration file (hereinafter - the configuration) with all possible options,
  * default configuration.
  *
+ *
+ *
+ *
+ *
+ *
+ *
  * Attention! You must NOT use the percent symbol in this file.
  * Instead, the percent symbol should be written: \u0025
  */
 {
   "configVersion": "1.5.0", // Version of the config. Do not remove or change it unnecessarily.
-  "editorVersion": "0.36",  // Version of the editor.
+  "editorVersion": "0.41",  // Version of the editor.
   // Common config options. All settings information in the mod not being used.
   "definition": {
     "author": "sirmax2",                        // Config author
     "description": "Default settings for XVM",  // Config description
     "url": "http://code.google.com/p/wot-xvm/", // Address to config updates
-    "date": "16.02.2013",                       // Config last modified
+    "date": "30.03.2013",                       // Config last modified
     "gameVersion": "0.8.4",                     // Supported version of the game
-    "modMinVersion": "3.4.0"                    // The minimum required version of the XVM mod
+    "modMinVersion": "3.5.0"                    // The minimum required version of the XVM mod
   },
   // General parameters for the battle interface
   "battle": {
     "mirroredVehicleIcons": true,               // false - Disable tank icon mirroring (good for alternative icons). True by default.
     "showPostmortemTips": true,                 // false - Disable pop-up panel at the bottom after death. True by default.
     "removePanelsModeSwitcher": false,          // true - Remove the Players Panel mode switcher (buttons for changing size)
-    "highlightVehicleIcon": true,               // false - disable highlighting of selected vehicle icon and squad
-    "clockFormat": "H:N",                       // Show the clock on the Debug Panel (near FPS). Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds. "" - remove clock.
+    "highlightVehicleIcon": true,               // false - disable highlighting of own vehicle icon and squad
+    "clockFormat": "H:N",                       // Format of clock on the Debug Panel (near FPS). Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds. "" - remove clock.
     "useStandardMarkers": false,                // true - use standard client vehicle markers
     "clanIconsFolder": "../../../clanicons"     // path to clan icons folder relative to res_mods/[GAME VERSION]/gui/flash
   },
@@ -45,7 +51,7 @@
   },
   // Parameters of the Battle Loading Screen
   "battleLoading": {
-    "clockFormat": "H:N:S",                     // Show the clock on the Battle Loading Screen. Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds. "" - remove clock.
+    "clockFormat": "H:N:S",                     // Format of clock on the Battle Loading Screen. Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds. "" - remove clock.
     "showChances": false,                       // true - Enable display of "chance to win" (only with xvm-stat) Read more: http://www.koreanrandom.com/forum/topic/1663-
     "showChancesExp": false,                    // Show experimental "chance to win" formula
     "removeSquadIcon": false,                   // true - Disable Platoon icons. This blank space can house, for example, clan logos
@@ -86,15 +92,16 @@
     // Enemy spotted status marker at right side panel
     "enemySpottedMarker": {
       "enabled": true,
-      "Xoffset": 15, // offset relative to level icon
+      "Xoffset": 15, // Offset relative to level icon
       "Yoffset": 0,
       "format": {
-        // never seen this enemy
-        "neverSeen": "<FONT FACE=\"$FieldFont\" SIZE=\"24\" COLOR=\"#DEDEDE\">*</FONT>",
-        // this enemy was seen atleast once
+        // Never seen this enemy
+        "neverSeen": "<font face='$FieldFont' size='24' color='#DEDEDE'>*</font>",
+        // This enemy was seen atleast once
         "lost": "",
-        // enemy currently revealed at minimap
+        // Enemy currently revealed at minimap
         "revealed": "",
+		// Dead enemy
         "dead": "",
         // Artillery specific values
         "artillery": {
@@ -132,8 +139,9 @@
       "vehicleFormatRight": "<font color='{{c:xwn}}'>{{vehicle}}</font>"
     }
   },
+  // Parameters of the After Battle Screen
   "finalStatistic": {
-    "startPage": 1,           // initial page (1, 2, 3)
+    "startPage": 1,           // Initial page (1, 2, 3)
     // 1 - squad
     // 2 - player name
     // 3 - vehicle name
@@ -141,7 +149,7 @@
     // 5 - frags
     // 6 - experience
     // 7 - medals
-    "sortColumn": 6,          // number of column for sorting (1 - 7)
+    "sortColumn": 6,          // Number of column for sorting (1 - 7)
     "showChances": false,     // true - Enable display of "chance to win" (only with xvm-stat)
     "showChancesExp": false   // Show experimental "chance to win" formula
   },
@@ -152,15 +160,15 @@
   },
   // Hit log (my hits calculator)
   "hitLog": {
-    "enabled": true,      // on/off switch
+    "visible": true,      // On/off switch
     "x": 270,             // X position (negative values - bind to right side of screen)
     "y": 5,               // Y position (negative values - bind to bottom side of screen)
     "w": 500,             // Width
     "h": 1000,            // Height
-    "lines": 0,           // Number of lines. Old lines will be pushed out
+    "lines": 0,           // Number of lines with hits. Old lines will be pushed out
     "direction": "down",  // Log direction: up - lines will be added from up to down, down - from down to up.
-    "insertOrder": "end", // Insert order: begin - insert new values to begin, end - add to end
-    "groupHitsByPlayer": true, // group hits by players name
+    "groupHitsByPlayer": true, // Group hits by players name
+	"insertOrder": "end", // Insert order: begin - insert new values to begin, end - add to end
     // Substitution for {{dead}} macro when tank is dead
     "deadMarker": "<font face='Wingdings'>N</font>",
     "blowupMarker": "<font face='Wingdings'>M</font>",
@@ -183,7 +191,7 @@
   "captureBar": {
     "enabled": true, // On/off switch
     "primaryTitleOffset": 7, // Upper textfield offset in case of big font size
-    "appendPlus" : true, // append plus to three capturers. Cant calculate more than three.
+    "appendPlus" : true, // Append plus to three capturers. Cant calculate more than three.
     // Capture format (macros allowed, see readme-en.txt)
     "enemy": {
       "primaryTitleFormat":   "<font size='15' color='#FFFFFF'>Enemy base capture! {{extra}}</font>", // Upper textfield
@@ -216,20 +224,18 @@
     // Fields can load images from disk by HTML:
     //   "format": { "ally": "<img src='img://../icons/bzz.png' width='8' height='8'>"}, ...
     //   While file is at WoT\res_mods\icons\bzz.png
-    // On\off minimap mod switch as a whole.
-    // Turned off by default.
-    "enabled": true,
+    "enabled": true,                // false - Disable
     "mapBackgroundImageAlpha": 100, // Map image transparency.
     "selfIconAlpha": 100,           // Self icon transparency. White pointing arrow.
     "cameraAlpha": 100,             // Camera transparency and its attached geometry. Green triangle.
     "iconScale": 1,                 // Vehicles icon size.
                                     // Does not affect attached geometry and textfields.
                                     // Floating point allowed: 0.7 1.4.
-    "zoom": { // Map zoom by key pressing. Keys are defined at "keys" upper level section
+    "zoom": { // Map zoom by key pressing. Key is defined at "keys" upper level section.
       "pixelsBack": 160,  // Number of pixels to get back from maximum size
-      "centered": true // Center zoomed minimap at display center
+      "centered": true    // Center zoomed minimap at display center
     },
-    "labels": {                     // textfields. Basic HTML\CSS supported.
+    "labels": {                     // Textfields. Basic HTML\CSS supported.
       "nickShrink": 5,              // Maximum nickname size for {{short-nick}} macro.
       "vehicleclassmacro": {        // {{vehicle-class}} macro substitutions by vehicle class.
         "light": "", // ♦
@@ -237,7 +243,7 @@
         "heavy": "",
         "td": "",    // ▼
         "spg": "■",  // Artillery
-        "superh": "" // superHeavyTank extra class by gui_settings.xml
+        "superh": "" // HT10 by gui_settings.xml
         // Special symbols website:
         //   http://www.fileformat.info/info/unicode/char/25a0/index.htm
         // Great symbolic font by Andrey_Hard for {{vehicle-class}}:
@@ -246,14 +252,12 @@
       "units": { // Textfields for tanks on minimap.
         "revealedEnabled":  true, // Textfields switch for revealed units.
         "lostEnemyEnabled": true, // Textfields switch for lost enemy units. Show last seen position.
-        "format": { // Формат поля.
-          "ally":  "<span class='mm_a'>{{vehicle}}</span>", // Ally
-          "enemy": "<span class='mm_e'>{{vehicle}}</span>", // Enemy
-          "squad": "<textformat leading='-1'><span class='mm_s'><i>{{short-nick}}</i>\n{{vehicle}}</span><textformat>", // Squadmates
-          // Lost enemy units
-          "lost":  "<span class='mm_dot'>\u2022</span><span class='mm_l'><i>{{vehicle}}</i></span>",
-          // For your own marker or spectated subject.
-          "oneself": ""
+        "format": {
+          "ally":  "<span class='mm_a'>{{vehicle}}</span>",
+          "enemy": "<span class='mm_e'>{{vehicle}}</span>",
+          "squad": "<textformat leading='-1'><span class='mm_s'><i>{{short-nick}}</i>\n{{vehicle}}</span><textformat>",
+          "lost":  "<span class='mm_dot'>\u2022</span><span class='mm_l'><i>{{vehicle}}</i></span>",  // Lost enemy units
+          "oneself": ""  // For your own marker or spectated subject.
         },
         "css": { // CSS style.
           "ally":  ".mm_a{font-family:$FieldFont; font-size:8px; color:#C8FFA6;}",
@@ -324,8 +328,7 @@
           "oneself": 100
         }
       },
-      "mapSize": { // Textfield for map side size. 1000m, 700m, 600m.
-        // Works only with xvm-stat.exe if locale is not RU, EN or CH
+      "mapSize": { // Textfield for map side size. 1000m, 700m, 600m. Works only with xvm-stat.exe if locale is not RU, EN or CH
         "enabled": true,
         "format": "<b>{{cellsize}}0 m</b>",
         "css": "font-size:10px; color:#FFCC66;",
@@ -347,12 +350,10 @@
         "height": 30
       }
     },
-    "circles": { // Distance circles. Only real map meters. Only for owned unit.
-        // Works only with xvm-stat.exe if locale is not RU, EN or CH
+    "circles": { // Distance circles. Only real map meters. Only for owned unit.  Works only with xvm-stat.exe if locale is not RU, EN or CH
         "enabled": true,
         "major": [
-            // 445 meters - maximum reveal distance.
-            { "enabled": true, "distance": 445, "thickness": 0.75, "alpha": 35, "color": "0xFFCC66" },
+            { "enabled": true, "distance": 445, "thickness": 0.75, "alpha": 35, "color": "0xFFCC66" },  // 445 meters - maximum reveal distance.
             { "enabled": false, "distance": 50, "thickness": 1, "alpha": 30, "color": "0xFFFFFF" }
         ],
         // Special circles dependent on vehicle type.
@@ -361,7 +362,7 @@
         //   See other vehicle types at:
         // http://code.google.com/p/wot-xvm/source/browse/trunk/src/xvm/src/wot/utils/VehicleInfoData2.as
         //   Artillery gun fire range may differ depending on vehicle angle relative to ground
-        // and vehicle height positioning relative to target.
+        // and vehicle height positioning relative to target. These factors are not considered.
         // See pics at http://goo.gl/ZqlPa
         "special": [
             { "su_18":            { "enabled": true, "distance": 552,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
@@ -479,7 +480,7 @@
       "color": "0xFFFFFF"
     }
   },
-  // OVER-TARGET MARKERS
+  // Over-target markers
   "markers": {
     // Ally
     "ally": {
@@ -587,6 +588,7 @@
           "textFields": [
             // Text field with the name of the tank
             {
+			  "name": "Tank name",
               "visible": true,                // false - Disable
               "x": 0,                         // Position on the X axis
               "y": -36,                       // Position on the Y axis
@@ -611,6 +613,7 @@
             },
             // Text field with the remaining / maximum health
             {
+			  "name": "Tank HP",
               "visible": true,                // false - Disable
               "x": 0,                         // Position on the X axis
               "y": -20,                       // Position on the Y axis
@@ -737,7 +740,8 @@
           "textFields": [
             // Text field with the name of the player
             {
-              "visible": true,                // false - Disable
+              "name": "Player name",
+			  "visible": true,                // false - Disable
               "x": 0,                         // Position on the X axis
               "y": -36,                       // Position on the Y axis
               "alpha": 100,                   // Opacity (dynamic transparency allowed, see readme-en.txt)
@@ -761,7 +765,8 @@
             },
             // Text field with the percentage of remaining health
             {
-              "visible": true,                // false - Disable
+              "name": "Remain HP",
+			  "visible": true,                // false - Disable
               "x": 0,                         // Position on the X axis
               "y": -20,                       // Position on the Y axis
               "alpha": 100,                   // Opacity (dynamic transparency allowed, see readme-en.txt)
@@ -1017,7 +1022,8 @@
           "textFields": [
             // Text field with the name of the player
             {
-              "visible": true,                // false - Disable
+              "name": "Player name",
+			  "visible": true,                // false - Disable
               "x": 0,                         // Position on the X axis
               "y": -34,                       // Position on the Y axis
               "alpha": 80,                    // Opacity (dynamic transparency allowed, see readme-en.txt)
@@ -1041,7 +1047,8 @@
             },
             // Text field with the name of the tank
             {
-              "visible": true,                // false - Disable
+              "name": "Tank name",
+			  "visible": true,                // false - Disable
               "x": 0,                         // Position on the X axis
               "y": -20,                       // Position on the Y axis
               "alpha": 80,                    // Opacity (dynamic transparency allowed, see readme-en.txt)
@@ -1173,7 +1180,8 @@
           "textFields": [
             // Text field with the name of the tank
             {
-              "visible": true,                // false - Disable
+              "name": "Tank name",
+			  "visible": true,                // false - Disable
               "x": 0,                         // Position on the X axis
               "y": -36,                       // Position on the Y axis
               "alpha": 100,                   // Opacity (dynamic transparency allowed, see readme-en.txt)
@@ -1197,7 +1205,8 @@
             },
             // Text field with the remaining / maximum health
             {
-              "visible": true,                // false - Disable
+              "name": "Tank HP",
+			  "visible": true,                // false - Disable
               "x": 0,                         // Position on the X axis
               "y": -20,                       // Position on the Y axis
               "alpha": 100,                   // Opacity (dynamic transparency allowed, see readme-en.txt)
@@ -1323,7 +1332,8 @@
           "textFields": [
             // Text field with the name of the player
             {
-              "visible": true,                // false - Disable
+              "name": "Player name",
+			  "visible": true,                // false - Disable
               "x": 0,                         // Position on the X axis
               "y": -36,                       // Position on the Y axis
               "alpha": 100,                   // Opacity (dynamic transparency allowed, see readme-en.txt)
@@ -1347,7 +1357,8 @@
             },
             // Text field with the percentage of remaining health
             {
-              "visible": true,                // false - Disable
+              "name": "Remain HP",
+			  "visible": true,                // false - Disable
               "x": 0,                         // Position on the X axis
               "y": -20,                       // Position on the Y axis
               "alpha": 100,                   // Opacity (dynamic transparency allowed, see readme-en.txt)
@@ -1603,7 +1614,8 @@
           "textFields": [
             // Text field with the name of the player
             {
-              "visible": true,                // false - Disable
+              "name": "Player name",
+			  "visible": true,                // false - Disable
               "x": 0,                         // Position on the X axis
               "y": -34,                       // Position on the Y axis
               "alpha": 80,                    // Opacity (dynamic transparency allowed, see readme-en.txt)
@@ -1627,7 +1639,8 @@
             },
             // Text field with the name of the tank
             {
-              "visible": true,                // false - Disable
+              "name": "Tank name",
+			  "visible": true,                // false - Disable
               "x": 0,                         // Position on the X axis
               "y": -20,                       // Position on the Y axis
               "alpha": 80,                    // Opacity (dynamic transparency allowed, see readme-en.txt)
@@ -1654,7 +1667,7 @@
       }
     }
   },
-  // COLOR SETTINGS
+  // Color settings
   "colors": {
     // System colors
     "system": {
