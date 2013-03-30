@@ -1,13 +1,13 @@
 ﻿/**
  * @author sirmax2, ilitvinov87
  */
+import wot.utils.Logger;
 import wot.PlayersPanel.PlayerListItemRenderer;
 import wot.PlayersPanel.SpotStatusModel;
 import wot.utils.Cache;
 import wot.utils.Config;
 import wot.utils.Defines;
 import wot.utils.GlobalEventDispatcher
-import wot.utils.Logger;
 import wot.utils.Macros;
 import wot.utils.StatLoader;
 import wot.utils.StatData;

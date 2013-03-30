@@ -57,7 +57,7 @@ class wot.PlayersPanel.SpotStatusView
             {
                 case SpotStatusModel.NEVER_SEEN:
                     return cfg.format.artillery.neverSeen;
-                case SpotStatusModel.SEEN:
+                case SpotStatusModel.LOST:
                     return cfg.format.artillery.lost;
                 case SpotStatusModel.REVEALED:
                     return cfg.format.artillery.revealed;
@@ -71,8 +71,8 @@ class wot.PlayersPanel.SpotStatusView
             {
                 case SpotStatusModel.NEVER_SEEN:
                     return cfg.format.neverSeen;
-                case SpotStatusModel.SEEN:
-                    return cfg.format.seen;
+                case SpotStatusModel.LOST:
+                    return cfg.format.lost;
                 case SpotStatusModel.REVEALED:
                     return cfg.format.revealed;
                 case SpotStatusModel.DEAD:
@@ -80,7 +80,7 @@ class wot.PlayersPanel.SpotStatusView
             }
         }
         
-        return "#undefined#";
+        return "ERROR";
     }
     
     // -- Getters

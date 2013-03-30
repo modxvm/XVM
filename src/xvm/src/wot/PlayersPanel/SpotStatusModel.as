@@ -12,7 +12,7 @@ class wot.PlayersPanel.SpotStatusModel
 {
     public static var DEAD:Number = 0;
     public static var NEVER_SEEN:Number = 1;
-    public static var SEEN:Number = 2;
+    public static var LOST:Number = 2;
     public static var REVEALED:Number = 3;
         
     private var seen:Array;
@@ -35,7 +35,7 @@ class wot.PlayersPanel.SpotStatusModel
             return REVEALED;
         }
 
-        return wasSeen(uid) ? SEEN : NEVER_SEEN;
+        return wasSeen(uid) ? LOST : NEVER_SEEN;
     }
     
     public function isArti(uid:Number):Boolean
