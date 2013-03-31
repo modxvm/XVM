@@ -27,7 +27,7 @@ from xml.dom import minidom
 # Based on XVM 3.5.0, SVN rev. 1604
 # Last change of xvm-stat: SVN rev. 1604
 
-XVMFS_VERSION = '0.3.0'
+XVMFS_VERSION = '0.3.2'
 fuse.fuse_python_api = (0, 2)
 
 # Logging configuration.
@@ -70,7 +70,6 @@ BEGIN_CMD = '/@'
 PING_THRESHOLD = 500
 
 lock = threading.RLock()
-# remove lockIngame
 lockNetwork = threading.RLock()
 lockResults = threading.RLock()
 
@@ -197,7 +196,7 @@ class XvmFS(Fuse):
             return
         with lock:
             self.command = command
-            self.result = ''
+            self.result = EMPTY_RESULT
             cmd = command.split(' ', 1)
             command = cmd[0]
             parameters = cmd[1] if len(cmd) > 1 else ''
@@ -792,7 +791,7 @@ def CollectParts(parameters):
 
     (cmdId, partId, params) = param_list
     try:
-        partId = int(partId)
+        partId = int(partId, 16)
     except ValueError, ve:
         Log.error(str(ve))
         return None
