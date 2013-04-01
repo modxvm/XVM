@@ -91,4 +91,7 @@ class wot.utils.Defines
     public static var LOADSTATE_LOADING = 2; // loading
     public static var LOADSTATE_DONE = 3;    // statistics loaded
     public static var LOADSTATE_UNKNOWN = 4; // unknown vehicle in FogOfWar
+
+    // Level in roman numerals
+    public static var ROMAN_LEVEL: Array = [ "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" ];
 }

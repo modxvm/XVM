@@ -11,10 +11,10 @@ class wot.TeamMemberRenderer.TeamMemberRenderer extends net.wargaming.messenger.
 {
     private var configured:Boolean;
     private var uid:Number;
-    private var m_effField:TextField;
+    private var m_infoField:TextField;
     private var stat:Object;
 
-    private static var dummy = Logger.dummy;
+    private static var __dummy = Logger.dummy;
 
     function TeamMemberRenderer()
     {
@@ -24,7 +24,7 @@ class wot.TeamMemberRenderer.TeamMemberRenderer extends net.wargaming.messenger.
 
         configured = false;
         uid = 0;
-        m_effField = null;
+        m_infoField = null;
         stat = null;
 
         GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
@@ -67,9 +67,9 @@ class wot.TeamMemberRenderer.TeamMemberRenderer extends net.wargaming.messenger.
             //    185, 2, "TeamRenderersHeaderTip");
         }
 
-        m_effField = Utils.duplicateTextField(this, "eff", vehicleLevelField, 0, "right");
-        m_effField._width = 20;
-        m_effField._x = width - 4;
+        m_infoField = Utils.duplicateTextField(this, "eff", vehicleLevelField, 0, "right");
+        m_infoField._width = 20;
+        m_infoField._x = width - 4;
 
         afterSetDataXVM();
     }
@@ -111,7 +111,7 @@ class wot.TeamMemberRenderer.TeamMemberRenderer extends net.wargaming.messenger.
             setXVMStat();
         else
         {
-            m_effField.htmlText = "";
+            m_infoField.htmlText = "";
             GlobalEventDispatcher.addEventListener("userdata_cached", this, setXVMStat);
             UserDataLoaderHelper.LoadUserData(uid, true);
         }
@@ -123,7 +123,7 @@ class wot.TeamMemberRenderer.TeamMemberRenderer extends net.wargaming.messenger.
         if (!Cache.Exist(key))
             return;
         GlobalEventDispatcher.removeEventListener("userdata_cached", this, setXVMStat);
-        stat = TeamRendererHelper.setXVMStat(key, m_effField);
+        stat = TeamRendererHelper.setXVMStat(key, m_infoField);
     }
 
     // override

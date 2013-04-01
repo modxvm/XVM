@@ -7,7 +7,6 @@ import wot.utils.Defines;
 import wot.utils.GraphicsUtil;
 import wot.utils.Locale;
 import wot.utils.Logger;
-import wot.utils.Macros;
 import wot.utils.Utils;
 import wot.utils.VehicleInfo;
 
@@ -252,7 +251,7 @@ class wot.VehicleMarkersManager.HitLog
                 format = formatArr.join(data.level);
             formatArr = format.split("{{rlevel}}");
             if (formatArr.length > 1)
-                format = formatArr.join(Macros.rlevel[data.level - 1]);
+                format = formatArr.join(Defines.ROMAN_LEVEL[data.level - 1]);
             formatArr = format.split("{{dmg-kind}}");
             if (formatArr.length > 1)
                 format = formatArr.join(Locale.get(data.damageType));

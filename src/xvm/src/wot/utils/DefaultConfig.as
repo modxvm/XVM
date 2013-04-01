@@ -78,18 +78,18 @@ class wot.utils.DefaultConfig
                 }
             },
             rating: {
-                showPlayersStatistics: true,     // Global switch. Handles whole statisctics module.
-                loadEnemyStatsInFogOfWar: true,  // Load players data in "fog of war".
-                enableStatisticsLog: false,      // Enable saving statistics to "xvm-stat.log" file
-                enableUserInfoStatistics: true,  // Enable statistics in the user info window
-                enableCompanyStatistics: true    // Enable statistics in the company window
+                showPlayersStatistics: true,	// Global switch. Handles whole statisctics module.
+                loadEnemyStatsInFogOfWar: true,	// Load players data in "fog of war".
+                enableStatisticsLog: false, 	// Enable saving statistics to "xvm-stat.log" file
+                enableUserInfoStatistics: true,	// Enable statistics in the user info window
+                enableCompanyStatistics: true	// Enable statistics in the company window
             },
-			squad: {
-				enabled: false, 	// Global switch
-				romanNumb: true,	// Roman level numbers
-				showClan: true,		// Show player clan
-				leftLvlBorder: ""	// Grille [4
-			},
+            squad: {
+                enabled: false,			// Global switch
+                romanNumbers: true,		// Roman level numbers
+                showClan: true,			// Show player clan
+                leftLvlBorder: ""		// Grille [4
+            },
             hotkeys: {
                 minimapZoom: { enabled: false, onHold: true, keyCode: 17 } // 17 - Ctrl
                 /*

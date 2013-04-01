@@ -41,19 +41,14 @@ class wot.utils.Locale
         tr["PutOwnCrew"] = "Put own crew";
         tr["PutBestCrew"] = "Put best crew";
 
-		// squad
-		tr["ussr"] = "USSR";
-		tr["germany"] = "Germany";
-		tr["usa"] = "USA";
-		tr["france"] = "France";
-		tr["uk"] = "UK";
-		tr["china"] = "China";
-		tr["HT"] = "HT";
-		tr["MT"] = "MT";
-		tr["LT"] = "LT";
-		tr["TD"] = "TD";
-		tr["SPG"] = "SPG";
-		
+        // squad
+        tr["ussr"] = "USSR";
+        tr["germany"] = "Germany";
+        tr["usa"] = "USA";
+        tr["france"] = "France";
+        tr["uk"] = "UK";
+        tr["china"] = "China";
+
         // RU
         tr = _translations["RU"];
 
@@ -126,20 +121,21 @@ class wot.utils.Locale
         // crew
         tr["PutOwnCrew"] = "Родной экипаж";
         tr["PutBestCrew"] = "Лучший экипаж";
-		
-		//squad
-		tr["Battle levels"] = "Ур. боёв";
-		tr["ussr"] = "СССР";
-		tr["germany"] = "Германия";
-		tr["usa"] = "США";
-		tr["france"] = "Франция";
-		tr["uk"] = "Великобритания";
-		tr["china"] = "Китай";
-		tr["HT"] = "ТТ";
-		tr["MT"] = "СТ";
-		tr["LT"] = "ЛТ";
-		tr["TD"] = "ПТ";
-		tr["SPG"] = "САУ";
+
+        //squad
+        tr["Vehicle"] = "Танк";
+        tr["Battle tiers"] = "Уровень боёв";
+        tr["ussr"] = "СССР";
+        tr["germany"] = "Германия";
+        tr["usa"] = "США";
+        tr["france"] = "Франция";
+        tr["uk"] = "Великобритания";
+        tr["china"] = "Китай";
+        tr["HT"] = "ТТ";
+        tr["MT"] = "СТ";
+        tr["LT"] = "ЛТ";
+        tr["TD"] = "ПТ";
+        tr["SPG"] = "САУ";
     }
 
     public static function setRegion(value: String)

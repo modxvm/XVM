@@ -9,15 +9,16 @@ FILES="
   battleloading.swf
   crew.swf
   FinalStatistic.swf
+  lobby_messenger.swf
   Minimap.swf
   PlayersPanel.swf
+  SquadMemberRenderer.swf
   StatisticForm.swf
   TeamBasesPanel.swf
   TeamMemberRenderer.swf
   TeamRenderer.swf
   UserInfo.swf
   VehicleMarkersManager.swf
-  lobby_messenger.swf
   XVM.xvmconf XVM.css OTMData.xml"
 
 cd $(dirname $(realpath $(cygpath --unix $0)))

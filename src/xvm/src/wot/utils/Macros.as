@@ -14,9 +14,6 @@ class wot.utils.Macros
 {
     private static var dummy = Logger.dummy;
 
-    // Level in roman numerals
-    public static var rlevel: Array = [ "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" ];
-
     private static var data_provider: Object = {}; //{ PLAYERNAME1: { macro1: func || value, macro2:... }, PLAYERNAME2: {...} }
 
     public static function Format(playerName, format: String, options:Object): String
@@ -109,7 +106,7 @@ class wot.utils.Macros
             // {{level}}
             pdata["level"] = data.level ? String(data.level) : "";
             // {{rlevel}}
-            pdata["rlevel"] = data.level ? Macros.rlevel[data.level - 1] : "";
+            pdata["rlevel"] = data.level ? Defines.ROMAN_LEVEL[data.level - 1] : "";
             // {{hp-max}}
             pdata["hp-max"] = data.maxHealth ? String(data.maxHealth) : "";
             // {{turret}}

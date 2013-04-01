@@ -1,0 +1,22 @@
+--- orig\SquadMemberRenderer.xml	2013-04-01 12:22:03.277973500 +0300
++++ SquadMemberRenderer.xml	2013-04-01 12:22:03.427973500 +0300
+@@ -38125,8 +38125,8 @@
+               <String value="charAt"/>
+               <String value=" "/>
+               <String value="\"/>
+-              <String value=""/>
+-              <String value=""/>
++              <String value=" "/>
++              <String value=" "/>
+               <String value="&#10;"/>
+               <String value="&#13;"/>
+               <String value="&#9;"/>
+@@ -42716,7 +42716,7 @@
+         <actions>
+           <PushData>
+             <items>
+-              <StackString value="net.wargaming.messenger.controls.SquadMemberRenderer"/>
++              <StackString value="wot.SquadMemberRenderer.SquadMemberRenderer"/>
+             </items>
+           </PushData>
+           <GetVariable/>
