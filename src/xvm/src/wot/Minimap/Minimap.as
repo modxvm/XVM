@@ -196,6 +196,14 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
         }
     }
     
+    function onEnterFrame()
+    {
+        if (zoom)
+        {
+            zoom.onEnterFrame();
+        }
+    }
+    
     private function startExtendedProcedure():Void
     {
         /**
@@ -210,10 +218,6 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
         if (MapConfig.zoomEnabled)
         {
             zoom = new Zoom(this);
-            var key:Number = MapConfig.zoomKey;
-            
-            net.wargaming.managers.BattleInputHandler.instance.addHandler(key, false, zoom, "onZoomKeyClick");
-            net.wargaming.managers.BattleInputHandler.instance.addHandler(key, true, zoom, "onZoomKeyClick");
         }
 
         sync = new SyncModel();
