@@ -142,9 +142,7 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     function sizeUp()
     {
         super.sizeUp();
-        //Logger.addObject(icons, "icons", 3);
-        //Logger.addObject(_root.rightPanel.m_list._dataProvider, "_root.rightPanel.m_list._dataProvider", 3);
-        //Logger.addObject(_root.rightPanel.m_list.renderers, "_root.rightPanel.m_list.renderers", 3);
+        //wot.utils.Logger.addObject(_root.rightPanel.spotStatusModel.seen, "spotStatusModel.seen", 3);
     }
     
     // -- Private

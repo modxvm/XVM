@@ -49,7 +49,7 @@ class wot.PlayersPanel.PlayersPanel extends net.wargaming.ingame.PlayersPanel
      
     function initEnemySpotterMarkers(event):Void
     {
-        if (isEnemyPanel && Config.s_config.playersPanel.enemySpottedMarker.enabled)
+        if (isEnemyPanel && Config.s_config.playersPanel.enemySpottedMarker.enabled && spotStatusModel == null)
         {
             spotStatusModel = new SpotStatusModel();
         }
