@@ -1,6 +1,5 @@
 import wot.Minimap.Minimap;
 import wot.Minimap.model.externalProxy.MapConfig;
-import wot.utils.Logger;
 
 /**
  * Handles minimap windows zoom and center positioning
@@ -14,61 +13,25 @@ class wot.Minimap.Zoom
     /** Temporary place to store last normal map size value before resize procedure by zoom */
     private var prevSizeIndex:Number;
     
-    /** Stores state for zoom switcher */
-    private var currentZoomState:Boolean;
-    
-    private var isInKeyDownState:Boolean;
-    private var isInKeyClickState:Boolean;
+    /** Stores state for switcher */
+    var currentState:Boolean;
     
     public function Zoom(minimap:Minimap) 
     {
         this.minimap = minimap;
-        currentZoomState = true;
-        isInKeyDownState = false;
-        isInKeyClickState = false;
+        currentState = true;
     }
     
-    public function onEnterFrame()
-    {
-        var key:Number = MapConfig.zoomKey;
-        
-        if (Key.isDown(key))
-        {
-            pressed();
-        }
-        else
-        {
-            released();
-        }
-    }
-    
-    private function pressed():Void
-    {
-        if (isInKeyDownState != true)
-        {
-            isInKeyDownState = true;
-            invokeHoldBehaviour(isInKeyDownState);
-        }
-    }
-    
-    private function released():Void
-    {
-        if (isInKeyDownState != false)
-        {
-            isInKeyDownState = false;
-            invokeHoldBehaviour(isInKeyDownState);
-        }
-    }
-    
-    private function invokeZoomBehaviour(isKeyDown):Void
+    public function onZoomKeyClick(event):Void
     {
         /**
          * Zoom while key is on hold
          * or switch zoom when key is clicked
          */
+        var isKeyDown:Boolean = event.details.value == "keyDown";
         if (MapConfig.zoomHold)
         {
-            invokeHoldBehaviour(isKeyDown);
+            holdBehaviour(isKeyDown);
         }
         else if (isKeyDown)
         {
@@ -78,7 +41,7 @@ class wot.Minimap.Zoom
     
     // -- Private
     
-    private function invokeHoldBehaviour(isKeyDown:Boolean):Void
+    private function holdBehaviour(isKeyDown:Boolean):Void
     {
         if (isKeyDown)
         {
@@ -92,15 +55,15 @@ class wot.Minimap.Zoom
     
     private function switchBehaviour():Void
     {
-        if (currentZoomState)
+        if (currentState)
         {
             zoomIn();
-            currentZoomState = !currentZoomState;
+            currentState = !currentState;
         }
         else
         {
             zoomOut();
-            currentZoomState = !currentZoomState;
+            currentState = !currentState;
         }
     }
     

@@ -5,6 +5,7 @@
 import com.greensock.OverwriteManager;
 import com.greensock.plugins.TweenPlugin;
 import com.greensock.plugins.TintPlugin;
+import wot.battle.BattleInputHandler;
 import wot.utils.Config;
 import wot.utils.GlobalEventDispatcher;
 import wot.utils.Logger;
@@ -37,14 +38,14 @@ class wot.battle.BattleMain
         instance = new BattleMain();
         gfx.io.GameDelegate.addCallBack("battle.showPostmortemTips", instance, "showPostmortemTips");
         gfx.io.GameDelegate.addCallBack("Stage.Update", instance, "onUpdateStage");
+        
+        BattleInputHandler.upgrade();
     }
     
     private static function BattleMainConfigLoaded()
     {
         //Logger.add("BattleMainConfigLoaded()");
 
-        //Logger.addObject(_root, "_root", 2);
-        
         GlobalEventDispatcher.removeEventListener("config_loaded", BattleMainConfigLoaded);
 
         // Initialize Sixth Sense Indicator
