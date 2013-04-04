@@ -19,14 +19,22 @@
                 return "ch06_renault_nc31";
 
             //level 2
+            case "AT-1":
             case "АТ-1":
                 return "at_1";
+            case "T-60":
+            case "Т-60":
+                return "t-60";
+            case "BT-2":
             case "БТ-2":
                 return "bt_2";
+            case "T-26":
             case "Т-26":
                 return "t_26";
+            case "SU-18":
             case "СУ-18":
                 return "su_18";
+            case "Tetrarch":
             case "Тетрарх":
                 return "tetrarch_ll";
             case "Bison":
@@ -73,18 +81,28 @@
                 return "ch07_vickers_mke_type_bt26";
 
             //level 3
+            case "SU-76":
             case "СУ-76":
                 return "su_76";
+            case "T-70":
+            case "Т-70":
+                return "t-70";
+            case "BT-7":
             case "БТ-7":
                 return "bt_7";
+            case "T-127":
             case "Т-127":
                 return "t_127";
+            case "T-46":
             case "Т-46":
                 return "t_46";
+            case "SU-26":
             case "СУ-26":
                 return "su_26";
+            case "BT-SV":
             case "БТ-СВ":
                 return "bt_sv";
+            case "M3 Stuart LL":
             case "M3 лёгкий":
                 return "m3_stuart_ll";
             case "StPz II":
@@ -93,8 +111,6 @@
                 return "wespe";
             case "Marder II":
                 return "g20_marder_ii";
-            case "Pz S35":
-                return "pz38t"; //todo (???)
             case "Pz38t":
                 return "pz38t";
             case "T-15":
@@ -145,18 +161,28 @@
                 return "ch08_type97_chi_ha";
 
             //level 4
+            case "SU-85B":
             case "СУ-85Б":
                 return "gaz_74b";
+            case "T-80":
+            case "Т-80":
+                return "t80";
+            case "A-20":
             case "А-20":
                 return "a_20";
+            case "Valentine II":
             case "Валентайн II":
                 return "valentine_ll";
+            case "T-50":
             case "Т-50":
                 return "t_50";
+            case "T-28":
             case "Т-28":
                 return "t_28";
+            case "SU-5":
             case "СУ-5":
                 return "su_5";
+            case "A-32":
             case "А-32":
                 return "a_32";
             case "Grille":
@@ -167,6 +193,8 @@
                 return "pz38_na";
             case "PzIII":
                 return "pziii";
+            case "VK 20.01 D":
+                return "vk2001db";
             case "Luchs":
                 return "pzii_luchs";
             case "PzKpfw B2 740 (f)":
@@ -203,24 +231,34 @@
                 return "ch09_m5";
 
             //level 5
+            case "SU-85":
             case "СУ-85":
                 return "su_85";
+            case "T-34":
             case "Т-34":
                 return "t_34";
+            case "Matilda IV":
             case "Матильда IV":
                 return "matilda_ii_ll";
+            case "T-50-2":
             case "Т-50-2":
                 return "t_50_2";
+            case "KV-1":
             case "КВ-1":
                 return "kv1";
+            case "Churchill III":
             case "Черчилль III":
                 return "churchill_ll";
+            case "SU-8":
             case "СУ-8":
                 return "su_8";
+            case "KV-220":
             case "КВ-220":
                 return "kv_220";
+            case "KV-220 T":
             case "КВ-220 Т":
                 return "kv_220_action";
+            case "SU-85I":
             case "СУ-85И":
                 return "su_85i";
             case "Hummel":
@@ -277,18 +315,25 @@
             //level 6
             case "СУ-100Y":
                 return "su100y";
+            case "SU-100":
             case "СУ-100":
                 return "su_100";
+            case "T-34-85":
             case "Т-34-85":
                 return "t_34_85";
+            case "KV-1S":
             case "КВ-1С":
                 return "kv_1s";
+            case "T-150":
             case "Т-150":
                 return "t150";
+            case "KV-2":
             case "КВ-2":
                 return "kv2";
+            case "S-51":
             case "С-51":
                 return "s_51";
+            case "SU-14":
             case "СУ-14":
                 return "su_14";
             case "GwPanther":
@@ -297,16 +342,18 @@
                 return "dickermax";
             case "JagdPzIV":
                 return "jagdpziv";
-            case "VK3001P":
+            case "VK 30.01 P":
                 return "vk3001p";
-            case "VK3601H":
+            case "VK 36.01 H":
                 return "vk3601h";
-            case "VK3001H":
+            case "VK 30.01 H":
                 return "vk3001h";
+            case "VK 30.01 D":
+                return "vk3002db_v1";    
+            case "VK 28.01":
+                return "vk2801";
             case "PzIV S.":
                 return "pziv_schmalturm";
-            case "VK2801":
-                return "vk2801";
             case "PzKpfw V-IV":
                 return "pzv_pziv";
             case "T21":
@@ -347,20 +394,28 @@
                 return "ch20_type58";
 
             //level 7
+            case "SU-152":
             case "СУ-152":
                 return "su_152";
+            case "SU-100M1":
             case "СУ-100М1":
                 return "su100m1";
+            case "SU-122-44":
             case "СУ-122-44":
                 return "su122_44";
+            case "T-43":
             case "Т-43":
                 return "t_43";
+            case "KV-13":
             case "КВ-13":
                 return "kv_13";
+            case "IS":
             case "ИС":
                 return "is";
+            case "KV-3":
             case "КВ-3":
                 return "kv_3";
+            case "Obj. 212":
             case "Об. 212":
                 return "object_212";
             case "GwTiger":
@@ -371,10 +426,14 @@
                 return "pzvi_tiger_p";
             case "Tiger":
                 return "pzvi";
-            case "VK3002DB":
+            case "Panther":
+                return "pzv";
+            case "VK 30.02 D":
                 return "vk3002db";
             case "Panther":
                 return "pzv";
+            case "Aufkl.Panther":
+                return "auf_panther";
             case "PzV/M10":
                 return "panther_m10";
             case "T71":
@@ -415,20 +474,28 @@
                 return "ch02_type62";
 
             //level 8
+            case "ISU-152":
             case "ИСУ-152":
                 return "isu_152";
+            case "SU-101":
             case "СУ-101":
                 return "su_101";
+            case "T-44":
             case "Т-44":
                 return "t_44";
+            case "IS-6":
             case "ИС-6":
                 return "object252";
+            case "IS-3":
             case "ИС-3":
                 return "is_3";
+            case "KV-4":
             case "КВ-4":
                 return "kv4";
+            case "KV-5":
             case "КВ-5":
                 return "kv_5";
+            case "Obj. 261":
             case "Об. 261":
                 return "object_261";
             case "GwTyp E":
@@ -439,7 +506,7 @@
                 return "jagdpantherii";
             case "Ferdinand":
                 return "ferdinand";
-            case "VK4502A":
+            case "VK 45.02 A":
                 return "vk4502a";
             case "Tiger II":
                 return "pzvib_tiger_ii";
@@ -447,6 +514,8 @@
                 return "lowe";
             case "Panther II":
                 return "panther_ii";
+            case "Indien-Pz.":
+                return "indien_panzer";
             case "T69":
                 return "t69";
             case "T28 Prot.":
@@ -495,14 +564,19 @@
                 return "ch03_wz_111";
 
             //level 9
+            case "Obj. 704":
             case "Об. 704":
                 return "object_704";
+            case "SU-122-54":
             case "СУ-122-54":
                 return "su122_54";
+            case "T-54":
             case "Т-54":
                 return "t_54";
+            case "IS-8":
             case "ИС-8":
                 return "is8";
+            case "ST-I":    
             case "СТ-I":
                 return "st_i";
             case "Jagdtiger":
@@ -513,6 +587,8 @@
                 return "e_75";
             case "E-50":
                 return "e_50";
+            case "Leopard PT A":
+                return "pro_ag_a";
             case "T54E1":
                 return "t54e1";
             case "T30":
@@ -541,14 +617,19 @@
                 return "ch12_111_1_2_3";
 
             //level 10
+            case "Obj. 268":
             case "Об. 268":
                 return "object268";
+            case "Obj. 263":
             case "Об. 263":
                 return "object263";
+            case "T-62A":
             case "Т-62А":
                 return "t62a";
+            case "IS-7":
             case "ИС-7":
                 return "is_7";
+            case "IS-4":
             case "ИС-4":
                 return "is_4";
             case "JgPzE100":
@@ -559,6 +640,8 @@
                 return "e_100";
             case "E-50M":
                 return "e50_ausf_m";
+            case "Leopard 1":
+                return "leopard1";
             case "T57 Heavy":
                 return "t57_58";
             case "T110E4":

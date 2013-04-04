@@ -96,7 +96,7 @@ class wot.SquadMemberRenderer.SquadMemberRenderer extends net.wargaming.messenge
         var ti = getTankInfo(data.vehicleName);
         if (ti != null)
             m_infoField.htmlText = "<span class='xvm_info'>" + Config.s_config.squad.leftLvlBorder + ti.level + "</span>";
-        Logger.add(m_infoField.htmlText);
+        //Logger.add(m_infoField.htmlText);
     }
 
     // override
@@ -112,10 +112,10 @@ class wot.SquadMemberRenderer.SquadMemberRenderer extends net.wargaming.messenge
         
         return
             Locale.get("Vehicle") + ": " + ti.vname + "\n" +
-            Locale.get("Level") + ": " + ti.level + "\n" +
-            Locale.get("Nation") + ": " + Locale.get(ti.nation) + "\n" +
             Locale.get("Type") + ": " + Locale.get(ti.type) + "\n" +
-            Locale.get("Battle tiers") + ": " + ti.battleTiers;
+            Locale.get("Level") + ": " + ti.level + "\n" +
+            Locale.get("Battle tiers") + ": " + ti.battleTiers + "\n" +
+            Locale.get("Nation") + ": " + Locale.get(ti.nation);
     }
 
     function getTankInfo(vname:String):Object
