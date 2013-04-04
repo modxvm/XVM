@@ -344,13 +344,21 @@
                 return "jagdpziv";
             case "VK 30.01 P":
                 return "vk3001p";
+            case "VK3001P":
+                return "vk3001p";
             case "VK 36.01 H":
                 return "vk3601h";
+            case "VK3601H":
+                return "vk3001p";
             case "VK 30.01 H":
+                return "vk3001h";
+            case "VK3001H":
                 return "vk3001h";
             case "VK 30.01 D":
                 return "vk3002db_v1";    
             case "VK 28.01":
+                return "vk2801";
+            case "VK2801":
                 return "vk2801";
             case "PzIV S.":
                 return "pziv_schmalturm";
@@ -430,8 +438,8 @@
                 return "pzv";
             case "VK 30.02 D":
                 return "vk3002db";
-            case "Panther":
-                return "pzv";
+            case "VK3002DB":
+                return "vk3002db";
             case "Aufkl.Panther":
                 return "auf_panther";
             case "PzV/M10":
@@ -508,6 +516,8 @@
                 return "ferdinand";
             case "VK 45.02 A":
                 return "vk4502a";
+            case "VK4502A":
+                return "vk4502a";
             case "Tiger II":
                 return "pzvib_tiger_ii";
             case "Löwe":
@@ -581,6 +591,8 @@
                 return "st_i";
             case "Jagdtiger":
                 return "jagdtiger";
+            case "VK 45.02 P":
+                return "vk4502p";
             case "VK4502P":
                 return "vk4502p";
             case "E-75":
