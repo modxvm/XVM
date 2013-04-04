@@ -1,4 +1,5 @@
 XVM-3.5.0-test7:
+  * squad window: show info about tank
   * fixed mouse cursor with minimap zoom by Ctrl press
   * new feature: enemy spotted status at right side panel
   

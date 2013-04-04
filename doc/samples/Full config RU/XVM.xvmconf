@@ -19,7 +19,7 @@
     "author": "sirmax2",                        // автор конфига
     "description": "Default settings for XVM",  // описание конфига
     "url": "http://code.google.com/p/wot-xvm/", // адрес, где выкладываются обновления конфига
-    "date": "30.03.2013",                       // дата последней модификации конфига
+    "date": "05.04.2013",                       // дата последней модификации конфига
     "gameVersion": "0.8.4",                     // поддерживаемая версия игры
     "modMinVersion": "3.5.0"                    // минимально необходимая версия мода XVM
   },
@@ -48,6 +48,13 @@
     // http://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
     // Ctrl - 17, X - 88, C - 67
     "minimapZoom": { "enabled": true, "onHold": true, "keyCode": 17 }
+  },
+  // Окно взвода
+  "squad": {
+    enabled: true,      // false - выключить отображение информации
+    romanNumbers: true, // false - уровень арабскими цифрами
+    showClan: true,     // false - скрыть клан игрока
+    leftLvlBorder: ""   // Разделитель между техникой и уровнем. "Grille [4"
   },
   // Параметры экрана загрузки боя
   "battleLoading": {

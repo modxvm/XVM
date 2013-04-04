@@ -19,7 +19,7 @@
     "author": "sirmax2",                        // Config author
     "description": "Default settings for XVM",  // Config description
     "url": "http://code.google.com/p/wot-xvm/", // Address to config updates
-    "date": "30.03.2013",                       // Config last modified
+    "date": "05.04.2013",                       // Config last modified
     "gameVersion": "0.8.4",                     // Supported version of the game
     "modMinVersion": "3.5.0"                    // The minimum required version of the XVM mod
   },
@@ -48,6 +48,13 @@
     // http://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
     // Common keys are Ctrl - 17, X - 88, C - 67
     "minimapZoom": { "enabled": true, "onHold": true, "keyCode": 17 }
+  },
+  // Squad window
+  "squad": {
+    enabled: true,      // false - Disable display info
+    romanNumbers: true, // false - arabic numerals
+    showClan: true,     // false - hide player clan
+    leftLvlBorder: ""   // Separator between vehicle and level. "Grille [4"
   },
   // Parameters of the Battle Loading Screen
   "battleLoading": {
