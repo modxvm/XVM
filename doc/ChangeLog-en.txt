@@ -1,3 +1,6 @@
+XVM-3.5.0-pre1:
+  * adaptation to WoT 0.8.5.CT1
+
 XVM-3.5.0-test7:
   * squad window: show info about tank
   * fixed mouse cursor with minimap zoom by Ctrl press
