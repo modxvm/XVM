@@ -1,5 +1,5 @@
---- orig\Minimap.xml	2013-03-04 19:06:49.857526900 +0400
-+++ Minimap.xml	2013-03-04 19:06:50.339554500 +0400
+--- orig\Minimap.xml	2013-04-05 21:57:24.236636100 +0300
++++ Minimap.xml	2013-04-05 21:57:24.567655000 +0300
 @@ -397,16 +397,16 @@
          <styles>
            <StyleList>
@@ -581,7 +581,7 @@
 +              </ClippedBitmap>
 +              <ClippedBitmap objectID="107">
                  <matrix>
-                   <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-800" transY="-800"/>
+                   <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-850" transY="-821"/>
                  </matrix>
 -              </ClippedBitmap2>
 +              </ClippedBitmap>
@@ -693,7 +693,7 @@
              </fillStyles>
              <lineStyles/>
            </StyleList>
-@@ -3787,16 +3787,16 @@
+@@ -2598,16 +2598,16 @@
          <styles>
            <StyleList>
              <fillStyles>
@@ -703,9 +703,51 @@
                    <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="0" transY="0"/>
                  </matrix>
 -              </ClippedBitmap2>
--              <ClippedBitmap2 objectID="140">
+-              <ClippedBitmap2 objectID="119">
 +              </ClippedBitmap>
-+              <ClippedBitmap objectID="140">
++              <ClippedBitmap objectID="119">
+                 <matrix>
+                   <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-800" transY="-800"/>
+                 </matrix>
+-              </ClippedBitmap2>
++              </ClippedBitmap>
+             </fillStyles>
+             <lineStyles/>
+           </StyleList>
+@@ -2637,16 +2637,16 @@
+         <styles>
+           <StyleList>
+             <fillStyles>
+-              <ClippedBitmap2 objectID="65535">
++              <ClippedBitmap objectID="65535">
+                 <matrix>
+                   <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="0" transY="0"/>
+                 </matrix>
+-              </ClippedBitmap2>
+-              <ClippedBitmap2 objectID="121">
++              </ClippedBitmap>
++              <ClippedBitmap objectID="121">
+                 <matrix>
+                   <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-850" transY="-821"/>
+                 </matrix>
+-              </ClippedBitmap2>
++              </ClippedBitmap>
+             </fillStyles>
+             <lineStyles/>
+           </StyleList>
+@@ -3887,16 +3887,16 @@
+         <styles>
+           <StyleList>
+             <fillStyles>
+-              <ClippedBitmap2 objectID="65535">
++              <ClippedBitmap objectID="65535">
+                 <matrix>
+                   <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="0" transY="0"/>
+                 </matrix>
+-              </ClippedBitmap2>
+-              <ClippedBitmap2 objectID="144">
++              </ClippedBitmap>
++              <ClippedBitmap objectID="144">
                  <matrix>
                    <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-380" transY="-560"/>
                  </matrix>
@@ -714,7 +756,7 @@
              </fillStyles>
              <lineStyles/>
            </StyleList>
-@@ -4361,16 +4361,16 @@
+@@ -4461,16 +4461,16 @@
          <styles>
            <StyleList>
              <fillStyles>
@@ -724,9 +766,9 @@
                    <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="0" transY="0"/>
                  </matrix>
 -              </ClippedBitmap2>
--              <ClippedBitmap2 objectID="162">
+-              <ClippedBitmap2 objectID="166">
 +              </ClippedBitmap>
-+              <ClippedBitmap objectID="162">
++              <ClippedBitmap objectID="166">
                  <matrix>
                    <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-380" transY="-560"/>
                  </matrix>
@@ -735,7 +777,7 @@
              </fillStyles>
              <lineStyles/>
            </StyleList>
-@@ -4935,16 +4935,16 @@
+@@ -5035,16 +5035,16 @@
          <styles>
            <StyleList>
              <fillStyles>
@@ -745,9 +787,9 @@
                    <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="0" transY="0"/>
                  </matrix>
 -              </ClippedBitmap2>
--              <ClippedBitmap2 objectID="184">
+-              <ClippedBitmap2 objectID="188">
 +              </ClippedBitmap>
-+              <ClippedBitmap objectID="184">
++              <ClippedBitmap objectID="188">
                  <matrix>
                    <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-380" transY="-560"/>
                  </matrix>
@@ -756,7 +798,7 @@
              </fillStyles>
              <lineStyles/>
            </StyleList>
-@@ -5509,16 +5509,16 @@
+@@ -5609,16 +5609,16 @@
          <styles>
            <StyleList>
              <fillStyles>
@@ -766,9 +808,9 @@
                    <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="0" transY="0"/>
                  </matrix>
 -              </ClippedBitmap2>
--              <ClippedBitmap2 objectID="206">
+-              <ClippedBitmap2 objectID="210">
 +              </ClippedBitmap>
-+              <ClippedBitmap objectID="206">
++              <ClippedBitmap objectID="210">
                  <matrix>
                    <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="-380" transY="-560"/>
                  </matrix>
@@ -777,7 +819,7 @@
              </fillStyles>
              <lineStyles/>
            </StyleList>
-@@ -39377,16 +39377,16 @@
+@@ -41333,16 +41333,16 @@
          <styles>
            <StyleList>
              <fillStyles>
@@ -787,9 +829,9 @@
                    <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="0" transY="0"/>
                  </matrix>
 -              </ClippedBitmap2>
--              <ClippedBitmap2 objectID="284">
+-              <ClippedBitmap2 objectID="293">
 +              </ClippedBitmap>
-+              <ClippedBitmap objectID="284">
++              <ClippedBitmap objectID="293">
                  <matrix>
                    <Transform scaleX="33.33374023437500" scaleY="33.33374023437500" transX="0" transY="0"/>
                  </matrix>
@@ -798,7 +840,7 @@
              </fillStyles>
              <lineStyles/>
            </StyleList>
-@@ -61010,7 +61010,7 @@
+@@ -62966,7 +62966,7 @@
          <actions>
            <PushData>
              <items>
@@ -807,7 +849,7 @@
              </items>
            </PushData>
            <GetVariable/>
-@@ -61036,7 +61036,7 @@
+@@ -62992,7 +62992,7 @@
          <actions>
            <PushData>
              <items>
