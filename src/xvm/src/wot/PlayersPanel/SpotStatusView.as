@@ -27,21 +27,21 @@ class wot.PlayersPanel.SpotStatusView
         }
         
         spotStatusMarker.htmlText = getFormat(status, isArti);
+        
+        /** Define point relative to which marker is set  */
+        spotStatusMarker._x = renderer.vehicleLevel._x + cfg.Xoffset; // vehicleLevel._x is 8 for example
+        spotStatusMarker._y = renderer.vehicleLevel._y + cfg.Yoffset; // vehicleLevel._y is -445.05 for example
     }
     
     // -- Private
     
     private function createMarker(renderer:PlayerListItemRenderer):Void
     {
-        /** Define point relative to which marker is set  */
-        var baseX:Number = renderer.vehicleLevel._x + cfg.Xoffset; // vehicleLevel._x is 8 for example
-        var baseY:Number = renderer.vehicleLevel._y + cfg.Yoffset; // vehicleLevel._y is -445.05 for example
-        
         spotStatusMarker = renderer.createTextField
         (
             SPOT_STATUS_TF_NAME,
             renderer.getNextHighestDepth(),
-            baseX, baseY, 25, 25
+            0, 0, 25, 25
         );
         
         spotStatusMarker.antiAliasType = "advanced";
