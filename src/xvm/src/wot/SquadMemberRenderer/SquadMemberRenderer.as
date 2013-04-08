@@ -111,9 +111,7 @@ class wot.SquadMemberRenderer.SquadMemberRenderer extends net.wargaming.messenge
             return super.getToolTipData();
         
         return
-            Locale.get("Vehicle") + ": " + ti.vname + "\n" +
             Locale.get("Type") + ": " + Locale.get(ti.type) + "\n" +
-            Locale.get("Level") + ": " + ti.level + "\n" +
             Locale.get("Battle tiers") + ": " + ti.battleTiers + "\n" +
             Locale.get("Nation") + ": " + Locale.get(ti.nation);
     }
@@ -122,11 +120,11 @@ class wot.SquadMemberRenderer.SquadMemberRenderer extends net.wargaming.messenge
     {
         //Logger.add("getTankInfo");
         //Logger.addObject(data);
+        if (Config.s_loaded && !Config.s_config.squad.showClan)
+            data.displayName = Utils.GetPlayerName(data.displayName); // FIXIT: bad style
+            
         if (!Config.s_loaded || !Config.s_config.squad.enabled || !data || !vname || vname == "")
             return null;
-
-        if (!Config.s_config.squad.showClan)
-            data.displayName = Utils.GetPlayerName(data.displayName); // FIXIT: bad style
 
         var vkey = VehicleInfoDataL10n.LocalizedNameToVehicleKey(vname);
 

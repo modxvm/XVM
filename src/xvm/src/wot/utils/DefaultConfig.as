@@ -88,7 +88,8 @@ class wot.utils.DefaultConfig
                 enabled: false,			// Global switch
                 romanNumbers: true,		// Roman level numbers
                 showClan: true,			// Show player clan
-                leftLvlBorder: ""		// Grille [4
+                leftLvlBorder: "",		// Grille [4
+                rightLvlBorder: ""		// Grille 4]
             },
             hotkeys: {
                 minimapZoom: { enabled: true, onHold: true, keyCode: 17 } // 17 - Ctrl
