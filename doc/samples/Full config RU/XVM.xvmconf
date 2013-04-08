@@ -51,10 +51,11 @@
   },
   // Окно взвода
   "squad": {
-    enabled: true,      // false - выключить отображение информации
-    romanNumbers: true, // false - уровень арабскими цифрами
-    showClan: true,     // false - скрыть клан игрока
-    leftLvlBorder: ""   // Разделитель между техникой и уровнем. "Grille [4"
+    "enabled": true,      // false - выключить отображение информации
+    "romanNumbers": true, // false - уровень арабскими цифрами
+    "showClan": true,     // false - скрыть клан игрока
+    "leftLvlBorder": "",   // Обрамление уровня слева. "Grille [4"
+	"rightLvlBorder": ""   // Обрамление уровня справа. "Grille 4]"
   },
   // Параметры экрана загрузки боя
   "battleLoading": {
@@ -2082,6 +2083,7 @@
         "usa_T1_hvy": null,
         "france_BDR_G1B": null,
         "uk_GB08_Churchill_I": null,
+		"uk_GB51_Excelsior": null,
         "ussr_SU_85I": null,
         "ussr_SU_85": null,
         "germany_StuGIII": null,
@@ -2222,10 +2224,12 @@
         "usa_T95": null,
         "france_AMX50_Foch": null,
 		"uk_GB32_Tortoise": null,
+		"ussr_Object_907": null,
         "ussr_T62A": null,
         "germany_E50_Ausf_M": null,
 		"germany_Leopard1": null,
         "usa_M48A1": null,
+		"usa_M60": null,
         "france_Bat_Chatillon25t": null,
         "uk_GB70_FV4202_105": null,
         "china_Ch19_121": null,
@@ -2233,6 +2237,7 @@
         "ussr_IS_7": null,
         "germany_E_100": null,
         "germany_Maus": null,
+		"germany_VK7201": null,
         "usa_T110": null,
         "usa_T57_58": null,
         "france_F10_AMX_50B": null,
