@@ -41,13 +41,13 @@
                 return "bison_i";
             case "PzJg I":
                 return "panzerjager_i";
-            case "Pz35t":
+            case "Pz. 35 (t)":
                 return "pz35t";
-            case "PzII":
+            case "Pz. II":
                 return "pzii";
             case "Pz. I":
                 return "pzi";
-            case "PzKpfw 38H735 (f)":
+            case "Pz. 38H":
                 return "h39_captured";
             case "M2 Light":
                 return "m2_lt";
@@ -102,8 +102,8 @@
             case "BT-SV":
             case "БТ-СВ":
                 return "bt_sv";
-            case "M3 Stuart LL":
-            case "M3 лёгкий":
+            case "M3 Light":
+            case "М3 лёгкий":
                 return "m3_stuart_ll";
             case "StPz II":
                 return "sturmpanzer_ii";
@@ -111,19 +111,19 @@
                 return "wespe";
             case "Marder II":
                 return "g20_marder_ii";
-            case "Pz38t":
+            case "Pz. 38 (t)":
                 return "pz38t";
             case "T-15":
                 return "t_15";
-            case "PzIII A":
+            case "Pz. III A":
                 return "pziii_a";
             case "Pz. II G":
                 return "pz_ii_ausfg";
             case "Pz. I C":
                 return "pzi_ausf_c";
-            case "PzKpfw II Ausf. J":
+            case "Pz. II J":
                 return "pzii_j";
-            case "PzKpfw S35 739 (f)":
+            case "Pz. S35":
                 return "s35_captured";
             case "M3 Stuart":
                 return "m3_stuart";
@@ -138,7 +138,7 @@
             case "MTLS-1G14":
                 return "mtls_1g14";
             case "Sexton I":
-                return "sexton_i";
+                return "gb78_sexton_i";
             case "Ren.UE57":
                 return "renaultue57";
             case "FCM36P40":
@@ -189,15 +189,15 @@
                 return "grille";
             case "Hetzer":
                 return "hetzer";
-            case "Pz38nA":
+            case "Pz. 38 nA":
                 return "pz38_na";
-            case "PzIII":
+            case "Pz. III":
                 return "pziii";
             case "VK 20.01 D":
                 return "vk2001db";
             case "Luchs":
                 return "pzii_luchs";
-            case "PzKpfw B2 740 (f)":
+            case "Pz. B2":
                 return "b_1bis_captured";
             case "M5 Stuart":
                 return "m5_stuart";
@@ -267,9 +267,11 @@
                 return "stugiii";
             case "T-25":
                 return "t_25";
-            case "PzIV":
+            case "Pz. IV":
                 return "pziv";
-            case "PzIII/IV":
+            case "Pz. IV Hyd.":
+                return "pziv_hydro";
+            case "Pz. III/IV":
                 return "pziii_iv";
             case "Leopard":
                 return "vk1602";
@@ -313,6 +315,7 @@
                 return "ch21_t34";
 
             //level 6
+            case "SU-100Y":
             case "СУ-100Y":
                 return "su100y";
             case "SU-100":
@@ -344,26 +347,20 @@
                 return "jagdpziv";
             case "VK 30.01 P":
                 return "vk3001p";
-            case "VK3001P":
-                return "vk3001p";
             case "VK 36.01 H":
                 return "vk3601h";
-            case "VK3601H":
-                return "vk3001p";
             case "VK 30.01 H":
-                return "vk3001h";
-            case "VK3001H":
                 return "vk3001h";
             case "VK 30.01 D":
                 return "vk3002db_v1";    
             case "VK 28.01":
                 return "vk2801";
-            case "VK2801":
-                return "vk2801";
-            case "PzIV S.":
+            case "Pz. IV S.":
                 return "pziv_schmalturm";
-            case "PzKpfw V-IV":
+            case "Pz. V/IV":
                 return "pzv_pziv";
+            case "Pz. V/IV A":
+                return "pzv_pziv_ausf_alfa";
             case "T21":
                 return "t21";
             case "Hellcat":
@@ -438,11 +435,9 @@
                 return "pzv";
             case "VK 30.02 D":
                 return "vk3002db";
-            case "VK3002DB":
-                return "vk3002db";
             case "Aufkl.Panther":
                 return "auf_panther";
-            case "PzV/M10":
+            case "Pz. V/M10":
                 return "panther_m10";
             case "T71":
                 return "t71";
@@ -515,8 +510,6 @@
             case "Ferdinand":
                 return "ferdinand";
             case "VK 45.02 A":
-                return "vk4502a";
-            case "VK4502A":
                 return "vk4502a";
             case "Tiger II":
                 return "pzvib_tiger_ii";
@@ -592,8 +585,6 @@
             case "Jagdtiger":
                 return "jagdtiger";
             case "VK 45.02 P":
-                return "vk4502p";
-            case "VK4502P":
                 return "vk4502p";
             case "E-75":
                 return "e_75";
