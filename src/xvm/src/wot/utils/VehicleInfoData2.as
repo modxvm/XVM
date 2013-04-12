@@ -86,7 +86,6 @@ class wot.utils.VehicleInfoData2
         sturmpanzer_ii:             { level: 3,  type: "SPG", hpstock: 160,  hptop: 160,  turret: 0, premium: 0, nation: "germany", name: "Sturmpanzer_II" },
         wespe:                      { level: 3,  type: "SPG", hpstock: 170,  hptop: 170,  turret: 0, premium: 0, nation: "germany", name: "Wespe" },
         m37:                        { level: 3,  type: "SPG", hpstock: 150,  hptop: 150,  turret: 0, premium: 0, nation: "usa",     name: "M37" },
-        sexton_i:                   { level: 3,  type: "SPG", hpstock: 160,  hptop: 160,  turret: 0, premium: 1, nation: "usa",     name: "Sexton_I" },
         lorraine39_l_am:            { level: 3,  type: "SPG", hpstock: 140,  hptop: 140,  turret: 0, premium: 0, nation: "france",  name: "Lorraine39_L_AM" },
         gb78_sexton_i:              { level: 3,  type: "SPG", hpstock: 160,  hptop: 160,  turret: 0, premium: 1, nation: "uk",      name: "GB78_Sexton_I" },
 
