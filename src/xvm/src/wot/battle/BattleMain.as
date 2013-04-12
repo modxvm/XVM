@@ -63,6 +63,7 @@ class wot.battle.BattleMain
         SetupElements();
         
         fixFragCorellationBarOffset();
+        hideFragCorellationBarTeamTextFields();
     }
 
     private static function SetupElements()
@@ -219,5 +220,13 @@ class wot.battle.BattleMain
                 }
             }
         }
+    }
+    
+    private static function hideFragCorellationBarTeamTextFields():Void
+    {
+        _root.fragCorrelationBar.height = 30;
+        return;
+        _root.fragCorrelationBar.m_enemyTeamTF._alpha = 0;
+        _root.fragCorrelationBar.m_alliedTeamTF._alpha = 0;
     }
 }
