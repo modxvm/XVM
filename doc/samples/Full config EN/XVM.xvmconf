@@ -19,8 +19,8 @@
     "author": "sirmax2",                        // Config author
     "description": "Default settings for XVM",  // Config description
     "url": "http://code.google.com/p/wot-xvm/", // Address to config updates
-    "date": "05.04.2013",                       // Config last modified
-    "gameVersion": "0.8.4",                     // Supported version of the game
+    "date": "15.04.2013",                       // Config last modified
+    "gameVersion": "0.8.5",                     // Supported version of the game
     "modMinVersion": "3.5.0"                    // The minimum required version of the XVM mod
   },
   // General parameters for the battle interface

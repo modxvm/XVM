@@ -23,7 +23,7 @@
   "rating": {
     "showPlayersStatistics": true,
     "loadEnemyStatsInFogOfWar": true,
-    "enableStatisticsLog": false,
+    "enableStatisticsLog": true,
     "enableUserInfoStatistics": true,
     "enableCompanyStatistics": true
   },
@@ -237,7 +237,7 @@
       "mapSize": {
         "enabled": true,
         "format": "<b>{{cellsize}}0 м</b>",
-        "css": "font-size:8px; color:#FFCC66;",
+        "css": "font-size:7px; color:#FFCC66;",
         "alpha": 60,
         "offsetX": 0,
         "offsetY": 0,
@@ -315,6 +315,12 @@
          { "enabled": true, "from": 400, "to": 497, "inmeters": true, "thickness": 0.9,   "alpha": 40, "color": "0xCCCCCC"},
          { "enabled": true, "from": 500, "to": 2000,"inmeters": true, "thickness": 0.75,   "alpha": 40, "color": "0xCCCCCC"}
        ]
+    },
+    "square" : {
+      "enabled": false,
+      "thickness": 0.7,
+      "alpha": 40,
+      "color": "0xFFFFFF"
     }
   },
 
@@ -439,7 +445,7 @@
                 "distance": 1,
                 "size": 3
               },
-              "format": "{{vehicle}}"
+              "format": "{{nick}}"
             },
    {
               "visible": true,
@@ -630,7 +636,7 @@
                 "distance": 1,
                 "size": 3
               },
-              "format": "{{nick}}"
+              "format": "{{vehicle}}"
             },
             {
               "visible": true,
@@ -850,7 +856,7 @@
                 "distance": 1,
                 "size": 3
               },
-              "format": "{{vehicle}}"
+              "format": "{{nick}}"
             }
 			]
         },
@@ -973,7 +979,7 @@
                 "distance": 1,
                 "size": 3
               },
-              "format": "{{nick}}"
+              "format": "{{vehicle}}"
             }
           ]
         }
@@ -1099,7 +1105,7 @@
                 "distance": 1,
                 "size": 3
               },
-              "format": "{{vehicle}}"
+              "format": "{{nick}}"
             },
             {
               "visible": true,
@@ -1290,7 +1296,7 @@
                 "distance": 1,
                 "size": 3
               },
-              "format": "{{nick}}"
+              "format": "{{vehicle}}"
             },
             {
               "visible": true,
@@ -1509,7 +1515,7 @@
                 "distance": 1,
                 "size": 3
               },
-              "format": "{{vehicle}}"
+              "format": "{{nick}}"
             }
 			]
         },
@@ -1632,7 +1638,7 @@
                 "distance": 1,
                 "size": 3
               },
-              "format": "{{nick}}"
+              "format": "{{vehicle}}"
             }
           ]
         }
@@ -1967,7 +1973,7 @@
     "france_AMX50_Foch": null,
     "france_ARL_44": null,
     "france_ARL_V39": null,
-    "france_B1": "! B1 !",
+    "france_B1": null,
     "france_Bat_Chatillon155": "Bat 155",
     "france_Bat_Chatillon25t": "Bat 25t",
     "france_BDR_G1B": null,
@@ -2037,7 +2043,7 @@
     "germany_S35_captured": null,
     "germany_StuGIII": "StuG III",
     "germany_Sturmpanzer_II": null,
-    "germany_T_15": "!!T-15!!",
+    "germany_T_15": null,
     "germany_T_25": null,
     "germany_VK1602": null,
     "germany_VK2801": "VK 2801",
@@ -2150,7 +2156,7 @@
     "ussr_ISU_152": null,
     "ussr_KV_13": null,
     "ussr_KV_1s": null,
-    "ussr_KV_220": "null",
+    "ussr_KV_220": null,
     "ussr_KV_220_action": null,
     "ussr_KV_3": null,
     "ussr_KV_5": null,

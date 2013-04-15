@@ -1,12 +1,17 @@
-﻿{
+﻿/**
+ * Внимание! Кодировка файла должна оставаться UTF8 + BOM. В противном случае вместо кириллицы в игре будут пустые глифы.
+ * Для редактирования используйте notepad++. http://goo.gl/y6iet
+ * В случае Windows notepad: Сохранить как -> Кодировка: UTF
+ */
+{
   "configVersion": "1.5.0", // Версия конфига. Не удаляйте и не изменяйте её без необходимости.
   "editorVersion": "0.36",  // Версия редактора.
   // Блок общих параметров конфига. Все параметры информационные, в моде не используются.
   "definition": {
     "author": "demon2597",                        // автор конфига
     "description": "My settings for XVM",         // описание конфига
-    "url": "http://www.koreanrandom.com/forum/topic/2172-demon2597-config/", // адрес, где выкладываеются обновления конфига
-    "date": "6.03.2013",                       // дата последней модификации конфига
+    "url": "http://www.koreanrandom.com/forum/topic/2172-", // адрес, где выкладываеются обновления конфига
+    "date": "3.04.2013",                       // дата последней модификации конфига
     "gameVersion": "0.8.4",                     // поддерживаемая версия игры
     "modMinVersion": "3.5.0"                    // минимально необходимая версия мода XVM
   },
@@ -29,6 +34,14 @@
     "enableUserInfoStatistics": true,           // true - включить отображение статистики в достижениях пользователя
     "enableCompanyStatistics": true             // true - включить отображение статистики при наборе роты
   },
+  // Специальные горячие клавиши XVM
+  "hotkeys": {
+    // onHold: произвести действие по разовому нажатию клавиши или по удержанию
+    // Значения кодов можно посмотреть здесь:
+    // http://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
+    // Ctrl - 17, X - 99, C - 67
+    "minimapZoom": { "enabled": true, "onHold": true, "keyCode": 17 }
+  },
   // Параметры экрана загрузки боя
   "battleLoading": {
     "clockFormat": "H:N:S",                     // Показать часы на экране загрузки боя. Формат: Y:год, M:месяц, D:день, H:часы, N:минуты, S:секунды. "" - убрать часы.
@@ -46,9 +59,9 @@
       "alpha": 90                               //   прозрачность иконки игрока/клана
     },
     // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatLeft": "<font face='PartnerCondensed Mono' size='13'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:kb}}'>{{kb:3}}</font>  <font color='{{c:xeff}}'>{{xeff}}</font>  | <font color='{{c:t-battles}}'>{{t-hb:3}}</font>  <font color='{{c:e}}'>{{e}}</font></font>",
+    "formatLeft": "<font face='PartnerCondensed Mono' size='13'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xeff}}'>{{xeff}}</font> | <font color='{{c:t-battles}}'>{{t-hb:3}}</font></font><font size='0'>.",
     // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatRight": "<font face='PartnerCondensed Mono' size='13'><font color='{{c:e}}'>{{e}}</font> <font color='{{c:t-battles}}'>{{t-hb:3}}</font>  |  <font color='{{c:xeff}}'>{{xeff}}</font> <font color='{{c:kb}}'>{{kb:3}}</font>  <font color='{{c:rating}}'>{{rating:3}}</font></font>"
+    "formatRight": "<font face='PartnerCondensed Mono' size='13'><font color='{{c:t-battles}}'>{{t-hb:3}}</font> | <font color='{{c:xeff}}'>{{xeff}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>"
   },
   // Параметры окна статистики по клавише Tab
   "statisticForm": {
@@ -58,9 +71,9 @@
     // параметры отображения иконки игрока/клана (см. battleLoading выше)
     "clanIcon": { "show": false, "x": 0, "y": 6, "xr": 0, "yr": 6, "h": 16, "w": 16, "alpha": 90 },
     // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatLeft": "<font face='PartnerCondensed Mono' size='13'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:kb}}'>{{kb:3}}</font>  <font color='{{c:xeff}}'>{{xeff}}</font>  | <font color='{{c:t-battles}}'>{{t-hb:3}}</font>  <font color='{{c:e}}'>{{e}}</font></font>  <font face='XVMSymbol' size='20'>{{vtype}}</font>",
+    "formatLeft": "<font face='PartnerCondensed Mono' size='13'><font color='{{c:rating}}'>{{rating:3}}</font>  <font color='{{c:kb}}'>{{kb:3}}</font>  <font color='{{c:xeff}}'>{{xeff}}</font> | <font color='{{c:t-battles}}'>{{t-hb:3}}</font></font>  <font face='XVMSymbol' size='20'>{{vtype}}</font>",
     // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatRight": "<font face='XVMSymbol' size='20'>{{vtype}}</font>  <font face='PartnerCondensed Mono' size='13'><font color='{{c:e}}'>{{e}}</font> <font color='{{c:t-battles}}'>{{t-hb:3}}</font>  |  <font color='{{c:xeff}}'>{{xeff}}</font> <font color='{{c:kb}}'>{{kb:3}}</font>  <font color='{{c:rating}}'>{{rating:3}}</font></font>"
+    "formatRight": "<font face='XVMSymbol' size='20'>{{vtype}}</font>  <font face='PartnerCondensed Mono' size='13'><font color='{{c:t-battles}}'>{{t-hb:3}}</font> | <font color='{{c:xeff}}'>{{xeff}}</font>  <font color='{{c:kb}}'>{{kb:3}}</font>  <font color='{{c:rating}}'>{{rating:3}}</font></font>"
   },
   // Параметры панелей игроков ("ушей")
   "playersPanel": {
@@ -69,21 +82,43 @@
     "removeSquadIcon": false, // true - убрать отображение иконки взвода
     // параметры отображения иконки игрока/клана (см. battleLoading выше).
     "clanIcon": { "show": false, "x": 0, "y": 6, "xr": 0, "yr": 6, "h": 16, "w": 16, "alpha": 90 },
+"enemySpottedMarker": {
+       "enabled": true,
+       "Xoffset": -44, // Смещение относительно иконки уровня танка
+       "Yoffset": -6,
+       "format": {
+         // Этот враг никогда не светился
+         "neverSeen": "<img src='img://gui/flash/neverseen.png' width='23' height='20'>",
+         // Этот враг светился хотя бы один раз и отмечен на миникарте как потерянный
+         "lost": "",
+         // Виден на миникарте прямо сейчас
+         "revealed": "<img src='img://gui/flash/revealed.png' width='23' height='20'>",
+         // Уничтоженный враг
+         "dead": "",
+         // Специфичные значения для артиллерии
+         "artillery": {
+           "neverSeen": "<img src='img://gui/flash/neverseen.png' width='23' height='20'>",
+           "lost": "",
+           "revealed": "<img src='img://gui/flash/revealed.png' width='23' height='20'>",
+           "dead": ""
+         }
+       }
+     },
     // режим ушей "medium" - первые средние уши в игре
     "medium": {
-      "width": 140,    // 0..250 - задает ширину поля имени игрока. По умолчанию: 46
+      "width": 130,    // 0..250 - задает ширину поля имени игрока. По умолчанию: 46
       // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-      "formatLeft": "  <font face='PartnerCondensed Mono'  color='{{c:e}}'>{{e}}</font>    <font color='{{c:xeff}}'>{{name}}</font> <font size='13' >{{clannb}}</font>",
+      "formatLeft": "  <font color='{{c:xeff}}'>{{name}}</font> <font size='13' >{{clannb}}</font>",
       // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-      "formatRight": "<font size='13' >{{clannb}}</font> <font color='{{c:xeff}}'>{{name}}</font>    <font face='PartnerCondensed Mono'  color='{{c:e}}'>{{e}}</font>  <font size='0'>."
+      "formatRight": "<font size='13' >{{clannb}}</font> <font color='{{c:xeff}}'>{{name}}</font>  <font size='0'>."
     },
     // режим ушей "medium2" - вторые средние уши в игре
     "medium2": {
-      "width": 55,    // 0..250 - задает ширину поля имени игрока. По умолчанию: 65
+      "width": 20,    // 0..250 - задает ширину поля имени игрока. По умолчанию: 65
       // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-      "formatLeft": "<font face='PartnerCondensed Mono' ><font color='{{c:xeff}}'>{{xeff}}</font>  <font color='{{c:e}}'>{{e}}</font></font>",
+      "formatLeft": "<font face='PartnerCondensed Mono'  color='{{c:xeff}}'>{{xeff}}</font>",
       // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-      "formatRight": "<font face='PartnerCondensed Mono' ><font color='{{c:e}}'>{{e}}</font>  <font color='{{c:xeff}}'>{{xeff}}</font></font>"
+      "formatRight": "<font face='PartnerCondensed Mono'  color='{{c:xeff}}'>{{xeff}}</font>"
     },
     // режим ушей "large" - широкие уши в игре
     "large": {
@@ -92,8 +127,8 @@
       "nickFormatLeft": "<font face='PartnerCondensed Mono' size='13' color='{{c:kb}}'>{{kb:3}}</font> {{name}} <font size='13' color='#FFCC66'>{{clannb}}</font>",
       "nickFormatRight": "<font size='13' color='#FFCC66'>{{clannb}}</font> {{name}} <font face='PartnerCondensed Mono' size='13' color='{{c:kb}}'>{{kb:3}}</font>",
       // формат отображения названия танка (допускаются макроподстановки, см. readme-ru.txt)
-      "vehicleFormatLeft": "<font face='PartnerCondensed Mono' ><font color='{{c:xeff}}'>{{xeff}}</font>  <font color='{{c:e}}'>{{e}}</font></font>",
-      "vehicleFormatRight": "<font face='PartnerCondensed Mono' ><font color='{{c:e}}'>{{e}}</font>  <font color='{{c:xeff}}'>{{xeff}}</font>"
+      "vehicleFormatLeft": "<font face='PartnerCondensed Mono'  color='{{c:xeff}}'>{{xeff}}</font>",
+      "vehicleFormatRight": "<font face='PartnerCondensed Mono'  color='{{c:xeff}}'>{{xeff}}</font>"
     }
   },
   // Окно статистики после боя
@@ -118,11 +153,11 @@
   // Лог попаданий (счетчик своих попаданий)
   "hitLog": {
     "visible": true,     // переключатель вкл/выкл
-    "x": 335,            // Позиция X (отрицательные значения - привязать к правой стороне экрана)
+    "x": 305,            // Позиция X (отрицательные значения - привязать к правой стороне экрана)
     "y": 5,              // Позиция Y (отрицательные значения - привязать к нижней стороне экрана)
-    "w": 300,            // Ширина
+    "w": 500,            // Ширина
     "h": 500,            // Высота
-    "lines": 20,          // Количество строк. Устаревшие данные выталкиваются.
+    "lines": 21,          // Количество строк. Устаревшие данные выталкиваются.
     "direction": "down", // Направление лога: up - строки добавляются сверху поля, down - снизу
     "insertOrder": "begin", // begin - строки добавляются вначале лога, end - в конце
     "groupHitsByPlayer": false, // группировать попадания по имени игрока
@@ -132,16 +167,16 @@
     // Формат заголовка по умолчанию (до первого попадания). Макросы НЕ допускаются.
     "defaultHeader":  "",
     // Формат заголовка (допускаются макроподстановки, см. readme-ru.txt)
-    "formatHeader": "<font color='#CCCCCC'>Атак: <font color='#FFFFFF'>{{n}}</font>  Урона: <b><font color='#FFCC66'>{{dmg-total}}</font></b>  Последний: <font color='#FFFFFF'>{{dmg}}</font></font>",
+    "formatHeader": "<u><font color='#E5E5E5'>Атак: <b><font color='#FCFCFC'>{{n}}</font></b>  Урона: <b><font color='#FFCC66'>{{dmg-total}}</font></b>  Последний: <b><font color='#FCFCFC'>{{dmg}}</font></b></font></u>",
     // Формат лога попаданий (допускаются макроподстановки, см. readme-ru.txt)
-    "formatHistory": "<textformat leading='0' tabstops='[20,55,90,130,175]'><font color='#FFFFFF' size='13'><font color='#CCCCCC{{dead}}'><b></b{{dead}}>\u00D7{{n-player}}<tab>{{dmg-kind}}<tab>-{{dmg}}<tab>({{dmg-player}})</b></b><tab><font face='XVMSymbol'><font size='19'><font size='0{{dead}}'>{{dead}}</font></font><font size='0'><font size='19{{dead}}'>\u002A</font></font></font><tab><font face='XVMSymbol' size='20'>{{vtype}}</font>  <b></b{{dead}}>{{vehicle}}</b></b></font></font></font></textformat>",
+    "formatHistory": "<textformat leading='-1' tabstops='[20,55,90,130,175]'><font color='#FFE1A6' size='13'><font color='#E5E5E5{{dead}}'><b></b{{dead}}>\u00D7{{n-player}}<tab>{{dmg-kind}}<tab>-{{dmg}}<tab>({{dmg-player}})</b></b><tab><font face='XVMSymbol'><font size='19'><font size='0{{dead}}'>{{dead}}</font></font><font size='0'><font size='19{{dead}}'>\u002A</font></font></font><tab><font face='XVMSymbol' size='20'>{{vtype}}</font>  <b></b{{dead}}>{{vehicle}}</b></b></font></font></textformat>",
     "shadow": {                       //   параметры тени
       "alpha": 100,                   //     прозрачность
       "color": "0x000000",            //     цвет
       "angle": 45,                    //     угол смещения
       "distance": 0,                  //     дистанция смещение
-      "size": 5,                      //     размер
-      "strength": 150                 //     интенсивность
+      "size": 4,                      //     размер
+      "strength": 100                 //     интенсивность
     }
   },
   // Полоса захвата
@@ -153,7 +188,7 @@
     "enemy": { // Наши захватывают
       "primaryTitleFormat":   "<font size='15' color='#FCFCFC'><font color='#60FF00'>База атакована!</font>  <font size='15'>{{extra}}</font></font>", // Верхнее текстовое поле
       "secondaryTitleFormat": "<font size='15' color='#FCFCFC'>{{points}}\u0025</font>",              // Нижнее текстовое поле
-      "captureDoneFormat":    "<font size='17' color='#FFCC66'>База захвачена!<font size='19'>\n\n\n\n</font><font face='XVMSymbol' size='183' color='#FFCC66'>\u0040               <font size='0'>\u0040</font></font></font>",    // Текст полного захвата
+      "captureDoneFormat":    "<font size='17' color='#FFCC66'>База захвачена!<font size='19'>\n\n\n\n</font><font face='XVMSymbol' size='183' color='#FFCC66'>\u0040           <font size='0'>\u0040</font></font></font>",    // Текст полного захвата
       "extra":"Наших на захвате: <b><font color='#FFCC66'>{{tanks}}</font></b>  Осталось: <b><font color='#FFCC66'>{{time}}</font><b>",                          // Дополнительный текст после необходимого расчета
       "shadow": {          // Тень полей
         "color": "0x000000", // Цвет
@@ -165,7 +200,7 @@
     "ally": { // Враги захватывают
       "primaryTitleFormat":   "<font size='15' color='#FCFCFC'><font color='#FE0E00'>База атакована!</font>  <font size='15'>{{extra}}</font></font>",
       "secondaryTitleFormat": "<font size='15' color='#FCFCFC'>{{points}}\u0025</font>",
-      "captureDoneFormat":    "<font size='17' color='#FFCC66'>База захвачена!\n\n<font face='XVMSymbol'  size='183' color='#FFCC66'>               \u0041</font></font>",
+      "captureDoneFormat":    "<font size='17' color='#FFCC66'>База захвачена!\n\n<font face='XVMSymbol'  size='183' color='#FFCC66'>           \u0041</font></font>",
       "extra":"Врагов на захвате: <b><font color='#FFCC66'>{{tanks}}</font></b>  Осталось: <b><font color='#FFCC66'>{{time}}</font><b>",
       "shadow": {
         "color": "0x000000",
@@ -194,7 +229,11 @@
     "iconScale": 0.8,                 // Размер только иконки техники.
                                     // Не влияет на прикрепленную к геометрию и текстовые поля.
                                     // Можно дробные 0.7 1.4.
-
+    "zoom": { // Увеличение миникарты по нажатию кнопки.
+              // Кнопки задаются в секции "keys" верхнего уровня в этом файле конфигурации.
+      "pixelsBack": 440,  // Кол-во пикселей назад для уменьшения миникарты от максимального размера
+      "centered": false // Центрирование увеличенной миникарты по центру экрана
+    },
     "labels": {                     // Текстовые надписи. Поддерживают HTML.
       "nickShrink": 5,              // Максимальные размер ника для макроса {{short-nick}}.
       "vehicleclassmacro": {        // Подстановки макроса {{vehicle-class}}
@@ -323,40 +362,40 @@
         // и высоте расположения машины относительно цели. на миникарте эти факторы не учитываются.
         // Подробнее по ссылке: http://goo.gl/ZqlPa
         "special": [
-            { "su_18":            { "enabled": true, "distance": 552,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "su_26":            { "enabled": true, "distance": 578,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "su_5":             { "enabled": true, "distance": 605,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "su_8":             { "enabled": true, "distance": 920,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "s_51":             { "enabled": true, "distance": 1229, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "su_14":            { "enabled": true, "distance": 1229, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "object_212":       { "enabled": true, "distance": 1229, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "object_261":       { "enabled": true, "distance": 1463, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "su_18":            { "enabled": true, "distance": 552,  "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "su_26":            { "enabled": true, "distance": 578,  "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "su_5":             { "enabled": true, "distance": 605,  "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "su_8":             { "enabled": true, "distance": 920,  "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "s_51":             { "enabled": true, "distance": 1229, "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "su_14":            { "enabled": true, "distance": 1229, "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "object_212":       { "enabled": true, "distance": 1229, "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "object_261":       { "enabled": true, "distance": 1463, "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
 
-            { "bison_i":          { "enabled": true, "distance": 605,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "sturmpanzer_ii":   { "enabled": true, "distance": 605,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "wespe":            { "enabled": true, "distance": 1000, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "grille":           { "enabled": true, "distance": 1210, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "hummel":           { "enabled": true, "distance": 1264, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "g_panther":        { "enabled": true, "distance": 1407, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "g_tiger":          { "enabled": true, "distance": 1172, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "g_e":              { "enabled": true, "distance": 1172, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "bison_i":          { "enabled": true, "distance": 605,  "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "sturmpanzer_ii":   { "enabled": true, "distance": 605,  "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "wespe":            { "enabled": true, "distance": 1000, "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "grille":           { "enabled": true, "distance": 1210, "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "hummel":           { "enabled": true, "distance": 1264, "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "g_panther":        { "enabled": true, "distance": 1407, "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "g_tiger":          { "enabled": true, "distance": 1172, "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "g_e":              { "enabled": true, "distance": 1172, "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
 
-            { "t57":              { "enabled": true, "distance": 552,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "m37":              { "enabled": true, "distance": 969,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "m7_priest":        { "enabled": true, "distance": 1047, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "m41":              { "enabled": true, "distance": 1210, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "m12":              { "enabled": true, "distance": 1316, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "m40m43":           { "enabled": true, "distance": 1179, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "t92":              { "enabled": true, "distance": 1248, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "t57":              { "enabled": true, "distance": 552,  "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "m37":              { "enabled": true, "distance": 969,  "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "m7_priest":        { "enabled": true, "distance": 1047, "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "m41":              { "enabled": true, "distance": 1210, "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "m12":              { "enabled": true, "distance": 1316, "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "m40m43":           { "enabled": true, "distance": 1179, "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "t92":              { "enabled": true, "distance": 1248, "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
 
-            { "renaultbs":        { "enabled": true, "distance": 450,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "lorraine39_l_am":  { "enabled": true, "distance": 844,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "amx_105am":        { "enabled": true, "distance": 1000, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "_105_lefh18b2":    { "enabled": true, "distance": 1000, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "amx_13f3am":       { "enabled": true, "distance": 1250, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "lorraine155_50":   { "enabled": true, "distance": 1202, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "lorraine155_51":   { "enabled": true, "distance": 1296, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "bat_chatillon155": { "enabled": true, "distance": 1296, "thickness": 1, "alpha": 60, "color": "0xEE4444" } }
+            { "renaultbs":        { "enabled": true, "distance": 450,  "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "lorraine39_l_am":  { "enabled": true, "distance": 844,  "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "amx_105am":        { "enabled": true, "distance": 1000, "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "_105_lefh18b2":    { "enabled": true, "distance": 1000, "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "amx_13f3am":       { "enabled": true, "distance": 1250, "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "lorraine155_50":   { "enabled": true, "distance": 1202, "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "lorraine155_51":   { "enabled": true, "distance": 1296, "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
+            { "bat_chatillon155": { "enabled": true, "distance": 1296, "thickness": 1, "alpha": 40, "color": "0xFE7903" } }
         ]
     },
     "lines": { // Линии. Только для своей техники.
@@ -381,26 +420,26 @@
          { "enabled": true, "from": 500, "to": 2000, "inmeters": true, "thickness": 0.75,   "alpha": 30, "color": "0x60FF00"}
        ],
        "camera": [ // Направление камеры от своей техники.
-         { "enabled": true, "from": 50,  "to": 80, "inmeters": true, "thickness": 1.3,   "alpha": 45, "color": "0xFFCC66"},
-         { "enabled": true, "from": 120,  "to": 180, "inmeters": true, "thickness": 1.2,   "alpha": 40, "color": "0xFFCC66"},
-         { "enabled": true, "from": 220, "to": 280, "inmeters": true, "thickness": 1.1,   "alpha": 35, "color": "0xFFCC66"},
-         { "enabled": true, "from": 320, "to": 380, "inmeters": true, "thickness": 1,   "alpha": 30, "color": "0xFFCC66"},
-         { "enabled": true, "from": 420, "to": 480, "inmeters": true, "thickness": 0.9,   "alpha": 30, "color": "0xFFCC66"},
-         { "enabled": true, "from": 520, "to": 580, "inmeters": true, "thickness": 0.8,   "alpha": 30, "color": "0xFFCC66"},
-         { "enabled": true, "from": 620, "to": 680, "inmeters": true, "thickness": 0.75,   "alpha": 30, "color": "0xFFCC66"},
-         { "enabled": true, "from": 720, "to": 780, "inmeters": true, "thickness": 0.75,   "alpha": 30, "color": "0xFFCC66"},
-         { "enabled": true, "from": 820, "to": 880, "inmeters": true, "thickness": 0.75,   "alpha": 30, "color": "0xFFCC66"},
-         { "enabled": true, "from": 920, "to": 980, "inmeters": true, "thickness": 0.75,   "alpha": 30, "color": "0xFFCC66"},
-         { "enabled": true, "from": 1020, "to": 1080, "inmeters": true, "thickness": 0.75,   "alpha": 30, "color": "0xFFCC66"},
-         { "enabled": true, "from": 1120, "to": 1180, "inmeters": true, "thickness": 0.75,   "alpha": 30, "color": "0xFFCC66"},
-         { "enabled": true, "from": 1220, "to": 1280, "inmeters": true, "thickness": 0.75,   "alpha": 30, "color": "0xFFCC66"},
-         { "enabled": true, "from": 1320, "to": 1380, "inmeters": true, "thickness": 0.75,   "alpha": 30, "color": "0xFFCC66"},
-         { "enabled": true, "from": 1420, "to": 1480, "inmeters": true, "thickness": 0.75,   "alpha": 30, "color": "0xFFCC66"},
-         { "enabled": true, "from": 1520, "to": 1580, "inmeters": true, "thickness": 0.75,   "alpha": 30, "color": "0xFFCC66"},
-         { "enabled": true, "from": 1620, "to": 1680, "inmeters": true, "thickness": 0.75,   "alpha": 30, "color": "0xFFCC66"},
-         { "enabled": true, "from": 1720, "to": 1780, "inmeters": true, "thickness": 0.75,   "alpha": 30, "color": "0xFFCC66"},
-         { "enabled": true, "from": 1820, "to": 1880, "inmeters": true, "thickness": 0.75,   "alpha": 30, "color": "0xFFCC66"},
-         { "enabled": true, "from": 1920, "to": 2000, "inmeters": true, "thickness": 0.75,   "alpha": 30, "color": "0xFFCC66"},
+         { "enabled": true, "from": 50,  "to": 80, "inmeters": true, "thickness": 1.3,   "alpha": 50, "color": "0xFFCC66"},
+         { "enabled": true, "from": 120,  "to": 180, "inmeters": true, "thickness": 1.2,   "alpha": 45, "color": "0xFFCC66"},
+         { "enabled": true, "from": 220, "to": 280, "inmeters": true, "thickness": 1.1,   "alpha": 40, "color": "0xFFCC66"},
+         { "enabled": true, "from": 320, "to": 380, "inmeters": true, "thickness": 1,   "alpha": 35, "color": "0xFFCC66"},
+         { "enabled": true, "from": 420, "to": 480, "inmeters": true, "thickness": 0.9,   "alpha": 35, "color": "0xFFCC66"},
+         { "enabled": true, "from": 520, "to": 580, "inmeters": true, "thickness": 0.8,   "alpha": 35, "color": "0xFFCC66"},
+         { "enabled": true, "from": 620, "to": 680, "inmeters": true, "thickness": 0.75,   "alpha": 35, "color": "0xFFCC66"},
+         { "enabled": true, "from": 720, "to": 780, "inmeters": true, "thickness": 0.75,   "alpha": 35, "color": "0xFFCC66"},
+         { "enabled": true, "from": 820, "to": 880, "inmeters": true, "thickness": 0.75,   "alpha": 35, "color": "0xFFCC66"},
+         { "enabled": true, "from": 920, "to": 980, "inmeters": true, "thickness": 0.75,   "alpha": 35, "color": "0xFFCC66"},
+         { "enabled": true, "from": 1020, "to": 1080, "inmeters": true, "thickness": 0.75,   "alpha": 35, "color": "0xFFCC66"},
+         { "enabled": true, "from": 1120, "to": 1180, "inmeters": true, "thickness": 0.75,   "alpha": 35, "color": "0xFFCC66"},
+         { "enabled": true, "from": 1220, "to": 1280, "inmeters": true, "thickness": 0.75,   "alpha": 35, "color": "0xFFCC66"},
+         { "enabled": true, "from": 1320, "to": 1380, "inmeters": true, "thickness": 0.75,   "alpha": 35, "color": "0xFFCC66"},
+         { "enabled": true, "from": 1420, "to": 1480, "inmeters": true, "thickness": 0.75,   "alpha": 35, "color": "0xFFCC66"},
+         { "enabled": true, "from": 1520, "to": 1580, "inmeters": true, "thickness": 0.75,   "alpha": 35, "color": "0xFFCC66"},
+         { "enabled": true, "from": 1620, "to": 1680, "inmeters": true, "thickness": 0.75,   "alpha": 35, "color": "0xFFCC66"},
+         { "enabled": true, "from": 1720, "to": 1780, "inmeters": true, "thickness": 0.75,   "alpha": 35, "color": "0xFFCC66"},
+         { "enabled": true, "from": 1820, "to": 1880, "inmeters": true, "thickness": 0.75,   "alpha": 35, "color": "0xFFCC66"},
+         { "enabled": true, "from": 1920, "to": 2000, "inmeters": true, "thickness": 0.75,   "alpha": 35, "color": "0xFFCC66"},
            //Точки
          { "enabled": true, "from": 99,  "to": 100, "inmeters": true, "thickness": 2.2,   "alpha": 70, "color": "0xFFCC66"},
          { "enabled": true, "from": 199,  "to": 200, "inmeters": true, "thickness": 2.1,   "alpha": 65, "color": "0xFFCC66"},
@@ -437,6 +476,7 @@
     },
     "square" : { // Квадрат со стороной 1000м- максимальная дальность видимости засвеченного протиника
       "enabled": true,
+      "artilleryEnabled": false, // Показывать ли квадрат в случае артиллерии
       "thickness": 1,
       "alpha": 30,
       "color": "0xFFCC66"
@@ -564,7 +604,7 @@
                 "distance": 1,                //   дистанция смещение
                 "size": 1                     //   размер
               },
-              "format": "<font size='14'><font size='0{{clannb}}'>[</font></font> {{vehicle}} <font size='14'><font size='0{{clannb}}'>]</font></font>"         // формат текста. См. описание макросов в readme-ru.txt
+              "format": "<font size='14'><font size='0{{clan}}'>[</font></font> {{vehicle}} <font size='14'><font size='0{{clan}}'>]</font></font>"         // формат текста. См. описание макросов в readme-ru.txt
             },
             // Текстовое поле с текущим здоровьем
             {
@@ -589,7 +629,7 @@
                 "distance": 1,                //   дистанция смещение
                 "size": 1                     //   размер
               },
-              "format": "<font color='#FCFCFC'><font face='XVMSymbol' color='{{c:e}}'>\u0046</font></font> {{hp}} <font color='#FCFCFC'><font face='XVMSymbol' color='{{c:e}}'>\u0047</font></font>" // формат текста. См. описание макросов в readme-ru.txt
+              "format": "{{hp}}" // формат текста. См. описание макросов в readme-ru.txt
             },
             // Текстовое поле стоковой башни1
             {
@@ -844,9 +884,9 @@
               },
               "format": "{{rlevel}} {{vehicle}}"         // формат текста. См. описание макросов в readme-ru.txt
             },
-        // Текстовое поле с эффективностями и количествами боев
+        // Текстовое поле с эффективностью и количествами боев
             {
-              "name": "e, xeff",             // название текстового поля, ни на что не влияет
+              "name": "xeff, hb, kb",             // название текстового поля, ни на что не влияет
               "visible": true,                // false - не отображать
               "x": 0,                         // положение по оси X
               "y": -40,                       // положение по оси Y
@@ -865,7 +905,7 @@
                 "distance": 1,                //   дистанция смещение
                 "size": 1                     //   размер
               },
-              "format": "<font color='{{c:t-battles}}'>{{t-hb}}</font>  <font color='{{c:e}}'>{{e}}</font>  <font color='{{c:xeff}}'>{{xeff}}</font>  <font color='{{c:kb}}'>{{kb}}</font>"         // формат текста. См. описание макросов в readme-ru.txt
+              "format": "<font color='{{c:t-battles}}'>{{t-hb}}</font>  <font color='{{c:xeff}}'>{{xeff}}</font>  <font color='{{c:kb}}'>{{kb}}</font>"         // формат текста. См. описание макросов в readme-ru.txt
             },
             // Текстовое поле с именем игрока
             {
@@ -1335,7 +1375,7 @@
                 "distance": 1,                //   дистанция смещение
                 "size": 1                     //   размер
               },
-              "format": "<font size='14'><font size='0{{clannb}}'>[</font></font> {{vehicle}} <font size='14'><font size='0{{clannb}}'>]</font></font>"         // формат текста. См. описание макросов в readme-ru.txt
+              "format": "<font size='14'><font size='0{{clan}}'>[</font></font> {{vehicle}} <font size='14'><font size='0{{clan}}'>]</font></font>"         // формат текста. См. описание макросов в readme-ru.txt
             },
             // Текстовое поле с текущим здоровьем
             {
@@ -1360,7 +1400,7 @@
                 "distance": 1,                //   дистанция смещение
                 "size": 1                     //   размер
               },
-              "format": "<font color='#FCFCFC'><font face='XVMSymbol' color='{{c:e}}'>\u0046</font></font> {{hp}} <font color='#FCFCFC'><font face='XVMSymbol' color='{{c:e}}'>\u0047</font></font>" // формат текста. См. описание макросов в readme-ru.txt
+              "format": "{{hp}}" // формат текста. См. описание макросов в readme-ru.txt
             },
             // Текстовое поле стоковой башни1
             {
@@ -1615,9 +1655,9 @@
               },
               "format": "{{rlevel}} {{vehicle}}"         // формат текста. См. описание макросов в readme-ru.txt
             },
-        // Текстовое поле с эффективностями и количествами боев
+        // Текстовое поле с эффективностью и количествами боев
             {
-              "name": "e, xeff",             // название текстового поля, ни на что не влияет
+              "name": "xeff, hb, kb",             // название текстового поля, ни на что не влияет
               "visible": true,                // false - не отображать
               "x": 0,                         // положение по оси X
               "y": -40,                       // положение по оси Y
@@ -1636,7 +1676,7 @@
                 "distance": 1,                //   дистанция смещение
                 "size": 1                     //   размер
               },
-              "format": "<font color='{{c:t-battles}}'>{{t-hb}}</font>  <font color='{{c:e}}'>{{e}}</font>  <font color='{{c:xeff}}'>{{xeff}}</font>  <font color='{{c:kb}}'>{{kb}}</font>"         // формат текста. См. описание макросов в readme-ru.txt
+              "format": "<font color='{{c:t-battles}}'>{{t-hb}}</font>  <font color='{{c:xeff}}'>{{xeff}}</font>  <font color='{{c:kb}}'>{{kb}}</font>"         // формат текста. См. описание макросов в readme-ru.txt
             },
             // Текстовое поле с именем игрока
             {

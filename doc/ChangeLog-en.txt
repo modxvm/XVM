@@ -1,42 +1,34 @@
-XVM-3.5.0-pre1:
-  * adaptation to WoT 0.8.5.CT1
+XVM-3.5.0:
+  * adaptation to WoT 0.8.5.CT2
 
-XVM-3.5.0-test7:
+  [NEW FUNCTIONS]
   * squad window: show info about tank
-  * fixed mouse cursor with minimap zoom by Ctrl press
-  * new feature: enemy spotted status at right side panel
-  
-XVM-3.5.0-test6:
-  * bugs fixed
-
-XVM-3.5.0-test5:
-  * fixed endless loop when stat is not available
-
-XVM-3.5.0-test4:
-  * minimap: zoom size memory fixed
-  * updated per-vehicle statistics data (added new tanks)
+  * enemy spotted status at right side panel
+  * crew: crew loading mod (author: Lemaxho)
   * added button in company window for enabling automatic loading data
 
-XVM-3.5.0-test3:
-  * bugs fixed
-
-XVM-3.5.0-test2:
+  [FIXES]
+  * fixed mouse cursor with minimap zoom by Ctrl press
+  * fixed endless loop when stat is not available
   * capture bar: tweak
-  * minimap: zoom minimap by key pressing; see sections "minimap":{"zoom" and "hotkeys":{ at XVM.xvmconf
-  * minimap: 1km square switch for artillery
-  * minimap: iconScale now does not affect capture bases
-  * markers: auto size text fields
-  * crew: crew loading mod (author: Lemaxho)
   
-XVM-3.5.0-test1:
-  * xvm-stat protocol reworked (XVM Stat 1.3.0 ot higher required)
-  * minimap: xvm-stat.exe is not necessary for map recongnition for RU, NA/EN, CH locales
-  * minimap: world map battle fix
-  * minimap: {{vehicle-name}} macro returns vehicle system name - usa-M24_Chaffee
-  * minimap: smoothed superHeavyTank and all tank wrecks icons
-  * minimap: 1000m square implemented
+  [MINIMAP]
   * minimap enabled by default
+  * zoom minimap by key pressing; see sections "minimap":{"zoom" and "hotkeys":{ at XVM.xvmconf
+  * 1000m square implemented
+  * 1km square switch for artillery
+  * xvm-stat.exe is not necessary for map recongnition for RU, NA/EN, CH locales
+  * {{vehicle-name}} macro returns vehicle system name - usa-M24_Chaffee
+  * smoothed superHeavyTank and all tank wrecks icons
+  * zoom size memory fixed
+  * world map battle fix
+  * iconScale now does not affect capture bases
+  
+  [OTHER]
+  * xvm-stat protocol reworked (XVM Stat 1.3.0 ot higher required)
   * user statistics in hangar enabled by default
+  * markers: auto size text fields
+  * updated per-vehicle statistics data (added new tanks)
 
 XVM-3.4.2:
   * minimap fix: minimal map size
