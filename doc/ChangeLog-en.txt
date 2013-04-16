@@ -1,4 +1,4 @@
-XVM-3.5.0:
+XVM-3.5.0-pre1:
   * adaptation to WoT 0.8.5.CT2
 
   [NEW FUNCTIONS]
@@ -14,7 +14,8 @@ XVM-3.5.0:
   
   [MINIMAP]
   * minimap enabled by default
-  * zoom minimap by key pressing; see sections "minimap":{"zoom" and "hotkeys":{ at XVM.xvmconf
+  * zoom minimap by key pressing;
+    see sections "minimap":{"zoom" and "hotkeys":{ at XVM.xvmconf
   * 1000m square implemented
   * 1km square switch for artillery
   * xvm-stat.exe is not necessary for map recongnition for RU, NA/EN, CH locales
@@ -25,7 +26,8 @@ XVM-3.5.0:
   * iconScale now does not affect capture bases
   
   [OTHER]
-  * xvm-stat protocol reworked (XVM Stat 1.3.0 ot higher required)
+  * xvm-stat protocol reworked
+    ATTENTION: XVM Stat 1.4.0 ot higher required
   * user statistics in hangar enabled by default
   * markers: auto size text fields
   * updated per-vehicle statistics data (added new tanks)
