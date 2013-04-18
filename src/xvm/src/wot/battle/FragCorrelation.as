@@ -59,27 +59,7 @@ class wot.battle.FragCorrelation
     private static function hideFragCorellationBarTeamTextFields():Void
     {
         /** Everything outside of this rectangular mask will be invisible */
-        _root.fragCorrelationBar.setMask(createMask());
-    }
-    
-    private static function createMask():MovieClip
-    {
-        var fragMask:MovieClip = _root.createEmptyMovieClip("fragMask", _root.getNextHighestDepth());
-        
-        fragMask.lineStyle(1, 0x33CCCC, 100);
-        fragMask.beginFill(0x000000, 100);
-        
-        var maxY:Number = 0;
-        var minY:Number = 30;
-        var minX:Number = 100;
-        var maxX:Number = 1600;
-        fragMask.moveTo(minX, minY);
-        fragMask.lineTo(maxX, minY);
-        fragMask.lineTo(maxX, maxY);
-        fragMask.lineTo(minX, maxY);
-        fragMask.lineTo(minX, minY);
-        fragMask.endFill();
-        
-        return fragMask;
+        _root.fragCorrelationBar.scrollRect = new flash.geom.Rectangle
+        (0, 0, _root.fragCorrelationBar._width, _root.fragCorrelationBar._height / 2);
     }
 }
