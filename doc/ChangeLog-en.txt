@@ -1,3 +1,8 @@
+XVM-3.5.0
+  * minimap: added new map Pearl River to map recognition system
+  * implemented ability to disable "Allies | Enemie" text fields under
+    - upper level section "fragCorrelation" at xvm config file
+  
 XVM-3.5.0-pre1:
   * adaptation to WoT 0.8.5.CT2
 
