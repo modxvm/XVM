@@ -291,7 +291,12 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         }
         else
         {
-            m_statisticsHeaderField.htmlText = "<span class='xvm_statisticsHeader'>" + Locale.get("player (average / top)") + "</span>";
+            var columnTitle:String = "";
+            if (Config.s_config.rating.enableUserInfoStatistics)
+            {
+                columnTitle = Locale.get("player (average / top)");
+            }
+            m_statisticsHeaderField.htmlText = "<span class='xvm_statisticsHeader'>" + columnTitle + "</span>";
             var data = list.dataProvider[list.selectedIndex];
             if (!data)
                 m_statisticsField2.htmlText = "";
