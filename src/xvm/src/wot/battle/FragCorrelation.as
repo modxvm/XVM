@@ -1,10 +1,12 @@
 import wot.utils.Config;
+import wot.utils.Utils;
 
 class wot.battle.FragCorrelation
 {
     public static function modify():Void
     {
         fixFragCorellationBarOffset();
+        disableSelection();
         if (Config.s_config.fragCorrelation.hideTeamTextFields == true)
         {
             hideFragCorellationBarTeamTextFields();
@@ -40,9 +42,41 @@ class wot.battle.FragCorrelation
         }
     }
     
+    /** Disable caret cursor change while mouse cursor is hovering over frag clips */
+    private static function disableSelection():Void
+    {
+        _root.fragCorrelationBar._selectable = false;
+        var fragClips:Array = Utils.getChildrenOf(_root.fragCorrelationBar);
+        for (var i in fragClips)
+        {
+            fragClips[i]._selectable = false;
+        }
+    }
+    
     private static function hideFragCorellationBarTeamTextFields():Void
     {
-        _root.fragCorrelationBar.m_enemyTeamTF._alpha = 0;
-        _root.fragCorrelationBar.m_alliedTeamTF._alpha = 0;
+        /** Everything outside of this rectangular mask will be invisible */
+        _root.fragCorrelationBar.setMask(createMask());
+    }
+    
+    private static function createMask():MovieClip
+    {
+        var fragMask:MovieClip = _root.createEmptyMovieClip("fragMask", _root.getNextHighestDepth());
+        
+        fragMask.lineStyle(1, 0x33CCCC, 100);
+        fragMask.beginFill(0x000000, 100);
+        
+        var maxY:Number = 0;
+        var minY:Number = 30;
+        var minX:Number = 100;
+        var maxX:Number = 1600;
+        fragMask.moveTo(minX, minY);
+        fragMask.lineTo(maxX, minY);
+        fragMask.lineTo(maxX, maxY);
+        fragMask.lineTo(minX, maxY);
+        fragMask.lineTo(minX, minY);
+        fragMask.endFill();
+        
+        return fragMask;
     }
 }
