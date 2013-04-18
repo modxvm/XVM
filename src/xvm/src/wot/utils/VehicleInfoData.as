@@ -265,9 +265,11 @@ class wot.utils.VehicleInfoData
 
         // level 10
         ussr_T62A:                      { tiers: [ 10, 12 ], name: null, short: "62" },
+        ussr_Object_907:                { tiers: [ 10, 12 ], name: null, short: "" },
         germany_E50_Ausf_M:             { tiers: [ 10, 12 ], name: null, short: "" },
         germany_Leopard1:               { tiers: [ 10, 12 ], name: null, short: "" },
         usa_M48A1:                      { tiers: [ 10, 12 ], name: null, short: "" },
+        usa_M60:                        { tiers: [ 10, 12 ], name: null, short: "" },
         france_Bat_Chatillon25t:        { tiers: [ 10, 12 ], name: null, short: "" },
         uk_GB70_FV4202_105:             { tiers: [ 10, 12 ], name: null, short: "" },
         china_Ch19_121:                 { tiers: [ 10, 12 ], name: null, short: "" },
@@ -275,6 +277,7 @@ class wot.utils.VehicleInfoData
         ussr_IS_7:                      { tiers: [ 10, 12 ], name: null, short: "7" },
         germany_E_100:                  { tiers: [ 10, 12 ], name: null, short: "100" },
         germany_Maus:                   { tiers: [ 10, 12 ], name: null, short: "Maus" },
+        germany_VK7201:                 { tiers: [ 10, 12 ], name: null, short: "" },
         usa_T110:                       { tiers: [ 10, 12 ], name: null, short: "110" },
         usa_T57_58:                     { tiers: [ 10, 12 ], name: null, short: "" },
         france_F10_AMX_50B:             { tiers: [ 10, 12 ], name: null, short: "50B" },
@@ -313,6 +316,7 @@ class wot.utils.VehicleInfoData
         ussr_KV_220_action:             { tiers: [ 5, 6 ],   name: null, short: "" },
         usa_M4A2E4:                     { tiers: [ 5, 6 ],   name: null, short: "" },
         uk_GB68_Matilda_Black_Prince:   { tiers: [ 5, 6 ],   name: null, short: "" },
+        uk_GB51_Excelsior:              { tiers: [ 5, 6 ],   name: null, short: "" },        
         uk_GB20_Crusader:               { tiers: [ 5, 7 ],   name: null, short: "" },
         ussr_T_50_2:                    { tiers: [ 7, 12 ],  name: null, short: "" },
         usa_M24_Chaffee:                { tiers: [ 7, 12 ],  name: null, short: "" },
