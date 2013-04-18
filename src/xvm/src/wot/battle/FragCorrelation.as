@@ -43,13 +43,16 @@ class wot.battle.FragCorrelation
     }
     
     /** Disable caret cursor change while mouse cursor is hovering over frag clips */
+    /**
+     * Does not work :(
+     */
     private static function disableSelection():Void
     {
-        _root.fragCorrelationBar._selectable = false;
-        var fragClips:Array = Utils.getChildrenOf(_root.fragCorrelationBar);
-        for (var i in fragClips)
+        var clipsToDisableSelect:Array = Utils.getChildrenOf(_root.fragCorrelationBar);
+        clipsToDisableSelect.push(_root.fragCorrelationBar);
+        for (var i in clipsToDisableSelect)
         {
-            fragClips[i]._selectable = false;
+            clipsToDisableSelect[i].selectable = false;
         }
     }
     
