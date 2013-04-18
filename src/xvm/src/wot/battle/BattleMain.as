@@ -63,7 +63,10 @@ class wot.battle.BattleMain
         SetupElements();
         
         fixFragCorellationBarOffset();
-        hideFragCorellationBarTeamTextFields();
+        if (Config.s_config.fragCorrelation.hideTeamTextFields == true)
+        {
+            hideFragCorellationBarTeamTextFields();
+        }
     }
 
     private static function SetupElements()

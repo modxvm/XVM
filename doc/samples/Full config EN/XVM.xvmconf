@@ -41,6 +41,11 @@
     "enableUserInfoStatistics": true,           // true - Enable statistics in the user info window
     "enableCompanyStatistics": true             // true - Enable statistics in the company window
   },
+  // Frag counter panel at top side of battle windows interface
+  "fragCorrelation": {
+    // Hide two stupid big white textfields "Allies | Enemies"
+    "hideTeamTextFields": false
+  },
   // Special XVM hotkeys
   "hotkeys": {
     // onHold: take action by key click or while key is remains pressed

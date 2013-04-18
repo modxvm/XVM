@@ -91,6 +91,9 @@ class wot.utils.DefaultConfig
                 leftLvlBorder: "",		// Grille [4
                 rightLvlBorder: ""		// Grille 4]
             },
+            fragCorrelation: {
+                hideTeamTextFields: false
+            },
             hotkeys: {
                 minimapZoom: { enabled: false, onHold: true, keyCode: 17 } // 17 - Ctrl
                 /*
