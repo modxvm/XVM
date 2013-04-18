@@ -92,7 +92,7 @@ class wot.utils.DefaultConfig
                 rightLvlBorder: ""		// Grille 4]
             },
             hotkeys: {
-                minimapZoom: { enabled: true, onHold: true, keyCode: 17 } // 17 - Ctrl
+                minimapZoom: { enabled: false, onHold: true, keyCode: 17 } // 17 - Ctrl
                 /*
                 minimapExtended: { enabled: true, onHold: true, keycode: 16 } // 16 - Alt?
                 messages: [
