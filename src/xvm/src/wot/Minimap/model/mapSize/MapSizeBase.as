@@ -69,6 +69,8 @@ class wot.Minimap.model.mapSize.MapSizeBase
                 return 100; 
             case "17_munchen": // Вайдпарк
                 return 60;      
+            case "60_asia_miao": // Жемчужная река
+                return 100;      
             default: 
                 return undefined;
         }
@@ -307,6 +309,11 @@ class wot.Minimap.model.mapSize.MapSizeBase
             case "South Coast":
                 return 100;
             case "雅尔塔小镇":
+                return 100;
+            
+            case "Жемчужная река":
+                return 100;
+            case "Pearl River":
                 return 100;
            
             default:
