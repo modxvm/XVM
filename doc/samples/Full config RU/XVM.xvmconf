@@ -19,7 +19,7 @@
     "author": "sirmax2",                        // автор конфига
     "description": "Default settings for XVM",  // описание конфига
     "url": "http://code.google.com/p/wot-xvm/", // адрес, где выкладываются обновления конфига
-    "date": "15.04.2013",                       // дата последней модификации конфига
+    "date": "18.04.2013",                       // дата последней модификации конфига
     "gameVersion": "0.8.5",                     // поддерживаемая версия игры
     "modMinVersion": "3.5.0"                    // минимально необходимая версия мода XVM
   },
@@ -41,10 +41,9 @@
     "enableUserInfoStatistics": true,           // true - включить отображение статистики в достижениях пользователя
     "enableCompanyStatistics": true             // true - включить отображение статистики при наборе роты
   },
-  // Верхняя нанель счёта
+  // Панель счёта в бою
   "fragCorrelation": {
-    // Спрятать два тупых больших белых тектовых поля "Союзники | Противники"
-    "hideTeamTextFields": false
+    "hideTeamTextFields": false // true - cпрятать два текстовых поля "Союзники | Противники"
   },
   // Специальные горячие клавиши XVM
   "hotkeys": {
@@ -60,7 +59,7 @@
     "romanNumbers": true, // false - уровень арабскими цифрами
     "showClan": true,     // false - скрыть клан игрока
     "leftLvlBorder": "",   // Обрамление уровня слева. "Grille [4"
-	"rightLvlBorder": ""   // Обрамление уровня справа. "Grille 4]"
+    "rightLvlBorder": ""   // Обрамление уровня справа. "Grille 4]"
   },
   // Параметры экрана загрузки боя
   "battleLoading": {

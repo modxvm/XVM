@@ -19,7 +19,7 @@
     "author": "sirmax2",                        // Config author
     "description": "Default settings for XVM",  // Config description
     "url": "http://code.google.com/p/wot-xvm/", // Address to config updates
-    "date": "15.04.2013",                       // Config last modified
+    "date": "18.04.2013",                       // Config last modified
     "gameVersion": "0.8.5",                     // Supported version of the game
     "modMinVersion": "3.5.0"                    // The minimum required version of the XVM mod
   },
@@ -43,8 +43,7 @@
   },
   // Frag counter panel at top side of battle windows interface
   "fragCorrelation": {
-    // Hide two stupid big white textfields "Allies | Enemies"
-    "hideTeamTextFields": false
+    "hideTeamTextFields": false // true - hide textfields "Allies | Enemies"
   },
   // Special XVM hotkeys
   "hotkeys": {
@@ -60,7 +59,7 @@
     "romanNumbers": true, // false - arabic numerals
     "showClan": true,     // false - hide player clan
     "leftLvlBorder": "",   // Left level border. "Grille [4"
-	"rightLvlBorder": ""   // Right level border. "Grille 4]"
+    "rightLvlBorder": ""   // Right level border. "Grille 4]"
   },
   // Parameters of the Battle Loading Screen
   "battleLoading": {
