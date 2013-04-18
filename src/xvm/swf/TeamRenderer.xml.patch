@@ -1,5 +1,5 @@
---- orig\TeamRenderer.xml	2013-02-22 13:56:48.448084900 +0200
-+++ TeamRenderer.xml	2013-02-22 13:56:48.691109200 +0200
+--- orig\TeamRenderer.xml	2013-04-18 15:44:25.369713500 +0400
++++ TeamRenderer.xml	2013-04-18 15:44:25.496720800 +0400
 @@ -41224,7 +41224,7 @@
          <actions>
            <PushData>

@@ -1,5 +1,5 @@
---- orig\battleloading.xml	2013-02-15 10:02:44.971626300 +0200
-+++ battleloading.xml	2013-02-15 10:02:45.151628100 +0200
+--- orig\battleloading.xml	2013-04-18 15:44:19.713390000 +0400
++++ battleloading.xml	2013-04-18 15:44:19.872399100 +0400
 @@ -300,7 +300,7 @@
            </PlaceObject2>
            <PlaceObject2 replace="0" depth="8" objectID="13" name="iconLoader" allflags1="0" allflags2="4">

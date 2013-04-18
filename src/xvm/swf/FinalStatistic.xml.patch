@@ -1,5 +1,5 @@
---- orig\FinalStatistic.xml	2013-04-05 21:47:01.729030700 +0300
-+++ FinalStatistic.xml	2013-04-05 21:47:02.146054500 +0300
+--- orig\FinalStatistic.xml	2013-04-18 15:44:21.090468700 +0400
++++ FinalStatistic.xml	2013-04-18 15:44:21.435488500 +0400
 @@ -85467,8 +85467,8 @@
                <String value="charAt"/>
                <String value=" "/>

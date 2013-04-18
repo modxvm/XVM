@@ -1,5 +1,5 @@
---- orig\TeamMemberRenderer.xml	2013-02-18 23:38:54.077632700 +0200
-+++ TeamMemberRenderer.xml	2013-02-18 23:38:54.332647200 +0200
+--- orig\TeamMemberRenderer.xml	2013-04-18 15:44:25.068696300 +0400
++++ TeamMemberRenderer.xml	2013-04-18 15:44:25.205704100 +0400
 @@ -38939,8 +38939,8 @@
                <String value="charAt"/>
                <String value=" "/>

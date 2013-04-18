@@ -1,5 +1,5 @@
---- orig\SquadMemberRenderer.xml	2013-04-01 12:22:03.277973500 +0300
-+++ SquadMemberRenderer.xml	2013-04-01 12:22:03.427973500 +0300
+--- orig\SquadMemberRenderer.xml	2013-04-18 15:44:24.719676300 +0400
++++ SquadMemberRenderer.xml	2013-04-18 15:44:24.861684400 +0400
 @@ -38125,8 +38125,8 @@
                <String value="charAt"/>
                <String value=" "/>
