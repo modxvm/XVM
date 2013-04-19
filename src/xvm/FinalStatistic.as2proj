@@ -39,8 +39,8 @@
   <compileTargets>
     <compile path="src\wot\FinalStatistic\FinalStatisticForm.as" />
     <compile path="src\wot\FinalStatistic\TeamStats.as" />
-    <compile path="src\wot\FinalStatistic\TeamMemberItemRenderer.as" />
     <compile path="src\wot\FinalStatistic\DetailsBlock.as" />
+    <compile path="src\wot\FinalStatistic\EfficiencyRenderer.as" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>

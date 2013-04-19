@@ -20,30 +20,21 @@
              </items>
            </PushData>
            <GetVariable/>
-@@ -104558,7 +104558,7 @@
-         <actions>
-           <PushData>
-             <items>
--              <StackString value="net.wargaming.hangar.FinalStatistic.view.TeamMemberItemRenderer"/>
-+              <StackString value="wot.FinalStatistic.TeamMemberItemRenderer"/>
-             </items>
-           </PushData>
-           <GetVariable/>
-@@ -104584,7 +104584,7 @@
-         <actions>
-           <PushData>
-             <items>
--              <StackString value="net.wargaming.hangar.FinalStatistic.view.TeamMemberItemRenderer"/>
-+              <StackString value="wot.FinalStatistic.TeamMemberItemRenderer"/>
-             </items>
-           </PushData>
-           <GetVariable/>
 @@ -104662,7 +104662,7 @@
          <actions>
            <PushData>
              <items>
 -              <StackString value="net.wargaming.hangar.FinalStatistic.view.DetailsBlock"/>
 +              <StackString value="wot.FinalStatistic.DetailsBlock"/>
+             </items>
+           </PushData>
+           <GetVariable/>
+@@ -104740,7 +104740,7 @@
+         <actions>
+           <PushData>
+             <items>
+-              <StackString value="net.wargaming.hangar.FinalStatistic.view.EfficiencyRenderer"/>
++              <StackString value="wot.FinalStatistic.EfficiencyRenderer"/>
              </items>
            </PushData>
            <GetVariable/>

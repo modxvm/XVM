@@ -1,55 +1,50 @@
 ﻿import wot.utils.Config;
-import wot.utils.Locale;
 
 class wot.FinalStatistic.TeamStats extends net.wargaming.hangar.FinalStatistic.TeamStats // gfx.core.UIComponent
 {
-    function TeamStats()
-    {
-        super();
-        iconTypeToKey.health.key = "damageDealt";
-        healthHead1.helpText = healthHead2.helpText = Locale.get("Damage dealt");
-    }
-
     function configUI()
     {
         super.configUI();
 
-        tankHead1.selected = tankHead2.selected = false;
+        // TeamStats recreated every time tab page is changed, so save flag at the parent form class.
+		if (parent["__xvm_TeamStats_initialized"])
+            return;
+        parent["__xvm_TeamStats_initialized"] = true;
 
+        wot.utils.Logger.add("Sort");
+        
+        var sortInfo;
         switch (Config.s_config.finalStatistic.sortColumn)
         {
             case 1:
-                sqadHead1.selected = sqadHead2.selected = true;
-                this.applySort("squad", "desc");
+                sortInfo = { f1: sqadHead1, f2: sqadHead2, iconType: "squad", sortDirection: "desc" };
                 break;
             case 2:
-                playerHead1.selected = playerHead2.selected = true;
-                this.applySort("player", "asc");
+                sortInfo = { f1: playerHead1, f2: playerHead2, iconType: "player", sortDirection: "asc" };
                 break;
             case 3:
-                tankHead1.selected = tankHead2.selected = true;
-                this.applySort("tank", "desc");
+                sortInfo = { f1: tankHead1, f2: tankHead2, iconType: "tank", sortDirection: "desc" };
                 break;
             case 4:
-                healthHead1.selected = healthHead2.selected = true;
-                this.applySort("health", "desc");
+                sortInfo = { f1: damageHead1, f2: damageHead2, iconType: "damage", sortDirection: "desc" };
                 break;
             case 5:
-                fragHead1.selected = fragHead2.selected = true;
-                this.applySort("frag", "desc");
+                sortInfo = { f1: fragHead1, f2: fragHead2, iconType: "frag", sortDirection: "desc" };
                 break;
             case 6:
-                xpHead1.selected = xpHead2.selected = true;
-                this.applySort("xp", "desc");
+                sortInfo = { f1: xpHead1, f2: xpHead2, iconType: "xp", sortDirection: "desc" };
                 break;
             case 7:
-                medalHead1.selected = medalHead2.selected = true;
-                this.applySort("medal", "desc");
+                sortInfo = { f1: medalHead1, f2: medalHead2, iconType: "medal", sortDirection: "desc" };
                 break;
             default:
-                xpHead1.selected = xpHead2.selected = true;
-                this.applySort("xp", "desc");
+                sortInfo = { f1: xpHead1, f2: xpHead2, iconType: "xp", sortDirection: "desc" };
                 break;
         }
+
+        clearHeadersSelection(team1buttons, sortInfo.f1);
+        clearHeadersSelection(team2buttons, sortInfo.f2);
+        sortInfo.f1.selected = sortInfo.f2.selected = true;
+        applySort(sortInfo.iconType, sortInfo.sortDirection);
     }
 }

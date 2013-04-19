@@ -23,8 +23,17 @@
     "enableUserInfoStatistics": true,
     "enableCompanyStatistics": true
   },
+  "fragCorrelation": {
+    "hideTeamTextFields": true
+  },
   "hotkeys": {
-    "minimapZoom": { "enabled": true, "onHold": true, "keyCode": 17 }
+    "minimapZoom": { "enabled": false, "onHold": true, "keyCode": 17 }
+  },
+  "squad": {
+    "enabled": true,
+    "romanNumbers": true,
+    "showClan": true,
+    "leftLvlBorder": ""
   },
   "battleLoading": {
     "showChances": true,
@@ -71,6 +80,7 @@
   },
   "minimap": {
     "enabled": true,
+    "iconScale": 1.5,
     "circles": {
         "major": [
             { "enabled": true, "distance": 445, "thickness": 0.3, "alpha": 65, "color": "0xFF3333" },
@@ -93,7 +103,11 @@
        ]
     },
     "square" : {
-      "enabled": true
+      "enabled": true,
+      "artilleryEnabled": false,
+      "thickness": 0.7,
+      "alpha": 40,
+      "color": "0xFFFFFF"
     }
   },
   "hitLog": {
