@@ -298,8 +298,7 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
 
     private function setSelectedVehicleStatistic()
     {
-        var columnTitle:String = Config.s_config.rating.enableUserInfoStatistics ? Locale.get("player (average / top)") : "";
-        m_statisticsHeaderField.htmlText = "<span class='xvm_statisticsHeader'>" + columnTitle + "</span>";
+        m_statisticsHeaderField.htmlText = "<span class='xvm_statisticsHeader'>" + Locale.get("player (average / top)") + "</span>";
 
         var data = list.dataProvider[list.selectedIndex];
         if (!data)
