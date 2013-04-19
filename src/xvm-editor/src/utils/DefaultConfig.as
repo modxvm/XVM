@@ -74,11 +74,34 @@ public class DefaultConfig
                 }
             },
             rating: {
-                showPlayersStatistics: true,     // Global switch. Handles whole statisctics module.
-                loadEnemyStatsInFogOfWar: true,  // Load players data in "fog of war".
-                enableStatisticsLog: false,      // Enable saving statistics to "xvm-stat.log" file
-                enableUserInfoStatistics: true,  // Enable statistics in the user info window
-                enableCompanyStatistics: true    // Enable statistics in the company window
+                showPlayersStatistics: true,	// Global switch. Handles whole statisctics module.
+                loadEnemyStatsInFogOfWar: true,	// Load players data in "fog of war".
+                enableStatisticsLog: false, 	// Enable saving statistics to "xvm-stat.log" file
+                enableUserInfoStatistics: true,	// Enable statistics in the user info window
+                enableCompanyStatistics: true	// Enable statistics in the company window
+            },
+            squad: {
+                enabled: false,			// Global switch
+                romanNumbers: true,		// Roman level numbers
+                showClan: true,			// Show player clan
+                leftLvlBorder: "",		// Grille [4
+                rightLvlBorder: ""		// Grille 4]
+            },
+            userInfo: {
+                showEColumn: false              // Show column for per-vehicle efficiency
+            },
+            fragCorrelation: {
+                hideTeamTextFields: false
+            },
+            hotkeys: {
+                minimapZoom: { enabled: false, onHold: true, keyCode: 17 } // 17 - Ctrl
+                /*
+                minimapExtended: { enabled: true, onHold: true, keycode: 16 } // 16 - Alt?
+                messages: [
+                  {  enabled: true, keycode: 113, text: "ШАНСЫ 5% АЙДА ТАПИЦА" }, // F2
+                  {  enabled: true, keycode: 114, text: "☆\nhey!\n☆" } // .split("\n")
+                ]
+                */
             },
             battleLoading: {
                 // Show clock at Battle Loading Screen.
@@ -112,6 +135,24 @@ public class DefaultConfig
                 removeSquadIcon: false, // Hide squad icon.
                 // Playes/clan icon parameters.
                 clanIcon: { show: true, x: 0, y: 6, xr: NaN, yr: NaN, h: 16, w: 16, alpha: 90 },
+                // Display options for icons of never seen enemies
+                enemySpottedMarker: {
+                  enabled: false,
+                  Xoffset: -22,
+                  Yoffset: -2,
+                  format: {
+                    neverSeen: "<FONT FACE=\"$FieldFont\" SIZE=\"24\" COLOR=\"#DDDDDD\">*</FONT>",
+                    lost: "",
+                    revealed: "",
+                    dead: "",
+                    artillery: {
+                      neverSeen: "",
+                      lost: "",
+                      revealed: "",
+                      dead: ""
+                    }
+                  }
+                },
                 // Medium1 mode.
                 medium: {
                     // 0..250 - player name field width.
@@ -155,6 +196,10 @@ public class DefaultConfig
                 selfIconAlpha: 100,
                 cameraAlpha: 100,
                 iconScale: 1,
+                zoom: {
+                  pixelsBack: 160,
+                  centered: true
+                },
                 labels: {
                   nickShrink: 5,
                   vehicleclassmacro: {
@@ -306,12 +351,13 @@ public class DefaultConfig
                 },
                 square: {
                   enabled: false,
+                  artilleryEnabled: false,
                   thickness: 0.7,
                   alpha: 40,
                   color: "0xFFFFFF"
                 },
                 lines: {
-                  enabled: true,
+                  enabled: false,
                   vehicle: [
                     { enabled: true, from: 50,  to: 100, inmeters: true, thickness: 2,   alpha: 60, color: 0x44EE44},
                     { enabled: true, from: 200, to: 300, inmeters: true, thickness: 1.5, alpha: 45, color: 0x44EE44},
