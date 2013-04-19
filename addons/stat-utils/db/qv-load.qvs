@@ -1,0 +1,14 @@
+vi:
+Load * from 'players\_vinfo.csv' (ansi, txt, delimiter is ';', embedded labels);
+
+vt:
+Load * from 'players\_vtop.csv' (ansi, txt, delimiter is ';', embedded labels);
+
+v:
+Load *,
+ (vwins/vbattles) as R,
+ (vdamage/vbattles) as D,
+ (vfrags/vbattles) as F,
+ (vspotted/vbattles) as S,
+ (vsurvived/vbattles) as U
+ from 'players\_vehicle.csv' (ansi, txt, delimiter is ';', embedded labels);
