@@ -271,77 +271,81 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
     private function setXVMStat2()
     {
         if (list.selectedIndex == 0)
-        {
-            m_statisticsHeaderField.htmlText = "";
-            if (!m_userData)
-                return;
-            var spo = m_userData.spo / m_userData.b;
-            var def = m_userData.def / m_userData.b;
-            var cap = m_userData.cap / m_userData.b;
-            m_statisticsField2.htmlText = "<span class='xvm_statisticsField'>" +
-                Locale.get("Avg level") + ": <font color='#ffc133'>" +
-                    (m_userData.lvl ? Sprintf.format("%.1f", m_userData.lvl) : "-") + "</font> " +
-                Locale.get("Spotted") + ": <font color='#ffc133'>" +
-                    (spo ? Sprintf.format("%.2f", spo) : "-") + "</font> " +
-                Locale.get("Defence") + ": <font color='#ffc133'>" +
-                    (def ? Sprintf.format("%.2f", def) : "-") + "</font> " +
-                Locale.get("Capture") + ": <font color='#ffc133'>" +
-                    (cap ? Sprintf.format("%.2f", cap) : "-") + "</font> " +
-                "</span>";
-        }
+            setGlobalStatistic();
         else
-        {
-            var columnTitle:String = "";
-            if (Config.s_config.rating.enableUserInfoStatistics)
-            {
-                columnTitle = Locale.get("player (average / top)");
-            }
-            m_statisticsHeaderField.htmlText = "<span class='xvm_statisticsHeader'>" + columnTitle + "</span>";
-            var data = list.dataProvider[list.selectedIndex];
-            if (!data)
-                m_statisticsField2.htmlText = "";
-            else
-            {
-                //Logger.addObject(blocksArea, "blocksArea", 3);
-                //Logger.addObject(data);
-                var tb = extractNumber(blocksArea.blockcommon.itembattlesCount.value.text);
-                var tw = extractNumber(blocksArea.blockcommon.itemwins.value.text);
-                var td = extractNumber(blocksArea.blockbattleeffect.itemdamageDealt.value.text);
-                var tf = extractNumber(blocksArea.blockbattleeffect.itemfrags.value.text);
-                var vn = VehicleInfo.getVehicleName(data.icon);
-                vn = vn.slice(vn.indexOf("-") + 1).toUpperCase();
-                var stat = {
-                    tb: tb,
-                    tw: data.w,
-                    tl: data.level,
-                    vn: vn,
-                    td: td,
-                    tf: tf,
-                    ts: data.ts
-                };
-                stat = StatLoader.CalculateStatValues(stat, true);
-                //Logger.addObject(stat);
-
-                var specD = td / tb / data.hp || 0;
-                var e_color = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.te);
-                var s2 = "";
-                s2 += "E: " + (!stat.teff ? "-" :
-                    "<font color='" + e_color + "'>" + (stat.te < 10 ? stat.te : "X") + "</font> (<font color='" + e_color + "'>" + stat.teff + "</font>)") + "  ";
-                s2 += Locale.get("Spec dmg") + ": " + (!specD ? "-" :
-                    "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, specD) + "'>" + Sprintf.format("%.2f", specD) + "</font>") + " ";
-                s2 += "(<font color='#ffc133'>" + (data.avgE ? Sprintf.format("%.2f", data.avgE) : "-") + "</font>" +
-                    " / <font color='#ffc133'>" + (data.topE ? Sprintf.format("%.2f", data.topE) : "-") + "</font>)  ";
-                // FIXIT: Disabled until WG will provide correct per-vehicle stat
-                s2 += Locale.get("Spotted") + ": " + (!data.tsb ? "-" :
-                    "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, data.tsb) + "'>" + Sprintf.format("%.2f", data.tsb) + "</font>") + " ";
-                s2 += "(<font color='#ffc133'>" + (data.avgS ? Sprintf.format("%.2f", data.avgS) : "-") + "</font>" +
-                    " / <font color='#ffc133'>" + (data.topS ? Sprintf.format("%.2f", data.topS) : "-") + "</font>)  ";
-                // END FIXIT
-                m_statisticsField2.htmlText = "<span class='xvm_statisticsField'>" + s2 + "</span>";
-            }
-        }
+            setSelectedVehicleStatistic();
     }
 
+    private function setGlobalStatistic()
+    {
+        m_statisticsHeaderField.htmlText = "";
+        if (!m_userData)
+            return;
+        var spo = m_userData.spo / m_userData.b;
+        var def = m_userData.def / m_userData.b;
+        var cap = m_userData.cap / m_userData.b;
+        m_statisticsField2.htmlText = "<span class='xvm_statisticsField'>" +
+            Locale.get("Avg level") + ": <font color='#ffc133'>" +
+                (m_userData.lvl ? Sprintf.format("%.1f", m_userData.lvl) : "-") + "</font> " +
+            Locale.get("Spotted") + ": <font color='#ffc133'>" +
+                (spo ? Sprintf.format("%.2f", spo) : "-") + "</font> " +
+            Locale.get("Defence") + ": <font color='#ffc133'>" +
+                (def ? Sprintf.format("%.2f", def) : "-") + "</font> " +
+            Locale.get("Capture") + ": <font color='#ffc133'>" +
+                (cap ? Sprintf.format("%.2f", cap) : "-") + "</font> " +
+            "</span>";
+    }
+
+    private function setSelectedVehicleStatistic()
+    {
+        var columnTitle:String = Config.s_config.rating.enableUserInfoStatistics ? Locale.get("player (average / top)") : "";
+        m_statisticsHeaderField.htmlText = "<span class='xvm_statisticsHeader'>" + columnTitle + "</span>";
+
+        var data = list.dataProvider[list.selectedIndex];
+        if (!data)
+        {
+            m_statisticsField2.htmlText = "";
+            return;
+        }
+
+        //Logger.addObject(blocksArea, "blocksArea", 3);
+        //Logger.addObject(data);
+        var tb = extractNumber(blocksArea.blockcommon.itembattlesCount.value.text);
+        var tw = extractNumber(blocksArea.blockcommon.itemwins.value.text);
+        var td = extractNumber(blocksArea.blockbattleeffect.itemdamageDealt.value.text);
+        var tf = extractNumber(blocksArea.blockbattleeffect.itemfrags.value.text);
+        var vn = VehicleInfo.getVehicleName(data.icon);
+        vn = vn.slice(vn.indexOf("-") + 1).toUpperCase();
+        var stat = {
+            tb: tb,
+            tw: data.w,
+            tl: data.level,
+            vn: vn,
+            td: td,
+            tf: tf,
+            ts: data.ts
+        };
+        stat = StatLoader.CalculateStatValues(stat, true);
+        //Logger.addObject(stat);
+
+        var specD = td / tb / data.hp || 0;
+        var e_color = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.te);
+        var s2 = "";
+        s2 += "E: " + (!stat.teff ? "-" :
+            "<font color='" + e_color + "'>" + (stat.te < 10 ? stat.te : "X") + "</font> (<font color='" + e_color + "'>" + stat.teff + "</font>)") + "  ";
+        s2 += Locale.get("Spec dmg") + ": " + (!specD ? "-" :
+            "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, specD) + "'>" + Sprintf.format("%.2f", specD) + "</font>") + " ";
+        s2 += "(<font color='#ffc133'>" + (data.avgE ? Sprintf.format("%.2f", data.avgE) : "-") + "</font>" +
+            " / <font color='#ffc133'>" + (data.topE ? Sprintf.format("%.2f", data.topE) : "-") + "</font>)  ";
+        // FIXIT: WG providing incorrect per-vehicle stat
+        s2 += Locale.get("Spotted") + ": " + (!data.tsb ? "-" :
+            "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, data.tsb) + "'>" + Sprintf.format("%.2f", data.tsb) + "</font>") + " ";
+        s2 += "(<font color='#ffc133'>" + (data.avgS ? Sprintf.format("%.2f", data.avgS) : "-") + "</font>" +
+            " / <font color='#ffc133'>" + (data.topS ? Sprintf.format("%.2f", data.topS) : "-") + "</font>)  ";
+        // END FIXIT
+        m_statisticsField2.htmlText = "<span class='xvm_statisticsField'>" + s2 + "</span>";
+    }
+    
     // list
 
     // override
@@ -372,6 +376,19 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
                 : vi2.type == "MT" ? 3
                 : vi2.type == "TD" ? 4
                 : 5;
+            data[i].hp = vi2.hptop;
+            data[i].avgR = vi2.avg.R;
+            data[i].avgD = vi2.avg.D;
+            data[i].avgE = vi2.avg.E;
+            data[i].avgF = vi2.avg.F;
+            data[i].avgS = vi2.avg.S;
+            data[i].avgU = vi2.avg.U;
+            data[i].topR = vi2.top.R;
+            data[i].topD = vi2.top.D;
+            data[i].topE = vi2.top.E;
+            data[i].topF = vi2.top.F;
+            data[i].topS = vi2.top.S;
+            data[i].topU = vi2.top.U;
             if (m_userData)
             {
                 var vn = VehicleInfo.getVehicleName(data[i].icon);
@@ -397,23 +414,11 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
                 }
                 data[i].tsb = stat.ts / stat.tb || 0;
                 data[i].ts = stat.ts || 0;
-                // FIXIT: Disabled until WG will provide correct per-vehicle stat
-                data[i].e = stat.te || 0;
-                data[i].teff = stat.teff || 0;
-                // END FIXIT
-                data[i].hp = vi2.hptop;
-                data[i].avgR = vi2.avg.R;
-                data[i].avgD = vi2.avg.D;
-                data[i].avgE = vi2.avg.E;
-                data[i].avgF = vi2.avg.F;
-                data[i].avgS = vi2.avg.S;
-                data[i].avgU = vi2.avg.U;
-                data[i].topR = vi2.top.R;
-                data[i].topD = vi2.top.D;
-                data[i].topE = vi2.top.E;
-                data[i].topF = vi2.top.F;
-                data[i].topS = vi2.top.S;
-                data[i].topU = vi2.top.U;
+                if (Config.s_config.userInfo.showEColumn == true)
+                {
+                    data[i].e = stat.te || 0;
+                    data[i].teff = stat.teff || 0;
+                }
             }
         }
 
@@ -486,9 +491,8 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         m_button3 = createButton(hdr, "bNat", 135, y, Locale.get("Nation"), "left", 2);
         m_button4 = createButton(hdr, "bNam", 200, y, Locale.get("Name"), "left", 2);
         m_button5 = createButton(hdr, "bEff", 305, y, "E", "right", 1);
-        // FIXIT: Disabled until WG will provide correct per-vehicle stat
-        //m_button5._visible = false;
-        // END FIXIT
+        // Option for disable "E" column until, because WG is providing incorrect per-vehicle stats
+        m_button5._visible = Config.s_config.userInfo.showEColumn == true;
         if (Config.s_config.rating.showPlayersStatistics != true || Config.s_config.rating.enableUserInfoStatistics != true)
         {
             m_button5.enabled = false;

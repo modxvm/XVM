@@ -23,17 +23,20 @@
     "enableUserInfoStatistics": true,
     "enableCompanyStatistics": true
   },
-  "fragCorrelation": {
-    "hideTeamTextFields": true
-  },
-  "hotkeys": {
-    "minimapZoom": { "enabled": false, "onHold": true, "keyCode": 17 }
-  },
   "squad": {
     "enabled": true,
     "romanNumbers": true,
     "showClan": true,
     "leftLvlBorder": ""
+  },
+  "userInfo": {
+     "showEColumn": true
+  },
+  "fragCorrelation": {
+    "hideTeamTextFields": true
+  },
+  "hotkeys": {
+    "minimapZoom": { "enabled": false, "onHold": true, "keyCode": 17 }
   },
   "battleLoading": {
     "showChances": true,

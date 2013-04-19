@@ -41,6 +41,18 @@
     "enableUserInfoStatistics": true,           // true - Enable statistics in the user info window
     "enableCompanyStatistics": true             // true - Enable statistics in the company window
   },
+  // Squad window
+  "squad": {
+    "enabled": true,      // false - Disable display info
+    "romanNumbers": true, // false - arabic numerals
+    "showClan": true,     // false - hide player clan
+    "leftLvlBorder": "",  // Left level border. "Grille [4"
+    "rightLvlBorder": ""  // Right level border. "Grille 4]"
+  },
+  // Achievements window
+  "userInfo": {
+     "showEColumn": false // Show column for per-vehicle efficiency (this values can be incorrect, because WG is providing incorrect per-vehicle stats)
+  },
   // Frag counter panel at top side of battle windows interface
   "fragCorrelation": {
     "hideTeamTextFields": true // true - hide textfields "Allies | Enemies"
@@ -53,14 +65,6 @@
     // Most keys are unable to be assigned.
     // Common working keys are Ctrl - 17, X - 88, C - 67
     "minimapZoom": { "enabled": false, "onHold": true, "keyCode": 17 }
-  },
-  // Squad window
-  "squad": {
-    "enabled": true,      // false - Disable display info
-    "romanNumbers": true, // false - arabic numerals
-    "showClan": true,     // false - hide player clan
-    "leftLvlBorder": "",   // Left level border. "Grille [4"
-    "rightLvlBorder": ""   // Right level border. "Grille 4]"
   },
   // Parameters of the Battle Loading Screen
   "battleLoading": {

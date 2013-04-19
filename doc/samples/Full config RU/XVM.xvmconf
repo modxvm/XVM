@@ -41,6 +41,18 @@
     "enableUserInfoStatistics": true,           // true - включить отображение статистики в достижениях пользователя
     "enableCompanyStatistics": true             // true - включить отображение статистики при наборе роты
   },
+  // Окно взвода
+  "squad": {
+    "enabled": true,      // false - выключить отображение информации
+    "romanNumbers": true, // false - уровень арабскими цифрами
+    "showClan": true,     // false - скрыть клан игрока
+    "leftLvlBorder": "",  // Обрамление уровня слева. "Grille [4"
+    "rightLvlBorder": ""  // Обрамление уровня справа. "Grille 4]"
+  },
+  // Окно достижений
+  "userInfo": {
+     "showEColumn": false // Показывать колонку эффективности по танку (значения могут быть неверными из-за особенностей предоставления статистики серверами WG)
+  },
   // Панель счёта в бою
   "fragCorrelation": {
     "hideTeamTextFields": true // true - cпрятать два текстовых поля "Союзники | Противники"
@@ -53,14 +65,6 @@
     // Большинство клавиш не работают
     // Работающие: Ctrl - 17, X - 88, C - 67
     "minimapZoom": { "enabled": false, "onHold": true, "keyCode": 17 }
-  },
-  // Окно взвода
-  "squad": {
-    "enabled": true,      // false - выключить отображение информации
-    "romanNumbers": true, // false - уровень арабскими цифрами
-    "showClan": true,     // false - скрыть клан игрока
-    "leftLvlBorder": "",   // Обрамление уровня слева. "Grille [4"
-    "rightLvlBorder": ""   // Обрамление уровня справа. "Grille 4]"
   },
   // Параметры экрана загрузки боя
   "battleLoading": {
@@ -413,7 +417,7 @@
             { "lorraine155_50":   { "enabled": true, "distance": 1202, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
             { "lorraine155_51":   { "enabled": true, "distance": 1296, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
             { "bat_chatillon155": { "enabled": true, "distance": 1296, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            
+
             { "gb78_sexton_i":    { "enabled": true, "distance": 767,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } }
         ]
     },

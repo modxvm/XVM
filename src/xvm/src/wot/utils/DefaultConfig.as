@@ -91,6 +91,9 @@ class wot.utils.DefaultConfig
                 leftLvlBorder: "",		// Grille [4
                 rightLvlBorder: ""		// Grille 4]
             },
+            userInfo: {
+                showEColumn: false              // Show column for per-vehicle efficiency
+            },
             fragCorrelation: {
                 hideTeamTextFields: false
             },
