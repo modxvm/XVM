@@ -2,24 +2,28 @@
  * Полный конфигурационный файл (далее - конфиг) со всеми возможными опциями,
  * настроенными по умолчанию.
  *
+ * Внимание! Кодировка файла должна оставаться UTF8 + BOM. В противном случае вместо кириллицы в игре будут пустые глифы.
+ * Для редактирования используйте notepad++. http://goo.gl/y6iet
+ * В случае Windows notepad: Сохранить как -> Кодировка: UTF
+ *
  * Внимание! Использование символа процента в данном файле не допустимо.
  * Вместо символа процента следует писать: \u0025
  */
 {
   "configVersion": "1.5.0", // Версия конфига. Не удаляйте и не изменяйте её без необходимости.
-  "editorVersion": "0.36",  // Версия редактора.
+  "editorVersion": "0.41",  // Версия редактора.
   // Блок общих параметров конфига. Все параметры информационные, в моде не используются.
   "definition": {
     "author": "Ded_Shalfey",                        // автор конфига
-    "description": "Версия 4",  // описание конфига
+    "description": "Версия 6(только для тестирования)!",  // описание конфига
     "url": "http://www.koreanrandom.com/forum/topic/1384-xvm-configurations/#entry11760", // адрес, где выкладываеются обновления конфига
-    "date": "05.03.2013",                       // дата последней модификации конфига
-    "gameVersion": "1.4",                     // поддерживаемая версия игры
-    "modMinVersion": "3.4.0"                    // минимально необходимая версия мода XVM
+    "date": "18.04.2013",                       // дата последней модификации конфига
+    "gameVersion": "0.8.5",                     // поддерживаемая версия игры
+    "modMinVersion": "3.5.0"                    // минимально необходимая версия мода XVM
   },
   // Блок общих параметров боевого интерфейса
   "battle": {
-    "mirroredVehicleIcons": false,              // false - отключить зеркалирования иконок танков (полезно для альтернативных иконок). По умолчанию включено.
+    "mirroredVehicleIcons": false,               // false - отключить зеркалирования иконок танков (полезно для альтернативных иконок). По умолчанию включено.
     "showPostmortemTips": false,                // false - отключить всплывающую внизу панель после смерти. По умолчанию включено.
     "removePanelsModeSwitcher": false,          // true - убрать переключатель режимов ушей мышкой
     "highlightVehicleIcon": true,               // false - отключить подсветку иконки выбранного танка и взвода
@@ -31,30 +35,50 @@
   "rating": {
     "showPlayersStatistics": true,              // true - включить отображение статистики. Глобальный переключатель - без него модуль статистики будет везде отключен.
     "loadEnemyStatsInFogOfWar": true,           // true - включить загрузку данных по противникам в "тумане войны"
-    "enableStatisticsLog": true,                // true - включить сохранение статистики в файл "xvm-stat.log"
+    "enableStatisticsLog": true,               // true - включить сохранение статистики в файл "xvm-stat.log"
     "enableUserInfoStatistics": true,           // true - включить отображение статистики в достижениях пользователя
     "enableCompanyStatistics": true             // true - включить отображение статистики при наборе роты
   },
+  // Панель счёта в бою
+  "fragCorrelation": {
+    "hideTeamTextFields": false // true - cпрятать два текстовых поля "Союзники | Противники"
+  },
+  // Специальные горячие клавиши XVM
+  "hotkeys": {
+    // onHold: произвести действие по разовому нажатию клавиши или по удержанию
+    // Значения кодов можно посмотреть здесь:
+    // http://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
+    // Ctrl - 17, X - 88, C - 67, F - 70
+    "minimapZoom": { "enabled": true, "onHold": false, "keyCode": 20 }
+  },
+  // Окно взвода
+  "squad": {
+    "enabled": true,      // false - выключить отображение информации
+    "romanNumbers": true, // false - уровень арабскими цифрами
+    "showClan": true,     // false - скрыть клан игрока
+    "leftLvlBorder": "",   // Обрамление уровня слева. "Grille [4"
+	"rightLvlBorder": ""   // Обрамление уровня справа. "Grille 4]"
+  },
   // Параметры экрана загрузки боя
   "battleLoading": {
-    "clockFormat": "H:N:S   Дед Шалфей",  // Показать часы на экране загрузки боя. Формат: Y:год, M:месяц, D:день, H:часы, N:минуты, S:секунды. "" - убрать часы.
-    "showChances": true,                        // true - включить отображение шансов на победу (только с xvm-stat) Прочитать подробней: http://www.koreanrandom.com/forum/topic/1663-
-    "showChancesExp": true,                     // Показывать экспериментальную формулу расчета шансов
-    "removeSquadIcon": false,                   // true - убрать отображение иконки взвода. На пустое поле можно вывести, например, иконку клана.
-    "clanIcon": {                               // параметры отображения иконки игрока/клана
-      "show": true,                             //   false - не отображать иконки игрока/клана в окне загрузки боя
-      "x": -340,                                   //   положение по оси X оносительно иконки танка
-      "y": 6,                                   //   положение по оси Y оносительно иконки танка
-      "xr": -340,                                  //   положение по оси X для правых ушей
-      "yr": 6,                                  //   положение по оси Y для правых ушей
-      "w": 16,                                  //   ширина иконки игрока/клана
-      "h": 16,                                  //   высота иконки игрока/клана
-      "alpha": 90                               //   прозрачность иконки игрока/клана
+    "clockFormat": "H:N:S Дед Шалфей",         // Показать часы на экране загрузки боя. Формат: Y:год, M:месяц, D:день, H:часы, N:минуты, S:секунды. "" - убрать часы.
+    "showChances": true,                       // true - включить отображение шансов на победу (только с xvm-stat) Прочитать подробней: http://www.koreanrandom.com/forum/topic/1663-
+    "showChancesExp": true,                    // Показывать экспериментальную формулу расчета шансов
+    "removeSquadIcon": false,                  // true - убрать отображение иконки взвода. На пустое поле можно вывести, например, иконку клана.
+    "clanIcon": {                              // параметры отображения иконки игрока/клана
+      "show": true,                            //   false - не отображать иконки игрока/клана в окне загрузки боя
+      "x": -340,                               //   положение по оси X оносительно иконки танка
+      "y": 6,                                  //   положение по оси Y оносительно иконки танка
+      "xr": -340,                              //   положение по оси X для правых ушей
+      "yr": 6,                                 //   положение по оси Y для правых ушей
+      "w": 16,                                 //   ширина иконки игрока/клана
+      "h": 16,                                 //   высота иконки игрока/клана
+      "alpha": 90                              //   прозрачность иконки игрока/клана
     },
     // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatLeft": "<font face='Comic Sans MS' size='11'><font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font></font> | <font face='Comic Sans MS' size='11'><font color='{{c:t-battles}}'>{{t-battles:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
+    "formatLeft": "<font face='Comic Sans MS' size='10'><font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font></font> | <font face='Comic Sans MS' size='10'><font color='{{c:t-battles}}'>{{t-battles:4}}</font> <font color='{{c:e}}'>{{teff}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
     // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatRight": "<font face='Comic Sans MS' size='11'><font color='{{c:t-battles}}'>{{t-battles:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font> | <font face='Comic Sans MS'><font face='Comic Sans MS' size='11'><font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font></font>"
+    "formatRight": "<font face='Comic Sans MS' size='10'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:e}}'>{{teff}}</font> <font color='{{c:t-battles}}'>{{t-battles:4}}</font></font> | <font face='Comic Sans MS' size='10'><font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font></font>"
   },
   // Параметры окна статистики по клавише Tab
   "statisticForm": {
@@ -64,17 +88,40 @@
     // параметры отображения иконки игрока/клана (см. battleLoading выше)
     "clanIcon": { "show": true, "x": 81, "y": 6, "xr": 81, "yr": 6, "h": 16, "w": 16, "alpha": 90 },
     // формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatLeft": "<font face='Comic Sans MS' size='11'><font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font></font> | <font face='Comic Sans MS' size='11'><font color='{{c:t-battles}}'>{{t-battles:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
+    "formatLeft": "<font face='Comic Sans MS' size='10'><font color='{{c:kb}}'>{{kb}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:rating}}'>{{rating}}</font></font> | <font face='Comic Sans MS' size='10'><font color='{{c:t-battles}}'>{{t-battles:4}}</font> <font color='{{c:e}}'>{{teff}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font>",
     // формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatRight": "<font face='Comic Sans MS' size='11'><font color='{{c:t-battles}}'>{{t-battles:4}}</font> <font color='{{c:t-rating}}'>{{t-rating:3}}</font></font> | <font face='Comic Sans MS' size='11'><font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font></font> "
+    "formatRight": "<font face='Comic Sans MS' size='10'><font color='{{c:t-rating}}'>{{t-rating:3}}</font> <font color='{{c:e}}'>{{teff}}</font> <font color='{{c:t-battles}}'>{{t-battles:4}}</font></font> | <font face='Comic Sans MS' size='10'><font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:eff}}'>{{eff}}</font> <font color='{{c:kb}}'>{{kb}}</font></font>"
   },
   // Параметры панелей игроков ("ушей")
   "playersPanel": {
-    "alpha": 80,       // 0..100 - задает прозрачность "ушей". 0 - прозрачные, 100 - не прозрачные
+    "alpha": 65,       // 0..100 - задает прозрачность "ушей". 0 - прозрачные, 100 - не прозрачные
     "iconAlpha": 100,  // 0..100 - задает прозрачность иконок в "ушах". 0 - прозрачные, 100 - не прозрачные
     "removeSquadIcon": false, // true - убрать отображение иконки взвода
     // параметры отображения иконки игрока/клана (см. battleLoading выше).
-    "clanIcon": { "show": true, "x": 82, "y": 6, "xr": 82, "yr": 6, "h": 16, "w": 16, "alpha": 90 },
+    "clanIcon": { "show": false, "x": 82, "y": 6, "xr": 82, "yr": 6, "h": 16, "w": 16, "alpha": 90 },
+	// Маркер статуса засвета в правой боковой панели списка игроков
+    "enemySpottedMarker": {
+      "enabled": true,
+      "Xoffset": -40, // Смещение относительно иконки уровня танка
+      "Yoffset": -7,
+      "format": {
+        // Этот враг никогда не светился
+        "neverSeen": "<img src='img://gui/flash/neverseen.png' width='20' height='20'>",
+        // Этот враг светился хотя бы один раз и отмечен на миникарте как потерянный
+        "lost": "",
+        // Виден на миникарте прямо сейчас
+        "revealed": "<img src='img://gui/flash/revealed.png' width='20' height='20'>",
+        // Уничтоженный враг
+        "dead": "<img src='img://gui/flash/dead.png' width='20' height='20'>",
+        // Специфичные значения для артиллерии
+        "artillery": {
+          "neverSeen": "<img src='img://gui/flash/neverseen.png' width='20' height='20'>",
+          "lost": "",
+          "revealed": "<img src='img://gui/flash/revealed.png' width='20' height='20'>",
+          "dead": "<img src='img://gui/flash/dead.png' width='20' height='20'>"
+        }
+      }
+    },
     // режим ушей "medium" - первые средние уши в игре
     "medium": {
       "width": 80,    // 0..250 - задает ширину поля имени игрока. По умолчанию: 46
@@ -112,8 +159,8 @@
     // 5 - фраги за бой
     // 6 - опыт за бой
     // 7 - медали за бой
-    "sortColumn": 6,          // номер колонки для сортировки (1 - 7)
-    "showChances": false,     // true - включить отображение шансов на победу (только с xvm-stat)
+    "sortColumn": 4,          // номер колонки для сортировки (1 - 7)
+    "showChances": true,     // true - включить отображение шансов на победу (только с xvm-stat)
     "showChancesExp": false   // Показывать экспериментальную формулу расчета шансов
   },
   // Отображаемые строки {{turret}} маркера
@@ -138,7 +185,7 @@
     // Формат заголовка по умолчанию (до первого попадания). Макросы НЕ допускаются.
     "defaultHeader":  "<font color='#FFFFFF'>Hits:</font> <font size='13'>#0</font>",
     // Формат заголовка (допускаются макроподстановки, см. readme-ru.txt)
-    "formatHeader":  "<font color='#FFFFFF'>Урон:</font> <font size='14'></font> <font size='14'><b><font color='#fd0000'>{{dmg-total}} хп</font></b>  <font color='#FFFFFF'>Последний Урон:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}} хп</b> {{dead}}</font><font color='{{c:vtype}}'>({{vehicle}})</font></font>",
+    "formatHeader":  "<font color='#FFFFFF'>Урон:</font> <font size='14'></font> <font size='14'><b><font color='#FFFF00'>{{dmg-total}} хп</font></b>  <font color='#FFFFFF'>Последний Урон:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}} хп</b> {{dead}}</font><font color='{{c:vtype}}'>({{vehicle}})</font></font>",
     // Формат лога попаданий (допускаются макроподстановки, см. readme-ru.txt)
     "formatHistory": "<textformat leading='-4' tabstops='[20,50,90,150]'><font size='12' face='Comic Sans MS'>\u00D7{{n-player}}:</font><tab>{{dmg-player}}<tab>| <font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab>| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>",
     "shadow": {                       //   параметры тени
@@ -200,7 +247,18 @@
     "iconScale": 1,                 // Размер только иконки техники.
                                     // Не влияет на прикрепленную к геометрию и текстовые поля.
                                     // Можно дробные 0.7 1.4.
-
+	"zoom": { // Увеличение миникарты по нажатию кнопки.
+              // Кнопки задаются в секции "keys" верхнего уровня в этом файле конфигурации.
+      "pixelsBack": 160,  // Кол-во пикселей назад для уменьшения миникарты от максимального размера
+      "centered": true // Центрирование увеличенной миникарты по центру экрана
+    },
+	"square" : { // Квадрат со стороной 1000m. Показывает границы максимальной отрисовка юнитов.
+      "enabled": true,
+      "artilleryEnabled": true, // Показывать ли квадрат в случае артиллерии
+      "thickness": 0.7, // Толщина
+      "alpha": 100, // Прозрачность
+      "color": "0xFF0000"
+    },
     "labels": {                     // Текстовые поля. Поддерживают HTML.
       "nickShrink": 5,              // Максимальные размер ника для макроса {{short-nick}}.
       "vehicleclassmacro": {        // Подстановки макроса {{vehicle-class}}
@@ -219,11 +277,11 @@
         "revealedEnabled": true, // Выключатель добавочных текстовых полей для видимых юнитов.
         "lostEnemyEnabled": true,// Выключатель текстовых полей, помечивающих последние позиции потерянных врагов.
         "format": { // Формат поля.
-          "ally":  "<span class='mm_a'>{{vehicle-type}}({{level}})</span>", // Союзник
-          "enemy": "<span class='mm_e'>{{vehicle-type}}({{level}})</span>", // Враг
-          "squad": "<textformat leading='-1'><span class='mm_s'><i>{{short-nick}}</i>\n{{vehicle-type}}({{level}})</span><textformat>", // Совзводный.
+          "ally":  "<span class='mm_a'>{{vehicle-type}}</span>", // Союзник
+          "enemy": "<span class='mm_e'>{{vehicle-type}}</span>", // Враг
+          "squad": "<textformat leading='-1'><span class='mm_s'><i>{{short-nick}}</i>\n{{vehicle-type}}</span><textformat>", // Совзводный.
           // Для потерянных с миникарты врагов.
-          "lost":  "<span class='mm_dot'>\u2022</span><span class='mm_l'><i>{{vehicle-type}}({{level}})</i></span>",
+          "lost":  "<span class='mm_dot'>\u2022</span><span class='mm_l'><i>{{vehicle-type}}</i></span>",
           // Для своего маркера и маркера приёмника камеры наблюдения в случае смерти.
           "oneself": ""
         },
@@ -336,340 +394,354 @@
         // и высоте расположения машины относительно цели. на миникарте эти факторы не учитываются.
         // Подробнее по ссылке: http://goo.gl/ZqlPa
         "special": [
-            { "su_18":            { "enabled": true, "distance": 552,  "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "su_26":            { "enabled": true, "distance": 578,  "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "su_5":             { "enabled": true, "distance": 605,  "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "su_8":             { "enabled": true, "distance": 920,  "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "s_51":             { "enabled": true, "distance": 1229, "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "su_14":            { "enabled": true, "distance": 1229, "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "object_212":       { "enabled": true, "distance": 1229, "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "object_261":       { "enabled": true, "distance": 1463, "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
+            { "su_18":            { "enabled": true, "distance": 552,  "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "su_26":            { "enabled": true, "distance": 578,  "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "su_5":             { "enabled": true, "distance": 605,  "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "su_8":             { "enabled": true, "distance": 920,  "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "s_51":             { "enabled": true, "distance": 1229, "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "su_14":            { "enabled": true, "distance": 1229, "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "object_212":       { "enabled": true, "distance": 1229, "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "object_261":       { "enabled": true, "distance": 1463, "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
 
-            { "bison_i":          { "enabled": true, "distance": 605,  "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "sturmpanzer_ii":   { "enabled": true, "distance": 605,  "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "wespe":            { "enabled": true, "distance": 1000, "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "grille":           { "enabled": true, "distance": 1210, "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "hummel":           { "enabled": true, "distance": 1264, "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "g_panther":        { "enabled": true, "distance": 1407, "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "g_tiger":          { "enabled": true, "distance": 1172, "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "g_e":              { "enabled": true, "distance": 1172, "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
+            { "bison_i":          { "enabled": true, "distance": 605,  "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "sturmpanzer_ii":   { "enabled": true, "distance": 605,  "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "wespe":            { "enabled": true, "distance": 1000, "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "grille":           { "enabled": true, "distance": 1210, "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "hummel":           { "enabled": true, "distance": 1264, "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "g_panther":        { "enabled": true, "distance": 1407, "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "g_tiger":          { "enabled": true, "distance": 1172, "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "g_e":              { "enabled": true, "distance": 1172, "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
 
-            { "t57":              { "enabled": true, "distance": 552,  "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "m37":              { "enabled": true, "distance": 969,  "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "m7_priest":        { "enabled": true, "distance": 1047, "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "m41":              { "enabled": true, "distance": 1210, "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "m12":              { "enabled": true, "distance": 1316, "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "m40m43":           { "enabled": true, "distance": 1179, "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "t92":              { "enabled": true, "distance": 1248, "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
+            { "t57":              { "enabled": true, "distance": 552,  "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "m37":              { "enabled": true, "distance": 969,  "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "m7_priest":        { "enabled": true, "distance": 1047, "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "m41":              { "enabled": true, "distance": 1210, "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "m12":              { "enabled": true, "distance": 1316, "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "m40m43":           { "enabled": true, "distance": 1179, "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "t92":              { "enabled": true, "distance": 1248, "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
 
-            { "renaultbs":        { "enabled": true, "distance": 450,  "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "lorraine39_l_am":  { "enabled": true, "distance": 844,  "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "amx_105am":        { "enabled": true, "distance": 1000, "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "_105_lefh18b2":    { "enabled": true, "distance": 1000, "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "amx_13f3am":       { "enabled": true, "distance": 1250, "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "lorraine155_50":   { "enabled": true, "distance": 1202, "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "lorraine155_51":   { "enabled": true, "distance": 1296, "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
-            { "bat_chatillon155": { "enabled": true, "distance": 1296, "thickness": 1, "alpha": 60, "color": "0xEE4384" } },
+            { "renaultbs":        { "enabled": true, "distance": 450,  "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "lorraine39_l_am":  { "enabled": true, "distance": 844,  "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "amx_105am":        { "enabled": true, "distance": 1000, "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "_105_lefh18b2":    { "enabled": true, "distance": 1000, "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "amx_13f3am":       { "enabled": true, "distance": 1250, "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "lorraine155_50":   { "enabled": true, "distance": 1202, "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "lorraine155_51":   { "enabled": true, "distance": 1296, "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
+            { "bat_chatillon155": { "enabled": true, "distance": 1296, "thickness": 1, "alpha": 75, "color": "0xEE4384" } },
 		// Дальность обзора танков
        // Арта	
-            { "bison_i":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "renaultbs":            { "enabled": true, "distance": 260,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "su_18":            { "enabled": true, "distance": 260,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t57":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "lorraine39_l_am":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m37":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-			{ "sexton_i":            { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "sturmpanzer_ii":            { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "su_26":            { "enabled": true, "distance": 300,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "wespe":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "_105_lefh18b2":            { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "amx_105am":            { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "grille":            { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m7_priest":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "su_5":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "amx_13f3am":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "hummel":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m41":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "su_8":            { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "g_panther":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "lorraine155_50":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m12":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "s_51":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "su_14":            { "enabled": true, "distance": 300,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "g_tiger":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "lorraine155_51":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m40m43":            { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "object_212":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "bat_chatillon155":            { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "g_e":            { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "object_261":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t92":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
+            { "bison_i":          { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "renaultbs":        { "enabled": true, "distance": 260,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "su_18":            { "enabled": true, "distance": 260,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t57":              { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "lorraine39_l_am":  { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m37":              { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb78_sexton_i":    { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "sturmpanzer_ii":   { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "su_26":            { "enabled": true, "distance": 300,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "wespe":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "_105_lefh18b2":    { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "amx_105am":        { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "grille":           { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m7_priest":        { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "su_5":             { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "amx_13f3am":       { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "hummel":           { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m41":              { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "su_8":             { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "g_panther":        { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "lorraine155_50":   { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m12":              { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "s_51":             { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "su_14":            { "enabled": true, "distance": 300,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "g_tiger":          { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "lorraine155_51":   { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m40m43":           { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "object_212":       { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "bat_chatillon155": { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "g_e":              { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "object_261":       { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t92":              { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
  
        // Техника по уровням:
        // 1
-            { "ch06_renault_nc31":            { "enabled": true, "distance": 280,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb01_medium_mark_i":            { "enabled": true, "distance": 280,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "ltraktor":            { "enabled": true, "distance": 310,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "ms_1":            { "enabled": true, "distance": 280,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "observer":            { "enabled": true, "distance": 240,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "renaultft":            { "enabled": true, "distance": 280,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t1_cunningham":            { "enabled": true, "distance": 280,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
+            { "ch06_renault_nc31":             { "enabled": true, "distance": 280,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb01_medium_mark_i":            { "enabled": true, "distance": 280,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "ltraktor":                      { "enabled": true, "distance": 310,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "ms_1":                          { "enabled": true, "distance": 280,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "observer":                      { "enabled": true, "distance": 240,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "renaultft":                     { "enabled": true, "distance": 280,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t1_cunningham":                 { "enabled": true, "distance": 280,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
        // 2
-            { "at_1":            { "enabled": true, "distance": 250,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "bt_2":            { "enabled": true, "distance": 280,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "ch07_vickers_mke_type_bt26":            { "enabled": true, "distance": 310,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "d1":            { "enabled": true, "distance": 300,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb03_cruiser_mk_i":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb05_vickers_medium_mk_ii":            { "enabled": true, "distance": 300,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb39_universal_carrierqf2":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb58_cruiser_mk_iii":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "h39_captured":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "hotchkiss_h35":            { "enabled": true, "distance": 300,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m2_lt":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "panzerjager_i":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "pz35t":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "pzi":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "pzii":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "renaultft_ac":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t1_e6":            { "enabled": true, "distance": 260,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t18":            { "enabled": true, "distance": 240,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t2_lt":            { "enabled": true, "distance": 260,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t2_med":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t_26":            { "enabled": true, "distance": 310,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "tetrarch_ll":            { "enabled": true, "distance": 260,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
+            { "at_1":                          { "enabled": true, "distance": 250,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "bt_2":                          { "enabled": true, "distance": 280,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "ch07_vickers_mke_type_bt26":    { "enabled": true, "distance": 310,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "d1":                            { "enabled": true, "distance": 300,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb03_cruiser_mk_i":             { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb05_vickers_medium_mk_ii":     { "enabled": true, "distance": 300,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb39_universal_carrierqf2":     { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb58_cruiser_mk_iii":           { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "h39_captured":                  { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "hotchkiss_h35":                 { "enabled": true, "distance": 300,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m2_lt":                         { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "panzerjager_i":                 { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "pz35t":                         { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "pzi":                           { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "pzii":                          { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "renaultft_ac":                  { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t1_e6":                         { "enabled": true, "distance": 260,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t18":                           { "enabled": true, "distance": 240,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t2_lt":                         { "enabled": true, "distance": 260,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t2_med":                        { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t_26":                          { "enabled": true, "distance": 310,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "tetrarch_ll":                   { "enabled": true, "distance": 260,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t_60":                          { "enabled": true, "distance": 300,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
        // 3
-            { "amx38":            { "enabled": true, "distance": 310,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "bt_7":            { "enabled": true, "distance": 280,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "bt_sv":            { "enabled": true, "distance": 280,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "ch08_type97_chi_ha":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "d2":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "fcm_36pak40":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "g20_marder_ii":            { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb06_vickers_medium_mk_iii":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb42_valentine_at":            { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb59_cruiser_mk_iv":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb69_cruiser_mk_ii":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m2_med":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m22_locust":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m3_stuart":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m3_stuart_ll":            { "enabled": true, "distance": 280,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "mtls_1g14":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "pz38t":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "pzi_ausf_c":            { "enabled": true, "distance": 340,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "pzii_j":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-			{ "pz_ii_ausfg":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "pziii_a":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "renaultue57":            { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "s35_captured":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "su_76":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t_127":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t_15":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t_46":            { "enabled": true, "distance": 310,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t82":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
+            { "amx38":                         { "enabled": true, "distance": 310,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "bt_7":                          { "enabled": true, "distance": 280,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "bt_sv":                         { "enabled": true, "distance": 280,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "ch08_type97_chi_ha":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "d2":                            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "fcm_36pak40":                   { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "g20_marder_ii":                 { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb06_vickers_medium_mk_iii":    { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb42_valentine_at":             { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb59_cruiser_mk_iv":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb69_cruiser_mk_ii":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m2_med":                        { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m22_locust":                    { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m3_stuart":                     { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m3_stuart_ll":                  { "enabled": true, "distance": 280,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "mtls_1g14":                     { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "pz38t":                         { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "pzi_ausf_c":                    { "enabled": true, "distance": 340,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "pzii_j":                        { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "pz_ii_ausfg":                   { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "pziii_a":                       { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "renaultue57":                   { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "s35_captured":                  { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "su_76":                         { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t_127":                         { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t_15":                          { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t_46":                          { "enabled": true, "distance": 310,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t82":                           { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t_70":                          { "enabled": true, "distance": 310,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
        // 4
-            { "a_20":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "a_32":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "amx40":            { "enabled": true, "distance": 340,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "b1":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "b_1bis_captured":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "ch09_m5":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gaz_74b":            { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb04_valentine":            { "enabled": true, "distance": 340,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb07_matilda":            { "enabled": true, "distance": 340,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb57_alecto":            { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb60_covenanter":            { "enabled": true, "distance": 340,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "hetzer":            { "enabled": true, "distance": 260,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m3_grant":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m5_stuart":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m8a1":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "pz38_na":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "pzii_luchs":            { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "pziii":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "somua_sau_40":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t_28":            { "enabled": true, "distance": 340,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t40":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t_50":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "valentine_ll":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
+            { "a_20":                          { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "a_32":                          { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "amx40":                         { "enabled": true, "distance": 340,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "b1":                            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "b_1bis_captured":               { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "ch09_m5":                       { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gaz_74b":                       { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb04_valentine":                { "enabled": true, "distance": 340,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb07_matilda":                  { "enabled": true, "distance": 340,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb57_alecto":                   { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb60_covenanter":               { "enabled": true, "distance": 340,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "hetzer":                        { "enabled": true, "distance": 260,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m3_grant":                      { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m5_stuart":                     { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m8a1":                          { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "pz38_na":                       { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "pzii_luchs":                    { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "pziii":                         { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "somua_sau_40":                  { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t_28":                          { "enabled": true, "distance": 340,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t40":                           { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t_50":                          { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "valentine_ll":                  { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t80":                           { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "vk2001db":                      { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
        // 5
-            { "bdr_g1b":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "ch21_t34":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "churchill_ll":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "elc_amx":            { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb08_churchill_i":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb20_crusader":            { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb68_matilda_black_prince":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-			{ "gb73_at2":            { "enabled": true, "distance": 310,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "kv":            { "enabled": true, "distance": 310,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "kv1":            { "enabled": true, "distance": 310,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "kv_220":            { "enabled": true, "distance": 310,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "kv_220_action":            { "enabled": true, "distance": 310,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m10_wolverine":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m24_chaffee":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m4_sherman":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m4a2e4":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m7_med":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "matilda_ii_ll":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "pziii_iv":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "pziv":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "pziv_hydro":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "ram_ii":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "s_35ca":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "stugiii":            { "enabled": true, "distance": 310,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "su_85i":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "su_85":            { "enabled": true, "distance": 280,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t_50_2":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t1_hvy":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t14":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t_25":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t_34":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t49":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "vk1602":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
+            { "bdr_g1b":                       { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "ch21_t34":                      { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "churchill_ll":                  { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "elc_amx":                       { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb08_churchill_i":              { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb20_crusader":                 { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb68_matilda_black_prince":     { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb73_at2":                      { "enabled": true, "distance": 310,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "kv":                            { "enabled": true, "distance": 310,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "kv1":                           { "enabled": true, "distance": 310,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "kv_220":                        { "enabled": true, "distance": 310,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "kv_220_action":                 { "enabled": true, "distance": 310,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m10_wolverine":                 { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m24_chaffee":                   { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m4_sherman":                    { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m4a2e4":                        { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m7_med":                        { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "matilda_ii_ll":                 { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "pziii_iv":                      { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "pziv":                          { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "pziv_hydro":                    { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "ram_ii":                        { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "s_35ca":                        { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "stugiii":                       { "enabled": true, "distance": 310,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "su_85i":                        { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "su_85":                         { "enabled": true, "distance": 280,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t_50_2":                        { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t1_hvy":                        { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t14":                           { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t_25":                          { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t_34":                          { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t49":                           { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "vk1602":                        { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
        // 6
-            { "amx_12t":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "arl_44":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "arl_v39":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "ch15_59_16":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "ch20_type58":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "dickermax":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb09_churchill_vii":            { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb21_cromwell":            { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-			{ "gb40_gun_carrier_churchill":            { "enabled": true, "distance": 340,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb63_tog_ii":            { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-			{ "gb74_at8":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "jagdpziv":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "kv_1s":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "kv2":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m18_hellcat":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m36_slagger":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m4a3e8_sherman":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m6":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "pziv_schmalturm":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "pzv_pziv":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "pzv_pziv_ausf_alfa":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "sherman_jumbo":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "su_100":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "su100y":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t150":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t21":            { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t_34_85":            { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "vk2801":            { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "vk3001h":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "vk3001p":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "vk3601h":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
+            { "amx_12t":                       { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "arl_44":                        { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "arl_v39":                       { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "ch15_59_16":                    { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "ch20_type58":                   { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "dickermax":                     { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb09_churchill_vii":            { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb21_cromwell":                 { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb40_gun_carrier_churchill":    { "enabled": true, "distance": 340,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb63_tog_ii":                   { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb74_at8":                      { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "jagdpziv":                      { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "kv_1s":                         { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "kv2":                           { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m18_hellcat":                   { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m36_slagger":                   { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m4a3e8_sherman":                { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m6":                            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "pziv_schmalturm":               { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "pzv_pziv":                      { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "pzv_pziv_ausf_alfa":            { "enabled": true, "distance": 320,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "sherman_jumbo":                 { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "su_100":                        { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "su100y":                        { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t150":                          { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t21":                           { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t_34_85":                       { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "vk2801":                        { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "vk3001h":                       { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "vk3001p":                       { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "vk3601h":                       { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "vk3002db_v1":                   { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
        // 7
-            { "amx_13_75":            { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "amx_ac_mle1946":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "amx_m4_1945":            { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "ch02_type62":            { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "ch04_t34_1":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "ch10_is2":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "ch16_wz_131":            { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb10_black_prince":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb22_comet":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb71_at_15a":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-			{ "gb75_at7":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "is":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "jagdpanther":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "kv_13":            { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "kv_3":            { "enabled": true, "distance": 340,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "panther_m10":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "pzv":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "pzvi":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "pzvi_tiger_p":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "su100m1":            { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "su122_44":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "su_152":            { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t20":            { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t25_2":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t25_at":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t29":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t_43":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t71":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
-            { "vk3002db":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
+            { "amx_13_75":                     { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "amx_ac_mle1946":                { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "amx_m4_1945":                   { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "ch02_type62":                   { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "ch04_t34_1":                    { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "ch10_is2":                      { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "ch16_wz_131":                   { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb10_black_prince":             { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb22_comet":                    { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb71_at_15a":                   { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb75_at7":                      { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "is":                            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "jagdpanther":                   { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "kv_13":                         { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "kv_3":                          { "enabled": true, "distance": 340,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "panther_m10":                   { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "pzv":                           { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "pzvi":                          { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "pzvi_tiger_p":                  { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "su100m1":                       { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "su122_44":                      { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "su_152":                        { "enabled": true, "distance": 330,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t20":                           { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t25_2":                         { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t25_at":                        { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t29":                           { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t_43":                          { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t71":                           { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "vk3002db":                      { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "auf_panther":                   { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
        // 8
-            { "amx_13_90":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "amx_50_100":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "amx_ac_mle1948":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "ch01_type59":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "ch01_type59_gold":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "ch03_wz_111":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "ch05_t34_2":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "ch11_110":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "ch17_wz131_1_wz132":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "fcm_50t":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "ferdinand":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb11_caernarvon":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb23_centurion":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-			{ "gb72_at15":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "is_3":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "isu_152":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "jagdpantherii":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "jagdtiger_sdkfz_185":            { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "kv4":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "kv_5":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "lowe":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m6a2e1":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "object252":            { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "panther_ii":            { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "pershing":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "pzvib_tiger_ii":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "su_101":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t23":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t26_e4_superpershing":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t28":            { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t28_prototype":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t32":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t34_hvy":            { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t_44":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t69":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "vk4502a":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
+            { "amx_13_90":                     { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "amx_50_100":                    { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "amx_ac_mle1948":                { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "ch01_type59":                   { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "ch01_type59_gold":              { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "ch03_wz_111":                   { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "ch05_t34_2":                    { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "ch11_110":                      { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "ch17_wz131_1_wz132":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "fcm_50t":                       { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "ferdinand":                     { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb11_caernarvon":               { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb23_centurion":                { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb72_at15":                     { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "is_3":                          { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "isu_152":                       { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "jagdpantherii":                 { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "jagdtiger_sdkfz_185":           { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "kv4":                           { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "kv_5":                          { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "lowe":                          { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m6a2e1":                        { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "object252":                     { "enabled": true, "distance": 350,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "panther_ii":                    { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "pershing":                      { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "pzvib_tiger_ii":                { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "su_101":                        { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t23":                           { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t26_e4_superpershing":          { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t28":                           { "enabled": true, "distance": 370,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t28_prototype":                 { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t32":                           { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t34_hvy":                       { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t_44":                          { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t69":                           { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "vk4502a":                       { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "indien_panzer":                 { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
        // 9
-            { "amx_50_120":            { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "amx50_foch":            { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "ch12_111_1_2_3":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "ch18_wz_120":            { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "e_50":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "e_75":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb12_conqueror":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb24_centurion_mk3":            { "enabled": true, "distance": 410,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-			{ "gb32_tortoise":            { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "is8":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "jagdtiger":            { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "lorraine40t":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m103":            { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m46_patton":            { "enabled": true, "distance": 410,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "object_704":            { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "st_i":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "su122_54":            { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t30":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t_54":            { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t54e1":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t95":            { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "vk4502p":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
+            { "amx_50_120":                    { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "amx50_foch":                    { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "ch12_111_1_2_3":                { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "ch18_wz_120":                   { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "e_50":                          { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "e_75":                          { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb12_conqueror":                { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb24_centurion_mk3":            { "enabled": true, "distance": 410,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb32_tortoise":                 { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "is8":                           { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "jagdtiger":                     { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "lorraine40t":                   { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m103":                          { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m46_patton":                    { "enabled": true, "distance": 410,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "object_704":                    { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "st_i":                          { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "su122_54":                      { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t30":                           { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t_54":                          { "enabled": true, "distance": 390,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t54e1":                         { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t95":                           { "enabled": true, "distance": 380,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "vk4502p":                       { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "pro_ag_a":                      { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
        // 10
-            { "amx_50fosh_155":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "bat_chatillon25t":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "ch19_121":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "ch22_113":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "e_100":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "e50_ausf_m":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "f10_amx_50b":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb13_fv215b":            { "enabled": true, "distance": 410,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-			{ "gb48_fv215b_183":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "gb70_fv4202_105":            { "enabled": true, "distance": 410,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "is_4":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "is_7":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "jagdpz_e100":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "m48a1":            { "enabled": true, "distance": 420,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "maus":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "object263":            { "enabled": true, "distance": 410,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "object268":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t110":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t110e3":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t110e4":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t57_58":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "t62a":            { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } },
-            { "white_tiger":            { "enabled": true, "distance": 460,  "thickness": 1, "alpha": 65, "color": "0x7DFF3D" } }	
+            { "amx_50fosh_155":                { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "bat_chatillon25t":              { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "ch19_121":                      { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "ch22_113":                      { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "e_100":                         { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "e50_ausf_m":                    { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "f10_amx_50b":                   { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb13_fv215b":                   { "enabled": true, "distance": 410,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb48_fv215b_183":               { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb70_fv4202_105":               { "enabled": true, "distance": 410,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "is_4":                          { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "is_7":                          { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "jagdpz_e100":                   { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m48a1":                         { "enabled": true, "distance": 420,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "maus":                          { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "object263":                     { "enabled": true, "distance": 410,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "object268":                     { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t110":                          { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t110e3":                        { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t110e4":                        { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t57_58":                        { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "t62a":                          { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "white_tiger":                   { "enabled": true, "distance": 460,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "leopard1":                      { "enabled": true, "distance": 410,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            
+			{ "vk7201":                        { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "object_907":                    { "enabled": true, "distance": 400,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "m60":                           { "enabled": true, "distance": 420,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } },
+            { "gb51_excelsior":                { "enabled": true, "distance": 360,  "thickness": 1, "alpha": 75, "color": "0x7DFF3D" } }			
         ]
     },
     "lines": { // Линии. Только для своей техники.
@@ -817,7 +889,7 @@
               "strength": 1320                 //     интенсивность
             },
             "speed": 3,                       //   время отображения отлетающего урона
-            "maxRange": 80,                   //   расстояние, на которое отлетает урон
+            "maxRange": 90,                   //   расстояние, на которое отлетает урон
             "damageMessage": "={{dmg}}="       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
           },
           "contourIcon": {                    // иконки танка
@@ -845,7 +917,7 @@
           "actionMarker": {                   // маркеры "Нужна помощь" и "Атакую"
             "visible": true,                  //   false - не отображать
             "x": 0,                           //   положение по оси X
-            "y": -77,                         //   положение по оси Y
+            "y": -87,                         //   положение по оси Y
             "alpha": 100                      //   прозрачность
           },
           // Блок текстовых полей
@@ -998,7 +1070,7 @@
                 "distance": 1,                //   дистанция смещение
                 "size": 1                     //   размер
               },
-              "format": "<font color='{{c:xeff}}'>\u0021</font>"         // формат текста. См. описание макросов в readme-ru.txt
+              "format": "<font color='{{c:eff}}'>\u0021</font>"         // формат текста. См. описание макросов в readme-ru.txt
 			}
           ]
         },
@@ -1068,7 +1140,7 @@
               "strength": 1320                 //     интенсивность
             },
             "speed": 3,                       //   время отображения отлетающего урона
-            "maxRange": 80,                   //   расстояние, на которое отлетает урон
+            "maxRange": 90,                   //   расстояние, на которое отлетает урон
             "damageMessage": "={{dmg}}="       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
           },
           "contourIcon": {                    // иконки танка
@@ -1096,7 +1168,7 @@
           "actionMarker": {                   // маркеры "Нужна помощь" и "Атакую"
             "visible": true,                  //   false - не отображать
             "x": 0,                           //   положение по оси X
-            "y": -77,                         //   положение по оси Y
+            "y": -87,                         //   положение по оси Y
             "alpha": 100                      //   прозрачность
           },
           // Блок текстовых полей
@@ -1226,6 +1298,54 @@
                 "strength": 1320
               },
               "format": "{{t-rating}}"
+            },
+			{
+              "name": "Эффективность игрока на текущем танке",
+              "visible": true,
+              "x": -43,
+              "y": 16,
+              "alpha": 100,
+              "color": "{{c:e}}",
+              "font": {
+                "name": "Comic Sans MS",
+                "size": 11,
+                "align": "center",
+                "bold": false,
+                "italic": false
+              },
+              "shadow": {
+                "alpha": 50,
+                "color": "0x000000",
+                "angle": 45,
+                "distance": 1,
+                "size": 5,
+                "strength": 1320
+              },
+              "format": "{{teff}} (КПД)"
+            },
+			{
+              "name": "Средний дамаг за бой для текущего танка",
+              "visible": true,
+              "x": 49,
+              "y": 16,
+              "alpha": 100,
+              "color": "{{c:tdb}}",
+              "font": {
+                "name": "Comic Sans MS",
+                "size": 11,
+                "align": "center",
+                "bold": false,
+                "italic": false
+              },
+              "shadow": {
+                "alpha": 50,
+                "color": "0x000000",
+                "angle": 45,
+                "distance": 1,
+                "size": 5,
+                "strength": 1320
+              },
+              "format": "{{tdb}} (Дамаг)"
             }
           ]
         }
@@ -1298,9 +1418,9 @@
               "strength": 400                 //     интенсивность
             },
             "speed": 3,                       //   время отображения отлетающего урона
-            "maxRange": 80,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "={{dmg}}=\n<font face='XVMSymbol' size='24'>\u002B</font>\n-1Союзник",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "={{dmg}}=\n<font face='XVMSymbol' size='24'>\u002C</font>\n-1Союзник"      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+            "maxRange": 90,                   //   расстояние, на которое отлетает урон
+            "damageMessage": "={{dmg}}=\n\n<font face='XVMSymbol' size='24'>\u002B</font>\n\n-Союзник",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
+            "blowupMessage": "={{dmg}}=\n\n<font face='XVMSymbol' size='24'>\u002C</font>\n\n-Союзник"      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -1327,7 +1447,7 @@
           "actionMarker": {                   // маркеры "Нужна помощь" и "Атакую"
             "visible": true,                  //   false - не отображать
             "x": 0,                           //   положение по оси X
-            "y": -77,                         //   положение по оси Y
+            "y": -87,                         //   положение по оси Y
             "alpha": 100                      //   прозрачность
           },
           // Блок текстовых полей
@@ -1399,9 +1519,9 @@
               "strength": 600                 //     интенсивность
             },
             "speed": 3,                       //   время отображения отлетающего урона
-            "maxRange": 80,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "={{dmg}}=\n<font face='XVMSymbol' size='24'>\u002B</font>\n-1Союзник",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "={{dmg}}=\n<font face='XVMSymbol' size='24'>\u002C</font>\n-1Союзник"      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+            "maxRange": 90,                   //   расстояние, на которое отлетает урон
+            "damageMessage": "={{dmg}}=\n\n<font face='XVMSymbol' size='24'>\u002B</font>\n\n-Союзник",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
+            "blowupMessage": "={{dmg}}=\n\n<font face='XVMSymbol' size='24'>\u002C</font>\n\n-Союзник"      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -1428,7 +1548,7 @@
           "actionMarker": {                   // маркеры "Нужна помощь" и "Атакую"
             "visible": true,                  //   false - не отображать
             "x": 0,                           //   положение по оси X
-            "y": -67,                         //   положение по оси Y
+            "y": -87,                         //   положение по оси Y
             "alpha": 100                      //   прозрачность
           },
           // Блок текстовых полей
@@ -1557,7 +1677,7 @@
               "strength": 1320                 //     интенсивность
             },
             "speed": 3,                       //   время отображения отлетающего урона
-            "maxRange": 80,                   //   расстояние, на которое отлетает урон
+            "maxRange": 90,                   //   расстояние, на которое отлетает урон
             "damageMessage": "={{dmg}}="       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
           },
           "contourIcon": {                    // иконки танка
@@ -1585,7 +1705,7 @@
           "actionMarker": {                   // маркеры "Нужна помощь" и "Атакую"
             "visible": true,                  //   false - не отображать
             "x": 0,                           //   положение по оси X
-            "y": -77,                         //   положение по оси Y
+            "y": -87,                         //   положение по оси Y
             "alpha": 100                      //   прозрачность
           },
           // Блок текстовых полей
@@ -1738,7 +1858,7 @@
                 "distance": 1,                //   дистанция смещение
                 "size": 1                     //   размер
               },
-              "format": "<font color='{{c:xeff}}'>\u0022</font>"         // формат текста. См. описание макросов в readme-ru.txt
+              "format": "<font color='{{c:eff}}'>\u0022</font>"         // формат текста. См. описание макросов в readme-ru.txt
 			}
           ]
         },
@@ -1808,7 +1928,7 @@
               "strength": 1320                 //     интенсивность
             },
             "speed": 3,                       //   время отображения отлетающего урона
-            "maxRange": 80,                   //   расстояние, на которое отлетает урон
+            "maxRange": 90,                   //   расстояние, на которое отлетает урон
             "damageMessage": "={{dmg}}="       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
           },
           "contourIcon": {                    // иконки танка
@@ -1836,7 +1956,7 @@
           "actionMarker": {                   // маркеры "Нужна помощь" и "Атакую"
             "visible": true,                  //   false - не отображать
             "x": 0,                           //   положение по оси X
-            "y": -77,                         //   положение по оси Y
+            "y": -87,                         //   положение по оси Y
             "alpha": 100                      //   прозрачность
           },
           // Блок текстовых полей
@@ -1966,6 +2086,54 @@
                 "strength": 1320
               },
               "format": "{{t-rating}}"
+            },
+			{
+              "name": "Эффективность игрока на текущем танке",
+              "visible": true,
+              "x": -43,
+              "y": 16,
+              "alpha": 100,
+              "color": "{{c:e}}",
+              "font": {
+                "name": "Comic Sans MS",
+                "size": 11,
+                "align": "center",
+                "bold": false,
+                "italic": false
+              },
+              "shadow": {
+                "alpha": 50,
+                "color": "0x000000",
+                "angle": 45,
+                "distance": 1,
+                "size": 5,
+                "strength": 1320
+              },
+              "format": "{{teff}} (КПД)"
+            },
+			{
+              "name": "Средний дамаг за бой для текущего танка",
+              "visible": true,
+              "x": 49,
+              "y": 16,
+              "alpha": 100,
+              "color": "{{c:tdb}}",
+              "font": {
+                "name": "Comic Sans MS",
+                "size": 11,
+                "align": "center",
+                "bold": false,
+                "italic": false
+              },
+              "shadow": {
+                "alpha": 50,
+                "color": "0x000000",
+                "angle": 45,
+                "distance": 1,
+                "size": 5,
+                "strength": 1320
+              },
+              "format": "{{tdb}} (Дамаг)"
             }
           ]
         }
@@ -2038,9 +2206,9 @@
               "strength": 400                 //     интенсивность
             },
             "speed": 3,                       //   время отображения отлетающего урона
-            "maxRange": 80,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "={{dmg}}=\n<font face='XVMSymbol' size='24'>\u002B</font>\n-1Враг",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "={{dmg}}=\n<font face='XVMSymbol' size='24'>\u002C</font>\n-1Враг"      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+            "maxRange": 90,                   //   расстояние, на которое отлетает урон
+            "damageMessage": "={{dmg}}=\n\n<font face='XVMSymbol' size='24'>\u002B</font>\n\n-Враг",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
+            "blowupMessage": "={{dmg}}=\n\n<font face='XVMSymbol' size='24'>\u002C</font>\n\n-Враг"      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -2067,7 +2235,7 @@
           "actionMarker": {                   // маркеры "Нужна помощь" и "Атакую"
             "visible": true,                  //   false - не отображать
             "x": 0,                           //   положение по оси X
-            "y": -77,                         //   положение по оси Y
+            "y": -87,                         //   положение по оси Y
             "alpha": 100                      //   прозрачность
           },
           // Блок текстовых полей
@@ -2139,9 +2307,9 @@
               "strength": 400                 //     интенсивность
             },
             "speed": 3,                       //   время отображения отлетающего урона
-            "maxRange": 80,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "={{dmg}}=\n<font face='XVMSymbol' size='24'>\u002B</font>\n-1Враг",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "={{dmg}}=\n<font face='XVMSymbol' size='24'>\u002C</font>\n-1Враг"      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+            "maxRange": 90,                   //   расстояние, на которое отлетает урон
+            "damageMessage": "={{dmg}}=\n\n<font face='XVMSymbol' size='24'>\u002B</font>\n\n-Враг",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
+            "blowupMessage": "={{dmg}}=\n\n<font face='XVMSymbol' size='24'>\u002C</font>\n\n-Враг"      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -2168,7 +2336,7 @@
           "actionMarker": {                   // маркеры "Нужна помощь" и "Атакую"
             "visible": true,                  //   false - не отображать
             "x": 0,                           //   положение по оси X
-            "y": -77,                         //   положение по оси Y
+            "y": -87,                         //   положение по оси Y
             "alpha": 100                      //   прозрачность
           },
           // Блок текстовых полей
@@ -2323,12 +2491,12 @@
       "unknown_enemytk_hit":	"0xF50800",
       "unknown_enemytk_kill":	"0xF50800",
       "unknown_enemytk_blowup":	"0xF50800",
-      "player_ally_hit":	"0xFFDD33",
-      "player_ally_kill":	"0xFFDD33",
-      "player_ally_blowup":	"0xFFDD33",
-      "player_squadman_hit":	"0xFFDD33",
-      "player_squadman_kill":	"0xFFDD33",
-      "player_squadman_blowup":	"0xFFDD33",
+      "player_ally_hit":	"0x00EAFF",
+      "player_ally_kill":	"0x00EAFF",
+      "player_ally_blowup":	"0x00EAFF",
+      "player_squadman_hit":	"0x00EAFF",
+      "player_squadman_kill":	"0x00EAFF",
+      "player_squadman_blowup":	"0x00EAFF",
       "player_enemy_hit":	"0xFFDD33",
       "player_enemy_kill":	"0xFFDD33",
       "player_enemy_blowup":	"0xFFDD33",
@@ -2534,13 +2702,14 @@
     "vehicleMarker": "../maps/icons/vehicle/contour"
   },
   // Замена названий танков. Значение null - использовать стандартное название.
-  "vehicleNames": {
+"vehicleNames": {
         "ussr_MS_1": null,
         "germany_Ltraktor": null,
         "usa_T1_Cunningham": null,
         "france_RenaultFT": null,
         "uk_GB01_Medium_Mark_I": null,
         "china_Ch06_Renault_NC31": null,
+        "ussr_T_60": null,
         "ussr_BT_2": null,
         "ussr_T_26": null,
         "ussr_Tetrarch_LL": null,
@@ -2560,13 +2729,16 @@
         "germany_PanzerJager_I": null,
         "usa_T18": null,
         "france_RenaultFT_AC": null,
+        "uk_GB39_Universal_CarrierQF2": null,
         "ussr_SU_18": null,
         "usa_T57": null,
         "france_RenaultBS": null,
+        "ussr_T_70": null,
         "ussr_BT_7": null,
         "ussr_T_46": null,
+        "germany_Pz_II_AusfG": null,
         "germany_Pz38t": null,
-        "germany_PzII_Luchs": null,
+        "germany_PzI_ausf_C": null,
         "germany_PzIII_A": null,
         "germany_T_15": null,
         "usa_M22_Locust": null,
@@ -2585,18 +2757,22 @@
         "usa_T82": null,
         "france_FCM_36Pak40": null,
         "france_RenaultUE57": null,
+        "uk_GB42_Valentine_AT": null,
         "ussr_SU_26": null,
         "germany_Sturmpanzer_II": null,
         "germany_Wespe": null,
         "usa_M37": null,
         "france_Lorraine39_L_AM": null,
+        "ussr_T80": null,
         "ussr_A_20": null,
         "germany_Pz38_NA": null,
+        "germany_PzII_Luchs": null,
         "usa_M5_Stuart": null,
         "china_Ch09_M5": null,
-        "ussr_A_32": null,
         "ussr_T_28": null,
         "germany_PzIII": null,
+        "germany_PzIII_training": null,
+        "germany_VK2001DB": null,
         "usa_M3_Grant": null,
         "uk_GB07_Matilda": null,
         "france_B1": null,
@@ -2605,14 +2781,14 @@
         "usa_M8A1": null,
         "usa_T40": null,
         "france_Somua_Sau_40": null,
+        "uk_GB57_Alecto": null,
         "ussr_SU_5": null,
         "germany_Grille": null,
         "usa_M7_Priest": null,
         "france__105_leFH18B2": null,
         "france_AMX_105AM": null,
-        "ussr_T_50_2": null,
-        "germany_VK2801": null,
-        "usa_M24_Chaffee": null,
+        "germany_VK1602": null,
+        "france_ELC_AMX": null,
         "ussr_T_34": null,
         "germany_PzIII_IV": null,
         "germany_PzIV": null,
@@ -2626,25 +2802,31 @@
         "usa_T1_hvy": null,
         "france_BDR_G1B": null,
         "uk_GB08_Churchill_I": null,
+        "uk_GB51_Excelsior": null,
         "ussr_SU_85I": null,
         "ussr_SU_85": null,
         "germany_StuGIII": null,
         "usa_M10_Wolverine": null,
         "usa_T49": null,
         "france_S_35CA": null,
+        "uk_GB73_AT2": null,
         "ussr_SU_8": null,
         "germany_Hummel": null,
         "usa_M41": null,
         "france_AMX_13F3AM": null,
+        "germany_VK2801": null,
         "usa_T21": null,
         "france_AMX_12t": null,
         "china_Ch15_59_16": null,
         "ussr_T_34_85": null,
+        "ussr_T_34_85_training": null,
         "germany_PzIV_schmalturm": null,
         "germany_VK3001H": null,
         "germany_VK3001P": null,
         "germany_VK3601H": null,
+        "germany_VK3002DB_V1": null,
         "usa_M4A3E8_Sherman": null,
+        "usa_M4A3E8_Sherman_training": null,
         "usa_Sherman_Jumbo": null,
         "uk_GB21_Cromwell": null,
         "china_Ch20_Type58": null,
@@ -2661,11 +2843,14 @@
         "usa_M18_Hellcat": null,
         "usa_M36_Slagger": null,
         "france_ARL_V39": null,
+        "uk_GB40_Gun_Carrier_Churchill": null,
+        "uk_GB74_AT8": null,
         "ussr_S_51": null,
         "ussr_SU_14": null,
         "germany_G_Panther": null,
         "usa_M12": null,
         "france_Lorraine155_50": null,
+        "germany_Auf_Panther": null,
         "usa_T71": null,
         "france_AMX_13_75": null,
         "china_Ch02_Type62": null,
@@ -2673,10 +2858,12 @@
         "ussr_KV_13": null,
         "ussr_T_43": null,
         "germany_PzV": null,
+        "germany_PzV_training": null,
         "germany_VK3002DB": null,
         "usa_T20": null,
         "uk_GB22_Comet": null,
         "china_Ch04_T34_1": null,
+        "china_Ch04_T34_1_training": null,
         "ussr_IS": null,
         "ussr_KV_3": null,
         "germany_PzVI": null,
@@ -2693,6 +2880,7 @@
         "usa_T25_AT": null,
         "france_AMX_AC_Mle1946": null,
         "uk_GB71_AT_15A": null,
+        "uk_GB75_AT7": null,
         "ussr_Object_212": null,
         "germany_G_Tiger": null,
         "usa_M40M43": null,
@@ -2701,6 +2889,7 @@
         "china_Ch17_WZ131_1_WZ132": null,
         "ussr_T_44": null,
         "germany_Panther_II": null,
+        "germany_Indien_Panzer": null,
         "usa_Pershing": null,
         "usa_T23": null,
         "usa_T69": null,
@@ -2710,6 +2899,7 @@
         "ussr_KV4": null,
         "germany_Lowe": null,
         "germany_PzVIB_Tiger_II": null,
+        "germany_PzVIB_Tiger_II_training": null,
         "germany_VK4502A": null,
         "usa_M6A2E1": null,
         "usa_T32": null,
@@ -2725,12 +2915,14 @@
         "usa_T28": null,
         "usa_T28_Prototype": null,
         "france_AMX_AC_Mle1948": null,
+        "uk_GB72_AT15": null,
         "ussr_Object_261": null,
         "germany_G_E": null,
         "usa_T92": null,
         "france_Bat_Chatillon155": null,
         "ussr_T_54": null,
         "germany_E_50": null,
+        "germany_Pro_Ag_A": null,
         "usa_M46_Patton": null,
         "usa_T54E1": null,
         "france_Lorraine40t": null,
@@ -2750,9 +2942,13 @@
         "usa_T30": null,
         "usa_T95": null,
         "france_AMX50_Foch": null,
+        "uk_GB32_Tortoise": null,
+        "ussr_Object_907": null,
         "ussr_T62A": null,
         "germany_E50_Ausf_M": null,
+        "germany_Leopard1": null,
         "usa_M48A1": null,
+        "usa_M60": null,
         "france_Bat_Chatillon25t": null,
         "uk_GB70_FV4202_105": null,
         "china_Ch19_121": null,
@@ -2760,6 +2956,7 @@
         "ussr_IS_7": null,
         "germany_E_100": null,
         "germany_Maus": null,
+        "germany_VK7201": null,
         "usa_T110": null,
         "usa_T57_58": null,
         "france_F10_AMX_50B": null,
@@ -2771,20 +2968,22 @@
         "usa_T110E3": null,
         "usa_T110E4": null,
         "france_AMX_50Fosh_155": null,
+        "uk_GB48_FV215b_183": null,
         "germany_Bison_I": null,
         "usa_T2_lt": null,
+        "germany_PzI": null,
         "ussr_M3_Stuart_LL": null,
         "ussr_BT_SV": null,
         "germany_PzII_J": null,
         "ussr_T_127": null,
+        "uk_GB78_Sexton_I": null,
         "ussr_T_50": null,
-        "germany_VK1602": null,
         "ussr_Valentine_LL": null,
         "germany_B_1bis_captured": null,
+        "ussr_A_32": null,
         "france_AMX40": null,
         "uk_GB04_Valentine": null,
         "uk_GB60_Covenanter": null,
-        "france_ELC_AMX": null,
         "germany_PzIV_Hydro": null,
         "ussr_Churchill_LL": null,
         "ussr_Matilda_II_LL": null,
@@ -2794,6 +2993,8 @@
         "usa_M4A2E4": null,
         "uk_GB68_Matilda_Black_Prince": null,
         "uk_GB20_Crusader": null,
+        "ussr_T_50_2": null,
+        "usa_M24_Chaffee": null,
         "germany_PzV_PzIV": null,
         "germany_PzV_PzIV_ausf_Alfa": null,
         "uk_GB63_TOG_II": null,

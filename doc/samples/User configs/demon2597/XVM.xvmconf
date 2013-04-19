@@ -5,14 +5,14 @@
  */
 {
   "configVersion": "1.5.0", // Версия конфига. Не удаляйте и не изменяйте её без необходимости.
-  "editorVersion": "0.36",  // Версия редактора.
+  "editorVersion": "0.41",  // Версия редактора.
   // Блок общих параметров конфига. Все параметры информационные, в моде не используются.
   "definition": {
     "author": "demon2597",                        // автор конфига
     "description": "My settings for XVM",         // описание конфига
     "url": "http://www.koreanrandom.com/forum/topic/2172-", // адрес, где выкладываеются обновления конфига
-    "date": "3.04.2013",                       // дата последней модификации конфига
-    "gameVersion": "0.8.4",                     // поддерживаемая версия игры
+    "date": "18.04.2013",                       // дата последней модификации конфига
+    "gameVersion": "0.8.5",                     // поддерживаемая версия игры
     "modMinVersion": "3.5.0"                    // минимально необходимая версия мода XVM
   },
   // Блок общих параметров боевого интерфейса
@@ -21,7 +21,6 @@
     "showPostmortemTips": false,                // false - отключить всплывающую внизу панель после смерти. По умолчанию включено.
     "removePanelsModeSwitcher": false,          // true - убрать переключатель режимов ушей мышкой
     "highlightVehicleIcon": false,              // false - отключить подсветку иконки выбранного танка и взвода
-    "hideXVMVersion": true,                    // true - отключить отображение версии xvm в верхнем левом углу экрана
     "clockFormat": "",                       // Показать часы на экране панели отладки (возле FPS). Формат: Y:год, M:месяц, D:день, H:часы, N:минуты, S:секунды. "" - убрать часы.
     "useStandardMarkers": false,                // true - использовать стандартные маркеры клиента
     "clanIconsFolder": "../../../clanicons"     // путь к папке иконок кланов относительно res_mods/[ВЕРСИЯ ИГРЫ]/gui/flash
@@ -30,21 +29,33 @@
   "rating": {
     "showPlayersStatistics": true,              // true - включить отображение статистики. Глобальный переключатель - без него модуль статистики будет везде отключен.
     "loadEnemyStatsInFogOfWar": true,           // true - включить загрузку данных по противникам в "тумане войны"
-    "enableStatisticsLog": false,                // true - включить сохранение статистики в файл "xvm-stat.log"
+    "enableStatisticsLog": false,               // true - включить сохранение статистики в файл "xvm-stat.log"
     "enableUserInfoStatistics": true,           // true - включить отображение статистики в достижениях пользователя
     "enableCompanyStatistics": true             // true - включить отображение статистики при наборе роты
+  },
+  // Панель счёта в бою
+  "fragCorrelation": {
+    "hideTeamTextFields": true // true - cпрятать два текстовых поля "Союзники | Противники"
   },
   // Специальные горячие клавиши XVM
   "hotkeys": {
     // onHold: произвести действие по разовому нажатию клавиши или по удержанию
     // Значения кодов можно посмотреть здесь:
     // http://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
-    // Ctrl - 17, X - 99, C - 67
+    // Ctrl - 17, X - 88, C - 67
     "minimapZoom": { "enabled": true, "onHold": true, "keyCode": 17 }
+  },
+  // Окно взвода
+  "squad": {
+    "enabled": true,      // false - выключить отображение информации
+    "romanNumbers": true, // false - уровень арабскими цифрами
+    "showClan": true,     // false - скрыть клан игрока
+    "leftLvlBorder": "",   // Обрамление уровня слева. "Grille [4"
+	"rightLvlBorder": ""   // Обрамление уровня справа. "Grille 4]"
   },
   // Параметры экрана загрузки боя
   "battleLoading": {
-    "clockFormat": "H:N:S",                     // Показать часы на экране загрузки боя. Формат: Y:год, M:месяц, D:день, H:часы, N:минуты, S:секунды. "" - убрать часы.
+    "clockFormat": "H:N:S",                     // Формат часов на экране загрузки боя. Формат: Y:год, M:месяц, D:день, H:часы, N:минуты, S:секунды. "" - убрать часы.
     "showChances": true,                        // true - включить отображение шансов на победу (только с xvm-stat)
     "showChancesExp": false,                    // Показывать экспериментальную формулу расчета шансов
     "removeSquadIcon": false,                   // true - убрать отображение иконки взвода. На пустое поле можно вывести, например, иконку клана.
@@ -82,6 +93,7 @@
     "removeSquadIcon": false, // true - убрать отображение иконки взвода
     // параметры отображения иконки игрока/клана (см. battleLoading выше).
     "clanIcon": { "show": false, "x": 0, "y": 6, "xr": 0, "yr": 6, "h": 16, "w": 16, "alpha": 90 },
+    // Маркер статуса засвета в правой боковой панели списка игроков
 "enemySpottedMarker": {
        "enabled": true,
        "Xoffset": -44, // Смещение относительно иконки уровня танка
@@ -131,7 +143,7 @@
       "vehicleFormatRight": "<font face='PartnerCondensed Mono'  color='{{c:xeff}}'>{{xeff}}</font>"
     }
   },
-  // Окно статистики после боя
+  // Параметры окна послебоевой статистики
   "finalStatistic": {
     "startPage": 1,           // номер начальной страницы (1, 2, 3)
     // 1 - взвод
@@ -212,17 +224,10 @@
   },
   // Миникарта
   "minimap": {
-    // Напоминалка: размер миникарты меняется по нажатию клавиш "-" и "=".
-    //   На клавиатуре эти кнопки находятся в ряду цифр.
-    //   Можно переназначить в меню игры Настройки - Управление - В самом низу.
     // Через все поля можно подкачивать изображения с диска:
     //   "format": { "ally": "<img src='img://../icons/bzz.png' width='8' height='8'>"}, ...
-    //   Файлы в WoT\res_mods\icons\bzz.png
-
-    // Включение\выключение всего мода миникарты в целом.
-    // По умолчанию выключено.
-    // Поставить в true для включения.
-    "enabled": true,
+    //   Файлы должны быть в WoT\res_mods\icons\bzz.png
+    "enabled": true, // Включение\выключение всего мода миникарты в целом.
     "mapBackgroundImageAlpha": 100, // Прозрачность изображения карты.
     "selfIconAlpha": 100,           // Прозрачность своей иконки. Белая стрелка
     "cameraAlpha": 100,              // Прозрачность камеры и прикрепленной геометрии. Зеленый треугольник.
@@ -310,7 +315,7 @@
             "strength": 4
           }
         },
-        "offset": {
+        "offset": { // Выравнивание
           "ally":  {"x": -4, "y": 2},   // Смещение поля относительно текущей иконки.
           "enemy": {"x": -4, "y": 2},   // Смещение поля относительно текущей иконки.
           "squad": {"x": -4, "y": -7},   // Смещение поля относительно текущей иконки.
@@ -326,7 +331,6 @@
         }
       },
       "mapSize": { // Поле размера стороны карты. Например 1000м, 700м, 600м.
-        // Работает только с xvm-stat.exe
         "enabled": true,
         "format": "<b>{{cellsize}}0 м</b>",
         "css": "font-size:10px; color:#FFCC66;",
@@ -358,8 +362,8 @@
         // По умолчанию в списке только круги дальнобойности артиллерии с топ орудиями.
         // Типы для дополнения брать по ссылке
         // http://code.google.com/p/wot-xvm/source/browse/trunk/src/xvm/src/wot/utils/VehicleInfoData2.as
-        //   Дальнобойность арты може менятся в зависимости от углов постановки машины на склонах местности
-        // и высоте расположения машины относительно цели. на миникарте эти факторы не учитываются.
+        //   Дальнобойность арты может меняться в зависимости от углов постановки машины на склонах местности
+        // и высоте расположения машины относительно цели. На миникарте эти факторы не учитываются.
         // Подробнее по ссылке: http://goo.gl/ZqlPa
         "special": [
             { "su_18":            { "enabled": true, "distance": 552,  "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
@@ -395,7 +399,9 @@
             { "amx_13f3am":       { "enabled": true, "distance": 1250, "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
             { "lorraine155_50":   { "enabled": true, "distance": 1202, "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
             { "lorraine155_51":   { "enabled": true, "distance": 1296, "thickness": 1, "alpha": 40, "color": "0xFE7903" } },
-            { "bat_chatillon155": { "enabled": true, "distance": 1296, "thickness": 1, "alpha": 40, "color": "0xFE7903" } }
+            { "bat_chatillon155": { "enabled": true, "distance": 1296, "thickness": 1, "alpha": 60, "color": "0xFE7903" } },
+            
+            { "gb78_sexton_i":    { "enabled": true, "distance": 767,  "thickness": 1, "alpha": 60, "color": "0xFE7903" } }
         ]
     },
     "lines": { // Линии. Только для своей техники.
@@ -410,13 +416,13 @@
        // Для постановки точки попробуйте отрезок длиной в единицу и с большой толщиной.
        // Для простоты можете оставить один длинный отрезок, не забыв убрать зяпятую. В конце секции запятая не ставится.
        "vehicle": [ // Направление корпуса своей техники.
-         { "enabled": true, "from": 50,  "to": 95, "inmeters": true, "thickness": 1.5,   "alpha": 45, "color": "0x60FF00"},
-         { "enabled": true, "from": 100,  "to": 145, "inmeters": true, "thickness": 1.4,   "alpha": 40, "color": "0x60FF00"},
-         { "enabled": true, "from": 150,  "to": 196, "inmeters": true, "thickness": 1.3,   "alpha": 35, "color": "0x60FF00"},
-         { "enabled": true, "from": 200, "to": 246, "inmeters": true, "thickness": 1.2, "alpha": 33, "color": "0x60FF00"},
-         { "enabled": true, "from": 250, "to": 296, "inmeters": true, "thickness": 1.1, "alpha": 30, "color": "0x60FF00"},
-         { "enabled": true, "from": 300, "to": 397, "inmeters": true, "thickness": 1,   "alpha": 30, "color": "0x60FF00"},
-         { "enabled": true, "from": 400, "to": 497, "inmeters": true, "thickness": 0.9,   "alpha": 30, "color": "0x60FF00"},
+         { "enabled": true, "from": 50,  "to": 97, "inmeters": true, "thickness": 1.5,   "alpha": 45, "color": "0x60FF00"},
+         { "enabled": true, "from": 100,  "to": 147, "inmeters": true, "thickness": 1.4,   "alpha": 40, "color": "0x60FF00"},
+         { "enabled": true, "from": 150,  "to": 197, "inmeters": true, "thickness": 1.3,   "alpha": 35, "color": "0x60FF00"},
+         { "enabled": true, "from": 200, "to": 248, "inmeters": true, "thickness": 1.2, "alpha": 33, "color": "0x60FF00"},
+         { "enabled": true, "from": 250, "to": 298, "inmeters": true, "thickness": 1.1, "alpha": 30, "color": "0x60FF00"},
+         { "enabled": true, "from": 300, "to": 398, "inmeters": true, "thickness": 1,   "alpha": 30, "color": "0x60FF00"},
+         { "enabled": true, "from": 400, "to": 498, "inmeters": true, "thickness": 0.9,   "alpha": 30, "color": "0x60FF00"},
          { "enabled": true, "from": 500, "to": 2000, "inmeters": true, "thickness": 0.75,   "alpha": 30, "color": "0x60FF00"}
        ],
        "camera": [ // Направление камеры от своей техники.
@@ -464,21 +470,21 @@
       // Углы горизонтальной наводки могут меняться в зависимости от углов постановки машины на склонах местности.
        // Подробнее по ссылке: http://goo.gl/ZqlPa
        "traverseAngle": [ // Углы горизонтальной наводки. Срабатывают только, если углы есть.
-         { "enabled": true, "from": 50,  "to": 95, "inmeters": true, "thickness": 1.5,   "alpha": 50, "color": "0xCCCCCC"},
-         { "enabled": true, "from": 100,  "to": 145, "inmeters": true, "thickness": 1.4,   "alpha": 48, "color": "0xCCCCCC"},
-         { "enabled": true, "from": 150,  "to": 196, "inmeters": true, "thickness": 1.3,   "alpha": 46, "color": "0xCCCCCC"},
-         { "enabled": true, "from": 200, "to": 246, "inmeters": true, "thickness": 1.2, "alpha": 44, "color": "0xCCCCCC"},
-         { "enabled": true, "from": 250, "to": 296, "inmeters": true, "thickness": 1.1, "alpha": 42, "color": "0xCCCCCC"},
-         { "enabled": true, "from": 300, "to": 397, "inmeters": true, "thickness": 1,   "alpha": 40, "color": "0xCCCCCC"},
-         { "enabled": true, "from": 400, "to": 497, "inmeters": true, "thickness": 0.9,   "alpha": 40, "color": "0xCCCCCC"},
+         { "enabled": true, "from": 50,  "to": 97, "inmeters": true, "thickness": 1.5,   "alpha": 50, "color": "0xCCCCCC"},
+         { "enabled": true, "from": 100,  "to": 147, "inmeters": true, "thickness": 1.4,   "alpha": 48, "color": "0xCCCCCC"},
+         { "enabled": true, "from": 150,  "to": 197, "inmeters": true, "thickness": 1.3,   "alpha": 46, "color": "0xCCCCCC"},
+         { "enabled": true, "from": 200, "to": 248, "inmeters": true, "thickness": 1.2, "alpha": 44, "color": "0xCCCCCC"},
+         { "enabled": true, "from": 250, "to": 298, "inmeters": true, "thickness": 1.1, "alpha": 42, "color": "0xCCCCCC"},
+         { "enabled": true, "from": 300, "to": 398, "inmeters": true, "thickness": 1,   "alpha": 40, "color": "0xCCCCCC"},
+         { "enabled": true, "from": 400, "to": 498, "inmeters": true, "thickness": 0.9,   "alpha": 40, "color": "0xCCCCCC"},
          { "enabled": true, "from": 500, "to": 2000, "inmeters": true, "thickness": 0.75,   "alpha": 40, "color": "0xCCCCCC"}
        ]
     },
     "square" : { // Квадрат со стороной 1000м- максимальная дальность видимости засвеченного протиника
       "enabled": true,
       "artilleryEnabled": false, // Показывать ли квадрат в случае артиллерии
-      "thickness": 1,
-      "alpha": 30,
+      "thickness": 1, // Толщина
+      "alpha": 30, // Прозрачность
       "color": "0xFFCC66"
     }
   },
@@ -2297,7 +2303,7 @@
       { "value": 101, "alpha": 0 }
     ],
     // Динамическая прозрачность по эффективности (только с xvm-stat). Значения от меньшего к большему.
-    "xeff": [
+    "eff": [
       { "value": 900,  "alpha": 100 },
       { "value": 1200, "alpha": 100 },
       { "value": 9999, "alpha": 100 }
