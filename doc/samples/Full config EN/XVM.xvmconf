@@ -43,7 +43,7 @@
   },
   // Frag counter panel at top side of battle windows interface
   "fragCorrelation": {
-    "hideTeamTextFields": false // true - hide textfields "Allies | Enemies"
+    "hideTeamTextFields": true // true - hide textfields "Allies | Enemies"
   },
   // Special XVM hotkeys
   "hotkeys": {

@@ -43,7 +43,7 @@
   },
   // Панель счёта в бою
   "fragCorrelation": {
-    "hideTeamTextFields": false // true - cпрятать два текстовых поля "Союзники | Противники"
+    "hideTeamTextFields": true // true - cпрятать два текстовых поля "Союзники | Противники"
   },
   // Специальные горячие клавиши XVM
   "hotkeys": {
