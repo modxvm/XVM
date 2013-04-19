@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<c:PanelComponent
+    xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:c="components.*"
+    title="{resourceManager.getString('panels', 'PSquad')}">
+    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'Enabled')}" labelWidth="180" id="v_enabled" config="squad.enabled" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'romanNumbers')}" labelWidth="180" id="v_romanNumbers" config="squad.romanNumbers" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'showClan')}" labelWidth="180" id="v_showClan" config="squad.showClan" change="onChange(event)"/>
+    <c:LabeledTextInput label="{resourceManager.getString('panels', 'leftLvlBorder')}" labelWidth="180" id="v_leftLvlBorder" config="squad.leftLvlBorder" change="onChange(event)"/>
+    <c:LabeledTextInput label="{resourceManager.getString('panels', 'rightLvlBorder')}" labelWidth="180" id="v_rightLvlBorder" config="squad.rightLvlBorder" change="onChange(event)"/>
+</c:PanelComponent>

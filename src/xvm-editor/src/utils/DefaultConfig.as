@@ -91,7 +91,7 @@ public class DefaultConfig
                 showEColumn: false              // Show column for per-vehicle efficiency
             },
             fragCorrelation: {
-                hideTeamTextFields: false
+                hideTeamTextFields: true
             },
             hotkeys: {
                 minimapZoom: { enabled: false, onHold: true, keyCode: 17 } // 17 - Ctrl

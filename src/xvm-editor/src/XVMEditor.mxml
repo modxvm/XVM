@@ -84,8 +84,23 @@
                     <s:Scroller x="0" y="0" width="420" height="100%">
                         <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1" creationComplete="{RefreshCurrentPage()}">
                             <p:PDefinition id="p_definition" config="definition" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
-                            <p:PBattle id="p_battle" config="battle" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                             <p:PRating id="p_rating" config="rating" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+                        </s:VGroup>
+                    </s:Scroller>
+                </s:NavigatorContent>
+                <s:NavigatorContent label="{_('hangarPage')}" width="100%" height="100%" id="pgHangar">
+                    <s:Scroller x="0" y="0" width="420" height="100%">
+                        <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1" creationComplete="{RefreshCurrentPage()}">
+                            <p:PUserInfo id="p_userInfo" config="userInfo" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+                            <p:PSquad id="p_squad" config="squad" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+                        </s:VGroup>
+                    </s:Scroller>
+                </s:NavigatorContent>
+                <s:NavigatorContent label="{_('battlePage')}" width="100%" height="100%" id="pgBattle">
+                    <s:Scroller x="0" y="0" width="420" height="100%">
+                        <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1" creationComplete="{RefreshCurrentPage()}">
+                            <p:PBattle id="p_battle" config="battle" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+                            <p:PFragCorrelation id="p_fragCorrelation" config="fragCorrelation" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                         </s:VGroup>
                     </s:Scroller>
                 </s:NavigatorContent>

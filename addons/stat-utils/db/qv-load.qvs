@@ -1,9 +1,6 @@
 vi:
 Load * from 'players\_vinfo.csv' (ansi, txt, delimiter is ';', embedded labels);
 
-vt:
-Load * from 'players\_vtop.csv' (ansi, txt, delimiter is ';', embedded labels);
-
 v:
 Load *,
  (vwins/vbattles) as R,

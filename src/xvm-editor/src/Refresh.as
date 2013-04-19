@@ -20,6 +20,10 @@ protected function RefreshCurrentPage():void
 
         if (pg == pgCommon)
             RefreshCommonPage();
+        else if (pg == pgHangar)
+            RefreshHangarPage();
+        if (pg == pgBattle)
+            RefreshBattlePage();
         else if (pg == pgHitLog)
             RefreshHitLogPage();
         else if (pg == pgCaptureBar)
@@ -75,6 +79,49 @@ private function RefreshCommonPage():void
         this.p_definition.v_gameVersion.value = section.gameVersion;
         this.p_definition.v_modMinVersion.value = section.modMinVersion;
 
+        section = Config.s_config.rating;
+        this.p_rating.v_showPlayersStatistics.value = section.showPlayersStatistics;
+        this.p_rating.v_enableUserInfoStatistics.value = section.enableUserInfoStatistics;
+        this.p_rating.v_enableCompanyStatistics.value = section.enableCompanyStatistics;
+        this.p_rating.v_loadEnemyStatsInFogOfWar.value = section.loadEnemyStatsInFogOfWar;
+        this.p_rating.v_enableStatisticsLog.value = section.enableStatisticsLog;
+    }
+    catch (ex:Error)
+    {
+        debug("ERROR: RefreshCommonPage(): " + ex.toString());
+    }
+}
+
+private function RefreshHangarPage():void
+{
+    debug("RefreshHangarPage()");
+    try
+    {
+        var section:*;
+
+        section = Config.s_config.squad;
+        this.p_squad.v_enabled.value = section.enabled;
+        this.p_squad.v_romanNumbers.value = section.romanNumbers;
+        this.p_squad.v_showClan.value = section.showClan;
+        this.p_squad.v_leftLvlBorder.value = section.leftLvlBorder;
+        this.p_squad.v_rightLvlBorder.value = section.rightLvlBorder;
+
+        section = Config.s_config.userInfo;
+        this.p_userInfo.v_showEColumn.value = section.showEColumn;
+    }
+    catch (ex:Error)
+    {
+        debug("ERROR: RefreshHangarPage(): " + ex.toString());
+    }
+}
+
+private function RefreshBattlePage():void
+{
+    debug("RefreshBattlePage()");
+    try
+    {
+        var section:*;
+
         section = Config.s_config.battle;
         this.p_battle.v_mirroredVehicleIcons.value = section.mirroredVehicleIcons;
         this.p_battle.v_showPostmortemTips.value = section.showPostmortemTips;
@@ -84,16 +131,12 @@ private function RefreshCommonPage():void
         this.p_battle.v_clockFormat.value = section.clockFormat;
         this.p_battle.v_clanIconsFolder.value = section.clanIconsFolder;
 
-        section = Config.s_config.rating;
-        this.p_rating.v_showPlayersStatistics.value = section.showPlayersStatistics;
-        this.p_rating.v_loadEnemyStatsInFogOfWar.value = section.loadEnemyStatsInFogOfWar;
-        this.p_rating.v_enableStatisticsLog.value = section.enableStatisticsLog;
-        this.p_rating.v_enableUserInfoStatistics.value = section.enableUserInfoStatistics;
-        this.p_rating.v_enableCompanyStatistics.value = section.enableCompanyStatistics;
+        section = Config.s_config.fragCorrelation;
+        this.p_fragCorrelation.v_hideTeamTextFields.value = section.hideTeamTextFields;
     }
     catch (ex:Error)
     {
-        debug("ERROR: RefreshCommonPage(): " + ex.toString());
+        debug("ERROR: RefreshBattlePage(): " + ex.toString());
     }
 }
 
