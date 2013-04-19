@@ -86,6 +86,7 @@ class wot.utils.VehicleInfoData2
         sturmpanzer_ii:             { level: 3,  type: "SPG", hpstock: 160,  hptop: 160,  turret: 0, premium: 0, nation: "germany", name: "Sturmpanzer_II" },
         wespe:                      { level: 3,  type: "SPG", hpstock: 170,  hptop: 170,  turret: 0, premium: 0, nation: "germany", name: "Wespe" },
         m37:                        { level: 3,  type: "SPG", hpstock: 150,  hptop: 150,  turret: 0, premium: 0, nation: "usa",     name: "M37" },
+        sexton_i:                   { level: 3,  type: "SPG", hpstock: 160,  hptop: 160,  turret: 0, premium: 1, nation: "usa",     name: "Sexton_I" },
         lorraine39_l_am:            { level: 3,  type: "SPG", hpstock: 140,  hptop: 140,  turret: 0, premium: 0, nation: "france",  name: "Lorraine39_L_AM" },
         gb78_sexton_i:              { level: 3,  type: "SPG", hpstock: 160,  hptop: 160,  turret: 0, premium: 1, nation: "uk",      name: "GB78_Sexton_I" },
 
@@ -174,7 +175,7 @@ class wot.utils.VehicleInfoData2
         pzv_pziv_ausf_alfa:         { level: 6,  type: "MT",  hpstock: 870,  hptop: 870,  turret: 0, premium: 1, nation: "germany", name: "PzV_PzIV_ausf_Alfa" },
         vk3001h:                    { level: 6,  type: "MT",  hpstock: 670,  hptop: 750,  turret: 2, premium: 0, nation: "germany", name: "VK3001H" },
         vk3001p:                    { level: 6,  type: "MT",  hpstock: 610,  hptop: 710,  turret: 2, premium: 0, nation: "germany", name: "VK3001P" },
-        vk3002db_v1:                { level: 6,  type: "MT",  hpstock: 700,  hptop: 770,  turret: 1, premium: 0, nation: "germany", name: "VK3002DB_V1" },
+        vk3002db_v1:                { level: 6,  type: "MT",  hpstock: 700,  hptop: 770,  turret: 2, premium: 0, nation: "germany", name: "VK3002DB_V1" },
         vk3601h:                    { level: 6,  type: "MT",  hpstock: 760,  hptop: 850,  turret: 2, premium: 0, nation: "germany", name: "VK3601H" },
         m4a3e8_sherman:             { level: 6,  type: "MT",  hpstock: 720,  hptop: 750,  turret: 2, premium: 0, nation: "usa",     name: "M4A3E8_Sherman" },
         m4a3e8_sherman_training:    { level: 6,  type: "MT",  hpstock: 830,  hptop: 830,  turret: 0, premium: 0, nation: "usa",     name: "M4A3E8_Sherman_training" },
