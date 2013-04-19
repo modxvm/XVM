@@ -1,3 +1,11 @@
+XVM-3.5.0
+  [FIXES]
+  * fixed sorting in After Battle stats
+  * fixed win chances with test tanks
+  * other fixes
+  [OTHER]
+  * updated clan icons
+
 XVM-3.5.0-pre2
   * adaptation to WoT 0.8.5
   
