@@ -1,4 +1,5 @@
 #!/bin/sh
+LANG=C
 
 [ "$host" = "" ] && exit
 
