@@ -59,13 +59,13 @@
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
     "medium": {
       "width": 120,
-      "formatLeft": "{{vehicle}} <font color='{{c:xwn}}'>{{nick}}</font>",
-      "formatRight": "{{vehicle}} <font color='{{c:xwn}}'>{{nick}}</font>"
+      "formatLeft": "<font color='{{c:xwn}}'>{{nick}}</font>",
+      "formatRight": "<font color='{{c:xwn}}'>{{nick}}</font>"
     },
     "medium2": {
       "width": 120,
-      "formatLeft": "{{nick}} <font color='{{c:xwn}}'>{{vehicle}}</font>",
-      "formatRight": "{{nick}} <font color='{{c:xwn}}'>{{vehicle}}</font>"
+      "formatLeft": "<font color='{{c:xwn}}'>{{vehicle}}</font>",
+      "formatRight": "<font color='{{c:xwn}}'>{{vehicle}}</font>"
     },
     "large": {
       "width": 120,
@@ -73,6 +73,21 @@
       "nickFormatRight": "{{name}}<font color='#cccccc'>{{clan}}</font> <font color='{{c:xwn}}'>{{xwn}}</font>",
       "vehicleFormatLeft": "",
       "vehicleFormatRight": ""
+    },
+    "enemySpottedMarker": {
+      "enabled": true,
+      "format": {
+        "neverSeen": "<font face='$FieldFont' size='24' color='#DDDDDD'>*</font>",
+        "lost": "<font face='$FieldFont' size='24' color='#666666'>*</font>",
+        "revealed": "<font face='$FieldFont' size='24' color='#00DE00'>*</font>",
+        "dead": "",
+        "artillery": {
+          "neverSeen": "<font face='$FieldFont' size='24' color='#DDDDDD'>*</font>",
+          "lost": "<font face='$FieldFont' size='24' color='#666666'>*</font>",
+          "revealed": "<font face='$FieldFont' size='24' color='#00DE00'>*</font>",
+          "dead": ""
+        }
+      }
     }
   },
   "finalStatistic": {

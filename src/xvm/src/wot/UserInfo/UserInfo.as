@@ -192,6 +192,9 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
 
         super.setStat.apply(this, arguments);
 
+        if (Config.s_config.rating.enableUserInfoStatistics != true)
+            return;
+
         if (!m_statisticsField1)
         {
             m_statisticsField1 = Utils.duplicateTextField(blocksArea.blockcommon.itemsurvivedBattles, "statisticsField",

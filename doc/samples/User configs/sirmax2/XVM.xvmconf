@@ -43,15 +43,15 @@
     "showChancesExp": true,
     "removeSquadIcon": false,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft":  "<font face='Consolas' size='11'>{{avglvl}} <font face='Symbol' color='#111111'><b><font color='{{c:tdv}}'>·</font><font color='{{c:tfb}}'>·</font><font color='{{c:tsb}}'>·</font></b></font> <font color='{{c:e}}'>{{e}}</font>|<font color='{{c:xeff}}'>{{xeff}}</font>|<font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:twr}}'>{{twr}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>",
-    "formatRight": "<font face='Consolas' size='11'>{{avglvl}} <font face='Symbol' color='#111111'><b><font color='{{c:tdv}}'>·</font><font color='{{c:tfb}}'>·</font><font color='{{c:tsb}}'>·</font></b></font> <font color='{{c:e}}'>{{e}}</font>|<font color='{{c:xeff}}'>{{xeff}}</font>|<font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:twr}}'>{{twr}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>"
+    "formatLeft":  "<font face='Consolas' size='11'>{{avglvl}} <font face='Symbol' color='#111111'><b><font color='{{c:tdv}}'>·</font><font color='{{c:tfb}}'>·</font><font color='{{c:tsb}}'>·</font></b></font> <font color='{{c:e}}'>{{e}}</font>|<font color='{{c:xeff}}'>{{xeff}}</font>|<font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:twr}}'>{{twr}}</font></font>",
+    "formatRight": "<font face='Consolas' size='11'>{{avglvl}} <font face='Symbol' color='#111111'><b><font color='{{c:tdv}}'>·</font><font color='{{c:tfb}}'>·</font><font color='{{c:tsb}}'>·</font></b></font> <font color='{{c:e}}'>{{e}}</font>|<font color='{{c:xeff}}'>{{xeff}}</font>|<font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:twr}}'>{{twr}}</font></font>"
   },
   "statisticForm": {
     "showChances": true,
     "showChancesExp": true,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft":  "<font face='Consolas' size='11'>{{avglvl}} <font face='Symbol' color='#111111'><b><font color='{{c:tdv}}'>·</font><font color='{{c:tfb}}'>·</font><font color='{{c:tsb}}'>·</font></b></font> <font color='{{c:e}}'>{{e}}</font>|<font color='{{c:xeff}}'>{{xeff}}</font>|<font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:twr}}'>{{twr}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>",
-    "formatRight": "<font face='Consolas' size='11'>{{avglvl}} <font face='Symbol' color='#111111'><b><font color='{{c:tdv}}'>·</font><font color='{{c:tfb}}'>·</font><font color='{{c:tsb}}'>·</font></b></font> <font color='{{c:e}}'>{{e}}</font>|<font color='{{c:xeff}}'>{{xeff}}</font>|<font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:twr}}'>{{twr}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font>"
+    "formatLeft":  "<font face='Consolas' size='11'>{{avglvl}} <font face='Symbol' color='#111111'><b><font color='{{c:tdv}}'>·</font><font color='{{c:tfb}}'>·</font><font color='{{c:tsb}}'>·</font></b></font> <font color='{{c:e}}'>{{e}}</font>|<font color='{{c:xeff}}'>{{xeff}}</font>|<font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:twr}}'>{{twr}}</font></font>",
+    "formatRight": "<font face='Consolas' size='11'>{{avglvl}} <font face='Symbol' color='#111111'><b><font color='{{c:tdv}}'>·</font><font color='{{c:tfb}}'>·</font><font color='{{c:tsb}}'>·</font></b></font> <font color='{{c:e}}'>{{e}}</font>|<font color='{{c:xeff}}'>{{xeff}}</font>|<font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:twr}}'>{{twr}}</font></font>"
   },
   "playersPanel": {
     "alpha": 50,
@@ -59,13 +59,13 @@
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
     "medium": {
       "width": 120,
-      "formatLeft": "{{vehicle}} <font color='{{c:xwn}}'>{{nick}}</font>",
-      "formatRight": "{{vehicle}} <font color='{{c:xwn}}'>{{nick}}</font>"
+      "formatLeft": "<font color='{{c:xwn}}'>{{nick}}</font>",
+      "formatRight": "<font color='{{c:xwn}}'>{{nick}}</font>"
     },
     "medium2": {
       "width": 120,
-      "formatLeft": "{{nick}} <font color='{{c:xwn}}'>{{vehicle}}</font>",
-      "formatRight": "{{nick}} <font color='{{c:xwn}}'>{{vehicle}}</font>"
+      "formatLeft": "<font color='{{c:xwn}}'>{{vehicle}}</font>",
+      "formatRight": "<font color='{{c:xwn}}'>{{vehicle}}</font>"
     },
     "large": {
       "width": 120,
@@ -73,6 +73,21 @@
       "nickFormatRight": "{{name}}<font color='#cccccc'>{{clan}}</font> <font color='{{c:xwn}}'>{{xwn}}</font>",
       "vehicleFormatLeft": "",
       "vehicleFormatRight": ""
+    },
+    "enemySpottedMarker": {
+      "enabled": true,
+      "format": {
+        "neverSeen": "<font face='$FieldFont' size='24' color='#DDDDDD'>*</font>",
+        "lost": "<font face='$FieldFont' size='24' color='#666666'>*</font>",
+        "revealed": "<font face='$FieldFont' size='24' color='#00DE00'>*</font>",
+        "dead": "",
+        "artillery": {
+          "neverSeen": "<font face='$FieldFont' size='24' color='#DDDDDD'>*</font>",
+          "lost": "<font face='$FieldFont' size='24' color='#666666'>*</font>",
+          "revealed": "<font face='$FieldFont' size='24' color='#00DE00'>*</font>",
+          "dead": ""
+        }
+      }
     }
   },
   "finalStatistic": {
