@@ -1,5 +1,14 @@
---- orig\battleloading.xml	2013-04-18 15:44:19.713390000 +0400
-+++ battleloading.xml	2013-04-18 15:44:19.872399100 +0400
+--- orig\battleloading.xml	2013-04-21 21:19:36.670159300 +0300
++++ battleloading.xml	2013-04-21 21:19:36.851169600 +0300
+@@ -194,7 +194,7 @@
+       </ImportAssets2>
+       <DefineEditText objectID="14" wordWrap="0" multiLine="0" password="0" readOnly="1" autoSize="0" hasLayout="1" notSelectable="1" hasBorder="0" isHTML="0" useOutlines="1" fontRef="9" fontHeight="260" align="0" leftMargin="0" rightMargin="0" indent="0" leading="40" variableName="">
+         <size>
+-          <Rectangle left="-40" right="1310" top="-40" bottom="367"/>
++          <Rectangle left="-48" right="1572" top="-40" bottom="367"/>
+         </size>
+         <color>
+           <Color red="162" green="146" blue="126" alpha="255"/>
 @@ -300,7 +300,7 @@
            </PlaceObject2>
            <PlaceObject2 replace="0" depth="8" objectID="13" name="iconLoader" allflags1="0" allflags2="4">
@@ -9,6 +18,24 @@
              </transform>
              <events>
                <Event flags1="0" flags2="4">
+@@ -348,7 +348,7 @@
+           </PlaceObject2>
+           <PlaceObject3 replace="0" depth="9" objectID="14" name="vehicleField">
+             <transform>
+-              <Transform scaleX="1.200012207031250" scaleY="1.000000000000000" transX="1668" transY="100"/>
++              <Transform scaleX="1.000000000000000" scaleY="1.000000000000000" transX="1668" transY="100"/>
+             </transform>
+             <filters>
+               <DropShadow blurX="2.000000000000000" blurY="2.000000000000000" angle="1.570785522460938" distance="0.000000000000000" strength="0.1992187500000000" innerShadow="0" knockout="0" passes="3">
+@@ -429,7 +429,7 @@
+       <CSMTextSettings objectID="17" useFlashType="1" gridFit="1" thickness="0.000000000000000" sharpness="0.000000000000000"/>
+       <DefineEditText objectID="18" wordWrap="0" multiLine="0" password="0" readOnly="1" autoSize="0" hasLayout="1" notSelectable="1" hasBorder="0" isHTML="0" useOutlines="1" fontRef="9" fontHeight="260" align="1" leftMargin="0" rightMargin="0" indent="0" leading="40" variableName="">
+         <size>
+-          <Rectangle left="-40" right="1310" top="-40" bottom="367"/>
++          <Rectangle left="-48" right="1572" top="-40" bottom="367"/>
+         </size>
+         <color>
+           <Color red="162" green="146" blue="126" alpha="255"/>
 @@ -535,7 +535,7 @@
            </PlaceObject2>
            <PlaceObject2 replace="0" depth="8" objectID="13" name="iconLoader" allflags1="0" allflags2="4">
@@ -18,6 +45,15 @@
              </transform>
              <events>
                <Event flags1="0" flags2="4">
+@@ -583,7 +583,7 @@
+           </PlaceObject2>
+           <PlaceObject3 replace="0" depth="9" objectID="18" name="vehicleField">
+             <transform>
+-              <Transform scaleX="1.200012207031250" scaleY="1.000000000000000" transX="5188" transY="100"/>
++              <Transform scaleX="1.000000000000000" scaleY="1.000000000000000" transX="5798" transY="100"/>
+             </transform>
+             <filters>
+               <DropShadow blurX="2.000000000000000" blurY="2.000000000000000" angle="1.570785522460938" distance="0.000000000000000" strength="0.1992187500000000" innerShadow="0" knockout="0" passes="3">
 @@ -44654,7 +44654,7 @@
          <actions>
            <PushData>
