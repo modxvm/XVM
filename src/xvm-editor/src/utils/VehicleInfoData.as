@@ -5,7 +5,7 @@
 package utils
 {
 
-public class VehicleInfoData
+class VehicleInfoData
 {
     public static var data:Object = {
         // level 1
@@ -17,6 +17,7 @@ public class VehicleInfoData
         china_Ch06_Renault_NC31:        { tiers: [ 1, 2 ],   name: null, short: "" },
 
         // level 2
+        ussr_T_60:                      { tiers: [ 2, 3 ],   name: null, short: "" },
         ussr_BT_2:                      { tiers: [ 2, 3 ],   name: null, short: "" },
         ussr_T_26:                      { tiers: [ 2, 3 ],   name: null, short: "" },
         ussr_Tetrarch_LL:               { tiers: [ 2, 3 ],   name: null, short: "" },
@@ -42,6 +43,7 @@ public class VehicleInfoData
         france_RenaultBS:               { tiers: [ 3, 4 ],   name: null, short: "" },
 
         // level 3
+        ussr_T_70:                      { tiers: [ 3, 5 ],   name: null, short: "" },
         ussr_BT_7:                      { tiers: [ 3, 5 ],   name: null, short: "" },
         ussr_T_46:                      { tiers: [ 3, 5 ],   name: null, short: "" },
         germany_Pz_II_AusfG:            { tiers: [ 3, 5 ],   name: null, short: "" },
@@ -73,6 +75,7 @@ public class VehicleInfoData
         france_Lorraine39_L_AM:         { tiers: [ 4, 6 ],   name: null, short: "" },
 
         // level 4
+        ussr_T80:                       { tiers: [ 4, 8 ],   name: null, short: "" },
         ussr_A_20:                      { tiers: [ 4, 8 ],   name: null, short: "" },
         germany_Pz38_NA:                { tiers: [ 4, 8 ],   name: null, short: "" },
         germany_PzII_Luchs:             { tiers: [ 4, 8 ],   name: null, short: "" },
@@ -81,6 +84,7 @@ public class VehicleInfoData
         ussr_T_28:                      { tiers: [ 4, 6 ],   name: null, short: "" },
         germany_PzIII:                  { tiers: [ 4, 6 ],   name: null, short: "" },
         germany_PzIII_training:         { tiers: [ 4, 6 ],   name: null, short: "" },
+        germany_VK2001DB:               { tiers: [ 4, 6 ],   name: null, short: "" },
         usa_M3_Grant:                   { tiers: [ 4, 6 ],   name: null, short: "" },
         uk_GB07_Matilda:                { tiers: [ 4, 6 ],   name: null, short: "" },
         france_B1:                      { tiers: [ 4, 5 ],   name: null, short: "" },
@@ -135,6 +139,7 @@ public class VehicleInfoData
         germany_VK3001H:                { tiers: [ 6, 8 ],   name: null, short: "" },
         germany_VK3001P:                { tiers: [ 6, 8 ],   name: null, short: "" },
         germany_VK3601H:                { tiers: [ 6, 8 ],   name: null, short: "" },
+        germany_VK3002DB_V1:            { tiers: [ 6, 8 ],   name: null, short: "" },
         usa_M4A3E8_Sherman:             { tiers: [ 6, 8 ],   name: null, short: "" },
         usa_M4A3E8_Sherman_training:    { tiers: [ 6, 8 ],   name: null, short: "" },
         usa_Sherman_Jumbo:              { tiers: [ 6, 8 ],   name: null, short: "" },
@@ -162,6 +167,7 @@ public class VehicleInfoData
         france_Lorraine155_50:          { tiers: [ 9, 10 ],  name: null, short: "" },
 
         // level 7
+        germany_Auf_Panther:            { tiers: [ 8, 11 ],  name: null, short: "" },
         usa_T71:                        { tiers: [ 8, 11 ],  name: null, short: "" },
         france_AMX_13_75:               { tiers: [ 8, 11 ],  name: null, short: "" },
         china_Ch02_Type62:              { tiers: [ 8, 11 ],  name: null, short: "" },
@@ -202,6 +208,7 @@ public class VehicleInfoData
         china_Ch17_WZ131_1_WZ132:       { tiers: [ 9, 12 ],  name: null, short: "" },
         ussr_T_44:                      { tiers: [ 8, 10 ],  name: null, short: "" },
         germany_Panther_II:             { tiers: [ 8, 10 ],  name: null, short: "" },
+        germany_Indien_Panzer:          { tiers: [ 8, 10 ],  name: null, short: "" },
         usa_Pershing:                   { tiers: [ 8, 10 ],  name: null, short: "" },
         usa_T23:                        { tiers: [ 8, 10 ],  name: null, short: "" },
         usa_T69:                        { tiers: [ 8, 10 ],  name: null, short: "" },
@@ -236,6 +243,7 @@ public class VehicleInfoData
         // level 9
         ussr_T_54:                      { tiers: [ 9, 11 ],  name: null, short: "54" },
         germany_E_50:                   { tiers: [ 9, 11 ],  name: null, short: "50" },
+        germany_Pro_Ag_A:               { tiers: [ 9, 11 ],  name: null, short: "" },
         usa_M46_Patton:                 { tiers: [ 9, 11 ],  name: null, short: "Patt" },
         usa_T54E1:                      { tiers: [ 9, 11 ],  name: null, short: "54E1" },
         france_Lorraine40t:             { tiers: [ 9, 11 ],  name: null, short: "" },
@@ -260,8 +268,11 @@ public class VehicleInfoData
 
         // level 10
         ussr_T62A:                      { tiers: [ 10, 12 ], name: null, short: "62" },
+        ussr_Object_907:                { tiers: [ 10, 12 ], name: null, short: "" },
         germany_E50_Ausf_M:             { tiers: [ 10, 12 ], name: null, short: "" },
+        germany_Leopard1:               { tiers: [ 10, 12 ], name: null, short: "" },
         usa_M48A1:                      { tiers: [ 10, 12 ], name: null, short: "" },
+        usa_M60:                        { tiers: [ 10, 12 ], name: null, short: "" },
         france_Bat_Chatillon25t:        { tiers: [ 10, 12 ], name: null, short: "" },
         uk_GB70_FV4202_105:             { tiers: [ 10, 12 ], name: null, short: "" },
         china_Ch19_121:                 { tiers: [ 10, 12 ], name: null, short: "" },
@@ -269,6 +280,7 @@ public class VehicleInfoData
         ussr_IS_7:                      { tiers: [ 10, 12 ], name: null, short: "7" },
         germany_E_100:                  { tiers: [ 10, 12 ], name: null, short: "100" },
         germany_Maus:                   { tiers: [ 10, 12 ], name: null, short: "Maus" },
+        germany_VK7201:                 { tiers: [ 10, 12 ], name: null, short: "" },
         usa_T110:                       { tiers: [ 10, 12 ], name: null, short: "110" },
         usa_T57_58:                     { tiers: [ 10, 12 ], name: null, short: "" },
         france_F10_AMX_50B:             { tiers: [ 10, 12 ], name: null, short: "50B" },
@@ -291,7 +303,8 @@ public class VehicleInfoData
         ussr_BT_SV:                     { tiers: [ 3, 4 ],   name: null, short: "" },
         germany_PzII_J:                 { tiers: [ 3, 4 ],   name: null, short: "" },
         ussr_T_127:                     { tiers: [ 3, 4 ],   name: null, short: "" },
-        usa_Sexton_I:                   { tiers: [ 4, 5 ],   name: null, short: "" },
+        Sexton_I:                       { tiers: [ 4, 5 ],   name: null, short: "" },
+        uk_GB78_Sexton_I:               { tiers: [ 4, 5 ],   name: null, short: "" },
         ussr_T_50:                      { tiers: [ 5, 9 ],   name: null, short: "" },
         ussr_Valentine_LL:              { tiers: [ 4, 4 ],   name: null, short: "" },
         germany_B_1bis_captured:        { tiers: [ 4, 4 ],   name: null, short: "" },
@@ -307,6 +320,7 @@ public class VehicleInfoData
         ussr_KV_220_action:             { tiers: [ 5, 6 ],   name: null, short: "" },
         usa_M4A2E4:                     { tiers: [ 5, 6 ],   name: null, short: "" },
         uk_GB68_Matilda_Black_Prince:   { tiers: [ 5, 6 ],   name: null, short: "" },
+        uk_GB51_Excelsior:              { tiers: [ 5, 6 ],   name: null, short: "" },        
         uk_GB20_Crusader:               { tiers: [ 5, 7 ],   name: null, short: "" },
         ussr_T_50_2:                    { tiers: [ 7, 12 ],  name: null, short: "" },
         usa_M24_Chaffee:                { tiers: [ 7, 12 ],  name: null, short: "" },
