@@ -49,8 +49,8 @@ class wot.Minimap.model.iconTracker.LostPlayers
         /** Keep track of previously lost players to avoid unnecessary event dispatch */
         if (lostPrev == undefined)
             lostPrev = lost;
-            
-        if (lostPrev.toString() != lost.toString())
+        
+        if (!areLostListsEqual(lostPrev, lost))
         {
             lostPrev = lost;
             GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.LOST_PLAYERS_UPDATE, lost));
@@ -72,5 +72,22 @@ class wot.Minimap.model.iconTracker.LostPlayers
         }
         
         return alive;
+    }
+    
+    function areLostListsEqual(a:Array, b:Array):Boolean
+    {
+        if (a.length != b.length)
+        {
+            return false;
+        }
+        var len:Number = a.length;
+        for (var i:Number = 0; i < len; i++)
+        {
+            if (a[i].uid !== b[i].uid)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

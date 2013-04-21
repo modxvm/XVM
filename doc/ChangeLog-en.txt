@@ -1,3 +1,6 @@
+  [FIXES]
+  * fixed rare condition when wrong minimap lost marker was deleted
+  
 XVM-3.5.0
   [FIXES]
   * fixed sorting in After Battle stats

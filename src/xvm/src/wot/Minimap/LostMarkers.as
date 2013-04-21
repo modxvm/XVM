@@ -44,11 +44,13 @@ class wot.Minimap.LostMarkers
         for (var i in lost)
         {
             var lostGuy:Icon = lost[i];
+            
             var depth:Number = markersContainer.getNextHighestDepth();
             var marker:MovieClip = markersContainer.createEmptyMovieClip("marker" + depth, depth);
             /** Set lost position */
             marker._x = lostGuy.pos.x;
             marker._y = lostGuy.pos.y;
+            
             /* New TextField is attached to Minimap at this moment */
             var tf:TextField = LabelAppend.append(marker, lostGuy.uid, MinimapEntry.MINIMAP_ENTRY_NAME_LOST, lostGuy.vehicleClass);
             
