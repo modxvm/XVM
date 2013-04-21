@@ -363,7 +363,7 @@ class wot.utils.DefaultConfig
                 lines: {
                   enabled: true,
                   vehicle: [
-                    { enabled: true, from: 20,  to: 300, inmeters: false, thickness: 0.4, alpha: 35, color: 0xFFCC66 }
+                    { enabled: false, from: 20,  to: 300, inmeters: false, thickness: 0.4, alpha: 35, color: 0xFFCC66 }
                   ],
                   camera: [
                     { enabled: false, from: 50,  to: 100, inmeters: true, thickness: 2,   alpha: 60, color: 0xEE0044},
