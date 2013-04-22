@@ -1,6 +1,6 @@
-import wot.utils.GraphicsUtil;
-import wot.utils.Macros;
-import wot.utils.Utils;
+import com.xvm.GraphicsUtil;
+import com.xvm.Macros;
+import com.xvm.Utils;
 import wot.VehicleMarkersManager.ColorsManager;
 import wot.VehicleMarkersManager.components.damage.DamageTextProxy;
 import wot.VehicleMarkersManager.components.damage.DamageTextAnimation;
@@ -68,9 +68,9 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
         var tf:TextField = createTextField(color, shadowColor, cfg);
 
         tf.htmlText = "<textformat leading='-2'><p class='xvm_damageText'>" + text + "</p></textformat>";
-        //wot.utils.Logger.add("dmg: " + flagToDamageSource(flag) + ", " + proxy.damageDest + " - color=" + color);
-        //wot.utils.Logger.add(tf.htmlText);
-        //wot.utils.Logger.add(XvmHelper.createCSS(cfg.font, color, "xvm_damageText"));
+        //com.xvm.Logger.add("dmg: " + flagToDamageSource(flag) + ", " + proxy.damageDest + " - color=" + color);
+        //com.xvm.Logger.add(tf.htmlText);
+        //com.xvm.Logger.add(XvmHelper.createCSS(cfg.font, color, "xvm_damageText"));
 
         var dummy = new DamageTextAnimation(cfg, tf); // defines and starts
     }

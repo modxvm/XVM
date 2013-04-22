@@ -1,6 +1,6 @@
 import flash.filters.DropShadowFilter;
 import flash.geom.Point;
-import wot.utils.Config;
+import com.xvm.Config;
 import wot.Minimap.MinimapEntry;
 
 class wot.Minimap.model.externalProxy.MapConfig

@@ -3,15 +3,15 @@
  * Dispatches event for config loading if it is not loaded
  */
 import gfx.core.UIComponent;
-import wot.utils.Config;
-import wot.utils.Defines;
-import wot.utils.GlobalEventDispatcher;
-import wot.utils.GraphicsUtil;
-import wot.utils.Logger;
-import wot.utils.Utils;
+import com.xvm.Config;
+import com.xvm.Defines;
+import com.xvm.GlobalEventDispatcher;
+import com.xvm.GraphicsUtil;
+import com.xvm.Logger;
+import com.xvm.Utils;
 import wot.VehicleMarkersManager.IVehicleMarker;
 import wot.VehicleMarkersManager.HitLog;
-import wot.utils.VehicleInfo;
+import com.xvm.VehicleInfo;
 
 /* TODO:
  * Check for performance boost with marker object caching

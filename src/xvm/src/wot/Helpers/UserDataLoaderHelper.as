@@ -1,10 +1,10 @@
 /**
  * Helper class for shared functions used for loading user data in the hangar
  */
-import wot.utils.Cache;
-import wot.utils.GlobalEventDispatcher;
-import wot.utils.StatLoader;
-import wot.utils.Utils;
+import com.xvm.Cache;
+import com.xvm.GlobalEventDispatcher;
+import com.xvm.StatLoader;
+import com.xvm.Utils;
 
 class wot.Helpers.UserDataLoaderHelper
 {
@@ -12,7 +12,7 @@ class wot.Helpers.UserDataLoaderHelper
         
     public static function LoadUserData(value, isId)
     {
-        //wot.utils.Logger.add("add queue: " + value);
+        //com.xvm.Logger.add("add queue: " + value);
         var found = false;
         for (var i = 0; i < queue.length; ++i)
         {
@@ -36,7 +36,7 @@ class wot.Helpers.UserDataLoaderHelper
             return;
 
         var item = queue.shift();
-        //wot.utils.Logger.add("process queue: " + item.value);
+        //com.xvm.Logger.add("process queue: " + item.value);
         GlobalEventDispatcher.addEventListener("userdata_loaded",  UserDataLoaderHelper.onUserDataLoaded);
         StatLoader.LoadUserData(item.value, item.isId);
     }

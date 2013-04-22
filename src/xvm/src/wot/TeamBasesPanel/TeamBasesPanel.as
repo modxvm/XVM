@@ -3,7 +3,7 @@
  */
 
 import wot.TeamBasesPanel.CapConfig;
-import wot.utils.Utils;
+import com.xvm.Utils;
 
 /**
 * Creates and manages CaptureBar instances.

@@ -1,6 +1,6 @@
 import flash.geom.Point;
 import wot.Minimap.MinimapEvent;
-import wot.utils.GlobalEventDispatcher;
+import com.xvm.GlobalEventDispatcher;
 import wot.Minimap.MinimapEntry;
 import wot.Minimap.model.externalProxy.IconsProxy;
 import wot.Minimap.model.externalProxy.MapConfig;

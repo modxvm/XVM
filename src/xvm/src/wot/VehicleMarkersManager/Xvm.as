@@ -3,14 +3,14 @@
  */
 import com.greensock.OverwriteManager;
 import com.greensock.plugins.*;
-import wot.utils.Config;
-import wot.utils.Defines;
-import wot.utils.GlobalEventDispatcher;
-import wot.utils.Logger;
-import wot.utils.Macros;
-import wot.utils.StatData;
-import wot.utils.StatLoader;
-import wot.utils.Utils;
+import com.xvm.Config;
+import com.xvm.Defines;
+import com.xvm.GlobalEventDispatcher;
+import com.xvm.Logger;
+import com.xvm.Macros;
+import com.xvm.StatData;
+import com.xvm.StatLoader;
+import com.xvm.Utils;
 import wot.VehicleMarkersManager.ColorsManager;
 import wot.VehicleMarkersManager.ErrorHandler;
 import wot.VehicleMarkersManager.VehicleMarkerProxy;

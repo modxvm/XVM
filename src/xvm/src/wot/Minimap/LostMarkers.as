@@ -1,7 +1,7 @@
 import wot.Minimap.Minimap
 import wot.Minimap.dataTypes.Icon;
 import wot.Minimap.MinimapEntry;
-import wot.utils.GlobalEventDispatcher;
+import com.xvm.GlobalEventDispatcher;
 import wot.Minimap.MinimapEvent;
 import wot.Minimap.staticUtils.LabelAppend;
 

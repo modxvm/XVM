@@ -1,7 +1,7 @@
 import com.greensock.TimelineLite;
 import com.greensock.TweenLite;
 import com.greensock.easing.*;
-//import wot.utils.Logger;
+//import com.xvm.Logger;
 
 class wot.VehicleMarkersManager.components.damage.DamageTextAnimation
 {

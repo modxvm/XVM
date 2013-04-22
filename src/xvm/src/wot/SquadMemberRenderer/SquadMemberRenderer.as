@@ -2,14 +2,14 @@
  * ...
  * @author Mr.A
  */
-import wot.utils.Config;
-import wot.utils.Defines;
-import wot.utils.GlobalEventDispatcher;
-import wot.utils.Locale;
-import wot.utils.Logger;
-import wot.utils.Utils;
-import wot.utils.VehicleInfo;
-import wot.utils.VehicleInfoDataL10n;
+import com.xvm.Config;
+import com.xvm.Defines;
+import com.xvm.GlobalEventDispatcher;
+import com.xvm.Locale;
+import com.xvm.Logger;
+import com.xvm.Utils;
+import com.xvm.VehicleInfo;
+import com.xvm.VehicleInfoDataL10n;
 
 class wot.SquadMemberRenderer.SquadMemberRenderer extends net.wargaming.messenger.controls.SquadMemberRenderer
 {
@@ -17,8 +17,6 @@ class wot.SquadMemberRenderer.SquadMemberRenderer extends net.wargaming.messenge
     private var uid:Number;
     private var m_infoField:TextField;
 
-    private static var __dummy = Logger.dummy; // avoid compiler warning
-    
     function SquadMemberRenderer()
     {
         super();

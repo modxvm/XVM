@@ -1,7 +1,7 @@
-import wot.utils.Config;
-import wot.utils.Defines;
-import wot.utils.GraphicsUtil;
-import wot.utils.IconLoader;
+import com.xvm.Config;
+import com.xvm.Defines;
+import com.xvm.GraphicsUtil;
+import com.xvm.IconLoader;
 import wot.VehicleMarkersManager.ErrorHandler;
 import wot.VehicleMarkersManager.components.ContourIconProxy;
 

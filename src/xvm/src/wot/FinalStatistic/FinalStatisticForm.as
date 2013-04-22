@@ -1,10 +1,10 @@
-﻿import wot.utils.Config;
-import wot.utils.Defines;
-import wot.utils.GlobalEventDispatcher;
-import wot.utils.StatData;
-import wot.utils.StatLoader;
-import wot.utils.StatsLogger;
-import wot.utils.Utils;
+﻿import com.xvm.Config;
+import com.xvm.Defines;
+import com.xvm.GlobalEventDispatcher;
+import com.xvm.StatData;
+import com.xvm.StatLoader;
+import com.xvm.StatsLogger;
+import com.xvm.Utils;
 import wot.FinalStatistic.WinChances;
 
 class wot.FinalStatistic.FinalStatisticForm extends net.wargaming.hangar.FinalStatistic.FinalStatisticForm

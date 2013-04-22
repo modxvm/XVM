@@ -1,4 +1,4 @@
-import wot.utils.Utils;
+import com.xvm.Utils;
 
 class wot.TeamBasesPanel.CapBarModel.OneTankSpeed
 {

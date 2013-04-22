@@ -1,6 +1,16 @@
---- orig\StatisticForm.xml	2013-04-18 15:44:20.542437400 +0400
-+++ StatisticForm.xml	2013-04-18 15:44:20.671444800 +0400
-@@ -40959,7 +40959,7 @@
+--- orig\StatisticForm.xml	2013-04-22 16:00:57.381869500 +0300
++++ StatisticForm.xml	2013-04-22 16:00:57.551869500 +0300
+@@ -14,6 +14,9 @@
+           <Color red="102" green="102" blue="102"/>
+         </color>
+       </SetBackgroundColor>
++      <ImportAssets2 url="xvm.swf" reserved1="1" reserved2="0">
++        <symbols/>
++      </ImportAssets2>
+       <DefineShape3 objectID="1">
+         <bounds>
+           <Rectangle left="0" right="10000" top="0" bottom="500"/>
+@@ -40959,7 +40962,7 @@
          <actions>
            <PushData>
              <items>
@@ -9,7 +19,7 @@
              </items>
            </PushData>
            <GetVariable/>
-@@ -40985,7 +40985,7 @@
+@@ -40985,7 +40988,7 @@
          <actions>
            <PushData>
              <items>

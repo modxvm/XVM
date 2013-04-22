@@ -2,24 +2,22 @@
  * ...
  * @author sirmax2
  */
-import wot.utils.Cache;
-import wot.utils.Config;
-import wot.utils.Defines;
-import wot.utils.GlobalEventDispatcher;
-import wot.utils.IconLoader;
-import wot.utils.Logger;
-import wot.utils.Macros;
-import wot.utils.StatData;
-import wot.utils.StatLoader;
-import wot.utils.PlayerInfo;
-import wot.utils.Utils;
+import com.xvm.Cache;
+import com.xvm.Config;
+import com.xvm.Defines;
+import com.xvm.GlobalEventDispatcher;
+import com.xvm.IconLoader;
+import com.xvm.Logger;
+import com.xvm.Macros;
+import com.xvm.StatData;
+import com.xvm.StatLoader;
+import com.xvm.PlayerInfo;
+import com.xvm.Utils;
 
 // Renders one player, not a bulk.
 
 class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRenderer
 {
-    private static var dummy = Logger.dummy; // avoid import warning
-
     private var m_iconset: IconLoader = null;
     private var m_clanIconLoaded = false;
     private var m_iconLoaded: Boolean = false;

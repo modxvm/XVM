@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project version="2">
+  <!-- Output SWF options -->
+  <output>
+    <movie outputType="Application" />
+    <movie input="" />
+    <movie path="..\..\bin\xvm.swf" />
+    <movie fps="30" />
+    <movie width="800" />
+    <movie height="600" />
+    <movie version="8" />
+    <movie minorVersion="0" />
+    <movie platform="Flash Player" />
+    <movie background="#FFFFFF" />
+    <movie preferredSDK="Mtasc 1.14;1.14;" />
+  </output>
+  <!-- Other classes to be compiled into your SWF -->
+  <classpaths>
+    <class path="xvmlib" />
+    <class path="include-shared" />
+  </classpaths>
+  <!-- Build options -->
+  <build>
+    <option verbose="False" />
+    <option strict="False" />
+    <option infer="True" />
+    <option useMain="False" />
+    <option useMX="False" />
+    <option warnUnusedImports="False" />
+    <option traceMode="Disable" />
+    <option traceFunction="" />
+    <option libraryPrefix="xvm" />
+    <option excludeFile="" />
+    <option groupClasses="True" />
+    <option frame="1" />
+    <option keep="True" />
+  </build>
+  <!-- Class files to compile (other referenced classes will automatically be included) -->
+  <compileTargets>
+    <compile path="xvmlib\com\xvm" />
+    <compile path="xvmlib\com\greensock" />
+    <compile path="xvmlib\com\greensock\core" />
+    <compile path="xvmlib\com\greensock\easing" />
+    <compile path="xvmlib\com\greensock\easing\helpers" />
+    <compile path="xvmlib\com\greensock\plugins" />
+    <compile path="xvmlib\com\greensock\plugins\helpers" />
+    <compile path="xvmlib\com\natecook" />
+    <compile path="xvmlib\com\produxion\util" />
+    <compile path="xvmlib\com\produxion" />
+  </compileTargets>
+  <!-- Assets to embed into the output SWF -->
+  <library>
+    <!-- example: <asset path="..." id="..." update="..." glyphs="..." mode="..." place="..." sharepoint="..." /> -->
+  </library>
+  <!-- Paths to exclude from the Project Explorer tree -->
+  <hiddenPaths>
+    <!-- example: <hidden path="..." /> -->
+  </hiddenPaths>
+  <!-- Executed before build -->
+  <preBuildCommand />
+  <!-- Executed after build -->
+  <postBuildCommand alwaysRun="False" />
+  <!-- Other project options -->
+  <options>
+    <option showHiddenPaths="False" />
+    <option testMovie="Custom" />
+    <option testMovieCommand="..\..\utils\test.sh" />
+  </options>
+  <!-- Plugin storage -->
+  <storage />
+</project>

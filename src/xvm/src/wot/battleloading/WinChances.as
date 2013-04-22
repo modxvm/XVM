@@ -1,7 +1,7 @@
-import wot.utils.Chance;
-import wot.utils.GlobalEventDispatcher;
-import wot.utils.StatsLogger;
-import wot.utils.Utils;
+import com.xvm.Chance;
+import com.xvm.GlobalEventDispatcher;
+import com.xvm.StatsLogger;
+import com.xvm.Utils;
 
 class wot.battleloading.WinChances
 {
@@ -37,13 +37,13 @@ class wot.battleloading.WinChances
             s_chanceText = '<span class="xvm_battleText">' +
                 (Chance.ShowChance(s_chanceField, showExp) || "") +
                 '</span>';
-            //wot.utils.Logger.add(s_chanceText);
+            //com.xvm.Logger.add(s_chanceText);
             if (enableLog == true)
                 StatsLogger.saveStatistics("chance", Chance.lastChances);
         }
         if (s_chanceField.htmlText != s_chanceText)
         {
-            //wot.utils.Logger.add(s_chanceField.htmlText);
+            //com.xvm.Logger.add(s_chanceField.htmlText);
             s_chanceField.html = true;
             s_chanceField.htmlText = s_chanceText;
         }

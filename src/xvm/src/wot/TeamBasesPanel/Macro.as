@@ -1,5 +1,5 @@
 import wot.TeamBasesPanel.CapConfig;
-import wot.utils.Locale;
+import com.xvm.Locale;
 
 /**
  * Class prepares html formatted text.

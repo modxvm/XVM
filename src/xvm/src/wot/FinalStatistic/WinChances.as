@@ -1,6 +1,6 @@
-import wot.utils.Config;
-import wot.utils.Chance;
-import wot.utils.GlobalEventDispatcher;
+import com.xvm.Config;
+import com.xvm.Chance;
+import com.xvm.GlobalEventDispatcher;
 
 class wot.FinalStatistic.WinChances
 {

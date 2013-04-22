@@ -1,5 +1,5 @@
 import wot.PlayersPanel.PlayerListItemRenderer;
-import wot.utils.Config;
+import com.xvm.Config;
 import wot.PlayersPanel.SpotStatusModel;
 
 /**

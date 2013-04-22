@@ -1,6 +1,6 @@
-import wot.utils.GlobalEventDispatcher;
-import wot.utils.Defines;
-import wot.utils.Utils;
+import com.xvm.GlobalEventDispatcher;
+import com.xvm.Defines;
+import com.xvm.Utils;
 
 class wot.battleloading.TipField
 {

@@ -1,6 +1,6 @@
 import net.wargaming.controls.UILoaderAlt;
-import wot.utils.PlayerInfo;
-import wot.utils.Utils;
+import com.xvm.PlayerInfo;
+import com.xvm.Utils;
 import wot.VehicleMarkersManager.components.ClanIconProxy;
 
 class wot.VehicleMarkersManager.components.ClanIconComponent

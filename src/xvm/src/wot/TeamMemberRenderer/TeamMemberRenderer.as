@@ -1,9 +1,9 @@
 import net.wargaming.messenger.MessengerUtils;
-import wot.utils.Cache;
-import wot.utils.Config;
-import wot.utils.GlobalEventDispatcher;
-import wot.utils.Logger;
-import wot.utils.Utils;
+import com.xvm.Cache;
+import com.xvm.Config;
+import com.xvm.GlobalEventDispatcher;
+import com.xvm.Logger;
+import com.xvm.Utils;
 import wot.Helpers.TeamRendererHelper;
 import wot.Helpers.UserDataLoaderHelper;
 
@@ -13,8 +13,6 @@ class wot.TeamMemberRenderer.TeamMemberRenderer extends net.wargaming.messenger.
     private var uid:Number;
     private var m_infoField:TextField;
     private var stat:Object;
-
-    private static var __dummy = Logger.dummy;
 
     function TeamMemberRenderer()
     {

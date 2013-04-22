@@ -1,5 +1,5 @@
 import flash.filters.DropShadowFilter;
-import wot.utils.Utils;
+import com.xvm.Utils;
 
 class wot.VehicleMarkersManager.ErrorHandler
 {

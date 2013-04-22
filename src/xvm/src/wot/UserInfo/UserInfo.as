@@ -1,14 +1,14 @@
 import com.natecook.Sprintf;
-import wot.utils.Cache;
-import wot.utils.Config;
-import wot.utils.Defines;
-import wot.utils.GlobalEventDispatcher;
-import wot.utils.GraphicsUtil;
-import wot.utils.Locale;
-import wot.utils.Logger;
-import wot.utils.StatLoader;
-import wot.utils.VehicleInfo;
-import wot.utils.Utils;
+import com.xvm.Cache;
+import com.xvm.Config;
+import com.xvm.Defines;
+import com.xvm.GlobalEventDispatcher;
+import com.xvm.GraphicsUtil;
+import com.xvm.Locale;
+import com.xvm.Logger;
+import com.xvm.StatLoader;
+import com.xvm.VehicleInfo;
+import com.xvm.Utils;
 import wot.Helpers.UserDataLoaderHelper;
 
 class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
@@ -27,8 +27,6 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
     var m_button1:MovieClip, m_button2:MovieClip, m_button3:MovieClip, m_button4:MovieClip;
     var m_button5:MovieClip, m_button6:MovieClip, m_button7:MovieClip, m_button8:MovieClip;
     var m_dataLoaded:Boolean;
-
-    private static var dummy = Logger.dummy;
 
     function UserInfo()
     {

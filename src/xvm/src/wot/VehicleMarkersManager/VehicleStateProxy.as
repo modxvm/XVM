@@ -1,6 +1,6 @@
 import wot.VehicleMarkersManager.AbstractAccessProxy;
 import wot.VehicleMarkersManager.Xvm;
-//import wot.utils.Logger;
+//import com.xvm.Logger;
 
 class wot.VehicleMarkersManager.VehicleStateProxy extends AbstractAccessProxy
 {

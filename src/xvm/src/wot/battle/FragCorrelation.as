@@ -1,5 +1,5 @@
-import wot.utils.Config;
-import wot.utils.Utils;
+import com.xvm.Config;
+import com.xvm.Utils;
 
 class wot.battle.FragCorrelation
 {

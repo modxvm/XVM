@@ -1,7 +1,7 @@
 import wot.VehicleMarkersManager.AbstractAccessProxy;
 import wot.VehicleMarkersManager.Xvm;
-import wot.utils.VehicleInfo;
-import wot.utils.Config
+import com.xvm.VehicleInfo;
+import com.xvm.Config
 
 class wot.VehicleMarkersManager.components.TurretStatusProxy extends AbstractAccessProxy
 {

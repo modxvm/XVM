@@ -17,7 +17,8 @@
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="src" />
-    <class path="classes" />
+    <class path="include" />
+    <class path="include-shared" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -26,7 +27,7 @@
     <option infer="True" />
     <option useMain="False" />
     <option useMX="False" />
-    <option warnUnusedImports="True" />
+    <option warnUnusedImports="False" />
     <option traceMode="Disable" />
     <option traceFunction="" />
     <option libraryPrefix="" />
@@ -39,8 +40,8 @@
   <compileTargets>
     <compile path="src\wot\crew\tankmen\Crew.as" />
     <compile path="src\wot\crew\tankmen\CrewItemRenderer.as" />
-    <compile path="classes\Mouse.as" />
     <compile path="src\wot\crew\CrewLoader.as" />
+    <compile path="include-shared\Mouse.as" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>

@@ -1,6 +1,6 @@
 import wot.Minimap.dataTypes.Player;
-import wot.utils.VehicleInfo;
-import wot.utils.VehicleInfoData2;
+import com.xvm.VehicleInfo;
+import com.xvm.VehicleInfoData2;
 import wot.Minimap.model.externalProxy.PlayersPanelProxy;
 import wot.Minimap.model.externalProxy.IconsProxy;
 import wot.Minimap.Minimap;

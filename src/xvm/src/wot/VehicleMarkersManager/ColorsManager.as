@@ -2,7 +2,7 @@
  * ...
  * @author Maxim Schedriviy
  */
-import wot.utils.Config;
+import com.xvm.Config;
 import net.wargaming.managers.ColorSchemeManager;
 
 class wot.VehicleMarkersManager.ColorsManager
@@ -59,7 +59,7 @@ class wot.VehicleMarkersManager.ColorsManager
         var key: String = entityName + "_";
         key += !isDead ? "alive_" : isBlowedUp ? "blowedup_" : "dead_";
         key += isColorBlindMode ? "blind" : "normal";
-        //wot.utils.Logger.add("getSystemColor():" + key + " " + Config.s_config.colors.system[key]);
+        //com.xvm.Logger.add("getSystemColor():" + key + " " + Config.s_config.colors.system[key]);
         return parseInt(Config.s_config.colors.system[key]);
     }
 
@@ -96,8 +96,8 @@ class wot.VehicleMarkersManager.ColorsManager
 
     private function onChange()
     {
-        //wot.utils.Logger.addObject(ColorSchemeManager._colors, "colors", 4);
+        //com.xvm.Logger.addObject(ColorSchemeManager._colors, "colors", 4);
         isColorBlindMode = ColorSchemeManager._colors.vm_enemy.aliasColor == "purple";
-        //wot.utils.Logger.add("CB:" + isColorBlindMode);
+        //com.xvm.Logger.add("CB:" + isColorBlindMode);
     }
 }

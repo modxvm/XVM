@@ -3,11 +3,11 @@
  */
 import net.wargaming.messenger.MessengerUtils;
 import net.wargaming.managers.ToolTipManager;
-import wot.utils.Cache;
-import wot.utils.Defines;
-import wot.utils.GraphicsUtil;
-import wot.utils.Locale;
-import wot.utils.Utils;
+import com.xvm.Cache;
+import com.xvm.Defines;
+import com.xvm.GraphicsUtil;
+import com.xvm.Locale;
+import com.xvm.Utils;
 
 class wot.Helpers.TeamRendererHelper
 {

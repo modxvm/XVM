@@ -1,5 +1,5 @@
-import wot.utils.Chance;
-import wot.utils.Utils;
+import com.xvm.Chance;
+import com.xvm.Utils;
 
 class wot.StatisticForm.WinChances
 {
@@ -11,7 +11,7 @@ class wot.StatisticForm.WinChances
 
     public function showWinChances()
     {
-        //wot.utils.Logger.add("showWinChances()");
+        //com.xvm.Logger.add("showWinChances()");
         if (!_root.statsDialog)
             return;
         if (!s_chanceField)
@@ -23,10 +23,10 @@ class wot.StatisticForm.WinChances
         s_chanceText = "<span class='xvm_battleText'>" +
             (Chance.GetChanceText(showExp) || "") +
             "</span>";
-        //wot.utils.Logger.add(s_chanceText);
+        //com.xvm.Logger.add(s_chanceText);
         if (s_chanceField.htmlText != s_chanceText)
         {
-            //wot.utils.Logger.add(s_chanceField.htmlText);
+            //com.xvm.Logger.add(s_chanceField.htmlText);
             s_chanceField.html = true;
             s_chanceField.htmlText = s_chanceText;
         }

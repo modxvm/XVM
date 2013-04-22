@@ -1,6 +1,6 @@
 import com.greensock.TweenLite;
 import com.greensock.easing.Cubic;
-import wot.utils.GraphicsUtil;
+import com.xvm.GraphicsUtil;
 import wot.VehicleMarkersManager.components.HealthBarProxy;
 
 class wot.VehicleMarkersManager.components.HealthBarComponent

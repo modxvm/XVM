@@ -3,11 +3,11 @@
  */
 import net.wargaming.controls.UILoaderAlt;
 import wot.PlayersPanel.SpotStatusView;
-import wot.utils.Config;
-import wot.utils.Defines;
-import wot.utils.IconLoader;
-import wot.utils.PlayerInfo;
-import wot.utils.Utils;
+import com.xvm.Config;
+import com.xvm.Defines;
+import com.xvm.IconLoader;
+import com.xvm.PlayerInfo;
+import com.xvm.Utils;
 
 class wot.PlayersPanel.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRenderer
 {
@@ -52,7 +52,7 @@ class wot.PlayersPanel.PlayerListItemRenderer extends net.wargaming.ingame.Playe
     // override
     function __getColorTransform(schemeName)
     {
-        //wot.utils.Logger.add("data.squad=" + data.squad + " " + data.label + " scheme=" + schemeName);
+        //com.xvm.Logger.add("data.squad=" + data.squad + " " + data.label + " scheme=" + schemeName);
 
         if (Config.s_config.battle.highlightVehicleIcon == false)
         {

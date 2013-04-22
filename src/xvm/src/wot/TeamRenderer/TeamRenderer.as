@@ -1,10 +1,10 @@
 ﻿import net.wargaming.managers.ToolTipManager;
-import wot.utils.Cache;
-import wot.utils.Config;
-import wot.utils.GlobalEventDispatcher;
-import wot.utils.Locale;
-import wot.utils.Logger;
-import wot.utils.Utils;
+import com.xvm.Cache;
+import com.xvm.Config;
+import com.xvm.GlobalEventDispatcher;
+import com.xvm.Locale;
+import com.xvm.Logger;
+import com.xvm.Utils;
 import wot.Helpers.TeamRendererHelper;
 import wot.Helpers.UserDataLoaderHelper;
 
@@ -14,8 +14,6 @@ class wot.TeamRenderer.TeamRenderer extends net.wargaming.messenger.controls.Tea
     private var m_name:String;
     private var m_effField:TextField;
     private var stat:Object;
-
-    private static var dummy = Logger.dummy;
 
     function TeamRenderer()
     {

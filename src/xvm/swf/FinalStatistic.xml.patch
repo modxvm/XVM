@@ -1,6 +1,16 @@
---- orig\FinalStatistic.xml	2013-04-18 15:44:21.090468700 +0400
-+++ FinalStatistic.xml	2013-04-18 15:44:21.435488500 +0400
-@@ -85467,8 +85467,8 @@
+--- orig\FinalStatistic.xml	2013-04-22 16:00:57.961869500 +0300
++++ FinalStatistic.xml	2013-04-22 16:00:58.341869500 +0300
+@@ -14,6 +14,9 @@
+           <Color red="255" green="255" blue="255"/>
+         </color>
+       </SetBackgroundColor>
++      <ImportAssets2 url="xvm.swf" reserved1="1" reserved2="0">
++        <symbols/>
++      </ImportAssets2>
+       <ImportAssets2 url="ComponentsLib.swf" reserved1="1" reserved2="0">
+         <symbols>
+           <Symbol objectID="1" name="Window_BGForm"/>
+@@ -85467,8 +85470,8 @@
                <String value="charAt"/>
                <String value=" "/>
                <String value="\"/>
@@ -11,7 +21,7 @@
                <String value="&#10;"/>
                <String value="&#13;"/>
                <String value="&#9;"/>
-@@ -104480,7 +104480,7 @@
+@@ -104480,7 +104483,7 @@
          <actions>
            <PushData>
              <items>
@@ -20,7 +30,7 @@
              </items>
            </PushData>
            <GetVariable/>
-@@ -104662,7 +104662,7 @@
+@@ -104662,7 +104665,7 @@
          <actions>
            <PushData>
              <items>
@@ -29,7 +39,7 @@
              </items>
            </PushData>
            <GetVariable/>
-@@ -104740,7 +104740,7 @@
+@@ -104740,7 +104743,7 @@
          <actions>
            <PushData>
              <items>
@@ -38,7 +48,7 @@
              </items>
            </PushData>
            <GetVariable/>
-@@ -104818,7 +104818,7 @@
+@@ -104818,7 +104821,7 @@
          <actions>
            <PushData>
              <items>

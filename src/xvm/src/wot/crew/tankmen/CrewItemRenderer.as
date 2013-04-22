@@ -2,7 +2,7 @@
  * 
  * @author LEMAXHO
  */
-import wot.utils.Locale;
+import com.xvm.Locale;
 import wot.crew.CrewLoader;
 
 class wot.crew.tankmen.CrewItemRenderer extends net.wargaming.tankmen.CrewItemRenderer

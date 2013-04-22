@@ -1,4 +1,4 @@
-import wot.utils.Config;
+import com.xvm.Config;
 import wot.VehicleMarkersManager.VehicleStateProxy;
 
 class wot.VehicleMarkersManager.VehicleState

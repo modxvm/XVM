@@ -1,5 +1,5 @@
-import wot.utils.Logger;
-import wot.utils.Config;
+import com.xvm.Logger;
+import com.xvm.Config;
 import wot.Minimap.model.mapSize.MapSizeBase;
 
 /**

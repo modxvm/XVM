@@ -2,13 +2,13 @@
  * ...
  * @author Maxim Schedriviy
  */
-import wot.utils.Config;
-import wot.utils.Defines;
-import wot.utils.GraphicsUtil;
-import wot.utils.Locale;
-import wot.utils.Logger;
-import wot.utils.Utils;
-import wot.utils.VehicleInfo;
+import com.xvm.Config;
+import com.xvm.Defines;
+import com.xvm.GraphicsUtil;
+import com.xvm.Locale;
+import com.xvm.Logger;
+import com.xvm.Utils;
+import com.xvm.VehicleInfo;
 
 class wot.VehicleMarkersManager.HitLog
 {
@@ -65,7 +65,7 @@ class wot.VehicleMarkersManager.HitLog
     public function update(delta:Number, curHealth:Number, vehicleName:String, icon:String, playerName:String,
         level:Number, damageType:String, vtype:String, vtypeColor:String, dead:Boolean)
     {
-        //wot.utils.Logger.add(delta + " " + vehicleName + " " + playerName + " " + level);
+        //com.xvm.Logger.add(delta + " " + vehicleName + " " + playerName + " " + level);
 
         total += delta;
 
@@ -164,7 +164,7 @@ class wot.VehicleMarkersManager.HitLog
 
     private function formatText(format:String, playerName:String):String
     {
-        // TODO: Macros optimization - use wot.utils.Macros class
+        // TODO: Macros optimization - use com.xvm.Macros class
 
         if (format.indexOf("{{") == -1)
             return format;

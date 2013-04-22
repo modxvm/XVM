@@ -2,12 +2,13 @@
  * @author LEMAXHO
  */
 import com.xvm.JSONx;
-import wot.utils.Comm;
-import wot.utils.Config;
-import wot.utils.Defines;
-import wot.utils.GlobalEventDispatcher;
-import wot.utils.Utils;
+import com.xvm.Comm;
+import com.xvm.Config;
+import com.xvm.Defines;
+import com.xvm.GlobalEventDispatcher;
+import com.xvm.Utils;
 import wot.crew.CrewLoader;
+import net.wargaming.utils.DebugUtils;
 
 class wot.crew.tankmen.Crew extends net.wargaming.tankmen.Crew
 {
@@ -18,7 +19,7 @@ class wot.crew.tankmen.Crew extends net.wargaming.tankmen.Crew
         super();
 
         Utils.TraceXvmModule("Crew");
-        
+
         pingCommandCounter = 0;
 
         GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
@@ -57,7 +58,7 @@ class wot.crew.tankmen.Crew extends net.wargaming.tankmen.Crew
                 Utils.createCSS("xvm_ping", 0xCCCCCC, "$FieldFont", 10, "left", false, false));
         }
         
-        wot.utils.Logger.addObject(event);
+        com.xvm.Logger.addObject(event);
 
         var str:Array = [];
         var res = JSONx.parse(event.str);
@@ -66,14 +67,14 @@ class wot.crew.tankmen.Crew extends net.wargaming.tankmen.Crew
         str.sort();
         _root["__xvm_pingTextField"].htmlText = "<span class='xvm_ping'>" + str.join("\n") + "</span>";
 
-        //wot.utils.Logger.add(str.join("\n"));
+        //com.xvm.Logger.add(str.join("\n"));
     }
     
     // override
     function setTankmen(data)
     {
         super.setTankmen(data);
-        //wot.utils.Logger.addObject(list, "list", 2);
+        //com.xvm.Logger.addObject(list, "list", 2);
         CrewLoader.s_defaultCrew = list._dataProvider; // setting the crewlist
     }
 	

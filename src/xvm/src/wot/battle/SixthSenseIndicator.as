@@ -6,13 +6,11 @@ import com.greensock.TweenLite;
 import com.greensock.TimelineLite;
 import com.greensock.easing.Linear;
 import net.wargaming.controls.UILoaderAlt;
-import wot.utils.IconLoader;
-import wot.utils.Logger;
+import com.xvm.IconLoader;
+import com.xvm.Logger;
 
 class wot.battle.SixthSenseIndicator
 {
-    private static var dummy = Logger.dummy;
-
     var icon:UILoaderAlt;
 
     public function SixthSenseIndicator()

@@ -1,4 +1,4 @@
-﻿import wot.utils.Config;
+﻿import com.xvm.Config;
 
 class wot.FinalStatistic.TeamStats extends net.wargaming.hangar.FinalStatistic.TeamStats // gfx.core.UIComponent
 {
@@ -11,7 +11,7 @@ class wot.FinalStatistic.TeamStats extends net.wargaming.hangar.FinalStatistic.T
             return;
         parent["__xvm_TeamStats_initialized"] = true;
 
-        wot.utils.Logger.add("Sort");
+        com.xvm.Logger.add("Sort");
         
         var sortInfo;
         switch (Config.s_config.finalStatistic.sortColumn)

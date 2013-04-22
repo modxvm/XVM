@@ -3,17 +3,17 @@
  * @author sirmax2
  */
 import net.wargaming.controls.UILoaderAlt;
-import wot.utils.Cache;
-import wot.utils.Config;
-import wot.utils.Defines;
-import wot.utils.GlobalEventDispatcher;
-import wot.utils.IconLoader;
-import wot.utils.Logger;
-import wot.utils.Macros;
-import wot.utils.PlayerInfo;
-import wot.utils.StatData;
-import wot.utils.StatLoader;
-import wot.utils.Utils;
+import com.xvm.Cache;
+import com.xvm.Config;
+import com.xvm.Defines;
+import com.xvm.GlobalEventDispatcher;
+import com.xvm.IconLoader;
+import com.xvm.Logger;
+import com.xvm.Macros;
+import com.xvm.PlayerInfo;
+import com.xvm.StatData;
+import com.xvm.StatLoader;
+import com.xvm.Utils;
 import wot.StatisticForm.WinChances;
 
 class wot.StatisticForm.BattleStatItemRenderer extends net.wargaming.BattleStatItemRenderer

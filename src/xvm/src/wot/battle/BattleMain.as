@@ -7,19 +7,17 @@ import com.greensock.OverwriteManager;
 import com.greensock.plugins.TweenPlugin;
 import com.greensock.plugins.TintPlugin;
 import wot.battle.BattleInputHandler;
-import wot.utils.Config;
-import wot.utils.GlobalEventDispatcher;
-import wot.utils.Logger;
-import wot.utils.StatLoader;
-import wot.utils.Utils;
+import com.xvm.Config;
+import com.xvm.GlobalEventDispatcher;
+import com.xvm.Logger;
+import com.xvm.StatLoader;
+import com.xvm.Utils;
 import wot.battle.SixthSenseIndicator;
 
 class wot.battle.BattleMain
 {
     static var instance: BattleMain;
     var sixthSenseIndicator:SixthSenseIndicator;
-
-    private static var dummy = Logger.dummy;
 
     private static var soundManager = new net.wargaming.managers.SoundManager();
     private static var width, height;

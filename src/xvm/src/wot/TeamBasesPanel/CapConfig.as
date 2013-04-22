@@ -1,4 +1,4 @@
-import wot.utils.Config;
+import com.xvm.Config;
 
 class wot.TeamBasesPanel.CapConfig
 {

@@ -2,11 +2,11 @@
  * Base xvm class with varous basic functions (like macros substitutions).
  * Class don't contain any workflow logic.
  */
-//import wot.utils.Cache;
-import wot.utils.GraphicsUtil;
-import wot.utils.Logger;
-import wot.utils.Macros;
-import wot.utils.Utils;
+//import com.xvm.Cache;
+import com.xvm.GraphicsUtil;
+import com.xvm.Logger;
+import com.xvm.Macros;
+import com.xvm.Utils;
 import wot.VehicleMarkersManager.ColorsManager;
 import wot.VehicleMarkersManager.ErrorHandler;
 import wot.VehicleMarkersManager.VehicleMarkerProxy;

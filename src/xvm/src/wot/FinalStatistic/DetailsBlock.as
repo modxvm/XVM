@@ -1,7 +1,7 @@
-﻿import wot.utils.Config;
-import wot.utils.GlobalEventDispatcher;
-import wot.utils.Locale;
-import wot.utils.Utils;
+﻿import com.xvm.Config;
+import com.xvm.GlobalEventDispatcher;
+import com.xvm.Locale;
+import com.xvm.Utils;
 
 class wot.FinalStatistic.DetailsBlock extends net.wargaming.hangar.FinalStatistic.view.DetailsBlock
 {

@@ -1,5 +1,5 @@
 import wot.Minimap.Minimap;
-import wot.utils.Utils;
+import com.xvm.Utils;
 import wot.Minimap.MinimapEntry;
 
 /**
