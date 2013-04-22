@@ -72,7 +72,6 @@ class com.xvm.VehicleInfoData
         france_Lorraine39_L_AM:         { tiers: [ 4, 6 ],   name: null, short: "" },
 
         // level 4
-        ussr_T80:                       { tiers: [ 4, 8 ],   name: null, short: "" },
         ussr_A_20:                      { tiers: [ 4, 8 ],   name: null, short: "" },
         germany_Pz38_NA:                { tiers: [ 4, 8 ],   name: null, short: "" },
         germany_PzII_Luchs:             { tiers: [ 4, 8 ],   name: null, short: "" },
@@ -309,6 +308,7 @@ class com.xvm.VehicleInfoData
         france_AMX40:                   { tiers: [ 4, 6 ],   name: null, short: "" },
         uk_GB04_Valentine:              { tiers: [ 4, 6 ],   name: null, short: "" },
         uk_GB60_Covenanter:             { tiers: [ 4, 6 ],   name: null, short: "" },
+        ussr_T80:                       { tiers: [ 4, 6 ],   name: null, short: "" },
         germany_PzIV_Hydro:             { tiers: [ 5, 6 ],   name: null, short: "" },
         ussr_Churchill_LL:              { tiers: [ 5, 6 ],   name: null, short: "" },
         ussr_Matilda_II_LL:             { tiers: [ 5, 6 ],   name: null, short: "" },
