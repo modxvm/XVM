@@ -2,6 +2,7 @@
  * ...
  * @author sirmax2
  */
+import com.xvm.JSONxLoader;
 import wot.utils.Comm;
 import wot.utils.Defines;
 import wot.utils.GlobalEventDispatcher;
@@ -23,14 +24,12 @@ class wot.utils.Config
 
     // Private vars
     private static var s_loading: Boolean = false;
-    private static var s_load_legacy_config: Boolean = false;
-    private static var s_config_filename: String = "";
     private static var s_src: String = "";
 
     // Load XVM mod config; config data is shared between all marker instances, so
     // it should be loaded only once per session. s_loaded flag indicates that
     // we've already initialized config loading process.
-    public static function LoadConfig(src: String, filename: String, legacy: Boolean)
+    public static function LoadConfig(src: String)
     {
         //Logger.add("TRACE: LoadConfig()");
         if (s_loaded)
@@ -39,8 +38,6 @@ class wot.utils.Config
             return;
         }
         s_src = src || "";
-        s_config_filename = filename || Defines.DEFAULT_CONFIG_NAME;
-        s_load_legacy_config = legacy ? true : false;
         ReloadConfig();
     }
 
@@ -52,116 +49,88 @@ class wot.utils.Config
         s_loading = true;
 
         Config.s_config = wot.utils.DefaultConfig.config;
-        if (s_load_legacy_config)
-            ReloadLegacyConfig();
-        else
-            ReloadXvmConfig();
-    }
 
-    private static function ReloadLegacyConfig()
-    {
-        //Logger.add("TRACE: Config.ReloadLegacyConfig()");
-        var xml:XML = new XML();
-        xml.ignoreWhite = true;
-        xml.onLoad = function(success: Boolean)
-        {
-            var finallyBugWorkaround: Boolean = false; // Workaround: finally block have a bug - it can be called twice.
-            try
-            {
-                if (!success)
-                    return;
-
-                var config = com.produxion.util.XML2Object.deserialize(xml);
-                config = config["overTargetMarkers"];
-                if (!config)
-                    return;
-
-                config = wot.utils.OTMConfigConverter.convert(config);
-                Config.s_config = Config.MergeConfigs(Config.FixConfig(config), Config.s_config);
-                //Logger.addObject(Config.s_config.markers.enemy.dead);
-            }
-            finally
-            {
-                if (finallyBugWorkaround)
-                    return;
-                finallyBugWorkaround = true;
-                Config.ReloadXvmConfig();
-            }
-        };
-        xml.load("OTMData.xml");
-    }
-
-    private static function ReloadXvmConfig()
-    {
         //Logger.add("TRACE: Config.ReloadXvmConfig()");
-        Comm.Sync(s_config_filename, null, null, ReloadXvmConfigCallback);
+        JSONxLoader.LoadAndParse(Defines.XVM_ROOT + Defines.CONFIG_FILE_NAME, null, ReloadXvmConfigCallback);
     }
 
-    private static function ReloadXvmConfigCallback(event) {
+    private static function ReloadXvmConfigCallback(event)
+    {
 //Logger.add("ReloadXvmConfigCallback::start");
-            var finallyBugWorkaround: Boolean = false; // Workaround: finally block have a bug - it can be called twice times.
-            try
+        if (event.error != null && event.error.type == "NO_FILE")
+        {
+            if (event.filename == Defines.CONFIG_FILE_NAME)
             {
-                Config.ProcessXvmConfig(event.str);
-                Config.TuneupConfig();
+                // xvm.xc not found, try to load legacy config XVM.xvmconf
+                JSONxLoader.LoadAndParse(Defines.CONFIG_FILE_NAME_XVMCONF, null, ReloadXvmConfigCallback);
+                return;
             }
-            finally
+            else
             {
-//Logger.add("ReloadXvmConfigCallback::finally:start");
-                if (finallyBugWorkaround)
-                    return;
-                finallyBugWorkaround = true;
-                Config.ReloadGameRegion();
-//Logger.add("ReloadXvmConfigCallback::finally::end");
+                // xvm.xc is primary config
+                event.filename = Defines.CONFIG_FILE_NAME;
             }
-//Logger.add("ReloadXvmConfigCallback::end");
         }
 
-    private static function ProcessXvmConfig(str: String)
-    {
-        if (str)
+        var finallyBugWorkaround: Boolean = false; // Workaround: finally block have a bug - it can be called twice times.
+        try
         {
-            try
-            {
-                var config = com.xvm.JSON.parse(str);
+            Config.ProcessXvmConfig(event);
+            Config.TuneupConfig();
+        }
+        finally
+        {
+//Logger.add("ReloadXvmConfigCallback::finally:start");
+            if (finallyBugWorkaround)
+                return;
+            finallyBugWorkaround = true;
+            Config.ReloadGameRegion();
+//Logger.add("ReloadXvmConfigCallback::finally::end");
+        }
+//Logger.add("ReloadXvmConfigCallback::end");
+    }
 
-                if (!config)
-                {
-                    var text = "Error parsing config file. Using default settings.";
-                    GlobalEventDispatcher.dispatchEvent( { type: "set_info", error: text } );
-                    Logger.add(text);
-                }
-                else
-                {
-                    Config.s_config = Config.MergeConfigs(Config.FixConfig(config), Config.s_config);
-                    //Logger.addObject(Config.s_config);
-                    GlobalEventDispatcher.dispatchEvent({ type: "set_info" }); // Just show version
-                }
-            }
-            catch (ex)
+    private static function ProcessXvmConfig(event)
+    {
+        if (event.error)
+        {
+            var ex = event.error;
+
+            var text:String = "Error loading config file '" + event.filename + "': ";
+
+            if (ex.at == null)
+                text += (ex.name != null ? Utils.trim(ex.name) + ": " : "") + Utils.trim(ex.message);
+            else
             {
-                var head = ex.at > 0 ? str.substring(0, ex.at) : "";
+                var head = ex.at > 0 ? ex.text.substring(0, ex.at) : "";
                 head = head.split("\r").join("").split("\n").join("");
                 while (head.indexOf("  ") != -1)
                     head = head.split("  ").join(" ");
                 head = head.substr(head.length - 75, 75);
 
-                var tail = (ex.at + 1 < str.length) ? str.substring(ex.at + 1, str.length) : "";
+                var tail = (ex.at + 1 < ex.text.length) ? ex.text.substring(ex.at + 1, ex.text.length) : "";
                 tail = tail.split("\r").join("").split("\n").join("");
                 while (tail.indexOf("  ") != -1)
                     tail = tail.split("  ").join(" ");
 
-                var text:String = "Error loading config file: " +
-                    "[" + ex.at + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " +
-                    head + ">>>" + str.charAt(ex.at) + "<<<" + tail;
-                GlobalEventDispatcher.dispatchEvent( { type: "set_info", error: text } );
-                Logger.add(String(text).substr(0, 200));
+                var fn = Utils.startsWith(Defines.XVM_ROOT, event.filename) ? event.filename.substring(Defines.XVM_ROOT.length) : event.filename;
+                text += "[" + ex.at + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " +
+                    head + ">>>" + ex.text.charAt(ex.at) + "<<<" + tail;
             }
+            GlobalEventDispatcher.dispatchEvent( { type: "set_info", error: text } );
+            Logger.add(String(text).substr(0, 200));
+            return;
         }
-        else
+            
+        if (!event.data)
         {
-          GlobalEventDispatcher.dispatchEvent({ type: "set_info", warning: "" });
+            GlobalEventDispatcher.dispatchEvent( { type: "set_info", warning: "" } );
+            return;
         }
+
+        Config.s_config = Config.MergeConfigs(Config.FixConfig(event.data), Config.s_config);
+        //Logger.addObject(Config.s_config);
+        GlobalEventDispatcher.dispatchEvent({ type: "set_info" }); // Just show version
     }
 
     private static function ReloadGameRegion()

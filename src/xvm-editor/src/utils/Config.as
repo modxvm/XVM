@@ -4,8 +4,6 @@
  */
 package utils
 {
-    import mx.collections.XMLListCollection;
-
     import utils.Defines;
     import utils.Utils;
 

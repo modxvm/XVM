@@ -19,11 +19,14 @@ FILES="
   TeamRenderer.swf
   UserInfo.swf
   VehicleMarkersManager.swf
-  XVM.xvmconf XVM.css OTMData.xml"
+  XVM.xvmconf"
+
+DIRS="xvm"
 
 cd $(dirname $(realpath $(cygpath --unix $0)))
 
-SWF_DIR="$WOT_DIRECTORY/res_mods/$GAME_VER/gui/flash"
+RES_MODS_DIR="$WOT_DIRECTORY/res_mods"
+SWF_DIR="$RES_MODS_DIR/$GAME_VER/gui/flash"
 
 mkdir -p "$SWF_DIR"
 
@@ -36,6 +39,19 @@ copy_file()
   }
 }
 
-for file in $FILES; do
-  copy_file $file
+copy_dir()
+{
+  [ -e "$RES_MODS_DIR/$1" ] && rm -rf "$RES_MODS_DIR/$1"
+  [ -d "../bin/$1" ] && {
+    echo "=> $1"
+    cp -rp "../bin/$1" "$RES_MODS_DIR"
+  }
+}
+
+for n in $FILES; do
+  copy_file $n
+done
+
+for n in $DIRS; do
+  copy_dir $n
 done

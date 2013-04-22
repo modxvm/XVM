@@ -11,7 +11,6 @@ package controls
     import mx.events.FlexEvent;
     import flash.display.DisplayObject;
     import flash.events.MouseEvent;
-    import flash.xml.*;
 
     import mx.core.IDataRenderer;
 

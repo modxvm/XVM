@@ -27,6 +27,6 @@ class wot.utils.Logger
             depth = 1;
         if (depth > 10)
             depth = 10;
-        add((name || "[obj]") + ": " + com.xvm.JSON.stringifyDepth(obj, depth));
+        add((name || "[obj]") + ": " + com.xvm.JSONx.stringifyDepth(obj, depth));
     }
 }

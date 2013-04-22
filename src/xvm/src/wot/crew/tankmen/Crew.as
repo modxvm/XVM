@@ -1,7 +1,7 @@
 ﻿/**
  * @author LEMAXHO
  */
-import com.xvm.JSON;
+import com.xvm.JSONx;
 import wot.utils.Comm;
 import wot.utils.Config;
 import wot.utils.Defines;
@@ -60,7 +60,7 @@ class wot.crew.tankmen.Crew extends net.wargaming.tankmen.Crew
         wot.utils.Logger.addObject(event);
 
         var str:Array = [];
-        var res = JSON.parse(event.str);
+        var res = JSONx.parse(event.str);
         for (var i in res)
             str.push(i + ": " + res[i])
         str.sort();

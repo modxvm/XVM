@@ -20,6 +20,15 @@ public class DefaultConfig
                 gameVersion: Defines.WOT_VERSION,
                 modMinVersion: Defines.XVM_VERSION
             },
+            hangar: {
+                // Show ping to the servers
+                pingServers: {
+                  enabled: true,
+                  updateInterval: 3000, // msec
+                  x: 100,
+                  y: 0
+                }
+            },
             battle: {
                 mirroredVehicleIcons: true,      // Set false for alternative tank icon mirroring.
                 showPostmortemTips: true,        // Popup tooltip panel after death.
@@ -312,7 +321,7 @@ public class DefaultConfig
                 circles: {
                   enabled: true,
                   major: [
-                    { enabled: true, distance: 445, thickness: 1, alpha: 40, color: 0x000000 },
+                    { enabled: true, distance: 445, thickness: 0.75, alpha: 45, color: 0xFFCC66 },
                     { enabled: false, distance: 50, thickness: 2.5, alpha: 100, color: 0xFFFFFF }
                   ],
                   special: [
@@ -357,21 +366,17 @@ public class DefaultConfig
                   color: "0xFFFFFF"
                 },
                 lines: {
-                  enabled: false,
+                  enabled: true,
                   vehicle: [
-                    { enabled: true, from: 50,  to: 100, inmeters: true, thickness: 2,   alpha: 60, color: 0x44EE44},
-                    { enabled: true, from: 200, to: 300, inmeters: true, thickness: 1.5, alpha: 45, color: 0x44EE44},
-                    { enabled: true, from: 350, to: 445, inmeters: true, thickness: 1,   alpha: 30, color: 0x44EE44}
+                    { enabled: false, from: 20,  to: 300, inmeters: false, thickness: 0.4, alpha: 35, color: 0xFFCC66 }
                   ],
                   camera: [
-                    { enabled: true, from: 50,  to: 100, inmeters: true, thickness: 2,   alpha: 60, color: 0xEE0044},
-                    { enabled: true, from: 200, to: 300, inmeters: true, thickness: 1.5, alpha: 45, color: 0xEE0044},
-                    { enabled: true, from: 350, to: 445, inmeters: true, thickness: 1,   alpha: 30, color: 0xEE0044}
+                    { enabled: false, from: 50,  to: 100, inmeters: true, thickness: 2,   alpha: 60, color: 0xEE0044},
+                    { enabled: false, from: 200, to: 300, inmeters: true, thickness: 1.5, alpha: 45, color: 0xEE0044},
+                    { enabled: false, from: 350, to: 445, inmeters: true, thickness: 1,   alpha: 30, color: 0xEE0044}
                   ],
                   traverseAngle: [
-                    { enabled: true, from: 50,  to: 100, inmeters: true, thickness: 2,   alpha: 60, color: 0xFFFFFF},
-                    { enabled: true, from: 200, to: 300, inmeters: true, thickness: 1.5, alpha: 45, color: 0xFFFFFF},
-                    { enabled: true, from: 350, to: 445, inmeters: true, thickness: 1,   alpha: 30, color: 0xFFFFFF}
+                    { enabled: true, from: 20,  to: 300, inmeters: false, thickness: 0.4, alpha: 35, color: 0xFFCC66}
                   ]
                 }
             },

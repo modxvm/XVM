@@ -3,19 +3,15 @@
 import flash.events.Event;
 import flash.events.IOErrorEvent;
 import flash.net.FileFilter;
-import flash.net.FileReference;
+import flash.net.FileReferenceList;
 
-import mx.collections.XMLListCollection;
 import mx.managers.PopUpManager;
-import mx.utils.ObjectUtil;
 
 import utils.Config;
 import utils.DefaultConfig;
-import utils.OTMConfigConverter;
-import utils.PatchedXMLDecoder;
 import utils.Utils;
 
-private var fr:FileReference;
+private var frl:FileReferenceList;
 private var lastFileName:String;
 private var merge:Boolean;
 private var mergeDialog:MergeDialog;
@@ -26,23 +22,26 @@ private var config:Object;
 private function LoadConfig(merge:Boolean):void
 {
     this.merge = merge;
-	fr = new FileReference();
-	fr.addEventListener(Event.SELECT, onFileLoadSelect);
-	fr.addEventListener(Event.CANCEL,onCancelLoad);
-	fr.browse([ new FileFilter(_("FileFilterText"), "*.xvmconf; *.xml") ]);
+	frl = new FileReferenceList();
+	frl.addEventListener(Event.SELECT, onFileLoadSelect);
+	frl.addEventListener(Event.CANCEL,onCancelLoad);
+	frl.browse([ new FileFilter(_("FileFilterText"), "*.xvmconf") ]);
 }
 
 private function onFileLoadSelect(e:Event):void
 {
-	lastFileName = fr.name;
-	fr.addEventListener(Event.COMPLETE, onLoadComplete);
-	fr.addEventListener(IOErrorEvent.IO_ERROR, onLoadError);
-	fr.load();
+	lastFileName = frl.fileList[0].name;
+	for each (var fr in frl)
+	{
+		fr.addEventListener(Event.COMPLETE, onLoadComplete);
+		fr.addEventListener(IOErrorEvent.IO_ERROR, onLoadError);
+		fr.load();
+	}
 }
 
 private function onCancelLoad(e:Event):void
 {
-	fr = null;
+	frl = null;
 }
 
 private function onLoadComplete(e:Event):void
@@ -50,10 +49,7 @@ private function onLoadComplete(e:Event):void
     try
     {
     	var data:String = fr.data.readUTFBytes(fr.data.bytesAvailable);
-        config = Utils.endsWith(".xml", fr.name.toLowerCase())
-            ? OTMConfigConverter.convert((new PatchedXMLDecoder()).decode(data))
-            : utils.JSON.parse(data)
-        config = Config.FixConfig(config);
+        config = Config.FixConfig(utils.JSON.parse(data));
 
         if (!merge)
             onLoadComplete2(null);
@@ -103,11 +99,6 @@ private function onLoadComplete2(e:Event):void
     }
 }
 
-private function clenupConfig(config:*, data:XMLList):*
-{
-
-}
-
 private function onLoadError(e:IOErrorEvent):void
 {
 	debug(_("LoadFileError") + ": " + e.text);
@@ -122,7 +113,7 @@ private function SaveConfig():void
 	fr.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
 	// Serialize and add UTF-8 BOM
 	var str:String = "\uFEFF" + utils.JSON.stringify(Config.s_config);
-	fr.save(str, lastFileName.toLowerCase() == "otmdata.xml" ? "XVM.xvmconf" : lastFileName);
+	fr.save(str, lastFileName);
 }
 
 private function onFileSave(e:Event):void

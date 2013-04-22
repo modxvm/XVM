@@ -1,4 +1,4 @@
-import com.xvm.JSON;
+import com.xvm.JSONx;
 import wot.utils.Defines;
 import wot.utils.Logger;
 import wot.utils.Sandbox;
@@ -98,7 +98,7 @@ class wot.utils.Comm
                 return;
             }
 
-            var response = JSON.parse(str);
+            var response = JSONx.parse(str);
 
             if (response.status == "ERROR")
             {

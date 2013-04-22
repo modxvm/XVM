@@ -1,5 +1,6 @@
 ﻿/*
 Copyright (c) 2005 JSON.org
+Copyright (c) 2013 m.schedriviy@gmail.com (JSONx extension)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +21,17 @@ SOFTWARE.
 */
 
 /*
+ JSONx extensions:
+    1. Comments:
+        Block: /* *_/
+        Line: //
+    2. References:
+        Internal: "obj": ${"path.to.object"}
+        External: "obj": ${"filename":"path.to.object"}
+        Root object: "obj": ${"."}
+*/
+
+/*
 ported to Actionscript May 2005 by Trannie Carter <tranniec@designvox.com>, wwww.designvox.com
 USAGE:
 	try {
@@ -31,7 +43,10 @@ USAGE:
 
 */
 
-class com.xvm.JSON {
+package com.xvm
+{
+
+class JSONx {
 
   static var maxDepth: Number = undefined;
   static var curDepth: Number = undefined;
@@ -81,14 +96,14 @@ class com.xvm.JSON {
                           s += compact ? ',' : ',\n';
                       }
                       s += compact ?
-					       stringify(i, "", true) + ':' + v :
-						   indent + "  " + stringify(i, indent + "  ") + ': ' + v;
+                        stringify(i, "", true) + ':' + v :
+                        indent + "  " + stringify(i, indent + "  ") + ': ' + v;
                   }
               }
               curDepth--;
               return '{' +
                 (arg instanceof MovieClip || arg instanceof TextField ? "// " + arg.toString() : "") +
-			    (compact ? s + '}' : '\n' + s + '\n' + indent + '}');
+                    (compact ? s + '}' : '\n' + s + '\n' + indent + '}');
           }
       }
       curDepth--;
@@ -147,14 +162,14 @@ class com.xvm.JSON {
   static function parse(text:String):Object {
     if (!text || text == "")
         return null;
-    var ta: Array = text.split('');
+    var ta: Array = text.split(''); // charAt is much slower in Flash then array
     var at = 0;
     var ch = ' ';
     var _value:Function;
 
     var _error:Function = function (m) {
         throw {
-            name: 'JSONError',
+            name: 'JSONxError',
             message: m,
             at: at - 1,
             text: text
@@ -234,14 +249,14 @@ class com.xvm.JSON {
                             t = parseInt(_next(), 16);
                             if (!isFinite(t)) {
                                 outer = true;
-                                                                    break;
+                                break;
                             }
                             u = u * 16 + t;
                         }
-                                                    if(outer) {
-                                                            outer = false;
-                                                            break;
-                                                    }
+                        if(outer) {
+                            outer = false;
+                            break;
+                        }
                         s += String.fromCharCode(u);
                         break;
                     default:
@@ -258,59 +273,86 @@ class com.xvm.JSON {
     var _array:Function = function() {
         var a = [];
 
-        if (ch == '[') {
+        _next();
+        _white();
+        if (ch == ']') {
             _next();
+            return a;
+        }
+        while (ch) {
+            a.push(_value());
             _white();
             if (ch == ']') {
                 _next();
                 return a;
+            } else if (ch != ',') {
+                break;
             }
-            while (ch) {
-                a.push(_value());
-                _white();
-                if (ch == ']') {
-                    _next();
-                    return a;
-                } else if (ch != ',') {
-                    break;
-                }
-                _next();
-                _white();
-            }
+            _next();
+            _white();
         }
         _error("Bad array");
     }
 
+    // {...}
     var _object:Function = function() {
         var k, o = {};
 
+        _next();
+        _white();
+        if (ch == '}') {
+            _next();
+            return o;
+        }
+        while (ch) {
+            k = _string();
+            _white();
+            if (ch != ':') {
+                break;
+            }
+            _next();
+            o[k] = _value();
+            _white();
+            if (ch == '}') {
+                _next();
+                return o;
+            } else if (ch != ',') {
+                break;
+            }
+            _next();
+            _white();
+        }
+        _error("Bad object");
+    }
+
+    // ${...}
+    var _reference:Function = function() {
+        var f, p;
+
+        _next();
         if (ch == '{') {
             _next();
             _white();
             if (ch == '}') {
                 _next();
-                return o;
+                return null;
             }
             while (ch) {
-                k = _string();
+                p = _string();
                 _white();
-                if (ch != ':') {
-                    break;
-                }
-                _next();
-                o[k] = _value();
-                _white();
-                if (ch == '}') {
+                if (ch == ':') {
                     _next();
-                    return o;
-                } else if (ch != ',') {
-                    break;
+                    f = p;
+                    p = _string();
+                    _white();
                 }
+                if (ch != '}')
+                    break;
                 _next();
-                _white();
+                return { $ref: { file: f, path: p } };
             }
         }
-        _error("Bad object");
+        _error("Bad reference");
     }
 
     var _number:Function = function() {
@@ -367,6 +409,8 @@ class com.xvm.JSON {
     _value = function() {
         _white();
         switch (ch) {
+            case '$':
+                return _reference();
             case '{':
                 return _object();
             case '[':
@@ -382,4 +426,6 @@ class com.xvm.JSON {
 
     return _value();
   }
+}
+
 }

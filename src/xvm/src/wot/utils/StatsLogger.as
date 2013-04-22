@@ -8,7 +8,7 @@ class wot.utils.StatsLogger
         var out: Object = mapData(data, key);
         var d: Date = new Date();
         Comm.SyncEncoded(Defines.COMMAND_LOGSTAT,
-            d.getTime() + ":" + key + ":" + com.xvm.JSON.stringify(out, "", true));
+            d.getTime() + ":" + key + ":" + com.xvm.JSONx.stringify(out, "", true));
     }
 
     private static function mapData(data: Object, fieldName: String)

@@ -11,13 +11,19 @@ class wot.utils.Defines
     public static var CONFIG_VERSION: String = "1.5.0";
     public static var EDITOR_VERSION: String = "0.42";
 
-    public static var DEFAULT_CONFIG_NAME: String = "XVM.xvmconf";
+    // Path to Dokan MountPoint
+    public static var DOKAN_MP = "../../../.stat/";
+
+    // res_mods/xvm/
+    public static var XVM_ROOT: String = "../../../xvm/";
+    
+    // res_mods/xvm/xvm.xc
+    public static var CONFIG_FILE_NAME: String = "xvm.xc";
+    // res_mods/x.x.x/gui/flash/XVM.xvmconf
+    public static var CONFIG_FILE_NAME_XVMCONF: String = "XVM.xvmconf";
 
     // MAX_PATH is 259 on NTFS
     public static var MAX_PATH: Number = 100;
-
-    // Path to Dokan MountPoint
-    public static var DOKAN_MP = "../../../.stat/";
 
     // WebDav commands
     public static var COMMAND_LOG: String = DOKAN_MP + "@LOG";

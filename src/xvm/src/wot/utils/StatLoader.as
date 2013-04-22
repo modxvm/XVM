@@ -1,4 +1,4 @@
-import com.xvm.JSON;
+import com.xvm.JSONx;
 import wot.utils.Comm;
 import wot.utils.Config;
 import wot.utils.Defines;
@@ -97,7 +97,7 @@ class wot.utils.StatLoader
                 s:pdata.selected ? 1 : 0,
                 t:pdata.team
             }
-            rq.push(JSON.stringify(pd, "", true));
+            rq.push(JSONx.stringify(pd, "", true));
         }
 
         var n = rq.length;
@@ -108,7 +108,7 @@ class wot.utils.StatLoader
                 n--;
                 try
                 {
-                    var response = JSON.parse(event.str);
+                    var response = JSONx.parse(event.str);
                     if (n == 0)
                         Comm.Async(Defines.COMMAND_GET_ASYNC, response.resultId, null, null, StatLoader.LoadStatDataCallback);
                     // TODO: what if bad resultId?
@@ -130,7 +130,7 @@ class wot.utils.StatLoader
         var finallyBugWorkaround: Boolean = false; // Workaround: finally block have a bug - it can be called twice. Why? How?
         try
         {
-            var response = JSON.parse(event.str);
+            var response = JSONx.parse(event.str);
 
             if (response.info && response.info.xvm)
                 GlobalEventDispatcher.dispatchEvent({ type: "set_info", ver: response.info.xvm.ver, message: response.info.xvm.message });
@@ -293,7 +293,7 @@ class wot.utils.StatLoader
         try
         {
             //Logger.add(event.str);
-            var players = JSON.parse(event.str);
+            var players = JSONx.parse(event.str);
             for (var i = 0; i < players.length; ++i)
             {
                 var p = players[i];
@@ -366,7 +366,7 @@ class wot.utils.StatLoader
         {
             try
             {
-                data = JSON.parse(event.str);
+                data = JSONx.parse(event.str);
             }
             catch (ex)
             {
