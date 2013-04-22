@@ -33,7 +33,7 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 // XVM Stat version
-[assembly: AssemblyVersion("1.4.2.*")]
-[assembly: AssemblyFileVersion("1.4.2.*")]
+[assembly: AssemblyVersion("1.4.3.*")]
+[assembly: AssemblyFileVersion("1.4.3.*")]
 // XVM Mod version
 [assembly: AssemblyInformationalVersion("3.5.0")]

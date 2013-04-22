@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Xml;
 using wot.Properties;
+using System.Globalization;
 
 namespace wot
 {
@@ -353,123 +354,7 @@ namespace wot
           if (!command.StartsWith("@LOG") && command != "@SET" && command != "@ADD")
             Log(String.Format("=> {0} {1}", command, parameters));
 
-          switch (command)
-          {
-            // SYNC
-
-            // Encoded
-
-            case "@LOG": // args - encoded log string
-              ProcessLog(parameters, LogDestination.Log);
-              break;
-
-            case "@LOGSTAT": // args - encoded log string
-              ProcessLog(parameters, LogDestination.Stats);
-              break;
-
-            case "@SET": // args - set of players
-            case "@ADD": // args - set of players
-              {
-                string value = CollectParts(parameters);
-                if (!String.IsNullOrEmpty(value))
-                {
-                  Debug(String.Format("{0} {1}", command, value));
-                  if (command == "@SET")
-                  {
-                    lock (_lockResults)
-                    {
-                      results.Add(new Result() { result = null, thread = null, players = new List<PlayerData>() });
-                      lastResultId = results.Count - 1;
-                    }
-                  }
-                  AddPendingPlayers(value, lastResultId);
-                }
-                _result = String.Format("{{\"resultId\":{0}}}", lastResultId);
-              }
-              break;
-
-            // Flat
-
-            case "@VAR": // args - variable=value
-              {
-                string[] v = parameters.Split(new char[] { '=' }, 2);
-                if (v.Length < 2)
-                  throw new Exception("Bad variable received: " + parameters);
-                Log("SET VAR: " + parameters);
-                vars[v[0].Trim()] = v[1];
-              }
-              break;
-
-            case "@GET_VERSION":
-              {
-                _result = String.Format("{0}\n{1}", version, Path.GetDirectoryName(Assembly.GetEntryAssembly().Location));
-                foreach (string v in vars.Keys)
-                  _result += String.Format("\n{0}={1}", v, vars[v]);
-              }
-              Debug("_result: " + _result);
-              break;
-
-            case "@GET_PLAYERS": // no args
-              {
-                if (lastResultId < 0)
-                  throw new Exception("No last result: " + lastResultId);
-                lock (_lockResults)
-                {
-                  if (results[lastResultId].players == null)
-                    throw new Exception("No players: " + lastResultId);
-                  _result = JsonMapper.ToJson(results[lastResultId].players);
-                }
-              }
-              Debug("_result: " + _result);
-              break;
-
-            // ASYNC
-
-            case "@GET_ASYNC": // args - resultId requestCount
-              _result = AsyncWrapper(parameters, (resultId, arg) =>
-              {
-                lock (_lockNetwork)
-                {
-                  Result r;
-                  lock (_lockResults)
-                  {
-                    r = results[resultId];
-                  }
-                  string res = GetStat(r); // this will start network operations
-                  lock (_lockResults)
-                  {
-                    results[resultId].result = !string.IsNullOrEmpty(res) ? res
-                      : String.Format("{{\"status\":\"ERROR\",\"error\":\"no result: {0}\"}}", resultId);
-                    results[resultId].thread = null;
-                  }
-                  //Debug("Loaded: " + resultId);
-                }
-              });
-              Debug("_result: " + _result);
-              break;
-
-            case "@INFO_ASYNC": // args - resultId requestCount params
-              _result = AsyncWrapper(parameters, (resultId, arg) =>
-              {
-                lock (_lockNetwork)
-                {
-                  string res = GetInfo(arg); // this will start network operations
-                  lock (_lockResults)
-                  {
-                    results[resultId].result = !string.IsNullOrEmpty(res) ? res
-                      : String.Format("{{\"status\":\"ERROR\",\"error\":\"no result: {0}\"}}", resultId);
-                    results[resultId].thread = null;
-                  }
-                  //Debug("Loaded: " + resultId);
-                }
-              });
-              Debug("_result: " + _result);
-              break;
-
-            default:
-              Log("Unknown command: " + command);
-              break;
-          }
+          ProcessCommand(command, parameters);
         }
         catch (Exception ex)
         {
@@ -483,6 +368,154 @@ namespace wot
 
         return 0;
       }
+    }
+
+    private void ProcessCommand(String command, String parameters)
+    {
+      switch (command)
+      {
+        // SYNC
+
+        // Encoded
+
+        case "@LOG": // args - encoded log string
+          ProcessLog(parameters, LogDestination.Log);
+          break;
+
+        case "@LOGSTAT": // args - encoded log string
+          ProcessLog(parameters, LogDestination.Stats);
+          break;
+
+        case "@SET": // args - set of players
+        case "@ADD": // args - set of players
+          ProcessSetAddCommand(command, parameters);
+          break;
+
+        // Flat
+
+        case "@VAR": // args - variable=value
+          ProcessVarCommand(parameters);
+          break;
+
+        case "@GET_VERSION":
+          ProcessGetVersionCommand();
+          Debug("_result: " + _result);
+          break;
+
+        case "@GET_PLAYERS": // no args
+          ProcessGetPlayersCommand();
+          Debug("_result: " + _result);
+          break;
+
+        // ASYNC
+
+        case "@GET_ASYNC": // args - resultId requestCount
+          ProcessGetAsyncCommand(parameters);
+          Debug("_result: " + _result);
+          break;
+
+        case "@INFO_ASYNC": // args - resultId requestCount params
+          ProcessInfoAsyncCommand(parameters);
+          Debug("_result: " + _result);
+          break;
+
+        case "@PING": // no args
+          _result = PingWotServers.Instance.Ping();
+          //Debug("_result: " + _result);
+          break;
+
+        default:
+          Log("Unknown command: " + command);
+          break;
+      }
+    }
+
+    private void ProcessSetAddCommand(String command, String parameters)
+    {
+      string value = CollectParts(parameters);
+      if (!String.IsNullOrEmpty(value))
+      {
+        Debug(String.Format("{0} {1}", command, value));
+        if (command == "@SET")
+        {
+          lock (_lockResults)
+          {
+            results.Add(new Result() { result = null, thread = null, players = new List<PlayerData>() });
+            lastResultId = results.Count - 1;
+          }
+        }
+        AddPendingPlayers(value, lastResultId);
+      }
+      _result = String.Format("{{\"resultId\":{0}}}", lastResultId);
+    }
+
+    private void ProcessVarCommand(String parameters)
+    {
+      string[] v = parameters.Split(new char[] { '=' }, 2);
+      if (v.Length < 2)
+        throw new Exception("Bad variable received: " + parameters);
+      Log("SET VAR: " + parameters);
+      vars[v[0].Trim()] = v[1];
+    }
+
+    private void ProcessGetVersionCommand()
+    {
+      _result = String.Format("{0}\n{1}", version, Path.GetDirectoryName(Assembly.GetEntryAssembly().Location));
+      foreach (string v in vars.Keys)
+        _result += String.Format("\n{0}={1}", v, vars[v]);
+    }
+
+    private void ProcessGetPlayersCommand()
+    {
+      if (lastResultId < 0)
+        throw new Exception("No last result: " + lastResultId);
+      lock (_lockResults)
+      {
+        if (results[lastResultId].players == null)
+          throw new Exception("No players: " + lastResultId);
+        _result = JsonMapper.ToJson(results[lastResultId].players);
+      }
+    }
+
+    private void ProcessGetAsyncCommand(String parameters)
+    {
+      _result = AsyncWrapper(parameters, (resultId, arg) =>
+        {
+          lock (_lockNetwork)
+          {
+            Result r;
+            lock (_lockResults)
+            {
+              r = results[resultId];
+            }
+            string res = GetStat(r); // this will start network operations
+            lock (_lockResults)
+            {
+              results[resultId].result = !string.IsNullOrEmpty(res) ? res
+                : String.Format("{{\"status\":\"ERROR\",\"error\":\"no result: {0}\"}}", resultId);
+              results[resultId].thread = null;
+            }
+            //Debug("Loaded: " + resultId);
+          }
+        });
+    }
+
+    private void ProcessInfoAsyncCommand(String parameters)
+    {
+      _result = AsyncWrapper(parameters, (resultId, arg) =>
+                {
+                  lock (_lockNetwork)
+                  {
+                    string res = GetInfo(arg); // this will start network operations
+                    lock (_lockResults)
+                    {
+                      results[resultId].result = !string.IsNullOrEmpty(res) ? res
+                        : String.Format("{{\"status\":\"ERROR\",\"error\":\"no result: {0}\"}}", resultId);
+                      results[resultId].thread = null;
+                    }
+                    //Debug("Loaded: " + resultId);
+                  }
+                });
     }
 
     private string _lastReadFileFilenameAndOffset = "";
@@ -712,7 +745,7 @@ namespace wot
         }
         Array.Resize<Stat>(ref res.players, pos);
 
-        Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
+        Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
         return JsonMapper.ToJson(res);
       }
       catch
@@ -748,7 +781,7 @@ namespace wot
 
         string responseFromServer = loadUrl(proxies[(new Random()).Next(proxies.Length)], updateRequest);
 
-        Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
+        Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
         Response res = JsonDataToResponse(JsonMapper.ToObject(responseFromServer));
         if (res == null || res.players == null)
         {
@@ -892,7 +925,7 @@ namespace wot
         s = Encoding.UTF8.GetString(buf.ToArray());
         if (s.Contains(",")) {
             string[] sa = s.Split(',');
-            s = sa[1] + "/" + sa[0];
+            s = String.Format("{0}/{1}", sa[1], sa[0]);
         }
       }
       catch (Exception ex)
@@ -991,7 +1024,7 @@ namespace wot
       {
         string[] pa = parameters.Split(new char[] { ',' }, 3); // cmdid, partid, data
         string cmdId = pa[0];
-        int partId = int.Parse(pa[1], System.Globalization.NumberStyles.HexNumber);
+        int partId = int.Parse(pa[1], NumberStyles.HexNumber);
         parameters = pa[2];
 
         if (cmdId.StartsWith("_"))
@@ -1005,7 +1038,7 @@ namespace wot
         if (partId == 0)
         {
           string[] pb = parameters.Split(',');
-          part.len = int.Parse(pb[0], System.Globalization.NumberStyles.HexNumber);
+          part.len = int.Parse(pb[0], NumberStyles.HexNumber);
           parameters = pb[1];
         }
 

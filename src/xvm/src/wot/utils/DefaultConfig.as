@@ -24,6 +24,15 @@ class wot.utils.DefaultConfig
                 gameVersion: Defines.WOT_VERSION,
                 modMinVersion: Defines.XVM_VERSION
             },
+            hangar: {
+                // Show ping to the servers
+                pingServers: {
+                  enabled: true,
+                  updateInterval: 3000, // msec
+                  x: 100,
+                  y: 0
+                }
+            },
             battle: {
                 mirroredVehicleIcons: true,      // Set false for alternative tank icon mirroring.
                 showPostmortemTips: true,        // Popup tooltip panel after death.

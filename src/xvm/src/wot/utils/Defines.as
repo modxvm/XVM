@@ -29,6 +29,7 @@ class wot.utils.Defines
     public static var COMMAND_GET_PLAYERS: String = DOKAN_MP + "@GET_PLAYERS";
     public static var COMMAND_GET_VERSION: String = DOKAN_MP + "@GET_VERSION";
     public static var COMMAND_INFO_ASYNC: String = DOKAN_MP + "@INFO_ASYNC";
+    public static var COMMAND_PING: String = DOKAN_MP + "@PING";
 
     // Default path to vehicle icons (relative)
     public static var CONTOUR_ICON_PATH: String = "../maps/icons/vehicle/contour/";
