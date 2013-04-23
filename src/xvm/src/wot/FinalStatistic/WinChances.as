@@ -22,12 +22,12 @@ class wot.FinalStatistic.WinChances
 
     private function showWinChances()
     {
-        var s_chanceField = form_mc._parent._parent.titleBtn.textField;
+        var s_chanceField:TextField = form_mc._parent._parent.titleBtn.textField;
         var s_text = null;
         form_mc.onEnterFrame = function()
         {
-            if (s_chanceField.htmlText == undefined)
-                continue;
+            if (s_chanceField.htmlText == null)
+                return;
             //delete this.onEnterFrame;
             if (s_text == null)
             {
