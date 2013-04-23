@@ -56,6 +56,7 @@
     <compile path="shared\Mouse.as" />
     <compile path="src\wot\TeamRenderer" />
     <compile path="src\wot\TeamMemberRenderer" />
+    <compile path="src\wot\battleloading" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>

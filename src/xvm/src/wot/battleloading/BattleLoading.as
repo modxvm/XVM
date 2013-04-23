@@ -11,8 +11,27 @@ import wot.battleloading.TipField;
 import wot.battleloading.RealClock;
 import wot.battleloading.WinChances;
 
-class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
+class wot.battleloading.BattleLoading
 {
+    // override
+    function setSize()
+    {
+        return this.setSizeImpl.apply(this, arguments);
+    }
+
+    // override
+    function setMapBG()
+    {
+        return this.setMapBGImpl.apply(this, arguments);
+    }
+
+    /////////////////////////////////////////////////////////////////
+
+    private var wrapper:net.wargaming.BattleLoading;
+    private var base:net.wargaming.BattleLoading;
+
+    /////////////////////////////////////////////////////////////////
+
     private static var STAT_PRELOAD_DELAY:Number = 1000;
 
     // Components
@@ -20,9 +39,10 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
     private var tipField:TipField;
     private var realClock:RealClock;
 
-    public function BattleLoading()
+    public function BattleLoading(wrapper:net.wargaming.BattleLoading, base:net.wargaming.BattleLoading)
     {
-        super();
+        this.wrapper = wrapper;
+        this.base = base;
 
         Utils.TraceXvmModule("BattleLoading");
 
@@ -32,9 +52,9 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
         StatLoader.teams = { t1:0, t2:0 };
 
         // Components
-        winChances = new WinChances(form_mc); // Winning chance info above players list.
-        tipField   = new TipField(form_mc);   // Information field below players list.
-        realClock  = new RealClock(form_mc);  // Realworld time at right side of TipField.
+        winChances = new WinChances(wrapper.form_mc); // Winning chance info above players list.
+        tipField   = new TipField(wrapper.form_mc);   // Information field below players list.
+        realClock  = new RealClock(wrapper.form_mc);  // Realworld time at right side of TipField.
 
         GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
         Config.LoadConfig("BattleLoading.as");
@@ -49,14 +69,14 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
     }
 
     // override
-    function setSize(width, height)
+    function setSizeImpl(width, height)
     {
-        super.setSize(width, height);
+        base.setSize(width, height);
         Comm.SetVar("window_size", width + "," + height);
     }
 
     // override
-    function setMapBG(imgsource:String)
+    function setMapBGImpl(imgsource:String)
     {
         /**
          * imgsource arg:
@@ -74,7 +94,7 @@ class wot.battleloading.BattleLoading extends net.wargaming.BattleLoading
          */
         Comm.SetVar("map_name", mapName);
 
-        super.setMapBG(imgsource);
+        base.setMapBG(imgsource);
     }
 
     private function onConfigLoaded()

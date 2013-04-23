@@ -16,26 +16,52 @@ import com.xvm.Utils;
 
 // Renders one player, not a bulk.
 
-class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls.LobbyPlayerListItemRenderer
+class wot.battleloading.BattleLoadingItemRenderer
 {
+    // override
+    function setData()
+    {
+        return this.setDataImpl.apply(this, arguments);
+    }
+
+    // override
+    function setState()
+    {
+        return this.setStateImpl.apply(this, arguments);
+    }
+
+    // override
+    function update()
+    {
+        return this.updateImpl.apply(this, arguments);
+    }
+
+    /////////////////////////////////////////////////////////////////
+
+    private var wrapper:net.wargaming.controls.LobbyPlayerListItemRenderer;
+    private var base:net.wargaming.controls.LobbyPlayerListItemRenderer;
+
+    /////////////////////////////////////////////////////////////////
+
     private var m_iconset: IconLoader = null;
     private var m_clanIconLoaded = false;
     private var m_iconLoaded: Boolean = false;
 
-    function BattleLoadingItemRenderer()
+    public function BattleLoadingItemRenderer(wrapper:net.wargaming.controls.LobbyPlayerListItemRenderer, base:net.wargaming.controls.LobbyPlayerListItemRenderer)
     {
-        super();
+        this.wrapper = wrapper;
+        this.base = base;
 
         Utils.TraceXvmModule("BattleLoadingItemRenderer");
 
-        vehicleField.html = true;
-        vehicleField.verticalAlign = "center";
-        vehicleField.verticalAutoSize = true;
-        vehicleField.condenseWhite = true;
+        wrapper.vehicleField.html = true;
+        wrapper.vehicleField.verticalAlign = "center";
+        wrapper.vehicleField.verticalAutoSize = true;
+        wrapper.vehicleField.condenseWhite = true;
     }
 
     // override
-    function setData(data)
+    function setDataImpl(data)
     {
         // Process one player data.
         if (data)
@@ -45,19 +71,19 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
         }
 
         // Remove squad icon.
-        if (Config.s_config.battleLoading.removeSquadIcon && squad)
-            squad._visible = false;
+        if (Config.s_config.battleLoading.removeSquadIcon && wrapper.squad)
+            wrapper.squad._visible = false;
 
-        super.setData(data);
+        base.setData(data);
     }
 
     function addPlayerToStatLoadQueue(data)
     {
-        if (Config.s_config.rating.showPlayersStatistics)
-        {
-            StatLoader.AddPlayerData(data, team);
-            GlobalEventDispatcher.addEventListener("stat_loaded", this, StatLoadedCallback);
-        }
+        if (!Config.s_config.rating.showPlayersStatistics)
+            return;
+        
+        StatLoader.AddPlayerData(data, team);
+        GlobalEventDispatcher.addEventListener("stat_loaded", this, StatLoadedCallback);
     }
 
     function attachClanIconToPlayer(data)
@@ -70,13 +96,13 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
         if (!cfg.show)
             return;
 
-        var icon = PlayerInfo.createIcon(this, cfg, iconLoader._x, iconLoader._y, team);
+        var icon = PlayerInfo.createIcon(wrapper, cfg, wrapper.iconLoader._x, wrapper.iconLoader._y, team);
         PlayerInfo.setSource(icon, Utils.GetPlayerName(data.label), Utils.GetClanName(data.label));
     }
 
     private function get team(): Number
     {
-        return (this.owner._name == "team1List") ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
+        return (wrapper.owner._name == "team1List") ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
     }
 
     function completeLoad()
@@ -86,81 +112,82 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
             return;
         m_iconLoaded = true;
 
-        vehicleField._width += 80;
+        wrapper.vehicleField._width += 80;
         if (team == Defines.TEAM_ALLY)
-            vehicleField._x -= 113; // sirmax: why this value?
+            wrapper.vehicleField._x -= 113; // sirmax: why this value?
         else
-            vehicleField._x += 5;
+            wrapper.vehicleField._x += 5;
         if (!Config.s_config.battle.mirroredVehicleIcons)
         {
             if (team == Defines.TEAM_ENEMY)
             {
-                iconLoader._xscale = -iconLoader._xscale;
-                iconLoader._x -= 80;
-                //Logger.add(iconLoader.width + "x" + iconLoader.height);
+                wrapper.iconLoader._xscale = -wrapper.iconLoader._xscale;
+                wrapper.iconLoader._x -= 80;
+                //Logger.add(wrapper.iconLoader.width + "x" + wrapper.iconLoader.height);
             }
         }
     }
 
     // override
-    function setState()
+    function setStateImpl()
     {
-        super.setState();
+        base.setState();
 
-        if (Config.s_config.battle.highlightVehicleIcon == false && (selected || data.squad > 10))
+        if (Config.s_config.battle.highlightVehicleIcon == false && (wrapper.selected || wrapper.data.squad > 10))
         {
-            var tr = new flash.geom.Transform(iconLoader);
-            tr.colorTransform = net.wargaming.managers.ColorSchemeManager.instance.getScheme(!disabled ? "normal" : "normal_dead").transform;
+            var tr = new flash.geom.Transform(wrapper.iconLoader);
+            tr.colorTransform = net.wargaming.managers.ColorSchemeManager.instance.getScheme(!wrapper.disabled ? "normal" : "normal_dead").transform;
         }
     }
 
     // override
-    function update()
+    function updateImpl()
     {
-        if (!data)
+        if (!wrapper.data)
         {
-            super.update();
+            base.update();
             return;
         }
 
-        self_bg._visible = selected;
+        wrapper.self_bg._visible = wrapper.selected;
 
-        onEnterFrame = function()
+        var me = this;
+        wrapper.onEnterFrame = function()
         {
             delete this.onEnterFrame;
-            this.update2();
+            me.update2();
         }
     }
 
     function update2()
     {
-        if (!data)
+        if (!wrapper.data)
             return;
 
         //Logger.add("update2");
 
-        Macros.RegisterPlayerData(Utils.GetNormalizedPlayerName(data.label), data, team);
+        Macros.RegisterPlayerData(Utils.GetNormalizedPlayerName(wrapper.data.label), wrapper.data, team);
 
-        var saved_icon = data.icon;
-        var saved_label = data.label;
+        var saved_icon = wrapper.data.icon;
+        var saved_label = wrapper.data.label;
 
         // Alternative icon set
         if (!m_iconset)
             m_iconset = new IconLoader(this, completeLoad);
-        m_iconset.init(iconLoader,
-            [ data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.battleLoading), data.icon ]);
+        m_iconset.init(wrapper.iconLoader,
+            [ wrapper.data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.battleLoading), wrapper.data.icon ]);
 
-        data.icon = m_iconset.currentIcon;
-        data.label = Cache.Get("BL." + saved_label, function() { return Macros.Format(saved_label, "{{nick}}") });
+        wrapper.data.icon = m_iconset.currentIcon;
+        wrapper.data.label = Cache.Get("BL." + saved_label, function() { return Macros.Format(saved_label, "{{nick}}") });
 
-        super.update();
+        base.update();
 
-        data.icon = saved_icon;
-        data.label = saved_label;
+        wrapper.data.icon = saved_icon;
+        wrapper.data.label = saved_label;
 
         var key = "BL/" + saved_label;
         var team = this.team;
-        vehicleField.htmlText = Cache.Get(key, function() { return Macros.Format(saved_label,
+        wrapper.vehicleField.htmlText = Cache.Get(key, function() { return Macros.Format(saved_label,
             team == Defines.TEAM_ALLY ? Config.s_config.battleLoading.formatLeft : Config.s_config.battleLoading.formatRight,
             { }) } );
 
@@ -174,12 +201,12 @@ class wot.battleloading.BattleLoadingItemRenderer extends net.wargaming.controls
 
         GlobalEventDispatcher.removeEventListener("stat_loaded", this, StatLoadedCallback);
 
-        var label = data.label;
+        var label = wrapper.data.label;
         var team = this.team;
-        vehicleField.condenseWhite = StatData.s_empty;
+        wrapper.vehicleField.condenseWhite = StatData.s_empty;
         var key = "BL/" + label;
         Cache.Remove(key);
-        vehicleField.htmlText = Cache.Get(key, function() { return Macros.Format(label,
+        wrapper.vehicleField.htmlText = Cache.Get(key, function() { return Macros.Format(label,
             team == Defines.TEAM_ALLY ? Config.s_config.battleLoading.formatLeft : Config.s_config.battleLoading.formatRight,
             { }) } );
 

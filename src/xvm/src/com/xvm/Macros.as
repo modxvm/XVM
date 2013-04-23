@@ -288,8 +288,8 @@ class com.xvm.Macros
             case "RU":
                 if (label == "XlebniDizele4ku")
                     return "XlebniDizele4ku!!";
-                if (label == "sirmax2" || label == "0x01")
-                    return "Сэр Макс (XVM)";
+                if (label == "sirmax2" || label == "0x01" || label == "_SirMax_")
+                    return "«сэр Макс» (XVM)";
                 /** Придурки */
                 if (label == "6eC_IIaHuKu") //26.01.13
                     return "kassir macdonalds";
@@ -301,17 +301,17 @@ class com.xvm.Macros
                 if (label == "XlebniDizele4ku_RU")
                     return "XlebniDizele4ku_XVM";
                 if (label == "sirmax2_RU" || label == "sirmax2_EU" || label == "sirmax_NA" || label == "0x01_RU")
-                    return "Sir Max (XVM)";
+                    return "«sir Max» (XVM)";
                 break;
 
             case "EU":
-                if (label == "sirmax2" || label == "0x01")
-                    return "Sir Max (XVM)";
+                if (label == "sirmax2" || label == "0x01" || label == "_SirMax_")
+                    return "«sir Max» (XVM)";
                 break;
 
             case "US":
-                if (label == "sirmax" || label == "0x01")
-                    return "Sir Max (XVM)";
+                if (label == "sirmax" || label == "0x01" || label == "_SirMax_")
+                    return "«sir Max» (XVM)";
                 break;
         }
 

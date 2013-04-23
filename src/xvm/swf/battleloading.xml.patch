@@ -1,70 +1,236 @@
---- orig\battleloading.xml	2013-04-23 15:48:33.833239200 +0300
-+++ battleloading.xml	2013-04-23 15:48:34.003239200 +0300
-@@ -15,4 +15,7 @@
-         </color>
-       </SetBackgroundColor>
-+      <ImportAssets2 url="xvm.swf" reserved1="1" reserved2="0">
-+        <symbols/>
-+      </ImportAssets2>
-       <DefineBitsLossless2 objectID="1" format="5" width="7" height="20">
-         <data>
-@@ -195,5 +198,5 @@
+--- orig\battleloading.xml	2013-04-24 00:06:13.969677000 +0300
++++ battleloading.xml	2013-04-24 00:06:14.150687300 +0300
+@@ -67,8 +67,8 @@
+       <DefineShape5 objectID="4" nonScalingStrokes="0" scalingStrokes="1">
+         <bounds>
+-          <Rectangle left="-10" right="8410" top="-10" bottom="510"/>
++          <Rectangle left="0" right="8420" top="0" bottom="500"/>
+         </bounds>
+         <strokeBounds>
+-          <Rectangle left="0" right="8400" top="0" bottom="500"/>
++          <Rectangle left="0" right="0" top="0" bottom="0"/>
+         </strokeBounds>
+         <styles>
+@@ -81,11 +81,5 @@
+               </Solid>
+             </fillStyles>
+-            <lineStyles>
+-              <LineStyle width="20" startCapStyle="0" jointStyle="0" hasFill="0" noHScale="0" noVScale="0" pixelHinting="0" noClose="0" endCapStyle="0">
+-                <fillColor>
+-                  <Color red="255" green="255" blue="255" alpha="0"/>
+-                </fillColor>
+-              </LineStyle>
+-            </lineStyles>
++            <lineStyles/>
+           </StyleList>
+         </styles>
+@@ -93,14 +87,14 @@
+           <Shape>
+             <edges>
+-              <ShapeSetup x="79" y="0" fillStyle1="1" lineStyle="1"/>
+-              <LineTo x="3882" y="0"/>
++              <ShapeSetup x="79" y="0" fillStyle1="1"/>
++              <LineTo x="3902" y="0"/>
+               <LineTo x="4439" y="0"/>
+-              <LineTo x="0" y="445"/>
+-              <LineTo x="0" y="55"/>
++              <LineTo x="0" y="425"/>
++              <LineTo x="0" y="75"/>
+               <LineTo x="-4439" y="0"/>
+-              <LineTo x="-3882" y="0"/>
++              <LineTo x="-3902" y="0"/>
+               <LineTo x="-79" y="0"/>
+-              <LineTo x="0" y="-55"/>
+-              <LineTo x="0" y="-445"/>
++              <LineTo x="0" y="-75"/>
++              <LineTo x="0" y="-425"/>
+               <LineTo x="79" y="0"/>
+               <ShapeSetup/>
+@@ -171,5 +165,5 @@
+       <DefineEditText objectID="10" wordWrap="0" multiLine="0" password="0" readOnly="1" autoSize="0" hasLayout="1" notSelectable="1" hasBorder="0" isHTML="0" useOutlines="1" fontRef="9" fontHeight="260" align="1" leftMargin="0" rightMargin="0" indent="0" leading="40" variableName="">
+         <size>
+-          <Rectangle left="-40" right="4220" top="-40" bottom="367"/>
++          <Rectangle left="-40" right="4220" top="-40" bottom="380"/>
+         </size>
+         <color>
+@@ -195,5 +189,5 @@
        <DefineEditText objectID="14" wordWrap="0" multiLine="0" password="0" readOnly="1" autoSize="0" hasLayout="1" notSelectable="1" hasBorder="0" isHTML="0" useOutlines="1" fontRef="9" fontHeight="260" align="0" leftMargin="0" rightMargin="0" indent="0" leading="40" variableName="">
          <size>
 -          <Rectangle left="-40" right="1310" top="-40" bottom="367"/>
-+          <Rectangle left="-48" right="1572" top="-40" bottom="367"/>
++          <Rectangle left="-40" right="1580" top="-40" bottom="380"/>
          </size>
          <color>
-@@ -301,5 +304,5 @@
+@@ -257,5 +251,5 @@
+           <PlaceObject3 replace="0" depth="5" objectID="10" name="textField">
+             <transform>
+-              <Transform transX="3300" transY="100"/>
++              <Transform transX="3300" transY="80"/>
+             </transform>
+             <filters>
+@@ -296,10 +290,10 @@
+           <PlaceObject2 replace="0" depth="7" objectID="12" name="squad">
+             <transform>
+-              <Transform scaleX="1.000030517578125" scaleY="1.000000000000000" transX="7640" transY="40"/>
++              <Transform scaleX="1.000000000000000" scaleY="1.000000000000000" transX="7640" transY="20"/>
+             </transform>
+           </PlaceObject2>
            <PlaceObject2 replace="0" depth="8" objectID="13" name="iconLoader" allflags1="0" allflags2="4">
              <transform>
 -              <Transform scaleX="-8.000000000000000" scaleY="2.399993896484375" transX="1600" transY="0"/>
-+              <Transform scaleX="-8.000000000000000" scaleY="2.399993896484375" transX="1674" transY="20"/>
++              <Transform scaleX="-8.000000000000000" scaleY="2.399993896484375" transX="1680" transY="20"/>
              </transform>
              <events>
-@@ -349,5 +352,5 @@
+@@ -349,5 +343,5 @@
            <PlaceObject3 replace="0" depth="9" objectID="14" name="vehicleField">
              <transform>
 -              <Transform scaleX="1.200012207031250" scaleY="1.000000000000000" transX="1668" transY="100"/>
-+              <Transform scaleX="1.000000000000000" scaleY="1.000000000000000" transX="1668" transY="100"/>
++              <Transform scaleX="1.000000000000000" scaleY="1.000000000000000" transX="1640" transY="60"/>
              </transform>
              <filters>
-@@ -430,5 +433,5 @@
+@@ -375,8 +369,8 @@
+       <DefineShape5 objectID="16" nonScalingStrokes="0" scalingStrokes="1">
+         <bounds>
+-          <Rectangle left="-10" right="8410" top="-10" bottom="490"/>
++          <Rectangle left="0" right="8420" top="0" bottom="500"/>
+         </bounds>
+         <strokeBounds>
+-          <Rectangle left="0" right="8400" top="0" bottom="480"/>
++          <Rectangle left="0" right="0" top="0" bottom="0"/>
+         </strokeBounds>
+         <styles>
+@@ -389,11 +383,5 @@
+               </Solid>
+             </fillStyles>
+-            <lineStyles>
+-              <LineStyle width="20" startCapStyle="0" jointStyle="0" hasFill="0" noHScale="0" noVScale="0" pixelHinting="0" noClose="0" endCapStyle="0">
+-                <fillColor>
+-                  <Color red="255" green="255" blue="255" alpha="0"/>
+-                </fillColor>
+-              </LineStyle>
+-            </lineStyles>
++            <lineStyles/>
+           </StyleList>
+         </styles>
+@@ -401,16 +389,16 @@
+           <Shape>
+             <edges>
+-              <ShapeSetup x="39" y="0" fillStyle1="1" lineStyle="1"/>
++              <ShapeSetup x="59" y="0" fillStyle1="1"/>
+               <LineTo x="3982" y="0"/>
+               <LineTo x="4379" y="0"/>
+-              <LineTo x="0" y="39"/>
++              <LineTo x="0" y="29"/>
+               <LineTo x="0" y="420"/>
+-              <LineTo x="0" y="21"/>
++              <LineTo x="0" y="51"/>
+               <LineTo x="-4379" y="0"/>
+               <LineTo x="-3982" y="0"/>
+-              <LineTo x="-39" y="0"/>
+-              <LineTo x="0" y="-21"/>
++              <LineTo x="-59" y="0"/>
++              <LineTo x="0" y="-51"/>
+               <LineTo x="0" y="-420"/>
+-              <LineTo x="0" y="-39"/>
++              <LineTo x="0" y="-29"/>
+               <LineTo x="39" y="0"/>
+               <ShapeSetup/>
+@@ -421,5 +409,5 @@
+       <DefineEditText objectID="17" wordWrap="0" multiLine="0" password="0" readOnly="1" autoSize="0" hasLayout="1" notSelectable="1" hasBorder="0" isHTML="0" useOutlines="1" fontRef="9" fontHeight="260" align="0" leftMargin="0" rightMargin="0" indent="0" leading="40" variableName="">
+         <size>
+-          <Rectangle left="-40" right="4220" top="-40" bottom="392"/>
++          <Rectangle left="-40" right="4220" top="-40" bottom="380"/>
+         </size>
+         <color>
+@@ -430,5 +418,5 @@
        <DefineEditText objectID="18" wordWrap="0" multiLine="0" password="0" readOnly="1" autoSize="0" hasLayout="1" notSelectable="1" hasBorder="0" isHTML="0" useOutlines="1" fontRef="9" fontHeight="260" align="1" leftMargin="0" rightMargin="0" indent="0" leading="40" variableName="">
          <size>
 -          <Rectangle left="-40" right="1310" top="-40" bottom="367"/>
-+          <Rectangle left="-48" right="1572" top="-40" bottom="367"/>
++          <Rectangle left="-40" right="1580" top="-40" bottom="380"/>
          </size>
          <color>
-@@ -536,5 +539,5 @@
+@@ -441,5 +429,5 @@
+           <PlaceObject2 replace="0" depth="1" objectID="8" name="voiceWave" allflags1="0" allflags2="4">
+             <transform>
+-              <Transform scaleX="0.6199951171875000" scaleY="0.6250000000000000" transX="5920" transY="0"/>
++              <Transform scaleX="0.6199951171875000" scaleY="0.6250000000000000" transX="5940" transY="0"/>
+             </transform>
+             <events>
+@@ -487,10 +475,10 @@
+           <PlaceObject2 replace="0" depth="3" objectID="7" name="self_bg">
+             <transform>
+-              <Transform scaleX="1.494659423828125" scaleY="1.045455932617188" transX="0" transY="40"/>
++              <Transform scaleX="1.494659423828125" scaleY="1.000000000000000" transX="20" transY="40"/>
+             </transform>
+           </PlaceObject2>
+           <PlaceObject3 replace="0" depth="5" objectID="17" name="textField">
+             <transform>
+-              <Transform transX="920" transY="100"/>
++              <Transform transX="920" transY="80"/>
+             </transform>
+             <filters>
+@@ -531,10 +519,10 @@
+           <PlaceObject2 replace="0" depth="7" objectID="12" name="squad">
+             <transform>
+-              <Transform transX="200" transY="40"/>
++              <Transform transX="200" transY="20"/>
+             </transform>
+           </PlaceObject2>
            <PlaceObject2 replace="0" depth="8" objectID="13" name="iconLoader" allflags1="0" allflags2="4">
              <transform>
 -              <Transform scaleX="8.000000000000000" scaleY="2.399993896484375" transX="6780" transY="0"/>
-+              <Transform scaleX="8.000000000000000" scaleY="2.399993896484375" transX="6780" transY="20"/>
++              <Transform scaleX="8.000000000000000" scaleY="2.399993896484375" transX="6740" transY="20"/>
              </transform>
              <events>
-@@ -584,5 +587,5 @@
+@@ -584,5 +572,5 @@
            <PlaceObject3 replace="0" depth="9" objectID="18" name="vehicleField">
              <transform>
 -              <Transform scaleX="1.200012207031250" scaleY="1.000000000000000" transX="5188" transY="100"/>
-+              <Transform scaleX="1.000000000000000" scaleY="1.000000000000000" transX="5798" transY="100"/>
++              <Transform scaleX="1.000000000000000" scaleY="1.000000000000000" transX="5760" transY="60"/>
              </transform>
              <filters>
-@@ -44655,5 +44658,5 @@
+@@ -1820,5 +1808,5 @@
+           <PlaceObject2 replace="0" depth="4" objectID="21" name="team1List" allflags1="0" allflags2="4">
+             <transform>
+-              <Transform scaleX="3.246185302734375" scaleY="3.073638916015625" transX="-8420" transY="4660"/>
++              <Transform scaleX="3.238449096679688" scaleY="3.099990844726562" transX="-8420" transY="4680"/>
+             </transform>
+             <events>
+@@ -1904,5 +1892,5 @@
+                     <items>
+                       <StackDictionaryLookup index="10"/>
+-                      <StackInteger value="25"/>
++                      <StackInteger value="0"/>
+                     </items>
+                   </PushData>
+@@ -1951,5 +1939,5 @@
+           <PlaceObject2 replace="0" depth="6" objectID="21" name="team2List" allflags1="0" allflags2="4">
+             <transform>
+-              <Transform scaleX="3.246154785156250" scaleY="3.073638916015625" transX="20" transY="4660"/>
++              <Transform scaleX="3.238449096679688" scaleY="3.099990844726562" transX="20" transY="4680"/>
+             </transform>
+             <events>
+@@ -2035,5 +2023,5 @@
+                     <items>
+                       <StackDictionaryLookup index="10"/>
+-                      <StackInteger value="25"/>
++                      <StackInteger value="0"/>
+                     </items>
+                   </PushData>
+@@ -44655,5 +44643,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.controls.LobbyPlayerListItemRenderer"/>
 +              <StackString value="wot.wrapper.battleloading.BattleLoadingItemRenderer"/>
              </items>
            </PushData>
-@@ -44681,5 +44684,5 @@
+@@ -44681,5 +44669,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.controls.LobbyPlayerListItemRenderer"/>
 +              <StackString value="wot.wrapper.battleloading.BattleLoadingItemRenderer"/>
              </items>
            </PushData>
-@@ -44733,5 +44736,5 @@
+@@ -44733,5 +44721,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.BattleLoading"/>

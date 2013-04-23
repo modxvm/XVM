@@ -8,6 +8,11 @@
     "gameVersion": "0.8.0",
     "modMinVersion": "3.0.4"
   },
+  "hangar": {
+    "pingServers": {
+      "enabled": true
+    }
+  },
   "battle": {
     "mirroredVehicleIcons": false,
     "showPostmortemTips": false,
