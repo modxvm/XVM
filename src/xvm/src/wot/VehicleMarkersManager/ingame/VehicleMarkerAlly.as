@@ -1,4 +1,4 @@
-﻿class wot.ingame.VehicleMarkerAlly extends wot.VehicleMarkersManager.VehicleMarkerProxy
+﻿class wot.VehicleMarkersManager.ingame.VehicleMarkerAlly extends wot.VehicleMarkersManager.VehicleMarkerProxy
 {
   function VehicleMarkerAlly()
   {

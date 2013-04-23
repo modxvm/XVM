@@ -9,7 +9,7 @@ intrinsic class com.xvm.Defines
 	static public var WOT_VERSION : String;
 	static public var CONFIG_VERSION : String;
 	static public var EDITOR_VERSION : String;
-	static public var DOKAN_MP : Object;
+	static public var DOKAN_MP : String;
 	static public var XVM_ROOT : String;
 	static public var CONFIG_FILE_NAME : String;
 	static public var CONFIG_FILE_NAME_XVMCONF : String;
@@ -54,14 +54,14 @@ intrinsic class com.xvm.Defines
 	static public var FROM_ENEMY : Number;
 	static public var FROM_SQUAD : Number;
 	static public var FROM_PLAYER : Number;
-	static public var DIRECTION_DOWN : Object;
-	static public var DIRECTION_UP : Object;
-	static public var INSERTORDER_BEGIN : Object;
-	static public var INSERTORDER_END : Object;
-	static public var LOADSTATE_NONE : Object;
-	static public var LOADSTATE_LOADING : Object;
-	static public var LOADSTATE_DONE : Object;
-	static public var LOADSTATE_UNKNOWN : Object;
+	static public var DIRECTION_DOWN : Number;
+	static public var DIRECTION_UP : Number;
+	static public var INSERTORDER_BEGIN : Number;
+	static public var INSERTORDER_END : Number;
+	static public var LOADSTATE_NONE : Number;
+	static public var LOADSTATE_LOADING : Number;
+	static public var LOADSTATE_DONE : Number;
+	static public var LOADSTATE_UNKNOWN : Number;
 	static public var ROMAN_LEVEL : Array;
 
 }

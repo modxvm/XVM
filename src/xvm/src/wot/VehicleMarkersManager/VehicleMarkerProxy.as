@@ -20,9 +20,6 @@ import com.xvm.VehicleInfo;
 
 class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent implements IVehicleMarker
 {
-    // dummy var to avoid import warning
-    private static var __dummy = Logger.dummy;
-
     // Private members
     var m_vehicleName:String;
     var m_level:Number;

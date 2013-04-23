@@ -22,9 +22,6 @@ import wot.VehicleMarkersManager.components.VehicleTypeComponent;
 
 class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
 {
-    // dummy var to avoid import warning
-    private static var __dummy = Logger.dummy;
-
     /**
      * Trace function for debug purpose. Must be commented on release.
      * TODO: Is AS2/FD have any kind of conditional compilation?

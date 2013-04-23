@@ -12,9 +12,6 @@ import com.xvm.VehicleInfo;
 
 class wot.VehicleMarkersManager.HitLog
 {
-    // dummy var to avoid import warning
-    private static var __dummy = Logger.dummy;
-
     private static var groupHitsByPlayer:Boolean = false;
 
     private var x:Number;

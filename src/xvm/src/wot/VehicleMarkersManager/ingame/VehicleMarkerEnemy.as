@@ -1,4 +1,4 @@
-﻿class wot.ingame.VehicleMarkerEnemy extends wot.VehicleMarkersManager.VehicleMarkerProxy
+﻿class wot.VehicleMarkersManager.ingame.VehicleMarkerEnemy extends wot.VehicleMarkersManager.VehicleMarkerProxy
 {
   function VehicleMarkerEnemy()
   {

@@ -44,9 +44,7 @@ import wot.VehicleMarkersManager.components.VehicleTypeProxy;
 
 class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarkersManager.IVehicleMarker
 {
-    // dummy var to avoid import warning
-    private static var __dummy = Logger.dummy;
-/*
+    /*
     private function trace(str:String):Void
     {
         //if (m_playerFullName == "...")
