@@ -57,6 +57,7 @@
     <compile path="src\wot\TeamRenderer" />
     <compile path="src\wot\TeamMemberRenderer" />
     <compile path="src\wot\battleloading" />
+    <compile path="src\wot\PlayersPanel" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>

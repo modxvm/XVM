@@ -1,4 +1,3 @@
-import wot.PlayersPanel.PlayerListItemRenderer;
 import com.xvm.Config;
 import wot.PlayersPanel.SpotStatusModel;
 
@@ -11,10 +10,10 @@ class wot.PlayersPanel.SpotStatusView
 {
     public static var SPOT_STATUS_TF_NAME:String = "spotStatusTF";
     
-    private var renderer:PlayerListItemRenderer;
+    private var renderer:net.wargaming.ingame.PlayerListItemRenderer;
     private var spotStatusMarker:TextField;
     
-    public function SpotStatusView(renderer:PlayerListItemRenderer) 
+    public function SpotStatusView(renderer:net.wargaming.ingame.PlayerListItemRenderer) 
     {
         this.renderer = renderer;
     }
@@ -35,7 +34,7 @@ class wot.PlayersPanel.SpotStatusView
     
     // -- Private
     
-    private function createMarker(renderer:PlayerListItemRenderer):Void
+    private function createMarker(renderer:net.wargaming.ingame.PlayerListItemRenderer):Void
     {
         spotStatusMarker = renderer.createTextField
         (

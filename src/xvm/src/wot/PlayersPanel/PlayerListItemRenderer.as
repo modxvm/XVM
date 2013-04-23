@@ -9,8 +9,27 @@ import com.xvm.IconLoader;
 import com.xvm.PlayerInfo;
 import com.xvm.Utils;
 
-class wot.PlayersPanel.PlayerListItemRenderer extends net.wargaming.ingame.PlayerListItemRenderer
+class wot.PlayersPanel.PlayerListItemRenderer
 {
+    // override
+    function __getColorTransform()
+    {
+        return this.__getColorTransformImpl.apply(this, arguments);
+    }
+
+    // override
+    function update()
+    {
+        return this.updateImpl.apply(this, arguments);
+    }
+
+    /////////////////////////////////////////////////////////////////
+
+    public var wrapper:net.wargaming.ingame.PlayerListItemRenderer;
+    private var base:net.wargaming.ingame.PlayerListItemRenderer;
+
+    /////////////////////////////////////////////////////////////////
+
     private static var IS_ALIVE:Number = 1;
     
     var m_clanIcon: UILoaderAlt = null;
@@ -19,13 +38,15 @@ class wot.PlayersPanel.PlayerListItemRenderer extends net.wargaming.ingame.Playe
     
     public var spotStatusView:SpotStatusView;
 
-    function PlayerListItemRenderer()
+    public function PlayerListItemRenderer(wrapper:net.wargaming.ingame.PlayerListItemRenderer, base:net.wargaming.ingame.PlayerListItemRenderer)
     {
-        super();
-
+        this.wrapper = wrapper;
+        this.base = base;
+        wrapper["_xvm_worker"] = this;
+        
         Utils.TraceXvmModule("PlayerListItemRenderer");
         
-        spotStatusView = new SpotStatusView(this);
+        spotStatusView = new SpotStatusView(wrapper);
     }
     
     function completeLoad()
@@ -36,21 +57,20 @@ class wot.PlayersPanel.PlayerListItemRenderer extends net.wargaming.ingame.Playe
 
         mirrorEnemyIcons();
         
-        iconLoader._visible = true;
+        wrapper.iconLoader._visible = true;
     }
     
     private function mirrorEnemyIcons():Void
     {
         if (!Config.s_config.battle.mirroredVehicleIcons && team == Defines.TEAM_ENEMY)
         {
-            iconLoader._xscale = -iconLoader._xscale;
-            iconLoader._x -= 80;
-            this.vehicleLevel._x = iconLoader._x + 15;
+            wrapper.iconLoader._xscale = -wrapper.iconLoader._xscale;
+            wrapper.iconLoader._x -= 80;
+            wrapper.vehicleLevel._x = wrapper.iconLoader._x + 15;
         }
     }
 
-    // override
-    function __getColorTransform(schemeName)
+    function __getColorTransformImpl(schemeName)
     {
         //com.xvm.Logger.add("data.squad=" + data.squad + " " + data.label + " scheme=" + schemeName);
 
@@ -62,33 +82,32 @@ class wot.PlayersPanel.PlayerListItemRenderer extends net.wargaming.ingame.Playe
                 schemeName = "normal_dead";
         }
 
-        return super.__getColorTransform(schemeName);
+        return base.__getColorTransform(schemeName);
     }
 
-    // override
-    function update()
+    function updateImpl()
     {
-        var saved_icon = data ? data.icon : null;
-        if (data)
+        var saved_icon = wrapper.data ? wrapper.data.icon : null;
+        if (wrapper.data)
         {
             // Alternative icon set
             if (!m_iconset)
                 m_iconset = new IconLoader(this, completeLoad);
-            m_iconset.init(iconLoader,
-                [ data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.playersPanel), data.icon ]);
-            data.icon = m_iconset.currentIcon;
+            m_iconset.init(wrapper.iconLoader,
+                [ wrapper.data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.playersPanel), wrapper.data.icon ]);
+            wrapper.data.icon = m_iconset.currentIcon;
 
             // Player/clan icons
-            attachClanIconToPlayer(data);
+            attachClanIconToPlayer(wrapper.data);
         }
 
-        if (Config.s_config.playersPanel.removeSquadIcon && squadIcon)
-            squadIcon._visible = false;
+        if (Config.s_config.playersPanel.removeSquadIcon && wrapper.squadIcon)
+            wrapper.squadIcon._visible = false;
 
-        super.update();
+        base.update();
 
-        if (data)
-            data.icon = saved_icon;
+        if (wrapper.data)
+            wrapper.data.icon = saved_icon;
     }
 
     private function attachClanIconToPlayer(data):Void
@@ -100,8 +119,8 @@ class wot.PlayersPanel.PlayerListItemRenderer extends net.wargaming.ingame.Playe
         if (m_clanIcon == null)
         {
             var x = (!m_iconLoaded || Config.s_config.battle.mirroredVehicleIcons || (team == Defines.TEAM_ALLY))
-                ? iconLoader._x : iconLoader._x + 80;
-            m_clanIcon = PlayerInfo.createIcon(this, cfg, x, iconLoader._y, team);
+                ? wrapper.iconLoader._x : wrapper.iconLoader._x + 80;
+            m_clanIcon = PlayerInfo.createIcon(wrapper, cfg, x, wrapper.iconLoader._y, team);
         }
         PlayerInfo.setSource(m_clanIcon, data.label, data.clanAbbrev);
         m_clanIcon["holder"]._alpha = ((data.vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) != 0) ? 100 : 50;
@@ -109,6 +128,6 @@ class wot.PlayersPanel.PlayerListItemRenderer extends net.wargaming.ingame.Playe
     
     private function get team(): Number
     {
-        return (this._parent._parent._itemRenderer == "LeftItemRendererIcon") ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
+        return (wrapper._parent._parent._itemRenderer == "LeftItemRendererIcon") ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY;
     }
 }
