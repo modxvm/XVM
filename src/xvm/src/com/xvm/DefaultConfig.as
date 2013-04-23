@@ -28,7 +28,7 @@ class com.xvm.DefaultConfig
                 // Show ping to the servers
                 pingServers: {
                   enabled: false,
-                  updateInterval: 3000, // msec
+                  updateInterval: 10000, // msec
                   x: 100,
                   y: 0
                 }

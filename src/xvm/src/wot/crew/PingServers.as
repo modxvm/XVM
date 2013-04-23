@@ -18,18 +18,23 @@ class wot.crew.PingServers
         instance.pingTimer = _global.setInterval(
             function() { PingServers.instance.ShowPing.call(PingServers.instance) },
             Config.s_config.hangar.pingServers.updateInterval);
+
+        // immediately
+        PingServers.instance.ShowPing.call(PingServers.instance);
+        // after 1 sec
+        _global.setTimeout(function() { PingServers.instance.ShowPing.call(PingServers.instance) }, 1000);
     }
 
     public function PingServers()
     {
         pingCommandCounter = 0;
     }
-    
+
     private function ShowPing()
     {
         Comm.Sync(Defines.COMMAND_PING, String(pingCommandCounter++), this, ShowPingCallback);
     }
-    
+
     private function ShowPingCallback(event)
     {
         if (event.str == null || event.str == "")
@@ -37,7 +42,7 @@ class wot.crew.PingServers
         
         if (_root["__xvm_pingTextField"] == null)
         {
-            _root["__xvm_pingTextField"] = _root.createTextField("__xvm_pingTextField", _root.getNextHighestDepth(),
+            _root["__xvm_pingTextField"] = _root.createTextField("__xvm_pingTextField", 0,
                 Config.s_config.hangar.pingServers.x, Config.s_config.hangar.pingServers.y, 100, 300);
             _root["__xvm_pingTextField"].antiAliasType = "advanced";
             _root["__xvm_pingTextField"].html = true;
@@ -46,7 +51,7 @@ class wot.crew.PingServers
                 Utils.createCSS("xvm_ping", 0xCCCCCC, "$FieldFont", 10, "left", false, false));
         }
         
-        com.xvm.Logger.addObject(event);
+        //com.xvm.Logger.addObject(event);
 
         var str:Array = [];
         var res = JSONx.parse(event.str);

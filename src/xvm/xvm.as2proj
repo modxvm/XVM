@@ -54,6 +54,8 @@
     <compile path="src\wot\crew\tankmen" />
     <compile path="src\wot\SquadMemberRenderer" />
     <compile path="shared\Mouse.as" />
+    <compile path="src\wot\TeamRenderer" />
+    <compile path="src\wot\TeamMemberRenderer" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>

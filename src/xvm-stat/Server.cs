@@ -351,7 +351,7 @@ namespace wot
             parameters = cmd[1];
           }
 
-          if (!command.StartsWith("@LOG") && command != "@SET" && command != "@ADD")
+          if (!command.StartsWith("@LOG") && command != "@SET" && command != "@ADD" && command != "@PING")
             Log(String.Format("=> {0} {1}", command, parameters));
 
           ProcessCommand(command, parameters);

@@ -3,18 +3,38 @@ import com.xvm.Config;
 import com.xvm.GlobalEventDispatcher;
 import com.xvm.Logger;
 import com.xvm.Utils;
-import wot.Helpers.TeamRendererHelper;
-import wot.Helpers.UserDataLoaderHelper;
+import com.xvm.Helpers.TeamRendererHelper;
+import com.xvm.Helpers.UserDataLoaderHelper;
 
-class wot.TeamRenderer.PlayerItemRenderer extends net.wargaming.messenger.controls.PlayerItemRenderer
+class wot.TeamRenderer.PlayerItemRenderer
 {
+    // override
+    function configUI()
+    {
+        return this.configUIImpl.apply(this, arguments);
+    }
+
+    // override
+    function afterSetData()
+    {
+        return this.afterSetDataImpl.apply(this, arguments);
+    }
+
+    /////////////////////////////////////////////////////////////////
+
+    private var wrapper:net.wargaming.messenger.controls.PlayerItemRenderer;
+    private var base:net.wargaming.messenger.controls.PlayerItemRenderer;
+
+    /////////////////////////////////////////////////////////////////
+
     private var configured:Boolean;
     private var m_name:String;
     private var m_effField:TextField;
 
-    function PlayerItemRenderer()
+    public function PlayerItemRenderer(wrapper:net.wargaming.messenger.controls.PlayerItemRenderer, base:net.wargaming.messenger.controls.PlayerItemRenderer)
     {
-        super();
+        this.wrapper = wrapper;
+        this.base = base;
 
         Utils.TraceXvmModule("TeamRenderer");
 
@@ -32,10 +52,9 @@ class wot.TeamRenderer.PlayerItemRenderer extends net.wargaming.messenger.contro
         configXVM();
     }
 
-    // override
-    function configUI()
+    function configUIImpl()
     {
-        super.configUI();
+        base.configUI();
         configured = true;
         configXVM();
     }
@@ -49,18 +68,17 @@ class wot.TeamRenderer.PlayerItemRenderer extends net.wargaming.messenger.contro
 
         if (m_effField == null)
         {
-            m_effField = Utils.duplicateTextField(this, "eff", numberField, 0, "left");
-            m_effField._x = width - 20;
+            m_effField = Utils.duplicateTextField(wrapper, "eff", wrapper.numberField, 0, "left");
+            m_effField._x = wrapper.width - 20;
         }
         m_effField.htmlText = "";
 
         afterSetDataXVM();
     }
 
-    // override
-    function afterSetData()
+    function afterSetDataImpl()
     {
-        super.afterSetData();
+        base.afterSetData();
         afterSetDataXVM();
     }
 
@@ -71,14 +89,14 @@ class wot.TeamRenderer.PlayerItemRenderer extends net.wargaming.messenger.contro
         if (Config.s_config.rating.enableCompanyStatistics != true)
             return;
 
-        if (!data || !data.label)
+        if (!wrapper.data || !wrapper.data.label)
         {
             m_name = null;
             m_effField.htmlText = "";
             return;
         }
             
-        m_name = Utils.GetPlayerName(data.label);
+        m_name = Utils.GetPlayerName(wrapper.data.label);
         if (Cache.Exist("INFO@" + m_name))
             setXVMStat();
         else

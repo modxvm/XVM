@@ -4,19 +4,50 @@ import com.xvm.Config;
 import com.xvm.GlobalEventDispatcher;
 import com.xvm.Logger;
 import com.xvm.Utils;
-import wot.Helpers.TeamRendererHelper;
-import wot.Helpers.UserDataLoaderHelper;
+import com.xvm.Helpers.TeamRendererHelper;
+import com.xvm.Helpers.UserDataLoaderHelper;
 
-class wot.TeamMemberRenderer.TeamMemberRenderer extends net.wargaming.messenger.controls.TeamMemberRenderer
+class wot.TeamMemberRenderer.TeamMemberRenderer
 {
+    // override
+    function configUI()
+    {
+        return this.configUIImpl.apply(this, arguments);
+    }
+
+    // override
+    function afterSetData()
+    {
+        return this.afterSetDataImpl.apply(this, arguments);
+    }
+
+    // override
+    function updateAfterStateChange()
+    {
+        return this.updateAfterStateChangeImpl.apply(this, arguments);
+    }
+
+    // override
+    function getToolTipData()
+    {
+        return this.getToolTipDataImpl.apply(this, arguments);
+    }
+
+    /////////////////////////////////////////////////////////////////
+
+    private var wrapper:net.wargaming.messenger.controls.TeamMemberRenderer;
+    private var base:net.wargaming.messenger.controls.TeamMemberRenderer;
+
+    /////////////////////////////////////////////////////////////////
     private var configured:Boolean;
     private var uid:Number;
     private var m_infoField:TextField;
     private var stat:Object;
 
-    function TeamMemberRenderer()
+    public function TeamMemberRenderer(wrapper:net.wargaming.messenger.controls.TeamMemberRenderer, base:net.wargaming.messenger.controls.TeamMemberRenderer)
     {
-        super();
+        this.wrapper = wrapper;
+        this.base = base;
 
         Utils.TraceXvmModule("TeamMemberRenderer");
 
@@ -35,15 +66,14 @@ class wot.TeamMemberRenderer.TeamMemberRenderer extends net.wargaming.messenger.
         configXVM();
     }
 
-    // override
-    function configUI()
+    function configUIImpl()
     {
-        textField._x -= 10;
-        vehicle_type_icon._x -= 8;
-        vehicleNameField._x -= 8;
-        vehicleLevelField._x -= 12;
+        wrapper.textField._x -= 10;
+        wrapper.vehicle_type_icon._x -= 8;
+        wrapper.vehicleNameField._x -= 8;
+        wrapper.vehicleLevelField._x -= 12;
 
-        super.configUI();
+        base.configUI();
 
         configured = true;
         configXVM();
@@ -56,55 +86,50 @@ class wot.TeamMemberRenderer.TeamMemberRenderer extends net.wargaming.messenger.
         if (Config.s_config.rating.enableCompanyStatistics != true)
             return;
 
-        var wnd = owner._parent;
+        var wnd = wrapper.owner._parent;
         if (wnd)
         {
-            wnd.queueLabelXVM = TeamRendererHelper.CreateXVMHeaderLabel(wnd, "queueLabel", vehicleLevelField, 
+            wnd.queueLabelXVM = TeamRendererHelper.CreateXVMHeaderLabel(wnd, "queueLabel", wrapper.vehicleLevelField, 
                 183, 2, "TeamRenderersHeaderTip");
-            //wnd.crewStuffFieldXVM = TeamRendererHelper.CreateXVMHeaderLabel(wnd, "crewStuffField", vehicleLevelField, 
-            //    185, 2, "TeamRenderersHeaderTip");
         }
 
-        m_infoField = Utils.duplicateTextField(this, "eff", vehicleLevelField, 0, "right");
+        m_infoField = Utils.duplicateTextField(wrapper, "eff", wrapper.vehicleLevelField, 0, "right");
         m_infoField._width = 20;
-        m_infoField._x = width - 4;
+        m_infoField._x = wrapper.width - 4;
 
         afterSetDataXVM();
     }
 
-    // override
-    function afterSetData()
+    function afterSetDataImpl()
     {
-        super.afterSetData();
+        base.afterSetData();
         setTextColor();
         afterSetDataXVM();
     }
 
-    // override
-    function updateAfterStateChange()
+    function updateAfterStateChangeImpl()
     {
-        super.updateAfterStateChange();
+        base.updateAfterStateChange();
         setTextColor();
     }
     
     private function setTextColor()
     {
-        var color = MessengerUtils.isFriend(data) ? 0x66FF66 : MessengerUtils.isIgnored(data) ? 0xFF6666 : data.colors[0];
-        textField.textColor = numberField.textColor = vehicleNameField.textColor = vehicleLevelField.textColor = color;
+        var color = MessengerUtils.isFriend(wrapper.data) ? 0x66FF66 : MessengerUtils.isIgnored(wrapper.data) ? 0xFF6666 : wrapper.data.colors[0];
+        wrapper.textField.textColor = wrapper.numberField.textColor = wrapper.vehicleNameField.textColor = wrapper.vehicleLevelField.textColor = color;
     }
     
     private function afterSetDataXVM()
     {
-        if (!data || !data.uid)
-            return;
-        //Logger.addObject(data);
-        
         if (!configured || !Config.s_loaded || Config.s_config.rating.showPlayersStatistics != true)
             return;
         if (Config.s_config.rating.enableCompanyStatistics != true)
             return;
-            
-        uid = data.uid;
+        if (!wrapper.data || !wrapper.data.uid)
+            return;
+        //Logger.addObject(wrapper.data);
+        
+        uid = wrapper.data.uid;
         if (Cache.Exist("INFO#" + uid))
             setXVMStat();
         else
@@ -124,9 +149,8 @@ class wot.TeamMemberRenderer.TeamMemberRenderer extends net.wargaming.messenger.
         stat = TeamRendererHelper.setXVMStat(key, m_infoField);
     }
 
-    // override
-    function getToolTipData()
+    function getToolTipDataImpl()
     {
-        return (!stat) ? super.getToolTipData() : TeamRendererHelper.GetToolTipData(data, stat);
+        return (!stat) ? base.getToolTipData() : TeamRendererHelper.GetToolTipData(wrapper.data, stat);
     }
 }

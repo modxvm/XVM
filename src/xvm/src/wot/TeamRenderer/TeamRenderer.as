@@ -5,19 +5,39 @@ import com.xvm.GlobalEventDispatcher;
 import com.xvm.Locale;
 import com.xvm.Logger;
 import com.xvm.Utils;
-import wot.Helpers.TeamRendererHelper;
-import wot.Helpers.UserDataLoaderHelper;
+import com.xvm.Helpers.TeamRendererHelper;
+import com.xvm.Helpers.UserDataLoaderHelper;
 
-class wot.TeamRenderer.TeamRenderer extends net.wargaming.messenger.controls.TeamRenderer
+class wot.TeamRenderer.TeamRenderer
 {
+    // override
+    function configUI()
+    {
+        return this.configUIImpl.apply(this, arguments);
+    }
+
+    // override
+    function afterSetData()
+    {
+        return this.afterSetDataImpl.apply(this, arguments);
+    }
+
+    /////////////////////////////////////////////////////////////////
+
+    private var wrapper:net.wargaming.messenger.controls.TeamRenderer;
+    private var base:net.wargaming.messenger.controls.TeamRenderer;
+
+    /////////////////////////////////////////////////////////////////
+
     private var configured:Boolean;
     private var m_name:String;
     private var m_effField:TextField;
     private var stat:Object;
 
-    function TeamRenderer()
+    public function TeamRenderer(wrapper:net.wargaming.messenger.controls.TeamRenderer, base:net.wargaming.messenger.controls.TeamRenderer)
     {
-        super();
+        this.wrapper = wrapper;
+        this.base = base;
 
         Utils.TraceXvmModule("TeamRenderer");
 
@@ -36,10 +56,9 @@ class wot.TeamRenderer.TeamRenderer extends net.wargaming.messenger.controls.Tea
         configXVM();
     }
 
-    // override
-    function configUI()
+    function configUIImpl()
     {
-        super.configUI();
+        base.configUI();
         configured = true;
         configXVM();
     }
@@ -51,29 +70,30 @@ class wot.TeamRenderer.TeamRenderer extends net.wargaming.messenger.controls.Tea
         if (Config.s_config.rating.enableCompanyStatistics != true)
             return;
 
-        this.onRollOver = function()
+        var me = this;
+        wrapper.onRollOver = function()
         {
-            if (this.stat)
-                ToolTipManager.instance.show(TeamRendererHelper.GetToolTipData(this.data, this.stat));
+            if (me.stat)
+                ToolTipManager.instance.show(TeamRendererHelper.GetToolTipData(me.wrapper.data, me.stat));
             else
             {
-                if (this.toolTip)
-                    ToolTipManager.instance.show(this.toolTip);
+                if (me.wrapper.toolTip)
+                    ToolTipManager.instance.show(me.wrapper.toolTip);
             }
         }
 
         if (m_effField == null)
         {
-            m_effField = Utils.duplicateTextField(this, "eff", textField, 0, "left");
-            m_effField._x = textField._x + textField._width - 20;
+            m_effField = Utils.duplicateTextField(wrapper, "eff", wrapper.textField, 0, "left");
+            m_effField._x = wrapper.textField._x + wrapper.textField._width - 20;
         }
         m_effField.htmlText = "";
 
-        var updateButton = this["owner"]._parent.updateButton;
+        var updateButton = wrapper["owner"]._parent.updateButton;
         if (updateButton == null)
         {
             //Logger.add("updateButton");
-            updateButton = Utils.duplicateButton(this["owner"]._parent.refreshButton, "updateButton", 135, 0, "", "icons/allUp.tga");
+            updateButton = Utils.duplicateButton(wrapper["owner"]._parent.refreshButton, "updateButton", 135, 0, "", "icons/allUp.tga");
             updateButton.toggle = true;
             updateButton.addEventListener("select", function(e) {
                 updateButton._iconSource = e.selected ? "icons/allDown.tga" : "icons/allUp.tga";
@@ -94,24 +114,23 @@ class wot.TeamRenderer.TeamRenderer extends net.wargaming.messenger.controls.Tea
         UserDataLoaderHelper.LoadUserData(m_name, false);
     }
 
-    // override
-    function afterSetData()
+    function afterSetDataImpl()
     {
-        super.afterSetData();
+        base.afterSetData();
         //Logger.addObject(data);
         afterSetDataXVM();
     }
 
     private function afterSetDataXVM()
     {
-        if (!data || !data.uid)
-            return;
         if (!configured || !Config.s_loaded || Config.s_config.rating.showPlayersStatistics != true)
             return;
         if (Config.s_config.rating.enableCompanyStatistics != true)
             return;
+        if (!wrapper.data || !wrapper.data.uid)
+            return;
 
-        m_name = Utils.GetPlayerName(data.owner);
+        m_name = Utils.GetPlayerName(wrapper.data.owner);
         if (Cache.Exist("INFO@" + m_name))
             setXVMStat();
         else
@@ -119,7 +138,7 @@ class wot.TeamRenderer.TeamRenderer extends net.wargaming.messenger.controls.Tea
             stat = null;
             m_effField.htmlText = "";
             GlobalEventDispatcher.addEventListener("userdata_cached", this, setXVMStat);
-            if (this["owner"]._parent.updateButton != null && this["owner"]._parent.updateButton.selected)
+            if (wrapper["owner"]._parent.updateButton != null && wrapper["owner"]._parent.updateButton.selected)
                 onUpdateClick();
         }
     }
