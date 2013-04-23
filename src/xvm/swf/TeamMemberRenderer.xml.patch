@@ -1,7 +1,6 @@
---- orig\TeamMemberRenderer.xml	2013-04-22 16:01:02.191869500 +0300
-+++ TeamMemberRenderer.xml	2013-04-22 16:01:02.341869500 +0300
-@@ -14,6 +14,9 @@
-           <Color red="51" green="51" blue="51"/>
+--- orig\TeamMemberRenderer.xml	2013-04-23 15:48:39.383239200 +0300
++++ TeamMemberRenderer.xml	2013-04-23 15:48:39.543239200 +0300
+@@ -15,4 +15,7 @@
          </color>
        </SetBackgroundColor>
 +      <ImportAssets2 url="xvm.swf" reserved1="1" reserved2="0">
@@ -9,9 +8,7 @@
 +      </ImportAssets2>
        <DefineBitsLossless2 objectID="1" format="5" width="15" height="15">
          <data>
-           <data>eNpjYKA+YAViByhNqr4MIJ5qpKKQQaJ+KSCu4GFhebZ+RlsFNxOTFAH1QkAsDsSiQOwBxLP1pCX+f3hwZLY6L5cHVFwcqg5dXxE3O1upmIhQiaioaKkgH9+5+tTo/9+enzmXZatXKsjPBxQXKRUVFgCqY0XW7wfEC/SEBX5s6y78++rOvl+fPz/5/+fPm//vru38/3jnLCD/8d9nV3b8WF2TukBHkNcPSS8vEOezMDCs0mJn/1hhpvJ/d0fy/0enVvx/dWnb/0vrJ/3f0531sdJcdTVQHqSOF83dIH4aELcIMDG96Ap1+H9354T/J+bX/b++qvZFi49FiwAzcxoDpj4Y4AbiPKC5749vmPb/8obe/5O99P6fm13w/tCC5jxWRkZePGENCV8J0f+3dkx7kKghvVSdnf1Buo7c/4vzS2briQt74NDHDE0PJ1KdrS5FaipVcjEyhgH5IPpihIrUyWQLzQyoOpxpSYmbqwqo3hYqbg3EIP5URS4OfGkMloal0cSlyUzb+AAAG4yGoQ==</data>
-@@ -38939,8 +38942,8 @@
-               <String value="charAt"/>
+@@ -38940,6 +38943,6 @@
                <String value=" "/>
                <String value="\"/>
 -              <String value=""/>
@@ -20,13 +17,10 @@
 +              <String value=" "/>
                <String value="&#10;"/>
                <String value="&#13;"/>
-               <String value="&#9;"/>
-@@ -47792,7 +47795,7 @@
-         <actions>
+@@ -47793,5 +47796,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.messenger.controls.TeamMemberRenderer"/>
-+              <StackString value="wot.TeamMemberRenderer.TeamMemberRenderer"/>
++              <StackString value="wot.wrapper.TeamMemberRenderer.TeamMemberRenderer"/>
              </items>
            </PushData>
-           <GetVariable/>

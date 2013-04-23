@@ -16,9 +16,9 @@
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
-    <class path="src" />
+    <class path="wrapper" />
     <class path="include" />
-    <class path="include-shared" />
+    <class path="shared" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -38,8 +38,8 @@
   </build>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="src\wot\Minimap\Minimap.as" />
-    <compile path="src\wot\Minimap\MinimapEntry.as" />
+    <compile path="wrapper\wot\wrapper\Minimap\Minimap.as" />
+    <compile path="wrapper\wot\wrapper\Minimap\MinimapEntry.as" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>

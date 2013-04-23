@@ -20,7 +20,7 @@ class wot.crew.PingServers
             Config.s_config.hangar.pingServers.updateInterval);
     }
 
-    public function PinfServers()
+    public function PingServers()
     {
         pingCommandCounter = 0;
     }

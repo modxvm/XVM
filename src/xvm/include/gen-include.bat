@@ -1,2 +1,3 @@
 @echo off
-igen.exe -clean ../xvmlib .
+igen.exe -clean ../src .
+rem pause

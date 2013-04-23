@@ -10,16 +10,30 @@ import com.xvm.Utils;
 import wot.crew.CrewLoader;
 import wot.crew.PingServers;
 
-class wot.crew.tankmen.Crew extends net.wargaming.tankmen.Crew
+class wot.crew.tankmen.Crew
 {
-    public function Crew()
+    // override
+    function setTankmen()
     {
-        super();
+        return this.setTankmenImpl.apply(this, arguments);
+    }
+
+    /////////////////////////////////////////////////////////////////
+
+    private var wrapper:net.wargaming.tankmen.Crew;
+    private var base:net.wargaming.tankmen.Crew;
+
+    /////////////////////////////////////////////////////////////////
+
+    public function Crew(wrapper:net.wargaming.tankmen.Crew, base:net.wargaming.tankmen.Crew)
+    {
+        this.wrapper = wrapper;
+        this.base = base;
 
         Utils.TraceXvmModule("Crew");
 
         GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
-        Config.LoadConfig("Crew.as"); // required for localization
+        Config.LoadConfig("Crew.as");
     }
 
     private function onConfigLoaded()
@@ -31,11 +45,11 @@ class wot.crew.tankmen.Crew extends net.wargaming.tankmen.Crew
     }
 
     // override
-    function setTankmen(data)
+    function setTankmenImpl(data)
     {
-        super.setTankmen(data);
-        //com.xvm.Logger.addObject(list, "list", 2);
-        CrewLoader.s_defaultCrew = list._dataProvider; // setting the crewlist
+        base.setTankmen(data);
+        //com.xvm.Logger.addObject(wrapper.list, "list", 2);
+        CrewLoader.s_defaultCrew = wrapper.list._dataProvider; // save the crewlist
     }
-	
-} 
+
+}

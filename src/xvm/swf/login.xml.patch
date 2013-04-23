@@ -16,7 +16,7 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.login.Login"/>
-+              <StackString value="wot.Login.Login"/>
++              <StackString value="wot.wrapper.Login.Login"/>
              </items>
            </PushData>
            <GetVariable/>

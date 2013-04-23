@@ -1,7 +1,6 @@
---- orig\crew.xml	2013-04-22 16:01:03.511869500 +0300
-+++ crew.xml	2013-04-22 16:01:03.891869500 +0300
-@@ -14,6 +14,9 @@
-           <Color red="51" green="51" blue="51"/>
+--- orig\crew.xml	2013-04-23 15:48:40.713239200 +0300
++++ crew.xml	2013-04-23 15:48:41.093239200 +0300
+@@ -15,4 +15,7 @@
          </color>
        </SetBackgroundColor>
 +      <ImportAssets2 url="xvm.swf" reserved1="1" reserved2="0">
@@ -9,22 +8,17 @@
 +      </ImportAssets2>
        <ImportAssets2 url="ComponentsLib.swf" reserved1="1" reserved2="0">
          <symbols>
-           <Symbol objectID="1" name="UILoaderAlt"/>
-@@ -127284,7 +127287,7 @@
-         <actions>
+@@ -127285,5 +127288,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.tankmen.CrewItemRenderer"/>
-+              <StackString value="wot.crew.tankmen.CrewItemRenderer"/>
++              <StackString value="wot.wrapper.crew.tankmen.CrewItemRenderer"/>
              </items>
            </PushData>
-           <GetVariable/>
-@@ -127466,7 +127469,7 @@
-         <actions>
+@@ -127467,5 +127470,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.tankmen.Crew"/>
-+              <StackString value="wot.crew.tankmen.Crew"/>
++              <StackString value="wot.wrapper.crew.tankmen.Crew"/>
              </items>
            </PushData>
-           <GetVariable/>

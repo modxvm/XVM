@@ -9,10 +9,35 @@ import com.xvm.Logger;
 import com.xvm.StatLoader;
 import com.xvm.VehicleInfo;
 import com.xvm.Utils;
-import wot.Helpers.UserDataLoaderHelper;
+import com.xvm.Helpers.UserDataLoaderHelper;
 
-class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
+class wot.UserInfo.UserInfo
 {
+    // override
+    function setCommonInfo()
+    {
+        return this.setCommonInfoImpl.apply(this, arguments);
+    }
+
+    // override
+    function setStat()
+    {
+        return this.setStatImpl.apply(this, arguments);
+    }
+
+    // override
+    function setList()
+    {
+        return this.setListImpl.apply(this, arguments);
+    }
+
+    /////////////////////////////////////////////////////////////////
+
+    private var wrapper:net.wargaming.profile.UserInfo;
+    private var base:net.wargaming.profile.UserInfo;
+
+    /////////////////////////////////////////////////////////////////
+
     static var lastSort = {
         name: "bBat",
         type: [ "fights" ],
@@ -28,9 +53,10 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
     var m_button5:MovieClip, m_button6:MovieClip, m_button7:MovieClip, m_button8:MovieClip;
     var m_dataLoaded:Boolean;
 
-    function UserInfo()
+    public function UserInfo(wrapper:net.wargaming.profile.UserInfo, base:net.wargaming.profile.UserInfo)
     {
-        super();
+        this.wrapper = wrapper;
+        this.base = base;
 
         Utils.TraceXvmModule("UserInfo");
 
@@ -53,13 +79,12 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         loadData();
     }
 
-    // override
-    function setCommonInfo()
+    function setCommonInfoImpl()
     {
         m_name = arguments[1];
         loadData();
 
-        super.setCommonInfo.apply(this, arguments);
+        base.setCommonInfo.apply(base, arguments);
     }
 
     function loadData()
@@ -96,14 +121,13 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         return (res == "") ? 0 : parseInt(res);
     }
 
-    // override
-    function setStat()
+    function setStatImpl()
     {
         var battles = 0;
         var battlesExtraId = 0;
         var xp = 0;
 
-        var data = (list.selectedIndex > 0) ? list.dataProvider[list.selectedIndex] : null;
+        var data = (wrapper.list.selectedIndex > 0) ? wrapper.list.dataProvider[wrapper.list.selectedIndex] : null;
 
         for (var i = 0; i < arguments.length; ++i)
         {
@@ -187,30 +211,29 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
                     break;
             }
         }
-
-        super.setStat.apply(this, arguments);
+        base.setStat.apply(base, arguments);
 
         if (Config.s_config.rating.enableUserInfoStatistics != true)
             return;
 
         if (!m_statisticsField1)
         {
-            m_statisticsField1 = Utils.duplicateTextField(blocksArea.blockcommon.itemsurvivedBattles, "statisticsField",
-                blocksArea.blockcommon.itemsurvivedBattles.label, blocksArea.blockcommon.itemsurvivedBattles.label._height, "left");
+            m_statisticsField1 = Utils.duplicateTextField(wrapper.blocksArea.blockcommon.itemsurvivedBattles, "statisticsField",
+                wrapper.blocksArea.blockcommon.itemsurvivedBattles.label, wrapper.blocksArea.blockcommon.itemsurvivedBattles.label._height, "left");
             m_statisticsField1._width += 100;
-            m_statisticsField2 = Utils.duplicateTextField(blocksArea.blockbattleeffect.itemdamageDealt, "statisticsField",
-                blocksArea.blockbattleeffect.itemdamageDealt.label, blocksArea.blockbattleeffect.itemdamageDealt.label._height, "left");
+            m_statisticsField2 = Utils.duplicateTextField(wrapper.blocksArea.blockbattleeffect.itemdamageDealt, "statisticsField",
+                wrapper.blocksArea.blockbattleeffect.itemdamageDealt.label, wrapper.blocksArea.blockbattleeffect.itemdamageDealt.label._height, "left");
             m_statisticsField2._width += 100;
-            m_statisticsHeaderField = Utils.duplicateTextField(blocksArea.blockbattleeffect.title, "statisticsHeader",
-                blocksArea.blockbattleeffect.title.blockName, 0, "left");
+            m_statisticsHeaderField = Utils.duplicateTextField(wrapper.blocksArea.blockbattleeffect.title, "statisticsHeader",
+                wrapper.blocksArea.blockbattleeffect.title.blockName, 0, "left");
             m_statisticsHeaderField._x = 330;
-            blocksArea.blockcommon.itembattlesCount.extra._width += 45;
-            blocksArea.blockcommon.itemwins.extra._width += 45;
-            blocksArea.blockcommon.itemlosses.extra._width += 45;
-            blocksArea.blockcommon.itemsurvivedBattles.extra._width += 45;
-            blocksArea.blockbattleeffect.itemfrags.extra._width += 45;
-            blocksArea.blockbattleeffect.itemdamageDealt.extra._width += 45;
-            //Logger.addObject(blocksArea.blockcommon, "blocksArea", 1);
+            wrapper.blocksArea.blockcommon.itembattlesCount.extra._width += 45;
+            wrapper.blocksArea.blockcommon.itemwins.extra._width += 45;
+            wrapper.blocksArea.blockcommon.itemlosses.extra._width += 45;
+            wrapper.blocksArea.blockcommon.itemsurvivedBattles.extra._width += 45;
+            wrapper.blocksArea.blockbattleeffect.itemfrags.extra._width += 45;
+            wrapper.blocksArea.blockbattleeffect.itemdamageDealt.extra._width += 45;
+            //Logger.addObject(wrapper.blocksArea.blockcommon, "blocksArea", 1);
         }
 
         setXVMStat1();
@@ -234,7 +257,7 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         }
 
         fixList();
-        list.invalidate();
+        wrapper.list.invalidate();
 
         setXVMStat1();
         setXVMStat2();
@@ -271,7 +294,7 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
 
     private function setXVMStat2()
     {
-        if (list.selectedIndex == 0)
+        if (wrapper.list.selectedIndex == 0)
             setGlobalStatistic();
         else
             setSelectedVehicleStatistic();
@@ -301,7 +324,7 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
     {
         m_statisticsHeaderField.htmlText = "<span class='xvm_statisticsHeader'>" + Locale.get("player (average / top)") + "</span>";
 
-        var data = list.dataProvider[list.selectedIndex];
+        var data = wrapper.list.dataProvider[wrapper.list.selectedIndex];
         if (!data)
         {
             m_statisticsField2.htmlText = "";
@@ -310,10 +333,10 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
 
         //Logger.addObject(blocksArea, "blocksArea", 3);
         //Logger.addObject(data);
-        var tb = extractNumber(blocksArea.blockcommon.itembattlesCount.value.text);
-        var tw = extractNumber(blocksArea.blockcommon.itemwins.value.text);
-        var td = extractNumber(blocksArea.blockbattleeffect.itemdamageDealt.value.text);
-        var tf = extractNumber(blocksArea.blockbattleeffect.itemfrags.value.text);
+        var tb = extractNumber(wrapper.blocksArea.blockcommon.itembattlesCount.value.text);
+        var tw = extractNumber(wrapper.blocksArea.blockcommon.itemwins.value.text);
+        var td = extractNumber(wrapper.blocksArea.blockbattleeffect.itemdamageDealt.value.text);
+        var tf = extractNumber(wrapper.blocksArea.blockbattleeffect.itemfrags.value.text);
         var vn = VehicleInfo.getVehicleName(data.icon);
         vn = vn.slice(vn.indexOf("-") + 1).toUpperCase();
         var stat = {
@@ -345,13 +368,13 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         // END FIXIT
         m_statisticsField2.htmlText = "<span class='xvm_statisticsField'>" + s2 + "</span>";
     }
-    
+
     // list
 
-    // override
-    function setList()
+    function setListImpl()
     {
-        super.setList.apply(this, arguments);
+        base.setList.apply(base, arguments);
+
         fixList();
         if (lastSort.type)
             sortList(lastSort.type, lastSort.dir);
@@ -361,7 +384,7 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
 
     private function fixList()
     {
-        var data = list.dataProvider;
+        var data = wrapper.list.dataProvider;
         //Logger.addObject(data, "", 3);
         for (var i = 0; i < data.length; ++i)
         {
@@ -422,69 +445,31 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
             }
         }
 
-        for (var i in list.renderers)
-        {
-            if (list.renderers[i].setup != rendererSetup)
-            {
-                list.renderers[i].setup2 = list.renderers[i].setup;
-                list.renderers[i].setup = rendererSetup;
-            }
-        }
-    }
-
-    function rendererSetup()
-    {
-        this["setup2"].apply(this, arguments);
-        var data = this["data"];
-        var teff = this["teff"];
-        var fights = this["fights"];
-
-        if (!teff)
-        {
-            teff = Utils.duplicateTextField(this, "teff", fights, 0, "center");
-            this["teff"] = teff;
-            teff._x -= 37;
-            //Logger.add("t=" + teff._x + ", f=" + fights._x);
-        }
-
-        if (!data || !data.e || !data.teff)
-            teff.htmlText = "";
-        else
-        {
-            var color = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, data.e);
-            teff.htmlText =
-                "<span class='xvm_teff'>" +
-                "<font color='" + color + "'>" + (data.e < 10 ? data.e : "X") + "</font>" +
-                //" (<font color='" + color + "'>" + data.teff + "</font>)" +
-                "</span>";
-        }
+        fixRenderers();
     }
 
     // sorting
 
     private function createButtons()
     {
-        var hdr:MovieClip = null;
+        var hdr = null;
         var y = 0;
-        for (var i in this)
+        for (var i in wrapper)
         {
             if (!Utils.startsWith("instance", i))
                 continue;
-            for (var j in this[i])
+            for (var j in wrapper[i])
             {
                 if (Utils.startsWith("instance", j))
                 {
-                    hdr = this[i];
-                    y = this[i][j]._y;
-                    this[i][j].text = "";
+                    hdr = wrapper[i];
+                    y = wrapper[i][j]._y;
+                    wrapper[i][j].text = "";
                 }
             }
             if (hdr != null)
                 break;
         }
-
-        if (hdr == null)
-            return;
 
         m_button1 = createButton(hdr, "bLvl", 10,  y, Locale.get("Level"), "left", 1);
         m_button2 = createButton(hdr, "bTyp", 124, y, Locale.get("Type"), "right", 1);
@@ -510,7 +495,7 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
             click: "onSortClick",
             stateChange: "onButtonStateChangeClick"
         });
-            
+
         b.group = "sort";
         b.defaultSort = defaultSort;
         b.sortDir = 0;
@@ -551,7 +536,7 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         sortList(sortType, sortDir);
         lastSort.name = b._name;
 
-        list.selectedIndex = 0;
+        wrapper.list.selectedIndex = 0;
     }
 
     function sortList(sortType, sortDir)
@@ -560,7 +545,7 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         lastSort.dir = sortDir.slice();
         for (var i = 0; i < sortDir.length; ++i)
             sortDir[i] = (sortDir[i] == 1 ? Array.DESCENDING : 0) | Array.CASEINSENSITIVE | Array.NUMERIC;
-        var data = list.dataProvider.slice();
+        var data = wrapper.list.dataProvider.slice();
         var first = data.shift();
         var isWins = Utils.indexOf(sortType, "wins") != -1;
         if (isWins)
@@ -575,7 +560,7 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
                 data[i].wins += "%";
         }
         data.unshift(first);
-        list.dataProvider = data;
+        wrapper.list.dataProvider = data;
     }
 
     private function onButtonStateChangeClick(e)
@@ -586,6 +571,48 @@ class wot.UserInfo.UserInfo extends net.wargaming.profile.UserInfo
         else {
             b.sortDir = 0;
             b.textField.textColor = 0xF2F1E1;
+        }
+    }
+
+    // fix renderers
+    function fixRenderers()
+    {
+        for (var i in wrapper.list.renderers)
+        {
+            if (wrapper.list.renderers[i].setup != rendererSetup)
+            {
+                wrapper.list.renderers[i].setup_orig = wrapper.list.renderers[i].setup;
+                wrapper.list.renderers[i].setup = rendererSetup;
+            }
+        }
+    }
+
+    // executes in the renderer context
+    function rendererSetup()
+    {
+        this["setup_orig"].apply(this, arguments);
+        var data = this["data"];
+        var teff = this["teff"];
+        var fights = this["fights"];
+
+        if (!teff)
+        {
+            teff = Utils.duplicateTextField(this, "teff", fights, 0, "center");
+            this["teff"] = teff;
+            teff._x -= 37;
+            //Logger.add("t=" + teff._x + ", f=" + fights._x);
+        }
+
+        if (!data || !data.e || !data.teff)
+            teff.htmlText = "";
+        else
+        {
+            var color = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, data.e);
+            teff.htmlText =
+                "<span class='xvm_teff'>" +
+                "<font color='" + color + "'>" + (data.e < 10 ? data.e : "X") + "</font>" +
+                //" (<font color='" + color + "'>" + data.teff + "</font>)" +
+                "</span>";
         }
     }
 }

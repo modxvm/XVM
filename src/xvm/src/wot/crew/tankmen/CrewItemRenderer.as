@@ -1,35 +1,55 @@
 ﻿/**
- * 
+ *
  * @author LEMAXHO
  */
 import com.xvm.Locale;
 import wot.crew.CrewLoader;
 
-class wot.crew.tankmen.CrewItemRenderer extends net.wargaming.tankmen.CrewItemRenderer
+class wot.crew.tankmen.CrewItemRenderer
 {
-    var onMouseDownFuncBase;
-
-    function CrewItemRenderer()
+    // override
+    function configUI()
     {
-        super();
+        return this.configUIImpl.apply(this, arguments);
+    }
+
+    /////////////////////////////////////////////////////////////////
+
+    private var wrapper:net.wargaming.tankmen.CrewItemRenderer;
+    private var base:net.wargaming.tankmen.CrewItemRenderer;
+
+    /////////////////////////////////////////////////////////////////
+
+    private var onMouseDownFuncBase;
+
+    public function CrewItemRenderer(wrapper:net.wargaming.tankmen.CrewItemRenderer, base:net.wargaming.tankmen.CrewItemRenderer)
+    {
+        this.wrapper = wrapper;
+        this.base = base;
+
         onMouseDownFuncBase = null;
     }
 
-    function configUI()
+    private function configUIImpl()
     {
-        super.configUI();
-        onMouseDownFuncBase = onMouseDownFunc;
-        onMouseDownFunc = onMouseDownFunc2;
-        onMouseDown = onMouseDownFunc
+        base.configUI();
+        wrapper["onMouseDownFuncBase"] = wrapper.onMouseDownFunc;
+        wrapper.onMouseDownFunc =  onMouseDownFuncXVM;
+        wrapper.onMouseDown = wrapper.onMouseDownFunc;
     }
 
-    function onMouseDownFunc2(button, target)
+    /////////////////////////////////////////////////////////////////
+    // CONTEXT: wrapper
+    
+    private function onMouseDownFuncXVM(button, target)
     {
+        var context:net.wargaming.tankmen.CrewItemRenderer = net.wargaming.tankmen.CrewItemRenderer(this);
+            
         onMouseDownFuncBase.apply(this, arguments);
 
-        if (_disabled || data.tankmanID != null)
+        if (context.disabled || context.data.tankmanID != null)
             return;
-        if (Mouse.RIGHT != button || !this.hitTest(_root._xmouse, _root._ymouse, true))
+        if (Mouse.RIGHT != button || !context.hitTest(_root._xmouse, _root._ymouse, true))
             return;
 
         // check for empty space click
@@ -51,7 +71,10 @@ class wot.crew.tankmen.CrewItemRenderer extends net.wargaming.tankmen.CrewItemRe
             [{id: "PutOwnCrew", label: Locale.get("PutOwnCrew") }],
             [net.wargaming.controls.ContextMenu.SEPARATE],
             [{id: "PutBestCrew", label: Locale.get("PutBestCrew") }]
-            ], false, {id: this.data.tankmanID});
+            ], false, {id: context.data.tankmanID});
         menu.addEventListener("action", CrewLoader.PutCrewAction);
     }
-} 
+
+    // CONTEXT: wrapper
+    /////////////////////////////////////////////////////////////////
+}

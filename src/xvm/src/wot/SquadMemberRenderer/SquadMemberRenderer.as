@@ -11,15 +11,41 @@ import com.xvm.Utils;
 import com.xvm.VehicleInfo;
 import com.xvm.VehicleInfoDataL10n;
 
-class wot.SquadMemberRenderer.SquadMemberRenderer extends net.wargaming.messenger.controls.SquadMemberRenderer
+class wot.SquadMemberRenderer.SquadMemberRenderer
 {
+    // override
+    function configUI()
+    {
+        return this.configUIImpl.apply(this, arguments);
+    }
+
+    // override
+    function afterSetData()
+    {
+        return this.afterSetDataImpl.apply(this, arguments);
+    }
+
+    // override
+    function getToolTipData()
+    {
+        return this.getToolTipDataImpl.apply(this, arguments);
+    }
+
+    /////////////////////////////////////////////////////////////////
+
+    private var wrapper:net.wargaming.messenger.controls.SquadMemberRenderer;
+    private var base:net.wargaming.messenger.controls.SquadMemberRenderer;
+
+    /////////////////////////////////////////////////////////////////
+
     private var configured:Boolean;
     private var uid:Number;
     private var m_infoField:TextField;
 
-    function SquadMemberRenderer()
+    public function SquadMemberRenderer(wrapper:net.wargaming.messenger.controls.SquadMemberRenderer, base:net.wargaming.messenger.controls.SquadMemberRenderer)
     {
-        super();
+        this.wrapper = wrapper;
+        this.base = base;
 
         Utils.TraceXvmModule("Squad");
 
@@ -30,18 +56,16 @@ class wot.SquadMemberRenderer.SquadMemberRenderer extends net.wargaming.messenge
         GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
         Config.LoadConfig("SquadMemberRenderer.as");
     }
-    
+
     private function onConfigLoaded()
     {
         GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
         configXVM();
     }
 
-    // override
-    function configUI()
+    function configUIImpl()
     {
-        super.configUI();
-
+        base.configUI();
         configured = true;
         configXVM();
     }
@@ -53,17 +77,16 @@ class wot.SquadMemberRenderer.SquadMemberRenderer extends net.wargaming.messenge
         if (Config.s_config.squad.enabled != true)
             return;
 
-        m_infoField = Utils.duplicateTextField(this, "info", vehicleNameField, 0, "right");
+        m_infoField = Utils.duplicateTextField(wrapper, "info", wrapper.vehicleNameField, 0, "right");
         m_infoField._width = 20;
-        m_infoField._x = width - 4;
+        m_infoField._x = wrapper.width - 4;
 
         afterSetDataXVM();
     }
-    
-    // override
-    function afterSetData()
+
+    function afterSetDataImpl()
     {
-        super.afterSetData();
+        base.afterSetData();
         afterSetDataXVM();
     }
 
@@ -72,7 +95,7 @@ class wot.SquadMemberRenderer.SquadMemberRenderer extends net.wargaming.messenge
         if (m_infoField != null)
             m_infoField.htmlText = "";
 
-        if (!data || !data.uid)
+        if (!wrapper.data || !wrapper.data.uid)
             return;
         //Logger.addObject(data);
         if (!configured || !Config.s_loaded)
@@ -80,7 +103,7 @@ class wot.SquadMemberRenderer.SquadMemberRenderer extends net.wargaming.messenge
         if (Config.s_config.squad.enabled != true)
             return;
 
-        uid = data.uid;
+        uid = wrapper.data.uid;
         /*
         if (Cache.Exist("INFO#" + uid))
             setXVMStat();
@@ -90,24 +113,23 @@ class wot.SquadMemberRenderer.SquadMemberRenderer extends net.wargaming.messenge
             GlobalEventDispatcher.addEventListener("userdata_cached", this, setXVMStat);
             UserDataLoaderHelper.LoadUserData(uid, true);
         }*/
-        
-        var ti = getTankInfo(data.vehicleName);
+
+        var ti = getTankInfo(wrapper.data.vehicleName);
         if (ti != null)
             m_infoField.htmlText = "<span class='xvm_info'>" + Config.s_config.squad.leftLvlBorder + ti.level + "</span>";
         //Logger.add(m_infoField.htmlText);
     }
 
-    // override
-    function getToolTipData()
+    function getToolTipDataImpl()
     {
         //Logger.add("getToolTipData");
         if (!Config.s_config.squad.enabled)
-            return super.getToolTipData();
+            return base.getToolTipData();
 
-        var ti = getTankInfo(data.vehicleName);
+        var ti = getTankInfo(wrapper.data.vehicleName);
         if (ti == null)
-            return super.getToolTipData();
-        
+            return base.getToolTipData();
+
         return
             Locale.get("Type") + ": " + Locale.get(ti.type) + "\n" +
             Locale.get("Battle tiers") + ": " + ti.battleTiers + "\n" +
@@ -119,9 +141,9 @@ class wot.SquadMemberRenderer.SquadMemberRenderer extends net.wargaming.messenge
         //Logger.add("getTankInfo");
         //Logger.addObject(data);
         if (Config.s_loaded && !Config.s_config.squad.showClan)
-            data.displayName = Utils.GetPlayerName(data.displayName); // FIXIT: bad style
-            
-        if (!Config.s_loaded || !Config.s_config.squad.enabled || !data || !vname || vname == "")
+            wrapper.data.displayName = Utils.GetPlayerName(wrapper.data.displayName); // FIXIT: bad style
+
+        if (!Config.s_loaded || !Config.s_config.squad.enabled || !wrapper.data || !vname || vname == "")
             return null;
 
         var vkey = VehicleInfoDataL10n.LocalizedNameToVehicleKey(vname);
@@ -142,5 +164,5 @@ class wot.SquadMemberRenderer.SquadMemberRenderer extends net.wargaming.messenge
             battleTiers: vi1.tiers.join("-")
         };
     }
-    
+
 }
