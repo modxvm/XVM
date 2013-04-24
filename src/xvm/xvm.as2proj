@@ -59,6 +59,7 @@
     <compile path="src\wot\battleloading" />
     <compile path="src\wot\PlayersPanel" />
     <compile path="src\wot\StatisticForm" />
+    <compile path="src\wot\TeamBasesPanel" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>

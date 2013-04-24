@@ -6,6 +6,7 @@ import wot.TeamBasesPanel.CapBarModel.CapSpeed;
 import wot.TeamBasesPanel.Macro;
 import wot.TeamBasesPanel.CapConfig;
 import wot.TeamBasesPanel.CapBarModel.OneTankSpeed;
+import com.xvm.Utils;
 
 /**
  * Capture progress bar
@@ -33,8 +34,27 @@ import wot.TeamBasesPanel.CapBarModel.OneTankSpeed;
  * updateProgress() is also called twice a second.
  */
 
-class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
+class wot.TeamBasesPanel.CaptureBar
 {
+    // override
+    function updateProgress()
+    {
+        return this.updateProgressImpl.apply(this, arguments);
+    }
+
+    // override
+    function updateTitle()
+    {
+        return this.updateTitleImpl.apply(this, arguments);
+    }
+
+    /////////////////////////////////////////////////////////////////
+
+    private var wrapper:net.wargaming.ingame.CaptureBar;
+    private var base:net.wargaming.ingame.CaptureBar;
+
+    /////////////////////////////////////////////////////////////////
+
     private var m_capSpeed:CapSpeed; // calculates capture speed
     private var m_oneTankSpeed:OneTankSpeed; // define cap min cap speed based on map type
     private var m_macro:Macro;       // defines user presentable html text
@@ -48,10 +68,15 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
     * Not once per capture bar creation on stage.
     * See this.start()
     */
-    public function CaptureBar()
+    public function CaptureBar(wrapper:net.wargaming.ingame.CaptureBar, base:net.wargaming.ingame.CaptureBar)
     {
+        this.wrapper = wrapper;
+        this.base = base;
+        wrapper["_xvm_worker"] = this;
+        
+        Utils.TraceXvmModule("TeamBasesPanel");
+
         m_oneTankSpeed = new OneTankSpeed();
-        super();
     }
     
    /**
@@ -72,14 +97,14 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
         * so lower font parts are not being cut
         * when font size does not fit field height.
         */ 
-        m_titleTF.autoSize = "center";
-        m_timerTF.autoSize = "center";
+        wrapper.m_titleTF.autoSize = "center";
+        wrapper.m_timerTF.autoSize = "center";
         
        /**
         * Adjust distance from primary upper field so
         * no overlapping occurs when font size is high.
         */
-        m_titleTF._y -= CapConfig.primaryTitleOffset;
+        wrapper.m_titleTF._y -= CapConfig.primaryTitleOffset;
         
         /** Calculates capture speed */
         m_capSpeed = new CapSpeed();
@@ -92,32 +117,32 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
         * Shadow style and new macro should be defined already.
         * If not, than original WG data will be displayed to user before first update tick.
         */
-        m_titleTF.filters = getShadowFilter(capColor);
-        m_timerTF.filters = getShadowFilter(capColor);
-        m_titleTF.htmlText = m_macro.getPrimaryText();
-        m_timerTF.htmlText = m_macro.getSecondaryText();
+        wrapper.m_titleTF.filters = getShadowFilter(capColor);
+        wrapper.m_timerTF.filters = getShadowFilter(capColor);
+        wrapper.m_titleTF.htmlText = m_macro.getPrimaryText();
+        wrapper.m_timerTF.htmlText = m_macro.getSecondaryText();
     }
     
    /**
     * Called by TeamBasesPanel original WG class
     */ 
-    public function updateProgress(newPointsVal:Number):Void
+    public function updateProgressImpl(newPointsVal:Number):Void
     {
         if (!CapConfig.enabled)
         {
-            super.updateProgress(newPointsVal);
+            base.updateProgress(newPointsVal);
             return;
         }
 
-        m_capSpeed.calculate(newPointsVal, m_points || m_startPoints);
+        m_capSpeed.calculate(newPointsVal, wrapper.m_points || m_startPoints);
 
-        super.updateProgress(newPointsVal); // modifies m_point;
+        base.updateProgress(newPointsVal); // modifies m_point;
         
         //prepare text strings
         m_macro.update(isSituationNormal, capSecondsLeft, timeLeftMinSec, capturersNum, newPointsVal, m_capSpeed.getSpeed());
         
-        m_titleTF.htmlText = m_macro.getPrimaryText();   // Upper text field relative to capture bar
-        m_timerTF.htmlText = m_macro.getSecondaryText(); // Lower text field relative to capture bar
+        wrapper.m_titleTF.htmlText = m_macro.getPrimaryText();   // Upper text field relative to capture bar
+        wrapper.m_timerTF.htmlText = m_macro.getSecondaryText(); // Lower text field relative to capture bar
     }
 
     /**
@@ -125,10 +150,10 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
      * Called from TeamBasesPanel.setCaptured, when point becomes fully captured (3-5 seconds after 100 percent).
      * @param value
      */
-    function updateTitle(value)
+    function updateTitleImpl(value)
     {
-        m_titleTF.htmlText = m_macro.getCaptureDoneText();
-        m_timerTF.htmlText = "";
+        wrapper.m_titleTF.htmlText = m_macro.getCaptureDoneText();
+        wrapper.m_timerTF.htmlText = "";
     }
 
     // -- Private
@@ -191,6 +216,6 @@ class wot.TeamBasesPanel.CaptureBar extends net.wargaming.ingame.CaptureBar
     
     private function get capPointsLeft():Number
     {
-        return 100 - m_points;
+        return 100 - wrapper.m_points;
     }
 }

@@ -9,15 +9,30 @@ import com.xvm.Utils;
 * Creates and manages CaptureBar instances.
 */
 
-class wot.TeamBasesPanel.TeamBasesPanel extends net.wargaming.ingame.TeamBasesPanel
+class wot.TeamBasesPanel.TeamBasesPanel
 {
-    public function TeamBasesPanel() 
+    // override
+    function add()
     {
+        return this.addImpl.apply(this, arguments);
+    }
+
+    /////////////////////////////////////////////////////////////////
+
+    private var wrapper:net.wargaming.ingame.TeamBasesPanel;
+    private var base:net.wargaming.ingame.TeamBasesPanel;
+
+    /////////////////////////////////////////////////////////////////
+
+    public function TeamBasesPanel(wrapper:net.wargaming.ingame.TeamBasesPanel, base:net.wargaming.ingame.TeamBasesPanel)
+    {
+        this.wrapper = wrapper;
+        this.base = base;
+
         Utils.TraceXvmModule("TeamBasesPanel");
-        super();
     }
     
-    function add(id, sortWeight, capColor, title, points)
+    function addImpl(id, sortWeight, capColor, title, points)
     {
         if (CapConfig.enabled)
         {
@@ -28,16 +43,16 @@ class wot.TeamBasesPanel.TeamBasesPanel extends net.wargaming.ingame.TeamBasesPa
             * Passing original values make text properties original
             * at that first moment.
             */
-            super.add(id, sortWeight, capColor, null, null);
+            base.add(id, sortWeight, capColor, null, null);
             /**
             * This array is defined at parent original WG class.
-            * start() is XVMs method at CaptureBar class.
+            * start() is XVMs method at worker CaptureBar class.
             */
-            captureBars[indexByID[id]].start(points, capColor);
+            wrapper.captureBars[wrapper.indexByID[id]]["_xvm_worker"].start(points, capColor);
         }
         else
         {
-            super.add(id, sortWeight, capColor, title, points);
+            base.add(id, sortWeight, capColor, title, points);
         }
     }
 }
