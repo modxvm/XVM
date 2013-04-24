@@ -14,6 +14,6 @@ class wot.VehicleMarkersManager.components.ActionMarkerProxy extends AbstractAcc
 
     public function get actionMarker():MovieClip
     {
-        return xvm.proxy.actionMarker;
+        return xvm.wrapper.actionMarker;
     }
 }

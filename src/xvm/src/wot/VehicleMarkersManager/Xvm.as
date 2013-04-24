@@ -295,6 +295,10 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     }
 
     /**
+    * MAIN
+    */
+
+    /**
      * Second stage of initialization
      * @see init
      * @see StatLoader
@@ -308,12 +312,6 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         initializeTextFields();
         XVMUpdateStyle();
     }
-
-    // CODE BELOW IS NOT CHECKED
-
-    /**
-    * MAIN
-    */
 
     function XVMUpdateDynamicTextFields()
     {

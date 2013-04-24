@@ -14,7 +14,7 @@ class wot.VehicleMarkersManager.components.HealthBarProxy extends AbstractAccess
 
     public function createHolder():MovieClip
     {
-        return xvm.wrapper.createEmptyMovieClip("xvm_healthBar", xvm.proxy.marker.getDepth() - 1); // Put health Bar to back.
+        return xvm.wrapper.createEmptyMovieClip("xvm_healthBar", xvm.wrapper.marker.getDepth() - 1); // Put health Bar to back.
     }
 
     public function get curHealth():Number

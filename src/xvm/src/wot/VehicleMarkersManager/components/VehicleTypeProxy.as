@@ -15,7 +15,7 @@ class wot.VehicleMarkersManager.components.VehicleTypeProxy extends AbstractAcce
 
     public function get marker():MovieClip
     {
-        return xvm.proxy.marker;
+        return xvm.wrapper.marker;
     }
 
     public function get isSpeaking():Boolean

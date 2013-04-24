@@ -8,54 +8,77 @@ class wot.wrapper.VehicleMarkersManager.VehicleMarkerProxy extends net.wargaming
     {
         super();
 
+        //for (var i in this)
+        //    com.xvm.Logger.add(i + " " + typeof(this[i]));
+
         var OVERRIDE_FUNCTIONS:Array = [
-            "onEnterFrame",
-            "gotoAndStop",
-            "__get__visible",
-            "__set__visible",
-            "__get__disabled",
-            "__set__disabled",
+            // VehicleMarker
             "init",
+            //"settingsUpdate",
             "update",
             "updateMarkerSettings",
+            //"onSplashHidden",
+            //"layoutParts",
+            //"__get__colorsManager",
+            //"__get__colorSchemeName",
+            //"__get__vehicleDestroyed",
+            //"__get__isEnabledExInfo",
+            //"isSpeaking",
             "setSpeaking",
+            //"getMarkerState",
+            //"setMarkerState",
             "setEntityName",
             "updateHealth",
             "updateState",
             "showExInfo",
             "showActionMarker",
-            "settingsUpdate",
+            //"getPartVisibility",
+            //"getNameText",
+            //"getHelthText",
+            //"getHealthPercents",
+            //"configUI",
+            //"draw",
+            //"setupIconLoader",
+            //"populateData",
+            //"setVehicleClass",
+            //"initMarkerLabel",
+            //"updateMarkerLabel",
+            //"_centeringIcon",
+            //"_onCompleteLoad",
+            //"_getVehicleClassName",
+            //"__get__exInfo",
+            //"__set__exInfo",
+            //"__get__markerSettings",
+            //"__set__markerSettings",
+
+            // UIComponent
             "onLoad",
-            "configUI",
-            "setSize",
-            "validateNow",
-            "invalidate",
-            "setMarkerState",
-            "__get__exInfo",
-            "__set__exInfo",
-            "__get_markerSettings",
-            "__set_markerSettings",
-            "__get__width",
-            "__set__width",
-            "__get__height",
-            "__set__height",
-            "__get__focused",
-            "__set__focused",
-            "__get__displayFocus",
-            "__set__displayFocus",
-            "handleInput",
-            "toString",
-            "initSize",
-            "draw",
-            "changeFocus",
-            "onMouseWheel",
-            "scrollWheel"
+            //"__get__disabled",
+            //"__set__disabled",
+            //"__get__visible",
+            //"__set__visible",
+            //"__get__width",
+            //"__set__width",
+            //"__get__height",
+            //"__set__height",
+            //"setSize",
+            //"__get__focused",
+            //"__set__focused",
+            //"__get__displayFocus",
+            //"__set__displayFocus",
+            //"handleInput",
+            //"invalidate",
+            //"validateNow",
+            //"toString",
+            //"initSize",
+            //"changeFocus",
+            //"onMouseWheel",
+            //"scrollWheel",
+
+            // MovieClip
+            "onEnterFrame",
+            "gotoAndStop"
         ];
-        for (var i in this)
-        {
-            
-            com.xvm.Logger.add(i + " " + typeof(this[i]));
-        }
         Wrapper.override(this, new wot.VehicleMarkersManager.VehicleMarkerProxy(this, super), OVERRIDE_FUNCTIONS);
     }
 }

@@ -29,4 +29,16 @@
     function updateState(newState:String, isImmediate:Boolean):Void;
     function showExInfo(show:Boolean):Void;
     function showActionMarker(actionState):Void;
+
+    function settingsUpdate(flag);
+    function getMarkerState();
+    function setMarkerState(value);
+    function setVehicleClass();
+    function initMarkerLabel();
+    function updateMarkerLabel();
+
+    function get exInfo();
+    function set exInfo(value);
+    function get markerSettings();
+    function set markerSettings(value);
 }
