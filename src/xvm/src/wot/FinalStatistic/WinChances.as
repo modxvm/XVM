@@ -6,7 +6,7 @@ class wot.FinalStatistic.WinChances
 {
     private var form_mc:MovieClip;
 
-    public function WinChances(form_mc)
+    public function WinChances(form_mc:MovieClip)
     {
         this.form_mc = form_mc;
         GlobalEventDispatcher.addEventListener("stat_loaded", this, onStatLoaded);

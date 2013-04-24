@@ -24,7 +24,7 @@ class wot.VehicleMarkersManager.components.damage.DamageTextAnimation
      *
      *              0s    0.5s  1s    1.5s  delay Xs
      *  emerge      ###++ +++++ +++++ +++++ ~ ~ ~ -----
-     *  tint        ### 
+     *  tint        ###
      *  moveUpward  ##### ##### ##### ##### ~ ~ ~ +++++
      *  fadeOut     ----- ----- ----- ----- ~ ~ ~ #####
      */

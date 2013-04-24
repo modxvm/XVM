@@ -16,7 +16,7 @@ class wot.VehicleMarkersManager.components.HealthBarComponent
     {
         this.proxy = proxy;
     }
-    
+
     public function init()
     {
         healthBar = proxy.createHolder();

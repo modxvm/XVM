@@ -9,7 +9,7 @@ class wot.battle.FragCorrelation
         if (Config.s_config.fragCorrelation.hideTeamTextFields == true)
             hideFragCorellationBarTeamTextFields();
     }
-    
+
     /** Disable caret cursor change while mouse cursor is hovering over frag clips */
     private static function disableSelection():Void
     {
@@ -24,7 +24,7 @@ class wot.battle.FragCorrelation
         for (var i in clipsToDisableSelect)
             clipsToDisableSelect[i].selectable = false;
     }
-    
+
     private static function hideFragCorellationBarTeamTextFields():Void
     {
         /** Everything outside of this rectangular mask will be invisible */

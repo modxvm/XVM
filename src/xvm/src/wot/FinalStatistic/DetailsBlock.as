@@ -3,8 +3,32 @@ import com.xvm.GlobalEventDispatcher;
 import com.xvm.Locale;
 import com.xvm.Utils;
 
-class wot.FinalStatistic.DetailsBlock extends net.wargaming.hangar.FinalStatistic.view.DetailsBlock
+class wot.FinalStatistic.DetailsBlock
 {
+    /////////////////////////////////////////////////////////////////
+    // wrapped methods
+
+    public var wrapper:net.wargaming.hangar.FinalStatistic.view.DetailsBlock;
+    private var base:net.wargaming.hangar.FinalStatistic.view.DetailsBlock;
+
+    public function DetailsBlock(wrapper:net.wargaming.hangar.FinalStatistic.view.DetailsBlock, base:net.wargaming.hangar.FinalStatistic.view.DetailsBlock)
+    {
+        this.wrapper = wrapper;
+        this.base = base;
+
+        Utils.TraceXvmModule("FinalStatistic");
+
+        DetailsBlockCtor();
+    }
+
+    function draw()
+    {
+        return this.drawImpl.apply(this, arguments);
+    }
+
+    // wrapped methods
+    /////////////////////////////////////////////////////////////////
+
     var shotsTitle: TextField;
     var shotsCount: TextField;
     var shotsPercent: TextField;
@@ -13,21 +37,19 @@ class wot.FinalStatistic.DetailsBlock extends net.wargaming.hangar.FinalStatisti
     var damageTitle: TextField;
     var damageValue: TextField;
 
-    function DetailsBlock()
+    private function DetailsBlockCtor()
     {
-        super();
-
         GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
         Config.LoadConfig("DetailsBlock.as");
 
-        var h = xpTitleLbl._height;
-        shotsTitle = Utils.duplicateTextField(this, "shotsTitle", xpTitleLbl, h + 10, "left");
-        shotsCount = Utils.duplicateTextField(this, "shotsCount", xpLbl, h + 10, "right");
-        shotsPercent = Utils.duplicateTextField(this, "shotsPercent", premXpLbl, h + 10, "right");
-        damageAssistedTitle = Utils.duplicateTextField(this, "damageAssistedTitle", xpTitleLbl, 2 * h + 10, "left");
-        damageAssistedValue = Utils.duplicateTextField(this, "damageAssistedValue", premXpLbl, 2 * h + 10, "right");
-        damageTitle = Utils.duplicateTextField(this, "damageTitle", xpTitleLbl, 3 * h + 10, "left");
-        damageValue = Utils.duplicateTextField(this, "damageValue", premXpLbl, 3 * h + 10, "right");
+        var h = wrapper.xpTitleLbl._height;
+        shotsTitle = Utils.duplicateTextField(wrapper, "shotsTitle", wrapper.xpTitleLbl, h + 10, "left");
+        shotsCount = Utils.duplicateTextField(wrapper, "shotsCount", wrapper.xpLbl, h + 10, "right");
+        shotsPercent = Utils.duplicateTextField(wrapper, "shotsPercent", wrapper.premXpLbl, h + 10, "right");
+        damageAssistedTitle = Utils.duplicateTextField(wrapper, "damageAssistedTitle", wrapper.xpTitleLbl, 2 * h + 10, "left");
+        damageAssistedValue = Utils.duplicateTextField(wrapper, "damageAssistedValue", wrapper.premXpLbl, 2 * h + 10, "right");
+        damageTitle = Utils.duplicateTextField(wrapper, "damageTitle", wrapper.xpTitleLbl, 3 * h + 10, "left");
+        damageValue = Utils.duplicateTextField(wrapper, "damageValue", wrapper.premXpLbl, 3 * h + 10, "right");
     }
 
     private function onConfigLoaded()
@@ -37,18 +59,18 @@ class wot.FinalStatistic.DetailsBlock extends net.wargaming.hangar.FinalStatisti
     }
 
     // override
-    function draw()
+    function drawImpl()
     {
-        var dirty = _dataDirty;
-        super.draw();
+        var dirty = wrapper._dataDirty;
+        base.draw();
         if (dirty)
         {
-            var data = _parent._parent._parent._parent.data;
+            var data = wrapper._parent._parent._parent._parent.data;
             var team1 = data.team1;
 
             var cr = data.personal.creditsData;
-            creditsLbl.htmlText = cr[cr.length - 1].col1;
-            premCreditsLbl.htmlText = cr[cr.length - 1].col3;
+            wrapper.creditsLbl.htmlText = cr[cr.length - 1].col1;
+            wrapper.premCreditsLbl.htmlText = cr[cr.length - 1].col3;
 
             var pos = 0;
             for (var i = 0; i < 15; ++i)

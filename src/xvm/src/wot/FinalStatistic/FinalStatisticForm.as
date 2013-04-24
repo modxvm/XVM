@@ -7,25 +7,45 @@ import com.xvm.StatsLogger;
 import com.xvm.Utils;
 import wot.FinalStatistic.WinChances;
 
-class wot.FinalStatistic.FinalStatisticForm extends net.wargaming.hangar.FinalStatistic.FinalStatisticForm
+class wot.FinalStatistic.FinalStatisticForm
 {
+    /////////////////////////////////////////////////////////////////
+    // wrapped methods
+
+    public var wrapper:net.wargaming.hangar.FinalStatistic.FinalStatisticForm;
+    private var base:net.wargaming.hangar.FinalStatistic.FinalStatisticForm;
+
+    public function FinalStatisticForm(wrapper:net.wargaming.hangar.FinalStatistic.FinalStatisticForm, base:net.wargaming.hangar.FinalStatistic.FinalStatisticForm)
+    {
+        this.wrapper = wrapper;
+        this.base = base;
+
+        Utils.TraceXvmModule("FinalStatistic");
+
+        FinalStatisticFormCtor();
+    }
+
+    function setCommonData()
+    {
+        return this.setCommonDataImpl.apply(this, arguments);
+    }
+
+    // wrapped methods
+    /////////////////////////////////////////////////////////////////
+
     private var save_data_pending:Boolean;
 
     // Components
     private var winChances:WinChances;
 
-    function FinalStatisticForm()
+    private function FinalStatisticFormCtor()
     {
-        super();
-
-        Utils.TraceXvmModule("FinalStatistic");
-
         save_data_pending = false;
 
         StatData.s_loaded = false;
         StatData.s_data = {};
 
-        winChances = new WinChances(this);
+        winChances = new WinChances(wrapper);
         GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
         Config.LoadConfig("FinalStatisticForm.as");
     }
@@ -38,27 +58,27 @@ class wot.FinalStatistic.FinalStatisticForm extends net.wargaming.hangar.FinalSt
 
     private function processData()
     {
-        if (!save_data_pending || !Config.s_loaded || data == null)
+        if (!save_data_pending || !Config.s_loaded || wrapper.data == null)
             return;
 
         save_data_pending = false;
 
         if (Config.s_config.rating.enableStatisticsLog == true)
-            StatsLogger.saveStatistics("results", data);
+            StatsLogger.saveStatistics("results", wrapper.data);
 
         if (Config.s_config.rating.showPlayersStatistics && Config.s_config.finalStatistic.showChances)
         {
-            var len = data.team1.length;
+            var len = wrapper.data.team1.length;
             for (var i = 0; i < len; ++i)
             {
-                var d = data.team1[i];
+                var d = wrapper.data.team1[i];
                 StatLoader.AddPlayerData(d, Defines.TEAM_ALLY);
             }
 
-            len = data.team2.length;
+            len = wrapper.data.team2.length;
             for (var i = 0; i < len; ++i)
             {
-                var d = data.team2[i];
+                var d = wrapper.data.team2[i];
                 StatLoader.AddPlayerData(d, Defines.TEAM_ENEMY);
             }
 
@@ -66,12 +86,12 @@ class wot.FinalStatistic.FinalStatisticForm extends net.wargaming.hangar.FinalSt
         }
     }
 
-    function setCommonData(data)
+    function setCommonDataImpl(data)
     {
-        super.setCommonData(data);
+        base.setCommonData(data);
         var page = parseInt(Config.s_config.finalStatistic.startPage);
         if (!isNaN(page) && page >= 1 && page <= 3)
-            tabs_mc.selectedIndex = page - 1;
+            wrapper.tabs_mc.selectedIndex = page - 1;
         save_data_pending = true;
         processData();
     }

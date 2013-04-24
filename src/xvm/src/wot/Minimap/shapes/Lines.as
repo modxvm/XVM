@@ -12,10 +12,10 @@ import wot.Minimap.dataTypes.cfg.LineCfg;
 
 class wot.Minimap.shapes.Lines extends ShapeAttach
 {
-    public function Lines(mapSizeInMeters:Number) 
+    public function Lines(mapSizeInMeters:Number)
     {
         super(mapSizeInMeters);
-        
+
         attachCameraLines();
         attachVehicleDirectionLines();
         if (rightAngle != 1)
@@ -26,23 +26,23 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
              */
             attachVehicleTraverseAngle();
         }
-        
+
         /**
          * Warning! Workaround!
          * Camera entry (MinimapEntry0) is reinitialized spontaniously many times in a round.
          */
         GlobalEventDispatcher.addEventListener(MinimapEvent.ON_ENTRY_INITED, this, onEntryInited);
     }
-    
+
     // -- Private
-    
+
     private function attachVehicleDirectionLines():Void
     {
         var depth:Number = selfAttachments.getNextHighestDepth();
         var vehLines:MovieClip = selfAttachments.createEmptyMovieClip("vehLine" + depth, depth);
         attachLines(vehLines, MapConfig.linesVehicle, 0);
     }
-    
+
     private function attachVehicleTraverseAngle():Void
     {
         var depth:Number = selfAttachments.getNextHighestDepth();
@@ -50,7 +50,7 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
         attachLines(traverseAgnle, MapConfig.linesTraverseAngle, rightAngle);
         attachLines(traverseAgnle, MapConfig.linesTraverseAngle, -leftAngle);
     }
-    
+
     private function attachCameraLines():Void
     {
         var cameraEntry:wot.Minimap.MinimapEntry = IconsProxy.getCamera()["_xvm_worker"];
@@ -60,18 +60,18 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
         var vehLines:MovieClip = camAttach.createEmptyMovieClip("cameraLine" + depth, 10000);
         attachLines(vehLines, MapConfig.linesCamera, 0);
     }
-    
+
     private function attachLines(mc:MovieClip, linesCfg:Array, angle:Number):Void
     {
         for (var i in linesCfg)
         {
             var lineCfg:LineCfg = linesCfg[i];
-            
+
             if (lineCfg.enabled)
             {
                 var from:Point = horAnglePoint(lineCfg.from, angle);
                 var to  :Point = horAnglePoint(lineCfg.to, angle);
-                
+
                 /** Translate absolute minimap distance in points to game meters */
                 if (lineCfg.inmeters)
                 {
@@ -80,26 +80,26 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
                     from.x *= scaleFactor;
                     to.x   *= scaleFactor;
                 }
-                
+
                 drawLine(mc, from, to, lineCfg.thickness, lineCfg.color, lineCfg.alpha);
             }
         }
     }
-    
+
     private function horAnglePoint(R:Number, angle:Number):Point
     {
         angle = angle * (Math.PI / 180);
         return new Point(R * Math.sin(angle), R * Math.cos(angle));
     }
-    
+
     private function drawLine(mc:MovieClip, from:Point, to:Point, thickness:Number, color:Number, alpha:Number):Void
     {
         mc.lineStyle(thickness, color, alpha);
-        
+
         mc.moveTo(from.x, -from.y);
         mc.lineTo(to.x, -to.y);
     }
-    
+
     private function onEntryInited(event:MinimapEvent):Void
     {
         /**
@@ -113,17 +113,17 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
             attachCameraLines();
         }
     }
-    
+
     private function get leftAngle():Number
     {
         return gunConstraints.left.angle._currentframe;
     }
-    
+
     private function get rightAngle():Number
     {
         return gunConstraints.right.angle._currentframe;
     }
-    
+
     private function get gunConstraints():Object
     {
         return _root.damagePanel.componentsContainer.tankIndicator.hull.gunConstraints;

@@ -13,19 +13,19 @@ import wot.Minimap.shapes.ShapeAttach;
 class wot.Minimap.shapes.Circles extends ShapeAttach
 {
     private var CIRCLE_SIDES:Number = 350; /** Defines circle smoothness\angularity */
-    
-    public function Circles(mapSizeInMeters:Number) 
+
+    public function Circles(mapSizeInMeters:Number)
     {
         super(mapSizeInMeters);
-        
+
         var player:Player = PlayersPanelProxy.getSelf();
         var vehType:String = VehicleInfo.getName2(player.icon);
         var circlesCfg:Array = defineCirclesCfg(vehType);
-        
+
         for (var i in circlesCfg)
         {
             var circleCfg:CircleCfg = circlesCfg[i];
-            
+
             if (circleCfg.enabled)
             {
                 var radius:Number =  scaleFactor * circleCfg.distance;
@@ -33,13 +33,13 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
             }
         }
     }
-    
-    /** Private */ 
-    
+
+    /** Private */
+
     private function defineCirclesCfg(vehicleType:String):Array
     {
         var cfg:Array = [];
-        
+
         /** Special vehicle type dependent circle configs */
         var spec:Array = MapConfig.circlesSpecial;
         for (var i in spec)
@@ -50,19 +50,19 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
                 cfg.push(spec[i][vehicleType]);
             }
         }
-        
+
         /** Major circle configs */
         cfg = cfg.concat(MapConfig.circlesMajor);
-        
+
         return cfg;
     }
-    
+
     private function drawCircle(radius:Number, thickness:Number, color:Number, alpha:Number)
     {
         var depth:Number = selfAttachments.getNextHighestDepth();
         var mc:MovieClip = selfAttachments.createEmptyMovieClip("circle" + depth, depth);
         mc.lineStyle(thickness, color, alpha);
-        
+
         var centerX:Number = 0;
         var centerY:Number = 0;
 
@@ -77,12 +77,12 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
             mc.lineTo(pointX, pointY);
         }
     }
-    
+
     private function magicTrigFunctionX(pointRatio):Number
     {
         return Math.cos(pointRatio*2*Math.PI);
     }
-    
+
     private function magicTrigFunctionY(pointRatio):Number
     {
         return Math.sin(pointRatio*2*Math.PI);

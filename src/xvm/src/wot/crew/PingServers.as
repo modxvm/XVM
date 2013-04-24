@@ -39,7 +39,7 @@ class wot.crew.PingServers
     {
         if (event.str == null || event.str == "")
             return;
-        
+
         if (_root["__xvm_pingTextField"] == null)
         {
             _root["__xvm_pingTextField"] = _root.createTextField("__xvm_pingTextField", 0,
@@ -50,7 +50,7 @@ class wot.crew.PingServers
             _root["__xvm_pingTextField"].styleSheet = Utils.createStyleSheet(
                 Utils.createCSS("xvm_ping", 0xCCCCCC, "$FieldFont", 10, "left", false, false));
         }
-        
+
         //com.xvm.Logger.addObject(event);
 
         var str:Array = [];
@@ -62,5 +62,5 @@ class wot.crew.PingServers
 
         //com.xvm.Logger.add(str.join("\n"));
     }
-    
+
 }

@@ -37,10 +37,10 @@ class wot.battle.BattleMain
         instance = new BattleMain();
         gfx.io.GameDelegate.addCallBack("battle.showPostmortemTips", instance, "showPostmortemTips");
         gfx.io.GameDelegate.addCallBack("Stage.Update", instance, "onUpdateStage");
-        
+
         BattleInputHandler.upgrade();
     }
-    
+
     private static function BattleMainConfigLoaded()
     {
         //Logger.add("BattleMainConfigLoaded()");
@@ -60,7 +60,7 @@ class wot.battle.BattleMain
 
         // Setup Visual Elements
         SetupElements();
-        
+
         FragCorrelation.modify();
     }
 
@@ -96,7 +96,7 @@ class wot.battle.BattleMain
             x = width - x - w;
         if (va == 2)
             y = width - y - h;
-        
+
         mc._x = x;
         mc._y = y;
         mc.height = h;
@@ -150,7 +150,7 @@ class wot.battle.BattleMain
         clock.antiAliasType = "advanced";
         clock.html = true;
         var tf: TextFormat = fps.getNewTextFormat();
-        clock.styleSheet = Utils.createStyleSheet(Utils.createCSS("xvm_clock", 
+        clock.styleSheet = Utils.createStyleSheet(Utils.createCSS("xvm_clock",
             tf.color, tf.font, tf.size, "left", tf.bold, tf.italic));
         clock.filters = [new flash.filters.DropShadowFilter(1, 90, 0, 100, 5, 5, 1.5, 3)];
 
@@ -172,10 +172,10 @@ class wot.battle.BattleMain
         BattleMain.width = width;
         BattleMain.height = height;
         SetupElements();
-        
+
         fixMinimapSize();
     }
-    
+
     private function fixMinimapSize():Void
     {
         /**
@@ -190,5 +190,5 @@ class wot.battle.BattleMain
             _root.minimap.sizeUp();
         }
     }
-    
+
 }

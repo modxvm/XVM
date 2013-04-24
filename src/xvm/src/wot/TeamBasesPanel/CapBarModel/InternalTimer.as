@@ -16,7 +16,7 @@ class wot.TeamBasesPanel.CapBarModel.InternalTimer
         m_destructionTimer = 0;
         m_flashTimer = _global.setInterval(this, "incTime", TICK_INTERVAL_MS);
     }
-    
+
     public function getInterval():Number
     {
        /**
@@ -26,18 +26,18 @@ class wot.TeamBasesPanel.CapBarModel.InternalTimer
         var interval:Number = newTime - m_prevTime;
         m_prevTime = newTime;
         interval = roundToWholeAndHalf(interval);
-        
+
        /**
         * Reset self-destruction timer.
         * Timer is still in use.
-        */ 
+        */
         m_destructionTimer = 0;
-        
+
         return interval;
     }
-    
+
     // -- Private
-    
+
     private function roundToWholeAndHalf(interval:Number):Number
     {
         // 0.40000000000001 -> 0.5
@@ -47,12 +47,12 @@ class wot.TeamBasesPanel.CapBarModel.InternalTimer
         interval = Math.round(interval);
         return interval /= 2;
     }
-    
+
     private function incTime():Void
     {
         m_timeNow = m_timeNow + TICK_INTERVAL_S;
         m_destructionTimer = m_destructionTimer + TICK_INTERVAL_S;
-        
+
         /**
          * Selfdestruct if timer have not been used for long time.
          */

@@ -13,6 +13,8 @@ import wot.battleloading.WinChances;
 
 class wot.battleloading.BattleLoading
 {
+    /////////////////////////////////////////////////////////////////
+
     // override
     function setSize()
     {
@@ -32,13 +34,6 @@ class wot.battleloading.BattleLoading
 
     /////////////////////////////////////////////////////////////////
 
-    private static var STAT_PRELOAD_DELAY:Number = 1000;
-
-    // Components
-    private var winChances:WinChances;
-    private var tipField:TipField;
-    private var realClock:RealClock;
-
     public function BattleLoading(wrapper:net.wargaming.BattleLoading, base:net.wargaming.BattleLoading)
     {
         this.wrapper = wrapper;
@@ -46,6 +41,20 @@ class wot.battleloading.BattleLoading
 
         Utils.TraceXvmModule("BattleLoading");
 
+        BattleLoadingCtor();
+    }
+
+    /////////////////////////////////////////////////////////////////
+
+    private static var STAT_PRELOAD_DELAY:Number = 1000;
+
+    // Components
+    private var winChances:WinChances;
+    private var tipField:TipField;
+    private var realClock:RealClock;
+
+    private function BattleLoadingCtor()
+    {
         StatData.s_loaded = false;
         StatData.s_data = {};
         StatLoader.s_players_count = 0;

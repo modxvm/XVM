@@ -1,7 +1,7 @@
 /**
  * PlayersPanel.swf
  * _level0.leftPanel.m_list._dataProvider[*]
- * 
+ *
   "uid": 1170763,
   "vehicle": "BDR G1B",
   "position": 7,

@@ -8,19 +8,19 @@ class wot.Minimap.Zoom
 {
     /** This is the subject of resize reposition */
     private var minimap:net.wargaming.ingame.Minimap;
-    
+
     /** Temporary place to store last normal map size value before resize procedure by zoom */
     private var prevSizeIndex:Number;
-    
+
     /** Stores state for switcher */
     var currentState:Boolean;
-    
-    public function Zoom(minimap:net.wargaming.ingame.Minimap) 
+
+    public function Zoom(minimap:net.wargaming.ingame.Minimap)
     {
         this.minimap = minimap;
         currentState = true;
     }
-    
+
     public function onZoomKeyClick(event):Void
     {
         /**
@@ -37,9 +37,9 @@ class wot.Minimap.Zoom
             switchBehaviour();
         }
     }
-    
+
     // -- Private
-    
+
     private function holdBehaviour(isKeyDown:Boolean):Void
     {
         if (isKeyDown)
@@ -51,7 +51,7 @@ class wot.Minimap.Zoom
             zoomOut();
         }
     }
-    
+
     private function switchBehaviour():Void
     {
         if (currentState)
@@ -65,7 +65,7 @@ class wot.Minimap.Zoom
             currentState = !currentState;
         }
     }
-    
+
     private function zoomIn():Void
     {
         increaseSize();
@@ -74,37 +74,37 @@ class wot.Minimap.Zoom
             centerPosition();
         }
     }
-    
+
     private function zoomOut():Void
     {
         bottomRightPosition();
         restoreSize();
     }
-    
+
     private function centerPosition():Void
     {
         /** Position map bottom right corner at center */
         minimap._x = Stage.width / 2;
         minimap._y = Stage.height / 2;
-        
+
         /** Offset position taking map center into account */
         minimap._x += minimap.width / 2;
         minimap._y += minimap.height / 2;
     }
-    
+
     private function bottomRightPosition():Void
     {
         /** Position map bottom right corner at bottom right of Stage */
         minimap._x = Stage.width;
         minimap._y = Stage.height;
     }
-    
+
     private function increaseSize():Void
     {
         var side:Number = Stage.height - MapConfig.zoomPixelsBack;
         minimap.setSize(side, side);
     }
-    
+
     private function restoreSize():Void
     {
         minimap.setupSize(minimap.m_sizeIndex, Stage.height);

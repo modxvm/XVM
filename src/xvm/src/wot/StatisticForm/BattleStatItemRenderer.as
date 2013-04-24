@@ -18,23 +18,33 @@ import wot.StatisticForm.WinChances;
 
 class wot.StatisticForm.BattleStatItemRenderer
 {
-    // override
+    /////////////////////////////////////////////////////////////////
+    // wrapped methods
+
+    private var wrapper:net.wargaming.BattleStatItemRenderer;
+    private var base:net.wargaming.BattleStatItemRenderer;
+
+    public function BattleStatItemRenderer(wrapper:net.wargaming.BattleStatItemRenderer, base:net.wargaming.BattleStatItemRenderer)
+    {
+        this.wrapper = wrapper;
+        this.base = base;
+
+        Utils.TraceXvmModule("StatisticForm");
+
+        BattleStatItemRendererCtor();
+    }
+
     function updateData()
     {
         return this.updateDataImpl.apply(this, arguments);
     }
 
-    // override
     function updateState()
     {
         return this.updateStateImpl.apply(this, arguments);
     }
 
-    /////////////////////////////////////////////////////////////////
-
-    private var wrapper:net.wargaming.BattleStatItemRenderer;
-    private var base:net.wargaming.BattleStatItemRenderer;
-
+    // wrapped methods
     /////////////////////////////////////////////////////////////////
 
     static var DEBUG_TIMES = false;
@@ -45,13 +55,8 @@ class wot.StatisticForm.BattleStatItemRenderer
     var m_iconset: IconLoader = null;
     var m_iconLoaded: Boolean = false;
 
-    public function BattleStatItemRenderer(wrapper:net.wargaming.BattleStatItemRenderer, base:net.wargaming.BattleStatItemRenderer)
+    public function BattleStatItemRendererCtor()
     {
-        this.wrapper = wrapper;
-        this.base = base;
-
-        Utils.TraceXvmModule("StatisticForm");
-
         if (s_winChances == null)
             s_winChances = new WinChances();
 
@@ -119,7 +124,7 @@ class wot.StatisticForm.BattleStatItemRenderer
         var start = new Date();
 
         wrapper.col3.condenseWhite = StatData.s_empty;
-        
+
         var pname = Utils.GetNormalizedPlayerName(wrapper.data.label);
         Macros.RegisterPlayerData(pname, wrapper.data, team);
 

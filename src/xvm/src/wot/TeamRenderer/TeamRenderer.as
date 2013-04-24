@@ -10,29 +10,11 @@ import com.xvm.Helpers.UserDataLoaderHelper;
 
 class wot.TeamRenderer.TeamRenderer
 {
-    // override
-    function configUI()
-    {
-        return this.configUIImpl.apply(this, arguments);
-    }
-
-    // override
-    function afterSetData()
-    {
-        return this.afterSetDataImpl.apply(this, arguments);
-    }
-
     /////////////////////////////////////////////////////////////////
+    // wrapped methods
 
     private var wrapper:net.wargaming.messenger.controls.TeamRenderer;
     private var base:net.wargaming.messenger.controls.TeamRenderer;
-
-    /////////////////////////////////////////////////////////////////
-
-    private var configured:Boolean;
-    private var m_name:String;
-    private var m_effField:TextField;
-    private var stat:Object;
 
     public function TeamRenderer(wrapper:net.wargaming.messenger.controls.TeamRenderer, base:net.wargaming.messenger.controls.TeamRenderer)
     {
@@ -41,6 +23,29 @@ class wot.TeamRenderer.TeamRenderer
 
         Utils.TraceXvmModule("TeamRenderer");
 
+        TeamRendererCtor();
+    }
+
+    function configUI()
+    {
+        return this.configUIImpl.apply(this, arguments);
+    }
+
+    function afterSetData()
+    {
+        return this.afterSetDataImpl.apply(this, arguments);
+    }
+
+    // wrapped methods
+    /////////////////////////////////////////////////////////////////
+
+    private var configured:Boolean;
+    private var m_name:String;
+    private var m_effField:TextField;
+    private var stat:Object;
+
+    public function TeamRendererCtor()
+    {
         configured = false;
         m_name = null;
         m_effField = null;
@@ -98,14 +103,14 @@ class wot.TeamRenderer.TeamRenderer
             updateButton.addEventListener("select", function(e) {
                 updateButton._iconSource = e.selected ? "icons/allDown.tga" : "icons/allUp.tga";
                 updateButton.tooltipText = Locale.get("Load statistics") + ": " + Locale.get(e.selected ? "enabled" : "disabled");
-                updateButton._autoSize = false; // WG bug 
+                updateButton._autoSize = false; // WG bug
                 updateButton.configUI();
             });
             updateButton.selected = false;
             updateButton.tooltipText = Locale.get("Load statistics") + ": " + Locale.get("disabled");
         }
         updateButton.addEventListener("click", this, "onUpdateClick");
-        
+
         afterSetDataXVM();
     }
 

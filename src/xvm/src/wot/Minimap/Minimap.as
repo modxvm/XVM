@@ -20,52 +20,53 @@ import wot.Minimap.model.externalProxy.MapConfig;
 
 class wot.Minimap.Minimap
 {
-    // override
-    function scaleMarkers()
-    {
-        return this.scaleMarkersImpl.apply(this, arguments);
-    }
-
-    // override
-    function onEntryInited()
-    {
-        return this.onEntryInitedImpl.apply(this, arguments);
-    }
-
-    // override
-    function correctSizeIndex()
-    {
-        return this.correctSizeIndexImpl.apply(this, arguments);
-    }
-
-    // override
-    function sizeUp()
-    {
-        return this.sizeUpImpl.apply(this, arguments);
-    }
-
     /////////////////////////////////////////////////////////////////
+    // wrapped methods
 
     private var wrapper:net.wargaming.ingame.Minimap;
     private var base:net.wargaming.ingame.Minimap;
-
-    /////////////////////////////////////////////////////////////////
 
     public function Minimap(wrapper:net.wargaming.ingame.Minimap, base:net.wargaming.ingame.Minimap)
     {
         this.wrapper = wrapper;
         this.base = base;
         wrapper["_xvm_worker"] = this;
-        
+
         Utils.TraceXvmModule("Minimap");
-        
+
+        MinimapCtor();
+    }
+
+    function scaleMarkers()
+    {
+        return this.scaleMarkersImpl.apply(this, arguments);
+    }
+
+    function onEntryInited()
+    {
+        return this.onEntryInitedImpl.apply(this, arguments);
+    }
+
+    function correctSizeIndex()
+    {
+        return this.correctSizeIndexImpl.apply(this, arguments);
+    }
+
+    function sizeUp()
+    {
+        return this.sizeUpImpl.apply(this, arguments);
+    }
+
+    // wrapped methods
+    /////////////////////////////////////////////////////////////////
+
+    public function MinimapCtor()
+    {
         GlobalEventDispatcher.addEventListener(MinimapEvent.MINIMAP_READY, this, onReady);
         GlobalEventDispatcher.addEventListener(MinimapEvent.PANEL_READY, this, onReady);
-        
+
         checkLoading();
     }
-    
-    /////////////////////////////////////////////////////////////////
 
     /**
      * icons Z indexes from Minimap.pyc:
@@ -83,26 +84,26 @@ class wot.Minimap.Minimap
     public static var EXTERNAL_CUSTOM_INDEX:Number = MAX_DEAD_ZINDEX - 1;
     public static var CAMERA_NORMAL_ZINDEX:Number = 100;
     public static var SELF_ZINDEX:Number = 151;
-    
+
     /** Simplified minimap interface for communication with other Python or Flash mods */
     public var externalDeveloperInterface:ExternalDeveloperInterface;
-    
+
     /** Used at MinimapEntry to get testUid */
     public var sync:SyncModel;
 
     /** Defines lost enemy positions */
     private var autoUpdate:AutoUpdate;
-    
+
     /** Places and removes lost enemy positions on minimap */
     private var lostMarkers:LostMarkers;
-    
+
     /**
      * Defines real map side size in meters.
      * Common values are 1km, 600m
      */
     private var mapSizeModel:MapSizeModel;
     private var mapSizeLabel:MapSizeLabel;
-    
+
     /**
      * Shape to icon attachments.
      * Shows game related distances and direction.
@@ -110,21 +111,21 @@ class wot.Minimap.Minimap
     private var circles:Circles;
     private var square:Square;
     private var lines:Lines;
-    
+
     private var zoom:Zoom;
-    
+
     private var isMinimapReady:Boolean = false;
     private var isPanelReady:Boolean = false;
     private var loadComplete:Boolean = false;
     private var mapExtended:Boolean = false;
-    
+
     function scaleMarkersImpl(percent)
     {
         base.scaleMarkers(percent);
         XvmRescaleBase(percent);
         rescaleAttachments();
     }
-    
+
     private function XvmRescaleBase(percent:Number):Void
     {
         /**
@@ -142,41 +143,41 @@ class wot.Minimap.Minimap
     function onEntryInitedImpl()
     {
         base.onEntryInited();
-        
+
         if (sync && MapConfig.enabled)
            sync.updateIconsExtension();
-           
+
         GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ON_ENTRY_INITED));
-        
+
         /**
          * Camera object reconstruction occurs sometimes and all its previous props are lost.
          * Check if alpha is set.
          */
         setCameraAlpha();
     }
-    
+
     /** Disables maximum minimap size limitation */
     function correctSizeIndexImpl(sizeIndex:Number, stageHeight:Number):Number
     {
         /** base.correctSizeIndex code is omitted to drop limits */
-        
+
         /** Do not allow size less than map border */
         if (sizeIndex < 0)
         {
             sizeIndex = 0;
         }
-        
+
         return sizeIndex;
     }
-    
+
     /** Suitable for manual debug tracing by pushing "=" button */
     function sizeUpImpl()
     {
         base.sizeUp();
     }
-    
+
     // -- Private
-    
+
     private function rescaleAttachments():Void
     {
         var entries:Array = IconsProxy.getAllEntries();
@@ -186,7 +187,7 @@ class wot.Minimap.Minimap
         }
         /** See MinimapEntry.rescaleAttachments() */
     }
-    
+
     private function checkLoading():Void
     {
         wrapper.icons.onEnterFrame = function()
@@ -198,7 +199,7 @@ class wot.Minimap.Minimap
             }
         }
     }
-        
+
     private function onReady(event:MinimapEvent):Void
     {
         switch (event.type)
@@ -210,22 +211,22 @@ class wot.Minimap.Minimap
                 isPanelReady = true;
                 break;
         }
-        
+
         loadComplete = isMinimapReady && isPanelReady;
-        
+
         if (loadComplete && !mapExtended)
         {
             externalDeveloperInterface = new ExternalDeveloperInterface();
-            
+
             if (MapConfig.enabled)
             {
                 startExtendedProcedure();
             }
-            
+
             mapExtended = true;
         }
     }
-    
+
     private function startExtendedProcedure():Void
     {
         /**
@@ -258,13 +259,13 @@ class wot.Minimap.Minimap
             autoUpdate = new AutoUpdate();
             lostMarkers = new LostMarkers(wrapper.icons);
         }
-        
+
         /**
          * Set alpha of background map image.
          * Does not affect markers
          */
         wrapper.backgrnd._alpha = MapConfig.mapBackgroundImageAlpha;
-        
+
         /**
          * Setup alpha for icon of player himself.
          * Looks like white arrow.
@@ -272,7 +273,7 @@ class wot.Minimap.Minimap
          */
         var selfIcon:net.wargaming.ingame.MinimapEntry = IconsProxy.getSelf();
         selfIcon.selfIcon._alpha = MapConfig.selfIconAlpha;
-        
+
         /**
          * Setup alpha for camera of player himself.
          * Looks like green highlighted corner.
@@ -284,7 +285,7 @@ class wot.Minimap.Minimap
          * Defines real map size in meters.
          */
         mapSizeModel = new MapSizeModel();
-        
+
         /** Map size dependent */
         if (mapSizeModel.getSide())
         {
@@ -293,7 +294,7 @@ class wot.Minimap.Minimap
             {
                 mapSizeLabel = new MapSizeLabel(wrapper.backgrnd, mapSizeModel.getSide());
             }
-            
+
             /**
              * Draw customized circles.
              * Outlines distance in meters.
@@ -302,7 +303,7 @@ class wot.Minimap.Minimap
             {
                 circles = new Circles(mapSizeModel.getSide() * 10); /** Total map side distance in meters */
             }
-            
+
             /**
              * Draw customized circles.
              * Outlines distance in meters.
@@ -311,7 +312,7 @@ class wot.Minimap.Minimap
             {
                 square = new Square(mapSizeModel.getSide() * 10); /** Total map side distance in meters */
             }
-            
+
             /**
              * Draw customized lines.
              * Outlines vehicle direction, gun horizontal traverse angle

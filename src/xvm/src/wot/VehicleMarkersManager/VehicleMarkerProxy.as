@@ -35,7 +35,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy extends gfx.core.UIComponent 
     // Used in child classes VehicleMarkerAlly and VehicleMarkerEnemy
     // TODO: can include to interface as property?
     public var m_team:String; // values: ally, enemy (readonly)
-    
+
     // Inherited from sprite
     // TODO: try to remove and create dynamically only with standard markers to improve performance
     public var levelIcon:MovieClip;

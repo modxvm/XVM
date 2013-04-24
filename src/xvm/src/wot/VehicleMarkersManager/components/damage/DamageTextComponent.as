@@ -16,7 +16,7 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
     {
         this.proxy = proxy;
     }
-    
+
     public function init()
     {
         damage = proxy.createHolder();

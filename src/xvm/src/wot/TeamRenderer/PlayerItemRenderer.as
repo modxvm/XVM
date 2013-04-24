@@ -8,28 +8,11 @@ import com.xvm.Helpers.UserDataLoaderHelper;
 
 class wot.TeamRenderer.PlayerItemRenderer
 {
-    // override
-    function configUI()
-    {
-        return this.configUIImpl.apply(this, arguments);
-    }
-
-    // override
-    function afterSetData()
-    {
-        return this.afterSetDataImpl.apply(this, arguments);
-    }
-
     /////////////////////////////////////////////////////////////////
+    // wrapped methods
 
     private var wrapper:net.wargaming.messenger.controls.PlayerItemRenderer;
     private var base:net.wargaming.messenger.controls.PlayerItemRenderer;
-
-    /////////////////////////////////////////////////////////////////
-
-    private var configured:Boolean;
-    private var m_name:String;
-    private var m_effField:TextField;
 
     public function PlayerItemRenderer(wrapper:net.wargaming.messenger.controls.PlayerItemRenderer, base:net.wargaming.messenger.controls.PlayerItemRenderer)
     {
@@ -38,6 +21,28 @@ class wot.TeamRenderer.PlayerItemRenderer
 
         Utils.TraceXvmModule("TeamRenderer");
 
+        PlayerItemRendererCtor();
+    }
+
+    function configUI()
+    {
+        return this.configUIImpl.apply(this, arguments);
+    }
+
+    function afterSetData()
+    {
+        return this.afterSetDataImpl.apply(this, arguments);
+    }
+
+    // wrapped methods
+    /////////////////////////////////////////////////////////////////
+
+    private var configured:Boolean;
+    private var m_name:String;
+    private var m_effField:TextField;
+
+    public function PlayerItemRendererCtor()
+    {
         configured = false;
         m_name = null;
         m_effField = null;
@@ -95,7 +100,7 @@ class wot.TeamRenderer.PlayerItemRenderer
             m_effField.htmlText = "";
             return;
         }
-            
+
         m_name = Utils.GetPlayerName(wrapper.data.label);
         if (Cache.Exist("INFO@" + m_name))
             setXVMStat();

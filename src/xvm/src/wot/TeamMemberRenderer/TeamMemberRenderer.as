@@ -9,40 +9,11 @@ import com.xvm.Helpers.UserDataLoaderHelper;
 
 class wot.TeamMemberRenderer.TeamMemberRenderer
 {
-    // override
-    function configUI()
-    {
-        return this.configUIImpl.apply(this, arguments);
-    }
-
-    // override
-    function afterSetData()
-    {
-        return this.afterSetDataImpl.apply(this, arguments);
-    }
-
-    // override
-    function updateAfterStateChange()
-    {
-        return this.updateAfterStateChangeImpl.apply(this, arguments);
-    }
-
-    // override
-    function getToolTipData()
-    {
-        return this.getToolTipDataImpl.apply(this, arguments);
-    }
-
     /////////////////////////////////////////////////////////////////
+    // wrapped methods
 
     private var wrapper:net.wargaming.messenger.controls.TeamMemberRenderer;
     private var base:net.wargaming.messenger.controls.TeamMemberRenderer;
-
-    /////////////////////////////////////////////////////////////////
-    private var configured:Boolean;
-    private var uid:Number;
-    private var m_infoField:TextField;
-    private var stat:Object;
 
     public function TeamMemberRenderer(wrapper:net.wargaming.messenger.controls.TeamMemberRenderer, base:net.wargaming.messenger.controls.TeamMemberRenderer)
     {
@@ -51,6 +22,39 @@ class wot.TeamMemberRenderer.TeamMemberRenderer
 
         Utils.TraceXvmModule("TeamMemberRenderer");
 
+        TeamMemberRendererCtor();
+    }
+
+    function configUI()
+    {
+        return this.configUIImpl.apply(this, arguments);
+    }
+
+    function afterSetData()
+    {
+        return this.afterSetDataImpl.apply(this, arguments);
+    }
+
+    function updateAfterStateChange()
+    {
+        return this.updateAfterStateChangeImpl.apply(this, arguments);
+    }
+
+    function getToolTipData()
+    {
+        return this.getToolTipDataImpl.apply(this, arguments);
+    }
+
+    // wrapped methods
+    /////////////////////////////////////////////////////////////////
+
+    private var configured:Boolean;
+    private var uid:Number;
+    private var m_infoField:TextField;
+    private var stat:Object;
+
+    public function TeamMemberRendererCtor()
+    {
         configured = false;
         uid = 0;
         m_infoField = null;
@@ -78,7 +82,7 @@ class wot.TeamMemberRenderer.TeamMemberRenderer
         configured = true;
         configXVM();
     }
-    
+
     private function configXVM()
     {
         if (!configured || !Config.s_loaded || Config.s_config.rating.showPlayersStatistics != true)
@@ -89,7 +93,7 @@ class wot.TeamMemberRenderer.TeamMemberRenderer
         var wnd = wrapper.owner._parent;
         if (wnd)
         {
-            wnd.queueLabelXVM = TeamRendererHelper.CreateXVMHeaderLabel(wnd, "queueLabel", wrapper.vehicleLevelField, 
+            wnd.queueLabelXVM = TeamRendererHelper.CreateXVMHeaderLabel(wnd, "queueLabel", wrapper.vehicleLevelField,
                 183, 2, "TeamRenderersHeaderTip");
         }
 
@@ -112,13 +116,13 @@ class wot.TeamMemberRenderer.TeamMemberRenderer
         base.updateAfterStateChange();
         setTextColor();
     }
-    
+
     private function setTextColor()
     {
         var color = MessengerUtils.isFriend(wrapper.data) ? 0x66FF66 : MessengerUtils.isIgnored(wrapper.data) ? 0xFF6666 : wrapper.data.colors[0];
         wrapper.textField.textColor = wrapper.numberField.textColor = wrapper.vehicleNameField.textColor = wrapper.vehicleLevelField.textColor = color;
     }
-    
+
     private function afterSetDataXVM()
     {
         if (!configured || !Config.s_loaded || Config.s_config.rating.showPlayersStatistics != true)
@@ -128,7 +132,7 @@ class wot.TeamMemberRenderer.TeamMemberRenderer
         if (!wrapper.data || !wrapper.data.uid)
             return;
         //Logger.addObject(wrapper.data);
-        
+
         uid = wrapper.data.uid;
         if (Cache.Exist("INFO#" + uid))
             setXVMStat();

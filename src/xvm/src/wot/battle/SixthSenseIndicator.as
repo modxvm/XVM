@@ -52,7 +52,7 @@ class wot.battle.SixthSenseIndicator
 
         if (frame == "active")
             net.wargaming.managers.SoundManager.playSound("sixthsense", "normal", "");
-        
+
         if (icon.source == "")
         {
             _root.sixthSenseIndicator.gotoAndPlay2(frame);

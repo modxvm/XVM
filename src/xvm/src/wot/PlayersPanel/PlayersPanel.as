@@ -15,47 +15,53 @@ import wot.Minimap.MinimapEvent;
 
 class wot.PlayersPanel.PlayersPanel
 {
-    // override
+    /////////////////////////////////////////////////////////////////
+    // wrapped methods
+
+    private var wrapper:net.wargaming.ingame.PlayersPanel;
+    private var base:net.wargaming.ingame.PlayersPanel;
+
+    public function PlayersPanel(wrapper:net.wargaming.ingame.PlayersPanel, base:net.wargaming.ingame.PlayersPanel)
+    {
+        this.wrapper = wrapper;
+        this.base = base;
+
+        Utils.TraceXvmModule("PlayersPanel");
+
+        PlayersPanelCtor();
+    }
+
     function setData()
     {
         return this.setDataImpl.apply(this, arguments);
     }
 
-    // override
     function onRecreateDevice()
     {
         return this.onRecreateDeviceImpl.apply(this, arguments);
     }
 
-    // override
     function _setVehiclesStr()
     {
         return this._setVehiclesStrImpl.apply(this, arguments);
     }
 
-    // override
     function _setNamesStr()
     {
         return this._setNamesStrImpl.apply(this, arguments);
     }
 
-    // override
     function updateWidthOfLongestName()
     {
         // stub
     }
 
-    // override
     function _getHTMLText()
     {
         return this._getHTMLTextImpl.apply(this, arguments);
     }
 
-    /////////////////////////////////////////////////////////////////
-
-    private var wrapper:net.wargaming.ingame.PlayersPanel;
-    private var base:net.wargaming.ingame.PlayersPanel;
-
+    // wrapped methods
     /////////////////////////////////////////////////////////////////
 
     /**
@@ -72,16 +78,11 @@ class wot.PlayersPanel.PlayersPanel
 
     private var m_knownPlayersCount:Number = 0; // for Fog of War mode.
     private var m_postmortemIndex:Number = 0;
-    
+
     private var spotStatusModel:SpotStatusModel;
 
-    public function PlayersPanel(wrapper:net.wargaming.ingame.PlayersPanel, base:net.wargaming.ingame.PlayersPanel)
+    public function PlayersPanelCtor()
     {
-        this.wrapper = wrapper;
-        this.base = base;
-
-        Utils.TraceXvmModule("PlayersPanel");
-
         GlobalEventDispatcher.addEventListener("config_loaded", StatLoader.LoadLastStat);
         GlobalEventDispatcher.addEventListener("config_loaded", this, initEnemySpotterMarkers);
         GlobalEventDispatcher.addEventListener("stat_loaded", this, onStatLoaded);
@@ -90,7 +91,7 @@ class wot.PlayersPanel.PlayersPanel
         /** Minimap needs to know loaded status */
         checkLoading();
     }
-     
+
     function initEnemySpotterMarkers(event):Void
     {
         if (isEnemyPanel && Config.s_config.playersPanel.enemySpottedMarker.enabled && spotStatusModel == null)
@@ -104,7 +105,7 @@ class wot.PlayersPanel.PlayersPanel
         _lastAdjustedState = "";
         wrapper.update();
     }
-    
+
     /**
      * Refreshes Enemy Spotted Marker.
      * Invoked by Minimap.AutoUpdate each 300ms.
@@ -124,7 +125,7 @@ class wot.PlayersPanel.PlayersPanel
             }
         }
     }
-    
+
     function setDataImpl(data, sel, postmortemIndex, isColorBlind, knownPlayersCount)
     {
         //Logger.add("PlayersPanel.setData()");
@@ -482,7 +483,7 @@ class wot.PlayersPanel.PlayersPanel
             }
         }
     }
-    
+
     private function get isEnemyPanel():Boolean
     {
         return wrapper.m_type == "right";

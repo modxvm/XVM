@@ -16,13 +16,13 @@ class wot.TeamBasesPanel.CapBarModel.CapSpeed
     private var m_timer:InternalTimer;
 
     private var m_speed:Number;
-    
-    public function CapSpeed() 
+
+    public function CapSpeed()
     {
         m_cycle = new CapCycle();
         m_timer = new InternalTimer();
     }
-    
+
     public function calculate(newPointsVal:Number, prevPoints:Number):Void
     {
         if (newPointsVal == prevPoints)
@@ -30,9 +30,9 @@ class wot.TeamBasesPanel.CapBarModel.CapSpeed
             /**
              * Update without points change breaks.
              * Omit cycle calculation.
-             * 
+             *
              * TODO: Check capture block at encounter battle.
-             * 
+             *
              * Useless update without block once has been seen:
              * http://www.koreanrandom.com/forum/topic/1760-полоса-захвата/?p=45650
              */
@@ -48,7 +48,7 @@ class wot.TeamBasesPanel.CapBarModel.CapSpeed
             * capture points dropped,
             * capture is blocked or
             * high speed due to replay rewind.
-            * 
+            *
             * Reset everything and bail out.
             * Will recalculate in two cycles of normal capture flow.
             */
@@ -56,7 +56,7 @@ class wot.TeamBasesPanel.CapBarModel.CapSpeed
             m_speed = 0;
             return;
         }
-        
+
        /**
         * Define capturing cycle size and
         * calculate average speed for last cycle.
@@ -65,7 +65,7 @@ class wot.TeamBasesPanel.CapBarModel.CapSpeed
         m_cycle.update(approxSpeed);
         m_speed = m_cycle.getAverageSpeed();
     }
-    
+
     public function getSpeed():Number
     {
         return m_speed;

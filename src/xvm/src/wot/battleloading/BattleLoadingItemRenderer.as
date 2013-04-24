@@ -18,6 +18,8 @@ import com.xvm.Utils;
 
 class wot.battleloading.BattleLoadingItemRenderer
 {
+    /////////////////////////////////////////////////////////////////
+
     // override
     function setData()
     {
@@ -43,10 +45,6 @@ class wot.battleloading.BattleLoadingItemRenderer
 
     /////////////////////////////////////////////////////////////////
 
-    private var m_iconset: IconLoader = null;
-    private var m_clanIconLoaded = false;
-    private var m_iconLoaded: Boolean = false;
-
     public function BattleLoadingItemRenderer(wrapper:net.wargaming.controls.LobbyPlayerListItemRenderer, base:net.wargaming.controls.LobbyPlayerListItemRenderer)
     {
         this.wrapper = wrapper;
@@ -54,6 +52,17 @@ class wot.battleloading.BattleLoadingItemRenderer
 
         Utils.TraceXvmModule("BattleLoadingItemRenderer");
 
+        BattleLoadingItemRendererCtor();
+    }
+
+    /////////////////////////////////////////////////////////////////
+
+    private var m_iconset: IconLoader = null;
+    private var m_clanIconLoaded = false;
+    private var m_iconLoaded: Boolean = false;
+
+    private function BattleLoadingItemRendererCtor()
+    {
         wrapper.vehicleField.html = true;
         wrapper.vehicleField.verticalAlign = "center";
         wrapper.vehicleField.verticalAutoSize = true;
@@ -81,7 +90,7 @@ class wot.battleloading.BattleLoadingItemRenderer
     {
         if (!Config.s_config.rating.showPlayersStatistics)
             return;
-        
+
         StatLoader.AddPlayerData(data, team);
         GlobalEventDispatcher.addEventListener("stat_loaded", this, StatLoadedCallback);
     }

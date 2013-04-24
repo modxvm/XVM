@@ -4,29 +4,38 @@
  */
 import com.xvm.Locale;
 import wot.crew.CrewLoader;
+import com.xvm.Utils;
 
 class wot.crew.tankmen.CrewItemRenderer
 {
-    // override
-    function configUI()
-    {
-        return this.configUIImpl.apply(this, arguments);
-    }
-
     /////////////////////////////////////////////////////////////////
+    // wrapped methods
 
     private var wrapper:net.wargaming.tankmen.CrewItemRenderer;
     private var base:net.wargaming.tankmen.CrewItemRenderer;
-
-    /////////////////////////////////////////////////////////////////
-
-    private var onMouseDownFuncBase;
 
     public function CrewItemRenderer(wrapper:net.wargaming.tankmen.CrewItemRenderer, base:net.wargaming.tankmen.CrewItemRenderer)
     {
         this.wrapper = wrapper;
         this.base = base;
 
+        Utils.TraceXvmModule("Crew");
+
+        CrewItemRendererCtor();
+    }
+
+    function configUI()
+    {
+        return this.configUIImpl.apply(this, arguments);
+    }
+
+    // wrapped methods
+    /////////////////////////////////////////////////////////////////
+
+    private var onMouseDownFuncBase;
+
+    private function CrewItemRendererCtor()
+    {
         onMouseDownFuncBase = null;
     }
 
@@ -40,11 +49,11 @@ class wot.crew.tankmen.CrewItemRenderer
 
     /////////////////////////////////////////////////////////////////
     // CONTEXT: wrapper
-    
+
     private function onMouseDownFuncXVM(button, target)
     {
         var context:net.wargaming.tankmen.CrewItemRenderer = net.wargaming.tankmen.CrewItemRenderer(this);
-            
+
         onMouseDownFuncBase.apply(this, arguments);
 
         if (context.disabled || context.data.tankmanID != null)

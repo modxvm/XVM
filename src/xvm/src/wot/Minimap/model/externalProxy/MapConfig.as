@@ -14,7 +14,7 @@ class wot.Minimap.model.externalProxy.MapConfig
         return minimap.cameraAlpha;    }
     public static function get iconScale():Number    {
         return minimap.iconScale;    }
-    
+
     /** Zoom */
         public static function get zoomEnabled():Boolean    {
             return Config.s_config.hotkeys.minimapZoom.enabled;        }
@@ -26,7 +26,7 @@ class wot.Minimap.model.externalProxy.MapConfig
             return minimap.zoom.centered;        }
         public static function get zoomPixelsBack():Number    {
             return minimap.zoom.pixelsBack;        }
-   
+
     /** Labels */
         public static function get nickShrink():Number    {
             return labels.nickShrink;    }
@@ -48,7 +48,7 @@ class wot.Minimap.model.externalProxy.MapConfig
                 return labels.units.revealedEnabled;    }
             public static function get lostEnemyEnabled():Boolean    {
                 return labels.units.lostEnemyEnabled;   }
-                    
+
             /** Format */
             public static function unitLabelFormat(entryName:String)
             {
@@ -90,16 +90,16 @@ class wot.Minimap.model.externalProxy.MapConfig
         /** Map size label */
             public static function get mapSizeLabelEnabled():Boolean  {
                 return mapSize.enabled;    }
-                
+
             public static function get mapSizeLabelFormat():String    {
                 return mapSize.format;     }
-                
+
             public static function get mapSizeLabelCss():String       {
                 return mapSize.css;        }
-                
+
             public static function get mapSizeLabelAlpha():Number     {
                 return mapSize.alpha;      }
-                
+
             public static function get mapSizeLabelOffset():Point     {
                 return new Point(mapSize.offsetX,
                                  mapSize.offsetY); }
@@ -108,7 +108,7 @@ class wot.Minimap.model.externalProxy.MapConfig
                     return mapSize.shadow.enabled;    }
                 public static function get mapSizeLabelShadow():DropShadowFilter    {
                     return extractShadowFilter(labels.mapSize.shadow);    }
-            
+
             public static function get mapSizeLabelWidth() :Number   {
                 return mapSize.width;     }
             public static function get mapSizeLabelHeight():Number   {
@@ -123,7 +123,7 @@ class wot.Minimap.model.externalProxy.MapConfig
         public static function get circlesSpecial():Array   {
             return circles.special;
         }
-        
+
     /** Squarea*/
         public static function get squareEnabled():Boolean {
             return square.enabled;
@@ -134,7 +134,7 @@ class wot.Minimap.model.externalProxy.MapConfig
         public static function get squareConfig():Object {
             return square;
         }
-        
+
     /** Lines */
         public static function get linesEnabled():Boolean   {
             return lines.enabled;
@@ -148,9 +148,9 @@ class wot.Minimap.model.externalProxy.MapConfig
         public static function get linesTraverseAngle():Array{
             return lines.traverseAngle;
         }
-        
+
     // -- Private
-    
+
     private static function extractShadowFilter(source:Object):DropShadowFilter
     {
         return new DropShadowFilter(
@@ -159,19 +159,19 @@ class wot.Minimap.model.externalProxy.MapConfig
             parseInt(source.color),
             // DropShadowFilter accepts alpha be from 0 to 1.
             // 90 at default config.
-            source.alpha / 100, 
+            source.alpha / 100,
             source.blur,
             source.blur,
             source.strength,
             3 // quality
         )
     }
-    
+
     /** Translate internal WG entryName to minimap config file marker type*/
     private static function entryType(entryName:String):String
     {
         switch (entryName)
-        {   
+        {
             case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_NAME_ALLY:
                 return "ally";
                 break;
@@ -190,37 +190,37 @@ class wot.Minimap.model.externalProxy.MapConfig
         }
         return null;
     }
-    
+
     private static function get labels():Object
     {
         return minimap.labels;
     }
-    
+
     private static function get lines():Object
     {
         return minimap.lines;
     }
-    
+
     private static function get circles():Object
     {
         return minimap.circles;
     }
-    
+
     private static function get square():Object
     {
         return minimap.square;
     }
-    
+
     private static function get mapSize():Object
     {
         return labels.mapSize;
     }
-    
+
     private static function get vehicleclassmacro():Object
     {
         return labels.vehicleclassmacro;
     }
-    
+
     private static function get minimap():Object
     {
         return Config.s_config.minimap;

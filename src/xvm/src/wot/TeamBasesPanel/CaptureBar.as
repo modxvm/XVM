@@ -10,22 +10,22 @@ import com.xvm.Utils;
 
 /**
  * Capture progress bar
- * 
+ *
  * Extra features implemented:
  * ) Time left to capture point
  * ) Number of capturing tanks
  * ) Style customization
- * 
+ *
  * Features are based on
  * time passed and number of captured points between updates.
- * 
+ *
  * possible todo:
  * ) Separate capture line for each capturer. Hard.
  */
 
 /**
  * Cap block.
- * 
+ *
  * updateProgress is also called when capture is blocked at Encounter battle type.
  * Situation occurs when opposing tanks both stand on shared cap point.
  * Сapture bar freezes and blinks white. Cap points already captured remain.
@@ -36,49 +36,54 @@ import com.xvm.Utils;
 
 class wot.TeamBasesPanel.CaptureBar
 {
-    // override
+    /////////////////////////////////////////////////////////////////
+    // wrapped methods
+
+    private var wrapper:net.wargaming.ingame.CaptureBar;
+    private var base:net.wargaming.ingame.CaptureBar;
+
+    public function CaptureBar(wrapper:net.wargaming.ingame.CaptureBar, base:net.wargaming.ingame.CaptureBar)
+    {
+        this.wrapper = wrapper;
+        this.base = base;
+        wrapper["_xvm_worker"] = this;
+
+        Utils.TraceXvmModule("TeamBasesPanel");
+
+        CaptureBarCtor();
+    }
+
     function updateProgress()
     {
         return this.updateProgressImpl.apply(this, arguments);
     }
 
-    // override
     function updateTitle()
     {
         return this.updateTitleImpl.apply(this, arguments);
     }
 
-    /////////////////////////////////////////////////////////////////
-
-    private var wrapper:net.wargaming.ingame.CaptureBar;
-    private var base:net.wargaming.ingame.CaptureBar;
-
+    // wrapped methods
     /////////////////////////////////////////////////////////////////
 
     private var m_capSpeed:CapSpeed; // calculates capture speed
     private var m_oneTankSpeed:OneTankSpeed; // define cap min cap speed based on map type
     private var m_macro:Macro;       // defines user presentable html text
     private var m_capColor:String;
-    
+
     /** Ugly hack to allow one tick earlier speed calculation */
     private var m_startPoints:Number
-    
+
    /**
     * CaptureBar() constructor is called once per battle.
     * Not once per capture bar creation on stage.
     * See this.start()
     */
-    public function CaptureBar(wrapper:net.wargaming.ingame.CaptureBar, base:net.wargaming.ingame.CaptureBar)
+    public function CaptureBarCtor()
     {
-        this.wrapper = wrapper;
-        this.base = base;
-        wrapper["_xvm_worker"] = this;
-        
-        Utils.TraceXvmModule("TeamBasesPanel");
-
         m_oneTankSpeed = new OneTankSpeed();
     }
-    
+
    /**
     * Cant be inserted to constructor easily.
     * Cant be passed as argument externally easily.
@@ -88,30 +93,30 @@ class wot.TeamBasesPanel.CaptureBar
     {
         /** Ugly hack to allow one tick earlier speed calculation */
         m_startPoints = startPoints;
-        
+
        /** colorFeature respects color blind */
         m_capColor = capColor;
-       
+
        /**
         * autoSize extends field vertically
         * so lower font parts are not being cut
         * when font size does not fit field height.
-        */ 
+        */
         wrapper.m_titleTF.autoSize = "center";
         wrapper.m_timerTF.autoSize = "center";
-        
+
        /**
         * Adjust distance from primary upper field so
         * no overlapping occurs when font size is high.
         */
         wrapper.m_titleTF._y -= CapConfig.primaryTitleOffset;
-        
+
         /** Calculates capture speed */
         m_capSpeed = new CapSpeed();
-        
+
         /** Substitutes macro text like {{speed}} with corresponding value to present at user interface */
         m_macro = new Macro(startPoints, m_capColor);
-        
+
        /**
         * At this moment TeamBasesPanel called "add" method.
         * Shadow style and new macro should be defined already.
@@ -122,10 +127,10 @@ class wot.TeamBasesPanel.CaptureBar
         wrapper.m_titleTF.htmlText = m_macro.getPrimaryText();
         wrapper.m_timerTF.htmlText = m_macro.getSecondaryText();
     }
-    
+
    /**
     * Called by TeamBasesPanel original WG class
-    */ 
+    */
     public function updateProgressImpl(newPointsVal:Number):Void
     {
         if (!CapConfig.enabled)
@@ -137,10 +142,10 @@ class wot.TeamBasesPanel.CaptureBar
         m_capSpeed.calculate(newPointsVal, wrapper.m_points || m_startPoints);
 
         base.updateProgress(newPointsVal); // modifies m_point;
-        
+
         //prepare text strings
         m_macro.update(isSituationNormal, capSecondsLeft, timeLeftMinSec, capturersNum, newPointsVal, m_capSpeed.getSpeed());
-        
+
         wrapper.m_titleTF.htmlText = m_macro.getPrimaryText();   // Upper text field relative to capture bar
         wrapper.m_timerTF.htmlText = m_macro.getSecondaryText(); // Lower text field relative to capture bar
     }
@@ -166,7 +171,7 @@ class wot.TeamBasesPanel.CaptureBar
                 CapConfig.shadowColor(m_capColor),
                 // DropShadowFilter accepts alpha be from 0 to 1.
                 // 90 at default config.
-                CapConfig.shadowAlpha(m_capColor) / 100, 
+                CapConfig.shadowAlpha(m_capColor) / 100,
                 CapConfig.shadowBlur(m_capColor),
                 CapConfig.shadowBlur(m_capColor),
                 CapConfig.shadowStrength(m_capColor),
@@ -182,21 +187,21 @@ class wot.TeamBasesPanel.CaptureBar
     {
         return (m_capSpeed.getSpeed() > 0 && capturersNum > 0);
     }
-        
+
     private function get capturersNum():Number
     {
         var caps:Number = Math.round(m_capSpeed.getSpeed() / m_oneTankSpeed.getSpeed());
-        
+
        /**
         * Maximum capturers number at standart battle type is 3.
         * Calculating more than 3 caps at encounter battle type is too complicated.
         */
         if (caps > 3)
             caps = 3;
-            
+
         return caps;
     }
-    
+
     /**
      * Time format
      * 125 -> 2:05
@@ -208,12 +213,12 @@ class wot.TeamBasesPanel.CaptureBar
         return min.toString() + ":" +
         (sec < 10 ? "0" + sec.toString() : sec.toString());
     }
-    
+
     private function get capSecondsLeft():Number
     {
         return Math.round(capPointsLeft / m_capSpeed.getSpeed());
     }
-    
+
     private function get capPointsLeft():Number
     {
         return 100 - wrapper.m_points;

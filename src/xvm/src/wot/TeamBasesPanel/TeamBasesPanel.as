@@ -11,18 +11,11 @@ import com.xvm.Utils;
 
 class wot.TeamBasesPanel.TeamBasesPanel
 {
-    // override
-    function add()
-    {
-        return this.addImpl.apply(this, arguments);
-    }
-
     /////////////////////////////////////////////////////////////////
+    // wrapped methods
 
     private var wrapper:net.wargaming.ingame.TeamBasesPanel;
     private var base:net.wargaming.ingame.TeamBasesPanel;
-
-    /////////////////////////////////////////////////////////////////
 
     public function TeamBasesPanel(wrapper:net.wargaming.ingame.TeamBasesPanel, base:net.wargaming.ingame.TeamBasesPanel)
     {
@@ -31,7 +24,15 @@ class wot.TeamBasesPanel.TeamBasesPanel
 
         Utils.TraceXvmModule("TeamBasesPanel");
     }
-    
+
+    function add()
+    {
+        return this.addImpl.apply(this, arguments);
+    }
+
+    // wrapped methods
+    /////////////////////////////////////////////////////////////////
+
     function addImpl(id, sortWeight, capColor, title, points)
     {
         if (CapConfig.enabled)
@@ -39,7 +40,7 @@ class wot.TeamBasesPanel.TeamBasesPanel
             /**
             * null, null args somehow allow to set XVM-specific vals
             * at the very first moment capture bar appears.
-            * 
+            *
             * Passing original values make text properties original
             * at that first moment.
             */

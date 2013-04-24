@@ -8,18 +8,18 @@ class com.xvm.Utils
 {
     private static var TRACE_XVM_MODULES = true;
 
-    public static function startsWith(substr: String, str: String): Boolean
+    public static function startsWith(substr:String, str:String):Boolean
     {
         return str.indexOf(substr, 0) == 0;
     }
 
-    public static function endsWith(substr: String, str: String): Boolean
+    public static function endsWith(substr:String, str:String):Boolean
     {
         return str.lastIndexOf(substr) == (str.length - substr.length);
     }
 
     // TODO: check performance, charAt is slow in ScaleForm
-    public static function trim(str: String): String
+    public static function trim(str:String):String
     {
         var i, j;
         for (i = 0; str.charCodeAt(i) < 33; ++i);
@@ -28,7 +28,7 @@ class com.xvm.Utils
         return str.substring(i, j+1);
     }
 
-    public static function toInt(value: Object, defaultValue: Number): Number
+    public static function toInt(value:Object, defaultValue:Number):Number
     {
         if (!defaultValue)
             defaultValue = 0;
@@ -38,7 +38,7 @@ class com.xvm.Utils
         return isNaN(n) ? defaultValue : n;
     }
 
-    public static function toFloat(value: Object, defaultValue: Number): Number
+    public static function toFloat(value:Object, defaultValue:Number):Number
     {
         if (!defaultValue)
             defaultValue = 0;
@@ -48,7 +48,7 @@ class com.xvm.Utils
         return isNaN(n) ? defaultValue : n;
     }
 
-    public static function toBool(value: Object, defaultValue: Boolean): Boolean
+    public static function toBool(value:Object, defaultValue:Boolean):Boolean
     {
         if ((typeof value) == "boolean")
             return Boolean(value);
@@ -58,12 +58,12 @@ class com.xvm.Utils
         return defaultValue ? value != "false" : value == "true";
     }
 
-    public static function elapsedMSec(start, end): Number
+    public static function elapsedMSec(start:Date, end:Date):Number
     {
-        return end - start;
+        return end.getTime() - start.getTime();
     }
 
-    public static function fixPath(path: String): String
+    public static function fixPath(path:String):String
     {
         path = path.split("\\").join("/");
         if (!Utils.endsWith("/", path))
@@ -99,7 +99,7 @@ class com.xvm.Utils
         return -1;
     }
 
-    public static function padLeft(str: String, len: Number, char: String)
+    public static function padLeft(str:String, len:Number, char:String):String
     {
         if (!str)
             str = "";
@@ -111,7 +111,7 @@ class com.xvm.Utils
     }
 
     // 0 - equal, -1 - v1<v2, 1 - v1>v2, -2 - error
-    public static function compareVersions(v1: String, v2: String): Number
+    public static function compareVersions(v1:String, v2:String):Number
     {
         try
         {
@@ -151,18 +151,18 @@ class com.xvm.Utils
         }
     }
 
-    public static function GetPlayerName(fullplayername: String): String
+    public static function GetPlayerName(fullplayername:String):String
     {
         var pos = fullplayername.indexOf("[");
         return (pos < 0) ? fullplayername : Utils.trim(fullplayername.slice(0, pos));
     }
 
-    public static function GetNormalizedPlayerName(fullplayername: String): String
+    public static function GetNormalizedPlayerName(fullplayername:String):String
     {
         return GetPlayerName(fullplayername).toUpperCase();
     }
 
-    public static function GetClanName(fullplayername: String): String
+    public static function GetClanName(fullplayername:String):String
     {
         var pos = fullplayername.indexOf("[");
         if (pos < 0)
@@ -171,14 +171,14 @@ class com.xvm.Utils
         return n.slice(0, n.indexOf("]"));
     }
 
-    public static function GetClanNameWithBrackets(fullplayername: String): String
+    public static function GetClanNameWithBrackets(fullplayername:String):String
     {
         var clan = GetClanName(fullplayername);
         return clan ? "[" + clan + "]" : "";
     }
 
     private static var xvmModules: Array = [];
-    public static function TraceXvmModule(moduleName: String)
+    public static function TraceXvmModule(moduleName:String):Void
     {
         if (!TRACE_XVM_MODULES)
             return;
@@ -189,7 +189,7 @@ class com.xvm.Utils
         }
     }
 
-    public static function FormatDate(format: String, date: Date)
+    public static function FormatDate(format:String, date:Date):String
     {
         var keys = {Y:"getFullYear", M:"getMonth", D:"getDate", H:"getHours", N:"getMinutes", S:"getSeconds"/*, I:"getMilliseconds"*/};
         var str = "";
@@ -215,6 +215,7 @@ class com.xvm.Utils
 
     /**
      * Get children MovieClips of MovieClip
+     * FIXIT: skips TextField?
      */
     public static function getChildrenOf(target:MovieClip, recursive:Boolean):Array
     {
@@ -238,7 +239,7 @@ class com.xvm.Utils
      * [1,2,3,4,5,6] - [1,2,3] = [4,5,6]
      * minuend − subtrahend = difference
      */
-    public static function subtractArray(minuend, subtrahend)
+    public static function subtractArray(minuend:Array, subtrahend:Array):Array
     {
         var difference:Array = [];
     
@@ -264,8 +265,8 @@ class com.xvm.Utils
     /**
      * Create CSS
      */
-    public static function createCSS(className:String, color: Number,
-        fontName: String, fontSize: Number, align: String, bold: Boolean, italic: Boolean):String
+    public static function createCSS(className:String, color:Number,
+        fontName:String, fontSize:Number, align:String, bold:Boolean, italic:Boolean):String
     {
         return "." + className + " {" +
             "color:#" + Utils.padLeft(color.toString(16), 6, '0') + ";" +
@@ -283,7 +284,7 @@ class com.xvm.Utils
     public static function createCSSFromConfig(config_font:Object, color:Number, className:String):String
     {
         return createCSS(className,
-            Utils.padLeft(color.toString(16), 6, '0'),
+            parseInt(Utils.padLeft(color.toString(16), 6, '0')),
             config_font && config_font.name ? config_font.name : "$FieldFont",
             config_font && config_font.size ? config_font.size : 13,
             config_font && config_font.align ? config_font.align : "center",
@@ -291,7 +292,7 @@ class com.xvm.Utils
             config_font && config_font.italic ? true : false);
     }
     
-    public static function createStyleSheet(css: String):TextField.StyleSheet
+    public static function createStyleSheet(css:String):TextField.StyleSheet
     {
         var style:TextField.StyleSheet = new TextField.StyleSheet();
         style.parseCSS(css);
@@ -299,7 +300,7 @@ class com.xvm.Utils
     }
 	
     // Duplicate text field
-    public static function duplicateTextField(mc, name, textField, yOffset, align)
+    public static function duplicateTextField(mc:MovieClip, name:String, textField:TextField, yOffset:Number, align:String):TextField
     {
         var res:TextField = mc.createTextField("name", mc.getNextHighestDepth(),
             textField._x, textField._y + yOffset, textField._width, textField._height);
@@ -314,7 +315,7 @@ class com.xvm.Utils
         return res;
     }
 
-    public static function createButton(mc:MovieClip, name, x, y, txt, align:String):MovieClip
+    public static function createButton(mc:MovieClip, name:String, x:Number, y:Number, txt:String, align:String):MovieClip
     {
         var b:MovieClip = mc.attachMovie("Button", name, mc.getNextHighestDepth());
         b._x = x;
@@ -325,8 +326,8 @@ class com.xvm.Utils
         if (align == "right")
             b._x -= Math.round(b.textField.textWidth + 21);
 
-        b.addEventListener("rollOver", onShowTooltip);
-        b.addEventListener("rollOut", onHideTooltip);
+        b.addEventListener("rollOver", showTooltip);
+        b.addEventListener("rollOut", hideTooltip);
 
         return b;
     }
@@ -341,15 +342,15 @@ class com.xvm.Utils
         mc._iconSource = iconSource;
         mc.tooltipText = toolTip;
         
-        mc.addEventListener("rollOver", onShowTooltip);
-        mc.addEventListener("rollOut", onHideTooltip);
+        mc.addEventListener("rollOver", showTooltip);
+        mc.addEventListener("rollOut", hideTooltip);
 
         mc.configUI();
 
         return mc;
     }
     
-    public static function addEventListeners(obj:Object, target:Object, handlers:Object)
+    public static function addEventListeners(obj:Object, target:Object, handlers:Object):Void
     {
         if (!obj || !target || !handlers)
             return;
@@ -357,20 +358,20 @@ class com.xvm.Utils
             obj.addEventListener(name, target, handlers[name]);
     }
 
-    private static function onShowTooltip(e)
+    private static function showTooltip(e:Object):Void
     {
         var b = e.target;
         if (b.tooltipText)
             net.wargaming.managers.ToolTipManager.instance.show(b.tooltipText);
     }
 
-    private static function onHideTooltip(e)
+    private static function hideTooltip(e:Object):Void
     {
         net.wargaming.managers.ToolTipManager.instance.hide();
     }
 
     // http://www.koreanrandom.com/forum/topic/2625-/
-    public static function XEFF(value)
+    public static function XEFF(value:Number):Number
     {
         return value < 440 ? 0 :
             Math.round(Math.max(0, Math.min(100,
@@ -385,7 +386,7 @@ class com.xvm.Utils
             )));
     }
     
-    public static function XWN(value)
+    public static function XWN(value:Number):Number
     {
         return value > 2140 ? 100 :
             Math.round(Math.max(0, Math.min(100,

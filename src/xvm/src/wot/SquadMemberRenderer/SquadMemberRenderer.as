@@ -13,34 +13,11 @@ import com.xvm.VehicleInfoDataL10n;
 
 class wot.SquadMemberRenderer.SquadMemberRenderer
 {
-    // override
-    function configUI()
-    {
-        return this.configUIImpl.apply(this, arguments);
-    }
-
-    // override
-    function afterSetData()
-    {
-        return this.afterSetDataImpl.apply(this, arguments);
-    }
-
-    // override
-    function getToolTipData()
-    {
-        return this.getToolTipDataImpl.apply(this, arguments);
-    }
-
     /////////////////////////////////////////////////////////////////
+    // wrapped methods
 
     private var wrapper:net.wargaming.messenger.controls.SquadMemberRenderer;
     private var base:net.wargaming.messenger.controls.SquadMemberRenderer;
-
-    /////////////////////////////////////////////////////////////////
-
-    private var configured:Boolean;
-    private var uid:Number;
-    private var m_infoField:TextField;
 
     public function SquadMemberRenderer(wrapper:net.wargaming.messenger.controls.SquadMemberRenderer, base:net.wargaming.messenger.controls.SquadMemberRenderer)
     {
@@ -49,6 +26,33 @@ class wot.SquadMemberRenderer.SquadMemberRenderer
 
         Utils.TraceXvmModule("Squad");
 
+        SquadMemberRendererCtor();
+    }
+
+    function configUI()
+    {
+        return this.configUIImpl.apply(this, arguments);
+    }
+
+    function afterSetData()
+    {
+        return this.afterSetDataImpl.apply(this, arguments);
+    }
+
+    function getToolTipData()
+    {
+        return this.getToolTipDataImpl.apply(this, arguments);
+    }
+
+    // wrapped methods
+    /////////////////////////////////////////////////////////////////
+
+    private var configured:Boolean;
+    private var uid:Number;
+    private var m_infoField:TextField;
+
+    public function SquadMemberRendererCtor()
+    {
         configured = false;
         uid = 0;
         m_infoField = null;

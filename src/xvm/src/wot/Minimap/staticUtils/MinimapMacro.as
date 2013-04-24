@@ -13,14 +13,14 @@ class wot.Minimap.staticUtils.MinimapMacro
     private static var VEH_NAME:String = "{{vehiclename}}";
     private static var VEH_NAME_ALT:String = "{{vehicle-name}}";
     private static var SHORT_VEH__MACRO:String = "{{vehicle-type-short}}"; // TODO
-    
+
     public static function process(format:String, player:Player, vehicleClass:String):String
     {
         if (format.indexOf("{{") == -1)
             return format;
 
         // TODO: StatFormat
-        
+
         var formatArr:Array;
 
         /**
@@ -35,7 +35,7 @@ class wot.Minimap.staticUtils.MinimapMacro
             var vi2 = VehicleInfo.getInfo2(player.icon);
             format = formatArr.join(vi2.level);
         }
-        
+
         /** Vehicle short type */
         formatArr = format.split(SHORT_VEH__MACRO);
         if (formatArr.length > 1)
@@ -43,13 +43,13 @@ class wot.Minimap.staticUtils.MinimapMacro
             var type:String = VehicleInfo.getVehicleName(player.icon).split("-").join("_");
             format = formatArr.join(VehicleTypeShort.translate(type));
         }
-            
 
-        
-        
+
+
+
         //var info:MovieClip = PlayersPanelProxy.getPlayerInfo(player.uid);
         //Logger.addObject(info._parent, "info", 2);
-            
+
         /** Vehicle system name - usa-M24_Chaffee */
         var systemVehName:String = VehicleInfo.getName1(player.icon);
         formatArr = format.split(VEH_NAME);
@@ -58,7 +58,7 @@ class wot.Minimap.staticUtils.MinimapMacro
         formatArr = format.split(VEH_NAME_ALT);
         if (formatArr.length > 1)
             format = formatArr.join(systemVehName);
-            
+
         /** Vehicle type readable - Чаффи */
         formatArr = format.split(VEH_MACRO);
         if (formatArr.length > 1)
@@ -67,8 +67,8 @@ class wot.Minimap.staticUtils.MinimapMacro
         if (formatArr.length > 1)
             format = formatArr.join(player.vehicle);
 
-            
-            
+
+
         /** Nickname shortened */
         formatArr = format.split(NICK_MACRO);
         if (formatArr.length > 1)
@@ -77,7 +77,7 @@ class wot.Minimap.staticUtils.MinimapMacro
             var shortNick = userName.slice(0, MapConfig.nickShrink);
             format = formatArr.join(shortNick);
         }
-        
+
         //Logger.addObject(format, "format", 3);
         /** {{vehicle-class}} returns special symbol depending on class */
         formatArr = format.split(VEHCLASS_MACRO);
@@ -105,7 +105,7 @@ class wot.Minimap.staticUtils.MinimapMacro
                     break;
             }
         }
-        
+
         return format;
     }
 }

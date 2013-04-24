@@ -9,18 +9,11 @@ import wot.crew.PingServers;
 
 class wot.crew.tankmen.Crew
 {
-    // override
-    function setTankmen()
-    {
-        return this.setTankmenImpl.apply(this, arguments);
-    }
-
     /////////////////////////////////////////////////////////////////
+    // wrapped methods
 
     private var wrapper:net.wargaming.tankmen.Crew;
     private var base:net.wargaming.tankmen.Crew;
-
-    /////////////////////////////////////////////////////////////////
 
     public function Crew(wrapper:net.wargaming.tankmen.Crew, base:net.wargaming.tankmen.Crew)
     {
@@ -29,6 +22,19 @@ class wot.crew.tankmen.Crew
 
         Utils.TraceXvmModule("Crew");
 
+        CrewCtor();
+    }
+
+    function setTankmen()
+    {
+        return this.setTankmenImpl.apply(this, arguments);
+    }
+
+    // wrapped methods
+    /////////////////////////////////////////////////////////////////
+
+    private function CrewCtor()
+    {
         GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
         Config.LoadConfig("Crew.as");
     }

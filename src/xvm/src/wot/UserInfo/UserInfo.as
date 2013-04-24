@@ -13,29 +13,38 @@ import com.xvm.Helpers.UserDataLoaderHelper;
 
 class wot.UserInfo.UserInfo
 {
-    // override
+    /////////////////////////////////////////////////////////////////
+    // wrapped methods
+
+    private var wrapper:net.wargaming.profile.UserInfo;
+    private var base:net.wargaming.profile.UserInfo;
+
+    public function UserInfo(wrapper:net.wargaming.profile.UserInfo, base:net.wargaming.profile.UserInfo)
+    {
+        this.wrapper = wrapper;
+        this.base = base;
+
+        Utils.TraceXvmModule("UserInfo");
+
+        UserInfoCtor();
+    }
+
     function setCommonInfo()
     {
         return this.setCommonInfoImpl.apply(this, arguments);
     }
 
-    // override
     function setStat()
     {
         return this.setStatImpl.apply(this, arguments);
     }
 
-    // override
     function setList()
     {
         return this.setListImpl.apply(this, arguments);
     }
 
-    /////////////////////////////////////////////////////////////////
-
-    private var wrapper:net.wargaming.profile.UserInfo;
-    private var base:net.wargaming.profile.UserInfo;
-
+    // wrapped methods
     /////////////////////////////////////////////////////////////////
 
     static var lastSort = {
@@ -53,13 +62,8 @@ class wot.UserInfo.UserInfo
     var m_button5:MovieClip, m_button6:MovieClip, m_button7:MovieClip, m_button8:MovieClip;
     var m_dataLoaded:Boolean;
 
-    public function UserInfo(wrapper:net.wargaming.profile.UserInfo, base:net.wargaming.profile.UserInfo)
+    public function UserInfoCtor()
     {
-        this.wrapper = wrapper;
-        this.base = base;
-
-        Utils.TraceXvmModule("UserInfo");
-
         m_name = null;
         m_userData = null;
         m_dataLoaded = false;
@@ -590,15 +594,16 @@ class wot.UserInfo.UserInfo
     // executes in the renderer context
     function rendererSetup()
     {
-        this["setup_orig"].apply(this, arguments);
-        var data = this["data"];
-        var teff = this["teff"];
-        var fights = this["fights"];
+        var context = MovieClip(this);
+        context["setup_orig"].apply(context, arguments);
+        var data = context["data"];
+        var teff = context["teff"];
+        var fights = context["fights"];
 
         if (!teff)
         {
-            teff = Utils.duplicateTextField(this, "teff", fights, 0, "center");
-            this["teff"] = teff;
+            teff = Utils.duplicateTextField(context, "teff", fights, 0, "center");
+            context["teff"] = teff;
             teff._x -= 37;
             //Logger.add("t=" + teff._x + ", f=" + fights._x);
         }

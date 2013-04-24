@@ -1,21 +1,44 @@
-﻿class wot.FinalStatistic.EfficiencyRenderer extends net.wargaming.hangar.FinalStatistic.view.EfficiencyRenderer
+﻿import com.xvm.Utils;
+
+class wot.FinalStatistic.EfficiencyRenderer
 {
-    // override
+    /////////////////////////////////////////////////////////////////
+    // wrapped methods
+
+    public var wrapper:net.wargaming.hangar.FinalStatistic.view.EfficiencyRenderer;
+    private var base:net.wargaming.hangar.FinalStatistic.view.EfficiencyRenderer;
+
+    public function EfficiencyRenderer(wrapper:net.wargaming.hangar.FinalStatistic.view.EfficiencyRenderer, base:net.wargaming.hangar.FinalStatistic.view.EfficiencyRenderer)
+    {
+        this.wrapper = wrapper;
+        this.base = base;
+
+        Utils.TraceXvmModule("FinalStatistic");
+    }
+
     function draw()
     {
-        var dirty = _dataDirty;
-        super.draw();
-        
-        if (data == null || data.isFake)
+        return this.drawImpl.apply(this, arguments);
+    }
+
+    // wrapped methods
+    /////////////////////////////////////////////////////////////////
+
+    function drawImpl()
+    {
+        var dirty = wrapper._dataDirty;
+        base.draw();
+
+        if (wrapper.data == null || wrapper.data.isFake)
             return;
 
-        if (data.damageDealt > 0)
+        if (wrapper.data.damageDealt > 0)
         {
             //damageIcon.iconLabelMc._x = 0;
             //damageIcon.iconLabelMc._width = damageIcon._width;
             //damageIcon.value = data.damageDealt;
         }
-        if (data.damageAssisted > 0)
+        if (wrapper.data.damageAssisted > 0)
         {
             //evilIcon.iconLabelMc._x = 0;
             //evilIcon.iconLabelMc._width = evilIcon._width;

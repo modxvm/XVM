@@ -6,7 +6,7 @@ import wot.Minimap.model.externalProxy.IconsProxy;
  * SyncModel class
  * handles tank data syncronization from PlayersPanel to Minimap
  * by means of altered WG event.
- * 
+ *
  * @author ilitvinov87@gmail.com
  */
 
@@ -19,13 +19,13 @@ class wot.Minimap.model.iconTracker.SyncModel
      * this var is considered actula uid of icon:MinimapEntry.
      */
     private var testUid:Number;
-    
+
     /**
      * Temporary behavior alteration switch.
      * Allows original icon highlighting behavior.
      */
     public var syncProcedureInProgress:Boolean;
-    
+
     /** Invoked by Minimap when its ready */
     public function updateIconsExtension():Void
     {
@@ -38,21 +38,21 @@ class wot.Minimap.model.iconTracker.SyncModel
         }
         syncProcedureInProgress = false;
     }
-    
+
     /** Used at MinimapEntry to define uid if syncronization succeeded */
     public function getTestUid():Number
     {
         return testUid;
     }
-    
+
     // -- Private
-    
+
     /** Defines current unassigned uid-s at Minimaps icons */
     private function getUnassignedUids():Array
     {
         return Utils.subtractArray(PlayersPanelProxy.getAllUids(), IconsProxy.getSyncedUids());
     }
-    
+
     /** Touched players MinimapEntry receives event */
     private function touchPlayer(uid:Number):Void
     {

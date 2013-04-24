@@ -25,7 +25,7 @@ class wot.crew.CrewLoader
                 gfx.io.GameDelegate.call("tankmen.equipTankman", [t["compact"], null, t["slot"]]);
         }
     }
-    
+
     private static function GetCrew(checkFunc:Function):Array
     {
         var tnkObj:Object = s_defaultCrew[0];
@@ -63,7 +63,7 @@ class wot.crew.CrewLoader
             return false;
         return CheckBest(actualTankman, bestTankman, theTank);
     }
-    
+
     /**
      * Compares two tankman
      * @param actualTankman current candidate
@@ -97,21 +97,21 @@ class wot.crew.CrewLoader
         //conserve the bestTankman
         if (bestTankman["skills"].length > actualTankman["skills"].length)
             return false;
-        
+
         //CASE 2.2 : bestTankman has less skills than actualTankman
         //select the actualTankman
         if (bestTankman["skills"].length < actualTankman["skills"].length)
             return true;
-        
+
         //CASE 2.3 : bestTankman has the same number of skills that the actualTankman
         //if the bestTankman's lastskilllevel is < that actualTankman's
         //select the actualTankman
         if (bestTankman["lastSkillLevel"] < actualTankman["lastSkillLevel"])
             return true;
-        
+
         return false;
     }
-    
+
     /**
      * skill tankman penality
      * @param aTankman
@@ -121,17 +121,17 @@ class wot.crew.CrewLoader
     private static function getPenality(tankman:Object, dummyTankman:Object)
     {
         var res = 1;
-        
+
         if (tankman["vehicleType"] == dummyTankman["curVehicleName"])
             res = 1;
-        else 
+        else
         {
             if (tankman["tankType"] == dummyTankman["curVehicleType"])
             {
                 // 25% penalty same tanktype but tank is different
                 res = (dummyTankman["vehicleElite"] == true) ? 1 : 0.75;
             }
-            else 
+            else
             {
                 // 50% penalty different tanktype
                 res = 0.5;
@@ -139,7 +139,7 @@ class wot.crew.CrewLoader
         }
         return tankman["efficiencyLevel"] * res;
     }
-	
+
     private static function TankmanInArray(list:Array, elem:Object):Boolean
     {
         for (var i = 0; i < list.length; ++i)
@@ -148,5 +148,5 @@ class wot.crew.CrewLoader
                 return true;
         }
         return false;
-    }    
+    }
 }

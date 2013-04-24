@@ -10,8 +10,8 @@ import wot.Minimap.model.mapSize.MapSizeBase;
 class wot.Minimap.model.mapSize.MapSizeModel
 {
     private var cellSide:Number;
-    
-    public function MapSizeModel() 
+
+    public function MapSizeModel()
     {
         /**
          * Read map name previously written by Battleloading.setMapBG().
@@ -20,7 +20,7 @@ class wot.Minimap.model.mapSize.MapSizeModel
          * but depends on xvm-stat.exe presence.
          */
         cellSide = MapSizeBase.sizeBySytemMapName(Config.s_vars.map_name);
-        
+
         if (!cellSide)
         {
             Logger.add("Minimap: system map name not set: " + Config.s_vars.map_name);
@@ -32,17 +32,17 @@ class wot.Minimap.model.mapSize.MapSizeModel
              */
             cellSide = MapSizeBase.sizeByLocalizedMapName(_root.statsData.arenaData.mapText);
             Logger.add("Minimap: localized map name: " + _root.statsData.arenaData.mapText);
-            
+
             if (!cellSide)
             {
                 /** This can be seen only for new maps */
                 Logger.add("Minimap ERROR: map no recognized");
             }
         }
-        
+
 
     }
-    
+
     public function getSide():Number
     {
         return cellSide;
