@@ -44,7 +44,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         this.base = base;
         wrapper["_xvm_worker"] = this;
         
-        Utils.TraceXvmModule("PlayerListItemRenderer");
+        Utils.TraceXvmModule("PlayersPanel");
         
         spotStatusView = new SpotStatusView(wrapper);
     }
