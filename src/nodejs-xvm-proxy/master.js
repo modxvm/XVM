@@ -94,7 +94,8 @@ var usageStat = {
     max_conn: 0,
     mongorq: 0,
     mongorq_max: settings.dbMaxConnections * settings.numNodes,
-    connections: [ ]
+    connections: [ ],
+    cmdInfo: 0
 };
 
 var processUsageReport = function(report) {
@@ -102,8 +103,10 @@ var processUsageReport = function(report) {
         usageStat.requests += report.requests;
         usageStat.requests_current += report.requests;
     }
-    if(report.players)
+    if(report.players) {
         usageStat.players += report.players;
+        usageStat.players_current += report.players;
+    }
     if(report.cached)
         usageStat.cached += report.cached;
     if(report.updated)
@@ -123,8 +126,8 @@ var processUsageReport = function(report) {
         usageStat.mongorq_max += report.mongorq_max;
         utils.log("mongorq_max: " + usageStat.mongorq_max);
     }
-    if(report.cmd_info)
-        usageStat.cmd_info += report.cmd_info;
+    if(report.cmdInfo)
+        usageStat.cmdInfo += report.cmdInfo;
     if(report.connections) {
         if (!usageStat.connections[report.serverId])
             usageStat.connections[report.serverId] = {cur:0, max:settings.servers[report.serverId].maxconn, total:0, fail:0};

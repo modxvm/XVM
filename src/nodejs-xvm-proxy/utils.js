@@ -213,12 +213,17 @@ exports.filterByRegion = function(data, region) {
 
 exports.getStatServers = function(id) {
     var serverId = Math.floor(id / 500000000);
+
     if(serverId < 0 || serverId >= settings.statServers.length)
         return null;
+
     var servers = settings.statServers[serverId];
-    if(!servers || servers.length == 0)
+
+    if(!servers || servers.length === 0)
         return null;
+
     var res = [ ];
+
     for(var i in servers) {
         var srv = settings.servers[servers[i]];
         srv.id = servers[i];

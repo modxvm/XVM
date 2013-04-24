@@ -5,7 +5,7 @@ exports.performance = function(req, res) {
 
     db.getPerformanceReport(function(error, result) {
 
-        vm = result.map(function(item, index) {
+        var vm = result.map(function(item, index) {
             // TODO
             var uptime = item.uptime / 1000,
                 d = (uptime / (60 * 60 * 24)).toFixed(),
@@ -43,6 +43,7 @@ exports.performance = function(req, res) {
                 max_conn: (item.max_conn / item.players * 100).toFixed(2),
                 mongorq: item.mongorq,
                 mongorq_max: item.mongorq_max,
+                cmdInfo: item.cmdInfo,
                 connections: connections
             };
         });

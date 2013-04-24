@@ -261,7 +261,7 @@ var _parseNewPlayerData = function(id, data) {
             f: vdata.frags,
             s: vdata.spotted,
             u: vdata.survivedBattles
-        }
+        };
     }
 
     // Average Tier

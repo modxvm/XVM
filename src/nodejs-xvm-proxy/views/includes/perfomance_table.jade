@@ -13,6 +13,7 @@ div.row
     div.span1 updfail
     div.span1 max_conn
     div.span1 mongorq
+    div.span1 info reqs
 
 each record in db
     div(data-toggle="collapse", data-target=".i"+record.index).row.record
@@ -28,6 +29,7 @@ each record in db
         div.span1 #{record.updfail}%
         div.span1 #{record.max_conn}%
         div.span1 #{record.mongorq} / #{record.mongorq_max}
+        div.span1 #{record.cmdInfo}
 
     div(class="i"+record.index).row.collapse
         div.span6
