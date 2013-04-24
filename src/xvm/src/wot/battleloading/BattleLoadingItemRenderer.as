@@ -50,7 +50,7 @@ class wot.battleloading.BattleLoadingItemRenderer
         this.wrapper = wrapper;
         this.base = base;
 
-        Utils.TraceXvmModule("BattleLoadingItemRenderer");
+        Utils.TraceXvmModule("BL");
 
         BattleLoadingItemRendererCtor();
     }

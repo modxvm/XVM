@@ -23,7 +23,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
         this.base = base;
         wrapper["_xvm_worker"] = this;
 
-        Utils.TraceXvmModule("PlayersPanel");
+        Utils.TraceXvmModule("PP");
 
         PlayerListItemRendererCtor();
     }

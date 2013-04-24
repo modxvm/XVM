@@ -39,7 +39,7 @@ class wot.battleloading.BattleLoading
         this.wrapper = wrapper;
         this.base = base;
 
-        Utils.TraceXvmModule("BattleLoading");
+        Utils.TraceXvmModule("BL");
 
         BattleLoadingCtor();
     }

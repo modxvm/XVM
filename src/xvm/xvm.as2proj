@@ -63,6 +63,10 @@
     <compile path="src\wot\battle" />
     <compile path="src\wot\Minimap" />
     <compile path="src\wot\FinalStatistic" />
+    <compile path="src\wot\VehicleMarkersManager" />
+    <compile path="src\wot\VehicleMarkersManager\components" />
+    <compile path="src\wot\VehicleMarkersManager\ingame" />
+    <compile path="src\wot\VehicleMarkersManager\components\damage" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>
@@ -70,7 +74,9 @@
   </library>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
-    <!-- example: <hidden path="..." /> -->
+    <hidden path="include" />
+    <hidden path="wrapper" />
+    <hidden path="swf" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand />

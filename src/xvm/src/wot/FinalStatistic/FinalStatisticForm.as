@@ -20,7 +20,7 @@ class wot.FinalStatistic.FinalStatisticForm
         this.wrapper = wrapper;
         this.base = base;
 
-        Utils.TraceXvmModule("FinalStatistic");
+        Utils.TraceXvmModule("FS");
 
         FinalStatisticFormCtor();
     }

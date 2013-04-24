@@ -26,7 +26,7 @@ class wot.PlayersPanel.PlayersPanel
         this.wrapper = wrapper;
         this.base = base;
 
-        Utils.TraceXvmModule("PlayersPanel");
+        Utils.TraceXvmModule("PP");
 
         PlayersPanelCtor();
     }

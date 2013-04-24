@@ -32,7 +32,7 @@ class wot.Minimap.MinimapEntry
         this.base = base;
         wrapper["_xvm_worker"] = this;
 
-        Utils.TraceXvmModule("Minimap");
+        Utils.TraceXvmModule("MM");
     }
 
     function lightPlayer()

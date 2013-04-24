@@ -14,7 +14,7 @@ class wot.FinalStatistic.TeamStats
         this.wrapper = wrapper;
         this.base = base;
 
-        Utils.TraceXvmModule("FinalStatistic");
+        Utils.TraceXvmModule("FS");
     }
 
     function configUI()

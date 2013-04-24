@@ -24,7 +24,7 @@ class wot.battle.BattleMain
 
     static function main()
     {
-        Utils.TraceXvmModule("Battle:main");
+        Utils.TraceXvmModule("Battle");
 
         GlobalEventDispatcher.addEventListener("config_loaded", BattleMainConfigLoaded);
         GlobalEventDispatcher.addEventListener("config_loaded", StatLoader.LoadLastStat);

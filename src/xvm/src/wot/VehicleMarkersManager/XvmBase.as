@@ -73,6 +73,8 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
     private var _proxy:VehicleMarkerProxy;
     public function get proxy():VehicleMarkerProxy { return _proxy; }
 
+    public function get wrapper():gfx.core.UIComponent { return _proxy.wrapper; }
+    
     public function get isBlowedUp():Boolean { return s_blowedUp[m_playerFullName] != undefined; }
 
     private function getCurrentSystemColor():Number
@@ -84,7 +86,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
     {
         return ColorsManager.getSystemColor(o.entityName, o.dead, o.blowedUp, ColorsManager.isColorBlindMode);
     }
-    
+
     /**
      * Text formatting functions
      */
@@ -175,8 +177,8 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
     {
         try
         {
-            var n = proxy.getNextHighestDepth();
-            var textField: TextField = proxy.createTextField("textField" + n, n, 0, 0, 140, 100);
+            var n = wrapper.getNextHighestDepth();
+            var textField: TextField = wrapper.createTextField("textField" + n, n, 0, 0, 140, 100);
 
             //textField._quality = "BEST";
             textField.antiAliasType = "normal";

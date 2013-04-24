@@ -13,7 +13,7 @@ class wot.FinalStatistic.EfficiencyRenderer
         this.wrapper = wrapper;
         this.base = base;
 
-        Utils.TraceXvmModule("FinalStatistic");
+        Utils.TraceXvmModule("FS");
     }
 
     function draw()

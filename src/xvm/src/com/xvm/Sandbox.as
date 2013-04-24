@@ -1,26 +1,34 @@
+import net.wargaming.utils.DebugUtils;
+
 class com.xvm.Sandbox
 {
+    public static var SANDBOX_UNKNOWN = "_";
+    public static var SANDBOX_VMM = "V";
+    public static var SANDBOX_BATTLE = "B";
+    public static var SANDBOX_HANGAR = "H";
+
     public static function GetCurrentSandboxPrefix() : String
     {
         // VehicleMarkersManager.swf
         if (_root["vehicleMarkersCanvas"] != undefined)
-            return "V";
+            return SANDBOX_VMM;
 
         // battle.swf, PlayersPanel.swf, StatisticForm.swf, Minimap.swf, TeamBasesPanel.swf
         if (_root["sixthSenseIndicator"] != undefined)
-            return "B";
+            return SANDBOX_BATTLE;
 
         // hangar SWFs + battleloading.swf
         if (_root["invitesHandler"] != undefined)
-            return "H";
+            return SANDBOX_HANGAR;
 
         // unknown sand box
-        var s = "\nunknown sand box\n\n";
+        var s = "XVM\nunknown sand box\n\n";
         for (var i in _root)
         {
-            if (typeof _root[i] != "function")
+            if (typeof(_root[i]) != "function")
                 s += i + ": " + _root[i] + "\n";
         }
-        return "_";
+        DebugUtils.LOG_WARNING(s);
+        return SANDBOX_UNKNOWN;
     }
 }

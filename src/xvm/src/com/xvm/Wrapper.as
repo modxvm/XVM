@@ -14,7 +14,18 @@ class com.xvm.Wrapper
     {
         return function() {
             //com.xvm.Logger.add("wr:" + func);
-            return obj[func].apply(obj, arguments); 
+            var f = obj[func];
+            if (f == undefined)
+            {
+                com.xvm.Logger.add("WARNING: no worker func: " + typeof(obj) + "::" + func + "()");
+                return undefined;
+            }
+            if (typeof(f) != "function")
+            {
+                com.xvm.Logger.add("WARNING: not a function: " + typeof(obj) + "::" + func + "()");
+                return undefined;
+            }
+            return f.apply(obj, arguments); 
         }
     }
 }

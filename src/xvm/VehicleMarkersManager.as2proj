@@ -47,7 +47,19 @@
   </library>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
-    <!-- example: <hidden path="..." /> -->
+    <hidden path="src" />
+    <hidden path="wrapper\wot\wrapper\battle" />
+    <hidden path="wrapper\wot\wrapper\battleloading" />
+    <hidden path="wrapper\wot\wrapper\crew" />
+    <hidden path="wrapper\wot\wrapper\FinalStatistic" />
+    <hidden path="wrapper\wot\wrapper\Minimap" />
+    <hidden path="wrapper\wot\wrapper\PlayersPanel" />
+    <hidden path="wrapper\wot\wrapper\SquadMemberRenderer" />
+    <hidden path="wrapper\wot\wrapper\StatisticForm" />
+    <hidden path="wrapper\wot\wrapper\TeamBasesPanel" />
+    <hidden path="wrapper\wot\wrapper\TeamMemberRenderer" />
+    <hidden path="wrapper\wot\wrapper\TeamRenderer" />
+    <hidden path="wrapper\wot\wrapper\UserInfo" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand />
@@ -55,7 +67,7 @@
   <postBuildCommand alwaysRun="False" />
   <!-- Other project options -->
   <options>
-    <option showHiddenPaths="True" />
+    <option showHiddenPaths="False" />
     <option testMovie="Custom" />
     <option testMovieCommand="..\..\utils\test.sh" />
   </options>

@@ -16,7 +16,7 @@ class wot.FinalStatistic.DetailsBlock
         this.wrapper = wrapper;
         this.base = base;
 
-        Utils.TraceXvmModule("FinalStatistic");
+        Utils.TraceXvmModule("FS");
 
         DetailsBlockCtor();
     }

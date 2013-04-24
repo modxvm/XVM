@@ -4,29 +4,29 @@
     
     static function createInstance(context, symbol, name, depth, initObj);
     
-    function get disabled();
-    function set disabled(value);
-    function get visible();
-    function set visible(value);
-    function get width();
-    function set width(value);
-    function get height();
-    function set height(value);
-    function setSize(width, height);
-    function get focused();
-    function set focused(value);
-    function get displayFocus();
-    function set displayFocus(value);
-    function handleInput(details, pathToFocus);
-    function invalidate();
-    function validateNow();
-    function toString();
-    function configUI();
-    function initSize();
-    function draw();
-    function changeFocus();
-    function onMouseWheel(delta, target);
-    function scrollWheel(delta);
+    function get disabled():Boolean;
+    function set disabled(value:Boolean):Void;
+    function get visible():Boolean;
+    function set visible(value:Boolean):Void;
+    function get width():Number;
+    function set width(value:Number):Void;
+    function get height():Number;
+    function set height(value:Number):Void;
+    function setSize(width:Number, height:Number):Void;
+    function get focused():Boolean;
+    function set focused(value:Boolean):Void;
+    function get displayFocus():Boolean;
+    function set displayFocus(value:Boolean):Void;
+    function handleInput(details, pathToFocus):Void;
+    function invalidate():Void;
+    function validateNow():Void;
+    function toString():String;
+    function configUI():Void;
+    function initSize():Void;
+    function draw():Void;
+    function changeFocus():Void;
+    function onMouseWheel(delta:Number, target:Object):Void;
+    function scrollWheel(delta:Number):Void;
 
     // gfx.events.EventDispatcher inherits
     function addEventListener(event, scope, callBack);

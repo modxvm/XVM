@@ -29,7 +29,7 @@ class wot.StatisticForm.BattleStatItemRenderer
         this.wrapper = wrapper;
         this.base = base;
 
-        Utils.TraceXvmModule("StatisticForm");
+        Utils.TraceXvmModule("SF");
 
         BattleStatItemRendererCtor();
     }

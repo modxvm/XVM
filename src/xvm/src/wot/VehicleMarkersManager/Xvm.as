@@ -101,8 +101,8 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     /**
      * @see IVehicleMarker
      */
-    function init(vClass, vIconSource, vType, vLevel, pFullName,
-        curHealth, maxHealth, entityName, speaking, hunt, entityType)
+    function init(vClass:String, vIconSource:String, vType:String, vLevel:Number, pFullName:String,
+        curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean, hunt:Boolean, entityType:String)
     {
         m_playerFullName = pFullName; // alex[ALX]
 
@@ -144,7 +144,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
             }, proxy.m_team == "ally" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
 
         // Create clan icon and place to mc.
-        clanIconComponent.initialize(proxy);
+        clanIconComponent.initialize(wrapper);
 
         // Initialize states and creating text fields
         initializeTextFields();
@@ -184,7 +184,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     /**
      * @see IVehicleMarker
      */
-    function setSpeaking(value)
+    function setSpeaking(value:Boolean)
     {
         //trace("Xvm::setSpeaking(" + value + ")");
         if (m_speaking == value)
@@ -200,7 +200,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     /**
      * @see IVehicleMarker
      */
-    function setEntityName(value)
+    function setEntityName(value:String)
     {
         //trace("Xvm::setEntityName(" + value + ")");
         if (value == m_entityName)
@@ -214,7 +214,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     /**
      * @see IVehicleMarker
      */
-    function updateHealth(newHealth, flag, damageType)
+    function updateHealth(newHealth:Number, flag:Number, damageType:String)
     {
         /*
          * newHealth:
@@ -255,7 +255,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     /**
      * @see IVehicleMarker
      */
-    function updateState(newState, isImmediate)
+    function updateState(newState:String, isImmediate:Boolean)
     {
         //trace("Xvm::updateState(" + newState + ", " + isImmediate + "): " + vehicleState.getCurrentState());
 
@@ -272,7 +272,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     /**
      * @see IVehicleMarker
      */
-    function showExInfo(show)
+    function showExInfo(show:Boolean)
     {
         //trace("Xvm::showExInfo()");
         if (m_showExInfo == show)

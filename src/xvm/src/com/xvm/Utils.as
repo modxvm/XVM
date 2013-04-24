@@ -182,11 +182,11 @@ class com.xvm.Utils
     {
         if (!TRACE_XVM_MODULES)
             return;
-        if (Utils.indexOf(xvmModules, moduleName) == -1)
-        {
-            xvmModules.push(moduleName);
-            Logger.add("xvm-> [ \"" + xvmModules.join("\", \"") + "\" ]");
-        }
+        if (_global["_xvm__trace_module_" + moduleName] != undefined)
+            return;
+        _global["_xvm__trace_module_" + moduleName] = 1;
+        xvmModules.push(moduleName);
+        Logger.add("xvm-> [ \"" + xvmModules.join("\", \"") + "\" ]");
     }
 
     public static function FormatDate(format:String, date:Date):String
