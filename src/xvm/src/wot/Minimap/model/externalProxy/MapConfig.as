@@ -1,7 +1,6 @@
 import flash.filters.DropShadowFilter;
 import flash.geom.Point;
 import com.xvm.Config;
-import wot.Minimap.MinimapEntry;
 
 class wot.Minimap.model.externalProxy.MapConfig
 {
@@ -173,19 +172,19 @@ class wot.Minimap.model.externalProxy.MapConfig
     {
         switch (entryName)
         {   
-            case MinimapEntry.MINIMAP_ENTRY_NAME_ALLY:
+            case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_NAME_ALLY:
                 return "ally";
                 break;
-            case MinimapEntry.MINIMAP_ENTRY_NAME_ENEMY:
+            case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_NAME_ENEMY:
                 return "enemy";
                 break;
-            case MinimapEntry.MINIMAP_ENTRY_NAME_SQUAD:
+            case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_NAME_SQUAD:
                 return "squad"; // originally "squadman"
                 break;
-            case MinimapEntry.MINIMAP_ENTRY_NAME_SELF:
+            case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_NAME_SELF:
                 return "oneself";  // originally ""
                 break;
-            case MinimapEntry.MINIMAP_ENTRY_NAME_LOST:
+            case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_NAME_LOST:
                 return "lost";
                 break;
         }

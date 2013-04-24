@@ -1,9 +1,8 @@
-import wot.Minimap.Zoom;
-import wot.Minimap.MinimapEntry;
-import wot.Minimap.shapes.Square;
-import wot.Minimap.ExternalDeveloperInterface;
 import com.xvm.Utils;
 import com.xvm.GlobalEventDispatcher;
+import wot.Minimap.Zoom;
+import wot.Minimap.shapes.Square;
+import wot.Minimap.ExternalDeveloperInterface;
 import wot.Minimap.MapSizeLabel;
 import wot.Minimap.LostMarkers;
 import wot.Minimap.MinimapEvent;
@@ -19,8 +18,55 @@ import wot.Minimap.model.externalProxy.MapConfig;
  * @author ilitvinov87@gmail.com
  */
 
-class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
+class wot.Minimap.Minimap
 {
+    // override
+    function scaleMarkers()
+    {
+        return this.scaleMarkersImpl.apply(this, arguments);
+    }
+
+    // override
+    function onEntryInited()
+    {
+        return this.onEntryInitedImpl.apply(this, arguments);
+    }
+
+    // override
+    function correctSizeIndex()
+    {
+        return this.correctSizeIndexImpl.apply(this, arguments);
+    }
+
+    // override
+    function sizeUp()
+    {
+        return this.sizeUpImpl.apply(this, arguments);
+    }
+
+    /////////////////////////////////////////////////////////////////
+
+    private var wrapper:net.wargaming.ingame.Minimap;
+    private var base:net.wargaming.ingame.Minimap;
+
+    /////////////////////////////////////////////////////////////////
+
+    public function Minimap(wrapper:net.wargaming.ingame.Minimap, base:net.wargaming.ingame.Minimap)
+    {
+        this.wrapper = wrapper;
+        this.base = base;
+        wrapper["_xvm_worker"] = this;
+        
+        Utils.TraceXvmModule("Minimap");
+        
+        GlobalEventDispatcher.addEventListener(MinimapEvent.MINIMAP_READY, this, onReady);
+        GlobalEventDispatcher.addEventListener(MinimapEvent.PANEL_READY, this, onReady);
+        
+        checkLoading();
+    }
+    
+    /////////////////////////////////////////////////////////////////
+
     /**
      * icons Z indexes from Minimap.pyc:
      *  _BACK_ICONS_RANGE = (25, 49)
@@ -72,9 +118,9 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     private var loadComplete:Boolean = false;
     private var mapExtended:Boolean = false;
     
-    function scaleMarkers(percent)
+    function scaleMarkersImpl(percent)
     {
-        super.scaleMarkers(percent);
+        base.scaleMarkers(percent);
         XvmRescaleBase(percent);
         rescaleAttachments();
     }
@@ -84,31 +130,18 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
         /**
          * Revert capture base icon size.
          */
-        for (var i in icons)
+        for (var i in wrapper.icons)
         {
-            if (icons[i].entryName == "base")
+            if (wrapper.icons[i].entryName == "base")
             {
-                icons[i]._xscale = icons[i]._yscale = 100;
+                wrapper.icons[i]._xscale = wrapper.icons[i]._yscale = 100;
             }
         }
     }
 
-    // override
-    function Minimap()
+    function onEntryInitedImpl()
     {
-        Utils.TraceXvmModule("Minimap");
-        super();
-        
-        GlobalEventDispatcher.addEventListener(MinimapEvent.MINIMAP_READY, this, onReady);
-        GlobalEventDispatcher.addEventListener(MinimapEvent.PANEL_READY, this, onReady);
-        
-        checkLoading();
-    }
-    
-    // override
-    function onEntryInited()
-    {
-        super.onEntryInited();
+        base.onEntryInited();
         
         if (sync && MapConfig.enabled)
            sync.updateIconsExtension();
@@ -123,10 +156,9 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     }
     
     /** Disables maximum minimap size limitation */
-    // override
-    function correctSizeIndex(sizeIndex:Number, stageHeight:Number):Number
+    function correctSizeIndexImpl(sizeIndex:Number, stageHeight:Number):Number
     {
-        /** super.correctSizeIndex code is omitted to drop limits */
+        /** base.correctSizeIndex code is omitted to drop limits */
         
         /** Do not allow size less than map border */
         if (sizeIndex < 0)
@@ -138,10 +170,9 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     }
     
     /** Suitable for manual debug tracing by pushing "=" button */
-    // override
-    function sizeUp()
+    function sizeUpImpl()
     {
-        super.sizeUp();
+        base.sizeUp();
     }
     
     // -- Private
@@ -158,7 +189,7 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
     
     private function checkLoading():Void
     {
-        icons.onEnterFrame = function()
+        wrapper.icons.onEnterFrame = function()
         {
             if (this.MinimapEntry0)
             {
@@ -202,13 +233,13 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
          * Read val from config.
          * Default by WG is 0.5.
          */
-        MARKERS_SCALING = MapConfig.iconScale;
-        scaleMarkers(MARKERS_SCALING);
+        net.wargaming.ingame.Minimap.MARKERS_SCALING = MapConfig.iconScale;
+        scaleMarkers(net.wargaming.ingame.Minimap.MARKERS_SCALING);
 
         /** Zoom map on key press */
         if (MapConfig.zoomEnabled)
         {
-            zoom = new Zoom(this);
+            zoom = new Zoom(wrapper);
 
             var key:Number = MapConfig.zoomKey;
             net.wargaming.managers.BattleInputHandler.instance.addHandler(key, false, zoom, "onZoomKeyClick");
@@ -225,21 +256,21 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
              * sends event on lost units change.
              */
             autoUpdate = new AutoUpdate();
-            lostMarkers = new LostMarkers(icons);
+            lostMarkers = new LostMarkers(wrapper.icons);
         }
         
         /**
          * Set alpha of background map image.
          * Does not affect markers
          */
-        this.backgrnd._alpha = MapConfig.mapBackgroundImageAlpha;
+        wrapper.backgrnd._alpha = MapConfig.mapBackgroundImageAlpha;
         
         /**
          * Setup alpha for icon of player himself.
          * Looks like white arrow.
          * Does not affect attached shapes.
          */
-        var selfIcon:MinimapEntry = IconsProxy.getSelf();
+        var selfIcon:net.wargaming.ingame.MinimapEntry = IconsProxy.getSelf();
         selfIcon.selfIcon._alpha = MapConfig.selfIconAlpha;
         
         /**
@@ -260,7 +291,7 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
             /** Draw map size at map corner */
             if (MapConfig.mapSizeLabelEnabled)
             {
-                mapSizeLabel = new MapSizeLabel(this.backgrnd, mapSizeModel.getSide());
+                mapSizeLabel = new MapSizeLabel(wrapper.backgrnd, mapSizeModel.getSide());
             }
             
             /**
@@ -295,7 +326,7 @@ class wot.Minimap.Minimap extends net.wargaming.ingame.Minimap
 
     private function setCameraAlpha():Void
     {
-        var camera:MinimapEntry = IconsProxy.getCamera();
+        var camera:net.wargaming.ingame.MinimapEntry = IconsProxy.getCamera();
         camera._alpha = MapConfig.cameraAlpha;
     }
 }

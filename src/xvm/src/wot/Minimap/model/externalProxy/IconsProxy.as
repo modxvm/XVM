@@ -1,6 +1,4 @@
-import wot.Minimap.Minimap;
 import com.xvm.Utils;
-import wot.Minimap.MinimapEntry;
 
 /**
  * IconsProxy class
@@ -45,7 +43,7 @@ class wot.Minimap.model.externalProxy.IconsProxy
     }
     
     /** Used by VehiclePositionTracking to get vehicle positions */
-    public static function getEntry(uid:Number):MinimapEntry
+    public static function getEntry(uid:Number):net.wargaming.ingame.MinimapEntry
     {
         var minimapEntries:Array = getMinimapEntries();
         var assigned:Array = [];
@@ -60,17 +58,17 @@ class wot.Minimap.model.externalProxy.IconsProxy
     }
     
     /** Looks like white arrow */
-    public static function getSelf():MinimapEntry
+    public static function getSelf():net.wargaming.ingame.MinimapEntry
     {
         var icons:MovieClip = getIcons();
-        return MinimapEntry(icons.getInstanceAtDepth(Minimap.SELF_ZINDEX));
+        return net.wargaming.ingame.MinimapEntry(icons.getInstanceAtDepth(wot.Minimap.Minimap.SELF_ZINDEX));
     }
     
     /** Looks like green highlighted corner */
-    public static function getCamera():MinimapEntry
+    public static function getCamera():net.wargaming.ingame.MinimapEntry
     {
         var icons:MovieClip = getIcons();
-        return MinimapEntry(icons.getInstanceAtDepth(Minimap.CAMERA_NORMAL_ZINDEX));
+        return net.wargaming.ingame.MinimapEntry(icons.getInstanceAtDepth(wot.Minimap.Minimap.CAMERA_NORMAL_ZINDEX));
     }
     
     public static function getIcons():MovieClip

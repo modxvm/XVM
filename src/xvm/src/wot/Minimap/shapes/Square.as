@@ -3,7 +3,6 @@ import com.xvm.VehicleInfo;
 import com.xvm.VehicleInfoData2;
 import wot.Minimap.model.externalProxy.PlayersPanelProxy;
 import wot.Minimap.model.externalProxy.IconsProxy;
-import wot.Minimap.Minimap;
 import wot.Minimap.shapes.ShapeAttach;
 import wot.Minimap.model.externalProxy.MapConfig;
 
@@ -37,7 +36,7 @@ class wot.Minimap.shapes.Square extends ShapeAttach
     
     private function createSquareClip():MovieClip
     {
-        return icons.createEmptyMovieClip("square", Minimap.SQUARE_1KM_INDEX);
+        return icons.createEmptyMovieClip("square", wot.Minimap.Minimap.SQUARE_1KM_INDEX);
     }
     
     private function defineStyle(mc:MovieClip):Void

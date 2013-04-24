@@ -2,7 +2,6 @@ import com.xvm.VehicleTypeShort;
 import com.xvm.VehicleInfo;
 import wot.Minimap.model.externalProxy.MapConfig;
 import wot.Minimap.dataTypes.Player;
-import wot.Minimap.MinimapEntry;
 
 class wot.Minimap.staticUtils.MinimapMacro
 {
@@ -86,22 +85,22 @@ class wot.Minimap.staticUtils.MinimapMacro
         {
             switch (vehicleClass)
             {
-                case MinimapEntry.MINIMAP_ENTRY_VEH_CLASS_LIGHT:
+                case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_VEH_CLASS_LIGHT:
                     format = formatArr.join(MapConfig.lightSymbol);
                     break;
-                case MinimapEntry.MINIMAP_ENTRY_VEH_CLASS_MEDIUM:
+                case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_VEH_CLASS_MEDIUM:
                     format = formatArr.join(MapConfig.mediumSymbol);
                     break;
-                case MinimapEntry.MINIMAP_ENTRY_VEH_CLASS_HEAVY:
+                case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_VEH_CLASS_HEAVY:
                     format = formatArr.join(MapConfig.heavySymbol);
                     break;
-                case MinimapEntry.MINIMAP_ENTRY_VEH_CLASS_TD:
+                case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_VEH_CLASS_TD:
                     format = formatArr.join(MapConfig.tdSymbol);
                     break;
-                case MinimapEntry.MINIMAP_ENTRY_VEH_CLASS_SPG:
+                case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_VEH_CLASS_SPG:
                     format = formatArr.join(MapConfig.spgSymbol);
                     break;
-                case MinimapEntry.MINIMAP_ENTRY_VEH_CLASS_SUPER:
+                case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_VEH_CLASS_SUPER:
                     format = formatArr.join(MapConfig.superSymbol);
                     break;
             }

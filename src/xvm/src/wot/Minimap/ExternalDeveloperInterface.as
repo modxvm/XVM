@@ -1,5 +1,3 @@
-import wot.Minimap.Minimap;
-
 /**
  * Simplified minimap interface for communication with other Python or Flash mods.
  * 
@@ -11,7 +9,7 @@ class wot.Minimap.ExternalDeveloperInterface
     
     public function ExternalDeveloperInterface()
     {
-        customContainer = icons.createEmptyMovieClip("customContainer", Minimap.EXTERNAL_CUSTOM_INDEX);
+        customContainer = icons.createEmptyMovieClip("customContainer", wot.Minimap.Minimap.EXTERNAL_CUSTOM_INDEX);
     }
     
     /**

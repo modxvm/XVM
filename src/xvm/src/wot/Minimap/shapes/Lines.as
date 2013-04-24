@@ -1,7 +1,6 @@
 import flash.geom.Point;
 import wot.Minimap.MinimapEvent;
 import com.xvm.GlobalEventDispatcher;
-import wot.Minimap.MinimapEntry;
 import wot.Minimap.model.externalProxy.IconsProxy;
 import wot.Minimap.model.externalProxy.MapConfig;
 import wot.Minimap.shapes.ShapeAttach;
@@ -54,7 +53,7 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
     
     private function attachCameraLines():Void
     {
-        var cameraEntry:MinimapEntry = IconsProxy.getCamera();
+        var cameraEntry:wot.Minimap.MinimapEntry = IconsProxy.getCamera()["_xvm_worker"];
         cameraEntry.cameraExtendedToken = true;
         var camAttach:MovieClip = cameraEntry.attachments;
         var depth:Number = camAttach.getNextHighestDepth();

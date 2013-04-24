@@ -61,6 +61,7 @@
     <compile path="src\wot\StatisticForm" />
     <compile path="src\wot\TeamBasesPanel" />
     <compile path="src\wot\battle" />
+    <compile path="src\wot\Minimap" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>

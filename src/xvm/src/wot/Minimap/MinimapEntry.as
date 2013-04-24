@@ -1,3 +1,4 @@
+import com.xvm.Utils;
 import wot.Minimap.model.externalProxy.MapConfig;
 import wot.Minimap.staticUtils.LabelAppend;
 import wot.Minimap.dataTypes.Player;
@@ -17,8 +18,32 @@ import wot.Minimap.dataTypes.Player;
  * @author ilitvinov87@gmail.com
  */
 
-class wot.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
+class wot.Minimap.MinimapEntry
 {
+    // override
+    function lightPlayer()
+    {
+        return this.lightPlayerImpl.apply(this, arguments);
+    }
+
+    /////////////////////////////////////////////////////////////////
+
+    public var wrapper:net.wargaming.ingame.MinimapEntry;
+    private var base:net.wargaming.ingame.MinimapEntry;
+
+    /////////////////////////////////////////////////////////////////
+
+    public function MinimapEntry(wrapper:net.wargaming.ingame.MinimapEntry, base:net.wargaming.ingame.MinimapEntry)
+    {
+        this.wrapper = wrapper;
+        this.base = base;
+        wrapper["_xvm_worker"] = this;
+        
+        Utils.TraceXvmModule("Minimap");
+    }
+
+    /////////////////////////////////////////////////////////////////
+
     /** Entry type: enemy, ally, squadman, empty possible */
     public static var MINIMAP_ENTRY_NAME_ENEMY:String = "enemy";
     public static var MINIMAP_ENTRY_NAME_ALLY:String = "ally";
@@ -50,12 +75,9 @@ class wot.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
      */
     public function get attachments():MovieClip
     {
-        if (!this.attachments)
-        {
-            this.createEmptyMovieClip("attachments", this.getNextHighestDepth());
-        }
-        
-        return this.attachments;
+        if (!wrapper["_xvm_attachments"])
+            wrapper.createEmptyMovieClip("_xvm_attachments", wrapper.getNextHighestDepth());
+        return wrapper["_xvm_attachments"];
     }
     
     /**
@@ -68,10 +90,10 @@ class wot.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
      */
     public function rescaleAttachments():Void
     {
-        attachments._xscale = attachments._yscale = (1 / (this._xscale / 100)) * 100;
+        attachments._xscale = attachments._yscale = (1 / (wrapper._xscale / 100)) * 100;
     }
     
-    function lightPlayer(visibility)
+    function lightPlayerImpl(visibility)
     {
         /** Behavior is altered temporarily so original icon highlighting works */
         if (syncProcedureInProgress)
@@ -80,7 +102,7 @@ class wot.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
         }
         else
         {
-            super.lightPlayer(visibility);
+            base.lightPlayer(visibility);
         }
     }
     
@@ -93,7 +115,7 @@ class wot.Minimap.MinimapEntry extends net.wargaming.ingame.MinimapEntry
         if (MapConfig.revealedEnabled)
         {
             /** Attach revealed icon info */
-            label = LabelAppend.append(attachments, uid, this.entryName, this.vehicleClass);
+            label = LabelAppend.append(attachments, uid, wrapper.entryName, wrapper.vehicleClass);
         }
         
         rescaleAttachments();

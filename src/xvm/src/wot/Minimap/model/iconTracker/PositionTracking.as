@@ -1,7 +1,6 @@
 import com.xvm.GlobalEventDispatcher;
 import wot.Minimap.MinimapEvent;
 import wot.Minimap.dataTypes.Icon;
-import wot.Minimap.MinimapEntry;
 import wot.Minimap.model.externalProxy.IconsProxy;
 
 class wot.Minimap.model.iconTracker.PositionTracking
@@ -24,7 +23,7 @@ class wot.Minimap.model.iconTracker.PositionTracking
         /** entry is MinimapEntry */
         for (var i in entries)
         {
-            var entry:MinimapEntry = entries[i];
+            var entry:net.wargaming.ingame.MinimapEntry = entries[i];
             
             if (entry.entryName != "enemy")
             {
@@ -35,7 +34,7 @@ class wot.Minimap.model.iconTracker.PositionTracking
             {
                 rememberLost(entry);
                 
-                informPlayersPanel(entry.uid);
+                informPlayersPanel(entry["_xvm_worker"].uid);
             }
         }
     }

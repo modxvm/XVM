@@ -1,6 +1,4 @@
-import wot.Minimap.Minimap
 import wot.Minimap.dataTypes.Icon;
-import wot.Minimap.MinimapEntry;
 import com.xvm.GlobalEventDispatcher;
 import wot.Minimap.MinimapEvent;
 import wot.Minimap.staticUtils.LabelAppend;
@@ -15,7 +13,7 @@ class wot.Minimap.LostMarkers
     public function LostMarkers(icons:MovieClip) 
     {
         this.icons = icons;
-        this.markersContainer = icons.createEmptyMovieClip("lostMarkers", Minimap.LOST_UNITS_INDEX)//);
+        this.markersContainer = icons.createEmptyMovieClip("lostMarkers", wot.Minimap.Minimap.LOST_UNITS_INDEX)//);
         GlobalEventDispatcher.addEventListener(MinimapEvent.LOST_PLAYERS_UPDATE, this, onLost);
         lostMarkersTracking = [];
     }
@@ -52,7 +50,7 @@ class wot.Minimap.LostMarkers
             marker._y = lostGuy.pos.y;
             
             /* New TextField is attached to Minimap at this moment */
-            var tf:TextField = LabelAppend.append(marker, lostGuy.uid, MinimapEntry.MINIMAP_ENTRY_NAME_LOST, lostGuy.vehicleClass);
+            var tf:TextField = LabelAppend.append(marker, lostGuy.uid, wot.Minimap.MinimapEntry.MINIMAP_ENTRY_NAME_LOST, lostGuy.vehicleClass);
             
             /**
              * Pointer to its address is tracked to handle proper remove

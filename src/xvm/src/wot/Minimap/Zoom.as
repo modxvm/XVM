@@ -1,4 +1,3 @@
-import wot.Minimap.Minimap;
 import wot.Minimap.model.externalProxy.MapConfig;
 
 /**
@@ -8,7 +7,7 @@ import wot.Minimap.model.externalProxy.MapConfig;
 class wot.Minimap.Zoom
 {
     /** This is the subject of resize reposition */
-    private var minimap:Minimap;
+    private var minimap:net.wargaming.ingame.Minimap;
     
     /** Temporary place to store last normal map size value before resize procedure by zoom */
     private var prevSizeIndex:Number;
@@ -16,7 +15,7 @@ class wot.Minimap.Zoom
     /** Stores state for switcher */
     var currentState:Boolean;
     
-    public function Zoom(minimap:Minimap) 
+    public function Zoom(minimap:net.wargaming.ingame.Minimap) 
     {
         this.minimap = minimap;
         currentState = true;

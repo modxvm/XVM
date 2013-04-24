@@ -1,4 +1,3 @@
-import wot.Minimap.MinimapEntry;
 import wot.Minimap.model.externalProxy.IconsProxy;
 
 /**
@@ -28,7 +27,7 @@ class wot.Minimap.shapes.ShapeAttach
          * Used as a center of circles.
          * Will carry attached circles with itself automatically.
          */
-        var self:MinimapEntry = IconsProxy.getSelf();
+        var self:wot.Minimap.MinimapEntry = IconsProxy.getSelf()["_xvm_worker"];
         selfAttachments = self.attachments;
         
         var metersPerPoint:Number = MAP_SIZE_IN_POINTS / mapSizeInMeters;
