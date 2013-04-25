@@ -46,7 +46,7 @@ class wot.TeamBasesPanel.CaptureBar
     {
         this.wrapper = wrapper;
         this.base = base;
-        wrapper["_xvm_worker"] = this;
+        wrapper.xvm_worker = this;
 
         Utils.TraceXvmModule("TeamBasesPanel");
 

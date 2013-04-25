@@ -121,7 +121,7 @@ class wot.PlayersPanel.PlayersPanel
                 var uid:Number = renderer.data.uid;
                 var status:Number = spotStatusModel.defineStatus(uid, renderer.data.vehicleState);
                 var subjectIsArtillery:Boolean = spotStatusModel.isArti(uid);
-                renderer["_xvm_worker"].spotStatusView.update(status, subjectIsArtillery);
+                renderer.xvm_worker.spotStatusView.update(status, subjectIsArtillery);
             }
         }
     }

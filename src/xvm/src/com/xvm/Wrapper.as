@@ -10,22 +10,22 @@ class com.xvm.Wrapper
         }
     }
 
-    public static function wrap(obj, func)
+    public static function wrap(worker, func)
     {
         return function() {
             //com.xvm.Logger.add("wr:" + func);
-            var f = obj[func];
+            var f = worker[func];
             if (f == undefined)
             {
-                com.xvm.Logger.add("WARNING: no worker func: " + typeof(obj) + "::" + func + "()");
+                com.xvm.Logger.add("WARNING: no worker func: " + typeof(worker) + "::" + func + "()");
                 return undefined;
             }
             if (typeof(f) != "function")
             {
-                com.xvm.Logger.add("WARNING: not a function: " + typeof(obj) + "::" + func + "()");
+                com.xvm.Logger.add("WARNING: not a function: " + typeof(worker) + "::" + func + "()");
                 return undefined;
             }
-            return f.apply(obj, arguments); 
+            return f.apply(worker, arguments); 
         }
     }
 }

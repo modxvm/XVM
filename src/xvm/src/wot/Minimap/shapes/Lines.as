@@ -53,7 +53,7 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
 
     private function attachCameraLines():Void
     {
-        var cameraEntry:wot.Minimap.MinimapEntry = IconsProxy.getCamera()["_xvm_worker"];
+        var cameraEntry:wot.Minimap.MinimapEntry = IconsProxy.getCamera().xvm_worker;
         cameraEntry.cameraExtendedToken = true;
         var camAttach:MovieClip = cameraEntry.attachments;
         var depth:Number = camAttach.getNextHighestDepth();

@@ -19,42 +19,39 @@ import com.xvm.Utils;
 class wot.battleloading.BattleLoadingItemRenderer
 {
     /////////////////////////////////////////////////////////////////
-
-    // override
-    function setData()
-    {
-        return this.setDataImpl.apply(this, arguments);
-    }
-
-    // override
-    function setState()
-    {
-        return this.setStateImpl.apply(this, arguments);
-    }
-
-    // override
-    function update()
-    {
-        return this.updateImpl.apply(this, arguments);
-    }
-
-    /////////////////////////////////////////////////////////////////
+    // wrapped methods
 
     private var wrapper:net.wargaming.controls.LobbyPlayerListItemRenderer;
     private var base:net.wargaming.controls.LobbyPlayerListItemRenderer;
-
-    /////////////////////////////////////////////////////////////////
 
     public function BattleLoadingItemRenderer(wrapper:net.wargaming.controls.LobbyPlayerListItemRenderer, base:net.wargaming.controls.LobbyPlayerListItemRenderer)
     {
         this.wrapper = wrapper;
         this.base = base;
 
+        Logger.addObject(base, "base");
+
         Utils.TraceXvmModule("BL");
 
         BattleLoadingItemRendererCtor();
     }
 
+    function setData()
+    {
+        return this.setDataImpl.apply(this, arguments);
+    }
+
+    function setState()
+    {
+        return this.setStateImpl.apply(this, arguments);
+    }
+
+    function update()
+    {
+        return this.updateImpl.apply(this, arguments);
+    }
+
+    // wrapped methods
     /////////////////////////////////////////////////////////////////
 
     private var m_iconset: IconLoader = null;

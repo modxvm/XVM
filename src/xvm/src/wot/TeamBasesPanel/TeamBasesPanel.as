@@ -49,7 +49,7 @@ class wot.TeamBasesPanel.TeamBasesPanel
             * This array is defined at parent original WG class.
             * start() is XVMs method at worker CaptureBar class.
             */
-            wrapper.captureBars[wrapper.indexByID[id]]["_xvm_worker"].start(points, capColor);
+            wrapper.captureBars[wrapper.indexByID[id]].xvm_worker.start(points, capColor);
         }
         else
         {

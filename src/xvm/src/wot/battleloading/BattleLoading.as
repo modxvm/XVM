@@ -14,25 +14,10 @@ import wot.battleloading.WinChances;
 class wot.battleloading.BattleLoading
 {
     /////////////////////////////////////////////////////////////////
-
-    // override
-    function setSize()
-    {
-        return this.setSizeImpl.apply(this, arguments);
-    }
-
-    // override
-    function setMapBG()
-    {
-        return this.setMapBGImpl.apply(this, arguments);
-    }
-
-    /////////////////////////////////////////////////////////////////
+    // wrapped methods
 
     private var wrapper:net.wargaming.BattleLoading;
     private var base:net.wargaming.BattleLoading;
-
-    /////////////////////////////////////////////////////////////////
 
     public function BattleLoading(wrapper:net.wargaming.BattleLoading, base:net.wargaming.BattleLoading)
     {
@@ -44,6 +29,17 @@ class wot.battleloading.BattleLoading
         BattleLoadingCtor();
     }
 
+    function setSize()
+    {
+        return this.setSizeImpl.apply(this, arguments);
+    }
+
+    function setMapBG()
+    {
+        return this.setMapBGImpl.apply(this, arguments);
+    }
+
+    // wrapped methods
     /////////////////////////////////////////////////////////////////
 
     private static var STAT_PRELOAD_DELAY:Number = 1000;

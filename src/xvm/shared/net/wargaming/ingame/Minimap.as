@@ -2,6 +2,11 @@ import gfx.core.UIComponent;
 
 intrinsic class net.wargaming.ingame.Minimap extends UIComponent
 {
+    /////////////////////////////////////////////////////////////////
+    // XVM
+    var xvm_worker:wot.Minimap.Minimap; 
+    /////////////////////////////////////////////////////////////////
+
     static var MARKERS_SCALING:Number;
     
     var icons:MovieClip;

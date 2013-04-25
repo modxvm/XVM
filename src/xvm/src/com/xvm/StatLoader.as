@@ -34,7 +34,7 @@ class com.xvm.StatLoader
         var vehId = data.vehId || data.playerID || 0;
         var vehicleState = data.vehicleState || 3; // IS_ALIVE = 1, IS_AVATAR_READY = 2, IS_UNKNOWN = 4
 
-        //Logger.add("AddPlayerData: " + playerName + ", " + vehicle + ", " + icon);
+        //Logger.add("AddPlayerData: " + team + ", " + label + ", " + vehicle + ", " + icon);
 
         if (id <= 0 || !label)
             return;

@@ -34,7 +34,7 @@ class wot.Minimap.model.iconTracker.PositionTracking
             {
                 rememberLost(entry);
 
-                informPlayersPanel(entry["_xvm_worker"].uid);
+                informPlayersPanel(entry.xvm_worker.uid);
             }
         }
     }

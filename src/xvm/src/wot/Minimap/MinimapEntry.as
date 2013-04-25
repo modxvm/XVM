@@ -30,7 +30,7 @@ class wot.Minimap.MinimapEntry
     {
         this.wrapper = wrapper;
         this.base = base;
-        wrapper["_xvm_worker"] = this;
+        wrapper.xvm_worker = this;
 
         Utils.TraceXvmModule("MM");
     }
@@ -74,9 +74,9 @@ class wot.Minimap.MinimapEntry
      */
     public function get attachments():MovieClip
     {
-        if (!wrapper["_xvm_attachments"])
-            wrapper.createEmptyMovieClip("_xvm_attachments", wrapper.getNextHighestDepth());
-        return wrapper["_xvm_attachments"];
+        if (!wrapper.xvm_attachments)
+            wrapper.createEmptyMovieClip("xvm_attachments", wrapper.getNextHighestDepth());
+        return wrapper.xvm_attachments;
     }
 
     /**

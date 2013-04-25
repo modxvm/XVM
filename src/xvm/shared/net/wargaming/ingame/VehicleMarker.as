@@ -2,7 +2,7 @@
 {
     /////////////////////////////////////////////////////////////////
     // XVM
-    var xvm_proxy:wot.VehicleMarkersManager.VehicleMarkerProxy; 
+    var xvm_worker:wot.VehicleMarkersManager.VehicleMarkerProxy; 
     /////////////////////////////////////////////////////////////////
 
     var m_entityName:String;
