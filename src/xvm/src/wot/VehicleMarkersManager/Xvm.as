@@ -301,7 +301,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         m_isDead = newState == "dead";
 
         XVMUpdateStyle();
-		// setMarkerState after set style!
+        // setMarkerState after set style!
         vehicleTypeComponent.setMarkerState(isImmediate && m_isDead ? "immediate_dead" : newState);
     }
 

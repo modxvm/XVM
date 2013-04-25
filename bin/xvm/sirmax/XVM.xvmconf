@@ -156,7 +156,7 @@
       "alive": {
         "normal": {
           "vehicleIcon": {
-            "maxScale": 80
+            "maxScale": 100
           },
           "contourIcon": {
             "visible": false,
@@ -206,7 +206,7 @@
         },
         "extended": {
           "vehicleIcon": {
-            "maxScale": 80
+            "maxScale": 100
           },
           "contourIcon": {
             "visible": false,
@@ -309,7 +309,7 @@
       "alive": {
         "normal": {
           "vehicleIcon": {
-            "maxScale": 80
+            "maxScale": 100
           },
           "contourIcon": {
             "visible": false,
@@ -359,7 +359,7 @@
         },
         "extended": {
           "vehicleIcon": {
-            "maxScale": 80
+            "maxScale": 100
           },
           "contourIcon": {
             "visible": false,
