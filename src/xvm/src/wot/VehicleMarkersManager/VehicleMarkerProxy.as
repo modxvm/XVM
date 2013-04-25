@@ -22,8 +22,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
 {
     //private function trace(str:String):Void
     //{
-        //if (m_playerFullName == "...")
-        //Logger.add(m_playerFullName + "> " + str);
+    //    //if (m_playerFullName == "...")
+    //    Logger.add(m_playerFullName + "> " + str);
     //}
 
     /////////////////////////////////////////////////////////////////
@@ -179,49 +179,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         base.gotoAndStop(frame);
 
         if (IsXvmMarker)
-            setupFrameXvmMarker();
-    }
-
-    private function setupFrameXvmMarker()
-    {
-        // Remove standard fields for XVM
-        if (wrapper.pNameField)
-        {
-            wrapper.pNameField._visible = false;
-            wrapper.pNameField.removeTextField();
-            delete wrapper.pNameField;
-        }
-
-        if (wrapper.vNameField)
-        {
-            wrapper.vNameField._visible = false;
-            wrapper.vNameField.removeTextField();
-            delete wrapper.vNameField;
-        }
-
-        if (wrapper.healthBar)
-        {
-            wrapper.healthBar.stop();
-            wrapper.healthBar._visible = false;
-            wrapper.healthBar.removeMovieClip();
-            delete wrapper.healthBar;
-        }
-
-        if (wrapper.hp_mc)
-        {
-            wrapper.hp_mc.stop();
-            wrapper.hp_mc._visible = false;
-            wrapper.hp_mc.removeMovieClip();
-            delete wrapper.hp_mc;
-        }
-
-        if (wrapper.hitLbl)
-        {
-            wrapper.hitLbl.stop();
-            wrapper.hitLbl._visible = false;
-            wrapper.hitLbl.removeMovieClip();
-            delete wrapper.hitLbl;
-        }
+            wot.VehicleMarkersManager.Xvm(subject).setupMarkerFrame();
     }
 
     /**

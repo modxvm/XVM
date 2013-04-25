@@ -29,6 +29,12 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
 
     public function setVehicleClass()
     {
+        //com.xvm.Logger.add("setVehicleClass: " + m_vehicleClass);
+
+        // Fix markers centering (TODO)
+//        proxy.marker.marker._x = -8;
+//        proxy.marker.marker._y = -16;
+
         var className = (proxy.isSpeaking && !proxy.isDead) ? "dynamic" : m_vehicleClass;
 
         if (proxy.marker.marker.iconHunt == null)
@@ -46,13 +52,9 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
         }
     }
 
-    public function getVehicleClass():String
+    public function setMarkerState(value)
     {
-        return m_vehicleClass;
-    }
-
-    function setMarkerState(value)
-    {
+        //com.xvm.Logger.add("setMarkerState: " + value);
         m_markerState = value;
         proxy.marker.gotoAndPlay(m_markerState);
 
@@ -60,8 +62,9 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
             this.setVehicleClass();
     }
 
-    function updateMarkerLabel()
+    public function updateMarkerLabel()
     {
+        //com.xvm.Logger.add("updateMarkerLabel: " + m_markerLabel + " " + m_markerState);
         var aliasColor = ColorsManager.getMarkerColorAlias(proxy.entityName, proxy.isColorBlindMode);
         if (m_markerLabel == aliasColor)
             return;
@@ -92,7 +95,6 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
             draw(cfg);
 
         proxy.marker._visible = visible;
-
     }
 
     // PRIVATE FUNCTIONS
@@ -101,10 +103,6 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
     {
         var x = cfg.scaleX * cfg.maxScale / 100;
         var y = cfg.scaleY * cfg.maxScale / 100;
-
-        // Fix markers centering (TODO)
-        proxy.marker.marker._x = -8;
-        proxy.marker.marker._y = -16;
 
         for (var childName in proxy.marker.marker)
         {

@@ -4,4 +4,5 @@
  * . - root object
  */
 ${"default/@xvm.xc":"."}
+//${"test/@xvm.xc":"."}
 //${"sirmax/XVM.xvmconf":"."}

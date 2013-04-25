@@ -21,8 +21,10 @@ class wot.crew.PingServers
 
         // immediately
         PingServers.instance.ShowPing.call(PingServers.instance);
-        // after 1 sec
+        // after 1, 3, 5 sec
         _global.setTimeout(function() { PingServers.instance.ShowPing.call(PingServers.instance) }, 1000);
+        _global.setTimeout(function() { PingServers.instance.ShowPing.call(PingServers.instance) }, 3000);
+        _global.setTimeout(function() { PingServers.instance.ShowPing.call(PingServers.instance) }, 5000);
     }
 
     public function PingServers()

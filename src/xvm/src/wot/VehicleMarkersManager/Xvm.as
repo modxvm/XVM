@@ -44,13 +44,12 @@ import wot.VehicleMarkersManager.components.VehicleTypeProxy;
 
 class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarkersManager.IVehicleMarker
 {
-    /*
-    private function trace(str:String):Void
-    {
+    //private function trace(str:String):Void
+    //{
         //if (m_playerFullName == "...")
         //Logger.add(m_playerFullName + "> " + str);
-    }
-*/
+    //}
+
     /**
      * .ctor()
      * @param	proxy Parent proxy class (for placing UI Controls)
@@ -161,6 +160,48 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         }
     }
 
+    public function setupMarkerFrame()
+    {
+        // Remove standard fields for XVM
+        if (wrapper.pNameField)
+        {
+            wrapper.pNameField._visible = false;
+            wrapper.pNameField.removeTextField();
+            delete wrapper.pNameField;
+        }
+
+        if (wrapper.vNameField)
+        {
+            wrapper.vNameField._visible = false;
+            wrapper.vNameField.removeTextField();
+            delete wrapper.vNameField;
+        }
+
+        if (wrapper.healthBar)
+        {
+            wrapper.healthBar.stop();
+            wrapper.healthBar._visible = false;
+            wrapper.healthBar.removeMovieClip();
+            delete wrapper.healthBar;
+        }
+
+        if (wrapper.hp_mc)
+        {
+            wrapper.hp_mc.stop();
+            wrapper.hp_mc._visible = false;
+            wrapper.hp_mc.removeMovieClip();
+            delete wrapper.hp_mc;
+        }
+
+        if (wrapper.hitLbl)
+        {
+            wrapper.hitLbl.stop();
+            wrapper.hitLbl._visible = false;
+            wrapper.hitLbl.removeMovieClip();
+            delete wrapper.hitLbl;
+        }
+    }
+
     /**
      * @see IVehicleMarker
      */
@@ -239,10 +280,8 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         {
             // markers{ally{alive{normal
             var vehicleStateCfg:Object = vehicleState.getCurrentConfig();
-
             healthBarComponent.updateState(vehicleStateCfg);
             healthBarComponent.showDamage(vehicleStateCfg, newHealth, m_maxHealth, -delta, flag, damageType);
-
             damageTextComponent.showDamage(vehicleStateCfg.damageText, newHealth, -delta, flag, damageType);
         }
 
@@ -261,9 +300,9 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
 
         m_isDead = newState == "dead";
 
-        vehicleTypeComponent.setMarkerState(isImmediate && m_isDead ? "immediate_dead" : newState);
-
         XVMUpdateStyle();
+		// setMarkerState after set style!
+        vehicleTypeComponent.setMarkerState(isImmediate && m_isDead ? "immediate_dead" : newState);
     }
 
     /**

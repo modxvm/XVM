@@ -73,7 +73,7 @@ class wot.VehicleMarkersManager.XvmBase
     private var _proxy:VehicleMarkerProxy;
     public function get proxy():VehicleMarkerProxy { return _proxy; }
 
-    public function get wrapper():MovieClip { return proxy.wrapper; }
+    public function get wrapper():net.wargaming.ingame.VehicleMarker { return proxy.wrapper; }
     
     public function get isBlowedUp():Boolean { return s_blowedUp[m_playerFullName] != undefined; }
 
