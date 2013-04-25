@@ -56,6 +56,9 @@
     "modMinVersion": "3.5.0"
   },
 
+  // Блок параметров ангара
+  "hangar": ${"hangar.xc":"hangar"},
+
   // Блок общих параметров боевого интерфейса
   "battle": ${"battle.xc":"battle"},
 
