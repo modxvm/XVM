@@ -16,7 +16,7 @@ class wot.wrapper.VehicleMarkersManager.VehicleMarkerProxy extends net.wargaming
             "init",
             //"settingsUpdate",
             "update",
-//            "updateMarkerSettings",
+            "updateMarkerSettings",
             //"onSplashHidden",
             //"layoutParts",
             //"__get__colorsManager",

@@ -53,13 +53,12 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
 */
     /**
      * .ctor()
-     * @param	proxy Parent proxy class (for placing UI Components)
+     * @param	proxy Parent proxy class (for placing UI Controls)
      */
     function Xvm(proxy:VehicleMarkerProxy)
     {
-        super(); // gfx.core.UIComponent
         _proxy = proxy;
-        initialize();
+        initializeStaticEnvironment();
 
         vehicleState = new VehicleState(new VehicleStateProxy(this));
         healthBarComponent = new HealthBarComponent(new HealthBarProxy(this));
@@ -70,15 +69,17 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         turretStatusComponent = new TurretStatusComponent(new TurretStatusProxy(this));
         vehicleTypeComponent = new VehicleTypeComponent(new VehicleTypeProxy(this));
         damageTextComponent = new DamageTextComponent(new DamageTextProxy(this));
-
     }
 
-    private static var initialized:Boolean = false;
-    private static function initialize()
+    /**
+     * Called from .ctor()
+     */
+    private static var s_initialized:Boolean = false;
+    private static function initializeStaticEnvironment()
     {
-        if (Xvm.initialized)
+        if (Xvm.s_initialized)
             return;
-        Xvm.initialized = true;
+        Xvm.s_initialized = true;
 
         Utils.TraceXvmModule("XVM");
 
@@ -176,9 +177,8 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
      */
     function updateMarkerSettings()
     {
-        //trace("Xvm::updateMarkerSettings()");
-        // do nothing
         // We don't use in-game settings. Yet.
+        // do nothing
     }
 
     /**
@@ -190,11 +190,8 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         if (m_speaking == value)
             return;
         m_speaking = value;
-        if (initialized)
-        {
-            vehicleTypeComponent.setVehicleClass();
-            vehicleTypeComponent.updateState(vehicleState.getCurrentConfig());
-        }
+        vehicleTypeComponent.setVehicleClass();
+        vehicleTypeComponent.updateState(vehicleState.getCurrentConfig());
     }
 
     /**
@@ -292,6 +289,16 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     function showActionMarker(actionState)
     {
         actionMarkerComponent.showActionMarker(actionState);
+    }
+
+    /**
+     * Components extension: MovieClip.onEnterFrame translation
+     * TODO: Check performance & implementation
+     */
+    function onEnterFrame():Void
+    {
+        if (contourIconComponent != null && contourIconComponent.onEnterFrame != null)
+            contourIconComponent.onEnterFrame();
     }
 
     /**

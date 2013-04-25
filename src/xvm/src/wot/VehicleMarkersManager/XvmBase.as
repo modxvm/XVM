@@ -20,7 +20,7 @@ import wot.VehicleMarkersManager.components.LevelIconComponent;
 import wot.VehicleMarkersManager.components.TurretStatusComponent;
 import wot.VehicleMarkersManager.components.VehicleTypeComponent;
 
-class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
+class wot.VehicleMarkersManager.XvmBase
 {
     /**
      * Trace function for debug purpose. Must be commented on release.
@@ -59,7 +59,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
     // Vehicle State
     var vehicleState: VehicleState;
 
-    // UI Components
+    // UI Controls
     var actionMarkerComponent: ActionMarkerComponent;
     var clanIconComponent:ClanIconComponent;
     var contourIconComponent: ContourIconComponent;
@@ -93,7 +93,7 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
 
     public function formatStaticText(format:String):String
     {
-        var key = "VMM/" + m_playerFullName + "/" + format;
+        //var key = "VMM/" + m_playerFullName + "/" + format;
         var pn = m_playerFullName;
         return Utils.trim(Macros.Format(pn, format));
         //return Utils.trim(Cache.Get(key, function() { return Macros.Format(pn, format) }));
@@ -158,16 +158,6 @@ class wot.VehicleMarkersManager.XvmBase extends gfx.core.UIComponent
 
         var n = isFinite(format) ? Number(format) : 100;
         return (n <= 0) ? 1 : (n > 100) ? 100 : n;
-    }
-
-    /**
-     * Components extension: MovieClip.onEnterFrame translation
-     * TODO: Check performance & implementation
-     */
-    function onEnterFrame():Void
-    {
-        if (contourIconComponent != null && contourIconComponent.onEnterFrame != null)
-            contourIconComponent.onEnterFrame();
     }
 
     /**

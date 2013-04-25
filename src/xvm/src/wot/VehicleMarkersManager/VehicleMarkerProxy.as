@@ -2,8 +2,6 @@
  * Proxy class for vehicle marker components
  * Dispatches event for config loading if it is not loaded
  */
-import gfx.core.UIComponent;
-import net.wargaming.controls.UILoaderAlt;
 import com.xvm.Config;
 import com.xvm.Defines;
 import com.xvm.GlobalEventDispatcher;
@@ -22,11 +20,11 @@ import wot.VehicleMarkersManager.IVehicleMarker;
 
 class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
 {
-    private function trace(str:String):Void
-    {
+    //private function trace(str:String):Void
+    //{
         //if (m_playerFullName == "...")
-        Logger.add(m_playerFullName + "> " + str);
-    }
+        //Logger.add(m_playerFullName + "> " + str);
+    //}
 
     /////////////////////////////////////////////////////////////////
 
@@ -72,7 +70,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
      * ctor()
      */
     var start;
-    public function VehicleMarkerProxyCtor()
+    private function VehicleMarkerProxyCtor()
     {
         start = new Date();
         //trace("VehicleMarkerProxy::ctor()");
@@ -171,9 +169,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     {
         if (subject == null)
             return;
-        var mc:MovieClip = MovieClip(subject);
-        if (mc.onEnterFrame != null)
-            mc.onEnterFrame();
+        if (subject.onEnterFrame != null)
+            subject.onEnterFrame();
     }
 
     function gotoAndStop(frame:Object):Void
@@ -191,47 +188,39 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         if (wrapper.pNameField)
         {
             wrapper.pNameField._visible = false;
-//                pNameField.removeTextField();
-//                delete pNameField;
+            wrapper.pNameField.removeTextField();
+            delete wrapper.pNameField;
         }
 
         if (wrapper.vNameField)
         {
             wrapper.vNameField._visible = false;
-//                vNameField.removeTextField();
-//                delete vNameField;
+            wrapper.vNameField.removeTextField();
+            delete wrapper.vNameField;
         }
 
         if (wrapper.healthBar)
         {
             wrapper.healthBar.stop();
             wrapper.healthBar._visible = false;
-//                healthBar.removeMovieClip();
-//                delete healthBar;
+            wrapper.healthBar.removeMovieClip();
+            delete wrapper.healthBar;
         }
 
         if (wrapper.hp_mc)
         {
             wrapper.hp_mc.stop();
             wrapper.hp_mc._visible = false;
-//                hp_mc.removeMovieClip();
-//                delete hp_mc;
+            wrapper.hp_mc.removeMovieClip();
+            delete wrapper.hp_mc;
         }
 
         if (wrapper.hitLbl)
         {
             wrapper.hitLbl.stop();
             wrapper.hitLbl._visible = false;
-//                hitLbl.removeMovieClip();
-//                delete hitLbl;
-        }
-
-        if (wrapper.hp_mc)
-        {
-            wrapper.hp_mc.stop();
-            wrapper.hp_mc._visible = false;
-//                hp_mc.removeMovieClip();
-//                delete hp_mc;
+            wrapper.hitLbl.removeMovieClip();
+            delete wrapper.hitLbl;
         }
     }
 
@@ -346,62 +335,57 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     public function showExInfo(show:Boolean):Void { return call("showExInfo", arguments); }
     public function showActionMarker(actionState):Void { return call("showActionMarker", arguments); }
 
-    public function onLoad()                      { return call("onLoad", arguments); }
-    
-    // NOT USED
-    /*
-    public function settingsUpdate()              { return call("settingsUpdate", arguments); }
-    public function onSplashHidden()              { return call("onSplashHidden", arguments); }
-    public function layoutParts()                 { return call("layoutParts", arguments); }
-    public function __get__colorsManager()        { return call("__get__colorsManager", arguments); }
-    public function __get__colorSchemeName()      { return call("__get__colorSchemeName", arguments); }
-    public function __get__vehicleDestroyed()     { return call("__get__vehicleDestroyed", arguments); }
-    public function __get__isEnabledExInfo()      { return call("__get__isEnabledExInfo", arguments); }
-    public function isSpeaking()                  { return call("isSpeaking", arguments); }
-    public function getMarkerState()              { return call("getMarkerState", arguments); }
-    public function setMarkerState()              { return call("setMarkerState", arguments); }
-    public function getPartVisibility()           { return call("getPartVisibility", arguments); }
-    public function getNameText()                 { return call("getNameText", arguments); }
-    public function getHelthText()                { return call("getHelthText", arguments); }
-    public function getHealthPercents()           { return call("getHealthPercents", arguments); }
-    public function configUI()                    { return call("configUI", arguments); }
-    public function draw():Void                   { return call("draw", arguments); }
-    public function setupIconLoader()             { return call("setupIconLoader", arguments); }
-    public function populateData()                { return call("populateData", arguments); }
-    public function setVehicleClass()             { return call("setVehicleClass", arguments); }
-    public function initMarkerLabel()             { return call("initMarkerLabel", arguments); }
-    public function updateMarkerLabel()           { return call("updateMarkerLabel", arguments); }
-    public function _centeringIcon()              { return call("_centeringIcon", arguments); }
-    public function _onCompleteLoad()             { return call("_onCompleteLoad", arguments); }
-    public function _getVehicleClassName()        { return call("_getVehicleClassName", arguments); }
-    public function __get__exInfo()               { return call("__get__exInfo", arguments); }
-    public function __set__exInfo()               { return call("__set__exInfo", arguments); }
-    public function __get__markerSettings()       { return call("__get__markerSettings", arguments); }
-    public function __set__markerSettings()       { return call("__set__markerSettings", arguments); }
+    //public function settingsUpdate()              { return call("settingsUpdate", arguments); }
+    //public function onSplashHidden()              { return call("onSplashHidden", arguments); }
+    //public function layoutParts()                 { return call("layoutParts", arguments); }
+    //public function __get__colorsManager()        { return call("__get__colorsManager", arguments); }
+    //public function __get__colorSchemeName()      { return call("__get__colorSchemeName", arguments); }
+    //public function __get__vehicleDestroyed()     { return call("__get__vehicleDestroyed", arguments); }
+    //public function __get__isEnabledExInfo()      { return call("__get__isEnabledExInfo", arguments); }
+    //public function isSpeaking()                  { return call("isSpeaking", arguments); }
+    //public function getMarkerState()              { return call("getMarkerState", arguments); }
+    //public function setMarkerState()              { return call("setMarkerState", arguments); }
+    //public function getPartVisibility()           { return call("getPartVisibility", arguments); }
+    //public function getNameText()                 { return call("getNameText", arguments); }
+    //public function getHelthText()                { return call("getHelthText", arguments); }
+    //public function getHealthPercents()           { return call("getHealthPercents", arguments); }
+    //public function configUI()                    { return call("configUI", arguments); }
+    //public function draw():Void                   { return call("draw", arguments); }
+    //public function setupIconLoader()             { return call("setupIconLoader", arguments); }
+    //public function populateData()                { return call("populateData", arguments); }
+    //public function setVehicleClass()             { return call("setVehicleClass", arguments); }
+    //public function initMarkerLabel()             { return call("initMarkerLabel", arguments); }
+    //public function updateMarkerLabel()           { return call("updateMarkerLabel", arguments); }
+    //public function _centeringIcon()              { return call("_centeringIcon", arguments); }
+    //public function _onCompleteLoad()             { return call("_onCompleteLoad", arguments); }
+    //public function _getVehicleClassName()        { return call("_getVehicleClassName", arguments); }
+    //public function __get__exInfo()               { return call("__get__exInfo", arguments); }
+    //public function __set__exInfo()               { return call("__set__exInfo", arguments); }
+    //public function __get__markerSettings()       { return call("__get__markerSettings", arguments); }
+    //public function __set__markerSettings()       { return call("__set__markerSettings", arguments); }
 
     public function onLoad()                      { return call("onLoad", arguments); }
-    public function __get__disabled()             { return call("__get__disabled", arguments); }
-    public function __set__disabled()             { return call("__set__disabled", arguments); }
-    public function __get__visible()              { return call("__get__visible", arguments); }
-    public function __set__visible()              { return call("__set__visible", arguments); }
-    public function __get__width()                { return call("__get__width", arguments); }
-    public function __set__width()                { return call("__set__width", arguments); }
-    public function __get__height()               { return call("__get__height", arguments); }
-    public function __set__height()               { return call("__set__height", arguments); }
-    public function setSize()                     { return call("setSize", arguments); }
-    public function __get__focused()              { return call("__get__focused", arguments); }
-    public function __set__focused()              { return call("__set__focused", arguments); }
-    public function __get__displayFocus()         { return call("__get__displayFocus", arguments); }
-    public function __set__displayFocus()         { return call("__set__displayFocus", arguments); }
-    public function handleInput()                 { return call("handleInput", arguments); }
-    public function invalidate()                  { return call("invalidate", arguments); }
-    public function validateNow()                 { return call("validateNow", arguments); }
-    public function toString()                    { return call("toString", arguments); }
-    public function initSize()                    { return call("initSize", arguments); }
-    public function changeFocus()                 { return call("changeFocus", arguments); }
-    public function onMouseWheel()                { return call("onMouseWheel", arguments); }
-    public function scrollWheel()                 { return call("scrollWheel", arguments); }
-    /*
+    //public function __get__disabled()             { return call("__get__disabled", arguments); }
+    //public function __set__disabled()             { return call("__set__disabled", arguments); }
+    //public function __get__visible()              { return call("__get__visible", arguments); }
+    //public function __set__visible()              { return call("__set__visible", arguments); }
+    //public function __get__width()                { return call("__get__width", arguments); }
+    //public function __set__width()                { return call("__set__width", arguments); }
+    //public function __get__height()               { return call("__get__height", arguments); }
+    //public function __set__height()               { return call("__set__height", arguments); }
+    //public function setSize()                     { return call("setSize", arguments); }
+    //public function __get__focused()              { return call("__get__focused", arguments); }
+    //public function __set__focused()              { return call("__set__focused", arguments); }
+    //public function __get__displayFocus()         { return call("__get__displayFocus", arguments); }
+    //public function __set__displayFocus()         { return call("__set__displayFocus", arguments); }
+    //public function handleInput()                 { return call("handleInput", arguments); }
+    //public function invalidate()                  { return call("invalidate", arguments); }
+    //public function validateNow()                 { return call("validateNow", arguments); }
+    //public function toString()                    { return call("toString", arguments); }
+    //public function initSize()                    { return call("initSize", arguments); }
+    //public function changeFocus()                 { return call("changeFocus", arguments); }
+    //public function onMouseWheel()                { return call("onMouseWheel", arguments); }
+    //public function scrollWheel()                 { return call("scrollWheel", arguments); }
 
     ///**
      //* Ingame original WG marker settings.

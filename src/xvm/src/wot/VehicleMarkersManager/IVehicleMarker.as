@@ -18,4 +18,10 @@ interface wot.VehicleMarkersManager.IVehicleMarker
     function updateState(newState:String, isImmediate:Boolean):Void;
     function showExInfo(show:Boolean):Void;
     function showActionMarker(actionState):Void;
+    
+    
+    /**
+     * MovieClip
+     */
+    function onEnterFrame();
 }
