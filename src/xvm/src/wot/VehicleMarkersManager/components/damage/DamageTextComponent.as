@@ -49,7 +49,7 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
         {
             color = proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.color), delta, flag, damageType);
         }
-
+        
         var shadowColor:Number;
         if (cfg.shadow.color == null)
         {
@@ -70,7 +70,7 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
         tf.htmlText = "<textformat leading='-2'><p class='xvm_damageText'>" + text + "</p></textformat>";
         //com.xvm.Logger.add("dmg: " + flagToDamageSource(flag) + ", " + proxy.damageDest + " - color=" + color);
         //com.xvm.Logger.add(tf.htmlText);
-        //com.xvm.Logger.add(XvmHelper.createCSS(cfg.font, color, "xvm_damageText"));
+        //com.xvm.Logger.add(Utils.createCSSFromConfig(cfg.font, color, "xvm_damageText"));
 
         var dummy = new DamageTextAnimation(cfg, tf); // defines and starts
     }

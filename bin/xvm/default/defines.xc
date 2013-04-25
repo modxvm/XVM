@@ -3,10 +3,10 @@
  */
 {
   // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-  "formatLeft": "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
+  "formatLeft": "{{vehicle}} <font face='Lucida Console' size='12'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font></font>",
 
   // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-  "formatRight": "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}",
+  "formatRight": "<font face='Lucida Console' size='12'><font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font> {{vehicle}}",
   
   // Параметры отображения иконки игрока/клана
   "clanIcon": {    // параметры отображения иконки игрока/клана

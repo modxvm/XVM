@@ -25,7 +25,7 @@ class wot.VehicleMarkersManager.components.VehicleTypeProxy extends AbstractAcce
 
     public function get isDead():Boolean
     {
-        return xvm.m_isDead; // or xvm.vehicleDestroyed(); ?
+        return xvm.m_isDead;
     }
 
     public function get entityName():String
@@ -40,6 +40,6 @@ class wot.VehicleMarkersManager.components.VehicleTypeProxy extends AbstractAcce
 
     public function setMarkerLabel(markerLabel:String):Void
     {
-        xvm.proxy.gotoAndStop(markerLabel);
+        xvm.wrapper.gotoAndStop(markerLabel);
     }
 }

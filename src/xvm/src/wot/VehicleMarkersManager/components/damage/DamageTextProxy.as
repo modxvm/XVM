@@ -14,7 +14,7 @@ class wot.VehicleMarkersManager.components.damage.DamageTextProxy extends Abstra
 
     public function createHolder():MovieClip
     {
-        return xvm.proxy.wrapper.createEmptyMovieClip("xvm_damageHolder", xvm.proxy.wrapper.getNextHighestDepth());
+        return xvm.wrapper.createEmptyMovieClip("xvm_damageHolder", xvm.wrapper.getNextHighestDepth());
     }
 
     public function get entityName():String

@@ -284,7 +284,7 @@ class com.xvm.Utils
     public static function createCSSFromConfig(config_font:Object, color:Number, className:String):String
     {
         return createCSS(className,
-            parseInt(Utils.padLeft(color.toString(16), 6, '0')),
+            color,
             config_font && config_font.name ? config_font.name : "$FieldFont",
             config_font && config_font.size ? config_font.size : 13,
             config_font && config_font.align ? config_font.align : "center",
