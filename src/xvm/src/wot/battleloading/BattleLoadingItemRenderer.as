@@ -29,8 +29,6 @@ class wot.battleloading.BattleLoadingItemRenderer
         this.wrapper = wrapper;
         this.base = base;
 
-        Logger.addObject(base, "base");
-
         Utils.TraceXvmModule("BL");
 
         BattleLoadingItemRendererCtor();

@@ -25,6 +25,6 @@ class wot.VehicleMarkersManager.VehicleStateProxy extends AbstractAccessProxy
 
     public function get team():String
     {
-        return xvm.proxy.m_team;
+        return xvm.wrapper.m_team;
     }
 }

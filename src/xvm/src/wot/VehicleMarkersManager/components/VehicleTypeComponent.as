@@ -101,6 +101,11 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
     {
         var x = cfg.scaleX * cfg.maxScale / 100;
         var y = cfg.scaleY * cfg.maxScale / 100;
+
+        // Fix markers centering (TODO)
+        proxy.marker.marker._x = -8;
+        proxy.marker.marker._y = -16;
+
         for (var childName in proxy.marker.marker)
         {
             //if (childName == "marker_shadow")

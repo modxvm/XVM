@@ -65,7 +65,6 @@
     <compile path="src\wot\FinalStatistic" />
     <compile path="src\wot\VehicleMarkersManager" />
     <compile path="src\wot\VehicleMarkersManager\components" />
-    <compile path="src\wot\VehicleMarkersManager\ingame" />
     <compile path="src\wot\VehicleMarkersManager\components\damage" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->

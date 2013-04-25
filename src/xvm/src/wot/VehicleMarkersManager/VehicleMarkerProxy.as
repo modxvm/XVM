@@ -57,10 +57,6 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     // Components
     private static var hitLog:HitLog = null;
 
-    // Used in child classes VehicleMarkerAlly and VehicleMarkerEnemy
-    // TODO: include to interface as property?
-    public var m_team:String; // values: ally, enemy (readonly)
-
     /**
      * Instance of subject class with real implementation
      */
@@ -109,10 +105,25 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         }
     }
 
+    /**
+     * Config load callback
+     * Calls on config loading is complete. Calls always, even if config is missed or loading failed.
+     */
+    private function onConfigLoaded():Void
+    {
+        //trace("onConfigLoaded()");
+
+        GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
+
+        //Config.s_config.battle.useStandardMarkers = true;
+        
+        initialize();
+    }
+
     private function initialize():Void
     {
         // Don't draw hitlog in hangar
-        if (Sandbox.GetCurrentSandboxPrefix() == Sandbox.SANDBOX_HANGAR)
+        if (Sandbox.GetCurrentSandboxPrefix() == Sandbox.SANDBOX_VMM)
         {
             if (Config.s_config.hitLog.visible && hitLog == null)
                 hitLog = new HitLog(Config.s_config.hitLog);
@@ -176,34 +187,6 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
 
     private function setupFrameXvmMarker()
     {
-    ///**
-     //* Quick dirty partial fix of alive markers bad positioning at FragCorrelationBar.
-     //* Positioning is broken because of VehicleMarkersManager.xml.patch
-     //*/
-    //private static function fixFragCorellationBarOffset():Void
-    //{
-        //_root.fragCorrelationBar.enemyMarkers.drawRenderers =
-        //_root.fragCorrelationBar.alliedMarkers.drawRenderers =
-        //function(resetPrevData)
-        //{
-            ///** Original WG code */
-            //for (var i = 0; i < this.__get__dataProvider().length; ++i)
-            //{
-                //this.createItemRenderer(this.__get__dataProvider()[i], resetPrevData);
-            //}
-            //
-            ///** Extra XVM code */
-            //for (var vid in this.vIdToRenderer)
-            //{
-                //var renderer = this.vIdToRenderer[vid];
-                //if (renderer._data.isAlive)
-                //{
-                    //renderer._y = 16;
-                    //renderer._x += 6;
-                //}
-            //}
-        //}
-    //}
         // Remove standard fields for XVM
         if (wrapper.pNameField)
         {
@@ -250,19 +233,6 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
 //                hp_mc.removeMovieClip();
 //                delete hp_mc;
         }
-    }
-
-    /**
-     * Config load callback
-     * Calls on config loading is complete. Calls always, even if config is missed or loading failed.
-     */
-    private function onConfigLoaded():Void
-    {
-        //trace("onConfigLoaded()");
-
-        GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
-
-        initialize();
     }
 
     /**
@@ -344,11 +314,42 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     public function updateMarkerSettings():Void { return call("updateMarkerSettings", arguments); }
     public function setSpeaking(value:Boolean):Void { return call("setSpeaking", arguments); }
     public function setEntityName(value:String):Void { return call("setEntityName", arguments); }
-    public function updateHealth(curHealth:Number, flag:Number, damageType:String):Void { return call("updateHealth", arguments); }
-    public function updateState(newState:String, isImmediate:Boolean):Void { return call("updateState", arguments); }
+
+    public function updateHealth(curHealth:Number, flag:Number, damageType:String):Void
+    {
+        if (curHealth <= 0)
+            m_dead = true;
+
+        if (flag == Defines.FROM_PLAYER && wrapper.m_team == "enemy" && hitLog != null) // do not calculate friendly fire
+        {
+            var delta = m_curHealth - (curHealth < 0 ? 0 : curHealth);
+            hitLog.update(delta, curHealth,
+                VehicleInfo.mapVehicleName(m_defaultIconSource, m_vehicleName),
+                m_defaultIconSource,
+                m_playerFullName, m_level, damageType,
+                VehicleInfo.GetVTypeValue(m_defaultIconSource),
+                GraphicsUtil.GetVTypeColorValue(m_defaultIconSource),
+                m_dead);
+        }
+        m_curHealth = curHealth < 0 ? 0 : curHealth;
+
+        return call("updateHealth", arguments);
+    }
+
+    public function updateState(newState:String, isImmediate:Boolean):Void
+    {
+        if (newState == "dead")
+            m_dead = true;
+        return call("updateState", arguments);
+    }
+
     public function showExInfo(show:Boolean):Void { return call("showExInfo", arguments); }
     public function showActionMarker(actionState):Void { return call("showActionMarker", arguments); }
+
+    public function onLoad()                      { return call("onLoad", arguments); }
     
+    // NOT USED
+    /*
     public function settingsUpdate()              { return call("settingsUpdate", arguments); }
     public function onSplashHidden()              { return call("onSplashHidden", arguments); }
     public function layoutParts()                 { return call("layoutParts", arguments); }
@@ -400,44 +401,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     public function changeFocus()                 { return call("changeFocus", arguments); }
     public function onMouseWheel()                { return call("onMouseWheel", arguments); }
     public function scrollWheel()                 { return call("scrollWheel", arguments); }
+    /*
 
-
-    //
-    //public function update():Void                      { call("update"); }
-    //public function updateMarkerSettings():Void        { call("updateMarkerSettings"); }
-    //public function setSpeaking(value:Boolean):Void    { call("setSpeaking",      [ value ]); }
-    //public function setEntityName(value:String):Void   { call("setEntityName",    [ value ]); }
-//
-    //public function updateHealth(curHealth:Number, flag:Number, damageType:String):Void
-    //{
-        //if (curHealth <= 0)
-            //m_dead = true;
-//
-        //if (flag == Defines.FROM_PLAYER && m_team == "enemy" && hitLog != null) // do not calculate friendly fire
-        //{
-            //var delta = m_curHealth - (curHealth < 0 ? 0 : curHealth);
-            //hitLog.update(delta, curHealth,
-                //VehicleInfo.mapVehicleName(m_defaultIconSource, m_vehicleName),
-                //m_defaultIconSource,
-                //m_playerFullName, m_level, damageType,
-                //VehicleInfo.GetVTypeValue(m_defaultIconSource),
-                //GraphicsUtil.GetVTypeColorValue(m_defaultIconSource),
-                //m_dead);
-        //}
-        //m_curHealth = curHealth < 0 ? 0 : curHealth;
-        //call("updateHealth", [ curHealth, flag, damageType ]);
-    //}
-//
-    //public function updateState(newState:String, isImmediate:Boolean):Void
-    //{
-        //if (newState == "dead")
-            //m_dead = true;
-        //call("updateState",  [ newState, isImmediate ]);
-    //}
-//
-    //public function showExInfo(show:Boolean):Void      { call("showExInfo",       [ show ]); }
-    //public function showActionMarker(actionState):Void { call("showActionMarker", [ actionState ]); }
-//
     ///**
      //* Ingame original WG marker settings.
      //*
