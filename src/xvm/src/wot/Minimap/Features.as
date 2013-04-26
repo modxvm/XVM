@@ -25,7 +25,7 @@ class wot.Minimap.Features
         this.minimap = minimap;
     }
     
-    public function apply():Void
+    public function applyMod():Void
     {
         
     }

@@ -40,11 +40,6 @@ class wot.Minimap.Minimap
         MinimapCtor();
     }
 
-    function scaleMarkers()
-    {
-        return this.scaleMarkersImpl.apply(this, arguments);
-    }
-
     function onEntryInited()
     {
         return this.onEntryInitedImpl.apply(this, arguments);
@@ -123,6 +118,11 @@ class wot.Minimap.Minimap
     private var isPanelReady:Boolean = false;
     private var loadComplete:Boolean = false;
     private var mapExtended:Boolean = false;
+    
+    function scaleMarkers()
+    {
+        return this.scaleMarkersImpl.apply(this, arguments);
+    }
 
     function scaleMarkersImpl(percent)
     {
@@ -237,7 +237,7 @@ class wot.Minimap.Minimap
     private function startExtendedProcedure():Void
     {
         features = new Features(this);
-        features.apply();
+        features.applyMod();
         
         /**
          * Setup minimap icon size.
