@@ -1,6 +1,6 @@
-import wot.Minimap.dataTypes.Player;
 import com.xvm.VehicleInfo;
-import com.xvm.VehicleInfoData2;
+//import com.xvm.VehicleInfoData2;
+import wot.Minimap.Minimap;
 import wot.Minimap.model.externalProxy.PlayersPanelProxy;
 import wot.Minimap.model.externalProxy.IconsProxy;
 import wot.Minimap.shapes.ShapeAttach;
@@ -36,7 +36,7 @@ class wot.Minimap.shapes.Square extends ShapeAttach
 
     private function createSquareClip():MovieClip
     {
-        return icons.createEmptyMovieClip("square", wot.Minimap.Minimap.SQUARE_1KM_INDEX);
+        return IconsProxy.createEmptyMovieClip("square", Minimap.SQUARE_1KM_INDEX);
     }
 
     private function defineStyle(mc:MovieClip):Void
@@ -69,24 +69,17 @@ class wot.Minimap.shapes.Square extends ShapeAttach
 
     private function updatePosition(mc:MovieClip):Void
     {
-        icons.onEnterFrame = function()
+        IconsProxy.setOnEnterFrame(function()
         {
-            var self:MovieClip = IconsProxy.getSelf();
-            this.square._x = self._x;
-            this.square._y = self._y;
-        }
+            var selfMC:MovieClip = IconsProxy.selfEntry.wrapper;
+            this.square._x = selfMC._x;
+            this.square._y = selfMC._y;
+        });
     }
 
     private function isArtillery():Boolean
     {
-        var self:Player = PlayersPanelProxy.getSelf();
-        var systemVehType:String =  VehicleInfo.getName2(self.icon);
-
-        return VehicleInfoData2.data[systemVehType].type == "SPG"
-    }
-
-    private function get icons():MovieClip
-    {
-        return IconsProxy.getIcons();
+        var vi2 = VehicleInfo.getInfo2(PlayersPanelProxy.self.icon);
+        return vi2 == null ? false : vi2.type == "SPG";
     }
 }

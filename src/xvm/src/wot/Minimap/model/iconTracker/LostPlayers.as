@@ -25,7 +25,7 @@ class wot.Minimap.model.iconTracker.LostPlayers
     public function find():Void
     {
         /** All the units not revealed at minimap */
-        var hiddenUids = Utils.subtractArray(PlayersPanelProxy.getEnemyUids(), IconsProxy.getSyncedUids());
+        var hiddenUids = Utils.subtractArray(PlayersPanelProxy.enemyUids, IconsProxy.syncedUids);
 
         hiddenUids = filterDead(hiddenUids);
 

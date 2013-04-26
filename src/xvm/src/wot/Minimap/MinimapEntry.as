@@ -109,7 +109,7 @@ class wot.Minimap.MinimapEntry
 
     private function initExtendedBehaviour():Void
     {
-        uid = _root.minimap.sync.getTestUid();
+        uid = minimap.xvm_worker.sync.getTestUid();
 
         if (MapConfig.revealedEnabled)
         {
@@ -122,6 +122,11 @@ class wot.Minimap.MinimapEntry
 
     private function get syncProcedureInProgress():Boolean
     {
-        return _root.minimap.sync.syncProcedureInProgress;
+        return minimap.xvm_worker.sync.syncProcedureInProgress;
+    }
+
+    private function get minimap():net.wargaming.ingame.Minimap
+    {
+        return net.wargaming.ingame.Minimap(_root.minimap);
     }
 }

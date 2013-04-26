@@ -1,6 +1,7 @@
 import flash.geom.Point;
-import wot.Minimap.MinimapEvent;
 import com.xvm.GlobalEventDispatcher;
+import wot.Minimap.MinimapEntry;
+import wot.Minimap.MinimapEvent;
 import wot.Minimap.model.externalProxy.IconsProxy;
 import wot.Minimap.model.externalProxy.MapConfig;
 import wot.Minimap.shapes.ShapeAttach;
@@ -53,7 +54,7 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
 
     private function attachCameraLines():Void
     {
-        var cameraEntry:wot.Minimap.MinimapEntry = IconsProxy.getCamera().xvm_worker;
+        var cameraEntry:MinimapEntry = IconsProxy.cameraEntry;
         cameraEntry.cameraExtendedToken = true;
         var camAttach:MovieClip = cameraEntry.attachments;
         var depth:Number = camAttach.getNextHighestDepth();
@@ -107,7 +108,7 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
          * Camera object reconstruction occurs sometimes and all its previous props are lost.
          * Reattach lines in that case.
          */
-        var cam:Object = IconsProxy.getCamera();
+        var cam:MinimapEntry = IconsProxy.cameraEntry;
         if (!cam.cameraExtendedToken)
         {
             attachCameraLines();
@@ -126,6 +127,6 @@ class wot.Minimap.shapes.Lines extends ShapeAttach
 
     private function get gunConstraints():Object
     {
-        return _root.damagePanel.componentsContainer.tankIndicator.hull.gunConstraints;
+        return net.wargaming.ingame.damagePanel.TankIndicator(_root.damagePanel.componentsContainer.tankIndicator).hull.gunConstraints;
     }
 }

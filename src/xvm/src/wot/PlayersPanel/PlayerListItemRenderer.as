@@ -51,7 +51,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     public function PlayerListItemRendererCtor()
     {
-        spotStatusView = new SpotStatusView(wrapper);
+        spotStatusView = new SpotStatusView(this);
     }
 
     function completeLoad()

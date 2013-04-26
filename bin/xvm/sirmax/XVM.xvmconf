@@ -82,15 +82,15 @@
     "enemySpottedMarker": {
       "enabled": true,
       "format": {
-        "neverSeen": "<font face='$FieldFont' size='24' color='#DDDDDD'>*</font>",
-        "lost": "<font face='$FieldFont' size='24' color='#666666'>*</font>",
+        "neverSeen": "<font face='$FieldFont' size='24' color='#999999'>*</font>",
+        "lost": "<font face='$FieldFont' size='24' color='#DDDDDD'>*</font>",
         "revealed": "<font face='$FieldFont' size='24' color='#00DE00'>*</font>",
-        "dead": "",
+        "dead": "<font face='$FieldFont' size='24' color='#222222'>*</font>",
         "artillery": {
-          "neverSeen": "<font face='$FieldFont' size='24' color='#DDDDDD'>*</font>",
-          "lost": "<font face='$FieldFont' size='24' color='#666666'>*</font>",
-          "revealed": "<font face='$FieldFont' size='24' color='#00DE00'>*</font>",
-          "dead": ""
+          "neverSeen": "<font face='$FieldFont' size='24' color='#999999'>*</font>",
+          "lost": "<font face='$FieldFont' size='24' color='#DDDDDD'>*</font>",
+          "revealed": "<font face='$FieldFont' size='24' color='#DE0000'>*</font>",
+          "dead": "<font face='$FieldFont' size='24' color='#222222'>*</font>"
         }
       }
     }
@@ -103,7 +103,7 @@
   },
   "minimap": {
     "enabled": true,
-    "iconScale": 1.5,
+    "iconScale": 1,
     "circles": {
         "major": [
             { "enabled": true, "distance": 445, "thickness": 0.3, "alpha": 65, "color": "0xFF3333" },
@@ -112,7 +112,7 @@
     },
     "lines": {
       "vehicle": [
-         //{ "enabled": true, "from": -50, "to": 150,  "inmeters": true, "thickness": 1.2,  "alpha": 65, "color": "0xFFFFFF"}
+         { "enabled": true, "from": -50, "to": 150,  "inmeters": true, "thickness": 1.2,  "alpha": 65, "color": "0xFFFFFF"}
        ],
        "camera": [
          { "enabled": true, "from": 50,  "to": 707,   "inmeters": true, "thickness": 0.7,  "alpha": 65, "color": "0x00BBFF"},

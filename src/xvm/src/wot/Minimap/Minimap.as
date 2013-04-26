@@ -5,6 +5,7 @@ import wot.Minimap.shapes.Square;
 import wot.Minimap.ExternalDeveloperInterface;
 import wot.Minimap.MapSizeLabel;
 import wot.Minimap.LostMarkers;
+import wot.Minimap.MinimapEntry;
 import wot.Minimap.MinimapEvent;
 import wot.Minimap.shapes.Lines;
 import wot.Minimap.shapes.Circles;
@@ -23,7 +24,7 @@ class wot.Minimap.Minimap
     /////////////////////////////////////////////////////////////////
     // wrapped methods
 
-    private var wrapper:net.wargaming.ingame.Minimap;
+    public var wrapper:net.wargaming.ingame.Minimap;
     private var base:net.wargaming.ingame.Minimap;
 
     public function Minimap(wrapper:net.wargaming.ingame.Minimap, base:net.wargaming.ingame.Minimap)
@@ -181,10 +182,12 @@ class wot.Minimap.Minimap
 
     private function rescaleAttachments():Void
     {
-        var entries:Array = IconsProxy.getAllEntries();
-        for (var i in entries)
+        var entries:Array = IconsProxy.allEntries;
+        var len:Number = entries.length;
+        for (var i:Number = 0; i < len; ++i)
         {
-            entries[i].rescaleAttachments();
+            var entry:MinimapEntry = entries[i];
+            entry.rescaleAttachments();
         }
         /** See MinimapEntry.rescaleAttachments() */
     }
@@ -241,7 +244,7 @@ class wot.Minimap.Minimap
         /** Zoom map on key press */
         if (MapConfig.zoomEnabled)
         {
-            zoom = new Zoom(wrapper);
+            zoom = new Zoom(this);
 
             var key:Number = MapConfig.zoomKey;
             net.wargaming.managers.BattleInputHandler.instance.addHandler(key, false, zoom, "onZoomKeyClick");
@@ -272,8 +275,8 @@ class wot.Minimap.Minimap
          * Looks like white arrow.
          * Does not affect attached shapes.
          */
-        var selfIcon:net.wargaming.ingame.MinimapEntry = IconsProxy.getSelf();
-        selfIcon.selfIcon._alpha = MapConfig.selfIconAlpha;
+        var selfIcon:MinimapEntry = IconsProxy.selfEntry;
+        selfIcon.wrapper.selfIcon._alpha = MapConfig.selfIconAlpha;
 
         /**
          * Setup alpha for camera of player himself.
@@ -328,7 +331,7 @@ class wot.Minimap.Minimap
 
     private function setCameraAlpha():Void
     {
-        var camera:net.wargaming.ingame.MinimapEntry = IconsProxy.getCamera();
-        camera._alpha = MapConfig.cameraAlpha;
+        var camera:MinimapEntry = IconsProxy.cameraEntry;
+        camera.wrapper._alpha = MapConfig.cameraAlpha;
     }
 }

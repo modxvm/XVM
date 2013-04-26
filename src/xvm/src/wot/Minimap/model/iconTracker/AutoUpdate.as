@@ -1,3 +1,4 @@
+import wot.Minimap.model.externalProxy.PlayersPanelProxy;
 import wot.Minimap.model.iconTracker.PositionTracking;
 import wot.Minimap.model.iconTracker.LostPlayers;
 
@@ -42,7 +43,7 @@ class wot.Minimap.model.iconTracker.AutoUpdate
         lost.find();
 
         /** Refreshes enemy spotted feature */
-        _root.rightPanel.updateSpotStatusMarkers();
+        PlayersPanelProxy.rightPanel.xvm_worker.updateSpotStatusMarkers();
     }
 
     /** Selfdestruct if timer have not been used for long time */

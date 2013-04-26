@@ -1,4 +1,5 @@
 import com.xvm.Config;
+import wot.PlayersPanel.PlayerListItemRenderer;
 import wot.PlayersPanel.SpotStatusModel;
 
 /**
@@ -8,77 +9,54 @@ import wot.PlayersPanel.SpotStatusModel;
  */
 class wot.PlayersPanel.SpotStatusView
 {
-    public static var SPOT_STATUS_TF_NAME:String = "spotStatusTF";
+    private static var SPOT_STATUS_TF_NAME:String = "spotStatusTF";
 
-    private var renderer:net.wargaming.ingame.PlayerListItemRenderer;
+    private var renderer:PlayerListItemRenderer;
     private var spotStatusMarker:TextField;
 
-    public function SpotStatusView(renderer:net.wargaming.ingame.PlayerListItemRenderer)
+    public function SpotStatusView(renderer:PlayerListItemRenderer)
     {
         this.renderer = renderer;
+        spotStatusMarker = null;
     }
 
-    public function update(status:Number, isArti:Boolean):Void
+    public function update(status:Number, isArty:Boolean):Void
     {
-        if (renderer[SPOT_STATUS_TF_NAME] == undefined)
-        {
-            createMarker(renderer);
-        }
+        if (spotStatusMarker == null)
+            spotStatusMarker = createMarker(renderer);
 
-        spotStatusMarker.htmlText = getFormat(status, isArti);
+        spotStatusMarker.htmlText = getFormat(status, isArty);
 
         /** Define point relative to which marker is set  */
-        spotStatusMarker._x = renderer.vehicleLevel._x + cfg.Xoffset; // vehicleLevel._x is 8 for example
-        spotStatusMarker._y = renderer.vehicleLevel._y + cfg.Yoffset; // vehicleLevel._y is -445.05 for example
+        spotStatusMarker._x = renderer.wrapper.vehicleLevel._x + cfg.Xoffset; // vehicleLevel._x is 8 for example
+        spotStatusMarker._y = renderer.wrapper.vehicleLevel._y + cfg.Yoffset; // vehicleLevel._y is -445.05 for example
     }
 
     // -- Private
 
-    private function createMarker(renderer:net.wargaming.ingame.PlayerListItemRenderer):Void
+    private static function createMarker(renderer:PlayerListItemRenderer):TextField
     {
-        spotStatusMarker = renderer.createTextField
-        (
-            SPOT_STATUS_TF_NAME,
-            renderer.getNextHighestDepth(),
-            0, 0, 25, 25
-        );
-
-        spotStatusMarker.antiAliasType = "advanced";
-        spotStatusMarker.html = true;
+        var marker:TextField = renderer.wrapper.createTextField(SPOT_STATUS_TF_NAME, renderer.wrapper.getNextHighestDepth(), 0, 0, 25, 25);
+        marker.antiAliasType = "advanced";
+        marker.selectable = false;
+        marker.html = true;
+        return marker;
     }
 
     /** Return HTML text from config file */
-    private function getFormat(status:Number, isArti:Boolean):String
+    private function getFormat(status:Number, isArty:Boolean):String
     {
-        if (isArti)
+        switch (status)
         {
-            switch (status)
-            {
-                case SpotStatusModel.NEVER_SEEN:
-                    return cfg.format.artillery.neverSeen;
-                case SpotStatusModel.LOST:
-                    return cfg.format.artillery.lost;
-                case SpotStatusModel.REVEALED:
-                    return cfg.format.artillery.revealed;
-                case SpotStatusModel.DEAD:
-                    return cfg.format.artillery.dead;
-            }
+            case SpotStatusModel.NEVER_SEEN:
+                return isArty ? cfg.format.artillery.neverSeen : cfg.format.neverSeen;
+            case SpotStatusModel.LOST:
+                return isArty ? cfg.format.artillery.lost : cfg.format.lost;
+            case SpotStatusModel.REVEALED:
+                return isArty ? cfg.format.artillery.revealed : cfg.format.revealed;
+            case SpotStatusModel.DEAD:
+                return isArty ? cfg.format.artillery.dead : cfg.format.dead;
         }
-        else
-        {
-            switch (status)
-            {
-                case SpotStatusModel.NEVER_SEEN:
-                    return cfg.format.neverSeen;
-                case SpotStatusModel.LOST:
-                    return cfg.format.lost;
-                case SpotStatusModel.REVEALED:
-                    return cfg.format.revealed;
-                case SpotStatusModel.DEAD:
-                    return cfg.format.dead;
-            }
-        }
-
         return "ERROR";
     }
 

@@ -12,6 +12,7 @@ import com.xvm.StatLoader;
 import com.xvm.StatData;
 import com.xvm.Utils;
 import wot.Minimap.MinimapEvent;
+import wot.PlayersPanel.PlayerListItemRenderer;
 
 class wot.PlayersPanel.PlayersPanel
 {
@@ -25,6 +26,7 @@ class wot.PlayersPanel.PlayersPanel
     {
         this.wrapper = wrapper;
         this.base = base;
+        wrapper.xvm_worker = this;
 
         Utils.TraceXvmModule("PP");
 
@@ -92,12 +94,10 @@ class wot.PlayersPanel.PlayersPanel
         checkLoading();
     }
 
-    function initEnemySpotterMarkers(event):Void
+    private function initEnemySpotterMarkers(event):Void
     {
         if (isEnemyPanel && Config.s_config.playersPanel.enemySpottedMarker.enabled && spotStatusModel == null)
-        {
             spotStatusModel = new SpotStatusModel();
-        }
     }
 
     private function onStatLoaded()
@@ -112,21 +112,21 @@ class wot.PlayersPanel.PlayersPanel
      */
     public function updateSpotStatusMarkers():Void
     {
-        if (isEnemyPanel && Config.s_config.playersPanel.enemySpottedMarker.enabled)
+        if (!isEnemyPanel || !Config.s_config.playersPanel.enemySpottedMarker.enabled)
+            return;
+
+        /** Redraw every renderer */
+        for (var i in wrapper.m_list.renderers)
         {
-            /** Redraw every renderer */
-            for (var i in wrapper.m_list.renderers)
-            {
-                var renderer:net.wargaming.ingame.PlayerListItemRenderer = wrapper.m_list.renderers[i];
-                var uid:Number = renderer.data.uid;
-                var status:Number = spotStatusModel.defineStatus(uid, renderer.data.vehicleState);
-                var subjectIsArtillery:Boolean = spotStatusModel.isArti(uid);
-                renderer.xvm_worker.spotStatusView.update(status, subjectIsArtillery);
-            }
+            var renderer:PlayerListItemRenderer = net.wargaming.ingame.PlayerListItemRenderer(wrapper.m_list.renderers[i]).xvm_worker;
+            var uid:Number = renderer.wrapper.data.uid;
+            var status:Number = spotStatusModel.defineStatus(uid, renderer.wrapper.data.vehicleState);
+            var subjectIsArtillery:Boolean = spotStatusModel.isArty(uid);
+            renderer.spotStatusView.update(status, subjectIsArtillery);
         }
     }
 
-    function setDataImpl(data, sel, postmortemIndex, isColorBlind, knownPlayersCount)
+    private function setDataImpl(data, sel, postmortemIndex, isColorBlind, knownPlayersCount)
     {
         //Logger.add("PlayersPanel.setData()");
         // fix WG bug - double redrawing panels on kill
@@ -145,11 +145,11 @@ class wot.PlayersPanel.PlayersPanel
     private var _lastAdjustedState = "";
 
     // Centered _y value of text field
-    var centeredTextY:Number;
-    var leadingNames:Number;
-    var leadingVehicles:Number;
+    private var centeredTextY:Number;
+    private var leadingNames:Number;
+    private var leadingVehicles:Number;
 
-    function setData2(data, sel, postmortemIndex, isColorBlind, knownPlayersCount)
+    private function setData2(data, sel, postmortemIndex, isColorBlind, knownPlayersCount)
     {
         //Logger.add("PlayersPanel.setData2()");
         //Logger.add(data);
@@ -210,14 +210,14 @@ class wot.PlayersPanel.PlayersPanel
         wrapper.m_vehicles._y = centeredTextY + leadingVehicles / 2.0; // centering on cell, because of align=top
     }
 
-    function onRecreateDeviceImpl(width, height)
+    private function onRecreateDeviceImpl(width, height)
     {
         //Logger.add("PlayersPanel.onRecreateDevice()");
         base.onRecreateDevice(width, height);
         XVMAdjustPanelSize();
     }
 
-    function _setVehiclesStrImpl(data, sel, isColorBlind, knownPlayersCount)
+    private function _setVehiclesStrImpl(data, sel, isColorBlind, knownPlayersCount)
     {
         //Logger.add("PlayersPanel._setVehiclesStr(): knownPlayersCount=" + knownPlayersCount + " sel=" + sel);
         try
@@ -233,7 +233,7 @@ class wot.PlayersPanel.PlayersPanel
         }
     }
 
-    function _setNamesStrImpl(data, sel, isColorBlind, knownPlayersCount)
+    private function _setNamesStrImpl(data, sel, isColorBlind, knownPlayersCount)
     {
         //Logger.add("PlayersPanel._setNameStr()");
         try
@@ -249,7 +249,7 @@ class wot.PlayersPanel.PlayersPanel
         }
     }
 
-    function _getHTMLTextImpl(colorScheme, text)
+    private function _getHTMLTextImpl(colorScheme, text)
     {
         //Logger.add("PlayersPanel._getHTMLText()");
         if (m_fieldType == Defines.FIELDTYPE_NONE)
@@ -381,7 +381,7 @@ class wot.PlayersPanel.PlayersPanel
         return format;
     }
 
-    function XVMAdjustPanelSize()
+    private function XVMAdjustPanelSize()
     {
         //Logger.add("PlayersPanel.XVMAdjustPanelSize()");
 
@@ -444,7 +444,7 @@ class wot.PlayersPanel.PlayersPanel
         }
     }
 
-    function XVMGetMaximumFieldWidth(field: TextField)
+    private function XVMGetMaximumFieldWidth(field: TextField)
     {
         var max_width = 0;
         for (var i = 0; i < field.numLines; ++i)
@@ -456,7 +456,7 @@ class wot.PlayersPanel.PlayersPanel
         return max_width;
     }
 
-    function XVMGetMaximumFieldHeight(field: TextField)
+    private function XVMGetMaximumFieldHeight(field: TextField)
     {
         var max_height = 0;
         for (var i = 0; i < field.numLines; ++i)

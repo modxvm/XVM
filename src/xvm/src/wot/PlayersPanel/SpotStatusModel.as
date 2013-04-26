@@ -1,9 +1,8 @@
 import com.xvm.GlobalEventDispatcher;
+import com.xvm.VehicleInfo;
 import wot.Minimap.MinimapEvent;
-import wot.PlayersPanel.PlayersPanel;
 import wot.Minimap.model.externalProxy.IconsProxy;
 import wot.Minimap.model.externalProxy.PlayersPanelProxy;
-import com.xvm.VehicleInfo;
 
 /**
  * @author ilitvinov87@gmail.com
@@ -25,24 +24,19 @@ class wot.PlayersPanel.SpotStatusModel
 
     public function defineStatus(uid:Number, vehicleState:Number):Number
     {
-        if (vehicleState == 2)
-        {
+        if ((vehicleState & net.wargaming.ingame.VehicleStateInBattle.IS_AVIVE) == 0)
             return DEAD;
-        }
 
         if (isRevealedRightNow(uid))
-        {
             return REVEALED;
-        }
 
         return wasSeen(uid) ? LOST : NEVER_SEEN;
     }
 
-    public function isArti(uid:Number):Boolean
+    public function isArty(uid:Number):Boolean
     {
         var info:Object = PlayersPanelProxy.getPlayerInfo(uid); // "../maps/icons/vehicle/contour/ussr-SU-18.png"
         var info2:Object = VehicleInfo.getInfo2(info.icon);
-
         return info2.type == "SPG";
     }
 
@@ -50,15 +44,12 @@ class wot.PlayersPanel.SpotStatusModel
 
     private function isRevealedRightNow(subjUid):Boolean
     {
-        var uids:Array = IconsProxy.getSyncedUids();
+        var uids:Array = IconsProxy.syncedUids;
         for (var i in uids)
         {
             if (uids[i] == subjUid)
-            {
                 return true;
-            }
         }
-
         return false;
     }
 
@@ -74,16 +65,8 @@ class wot.PlayersPanel.SpotStatusModel
         for (var i in seen)
         {
             if (seen[i] == uid)
-            {
                 return true;
-            }
         }
-
         return false;
-    }
-
-    private function get panel():PlayersPanel
-    {
-        return _root.rightPanel;
     }
 }

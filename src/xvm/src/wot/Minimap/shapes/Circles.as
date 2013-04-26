@@ -18,7 +18,7 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
     {
         super(mapSizeInMeters);
 
-        var player:Player = PlayersPanelProxy.getSelf();
+        var player:Player = PlayersPanelProxy.self;
         var vehType:String = VehicleInfo.getName2(player.icon);
         var circlesCfg:Array = defineCirclesCfg(vehType);
 

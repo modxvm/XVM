@@ -66,6 +66,14 @@
     <compile path="src\wot\VehicleMarkersManager" />
     <compile path="src\wot\VehicleMarkersManager\components" />
     <compile path="src\wot\VehicleMarkersManager\components\damage" />
+    <compile path="src\wot\Minimap\dataTypes" />
+    <compile path="src\wot\Minimap\dataTypes\cfg" />
+    <compile path="src\wot\Minimap\model" />
+    <compile path="src\wot\Minimap\model\externalProxy" />
+    <compile path="src\wot\Minimap\model\iconTracker" />
+    <compile path="src\wot\Minimap\model\mapSize" />
+    <compile path="src\wot\Minimap\shapes" />
+    <compile path="src\wot\Minimap\staticUtils" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>

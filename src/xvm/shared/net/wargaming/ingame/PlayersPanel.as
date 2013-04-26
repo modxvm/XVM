@@ -1,5 +1,10 @@
 ﻿intrinsic class net.wargaming.ingame.PlayersPanel extends MovieClip
 {
+    /////////////////////////////////////////////////////////////////
+    // XVM
+    var xvm_worker:wot.PlayersPanel.PlayersPanel;
+    /////////////////////////////////////////////////////////////////
+
     static var PLAYER_NAME_LENGTH: Number;
     static var STATES: Object;
     static var SQUAD_SIZE: Number;

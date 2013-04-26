@@ -1,4 +1,5 @@
 import com.xvm.GlobalEventDispatcher;
+import wot.Minimap.MinimapEntry;
 import wot.Minimap.MinimapEvent;
 import wot.Minimap.dataTypes.Icon;
 import wot.Minimap.model.externalProxy.IconsProxy;
@@ -19,31 +20,29 @@ class wot.Minimap.model.iconTracker.PositionTracking
 
     public function update():Void
     {
-        var entries:Array = IconsProxy.getAllSyncedEntries();
+        var entries:Array = IconsProxy.allSyncedEntries;
         /** entry is MinimapEntry */
-        for (var i in entries)
+        var len:Number = entries.length;
+        for (var i:Number = 0; i < len; ++i)
         {
-            var entry:net.wargaming.ingame.MinimapEntry = entries[i];
+            var entry:MinimapEntry = entries[i];
 
-            if (entry.entryName != "enemy")
-            {
+            if (entry.wrapper.entryName != "enemy")
                 continue;
-            }
 
             if (trackThisOne(entry))
             {
                 rememberLost(entry);
-
-                informPlayersPanel(entry.xvm_worker.uid);
+                informPlayersPanel(entry.uid);
             }
         }
     }
 
     // -- Private
 
-    private function rememberLost(entry):Void
+    private function rememberLost(entry:MinimapEntry):Void
     {
-        posTrack.push(new Icon(entry.uid, entry._x, entry._y, entry.vehicleClass));
+        posTrack.push(new Icon(entry.uid, entry.wrapper._x, entry.wrapper._y, entry.wrapper.vehicleClass));
     }
 
     private function informPlayersPanel(uid:Number):Void
@@ -51,7 +50,7 @@ class wot.Minimap.model.iconTracker.PositionTracking
         GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENEMY_REVEALED, uid));
     }
 
-    private function trackThisOne(entry):Boolean
+    private function trackThisOne(entry:MinimapEntry):Boolean
     {
         var firstTimeSeen:Boolean = true;
 
@@ -62,10 +61,8 @@ class wot.Minimap.model.iconTracker.PositionTracking
             if (entry.uid == track.uid)
             {
                 firstTimeSeen = false;
-
-                track.pos.x = entry._x;
-                track.pos.y = entry._y;
-
+                track.pos.x = entry.wrapper._x;
+                track.pos.y = entry.wrapper._y;
                 break;
             }
         }

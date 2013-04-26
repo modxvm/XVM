@@ -1,3 +1,4 @@
+import wot.Minimap.Minimap;
 import wot.Minimap.model.externalProxy.MapConfig;
 
 /**
@@ -7,7 +8,7 @@ import wot.Minimap.model.externalProxy.MapConfig;
 class wot.Minimap.Zoom
 {
     /** This is the subject of resize reposition */
-    private var minimap:net.wargaming.ingame.Minimap;
+    private var minimap:Minimap;
 
     /** Temporary place to store last normal map size value before resize procedure by zoom */
     private var prevSizeIndex:Number;
@@ -15,7 +16,7 @@ class wot.Minimap.Zoom
     /** Stores state for switcher */
     var currentState:Boolean;
 
-    public function Zoom(minimap:net.wargaming.ingame.Minimap)
+    public function Zoom(minimap:Minimap)
     {
         this.minimap = minimap;
         currentState = true;
@@ -84,29 +85,29 @@ class wot.Minimap.Zoom
     private function centerPosition():Void
     {
         /** Position map bottom right corner at center */
-        minimap._x = Stage.width / 2;
-        minimap._y = Stage.height / 2;
+        minimap.wrapper._x = Stage.width / 2;
+        minimap.wrapper._y = Stage.height / 2;
 
         /** Offset position taking map center into account */
-        minimap._x += minimap.width / 2;
-        minimap._y += minimap.height / 2;
+        minimap.wrapper._x += minimap.wrapper.width / 2;
+        minimap.wrapper._y += minimap.wrapper.height / 2;
     }
 
     private function bottomRightPosition():Void
     {
         /** Position map bottom right corner at bottom right of Stage */
-        minimap._x = Stage.width;
-        minimap._y = Stage.height;
+        minimap.wrapper._x = Stage.width;
+        minimap.wrapper._y = Stage.height;
     }
 
     private function increaseSize():Void
     {
         var side:Number = Stage.height - MapConfig.zoomPixelsBack;
-        minimap.setSize(side, side);
+        minimap.wrapper.setSize(side, side);
     }
 
     private function restoreSize():Void
     {
-        minimap.setupSize(minimap.m_sizeIndex, Stage.height);
+        minimap.wrapper.setupSize(minimap.wrapper.m_sizeIndex, Stage.height);
     }
 }

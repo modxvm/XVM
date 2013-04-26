@@ -9,7 +9,7 @@ class wot.Minimap.ExternalDeveloperInterface
 
     public function ExternalDeveloperInterface()
     {
-        customContainer = icons.createEmptyMovieClip("customContainer", wot.Minimap.Minimap.EXTERNAL_CUSTOM_INDEX);
+        customContainer = _icons.createEmptyMovieClip("customContainer", wot.Minimap.Minimap.EXTERNAL_CUSTOM_INDEX);
     }
 
     /**
@@ -77,32 +77,32 @@ class wot.Minimap.ExternalDeveloperInterface
          * Workaround.
          * ---------------
          */
-        if (!instanceName)
+        if (instanceName == null)
         {
             instanceName = "customInstance";
         }
 
-        if (!styleConfig)
+        if (styleConfig == null)
         {
             styleConfig = "font-family:$FieldFont; font-size:8px; color:#BBEEBB;";
         }
 
-        if (!alpha)
+        if (alpha == null)
         {
             alpha = 100;
         }
 
-        if (!width)
+        if (width == null)
         {
             width = 80;
         }
 
-        if (!height)
+        if (height == null)
         {
             height = 30;
         }
 
-        if (!scale)
+        if (scale == null)
         {
             scale = 100;
         }
@@ -135,7 +135,7 @@ class wot.Minimap.ExternalDeveloperInterface
      * icons:MovieClip is Minimap.as field.
      * Contains MinimapEntry objects representing tanks\bases\cap points\cameras.
      */
-    private function get icons():MovieClip
+    private function get _icons():MovieClip
     {
         return _root.minimap.icons;
     }

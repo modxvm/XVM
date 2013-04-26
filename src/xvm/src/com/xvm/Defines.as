@@ -5,11 +5,11 @@
 class com.xvm.Defines
 {
     // Global versions
-    public static var XVM_VERSION:String = "3.5.0";
+    public static var XVM_VERSION:String = "4.0.0-alpha1";
     public static var XVM_INTRO:String = "www.modxvm.com";
     public static var WOT_VERSION:String = "0.8.5";
     public static var CONFIG_VERSION:String = "1.5.0";
-    public static var EDITOR_VERSION:String = "0.42";
+    public static var EDITOR_VERSION:String = "0.50";
 
     // Path to Dokan MountPoint
     public static var DOKAN_MP:String = "../../../.stat/";
