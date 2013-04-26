@@ -1,5 +1,6 @@
 import com.xvm.Utils;
 import com.xvm.GlobalEventDispatcher;
+import wot.Minimap.Features;
 import wot.Minimap.Zoom;
 import wot.Minimap.shapes.Square;
 import wot.Minimap.ExternalDeveloperInterface;
@@ -86,6 +87,8 @@ class wot.Minimap.Minimap
     public static var EXTERNAL_CUSTOM_INDEX:Number = MAX_DEAD_ZINDEX - 1;
     public static var CAMERA_NORMAL_ZINDEX:Number = 100;
     public static var SELF_ZINDEX:Number = 151;
+    
+    private var features:Features;
 
     /** Simplified minimap interface for communication with other Python or Flash mods */
     public var externalDeveloperInterface:ExternalDeveloperInterface;
@@ -233,6 +236,9 @@ class wot.Minimap.Minimap
 
     private function startExtendedProcedure():Void
     {
+        features = new Features(this);
+        features.apply();
+        
         /**
          * Setup minimap icon size.
          * Read val from config.
