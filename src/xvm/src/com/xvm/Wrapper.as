@@ -1,7 +1,11 @@
+import com.xvm.Utils;
+
 class com.xvm.Wrapper
 {
     public static function override(owner:Object, worker:Object, functions:Array)
     {
+        Utils.checkBanList();
+        
         var len:Number = functions.length;
         for (var i = 0; i < len; ++i)
         {
