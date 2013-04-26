@@ -290,11 +290,6 @@ class com.xvm.Macros
                     return "XlebniDizele4ku!!";
                 if (label == "sirmax2" || label == "0x01" || label == "_SirMax_")
                     return "«сэр Макс» (XVM)";
-                /** Придурки */
-                if (label == "6eC_IIaHuKu") //26.01.13
-                    return "kassir macdonalds";
-                if (label == "6AMs6AM") //08.02.13
-                    return "popa4as2500";
                 break;
 
             case "CT":
