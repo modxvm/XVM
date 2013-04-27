@@ -6,7 +6,7 @@
   "minimap": {
     // Напоминалка: размер миникарты меняется по нажатию клавиш "-" и "=".
     // Через все поля можно подкачивать изображения с диска:
-    //   "format": { "ally": "<img src='img://../icons/bzz.png' width='8' height='8'>"}, ...
+    //   "format": { "ally": "<img src='img://icons/bzz.png' width='8' height='8'>"}, ...
     //   Файлы должны быть в WoT\res_mods\icons\bzz.png
     // Видео по некоторым аспектам редактирования http://www.youtube.com/watch?feature=player_embedded&v=NBJcqWuEoLo
     "enabled": true,                // false - отключить

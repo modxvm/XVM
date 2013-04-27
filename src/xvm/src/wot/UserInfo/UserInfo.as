@@ -58,6 +58,7 @@ class wot.UserInfo.UserInfo
     var m_statisticsHeaderField:TextField;
     var m_name:String;
     var m_userData:Object;
+    var m_buttonOwn:MovieClip;
     var m_button1:MovieClip, m_button2:MovieClip, m_button3:MovieClip, m_button4:MovieClip;
     var m_button5:MovieClip, m_button6:MovieClip, m_button7:MovieClip, m_button8:MovieClip;
     var m_dataLoaded:Boolean;
@@ -475,12 +476,15 @@ class wot.UserInfo.UserInfo
                 break;
         }
 
+        //m_buttonOwn = Utils.createButton(hdr, "bOwn", 10, y + 30, Locale.get("in hangar"), "left");
+        //m_buttonOwn.addEventListener("click", this, "onButtonOwnClick");
+
         m_button1 = createButton(hdr, "bLvl", 10,  y, Locale.get("Level"), "left", 1);
         m_button2 = createButton(hdr, "bTyp", 124, y, Locale.get("Type"), "right", 1);
         m_button3 = createButton(hdr, "bNat", 135, y, Locale.get("Nation"), "left", 2);
         m_button4 = createButton(hdr, "bNam", 200, y, Locale.get("Name"), "left", 2);
         m_button5 = createButton(hdr, "bEff", 305, y, "E", "right", 1);
-        // Option for disable "E" column until, because WG is providing incorrect per-vehicle stats
+        // Option for disable "E" column, because WG is providing incorrect per-vehicle stats
         m_button5._visible = Config.s_config.userInfo.showEColumn == true;
         if (Config.s_config.rating.showPlayersStatistics != true || Config.s_config.rating.enableUserInfoStatistics != true)
         {
@@ -543,6 +547,14 @@ class wot.UserInfo.UserInfo
         wrapper.list.selectedIndex = 0;
     }
 
+    private function onButtonOwnClick(e)
+    {
+        //Logger.addObject(_root, "_root", 2);
+        //Logger.addObject(_root.constraints, "constraints", 3);
+        //Logger.addObject(_root.contentHolder.main, "contentHolder.main", 3);
+        //Logger.addObject(_root.header.tankPanel, "header.tankPanel", 3);
+    }
+    
     function sortList(sortType, sortDir)
     {
         lastSort.type = sortType.slice();

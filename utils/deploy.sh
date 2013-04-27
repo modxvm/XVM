@@ -22,7 +22,8 @@ FILES="
   VehicleMarkersManager.swf
   XVM.xvmconf"
 
-DIRS="xvm"
+XVM_FILES="xvm.xc sirmax.xc"
+XVM_DIRS="configs"
 
 cd $(dirname $(realpath $(cygpath --unix $0)))
 
@@ -40,12 +41,21 @@ copy_file()
   }
 }
 
-copy_dir()
+copy_xvm_file()
 {
-  [ -e "$RES_MODS_DIR/$1" ] && rm -rf "$RES_MODS_DIR/$1"
-  [ -d "../bin/$1" ] && {
+  [ -f "$RES_MODS_DIR/xvm/$1" ] && rm -f "$RES_MODS_DIR/xvm/$1"
+  [ -f "../bin/xvm/$1" ] && {
     echo "=> $1"
-    cp -rp "../bin/$1" "$RES_MODS_DIR"
+    cp -p "../bin/xvm/$1" "$RES_MODS_DIR/xvm/${1##*/}"
+  }
+}
+
+copy_xvm_dir()
+{
+  [ -e "$RES_MODS_DIR/xvm/$1" ] && rm -rf "$RES_MODS_DIR/xvm/$1"
+  [ -d "../bin/xvm/$1" ] && {
+    echo "=> $1"
+    cp -rp "../bin/xvm/$1" "$RES_MODS_DIR/xvm"
   }
 }
 
@@ -53,6 +63,10 @@ for n in $FILES; do
   copy_file $n
 done
 
-for n in $DIRS; do
-  copy_dir $n
+for n in $XVM_FILES; do
+  copy_xvm_file $n
+done
+
+for n in $XVM_DIRS; do
+  copy_xvm_dir $n
 done

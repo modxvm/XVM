@@ -9,6 +9,6 @@
     "highlightVehicleIcon": true,           // false - отключить подсветку иконки своего танка и взвода
     "clockFormat": "H:N",                   // Формат часов на экране панели отладки (возле FPS). Формат: Y:год, M:месяц, D:день, H:часы, N:минуты, S:секунды. "" - убрать часы.
     "useStandardMarkers": false,            // true - использовать стандартные маркеры клиента
-    "clanIconsFolder": "../../../clanicons" // путь к папке иконок кланов относительно res_mods/[ВЕРСИЯ ИГРЫ]/gui/flash
+    "clanIconsFolder": "clanicons"          // путь к папке иконок кланов относительно res_mods/xvm/img
   }
 }

@@ -3,14 +3,15 @@
  */
 {
   // Наборы иконок
+  // пути относительно res_mods/xvm/img
   "iconset": {
     // набор иконок для экрана загрузки боя
-    "battleLoading": "../maps/icons/vehicle/contour",
+    "battleLoading": "contour",
     // набор иконок для формы статистики (по Tab)
-    "statisticForm": "../maps/icons/vehicle/contour",
+    "statisticForm": "contour",
     // набор иконок для ушей
-    "playersPanel":  "../maps/icons/vehicle/contour",
+    "playersPanel":  "contour",
     // набор иконок для маркеров над танками
-    "vehicleMarker": "../maps/icons/vehicle/contour"
+    "vehicleMarker": "contour"
   }
 }

@@ -6,6 +6,7 @@ import com.greensock.TweenLite;
 import com.greensock.TimelineLite;
 import com.greensock.easing.Linear;
 import net.wargaming.controls.UILoaderAlt;
+import com.xvm.Defines;
 import com.xvm.IconLoader;
 import com.xvm.Logger;
 
@@ -17,7 +18,7 @@ class wot.battle.SixthSenseIndicator
     {
         var il:IconLoader = new IconLoader(_root.sixthSenseIndicator, completeLoadSixthSenseIcon);
         icon = (UILoaderAlt)(_root.sixthSenseIndicator.attachMovie("UILoaderAlt", "icon", 0));
-        il.init(icon, [ "../../../icons/SixthSense.png", "" ], false);
+        il.init(icon, [ Defines.SIXTH_SENSE_IMG, "" ], false);
         icon.source = il.currentIcon;
 
         // override _root.sixthSenseIndicator.gotoAndPlay()

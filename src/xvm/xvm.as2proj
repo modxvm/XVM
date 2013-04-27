@@ -81,7 +81,6 @@
   </library>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
-    <hidden path="include" />
     <hidden path="wrapper" />
     <hidden path="swf" />
   </hiddenPaths>

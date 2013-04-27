@@ -43,6 +43,9 @@ class wot.crew.tankmen.Crew
     {
         GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
 
+        if (Config.s_config.hangar.hideTutorial == true)
+            _root.header.tutorialDispatcher._visible = false;
+
         if (Config.s_config.hangar.pingServers.enabled == true)
             PingServers.StartPinging();
     }

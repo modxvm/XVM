@@ -58,7 +58,10 @@ class wot.crew.PingServers
         var str:Array = [];
         var res = JSONx.parse(event.str);
         for (var i in res)
-            str.push(i + ": " + res[i])
+        {
+            var s = Utils.startsWith("WOT ", i) ? i.substring(4) : i;
+            str.push(s + ": " + res[i])
+        }
         str.sort();
         _root["__xvm_pingTextField"].htmlText = "<span class='xvm_ping'>" + str.join("\n") + "</span>";
 

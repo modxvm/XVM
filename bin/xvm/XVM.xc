@@ -1,8 +1,7 @@
 ﻿/**
  * load config:
- * default/@xvm.xc - path and file name of config
+ * configs/default/@xvm.xc - path and file name of config
  * . - root object
  */
-${"default/@xvm.xc":"."}
-//${"test/@xvm.xc":"."}
-//${"sirmax/XVM.xvmconf":"."}
+${"configs/default/@xvm.xc":"."}
+//${"sirmax.xc":"."}

@@ -3,6 +3,7 @@
  */
 {
   "hangar": {
+    "hideTutorial": false,
     // Show ping to the servers
     // Показывть пинг на сервера
     "pingServers": {

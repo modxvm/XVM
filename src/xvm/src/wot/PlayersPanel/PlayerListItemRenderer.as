@@ -99,7 +99,7 @@ class wot.PlayersPanel.PlayerListItemRenderer
             if (!m_iconset)
                 m_iconset = new IconLoader(this, completeLoad);
             m_iconset.init(wrapper.iconLoader,
-                [ wrapper.data.icon.split(Defines.CONTOUR_ICON_PATH).join(Config.s_config.iconset.playersPanel), wrapper.data.icon ]);
+                [ wrapper.data.icon.split(Defines.WG_CONTOUR_ICON_PATH).join(Defines.XVMRES_ROOT + Config.s_config.iconset.playersPanel), wrapper.data.icon ]);
             wrapper.data.icon = m_iconset.currentIcon;
 
             // Player/clan icons

@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="MountPoint" Type="System.String" Scope="User">
-      <Value Profile="(Default)">res_mods\.stat</Value>
+      <Value Profile="(Default)">res_mods\xvm\.xvmfs</Value>
     </Setting>
     <Setting Name="Timeout" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">10000</Value>

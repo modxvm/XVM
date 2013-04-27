@@ -25,7 +25,7 @@ namespace wot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("res_mods\\.stat")]
+        [global::System.Configuration.DefaultSettingValueAttribute("res_mods\\xvm\\.xvmfs")]
         public string MountPoint {
             get {
                 return ((string)(this["MountPoint"]));

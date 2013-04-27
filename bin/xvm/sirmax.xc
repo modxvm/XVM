@@ -9,6 +9,7 @@
     "modMinVersion": "3.0.4"
   },
   "hangar": {
+    "hideTutorial": true,
     "pingServers": {
       "enabled": true
     }
@@ -19,7 +20,7 @@
     "removePanelsModeSwitcher": true,
     "highlightVehicleIcon": false,
     "useStandardMarkers": false,
-    "clanIconsFolder": "../../../clanicons"
+    "clanIconsFolder": "clanicons"
   },
   "rating": {
     "showPlayersStatistics": true,
@@ -467,9 +468,9 @@
     ]
   },
   "iconset": {
-    "battleLoading": "../../../icons/HARDicons",
-    "statisticForm": "../../../icons/HARDicons",
-    "playersPanel":  "../../../icons/HARDicons",
-    "vehicleMarker": "../../../icons/Aslain/iconset2"
+    "battleLoading": "HARDicons",
+    "statisticForm": "HARDicons",
+    "playersPanel":  "HARDicons",
+    "vehicleMarker": "Aslain/iconset2"
   }
 }

@@ -149,7 +149,7 @@ class com.xvm.JSONxLoader
                 if (!obj_cache.hasOwnProperty(fn))
                     obj_cache[fn] = JSONx.parse(file_cache[fn]);
                 if (obj_cache[fn] == null)
-                    throw { type: "NO_FILE", message: "file is missing" };
+                    throw { type: "NO_FILE", message: "file is missing: " + fn };
                 var value = getValue(obj_cache[fn], data.$ref.path);
                 if (value == undefined)
                     throw { type: "BAD_REF", message: "bad reference:\n    ${\"" + data.$ref.file + "\":\"" + data.$ref.path + "\"}" };

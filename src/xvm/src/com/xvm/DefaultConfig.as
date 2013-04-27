@@ -25,6 +25,7 @@ class com.xvm.DefaultConfig
                 modMinVersion: Defines.XVM_VERSION
             },
             hangar: {
+                hideTutorial: false,
                 // Show ping to the servers
                 pingServers: {
                   enabled: false,

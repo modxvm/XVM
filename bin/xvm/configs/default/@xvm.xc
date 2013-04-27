@@ -66,7 +66,7 @@
   "rating": ${"rating.xc":"rating"},
 
   // Специальные горячие клавиши XVM
-  "hotkeys": ${"hotkeys.xc":"."},
+  "hotkeys": ${"hotkeys.xc":"hotkeys"},
 
   // Окно взвода
   "squad": ${"squad.xc":"squad"},

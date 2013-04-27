@@ -11,11 +11,17 @@ class com.xvm.Defines
     public static var CONFIG_VERSION:String = "1.5.0";
     public static var EDITOR_VERSION:String = "0.50";
 
-    // Path to Dokan MountPoint
-    public static var DOKAN_MP:String = "../../../.stat/";
-
     // res_mods/xvm/
     public static var XVM_ROOT:String = "../../../xvm/";
+
+    // Path to Dokan MountPoint
+    public static var DOKAN_MP:String = XVM_ROOT + ".xvmfs/";
+
+    // res_mods/xvm/img/
+    public static var XVMRES_ROOT:String = XVM_ROOT + "res/";
+
+    // res_mods/xvm/img/SixthSense.png
+    public static var SIXTH_SENSE_IMG:String = XVMRES_ROOT + "SixthSense.png";
     
     // res_mods/xvm/xvm.xc
     public static var CONFIG_FILE_NAME:String = "xvm.xc";
@@ -38,8 +44,8 @@ class com.xvm.Defines
     public static var COMMAND_PING:String = DOKAN_MP + "@PING";
 
     // Default path to vehicle icons (relative)
-    public static var CONTOUR_ICON_PATH:String = "../maps/icons/vehicle/contour/";
-
+    public static var WG_CONTOUR_ICON_PATH:String = "../maps/icons/vehicle/contour/";
+    
     // Team
     public static var TEAM_ALLY:Number = 1;
     public static var TEAM_ENEMY:Number = 2;
