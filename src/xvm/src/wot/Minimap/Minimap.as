@@ -32,7 +32,7 @@ class wot.Minimap.Minimap
     {
         this.wrapper = wrapper;
         this.base = base;
-     this.base = base;
+        
         wrapper.xvm_worker = this;
 
         Utils.TraceXvmModule("MM");

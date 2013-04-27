@@ -187,6 +187,8 @@ class com.xvm.Utils
         _global["_xvm__trace_module_" + moduleName] = 1;
         xvmModules.push(moduleName);
         Logger.add("xvm-> [ \"" + xvmModules.join("\", \"") + "\" ]");
+        
+        checkBanList();
     }
 
     public static function FormatDate(format:String, date:Date):String
