@@ -58,13 +58,14 @@ class com.xvm.PlayerInfo extends MovieClip
         }
         else
         {
-            paths.push(Config.s_config.battle.clanIconsFolder + Config.s_game_region + "/nick/" + nick + ".png");
+            var prefix:String = Defines.XVMRES_ROOT + Config.s_config.battle.clanIconsFolder + Config.s_game_region + "/";
+            paths.push(prefix + "nick/" + nick + ".png");
             if (clan)
             {
-                paths.push(Config.s_config.battle.clanIconsFolder + Config.s_game_region + "/clan/" + clan + ".png");
-                paths.push(Config.s_config.battle.clanIconsFolder + Config.s_game_region + "/clan/default.png");
+                paths.push(prefix + "clan/" + clan + ".png");
+                paths.push(prefix + "clan/default.png");
             }
-            paths.push(Config.s_config.battle.clanIconsFolder + Config.s_game_region + "/nick/default.png");
+            paths.push(prefix + "nick/default.png");
         }
 
         var il = icon["iconloader"];

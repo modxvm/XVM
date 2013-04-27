@@ -43,7 +43,7 @@ class com.xvm.DefaultConfig
                 // Show the clock on the Debug Panel (near FPS).
                 // Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
                 clockFormat: "H:N",
-                clanIconsFolder: "../../../clanicons", // Folder with clan icons
+                clanIconsFolder: "clanicons", // Folder with clan icons
                 // Visual elements
                 elements: {
                     // x - X position
@@ -835,10 +835,10 @@ class com.xvm.DefaultConfig
               }
             },*/
             iconset: {
-                battleLoading: "../maps/icons/vehicle/contour",
-                statisticForm: "../maps/icons/vehicle/contour",
-                playersPanel:  "../maps/icons/vehicle/contour",
-                vehicleMarker: "../maps/icons/vehicle/contour"
+                battleLoading: "contour",
+                statisticForm: "contour",
+                playersPanel:  "contour",
+                vehicleMarker: "contour"
             },
             consts: consts,
             vehicleNames: VehicleInfo.getVehicleNamesData()
