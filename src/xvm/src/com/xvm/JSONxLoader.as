@@ -153,7 +153,22 @@ class com.xvm.JSONxLoader
                 var value = getValue(obj_cache[fn], data.$ref.path);
                 if (value == undefined)
                     throw { type: "BAD_REF", message: "bad reference:\n    ${\"" + data.$ref.file + "\":\"" + data.$ref.path + "\"}" };
-                data = Deref(value, level + 1, {d:dirName, f:fileName});
+
+                // override referenced values
+                //   "damageText": {
+                //     "$ref": { "path":"def.damageText" },
+                //     "damageMessage": "all {{dmg}}"
+                //    }
+
+                for (var i in data)
+                {
+                    if (i != "$ref")
+                        value[i] = data[i];
+                }
+
+                // deref result
+                data = Deref(value, level + 1, { d:dirName, f:fileName } );
+                //Logger.addObject(data);
             }
             catch (ex)
             {
@@ -163,7 +178,7 @@ class com.xvm.JSONxLoader
 
         return data;
     }
-    
+
     private function getValue(obj:Object, path: String)
     {
         if (obj == null)

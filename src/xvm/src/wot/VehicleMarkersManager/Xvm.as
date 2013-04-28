@@ -282,7 +282,10 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
             var vehicleStateCfg:Object = vehicleState.getCurrentConfig();
             healthBarComponent.updateState(vehicleStateCfg);
             healthBarComponent.showDamage(vehicleStateCfg, newHealth, m_maxHealth, -delta, flag, damageType);
-            damageTextComponent.showDamage(vehicleStateCfg.damageText, newHealth, -delta, flag, damageType);
+            damageTextComponent.showDamage(
+                flag == Defines.FROM_PLAYER ? vehicleStateCfg.damageTextPlayer
+                    : flag == Defines.FROM_SQUAD ? vehicleStateCfg.damageTextSquadman : vehicleStateCfg.damageText,
+                newHealth, -delta, flag, damageType);
         }
 
         XVMUpdateDynamicTextFields();

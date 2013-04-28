@@ -129,7 +129,8 @@ class com.xvm.Config
         }
 
         Config.s_config = Config.MergeConfigs(Config.FixConfig(event.data), Config.s_config);
-        //Logger.addObject(Config.s_config);
+        //Logger.addObject(Config.s_config, "config", 2);
+        //Logger.addObject(Config.s_config.markers.enemy.alive.normal, "", 3);
         GlobalEventDispatcher.dispatchEvent({ type: "set_info" }); // Just show version
     }
 
