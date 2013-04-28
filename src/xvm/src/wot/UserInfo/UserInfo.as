@@ -10,6 +10,8 @@ import com.xvm.StatLoader;
 import com.xvm.VehicleInfo;
 import com.xvm.Utils;
 import com.xvm.Helpers.UserDataLoaderHelper;
+import wot.WGDataTypes.CarouselDataItem;
+import wot.WGDataTypes.UserInfoDataItem;
 
 class wot.UserInfo.UserInfo
 {
@@ -58,11 +60,15 @@ class wot.UserInfo.UserInfo
     var m_statisticsHeaderField:TextField;
     var m_name:String;
     var m_userData:Object;
-    var m_buttonOwn:MovieClip;
+    var m_buttonOwn:gfx.controls.Button;
+    var m_tiFilter:gfx.controls.TextInput;
     var m_button1:MovieClip, m_button2:MovieClip, m_button3:MovieClip, m_button4:MovieClip;
     var m_button5:MovieClip, m_button6:MovieClip, m_button7:MovieClip, m_button8:MovieClip;
     var m_dataLoaded:Boolean;
 
+    private var m_fullDataProvider:Array;
+    private var m_filteredDataProvider:Array;
+    
     public function UserInfoCtor()
     {
         m_name = null;
@@ -79,7 +85,7 @@ class wot.UserInfo.UserInfo
 
         // create sort buttons
         if (m_button1 == null)
-            createButtons();
+            createControls();
 
         loadData();
     }
@@ -220,6 +226,11 @@ class wot.UserInfo.UserInfo
 
         if (Config.s_config.rating.enableUserInfoStatistics != true)
             return;
+
+        // shift achievements
+        wrapper.achievements.offsetContent = 94;
+        wrapper.achievements.startXPos = 94;
+        //wrapper.achievements._width = 912;
 
         if (!m_statisticsField1)
         {
@@ -381,17 +392,19 @@ class wot.UserInfo.UserInfo
         base.setList.apply(base, arguments);
 
         fixList();
+        filterList();
         if (lastSort.type)
             sortList(lastSort.type, lastSort.dir);
         //Logger.addObject(lastSort, "", 2);
         //Logger.addObject(_root, "_root", 2);
+        //Logger.addObject(m_fullDataProvider);
     }
 
     private function fixList()
     {
-        var data = wrapper.list.dataProvider;
+        var data:Array = wrapper.list.dataProvider;
         //Logger.addObject(data, "", 3);
-        for (var i = 0; i < data.length; ++i)
+        for (var i = 1; i < data.length; ++i)
         {
             var vi2 = VehicleInfo.getInfo2(data[i].icon);
             if (!vi2) {
@@ -453,11 +466,43 @@ class wot.UserInfo.UserInfo
         fixRenderers();
     }
 
-    // sorting
-
-    private function createButtons()
+    private function filterList()
     {
-        var hdr = null;
+        //Logger.add("filterList()");
+        m_fullDataProvider = wrapper.list.dataProvider;
+
+        var carouselData:Array = wot.RootComponents.carousel.dataProvider || _global._xvm_carousel_dataProvider;
+        if (!carouselData)
+        {
+            m_filteredDataProvider = null;
+            return;
+        }
+
+        m_filteredDataProvider = [ m_fullDataProvider[0] ];
+        var ulen:Number = m_fullDataProvider.length;
+        var clen:Number = carouselData.length;
+        for (var i:Number = 0; i < ulen; ++i)
+        {
+            var ui:wot.WGDataTypes.UserInfoDataItem = m_fullDataProvider[i];
+
+            for (var j:Number = 0; j < clen; ++j)
+            {
+                var ci:CarouselDataItem = carouselData[j];
+                if (ci.label == ui.name)
+                {
+                    //Logger.add("ci=ui: " + ci.label);
+                    m_filteredDataProvider.push(ui);
+                    break;
+                }
+            }
+        }
+    }
+    
+    // controls
+
+    private function createControls()
+    {
+        var header:MovieClip = null;
         var y = 0;
         for (var i in wrapper)
         {
@@ -467,23 +512,22 @@ class wot.UserInfo.UserInfo
             {
                 if (Utils.startsWith("instance", j))
                 {
-                    hdr = wrapper[i];
+                    header = wrapper[i];
                     y = wrapper[i][j]._y;
                     wrapper[i][j].text = "";
                 }
             }
-            if (hdr != null)
+            if (header != null)
                 break;
         }
 
-        //m_buttonOwn = Utils.createButton(hdr, "bOwn", 10, y + 30, Locale.get("in hangar"), "left");
-        //m_buttonOwn.addEventListener("click", this, "onButtonOwnClick");
-
-        m_button1 = createButton(hdr, "bLvl", 10,  y, Locale.get("Level"), "left", 1);
-        m_button2 = createButton(hdr, "bTyp", 124, y, Locale.get("Type"), "right", 1);
-        m_button3 = createButton(hdr, "bNat", 135, y, Locale.get("Nation"), "left", 2);
-        m_button4 = createButton(hdr, "bNam", 200, y, Locale.get("Name"), "left", 2);
-        m_button5 = createButton(hdr, "bEff", 305, y, "E", "right", 1);
+        var holder:MovieClip = header.createEmptyMovieClip("holder", header.getNextHighestDepth());
+        
+        m_button1 = createButton(holder, "bLvl", 10,  y, Locale.get("Level"), "left", 1);
+        m_button2 = createButton(holder, "bTyp", 124, y, Locale.get("Type"), "right", 1);
+        m_button3 = createButton(holder, "bNat", 135, y, Locale.get("Nation"), "left", 2);
+        m_button4 = createButton(holder, "bNam", 200, y, Locale.get("Name"), "left", 2);
+        m_button5 = createButton(holder, "bEff", 305, y, "E", "right", 1);
         // Option for disable "E" column, because WG is providing incorrect per-vehicle stats
         m_button5._visible = Config.s_config.userInfo.showEColumn == true;
         if (Config.s_config.rating.showPlayersStatistics != true || Config.s_config.rating.enableUserInfoStatistics != true)
@@ -491,9 +535,32 @@ class wot.UserInfo.UserInfo
             m_button5.enabled = false;
             m_button5._alpha = 30;
         }
-        m_button6 = createButton(hdr, "bBat", 365, y, Locale.get("Fights"), "right", 1);
-        m_button7 = createButton(hdr, "bWin", 435, y, Locale.get("Wins"), "right", 1);
-        m_button8 = createButton(hdr, "bMed", 440, y, "M", "left", 1);
+        m_button6 = createButton(holder, "bBat", 365, y, Locale.get("Fights"), "right", 1);
+        m_button7 = createButton(holder, "bWin", 435, y, Locale.get("Wins"), "right", 1);
+        m_button8 = createButton(holder, "bMed", 440, y, "M", "left", 1);
+        
+        
+        // Filter controls
+
+        wrapper.achievements._width -= 40;
+
+        //Logger.addObject(wrapper, "wrapper", 3);
+        m_buttonOwn = gfx.controls.CheckBox(Utils.createCheckBox(holder, "bOwn", 0, -80, Locale.get("In hangar")));
+        m_buttonOwn.addEventListener("click", this, "onButtonOwnClick");
+        m_buttonOwn.tooltipText = Locale.get("Show only tanks in own hangar");
+
+        // TODO: player info dialog is broken when using TextInput? 
+        
+        //var filterLabel: TextField = holder.createTextField("filterLabel", holder.getNextHighestDepth(), 0, -60, 90, 20);
+        //filterLabel.antiAliasType = "advanced";
+        //filterLabel.styleSheet = Utils.createStyleSheet(Utils.createCSSFromConfig("$FieldFont", m_buttonOwn.textField.textColor, "xvm_filterLabel"));
+        //filterLabel.selectable = false;
+        //filterLabel.html = true;
+        //filterLabel.htmlText = "<span class='xvm_filterLabel'>" + Locale.get("Filter") + ":</span>";
+
+        //m_tiFilter = gfx.controls.TextInput(Utils.createTextInput(holder, "tiFilter", 0, -40));
+        //m_tiFilter.width = 90;
+        //m_tiFilter.addEventListener("textChange", this, "onFilterTextChanged");
     }
 
     private function createButton(hdr:MovieClip, name, x, y, txt, align, defaultSort):MovieClip
@@ -515,6 +582,8 @@ class wot.UserInfo.UserInfo
 
         return b;
     }
+
+    // sorting
 
     private function onSortClick(e)
     {
@@ -546,14 +615,6 @@ class wot.UserInfo.UserInfo
 
         wrapper.list.selectedIndex = 0;
     }
-
-    private function onButtonOwnClick(e)
-    {
-        //Logger.addObject(_root, "_root", 2);
-        //Logger.addObject(_root.constraints, "constraints", 3);
-        //Logger.addObject(_root.contentHolder.main, "contentHolder.main", 3);
-        //Logger.addObject(_root.header.tankPanel, "header.tankPanel", 3);
-    }
     
     function sortList(sortType, sortDir)
     {
@@ -579,6 +640,39 @@ class wot.UserInfo.UserInfo
         wrapper.list.dataProvider = data;
     }
 
+    private function onButtonOwnClick(e)
+    {
+        m_tiFilter.text = "";
+
+        if (m_filteredDataProvider == null)
+            return;
+        if (m_buttonOwn.selected)
+            wrapper.list.dataProvider = m_filteredDataProvider;
+        else
+            wrapper.list.dataProvider = m_fullDataProvider;
+        wrapper.list.selectedIndex = 0;
+    }
+
+    private function onFilterTextChanged(e)
+    {
+        var provider:Array = m_buttonOwn.selected ? m_filteredDataProvider : m_fullDataProvider;
+        var data:Array = [ provider[0] ];
+        var len:Number = provider.length;
+        var filter:String = m_tiFilter.text.toLowerCase();
+        for (var i:Number = 1; i < len; ++i)
+        {
+            var item:UserInfoDataItem = provider[i];
+            if (filter == "" || item.name.toLowerCase().indexOf(filter) >= 0)
+                data.push(item);
+        }
+
+        wrapper.list.dataProvider = data;
+        if (lastSort.type)
+            sortList(lastSort.type, lastSort.dir);
+        wrapper.list.selectedIndex = 0;
+    }
+
+    
     private function onButtonStateChangeClick(e)
     {
         var b = e.target;

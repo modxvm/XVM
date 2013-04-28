@@ -334,6 +334,35 @@ class com.xvm.Utils
         return b;
     }
 
+    public static function createCheckBox(mc:MovieClip, name:String, x:Number, y:Number, txt:String, align:String):MovieClip
+    {
+        var b:MovieClip = mc.attachMovie("CheckBox", name, mc.getNextHighestDepth());
+        b._x = x;
+        b._y = y;
+        b.autoSize = true;
+        b.label = txt;
+
+        if (align == "right")
+            b._x -= Math.round(b.textField.textWidth + 21);
+
+        b.addEventListener("rollOver", showTooltip);
+        b.addEventListener("rollOut", hideTooltip);
+
+        return b;
+    }
+
+    public static function createTextInput(mc:MovieClip, name:String, x:Number, y:Number):MovieClip
+    {
+        var b:MovieClip = mc.attachMovie("TextInput", name, mc.getNextHighestDepth());
+        b._x = x;
+        b._y = y;
+
+        b.addEventListener("rollOver", showTooltip);
+        b.addEventListener("rollOut", hideTooltip);
+
+        return b;
+    }
+
     public static function duplicateButton(src:Object, name:String, offsetX:Number, offsetY:Number,
         text:String, iconSource:String, toolTip:String):MovieClip
     {

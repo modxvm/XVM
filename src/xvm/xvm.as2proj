@@ -74,6 +74,7 @@
     <compile path="src\wot\Minimap\model\mapSize" />
     <compile path="src\wot\Minimap\shapes" />
     <compile path="src\wot\Minimap\staticUtils" />
+    <compile path="shared\MovieClip.as" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>

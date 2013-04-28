@@ -2,6 +2,34 @@
  *
  */
 {
+  // блоки подстановок
+  "def": {
+    "damageText": {                     // всплывающий урон
+      "visible": true,                  //   false - не отображать
+      "x": 0,                           //   положение по оси X
+      "y": -67,                         //   положение по оси Y
+      "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
+      "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
+      "font": {                         //   параметры шрифта
+        "name": "$FieldFont",           //     название
+        "size": 18,                     //     размер
+        "align": "center",              //     выравнивание текста (left, center, right)
+        "bold": false,                  //     обычный (false) или жирный (true)
+        "italic": false                 //     обычный (false) или курсив (true)
+      },
+      "shadow": {                       //   параметры тени
+        "alpha": 100,                   //     прозрачность
+        "color": "0x000000",            //     цвет
+        "angle": 45,                    //     угол смещения
+        "distance": 0,                  //     дистанция смещение
+        "size": 6,                      //     размер
+        "strength": 200                 //     интенсивность
+      },
+      "speed": 2,                       //   время отображения отлетающего урона
+      "maxRange": 40,                   //   расстояние, на которое отлетает урон
+      "damageMessage": "{{dmg}}",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
+      "blowupMessage": "Blown-up!"      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+  },
   // Блок маркеров над танками
   "markers": {
     // союзник
@@ -52,57 +80,20 @@
               "fade": 1                       //     время затухания в секундах
             }
           },
-          "damageText": {                     // всплывающий урон
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -67,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "font": {                         //   параметры шрифта
-              "name": "$FieldFont",           //     название
-              "size": 18,                     //     размер
-              "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": false,                  //     обычный (false) или жирный (true)
-              "italic": false                 //     обычный (false) или курсив (true)
-            },
-            "shadow": {                       //   параметры тени
-              "alpha": 100,                   //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 0,                  //     дистанция смещение
-              "size": 6,                      //     размер
-              "strength": 200                 //     интенсивность
-            },
-            "speed": 2,                       //   время отображения отлетающего урона
-            "maxRange": 40,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "{{dmg}}",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "Blown-up!"      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+          "damageText": {
+            "$ref": { "path":"def.damageText" },
+            "damageMessage": "all {{dmg}}"
+            }
           },
-          "damageTextSquadman": {             // всплывающий урон для взводного
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -67,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "font": {                         //   параметры шрифта
-              "name": "$FieldFont",           //     название
-              "size": 18,                     //     размер
-              "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": false,                  //     обычный (false) или жирный (true)
-              "italic": false                 //     обычный (false) или курсив (true)
-            },
-            "shadow": {                       //   параметры тени
-              "alpha": 100,                   //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 0,                  //     дистанция смещение
-              "size": 6,                      //     размер
-              "strength": 200                 //     интенсивность
-            },
-            "speed": 2,                       //   время отображения отлетающего урона
-            "maxRange": 40,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "{{dmg}}",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "Blown-up!"      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+          "damageTextPlayer": {
+            "$ref": { "path":"def.damageText" },
+            "damageMessage": "player {{dmg}}"
+            }
+          },
+          "damageTextSquadman": {
+            "$ref": { "path":"def.damageText" },
+            "damageMessage": "squad {{dmg}}"
+            }
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -230,57 +221,20 @@
               "fade": 1                       //     время затухания в секундах
             }
           },
-          "damageText": {                     // всплывающий урон
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -67,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "font": {                         //   параметры шрифта
-              "name": "$FieldFont",           //     название
-              "size": 18,                     //     размер
-              "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": false,                  //     обычный (false) или жирный (true)
-              "italic": false                 //     обычный (false) или курсив (true)
-            },
-            "shadow": {                       //   параметры тени
-              "alpha": 100,                   //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 0,                  //     дистанция смещение
-              "size": 6,                      //     размер
-              "strength": 200                 //     интенсивность
-            },
-            "speed": 2,                       //   время отображения отлетающего урона
-            "maxRange": 40,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "{{dmg}}",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "Blown-up!"      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+          "damageText": {
+            "$ref": { "path":"def.damageText" },
+            "damageMessage": "all {{dmg}}"
+            }
           },
-          "damageTextSquadman": {             // всплывающий урон для взводного
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -67,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "font": {                         //   параметры шрифта
-              "name": "$FieldFont",           //     название
-              "size": 18,                     //     размер
-              "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": false,                  //     обычный (false) или жирный (true)
-              "italic": false                 //     обычный (false) или курсив (true)
-            },
-            "shadow": {                       //   параметры тени
-              "alpha": 100,                   //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 0,                  //     дистанция смещение
-              "size": 6,                      //     размер
-              "strength": 200                 //     интенсивность
-            },
-            "speed": 2,                       //   время отображения отлетающего урона
-            "maxRange": 40,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "{{dmg}}",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "Blown-up!"      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+          "damageTextPlayer": {
+            "$ref": { "path":"def.damageText" },
+            "damageMessage": "player {{dmg}}"
+            }
+          },
+          "damageTextSquadman": {
+            "$ref": { "path":"def.damageText" },
+            "damageMessage": "squad {{dmg}}"
+            }
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -437,57 +391,20 @@
               "fade": 1                       //     время затухания в секундах
             }
           },
-          "damageText": {                     // всплывающий урон
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -67,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "font": {                         //   параметры шрифта
-              "name": "$FieldFont",           //     название
-              "size": 18,                     //     размер
-              "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": false,                  //     обычный (false) или жирный (true)
-              "italic": false                 //     обычный (false) или курсив (true)
-            },
-            "shadow": {                       //   параметры тени
-              "alpha": 100,                   //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 0,                  //     дистанция смещение
-              "size": 6,                      //     размер
-              "strength": 200                 //     интенсивность
-            },
-            "speed": 2,                       //   время отображения отлетающего урона
-            "maxRange": 40,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "{{dmg}}",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "Blown-up!"      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+          "damageText": {
+            "$ref": { "path":"def.damageText" },
+            "damageMessage": "all {{dmg}}"
+            }
           },
-          "damageTextSquadman": {             // всплывающий урон для взводного
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -67,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "font": {                         //   параметры шрифта
-              "name": "$FieldFont",           //     название
-              "size": 18,                     //     размер
-              "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": false,                  //     обычный (false) или жирный (true)
-              "italic": false                 //     обычный (false) или курсив (true)
-            },
-            "shadow": {                       //   параметры тени
-              "alpha": 100,                   //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 0,                  //     дистанция смещение
-              "size": 6,                      //     размер
-              "strength": 200                 //     интенсивность
-            },
-            "speed": 2,                       //   время отображения отлетающего урона
-            "maxRange": 40,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "{{dmg}}",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "Blown-up!"      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+          "damageTextPlayer": {
+            "$ref": { "path":"def.damageText" },
+            "damageMessage": "player {{dmg}}"
+            }
+          },
+          "damageTextSquadman": {
+            "$ref": { "path":"def.damageText" },
+            "damageMessage": "squad {{dmg}}"
+            }
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -564,57 +481,20 @@
               "fade": 1                       //     время затухания в секундах
             }
           },
-          "damageText": {                     // всплывающий урон
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -67,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "font": {                         //   параметры шрифта
-              "name": "$FieldFont",           //     название
-              "size": 18,                     //     размер
-              "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": false,                  //     обычный (false) или жирный (true)
-              "italic": false                 //     обычный (false) или курсив (true)
-            },
-            "shadow": {                       //   параметры тени
-              "alpha": 100,                   //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 0,                  //     дистанция смещение
-              "size": 6,                      //     размер
-              "strength": 200                 //     интенсивность
-            },
-            "speed": 2,                       //   время отображения отлетающего урона
-            "maxRange": 40,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "{{dmg}}",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "Blown-up!"      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+          "damageText": {
+            "$ref": { "path":"def.damageText" },
+            "damageMessage": "all {{dmg}}"
+            }
           },
-          "damageTextSquadman": {             // всплывающий урон для взводного
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -67,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "font": {                         //   параметры шрифта
-              "name": "$FieldFont",           //     название
-              "size": 18,                     //     размер
-              "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": false,                  //     обычный (false) или жирный (true)
-              "italic": false                 //     обычный (false) или курсив (true)
-            },
-            "shadow": {                       //   параметры тени
-              "alpha": 100,                   //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 0,                  //     дистанция смещение
-              "size": 6,                      //     размер
-              "strength": 200                 //     интенсивность
-            },
-            "speed": 2,                       //   время отображения отлетающего урона
-            "maxRange": 40,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "{{dmg}}",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "Blown-up!"      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+          "damageTextPlayer": {
+            "$ref": { "path":"def.damageText" },
+            "damageMessage": "player {{dmg}}"
+            }
+          },
+          "damageTextSquadman": {
+            "$ref": { "path":"def.damageText" },
+            "damageMessage": "squad {{dmg}}"
+            }
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -748,31 +628,20 @@
               "fade": 1                       //     время затухания в секундах
             }
           },
-          "damageText": {                     // всплывающий урон
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -67,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "font": {                         //   параметры шрифта
-              "name": "$FieldFont",           //     название
-              "size": 18,                     //     размер
-              "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": false,                  //     обычный (false) или жирный (true)
-              "italic": false                 //     обычный (false) или курсив (true)
-            },
-            "shadow": {                       //   параметры тени
-              "alpha": 100,                   //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 0,                  //     дистанция смещение
-              "size": 6,                      //     размер
-              "strength": 200                 //     интенсивность
-            },
-            "speed": 2,                       //   время отображения отлетающего урона
-            "maxRange": 40,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "{{dmg}}",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "Blown-up!"      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+          "damageText": {
+            "$ref": { "path":"def.damageText" },
+            "damageMessage": "all {{dmg}}"
+            }
+          },
+          "damageTextPlayer": {
+            "$ref": { "path":"def.damageText" },
+            "damageMessage": "player {{dmg}}"
+            }
+          },
+          "damageTextSquadman": {
+            "$ref": { "path":"def.damageText" },
+            "damageMessage": "squad {{dmg}}"
+            }
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -900,31 +769,20 @@
               "fade": 1                       //     время затухания в секундах
             }
           },
-          "damageText": {                     // всплывающий урон
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -67,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "font": {                         //   параметры шрифта
-              "name": "$FieldFont",           //     название
-              "size": 18,                     //     размер
-              "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": false,                  //     обычный (false) или жирный (true)
-              "italic": false                 //     обычный (false) или курсив (true)
-            },
-            "shadow": {                       //   параметры тени
-              "alpha": 100,                   //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 0,                  //     дистанция смещение
-              "size": 6,                      //     размер
-              "strength": 200                 //     интенсивность
-            },
-            "speed": 2,                       //   время отображения отлетающего урона
-            "maxRange": 40,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "{{dmg}}",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "Blown-up!"      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+          "damageText": {
+            "$ref": { "path":"def.damageText" },
+            "damageMessage": "all {{dmg}}"
+            }
+          },
+          "damageTextPlayer": {
+            "$ref": { "path":"def.damageText" },
+            "damageMessage": "player {{dmg}}"
+            }
+          },
+          "damageTextSquadman": {
+            "$ref": { "path":"def.damageText" },
+            "damageMessage": "squad {{dmg}}"
+            }
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -1081,31 +939,20 @@
               "fade": 1                       //     время затухания в секундах
             }
           },
-          "damageText": {                     // всплывающий урон
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -67,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "font": {                         //   параметры шрифта
-              "name": "$FieldFont",           //     название
-              "size": 18,                     //     размер
-              "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": false,                  //     обычный (false) или жирный (true)
-              "italic": false                 //     обычный (false) или курсив (true)
-            },
-            "shadow": {                       //   параметры тени
-              "alpha": 100,                   //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 0,                  //     дистанция смещение
-              "size": 6,                      //     размер
-              "strength": 200                 //     интенсивность
-            },
-            "speed": 2,                       //   время отображения отлетающего урона
-            "maxRange": 40,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "{{dmg}}",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "Blown-up!"      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+          "damageText": {
+            "$ref": { "path":"def.damageText" },
+            "damageMessage": "all {{dmg}}"
+            }
+          },
+          "damageTextPlayer": {
+            "$ref": { "path":"def.damageText" },
+            "damageMessage": "player {{dmg}}"
+            }
+          },
+          "damageTextSquadman": {
+            "$ref": { "path":"def.damageText" },
+            "damageMessage": "squad {{dmg}}"
+            }
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -1182,31 +1029,20 @@
               "fade": 1                       //     время затухания в секундах
             }
           },
-          "damageText": {                     // всплывающий урон
-            "visible": true,                  //   false - не отображать
-            "x": 0,                           //   положение по оси X
-            "y": -67,                         //   положение по оси Y
-            "alpha": 100,                     //   прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-            "color": null,                    //   цвет (допускается использование динамического цвета, см. readme-ru.txt)
-            "font": {                         //   параметры шрифта
-              "name": "$FieldFont",           //     название
-              "size": 18,                     //     размер
-              "align": "center",              //     выравнивание текста (left, center, right)
-              "bold": false,                  //     обычный (false) или жирный (true)
-              "italic": false                 //     обычный (false) или курсив (true)
-            },
-            "shadow": {                       //   параметры тени
-              "alpha": 100,                   //     прозрачность
-              "color": "0x000000",            //     цвет
-              "angle": 45,                    //     угол смещения
-              "distance": 0,                  //     дистанция смещение
-              "size": 6,                      //     размер
-              "strength": 200                 //     интенсивность
-            },
-            "speed": 2,                       //   время отображения отлетающего урона
-            "maxRange": 40,                   //   расстояние, на которое отлетает урон
-            "damageMessage": "{{dmg}}",       //   текст при обычном уроне (см. описание макросов в readme-ru.txt)
-            "blowupMessage": "Blown-up!"      //   текст при взрыве боеукладки (см. описание макросов в readme-ru.txt)
+          "damageText": {
+            "$ref": { "path":"def.damageText" },
+            "damageMessage": "all {{dmg}}"
+            }
+          },
+          "damageTextPlayer": {
+            "$ref": { "path":"def.damageText" },
+            "damageMessage": "player {{dmg}}"
+            }
+          },
+          "damageTextSquadman": {
+            "$ref": { "path":"def.damageText" },
+            "damageMessage": "squad {{dmg}}"
+            }
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать

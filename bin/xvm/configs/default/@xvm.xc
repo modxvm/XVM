@@ -59,8 +59,14 @@
   // Блок параметров ангара
   "hangar": ${"hangar.xc":"hangar"},
 
+  // Окно достижений
+  "userInfo": ${"hangar.xc":"userInfo"},
+
   // Блок общих параметров боевого интерфейса
   "battle": ${"battle.xc":"battle"},
+
+  // Панель счёта в бою
+  "fragCorrelation": ${"battle.xc":"fragCorrelation"},
 
   // Блок управлением статистикой (только с xvm-stat)
   "rating": ${"rating.xc":"rating"},

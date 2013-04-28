@@ -3,6 +3,7 @@
  */
 import com.xvm.Config;
 import com.xvm.GlobalEventDispatcher;
+import com.xvm.Logger;
 import com.xvm.Utils;
 import wot.crew.CrewLoader;
 import wot.crew.PingServers;
@@ -48,6 +49,14 @@ class wot.crew.tankmen.Crew
 
         if (Config.s_config.hangar.pingServers.enabled == true)
             PingServers.StartPinging();
+
+        // FIXIT: dyrty hack, find the best place to initialize carousel
+        var timer = _global.setInterval(function() {
+            // save carousel tanks in _global to be available from the Achievements dialog.
+            var carousel:net.wargaming.Carousel = wot.RootComponents.carousel;
+            if (carousel)
+                _global._xvm_carousel_dataProvider = carousel.dataProvider;
+        }, 1000);
     }
 
     // override
