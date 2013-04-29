@@ -6,5 +6,4 @@ class wot.RootComponents
     {
         return _root.contentHolder.main.carousel;
     }
-    
 }

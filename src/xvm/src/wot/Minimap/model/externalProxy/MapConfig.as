@@ -26,7 +26,7 @@ class wot.Minimap.model.externalProxy.MapConfig
             return minimap.zoom.centered;        }
         public static function get zoomPixelsBack():Number    {
             return minimap.zoom.pixelsBack;        }
-
+    
     /** Labels */
         public static function get nickShrink():Number    {
             return labels.nickShrink;    }
