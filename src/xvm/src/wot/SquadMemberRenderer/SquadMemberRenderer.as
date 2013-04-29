@@ -120,7 +120,13 @@ class wot.SquadMemberRenderer.SquadMemberRenderer
 
         var ti = getTankInfo(wrapper.data.vehicleName);
         if (ti != null)
-            m_infoField.htmlText = "<span class='xvm_info'>" + Config.s_config.squad.leftLvlBorder + ti.level + "</span>";
+        {
+            m_infoField.htmlText = "<span class='xvm_info'>" +
+                Utils.fixImgTag(Config.s_config.squad.leftLvlBorder) +
+                ti.level +
+                Utils.fixImgTag(Config.s_config.squad.rightLvlBorder) +
+                "</span>";
+        }
         //Logger.add(m_infoField.htmlText);
     }
 

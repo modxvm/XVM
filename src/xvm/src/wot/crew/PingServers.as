@@ -63,7 +63,7 @@ class wot.crew.PingServers
             str.push(s + ": " + res[i])
         }
         str.sort();
-        _root["__xvm_pingTextField"].htmlText = "<span class='xvm_ping'>" + str.join("\n") + "</span>";
+        _root["__xvm_pingTextField"].htmlText = "<span class='xvm_ping'>" + Utils.fixImgTag(str.join("\n")) + "</span>";
 
         //com.xvm.Logger.add(str.join("\n"));
     }

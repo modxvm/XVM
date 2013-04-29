@@ -1,4 +1,5 @@
 import com.xvm.Config;
+import com.xvm.Utils;
 import wot.PlayersPanel.PlayerListItemRenderer;
 import wot.PlayersPanel.SpotStatusModel;
 
@@ -25,7 +26,7 @@ class wot.PlayersPanel.SpotStatusView
         if (spotStatusMarker == null)
             spotStatusMarker = createMarker(renderer);
 
-        spotStatusMarker.htmlText = getFormat(status, isArty);
+        spotStatusMarker.htmlText = Utils.fixImgTag(getFormat(status, isArty));
 
         /** Define point relative to which marker is set  */
         spotStatusMarker._x = renderer.wrapper.vehicleLevel._x + cfg.Xoffset; // vehicleLevel._x is 8 for example

@@ -19,7 +19,7 @@ class com.xvm.Macros
 
         var len = formatArr.length;
         if (len == 1)
-            return format;
+            return Utils.fixImgTag(format);
 
         var res = formatArr[0];
         var pdata: String = data_provider[Utils.GetNormalizedPlayerName(playerName)];
@@ -41,7 +41,7 @@ class com.xvm.Macros
 
 //Logger.add(playerName + "> " + format);
 //Logger.add(playerName + "> " + res);
-        return res;
+        return Utils.fixImgTag(res);
     }
 
     /**

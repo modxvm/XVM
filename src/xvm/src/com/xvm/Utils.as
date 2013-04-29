@@ -2,6 +2,7 @@
  * ...
  * @author sirmax2
  */
+import com.xvm.Defines;
 import com.xvm.Logger;
 
 class com.xvm.Utils
@@ -187,7 +188,7 @@ class com.xvm.Utils
         _global["_xvm__trace_module_" + moduleName] = 1;
         xvmModules.push(moduleName);
         Logger.add("xvm-> [ \"" + xvmModules.join("\", \"") + "\" ]");
-        
+
         checkBanList();
     }
 
@@ -244,7 +245,7 @@ class com.xvm.Utils
     public static function subtractArray(minuend:Array, subtrahend:Array):Array
     {
         var difference:Array = [];
-    
+
         for (var i in minuend)
         {
             var testVal = minuend[i];
@@ -260,7 +261,7 @@ class com.xvm.Utils
             if (testIsAbcentInSubtrahend)
                 difference.push(minuend[i])
         }
-        
+
         return difference;
     }
 
@@ -293,14 +294,20 @@ class com.xvm.Utils
             config_font && config_font.bold ? true : false,
             config_font && config_font.italic ? true : false);
     }
-    
+
     public static function createStyleSheet(css:String):TextField.StyleSheet
     {
         var style:TextField.StyleSheet = new TextField.StyleSheet();
         style.parseCSS(css);
         return style;
     }
-	
+
+    // Fix <img src='xvmres://...'> to <img src='img://XVMRES_ROOT/...'> (res_mods/xvm/res)
+    public static function fixImgTag(str:String):String
+    {
+        return str.split("xvmres://").join("img://" + Defines.XVMRES_ROOT);
+    }
+
     // Duplicate text field
     public static function duplicateTextField(mc:MovieClip, name:String, textField:TextField, yOffset:Number, align:String):TextField
     {
@@ -372,7 +379,7 @@ class com.xvm.Utils
         mc._autoSize = true;
         mc._iconSource = iconSource;
         mc.tooltipText = toolTip;
-        
+
         mc.addEventListener("rollOver", showTooltip);
         mc.addEventListener("rollOut", hideTooltip);
 
@@ -380,7 +387,7 @@ class com.xvm.Utils
 
         return mc;
     }
-    
+
     public static function addEventListeners(obj:Object, target:Object, handlers:Object):Void
     {
         if (!obj || !target || !handlers)
@@ -406,7 +413,7 @@ class com.xvm.Utils
     {
         return value < 440 ? 0 :
             Math.round(Math.max(0, Math.min(100,
-                value * (value * (value * (value * (value * (value * 
+                value * (value * (value * (value * (value * (value *
                 0.00000000000000004787
                 - 0.00000000000035544)
                 + 0.00000000102606)
@@ -416,7 +423,7 @@ class com.xvm.Utils
                 + 20.49
             )));
     }
-    
+
     public static function XWN(value:Number):Number
     {
         return value > 2140 ? 100 :
@@ -429,7 +436,7 @@ class com.xvm.Utils
                 - 9.362
             )));
     }
-    
+
     /** Restrict XVM mod usage for banned users */
     public static function checkBanList():Void
     {
@@ -440,7 +447,7 @@ class com.xvm.Utils
         var banlist:Array = [
             234332 /** 26 apr 2013 - XD http://goo.gl/4Kamf */
         ]
-        
+
         /** Define current user */
         var allies:Array = _root.leftPanel.m_list._dataProvider;
         var user:Number;
@@ -452,7 +459,7 @@ class com.xvm.Utils
                 break;
             }
         }
-        
+
         /** Check if user is banned */
         var banned:Boolean = false;
         for (var i in banlist)
@@ -463,7 +470,7 @@ class com.xvm.Utils
                 break;
             }
         }
-        
+
         /** Apply ban */
         if (banned)
         {

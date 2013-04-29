@@ -155,7 +155,7 @@ class wot.battle.BattleMain
         clock.filters = [new flash.filters.DropShadowFilter(1, 90, 0, 100, 5, 5, 1.5, 3)];
 
         _global.setInterval(function() {
-            clock.htmlText = "<span class='xvm_clock'>" + Utils.FormatDate(format, new Date()) + "</span>";
+            clock.htmlText = Utils.fixImgTag("<span class='xvm_clock'>" + Utils.FormatDate(format, new Date()) + "</span>");
         }, 1000);
     }
 

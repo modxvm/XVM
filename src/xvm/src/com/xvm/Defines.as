@@ -5,10 +5,10 @@
 class com.xvm.Defines
 {
     // Global versions
-    public static var XVM_VERSION:String = "4.0.0-alpha1";
+    public static var XVM_VERSION:String = "4.0.0-alpha3";
     public static var XVM_INTRO:String = "www.modxvm.com";
     public static var WOT_VERSION:String = "0.8.5";
-    public static var CONFIG_VERSION:String = "1.5.0";
+    public static var CONFIG_VERSION:String = "4.0.0";
     public static var EDITOR_VERSION:String = "0.50";
 
     // res_mods/xvm/

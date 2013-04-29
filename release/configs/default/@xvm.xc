@@ -24,11 +24,11 @@
 {
    // Version of the config. Do not remove or change it unnecessarily.
    // Версия конфига. Не удаляйте и не изменяйте её без необходимости.
-  "configVersion": "1.5.0",
+  "configVersion": "4.0.0",
 
   // Version of the editor.
   // Версия редактора.
-  "editorVersion": "0.41",
+  "editorVersion": "0.50",
 
   // Common config options. All settings information in the mod not being used.
   // Общие параметры конфига. Все параметры информационные, в моде не используются.

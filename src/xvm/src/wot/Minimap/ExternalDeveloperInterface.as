@@ -3,6 +3,8 @@
  *
  * http://www.koreanrandom.com/forum/topic/2601-pythonflash-coders-interface/
  */
+import com.xvm.Utils;
+ 
 class wot.Minimap.ExternalDeveloperInterface
 {
     var customContainer:MovieClip;
@@ -51,7 +53,7 @@ class wot.Minimap.ExternalDeveloperInterface
      * _root.minimap.externalDeveloperInterface.createCustomMarker(-10, 10.5, "bar", null, 50, 60, 30);
      *
      * _root.minimap.externalDeveloperInterface.createCustomMarker
-     * (-40, 30.5, "foo<img src='img://../icons/bzz.png' width='8' height='8'>");
+     * (-40, 30.5, "foo<img src='xvmres://icons/bzz.png' width='8' height='8'>");
      * WoT\res_mods\icons\bzz.png
      *
      * Python example:
@@ -123,7 +125,7 @@ class wot.Minimap.ExternalDeveloperInterface
         style.parseCSS(".custom{" + styleConfig + "}");
         tf.styleSheet = style;
 
-        tf.htmlText = "<span class='custom'>" + format + "</span>";
+        tf.htmlText = "<span class='custom'>" + Utils.fixImgTag(format) + "</span>";
 
         tf._alpha = alpha;
         tf._xscale = tf._yscale = scale;

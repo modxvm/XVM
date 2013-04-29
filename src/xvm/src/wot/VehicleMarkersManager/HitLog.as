@@ -164,7 +164,7 @@ class wot.VehicleMarkersManager.HitLog
         // TODO: Macros optimization - use com.xvm.Macros class
 
         if (format.indexOf("{{") == -1)
-            return format;
+            return Utils.fixImgTag(format);
 
         try
         {
@@ -269,6 +269,6 @@ class wot.VehicleMarkersManager.HitLog
             format = "Error: " + String(e);
         }
 
-        return format;
+        return Utils.fixImgTag(format);
     }
 }

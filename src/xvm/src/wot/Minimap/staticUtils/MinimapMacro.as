@@ -1,3 +1,4 @@
+import com.xvm.Utils;
 import com.xvm.VehicleTypeShort;
 import com.xvm.VehicleInfo;
 import wot.Minimap.model.externalProxy.MapConfig;
@@ -17,7 +18,7 @@ class wot.Minimap.staticUtils.MinimapMacro
     public static function process(format:String, player:Player, vehicleClass:String):String
     {
         if (format.indexOf("{{") == -1)
-            return format;
+            return Utils.fixImgTag(format);
 
         // TODO: StatFormat
 
@@ -106,6 +107,6 @@ class wot.Minimap.staticUtils.MinimapMacro
             }
         }
 
-        return format;
+        return Utils.fixImgTag(format);
     }
 }

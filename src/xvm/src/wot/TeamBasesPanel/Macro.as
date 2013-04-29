@@ -1,5 +1,6 @@
-import wot.TeamBasesPanel.CapConfig;
 import com.xvm.Locale;
+import com.xvm.Utils;
+import wot.TeamBasesPanel.CapConfig;
 
 /**
  * Class prepares html formatted text.
@@ -79,7 +80,7 @@ class wot.TeamBasesPanel.Macro
     private function format(text:String):String
     {
         if (text.indexOf("{{") == -1)
-            return text;
+            return Utils.fixImgTag(text);
 
        /**
         * Extra data is tanks capturing and time left.
@@ -98,7 +99,7 @@ class wot.TeamBasesPanel.Macro
         text = stringReplace("{{speed}}", m_speed, text);
         text = stringReplace("{{points}}", m_points, text);
 
-        return text;
+        return Utils.fixImgTag(text);
     }
 
     private function stringReplace(what:String, to:String, where:String):String

@@ -489,15 +489,33 @@ class com.xvm.Config
         }
 
         if (v == "1.4.0")
-        {
-            // todo: set battle.clanIconsFolder from config.players..root
             v = "1.5.0";
+
+        if (v == "1.5.0")
+        {
+            config.markers.ally.alive.normal.damageTextPlayer = config.markers.ally.alive.normal.damageText;
+            config.markers.ally.alive.normal.damageTextSquadman = config.markers.ally.alive.normal.damageText;
+            config.markers.ally.alive.extended.damageTextPlayer = config.markers.ally.alive.normal.damageText;
+            config.markers.ally.alive.extended.damageTextSquadman = config.markers.ally.alive.normal.damageText;
+            config.markers.ally.dead.normal.damageTextPlayer = config.markers.ally.alive.normal.damageText;
+            config.markers.ally.dead.normal.damageTextSquadman = config.markers.ally.alive.normal.damageText;
+            config.markers.ally.dead.extended.damageTextPlayer = config.markers.ally.alive.normal.damageText;
+            config.markers.ally.dead.extended.damageTextSquadman = config.markers.ally.alive.normal.damageText;
+            config.markers.enemy.alive.normal.damageTextPlayer = config.markers.ally.alive.normal.damageText;
+            config.markers.enemy.alive.normal.damageTextSquadman = config.markers.ally.alive.normal.damageText;
+            config.markers.enemy.alive.extended.damageTextPlayer = config.markers.ally.alive.normal.damageText;
+            config.markers.enemy.alive.extended.damageTextSquadman = config.markers.ally.alive.normal.damageText;
+            config.markers.enemy.dead.normal.damageTextPlayer = config.markers.ally.alive.normal.damageText;
+            config.markers.enemy.dead.normal.damageTextSquadman = config.markers.ally.alive.normal.damageText;
+            config.markers.enemy.dead.extended.damageTextPlayer = config.markers.ally.alive.normal.damageText;
+            config.markers.enemy.dead.extended.damageTextSquadman = config.markers.ally.alive.normal.damageText;
+            v = "4.0.0";
         }
 
 /*
-        if (v == "1.x.x")
+        if (v == "4.x.x")
         {
-            v = "1.y.y";
+            v = "4.y.y";
         }
 */
 
