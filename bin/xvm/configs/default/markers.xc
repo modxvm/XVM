@@ -84,17 +84,14 @@
           "damageText": {
             "$ref": { "path":"def.damageText" },
             "damageMessage": "all {{dmg}}"
-            }
           },
           "damageTextPlayer": {
             "$ref": { "path":"def.damageText" },
             "damageMessage": "player {{dmg}}"
-            }
           },
           "damageTextSquadman": {
             "$ref": { "path":"def.damageText" },
             "damageMessage": "squad {{dmg}}"
-            }
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -225,17 +222,14 @@
           "damageText": {
             "$ref": { "path":"def.damageText" },
             "damageMessage": "all {{dmg}}"
-            }
           },
           "damageTextPlayer": {
             "$ref": { "path":"def.damageText" },
             "damageMessage": "player {{dmg}}"
-            }
           },
           "damageTextSquadman": {
             "$ref": { "path":"def.damageText" },
             "damageMessage": "squad {{dmg}}"
-            }
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -395,17 +389,14 @@
           "damageText": {
             "$ref": { "path":"def.damageText" },
             "damageMessage": "all {{dmg}}"
-            }
           },
           "damageTextPlayer": {
             "$ref": { "path":"def.damageText" },
             "damageMessage": "player {{dmg}}"
-            }
           },
           "damageTextSquadman": {
             "$ref": { "path":"def.damageText" },
             "damageMessage": "squad {{dmg}}"
-            }
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -485,17 +476,14 @@
           "damageText": {
             "$ref": { "path":"def.damageText" },
             "damageMessage": "all {{dmg}}"
-            }
           },
           "damageTextPlayer": {
             "$ref": { "path":"def.damageText" },
             "damageMessage": "player {{dmg}}"
-            }
           },
           "damageTextSquadman": {
             "$ref": { "path":"def.damageText" },
             "damageMessage": "squad {{dmg}}"
-            }
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -632,17 +620,14 @@
           "damageText": {
             "$ref": { "path":"def.damageText" },
             "damageMessage": "all {{dmg}}"
-            }
           },
           "damageTextPlayer": {
             "$ref": { "path":"def.damageText" },
             "damageMessage": "player {{dmg}}"
-            }
           },
           "damageTextSquadman": {
             "$ref": { "path":"def.damageText" },
             "damageMessage": "squad {{dmg}}"
-            }
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -773,17 +758,14 @@
           "damageText": {
             "$ref": { "path":"def.damageText" },
             "damageMessage": "all {{dmg}}"
-            }
           },
           "damageTextPlayer": {
             "$ref": { "path":"def.damageText" },
             "damageMessage": "player {{dmg}}"
-            }
           },
           "damageTextSquadman": {
             "$ref": { "path":"def.damageText" },
             "damageMessage": "squad {{dmg}}"
-            }
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -943,17 +925,14 @@
           "damageText": {
             "$ref": { "path":"def.damageText" },
             "damageMessage": "all {{dmg}}"
-            }
           },
           "damageTextPlayer": {
             "$ref": { "path":"def.damageText" },
             "damageMessage": "player {{dmg}}"
-            }
           },
           "damageTextSquadman": {
             "$ref": { "path":"def.damageText" },
             "damageMessage": "squad {{dmg}}"
-            }
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать
@@ -1033,17 +1012,14 @@
           "damageText": {
             "$ref": { "path":"def.damageText" },
             "damageMessage": "all {{dmg}}"
-            }
           },
           "damageTextPlayer": {
             "$ref": { "path":"def.damageText" },
             "damageMessage": "player {{dmg}}"
-            }
           },
           "damageTextSquadman": {
             "$ref": { "path":"def.damageText" },
             "damageMessage": "squad {{dmg}}"
-            }
           },
           "contourIcon": {                    // иконки танка
             "visible": false,                 //   false - не отображать

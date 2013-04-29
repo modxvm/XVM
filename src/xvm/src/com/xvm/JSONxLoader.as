@@ -64,12 +64,14 @@ class com.xvm.JSONxLoader
         try
         {
             //Logger.addObject(rootObj, "rootObj", 5);
+            //Logger.addObject(rootObj.markers.ally.alive.normal, "marker", 10);
             rootObj = Deref(rootObj);
             if (pendingFiles.length > 0)
                 LoadFiles();
             else
             {
                 //Logger.addObject(rootObj, "config", 10);
+                //Logger.addObject(rootObj.markers.ally.alive.normal, "marker", 10);
                 callback.call(target, { data:rootObj, filename:rootFileName } );
             }
         }
@@ -108,13 +110,17 @@ class com.xvm.JSONxLoader
         if (data.$ref == null)
         {
             for (var i in data)
+            {
                 data[i] = Deref(data[i], level + 1, file);
+                //Logger.addObject(data[i], i, 2);
+            }
             return data;
         }
 
         // reference
 
         //Logger.addObject(data, "Deref[" + level + "]", 2);
+
         var dirName = file.d || "";
         var fileName = file.f || "";
         var fn = dirName + (data.$ref.file || fileName);
@@ -196,6 +202,11 @@ class com.xvm.JSONxLoader
                 return undefined;
             o = o[p[i]];
         }
-        return o;
+        return clone(o);
+    }
+    
+    private function clone(obj:Object):Object
+    {
+        return JSONx.parse(JSONx.stringify(obj, "", true));
     }
 }

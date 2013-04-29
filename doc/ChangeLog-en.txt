@@ -1,6 +1,7 @@
 XVM-4.0.0-alpha2:
   * new option: hangar/hideTutorial
   * filter by tanks in the own hangar in the Achievements window
+  * separate settings for self and squadman damage text
 
 XVM-4.0.0-alpha1:
   * new config format (now config is loading from res_mods/xvm/xvm.xc)
