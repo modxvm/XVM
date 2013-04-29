@@ -83,171 +83,166 @@ class wot.Minimap.model.mapSize.MapSizeBase
             case "Аэродром":
             case "Airfield":
             case "阿拉曼机场":
-                return 100;
+                return sizeBySytemMapName("31_airfield");
 
             case "Уайдпарк":
             case "Widepark":
             case "慕尼黑":
-                return 60;
+                return sizeBySytemMapName("17_munchen");
 
             case "Вестфилд":
             case "Westfield":
             case "韦斯特菲尔德":
-                return 100;
+                return sizeBySytemMapName("23_westfeld");
 
             case "Заполярье":
             case "Arctic Region":
             case "极地冰原":
-                return 100;
+                return sizeBySytemMapName("38_mannerheim_line");
 
             case "Карелия":
             case "Karelia":
             case "卡累利阿":
-                return 100;
+                return sizeBySytemMapName("01_karelia");
 
             case "Комарин":
             case "Komarin":
             case "科马林":
-                return 80;
+                return sizeBySytemMapName("15_komarin");
 
             case "Лайв Окс":
             case "Live Oaks":
             case "里夫奥克斯":
-                return 100;
+                return sizeBySytemMapName("44_north_america");
 
             case "Ласвилль":
             case "Lakeville":
             case "拉斯威利":
-                return 80;
+                return sizeBySytemMapName("07_lakeville");
 
             case "Линия Зигфрида":
             case "Siegfried Line":
             case "齐格菲防线":
-                return 100;
+                return sizeBySytemMapName("14_siegfried_line");
 
             case "Малиновка":
             case "Malinovka":
             case "马利诺夫卡":
-                return 100;
+                return sizeBySytemMapName("02_malinovka");
 
             case "Монастырь":
             case "Abbey":
             case "小镇争夺战":
-                return 100;
+                return sizeBySytemMapName("19_monastery");
 
             case "Мурованка":
             case "Murovanka":
             case "穆勒万卡":
-                return 80;
+                return sizeBySytemMapName("11_murovanka");
 
             case "Перевал":
             case "Mountain Pass":
             case "胜利之门":
-                return 100;
+                return sizeBySytemMapName("37_caucasus");
 
             case "Песчаная река":
             case "Sand River":
             case "荒漠小镇":
-                return 100;
+                return sizeBySytemMapName("28_desert");
 
             case "Порт":
             case "Port":
             case "钢铁丛林":
-                return 83;
+                return sizeBySytemMapName("42_north_america");
 
             case "Провинция":
             case "Province":
             case "坎帕尼亚":
-                return 60;
+                return sizeBySytemMapName("03_campania");
 
             case "Прохоровка":
             case "Prokhorovka":
             case "普罗霍洛夫卡":
-                return 100;
+                return sizeBySytemMapName("05_prohorovka");
 
             case "Редшир":
             case "Redshire":
             case "斯特拉特福":
-                return 100;
+                return sizeBySytemMapName("34_redshire");
 
             case "Рудники":
             case "Mines":
             case "湖边的角逐":
-                return 80;
+                return sizeBySytemMapName("10_hills");
 
             case "Руинберг":
             case "Ruinberg":
             case "鲁别克":
-                return 80;
+                return sizeBySytemMapName("08_ruinberg");
 
             case "Рыбацкая бухта":
             case "Fishermans Bay":
             case "费舍尔湾":
-                return 100;
+                return sizeBySytemMapName("36_fishing_bay");
 
             case "Степи":
             case "Steppes":
             case "荒蛮之地":
-                return 100;
+                return sizeBySytemMapName("35_steppes");
 
             case "Тихий берег":
             case "Serene Coast":
             case "寂静海岸":
-                return 100;
-
-            case "Топь":
-            case "Swamp":
-            case "黑暗沼泽":
-                return 100;
+                return sizeBySytemMapName("47_canada_a");
 
             case "Утёс":
             case "Cliff":
             case "海岸争霸":
-                return 100;
+                return sizeBySytemMapName("18_cliff");
 
             case "Фьорды":
             case "Fjords":
             case "北欧峡湾":
-                return 100;
+                return sizeBySytemMapName("33_fjord");
 
             case "Хайвей":
             case "Highway":
             case "州际公路":
-                return 100;
+                return sizeBySytemMapName("45_north_america");
 
             case "Химмельсдорф":
             case "Himmelsdorf":
             case "锡默尔斯多夫":
-                return 70;
+                return sizeBySytemMapName("04_himmelsdorf");
 
             case "Хребет Дракона":
             case "Dragon Ridge":
             case "香格里拉":
-                return 100;
+                return sizeBySytemMapName("51_asia");
 
             case "Эль-Халлуф":
             case "El Halluf":
             case "埃里-哈罗夫":
-                return 100;
+                return sizeBySytemMapName("29_el_hallouf");
 
             case "Энск":
             case "Ensk":
             case "安斯克":
-                return 60;
+                return sizeBySytemMapName("06_ensk");
 
             case "Эрленберг":
             case "Erlenberg":
             case "埃勒斯堡":
-                return 100;
+                return sizeBySytemMapName("13_erlenberg");
 
             case "Южный берег":
             case "South Coast":
             case "雅尔塔小镇":
-                return 100;
+                return sizeBySytemMapName("39_crimea");
 
             case "Жемчужная река":
             case "Pearl River":
-                return 100;
+                return sizeBySytemMapName("60_asia_miao");
 
             default:
                 return undefined;
