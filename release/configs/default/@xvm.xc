@@ -102,7 +102,28 @@
   "minimap": ${"minimap.xc":"minimap"},
 
   // Блок маркеров над танками
-  "markers": ${"markers.xc":"markers"},
+  "markers": {
+    "ally": {
+      "alive": {
+        "normal": ${"markersAliveNormal.xc":"ally"},
+        "extended": ${"markersAliveExtended.xc":"ally"}
+      },
+      "dead": {
+        "normal": ${"markersDeadNormal.xc":"ally"},
+        "extended": ${"markersDeadExtended.xc":"ally"}
+      }
+    },
+    "enemy": {
+      "alive": {
+        "normal": ${"markersAliveNormal.xc":"enemy"},
+        "extended": ${"markersAliveExtended.xc":"enemy"}
+      },
+      "dead": {
+        "normal": ${"markersDeadNormal.xc":"enemy"},
+        "extended": ${"markersDeadExtended.xc":"enemy"}
+      }
+    }
+  },
 
   // Настройки цветов
   "colors": ${"colors.xc":"colors"},
