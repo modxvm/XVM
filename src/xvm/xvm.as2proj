@@ -70,11 +70,11 @@
     <compile path="src\wot\Minimap\shapes" />
     <compile path="src\wot\Minimap\staticUtils" />
     <compile path="shared\MovieClip.as" />
-    <compile path="src\wot\hangar\FinalStatistic" />
-    <compile path="src\wot\hangar\crew" />
-    <compile path="src\wot\hangar\SquadMemberRenderer" />
-    <compile path="src\wot\hangar\UserInfo" />
-    <compile path="src\wot\hangar\StatisticForm" />
+    <compile path="src\wot\FinalStatistic" />
+    <compile path="src\wot\crew" />
+    <compile path="src\wot\SquadMemberRenderer" />
+    <compile path="src\wot\UserInfo" />
+    <compile path="src\wot\StatisticForm" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>
