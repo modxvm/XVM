@@ -99,28 +99,28 @@
   "captureBar": ${"captureBar.xc":"captureBar"},
 
   // Миникарта
-  "minimap": ${"minimap.xc":"minimap"},
+  "minimap": ${"minimap/minimap.xc":"minimap"},
 
   // Блок маркеров над танками
   "markers": {
     "ally": {
       "alive": {
-        "normal": ${"markersAliveNormal.xc":"ally"},
-        "extended": ${"markersAliveExtended.xc":"ally"}
+        "normal": ${"markers/markersAliveNormal.xc":"ally"},
+        "extended": ${"markers/markersAliveExtended.xc":"ally"}
       },
       "dead": {
-        "normal": ${"markersDeadNormal.xc":"ally"},
-        "extended": ${"markersDeadExtended.xc":"ally"}
+        "normal": ${"markers/markersDeadNormal.xc":"ally"},
+        "extended": ${"markers/markersDeadExtended.xc":"ally"}
       }
     },
     "enemy": {
       "alive": {
-        "normal": ${"markersAliveNormal.xc":"enemy"},
-        "extended": ${"markersAliveExtended.xc":"enemy"}
+        "normal": ${"markers/markersAliveNormal.xc":"enemy"},
+        "extended": ${"markers/markersAliveExtended.xc":"enemy"}
       },
       "dead": {
-        "normal": ${"markersDeadNormal.xc":"enemy"},
-        "extended": ${"markersDeadExtended.xc":"enemy"}
+        "normal": ${"markers/markersDeadNormal.xc":"enemy"},
+        "extended": ${"markers/markersDeadExtended.xc":"enemy"}
       }
     }
   },

@@ -43,15 +43,15 @@
             }
           },
           "damageText": {
-            "$ref": { "file": "defines.xc", "path":"damageText" },
+            "$ref": { "file": "../defines.xc", "path":"damageText" },
             "damageMessage": "all {{dmg}}"
           },
           "damageTextPlayer": {
-            "$ref": { "file": "defines.xc", "path":"damageText" },
+            "$ref": { "file": "../defines.xc", "path":"damageText" },
             "damageMessage": "player {{dmg}}"
           },
           "damageTextSquadman": {
-            "$ref": { "file": "defines.xc", "path":"damageText" },
+            "$ref": { "file": "../defines.xc", "path":"damageText" },
             "damageMessage": "squad {{dmg}}"
           },
           "contourIcon": {                    // иконки танка
@@ -83,58 +83,7 @@
             "alpha": 100                      //   прозрачность
           },
           // Блок текстовых полей
-          "textFields": [
-            // Имя игрока
-            {
-              "name": "Имя игрока",           // название текстового поля, ни на что не влияет
-              "visible": true,                // false - не отображать
-              "x": 0,                         // положение по оси X
-              "y": -34,                       // положение по оси Y
-              "alpha": 80,                    // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-              "color": null,                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
-              "font": {                       // параметры шрифта
-                "name": "$FieldFont",         //   название
-                "size": 13,                   //   размер
-                "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false,                //   обычный (false) или жирный (true)
-                "italic": false               //   обычный (false) или курсив (true)
-              },
-              "shadow": {                     // параметры тени
-                "alpha": 100,                 //   прозрачность
-                "color": "0x000000",          //   цвет
-                "angle": 45,                  //   угол смещения
-                "distance": 0,                //   дистанция смещение
-                "size": 6,                    //   размер
-                "strength": 200               //   интенсивность
-              },
-              "format": "{{nick}}"            // формат текста. См. описание макросов в readme-ru.txt
-            },
-            // Текстовое поле с названием танка
-            {
-              "name": "Название танка",       // название текстового поля, ни на что не влияет
-              "visible": true,                // false - не отображать
-              "x": 0,                         // положение по оси X
-              "y": -20,                       // положение по оси Y
-              "alpha": 80,                    // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-              "color": null,                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
-              "font": {                       // параметры шрифта
-                "name": "$FieldFont",         //   название
-                "size": 13,                   //   размер
-                "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false,                //   обычный (false) или жирный (true)
-                "italic": false               //   обычный (false) или курсив (true)
-              },
-              "shadow": {                     // параметры тени
-                "alpha": 100,                 //   прозрачность
-                "color": "0x000000",          //   цвет
-                "angle": 45,                  //   угол смещения
-                "distance": 0,                //   дистанция смещение
-                "size": 6,                    //   размер
-                "strength": 200               //   интенсивность
-              },
-              "format": "{{vehicle}}"         // формат текста. См. описание макросов в readme-ru.txt
-            }
-          ]
+          "textFields": [  ]                  // Не отображать текст в этом режиме
         },
   "enemy": {
           "vehicleIcon": {                    // иконка типа танка (тт/ст/лт/пт/арта)
@@ -180,15 +129,15 @@
             }
           },
           "damageText": {
-            "$ref": { "file": "defines.xc", "path":"damageText" },
+            "$ref": { "file": "../defines.xc", "path":"damageText" },
             "damageMessage": "all {{dmg}}"
           },
           "damageTextPlayer": {
-            "$ref": { "file": "defines.xc", "path":"damageText" },
+            "$ref": { "file": "../defines.xc", "path":"damageText" },
             "damageMessage": "player {{dmg}}"
           },
           "damageTextSquadman": {
-            "$ref": { "file": "defines.xc", "path":"damageText" },
+            "$ref": { "file": "../defines.xc", "path":"damageText" },
             "damageMessage": "squad {{dmg}}"
           },
           "contourIcon": {                    // иконки танка
@@ -220,57 +169,6 @@
             "alpha": 100                      //   прозрачность
           },
           // Блок текстовых полей
-          "textFields": [
-            // Имя игрока
-            {
-              "name": "Имя игрока",           // название текстового поля, ни на что не влияет
-              "visible": true,                // false - не отображать
-              "x": 0,                         // положение по оси X
-              "y": -34,                       // положение по оси Y
-              "alpha": 80,                    // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-              "color": null,                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
-              "font": {                       // параметры шрифта
-                "name": "$FieldFont",         //   название
-                "size": 13,                   //   размер
-                "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false,                //   обычный (false) или жирный (true)
-                "italic": false               //   обычный (false) или курсив (true)
-              },
-              "shadow": {                     // параметры тени
-                "alpha": 100,                 //   прозрачность
-                "color": "0x000000",          //   цвет
-                "angle": 45,                  //   угол смещения
-                "distance": 0,                //   дистанция смещение
-                "size": 6,                    //   размер
-                "strength": 200               //   интенсивность
-              },
-              "format": "{{nick}}"            // формат текста. См. описание макросов в readme-ru.txt
-            },
-            // Текстовое поле с названием танка
-            {
-              "name": "Название танка",       // название текстового поля, ни на что не влияет
-              "visible": true,                // false - не отображать
-              "x": 0,                         // положение по оси X
-              "y": -20,                       // положение по оси Y
-              "alpha": 80,                    // прозрачность (допускается использование динамической прозрачности, см. readme-ru.txt)
-              "color": null,                  // цвет (допускается использование динамического цвета, см. readme-ru.txt)
-              "font": {                       // параметры шрифта
-                "name": "$FieldFont",         //   название
-                "size": 13,                   //   размер
-                "align": "center",            //   выравнивание текста (left, center, right)
-                "bold": false,                //   обычный (false) или жирный (true)
-                "italic": false               //   обычный (false) или курсив (true)
-              },
-              "shadow": {                     // параметры тени
-                "alpha": 100,                 //   прозрачность
-                "color": "0x000000",          //   цвет
-                "angle": 45,                  //   угол смещения
-                "distance": 0,                //   дистанция смещение
-                "size": 6,                    //   размер
-                "strength": 200               //   интенсивность
-              },
-              "format": "{{vehicle}}"         // формат текста. См. описание макросов в readme-ru.txt
-            }
-          ]
+          "textFields": [  ]                  // Не отображать текст в этом режиме
         }
 }

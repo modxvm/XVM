@@ -46,15 +46,15 @@
             }
           },
           "damageText": {
-            "$ref": { "file": "defines.xc", "path":"damageText" },
+            "$ref": { "file": "../defines.xc", "path":"damageText" },
             "damageMessage": "all {{dmg}}"
           },
           "damageTextPlayer": {
-            "$ref": { "file": "defines.xc", "path":"damageText" },
+            "$ref": { "file": "../defines.xc", "path":"damageText" },
             "damageMessage": "player {{dmg}}"
           },
           "damageTextSquadman": {
-            "$ref": { "file": "defines.xc", "path":"damageText" },
+            "$ref": { "file": "../defines.xc", "path":"damageText" },
             "damageMessage": "squad {{dmg}}"
           },
           "contourIcon": {                    // иконки танка
@@ -87,9 +87,9 @@
           },
           // Блок текстовых полей
           "textFields": [
-            // Текстовое поле с названием танка
+            // Текстовое поле с именем игрока
             {
-              "name": "Название танка",       // название текстового поля, ни на что не влияет
+              "name": "Имя игрока",           // название текстового поля, ни на что не влияет
               "visible": true,                // false - не отображать
               "x": 0,                         // положение по оси X
               "y": -36,                       // положение по оси Y
@@ -110,11 +110,11 @@
                 "size": 6,                    //   размер
                 "strength": 200               //   интенсивность
               },
-              "format": "{{vehicle}}{{turret}}" // формат текста. См. описание макросов в readme-ru.txt
+              "format": "{{nick}}"            // формат текста. См. описание макросов в readme-ru.txt
             },
-            // Текстовое поле с оставшимся / максимальным здоровьем
+            // Текстовое поле с процентом оставшегося здоровьем
             {
-              "name": "Здоровье",             // название текстового поля, ни на что не влияет
+              "name": "Процент здоровья",     // название текстового поля, ни на что не влияет
               "visible": true,                // false - не отображать
               "x": 0,                         // положение по оси X
               "y": -20,                       // положение по оси Y
@@ -135,7 +135,33 @@
                 "size": 4,                    //   размер
                 "strength": 100               //   интенсивность
               },
-              "format": "{{hp}} / {{hp-max}}" // формат текста. См. описание макросов в readme-ru.txt
+              // символ процента - \u0025
+              "format": "{{hp-ratio}}\u0025"  // формат текста. См. описание макросов в readme-ru.txt
+            },
+            // Текстовое поле с рейтингом
+            {
+              "name": "Процент побед",
+              "visible": true,
+              "x": 0,
+              "y": -46,
+              "alpha": 100,
+              "color": "{{c:rating}}",
+              "font": {
+                "name": "$FieldFont",
+                "size": 11,
+                "align": "center",
+                "bold": true,
+                "italic": false
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "0x000000",
+                "angle": 45,
+                "distance": 0,
+                "size": 6,
+                "strength": 200
+              },
+              "format": "{{rating}}"
             }
           ]
         },
@@ -183,15 +209,15 @@
             }
           },
           "damageText": {
-            "$ref": { "file": "defines.xc", "path":"damageText" },
+            "$ref": { "file": "../defines.xc", "path":"damageText" },
             "damageMessage": "all {{dmg}}"
           },
           "damageTextPlayer": {
-            "$ref": { "file": "defines.xc", "path":"damageText" },
+            "$ref": { "file": "../defines.xc", "path":"damageText" },
             "damageMessage": "player {{dmg}}"
           },
           "damageTextSquadman": {
-            "$ref": { "file": "defines.xc", "path":"damageText" },
+            "$ref": { "file": "../defines.xc", "path":"damageText" },
             "damageMessage": "squad {{dmg}}"
           },
           "contourIcon": {                    // иконки танка
@@ -224,9 +250,9 @@
           },
           // Блок текстовых полей
           "textFields": [
-            // Текстовое поле с названием танка
+            // Текстовое поле с именем игрока
             {
-              "name": "Название танка",       // название текстового поля, ни на что не влияет
+              "name": "Имя игрока",           // название текстового поля, ни на что не влияет
               "visible": true,                // false - не отображать
               "x": 0,                         // положение по оси X
               "y": -36,                       // положение по оси Y
@@ -247,11 +273,11 @@
                 "size": 6,                    //   размер
                 "strength": 200               //   интенсивность
               },
-              "format": "{{vehicle}}{{turret}}" // формат текста. См. описание макросов в readme-ru.txt
+              "format": "{{nick}}"            // формат текста. См. описание макросов в readme-ru.txt
             },
-            // Текстовое поле с оставшимся / максимальным здоровьем
+            // Текстовое поле с процентом оставшегося здоровьем
             {
-              "name": "Здоровье",             // название текстового поля, ни на что не влияет
+              "name": "Процент здоровья",     // название текстового поля, ни на что не влияет
               "visible": true,                // false - не отображать
               "x": 0,                         // положение по оси X
               "y": -20,                       // положение по оси Y
@@ -272,7 +298,33 @@
                 "size": 4,                    //   размер
                 "strength": 100               //   интенсивность
               },
-              "format": "{{hp}} / {{hp-max}}" // формат текста. См. описание макросов в readme-ru.txt
+              // символ процента - \u0025
+              "format": "{{hp-ratio}}\u0025"  // формат текста. См. описание макросов в readme-ru.txt
+            },
+            // Текстовое поле с рейтингом
+            {
+              "name": "Процент побед",
+              "visible": true,
+              "x": 0,
+              "y": -46,
+              "alpha": 100,
+              "color": "{{c:rating}}",
+              "font": {
+                "name": "$FieldFont",
+                "size": 11,
+                "align": "center",
+                "bold": true,
+                "italic": false
+              },
+              "shadow": {
+                "alpha": 100,
+                "color": "0x000000",
+                "angle": 45,
+                "distance": 0,
+                "size": 6,
+                "strength": 200
+              },
+              "format": "{{rating}}"
             }
           ]
         }
