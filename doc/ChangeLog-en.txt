@@ -1,3 +1,5 @@
+  * minimap: fix issues at Fisherman's bay map for EN\US locale users without xvm-stat.exe
+
 XVM-4.0.0-alpha2:
   * new option: hangar/hideTutorial
   * filter by tanks in the own hangar in the Achievements window
