@@ -49,20 +49,15 @@
     <compile path="src\com\produxion" />
     <compile path="src\com\xvm" />
     <compile path="src\com\xvm\Helpers" />
-    <compile path="src\wot\crew" />
-    <compile path="src\wot\UserInfo" />
     <compile path="src\wot\crew\tankmen" />
-    <compile path="src\wot\SquadMemberRenderer" />
     <compile path="shared\Mouse.as" />
     <compile path="src\wot\TeamRenderer" />
     <compile path="src\wot\TeamMemberRenderer" />
     <compile path="src\wot\battleloading" />
     <compile path="src\wot\PlayersPanel" />
-    <compile path="src\wot\StatisticForm" />
     <compile path="src\wot\TeamBasesPanel" />
     <compile path="src\wot\battle" />
     <compile path="src\wot\Minimap" />
-    <compile path="src\wot\FinalStatistic" />
     <compile path="src\wot\VehicleMarkersManager" />
     <compile path="src\wot\VehicleMarkersManager\components" />
     <compile path="src\wot\VehicleMarkersManager\components\damage" />
@@ -75,6 +70,11 @@
     <compile path="src\wot\Minimap\shapes" />
     <compile path="src\wot\Minimap\staticUtils" />
     <compile path="shared\MovieClip.as" />
+    <compile path="src\wot\hangar\FinalStatistic" />
+    <compile path="src\wot\hangar\crew" />
+    <compile path="src\wot\hangar\SquadMemberRenderer" />
+    <compile path="src\wot\hangar\UserInfo" />
+    <compile path="src\wot\hangar\StatisticForm" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>

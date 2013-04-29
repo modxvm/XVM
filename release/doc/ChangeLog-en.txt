@@ -1,3 +1,4 @@
+  * minimap: deustch locale support without xvm-stat.exe
   * minimap: fix issues at Fisherman's bay map for EN\US locale users without xvm-stat.exe
 
 XVM-4.0.0-alpha2:
