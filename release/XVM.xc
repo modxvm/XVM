@@ -4,4 +4,4 @@
  * . - root object
  */
 ${"configs/default/@xvm.xc":"."}
-//${"sirmax.xc":"."}
+//${"configs/sirmax.xc":"."}
