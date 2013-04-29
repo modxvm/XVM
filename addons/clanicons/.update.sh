@@ -6,8 +6,8 @@
 main()
 {
   i=$startclan
-  mkdir -p all/res_mods/clanicons/$dir/clan
-  mkdir -p all/res_mods/clanicons/$dir/nick
+  mkdir -p clanicons/$dir/clan
+  mkdir -p clanicons/$dir/nick
   while [ $i -le $lastclan ]; do
     update $i
     i=$((i+1))
@@ -34,7 +34,7 @@ update()
   fi
 
   echo -n "[$clan] => $clan.png"
-  wget -qc http://$host/dcont/clans/emblems/$1/emblem_64x64.png -O all/res_mods/clanicons/$dir/clan/$clan.png 2>/dev/null
+  wget -qc http://$host/dcont/clans/emblems/$1/emblem_64x64.png -O clanicons/$dir/clan/$clan.png 2>/dev/null
 
   echo " OK"
 }
