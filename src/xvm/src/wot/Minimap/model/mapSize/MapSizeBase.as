@@ -181,7 +181,7 @@ class wot.Minimap.model.mapSize.MapSizeBase
                 return sizeBySytemMapName("08_ruinberg");
 
             case "Рыбацкая бухта":
-            case "Fishermans Bay":
+            case "Fisherman's Bay":
             case "费舍尔湾":
                 return sizeBySytemMapName("36_fishing_bay");
 

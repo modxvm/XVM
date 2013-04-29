@@ -107,7 +107,6 @@ class wot.Minimap.model.externalProxy.PlayersPanelProxy
 
     private static function get _allyPlayers():Array
     {
-        //Logger.addObject(leftPanel.m_list._dataProvider, "mm.ppp._root.leftPanel.m_list._dataProvider = ", 3);
         return leftPanel.m_list._dataProvider;
     }
 
