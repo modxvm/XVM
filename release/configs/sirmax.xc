@@ -1,5 +1,8 @@
 {
   "configVersion": "1.5.0",
+  "def": {
+    "format":  "<font face='Consolas' size='11'>{{avglvl}} <font face='Symbol' color='#111111'><b><font color='{{c:tdv}}'>·</font><font color='{{c:tfb}}'>·</font><font color='{{c:tsb}}'>·</font></b></font> <font color='{{c:e}}'>{{e}}</font>|<font color='{{c:xeff}}'>{{xeff}}</font>|<font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:twr}}'>{{twr}}</font></font>"
+  },
   "definition": {
     "author": "sirmax2",
     "description": "Sirmax's settings for XVM",
@@ -44,20 +47,21 @@
   "hotkeys": {
     "minimapZoom": { "enabled": false, "onHold": true, "keyCode": 17 }
   },
+
   "battleLoading": {
     "showChances": true,
     "showChancesExp": true,
     "removeSquadIcon": false,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft":  "<font face='Consolas' size='11'>{{avglvl}} <font face='Symbol' color='#111111'><b><font color='{{c:tdv}}'>·</font><font color='{{c:tfb}}'>·</font><font color='{{c:tsb}}'>·</font></b></font> <font color='{{c:e}}'>{{e}}</font>|<font color='{{c:xeff}}'>{{xeff}}</font>|<font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:twr}}'>{{twr}}</font></font>",
-    "formatRight": "<font face='Consolas' size='11'>{{avglvl}} <font face='Symbol' color='#111111'><b><font color='{{c:tdv}}'>·</font><font color='{{c:tfb}}'>·</font><font color='{{c:tsb}}'>·</font></b></font> <font color='{{c:e}}'>{{e}}</font>|<font color='{{c:xeff}}'>{{xeff}}</font>|<font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:twr}}'>{{twr}}</font></font>"
+    "formatLeft":  ${"def.format"},
+    "formatRight": ${"def.format"}
   },
   "statisticForm": {
     "showChances": true,
     "showChancesExp": true,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
-    "formatLeft":  "<font face='Consolas' size='11'>{{avglvl}} <font face='Symbol' color='#111111'><b><font color='{{c:tdv}}'>·</font><font color='{{c:tfb}}'>·</font><font color='{{c:tsb}}'>·</font></b></font> <font color='{{c:e}}'>{{e}}</font>|<font color='{{c:xeff}}'>{{xeff}}</font>|<font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:twr}}'>{{twr}}</font></font>",
-    "formatRight": "<font face='Consolas' size='11'>{{avglvl}} <font face='Symbol' color='#111111'><b><font color='{{c:tdv}}'>·</font><font color='{{c:tfb}}'>·</font><font color='{{c:tsb}}'>·</font></b></font> <font color='{{c:e}}'>{{e}}</font>|<font color='{{c:xeff}}'>{{xeff}}</font>|<font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:twr}}'>{{twr}}</font></font>"
+    "formatLeft":  ${"def.format"},
+    "formatRight": ${"def.format"}
   },
   "playersPanel": {
     "alpha": 50,
@@ -468,9 +472,9 @@
     ]
   },
   "iconset": {
-    "battleLoading": "HARDicons",
-    "statisticForm": "HARDicons",
-    "playersPanel":  "HARDicons",
-    "vehicleMarker": "Aslain/iconset2"
+    "battleLoading": "contour/HARDicons",
+    "statisticForm": "contour/HARDicons",
+    "playersPanel":  "contour/HARDicons",
+    "vehicleMarker": "contour/Aslain/iconset2"
   }
 }

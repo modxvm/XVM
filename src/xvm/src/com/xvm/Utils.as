@@ -305,7 +305,7 @@ class com.xvm.Utils
     // Fix <img src='xvmres://...'> to <img src='img://XVMRES_ROOT/...'> (res_mods/xvm/res)
     public static function fixImgTag(str:String):String
     {
-        return str.split("xvmres://").join("img://" + Defines.XVMRES_ROOT);
+        return str.split("xvmres://").join("img://" + Defines.XVMRES_IMG_ROOT);
     }
 
     // Duplicate text field

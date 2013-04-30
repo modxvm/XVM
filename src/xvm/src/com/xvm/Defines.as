@@ -20,6 +20,9 @@ class com.xvm.Defines
     // res_mods/xvm/img/
     public static var XVMRES_ROOT:String = XVM_ROOT + "res/";
 
+    // res_mods/xvm/img/ (for <img> tag)
+    public static var XVMRES_IMG_ROOT:String = "../xvm/res/";
+
     // res_mods/xvm/img/SixthSense.png
     public static var SIXTH_SENSE_IMG:String = XVMRES_ROOT + "SixthSense.png";
     
