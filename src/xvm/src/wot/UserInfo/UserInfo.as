@@ -572,7 +572,7 @@ class wot.UserInfo.UserInfo
             wrapper.nameField._x + 320, wrapper.nameField._y + 8, Locale.get("In hangar")));
         m_buttonOwn.addEventListener("click", this, "onButtonOwnClick");
         m_buttonOwn.tooltipText = Locale.get("Show only tanks in own hangar");
-        m_buttonOwn.selected = Config.s_config.userInfo.inHangarFilterEnabled == true;
+        m_buttonOwn.selected = IsSelfUserInfo() && Config.s_config.userInfo.inHangarFilterEnabled == true;
         
         // TODO: player info dialog is broken when using TextInput? 
         
@@ -585,7 +585,7 @@ class wot.UserInfo.UserInfo
         filterLabel.htmlText = "<span class='xvm_filterLabel'>" + Locale.get("Filter") + ":</span>";
 
         // userInfoWindow don't load data when create TextInput on it, use workaround.
-        if (!wrapper._parent.addToIgnoredButton)
+        if (IsSelfUserInfo())
         {
             m_tiFilter = gfx.controls.TextInput(Utils.createTextInput(wrapper, "__xvm_tiFilter",
                 wrapper.nameField._x + 450, wrapper.nameField._y + 5, 70));
@@ -597,6 +597,11 @@ class wot.UserInfo.UserInfo
         m_tiFilter.addEventListener("textChange", this, "applyFilterAndSort");
     }
 
+    private function IsSelfUserInfo()
+    {
+        return !wrapper._parent.addToIgnoredButton;
+    }
+    
     private function createButton(hdr:MovieClip, name, x, y, txt, align, defaultSort):MovieClip
     {
         var b = Utils.createButton(hdr, name, x, y, txt, align);
