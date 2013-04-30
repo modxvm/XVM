@@ -358,16 +358,13 @@ class com.xvm.Utils
         return b;
     }
 
-    public static function createTextInput(mc:MovieClip, name:String, x:Number, y:Number):MovieClip
+    public static function createTextInput(mc:MovieClip, name:String, x:Number, y:Number, width:Number):gfx.controls.TextInput
     {
-        var b:MovieClip = mc.attachMovie("TextInput", name, mc.getNextHighestDepth());
-        b._x = x;
-        b._y = y;
-
-        b.addEventListener("rollOver", showTooltip);
-        b.addEventListener("rollOut", hideTooltip);
-
-        return b;
+        var c:gfx.controls.TextInput = gfx.controls.TextInput(mc.attachMovie("TextInput", name, mc.getNextHighestDepth()));
+        c._x = x;
+        c._y = y;
+        c._width = width;
+        return c;
     }
 
     public static function duplicateButton(src:Object, name:String, offsetX:Number, offsetY:Number,

@@ -4,6 +4,8 @@ XVM-4.0.0-alpha3:
   * minimap: fix issues at Fisherman's bay map for EN\US locale users without xvm-stat.exe
   * special scheme name for <img> tag: xvmres:// - path relative to res_mods/xvm/res folder 
       for example: <img src='xvmres://icons/foo.png'>
+  * filter by tank name in the Achievements window
+  * new option: userInfo/inHangarFilterEnabled - enable "In hangar" check box by default
 
 XVM-4.0.0-alpha2:
   * new option: hangar/hideTutorial

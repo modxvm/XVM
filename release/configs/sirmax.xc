@@ -17,6 +17,16 @@
       "enabled": true
     }
   },
+  "userInfo": {
+     "inHangarFilterEnabled": true,
+     "showEColumn": true
+  },
+  "squad": {
+    "enabled": true,
+    "romanNumbers": true,
+    "showClan": true,
+    "leftLvlBorder": ""
+  },
   "battle": {
     "mirroredVehicleIcons": false,
     "showPostmortemTips": false,
@@ -31,15 +41,6 @@
     "enableStatisticsLog": true,
     "enableUserInfoStatistics": true,
     "enableCompanyStatistics": true
-  },
-  "squad": {
-    "enabled": true,
-    "romanNumbers": true,
-    "showClan": true,
-    "leftLvlBorder": ""
-  },
-  "userInfo": {
-     "showEColumn": true
   },
   "fragCorrelation": {
     "hideTeamTextFields": true

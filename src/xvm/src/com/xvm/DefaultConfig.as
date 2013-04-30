@@ -102,6 +102,7 @@ class com.xvm.DefaultConfig
                 rightLvlBorder: ""		// Grille 4]
             },
             userInfo: {
+                inHangarFilterEnabled: false,   // Enable [x] In hangar check box by default
                 showEColumn: false              // Show column for per-vehicle efficiency
             },
             fragCorrelation: {

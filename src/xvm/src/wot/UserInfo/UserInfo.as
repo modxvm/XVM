@@ -227,11 +227,6 @@ class wot.UserInfo.UserInfo
         if (Config.s_config.rating.enableUserInfoStatistics != true)
             return;
 
-        // shift achievements
-        wrapper.achievements.offsetContent = 94;
-        wrapper.achievements.startXPos = 94;
-        //wrapper.achievements._width = 912;
-
         if (!m_statisticsField1)
         {
             m_statisticsField1 = Utils.duplicateTextField(wrapper.blocksArea.blockcommon.itemsurvivedBattles, "statisticsField",
@@ -393,8 +388,7 @@ class wot.UserInfo.UserInfo
 
         fixList();
         filterList();
-        if (lastSort.type)
-            sortList(lastSort.type, lastSort.dir);
+        applyFilterAndSort();
         //Logger.addObject(lastSort, "", 2);
         //Logger.addObject(_root, "_root", 2);
         //Logger.addObject(m_fullDataProvider);
@@ -498,6 +492,37 @@ class wot.UserInfo.UserInfo
         }
     }
     
+    private function applyFilterAndSort()
+    {
+        if (m_filteredDataProvider == null)
+            return;
+
+        if (m_buttonOwn != null)
+        {
+            var data:Array = m_buttonOwn.selected ? m_filteredDataProvider : m_fullDataProvider;
+            if (m_tiFilter.text != null && m_tiFilter.text != "")
+            {
+                var provider:Array = data;
+                data = [ provider[0] ];
+                var len:Number = provider.length;
+                var filter:String = m_tiFilter.text.toLowerCase();
+                for (var i:Number = 1; i < len; ++i)
+                {
+                    var item:UserInfoDataItem = provider[i];
+                    if (filter == "" || item.name.toLowerCase().indexOf(filter) >= 0)
+                        data.push(item);
+                }
+            }
+
+            wrapper.list.dataProvider = data;
+        }
+
+        if (lastSort.type)
+            sortList(lastSort.type, lastSort.dir);
+        
+        wrapper.list.selectedIndex = 0;
+    }
+
     // controls
 
     private function createControls()
@@ -542,25 +567,34 @@ class wot.UserInfo.UserInfo
         
         // Filter controls
 
-        wrapper.achievements._width -= 40;
-
         //Logger.addObject(wrapper, "wrapper", 3);
-        m_buttonOwn = gfx.controls.CheckBox(Utils.createCheckBox(holder, "bOwn", 0, -80, Locale.get("In hangar")));
+        m_buttonOwn = gfx.controls.CheckBox(Utils.createCheckBox(wrapper, "bOwn",
+            wrapper.nameField._x + 320, wrapper.nameField._y + 8, Locale.get("In hangar")));
         m_buttonOwn.addEventListener("click", this, "onButtonOwnClick");
         m_buttonOwn.tooltipText = Locale.get("Show only tanks in own hangar");
-
+        m_buttonOwn.selected = Config.s_config.userInfo.inHangarFilterEnabled == true;
+        
         // TODO: player info dialog is broken when using TextInput? 
         
-        //var filterLabel: TextField = holder.createTextField("filterLabel", holder.getNextHighestDepth(), 0, -60, 90, 20);
-        //filterLabel.antiAliasType = "advanced";
-        //filterLabel.styleSheet = Utils.createStyleSheet(Utils.createCSSFromConfig("$FieldFont", m_buttonOwn.textField.textColor, "xvm_filterLabel"));
-        //filterLabel.selectable = false;
-        //filterLabel.html = true;
-        //filterLabel.htmlText = "<span class='xvm_filterLabel'>" + Locale.get("Filter") + ":</span>";
+        var filterLabel:TextField = wrapper.createTextField("filterLabel", wrapper.getNextHighestDepth(),
+            wrapper.nameField._x + 400, wrapper.nameField._y + 7, 50, 20);
+        filterLabel.antiAliasType = "advanced";
+        filterLabel.styleSheet = Utils.createStyleSheet(Utils.createCSSFromConfig("$FieldFont", m_buttonOwn.textField.textColor, "xvm_filterLabel"));
+        filterLabel.selectable = false;
+        filterLabel.html = true;
+        filterLabel.htmlText = "<span class='xvm_filterLabel'>" + Locale.get("Filter") + ":</span>";
 
-        //m_tiFilter = gfx.controls.TextInput(Utils.createTextInput(holder, "tiFilter", 0, -40));
-        //m_tiFilter.width = 90;
-        //m_tiFilter.addEventListener("textChange", this, "onFilterTextChanged");
+        // userInfoWindow don't load data when create TextInput on it, use workaround.
+        if (!wrapper._parent.addToIgnoredButton)
+        {
+            m_tiFilter = gfx.controls.TextInput(Utils.createTextInput(wrapper, "__xvm_tiFilter",
+                wrapper.nameField._x + 450, wrapper.nameField._y + 5, 70));
+        }
+        else
+        {
+            m_tiFilter = gfx.controls.TextInput(Utils.createTextInput(wrapper._parent._parent, "_xvm_tiFilter", 536, 5, 70));
+        }
+        m_tiFilter.addEventListener("textChange", this, "applyFilterAndSort");
     }
 
     private function createButton(hdr:MovieClip, name, x, y, txt, align, defaultSort):MovieClip
@@ -640,39 +674,14 @@ class wot.UserInfo.UserInfo
         wrapper.list.dataProvider = data;
     }
 
+    // filtering
+    
     private function onButtonOwnClick(e)
     {
         m_tiFilter.text = "";
-
-        if (m_filteredDataProvider == null)
-            return;
-        if (m_buttonOwn.selected)
-            wrapper.list.dataProvider = m_filteredDataProvider;
-        else
-            wrapper.list.dataProvider = m_fullDataProvider;
-        wrapper.list.selectedIndex = 0;
+        applyFilterAndSort();
     }
 
-    private function onFilterTextChanged(e)
-    {
-        var provider:Array = m_buttonOwn.selected ? m_filteredDataProvider : m_fullDataProvider;
-        var data:Array = [ provider[0] ];
-        var len:Number = provider.length;
-        var filter:String = m_tiFilter.text.toLowerCase();
-        for (var i:Number = 1; i < len; ++i)
-        {
-            var item:UserInfoDataItem = provider[i];
-            if (filter == "" || item.name.toLowerCase().indexOf(filter) >= 0)
-                data.push(item);
-        }
-
-        wrapper.list.dataProvider = data;
-        if (lastSort.type)
-            sortList(lastSort.type, lastSort.dir);
-        wrapper.list.selectedIndex = 0;
-    }
-
-    
     private function onButtonStateChangeClick(e)
     {
         var b = e.target;
