@@ -15,7 +15,7 @@
   },
   // Окно достижений
   "userInfo": {
-     "inHangarFilterEnabled": false // Enable [x] In hangar check box by default
+     "inHangarFilterEnabled": false, // Enable [x] In hangar check box by default
      "showEColumn": false // Показывать колонку эффективности по танку (значения могут быть неверными из-за особенностей предоставления статистики серверами WG)
   }
 }
