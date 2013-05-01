@@ -1,14 +1,15 @@
 ﻿/**
- *
+ * Minimap labels.
+ * Надписи на миникарте.
  */
 {
   "labels": {                     // Текстовые поля. Поддерживают HTML.
       "nickShrink": 5,              // Максимальный размер ника для макроса {{short-nick}}.
       "vehicleclassmacro": {        // Подстановки макроса {{vehicle-class}}
-        "light": "", // ЛT ¦
+        "light": "", // ЛT
         "medium": "",// СТ
         "heavy": "", // ТТ
-        "td": "",    // ПТ Ў
+        "td": "",    // ПТ
         "spg": "¦",  // Арта
         "superh": "" // ТТ10 посредством gui_settings.xml
         // Сайт со спец символами:

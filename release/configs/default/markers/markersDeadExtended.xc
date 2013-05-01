@@ -1,5 +1,6 @@
 ﻿/**
- *
+ * Options for dead with Alt markers.
+ * Настройки маркеров для трупов с Alt.
  */
 {
   "damageText": {                     // всплывающий урон

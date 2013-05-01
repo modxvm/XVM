@@ -1,8 +1,8 @@
 ﻿/**
- * 
+ * Parameters for squad window.
+ * Параметры окна взвода.
  */
 {
-  // Окно взвода
   "squad": {
     "enabled": true,      // false - выключить отображение информации
     "romanNumbers": true, // false - уровень арабскими цифрами

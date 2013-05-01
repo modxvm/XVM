@@ -1,5 +1,6 @@
 /**
- *
+ * Color settings for damage.
+ * Настройки цвета для урона.
  */
 {
   "damage": {

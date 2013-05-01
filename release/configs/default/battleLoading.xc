@@ -1,8 +1,8 @@
 ﻿/**
- *
+ * Parameters of the Battle Loading screen.
+ * Параметры экрана загрузки боя.
  */
 {
-  // Параметры экрана загрузки боя
   "battleLoading": {
     "clockFormat": "H:N:S",                     // Формат часов на экране загрузки боя. Формат: Y:год, M:месяц, D:день, H:часы, N:минуты, S:секунды. "" - убрать часы.
     "showChances": false,                       // true - включить отображение шансов на победу (только с xvm-stat) Прочитать подробней: http://www.koreanrandom.com/forum/topic/1663-

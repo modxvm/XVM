@@ -1,11 +1,8 @@
 ﻿/**
- * Параметры панелей игроков ("ушей")
+ * Parameters of the Players Panels ("ears").
+ * Параметры панелей игроков ("ушей").
  */
 {
-  "def": {
-    "nick": "<font color='{{c:xwn}}'>{{nick}}</font>",
-    "vehicle": "<font color='{{c:xwn}}'>{{vehicle}}</font>"
-  },
   "playersPanel": {
     "alpha": 60,       // 0..100 - задает прозрачность "ушей". 0 - прозрачные, 100 - не прозрачные
     "iconAlpha": 100,  // 0..100 - задает прозрачность иконок в "ушах". 0 - прозрачные, 100 - не прозрачные
@@ -48,17 +45,17 @@
     "medium": {
       "width": 46,    // 0..250 - задает ширину поля имени игрока. По умолчанию: 46.
       // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-      "formatLeft": ${"def.nick"},
+      "formatLeft": "<font color='{{c:xwn}}'>{{nick}}</font>",
       // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-      "formatRight": ${"def.nick"}
+      "formatRight": "<font color='{{c:xwn}}'>{{nick}}</font>"
     },
     // Режим ушей "medium2" - вторые средние уши в игре
     "medium2": {
       "width": 65,    // 0..250 - задает ширину поля названия танка. По умолчанию: 65.
       // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-      "formatLeft": ${"def.vehicle"},
+      "formatLeft": "<font color='{{c:xwn}}'>{{vehicle}}</font>",
       // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-      "formatRight": ${"def.vehicle"}
+      "formatRight": "<font color='{{c:xwn}}'>{{vehicle}}</font>"
     },
     // Режим ушей "large" - широкие уши в игре
     "large": {
@@ -67,8 +64,8 @@
       "nickFormatLeft": "<font color='{{c:rating}}'>{{rating}}</font> {{nick}}",
       "nickFormatRight": "{{nick}} <font color='{{c:rating}}'>{{rating}}</font>",
       // Формат отображения названия танка (допускаются макроподстановки, см. readme-ru.txt)
-      "vehicleFormatLeft": ${"def.vehicle"},
-      "vehicleFormatRight": ${"def.vehicle"}
+      "vehicleFormatLeft": "<font color='{{c:xwn}}'>{{vehicle}}</font>",
+      "vehicleFormatRight": "<font color='{{c:xwn}}'>{{vehicle}}</font>"
     }
   }
 }

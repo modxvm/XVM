@@ -1,5 +1,6 @@
 /**
- *
+ * Over-target markers. All settings moved to separate files.
+ * Маркеры над танками. Все настройки вынесены в отдельные файлы.
  */
 {
   "markers": {

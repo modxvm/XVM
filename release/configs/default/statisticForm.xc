@@ -1,8 +1,8 @@
 ﻿/**
- *
+ * Parameters of the Battle Statistics form.
+ * Параметры окна статистики по клавише Tab.
  */
 {
-  // Параметры окна статистики по клавише Tab
   "statisticForm": {
     "showChances": false,     // true - включить отображение шансов на победу (только с xvm-stat, пока работает только в боях 15x15)
     "showChancesExp": false,  // Показывать экспериментальную формулу расчета шансов

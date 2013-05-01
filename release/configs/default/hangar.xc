@@ -1,5 +1,6 @@
 ﻿/**
- * Ангар
+ * Parameters for hangar.
+ * Параметры ангара.
  */
 {
   "hangar": {

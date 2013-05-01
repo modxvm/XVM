@@ -1,5 +1,6 @@
 ﻿/**
- * Общие параметры боевого интерфейса
+ * General parameters for the battle interface.
+ * Общие параметры боевого интерфейса.
  */
 {
   "battle": {
