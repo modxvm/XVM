@@ -15,8 +15,6 @@ XVM-4.0.0-alpha2:
 XVM-4.0.0-alpha1:
   * new config format (now config is loading from res_mods/xvm/xvm.xc)
   * removed legacy support for OTMData.xml config
-
-  [FIXES]
   * fixed rare condition when wrong minimap lost marker was deleted
   
 XVM-3.5.0
