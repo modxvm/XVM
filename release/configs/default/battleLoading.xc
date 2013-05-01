@@ -9,10 +9,19 @@
     "showChancesExp": false,                    // Показывать экспериментальную формулу расчета шансов
     "removeSquadIcon": false,                   // true - убрать отображение иконки взвода. На пустое поле можно вывести, например, иконку клана.
     // параметры отображения иконки игрока/клана
-    "clanIcon": ${"defines.xc":"clanIcon"},
+    "clanIcon": {    // параметры отображения иконки игрока/клана
+    "show": true,  //   false - не отображать иконки игрока/клана в окне загрузки боя
+    "x": 0,        //   положение по оси X оносительно иконки танка
+    "y": 6,        //   положение по оси Y оносительно иконки танка
+    "xr": 0,       //   положение по оси X для правых ушей (положительные значения поместят иконку *внутрь* панели)
+    "yr": 6,       //   положение по оси Y для правых ушей
+    "w": 16,       //   ширина иконки игрока/клана
+    "h": 16,       //   высота иконки игрока/клана
+    "alpha": 90    //   прозрачность иконки игрока/клана
+  },
     // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatLeft": ${"defines.xc":"formatLeft"},
+    "formatLeft": "{{vehicle}} <font face='Lucida Console' size='12'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font></font>",
     // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
-    "formatRight": ${"defines.xc":"formatRight"}
+    "formatRight": "<font face='Lucida Console' size='12'><font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font> {{vehicle}}"
   }
 }
