@@ -44,7 +44,7 @@
     // Color settings for damage. Link.
     // Настройки цвета для урона. Ссылка.
     "damage": ${"colorsDamage.xc":"damage"},
-    // Damage kind.
+    // Dynamic color by damage kind.
     // Динамический цвет по типу урона.
     "dmg_kind": {
       // Атака.
