@@ -4,6 +4,15 @@
  */
 {
   "damage": {
+      // Format: src_dst_type.
+      // Src:  ally, squadman, enemy, unknown, player.
+      // Dst:  ally, squadman, allytk, enemytk, enemy.
+      // Type: hit, kill, blowup.
+      // ----
+      // Формат: источник_получатель_тип.
+      // Источник:   ally - союзник, squadman - взводный, enemy - противник, unknown - неизвестный (не виден игроку), player - игрок.
+      // Получатель: ally, squadman, enemy, allytk - союзник тимкиллер, enemytk - противник тимкиллер.
+      // Тип:        hit - попадание, kill - убийство, blowup - боеукладка.
       "ally_ally_hit":		"0x00EAFF",
       "ally_ally_kill":		"0x00EAFF",
       "ally_ally_blowup":	"0x00EAFF",

@@ -4,23 +4,48 @@
  */
 {
   "captureBar": {
-    "enabled": true, // Переключатель вкл/выкл
-    "primaryTitleOffset": 7, // Смещение верхнего поля вверх на случай больших размеров шрифтов
-    "appendPlus" : true, // Дописывать плюс к тройке захватчиков. Невозможно рассчитать более трёх.
-    // Формат захвата (допускаются макроподстановки, см. readme-ru.txt)
-    "enemy": { // Вражеской
-      "primaryTitleFormat":   "<font size='15' color='#FFFFFF'>Захват вражеской базы! {{extra}}</font>",    // Верхнее текстовое поле
-      "secondaryTitleFormat": "<font size='15' color='#FFFFFF'>{{points}}</font>",                       // Нижнее текстовое поле
-      "captureDoneFormat":    "<font size='17' color='#FFCC66'>Вражеская база захвачена!</font>",             // Текст полного захвата
-      "extra": "Захватчиков: <b><font color='#FFCC66'>{{tanks}}</font></b> Осталось времени: <b><font color='#FFCC66'>{{time}}</font><b>", // Дополнительный текст после необходимого расчета
-      "shadow": {            // Тень полей
-        "color": "0x000000", // Цвет
-        "alpha": 50,         // Прозрачность 0-100
-        "blur": 6,           // Размытие 0-255; 6 рекомендовано
-        "strength": 3        // Сила 0-255; 3 рекомендовано
+    // On/off switch.
+    // Переключатель вкл/выкл.
+    "enabled": true,
+    // Upper textfield offset in case of big font size.
+    // Смещение верхнего поля вверх на случай больших размеров шрифтов.
+    "primaryTitleOffset": 7,
+    // Append plus to three capturers. Cant calculate more than three.
+    // Дописывать плюс к тройке захватчиков. Невозможно рассчитать более трёх.
+    "appendPlus" : true,
+    // Capture format (macros allowed, see readme-en.txt).
+    // Формат захвата (допускаются макроподстановки, см. readme-ru.txt).
+    "enemy": { // Вражеской.
+      // Upper textfield.
+      // Верхнее текстовое поле.
+      "primaryTitleFormat":   "<font size='15' color='#FFFFFF'>Захват вражеской базы! {{extra}}</font>",
+      // Lower textfield.
+      // Нижнее текстовое поле.
+      "secondaryTitleFormat": "<font size='15' color='#FFFFFF'>{{points}}</font>",
+      // Full capture text.
+      // Текст полного захвата.
+      "captureDoneFormat":    "<font size='17' color='#FFCC66'>Вражеская база захвачена!</font>",
+      // Extra text available after necessary calculations.
+      // Дополнительный текст после необходимого расчета.
+      "extra": "Захватчиков: <b><font color='#FFCC66'>{{tanks}}</font></b> Осталось времени: <b><font color='#FFCC66'>{{time}}</font><b>",
+      // Fields shadow
+      // Тень полей.
+      "shadow": {
+        // Color.
+        // Цвет.
+        "color": "0x000000",
+        // Alpha 0-100.
+        // Прозрачность 0-100.
+        "alpha": 50,
+        // Blur 0-255; 6 is recommended.
+        // Размытие 0-255; 6 рекомендовано.
+        "blur": 6,
+        // Strength 0-255; 3 is recommended.
+        // Сила 0-255; 3 рекомендовано.
+        "strength": 3
       }
     },
-    "ally": { // Союзников
+    "ally": { // Союзников.
       "primaryTitleFormat":   "<font size='15' color='#FFFFFF'>Захват нашей базы! {{extra}}</font>",
       "secondaryTitleFormat": "<font size='15' color='#FFFFFF'>{{points}}</font>",
       "captureDoneFormat":    "<font size='17' color='#FFCC66'>Наша база захвачена!</font>",
