@@ -4,23 +4,32 @@
  */
 {
   "statisticForm": {
-    "showChances": false,     // true - включить отображение шансов на победу (только с xvm-stat, пока работает только в боях 15x15)
-    "showChancesExp": false,  // Показывать экспериментальную формулу расчета шансов
-    "removeSquadIcon": false, // true - убрать отображение иконки взвода
-    // параметры отображения иконки игрока/клана
-    "clanIcon": {    // параметры отображения иконки игрока/клана
-    "show": true,  //   false - не отображать иконки игрока/клана в окне загрузки боя
-    "x": 0,        //   положение по оси X оносительно иконки танка
-    "y": 6,        //   положение по оси Y оносительно иконки танка
-    "xr": 0,       //   положение по оси X для правых ушей (положительные значения поместят иконку *внутрь* панели)
-    "yr": 6,       //   положение по оси Y для правых ушей
-    "w": 16,       //   ширина иконки игрока/клана
-    "h": 16,       //   высота иконки игрока/клана
-    "alpha": 90    //   прозрачность иконки игрока/клана
-  },
-    // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
+    // true - Enable display of "chance to win" (only with xvm-stat).
+    // true - включить отображение шансов на победу (только с xvm-stat).
+    "showChances": false,
+    // true - Show experimental "chance to win" formula
+    // true - показывать экспериментальную формулу расчета шансов.
+    "showChancesExp": false,
+    // true - Disable Platoon icons.
+    // true - убрать отображение иконки взвода.
+    "removeSquadIcon": false,
+    // Display options for Team/Clan logos (see battleLoading.xc).
+    // Параметры отображения иконки игрока/клана (см. battleLoading.xc).
+    "clanIcon": {
+      "show": true,
+      "x": 0,
+      "y": 6,
+      "xr": 0,
+      "yr": 6,
+      "w": 16,
+      "h": 16,
+      "alpha": 90
+    },
+    // Display format for the left panel (macros allowed, see readme-en.txt).
+    // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt).
     "formatLeft": "{{vehicle}} <font face='Lucida Console' size='12'><font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font></font>",
-    // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
+    // Display format for the right panel (macros allowed, see readme-en.txt).
+    // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt).
     "formatRight": "<font face='Lucida Console' size='12'><font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font></font> {{vehicle}}"
   }
 }

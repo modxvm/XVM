@@ -1,48 +1,78 @@
 ﻿/**
- * Minimap labels.
- * Надписи на миникарте.
+ * Minimap labels. Basic HTML/CSS supported.
+ * Надписи на миникарте. Поддерживают HTML.
  */
 {
-  "labels": {                     // Текстовые поля. Поддерживают HTML.
-      "nickShrink": 5,              // Максимальный размер ника для макроса {{short-nick}}.
-      "vehicleclassmacro": {        // Подстановки макроса {{vehicle-class}}
-        "light": "", // ЛT
-        "medium": "",// СТ
-        "heavy": "", // ТТ
-        "td": "",    // ПТ
-        "spg": "¦",  // Арта
-        "superh": "" // ТТ10 посредством gui_settings.xml
-        // Сайт со спец символами:
-        //   http://www.fileformat.info/info/unicode/char/25a0/index.htm
+  "labels": {
+      // Maximum nickname size for {{short-nick}} macro.
+      // Максимальный размер ника для макроса {{short-nick}}.
+      "nickShrink": 5,
+      // {{vehicle-class}} macro substitutions.
+      // Подстановки макроса {{vehicle-class}}.
+      "vehicleclassmacro": {
+        // ЛT ♦.
+        "light": "",
+        // СТ.
+        "medium": "",
+        // ТТ.
+        "heavy": "",
+        // ПТ ▼.
+        "td": "",
+        // Artillery / Арта.
+        "spg": "■",
+        // HeavyTank10 by gui_settings.xml.
+        // ТТ10 посредством gui_settings.xml.
+        "superh": ""
+        // Special symbols website / Сайт со спец символами:
+        // http://www.fileformat.info/info/unicode/char/25a0/index.htm
+        // Great symbolic font by Andrey_Hard for {{vehicle-class}}:
         // Отличный символьный шрифт от Andrey_Hard для замены букв от {{vehicle-class}} макроса:
-        //   http://goo.gl/d2KIj
+        // http://goo.gl/d2KIj
       },
-      "units": { // Текстовые поля для танков на миникарте.
-        "revealedEnabled": true, // Выключатель добавочных текстовых полей для видимых юнитов.
-        "lostEnemyEnabled": true,// Выключатель текстовых полей для пропавших врагов.
-        "format": { // Формат поля.
-          "ally":  "<span class='mm_a'>{{vehicle}}</span>", // Союзник
-          "enemy": "<span class='mm_e'>{{vehicle}}</span>", // Враг
-          "squad": "<textformat leading='-1'><span class='mm_s'><i>{{short-nick}}</i>\n{{vehicle}}</span><textformat>", // Совзводный.
-          "lost":  "<span class='mm_dot'>\u2022</span><span class='mm_l'><i>{{vehicle}}</i></span>",  // Для пропавших с миникарты врагов.
-          "oneself": ""  // Для своего маркера и маркера приёмника камеры наблюдения в случае смерти.
+      // Textfields for tanks on minimap.
+      // Текстовые поля для танков на миникарте.
+      "units": {
+        // Textfields switch for revealed units.
+        // Выключатель добавочных текстовых полей для видимых юнитов.
+        "revealedEnabled": true,
+        // Textfields switch for lost enemy units. Show last seen position.
+        // Выключатель текстовых полей для пропавших врагов.
+        "lostEnemyEnabled": true,
+        // Формат поля.
+        "format": {
+          // Союзник.
+          "ally":  "<span class='mm_a'>{{vehicle}}</span>",
+          // Враг.
+          "enemy": "<span class='mm_e'>{{vehicle}}</span>",
+          // Совзводный.
+          "squad": "<textformat leading='-1'><span class='mm_s'><i>{{short-nick}}</i>\n{{vehicle}}</span><textformat>",
+          // Lost enemy units.
+          // Для пропавших с миникарты врагов.
+          "lost":  "<span class='mm_dot'>\u2022</span><span class='mm_l'><i>{{vehicle}}</i></span>",
+          // For your own marker or spectated subject.
+          // Для своего маркера и маркера приёмника камеры наблюдения в случае смерти.
+          "oneself": ""
         },
-        "css": { // CSS стиль.
+        // CSS style.
+        // CSS стиль.
+        "css": {
           "ally":  ".mm_a{font-family:$FieldFont; font-size:8px; color:#C8FFA6;}",
           "enemy": ".mm_e{font-family:$FieldFont; font-size:8px; color:#FCA9A4;}",
           "squad": ".mm_s{font-family:$FieldFont; font-size:8px; color:#FFC099;}",
           "lost":  ".mm_l{font-family:$FieldFont; font-size:8px; color:#FCA9A4;} .mm_dot{font-family:Arial; font-size:17px; color:#FCA9A4;}",
           "oneself": ".mm_o{font-family:$FieldFont; font-size:8px; color:#FFFFFF;}"
         },
-        "shadow": { // Тени полей.
+        // Fields shadow.
+        // Тени полей.
+        "shadow": {
           "ally": {
             "enabled": true,
             "color": "0x000000",
-            "distance": 0, // Дистанция тени относительно поля.
-            "angle": 0,    // Угол тени при дистанции > 0
-            "alpha": 80,   // Прозрачность
-            "blur": 3,     // Размытие
-            "strength": 4  // Сила
+            "distance": 0,
+            "angle": 0,
+            "alpha": 80,
+            "blur": 3,
+            "strength": 4
           },
           "enemy": {
             "enabled": true,
@@ -81,14 +111,17 @@
             "strength": 4
           }
         },
-        "offset": { // Выравнивание
-          "ally":  {"x": 3, "y": -1},   // Смещение поля относительно текущей иконки.
-          "enemy": {"x": 3, "y": -1},   // Смещение поля относительно текущей иконки.
-          "squad": {"x": 3, "y": -2},   // Смещение поля относительно текущей иконки.
-          "lost":  {"x": -6, "y": -10}, // Смещение относительно последних координат видимой позиции.
-          "oneself": {"x": 0, "y": 0}   // Смещение поля относительно текущей иконки.
+        // Field offset ralative to current icon (except lost - relative to enemy last seen position).
+        // Смещение полей относительно текущей иконки (кроме lost - относительно последних координат видимой позиции).
+        "offset": {
+          "ally":  {"x": 3, "y": -1},
+          "enemy": {"x": 3, "y": -1},
+          "squad": {"x": 3, "y": -2},
+          "lost":  {"x": -6, "y": -10},
+          "oneself": {"x": 0, "y": 0}
         },
-        "alpha" : { // Прозрачность текстовых полей.
+        // Прозрачность текстовых полей.
+        "alpha" : {
           "ally":  100,
           "enemy": 100,
           "squad": 100,
@@ -96,7 +129,9 @@
           "oneself": 100
         }
       },
-      "mapSize": { // Поле размера стороны карты. Например, 1000м, 700м, 600м.
+      // Textfield for map side size. 1000m, 700m, 600m. Works only with xvm-stat.exe if locale is not RU, EN or CH.
+      // Поле размера стороны карты. Например, 1000м, 700м, 600м.
+      "mapSize": {
         "enabled": true,
         "format": "<b>{{cellsize}}0 м</b>",
         "css": "font-size:10px; color:#FFCC66;",
@@ -112,6 +147,9 @@
           "blur": 2,
           "strength": 3
         },
+        // Decrease sizes in case of map image weird shrinking while map resize.
+        // Increase sizes in case of field being partially cut off.
+        // -------------------------------------------------------------------------------------
         // Уменьшайте размеры, если при изменении размера миникарты изображение карты сжимается.
         // Увеличивайте размеры, если содержмиое поля обрезается.
         "width": 100,

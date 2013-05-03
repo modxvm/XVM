@@ -4,8 +4,8 @@
  */
 {
   "captureBar": {
-    // On/off switch.
-    // Переключатель вкл/выкл.
+    // false - Disable.
+    // false - отключить.
     "enabled": true,
     // Upper textfield offset in case of big font size.
     // Смещение верхнего поля вверх на случай больших размеров шрифтов.
@@ -31,17 +31,16 @@
       // Fields shadow
       // Тень полей.
       "shadow": {
-        // Color.
         // Цвет.
         "color": "0x000000",
-        // Alpha 0-100.
+        // Opacity 0-100.
         // Прозрачность 0-100.
         "alpha": 50,
         // Blur 0-255; 6 is recommended.
         // Размытие 0-255; 6 рекомендовано.
         "blur": 6,
-        // Strength 0-255; 3 is recommended.
-        // Сила 0-255; 3 рекомендовано.
+        // Intensity 0-255; 3 is recommended.
+        // Интенсивность 0-255; 3 рекомендовано.
         "strength": 3
       }
     },

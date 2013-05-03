@@ -1,20 +1,32 @@
 ﻿/**
- * Minimap circles.
- * Круги на миникарте.
+ * Minimap circles. Only real map meters. Only for owned unit. Works only with xvm-stat.exe if locale is not RU, EN or CH.
+ * Круги на миникарте. Дистанция только в реальных метрах карты. Только для своей техники.
  */
 {
-  "circles": { // Дистанция только в реальных метрах карты. Только для своей техники.
+  "circles": {
         "enabled": true,
-        "major": [ // Основные круги. thickness - толщина.
-            { "enabled": true, "distance": 445, "thickness": 0.75, "alpha": 35, "color": "0xFFCC66" },  // 445 метров - максимальная дистанция засвета.
-            { "enabled": false, "distance": 50, "thickness": 1, "alpha": 30, "color": "0xFFFFFF" }   // enabled : false <- выключен
+        // Основные круги.
+        // "enabled": false - выключен; "distance" - дистанция; "thickness" - толщина; "alpha" - прозрачность; "color" - цвет.
+        "major": [
+            // 445 meters - maximum reveal distance. / 445 метров - максимальная дистанция засвета.
+            { "enabled": true,  "distance": 445, "thickness": 0.75, "alpha": 35, "color": "0xFFCC66" },
+            { "enabled": false, "distance": 50,  "thickness": 1,    "alpha": 30, "color": "0xFFFFFF" }
         ],
+        // Special circles dependent on vehicle type.
+        // Many configuration lines for the same vehicle make many circles.
+        // Only artillery top gun range by default.
+        // See other vehicle types at:
+        // http://code.google.com/p/wot-xvm/source/browse/trunk/src/xvm/src/wot/utils/VehicleInfoData2.as
+        // Artillery gun fire range may differ depending on vehicle angle relative to ground
+        // and vehicle height positioning relative to target. These factors are not considered.
+        // See pics at http://goo.gl/ZqlPa
+        // ------------------------------------------------------------------------------------------------
         // Специальные круги, зависящие от модели техники.
         // Несколько строк для одной техники делают несколько кругов.
         // По умолчанию в списке только круги дальнобойности артиллерии с топ орудиями.
-        //   Типы для дополнения брать по ссылке
+        // Названия танков для дополнения брать по ссылке
         // http://code.google.com/p/wot-xvm/source/browse/trunk/src/xvm/src/wot/utils/VehicleInfoData2.as
-        //   Дальнобойность арты может меняться в зависимости от углов постановки машины на склонах местности
+        // Дальнобойность арты может меняться в зависимости от углов постановки машины на склонах местности
         // и высоте расположения машины относительно цели. На миникарте эти факторы не учитываются.
         // Подробнее по ссылке: http://goo.gl/ZqlPa
         "special": [

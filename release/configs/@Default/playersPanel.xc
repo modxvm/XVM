@@ -4,35 +4,53 @@
  */
 {
   "playersPanel": {
-    "alpha": 60,       // 0..100 - задает прозрачность "ушей". 0 - прозрачные, 100 - не прозрачные
-    "iconAlpha": 100,  // 0..100 - задает прозрачность иконок в "ушах". 0 - прозрачные, 100 - не прозрачные
-    "removeSquadIcon": false, // true - убрать отображение иконки взвода
-    // параметры отображения иконки игрока/клана
-    "clanIcon": {    // параметры отображения иконки игрока/клана
-    "show": true,  //   false - не отображать иконки игрока/клана в окне загрузки боя
-    "x": 0,        //   положение по оси X оносительно иконки танка
-    "y": 6,        //   положение по оси Y оносительно иконки танка
-    "xr": 0,       //   положение по оси X для правых ушей (положительные значения поместят иконку *внутрь* панели)
-    "yr": 6,       //   положение по оси Y для правых ушей
-    "w": 16,       //   ширина иконки игрока/клана
-    "h": 16,       //   высота иконки игрока/клана
-    "alpha": 90    //   прозрачность иконки игрока/клана
-  },
-    // Маркер статуса засвета в правой боковой панели списка игроков
+    // Opacity percentage of the panels. 0 - transparent, 100 - opaque.
+    // Прозрачность в процентах ушей. 0 - прозрачные, 100 - не прозрачные.
+    "alpha": 60,
+    // Opacity percentage of icons in the panels. 0 - transparent ... 100 - opaque.
+    // Прозрачность в процентах иконок в ушах. 0 - прозрачные, 100 - не прозрачные.
+    "iconAlpha": 100,
+    // true - Disable Platoon icons.
+    // true - убрать отображение иконки взвода.
+    "removeSquadIcon": false,
+    // Display options for Team/Clan logos (see battleLoading.xc).
+    // Параметры отображения иконки игрока/клана (см. battleLoading.xc).
+    "clanIcon": {
+      "show": true,
+      "x": 0,
+      "y": 6,
+      "xr": 0,
+      "yr": 6,
+      "w": 16,
+      "h": 16,
+      "alpha": 90
+    },
+    // Enemy spotted status marker at right side panel.
+    // Маркер статуса засвета в правой боковой панели списка игроков.
     "enemySpottedMarker": {
+      // false - Disable.
+      // false - отключить.
       "enabled": true,
-      "Xoffset": 15, // Смещение относительно иконки уровня танка
+      // Offset relative to level icon (by X, Y).
+      // Смещение относительно иконки уровня танка (по X, Y).
+      "Xoffset": 15,
       "Yoffset": 0,
+      // Формат.
       "format": {
-        // Этот враг никогда не светился
+        // Never seen this enemy.
+        // Этот враг никогда не светился.
         "neverSeen": "<font face='$FieldFont' size='24' color='#DEDEDE'>*</font>",
-        // Этот враг светился хотя бы один раз и отмечен на миникарте как потерянный
+        // This enemy was seen atleast once.
+        // Этот враг светился хотя бы один раз и отмечен на миникарте как потерянный.
         "lost": "",
-        // Виден на миникарте прямо сейчас
+        // Enemy currently revealed at minimap.
+        // Виден на миникарте прямо сейчас.
         "revealed": "",
-        // Уничтоженный враг
+        // Dead enemy.
+        // Уничтоженный враг.
         "dead": "",
-        // Специфичные значения для артиллерии
+        // Artillery specific values.
+        // Специфичные значения для артиллерии.
         "artillery": {
           "neverSeen": "",
           "lost": "",
@@ -41,29 +59,44 @@
         }
       }
     },
-    // Режим ушей "medium" - первые средние уши в игре
+    // Options for the "medium" panels - the first of the medium panels.
+    // Режим ушей "medium" - первые средние уши в игре.
     "medium": {
-      "width": 46,    // 0..250 - задает ширину поля имени игрока. По умолчанию: 46.
-      // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
+      // Width of the player's name column, 0-250. Default is 46.
+      // Ширина поля имени игрока, 0-250. По умолчанию: 46.
+      "width": 46,
+      // Display format for the left panel (macros allowed, see readme-en.txt).
+      // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt).
       "formatLeft": "<font color='{{c:xwn}}'>{{nick}}</font>",
-      // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
+      // Display format for the right panel (macros allowed, see readme-en.txt).
+      // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt).
       "formatRight": "<font color='{{c:xwn}}'>{{nick}}</font>"
     },
-    // Режим ушей "medium2" - вторые средние уши в игре
+    // Options for the "medium2" panels - the second of the medium panels.
+    // Режим ушей "medium2" - вторые средние уши в игре.
     "medium2": {
-      "width": 65,    // 0..250 - задает ширину поля названия танка. По умолчанию: 65.
-      // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt)
+      // Width of the vehicle name column, 0-250. Default is 65.
+      // Ширина поля названия танка, 0-250. По умолчанию: 65.
+      "width": 65,
+      // Display format for the left panel (macros allowed, see readme-en.txt).
+      // Формат отображения для левой панели (допускаются макроподстановки, см. readme-ru.txt).
       "formatLeft": "<font color='{{c:xwn}}'>{{vehicle}}</font>",
-      // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt)
+      // Display format for the right panel (macros allowed, see readme-en.txt).
+      // Формат отображения для правой панели (допускаются макроподстановки, см. readme-ru.txt).
       "formatRight": "<font color='{{c:xwn}}'>{{vehicle}}</font>"
     },
-    // Режим ушей "large" - широкие уши в игре
+    // Options for the "large" panels - the widest panels.
+    // Режим ушей "large" - широкие уши в игре.
     "large": {
-      "width": 170,  // 0..250 - задает ширину поля имени игрока. По умолчанию: 170.
-      // Формат отображения имени игрока (допускаются макроподстановки, см. readme-ru.txt)
+      // Width of the player's name column, 0-250. Default is 170.
+      // Ширина поля имени игрока, 0-250. По умолчанию: 170.
+      "width": 170,
+      // Display format for player nickname (macros allowed, see readme-en.txt).
+      // Формат отображения имени игрока (допускаются макроподстановки, см. readme-ru.txt).
       "nickFormatLeft": "<font color='{{c:rating}}'>{{rating}}</font> {{nick}}",
       "nickFormatRight": "{{nick}} <font color='{{c:rating}}'>{{rating}}</font>",
-      // Формат отображения названия танка (допускаются макроподстановки, см. readme-ru.txt)
+      // Display format for vehicle name (macros allowed, see readme-en.txt).
+      // Формат отображения названия танка (допускаются макроподстановки, см. readme-ru.txt).
       "vehicleFormatLeft": "<font color='{{c:xwn}}'>{{vehicle}}</font>",
       "vehicleFormatRight": "<font color='{{c:xwn}}'>{{vehicle}}</font>"
     }
