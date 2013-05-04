@@ -40,11 +40,19 @@ class wot.crew.PingServers
 
     private function showPing()
     {
-        Comm.Sync(Defines.COMMAND_PING, String(pingCommandCounter++), this, updateView);
+        Comm.Sync(Defines.COMMAND_PING, String(pingCommandCounter++), this, answerCallback);
     }
     
-    private function updateView(event):Void
+    private function answerCallback(event):Void
     {
-        view.showPingCallback(event);
+        if (event.str == null || event.str == "")
+            return;
+            
+        view.update(parseAnswer(event.str));
+    }
+    
+    private function parseAnswer(str:String)
+    {
+        return str;
     }
 }
