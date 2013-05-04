@@ -3,7 +3,7 @@ import com.xvm.Utils;
 
 class wot.crew.PingServersView
 {
-    private static var TF_ID:String = "__xvm_pingTextField";
+    private static var TF_NAME:String = "__xvm_pingTextField";
     private static var TF_DEPTH:Number = 0;
     private static var TF_WIDTH:Number = 100;
     private static var TF_HEIGHT:Number = 300;
@@ -24,7 +24,7 @@ class wot.crew.PingServersView
     {
         var xPos:Number = Config.s_config.hangar.pingServers.x;
         var yPos:Number = Config.s_config.hangar.pingServers.y;
-        tf = _root.createTextField(TF_ID, TF_DEPTH,
+        tf = _root.createTextField(TF_NAME, TF_DEPTH,
             xPos, yPos, TF_WIDTH, TF_HEIGHT);
         tf.antiAliasType = "advanced";
         tf.html = true;
@@ -35,6 +35,6 @@ class wot.crew.PingServersView
     
     private function get tf():TextField
     {
-        return _root[TF_ID];
+        return _root[TF_NAME];
     }
 }

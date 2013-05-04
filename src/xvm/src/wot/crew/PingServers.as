@@ -58,8 +58,8 @@ class wot.crew.PingServers
         var list:Array = [];
         for (var i in parsedAnswerObj)
         {
-            var s = Utils.startsWith("WOT ", i) ? i.substring(4) : i;
-            list.push(s + ": " + parsedAnswerObj[i])
+            var cluster = Utils.startsWith("WOT ", i) ? i.substring(4) : i;
+            list.push(cluster + ": " + parsedAnswerObj[i])
         }
         list.sort();
         
