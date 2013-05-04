@@ -8,15 +8,8 @@ class wot.crew.PingServersView
         createField();
     }
     
-    public function update(parsedAnswerObj:Object)
+    public function update(list:Array)
     {
-        var list:Array = [];
-        for (var i in parsedAnswerObj)
-        {
-            var s = Utils.startsWith("WOT ", i) ? i.substring(4) : i;
-            list.push(s + ": " + parsedAnswerObj[i])
-        }
-        list.sort();
         tf.htmlText = "<span class='xvm_ping'>" + Utils.fixImgTag(list.join("\n")) + "</span>";
 
         //com.xvm.Logger.add(str.join("\n"));

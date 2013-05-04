@@ -52,8 +52,17 @@ class wot.crew.PingServers
         view.update(parseAnswer(answer));
     }
     
-    private function parseAnswer(answer:String):Object
+    private function parseAnswer(answer:String):Array
     {
-        return JSONx.parse(answer);
+        var parsedAnswerObj:Object = JSONx.parse(answer);
+        var list:Array = [];
+        for (var i in parsedAnswerObj)
+        {
+            var s = Utils.startsWith("WOT ", i) ? i.substring(4) : i;
+            list.push(s + ": " + parsedAnswerObj[i])
+        }
+        list.sort();
+        
+        return list;
     }
 }
