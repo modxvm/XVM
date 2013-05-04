@@ -7,8 +7,8 @@
     // true - Disable display of tutorial icon
     // true - скрыть иконку обучения
     "hideTutorial": false,
-    // Ping servers
-    // Пинг серверов
+    // Ping servers; works only with xvm-stat.exe
+    // Пинг серверов; работает только с xvm-stat.exe
     "pingServers": {
       // true - Enable display of ping to the servers
       // true - показывать пинг до серверов
