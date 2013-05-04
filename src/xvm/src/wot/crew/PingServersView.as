@@ -8,16 +8,16 @@ class wot.crew.PingServersView
         createField();
     }
     
-    public function update(res:Object)
+    public function update(parsedAnswerObj:Object)
     {
-        var str:Array = [];
-        for (var i in res)
+        var list:Array = [];
+        for (var i in parsedAnswerObj)
         {
             var s = Utils.startsWith("WOT ", i) ? i.substring(4) : i;
-            str.push(s + ": " + res[i])
+            list.push(s + ": " + parsedAnswerObj[i])
         }
-        str.sort();
-        tf.htmlText = "<span class='xvm_ping'>" + Utils.fixImgTag(str.join("\n")) + "</span>";
+        list.sort();
+        tf.htmlText = "<span class='xvm_ping'>" + Utils.fixImgTag(list.join("\n")) + "</span>";
 
         //com.xvm.Logger.add(str.join("\n"));
     }
