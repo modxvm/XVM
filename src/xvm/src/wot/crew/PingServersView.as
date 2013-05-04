@@ -17,19 +17,24 @@ class wot.crew.PingServersView
             str.push(s + ": " + res[i])
         }
         str.sort();
-        _root["__xvm_pingTextField"].htmlText = "<span class='xvm_ping'>" + Utils.fixImgTag(str.join("\n")) + "</span>";
+        tf.htmlText = "<span class='xvm_ping'>" + Utils.fixImgTag(str.join("\n")) + "</span>";
 
         //com.xvm.Logger.add(str.join("\n"));
     }
     
     public function createField():Void
     {
-        _root["__xvm_pingTextField"] = _root.createTextField("__xvm_pingTextField", 0,
+        tf = _root.createTextField("__xvm_pingTextField", 0,
             Config.s_config.hangar.pingServers.x, Config.s_config.hangar.pingServers.y, 100, 300);
-        _root["__xvm_pingTextField"].antiAliasType = "advanced";
-        _root["__xvm_pingTextField"].html = true;
-        _root["__xvm_pingTextField"].selectable = false;
-        _root["__xvm_pingTextField"].styleSheet = Utils.createStyleSheet(
+        tf.antiAliasType = "advanced";
+        tf.html = true;
+        tf.selectable = false;
+        tf.styleSheet = Utils.createStyleSheet(
             Utils.createCSS("xvm_ping", 0xCCCCCC, "$FieldFont", 10, "left", false, false));
+    }
+    
+    private function get tf():TextField
+    {
+        return _root["__xvm_pingTextField"];
     }
 }
