@@ -31,7 +31,10 @@ class com.xvm.DefaultConfig
                   enabled: false,
                   updateInterval: 10000, // msec
                   x: 100,
-                  y: 0
+                  y: 0,
+                  style:{
+                    fontSize: 11
+                  }
                 }
             },
             battle: {

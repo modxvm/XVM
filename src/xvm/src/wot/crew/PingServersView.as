@@ -8,8 +8,11 @@ class wot.crew.PingServersView
     private static var TF_WIDTH:Number = 100;
     private static var TF_HEIGHT:Number = 300;
     
-    public function PingServersView()
+    private var cfg:Object;
+    
+    public function PingServersView(cfg:Object)
     {
+        this.cfg = cfg;
         createField();
     }
     
@@ -20,20 +23,21 @@ class wot.crew.PingServersView
         {
             list += responceTimeList[i].cluster + ": " + responceTimeList[i].time + "\n";
         }
-        tf.htmlText = "<span class='xvm_ping'>" + Utils.fixImgTag(list) + "</span>";
+        tf.htmlText = "<span class='xvm_ping'>" + list + "</span>";
     }
     
     public function createField():Void
     {
-        var xPos:Number = Config.s_config.hangar.pingServers.x;
-        var yPos:Number = Config.s_config.hangar.pingServers.y;
+        var xPos:Number = cfg.x;
+        var yPos:Number = cfg.y;
+        var fontSize:Number = cfg.style.fontSize;
         tf = _root.createTextField(TF_NAME, TF_DEPTH,
             xPos, yPos, TF_WIDTH, TF_HEIGHT);
         tf.antiAliasType = "advanced";
         tf.html = true;
         tf.selectable = false;
         tf.styleSheet = Utils.createStyleSheet(
-            Utils.createCSS("xvm_ping", 0xCCCCCC, "$FieldFont", 11, "left", false, false));
+            Utils.createCSS("xvm_ping", 0xCCCCCC, "$FieldFont", fontSize, "left", false, false));
     }
     
     private function get tf():TextField

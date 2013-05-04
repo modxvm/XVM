@@ -15,15 +15,15 @@ class wot.crew.PingServers
 
     public static function initFeature()
     {
-        if (Config.s_config.hangar.pingServers.enabled == false)
+        if (cfg.enabled == false)
             return;
         
         if (instance == null)
             instance = new PingServers();
-        instance.view = new PingServersView();
+        instance.view = new PingServersView(cfg);
         instance.pingTimer = _global.setInterval(
             function() { PingServers.instance.showPing.call(PingServers.instance) },
-            Config.s_config.hangar.pingServers.updateInterval);
+            cfg.updateInterval);
 
         // immediately
         PingServers.instance.showPing.call(PingServers.instance);
@@ -59,12 +59,15 @@ class wot.crew.PingServers
         for (var i in parsedAnswerObj)
         {
             var cluster:String = Utils.startsWith("WOT ", i) ? i.substring(4) : i;
-            responceTimeList.push({cluster: cluster, time: parsedAnswerObj[i]});
+            responceTimeList.push({ cluster: cluster, time: parsedAnswerObj[i] });
         }
-        responceTimeList.sortOn(["cluster", "time"]);
+        responceTimeList.sortOn(["cluster"]);
         
         return responceTimeList;
     }
     
-    
+    private static function get cfg():Object
+    {
+        return Config.s_config.hangar.pingServers;
+    }
 }
