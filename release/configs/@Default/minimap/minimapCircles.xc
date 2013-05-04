@@ -1,5 +1,6 @@
 ﻿/**
- * Minimap circles. Only real map meters. Only for owned unit. Works only with xvm-stat.exe if locale is not RU, EN or CH.
+ * Minimap circles. Only real map meters. Only for own unit. Works only with xvm-stat.exe for uncommon locales.
+ * xvm-stat.exe is not necessary for RU, EN, DE and partially CH locale.
  * Круги на миникарте. Дистанция только в реальных метрах карты. Только для своей техники.
  */
 {
