@@ -47,8 +47,7 @@ class wot.crew.tankmen.Crew
         if (Config.s_config.hangar.hideTutorial == true)
             _root.header.tutorialDispatcher._visible = false;
 
-        if (Config.s_config.hangar.pingServers.enabled == true)
-            PingServers.StartPinging();
+        PingServers.initFeature();
 
         // FIXIT: dyrty hack, find the best place to initialize carousel
         var timer = _global.setInterval(function() {

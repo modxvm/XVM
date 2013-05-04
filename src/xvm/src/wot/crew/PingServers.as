@@ -11,8 +11,11 @@ class wot.crew.PingServers
     private var pingCommandCounter:Number;
     private var pingTimer:Function;
 
-    public static function StartPinging()
+    public static function initFeature()
     {
+        if (Config.s_config.hangar.pingServers.enabled == false)
+            return;
+        
         if (instance == null)
             instance = new PingServers();
         instance.pingTimer = _global.setInterval(
