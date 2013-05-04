@@ -13,11 +13,14 @@ class wot.crew.PingServersView
         createField();
     }
     
-    public function update(list:Array)
+    public function update(responceTimeList:Array)
     {
-        tf.htmlText = "<span class='xvm_ping'>" + Utils.fixImgTag(list.join("\n")) + "</span>";
-
-        //com.xvm.Logger.add(str.join("\n"));
+        var list:String = "";
+        for (var i:Number = 0; i < responceTimeList.length; i++)
+        {
+            list += responceTimeList[i].cluster + ": " + responceTimeList[i].time + "\n";
+        }
+        tf.htmlText = "<span class='xvm_ping'>" + Utils.fixImgTag(list) + "</span>";
     }
     
     public function createField():Void
@@ -30,7 +33,7 @@ class wot.crew.PingServersView
         tf.html = true;
         tf.selectable = false;
         tf.styleSheet = Utils.createStyleSheet(
-            Utils.createCSS("xvm_ping", 0xCCCCCC, "$FieldFont", 10, "left", false, false));
+            Utils.createCSS("xvm_ping", 0xCCCCCC, "$FieldFont", 11, "left", false, false));
     }
     
     private function get tf():TextField

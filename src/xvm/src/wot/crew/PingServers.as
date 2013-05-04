@@ -55,14 +55,16 @@ class wot.crew.PingServers
     private function parseAnswer(answer:String):Array
     {
         var parsedAnswerObj:Object = JSONx.parse(answer);
-        var list:Array = [];
+        var responceTimeList:Array = [];
         for (var i in parsedAnswerObj)
         {
-            var cluster = Utils.startsWith("WOT ", i) ? i.substring(4) : i;
-            list.push(cluster + ": " + parsedAnswerObj[i])
+            var cluster:String = Utils.startsWith("WOT ", i) ? i.substring(4) : i;
+            responceTimeList.push({cluster: cluster, time: parsedAnswerObj[i]});
         }
-        list.sort();
+        responceTimeList.sortOn(["cluster", "time"]);
         
-        return list;
+        return responceTimeList;
     }
+    
+    
 }
