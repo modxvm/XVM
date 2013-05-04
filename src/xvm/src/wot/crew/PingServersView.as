@@ -1,17 +1,15 @@
 import com.xvm.Config;
-import com.xvm.JSONx;
 import com.xvm.Utils;
 
 class wot.crew.PingServersView
 {
-    public function update(answer:String)
+    public function PingServersView()
     {
-        if (_root["__xvm_pingTextField"] == null)
-        {
-            createField();
-        }
-
-        var res = JSONx.parse(answer);
+        createField();
+    }
+    
+    public function update(res:Object)
+    {
         var str:Array = [];
         for (var i in res)
         {
@@ -24,7 +22,7 @@ class wot.crew.PingServersView
         //com.xvm.Logger.add(str.join("\n"));
     }
     
-    private function createField():Void
+    public function createField():Void
     {
         _root["__xvm_pingTextField"] = _root.createTextField("__xvm_pingTextField", 0,
             Config.s_config.hangar.pingServers.x, Config.s_config.hangar.pingServers.y, 100, 300);

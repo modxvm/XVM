@@ -45,14 +45,15 @@ class wot.crew.PingServers
     
     private function answerCallback(event):Void
     {
-        if (event.str == null || event.str == "")
+        var answer:String = event.str;
+        if (answer == null || answer == "")
             return;
             
-        view.update(parseAnswer(event.str));
+        view.update(parseAnswer(answer));
     }
     
-    private function parseAnswer(str:String)
+    private function parseAnswer(answer:String):Object
     {
-        return str;
+        return JSONx.parse(answer);
     }
 }
