@@ -32,8 +32,23 @@ class com.xvm.DefaultConfig
                   updateInterval: 10000, // msec
                   x: 100,
                   y: 0,
-                  style:{
-                    fontSize: 11
+                  alpha: 60,
+                  fontStyle: {
+                    name: "$FieldFont",
+                    size: 11,
+                    bold: true,
+                    italic: false,
+                    color: {
+                      great: "0x33FFCC",
+                      good: "0x99FF33",
+                      poor: "0xFFFF33",
+                      bad: "0xFF7733"
+                    }
+                  },
+                  threshold: {
+                    great: 30,
+                    good: 60,
+                    poor: 100
                   }
                 }
             },
