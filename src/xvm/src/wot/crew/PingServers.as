@@ -22,15 +22,15 @@ class wot.crew.PingServers
             instance = new PingServers();
         instance.view = new PingServersView();
         instance.pingTimer = _global.setInterval(
-            function() { PingServers.instance.ShowPing.call(PingServers.instance) },
+            function() { PingServers.instance.showPing.call(PingServers.instance) },
             Config.s_config.hangar.pingServers.updateInterval);
 
         // immediately
-        PingServers.instance.ShowPing.call(PingServers.instance);
+        PingServers.instance.showPing.call(PingServers.instance);
         // after 1, 3, 5 sec
-        _global.setTimeout(function() { PingServers.instance.ShowPing.call(PingServers.instance) }, 1000);
-        _global.setTimeout(function() { PingServers.instance.ShowPing.call(PingServers.instance) }, 3000);
-        _global.setTimeout(function() { PingServers.instance.ShowPing.call(PingServers.instance) }, 5000);
+        _global.setTimeout(function() { PingServers.instance.showPing.call(PingServers.instance) }, 1000);
+        _global.setTimeout(function() { PingServers.instance.showPing.call(PingServers.instance) }, 3000);
+        _global.setTimeout(function() { PingServers.instance.showPing.call(PingServers.instance) }, 5000);
     }
 
     public function PingServers()
@@ -38,8 +38,13 @@ class wot.crew.PingServers
         pingCommandCounter = 0;
     }
 
-    private function ShowPing()
+    private function showPing()
     {
-        Comm.Sync(Defines.COMMAND_PING, String(pingCommandCounter++), view, view.showPingCallback);
+        Comm.Sync(Defines.COMMAND_PING, String(pingCommandCounter++), this, updateView);
+    }
+    
+    private function updateView(event):Void
+    {
+        view.showPingCallback(event);
     }
 }
