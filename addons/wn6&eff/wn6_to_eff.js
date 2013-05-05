@@ -1,6 +1,6 @@
-// Скрипт для замены одного представления рейтинга на другое
+// РЎРєСЂРёРїС‚ РґР»СЏ Р·Р°РјРµРЅС‹ РѕРґРЅРѕРіРѕ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ СЂРµР№С‚РёРЅРіР° РЅР° РґСЂСѓРіРѕРµ
 
-// Искомый текст и текст замены
+// РСЃРєРѕРјС‹Р№ С‚РµРєСЃС‚ Рё С‚РµРєСЃС‚ Р·Р°РјРµРЅС‹
 var text_sample1="{{wn}}";
 var text_replace1="{{eff:4}}";
 var text_sample2="{{c:wn}}";
@@ -8,7 +8,7 @@ var text_replace2="{{c:eff}}";
 
 var i=0;
 do {
-	// Имя файла берём из аргумента или задаем XVM.xvmconf, если аргумент пуст
+	// РРјСЏ С„Р°Р№Р»Р° Р±РµСЂС‘Рј РёР· Р°СЂРіСѓРјРµРЅС‚Р° РёР»Рё Р·Р°РґР°РµРј XVM.xvmconf, РµСЃР»Рё Р°СЂРіСѓРјРµРЅС‚ РїСѓСЃС‚
 	if (WScript.Arguments.length<1) {
 		var file_name="XVM.xvmconf";
 	}
@@ -19,7 +19,7 @@ do {
 	var fso=WScript.CreateObject("Scripting.FileSystemObject");
 	if (!fso.FileExists(file_name))
 	  break;
-	// Переносим исходный файл во временный
+	// РџРµСЂРµРЅРѕСЃРёРј РёСЃС…РѕРґРЅС‹Р№ С„Р°Р№Р» РІРѕ РІСЂРµРјРµРЅРЅС‹Р№
 	var file_name_tmp=file_name+".tmp";
 	if(fso.FileExists(file_name_tmp))
 	  fso.DeleteFile(file_name_tmp);
@@ -28,7 +28,7 @@ do {
 	var fo=fso.OpenTextFile(file_name_tmp,1,false,false);
 	var fr=fso.OpenTextFile(file_name,2,true,false);
 
-	// Выполняем замену текста в каждой строке
+	// Р’С‹РїРѕР»РЅСЏРµРј Р·Р°РјРµРЅСѓ С‚РµРєСЃС‚Р° РІ РєР°Р¶РґРѕР№ СЃС‚СЂРѕРєРµ
 	var re1=new RegExp(text_sample1);
 	var re2=new RegExp(text_sample2);
 
@@ -42,7 +42,7 @@ do {
 	}
 	fo.Close();
 	fr.Close();
-	// Удаляем исходный файл
+	// РЈРґР°Р»СЏРµРј РёСЃС…РѕРґРЅС‹Р№ С„Р°Р№Р»
 	fso.DeleteFile(file_name_tmp);
 
 	i++
