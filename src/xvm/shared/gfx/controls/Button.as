@@ -2,6 +2,7 @@
 {
     var state;
     var textField;
+    var tooltipText;
     function get label();
     function set label(value);
     function get disabled();
@@ -10,7 +11,7 @@
     function set selected(value);
     function get groupName();
     function set groupName(value);
-    function get group();
+    function get group():gfx.controls.ButtonGroup;
     function set group(value);
     function get disableFocus();
     function set disableFocus(value);

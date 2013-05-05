@@ -38,17 +38,12 @@
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
     <compile path="src\com" />
-    <compile path="src\com\greensock" />
     <compile path="src\com\greensock\core" />
     <compile path="src\com\greensock\easing" />
     <compile path="src\com\greensock\easing\helpers" />
     <compile path="src\com\greensock\plugins" />
     <compile path="src\com\greensock\plugins\helpers" />
-    <compile path="src\com\natecook" />
     <compile path="src\com\produxion\util" />
-    <compile path="src\com\produxion" />
-    <compile path="src\com\xvm" />
-    <compile path="src\com\xvm\Helpers" />
     <compile path="src\wot\crew\tankmen" />
     <compile path="shared\Mouse.as" />
     <compile path="src\wot\TeamRenderer" />
@@ -67,7 +62,6 @@
     <compile path="src\wot\Minimap\model\externalProxy" />
     <compile path="src\wot\Minimap\model\iconTracker" />
     <compile path="src\wot\Minimap\model\mapSize" />
-    <compile path="src\wot\Minimap\shapes" />
     <compile path="src\wot\Minimap\staticUtils" />
     <compile path="shared\MovieClip.as" />
     <compile path="src\wot\FinalStatistic" />
@@ -75,6 +69,8 @@
     <compile path="src\wot\SquadMemberRenderer" />
     <compile path="src\wot\UserInfo" />
     <compile path="src\wot\StatisticForm" />
+    <compile path="src\wot\Minimap\shapes" />
+    <compile path="src\com\xvm" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>

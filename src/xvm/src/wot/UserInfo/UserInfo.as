@@ -60,14 +60,17 @@ class wot.UserInfo.UserInfo
     var m_statisticsHeaderField:TextField;
     var m_name:String;
     var m_userData:Object;
-    var m_buttonOwn:gfx.controls.Button;
+    var m_rbAll:gfx.controls.RadioButton;
+    var m_rbFull:gfx.controls.RadioButton;
+    var m_rbOwn:gfx.controls.RadioButton;
     var m_tiFilter:gfx.controls.TextInput;
     var m_button1:MovieClip, m_button2:MovieClip, m_button3:MovieClip, m_button4:MovieClip;
     var m_button5:MovieClip, m_button6:MovieClip, m_button7:MovieClip, m_button8:MovieClip;
     var m_dataLoaded:Boolean;
 
+    private var m_allDataProvider:Array;
     private var m_fullDataProvider:Array;
-    private var m_filteredDataProvider:Array;
+    private var m_hangarDataProvider:Array;
     
     public function UserInfoCtor()
     {
@@ -132,6 +135,11 @@ class wot.UserInfo.UserInfo
         return (res == "") ? 0 : parseInt(res);
     }
 
+    private function perBattle(value:Number, battles:Number):Number
+    {
+        return battles <= 0 ? 0 : value / battles;
+    }
+    
     function setStatImpl()
     {
         var battles = 0;
@@ -152,7 +160,7 @@ class wot.UserInfo.UserInfo
                 case "wins":
                     // battles
                     var wins = extractNumber(arguments[i + 1]);
-                    var gwr = wins / battles * 100;
+                    var gwr = perBattle(wins, battles) * 100;
                     var r1 = Math.round(gwr) / 100 + 0.005;
                     var r2 = int(gwr) / 100 + 0.01;
                     var b1 = (battles * r1 - wins) / (1 - r1);
@@ -166,26 +174,26 @@ class wot.UserInfo.UserInfo
                         : b2 + Locale.get(" to ") + (r2 * 100) + "% / " + b1 + Locale.get(" to ") + (r2 * 100 + 0.5) + "%";
 
                     // wins
-                    arguments[i + 2] = Sprintf.format("%.2f", wins / battles * 100) + "%";
+                    arguments[i + 2] = Sprintf.format("%.2f", gwr) + "%";
                     if (data && data.avgR && data.topR)
                         arguments[i + 2] += " (" + Sprintf.format("%.2f", data.avgR * 100) + " / " + Sprintf.format("%.2f", data.topR * 100) + ")";
                     i += 2;
                     break;
 
                 case "losses":
-                    arguments[i + 2] = Sprintf.format("%.2f", extractNumber(arguments[i + 1]) / battles * 100) + "%";
+                    arguments[i + 2] = Sprintf.format("%.2f", perBattle(extractNumber(arguments[i + 1]), battles) * 100) + "%";
                     i += 2;
                     break;
 
                 case "survivedBattles":
-                    arguments[i + 2] = Sprintf.format("%.2f", extractNumber(arguments[i + 1]) / battles * 100) + "%";
+                    arguments[i + 2] = Sprintf.format("%.2f", perBattle(extractNumber(arguments[i + 1]), battles) * 100) + "%";
                     if (data && data.avgU && data.topU)
                         arguments[i + 2] += " (" + Sprintf.format("%.2f", data.avgU * 100) + " / " + Sprintf.format("%.2f", data.topU * 100) + ")";
                     i += 2;
                     break;
 
                 case "frags":
-                    arguments[i + 2] = Sprintf.format("%.2f", extractNumber(arguments[i + 1]) / battles);
+                    arguments[i + 2] = Sprintf.format("%.2f", perBattle(extractNumber(arguments[i + 1]), battles));
                     if (data && data.avgF && data.topF)
                         arguments[i + 2] += " (" + Sprintf.format("%.2f", data.avgF) + " / " + Sprintf.format("%.2f", data.topF) + ")";
                     i += 2;
@@ -200,10 +208,10 @@ class wot.UserInfo.UserInfo
                 case "damageDealt":
                     if (data && data.avgD && data.topD)
                     {
-                        arguments[i + 2] = Math.round(extractNumber(arguments[i + 1]) / battles) +
+                        arguments[i + 2] = Math.round(perBattle(extractNumber(arguments[i + 1]), battles)) +
                             " (" + data.avgD + " / " + data.topD + ")";
                     } else {
-                        arguments[i + 2] = Sprintf.format("%.2f", extractNumber(arguments[i + 1]) / battles);
+                        arguments[i + 2] = Sprintf.format("%.2f", perBattle(extractNumber(arguments[i + 1]), battles));
                     }
                     i += 2;
                     break;
@@ -214,7 +222,7 @@ class wot.UserInfo.UserInfo
                     break;
 
                 case "avgExperience":
-                    arguments[i + 2] = Sprintf.format("%.2f", (xp / battles));
+                    arguments[i + 2] = Sprintf.format("%.2f", perBattle(xp, battles));
                     i += 2;
                     break;
 
@@ -267,7 +275,8 @@ class wot.UserInfo.UserInfo
             m_button5.tooltipText = Locale.get("UserInfoEHint").split("%DATE%").join("<font color='#CCCCCC'>" + dt + "</font>");
         }
 
-        fixList();
+        fixList(wrapper.list.dataProvider);
+        fixRenderers();
         wrapper.list.invalidate();
 
         setXVMStat1();
@@ -344,7 +353,7 @@ class wot.UserInfo.UserInfo
 
         //Logger.addObject(blocksArea, "blocksArea", 3);
         //Logger.addObject(data);
-        var tb = extractNumber(wrapper.blocksArea.blockcommon.itembattlesCount.value.text);
+        var tb = data.fights;
         var tw = extractNumber(wrapper.blocksArea.blockcommon.itemwins.value.text);
         var td = extractNumber(wrapper.blocksArea.blockbattleeffect.itemdamageDealt.value.text);
         var tf = extractNumber(wrapper.blocksArea.blockbattleeffect.itemfrags.value.text);
@@ -362,21 +371,30 @@ class wot.UserInfo.UserInfo
         stat = StatLoader.CalculateStatValues(stat, true);
         //Logger.addObject(stat);
 
-        var specD = td / tb / data.hp || 0;
-        var e_color = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.te);
         var s2 = "";
-        s2 += "E: " + (!stat.teff ? "-" :
-            "<font color='" + e_color + "'>" + (stat.te < 10 ? stat.te : "X") + "</font> (<font color='" + e_color + "'>" + stat.teff + "</font>)") + "  ";
+
+        if (tb == 0)
+            s2 += "E: - (-)  ";
+        else
+        {
+            var e_color = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.te);
+            s2 += "E: " + (!stat.teff ? "-" :
+                "<font color='" + e_color + "'>" + (stat.te < 10 ? stat.te : "X") + "</font> (<font color='" + e_color + "'>" + stat.teff + "</font>)") + "  ";
+        }
+
+        var specD = tb == 0 ? 0 : td / tb / data.hp || 0;
         s2 += Locale.get("Spec dmg") + ": " + (!specD ? "-" :
             "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TDV, specD) + "'>" + Sprintf.format("%.2f", specD) + "</font>") + " ";
         s2 += "(<font color='#ffc133'>" + (data.avgE ? Sprintf.format("%.2f", data.avgE) : "-") + "</font>" +
             " / <font color='#ffc133'>" + (data.topE ? Sprintf.format("%.2f", data.topE) : "-") + "</font>)  ";
+
         // FIXIT: WG providing incorrect per-vehicle stat
         s2 += Locale.get("Spotted") + ": " + (!data.tsb ? "-" :
             "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, data.tsb) + "'>" + Sprintf.format("%.2f", data.tsb) + "</font>") + " ";
         s2 += "(<font color='#ffc133'>" + (data.avgS ? Sprintf.format("%.2f", data.avgS) : "-") + "</font>" +
             " / <font color='#ffc133'>" + (data.topS ? Sprintf.format("%.2f", data.topS) : "-") + "</font>)  ";
         // END FIXIT
+
         m_statisticsField2.htmlText = "<span class='xvm_statisticsField'>" + s2 + "</span>";
     }
 
@@ -386,17 +404,16 @@ class wot.UserInfo.UserInfo
     {
         base.setList.apply(base, arguments);
 
-        fixList();
         filterList();
+        fixRenderers();
         applyFilterAndSort();
         //Logger.addObject(lastSort, "", 2);
         //Logger.addObject(_root, "_root", 2);
         //Logger.addObject(m_fullDataProvider);
     }
 
-    private function fixList()
+    private function fixList(data:Array)
     {
-        var data:Array = wrapper.list.dataProvider;
         //Logger.addObject(data, "", 3);
         for (var i = 1; i < data.length; ++i)
         {
@@ -456,23 +473,64 @@ class wot.UserInfo.UserInfo
                 }
             }
         }
-
-        fixRenderers();
     }
 
     private function filterList()
     {
         //Logger.add("filterList()");
+        
+        // Full
         m_fullDataProvider = wrapper.list.dataProvider;
 
+        fixList(m_fullDataProvider);
+
+        // All
+        m_allDataProvider = [ m_fullDataProvider[0] ];
+        var commonId = m_fullDataProvider[0].id;
+        var len:Number = m_fullDataProvider.length;
+        var all = com.xvm.VehicleInfoData2.data;
+        for (var vn:String in all)
+        {
+            if (vn == "unknown")
+                continue;
+
+            var vi = all[vn];
+            var icon = "../maps/icons/vehicle/small/" + vi.nation + "-" + vi.name + ".png";
+
+            var item:Object = null;
+            for (var i:Number = 1; i < len; ++i)
+            {
+                if (m_fullDataProvider[i].icon == icon)
+                {
+                    item = m_fullDataProvider[i];
+                    break;
+                }
+            }
+
+            m_allDataProvider.push(item || {
+                id: commonId,
+                name: vi.name,
+                icon: icon,
+                type: UserInfoDataItem.toType(vi.type),
+                nation: UserInfoDataItem.toNation(vi.nation),
+                level: vi.level,
+                toolTip: 0,
+                fights: 0,
+                wins: 0,
+                vehicleClass: 0 // 1,2,3,M
+            });
+        }
+        fixList(m_allDataProvider);
+        
+        // Hangar
         var carouselData:Array = wot.RootComponents.carousel.dataProvider || _global._xvm_carousel_dataProvider;
         if (!carouselData)
         {
-            m_filteredDataProvider = null;
+            m_hangarDataProvider = null;
             return;
         }
 
-        m_filteredDataProvider = [ m_fullDataProvider[0] ];
+        m_hangarDataProvider = [ m_fullDataProvider[0] ];
         var ulen:Number = m_fullDataProvider.length;
         var clen:Number = carouselData.length;
         for (var i:Number = 0; i < ulen; ++i)
@@ -485,7 +543,7 @@ class wot.UserInfo.UserInfo
                 if (ci.label == ui.name)
                 {
                     //Logger.add("ci=ui: " + ci.label);
-                    m_filteredDataProvider.push(ui);
+                    m_hangarDataProvider.push(ui);
                     break;
                 }
             }
@@ -494,12 +552,13 @@ class wot.UserInfo.UserInfo
     
     private function applyFilterAndSort()
     {
-        if (m_filteredDataProvider == null)
-            return;
+        //Logger.add("applyFilterAndSort()");
 
-        if (m_buttonOwn != null)
+        if (m_rbFull != null)
         {
-            var data:Array = m_buttonOwn.selected ? m_filteredDataProvider : m_fullDataProvider;
+            var selected = m_rbFull.group.selectedButton;
+            var data:Array = selected == m_rbOwn ? m_hangarDataProvider || m_fullDataProvider
+                : selected == m_rbAll ? m_allDataProvider : m_fullDataProvider;
             if (m_tiFilter.text != null && m_tiFilter.text != "")
             {
                 var provider:Array = data;
@@ -567,33 +626,36 @@ class wot.UserInfo.UserInfo
         
         // Filter controls
 
-        //Logger.addObject(wrapper, "wrapper", 3);
-        m_buttonOwn = gfx.controls.CheckBox(Utils.createCheckBox(wrapper, "bOwn",
-            wrapper.nameField._x + 320, wrapper.nameField._y + 8, Locale.get("In hangar")));
-        m_buttonOwn.addEventListener("click", this, "onButtonOwnClick");
-        m_buttonOwn.tooltipText = Locale.get("Show only tanks in own hangar");
-        m_buttonOwn.selected = IsSelfUserInfo() && Config.s_config.userInfo.inHangarFilterEnabled == true;
-        
         // TODO: player info dialog is broken when using TextInput? 
+        // userInfoWindow don't load data when create TextInput on it, use workaround.
+        var owner:MovieClip = IsSelfUserInfo() ? wrapper : wrapper._parent._parent;
+        var dy:Number = IsSelfUserInfo() ? -67 : 0;
         
-        var filterLabel:TextField = wrapper.createTextField("filterLabel", wrapper.getNextHighestDepth(),
-            wrapper.nameField._x + 400, wrapper.nameField._y + 7, 50, 20);
+        //Logger.addObject(wrapper, "wrapper", 3);
+
+        m_rbOwn = gfx.controls.RadioButton(Utils.createRadioButton(owner, "rbOwnTanks", 460, dy - 2, 100, Locale.get("In hangar"), "filter"));
+        m_rbOwn.addEventListener("select", this, "applyFilterAndSort");
+        m_rbOwn.tooltipText = Locale.get("Show only tanks in own hangar");
+        m_rbOwn.selected = IsSelfUserInfo() && Config.s_config.userInfo.inHangarFilterEnabled == true;
+        
+        m_rbFull = gfx.controls.RadioButton(Utils.createRadioButton(owner, "rbFullTanks", 460, dy + 10, 100, Locale.get("Player tanks"), "filter"));
+        m_rbFull.addEventListener("select", this, "applyFilterAndSort");
+        m_rbFull.tooltipText = Locale.get("Show all tanks played");
+        m_rbFull.selected = !IsSelfUserInfo() || Config.s_config.userInfo.inHangarFilterEnabled != true;
+
+        m_rbAll = gfx.controls.RadioButton(Utils.createRadioButton(owner, "rbAllTanks", 460, dy + 22, 100, Locale.get("All tanks"), "filter"));
+        m_rbAll.addEventListener("select", this, "applyFilterAndSort");
+        m_rbAll.tooltipText = Locale.get("Show all tanks in the game");
+        m_rbAll.selected = false;
+
+        var filterLabel:TextField = owner.createTextField("filterLabel", owner.getNextHighestDepth(), 560, dy - 2, 60, 20);
         filterLabel.antiAliasType = "advanced";
-        filterLabel.styleSheet = Utils.createStyleSheet(Utils.createCSSFromConfig("$FieldFont", m_buttonOwn.textField.textColor, "xvm_filterLabel"));
+        filterLabel.styleSheet = Utils.createStyleSheet(Utils.createCSSFromConfig("$FieldFont", m_rbOwn.textField.textColor, "xvm_filterLabel"));
         filterLabel.selectable = false;
         filterLabel.html = true;
         filterLabel.htmlText = "<span class='xvm_filterLabel'>" + Locale.get("Filter") + ":</span>";
 
-        // userInfoWindow don't load data when create TextInput on it, use workaround.
-        if (IsSelfUserInfo())
-        {
-            m_tiFilter = gfx.controls.TextInput(Utils.createTextInput(wrapper, "__xvm_tiFilter",
-                wrapper.nameField._x + 450, wrapper.nameField._y + 5, 70));
-        }
-        else
-        {
-            m_tiFilter = gfx.controls.TextInput(Utils.createTextInput(wrapper._parent._parent, "_xvm_tiFilter", 536, 5, 70));
-        }
+        m_tiFilter = gfx.controls.TextInput(Utils.createTextInput(owner, "__xvm_tiFilter", 560, dy + 13, 60));
         m_tiFilter.addEventListener("textChange", this, "applyFilterAndSort");
     }
 
@@ -681,12 +743,6 @@ class wot.UserInfo.UserInfo
 
     // filtering
     
-    private function onButtonOwnClick(e)
-    {
-        m_tiFilter.text = "";
-        applyFilterAndSort();
-    }
-
     private function onButtonStateChangeClick(e)
     {
         var b = e.target;

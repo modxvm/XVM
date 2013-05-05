@@ -341,6 +341,22 @@ class com.xvm.Utils
         return b;
     }
 
+    public static function createRadioButton(mc:MovieClip, name:String, x:Number, y:Number, width:Number, txt:String, group:String):MovieClip
+    {
+        var b:MovieClip = mc.attachMovie("RadioButton", name, mc.getNextHighestDepth());
+        b._x = x;
+        b._y = y;
+        b.autoSize = false;
+        b.width = width;
+        b.label = txt;
+        b.group = group;
+
+        b.addEventListener("rollOver", showTooltip);
+        b.addEventListener("rollOut", hideTooltip);
+
+        return b;
+    }
+
     public static function createCheckBox(mc:MovieClip, name:String, x:Number, y:Number, txt:String, align:String):MovieClip
     {
         var b:MovieClip = mc.attachMovie("CheckBox", name, mc.getNextHighestDepth());

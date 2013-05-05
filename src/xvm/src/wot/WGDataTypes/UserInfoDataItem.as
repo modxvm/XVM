@@ -33,4 +33,39 @@ class wot.WGDataTypes.UserInfoDataItem
 {
     var icon:String;
     var name:String;
+    var vehicleClass:Number; // 1,2,3,4(M)
+    var type:Number;
+    var nation: Number;
+    var level:Number;
+    var toolTip:Number;
+    var fights:Number;
+    var wins:Number;
+    
+    public static function toType(s:String):Number
+    {
+        switch (s)
+        {
+            case "LT": return 2;
+            case "MT": return 3;
+            case "HT": return 5;
+            case "TD": return 4;
+            case "SPG": return 1;
+            default: return 0;
+        }
+    }
+
+    public static function toNation(s:String):Number
+    {
+        switch (s)
+        {
+            case "ussr": return 0;
+            case "germany": return 1;
+            case "usa": return 2;
+            case "china": return 3;
+            case "france": return 4;
+            case "uk": return 5;
+            case "japan": return 6;
+            default: return -1;
+        }
+    }
 }

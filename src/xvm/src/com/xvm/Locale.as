@@ -112,8 +112,12 @@ class com.xvm.Locale
         tr["top"] = "топ";
         tr["Spec dmg"] = "Уд. дамаг";
 
+        tr["All tanks"] = "Все танки";
+        tr["Show all tanks in the game"] = "Показать все танки в игре";
+        tr["Player tanks"] = "Танки игрока";
+        tr["Show all tanks played"] = "Показыть все танки, на которых играл";
         tr["In hangar"] = "В ангаре";
-        tr["Show only tanks in own hangar"] = "Показывать только танки в своем ангаре";
+        tr["Show only tanks in own hangar"] = "Показать только танки в своем ангаре";
         tr["Filter"] = "Фильтр";
         
         tr["Level"] = "Уровень";
