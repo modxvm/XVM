@@ -65,6 +65,7 @@
         // Values above define bad responce
         // Значения более считаются плохим откликом
       },
+      // Параметры тени
       "shadow": {
         "enabled": true,
         "color": "0xFF0000",
