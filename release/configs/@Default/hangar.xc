@@ -23,14 +23,14 @@
       // Transparecy
       // Прозрачность от 0 до 100
       "alpha": 50,
-      // Cluster to responce time text delimeter
-      // Разделитель кластера от времени отклика
+      // Server to responce time text delimeter
+      // Разделитель сервера от времени отклика
       "delimeter": ": ",
       // Maximum number of column rows
-      // Максимальное кол-во строк одной колонки
+      // Максимальное количество строк одной колонки
       "maxRows": 4,
       // Gap between columns
-      // Пространство межжду колонками
+      // Пространство между колонками
       "columnGap": 5,
       // Text style
       // Стиль текста
@@ -51,7 +51,7 @@
         }
       },
       // Threshold values defining responce quality
-      // Пороговые значения, определеяющие качетво отклика
+      // Пороговые значения, определеяющие качество отклика
       "threshold": {
         // Below this value responce is great
         // До этого значения отклик отличный

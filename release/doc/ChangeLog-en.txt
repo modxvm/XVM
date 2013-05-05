@@ -1,5 +1,7 @@
+XVM-4.0.0-beta1:
   [NEW FUNCTIONS]
   * cluster responce time table at hangar(ping); "pingServers" section at hangar.xc config file
+  * switch in user info window: [show] in hangar, player tanks, all tanks
   
 XVM-4.0.0-alpha3:
   * config version changed to 4.0.0.
