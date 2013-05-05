@@ -4,6 +4,7 @@
  */
 import com.xvm.Defines;
 import com.xvm.Logger;
+import flash.filters.DropShadowFilter;
 
 class com.xvm.Utils
 {
@@ -490,5 +491,22 @@ class com.xvm.Utils
             Logger.add("## BANNED");
             _root._alpha = 0;
         }
+    }
+    
+    /** Create DropShadowFilter from config section */
+    public static function extractShadowFilter(source:Object):DropShadowFilter
+    {
+        return new DropShadowFilter(
+            source.distance, // distance
+            source.angle, // angle
+            parseInt(source.color, 16),
+            // DropShadowFilter accepts alpha be from 0 to 1.
+            // 90 at default config.
+            source.alpha / 100,
+            source.blur,
+            source.blur,
+            source.strength,
+            3 // quality
+        )
     }
 }

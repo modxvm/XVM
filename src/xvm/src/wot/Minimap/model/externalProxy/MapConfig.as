@@ -1,6 +1,7 @@
-import flash.filters.DropShadowFilter;
+import com.xvm.Utils;
 import flash.geom.Point;
 import com.xvm.Config;
+import flash.filters.DropShadowFilter;
 
 class wot.Minimap.model.externalProxy.MapConfig
 {
@@ -77,7 +78,7 @@ class wot.Minimap.model.externalProxy.MapConfig
             public static function unitShadow(entryName:String):DropShadowFilter
             {
                 var unitType:String = entryType(entryName);
-                return extractShadowFilter(labels.units.shadow[unitType]);
+                return Utils.extractShadowFilter(labels.units.shadow[unitType]);
             }
             /** Offset */
             public static function unitLabelOffset(entryName:String)
@@ -107,7 +108,7 @@ class wot.Minimap.model.externalProxy.MapConfig
                 public static function get mapSizeLabelShadowEnabled(vehicleClass):Boolean    {
                     return mapSize.shadow.enabled;    }
                 public static function get mapSizeLabelShadow():DropShadowFilter    {
-                    return extractShadowFilter(labels.mapSize.shadow);    }
+                    return Utils.extractShadowFilter(labels.mapSize.shadow);    }
 
             public static function get mapSizeLabelWidth() :Number   {
                 return mapSize.width;     }
@@ -150,22 +151,6 @@ class wot.Minimap.model.externalProxy.MapConfig
         }
 
     // -- Private
-
-    private static function extractShadowFilter(source:Object):DropShadowFilter
-    {
-        return new DropShadowFilter(
-            source.distance, // distance
-            source.angle, // angle
-            parseInt(source.color),
-            // DropShadowFilter accepts alpha be from 0 to 1.
-            // 90 at default config.
-            source.alpha / 100,
-            source.blur,
-            source.blur,
-            source.strength,
-            3 // quality
-        )
-    }
 
     /** Translate internal WG entryName to minimap config file marker type*/
     private static function entryType(entryName:String):String

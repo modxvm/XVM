@@ -26,6 +26,11 @@ class wot.crew.PingFieldBuilder
         tf._alpha = cfg.alpha;
         tf.htmlText = "";
         
+        if (cfg.shadow.enabled)
+        {
+            tf.filters = [Utils.extractShadowFilter(cfg.shadow)];
+        }
+        
         return tf;
     }
     

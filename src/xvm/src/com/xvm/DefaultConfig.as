@@ -52,6 +52,15 @@ class com.xvm.DefaultConfig
                     great: 30,
                     good: 60,
                     poor: 100
+                  },
+                  shadow: {
+                    enabled: true,
+                    color: "0x000000",
+                    distance: 0,
+                    angle: 0,
+                    alpha: 100,
+                    blur: 3,
+                    strength: 5
                   }
                 }
             },

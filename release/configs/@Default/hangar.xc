@@ -19,10 +19,10 @@
       // Axis field coordinates
       // Положение поля по осям
       "x": 100,
-      "y": 0,
+      "y": 25,
       // Transparecy
       // Прозрачность от 0 до 100
-      "alpha": 60,
+      "alpha": 50,
       // Cluster to responce time text delimeter
       // Разделитель кластера от времени отклика
       "delimeter": ": ",
@@ -38,8 +38,8 @@
         // Font name
         // Название шрифта
         "name": "$FieldFont",
-        "size": 11, // Размер
-        "bold": true,  // Жирный
+        "size": 14, // Размер
+        "bold": false,  // Жирный
         "italic": false, // Курсив
         // Different colors depending on server responce time
         // Разные цвета в зависимости от времени отклика сервера
@@ -64,6 +64,15 @@
         "poor": 100
         // Values above define bad responce
         // Значения более считаются плохим откликом
+      },
+      "shadow": {
+        "enabled": true,
+        "color": "0xFF0000",
+        "distance": 0,
+        "angle": 0,
+        "alpha": 100,
+        "blur": 3,
+        "strength": 5
       }
     }
   },
