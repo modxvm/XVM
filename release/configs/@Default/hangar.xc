@@ -23,6 +23,16 @@
       // Transparecy
       // Прозрачность от 0 до 100
       "alpha": 60,
+      // Cluster to responce time text delimeter
+      // Разделитель кластера от времени отклика
+      "delimeter": ": ",
+      // Maximum number of column rows
+      // Максимальное кол-во строк одной колонки
+      "maxRows": 4,
+      // Gap between columns
+      // Пространство межжду колонками
+      "columnGap": 5,
+      // Text style
       // Стиль текста
       "fontStyle": {
         // Font name

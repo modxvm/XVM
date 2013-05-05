@@ -31,12 +31,15 @@ class com.xvm.DefaultConfig
                   enabled: false,
                   updateInterval: 10000, // msec
                   x: 100,
-                  y: 0,
-                  alpha: 60,
+                  y: 25,
+                  alpha: 50,
+                  delimeter: ": ",
+                  maxRows: 4,
+                  columnGap: 5,
                   fontStyle: {
                     name: "$FieldFont",
-                    size: 11,
-                    bold: true,
+                    size: 14,
+                    bold: false,
                     italic: false,
                     color: {
                       great: "0x33FFCC",
