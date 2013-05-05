@@ -1,7 +1,11 @@
-import com.xvm.Logger;
 import wot.crew.PingServersView;
 import com.xvm.Utils;
 
+/**
+ * TextField building is separated here.
+ * Other classes do not care about field creation process.
+ * And this class does not care about other classes using fields.
+ */
 class wot.crew.PingFieldBuilder
 {
     private static var TF_NAME_PREFIX:String = "__xvm_pingTextField";

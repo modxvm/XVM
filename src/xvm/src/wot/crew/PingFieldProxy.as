@@ -1,6 +1,12 @@
-import com.xvm.Logger;
 import wot.crew.PingFieldBuilder;
 
+/**
+ * Manages many columns - TextFields.
+ * Returns to view one field for update.
+ * 
+ * Each column can consist of many rows.
+ * Row example: "RU1: 15"
+ */
 class wot.crew.PingFieldProxy
 {
     private var cfg:Object;
@@ -13,6 +19,10 @@ class wot.crew.PingFieldProxy
         builder = new PingFieldBuilder(cfg);
     }
     
+    /**
+     * Defines which field is appropriate for data apeend.
+     * If there is no such field then create one.
+     */
     public function getReceiverField():TextField
     {
         var firstNotFullField:TextField = getFirstNotFullField();
@@ -22,6 +32,34 @@ class wot.crew.PingFieldProxy
         }
         return createNewField();
     }
+    
+    /**
+     * Align colums so they do not overlap each other.
+     */
+    public function alignFields():Void
+    {
+        for (var i:Number = 1; i < fields.length; i++)
+        {
+            var currentField:TextField = fields[i];
+            var prevField:TextField = fields[i - 1];
+            currentField._x = prevField._x + prevField._width + cfg.columnGap;
+        }
+    }
+    
+    /**
+     * Each update data is obsolete.
+     * Content is erased, but empty fields remain.
+     */
+    public function clearAllFields():Void
+    {
+        for (var i in fields)
+        {
+            var tf:TextField = fields[i];
+            tf.htmlText = "";
+        }
+    }
+    
+    // -- Private
     
     private function getFirstNotFullField()
     {
@@ -36,27 +74,6 @@ class wot.crew.PingFieldProxy
         
         return null;
     }
-    
-    public function alignFields():Void
-    {
-        for (var i:Number = 1; i < fields.length; i++)
-        {
-            var currentField:TextField = fields[i];
-            var prevField:TextField = fields[i - 1];
-            currentField._x = prevField._x + prevField._width + cfg.columnGap;
-        }
-    }
-    
-    public function clearAllFields():Void
-    {
-        for (var i in fields)
-        {
-            var tf:TextField = fields[i];
-            tf.htmlText = "";
-        }
-    }
-    
-    // -- Private
     
     private function createNewField():TextField
     {

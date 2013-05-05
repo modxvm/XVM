@@ -23,7 +23,6 @@ class wot.crew.PingServersView
     {
         tfProxy.clearAllFields();
         
-        /** Data append creates field if necessary */
         for (var i:Number = 0; i < responceTimeList.length; i++)
         {
             appendRowToFields(makeStyledRow(responceTimeList[i]));
@@ -56,9 +55,12 @@ class wot.crew.PingServersView
     private function appendRowToFields(row:String):Void
     {
         var receiverTf:TextField = tfProxy.getReceiverField();
+        
         if (receiverTf.htmlText != "")
             receiverTf.htmlText += "\n";
+            
         receiverTf.htmlText += row;
+        
         tfProxy.alignFields();
     }
 }
