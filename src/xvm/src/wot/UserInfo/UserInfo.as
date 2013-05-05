@@ -491,7 +491,7 @@ class wot.UserInfo.UserInfo
         var all = com.xvm.VehicleInfoData2.data;
         for (var vn:String in all)
         {
-            if (vn == "unknown")
+            if (vn == "unknown" || Utils.endsWith("_training"))
                 continue;
 
             var vi = all[vn];

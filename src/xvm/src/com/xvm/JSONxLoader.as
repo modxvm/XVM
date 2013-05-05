@@ -118,6 +118,7 @@ class com.xvm.JSONxLoader
         }
 
         // reference
+        //   "$ref": { "file": "...", "line": "..." }
 
         //Logger.addObject(data, "Deref[" + level + "]", 2);
 
