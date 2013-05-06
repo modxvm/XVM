@@ -102,6 +102,10 @@
   // {{turret}} marker display strings.
   // Отображаемые строки {{turret}} маркера.
   "turretMarkers": ${"turretMarkers.xc":"turretMarkers"},
+  
+  // Ingame crits panel by "expert" skill.
+  // Внутриигровая панель критов от навыка "экспет".
+  "expertPanel": ${"expertPanel.xc":"expertPanel"},
 
   // Hit log (my hits calculator).
   // Лог попаданий (счетчик своих попаданий).

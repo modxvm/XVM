@@ -13,6 +13,7 @@ import com.xvm.Logger;
 import com.xvm.StatLoader;
 import com.xvm.Utils;
 import wot.battle.SixthSenseIndicator;
+import wot.battle.ExpertPanel;
 
 class wot.battle.BattleMain
 {
@@ -62,6 +63,8 @@ class wot.battle.BattleMain
         SetupElements();
 
         FragCorrelation.modify();
+        
+        ExpertPanel.modify();
     }
 
     private static function SetupElements()

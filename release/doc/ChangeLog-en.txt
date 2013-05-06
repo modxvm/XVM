@@ -1,3 +1,6 @@
+  [NEW FUNCTIONS]
+  * expertPanel mod; see expertPanel.xc
+
 XVM-4.0.0-beta1:
   [NEW FUNCTIONS]
   * cluster responce time table at hangar(ping); "pingServers" section at hangar.xc config file

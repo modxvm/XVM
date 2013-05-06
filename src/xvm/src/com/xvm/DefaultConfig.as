@@ -235,6 +235,10 @@ class com.xvm.DefaultConfig
                 highVulnerability: "*",
                 lowVulnerability: "'"
             },
+            expertPanel: {
+              delay: 15,
+              scale: 150
+            },
             minimap: {
                 enabled: true,
                 mapBackgroundImageAlpha: 100,
