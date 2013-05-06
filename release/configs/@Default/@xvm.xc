@@ -70,6 +70,10 @@
   // Frag counter panel.
   // Панель счёта в бою.
   "fragCorrelation": ${"battle.xc":"fragCorrelation"},
+  
+  // Ingame crits panel by "expert" skill.
+  // Внутриигровая панель критов от навыка "экспет".
+  "expertPanel": ${"battle.xc":"expertPanel"},
 
   // Options for player statistics (only with xvm-stat).
   // Блок управлением статистикой (только с xvm-stat).
