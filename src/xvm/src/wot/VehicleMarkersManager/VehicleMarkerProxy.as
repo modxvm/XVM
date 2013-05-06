@@ -13,6 +13,7 @@ import com.xvm.VehicleInfo;
 import wot.VehicleMarkersManager.log.HitLog;
 import wot.VehicleMarkersManager.log.HpLog;
 import wot.VehicleMarkersManager.IVehicleMarker;
+import wot.VehicleMarkersManager.log.PlayerModel;
 
 /* TODO:
  * Check for performance boost with marker object caching
@@ -122,7 +123,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
 
     private function initialize():Void
     {
-        // Don't draw hitlog in hangar
+        // Don't draw at hangar
         if (Sandbox.GetCurrentSandboxPrefix() == Sandbox.SANDBOX_VMM)
         {
             if (Config.s_config.hitLog.visible && hitLog == null)
@@ -134,7 +135,9 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
 
         // finalize initialization
         if (m_playerFullName && !subject)
+        {
             initializeSubject();
+        }
     }
 
     /**
@@ -245,7 +248,6 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     /**
      * called by Battle.pyc
      */
-
     public function init(vClass:String, vIconSource:String, vType:String, vLevel:Number, pFullName:String,
         curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean, hunt:Boolean, entityType:String):Void
     {
@@ -259,6 +261,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         m_dead = m_curHealth <= 0;
         if (Config.s_loaded == true && !subject)
             initializeSubject();
+        hpLog.onNewMarkerCreated(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth);
         call("init", [ vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt, entityType ]);
     }
 
@@ -272,18 +275,28 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         if (curHealth <= 0)
             m_dead = true;
 
-        if (flag == Defines.FROM_PLAYER && wrapper.m_team == "enemy" && hitLog != null) // do not calculate friendly fire
+        var curHealthAbsolute:Number = (curHealth < 0 ? 0 : curHealth);
+            
+        if (flag == Defines.FROM_PLAYER && wrapper.m_team == "enemy") /** Omit allies */
         {
-            var delta = m_curHealth - (curHealth < 0 ? 0 : curHealth);
-            hitLog.update(delta, curHealth,
-                VehicleInfo.mapVehicleName(m_defaultIconSource, m_vehicleName),
-                m_defaultIconSource,
-                m_playerFullName, m_level, damageType,
-                VehicleInfo.GetVTypeValue(m_defaultIconSource),
-                GraphicsUtil.GetVTypeColorValue(m_defaultIconSource),
-                m_dead);
+            
+            if (hitLog != null)
+            {
+                var delta = m_curHealth - curHealthAbsolute;
+                hitLog.update(delta, curHealth,
+                    VehicleInfo.mapVehicleName(m_defaultIconSource, m_vehicleName),
+                    m_defaultIconSource,
+                    m_playerFullName, m_level, damageType,
+                    VehicleInfo.GetVTypeValue(m_defaultIconSource),
+                    GraphicsUtil.GetVTypeColorValue(m_defaultIconSource),
+                    m_dead);
+            }
+            if (hpLog != null)
+            {
+                hpLog.onHealthUpdate(m_playerFullName, curHealthAbsolute);
+            }
         }
-        m_curHealth = curHealth < 0 ? 0 : curHealth;
+        m_curHealth = curHealthAbsolute;
 
         return call("updateHealth", arguments);
     }

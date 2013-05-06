@@ -474,6 +474,9 @@ class com.xvm.DefaultConfig
                   strength: 150
                 }
             },
+            hpLog: {
+              enabled: true
+            },
             markers: {
                 ally: {
                     alive: {
