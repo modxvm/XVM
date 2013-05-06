@@ -19,8 +19,8 @@ class wot.crew.PingFieldBuilder
     
     public function createField(num:Number):TextField
     {
-        var depth:Number = _root.getNextHighestDepth();
-        var tf:TextField = _root.createTextField(TF_NAME_PREFIX + num, depth, cfg.x, cfg.y, 200, 200);
+        var depth:Number = holder.getNextHighestDepth();
+        var tf:TextField = holder.createTextField(TF_NAME_PREFIX + num, depth, cfg.x, cfg.y, 200, 200);
         tf.autoSize = true;
         tf.multiline = true;
         tf.antiAliasType = "advanced";
@@ -60,5 +60,10 @@ class wot.crew.PingFieldBuilder
         css += createQualityCss(PingServersView.QUALITY_BAD);
         
         return css;
+    }
+    
+    private function get holder():MovieClip
+    {
+        return _root.header;
     }
 }
