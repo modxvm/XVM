@@ -68,7 +68,7 @@
       // Параметры тени
       "shadow": {
         "enabled": true,
-        "color": "0xFF0000",
+        "color": "0x000000",
         "distance": 0,
         "angle": 0,
         "alpha": 100,
