@@ -2,68 +2,48 @@
  * @author ilitvinov87@gmail.com
  */
 import com.xvm.Logger;
+import wot.VehicleMarkersManager.log.HpLogView;
 
 class wot.VehicleMarkersManager.log.HpLog
 {
     private var cfg:Object;
     private var model:Array = [];
+    private var view:HpLogView;
     
     public function HpLog(cfg:Object) 
     {
-        this.cfg = cfg;
+        this.view = HpLogView(cfg);
     }
     
     public function onNewMarkerCreated(vClass:String, vIconSource:String, vType:String,
                                        vLevel:Number, pFullName:String,
                                        curHealth:Number, maxHealth:Number):Void
     {
-        var playerObject:Object = {
+        var player:Object = {
             vClass: vClass, vIconSource: vIconSource, vType: vType, vLevel: vLevel,
             pFullName: pFullName, curHealth: curHealth, maxHealth: maxHealth }
-            
-        var loggedPlayer:Object = getLoggedPlayer(pFullName);
+        
+        var loggerPlayer:Object = getLoggedPlayer(pFullName);
         if (loggedPlayer == null)
         {
             /** Append new player to logging */
             model.push(playerObject);
-            redrawList();
         }
-        else
-        {
-            /** Check if player health changed since last encounter */
-            if (loggedPlayer.curHealth != playerObject.curHealth)
-            {
-                loggedPlayer.curHealth = playerObject.curHealth;
-                redrawList();
-            }
-        }
-    }
-   
-    public function onHealthUpdate(pFullName:String, curHealthAbsolute:Number):Void
-    {
-        if (curHealthAbsolute != 0)
-        {
-            var loggedPlayer:Object = getLoggedPlayer(pFullName);
-            loggedPlayer.curHealth = curHealthAbsolute;
-            redrawList();
-        }
-        else
-        {
-            onEnemyDied(pFullName);
-        }
+        redrawLog();
     }
     
-    public function onEnemyDied():Void
+    public function onHealthUpdate(pFullName:String, curHealth:Number):Void
     {
-        // remove from model
-        redrawList();
+        var player:Object = getLoggedPlayer(pFullName);
+        player.curHealth = curHealth;
+        redrawLog();
     }
     
     // -- Private
     
-    private function redrawList():Void
+    private function redrawLog():Void
     {
-        
+        view.update(model);
     }
     
     private function getLoggedPlayer(pFullName):Object
