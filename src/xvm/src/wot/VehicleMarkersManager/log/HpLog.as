@@ -24,18 +24,24 @@ class wot.VehicleMarkersManager.log.HpLog
             pFullName: pFullName, curHealth: curHealth, maxHealth: maxHealth }
         
         var loggerPlayer:Object = getLoggedPlayer(pFullName);
-        if (loggedPlayer == null)
+        if (loggerPlayer == null)
         {
             /** Append new player to logging */
-            model.push(playerObject);
+            model.push(player);
+            redrawLog();
         }
-        redrawLog();
+        else if (loggerPlayer.curHealth != curHealth)
+        {
+            /** Enemy health can actually have been changed while he was out of sight */
+            onHealthUpdate(pFullName, curHealth);
+        }
     }
     
     public function onHealthUpdate(pFullName:String, curHealth:Number):Void
     {
         var player:Object = getLoggedPlayer(pFullName);
         player.curHealth = curHealth;
+        
         redrawLog();
     }
     

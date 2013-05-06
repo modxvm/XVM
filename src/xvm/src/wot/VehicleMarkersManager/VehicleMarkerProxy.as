@@ -127,10 +127,11 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         if (Sandbox.GetCurrentSandboxPrefix() == Sandbox.SANDBOX_VMM)
         {
             if (Config.s_config.hitLog.visible && hitLog == null)
+            {
                 hitLog = new HitLog(Config.s_config.hitLog);
-                
-            if (Config.s_config.hpLog.enabled && hpLog == null)
-                hpLog = new HpLog(Config.s_config.hpLog);
+                if (Config.s_config.hitLog.hpLeft && hpLog == null)
+                    hpLog = new HpLog(Config.s_config.hitLog);
+            }
         }
 
         // finalize initialization

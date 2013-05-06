@@ -7,6 +7,9 @@
     // false - Disable.
     // false - отключить.
     "visible": true,
+    // Show enemy hp left by Alt press
+    // Показывать оставшееся здоровье врагов по нажатию Alt
+    "hpLeft": true,
     // X position (negative values - bind to right side of screen).
     // Позиция X (отрицательные значения - привязать к правой стороне экрана).
     "x": 270,

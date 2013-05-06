@@ -451,6 +451,7 @@ class com.xvm.DefaultConfig
             },
             hitLog: {
                 visible: true,
+                hpLeft: true,
                 x: 270,
                 y: 5,
                 w: 500,
@@ -473,9 +474,6 @@ class com.xvm.DefaultConfig
                   size: 5,
                   strength: 150
                 }
-            },
-            hpLog: {
-              enabled: true
             },
             markers: {
                 ally: {
