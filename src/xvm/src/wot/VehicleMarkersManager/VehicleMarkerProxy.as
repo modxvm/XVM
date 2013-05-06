@@ -10,8 +10,7 @@ import com.xvm.Logger;
 import com.xvm.Sandbox;
 import com.xvm.Utils;
 import com.xvm.VehicleInfo;
-import wot.VehicleMarkersManager.log.HitLog;
-import wot.VehicleMarkersManager.log.HpLog;
+import wot.VehicleMarkersManager.log.LogLists;
 import wot.VehicleMarkersManager.IVehicleMarker;
 import wot.VehicleMarkersManager.log.PlayerModel;
 
@@ -55,8 +54,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     private var m_dead:Boolean;
 
     // Components
-    private static var hitLog:HitLog = null;
-    private static var hpLog:HpLog = null;
+    private static var logLists:LogLists = null;
 
     /**
      * Instance of subject class with real implementation
@@ -126,11 +124,9 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         // Don't draw at hangar
         if (Sandbox.GetCurrentSandboxPrefix() == Sandbox.SANDBOX_VMM)
         {
-            if (Config.s_config.hitLog.visible && hitLog == null)
+            if (logLists == null)
             {
-                hitLog = new HitLog(Config.s_config.hitLog);
-                if (Config.s_config.hitLog.hpLeft && hpLog == null)
-                    hpLog = new HpLog(Config.s_config.hitLog);
+                logLists = new LogLists(Config.s_config.hitLog);
             }
         }
 
@@ -262,7 +258,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         m_dead = m_curHealth <= 0;
         if (Config.s_loaded == true && !subject)
             initializeSubject();
-        hpLog.onNewMarkerCreated(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth);
+        logLists.onNewMarkerCreated(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth);
         call("init", [ vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt, entityType ]);
     }
 
@@ -280,21 +276,16 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
             
         if (flag == Defines.FROM_PLAYER && wrapper.m_team == "enemy") /** Omit allies */
         {
-            
-            if (hitLog != null)
+            if (logLists != null)
             {
                 var delta = m_curHealth - curHealthAbsolute;
-                hitLog.update(delta, curHealth,
+                logLists.updateHealth(delta, curHealth,
                     VehicleInfo.mapVehicleName(m_defaultIconSource, m_vehicleName),
                     m_defaultIconSource,
                     m_playerFullName, m_level, damageType,
                     VehicleInfo.GetVTypeValue(m_defaultIconSource),
                     GraphicsUtil.GetVTypeColorValue(m_defaultIconSource),
-                    m_dead);
-            }
-            if (hpLog != null)
-            {
-                hpLog.onHealthUpdate(m_playerFullName, curHealthAbsolute);
+                    m_dead, curHealthAbsolute);
             }
         }
         m_curHealth = curHealthAbsolute;

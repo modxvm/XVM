@@ -15,25 +15,19 @@ class wot.VehicleMarkersManager.log.HpLog
         this.view = HpLogView(cfg);
     }
     
-    public function onNewMarkerCreated(vClass:String, vIconSource:String, vType:String,
-                                       vLevel:Number, pFullName:String,
-                                       curHealth:Number, maxHealth:Number):Void
+    public function onNewMarkerCreated(player:Object):Void
     {
-        var player:Object = {
-            vClass: vClass, vIconSource: vIconSource, vType: vType, vLevel: vLevel,
-            pFullName: pFullName, curHealth: curHealth, maxHealth: maxHealth }
-        
-        var loggerPlayer:Object = getLoggedPlayer(pFullName);
+        var loggerPlayer:Object = getLoggedPlayer(player.pFullName);
         if (loggerPlayer == null)
         {
             /** Append new player to logging */
             model.push(player);
             redrawLog();
         }
-        else if (loggerPlayer.curHealth != curHealth)
+        else if (loggerPlayer.curHealth != player.curHealth)
         {
             /** Enemy health can actually have been changed while he was out of sight */
-            onHealthUpdate(pFullName, curHealth);
+            onHealthUpdate(player.pFullName, player.curHealth);
         }
     }
     
