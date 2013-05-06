@@ -19,7 +19,6 @@ namespace wot
   {
     #region Private Members
 
-    [Serializable]
     public class PlayerData
     {
       public long id;         // player id
@@ -32,7 +31,6 @@ namespace wot
       internal string _clan { get { return n.GetClanName(); } }
     }
 
-    [Serializable]
     public class Stat
     {
       public long id;         // player id
@@ -59,20 +57,17 @@ namespace wot
       public int tf;          // tank frags
     }
 
-    [Serializable]
     public class XVMInfo
     {
       public String ver;
       public String message;
     }
 
-    [Serializable]
     public class Info
     {
       public XVMInfo xvm;
     }
 
-    [Serializable]
     public class Response
     {
       public Stat[] players;
