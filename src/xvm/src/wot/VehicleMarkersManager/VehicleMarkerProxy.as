@@ -11,6 +11,7 @@ import com.xvm.Sandbox;
 import com.xvm.Utils;
 import com.xvm.VehicleInfo;
 import wot.VehicleMarkersManager.HitLog;
+import wot.VehicleMarkersManager.HpLog;
 import wot.VehicleMarkersManager.IVehicleMarker;
 
 /* TODO:
@@ -54,6 +55,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
 
     // Components
     private static var hitLog:HitLog = null;
+    private static var hpLog:HpLog = null;
 
     /**
      * Instance of subject class with real implementation
@@ -125,6 +127,9 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         {
             if (Config.s_config.hitLog.visible && hitLog == null)
                 hitLog = new HitLog(Config.s_config.hitLog);
+                
+            if (Config.s_config.hpLog.enabled && hpLog == null)
+                hpLog = new HpLog(Config.s_config.hpLog);
         }
 
         // finalize initialization
