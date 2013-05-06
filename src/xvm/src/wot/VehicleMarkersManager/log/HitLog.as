@@ -10,7 +10,7 @@ import com.xvm.Logger;
 import com.xvm.Utils;
 import com.xvm.VehicleInfo;
 
-class wot.VehicleMarkersManager.HitLog
+class wot.VehicleMarkersManager.log.HitLog
 {
     private static var groupHitsByPlayer:Boolean = false;
 

@@ -10,8 +10,8 @@ import com.xvm.Logger;
 import com.xvm.Sandbox;
 import com.xvm.Utils;
 import com.xvm.VehicleInfo;
-import wot.VehicleMarkersManager.HitLog;
-import wot.VehicleMarkersManager.HpLog;
+import wot.VehicleMarkersManager.log.HitLog;
+import wot.VehicleMarkersManager.log.HpLog;
 import wot.VehicleMarkersManager.IVehicleMarker;
 
 /* TODO:

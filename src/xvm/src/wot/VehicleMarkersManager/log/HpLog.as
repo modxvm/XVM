@@ -1,7 +1,7 @@
 /**
  * @author ilitvinov87@gmail.com
  */
-class wot.VehicleMarkersManager.HpLog
+class wot.VehicleMarkersManager.log.HpLog
 {
     private var cfg:Object;
     
