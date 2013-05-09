@@ -9,12 +9,9 @@ import com.xvm.Locale;
 import com.xvm.Logger;
 import com.xvm.Utils;
 import com.xvm.VehicleInfo;
-import wot.VehicleMarkersManager.log.HpLog;
 
 class wot.VehicleMarkersManager.log.HitLog
 {
-    private static var hpLog:HpLog = null;
-    
     private static var groupHitsByPlayer:Boolean = false;
 
     private var x:Number;
@@ -55,9 +52,6 @@ class wot.VehicleMarkersManager.log.HitLog
         players = {};
 
         createControl();
-        
-        if (Config.s_config.hitLog.hpLeft)
-            hpLog = new HpLog(Config.s_config.hitLog);
     }
 
     function setText(txt)

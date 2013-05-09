@@ -12,7 +12,6 @@ import com.xvm.Utils;
 import com.xvm.VehicleInfo;
 import wot.VehicleMarkersManager.log.LogLists;
 import wot.VehicleMarkersManager.IVehicleMarker;
-import wot.VehicleMarkersManager.log.PlayerModel;
 
 /* TODO:
  * Check for performance boost with marker object caching

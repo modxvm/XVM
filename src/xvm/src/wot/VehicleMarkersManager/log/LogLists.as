@@ -1,8 +1,9 @@
 import wot.VehicleMarkersManager.log.HitLog;
 import wot.VehicleMarkersManager.log.HpLog;
+import com.xvm.Logger;
+
 /**
- * ...
- * @author 
+ * @author ilitvinov87@gmail.com
  */
 class wot.VehicleMarkersManager.log.LogLists
 {
