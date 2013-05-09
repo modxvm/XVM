@@ -30,22 +30,22 @@ class com.xvm.DefaultConfig
                 pingServers: {
                   enabled: false,
                   updateInterval: 10000, // msec
-                  x: 100,
-                  y: 25,
-                  alpha: 50,
+                  x: 170,
+                  y: 35,
+                  alpha: 100,
                   delimeter: ": ",
                   maxRows: 4,
-                  columnGap: 5,
+                  columnGap: 10,
                   fontStyle: {
                     name: "$FieldFont",
-                    size: 14,
+                    size: 12,
                     bold: false,
                     italic: false,
                     color: {
-                      great: "0x33FFCC",
-                      good: "0x99FF33",
-                      poor: "0xFFFF33",
-                      bad: "0xFF7733"
+                      great: "0xFFCC66",
+                      good: "0xE5E4E1",
+                      poor: "0x96948F",
+                      bad: "0xFE3131"
                     }
                   },
                   threshold: {
@@ -58,9 +58,9 @@ class com.xvm.DefaultConfig
                     color: "0x000000",
                     distance: 0,
                     angle: 0,
-                    alpha: 100,
-                    blur: 3,
-                    strength: 5
+                    alpha: 70,
+                    blur: 4,
+                    strength: 2
                   }
                 }
             },
