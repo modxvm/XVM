@@ -40,6 +40,16 @@ class wot.VehicleMarkersManager.log.HpLeft
         for (var i in model)
         {
             var player = model[i];
+            if (player.curHealth == 0)
+            {
+                /**
+                 * The only way to keep track of dead is to check markers health.
+                 * Markers draw distance is restriction.
+                 * VehicleMarkersManagers sandbox does not
+                 * know when someone dies out of sight.
+                 */
+                break;
+            }
             text += player.pFullName + " " + player.vType + " " + player.curHealth + "<br/>";
         }
         text += "</span>";
