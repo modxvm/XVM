@@ -5,16 +5,10 @@ import com.greensock.plugins.ColorMatrixFilterPlugin;
 import com.xvm.Logger;
 import wot.VehicleMarkersManager.log.HpLogView;
 
-class wot.VehicleMarkersManager.log.HpLog
+class wot.VehicleMarkersManager.log.HpLeft
 {
-    private var cfg:Object;
     private var model:Array = [];
    
-    public function HpLog(cfg:Object) 
-    {
-        
-    }
-    
     public function onNewMarkerCreated(player:Object):Void
     {
         //Logger.add("####### onNewMarkerCreated " + player.pFullName + " " + player.curHealth);

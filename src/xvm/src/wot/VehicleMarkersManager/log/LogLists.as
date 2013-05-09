@@ -1,5 +1,5 @@
 import wot.VehicleMarkersManager.log.HitLog;
-import wot.VehicleMarkersManager.log.HpLog;
+import wot.VehicleMarkersManager.log.HpLeft;
 import com.xvm.Logger;
 
 /**
@@ -9,7 +9,7 @@ class wot.VehicleMarkersManager.log.LogLists
 {
     private var cfg:Object;
     private var hitLog:HitLog;
-    private var hpLog:HpLog;
+    private var hpLeft:HpLeft;
     
     public function LogLists(cfg:Object) 
     {
@@ -20,7 +20,7 @@ class wot.VehicleMarkersManager.log.LogLists
         }
         if (cfg.hpLeft)
         {
-            hpLog = new HpLog(cfg);
+            hpLeft = new HpLeft();
         }
         hitLog.setHitText(); // updateText();
     }
@@ -30,7 +30,7 @@ class wot.VehicleMarkersManager.log.LogLists
         var player:Object = {
             vClass: vClass, vIconSource: vIconSource, vType: vType, vLevel: vLevel,
             pFullName: pFullName, curHealth: curHealth, maxHealth: maxHealth };
-        hpLog.onNewMarkerCreated(player);
+        hpLeft.onNewMarkerCreated(player);
         
         updateText();
     }
@@ -40,7 +40,7 @@ class wot.VehicleMarkersManager.log.LogLists
     {
         hitLog.update(delta, curHealth, vehicleName, icon, playerName,
         level, damageType, vtype, vtypeColor, dead);
-        hpLog.onHealthUpdate(playerName, curAbsoluteHealth);
+        hpLeft.onHealthUpdate(playerName, curAbsoluteHealth);
         
         updateText();
     }
