@@ -1,6 +1,7 @@
 /**
  * @author ilitvinov87@gmail.com
  */
+import com.greensock.plugins.ColorMatrixFilterPlugin;
 import com.xvm.Logger;
 import wot.VehicleMarkersManager.log.HpLogView;
 
@@ -8,11 +9,10 @@ class wot.VehicleMarkersManager.log.HpLog
 {
     private var cfg:Object;
     private var model:Array = [];
-    private var view:HpLogView;
-    
+   
     public function HpLog(cfg:Object) 
     {
-        this.view = new HpLogView(cfg);
+        
     }
     
     public function onNewMarkerCreated(player:Object):Void
@@ -23,7 +23,6 @@ class wot.VehicleMarkersManager.log.HpLog
         {
             /** Append new player to logging */
             model.push(player);
-            redrawLog();
         }
         else if (loggerPlayer.curHealth != player.curHealth)
         {
@@ -37,15 +36,21 @@ class wot.VehicleMarkersManager.log.HpLog
         //Logger.add("####### onHealthUpdate " + curHealth + " " + pFullName);
         var player:Object = getLoggedPlayer(pFullName);
         player.curHealth = curHealth;
-        
-        redrawLog();
     }
     
     // -- Private
     
-    private function redrawLog():Void
+    public function getText():String
     {
-        view.update(model);
+        var text:String = "<span class='xvm_hitlog'>";
+        for (var i in model)
+        {
+            var player = model[i];
+            text += player.pFullName + " " + player.vType + " " + player.curHealth + "<br/>";
+        }
+        text += "</span>";
+        
+        return text;
     }
     
     private function getLoggedPlayer(pFullName:String):Object

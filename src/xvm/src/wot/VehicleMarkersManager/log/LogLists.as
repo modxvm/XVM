@@ -22,6 +22,7 @@ class wot.VehicleMarkersManager.log.LogLists
         {
             hpLog = new HpLog(cfg);
         }
+        hitLog.setHitText(); // updateText();
     }
     
     public function onNewMarkerCreated(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth):Void
@@ -29,8 +30,9 @@ class wot.VehicleMarkersManager.log.LogLists
         var player:Object = {
             vClass: vClass, vIconSource: vIconSource, vType: vType, vLevel: vLevel,
             pFullName: pFullName, curHealth: curHealth, maxHealth: maxHealth };
-            
         hpLog.onNewMarkerCreated(player);
+        
+        updateText();
     }
     
     public function updateHealth(delta:Number, curHealth:Number, vehicleName:String, icon:String, playerName:String,
@@ -38,7 +40,15 @@ class wot.VehicleMarkersManager.log.LogLists
     {
         hitLog.update(delta, curHealth, vehicleName, icon, playerName,
         level, damageType, vtype, vtypeColor, dead);
-        
         hpLog.onHealthUpdate(playerName, curAbsoluteHealth);
+        
+        updateText();
+    }
+    
+    private function updateText():Void
+    {
+        //Logger.add("hpLog.getText() " + hpLog.getText());
+        //hitLog.setHpText(hpLog.getText());
+        hitLog.setHitText();
     }
 }

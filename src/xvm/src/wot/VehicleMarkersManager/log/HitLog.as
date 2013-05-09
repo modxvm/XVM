@@ -31,6 +31,8 @@ class wot.VehicleMarkersManager.log.HitLog
     private var total:Number;
     private var players:Object;
     private var hits:Array;
+    
+    private var text:String;
 
     public function HitLog(cfg:Object)
     {
@@ -54,9 +56,25 @@ class wot.VehicleMarkersManager.log.HitLog
         createControl();
     }
 
-    function setText(txt)
+    /**
+     * Save prepared content.
+     * LogLists decides when to update text field with content.
+     */
+    function saveText(text:String)
     {
-        textField.htmlText = "<span class='xvm_hitlog'>" + txt + "</span>";
+        this.text = text;
+    }
+    
+    /** Invoked by LogLists */
+    public function setHpText(text:String):Void
+    {
+        textField.htmlText = text;
+    }
+    
+    /** Invoked by LogLists */
+    public function setHitText():Void
+    {
+        textField.htmlText = "<span class='xvm_hitlog'>" + this.text + "</span>";
     }
 
     public function update(delta:Number, curHealth:Number, vehicleName:String, icon:String, playerName:String,
@@ -104,7 +122,7 @@ class wot.VehicleMarkersManager.log.HitLog
 
         if (lines <= 0)
         {
-            setText(header);
+            saveText(header);
             return;
         }
 
@@ -128,7 +146,7 @@ class wot.VehicleMarkersManager.log.HitLog
             i++;
         }
 
-        setText((direction == Defines.DIRECTION_DOWN) ? header + "<br/>" + txt : txt + "<br/>" + header);
+        saveText((direction == Defines.DIRECTION_DOWN) ? header + "<br/>" + txt : txt + "<br/>" + header);
     }
 
     private function createControl()
@@ -156,7 +174,7 @@ class wot.VehicleMarkersManager.log.HitLog
         style.parseCSS(".xvm_hitlog{font-family:$FieldFont;font-size:15px;color:#f4efe8;}");
         textField.styleSheet = style;
 
-        setText(defaultHeader);
+        saveText(defaultHeader);
     }
 
     private function formatText(format:String, playerName:String):String
