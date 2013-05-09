@@ -22,7 +22,7 @@
       "y": 35,
       // Transparecy
       // Прозрачность от 0 до 100
-      "alpha": 100,
+      "alpha": 80,
       // Server to responce time text delimeter
       // Разделитель сервера от времени отклика
       "delimeter": ": ",
@@ -47,7 +47,7 @@
           "great": "0xFFCC66", // Отличный
           "good": "0xE5E4E1",  // Хороший
           "poor": "0x96948F",  // Так себе
-          "bad": "0xFE3131"    // Плохой
+          "bad": "0xD64D4D"    // Плохой
         }
       },
       // Threshold values defining responce quality

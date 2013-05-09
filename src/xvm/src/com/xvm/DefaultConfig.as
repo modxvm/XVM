@@ -32,7 +32,7 @@ class com.xvm.DefaultConfig
                   updateInterval: 10000, // msec
                   x: 170,
                   y: 35,
-                  alpha: 100,
+                  alpha: 80,
                   delimeter: ": ",
                   maxRows: 4,
                   columnGap: 10,
@@ -45,7 +45,7 @@ class com.xvm.DefaultConfig
                       great: "0xFFCC66",
                       good: "0xE5E4E1",
                       poor: "0x96948F",
-                      bad: "0xFE3131"
+                      bad: "0xD64D4D"
                     }
                   },
                   threshold: {
