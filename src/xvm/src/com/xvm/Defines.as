@@ -110,4 +110,9 @@ class com.xvm.Defines
 
     // Level in roman numerals
     public static var ROMAN_LEVEL:Array = [ "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" ];
+    
+    // UI Colors
+    public static var UICOLOR_DEFAULT = 0xC9C9B6;
+    public static var UICOLOR_GOLD = 0xFFC133;
+    public static var UICOLOR_BLUE = 0x408CCF;
 }

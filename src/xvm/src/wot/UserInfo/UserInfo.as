@@ -429,6 +429,7 @@ class wot.UserInfo.UserInfo
                 : vi2.type == "TD" ? 4
                 : 5;
             data[i].hp = vi2.hptop;
+            data[i].premium = vi2.premium;
             data[i].avgR = vi2.avg.R;
             data[i].avgD = vi2.avg.D;
             data[i].avgE = vi2.avg.E;
@@ -776,6 +777,9 @@ class wot.UserInfo.UserInfo
         var teff = context["teff"];
         var fights = context["fights"];
 
+        var name = context["textField"];
+        name.textColor = data.premium ? Defines.UICOLOR_GOLD : Defines.UICOLOR_DEFAULT;
+        
         if (!teff)
         {
             teff = Utils.duplicateTextField(context, "teff", fights, 0, "center");
