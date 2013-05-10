@@ -154,9 +154,9 @@ class com.xvm.Config
 
                 // MAX_PATH is 259 on NTFS
                 // WARNING: What if MAX_PATH less then 50?
-                //   259 - "\res_mods\.stat\".length - 1 = 242
+                //   259 - "\res_mods\xvm\.xvmfs\".length - 1 = 237
                 // 199 - ?
-                Defines.MAX_PATH = Math.min(199, Math.max(50, 242 - a[1].length));
+                Defines.MAX_PATH = Math.min(199, Math.max(50, 237 - a[1].length));
 
                 for (var i = 2; i < a.length; ++i)
                 {
@@ -509,6 +509,10 @@ class com.xvm.Config
             config.markers.enemy.dead.normal.damageTextSquadman = config.markers.ally.alive.normal.damageText;
             config.markers.enemy.dead.extended.damageTextPlayer = config.markers.ally.alive.normal.damageText;
             config.markers.enemy.dead.extended.damageTextSquadman = config.markers.ally.alive.normal.damageText;
+
+            if (config.battle.clanIconsFolder == "../../../clanicons")
+                config.battle.clanIconsFolder = "clanicons";
+
             v = "4.0.0";
         }
 

@@ -17,13 +17,13 @@ class com.xvm.Defines
     // Path to Dokan MountPoint
     public static var DOKAN_MP:String = XVM_ROOT + ".xvmfs/";
 
-    // res_mods/xvm/img/
+    // res_mods/xvm/res/
     public static var XVMRES_ROOT:String = XVM_ROOT + "res/";
 
-    // res_mods/xvm/img/ (for <img> tag)
+    // res_mods/xvm/res/ (for <img> tag)
     public static var XVMRES_IMG_ROOT:String = "../xvm/res/";
 
-    // res_mods/xvm/img/SixthSense.png
+    // res_mods/xvm/res/SixthSense.png
     public static var SIXTH_SENSE_IMG:String = XVMRES_ROOT + "SixthSense.png";
     
     // res_mods/xvm/xvm.xc

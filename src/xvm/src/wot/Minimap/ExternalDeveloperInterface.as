@@ -54,7 +54,7 @@ class wot.Minimap.ExternalDeveloperInterface
      *
      * _root.minimap.externalDeveloperInterface.createCustomMarker
      * (-40, 30.5, "foo<img src='xvmres://icons/bzz.png' width='8' height='8'>");
-     * WoT\res_mods\icons\bzz.png
+     * WoT\res_mods\xvm\res\icons\bzz.png
      *
      * Python example:
      *

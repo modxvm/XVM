@@ -1,7 +1,9 @@
 {
   "configVersion": "1.5.0",
   "def": {
-    "format":  "<font face='Consolas' size='11'>{{avglvl}} <font face='Symbol' color='#111111'><b><font color='{{c:tdv}}'>·</font><font color='{{c:tfb}}'>·</font><font color='{{c:tsb}}'>·</font></b></font> <font color='{{c:e}}'>{{e}}</font>|<font color='{{c:xeff}}'>{{xeff}}</font>|<font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:twr}}'>{{twr}}</font></font>"
+    "format":  "<font face='Consolas' size='11'>{{avglvl}} <font face='Symbol' color='#111111'><b><font color='{{c:tdv}}'>·</font><font color='{{c:tfb}}'>·</font><font color='{{c:tsb}}'>·</font></b></font> <font color='{{c:e}}'>{{e}}</font>|<font color='{{c:xeff}}'>{{xeff}}</font>|<font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:twr}}'>{{twr}}</font></font>",
+    "markersStat": "<b><font face='Symbol' color='#CCCCCC' size='11'><font color='{{c:t-battles}}'>·</font> <font color='{{c:e}}'>·</font> <font color='{{c:xeff}}'>·</font> <font color='{{c:xwn}}'>·</font></font></b>",
+    "markersStatAlt": "<b><font face='$FieldFont' size='12'><font color='{{c:t-battles}}'>{{t-hb}}</font> <font color='{{c:e}}'>{{teff}}</font> <font color='{{c:xeff}}'>{{xeff}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:twr}}'>{{twr}}</font></font></b>"
   },
   "definition": {
     "author": "sirmax2",
@@ -199,7 +201,7 @@
               "name": "Rating marks",
               "x": 0, "y": -35,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<font face='Symbol' color='#CCCCCC' size='11'><font color='{{c:e}}'><b>·</b> </font><font color='{{c:tdv}}'><b>·</b></font><font color='{{c:tfb}}'><b>·</b></font><font color='{{c:tsb}}'><b>·</b> <font color='{{c:xwn}}'><b>·</b></font></font>"
+              "format": ${"def.markersStat"}
             },
             {
               "visible": true,
@@ -261,7 +263,7 @@
               "name": "Tank Rating",
               "x": 0, "y": -52, "alpha": 75,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<font face='$FieldFont' size='12'><b><font color='{{c:e}}'>{{teff}}</font> <font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:twr}}'>{{twr}}</font> <font color='{{c:xeff}}'>{{xeff}} <font color='{{c:xwn}}'>{{xwn}}</font></font></b></font>"
+              "format": ${"def.markersStatAlt"}
             }
           ]
         }
@@ -352,7 +354,7 @@
               "name": "Rating marks",
               "x": 0, "y": -35,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<font face='Symbol' color='#CCCCCC' size='11'><font color='{{c:e}}'><b>·</b> </font><font color='{{c:tdv}}'><b>·</b></font><font color='{{c:tfb}}'><b>·</b></font><font color='{{c:tsb}}'><b>·</b> <font color='{{c:xwn}}'><b>·</b></font></font>"
+              "format": ${"def.markersStat"}
             },
             {
               "visible": true,
@@ -414,7 +416,7 @@
               "name": "Tank Rating",
               "x": 0, "y": -52, "alpha": 75,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
-              "format": "<font face='$FieldFont' size='12'><b><font color='{{c:xeff}}'>{{xeff}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:twr}}'>{{twr}}</font> <font color='{{c:e}}'>{{teff}}</font></b></font>"
+              "format": ${"def.markersStatAlt"}
             }
           ]
         }
