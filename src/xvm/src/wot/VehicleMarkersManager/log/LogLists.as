@@ -31,6 +31,7 @@ class wot.VehicleMarkersManager.log.LogLists
         GlobalEventDispatcher.addEventListener(VMMEvent.ALT_STATE_INFORM, this, onAltStateInform);
     }
     
+    /** Invoked by VMM */
     public function onNewMarkerCreated(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth):Void
     {
         var player:Object = {
@@ -41,19 +42,24 @@ class wot.VehicleMarkersManager.log.LogLists
         updateText();
     }
     
+    /** Invoked by VMM */
     public function onHpUpdate(flag:Number, delta:Number, curHealth:Number, vehicleName:String, icon:String, playerName:String,
         level:Number, damageType:String, vtype:String, vtypeColor:String, dead:Boolean, curAbsoluteHealth:Number)
     {
+        /** Update Hitlog */
         if (flag == Defines.FROM_PLAYER)
         {
             hitLog.update(delta, curHealth, vehicleName, icon, playerName,
             level, damageType, vtype, vtypeColor, dead);
         }
+        
+        /** Update HP log */
         hpLeft.onHealthUpdate(playerName, curAbsoluteHealth);
         
         updateText();
     }
     
+    /** Show prepared Hitlog or HP log text depending on cfg and Alt button */
     private function updateText():Void
     {
         if (altPressed && cfg.hpLeft)
@@ -66,6 +72,7 @@ class wot.VehicleMarkersManager.log.LogLists
         }
     }
     
+    /** Catches Alt press event from VMM */
     private function onAltStateInform(event:VMMEvent):Void
     {
         var eventAltPressed:Boolean = Boolean(event.payload);
