@@ -15,7 +15,7 @@ class wot.VehicleMarkersManager.log.HpLeft
         var loggerPlayer:Object = getLoggedPlayer(player.pFullName);
         if (loggerPlayer == null)
         {
-            /** Append new player to logging */
+            /** Append new player to HP logging model */
             model.push(player);
         }
         else if (loggerPlayer.curHealth != player.curHealth)
@@ -50,7 +50,7 @@ class wot.VehicleMarkersManager.log.HpLeft
                  */
                 break;
             }
-            text += player.pFullName + " " + player.vType + " " + player.curHealth + "<br/>";
+            text += /* player.pFullName + */ " " + player.vType + " " + player.curHealth + "<br/>";
         }
         text += "</span>";
         

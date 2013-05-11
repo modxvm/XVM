@@ -52,7 +52,7 @@ class wot.VehicleMarkersManager.log.LogLists
     
     private function updateText():Void
     {
-        if (altPressed)
+        if (altPressed && cfg.hpLeft)
         {
             hitLog.setHpText(hpLeft.getText());
         }
