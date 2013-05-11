@@ -1,5 +1,8 @@
 /**
  * Simplified minimap interface for communication with other Python or Flash mods.
+ * 
+ * Let me know if this does not work.
+ * ilitvinov87@gmail.com
  *
  * http://www.koreanrandom.com/forum/topic/2601-pythonflash-coders-interface/
  */
