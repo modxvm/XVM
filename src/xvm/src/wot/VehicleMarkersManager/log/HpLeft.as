@@ -11,7 +11,7 @@ class wot.VehicleMarkersManager.log.HpLeft
    
     public function onNewMarkerCreated(player:Object):Void
     {
-        //Logger.add("####### onNewMarkerCreated " + player.pFullName + " " + player.curHealth);
+        Logger.add("####### onNewMarkerCreated " + player.pFullName + " " + player.curHealth);
         var loggerPlayer:Object = getLoggedPlayer(player.pFullName);
         if (loggerPlayer == null)
         {
@@ -27,7 +27,7 @@ class wot.VehicleMarkersManager.log.HpLeft
     
     public function onHealthUpdate(pFullName:String, curHealth:Number):Void
     {
-        //Logger.add("####### onHealthUpdate " + curHealth + " " + pFullName);
+        Logger.add("####### onHealthUpdate " + curHealth + " " + pFullName);
         var player:Object = getLoggedPlayer(pFullName);
         player.curHealth = curHealth;
     }

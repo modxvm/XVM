@@ -1,6 +1,7 @@
 import wot.VehicleMarkersManager.log.HitLog;
 import wot.VehicleMarkersManager.log.HpLeft;
 import com.xvm.Logger;
+import com.xvm.Defines;
 import com.xvm.GlobalEventDispatcher;
 import wot.VehicleMarkersManager.VMMEvent;
 
@@ -40,11 +41,14 @@ class wot.VehicleMarkersManager.log.LogLists
         updateText();
     }
     
-    public function updateHealth(delta:Number, curHealth:Number, vehicleName:String, icon:String, playerName:String,
+    public function onHpUpdate(flag:Number, delta:Number, curHealth:Number, vehicleName:String, icon:String, playerName:String,
         level:Number, damageType:String, vtype:String, vtypeColor:String, dead:Boolean, curAbsoluteHealth:Number)
     {
-        hitLog.update(delta, curHealth, vehicleName, icon, playerName,
-        level, damageType, vtype, vtypeColor, dead);
+        if (flag == Defines.FROM_PLAYER)
+        {
+            hitLog.update(delta, curHealth, vehicleName, icon, playerName,
+            level, damageType, vtype, vtypeColor, dead);
+        }
         hpLeft.onHealthUpdate(playerName, curAbsoluteHealth);
         
         updateText();

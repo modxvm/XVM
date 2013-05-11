@@ -273,12 +273,12 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
 
         var curHealthAbsolute:Number = (curHealth < 0 ? 0 : curHealth);
             
-        if (flag == Defines.FROM_PLAYER && wrapper.m_team == "enemy") /** Omit allies */
+        if (wrapper.m_team == "enemy") /** Omit allies */
         {
             if (logLists != null)
             {
                 var delta = m_curHealth - curHealthAbsolute;
-                logLists.updateHealth(delta, curHealth,
+                logLists.onHpUpdate(flag, delta, curHealth,
                     VehicleInfo.mapVehicleName(m_defaultIconSource, m_vehicleName),
                     m_defaultIconSource,
                     m_playerFullName, m_level, damageType,
