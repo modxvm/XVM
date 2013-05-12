@@ -39,13 +39,6 @@
   <compileTargets>
     <compile path="shared\Mouse.as" />
     <compile path="shared\MovieClip.as" />
-    <compile path="src\com" />
-    <compile path="src\com\greensock\core" />
-    <compile path="src\com\greensock\easing" />
-    <compile path="src\com\greensock\easing\helpers" />
-    <compile path="src\com\greensock\plugins" />
-    <compile path="src\com\greensock\plugins\helpers" />
-    <compile path="src\com\produxion\util" />
     <compile path="src\com\xvm" />
     <compile path="src\wot\battle" />
     <compile path="src\wot\battleloading" />
@@ -53,13 +46,6 @@
     <compile path="src\wot\crew\tankmen" />
     <compile path="src\wot\FinalStatistic" />
     <compile path="src\wot\Minimap" />
-    <compile path="src\wot\Minimap\dataTypes" />
-    <compile path="src\wot\Minimap\dataTypes\cfg" />
-    <compile path="src\wot\Minimap\model" />
-    <compile path="src\wot\Minimap\model\externalProxy" />
-    <compile path="src\wot\Minimap\model\iconTracker" />
-    <compile path="src\wot\Minimap\model\mapSize" />
-    <compile path="src\wot\Minimap\staticUtils" />
     <compile path="src\wot\PlayersPanel" />
     <compile path="src\wot\SquadMemberRenderer" />
     <compile path="src\wot\StatisticForm" />
@@ -68,9 +54,6 @@
     <compile path="src\wot\TeamRenderer" />
     <compile path="src\wot\UserInfo" />
     <compile path="src\wot\VehicleMarkersManager" />
-    <compile path="src\wot\VehicleMarkersManager\components" />
-    <compile path="src\wot\VehicleMarkersManager\components\damage" />
-	<compile path="src\wot\Minimap\shapes" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>

@@ -51,11 +51,10 @@ class wot.VehicleMarkersManager.log.HpLeft
                  */
                 break;
             }
-            text += "<textformat leading='-4' tabstops='[20,50,90,150]'>";
-            text += "<tab><font color='#FFFFFF'>" + player.vType + "</font>";
-            text += "<tab>| <font color='#FF9999'>" + player.curHealth + "</font>";
-            text += "<tab>| <font color='#666666'>" + player.pFullName + "</font>";
-            text += "</textformat><br/>";
+            text += "<font color='#FFFFFF'>" + player.vType + "</font>";
+            text += "   <font color='#FF9999'>" + player.curHealth + "</font>";
+            text += "   <font color='#BBBBBB'>" + player.pFullName + "</font>";
+            text += "<br/>";
         }
         text += "</span>";
         
