@@ -1,9 +1,8 @@
 /**
  * @author ilitvinov87@gmail.com
  */
-import com.greensock.plugins.ColorMatrixFilterPlugin;
 import com.xvm.Logger;
-import wot.VehicleMarkersManager.log.HpLogView;
+import wot.VehicleMarkersManager.log.HitLog;
 
 class wot.VehicleMarkersManager.log.HpLeft
 {
@@ -11,7 +10,8 @@ class wot.VehicleMarkersManager.log.HpLeft
    
     public function onNewMarkerCreated(player:Object):Void
     {
-        Logger.add("####### onNewMarkerCreated " + player.pFullName + " " + player.curHealth);
+        //Logger.add("HpLeft.onNewMarkerCreated " + player.pFullName + " " + player.curHealth);
+        //Logger.add("  HpLeft.model.length " + model.length);
         var loggerPlayer:Object = getLoggedPlayer(player.pFullName);
         if (loggerPlayer == null)
         {
@@ -27,7 +27,8 @@ class wot.VehicleMarkersManager.log.HpLeft
     
     public function onHealthUpdate(pFullName:String, curHealth:Number):Void
     {
-        Logger.add("####### onHealthUpdate " + curHealth + " " + pFullName);
+        //Logger.add("HpLeft.onHealthUpdate " + curHealth + " " + pFullName);
+        //Logger.add("  HpLeft.model.length " + model.length);
         var player:Object = getLoggedPlayer(pFullName);
         player.curHealth = curHealth;
     }
@@ -36,7 +37,7 @@ class wot.VehicleMarkersManager.log.HpLeft
     
     public function getText():String
     {
-        var text:String = "<span class='xvm_hitlog'>";
+        var text:String = "<span class='" + HitLog.STYLE_NAME + "'>";
         for (var i in model)
         {
             var player = model[i];
@@ -50,7 +51,11 @@ class wot.VehicleMarkersManager.log.HpLeft
                  */
                 break;
             }
-            text += /* player.pFullName + */ " " + player.vType + " " + player.curHealth + "<br/>";
+            text += "<textformat leading='-4' tabstops='[20,50,90,150]'>";
+            text += "<tab><font color='#FFFFFF'>" + player.vType + "</font>";
+            text += "<tab>| <font color='#FF9999'>" + player.curHealth + "</font>";
+            text += "<tab>| <font color='#666666'>" + player.pFullName + "</font>";
+            text += "</textformat><br/>";
         }
         text += "</span>";
         

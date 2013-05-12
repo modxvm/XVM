@@ -1,6 +1,5 @@
 import wot.VehicleMarkersManager.log.HitLog;
 import wot.VehicleMarkersManager.log.HpLeft;
-import com.xvm.Logger;
 import com.xvm.Defines;
 import com.xvm.GlobalEventDispatcher;
 import wot.VehicleMarkersManager.VMMEvent;

@@ -12,6 +12,8 @@ import com.xvm.VehicleInfo;
 
 class wot.VehicleMarkersManager.log.HitLog
 {
+    public static var STYLE_NAME:String = "xvm_hitlog";
+    
     private static var groupHitsByPlayer:Boolean = false;
 
     private var x:Number;
@@ -74,7 +76,7 @@ class wot.VehicleMarkersManager.log.HitLog
     /** Invoked by LogLists */
     public function setHitText():Void
     {
-        textField.htmlText = "<span class='xvm_hitlog'>" + this.text + "</span>";
+        textField.htmlText = "<span class='" + STYLE_NAME + "'>" + this.text + "</span>";
     }
 
     public function update(delta:Number, curHealth:Number, vehicleName:String, icon:String, playerName:String,
@@ -171,7 +173,7 @@ class wot.VehicleMarkersManager.log.HitLog
 
         textField.html = true;
         var style:TextField.StyleSheet = new TextField.StyleSheet();
-        style.parseCSS(".xvm_hitlog{font-family:$FieldFont;font-size:15px;color:#f4efe8;}");
+        style.parseCSS("." + STYLE_NAME + "{font-family:$FieldFont;font-size:15px;color:#f4efe8;}");
         textField.styleSheet = style;
 
         saveText(defaultHeader);
