@@ -157,8 +157,15 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     private function createStandardMarker()
     {
         trace("createStandardMarker()");
+
         // re-enable vehicle type marker for standard marker
         wrapper.marker._visible = true;
+
+        // fix icon visibility after load for standard marker
+        var wr = wrapper;
+        wrapper.iconLoader.addEventListener("init",
+            function() { wr.iconLoader.visible = wr.getPartVisibility(net.wargaming.ingame.VehicleMarker.ICON) });
+
         subject = base;
     }
 

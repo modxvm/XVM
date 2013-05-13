@@ -2,12 +2,12 @@
 {
     /////////////////////////////////////////////////////////////////
     // XVM
-    var xvm_worker:wot.VehicleMarkersManager.VehicleMarkerProxy; 
-    var m_team:String; 
+    var xvm_worker:wot.VehicleMarkersManager.VehicleMarkerProxy;
+    var m_team:String;
     /////////////////////////////////////////////////////////////////
 
     var m_entityName:String;
-    
+
     var levelIcon:MovieClip;
     var iconLoader:net.wargaming.controls.UILoaderAlt;
     var hp_mc:MovieClip;
@@ -20,6 +20,14 @@
     var healthBar:MovieClip;
     var bgShadow:MovieClip;
 
+    static var ICON;
+    static var LEVEL;
+    static var HEALTH_LBL;
+    static var HEALTH_BAR;
+    static var P_NAME_LBL;
+    static var V_NAME_LBL;
+    static var DAMAGE_PANEL;
+
     function init(vClass:String, vIconSource:String, vType:String, vLevel:Number, pFullName:String,
         curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean, hunt:Boolean, entityType:String):Void;
     function update():Void;
@@ -30,6 +38,8 @@
     function updateState(newState:String, isImmediate:Boolean):Void;
     function showExInfo(show:Boolean):Void;
     function showActionMarker(actionState):Void;
+
+    function getPartVisibility(part);
 
     function settingsUpdate(flag);
     function getMarkerState();
