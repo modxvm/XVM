@@ -53,7 +53,7 @@ class wot.VehicleMarkersManager.log.HpLeft
             }
             text += "<font color='#FFFFFF'>" + player.vType + "</font>";
             text += "   <font color='#FF9999'>" + player.curHealth + "</font>";
-            text += "   <font color='#BBBBBB'>" + player.pFullName + "</font>";
+            text += "    <font color='#BBBBBB'>" + player.pFullName + "</font>";
             text += "<br/>";
         }
         text += "</span>";
