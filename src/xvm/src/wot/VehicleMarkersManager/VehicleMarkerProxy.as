@@ -157,8 +157,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     private function createStandardMarker()
     {
         trace("createStandardMarker()");
-        // re-enable vehicle type marker (required only for standard marker)
-        //wrapper.marker._visible = true;
+        // re-enable vehicle type marker for standard marker
+        wrapper.marker._visible = true;
         subject = base;
     }
 
