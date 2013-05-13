@@ -16,7 +16,8 @@
   "hangar": {
     "hideTutorial": true,
     "pingServers": {
-      "enabled": true
+      "enabled": true,
+      "x": 0
     }
   },
   "userInfo": {

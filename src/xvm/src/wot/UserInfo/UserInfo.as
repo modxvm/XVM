@@ -276,7 +276,6 @@ class wot.UserInfo.UserInfo
         }
 
         fixList(wrapper.list.dataProvider);
-        fixRenderers();
         wrapper.list.invalidate();
 
         setXVMStat1();
@@ -405,7 +404,6 @@ class wot.UserInfo.UserInfo
         base.setList.apply(base, arguments);
 
         filterList();
-        fixRenderers();
         applyFilterAndSort();
         //Logger.addObject(lastSort, "", 2);
         //Logger.addObject(_root, "_root", 2);
@@ -752,52 +750,6 @@ class wot.UserInfo.UserInfo
         else {
             b.sortDir = 0;
             b.textField.textColor = 0xF2F1E1;
-        }
-    }
-
-    // fix renderers
-    function fixRenderers()
-    {
-        for (var i in wrapper.list.renderers)
-        {
-            if (wrapper.list.renderers[i].setup != rendererSetup)
-            {
-                wrapper.list.renderers[i].setup_orig = wrapper.list.renderers[i].setup;
-                wrapper.list.renderers[i].setup = rendererSetup;
-            }
-        }
-    }
-
-    // executes in the renderer context
-    function rendererSetup()
-    {
-        var context = MovieClip(this);
-        context["setup_orig"].apply(context, arguments);
-        var data = context["data"];
-        var teff = context["teff"];
-        var fights = context["fights"];
-
-        var name = context["textField"];
-        name.textColor = data.premium ? Defines.UICOLOR_GOLD : Defines.UICOLOR_DEFAULT;
-        
-        if (!teff)
-        {
-            teff = Utils.duplicateTextField(context, "teff", fights, 0, "center");
-            context["teff"] = teff;
-            teff._x -= 37;
-            //Logger.add("t=" + teff._x + ", f=" + fights._x);
-        }
-
-        if (!data || !data.e || !data.teff)
-            teff.htmlText = "";
-        else
-        {
-            var color = GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, data.e);
-            teff.htmlText =
-                "<span class='xvm_teff'>" +
-                "<font color='" + color + "'>" + (data.e < 10 ? data.e : "X") + "</font>" +
-                //" (<font color='" + color + "'>" + data.teff + "</font>)" +
-                "</span>";
         }
     }
 }
