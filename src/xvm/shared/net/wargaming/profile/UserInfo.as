@@ -16,6 +16,8 @@
     var title:MovieClip;
     var sb_clan:MovieClip;
 
+    var header:MovieClip; // Added by XVM SWF patch! Contains "fights" and "wins" text fields.
+    
     var USER_INFO_FRAME;
 
     function setClanEmblem(clanEmblemId);

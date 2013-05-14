@@ -1,5 +1,5 @@
---- orig\UserInfo.xml	2013-05-13 15:02:04.896190500 +0300
-+++ UserInfo.xml	2013-05-13 15:02:05.096190500 +0300
+--- orig\UserInfo.xml	2013-05-14 12:19:12.314806300 +0300
++++ UserInfo.xml	2013-05-14 12:19:12.522806300 +0300
 @@ -15,4 +15,7 @@
          </color>
        </SetBackgroundColor>
@@ -15,6 +15,20 @@
 +          <Symbol objectID="55" name="vehicleItemRenderer_xvm"/>
          </symbols>
        </Export>
+@@ -5656,5 +5659,5 @@
+             </transform>
+           </PlaceObject2>
+-          <PlaceObject3 replace="0" depth="2" objectID="95">
++          <PlaceObject3 replace="0" depth="2" objectID="95" name="fights">
+             <transform>
+               <Transform transX="3420" transY="120"/>
+@@ -5668,5 +5671,5 @@
+             </filters>
+           </PlaceObject3>
+-          <PlaceObject3 replace="0" depth="3" objectID="96">
++          <PlaceObject3 replace="0" depth="3" objectID="96" name="wins">
+             <transform>
+               <Transform transX="5380" transY="120"/>
 @@ -6463,5 +6466,5 @@
                      <items>
                        <StackString value="itemRenderer"/>
@@ -22,6 +36,13 @@
 +                      <StackString value="vehicleItemRenderer_xvm"/>
                      </items>
                    </PushData>
+@@ -6624,5 +6627,5 @@
+             </events>
+           </PlaceObject2>
+-          <PlaceObject2 replace="0" depth="11" objectID="97">
++          <PlaceObject2 replace="0" depth="11" objectID="97" name="header">
+             <transform>
+               <Transform transX="100" transY="1880"/>
 @@ -6918,5 +6921,5 @@
                      <items>
                        <StackString value="itemRenderer"/>

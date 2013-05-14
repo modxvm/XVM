@@ -113,6 +113,7 @@ class com.xvm.Defines
     
     // UI Colors
     public static var UICOLOR_DEFAULT = 0xC9C9B6;
+    public static var UICOLOR_DEFAULT2 = 0x969687;
     public static var UICOLOR_GOLD = 0xFFC133;
     public static var UICOLOR_BLUE = 0x408CCF;
 }

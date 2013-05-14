@@ -27,8 +27,8 @@
     "hideTutorial": true,
     "pingServers": {
       "enabled": true,
-      "delimiter": "<img src='img://userInfoId0x01'> ",
-      "x": 0
+      "delimiter": ": ",
+      "x": 5
     }
   },
   "userInfo": {

@@ -85,16 +85,13 @@ class wot.UserInfo.UserInfo
     private function onConfigLoaded()
     {
         GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
-
-        // create sort buttons
-        if (m_button1 == null)
-            createControls();
-
         loadData();
     }
 
     function setCommonInfoImpl()
     {
+        //Logger.add("setCommonInfo()");
+        
         m_name = arguments[1];
         loadData();
 
@@ -107,14 +104,14 @@ class wot.UserInfo.UserInfo
             return;
         if (Config.s_config.rating.enableUserInfoStatistics != true)
             return;
-
+        
         if (!m_name)
             return;
-
+        
         if (m_dataLoaded)
             return;
         m_dataLoaded = true;
-
+        
         if (Cache.Exist("INFO@" + m_name))
             onUserDataLoaded();
         else {
@@ -122,7 +119,7 @@ class wot.UserInfo.UserInfo
             UserDataLoaderHelper.LoadUserData(m_name, false);
         }
     }
-
+    
     private function extractNumber(str)
     {
         var res = "";
@@ -401,7 +398,13 @@ class wot.UserInfo.UserInfo
 
     function setListImpl()
     {
+        //Logger.add("setList()");
+
         base.setList.apply(base, arguments);
+
+        // create sort and filter buttons
+        if (m_button1 == null)
+            createControls();
 
         filterList();
         applyFilterAndSort();
@@ -410,6 +413,79 @@ class wot.UserInfo.UserInfo
         //Logger.addObject(m_fullDataProvider);
     }
 
+    private function filterList()
+    {
+        // Full
+        m_fullDataProvider = wrapper.list.dataProvider;
+
+        fixList(m_fullDataProvider);
+
+        // All
+        m_allDataProvider = [ m_fullDataProvider[0] ];
+        var commonId = m_fullDataProvider[0].id;
+        var len:Number = m_fullDataProvider.length;
+        var all = com.xvm.VehicleInfoData2.data;
+        for (var vn:String in all)
+        {
+            if (vn == "unknown" || Utils.endsWith("_training", vn))
+                continue;
+
+            var vi = all[vn];
+            var icon = "../maps/icons/vehicle/small/" + vi.nation + "-" + vi.name + ".png";
+
+            var item:Object = null;
+            for (var i:Number = 1; i < len; ++i)
+            {
+                if (m_fullDataProvider[i].icon == icon)
+                {
+                    item = m_fullDataProvider[i];
+                    break;
+                }
+            }
+
+            m_allDataProvider.push(item || {
+                id: commonId,
+                name: vi.name,
+                icon: icon,
+                type: UserInfoDataItem.toType(vi.type),
+                nation: UserInfoDataItem.toNation(vi.nation),
+                level: vi.level,
+                toolTip: 0,
+                fights: 0,
+                wins: 0,
+                vehicleClass: 0 // 1,2,3,M
+            });
+        }
+        fixList(m_allDataProvider);
+        
+        // Hangar
+        var carouselData:Array = wot.RootComponents.carousel.dataProvider || _global._xvm_carousel_dataProvider;
+        if (!carouselData)
+        {
+            m_hangarDataProvider = null;
+            return;
+        }
+
+        m_hangarDataProvider = [ m_fullDataProvider[0] ];
+        var ulen:Number = m_fullDataProvider.length;
+        var clen:Number = carouselData.length;
+        for (var i:Number = 0; i < ulen; ++i)
+        {
+            var ui:wot.WGDataTypes.UserInfoDataItem = m_fullDataProvider[i];
+
+            for (var j:Number = 0; j < clen; ++j)
+            {
+                var ci:CarouselDataItem = carouselData[j];
+                if (ci.label == ui.name)
+                {
+                    //Logger.add("ci=ui: " + ci.label);
+                    m_hangarDataProvider.push(ui);
+                    break;
+                }
+            }
+        }
+    }
+    
     private function fixList(data:Array)
     {
         //Logger.addObject(data, "", 3);
@@ -474,81 +550,6 @@ class wot.UserInfo.UserInfo
         }
     }
 
-    private function filterList()
-    {
-        //Logger.add("filterList()");
-        
-        // Full
-        m_fullDataProvider = wrapper.list.dataProvider;
-
-        fixList(m_fullDataProvider);
-
-        // All
-        m_allDataProvider = [ m_fullDataProvider[0] ];
-        var commonId = m_fullDataProvider[0].id;
-        var len:Number = m_fullDataProvider.length;
-        var all = com.xvm.VehicleInfoData2.data;
-        for (var vn:String in all)
-        {
-            if (vn == "unknown" || Utils.endsWith("_training"))
-                continue;
-
-            var vi = all[vn];
-            var icon = "../maps/icons/vehicle/small/" + vi.nation + "-" + vi.name + ".png";
-
-            var item:Object = null;
-            for (var i:Number = 1; i < len; ++i)
-            {
-                if (m_fullDataProvider[i].icon == icon)
-                {
-                    item = m_fullDataProvider[i];
-                    break;
-                }
-            }
-
-            m_allDataProvider.push(item || {
-                id: commonId,
-                name: vi.name,
-                icon: icon,
-                type: UserInfoDataItem.toType(vi.type),
-                nation: UserInfoDataItem.toNation(vi.nation),
-                level: vi.level,
-                toolTip: 0,
-                fights: 0,
-                wins: 0,
-                vehicleClass: 0 // 1,2,3,M
-            });
-        }
-        fixList(m_allDataProvider);
-        
-        // Hangar
-        var carouselData:Array = wot.RootComponents.carousel.dataProvider || _global._xvm_carousel_dataProvider;
-        if (!carouselData)
-        {
-            m_hangarDataProvider = null;
-            return;
-        }
-
-        m_hangarDataProvider = [ m_fullDataProvider[0] ];
-        var ulen:Number = m_fullDataProvider.length;
-        var clen:Number = carouselData.length;
-        for (var i:Number = 0; i < ulen; ++i)
-        {
-            var ui:wot.WGDataTypes.UserInfoDataItem = m_fullDataProvider[i];
-
-            for (var j:Number = 0; j < clen; ++j)
-            {
-                var ci:CarouselDataItem = carouselData[j];
-                if (ci.label == ui.name)
-                {
-                    //Logger.add("ci=ui: " + ci.label);
-                    m_hangarDataProvider.push(ui);
-                    break;
-                }
-            }
-        }
-    }
-    
     private function applyFilterAndSort()
     {
         //Logger.add("applyFilterAndSort()");
@@ -585,32 +586,22 @@ class wot.UserInfo.UserInfo
 
     private function createControls()
     {
-        var header:MovieClip = null;
-        var y = 0;
-        for (var i in wrapper)
-        {
-            if (!Utils.startsWith("instance", i))
-                continue;
-            for (var j in wrapper[i])
-            {
-                if (Utils.startsWith("instance", j))
-                {
-                    header = wrapper[i];
-                    y = wrapper[i][j]._y;
-                    wrapper[i][j].text = "";
-                }
-            }
-            if (header != null)
-                break;
-        }
+        //Logger.add("createControls()");
 
-        var holder:MovieClip = header.createEmptyMovieClip("holder", header.getNextHighestDepth());
-        
-        m_button1 = createButton(holder, "bLvl", 10,  y, Locale.get("Level"), "left", 1);
-        m_button2 = createButton(holder, "bTyp", 124, y, Locale.get("Type"), "right", 1);
-        m_button3 = createButton(holder, "bNat", 135, y, Locale.get("Nation"), "left", 2);
-        m_button4 = createButton(holder, "bNam", 200, y, Locale.get("Name"), "left", 2);
-        m_button5 = createButton(holder, "bEff", 305, y, "E", "right", 1);
+        // hide original text fields
+        wrapper.header.fights._visible = false;
+        wrapper.header.wins._visible = false;
+
+        // add new buttons
+        var hdr:MovieClip = wrapper.header;
+
+        m_button1 = createButton(hdr, "bLvl", 10,  5, Locale.get("Level"), "left", 1);
+        m_button2 = createButton(hdr, "bTyp", 124, 5, Locale.get("Type"), "right", 1);
+        m_button3 = createButton(hdr, "bNat", 135, 5, Locale.get("Nation"), "left", 2);
+        m_button4 = createButton(hdr, "bNam", 200, 5, Locale.get("Name"), "left", 2);
+
+        m_button5 = createButton(hdr, "bEff", 305, 5, "E", "right", 1);
+
         // Option for disable "E" column, because WG is providing incorrect per-vehicle stats
         m_button5._visible = Config.s_config.userInfo.showEColumn == true;
         if (Config.s_config.rating.showPlayersStatistics != true || Config.s_config.rating.enableUserInfoStatistics != true)
@@ -618,44 +609,43 @@ class wot.UserInfo.UserInfo
             m_button5.enabled = false;
             m_button5._alpha = 30;
         }
-        m_button6 = createButton(holder, "bBat", 365, y, Locale.get("Fights"), "right", 1);
-        m_button7 = createButton(holder, "bWin", 435, y, Locale.get("Wins"), "right", 1);
-        m_button8 = createButton(holder, "bMed", 440, y, "M", "left", 1);
         
-        
+        m_button6 = createButton(hdr, "bBat", 365, 5, Locale.get("Fights"), "right", 1);
+        m_button7 = createButton(hdr, "bWin", 435, 5, Locale.get("Wins"), "right", 1);
+        m_button8 = createButton(hdr, "bMed", 440, 5, "M", "left", 1);
+
         // Filter controls
 
-        // TODO: player info dialog is broken when using TextInput? 
-        // userInfoWindow don't load data when create TextInput on it, use workaround.
-        var owner:MovieClip = IsSelfUserInfo() ? wrapper : wrapper._parent._parent;
-        var dy:Number = IsSelfUserInfo() ? -67 : 0;
-        
-        //Logger.addObject(wrapper, "wrapper", 3);
+        var filter:MovieClip = (IsSelfUserInfo() ? wrapper : wrapper._parent._parent).createEmptyMovieClip("filterPanel", 999);
+        filter._x = 460;
+        filter._y = IsSelfUserInfo() ? -69 : 0;
 
-        m_rbOwn = gfx.controls.RadioButton(Utils.createRadioButton(owner, "rbOwnTanks", 460, dy - 2, 100, Locale.get("In hangar"), "filter"));
-        m_rbOwn.addEventListener("select", this, "applyFilterAndSort");
-        m_rbOwn.tooltipText = Locale.get("Show only tanks in own hangar");
-        m_rbOwn.selected = IsSelfUserInfo() && Config.s_config.userInfo.inHangarFilterEnabled == true;
-        
-        m_rbFull = gfx.controls.RadioButton(Utils.createRadioButton(owner, "rbFullTanks", 460, dy + 10, 100, Locale.get("Player tanks"), "filter"));
-        m_rbFull.addEventListener("select", this, "applyFilterAndSort");
-        m_rbFull.tooltipText = Locale.get("Show all tanks played");
-        m_rbFull.selected = !IsSelfUserInfo() || Config.s_config.userInfo.inHangarFilterEnabled != true;
-
-        m_rbAll = gfx.controls.RadioButton(Utils.createRadioButton(owner, "rbAllTanks", 460, dy + 22, 100, Locale.get("All tanks"), "filter"));
-        m_rbAll.addEventListener("select", this, "applyFilterAndSort");
-        m_rbAll.tooltipText = Locale.get("Show all tanks in the game");
-        m_rbAll.selected = false;
-
-        var filterLabel:TextField = owner.createTextField("filterLabel", owner.getNextHighestDepth(), 560, dy - 2, 60, 20);
+        var filterLabel:TextField = filter.createTextField("filterLabel", 0, 100, 0, 60, 20);
         filterLabel.antiAliasType = "advanced";
-        filterLabel.styleSheet = Utils.createStyleSheet(Utils.createCSSFromConfig("$FieldFont", m_rbOwn.textField.textColor, "xvm_filterLabel"));
+        filterLabel.styleSheet = Utils.createStyleSheet(Utils.createCSSFromConfig("$FieldFont", Defines.UICOLOR_DEFAULT2, "xvm_filterLabel"));
         filterLabel.selectable = false;
         filterLabel.html = true;
         filterLabel.htmlText = "<span class='xvm_filterLabel'>" + Locale.get("Filter") + ":</span>";
-
-        m_tiFilter = gfx.controls.TextInput(Utils.createTextInput(owner, "__xvm_tiFilter", 560, dy + 13, 60));
+        
+        m_tiFilter = gfx.controls.TextInput(Utils.createTextInput(filter, "__xvm_tiFilter", 100, 15, 60));
         m_tiFilter.addEventListener("textChange", this, "applyFilterAndSort");
+        
+        m_rbOwn = gfx.controls.RadioButton(Utils.createRadioButton(filter, "rbOwnTanks", 0, 0, 100, Locale.get("In hangar"), "filter"));
+        m_rbOwn.tooltipText = Locale.get("Show only tanks in own hangar");
+        m_rbOwn.selected = IsSelfUserInfo() && Config.s_config.userInfo.inHangarFilterEnabled == true;
+        m_rbOwn.addEventListener("select", this, "applyFilterAndSort");
+        
+        m_rbFull = gfx.controls.RadioButton(Utils.createRadioButton(filter, "rbFullTanks", 0, 12, 100, Locale.get("Player tanks"), "filter"));
+        m_rbFull.tooltipText = Locale.get("Show all tanks played");
+        m_rbFull.selected = !IsSelfUserInfo() || Config.s_config.userInfo.inHangarFilterEnabled != true;
+        m_rbFull.addEventListener("select", this, "applyFilterAndSort");
+        
+        m_rbAll = gfx.controls.RadioButton(Utils.createRadioButton(filter, "rbAllTanks", 0, 24, 100, Locale.get("All tanks"), "filter"));
+        m_rbAll.tooltipText = Locale.get("Show all tanks in the game");
+        m_rbAll.selected = false;
+        m_rbAll.addEventListener("select", this, "applyFilterAndSort");
+        
+        _controlsCreated = true;
     }
 
     private function IsSelfUserInfo()
@@ -746,10 +736,10 @@ class wot.UserInfo.UserInfo
     {
         var b = e.target;
         if (b.selected)
-            b.textField.textColor = b.sortDir == b.defaultSort ? 0xFFC133 : 0x408CCF;
+            b.textField.textColor = b.sortDir == b.defaultSort ? Defines.UICOLOR_GOLD : Defines.UICOLOR_BLUE;
         else {
             b.sortDir = 0;
-            b.textField.textColor = 0xF2F1E1;
+            b.textField.textColor = Defines.UICOLOR_DEFAULT;
         }
     }
 }
