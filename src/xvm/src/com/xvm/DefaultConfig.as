@@ -33,7 +33,7 @@ class com.xvm.DefaultConfig
                   x: 170,
                   y: 35,
                   alpha: 80,
-                  delimeter: ": ",
+                  delimiter: ": ",
                   maxRows: 4,
                   columnGap: 10,
                   fontStyle: {

@@ -16,7 +16,11 @@
     var title:MovieClip;
     var sb_clan:MovieClip;
 
+    var USER_INFO_FRAME;
+
+    function setClanEmblem(clanEmblemId);
     function setCommonInfo();
+    function setList();
     function setStat();
-    function setList()
+    function setAchievements();
 }

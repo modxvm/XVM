@@ -49,7 +49,7 @@ class wot.crew.tankmen.Crew
 
         PingServers.initFeature();
 
-        // FIXIT: dyrty hack, find the best place to initialize carousel
+        // FIXIT: dirty hack, find the best place to initialize carousel without timer
         var timer = _global.setInterval(function() {
             // save carousel tanks in _global to be available from the Achievements dialog.
             var carousel:net.wargaming.Carousel = wot.RootComponents.carousel;

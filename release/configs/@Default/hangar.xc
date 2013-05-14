@@ -23,9 +23,9 @@
       // Transparecy
       // Прозрачность от 0 до 100
       "alpha": 80,
-      // Server to responce time text delimeter
+      // Server to responce time text delimiter
       // Разделитель сервера от времени отклика
-      "delimeter": ": ",
+      "delimiter": ": ",
       // Maximum number of column rows
       // Максимальное количество строк одной колонки
       "maxRows": 4,

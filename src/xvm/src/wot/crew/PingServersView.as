@@ -35,7 +35,7 @@ class wot.crew.PingServersView
     {
         var time:Number = pingObj.time;
         var cluster:String = pingObj.cluster;
-        var raw:String = cluster + cfg.delimeter + time;
+        var raw:String = cluster + cfg.delimiter + time;
         
         return "<span class='" + STYLE_NAME_PREFIX + defineQuality(time) + "'>" + raw + "</span>";
     }

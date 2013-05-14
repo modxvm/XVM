@@ -1,9 +1,19 @@
 {
   "configVersion": "1.5.0",
   "def": {
+    //"standardMarkers": true,
+    "standardMarkers": false,
+
     "format":  "<font face='Consolas' size='11'>{{avglvl}} <font face='Symbol' color='#111111'><b><font color='{{c:tdv}}'>·</font><font color='{{c:tfb}}'>·</font><font color='{{c:tsb}}'>·</font></b></font> <font color='{{c:e}}'>{{e}}</font>|<font color='{{c:xeff}}'>{{xeff}}</font>|<font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:twr}}'>{{twr}}</font></font>",
+    
     "markersStat": "<b><font face='Symbol' color='#CCCCCC' size='11'><font color='{{c:t-battles}}'>·</font> <font color='{{c:e}}'>·</font> <font color='{{c:xeff}}'>·</font> <font color='{{c:xwn}}'>·</font></font></b>",
-    "markersStatAlt": "<b><font face='$FieldFont' size='12'><font color='{{c:t-battles}}'>{{t-hb}}</font> <font color='{{c:e}}'>{{teff}}</font> <font color='{{c:xeff}}'>{{xeff}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:twr}}'>{{twr}}</font></font></b>"
+    "markersStatAlt": "<b><font face='$FieldFont' size='12'><font color='{{c:t-battles}}'>{{t-hb}}</font> <font color='{{c:e}}'>{{teff}}</font> <font color='{{c:xeff}}'>{{xeff}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:twr}}'>{{twr}}</font></font></b>",
+    
+    "damageMessageAlive": "{{dmg}} <img src='xvmres://icons/fire.png' width='30' height='30'>",
+    "damageMessageAllyDead": "({{dmg}}) <img src='xvmres://icons/fire.png' width='30' height='30'>",
+    "damageMessageEnemyDead": "<textformat leading='-5'>({{dmg}}) <img src='xvmres://icons/fire.png' width='30' height='30'><br>{{vehicle}}</textformat>",
+    
+    "__stub__": null
   },
   "definition": {
     "author": "sirmax2",
@@ -17,6 +27,7 @@
     "hideTutorial": true,
     "pingServers": {
       "enabled": true,
+      "delimiter": "<img src='img://userInfoId0x01'> ",
       "x": 0
     }
   },
@@ -35,7 +46,7 @@
     "showPostmortemTips": false,
     "removePanelsModeSwitcher": true,
     "highlightVehicleIcon": false,
-    "useStandardMarkers": false,
+    "useStandardMarkers": ${"def.standardMarkers"},
     "clanIconsFolder": "clanicons"
   },
   "rating": {
@@ -184,7 +195,7 @@
           },
           "damageText": {
             "y": -55,
-            "damageMessage": "{{dmg}}"
+            "damageMessage": ${"def.damageMessageAlive"}
           },
           "actionMarker": {
             "y": -55
@@ -234,7 +245,7 @@
           },
           "damageText": {
             "y": -55,
-            "damageMessage": "{{dmg}}"
+            "damageMessage": ${"def.damageMessageAlive"}
           },
           "actionMarker": {
             "y": -55
@@ -276,7 +287,7 @@
           },
           "damageText": {
             "y": -55,
-            "damageMessage": "({{dmg}})",
+            "damageMessage": ${"def.damageMessageAllyDead"},
             "blowupMessage": "Blown-up!"
           },
           "actionMarker": {
@@ -289,7 +300,7 @@
           },
           "damageText": {
             "y": -55,
-            "damageMessage": "({{dmg}})",
+            "damageMessage": ${"def.damageMessageAllyDead"},
             "blowupMessage": "Blown-up!"
           },
           "actionMarker": {
@@ -337,7 +348,7 @@
           },
           "damageText": {
             "y": -55,
-            "damageMessage": "{{dmg}}"
+            "damageMessage": ${"def.damageMessageAlive"}
           },
           "actionMarker": {
             "y": -55
@@ -387,7 +398,7 @@
           },
           "damageText": {
             "y": -55,
-            "damageMessage": "{{dmg}}"
+            "damageMessage": ${"def.damageMessageAlive"}
           },
           "actionMarker": {
             "y": -55
@@ -429,7 +440,7 @@
           },
           "damageText": {
             "y": -65,
-            "damageMessage": "<textformat leading='-5'>({{dmg}})<br>{{vehicle}}</textformat>",
+            "damageMessage": ${"def.damageMessageEnemyDead"},
             "blowupMessage": "<textformat leading='-5'>Blown-up!<br>{{vehicle}}</textformat>"
           },
           "actionMarker": {
@@ -442,7 +453,7 @@
           },
           "damageText": {
             "y": -55,
-            "damageMessage": "({{dmg}})",
+            "damageMessage": ${"def.damageMessageEnemyDead"},
             "blowupMessage": "Blown-up!"
           },
           "actionMarker": {
