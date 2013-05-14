@@ -123,7 +123,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         m_speaking = speaking;
 
         m_isDead    = curHealth <= 0; // -1 for ammunition storage explosion
-        m_curHealth = curHealth >= 0 ? (curHealth) : (0);
+        m_curHealth = curHealth >= 0 ? curHealth : 0;
 
         healthBarComponent.init();
         contourIconComponent.init();
@@ -283,10 +283,10 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
             var vehicleStateCfg:Object = vehicleState.getCurrentConfig();
             healthBarComponent.updateState(vehicleStateCfg);
             healthBarComponent.showDamage(vehicleStateCfg, newHealth, m_maxHealth, -delta, flag, damageType);
-            damageTextComponent.showDamage(
-                flag == Defines.FROM_PLAYER ? vehicleStateCfg.damageTextPlayer
-                    : flag == Defines.FROM_SQUAD ? vehicleStateCfg.damageTextSquadman : vehicleStateCfg.damageText,
-                newHealth, -delta, flag, damageType);
+            var cfg = flag == Defines.FROM_PLAYER ? vehicleStateCfg.damageTextPlayer
+                : flag == Defines.FROM_SQUAD ? vehicleStateCfg.damageTextSquadman : vehicleStateCfg.damageText;
+            //Logger.addObject(cfg, m_playerFullName);
+            damageTextComponent.showDamage(cfg, newHealth, -delta, flag, damageType);
         }
 
         XVMUpdateDynamicTextFields();

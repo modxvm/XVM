@@ -644,8 +644,6 @@ class wot.UserInfo.UserInfo
         m_rbAll.tooltipText = Locale.get("Show all tanks in the game");
         m_rbAll.selected = false;
         m_rbAll.addEventListener("select", this, "applyFilterAndSort");
-        
-        _controlsCreated = true;
     }
 
     private function IsSelfUserInfo()

@@ -493,22 +493,38 @@ class com.xvm.Config
 
         if (v == "1.5.0")
         {
-            config.markers.ally.alive.normal.damageTextPlayer = config.markers.ally.alive.normal.damageText;
-            config.markers.ally.alive.normal.damageTextSquadman = config.markers.ally.alive.normal.damageText;
-            config.markers.ally.alive.extended.damageTextPlayer = config.markers.ally.alive.normal.damageText;
-            config.markers.ally.alive.extended.damageTextSquadman = config.markers.ally.alive.normal.damageText;
-            config.markers.ally.dead.normal.damageTextPlayer = config.markers.ally.alive.normal.damageText;
-            config.markers.ally.dead.normal.damageTextSquadman = config.markers.ally.alive.normal.damageText;
-            config.markers.ally.dead.extended.damageTextPlayer = config.markers.ally.alive.normal.damageText;
-            config.markers.ally.dead.extended.damageTextSquadman = config.markers.ally.alive.normal.damageText;
-            config.markers.enemy.alive.normal.damageTextPlayer = config.markers.ally.alive.normal.damageText;
-            config.markers.enemy.alive.normal.damageTextSquadman = config.markers.ally.alive.normal.damageText;
-            config.markers.enemy.alive.extended.damageTextPlayer = config.markers.ally.alive.normal.damageText;
-            config.markers.enemy.alive.extended.damageTextSquadman = config.markers.ally.alive.normal.damageText;
-            config.markers.enemy.dead.normal.damageTextPlayer = config.markers.ally.alive.normal.damageText;
-            config.markers.enemy.dead.normal.damageTextSquadman = config.markers.ally.alive.normal.damageText;
-            config.markers.enemy.dead.extended.damageTextPlayer = config.markers.ally.alive.normal.damageText;
-            config.markers.enemy.dead.extended.damageTextSquadman = config.markers.ally.alive.normal.damageText;
+            if (!config.markers.ally.alive.normal.damageTextPlayer)
+                config.markers.ally.alive.normal.damageTextPlayer = config.markers.ally.alive.normal.damageText;
+            if (!config.markers.ally.alive.normal.damageTextSquadman)
+                config.markers.ally.alive.normal.damageTextSquadman = config.markers.ally.alive.normal.damageText;
+            if (!config.markers.ally.alive.extended.damageTextPlayer)
+                config.markers.ally.alive.extended.damageTextPlayer = config.markers.ally.alive.extended.damageText;
+            if (!config.markers.ally.alive.extended.damageTextSquadman)
+                config.markers.ally.alive.extended.damageTextSquadman = config.markers.ally.alive.extended.damageText;
+            if (!config.markers.ally.dead.normal.damageTextPlayer)
+                config.markers.ally.dead.normal.damageTextPlayer = config.markers.ally.dead.normal.damageText;
+            if (!config.markers.ally.dead.normal.damageTextSquadman)
+                config.markers.ally.dead.normal.damageTextSquadman = config.markers.ally.dead.normal.damageText;
+            if (!config.markers.ally.dead.extended.damageTextPlayer)
+                config.markers.ally.dead.extended.damageTextPlayer = config.markers.ally.dead.extended.damageText;
+            if (!config.markers.ally.dead.extended.damageTextSquadman)
+                config.markers.ally.dead.extended.damageTextSquadman = config.markers.ally.dead.extended.damageText;
+            if (!config.markers.enemy.alive.normal.damageTextPlayer)
+                config.markers.enemy.alive.normal.damageTextPlayer = config.markers.enemy.alive.normal.damageText;
+            if (!config.markers.enemy.alive.normal.damageTextSquadman)
+                config.markers.enemy.alive.normal.damageTextSquadman = config.markers.enemy.alive.normal.damageText;
+            if (!config.markers.enemy.alive.extended.damageTextPlayer)
+                config.markers.enemy.alive.extended.damageTextPlayer = config.markers.enemy.alive.extended.damageText;
+            if (!config.markers.enemy.alive.extended.damageTextSquadman)
+                config.markers.enemy.alive.extended.damageTextSquadman = config.markers.enemy.alive.extended.damageText;
+            if (!config.markers.enemy.dead.normal.damageTextPlayer)
+                config.markers.enemy.dead.normal.damageTextPlayer = config.markers.enemy.dead.normal.damageText;
+            if (!config.markers.enemy.dead.normal.damageTextSquadman)
+                config.markers.enemy.dead.normal.damageTextSquadman = config.markers.enemy.dead.normal.damageText;
+            if (!config.markers.enemy.dead.extended.damageTextPlayer)
+                config.markers.enemy.dead.extended.damageTextPlayer = config.markers.enemy.dead.extended.damageText;
+            if (!config.markers.enemy.dead.extended.damageTextSquadman)
+                config.markers.enemy.dead.extended.damageTextSquadman = config.markers.enemy.dead.extended.damageText;
 
             if (config.battle.clanIconsFolder == "../../../clanicons")
                 config.battle.clanIconsFolder = "clanicons";
