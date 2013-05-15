@@ -93,12 +93,12 @@
       "width": 170,
       // Display format for player nickname (macros allowed, see readme-en.txt).
       // Формат отображения имени игрока (допускаются макроподстановки, см. readme-ru.txt).
-      "nickFormatLeft": "<font color='{{c:rating}}'>{{rating}}</font> {{nick}}",
-      "nickFormatRight": "{{nick}} <font color='{{c:rating}}'>{{rating}}</font>",
+      "nickFormatLeft": "<font color='{{c:xwn}}'>{{xwn}}</font> {{nick}}",
+      "nickFormatRight": "{{nick}} <font color='{{c:xwn}}'>{{xwn}}</font>",
       // Display format for vehicle name (macros allowed, see readme-en.txt).
       // Формат отображения названия танка (допускаются макроподстановки, см. readme-ru.txt).
-      "vehicleFormatLeft": "<font color='{{c:xwn}}'>{{vehicle}}</font>",
-      "vehicleFormatRight": "<font color='{{c:xwn}}'>{{vehicle}}</font>"
+      "vehicleFormatLeft": "{{vehicle}}",
+      "vehicleFormatRight": "{{vehicle}}"
     }
   }
 }
