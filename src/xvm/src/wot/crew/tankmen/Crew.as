@@ -6,7 +6,6 @@ import com.xvm.GlobalEventDispatcher;
 import com.xvm.Logger;
 import com.xvm.Utils;
 import wot.crew.CrewLoader;
-import wot.crew.PingServers;
 
 class wot.crew.tankmen.Crew
 {
@@ -47,8 +46,6 @@ class wot.crew.tankmen.Crew
         if (Config.s_config.hangar.hideTutorial == true)
             _root.header.tutorialDispatcher._visible = false;
 
-        PingServers.initFeature();
-
         // FIXIT: dirty hack, find the best place to initialize carousel without timer
         var timer = _global.setInterval(function() {
             // save carousel tanks in _global to be available from the Achievements dialog.
@@ -58,7 +55,6 @@ class wot.crew.tankmen.Crew
         }, 1000);
     }
 
-    // override
     function setTankmenImpl(data)
     {
         base.setTankmen(data);

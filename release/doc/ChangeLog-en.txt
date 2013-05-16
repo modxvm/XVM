@@ -1,30 +1,25 @@
+XVM-4.0.0-beta3:
   [NEW FUNCTIONS]
-  * expertPanel mod; see expertPanel.xc
-
-XVM-4.0.0-beta1:
-  [NEW FUNCTIONS]
-  * cluster responce time table at hangar(ping); "pingServers" section at hangar.xc config file
+  * expertPanel mod; see battle.xc
+  * cluster responce time table at login and hangar (ping);
+    "pingServers" section at login.xc and  hangar.xc config files
   * switch in user info window: [show] in hangar, player tanks, all tanks
-  
+
 XVM-4.0.0-alpha3:
+  * new config format (now config is loading from res_mods/xvm/xvm.xc)
+  * removed legacy support for OTMData.xml config
+  * fixed rare condition when wrong minimap lost marker was deleted
+  * new option: hangar/hideTutorial
+  * filter by tanks in the own hangar in the Achievements window
+  * separate settings for self and squadman damage text
   * config version changed to 4.0.0.
   * minimap: deustch locale support without xvm-stat.exe
   * minimap: fix issues at Fisherman's bay map for EN\US locale users without xvm-stat.exe
-  * special scheme name for <img> tag: xvmres:// - path relative to res_mods/xvm/res folder 
+  * special scheme name for <img> tag: xvmres:// - path relative to res_mods/xvm/res folder
       for example: <img src='xvmres://icons/foo.png'>
   * filter by tank name in the Achievements window
   * new option: userInfo/inHangarFilterEnabled - enable "In hangar" check box by default
 
-XVM-4.0.0-alpha2:
-  * new option: hangar/hideTutorial
-  * filter by tanks in the own hangar in the Achievements window
-  * separate settings for self and squadman damage text
-
-XVM-4.0.0-alpha1:
-  * new config format (now config is loading from res_mods/xvm/xvm.xc)
-  * removed legacy support for OTMData.xml config
-  * fixed rare condition when wrong minimap lost marker was deleted
-  
 XVM-3.5.0
   [FIXES]
   * fixed sorting in After Battle stats
@@ -35,7 +30,7 @@ XVM-3.5.0
 
 XVM-3.5.0-pre2
   * adaptation to WoT 0.8.5
-  
+
   [NEW FUNCTIONS]
   * implemented ability to disable "Allies | Enemies" text fields under score panel
     - upper level section "fragCorrelation" at xvm config file
@@ -43,10 +38,10 @@ XVM-3.5.0-pre2
   [FIXES]
   * minimap: added new map Pearl River to map recognition system
   * score panel updated
-  
+
   [OTHER]
   * minimap: zoom minimap on Ctrl press disabled by default
-  
+
 XVM-3.5.0-pre1:
   * adaptation to WoT 0.8.5.CT2
 
@@ -60,7 +55,7 @@ XVM-3.5.0-pre1:
   * fixed mouse cursor with minimap zoom by Ctrl press
   * fixed endless loop when stat is not available
   * capture bar: tweak
-  
+
   [MINIMAP]
   * minimap enabled by default
   * zoom minimap by key pressing;
@@ -73,7 +68,7 @@ XVM-3.5.0-pre1:
   * zoom size memory fixed
   * world map battle fix
   * iconScale now does not affect capture bases
-  
+
   [OTHER]
   * xvm-stat protocol reworked
     ATTENTION: XVM Stat 1.4.0 ot higher required

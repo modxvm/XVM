@@ -1,20 +1,23 @@
-import wot.crew.PingServersView;
+import com.xvm.Sandbox;
 import com.xvm.Utils;
+import com.xvm.Components.PingServers.PingServersView;
 
 /**
  * TextField building is separated here.
  * Other classes do not care about field creation process.
  * And this class does not care about other classes using fields.
  */
-class wot.crew.PingFieldBuilder
+class com.xvm.Components.PingServers.PingFieldBuilder
 {
     private static var TF_NAME_PREFIX:String = "__xvm_pingTextField";
 
     private var cfg:Object;
+    private var holder:MovieClip;
     
-    public function PingFieldBuilder(cfg:Object) 
+    public function PingFieldBuilder(cfg:Object, holder:MovieClip) 
     {
         this.cfg = cfg;
+        this.holder = holder;
     }
     
     public function createField(num:Number):TextField
@@ -28,7 +31,7 @@ class wot.crew.PingFieldBuilder
         tf.selectable = false;
         tf.styleSheet = Utils.createStyleSheet(createCss());
         tf._alpha = cfg.alpha;
-        tf.htmlText = "";
+        tf.htmlText =  "";
         
         if (cfg.shadow.enabled)
         {
@@ -60,10 +63,5 @@ class wot.crew.PingFieldBuilder
         css += createQualityCss(PingServersView.QUALITY_BAD);
         
         return css;
-    }
-    
-    private function get holder():MovieClip
-    {
-        return _root.header;
     }
 }

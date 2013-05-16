@@ -1,7 +1,7 @@
 import com.xvm.Config;
-import wot.crew.PingFieldProxy;
+import com.xvm.Components.PingServers.PingFieldProxy;
 
-class wot.crew.PingServersView
+class com.xvm.Components.PingServers.PingServersView
 {
     public static var QUALITY_BAD:String = "bad";
     public static var QUALITY_POOR:String = "poor";
@@ -13,10 +13,10 @@ class wot.crew.PingServersView
     private var tfProxy:PingFieldProxy;
     private var fields:Array = [];
 
-    public function PingServersView(cfg:Object)
+    public function PingServersView(cfg:Object, holder:MovieClip)
     {
         this.cfg = cfg;
-        tfProxy = new PingFieldProxy(cfg);
+        tfProxy = new PingFieldProxy(cfg, holder);
     }
     
     public function update(responceTimeList:Array)

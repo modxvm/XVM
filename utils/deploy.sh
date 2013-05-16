@@ -10,6 +10,7 @@ FILES="
   battleloading.swf
   crew.swf
   FinalStatistic.swf
+  LangBarPanel.swf
   lobby_messenger.swf
   Minimap.swf
   PlayersPanel.swf

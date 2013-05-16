@@ -3,24 +3,26 @@ import com.xvm.Config;
 import com.xvm.Defines;
 import com.xvm.JSONx;
 import com.xvm.Utils;
-import wot.crew.PingServersView;
+import com.xvm.Components.PingServers.PingServersView;
 
-class wot.crew.PingServers
+class com.xvm.Components.PingServers.PingServers
 {
-    private static var instance:PingServers = null;
+    public static var instance:PingServers = null;
     
     private var view:PingServersView;
     private var pingCommandCounter:Number;
     private var pingTimer:Function;
 
-    public static function initFeature()
+    public static function initFeature(cfg:Object, holder:MovieClip)
     {
         if (cfg.enabled == false)
             return;
-        
+
         if (instance == null)
             instance = new PingServers();
-        instance.view = new PingServersView(cfg);
+        instance.view = new PingServersView(cfg, holder);
+        if (instance.pingTimer != null)
+            _global.clearInterval(instance.pingTimer);
         instance.pingTimer = _global.setInterval(
             function() { PingServers.instance.showPing.call(PingServers.instance) },
             cfg.updateInterval);
@@ -64,10 +66,5 @@ class wot.crew.PingServers
         responceTimeList.sortOn(["cluster"]);
         
         return responceTimeList;
-    }
-    
-    private static function get cfg():Object
-    {
-        return Config.s_config.hangar.pingServers;
     }
 }

@@ -55,6 +55,10 @@
     "modMinVersion": "4.0.0"
   },
 
+  // Parameters for login screen.
+  // Параметры экрана логина.
+  "login": ${"login.xc":"login"},
+
   // Parameters for hangar.
   // Параметры ангара.
   "hangar": ${"hangar.xc":"hangar"},

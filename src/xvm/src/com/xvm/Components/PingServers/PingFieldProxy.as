@@ -1,4 +1,4 @@
-import wot.crew.PingFieldBuilder;
+import com.xvm.Components.PingServers.PingFieldBuilder;
 
 /**
  * Manages many columns - TextFields.
@@ -7,16 +7,16 @@ import wot.crew.PingFieldBuilder;
  * Each column can consist of many rows.
  * Row example: "RU1: 15"
  */
-class wot.crew.PingFieldProxy
+class com.xvm.Components.PingServers.PingFieldProxy
 {
     private var cfg:Object;
     private var builder:PingFieldBuilder;
     private var fields:Array = [];
     
-    public function PingFieldProxy(cfg:Object) 
+    public function PingFieldProxy(cfg:Object, holder:MovieClip) 
     {
         this.cfg = cfg;
-        builder = new PingFieldBuilder(cfg);
+        builder = new PingFieldBuilder(cfg, holder);
     }
     
     /**

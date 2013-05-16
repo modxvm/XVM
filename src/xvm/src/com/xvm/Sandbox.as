@@ -6,6 +6,7 @@ class com.xvm.Sandbox
     public static var SANDBOX_VMM = "V";
     public static var SANDBOX_BATTLE = "B";
     public static var SANDBOX_HANGAR = "H";
+    public static var SANDBOX_LOGIN = "L";
 
     public static function GetCurrentSandboxPrefix() : String
     {
@@ -20,6 +21,10 @@ class com.xvm.Sandbox
         // hangar SWFs + battleloading.swf
         if (_root["invitesHandler"] != undefined)
             return SANDBOX_HANGAR;
+
+        // login screen
+        if (_root.loadingName != "startgamevideo" || _root.loadingName == "login")
+            return SANDBOX_LOGIN;
 
         // unknown sand box
         var s = "XVM\nunknown sand box\n\n";
