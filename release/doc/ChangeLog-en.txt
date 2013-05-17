@@ -1,3 +1,5 @@
+  * hitlog: shows enemy HP left on Alt press; hitlog.xc: { "hpleft": "true"
+
 XVM-4.0.0-beta3:
   [NEW FUNCTIONS]
   * expertPanel mod; see battle.xc
