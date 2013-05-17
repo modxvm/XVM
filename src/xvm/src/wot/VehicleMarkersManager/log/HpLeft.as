@@ -1,7 +1,6 @@
 /**
  * @author ilitvinov87@gmail.com
  */
-import com.xvm.Logger;
 import wot.VehicleMarkersManager.log.HitLog;
 
 class wot.VehicleMarkersManager.log.HpLeft
@@ -10,8 +9,6 @@ class wot.VehicleMarkersManager.log.HpLeft
    
     public function onNewMarkerCreated(player:Object):Void
     {
-        //Logger.add("HpLeft.onNewMarkerCreated " + player.pFullName + " " + player.curHealth);
-        //Logger.add("  HpLeft.model.length " + model.length);
         var loggerPlayer:Object = getLoggedPlayer(player.pFullName);
         if (loggerPlayer == null)
         {
@@ -27,8 +24,6 @@ class wot.VehicleMarkersManager.log.HpLeft
     
     public function onHealthUpdate(pFullName:String, curHealth:Number):Void
     {
-        //Logger.add("HpLeft.onHealthUpdate " + curHealth + " " + pFullName);
-        //Logger.add("  HpLeft.model.length " + model.length);
         var player:Object = getLoggedPlayer(pFullName);
         player.curHealth = curHealth;
     }
@@ -49,7 +44,7 @@ class wot.VehicleMarkersManager.log.HpLeft
                  * VehicleMarkersManagers sandbox does not
                  * know when someone dies out of sight.
                  */
-                break;
+                continue;
             }
             text += "<font color='#FFFFFF'>" + player.vType + "</font>";
             text += "   <font color='#FF9999'>" + player.curHealth + "</font>";
