@@ -82,8 +82,6 @@ class wot.VehicleMarkersManager.log.HitLog
     public function update(delta:Number, curHealth:Number, vehicleName:String, icon:String, playerName:String,
         level:Number, damageType:String, vtype:String, vtypeColor:String, dead:Boolean)
     {
-        //com.xvm.Logger.add(delta + " " + vehicleName + " " + playerName + " " + level);
-
         total += delta;
 
         var dmg = delta;

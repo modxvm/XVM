@@ -264,7 +264,10 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         m_dead = m_curHealth <= 0;
         if (Config.s_loaded == true && !subject)
             initializeSubject();
-        logLists.onNewMarkerCreated(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth);
+        if (wrapper.m_team == "enemy")
+        {
+            logLists.onNewMarkerCreated(vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth);
+        }
         call("init", [ vClass, vIconSource, vType, vLevel, pFullName, curHealth, maxHealth, entityName, speaking, hunt, entityType ]);
     }
 
@@ -279,7 +282,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
             m_dead = true;
 
         var curHealthAbsolute:Number = (curHealth < 0 ? 0 : curHealth);
-            
+        
         if (wrapper.m_team == "enemy") /** Omit allies */
         {
             if (logLists != null)
