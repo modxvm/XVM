@@ -50,10 +50,12 @@ class wot.LangBarPanel.LanguageBar
 
         var me = this;
         _global.setInterval(function() { me.pingInitializationTimer.call(me); }, 1000);
+        pingInitializationTimer();
     }
 
     private function pingInitializationTimer()
     {
+        //Logger.add(_root.loadingName);
         if (currentLoadingName == _root.loadingName)
             return;
         currentLoadingName = _root.loadingName;
@@ -69,13 +71,15 @@ class wot.LangBarPanel.LanguageBar
             holder = header.createEmptyMovieClip("pingHolder", header.getNextHighestDepth());
             PingServers.initFeature(Config.s_config.hangar.pingServers, holder);
         }
-        else if (currentLoadingName == "login")
+        else if (currentLoadingName == "startgamevideo" || currentLoadingName == "login")
         {
-            var main:MovieClip = _root.contentHolder.main;
+            var main:MovieClip = _root;
             holder = main.createEmptyMovieClip("pingHolder", main.getNextHighestDepth());
             // _root.contentHolder.main is fixed size (1024x768), so create holder and place it at the top left corner of screen.
             holder._x = Math.round((1024 - main.__width) / 2);
             holder._y = Math.round((768 - main.__height) / 2);
+            //holder._x = 512;
+            //holder._y = 384;
             PingServers.initFeature(Config.s_config.login.pingServers, holder);
         }
     }

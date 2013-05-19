@@ -1,4 +1,3 @@
-import com.xvm.Config;
 import com.xvm.Components.PingServers.PingFieldProxy;
 
 class com.xvm.Components.PingServers.PingServersView

@@ -15,7 +15,7 @@ class wot.battleloading.TipField
 
     private function setInfoFieldData(event)
     {
-        //Logger.addObject(event, "SetInfoFieldData(event)");
+        //com.xvm.Logger.addObject(event, "SetInfoFieldData(event)");
         var info: TextField = form_mc.helpTip;
         var tip: TextField = form_mc.tipText;
 

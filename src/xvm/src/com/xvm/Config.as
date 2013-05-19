@@ -13,19 +13,20 @@ import com.xvm.Utils;
 class com.xvm.Config
 {
     // Public vars
-    public static var s_config: Object;
-    public static var s_loaded: Boolean = false;
-    public static var s_proxy_available: Boolean = true;
-    public static var s_game_region: String = null;
-    public static var s_vars: Object = {
+    public static var s_config:Object;
+    public static var s_loaded:Boolean = false;
+    public static var s_proxy_available:Boolean = true;
+    public static var s_game_region:String = null;
+    public static var s_vars:Object = {
         window_size: [ 1024, 768 ],
         map_name: ""
     }
 
     // Private vars
-    private static var s_loading: Boolean = false;
-    private static var s_src: String = "";
-
+    private static var s_loading:Boolean = false;
+    private static var s_src:String = "";
+    private static var info_event:Object = null;
+    
     // Load XVM mod config; config data is shared between all marker instances, so
     // it should be loaded only once per session. s_loaded flag indicates that
     // we've already initialized config loading process.
@@ -34,6 +35,11 @@ class com.xvm.Config
         //Logger.add("TRACE: LoadConfig()");
         if (s_loaded)
         {
+            if (info_event != null)
+            {
+                // Use set timeout to avoid overriding by default value
+                _global.setTimeout(function() { GlobalEventDispatcher.dispatchEvent(Config.info_event); }, 1);
+            }
             GlobalEventDispatcher.dispatchEvent({type: "config_loaded"});
             return;
         }
@@ -117,21 +123,24 @@ class com.xvm.Config
                 text += "[" + ex.at + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " +
                     head + ">>>" + ex.text.charAt(ex.at) + "<<<" + tail;
             }
-            GlobalEventDispatcher.dispatchEvent( { type: "set_info", error: text } );
+            info_event = { type: "set_info", error: text };
+            GlobalEventDispatcher.dispatchEvent(info_event);
             Logger.add(String(text).substr(0, 200));
             return;
         }
             
         if (!event.data)
         {
-            GlobalEventDispatcher.dispatchEvent( { type: "set_info", warning: "" } );
+            info_event = { type: "set_info", warning: "" };
+            GlobalEventDispatcher.dispatchEvent(info_event);
             return;
         }
 
         Config.s_config = Config.MergeConfigs(Config.FixConfig(event.data), Config.s_config);
         //Logger.addObject(Config.s_config, "config", 2);
         //Logger.addObject(Config.s_config.markers.enemy.alive.normal, "", 3);
-        GlobalEventDispatcher.dispatchEvent({ type: "set_info" }); // Just show version
+        info_event = { type: "set_info" };
+        GlobalEventDispatcher.dispatchEvent(info_event); // Just show version
     }
 
     private static function ReloadGameRegion()

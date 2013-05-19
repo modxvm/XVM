@@ -1,0 +1,17 @@
+--- orig\gameloading.xml	2013-05-19 11:46:17.276464100 +0300
++++ gameloading.xml	2013-05-19 11:46:17.370064300 +0300
+@@ -15,4 +15,7 @@
+         </color>
+       </SetBackgroundColor>
++      <ImportAssets2 url="xvm.swf" reserved1="1" reserved2="0">
++        <symbols/>
++      </ImportAssets2>
+       <ImportAssets2 url="ComponentsLib.swf" reserved1="1" reserved2="0">
+         <symbols>
+@@ -12291,5 +12291,5 @@
+           <PushData>
+             <items>
+-              <StackString value="net.wargaming.gameloading.GameLoadingForm"/>
++              <StackString value="wot.wrapper.gameloading.GameLoadingForm"/>
+             </items>
+           </PushData>

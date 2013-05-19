@@ -35,6 +35,11 @@ class com.xvm.Components.PingServers.PingServers
         _global.setTimeout(function() { PingServers.instance.showPing.call(PingServers.instance) }, 5000);
     }
 
+    public static function sendPing()
+    {
+        Comm.Sync(Defines.COMMAND_PING, "0");
+    }
+
     public function PingServers()
     {
         pingCommandCounter = 0;
