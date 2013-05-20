@@ -287,7 +287,7 @@ class com.xvm.Macros
         {
             case "RU":
                 if (label == "XlebniDizele4ku")
-                    return "XlebniDizele4ku!!";
+                    return "Буркартошкин!";
                 if (label == "sirmax2" || label == "0x01" || label == "_SirMax_")
                     return "«сэр Макс» (XVM)";
                 break;
