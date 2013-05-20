@@ -2,7 +2,7 @@
  * The boot configs file. To use - rename to xvm.xc.
  *
  * Reference format: ${"path to config file":"."}
- * // - сomment out the line (will not be used)
+ * // - comment out the line (will not be used)
  *
  * ---------------------------------------------------------------
  * Пример загрузочного файла конфигов. Для использования переименовать в xvm.xc.

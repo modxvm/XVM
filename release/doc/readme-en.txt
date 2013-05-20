@@ -9,22 +9,30 @@
 -----------------------------------------------------------
 
   This mod have many features, like:
-    * Vehicle markers (formerly OverTargetMarkers)
+    * Customizable vehicle markers
     * Disable Postmortem Panel
     * Vehicle Icons Mirroring Controlling
     * Players Panel Controlling (width, transparency, content)
     * Clock at battle loading screen
-    * Player/clan icon
-    * Vehicle icon sets
-    * In-game players rating (only with xvm-stat package)
+    * Player, clan icon
+    * Different vehicle icon sets for ears, battle loading screen, etc.
+    * Players statistics (only with xvm-stat package)
     * Capture bar additional information
+    * Customizable minimap
+    * Display extended statistics in the company and user info windows
+    * Show info about tank in squad window
+    * Enemy spotted status at right side panel
+    * Crew autoloading mod
+    * Displaying ping before login to the server or battle
 
-  Project site:  http://code.google.com/p/wot-xvm/
+  Project site:  http://www.modxvm.com/
 
   Support:       http://www.koreanrandom.com/forum/topic/1383-xvm
-  FAQ (Russian): http://www.koreanrandom.com/forum/topic/1381-faq
-  Ready configs: http://www.koreanrandom.com/forum/forum/50-custom-configurations
+  FAQ:           http://www.modxvm.com/en/faq/
+  User configs:  http://www.koreanrandom.com/forum/forum/50-custom-configurations
   Сonfig editor: http://www.koreanrandom.com/forum/topic/1422-/#entry11316
+
+
 
 -----------------------------------------------------------
 2. INSTALL
@@ -35,20 +43,16 @@
 
   2. You do not need to setup anything by default.
 
-     If you want special settings, you need to create config file:
-       \res_mods\[GAME VERSION]\gui\flash\XVM.xvmconf
+    If you want special settings, you need to rename boot config file:
+      \res_mods\xvm\xvm.xc.sample to xvm.xc
+    Instructions for setting it up are inside.
 
-     You can select ready config file from \xvm-doc\samples\ directory, or use
-     online editor: http://www.koreanrandom.com/forum/topic/1422-/#entry11316
+    All possible config options you can see in
+      \res_mods\xvm\configs\@Default\
+    Or use online editor: http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
-     Old OTMData.xml configs are also supported in legacy mode, you can use if if
-     you do not need new features.
-
-     All possible config options you can see in this file:
-       \xvm-doc\samples\Full config EN\XVM.xvmconf
-
-     Note: If you changing config manually, use Notepad, DO NOT use MS Word,
-     WordPad and such editors.
+    Note: If you changing config manually, use Notepad, DO NOT use MS Word,
+    WordPad and such editors.
 
 -----------------------------------------------------------
 3. UPDATE
@@ -57,25 +61,22 @@
   1. Unzip archive to game folder:
      Right click to archive -> "Extract all..." -> select game folder -> "Extract"
 
-  2. If game version was updated, copy your config:
-     from res_mods/[OLD VERSION]/gui/flash/XVM.xvmconf
-     to res_mods/[NEW VERSION]/gui/flash/XVM.xvmconf
-
-  3. Do NOT do anything else.
+  2. Do NOT do anything else.
 
 -----------------------------------------------------------
 4. ADDITIONAL INFORMATION ABOUT CONFIG FILE
 -----------------------------------------------------------
 
   Mod config files:
-    \res_mods\[GAME VERSION]\gui\flash\XVM.xvmconf
-  You can select ready config file from \xvm-doc\samples\ directory
+    \res_mods\xvm\configs\@Default\
+  You can select ready config file from \res_mods\xvm\configs\user configs\ directory
   You can create new config or edit existing using online editor:
     http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
   All possible config options you can see in this file:
-    \xvm-doc\samples\Full config EN\XVM.xvmconf
+    \res_mods\xvm\configs\@Default\
 
+    
   Supported HTML tags:
     http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText
 
@@ -213,22 +214,23 @@
       "<font color='{{c:xwn}}'>{{rating}}</font>"
 
   Dynamic color and transparency usage examples:
-  In XVM.xvmconf:
     "color": "{{c:xwn}}" - color depended from xwn
     "alpha": "{{a:hp}}" - transparency depended from current health
 
   Clan and players icons.
   Config parameter battle/clanIconsFolder set path to clan icons root folder.
+  
   All icons are loading automatically from game region subfolder (RU/EU/US/...).
+  
   To add your clan or player icon, just copy icon file to:
-    clanicons/[REGION]/clan/ (for clan)
-    clanicons/[REGION]/nick/ (for single player)
+    \res_mods\xvm\res\clanicons\[REGION]\clan\ (for clan)
+    \res_mods\xvm\res\clanicons\[REGION]\nick\ (for single player)
   Also you can create default clan and player icons:
-    clanicons/[REGION]/clan/default.png (for default clan)
-    clanicons/[REGION]/nick/default.png (for default player)
+    \res_mods\xvm\res\clanicons\[REGION]\clan\default.png (for default clan)
+    \res_mods\xvm\res\clanicons\[REGION]\nick\default.png (for default player)
   Search order is:
     nick/<player>.png -> clan/<clan>.png -> clan/default.png -> nick/default.png
-  TOP 100 clans are added to mod archive by default.
+  TOP 150 clans are added to mod archive by default.
   Full archive with all clans can be downloaded separately:
     http://code.google.com/p/wot-xvm/downloads/list
     Files: clanicons-full-ru-XXX.zip (RU), clanicons-full-eu-XXX.zip (EU),
@@ -236,18 +238,18 @@
 
   6-th sence image.
   To change sixth sense indicator place alternative PNG image to
-  res_mods/icons/SixthSense.png
+   \res_mods\xvm\res\SixthSense.png. 
 
   Hit Log.
   Negative x, y values allow to bind the text to the right and bottom edges for
   the same behavior with different screen resolutions.
-  Will work only with running xvm-stat!!!
+  Will work only with running xvm-stat!
 
   Clock in battle and in battle loading screen.
   Format: Y:year, M:month, D:day, H:hour, N:minute, S:second. "" - remove clock.
   For example:
   "clockFormat": "H:N"          => 01:23
-  "clockFormat": "Y-M-D H:N:S"  => 2012-12-31 01:23:45
+  "clockFormat": "Y.M.D H:N:S"  => 2013.05.20 01:23:45
   Also possible to use HTML in clock in battle.
 
   Efficiency ranges for {{teff}}, {{e}}.
