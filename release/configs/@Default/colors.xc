@@ -110,21 +110,21 @@
     // Динамический цвет по эффективности (только с xvm-stat).
     "eff": [
       { "value": 645,  "color": "0xFE0E00" },   //    0 - 644  - very bad
-      { "value": 875,  "color": "0xFE7903" },   //  645 - 869  - bad
-      { "value": 1155, "color": "0xF8F400" },   //  870 - 1149 - normal
-      { "value": 1470, "color": "0x60FF00" },   // 1150 - 1464 - good
-      { "value": 1740, "color": "0x02C9B3" },   // 1465 - 1724 - very good
-      { "value": 9999, "color": "0xD042F3" }    // 1725 - *    - unique
+      { "value": 875,  "color": "0xFE7903" },   //  645 - 874  - bad
+      { "value": 1155, "color": "0xF8F400" },   //  875 - 1154 - normal
+      { "value": 1470, "color": "0x60FF00" },   // 1155 - 1469 - good
+      { "value": 1740, "color": "0x02C9B3" },   // 1470 - 1739 - very good
+      { "value": 9999, "color": "0xD042F3" }    // 1740 - *    - unique
     ],
     // Dynamic color by WN6 rating (only with xvm-stat).
     // Динамический цвет по рейтингу WN6 (только с xvm-stat).
     "wn": [
       { "value": 435,  "color": "0xFE0E00" },   //    0 - 434  - very bad
-      { "value": 805,  "color": "0xFE7903" },   //  435 - 799  - bad
-      { "value": 1200, "color": "0xF8F400" },   //  800 - 1194 - normal
-      { "value": 1595, "color": "0x60FF00" },   // 1195 - 1584 - good
-      { "value": 1900, "color": "0x02C9B3" },   // 1585 - 1879 - very good
-      { "value": 9999, "color": "0xD042F3" }    // 1880 - *    - unique
+      { "value": 805,  "color": "0xFE7903" },   //  435 - 804  - bad
+      { "value": 1200, "color": "0xF8F400" },   //  805 - 1199 - normal
+      { "value": 1595, "color": "0x60FF00" },   // 1200 - 1594 - good
+      { "value": 1900, "color": "0x02C9B3" },   // 1595 - 1899 - very good
+      { "value": 9999, "color": "0xD042F3" }    // 1900 - *    - unique
     ],
     // Dynamic color by TEFF (E) rating (only with xvm-stat).
     // Динамический цвет по рейтингу TEFF (E) (только с xvm-stat).
