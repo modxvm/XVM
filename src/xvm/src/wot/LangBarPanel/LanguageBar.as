@@ -73,7 +73,7 @@ class wot.LangBarPanel.LanguageBar
         }
         else if (currentLoadingName == "startgamevideo" || currentLoadingName == "login")
         {
-            var main:MovieClip = _root;
+            var main:MovieClip = _root.contentHolder.main;
             holder = main.createEmptyMovieClip("pingHolder", main.getNextHighestDepth());
             // _root.contentHolder.main is fixed size (1024x768), so create holder and place it at the top left corner of screen.
             holder._x = Math.round((1024 - main.__width) / 2);

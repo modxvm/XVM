@@ -58,7 +58,7 @@ class wot.gameloading.GameLoadingForm
 
     private function pingInitializationTimer()
     {
-        var main:MovieClip = _root;
+        var main:MovieClip = wrapper;
         var holder = main.createEmptyMovieClip("pingHolder", main.getNextHighestDepth());
         // _root.contentHolder.main is fixed size (1024x768), so create holder and place it at the top left corner of screen.
         holder._x = Math.round((1024 - main.__width) / 2);
