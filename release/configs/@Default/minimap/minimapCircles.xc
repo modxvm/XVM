@@ -4,6 +4,11 @@
  * Круги на миникарте. Дистанция только в реальных метрах карты. Только для своей техники.
  */
 {
+  // Artillery gun fire range circle
+  // Круг дальности стрельбы арты
+  // "enabled": false - выключен; "thickness" - толщина; "alpha" - прозрачность; "color" - цвет.
+  "range_circle": { "enabled": true, "thickness": 1, "alpha": 60, "color": "0xEE4444" },
+  
   "circles": {
         "enabled": true,
         // Основные круги.
@@ -31,42 +36,42 @@
         // и высоте расположения машины относительно цели. На миникарте эти факторы не учитываются.
         // Подробнее по ссылке: http://goo.gl/ZqlPa
         "special": [
-            { "su_18":            { "enabled": true, "distance": 552,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "su_26":            { "enabled": true, "distance": 578,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "su_5":             { "enabled": true, "distance": 605,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "su_8":             { "enabled": true, "distance": 920,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "s_51":             { "enabled": true, "distance": 1229, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "su_14":            { "enabled": true, "distance": 1229, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "object_212":       { "enabled": true, "distance": 1229, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "object_261":       { "enabled": true, "distance": 1463, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "su_18":            {"$ref": { "path": "range_circle" }, "distance": 552  } },
+            { "su_26":            {"$ref": { "path": "range_circle" }, "distance": 578  } },
+            { "su_5":             {"$ref": { "path": "range_circle" }, "distance": 605  } },
+            { "su_8":             {"$ref": { "path": "range_circle" }, "distance": 920  } },
+            { "s_51":             {"$ref": { "path": "range_circle" }, "distance": 1229 } },
+            { "su_14":            {"$ref": { "path": "range_circle" }, "distance": 1229 } },
+            { "object_212":       {"$ref": { "path": "range_circle" }, "distance": 1229 } },
+            { "object_261":       {"$ref": { "path": "range_circle" }, "distance": 1463 } },
 
-            { "bison_i":          { "enabled": true, "distance": 605,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "sturmpanzer_ii":   { "enabled": true, "distance": 605,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "wespe":            { "enabled": true, "distance": 1000, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "grille":           { "enabled": true, "distance": 1210, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "hummel":           { "enabled": true, "distance": 1264, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "g_panther":        { "enabled": true, "distance": 1407, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "g_tiger":          { "enabled": true, "distance": 1172, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "g_e":              { "enabled": true, "distance": 1172, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "bison_i":          {"$ref": { "path": "range_circle" }, "distance": 605  } },
+            { "sturmpanzer_ii":   {"$ref": { "path": "range_circle" }, "distance": 605  } },
+            { "wespe":            {"$ref": { "path": "range_circle" }, "distance": 1000 } },
+            { "grille":           {"$ref": { "path": "range_circle" }, "distance": 1210 } },
+            { "hummel":           {"$ref": { "path": "range_circle" }, "distance": 1264 } },
+            { "g_panther":        {"$ref": { "path": "range_circle" }, "distance": 1407 } },
+            { "g_tiger":          {"$ref": { "path": "range_circle" }, "distance": 1172 } },
+            { "g_e":              {"$ref": { "path": "range_circle" }, "distance": 1172 } },
 
-            { "t57":              { "enabled": true, "distance": 552,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "m37":              { "enabled": true, "distance": 969,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "m7_priest":        { "enabled": true, "distance": 1047, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "m41":              { "enabled": true, "distance": 1210, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "m12":              { "enabled": true, "distance": 1316, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "m40m43":           { "enabled": true, "distance": 1179, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "t92":              { "enabled": true, "distance": 1248, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "t57":              {"$ref": { "path": "range_circle" }, "distance": 552  } },
+            { "m37":              {"$ref": { "path": "range_circle" }, "distance": 969  } },
+            { "m7_priest":        {"$ref": { "path": "range_circle" }, "distance": 1047 } },
+            { "m41":              {"$ref": { "path": "range_circle" }, "distance": 1210 } },
+            { "m12":              {"$ref": { "path": "range_circle" }, "distance": 1316 } },
+            { "m40m43":           {"$ref": { "path": "range_circle" }, "distance": 1179 } },
+            { "t92":              {"$ref": { "path": "range_circle" }, "distance": 1248 } },
 
-            { "renaultbs":        { "enabled": true, "distance": 450,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "lorraine39_l_am":  { "enabled": true, "distance": 844,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "amx_105am":        { "enabled": true, "distance": 1000, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "_105_lefh18b2":    { "enabled": true, "distance": 1000, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "amx_13f3am":       { "enabled": true, "distance": 1250, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "lorraine155_50":   { "enabled": true, "distance": 1202, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "lorraine155_51":   { "enabled": true, "distance": 1296, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
-            { "bat_chatillon155": { "enabled": true, "distance": 1296, "thickness": 1, "alpha": 60, "color": "0xEE4444" } },
+            { "renaultbs":        {"$ref": { "path": "range_circle" }, "distance": 450  } },
+            { "lorraine39_l_am":  {"$ref": { "path": "range_circle" }, "distance": 844  } },
+            { "amx_105am":        {"$ref": { "path": "range_circle" }, "distance": 1000 } },
+            { "_105_lefh18b2":    {"$ref": { "path": "range_circle" }, "distance": 1000 } },
+            { "amx_13f3am":       {"$ref": { "path": "range_circle" }, "distance": 1250 } },
+            { "lorraine155_50":   {"$ref": { "path": "range_circle" }, "distance": 1202 } },
+            { "lorraine155_51":   {"$ref": { "path": "range_circle" }, "distance": 1296 } },
+            { "bat_chatillon155": {"$ref": { "path": "range_circle" }, "distance": 1296 } },
 
-            { "gb78_sexton_i":    { "enabled": true, "distance": 767,  "thickness": 1, "alpha": 60, "color": "0xEE4444" } }
+            { "gb78_sexton_i":    {"$ref": { "path": "range_circle" }, "distance": 767  } }
         ]
     }
 }
