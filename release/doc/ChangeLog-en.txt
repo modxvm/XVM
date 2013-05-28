@@ -1,5 +1,6 @@
-  * hitlog: shows enemy HP left on Alt press; hitlog.xc: { "hpleft": "true"
-  * show ping at the game loading screen
+XVM-4.0.0-test1:
+  * hitlog: shows enemy HP left (markers which were visible) on Alt press; hitlog.xc: "hpLeft": "true"
+  * show ping at the game loading screen; login.xc/pingServers
 
 XVM-4.0.0-beta3:
   [NEW FUNCTIONS]

@@ -3,24 +3,24 @@
  * Настройки цветов.
  */
 {
-  // Dynamic color to the various statistical parameters
-  // Динамический цвет по различным статистическим показателям
+  // Dynamic color by various statistical parameters.
+  // Динамический цвет по различным статистическим показателям.
   "color_rating": {
-    "undefined":    "0xFCFCFC",   // неопределенно   undefined
-    "very_bad":     "0xFE0E00",   // очень плохо     very bad
-    "bad":          "0xFE7903",   // плохо           bad
-    "normal":       "0xF8F400",   // средне          normal
-    "good":         "0x60FF00",   // хорошо          good
-    "very_good":    "0x02C9B3",   // очень хорошо    very good
-    "unique":       "0xD042F3"    // уникально       unique
+    "undefined":    "0xFCFCFC",   // undefined  / неопределенно
+    "very_bad":     "0xFE0E00",   // very bad   / очень плохо
+    "bad":          "0xFE7903",   // bad        / плохо
+    "normal":       "0xF8F400",   // normal     / средне
+    "good":         "0x60FF00",   // good       / хорошо
+    "very_good":    "0x02C9B3",   // very good  / очень хорошо
+    "unique":       "0xD042F3"    // unique     / уникально
   },
-  // Dynamic color on the remaining health points
-  // Динамический цвет по оставшемуся запасу прочности
+  // Dynamic color by remaining health points.
+  // Динамический цвет по оставшемуся запасу прочности.
   "color_hp": {
-    "very_low":         "0xFF0000",   // очень низкий   very low
-    "low":              "0xDD4444",   // низкий         low
-    "average":          "0xFFCC22",   // средний        average
-    "above_average":    "0xFCFCFC"    // выше среднего  above-average
+    "very_low":         "0xFF0000",   // very low       / очень низкий
+    "low":              "0xDD4444",   // low            / низкий
+    "average":          "0xFFCC22",   // average        / средний
+    "above_average":    "0xFCFCFC"    // above-average  / выше среднего
   },
   "colors": {
     // System colors.
