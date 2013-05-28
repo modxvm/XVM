@@ -117,16 +117,13 @@
     // Floating damage values for ally, player, squadman.
     // Всплывающий урон для союзника, игрока, взводного.
     "damageText": {
-      "$ref": { "path":"damageText" },
-      "damageMessage": "all {{dmg}}"
+      "$ref": { "path":"damageText" }
     },
     "damageTextPlayer": {
-      "$ref": { "path":"damageText" },
-      "damageMessage": "player {{dmg}}"
+      "$ref": { "path":"damageText" }
     },
     "damageTextSquadman": {
-      "$ref": { "path":"damageText" },
-      "damageMessage": "squad {{dmg}}"
+      "$ref": { "path":"damageText" }
     },
     // Vehicle contour icon.
     // Контурная иконка танка.
@@ -229,16 +226,13 @@
     // Floating damage values for ally, player, squadman.
     // Всплывающий урон для союзника, игрока, взводного.
     "damageText": {
-      "$ref": { "path":"damageText" },
-      "damageMessage": "all {{dmg}}"
+      "$ref": { "path":"damageText" }
     },
     "damageTextPlayer": {
-      "$ref": { "path":"damageText" },
-      "damageMessage": "player {{dmg}}"
+      "$ref": { "path":"damageText" }
     },
     "damageTextSquadman": {
-      "$ref": { "path":"damageText" },
-      "damageMessage": "squad {{dmg}}"
+      "$ref": { "path":"damageText" }
     },
     // Vehicle contour icon.
     // Контурная иконка танка.
