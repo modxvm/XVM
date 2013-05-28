@@ -7,7 +7,7 @@
   // Artillery gun fire range circle
   // Круг дальности стрельбы арты
   // "enabled": false - выключен; "thickness" - толщина; "alpha" - прозрачность; "color" - цвет.
-  "range_circle": { "enabled": true, "thickness": 1, "alpha": 60, "color": "0xEE4444" },
+  "rangeCircle": { "enabled": true, "thickness": 1, "alpha": 60, "color": "0xEE4444" },
   
   "circles": {
         "enabled": true,
@@ -36,42 +36,42 @@
         // и высоте расположения машины относительно цели. На миникарте эти факторы не учитываются.
         // Подробнее по ссылке: http://goo.gl/ZqlPa
         "special": [
-            { "su_18":            {"$ref": { "path": "range_circle" }, "distance": 552  } },
-            { "su_26":            {"$ref": { "path": "range_circle" }, "distance": 578  } },
-            { "su_5":             {"$ref": { "path": "range_circle" }, "distance": 605  } },
-            { "su_8":             {"$ref": { "path": "range_circle" }, "distance": 920  } },
-            { "s_51":             {"$ref": { "path": "range_circle" }, "distance": 1229 } },
-            { "su_14":            {"$ref": { "path": "range_circle" }, "distance": 1229 } },
-            { "object_212":       {"$ref": { "path": "range_circle" }, "distance": 1229 } },
-            { "object_261":       {"$ref": { "path": "range_circle" }, "distance": 1463 } },
+            { "su_18":            {"$ref": { "path": "rangeCircle" }, "distance": 552  } },
+            { "su_26":            {"$ref": { "path": "rangeCircle" }, "distance": 578  } },
+            { "su_5":             {"$ref": { "path": "rangeCircle" }, "distance": 605  } },
+            { "su_8":             {"$ref": { "path": "rangeCircle" }, "distance": 920  } },
+            { "s_51":             {"$ref": { "path": "rangeCircle" }, "distance": 1229 } },
+            { "su_14":            {"$ref": { "path": "rangeCircle" }, "distance": 1229 } },
+            { "object_212":       {"$ref": { "path": "rangeCircle" }, "distance": 1229 } },
+            { "object_261":       {"$ref": { "path": "rangeCircle" }, "distance": 1463 } },
 
-            { "bison_i":          {"$ref": { "path": "range_circle" }, "distance": 605  } },
-            { "sturmpanzer_ii":   {"$ref": { "path": "range_circle" }, "distance": 605  } },
-            { "wespe":            {"$ref": { "path": "range_circle" }, "distance": 1000 } },
-            { "grille":           {"$ref": { "path": "range_circle" }, "distance": 1210 } },
-            { "hummel":           {"$ref": { "path": "range_circle" }, "distance": 1264 } },
-            { "g_panther":        {"$ref": { "path": "range_circle" }, "distance": 1407 } },
-            { "g_tiger":          {"$ref": { "path": "range_circle" }, "distance": 1172 } },
-            { "g_e":              {"$ref": { "path": "range_circle" }, "distance": 1172 } },
+            { "bison_i":          {"$ref": { "path": "rangeCircle" }, "distance": 605  } },
+            { "sturmpanzer_ii":   {"$ref": { "path": "rangeCircle" }, "distance": 605  } },
+            { "wespe":            {"$ref": { "path": "rangeCircle" }, "distance": 1000 } },
+            { "grille":           {"$ref": { "path": "rangeCircle" }, "distance": 1210 } },
+            { "hummel":           {"$ref": { "path": "rangeCircle" }, "distance": 1264 } },
+            { "g_panther":        {"$ref": { "path": "rangeCircle" }, "distance": 1407 } },
+            { "g_tiger":          {"$ref": { "path": "rangeCircle" }, "distance": 1172 } },
+            { "g_e":              {"$ref": { "path": "rangeCircle" }, "distance": 1172 } },
 
-            { "t57":              {"$ref": { "path": "range_circle" }, "distance": 552  } },
-            { "m37":              {"$ref": { "path": "range_circle" }, "distance": 969  } },
-            { "m7_priest":        {"$ref": { "path": "range_circle" }, "distance": 1047 } },
-            { "m41":              {"$ref": { "path": "range_circle" }, "distance": 1210 } },
-            { "m12":              {"$ref": { "path": "range_circle" }, "distance": 1316 } },
-            { "m40m43":           {"$ref": { "path": "range_circle" }, "distance": 1179 } },
-            { "t92":              {"$ref": { "path": "range_circle" }, "distance": 1248 } },
+            { "t57":              {"$ref": { "path": "rangeCircle" }, "distance": 552  } },
+            { "m37":              {"$ref": { "path": "rangeCircle" }, "distance": 969  } },
+            { "m7_priest":        {"$ref": { "path": "rangeCircle" }, "distance": 1047 } },
+            { "m41":              {"$ref": { "path": "rangeCircle" }, "distance": 1210 } },
+            { "m12":              {"$ref": { "path": "rangeCircle" }, "distance": 1316 } },
+            { "m40m43":           {"$ref": { "path": "rangeCircle" }, "distance": 1179 } },
+            { "t92":              {"$ref": { "path": "rangeCircle" }, "distance": 1248 } },
 
-            { "renaultbs":        {"$ref": { "path": "range_circle" }, "distance": 450  } },
-            { "lorraine39_l_am":  {"$ref": { "path": "range_circle" }, "distance": 844  } },
-            { "amx_105am":        {"$ref": { "path": "range_circle" }, "distance": 1000 } },
-            { "_105_lefh18b2":    {"$ref": { "path": "range_circle" }, "distance": 1000 } },
-            { "amx_13f3am":       {"$ref": { "path": "range_circle" }, "distance": 1250 } },
-            { "lorraine155_50":   {"$ref": { "path": "range_circle" }, "distance": 1202 } },
-            { "lorraine155_51":   {"$ref": { "path": "range_circle" }, "distance": 1296 } },
-            { "bat_chatillon155": {"$ref": { "path": "range_circle" }, "distance": 1296 } },
+            { "renaultbs":        {"$ref": { "path": "rangeCircle" }, "distance": 450  } },
+            { "lorraine39_l_am":  {"$ref": { "path": "rangeCircle" }, "distance": 844  } },
+            { "amx_105am":        {"$ref": { "path": "rangeCircle" }, "distance": 1000 } },
+            { "_105_lefh18b2":    {"$ref": { "path": "rangeCircle" }, "distance": 1000 } },
+            { "amx_13f3am":       {"$ref": { "path": "rangeCircle" }, "distance": 1250 } },
+            { "lorraine155_50":   {"$ref": { "path": "rangeCircle" }, "distance": 1202 } },
+            { "lorraine155_51":   {"$ref": { "path": "rangeCircle" }, "distance": 1296 } },
+            { "bat_chatillon155": {"$ref": { "path": "rangeCircle" }, "distance": 1296 } },
 
-            { "gb78_sexton_i":    {"$ref": { "path": "range_circle" }, "distance": 767  } }
+            { "gb78_sexton_i":    {"$ref": { "path": "rangeCircle" }, "distance": 767  } }
         ]
     }
 }
