@@ -245,8 +245,15 @@ namespace LitJson
         #region Public Indexers
         public JsonData this[string prop_name] {
             get {
-                EnsureDictionary ();
+              try
+              {
+                EnsureDictionary();
                 return inst_object[prop_name];
+              }
+              catch
+              {
+                return null;
+              }
             }
 
             set {

@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="BxmlDecoder\BxmlReader.cs" />
     <Compile Include="BxmlDecoder\Packed_Section.cs" />
+    <Compile Include="UpdateStatThread.cs" />
     <Compile Include="Dokan\DokanNet.cs" />
     <Compile Include="Dokan\DokanOperations.cs" />
     <Compile Include="Dokan\Proxy.cs" />

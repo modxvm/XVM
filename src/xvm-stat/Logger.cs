@@ -3,35 +3,59 @@ using System.IO;
 
 namespace wot
 {
-  public class Logger : IDisposable
+  public class Logger : Singleton<Logger>, IDisposable
   {
+    public static string Path
+    {
+      set
+      {
+        Instance._w = new StreamWriter(value, false);
+      }
+    }
+
+    public static bool IsActive
+    {
+      get
+      {
+        return Instance._w != null;
+      }
+    }
+
+    #region private ctor()
+    private Logger()
+    {
+    }
+    #endregion
+
     private bool _disposed;
     private TextWriter _w;
-    private readonly object _lock;
-
-    public Logger(string path)
-    {
-      _w = new StreamWriter(path, false);
-      _lock = new { };
-    }
+    private readonly object _lock = new object();
 
     ~Logger()
     {
       Dispose(false);
     }
 
+    #region public
 
-    public void LogAsync(string message)
+    public static void LogAsync(string message)
     {
-      Action<string> action = WriteMessage;
+      if (!Logger.IsActive)
+        return;
+      Action<string> action = Instance.WriteMessage;
       action.BeginInvoke(message, WriteMessageComplete, action);
     }
 
-    public void Log(string message)
+    public static void Log(string message)
     {
-      WriteMessage(message);
+      if (!Logger.IsActive)
+        return;
+      Instance.WriteMessage(message);
     }
 
+    #endregion
+
+    #region private
 
     private static void WriteMessageComplete(IAsyncResult iar)
     {
@@ -49,6 +73,10 @@ namespace wot
         }
       }
     }
+
+    #endregion
+
+    #region IDisposable
 
     public void Dispose()
     {
@@ -78,5 +106,7 @@ namespace wot
         _disposed = true;
       }
     }
+
+    #endregion
   }
 }

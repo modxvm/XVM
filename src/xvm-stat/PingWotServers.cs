@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Net.NetworkInformation;
 using System.Threading;
 using System.Xml;
 using LitJson;
 using wot.BxmlDecoder;
-using System.Net.NetworkInformation;
-using System.Net;
 
 namespace wot
 {

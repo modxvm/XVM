@@ -26,8 +26,6 @@ namespace wot
 
     private static Process wotProcess = null;
 
-    private static Logger logger;
-
     static Program()
     {
       AppDomain.CurrentDomain.UnhandledException += UnhandledException;
@@ -53,7 +51,7 @@ namespace wot
     {
       if (!debug || isDebug)
       Console.WriteLine((debug ? "DEBUG: " : "") + message);
-      if (logger == null)
+      if (!Logger.IsActive)
         return;
      
       try
@@ -67,7 +65,7 @@ namespace wot
           lines[i] = lines[i].PadLeft(lines[i].Length + logstr.Length);
         logstr += string.Join(Environment.NewLine, lines);
 
-        logger.LogAsync(logstr + Environment.NewLine);          
+        Logger.LogAsync(logstr + Environment.NewLine);          
       }
       catch
       {
@@ -187,8 +185,8 @@ namespace wot
     {
       try
       {
-          logger = new Logger("XVM.log");
-          logger.Log(String.Format("{0:yyyy.MM.dd HH:mm:ss} {1}{2}", DateTime.Now, Console.Title, Environment.NewLine));       
+          Logger.Path = "XVM.log";
+          Logger.Log(String.Format("{0:yyyy.MM.dd HH:mm:ss} {1}{2}", DateTime.Now, Console.Title, Environment.NewLine));       
       }
       catch
       {
@@ -440,10 +438,10 @@ namespace wot
           }
           Debug(processInfo);
 
-          Debug("Wait for process to exit");
-          wotProcess.WaitForExit();
           if (isLauncher && wotProcess.ExitCode == 0)
           {
+            Debug("Wait for launcher process to exit");
+            wotProcess.WaitForExit();
             wotProcess.Dispose();
             wotProcess = null;
             Log("Searching game process: " + WOT_PROCESS_NAME);
@@ -451,11 +449,16 @@ namespace wot
             Process[] wotProcesses = Process.GetProcessesByName(WOT_PROCESS_NAME);
             Debug(String.Format("Found {0} process", wotProcesses.Length));
             if (wotProcesses.Length > 0)
-            {
-              Debug("Wait for process to exit");
               wotProcess = wotProcesses[0];
-              wotProcess.WaitForExit();
-            }
+          }
+
+          if (wotProcess != null)
+          {
+            // start update stats thread
+            UpdateStatThread.Instance.Start();
+
+            Debug("Wait for game process to exit");
+            wotProcess.WaitForExit();
           }
         }
         finally

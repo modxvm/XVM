@@ -1,17 +1,15 @@
-﻿using Dokan;
-using LitJson;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Globalization;
 using System.IO;
-using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Xml;
+using Dokan;
+using LitJson;
 using wot.Properties;
-using System.Globalization;
 
 namespace wot
 {
@@ -611,7 +609,7 @@ namespace wot
         long tmpTime = long.MaxValue;
         try
         {
-          loadUrl(tempUrl, "test", out tmpTime, true);
+          Utils.LoadUrl(tempUrl, "test", out tmpTime, true);
         }
         catch (Exception ex)
         {
@@ -633,58 +631,6 @@ namespace wot
       }
 
       return proxyUrl.ToArray();
-    }
-
-    private static string loadUrl(string url, string members)
-    {
-      long dummy;
-      return loadUrl(url, members, out dummy);
-    }
-
-    private static string loadUrl(string url, string members, out long duration, bool test = false)
-    {
-      if (!test)
-        Log("HTTP: " + members);
-      url = url.Replace("%1", members).Replace("%2", Program.PublicKeyToken);
-      duration = long.MaxValue;
-
-      Stopwatch sw = new Stopwatch();
-      sw.Start();
-
-      HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-      request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-      request.Credentials = CredentialCache.DefaultCredentials;
-      if (!Program.isNoProxy)
-        request.Proxy.Credentials = CredentialCache.DefaultCredentials;
-      else
-        request.Proxy = new WebProxy();
-      request.Timeout = Settings.Default.Timeout;
-
-      HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-      Stream dataStream = response.GetResponseStream();
-      StreamReader reader = new StreamReader(dataStream);
-      string responseFromServer = reader.ReadToEnd();
-
-      reader.Close();
-      dataStream.Close();
-      response.Close();
-
-      sw.Stop();
-
-      Log(String.Format("  Time: {0} ms, Size: {1} bytes", sw.ElapsedMilliseconds, responseFromServer.Length));
-
-      Debug("responseFromServer: " + responseFromServer);
-
-      // check if error (???)
-      if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Accepted)
-      {
-        // One of our ratting servers' exception starts with "onException"
-        if (!responseFromServer.StartsWith("onException", StringComparison.InvariantCultureIgnoreCase))
-          duration = sw.ElapsedMilliseconds;
-      }
-
-      return responseFromServer;
     }
 
     #endregion
@@ -774,10 +720,11 @@ namespace wot
         // for example  "?ABC" . So it's must be replace to "%3F" for search.
         updateRequest = updateRequest.Replace("?", "%3F");
 
-        string responseFromServer = loadUrl(proxies[(new Random()).Next(proxies.Length)], updateRequest);
+        string proxy = proxies[(new Random()).Next(proxies.Length)];
+        string responseFromServer = Utils.LoadUrl(proxy, updateRequest);
 
         Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-        Response res = JsonDataToResponse(JsonMapper.ToObject(responseFromServer));
+        Response res = JsonDataToResponse(JsonMapper.ToObject(responseFromServer), proxy);
         if (res == null || res.players == null)
         {
           Log("WARNING: empty response or parsing error");
@@ -828,7 +775,7 @@ namespace wot
 
     #region Stat parsing
 
-    private Response JsonDataToResponse(JsonData jd)
+    private Response JsonDataToResponse(JsonData jd, string proxy)
     {
       if (jd == null)
         return null;
@@ -896,6 +843,27 @@ namespace wot
         Log("Parse error: info: " + ex);
       }
 
+      // update queue
+      try
+      {
+        if (jd["update"] != null && jd["update"].IsObject)
+        {
+          int ver = jd["update"].ToInt("ver");
+          if (ver == 1)
+          {
+            string guid = jd["update"].ToString("guid");
+            List<long> ids = new List<long>();
+            foreach (JsonData data in jd["update"])
+              ids.Add(data.IsLong ? long.Parse(data.ToString()) : data.IsInt ? int.Parse(data.ToString()) : -1);
+            UpdateStatThread.Enqueue(proxy, guid, ids.ToArray());
+          }
+        }
+      }
+      catch (Exception ex)
+      {
+        Log("Parse error: update: " + ex);
+      }
+
       return res;
     }
 
@@ -941,7 +909,7 @@ namespace wot
         // for example  "?ABC" . So it's must be replace to "%3F" for search.
         s = s.Replace("?", "%3F");
 
-        string response = loadUrl(proxies[(new Random()).Next(proxies.Length)], "INFO/" + s);
+        string response = Utils.LoadUrl(proxies[(new Random()).Next(proxies.Length)], "INFO/" + s);
         if (string.IsNullOrEmpty(response))
           return "{{\"status\":\"ERROR\",\"error\":\"NO_DATA\"}}";
         infocache[key] = response;
