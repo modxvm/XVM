@@ -27,12 +27,12 @@ class wot.PlayersPanel.PlayersPanel
         this.wrapper = wrapper;
         this.base = base;
         wrapper.xvm_worker = this;
-
+        
         Utils.TraceXvmModule("PP");
-
+        
         PlayersPanelCtor();
     }
-
+    
     function setData()
     {
         return this.setDataImpl.apply(this, arguments);
@@ -89,7 +89,7 @@ class wot.PlayersPanel.PlayersPanel
         GlobalEventDispatcher.addEventListener("config_loaded", this, initEnemySpotterMarkers);
         GlobalEventDispatcher.addEventListener("stat_loaded", this, onStatLoaded);
         Config.LoadConfig("PlayersPanel.as");
-
+        
         /** Minimap needs to know loaded status */
         checkLoading();
     }
@@ -149,6 +149,16 @@ class wot.PlayersPanel.PlayersPanel
     private var leadingNames:Number;
     private var leadingVehicles:Number;
 
+    private function selectPlayer(event):Void
+    {
+        if (m_data == null)
+            return;
+        var pos:Number = event.details.code == 48 ? 9 : event.details.code - 49;
+        if (pos < m_data.length)
+            Logger.add("selectPlayer: " + m_data[pos].vehId);
+            gfx.io.GameDelegate.call("Battle.selectPlayer", [m_data[pos].vehId]);
+    }
+    
     private function setData2(data, sel, postmortemIndex, isColorBlind, knownPlayersCount)
     {
         //Logger.add("PlayersPanel.setData2()");
@@ -168,6 +178,21 @@ class wot.PlayersPanel.PlayersPanel
 
             // [1/3] fix WG bug - this function is slow, don't call it if not required.
             wrapper.m_list["invalidateData2"] = wrapper.m_list["invalidateData"];
+
+            // Switch players with keys in the postmortem mode. TODO: Cannot be used without holding Ctrl?
+            if (wrapper.m_type == "left")
+            {
+                //net.wargaming.managers.BattleInputHandler.instance.addHandler(49, true, this, "selectPlayer"); // Ctrl+1
+                //net.wargaming.managers.BattleInputHandler.instance.addHandler(50, true, this, "selectPlayer"); // Ctrl+2
+                //net.wargaming.managers.BattleInputHandler.instance.addHandler(51, true, this, "selectPlayer"); // Ctrl+3
+                //net.wargaming.managers.BattleInputHandler.instance.addHandler(52, true, this, "selectPlayer"); // Ctrl+4
+                //net.wargaming.managers.BattleInputHandler.instance.addHandler(53, true, this, "selectPlayer"); // Ctrl+5
+                //net.wargaming.managers.BattleInputHandler.instance.addHandler(54, true, this, "selectPlayer"); // Ctrl+6
+                //net.wargaming.managers.BattleInputHandler.instance.addHandler(55, true, this, "selectPlayer"); // Ctrl+7
+                //net.wargaming.managers.BattleInputHandler.instance.addHandler(56, true, this, "selectPlayer"); // Ctrl+8
+                //net.wargaming.managers.BattleInputHandler.instance.addHandler(57, true, this, "selectPlayer"); // Ctrl+9
+                //net.wargaming.managers.BattleInputHandler.instance.addHandler(48, true, this, "selectPlayer"); // Ctrl+0
+            }
         }
 
         if (data)
