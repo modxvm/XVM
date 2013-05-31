@@ -61,8 +61,9 @@ class wot.Minimap.Minimap
         return this.scaleMarkersImpl.apply(this, arguments);
     }
     
-    function updatePlayerMessangersPanel()
+    function updatePlayerMessangersPanel() /** Typo by WG */
     {
+        Logger.add("updatePlayerMessangersPanel");
         return this.updatePlayerMessangersPanelImpl.apply(this, arguments);
     }
 
