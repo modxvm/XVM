@@ -30,4 +30,5 @@ intrinsic class net.wargaming.ingame.Minimap extends UIComponent
     function updateContentBeforeDraw(leftBorderSpace, topBorderSpace, rightBorderSpace, bottomBorderSpace);
     function updateContent();
     function draw();
+    function updatePlayerMessangersPanel(stageHeight);
 }

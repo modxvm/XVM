@@ -1,3 +1,4 @@
+import com.xvm.Logger;
 import com.xvm.Utils;
 import com.xvm.GlobalEventDispatcher;
 import wot.Minimap.Features;
@@ -53,6 +54,16 @@ class wot.Minimap.Minimap
     function sizeUp()
     {
         return this.sizeUpImpl.apply(this, arguments);
+    }
+    
+    function scaleMarkers()
+    {
+        return this.scaleMarkersImpl.apply(this, arguments);
+    }
+    
+    function updatePlayerMessangersPanel()
+    {
+        return this.updatePlayerMessangersPanelImpl.apply(this, arguments);
     }
 
     // wrapped methods
@@ -119,16 +130,18 @@ class wot.Minimap.Minimap
     private var loadComplete:Boolean = false;
     private var mapExtended:Boolean = false;
     
-    function scaleMarkers()
-    {
-        return this.scaleMarkersImpl.apply(this, arguments);
-    }
-
     function scaleMarkersImpl(percent)
     {
         base.scaleMarkers(percent);
         XvmRescaleBase(percent);
         rescaleAttachments();
+    }
+    
+    function updatePlayerMessangersPanelImpl(stageHeight)
+    {
+        Logger.add("stageHeight " + stageHeight);
+        stageHeight = 0;
+        base.updatePlayerMessangersPanel.apply(stageHeight);
     }
 
     private function XvmRescaleBase(percent:Number):Void
