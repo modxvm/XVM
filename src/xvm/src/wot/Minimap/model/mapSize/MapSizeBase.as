@@ -71,6 +71,8 @@ class wot.Minimap.model.mapSize.MapSizeBase
                 return 60;
             case "60_asia_miao": // Жемчужная река
                 return 100;
+            case "73_asia_korea": // Священная долина
+                return 100;
             default:
                 return undefined;
         }
@@ -268,7 +270,11 @@ class wot.Minimap.model.mapSize.MapSizeBase
             case "Жемчужная река":
             case "Pearl River":
             case "Perlenfluss":
-                return sizeBySytemMapName("60_asia_miao")
+                return sizeBySytemMapName("60_asia_miao");
+            
+            case "Священная долина":
+            case "Sacred Valley":
+                return sizeBySytemMapName("73_asia_korea");
 
             default:
                 return undefined;
