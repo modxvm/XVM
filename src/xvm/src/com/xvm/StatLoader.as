@@ -186,9 +186,12 @@ class com.xvm.StatLoader
         {
             var Or = stat.r;
             var Tr = Math.round(stat.tw / stat.tb * 100);
-            var Tb = Math.min(stat.tb, 100);
-            var Tl = Math.max(stat.tl, 10) * 10;
-            stat.tr = Math.round(Or - (Or - Tr) * Tb / Tl);
+            var Tb = stat.tb / 100;
+            var Tl = Math.min(stat.tl, 4) / 4;
+            if (stat.tb < 100)
+                stat.tr = Math.round(Or - (Or - Tr) * Tb * Tl);
+            else
+                stat.tr = Tr;
         }
 
         // XVM Scale: http://www.koreanrandom.com/forum/topic/2625-xvm-scale
