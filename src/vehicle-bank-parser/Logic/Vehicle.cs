@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Xml;
+using System;
 
 class Vehicle
 {
@@ -81,15 +79,14 @@ class Vehicle
 
     public string ToJsonString()
     {
-        return ((name.Replace("-", "_").ToLower() + ":").PadRight(27) + " { " +
-            ("level: " + level + ",").PadRight(11) +
-            ("type: \"" + type + "\", ").PadRight(13) +
-            ("hpstock: " + hpstock + ", ").PadRight(15) +
-            ("hptop: " + hptop + ", ").PadRight(13) +
-            "turret: " + status + ", " +
-            "premium: " + (premium ? "1" : "0") + ", " +
-            ("nation: \"" + nation + "\", ").PadRight(19) +
-            "name: \"" + name + "\"" +
-            " }");
+      return (String.Format("{0} {{ {1}{2}{3}{4}turret: {5}, premium: {6}, {7}name: \"{8}\" }}",
+        (name.Replace("-", "_").ToLower() + ":").PadRight(27),
+        String.Format("level: {0},", level).PadRight(11),
+        String.Format("type: \"{0}\", ", type).PadRight(13),
+        String.Format("hpstock: {0}, ", hpstock).PadRight(15),
+        String.Format("hptop: {0}, ", hptop).PadRight(13),
+        status,
+        (premium ? "1" : "0"),
+        String.Format("nation: \"{0}\", ", nation).PadRight(19), name));
     }
 }

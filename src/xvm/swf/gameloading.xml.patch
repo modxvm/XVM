@@ -1,5 +1,5 @@
---- orig\gameloading.xml	2013-05-19 11:46:17.276464100 +0300
-+++ gameloading.xml	2013-05-19 11:46:17.370064300 +0300
+--- orig\gameloading.xml	2013-06-03 15:56:56.306553900 +0300
++++ gameloading.xml	2013-06-03 15:56:56.386554700 +0300
 @@ -15,4 +15,7 @@
          </color>
        </SetBackgroundColor>
@@ -8,7 +8,7 @@
 +      </ImportAssets2>
        <ImportAssets2 url="ComponentsLib.swf" reserved1="1" reserved2="0">
          <symbols>
-@@ -12291,5 +12291,5 @@
+@@ -12995,5 +12998,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.gameloading.GameLoadingForm"/>

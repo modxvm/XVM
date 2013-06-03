@@ -1,5 +1,5 @@
---- orig\Minimap.xml	2013-04-23 15:48:37.743239200 +0300
-+++ Minimap.xml	2013-04-23 15:48:38.083239200 +0300
+--- orig\Minimap.xml	2013-06-03 15:56:52.586516700 +0300
++++ Minimap.xml	2013-06-03 15:56:52.926520100 +0300
 @@ -15,4 +15,7 @@
          </color>
        </SetBackgroundColor>
@@ -749,7 +749,7 @@
 +              </ClippedBitmap>
              </fillStyles>
              <lineStyles/>
-@@ -41334,14 +41337,14 @@
+@@ -41407,14 +41410,14 @@
            <StyleList>
              <fillStyles>
 -              <ClippedBitmap2 objectID="65535">
@@ -758,9 +758,9 @@
                    <Transform scaleX="20.00000000000000" scaleY="20.00000000000000" transX="0" transY="0"/>
                  </matrix>
 -              </ClippedBitmap2>
--              <ClippedBitmap2 objectID="293">
+-              <ClippedBitmap2 objectID="295">
 +              </ClippedBitmap>
-+              <ClippedBitmap objectID="293">
++              <ClippedBitmap objectID="295">
                  <matrix>
                    <Transform scaleX="33.33374023437500" scaleY="33.33374023437500" transX="0" transY="0"/>
                  </matrix>
@@ -768,14 +768,14 @@
 +              </ClippedBitmap>
              </fillStyles>
              <lineStyles/>
-@@ -62967,5 +62970,5 @@
+@@ -65513,5 +65516,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.ingame.Minimap"/>
 +              <StackString value="wot.wrapper.Minimap.Minimap"/>
              </items>
            </PushData>
-@@ -62993,5 +62996,5 @@
+@@ -65539,5 +65542,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.ingame.MinimapEntry"/>

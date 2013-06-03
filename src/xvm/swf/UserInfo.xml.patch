@@ -1,5 +1,5 @@
---- orig\UserInfo.xml	2013-05-14 12:19:12.314806300 +0300
-+++ UserInfo.xml	2013-05-14 12:19:12.522806300 +0300
+--- orig\UserInfo.xml	2013-06-03 15:56:54.986540700 +0300
++++ UserInfo.xml	2013-06-03 15:56:55.186542700 +0300
 @@ -15,4 +15,7 @@
          </color>
        </SetBackgroundColor>
@@ -50,7 +50,7 @@
 +                      <StackString value="vehicleItemRenderer_xvm"/>
                      </items>
                    </PushData>
-@@ -57216,6 +57219,6 @@
+@@ -57206,6 +57209,6 @@
                <String value=" "/>
                <String value="\"/>
 -              <String value=""/>
@@ -59,21 +59,21 @@
 +              <String value=" "/>
                <String value="&#10;"/>
                <String value="&#13;"/>
-@@ -61882,5 +61885,5 @@
+@@ -61872,5 +61875,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.profile.ItemRenderer"/>
 +              <StackString value="wot.wrapper.UserInfo.ItemRenderer"/>
              </items>
            </PushData>
-@@ -61888,5 +61891,5 @@
+@@ -61878,5 +61881,5 @@
            <PushData>
              <items>
 -              <StackString value="vehicleItemRenderer"/>
 +              <StackString value="vehicleItemRenderer_xvm"/>
                <StackInteger value="2"/>
                <StackString value="Object"/>
-@@ -62142,5 +62145,5 @@
+@@ -62132,5 +62135,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.profile.UserInfo"/>

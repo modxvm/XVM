@@ -9,9 +9,9 @@
     "markersStat": "<b><font face='Symbol' color='#CCCCCC' size='11'><font color='{{c:t-battles}}'>·</font> <font color='{{c:e}}'>·</font> <font color='{{c:xeff}}'>·</font> <font color='{{c:xwn}}'>·</font></font></b>",
     "markersStatAlt": "<b><font face='$FieldFont' size='12'><font color='{{c:t-battles}}'>{{t-hb}}</font> <font color='{{c:e}}'>{{teff}}</font> <font color='{{c:xeff}}'>{{xeff}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:twr}}'>{{twr}}</font></font></b>",
 
-    "damageMessageAlive": "{{dmg}} <img src='xvmres://icons/fire.png' width='30' height='30'>",
-    "damageMessageAllyDead": "({{dmg}}) <img src='xvmres://icons/fire.png' width='30' height='30'>",
-    "damageMessageEnemyDead": "<textformat leading='-5'>({{dmg}}) <img src='xvmres://icons/fire.png' width='30' height='30'><br>{{vehicle}}</textformat>",
+    "damageMessageAlive": "{{dmg}}",
+    "damageMessageAllyDead": "({{dmg}})",
+    "damageMessageEnemyDead": "<textformat leading='-5'>({{dmg}})<br>{{vehicle}}</textformat>",
 
     "pingServers": { "enabled": true },
 

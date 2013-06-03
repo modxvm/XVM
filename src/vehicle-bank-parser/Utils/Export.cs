@@ -31,7 +31,7 @@ static class Export
 * Data extracted from WoT version 0.8.0
 */
 
-class wot.utils.VehicleInfoData2
+class com.xvm.VehicleInfoData2
 {
     /**
     * Vehicles in list has two turret modules.

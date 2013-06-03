@@ -1,5 +1,5 @@
---- orig\FinalStatistic.xml	2013-04-23 15:48:35.233239200 +0300
-+++ FinalStatistic.xml	2013-04-23 15:48:35.613239200 +0300
+--- orig\FinalStatistic.xml	2013-06-03 15:56:49.986490700 +0300
++++ FinalStatistic.xml	2013-06-03 15:56:50.386494700 +0300
 @@ -15,4 +15,7 @@
          </color>
        </SetBackgroundColor>
@@ -8,7 +8,7 @@
 +      </ImportAssets2>
        <ImportAssets2 url="ComponentsLib.swf" reserved1="1" reserved2="0">
          <symbols>
-@@ -85468,6 +85471,6 @@
+@@ -85719,6 +85722,6 @@
                <String value=" "/>
                <String value="\"/>
 -              <String value=""/>
@@ -17,28 +17,28 @@
 +              <String value=" "/>
                <String value="&#10;"/>
                <String value="&#13;"/>
-@@ -104481,5 +104484,5 @@
+@@ -107070,5 +107073,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.hangar.FinalStatistic.TeamStats"/>
 +              <StackString value="wot.wrapper.FinalStatistic.TeamStats"/>
              </items>
            </PushData>
-@@ -104663,5 +104666,5 @@
+@@ -107252,5 +107255,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.hangar.FinalStatistic.view.DetailsBlock"/>
 +              <StackString value="wot.wrapper.FinalStatistic.DetailsBlock"/>
              </items>
            </PushData>
-@@ -104741,5 +104744,5 @@
+@@ -107330,5 +107333,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.hangar.FinalStatistic.view.EfficiencyRenderer"/>
 +              <StackString value="wot.wrapper.FinalStatistic.EfficiencyRenderer"/>
              </items>
            </PushData>
-@@ -104819,5 +104822,5 @@
+@@ -107408,5 +107411,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.hangar.FinalStatistic.FinalStatisticForm"/>

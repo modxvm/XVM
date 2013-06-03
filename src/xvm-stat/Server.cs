@@ -720,6 +720,9 @@ namespace wot
         // for example  "?ABC" . So it's must be replace to "%3F" for search.
         updateRequest = updateRequest.Replace("?", "%3F");
 
+        //Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("it-IT");
+        //Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+
         string proxy = proxies[(new Random()).Next(proxies.Length)];
         string responseFromServer = Utils.LoadUrl(proxy, updateRequest);
 

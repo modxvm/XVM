@@ -8,7 +8,7 @@ using System.IO;
 using System.Xml;
 using Packed_Section_Reader;
 
-public partial class BxmlReader
+public class BxmlReader
 {
     public string PackedFileName = "";
     public XmlDocument xDoc;

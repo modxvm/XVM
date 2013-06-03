@@ -39,7 +39,6 @@
   <compileTargets>
     <compile path="shared\Mouse.as" />
     <compile path="shared\MovieClip.as" />
-    <compile path="src\com\xvm" />
     <compile path="src\wot\battle" />
     <compile path="src\wot\battleloading" />
     <compile path="src\wot\crew" />
@@ -56,6 +55,7 @@
     <compile path="src\wot\VehicleMarkersManager" />
     <compile path="src\wot\LangBarPanel" />
     <compile path="src\wot\gameloading" />
+    <compile path="src\com\xvm\Wrapper.as" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>

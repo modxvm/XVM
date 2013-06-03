@@ -35,7 +35,7 @@ class Program
         throw new Exception("Cannot find vehicle class:\n  " + tags);
     }
 
-    static void Main(string[] args)
+    static void Main()
     {
         try
         {
@@ -95,7 +95,7 @@ class Program
         }
         catch (Exception ex)
         {
-            Console.WriteLine("Error:\n" + ex.ToString());
+            Console.WriteLine("Error:\n" + ex);
         }
     }
 }

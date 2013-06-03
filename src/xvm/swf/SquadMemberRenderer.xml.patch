@@ -1,5 +1,5 @@
---- orig\SquadMemberRenderer.xml	2013-04-23 15:48:39.043239200 +0300
-+++ SquadMemberRenderer.xml	2013-04-23 15:48:39.193239200 +0300
+--- orig\SquadMemberRenderer.xml	2013-06-03 15:56:53.926530100 +0300
++++ SquadMemberRenderer.xml	2013-06-03 15:56:54.076531600 +0300
 @@ -15,4 +15,7 @@
          </color>
        </SetBackgroundColor>
