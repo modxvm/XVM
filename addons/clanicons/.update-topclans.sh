@@ -15,6 +15,7 @@ get()
 parse_ivanerr()
 {
   echo "Searching new top clans..."
+  eflg=0
   i=0
   cat "$tmpfn" | grep -E "^\s+<td><a " | while read line; do
     clan=`echo $line | cut -d\> -f3 | cut -d\< -f1`
@@ -25,10 +26,12 @@ parse_ivanerr()
     [ $i -gt $top_count ] && return
 
     if ! grep -E "^$l\$" $topfile $topfile_persist > /dev/null; then
-      echo
+      [ $eflg -eq 1 ] && echo
+      eflg=0
       echo "$i: $l"
       echo "$l" >> $topfile
     else
+      eflg=1
       echo -n .
       [ "$((i%10))" -eq 0 ] && echo -n $i
     fi
@@ -46,8 +49,7 @@ parse_null()
     clan=`echo $line | cut -d' ' -f1`
     id=`echo "$line " | cut -d' ' -f2`
 
-    echo -n .
-    [ "$((i%10))" -eq 0 ] && echo -n $i
+    [ "$((i%10))" -eq 0 ] && echo -n "$i "
     if [ "$id" = "" ]; then
       echo
       echo -n "$clan "
@@ -99,12 +101,8 @@ optimize()
 #############
 # main
 
-if [ "$url" != "" ];then
-  get
-  parse_ivanerr
-else
-  parse_null
-fi
+[ "$url" != "" ] && get
+parse_$parser
 sort_topfile
 update
 optimize

@@ -1,5 +1,6 @@
 #!/bin/sh
 
+parser=ivanerr
 url="http://ivanerr.ru/lt/showclansrating/"
 host=worldoftanks.ru
 dir=RU

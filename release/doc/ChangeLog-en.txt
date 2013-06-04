@@ -1,15 +1,5 @@
-XVM-4.0.0-test1:
-  * hitlog: shows enemy HP left (markers which were visible) on Alt press; hitlog.xc: "hpLeft": "true"
-  * show ping at the game loading screen; login.xc/pingServers
-
-XVM-4.0.0-beta3:
-  [NEW FUNCTIONS]
-  * expertPanel mod; see battle.xc
-  * cluster responce time table at login and hangar (ping);
-    "pingServers" section at login.xc and  hangar.xc config files
-  * switch in user info window: [show] in hangar, player tanks, all tanks
-
-XVM-4.0.0-alpha3:
+XVM-4.0.0-test2:
+  * adaptation to WoT 0.8.6.CT1
   * new config format (now config is loading from res_mods/xvm/xvm.xc)
   * removed legacy support for OTMData.xml config
   * fixed rare condition when wrong minimap lost marker was deleted
@@ -23,42 +13,33 @@ XVM-4.0.0-alpha3:
       for example: <img src='xvmres://icons/foo.png'>
   * filter by tank name in the Achievements window
   * new option: userInfo/inHangarFilterEnabled - enable "In hangar" check box by default
+  * expertPanel mod; see battle.xc
+  * cluster responce time table at login and hangar (ping);
+    "pingServers" section at login.xc and  hangar.xc config files
+  * switch in user info window: [show] in hangar, player tanks, all tanks
+  * hitlog: shows enemy HP left (markers which were visible) on Alt press; hitlog.xc: "hpLeft": "true"
+  * show ping at the game loading screen; login.xc/pingServers
 
 XVM-3.5.0
-  [FIXES]
-  * fixed sorting in After Battle stats
-  * fixed win chances with test tanks
-  * other fixes
-  [OTHER]
-  * updated clan icons
-
-XVM-3.5.0-pre2
   * adaptation to WoT 0.8.5
-
-  [NEW FUNCTIONS]
-  * implemented ability to disable "Allies | Enemies" text fields under score panel
-    - upper level section "fragCorrelation" at xvm config file
-
-  [FIXES]
-  * minimap: added new map Pearl River to map recognition system
-  * score panel updated
-
-  [OTHER]
-  * minimap: zoom minimap on Ctrl press disabled by default
-
-XVM-3.5.0-pre1:
-  * adaptation to WoT 0.8.5.CT2
 
   [NEW FUNCTIONS]
   * squad window: show info about tank
   * enemy spotted status at right side panel
   * crew: crew loading mod (author: Lemaxho)
   * added button in company window for enabling automatic loading data
+  * implemented ability to disable "Allies | Enemies" text fields under score panel
+    - upper level section "fragCorrelation" at xvm config file
 
   [FIXES]
   * fixed mouse cursor with minimap zoom by Ctrl press
   * fixed endless loop when stat is not available
   * capture bar: tweak
+  * minimap: added new map Pearl River to map recognition system
+  * score panel updated
+  * fixed sorting in After Battle stats
+  * fixed win chances with test tanks
+  * other fixes
 
   [MINIMAP]
   * minimap enabled by default
@@ -79,6 +60,8 @@ XVM-3.5.0-pre1:
   * user statistics in hangar enabled by default
   * markers: auto size text fields
   * updated per-vehicle statistics data (added new tanks)
+  * minimap: zoom minimap on Ctrl press disabled by default
+  * updated clan icons
 
 XVM-3.4.2:
   * minimap fix: minimal map size

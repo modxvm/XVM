@@ -1,5 +1,6 @@
 #!/bin/sh
 
+parser=ivanerr
 url="http://wotclans.net/eu/showclansrating/"
 host=worldoftanks.eu
 dir=EU
