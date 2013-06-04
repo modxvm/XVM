@@ -162,6 +162,7 @@ class com.xvm.JSONx {
     if (!text || text == "")
         return null;
     var ta: Array = text.split(''); // charAt is much slower in Flash then array
+    var talen = ta.length;
     var at = 0;
     var ch = ' ';
     var _value:Function;
@@ -176,8 +177,8 @@ class com.xvm.JSONx {
     }
 
     var _next:Function = function() {
-        ch = ta[at];
-        at += 1;
+        ch = (at >= talen) ? '' : ta[at];
+        at++;
         return ch;
     }
 
@@ -372,7 +373,7 @@ class com.xvm.JSONx {
             }
         }
         //v = +n;
-                    v = 1 * Number(n);
+        v = 1 * Number(n);
         if (!isFinite(v)) {
             _error("Bad number");
         } else {

@@ -55,6 +55,7 @@ class com.xvm.JSONxLoader
             if (!--me.loadingCount)
                 me.LoadFileCallback.call(me);
         }
+        //Logger.add("lv.load: " + rootPath + filename);
         lv.load(rootPath + filename);
     }
     
@@ -66,6 +67,7 @@ class com.xvm.JSONxLoader
             //Logger.addObject(rootObj, "rootObj", 5);
             //Logger.addObject(rootObj.markers.ally.alive.normal, "marker", 10);
             rootObj = Deref(rootObj);
+            //Logger.addObject(pendingFiles, "pendingFiles", 2);
             if (pendingFiles.length > 0)
                 LoadFiles();
             else
@@ -83,6 +85,7 @@ class com.xvm.JSONxLoader
 
     private function Deref(data:Object, level:Number, file:Object)
     {
+        //Logger.addObject(data, "Deref", 2);
         if (level == null)
             level = 0;
 
@@ -188,6 +191,8 @@ class com.xvm.JSONxLoader
 
     private function getValue(obj:Object, path: String)
     {
+        //Logger.add("getValue: " + path);
+
         if (obj == null)
             return undefined;
 
