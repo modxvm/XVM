@@ -416,12 +416,27 @@ if (fso.FileExists(path+author+"\\markers\\markers.xc")) {
     fout.Close();
 }
 
+// Прописываем созданный конфиг к загрузке, если конфиг скрипт лежал в res_mods/xvm/anyFolder/script.js
+var xvmFolder = path.substring(0, path.length-1);
+var scriptFolder = xvmFolder.substring(xvmFolder.lastIndexOf("\\")+1);
+xvmFolder = xvmFolder.substring(0, xvmFolder.lastIndexOf("\\")+1);
+var change = "";
+if (xvmFolder.substring(xvmFolder.length-14) == "\\res_mods\\xvm\\") {
+	file_out = xvmFolder+"xvm.xc";
+	fso.GetFile(file_out).copy(xvmFolder+"xvm.xc.old");
+	fout=fso.OpenTextFile(file_out,2,true,false);
+	fout.WriteLine('${"'+scriptFolder+'/'+author+'/@xvm.xc":"."}');
+	if (Rus)
+		change = '\nИ прописан к загрузке в:\n"'+xvmFolder+'xvm.xc"';
+	else
+		change = '\nAnd set for loading in:\n"'+xvmFolder+'xvm.xc"';
+}
 
 // Отчитываемся о проделанной работе
 if (Rus)
-    WScript.Echo("Конфиг успешно сохранен в:\n\""+path+author+"\\\"");
+    WScript.Echo("Конфиг успешно сохранен в:\n\""+path+author+"\\\""+change);
 else
-    WScript.Echo("Config successfully saved in:\n\""+path+author+"\\\"");
+    WScript.Echo("Config successfully saved in:\n\""+path+author+"\\\""+change);
 
 /******************************************************************************
                      Вспомогательные функции
