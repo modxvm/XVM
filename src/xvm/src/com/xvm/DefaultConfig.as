@@ -490,7 +490,7 @@ class com.xvm.DefaultConfig
             },
             hitLog: {
                 visible: true,
-                hpLeft: false,
+                hpLeft: true,
                 x: 270,
                 y: 5,
                 w: 500,

@@ -19,7 +19,7 @@ class wot.Minimap.model.mapSize.MapSizeModel
          * Method does not depend on locale,
          * but depends on xvm-stat.exe presence.
          */
-        Logger.add("Minimap: Config.s_vars.map_name " + Config.s_vars.map_name);
+        Logger.add("Minimap: Config.s_vars " + Config.s_vars.map_name);
         cellSide = MapSizeBase.sizeBySytemMapName(Config.s_vars.map_name);
         Logger.add("Minimap: cellSide " + cellSide);
 
