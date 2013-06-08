@@ -1,8 +1,8 @@
 /******************************************************************************
       Скрипт для разбивки конфига XVM.xvmconf под формат XVM-4.0.0+
-	  Automatic conversion XVM.xvmconf to the new format XVM-4.0.0+
-	  
-	  Инструкции (instructions):
+      Automatic conversion XVM.xvmconf to the new format XVM-4.0.0+
+      
+      Инструкции (instructions):
       http://www.koreanrandom.com/forum/topic/4643-
 ******************************************************************************/
 
@@ -49,7 +49,7 @@ var path = WScript.ScriptFullName.substr(0, (WScript.ScriptFullName.length - WSc
 // Имя файла конфига берём из аргумента или задаем XVM.xvmconf, если аргумент пуст
 var file_input="XVM.xvmconf";
 if (WScript.Arguments.length>0) {
-	file_input=WScript.Arguments(0);
+    file_input=WScript.Arguments(0);
 }
    
 // Проверяем наличие файла XVM.xvmconf
@@ -57,7 +57,7 @@ if (!fso.FileExists(file_input)) {
     if (Rus)
         WScript.Echo("Файл \"XVM.xvmconf\" не найден, поместите его в эту же папку,\n или перетащите на скрипт.\n\nПодробнее: http://www.koreanrandom.com/forum/topic/4643-");
     else
-        WScript.Echo("The file \"XVM.xvmconf\" not found, place it in the same folder,\n or drag'n'drop a config on the scpirt.\n\nFor more information: http://www.koreanrandom.com/forum/topic/4643-");
+        WScript.Echo("The file \"XVM.xvmconf\" not found, place it in the same folder,\n or drag'n'drop a config on the script.\n\nFor more information: http://www.koreanrandom.com/forum/topic/4643-");
     WScript.Quit();
 }
 
@@ -75,13 +75,17 @@ finput.Close();
 
 // создаем папку для конфига по имени прописанного в нем автора
 i = 0;
-while (inputConfig[i].indexOf('"author"') == -1){
+while (i < inputConfig.length && !isStart(inputConfig[i], '"author"')){
   i++;
 }
-var author = inputConfig[i].substring(inputConfig[i].indexOf('"author"'));
-author = author.substring(8);
-author = author.substring(author.indexOf("\"")+1);
-author = author.substring(0, author.indexOf("\""));
+if (i == inputConfig.length) {
+    var author = "autoscript by seriych";
+} else {
+    var author = inputConfig[i].substring(inputConfig[i].indexOf('"author"'));
+    author = author.substring(8);
+    author = author.substring(author.indexOf("\"")+1);
+    author = author.substring(0, author.indexOf("\""));
+}
 // Если папка с именем автора существует, создаем новую с числовым индексом
 if (fso.FolderExists(path+author)) {
     i = 1;
@@ -96,7 +100,7 @@ fso.CreateFolder(path+author);
 for ( var j = 0; j < sections.length; j++) {
     i = 0;
     //ищем строку, содержащую секцию
-    while ( i < inputConfig.length && inputConfig[i].indexOf(sections[j]) == -1)
+    while ( i < inputConfig.length && !isStart(inputConfig[i], sections[j]))
         i++;
     // если не нашли, переходим к следующей секции
     if (i == inputConfig.length)
@@ -199,7 +203,7 @@ if (fso.FileExists(path+author+"\\minimap\\minimap.xc")) {
     for ( j = 0; j < sections.length; j++) {
         i = 0;
         //ищем строку, содержащую секцию
-        while ( i < inputConfig.length && inputConfig[i].indexOf(sections[j]) == -1)
+        while ( i < inputConfig.length && !isStart(inputConfig[i], sections[j]))
             i++;
         // если не нашли, переходим к следующей секции
         if (i == inputConfig.length)
@@ -271,7 +275,7 @@ if (fso.FileExists(path+author+"\\colors.xc")) {
     for ( j = 0; j < sections.length; j++) {
         i = 0;
         //ищем строку, содержащую секцию
-        while ( i < inputConfig.length && inputConfig[i].indexOf(sections[j]) == -1)
+        while ( i < inputConfig.length && !isStart(inputConfig[i], sections[j]))
             i++;
         // если не нашли, переходим к следующей секции
         if (i == inputConfig.length)
@@ -341,7 +345,7 @@ if (fso.FileExists(path+author+"\\markers\\markers.xc")) {
     for ( var m = 0; m < enemy.length; m++) {
         i = 0;
         //ищем строку, содержащую секцию
-        while ( i < inputConfig.length && inputConfig[i].indexOf(enemy[m]) == -1)
+        while ( i < inputConfig.length && !isStart(inputConfig[i], enemy[m]))
             i++;
         // если не нашли, переходим к следующей секции
         if (i == inputConfig.length)
@@ -351,7 +355,7 @@ if (fso.FileExists(path+author+"\\markers\\markers.xc")) {
         for ( j = 0; j < dead.length; j++) {
             i = i1;
             //ищем строку, содержащую секцию
-            while ( i < inputConfig.length && inputConfig[i].indexOf(dead[j]) == -1)
+            while ( i < inputConfig.length && !isStart(inputConfig[i], dead[j]))
                 i++;
             // если не нашли, переходим к следующей секции
             if (i == inputConfig.length)
@@ -361,7 +365,7 @@ if (fso.FileExists(path+author+"\\markers\\markers.xc")) {
             for ( p = 0; p < extended.length; p++) {
                 //ищем строку, содержащую секцию
                 i = i2;
-                while ( i < inputConfig.length && inputConfig[i].indexOf(extended[p]) == -1)
+                while ( i < inputConfig.length && !isStart(inputConfig[i], extended[p]))
                     i++;
                 // если не нашли, переходим к следующей секции
                 if (i == inputConfig.length)
@@ -422,14 +426,14 @@ var scriptFolder = xvmFolder.substring(xvmFolder.lastIndexOf("\\")+1);
 xvmFolder = xvmFolder.substring(0, xvmFolder.lastIndexOf("\\")+1);
 var change = "";
 if (xvmFolder.substring(xvmFolder.length-14) == "\\res_mods\\xvm\\") {
-	file_out = xvmFolder+"xvm.xc";
-	fso.GetFile(file_out).copy(xvmFolder+"xvm.xc.old");
-	fout=fso.OpenTextFile(file_out,2,true,false);
-	fout.WriteLine('${"'+scriptFolder+'/'+author+'/@xvm.xc":"."}');
-	if (Rus)
-		change = '\nИ прописан к загрузке в:\n"'+xvmFolder+'xvm.xc"';
-	else
-		change = '\nAnd set for loading in:\n"'+xvmFolder+'xvm.xc"';
+    file_out = xvmFolder+"xvm.xc";
+    fso.GetFile(file_out).copy(xvmFolder+"xvm.xc.old");
+    fout=fso.OpenTextFile(file_out,2,true,false);
+    fout.WriteLine('${"'+scriptFolder+'/'+author+'/@xvm.xc":"."}');
+    if (Rus)
+        change = '\nИ прописан к загрузке в:\n"'+xvmFolder+'xvm.xc"';
+    else
+        change = '\nAnd set for loading in:\n"'+xvmFolder+'xvm.xc"';
 }
 
 // Отчитываемся о проделанной работе
@@ -437,6 +441,9 @@ if (Rus)
     WScript.Echo("Конфиг успешно сохранен в:\n\""+path+author+"\\\""+change);
 else
     WScript.Echo("Config successfully saved in:\n\""+path+author+"\\\""+change);
+
+// Завершаем выполнение скрипта
+WScript.Quit();
 
 /******************************************************************************
                      Вспомогательные функции
@@ -456,14 +463,19 @@ function diffBraces(line) {
   return openBraces-closeBraces
 }
 
-// Функция проверки, является ли строка комментарием
-function isComment(line) {
+// функция, возвращающая true, если строка содержит подстроку в начале или сразу после пробелов и табов
+function isStart(line, sect) {
   while (line.indexOf(" ") == 0 || line.indexOf("   ") == 0 )
     line = line.substring(1);
-  if (line.substring(0, 2) == "//")
+  if (line.indexOf(sect) == 0)
     return true
   else
     return false
+}
+
+// Функция проверки, является ли строка комментарием
+function isComment(line) {
+  return isStart(line, "//")
 }
 
 // функция, возвращающая количество строк подряд с комментариями выше i-й строки
