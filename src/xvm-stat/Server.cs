@@ -165,7 +165,7 @@ namespace wot
             wotVersion = "VTC";
           else if (s.LastIndexOf("http://update.worldoftanks.kr") > -1)
             wotVersion = "KR";
-          else if (s.LastIndexOf("http://update-ct.wargaming.net/") > -1)
+          else if (s.LastIndexOf("http://update-ct.wargaming.net/") > -1 || s.LastIndexOf("http://update-ct.worldoftanks.net/") > -1)
             wotVersion = "CT";
         }
       }
