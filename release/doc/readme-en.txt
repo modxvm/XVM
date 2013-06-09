@@ -202,6 +202,7 @@
       {{c:kb}}        - color depended from kilo-battles
       {{c:t-rating}}  - color depended from current vehicle win ratio
       {{c:t-battles}} - color depended from current vehicle battles
+      Any color macro you can change to transparency macro ({{a: tdb}}).
 
   "format" field examples:
     1. Show number of kilo-battles, efficiency and GWR without changing a color:
