@@ -11,7 +11,7 @@
                 return "ltraktor";
             case "T1":
                 return "t1_cunningham";
-            case "FT-17":
+            case "Renault FT":
                 return "renaultft";
             case "Medium I":
                 return "gb01_medium_mark_i";
@@ -37,8 +37,8 @@
             case "Tetrarch":
             case "Тетрарх":
                 return "tetrarch_ll";
-            case "Bison":
-                return "bison_i";
+            case "G.Pz. Mk. VI":
+                return "gw_mk_vie";
             case "PzJg I":
                 return "panzerjager_i";
             case "Pz. 35 (t)":
@@ -61,13 +61,13 @@
                 return "t57";
             case "T1E6":
                 return "t1_e6";
-            case "Ren.FT AC":
+            case "FT AC":
                 return "renaultft_ac";
             case "D1":
                 return "d1";
             case "H35":
                 return "hotchkiss_h35";
-            case "BS":
+            case "FT BS":
                 return "renaultbs";
             case "Cruiser III":
                 return "gb58_cruiser_mk_iii";
@@ -105,8 +105,8 @@
             case "M3 Light":
             case "М3 лёгкий":
                 return "m3_stuart_ll";
-            case "StPz II":
-                return "sturmpanzer_ii";
+            case "Bison":
+                return "bison_i";
             case "Wespe":
                 return "wespe";
             case "Marder II":
@@ -133,21 +133,21 @@
                 return "m22_locust";
             case "M2 Medium":
                 return "m2_med";
-            case "M37":
-                return "m37";
+            case "M7 Priest":
+                return "m7_priest";
             case "MTLS-1G14":
                 return "mtls_1g14";
             case "Sexton I":
                 return "gb78_sexton_i";
-            case "Ren.UE57":
+            case "UE 57":
                 return "renaultue57";
-            case "FCM36P40":
+            case "FCM36 Pak40":
                 return "fcm_36pak40";
             case "D2":
                 return "d2";
             case "AMX 38":
                 return "amx38";
-            case "Lorr.39LAM":
+            case "Lorr. 39L AM":
                 return "lorraine39_l_am";
             case "Cruiser IV":
                 return "gb59_cruiser_mk_iv";
@@ -185,8 +185,10 @@
             case "A-32":
             case "А-32":
                 return "a_32";
-            case "Grille":
-                return "grille";
+            case "Pz.Sfl. IVb":
+                return "pz_sfl_ivb";
+            case "StPz II":
+                return "sturmpanzer_ii";
             case "Hetzer":
                 return "hetzer";
             case "Pz. 38 nA":
@@ -207,9 +209,9 @@
                 return "t40";
             case "M3 Lee":
                 return "m3_grant";
-            case "M7 Priest":
-                return "m7_priest";
-            case "SAu-40":
+            case "M37":
+                return "m37";
+            case "SAu 40":
                 return "somua_sau_40";
             case "B1":
                 return "b1";
@@ -217,8 +219,8 @@
                 return "amx40";
             case "leFH18B2":
                 return "_105_lefh18b2";
-            case "AMX105AM":
-                return "amx_105am";
+            case "AMX 105 AM":
+                return "amx_ob_am105";
             case "Covenanter":
                 return "gb60_covenanter";
             case "Alecto":
@@ -249,9 +251,9 @@
             case "Churchill III":
             case "Черчилль III":
                 return "churchill_ll";
-            case "SU-8":
-            case "СУ-8":
-                return "su_8";
+            case "SU-122A":
+            case "СУ-122А":
+                return "su122a";
             case "KV-220":
             case "КВ-220":
                 return "kv_220";
@@ -261,8 +263,8 @@
             case "SU-85I":
             case "СУ-85И":
                 return "su_85i";
-            case "Hummel":
-                return "hummel";
+            case "Grille":
+                return "grille";
             case "StuGIII":
                 return "stugiii";
             case "T-25":
@@ -295,14 +297,14 @@
                 return "m4a2e4";
             case "M41":
                 return "m41";
-            case "S-35CA":
+            case "S35 CA":
                 return "s_35ca";
-            case "BDR G1B":
+            case "BDR G1 B":
                 return "bdr_g1b";
             case "ELC AMX":
                 return "elc_amx";
-            case "AMX 13F3":
-                return "amx_13f3am";
+            case "AMX 13 105 AM":
+                return "amx_105am";
             case "Crusader":
                 return "gb20_crusader";
             case "AT 2":
@@ -333,14 +335,11 @@
             case "KV-2":
             case "КВ-2":
                 return "kv2";
-            case "S-51":
-            case "С-51":
-                return "s_51";
-            case "SU-14":
-            case "СУ-14":
-                return "su_14";
-            case "GwPanther":
-                return "g_panther";
+            case "SU-8":
+            case "СУ-8":
+                return "su_8";
+            case "Hummel":
+                return "hummel";
             case "D. Max":
                 return "dickermax";
             case "JagdPzIV":
@@ -373,16 +372,16 @@
                 return "sherman_jumbo";
             case "M6":
                 return "m6";
-            case "M12":
-                return "m12";
+            case "M44":
+                return "m44";
             case "ARL V39":
                 return "arl_v39";
             case "ARL 44":
                 return "arl_44";
-            case "AMX12t":
+            case "AMX 12 t":
                 return "amx_12t";
-            case "Lor.155 50":
-                return "lorraine155_50";
+            case "AMX 13 F3":
+                return "amx_13f3am";
             case "Cromwell":
                 return "gb21_cromwell";
             case "AT 8":
@@ -420,13 +419,18 @@
             case "KV-3":
             case "КВ-3":
                 return "kv_3";
-            case "Obj. 212":
-            case "Об. 212":
-                return "object_212";
-            case "GwTiger":
-                return "g_tiger";
+            case "S-51":
+            case "С-51":
+                return "s_51";
+            case "SU-14-1":
+            case "СУ-14-1":
+                return "su14_1";
+            case "G.W. Panther":
+                return "g_panther";
             case "JgPanther":
                 return "jagdpanther";
+            case "E-25":
+                return "e-25";
             case "Tiger P":
                 return "pzvi_tiger_p";
             case "Tiger":
@@ -449,16 +453,16 @@
                 return "t20";
             case "T29":
                 return "t29";
-            case "M40/M43":
-                return "m40m43";
-            case "AC Mle.46":
+            case "M12":
+                return "m12";
+            case "AMX AC 46":
                 return "amx_ac_mle1946";
             case "AMX M4 45":
                 return "amx_m4_1945";
             case "AMX 13 75":
                 return "amx_13_75";
-            case "Lor.155 51":
-                return "lorraine155_51";
+            case "Lorr. 155 50":
+                return "lorraine155_50";
             case "Comet":
                 return "gb22_comet";
             case "AT 7":
@@ -498,11 +502,11 @@
             case "KV-5":
             case "КВ-5":
                 return "kv_5";
-            case "Obj. 261":
-            case "Об. 261":
-                return "object_261";
-            case "GwTyp E":
-                return "g_e";
+            case "SU-14-2":
+            case "СУ-14-2":
+                return "su_14";
+            case "G.W. Tiger P":
+                return "gw_tiger_p";
             case "JgTig.8,8 cm":
                 return "jagdtiger_sdkfz_185";
             case "JgPanthII":
@@ -533,20 +537,20 @@
                 return "t32";
             case "T34":
                 return "t34_hvy";
-            case "T92":
-                return "t92";
+            case "M40/M43":
+                return "m40m43";
             case "M6A2E1":
                 return "m6a2e1";
-            case "AC Mle.48":
+            case "AMX AC 48":
                 return "amx_ac_mle1948";
-            case "AMX50 100":
+            case "AMX 50 100":
                 return "amx_50_100";
             case "FCM 50 t":
                 return "fcm_50t";
             case "AMX 13 90":
                 return "amx_13_90";
-            case "B.Chat.155":
-                return "bat_chatillon155";
+            case "Lorr. 155 51":
+                return "lorraine155_51";
             case "Centurion I":
                 return "gb23_centurion";
             case "AT 15":
@@ -565,6 +569,8 @@
                 return "ch01_type59_gold";
             case "WZ-111":
                 return "ch03_wz_111";
+            case "112":
+                return "ch23_112";
 
             //level 9
             case "Obj. 704":
@@ -582,6 +588,9 @@
             case "ST-I":    
             case "СТ-I":
                 return "st_i";
+            case "212A":
+            case "212А":
+                return "object_212";
             case "Jagdtiger":
                 return "jagdtiger";
             case "VK 45.02 P":
@@ -592,6 +601,8 @@
                 return "e_50";
             case "Leopard PT A":
                 return "pro_ag_a";
+            case "G.W. Tiger":
+                return "g_tiger";
             case "T54E1":
                 return "t54e1";
             case "T30":
@@ -602,18 +613,22 @@
                 return "m46_patton";
             case "M103":
                 return "m103";
-            case "AMX50Foch":
+            case "Foch":
                 return "amx50_foch";
-            case "AMX50 120":
+            case "AMX 50 120":
                 return "amx_50_120";
-            case "Lorraine40t":
+            case "Lorr. 40 t":
                 return "lorraine40t";
+            case "B-C 155 55":
+                return "bat_chatillon155_58";
             case "Centurion 7/1":
                 return "gb24_centurion_mk3";
             case "Tortoise":
                 return "gb32_tortoise";
             case "Conqueror":
                 return "gb12_conqueror";
+            case "M53/M55":
+                return "m53_55";
             case "WZ-120":
                 return "ch18_wz_120";
             case "WZ-111 1-4":
@@ -635,6 +650,9 @@
             case "IS-4":
             case "ИС-4":
                 return "is_4";
+            case "Obj. 261":
+            case "Об. 261":
+                return "object_261";
             case "JgPzE100":
                 return "jagdpz_e100";
             case "Maus":
@@ -645,6 +663,8 @@
                 return "e50_ausf_m";
             case "Leopard 1":
                 return "leopard1";
+            case "G.W. E 100":
+                return "g_e";
             case "T57 Heavy":
                 return "t57_58";
             case "T110E4":
@@ -655,12 +675,16 @@
                 return "m48a1";
             case "T110E5":
                 return "t110";
-            case "AMX50F155":
+            case "T92":
+                return "t92";
+            case "Foch 155":
                 return "amx_50fosh_155";
-            case "AMX50B":
+            case "AMX 50 B":
                 return "f10_amx_50b";
-            case "BatChat.25t":
+            case "B-C 25 t":
                 return "bat_chatillon25t";
+            case "B-C 155 58":
+                return "bat_chatillon155";
             case "FV4202":
                 return "gb70_fv4202_105";
             case "FV215b 183":
