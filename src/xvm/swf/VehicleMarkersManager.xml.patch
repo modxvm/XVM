@@ -1,5 +1,5 @@
---- orig\VehicleMarkersManager.xml	2013-06-03 15:56:53.346524300 +0300
-+++ VehicleMarkersManager.xml	2013-06-03 15:56:53.736528200 +0300
+--- orig\VehicleMarkersManager.xml	2013-06-09 23:48:16.426062200 +0300
++++ VehicleMarkersManager.xml	2013-06-09 23:48:16.769262800 +0300
 @@ -15,4 +15,7 @@
          </color>
        </SetBackgroundColor>
@@ -8,14 +8,14 @@
 +      </ImportAssets2>
        <DefineBitsLossless2 objectID="1" format="5" width="188" height="168">
          <data>
-@@ -83477,5 +83480,5 @@
+@@ -83578,5 +83581,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.ingame.VehicleMarkerEnemy"/>
 +              <StackString value="wot.wrapper.VehicleMarkersManager.ingame.VehicleMarkerEnemy"/>
              </items>
            </PushData>
-@@ -83503,5 +83506,5 @@
+@@ -83604,5 +83607,5 @@
            <PushData>
              <items>
 -              <StackString value="net.wargaming.ingame.VehicleMarkerAlly"/>

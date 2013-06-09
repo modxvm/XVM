@@ -1,5 +1,5 @@
---- orig\gameloading.xml	2013-06-03 15:56:56.306553900 +0300
-+++ gameloading.xml	2013-06-03 15:56:56.386554700 +0300
+--- orig\gameloading.xml	2013-06-09 23:48:19.218467100 +0300
++++ gameloading.xml	2013-06-09 23:48:19.296467300 +0300
 @@ -15,4 +15,7 @@
          </color>
        </SetBackgroundColor>
