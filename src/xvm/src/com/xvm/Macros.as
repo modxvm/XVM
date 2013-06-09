@@ -315,6 +315,8 @@ class com.xvm.Macros
         switch (Config.s_game_region)
         {
             case "RU":
+                if (label == "M_r_A")
+                    return "Флаттершай - лучшая пони!";
                 if (label == "XlebniDizele4ku")
                     return "Буркартошкин!";
                 if (label == "sirmax2" || label == "0x01" || label == "_SirMax_")
@@ -322,6 +324,8 @@ class com.xvm.Macros
                 break;
 
             case "CT":
+                if (label == "M_r_A_RU" || label == "M_r_A_EU")
+                    return "Fluttershy is best pony!";
                 if (label == "XlebniDizele4ku_RU")
                     return "XlebniDizele4ku_XVM";
                 if (label == "sirmax2_RU" || label == "sirmax2_EU" || label == "sirmax_NA" || label == "0x01_RU")
@@ -329,6 +333,8 @@ class com.xvm.Macros
                 break;
 
             case "EU":
+                if (label == "M_r_A")
+                    return "Fluttershy is best pony!";
                 if (label == "sirmax2" || label == "0x01" || label == "_SirMax_")
                     return "«sir Max» (XVM)";
                 break;
