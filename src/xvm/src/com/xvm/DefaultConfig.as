@@ -861,21 +861,6 @@ class com.xvm.DefaultConfig
             },
             alpha: {
                 // values - from min to max, transparency are for values 'lesser then ...'
-                eff: [
-                    { value: 900,  alpha: 100 },
-                    { value: 1200, alpha: 100 },
-                    { value: 9999, alpha: 100 }
-                ],
-                rating: [
-                    { value: 49,  alpha: 100 },
-                    { value: 53,  alpha: 100 },
-                    { value: 101, alpha: 100 }
-                ],
-                kb: [
-                    { value: 2,   alpha: 100 },
-                    { value: 10,  alpha: 100 },
-                    { value: 999, alpha: 100 }
-                ],
                 hp: [
                     { value: 200,  alpha: 100 },
                     { value: 400,  alpha: 80 },
@@ -887,6 +872,78 @@ class com.xvm.DefaultConfig
                     { value: 25,  alpha: 80 },
                     { value: 50,  alpha: 60 },
                     { value: 101, alpha: 40 }
+                ],
+                x: [
+                    { value: 30,  alpha: 100 },
+                    { value: 50, alpha: 80 },
+                    { value: 70, alpha: 60 },
+                    { value: 9999, alpha: 40 }
+                ],
+                eff: [
+                    { value: 900,  alpha: 100 },
+                    { value: 1200, alpha: 80 },
+                    { value: 1500, alpha: 60 },
+                    { value: 9999, alpha: 40 }
+                ],
+                wn: [
+                    { value: 900,  alpha: 100 },
+                    { value: 1200, alpha: 80 },
+                    { value: 1500, alpha: 60 },
+                    { value: 9999, alpha: 40 }
+                ],
+                rating: [
+                    { value: 49,  alpha: 100 },
+                    { value: 53,  alpha: 80 },
+                    { value: 60,  alpha: 60 },
+                    { value: 101, alpha: 40 }
+                ],
+                twr: [
+                    { value: 49,  alpha: 100 },
+                    { value: 53,  alpha: 80 },
+                    { value: 60,  alpha: 60 },
+                    { value: 101, alpha: 40 }
+                ],
+                e: [
+                    { value: 5,  alpha: 100 },
+                    { value: 7,  alpha: 80 },
+                    { value: 9,  alpha: 60 },
+                    { value: 20, alpha: 40 }
+                ],
+                kb: [
+                    { value: 2,   alpha: 100 },
+                    { value: 10,  alpha: 80 },
+                    { value: 20,  alpha: 60 },
+                    { value: 999, alpha: 40 }
+                ],
+                t_battles: [
+                    { value: 250,  alpha: 100 },
+                    { value: 500, alpha: 80 },
+                    { value: 1000, alpha: 60 },
+                    { value: 99999, alpha: 40 }
+                ],
+                tdb: [
+                    { value: 1,   alpha: 100 },
+                    { value: 500,  alpha: 80 },
+                    { value: 1000,  alpha: 60 },
+                    { value: 9999, alpha: 40 }
+                ],
+                tdv: [
+                    { value: 0.6,   alpha: 100 },
+                    { value: 1.0,  alpha: 80 },
+                    { value: 1.3,  alpha: 60 },
+                    { value: 15, alpha: 40 }
+                ],
+                tfb: [
+                    { value: 0.6,   alpha: 100 },
+                    { value: 1.0,  alpha: 80 },
+                    { value: 1.3,  alpha: 60 },
+                    { value: 15, alpha: 40 }
+                ],
+                tsb: [
+                    { value: 0.6,   alpha: 100 },
+                    { value: 1.0,  alpha: 80 },
+                    { value: 1.3,  alpha: 60 },
+                    { value: 15, alpha: 40 }
                 ]
             },
             // Text substitutions

@@ -141,6 +141,7 @@ class com.xvm.Macros
             // {{c:system}}
             pdata["c:system"] = function(o) { return "#" + Utils.padLeft(o.getSystemColor(o).toString(16), 6, "0"); }
 
+            // Alpha
             // {{a:hp}}
             pdata["a:hp"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, o.curHealth); }
             // {{a:hp-ratio}}, {{a:hp_ratio}}
@@ -190,8 +191,6 @@ class com.xvm.Macros
         pdata["e"] = stat.te == null ? "-" : stat.te >= 10 ? "E" : String(stat.te);
         // {{teff}}
         pdata["teff"] = stat.teff == null ? "----" : Utils.padLeft(String(stat.teff), 4);
-        // {{teff}}
-        pdata["teff"] = stat.teff == null ? "----" : Utils.padLeft(String(stat.teff), 4);
         // {{teff2}}
         pdata["teff2"] = stat.teff2 == null ? "----" : Utils.padLeft(String(stat.teff2), 4);
 
@@ -234,22 +233,22 @@ class com.xvm.Macros
         // Dynamic colors
         // {{c:xeff}}
         pdata["c:xeff"] = isNaN(parseInt(stat.xeff)) ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#", o.darken) };
+            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#", o.darken); }
         // {{c:xwn}}
         pdata["c:xwn"] = isNaN(parseInt(stat.xwn)) ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn, "#", o.darken) };
+            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn, "#", o.darken); }
         // {{c:eff}}
         pdata["c:eff"] = eff <= 0 ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff, "#", o.darken) };
+            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, eff, "#", o.darken); }
         // {{c:wn}}
         pdata["c:wn"] = !stat.wn ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, stat.wn, "#", o.darken) };
+            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, stat.wn, "#", o.darken); }
         // {{c:e}}
         pdata["c:e"] = stat.te == null ? ""
             : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, stat.te, "#", o.darken); }
         // {{c:twr}}
         pdata["c:twr"] = !stat.twr ? ""
-            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TWR, stat.twr, "#", o.darken) };
+            : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TWR, stat.twr, "#", o.darken); }
         // {{c:rating}}
         pdata["c:rating"] = r <= 0 ? ""
             : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, r, "#", o.darken); }
@@ -276,6 +275,36 @@ class com.xvm.Macros
         // {{c:tsb}}
         pdata["c:tsb"] = stat.tsb <= 0 ? ""
             : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TSB, stat.tsb, "#", o.darken); }
+
+        // Alpha
+        // {{a:xeff}}
+        pdata["a:xeff"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xeff); }
+        // {{a:xwn}}
+        pdata["a:xwn"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_X, stat.xwn); }
+        // {{a:eff}}
+        pdata["a:eff"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_EFF, eff); }
+        // {{a:wn}}
+        pdata["a:wn"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_WN, stat.wn); }
+        // {{a:e}}
+        pdata["a:e"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_E, stat.te); }
+        // {{a:twr}}
+        pdata["a:twr"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TWR, stat.twr); }
+        // {{a:rating}}
+        pdata["a:rating"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, r); }
+        // {{a:kb}}
+        pdata["a:kb"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_KB, b / 1000); }
+        // {{a:t-rating}}
+        pdata["a:t-rating"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_RATING, tr); }
+        // {{a:t-battles}}
+        pdata["a:t-battles"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TBATTLES, tb); }
+        // {{a:tdb}}
+        pdata["a:tdb"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDB, stat.tdb); }
+        // {{a:tdv}}
+        pdata["a:tdv"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TDV, stat.tdv); }
+        // {{a:tfb}}
+        pdata["a:tfb"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TFB, stat.tfb); }
+        // {{a:tsb}}
+        pdata["a:tsb"] = function(o) { return GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_TSB, stat.tsb); }
     }
 
     // PRIVATE
