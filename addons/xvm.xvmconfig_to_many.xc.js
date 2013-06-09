@@ -1,7 +1,7 @@
 /******************************************************************************
       Скрипт для разбивки конфига XVM.xvmconf под формат XVM-4.0.0+
       Automatic conversion XVM.xvmconf to the new format XVM-4.0.0+
-      
+
       Инструкции (instructions):
       http://www.koreanrandom.com/forum/topic/4643-
 ******************************************************************************/
@@ -51,7 +51,7 @@ var file_input="XVM.xvmconf";
 if (WScript.Arguments.length>0) {
     file_input=WScript.Arguments(0);
 }
-   
+
 // Проверяем наличие файла XVM.xvmconf
 if (!fso.FileExists(file_input)) {
     if (Rus)
@@ -113,24 +113,19 @@ for ( var j = 0; j < sections.length; j++) {
     if (section == "minimap" || section == "markers") {
         subfolder = section+"\\";
         fso.CreateFolder(path+author+"\\"+section);
-    };
+    }
     // создаем файл для записи секции
-    if (section == "userInfo" && fso.FileExists(path+author+"\\hangar.xc")) {
-        var file_out = path+author+"\\hangar.xc";
-        delStrings(file_out);
-        var fout=fso.OpenTextFile(file_out,8,true,false);
+    if (section == "userInfo")
         section = "hangar";
-        fout.WriteLine("  },");
-    } else if ( (section == "fragCorrelation" || section == "expertPanel") && fso.FileExists(path+author+"\\battle.xc")) {
-        var file_out = path+author+"\\battle.xc";
-        delStrings(file_out);
-        var fout=fso.OpenTextFile(file_out,8,true,false);
+    if (section == "fragCorrelation" || section == "expertPanel")
         section = "battle";
-        fout.WriteLine("  },");
+    var file_out = path+author+"\\"+subfolder+section+".xc";
+    if ((section == "hangar" || section == "battle") && fso.FileExists(file_out)) {
+            delStrings(file_out);
+            var fout=fso.OpenTextFile(file_out,8,true,false);
+            fout.WriteLine("  },");
     } else {
-        file_out = sections[j].substring(0, sections[j].length-1);
-        file_out = path+author+"\\"+subfolder+file_out.substring(1)+".xc";
-        fout=fso.OpenTextFile(file_out,2,true,false);
+        fout=fso.OpenTextFile(file_out,8,true,false);
         fout.WriteLine("{");
     }
     // записываем комментарии, предшествующие секции
@@ -179,7 +174,6 @@ fout.Close();
 /******************************************************************************
                Секция миникарты
 ******************************************************************************/
-
 if (fso.FileExists(path+author+"\\minimap\\minimap.xc")) {
     // массив названий секций миникарты
     sections = [    // порядок секций лучше не менять
@@ -253,7 +247,6 @@ if (fso.FileExists(path+author+"\\minimap\\minimap.xc")) {
 /******************************************************************************
                          Секция цветов
 ******************************************************************************/
-
 if (fso.FileExists(path+author+"\\colors.xc")) {
     // массив названий секции цветов
     sections = [    // порядок секций лучше не менять
@@ -325,7 +318,6 @@ if (fso.FileExists(path+author+"\\colors.xc")) {
 /******************************************************************************
                          Секция маркеров
 ******************************************************************************/
-
 if (fso.FileExists(path+author+"\\markers\\markers.xc")) {
     var    enemy = ['"ally"', '"enemy"' ];       // массив свой/чужой
     var     dead = ['"alive"',  '"dead"' ];      // массив живой/мертвый
