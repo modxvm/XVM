@@ -65,10 +65,10 @@ for n in $FILES; do
   copy_file $n
 done
 
-for n in $XVM_FILES; do
-  copy_xvm_file $n
-done
-
 for n in $XVM_DIRS; do
   copy_xvm_dir $n
+done
+
+for n in $XVM_FILES; do
+  copy_xvm_file $n
 done

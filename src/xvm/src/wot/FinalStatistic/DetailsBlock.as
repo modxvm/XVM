@@ -43,13 +43,14 @@ class wot.FinalStatistic.DetailsBlock
         Config.LoadConfig("DetailsBlock.as");
 
         var h = wrapper.xpTitleLbl._height;
-        shotsTitle = Utils.duplicateTextField(wrapper, "shotsTitle", wrapper.xpTitleLbl, h + 10, "left");
-        shotsCount = Utils.duplicateTextField(wrapper, "shotsCount", wrapper.xpLbl, h + 10, "right");
-        shotsPercent = Utils.duplicateTextField(wrapper, "shotsPercent", wrapper.premXpLbl, h + 10, "right");
-        damageAssistedTitle = Utils.duplicateTextField(wrapper, "damageAssistedTitle", wrapper.xpTitleLbl, 2 * h + 10, "left");
-        damageAssistedValue = Utils.duplicateTextField(wrapper, "damageAssistedValue", wrapper.premXpLbl, 2 * h + 10, "right");
-        damageTitle = Utils.duplicateTextField(wrapper, "damageTitle", wrapper.xpTitleLbl, 3 * h + 10, "left");
-        damageValue = Utils.duplicateTextField(wrapper, "damageValue", wrapper.premXpLbl, 3 * h + 10, "right");
+        var y = h + 60;
+        shotsTitle = Utils.duplicateTextField(wrapper, "shotsTitle", wrapper.xpTitleLbl, y, "left");
+        shotsCount = Utils.duplicateTextField(wrapper, "shotsCount", wrapper.xpLbl, y, "right");
+        shotsPercent = Utils.duplicateTextField(wrapper, "shotsPercent", wrapper.premXpLbl, y, "right");
+        damageAssistedTitle = Utils.duplicateTextField(wrapper, "damageAssistedTitle", wrapper.xpTitleLbl, y + h, "left");
+        damageAssistedValue = Utils.duplicateTextField(wrapper, "damageAssistedValue", wrapper.premXpLbl, y + h, "right");
+        damageTitle = Utils.duplicateTextField(wrapper, "damageTitle", wrapper.xpTitleLbl, y + 2 * h, "left");
+        damageValue = Utils.duplicateTextField(wrapper, "damageValue", wrapper.premXpLbl, y + 2 * h, "right");
     }
 
     private function onConfigLoaded()

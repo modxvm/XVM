@@ -1,7 +1,6 @@
 XVM-4.0.0-test4:
+  * adaptation to WoT 0.8.6.CT2
   * transparency statistics macros ({{a:xwn}},...)
-XVM-4.0.0-test2:
-  * adaptation to WoT 0.8.6.CT1
   * new config format (now config is loading from res_mods/xvm/xvm.xc)
   * removed legacy support for OTMData.xml config
   * fixed rare condition when wrong minimap lost marker was deleted
