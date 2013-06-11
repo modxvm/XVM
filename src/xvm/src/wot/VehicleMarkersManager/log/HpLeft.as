@@ -1,6 +1,7 @@
 /**
  * @author ilitvinov87@gmail.com
  */
+import com.xvm.Logger;
 import wot.VehicleMarkersManager.log.HitLog;
 
 class wot.VehicleMarkersManager.log.HpLeft

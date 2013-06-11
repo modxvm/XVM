@@ -16,7 +16,6 @@ import wot.VehicleMarkersManager.ErrorHandler;
 import wot.VehicleMarkersManager.VehicleMarkerProxy;
 import wot.VehicleMarkersManager.VehicleState;
 import wot.VehicleMarkersManager.VehicleStateProxy;
-import wot.VehicleMarkersManager.VMMEvent;
 import wot.VehicleMarkersManager.XvmBase;
 import wot.VehicleMarkersManager.components.ActionMarkerComponent;
 import wot.VehicleMarkersManager.components.ActionMarkerProxy;
@@ -314,7 +313,6 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
      */
     function showExInfo(show:Boolean)
     {
-        GlobalEventDispatcher.dispatchEvent(new VMMEvent(VMMEvent.ALT_STATE_INFORM, show));
         //trace("Xvm::showExInfo()");
         if (m_showExInfo == show)
             return;

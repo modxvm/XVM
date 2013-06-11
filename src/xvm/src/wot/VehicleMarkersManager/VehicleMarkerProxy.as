@@ -12,6 +12,7 @@ import com.xvm.Utils;
 import com.xvm.VehicleInfo;
 import wot.VehicleMarkersManager.log.LogLists;
 import wot.VehicleMarkersManager.IVehicleMarker;
+import wot.VehicleMarkersManager.VMMEvent;
 
 /* TODO:
  * Check for performance boost with marker object caching
@@ -171,7 +172,6 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
 
     private function createXvmMarker()
     {
-        //Logger.addObject(this, "this", 2);
         subject = new wot.VehicleMarkersManager.Xvm(this);
     }
 
@@ -309,7 +309,11 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         return call("updateState", arguments);
     }
 
-    public function showExInfo(show:Boolean):Void { return call("showExInfo", arguments); }
+    public function showExInfo(show:Boolean):Void
+    {
+        GlobalEventDispatcher.dispatchEvent(new VMMEvent(VMMEvent.ALT_STATE_INFORM, show));
+        return call("showExInfo", arguments);
+    }
     public function showActionMarker(actionState):Void { return call("showActionMarker", arguments); }
 
     //public function settingsUpdate()              { return call("settingsUpdate", arguments); }

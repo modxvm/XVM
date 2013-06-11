@@ -1,3 +1,5 @@
+  * fixed hpLeft work with standard markers enabled
+
 XVM-4.0.0-test4:
   * adaptation to WoT 0.8.6.CT2
   * transparency statistics macros ({{a:xwn}},...)
