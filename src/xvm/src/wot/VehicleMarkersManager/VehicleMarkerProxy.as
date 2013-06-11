@@ -189,6 +189,9 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         //trace("gotoAndStop(" + frame + ")");
         base.gotoAndStop(frame);
 
+        if (IsStandardMarker)
+            GraphicsUtil.colorize(wrapper.marker, wrapper.colorsManager.getRGB(wrapper.colorSchemeName), 0.8); // 20% darker to improve appearance
+
         if (IsXvmMarker)
             wot.VehicleMarkersManager.Xvm(subject).setupMarkerFrame();
     }

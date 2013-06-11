@@ -6,4 +6,7 @@
     function update();
     function addChangeCallBack(scope, func_name);
     function getScheme(schemeName);
+    function getAliasColor(schemeName);
+    function getRGB(schemeName);
+    function getTransform(schemeName);
 }

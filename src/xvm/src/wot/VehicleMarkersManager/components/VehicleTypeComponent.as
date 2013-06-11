@@ -134,6 +134,6 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
         proxy.marker._y = cfg.y //* cfg.maxScale / 100;
         proxy.marker._alpha = proxy.formatDynamicAlpha(cfg.alpha);
         // filters are not applicable to the MovieClip in Scaleform. Only ColorTransform can be used.
-        GraphicsUtil.colorize(proxy.marker, proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.color)));
+        GraphicsUtil.colorize(proxy.marker, proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.color)), 0.8); // 20% darker to improve appearance
     }
 }

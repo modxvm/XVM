@@ -52,4 +52,7 @@
     function set exInfo(value);
     function get markerSettings();
     function set markerSettings(value);
+    
+    function get colorsManager():net.wargaming.managers.ColorSchemeManager;
+    function get colorSchemeName();
 }

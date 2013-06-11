@@ -33,6 +33,7 @@ RES_MODS_DIR="$WOT_DIRECTORY/res_mods"
 SWF_DIR="$RES_MODS_DIR/$GAME_VER/gui/flash"
 
 mkdir -p "$SWF_DIR"
+mkdir -p "$RES_MODS_DIR/xvm"
 
 copy_file()
 {
@@ -65,10 +66,10 @@ for n in $FILES; do
   copy_file $n
 done
 
-for n in $XVM_DIRS; do
-  copy_xvm_dir $n
-done
-
 for n in $XVM_FILES; do
   copy_xvm_file $n
+done
+
+for n in $XVM_DIRS; do
+  copy_xvm_dir $n
 done

@@ -50,12 +50,14 @@ class com.xvm.GraphicsUtil
     }
 
     // require 2-colored black and white source image (mask).
-    public static function colorize(item:Object, col:Number)
+    public static function colorize(item:Object, col:Number, multiplicator:Number)
     {
+        if (multiplicator == null)
+            multiplicator = 1;
         var tr:flash.geom.ColorTransform = new flash.geom.ColorTransform();
-        tr.redMultiplier = ((col >> 16) & 0xFF) / 255;
-        tr.greenMultiplier = ((col >> 8) & 0xFF) / 255;
-        tr.blueMultiplier = (col & 0xFF) / 255;
+        tr.redMultiplier = ((col >> 16) & 0xFF) / 255 * multiplicator;
+        tr.greenMultiplier = ((col >> 8) & 0xFF) / 255 * multiplicator;
+        tr.blueMultiplier = (col & 0xFF) / 255 * multiplicator;
         tr.redOffset = 0;
         tr.greenOffset = 0;
         tr.blueOffset = 0;
