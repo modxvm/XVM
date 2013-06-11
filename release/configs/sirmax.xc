@@ -15,6 +15,16 @@
 
     "pingServers": { "enabled": true },
 
+    "markers": {
+      "vehicleIconColor": null,
+      //"vehicleIconColor": "{{c:xwn}}",
+      "ally": {
+      },
+      "enemy": {
+
+      }
+    },
+
     "__stub__": null
   },
   "definition": {
@@ -180,7 +190,8 @@
       "alive": {
         "normal": {
           "vehicleIcon": {
-            "maxScale": 100
+            "maxScale": 100,
+            "color": ${"def.markers.vehicleIconColor"}
           },
           "contourIcon": {
             "visible": false,
@@ -230,7 +241,8 @@
         },
         "extended": {
           "vehicleIcon": {
-            "maxScale": 100
+            "maxScale": 100,
+            "color": ${"def.markers.vehicleIconColor"}
           },
           "contourIcon": {
             "visible": false,
@@ -287,7 +299,8 @@
       "dead": {
         "normal": {
           "vehicleIcon": {
-            "maxScale": 80
+            "maxScale": 80,
+            "color": ${"def.markers.vehicleIconColor"}
           },
           "damageText": {
             "y": -55,
@@ -300,7 +313,8 @@
         },
         "extended": {
           "vehicleIcon": {
-            "maxScale": 80
+            "maxScale": 80,
+            "color": ${"def.markers.vehicleIconColor"}
           },
           "damageText": {
             "y": -55,
@@ -333,7 +347,8 @@
       "alive": {
         "normal": {
           "vehicleIcon": {
-            "maxScale": 100
+            "maxScale": 100,
+            "color": ${"def.markers.vehicleIconColor"}
           },
           "contourIcon": {
             "visible": false,
@@ -383,7 +398,8 @@
         },
         "extended": {
           "vehicleIcon": {
-            "maxScale": 100
+            "maxScale": 100,
+            "color": ${"def.markers.vehicleIconColor"}
           },
           "contourIcon": {
             "visible": false,
@@ -440,7 +456,8 @@
       "dead": {
         "normal": {
           "vehicleIcon": {
-            "maxScale": 80
+            "maxScale": 80,
+            "color": ${"def.markers.vehicleIconColor"}
           },
           "damageText": {
             "y": -65,
@@ -453,7 +470,8 @@
         },
         "extended": {
           "vehicleIcon": {
-            "maxScale": 80
+            "maxScale": 80,
+            "color": ${"def.markers.vehicleIconColor"}
           },
           "damageText": {
             "y": -55,

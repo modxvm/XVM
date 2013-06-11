@@ -161,7 +161,8 @@ class com.xvm.JSONxLoader
                 if (obj_cache[fn] == null)
                     throw { type: "NO_FILE", message: "file is missing: " + fn };
                 var value = getValue(obj_cache[fn], data.$ref.path);
-                if (value == undefined)
+                //Logger.add(data.$ref.path + ": " + String(value));
+                if (value === undefined)
                     throw { type: "BAD_REF", message: "bad reference:\n    ${\"" + data.$ref.file + "\":\"" + data.$ref.path + "\"}" };
 
                 // override referenced values
@@ -193,7 +194,7 @@ class com.xvm.JSONxLoader
     {
         //Logger.add("getValue: " + path);
 
-        if (obj == null)
+        if (obj === undefined)
             return undefined;
 
         if (path == "." || path == "")
@@ -208,7 +209,7 @@ class com.xvm.JSONxLoader
                 return undefined;
             o = o[p[i]];
         }
-        return clone(o);
+        return o == null ? null : clone(o);
     }
     
     private function clone(obj:Object):Object

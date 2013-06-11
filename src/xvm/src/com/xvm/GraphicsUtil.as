@@ -3,6 +3,7 @@
  * @author sirmax2
  */
 import flash.geom.ColorTransform;
+import flash.filters.ColorMatrixFilter;
 import flash.filters.DropShadowFilter;
 import com.xvm.Config;
 import com.xvm.Defines;
@@ -45,6 +46,19 @@ class com.xvm.GraphicsUtil
             tr.blueOffset *= ratio;
         }
 
+        item.transform.colorTransform = tr;
+    }
+
+    // require 2-colored black and white source image (mask).
+    public static function colorize(item:Object, col:Number)
+    {
+        var tr:flash.geom.ColorTransform = new flash.geom.ColorTransform();
+        tr.redMultiplier = ((col >> 16) & 0xFF) / 255;
+        tr.greenMultiplier = ((col >> 8) & 0xFF) / 255;
+        tr.blueMultiplier = (col & 0xFF) / 255;
+        tr.redOffset = 0;
+        tr.greenOffset = 0;
+        tr.blueOffset = 0;
         item.transform.colorTransform = tr;
     }
 
