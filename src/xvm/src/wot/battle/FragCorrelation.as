@@ -63,7 +63,7 @@ class wot.battle.FragCorrelation
         var ally:Boolean = Boolean(arguments.shift());
         var color = net.wargaming.managers.ColorSchemeManager.instance.getRGB("vm_" + (ally ? "ally" : "enemy"));
         var renderer = markers.$createItemRenderer.apply(markers, arguments);
-        GraphicsUtil.colorize(renderer.marker, color, 0.8);
+        GraphicsUtil.colorize(renderer.marker, color, 0.9); // 10% darker to improve appearance
         //Logger.addObject(arguments[0], color, 1);
         return renderer;
     }
