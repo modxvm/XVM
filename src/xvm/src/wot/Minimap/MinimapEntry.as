@@ -138,21 +138,22 @@ class wot.Minimap.MinimapEntry
         if (wrapper.m_type == null)
             return;
 
+        com.xvm.Logger.add("type=" + wrapper.m_type + " entryName=" + wrapper.entryName + " vehicleClass=" + wrapper.vehicleClass);
+
         var color = null;
         if (Config.s_config.battle.useStandardMarkers)
         {
-            var schemeName = (wrapper.entryName != "base") ? wrapper.colorSchemeName
+            var schemeName = (wrapper.entryName != "base" && wrapper.entryName != "spawn") ? wrapper.colorSchemeName
                 : (wrapper.vehicleClass == "red") ? "vm_enemy" : (wrapper.vehicleClass == "blue") ? "vm_ally" : null;
 
             if (!schemeName)
                 return;
 
-            //com.xvm.Logger.add("color scheme: " + schemeName + ", " + wrapper.m_type + ", " + wrapper.entryName + ", " + wrapper.vehicleClass);
             color = wrapper.colorsManager.getRGB(schemeName);
         }
         else
         {
-            var entryName = (wrapper.entryName != "base") ? wrapper.entryName
+            var entryName = (wrapper.entryName != "base" && wrapper.entryName != "spawn") ? wrapper.entryName
                 : (wrapper.vehicleClass == "red") ? "enemy" : (wrapper.vehicleClass == "blue") ? "ally" : null;
             if (entryName != null)
                 color = ColorsManager.getSystemColor(entryName, wrapper.isDead);
