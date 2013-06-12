@@ -4,9 +4,9 @@ import mx.core.UIComponent;
 import mx.events.MenuEvent;
 
 import utils.Config;
+import utils.ConfigUtils;
 import utils.DefaultConfig;
 import utils.Defines;
-import utils.JSON;
 
 public function debug(str:String):void
 {
@@ -15,9 +15,8 @@ public function debug(str:String):void
 
 protected function createNewConfig():void
 {
-	lastFileName = "XVM.xvmconf";
 	Config.s_config = DefaultConfig.config;
-	Config.TuneupConfig();
+	ConfigUtils.TuneupConfig();
     RefreshCurrentPage();
 }
 

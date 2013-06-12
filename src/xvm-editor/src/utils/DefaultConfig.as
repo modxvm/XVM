@@ -20,13 +20,83 @@ public class DefaultConfig
                 gameVersion: Defines.WOT_VERSION,
                 modMinVersion: Defines.XVM_VERSION
             },
-            hangar: {
+            login: {
                 // Show ping to the servers
                 pingServers: {
-                  enabled: true,
-                  updateInterval: 3000, // msec
-                  x: 100,
-                  y: 0
+                    enabled: false,
+                    updateInterval: 10000, // msec
+                    x: 15,
+                    y: 35,
+                    alpha: 80,
+                    delimiter: ": ",
+                    maxRows: 4,
+                    columnGap: 10,
+                    fontStyle: {
+                        name: "$FieldFont",
+                        size: 12,
+                        bold: false,
+                        italic: false,
+                        color: {
+                            great: "0xFFCC66",
+                            good: "0xE5E4E1",
+                            poor: "0x96948F",
+                            bad: "0xD64D4D"
+                        }
+                    },
+                    threshold: {
+                        great: 30,
+                        good: 60,
+                        poor: 100
+                    },
+                    shadow: {
+                        enabled: true,
+                        color: "0x000000",
+                        distance: 0,
+                        angle: 0,
+                        alpha: 70,
+                        blur: 4,
+                        strength: 2
+                    }
+                }
+            },
+            hangar: {
+                hideTutorial: false,
+                // Show ping to the servers
+                pingServers: {
+                    enabled: false,
+                    updateInterval: 10000, // msec
+                    x: 170,
+                    y: 35,
+                    alpha: 80,
+                    delimiter: ": ",
+                    maxRows: 4,
+                    columnGap: 10,
+                    fontStyle: {
+                        name: "$FieldFont",
+                        size: 12,
+                        bold: false,
+                        italic: false,
+                        color: {
+                            great: "0xFFCC66",
+                            good: "0xE5E4E1",
+                            poor: "0x96948F",
+                            bad: "0xD64D4D"
+                        }
+                    },
+                    threshold: {
+                        great: 30,
+                        good: 60,
+                        poor: 100
+                    },
+                    shadow: {
+                        enabled: true,
+                        color: "0x000000",
+                        distance: 0,
+                        angle: 0,
+                        alpha: 70,
+                        blur: 4,
+                        strength: 2
+                    }
                 }
             },
             battle: {
@@ -38,7 +108,7 @@ public class DefaultConfig
                 // Show the clock on the Debug Panel (near FPS).
                 // Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
                 clockFormat: "H:N",
-                clanIconsFolder: "../../../clanicons", // Folder with clan icons
+                clanIconsFolder: "clanicons", // Folder with clan icons
                 // Visual elements
                 elements: {
                     // x - X position
@@ -97,6 +167,7 @@ public class DefaultConfig
                 rightLvlBorder: ""		// Grille 4]
             },
             userInfo: {
+                inHangarFilterEnabled: false,   // Enable [x] In hangar check box by default
                 showEColumn: false              // Show column for per-vehicle efficiency
             },
             fragCorrelation: {
@@ -125,8 +196,8 @@ public class DefaultConfig
                 // Playes/clan icon parameters.
                 clanIcon: { show: true, x: 0, y: 6, xr: NaN, yr: NaN, h: 16, w: 16, alpha: 90 },
                 // Dispay format. Macro-substitutiones allowed.
-                formatLeft: "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
-                formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
+                formatLeft: "{{vehicle}}<font face='Lucida Console' size='12'> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
+                formatRight: "<font face='Lucida Console' size='12'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> </font>{{vehicle}}"
             },
             statisticForm: {
                 showChances: false,     // Show game round win chances percentage.
@@ -135,8 +206,8 @@ public class DefaultConfig
                 // Playes/clan icon parameters.
                 clanIcon: { show: true, x: 0, y: 6, xr: NaN, yr: NaN, h: 16, w: 16, alpha: 90 },
                 // Dispay format.
-                formatLeft: "{{vehicle}} <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating}}</font>",
-                formatRight: "<font color='{{c:rating}}'>{{rating}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> {{vehicle}}"
+                formatLeft: "{{vehicle}}<font face='Lucida Console' size='12'> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
+                formatRight: "<font face='Lucida Console' size='12'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> </font>{{vehicle}}"
             },
             playersPanel: {
                 alpha: 60,              // Side panel transparency. 0 - transparent, 100 - opaque.
@@ -198,6 +269,10 @@ public class DefaultConfig
             turretMarkers: {
                 highVulnerability: "*",
                 lowVulnerability: "'"
+            },
+            expertPanel: {
+              delay: 15,
+              scale: 150
             },
             minimap: {
                 enabled: true,
@@ -411,6 +486,7 @@ public class DefaultConfig
             },
             hitLog: {
                 visible: true,
+                hpLeft: true,
                 x: 270,
                 y: 5,
                 w: 500,
@@ -441,6 +517,8 @@ public class DefaultConfig
                             vehicleIcon: vi,
                             healthBar: hb_alive,
                             damageText: dmg,
+                            damageTextPlayer: dmg,
+                            damageTextSquadman: dmg,
                             contourIcon: ci,
                             clanIcon: clanIcon,
                             levelIcon: li,
@@ -451,6 +529,8 @@ public class DefaultConfig
                             vehicleIcon: vi,
                             healthBar: hb_alive,
                             damageText: dmg,
+                            damageTextPlayer: dmg,
+                            damageTextSquadman: dmg,
                             contourIcon: ci,
                             clanIcon: clanIcon,
                             levelIcon: li,
@@ -463,6 +543,8 @@ public class DefaultConfig
                             vehicleIcon: vi,
                             healthBar: hb_dead,
                             damageText: dmg,
+                            damageTextPlayer: dmg,
+                            damageTextSquadman: dmg,
                             contourIcon: ci,
                             clanIcon: clanIcon,
                             levelIcon: li,
@@ -473,6 +555,8 @@ public class DefaultConfig
                             vehicleIcon: vi,
                             healthBar: hb_dead,
                             damageText: dmg,
+                            damageTextPlayer: dmg,
+                            damageTextSquadman: dmg,
                             contourIcon: ci,
                             clanIcon: clanIcon,
                             levelIcon: li,
@@ -487,6 +571,8 @@ public class DefaultConfig
                             vehicleIcon: vi,
                             healthBar: hb_alive,
                             damageText: dmg,
+                            damageTextPlayer: dmg,
+                            damageTextSquadman: dmg,
                             contourIcon: ci,
                             clanIcon: clanIcon,
                             levelIcon: li,
@@ -497,6 +583,8 @@ public class DefaultConfig
                             vehicleIcon: vi,
                             healthBar: hb_alive,
                             damageText: dmg,
+                            damageTextPlayer: dmg,
+                            damageTextSquadman: dmg,
                             contourIcon: ci,
                             clanIcon: clanIcon,
                             levelIcon: li,
@@ -509,6 +597,8 @@ public class DefaultConfig
                             vehicleIcon: vi,
                             healthBar: hb_dead,
                             damageText: dmg,
+                            damageTextPlayer: dmg,
+                            damageTextSquadman: dmg,
                             contourIcon: ci,
                             clanIcon: clanIcon,
                             levelIcon: li,
@@ -519,6 +609,8 @@ public class DefaultConfig
                             vehicleIcon: vi,
                             healthBar: hb_dead,
                             damageText: dmg,
+                            damageTextPlayer: dmg,
+                            damageTextSquadman: dmg,
                             contourIcon: ci,
                             clanIcon: clanIcon,
                             levelIcon: li,
@@ -530,30 +622,18 @@ public class DefaultConfig
             },
             colors: {
                 system: {
-                    ally_alive_normal:		"0x96FF00",
-                    ally_alive_blind:		"0x96FF00",
-                    ally_dead_normal:		"0x009900",
-                    ally_dead_blind:		"0x009900",
-                    ally_blowedup_normal:	"0x007700",
-                    ally_blowedup_blind:	"0x007700",
-                    squadman_alive_normal:	"0xFFB964",
-                    squadman_alive_blind:	"0xFFFF00",
-                    squadman_dead_normal:	"0xCA7000",
-                    squadman_dead_blind:	"0xAAAA00",
-                    squadman_blowedup_normal:	"0xA45A00",
-                    squadman_blowedup_blind:	"0x888800",
-                    teamKiller_alive_normal:	"0x00EAFF",
-                    teamKiller_alive_blind:	"0x00EAFF",
-                    teamKiller_dead_normal:	"0x097783",
-                    teamKiller_dead_blind:	"0x097783",
-                    teamKiller_blowedup_normal:	"0x096A75",
-                    teamKiller_blowedup_blind:	"0x096A75",
-                    enemy_alive_normal:		"0xF50800",
-                    enemy_alive_blind:		"0x8379FE",
-                    enemy_dead_normal:		"0x840500",
-                    enemy_dead_blind:		"0x47407A",
-                    enemy_blowedup_normal:	"0x5A0401",
-                    enemy_blowedup_blind:	"0x3B365F"
+                    ally_alive:			"0x96FF00",
+                    ally_dead:			"0x009900",
+                    ally_blowedup:		"0x007700",
+                    squadman_alive:		"0xFFB964",
+                    squadman_dead:		"0xCA7000",
+                    squadman_blowedup:		"0xA45A00",
+                    teamKiller_alive:		"0x00EAFF",
+                    teamKiller_dead:		"0x097783",
+                    teamKiller_blowedup:	"0x096A75",
+                    enemy_alive:		"0xF50800",
+                    enemy_dead:			"0x840500",
+                    enemy_blowedup:		"0x5A0401"
                 },
                 // src: ally, squadman, enemy, unknown, player
                 // dst: ally, squadman, allytk, enemytk, enemy
@@ -765,21 +845,6 @@ public class DefaultConfig
             },
             alpha: {
                 // values - from min to max, transparency are for values 'lesser then ...'
-                eff: [
-                    { value: 900,  alpha: 100 },
-                    { value: 1200, alpha: 100 },
-                    { value: 9999, alpha: 100 }
-                ],
-                rating: [
-                    { value: 49,  alpha: 100 },
-                    { value: 53,  alpha: 100 },
-                    { value: 101, alpha: 100 }
-                ],
-                kb: [
-                    { value: 2,   alpha: 100 },
-                    { value: 10,  alpha: 100 },
-                    { value: 999, alpha: 100 }
-                ],
                 hp: [
                     { value: 200,  alpha: 100 },
                     { value: 400,  alpha: 80 },
@@ -791,6 +856,78 @@ public class DefaultConfig
                     { value: 25,  alpha: 80 },
                     { value: 50,  alpha: 60 },
                     { value: 101, alpha: 40 }
+                ],
+                x: [
+                    { value: 30,  alpha: 100 },
+                    { value: 50, alpha: 80 },
+                    { value: 70, alpha: 60 },
+                    { value: 9999, alpha: 40 }
+                ],
+                eff: [
+                    { value: 900,  alpha: 100 },
+                    { value: 1200, alpha: 80 },
+                    { value: 1500, alpha: 60 },
+                    { value: 9999, alpha: 40 }
+                ],
+                wn: [
+                    { value: 900,  alpha: 100 },
+                    { value: 1200, alpha: 80 },
+                    { value: 1500, alpha: 60 },
+                    { value: 9999, alpha: 40 }
+                ],
+                rating: [
+                    { value: 49,  alpha: 100 },
+                    { value: 53,  alpha: 80 },
+                    { value: 60,  alpha: 60 },
+                    { value: 101, alpha: 40 }
+                ],
+                twr: [
+                    { value: 49,  alpha: 100 },
+                    { value: 53,  alpha: 80 },
+                    { value: 60,  alpha: 60 },
+                    { value: 101, alpha: 40 }
+                ],
+                e: [
+                    { value: 5,  alpha: 100 },
+                    { value: 7,  alpha: 80 },
+                    { value: 9,  alpha: 60 },
+                    { value: 20, alpha: 40 }
+                ],
+                kb: [
+                    { value: 2,   alpha: 100 },
+                    { value: 10,  alpha: 80 },
+                    { value: 20,  alpha: 60 },
+                    { value: 999, alpha: 40 }
+                ],
+                t_battles: [
+                    { value: 250,  alpha: 100 },
+                    { value: 500, alpha: 80 },
+                    { value: 1000, alpha: 60 },
+                    { value: 99999, alpha: 40 }
+                ],
+                tdb: [
+                    { value: 1,   alpha: 100 },
+                    { value: 500,  alpha: 80 },
+                    { value: 1000,  alpha: 60 },
+                    { value: 9999, alpha: 40 }
+                ],
+                tdv: [
+                    { value: 0.6,   alpha: 100 },
+                    { value: 1.0,  alpha: 80 },
+                    { value: 1.3,  alpha: 60 },
+                    { value: 15, alpha: 40 }
+                ],
+                tfb: [
+                    { value: 0.6,   alpha: 100 },
+                    { value: 1.0,  alpha: 80 },
+                    { value: 1.3,  alpha: 60 },
+                    { value: 15, alpha: 40 }
+                ],
+                tsb: [
+                    { value: 0.6,   alpha: 100 },
+                    { value: 1.0,  alpha: 80 },
+                    { value: 1.3,  alpha: 60 },
+                    { value: 15, alpha: 40 }
                 ]
             },
             // Text substitutions
@@ -814,10 +951,10 @@ public class DefaultConfig
               }
             },*/
             iconset: {
-                battleLoading: "../maps/icons/vehicle/contour",
-                statisticForm: "../maps/icons/vehicle/contour",
-                playersPanel:  "../maps/icons/vehicle/contour",
-                vehicleMarker: "../maps/icons/vehicle/contour"
+                battleLoading: "contour",
+                statisticForm: "contour",
+                playersPanel:  "contour",
+                vehicleMarker: "contour"
             },
             consts: consts,
             vehicleNames: VehicleInfo.getVehicleNamesData()

@@ -1,18 +1,21 @@
-﻿import components.MergeDialog;
+﻿import com.xvm.JSONx;
+
+import components.MergeDialog;
 
 import flash.events.Event;
 import flash.events.IOErrorEvent;
 import flash.net.FileFilter;
+import flash.net.FileReference;
 import flash.net.FileReferenceList;
 
 import mx.managers.PopUpManager;
 
 import utils.Config;
+import utils.ConfigUtils;
 import utils.DefaultConfig;
+import utils.Defines;
 import utils.Utils;
 
-private var frl:FileReferenceList;
-private var lastFileName:String;
 private var merge:Boolean;
 private var mergeDialog:MergeDialog;
 private var config:Object;
@@ -22,16 +25,15 @@ private var config:Object;
 private function LoadConfig(merge:Boolean):void
 {
     this.merge = merge;
-	frl = new FileReferenceList();
+	var frl:FileReferenceList = new FileReferenceList();
 	frl.addEventListener(Event.SELECT, onFileLoadSelect);
-	frl.addEventListener(Event.CANCEL,onCancelLoad);
-	frl.browse([ new FileFilter(_("FileFilterText"), "*.xc"), new FileFilter(_("FileFilterText"), "*.xvmconf") ]);
+	//frl.addEventListener(Event.CANCEL,onCancelLoad);
+	frl.browse([ new FileFilter(_("FileFilterText"), "*.xc"), new FileFilter(_("FileFilterLegacyText"), "*.xvmconf;OTMData.xml") ]);
 }
 
 private function onFileLoadSelect(e:Event):void
 {
-	lastFileName = frl.fileList[0].name;
-	for each (var fr in frl)
+	for each (var fr:FileReference in FileReferenceList(e.target).fileList)
 	{
 		fr.addEventListener(Event.COMPLETE, onLoadComplete);
 		fr.addEventListener(IOErrorEvent.IO_ERROR, onLoadError);
@@ -39,17 +41,13 @@ private function onFileLoadSelect(e:Event):void
 	}
 }
 
-private function onCancelLoad(e:Event):void
-{
-	frl = null;
-}
-
 private function onLoadComplete(e:Event):void
 {
     try
     {
-    	var data:String = fr.data.readUTFBytes(fr.data.bytesAvailable);
-        config = Config.FixConfig(utils.JSON.parse(data));
+		debug(JSONx.stringify(e));		
+    	var data:String = e.target.data.readUTFBytes(e.target.data.bytesAvailable);
+        config = ConfigUtils.FixConfig(JSONx.parse(data));
 
         if (!merge)
             onLoadComplete2(null);
@@ -64,10 +62,6 @@ private function onLoadComplete(e:Event):void
     catch (ex:Error)
     {
         debug("ERROR: onLoadComplete(): " + ex.toString());
-    }
-    finally
-    {
-        fr = null;
     }
 }
 
@@ -84,8 +78,8 @@ private function onLoadComplete2(e:Event):void
             }
             config = mergeDialog.config;
         }
-        Config.s_config = Config.MergeConfigs(config, merge ? Config.s_config : DefaultConfig.config);
-        Config.TuneupConfig();
+        Config.s_config = ConfigUtils.MergeConfigs(config, merge ? Config.s_config : DefaultConfig.config, "def");
+        ConfigUtils.TuneupConfig();
         debug(_("ConfigurationLoaded"));
         RefreshCurrentPage();
     }
@@ -107,28 +101,34 @@ private function onLoadError(e:IOErrorEvent):void
 // SAVE
 private function SaveConfig():void
 {
-	fr = new FileReference();
+	var fr = new FileReference();
 	fr.addEventListener(Event.COMPLETE, onFileSave);
-	fr.addEventListener(Event.CANCEL,onCancelSave);
 	fr.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
 	// Serialize and add UTF-8 BOM
-	var str:String = "\uFEFF" + utils.JSON.stringify(Config.s_config);
-	fr.save(str, lastFileName);
+	var str:String = "\uFEFF/* Config was created in XVM Editor v" + utils.Defines.EDITOR_VERSION + " */\n" + 
+		JSONx.stringify(Config.s_config, null, false, sortFunction) + "\n";
+	fr.save(str, "xvm.xc");
+}
+
+private function sortFunction(a, b):int
+{
+	var an = sortElementsOrder.indexOf(a); 
+	var bn = sortElementsOrder.indexOf(b); 
+	if (an >= 0 && bn == -1)
+		return -1;
+	if (bn >= 0 && an == -1)
+		return 1;
+	if (an >= 0 && bn >= 0)
+		return an < bn ? -1 : an > bn ? 1 : 0;
+	return a < b ? -1 : a > b ? 1 : 0; 
 }
 
 private function onFileSave(e:Event):void
 {
 	debug(_("ConfigurationSaved"));
-	fr = null;
-}
-
-private function onCancelSave(e:Event):void
-{
-	fr = null;
 }
 
 private function onSaveError(e:IOErrorEvent):void
 {
 	debug(_("SaveFileError") + ": " + e.text);
-	fr = null;
 }

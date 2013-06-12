@@ -1,6 +1,6 @@
 ﻿import components.DefaultComponent;
 
-import utils.Config;
+import utils.ConfigUtilsEditor;
 import utils.DefaultConfig;
 import utils.Utils;
 
@@ -363,54 +363,30 @@ private function RefreshColorsPage1():void
         if (accColors1.selectedChild == nc_systemColors && p_systemColors != null)
         {
             section = Config.s_config.colors.system;
-            if (p_systemColors.v_ally_alive_normal != null)
-                p_systemColors.v_ally_alive_normal.value = section.ally_alive_normal;
-            if (p_systemColors.v_ally_alive_blind != null)
-                p_systemColors.v_ally_alive_blind.value = section.ally_alive_blind;
-            if (p_systemColors.v_ally_dead_normal != null)
-                p_systemColors.v_ally_dead_normal.value = section.ally_dead_normal;
-            if (p_systemColors.v_ally_dead_blind != null)
-                p_systemColors.v_ally_dead_blind.value = section.ally_dead_blind;
-            if (p_systemColors.v_ally_blowedup_normal != null)
-                p_systemColors.v_ally_blowedup_normal.value = section.ally_blowedup_normal;
-            if (p_systemColors.v_ally_blowedup_blind != null)
-                p_systemColors.v_ally_blowedup_blind.value = section.ally_blowedup_blind;
-            if (p_systemColors.v_squadman_alive_normal != null)
-                p_systemColors.v_squadman_alive_normal.value = section.squadman_alive_normal;
-            if (p_systemColors.v_squadman_alive_blind != null)
-                p_systemColors.v_squadman_alive_blind.value = section.squadman_alive_blind;
-            if (p_systemColors.v_squadman_dead_normal != null)
-                p_systemColors.v_squadman_dead_normal.value = section.squadman_dead_normal;
-            if (p_systemColors.v_squadman_dead_blind != null)
-                p_systemColors.v_squadman_dead_blind.value = section.squadman_dead_blind;
-            if (p_systemColors.v_squadman_blowedup_normal != null)
-                p_systemColors.v_squadman_blowedup_normal.value = section.squadman_blowedup_normal;
-            if (p_systemColors.v_squadman_blowedup_blind != null)
-                p_systemColors.v_squadman_blowedup_blind.value = section.squadman_blowedup_blind;
-            if (p_systemColors.v_teamKiller_alive_normal != null)
-                p_systemColors.v_teamKiller_alive_normal.value = section.teamKiller_alive_normal;
-            if (p_systemColors.v_teamKiller_alive_blind != null)
-                p_systemColors.v_teamKiller_alive_blind.value = section.teamKiller_alive_blind;
-            if (p_systemColors.v_teamKiller_dead_normal != null)
-                p_systemColors.v_teamKiller_dead_normal.value = section.teamKiller_dead_normal;
-            if (p_systemColors.v_teamKiller_dead_blind != null)
-                p_systemColors.v_teamKiller_dead_blind.value = section.teamKiller_dead_blind;
-            if (p_systemColors.v_teamKiller_blowedup_normal != null)
-                p_systemColors.v_teamKiller_blowedup_normal.value = section.teamKiller_blowedup_normal;
-            if (p_systemColors.v_teamKiller_blowedup_blind != null)
-                p_systemColors.v_teamKiller_blowedup_blind.value = section.teamKiller_blowedup_blind;
-            if (p_systemColors.v_enemy_alive_normal != null)
-                p_systemColors.v_enemy_alive_normal.value = section.enemy_alive_normal;
-            if (p_systemColors.v_enemy_alive_blind != null)
-                p_systemColors.v_enemy_alive_blind.value = section.enemy_alive_blind;
-            if (p_systemColors.v_enemy_dead_normal != null)
-                p_systemColors.v_enemy_dead_normal.value = section.enemy_dead_normal;
-            if (p_systemColors.v_enemy_dead_blind != null)
-                p_systemColors.v_enemy_dead_blind.value = section.enemy_dead_blind;
-            if (p_systemColors.v_enemy_blowedup_normal != null)
-                p_systemColors.v_enemy_blowedup_normal.value = section.enemy_blowedup_normal;
-            if (p_systemColors.v_enemy_blowedup_blind != null)
-                p_systemColors.v_enemy_blowedup_blind.value = section.enemy_blowedup_blind;
+            if (p_systemColors.v_ally_alive != null)
+                p_systemColors.v_ally_alive.value = section.ally_alive;
+            if (p_systemColors.v_ally_dead != null)
+                p_systemColors.v_ally_dead.value = section.ally_dead;
+            if (p_systemColors.v_ally_blowedup != null)
+                p_systemColors.v_ally_blowedup.value = section.ally_blowedup;
+            if (p_systemColors.v_squadman_alive != null)
+                p_systemColors.v_squadman_alive.value = section.squadman_alive;
+            if (p_systemColors.v_squadman_dead != null)
+                p_systemColors.v_squadman_dead.value = section.squadman_dead;
+            if (p_systemColors.v_squadman_blowedup != null)
+                p_systemColors.v_squadman_blowedup.value = section.squadman_blowedup;
+            if (p_systemColors.v_teamKiller_alive != null)
+                p_systemColors.v_teamKiller_alive.value = section.teamKiller_alive;
+            if (p_systemColors.v_teamKiller_dead != null)
+                p_systemColors.v_teamKiller_dead.value = section.teamKiller_dead;
+            if (p_systemColors.v_teamKiller_blowedup != null)
+                p_systemColors.v_teamKiller_blowedup.value = section.teamKiller_blowedup;
+            if (p_systemColors.v_enemy_alive != null)
+                p_systemColors.v_enemy_alive.value = section.enemy_alive;
+            if (p_systemColors.v_enemy_dead != null)
+                p_systemColors.v_enemy_dead.value = section.enemy_dead;
+            if (p_systemColors.v_enemy_blowedup != null)
+                p_systemColors.v_enemy_blowedup.value = section.enemy_blowedup;
         }
         else if (accColors1.selectedChild == nc_damageColors && p_damageColors != null)
         {
@@ -780,11 +756,11 @@ private function RefreshMarkersPage():void
                     if (!valueSet)
                     {
                         valueSet = true;
-                        value = Config.GetValue(conf);
+                        value = ConfigUtilsEditor.GetValue(conf);
                     }
                     else
                     {
-                        if (value != Config.GetValue(conf))
+                        if (value != ConfigUtilsEditor.GetValue(conf))
                         {
                             valueOk = false;
                             break;

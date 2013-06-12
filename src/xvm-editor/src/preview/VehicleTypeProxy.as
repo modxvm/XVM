@@ -28,11 +28,6 @@ public class VehicleTypeProxy extends AbstractAccessProxy
         return xvm.m_entityName;
     }
 
-    public function get isColorBlindMode():Boolean
-    {
-        return false;
-    }
-
     public function setMarkerLabel(markerLabel:String):void
     {
         marker.gotoAndStop(markerLabel);

@@ -24,7 +24,7 @@
             
             import spark.components.ToggleButton;
             
-            import utils.Config;
+			import utils.ConfigUtilsEditor;
             import utils.DefaultConfig;
             import utils.Embed;
             import utils.Utils;
@@ -104,7 +104,7 @@
                 for each (var state:String in activeMarkerStates)
                 {
                     var conf:String = "markers." + state + ".textFields";
-                    var v:Array = Config.GetValue(conf);
+                    var v:Array = ConfigUtilsEditor.GetValue(conf);
                     for (var i:int = 0; i < v.length; ++i)
                     {
                         empty = false;
@@ -179,7 +179,7 @@
                         var valueOk: Boolean = true;
                         for each (var curValues:Object in values.values)
                         {
-                            var curValue:Object = Config.GetValue(control.config, curValues);
+                            var curValue:Object = ConfigUtilsEditor.GetValue(control.config, curValues);
                             if (!valueSet)
                             {
                                 valueSet = true;
@@ -217,7 +217,7 @@
                     {
                         var activeValue:Object = m_values[rbg.selectedValue.toString()];
                         for each (var value:Object in activeValue.values)
-                            Config.SetValue(event.sender.config, event.sender.value, value);
+							ConfigUtilsEditor.SetValue(event.sender.config, event.sender.value, value);
                     }
 
                     onChange(null);

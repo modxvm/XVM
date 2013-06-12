@@ -45,6 +45,9 @@ USAGE:
 
 package com.xvm
 {
+	import flashx.textLayout.factory.StringTextLineFactory;
+	
+	import mx.messaging.channels.StreamingAMFChannel;
 
 public class JSONx {
 
@@ -59,11 +62,11 @@ public class JSONx {
     return s;
   }
 
-  public static function stringify(arg, indent:String = null, compact:Boolean = false):String {
+  public static function stringify(arg, indent:String = null, compact:Boolean = false, sort:Function = undefined, nodeName:String = ""):String {
 
   if (compact == undefined) compact = false;
 
-  var c, i, l, s = '', v;
+  var c, i, ii, l, s = '', v;
 
   if (!indent)
     indent = "";
@@ -72,14 +75,14 @@ public class JSONx {
   case 'movieclip':
   case 'object':
       if (maxDepth && maxDepth > 0 && curDepth >= maxDepth)
-        return stringify(arg.toString(), "", compact);
+        return stringify(arg.toString(), "", true);
 
       curDepth++;
       if (arg) {
           if (arg instanceof Array) {
               var len = arg.length;
               for (i = 0; i < len; ++i) {
-                  v = stringify(arg[i], compact ? "" : indent + "  ", compact);
+                  v = stringify(arg[i], compact ? "" : indent + "  ", compact, sort, nodeName);
                   if (s) {
                       s += compact ? ',' : ',\n';
                   }
@@ -88,21 +91,31 @@ public class JSONx {
               curDepth--;
               return compact ? '[' + s + ']' : '[\n' + s + '\n' + indent + ']';
           } else if (typeof arg.toString != 'undefined') {
-              for (i in arg) {
+			  var items:Array = [];
+			  for (i in arg)
+				  items.push(nodeName + i);
+			  if (sort != null)
+					items.sort(sort);
+			  else
+			  		items.sort();
+			  for (ii in items) {
+				  var i = items[ii].replace(/^\.*/, "");
                   v = arg[i];
                   if (typeof v != 'undefined' && typeof v != 'function') {
-                      v = stringify(v, compact ? "" : indent + "  ", compact);
+                      v = stringify(v, compact ? "" : indent + "  ", compact, sort, nodeName + ".");
                       if (s) {
                           s += compact ? ',' : ',\n';
                       }
-                      s += compact ?
-                        stringify(i, "", true) + ':' + v :
-                        indent + "  " + stringify(i, indent + "  ") + ': ' + v;
+                      s += compact
+						  ? stringify(i, "", true) + ':' + v
+						  : indent + "  " + stringify(i, indent + "  ") + ': ' + v;
                   }
               }
               curDepth--;
-              return '{' +
+			  var tmpRes:String = '{' +
                 (compact ? s + '}' : '\n' + s + '\n' + indent + '}');
+			  var compactRes:String = tmpRes.replace(/^\s*/gm, "").replace(/\n/g, " ");
+			  return compactRes.length < 110 ? compactRes : tmpRes;
           }
       }
       curDepth--;

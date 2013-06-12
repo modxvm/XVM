@@ -4,7 +4,7 @@ import events.ValueChangedEvent;
 import flash.utils.clearTimeout;
 import flash.utils.setTimeout;
 
-import utils.Config;
+import utils.ConfigUtilsEditor;
 
 protected function updateValue(event:ValueChangedEvent):void
 {
@@ -18,7 +18,7 @@ protected function updateValue(event:ValueChangedEvent):void
 		}
 
 		//debug(event.sender.config + "=" + event.sender.value);
-		Config.SetValue(event.sender.config, event.sender.value);
+		ConfigUtilsEditor.SetValue(event.sender.config, event.sender.value);
         if (preview)
             preview.update();
 	}
@@ -45,7 +45,7 @@ protected function updateMarkerValue(event:ValueChangedEvent):void
 		{
 			var config:String = "markers." + state + "." + activeElement + "." + event.sender.config;
 			//debug(config + "=" + event.sender.value);
-			Config.SetValue(config, event.sender.value);
+			ConfigUtilsEditor.SetValue(config, event.sender.value);
             if (preview)
                 preview.update();
 		}
@@ -68,7 +68,7 @@ protected function updateMarkerTextFieldValue(event:ValueChangedEvent):void
 		{
 			var config:String = "markers." + state + "." + activeElement;
 			//debug(config + "=" + event.sender.value);
-			Config.SetValue(config, values[state]);
+			ConfigUtilsEditor.SetValue(config, values[state]);
             if (preview)
                 preview.update();
 		}
@@ -89,43 +89,43 @@ protected function onSetDefaultValue(event:SetDefaultValueEvent):void
 		switch (path)
 		{
 			case "battleLoading":
-				Config.SetDefaultValue("battleLoading.showClock");
-				Config.SetDefaultValue("battleLoading.showChances");
-				Config.SetDefaultValue("battleLoading.showChancesExp");
-				Config.SetDefaultValue("battleLoading.removeSquadIcon");
+				ConfigUtilsEditor.SetDefaultValue("battleLoading.showClock");
+				ConfigUtilsEditor.SetDefaultValue("battleLoading.showChances");
+				ConfigUtilsEditor.SetDefaultValue("battleLoading.showChancesExp");
+				ConfigUtilsEditor.SetDefaultValue("battleLoading.removeSquadIcon");
 				break;
 
 			case "battleLoading.text":
-				Config.SetDefaultValue("battleLoading.formatLeft");
-				Config.SetDefaultValue("battleLoading.formatRight");
+				ConfigUtilsEditor.SetDefaultValue("battleLoading.formatLeft");
+				ConfigUtilsEditor.SetDefaultValue("battleLoading.formatRight");
 				break;
 
 			case "statisticForm":
-				Config.SetDefaultValue("statisticForm.showChances");
-				Config.SetDefaultValue("statisticForm.showChancesExp");
-				Config.SetDefaultValue("statisticForm.removeSquadIcon");
+				ConfigUtilsEditor.SetDefaultValue("statisticForm.showChances");
+				ConfigUtilsEditor.SetDefaultValue("statisticForm.showChancesExp");
+				ConfigUtilsEditor.SetDefaultValue("statisticForm.removeSquadIcon");
 				break;
 
 			case "statisticForm.text":
-				Config.SetDefaultValue("statisticForm.formatLeft");
-				Config.SetDefaultValue("statisticForm.formatRight");
+				ConfigUtilsEditor.SetDefaultValue("statisticForm.formatLeft");
+				ConfigUtilsEditor.SetDefaultValue("statisticForm.formatRight");
 				break;
 
 			case "playersPanel":
-				Config.SetDefaultValue("playersPanel.alpha");
-				Config.SetDefaultValue("playersPanel.iconAlpha");
-				Config.SetDefaultValue("playersPanel.removeSquadIcon");
+				ConfigUtilsEditor.SetDefaultValue("playersPanel.alpha");
+				ConfigUtilsEditor.SetDefaultValue("playersPanel.iconAlpha");
+				ConfigUtilsEditor.SetDefaultValue("playersPanel.removeSquadIcon");
 				break;
 
 			case "finalStatistic":
-				Config.SetDefaultValue("finalStatistic.startPage");
-				Config.SetDefaultValue("finalStatistic.sortColumn");
-				Config.SetDefaultValue("finalStatistic.showChances");
-				Config.SetDefaultValue("finalStatistic.showChancesExp");
+				ConfigUtilsEditor.SetDefaultValue("finalStatistic.startPage");
+				ConfigUtilsEditor.SetDefaultValue("finalStatistic.sortColumn");
+				ConfigUtilsEditor.SetDefaultValue("finalStatistic.showChances");
+				ConfigUtilsEditor.SetDefaultValue("finalStatistic.showChancesExp");
 				break;
 
 			default:
-				if (!Config.SetDefaultValue(path))
+				if (!ConfigUtilsEditor.SetDefaultValue(path))
 					debug("config not found: " + path);
 		}
         if (preview)
@@ -151,19 +151,19 @@ protected function onSetDefaultMarkerValue(event:SetDefaultValueEvent):void
 			{
 				case "damageText":
 					config_prefix += "damageText.";
-					Config.SetDefaultValue(config_prefix + "visible");
-					Config.SetDefaultValue(config_prefix + "x");
-					Config.SetDefaultValue(config_prefix + "y");
-					Config.SetDefaultValue(config_prefix + "alpha");
-					Config.SetDefaultValue(config_prefix + "color");
-					Config.SetDefaultValue(config_prefix + "speed");
-					Config.SetDefaultValue(config_prefix + "maxRange");
-					Config.SetDefaultValue(config_prefix + "damageMessage");
-					Config.SetDefaultValue(config_prefix + "blowupMessage");
+					ConfigUtilsEditor.SetDefaultValue(config_prefix + "visible");
+					ConfigUtilsEditor.SetDefaultValue(config_prefix + "x");
+					ConfigUtilsEditor.SetDefaultValue(config_prefix + "y");
+					ConfigUtilsEditor.SetDefaultValue(config_prefix + "alpha");
+					ConfigUtilsEditor.SetDefaultValue(config_prefix + "color");
+					ConfigUtilsEditor.SetDefaultValue(config_prefix + "speed");
+					ConfigUtilsEditor.SetDefaultValue(config_prefix + "maxRange");
+					ConfigUtilsEditor.SetDefaultValue(config_prefix + "damageMessage");
+					ConfigUtilsEditor.SetDefaultValue(config_prefix + "blowupMessage");
 					break;
 
 				default:
-					Config.SetDefaultValue(config_prefix + event.target.config);
+					ConfigUtilsEditor.SetDefaultValue(config_prefix + event.target.config);
 			}
 		}
         if (preview)

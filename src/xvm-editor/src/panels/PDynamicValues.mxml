@@ -24,7 +24,7 @@
             import mx.core.IVisualElement;
             import mx.messaging.channels.StreamingAMFChannel;
             
-            import utils.Config;
+            import utils.ConfigUtilsEditor;
             import utils.Embed;
 
             private var valueAsObject:Boolean = false;
@@ -76,7 +76,7 @@
             public function RefreshSource(src:* = null): void
             {
                 if (!src)
-                    src = Config.GetValue(config);
+                    src = ConfigUtilsEditor.GetValue(config);
 
                 // Cleanup
                 var len:int = container.numElements;

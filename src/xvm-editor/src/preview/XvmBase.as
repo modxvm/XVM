@@ -158,7 +158,7 @@ public class XvmBase
             format = formatArr.join(delta ? GraphicsUtil.GetDmgKindValue(damageType) : "")
         formatArr = format.split("{{c:system}}");
         if (formatArr.length > 1)
-            format = formatArr.join(ColorsManager.getSystemColor(m_entityName, m_isDead, isBlowedUp, false));
+            format = formatArr.join(ColorsManager.getSystemColor(m_entityName, m_isDead, isBlowedUp));
         formatArr = format.split("{{c:vtype}}");
         if (formatArr.length > 1)
         {
@@ -186,7 +186,7 @@ public class XvmBase
 
     public function formatDynamicColor(format:String, curHealth:Number, damageType:String = null):Number
     {
-        var systemColor =  ColorsManager.getSystemColor(m_entityName, m_isDead, isBlowedUp, false);
+        var systemColor =  ColorsManager.getSystemColor(m_entityName, m_isDead, isBlowedUp);
 
         if (!format)
             return systemColor;
