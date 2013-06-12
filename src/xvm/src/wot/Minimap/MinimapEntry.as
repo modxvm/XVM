@@ -138,7 +138,7 @@ class wot.Minimap.MinimapEntry
         if (wrapper.m_type == null)
             return;
 
-        com.xvm.Logger.add("type=" + wrapper.m_type + " entryName=" + wrapper.entryName + " vehicleClass=" + wrapper.vehicleClass);
+        //com.xvm.Logger.add("type=" + wrapper.m_type + " entryName=" + wrapper.entryName + " vehicleClass=" + wrapper.vehicleClass);
 
         var color = null;
         if (Config.s_config.battle.useStandardMarkers)
