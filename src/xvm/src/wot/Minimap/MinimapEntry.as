@@ -135,11 +135,18 @@ class wot.Minimap.MinimapEntry
 
     private function colorizeMarker()
     {
-        if (wrapper.m_type == null)
+        if (wrapper.m_type == null || wrapper.vehicleClass == null || wrapper.entryName == null)
             return;
 
-        //com.xvm.Logger.add("type=" + wrapper.m_type + " entryName=" + wrapper.entryName + " vehicleClass=" + wrapper.vehicleClass);
+        //if (wrapper.entryName != "ally" && wrapper.entryName != "enemy")
+        //    com.xvm.Logger.add("type=" + wrapper.m_type + " entryName=" + wrapper.entryName + " vehicleClass=" + wrapper.vehicleClass);
 
+        if (wrapper.entryName == "control")
+            return;
+        
+        if (wrapper.m_type == "player" && wrapper.entryName == "postmortemCamera")
+            return;
+        
         var color = null;
         if (Config.s_config.battle.useStandardMarkers)
         {

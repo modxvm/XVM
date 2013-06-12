@@ -30,12 +30,20 @@ public final class Defines
     public static const DYNAMIC_COLOR_X: Number = 14;
 
     // Dynamic alpha types
-    //public static const DYNAMIC_ALPHA_EFF: Number = 1;
-    //public static const DYNAMIC_ALPHA_RATING: Number = 2;
-    //public static const DYNAMIC_ALPHA_KB: Number = 3;
-    public static const DYNAMIC_ALPHA_HP: Number = 4;
-    public static const DYNAMIC_ALPHA_HP_RATIO: Number = 5;
-    //public static const DYNAMIC_ALPHA_TBATTLES: Number = 6;
+	public static const DYNAMIC_ALPHA_EFF: Number = 1;
+	public static const DYNAMIC_ALPHA_RATING: Number = 2;
+	public static const DYNAMIC_ALPHA_KB: Number = 3;
+	public static const DYNAMIC_ALPHA_HP: Number = 4;
+	public static const DYNAMIC_ALPHA_HP_RATIO: Number = 5;
+	public static const DYNAMIC_ALPHA_TBATTLES: Number = 6;
+	public static const DYNAMIC_ALPHA_TDB: Number = 7;
+	public static const DYNAMIC_ALPHA_TDV: Number = 8;
+	public static const DYNAMIC_ALPHA_TFB: Number = 9;
+	public static const DYNAMIC_ALPHA_TSB: Number = 10;
+	public static const DYNAMIC_ALPHA_E: Number = 11;
+	public static const DYNAMIC_ALPHA_TWR: Number = 12;
+	public static const DYNAMIC_ALPHA_WN: Number = 13;
+	public static const DYNAMIC_ALPHA_X: Number = 14;
 
     // Damage flag at Xvm.as: updateHealth
     public static var FROM_UNKNOWN: Number = 0;

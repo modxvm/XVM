@@ -16,6 +16,9 @@ import utils.DefaultConfig;
 import utils.Defines;
 import utils.Utils;
 
+private var loadCounter:int;
+private var loadCache:Object;
+
 private var merge:Boolean;
 private var mergeDialog:MergeDialog;
 private var config:Object;
@@ -33,8 +36,10 @@ private function LoadConfig(merge:Boolean):void
 
 private function onFileLoadSelect(e:Event):void
 {
+	loadCache = {};
 	for each (var fr:FileReference in FileReferenceList(e.target).fileList)
 	{
+		loadCounter++;
 		fr.addEventListener(Event.COMPLETE, onLoadComplete);
 		fr.addEventListener(IOErrorEvent.IO_ERROR, onLoadError);
 		fr.load();
@@ -45,10 +50,16 @@ private function onLoadComplete(e:Event):void
 {
     try
     {
-		debug(JSONx.stringify(e));		
+		var fr:FileReference = FileReference(e.target);
+		loadCounter--;
     	var data:String = e.target.data.readUTFBytes(e.target.data.bytesAvailable);
-        config = ConfigUtils.FixConfig(JSONx.parse(data));
+		loadCache[fr.name] = ConfigUtils.FixConfig(JSONx.parse(data));
 
+		if (loadCounter > 0)
+			return;
+		
+		config = CollectConfig(loadCache);
+		
         if (!merge)
             onLoadComplete2(null);
         else
@@ -63,6 +74,11 @@ private function onLoadComplete(e:Event):void
     {
         debug("ERROR: onLoadComplete(): " + ex.toString());
     }
+}
+
+private function CollectConfig(parts:Object):Object
+{
+	return parts;
 }
 
 private function onLoadComplete2(e:Event):void
@@ -101,7 +117,7 @@ private function onLoadError(e:IOErrorEvent):void
 // SAVE
 private function SaveConfig():void
 {
-	var fr = new FileReference();
+	var fr:FileReference = new FileReference();
 	fr.addEventListener(Event.COMPLETE, onFileSave);
 	fr.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
 	// Serialize and add UTF-8 BOM
@@ -110,10 +126,10 @@ private function SaveConfig():void
 	fr.save(str, "xvm.xc");
 }
 
-private function sortFunction(a, b):int
+private function sortFunction(a:String, b:String):int
 {
-	var an = sortElementsOrder.indexOf(a); 
-	var bn = sortElementsOrder.indexOf(b); 
+	var an:int = sortElementsOrder.indexOf(a); 
+	var bn:int = sortElementsOrder.indexOf(b); 
 	if (an >= 0 && bn == -1)
 		return -1;
 	if (bn >= 0 && an == -1)
