@@ -1,4 +1,5 @@
 import net.wargaming.Carousel;
+import net.wargaming.ingame.Minimap;
 
 class wot.RootComponents
 {
@@ -6,4 +7,9 @@ class wot.RootComponents
     {
         return _root.contentHolder.main.carousel;
     }
+
+    public static function get minimap():Minimap
+    {
+        return Minimap(_root.minimap);
+    }    
 }

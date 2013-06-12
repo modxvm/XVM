@@ -1,6 +1,6 @@
+import com.xvm.GlobalEventDispatcher;
 import com.xvm.Logger;
 import com.xvm.Utils;
-import com.xvm.GlobalEventDispatcher;
 import wot.Minimap.Features;
 import wot.Minimap.Zoom;
 import wot.Minimap.shapes.Square;
@@ -152,10 +152,9 @@ class wot.Minimap.Minimap
          */
         for (var i in wrapper.icons)
         {
-            if (wrapper.icons[i].entryName == "base")
-            {
-                wrapper.icons[i]._xscale = wrapper.icons[i]._yscale = 100;
-            }
+            var icon = wrapper.icons[i];
+            if (icon.entryName == "base")
+                icon._xscale = icon._yscale = 100;
         }
     }
 

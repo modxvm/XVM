@@ -18,11 +18,22 @@ intrinsic class net.wargaming.ingame.MinimapEntry extends UIComponent
     var m_type:String; /** ally enemy points*/
     var teamPoint:MovieClip; /** Clip is present if entry is capture base */
     
+    function configUI();
     function init(markerType, entryName, vehicleClass, markLabel);
-    function MinimapEntry();
+    function showAction(markLabel);
+    function update();
     function lightPlayer(visibility);
+    function playPlayer();
+    static function unhighlightLastEntry();
+    function get colorsManager():net.wargaming.managers.ColorSchemeManager;
+    function get colorSchemeName():String;
+    function setEntryName(value);
     function setDead(isPermanent);
-    function setPostmortem(isPostmortem)
+    function setPostmortem(isPostmortem);
+    function isTeamPoint();
+    function isBackMarker();
+    function updateType();
     function updateIfEntryIsPlayer();
-    //function invalidate();
+    function draw();
+    function getMinimap():net.wargaming.ingame.Minimap;
 }

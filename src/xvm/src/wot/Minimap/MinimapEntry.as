@@ -1,4 +1,6 @@
+import com.xvm.GraphicsUtil;
 import com.xvm.Utils;
+import wot.RootComponents;
 import wot.Minimap.model.externalProxy.MapConfig;
 import wot.Minimap.staticUtils.LabelAppend;
 import wot.Minimap.dataTypes.Player;
@@ -38,6 +40,16 @@ class wot.Minimap.MinimapEntry
     function lightPlayer()
     {
         return this.lightPlayerImpl.apply(this, arguments);
+    }
+
+    function init()
+    {
+        return this.initImpl.apply(this, arguments);
+    }
+
+    function invalidate()
+    {
+        return this.invalidateImpl.apply(this, arguments);
     }
 
     // wrapped methods
@@ -105,11 +117,39 @@ class wot.Minimap.MinimapEntry
         }
     }
 
+    function initImpl()
+    {
+        base.init.apply(base, arguments);
+        colorizeMarker();
+    }
+
+    function invalidateImpl()
+    {
+        base.invalidate();
+        colorizeMarker();
+    }
+    
     // -- Private
+
+    private function colorizeMarker()
+    {
+        if (wrapper.m_type == null)
+			return;
+
+        var schemeName = (wrapper.entryName != "base") ? wrapper.colorSchemeName
+            : (wrapper.vehicleClass == "red") ? "vm_enemy" : (wrapper.vehicleClass == "blue") ? "vm_ally" : null;
+
+        if (!schemeName)
+            return;
+            
+        //com.xvm.Logger.add("color scheme: " + schemeName + ", " + wrapper.m_type + ", " + wrapper.entryName + ", " + wrapper.vehicleClass);
+        var color = wrapper.colorsManager.getRGB(schemeName);
+        GraphicsUtil.colorize(wrapper, color, 0.8);
+    }
 
     private function initExtendedBehaviour():Void
     {
-        uid = minimap.xvm_worker.sync.getTestUid();
+        uid = RootComponents.minimap.xvm_worker.sync.getTestUid();
 
         if (MapConfig.revealedEnabled)
         {
@@ -122,11 +162,6 @@ class wot.Minimap.MinimapEntry
 
     private function get syncProcedureInProgress():Boolean
     {
-        return minimap.xvm_worker.sync.syncProcedureInProgress;
-    }
-
-    private function get minimap():net.wargaming.ingame.Minimap
-    {
-        return net.wargaming.ingame.Minimap(_root.minimap);
+        return RootComponents.minimap.xvm_worker.sync.syncProcedureInProgress;
     }
 }
