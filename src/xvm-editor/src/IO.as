@@ -15,6 +15,8 @@ import utils.ConfigUtils;
 import utils.DefaultConfig;
 import utils.Defines;
 import utils.Utils;
+import utils.OTMConfigConverter;
+import utils.PatchedXMLDecoder;
 
 private var loadCounter:int;
 private var loadCache:Object;
@@ -58,7 +60,11 @@ private function onLoadComplete(e:Event):void
 		if (loadCounter > 0)
 			return;
 		
-		config = CollectConfig(loadCache);
+		config = Utils.endsWith(".xml", fr.name.toLowerCase())
+			? OTMConfigConverter.convert((new PatchedXMLDecoder()).decode(loadCache[fr.name]))
+			: CollectConfig(loadCache);
+		
+		loadCache = null;
 		
         if (!merge)
             onLoadComplete2(null);
