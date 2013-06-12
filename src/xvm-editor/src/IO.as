@@ -1,4 +1,5 @@
 ﻿import com.xvm.JSONx;
+import com.xvm.JSONxLoader;
 
 import components.MergeDialog;
 
@@ -24,13 +25,14 @@ private var loadCache:Object;
 private var merge:Boolean;
 private var mergeDialog:MergeDialog;
 private var config:Object;
+private var frl:FileReferenceList;
 
 // LOAD
 
 private function LoadConfig(merge:Boolean):void
 {
     this.merge = merge;
-	var frl:FileReferenceList = new FileReferenceList();
+	frl = new FileReferenceList();
 	frl.addEventListener(Event.SELECT, onFileLoadSelect);
 	//frl.addEventListener(Event.CANCEL,onCancelLoad);
 	frl.browse([ new FileFilter(_("FileFilterText"), "*.xc"), new FileFilter(_("FileFilterLegacyText"), "*.xvmconf;OTMData.xml") ]);
@@ -55,7 +57,7 @@ private function onLoadComplete(e:Event):void
 		var fr:FileReference = FileReference(e.target);
 		loadCounter--;
     	var data:String = e.target.data.readUTFBytes(e.target.data.bytesAvailable);
-		loadCache[fr.name] = ConfigUtils.FixConfig(JSONx.parse(data));
+		loadCache[fr.name] = JSONx.parse(data);
 
 		if (loadCounter > 0)
 			return;
@@ -63,6 +65,7 @@ private function onLoadComplete(e:Event):void
 		config = Utils.endsWith(".xml", fr.name.toLowerCase())
 			? OTMConfigConverter.convert((new PatchedXMLDecoder()).decode(loadCache[fr.name]))
 			: CollectConfig(loadCache);
+		config = ConfigUtils.FixConfig(config);
 		
 		loadCache = null;
 		
@@ -84,7 +87,16 @@ private function onLoadComplete(e:Event):void
 
 private function CollectConfig(parts:Object):Object
 {
-	return parts;
+	
+	for (var i in parts)
+	{
+		if (parts[i].hasOwnProperty("configVersion"))
+		{
+			return JSONxLoader.Deref(parts[i], 0, {}, parts); 
+		}
+	}
+	debug("Cannot find root config element (\"configVersion\" must present)");
+	return null;
 }
 
 private function onLoadComplete2(e:Event):void
