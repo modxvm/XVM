@@ -1,7 +1,7 @@
+import com.xvm.ColorsManager;
 import com.xvm.GraphicsUtil;
 import com.xvm.Macros;
 import com.xvm.Utils;
-import wot.VehicleMarkersManager.ColorsManager;
 import wot.VehicleMarkersManager.components.damage.DamageTextProxy;
 import wot.VehicleMarkersManager.components.damage.DamageTextAnimation;
 

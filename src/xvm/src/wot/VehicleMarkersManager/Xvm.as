@@ -82,9 +82,6 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
 
         Utils.TraceXvmModule("XVM");
 
-        // initialize ColorsManager for detecting color blind mode
-        ColorsManager.initialize();
-
         // initialize TweenLite
         OverwriteManager.init(OverwriteManager.AUTO);
         TweenPlugin.activate([AutoAlphaPlugin, BevelFilterPlugin, BezierPlugin, BezierThroughPlugin, BlurFilterPlugin,
@@ -208,8 +205,8 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     function update()
     {
         //trace("Xvm::update()");
-        // Update Color Blind mode
-        vehicleTypeComponent.updateMarkerLabel();
+        // TODO: check // Update Color Blind mode
+        // TODO: check vehicleTypeComponent.updateMarkerLabel();
         XVMUpdateStyle();
     }
 

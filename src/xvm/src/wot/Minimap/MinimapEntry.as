@@ -1,3 +1,5 @@
+import com.xvm.Config;
+import com.xvm.ColorsManager;
 import com.xvm.GraphicsUtil;
 import com.xvm.Utils;
 import wot.RootComponents;
@@ -134,17 +136,30 @@ class wot.Minimap.MinimapEntry
     private function colorizeMarker()
     {
         if (wrapper.m_type == null)
-			return;
-
-        var schemeName = (wrapper.entryName != "base") ? wrapper.colorSchemeName
-            : (wrapper.vehicleClass == "red") ? "vm_enemy" : (wrapper.vehicleClass == "blue") ? "vm_ally" : null;
-
-        if (!schemeName)
             return;
-            
-        //com.xvm.Logger.add("color scheme: " + schemeName + ", " + wrapper.m_type + ", " + wrapper.entryName + ", " + wrapper.vehicleClass);
-        var color = wrapper.colorsManager.getRGB(schemeName);
-        GraphicsUtil.colorize(wrapper, color, 0.8);
+
+        var color = null;
+        if (Config.s_config.battle.useStandardMarkers)
+        {
+            var schemeName = (wrapper.entryName != "base") ? wrapper.colorSchemeName
+                : (wrapper.vehicleClass == "red") ? "vm_enemy" : (wrapper.vehicleClass == "blue") ? "vm_ally" : null;
+
+            if (!schemeName)
+                return;
+
+            //com.xvm.Logger.add("color scheme: " + schemeName + ", " + wrapper.m_type + ", " + wrapper.entryName + ", " + wrapper.vehicleClass);
+            color = wrapper.colorsManager.getRGB(schemeName);
+        }
+        else
+        {
+            var entryName = (wrapper.entryName != "base") ? wrapper.entryName
+                : (wrapper.vehicleClass == "red") ? "enemy" : (wrapper.vehicleClass == "blue") ? "ally" : null;
+            if (entryName != null)
+                color = ColorsManager.getSystemColor(entryName, wrapper.isDead);
+        }
+
+        if (color != null)
+            GraphicsUtil.colorize(wrapper, color, 0.8);
     }
 
     private function initExtendedBehaviour():Void

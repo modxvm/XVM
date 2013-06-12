@@ -46,7 +46,7 @@ USAGE:
 package com.xvm
 {
 
-class JSONx {
+public class JSONx {
 
   static var maxDepth: Number = undefined;
   static var curDepth: Number = undefined;
@@ -59,7 +59,7 @@ class JSONx {
     return s;
   }
 
-  public static function stringify(arg, indent:String, compact:Boolean):String {
+  public static function stringify(arg, indent:String = null, compact:Boolean = false):String {
 
   if (compact == undefined) compact = false;
 
@@ -102,8 +102,7 @@ class JSONx {
               }
               curDepth--;
               return '{' +
-                (arg instanceof MovieClip || arg instanceof TextField ? "// " + arg.toString() : "") +
-                    (compact ? s + '}' : '\n' + s + '\n' + indent + '}');
+                (compact ? s + '}' : '\n' + s + '\n' + indent + '}');
           }
       }
       curDepth--;
@@ -151,18 +150,19 @@ class JSONx {
   case 'boolean':
       return String(arg);
   case 'null':
-    return 'null';
+      return 'null';
   default:
-      if (maxDepth && maxDepth > 0)
-          wot.utils.Logger.add("JSON> " + (typeof arg));
+      //if (maxDepth && maxDepth > 0)
+      //    Logger.add("JSON> " + (typeof arg));
       return 'null';
   }
 }
 
-  static function parse(text:String):Object {
+  public static function parse(text:String):Object {
     if (!text || text == "")
         return null;
     var ta: Array = text.split(''); // charAt is much slower in Flash then array
+    var talen = ta.length;
     var at = 0;
     var ch = ' ';
     var _value:Function;
@@ -177,8 +177,8 @@ class JSONx {
     }
 
     var _next:Function = function() {
-        ch = ta[at];
-        at += 1;
+        ch = (at >= talen) ? '' : ta[at];
+        at++;
         return ch;
     }
 
@@ -373,7 +373,7 @@ class JSONx {
             }
         }
         //v = +n;
-                    v = 1 * Number(n);
+        v = 1 * Number(n);
         if (!isFinite(v)) {
             _error("Bad number");
         } else {

@@ -3,11 +3,11 @@
  * Class don't contain any workflow logic.
  */
 //import com.xvm.Cache;
+import com.xvm.ColorsManager;
 import com.xvm.GraphicsUtil;
 import com.xvm.Logger;
 import com.xvm.Macros;
 import com.xvm.Utils;
-import wot.VehicleMarkersManager.ColorsManager;
 import wot.VehicleMarkersManager.ErrorHandler;
 import wot.VehicleMarkersManager.VehicleMarkerProxy;
 import wot.VehicleMarkersManager.VehicleState;
@@ -79,12 +79,12 @@ class wot.VehicleMarkersManager.XvmBase
 
     private function getCurrentSystemColor():Number
     {
-        return ColorsManager.getSystemColor(m_entityName, m_isDead, isBlowedUp, ColorsManager.isColorBlindMode);
+        return ColorsManager.getSystemColor(m_entityName, m_isDead, isBlowedUp);
     }
 
     private static function getSystemColor(o:Object):Number
     {
-        return ColorsManager.getSystemColor(o.entityName, o.dead, o.blowedUp, ColorsManager.isColorBlindMode);
+        return ColorsManager.getSystemColor(o.entityName, o.dead, o.blowedUp);
     }
 
     /**

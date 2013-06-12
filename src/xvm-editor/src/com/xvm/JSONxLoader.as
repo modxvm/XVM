@@ -7,21 +7,20 @@ package com.xvm
 {
 
 import com.xvm.JSONx;
-import wot.utils.Logger;
 
-class JSONxLoader
+public class JSONxLoader
 {
     private var rootPath:Object;
     private var rootFileName:Object;
     private var target:Object;
     private var callback:Function;
-    
+
     private var file_cache = { };
     private var obj_cache = { };
     private var pendingFiles:Array = [ ];
-    
+
     private var rootObj:Object;
-    
+
     public static function LoadAndParse(filename:String, target:Object, callback:Function)
     {
         var jl:JSONxLoader = new JSONxLoader(filename, target, callback);
@@ -59,21 +58,25 @@ class JSONxLoader
             if (!--me.loadingCount)
                 me.LoadFileCallback.call(me);
         }
+        //Logger.add("lv.load: " + rootPath + filename);
         lv.load(rootPath + filename);
     }
-    
+
     private function LoadFileCallback()
     {
         //Logger.add("LoadFileCallback");
         try
         {
             //Logger.addObject(rootObj, "rootObj", 5);
+            //Logger.addObject(rootObj.markers.ally.alive.normal, "marker", 10);
             rootObj = Deref(rootObj);
+            //Logger.addObject(pendingFiles, "pendingFiles", 2);
             if (pendingFiles.length > 0)
                 LoadFiles();
             else
             {
                 //Logger.addObject(rootObj, "config", 10);
+                //Logger.addObject(rootObj.markers.ally.alive.normal, "marker", 10);
                 callback.call(target, { data:rootObj, filename:rootFileName } );
             }
         }
@@ -85,6 +88,7 @@ class JSONxLoader
 
     private function Deref(data:Object, level:Number, file:Object)
     {
+        //Logger.addObject(data, "Deref", 2);
         if (level == null)
             level = 0;
 
@@ -112,13 +116,18 @@ class JSONxLoader
         if (data.$ref == null)
         {
             for (var i in data)
+            {
                 data[i] = Deref(data[i], level + 1, file);
+                //Logger.addObject(data[i], i, 2);
+            }
             return data;
         }
 
         // reference
+        //   "$ref": { "file": "...", "line": "..." }
 
         //Logger.addObject(data, "Deref[" + level + "]", 2);
+
         var dirName = file.d || "";
         var fileName = file.f || "";
         var fn = dirName + (data.$ref.file || fileName);
@@ -153,11 +162,27 @@ class JSONxLoader
                 if (!obj_cache.hasOwnProperty(fn))
                     obj_cache[fn] = JSONx.parse(file_cache[fn]);
                 if (obj_cache[fn] == null)
-                    throw { type: "NO_FILE", message: "file is missing" };
+                    throw { type: "NO_FILE", message: "file is missing: " + fn };
                 var value = getValue(obj_cache[fn], data.$ref.path);
-                if (value == undefined)
+                //Logger.add(data.$ref.path + ": " + String(value));
+                if (value === undefined)
                     throw { type: "BAD_REF", message: "bad reference:\n    ${\"" + data.$ref.file + "\":\"" + data.$ref.path + "\"}" };
-                data = Deref(value, level + 1, {d:dirName, f:fileName});
+
+                // override referenced values
+                //   "damageText": {
+                //     "$ref": { "path":"def.damageText" },
+                //     "damageMessage": "all {{dmg}}"
+                //    }
+
+                for (var i in data)
+                {
+                    if (i != "$ref")
+                        value[i] = data[i];
+                }
+
+                // deref result
+                data = Deref(value, level + 1, { d:dirName, f:fileName } );
+                //Logger.addObject(data);
             }
             catch (ex)
             {
@@ -167,10 +192,12 @@ class JSONxLoader
 
         return data;
     }
-    
+
     private function getValue(obj:Object, path: String)
     {
-        if (obj == null)
+        //Logger.add("getValue: " + path);
+
+        if (obj === undefined)
             return undefined;
 
         if (path == "." || path == "")
@@ -185,7 +212,12 @@ class JSONxLoader
                 return undefined;
             o = o[p[i]];
         }
-        return o;
+        return o == null ? null : clone(o);
+    }
+
+    private function clone(obj:Object):Object
+    {
+        return JSONx.parse(JSONx.stringify(obj, "", true));
     }
 }
 

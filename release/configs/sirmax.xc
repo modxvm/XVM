@@ -1,5 +1,5 @@
 {
-  "configVersion": "1.5.0",
+  "configVersion": "4.0.0",
   "def": {
     //"standardMarkers": true,
     "standardMarkers": false,
@@ -513,5 +513,6 @@
     "statisticForm": "contour/HARDicons",
     "playersPanel":  "contour/HARDicons",
     "vehicleMarker": "contour/Aslain/iconset2"
-  }
+  },
+  "colors": ${"sirmax-colors.xc":"colors"}
 }

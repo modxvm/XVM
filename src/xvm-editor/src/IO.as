@@ -25,7 +25,7 @@ private function LoadConfig(merge:Boolean):void
 	frl = new FileReferenceList();
 	frl.addEventListener(Event.SELECT, onFileLoadSelect);
 	frl.addEventListener(Event.CANCEL,onCancelLoad);
-	frl.browse([ new FileFilter(_("FileFilterText"), "*.xvmconf") ]);
+	frl.browse([ new FileFilter(_("FileFilterText"), "*.xc"), new FileFilter(_("FileFilterText"), "*.xvmconf") ]);
 }
 
 private function onFileLoadSelect(e:Event):void

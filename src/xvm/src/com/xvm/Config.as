@@ -538,6 +538,31 @@ class com.xvm.Config
             if (config.battle.clanIconsFolder == "../../../clanicons")
                 config.battle.clanIconsFolder = "clanicons";
 
+            if (!config.colors.system.ally_alive)
+                config.colors.system.ally_alive = config.colors.system.ally_alive_normal;
+            if (!config.colors.system.ally_dead)
+                config.colors.system.ally_dead = config.colors.system.ally_dead_normal;
+            if (!config.colors.system.ally_blowedup)
+                config.colors.system.ally_blowedup = config.colors.system.ally_blowedup_normal;
+            if (!config.colors.system.squadman_alive)
+                config.colors.system.squadman_alive = config.colors.system.squadman_alive_normal;
+            if (!config.colors.system.squadman_dead)
+                config.colors.system.squadman_dead = config.colors.system.squadman_dead_normal;
+            if (!config.colors.system.squadman_blowedup)
+                config.colors.system.squadman_blowedup = config.colors.system.squadman_blowedup_normal;
+            if (!config.colors.system.teamKiller_alive)
+                config.colors.system.teamKiller_alive = config.colors.system.teamKiller_alive_normal;
+            if (!config.colors.system.teamKiller_dead)
+                config.colors.system.teamKiller_dead = config.colors.system.teamKiller_dead_normal;
+            if (!config.colors.system.teamKiller_blowedup)
+                config.colors.system.teamKiller_blowedup = config.colors.system.teamKiller_blowedup_normal;
+            if (!config.colors.system.enemy_alive)
+                config.colors.system.enemy_alive = config.colors.system.enemy_alive_normal;
+            if (!config.colors.system.enemy_dead)
+                config.colors.system.enemy_dead = config.colors.system.enemy_dead_normal;
+            if (!config.colors.system.enemy_blowedup)
+                config.colors.system.enemy_blowedup = config.colors.system.enemy_blowedup_normal;
+
             v = "4.0.0";
         }
 

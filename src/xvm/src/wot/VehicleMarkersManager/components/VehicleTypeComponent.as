@@ -1,5 +1,5 @@
+import com.xvm.ColorsManager;
 import com.xvm.GraphicsUtil;
-import wot.VehicleMarkersManager.ColorsManager;
 import wot.VehicleMarkersManager.ErrorHandler;
 import wot.VehicleMarkersManager.components.VehicleTypeProxy;
 
@@ -77,7 +77,7 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
     public function updateMarkerLabel()
     {
         //com.xvm.Logger.add("updateMarkerLabel: " + m_markerLabel + " " + m_markerState);
-        var aliasColor = ColorsManager.getMarkerColorAlias(proxy.entityName, proxy.isColorBlindMode);
+        var aliasColor = ColorsManager.getMarkerColorAlias(proxy.entityName);
         if (m_markerLabel == aliasColor)
             return;
 

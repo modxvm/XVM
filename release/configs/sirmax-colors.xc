@@ -3,8 +3,13 @@
  * Настройки цветов.
  */
 {
-  // Dynamic color by various statistical parameters.
-  // Динамический цвет по различным статистическим показателям.
+  "def": {
+    "al": "0xAADDFF",
+    "sq": "0xAAAAFF",
+    "tk": "0x00DDFF",
+    "en": "0xFFDDAA",
+    "pl": "0xAAFFAA"
+  },
   "colorRating": {
     "undefined":    "0xFCFCFC",   // undefined  / неопределенно
     "very_bad":     "0xFE0E00",   // very bad   / очень плохо
@@ -14,41 +19,116 @@
     "very_good":    "0x02C9B3",   // very good  / очень хорошо
     "unique":       "0xD042F3"    // unique     / уникально
   },
-  // Dynamic color by remaining health points.
-  // Динамический цвет по оставшемуся запасу прочности.
   "colorHP": {
     "very_low":         "0xFF0000",   // very low       / очень низкий
     "low":              "0xDD4444",   // low            / низкий
     "average":          "0xFFCC22",   // average        / средний
     "above_average":    "0xFCFCFC"    // above-average  / выше среднего
   },
+
   "colors": {
-    // System colors.
-    // Системные цвета.
     "system": {
-      // Format: object_state
-      // Object:      ally, squadman, teamKiller, enemy
-      // State:       alive, dead, blowedup
-      // ----
-      // Формат: объект_состояние
-      // Объект:      ally - союзник, squadman - взводный, teamKiller - тимкиллер, enemy - противник
-      // Состояние:   alive - живой, dead - мертвый, blowedup - взорвана боеукладка
-      "ally_alive":          "0x96FF00",
-      "ally_dead":           "0x009900",
-      "ally_blowedup":       "0x007700",
-      "squadman_alive":      "0xFFB964",
-      "squadman_dead":       "0xCA7000",
-      "squadman_blowedup":   "0xA45A00",
-      "teamKiller_alive":    "0x00EAFF",
-      "teamKiller_dead":     "0x097783",
-      "teamKiller_blowedup": "0x096A75",
-      "enemy_alive":         "0xF50800",
-      "enemy_dead":          "0x840500",
-      "enemy_blowedup":      "0x5A0401"
+      "ally_alive":          ${"def.al"},
+      "ally_dead":           "0x556E7F",
+      "ally_blowedup":       "0x668499",
+      "squadman_alive":      ${"def.sq"},
+      "squadman_dead":       "0x55557F",
+      "squadman_blowedup":   "0x666699",
+      "teamKiller_alive":    ${"def.tk"},
+      "teamKiller_dead":     "0x006E7F",
+      "teamKiller_blowedup": "0x008499",
+      "enemy_alive":         ${"def.en"},
+      "enemy_dead":          "0x9F6E55",
+      "enemy_blowedup":      "0x998466"
     },
     // Color settings for damage. Link.
     // Настройки цвета для урона. Ссылка.
-    "damage": ${"colorsDamage.xc":"damage"},
+    "damage": {
+      // Format: src_dst_type.
+      // Src:  ally, squadman, enemy, unknown, player.
+      // Dst:  ally, squadman, allytk, enemytk, enemy.
+      // Type: hit, kill, blowup.
+      // ----
+      // Формат: источник_получатель_тип.
+      // Источник:   ally - союзник, squadman - взводный, enemy - противник, unknown - неизвестный (не виден игроку), player - игрок.
+      // Получатель: ally, squadman, enemy, allytk - союзник тимкиллер, enemytk - противник тимкиллер.
+      // Тип:        hit - попадание, kill - убийство, blowup - боеукладка.
+      "ally_ally_hit":		${"def.tk"},
+      "ally_ally_kill":		${"def.tk"},
+      "ally_ally_blowup":	${"def.tk"},
+      "ally_squadman_hit":	${"def.tk"},
+      "ally_squadman_kill":	${"def.tk"},
+      "ally_squadman_blowup":	${"def.tk"},
+      "ally_enemy_hit":		${"def.en"},
+      "ally_enemy_kill":	${"def.en"},
+      "ally_enemy_blowup":	${"def.en"},
+      "ally_allytk_hit":	${"def.tk"},
+      "ally_allytk_kill":	${"def.tk"},
+      "ally_allytk_blowup":	${"def.tk"},
+      "ally_enemytk_hit":	${"def.en"},
+      "ally_enemytk_kill":	${"def.en"},
+      "ally_enemytk_blowup":	${"def.en"},
+      "squadman_ally_hit":	${"def.tk"},
+      "squadman_ally_kill":	${"def.tk"},
+      "squadman_ally_blowup":	${"def.tk"},
+      "squadman_squadman_hit":	${"def.tk"},
+      "squadman_squadman_kill":	${"def.tk"},
+      "squadman_squadman_blowup":${"def.tk"},
+      "squadman_enemy_hit":	${"def.en"},
+      "squadman_enemy_kill":	${"def.en"},
+      "squadman_enemy_blowup":	${"def.en"},
+      "squadman_allytk_hit":	${"def.tk"},
+      "squadman_allytk_kill":	${"def.tk"},
+      "squadman_allytk_blowup":	${"def.tk"},
+      "squadman_enemytk_hit":	${"def.en"},
+      "squadman_enemytk_kill":	${"def.en"},
+      "squadman_enemytk_blowup":${"def.en"},
+      "enemy_ally_hit":		${"def.al"},
+      "enemy_ally_kill":	${"def.al"},
+      "enemy_ally_blowup":	${"def.al"},
+      "enemy_squadman_hit":	${"def.sq"},
+      "enemy_squadman_kill":	${"def.sq"},
+      "enemy_squadman_blowup":	${"def.sq"},
+      "enemy_enemy_hit":	${"def.en"},
+      "enemy_enemy_kill":	${"def.en"},
+      "enemy_enemy_blowup":	${"def.en"},
+      "enemy_allytk_hit":	${"def.al"},
+      "enemy_allytk_kill":	${"def.al"},
+      "enemy_allytk_blowup":	${"def.al"},
+      "enemy_enemytk_hit":	${"def.en"},
+      "enemy_enemytk_kill":	${"def.en"},
+      "enemy_enemytk_blowup":	${"def.en"},
+      "unknown_ally_hit":	${"def.al"},
+      "unknown_ally_kill":	${"def.al"},
+      "unknown_ally_blowup":	${"def.al"},
+      "unknown_squadman_hit":	${"def.sq"},
+      "unknown_squadman_kill":	${"def.sq"},
+      "unknown_squadman_blowup":${"def.sq"},
+      "unknown_enemy_hit":	${"def.en"},
+      "unknown_enemy_kill":	${"def.en"},
+      "unknown_enemy_blowup":	${"def.en"},
+      "unknown_allytk_hit":	${"def.al"},
+      "unknown_allytk_kill":	${"def.al"},
+      "unknown_allytk_blowup":	${"def.al"},
+      "unknown_enemytk_hit":	${"def.en"},
+      "unknown_enemytk_kill":	${"def.en"},
+      "unknown_enemytk_blowup":	${"def.en"},
+      "player_ally_hit":	${"def.pl"},
+      "player_ally_kill":	${"def.pl"},
+      "player_ally_blowup":	${"def.pl"},
+      "player_squadman_hit":	${"def.pl"},
+      "player_squadman_kill":	${"def.pl"},
+      "player_squadman_blowup":	${"def.pl"},
+      "player_enemy_hit":	${"def.pl"},
+      "player_enemy_kill":	${"def.pl"},
+      "player_enemy_blowup":	${"def.pl"},
+      "player_allytk_hit":	${"def.pl"},
+      "player_allytk_kill":	${"def.pl"},
+      "player_allytk_blowup":	${"def.pl"},
+      "player_enemytk_hit":	${"def.pl"},
+      "player_enemytk_kill":	${"def.pl"},
+      "player_enemytk_blowup":	${"def.pl"}
+    },
     // Dynamic color by damage kind.
     // Динамический цвет по типу урона.
     "dmg_kind": {

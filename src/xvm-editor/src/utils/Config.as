@@ -4,6 +4,8 @@
  */
 package utils
 {
+    import com.xvm.JSONx;
+    
     import utils.Defines;
     import utils.Utils;
 
@@ -338,7 +340,7 @@ package utils
             if (value === null || value === undefined) // FIXIT: why undefined presents?
     			root[valueElement] = null;
     		else if (typeof value == "object")
-                root[valueElement] = utils.JSON.parse(utils.JSON.stringify(value)); // dereference
+                root[valueElement] = com.xvm.JSONx.parse(com.xvm.JSONx.stringify(value)); // dereference
             else
                 root[valueElement] = value;
     	}

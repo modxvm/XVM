@@ -1,3 +1,4 @@
+import com.xvm.ColorsManager;
 import com.xvm.Config;
 import com.xvm.GraphicsUtil;
 import com.xvm.Logger;
@@ -61,8 +62,14 @@ class wot.battle.FragCorrelation
         //Logger.addObject(net.wargaming.managers.ColorSchemeManager._colors, "_colors", 3);
         var markers = arguments.shift();
         var ally:Boolean = Boolean(arguments.shift());
-        var color = net.wargaming.managers.ColorSchemeManager.instance.getRGB("vm_" + (ally ? "ally" : "enemy"));
+
         var renderer = markers.$createItemRenderer.apply(markers, arguments);
+
+        var type = ally ? "ally" : "enemy";
+        var color = Config.s_config.battle.useStandardMarkers
+            ? net.wargaming.managers.ColorSchemeManager.instance.getRGB("vm_" + type)
+            : ColorsManager.getSystemColor(type, false);
+
         GraphicsUtil.colorize(renderer.marker, color, 0.9); // 10% darker to improve appearance
         //Logger.addObject(arguments[0], color, 1);
         return renderer;

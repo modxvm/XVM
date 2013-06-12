@@ -33,11 +33,6 @@ class wot.VehicleMarkersManager.components.VehicleTypeProxy extends AbstractAcce
         return xvm.m_entityName;
     }
 
-    public function get isColorBlindMode():Boolean
-    {
-        return ColorsManager.isColorBlindMode;
-    }
-
     public function setMarkerLabel(markerLabel:String):Void
     {
         xvm.wrapper.gotoAndStop(markerLabel);
