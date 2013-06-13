@@ -39,6 +39,7 @@
 	".rating",
 
 	"..value",
+	"..color",
 	"..alpha",
 
 	"...normal",

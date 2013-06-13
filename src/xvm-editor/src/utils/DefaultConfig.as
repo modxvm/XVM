@@ -108,7 +108,7 @@ public class DefaultConfig
                 // Show the clock on the Debug Panel (near FPS).
                 // Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
                 clockFormat: "H:N",
-                clanIconsFolder: "clanicons", // Folder with clan icons
+                clanIconsFolder: "clanicons/", // Folder with clan icons
                 // Visual elements
                 elements: {
                     // x - X position
@@ -194,7 +194,7 @@ public class DefaultConfig
                 showChancesExp: false,  // Show experimental "chance to win" formula.
                 removeSquadIcon: false, // Hide squad icon.
                 // Playes/clan icon parameters.
-                clanIcon: { show: true, x: 0, y: 6, xr: NaN, yr: NaN, h: 16, w: 16, alpha: 90 },
+                clanIcon: { show: true, x: 0, y: 6, xr: 0, yr: 6, h: 16, w: 16, alpha: 90 },
                 // Dispay format. Macro-substitutiones allowed.
                 formatLeft: "{{vehicle}}<font face='Lucida Console' size='12'> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
                 formatRight: "<font face='Lucida Console' size='12'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> </font>{{vehicle}}"
@@ -204,7 +204,7 @@ public class DefaultConfig
                 showChancesExp: false,  // Show experimental "chance to win" formula.
                 removeSquadIcon: false, // Hide squad icon.
                 // Playes/clan icon parameters.
-                clanIcon: { show: true, x: 0, y: 6, xr: NaN, yr: NaN, h: 16, w: 16, alpha: 90 },
+                clanIcon: { show: true, x: 0, y: 6, xr: 0, yr: 6, h: 16, w: 16, alpha: 90 },
                 // Dispay format.
                 formatLeft: "{{vehicle}}<font face='Lucida Console' size='12'> <font color='{{c:kb}}'>{{kb:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:rating}}'>{{rating:3}}</font></font>",
                 formatRight: "<font face='Lucida Console' size='12'><font color='{{c:rating}}'>{{rating:3}}</font> <font color='{{c:xwn}}'>{{xwn}}</font> <font color='{{c:kb}}'>{{kb:3}}</font> </font>{{vehicle}}"
@@ -214,7 +214,7 @@ public class DefaultConfig
                 iconAlpha: 100,         // Side panel icons transparency. 0 - transparent, 100 - opaque.
                 removeSquadIcon: false, // Hide squad icon.
                 // Playes/clan icon parameters.
-                clanIcon: { show: true, x: 0, y: 6, xr: NaN, yr: NaN, h: 16, w: 16, alpha: 90 },
+                clanIcon: { show: true, x: 0, y: 6, xr: 0, yr: 6, h: 16, w: 16, alpha: 90 },
                 // Display options for icons of never seen enemies
                 enemySpottedMarker: {
                   enabled: false,
@@ -951,10 +951,10 @@ public class DefaultConfig
               }
             },*/
             iconset: {
-                battleLoading: "contour",
-                statisticForm: "contour",
-                playersPanel:  "contour",
-                vehicleMarker: "contour"
+                battleLoading: "contour/",
+                statisticForm: "contour/",
+                playersPanel:  "contour/",
+                vehicleMarker: "contour/"
             },
             consts: consts,
             vehicleNames: VehicleInfo.getVehicleNamesData()

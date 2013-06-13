@@ -13,11 +13,12 @@ import mx.managers.PopUpManager;
 
 import utils.Config;
 import utils.ConfigUtils;
+import utils.ConfigUtilsEditor;
 import utils.DefaultConfig;
 import utils.Defines;
-import utils.Utils;
 import utils.OTMConfigConverter;
 import utils.PatchedXMLDecoder;
+import utils.Utils;
 
 private var loadCounter:int;
 private var loadCache:Object;
@@ -88,7 +89,7 @@ private function onLoadComplete(e:Event):void
 private function CollectConfig(parts:Object):Object
 {
 	
-	for (var i in parts)
+	for (var i:String in parts)
 	{
 		if (parts[i].hasOwnProperty("configVersion"))
 		{
@@ -139,8 +140,11 @@ private function SaveConfig():void
 	fr.addEventListener(Event.COMPLETE, onFileSave);
 	fr.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
 	// Serialize and add UTF-8 BOM
-	var str:String = "\uFEFF/* Config was created in XVM Editor v" + utils.Defines.EDITOR_VERSION + " */\n" + 
-		JSONx.stringify(Config.s_config, null, false, sortFunction) + "\n";
+	var str:String = "\uFEFF/**\n" +
+		" * Config was created in XVM Editor v" + utils.Defines.EDITOR_VERSION + "\n" +
+		" * at " + (new Date()).toString() + "\n" +
+		" */\n" + 
+		JSONx.stringify(ConfigUtilsEditor.SimplifyConfig(Config.s_config), null, false, sortFunction) + "\n";
 	fr.save(str, "xvm.xc");
 }
 
