@@ -121,11 +121,11 @@
 
   // Minimap.
   // Миникарта.
-  "minimap": ${"minimap/minimap.xc":"minimap"},
+  "minimap": ${"minimap.xc":"minimap"},
 
   // Over-target markers.
   // Маркеры над танками.
-  "markers": ${"markers/markers.xc":"markers"},
+  "markers": ${"markers.xc":"markers"},
 
   // Color settings.
   // Настройки цветов.
