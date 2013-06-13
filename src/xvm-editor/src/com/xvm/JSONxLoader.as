@@ -8,6 +8,8 @@ package com.xvm
 
 import com.xvm.JSONx;
 
+import mx.resources.ResourceManager;
+
 public class JSONxLoader
 {
     public static function Deref(data:Object, level:int, file:Object, cache:Object):*
@@ -57,11 +59,12 @@ public class JSONxLoader
 		try
 		{
             if (cache[fn] == null)
-                throw { type: "NO_FILE", message: "file is missing: " + fn };
+                throw { type: "NO_FILE", message: ResourceManager.getInstance().getString("main", "FileIsMissing") + ": " + fn };
             var value:* = getValue(cache[fn], data.$ref.path);
             //Logger.add(data.$ref.path + ": " + String(value));
             if (value === undefined)
-                throw { type: "BAD_REF", message: "bad reference:\n    ${\"" + data.$ref.file + "\":\"" + data.$ref.path + "\"}" };
+                throw { type: "BAD_REF", message: ResourceManager.getInstance().getString("main", "BadReference") +
+					":\n    ${\"" + data.$ref.file + "\":\"" + data.$ref.path + "\"}" };
 
             // override referenced values
             //   "damageText": {

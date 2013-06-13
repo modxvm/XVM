@@ -276,11 +276,9 @@ public class XvmBase
         textField.multiline = true;
         textField.wordWrap = false;
 
-		textField.autoSize = cfg.font.align;
-		
-		textField.embedFonts = !cfg.font || !cfg.font.name || cfg.font.name == "$FieldFont";
+		textField.autoSize = cfg.font && cfg.font.align ? cfg.font.align : "center";
 
-        //textField.html = true;
+		textField.embedFonts = !cfg.font || !cfg.font.name || cfg.font.name == "$FieldFont";
 
         var style:StyleSheet = new StyleSheet();
         style.parseCSS(XvmHelper.createCSS(cfg.font,

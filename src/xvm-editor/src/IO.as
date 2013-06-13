@@ -62,14 +62,16 @@ private function onLoadComplete(e:Event):void
 
 		if (loadCounter > 0)
 			return;
-		
+
 		config = Utils.endsWith(".xml", fr.name.toLowerCase())
 			? OTMConfigConverter.convert((new PatchedXMLDecoder()).decode(loadCache[fr.name]))
 			: CollectConfig(loadCache);
+		if (config == null)
+			return;
 		config = ConfigUtils.FixConfig(config);
-		
+
 		loadCache = null;
-		
+
         if (!merge)
             onLoadComplete2(null);
         else
@@ -82,21 +84,29 @@ private function onLoadComplete(e:Event):void
     }
     catch (ex:Error)
     {
-        debug("ERROR: onLoadComplete(): " + ex.toString());
+        error(ex.toString(), "onLoadComplete()");
     }
 }
 
 private function CollectConfig(parts:Object):Object
 {
-	
+
 	for (var i:String in parts)
 	{
 		if (parts[i].hasOwnProperty("configVersion"))
 		{
-			return JSONxLoader.Deref(parts[i], 0, {f:i}, parts); 
+			try
+			{
+				return JSONxLoader.Deref(parts[i], 0, {f:i}, parts);
+			}
+			catch (ex:*)
+			{
+				error(ex.error.message, _("ErrorLoadingConfig"));
+				return null;
+			}
 		}
 	}
-	debug("Cannot find root config element (\"configVersion\" must present)");
+	error(_("NoRootElement"), "CollectConfig()");
 	return null;
 }
 
@@ -108,19 +118,20 @@ private function onLoadComplete2(e:Event):void
         {
             if (mergeDialog.modalResult != true)
             {
-                debug(_("Loaded Canceled"));
+                debug("Loading canceled");
                 return;
             }
             config = mergeDialog.config;
         }
         Config.s_config = ConfigUtils.MergeConfigs(config, merge ? Config.s_config : DefaultConfig.config, "def");
+        config = ConfigUtils.MergeConfigs(config, merge ? Config.s_config : DefaultConfig.config, "def");
         ConfigUtils.TuneupConfig();
         debug(_("ConfigurationLoaded"));
         RefreshCurrentPage();
     }
     catch (ex:Error)
     {
-        debug("ERROR: onLoadComplete2(): " + ex.toString());
+        error(ex.toString(), "onLoadComplete2()");
     }
     finally
     {
@@ -130,7 +141,7 @@ private function onLoadComplete2(e:Event):void
 
 private function onLoadError(e:IOErrorEvent):void
 {
-	debug(_("LoadFileError") + ": " + e.text);
+	error(e.text, _("LoadFileError"));
 }
 
 // SAVE
@@ -143,22 +154,22 @@ private function SaveConfig():void
 	var str:String = "\uFEFF/**\n" +
 		" * Config was created in XVM Editor v" + utils.Defines.EDITOR_VERSION + "\n" +
 		" * at " + (new Date()).toString() + "\n" +
-		" */\n" + 
+		" */\n" +
 		JSONx.stringify(ConfigUtilsEditor.SimplifyConfig(Config.s_config), null, false, sortFunction) + "\n";
 	fr.save(str, "xvm.xc");
 }
 
 private function sortFunction(a:String, b:String):int
 {
-	var an:int = sortElementsOrder.indexOf(a); 
-	var bn:int = sortElementsOrder.indexOf(b); 
+	var an:int = sortElementsOrder.indexOf(a);
+	var bn:int = sortElementsOrder.indexOf(b);
 	if (an >= 0 && bn == -1)
 		return -1;
 	if (bn >= 0 && an == -1)
 		return 1;
 	if (an >= 0 && bn >= 0)
 		return an < bn ? -1 : an > bn ? 1 : 0;
-	return a < b ? -1 : a > b ? 1 : 0; 
+	return a < b ? -1 : a > b ? 1 : 0;
 }
 
 private function onFileSave(e:Event):void
@@ -168,5 +179,5 @@ private function onFileSave(e:Event):void
 
 private function onSaveError(e:IOErrorEvent):void
 {
-	debug(_("SaveFileError") + ": " + e.text);
+	error(e.text, _("SaveFileError"));
 }

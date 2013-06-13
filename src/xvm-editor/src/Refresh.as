@@ -16,7 +16,7 @@ protected function RefreshCurrentPage():void
 
         var now: Date = new Date();
 
-        //debug(JSON.stringify(Config.s_config));
+        //debug(JSONx.stringify(Config.s_config));
 
         if (pg == pgCommon)
             RefreshCommonPage();
@@ -60,7 +60,7 @@ protected function RefreshCurrentPage():void
     }
     catch (ex:Error)
     {
-        debug("ERROR: RefreshCurrentPage(): " + ex.toString());
+        error(ex.toString(), "RefreshCurrentPage()");
     }
 }
 
@@ -88,7 +88,7 @@ private function RefreshCommonPage():void
     }
     catch (ex:Error)
     {
-        debug("ERROR: RefreshCommonPage(): " + ex.toString());
+        error(ex.toString(), "RefreshCommonPage()");
     }
 }
 
@@ -111,7 +111,7 @@ private function RefreshHangarPage():void
     }
     catch (ex:Error)
     {
-        debug("ERROR: RefreshHangarPage(): " + ex.toString());
+        error(ex.toString(), "RefreshHangarPage()");
     }
 }
 
@@ -136,7 +136,7 @@ private function RefreshBattlePage():void
     }
     catch (ex:Error)
     {
-        debug("ERROR: RefreshBattlePage(): " + ex.toString());
+        error(ex.toString(), "RefreshBattlePage()");
     }
 }
 
@@ -171,7 +171,7 @@ private function RefreshHitLogPage():void
     }
     catch (ex:Error)
     {
-        debug("ERROR: RefreshHitLogPage(): " + ex.toString());
+        error(ex.toString(), "RefreshHitLogPage()");
     }
 }
 
@@ -205,7 +205,7 @@ private function RefreshCaptureBarPage():void
     }
     catch (ex:Error)
     {
-        debug("ERROR: RefreshCaptureBarPage(): " + ex.toString());
+        error(ex.toString(), "RefreshCaptureBarPage()");
     }
 }
 
@@ -225,7 +225,7 @@ private function RefreshMinimapPage():void
     }
     catch (ex:Error)
     {
-        debug("ERROR: RefreshMinimapPage(): " + ex.toString());
+        error(ex.toString(), "RefreshMinimapPage()");
     }
 }
 
@@ -256,7 +256,7 @@ private function RefreshBattleLoadingPage():void
     }
     catch (ex:Error)
     {
-        debug("ERROR: RefreshBattleLoadingPage(): " + ex.toString());
+        error(ex.toString(), "RefreshBattleLoadingPage()");
     }
 }
 
@@ -286,7 +286,7 @@ private function RefreshStatisticFormPage():void
     }
     catch (ex:Error)
     {
-        debug("ERROR: RefreshStatisticFormPage(): " + ex.toString());
+        error(ex.toString(), "RefreshStatisticFormPage()");
     }
 }
 
@@ -331,7 +331,7 @@ private function RefreshPlayersPanelPage():void
     }
     catch (ex:Error)
     {
-        debug("ERROR: RefreshPlayersPanelPage(): " + ex.toString());
+        error(ex.toString(), "RefreshPlayersPanelPage()");
     }
 }
 
@@ -350,7 +350,7 @@ private function RefreshFinalStatisticPage():void
     }
     catch (ex:Error)
     {
-        debug("ERROR: RefreshFinalStatisticPage(): " + ex.toString());
+        error(ex.toString(), "RefreshFinalStatisticPage()");
     }
 }
 
@@ -581,7 +581,7 @@ private function RefreshColorsPage1():void
     }
     catch (ex:Error)
     {
-        debug("ERROR: RefreshColorsPage1(): " + ex.toString());
+        error(ex.toString(), "RefreshColorsPage1()");
     }
 }
 
@@ -618,7 +618,7 @@ private function RefreshColorsPage2():void
     }
     catch (ex:Error)
     {
-        debug("ERROR: RefreshColorsPage2(): " + ex.toString());
+        error(ex.toString(), "RefreshColorsPage2()");
     }
 }
 
@@ -634,7 +634,7 @@ private function RefreshTransparencyPage():void
     }
     catch (ex:Error)
     {
-        debug("ERROR: RefreshTransparencyPage(): " + ex.toString());
+        error(ex.toString(), "RefreshTransparencyPage()");
     }
 }
 
@@ -658,7 +658,7 @@ private function RefreshTextsPage():void
     }
     catch (ex:Error)
     {
-        debug("ERROR: RefreshTextsPage(): " + ex.toString());
+        error(ex.toString(), "RefreshTextsPage()");
     }
 }
 
@@ -677,7 +677,7 @@ private function RefreshMiscPage():void
     }
     catch (ex:Error)
     {
-        debug("ERROR: RefreshMiscPage(): " + ex.toString());
+        error(ex.toString(), "RefreshMiscPage()");
     }
 }
 
@@ -686,12 +686,11 @@ private function RefreshVehicleNamesPage():void
     debug("RefreshVehicleNamesPage()");
     try
     {
-//        if (pgVehicleNames.updateCompletePendingFlag)
-            p_vehicleNames.RefreshSource();
+        p_vehicleNames.RefreshSource();
     }
     catch (ex:Error)
     {
-        debug("ERROR: RefreshVehicleNamesPage(): " + ex.toString());
+        error(ex.toString(), "RefreshVehicleNamesPage()");
     }
 }
 
@@ -775,7 +774,7 @@ private function RefreshMarkersPage():void
     }
     catch (ex:Error)
     {
-        debug("ERROR: RefreshMarkersPage(): " + ex.toString());
+        error(ex.toString(), "RefreshMarkersPage()");
     }
 }
 
@@ -789,6 +788,6 @@ private function RefreshTextFields():void
     }
     catch (ex:Error)
     {
-        debug("ERROR: RefreshTextFields(): " + ex.toString());
+        error(ex.toString(), "RefreshTextFields()");
     }
 }

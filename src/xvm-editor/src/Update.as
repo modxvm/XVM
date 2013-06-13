@@ -13,7 +13,7 @@ protected function updateValue(event:ValueChangedEvent):void
 	{
 		if (!event.sender.config)
 		{
-			debug("ERROR: config is null for: " + event.sender.id);
+			error("config is null for: " + event.sender.id);
 			return;
 		}
 
@@ -24,7 +24,7 @@ protected function updateValue(event:ValueChangedEvent):void
 	}
 	catch (ex:Error)
 	{
-		debug("ERROR: updateValue(): " + ex.toString());
+		error(ex.toString(), "updateValue()");
 	}
 }
 
@@ -35,7 +35,7 @@ protected function updateMarkerValue(event:ValueChangedEvent):void
 	{
 		if (!event.sender.config)
 		{
-			debug("ERROR: config is null for: " + event.sender.id);
+			error("config is null for: " + event.sender.id);
 			return;
 		}
 
@@ -52,7 +52,7 @@ protected function updateMarkerValue(event:ValueChangedEvent):void
 	}
 	catch (ex:Error)
 	{
-		debug("ERROR: updateMarkerValue(): " + ex.toString());
+		error(ex.toString(), "updateMarkerValue()");
 	}
 }
 
@@ -75,7 +75,7 @@ protected function updateMarkerTextFieldValue(event:ValueChangedEvent):void
 	}
 	catch (ex:Error)
 	{
-		debug("ERROR: updateMarkerTextFieldValue(): " + ex.toString());
+		error(ex.toString(), "updateMarkerTextFieldValue()");
 	}
 }
 
@@ -126,14 +126,14 @@ protected function onSetDefaultValue(event:SetDefaultValueEvent):void
 
 			default:
 				if (!ConfigUtilsEditor.SetDefaultValue(path))
-					debug("config not found: " + path);
+					error("config not found: " + path);
 		}
         if (preview)
             preview.update();
 	}
 	catch (ex:Error)
 	{
-		debug("ERROR: onSetDefaultValue(): " + ex.toString());
+		error(ex.toString(), "onSetDefaultValue()");
 	}
 }
 
@@ -171,6 +171,6 @@ protected function onSetDefaultMarkerValue(event:SetDefaultValueEvent):void
 	}
 	catch (ex:Error)
 	{
-		debug("ERROR: onSetDefaultMarkerValue(): " + ex.toString());
+		error(ex.toString(), "onSetDefaultMarkerValue()");
 	}
 }

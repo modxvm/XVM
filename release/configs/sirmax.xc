@@ -228,6 +228,7 @@
               "name": "Rating marks",
               "x": 0, "y": -35,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
+              "font": { "name": "Symbol" },
               "format": ${"def.markersStat"}
             },
             {
@@ -385,6 +386,7 @@
               "name": "Rating marks",
               "x": 0, "y": -35,
               "shadow": { "alpha": 100, "color": "0x000000", "angle": 0, "strength": 150, "distance": 0, "size": 3 },
+              "font": { "name": "Symbol" },
               "format": ${"def.markersStat"}
             },
             {

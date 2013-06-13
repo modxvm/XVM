@@ -6,18 +6,21 @@ public class ConfigUtils
     /**
      * Recursive walt default config and merge with loaded values.
      */
-    public static function MergeConfigs(config, def, prefix: String)
+    /**
+     * Recursive walt default config and merge with loaded values.
+     */
+    public static function MergeConfigs(config:*, def:*, prefix: String = null):*
     {
         if (!prefix)
             prefix = "def";
-
+        
         switch (typeof def)
         {
             case 'object':
-                if (def instanceof Array)
+                if (def is Array)
                 {
                     // warning: arrays are not checked now
-                    return (config instanceof Array) ? config : def;
+                    return (config is Array) ? config : def;
                 }
                 if (def == null)
                     return (typeof config == 'string' || typeof config == 'number') ? config : null;
@@ -25,41 +28,42 @@ public class ConfigUtils
                 for (var name:String in def)
                 {
                     result[name] = config.hasOwnProperty(name)
-                       ? MergeConfigs(config[name], def[name], prefix + "." + name)
-                       : def[name];
+                        ? MergeConfigs(config[name], def[name], prefix + "." + name)
+                        : def[name];
                 }
                 return result;
-
+                
             case 'number':
                 if (!isNaN(parseFloat(config)))
                     return parseFloat(config);
                 if (typeof config == 'string')
                     return config;
                 return def;
-
+                
             case 'boolean':
                 if (typeof config == 'boolean')
                     return config;
                 if (typeof config == 'string')
                     return config.toLowerCase() == "true";
                 return def;
-
+                
             case 'string':
                 return (config == null || typeof config == 'string') ? config : def;
-
+                
             case 'undefined':
             case 'null':
                 return (typeof config == 'string' || typeof config == 'number') ? config : def;
-
+                
             default:
                 return def;
         }
     }
+    
 
     /**
      * Modify some parameters to be with correct format.
      */
-    public static function TuneupConfig()
+    public static function TuneupConfig():void
     {
         Config.s_config.battle.clanIconsFolder = Utils.fixPath(Config.s_config.battle.clanIconsFolder);
 

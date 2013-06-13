@@ -12,6 +12,8 @@
             
             import mx.events.FlexEvent;
             import mx.events.ListEvent;
+
+            import mx.utils.ObjectUtil;
             
             import utils.GraphicsUtil;
 
@@ -86,7 +88,7 @@
                 }
                 catch (ex:Error)
                 {
-                    throw new Error("PreviewComponent::update(): " + ex.toString());
+                    throw new Error("PreviewComponent::update(): " + ex.toString() + "\n" + ObjectUtil.toString(ex.getStackTrace()));
                 }
             }
 

@@ -2,21 +2,31 @@
 
 import mx.core.UIComponent;
 import mx.events.MenuEvent;
+import mx.controls.Alert;
 
 import utils.Config;
 import utils.ConfigUtils;
 import utils.DefaultConfig;
 import utils.Defines;
 
+public function error(str:String, title:String = ""):void
+{
+    if (title == "")
+        title = _("Error");
+    debug("ERROR: " + title + ": " + str);
+
+    var alert:Alert = Alert.show(str, title);
+}
+
 public function debug(str:String):void
 {
-	preview.taDebug.text += str + "\n";
+    preview.taDebug.text += str + "\n";
 }
 
 protected function createNewConfig():void
 {
-	Config.s_config = DefaultConfig.config;
-	ConfigUtils.TuneupConfig();
+    Config.s_config = DefaultConfig.config;
+    ConfigUtils.TuneupConfig();
     RefreshCurrentPage();
 }
 
