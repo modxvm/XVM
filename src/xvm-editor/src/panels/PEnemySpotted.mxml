@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<c:PanelComponent
+    xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:c="components.*"
+    title="{resourceManager.getString('panels', 'PEnemySpotted')}">
+    <fx:Script>
+        <![CDATA[
+            import utils.Macros;
+
+            [Bindable]
+            public var rootElementName:String;
+        ]]>
+    </fx:Script>
+
+    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'Enabled')}" labelWidth="180" id="v_enabled" config="playersPanel.enemySpottedMarker.enabled" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'XOffset')}" id="v_Xoffset" config="playersPanel.enemySpottedMarker.Xoffset" minimum="-100" maximum="100" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'YOffset')}" id="v_Yoffset" config="playersPanel.enemySpottedMarker.Yoffset" minimum="-50" maximum="50" change="onChange(event)"/>
+    <s:Label text="{resourceManager.getString('panels', 'exceptArty')}:" width="100%" height="20" verticalAlign="middle" backgroundColor="0xDDDDDD" paddingLeft="5"/>
+    <c:LabeledTextInput label="{resourceManager.getString('panels', 'neverSeen')}" id="v_format_neverSeen" config="playersPanel.enemySpottedMarker.format.neverSeen" preview="true" change="onChange(event)"/>
+    <c:LabeledTextInput label="{resourceManager.getString('panels', 'lost')}" id="v_format_lost" config="playersPanel.enemySpottedMarker.format.lost" preview="true" change="onChange(event)"/>
+    <c:LabeledTextInput label="{resourceManager.getString('panels', 'revealed')}" id="v_format_revealed" config="playersPanel.enemySpottedMarker.format.revealed" preview="true" change="onChange(event)"/>
+    <c:LabeledTextInput label="{resourceManager.getString('panels', 'dead')}" id="v_format_dead" config="playersPanel.enemySpottedMarker.format.dead" preview="true" change="onChange(event)"/>
+    <s:Label text="{resourceManager.getString('panels', 'arty')}:" width="100%" height="20" verticalAlign="middle" backgroundColor="0xDDDDDD" paddingLeft="5"/>
+    <c:LabeledTextInput label="{resourceManager.getString('panels', 'neverSeen')}" id="v_format_artillery_neverSeen" config="playersPanel.enemySpottedMarker.format.artillery.neverSeen" preview="true" change="onChange(event)"/>
+    <c:LabeledTextInput label="{resourceManager.getString('panels', 'lost')}" id="v_format_artillery_lost" config="playersPanel.enemySpottedMarker.format.artillery.lost" preview="true" change="onChange(event)"/>
+    <c:LabeledTextInput label="{resourceManager.getString('panels', 'revealed')}" id="v_format_artillery_revealed" config="playersPanel.enemySpottedMarker.format.artillery.revealed" preview="true" change="onChange(event)"/>
+    <c:LabeledTextInput label="{resourceManager.getString('panels', 'dead')}" id="v_format_artillery_dead" config="playersPanel.enemySpottedMarker.format.artillery.dead" preview="true" change="onChange(event)"/>
+</c:PanelComponent>

@@ -89,11 +89,18 @@
                         </s:VGroup>
                     </s:Scroller>
                 </s:NavigatorContent>
+                <s:NavigatorContent label="{_('loginPage')}" width="100%" height="100%" id="pgLogin">
+                    <s:Scroller x="0" y="0" width="420" height="100%">
+                        <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1" creationComplete="{RefreshCurrentPage()}">
+                            <p:PPingServers id="p_pingServers_login" config="login.pingServers" rootElementName="login" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+                        </s:VGroup>
+                    </s:Scroller>
+                </s:NavigatorContent>
                 <s:NavigatorContent label="{_('hangarPage')}" width="100%" height="100%" id="pgHangar">
                     <s:Scroller x="0" y="0" width="420" height="100%">
                         <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1" creationComplete="{RefreshCurrentPage()}">
-                            <p:PUserInfo id="p_userInfo" config="userInfo" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
-                            <p:PSquad id="p_squad" config="squad" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+                            <p:PHangar id="p_hangar" config="hangar" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+                            <p:PPingServers id="p_pingServers_hangar" config="hangar.pingServers" rootElementName="hangar" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                         </s:VGroup>
                     </s:Scroller>
                 </s:NavigatorContent>
@@ -223,11 +230,18 @@
                         </s:VGroup>
                     </s:Scroller>
                 </s:NavigatorContent>
-                <s:NavigatorContent label="{_('PlayersPanel')}" width="100%" height="100%" id="pgPlayersPanel">
+                <s:NavigatorContent label="{_('PlayersPanel1')}" width="100%" height="100%" id="pgPlayersPanel1">
                     <s:Scroller x="0" y="0" width="420" height="100%">
                         <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1" creationComplete="{RefreshCurrentPage()}">
                             <p:PPlayersPanel id="p_playersPanel" config="playersPanel" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                             <p:PPlayersPanelIcons id="p_playersPanel_icons" config="playersPanel.clanIcon" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+                            <p:PEnemySpotted id="p_playersPanel_enemySpotted" config="playersPanel.enemySpottedMarker" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+                        </s:VGroup>
+                    </s:Scroller>
+                </s:NavigatorContent>
+                <s:NavigatorContent label="{_('PlayersPanel2')}" width="100%" height="100%" id="pgPlayersPanel2">
+                    <s:Scroller x="0" y="0" width="420" height="100%">
+                        <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1" creationComplete="{RefreshCurrentPage()}">
                             <p:PPlayersPanelMedium id="p_playersPanel_medium" config="playersPanel.medium" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                             <p:PPlayersPanelMedium2 id="p_playersPanel_medium2" config="playersPanel.medium2" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                             <p:PPlayersPanelLarge id="p_playersPanel_large" config="playersPanel.large" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>

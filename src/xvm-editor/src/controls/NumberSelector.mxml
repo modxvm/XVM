@@ -19,6 +19,7 @@
             [Bindable]
             public var stepSize:Number = 1;
 
+            // TODO
             [Bindable]
             public var isLogarithmic:Boolean = false;
 
@@ -42,7 +43,7 @@
             }
         ]]>
     </fx:Script>
-    <s:NumericStepper id="stepper" width="52" height="{height}"
+    <s:NumericStepper id="stepper" width="{maximum &lt; 10000 ? 52 : 60}" height="{height}"
         minimum="{minimum}" maximum="{maximum}" snapInterval="{stepSize}" stepSize="{stepSize}"
         valueParseFunction="parseValue"
         value="{value}" change="onChange(event)"/>

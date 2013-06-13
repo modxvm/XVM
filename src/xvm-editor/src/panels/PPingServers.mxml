@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<c:PanelComponent
+    xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:c="components.*"
+    title="{resourceManager.getString('panels', 'PPingServers')}">
+    <fx:Script>
+        <![CDATA[
+            import utils.Macros;
+
+            [Bindable]
+            public var rootElementName:String;
+        ]]>
+    </fx:Script>
+
+    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'Enabled')}" labelWidth="180" id="v_enabled" config="{rootElementName}.pingServers.enabled" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'updateInterval')}" labelWidth="160" id="v_updateInterval" config="{rootElementName}.pingServers.updateInterval" minimum="100" maximum="60000" stepSize="100" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'XPosition')}" labelWidth="160" id="v_x" config="{rootElementName}.pingServers.x" minimum="-999" maximum="2999" sliderVisible="false" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'YPosition')}" labelWidth="160" id="v_y" config="{rootElementName}.pingServers.y" minimum="-999" maximum="2999" sliderVisible="false" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Transparency')}" labelWidth="160" id="v_alpha" config="{rootElementName}.pingServers.alpha" minimum="0" maximum="100" change="onChange(event)"/>
+    <c:LabeledTextInput label="{resourceManager.getString('panels', 'delimiter')}" labelWidth="260" id="v_delimiter" config="{rootElementName}.pingServers.delimiter" preview="true" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'maxRows')}" labelWidth="260" id="v_maxRows" config="{rootElementName}.pingServers.maxRows" minimum="1" maximum="10" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'columnGap')}" labelWidth="260" id="v_columnGap" config="{rootElementName}.pingServers.columnGap" minimum="-10" maximum="30" change="onChange(event)"/>
+
+    <s:Label text="{resourceManager.getString('panels', 'fontStyle')}:" width="100%" height="20" fontWeight="bold" paddingLeft="5" verticalAlign="middle" backgroundColor="0xCCCCCC"/>
+    <c:LabeledFontSelector label="{resourceManager.getString('panels', 'FontName')}" id="v_fontStyle_name" config="{rootElementName}.pingServers.fontStyle.name" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Size')}" id="v_fontStyle_size" config="{rootElementName}.pingServers.fontStyle.size" minimum="0" maximum="50" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'Bold')}" id="v_fontStyle_bold" config="{rootElementName}.pingServers.fontStyle.bold" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'Italic')}" id="v_fontStyle_italic" config="{rootElementName}.pingServers.fontStyle.italic" change="onChange(event)"/>
+    <s:Label text="{resourceManager.getString('panels', 'fontStyleColors')}:" width="100%" height="20" verticalAlign="middle" backgroundColor="0xDDDDDD" paddingLeft="5"/>
+    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'color_great')}" width="230" id="v_fontStyle_color_great" config="{rootElementName}.pingServers.fontStyle.color.great" change="onChange(event)"/>
+    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'color_good')}" width="230" id="v_fontStyle_color_good" config="{rootElementName}.pingServers.fontStyle.color.good" change="onChange(event)"/>
+    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'color_poor')}" width="230" id="v_fontStyle_color_poor" config="{rootElementName}.pingServers.fontStyle.color.poor" change="onChange(event)"/>
+    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'color_bad')}" width="230" id="v_fontStyle_color_bad" config="{rootElementName}.pingServers.fontStyle.color.bad" change="onChange(event)"/>
+    <s:Label text="{resourceManager.getString('panels', 'threshold')}:" width="100%" height="20" verticalAlign="middle" backgroundColor="0xDDDDDD" paddingLeft="5"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'threshold_great')}" labelWidth="215" id="v_threshold_great" config="{rootElementName}.pingServers.threshold.great" minimum="1" maximum="500" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'threshold_good')}" labelWidth="215" id="v_threshold_good" config="{rootElementName}.pingServers.threshold.good" minimum="1" maximum="500" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'threshold_poor')}" labelWidth="215" id="v_threshold_poor" config="{rootElementName}.pingServers.threshold.poor" minimum="1" maximum="500" change="onChange(event)"/>
+    <s:Label text="{resourceManager.getString('panels', 'Shadow')}:" width="100%" height="20" fontWeight="bold" paddingLeft="5" verticalAlign="middle" backgroundColor="0xCCCCCC"/>
+    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'Enabled')}" id="v_shadow_enabled" config="{rootElementName}.pingServers.shadow.enabled" change="onChange(event)"/>
+    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'Color')}" width="320" id="v_shadow_color" config="{rootElementName}.pingServers.shadow.color" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Distance')}" id="v_shadow_distance" config="{rootElementName}.pingServers.shadow.distance" minimum="0" maximum="10" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Angle')}" id="v_shadow_angle" config="{rootElementName}.pingServers.shadow.angle" minimum="0" maximum="359" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Transparency')}" id="v_shadow_alpha" config="{rootElementName}.pingServers.shadow.alpha" minimum="0" maximum="100" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Size')}" id="v_shadow_blur" config="{rootElementName}.pingServers.shadow.blur" minimum="0" maximum="10" stepSize="0.1" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Strength')}" id="v_shadow_strength" config="{rootElementName}.pingServers.shadow.strength" minimum="0" maximum="1000" isLogarithmic="true" change="onChange(event)"/>
+</c:PanelComponent>

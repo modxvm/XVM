@@ -1,5 +1,6 @@
 ﻿import components.DefaultComponent;
 
+import utils.Config;
 import utils.ConfigUtilsEditor;
 import utils.DefaultConfig;
 import utils.Utils;
@@ -20,6 +21,8 @@ protected function RefreshCurrentPage():void
 
         if (pg == pgCommon)
             RefreshCommonPage();
+        else if (pg == pgLogin)
+            RefreshLoginPage();
         else if (pg == pgHangar)
             RefreshHangarPage();
         if (pg == pgBattle)
@@ -34,8 +37,10 @@ protected function RefreshCurrentPage():void
             RefreshBattleLoadingPage();
         else if (pg == pgStatisticForm)
             RefreshStatisticFormPage();
-        else if (pg == pgPlayersPanel)
-            RefreshPlayersPanelPage();
+        else if (pg == pgPlayersPanel1)
+            RefreshPlayersPanel1Page();
+        else if (pg == pgPlayersPanel2)
+            RefreshPlayersPanel2Page();
         else if (pg == pgFinalStatistic)
             RefreshFinalStatisticPage();
         else if (pg == pgColors1)
@@ -92,6 +97,47 @@ private function RefreshCommonPage():void
     }
 }
 
+private function RefreshLoginPage():void
+{
+    debug("RefreshLoginPage()");
+    try
+    {
+        var section:*;
+
+        section = Config.s_config.login.pingServers;
+        this.p_pingServers_login.v_enabled.value = section.enabled;
+        this.p_pingServers_login.v_updateInterval.value = section.updateInterval;
+        this.p_pingServers_login.v_x.value = section.x;
+        this.p_pingServers_login.v_y.value = section.y;
+        this.p_pingServers_login.v_alpha.value = section.alpha;
+        this.p_pingServers_login.v_delimiter.value = section.delimiter;
+        this.p_pingServers_login.v_maxRows.value = section.maxRows;
+        this.p_pingServers_login.v_columnGap.value = section.columnGap;
+        this.p_pingServers_login.v_fontStyle_name.value = section.fontStyle.name;
+        this.p_pingServers_login.v_fontStyle_size.value = section.fontStyle.size;
+        this.p_pingServers_login.v_fontStyle_bold.value = section.fontStyle.bold;
+        this.p_pingServers_login.v_fontStyle_italic.value = section.fontStyle.italic;
+        this.p_pingServers_login.v_fontStyle_color_great.value = section.fontStyle.color.great;
+        this.p_pingServers_login.v_fontStyle_color_good.value = section.fontStyle.color.good;
+        this.p_pingServers_login.v_fontStyle_color_poor.value = section.fontStyle.color.poor;
+        this.p_pingServers_login.v_fontStyle_color_bad.value = section.fontStyle.color.bad;
+        this.p_pingServers_login.v_threshold_great.value = section.threshold.great;
+        this.p_pingServers_login.v_threshold_good.value = section.threshold.good;
+        this.p_pingServers_login.v_threshold_poor.value = section.threshold.poor;
+        this.p_pingServers_login.v_shadow_enabled.value = section.shadow.enabled;
+        this.p_pingServers_login.v_shadow_color.value = section.shadow.color;
+        this.p_pingServers_login.v_shadow_distance.value = section.shadow.distance;
+        this.p_pingServers_login.v_shadow_angle.value = section.shadow.angle;
+        this.p_pingServers_login.v_shadow_alpha.value = section.shadow.alpha;
+        this.p_pingServers_login.v_shadow_blur.value = section.shadow.blur;
+        this.p_pingServers_login.v_shadow_strength.value = section.shadow.strength;
+    }
+    catch (ex:Error)
+    {
+        error(ex.toString(), "RefreshLoginPage()");
+    }
+}
+
 private function RefreshHangarPage():void
 {
     debug("RefreshHangarPage()");
@@ -99,15 +145,46 @@ private function RefreshHangarPage():void
     {
         var section:*;
 
-        section = Config.s_config.squad;
-        this.p_squad.v_enabled.value = section.enabled;
-        this.p_squad.v_romanNumbers.value = section.romanNumbers;
-        this.p_squad.v_showClan.value = section.showClan;
-        this.p_squad.v_leftLvlBorder.value = section.leftLvlBorder;
-        this.p_squad.v_rightLvlBorder.value = section.rightLvlBorder;
+        section = Config.s_config.hangar;
+        this.p_hangar.v_hideTutorial.value = section.hideTutorial;
 
         section = Config.s_config.userInfo;
-        this.p_userInfo.v_showEColumn.value = section.showEColumn;
+        this.p_hangar.v_showEColumn.value = section.showEColumn;
+
+        section = Config.s_config.squad;
+        this.p_hangar.v_enabled.value = section.enabled;
+        this.p_hangar.v_romanNumbers.value = section.romanNumbers;
+        this.p_hangar.v_showClan.value = section.showClan;
+        this.p_hangar.v_leftLvlBorder.value = section.leftLvlBorder;
+        this.p_hangar.v_rightLvlBorder.value = section.rightLvlBorder;
+
+        section = Config.s_config.hangar.pingServers;
+        this.p_pingServers_hangar.v_enabled.value = section.enabled;
+        this.p_pingServers_hangar.v_updateInterval.value = section.updateInterval;
+        this.p_pingServers_hangar.v_x.value = section.x;
+        this.p_pingServers_hangar.v_y.value = section.y;
+        this.p_pingServers_hangar.v_alpha.value = section.alpha;
+        this.p_pingServers_hangar.v_delimiter.value = section.delimiter;
+        this.p_pingServers_hangar.v_maxRows.value = section.maxRows;
+        this.p_pingServers_hangar.v_columnGap.value = section.columnGap;
+        this.p_pingServers_hangar.v_fontStyle_name.value = section.fontStyle.name;
+        this.p_pingServers_hangar.v_fontStyle_size.value = section.fontStyle.size;
+        this.p_pingServers_hangar.v_fontStyle_bold.value = section.fontStyle.bold;
+        this.p_pingServers_hangar.v_fontStyle_italic.value = section.fontStyle.italic;
+        this.p_pingServers_hangar.v_fontStyle_color_great.value = section.fontStyle.color.great;
+        this.p_pingServers_hangar.v_fontStyle_color_good.value = section.fontStyle.color.good;
+        this.p_pingServers_hangar.v_fontStyle_color_poor.value = section.fontStyle.color.poor;
+        this.p_pingServers_hangar.v_fontStyle_color_bad.value = section.fontStyle.color.bad;
+        this.p_pingServers_hangar.v_threshold_great.value = section.threshold.great;
+        this.p_pingServers_hangar.v_threshold_good.value = section.threshold.good;
+        this.p_pingServers_hangar.v_threshold_poor.value = section.threshold.poor;
+        this.p_pingServers_hangar.v_shadow_enabled.value = section.shadow.enabled;
+        this.p_pingServers_hangar.v_shadow_color.value = section.shadow.color;
+        this.p_pingServers_hangar.v_shadow_distance.value = section.shadow.distance;
+        this.p_pingServers_hangar.v_shadow_angle.value = section.shadow.angle;
+        this.p_pingServers_hangar.v_shadow_alpha.value = section.shadow.alpha;
+        this.p_pingServers_hangar.v_shadow_blur.value = section.shadow.blur;
+        this.p_pingServers_hangar.v_shadow_strength.value = section.shadow.strength;
     }
     catch (ex:Error)
     {
@@ -290,9 +367,9 @@ private function RefreshStatisticFormPage():void
     }
 }
 
-private function RefreshPlayersPanelPage():void
+private function RefreshPlayersPanel1Page():void
 {
-    debug("RefreshPlayersPanelPage()");
+    debug("RefreshPlayersPanel1Page()");
     try
     {
         var section:*;
@@ -311,6 +388,32 @@ private function RefreshPlayersPanelPage():void
         this.p_playersPanel_icons.v_w.value = section.w;
         this.p_playersPanel_icons.v_h.value = section.h;
         this.p_playersPanel_icons.v_alpha.value = section.alpha;
+
+        section = Config.s_config.playersPanel.enemySpottedMarker;
+        this.p_playersPanel_enemySpotted.v_enabled.value = section.enabled;
+        this.p_playersPanel_enemySpotted.v_Xoffset.value = section.Xoffset;
+        this.p_playersPanel_enemySpotted.v_Yoffset.value = section.Yoffset;
+        this.p_playersPanel_enemySpotted.v_format_neverSeen.value = section.format.neverSeen;
+        this.p_playersPanel_enemySpotted.v_format_lost.value = section.format.lost; 
+        this.p_playersPanel_enemySpotted.v_format_revealed.value = section.format.revealed;
+        this.p_playersPanel_enemySpotted.v_format_dead.value = section.format.dead;
+        this.p_playersPanel_enemySpotted.v_format_artillery_neverSeen.value = section.format.artillery.neverSeen;
+        this.p_playersPanel_enemySpotted.v_format_artillery_lost.value = section.format.artillery.lost;
+        this.p_playersPanel_enemySpotted.v_format_artillery_revealed.value = section.format.artillery.revealed;
+        this.p_playersPanel_enemySpotted.v_format_artillery_dead.value = section.format.artillery.dead;
+    }
+    catch (ex:Error)
+    {
+        error(ex.toString(), "RefreshPlayersPanel1Page()");
+    }
+}
+
+private function RefreshPlayersPanel2Page():void
+{
+    debug("RefreshPlayersPanel2Page()");
+    try
+    {
+        var section:*;
 
         section = Config.s_config.playersPanel.medium;
         this.p_playersPanel_medium.v_width.value = section.width;
@@ -331,7 +434,7 @@ private function RefreshPlayersPanelPage():void
     }
     catch (ex:Error)
     {
-        error(ex.toString(), "RefreshPlayersPanelPage()");
+        error(ex.toString(), "RefreshPlayersPanel2Page()");
     }
 }
 
