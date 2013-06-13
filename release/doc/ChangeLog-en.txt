@@ -1,4 +1,6 @@
+XVM-4.0.0-test5:
   * fixed hpLeft work with standard markers enabled
+  * ability to set colors for vehicle type markers (macros for dynamic colors can be used)
 
 XVM-4.0.0-test4:
   * adaptation to WoT 0.8.6.CT2
