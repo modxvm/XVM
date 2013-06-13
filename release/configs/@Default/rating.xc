@@ -12,12 +12,12 @@
     "enableUserInfoStatistics": true,
     // true - Enable statistics in the company window.
     // true - включить отображение статистики при наборе роты.
-    "enableCompanyStatistics": true
+    "enableCompanyStatistics": true,
     // true - Enable downloading of data on opponents in the "fog of war".
     // true - включить загрузку данных по противникам в "тумане войны".
     "loadEnemyStatsInFogOfWar": true,
     // true - Enable saving statistics to "xvm-stat.log" file.
     // true - включить сохранение статистики в файл "xvm-stat.log".
-    "enableStatisticsLog": false,
+    "enableStatisticsLog": false
   }
 }
