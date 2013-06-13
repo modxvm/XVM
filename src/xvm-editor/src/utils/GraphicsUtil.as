@@ -47,6 +47,19 @@ public class GraphicsUtil
         }
     }
 
+    // require 2-colored black and white source image (mask).
+    public static function colorize(item:Object, col:Number, multiplicator:Number = 1):void
+    {
+        var tr:flash.geom.ColorTransform = new flash.geom.ColorTransform();
+        tr.redMultiplier = ((col >> 16) & 0xFF) / 255 * multiplicator;
+        tr.greenMultiplier = ((col >> 8) & 0xFF) / 255 * multiplicator;
+        tr.blueMultiplier = (col & 0xFF) / 255 * multiplicator;
+        tr.redOffset = 0;
+        tr.greenOffset = 0;
+        tr.blueOffset = 0;
+        item.transform.colorTransform = tr;
+    }
+
     public static function brightenColor(hexColor: Number, percent: Number): Number
     {
         if (isNaN(percent))

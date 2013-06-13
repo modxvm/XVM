@@ -10,7 +10,7 @@ import com.xvm.JSONx;
 
 public class JSONxLoader
 {
-    public static function Deref(data:Object, level:int, file:Object, cache:Object)
+    public static function Deref(data:Object, level:int, file:Object, cache:Object):*
     {
         //Logger.addObject(data, "Deref", 2);
 
@@ -22,17 +22,14 @@ public class JSONxLoader
             return null;
 
         // scalar
-        if (typeof data.toString == 'undefined')
+        if (typeof data != "object")
             return data;
 
-		if (typeof data == 'string')
-			return data;
-		
         // array
-        if (data instanceof Array) // array
+        if (data is Array) // array
         {
-            var len = data.length;
-            for (var i = 0; i < len; ++i)
+            var len:int = data.length;
+            for (var i:int = 0; i < len; ++i)
                 data[i] = Deref(data[i], level + 1, file, cache);
             return data;
         }
@@ -40,9 +37,9 @@ public class JSONxLoader
         // object
         if (data.$ref == null)
         {
-            for (var i in data)
+            for (var name:String in data)
             {
-                data[i] = Deref(data[i], level + 1, file, cache);
+                data[name] = Deref(data[name], level + 1, file, cache);
                 //Logger.addObject(data[i], i, 2);
             }
             return data;
@@ -53,12 +50,7 @@ public class JSONxLoader
 
         //Logger.addObject(data, "Deref[" + level + "]", 2);
 
-        var dirName = file.d || "";
-        var fileName = file.f || "";
-        var fn = dirName + (data.$ref.file || fileName);
-        var fileArray:Array = fn.split("\\").join("/").split("/");
-        fileName = fileArray.pop();
-        dirName = fileArray.length > 0 ? fileArray.join("/") + "/" : "";
+        var fn:String = data.$ref.file || file.f || "";
 
         //Logger.add("fn: " + fn);
 
@@ -66,7 +58,7 @@ public class JSONxLoader
 		{
             if (cache[fn] == null)
                 throw { type: "NO_FILE", message: "file is missing: " + fn };
-            var value = getValue(cache[fn], data.$ref.path);
+            var value:* = getValue(cache[fn], data.$ref.path);
             //Logger.add(data.$ref.path + ": " + String(value));
             if (value === undefined)
                 throw { type: "BAD_REF", message: "bad reference:\n    ${\"" + data.$ref.file + "\":\"" + data.$ref.path + "\"}" };
@@ -77,17 +69,17 @@ public class JSONxLoader
             //     "damageMessage": "all {{dmg}}"
             //    }
 
-            for (var i in data)
+            for (var nm:String in data)
             {
-                if (i != "$ref")
-                    value[i] = data[i];
+                if (nm != "$ref")
+                    value[nm] = data[nm];
             }
 
             // deref result
-            data = Deref(value, level + 1, { d:dirName, f:fileName }, cache );
+            data = Deref(value, level + 1, { d:"", f:fn }, cache );
             //Logger.addObject(data);
         }
-        catch (ex)
+        catch (ex:Object)
         {
             throw ex.error ? ex : { error: ex, filename: fn };
         }
@@ -95,7 +87,7 @@ public class JSONxLoader
         return data;
     }
 
-    private static function getValue(obj:Object, path: String)
+    private static function getValue(obj:*, path: String):*
     {
         //Logger.add("getValue: " + path);
 
@@ -106,7 +98,7 @@ public class JSONxLoader
             return obj;
 
         var p: Array = path.split("."); // "path.to.value"
-        var o = obj;
+        var o:* = obj;
         var p_len:Number = p.length;
         for (var i:Number = 0; i < p_len; ++i)
         {

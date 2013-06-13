@@ -93,7 +93,7 @@ private function CollectConfig(parts:Object):Object
 	{
 		if (parts[i].hasOwnProperty("configVersion"))
 		{
-			return JSONxLoader.Deref(parts[i], 0, {}, parts); 
+			return JSONxLoader.Deref(parts[i], 0, {f:i}, parts); 
 		}
 	}
 	debug("Cannot find root config element (\"configVersion\" must present)");
