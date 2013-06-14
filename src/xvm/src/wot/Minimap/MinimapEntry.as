@@ -130,7 +130,7 @@ class wot.Minimap.MinimapEntry
         base.invalidate();
         colorizeMarker();
     }
-    
+
     // -- Private
 
     private function colorizeMarker()
@@ -143,10 +143,10 @@ class wot.Minimap.MinimapEntry
 
         if (wrapper.entryName == "control")
             return;
-        
+
         if (wrapper.m_type == "player" && wrapper.entryName == "postmortemCamera")
             return;
-        
+
         var color = null;
         if (Config.s_config.battle.useStandardMarkers)
         {
@@ -167,7 +167,10 @@ class wot.Minimap.MinimapEntry
         }
 
         if (color != null)
-            GraphicsUtil.colorize(wrapper.player || wrapper.teamPoint, color, wrapper.player ? 0.85 : 0.8);
+        {
+            GraphicsUtil.colorize(wrapper.player || wrapper.teamPoint, color,
+                wrapper.player ? Config.s_config.consts.VM_COEFF_MM_PLAYER : Config.s_config.consts.VM_COEFF_MM_BASE); // darker to improve appearance
+        }
     }
 
     private function initExtendedBehaviour():Void

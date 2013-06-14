@@ -70,7 +70,8 @@ class wot.battle.FragCorrelation
             ? net.wargaming.managers.ColorSchemeManager.instance.getRGB("vm_" + type)
             : ColorsManager.getSystemColor(type, false);
 
-        GraphicsUtil.colorize(renderer.marker, color, 0.9); // 10% darker to improve appearance
+        GraphicsUtil.colorize(renderer.marker, color,
+            Config.s_config.consts.VM_COEFF_TBP); // darker to improve appearance
         //Logger.addObject(arguments[0], color, 1);
         return renderer;
     }

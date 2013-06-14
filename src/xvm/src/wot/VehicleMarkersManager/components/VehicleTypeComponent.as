@@ -1,3 +1,4 @@
+import com.xvm.Config;
 import com.xvm.ColorsManager;
 import com.xvm.GraphicsUtil;
 import wot.VehicleMarkersManager.ErrorHandler;
@@ -134,6 +135,7 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
         proxy.marker._y = cfg.y //* cfg.maxScale / 100;
         proxy.marker._alpha = proxy.formatDynamicAlpha(cfg.alpha);
         // filters are not applicable to the MovieClip in Scaleform. Only ColorTransform can be used.
-        GraphicsUtil.colorize(proxy.marker, proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.color)), 0.8); // 20% darker to improve appearance
+        GraphicsUtil.colorize(proxy.marker, proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.color)),
+            Config.s_config.consts.VM_COEFF_VMM); // darker to improve appearance
     }
 }
