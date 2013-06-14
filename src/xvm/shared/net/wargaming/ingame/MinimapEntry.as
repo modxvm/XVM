@@ -9,6 +9,7 @@ intrinsic class net.wargaming.ingame.MinimapEntry extends UIComponent
     /////////////////////////////////////////////////////////////////
 
     var markMC:MovieClip;
+    var player:MovieClip;
     var entryName; /** ally/enemy/squad/"" */
     var isPostmortem;
     var isDeadPermanent;

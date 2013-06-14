@@ -167,7 +167,7 @@ class wot.Minimap.MinimapEntry
         }
 
         if (color != null)
-            GraphicsUtil.colorize(wrapper, color, 0.8);
+            GraphicsUtil.colorize(wrapper.player, color, 0.85);
     }
 
     private function initExtendedBehaviour():Void
