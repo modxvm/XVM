@@ -6,6 +6,9 @@
       http://www.koreanrandom.com/forum/topic/4643-
 ******************************************************************************/
 
+// версия скрипта
+var script_version = "8.6";
+
 // массив названий секций
 var sections = [    // порядок секций лучше не менять
                     '"login"',
@@ -108,26 +111,20 @@ for ( var j = 0; j < sections.length; j++) {
     // получаем название секции без кавычек
     var section = sections[j].substring(0, sections[j].length-1);
     section = section.substring(1);
-    // если секции миникарты или маркеров, то надо создавать под них папки
-    var subfolder = "";
-    if (section == "minimap" || section == "markers") {
-        subfolder = section+"\\";
-        fso.CreateFolder(path+author+"\\"+section);
-    }
     // создаем файл для записи секции
     if (section == "userInfo")
         section = "hangar";
     if (section == "fragCorrelation" || section == "expertPanel")
         section = "battle";
-    var file_out = path+author+"\\"+subfolder+section+".xc";
+    var file_out = path+author+"\\"+section+".xc";
+    var startString = "{";
+    // если файлы hangar.xc или battle.xc уже существуют, то в них надо удалить концовку и дописывать новую секцию
     if ((section == "hangar" || section == "battle") && fso.FileExists(file_out)) {
             delStrings(file_out);
-            var fout=fso.OpenTextFile(file_out,8,true,false);
-            fout.WriteLine("  },");
-    } else {
-        fout=fso.OpenTextFile(file_out,8,true,false);
-        fout.WriteLine("{");
+            startString = "  },";
     }
+    fout=fso.OpenTextFile(file_out,8,true,false);
+    fout.WriteLine(startString);
     // записываем комментарии, предшествующие секции
     for (var k = numberComments(i); k > 0; k--)
       fout.WriteLine(inputConfig[i-k]);
@@ -144,11 +141,8 @@ for ( var j = 0; j < sections.length; j++) {
     fout.WriteLine("  }");
     fout.WriteLine("}");
     fout.Close();
-    // проверяем, надо ли записывать ссылку на секцию с учетом подпапки
-    if (subfolder != "")
-        subfolder=subfolder.substring(0, subfolder.length-1)+"/";
     // создаем строку для записи в главный файл конфига подстановки вместо секции
-    input_string = "  "+sections[j]+": ${\""+subfolder+section+".xc\""+":"+sections[j]+"}";
+    input_string = "  "+sections[j]+": ${\""+section+".xc\""+":"+sections[j]+"}";
     // если секция не последняя в конфиге, надо добавить запятую
     if (inputConfig[i].indexOf(",") != -1)
         input_string = input_string + ",";
@@ -174,7 +168,7 @@ fout.Close();
 /******************************************************************************
                Секция миникарты
 ******************************************************************************/
-if (fso.FileExists(path+author+"\\minimap\\minimap.xc")) {
+if (fso.FileExists(path+author+"\\minimap.xc")) {
     // массив названий секций миникарты
     sections = [    // порядок секций лучше не менять
                         '"labels"',
@@ -183,7 +177,7 @@ if (fso.FileExists(path+author+"\\minimap\\minimap.xc")) {
                 ];
     // массив для хранения исходного конфига
     inputConfig = new Array();
-    finput=fso.OpenTextFile(path+author+"\\minimap\\minimap.xc",1,false,false);
+    finput=fso.OpenTextFile(path+author+"\\minimap.xc",1,false,false);
     i = 0;
 
     // считываем конфиг в массив
@@ -205,77 +199,6 @@ if (fso.FileExists(path+author+"\\minimap\\minimap.xc")) {
         // получаем название секции без кавычек
         section = sections[j].substring(0, sections[j].length-1);
         section = "minimap"+section.charAt(1).toUpperCase()+section.substring(2);
-        // создаем файл для записи секции
-        file_out = path+author+"\\minimap\\"+section+".xc";
-        fout=fso.OpenTextFile(file_out,2,true,false);
-        fout.WriteLine("{");
-        // записываем комментарии, предшествующие секции
-        for ( k = numberComments(i); k > 0; k--)
-          fout.WriteLine(inputConfig[i-k]);
-        // считаем разницу между количеством открывающих и закрывающих скобок
-        diff = diffBraces(inputConfig[i]);
-        // Пишем секцию в файл, пока не дойдем до конца секции (закроется последняя скобка секции)
-        do {
-          fout.WriteLine(inputConfig[i]);
-          // удаляем записанную строку из исходного конфига
-          inputConfig.splice(i, 1);
-          diff = diff + diffBraces(inputConfig[i]);
-        } while (diff > 0);  // выходим из цикла, если скобка закрылась
-        // завершаем секцию и закрываем файл
-        fout.WriteLine("  }");
-        fout.WriteLine("}");
-        fout.Close();
-        // создаем строку для записи в главный файл конфига подстановки вместо секции
-        input_string = "    "+sections[j]+": ${\""+section+".xc\""+":"+sections[j]+"}";
-        // если секция не последняя в конфиге, надо добавить запятую
-        if (inputConfig[i].indexOf(",") != -1)
-            input_string = input_string + ",";
-        // записываем подстановку в главный файл конфига
-        inputConfig.splice(i, 1, input_string, "");
-    }
-
-    // переносим отстатки секции minimap из массива в файл minimap/minimap.xc
-    file_out = path+author+"\\minimap\\minimap.xc";
-    fout=fso.OpenTextFile(file_out,2,true,false);
-    for ( i = 0; i < inputConfig.length; i++) {
-        fout.WriteLine(inputConfig[i]);
-    }
-    // закрываем файл
-    fout.Close();
-}
-
-/******************************************************************************
-                         Секция цветов
-******************************************************************************/
-if (fso.FileExists(path+author+"\\colors.xc")) {
-    // массив названий секции цветов
-    sections = [    // порядок секций лучше не менять
-                        '"damage"'
-                ];
-    // массив для хранения исходного конфига
-    inputConfig = new Array();
-    finput=fso.OpenTextFile(path+author+"\\colors.xc",1,false,false);
-    i = 0;
-
-    // считываем конфиг в массив
-    while(!finput.AtEndOfStream){
-      inputConfig[i]=finput.ReadLine();
-      i++;
-    }
-    finput.Close();
-
-    // ищем вхождения всех секций
-    for ( j = 0; j < sections.length; j++) {
-        i = 0;
-        //ищем строку, содержащую секцию
-        while ( i < inputConfig.length && !isStart(inputConfig[i], sections[j]))
-            i++;
-        // если не нашли, переходим к следующей секции
-        if (i == inputConfig.length)
-            continue;
-        // получаем название секции без кавычек
-        section = sections[j].substring(0, sections[j].length-1);
-        section = "colors"+section.charAt(1).toUpperCase()+section.substring(2);
         // создаем файл для записи секции
         file_out = path+author+"\\"+section+".xc";
         fout=fso.OpenTextFile(file_out,2,true,false);
@@ -305,8 +228,8 @@ if (fso.FileExists(path+author+"\\colors.xc")) {
         inputConfig.splice(i, 1, input_string, "");
     }
 
-    // переносим отстатки секции colors из массива в файл colors.xc
-    file_out = path+author+"\\colors.xc";
+    // переносим отстатки секции minimap из массива в файл minimap/minimap.xc
+    file_out = path+author+"\\minimap.xc";
     fout=fso.OpenTextFile(file_out,2,true,false);
     for ( i = 0; i < inputConfig.length; i++) {
         fout.WriteLine(inputConfig[i]);
@@ -318,13 +241,13 @@ if (fso.FileExists(path+author+"\\colors.xc")) {
 /******************************************************************************
                          Секция маркеров
 ******************************************************************************/
-if (fso.FileExists(path+author+"\\markers\\markers.xc")) {
+if (fso.FileExists(path+author+"\\markers.xc")) {
     var    enemy = ['"ally"', '"enemy"' ];       // массив свой/чужой
     var     dead = ['"alive"',  '"dead"' ];      // массив живой/мертвый
     var extended = ['"normal"', '"extended"' ];  // массив нормальный/расширенный режим
     // массив для хранения исходного конфига
     inputConfig = new Array();
-    finput=fso.OpenTextFile(path+author+"\\markers\\markers.xc",1,false,false);
+    finput=fso.OpenTextFile(path+author+"\\markers.xc",1,false,false);
 
     i = 0;
     // считываем конфиг в массив
@@ -367,7 +290,7 @@ if (fso.FileExists(path+author+"\\markers\\markers.xc")) {
                 section = dead[j].substring(0, dead[j].length-1)+section.charAt(1).toUpperCase()+section.substring(2);
                 section = "markers"+section.charAt(1).toUpperCase()+section.substring(2);
                 // создаем файл для записи секции
-                file_out = path+author+"\\markers\\"+section+".xc";
+                file_out = path+author+"\\"+section+".xc";
                 fout=fso.OpenTextFile(file_out,8,true,false);
                 if ( m == 0)
                     fout.WriteLine("{");
@@ -403,7 +326,7 @@ if (fso.FileExists(path+author+"\\markers\\markers.xc")) {
         }
     }
     // переносим отстатки секции markers из массива в файл markers/markers.xc
-    file_out = path+author+"\\markers\\markers.xc";
+    file_out = path+author+"\\markers.xc";
     fout=fso.OpenTextFile(file_out,2,true,false);
     for ( i = 0; i < inputConfig.length; i++) {
         fout.WriteLine(inputConfig[i]);
@@ -419,7 +342,8 @@ xvmFolder = xvmFolder.substring(0, xvmFolder.lastIndexOf("\\")+1);
 var change = "";
 if (xvmFolder.substring(xvmFolder.length-14) == "\\res_mods\\xvm\\") {
     file_out = xvmFolder+"xvm.xc";
-    fso.GetFile(file_out).copy(xvmFolder+"xvm.xc.old");
+    if (fso.FileExists(file_out))
+        fso.GetFile(file_out).copy(xvmFolder+"xvm.xc.old");
     fout=fso.OpenTextFile(file_out,2,true,false);
     fout.WriteLine('${"'+scriptFolder+'/'+author+'/@xvm.xc":"."}');
     if (Rus)
