@@ -310,7 +310,7 @@ class com.xvm.VehicleInfoData
         ussr_BT_SV:                     { tiers: [ 3, 4 ],   name: null, short: "" },
         germany_PzII_J:                 { tiers: [ 3, 4 ],   name: null, short: "" },
         ussr_T_127:                     { tiers: [ 3, 4 ],   name: null, short: "" },
-        Sexton_I:                       { tiers: [ 4, 5 ],   name: null, short: "" },
+        usa_Sexton_I:                   { tiers: [ 4, 5 ],   name: null, short: "" },
         uk_GB78_Sexton_I:               { tiers: [ 4, 5 ],   name: null, short: "" },
         ussr_T_50:                      { tiers: [ 5, 9 ],   name: null, short: "" },
         ussr_Valentine_LL:              { tiers: [ 4, 4 ],   name: null, short: "" },

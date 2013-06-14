@@ -331,6 +331,8 @@ private function RefreshMinimapPage():void
         this.p_minimap.v_square_thickness.value = section.square.thickness;
         this.p_minimap.v_square_alpha.value = section.square.alpha;
         this.p_minimap.v_square_color.value = section.square.color;
+        this.p_minimap.v_lines_enabled.value = section.lines.enabled;
+        this.p_minimap.v_circles_enabled.value = section.circles.enabled;
     }
     catch (ex:Error)
     {
@@ -864,7 +866,7 @@ public const ElementControls:Object = {
     levelIcon: [ "m_levelIcon" ],
     actionMarker: [ "m_actionMarker" ],
 
-    m_vehicleIcon: [ "v_visible", "v_showSpeaker", "v_x", "v_y", "v_alpha", "v_maxScale", "v_scaleX", "v_scaleY" ],
+    m_vehicleIcon: [ "v_visible", "v_showSpeaker", "v_x", "v_y", "v_color", "v_alpha", "v_maxScale", "v_scaleX", "v_scaleY" ],
     m_healthBar: [ "v_visible", "v_x", "v_y", "v_alpha", "v_color", "v_lcolor", "v_width", "v_height", "v_border_size",
         "v_border_color", "v_border_alpha", "v_fill_alpha", "v_damage_color", "v_damage_alpha", "v_damage_fade" ],
     m_damageText: [ "v_visible", "v_x", "v_y", "v_alpha", "v_color", "v_speed", "v_maxRange", "v_damageMessage", "v_blowupMessage" ],

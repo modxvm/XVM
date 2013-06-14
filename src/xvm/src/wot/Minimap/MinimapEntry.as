@@ -167,7 +167,7 @@ class wot.Minimap.MinimapEntry
         }
 
         if (color != null)
-            GraphicsUtil.colorize(wrapper.player, color, 0.85);
+            GraphicsUtil.colorize(wrapper.player || wrapper.teamPoint, color, wrapper.player ? 0.85 : 0.8);
     }
 
     private function initExtendedBehaviour():Void

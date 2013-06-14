@@ -354,3 +354,4 @@ class com.xvm.VehicleInfoData2
         unknown: { level: 0, name: "UNKNOWN" }
     }
 }
+    
