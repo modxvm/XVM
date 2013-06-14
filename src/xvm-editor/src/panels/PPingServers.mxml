@@ -7,8 +7,6 @@
     title="{resourceManager.getString('panels', 'PPingServers')}">
     <fx:Script>
         <![CDATA[
-            import utils.Macros;
-
             [Bindable]
             public var rootElementName:String;
         ]]>

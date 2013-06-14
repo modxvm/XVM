@@ -46,8 +46,8 @@ public class Xvm extends XvmBase
     /**
      * @see IVehicleMarker
      */
-    function init(vClass, vIconSource, vType, vLevel, pFullName,
-        curHealth, maxHealth, entityName, speaking, hunt, entityType)
+    public function init(vClass:String, vIconSource:String, vType:String, vLevel:int, pFullName:String,
+        curHealth:int, maxHealth:int, entityName:String, speaking:Boolean, hunt:Boolean, entityType:String):void
     {
         m_playerFullName = pFullName; // alex
 
@@ -86,7 +86,7 @@ public class Xvm extends XvmBase
     /**
      * @see IVehicleMarker
      */
-    function update()
+    public function update():void
     {
         trace("Xvm::update()");
 
@@ -96,7 +96,7 @@ public class Xvm extends XvmBase
     /**
      * @see IVehicleMarker
      */
-    function setEntityName(value)
+    public function setEntityName(value:String):void
     {
         trace("Xvm::setEntityName(" + value + ")");
         if (value == m_entityName)
@@ -108,7 +108,7 @@ public class Xvm extends XvmBase
     /**
      * @see IVehicleMarker
      */
-    function updateHealth(newHealth:Number, flag:Number, damageType:String):void
+    public function updateHealth(newHealth:Number, flag:Number, damageType:String):void
     {
         /*
          * newHealth:
@@ -144,7 +144,7 @@ public class Xvm extends XvmBase
     /**
      * @see IVehicleMarker
      */
-    function updateState(newState, isImmediate)
+    public function updateState(newState:String, isImmediate:Boolean):void
     {
         trace("Xvm::updateState(" + newState + ", " + isImmediate + "): " + vehicleState.getCurrentState());
 
@@ -159,7 +159,7 @@ public class Xvm extends XvmBase
     /**
      * @see IVehicleMarker
      */
-    function showExInfo(show)
+    public function showExInfo(show:Boolean):void
     {
         //trace("Xvm::showExInfo()");
         if (m_showExInfo == show)
@@ -174,7 +174,7 @@ public class Xvm extends XvmBase
     */
 
 	private var textFields:Array = [];
-    function UpdateTextFields(state_cfg:Object):void
+    private function UpdateTextFields(state_cfg:Object):void
     {
 		if (!Config.s_config || !Config.s_config.markers)
 			return;
@@ -203,13 +203,13 @@ public class Xvm extends XvmBase
 		}
     }
 
-    function XVMUpdateStyle()
+    private function XVMUpdateStyle():void
     {
 		if (!Config.s_config || !Config.s_config.markers)
 			return;
         //trace("XVMUpdateStyle: " + m_playerFullName + m_vname + " " + " scale=" + proxy.marker._xscale);
 
-        var cfg = vehicleState.getCurrentConfig();
+        var cfg:Object = vehicleState.getCurrentConfig();
 
         // Vehicle Type Marker
         vehicleTypeComponent.updateState(cfg);

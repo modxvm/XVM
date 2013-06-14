@@ -15,32 +15,30 @@ public class XvmBase
     private static var s_showExInfo:Boolean = false; // Saved "Extended Info State" for markers that appeared when Alt pressed.
     private static var s_blowedUp:Object = {}; // List of members that was ammoracked.
 
-    // Private members
-    public var m_entityName;
-    public var m_playerFullName;
-    public var m_curHealth;
-    public var m_maxHealth;
-    public var m_source;
-    public var m_vname;
-    public var m_level;
-    public var m_speaking;
-    public var m_entityType; // TODO: is the same as proxy.m_team?
+    public var m_entityName:String;
+    public var m_playerFullName:String;
+    public var m_curHealth:int;
+    public var m_maxHealth:int;
+    public var m_source:String;
+    public var m_vname:String;
+    public var m_level:int;
+    public var m_speaking:Boolean;
+    public var m_entityType:String; // TODO: is the same as proxy.m_team?
 
-    // Private members
-    var m_showExInfo: Boolean;
-    var m_isDead: Boolean;
-    var m_vclass:String;
+    public var m_showExInfo: Boolean;
+    public var m_isDead: Boolean;
+    public var m_vclass:String;
 
     // Vehicle State
-    var vehicleState: VehicleState;
+    public var vehicleState: VehicleState;
 
     // UI Components
-    var clanIconComponent:ClanIconComponent;
-    var contourIconComponent: ContourIconComponent;
-    var damageTextComponent: DamageTextComponent;
-    var healthBarComponent: HealthBarComponent;
-    var levelIconComponent: LevelIconComponent;
-    var vehicleTypeComponent: VehicleTypeComponent;
+    public var clanIconComponent:ClanIconComponent;
+    public var contourIconComponent: ContourIconComponent;
+    public var damageTextComponent: DamageTextComponent;
+    public var healthBarComponent: HealthBarComponent;
+    public var levelIconComponent: LevelIconComponent;
+    public var vehicleTypeComponent: VehicleTypeComponent;
 
     // Parent proxy instance (assigned from proxy)
     protected var _proxy:Marker;
@@ -186,7 +184,7 @@ public class XvmBase
 
     public function formatDynamicColor(format:String, curHealth:Number, damageType:String = null):Number
     {
-        var systemColor =  ColorsManager.getSystemColor(m_entityName, m_isDead, isBlowedUp);
+        var systemColor:Number =  ColorsManager.getSystemColor(m_entityName, m_isDead, isBlowedUp);
 
         if (!format)
             return systemColor;
@@ -195,7 +193,7 @@ public class XvmBase
             return Number(format);
 
         var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
-        var formatArr = format.split("{{c:hp}}");
+        var formatArr:Array = format.split("{{c:hp}}");
         if (formatArr.length > 1)
             format = formatArr.join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_HP, curHealth, "0x"));
         formatArr = format.split("{{c:hp-ratio}}");
@@ -236,7 +234,7 @@ public class XvmBase
             return Number(format);
 
         var hpRatio: Number = Math.ceil(curHealth / m_maxHealth * 100);
-        var formatArr = format.split("{{a:hp}}");
+        var formatArr:Array = format.split("{{a:hp}}");
         if (formatArr.length > 1)
             format = formatArr.join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP, curHealth).toString());
         formatArr = format.split("{{a:hp-ratio}}");
@@ -246,7 +244,7 @@ public class XvmBase
         if (formatArr.length > 1)
             format = formatArr.join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO, hpRatio).toString());
 
-        var n = !isNaN(parseInt(format)) ? Number(format) : 100;
+        var n:Number = !isNaN(parseInt(format)) ? Number(format) : 100;
         return (n <= 0) ? 1 : (n > 100) ? 100 : n;
 
         return 100;
@@ -256,7 +254,7 @@ public class XvmBase
      * Components extension: MovieClip.onEnterFrame translation
      * TODO: Check performance & implementation
      */
-    function onEnterFrame():void
+    private function onEnterFrame():void
     {
         if (contourIconComponent != null && contourIconComponent.onEnterFrame != null)
             contourIconComponent.onEnterFrame();

@@ -2,9 +2,12 @@ package preview
 {
 
 import mx.core.UIComponent;
-import spark.components.Image;
-import utils.*;
+
 import preview.*;
+
+import spark.components.Image;
+
+import utils.*;
 
 public class ContourIconComponent
 {
@@ -36,9 +39,9 @@ public class ContourIconComponent
      * @see	completeLoadContourIcon
      * @see	XVMUpdateStyle
      */
-    function updateState(state_cfg:Object)
+    public function updateState(state_cfg:Object):void
     {
-        var cfg = state_cfg.contourIcon;
+        var cfg:Object = state_cfg.contourIcon;
 
 		contourIcon.visible = cfg.visible;
 		if (cfg.visible)

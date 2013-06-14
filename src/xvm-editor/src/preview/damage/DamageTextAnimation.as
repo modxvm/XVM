@@ -41,7 +41,7 @@ public class DamageTextAnimation
       * Use GraphicsUtil.createShadowFilter and tween filter?
       */
 
-    public function DamageTextAnimation(cfg:Object, tf:TextField)
+    public function DamageTextAnimation(cfg:Object, tf:TextField):void
     {
         this.tf = tf;
         this.cfg = cfg;

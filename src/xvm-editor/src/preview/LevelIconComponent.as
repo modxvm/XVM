@@ -15,11 +15,11 @@ public class LevelIconComponent
             proxy.levelIcon.gotoAndStop(proxy.level);
     }
 
-    public function updateState(state_cfg:Object)
+    public function updateState(state_cfg:Object):void
     {
-        var cfg = state_cfg.levelIcon;
+        var cfg:Object = state_cfg.levelIcon;
 
-        var visible = cfg.visible;
+        var visible:Boolean = cfg.visible;
 
         if (visible)
             draw(cfg);
@@ -27,7 +27,7 @@ public class LevelIconComponent
         proxy.levelIcon.visible = visible;
     }
 
-    private function draw(cfg:Object)
+    private function draw(cfg:Object):void
     {
         proxy.levelIcon.x = cfg.x;
         proxy.levelIcon.y = cfg.y;

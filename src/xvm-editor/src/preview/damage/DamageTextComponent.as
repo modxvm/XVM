@@ -33,7 +33,7 @@ public class DamageTextComponent
      * @param	flag  damage source: 0 - "FROM_UNKNOWN", 1 - "FROM_ALLY", 2 - "FROM_ENEMY", 3 - "FROM_SQUAD", 4 - "FROM_PLAYER"
      * @param	damageType damage kind: "attack", "fire", "ramming", "world_collision", "death_zone", "drowning", "explosion"
      */
-    public function showDamage(cfg:Object, newHealth:Number, delta:Number, flag:Number, damageType:String)
+    public function showDamage(cfg:Object, newHealth:Number, delta:Number, flag:Number, damageType:String):void
     {
         this.cfg = cfg;// new DamageTextConfig(dmgReceiverCfg, dmgSourceCfg, flag, damageType);
 
@@ -73,12 +73,12 @@ public class DamageTextComponent
         //wot.utils.Logger.add(tf.htmlText);
         //wot.utils.Logger.add(XvmHelper.createCSS(cfg.font, color, "xvm_damageText"));
 
-        var dummy = new DamageTextAnimation(cfg, tf); // defines and starts
+        new DamageTextAnimation(cfg, tf); // defines and starts
     }
 
-    public function updateState(state_cfg:Object)
+    public function updateState(state_cfg:Object):void
     {
-		var cfg = state_cfg.damageText;
+		var cfg:Object = state_cfg.damageText;
 		damage.visible = cfg.visible;
 		damage.x = cfg.x;
 		damage.y = cfg.y;
@@ -113,8 +113,8 @@ public class DamageTextComponent
 
     private function defineText(newHealth:Number, delta:Number, damageType:String):String
     {
-        var msg = (newHealth < 0) ? cfg.blowupMessage : cfg.damageMessage;
-        var text = proxy.formatDynamicText(proxy.formatStaticText(msg), newHealth, delta, damageType);
+        var msg:String = (newHealth < 0) ? cfg.blowupMessage : cfg.damageMessage;
+        var text:String = proxy.formatDynamicText(proxy.formatStaticText(msg), newHealth, delta, damageType);
         // For some reason, DropShadowFilter is not rendered when textfield contains only one character,
         // so we're appending empty prefix and suffix to bypass this unexpected behavior
         return " " + text + " ";

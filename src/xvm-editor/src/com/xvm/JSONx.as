@@ -51,22 +51,20 @@ package com.xvm
 
 public class JSONx {
 
-  static var maxDepth: Number = undefined;
-  static var curDepth: Number = undefined;
-  static function stringifyDepth(arg, depth):String {
+  private static var maxDepth:int = 0;
+  private static var curDepth:int = 0;
+  public static function stringifyDepth(arg:*, depth:int):String {
     maxDepth = depth;
     curDepth = 0;
-    var s = stringify(arg);
-    maxDepth = undefined;
-    curDepth = undefined;
+    var s:String = stringify(arg);
+    maxDepth = 0;
+    curDepth = 0;
     return s;
   }
 
-  public static function stringify(arg, indent:String = null, compact:Boolean = false, sort:Function = undefined, nodeName:String = ""):String {
+  public static function stringify(arg:*, indent:String = null, compact:Boolean = false, sort:Function = undefined, nodeName:String = ""):String {
 
-  if (compact == undefined) compact = false;
-
-  var c, i, ii, l, s = '', v;
+  var c:String, i:*, s:String = '', v:String;
 
   if (!indent)
     indent = "";
@@ -79,8 +77,8 @@ public class JSONx {
 
       curDepth++;
       if (arg) {
-          if (arg instanceof Array) {
-              var len = arg.length;
+          if (arg is Array) {
+              var len:int = arg.length;
               for (i = 0; i < len; ++i) {
                   v = stringify(arg[i], compact ? "" : indent + "  ", compact, sort, nodeName);
                   if (s) {
@@ -98,9 +96,9 @@ public class JSONx {
 					items.sort(sort);
 			  else
 			  		items.sort();
-			  for (ii in items) {
-				  var i = items[ii].replace(/^\.*/, "");
-                  v = arg[i];
+			  for (var ii:* in items) {
+				  var item:String = items[ii].replace(/^\.*/, "");
+                  v = arg[item];
                   if (typeof v != 'undefined' && typeof v != 'function') {
                       v = stringify(v, compact ? "" : indent + "  ", compact, sort, nodeName + ".");
                       if (s) {
@@ -123,7 +121,7 @@ public class JSONx {
   case 'number':
       return isFinite(arg) ? String(arg) : 'null';
   case 'string':
-      l = arg.length;
+      var l:int = arg.length;
       s = '"';
       for (i = 0; i < l; i += 1) {
           c = arg.charAt(i);
@@ -153,9 +151,9 @@ public class JSONx {
                       s += '\\t';
                       break;
                   default:
-                      c = c.charCodeAt();
-                      s += '\\u00' + Math.floor(c / 16).toString(16) +
-                          (c % 16).toString(16);
+                      var cc:int = c.charCodeAt();
+                      s += '\\u00' + Math.floor(cc / 16).toString(16) +
+                          (cc % 16).toString(16);
               }
           }
       }
@@ -175,12 +173,12 @@ public class JSONx {
     if (!text || text == "")
         return null;
     var ta: Array = text.split(''); // charAt is much slower in Flash then array
-    var talen = ta.length;
-    var at = 0;
-    var ch = ' ';
+    var talen:int = ta.length;
+    var at:int = 0;
+    var ch:String = ' ';
     var _value:Function;
 
-    var _error:Function = function (m) {
+    var _error:Function = function (m:String):void {
         throw {
             name: 'JSONxError',
             message: m,
@@ -189,13 +187,13 @@ public class JSONx {
         };
     }
 
-    var _next:Function = function() {
+    var _next:Function = function():String {
         ch = (at >= talen) ? '' : ta[at];
         at++;
         return ch;
     }
 
-    var _white:Function = function() {
+    var _white:Function = function():void {
         while (ch) {
             if (ch <= ' ') {
                 _next();
@@ -230,12 +228,12 @@ public class JSONx {
         }
     }
 
-    var _string:Function = function() {
-        var i, s = '', t, u;
-                    var outer:Boolean = false;
+    var _string:Function = function():String {
+        var s:String = '';
+        var outer:Boolean = false;
 
         if (ch == '"') {
-                            while (_next()) {
+            while (_next()) {
                 if (ch == '"') {
                     _next();
                     return s;
@@ -257,9 +255,9 @@ public class JSONx {
                         s += '\t';
                         break;
                     case 'u':
-                        u = 0;
-                        for (i = 0; i < 4; i += 1) {
-                            t = parseInt(_next(), 16);
+                        var u:int = 0;
+                        for (var i:int = 0; i < 4; i += 1) {
+                            var t:int = parseInt(_next(), 16);
                             if (!isFinite(t)) {
                                 outer = true;
                                 break;
@@ -281,10 +279,11 @@ public class JSONx {
             }
         }
         _error("Bad string");
+        return null;
     }
 
-    var _array:Function = function() {
-        var a = [];
+    var _array:Function = function():Array {
+        var a:Array = [];
 
         _next();
         _white();
@@ -305,11 +304,12 @@ public class JSONx {
             _white();
         }
         _error("Bad array");
+        return null;
     }
 
     // {...}
-    var _object:Function = function() {
-        var k, o = {};
+    var _object:Function = function():Object {
+        var k:String, o:Object = {};
 
         _next();
         _white();
@@ -336,12 +336,11 @@ public class JSONx {
             _white();
         }
         _error("Bad object");
+        return null;
     }
 
     // ${...}
-    var _reference:Function = function() {
-        var f, p;
-
+    var _reference:Function = function():Object {
         _next();
         if (ch == '{') {
             _next();
@@ -350,6 +349,7 @@ public class JSONx {
                 _next();
                 return null;
             }
+            var f:String, p:String;
             while (ch) {
                 p = _string();
                 _white();
@@ -366,10 +366,11 @@ public class JSONx {
             }
         }
         _error("Bad reference");
+        return null;
     }
 
-    var _number:Function = function() {
-        var n = '', v;
+    var _number:Function = function():Number {
+        var n:String = '';
 
         if (ch == '-') {
             n = '-';
@@ -386,15 +387,16 @@ public class JSONx {
             }
         }
         //v = +n;
-        v = 1 * Number(n);
+        var v:Number = 1 * Number(n);
         if (!isFinite(v)) {
             _error("Bad number");
-        } else {
-            return v;
+            return NaN;
         }
+
+        return v;
     }
 
-    var _word:Function = function() {
+    var _word:Function = function():* {
         switch (ch) {
             case 't':
                 if (_next() == 'r' && _next() == 'u' && _next() == 'e') {
@@ -419,7 +421,7 @@ public class JSONx {
         _error("Syntax error");
     }
 
-    _value = function() {
+    _value = function():* {
         _white();
         switch (ch) {
             case '$':

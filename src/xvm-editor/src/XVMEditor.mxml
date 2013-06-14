@@ -109,6 +109,7 @@
                         <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1" creationComplete="{RefreshCurrentPage()}">
                             <p:PBattle id="p_battle" config="battle" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                             <p:PFragCorrelation id="p_fragCorrelation" config="fragCorrelation" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+                            <p:PExpertPanel id="p_expertPanel" config="expertPanel" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
                         </s:VGroup>
                     </s:Scroller>
                 </s:NavigatorContent>
@@ -191,6 +192,13 @@
                         </s:VGroup>
                     </s:Scroller>
                 </s:NavigatorContent>
+                <s:NavigatorContent label="{_('hotkeysPage')}" width="100%" height="100%" id="pgHotkeys">
+                    <s:Scroller x="0" y="0" width="420" height="100%">
+                        <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1" creationComplete="{RefreshCurrentPage()}">
+                            <p:PHotkeys id="p_hotkeys" config="hotkeys" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();"/>
+                        </s:VGroup>
+                    </s:Scroller>
+                </s:NavigatorContent>
                 <s:NavigatorContent label="{_('hitLogPage')}" width="100%" height="100%" id="pgHitLog">
                     <s:Scroller x="0" y="0" width="420" height="100%">
                         <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1" creationComplete="{RefreshCurrentPage()}">
@@ -269,10 +277,10 @@
                             <s:NavigatorContent id="nc_vtypeColors" label="{_('VTypeColors')}" width="100%" height="100%">
                                 <p:PVTypeColors id="p_vtypeColors" config="colors.vtype" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
                             </s:NavigatorContent>
-                            <s:NavigatorContent id="nc_colors_hp" label="{_('DynamicColorByHealthAmount')}" width="100%" height="100%">
+                            <s:NavigatorContent id="nc_colors_hp" label="{_('DynamicColorHealthAmount')}" width="100%" height="100%">
                                 <p:PDynamicValues id="p_colors_hp" config="colors.hp" minimum="0" maximum="3000" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
                             </s:NavigatorContent>
-                            <s:NavigatorContent id="nc_colors_hp_ratio" label="{_('DynamicColorByHealthRatio')}" width="100%" height="100%">
+                            <s:NavigatorContent id="nc_colors_hp_ratio" label="{_('DynamicColorHealthRatio')}" width="100%" height="100%">
                                 <p:PDynamicValues id="p_colors_hp_ratio" config="colors.hp_ratio" minimum="0" maximum="101" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
                             </s:NavigatorContent>
                         </mx:Accordion>
@@ -282,22 +290,22 @@
                             <s:NavigatorContent id="nc_colors_x" label="{_('DynamicColorXVMSCALE')}" width="100%" height="100%">
                                 <p:PDynamicValues id="p_colors_x" config="colors.x" minimum="0" maximum="101" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
                             </s:NavigatorContent>
-                            <s:NavigatorContent id="nc_colors_eff" label="{_('DynamicColorByEfficiency')}" width="100%" height="100%">
+                            <s:NavigatorContent id="nc_colors_eff" label="{_('DynamicColorEfficiency')}" width="100%" height="100%">
                                 <p:PDynamicValues id="p_colors_eff" config="colors.eff" minimum="0" maximum="3000" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
                             </s:NavigatorContent>
                             <s:NavigatorContent id="nc_colors_wn" label="{_('DynamicColorWN')}" width="100%" height="100%">
                                 <p:PDynamicValues id="p_colors_wn" config="colors.wn" minimum="0" maximum="3000" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
                             </s:NavigatorContent>
-                            <s:NavigatorContent id="nc_colors_rating" label="{_('DynamicColorByWinRate')}" width="100%" height="100%">
+                            <s:NavigatorContent id="nc_colors_rating" label="{_('DynamicColorWinRate')}" width="100%" height="100%">
                                 <p:PDynamicValues id="p_colors_rating" config="colors.rating" minimum="0" maximum="101" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
                             </s:NavigatorContent>
                             <s:NavigatorContent id="nc_colors_twr" label="{_('DynamicColorTWR')}" width="100%" height="100%">
                                 <p:PDynamicValues id="p_colors_twr" config="colors.twr" minimum="0" maximum="101" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
                             </s:NavigatorContent>
-                            <s:NavigatorContent id="nc_colors_kb" label="{_('DynamicColorByKiloBattles')}" width="100%" height="100%">
+                            <s:NavigatorContent id="nc_colors_kb" label="{_('DynamicColorKiloBattles')}" width="100%" height="100%">
                                 <p:PDynamicValues id="p_colors_kb" config="colors.kb" minimum="0" maximum="100" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
                             </s:NavigatorContent>
-                            <s:NavigatorContent id="nc_colors_tbattles" label="{_('DynamicColorByBattlesForTank')}" width="100%" height="100%">
+                            <s:NavigatorContent id="nc_colors_tbattles" label="{_('DynamicColorBattlesForTank')}" width="100%" height="100%">
                                 <p:PDynamicValues id="p_colors_tbattles" config="colors.t_battles" minimum="0" maximum="9999" editorClass="DynamicColorEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
                             </s:NavigatorContent>
                             <s:NavigatorContent id="nc_colors_e" label="{_('DynamicColorE')}" width="100%" height="100%">
@@ -319,11 +327,47 @@
                 </s:NavigatorContent>
                 <s:NavigatorContent label="{_('transparencyPage')}" width="100%" height="100%" id="pgTransparency">
                     <mx:Accordion id="accTransparency" width="420" height="100%" change="{RefreshCurrentPage()}">
-                        <s:NavigatorContent id="nc_alpha_hp" label="{_('DynamicTransparencyByHealthAmount')}" width="100%" height="100%">
+                        <s:NavigatorContent id="nc_alpha_hp" label="{_('DynamicAlphaHealthAmount')}" width="100%" height="100%">
                             <p:PDynamicValues id="p_alpha_hp" config="alpha.hp" minimum="0" maximum="3000" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
                         </s:NavigatorContent>
-                        <s:NavigatorContent id="nc_alpha_hp_ratio" label="{_('DynamicTransparencyByHealthRatio')}" width="100%" height="100%">
+                        <s:NavigatorContent id="nc_alpha_hp_ratio" label="{_('DynamicAlphaHealthRatio')}" width="100%" height="100%">
                             <p:PDynamicValues id="p_alpha_hp_ratio" config="alpha.hp_ratio" minimum="0" maximum="101" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                        </s:NavigatorContent>
+                        <s:NavigatorContent id="nc_alpha_x" label="{_('DynamicAlphaXVMSCALE')}" width="100%" height="100%">
+                            <p:PDynamicValues id="p_alpha_x" config="alpha.x" minimum="0" maximum="101" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                        </s:NavigatorContent>
+                        <s:NavigatorContent id="nc_alpha_eff" label="{_('DynamicAlphaEfficiency')}" width="100%" height="100%">
+                            <p:PDynamicValues id="p_alpha_eff" config="alpha.eff" minimum="0" maximum="3000" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                        </s:NavigatorContent>
+                        <s:NavigatorContent id="nc_alpha_wn" label="{_('DynamicAlphaWN')}" width="100%" height="100%">
+                            <p:PDynamicValues id="p_alpha_wn" config="alpha.wn" minimum="0" maximum="3000" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                        </s:NavigatorContent>
+                        <s:NavigatorContent id="nc_alpha_rating" label="{_('DynamicAlphaWinRate')}" width="100%" height="100%">
+                            <p:PDynamicValues id="p_alpha_rating" config="alpha.rating" minimum="0" maximum="101" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                        </s:NavigatorContent>
+                        <s:NavigatorContent id="nc_alpha_twr" label="{_('DynamicAlphaTWR')}" width="100%" height="100%">
+                            <p:PDynamicValues id="p_alpha_twr" config="alpha.twr" minimum="0" maximum="101" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                        </s:NavigatorContent>
+                        <s:NavigatorContent id="nc_alpha_kb" label="{_('DynamicAlphaKiloBattles')}" width="100%" height="100%">
+                            <p:PDynamicValues id="p_alpha_kb" config="alpha.kb" minimum="0" maximum="100" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                        </s:NavigatorContent>
+                        <s:NavigatorContent id="nc_alpha_tbattles" label="{_('DynamicAlphaBattlesForTank')}" width="100%" height="100%">
+                            <p:PDynamicValues id="p_alpha_tbattles" config="alpha.t_battles" minimum="0" maximum="9999" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                        </s:NavigatorContent>
+                        <s:NavigatorContent id="nc_alpha_e" label="{_('DynamicAlphaE')}" width="100%" height="100%">
+                            <p:PDynamicValues id="p_alpha_e" config="alpha.e" minimum="0" maximum="20" stepSize="0.5" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                        </s:NavigatorContent>
+                        <s:NavigatorContent id="nc_alpha_tdb" label="{_('DynamicAlphaTDB')}" width="100%" height="100%">
+                            <p:PDynamicValues id="p_alpha_tdb" config="alpha.tdb" minimum="0" maximum="5000" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                        </s:NavigatorContent>
+                        <s:NavigatorContent id="nc_alpha_tdv" label="{_('DynamicAlphaTDV')}" width="100%" height="100%">
+                            <p:PDynamicValues id="p_alpha_tdv" config="alpha.tdv" minimum="0" maximum="3" stepSize="0.1" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                        </s:NavigatorContent>
+                        <s:NavigatorContent id="nc_alpha_tfb" label="{_('DynamicAlphaTFB')}" width="100%" height="100%">
+                            <p:PDynamicValues id="p_alpha_tfb" config="alpha.tfb" minimum="0" maximum="3" stepSize="0.1" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                        </s:NavigatorContent>
+                        <s:NavigatorContent id="nc_alpha_tsb" label="{_('DynamicAlphaTSB')}" width="100%" height="100%">
+                            <p:PDynamicValues id="p_alpha_tsb" config="alpha.tsb" minimum="0" maximum="3" stepSize="0.1" editorClass="DynamicAlphaEdit" valueChanged="updateValue(event)" setDefaultValue="onSetDefaultValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
                         </s:NavigatorContent>
                 </mx:Accordion>
                 </s:NavigatorContent>

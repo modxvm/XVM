@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<a:ValueControl xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    xmlns:a="controls.*">
+    <fx:Script>
+        <![CDATA[
+            import mx.collections.ArrayCollection;
+            import mx.collections.Sort;
+            import mx.collections.SortField;
+            import mx.events.FlexEvent;
+
+            private const keys:Array = 
+                [ "Backspace", "Tab", "Caps Lock", "Left Ctrl", "Right Ctrl", "Right Shift", "Esc", "Insert", "Delete", "Page Up", "Page Down", "A", "C", "V", "X", "F1" ];
+            private const codes:Array = 
+                [  8,           9,     20,          17,          163,          161,           27,    45,       46,       33,        34,          65,  67,  86,  88, 112  ];
+
+            protected function init():void
+            {
+               /* var dp:ArrayCollection = new ArrayCollection();
+                for (var key:String in keys)
+                    dp.addItem(key);
+                edit.dataProvider = dp;*/
+            }
+
+            // IValueControl: value
+            private var _value:*;
+            [Bindable]
+            public override function get value():*
+            {
+                return _value;
+            }
+            public override function set value(v:*):void
+            {
+                _value = v;
+            }
+
+            protected override function onChange(event:Event):void
+            {
+                value = codes[keys.indexOf(edit.value)];
+                super.onChange(event);
+            }
+        ]]>
+    </fx:Script>
+    <mx:ComboBox id="edit" dataProvider="{keys}" dropdownWidth="300" rowCount="9" selectedIndex="{codes.indexOf(value)}"
+        close="onChange(event)" change="onChange(event)"/>
+</a:ValueControl>

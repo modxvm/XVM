@@ -6,6 +6,7 @@ import com.greensock.easing.Cubic;
 
 import flash.display.MovieClip;
 
+import mx.charts.chartClasses.IBar;
 import mx.containers.Canvas;
 import mx.core.ScrollPolicy;
 
@@ -41,17 +42,17 @@ public class HealthBarComponent
         healthBar.includeInLayout = false;
     }
 
-    public function showDamage(state_cfg:Object, curHealth:Number, maxHealth:Number, delta:Number)
+    public function showDamage(state_cfg:Object, curHealth:Number, maxHealth:Number, delta:Number):void
     {
-        var cfg = state_cfg.healthBar;
+        var cfg:Object = state_cfg.healthBar;
 		if (!cfg.visible)
 			return;
         //Flow bar animation
         TweenLite.killTweensOf(damage);
 
-		var o = { delta: delta };
+		var o:Object = { delta: delta };
 		
-		var onUpdate:Function = function()
+		var onUpdate:Function = function():void
 		{
 			damage.graphics.clear();
 			damage.graphics.beginFill(proxy.formatDynamicColor(cfg.damage.color), proxy.formatDynamicAlpha(cfg.damage.alpha) / 100.0);
@@ -65,11 +66,11 @@ public class HealthBarComponent
         TweenLite.to(o, cfg.damage.fade, {onUpdate:onUpdate, delta: 0, ease: Cubic.easeIn });
     }
 
-    public function updateState(state_cfg:Object)
+    public function updateState(state_cfg:Object):void
     {
-        var cfg = state_cfg.healthBar;
+        var cfg:Object = state_cfg.healthBar;
 
-        var visible = cfg.visible;
+        var visible:Boolean = cfg.visible;
 
         if (visible)
             draw(cfg);
@@ -77,7 +78,7 @@ public class HealthBarComponent
         healthBar.visible = visible;
     }
 
-    private function draw(cfg:Object)
+    private function draw(cfg:Object):void
     {
 		TweenLite.killTweensOf(damage);
         healthBar.graphics.clear();
@@ -85,12 +86,12 @@ public class HealthBarComponent
         fill.graphics.clear();
         damage.graphics.clear();
 
-		var ct = proxy.formatStaticColorText(cfg.color);
-		var lct = proxy.formatStaticColorText(cfg.lcolor);
-		var fullColor: Number = proxy.formatDynamicColor(ct);
-		var lowColor: Number = proxy.formatDynamicColor(lct || ct);
-		var percent: Number = proxy.curHealth / proxy.maxHealth;
-		var currColor = GraphicsUtil.colorByRatio(percent, lowColor, fullColor);
+		var ct:String = proxy.formatStaticColorText(cfg.color);
+		var lct:String = proxy.formatStaticColorText(cfg.lcolor);
+		var fullColor:Number = proxy.formatDynamicColor(ct);
+		var lowColor:Number = proxy.formatDynamicColor(lct || ct);
+		var percent:Number = proxy.curHealth / proxy.maxHealth;
+		var currColor:Number = GraphicsUtil.colorByRatio(percent, lowColor, fullColor);
 				
         border.graphics.beginFill(proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.border.color)),
 			proxy.formatDynamicAlpha(cfg.border.alpha) / 100.0);

@@ -18,7 +18,7 @@ public class ColorsManager
      * @param	isColorBlindMode CB mode flag
      * @return	name of marker frame
      */
-    public static function getMarkerColorAlias(entityName):String
+    public static function getMarkerColorAlias(entityName:String):String
     {
         //if (m_entityName != "ally" && m_entityName != "enemy" && m_entityName != "squadman" && m_entityName != "teamKiller")
         //  Logger.add("m_entityName=" + m_entityName);

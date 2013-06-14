@@ -11,9 +11,7 @@ public class VehicleInfo
     {
         var result:Object = {};
         for (var vname:String in VehicleInfoData.data)
-        {
             result[vname] = VehicleInfoData.data[vname].name;
-        }
         return result;
     }
 }

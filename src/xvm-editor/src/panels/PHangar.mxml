@@ -7,11 +7,11 @@
     title="{resourceManager.getString('panels', 'PHangar')}">
     <c:LabeledCheckBox label="{resourceManager.getString('panels', 'hideTutorial')}" id="v_hideTutorial" config="hangar.hideTutorial" change="onChange(event)"/>
 
-    <s:Label text="{resourceManager.getString('panels', 'UserInfo')}:" width="100%" height="20" fontWeight="bold" paddingLeft="10" verticalAlign="middle" backgroundColor="0xCCCCCC"/>
+    <s:Label text="{resourceManager.getString('panels', 'UserInfo')}:" width="100%" height="20" fontWeight="bold" paddingLeft="5" verticalAlign="middle" backgroundColor="0xCCCCCC"/>
     <c:LabeledCheckBox label="{resourceManager.getString('panels', 'showEColumn')}" id="v_showEColumn" config="userInfo.showEColumn" change="onChange(event)"/>
     <c:LabeledCheckBox label="{resourceManager.getString('panels', 'inHangarFilterEnabled')}" id="v_inHangarFilterEnabled" config="userInfo.inHangarFilterEnabled" change="onChange(event)"/>
 
-    <s:Label text="{resourceManager.getString('panels', 'Squad')}:" width="100%" height="20" fontWeight="bold" paddingLeft="10" verticalAlign="middle" backgroundColor="0xCCCCCC"/>
+    <s:Label text="{resourceManager.getString('panels', 'Squad')}:" width="100%" height="20" fontWeight="bold" paddingLeft="5" verticalAlign="middle" backgroundColor="0xCCCCCC"/>
     <c:LabeledCheckBox label="{resourceManager.getString('panels', 'StatisticsEnabled')}" labelWidth="180" id="v_enabled" config="squad.enabled" change="onChange(event)"/>
     <c:LabeledCheckBox label="{resourceManager.getString('panels', 'romanNumbers')}" labelWidth="180" id="v_romanNumbers" config="squad.romanNumbers" change="onChange(event)"/>
     <c:LabeledCheckBox label="{resourceManager.getString('panels', 'showClan')}" labelWidth="180" id="v_showClan" config="squad.showClan" change="onChange(event)"/>

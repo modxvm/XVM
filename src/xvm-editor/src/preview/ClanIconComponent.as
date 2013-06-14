@@ -2,9 +2,12 @@ package preview
 {
 
 import flash.display.MovieClip;
-import spark.components.Image;
-import utils.*;
+
 import preview.*;
+
+import spark.components.Image;
+
+import utils.*;
 
 public class ClanIconComponent
 {
@@ -22,14 +25,14 @@ public class ClanIconComponent
         proxy.addChild(m_clanIcon);
     }
 
-    public function updateState(state_cfg:Object)
+    public function updateState(state_cfg:Object):void
     {
         if (m_clanIcon == null || m_clanIcon.source == "")
             return;
 
-        var cfg = state_cfg.clanIcon;
+        var cfg:Object = state_cfg.clanIcon;
 
-        var visible = cfg.visible;
+        var visible:Boolean = cfg.visible;
 
         if (visible)
             draw(cfg);
@@ -37,7 +40,7 @@ public class ClanIconComponent
         m_clanIcon.visible = visible;
     }
 
-    private function draw(cfg:Object)
+    private function draw(cfg:Object):void
     {
 		m_clanIcon.visible = cfg.visible;
 		m_clanIcon.x = cfg.x - cfg.w / 2.0;

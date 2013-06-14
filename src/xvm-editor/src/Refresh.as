@@ -27,6 +27,8 @@ protected function RefreshCurrentPage():void
             RefreshHangarPage();
         if (pg == pgBattle)
             RefreshBattlePage();
+        else if (pg == pgHotkeys)
+            RefreshHotkeysPage();
         else if (pg == pgHitLog)
             RefreshHitLogPage();
         else if (pg == pgCaptureBar)
@@ -210,10 +212,32 @@ private function RefreshBattlePage():void
 
         section = Config.s_config.fragCorrelation;
         this.p_fragCorrelation.v_hideTeamTextFields.value = section.hideTeamTextFields;
+
+        section = Config.s_config.expertPanel;
+        this.p_expertPanel.v_delay.value = section.delay;
+        this.p_expertPanel.v_scale.value = section.scale;
     }
     catch (ex:Error)
     {
         error(ex.toString(), "RefreshBattlePage()");
+    }
+}
+
+private function RefreshHotkeysPage():void
+{
+    debug("RefreshHotkeysPage()");
+    try
+    {
+        var section:*;
+
+        section = Config.s_config.hotkeys;
+        this.p_hotkeys.v_minimapZoom_enabled.value = section.minimapZoom.enabled;
+        this.p_hotkeys.v_minimapZoom_keyCode.value = section.minimapZoom.keyCode;
+        this.p_hotkeys.v_minimapZoom_onHold.value = section.minimapZoom.onHold;
+    }
+    catch (ex:Error)
+    {
+        error(ex.toString(), "RefreshHotkeysPage()");
     }
 }
 
@@ -234,6 +258,7 @@ private function RefreshHitLogPage():void
         this.p_hitLog.v_direction.value = section.direction;
         this.p_hitLog.v_insertOrder.value = section.insertOrder;
         this.p_hitLog.v_groupHitsByPlayer.value = section.groupHitsByPlayer;
+        this.p_hitLog.v_hpLeft.value = section.hpLeft;
         this.p_hitLog.v_deadMarker.value = section.deadMarker;
         this.p_hitLog.v_blowupMarker.value = section.blowupMarker;
         this.p_hitLog.v_defaultHeader.value = section.defaultHeader;
@@ -394,7 +419,7 @@ private function RefreshPlayersPanel1Page():void
         this.p_playersPanel_enemySpotted.v_Xoffset.value = section.Xoffset;
         this.p_playersPanel_enemySpotted.v_Yoffset.value = section.Yoffset;
         this.p_playersPanel_enemySpotted.v_format_neverSeen.value = section.format.neverSeen;
-        this.p_playersPanel_enemySpotted.v_format_lost.value = section.format.lost; 
+        this.p_playersPanel_enemySpotted.v_format_lost.value = section.format.lost;
         this.p_playersPanel_enemySpotted.v_format_revealed.value = section.format.revealed;
         this.p_playersPanel_enemySpotted.v_format_dead.value = section.format.dead;
         this.p_playersPanel_enemySpotted.v_format_artillery_neverSeen.value = section.format.artillery.neverSeen;
@@ -734,6 +759,30 @@ private function RefreshTransparencyPage():void
             p_alpha_hp.RefreshSource();
         else if (accTransparency.selectedChild == nc_alpha_hp_ratio && p_alpha_hp_ratio != null)
             p_alpha_hp_ratio.RefreshSource();
+        else if (accTransparency.selectedChild == nc_alpha_x && p_alpha_x != null)
+            p_alpha_x.RefreshSource();
+        else if (accTransparency.selectedChild == nc_alpha_eff && p_alpha_eff != null)
+            p_alpha_eff.RefreshSource();
+        else if (accTransparency.selectedChild == nc_alpha_wn && p_alpha_wn != null)
+            p_alpha_wn.RefreshSource();
+        else if (accTransparency.selectedChild == nc_alpha_rating && p_alpha_rating != null)
+            p_alpha_rating.RefreshSource();
+        else if (accTransparency.selectedChild == nc_alpha_twr && p_alpha_twr != null)
+            p_alpha_twr.RefreshSource();
+        else if (accTransparency.selectedChild == nc_alpha_kb && p_alpha_kb != null)
+            p_alpha_kb.RefreshSource();
+        else if (accTransparency.selectedChild == nc_alpha_tbattles && p_alpha_tbattles != null)
+            p_alpha_tbattles.RefreshSource();
+        else if (accTransparency.selectedChild == nc_alpha_e && p_alpha_e != null)
+            p_alpha_e.RefreshSource();
+        else if (accTransparency.selectedChild == nc_alpha_tdb && p_alpha_tdb != null)
+            p_alpha_tdb.RefreshSource();
+        else if (accTransparency.selectedChild == nc_alpha_tdv && p_alpha_tdv != null)
+            p_alpha_tdv.RefreshSource();
+        else if (accTransparency.selectedChild == nc_alpha_tfb && p_alpha_tfb != null)
+            p_alpha_tfb.RefreshSource();
+        else if (accTransparency.selectedChild == nc_alpha_tsb && p_alpha_tsb != null)
+            p_alpha_tsb.RefreshSource();
     }
     catch (ex:Error)
     {

@@ -31,7 +31,7 @@
             xvm = new Xvm(this);
         }
 
-        public function init(vtype:String, vclass:String, vlevel:Number, vname:String, vsource):void
+        public function init(vtype:String, vclass:String, vlevel:Number, vname:String, vsource:String):void
         {
             // draw grid
             graphics.beginFill(0xFFFF00, 0.1);
@@ -42,7 +42,7 @@
             graphics.endFill();
 
             var entity:String = vtype == "ally" || vtype == "ally_dead" ? "ally" : "enemy";
-            xvm.init(vclass, vsource, vname, vlevel, '___Player___[CLAN]', vtype == "ally_dead" ? 0 : 1, 1, entity, false, false, entity); 
+            xvm.init(vclass, vsource, vname, vlevel, 'Player_Name_123[CLAN]', vtype == "ally_dead" ? 0 : 1, 1, entity, false, false, entity); 
 
             loadSWF(Resources.markersSWF);
         }

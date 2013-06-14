@@ -2,19 +2,21 @@ package preview
 {
 
 import flash.display.MovieClip;
-import utils.*;
+
 import preview.*;
+
+import utils.*;
 
 public class VehicleTypeComponent
 {
     private var proxy:VehicleTypeProxy;
 
-    private var m_hunt;
-    private var m_markerLabel;  // [proxy] "green", "gold", "blue", "yellow", "red", "purple"
-    private var m_markerState;  // [proxy.marker] "dead", "immediate_dead", ...
-    private var m_vehicleClass; // [proxy.marker.marker.icon] "lightTank", "mediumTank", ..., "dynamic" (speaker)
+    private var m_hunt:Boolean;
+    private var m_markerLabel:String;  // [proxy] "green", "gold", "blue", "yellow", "red", "purple"
+    private var m_markerState:String;  // [proxy.marker] "dead", "immediate_dead", ...
+    private var m_vehicleClass:String; // [proxy.marker.marker.icon] "lightTank", "mediumTank", ..., "dynamic" (speaker)
 
-    public function VehicleTypeComponent(proxy:VehicleTypeProxy, vehicleClass, hunt)
+    public function VehicleTypeComponent(proxy:VehicleTypeProxy, vehicleClass:String, hunt:Boolean)
     {
         this.proxy = proxy;
 
@@ -30,11 +32,11 @@ public class VehicleTypeComponent
         return m_vehicleClass;
     }
 
-    public function updateState(state_cfg:Object)
+    public function updateState(state_cfg:Object):void
     {
-        var cfg = state_cfg.vehicleIcon;
+        var cfg:Object = state_cfg.vehicleIcon;
 
-        var visible = cfg.visible || cfg.showSpeaker;
+        var visible:Boolean = cfg.visible || cfg.showSpeaker;
 
         if (visible)
             draw(cfg);
@@ -44,7 +46,7 @@ public class VehicleTypeComponent
 
     // PRIVATE FUNCTIONS
 
-    private function draw(cfg:Object)
+    private function draw(cfg:Object):void
     {
 		proxy.marker.marker.icon.gotoAndStop(cfg.visible ? m_vehicleClass : "dynamic");
 		if (cfg.visible)
