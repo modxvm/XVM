@@ -5,16 +5,16 @@
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
     height="100%"
-    title="{resourceManager.getString('markers', 'ContourIcon')}">
+    title="{_m('ContourIcon')}">
     <fx:Script>
         <![CDATA[
             import utils.Macros;
         ]]>
     </fx:Script>
-    <c:LabeledCheckBox label="{resourceManager.getString('markers', 'Visible')}" id="v_visible" config="visible" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'XPosition')}" id="v_x" config="x" minimum="-100" maximum="100" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'YPosition')}" id="v_y" config="y" minimum="-100" maximum="100" change="onChange(event)"/>
-    <c:LabeledMacrosNumberSelector label="{resourceManager.getString('markers', 'Transparency')}" id="v_alpha" config="alpha" minimum="0" maximum="100" allowedMacros="{Macros.get('transparency')}" change="onChange(event)"/>
-    <c:LabeledMacrosColorSelector label="{resourceManager.getString('markers', 'TintColor')}" toolTip="{resourceManager.getString('markers', 'DynamicColorTip')}" width="320" id="v_color" config="color" allowedMacros="{Macros.get('syscolors,colors_markers,colors_stat')}" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'TintAmount')} (%)" id="v_amount" config="amount" minimum="0" maximum="100" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_m('Visible')}" id="v_visible" config="visible" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_m('XPosition')}" id="v_x" config="x" minimum="-100" maximum="100" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_m('YPosition')}" id="v_y" config="y" minimum="-100" maximum="100" change="onChange(event)"/>
+    <c:LabeledMacrosNumberSelector label="{_m('Transparency')}" id="v_alpha" config="alpha" minimum="0" maximum="100" allowedMacros="{Macros.get('transparency')}" change="onChange(event)"/>
+    <c:LabeledMacrosColorSelector label="{_m('TintColor')}" toolTip="{_m('DynamicColorTip')}" width="320" id="v_color" config="color" allowedMacros="{Macros.get('syscolors,colors_markers,colors_stat')}" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_m('TintAmount')} (%)" id="v_amount" config="amount" minimum="0" maximum="100" change="onChange(event)"/>
 </c:PanelComponent>

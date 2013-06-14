@@ -5,12 +5,12 @@
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
     height="100%"
-    title="{resourceManager.getString('panels', 'TextFieldsFormats')}">
+    title="{_('TextFieldsFormats')}">
     <fx:Script>
         <![CDATA[
             import utils.Macros;
         ]]>
     </fx:Script>
-    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'FormatVehicleNameLeft')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatLeft" config="battleLoading.formatLeft" allowedMacros="{Macros.get('panels,stats,colors_panels,colors_stat')}" preview="true" change="onChange(event)"/>
-    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'FormatVehicleNameRight')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatRight" config="battleLoading.formatRight" allowedMacros="{Macros.get('panels,stats,colors_panels,colors_stat')}" preview="true" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{_('FormatVehicleNameLeft')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatLeft" config="battleLoading.formatLeft" allowedMacros="{Macros.get('panels,stats,colors_panels,colors_stat')}" preview="true" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{_('FormatVehicleNameRight')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatRight" config="battleLoading.formatRight" allowedMacros="{Macros.get('panels,stats,colors_panels,colors_stat')}" preview="true" change="onChange(event)"/>
 </c:PanelComponent>

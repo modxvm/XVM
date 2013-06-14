@@ -4,18 +4,18 @@
     xmlns:s="library://ns.adobe.com/flex/spark"
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
-    title="{resourceManager.getString('panels', 'ciTitle')}">
+    title="{_('ciTitle')}">
     <fx:Script>
         <![CDATA[
             import utils.Macros;
         ]]>
     </fx:Script>
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'ciShow')}" id="v_show" config="battleLoading.clanIcon.show" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'ciX')}" id="v_x" config="battleLoading.clanIcon.x" minimum="-400" maximum="200" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'ciY')}" id="v_y" config="battleLoading.clanIcon.y" minimum="-20" maximum="20" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'ciXR')}" id="v_xr" config="battleLoading.clanIcon.xr" minimum="-400" maximum="200" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'ciYR')}" id="v_yr" config="battleLoading.clanIcon.yr" minimum="-20" maximum="20" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'ciW')}" id="v_w" config="battleLoading.clanIcon.w" minimum="0" maximum="32" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'ciH')}" id="v_h" config="battleLoading.clanIcon.h" minimum="0" maximum="32" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'ciAlpha')}" id="v_alpha" config="battleLoading.clanIcon.alpha" minimum="0" maximum="100" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('ciShow')}" id="v_show" config="battleLoading.clanIcon.show" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_('ciX')}" id="v_x" config="battleLoading.clanIcon.x" minimum="-400" maximum="200" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_('ciY')}" id="v_y" config="battleLoading.clanIcon.y" minimum="-20" maximum="20" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_('ciXR')}" id="v_xr" config="battleLoading.clanIcon.xr" minimum="-400" maximum="200" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_('ciYR')}" id="v_yr" config="battleLoading.clanIcon.yr" minimum="-20" maximum="20" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_('ciW')}" id="v_w" config="battleLoading.clanIcon.w" minimum="0" maximum="32" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_('ciH')}" id="v_h" config="battleLoading.clanIcon.h" minimum="0" maximum="32" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_('ciAlpha')}" id="v_alpha" config="battleLoading.clanIcon.alpha" minimum="0" maximum="100" change="onChange(event)"/>
 </c:PanelComponent>

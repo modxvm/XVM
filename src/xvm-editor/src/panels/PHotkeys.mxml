@@ -4,13 +4,13 @@
     xmlns:s="library://ns.adobe.com/flex/spark"
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
-    title="{resourceManager.getString('panels', 'PHotkeys')}">
+    title="{_('PHotkeys')}">
     <fx:Script>
         <![CDATA[
         ]]>
     </fx:Script>
-    <s:Label text="{resourceManager.getString('panels', 'minimapZoom')}:" width="100%" height="20" fontWeight="bold" paddingLeft="5" verticalAlign="middle" backgroundColor="0xCCCCCC"/>
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'Enabled')}" labelWidth="180" id="v_minimapZoom_enabled" config="hotkeys.minimapZoom.enabled" change="onChange(event)"/>
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'onHold')}" id="v_minimapZoom_onHold" config="hotkeys.minimapZoom.onHold" change="onChange(event)"/>
-    <c:LabeledKeyCodeSelector label="{resourceManager.getString('panels', 'keyCode')}" id="v_minimapZoom_keyCode" config="hotkeys.minimapZoom.keyCode" change="onChange(event)"/>
+    <s:Label text="{_('minimapZoom')}:" width="100%" height="20" fontWeight="bold" paddingLeft="5" verticalAlign="middle" backgroundColor="0xCCCCCC"/>
+    <c:LabeledCheckBox label="{_('Enabled')}" labelWidth="180" id="v_minimapZoom_enabled" config="hotkeys.minimapZoom.enabled" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('onHold')}" id="v_minimapZoom_onHold" config="hotkeys.minimapZoom.onHold" change="onChange(event)"/>
+    <c:LabeledKeyCodeSelector label="{_('keyCode')}" id="v_minimapZoom_keyCode" config="hotkeys.minimapZoom.keyCode" change="onChange(event)"/>
 </c:PanelComponent>

@@ -4,7 +4,7 @@
     xmlns:s="library://ns.adobe.com/flex/spark"
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
-    title="{resourceManager.getString('panels', 'PTurretMarkers')}">
-    <c:LabeledTextInput label="{resourceManager.getString('panels', 'highVulnerability')}" toolTip="{resourceManager.getString('panels', 'highVulnerabilityTip')}" labelWidth="180" id="v_highVulnerability" config="turretMarkers.highVulnerability" change="onChange(event)"/>
-    <c:LabeledTextInput label="{resourceManager.getString('panels', 'lowVulnerability')}" toolTip="{resourceManager.getString('panels', 'lowVulnerabilityTip')}" labelWidth="180" id="v_lowVulnerability" config="turretMarkers.lowVulnerability" change="onChange(event)"/>
+    title="{_('PTurretMarkers')}">
+    <c:LabeledTextInput label="{_('highVulnerability')}" toolTip="{_('highVulnerabilityTip')}" labelWidth="180" id="v_highVulnerability" config="turretMarkers.highVulnerability" change="onChange(event)"/>
+    <c:LabeledTextInput label="{_('lowVulnerability')}" toolTip="{_('lowVulnerabilityTip')}" labelWidth="180" id="v_lowVulnerability" config="turretMarkers.lowVulnerability" change="onChange(event)"/>
 </c:PanelComponent>

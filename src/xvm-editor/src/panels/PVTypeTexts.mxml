@@ -4,10 +4,10 @@
     xmlns:s="library://ns.adobe.com/flex/spark"
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
-    title="{resourceManager.getString('panels', 'PVTypeTexts')}">
-    <c:LabeledTextInput label="{resourceManager.getString('panels', 'vtypeLT')}" labelWidth="180" id="v_LT" config="texts.vtype.LT" change="onChange(event)"/>
-    <c:LabeledTextInput label="{resourceManager.getString('panels', 'vtypeMT')}" labelWidth="180" id="v_MT" config="texts.vtype.MT" change="onChange(event)"/>
-    <c:LabeledTextInput label="{resourceManager.getString('panels', 'vtypeHT')}" labelWidth="180" id="v_HT" config="texts.vtype.HT" change="onChange(event)"/>
-    <c:LabeledTextInput label="{resourceManager.getString('panels', 'vtypeTD')}" labelWidth="180" id="v_TD" config="texts.vtype.TD" change="onChange(event)"/>
-    <c:LabeledTextInput label="{resourceManager.getString('panels', 'vtypeSPG')}" labelWidth="180" id="v_SPG" config="texts.vtype.SPG" change="onChange(event)"/>
+    title="{_('PVTypeTexts')}">
+    <c:LabeledTextInput label="{_('vtypeLT')}" labelWidth="180" id="v_LT" config="texts.vtype.LT" change="onChange(event)"/>
+    <c:LabeledTextInput label="{_('vtypeMT')}" labelWidth="180" id="v_MT" config="texts.vtype.MT" change="onChange(event)"/>
+    <c:LabeledTextInput label="{_('vtypeHT')}" labelWidth="180" id="v_HT" config="texts.vtype.HT" change="onChange(event)"/>
+    <c:LabeledTextInput label="{_('vtypeTD')}" labelWidth="180" id="v_TD" config="texts.vtype.TD" change="onChange(event)"/>
+    <c:LabeledTextInput label="{_('vtypeSPG')}" labelWidth="180" id="v_SPG" config="texts.vtype.SPG" change="onChange(event)"/>
 </c:PanelComponent>

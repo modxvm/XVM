@@ -37,6 +37,24 @@
                 { img: IMG5, m1: [  95, 260, 0.8, 1500 ], m2: [ 445, 225, 0.6, 1200 ], m3: [ 260, 240, 0.7, 320 ] }
             ];
 
+            [Bindable(event="languageChanged")]
+            public function getMapNames():Array
+            {
+                return [
+                    _('Hills') + " 1",
+                    _('Hills') + " 2",
+                    _('Mannerheim') + " 1",
+                    _('Mannerheim') + " 2",
+                    _('Mannerheim') + " 3"
+                ];
+            }
+
+            [Bindable(event="languageChanged")]
+            public function _(s:String):String
+            {
+                return resourceManager.getString('components', s);
+            }
+
             private static var s_taTestHtml:TextArea = null;
             public static function testHtml(value:String): void
             {
@@ -119,20 +137,12 @@
             </mx:Canvas>
             <s:BorderContainer y="400" width="100%" height="32" borderVisible="false">
                 <s:HGroup top="5" left="0" bottom="0" width="100%" gap="4" verticalAlign="top" paddingLeft="4" paddingRight="4">
-<!--                    <s:Label text="{resourceManager.getString('components', 'Background')}"/>-->
-                    <mx:List id="cbBG" width="100" height="120" selectedIndex="0" editable="false" change="cbBG_changeHandler(event)" creationComplete="cbBG_changeHandler(new ListEvent(''))">
-                        <mx:ArrayCollection>
-                            <fx:String>{resourceManager.getString('components', 'Hills')} 1</fx:String>
-                            <fx:String>{resourceManager.getString('components', 'Hills')} 2</fx:String>
-                            <fx:String>{resourceManager.getString('components', 'Mannerheim')} 1</fx:String>
-                            <fx:String>{resourceManager.getString('components', 'Mannerheim')} 2</fx:String>
-                            <fx:String>{resourceManager.getString('components', 'Mannerheim')} 3</fx:String>
-                        </mx:ArrayCollection>
-                    </mx:List>
+<!--                    <s:Label text="{_('Background')}"/>-->
+                    <mx:List id="cbBG" width="100" height="120" selectedIndex="0" editable="false" change="cbBG_changeHandler(event)" creationComplete="cbBG_changeHandler(new ListEvent(''))" dataProvider="{getMapNames()}"/>
                     <s:ToggleButton id="btnExt" label="Alt" click="{marker1.extMode=marker2.extMode=marker3.extMode=btnExt.selected;}"/>
-                    <s:ToggleButton id="btnDeadType" label="{resourceManager.getString('components', 'SelectDead')}" toolTip="{resourceManager.getString('components', 'SelectDeadToolTip')}" click="{marker3.deadType=btnDeadType.selected;}"/>
-                    <s:Button label="{resourceManager.getString('components', 'Hit')}" click="{marker1.hit();marker2.hit();}"/>
-                    <s:Button label="{resourceManager.getString('components', 'Action')}" click="{marker1.action();marker2.action();}"/>
+                    <s:ToggleButton id="btnDeadType" label="{_('SelectDead')}" toolTip="{_('SelectDeadToolTip')}" click="{marker3.deadType=btnDeadType.selected;}"/>
+                    <s:Button label="{_('Hit')}" click="{marker1.hit();marker2.hit();}"/>
+                    <s:Button label="{_('Action')}" click="{marker1.action();marker2.action();}"/>
                 </s:HGroup>
             </s:BorderContainer>
         </s:NavigatorContent>

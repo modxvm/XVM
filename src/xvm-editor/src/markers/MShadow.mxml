@@ -4,16 +4,16 @@
     xmlns:s="library://ns.adobe.com/flex/spark"
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
-    title="{resourceManager.getString('markers', 'Shadow')}">
+    title="{_m('Shadow')}">
     <fx:Script>
         <![CDATA[
             import utils.Macros;
         ]]>
     </fx:Script>
-    <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'Size')}" id="v_size" config="shadow.size" minimum="0" maximum="10" stepSize="0.1" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'Strength')}" id="v_strength" config="shadow.strength" minimum="0" maximum="5000" isLogarithmic="true" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'Angle')}" id="v_angle" config="shadow.angle" minimum="0" maximum="359" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('markers', 'Distance')}" id="v_distance" config="shadow.distance" minimum="0" maximum="10" change="onChange(event)"/>
-    <c:LabeledMacrosColorSelector label="{resourceManager.getString('markers', 'Color')}" toolTip="{resourceManager.getString('markers', 'DynamicColorTip')}" width="320" id="v_color" config="shadow.color" allowedMacros="{Macros.get('syscolors,colors_markers,colors_stat')}" change="onChange(event)"/>
-    <c:LabeledMacrosNumberSelector label="{resourceManager.getString('markers', 'Transparency')}" id="v_alpha" config="shadow.alpha" minimum="0" maximum="100" allowedMacros="{Macros.get('transparency')}" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_m('Size')}" id="v_size" config="shadow.size" minimum="0" maximum="10" stepSize="0.1" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_m('Strength')}" id="v_strength" config="shadow.strength" minimum="0" maximum="5000" isLogarithmic="true" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_m('Angle')}" id="v_angle" config="shadow.angle" minimum="0" maximum="359" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_m('Distance')}" id="v_distance" config="shadow.distance" minimum="0" maximum="10" change="onChange(event)"/>
+    <c:LabeledMacrosColorSelector label="{_m('Color')}" toolTip="{_m('DynamicColorTip')}" width="320" id="v_color" config="shadow.color" allowedMacros="{Macros.get('syscolors,colors_markers,colors_stat')}" change="onChange(event)"/>
+    <c:LabeledMacrosNumberSelector label="{_m('Transparency')}" id="v_alpha" config="shadow.alpha" minimum="0" maximum="100" allowedMacros="{Macros.get('transparency')}" change="onChange(event)"/>
 </c:PanelComponent>

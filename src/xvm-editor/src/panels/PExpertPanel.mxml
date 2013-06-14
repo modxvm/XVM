@@ -4,7 +4,7 @@
     xmlns:s="library://ns.adobe.com/flex/spark"
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
-    title="{resourceManager.getString('panels', 'PExpertPanel')}">
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'expertPanelDelay')}" labelWidth="210" id="v_delay" config="expertPanel.delay" minimum="0" maximum="60" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'expertPanelScale')}" labelWidth="210" id="v_scale" config="expertPanel.scale" minimum="0" maximum="300" change="onChange(event)"/>
+    title="{_('PExpertPanel')}">
+    <c:LabeledNumberSelector label="{_('expertPanelDelay')}" labelWidth="210" id="v_delay" config="expertPanel.delay" minimum="0" maximum="60" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_('expertPanelScale')}" labelWidth="210" id="v_scale" config="expertPanel.scale" minimum="0" maximum="300" change="onChange(event)"/>
 </c:PanelComponent>

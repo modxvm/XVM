@@ -4,12 +4,12 @@
     xmlns:s="library://ns.adobe.com/flex/spark"
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
-    title="{resourceManager.getString('panels', 'PBattle')}">
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'mirroredVehicleIcons')}" id="v_mirroredVehicleIcons" config="battle.mirroredVehicleIcons" change="onChange(event)"/>
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'showPostmortemTips')}" id="v_showPostmortemTips" config="battle.showPostmortemTips" change="onChange(event)"/>
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'removePanelsModeSwitcher')}" id="v_removePanelsModeSwitcher" config="battle.removePanelsModeSwitcher" change="onChange(event)"/>
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'highlightVehicleIcon')}" id="v_highlightVehicleIcon" config="battle.highlightVehicleIcon" change="onChange(event)"/>
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'useStandardMarkers')}" id="v_useStandardMarkers" config="battle.useStandardMarkers" change="onChange(event)"/>
-    <c:LabeledTextInput label="{resourceManager.getString('panels', 'clockFormat')}" toolTip="{resourceManager.getString('panels', 'clockFormatToolTip')}" id="v_clockFormat" config="battle.clockFormat" change="onChange(event)"/>
-    <c:LabeledTextInput label="{resourceManager.getString('panels', 'clanIconsFolder')}" toolTip="{resourceManager.getString('panels', 'clanIconsFolderToolTip')}" id="v_clanIconsFolder" config="battle.clanIconsFolder" change="onChange(event)"/>
+    title="{_('PBattle')}">
+    <c:LabeledCheckBox label="{_('mirroredVehicleIcons')}" id="v_mirroredVehicleIcons" config="battle.mirroredVehicleIcons" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('showPostmortemTips')}" id="v_showPostmortemTips" config="battle.showPostmortemTips" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('removePanelsModeSwitcher')}" id="v_removePanelsModeSwitcher" config="battle.removePanelsModeSwitcher" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('highlightVehicleIcon')}" id="v_highlightVehicleIcon" config="battle.highlightVehicleIcon" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('useStandardMarkers')}" id="v_useStandardMarkers" config="battle.useStandardMarkers" change="onChange(event)"/>
+    <c:LabeledTextInput label="{_('clockFormat')}" toolTip="{_('clockFormatToolTip')}" id="v_clockFormat" config="battle.clockFormat" change="onChange(event)"/>
+    <c:LabeledTextInput label="{_('clanIconsFolder')}" toolTip="{_('clanIconsFolderToolTip')}" id="v_clanIconsFolder" config="battle.clanIconsFolder" change="onChange(event)"/>
 </c:PanelComponent>

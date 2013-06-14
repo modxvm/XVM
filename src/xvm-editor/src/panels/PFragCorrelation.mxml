@@ -4,6 +4,6 @@
     xmlns:s="library://ns.adobe.com/flex/spark"
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
-    title="{resourceManager.getString('panels', 'PFragCorrelation')}">
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'hideTeamTextFields')}" id="v_hideTeamTextFields" config="fragCorrelation.hideTeamTextFields" change="onChange(event)"/>
+    title="{_('PFragCorrelation')}">
+    <c:LabeledCheckBox label="{_('hideTeamTextFields')}" id="v_hideTeamTextFields" config="fragCorrelation.hideTeamTextFields" change="onChange(event)"/>
 </c:PanelComponent>

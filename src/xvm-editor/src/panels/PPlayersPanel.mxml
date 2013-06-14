@@ -4,13 +4,13 @@
     xmlns:s="library://ns.adobe.com/flex/spark"
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
-    title="{resourceManager.getString('panels', 'PPlayersPanel')}">
+    title="{_('PPlayersPanel')}">
     <fx:Script>
         <![CDATA[
             import utils.Macros;
         ]]>
     </fx:Script>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'ppAlpha')}" id="v_alpha" config="playersPanel.alpha" minimum="0" maximum="100" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'ppIconAlpha')}" id="v_iconAlpha" config="playersPanel.iconAlpha" minimum="0" maximum="100" change="onChange(event)"/>
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'RemoveSquadIcon')}" id="v_removeSquadIcon" config="playersPanel.removeSquadIcon" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_('ppAlpha')}" id="v_alpha" config="playersPanel.alpha" minimum="0" maximum="100" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_('ppIconAlpha')}" id="v_iconAlpha" config="playersPanel.iconAlpha" minimum="0" maximum="100" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('RemoveSquadIcon')}" id="v_removeSquadIcon" config="playersPanel.removeSquadIcon" change="onChange(event)"/>
 </c:PanelComponent>

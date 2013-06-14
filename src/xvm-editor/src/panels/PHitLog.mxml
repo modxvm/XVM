@@ -4,32 +4,32 @@
     xmlns:s="library://ns.adobe.com/flex/spark"
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
-    title="{resourceManager.getString('panels', 'PHitLog')}">
+    title="{_('PHitLog')}">
     <fx:Script>
         <![CDATA[
             import utils.Macros;
         ]]>
     </fx:Script>
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'Visible')}" labelWidth="180" id="v_visible" config="hitLog.visible" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'XPosition')}" toolTip="{resourceManager.getString('panels', 'hitLogXTip')}" labelWidth="180" id="v_x" config="hitLog.x" minimum="-9999" maximum="9999" sliderVisible="false" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'YPosition')}" toolTip="{resourceManager.getString('panels', 'hitLogYTip')}" labelWidth="180" id="v_y" config="hitLog.y" minimum="-9999" maximum="9999" sliderVisible="false" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Width')}" labelWidth="180" id="v_w" config="hitLog.w" minimum="0" maximum="9999" sliderVisible="false" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Height')}" labelWidth="180" id="v_h" config="hitLog.h" minimum="0" maximum="9999" sliderVisible="false" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'lines')}" labelWidth="180" id="v_lines" config="hitLog.lines" minimum="0" maximum="100" change="onChange(event)"/>
-    <c:LabeledDirectionSelector label="{resourceManager.getString('panels', 'direction')}" labelWidth="180" id="v_direction" config="hitLog.direction" change="onChange(event)"/>
-    <c:LabeledInsertOrderSelector label="{resourceManager.getString('panels', 'insertOrder')}" toolTip="{resourceManager.getString('panels', 'insertOrderTip')}" labelWidth="180" id="v_insertOrder" config="hitLog.insertOrder" change="onChange(event)"/>
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'groupHitsByPlayer')}" id="v_groupHitsByPlayer" config="hitLog.groupHitsByPlayer" change="onChange(event)"/>
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'hpLeft')}" id="v_hpLeft" config="hitLog.hpLeft" change="onChange(event)"/>
-    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'deadMarker')}" labelWidth="100%" wrapTextField="true" height="40" id="v_deadMarker" config="hitLog.deadMarker" allowedMacros="{Macros.get('hitlog,colors_hitlog')}" preview="true" change="onChange(event)"/>
-    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'blowupMarker')}" labelWidth="100%" wrapTextField="true" height="40" id="v_blowupMarker" config="hitLog.blowupMarker" allowedMacros="{Macros.get('hitlog,colors_hitlog')}" preview="true" change="onChange(event)"/>
-    <c:LabeledTextInput label="{resourceManager.getString('panels', 'defaultHeader')}" labelWidth="100%" wrapTextField="true" height="40" id="v_defaultHeader" config="hitLog.defaultHeader" preview="true" change="onChange(event)"/>
-    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'formatHeader')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatHeader" config="hitLog.formatHeader" allowedMacros="{Macros.get('hitlog,dead,colors_hitlog')}" preview="true" change="onChange(event)"/>
-    <c:LabeledMacrosTextInput label="{resourceManager.getString('panels', 'formatHistory')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatHistory" config="hitLog.formatHistory" allowedMacros="{Macros.get('hitlog,dead,colors_hitlog')}" preview="true" change="onChange(event)"/>
-    <s:Label text="{resourceManager.getString('panels', 'Shadow')}:" width="100%" height="20" verticalAlign="middle" paddingLeft="5" backgroundColor="0xCCCCCC"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Size')}" id="v_shadow_size" config="hitLog.shadow.size" minimum="0" maximum="10" stepSize="0.1" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Strength')}" id="v_shadow_strength" config="hitLog.shadow.strength" minimum="0" maximum="1000" isLogarithmic="true" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Angle')}" id="v_shadow_angle" config="hitLog.shadow.angle" minimum="0" maximum="359" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Distance')}" id="v_shadow_distance" config="hitLog.shadow.distance" minimum="0" maximum="10" change="onChange(event)"/>
-    <c:LabeledColorSelector label="{resourceManager.getString('panels', 'Color')}" width="320" id="v_shadow_color" config="hitLog.shadow.color" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'Transparency')}" id="v_shadow_alpha" config="hitLog.shadow.alpha" minimum="0" maximum="100" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('Visible')}" labelWidth="180" id="v_visible" config="hitLog.visible" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_('XPosition')}" toolTip="{_('hitLogXTip')}" labelWidth="180" id="v_x" config="hitLog.x" minimum="-9999" maximum="9999" sliderVisible="false" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_('YPosition')}" toolTip="{_('hitLogYTip')}" labelWidth="180" id="v_y" config="hitLog.y" minimum="-9999" maximum="9999" sliderVisible="false" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_('Width')}" labelWidth="180" id="v_w" config="hitLog.w" minimum="0" maximum="9999" sliderVisible="false" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_('Height')}" labelWidth="180" id="v_h" config="hitLog.h" minimum="0" maximum="9999" sliderVisible="false" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_('lines')}" labelWidth="180" id="v_lines" config="hitLog.lines" minimum="0" maximum="100" change="onChange(event)"/>
+    <c:LabeledDirectionSelector label="{_('direction')}" labelWidth="180" id="v_direction" config="hitLog.direction" change="onChange(event)"/>
+    <c:LabeledInsertOrderSelector label="{_('insertOrder')}" toolTip="{_('insertOrderTip')}" labelWidth="180" id="v_insertOrder" config="hitLog.insertOrder" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('groupHitsByPlayer')}" id="v_groupHitsByPlayer" config="hitLog.groupHitsByPlayer" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('hpLeft')}" id="v_hpLeft" config="hitLog.hpLeft" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{_('deadMarker')}" labelWidth="100%" wrapTextField="true" height="40" id="v_deadMarker" config="hitLog.deadMarker" allowedMacros="{Macros.get('hitlog,colors_hitlog')}" preview="true" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{_('blowupMarker')}" labelWidth="100%" wrapTextField="true" height="40" id="v_blowupMarker" config="hitLog.blowupMarker" allowedMacros="{Macros.get('hitlog,colors_hitlog')}" preview="true" change="onChange(event)"/>
+    <c:LabeledTextInput label="{_('defaultHeader')}" labelWidth="100%" wrapTextField="true" height="40" id="v_defaultHeader" config="hitLog.defaultHeader" preview="true" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{_('formatHeader')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatHeader" config="hitLog.formatHeader" allowedMacros="{Macros.get('hitlog,dead,colors_hitlog')}" preview="true" change="onChange(event)"/>
+    <c:LabeledMacrosTextInput label="{_('formatHistory')}" labelWidth="100%" wrapTextField="true" height="40" id="v_formatHistory" config="hitLog.formatHistory" allowedMacros="{Macros.get('hitlog,dead,colors_hitlog')}" preview="true" change="onChange(event)"/>
+    <s:Label text="{_('Shadow')}:" width="100%" height="20" verticalAlign="middle" paddingLeft="5" backgroundColor="0xCCCCCC"/>
+    <c:LabeledNumberSelector label="{_('Size')}" id="v_shadow_size" config="hitLog.shadow.size" minimum="0" maximum="10" stepSize="0.1" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_('Strength')}" id="v_shadow_strength" config="hitLog.shadow.strength" minimum="0" maximum="1000" isLogarithmic="true" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_('Angle')}" id="v_shadow_angle" config="hitLog.shadow.angle" minimum="0" maximum="359" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_('Distance')}" id="v_shadow_distance" config="hitLog.shadow.distance" minimum="0" maximum="10" change="onChange(event)"/>
+    <c:LabeledColorSelector label="{_('Color')}" width="320" id="v_shadow_color" config="hitLog.shadow.color" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_('Transparency')}" id="v_shadow_alpha" config="hitLog.shadow.alpha" minimum="0" maximum="100" change="onChange(event)"/>
 </c:PanelComponent>

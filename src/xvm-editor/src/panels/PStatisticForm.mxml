@@ -4,8 +4,8 @@
     xmlns:s="library://ns.adobe.com/flex/spark"
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
-    title="{resourceManager.getString('panels', 'PStatisticForm')}">
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'ShowChances')}" id="v_showChances" config="statisticForm.showChances" change="onChange(event)"/>
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'ShowChancesExp')}" id="v_showChancesExp" config="statisticForm.showChancesExp" change="onChange(event)"/>
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'RemoveSquadIcon')}" id="v_removeSquadIcon" config="statisticForm.removeSquadIcon" change="onChange(event)"/>
+    title="{_('PStatisticForm')}">
+    <c:LabeledCheckBox label="{_('ShowChances')}" id="v_showChances" config="statisticForm.showChances" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('ShowChancesExp')}" id="v_showChancesExp" config="statisticForm.showChancesExp" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('RemoveSquadIcon')}" id="v_removeSquadIcon" config="statisticForm.removeSquadIcon" change="onChange(event)"/>
 </c:PanelComponent>

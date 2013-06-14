@@ -11,6 +11,18 @@
         import events.SetDefaultValueEvent;
         import events.ValueChangedEvent;
 
+        [Bindable(event="languageChanged")]
+        public function _(s:String):String
+        {
+            return resourceManager.getString('panels', s);
+        }
+
+        [Bindable(event="languageChanged")]
+        public function _m(s:String):String
+        {
+            return resourceManager.getString('markers', s);
+        }
+
         public override function set mxmlContent(value:Array):void
         {
             if (super.numElements == 0)
@@ -54,6 +66,6 @@
         [ResourceBundle("panels")]
         [ResourceBundle("markers")]
     </fx:Metadata>
-    <mx:Image right="5" y="-18" width="16" height="16" source="@Embed(source='images/revert.png')" toolTip="{resourceManager.getString('panels', 'DefaultSettings')}" useHandCursor="true" buttonMode="true" click="onSetDefault(event)"/>
+    <mx:Image right="5" y="-18" width="16" height="16" source="@Embed(source='images/revert.png')" toolTip="{_('DefaultSettings')}" useHandCursor="true" buttonMode="true" click="onSetDefault(event)"/>
     <s:VGroup id="holder" left="10" right="10" top="5" bottom="5" gap="2" variableRowHeight="true"/>
 </s:Panel>

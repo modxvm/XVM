@@ -4,9 +4,9 @@
     xmlns:s="library://ns.adobe.com/flex/spark"
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
-    title="{resourceManager.getString('panels', 'PFinalStatistic')}">
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'startPage')}" labelWidth="180" id="v_startPage" config="finalStatistic.startPage" minimum="1" maximum="3" change="onChange(event)"/>
-    <c:LabeledNumberSelector label="{resourceManager.getString('panels', 'sortColumn')}" labelWidth="180" id="v_sortColumn" config="finalStatistic.sortColumn" minimum="1" maximum="7" change="onChange(event)"/>
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'ShowChances')}" id="v_showChances" config="finalStatistic.showChances" change="onChange(event)"/>
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'ShowChancesExp')}" id="v_showChancesExp" config="finalStatistic.showChancesExp" change="onChange(event)"/>
+    title="{_('PFinalStatistic')}">
+    <c:LabeledNumberSelector label="{_('startPage')}" labelWidth="180" id="v_startPage" config="finalStatistic.startPage" minimum="1" maximum="3" change="onChange(event)"/>
+    <c:LabeledNumberSelector label="{_('sortColumn')}" labelWidth="180" id="v_sortColumn" config="finalStatistic.sortColumn" minimum="1" maximum="7" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('ShowChances')}" id="v_showChances" config="finalStatistic.showChances" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('ShowChancesExp')}" id="v_showChancesExp" config="finalStatistic.showChancesExp" change="onChange(event)"/>
 </c:PanelComponent>

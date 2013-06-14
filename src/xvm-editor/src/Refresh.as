@@ -324,6 +324,13 @@ private function RefreshMinimapPage():void
         this.p_minimap.v_selfIconAlpha.value = section.selfIconAlpha;
         this.p_minimap.v_cameraAlpha.value = section.cameraAlpha;
         this.p_minimap.v_iconScale.value = section.iconScale;
+        this.p_minimap.v_zoom_pixelsBack.value = section.zoom.pixelsBack;
+        this.p_minimap.v_zoom_centered.value = section.zoom.centered;
+        this.p_minimap.v_square_enabled.value = section.square.enabled;
+        this.p_minimap.v_square_artilleryEnabled.value = section.square.artilleryEnabled;
+        this.p_minimap.v_square_thickness.value = section.square.thickness;
+        this.p_minimap.v_square_alpha.value = section.square.alpha;
+        this.p_minimap.v_square_color.value = section.square.color;
     }
     catch (ex:Error)
     {

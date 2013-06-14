@@ -15,8 +15,12 @@
     <fx:Script>
         <![CDATA[
             import events.SetDefaultValueEvent;
-
+            
+            import mx.core.IVisualElement;
+            import mx.core.IVisualElementContainer;
             import mx.events.FlexEvent;
+            
+            import spark.components.SkinnableContainer;
 
             [Bindable(event="languageChanged")]
             protected function _(textId:String):String
@@ -39,8 +43,17 @@
             protected function onLanguageButtonClick(event:Event):void
             {
                 resourceManager.localeChain = (event.target == lang_en) ? ['en_US', 'ru_RU'] : ['ru_RU', 'en_US'];
-                dispatchEvent(new Event('languageChanged'));
-                //preview.cbBG.selectedIndex = preview.cbBG.selectedIndex; // refresh preview selected item
+                sendEventAllElements(this, "languageChanged");
+            }
+
+            private function sendEventAllElements(obj:IVisualElement, event:String):void
+            {
+                obj.dispatchEvent(new Event(event));
+                var c:IVisualElementContainer = obj as IVisualElementContainer;
+                if (c == null)
+                    return;
+                for (var i:int = 0; i < c.numElements; ++i)
+                    sendEventAllElements(c.getElementAt(i), event);
             }
         ]]>
     </fx:Script>

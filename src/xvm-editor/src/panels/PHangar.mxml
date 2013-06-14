@@ -4,17 +4,17 @@
     xmlns:s="library://ns.adobe.com/flex/spark"
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
-    title="{resourceManager.getString('panels', 'PHangar')}">
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'hideTutorial')}" id="v_hideTutorial" config="hangar.hideTutorial" change="onChange(event)"/>
+    title="{_('PHangar')}">
+    <c:LabeledCheckBox label="{_('hideTutorial')}" id="v_hideTutorial" config="hangar.hideTutorial" change="onChange(event)"/>
 
-    <s:Label text="{resourceManager.getString('panels', 'UserInfo')}:" width="100%" height="20" fontWeight="bold" paddingLeft="5" verticalAlign="middle" backgroundColor="0xCCCCCC"/>
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'showEColumn')}" id="v_showEColumn" config="userInfo.showEColumn" change="onChange(event)"/>
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'inHangarFilterEnabled')}" id="v_inHangarFilterEnabled" config="userInfo.inHangarFilterEnabled" change="onChange(event)"/>
+    <s:Label text="{_('UserInfo')}:" width="100%" height="20" fontWeight="bold" paddingLeft="5" verticalAlign="middle" backgroundColor="0xCCCCCC"/>
+    <c:LabeledCheckBox label="{_('showEColumn')}" id="v_showEColumn" config="userInfo.showEColumn" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('inHangarFilterEnabled')}" id="v_inHangarFilterEnabled" config="userInfo.inHangarFilterEnabled" change="onChange(event)"/>
 
-    <s:Label text="{resourceManager.getString('panels', 'Squad')}:" width="100%" height="20" fontWeight="bold" paddingLeft="5" verticalAlign="middle" backgroundColor="0xCCCCCC"/>
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'StatisticsEnabled')}" labelWidth="180" id="v_enabled" config="squad.enabled" change="onChange(event)"/>
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'romanNumbers')}" labelWidth="180" id="v_romanNumbers" config="squad.romanNumbers" change="onChange(event)"/>
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'showClan')}" labelWidth="180" id="v_showClan" config="squad.showClan" change="onChange(event)"/>
-    <c:LabeledTextInput label="{resourceManager.getString('panels', 'leftLvlBorder')}" labelWidth="180" id="v_leftLvlBorder" config="squad.leftLvlBorder" change="onChange(event)"/>
-    <c:LabeledTextInput label="{resourceManager.getString('panels', 'rightLvlBorder')}" labelWidth="180" id="v_rightLvlBorder" config="squad.rightLvlBorder" change="onChange(event)"/>
+    <s:Label text="{_('Squad')}:" width="100%" height="20" fontWeight="bold" paddingLeft="5" verticalAlign="middle" backgroundColor="0xCCCCCC"/>
+    <c:LabeledCheckBox label="{_('StatisticsEnabled')}" labelWidth="180" id="v_enabled" config="squad.enabled" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('romanNumbers')}" labelWidth="180" id="v_romanNumbers" config="squad.romanNumbers" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('showClan')}" labelWidth="180" id="v_showClan" config="squad.showClan" change="onChange(event)"/>
+    <c:LabeledTextInput label="{_('leftLvlBorder')}" labelWidth="180" id="v_leftLvlBorder" config="squad.leftLvlBorder" change="onChange(event)"/>
+    <c:LabeledTextInput label="{_('rightLvlBorder')}" labelWidth="180" id="v_rightLvlBorder" config="squad.rightLvlBorder" change="onChange(event)"/>
 </c:PanelComponent>

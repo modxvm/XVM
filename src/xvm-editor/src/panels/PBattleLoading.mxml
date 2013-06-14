@@ -4,9 +4,9 @@
     xmlns:s="library://ns.adobe.com/flex/spark"
     xmlns:mx="library://ns.adobe.com/flex/mx"
     xmlns:c="components.*"
-    title="{resourceManager.getString('panels', 'PBattleLoading')}">
-    <c:LabeledTextInput label="{resourceManager.getString('panels', 'clockFormat')}" toolTip="{resourceManager.getString('panels', 'clockFormatToolTip')}" id="v_clockFormat" config="battleLoading.clockFormat" change="onChange(event)"/>
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'ShowChances')}" id="v_showChances" config="battleLoading.showChances" change="onChange(event)"/>
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'ShowChancesExp')}" id="v_showChancesExp" config="battleLoading.showChancesExp" change="onChange(event)"/>
-    <c:LabeledCheckBox label="{resourceManager.getString('panels', 'RemoveSquadIcon')}" id="v_removeSquadIcon" config="battleLoading.removeSquadIcon" change="onChange(event)"/>
+    title="{_('PBattleLoading')}">
+    <c:LabeledTextInput label="{_('clockFormat')}" toolTip="{_('clockFormatToolTip')}" id="v_clockFormat" config="battleLoading.clockFormat" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('ShowChances')}" id="v_showChances" config="battleLoading.showChances" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('ShowChancesExp')}" id="v_showChancesExp" config="battleLoading.showChancesExp" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('RemoveSquadIcon')}" id="v_removeSquadIcon" config="battleLoading.removeSquadIcon" change="onChange(event)"/>
 </c:PanelComponent>

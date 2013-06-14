@@ -10,6 +10,12 @@
 
         import flash.events.Event;
 
+        [Bindable(event="languageChanged")]
+        public function _(s:String):String
+        {
+            return resourceManager.getString('panels', s);
+        }
+
         [Bindable]
         public var config:String = null;
 
