@@ -145,17 +145,19 @@ private function onLoadError(e:IOErrorEvent):void
 }
 
 // SAVE
-private function SaveConfig():void
+private function SaveConfig(trim:Boolean):void
 {
 	var fr:FileReference = new FileReference();
 	fr.addEventListener(Event.COMPLETE, onFileSave);
 	fr.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
 	// Serialize and add UTF-8 BOM
+	var cfg:Object = trim ? ConfigUtilsEditor.SimplifyConfig(Config.s_config) : Config.s_config;
+		
 	var str:String = "\uFEFF/**\n" +
 		" * Config was created in XVM Editor v" + utils.Defines.EDITOR_VERSION + "\n" +
 		" * at " + (new Date()).toString() + "\n" +
 		" */\n" +
-		JSONx.stringify(ConfigUtilsEditor.SimplifyConfig(Config.s_config), null, false, sortFunction) + "\n";
+		JSONx.stringify(cfg, null, false, sortFunction) + "\n";
 	fr.save(str, "xvm.xc");
 }
 

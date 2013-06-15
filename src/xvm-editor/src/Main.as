@@ -1,8 +1,8 @@
 ﻿import flash.events.Event;
 
+import mx.controls.Alert;
 import mx.core.UIComponent;
 import mx.events.MenuEvent;
-import mx.controls.Alert;
 
 import utils.Config;
 import utils.ConfigUtils;
@@ -35,26 +35,24 @@ protected function onLoadConfigClick():void
 	LoadConfig(false);
 }
 
-protected function onSaveConfigClick():void
+protected function onSaveConfigClick(trim:Boolean):void
 {
 	Config.s_config.editorVersion = Defines.EDITOR_VERSION;
-	SaveConfig();
+	SaveConfig(trim);
 }
 
-/*
-protected function onExtraButtonClick(event:MenuEvent):void
+protected function onSaveButtonClick(event:MenuEvent):void
 {
     switch (event.item.value)
     {
-        case "merge":
-            LoadConfig(true);
+        case "save":
+            onSaveConfigClick(true);
             break;
-        case "newconfig":
-            createNewConfig();
+        case "savefull":
+            onSaveConfigClick(false);
             break;
     }
 }
-*/
 
 protected function onVehicleStateChanged(event:Event):void
 {
