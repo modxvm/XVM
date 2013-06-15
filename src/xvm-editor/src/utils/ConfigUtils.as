@@ -251,67 +251,82 @@ public class ConfigUtils
 
         if (v == "1.5.0")
         {
-            if (!config.markers.ally.alive.normal.damageTextPlayer)
-                config.markers.ally.alive.normal.damageTextPlayer = config.markers.ally.alive.normal.damageText;
-            if (!config.markers.ally.alive.normal.damageTextSquadman)
-                config.markers.ally.alive.normal.damageTextSquadman = config.markers.ally.alive.normal.damageText;
-            if (!config.markers.ally.alive.extended.damageTextPlayer)
-                config.markers.ally.alive.extended.damageTextPlayer = config.markers.ally.alive.extended.damageText;
-            if (!config.markers.ally.alive.extended.damageTextSquadman)
-                config.markers.ally.alive.extended.damageTextSquadman = config.markers.ally.alive.extended.damageText;
-            if (!config.markers.ally.dead.normal.damageTextPlayer)
-                config.markers.ally.dead.normal.damageTextPlayer = config.markers.ally.dead.normal.damageText;
-            if (!config.markers.ally.dead.normal.damageTextSquadman)
-                config.markers.ally.dead.normal.damageTextSquadman = config.markers.ally.dead.normal.damageText;
-            if (!config.markers.ally.dead.extended.damageTextPlayer)
-                config.markers.ally.dead.extended.damageTextPlayer = config.markers.ally.dead.extended.damageText;
-            if (!config.markers.ally.dead.extended.damageTextSquadman)
-                config.markers.ally.dead.extended.damageTextSquadman = config.markers.ally.dead.extended.damageText;
-            if (!config.markers.enemy.alive.normal.damageTextPlayer)
-                config.markers.enemy.alive.normal.damageTextPlayer = config.markers.enemy.alive.normal.damageText;
-            if (!config.markers.enemy.alive.normal.damageTextSquadman)
-                config.markers.enemy.alive.normal.damageTextSquadman = config.markers.enemy.alive.normal.damageText;
-            if (!config.markers.enemy.alive.extended.damageTextPlayer)
-                config.markers.enemy.alive.extended.damageTextPlayer = config.markers.enemy.alive.extended.damageText;
-            if (!config.markers.enemy.alive.extended.damageTextSquadman)
-                config.markers.enemy.alive.extended.damageTextSquadman = config.markers.enemy.alive.extended.damageText;
-            if (!config.markers.enemy.dead.normal.damageTextPlayer)
-                config.markers.enemy.dead.normal.damageTextPlayer = config.markers.enemy.dead.normal.damageText;
-            if (!config.markers.enemy.dead.normal.damageTextSquadman)
-                config.markers.enemy.dead.normal.damageTextSquadman = config.markers.enemy.dead.normal.damageText;
-            if (!config.markers.enemy.dead.extended.damageTextPlayer)
-                config.markers.enemy.dead.extended.damageTextPlayer = config.markers.enemy.dead.extended.damageText;
-            if (!config.markers.enemy.dead.extended.damageTextSquadman)
-                config.markers.enemy.dead.extended.damageTextSquadman = config.markers.enemy.dead.extended.damageText;
+			try
+			{
+	            if (!config.markers.ally.alive.normal.damageTextPlayer)
+	                config.markers.ally.alive.normal.damageTextPlayer = config.markers.ally.alive.normal.damageText;
+	            if (!config.markers.ally.alive.normal.damageTextSquadman)
+	                config.markers.ally.alive.normal.damageTextSquadman = config.markers.ally.alive.normal.damageText;
+	            if (!config.markers.ally.alive.extended.damageTextPlayer)
+	                config.markers.ally.alive.extended.damageTextPlayer = config.markers.ally.alive.extended.damageText;
+	            if (!config.markers.ally.alive.extended.damageTextSquadman)
+	                config.markers.ally.alive.extended.damageTextSquadman = config.markers.ally.alive.extended.damageText;
+	            if (!config.markers.ally.dead.normal.damageTextPlayer)
+	                config.markers.ally.dead.normal.damageTextPlayer = config.markers.ally.dead.normal.damageText;
+	            if (!config.markers.ally.dead.normal.damageTextSquadman)
+	                config.markers.ally.dead.normal.damageTextSquadman = config.markers.ally.dead.normal.damageText;
+	            if (!config.markers.ally.dead.extended.damageTextPlayer)
+	                config.markers.ally.dead.extended.damageTextPlayer = config.markers.ally.dead.extended.damageText;
+	            if (!config.markers.ally.dead.extended.damageTextSquadman)
+	                config.markers.ally.dead.extended.damageTextSquadman = config.markers.ally.dead.extended.damageText;
+	            if (!config.markers.enemy.alive.normal.damageTextPlayer)
+	                config.markers.enemy.alive.normal.damageTextPlayer = config.markers.enemy.alive.normal.damageText;
+	            if (!config.markers.enemy.alive.normal.damageTextSquadman)
+	                config.markers.enemy.alive.normal.damageTextSquadman = config.markers.enemy.alive.normal.damageText;
+	            if (!config.markers.enemy.alive.extended.damageTextPlayer)
+	                config.markers.enemy.alive.extended.damageTextPlayer = config.markers.enemy.alive.extended.damageText;
+	            if (!config.markers.enemy.alive.extended.damageTextSquadman)
+	                config.markers.enemy.alive.extended.damageTextSquadman = config.markers.enemy.alive.extended.damageText;
+	            if (!config.markers.enemy.dead.normal.damageTextPlayer)
+	                config.markers.enemy.dead.normal.damageTextPlayer = config.markers.enemy.dead.normal.damageText;
+	            if (!config.markers.enemy.dead.normal.damageTextSquadman)
+	                config.markers.enemy.dead.normal.damageTextSquadman = config.markers.enemy.dead.normal.damageText;
+	            if (!config.markers.enemy.dead.extended.damageTextPlayer)
+	                config.markers.enemy.dead.extended.damageTextPlayer = config.markers.enemy.dead.extended.damageText;
+	            if (!config.markers.enemy.dead.extended.damageTextSquadman)
+	                config.markers.enemy.dead.extended.damageTextSquadman = config.markers.enemy.dead.extended.damageText;
+			}
+			catch (ex:Object)
+			{
+			}
 
-            if (config.battle.clanIconsFolder == "../../../clanicons")
-                config.battle.clanIconsFolder = "clanicons";
+			if (config.battle)
+			{
+				if (config.battle.clanIconsFolder == "../../../clanicons")
+	                config.battle.clanIconsFolder = "clanicons";
+			}
 
-            if (!config.colors.system.ally_alive)
-                config.colors.system.ally_alive = config.colors.system.ally_alive_normal;
-            if (!config.colors.system.ally_dead)
-                config.colors.system.ally_dead = config.colors.system.ally_dead_normal;
-            if (!config.colors.system.ally_blowedup)
-                config.colors.system.ally_blowedup = config.colors.system.ally_blowedup_normal;
-            if (!config.colors.system.squadman_alive)
-                config.colors.system.squadman_alive = config.colors.system.squadman_alive_normal;
-            if (!config.colors.system.squadman_dead)
-                config.colors.system.squadman_dead = config.colors.system.squadman_dead_normal;
-            if (!config.colors.system.squadman_blowedup)
-                config.colors.system.squadman_blowedup = config.colors.system.squadman_blowedup_normal;
-            if (!config.colors.system.teamKiller_alive)
-                config.colors.system.teamKiller_alive = config.colors.system.teamKiller_alive_normal;
-            if (!config.colors.system.teamKiller_dead)
-                config.colors.system.teamKiller_dead = config.colors.system.teamKiller_dead_normal;
-            if (!config.colors.system.teamKiller_blowedup)
-                config.colors.system.teamKiller_blowedup = config.colors.system.teamKiller_blowedup_normal;
-            if (!config.colors.system.enemy_alive)
-                config.colors.system.enemy_alive = config.colors.system.enemy_alive_normal;
-            if (!config.colors.system.enemy_dead)
-                config.colors.system.enemy_dead = config.colors.system.enemy_dead_normal;
-            if (!config.colors.system.enemy_blowedup)
-                config.colors.system.enemy_blowedup = config.colors.system.enemy_blowedup_normal;
-
+			try
+			{
+	            if (!config.colors.system.ally_alive)
+	                config.colors.system.ally_alive = config.colors.system.ally_alive_normal;
+	            if (!config.colors.system.ally_dead)
+	                config.colors.system.ally_dead = config.colors.system.ally_dead_normal;
+	            if (!config.colors.system.ally_blowedup)
+	                config.colors.system.ally_blowedup = config.colors.system.ally_blowedup_normal;
+	            if (!config.colors.system.squadman_alive)
+	                config.colors.system.squadman_alive = config.colors.system.squadman_alive_normal;
+	            if (!config.colors.system.squadman_dead)
+	                config.colors.system.squadman_dead = config.colors.system.squadman_dead_normal;
+	            if (!config.colors.system.squadman_blowedup)
+	                config.colors.system.squadman_blowedup = config.colors.system.squadman_blowedup_normal;
+	            if (!config.colors.system.teamKiller_alive)
+	                config.colors.system.teamKiller_alive = config.colors.system.teamKiller_alive_normal;
+	            if (!config.colors.system.teamKiller_dead)
+	                config.colors.system.teamKiller_dead = config.colors.system.teamKiller_dead_normal;
+	            if (!config.colors.system.teamKiller_blowedup)
+	                config.colors.system.teamKiller_blowedup = config.colors.system.teamKiller_blowedup_normal;
+	            if (!config.colors.system.enemy_alive)
+	                config.colors.system.enemy_alive = config.colors.system.enemy_alive_normal;
+	            if (!config.colors.system.enemy_dead)
+	                config.colors.system.enemy_dead = config.colors.system.enemy_dead_normal;
+	            if (!config.colors.system.enemy_blowedup)
+	                config.colors.system.enemy_blowedup = config.colors.system.enemy_blowedup_normal;
+			}
+			catch (ex:Object)
+			{
+			}
+				
             v = "4.0.0";
         }
 
