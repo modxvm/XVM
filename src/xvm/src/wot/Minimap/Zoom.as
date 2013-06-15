@@ -27,18 +27,16 @@ class wot.Minimap.Zoom
     {
         if (!userIsUsingChat)
         {
-            Logger.addObject();
-            
             /**
              * Zoom while key is on hold
              * or switch zoom when key is clicked
              */
-            var isKeyDown:Boolean = event.details.value == "keyDown";
+            var isZoomKeyDown:Boolean = event.details.value == "keyDown";
             if (MapConfig.zoomHold)
             {
-                holdBehaviour(isKeyDown);
+                holdBehaviour(isZoomKeyDown);
             }
-            else if (isKeyDown)
+            else if (isZoomKeyDown)
             {
                 switchBehaviour();
             }
@@ -47,9 +45,9 @@ class wot.Minimap.Zoom
 
     // -- Private
 
-    private function holdBehaviour(isKeyDown:Boolean):Void
+    private function holdBehaviour(isZoomKeyDown:Boolean):Void
     {
-        if (isKeyDown)
+        if (isZoomKeyDown)
         {
             zoomIn();
         }
