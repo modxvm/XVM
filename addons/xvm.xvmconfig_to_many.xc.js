@@ -7,13 +7,14 @@
 ******************************************************************************/
 
 // версия скрипта
-var script_version = "8.6";
+var script_version = "9.1";
 
 // массив названий секций
 var sections = [    // порядок секций лучше не менять
-                    '"login"',
-                    '"iconset"',
+                    '"battle"',
                     '"markers"',
+                    '"iconset"',
+                    '"login"',
                     '"vehicleNames"',
                     '"turretMarkers"',
                     '"texts"',
@@ -24,7 +25,6 @@ var sections = [    // порядок секций лучше не менять
                     '"captureBar"',
                     '"hitLog"',
                     '"hotkeys"',
-                    '"battle"',
                     '"fragCorrelation"',
                     '"expertPanel"',
                     '"hangar"',
@@ -35,6 +35,113 @@ var sections = [    // порядок секций лучше не менять
                     '"alpha"',
                     '"rating"'
                 ];
+// массив комментариев для секций
+var sectionsComments = {
+    markers: {
+        ru: '  // РњР°СЂРєРµСЂС‹ РЅР°Рґ С‚Р°РЅРєР°РјРё.',
+        en: '  // Over-target markers.'
+    },
+    login: {
+        ru: '  // РџР°СЂР°РјРµС‚СЂС‹ СЌРєСЂР°РЅР° Р»РѕРіРёРЅР°.',
+        en: '  // Parameters for login screen.'
+    },
+    iconset: {
+        ru: '  // РќР°Р±РѕСЂС‹ РёРєРѕРЅРѕРє.',
+        en: '  // Icon sets.'
+    },
+    vehicleNames: {
+        ru: '  // Р—Р°РјРµРЅР° РЅР°Р·РІР°РЅРёР№ С‚Р°РЅРєРѕРІ.',
+        en: '  // Vehicle names mapping.'
+    },
+    turretMarkers: {
+        ru: '  // РћС‚РѕР±СЂР°Р¶Р°РµРјС‹Рµ СЃС‚СЂРѕРєРё {{turret}} РјР°СЂРєРµСЂР°.',
+        en: '  // {{turret}} marker display strings.'
+    },
+    texts: {
+        ru: '  // РўРµРєСЃС‚РѕРІС‹Рµ РїРѕРґСЃС‚Р°РЅРѕРІРєРё.',
+        en: '  // Text substitutions.'
+    },
+    statisticForm: {
+        ru: '  // РџР°СЂР°РјРµС‚СЂС‹ РѕРєРЅР° СЃС‚Р°С‚РёСЃС‚РёРєРё РїРѕ РєР»Р°РІРёС€Рµ Tab.',
+        en: '  // Parameters of the Battle Statistics form.'
+    },
+    playersPanel: {
+        ru: '  // РџР°СЂР°РјРµС‚СЂС‹ РїР°РЅРµР»РµР№ РёРіСЂРѕРєРѕРІ ("СѓС€РµР№").',
+        en: '  // Parameters of the Players Panels ("ears").'
+    },
+    finalStatistic: {
+        ru: '  // РџР°СЂР°РјРµС‚СЂС‹ РѕРєРЅР° РїРѕСЃР»РµР±РѕРµРІРѕР№ СЃС‚Р°С‚РёСЃС‚РёРєРё.',
+        en: '  // Parameters of the After Battle Screen.'
+    },
+    battleLoading: {
+        ru: '  // РџР°СЂР°РјРµС‚СЂС‹ СЌРєСЂР°РЅР° Р·Р°РіСЂСѓР·РєРё Р±РѕСЏ.',
+        en: '  // Parameters of the Battle Loading screen.'
+    },
+    captureBar: {
+        ru: '  // РџРѕР»РѕСЃР° Р·Р°С…РІР°С‚Р°.',
+        en: '  // Capture bar.'
+    },
+    hitLog: {
+        ru: '  // Р›РѕРі РїРѕРїР°РґР°РЅРёР№ (СЃС‡РµС‚С‡РёРє СЃРІРѕРёС… РїРѕРїР°РґР°РЅРёР№).',
+        en: '  // Hit log (my hits calculator).'
+    },
+    hotkeys: {
+        ru: '  // РЎРїРµС†РёР°Р»СЊРЅС‹Рµ РіРѕСЂСЏС‡РёРµ РєР»Р°РІРёС€Рё XVM.',
+        en: '  // Special XVM hotkeys.'
+    },
+    battle: {
+        ru: '  // РћР±С‰РёРµ РїР°СЂР°РјРµС‚СЂС‹ Р±РѕРµРІРѕРіРѕ РёРЅС‚РµСЂС„РµР№СЃР°.',
+        en: '  // General parameters for the battle interface.'
+    },
+    fragCorrelation: {
+        ru: '  // РџР°РЅРµР»СЊ СЃС‡С‘С‚Р° РІ Р±РѕСЋ.',
+        en: '  // Frag counter panel.'
+    },
+    expertPanel: {
+        ru: '  // Р’РЅСѓС‚СЂРёРёРіСЂРѕРІР°СЏ РїР°РЅРµР»СЊ РєСЂРёС‚РѕРІ РѕС‚ РЅР°РІС‹РєР° "СЌРєСЃРїРµСЂС‚".',
+        en: '  // Ingame crits panel by "expert" skill.'
+    },
+    hangar: {
+        ru: '  // РџР°СЂР°РјРµС‚СЂС‹ Р°РЅРіР°СЂР°.',
+        en: '  // Parameters for hangar.'
+    },
+    userInfo: {
+        ru: '  // РџР°СЂР°РјРµС‚СЂС‹ РѕРєРЅР° РґРѕСЃС‚РёР¶РµРЅРёР№.',
+        en: '  // Parameters for userinfo window.'
+    },
+    minimap: {
+        ru: '  // РњРёРЅРёРєР°СЂС‚Р°.',
+        en: '  // Minimap.'
+    },
+    squad: {
+        ru: '  // РџР°СЂР°РјРµС‚СЂС‹ РѕРєРЅР° РІР·РІРѕРґР°.',
+        en: '  // Parameters for squad window.'
+    },
+    colors: {
+        ru: '  // РќР°СЃС‚СЂРѕР№РєРё С†РІРµС‚РѕРІ.',
+        en: '  // Color settings.'
+    },
+    alpha: {
+        ru: '  // РќР°СЃС‚СЂРѕР№РєРё РґРёРЅР°РјРёС‡РµСЃРєРѕР№ РїСЂРѕР·СЂР°С‡РЅРѕСЃС‚Рё.',
+        en: '  // Options for dynamic transparency.'
+    },
+    rating: {
+        ru: '  // Р‘Р»РѕРє СѓРїСЂР°РІР»РµРЅРёРµРј СЃС‚Р°С‚РёСЃС‚РёРєРѕР№ (С‚РѕР»СЊРєРѕ СЃ xvm-stat).',
+        en: '  // Options for player statistics (only with xvm-stat).'
+    },
+    minimapCircles: {
+        ru: '  // РљСЂСѓРіРё РЅР° РјРёРЅРёРєР°СЂС‚Рµ.',
+        en: '  // Minimap circles.'
+    },
+    minimapLines: {
+        ru: '  // Р›РёРЅРёРё РЅР° РјРёРЅРёРєР°СЂС‚Рµ.',
+        en: '  // Minimap lines.'
+    },
+    minimapLabels: {
+        ru: '  // РќР°РґРїРёСЃРё РЅР° РјРёРЅРёРєР°СЂС‚Рµ.',
+        en: '  // Minimap labels.'
+    }
+}
 
 // Определяем язык системы
 var reg = WScript.CreateObject('WScript.Shell');
@@ -84,7 +191,7 @@ while (i < inputConfig.length && !isStart(inputConfig[i], '"author"')){
 if (i == inputConfig.length) {
     var author = "autoscript by seriych";
 } else {
-    var author = inputConfig[i].substring(inputConfig[i].indexOf('"author"'));
+    author = inputConfig[i].substring(inputConfig[i].indexOf('"author"'));
     author = author.substring(8);
     author = author.substring(author.indexOf("\"")+1);
     author = author.substring(0, author.indexOf("\""));
@@ -99,18 +206,29 @@ if (fso.FolderExists(path+author)) {
 }
 fso.CreateFolder(path+author);
 
+i = 0;
+// ищем начало секции конфига
+var startIndex = 0;
+while ( i < inputConfig.length && !isStart(inputConfig[i], '{'))
+        i++;
+if (i != inputConfig.length)
+    startIndex = i;
+
 // ищем вхождения всех секций
 for ( var j = 0; j < sections.length; j++) {
     i = 0;
     //ищем строку, содержащую секцию
     while ( i < inputConfig.length && !isStart(inputConfig[i], sections[j]))
         i++;
-    // если не нашли, переходим к следующей секции
-    if (i == inputConfig.length)
-        continue;
     // получаем название секции без кавычек
     var section = sections[j].substring(0, sections[j].length-1);
     section = section.substring(1);
+    // если не нашли, прописываем пустышку
+    if (i == inputConfig.length) {
+        inputConfig.splice(startIndex+1, 1, "  ", sectionsComments[section].en, sectionsComments[section].ru, "  "+sections[j]+": {", "    ", "  },");
+        i = startIndex+4;
+    }
+    startIndex = i;
     // создаем файл для записи секции
     if (section == "userInfo")
         section = "hangar";
@@ -171,8 +289,8 @@ fout.Close();
 if (fso.FileExists(path+author+"\\minimap.xc")) {
     // массив названий секций миникарты
     sections = [    // порядок секций лучше не менять
-                        '"labels"',
                         '"circles"',
+                        '"labels"',
                         '"lines"'
                 ];
     // массив для хранения исходного конфига
@@ -187,18 +305,29 @@ if (fso.FileExists(path+author+"\\minimap.xc")) {
     }
     finput.Close();
 
+    i = 0;
+    // ищем начало секции minimap
+    while ( i < inputConfig.length && !isStart(inputConfig[i], '"minimap"'))
+            i++;
+    if (i != inputConfig.length)
+        startIndex = i;
+
     // ищем вхождения всех секций
     for ( j = 0; j < sections.length; j++) {
         i = 0;
         //ищем строку, содержащую секцию
         while ( i < inputConfig.length && !isStart(inputConfig[i], sections[j]))
             i++;
-        // если не нашли, переходим к следующей секции
-        if (i == inputConfig.length)
-            continue;
         // получаем название секции без кавычек
         section = sections[j].substring(0, sections[j].length-1);
         section = "minimap"+section.charAt(1).toUpperCase()+section.substring(2);
+        // если не нашли, прописываем пустышку
+        if (i == inputConfig.length) {
+            inputConfig.splice(startIndex+1, 0, sectionsComments[section].en, sectionsComments[section].ru, "  "+sections[j]+": {", "    ", "  },");
+            i = startIndex+3;
+        }
+        startIndex = i;
+
         // создаем файл для записи секции
         file_out = path+author+"\\"+section+".xc";
         fout=fso.OpenTextFile(file_out,2,true,false);
@@ -282,13 +411,13 @@ if (fso.FileExists(path+author+"\\markers.xc")) {
                 i = i2;
                 while ( i < inputConfig.length && !isStart(inputConfig[i], extended[p]))
                     i++;
-                // если не нашли, переходим к следующей секции
-                if (i == inputConfig.length)
-                    continue;
                 // получаем название секции без кавычек
                 section = extended[p].substring(0, extended[p].length-1);
                 section = dead[j].substring(0, dead[j].length-1)+section.charAt(1).toUpperCase()+section.substring(2);
                 section = "markers"+section.charAt(1).toUpperCase()+section.substring(2);
+                // если не нашли, переходим к следующей секции
+                if (i == inputConfig.length)
+                    continue;
                 // создаем файл для записи секции
                 file_out = path+author+"\\"+section+".xc";
                 fout=fso.OpenTextFile(file_out,8,true,false);
