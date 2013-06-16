@@ -43,7 +43,9 @@ protected function onSaveConfigClick(trim:Boolean):void
 
 protected function onSaveButtonClick(event:MenuEvent):void
 {
-    switch (event.item.value)
+	var value:String = event.item.value;
+	//mx.controls.Menu(saveMenu.popUp).selectedIndex = 0;
+    switch (value)
     {
         case "save":
             onSaveConfigClick(true);

@@ -80,11 +80,11 @@
             <s:HGroup top="0" left="0" bottom="0" gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="4" width="361">
                 <s:Button label="{_('openButton')}" icon="@Embed(source='images/fileopen.png')" click="onLoadConfigClick()"/>
                 <!--<s:Button label="{_('saveButton')}" icon="@Embed(source='images/filesave.png')" click="onSaveConfigClick()"/>-->
-				<mx:PopUpMenuButton itemClick="onSaveButtonClick(event)">
+				<mx:PopUpMenuButton itemClick="onSaveButtonClick(event)" id="saveMenu">
 					<mx:dataProvider>
 						<fx:Array>
-						<fx:Object value="save" label="{_('saveButton')}" icon="@Embed(source='images/filesave.png')"/>
-						<fx:Object value="savefull" label="{_('saveFullButton')}" icon="@Embed(source='images/filesave.png')" />
+							<fx:Object value="save" label="{_('saveButton')}" icon="@Embed(source='images/filesave.png')"/>
+							<fx:Object value="savefull" label="{_('saveFullButton')}" icon="@Embed(source='images/filesave.png')" />
 						</fx:Array>
 					</mx:dataProvider>
 				</mx:PopUpMenuButton>

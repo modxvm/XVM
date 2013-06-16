@@ -130,7 +130,7 @@
     }
   },
   "finalStatistic": {
-    "startPage": 2,
+    "startPage": 3,
     "sortColumn": 6,
     "showChances": true,
     "showChancesExp": true

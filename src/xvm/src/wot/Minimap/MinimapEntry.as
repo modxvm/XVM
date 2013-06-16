@@ -143,6 +143,8 @@ class wot.Minimap.MinimapEntry
 
         if (wrapper.entryName == "control")
             return;
+        if (wrapper.entryName == "base") // TODO: temporary disabled before understanding what to do with bases
+            return;
 
         if (wrapper.m_type == "player" && wrapper.entryName == "postmortemCamera")
             return;
