@@ -59,20 +59,22 @@ class wot.battle.FragCorrelation
     // CONTEXT: alliedMarkers, enemyMarkers
     private static function wrapper_createItemRenderer()
     {
-        //Logger.addObject(net.wargaming.managers.ColorSchemeManager._colors, "_colors", 3);
+        //Logger.addObject(net.wargaming.managers.ColorSchemeManager._colors, "_colors", 1);
         var markers = arguments.shift();
         var ally:Boolean = Boolean(arguments.shift());
+        var dead:Boolean = !arguments[0].isAlive;
 
         var renderer = markers.$createItemRenderer.apply(markers, arguments);
 
         var type = ally ? "ally" : "enemy";
         var color = Config.s_config.battle.useStandardMarkers
             ? net.wargaming.managers.ColorSchemeManager.instance.getRGB("vm_" + type)
-            : ColorsManager.getSystemColor(type, false);
+            : ColorsManager.getSystemColor(type, dead);
 
-        GraphicsUtil.colorize(renderer.marker, color,
-            Config.s_config.consts.VM_COEFF_TBP); // darker to improve appearance
+        GraphicsUtil.colorize(dead ? renderer.markerDead : renderer.marker, color,
+            Config.s_config.consts.VM_COEFF_TBP / (dead ? 2 : 1)); // darker to improve appearance
         //Logger.addObject(arguments[0], color, 1);
+        //Logger.addObject(renderer, "renderer", 1);
         return renderer;
     }
 }
