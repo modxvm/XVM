@@ -1,4 +1,6 @@
+XVM-4.0.0-test6:
   * minimap zoom: disabled while chatting; hotkeys.xc config comment about supported keys is updated
+  * some other fixes
   
 XVM-4.0.0-test5:
   * fixed hpLeft work with standard markers enabled
