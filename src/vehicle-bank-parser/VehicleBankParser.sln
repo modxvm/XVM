@@ -1,5 +1,4 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
+﻿Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleBankParser", "VehicleBankParser.csproj", "{844A4AC4-0798-47C3-BD42-C93310004613}"
 EndProject
