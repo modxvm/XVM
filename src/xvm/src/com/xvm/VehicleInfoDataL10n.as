@@ -11,7 +11,7 @@
                 return "ltraktor";
             case "T1":
                 return "t1_cunningham";
-            case "Renault FT":
+            case "FT":
                 return "renaultft";
             case "Medium I":
                 return "gb01_medium_mark_i";
@@ -620,7 +620,7 @@
             case "Lorr. 40 t":
                 return "lorraine40t";
             case "B-C 155 55":
-                return "bat_chatillon155_58";
+                return "bat_chatillon155_55";
             case "Centurion 7/1":
                 return "gb24_centurion_mk3";
             case "Tortoise":
@@ -684,7 +684,7 @@
             case "B-C 25 t":
                 return "bat_chatillon25t";
             case "B-C 155 58":
-                return "bat_chatillon155";
+                return "bat_chatillon155_58";
             case "FV4202":
                 return "gb70_fv4202_105";
             case "FV215b 183":
