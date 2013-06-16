@@ -7,7 +7,7 @@
 ******************************************************************************/
 
 // версия скрипта
-var script_version = "9.1";
+var script_version = "9.2";
 
 // массив названий секций
 var sections = [    // порядок секций лучше не менять
@@ -248,19 +248,23 @@ for ( var j = 0; j < sections.length; j++) {
       fout.WriteLine(inputConfig[i-k]);
     // считаем разницу между количеством открывающих и закрывающих скобок
     var diff = diffBraces(inputConfig[i]);
-    // Пишем секцию в файл, пока не дойдем до конца секции (закроется последняя скобка секции)
-    do {
-      fout.WriteLine(inputConfig[i]);
-      // удаляем записанную строку из исходного конфига
-      inputConfig.splice(i, 1);
-      diff = diff + diffBraces(inputConfig[i]);
-    } while (diff > 0);  // выходим из цикла, если скобка закрылась
+    if (diff == 0) {
+        // если секция из одной строки, пишем в файл эту строку без последней скобки
+        fout.WriteLine(inputConfig[i].substring(0, inputConfig[i].lastIndexOf("}"))+"       //      "+inputConfig[i].substring(inputConfig[i].lastIndexOf("}")+1));
+    } else {
+        // Иначе пишем в файл, пока не дойдем до конца секции (закроется последняя скобка секции)
+        while (diff > 0) {
+            fout.WriteLine(inputConfig[i]);
+            inputConfig.splice(i, 1);
+            diff = diff + diffBraces(inputConfig[i]);
+        }
+    }
     // завершаем секцию и закрываем файл
     fout.WriteLine("  }");
     fout.WriteLine("}");
     fout.Close();
     // создаем строку для записи в главный файл конфига подстановки вместо секции
-    input_string = "  "+sections[j]+": ${\""+section+".xc\""+":"+sections[j]+"}";
+    var input_string = "  "+sections[j]+": ${\""+section+".xc\""+":"+sections[j]+"}";
     // если секция не последняя в конфиге, надо добавить запятую
     if (inputConfig[i].indexOf(",") != -1)
         input_string = input_string + ",";
@@ -337,13 +341,17 @@ if (fso.FileExists(path+author+"\\minimap.xc")) {
           fout.WriteLine(inputConfig[i-k]);
         // считаем разницу между количеством открывающих и закрывающих скобок
         diff = diffBraces(inputConfig[i]);
-        // Пишем секцию в файл, пока не дойдем до конца секции (закроется последняя скобка секции)
-        do {
-          fout.WriteLine(inputConfig[i]);
-          // удаляем записанную строку из исходного конфига
-          inputConfig.splice(i, 1);
-          diff = diff + diffBraces(inputConfig[i]);
-        } while (diff > 0);  // выходим из цикла, если скобка закрылась
+        if (diff == 0) {
+            // если секция из одной строки, пишем в файл эту строку без последней скобки
+            fout.WriteLine(inputConfig[i].substring(0, inputConfig[i].lastIndexOf("}"))+"       //      "+inputConfig[i].substring(inputConfig[i].lastIndexOf("}")+1));
+        } else {
+            // Иначе пишем в файл, пока не дойдем до конца секции (закроется последняя скобка секции)
+            while (diff > 0) {
+                fout.WriteLine(inputConfig[i]);
+                inputConfig.splice(i, 1);
+                diff = diff + diffBraces(inputConfig[i]);
+            }
+        }
         // завершаем секцию и закрываем файл
         fout.WriteLine("  }");
         fout.WriteLine("}");
@@ -430,14 +438,18 @@ if (fso.FileExists(path+author+"\\markers.xc")) {
                   fout.WriteLine(inputConfig[i-k]);
                 // считаем разницу между количеством открывающих и закрывающих скобок
                 diff = diffBraces(inputConfig[i]);
-                // Пишем секцию в файл, пока не дойдем до конца секции (закроется последняя скобка секции)
                 inputConfig[i] = inputConfig[i].replace(extended[p], enemy[m]);
-                do {
-                  fout.WriteLine(inputConfig[i]);
-                  // удаляем записанную строку из исходного конфига
-                  inputConfig.splice(i, 1);
-                  diff = diff + diffBraces(inputConfig[i]);
-                } while (diff > 0);  // выходим из цикла, если скобка закрылась
+                if (diff == 0) {
+                    // если секция из одной строки, пишем в файл эту строку без последней скобки
+                    fout.WriteLine(inputConfig[i].substring(0, inputConfig[i].lastIndexOf("}"))+"       //      "+inputConfig[i].substring(inputConfig[i].lastIndexOf("}")+1));
+                } else {
+                    // Иначе пишем в файл, пока не дойдем до конца секции (закроется последняя скобка секции)
+                    while (diff > 0) {
+                        fout.WriteLine(inputConfig[i]);
+                        inputConfig.splice(i, 1);
+                        diff = diff + diffBraces(inputConfig[i]);
+                    }
+                }
                 // завершаем секцию и закрываем файл
                 if ( m == 1) {
                     fout.WriteLine("        }");
