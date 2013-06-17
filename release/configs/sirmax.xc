@@ -516,5 +516,6 @@
     "playersPanel":  "contour/HARDicons",
     "vehicleMarker": "contour/Aslain/iconset2"
   },
-  "colors": ${"sirmax-colors.xc":"colors"}
+//  "colors": ${"sirmax-colors.xc":"colors"},
+  "consts": { "VM_COEFF_VMM_DEAD": 0.75 }
 }
