@@ -70,7 +70,7 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
         //com.xvm.Logger.add("setMarkerState: " + value);
         m_markerState = value;
         proxy.marker.gotoAndPlay(m_markerState);
-/*        var frame = -1;
+        var frame = -1;
         proxy.marker.onEnterFrame = function()
         {
                 if (frame != this._currentframe)
@@ -80,7 +80,7 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
                 }
                 delete this.onEnterFrame;
                 this.gotoAndPlay("normal");
-	};*/
+	};
 
         if (proxy.isDead && proxy.isSpeaking) // change dynamic to vehicle type marker for dead while speaking
             this.setVehicleClass();
@@ -103,7 +103,7 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
         {
             if (proxy.isDead)
                 m_markerState = "immediate_dead";
-            proxy.marker.gotoAndPlay(m_markerState);
+            proxy.marker.gotoAndPlay("normal");
         }
 
         this.setVehicleClass();
@@ -151,7 +151,7 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
         else
         {
             GraphicsUtil.colorize(proxy.marker, proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.color)),
-                /*proxy.isDead ? Config.s_config.consts.VM_COEFF_VMM_DEAD :*/ Config.s_config.consts.VM_COEFF_VMM); // darker to improve appearance
+                proxy.isDead ? Config.s_config.consts.VM_COEFF_VMM_DEAD : Config.s_config.consts.VM_COEFF_VMM); // darker to improve appearance
         }
     }
 }
