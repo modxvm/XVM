@@ -1264,6 +1264,7 @@ class com.xvm.DefaultConfig
             AVG_BATTLES: 2000, // Averate number of battles. Source: http://wot-news.com/stat/server/ru/norm/en
             MAX_EBN: 200, // Maximum Ebn value for win-chance formula
             VM_COEFF_VMM: 0.88,
+            VM_COEFF_VMM_DEAD: 0.50,
             VM_COEFF_MM_PLAYER: 0.93,
             VM_COEFF_MM_BASE: 0.8,
             VM_COEFF_TBP: 0.93

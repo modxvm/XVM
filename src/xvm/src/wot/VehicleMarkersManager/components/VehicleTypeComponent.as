@@ -70,6 +70,17 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
         //com.xvm.Logger.add("setMarkerState: " + value);
         m_markerState = value;
         proxy.marker.gotoAndPlay(m_markerState);
+/*        var frame = -1;
+        proxy.marker.onEnterFrame = function()
+        {
+                if (frame != this._currentframe)
+                {
+                    frame = this._currentframe;
+                    return;
+                }
+                delete this.onEnterFrame;
+                this.gotoAndPlay("normal");
+	};*/
 
         if (proxy.isDead && proxy.isSpeaking) // change dynamic to vehicle type marker for dead while speaking
             this.setVehicleClass();
@@ -135,7 +146,12 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
         proxy.marker._y = cfg.y //* cfg.maxScale / 100;
         proxy.marker._alpha = proxy.formatDynamicAlpha(cfg.alpha);
         // filters are not applicable to the MovieClip in Scaleform. Only ColorTransform can be used.
-        GraphicsUtil.colorize(proxy.marker, proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.color)),
-            Config.s_config.consts.VM_COEFF_VMM); // darker to improve appearance
+        if (proxy.isSpeaking)
+            proxy.marker.transform.colorTransform = new flash.geom.ColorTransform();
+        else
+        {
+            GraphicsUtil.colorize(proxy.marker, proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.color)),
+                /*proxy.isDead ? Config.s_config.consts.VM_COEFF_VMM_DEAD :*/ Config.s_config.consts.VM_COEFF_VMM); // darker to improve appearance
+        }
     }
 }

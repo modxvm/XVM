@@ -8,8 +8,8 @@ cd $(dirname $(realpath $(cygpath --unix $0)))
 CURRENT_DIRECTORY=`pwd`
 
 #SAMPLE_REPLAY=blowup.wotreplay
-#SAMPLE_REPLAY=squad.wotreplay
-SAMPLE_REPLAY=assault.wotreplay
+SAMPLE_REPLAY=squad.wotreplay
+#SAMPLE_REPLAY=assault.wotreplay
 #SAMPLE_REPLAY=domination.wotreplay
 #SAMPLE_REPLAY=tk.wotreplay
 #SAMPLE_REPLAY=markers.wotreplay
