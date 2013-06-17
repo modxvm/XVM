@@ -72,7 +72,7 @@ class wot.battle.FragCorrelation
             : ColorsManager.getSystemColor(type, dead);
 
         GraphicsUtil.colorize(dead ? renderer.markerDead : renderer.marker, color,
-            Config.s_config.consts.VM_COEFF_TBP / (dead ? 2 : 1)); // darker to improve appearance
+            Config.s_config.consts.VM_COEFF_FC / (dead ? 2 : 1)); // darker to improve appearance
         //Logger.addObject(arguments[0], color, 1);
         //Logger.addObject(renderer, "renderer", 1);
         return renderer;
