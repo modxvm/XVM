@@ -93,5 +93,5 @@ private function getActiveMarkerStates():Array
 
 private function getActiveMarkerElement():Object
 {
-	return elements.selectedItem;
+    return elements.selectedItem;
 }

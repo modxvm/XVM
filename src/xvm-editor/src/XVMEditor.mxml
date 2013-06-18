@@ -15,11 +15,11 @@
     <fx:Script>
         <![CDATA[
             import events.SetDefaultValueEvent;
-            
+
             import mx.core.IVisualElement;
             import mx.core.IVisualElementContainer;
             import mx.events.FlexEvent;
-            
+
             import spark.components.SkinnableContainer;
 
             [Bindable(event="languageChanged")]
@@ -56,10 +56,10 @@
                     sendEventAllElements(c.getElementAt(i), event);
             }
 
-			protected function onRadioButtonChange(event:Event):void
-			{
-				vsMarkersDamageText.selectedIndex = int(damageTextRBG.selectedValue);
-			}
+            protected function onRadioButtonChange(event:Event):void
+            {
+                vsMarkersDamageText.selectedIndex = int(damageTextRBG.selectedValue);
+            }
         ]]>
     </fx:Script>
     <fx:Style>
@@ -72,23 +72,23 @@
     <fx:Metadata>
         [ResourceBundle("main")]
     </fx:Metadata>
-	<fx:Declarations>
-		<s:RadioButtonGroup id="damageTextRBG" change="onRadioButtonChange(event)"/>
-	</fx:Declarations>
+    <fx:Declarations>
+        <s:RadioButtonGroup id="damageTextRBG" change="onRadioButtonChange(event)"/>
+    </fx:Declarations>
     <s:VGroup left="0" right="0" top="0" bottom="0" gap="-1" creationComplete="onCreationComplete(event)">
         <s:BorderContainer width="1025" height="32">
             <s:HGroup top="0" left="0" bottom="0" gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="4" width="361">
                 <s:Button label="{_('openButton')}" icon="@Embed(source='images/fileopen.png')" click="onLoadConfigClick()"/>
                 <!--<s:Button label="{_('saveButton')}" icon="@Embed(source='images/filesave.png')" click="onSaveConfigClick()"/>-->
-				<mx:PopUpMenuButton itemClick="onSaveButtonClick(event)" id="saveMenu">
-					<mx:dataProvider>
-						<fx:Array>
-							<fx:Object value="save" label="{_('saveButton')}" icon="@Embed(source='images/filesave.png')"/>
-							<fx:Object value="savefull" label="{_('saveFullButton')}" icon="@Embed(source='images/filesave.png')" />
-						</fx:Array>
-					</mx:dataProvider>
-				</mx:PopUpMenuButton>
-				<s:Button label="{_('newConfig')}" icon="@Embed(source='images/filenew.png')" click="createNewConfig()"/>
+                <mx:PopUpMenuButton itemClick="onSaveButtonClick(event)" id="saveMenu">
+                    <mx:dataProvider>
+                        <fx:Array>
+                            <fx:Object value="save" label="{_('saveButton')}" icon="@Embed(source='images/filesave.png')"/>
+                            <fx:Object value="savefull" label="{_('saveFullButton')}" icon="@Embed(source='images/filesave.png')" />
+                        </fx:Array>
+                    </mx:dataProvider>
+                </mx:PopUpMenuButton>
+                <s:Button label="{_('newConfig')}" icon="@Embed(source='images/filenew.png')" click="createNewConfig()"/>
                 <s:Button label="{_('mergeConfigs')}" icon="@Embed(source='images/merge.png')" click="LoadConfig(true)"/>
             </s:HGroup>
             <s:HGroup top="0" bottom="0" width="130" right="50" verticalAlign="middle" horizontalAlign="right">
@@ -167,44 +167,44 @@
                                         </s:VGroup>
                                     </s:Scroller>
                                 </s:NavigatorContent>
-                                <s:NavigatorContent label="{_('DamageText')}" id="damageText">
-									<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-										<s:VGroup gap="-1" paddingLeft="10" paddingBottom="5">
-											<s:RadioButton group="{damageTextRBG}" value="0" label="{_('DamageTextPlayer')}" selected="true"/>
-											<s:RadioButton group="{damageTextRBG}" value="1" label="{_('DamageTextSquadman')}"/>
-											<s:RadioButton group="{damageTextRBG}" value="2" label="{_('DamageTextOther')}"/>
-										</s:VGroup>
-										<mx:ViewStack id="vsMarkersDamageText" width="100%" height="100%">
-											<s:NavigatorContent label="{_('DamageTextPlayer')}" id="damageTextPlayer">
-												<s:Scroller x="0" y="0" width="100%" height="100%">
-													<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-														<m:MDamageText title="{_('DamageTextPlayer')} *" id="m_damageTextPlayer" config="damageTextPlayer" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
-														<m:MFont id="m_damageTextPlayer_font" config="damageTextPlayer.font" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
-														<m:MShadow id="m_damageTextPlayer_shadow" config="damageTextPlayer.shadow" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
-													</s:VGroup>
-												</s:Scroller>
-											</s:NavigatorContent>
-											<s:NavigatorContent label="{_('DamageTextSquadman')}" id="damageTextSquadman">
-												<s:Scroller x="0" y="0" width="100%" height="100%">
-													<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-														<m:MDamageText title="{_('DamageTextSquadman')} *" id="m_damageTextSquadman" config="damageTextSquadman" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
-														<m:MFont id="m_damageTextSquadman_font" config="damageTextSquadman.font" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
-														<m:MShadow id="m_damageTextSquadman_shadow" config="damageTextSquadman.shadow" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
-													</s:VGroup>
-												</s:Scroller>
-											</s:NavigatorContent>
-											<s:NavigatorContent label="{_('DamageTextOther')}" id="damageTextOther">
-												<s:Scroller x="0" y="0" width="100%" height="100%">
-													<s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
-														<m:MDamageText title="{_('DamageTextOther')}" id="m_damageText" config="damageText" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
-														<m:MFont id="m_damageText_font" config="damageText.font" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
-														<m:MShadow id="m_damageText_shadow" config="damageText.shadow" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
-													</s:VGroup>
-												</s:Scroller>
-											</s:NavigatorContent>
-										</mx:ViewStack>
-									</s:VGroup>
-								</s:NavigatorContent>
+                                <s:NavigatorContent label="{_('DamageText')}" id="DamageTextNavContent">
+                                    <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+                                        <s:VGroup gap="-1" paddingLeft="10" paddingBottom="5">
+                                            <s:RadioButton group="{damageTextRBG}" value="0" label="{_('DamageTextPlayer')}" selected="true"/>
+                                            <s:RadioButton group="{damageTextRBG}" value="1" label="{_('DamageTextSquadman')}"/>
+                                            <s:RadioButton group="{damageTextRBG}" value="2" label="{_('DamageTextOther')}"/>
+                                        </s:VGroup>
+                                        <mx:ViewStack id="vsMarkersDamageText" width="100%" height="100%">
+                                            <s:NavigatorContent label="{_('DamageTextPlayer')}" id="damageTextPlayer">
+                                                <s:Scroller x="0" y="0" width="100%" height="100%">
+                                                    <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+                                                        <m:MDamageText title="{_('DamageTextPlayer')} *" id="m_damageTextPlayer" config="damageTextPlayer" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                                                        <m:MFont id="m_damageTextPlayer_font" config="damageTextPlayer.font" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();"/>
+                                                        <m:MShadow id="m_damageTextPlayer_shadow" config="damageTextPlayer.shadow" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();"/>
+                                                    </s:VGroup>
+                                                </s:Scroller>
+                                            </s:NavigatorContent>
+                                            <s:NavigatorContent label="{_('DamageTextSquadman')}" id="damageTextSquadman">
+                                                <s:Scroller x="0" y="0" width="100%" height="100%">
+                                                    <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+                                                        <m:MDamageText title="{_('DamageTextSquadman')} *" id="m_damageTextSquadman" config="damageTextSquadman" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                                                        <m:MFont id="m_damageTextSquadman_font" config="damageTextSquadman.font" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();"/>
+                                                        <m:MShadow id="m_damageTextSquadman_shadow" config="damageTextSquadman.shadow" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();"/>
+                                                    </s:VGroup>
+                                                </s:Scroller>
+                                            </s:NavigatorContent>
+                                            <s:NavigatorContent label="{_('DamageTextOther')}" id="damageText">
+                                                <s:Scroller x="0" y="0" width="100%" height="100%">
+                                                    <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">
+                                                        <m:MDamageText title="{_('DamageTextOther')}" id="m_damageText" config="damageText" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();" creationComplete="{RefreshCurrentPage()}"/>
+                                                        <m:MFont id="m_damageText_font" config="damageText.font" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();"/>
+                                                        <m:MShadow id="m_damageText_shadow" config="damageText.shadow" valueChanged="updateMarkerValue(event)" setDefaultValue="onSetDefaultMarkerValue(event); RefreshCurrentPage();"/>
+                                                    </s:VGroup>
+                                                </s:Scroller>
+                                            </s:NavigatorContent>
+                                        </mx:ViewStack>
+                                    </s:VGroup>
+                                </s:NavigatorContent>
                                 <s:NavigatorContent label="{_('ContourIcon')}" id="contourIcon">
                                     <s:Scroller x="0" y="0" width="100%" height="100%">
                                         <s:VGroup x="0" y="0" width="100%" height="100%" gap="-1">

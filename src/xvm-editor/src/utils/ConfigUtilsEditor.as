@@ -83,7 +83,7 @@ package utils
 		
 		public static function SimplifyConfig(config:Object):Object
 		{
-            //eturn config; // full config
+            //return config; // full config
 			// clone config
 			var cfg:Object = JSONx.parse(JSONx.stringify(config, "", true));
 			return _simplifyConfig(cfg, DefaultConfig.config);
@@ -112,6 +112,8 @@ package utils
 				}
 				else
 				{
+//                    if (def == null)
+//                        return null;
 					if (cfg[i] == def[i])
 						delete cfg[i];
 				}

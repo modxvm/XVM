@@ -1259,10 +1259,11 @@ public class DefaultConfig
             AVG_XVMSCALE: 30, // Average XVM Scale. Source: http://www.koreanrandom.com/forum/topic/2625-/
             AVG_BATTLES: 2000, // Averate number of battles. Source: http://wot-news.com/stat/server/ru/norm/en
             MAX_EBN: 200, // Maximum Ebn value for win-chance formula
-            VM_COEFF_VMM: 0.85,
-            VM_COEFF_MM_PLAYER: 0.85,
-            VM_COEFF_MM_BASE: 0.8,
-            VM_COEFF_TBP: 0.9
+            VM_COEFF_VMM: 0.88, // vehicle markers manager (alive)
+            VM_COEFF_VMM_DEAD: 0.50, // vehicle markers manager (dead)
+            VM_COEFF_MM_PLAYER: 0.93, // minimap (player)
+            VM_COEFF_MM_BASE: 0.8, // minimap (base)
+            VM_COEFF_FC: 0.93 // frag correlation
         };
     }
 }

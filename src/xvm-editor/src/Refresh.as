@@ -860,9 +860,9 @@ private function RefreshVehicleNamesPage():void
 public const ElementControls:Object = {
     vehicleIcon: [ "m_vehicleIcon" ],
     healthBar: [ "m_healthBar" ],
-    damageText: [ "m_damageText", "m_damageText_font", "m_damageText_shadow",
-		"m_damageTextPlayer", "m_damageTextPlayer_font", "m_damageTextPlayer_shadow",
-		"m_damageTextSquadman", "m_damageTextSquadman_font", "m_damageTextSquadman_shadow" ],
+    damageTextPlayer: [ "m_damageTextPlayer", "m_damageTextPlayer_font", "m_damageTextPlayer_shadow" ],
+    damageTextSquadman: [ "m_damageTextSquadman", "m_damageTextSquadman_font", "m_damageTextSquadman_shadow" ],
+    damageText: [ "m_damageText", "m_damageText_font", "m_damageText_shadow" ],
     contourIcon: [ "m_contourIcon" ],
     clanIcon: [ "m_clanIcon" ],
     levelIcon: [ "m_levelIcon" ],
@@ -902,48 +902,63 @@ private function RefreshMarkersPage():void
             return;
         }
 
-        var activeMarkerStates:Array = getActiveMarkerStates();
-
-        for each (var mname:String in ElementControls[activeElement.id])
+        if (activeElement.id == "DamageTextNavContent")
         {
-            for each (var mname2:String in ElementControls[mname])
-            {
-                if (this[mname] == null)
-                    continue;
-                var control:DefaultComponent = this[mname][mname2] as DefaultComponent;
-
-                //debug(mname + "." + mname2);
-                var valueSet: Boolean = false;
-                var value:*;
-                var valueOk: Boolean = true;
-                for each (var state:String in activeMarkerStates)
-                {
-                    var conf:String = "markers." + state + "." + activeElement.id + "." + control.config;
-                    //debug("  " + conf + "=" + Config.GetValue(conf));
-                    //values.push(Config.GetValue(conf));
-                    if (!valueSet)
-                    {
-                        valueSet = true;
-                        value = ConfigUtilsEditor.GetValue(conf);
-                    }
-                    else
-                    {
-                        if (value != ConfigUtilsEditor.GetValue(conf))
-                        {
-                            valueOk = false;
-                            break;
-                        }
-                    }
-                }
-
-                control.conflict = !valueOk;
-                control.value = value;
-            }
+            if (damageTextPlayer != null)
+                RefreshMarkersPage2(damageTextPlayer.id);
+            if (damageTextSquadman != null)
+                RefreshMarkersPage2(damageTextSquadman.id);
+            if (damageText != null)
+                RefreshMarkersPage2(damageText.id);
         }
+
+        RefreshMarkersPage2(activeElement.id);
     }
     catch (ex:Error)
     {
         error(ex.toString(), "RefreshMarkersPage()");
+    }
+}
+
+private function RefreshMarkersPage2(activeElementId:String):void
+{
+    var activeMarkerStates:Array = getActiveMarkerStates();
+
+    for each (var mname:String in ElementControls[activeElementId])
+    {
+        for each (var mname2:String in ElementControls[mname])
+        {
+            if (this[mname] == null)
+                continue;
+            var control:DefaultComponent = this[mname][mname2] as DefaultComponent;
+
+            //debug(mname + "." + mname2);
+            var valueSet: Boolean = false;
+            var value:*;
+            var valueOk: Boolean = true;
+            for each (var state:String in activeMarkerStates)
+            {
+                var conf:String = "markers." + state + "." + activeElementId + "." + control.config;
+                //debug("  " + conf + "=" + Config.GetValue(conf));
+                //values.push(Config.GetValue(conf));
+                if (!valueSet)
+                {
+                    valueSet = true;
+                    value = ConfigUtilsEditor.GetValue(conf);
+                }
+                else
+                {
+                    if (value != ConfigUtilsEditor.GetValue(conf))
+                    {
+                        valueOk = false;
+                        break;
+                    }
+                }
+            }
+
+            control.conflict = !valueOk;
+            control.value = value;
+        }
     }
 }
 
