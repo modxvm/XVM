@@ -1,33 +1,35 @@
-XVM-4.0.0-test6:
-  * minimap zoom: disabled while chatting; hotkeys.xc config comment about supported keys is updated
-  * some other fixes
-  
-XVM-4.0.0-test5:
-  * fixed hpLeft work with standard markers enabled
-  * ability to set colors for vehicle type markers (macros for dynamic colors can be used)
+XVM-4.0.0:
+  * adaptation to WoT 0.8.6
 
-XVM-4.0.0-test4:
-  * adaptation to WoT 0.8.6.CT2
+  [NEW FUNCTIONS]
   * transparency statistics macros ({{a:xwn}},...)
-  * new config format (now config is loading from res_mods/xvm/xvm.xc)
-  * removed legacy support for OTMData.xml config
-  * fixed rare condition when wrong minimap lost marker was deleted
+  * ability to set colors for vehicle type markers (macros for dynamic colors can be used)
   * new option: hangar/hideTutorial
   * filter by tanks in the own hangar in the Achievements window
   * separate settings for self and squadman damage text
-  * config version changed to 4.0.0.
-  * minimap: deustch locale support without xvm-stat.exe
-  * minimap: fix issues at Fisherman's bay map for EN\US locale users without xvm-stat.exe
-  * special scheme name for <img> tag: xvmres:// - path relative to res_mods/xvm/res folder
-      for example: <img src='xvmres://icons/foo.png'>
   * filter by tank name in the Achievements window
   * new option: userInfo/inHangarFilterEnabled - enable "In hangar" check box by default
+  * switch in user info window: [show] in hangar, player tanks, all tanks
   * expertPanel mod; see battle.xc
   * cluster responce time table at login and hangar (ping);
     "pingServers" section at login.xc and  hangar.xc config files
-  * switch in user info window: [show] in hangar, player tanks, all tanks
-  * hitlog: shows enemy HP left (markers which were visible) on Alt press; hitlog.xc: "hpLeft": "true"
+  * hitlog: shows enemy HP left (markers which were visible) on Alt press; 
+    hitlog.xc: "hpLeft": "true"
   * show ping at the game loading screen; login.xc/pingServers
+
+  [FIXES]
+  * fixed rare condition when wrong minimap lost marker was deleted
+  * minimap zoom: disabled while chatting; hotkeys.xc config comment about supported keys is updated
+  * minimap: fix issues at Fisherman's bay map for EN\US locale users without xvm-stat.exe
+  * some other fixes
+
+  [OTHER]
+  * new config format (now config is loading from res_mods/xvm/xvm.xc)
+  * removed legacy support for OTMData.xml config
+  * config version changed to 4.0.0
+  * special scheme name for <img> tag: xvmres:// - path relative to res_mods/xvm/res folder
+      for example: <img src='xvmres://icons/foo.png'>
+  * minimap: deustch locale support without xvm-stat.exe
 
 XVM-3.5.0
   * adaptation to WoT 0.8.5
