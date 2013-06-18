@@ -85,7 +85,8 @@ update()
     clan=`echo $line | cut -d' ' -f1`
     id=`echo $line | cut -d' ' -f2`
     echo "$i: $clan $id"
-    wget -qc http://$host/dcont/clans/emblems/$id/emblem_64x64.png -O ../../release/res/clanicons/$dir/clan/$clan.png 2>/dev/null
+    #wget -qc http://$host/dcont/clans/emblems/$id/emblem_64x64.png -O ../../release/res/clanicons/$dir/clan/$clan.png 2>/dev/null
+    wget -qc http://cw.$host/media/clans/emblems/clans_${id:0:1}/$id/emblem_64x64.png -O ../../release/res/clanicons/$dir/clan/$clan.png 2>/dev/null
   done
 }
 

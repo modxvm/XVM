@@ -34,7 +34,8 @@ update()
   fi
 
   echo -n "[$clan] => $clan.png"
-  wget -qc http://$host/dcont/clans/emblems/$1/emblem_64x64.png -O clanicons/$dir/clan/$clan.png 2>/dev/null
+  #wget -qc http://$host/dcont/clans/emblems/$1/emblem_64x64.png -O clanicons/$dir/clan/$clan.png 2>/dev/null
+  wget -qc http://cw.$host/media/clans/emblems/clans_${id:0:1}/$id/emblem_64x64.png -O clanicons/$dir/clan/$clan.png 2>/dev/null
 
   echo " OK"
 }
