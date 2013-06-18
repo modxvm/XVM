@@ -1,8 +1,8 @@
 #!/bin/sh
 
-#[ "$GAME_VER" = "" ] && GAME_VER="0.8.5"
-[ "$GAME_VER" = "" ] && GAME_VER="0.8.6 Common Test"
-[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/work/games/WoT-CT
+[ "$GAME_VER" = "" ] && GAME_VER="0.8.6"
+#[ "$GAME_VER" = "" ] && GAME_VER="0.8.6 Common Test"
+[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/work/games/WoT
 
 FILES="
   xvm.swf
