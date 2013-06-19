@@ -36,7 +36,7 @@ private function LoadConfig(merge:Boolean):void
 	frl = new FileReferenceList();
 	frl.addEventListener(Event.SELECT, onFileLoadSelect);
 	//frl.addEventListener(Event.CANCEL,onCancelLoad);
-	frl.browse([ new FileFilter(_("FileFilterText"), "*.xc"), new FileFilter(_("FileFilterLegacyText"), "*.xvmconf;OTMData.xml") ]);
+	frl.browse([ new FileFilter(_("FileFilterText"), "*.xc"), new FileFilter(_("FileFilterLegacyText"), "*.xvmconf; OTMData.xml") ]);
 }
 
 private function onFileLoadSelect(e:Event):void
@@ -58,7 +58,8 @@ private function onLoadComplete(e:Event):void
 		var fr:FileReference = FileReference(e.target);
 		loadCounter--;
     	var data:String = e.target.data.readUTFBytes(e.target.data.bytesAvailable);
-		loadCache[fr.name] = JSONx.parse(data);
+
+		loadCache[fr.name] = Utils.endsWith(".xml", fr.name.toLowerCase()) ? data : JSONx.parse(data);
 
 		if (loadCounter > 0)
 			return;
