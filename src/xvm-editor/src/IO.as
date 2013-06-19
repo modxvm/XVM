@@ -82,9 +82,12 @@ private function onLoadComplete(e:Event):void
             PopUpManager.centerPopUp(mergeDialog);
         }
     }
-    catch (ex:Error)
+    catch (ex:Object)
     {
-        error(ex.toString(), "onLoadComplete()");
+        var text:String = ex.toString();
+        if (ex.name == "JSONxError")
+            text = "JSONx Parse Error at pos " + ex.at + ": " + ex.message;
+        error(text, "onLoadComplete()");
     }
 }
 
@@ -99,9 +102,12 @@ private function CollectConfig(parts:Object):Object
 			{
 				return JSONxLoader.Deref(parts[i], 0, {f:i}, parts);
 			}
-			catch (ex:*)
+			catch (ex:Object)
 			{
-				error(ex.error.message, _("ErrorLoadingConfig"));
+                var text:String = ex.toString();
+                if (ex.name == "JSONxError")
+                    text = "JSONx Parse Error at pos " + ex.at + ": " + ex.message;
+				error(text, _("ErrorLoadingConfig"));
 				return null;
 			}
 		}
@@ -129,7 +135,7 @@ private function onLoadComplete2(e:Event):void
         debug(_("ConfigurationLoaded"));
         RefreshCurrentPage();
     }
-    catch (ex:Error)
+    catch (ex:Object)
     {
         error(ex.toString(), "onLoadComplete2()");
     }

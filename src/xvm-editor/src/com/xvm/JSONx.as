@@ -185,7 +185,7 @@ package com.xvm
                     name: 'JSONxError',
                     message: m,
                     at: at - 1,
-                        text: text
+                    text: text
                 };
             }
             

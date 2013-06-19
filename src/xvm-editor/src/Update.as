@@ -52,7 +52,7 @@ protected function updateMarkerValue(event:ValueChangedEvent):void
                 preview.update();
         }
     }
-    catch (ex:Error)
+    catch (ex:*)
     {
         error(ex.toString(), "updateMarkerValue()");
     }
