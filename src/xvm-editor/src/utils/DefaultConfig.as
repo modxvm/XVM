@@ -12,7 +12,7 @@ public class DefaultConfig
             configVersion: Defines.CONFIG_VERSION,
             editorVersion: Defines.EDITOR_VERSION,
             definition: {
-                author: "sirmax2",
+                author: "XVM",
                 description: "Default settings for XVM",
                 url: "http://code.google.com/p/wot-xvm/",
                 date: (d.getDate() < 10 ? "0" : "") + d.getDate() + "." +

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using LitJson;
 
 namespace wot
 {
@@ -120,17 +121,36 @@ namespace wot
           return;
         string url = String.Format("http://{0}:{1}/uc/accounts/{2}/api/{3}/?source_token=Intellect_Soft-WoT_Mobile-unofficial_stats",
           srv.host, srv.port, request.id, srv.api);
+
         long duration;
         string response = Utils.LoadUrl(url, out duration, true);
         if (duration == long.MaxValue) // error
           return;
+        if (!ValidateResponse(response))
+          return;
 
-        url = request.proxy.Replace("%1", "submitPlayer/") + request.guid;
+        url = String.Format("{0}/{1}/{2}", request.proxy.Replace("%1", "submitPlayer"), request.guid, request.id);
         Utils.HttpPost(url, response);
       }
       catch
       {
         // do nothing
+      }
+    }
+
+    private bool ValidateResponse(string response)
+    {
+      try
+      {
+        JsonData jd = JsonMapper.ToObject(response);
+        if (jd["status"].ToString().ToUpper() != "OK")
+          return false;
+
+        return true;
+      }
+      catch
+      {
+        return false;
       }
     }
   }

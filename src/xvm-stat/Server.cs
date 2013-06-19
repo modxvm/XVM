@@ -856,7 +856,7 @@ namespace wot
           {
             string guid = jd["update"].ToString("guid");
             List<long> ids = new List<long>();
-            foreach (JsonData data in jd["update"])
+            foreach (JsonData data in jd["update"]["ids"])
               ids.Add(data.IsLong ? long.Parse(data.ToString()) : data.IsInt ? int.Parse(data.ToString()) : -1);
             UpdateStatThread.Enqueue(proxy, guid, ids.ToArray());
           }
