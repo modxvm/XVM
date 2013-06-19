@@ -48,49 +48,50 @@ class com.xvm.ConfigLoader
 
         Config.s_config = com.xvm.DefaultConfig.config;
 
-        //Logger.add("TRACE: Config.ReloadXvmConfig()");
-        JSONxLoader.LoadAndParse(Defines.XVM_ROOT + Defines.CONFIG_FILE_NAME, null, ReloadXvmConfigCallback);
+        JSONxLoader.LoadAndParse(Defines.XVM_ROOT + Defines.CONFIG_FILE_NAME, null, ReloadConfigCallback);
     }
 
-    private static function ReloadXvmConfigCallback(event)
+    private static function ReloadConfigCallback(event)
     {
-//Logger.add("ReloadXvmConfigCallback::start");
+        //Logger.add("TRACE: ReloadConfigCallback(): start");
         if (event.error != null && event.error.type == "NO_FILE")
         {
             if (event.filename == Defines.CONFIG_FILE_NAME)
             {
                 // xvm.xc not found, try to load legacy config XVM.xvmconf
-                JSONxLoader.LoadAndParse(Defines.CONFIG_FILE_NAME_XVMCONF, null, ReloadXvmConfigCallback);
+                JSONxLoader.LoadAndParse(Defines.CONFIG_FILE_NAME_XVMCONF, null, ReloadConfigCallback);
                 return;
-            }
-            else
-            {
-                // xvm.xc is primary config
-                event.filename = Defines.CONFIG_FILE_NAME;
             }
         }
 
         var finallyBugWorkaround: Boolean = false; // Workaround: finally block have a bug - it can be called twice times.
         try
         {
-            ConfigLoader.ProcessXvmConfig(event);
+            ConfigLoader.ProcessConfig(event);
             ConfigUtils.TuneupConfig();
         }
         finally
         {
-//Logger.add("ReloadXvmConfigCallback::finally:start");
+            //Logger.add("TRACE: ReloadConfigCallback(): finally:start");
             if (finallyBugWorkaround)
                 return;
             finallyBugWorkaround = true;
             ConfigLoader.ReloadGameRegion();
-//Logger.add("ReloadXvmConfigCallback::finally::end");
+            //Logger.add("TRACE: ReloadConfigCallback(): finally::end");
         }
-//Logger.add("ReloadXvmConfigCallback::end");
+        //Logger.add("TRACE: ReloadConfigCallback(): end");
     }
 
-    private static function ProcessXvmConfig(event)
+    private static function ProcessConfig(event)
     {
-        if (event.error)
+        if (event.data == null || (event.error != null && event.error.type == "NO_FILE"))
+        {
+            info_event = { type: "set_info", warning: "" };
+            GlobalEventDispatcher.dispatchEvent(info_event);
+            return;
+        }
+
+        if (event.error != null)
         {
             var ex = event.error;
 
@@ -118,13 +119,6 @@ class com.xvm.ConfigLoader
             info_event = { type: "set_info", error: text };
             GlobalEventDispatcher.dispatchEvent(info_event);
             Logger.add(String(text).substr(0, 200));
-            return;
-        }
-
-        if (!event.data)
-        {
-            info_event = { type: "set_info", warning: "" };
-            GlobalEventDispatcher.dispatchEvent(info_event);
             return;
         }
 
