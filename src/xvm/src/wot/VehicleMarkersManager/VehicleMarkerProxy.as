@@ -189,9 +189,11 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         //trace("gotoAndStop(" + frame + ")");
         base.gotoAndStop(frame);
 
-        if (IsStandardMarker)
+        if (IsStandardMarker && !wrapper.m_speaking && !wrapper.marker.marker.icon["_xvm_colorized"])
         {
-            GraphicsUtil.colorize(wrapper.marker, wrapper.colorsManager.getRGB(wrapper.colorSchemeName),
+            // WARNING: do not touch proxy.marker.marker - marker animation will be broken
+            wrapper.marker.marker.icon["_xvm_colorized"] = true;
+            GraphicsUtil.colorize(wrapper.marker.marker.icon, wrapper.colorsManager.getRGB(wrapper.colorSchemeName),
                 Config.s_config.consts.VM_COEFF_VMM); // darker to improve appearance
         }
 

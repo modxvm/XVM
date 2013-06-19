@@ -7,6 +7,7 @@
     /////////////////////////////////////////////////////////////////
 
     var m_entityName:String;
+    var m_speaking:Boolean;
 
     var levelIcon:MovieClip;
     var iconLoader:net.wargaming.controls.UILoaderAlt;

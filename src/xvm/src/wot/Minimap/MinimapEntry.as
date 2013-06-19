@@ -2,6 +2,7 @@ import com.xvm.Config;
 import com.xvm.ColorsManager;
 import com.xvm.DefaultConfig;
 import com.xvm.GraphicsUtil;
+import com.xvm.Logger;
 import com.xvm.Utils;
 import wot.RootComponents;
 import wot.Minimap.model.externalProxy.MapConfig;
@@ -136,11 +137,11 @@ class wot.Minimap.MinimapEntry
 
     private function colorizeMarker()
     {
-        if (wrapper.m_type == null || wrapper.vehicleClass == null || wrapper.entryName == null)
+        if (wrapper.m_type == null || wrapper.vehicleClass == null || wrapper.entryName == null || wrapper.entryName == "")
             return;
 
         //if (wrapper.entryName != "ally" && wrapper.entryName != "enemy")
-        //    com.xvm.Logger.add("type=" + wrapper.m_type + " entryName=" + wrapper.entryName + " vehicleClass=" + wrapper.vehicleClass);
+        //    Logger.add("type=" + wrapper.m_type + " entryName=" + wrapper.entryName + " vehicleClass=" + wrapper.vehicleClass);
 
         if (wrapper.entryName == "control")
             return;
@@ -183,7 +184,9 @@ class wot.Minimap.MinimapEntry
 
         if (color != null)
         {
-            GraphicsUtil.colorize(wrapper.player || wrapper.teamPoint, color,
+            //Logger.addObject(wrapper.player, "pl", 3)
+            //Logger.add(wrapper.entryName);
+            GraphicsUtil.colorize(wrapper.teamPoint || wrapper.player/*.litIcon*/, color,
                 wrapper.player ? Config.s_config.consts.VM_COEFF_MM_PLAYER : Config.s_config.consts.VM_COEFF_MM_BASE);
         }
     }

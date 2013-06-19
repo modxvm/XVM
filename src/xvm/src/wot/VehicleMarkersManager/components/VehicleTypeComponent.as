@@ -1,6 +1,7 @@
 import com.xvm.Config;
 import com.xvm.ColorsManager;
 import com.xvm.GraphicsUtil;
+import com.xvm.Logger;
 import wot.VehicleMarkersManager.ErrorHandler;
 import wot.VehicleMarkersManager.components.VehicleTypeProxy;
 
@@ -47,7 +48,7 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
     
     public function setVehicleClass()
     {
-        //com.xvm.Logger.add("setVehicleClass: " + m_vehicleClass);
+        //Logger.add("setVehicleClass: " + m_vehicleClass);
 
         var frameName = getFrameName();
 
@@ -63,32 +64,41 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
             icon = m_hunt ? proxy.marker.marker.iconHunt : proxy.marker.marker.icon;
         }
         icon.gotoAndStop(frameName);
+
+        colorizeMarkerIcon(proxy.currentStateConfigRoot.vehicleIcon.color);
     }
 
     public function setMarkerState(value)
     {
-        //com.xvm.Logger.add("setMarkerState: " + value);
+        //Logger.add("setMarkerState: " + value);
         m_markerState = value;
-        proxy.marker.gotoAndPlay(m_markerState);
-        var frame = -1;
-        proxy.marker.onEnterFrame = function()
+        var state = m_markerState == "immediate_dead" ? "normal" : m_markerState;
+        proxy.marker.gotoAndPlay(state);
+        if (state != "normal")
         {
-                if (frame != this._currentframe)
-                {
-                    frame = this._currentframe;
-                    return;
-                }
-                delete this.onEnterFrame;
-                this.gotoAndPlay("normal");
-	};
-
+            var frame = -1;
+            var me = this;
+            proxy.marker.onEnterFrame = function()
+            {
+                    if (frame != this._currentframe)
+                    {
+                        frame = this._currentframe;
+                        return;
+                    }
+                    delete this.onEnterFrame;
+                    this.gotoAndPlay("normal");
+                    me.colorizeMarkerIcon(me.proxy.currentStateConfigRoot.vehicleIcon.color);
+                    //this.gotoAndPlay("dead");
+            }
+        }
+        
         if (proxy.isDead && proxy.isSpeaking) // change dynamic to vehicle type marker for dead while speaking
             this.setVehicleClass();
     }
 
     public function updateMarkerLabel()
     {
-        //com.xvm.Logger.add("updateMarkerLabel: " + m_markerLabel + " " + m_markerState);
+        //Logger.add("updateMarkerLabel: " + m_markerLabel + " " + m_markerState);
         var aliasColor = ColorsManager.getMarkerColorAlias(proxy.entityName);
         if (m_markerLabel == aliasColor)
             return;
@@ -103,7 +113,7 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
         {
             if (proxy.isDead)
                 m_markerState = "immediate_dead";
-            proxy.marker.gotoAndPlay("normal");
+            setMarkerState(m_markerState);
         }
 
         this.setVehicleClass();
@@ -128,7 +138,7 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
         var x = (cfg.scaleX + MARKER_CENTER_OFFSET_X) * cfg.maxScale / 100;
         var y = (cfg.scaleY + MARKER_CENTER_OFFSET_Y["$" + getFrameName().split("-").join("_")]) * cfg.maxScale / 100;
 
-        // WARNING: do not touch proxy.marker.marker - dead status will be broken
+        // WARNING: do not touch proxy.marker.marker - marker animation will be broken
         
         for (var childName in proxy.marker.marker)
         {
@@ -142,16 +152,20 @@ class wot.VehicleMarkersManager.components.VehicleTypeComponent
             icon._xscale = icon._yscale = cfg.maxScale;
         }
 
-        proxy.marker._x = cfg.x //* cfg.maxScale / 100;
-        proxy.marker._y = cfg.y //* cfg.maxScale / 100;
+        proxy.marker._x = cfg.x;
+        proxy.marker._y = cfg.y;
         proxy.marker._alpha = proxy.formatDynamicAlpha(cfg.alpha);
-        // filters are not applicable to the MovieClip in Scaleform. Only ColorTransform can be used.
+    }
+
+    private function colorizeMarkerIcon(color:String)
+    {
         if (proxy.isSpeaking)
-            proxy.marker.transform.colorTransform = new flash.geom.ColorTransform();
-        else
-        {
-            GraphicsUtil.colorize(proxy.marker, proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.color)),
-                proxy.isDead ? Config.s_config.consts.VM_COEFF_VMM_DEAD : Config.s_config.consts.VM_COEFF_VMM); // darker to improve appearance
-        }
+            return;
+
+        //Logger.add("colorize");
+
+        // filters are not applicable to the MovieClip in Scaleform. Only ColorTransform can be used.
+        GraphicsUtil.colorize(proxy.marker.marker.icon, proxy.formatDynamicColor(proxy.formatStaticColorText(color)),
+            proxy.isDead ? Config.s_config.consts.VM_COEFF_VMM_DEAD : Config.s_config.consts.VM_COEFF_VMM); // darker to improve appearance
     }
 }
