@@ -83,14 +83,15 @@ class com.xvm.JSONxLoader
         }
     }
 
-    private function Deref(data:Object, level:Number, file:String)
+    private function Deref(data:Object, level:Number, file:String, obj_path:String)
     {
-        //Logger.addObject(data, "Deref", 2);
+        //Logger.add(file);
+        //Logger.addObject(data, "Deref:" + level, 4);
         if (level == null)
             level = 0;
 
         // limit of recursion
-        if (level > 50)
+        if (level > 32)
             return data;
 
         if (data == null)
@@ -100,12 +101,15 @@ class com.xvm.JSONxLoader
         if (typeof data.toString == 'undefined')
             return data;
 
+        if (!obj_path)
+            obj_path = "";
+
         // array
         if (data instanceof Array) // array
         {
             var len = data.length;
             for (var i = 0; i < len; ++i)
-                data[i] = Deref(data[i], level + 1, file);
+                data[i] = Deref(data[i], level + 1, file, obj_path + "[" + i + "]");
             return data;
         }
 
@@ -114,7 +118,7 @@ class com.xvm.JSONxLoader
         {
             for (var i in data)
             {
-                data[i] = Deref(data[i], level + 1, file);
+                data[i] = Deref(data[i], level + 1, file, (obj_path == "" ? "" : obj_path + ".") + i);
                 //Logger.addObject(data[i], i, 2);
             }
             return data;
@@ -123,9 +127,11 @@ class com.xvm.JSONxLoader
         // reference
         //   "$ref": { "file": "...", "line": "..." }
 
-        //Logger.addObject(file, "file", 2);
         //Logger.addObject(data, "Deref[" + level + "]", 2);
 
+        if (data.$ref.$ref != null)
+            throw { type: "BAD_REF", message: "endless reference recursion in " + file + ", " + obj_path};
+        
         var fn = data.$ref.abs_path;
         if (!fn)
         {
@@ -179,7 +185,7 @@ class com.xvm.JSONxLoader
                 }
 
                 // deref result
-                data = Deref(value, level + 1, fn);
+                data = Deref(value, level + 1, fn, obj_path);
                 //Logger.addObject(data);
             }
             catch (ex)
