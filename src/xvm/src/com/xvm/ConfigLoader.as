@@ -84,7 +84,7 @@ class com.xvm.ConfigLoader
 
     private static function ProcessConfig(event)
     {
-        if (event.data == null || (event.error != null && event.error.type == "NO_FILE"))
+        if (event.error != null && event.error.type == "NO_FILE")
         {
             info_event = { type: "set_info", warning: "" };
             GlobalEventDispatcher.dispatchEvent(info_event);

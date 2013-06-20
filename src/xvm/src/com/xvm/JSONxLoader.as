@@ -64,7 +64,7 @@ class com.xvm.JSONxLoader
         //Logger.add("LoadFileCallback");
         try
         {
-            //Logger.addObject(rootObj, "rootObj", 5);
+            //Logger.addObject(rootObj, "rootObj", 2);
             //Logger.addObject(rootObj.markers.ally.alive.normal, "marker", 10);
             rootObj = Deref(rootObj);
             //Logger.addObject(pendingFiles, "pendingFiles", 2);
@@ -83,7 +83,7 @@ class com.xvm.JSONxLoader
         }
     }
 
-    private function Deref(data:Object, level:Number, file:Object)
+    private function Deref(data:Object, level:Number, file:String)
     {
         //Logger.addObject(data, "Deref", 2);
         if (level == null)
@@ -123,21 +123,22 @@ class com.xvm.JSONxLoader
         // reference
         //   "$ref": { "file": "...", "line": "..." }
 
+        //Logger.addObject(file, "file", 2);
         //Logger.addObject(data, "Deref[" + level + "]", 2);
 
-        var dirName = file.d || "";
-        var fileName = file.f || "";
-        var fn = dirName + (data.$ref.file || fileName);
-        var fileArray:Array = fn.split("\\").join("/").split("/");
-        fileName = fileArray.pop();
-        dirName = fileArray.length > 0 ? fileArray.join("/") + "/" : "";
+        var fn = data.$ref.abs_path;
+        if (!fn)
+        {
+            var d = splitDir(file || "");
+            fn = (d.d + (data.$ref.file || d.f));
+        }
 
         //Logger.add("fn: " + fn);
 
         if (!file_cache.hasOwnProperty(fn))
         {
             //Logger.add("fn: " + fn + " (pending)");
-            data.$ref.file = fn;
+            data.$ref.abs_path = fn;
             var found:Boolean = false;
             var len = pendingFiles.length;
             for (var j = 0; j < len; ++j)
@@ -159,7 +160,7 @@ class com.xvm.JSONxLoader
                 if (!obj_cache.hasOwnProperty(fn))
                     obj_cache[fn] = JSONx.parse(file_cache[fn]);
                 if (obj_cache[fn] == null)
-                    throw { type: "NO_FILE", message: "file is missing: " + fn };
+                    throw { type: fn == rootFileName ? "NO_FILE" : "NO_REF_FILE", message: "file is missing: " + fn };
                 var value = getValue(obj_cache[fn], data.$ref.path);
                 //Logger.add(data.$ref.path + ": " + String(value));
                 if (value === undefined)
@@ -178,7 +179,7 @@ class com.xvm.JSONxLoader
                 }
 
                 // deref result
-                data = Deref(value, level + 1, { d:dirName, f:fileName } );
+                data = Deref(value, level + 1, fn);
                 //Logger.addObject(data);
             }
             catch (ex)
@@ -215,5 +216,15 @@ class com.xvm.JSONxLoader
     private function clone(obj:Object):Object
     {
         return JSONx.parse(JSONx.stringify(obj, "", true));
+    }
+
+    private function splitDir(path:String):Object
+    {
+        var fileArray:Array = path.split("\\").join("/").split("/");
+        return
+        {
+            f: fileArray.pop(),
+            d: fileArray.length > 0 ? fileArray.join("/") + "/" : ""
+        }
     }
 }
