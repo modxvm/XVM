@@ -22,7 +22,7 @@
         // Many configuration lines for the same vehicle make many circles.
         // Only artillery top gun range by default.
         // See other vehicle types at:
-        // http://code.google.com/p/wot-xvm/source/browse/trunk/src/xvm/src/wot/utils/VehicleInfoData2.as
+        // http://code.google.com/p/wot-xvm/source/browse/trunk/src/xvm/src/com/xvm/VehicleInfoData2.as
         // Artillery gun fire range may differ depending on vehicle angle relative to ground
         // and vehicle height positioning relative to target. These factors are not considered.
         // See pics at http://goo.gl/ZqlPa
@@ -36,42 +36,55 @@
         // и высоте расположения машины относительно цели. На миникарте эти факторы не учитываются.
         // Подробнее по ссылке: http://goo.gl/ZqlPa
         "special": [
-            { "su_18":            {"$ref": { "path": "rangeCircle" }, "distance": 552  } },
-            { "su_26":            {"$ref": { "path": "rangeCircle" }, "distance": 578  } },
-            { "su_5":             {"$ref": { "path": "rangeCircle" }, "distance": 605  } },
-            { "su_8":             {"$ref": { "path": "rangeCircle" }, "distance": 920  } },
-            { "s_51":             {"$ref": { "path": "rangeCircle" }, "distance": 1229 } },
-            { "su_14":            {"$ref": { "path": "rangeCircle" }, "distance": 1229 } },
-            { "object_212":       {"$ref": { "path": "rangeCircle" }, "distance": 1229 } },
-            { "object_261":       {"$ref": { "path": "rangeCircle" }, "distance": 1463 } },
-
-            { "bison_i":          {"$ref": { "path": "rangeCircle" }, "distance": 605  } },
-            { "sturmpanzer_ii":   {"$ref": { "path": "rangeCircle" }, "distance": 605  } },
-            { "wespe":            {"$ref": { "path": "rangeCircle" }, "distance": 1000 } },
-            { "grille":           {"$ref": { "path": "rangeCircle" }, "distance": 1210 } },
-            { "hummel":           {"$ref": { "path": "rangeCircle" }, "distance": 1264 } },
-            { "g_panther":        {"$ref": { "path": "rangeCircle" }, "distance": 1407 } },
-            { "g_tiger":          {"$ref": { "path": "rangeCircle" }, "distance": 1172 } },
-            { "g_e":              {"$ref": { "path": "rangeCircle" }, "distance": 1172 } },
-
-            { "t57":              {"$ref": { "path": "rangeCircle" }, "distance": 552  } },
-            { "m37":              {"$ref": { "path": "rangeCircle" }, "distance": 969  } },
-            { "m7_priest":        {"$ref": { "path": "rangeCircle" }, "distance": 1047 } },
-            { "m41":              {"$ref": { "path": "rangeCircle" }, "distance": 1210 } },
-            { "m12":              {"$ref": { "path": "rangeCircle" }, "distance": 1316 } },
-            { "m40m43":           {"$ref": { "path": "rangeCircle" }, "distance": 1179 } },
-            { "t92":              {"$ref": { "path": "rangeCircle" }, "distance": 1248 } },
-
-            { "renaultbs":        {"$ref": { "path": "rangeCircle" }, "distance": 450  } },
-            { "lorraine39_l_am":  {"$ref": { "path": "rangeCircle" }, "distance": 844  } },
-            { "amx_105am":        {"$ref": { "path": "rangeCircle" }, "distance": 1000 } },
-            { "_105_lefh18b2":    {"$ref": { "path": "rangeCircle" }, "distance": 1000 } },
-            { "amx_13f3am":       {"$ref": { "path": "rangeCircle" }, "distance": 1250 } },
-            { "lorraine155_50":   {"$ref": { "path": "rangeCircle" }, "distance": 1202 } },
-            { "lorraine155_51":   {"$ref": { "path": "rangeCircle" }, "distance": 1296 } },
-            { "bat_chatillon155": {"$ref": { "path": "rangeCircle" }, "distance": 1296 } },
-
-            { "gb78_sexton_i":    {"$ref": { "path": "rangeCircle" }, "distance": 767  } }
+            // level 2
+            { "su_18":                {"$ref": { "path": "rangeCircle" }, "distance": 500 } },
+            { "gw_mk_vie":            {"$ref": { "path": "rangeCircle" }, "distance": 850 } },
+            { "t57":                  {"$ref": { "path": "rangeCircle" }, "distance": 553 } },
+            { "renaultbs":            {"$ref": { "path": "rangeCircle" }, "distance": 483 } },
+            // level 3
+            { "su_26":                {"$ref": { "path": "rangeCircle" }, "distance": 1218} },
+            { "bison_i":              {"$ref": { "path": "rangeCircle" }, "distance": 602 } },
+            { "wespe":                {"$ref": { "path": "rangeCircle" }, "distance": 989 } },
+            { "m7_priest":            {"$ref": { "path": "rangeCircle" }, "distance": 989 } },
+            { "lorraine39_l_am":      {"$ref": { "path": "rangeCircle" }, "distance": 983 } },
+            { "gb78_sexton_i":        {"$ref": { "path": "rangeCircle" }, "distance": 767 } },
+            // level 4
+            { "su_5":                 {"$ref": { "path": "rangeCircle" }, "distance": 613 } },
+            { "sturmpanzer_ii":       {"$ref": { "path": "rangeCircle" }, "distance": 602 } },
+            { "pz_sfl_ivb":           {"$ref": { "path": "rangeCircle" }, "distance": 989 } },
+            { "m37":                  {"$ref": { "path": "rangeCircle" }, "distance": 989 } },
+            { "amx_ob_am105":         {"$ref": { "path": "rangeCircle" }, "distance": 1288} },
+            // level 5
+            { "su122a":               {"$ref": { "path": "rangeCircle" }, "distance": 1201} },
+            { "grille":               {"$ref": { "path": "rangeCircle" }, "distance": 836 } },
+            { "m41":                  {"$ref": { "path": "rangeCircle" }, "distance": 1294} },
+            { "amx_105am":            {"$ref": { "path": "rangeCircle" }, "distance": 1288} },
+            // level 6
+            { "su_8":                 {"$ref": { "path": "rangeCircle" }, "distance": 1345} },
+            { "hummel":               {"$ref": { "path": "rangeCircle" }, "distance": 1260} },
+            { "m44":                  {"$ref": { "path": "rangeCircle" }, "distance": 1294} },
+            { "amx_13f3am":           {"$ref": { "path": "rangeCircle" }, "distance": 1381} },
+            // level 7
+            { "s_51":                 {"$ref": { "path": "rangeCircle" }, "distance": 1264} },
+            { "su14_1":               {"$ref": { "path": "rangeCircle" }, "distance": 1264} },
+            { "g_panther":            {"$ref": { "path": "rangeCircle" }, "distance": 1300} },
+            { "m12":                  {"$ref": { "path": "rangeCircle" }, "distance": 1413} },
+            { "lorraine155_50":       {"$ref": { "path": "rangeCircle" }, "distance": 1350} },
+            // level 8
+            { "su_14":                {"$ref": { "path": "rangeCircle" }, "distance": 1264} },
+            { "gw_tiger_p":           {"$ref": { "path": "rangeCircle" }, "distance": 1333} },
+            { "m40m43":               {"$ref": { "path": "rangeCircle" }, "distance": 1336} },
+            { "lorraine155_51":       {"$ref": { "path": "rangeCircle" }, "distance": 1368} },
+            // level 9
+            { "object_212":           {"$ref": { "path": "rangeCircle" }, "distance": 1264} },
+            { "g_tiger":              {"$ref": { "path": "rangeCircle" }, "distance": 1333} },
+            { "m53_55":               {"$ref": { "path": "rangeCircle" }, "distance": 1291} },
+            { "bat_chatillon155_55":  {"$ref": { "path": "rangeCircle" }, "distance": 1413} },
+            // level 10
+            { "object_261":           {"$ref": { "path": "rangeCircle" }, "distance": 1470} },
+            { "g_e":                  {"$ref": { "path": "rangeCircle" }, "distance": 1333} },
+            { "t92":                  {"$ref": { "path": "rangeCircle" }, "distance": 1411} },
+            { "bat_chatillon155_58":  {"$ref": { "path": "rangeCircle" }, "distance": 1413} }
         ]
     }
 }
