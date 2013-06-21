@@ -1,5 +1,5 @@
 import com.xvm.VehicleInfo;
-import wot.Minimap.model.externalProxy.PlayersPanelProxy;
+import wot.PlayersPanel.PlayersPanelProxy;
 import wot.Minimap.dataTypes.Player;
 import wot.Minimap.model.externalProxy.MapConfig;
 import wot.Minimap.dataTypes.cfg.CircleCfg;

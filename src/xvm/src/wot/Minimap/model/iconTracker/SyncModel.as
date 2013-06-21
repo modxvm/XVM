@@ -1,5 +1,5 @@
 import com.xvm.Utils;
-import wot.Minimap.model.externalProxy.PlayersPanelProxy;
+import wot.PlayersPanel.PlayersPanelProxy;
 import wot.Minimap.model.externalProxy.IconsProxy;
 
 /**

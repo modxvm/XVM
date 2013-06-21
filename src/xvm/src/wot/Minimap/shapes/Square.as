@@ -1,7 +1,6 @@
 import com.xvm.VehicleInfo;
-//import com.xvm.VehicleInfoData2;
 import wot.Minimap.Minimap;
-import wot.Minimap.model.externalProxy.PlayersPanelProxy;
+import wot.PlayersPanel.PlayersPanelProxy;
 import wot.Minimap.model.externalProxy.IconsProxy;
 import wot.Minimap.shapes.ShapeAttach;
 import wot.Minimap.model.externalProxy.MapConfig;

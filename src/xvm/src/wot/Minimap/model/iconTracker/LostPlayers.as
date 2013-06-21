@@ -2,7 +2,7 @@ import com.xvm.Utils;
 import wot.Minimap.MinimapEvent;
 import com.xvm.GlobalEventDispatcher;
 import wot.Minimap.model.externalProxy.IconsProxy;
-import wot.Minimap.model.externalProxy.PlayersPanelProxy;
+import wot.PlayersPanel.PlayersPanelProxy;
 
 class wot.Minimap.model.iconTracker.LostPlayers
 {

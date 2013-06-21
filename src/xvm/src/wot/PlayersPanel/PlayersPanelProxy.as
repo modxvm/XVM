@@ -33,7 +33,7 @@ import wot.Minimap.dataTypes.Player;
  * @author ilitvinov87@gmail.com
  */
 
-class wot.Minimap.model.externalProxy.PlayersPanelProxy
+class wot.PlayersPanel.PlayersPanelProxy
 {
     public static function get leftPanel():net.wargaming.ingame.PlayersPanel
     {

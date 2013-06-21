@@ -1,4 +1,4 @@
-import wot.Minimap.model.externalProxy.PlayersPanelProxy;
+import wot.PlayersPanel.PlayersPanelProxy;
 import wot.Minimap.model.iconTracker.PositionTracking;
 import wot.Minimap.model.iconTracker.LostPlayers;
 

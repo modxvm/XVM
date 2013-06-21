@@ -2,7 +2,7 @@ import com.xvm.GlobalEventDispatcher;
 import com.xvm.VehicleInfo;
 import wot.Minimap.MinimapEvent;
 import wot.Minimap.model.externalProxy.IconsProxy;
-import wot.Minimap.model.externalProxy.PlayersPanelProxy;
+import wot.PlayersPanel.PlayersPanelProxy;
 
 /**
  * @author ilitvinov87@gmail.com
