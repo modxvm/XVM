@@ -52,6 +52,10 @@ class wot.gameloading.GameLoadingForm
         // Send first ping as early as possible, to be ready on login screen.
         if (Config.s_config.login.pingServers.enabled || Config.s_config.hangar.pingServers.enabled);
             PingServers.sendPing();
+
+        if (Config.s_config.login.pingServers.showPingOnGameLoading != true)
+            return;
+
         var me = this;
         _global.setInterval(function() { me.pingInitializationTimer.call(me); }, 1000);
     }

@@ -108,6 +108,7 @@ private function RefreshLoginPage():void
 
         section = Config.s_config.login.pingServers;
         this.p_pingServers_login.v_enabled.value = section.enabled;
+        this.p_pingServers_login.v_showPingOnGameLoading.value = section.showPingOnGameLoading;
         this.p_pingServers_login.v_updateInterval.value = section.updateInterval;
         this.p_pingServers_login.v_x.value = section.x;
         this.p_pingServers_login.v_y.value = section.y;
