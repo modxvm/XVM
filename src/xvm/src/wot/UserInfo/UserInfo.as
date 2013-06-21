@@ -618,7 +618,7 @@ class wot.UserInfo.UserInfo
         if (Config.s_config.userInfo.showFilters == true)
         {
             var filter:MovieClip = (IsSelfUserInfo() ? wrapper : wrapper._parent._parent).createEmptyMovieClip("filterPanel", 999);
-            filter._x = 460;
+            filter._x = 392;
             filter._y = IsSelfUserInfo() ? -69 : 0;
 
             var filterLabel:TextField = filter.createTextField("filterLabel", 0, 100, 0, 60, 20);
