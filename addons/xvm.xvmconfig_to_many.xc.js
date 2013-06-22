@@ -7,7 +7,7 @@
 ******************************************************************************/
 
 // версия скрипта
-var script_version = "9.2";
+var script_version = "9.4";
 
 // массив названий секций
 var sections = [    // порядок секций лучше не менять
@@ -158,9 +158,8 @@ var path = WScript.ScriptFullName.substr(0, (WScript.ScriptFullName.length - WSc
 
 // Имя файла конфига берём из аргумента или задаем XVM.xvmconf, если аргумент пуст
 var file_input="XVM.xvmconf";
-if (WScript.Arguments.length>0) {
+if (WScript.Arguments.length>0)
     file_input=WScript.Arguments(0);
-}
 
 // Проверяем наличие файла XVM.xvmconf
 if (!fso.FileExists(file_input)) {
@@ -172,21 +171,16 @@ if (!fso.FileExists(file_input)) {
 }
 
 // массив для хранения исходного конфига
-var inputConfig = new Array();
-var finput=fso.OpenTextFile(file_input,1,false,false);
+var inputConfig = fileToArray(file_input);
+
+// Ищем имя автора конфига
 var i = 0;
-
-// считываем конфиг в массив
-while(!finput.AtEndOfStream){
-  inputConfig[i]=finput.ReadLine();
+while (i < inputConfig.length && !isStart(inputConfig[i], '"author"'))
   i++;
-}
-finput.Close();
-
-// создаем папку для конфига по имени прописанного в нем автора
-i = 0;
-while (i < inputConfig.length && !isStart(inputConfig[i], '"author"')){
-  i++;
+if (i == inputConfig.length) {
+    i = 0;
+    while (i < inputConfig.length && inputConfig[i].indexOf('"author"') == -1)
+      i++;
 }
 if (i == inputConfig.length) {
     var author = "autoscript by seriych";
@@ -196,12 +190,15 @@ if (i == inputConfig.length) {
     author = author.substring(author.indexOf("\"")+1);
     author = author.substring(0, author.indexOf("\""));
 }
+
+// заменяем символы, которые нельзя использовать в именах файлов, на пробелы
+author = author.replace( /[":*?><|&^\\\/]/g , ' ');
+
 // Если папка с именем автора существует, создаем новую с числовым индексом
 if (fso.FolderExists(path+author)) {
     i = 1;
-    while (fso.FolderExists(path+author+" "+i)) {
+    while (fso.FolderExists(path+author+" "+i))
         i++;
-    }
     author = author+" "+i;
 }
 fso.CreateFolder(path+author);
@@ -214,7 +211,9 @@ while ( i < inputConfig.length && !isStart(inputConfig[i], '{'))
 if (i != inputConfig.length)
     startIndex = i;
 
-// ищем вхождения всех секций
+/******************************************************************************/
+/**               Ищем вхождения всех секций                                  */
+/******************************************************************************/
 for ( var j = 0; j < sections.length; j++) {
     i = 0;
     //ищем строку, содержащую секцию
@@ -225,10 +224,17 @@ for ( var j = 0; j < sections.length; j++) {
     section = section.substring(1);
     // если не нашли, прописываем пустышку
     if (i == inputConfig.length) {
-        inputConfig.splice(startIndex+1, 1, "  ", sectionsComments[section].en, sectionsComments[section].ru, "  "+sections[j]+": {", "    ", "  },");
-        i = startIndex+4;
+        inputConfig.splice(startIndex+1, 0, sectionsComments[section].en, sectionsComments[section].ru, "  "+sections[j]+": {", "    ", "  },");
+        i = startIndex + 3;
+        // если миникарта-пустышка, запоминаем это
+        if (section == "minimap")
+            var blankMinimap = true;
+    } else if (section == "minimap") {
+        if ( diffBraces(inputConfig[i]) == 0)
+            blankMinimap = true;
+        else
+            blankMinimap = false;
     }
-    startIndex = i;
     // создаем файл для записи секции
     if (section == "userInfo")
         section = "hangar";
@@ -243,22 +249,8 @@ for ( var j = 0; j < sections.length; j++) {
     }
     fout=fso.OpenTextFile(file_out,8,true,false);
     fout.WriteLine(startString);
-    // записываем комментарии, предшествующие секции
-    for (var k = numberComments(i); k > 0; k--)
-      fout.WriteLine(inputConfig[i-k]);
-    // считаем разницу между количеством открывающих и закрывающих скобок
-    var diff = diffBraces(inputConfig[i]);
-    if (diff == 0) {
-        // если секция из одной строки, пишем в файл эту строку без последней скобки
-        fout.WriteLine(inputConfig[i].substring(0, inputConfig[i].lastIndexOf("}"))+"       //      "+inputConfig[i].substring(inputConfig[i].lastIndexOf("}")+1));
-    } else {
-        // Иначе пишем в файл, пока не дойдем до конца секции (закроется последняя скобка секции)
-        while (diff > 0) {
-            fout.WriteLine(inputConfig[i]);
-            inputConfig.splice(i, 1);
-            diff = diff + diffBraces(inputConfig[i]);
-        }
-    }
+    // копируем секцию в файл
+    writeSection();
     // завершаем секцию и закрываем файл
     fout.WriteLine("  }");
     fout.WriteLine("}");
@@ -266,7 +258,7 @@ for ( var j = 0; j < sections.length; j++) {
     // создаем строку для записи в главный файл конфига подстановки вместо секции
     var input_string = "  "+sections[j]+": ${\""+section+".xc\""+":"+sections[j]+"}";
     // если секция не последняя в конфиге, надо добавить запятую
-    if (inputConfig[i].indexOf(",") != -1)
+    if (inputConfig[i].indexOf(",") != -1 && inputConfig[i].lastIndexOf("}") < inputConfig[i].lastIndexOf(","))
         input_string = input_string + ",";
     // записываем подстановку в главный файл конфига
     inputConfig.splice(i, 1, input_string, "");
@@ -275,9 +267,8 @@ for ( var j = 0; j < sections.length; j++) {
 // переносим отстатки главного конфига из массива в файл @XVM.xc
 file_out = path+author+"\\@XVM.xc";
 fout=fso.OpenTextFile(file_out,2,true,false);
-for ( i = 0; i < inputConfig.length; i++) {
+for ( i = 0; i < inputConfig.length; i++)
     fout.WriteLine(inputConfig[i]);
-}
 fout.WriteLine();
 if (Rus)
     fout.WriteLine("//  РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРё СЃРіРµРЅРµСЂРёСЂРѕРІР°РЅРѕ СЌС‚РёРј СЃРєСЂРёРїС‚РѕРј:");
@@ -287,9 +278,9 @@ fout.WriteLine("//  http://www.koreanrandom.com/forum/topic/4643-");
 // закрываем файл
 fout.Close();
 
-/******************************************************************************
-               Секция миникарты
-******************************************************************************/
+/******************************************************************************/
+/**               Секция миникарты                                            */
+/******************************************************************************/
 if (fso.FileExists(path+author+"\\minimap.xc")) {
     // массив названий секций миникарты
     sections = [    // порядок секций лучше не менять
@@ -298,16 +289,7 @@ if (fso.FileExists(path+author+"\\minimap.xc")) {
                         '"lines"'
                 ];
     // массив для хранения исходного конфига
-    inputConfig = new Array();
-    finput=fso.OpenTextFile(path+author+"\\minimap.xc",1,false,false);
-    i = 0;
-
-    // считываем конфиг в массив
-    while(!finput.AtEndOfStream){
-      inputConfig[i]=finput.ReadLine();
-      i++;
-    }
-    finput.Close();
+    inputConfig = fileToArray(path+author+"\\minimap.xc");
 
     i = 0;
     // ищем начало секции minimap
@@ -329,6 +311,10 @@ if (fso.FileExists(path+author+"\\minimap.xc")) {
         if (i == inputConfig.length) {
             inputConfig.splice(startIndex+1, 0, sectionsComments[section].en, sectionsComments[section].ru, "  "+sections[j]+": {", "    ", "  },");
             i = startIndex+3;
+            // фикс для не добавления запятой, если секция-пустышка завершает файл
+            var lastRef = false;
+            if (j == sections.length-1 && blankMinimap)
+                lastRef = true;
         }
         startIndex = i;
 
@@ -336,22 +322,8 @@ if (fso.FileExists(path+author+"\\minimap.xc")) {
         file_out = path+author+"\\"+section+".xc";
         fout=fso.OpenTextFile(file_out,2,true,false);
         fout.WriteLine("{");
-        // записываем комментарии, предшествующие секции
-        for ( k = numberComments(i); k > 0; k--)
-          fout.WriteLine(inputConfig[i-k]);
-        // считаем разницу между количеством открывающих и закрывающих скобок
-        diff = diffBraces(inputConfig[i]);
-        if (diff == 0) {
-            // если секция из одной строки, пишем в файл эту строку без последней скобки
-            fout.WriteLine(inputConfig[i].substring(0, inputConfig[i].lastIndexOf("}"))+"       //      "+inputConfig[i].substring(inputConfig[i].lastIndexOf("}")+1));
-        } else {
-            // Иначе пишем в файл, пока не дойдем до конца секции (закроется последняя скобка секции)
-            while (diff > 0) {
-                fout.WriteLine(inputConfig[i]);
-                inputConfig.splice(i, 1);
-                diff = diff + diffBraces(inputConfig[i]);
-            }
-        }
+        // копируем секцию в файл
+        writeSection();
         // завершаем секцию и закрываем файл
         fout.WriteLine("  }");
         fout.WriteLine("}");
@@ -359,7 +331,7 @@ if (fso.FileExists(path+author+"\\minimap.xc")) {
         // создаем строку для записи в главный файл конфига подстановки вместо секции
         input_string = "    "+sections[j]+": ${\""+section+".xc\""+":"+sections[j]+"}";
         // если секция не последняя в конфиге, надо добавить запятую
-        if (inputConfig[i].indexOf(",") != -1)
+        if (inputConfig[i].indexOf(",") != -1 && !lastRef)
             input_string = input_string + ",";
         // записываем подстановку в главный файл конфига
         inputConfig.splice(i, 1, input_string, "");
@@ -368,31 +340,21 @@ if (fso.FileExists(path+author+"\\minimap.xc")) {
     // переносим отстатки секции minimap из массива в файл minimap/minimap.xc
     file_out = path+author+"\\minimap.xc";
     fout=fso.OpenTextFile(file_out,2,true,false);
-    for ( i = 0; i < inputConfig.length; i++) {
+    for ( i = 0; i < inputConfig.length; i++)
         fout.WriteLine(inputConfig[i]);
-    }
     // закрываем файл
     fout.Close();
 }
 
-/******************************************************************************
-                         Секция маркеров
-******************************************************************************/
+/******************************************************************************/
+/**                         Секция маркеров                                   */
+/******************************************************************************/
 if (fso.FileExists(path+author+"\\markers.xc")) {
     var    enemy = ['"ally"', '"enemy"' ];       // массив свой/чужой
     var     dead = ['"alive"',  '"dead"' ];      // массив живой/мертвый
     var extended = ['"normal"', '"extended"' ];  // массив нормальный/расширенный режим
     // массив для хранения исходного конфига
-    inputConfig = new Array();
-    finput=fso.OpenTextFile(path+author+"\\markers.xc",1,false,false);
-
-    i = 0;
-    // считываем конфиг в массив
-    while(!finput.AtEndOfStream){
-      inputConfig[i]=finput.ReadLine();
-      i++;
-    }
-    finput.Close();
+    inputConfig = fileToArray(path+author+"\\markers.xc");
 
     for ( var m = 0; m < enemy.length; m++) {
         i = 0;
@@ -433,23 +395,9 @@ if (fso.FileExists(path+author+"\\markers.xc")) {
                     fout.WriteLine("{");
                 else
                     fout.WriteLine("        },");
-                // записываем комментарии, предшествующие секции
-                for ( k = numberComments(i); k > 0; k--)
-                  fout.WriteLine(inputConfig[i-k]);
-                // считаем разницу между количеством открывающих и закрывающих скобок
-                diff = diffBraces(inputConfig[i]);
                 inputConfig[i] = inputConfig[i].replace(extended[p], enemy[m]);
-                if (diff == 0) {
-                    // если секция из одной строки, пишем в файл эту строку без последней скобки
-                    fout.WriteLine(inputConfig[i].substring(0, inputConfig[i].lastIndexOf("}"))+"       //      "+inputConfig[i].substring(inputConfig[i].lastIndexOf("}")+1));
-                } else {
-                    // Иначе пишем в файл, пока не дойдем до конца секции (закроется последняя скобка секции)
-                    while (diff > 0) {
-                        fout.WriteLine(inputConfig[i]);
-                        inputConfig.splice(i, 1);
-                        diff = diff + diffBraces(inputConfig[i]);
-                    }
-                }
+                // копируем секцию в файл
+                writeSection();
                 // завершаем секцию и закрываем файл
                 if ( m == 1) {
                     fout.WriteLine("        }");
@@ -469,9 +417,8 @@ if (fso.FileExists(path+author+"\\markers.xc")) {
     // переносим отстатки секции markers из массива в файл markers/markers.xc
     file_out = path+author+"\\markers.xc";
     fout=fso.OpenTextFile(file_out,2,true,false);
-    for ( i = 0; i < inputConfig.length; i++) {
+    for ( i = 0; i < inputConfig.length; i++)
         fout.WriteLine(inputConfig[i]);
-    }
     // закрываем файл
     fout.Close();
 }
@@ -495,16 +442,17 @@ if (xvmFolder.substring(xvmFolder.length-14) == "\\res_mods\\xvm\\") {
 
 // Отчитываемся о проделанной работе
 if (Rus)
-    WScript.Echo("Конфиг успешно сохранен в:\n\""+path+author+"\\\""+change);
+    WScript.Echo('Конфиг успешно сохранен в:\n"'+path+author+'\\"'+change);
 else
-    WScript.Echo("Config successfully saved in:\n\""+path+author+"\\\""+change);
+    WScript.Echo('Config successfully saved in:\n"'+path+author+'\\"'+change);
 
 // Завершаем выполнение скрипта
 WScript.Quit();
 
-/******************************************************************************
-                     Вспомогательные функции
-******************************************************************************/
+
+/******************************************************************************/
+/**                     Вспомогательные функции                               */
+/******************************************************************************/
 
 // Функция подсчета разницы количества открывающих и закрывающих скобок в строке
 function diffBraces(line) {
@@ -522,6 +470,8 @@ function diffBraces(line) {
 
 // функция, возвращающая true, если строка содержит подстроку в начале или сразу после пробелов и табов
 function isStart(line, sect) {
+  if ( line.substring(0, 3) == "п»ї")
+    line = line.substring(3);
   while (line.indexOf(" ") == 0 || line.indexOf("   ") == 0 )
     line = line.substring(1);
   if (line.indexOf(sect) == 0)
@@ -557,9 +507,54 @@ function delStrings(file_out) {
     n = n-2;
     finput=fso.OpenTextFile(file_out,2,true,false);
     var k = 0;
-    while(k<n){
+    while ( k < n) {
         finput.WriteLine(inputArr[k]);
         k++;
     }
     finput.Close();
+}
+
+// функция, удаляющая в строке последнее вхождение "}" или "},"
+function delLastBrace(line) {
+  if (section == "minimap" && diffBraces(inputConfig[i]) == 0)
+    var minimapFix = ",";
+  else
+    minimapFix = "";
+  if ( line.lastIndexOf("},") != -1 && line.lastIndexOf("},") == line.lastIndexOf("}"))
+    return line.substring(0, line.lastIndexOf("},"))+minimapFix+line.substring(line.lastIndexOf("},")+2);
+  else
+    return line.substring(0, line.lastIndexOf("}"))+minimapFix+line.substring(line.lastIndexOf("}")+1);
+}
+
+// функция, копирующая секцию в файл
+function writeSection() {
+    // записываем комментарии, предшествующие секции
+    for (var k = numberComments(i); k > 0; k--)
+      fout.WriteLine(inputConfig[i-k]);
+    // считаем разницу между количеством открывающих и закрывающих скобок
+    var diff = diffBraces(inputConfig[i]);
+    if (diff == 0)
+        // если секция из одной строки, пишем в файл эту строку без последней скобки
+        fout.WriteLine(delLastBrace(inputConfig[i]));
+    else
+        // Иначе пишем в файл, пока не дойдем до конца секции (закроется последняя скобка секции)
+        while (diff > 0) {
+            fout.WriteLine(inputConfig[i]);
+            inputConfig.splice(i, 1);
+            diff = diff + diffBraces(inputConfig[i]);
+        }
+}
+
+// функция, считывающая файл в массив
+function fileToArray(file_input) {
+    var inputConfig = new Array();
+    var finput = fso.OpenTextFile(file_input,1,false,false);
+    var i = 0;
+    // считываем конфиг в массив
+    while(!finput.AtEndOfStream){
+      inputConfig[i]=finput.ReadLine();
+      i++;
+    }
+    finput.Close();
+    return inputConfig;
 }
