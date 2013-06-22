@@ -262,7 +262,10 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     public function init(vClass:String, vIconSource:String, vType:String, vLevel:Number, pFullName:String,
         curHealth:Number, maxHealth:Number, entityName:String, speaking:Boolean, hunt:Boolean, entityType:String):Void
     {
-        //trace("init: " + pFullName);
+        /**
+         * Invoked on new marker creation.
+         * Does not invoked on Alt or unit death.
+         */
         m_vehicleName = vType;
         m_level = vLevel;
         m_playerFullName = pFullName;
