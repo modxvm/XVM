@@ -1,3 +1,5 @@
+  * hitlog: damage to drowned units is not taken into account anymore
+
 XVM-4.0.0:
   * adaptation to WoT 0.8.6
 
