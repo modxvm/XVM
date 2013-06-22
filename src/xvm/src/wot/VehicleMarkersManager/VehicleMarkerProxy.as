@@ -3,15 +3,14 @@
  * Dispatches event for config loading if it is not loaded
  */
 import com.xvm.Config;
-import com.xvm.Defines;
 import com.xvm.GlobalEventDispatcher;
 import com.xvm.GraphicsUtil;
-import com.xvm.Logger;
 import com.xvm.Sandbox;
 import com.xvm.Utils;
 import com.xvm.VehicleInfo;
-import wot.VehicleMarkersManager.log.LogLists;
 import wot.VehicleMarkersManager.IVehicleMarker;
+import wot.VehicleMarkersManager.log.LogLists;
+import wot.VehicleMarkersManager.UnitDestroyedAccounting;
 import wot.VehicleMarkersManager.VMMEvent;
 
 /* TODO:
@@ -264,7 +263,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     {
         /**
          * Invoked on new marker creation.
-         * Does not invoked on Alt or unit death.
+         * Does not get invoked on Alt or unit death.
          */
         m_vehicleName = vType;
         m_level = vLevel;
@@ -273,6 +272,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
         m_vehicleClass = vClass;
         m_curHealth = curHealth;
         m_dead = m_curHealth <= 0;
+        
         if (Config.s_loaded == true && !subject)
             initializeSubject();
         if (wrapper.m_team == "enemy")
@@ -316,7 +316,17 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     public function updateState(newState:String, isImmediate:Boolean):Void
     {
         if (newState == "dead")
+        {
             m_dead = true;
+            
+            /**
+             * updateState is sufficient for logDead routine.
+             * 
+             * Method is invoked both on new marker created being already dead
+             * and present marker becoming dead at some point in time.
+             */
+            UnitDestroyedAccounting.instance.logDead(m_playerFullName);
+        }
         return call("updateState", arguments);
     }
 
