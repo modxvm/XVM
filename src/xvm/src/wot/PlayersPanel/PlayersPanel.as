@@ -498,7 +498,7 @@ class wot.PlayersPanel.PlayersPanel
     {
         wrapper.m_list.onEnterFrame = function()
         {
-            if (this._dataProvider.length > 1)
+            if (this._dataProvider.length > 0)
             {
                 delete this.onEnterFrame;
 
