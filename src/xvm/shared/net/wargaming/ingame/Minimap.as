@@ -16,7 +16,7 @@ intrinsic class net.wargaming.ingame.Minimap extends UIComponent
     var setSize;
     var MINIMAP_SIZE:Number;
     var MINIMAP_STEP:Number;
-    
+    var __height:Number;
     var m_sizeIndex:Number;
     
     function Minimap();
