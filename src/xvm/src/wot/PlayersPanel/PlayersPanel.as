@@ -97,7 +97,10 @@ class wot.PlayersPanel.PlayersPanel
     private function initEnemySpotterMarkers(event):Void
     {
         if (isEnemyPanel && Config.s_config.playersPanel.enemySpottedMarker.enabled && spotStatusModel == null)
+        {
+            Logger.add("initEnemySpotterMarkers");
             spotStatusModel = new SpotStatusModel();
+        }
     }
 
     private function onStatLoaded()
