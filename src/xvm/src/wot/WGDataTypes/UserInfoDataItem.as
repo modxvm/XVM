@@ -40,6 +40,9 @@ class wot.WGDataTypes.UserInfoDataItem
     var toolTip:Number;
     var fights:Number;
     var wins:Number;
+
+    public static var TYPE:Array = [ "", "SPG", "LT", "MT", "HT", "TD" ];
+    public static var TYPE_RU:Array = [ "", "—¿”", "À“", "—“", "““", "œ“" ];
     
     public static function toType(s:String):Number
     {

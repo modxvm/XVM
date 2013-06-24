@@ -568,7 +568,10 @@ class wot.UserInfo.UserInfo
                 for (var i:Number = 1; i < len; ++i)
                 {
                     var item:UserInfoDataItem = provider[i];
-                    if (filter == "" || item.name.toLowerCase().indexOf(filter) >= 0)
+                    if (filter == "" || // empty
+                        item.name.toLowerCase().indexOf(filter) >= 0 || // name
+                        item.level.toString() == filter || Defines.ROMAN_LEVEL[item.level - 1].toLowerCase() == filter || // level
+                        UserInfoDataItem.TYPE[item.type].toLowerCase() == filter || UserInfoDataItem.TYPE_RU[item.type].toLowerCase() == filter) // type
                         data.push(item);
                 }
             }
