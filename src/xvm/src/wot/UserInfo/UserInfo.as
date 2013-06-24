@@ -571,7 +571,8 @@ class wot.UserInfo.UserInfo
                     if (filter == "" || // empty
                         item.name.toLowerCase().indexOf(filter) >= 0 || // name
                         item.level.toString() == filter || Defines.ROMAN_LEVEL[item.level - 1].toLowerCase() == filter || // level
-                        UserInfoDataItem.TYPE[item.type].toLowerCase() == filter || UserInfoDataItem.TYPE_RU[item.type].toLowerCase() == filter) // type
+                        UserInfoDataItem.TYPE[item.type].toLowerCase() == filter || UserInfoDataItem.TYPE_RU[item.type].toLowerCase() == filter ||
+                        (filter == "--" && item["premium"] != true)) // no prem
                         data.push(item);
                 }
             }
