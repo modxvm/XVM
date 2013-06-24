@@ -98,7 +98,6 @@ class wot.PlayersPanel.PlayersPanel
     {
         if (isEnemyPanel && Config.s_config.playersPanel.enemySpottedMarker.enabled && spotStatusModel == null)
         {
-            Logger.add("initEnemySpotterMarkers");
             spotStatusModel = new SpotStatusModel();
         }
     }
