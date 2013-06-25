@@ -1,4 +1,5 @@
 import wot.Minimap.dataTypes.Player;
+
 /**
  * PlayersPanelProxy class
  * provides simple wrapper to PlayersPanel.m_list._dataProvider Array
