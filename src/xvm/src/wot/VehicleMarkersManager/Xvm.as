@@ -80,7 +80,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
             return;
         Xvm.s_initialized = true;
 
-        Utils.TraceXvmModule("XVM");
+        Utils.TraceXvmModule("VMM");
 
         // initialize TweenLite
         OverwriteManager.init(OverwriteManager.AUTO);
