@@ -166,9 +166,12 @@ class wot.UserInfo.UserInfo
                     b2 = b2 % 1 == 0 ? b2 : (int(b2) + 1);
                     b1 = Math.max(0, b1);
                     b2 = Math.max(0, b2);
-                    arguments[battlesExtraId] = (b2 > b1)
-                        ? b1 + Locale.get(" to ") + (r2 * 100 - 0.5) + "% / " + b2 + Locale.get(" to ") + (r2 * 100) + "%"
-                        : b2 + Locale.get(" to ") + (r2 * 100) + "% / " + b1 + Locale.get(" to ") + (r2 * 100 + 0.5) + "%";
+                    if (gwr > 0 && gwr < 100)
+                    {
+                        arguments[battlesExtraId] = (b2 > b1)
+                            ? b1 + Locale.get(" to ") + (r2 * 100 - 0.5) + "% / " + b2 + Locale.get(" to ") + (r2 * 100) + "%"
+                            : b2 + Locale.get(" to ") + (r2 * 100) + "% / " + b1 + Locale.get(" to ") + (r2 * 100 + 0.5) + "%";
+                    }
 
                     // wins
                     arguments[i + 2] = Sprintf.format("%.2f", gwr) + "%";
@@ -408,6 +411,7 @@ class wot.UserInfo.UserInfo
 
         filterList();
         applyFilterAndSort();
+        
         //Logger.addObject(lastSort, "", 2);
         //Logger.addObject(_root, "_root", 2);
         //Logger.addObject(m_fullDataProvider);
@@ -570,6 +574,7 @@ class wot.UserInfo.UserInfo
                     var item:UserInfoDataItem = provider[i];
                     if (filter == "" || // empty
                         item.name.toLowerCase().indexOf(filter) >= 0 || // name
+                        VehicleInfo.getName2(item.icon).indexOf(filter.split("-").join("_")) >= 0 || // vname
                         item.level.toString() == filter || Defines.ROMAN_LEVEL[item.level - 1].toLowerCase() == filter || // level
                         UserInfoDataItem.TYPE[item.type].toLowerCase() == filter || UserInfoDataItem.TYPE_RU[item.type].toLowerCase() == filter ||
                         (filter == "--" && item["premium"] != true) || // no prem
@@ -619,38 +624,46 @@ class wot.UserInfo.UserInfo
         m_button7 = createButton(hdr, "bWin", 435, 5, Locale.get("Wins"), "right", 1);
         m_button8 = createButton(hdr, "bMed", 440, 5, "M", "left", 1);
 
-        // Filter controls
-        if (Config.s_config.userInfo.showFilters == true)
-        {
-            var filter:MovieClip = (IsSelfUserInfo() ? wrapper : wrapper._parent._parent).createEmptyMovieClip("filterPanel", 999);
-            filter._x = 392;
-            filter._y = IsSelfUserInfo() ? -69 : 0;
+        if (Config.s_config.userInfo.showFilters != true)
+            return;
 
-            var filterLabel:TextField = filter.createTextField("filterLabel", 0, 100, 0, 60, 20);
-            filterLabel.antiAliasType = "advanced";
-            filterLabel.styleSheet = Utils.createStyleSheet(Utils.createCSSFromConfig("$FieldFont", Defines.UICOLOR_DEFAULT2, "xvm_filterLabel"));
-            filterLabel.selectable = false;
-            filterLabel.html = true;
-            filterLabel.htmlText = "<span class='xvm_filterLabel'>" + Locale.get("Filter") + ":</span>";
-            
-            m_tiFilter = gfx.controls.TextInput(Utils.createTextInput(filter, "__xvm_tiFilter", 100, 15, 60));
-            m_tiFilter.addEventListener("textChange", this, "applyFilterAndSort");
-            
-            m_rbOwn = gfx.controls.RadioButton(Utils.createRadioButton(filter, "rbOwnTanks", 0, 0, 100, Locale.get("In hangar"), "filter"));
-            m_rbOwn.tooltipText = Locale.get("Show only tanks in own hangar");
-            m_rbOwn.selected = IsSelfUserInfo() && Config.s_config.userInfo.inHangarFilterEnabled == true;
-            m_rbOwn.addEventListener("select", this, "applyFilterAndSort");
-            
-            m_rbFull = gfx.controls.RadioButton(Utils.createRadioButton(filter, "rbFullTanks", 0, 12, 100, Locale.get("Player tanks"), "filter"));
-            m_rbFull.tooltipText = Locale.get("Show all tanks played");
-            m_rbFull.selected = !IsSelfUserInfo() || Config.s_config.userInfo.inHangarFilterEnabled != true;
-            m_rbFull.addEventListener("select", this, "applyFilterAndSort");
-            
-            m_rbAll = gfx.controls.RadioButton(Utils.createRadioButton(filter, "rbAllTanks", 0, 24, 100, Locale.get("All tanks"), "filter"));
-            m_rbAll.tooltipText = Locale.get("Show all tanks in the game");
-            m_rbAll.selected = false;
-            m_rbAll.addEventListener("select", this, "applyFilterAndSort");
+        // Filter controls
+        var filter:MovieClip = (IsSelfUserInfo() ? wrapper : wrapper._parent._parent).createEmptyMovieClip("filterPanel", 999);
+        filter._x = 392;
+        filter._y = IsSelfUserInfo() ? -69 : 0;
+
+        var filterLabel:TextField = filter.createTextField("filterLabel", 0, 100, 0, 60, 20);
+        filterLabel.antiAliasType = "advanced";
+        filterLabel.styleSheet = Utils.createStyleSheet(Utils.createCSSFromConfig("$FieldFont", Defines.UICOLOR_DEFAULT2, "xvm_filterLabel"));
+        filterLabel.selectable = false;
+        filterLabel.html = true;
+        filterLabel.htmlText = "<span class='xvm_filterLabel'>" + Locale.get("Filter") + ":</span>";
+        
+        m_tiFilter = gfx.controls.TextInput(Utils.createTextInput(filter, "__xvm_tiFilter", 100, 15, 60));
+        m_tiFilter.addEventListener("textChange", this, "applyFilterAndSort");
+        if (IsSelfUserInfo())
+            m_tiFilter.focused = true;
+        else
+        {
+            // FIXIT: dirty hack
+            var ti = m_tiFilter;
+            _global.setTimeout(function() { ti.focused = true; }, 10);
         }
+        
+        m_rbOwn = gfx.controls.RadioButton(Utils.createRadioButton(filter, "rbOwnTanks", 0, 0, 100, Locale.get("In hangar"), "filter"));
+        m_rbOwn.tooltipText = Locale.get("Show only tanks in own hangar");
+        m_rbOwn.selected = IsSelfUserInfo() && Config.s_config.userInfo.inHangarFilterEnabled == true;
+        m_rbOwn.addEventListener("select", this, "applyFilterAndSort");
+        
+        m_rbFull = gfx.controls.RadioButton(Utils.createRadioButton(filter, "rbFullTanks", 0, 12, 100, Locale.get("Player tanks"), "filter"));
+        m_rbFull.tooltipText = Locale.get("Show all tanks played");
+        m_rbFull.selected = !IsSelfUserInfo() || Config.s_config.userInfo.inHangarFilterEnabled != true;
+        m_rbFull.addEventListener("select", this, "applyFilterAndSort");
+        
+        m_rbAll = gfx.controls.RadioButton(Utils.createRadioButton(filter, "rbAllTanks", 0, 24, 100, Locale.get("All tanks"), "filter"));
+        m_rbAll.tooltipText = Locale.get("Show all tanks in the game");
+        m_rbAll.selected = false;
+        m_rbAll.addEventListener("select", this, "applyFilterAndSort");
     }
 
     private function IsSelfUserInfo()
