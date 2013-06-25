@@ -89,5 +89,16 @@
     // true - Enable display of E column (values ​​may be incorrect due to the peculiarities of WG statistics servers).
     // true - показывать колонку эффективности по танку (значения могут быть неверными из-за особенностей предоставления статистики серверами WG).
     "showEColumn": false
+    // number of column for sorting by default. Sort order: >0 - default, <0 - inverse
+    // номер колонки для сортировки по умолчанию. Порядок сортировки: >0 - по умолчанию, <0 - обратный
+    // 1 - Level       / Уровень
+    // 2 - Type        / Тип
+    // 3 - Nation      / Нация
+    // 4 - Name        / Название
+    // 5 - E           / E
+    // 6 - Fights      / Боев
+    // 7 - Wins        / Побед
+    // 8 - Class mark  / Знак классности
+    "sortColumn": 6
   }
 }

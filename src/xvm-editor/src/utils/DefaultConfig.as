@@ -168,8 +168,10 @@ public class DefaultConfig
                 rightLvlBorder: ""		// Grille 4]
             },
             userInfo: {
-                inHangarFilterEnabled: false,   // Enable [x] In hangar check box by default
-                showEColumn: false              // Show column for per-vehicle efficiency
+                showFilters: true,              // Show tank filters
+                inHangarFilterEnabled: false,   // Enable In hangar radio button by default
+                showEColumn: false,             // Show column for per-vehicle efficiency
+                sortColumn: 6                   // Number of column for sorting
             },
             fragCorrelation: {
                 hideTeamTextFields: true

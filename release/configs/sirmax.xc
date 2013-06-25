@@ -47,7 +47,8 @@
   },
   "userInfo": {
      "inHangarFilterEnabled": true,
-     "showEColumn": true
+     "showEColumn": true,
+     "sortColumn": -1
   },
   "squad": {
     "enabled": true,

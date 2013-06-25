@@ -152,7 +152,10 @@ private function RefreshHangarPage():void
         this.p_hangar.v_hideTutorial.value = section.hideTutorial;
 
         section = Config.s_config.userInfo;
+        this.p_hangar.v_showFilters.value = section.showFilters;
+        this.p_hangar.v_inHangarFilterEnabled.value = section.inHangarFilterEnabled;
         this.p_hangar.v_showEColumn.value = section.showEColumn;
+        this.p_hangar.v_sortColumn.value = section.sortColumn;
 
         section = Config.s_config.squad;
         this.p_hangar.v_enabled.value = section.enabled;

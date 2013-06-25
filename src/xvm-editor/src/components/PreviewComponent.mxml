@@ -150,5 +150,5 @@
             <s:TextArea right="0" width="476" height="100%" id="taDebug" visible="true" fontFamily="Consolas"/>
         </s:NavigatorContent>
     </mx:ViewStack>
-    <mx:Image right="5" top="5" width="16" height="16" source="@Embed(source='images/revert.png')" toolTip="Debug Window" useHandCursor="true" buttonMode="true" click="switchLayout(event)"/>
+    <mx:Image right="10" top="5" width="16" height="16" source="@Embed(source='images/revert.png')" toolTip="Debug Window" useHandCursor="true" buttonMode="true" click="switchLayout(event)"/>
 </s:BorderContainer>

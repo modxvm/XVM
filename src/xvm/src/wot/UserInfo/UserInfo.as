@@ -49,11 +49,7 @@ class wot.UserInfo.UserInfo
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
-    static var lastSort = {
-        name: "bBat",
-        type: [ "fights" ],
-        dir: [ "1" ]
-    };
+    static var lastSort = { };
 
     var m_statisticsField1:TextField;
     var m_statisticsField2:TextField;
@@ -586,7 +582,7 @@ class wot.UserInfo.UserInfo
             wrapper.list.dataProvider = data;
         }
 
-        if (lastSort.type)
+        if (lastSort.type != null)
             sortList(lastSort.type, lastSort.dir);
         
         wrapper.list.selectedIndex = 0;
@@ -605,12 +601,12 @@ class wot.UserInfo.UserInfo
         // add new buttons
         var hdr:MovieClip = wrapper.header;
 
-        m_button1 = createButton(hdr, "bLvl", 10,  5, Locale.get("Level"), "left", 1);
-        m_button2 = createButton(hdr, "bTyp", 124, 5, Locale.get("Type"), "right", 1);
-        m_button3 = createButton(hdr, "bNat", 135, 5, Locale.get("Nation"), "left", 2);
-        m_button4 = createButton(hdr, "bNam", 200, 5, Locale.get("Name"), "left", 2);
+        m_button1 = createButton(hdr, 1, "bLvl", "level",  10,  5, Locale.get("Level"), "left", 1);
+        m_button2 = createButton(hdr, 2, "bTyp", "type",   124, 5, Locale.get("Type"), "right", 1);
+        m_button3 = createButton(hdr, 3, "bNat", "nation", 135, 5, Locale.get("Nation"), "left", 2);
+        m_button4 = createButton(hdr, 4, "bNam", "name",   200, 5, Locale.get("Name"), "left", 2);
 
-        m_button5 = createButton(hdr, "bEff", 305, 5, "E", "right", 1);
+        m_button5 = createButton(hdr, 5, "bEff", "e",      305, 5, "E", "right", 1);
 
         // Option for disable "E" column, because WG is providing incorrect per-vehicle stats
         m_button5._visible = Config.s_config.userInfo.showEColumn == true;
@@ -620,9 +616,9 @@ class wot.UserInfo.UserInfo
             m_button5._alpha = 30;
         }
         
-        m_button6 = createButton(hdr, "bBat", 365, 5, Locale.get("Fights"), "right", 1);
-        m_button7 = createButton(hdr, "bWin", 435, 5, Locale.get("Wins"), "right", 1);
-        m_button8 = createButton(hdr, "bMed", 440, 5, "M", "left", 1);
+        m_button6 = createButton(hdr, 6, "bBat", "fights",       365, 5, Locale.get("Fights"), "right", 1);
+        m_button7 = createButton(hdr, 7, "bWin", "wins",         435, 5, Locale.get("Wins"), "right", 1);
+        m_button8 = createButton(hdr, 8, "bMed", "vehicleClass", 440, 5, "M", "left", 1);
 
         if (Config.s_config.userInfo.showFilters != true)
             return;
@@ -671,7 +667,7 @@ class wot.UserInfo.UserInfo
         return !wrapper._parent.addToIgnoredButton;
     }
     
-    private function createButton(hdr:MovieClip, name, x, y, txt, align, defaultSort):MovieClip
+    private function createButton(hdr:MovieClip, id:Number, name:String, type:String, x:Number, y:Number, txt:String, align:String, defaultSort:Number):MovieClip
     {
         var b = Utils.createButton(hdr, name, x, y, txt, align);
         Utils.addEventListeners(b, this, {
@@ -682,6 +678,20 @@ class wot.UserInfo.UserInfo
         b.group = "sort";
         b.defaultSort = defaultSort;
         b.sortDir = 0;
+        
+        if (lastSort.name == null)
+        {
+            var col = Config.s_config.userInfo.sortColumn || 6; // -8..-1,1..8
+            if (!((col >= -8 && col <= -1) || (col >= 1 && col <= 8)))
+                col = 6;
+            if (id == col || id == -col)
+            {
+                lastSort.name = name;
+                lastSort.type = type;
+                lastSort.dir = [ col > 0 ? defaultSort : 3 - defaultSort ];
+            }
+        }
+
         if (name == lastSort.name)
         {
             b.sortDir = lastSort.dir[0];

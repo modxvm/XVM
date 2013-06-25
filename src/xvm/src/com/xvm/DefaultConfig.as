@@ -170,7 +170,8 @@ class com.xvm.DefaultConfig
             userInfo: {
                 showFilters: true,              // Show tank filters
                 inHangarFilterEnabled: false,   // Enable In hangar radio button by default
-                showEColumn: false              // Show column for per-vehicle efficiency
+                showEColumn: false,             // Show column for per-vehicle efficiency
+                sortColumn: 6                   // Number of column for sorting        
             },
             fragCorrelation: {
                 hideTeamTextFields: true
