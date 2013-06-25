@@ -11,7 +11,7 @@ public final class Defines
     public static const XVM_VERSION: String = "4.0.0";
     public static const WOT_VERSION: String = "0.8.6";
     public static const CONFIG_VERSION: String = "4.0.0";
-    public static const EDITOR_VERSION: String = "0.54";
+    public static const EDITOR_VERSION: String = "0.55";
 
     // Dynamic color types
     public static const DYNAMIC_COLOR_EFF: Number = 1;

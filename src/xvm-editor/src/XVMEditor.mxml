@@ -4,7 +4,7 @@
     xmlns:mx="library://ns.adobe.com/flex/mx"
     pageTitle="XVM Editor"
     backgroundColor="0x808080"
-    minWidth="1024" minHeight="600" maxWidth="1024" maxHeight="600" width="1024" height="600"
+    minWidth="1000" minHeight="600" maxWidth="1000" maxHeight="600" width="1000" height="600"
     xmlns:ns1="*"
     xmlns:c="components.*"
     xmlns:p="panels.*"
@@ -76,7 +76,7 @@
         <s:RadioButtonGroup id="damageTextRBG" change="onRadioButtonChange(event)"/>
     </fx:Declarations>
     <s:VGroup left="0" right="0" top="0" bottom="0" gap="-1" creationComplete="onCreationComplete(event)">
-        <s:BorderContainer width="1025" height="32">
+        <s:BorderContainer width="1001" height="32">
             <s:HGroup top="0" left="0" bottom="0" gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="4" width="361">
                 <s:Button label="{_('openButton')}" icon="@Embed(source='images/fileopen.png')" click="onLoadConfigClick()"/>
                 <!--<s:Button label="{_('saveButton')}" icon="@Embed(source='images/filesave.png')" click="onSaveConfigClick()"/>-->
