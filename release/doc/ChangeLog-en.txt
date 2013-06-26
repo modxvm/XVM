@@ -1,3 +1,7 @@
+  * minimap: labels are detached from icons to lower layer
+  * minimap: code refactoring
+  * minimap: some interface object are no longer overlapping zoomed minimap
+  * minimap: fixed players death log list positioning while minimap is zoomed
   * hitlog: damage to drowned units is not taken into account anymore
   * minimap: fixed work when there is only one player in enemy team
 
