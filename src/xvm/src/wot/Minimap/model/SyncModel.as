@@ -1,6 +1,8 @@
+import com.xvm.Logger;
 import com.xvm.Utils;
 import wot.PlayersPanel.PlayersPanelProxy;
 import wot.Minimap.model.externalProxy.IconsProxy;
+import wot.Minimap.model.externalProxy.MapConfig;
 
 /**
  * SyncModel class
@@ -10,8 +12,16 @@ import wot.Minimap.model.externalProxy.IconsProxy;
  * @author ilitvinov87@gmail.com
  */
 
-class wot.Minimap.model.iconTracker.SyncModel
+class wot.Minimap.model.SyncModel
 {
+    private static var _instance:SyncModel;
+    
+    /**
+     * Temporary behavior alteration switch.
+     * Allows original icon highlighting behavior.
+     */
+    public var isSyncProcedureInProgress:Boolean;
+    
     /**
      * Testing uid during delegate event lighting cycle stored here.
      * Is set before light delegate event.
@@ -19,24 +29,33 @@ class wot.Minimap.model.iconTracker.SyncModel
      * this var is considered actula uid of icon:MinimapEntry.
      */
     private var testUid:Number;
-
-    /**
-     * Temporary behavior alteration switch.
-     * Allows original icon highlighting behavior.
-     */
-    public var syncProcedureInProgress:Boolean;
+    
+    public function SyncModel()
+    {
+        updateIconUids();
+    }
+    
+    public static function get instance():SyncModel
+    {
+        if (!_instance && MapConfig.enabled)
+        {
+            _instance = new SyncModel();
+        }
+        
+        return _instance;
+    }
 
     /** Invoked by Minimap when its ready */
-    public function updateIconsExtension():Void
+    public function updateIconUids():Void
     {
-        syncProcedureInProgress = true;
+        isSyncProcedureInProgress = true;
         var unassignedUids:Array = getUnassignedUids();
         for (var i in unassignedUids)
         {
             testUid = unassignedUids[i];
             touchPlayer(unassignedUids[i]);
         }
-        syncProcedureInProgress = false;
+        isSyncProcedureInProgress = false;
     }
 
     /** Used at MinimapEntry to define uid if syncronization succeeded */
@@ -61,6 +80,6 @@ class wot.Minimap.model.iconTracker.SyncModel
          * Lighting event is used at Minimap to define icon-user relation.
          */
         var player:Object = PlayersPanelProxy.getPlayerInfo(uid);
-        gfx.io.GameDelegate.call("minimap.lightPlayer", [player.vehId, true]);
+        gfx.io.GameDelegate.call("minimap.lightPlayer", [player.vehId, false]);
     }
 }

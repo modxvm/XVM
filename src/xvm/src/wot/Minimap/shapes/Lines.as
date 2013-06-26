@@ -13,9 +13,9 @@ import wot.Minimap.dataTypes.cfg.LineCfg;
 
 class wot.Minimap.shapes.Lines extends ShapeAttach
 {
-    public function Lines(mapSizeInMeters:Number)
+    public function Lines()
     {
-        super(mapSizeInMeters);
+        super();
 
         attachCameraLines();
         attachVehicleDirectionLines();

@@ -28,6 +28,10 @@
  */
 class wot.Minimap.dataTypes.Player
 {
+    public static var PLAYER_REVEALED:Number = 1;
+    public static var PLAYER_LOST:Number = 0;
+    public static var PLAYER_DEAD:Number = -1;
+    
     public var uid:Number;
     public var vehicle:String;
     public var team:String;

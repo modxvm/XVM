@@ -9,7 +9,19 @@ import wot.Minimap.model.mapSize.MapSizeBase;
 
 class wot.Minimap.model.mapSize.MapSizeModel
 {
+    private static var _instance:MapSizeModel;
+    
     private var cellSide:Number;
+    
+    public static function get instance():MapSizeModel
+    {
+        if (!_instance)
+        {
+            _instance = new MapSizeModel();
+        }
+        
+        return _instance;
+    }
 
     public function MapSizeModel()
     {
@@ -19,21 +31,23 @@ class wot.Minimap.model.mapSize.MapSizeModel
          * Method does not depend on locale,
          * but depends on xvm-stat.exe presence.
          */
-        Logger.add("Minimap: Config.s_vars " + Config.s_vars.map_name);
-        cellSide = MapSizeBase.sizeBySytemMapName(Config.s_vars.map_name);
+        var mapName:String = Config.s_vars.map_name;
+        Logger.add("Minimap: Config.s_vars " + mapName);
+        cellSide = MapSizeBase.sizeBySytemMapName(mapName);
         Logger.add("Minimap: cellSide " + cellSide);
 
         if (!cellSide)
         {
-            Logger.add("Minimap: system map name not set: " + Config.s_vars.map_name);
+            Logger.add("Minimap: system map name not set: " + mapName);
             /**
              * Map is not recognized with xvm-stat.exe.
              * Possibly due to xvm-stat.exe absence or new map name with old XVM.
              * Method does not depend on xvm-stat.exe,
              * but depends on localilized map names in Base.
              */
-            cellSide = MapSizeBase.sizeByLocalizedMapName(_root.statsData.arenaData.mapText);
-            Logger.add("Minimap: localized map name: " + _root.statsData.arenaData.mapText);
+            var mapText:String = _root.statsData.arenaData.mapText;
+            cellSide = MapSizeBase.sizeByLocalizedMapName(mapText);
+            Logger.add("Minimap: localized map name: " + mapText);
 
             if (!cellSide)
             {
@@ -45,8 +59,13 @@ class wot.Minimap.model.mapSize.MapSizeModel
 
     }
 
-    public function getSide():Number
+    public function getCellSide():Number
     {
         return cellSide;
+    }
+    
+    public function getFullSide():Number
+    {
+        return cellSide * 10;
     }
 }

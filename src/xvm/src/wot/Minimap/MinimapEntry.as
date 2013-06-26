@@ -1,13 +1,13 @@
-import com.xvm.Config;
-import com.xvm.ColorsManager;
-import com.xvm.DefaultConfig;
-import com.xvm.GraphicsUtil;
+import com.xvm.GlobalEventDispatcher;
 import com.xvm.Logger;
 import com.xvm.Utils;
-import wot.RootComponents;
-import wot.Minimap.model.externalProxy.MapConfig;
-import wot.Minimap.staticUtils.LabelAppend;
 import wot.Minimap.dataTypes.Player;
+import wot.Minimap.MinimapEntry;
+import wot.Minimap.MinimapEvent;
+import wot.Minimap.model.externalProxy.MapConfig;
+import wot.Minimap.model.SyncModel;
+import wot.Minimap.view.LabelsContainer;
+import wot.Minimap.view.MarkerColor;
 
 /**
  * MinimapEntry represent individual object on map.
@@ -16,10 +16,9 @@ import wot.Minimap.dataTypes.Player;
  * MinimapEntry object at Minimap is called icon.
  *
  * Extended behaviour:
- * ) Appending extra information about unit like level, type, nick etc.
- *   This aspect is handled by Minimap class also.
- * ) Remain disappeared icons to indicate last enemy position.
- *   Only this class handles this aspect.
+ * ) Append extra text information about unit like level, type, nick etc.
+ * ) Rescale child MovieClips to prevent inappropriate scale propagation.
+ * ) Colorize icon.
  *
  * @author ilitvinov87@gmail.com
  */
@@ -64,7 +63,10 @@ class wot.Minimap.MinimapEntry
     public static var MINIMAP_ENTRY_NAME_ALLY:String = "ally";
     public static var MINIMAP_ENTRY_NAME_SQUAD:String = "squadman";
     public static var MINIMAP_ENTRY_NAME_SELF:String = ""; /** Type of player himself and ? */
-    public static var MINIMAP_ENTRY_NAME_LOST:String = "lostenemy"; /** New type for last enemy position markers */
+    public static var MINIMAP_ENTRY_NAME_LOST_ENEMY:String = "lostenemy"; /** New type for last enemy position markers */
+    public static var MINIMAP_ENTRY_NAME_LOST_ALLY:String = "lostally"; /** New type for last ally position markers */
+    public static var MINIMAP_ENTRY_NAME_LOST_SQUAD:String = "lostsquad"; /** New type for last ally position markers */
+    
     public static var MINIMAP_ENTRY_VEH_CLASS_LIGHT:String = "lightTank";
     public static var MINIMAP_ENTRY_VEH_CLASS_MEDIUM:String = "mediumTank";
     public static var MINIMAP_ENTRY_VEH_CLASS_HEAVY:String = "heavyTank";
@@ -83,7 +85,7 @@ class wot.Minimap.MinimapEntry
     /** Used only for camera entry to define if entry is processed with Lines class */
     public var cameraExtendedToken:Boolean;
 
-    public var label:TextField;
+    public var labelMc:MovieClip;
 
     /**
      * All attachments container: TextFiels(Labels), Shapes.
@@ -110,8 +112,11 @@ class wot.Minimap.MinimapEntry
 
     function lightPlayerImpl(visibility)
     {
-        /** Behavior is altered temporarily so original icon highlighting works */
-        if (syncProcedureInProgress)
+        /**
+         * Behavior of original icon highlighting is altered temporarily
+         * while sync flag is raised.
+         */
+        if (isSyncProcedureInProgress)
         {
             initExtendedBehaviour();
         }
@@ -124,88 +129,63 @@ class wot.Minimap.MinimapEntry
     function initImpl()
     {
         base.init.apply(base, arguments);
-        colorizeMarker();
+        MarkerColor.setColor(wrapper);
     }
 
     function invalidateImpl()
     {
         base.invalidate();
-        colorizeMarker();
+        MarkerColor.setColor(wrapper);
     }
 
     // -- Private
 
-    private function colorizeMarker()
+    private function initExtendedBehaviour():Void
     {
-        if (wrapper.m_type == null || wrapper.vehicleClass == null || wrapper.entryName == null || wrapper.entryName == "")
-            return;
+        uid = SyncModel.instance.getTestUid();
+        /** Inform PlayersPanel */
+        GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.ENEMY_REVEALED, uid));
 
-        //if (wrapper.entryName != "ally" && wrapper.entryName != "enemy")
-        //    Logger.add("type=" + wrapper.m_type + " entryName=" + wrapper.entryName + " vehicleClass=" + wrapper.vehicleClass);
-
-        if (wrapper.entryName == "control")
-            return;
-
-        if (wrapper.m_type == "player" && wrapper.entryName == "postmortemCamera")
-            return;
-
-        var color = null;
-        if (Config.s_config.battle.useStandardMarkers)
+        if (MapConfig.revealedEnabled)
         {
-            if (wrapper.entryName == "base")
-                return;
-            var schemeName = wrapper.entryName != "spawn" ? wrapper.colorSchemeName
-                : (wrapper.vehicleClass == "red") ? "vm_enemy" : (wrapper.vehicleClass == "blue") ? "vm_ally" : null;
-            if (!schemeName)
-                return;
-            color = wrapper.colorsManager.getRGB(schemeName);
+            getLabel();
+            setLabelToMimicEntryMoves();
         }
-        else
+    }
+    private function getLabel():Void
         {
-            // use standard team bases if color is not changed
-            if (wrapper.entryName == "base")
-            {
-                var aa = Config.s_config.colors.system["ally_alive"];
-                var aad = DefaultConfig.config.colors.system["ally_alive"];
-                if (wrapper.vehicleClass == "blue" && aa == aad)
-                    return;
-                var ea = Config.s_config.colors.system["enemy_alive"];
-                var ead = DefaultConfig.config.colors.system["enemy_alive"];
-                if (wrapper.vehicleClass == "red" && ea == ead)
-                    return;
-            }
-            var entryName = (wrapper.entryName != "base" && wrapper.entryName != "spawn") ? wrapper.entryName
-                : (wrapper.vehicleClass == "red") ? "enemy" : (wrapper.vehicleClass == "blue") ? "ally" : null;
-            if (entryName != null)
-                color = ColorsManager.getSystemColor(entryName, wrapper.isDead);
+        labelMc = labelsContainer.getLabel(uid, wrapper.entryName, wrapper.vehicleClass);
             if (wrapper.entryName == "base")
                 wrapper.setEntryName("control");
         }
 
-        if (color != null)
+    private function setLabelToMimicEntryMoves():Void
         {
-            //Logger.addObject(wrapper.player, "pl", 3)
-            //Logger.add(wrapper.entryName);
-            GraphicsUtil.colorize(wrapper.teamPoint || wrapper.player/*.litIcon*/, color,
-                wrapper.player ? Config.s_config.consts.VM_COEFF_MM_PLAYER : Config.s_config.consts.VM_COEFF_MM_BASE);
+        wrapper.onEnterFrame = function()
+        {
+            /**
+             * No FPS drop discovered.
+             * Okay.
+             */
+            var entry:wot.Minimap.MinimapEntry = this.xvm_worker;
+            entry.labelMc._x = this._x;
+            entry.labelMc._y = this._y;
         }
     }
 
-    private function initExtendedBehaviour():Void
+    private function get isSyncProcedureInProgress():Boolean
     {
-        uid = RootComponents.minimap.xvm_worker.sync.getTestUid();
-
-        if (MapConfig.revealedEnabled)
+        var ret:Boolean = SyncModel.instance.isSyncProcedureInProgress;
+        if (ret == null)
         {
-            /** Attach revealed icon info */
-            label = LabelAppend.append(attachments, uid, wrapper.entryName, wrapper.vehicleClass);
+            Logger.add("## ERROR wot.Minimap.MinimapEntry: SyncModel.instance.isSyncProcedureInProgress == null");
         }
 
-        rescaleAttachments();
+        return ret;
     }
 
-    private function get syncProcedureInProgress():Boolean
+    private function get labelsContainer():LabelsContainer
     {
-        return RootComponents.minimap.xvm_worker.sync.syncProcedureInProgress;
+        return LabelsContainer.instance;
     }
 }

@@ -159,19 +159,18 @@ class wot.Minimap.model.externalProxy.MapConfig
         {
             case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_NAME_ALLY:
                 return "ally";
-                break;
             case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_NAME_ENEMY:
                 return "enemy";
-                break;
             case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_NAME_SQUAD:
                 return "squad"; // originally "squadman"
-                break;
             case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_NAME_SELF:
                 return "oneself";  // originally ""
-                break;
-            case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_NAME_LOST:
+            case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_NAME_LOST_ENEMY:
                 return "lost";
-                break;
+            case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_NAME_LOST_ALLY:
+                return "lostally";
+            case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_NAME_LOST_SQUAD:
+                return "lostsquad";
         }
         return null;
     }

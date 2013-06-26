@@ -1,4 +1,5 @@
 import com.xvm.Utils;
+import com.xvm.Logger;
 
 /**
  * IconsProxy class
@@ -86,12 +87,32 @@ class wot.Minimap.model.externalProxy.IconsProxy
     {
         _icons.onEnterFrame = func;
     }
+    
+    public static function isIconIsPresentAtMinimap(uid:Number):Boolean
+    {
+        var presentUids:Array = syncedUids;
+        for (var i in presentUids)
+        {
+            if (presentUids[i] == uid)
+            {
+                return true;
+            }
+        }
+        
+        return false;
+    }
 
     // -- Private
 
     private static function get _icons():MovieClip
     {
-        return _root.minimap.icons;
+        var ret:MovieClip = _root.minimap.icons;
+        if (ret == null)
+        {
+            Logger.add("## ERROR wot.Minimap.model.externalProxy.IconsProxy: _root.minimap.icons == null");
+        }
+        
+        return ret;
     }
 
     public static function get _allEntries():Array

@@ -1,3 +1,4 @@
+import com.xvm.Logger;
 import com.xvm.VehicleInfo;
 import wot.Minimap.Minimap;
 import wot.PlayersPanel.PlayersPanelProxy;
@@ -15,7 +16,7 @@ class wot.Minimap.shapes.Square extends ShapeAttach
 
     private static var SQUARE_SIDE_IN_METERS:Number = 1000;
 
-    public function Square(mapSizeInMeters:Number)
+    public function Square()
     {
         /** Disable square mod if user is artillery class*/
         if (!MapConfig.artiEnabled && isArtillery())
@@ -23,7 +24,7 @@ class wot.Minimap.shapes.Square extends ShapeAttach
             return;
         }
 
-        super(mapSizeInMeters);
+        super();
 
         var mc:MovieClip = createSquareClip();
         defineStyle(mc);

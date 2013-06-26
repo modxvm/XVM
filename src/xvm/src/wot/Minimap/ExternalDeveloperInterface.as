@@ -1,3 +1,6 @@
+import com.xvm.Utils;
+import wot.Minimap.MinimapProxy;
+
 /**
  * Simplified minimap interface for communication with other Python or Flash mods.
  * 
@@ -6,7 +9,6 @@
  *
  * http://www.koreanrandom.com/forum/topic/2601-pythonflash-coders-interface/
  */
-import com.xvm.Utils;
  
 class wot.Minimap.ExternalDeveloperInterface
 {
@@ -14,7 +16,7 @@ class wot.Minimap.ExternalDeveloperInterface
 
     public function ExternalDeveloperInterface()
     {
-        customContainer = _icons.createEmptyMovieClip("customContainer", wot.Minimap.Minimap.EXTERNAL_CUSTOM_INDEX);
+        customContainer = icons.createEmptyMovieClip("customContainer", wot.Minimap.Minimap.EXTERNAL_CUSTOM_INDEX);
     }
 
     /**
@@ -140,8 +142,8 @@ class wot.Minimap.ExternalDeveloperInterface
      * icons:MovieClip is Minimap.as field.
      * Contains MinimapEntry objects representing tanks\bases\cap points\cameras.
      */
-    private function get _icons():MovieClip
+    private function get icons():MovieClip
     {
-        return _root.minimap.icons;
+        return MinimapProxy.wrapper.icons;
     }
 }

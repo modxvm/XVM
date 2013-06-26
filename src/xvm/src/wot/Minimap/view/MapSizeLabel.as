@@ -1,18 +1,16 @@
+import wot.Minimap.MinimapProxy;
 import flash.geom.Point;
 import wot.Minimap.model.externalProxy.MapConfig;
+import wot.Minimap.model.mapSize.MapSizeModel;
 
-class wot.Minimap.MapSizeLabel
+class wot.Minimap.view.MapSizeLabel
 {
     private static var CELLSIZE_MACRO:String = "{{cellsize}}";
 
-    private var side:Number;
-
-    public function MapSizeLabel(mc:MovieClip, side:Number)
+    public function MapSizeLabel()
     {
-        this.side = side;
-
         var offset:Point = MapConfig.mapSizeLabelOffset;
-        var tf:TextField = mc.createTextField("mapSize", mc.getNextHighestDepth(),
+        var tf:TextField = bg.createTextField("mapSize", bg.getNextHighestDepth(),
             offset.x, offset.y, MapConfig.mapSizeLabelWidth, MapConfig.mapSizeLabelHeight);
         tf.antiAliasType = "advanced";
         tf.html = true;
@@ -40,9 +38,19 @@ class wot.Minimap.MapSizeLabel
         var formatArr:Array = format.split(CELLSIZE_MACRO);
         if (formatArr.length > 1)
         {
-            format = formatArr.join(side.toString());
+            format = formatArr.join(cellSize.toString());
         }
 
         return format;
+    }
+    
+    private function get bg():MovieClip
+    {
+        return MinimapProxy.wrapper.backgrnd;
+    }
+    
+    private function get cellSize():Number
+    {
+        return MapSizeModel.instance.getCellSide();
     }
 }

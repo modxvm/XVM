@@ -1,5 +1,6 @@
 import wot.Minimap.model.externalProxy.IconsProxy;
 import wot.Minimap.MinimapEntry;
+import wot.Minimap.model.mapSize.MapSizeModel;
 
 /**
  * Handles circles and lines scaling aspect.
@@ -21,7 +22,7 @@ class wot.Minimap.shapes.ShapeAttach
 
     private var selfAttachments:MovieClip;
 
-    public function ShapeAttach(mapSizeInMeters:Number)
+    public function ShapeAttach()
     {
         /**
          * Get oneself icon.
@@ -36,4 +37,9 @@ class wot.Minimap.shapes.ShapeAttach
     }
 
     // -- Private
+    
+    private function get mapSizeInMeters():Number
+    {
+        return MapSizeModel.instance.getFullSide();
+    }
 }

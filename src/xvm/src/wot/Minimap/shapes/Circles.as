@@ -14,9 +14,9 @@ class wot.Minimap.shapes.Circles extends ShapeAttach
 {
     private var CIRCLE_SIDES:Number = 350; /** Defines circle smoothness\angularity */
 
-    public function Circles(mapSizeInMeters:Number)
+    public function Circles()
     {
-        super(mapSizeInMeters);
+        super();
 
         var player:Player = PlayersPanelProxy.self;
         var vehType:String = VehicleInfo.getName2(player.icon);
