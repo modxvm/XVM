@@ -59,7 +59,7 @@
             { "grille":               {"$ref": { "path": "rangeCircle" }, "distance": 836 } },
             { "m41":                  {"$ref": { "path": "rangeCircle" }, "distance": 1294} },
             { "amx_105am":            {"$ref": { "path": "rangeCircle" }, "distance": 1288} },
-            { "_105_lefh18b2":        {"$ref": { "path": "rangeCircle" }, "distance": 1000} },
+            { "_105_lefh18b2":        {"$ref": { "path": "rangeCircle" }, "distance": 989} },
             // level 6
             { "su_8":                 {"$ref": { "path": "rangeCircle" }, "distance": 1345} },
             { "hummel":               {"$ref": { "path": "rangeCircle" }, "distance": 1260} },
