@@ -1,10 +1,8 @@
-import com.xvm.Logger;
-import wot.Minimap.view.LabelsContainer;
 import flash.geom.Point;
 import wot.Minimap.dataTypes.Player;
 import wot.Minimap.model.externalProxy.MapConfig;
 import wot.Minimap.staticUtils.MinimapMacro;
-import wot.PlayersPanel.PlayersPanelProxy;
+import wot.Minimap.view.LabelsContainer;
 
 class wot.Minimap.view.LabelViewBuilder
 {

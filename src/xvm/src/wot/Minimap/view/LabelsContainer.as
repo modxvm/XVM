@@ -1,13 +1,11 @@
-import wot.Minimap.dataTypes.Player;
-import wot.PlayersPanel.PlayersPanelProxy;
-import wot.Minimap.model.externalProxy.IconsProxy;
-import com.xvm.Logger;
 import com.xvm.GlobalEventDispatcher;
 import flash.geom.Point;
-import wot.Minimap.dataTypes.Icon;
+import wot.Minimap.dataTypes.Player;
 import wot.Minimap.MinimapEvent;
 import wot.Minimap.MinimapProxy;
+import wot.Minimap.model.externalProxy.IconsProxy;
 import wot.Minimap.view.LabelViewBuilder;
+import wot.PlayersPanel.PlayersPanelProxy;
 
 class wot.Minimap.view.LabelsContainer
 {
