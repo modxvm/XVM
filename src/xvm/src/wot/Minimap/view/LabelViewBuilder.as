@@ -12,18 +12,12 @@ class wot.Minimap.view.LabelViewBuilder
     
     public static function createTextField(label:MovieClip):Void
     {
-        var status:String = label[LabelsContainer.STATUS_FIELD_NAME];
+        var status:Number = label[LabelsContainer.STATUS_FIELD_NAME];
         var playerInfo:Player = label[LabelsContainer.PLAYER_INFO_FIELD_NAME];
         var entryName:String = label[LabelsContainer.ENTRY_NAME_FIELD_NAME];
         var vehicleClass:String = label[LabelsContainer.VEHICLE_CLASS_FIELD_NAME];
-        Logger.add("status " + status);
-        Logger.addObject(playerInfo, "playerInfo", 2);
-        Logger.add("entryName " + entryName);
-        Logger.add("vehicleClass " + vehicleClass);
-        Logger.add("");
-        Logger.add("");
         
-        var offset:Point = MapConfig.unitLabelOffset(entryName);
+        var offset:Point = MapConfig.unitLabelOffset(entryName, status);
 
         var textField:TextField = label.createTextField(TEXT_FIELD_NAME, label.getNextHighestDepth(), offset.x, offset.y, 100, 40);
         textField.antiAliasType = "advanced";
@@ -32,10 +26,11 @@ class wot.Minimap.view.LabelViewBuilder
         textField.selectable = false;
 
         var style:TextField.StyleSheet = new TextField.StyleSheet();
-        style.parseCSS(MapConfig.unitLabelCss(entryName));
+        style.parseCSS(MapConfig.unitLabelCss(entryName, status));
         textField.styleSheet = style;
 
-        var text:String = getText(entryName, playerInfo, vehicleClass);
+        var format:String = MapConfig.unitLabelFormat(entryName, status);
+        var text:String = MinimapMacro.process(format, playerInfo, vehicleClass);
         if (text == "undefined" || !text)
         {
             /**
@@ -46,20 +41,11 @@ class wot.Minimap.view.LabelViewBuilder
         }
         textField.htmlText = text;
 
-        if (MapConfig.unitShadowEnabled(entryName))
+        if (MapConfig.unitShadowEnabled(entryName, status))
         {
-            textField.filters = [MapConfig.unitShadow(entryName)];
+            textField.filters = [MapConfig.unitShadow(entryName, status)];
         }
 
-        textField._alpha = MapConfig.unitLabelAlpha(entryName);
-    }
-
-    // -- Private
-
-    private static function getText(entryName:String, player:Player, vehicleClass:String):String
-    {
-        var format:String = MapConfig.unitLabelFormat(entryName);
-
-        return MinimapMacro.process(format, player, vehicleClass);
+        textField._alpha = MapConfig.unitLabelAlpha(entryName, status);
     }
 }

@@ -306,11 +306,11 @@ class com.xvm.DefaultConfig
                       squad: "<textformat leading='-1'><span class='mm_s'><i>{{short-nick}}</i>\n{{vehicle-type}}</span><textformat>",
                       lost:  "<span class='mm_dot'>\u2022</span><span class='mm_l'><i>{{vehicle-type}}</i></span>",
                       oneself: "",
-                      lostally: "",
-                      lostsquad: "",
-                      deadenemy: "",
-                      deadally: "",
-                      deadsquad: ""
+                      lostally: "lostally",
+                      lostsquad: "lostsquad",
+                      deadenemy: "deadenemy",
+                      deadally: "deadally",
+                      deadsquad: "deadsquad"
                     },
                     css: {
                       ally:  ".mm_a{font-family:$FieldFont; font-size:8px; color:#C8FFA6;}",

@@ -1,3 +1,4 @@
+import wot.Minimap.dataTypes.Player;
 import com.xvm.Utils;
 import flash.geom.Point;
 import com.xvm.Config;
@@ -51,39 +52,39 @@ class wot.Minimap.model.externalProxy.MapConfig
                 return labels.units.lostEnemyEnabled;   }
 
             /** Format */
-            public static function unitLabelFormat(entryName:String)
+            public static function unitLabelFormat(entryName:String, status:Number)
             {
-                var unitType:String = entryType(entryName);
+                var unitType:String = defineCfgProperty(entryName, status);
                 return labels.units.format[unitType];
             }
             /** CSS */
-            public static function unitLabelCss(entryName:String)
+            public static function unitLabelCss(entryName:String, status:Number)
             {
-                var unitType:String = entryType(entryName);
+                var unitType:String = defineCfgProperty(entryName, status);
                 return labels.units.css[unitType];
             }
             /** Alpha */
-            public static function unitLabelAlpha(entryName:String)
+            public static function unitLabelAlpha(entryName:String, status:Number)
             {
-                var unitType:String = entryType(entryName);
+                var unitType:String = defineCfgProperty(entryName, status);
                 return labels.units.alpha[unitType];
             }
             /** Shadow enabled */
-            public static function unitShadowEnabled(entryName:String):Boolean
+            public static function unitShadowEnabled(entryName:String, status:Number):Boolean
             {
-                var unitType:String = entryType(entryName);
+                var unitType:String = defineCfgProperty(entryName, status);
                 return labels.units.shadow[unitType].enabled;
             }
             /** Shadow filter */
-            public static function unitShadow(entryName:String):DropShadowFilter
+            public static function unitShadow(entryName:String, status:Number):DropShadowFilter
             {
-                var unitType:String = entryType(entryName);
+                var unitType:String = defineCfgProperty(entryName, status);
                 return Utils.extractShadowFilter(labels.units.shadow[unitType]);
             }
             /** Offset */
-            public static function unitLabelOffset(entryName:String)
+            public static function unitLabelOffset(entryName:String, status:Number)
             {
-                var unitType:String = entryType(entryName);
+                var unitType:String = defineCfgProperty(entryName, status);
                 return new Point(labels.units.offset[unitType].x,
                                  labels.units.offset[unitType].y);
             }
@@ -153,26 +154,30 @@ class wot.Minimap.model.externalProxy.MapConfig
     // -- Private
 
     /** Translate internal WG entryName to minimap config file marker type*/
-    private static function entryType(entryName:String):String
+    private static function defineCfgProperty(entryName:String, status:Number):String
     {
-        switch (entryName)
+        var statusStr:String;
+        if (status == Player.PLAYER_LOST)
         {
-            case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_NAME_ALLY:
-                return "ally";
-            case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_NAME_ENEMY:
-                return "enemy";
-            case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_NAME_SQUAD:
-                return "squad"; // originally "squadman"
-            case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_NAME_SELF:
-                return "oneself";  // originally ""
-            case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_NAME_LOST_ENEMY:
-                return "lost";
-            case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_NAME_LOST_ALLY:
-                return "lostally";
-            case wot.Minimap.MinimapEntry.MINIMAP_ENTRY_NAME_LOST_SQUAD:
-                return "lostsquad";
+            statusStr = "lost";
         }
-        return null;
+        else if (status == Player.PLAYER_DEAD)
+        {
+            statusStr = "dead";
+        }
+        else
+        {
+            statusStr = "";
+        }
+        
+        var property:String = statusStr + entryName;
+        
+        if (property == "lostenemy")
+        {
+            property = "lost"; /** Backwards config compatibility */
+        }
+        
+        return property;
     }
 
     private static function get labels():Object
