@@ -305,14 +305,24 @@ class com.xvm.DefaultConfig
                       enemy: "<span class='mm_e'>{{vehicle-type}}</span>",
                       squad: "<textformat leading='-1'><span class='mm_s'><i>{{short-nick}}</i>\n{{vehicle-type}}</span><textformat>",
                       lost:  "<span class='mm_dot'>\u2022</span><span class='mm_l'><i>{{vehicle-type}}</i></span>",
-                      oneself: ""
+                      oneself: "",
+                      lostally: "",
+                      lostsquad: "",
+                      deadenemy: "",
+                      deadally: "",
+                      deadsquad: ""
                     },
                     css: {
                       ally:  ".mm_a{font-family:$FieldFont; font-size:8px; color:#C8FFA6;}",
                       enemy: ".mm_e{font-family:$FieldFont; font-size:8px; color:#FCA9A4;}",
                       squad: ".mm_s{font-family:$FieldFont; font-size:8px; color:#FFC099;}",
                       lost:  ".mm_l{font-family:$FieldFont; font-size:8px; color:#FCA9A4;} .mm_dot{font-family:Arial; font-size:17px; color:#FCA9A4;}",
-                      oneself: ".mm_o{font-family:$FieldFont; font-size:8px; color:#FFFFFF;}"
+                      oneself: ".mm_o{font-family:$FieldFont; font-size:8px; color:#FFFFFF;}",
+                      lostally: "",
+                      lostsquad: "",
+                      deadenemy: "",
+                      deadally: "",
+                      deadsquad: ""
                     },
                     shadow: {
                       ally: {
@@ -359,6 +369,51 @@ class com.xvm.DefaultConfig
                         alpha: 80,
                         blur: 3,
                         strength: 3
+                      },
+                      lostally: {
+                        enabled: true,
+                        color: "0x000000",
+                        distance: 0,
+                        angle: 0,
+                        alpha: 80,
+                        blur: 3,
+                        strength: 3
+                      },
+                      lostsquad: {
+                        enabled: true,
+                        color: "0x000000",
+                        distance: 0,
+                        angle: 0,
+                        alpha: 80,
+                        blur: 3,
+                        strength: 3
+                      },
+                      deadenemy: {
+                        enabled: true,
+                        color: "0x000000",
+                        distance: 0,
+                        angle: 0,
+                        alpha: 80,
+                        blur: 3,
+                        strength: 3
+                      },
+                      deadally: {
+                        enabled: true,
+                        color: "0x000000",
+                        distance: 0,
+                        angle: 0,
+                        alpha: 80,
+                        blur: 3,
+                        strength: 3
+                      },
+                      deadsquad: {
+                        enabled: true,
+                        color: "0x000000",
+                        distance: 0,
+                        angle: 0,
+                        alpha: 80,
+                        blur: 3,
+                        strength: 3
                       }
                     },
                     offset: {
@@ -366,14 +421,24 @@ class com.xvm.DefaultConfig
                       enemy: {x: 3, y: -1},
                       squad: {x: 3, y: -2},
                       lost:  {x: -6, y: -10},
-                      oneself: {x: 0, y: 0}
+                      oneself: { x: 0, y: 0 },
+                      lostally: { x: 0, y: 0 },
+                      lostsquad: { x: 0, y: 0 },
+                      deadenemy: { x: 0, y: 0 },
+                      deadally: { x: 0, y: 0 },
+                      deadsquad: { x: 0, y: 0 }
                     },
                     alpha : {
                       ally:  100,
                       enemy: 100,
                       squad: 100,
                       lost:  70,
-                      oneself: 100
+                      oneself: 100,
+                      lostally: 70,
+                      lostsquad: 70,
+                      deadenemy: 50,
+                      deadally: 50,
+                      deadsquad: 50
                     }
                   },
                   mapSize: {
