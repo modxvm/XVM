@@ -1,15 +1,13 @@
 import com.xvm.GlobalEventDispatcher;
 import wot.Minimap.MinimapEvent;
 import wot.PlayersPanel.PlayersPanelProxy;
-import wot.Minimap.model.iconTracker.PositionTracking;
-import wot.Minimap.model.iconTracker.LostPlayers;
 
 /**
  * Minimap icons status tracking by uid.
  * Alive? Dead? Lost?
  */
 
-class wot.Minimap.model.iconTracker.AutoUpdate
+class wot.Minimap.model.AutoUpdate
 {
     private static var TICK_INTERVAL_MS:Number = 300; // 300ms
     private static var SELF_DESTRUCT_TICKS_THRESHOLD:Number = 16 * 60 * 1000; /** Maximum battle duration */

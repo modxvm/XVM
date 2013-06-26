@@ -1,4 +1,5 @@
 import wot.Minimap.*;
+import wot.Minimap.model.AutoUpdate;
 import wot.Minimap.model.externalProxy.*;
 import wot.Minimap.model.iconTracker.*;
 import wot.Minimap.model.mapSize.MapSizeModel;
