@@ -15,11 +15,12 @@
     <fx:Script>
         <![CDATA[
             import events.SetDefaultValueEvent;
-
+            
+            import mx.collections.ArrayCollection;
             import mx.core.IVisualElement;
             import mx.core.IVisualElementContainer;
             import mx.events.FlexEvent;
-
+            
             import spark.components.SkinnableContainer;
 
             [Bindable(event="languageChanged")]
@@ -50,10 +51,21 @@
             {
                 obj.dispatchEvent(new Event(event));
                 var c:IVisualElementContainer = obj as IVisualElementContainer;
-                if (c == null)
+                if (c != null)
+                {
+                    for (var i:int = 0; i < c.numElements; ++i)
+                        sendEventAllElements(c.getElementAt(i), event);
                     return;
-                for (var i:int = 0; i < c.numElements; ++i)
-                    sendEventAllElements(c.getElementAt(i), event);
+                }
+
+                var pm:PopUpMenuButton = obj as PopUpMenuButton;
+                if (pm != null)
+                {
+                    // Flex bug workaround
+                    var a:Object = pm.dataProvider;
+                    pm.dataProvider = null;
+                    pm.dataProvider = a;
+                }
             }
 
             protected function onRadioButtonChange(event:Event):void
