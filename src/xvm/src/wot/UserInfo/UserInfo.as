@@ -608,12 +608,12 @@ class wot.UserInfo.UserInfo
         // add new buttons
         var hdr:MovieClip = wrapper.header;
 
-        m_button1 = createButton(hdr, 1, "bLvl", "level",  10,  5, Locale.get("Level"), "left", 1);
-        m_button2 = createButton(hdr, 2, "bTyp", "type",   124, 5, Locale.get("Type"), "right", 1);
-        m_button3 = createButton(hdr, 3, "bNat", "nation", 135, 5, Locale.get("Nation"), "left", 2);
-        m_button4 = createButton(hdr, 4, "bNam", "name",   200, 5, Locale.get("Name"), "left", 2);
+        m_button1 = createButton(hdr, 1, "bLvl", 10,  5, Locale.get("Level"), "left", 1);
+        m_button2 = createButton(hdr, 2, "bTyp", 124, 5, Locale.get("Type"), "right", 1);
+        m_button3 = createButton(hdr, 3, "bNat", 135, 5, Locale.get("Nation"), "left", 2);
+        m_button4 = createButton(hdr, 4, "bNam", 200, 5, Locale.get("Name"), "left", 2);
 
-        m_button5 = createButton(hdr, 5, "bEff", "e",      305, 5, "E", "right", 1);
+        m_button5 = createButton(hdr, 5, "bEff", 305, 5, "E", "right", 1);
 
         // Option for disable "E" column, because WG is providing incorrect per-vehicle stats
         m_button5._visible = Config.s_config.userInfo.showEColumn == true;
@@ -623,9 +623,9 @@ class wot.UserInfo.UserInfo
             m_button5._alpha = 30;
         }
         
-        m_button6 = createButton(hdr, 6, "bBat", "fights",       365, 5, Locale.get("Fights"), "right", 1);
-        m_button7 = createButton(hdr, 7, "bWin", "wins",         435, 5, Locale.get("Wins"), "right", 1);
-        m_button8 = createButton(hdr, 8, "bMed", "vehicleClass", 440, 5, "M", "left", 1);
+        m_button6 = createButton(hdr, 6, "bBat", 365, 5, Locale.get("Fights"), "right", 1);
+        m_button7 = createButton(hdr, 7, "bWin", 435, 5, Locale.get("Wins"), "right", 1);
+        m_button8 = createButton(hdr, 8, "bMed", 440, 5, "M", "left", 1);
 
         if (Config.s_config.userInfo.showFilters != true)
             return;
@@ -674,7 +674,7 @@ class wot.UserInfo.UserInfo
         return !wrapper._parent.addToIgnoredButton;
     }
     
-    private function createButton(hdr:MovieClip, id:Number, name:String, type:String, x:Number, y:Number, txt:String, align:String, defaultSort:Number):MovieClip
+    private function createButton(hdr:MovieClip, id:Number, name:String, x:Number, y:Number, txt:String, align:String, defaultSort:Number):MovieClip
     {
         var b = Utils.createButton(hdr, name, x, y, txt, align);
         Utils.addEventListeners(b, this, {
@@ -694,8 +694,10 @@ class wot.UserInfo.UserInfo
             if (id == col || id == -col)
             {
                 lastSort.name = name;
-                lastSort.type = type;
-                lastSort.dir = [ col > 0 ? defaultSort : 3 - defaultSort ];
+                lastSort.type = SORT_TYPES[(col > 0 ? col : -col) - 1];
+                lastSort.dir = SORT_DIRS[(col > 0 ? col : -col) - 1];
+                if (col < 0)
+                    lastSort.dir[0] = 3 - lastSort.dir[0];
             }
         }
 
@@ -708,6 +710,28 @@ class wot.UserInfo.UserInfo
         return b;
     }
 
+    private static var SORT_TYPES:Array = [
+        [ "level", "nation", "name" ],
+        [ "type", "level", "name" ],
+        [ "nation", "level", "type", "name" ],
+        [ "name" ],
+        [ "e", "fights" ],
+        [ "fights" ],
+        [ "wins" ],
+        [ "vehicleClass", "level", "type", "nation", "name" ]
+    ];
+
+    private static var SORT_DIRS:Array = [
+        [ 1, 2, 2 ],
+        [ 1, 1, 2 ],
+        [ 2, 1, 1, 2 ],
+        [ 2 ],
+        [ 1, 2 ],
+        [ 1 ],
+        [ 1 ],
+        [ 1, 1, 1, 2, 2 ]
+    ];
+    
     // sorting
 
     private function onSortClick(e)
@@ -718,22 +742,27 @@ class wot.UserInfo.UserInfo
         net.wargaming.managers.ToolTipManager.instance.hide();
         onButtonStateChangeClick(e);
 
-        var sortType = b == m_button1 ? [ "level", "nation", "name" ]
-            : b == m_button2 ? [ "type", "level", "name" ]
-            : b == m_button3 ? [ "nation", "level", "type", "name" ]
-            : b == m_button4 ? [ "name" ]
-            : b == m_button5 ? [ "e", "fights" ]
-            : b == m_button6 ? [ "fights" ]
-            : b == m_button7 ? [ "wins" ]
-            : [ "vehicleClass", "level", "type", "nation", "name" ];
-        var sortDir = b == m_button1 ? [ b.sortDir, 2, 2 ]
-            : b == m_button2 ? [ b.sortDir, 1, 2 ]
-            : b == m_button3 ? [ b.sortDir, 1, 1, 2 ]
-            : b == m_button4 ? [ b.sortDir ]
-            : b == m_button5 ? [ b.sortDir, b.sortDir ]
-            : b == m_button6 ? [ b.sortDir ]
-            : b == m_button7 ? [ b.sortDir ]
-            : [ b.sortDir, 1, 1, 2, 2 ];
+        var sortType =
+              b == m_button1 ? SORT_TYPES[0]
+            : b == m_button2 ? SORT_TYPES[1]
+            : b == m_button3 ? SORT_TYPES[2]
+            : b == m_button4 ? SORT_TYPES[3]
+            : b == m_button5 ? SORT_TYPES[4]
+            : b == m_button6 ? SORT_TYPES[5]
+            : b == m_button7 ? SORT_TYPES[6]
+            : SORT_TYPES[7];
+        var sortDir =
+              b == m_button1 ? SORT_DIRS[0]
+            : b == m_button2 ? SORT_DIRS[1]
+            : b == m_button3 ? SORT_DIRS[2]
+            : b == m_button4 ? SORT_DIRS[3]
+            : b == m_button5 ? SORT_DIRS[4]
+            : b == m_button6 ? SORT_DIRS[5]
+            : b == m_button7 ? SORT_DIRS[6]
+            : SORT_DIRS[7];
+        sortDir[0] = b.sortDir;
+        if (b == m_button5)
+            sortDir[1] = b.sortDir;
 
         sortList(sortType, sortDir);
         lastSort.name = b._name;
