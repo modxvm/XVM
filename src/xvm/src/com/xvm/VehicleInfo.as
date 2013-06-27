@@ -10,8 +10,8 @@ import com.xvm.VehicleInfoDataTop;
 
 class com.xvm.VehicleInfo
 {
-    // icon = "../maps/icons/vehicle/contour/usa-M24_Chaffee.tga"
-    // return: "usa-M24_Chaffee"
+    // icon = "../maps/icons/vehicle/contour/ussr-IS-3.png"
+    // return: "ussr-IS-3"
     public static function getVehicleName(icon: String): String
     {
         icon = icon.slice(icon.lastIndexOf("/") + 1, icon.lastIndexOf("."));
@@ -19,13 +19,23 @@ class com.xvm.VehicleInfo
         return icon;
     }
 
-    // icon = "../maps/icons/vehicle/contour/usa-M24_Chaffee.tga"
+    // icon = "../maps/icons/vehicle/contour/ussr-IS-3.png"
+    // return: "IS-3"
+    public static function getVName(icon: String): String
+    {
+        icon = getVehicleName(icon);
+        icon = icon.slice(icon.indexOf("-") + 1);
+        icon = Utils.trim(icon);
+        return icon;
+    }
+    
+    // icon = "../maps/icons/vehicle/contour/ussr-IS-3.png"
     public static function getInfo1(icon: String): Object
     {
         return VehicleInfoData.data[getName1(icon)] || null;
     }
 
-    // icon = "../maps/icons/vehicle/contour/usa-M24_Chaffee.tga"
+    // icon = "../maps/icons/vehicle/contour/ussr-IS-3.png"
     public static function getInfo2(icon: String): Object
     {
         var vn = getName2(icon);
@@ -68,8 +78,8 @@ class com.xvm.VehicleInfo
         return Config.s_config.texts.vtype[vtype];
     }
     
-    // icon = "../maps/icons/vehicle/contour/usa-M24_Chaffee.tga"
-    // return: "m24_chaffee"
+    // icon = "../maps/icons/vehicle/contour/ussr-IS-3.png"
+    // return: "is_3"
     public static function getName2(icon: String): String
     {
         icon = icon.slice(icon.lastIndexOf("/") + 1, icon.lastIndexOf("."));
@@ -79,8 +89,8 @@ class com.xvm.VehicleInfo
         return icon;
     }
 
-    // icon = "../maps/icons/vehicle/contour/usa-M24_Chaffee.tga"
-    // return: "usa_M24_Chaffee"
+    // icon = "../maps/icons/vehicle/contour/ussr-IS-3.png"
+    // return: "ussr_IS_3"
     public static function getName1(icon: String): String
     {
         icon = icon.slice(icon.lastIndexOf("/") + 1, icon.lastIndexOf("."));

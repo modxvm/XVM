@@ -65,7 +65,7 @@ class wot.UserInfo.UserInfo
     var m_dataLoaded:Boolean;
 
     private var m_allDataProvider:Array;
-    private var m_fullDataProvider:Array;
+    private var m_defaultDataProvider:Array;
     private var m_hangarDataProvider:Array;
     
     public function UserInfoCtor()
@@ -410,20 +410,20 @@ class wot.UserInfo.UserInfo
         
         //Logger.addObject(lastSort, "", 2);
         //Logger.addObject(_root, "_root", 2);
-        //Logger.addObject(m_fullDataProvider);
+        //Logger.addObject(m_defaultDataProvider);
     }
 
     private function filterList()
     {
         // Full
-        m_fullDataProvider = wrapper.list.dataProvider;
+        m_defaultDataProvider = wrapper.list.dataProvider;
 
-        fixList(m_fullDataProvider);
+        fixList(m_defaultDataProvider);
 
         // All
-        m_allDataProvider = [ m_fullDataProvider[0] ];
-        var commonId = m_fullDataProvider[0].id;
-        var len:Number = m_fullDataProvider.length;
+        m_allDataProvider = [ m_defaultDataProvider[0] ];
+        var commonId = m_defaultDataProvider[0].id;
+        var len:Number = m_defaultDataProvider.length;
         var all = com.xvm.VehicleInfoData2.data;
         for (var vn:String in all)
         {
@@ -436,13 +436,14 @@ class wot.UserInfo.UserInfo
             var item:Object = null;
             for (var i:Number = 1; i < len; ++i)
             {
-                if (m_fullDataProvider[i].icon == icon)
+                if (m_defaultDataProvider[i].icon == icon)
                 {
-                    item = m_fullDataProvider[i];
+                    item = m_defaultDataProvider[i];
                     break;
                 }
             }
 
+            //Logger.add(icon);
             m_allDataProvider.push(item || {
                 id: commonId,
                 name: vi.name,
@@ -466,16 +467,22 @@ class wot.UserInfo.UserInfo
             return;
         }
 
-        m_hangarDataProvider = [ m_fullDataProvider[0] ];
-        var ulen:Number = m_fullDataProvider.length;
+        m_hangarDataProvider = [ m_defaultDataProvider[0] ];
+        var ulen:Number = m_allDataProvider.length;
         var clen:Number = carouselData.length;
-        for (var i:Number = 0; i < ulen; ++i)
+        for (var j:Number = 0; j < clen; ++j)
         {
-            var ui:wot.WGDataTypes.UserInfoDataItem = m_fullDataProvider[i];
+            var ci:CarouselDataItem = carouselData[j];
+            if (ci.label == null)
+                continue;
+            //Logger.addObject(ci, "ci");
 
-            for (var j:Number = 0; j < clen; ++j)
+            for (var i:Number = 0; i < ulen; ++i)
             {
-                var ci:CarouselDataItem = carouselData[j];
+                var ui:wot.WGDataTypes.UserInfoDataItem = m_allDataProvider[i];
+                //Logger.add(ci.label + ", " + ui.name + ", " + VehicleInfo.getVName(ci.image));
+                if (VehicleInfo.getVName(ci.image) == ui.name)
+                    ui.name = ci.label;
                 if (ci.label == ui.name)
                 {
                     //Logger.add("ci=ui: " + ci.label);
@@ -557,8 +564,8 @@ class wot.UserInfo.UserInfo
         if (m_rbFull != null)
         {
             var selected = m_rbFull.group.selectedButton;
-            var data:Array = selected == m_rbOwn ? m_hangarDataProvider || m_fullDataProvider
-                : selected == m_rbAll ? m_allDataProvider : m_fullDataProvider;
+            var data:Array = selected == m_rbOwn ? m_hangarDataProvider || m_defaultDataProvider
+                : selected == m_rbAll ? m_allDataProvider : m_defaultDataProvider;
             if (m_tiFilter.text != null && m_tiFilter.text != "")
             {
                 var provider:Array = data;

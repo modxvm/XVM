@@ -17,7 +17,8 @@ class com.xvm.Utils
 
     public static function endsWith(substr:String, str:String):Boolean
     {
-        return str.lastIndexOf(substr) == (str.length - substr.length);
+        var i = str.lastIndexOf(substr);
+        return i >= 0 && i == (str.length - substr.length);
     }
 
     // TODO: check performance, charAt is slow in ScaleForm
