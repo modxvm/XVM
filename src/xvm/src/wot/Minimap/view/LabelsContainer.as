@@ -131,9 +131,11 @@ class wot.Minimap.view.LabelsContainer
     
     private function getPresenceStatus(uid:Number):Number
     {
+        var status:Number;
+        
         if (IconsProxy.isIconIsPresentAtMinimap(uid))
         {
-            return Player.PLAYER_REVEALED;
+            status = Player.PLAYER_REVEALED;
         }
         else
         {
@@ -144,12 +146,24 @@ class wot.Minimap.view.LabelsContainer
              */
             if (PlayersPanelProxy.isDead(uid))
             {
-                return Player.PLAYER_DEAD;
+                status = Player.PLAYER_DEAD;
             }
             else 
             {
-                return Player.PLAYER_LOST;
+                status = Player.PLAYER_LOST;
             }
         }
+        
+        var player:Player = PlayersPanelProxy.getPlayerInfo(uid);
+        if (player.teamKiller)
+        {
+            /**
+             * Set below zero.
+             * Later this will be recognized at MapConfig too.
+             */
+            status *= Player.TEAM_KILLER_FLAG;
+        }
+        
+        return status;
     }
 }

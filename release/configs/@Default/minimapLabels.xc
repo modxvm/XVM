@@ -51,7 +51,12 @@
           "lost":  "<span class='mm_dot'>\u2022</span><span class='mm_l'><i>{{vehicle}}</i></span>",
           // For your own marker or spectated subject.
           // Для своего маркера и маркера приёмника камеры наблюдения в случае смерти.
-          "oneself": ""
+          "oneself": "",
+          "lostally": "",
+          "lostsquad": "",
+          "deadenemy": "",
+          "deadally": "",
+          "deadsquad": ""
         },
         // CSS style.
         // CSS стиль.

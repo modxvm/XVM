@@ -170,6 +170,15 @@ class wot.Minimap.model.externalProxy.MapConfig
             statusStr = "";
         }
         
+        if (entryName == "squadman")
+        {
+            entryName = "squad";
+        }
+        if (status <= Player.TEAM_KILLER_FLAG)
+        {
+            entryName = "teamkiller";
+        }
+        
         var property:String = statusStr + entryName;
         
         if (property == "lostenemy")
