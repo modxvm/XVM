@@ -1,0 +1,27 @@
+# This is XvmFS configuration file.
+
+# XVM config file. Can be found in xvmfs-X.X.X.tar.gz archive
+#xvm_cfg = ~/.wine/drive_c/Games/World_of_Tanks/xvm-stat.exe.config
+
+# World of Tanks Launcher config file. Located in the game directory.
+#wot_cfg = ~/.wine/drive_c/Games/World_of_Tanks/wotlauncher.cfg
+
+# The path to the 'res_mods' game directory.
+#res_mods = ~/.wine/drive_c/Games/World_of_Tanks/res_mods
+
+# Directory for log files.
+log_dir = /tmp
+
+# If XvmFS is mounted on NTFS partition, the following option
+# should contain the path to the game, as the game see it.
+# The following value means that the game is installed
+# into .../drive_c/Games/World_of_Tanks folder under WINE.
+game_dir = C:\Games\World_of_Tanks
+
+# Uncomment following option to enable additional debug messages
+# for logging. Disabled by default.
+#debug = true
+
+# The threshold value used to choose some fast proxies from available 
+# proxy pool. For now several proxies are available for China only.
+#ping_threshold = 500
