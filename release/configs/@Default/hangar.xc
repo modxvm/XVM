@@ -83,6 +83,9 @@
     // true - Show filters on tanks.
     // true - показывать фильтры отображения танков.
     "showFilters": true,
+    // true: Set the default focus to the filter text input
+    // true: Выбрать поле ввода фильтра по умолчанию
+    "filterFocused": true,
     // true - Enable filter tanks in hangar by default.
     // true - включить фильтр отображения танков в ангаре по умолчанию.
     "inHangarFilterEnabled": false,

@@ -67,7 +67,7 @@ class wot.UserInfo.UserInfo
     private var m_allDataProvider:Array;
     private var m_defaultDataProvider:Array;
     private var m_hangarDataProvider:Array;
-    
+
     public function UserInfoCtor()
     {
         m_name = null;
@@ -87,7 +87,7 @@ class wot.UserInfo.UserInfo
     function setCommonInfoImpl()
     {
         //Logger.add("setCommonInfo()");
-        
+
         m_name = arguments[1];
         loadData();
 
@@ -100,14 +100,14 @@ class wot.UserInfo.UserInfo
             return;
         if (Config.s_config.rating.enableUserInfoStatistics != true)
             return;
-        
+
         if (!m_name)
             return;
-        
+
         if (m_dataLoaded)
             return;
         m_dataLoaded = true;
-        
+
         if (Cache.Exist("INFO@" + m_name))
             onUserDataLoaded();
         else {
@@ -115,7 +115,7 @@ class wot.UserInfo.UserInfo
             UserDataLoaderHelper.LoadUserData(m_name, false);
         }
     }
-    
+
     private function extractNumber(str)
     {
         var res = "";
@@ -132,7 +132,7 @@ class wot.UserInfo.UserInfo
     {
         return battles <= 0 ? 0 : value / battles;
     }
-    
+
     function setStatImpl()
     {
         var battles = 0;
@@ -265,7 +265,7 @@ class wot.UserInfo.UserInfo
 
         m_userData = Cache.Get(key);
 
-        if (!m_button1.disabled)
+        if (!m_button5.disabled)
         {
             var dt = m_userData.dt.split("T").join(" ").substr(0, 10);
             m_button5.tooltipText = Locale.get("UserInfoEHint").split("%DATE%").join("<font color='#CCCCCC'>" + dt + "</font>");
@@ -407,7 +407,7 @@ class wot.UserInfo.UserInfo
 
         filterList();
         applyFilterAndSort();
-        
+
         //Logger.addObject(lastSort, "", 2);
         //Logger.addObject(_root, "_root", 2);
         //Logger.addObject(m_defaultDataProvider);
@@ -458,7 +458,7 @@ class wot.UserInfo.UserInfo
             });
         }
         fixList(m_allDataProvider);
-        
+
         // Hangar
         var carouselData:Array = wot.RootComponents.carousel.dataProvider || _global._xvm_carousel_dataProvider;
         if (!carouselData)
@@ -492,7 +492,7 @@ class wot.UserInfo.UserInfo
             }
         }
     }
-    
+
     private function fixList(data:Array)
     {
         //Logger.addObject(data, "", 3);
@@ -591,7 +591,7 @@ class wot.UserInfo.UserInfo
 
         if (lastSort.type != null)
             sortList(lastSort.type, lastSort.dir);
-        
+
         wrapper.list.selectedIndex = 0;
     }
 
@@ -622,7 +622,7 @@ class wot.UserInfo.UserInfo
             m_button5.enabled = false;
             m_button5._alpha = 30;
         }
-        
+
         m_button6 = createButton(hdr, 6, "bBat", 365, 5, Locale.get("Fights"), "right", 1);
         m_button7 = createButton(hdr, 7, "bWin", 435, 5, Locale.get("Wins"), "right", 1);
         m_button8 = createButton(hdr, 8, "bMed", 440, 5, "M", "left", 1);
@@ -641,28 +641,31 @@ class wot.UserInfo.UserInfo
         filterLabel.selectable = false;
         filterLabel.html = true;
         filterLabel.htmlText = "<span class='xvm_filterLabel'>" + Locale.get("Filter") + ":</span>";
-        
+
         m_tiFilter = gfx.controls.TextInput(Utils.createTextInput(filter, "__xvm_tiFilter", 100, 15, 60));
         m_tiFilter.addEventListener("textChange", this, "applyFilterAndSort");
-        if (IsSelfUserInfo())
-            m_tiFilter.focused = true;
-        else
+        if (Config.s_config.userInfo.filterFocused == true)
         {
-            // FIXIT: dirty hack
-            var ti = m_tiFilter;
-            _global.setTimeout(function() { ti.focused = true; }, 10);
+          if (IsSelfUserInfo())
+              m_tiFilter.focused = true;
+          else
+          {
+              // FIXIT: dirty hack
+              var ti = m_tiFilter;
+              _global.setTimeout(function() { ti.focused = true; }, 10);
+          }
         }
-        
+
         m_rbOwn = gfx.controls.RadioButton(Utils.createRadioButton(filter, "rbOwnTanks", 0, 0, 100, Locale.get("In hangar"), "filter"));
         m_rbOwn.tooltipText = Locale.get("Show only tanks in own hangar");
         m_rbOwn.selected = IsSelfUserInfo() && Config.s_config.userInfo.inHangarFilterEnabled == true;
         m_rbOwn.addEventListener("select", this, "applyFilterAndSort");
-        
+
         m_rbFull = gfx.controls.RadioButton(Utils.createRadioButton(filter, "rbFullTanks", 0, 12, 100, Locale.get("Player tanks"), "filter"));
         m_rbFull.tooltipText = Locale.get("Show all tanks played");
         m_rbFull.selected = !IsSelfUserInfo() || Config.s_config.userInfo.inHangarFilterEnabled != true;
         m_rbFull.addEventListener("select", this, "applyFilterAndSort");
-        
+
         m_rbAll = gfx.controls.RadioButton(Utils.createRadioButton(filter, "rbAllTanks", 0, 24, 100, Locale.get("All tanks"), "filter"));
         m_rbAll.tooltipText = Locale.get("Show all tanks in the game");
         m_rbAll.selected = false;
@@ -673,7 +676,7 @@ class wot.UserInfo.UserInfo
     {
         return !wrapper._parent.addToIgnoredButton;
     }
-    
+
     private function createButton(hdr:MovieClip, id:Number, name:String, x:Number, y:Number, txt:String, align:String, defaultSort:Number):MovieClip
     {
         var b = Utils.createButton(hdr, name, x, y, txt, align);
@@ -685,7 +688,7 @@ class wot.UserInfo.UserInfo
         b.group = "sort";
         b.defaultSort = defaultSort;
         b.sortDir = 0;
-        
+
         if (lastSort.name == null)
         {
             var col = Config.s_config.userInfo.sortColumn || 6; // -8..-1,1..8
@@ -731,7 +734,7 @@ class wot.UserInfo.UserInfo
         [ 1 ],
         [ 1, 1, 1, 2, 2 ]
     ];
-    
+
     // sorting
 
     private function onSortClick(e)
@@ -769,7 +772,7 @@ class wot.UserInfo.UserInfo
 
         wrapper.list.selectedIndex = 0;
     }
-    
+
     function sortList(sortType, sortDir)
     {
         lastSort.type = sortType.slice();
@@ -795,7 +798,7 @@ class wot.UserInfo.UserInfo
     }
 
     // filtering
-    
+
     private function onButtonStateChangeClick(e)
     {
         var b = e.target;

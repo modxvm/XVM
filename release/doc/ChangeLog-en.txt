@@ -4,6 +4,13 @@
   * minimap: fixed players death log list positioning while minimap is zoomed
   * hitlog: damage to drowned units is not taken into account anymore
   * minimap: fixed work when there is only one player in enemy team
+  * new options:
+     login/pingServers/showPingOnGameLoading - show ping during game loading, before login screen
+     userInfo/showFilters - show tank filters
+     userInfo/filterFocused - set the default focus to the filter text input
+     userInfo/sortColumn - number of column for sorting
+       1 - Level, 2 - Type, 3 - Nation, 4 - Name, 5 - E, 6 - Fights, 7 - Wins, 8 - Class mark
+       Sort order: >0 - default, <0 - inverse
 
 XVM-4.0.0:
   * adaptation to WoT 0.8.6
