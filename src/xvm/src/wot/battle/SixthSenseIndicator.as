@@ -1,14 +1,12 @@
 ﻿/**
- * ...
- * @author ...
+ * @author sirmax
  */
-import com.greensock.TweenLite;
-import com.greensock.TimelineLite;
 import com.greensock.easing.Linear;
-import net.wargaming.controls.UILoaderAlt;
+import com.greensock.TimelineLite;
+import com.greensock.TweenLite;
 import com.xvm.Defines;
 import com.xvm.IconLoader;
-import com.xvm.Logger;
+import net.wargaming.controls.UILoaderAlt;
 
 class wot.battle.SixthSenseIndicator
 {

@@ -6,17 +6,10 @@ import com.greensock.plugins.*;
 import com.xvm.Config;
 import com.xvm.Defines;
 import com.xvm.GlobalEventDispatcher;
-import com.xvm.Logger;
 import com.xvm.Macros;
 import com.xvm.StatData;
 import com.xvm.StatLoader;
 import com.xvm.Utils;
-import wot.VehicleMarkersManager.ColorsManager;
-import wot.VehicleMarkersManager.ErrorHandler;
-import wot.VehicleMarkersManager.VehicleMarkerProxy;
-import wot.VehicleMarkersManager.VehicleState;
-import wot.VehicleMarkersManager.VehicleStateProxy;
-import wot.VehicleMarkersManager.XvmBase;
 import wot.VehicleMarkersManager.components.ActionMarkerComponent;
 import wot.VehicleMarkersManager.components.ActionMarkerProxy;
 import wot.VehicleMarkersManager.components.ClanIconComponent;
@@ -33,6 +26,11 @@ import wot.VehicleMarkersManager.components.TurretStatusComponent;
 import wot.VehicleMarkersManager.components.TurretStatusProxy;
 import wot.VehicleMarkersManager.components.VehicleTypeComponent;
 import wot.VehicleMarkersManager.components.VehicleTypeProxy;
+import wot.VehicleMarkersManager.ErrorHandler;
+import wot.VehicleMarkersManager.VehicleMarkerProxy;
+import wot.VehicleMarkersManager.VehicleState;
+import wot.VehicleMarkersManager.VehicleStateProxy;
+import wot.VehicleMarkersManager.XvmBase;
 
 /*
  * XVM() instance creates corresponding marker

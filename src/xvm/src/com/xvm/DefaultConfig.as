@@ -1,6 +1,6 @@
-﻿import com.xvm.Defines;
+﻿import com.xvm.ColorPalette;
+import com.xvm.Defines;
 import com.xvm.VehicleInfo;
-import com.xvm.ColorPalette;
 
 class com.xvm.DefaultConfig
 {

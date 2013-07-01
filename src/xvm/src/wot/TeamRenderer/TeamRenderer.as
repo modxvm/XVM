@@ -1,12 +1,11 @@
-﻿import net.wargaming.managers.ToolTipManager;
-import com.xvm.Cache;
+﻿import com.xvm.Cache;
 import com.xvm.Config;
 import com.xvm.GlobalEventDispatcher;
-import com.xvm.Locale;
-import com.xvm.Logger;
-import com.xvm.Utils;
 import com.xvm.Helpers.TeamRendererHelper;
 import com.xvm.Helpers.UserDataLoaderHelper;
+import com.xvm.Locale;
+import com.xvm.Utils;
+import net.wargaming.managers.ToolTipManager;
 
 class wot.TeamRenderer.TeamRenderer
 {

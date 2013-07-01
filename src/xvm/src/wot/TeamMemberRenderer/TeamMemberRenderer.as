@@ -1,11 +1,10 @@
-import net.wargaming.messenger.MessengerUtils;
 import com.xvm.Cache;
 import com.xvm.Config;
 import com.xvm.GlobalEventDispatcher;
-import com.xvm.Logger;
-import com.xvm.Utils;
 import com.xvm.Helpers.TeamRendererHelper;
 import com.xvm.Helpers.UserDataLoaderHelper;
+import com.xvm.Utils;
+import net.wargaming.messenger.MessengerUtils;
 
 class wot.TeamMemberRenderer.TeamMemberRenderer
 {

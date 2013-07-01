@@ -1,9 +1,8 @@
-﻿import com.xvm.Config;
+﻿import com.xvm.Components.PingServers.PingServers;
+import com.xvm.Config;
 import com.xvm.Defines;
 import com.xvm.GlobalEventDispatcher;
-import com.xvm.Logger;
 import com.xvm.Utils;
-import com.xvm.Components.PingServers.PingServers;
 
 class wot.gameloading.GameLoadingForm
 {

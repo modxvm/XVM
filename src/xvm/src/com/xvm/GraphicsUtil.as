@@ -2,12 +2,11 @@
  * ...
  * @author sirmax2
  */
-import flash.geom.ColorTransform;
-import flash.filters.ColorMatrixFilter;
-import flash.filters.DropShadowFilter;
 import com.xvm.Config;
 import com.xvm.Defines;
 import com.xvm.Utils;
+import flash.filters.DropShadowFilter;
+import flash.geom.ColorTransform;
 
 class com.xvm.GraphicsUtil
 {

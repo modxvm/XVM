@@ -5,9 +5,9 @@ import com.xvm.Defines;
 import com.xvm.GlobalEventDispatcher;
 import com.xvm.GraphicsUtil;
 import com.xvm.Locale;
+import com.xvm.StatData;
 import com.xvm.Utils;
 import com.xvm.VehicleInfo;
-import com.xvm.StatData;
 
 class com.xvm.Macros
 {

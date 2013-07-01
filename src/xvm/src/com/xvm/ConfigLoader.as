@@ -2,12 +2,12 @@
  * ...
  * @author sirmax2
  */
+import com.xvm.Comm;
 import com.xvm.Config;
 import com.xvm.ConfigUtils;
-import com.xvm.JSONxLoader;
-import com.xvm.Comm;
 import com.xvm.Defines;
 import com.xvm.GlobalEventDispatcher;
+import com.xvm.JSONxLoader;
 import com.xvm.Locale;
 import com.xvm.Logger;
 import com.xvm.Utils;

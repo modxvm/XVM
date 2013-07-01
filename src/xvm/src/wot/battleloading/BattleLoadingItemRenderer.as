@@ -7,11 +7,10 @@ import com.xvm.Config;
 import com.xvm.Defines;
 import com.xvm.GlobalEventDispatcher;
 import com.xvm.IconLoader;
-import com.xvm.Logger;
 import com.xvm.Macros;
+import com.xvm.PlayerInfo;
 import com.xvm.StatData;
 import com.xvm.StatLoader;
-import com.xvm.PlayerInfo;
 import com.xvm.Utils;
 
 // Renders one player, not a bulk.

@@ -3,7 +3,6 @@
  */
 import com.xvm.Config;
 import com.xvm.GlobalEventDispatcher;
-import com.xvm.Logger;
 import com.xvm.Utils;
 import wot.crew.CrewLoader;
 

@@ -1,5 +1,5 @@
-import com.xvm.Config;
 import com.xvm.Chance;
+import com.xvm.Config;
 import com.xvm.GlobalEventDispatcher;
 
 class wot.FinalStatistic.WinChances

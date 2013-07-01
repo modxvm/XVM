@@ -5,12 +5,8 @@
 //import com.xvm.Cache;
 import com.xvm.ColorsManager;
 import com.xvm.GraphicsUtil;
-import com.xvm.Logger;
 import com.xvm.Macros;
 import com.xvm.Utils;
-import wot.VehicleMarkersManager.ErrorHandler;
-import wot.VehicleMarkersManager.VehicleMarkerProxy;
-import wot.VehicleMarkersManager.VehicleState;
 import wot.VehicleMarkersManager.components.ActionMarkerComponent;
 import wot.VehicleMarkersManager.components.ClanIconComponent;
 import wot.VehicleMarkersManager.components.ContourIconComponent;
@@ -19,6 +15,9 @@ import wot.VehicleMarkersManager.components.HealthBarComponent;
 import wot.VehicleMarkersManager.components.LevelIconComponent;
 import wot.VehicleMarkersManager.components.TurretStatusComponent;
 import wot.VehicleMarkersManager.components.VehicleTypeComponent;
+import wot.VehicleMarkersManager.ErrorHandler;
+import wot.VehicleMarkersManager.VehicleMarkerProxy;
+import wot.VehicleMarkersManager.VehicleState;
 
 class wot.VehicleMarkersManager.XvmBase
 {

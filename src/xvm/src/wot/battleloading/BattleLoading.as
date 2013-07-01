@@ -3,12 +3,12 @@ import com.xvm.Config;
 import com.xvm.Defines;
 import com.xvm.GlobalEventDispatcher;
 import com.xvm.Logger;
-import com.xvm.StatsLogger;
 import com.xvm.StatData;
 import com.xvm.StatLoader;
+import com.xvm.StatsLogger;
 import com.xvm.Utils;
-import wot.battleloading.TipField;
 import wot.battleloading.RealClock;
+import wot.battleloading.TipField;
 import wot.battleloading.WinChances;
 
 class wot.battleloading.BattleLoading

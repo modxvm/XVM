@@ -2,7 +2,6 @@
  * ...
  * @author sirmax2
  */
-import net.wargaming.controls.UILoaderAlt;
 import com.xvm.Cache;
 import com.xvm.Config;
 import com.xvm.Defines;
@@ -14,6 +13,7 @@ import com.xvm.PlayerInfo;
 import com.xvm.StatData;
 import com.xvm.StatLoader;
 import com.xvm.Utils;
+import net.wargaming.controls.UILoaderAlt;
 import wot.StatisticForm.WinChances;
 
 class wot.StatisticForm.BattleStatItemRenderer

@@ -2,10 +2,10 @@
  * ...
  * @author sirmax2
  */
-import net.wargaming.controls.UILoaderAlt;
 import com.xvm.Config;
 import com.xvm.Defines;
 import com.xvm.IconLoader;
+import net.wargaming.controls.UILoaderAlt;
 
 class com.xvm.PlayerInfo extends MovieClip
 {

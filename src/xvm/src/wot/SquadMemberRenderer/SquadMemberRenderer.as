@@ -6,7 +6,6 @@ import com.xvm.Config;
 import com.xvm.Defines;
 import com.xvm.GlobalEventDispatcher;
 import com.xvm.Locale;
-import com.xvm.Logger;
 import com.xvm.Utils;
 import com.xvm.VehicleInfo;
 import com.xvm.VehicleInfoDataL10n;

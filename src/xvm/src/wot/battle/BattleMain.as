@@ -1,19 +1,18 @@
 ﻿/**
- * ...
  * @author sirmax2
  */
-import wot.battle.FragCorrelation;
 import com.greensock.OverwriteManager;
-import com.greensock.plugins.TweenPlugin;
 import com.greensock.plugins.TintPlugin;
-import wot.battle.BattleInputHandler;
+import com.greensock.plugins.TweenPlugin;
 import com.xvm.Config;
 import com.xvm.GlobalEventDispatcher;
 import com.xvm.Logger;
 import com.xvm.StatLoader;
 import com.xvm.Utils;
-import wot.battle.SixthSenseIndicator;
+import wot.battle.BattleInputHandler;
 import wot.battle.ExpertPanel;
+import wot.battle.FragCorrelation;
+import wot.battle.SixthSenseIndicator;
 
 class wot.battle.BattleMain
 {

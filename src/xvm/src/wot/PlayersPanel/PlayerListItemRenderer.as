@@ -1,13 +1,13 @@
 ﻿/**
  * @author sirmax2
  */
-import net.wargaming.controls.UILoaderAlt;
-import wot.PlayersPanel.SpotStatusView;
 import com.xvm.Config;
 import com.xvm.Defines;
 import com.xvm.IconLoader;
 import com.xvm.PlayerInfo;
 import com.xvm.Utils;
+import net.wargaming.controls.UILoaderAlt;
+import wot.PlayersPanel.SpotStatusView;
 
 class wot.PlayersPanel.PlayerListItemRenderer
 {

@@ -4,12 +4,11 @@ import com.xvm.Config;
 import com.xvm.Defines;
 import com.xvm.GlobalEventDispatcher;
 import com.xvm.GraphicsUtil;
-import com.xvm.Locale;
-import com.xvm.Logger;
-import com.xvm.StatLoader;
-import com.xvm.VehicleInfo;
-import com.xvm.Utils;
 import com.xvm.Helpers.UserDataLoaderHelper;
+import com.xvm.Locale;
+import com.xvm.StatLoader;
+import com.xvm.Utils;
+import com.xvm.VehicleInfo;
 import wot.WGDataTypes.CarouselDataItem;
 import wot.WGDataTypes.UserInfoDataItem;
 

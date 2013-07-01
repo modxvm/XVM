@@ -1,3 +1,4 @@
+import com.xvm.DefaultConfig;
 import com.xvm.ColorsManager;
 import com.xvm.Config;
 import com.xvm.GraphicsUtil;
@@ -11,9 +12,6 @@ class wot.Minimap.view.MarkerColor
     {
         if (wrapper.m_type == null || wrapper.vehicleClass == null || wrapper.entryName == null || wrapper.entryName == "")
             return;
-
-        //if (wrapper.entryName != "ally" && wrapper.entryName != "enemy")
-        //    Logger.add("type=" + wrapper.m_type + " entryName=" + wrapper.entryName + " vehicleClass=" + wrapper.vehicleClass);
 
         if (wrapper.entryName == "control")
             return;
@@ -56,8 +54,6 @@ class wot.Minimap.view.MarkerColor
 
         if (color != null)
         {
-            //Logger.addObject(wrapper.player, "pl", 3)
-            //Logger.add(wrapper.entryName);
             GraphicsUtil.colorize(wrapper.teamPoint || wrapper.player/*.litIcon*/, color,
                 wrapper.player ? Config.s_config.consts.VM_COEFF_MM_PLAYER : Config.s_config.consts.VM_COEFF_MM_BASE);
         }

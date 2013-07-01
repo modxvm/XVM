@@ -1,12 +1,12 @@
 /**
  * @author ilitvinov
  */
+import com.xvm.Utils;
 import flash.filters.DropShadowFilter;
 import wot.TeamBasesPanel.CapBarModel.CapSpeed;
-import wot.TeamBasesPanel.Macro;
-import wot.TeamBasesPanel.CapConfig;
 import wot.TeamBasesPanel.CapBarModel.OneTankSpeed;
-import com.xvm.Utils;
+import wot.TeamBasesPanel.CapConfig;
+import wot.TeamBasesPanel.Macro;
 
 /**
  * Capture progress bar

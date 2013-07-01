@@ -1,18 +1,18 @@
 ﻿/**
  * @author sirmax2, ilitvinov87
  */
-import com.xvm.Logger;
-import wot.PlayersPanel.SpotStatusModel;
 import com.xvm.Cache;
 import com.xvm.Config;
 import com.xvm.Defines;
-import com.xvm.GlobalEventDispatcher
+import com.xvm.GlobalEventDispatcher;
+import com.xvm.Logger;
 import com.xvm.Macros;
-import com.xvm.StatLoader;
 import com.xvm.StatData;
+import com.xvm.StatLoader;
 import com.xvm.Utils;
 import wot.Minimap.MinimapEvent;
 import wot.PlayersPanel.PlayerListItemRenderer;
+import wot.PlayersPanel.SpotStatusModel;
 
 class wot.PlayersPanel.PlayersPanel
 {

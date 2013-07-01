@@ -3,8 +3,8 @@
  * @author LEMAXHO
  */
 import com.xvm.Locale;
-import wot.crew.CrewLoader;
 import com.xvm.Utils;
+import wot.crew.CrewLoader;
 
 class wot.crew.tankmen.CrewItemRenderer
 {

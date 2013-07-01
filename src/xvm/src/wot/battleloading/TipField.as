@@ -1,5 +1,5 @@
-import com.xvm.GlobalEventDispatcher;
 import com.xvm.Defines;
+import com.xvm.GlobalEventDispatcher;
 import com.xvm.Utils;
 
 class wot.battleloading.TipField

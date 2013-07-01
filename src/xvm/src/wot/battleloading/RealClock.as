@@ -1,6 +1,6 @@
 import com.xvm.Config;
-import com.xvm.Utils;
 import com.xvm.GlobalEventDispatcher;
+import com.xvm.Utils;
 
 class wot.battleloading.RealClock
 {

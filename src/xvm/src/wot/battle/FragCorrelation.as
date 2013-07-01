@@ -1,8 +1,6 @@
 import com.xvm.ColorsManager;
 import com.xvm.Config;
 import com.xvm.GraphicsUtil;
-import com.xvm.Logger;
-import com.xvm.Utils;
 
 class wot.battle.FragCorrelation
 {

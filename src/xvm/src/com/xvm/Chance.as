@@ -2,8 +2,8 @@
  * ...
  * @author Maxim Schedriviy
  */
-import com.xvm.Defines;
 import com.xvm.Config;
+import com.xvm.Defines;
 import com.xvm.GraphicsUtil;
 import com.xvm.Locale;
 import com.xvm.StatData;

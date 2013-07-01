@@ -1,7 +1,7 @@
+import com.xvm.Round;
 import wot.TeamBasesPanel.CapBarModel.CapCycle;
 import wot.TeamBasesPanel.CapBarModel.InternalTimer;
 import wot.TeamBasesPanel.CapBarModel.OneTankSpeed;
-import com.xvm.Round;
 
 /**
 * This class determines capture speed based on latest information

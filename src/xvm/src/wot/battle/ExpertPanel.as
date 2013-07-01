@@ -1,5 +1,4 @@
 import com.xvm.Config;
-import com.xvm.Utils;
 import wot.battle.ExpertPanelWG;
 
 class wot.battle.ExpertPanel
