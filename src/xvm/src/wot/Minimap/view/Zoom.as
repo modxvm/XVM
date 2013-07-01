@@ -1,8 +1,7 @@
-import gfx.core.UIComponent;
+import com.xvm.Logger;
 import net.wargaming.ingame.Minimap;
 import wot.Minimap.MinimapProxy;
 import wot.Minimap.model.externalProxy.MapConfig;
-import com.xvm.Logger;
 
 /**
  * Handles minimap windows zoom and center positioning

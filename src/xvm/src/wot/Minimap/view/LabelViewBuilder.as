@@ -1,4 +1,3 @@
-import com.xvm.Logger;
 import flash.geom.Point;
 import wot.Minimap.dataTypes.Player;
 import wot.Minimap.model.externalProxy.MapConfig;
@@ -13,7 +12,6 @@ class wot.Minimap.view.LabelViewBuilder
     {
         var status:Number = label[LabelsContainer.STATUS_FIELD_NAME];
         var playerInfo:Player = label[LabelsContainer.PLAYER_INFO_FIELD_NAME];
-        Logger.addObject();
         var entryName:String = label[LabelsContainer.ENTRY_NAME_FIELD_NAME];
         var vehicleClass:String = label[LabelsContainer.VEHICLE_CLASS_FIELD_NAME];
         

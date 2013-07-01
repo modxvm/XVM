@@ -1,5 +1,5 @@
-import wot.Minimap.MinimapProxy;
 import flash.geom.Point;
+import wot.Minimap.MinimapProxy;
 import wot.Minimap.model.externalProxy.MapConfig;
 import wot.Minimap.model.mapSize.MapSizeModel;
 

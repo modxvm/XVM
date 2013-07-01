@@ -1,5 +1,4 @@
 import net.wargaming.ingame.Minimap;
-import com.xvm.Logger;
 
 class wot.Minimap.MinimapProxy
 {

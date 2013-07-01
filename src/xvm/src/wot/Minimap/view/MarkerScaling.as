@@ -1,6 +1,6 @@
+import wot.Minimap.MinimapEntry;
 import wot.Minimap.MinimapProxy;
 import wot.Minimap.model.externalProxy.IconsProxy;
-import wot.Minimap.MinimapEntry;
 import wot.Minimap.model.externalProxy.MapConfig;
 
 class wot.Minimap.view.MarkerScaling
