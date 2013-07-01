@@ -1,9 +1,5 @@
-  * minimap: labels are detached from icons to lower layer
-  * minimap: code refactoring
-  * minimap: some interface object are no longer overlapping zoomed minimap
-  * minimap: fixed players death log list positioning while minimap is zoomed
-  * hitlog: damage to drowned units is not taken into account anymore
-  * minimap: fixed work when there is only one player in enemy team
+  [NEW FUNCTIONS]
+  * minimap: new label types
   * new options:
      login/pingServers/showPingOnGameLoading - show ping during game loading, before login screen
      userInfo/showFilters - show tank filters
@@ -11,6 +7,17 @@
      userInfo/sortColumn - number of column for sorting
        1 - Level, 2 - Type, 3 - Nation, 4 - Name, 5 - E, 6 - Fights, 7 - Wins, 8 - Class mark
        Sort order: >0 - default, <0 - inverse
+	   
+  [FIXES]
+  * minimap: label of observer vehicle is no longer rotating with icon
+  * minimap: some interface object are no longer overlapping zoomed minimap
+  * minimap: fixed players death log list positioning while minimap is zoomed
+  * minimap: fixed work when there is only one player in enemy team
+  * hitlog: damage to drowned units is not taken into account anymore
+  
+  [OTHER]
+  * minimap: code refactoring
+  * minimap: labels are detached from icons to lower layer
 
 XVM-4.0.0:
   * adaptation to WoT 0.8.6
