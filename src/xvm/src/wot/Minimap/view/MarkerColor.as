@@ -9,11 +9,11 @@ class wot.Minimap.view.MarkerColor
 {
     public static function setColor(wrapper:net.wargaming.ingame.MinimapEntry):Void
     {
-        if (wrapper.m_type == null || wrapper.vehicleClass == null || wrapper.entryName == null)
+        if (wrapper.m_type == null || wrapper.vehicleClass == null || wrapper.entryName == null || wrapper.entryName == "")
             return;
 
         //if (wrapper.entryName != "ally" && wrapper.entryName != "enemy")
-        //    com.xvm.Logger.add("type=" + wrapper.m_type + " entryName=" + wrapper.entryName + " vehicleClass=" + wrapper.vehicleClass);
+        //    Logger.add("type=" + wrapper.m_type + " entryName=" + wrapper.entryName + " vehicleClass=" + wrapper.vehicleClass);
 
         if (wrapper.entryName == "control")
             return;
@@ -24,26 +24,42 @@ class wot.Minimap.view.MarkerColor
         var color = null;
         if (Config.s_config.battle.useStandardMarkers)
         {
-            var schemeName = (wrapper.entryName != "base" && wrapper.entryName != "spawn") ? wrapper.colorSchemeName
+            if (wrapper.entryName == "base")
+                return;
+            var schemeName = wrapper.entryName != "spawn" ? wrapper.colorSchemeName
                 : (wrapper.vehicleClass == "red") ? "vm_enemy" : (wrapper.vehicleClass == "blue") ? "vm_ally" : null;
-
             if (!schemeName)
                 return;
-
             color = wrapper.colorsManager.getRGB(schemeName);
         }
         else
         {
+            // use standard team bases if color is not changed
+            if (wrapper.entryName == "base")
+            {
+                var aa = Config.s_config.colors.system["ally_alive"];
+                var aad = DefaultConfig.config.colors.system["ally_alive"];
+                if (wrapper.vehicleClass == "blue" && aa == aad)
+                    return;
+                var ea = Config.s_config.colors.system["enemy_alive"];
+                var ead = DefaultConfig.config.colors.system["enemy_alive"];
+                if (wrapper.vehicleClass == "red" && ea == ead)
+                    return;
+            }
             var entryName = (wrapper.entryName != "base" && wrapper.entryName != "spawn") ? wrapper.entryName
                 : (wrapper.vehicleClass == "red") ? "enemy" : (wrapper.vehicleClass == "blue") ? "ally" : null;
             if (entryName != null)
                 color = ColorsManager.getSystemColor(entryName, wrapper.isDead);
+            if (wrapper.entryName == "base")
+                wrapper.setEntryName("control");
         }
 
         if (color != null)
         {
-            GraphicsUtil.colorize(wrapper.player || wrapper.teamPoint, color,
-                wrapper.player ? Config.s_config.consts.VM_COEFF_MM_PLAYER : Config.s_config.consts.VM_COEFF_MM_BASE); // darker to improve appearance
+            //Logger.addObject(wrapper.player, "pl", 3)
+            //Logger.add(wrapper.entryName);
+            GraphicsUtil.colorize(wrapper.teamPoint || wrapper.player/*.litIcon*/, color,
+                wrapper.player ? Config.s_config.consts.VM_COEFF_MM_PLAYER : Config.s_config.consts.VM_COEFF_MM_BASE);
         }
     }
 }
