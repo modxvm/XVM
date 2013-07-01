@@ -31,7 +31,7 @@
     <option traceFunction="" />
     <option libraryPrefix="xvm" />
     <option excludeFile="" />
-    <option groupClasses="True" />
+    <option groupClasses="False" />
     <option frame="1" />
     <option keep="True" />
   </build>
@@ -41,7 +41,6 @@
     <compile path="shared\MovieClip.as" />
     <compile path="src\wot\battle" />
     <compile path="src\wot\battleloading" />
-    <compile path="src\wot\crew" />
     <compile path="src\wot\crew\tankmen" />
     <compile path="src\wot\FinalStatistic" />
     <compile path="src\wot\Minimap" />
