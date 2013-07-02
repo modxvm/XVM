@@ -142,7 +142,7 @@ class com.xvm.Helpers.TeamRendererHelper
     public static function setXVMStat(key, textField)
     {
         var stat = Cache.Get(key);
-        if (Config.s_config.hangar.xvnInCompany == true)
+        if (Config.s_config.hangar.xwnInCompany == true)
         {
             textField.htmlText = "<span class='xvm_eff'>" + (!stat.wn ? "--" :
             "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn) + "'>" + (stat.xwn == 100 ? "XX" : (stat.xwn < 10 ? "0" : "") + stat.xwn) + "</font>") + "</span>";

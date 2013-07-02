@@ -9,7 +9,7 @@
     "hideTutorial": false,
     // true - Show XVN instead of XEFF in company windows
     // true - показывать XVN вместо XEFF в окнах рот
-    "xvnInCompany": true,
+    "xwnInCompany": true,
     // Ping servers; works only with xvm-stat.exe
     // Пинг серверов; работает только с xvm-stat.exe
     "pingServers": {
