@@ -29,8 +29,9 @@
         tf - tank frags
         ts - tank spotted
         tdb - average tank damage per battle (*)
-        tdf - average tank frags per battle (*)
+        tfb - average tank frags per battle (*)
         tdv - average tank damage efficiency per battle (*)
+        tsb - average number of spotted enemies per battle (*)
             (*) - calculated in StatLoader.as
         te - per-vehicle efficiency (http://www.koreanrandom.com/forum/topic/1643-)
 */

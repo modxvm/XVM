@@ -198,12 +198,12 @@ class com.xvm.StatLoader
 
         // xeff
         stat.xeff = null;
-        if (stat.e != null)
+        if (stat.e != null && stat.e > 0)
             stat.xeff = Utils.XEFF(stat.e);
 
         // xwn
         stat.xwn = null;
-        if (stat.wn != null)
+        if (stat.wn != null && stat.wn > 0)
             stat.xwn = Utils.XWN(stat.wn);
 
         // tdb, tfb, tsb, tdv, te, teff (last)

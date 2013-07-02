@@ -245,7 +245,7 @@ class com.xvm.GraphicsUtil
     public static function GetDynamicAlphaValue(type: Number, value: Number): Number
     {
         if (isNaN(value))
-            return 101;
+            return 0;
 
         var cfg_root:Object = Config.s_config.alpha;
         var cfg: Array;
@@ -266,7 +266,7 @@ class com.xvm.GraphicsUtil
             case Defines.DYNAMIC_ALPHA_TFB:             cfg = cfg_root.tfb; break;
             case Defines.DYNAMIC_ALPHA_TSB:             cfg = cfg_root.tsb; break;
           default:
-              return 102;
+              return 100;
         }
 
         var cfg_len:Number = cfg.length;
