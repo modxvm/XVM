@@ -4,6 +4,7 @@
 import net.wargaming.messenger.MessengerUtils;
 import net.wargaming.managers.ToolTipManager;
 import com.xvm.Cache;
+import com.xvm.Config;
 import com.xvm.Defines;
 import com.xvm.GraphicsUtil;
 import com.xvm.Locale;
@@ -141,8 +142,16 @@ class com.xvm.Helpers.TeamRendererHelper
     public static function setXVMStat(key, textField)
     {
         var stat = Cache.Get(key);
-        textField.htmlText = "<span class='xvm_eff'>" + (!stat.wn ? "--" :
+        if (Config.s_config.hangar.xvnInCompany == true)
+        {
+            textField.htmlText = "<span class='xvm_eff'>" + (!stat.wn ? "--" :
             "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn) + "'>" + (stat.xwn == 100 ? "XX" : (stat.xwn < 10 ? "0" : "") + stat.xwn) + "</font>") + "</span>";
+        }
+        else
+        {
+            textField.htmlText = "<span class='xvm_eff'>" + (!stat.e ? "--" :
+            "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff) + "'>" + (stat.xeff == 100 ? "XX" : (stat.xeff < 10 ? "0" : "") + stat.xeff) + "</font>") + "</span>";
+        }
         return stat;
     }
 }

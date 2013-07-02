@@ -7,6 +7,9 @@
     // true - Disable display of tutorial icon
     // true - скрыть иконку обучения
     "hideTutorial": false,
+    // true - Show XVN instead of XEFF in company windows
+    // true - показывать XVN вместо XEFF в окнах рот
+    "xvnInCompany": true,
     // Ping servers; works only with xvm-stat.exe
     // Пинг серверов; работает только с xvm-stat.exe
     "pingServers": {
@@ -83,8 +86,8 @@
     // true - Show filters on tanks.
     // true - показывать фильтры отображения танков.
     "showFilters": true,
-    // true: Set the default focus to the filter text input
-    // true: Выбрать поле ввода фильтра по умолчанию
+    // true - Set the default focus to the filter text input
+    // true - Выбрать поле ввода фильтра по умолчанию
     "filterFocused": true,
     // true - Enable filter tanks in hangar by default.
     // true - включить фильтр отображения танков в ангаре по умолчанию.
