@@ -150,6 +150,7 @@ private function RefreshHangarPage():void
 
         section = Config.s_config.hangar;
         this.p_hangar.v_hideTutorial.value = section.hideTutorial;
+        this.p_hangar.v_xwnInCompany.value = section.xwnInCompany;
 
         section = Config.s_config.userInfo;
         this.p_hangar.v_showFilters.value = section.showFilters;

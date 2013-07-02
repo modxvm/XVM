@@ -7,8 +7,8 @@
     // true - Disable display of tutorial icon
     // true - скрыть иконку обучения
     "hideTutorial": false,
-    // true - Show XVN instead of XEFF in company windows
-    // true - показывать XVN вместо XEFF в окнах рот
+    // true - Show XWN instead of XEFF in company windows
+    // true - показывать XWN вместо XEFF в окнах рот
     "xwnInCompany": true,
     // Ping servers; works only with xvm-stat.exe
     // Пинг серверов; работает только с xvm-stat.exe

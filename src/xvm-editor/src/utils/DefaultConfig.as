@@ -62,6 +62,7 @@ public class DefaultConfig
             },
             hangar: {
                 hideTutorial: false,
+                xwnInCompany: true,
                 // Show ping to the servers
                 pingServers: {
                     enabled: false,
