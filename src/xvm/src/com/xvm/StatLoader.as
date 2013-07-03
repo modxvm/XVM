@@ -219,9 +219,9 @@ class com.xvm.StatLoader
         if (stat.tb == null || stat.tl == null || (forceTeff != true && stat.tb < 10 + stat.tl * 2))
             return stat;
 
-        stat.tdb = stat.td == null || stat.td < 0 ? null : Math.round(stat.td / stat.tb);
-        stat.tfb = stat.tf == null || stat.tf < 0 ? null : Math.round(stat.tf / stat.tb * 10) / 10;
-        stat.tsb = stat.ts == null || stat.ts < 0 ? null : Math.round(stat.ts / stat.tb * 10) / 10;
+        stat.tdb = (stat.td == null || stat.td < 0) ? null : Math.round(stat.td / stat.tb);
+        stat.tfb = (stat.tf == null || stat.tf < 0) ? null : Math.round(stat.tf / stat.tb * 10) / 10;
+        stat.tsb = (stat.ts == null || stat.ts < 0) ? null : Math.round(stat.ts / stat.tb * 10) / 10;
         //Logger.addObject(stat);
 
         var vi2 = VehicleInfo.getInfo2("/-" + stat.vn + ".");
@@ -231,7 +231,7 @@ class com.xvm.StatLoader
             return stat;
         }
 
-        stat.tdv = stat.td == null || stat.td < 0 ? null : Math.round(stat.td / stat.tb / vi2.hptop * 10) / 10;
+        stat.tdv = (stat.td == null || stat.td < 0) ? null : Math.round(stat.td / stat.tb / vi2.hptop * 10) / 10;
 
         var EC = { CD: 3, CF: 1 };
 //        Logger.addObject(stat);
@@ -247,10 +247,10 @@ class com.xvm.StatLoader
         var minF = vi2.avg.F * 0.4;
         var d = 1 + dD / (vi2.top.D - vi2.avg.D);
         var f = 1 + dF / (vi2.top.F - vi2.avg.F);
-        var d2 = stat.tdb < vi2.avg.D ? stat.tdb / vi2.avg.D : d;
-        var f2 = stat.tfb < vi2.avg.F ? stat.tfb / vi2.avg.F : f;
-        d = stat.tdb < vi2.avg.D ? 1 + dD / (vi2.avg.D - minD) : d;
-        f = stat.tfb < vi2.avg.F ? 1 + dF / (vi2.avg.F - minF) : f;
+        var d2 = (stat.tdb < vi2.avg.D) ? stat.tdb / vi2.avg.D : d;
+        var f2 = (stat.tfb < vi2.avg.F) ? stat.tfb / vi2.avg.F : f;
+        d = (stat.tdb < vi2.avg.D) ? 1 + dD / (vi2.avg.D - minD) : d;
+        f = (stat.tfb < vi2.avg.F) ? 1 + dF / (vi2.avg.F - minF) : f;
 
         d = Math.max(0, d);
         f = Math.max(0, f);
@@ -263,7 +263,7 @@ class com.xvm.StatLoader
 
         stat.teff = Math.max(1, Math.round(stat.te * 1000));
         stat.teff2 = Math.max(1, Math.round(stat.teff2 * 1000));
-        stat.te = (stat.teff == 0) ? 0
+        stat.te = (stat.teff == 0) ? 0 //can not be used
             : (stat.teff < 300) ? 1
             : (stat.teff < 500) ? 2
             : (stat.teff < 700) ? 3

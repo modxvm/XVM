@@ -6,7 +6,6 @@
   // Dynamic transparency by various statistical parameters.
   // Динамическая прозрачность по различным статистическим показателям.
   "alphaRating": {
-    "undefined":    "100",  // undefined  / неопределенно
     "very_bad":     "100",  // very bad   / очень плохо
     "bad":          "70",   // bad        / плохо
     "normal":       "40",   // normal     / средне
@@ -72,7 +71,6 @@
     // Dynamic transparency by TEFF (E) rating (only with xvm-stat).
     // Динамическая прозрачность по рейтингу TEFF (E) (только с xvm-stat).
     "e": [
-      { "value": 0.01, "alpha": ${"alphaRating.undefined"} },
       { "value": 2,    "alpha": ${"alphaRating.very_bad" } },
       { "value": 4,    "alpha": ${"alphaRating.bad"      } },
       { "value": 5,    "alpha": ${"alphaRating.normal"   } },
@@ -123,7 +121,6 @@
     // Dynamic transparency by average damage on current tank (only with xvm-stat).
     // Динамическая прозрачность по среднему урону за бой на текущем танке (только с xvm-stat).
     "tdb": [
-      { "value": 1,    "alpha": ${"alphaRating.undefined"} },
       { "value": 500,  "alpha": ${"alphaRating.very_bad" } },
       { "value": 1000, "alpha": ${"alphaRating.normal"   } },
       { "value": 2000, "alpha": ${"alphaRating.good"     } }
@@ -131,7 +128,6 @@
     // Dynamic transparency by average damage efficiency on current tank (only with xvm-stat).
     // Динамическая прозрачность по эффективности урона за бой на текущем танке (только с xvm-stat).
     "tdv": [
-      { "value": 0.01, "alpha": ${"alphaRating.undefined"} },
       { "value": 0.6,  "alpha": ${"alphaRating.very_bad" } },
       { "value": 0.8,  "alpha": ${"alphaRating.bad"      } },
       { "value": 1.0,  "alpha": ${"alphaRating.normal"   } },
@@ -142,7 +138,6 @@
     // Dynamic transparency by average frags per battle on current tank (only with xvm-stat).
     // Динамическая прозрачность по среднему количеству фрагов за бой на текущем танке (только с xvm-stat).
     "tfb": [
-      { "value": 0.01, "alpha": ${"alphaRating.undefined"} },
       { "value": 0.6,  "alpha": ${"alphaRating.very_bad" } },
       { "value": 0.8,  "alpha": ${"alphaRating.bad"      } },
       { "value": 1.0,  "alpha": ${"alphaRating.normal"   } },
@@ -153,7 +148,6 @@
     // Dynamic transparency by number of spotted enemies per battle on current tank (only with xvm-stat).
     // Динамическая прозрачность по среднему количеству засвеченных врагов за бой на текущем танке (только с xvm-stat).
     "tsb": [
-      { "value": 0.01, "alpha": ${"alphaRating.undefined"} },
       { "value": 0.6,  "alpha": ${"alphaRating.very_bad" } },
       { "value": 0.8,  "alpha": ${"alphaRating.bad"      } },
       { "value": 1.0,  "alpha": ${"alphaRating.normal"   } },
