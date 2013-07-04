@@ -244,7 +244,7 @@ class com.xvm.GraphicsUtil
 
     public static function GetDynamicAlphaValue(type: Number, value: Number): Number
     {
-        if (isNaN(value))
+        if (isNaN(value) || value == null)
             return 0;
 
         var cfg_root:Object = Config.s_config.alpha;

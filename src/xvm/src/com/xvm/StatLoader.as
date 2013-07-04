@@ -241,6 +241,9 @@ class com.xvm.StatLoader
         if (EC.CF != null && EC.CF > 0 && (stat.tfb == null || stat.tfb <= 0))
             return stat;
 
+        if (vi2.top.D == vi2.avg.D || vi2.top.F == vi2.avg.F)
+            return stat;
+
         var dD = stat.tdb - vi2.avg.D;
         var dF = stat.tfb - vi2.avg.F;
         var minD = vi2.avg.D * 0.4;
