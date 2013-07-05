@@ -43,7 +43,7 @@
     "groupHitsByPlayer": true,
     // Insert order: begin - insert new values to begin, end - add to end.
     // Сортировка попаданий: begin - новые значения добавляются сверху, end - снизу.
-	"insertOrder": "end",
+    "insertOrder": "end",
     // Substitution for {{dead}} macro when tank is dead.
     // Подстановка для макроса {{dead}}, когда танк умирает.
     "deadMarker": "<font face='Wingdings'>N</font>",

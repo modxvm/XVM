@@ -34,7 +34,7 @@
   "definition": {
     // Config author.
     // Автор конфига.
-    "author": "sirmax2",
+    "author": "XVM",
 
     // Config description.
     // Описание конфига.
@@ -46,11 +46,11 @@
 
     // Config last modified.
     // Дата последней модификации конфига.
-    "date": "28.05.2013",
+    "date": "06.07.2013",
 
     // Supported version of the game.
     // Поддерживаемая версия игры.
-    "gameVersion": "0.8.5",
+    "gameVersion": "0.8.7",
 
     // The minimum required version of the XVM mod.
     // Минимально необходимая версия мода XVM.
