@@ -39,11 +39,13 @@ class com.xvm.VehicleInfoData
         germany_GW_Mk_VIe:              { tiers: [ 2, 3 ],   name: null, short: "" },
         usa_T57:                        { tiers: [ 2, 3 ],   name: null, short: "" },
         france_RenaultBS:               { tiers: [ 2, 3 ],   name: null, short: "" },
+        uk_GB25_Loyd_Carrier:           { tiers: [ 2, 3 ],   name: null, short: "" },
 
         // level 3
         ussr_T_70:                      { tiers: [ 3, 5 ],   name: null, short: "" },
         ussr_BT_7:                      { tiers: [ 3, 5 ],   name: null, short: "" },
         ussr_T_46:                      { tiers: [ 3, 5 ],   name: null, short: "" },
+        ussr_LTP:                       { tiers: [ 3, 5 ],   name: null, short: "" },
         germany_Pz_II_AusfG:            { tiers: [ 3, 5 ],   name: null, short: "" },
         germany_Pz38t:                  { tiers: [ 3, 5 ],   name: null, short: "" },
         germany_PzI_ausf_C:             { tiers: [ 3, 5 ],   name: null, short: "" },
@@ -71,6 +73,7 @@ class com.xvm.VehicleInfoData
         germany_Wespe:                  { tiers: [ 3, 5 ],   name: null, short: "" },
         usa_M7_Priest:                  { tiers: [ 3, 5 ],   name: null, short: "" },
         france_Lorraine39_L_AM:         { tiers: [ 3, 5 ],   name: null, short: "" },
+        uk_GB27_Sexton:                 { tiers: [ 3, 5 ],   name: null, short: "" },
 
         // level 4
         ussr_A_20:                      { tiers: [ 4, 8 ],   name: null, short: "" },
@@ -96,6 +99,7 @@ class com.xvm.VehicleInfoData
         germany_Sturmpanzer_II:         { tiers: [ 4, 6 ],   name: null, short: "" },
         usa_M37:                        { tiers: [ 4, 6 ],   name: null, short: "" },
         france_AMX_Ob_Am105:            { tiers: [ 4, 6 ],   name: null, short: "" },
+        uk_GB26_Birch_Gun:              { tiers: [ 4, 6 ],   name: null, short: "" },
 
         // level 5
         germany_VK1602:                 { tiers: [ 6, 9 ],   name: null, short: "" },
@@ -125,8 +129,10 @@ class com.xvm.VehicleInfoData
         usa_M41:                        { tiers: [ 5, 7 ],   name: null, short: "" },
         france__105_leFH18B2:           { tiers: [ 5, 7 ],   name: null, short: "" },
         france_AMX_105AM:               { tiers: [ 5, 7 ],   name: null, short: "" },
+        uk_GB28_Bishop:                 { tiers: [ 5, 7 ],   name: null, short: "" },
 
         // level 6
+        ussr_MT25:                      { tiers: [ 7, 10 ],  name: null, short: "" },
         germany_VK2801:                 { tiers: [ 7, 10 ],  name: null, short: "" },
         usa_T21:                        { tiers: [ 7, 10 ],  name: null, short: "" },
         france_AMX_12t:                 { tiers: [ 7, 10 ],  name: null, short: "" },
@@ -162,6 +168,7 @@ class com.xvm.VehicleInfoData
         germany_Hummel:                 { tiers: [ 6, 8 ],   name: null, short: "" },
         usa_M44:                        { tiers: [ 6, 8 ],   name: null, short: "" },
         france_AMX_13F3AM:              { tiers: [ 6, 8 ],   name: null, short: "" },
+        uk_GB77_FV304:                  { tiers: [ 6, 8 ],   name: null, short: "" },
 
         // level 7
         germany_Auf_Panther:            { tiers: [ 8, 11 ],  name: null, short: "" },
@@ -201,6 +208,7 @@ class com.xvm.VehicleInfoData
         germany_G_Panther:              { tiers: [ 7, 9 ],   name: null, short: "" },
         usa_M12:                        { tiers: [ 7, 9 ],   name: null, short: "" },
         france_Lorraine155_50:          { tiers: [ 7, 9 ],   name: null, short: "" },
+        uk_GB29_Crusader_5inch:         { tiers: [ 7, 9 ],   name: null, short: "" },
 
         // level 8
         france_AMX_13_90:               { tiers: [ 9, 12 ],  name: null, short: "" },
@@ -239,6 +247,7 @@ class com.xvm.VehicleInfoData
         germany_GW_Tiger_P:             { tiers: [ 8, 10 ],  name: null, short: "" },
         usa_M40M43:                     { tiers: [ 8, 10 ],  name: null, short: "" },
         france_Lorraine155_51:          { tiers: [ 8, 10 ],  name: null, short: "" },
+        uk_GB79_FV206:                  { tiers: [ 8, 10 ],  name: null, short: "" },
 
         // level 9
         ussr_T_54:                      { tiers: [ 9, 11 ],  name: null, short: "54" },
@@ -269,6 +278,7 @@ class com.xvm.VehicleInfoData
         germany_G_Tiger:                { tiers: [ 9, 11 ],  name: null, short: "" },
         usa_M53_55:                     { tiers: [ 9, 11 ],  name: null, short: "" },
         france_Bat_Chatillon155_55:     { tiers: [ 9, 11 ],  name: null, short: "" },
+        uk_GB30_FV3805:                 { tiers: [ 9, 11 ],  name: null, short: "" },
 
         // level 10
         ussr_T62A:                      { tiers: [ 10, 12 ], name: null, short: "62" },
@@ -302,6 +312,7 @@ class com.xvm.VehicleInfoData
         germany_G_E:                    { tiers: [ 10, 12 ], name: null, short: "" },
         usa_T92:                        { tiers: [ 10, 12 ], name: null, short: "" },
         france_Bat_Chatillon155_58:     { tiers: [ 10, 12 ], name: null, short: "" },
+        uk_GB31_Conqueror_Gun:          { tiers: [ 10, 12 ], name: null, short: "" },
 
         // non-standard
         usa_T2_lt:                      { tiers: [ 2, 4 ],   name: null, short: "" },
@@ -342,6 +353,7 @@ class com.xvm.VehicleInfoData
         usa_T26_E4_SuperPershing:       { tiers: [ 8, 9 ],   name: null, short: "" },
         china_Ch01_Type59:              { tiers: [ 8, 9 ],   name: null, short: "" },
         china_Ch01_Type59_gold:         { tiers: [ 8, 9 ],   name: null, short: "" },
+        china_Ch14_T34_3:               { tiers: [ 8, 9 ],   name: null, short: "" },
         germany_JagdTiger_SdKfz_185:    { tiers: [ 8, 9 ],   name: null, short: "" },
 
         // DO NOT REMOVE
