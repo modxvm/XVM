@@ -73,6 +73,8 @@ class wot.Minimap.model.mapSize.MapSizeBase
                 return 100;
             case "73_asia_korea": // Священная долина
                 return 100;
+            case "85_winter": // Белогорск-19
+                return 100;
             default:
                 return undefined;
         }
@@ -275,6 +277,10 @@ class wot.Minimap.model.mapSize.MapSizeBase
             case "Священная долина":
             case "Sacred Valley":
                 return sizeBySytemMapName("73_asia_korea");
+
+            case "Белогорск-19":
+            case "Belogorsk-19":
+                return sizeBySytemMapName("85_winter");
 
             default:
                 return undefined;
