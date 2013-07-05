@@ -773,19 +773,19 @@ class com.xvm.DefaultConfig
                     { value: 999, color: ColorPalette.purple }    // 92.5 - XX   - unique     (better then 99.9% of players)
                 ],
                 eff: [
-                    { value: 645,  color: ColorPalette.red },     // very bad
-                    { value: 875,  color: ColorPalette.orange },  // bad
-                    { value: 1155, color: ColorPalette.yellow },  // normal
-                    { value: 1470, color: ColorPalette.green },   // good
-                    { value: 1740, color: ColorPalette.blue },    // very good
+                    { value: 630,  color: ColorPalette.red },     // very bad
+                    { value: 860,  color: ColorPalette.orange },  // bad
+                    { value: 1140, color: ColorPalette.yellow },  // normal
+                    { value: 1460, color: ColorPalette.green },   // good
+                    { value: 1735, color: ColorPalette.blue },    // very good
                     { value: 9999, color: ColorPalette.purple }   // unique
                 ],
                 wn: [
-                    { value: 435,  color: ColorPalette.red },     // very bad
-                    { value: 805,  color: ColorPalette.orange },  // bad
-                    { value: 1200, color: ColorPalette.yellow },  // normal
-                    { value: 1595, color: ColorPalette.green },   // good
-                    { value: 1900, color: ColorPalette.blue },    // very good
+                    { value: 425,  color: ColorPalette.red },     // very bad
+                    { value: 795,  color: ColorPalette.orange },  // bad
+                    { value: 1175, color: ColorPalette.yellow },  // normal
+                    { value: 1570, color: ColorPalette.green },   // good
+                    { value: 1885, color: ColorPalette.blue },    // very good
                     { value: 9999, color: ColorPalette.purple }   // unique
                 ],
                 rating: [
@@ -884,15 +884,15 @@ class com.xvm.DefaultConfig
                     { value: 9999, alpha: 40 }
                 ],
                 eff: [
-                    { value: 900,  alpha: 100 },
-                    { value: 1200, alpha: 80 },
-                    { value: 1500, alpha: 60 },
+                    { value: 860,  alpha: 100 },
+                    { value: 1140, alpha: 80 },
+                    { value: 1460, alpha: 60 },
                     { value: 9999, alpha: 40 }
                 ],
                 wn: [
-                    { value: 900,  alpha: 100 },
-                    { value: 1200, alpha: 80 },
-                    { value: 1500, alpha: 60 },
+                    { value: 795,  alpha: 100 },
+                    { value: 1175, alpha: 80 },
+                    { value: 1570, alpha: 60 },
                     { value: 9999, alpha: 40 }
                 ],
                 rating: [
