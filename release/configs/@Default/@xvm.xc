@@ -27,7 +27,7 @@
 
   // Version of the editor.
   // Версия редактора.
-  "editorVersion": "0.50",
+  "editorVersion": "0.57",
 
   // Common config options. All settings information in the mod not being used.
   // Общие параметры конфига. Все параметры информационные, в моде не используются.

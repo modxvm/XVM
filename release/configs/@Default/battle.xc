@@ -24,7 +24,7 @@
     "useStandardMarkers": false,
     // Path to clan icons folder relative to res_mods/xvm/res.
     // Путь к папке иконок кланов относительно res_mods/xvm/res.
-    "clanIconsFolder": "clanicons"
+    "clanIconsFolder": "clanicons/"
   },
   // Frag counter panel at top side of battle windows interface.
   // Панель счёта в бою.

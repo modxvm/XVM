@@ -41,53 +41,53 @@
         // Формат поля.
         "format": {
           // Союзник.
-          "ally":  "<span class='mm_a'>{{vehicle}}</span>",
+          "ally":           "<span class='mm_a'>{{vehicle}}</span>",
           // Тимкиллер.
-          "teamkiller":  "<span class='mm_t'>{{vehicle}}</span>",
+          "teamkiller":     "<span class='mm_t'>{{vehicle}}</span>",
           // Враг.
-          "enemy": "<span class='mm_e'>{{vehicle}}</span>",
+          "enemy":          "<span class='mm_e'>{{vehicle}}</span>",
           // Взводный.
-          "squad": "<textformat leading='-2'><span class='mm_s'><i>{{short-nick}}</i>\n{{vehicle}}</span><textformat>",
+          "squad":          "<textformat leading='-2'><span class='mm_s'><i>{{short-nick}}</i>\n{{vehicle}}</span><textformat>",
           // Own marker or spectated subject.
           // Свой маркер и маркер приёмника камеры наблюдения в случае смерти.
-          "oneself": "",
+          "oneself":        "",
           // Out of radio range ally
           // Союзник, с которым потеряна связь
-          "lostally":  "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_la'><i>{{vehicle}}</i></span>",
+          "lostally":       "<span class='mm_dot'>\u2022</span><span class='mm_la'><i>{{vehicle}}</i></span>",
           // Out of radio range teamkiller
           // Тимкиллер, с которым потеряна связь
-          "lostteamkiller":  "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_lt'><i>{{vehicle}}</i></span>",
+          "lostteamkiller": "<span class='mm_dot'>\u2022</span><span class='mm_lt'><i>{{vehicle}}</i></span>",
           // Lost enemy units.
           // Противник, пропавший из засвета
-          "lost":  "<span class='mm_dot'>\u2022</span><span class='mm_l'><i>{{vehicle}}</i></span>",
+          "lost":           "<span class='mm_dot'>\u2022</span><span class='mm_l'><i>{{vehicle}}</i></span>",
           // Out of radio range squadman
           // Взводный, с которым потеряна связь
-          "lostsquad":  "<textformat leading='-4'><span class='mm_dot'>\u2022</span><span class='mm_ls'><i>{{short-nick}}\n   {{vehicle}}</i></span><textformat>",
+          "lostsquad":      "<textformat leading='-4'><span class='mm_dot'>\u2022</span><span class='mm_ls'><i>{{short-nick}}</i>\n   {{vehicle}}</span><textformat>",
           // Мертвый союзник.
-          "deadally":  "<span class='mm_dot'>\u2022</span><span class='mm_da'> {{vehicle}}</span>",
+          "deadally":       "<span class='mm_dot'>\u2022</span><span class='mm_da'> {{vehicle}}</span>",
           // Мертвый тимкиллер.
-          "deadteamkiller":  "<span class='mm_dot'>\u2022</span><span class='mm_dt'> {{vehicle}}</span>",
+          "deadteamkiller": "<span class='mm_dot'>\u2022</span><span class='mm_dt'> {{vehicle}}</span>",
           // Мертвый противник.
-          "deadenemy": "<span class='mm_dot'>\u2022</span><span class='mm_de'> {{vehicle}}</span>",
+          "deadenemy":      "<span class='mm_dot'>\u2022</span><span class='mm_de'> {{vehicle}}</span>",
           // Мертвый взводный.
-          "deadsquad": "<textformat leading='-4'><span class='mm_dot'>\u2022</span><span class='mm_ds'><i>{{short-nick}}</i>\n   {{vehicle}}</span><textformat>"
+          "deadsquad":      "<textformat leading='-4'><span class='mm_dot'>\u2022</span><span class='mm_ds'><i>{{short-nick}}</i>\n   {{vehicle}}</span><textformat>"
         },
         // CSS style (fonts and colors option)
         // CSS стиль (настройка шрифтов и цветов)
         "css": {
-          "ally":			".mm_a{font-family:$FieldFont; font-size:8px; color:#C8FFA6;}",
-          "teamkiller":		".mm_t{font-family:$FieldFont; font-size:8px; color:#A6F8FF;}",
-          "enemy":			".mm_e{font-family:$FieldFont; font-size:8px; color:#FCA9A4;}",
-          "squad":			".mm_s{font-family:$FieldFont; font-size:8px; color:#FFD099;}",
-          "oneself":		".mm_o{font-family:$FieldFont; font-size:8px; color:#FFFFFF;}",
-          "lostally":		".mm_la{font-family:$FieldFont; font-size:8px; color:#C8FFA6;} .mm_dot{font-family:Arial; font-size:17px; color:#B4E595;}",
-          "lostteamkiller":	".mm_lt{font-family:$FieldFont; font-size:8px; color:#A6F8FF;} .mm_dot{font-family:Arial; font-size:17px; color:#00D2E5;}",
-          "lost":			".mm_l{font-family:$FieldFont; font-size:8px; color:#FCA9A4;} .mm_dot{font-family:Arial; font-size:17px; color:#E59995;}",
-          "lostsquad":		".mm_ls{font-family:$FieldFont; font-size:8px; color:#FFD099;} .mm_dot{font-family:Arial; font-size:17px; color:#E5BB8A;}",
-          "deadally":		".mm_da{font-family:$FieldFont; font-size:8px; color:#6E8C5B;} .mm_dot{ffont-family:Arial; font-size:17px; color:#004D00;}",
-          "deadteamkiller":	".mm_dt{font-family:$FieldFont; font-size:8px; color:#5B898C;} .mm_dot{ffont-family:Arial; font-size:17px; color:#043A40;}",
-          "deadenemy":		".mm_de{font-family:$FieldFont; font-size:8px; color:#996763;} .mm_dot{font-family:Arial; font-size:17px; color:#4D0300;}",
-          "deadsquad":		".mm_ds{font-family:$FieldFont; font-size:8px; color:#997C5C;} .mm_dot{font-family:Arial; font-size:17px; color:#663800;}"
+          "ally":            ".mm_a{font-family:$FieldFont; font-size:8px; color:#C8FFA6;}",
+          "teamkiller":      ".mm_t{font-family:$FieldFont; font-size:8px; color:#A6F8FF;}",
+          "enemy":           ".mm_e{font-family:$FieldFont; font-size:8px; color:#FCA9A4;}",
+          "squad":           ".mm_s{font-family:$FieldFont; font-size:8px; color:#FFD099;}",
+          "oneself":         ".mm_o{font-family:$FieldFont; font-size:8px; color:#FFFFFF;}",
+          "lostally":       ".mm_la{font-family:$FieldFont; font-size:8px; color:#C8FFA6;} .mm_dot{font-family:Arial; font-size:17px; color:#B4E595;}",
+          "lostteamkiller": ".mm_lt{font-family:$FieldFont; font-size:8px; color:#A6F8FF;} .mm_dot{font-family:Arial; font-size:17px; color:#00D2E5;}",
+          "lost":            ".mm_l{font-family:$FieldFont; font-size:8px; color:#FCA9A4;} .mm_dot{font-family:Arial; font-size:17px; color:#E59995;}",
+          "lostsquad":      ".mm_ls{font-family:$FieldFont; font-size:8px; color:#FFD099;} .mm_dot{font-family:Arial; font-size:17px; color:#E5BB8A;}",
+          "deadally":       ".mm_da{font-family:$FieldFont; font-size:8px; color:#6E8C5B;} .mm_dot{font-family:Arial; font-size:17px; color:#004D00;}",
+          "deadteamkiller": ".mm_dt{font-family:$FieldFont; font-size:8px; color:#5B898C;} .mm_dot{font-family:Arial; font-size:17px; color:#043A40;}",
+          "deadenemy":      ".mm_de{font-family:$FieldFont; font-size:8px; color:#996763;} .mm_dot{font-family:Arial; font-size:17px; color:#4D0300;}",
+          "deadsquad":      ".mm_ds{font-family:$FieldFont; font-size:8px; color:#997C5C;} .mm_dot{font-family:Arial; font-size:17px; color:#663800;}"
         },
         // Fields shadow.
         // Тени полей.
@@ -123,19 +123,19 @@
         // Field offset ralative to current icon (except lost - relative to enemy last seen position).
         // Смещение полей относительно текущей иконки (кроме lost и dead- относительно последних координат видимой позиции).
         "offset": {
-          "ally":			{"x": 3, "y": -1},
-          "teamkiller":		{"x": 3, "y": -1},
-          "enemy":			{"x": 3, "y": -1},
-          "squad":			{"x": 3, "y": -2},
-          "oneself":		{"x": 0, "y": 0},
-          "lostally":		{"x": -5, "y": -11},
-          "lostteamkiller":	{"x": -5, "y": -11},
-          "lost":			{"x": -5, "y": -11},
-          "lostsquad":		{"x": -5, "y": -11},
-          "deadally":		{"x": -5, "y": -11},
-          "deadteamkiller":	{"x": -5, "y": -11},
-          "deadenemy":		{"x": -5, "y": -11},
-          "deadsquad":		{"x": -5, "y": -11}
+          "ally":           {"x": 3, "y": -1},
+          "teamkiller":     {"x": 3, "y": -1},
+          "enemy":          {"x": 3, "y": -1},
+          "squad":          {"x": 3, "y": -2},
+          "oneself":        {"x": 0, "y": 0},
+          "lostally":       {"x": -5, "y": -11},
+          "lostteamkiller": {"x": -5, "y": -11},
+          "lost":           {"x": -5, "y": -11},
+          "lostsquad":      {"x": -5, "y": -11},
+          "deadally":       {"x": -5, "y": -11},
+          "deadteamkiller": {"x": -5, "y": -11},
+          "deadenemy":      {"x": -5, "y": -11},
+          "deadsquad":      {"x": -5, "y": -11}
         },
         // Прозрачность текстовых полей.
         "alpha" : {
