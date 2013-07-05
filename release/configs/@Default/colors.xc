@@ -202,21 +202,21 @@
     // Dynamic color by efficiency (only with xvm-stat).
     // Динамический цвет по эффективности (только с xvm-stat).
     "eff": [
-      { "value": 645,  "color": ${"def.colorRating.very_bad" } },  //    0 - 644  - very bad
-      { "value": 875,  "color": ${"def.colorRating.bad"      } },  //  645 - 874  - bad
-      { "value": 1155, "color": ${"def.colorRating.normal"   } },  //  875 - 1154 - normal
-      { "value": 1470, "color": ${"def.colorRating.good"     } },  // 1155 - 1469 - good
-      { "value": 1740, "color": ${"def.colorRating.very_good"} },  // 1470 - 1739 - very good
+      { "value": 630,  "color": ${"def.colorRating.very_bad" } },  //    0 - 644  - very bad
+      { "value": 860,  "color": ${"def.colorRating.bad"      } },  //  645 - 874  - bad
+      { "value": 1140, "color": ${"def.colorRating.normal"   } },  //  875 - 1154 - normal
+      { "value": 1460, "color": ${"def.colorRating.good"     } },  // 1155 - 1469 - good
+      { "value": 1735, "color": ${"def.colorRating.very_good"} },  // 1470 - 1739 - very good
       { "value": 9999, "color": ${"def.colorRating.unique"   } }   // 1740 - *    - unique
     ],
     // Dynamic color by WN6 rating (only with xvm-stat).
     // Динамический цвет по рейтингу WN6 (только с xvm-stat).
     "wn": [
-      { "value": 435,  "color": ${"def.colorRating.very_bad" } },  //    0 - 434  - very bad
-      { "value": 805,  "color": ${"def.colorRating.bad"      } },  //  435 - 804  - bad
-      { "value": 1200, "color": ${"def.colorRating.normal"   } },  //  805 - 1199 - normal
-      { "value": 1595, "color": ${"def.colorRating.good"     } },  // 1200 - 1594 - good
-      { "value": 1900, "color": ${"def.colorRating.very_good"} },  // 1595 - 1899 - very good
+      { "value": 425,  "color": ${"def.colorRating.very_bad" } },  //    0 - 434  - very bad
+      { "value": 795,  "color": ${"def.colorRating.bad"      } },  //  435 - 804  - bad
+      { "value": 1175, "color": ${"def.colorRating.normal"   } },  //  805 - 1199 - normal
+      { "value": 1570, "color": ${"def.colorRating.good"     } },  // 1200 - 1594 - good
+      { "value": 1885, "color": ${"def.colorRating.very_good"} },  // 1595 - 1899 - very good
       { "value": 9999, "color": ${"def.colorRating.unique"   } }   // 1900 - *    - unique
     ],
     // Dynamic color by TEFF (E) rating (only with xvm-stat).

@@ -51,21 +51,21 @@
     // Dynamic transparency by efficiency (only with xvm-stat).
     // Динамическая прозрачность по эффективности (только с xvm-stat).
     "eff": [
-      { "value": 645,  "alpha": ${"alphaRating.very_bad" } },
-      { "value": 875,  "alpha": ${"alphaRating.bad"      } },
-      { "value": 1155, "alpha": ${"alphaRating.normal"   } },
-      { "value": 1470, "alpha": ${"alphaRating.good"     } },
-      { "value": 1740, "alpha": ${"alphaRating.very_good"} },
+      { "value": 630,  "alpha": ${"alphaRating.very_bad" } },
+      { "value": 860,  "alpha": ${"alphaRating.bad"      } },
+      { "value": 1140, "alpha": ${"alphaRating.normal"   } },
+      { "value": 1460, "alpha": ${"alphaRating.good"     } },
+      { "value": 1735, "alpha": ${"alphaRating.very_good"} },
       { "value": 9999, "alpha": ${"alphaRating.unique"   } }
     ],
     // Dynamic transparency by WN6 rating (only with xvm-stat).
     // Динамическая прозрачность по рейтингу WN6 (только с xvm-stat).
     "wn": [
-      { "value": 435,  "alpha": ${"alphaRating.very_bad" } },
-      { "value": 805,  "alpha": ${"alphaRating.bad"      } },
-      { "value": 1200, "alpha": ${"alphaRating.normal"   } },
-      { "value": 1595, "alpha": ${"alphaRating.good"     } },
-      { "value": 1900, "alpha": ${"alphaRating.very_good"} },
+      { "value": 425,  "alpha": ${"alphaRating.very_bad" } },
+      { "value": 795,  "alpha": ${"alphaRating.bad"      } },
+      { "value": 1175, "alpha": ${"alphaRating.normal"   } },
+      { "value": 1570, "alpha": ${"alphaRating.good"     } },
+      { "value": 1885, "alpha": ${"alphaRating.very_good"} },
       { "value": 9999, "alpha": ${"alphaRating.unique"   } }
     ],
     // Dynamic transparency by TEFF (E) rating (only with xvm-stat).
