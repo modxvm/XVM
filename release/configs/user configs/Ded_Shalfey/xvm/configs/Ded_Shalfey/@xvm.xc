@@ -36,7 +36,7 @@
 
     // Config description.
     // Описание конфига.
-    "description": "Version_8",
+    "description": "Version_9",
 
     // Address to config updates.
     // Адрес, где выкладываются обновления конфига.
@@ -44,16 +44,20 @@
 
     // Config last modified.
     // Дата последней модификации конфига.
-    "date": "10.05.2013",
+    "date": "26.06.2013",
 
     // Supported version of the game.
     // Поддерживаемая версия игры.
-    "gameVersion": "0.8.5",
+    "gameVersion": "0.8.6",
 
     // The minimum required version of the XVM mod.
     // Минимально необходимая версия мода XVM.
     "modMinVersion": "4.0.0"
   },
+
+  // Parameters for login screen.
+  // Параметры экрана логина.
+  "login": ${"login.xc":"login"},
 
   // Parameters for hangar.
   // Параметры ангара.
@@ -70,6 +74,10 @@
   // Frag counter panel.
   // Панель счёта в бою.
   "fragCorrelation": ${"battle.xc":"fragCorrelation"},
+  
+  // Ingame crits panel by "expert" skill.
+  // Внутриигровая панель критов от навыка "экспет".
+  "expertPanel": ${"battle.xc":"expertPanel"},
 
   // Options for player statistics (only with xvm-stat).
   // Блок управлением статистикой (только с xvm-stat).
@@ -113,11 +121,11 @@
 
   // Minimap.
   // Миникарта.
-  "minimap": ${"minimap/minimap.xc":"minimap"},
+  "minimap": ${"minimap.xc":"minimap"},
 
   // Over-target markers.
   // Маркеры над танками.
-  "markers": ${"markers/markers.xc":"markers"},
+  "markers": ${"markers.xc":"markers"},
 
   // Color settings.
   // Настройки цветов.

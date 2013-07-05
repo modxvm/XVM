@@ -25,8 +25,8 @@
     // Path to clan icons folder relative to res_mods/xvm/res.
     // Путь к папке иконок кланов относительно res_mods/xvm/res.
     "clanIconsFolder": "clanicons",
-  // Visual elements
-  // двигать визуальные элименты
+    // Visual elements
+    // Двигать визуальные элименты
     "elements": ${"battleElements.xc":"elements"}
   },
   // Frag counter panel at top side of battle windows interface.

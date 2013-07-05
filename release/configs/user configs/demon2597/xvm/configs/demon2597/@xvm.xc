@@ -44,11 +44,11 @@
 
     // Config last modified.
     // Дата последней модификации конфига.
-    "date": "17.05.2013",
+    "date": "21.06.2013",
 
     // Supported version of the game.
     // Поддерживаемая версия игры.
-    "gameVersion": "0.8.5",
+    "gameVersion": "0.8.6",
 
     // The minimum required version of the XVM mod.
     // Минимально необходимая версия мода XVM.
@@ -57,93 +57,105 @@
 
   // Parameters for login screen.
   // Параметры экрана логина.
-  "login": ${"login.xc":"login"},
+  "login": ${ "login.xc":"login" },
 
   // Parameters for hangar.
   // Параметры ангара.
-  "hangar": ${"hangar.xc":"hangar"},
+  "hangar": ${ "hangar.xc":"hangar" },
 
   // Parameters for userinfo window.
   // Параметры окна достижений.
-  "userInfo": ${"hangar.xc":"userInfo"},
+  "userInfo": ${ "hangar.xc":"userInfo" },
 
   // General parameters for the battle interface.
   // Общие параметры боевого интерфейса.
-  "battle": ${"battle.xc":"battle"},
+  "battle": ${ "battle.xc":"battle" },
 
   // Frag counter panel.
   // Панель счёта в бою.
-  "fragCorrelation": ${"battle.xc":"fragCorrelation"},
+  "fragCorrelation": ${ "battle.xc":"fragCorrelation" },
 
   // Ingame crits panel by "expert" skill.
   // Внутриигровая панель критов от навыка "экспет".
-  "expertPanel": ${"battle.xc":"expertPanel"},
+  "expertPanel": ${ "battle.xc":"expertPanel" },
 
   // Options for player statistics (only with xvm-stat).
   // Блок управлением статистикой (только с xvm-stat).
-  "rating": ${"rating.xc":"rating"},
+  "rating": ${ "rating.xc":"rating" },
 
   // Special XVM hotkeys.
   // Специальные горячие клавиши XVM.
-  "hotkeys": ${"hotkeys.xc":"hotkeys"},
+  "hotkeys": ${ "hotkeys.xc":"hotkeys" },
 
   // Parameters for squad window.
   // Параметры окна взвода.
-  "squad": ${"squad.xc":"squad"},
+  "squad": ${ "squad.xc":"squad" },
 
   // Parameters of the Battle Loading screen.
   // Параметры экрана загрузки боя.
-  "battleLoading": ${"battleLoading.xc":"battleLoading"},
+  "battleLoading": ${ "battleLoading.xc":"battleLoading" },
 
   // Parameters of the Battle Statistics form.
   // Параметры окна статистики по клавише Tab.
-  "statisticForm": ${"statisticForm.xc":"statisticForm"},
+  "statisticForm": ${ "statisticForm.xc":"statisticForm" },
 
   // Parameters of the Players Panels ("ears").
   // Параметры панелей игроков ("ушей").
-  "playersPanel": ${"playersPanel.xc":"playersPanel"},
+  "playersPanel": ${ "playersPanel.xc":"playersPanel" },
 
   // Parameters of the After Battle Screen.
   // Параметры окна послебоевой статистики.
-  "finalStatistic": ${"finalStatistic.xc":"finalStatistic"},
+  "finalStatistic": ${ "finalStatistic.xc":"finalStatistic" },
 
   // {{turret}} marker display strings.
   // Отображаемые строки {{turret}} маркера.
-  "turretMarkers": ${"turretMarkers.xc":"turretMarkers"},
+  "turretMarkers": ${ "turretMarkers.xc":"turretMarkers" },
 
   // Hit log (my hits calculator).
   // Лог попаданий (счетчик своих попаданий).
-  "hitLog": ${"hitLog.xc":"hitLog"},
+  "hitLog": ${ "hitLog.xc":"hitLog" },
 
   // Capture bar.
   // Полоса захвата.
-  "captureBar": ${"captureBar.xc":"captureBar"},
+  "captureBar": ${ "captureBar.xc":"captureBar" },
 
   // Minimap.
   // Миникарта.
-  "minimap": ${"minimap/minimap.xc":"minimap"},
+  "minimap": ${ "minimap.xc":"minimap" },
 
   // Over-target markers.
   // Маркеры над танками.
-  "markers": ${"markers/markers.xc":"markers"},
+  "markers": ${ "markers.xc":"markers" },
 
   // Color settings.
   // Настройки цветов.
-  "colors": ${"colors.xc":"colors"},
+  "colors": ${ "colors.xc":"colors" },
 
   // Options for dynamic transparency.
   // Настройки динамической прозрачности.
-  "alpha": ${"alpha.xc":"alpha"},
+  "alpha": ${ "alpha.xc":"alpha" },
 
   // Text substitutions.
   // Текстовые подстановки.
-  "texts": ${"texts.xc":"texts"},
+  "texts": ${ "texts.xc":"texts" },
 
   // Icon sets.
   // Наборы иконок.
-  "iconset": ${"iconset.xc":"iconset"},
+  "iconset": ${ "iconset.xc":"iconset" },
 
   // Vehicle names mapping.
   // Замена названий танков.
-  "vehicleNames": ${"vehicleNames.xc":"vehicleNames"}
+  "vehicleNames": ${ "vehicleNames.xc":"vehicleNames" },
+
+  // Constants.
+  // Константы.
+  "consts": {
+  // Darking factors of vehicle class marks.
+  // Коффициенты затемнения значков класса техники.
+  "VM_COEFF_VMM": 0.88,			// vehicle markers manager (alive) / маркеры над танком (живые)
+  "VM_COEFF_VMM_DEAD": 0.7,	// vehicle markers manager (dead) / маркеры над танком (мертвые) 
+  "VM_COEFF_MM_PLAYER": 0.93,	// minimap (player) / игроки на миникарте
+  "VM_COEFF_MM_BASE": 0.8,		// minimap (base) / базы на миникарте
+  "VM_COEFF_FC": 0.93			// frag correlation / значки в панели счета
+  }
 }

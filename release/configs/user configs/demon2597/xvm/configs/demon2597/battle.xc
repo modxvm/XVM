@@ -18,7 +18,7 @@
     "highlightVehicleIcon": false,
     // Format of clock on the Debug Panel (near FPS). Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds. "" - remove clock.
     // Формат часов на экране панели отладки (возле FPS). Формат: Y:год, M:месяц, D:день, H:часы, N:минуты, S:секунды. "" - убрать часы.
-    "clockFormat": "",
+    "clockFormat": "H:N",
     // true - use standard client vehicle markers.
     // true - использовать стандартные маркеры клиента.
     "useStandardMarkers": false,
@@ -34,12 +34,12 @@
     "hideTeamTextFields": true
   },
   // Ingame crits panel by "expert" skill.
-  // Внутриигровая панель критов от навыка "экспет".
+  // Внутриигровая панель критов от навыка "эксперт".
   "expertPanel": {
     // Delay for panel disappear. Original value was 5.
-    // Задержка исчезновения панели. Оригинальне значение было 5.
+    // Задержка исчезновения панели. Оригинальное значение было 5.
     "delay": 15,
-    // Panel scaling. 100 в оригинале.
+    // Panel scaling. Original value was 100.
     // Увеличение панели. 100 в оригинале.
     "scale": 150
   }

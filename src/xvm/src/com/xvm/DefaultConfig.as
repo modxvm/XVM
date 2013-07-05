@@ -478,7 +478,7 @@ class com.xvm.DefaultConfig
                       { "g_e":                  {"enabled": true, "thickness": 1, "alpha": 60, "color": "0xEE4444", "distance": 1333} },
                       { "t92":                  {"enabled": true, "thickness": 1, "alpha": 60, "color": "0xEE4444", "distance": 1411} },
                       { "bat_chatillon155_58":  {"enabled": true, "thickness": 1, "alpha": 60, "color": "0xEE4444", "distance": 1413} },
-                      { "gb31_conqueror_gun":   {"enabled": true, "thickness": 1, "alpha": 60, "color": "0xEE4444", "distance": 1007} },
+                      { "gb31_conqueror_gun":   {"enabled": true, "thickness": 1, "alpha": 60, "color": "0xEE4444", "distance": 1007} }
                   ]
                 },
                 square: {

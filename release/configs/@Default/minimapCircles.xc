@@ -94,7 +94,7 @@
             { "g_e":                  {"$ref": { "path": "rangeCircle" }, "distance": 1333} },
             { "t92":                  {"$ref": { "path": "rangeCircle" }, "distance": 1411} },
             { "bat_chatillon155_58":  {"$ref": { "path": "rangeCircle" }, "distance": 1413} },
-            { "gb31_conqueror_gun":   {"$ref": { "path": "rangeCircle" }, "distance": 1007} },
+            { "gb31_conqueror_gun":   {"$ref": { "path": "rangeCircle" }, "distance": 1007} }
         ]
     }
 }

@@ -1,0 +1,239 @@
+﻿<html>
+<!-- xvm.alastanka.org.ua #FF9000#D042F3-->
+<HEAD>
+<META http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>XVM: NEW config @xvm.xc специально для xvm.alastanka.org.ua</title>
+</HEAD>
+<BODY>
+<table border="1" bgcolor="" bordercolor="#FF9000" align="center">
+<tr bgcolor="#FF9000">
+<td><img src="http://www.modxvm.com/assets/xvm.png"><br>18.06.2013
+<td colspan="3"><a href="http://www.modxvm.com" title="XVM: eXtended Visualisation Mod">XVM: eXtended Visualisation Mod</a> Официальный сайт. Скачивание и документация	<a href="http://code.google.com/p/wot-xvm/source/browse/trunk/release/configs/@Default" target="_blank" title="Исходники XVM: Последние изменения в файлах нового конфига">Исходники XVM: Последние изменения в файлах нового конфига</a>					
+			<br>XVM: Редактор NEW конфигураций @xvm.xc специально для <a href="http://xvm.alastanka.org.ua" title="XVM: Редактор NEW конфигураций @xvm.xc специально для xvm.alastanka.org.ua">xvm.alastanka.org.ua</a>
+			<br>Для правильной работы разместить этот файл в папку с файлом @xvm.xc пример мой: \World_of_Tanks\res_mods\xvm\configs\user configs\Alastanka\@xvm.xc, кликнув на нужный файл он откроется для редактирования. 
+			
+
+<tr><td>1<td><a href="@xvm.xc">@xvm.xc</a>																					<td> Главный конфигурационный файл.													<td>
+	<ul>
+	<li>Версия конфига</li>
+	<li>Версия редактора</li>
+	<li>Общие параметры конфига. Все параметры информационные, в моде не используются</li>
+	<ul>
+		<li>Автор конфига</li>
+		<li>Описание конфига</li>
+		<li>Адрес, где выкладываются обновления конфига</li>
+		<li>Дата последней модификации конфига</li>
+		<li>Поддерживаемая версия игры</li>
+		<li>Минимально необходимая версия мода XVM</li>
+	</ul>
+	<li>Ссылки на все файлы конфига(Все настройки вынесены в отдельные файлы)</li>
+	<li>* Коффициенты затемнения значков класса техники "consts", вынесен Alastanka в (consts.xc)</li>
+	</ul>
+
+<tr><td>2<td><a href="alpha.xc">alpha.xc</a>																				<td> Настройки динамической прозрачности. Значения от меньшего к большему.			<td>
+	<ul>
+	<li>Динамическая прозрачность по оставшемуся здоровью</li>
+	<li>Динамическая прозрачность по проценту оставшегося здоровья</li>
+	<li>Динамическая прозрачность по эффективности</li>
+	<li>Динамическая прозрачность по проценту побед</li>
+	<li>Динамическая прозрачность по количеству кило-боев</li>
+	</ul>
+
+<tr><td>3<td><a href="battle.xc">battle.xc</a>																				<td> Общие параметры боевого интерфейса.											<td>
+	<ul>
+	<li>отключить зеркалирования иконок танков</li>
+	<li>отключить всплывающую внизу панель после смерти.</li>
+	<li>убрать переключатель режимов ушей мышкой.</li>
+	<li>отключить подсветку иконки своего танка и взвода.</li>
+	<li>Формат часов на экране панели отладки (возле FPS)</li>
+	<li>использовать стандартные маркеры клиента</li>
+	<li>Путь к папке иконок кланов относительно</li>
+	<li>Панель счёта в бою</li>
+	<li>Внутриигровая панель критов от навыка "экспет"</li>
+	<li>* Двигать визуальные элименты "elements", вынесен Alastanka в (battleElements.xc)</li>	
+	</ul>
+
+<tr><td>3a<td><a href="battleElements.xc">battleElements.xc *</a>															<td> * Двигать визуальные элименты.													<td>
+	<ul>
+	<li>* Дополнительный файл сборки Alastanka. Подгружается с файла (battle.xc)</li>
+	</ul>
+
+<tr><td>4<td><a href="battleLoading.xc">battleLoading.xc</a>																<td> Параметры экрана загрузки боя.													<td>
+	<ul>
+	<li>Формат часов на экране загрузки боя.</li>
+	<li>включить отображение шансов на победу</li>
+	<li>Показывать экспериментальную формулу расчета шансов</li>
+	<li>убрать отображение иконки взвода. На пустое поле можно вывести, например, иконку клана</li>
+	<li>Параметры отображения иконки игрока/клана</li>
+	<li>отображать иконки игрока/клана в окне загрузки боя</li>
+	<li>Формат отображения для левой панели</li>
+	<li>Формат отображения для правой панели</li>
+	</ul>
+
+<tr><td>5<td><a href="captureBar.xc">captureBar.xc</a>																		<td> Полоса захвата.																<td>
+	<ul>
+	<li>	</li>
+	</ul>
+
+<tr><td>6<td><a href="colors.xc">colors.xc</a>																				<td> Настройки цветов.																<td>
+	<ul>
+	<li>Системные цвета.
+	<li>Динамический цвет по типу урона</li>
+	<li>Динамический цвет по типу техники</li>
+	<li>Динамический цвет по оставшемуся здоровью</li>
+	<li>Динамический цвет по проценту оставшегося здоровья</li>
+	<li>Динамический цвет по шкале XVM</li>
+	<li>Динамический цвет по эффективности</li>
+	<li>Динамический цвет по рейтингу WN6</li>
+	<li>Динамический цвет по рейтингу TEFF (E)</li>
+	<li>Динамический цвет по проценту побед</li>
+	<li>Динамический цвет по TWR (T-Calc)</li>
+	<li>Динамический цвет по количеству кило-боев</li>
+	<li>Динамический цвет по количеству боев на текущем танке</li>
+	<li>Динамический цвет по среднему урону за бой на текущем танке</li>
+	<li>Динамический цвет по эффективности урона за бой на текущем танке</li>
+	<li>Динамический цвет по среднему количеству фрагов за бой на текущем танке</li>
+	<li>Динамический цвет по среднему количеству засвеченных врагов за бой на текущем танке</li>
+	<li>* Настройки цвета для урона(у Alastanka вынесен в отдельный файл colorsDamage.xc)</li>
+	</ul>
+
+<tr><td>6а<td><a href="colorsDamage.xc">colorsDamage.xc *</a>																<td> * Настройки цвета для урона.														<td>
+	<ul>
+	<li>* Дополнительный файл сборки Alastanka. Подгружается с файла "colors.xc"</li>
+	</ul>
+
+<tr><td>6б<td><a href="consts.xc">consts.xc *</a>																			<td> * Коффициенты затемнения значков класса техники.									<td>
+	<ul>
+	<li>* Дополнительный файл сборки Alastanka. Подгружается с файла (@xvm.xc)</li>
+	</ul>
+
+<tr><td>7<td><a href="finalStatistic.xc">finalStatistic.xc</a>																<td> Параметры окна послебоевой статистики.											<td>
+	<ul>
+	<li>	</li>
+	</ul>
+
+<tr><td>8<td><a href="hangar.xc">hangar.xc</a>																				<td> Параметры ангара.																<td>
+	<ul>
+	<li>скрыть иконку обучения</li>
+	<li>Пинг серверов</li>
+	<li>Окно достижений</li>
+	<ul>
+		<li>включить фильтр отображения танков в ангаре по умолчанию</li>
+		<li>показывать колонку эффективности по танку</li>
+	</ul>
+	</ul>
+
+<tr><td>9<td><a href="hitLog.xc">hitLog.xc</a>																				<td> Лог попаданий (счетчик своих попаданий).										<td>
+	<ul>
+	<li>	</li>
+	</ul>
+
+<tr><td>10<td><a href="hotkeys.xc">hotkeys.xc</a>																			<td> Специальные горячие клавиши XVM.												<td>
+	<ul>
+	<li>	</li>
+	</ul>
+
+<tr><td>11<td><a href="iconset.xc">iconset.xc</a>																			<td> Наборы иконок. Пути относительно res_mods/xvm/res.								<td>
+	<ul>
+	<li>	</li>
+	</ul>
+
+<tr><td>12<td><a href="login.xc">login.xc</a>																				<td> Параметры экрана логина.														<td>
+	<ul>
+	<li>Пинг серверов</li>
+	</ul>
+	
+<tr><td>13<td><a href="markers.xc">markers.xc</a>																			<td> Маркеры над танками. (Все настройки вынесены в отдельные файлы).				<td>
+	<ul>
+	<li>	</li>
+	</ul>
+
+<tr><td>14<td><a href="markersAliveExtended.xc">markersAliveExtended.xc</a>													<td> Настройки маркеров для живых с Alt.											<td>
+	<ul>
+	<li>	</li>
+	</ul>
+
+<tr><td>15<td><a href="markersAliveNormal.xc">markersAliveNormal.xc</a>														<td> Настройки маркеров для живых без Alt.											<td>
+	<ul>
+	<li>	</li>
+	</ul>
+
+<tr><td>16<td><a href="markersDeadExtended.xc">markersDeadExtended.xc</a>													<td> Настройки маркеров для трупов с Alt.											<td>
+	<ul>
+	<li>	</li>
+	</ul>
+
+<tr><td>17<td><a href="markersDeadNormal.xc">markersDeadNormal.xc</a>														<td> Настройки маркеров для трупов без Alt.											<td>
+	<ul>
+	<li>	</li>
+	</ul>
+
+<tr><td>18<td><a href="minimap.xc">minimap.xc</a>																			<td> Общие параметры миникарты.														<td>
+	<ul>
+	<li>Увеличение миникарты по нажатию кнопки</li>
+	<li>Квадрат со стороной 1000m</li>
+	</ul>
+
+<tr><td>19<td><a href="minimapCircles.xc">minimapCircles.xc</a>																<td> Круги на миникарте. Дистанция только в реальных метрах карты. Только для своей техники.<td>
+	<ul>
+	<li>	</li>
+	</ul>
+
+<tr><td>20<td><a href="minimapLabels.xc">minimapLabels.xc</a>																<td> Надписи на миникарте. Поддерживают HTML.										<td>
+	<ul>
+	<li>	</li>
+	</ul>
+
+<tr><td>21<td><a href="minimapLines.xc">minimapLines.xc</a>																	<td> Линии на миникарте. Только для своей техники.									<td>
+	<ul>
+	<li>	</li>
+	</ul>
+
+<tr><td>22<td><a href="playersPanel.xc">playersPanel.xc</a>																	<td> Параметры панелей игроков ("ушей").											<td>
+	<ul>
+	<li>Маркер статуса засвета в правой боковой панели списка игроков</li>
+	<li>Режим ушей "medium" - первые средние уши в игре</li>
+	<li>Режим ушей "medium2" - вторые средние уши в игре</li>
+	<li>Режим ушей "large" - широкие уши в игре</li>
+	</ul>
+
+<tr><td>23<td><a href="rating.xc">rating.xc</a>																				<td> Блок управлением статистикой (только с xvm-stat).								<td>
+	<ul>
+	<li>включить отображение статистики. Глобальный переключатель - без него модуль статистики будет везде отключен</li>
+	<li>включить загрузку данных по противникам в "тумане войны"</li>
+	<li>включить сохранение статистики в файл "xvm-stat.log"</li>
+	<li>включить отображение статистики в достижениях пользователя</li>
+	<li>включить отображение статистики при наборе роты</li>
+	</ul>
+
+<tr><td>24<td><a href="squad.xc">squad.xc</a>																				<td> Параметры окна взвода.															<td>
+	<ul>
+	<li>	</li>
+	</ul>
+
+<tr><td>25<td><a href="statisticForm.xc">statisticForm.xc</a>																<td> Параметры окна статистики по клавише Tab.										<td>
+	<ul>
+	<li>	</li>
+	</ul>
+
+<tr><td>26<td><a href="texts.xc">texts.xc</a>																				<td> Текстовые подстановки.															<td>
+	<ul>
+	<li>Текст для макроса {{vtype}}</li>
+	</ul>
+
+<tr><td>27<td><a href="turretMarkers.xc">turretMarkers.xc</a>																<td> Отображаемые строки {{turret}} маркера.										<td>
+	<ul>
+	<li>Сток/Топ Башня/Орудие</li>
+	</ul>
+
+<tr><td>28<td><a href="vehicleNames.xc">vehicleNames.xc</a>																	<td> Замена названий танков.														<td>
+	<ul>
+	<li>	</li>
+	</ul>
+
+</tr>
+</table>
+<br>
+</BODY>
+<!-- xvm.alastanka.org.ua -->
+</html>
