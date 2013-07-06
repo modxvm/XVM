@@ -1,709 +1,336 @@
-﻿class com.xvm.VehicleInfoDataL10n
+﻿import com.xvm.Config
+import com.xvm.Locale
+import com.xvm.Logger
+
+class com.xvm.VehicleInfoDataL10n
 {
+    public static var s_vehiclename = { };
+    private static var _initialized = false;
+
     public static function LocalizedNameToVehicleKey(name)
     {
-        switch (name) {
-            //level 1
-            case "MS-1":
-            case "МС-1":
-                return "ms_1";
-            case "LTraktor":
-                return "ltraktor";
-            case "T1":
-                return "t1_cunningham";
-            case "FT":
-                return "renaultft";
-            case "Medium I":
-                return "gb01_medium_mark_i";
-            case "NC-31":
-                return "ch06_renault_nc31";
-
-            //level 2
-            case "AT-1":
-            case "АТ-1":
-                return "at_1";
-            case "T-60":
-            case "Т-60":
-                return "t-60";
-            case "BT-2":
-            case "БТ-2":
-                return "bt_2";
-            case "T-26":
-            case "Т-26":
-                return "t_26";
-            case "SU-18":
-            case "СУ-18":
-                return "su_18";
-            case "Tetrarch":
-            case "Тетрарх":
-                return "tetrarch_ll";
-            case "G.Pz. Mk. VI":
-                return "gw_mk_vie";
-            case "PzJg I":
-                return "panzerjager_i";
-            case "Pz. 35 (t)":
-                return "pz35t";
-            case "Pz. II":
-                return "pzii";
-            case "Pz. I":
-                return "pzi";
-            case "Pz. 38H":
-                return "h39_captured";
-            case "M2 Light":
-                return "m2_lt";
-            case "T18":
-                return "t18";
-            case "T2 Light":
-                return "t2_lt";
-            case "T2 Medium":
-                return "t2_med";
-            case "T57":
-                return "t57";
-            case "T1E6":
-                return "t1_e6";
-            case "FT AC":
-                return "renaultft_ac";
-            case "D1":
-                return "d1";
-            case "H35":
-                return "hotchkiss_h35";
-            case "FT BS":
-                return "renaultbs";
-            case "Cruiser III":
-                return "gb58_cruiser_mk_iii";
-            case "UC 2-pdr":
-                return "gb39_universal_carrierqf2";
-            case "Cruiser I":
-                return "gb03_cruiser_mk_i";
-            case "Medium II":
-                return "gb05_vickers_medium_mk_ii";
-            case "VAE Type B":
-                return "ch07_vickers_mke_type_bt26";
-
-            //level 3
-            case "SU-76":
-            case "СУ-76":
-                return "su_76";
-            case "T-70":
-            case "Т-70":
-                return "t-70";
-            case "BT-7":
-            case "БТ-7":
-                return "bt_7";
-            case "T-127":
-            case "Т-127":
-                return "t_127";
-            case "T-46":
-            case "Т-46":
-                return "t_46";
-            case "SU-26":
-            case "СУ-26":
-                return "su_26";
-            case "BT-SV":
-            case "БТ-СВ":
-                return "bt_sv";
-            case "M3 Light":
-            case "М3 лёгкий":
-                return "m3_stuart_ll";
-            case "Bison":
-                return "bison_i";
-            case "Wespe":
-                return "wespe";
-            case "Marder II":
-                return "g20_marder_ii";
-            case "Pz. 38 (t)":
-                return "pz38t";
-            case "T-15":
-                return "t_15";
-            case "Pz. III A":
-                return "pziii_a";
-            case "Pz. II G":
-                return "pz_ii_ausfg";
-            case "Pz. I C":
-                return "pzi_ausf_c";
-            case "Pz. II J":
-                return "pzii_j";
-            case "Pz. S35":
-                return "s35_captured";
-            case "M3 Stuart":
-                return "m3_stuart";
-            case "T82":
-                return "t82";
-            case "Locust":
-                return "m22_locust";
-            case "M2 Medium":
-                return "m2_med";
-            case "M7 Priest":
-                return "m7_priest";
-            case "MTLS-1G14":
-                return "mtls_1g14";
-            case "Sexton I":
-                return "gb78_sexton_i";
-            case "UE 57":
-                return "renaultue57";
-            case "FCM36 Pak40":
-                return "fcm_36pak40";
-            case "D2":
-                return "d2";
-            case "AMX 38":
-                return "amx38";
-            case "Lorr. 39L AM":
-                return "lorraine39_l_am";
-            case "Cruiser IV":
-                return "gb59_cruiser_mk_iv";
-            case "Valentine AT":
-                return "gb42_valentine_at";
-            case "Cruiser II":
-                return "gb69_cruiser_mk_ii";
-            case "Medium III":
-                return "gb06_vickers_medium_mk_iii";
-            case "Chi-Ha":
-                return "ch08_type97_chi_ha";
-
-            //level 4
-            case "SU-85B":
-            case "СУ-85Б":
-                return "gaz_74b";
-            case "T-80":
-            case "Т-80":
-                return "t80";
-            case "A-20":
-            case "А-20":
-                return "a_20";
-            case "Valentine II":
-            case "Валентайн II":
-                return "valentine_ll";
-            case "T-50":
-            case "Т-50":
-                return "t_50";
-            case "T-28":
-            case "Т-28":
-                return "t_28";
-            case "SU-5":
-            case "СУ-5":
-                return "su_5";
-            case "A-32":
-            case "А-32":
-                return "a_32";
-            case "Pz.Sfl. IVb":
-                return "pz_sfl_ivb";
-            case "StPz II":
-                return "sturmpanzer_ii";
-            case "Hetzer":
-                return "hetzer";
-            case "Pz. 38 nA":
-                return "pz38_na";
-            case "Pz. III":
-                return "pziii";
-            case "VK 20.01 D":
-                return "vk2001db";
-            case "Luchs":
-                return "pzii_luchs";
-            case "Pz. B2":
-                return "b_1bis_captured";
-            case "M5 Stuart":
-                return "m5_stuart";
-            case "M8A1":
-                return "m8a1";
-            case "T40":
-                return "t40";
-            case "M3 Lee":
-                return "m3_grant";
-            case "M37":
-                return "m37";
-            case "SAu 40":
-                return "somua_sau_40";
-            case "B1":
-                return "b1";
-            case "AMX 40":
-                return "amx40";
-            case "leFH18B2":
-                return "_105_lefh18b2";
-            case "AMX 105 AM":
-                return "amx_ob_am105";
-            case "Covenanter":
-                return "gb60_covenanter";
-            case "Alecto":
-                return "gb57_alecto";
-            case "Valentine":
-                return "gb04_valentine";
-            case "Matilda":
-                return "gb07_matilda";
-            case "M5A1 Stuart":
-                return "ch09_m5";
-
-            //level 5
-            case "SU-85":
-            case "СУ-85":
-                return "su_85";
-            case "T-34":
-            case "Т-34":
-                return "t_34";
-            case "Matilda IV":
-            case "Матильда IV":
-                return "matilda_ii_ll";
-            case "T-50-2":
-            case "Т-50-2":
-                return "t_50_2";
-            case "KV-1":
-            case "КВ-1":
-                return "kv1";
-            case "Churchill III":
-            case "Черчилль III":
-                return "churchill_ll";
-            case "SU-122A":
-            case "СУ-122А":
-                return "su122a";
-            case "KV-220":
-            case "КВ-220":
-                return "kv_220";
-            case "KV-220 T":
-            case "КВ-220 Т":
-                return "kv_220_action";
-            case "SU-85I":
-            case "СУ-85И":
-                return "su_85i";
-            case "Grille":
-                return "grille";
-            case "StuGIII":
-                return "stugiii";
-            case "T-25":
-                return "t_25";
-            case "Pz. IV":
-                return "pziv";
-            case "Pz. IV Hyd.":
-                return "pziv_hydro";
-            case "Pz. III/IV":
-                return "pziii_iv";
-            case "Leopard":
-                return "vk1602";
-            case "Chaffee":
-                return "m24_chaffee";
-            case "M7":
-                return "m7_med";
-            case "T49":
-                return "t49";
-            case "Wolverine":
-                return "m10_wolverine";
-            case "Ram II":
-                return "ram_ii";
-            case "M4":
-                return "m4_sherman";
-            case "T1 Heavy":
-                return "t1_hvy";
-            case "T14":
-                return "t14";
-            case "M4A2E4":
-                return "m4a2e4";
-            case "M41":
-                return "m41";
-            case "S35 CA":
-                return "s_35ca";
-            case "BDR G1 B":
-                return "bdr_g1b";
-            case "ELC AMX":
-                return "elc_amx";
-            case "AMX 13 105 AM":
-                return "amx_105am";
-            case "Crusader":
-                return "gb20_crusader";
-            case "AT 2":
-                return "gb73_at2";
-            case "Churchill I":
-                return "gb08_churchill_i";
-            case "Matilda BP":
-                return "gb68_matilda_black_prince";
-            case "Type T-34":
-                return "ch21_t34";
-
-            //level 6
-            case "SU-100Y":
-            case "СУ-100Y":
-                return "su100y";
-            case "SU-100":
-            case "СУ-100":
-                return "su_100";
-            case "T-34-85":
-            case "Т-34-85":
-                return "t_34_85";
-            case "KV-1S":
-            case "КВ-1С":
-                return "kv_1s";
-            case "T-150":
-            case "Т-150":
-                return "t150";
-            case "KV-2":
-            case "КВ-2":
-                return "kv2";
-            case "SU-8":
-            case "СУ-8":
-                return "su_8";
-            case "Hummel":
-                return "hummel";
-            case "D. Max":
-                return "dickermax";
-            case "JagdPzIV":
-                return "jagdpziv";
-            case "VK 30.01 P":
-                return "vk3001p";
-            case "VK 36.01 H":
-                return "vk3601h";
-            case "VK 30.01 H":
-                return "vk3001h";
-            case "VK 30.01 D":
-                return "vk3002db_v1";    
-            case "VK 28.01":
-                return "vk2801";
-            case "Pz. IV S.":
-                return "pziv_schmalturm";
-            case "Pz. V/IV":
-                return "pzv_pziv";
-            case "Pz. V/IV A":
-                return "pzv_pziv_ausf_alfa";
-            case "T21":
-                return "t21";
-            case "Hellcat":
-                return "m18_hellcat";
-            case "Jackson":
-                return "m36_slagger";
-            case "M4A3E8":
-                return "m4a3e8_sherman";
-            case "M4A3E2":
-                return "sherman_jumbo";
-            case "M6":
-                return "m6";
-            case "M44":
-                return "m44";
-            case "ARL V39":
-                return "arl_v39";
-            case "ARL 44":
-                return "arl_44";
-            case "AMX 12 t":
-                return "amx_12t";
-            case "AMX 13 F3":
-                return "amx_13f3am";
-            case "Cromwell":
-                return "gb21_cromwell";
-            case "AT 8":
-                return "gb74_at8";
-            case "Churchill GC":
-                return "gb40_gun_carrier_churchill";
-            case "Churchill VII":
-                return "gb09_churchill_vii";
-            case "TOG II*":
-                return "gb63_tog_ii";
-            case "59-16":
-                return "ch15_59_16";
-            case "Type 58":
-                return "ch20_type58";
-
-            //level 7
-            case "SU-152":
-            case "СУ-152":
-                return "su_152";
-            case "SU-100M1":
-            case "СУ-100М1":
-                return "su100m1";
-            case "SU-122-44":
-            case "СУ-122-44":
-                return "su122_44";
-            case "T-43":
-            case "Т-43":
-                return "t_43";
-            case "KV-13":
-            case "КВ-13":
-                return "kv_13";
-            case "IS":
-            case "ИС":
-            case "ІС":
-                return "is";
-            case "KV-3":
-            case "КВ-3":
-                return "kv_3";
-            case "S-51":
-            case "С-51":
-                return "s_51";
-            case "SU-14-1":
-            case "СУ-14-1":
-                return "su14_1";
-            case "G.W. Panther":
-                return "g_panther";
-            case "JgPanther":
-                return "jagdpanther";
-            case "E-25":
-                return "e-25";
-            case "Tiger P":
-                return "pzvi_tiger_p";
-            case "Tiger":
-                return "pzvi";
-            case "Panther":
-                return "pzv";
-            case "VK 30.02 D":
-                return "vk3002db";
-            case "Aufkl.Panther":
-                return "auf_panther";
-            case "Pz. V/M10":
-                return "panther_m10";
-            case "T71":
-                return "t71";
-            case "T25/2":
-                return "t25_2";
-            case "T25 AT":
-                return "t25_at";
-            case "T20":
-                return "t20";
-            case "T29":
-                return "t29";
-            case "M12":
-                return "m12";
-            case "AMX AC 46":
-                return "amx_ac_mle1946";
-            case "AMX M4 45":
-                return "amx_m4_1945";
-            case "AMX 13 75":
-                return "amx_13_75";
-            case "Lorr. 155 50":
-                return "lorraine155_50";
-            case "Comet":
-                return "gb22_comet";
-            case "AT 7":
-                return "gb75_at7";
-            case "AT 15A":
-                return "gb71_at_15a";
-            case "Black Prince":
-                return "gb10_black_prince";
-            case "WZ-131":
-                return "ch16_wz_131";
-            case "T-34-1":
-                return "ch04_t34_1";
-            case "IS-2":
-                return "ch10_is2";
-            case "Type 62":
-                return "ch02_type62";
-
-            //level 8
-            case "ISU-152":
-            case "ИСУ-152":
-            case "ІСУ-152":
-                return "isu_152";
-            case "SU-101":
-            case "СУ-101":
-                return "su_101";
-            case "T-44":
-            case "Т-44":
-                return "t_44";
-            case "IS-6":
-            case "ИС-6":
-            case "ІС-6":
-                return "object252";
-            case "IS-3":
-            case "ИС-3":
-            case "ІС-3":
-                return "is_3";
-            case "KV-4":
-            case "КВ-4":
-                return "kv4";
-            case "KV-5":
-            case "КВ-5":
-                return "kv_5";
-            case "SU-14-2":
-            case "СУ-14-2":
-                return "su_14";
-            case "G.W. Tiger P":
-                return "gw_tiger_p";
-            case "JgTig.8,8 cm":
-                return "jagdtiger_sdkfz_185";
-            case "JgPanthII":
-                return "jagdpantherii";
-            case "Ferdinand":
-                return "ferdinand";
-            case "VK 45.02 A":
-                return "vk4502a";
-            case "Tiger II":
-                return "pzvib_tiger_ii";
-            case "Löwe":
-                return "lowe";
-            case "Panther II":
-                return "panther_ii";
-            case "Indien-Pz.":
-                return "indien_panzer";
-            case "T69":
-                return "t69";
-            case "T28 Prot.":
-                return "t28_prototype";
-            case "T28":
-                return "t28";
-            case "Pershing":
-                return "pershing";
-            case "T26E4":
-                return "t26_e4_superpershing";
-            case "T32":
-                return "t32";
-            case "T34":
-                return "t34_hvy";
-            case "M40/M43":
-                return "m40m43";
-            case "M6A2E1":
-                return "m6a2e1";
-            case "AMX AC 48":
-                return "amx_ac_mle1948";
-            case "AMX 50 100":
-                return "amx_50_100";
-            case "FCM 50 t":
-                return "fcm_50t";
-            case "AMX 13 90":
-                return "amx_13_90";
-            case "Lorr. 155 51":
-                return "lorraine155_51";
-            case "Centurion I":
-                return "gb23_centurion";
-            case "AT 15":
-                return "gb72_at15";
-            case "Caernarvon":
-                return "gb11_caernarvon";
-            case "WZ-132":
-                return "ch17_wz131_1_wz132"; // todo (???)
-            case "T-34-2":
-                return "ch05_t34_2";
-            case "110":
-                return "ch11_110";
-            case "Type 59":
-                return "ch01_type59";
-            case "Type 59 G":
-                return "ch01_type59_gold";
-            case "WZ-111":
-                return "ch03_wz_111";
-            case "112":
-                return "ch23_112";
-
-            //level 9
-            case "Obj. 704":
-            case "Об. 704":
-                return "object_704";
-            case "SU-122-54":
-            case "СУ-122-54":
-                return "su122_54";
-            case "T-54":
-            case "Т-54":
-                return "t_54";
-            case "IS-8":
-            case "ИС-8":
-            case "ІС-8":
-                return "is8";
-            case "ST-I":    
-            case "СТ-I":
-                return "st_i";
-            case "212A":
-            case "212А":
-                return "object_212";
-            case "Jagdtiger":
-                return "jagdtiger";
-            case "VK 45.02 P":
-                return "vk4502p";
-            case "E-75":
-                return "e_75";
-            case "E-50":
-                return "e_50";
-            case "Leopard PT A":
-                return "pro_ag_a";
-            case "G.W. Tiger":
-                return "g_tiger";
-            case "T54E1":
-                return "t54e1";
-            case "T30":
-                return "t30";
-            case "T95":
-                return "t95";
-            case "M46 Patton":
-                return "m46_patton";
-            case "M103":
-                return "m103";
-            case "Foch":
-                return "amx50_foch";
-            case "AMX 50 120":
-                return "amx_50_120";
-            case "Lorr. 40 t":
-                return "lorraine40t";
-            case "B-C 155 55":
-                return "bat_chatillon155_55";
-            case "Centurion 7/1":
-                return "gb24_centurion_mk3";
-            case "Tortoise":
-                return "gb32_tortoise";
-            case "Conqueror":
-                return "gb12_conqueror";
-            case "M53/M55":
-                return "m53_55";
-            case "WZ-120":
-                return "ch18_wz_120";
-            case "WZ-111 1-4":
-                return "ch12_111_1_2_3";
-
-            //level 10
-            case "Obj. 268":
-            case "Об. 268":
-                return "object268";
-            case "Obj. 263":
-            case "Об. 263":
-                return "object263";
-            case "T-62A":
-            case "Т-62А":
-                return "t62a";
-            case "IS-7":
-            case "ИС-7":
-            case "ІС-7":
-                return "is_7";
-            case "IS-4":
-            case "ИС-4":
-            case "ІС-4":
-                return "is_4";
-            case "Obj. 261":
-            case "Об. 261":
-                return "object_261";
-            case "JgPzE100":
-                return "jagdpz_e100";
-            case "Maus":
-                return "maus";
-            case "E-100":
-                return "e_100";
-            case "E-50M":
-                return "e50_ausf_m";
-            case "Leopard 1":
-                return "leopard1";
-            case "G.W. E 100":
-                return "g_e";
-            case "T57 Heavy":
-                return "t57_58";
-            case "T110E4":
-                return "t110e4";
-            case "T110E3":
-                return "t110e3";
-            case "M48 Patton":
-                return "m48a1";
-            case "T110E5":
-                return "t110";
-            case "T92":
-                return "t92";
-            case "Foch 155":
-                return "amx_50fosh_155";
-            case "AMX 50 B":
-                return "f10_amx_50b";
-            case "B-C 25 t":
-                return "bat_chatillon25t";
-            case "B-C 155 58":
-                return "bat_chatillon155_58";
-            case "FV4202":
-                return "gb70_fv4202_105";
-            case "FV215b 183":
-                return "gb48_fv215b_183";
-            case "FV215b":
-                return "gb13_fv215b";
-            case "121":
-                return "ch19_121";
-            case "113":
-                return "ch22_113";
-
-            default: return "";
-        }
+        VehicleInfoL10NDefaultValues();
+        Logger.add("Locale[vehicleinfo]: string: " + name + " | value: " +  Locale.s_lang.locale.vehiclename[name] + " | fallback string: " + s_vehiclename[name] );
+        return Locale.s_lang.locale.vehiclename[name] || Config.s_config.locale.vehiclename[name] || name ;
     }
+
+    private static function VehicleInfoL10NDefaultValues() {
+        if (_initialized)
+            return;
+        _initialized = true;
+        
+        //Tank names
+        //level 1
+        s_vehiclename["MS-1"]="ms_1";
+        s_vehiclename["LTraktor"]="ltraktor";
+        s_vehiclename["T1"]="t1_cunningham";
+        s_vehiclename["FT"]="renaultft";
+        s_vehiclename["Medium I"]="gb01_medium_mark_i";
+        s_vehiclename["NC-31"]="ch06_renault_nc31";
+        //level 2
+        s_vehiclename["AT-1"]="at_1";
+        s_vehiclename["T-60"]="t-60";
+        s_vehiclename["BT-2"]="bt_2";
+        s_vehiclename["T-26"]="t_26";
+        s_vehiclename["SU-18"]="su_18";
+        s_vehiclename["Tetrarch"]="tetrarch_ll";
+        s_vehiclename["G.Pz. Mk. VI"]="gw_mk_vie";
+        s_vehiclename["PzJg I"]="panzerjager_i";
+        s_vehiclename["Pz. 35 (t)"]="pz35t";
+        s_vehiclename["Pz. II"]="pzii";
+        s_vehiclename["Pz. I"]="pzi";
+        s_vehiclename["Pz. 38H"]="h39_captured";
+        s_vehiclename["M2 Light"]="m2_lt";
+        s_vehiclename["T18"]="t18";
+        s_vehiclename["T2 Light"]="t2_lt";
+        s_vehiclename["T2 Medium"]="t2_med";
+        s_vehiclename["T57"]="t57";
+        s_vehiclename["T1E6"]="t1_e6";
+        s_vehiclename["FT AC"]="renaultft_ac";
+        s_vehiclename["D1"]="d1";
+        s_vehiclename["H35"]="hotchkiss_h35";
+        s_vehiclename["FT BS"]="renaultbs";
+        s_vehiclename["Cruiser III"]="gb58_cruiser_mk_iii";
+        s_vehiclename["UC 2-pdr"]="gb39_universal_carrierqf2";
+        s_vehiclename["Cruiser I"]="gb03_cruiser_mk_i";
+        s_vehiclename["Medium II"]="gb05_vickers_medium_mk_ii";
+        s_vehiclename["VAE Type B"]="ch07_vickers_mke_type_bt26";
+        //level 3
+        s_vehiclename["SU-76"]="su_76";
+        s_vehiclename["T-70"]="t-70";
+        s_vehiclename["BT-7"]="bt_7";
+        s_vehiclename["T-127"]="t_127";
+        s_vehiclename["T-46"]="t_46";
+        s_vehiclename["SU-26"]="su_26";
+        s_vehiclename["BT-SV"]="bt_sv";
+        s_vehiclename["M3 Light"]="m3_stuart_ll";
+        s_vehiclename["Bison"]="bison_i";
+        s_vehiclename["Wespe"]="wespe";
+        s_vehiclename["Marder II"]="g20_marder_ii";
+        s_vehiclename["Pz. 38 (t)"]="pz38t";
+        s_vehiclename["T-15"]="t_15";
+        s_vehiclename["Pz. III A"]="pziii_a";
+        s_vehiclename["Pz. II G"]="pz_ii_ausfg";
+        s_vehiclename["Pz. I C"]="pzi_ausf_c";
+        s_vehiclename["Pz. II J"]="pzii_j";
+        s_vehiclename["Pz. S35"]="s35_captured";
+        s_vehiclename["M3 Stuart"]="m3_stuart";
+        s_vehiclename["T82"]="t82";
+        s_vehiclename["Locust"]="m22_locust";
+        s_vehiclename["M2 Medium"]="m2_med";
+        s_vehiclename["M7 Priest"]="m7_priest";
+        s_vehiclename["MTLS-1G14"]="mtls_1g14";
+        s_vehiclename["Sexton I"]="gb78_sexton_i";
+        s_vehiclename["UE 57"]="renaultue57";
+        s_vehiclename["FCM36 Pak40"]="fcm_36pak40";
+        s_vehiclename["D2"]="d2";
+        s_vehiclename["AMX 38"]="amx38";
+        s_vehiclename["Lorr. 39L AM"]="lorraine39_l_am";
+        s_vehiclename["Cruiser IV"]="gb59_cruiser_mk_iv";
+        s_vehiclename["Valentine AT"]="gb42_valentine_at";
+        s_vehiclename["Cruiser II"]="gb69_cruiser_mk_ii";
+        s_vehiclename["Medium III"]="gb06_vickers_medium_mk_iii";
+        s_vehiclename["Chi-Ha"]="ch08_type97_chi_ha";
+        //level 4
+        s_vehiclename["SU-85B"]="gaz_74b";
+        s_vehiclename["T-80"]="t80";
+        s_vehiclename["A-20"]="a_20";
+        s_vehiclename["Valentine II"]="valentine_ll";
+        s_vehiclename["T-50"]="t_50";
+        s_vehiclename["T-28"]="t_28";
+        s_vehiclename["SU-5"]="su_5";
+        s_vehiclename["A-32"]="a_32";
+        s_vehiclename["Pz.Sfl. IVb"]="pz_sfl_ivb";
+        s_vehiclename["StPz II"]="sturmpanzer_ii";
+        s_vehiclename["Hetzer"]="hetzer";
+        s_vehiclename["Pz. 38 nA"]="pz38_na";
+        s_vehiclename["Pz. III"]="pziii";
+        s_vehiclename["VK 20.01 D"]="vk2001db";
+        s_vehiclename["Luchs"]="pzii_luchs";
+        s_vehiclename["Pz. B2"]="b_1bis_captured";
+        s_vehiclename["M5 Stuart"]="m5_stuart";
+        s_vehiclename["M8A1"]="m8a1";
+        s_vehiclename["T40"]="t40";
+        s_vehiclename["M3 Lee"]="m3_grant";
+        s_vehiclename["M37"]="m37";
+        s_vehiclename["SAu 40"]="somua_sau_40";
+        s_vehiclename["B1"]="b1";
+        s_vehiclename["AMX 40"]="amx40";
+        s_vehiclename["leFH18B2"]="_105_lefh18b2";
+        s_vehiclename["AMX 105 AM"]="amx_ob_am105";
+        s_vehiclename["Covenanter"]="gb60_covenanter";
+        s_vehiclename["Alecto"]="gb57_alecto";
+        s_vehiclename["Valentine"]="gb04_valentine";
+        s_vehiclename["Matilda"]="gb07_matilda";
+        s_vehiclename["M5A1 Stuart"]="ch09_m5";
+        //level 5
+        s_vehiclename["SU-85"]="su_85";
+        s_vehiclename["T-34"]="t_34";
+        s_vehiclename["Matilda IV"]="matilda_ii_ll";
+        s_vehiclename["T-50-2"]="t_50_2";
+        s_vehiclename["KV-1"]="kv1";
+        s_vehiclename["Churchill III"]="churchill_ll";
+        s_vehiclename["SU-122A"]="su122a";
+        s_vehiclename["KV-220"]="kv_220";
+        s_vehiclename["KV-220 T"]="kv_220_action";
+        s_vehiclename["SU-85I"]="su_85i";
+        s_vehiclename["Grille"]="grille";
+        s_vehiclename["StuGIII"]="stugiii";
+        s_vehiclename["T-25"]="t_25";
+        s_vehiclename["Pz. IV"]="pziv";
+        s_vehiclename["Pz. IV Hyd."]="pziv_hydro";
+        s_vehiclename["Pz. III/IV"]="pziii_iv";
+        s_vehiclename["Leopard"]="vk1602";
+        s_vehiclename["Chaffee"]="m24_chaffee";
+        s_vehiclename["M7"]="m7_med";
+        s_vehiclename["T49"]="t49";
+        s_vehiclename["Wolverine"]="m10_wolverine";
+        s_vehiclename["Ram II"]="ram_ii";
+        s_vehiclename["M4"]="m4_sherman";
+        s_vehiclename["T1 Heavy"]="t1_hvy";
+        s_vehiclename["T14"]="t14";
+        s_vehiclename["M4A2E4"]="m4a2e4";
+        s_vehiclename["M41"]="m41";
+        s_vehiclename["S35 CA"]="s_35ca";
+        s_vehiclename["BDR G1 B"]="bdr_g1b";
+        s_vehiclename["ELC AMX"]="elc_amx";
+        s_vehiclename["AMX 13 105 AM"]="amx_105am";
+        s_vehiclename["Crusader"]="gb20_crusader";
+        s_vehiclename["AT 2"]="gb73_at2";
+        s_vehiclename["Churchill I"]="gb08_churchill_i";
+        s_vehiclename["Matilda BP"]="gb68_matilda_black_prince";
+        s_vehiclename["Type T-34"]="ch21_t34";
+        //level 6
+        s_vehiclename["SU-100Y"]="su100y";
+        s_vehiclename["SU-100"]="su_100";
+        s_vehiclename["T-34-85"]="t_34_85";
+        s_vehiclename["KV-1S"]="kv_1s";
+        s_vehiclename["T-150"]="t150";
+        s_vehiclename["KV-2"]="kv2";
+        s_vehiclename["SU-8"]="su_8";
+        s_vehiclename["Hummel"]="hummel";
+        s_vehiclename["D. Max"]="dickermax";
+        s_vehiclename["JagdPzIV"]="jagdpziv";
+        s_vehiclename["VK 30.01 P"]="vk3001p";
+        s_vehiclename["VK 36.01 H"]="vk3601h";
+        s_vehiclename["VK 30.01 H"]="vk3001h";
+        s_vehiclename["VK 30.01 D"]="vk3002db_v1";    
+        s_vehiclename["VK 28.01"]="vk2801";
+        s_vehiclename["Pz. IV S."]="pziv_schmalturm";
+        s_vehiclename["Pz. V/IV"]="pzv_pziv";
+        s_vehiclename["Pz. V/IV A"]="pzv_pziv_ausf_alfa";
+        s_vehiclename["T21"]="t21";
+        s_vehiclename["Hellcat"]="m18_hellcat";
+        s_vehiclename["Jackson"]="m36_slagger";
+        s_vehiclename["M4A3E8"]="m4a3e8_sherman";
+        s_vehiclename["M4A3E2"]="sherman_jumbo";
+        s_vehiclename["M6"]="m6";
+        s_vehiclename["M44"]="m44";
+        s_vehiclename["ARL V39"]="arl_v39";
+        s_vehiclename["ARL 44"]="arl_44";
+        s_vehiclename["AMX 12 t"]="amx_12t";
+        s_vehiclename["AMX 13 F3"]="amx_13f3am";
+        s_vehiclename["Cromwell"]="gb21_cromwell";
+        s_vehiclename["AT 8"]="gb74_at8";
+        s_vehiclename["Churchill GC"]="gb40_gun_carrier_churchill";
+        s_vehiclename["Churchill VII"]="gb09_churchill_vii";
+        s_vehiclename["TOG II*"]="gb63_tog_ii";
+        s_vehiclename["59-16"]="ch15_59_16";
+        s_vehiclename["Type 58"]="ch20_type58";
+        //level 7
+        s_vehiclename["SU-152"]="su_152";
+        s_vehiclename["SU-100M1"]="su100m1";
+        s_vehiclename["SU-122-44"]="su122_44";
+        s_vehiclename["T-43"]="t_43";
+        s_vehiclename["KV-13"]="kv_13";
+        s_vehiclename["IS"]="is";
+        s_vehiclename["KV-3"]="kv_3";
+        s_vehiclename["S-51"]="s_51";
+        s_vehiclename["SU-14-1"]="su14_1";
+        s_vehiclename["G.W. Panther"]="g_panther";
+        s_vehiclename["JgPanther"]="jagdpanther";
+        s_vehiclename["E-25"]="e-25";
+        s_vehiclename["Tiger P"]="pzvi_tiger_p";
+        s_vehiclename["Tiger"]="pzvi";
+        s_vehiclename["Panther"]="pzv";
+        s_vehiclename["VK 30.02 D"]="vk3002db";
+        s_vehiclename["Aufkl.Panther"]="auf_panther";
+        s_vehiclename["Pz. V/M10"]="panther_m10";
+        s_vehiclename["T71"]="t71";
+        s_vehiclename["T25/2"]="t25_2";
+        s_vehiclename["T25 AT"]="t25_at";
+        s_vehiclename["T20"]="t20";
+        s_vehiclename["T29"]="t29";
+        s_vehiclename["M12"]="m12";
+        s_vehiclename["AMX AC 46"]="amx_ac_mle1946";
+        s_vehiclename["AMX M4 45"]="amx_m4_1945";
+        s_vehiclename["AMX 13 75"]="amx_13_75";
+        s_vehiclename["Lorr. 155 50"]="lorraine155_50";
+        s_vehiclename["Comet"]="gb22_comet";
+        s_vehiclename["AT 7"]="gb75_at7";
+        s_vehiclename["AT 15A"]="gb71_at_15a";
+        s_vehiclename["Black Prince"]="gb10_black_prince";
+        s_vehiclename["WZ-131"]="ch16_wz_131";
+        s_vehiclename["T-34-1"]="ch04_t34_1";
+        s_vehiclename["IS-2"]="ch10_is2";
+        s_vehiclename["Type 62"]="ch02_type62";
+        //level 8
+        s_vehiclename["ISU-152"]="isu_152";
+        s_vehiclename["SU-101"]="su_101";
+        s_vehiclename["T-44"]="t_44";
+        s_vehiclename["IS-6"]="object252";
+        s_vehiclename["IS-3"]="is_3";
+        s_vehiclename["KV-4"]="kv4";
+        s_vehiclename["KV-5"]="kv_5";
+        s_vehiclename["SU-14-2"]="su_14";
+        s_vehiclename["G.W. Tiger P"]="gw_tiger_p";
+        s_vehiclename["JgTig.8;8 cm"]="jagdtiger_sdkfz_185";
+        s_vehiclename["JgPanthII"]="jagdpantherii";
+        s_vehiclename["Ferdinand"]="ferdinand";
+        s_vehiclename["VK 45.02 A"]="vk4502a";
+        s_vehiclename["Tiger II"]="pzvib_tiger_ii";
+        s_vehiclename["Löwe"]="lowe";
+        s_vehiclename["Panther II"]="panther_ii";
+        s_vehiclename["Indien-Pz."]="indien_panzer";
+        s_vehiclename["T69"]="t69";
+        s_vehiclename["T28 Prot."]="t28_prototype";
+        s_vehiclename["T28"]="t28";
+        s_vehiclename["Pershing"]="pershing";
+        s_vehiclename["T26E4"]="t26_e4_superpershing";
+        s_vehiclename["T32"]="t32";
+        s_vehiclename["T34"]="t34_hvy";
+        s_vehiclename["M40/M43"]="m40m43";
+        s_vehiclename["M6A2E1"]="m6a2e1";
+        s_vehiclename["AMX AC 48"]="amx_ac_mle1948";
+        s_vehiclename["AMX 50 100"]="amx_50_100";
+        s_vehiclename["FCM 50 t"]="fcm_50t";
+        s_vehiclename["AMX 13 90"]="amx_13_90";
+        s_vehiclename["Lorr. 155 51"]="lorraine155_51";
+        s_vehiclename["Centurion I"]="gb23_centurion";
+        s_vehiclename["AT 15"]="gb72_at15";
+        s_vehiclename["Caernarvon"]="gb11_caernarvon";
+        s_vehiclename["WZ-132"]="ch17_wz131_1_wz132";
+        s_vehiclename["T-34-2"]="ch05_t34_2";
+        s_vehiclename["110"]="ch11_110";
+        s_vehiclename["Type 59"]="ch01_type59";
+        s_vehiclename["Type 59 G"]="ch01_type59_gold";
+        s_vehiclename["WZ-111"]="ch03_wz_111";
+        s_vehiclename["112"]="ch23_112";
+        //level 9
+        s_vehiclename["Obj. 704"]="object_704";
+        s_vehiclename["SU-122-54"]="su122_54";
+        s_vehiclename["T-54"]="t_54";
+        s_vehiclename["IS-8"]="is8";
+        s_vehiclename["ST-I"]="st_i";
+        s_vehiclename["212A"]="object_212";
+        s_vehiclename["Jagdtiger"]="jagdtiger";
+        s_vehiclename["VK 45.02 P"]="vk4502p";
+        s_vehiclename["E-75"]="e_75";
+        s_vehiclename["E-50"]="e_50";
+        s_vehiclename["Leopard PT A"]="pro_ag_a";
+        s_vehiclename["G.W. Tiger"]="g_tiger";
+        s_vehiclename["T54E1"]="t54e1";
+        s_vehiclename["T30"]="t30";
+        s_vehiclename["T95"]="t95";
+        s_vehiclename["M46 Patton"]="m46_patton";
+        s_vehiclename["M103"]="m103";
+        s_vehiclename["Foch"]="amx50_foch";
+        s_vehiclename["AMX 50 120"]="amx_50_120";
+        s_vehiclename["Lorr. 40 t"]="lorraine40t";
+        s_vehiclename["B-C 155 55"]="bat_chatillon155_55";
+        s_vehiclename["Centurion 7/1"]="gb24_centurion_mk3";
+        s_vehiclename["Tortoise"]="gb32_tortoise";
+        s_vehiclename["Conqueror"]="gb12_conqueror";
+        s_vehiclename["M53/M55"]="m53_55";
+        s_vehiclename["WZ-120"]="ch18_wz_120";
+        s_vehiclename["WZ-111 1-4"]="ch12_111_1_2_3";
+        //level 10
+        s_vehiclename["Obj. 268"]="object268";
+        s_vehiclename["Obj. 263"]="object263";
+        s_vehiclename["T-62A"]="t62a";
+        s_vehiclename["IS-7"]="is_7";
+        s_vehiclename["IS-4"]="is_4";
+        s_vehiclename["Obj. 261"]="object_261";
+        s_vehiclename["JgPzE100"]="jagdpz_e100";
+        s_vehiclename["Maus"]="maus";
+        s_vehiclename["E-100"]="e_100";
+        s_vehiclename["E-50M"]="e50_ausf_m";
+        s_vehiclename["Leopard 1"]="leopard1";
+        s_vehiclename["G.W. E 100"]="g_e";
+        s_vehiclename["T57 Heavy"]="t57_58";
+        s_vehiclename["T110E4"]="t110e4";
+        s_vehiclename["T110E3"]="t110e3";
+        s_vehiclename["M48 Patton"]="m48a1";
+        s_vehiclename["T110E5"]="t110";
+        s_vehiclename["T92"]="t92";
+        s_vehiclename["Foch 155"]="amx_50fosh_155";
+        s_vehiclename["AMX 50 B"]="f10_amx_50b";
+        s_vehiclename["B-C 25 t"]="bat_chatillon25t";
+        s_vehiclename["B-C 155 58"]="bat_chatillon155_58";
+        s_vehiclename["FV4202"]="gb70_fv4202_105";
+        s_vehiclename["FV215b 183"]="gb48_fv215b_183";
+        s_vehiclename["FV215b"]="gb13_fv215b";
+        s_vehiclename["121"]="ch19_121";
+        s_vehiclename["113"]="ch22_113";
+    };
 }

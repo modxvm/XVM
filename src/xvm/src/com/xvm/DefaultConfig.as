@@ -985,25 +985,27 @@ class com.xvm.DefaultConfig
                 }
             },
             locale: {
-                XVM_translator : "Maxim Schedriviy",
-                attack : "attack",
-                fire : "fire",
-                ramming : "ramming",
-                world_collision : "falling",
-                UserInfoEHint :
-                    "Per-vehicle efficiency.\n" +
-                    "The values shown are as of the last statistics update: %DATE%\n" +
-                    "See actual current values in the detailed vehicle info.\n" +
-                    "Accuracy of the column values depends on the quality of the feed data.",
-                TeamRenderersHeaderTip : "Xwn rating.\nTo see detailed information, move mouse cursor to the player's name.",
-                PutOwnCrew : "Put own crew",
-                PutBestCrew : "Put best crew",
-                ussr : "USSR",
-                germany : "Germany",
-                usa : "USA",
-                france : "France",
-                uk : "UK",
-                china : "China"
+                common: {
+                    XVM_translator : "Maxim Schedriviy",
+                    attack : "attack",
+                    fire : "fire",
+                    ramming : "ramming",
+                    world_collision : "falling",
+                    UserInfoEHint :
+                        "Per-vehicle efficiency.\n" +
+                        "The values shown are as of the last statistics update: %DATE%\n" +
+                        "See actual current values in the detailed vehicle info.\n" +
+                        "Accuracy of the column values depends on the quality of the feed data.",
+                    TeamRenderersHeaderTip : "Xwn rating.\nTo see detailed information, move mouse cursor to the player's name.",
+                    PutOwnCrew : "Put own crew",
+                    PutBestCrew : "Put best crew",
+                    ussr : "USSR",
+                    germany : "Germany",
+                    usa : "USA",
+                    france : "France",
+                    uk : "UK",
+                    china : "China"
+                }
             },
       /*      images: {
               dmg_kind: {

@@ -198,9 +198,12 @@ class com.xvm.Locale
         }
     }
 
-    public static function get(text: String): String
+    public static function get(text: String,type: String): String
     {
-        //Logger.add("Locale: value: " + text + " | string: " + Config.s_config.locale[text] + " | fallback string: " + Config.s_config[text] );
-        return s_lang[text] || Config.s_config.locale[text] || text;
+        if (!type)
+            type = "common";
+
+        //Logger.add("Locale[get]: string: " + text + " | string: " + s_lang.locale[type][text] + " | fallback string: " + Config.s_config.locale[type][text] );
+        return s_lang.locale[type][text] || Config.s_config.locale[type][text] || text;
     }
 }
