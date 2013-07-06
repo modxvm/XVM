@@ -1,5 +1,5 @@
 ﻿{
-	"XVM translator": "RedMor",
+	"XVM_translator": "RedMor",
 	"enabled": "увімкнено",  
 	"disabled": "вимкнено",  
 	"Chance error": "Помилка розрахунку шансів",  

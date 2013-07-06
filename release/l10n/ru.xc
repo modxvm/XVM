@@ -1,5 +1,5 @@
 ﻿{
-	"XVM translator": "Maxim Schedriviy",
+	"XVM_translator": "Maxim Schedriviy",
 	"enabled": "включено",  
 	"disabled": "выключено",  
 	"Chance error": "Ошибка расчета шансов",  

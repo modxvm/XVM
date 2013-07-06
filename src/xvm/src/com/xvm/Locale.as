@@ -18,7 +18,6 @@ class com.xvm.Locale
     private static var _region = "EN";
     private static var _language = "EN";
     public static var s_lang:Object;
-    public static var s_fallback = {};
     private static var info_event:Object = null;
     private static var _initialized = false;
 
@@ -119,8 +118,8 @@ class com.xvm.Locale
             Logger.add("Locale: can not find language file. Filename:" + event.filename )
             if (event.filename == "en.xc")
             {
-                // en.xc not found, load strings from locale.as
-                LanguageFallback();
+                // en.xc not found, load strings from DefaultConfig.as
+                Logger.add("Locale: Fallback loaded. Translator: " + Config.s_config.locale.XVM_translator );
                 return;
             }
             else
@@ -177,41 +176,9 @@ class com.xvm.Locale
         Locale.s_lang = event.data;
         info_event = { type: "set_info" };
         GlobalEventDispatcher.dispatchEvent(info_event); // Just show version
-        Logger.add("Locale: language file loaded. Translator: " + get("XVM translator"));
+        Logger.add("Locale: language file loaded. Translator: " + get("XVM_translator"));
     }
 
-    public static function LanguageFallback() //This strings will be used if .xc not found
-    {
-        var tr;
-        // EN
-        tr = s_fallback;
-        tr["XVM translator"] = "Maxim Schedriviy";
-        tr["attack"] = "attack";
-        tr["fire"] = "fire";
-        tr["ramming"] = "ramming";
-        tr["world_collision"] = "falling";
-        tr["UserInfoEHint"] =
-            "Per-vehicle efficiency.\n" +
-            "The values shown are as of the last statistics update: %DATE%\n" +
-            "See actual current values in the detailed vehicle info.\n" +
-            "Accuracy of the column values depends on the quality of the feed data.";
-        tr["TeamRenderersHeaderTip"] =
-            "Xwn rating.\n" +
-            "To see detailed information, move mouse cursor to the player's name.";
-        // crew
-        tr["PutOwnCrew"] = "Put own crew";
-        tr["PutBestCrew"] = "Put best crew";
-        // squad
-        tr["ussr"] = "USSR";
-        tr["germany"] = "Germany";
-        tr["usa"] = "USA";
-        tr["france"] = "France";
-        tr["uk"] = "UK";
-        tr["china"] = "China";
-
-        Logger.add("Locale: Fallback loaded. Translator: " + get("XVM translator"));
-    }
-    
     public static function setRegion(value: String)
     {
         if (!value)
@@ -233,7 +200,7 @@ class com.xvm.Locale
 
     public static function get(text: String): String
     {
-        //Logger.add("Locale: value: " + text + " | string: " + s_lang[text] + " | fallback string: " + s_fallback[text] );
-        return s_lang[text] || s_fallback[text] || text;
+        //Logger.add("Locale: value: " + text + " | string: " + Config.s_config.locale[text] + " | fallback string: " + Config.s_config[text] );
+        return s_lang[text] || Config.s_config.locale[text] || text;
     }
 }

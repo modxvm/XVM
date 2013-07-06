@@ -1,5 +1,5 @@
 ﻿{
-	"XVM translator": "Alexander Shoumsky",
+	"XVM_translator": "Alexander Shoumsky",
 	"enabled": "укл.",  
 	"disabled": "адкл.",  
 	"Chance error": "Не ўдалося разлічыць шанцы",  

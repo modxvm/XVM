@@ -1,5 +1,5 @@
 ﻿{
-	"XVM translator": "Maxim Schedriviy",
+	"XVM_translator": "Maxim Schedriviy",
 	"attack": "attack",
 	"fire": "fire",
 	"ramming": "ramming",
