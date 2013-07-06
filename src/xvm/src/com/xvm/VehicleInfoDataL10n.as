@@ -10,8 +10,8 @@ class com.xvm.VehicleInfoDataL10n
     public static function LocalizedNameToVehicleKey(name)
     {
         VehicleInfoL10NDefaultValues();
-        Logger.add("Locale[vehicleinfo]: string: " + name + " | value: " +  Locale.s_lang.locale.vehiclename[name] + " | fallback string: " + s_vehiclename[name] );
-        return Locale.s_lang.locale.vehiclename[name] || Config.s_config.locale.vehiclename[name] || name ;
+        //Logger.add("Locale[vehicleinfo]: string: " + name + " | value: " +  Locale.s_lang.locale.vehiclename[name] + " | fallback string: " + s_vehiclename[name] );
+        return Locale.s_lang.locale.vehiclename[name] || Config.s_config.locale.vehiclename[name] || s_vehiclename[name] || name ;
     }
 
     private static function VehicleInfoL10NDefaultValues() {

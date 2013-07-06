@@ -10,7 +10,7 @@
     hangar/xwnInCompany - show XWN instead of XEFF in company windows
   * localization: XVM now using external files for translation
   * localization: New belarusian and ukranian translations
-  * localization: XVM now reads tank names from language file
+  * localization: XVM now reads tanks and maps names from language file
 
   [FIXES]
   * minimap: label of observer vehicle is no longer rotating with icon
