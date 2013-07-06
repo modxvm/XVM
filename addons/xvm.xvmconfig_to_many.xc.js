@@ -7,7 +7,7 @@
 ******************************************************************************/
 
 // версия скрипта
-var script_version = "9.4";
+var script_version = "9.5";
 
 // массив названий секций
 var sections = [    // порядок секций лучше не менять
@@ -235,6 +235,11 @@ for ( var j = 0; j < sections.length; j++) {
         else
             blankMinimap = false;
     }
+    // если перед секцией нет комментария, записываем дефолтный
+    if (numberComments(i)==0) {
+        inputConfig.splice(i, 0, sectionsComments[section].en, sectionsComments[section].ru);
+        i = i + 2;
+    }
     // создаем файл для записи секции
     if (section == "userInfo")
         section = "hangar";
@@ -316,8 +321,12 @@ if (fso.FileExists(path+author+"\\minimap.xc")) {
             if (j == sections.length-1 && blankMinimap)
                 lastRef = true;
         }
+        // если перед секцией нет комментария, записываем дефолтный
+        if (numberComments(i)==0) {
+            inputConfig.splice(i, 0, sectionsComments[section].en, sectionsComments[section].ru);
+            i = i + 2;
+        }
         startIndex = i;
-
         // создаем файл для записи секции
         file_out = path+author+"\\"+section+".xc";
         fout=fso.OpenTextFile(file_out,2,true,false);
