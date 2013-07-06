@@ -54,6 +54,12 @@
     Note: If you changing config manually, use Notepad, DO NOT use MS Word,
     WordPad and such editors.
 
+  3. If you want to use in XVM instead of Russian or English other language,
+    create the lang.xc file in folder \res_mods\xvm containing
+    lang=xx
+    Where xx - two-letter code of language which needs to be used.
+    Also, check that the xx.xc file is present in \res_mods\xvm\l10n
+
 -----------------------------------------------------------
 3. UPDATE
 -----------------------------------------------------------

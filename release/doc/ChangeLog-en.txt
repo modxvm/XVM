@@ -1,4 +1,4 @@
-  [NEW FUNCTIONS]
+﻿  [NEW FUNCTIONS]
   * minimap: new label types
   * new options:
     login/pingServers/showPingOnGameLoading - show ping during game loading, before login screen
@@ -8,6 +8,8 @@
       1 - Level, 2 - Type, 3 - Nation, 4 - Name, 5 - E, 6 - Fights, 7 - Wins, 8 - Class mark
       Sort order: >0 - default, <0 - inverse
     hangar/xwnInCompany - show XWN instead of XEFF in company windows
+  * localization: XVM now using external files for translation
+  * localization: New belarusian and ukranian translations
 
   [FIXES]
   * minimap: label of observer vehicle is no longer rotating with icon
@@ -15,10 +17,12 @@
   * minimap: fixed players death log list positioning while minimap is zoomed
   * minimap: fixed work when there is only one player in enemy team
   * hitlog: damage to drowned units is not taken into account anymore
-  
+
   [OTHER]
   * minimap: code refactoring
   * minimap: labels are detached from icons to lower layer
+  * localization: new belarusian and ukranian maps names
+  * localization: new ukranian tanks names
 
 XVM-4.0.0:
   * adaptation to WoT 0.8.6

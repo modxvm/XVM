@@ -415,6 +415,7 @@
                 return "kv_13";
             case "IS":
             case "ИС":
+            case "ІС":
                 return "is";
             case "KV-3":
             case "КВ-3":
@@ -483,6 +484,7 @@
             //level 8
             case "ISU-152":
             case "ИСУ-152":
+            case "ІСУ-152":
                 return "isu_152";
             case "SU-101":
             case "СУ-101":
@@ -492,9 +494,11 @@
                 return "t_44";
             case "IS-6":
             case "ИС-6":
+            case "ІС-6":
                 return "object252";
             case "IS-3":
             case "ИС-3":
+            case "ІС-3":
                 return "is_3";
             case "KV-4":
             case "КВ-4":
@@ -584,6 +588,7 @@
                 return "t_54";
             case "IS-8":
             case "ИС-8":
+            case "ІС-8":
                 return "is8";
             case "ST-I":    
             case "СТ-I":
@@ -646,9 +651,11 @@
                 return "t62a";
             case "IS-7":
             case "ИС-7":
+            case "ІС-7":
                 return "is_7";
             case "IS-4":
             case "ИС-4":
+            case "ІС-4":
                 return "is_4";
             case "Obj. 261":
             case "Об. 261":

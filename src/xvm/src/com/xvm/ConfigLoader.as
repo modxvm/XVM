@@ -77,6 +77,7 @@ class com.xvm.ConfigLoader
                 return;
             finallyBugWorkaround = true;
             ConfigLoader.ReloadGameRegion();
+            Locale.GetGameLanguage();
             //Logger.add("TRACE: ReloadConfigCallback(): finally::end");
         }
         //Logger.add("TRACE: ReloadConfigCallback(): end");
@@ -235,7 +236,7 @@ class com.xvm.ConfigLoader
         xml.load("../../../../WOTLauncher.cfg");
     }
 
-    private static function SetConfigLoaded()
+    public static function SetConfigLoaded()
     {
         Logger.add("Config: Loaded (" + s_src + ")");
         Config.s_loaded = true;
