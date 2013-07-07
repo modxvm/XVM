@@ -8,6 +8,10 @@ class wot.Minimap.view.LabelViewBuilder
 {
     public static var TEXT_FIELD_NAME:String = "textField";
     
+    private static var DEAD_DEPTH:Number = -1;
+    private static var LOST_DEPTH:Number = 0;
+    private static var ALIVE_DEPTH:Number = 1;
+    
     public static function createTextField(label:MovieClip):Void
     {
         var status:Number = label[LabelsContainer.STATUS_FIELD_NAME];
@@ -17,7 +21,9 @@ class wot.Minimap.view.LabelViewBuilder
         
         var offset:Point = MapConfig.unitLabelOffset(entryName, status);
 
-        var textField:TextField = label.createTextField(TEXT_FIELD_NAME, label.getNextHighestDepth(), offset.x, offset.y, 100, 40);
+        var depth:Number = defineDepth(status);
+        
+        var textField:TextField = label.createTextField(TEXT_FIELD_NAME, depth, offset.x, offset.y, 100, 40);
         textField.antiAliasType = "advanced";
         textField.html = true;
         textField.multiline = true;
@@ -45,5 +51,16 @@ class wot.Minimap.view.LabelViewBuilder
         }
 
         textField._alpha = MapConfig.unitLabelAlpha(entryName, status);
+    }
+    
+    private static function defineDepth(status:Number):Number
+    {
+        /** Math.abs because status can be negative which means player is teamkiller */
+        if (Math.abs(status) == Player.PLAYER_DEAD)
+            return DEAD_DEPTH;
+        else if (Math.abs(status) == Player.PLAYER_LOST)
+            return LOST_DEPTH;
+        else
+            return ALIVE_DEPTH;
     }
 }
