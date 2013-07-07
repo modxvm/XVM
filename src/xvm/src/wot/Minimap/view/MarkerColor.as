@@ -1,3 +1,4 @@
+import wot.Minimap.MinimapEntry
 import com.xvm.DefaultConfig;
 import com.xvm.ColorsManager;
 import com.xvm.Config;
@@ -13,7 +14,7 @@ class wot.Minimap.view.MarkerColor
         if (wrapper.m_type == null || wrapper.vehicleClass == null || wrapper.entryName == null || wrapper.entryName == "")
             return;
 
-        if (wrapper.entryName == "control")
+        if (wrapper.entryName == MinimapEntry.STATIC_ICON_CONTROL)
             return;
 
         if (wrapper.m_type == "player" && wrapper.entryName == "postmortemCamera")
@@ -22,7 +23,7 @@ class wot.Minimap.view.MarkerColor
         var color = null;
         if (Config.s_config.battle.useStandardMarkers)
         {
-            if (wrapper.entryName == "base")
+            if (wrapper.entryName == MinimapEntry.STATIC_ICON_BASE)
                 return;
             var schemeName = wrapper.entryName != "spawn" ? wrapper.colorSchemeName
                 : (wrapper.vehicleClass == "red") ? "vm_enemy" : (wrapper.vehicleClass == "blue") ? "vm_ally" : null;
@@ -33,7 +34,7 @@ class wot.Minimap.view.MarkerColor
         else
         {
             // use standard team bases if color is not changed
-            if (wrapper.entryName == "base")
+            if (wrapper.entryName == MinimapEntry.STATIC_ICON_BASE)
             {
                 var aa = Config.s_config.colors.system["ally_alive"];
                 var aad = DefaultConfig.config.colors.system["ally_alive"];
@@ -44,12 +45,12 @@ class wot.Minimap.view.MarkerColor
                 if (wrapper.vehicleClass == "red" && ea == ead)
                     return;
             }
-            var entryName = (wrapper.entryName != "base" && wrapper.entryName != "spawn") ? wrapper.entryName
+            var entryName = (wrapper.entryName != MinimapEntry.STATIC_ICON_BASE && wrapper.entryName != "spawn") ? wrapper.entryName
                 : (wrapper.vehicleClass == "red") ? "enemy" : (wrapper.vehicleClass == "blue") ? "ally" : null;
             if (entryName != null)
                 color = ColorsManager.getSystemColor(entryName, wrapper.isDead);
-            if (wrapper.entryName == "base")
-                wrapper.setEntryName("control");
+            if (wrapper.entryName == MinimapEntry.STATIC_ICON_BASE)
+                wrapper.setEntryName(MinimapEntry.STATIC_ICON_CONTROL);
         }
 
         if (color != null)

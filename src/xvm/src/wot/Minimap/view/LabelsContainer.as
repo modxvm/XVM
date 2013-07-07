@@ -20,9 +20,13 @@ class wot.Minimap.view.LabelsContainer
     public static var ENTRY_NAME_FIELD_NAME:String = "entryName";
     public static var VEHICLE_CLASS_FIELD_NAME:String = "vehicleClass";
     
-    private static var CONTAINER_NAME:String = "labelsContainer";
     
+    
+    private static var CONTAINER_NAME:String = "labelsContainer";
     private static var OFFMAP_COORDINATE:Number = 500;
+    private static var DEAD_DEPTH_START:Number = 100;
+    private static var LOST_DEPTH_START:Number = 200;
+	private static var ALIVE_DEPTH_START:Number = 300;
     
     public var holderMc:MovieClip;
     
@@ -64,7 +68,7 @@ class wot.Minimap.view.LabelsContainer
     
     private function createLabel(uid:Number, entryName:String, vehicleClass:String):Void
     {
-        var depth:Number = holderMc.getNextHighestDepth();
+        var depth:Number = getFreeDepth(ALIVE_DEPTH_START);
         var labelMc:MovieClip = holderMc.createEmptyMovieClip("" + uid, depth);
         
         /**
@@ -124,9 +128,35 @@ class wot.Minimap.view.LabelsContainer
                 {
                     labelMc[STATUS_FIELD_NAME] = actualStatus;
                     recreateTextField(labelMc);
+                    updateLabelDepth(labelMc);
                 }
             }
         }
+    }
+    
+    private function updateLabelDepth(labelMc:MovieClip):Void
+    {
+        var status:Number = labelMc[STATUS_FIELD_NAME];
+        var depth:Number;
+        if (Math.abs(status) == Player.PLAYER_DEAD)
+            depth = getFreeDepth(DEAD_DEPTH_START);
+        else if (Math.abs(status) == Player.PLAYER_LOST)
+            depth = getFreeDepth(LOST_DEPTH_START);
+        else
+            depth = getFreeDepth(ALIVE_DEPTH_START);
+        
+        labelMc.swapDepths(depth);
+    }
+    
+    private function getFreeDepth(start:Number):Number
+    {
+        var depth:Number = start;
+        while (holderMc.getInstanceAtDepth(depth))
+        {
+            depth++
+        }
+        
+        return depth;
     }
     
     private function getPresenceStatus(uid:Number):Number

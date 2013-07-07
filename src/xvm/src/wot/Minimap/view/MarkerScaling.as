@@ -5,7 +5,7 @@ import wot.Minimap.model.externalProxy.MapConfig;
 
 class wot.Minimap.view.MarkerScaling
 {
-    private static var STATIC_DECALS_NAME:String = "base";
+    
     private static var ORIGINAL_MARKERS_SCALING_FACTOR:Number = 0.5;
     
     public function MarkerScaling()
@@ -65,7 +65,8 @@ class wot.Minimap.view.MarkerScaling
                      * should not be alternatively scaled.
                      * Skip them.
                      */
-                    if (entry.entryName != STATIC_DECALS_NAME)
+                    if (entry.entryName != MinimapEntry.STATIC_ICON_BASE &&
+                        entry.entryName != MinimapEntry.STATIC_ICON_CONTROL)
                     {
                         entry._xscale = entry._yscale = scaleFactor;
                     }

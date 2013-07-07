@@ -27,6 +27,9 @@ class wot.Minimap.MinimapEntry
 {
     /////////////////////////////////////////////////////////////////
     // wrapped methods
+    
+    public static var STATIC_ICON_BASE:String = "base"; /** Team colored capture base and a start point */
+    public static var STATIC_ICON_CONTROL:String = "control"; /** Shared grey capture base */
 
     public var wrapper:net.wargaming.ingame.MinimapEntry;
     private var base:net.wargaming.ingame.MinimapEntry;
@@ -152,8 +155,8 @@ class wot.Minimap.MinimapEntry
     private function getLabel():Void
     {
         labelMc = labelsContainer.getLabel(uid, wrapper.entryName, wrapper.vehicleClass);
-        if (wrapper.entryName == "base")
-            wrapper.setEntryName("control");
+        if (wrapper.entryName == STATIC_ICON_BASE)
+            wrapper.setEntryName(STATIC_ICON_CONTROL);
     }
 
     private function setLabelToMimicEntryMoves():Void
