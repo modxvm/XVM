@@ -18,6 +18,7 @@ class com.xvm.Locale
     private static var _region = "EN";
     private static var _language = "EN";
     public static var s_lang:Object;
+    public static var s_lang_fallback = {};
     private static var info_event:Object = null;
     private static var _initialized = false;
 
@@ -119,6 +120,7 @@ class com.xvm.Locale
             if (event.filename == "en.xc")
             {
                 // en.xc not found, load strings from DefaultConfig.as
+                LoadLanguageFallback();
                 Logger.add("Locale: Fallback loaded. Translator: " + Config.s_config.locale.XVM_translator );
                 return;
             }
@@ -179,6 +181,123 @@ class com.xvm.Locale
         Logger.add("Locale: language file loaded. Translator: " + get("XVM_translator"));
     }
 
+    public static function LoadLanguageFallback() //This strings will be used if .xc not found
+    {
+        var tr;
+        // EN
+        tr = s_lang_fallback;
+        if (_language = "RU")
+        {
+            tr["enabled"] = "включено";
+            tr["disabled"] = "выключено";
+            // win chance
+            tr["Chance error"] = "Ошибка расчета шансов";
+            tr["Chance to win"] = "Шанс на победу";
+            tr["Global"] = "общий";
+            tr["Per-vehicle"] = "по технике";
+            // damage type
+            tr["attack"] = "атака";
+            tr["fire"] = "пожар";
+            tr["ramming"] = "таран";
+            tr["world_collision"] = "падение";
+            tr["<font size='15' color='#FFFFFF'>Enemy base capture! {{extra}}</font>"] =
+                "<font size='15' color='#FFFFFF'>Захват вражеской базы! {{extra}}</font>";
+            tr["<font size='17' color='#FFCC66'>Enemy base captured!</font>"] =
+                "<font size='17' color='#FFCC66'>Вражеская база захвачена!</font>";
+            tr["<font size='15' color='#FFFFFF'>Ally base capture! {{extra}}</font>"] =
+                "<font size='15' color='#FFFFFF'>Захват нашей базы! {{extra}}</font>";
+            tr["<font size='17' color='#FFCC66'>Ally base captured!</font>"] =
+                "<font size='17' color='#FFCC66'>Наша база захвачена!</font>";
+            tr["Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>"] =
+                "Захватчиков: <b><font color='#FFCC66'>{{tanks}}</font></b> Осталось: <b><font color='#FFCC66'>{{time}}</font><b>";
+            tr["Hit percent"] = "Процент попаданий";
+            tr["Damage upon detecting"] = "Урон по вашим разведданным";
+            tr["Damage dealt"] = "Нанесенный урон";
+            // TeamRenderers
+            tr["TeamRenderersHeaderTip"] =
+                "Рейтинг xwn.\n" +
+                "Чтобы увидеть более подробную информацию, наведите курсор мыши на значение рейтинга интересующего игрока.";
+            tr["Friend"] = "Друг";
+            tr["Ignored"] = "Игнор";
+            tr["Load statistics"] = "Загрузить статистику";
+            // UserInfo
+            tr["UserInfoEHint"] =
+                "Эффективность по танку.\n" +
+                "Значение указано на момент последнего обновления статистики: %DATE%\n" +
+                "Актуальное значение на текущий момент - в детальной информации по технике.\n" +
+                "Правильность значений в колонке зависит от качества полученных исходных данных.";
+            tr["Data was updated at"] = "Данные были обновлены";
+            tr[" to "] = " до ";
+            tr["EFF"] = "РЭ";
+            tr["updated"] = "обновлено";
+            tr["unknown"] = "неизвестно";
+            tr["Avg level"] = "Ср. уровень";
+            tr["Spotted"] = "Засвет";
+            tr["Defence"] = "Защита";
+            tr["Capture"] = "Захват";
+            tr["player (average / top)"] = "игрок (средний / топ)";
+            tr["top"] = "топ";
+            tr["Spec dmg"] = "Уд. дамаг";
+            tr["All tanks"] = "Все танки";
+            tr["Show all tanks in the game"] = "Показать все танки в игре";
+            tr["Player tanks"] = "Танки игрока";
+            tr["Show all tanks played"] = "Показать все танки, на которых играл";
+            tr["In hangar"] = "В ангаре";
+            tr["Show only tanks in own hangar"] = "Показать только танки в своем ангаре";
+            tr["Filter"] = "Фильтр";
+            tr["Level"] = "Уровень";
+            tr["Type"] = "Тип";
+            tr["Nation"] = "Нация";
+            tr["Name"] = "Имя";
+            tr["Fights"] = "Боёв";
+            tr["Wins"] = "Побед";
+            // crew
+            tr["PutOwnCrew"] = "Родной экипаж";
+            tr["PutBestCrew"] = "Лучший экипаж";
+            //squad
+            tr["Vehicle"] = "Танк";
+            tr["Battle tiers"] = "Уровень боёв";
+            tr["ussr"] = "СССР";
+            tr["germany"] = "Германия";
+            tr["usa"] = "США";
+            tr["france"] = "Франция";
+            tr["uk"] = "Великобритания";
+            tr["china"] = "Китай";
+            tr["HT"] = "ТТ";
+            tr["MT"] = "СТ";
+            tr["LT"] = "ЛТ";
+            tr["TD"] = "ПТ";
+            tr["SPG"] = "САУ";
+        }
+        else
+        {
+            tr["XVM translator"] = "Maxim Schedriviy";
+            tr["attack"] = "attack";
+            tr["fire"] = "fire";
+            tr["ramming"] = "ramming";
+            tr["world_collision"] = "falling";
+            tr["UserInfoEHint"] =
+                "Per-vehicle efficiency.\n" +
+                "The values shown are as of the last statistics update: %DATE%\n" +
+                "See actual current values in the detailed vehicle info.\n" +
+                "Accuracy of the column values depends on the quality of the feed data.";
+            tr["TeamRenderersHeaderTip"] =
+                "Xwn rating.\n" +
+                "To see detailed information, move mouse cursor to the player's name.";
+            // crew
+            tr["PutOwnCrew"] = "Put own crew";
+            tr["PutBestCrew"] = "Put best crew";
+            // squad
+            tr["ussr"] = "USSR";
+            tr["germany"] = "Germany";
+            tr["usa"] = "USA";
+            tr["france"] = "France";
+            tr["uk"] = "UK";
+            tr["china"] = "China";
+        }
+
+    }
+
     public static function setRegion(value: String)
     {
         if (!value)
@@ -203,7 +322,7 @@ class com.xvm.Locale
         if (!type)
             type = "common";
 
-        //Logger.add("Locale[get]: string: " + text + " | string: " + s_lang.locale[type][text] + " | fallback string: " + Config.s_config.locale[type][text] );
-        return s_lang.locale[type][text] || Config.s_config.locale[type][text] || text;
+        //Logger.add("Locale[get]: string: " + text + " | string: " + s_lang.locale[type][text] + " | fallback string: " + s_lang_fallback[text] );
+        return s_lang.locale[type][text] || s_lang_fallback[text] || text;
     }
 }

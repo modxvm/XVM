@@ -11,7 +11,7 @@ class com.xvm.VehicleInfoDataL10n
     {
         VehicleInfoL10NDefaultValues();
         //Logger.add("Locale[vehicleinfo]: string: " + name + " | value: " +  Locale.s_lang.locale.vehiclename[name] + " | fallback string: " + s_vehiclename[name] );
-        return Locale.s_lang.locale.vehiclename[name] || Config.s_config.locale.vehiclename[name] || s_vehiclename[name] || name ;
+        return Locale.s_lang.locale.vehiclename[name] || s_vehiclename[name] || name ;
     }
 
     private static function VehicleInfoL10NDefaultValues() {
@@ -19,21 +19,31 @@ class com.xvm.VehicleInfoDataL10n
             return;
         _initialized = true;
         
-        //Tank names
         //level 1
+        s_vehiclename["МС-1"]="ms_1";
         s_vehiclename["MS-1"]="ms_1";
         s_vehiclename["LTraktor"]="ltraktor";
         s_vehiclename["T1"]="t1_cunningham";
         s_vehiclename["FT"]="renaultft";
         s_vehiclename["Medium I"]="gb01_medium_mark_i";
         s_vehiclename["NC-31"]="ch06_renault_nc31";
+
         //level 2
+        //en
         s_vehiclename["AT-1"]="at_1";
         s_vehiclename["T-60"]="t-60";
         s_vehiclename["BT-2"]="bt_2";
         s_vehiclename["T-26"]="t_26";
         s_vehiclename["SU-18"]="su_18";
         s_vehiclename["Tetrarch"]="tetrarch_ll";
+        //ru
+        s_vehiclename["АТ-1"]="at_1";
+        s_vehiclename["Т-60"]="t-60";
+        s_vehiclename["БТ-2"]="bt_2";
+        s_vehiclename["Т-26"]="t_26";
+        s_vehiclename["СУ-18"]="su_18";
+        s_vehiclename["Тетрарх"]="tetrarch_ll";
+        //common
         s_vehiclename["G.Pz. Mk. VI"]="gw_mk_vie";
         s_vehiclename["PzJg I"]="panzerjager_i";
         s_vehiclename["Pz. 35 (t)"]="pz35t";
@@ -55,7 +65,9 @@ class com.xvm.VehicleInfoDataL10n
         s_vehiclename["Cruiser I"]="gb03_cruiser_mk_i";
         s_vehiclename["Medium II"]="gb05_vickers_medium_mk_ii";
         s_vehiclename["VAE Type B"]="ch07_vickers_mke_type_bt26";
+
         //level 3
+        //en
         s_vehiclename["SU-76"]="su_76";
         s_vehiclename["T-70"]="t-70";
         s_vehiclename["BT-7"]="bt_7";
@@ -64,6 +76,16 @@ class com.xvm.VehicleInfoDataL10n
         s_vehiclename["SU-26"]="su_26";
         s_vehiclename["BT-SV"]="bt_sv";
         s_vehiclename["M3 Light"]="m3_stuart_ll";
+        //ru
+        s_vehiclename["СУ-76"]="su_76";
+        s_vehiclename["Т-70"]="t-70";
+        s_vehiclename["БТ-7"]="bt_7";
+        s_vehiclename["Т-127"]="t_127";
+        s_vehiclename["Т-46"]="t_46";
+        s_vehiclename["СУ-26"]="su_26";
+        s_vehiclename["БТ-СВ"]="bt_sv";
+        s_vehiclename["М3 лёгкий"]="m3_stuart_ll";
+        //common
         s_vehiclename["Bison"]="bison_i";
         s_vehiclename["Wespe"]="wespe";
         s_vehiclename["Marder II"]="g20_marder_ii";
@@ -91,7 +113,9 @@ class com.xvm.VehicleInfoDataL10n
         s_vehiclename["Cruiser II"]="gb69_cruiser_mk_ii";
         s_vehiclename["Medium III"]="gb06_vickers_medium_mk_iii";
         s_vehiclename["Chi-Ha"]="ch08_type97_chi_ha";
+
         //level 4
+        //en
         s_vehiclename["SU-85B"]="gaz_74b";
         s_vehiclename["T-80"]="t80";
         s_vehiclename["A-20"]="a_20";
@@ -100,6 +124,16 @@ class com.xvm.VehicleInfoDataL10n
         s_vehiclename["T-28"]="t_28";
         s_vehiclename["SU-5"]="su_5";
         s_vehiclename["A-32"]="a_32";
+        //ru
+        s_vehiclename["СУ-85Б"]="gaz_74b";
+        s_vehiclename["Т-80"]="t80";
+        s_vehiclename["А-20"]="a_20";
+        s_vehiclename["Валентайн II"]="valentine_ll";
+        s_vehiclename["Т-50"]="t_50";
+        s_vehiclename["Т-28"]="t_28";
+        s_vehiclename["СУ-5"]="su_5";
+        s_vehiclename["А-32"]="a_32";
+        //common
         s_vehiclename["Pz.Sfl. IVb"]="pz_sfl_ivb";
         s_vehiclename["StPz II"]="sturmpanzer_ii";
         s_vehiclename["Hetzer"]="hetzer";
@@ -123,7 +157,9 @@ class com.xvm.VehicleInfoDataL10n
         s_vehiclename["Valentine"]="gb04_valentine";
         s_vehiclename["Matilda"]="gb07_matilda";
         s_vehiclename["M5A1 Stuart"]="ch09_m5";
+
         //level 5
+        //en
         s_vehiclename["SU-85"]="su_85";
         s_vehiclename["T-34"]="t_34";
         s_vehiclename["Matilda IV"]="matilda_ii_ll";
@@ -134,6 +170,18 @@ class com.xvm.VehicleInfoDataL10n
         s_vehiclename["KV-220"]="kv_220";
         s_vehiclename["KV-220 T"]="kv_220_action";
         s_vehiclename["SU-85I"]="su_85i";
+        //ru
+        s_vehiclename["СУ-85"]="su_85";
+        s_vehiclename["Т-34"]="t_34";
+        s_vehiclename["Матильда IV"]="matilda_ii_ll";
+        s_vehiclename["Т-50-2"]="t_50_2";
+        s_vehiclename["КВ-1"]="kv1";
+        s_vehiclename["Черчилль III"]="churchill_ll";
+        s_vehiclename["СУ-122А"]="su122a";
+        s_vehiclename["КВ-220"]="kv_220";
+        s_vehiclename["КВ-220 Т"]="kv_220_action";
+        s_vehiclename["СУ-85И"]="su_85i";
+        //common
         s_vehiclename["Grille"]="grille";
         s_vehiclename["StuGIII"]="stugiii";
         s_vehiclename["T-25"]="t_25";
@@ -160,7 +208,9 @@ class com.xvm.VehicleInfoDataL10n
         s_vehiclename["Churchill I"]="gb08_churchill_i";
         s_vehiclename["Matilda BP"]="gb68_matilda_black_prince";
         s_vehiclename["Type T-34"]="ch21_t34";
+
         //level 6
+        //en
         s_vehiclename["SU-100Y"]="su100y";
         s_vehiclename["SU-100"]="su_100";
         s_vehiclename["T-34-85"]="t_34_85";
@@ -168,6 +218,15 @@ class com.xvm.VehicleInfoDataL10n
         s_vehiclename["T-150"]="t150";
         s_vehiclename["KV-2"]="kv2";
         s_vehiclename["SU-8"]="su_8";
+        //ru
+        s_vehiclename["СУ-100Y"]="su100y";
+        s_vehiclename["СУ-100"]="su_100";
+        s_vehiclename["Т-34-85"]="t_34_85";
+        s_vehiclename["КВ-1С"]="kv_1s";
+        s_vehiclename["Т-150"]="t150";
+        s_vehiclename["КВ-2"]="kv2";
+        s_vehiclename["СУ-8"]="su_8";
+        //common
         s_vehiclename["Hummel"]="hummel";
         s_vehiclename["D. Max"]="dickermax";
         s_vehiclename["JagdPzIV"]="jagdpziv";
@@ -197,7 +256,9 @@ class com.xvm.VehicleInfoDataL10n
         s_vehiclename["TOG II*"]="gb63_tog_ii";
         s_vehiclename["59-16"]="ch15_59_16";
         s_vehiclename["Type 58"]="ch20_type58";
+
         //level 7
+        //en
         s_vehiclename["SU-152"]="su_152";
         s_vehiclename["SU-100M1"]="su100m1";
         s_vehiclename["SU-122-44"]="su122_44";
@@ -207,6 +268,17 @@ class com.xvm.VehicleInfoDataL10n
         s_vehiclename["KV-3"]="kv_3";
         s_vehiclename["S-51"]="s_51";
         s_vehiclename["SU-14-1"]="su14_1";
+        //ru
+        s_vehiclename["СУ-152"]="su_152";
+        s_vehiclename["СУ-100М1"]="su100m1";
+        s_vehiclename["СУ-122-44"]="su122_44";
+        s_vehiclename["Т-43"]="t_43";
+        s_vehiclename["КВ-13"]="kv_13";
+        s_vehiclename["ИС"]="is";
+        s_vehiclename["КВ-3"]="kv_3";
+        s_vehiclename["С-51"]="s_51";
+        s_vehiclename["СУ-14-1"]="su14_1";
+        //common
         s_vehiclename["G.W. Panther"]="g_panther";
         s_vehiclename["JgPanther"]="jagdpanther";
         s_vehiclename["E-25"]="e-25";
@@ -234,7 +306,9 @@ class com.xvm.VehicleInfoDataL10n
         s_vehiclename["T-34-1"]="ch04_t34_1";
         s_vehiclename["IS-2"]="ch10_is2";
         s_vehiclename["Type 62"]="ch02_type62";
+
         //level 8
+        //en
         s_vehiclename["ISU-152"]="isu_152";
         s_vehiclename["SU-101"]="su_101";
         s_vehiclename["T-44"]="t_44";
@@ -243,6 +317,16 @@ class com.xvm.VehicleInfoDataL10n
         s_vehiclename["KV-4"]="kv4";
         s_vehiclename["KV-5"]="kv_5";
         s_vehiclename["SU-14-2"]="su_14";
+        //ru
+        s_vehiclename["ИСУ-152"]="isu_152";
+        s_vehiclename["СУ-101"]="su_101";
+        s_vehiclename["Т-44"]="t_44";
+        s_vehiclename["ИС-6"]="object252";
+        s_vehiclename["ИС-3"]="is_3";
+        s_vehiclename["КВ-4"]="kv4";
+        s_vehiclename["КВ-5"]="kv_5";
+        s_vehiclename["СУ-14-2"]="su_14";
+        //common
         s_vehiclename["G.W. Tiger P"]="gw_tiger_p";
         s_vehiclename["JgTig.8;8 cm"]="jagdtiger_sdkfz_185";
         s_vehiclename["JgPanthII"]="jagdpantherii";
@@ -276,13 +360,23 @@ class com.xvm.VehicleInfoDataL10n
         s_vehiclename["Type 59 G"]="ch01_type59_gold";
         s_vehiclename["WZ-111"]="ch03_wz_111";
         s_vehiclename["112"]="ch23_112";
+
         //level 9
+        //en
         s_vehiclename["Obj. 704"]="object_704";
         s_vehiclename["SU-122-54"]="su122_54";
         s_vehiclename["T-54"]="t_54";
         s_vehiclename["IS-8"]="is8";
         s_vehiclename["ST-I"]="st_i";
         s_vehiclename["212A"]="object_212";
+        //ru
+        s_vehiclename["Об. 704"]="object_704";
+        s_vehiclename["СУ-122-54"]="su122_54";
+        s_vehiclename["Т-54"]="t_54";
+        s_vehiclename["ИС-8"]="is8";   
+        s_vehiclename["СТ-I"]="st_i";
+        s_vehiclename["212А"]="object_212";
+        //common
         s_vehiclename["Jagdtiger"]="jagdtiger";
         s_vehiclename["VK 45.02 P"]="vk4502p";
         s_vehiclename["E-75"]="e_75";
@@ -304,13 +398,29 @@ class com.xvm.VehicleInfoDataL10n
         s_vehiclename["M53/M55"]="m53_55";
         s_vehiclename["WZ-120"]="ch18_wz_120";
         s_vehiclename["WZ-111 1-4"]="ch12_111_1_2_3";
+
         //level 10
+        //en
         s_vehiclename["Obj. 268"]="object268";
         s_vehiclename["Obj. 263"]="object263";
         s_vehiclename["T-62A"]="t62a";
         s_vehiclename["IS-7"]="is_7";
         s_vehiclename["IS-4"]="is_4";
         s_vehiclename["Obj. 261"]="object_261";
+        //ru
+        s_vehiclename["Obj. 268"]="object268";
+        s_vehiclename["Obj. 263"]="object263";
+        s_vehiclename["T-62A"]="t62a";
+        s_vehiclename["IS-7"]="is_7";
+        s_vehiclename["IS-4"]="is_4";
+        s_vehiclename["Obj. 261"]="object_261";
+        //common
+        s_vehiclename["Об. 268"]="object268";
+        s_vehiclename["Об. 263"]="object263";
+        s_vehiclename["Т-62А"]="t62a";
+        s_vehiclename["ИС-7"]="is_7";
+        s_vehiclename["ИС-4"]="is_4";
+        s_vehiclename["Об. 261"]="object_261";
         s_vehiclename["JgPzE100"]="jagdpz_e100";
         s_vehiclename["Maus"]="maus";
         s_vehiclename["E-100"]="e_100";
@@ -331,6 +441,6 @@ class com.xvm.VehicleInfoDataL10n
         s_vehiclename["FV215b 183"]="gb48_fv215b_183";
         s_vehiclename["FV215b"]="gb13_fv215b";
         s_vehiclename["121"]="ch19_121";
-        s_vehiclename["113"]="ch22_113";
+        s_vehiclename["113"]="ch22_113"
     };
 }
