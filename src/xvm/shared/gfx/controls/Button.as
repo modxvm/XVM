@@ -5,8 +5,6 @@
     var tooltipText;
     function get label();
     function set label(value);
-    function get disabled();
-    function set disabled(value);
     function get selected();
     function set selected(value);
     function get groupName();

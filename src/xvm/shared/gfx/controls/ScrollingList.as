@@ -8,8 +8,6 @@
     function set scrollPosition(value);
     function get selectedIndex();
     function set selectedIndex(value);
-    function get disabled();
-    function set disabled(value);
     function scrollToIndex(index);
     function get rowCount();
     function set rowCount(value);
