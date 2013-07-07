@@ -43,7 +43,6 @@
     <compile path="src\wot\battleloading" />
     <compile path="src\wot\crew\tankmen" />
     <compile path="src\wot\FinalStatistic" />
-    <compile path="src\wot\Minimap" />
     <compile path="src\wot\PlayersPanel" />
     <compile path="src\wot\SquadMemberRenderer" />
     <compile path="src\wot\StatisticForm" />
@@ -55,6 +54,8 @@
     <compile path="src\wot\LangBarPanel" />
     <compile path="src\wot\gameloading" />
     <compile path="src\com\xvm\Wrapper.as" />
+    <compile path="src\wot\Minimap\Minimap.as" />
+    <compile path="src\wot\Minimap\MinimapEntry.as" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>
