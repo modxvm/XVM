@@ -318,7 +318,7 @@ class com.xvm.Macros
                 if (label == "M_r_A")
                     return "Флаттершай - лучшая пони!";
                 if (label == "XlebniDizele4ku")
-                    return "Буркартошкин!";
+                    return "Хлебни Дизелёчку!";
                 if (label == "sirmax2" || label == "0x01" || label == "_SirMax_")
                     return "«сэр Макс» (XVM)";
                 break;
@@ -326,8 +326,6 @@ class com.xvm.Macros
             case "CT":
                 if (label == "M_r_A_RU" || label == "M_r_A_EU")
                     return "Fluttershy is best pony!";
-                if (label == "XlebniDizele4ku_RU")
-                    return "XlebniDizele4ku_XVM";
                 if (label == "sirmax2_RU" || label == "sirmax2_EU" || label == "sirmax_NA" || label == "0x01_RU")
                     return "«sir Max» (XVM)";
                 break;
