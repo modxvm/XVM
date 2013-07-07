@@ -150,14 +150,14 @@ class wot.Minimap.MinimapEntry
         }
     }
     private function getLabel():Void
-        {
+    {
         labelMc = labelsContainer.getLabel(uid, wrapper.entryName, wrapper.vehicleClass);
-            if (wrapper.entryName == "base")
-                wrapper.setEntryName("control");
-        }
+        if (wrapper.entryName == "base")
+            wrapper.setEntryName("control");
+    }
 
     private function setLabelToMimicEntryMoves():Void
-        {
+    {
         wrapper.onEnterFrame = function()
         {
             /**
