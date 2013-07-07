@@ -1,4 +1,3 @@
-import com.xvm.Logger;
 import wot.Minimap.dataTypes.Player;
 import com.xvm.Utils;
 import flash.geom.Point;
@@ -56,7 +55,6 @@ class wot.Minimap.model.externalProxy.MapConfig
             public static function unitLabelFormat(entryName:String, status:Number)
             {
                 var unitType:String = defineCfgProperty(entryName, status);
-                Logger.add("unitType " + unitType);
                 return labels.units.format[unitType];
             }
             /** CSS */
@@ -176,9 +174,6 @@ class wot.Minimap.model.externalProxy.MapConfig
         
         if (property == "lostenemy")
             property = "lost"; /** Backwards config compatibility */
-        
-        if (entryName = "teamkiller")
-            Logger.add("tk prop " + property);
         
         return property;
     }
