@@ -173,6 +173,9 @@ class wot.Minimap.model.mapSize.MapSizeBase
         s_mapname["Kloster"]="19_monastery";
         s_mapname["小镇争夺战"]="19_monastery"; 
 
+        s_mapname["Топь"] = "22_slough";
+        s_mapname["Swamp"] = "22_slough";
+
         s_mapname["Вестфилд"]="23_westfeld";
         s_mapname["Westfield"]="23_westfeld";
         s_mapname["韦斯特菲尔德"]="23_westfeld";

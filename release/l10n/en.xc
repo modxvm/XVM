@@ -91,6 +91,7 @@
             "Widepark": "17_munchen",
             "Cliff": "18_cliff",
             "Abbey": "19_monastery",
+            "Swamp": "22_slough",
             "Westfield": "23_westfeld",
             "Sand River": "28_desert",
             "El Halluf": "29_el_hallouf",
