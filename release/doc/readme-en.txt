@@ -54,11 +54,10 @@
     Note: If you changing config manually, use Notepad, DO NOT use MS Word,
     WordPad and such editors.
 
-  3. If you want to use in XVM instead of Russian or English other language,
-    create the lang.xc file in folder \res_mods\xvm containing
-    lang=xx
-    Where xx - two-letter code of language which needs to be used.
-    Also, check that the xx.xc file is present in \res_mods\xvm\l10n
+  3. If XVM incorrectly detects the language of the game client,
+    then in the configuration file (by default\res_mods\xvm\configs\@default\@xvm.xc)
+    change the value of the variable "language" from "auto" to the language code.
+    The language code must match the name of the file in the \res_mods\xvm\l10n\ (for example, "en").
 
 -----------------------------------------------------------
 3. UPDATE

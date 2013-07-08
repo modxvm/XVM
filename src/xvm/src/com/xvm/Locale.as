@@ -2,6 +2,7 @@
  * ...
  * @author Maxim Schedriviy
  * @author Michael Pavlyshko
+ * @author Pavel Maca
  */
 import com.xvm.Config;
 import com.xvm.ConfigLoader;
@@ -13,31 +14,32 @@ import com.xvm.Logger;
 import com.xvm.Utils;
 import flash.external.ExternalInterface;
 import net.wargaming.managers.Localization;
+
 class com.xvm.Locale
 {
     private static var _language:String;
     public static var s_lang:Object;
     public static var s_lang_fallback = {};
     private static var _initialized:Boolean = false;
-    
+
     public static var AUTO_DETECTION = "auto";
     private static var timer;
-    
+
     public static function loadLocale() 
     {
         if (_initialized) return;
         _initialized = true;
-        
+
         if (Config.s_config.definition.language == AUTO_DETECTION) {
             getLanguageFromGettext();
-            
+
         }else {
             _language = Config.s_config.definition.language.toLowerCase();
             Logger.add("Locale: '" + _language + "' (config)");
             loadLocaleFile();
         }
     }
-    
+
     private static function getLanguageFromGettext() 
     {
         //Logger.add("Locale: timer tick");
@@ -45,7 +47,7 @@ class com.xvm.Locale
         {
             clearInterval(timer);
             timer = null;
-                
+
             _language = Localization.makeString("#settings:LANGUAGE_CODE", { } ).toLowerCase();
             Logger.add("Locale: '" + _language + "' (detected)");
             loadLocaleFile();
@@ -53,13 +55,13 @@ class com.xvm.Locale
             timer = setInterval(getLanguageFromGettext, 100);
         }
     }
-    
+
     private static function loadLocaleFile() 
     {
         LoadLanguageFallback();
         JSONxLoader.LoadAndParse(Defines.XVM_ROOT + "l10n/" + _language + ".xc", null, languageFileCallback);
     }
-    
+
     private static function languageFileCallback(event)
     {
         if (event.error == null) {
@@ -72,18 +74,18 @@ class com.xvm.Locale
                 Logger.add("Locale: Can not find language file. Filename:" + event.filename );
                 return;
             }
-            
+
             var ex = event.error;
             var text:String = "Error loading language file '" + event.filename + "': ";
             text += ConfigUtils.parseErrorEvent(event);
-            
+
             /** Show error message on battle loading */
             var info_event = { type: "set_info", error: text };
             GlobalEventDispatcher.dispatchEvent(info_event);
             Logger.add(String(text).substr(0, 200));
         }
     }
-        
+
     public static function LoadLanguageFallback() //This strings will be used if .xc not found
     {
         var tr = s_lang_fallback;
@@ -198,11 +200,12 @@ class com.xvm.Locale
             tr["china"] = "China";
         }
     }
+
     public static function get(text: String,type: String): String
     {
         if (!type)
             type = "common";
-          //Logger.add("Locale[get]: string: " + text + " | string: " + s_lang.locale[type][text] + " | fallback string: " + s_lang_fallback[text] );
+        //Logger.add("Locale[get]: string: " + text + " | string: " + s_lang.locale[type][text] + " | fallback string: " + s_lang_fallback[text] + " | language: " + _language );
         return s_lang.locale[type][text] || s_lang_fallback[text] || text;
     }
 }
