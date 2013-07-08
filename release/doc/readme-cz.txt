@@ -31,28 +31,33 @@
 -----------------------------------------------------------
 
   1.  Rozbalte archiv do složky s hrou:
-        Kliknout pravým tlačítkem myši na soubor, zvolit možnost "Extrahovat vše..."
-        -> najít adresář se hrou (výchozí C:\Games\World of Tanks) -> "Extrahovat".
+      Kliknout pravým tlačítkem myši na soubor, zvolit možnost "Extrahovat vše..."
+      -> najít adresář se hrou (výchozí C:\Games\World of Tanks) -> "Extrahovat".
 
   2.  Nemusíte nic nastavovat.
-        Pokud chcete nějaké jiné, než výchozí nastavení, je nutné vytvořit soubor s nastavením:
-        "\res_mods\[VERZE HRY]\gui\flash\XVM.xvmconf" v adresáři hry.
+      Pokud chcete nějaké jiné, než výchozí nastavení, je nutné vytvořit soubor s nastavením:
+      "\res_mods\[VERZE HRY]\gui\flash\XVM.xvmconf" v adresáři hry.
 
-        Můžete použít některé z připravených souborů s nastavením ve složce "\xvm-doc\samples\" v adresáři hry.
+      Můžete použít některé z připravených souborů s nastavením ve složce "\xvm-doc\samples\" v adresáři hry.
 
-        Můžete použít online editor:
-        http://www.koreanrandom.com/forum/topic/1422-/#entry11316
+      Můžete použít online editor:
+      http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
-        Starší soubory s nastavením (OTMData.xml) jsou také podporovány,
-        můžete je použít, pokud nechcete využít nových funkcí.
+      Starší soubory s nastavením (OTMData.xml) jsou také podporovány,
+      můžete je použít, pokud nechcete využít nových funkcí.
 
-        Všechna možná nastavení můžete najít v tomto souboru:
-        "\xvm-doc\samples\Full config EN\XVM.xvmconf"
+      Všechna možná nastavení můžete najít v tomto souboru:
+      "\xvm-doc\samples\Full config EN\XVM.xvmconf"
 
-        !!!Poznámka!!!:
-        ---------------
-        Pokud budete ručně měnit soubor nastavení, použijte Poznámkový blok,
-        NEPOUŽÍVEJTE Word, WordPad ani další podobné editory.
+      !!!Poznámka!!!:
+      ---------------
+      Pokud budete ručně měnit soubor nastavení, použijte Poznámkový blok,
+      NEPOUŽÍVEJTE Word, WordPad ani další podobné editory.
+
+ 3.   Pokud XVM nesprávně rozpozná jazyk herního klienta,
+      pak v konfiguračním souboru (ve výchozím nastavení \res_mods\xvm\configs\@default\@xvm.xc)
+      změňte hodnotu proměnné "language" z "auto" na kód jazyka.
+      Kód jazyka musí odpovídat názvu souboru ve složce \res_mods\xvm\l10n\ (například, "cs").
 
 
 -----------------------------------------------------------
