@@ -15,6 +15,8 @@ class wot.Minimap.shapes.Square extends ShapeAttach
      */
 
     private static var SQUARE_SIDE_IN_METERS:Number = 1000;
+    
+    private var squareClip:MovieClip;
 
     public function Square()
     {
@@ -26,10 +28,10 @@ class wot.Minimap.shapes.Square extends ShapeAttach
 
         super();
 
-        var mc:MovieClip = createSquareClip();
-        defineStyle(mc);
-        drawLines(mc);
-        updatePosition(mc);
+        squareClip = createSquareClip();
+        defineStyle();
+        drawLines();
+        updatePosition();
     }
 
     //--Private
@@ -39,35 +41,35 @@ class wot.Minimap.shapes.Square extends ShapeAttach
         return IconsProxy.createEmptyMovieClip("square", Minimap.SQUARE_1KM_INDEX);
     }
 
-    private function defineStyle(mc:MovieClip):Void
+    private function defineStyle():Void
     {
         var config:Object = MapConfig.squareConfig;
 
-        mc.lineStyle(config.thickness, parseInt(config.color, 16), config.alpha, null, null, "none");
+        squareClip.lineStyle(config.thickness, parseInt(config.color, 16), config.alpha, null, null, "none");
     }
 
-    private function drawLines(mc:MovieClip):Void
+    private function drawLines():Void
     {
         var offset:Number = scaleFactor * SQUARE_SIDE_IN_METERS / 2;
 
         /** Top line */
-        mc.moveTo(-offset, -offset);
-        mc.lineTo( offset, -offset);
+        squareClip.moveTo(-offset, -offset);
+        squareClip.lineTo( offset, -offset);
 
         /** Right line */
-        mc.moveTo( offset, -offset);
-        mc.lineTo( offset,  offset);
+        squareClip.moveTo( offset, -offset);
+        squareClip.lineTo( offset,  offset);
 
         /** Bottom line */
-        mc.moveTo( offset,  offset);
-        mc.lineTo(-offset,  offset);
+        squareClip.moveTo( offset,  offset);
+        squareClip.lineTo(-offset,  offset);
 
         /** Uper line */
-        mc.moveTo(-offset,  offset);
-        mc.lineTo( -offset, -offset);
+        squareClip.moveTo(-offset,  offset);
+        squareClip.lineTo( -offset, -offset);
     }
 
-    private function updatePosition(mc:MovieClip):Void
+    private function updatePosition():Void
     {
         IconsProxy.setOnEnterFrame(function()
         {
@@ -81,5 +83,11 @@ class wot.Minimap.shapes.Square extends ShapeAttach
     {
         var vi2 = VehicleInfo.getInfo2(PlayersPanelProxy.self.icon);
         return vi2 == null ? false : vi2.type == "SPG";
+    }
+    
+    /** overwrite */
+    private function postmortemMod(event) {
+		squareClip._visible = false;
+		super.postmortemMod.apply(arguments);
     }
 }
