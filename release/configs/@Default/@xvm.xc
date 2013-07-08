@@ -54,7 +54,13 @@
 
     // The minimum required version of the XVM mod.
     // Минимально необходимая версия мода XVM.
-    "modMinVersion": "4.0.0"
+    "modMinVersion": "4.0.0",
+	
+    // Translation
+    // Set "auto" to detect language from game client, or 
+    // specify file name located in res_mods/xvm/l10n/ (ex: "en")
+    // TODO: ru description
+	"language": "auto"
   },
 
   // Parameters for login screen.

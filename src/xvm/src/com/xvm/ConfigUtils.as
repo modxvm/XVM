@@ -325,4 +325,27 @@ class com.xvm.ConfigUtils
         config.configVersion = v;
         return config;
     }
+    
+    public static function parseErrorEvent(event):String {
+        var ex = event.error;
+        
+        if (ex.at == null)
+            return (ex.name != null ? Utils.trim(ex.name) + ": " : "") + Utils.trim(ex.message);
+        else
+        {
+            var head = ex.at > 0 ? ex.text.substring(0, ex.at) : "";
+            head = head.split("\r").join("").split("\n").join("");
+            while (head.indexOf("  ") != -1)
+                head = head.split("  ").join(" ");
+            head = head.substr(head.length - 75, 75);
+            
+            var tail = (ex.at + 1 < ex.text.length) ? ex.text.substring(ex.at + 1, ex.text.length) : "";
+            tail = tail.split("\r").join("").split("\n").join("");
+            while (tail.indexOf("  ") != -1)
+            tail = tail.split("  ").join(" ");
+            
+            return "[" + ex.at + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " +
+                head + ">>>" + ex.text.charAt(ex.at) + "<<<" + tail;
+        }
+    }
 }

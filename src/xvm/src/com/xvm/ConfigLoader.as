@@ -77,7 +77,7 @@ class com.xvm.ConfigLoader
                 return;
             finallyBugWorkaround = true;
             ConfigLoader.ReloadGameRegion();
-            Locale.GetGameLanguage();
+            Locale.loadLocale();
             //Logger.add("TRACE: ReloadConfigCallback(): finally::end");
         }
         //Logger.add("TRACE: ReloadConfigCallback(): end");
@@ -97,26 +97,8 @@ class com.xvm.ConfigLoader
             var ex = event.error;
 
             var text:String = "Error loading config file '" + event.filename + "': ";
+            text += ConfigUtils.parseErrorEvent(event);
 
-            if (ex.at == null)
-                text += (ex.name != null ? Utils.trim(ex.name) + ": " : "") + Utils.trim(ex.message);
-            else
-            {
-                var head = ex.at > 0 ? ex.text.substring(0, ex.at) : "";
-                head = head.split("\r").join("").split("\n").join("");
-                while (head.indexOf("  ") != -1)
-                    head = head.split("  ").join(" ");
-                head = head.substr(head.length - 75, 75);
-
-                var tail = (ex.at + 1 < ex.text.length) ? ex.text.substring(ex.at + 1, ex.text.length) : "";
-                tail = tail.split("\r").join("").split("\n").join("");
-                while (tail.indexOf("  ") != -1)
-                    tail = tail.split("  ").join(" ");
-
-                var fn = Utils.startsWith(Defines.XVM_ROOT, event.filename) ? event.filename.substring(Defines.XVM_ROOT.length) : event.filename;
-                text += "[" + ex.at + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " +
-                    head + ">>>" + ex.text.charAt(ex.at) + "<<<" + tail;
-            }
             info_event = { type: "set_info", error: text };
             GlobalEventDispatcher.dispatchEvent(info_event);
             Logger.add(String(text).substr(0, 200));
@@ -145,7 +127,6 @@ class com.xvm.ConfigLoader
             {
                 var a: Array = event.str.split("\n");
                 Config.s_game_region = a[0].toUpperCase();
-                Locale.setRegion(Config.s_game_region);
 
                 // MAX_PATH is 259 on NTFS
                 // WARNING: What if MAX_PATH less then 50?
@@ -222,7 +203,6 @@ class com.xvm.ConfigLoader
                     else if (url.indexOf("http://update.worldoftanks.vn") > -1)
                         Config.s_game_region = "VTC";
                 }
-                Locale.setRegion(Config.s_game_region);
             }
             finally
             {
@@ -236,7 +216,7 @@ class com.xvm.ConfigLoader
         xml.load("../../../../WOTLauncher.cfg");
     }
 
-    public static function SetConfigLoaded()
+    private static function SetConfigLoaded()
     {
         Logger.add("Config: Loaded (" + s_src + ")");
         Config.s_loaded = true;
