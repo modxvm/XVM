@@ -1,5 +1,5 @@
 ﻿  [NEW FUNCTIONS]
-  * minimap: new label types
+  * minimap: new label types - wrecks, teamkillers, lost allies
   * new options:
     login/pingServers/showPingOnGameLoading - show ping during game loading, before login screen
     userInfo/showFilters - show tank filters
