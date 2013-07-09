@@ -91,19 +91,22 @@ class com.xvm.Locale
         var tr = s_lang_fallback;
         if (_language == "ru")
         {
+            /** Hardcoded RU language */
             tr["XVM_translator"] = "Maxim Schedriviy";
-            tr["enabled"] = "включено";
-            tr["disabled"] = "выключено";
-            // win chance
+
+            // Win chance
             tr["Chance error"] = "Ошибка расчета шансов";
             tr["Chance to win"] = "Шанс на победу";
             tr["global"] = "общий";
             tr["per-vehicle"] = "по технике";
-            // damage type
+            
+            // Hitlog
             tr["attack"] = "атака";
             tr["fire"] = "пожар";
             tr["ramming"] = "таран";
             tr["world_collision"] = "падение";
+            
+            // Capture
             tr["<font size='15' color='#FFFFFF'>Enemy base capture! {{extra}}</font>"] =
                 "<font size='15' color='#FFFFFF'>Захват вражеской базы! {{extra}}</font>";
             tr["<font size='17' color='#FFCC66'>Enemy base captured!</font>"] =
@@ -114,9 +117,12 @@ class com.xvm.Locale
                 "<font size='17' color='#FFCC66'>Наша база захвачена!</font>";
             tr["Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>"] =
                 "Захватчиков: <b><font color='#FFCC66'>{{tanks}}</font></b> Осталось: <b><font color='#FFCC66'>{{time}}</font><b>";
+            
+            // FinalStatistics
             tr["Hit percent"] = "Процент попаданий";
             tr["Damage upon detecting"] = "Урон по вашим разведданным";
             tr["Damage dealt"] = "Нанесенный урон";
+            
             // TeamRenderers
             tr["TeamRenderersHeaderTip"] =
                 "Рейтинг xwn (или xeff).\n" +
@@ -124,6 +130,9 @@ class com.xvm.Locale
             tr["Friend"] = "Друг";
             tr["Ignored"] = "Игнор";
             tr["Load statistics"] = "Загрузить статистику";
+            tr["enabled"] = "включено";
+            tr["disabled"] = "выключено";
+            
             // UserInfo
             tr["UserInfoEHint"] =
                 "Эффективность по танку.\n" +
@@ -140,7 +149,9 @@ class com.xvm.Locale
             tr["Defence"] = "Защита";
             tr["Capture"] = "Захват";
             tr["player (average / top)"] = "игрок (средний / топ)";
-            tr["top"] = "топ";
+            
+            // UserInfo - filters
+            tr["Filter"] = "Фильтр";
             tr["Spec dmg"] = "Уд. дамаг";
             tr["All tanks"] = "Все танки";
             tr["Show all tanks in the game"] = "Показать все танки в игре";
@@ -148,17 +159,20 @@ class com.xvm.Locale
             tr["Show all tanks played"] = "Показать все танки, на которых играл";
             tr["In hangar"] = "В ангаре";
             tr["Show only tanks in own hangar"] = "Показать только танки в своем ангаре";
-            tr["Filter"] = "Фильтр";
+            
+            // UserInfo - buttons
             tr["Level"] = "Уровень";
             tr["Type"] = "Тип";
             tr["Nation"] = "Нация";
             tr["Name"] = "Имя";
             tr["Fights"] = "Боёв";
             tr["Wins"] = "Побед";
-            // crew
+            
+            // Crew
             tr["PutOwnCrew"] = "Родной экипаж";
             tr["PutBestCrew"] = "Лучший экипаж";
-            //squad
+            
+            // Squad
             tr["Vehicle"] = "Танк";
             tr["Battle tiers"] = "Уровень боёв";
             tr["ussr"] = "СССР";
@@ -175,23 +189,29 @@ class com.xvm.Locale
         }
         else
         {
+            /** Hard coded EN language (additional strings) */
             tr["XVM_translator"] = "Maxim Schedriviy";
-            tr["attack"] = "attack";
-            tr["fire"] = "fire";
-            tr["ramming"] = "ramming";
+            
+            // Hitlog
             tr["world_collision"] = "falling";
+            
+            // UserInfo
             tr["UserInfoEHint"] =
                 "Per-vehicle efficiency.\n" +
                 "The values shown are as of the last statistics update: %DATE%\n" +
                 "See actual current values in the detailed vehicle info.\n" +
                 "Accuracy of the column values depends on the quality of the feed data.";
+            
+            // TeamRenderers
             tr["TeamRenderersHeaderTip"] =
                 "Xwn (or xeff) rating.\n" +
                 "To see detailed information, move mouse cursor to the player's name.";
-            // crew
+            
+            // Crew
             tr["PutOwnCrew"] = "Put own crew";
             tr["PutBestCrew"] = "Put best crew";
-            // squad
+            
+            // Squad
             tr["ussr"] = "USSR";
             tr["germany"] = "Germany";
             tr["usa"] = "USA";
