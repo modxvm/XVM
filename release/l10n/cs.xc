@@ -6,8 +6,8 @@
             // Win chance
             "Chance error": "Chyba",
             "Chance to win": "Šance na výhru",
-            "Global": "Celková",
-            "Per-vehicle": "Dle vozidel",
+            "global": "Celková",
+            "per-vehicle": "Dle vozidel",
 
             // Hitlog
             "attack": "střelba",
