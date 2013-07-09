@@ -26,7 +26,7 @@ class wot.Minimap.model.mapSize.MapSizeBase
                 return 60;
             case "13_erlenberg":   // Эрленберг
                 return 100;
-            case "36_fishing_bay":  // Рыбацкая бхута
+            case "36_fishing_bay":  // Рыбацкая бухта
                 return 100;
             case "33_fjord":        // Фьёрды
                 return 100;
