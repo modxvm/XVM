@@ -7,8 +7,8 @@
             //win chance
             "Chance error": "Chance error",
             "Chance to win": "Chance to win",
-            "Global": "Global",
-            "Per-vehicle": "Per-vehicle",
+            "global": "global",
+            "per-vehicle": "per-vehicle",
             //damage type
             "attack": "attack",
             "fire": "fire",
@@ -25,7 +25,7 @@
             "Damage upon detecting": "Damage upon detecting",
             "Damage dealt": "Damage dealt",
             //TeamRenderers
-            "TeamRenderersHeaderTip": "Xwn rating.\nTo see detailed information, move mouse cursor to the player's name.",
+            "TeamRenderersHeaderTip": "Xwn (or xeff) rating.\nTo see detailed information, move mouse cursor to the player's name.",
             "Friend": "Friend",
             "Ignored": "Ignored",
             "Load statistics": "Load statistics",

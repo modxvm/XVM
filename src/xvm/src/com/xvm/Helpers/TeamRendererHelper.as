@@ -22,8 +22,16 @@ class com.xvm.Helpers.TeamRendererHelper
         res._width = 25;
         res._x = wnd[name]._x + offsetX + 25;
         res._y = wnd[name]._y + offsetY;
-        res.htmlText = "<span class='xvm_" + name + "XVM'><font color='#" +
+        if (Config.s_config.hangar.xwnInCompany == true)
+        {
+            res.htmlText = "<span class='xvm_" + name + "XVM'><font color='#" +
             wnd[name].textColor.toString(16) + "'>xwn</font></span>";
+        }
+        else
+        {
+            res.htmlText = "<span class='xvm_" + name + "XVM'><font color='#" +
+            wnd[name].textColor.toString(16) + "'>xeff</font></span>";   
+        }
 
         var b = wnd.attachMovie("Button", name + "XVMHolder", wnd.getNextHighestDepth());
         b._x = res._x;

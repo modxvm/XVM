@@ -56,13 +56,13 @@ class com.xvm.Chance
 
         lastChances = { g: chG.percentF, t: chT.percentF };
         text += Locale.get("Chance to win") + ": " +
-            FormatChangeText(Locale.get("Global"), chG) + ", " +
-            FormatChangeText(Locale.get("Per-vehicle"), chT);
+            FormatChangeText(Locale.get("global"), chG) + ", " +
+            FormatChangeText(Locale.get("per-vehicle"), chT);
         if (showExp)
         {
             var chX1 = GetChance(ChanceFuncX1);
             var chX2 = GetChance(ChanceFuncX2);
-            text += " | Exp: " + FormatChangeText("", chX1) + ", " + FormatChangeText("", chX2) + " T=" + battleTier;
+            text += " | exp: " + FormatChangeText("", chX1) + ", " + FormatChangeText("", chX2) + ". T=" + battleTier;
             lastChances.X1 = chX1.percentF;
             lastChances.X2 = chX2.percentF;
         }

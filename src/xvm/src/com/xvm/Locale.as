@@ -97,8 +97,8 @@ class com.xvm.Locale
             // win chance
             tr["Chance error"] = "Ошибка расчета шансов";
             tr["Chance to win"] = "Шанс на победу";
-            tr["Global"] = "общий";
-            tr["Per-vehicle"] = "по технике";
+            tr["global"] = "общий";
+            tr["per-vehicle"] = "по технике";
             // damage type
             tr["attack"] = "атака";
             tr["fire"] = "пожар";
@@ -119,7 +119,7 @@ class com.xvm.Locale
             tr["Damage dealt"] = "Нанесенный урон";
             // TeamRenderers
             tr["TeamRenderersHeaderTip"] =
-                "Рейтинг xwn.\n" +
+                "Рейтинг xwn (или xeff).\n" +
                 "Чтобы увидеть более подробную информацию, наведите курсор мыши на значение рейтинга интересующего игрока.";
             tr["Friend"] = "Друг";
             tr["Ignored"] = "Игнор";
@@ -186,7 +186,7 @@ class com.xvm.Locale
                 "See actual current values in the detailed vehicle info.\n" +
                 "Accuracy of the column values depends on the quality of the feed data.";
             tr["TeamRenderersHeaderTip"] =
-                "Xwn rating.\n" +
+                "Xwn (or xeff) rating.\n" +
                 "To see detailed information, move mouse cursor to the player's name.";
             // crew
             tr["PutOwnCrew"] = "Put own crew";

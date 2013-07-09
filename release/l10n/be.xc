@@ -7,8 +7,8 @@
             //win chance
             "Chance error": "Не ўдалося разлічыць шанцы",
             "Chance to win": "Шанец перамагчы",
-            "Global": "агульны",
-            "Per-vehicle": "паводле тэхнікі",
+            "global": "агульны",
+            "per-vehicle": "паводле тэхнікі",
             //damage type
             "attack": "атака",
             "fire": "пажар",

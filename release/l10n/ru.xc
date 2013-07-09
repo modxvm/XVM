@@ -7,8 +7,8 @@
             //win chance
             "Chance error": "Ошибка расчета шансов",
             "Chance to win": "Шанс на победу",
-            "Global": "общий",
-            "Per-vehicle": "по технике",
+            "global": "общий",
+            "per-vehicle": "по технике",
             //damage type
             "attack": "атака",
             "fire": "пожар",
@@ -25,7 +25,7 @@
             "Damage upon detecting": "Урон по вашим разведданным",
             "Damage dealt": "Нанесенный урон",
             //TeamRenderers
-            "TeamRenderersHeaderTip": "Рейтинг xwn.\nЧтобы увидеть более подробную информацию, наведите курсор мыши на значение рейтинга интересующего игрока.",
+            "TeamRenderersHeaderTip": "Рейтинг xwn (или xeff).\nЧтобы увидеть более подробную информацию, наведите курсор мыши на значение рейтинга интересующего игрока.",
             "Friend": "Друг",
             "Ignored": "Игнор",
             "Load statistics": "Загрузить статистику",
