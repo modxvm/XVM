@@ -20,6 +20,7 @@
   * hitlog: damage to drowned units is not taken into account anymore
 
   [OTHER]
+  * minimap: shapes attached to vehicles are removed on player death
   * minimap: code refactoring
   * minimap: labels are detached from icons to lower layer
   * localization: new belarusian and ukranian maps names
