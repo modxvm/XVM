@@ -1,6 +1,8 @@
 import com.xvm.Logger;
 import com.xvm.Config;
-import wot.Minimap.model.mapSize.MapSizeBase;
+import flash.external.ExternalInterface;
+import net.wargaming.managers.Localization;
+import wot.Minimap.model.mapSize.MapInfoData;
 
 /**
  * Defines real map side size in meters.
@@ -33,7 +35,7 @@ class wot.Minimap.model.mapSize.MapSizeModel
          */
         var mapName:String = Config.s_vars.map_name;
         Logger.add("Minimap: Config.s_vars " + mapName);
-        cellSide = MapSizeBase.sizeBySytemMapName(mapName);
+        cellSide = sizeBySytemMapName(mapName);
         Logger.add("Minimap: cellSide " + cellSide);
 
         if (!cellSide)
@@ -46,7 +48,7 @@ class wot.Minimap.model.mapSize.MapSizeModel
              * but depends on localilized map names in Base.
              */
             var mapText:String = _root.statsData.arenaData.mapText;
-            cellSide = MapSizeBase.sizeByLocalizedMapName(mapText);
+            cellSide = sizeByLocalizedMapName(mapText);
             Logger.add("Minimap: localized map name: " + mapText);
 
             if (!cellSide)
@@ -55,8 +57,6 @@ class wot.Minimap.model.mapSize.MapSizeModel
                 Logger.add("Minimap ERROR: map no recognized");
             }
         }
-
-
     }
 
     public function getCellSide():Number
@@ -67,5 +67,31 @@ class wot.Minimap.model.mapSize.MapSizeModel
     public function getFullSide():Number
     {
         return cellSide * 10;
+    }
+    
+    // -- Private
+    
+    private function sizeBySytemMapName(mapName:String):Number
+    {
+        return MapInfoData.getData()[mapName.toLowerCase()].size;
+    }
+
+    /**
+     * Create loop from all system mapnames and compare given value agins arenas.mo mapnames.
+     * @param translated mapname
+     * @return map size
+     */
+    private function sizeByLocalizedMapName(localizedMapName:String):Number
+    {
+        if (!ExternalInterface.available) 
+            Logger.add("Minimap: Error - ExternalInterface not ready");
+            
+        for (var systemMapName:String in MapInfoData.getData()) {
+            var tmp:String = Localization.makeString("#arenas:" + systemMapName + "/name", {});
+            if (tmp == localizedMapName) {
+                return MapInfoData.getData()[systemMapName].size;
+            }
+        }
+        return undefined;
     }
 }
