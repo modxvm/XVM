@@ -10,13 +10,13 @@ class com.xvm.VehicleInfoDataL10n
 
     // name = "Об. 907"
     // return: "object_907"
-    public function LocalizedNameToVehicleKey(name:String):String
+    public static function LocalizedNameToVehicleKey(name:String):String
     {
         getData();
         return data[name] || "";
     }
 
-    private function setupData():Void
+    private static function setupData():Void
     {
         data = new Object();
 
@@ -29,7 +29,7 @@ class com.xvm.VehicleInfoDataL10n
         }
     }
 
-    private function getData():Object
+    private static function getData():Object
     {
         if (!data)
             setupData();
