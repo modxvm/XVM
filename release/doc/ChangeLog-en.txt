@@ -19,12 +19,11 @@
   * hitlog: damage to drowned units is not taken into account anymore
 
   [OTHER]
-  * minimap: shapes work in all locales without xvm-stat.exe
   * minimap: shapes attached to vehicles are removed on player death
   * minimap: code refactoring
   * minimap: labels are detached from icons to lower layer
-  * localization: new belarusian and ukranian maps names
-  * localization: new ukranian tanks names
+  * minimap: shapes work in all locales without xvm-stat.exe
+  * squad window: work in all locales
 
 XVM-4.0.0:
   * adaptation to WoT 0.8.6

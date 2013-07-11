@@ -1,7 +1,5 @@
 import com.xvm.Logger;
-import com.xvm.Config;
 import flash.external.ExternalInterface;
-import net.wargaming.managers.Localization;
 import wot.Minimap.model.mapSize.MapInfoData;
 
 /**
@@ -25,23 +23,6 @@ class wot.Minimap.model.mapSize.MapSizeModel
         return _instance;
     }
 
-    private function MapSizeModel()
-    {
-        /**
-         * Translate map name back to system name.
-         * Map must be added in MapInfoData.
-         */
-        var mapText:String = _root.statsData.arenaData.mapText;
-        cellSide = sizeByLocalizedMapName(mapText);
-        Logger.add("Minimap: localized map name: " + mapText);
-
-        if (!cellSide)
-        {
-            /** This can be seen only when map isn't set in MapInfoData */
-            Logger.add("Minimap ERROR: map no recognized");
-        }
-    }
-
     public function getCellSide():Number
     {
         return cellSide;
@@ -51,26 +32,25 @@ class wot.Minimap.model.mapSize.MapSizeModel
     {
         return cellSide * 10;
     }
-    
+
     // -- Private
 
-    /**
-     * Create loop from all system map names and compare given value agins arenas.mo names.
-     * @param translated mapname
-     * @return map size
-     */
-    private function sizeByLocalizedMapName(localizedMapName:String):Number
+    private function MapSizeModel()
     {
-        /** TODO: is it necessary? (Localization using ExternalInterface) */
+        /**
+         * Translate localized map name back to system name.
+         * Map must be added in MapInfoData.
+         */
+        var mapText:String = _root.statsData.arenaData.mapText;
+        cellSide = MapInfoData.SizeByLocalizedMapName(mapText);
         if (!ExternalInterface.available) 
             Logger.add("Minimap: Error - ExternalInterface not ready");
-            
-        for (var systemMapName:String in MapInfoData.getData()) {
-            var tmp:String = Localization.makeString("#arenas:" + systemMapName + "/name", {});
-            if (tmp == localizedMapName) {
-                return MapInfoData.getData()[systemMapName].size;
-            }
+        Logger.add("Minimap: localized map name: " + mapText);
+
+        if (!cellSide)
+        {
+            /** This can be seen only when map isn't set in MapInfoData */
+            Logger.add("Minimap ERROR: map no recognized");
         }
-        return undefined;
     }
 }
