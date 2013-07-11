@@ -7,7 +7,7 @@ class com.xvm.Defines
     // Global versions
     public static var XVM_VERSION:String = "4.0.1-test-1";
     public static var XVM_INTRO:String = "www.modxvm.com";
-    public static var WOT_VERSION:String = "0.8.7.CT1";
+    public static var WOT_VERSION:String = "0.8.7.CT2";
     public static var CONFIG_VERSION:String = "4.0.0";
     public static var EDITOR_VERSION:String = "0.57";
 
@@ -118,7 +118,7 @@ class com.xvm.Defines
 
     // Level in roman numerals
     public static var ROMAN_LEVEL:Array = [ "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" ];
-    
+
     // UI Colors
     public static var UICOLOR_DEFAULT = 0xC9C9B6;
     public static var UICOLOR_DEFAULT2 = 0x969687;

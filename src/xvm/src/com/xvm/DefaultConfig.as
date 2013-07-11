@@ -164,7 +164,7 @@ class com.xvm.DefaultConfig
                 enableCompanyStatistics: true   // Enable statistics in the company window
             },
             squad: {
-                enabled: false,     // Global switch
+                enabled: true,     // Global switch
                 romanNumbers: true, // Roman level numbers
                 showClan: true,     // Show player clan
                 leftLvlBorder: "",  // Grille [4

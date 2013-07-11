@@ -9,8 +9,7 @@
       Sort order: >0 - default, <0 - inverse
     hangar/xwnInCompany - show XWN instead of XEFF in company windows
   * localization: XVM now using external files for translation
-  * localization: New belarusian, ukranian and czech translations
-  * localization: XVM now reads tanks names from language file
+  * localization: new belarusian, ukranian and czech translations
 
   [FIXES]
   * minimap: label of observer vehicle is no longer rotating with icon
