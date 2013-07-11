@@ -10,19 +10,19 @@
       // {{vehicle-class}} macro substitutions.
       // Подстановки макроса {{vehicle-class}}.
       "vehicleclassmacro": {
-        // ЛT ♦.
-        "light": "",
-        // СТ.
-        "medium": "",
-        // ТТ.
-        "heavy": "",
-        // ПТ ▼.
-        "td": "",
-        // Artillery / Арта.
-        "spg": "■",
+        // LT / ЛT ♦.
+        "light": "\u2022",
+        // MT / СТ.
+        "medium": "\u2022",
+        // HT / ТТ.
+        "heavy": "\u2022",
+        // TD / ПТ ▼.
+        "td": "\u2022",
+        // Artillery / Арта. ■
+        "spg": "\u25AA",
         // HeavyTank10 by gui_settings.xml.
         // ТТ10 посредством gui_settings.xml.
-        "superh": ""
+        "superh": "\u2022"
         // Special symbols website / Сайт со спец символами:
         // http://www.fileformat.info/info/unicode/char/25a0/index.htm
         // Great symbolic font by Andrey_Hard for {{vehicle-class}}:
@@ -53,24 +53,24 @@
           "oneself":        "",
           // Out of radio range ally
           // Союзник, с которым потеряна связь
-          "lostally":       "<span class='mm_dot'>\u2022</span><span class='mm_la'><i>{{vehicle}}</i></span>",
+          "lostally":       "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_la'><i>{{vehicle}}</i></span>",
           // Out of radio range teamkiller
           // Тимкиллер, с которым потеряна связь
-          "lostteamkiller": "<span class='mm_dot'>\u2022</span><span class='mm_lt'><i>{{vehicle}}</i></span>",
+          "lostteamkiller": "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_lt'><i>{{vehicle}}</i></span>",
           // Lost enemy units.
           // Противник, пропавший из засвета
-          "lost":           "<span class='mm_dot'>\u2022</span><span class='mm_l'><i>{{vehicle}}</i></span>",
+          "lost":           "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_l'><i>{{vehicle}}</i></span>",
           // Out of radio range squadman
           // Взводный, с которым потеряна связь
-          "lostsquad":      "<textformat leading='-4'><span class='mm_dot'>\u2022</span><span class='mm_ls'><i>{{short-nick}}</i>\n   {{vehicle}}</span><textformat>",
+          "lostsquad":      "<textformat leading='-4'><span class='mm_dot'>{{vehicle-class}}</span><span class='mm_ls'><i>{{short-nick}}</i>\n   {{vehicle}}</span><textformat>",
           // Мертвый союзник.
-          "deadally":       "<span class='mm_dot'>\u2022</span><span class='mm_da'> {{vehicle}}</span>",
+          "deadally":       "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_da'></span>",
           // Мертвый тимкиллер.
-          "deadteamkiller": "<span class='mm_dot'>\u2022</span><span class='mm_dt'> {{vehicle}}</span>",
+          "deadteamkiller": "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_dt'></span>",
           // Мертвый противник.
-          "deadenemy":      "<span class='mm_dot'>\u2022</span><span class='mm_de'> {{vehicle}}</span>",
+          "deadenemy":      "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_de'></span>",
           // Мертвый взводный.
-          "deadsquad":      "<textformat leading='-4'><span class='mm_dot'>\u2022</span><span class='mm_ds'><i>{{short-nick}}</i>\n   {{vehicle}}</span><textformat>"
+          "deadsquad":      "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_ds'><i>{{short-nick}}</i></span>"
         },
         // CSS style (fonts and colors option)
         // CSS стиль (настройка шрифтов и цветов)

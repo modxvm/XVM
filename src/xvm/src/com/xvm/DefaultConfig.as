@@ -294,31 +294,30 @@ class com.xvm.DefaultConfig
                 labels: {
                   nickShrink: 5,
                   vehicleclassmacro: {
-                    light: "",
-                    medium: "",
-                    heavy: "",
-                    td: "",
-                    spg: "■",
-                    superh: ""
+                    light: "\u2022",
+                    medium: "\u2022",
+                    heavy: "\u2022",
+                    td: "\u2022",
+                    spg: "\u25AA",
+                    superh: "\u2022"
                   },
                   units: {
                     revealedEnabled: true,
                     lostEnemyEnabled: true,
                     format: {
-                      ally:           "<span class='mm_a'>{{vehicle}}</span>",
-                      teamkiller:     "<span class='mm_t'>{{vehicle}}</span>",
-                      enemy:          "<span class='mm_e'>{{vehicle}}</span>",
-                      squad:          "<textformat leading='-2'><span class='mm_s'><i>{{short-nick}}</i>\n{{vehicle}}</span><textformat>",
-                      lost:           "<span class='mm_dot'>\u2022</span><span class='mm_l'><i>{{vehicle}}</i></span>",
-                      oneself:        "",
-                      lostally:       "<span class='mm_dot'>\u2022</span><span class='mm_la'><i>{{vehicle}}</i></span>",
-                      lostteamkiller: "<span class='mm_dot'>\u2022</span><span class='mm_lt'><i>{{vehicle}}</i></span>",
-                      lost:           "<span class='mm_dot'>\u2022</span><span class='mm_l'><i>{{vehicle}}</i></span>",
-                      lostsquad:      "<textformat leading='-4'><span class='mm_dot'>\u2022</span><span class='mm_ls'><i>{{short-nick}}</i>\n   {{vehicle}}</span><textformat>",
-                      deadally:       "<span class='mm_dot'>\u2022</span><span class='mm_da'> {{vehicle}}</span>",
-                      deadteamkiller: "<span class='mm_dot'>\u2022</span><span class='mm_dt'> {{vehicle}}</span>",
-                      deadenemy:      "<span class='mm_dot'>\u2022</span><span class='mm_de'> {{vehicle}}</span>",
-                      deadsquad:      "<textformat leading='-4'><span class='mm_dot'>\u2022</span><span class='mm_ds'><i>{{short-nick}}</i>\n   {{vehicle}}</span><textformat>"
+                      "ally":           "<span class='mm_a'>{{vehicle}}</span>",
+                      "teamkiller":     "<span class='mm_t'>{{vehicle}}</span>",
+                      "enemy":          "<span class='mm_e'>{{vehicle}}</span>",
+                      "squad":          "<textformat leading='-2'><span class='mm_s'><i>{{short-nick}}</i>\n{{vehicle}}</span><textformat>",
+                      "oneself":        "",
+                      "lostally":       "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_la'><i>{{vehicle}}</i></span>",
+                      "lostteamkiller": "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_lt'><i>{{vehicle}}</i></span>",
+                      "lost":           "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_l'><i>{{vehicle}}</i></span>",
+                      "lostsquad":      "<textformat leading='-4'><span class='mm_dot'>{{vehicle-class}}</span><span class='mm_ls'><i>{{short-nick}}</i>\n   {{vehicle}}</span><textformat>",
+                      "deadally":       "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_da'></span>",
+                      "deadteamkiller": "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_dt'></span>",
+                      "deadenemy":      "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_de'></span>",
+                      "deadsquad":      "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_ds'><i>{{short-nick}}</i></span>"
                     },
                     css: {
                       ally:            ".mm_a{font-family:$FieldFont; font-size:8px; color:#C8FFA6;}",
