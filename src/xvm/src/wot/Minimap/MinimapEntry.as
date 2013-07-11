@@ -161,12 +161,21 @@ class wot.Minimap.MinimapEntry
 
     private function setLabelToMimicEntryMoves():Void
     {
+        /**
+         * No FPS drop discovered.
+         * Okay.
+         */
         wrapper.onEnterFrame = function()
         {
             /**
-             * No FPS drop discovered.
-             * Okay.
+             * Seldom error workaround.
+             * Wreck sometimes is placed at map center.
              */
+            if (!this._x && !this._y)
+            {
+                return;
+            }
+            
             var entry:wot.Minimap.MinimapEntry = this.xvm_worker;
             entry.labelMc._x = this._x;
             entry.labelMc._y = this._y;
