@@ -1,7 +1,5 @@
 ﻿/**
  * Minimap lines. Only for owned vehicle.
- * Sizes dependent on meters work only with xvm-stat.exe for uncommon locales.
- * xvm-stat.exe is not necessary for RU, EN and partially DE, CH locale.
  * Линии на миникарте. Только для своей техники.
  */
 {

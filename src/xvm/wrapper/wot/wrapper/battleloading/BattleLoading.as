@@ -7,8 +7,7 @@ class wot.wrapper.battleloading.BattleLoading extends net.wargaming.BattleLoadin
         super();
 
         var OVERRIDE_FUNCTIONS:Array = [
-            "setSize",
-            "setMapBG"
+            "setSize"
         ];
         Wrapper.override(this, new wot.battleloading.BattleLoading(this, super), OVERRIDE_FUNCTIONS);
     }

@@ -10,7 +10,7 @@
     hangar/xwnInCompany - show XWN instead of XEFF in company windows
   * localization: XVM now using external files for translation
   * localization: New belarusian, ukranian and czech translations
-  * localization: XVM now reads tanks and maps names from language file
+  * localization: XVM now reads tanks names from language file
 
   [FIXES]
   * minimap: label of observer vehicle is no longer rotating with icon
@@ -20,6 +20,7 @@
   * hitlog: damage to drowned units is not taken into account anymore
 
   [OTHER]
+  * minimap: shapes work in all locales without xvm-stat.exe
   * minimap: shapes attached to vehicles are removed on player death
   * minimap: code refactoring
   * minimap: labels are detached from icons to lower layer

@@ -34,11 +34,6 @@ class wot.battleloading.BattleLoading
         return this.setSizeImpl.apply(this, arguments);
     }
 
-    function setMapBG()
-    {
-        return this.setMapBGImpl.apply(this, arguments);
-    }
-
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
@@ -78,28 +73,6 @@ class wot.battleloading.BattleLoading
     {
         base.setSize(width, height);
         Comm.SetVar("window_size", width + "," + height);
-    }
-
-    // override
-    function setMapBGImpl(imgsource:String)
-    {
-        /**
-         * imgsource arg:
-         * ../maps/icons/map/screen/19_monastery.png
-         */
-
-        /** Extract map name from image source */
-        var arr:Array = imgsource.split("/");
-        arr = arr[5].split(".");
-        var mapName:String = arr[0]; // 45_north_america
-
-        /**
-         * Save map name for Minimap mod.
-         * Best method to define map size without Python so far.
-         */
-        Comm.SetVar("map_name", mapName);
-
-        base.setMapBG(imgsource);
     }
 
     private function onConfigLoaded()

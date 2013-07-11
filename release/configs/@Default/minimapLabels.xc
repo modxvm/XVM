@@ -155,8 +155,6 @@
         }
       },
       // Textfield for map side size. 1000m, 700m, 600m.
-      // Works only with xvm-stat.exe for uncommon locales.
-      // xvm-stat.exe is not necessary for RU, EN, DE and partially CH locale.
       // Поле размера стороны карты. Например, 1000м, 700м, 600м.
       "mapSize": {
         "enabled": true,
