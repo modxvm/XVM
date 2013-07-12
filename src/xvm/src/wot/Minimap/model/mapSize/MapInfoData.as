@@ -4,7 +4,6 @@
  * @author Mr.A
  * @author Maxim Schedriviy <m.schedriviy@gmail.com>
  */
-import com.xvm.Logger;
 import net.wargaming.managers.Localization;
 
 class wot.Minimap.model.mapSize.MapInfoData
@@ -82,7 +81,7 @@ class wot.Minimap.model.mapSize.MapInfoData
         for (var key:String in _systemMapnameList) {
             var systemMapName:String = key.substring(1);
             var localMapName:String = Localization.makeString("#arenas:" + systemMapName + "/name", {});
-            _localizedMapnameList[localMapName] = _systemMapnameList[systemMapName].size;
+            _localizedMapnameList[localMapName] = _systemMapnameList[key].size;
         }
         //Logger.add(com.xvm.Utils.elapsedMSec(start, new Date()).toString());
     }

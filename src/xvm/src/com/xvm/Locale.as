@@ -5,27 +5,28 @@
  * @author Pavel Maca
  */
 import com.xvm.Config;
-import com.xvm.ConfigLoader;
 import com.xvm.ConfigUtils;
 import com.xvm.Defines;
 import com.xvm.GlobalEventDispatcher;
 import com.xvm.JSONxLoader;
 import com.xvm.Logger;
-import com.xvm.Utils;
 import flash.external.ExternalInterface;
 import net.wargaming.managers.Localization;
 
 class com.xvm.Locale
 {
+    public static var AUTO_DETECTION:String = "auto";
+
+    private static var s_lang:Object;
+    private static var s_lang_fallback:Object = {};
     private static var _language:String;
-    public static var s_lang:Object;
-    public static var s_lang_fallback = {};
     private static var _initialized:Boolean = false;
+    private static var timer:Number;
 
-    public static var AUTO_DETECTION = "auto";
-    private static var timer;
+    /////////////////////////////////////////////////////////////////
+    // PUBLIC STATIC
 
-    public static function loadLocale() 
+    public static function loadLocale():Void
     {
         if (_initialized) return;
         _initialized = true;
@@ -40,7 +41,18 @@ class com.xvm.Locale
         }
     }
 
-    private static function getLanguageFromGettext() 
+    public static function get(text:String,type:String):String
+    {
+        if (!type)
+            type = "common";
+        //Logger.add("Locale[get]: string: " + text + " | string: " + s_lang.locale[type][text] + " | fallback string: " + s_lang_fallback[text] + " | language: " + _language );
+        return s_lang.locale[type][text] || s_lang_fallback[text] || text;
+    }
+
+    /////////////////////////////////////////////////////////////////
+    // PRIVATE
+
+    private static function getLanguageFromGettext():Void
     {
         //Logger.add("Locale: timer tick");
         if (ExternalInterface.available) 
@@ -56,37 +68,14 @@ class com.xvm.Locale
         }
     }
 
-    private static function loadLocaleFile() 
+    private static function loadLocaleFile():Void
     {
         LoadLanguageFallback();
         JSONxLoader.LoadAndParse(Defines.XVM_ROOT + "l10n/" + _language + ".xc", null, languageFileCallback);
     }
 
-    private static function languageFileCallback(event)
-    {
-        if (event.error == null) {
-            s_lang = event.data;
-            Logger.add("Locale: Loaded '" + _language + "' language by " + get("XVM_translator"));
-        }
-        else {
-            if (event.error.type == "NO_FILE")
-            {
-                Logger.add("Locale: Can not find language file. Filename:" + event.filename );
-                return;
-            }
-
-            var ex = event.error;
-            var text:String = "Error loading language file '" + event.filename + "': ";
-            text += ConfigUtils.parseErrorEvent(event);
-
-            /** Show error message on battle loading */
-            var info_event = { type: "set_info", error: text };
-            GlobalEventDispatcher.dispatchEvent(info_event);
-            Logger.add(String(text).substr(0, 200));
-        }
-    }
-
-    public static function LoadLanguageFallback() //This strings will be used if .xc not found
+    //This strings will be used if .xc not found
+    private static function LoadLanguageFallback():Void
     {
         var tr = s_lang_fallback;
         if (_language == "ru")
@@ -189,7 +178,7 @@ class com.xvm.Locale
         }
         else
         {
-            /** Hard coded EN language (additional strings) */
+            /** Hardcoded EN language */
             tr["XVM_translator"] = "Maxim Schedriviy";
             
             // Hitlog
@@ -221,11 +210,27 @@ class com.xvm.Locale
         }
     }
 
-    public static function get(text: String,type: String): String
+    private static function languageFileCallback(event):Void
     {
-        if (!type)
-            type = "common";
-        //Logger.add("Locale[get]: string: " + text + " | string: " + s_lang.locale[type][text] + " | fallback string: " + s_lang_fallback[text] + " | language: " + _language );
-        return s_lang.locale[type][text] || s_lang_fallback[text] || text;
+        if (event.error == null) {
+            s_lang = event.data;
+            Logger.add("Locale: Loaded '" + _language + "' language by " + get("XVM_translator"));
+        }
+        else {
+            if (event.error.type == "NO_FILE")
+            {
+                Logger.add("Locale: Can not find language file. Filename: " + event.filename );
+                return;
+            }
+
+            var ex = event.error;
+            var text:String = "Error loading language file '" + event.filename + "': ";
+            text += ConfigUtils.parseErrorEvent(event);
+
+            /** Show error message on battle loading */
+            var info_event = { type: "set_info", error: text };
+            GlobalEventDispatcher.dispatchEvent(info_event);
+            Logger.add(String(text).substr(0, 200));
+        }
     }
 }

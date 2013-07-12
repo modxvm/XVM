@@ -12,7 +12,8 @@ class com.xvm.VehicleInfoDataL10n
     // return: "object_907"
     public static function LocalizedNameToVehicleKey(name:String):String
     {
-        getData();
+        if (data == null)
+            setupData();
         return data[name] || "";
     }
 
@@ -27,12 +28,5 @@ class com.xvm.VehicleInfoDataL10n
             var tmpShort:String = Localization.makeString("#" + nation + "_vehicles:" + VehicleInfoData2.data[tankKey].name + "_short", { } );
             data[tmp] = data[tmpShort] = tankKey;
         }
-    }
-
-    private static function getData():Object
-    {
-        if (!data)
-            setupData();
-        return data;
     }
 }
