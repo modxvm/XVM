@@ -41,12 +41,10 @@ class com.xvm.Locale
         }
     }
 
-    public static function get(text:String,type:String):String
+    public static function get(text:String):String
     {
-        if (!type)
-            type = "common";
-        //Logger.add("Locale[get]: string: " + text + " | string: " + s_lang.locale[type][text] + " | fallback string: " + s_lang_fallback[text] + " | language: " + _language );
-        return s_lang.locale[type][text] || s_lang_fallback[text] || text;
+        //Logger.add("Locale[get]: string: " + text + " | string: " + s_lang.locale[text] + " | fallback string: " + s_lang_fallback[text] + " | language: " + _language );
+        return s_lang.locale[text] || s_lang_fallback[text] || text;
     }
 
     /////////////////////////////////////////////////////////////////
