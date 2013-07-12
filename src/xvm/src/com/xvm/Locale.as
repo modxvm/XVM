@@ -31,11 +31,11 @@ class com.xvm.Locale
         if (_initialized) return;
         _initialized = true;
 
-        if (Config.s_config.definition.language == AUTO_DETECTION) {
+        if (Config.s_config.language == AUTO_DETECTION) {
             getLanguageFromGettext();
 
         }else {
-            _language = Config.s_config.definition.language.toLowerCase();
+            _language = Config.s_config.language.toLowerCase();
             Logger.add("Locale: '" + _language + "' (config)");
             loadLocaleFile();
         }
