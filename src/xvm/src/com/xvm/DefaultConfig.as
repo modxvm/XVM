@@ -19,9 +19,9 @@ class com.xvm.DefaultConfig
                 date: (d.getDate() < 10 ? "0" : "") + d.getDate() + "." +
                     (d.getMonth() < 9 ? "0" : "") + (d.getMonth() + 1) + "." + d.getFullYear(),
                 gameVersion: Defines.WOT_VERSION,
-                modMinVersion: Defines.XVM_VERSION,
-                language: Locale.AUTO_DETECTION
+                modMinVersion: Defines.XVM_VERSION
             },
+            language: Locale.AUTO_DETECTION,
             login: {
                 // Show ping to the servers
                 pingServers: {
