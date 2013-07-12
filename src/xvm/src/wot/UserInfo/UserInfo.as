@@ -7,6 +7,7 @@ import com.xvm.GraphicsUtil;
 import com.xvm.Helpers.UserDataLoaderHelper;
 import com.xvm.Locale;
 import com.xvm.StatLoader;
+import com.xvm.Strings;
 import com.xvm.Utils;
 import com.xvm.VehicleInfo;
 import wot.WGDataTypes.CarouselDataItem;
@@ -426,7 +427,7 @@ class wot.UserInfo.UserInfo
         var all = com.xvm.VehicleInfoData2.data;
         for (var vn:String in all)
         {
-            if (vn == "unknown" || Utils.endsWith("_training", vn))
+            if (vn == "unknown" || Strings.endsWith("_training", vn))
                 continue;
 
             var vi = all[vn];

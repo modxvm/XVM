@@ -2,34 +2,14 @@
  * ...
  * @author sirmax2
  */
+import flash.filters.DropShadowFilter;
 import com.xvm.Defines;
 import com.xvm.Logger;
-import flash.filters.DropShadowFilter;
+import com.xvm.Strings;
 
 class com.xvm.Utils
 {
     private static var TRACE_XVM_MODULES = true;
-
-    public static function startsWith(substr:String, str:String):Boolean
-    {
-        return str.indexOf(substr, 0) == 0;
-    }
-
-    public static function endsWith(substr:String, str:String):Boolean
-    {
-        var i = str.lastIndexOf(substr);
-        return i >= 0 && i == (str.length - substr.length);
-    }
-
-    // TODO: check performance, charAt is slow in ScaleForm
-    public static function trim(str:String):String
-    {
-        var i, j;
-        for (i = 0; str.charCodeAt(i) < 33; ++i);
-        var len = str.length;
-        for (j = len-1; str.charCodeAt(j) < 33; --j);
-        return str.substring(i, j+1);
-    }
 
     public static function toInt(value:Object, defaultValue:Number):Number
     {
@@ -69,7 +49,7 @@ class com.xvm.Utils
     public static function fixPath(path:String):String
     {
         path = path.split("\\").join("/");
-        if (!Utils.endsWith("/", path))
+        if (!Strings.endsWith("/", path))
             path += "/";
         return path;
     }
@@ -100,17 +80,6 @@ class com.xvm.Utils
             ++i;
         }
         return -1;
-    }
-
-    public static function padLeft(str:String, len:Number, char:String):String
-    {
-        if (!str)
-            str = "";
-        if (!char)
-            char = ' ';
-        while (str.length < len)
-            str = char + str;
-        return str;
     }
 
     // 0 - equal, -1 - v1<v2, 1 - v1>v2, -2 - error
@@ -157,7 +126,7 @@ class com.xvm.Utils
     public static function GetPlayerName(fullplayername:String):String
     {
         var pos = fullplayername.indexOf("[");
-        return (pos < 0) ? fullplayername : Utils.trim(fullplayername.slice(0, pos));
+        return (pos < 0) ? fullplayername : Strings.trim(fullplayername.slice(0, pos));
     }
 
     public static function GetNormalizedPlayerName(fullplayername:String):String
@@ -192,30 +161,6 @@ class com.xvm.Utils
         Logger.add("xvm-> [ \"" + xvmModules.join("\", \"") + "\" ]");
 
         checkBanList();
-    }
-
-    public static function FormatDate(format:String, date:Date):String
-    {
-        var keys = {Y:"getFullYear", M:"getMonth", D:"getDate", H:"getHours", N:"getMinutes", S:"getSeconds"/*, I:"getMilliseconds"*/};
-        var str = "";
-        if (!date)
-            date = new Date();
-        var ci, meth;
-        var formatArr = format.split(""); // charAt() is slow
-        var format_len = formatArr.length;
-        for (var i = 0; i < format_len; ++i)
-        {
-            ci = formatArr[i];
-            if (keys[ci] == undefined)
-            {
-                str += ci;
-                continue;
-            }
-            meth = keys[ci];
-            var val = date[meth]() + ((meth == "getMonth") ? 1 : 0);
-            str += (val < 10) ? "0" + val : val;
-        }
-        return str;
     }
 
     /**
@@ -274,7 +219,7 @@ class com.xvm.Utils
         fontName:String, fontSize:Number, align:String, bold:Boolean, italic:Boolean):String
     {
         return "." + className + " {" +
-            "color:#" + Utils.padLeft(color.toString(16), 6, '0') + ";" +
+            "color:#" + Strings.padLeft(color.toString(16), 6, '0') + ";" +
             "font-family:\"" + fontName + "\";" +
             "font-size:" + fontSize + ";" +
             "text-align:" + align + ";" +

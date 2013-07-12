@@ -1,6 +1,6 @@
 import com.xvm.Config;
 import com.xvm.GlobalEventDispatcher;
-import com.xvm.Utils;
+import com.xvm.Strings;
 
 class wot.battleloading.RealClock
 {
@@ -30,6 +30,6 @@ class wot.battleloading.RealClock
         tf.align = "right";
         clock.setNewTextFormat(tf);
         clock.filters = f.filters;
-        _global.setInterval(function() { clock.text = Utils.FormatDate(format, new Date()); }, 1000);
+        _global.setInterval(function() { clock.text = Strings.FormatDate(format, new Date()); }, 1000);
     }
 }

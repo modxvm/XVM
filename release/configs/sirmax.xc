@@ -62,7 +62,9 @@
     "removePanelsModeSwitcher": true,
     "highlightVehicleIcon": false,
     "useStandardMarkers": ${"def.standardMarkers"},
-    "clanIconsFolder": "clanicons"
+    "clanIconsFolder": "clanicons",
+    "elements": ${"sirmax-elements.xc":"."}
+    }
   },
   "rating": {
     "showPlayersStatistics": true,

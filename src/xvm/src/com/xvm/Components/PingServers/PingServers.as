@@ -2,7 +2,7 @@ import com.xvm.Comm;
 import com.xvm.Config;
 import com.xvm.Defines;
 import com.xvm.JSONx;
-import com.xvm.Utils;
+import com.xvm.Strings;
 import com.xvm.Components.PingServers.PingServersView;
 
 class com.xvm.Components.PingServers.PingServers
@@ -65,7 +65,7 @@ class com.xvm.Components.PingServers.PingServers
         var responceTimeList:Array = [];
         for (var i in parsedAnswerObj)
         {
-            var cluster:String = Utils.startsWith("WOT ", i) ? i.substring(4) : i;
+            var cluster:String = Strings.startsWith("WOT ", i) ? i.substring(4) : i;
             responceTimeList.push({ cluster: cluster, time: parsedAnswerObj[i] });
         }
         responceTimeList.sortOn(["cluster"]);

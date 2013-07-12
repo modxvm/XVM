@@ -1,5 +1,5 @@
 import flash.filters.DropShadowFilter;
-import com.xvm.Utils;
+import com.xvm.Strings;
 
 class wot.VehicleMarkersManager.ErrorHandler
 {
@@ -11,7 +11,7 @@ class wot.VehicleMarkersManager.ErrorHandler
         if (!_root.hasOwnProperty("xvmErrorText"))
             createErrorField();
 
-        errorText += "[" + Utils.padLeft((errorCounter++).toString(), 3, '0') + "] " + str + "\n";
+        errorText += "[" + Strings.padLeft((errorCounter++).toString(), 3, '0') + "] " + str + "\n";
         while ((errorText.split("\n")).length > 15)
             errorText = errorText.slice(errorText.indexOf("\n") + 1, errorText.length - 1);
         _root.xvmErrorText.htmlText +=

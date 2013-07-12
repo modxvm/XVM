@@ -10,7 +10,7 @@ import com.xvm.GlobalEventDispatcher;
 import com.xvm.JSONxLoader;
 import com.xvm.Locale;
 import com.xvm.Logger;
-import com.xvm.Utils;
+import com.xvm.Strings;
 
 class com.xvm.ConfigLoader
 {
@@ -182,7 +182,7 @@ class com.xvm.ConfigLoader
                     items = [ items ];
                 for (var i = 0; i < items.length; ++i)
                 {
-                    var url:String = Utils.trim(items[i]["data"]).toLowerCase();
+                    var url:String = Strings.trim(items[i]["data"]).toLowerCase();
                     //Logger.add("url: " + url);
                     if (url.indexOf("http://update.wot.ru.wargaming.net") > -1 || url.indexOf("http://update.worldoftanks.ru") > -1)
                         Config.s_game_region = "RU";

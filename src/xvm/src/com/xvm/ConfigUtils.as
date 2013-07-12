@@ -3,6 +3,7 @@
  * @author sirmax2
  */
 import com.xvm.Config;
+import com.xvm.Strings;
 import com.xvm.Utils;
 
 class com.xvm.ConfigUtils
@@ -53,7 +54,7 @@ class com.xvm.ConfigUtils
 
             case 'undefined':
             case 'null':
-                return (typeof config == 'string' || typeof config == 'number') ? config : def;
+                return (typeof config == 'string' || typeof config == 'number' || typeof config == 'object') ? config : def;
 
             default:
                 return def;
@@ -330,7 +331,7 @@ class com.xvm.ConfigUtils
         var ex = event.error;
 
         if (ex.at == null)
-            return (ex.name != null ? Utils.trim(ex.name) + ": " : "") + Utils.trim(ex.message);
+            return (ex.name != null ? Strings.trim(ex.name) + ": " : "") + Strings.trim(ex.message);
         else
         {
             var head = ex.at > 0 ? ex.text.substring(0, ex.at) : "";
@@ -344,7 +345,7 @@ class com.xvm.ConfigUtils
             while (tail.indexOf("  ") != -1)
             tail = tail.split("  ").join(" ");
 
-            return "[" + ex.at + "] " + Utils.trim(ex.name) + ": " + Utils.trim(ex.message) + "\n  " +
+            return "[" + ex.at + "] " + Strings.trim(ex.name) + ": " + Strings.trim(ex.message) + "\n  " +
                 head + ">>>" + ex.text.charAt(ex.at) + "<<<" + tail;
         }
     }

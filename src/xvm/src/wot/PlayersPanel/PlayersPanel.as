@@ -9,6 +9,7 @@ import com.xvm.Logger;
 import com.xvm.Macros;
 import com.xvm.StatData;
 import com.xvm.StatLoader;
+import com.xvm.Strings;
 import com.xvm.Utils;
 import wot.Minimap.MinimapEvent;
 import wot.PlayersPanel.PlayerListItemRenderer;
@@ -321,7 +322,7 @@ class wot.PlayersPanel.PlayersPanel
         {
             //Logger.add("before: " + text);
             var data = m_data[m_item++];
-            var deadState = Utils.endsWith("dead", colorScheme) ? Defines.DEADSTATE_DEAD : Defines.DEADSTATE_ALIVE;
+            var deadState = Strings.endsWith("dead", colorScheme) ? Defines.DEADSTATE_DEAD : Defines.DEADSTATE_ALIVE;
             var state = wrapper.m_state;
             var field = state == "medium2" ? wrapper.m_vehicles : wrapper.m_names;
             var pname = Utils.GetNormalizedPlayerName(data.label);

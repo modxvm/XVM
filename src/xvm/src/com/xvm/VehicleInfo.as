@@ -2,7 +2,7 @@
  * @author sirmax2
  */
 import com.xvm.Config;
-import com.xvm.Utils;
+import com.xvm.Strings;
 import com.xvm.VehicleInfoData;
 import com.xvm.VehicleInfoData2;
 import com.xvm.VehicleInfoDataAvg;
@@ -15,7 +15,7 @@ class com.xvm.VehicleInfo
     public static function getVehicleName(icon: String): String
     {
         icon = icon.slice(icon.lastIndexOf("/") + 1, icon.lastIndexOf("."));
-        icon = Utils.trim(icon);
+        icon = Strings.trim(icon);
         return icon;
     }
 
@@ -25,7 +25,7 @@ class com.xvm.VehicleInfo
     {
         icon = getVehicleName(icon);
         icon = icon.slice(icon.indexOf("-") + 1);
-        icon = Utils.trim(icon);
+        icon = Strings.trim(icon);
         return icon;
     }
     
@@ -84,7 +84,7 @@ class com.xvm.VehicleInfo
     {
         icon = icon.slice(icon.lastIndexOf("/") + 1, icon.lastIndexOf("."));
         icon = icon.slice(icon.indexOf("-") + 1);
-        icon = Utils.trim(icon);
+        icon = Strings.trim(icon);
         icon = icon.split("-").join("_").toLowerCase();
         return icon;
     }
@@ -95,7 +95,7 @@ class com.xvm.VehicleInfo
     {
         icon = icon.slice(icon.lastIndexOf("/") + 1, icon.lastIndexOf("."));
         icon = icon.split("-").join("_");
-        icon = Utils.trim(icon);
+        icon = Strings.trim(icon);
         return icon;
     }
 }

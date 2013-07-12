@@ -6,6 +6,7 @@
 import com.xvm.ColorsManager;
 import com.xvm.GraphicsUtil;
 import com.xvm.Macros;
+import com.xvm.Strings;
 import com.xvm.Utils;
 import wot.VehicleMarkersManager.components.ActionMarkerComponent;
 import wot.VehicleMarkersManager.components.ClanIconComponent;
@@ -94,7 +95,7 @@ class wot.VehicleMarkersManager.XvmBase
     {
         //var key = "VMM/" + m_playerFullName + "/" + format;
         var pn = m_playerFullName;
-        return Utils.trim(Macros.Format(pn, format));
+        return Strings.trim(Macros.Format(pn, format));
         //return Utils.trim(Cache.Get(key, function() { return Macros.Format(pn, format) }));
     }
 
@@ -113,7 +114,7 @@ class wot.VehicleMarkersManager.XvmBase
      */
     public function formatDynamicText(format:String, curHealth:Number, delta:Number, damageFlag:Number, damageType:String):String
     {
-        return Utils.trim(Macros.Format(m_playerFullName, format,
+        return Strings.trim(Macros.Format(m_playerFullName, format,
             {
                 curHealth:curHealth,
                 delta:isBlowedUp ? delta - 1 : delta, // curHealth = -1 for blowedUp
@@ -128,7 +129,7 @@ class wot.VehicleMarkersManager.XvmBase
 
     public function formatStaticColorText(format:String):String
     {
-        format = Utils.trim(Macros.Format(m_playerFullName, format));
+        format = Strings.trim(Macros.Format(m_playerFullName, format));
         return format.split("#").join("0x");
     }
 

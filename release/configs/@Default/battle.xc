@@ -42,5 +42,8 @@
     // Panel scaling. Original value was 100.
     // Увеличение панели. 100 в оригинале.
     "scale": 150
-  }
+  },
+  // GUI elements settings (experts only)
+  // Настройки графических элементов (только для экспертов!)
+  "elements": ${"elements.xc":"."}
 }

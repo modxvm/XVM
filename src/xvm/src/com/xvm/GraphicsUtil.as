@@ -4,6 +4,7 @@
  */
 import com.xvm.Config;
 import com.xvm.Defines;
+import com.xvm.Strings;
 import com.xvm.Utils;
 import flash.filters.DropShadowFilter;
 import flash.geom.ColorTransform;
@@ -140,7 +141,7 @@ class com.xvm.GraphicsUtil
             }
             if (!vtype || !Config.s_config.colors.vtype[vtype])
                 return "";
-            return prefix + Utils.padLeft(Utils.toInt(Config.s_config.colors.vtype[vtype], 0xFFFFFE).toString(16), 6, "0");
+            return prefix + Strings.padLeft(Utils.toInt(Config.s_config.colors.vtype[vtype], 0xFFFFFE).toString(16), 6, "0");
         }
         catch (ex:Error)
         {
@@ -162,7 +163,7 @@ class com.xvm.GraphicsUtil
             key += !isDead ? "hit" : isBlowedUp ? "blowup" : "kill";
             if (!Config.s_config.colors.damage[key])
                 return "";
-            return prefix + Utils.padLeft(Utils.toInt(Config.s_config.colors.damage[key], 0xFFFFFE).toString(16), 6, "0");
+            return prefix + Strings.padLeft(Utils.toInt(Config.s_config.colors.damage[key], 0xFFFFFE).toString(16), 6, "0");
         }
         catch (ex:Error)
         {
@@ -180,7 +181,7 @@ class com.xvm.GraphicsUtil
         {
             if (!dmg_kind || !Config.s_config.colors.dmg_kind[dmg_kind])
                 return "";
-            return prefix + Utils.padLeft(Utils.toInt(Config.s_config.colors.dmg_kind[dmg_kind], 0xFFFFFE).toString(16), 6, "0");
+            return prefix + Strings.padLeft(Utils.toInt(Config.s_config.colors.dmg_kind[dmg_kind], 0xFFFFFE).toString(16), 6, "0");
         }
         catch (ex:Error)
         {
@@ -235,7 +236,7 @@ class com.xvm.GraphicsUtil
             {
                 if (darker)
                     color = GraphicsUtil.darkenColor(color, 50);
-                return prefix + Utils.padLeft(color.toString(16), 6, "0");
+                return prefix + Strings.padLeft(color.toString(16), 6, "0");
             }
         }
 

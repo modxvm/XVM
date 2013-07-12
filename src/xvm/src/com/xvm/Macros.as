@@ -6,6 +6,7 @@ import com.xvm.GlobalEventDispatcher;
 import com.xvm.GraphicsUtil;
 import com.xvm.Locale;
 import com.xvm.StatData;
+import com.xvm.Strings;
 import com.xvm.Utils;
 import com.xvm.VehicleInfo;
 
@@ -139,7 +140,7 @@ class com.xvm.Macros
             pdata["c:dmg-kind"] = function(o) { return o.delta ? GraphicsUtil.GetDmgKindValue(o.damageType) : ""; }
             pdata["c:dmg_kind"] = pdata["c:dmg-kind"];
             // {{c:system}}
-            pdata["c:system"] = function(o) { return "#" + Utils.padLeft(o.getSystemColor(o).toString(16), 6, "0"); }
+            pdata["c:system"] = function(o) { return "#" + Strings.padLeft(o.getSystemColor(o).toString(16), 6, "0"); }
 
             // Alpha
             // {{a:hp}}
@@ -182,47 +183,47 @@ class com.xvm.Macros
         pdata["xwn"] = stat.xwn == null ? "--" : stat.xwn == 100 ? "XX" : (stat.xwn < 10 ? "0" : "") + stat.xwn;
         // {{eff}}, {{eff:4}}
         pdata["eff"] = eff <= 0 ? "----" : String(eff);
-        pdata["eff:4"] = eff <= 0 ? "----" : Utils.padLeft(pdata["eff"], 4);
+        pdata["eff:4"] = eff <= 0 ? "----" : Strings.padLeft(pdata["eff"], 4);
         // {{wn}}
-        pdata["wn"] = stat.wn <= 0 ? "----" : Utils.padLeft(String(stat.wn), 4);
+        pdata["wn"] = stat.wn <= 0 ? "----" : Strings.padLeft(String(stat.wn), 4);
         // {{twr}}
-        pdata["twr"] = stat.twr <= 0 ? "--%" : Utils.padLeft(String(stat.twr) + "%", 3);
+        pdata["twr"] = stat.twr <= 0 ? "--%" : Strings.padLeft(String(stat.twr) + "%", 3);
         // {{e}}
         pdata["e"] = stat.te == null ? "-" : stat.te >= 10 ? "E" : String(stat.te);
         // {{teff}}
-        pdata["teff"] = stat.teff == null ? "----" : Utils.padLeft(String(stat.teff), 4);
+        pdata["teff"] = stat.teff == null ? "----" : Strings.padLeft(String(stat.teff), 4);
         // {{teff2}}
-        pdata["teff2"] = stat.teff2 == null ? "----" : Utils.padLeft(String(stat.teff2), 4);
+        pdata["teff2"] = stat.teff2 == null ? "----" : Strings.padLeft(String(stat.teff2), 4);
 
         // {{rating}}, {{rating:3}}
         pdata["rating"] = r <= 0 ? "--%" : String(r) + "%";
-        pdata["rating:3"] = Utils.padLeft(pdata["rating"], 3);
+        pdata["rating:3"] = Strings.padLeft(pdata["rating"], 3);
         // {{battles}}
         pdata["battles"] = b <= 0 ? "---" : String(b);
         // {{wins}}
         pdata["wins"] = b <= 0 ? "---" : String(w);
         // {{kb}}, {{kb:3}}
         pdata["kb"] = b <= 0 ? "--k" : String(Math.round(b / 1000)) + "k";
-        pdata["kb:3"] = Utils.padLeft(pdata["kb"], 3);
+        pdata["kb:3"] = Strings.padLeft(pdata["kb"], 3);
 
         // {{t-rating}}, {{t-rating:3}}
         pdata["t-rating"] = tr <= 0 ? "--%" : String(tr) + "%";
-        pdata["t-rating:3"] = Utils.padLeft(pdata["t-rating"], 3);
+        pdata["t-rating:3"] = Strings.padLeft(pdata["t-rating"], 3);
         // {{t-battles}}, {{t-battles:4}}
         pdata["t-battles"] = tb <= 0 ? "----" : String(tb);
-        pdata["t-battles:4"] = Utils.padLeft(pdata["t-battles"], 4);
+        pdata["t-battles:4"] = Strings.padLeft(pdata["t-battles"], 4);
         // {{t-wins}}
         pdata["t-wins"] = tb <= 0 ? "----" : String(tw);
         // {{t-kb}}, {{t-kb-0}}, {{t-kb:4}}
-        pdata["t-kb-0"] = tb <= 0 ? "-.-k" : Utils.padLeft(Sprintf.format("%.1fk", tbK, 4));
+        pdata["t-kb-0"] = tb <= 0 ? "-.-k" : Strings.padLeft(Sprintf.format("%.1fk", tbK, 4));
         pdata["t-kb:4"] = tbK < 1 ? pdata["t-kb-0"].split("0.", 2).join(" .") : pdata["t-kb-0"]; // remove leading zero before dot
-        pdata["t-kb"] = Utils.trim(pdata["t-kb:4"]);
+        pdata["t-kb"] = Strings.trim(pdata["t-kb:4"]);
         // {{t-hb}}, {{t-hb:3}}
         pdata["t-hb"] = tb <= 0 ? "--h" : String(Math.round(tb / 100)) + "h";
-        pdata["t-hb:3"] = Utils.padLeft(pdata["t-hb"], 3);
+        pdata["t-hb:3"] = Strings.padLeft(pdata["t-hb"], 3);
         // {{tdb}}, {{tdb:4}}
         pdata["tdb"] = stat.tdb == null ? "----" : String(stat.tdb);
-        pdata["tdb:4"] = Utils.padLeft(pdata["tdb"], 4);
+        pdata["tdb:4"] = Strings.padLeft(pdata["tdb"], 4);
         // {{tdv}}
         pdata["tdv"] = stat.tdv == null ? "-.-" : Sprintf.format("%.1f", stat.tdv);
         // {{tfb}}

@@ -7,6 +7,7 @@ import com.xvm.Defines;
 import com.xvm.GraphicsUtil;
 import com.xvm.Locale;
 import com.xvm.Logger;
+import com.xvm.Strings;
 import com.xvm.Utils;
 import com.xvm.VehicleInfo;
 
@@ -280,7 +281,7 @@ class wot.VehicleMarkersManager.log.HitLog
             if (formatArr.length > 1)
                 format = formatArr.join(data.vtypeColor);
 
-            format = Utils.trim(format);
+            format = Strings.trim(format);
         }
         catch (e)
         {
