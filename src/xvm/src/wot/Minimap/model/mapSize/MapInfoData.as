@@ -27,41 +27,42 @@ class wot.Minimap.model.mapSize.MapInfoData
     private static var _systemMapnameList:Object = 
     {
         //$00_tank_tutorial
-        $01_karelia:          { size: 100 }, // Карелия         -- FIXIT: Remove russian from sources // sirmax
-        $02_malinovka:        { size: 100 }, // Малиновка
-        $03_campania:         { size: 60 },  // Провинция
-        $04_himmelsdorf:      { size: 70 },  // Химмельсдорф
-        $05_prohorovka:       { size: 100 }, // Прохоровка
-        $06_ensk:             { size: 60 },  // Энск
-        $07_lakeville:        { size: 80 },  // Ласвилль
-        $08_ruinberg:         { size: 80 },  // Руинберг
-        $10_hills:            { size: 80 },  // Рудники
-        $11_murovanka:        { size: 80 },  // Мурованка
-        $13_erlenberg:        { size: 100 }, // Эрленберг
-        $14_siegfried_line:   { size: 100 }, // Линия Зигфрида
-        $15_komarin:          { size: 80 },  // Комарин
-        $17_munchen:          { size: 60 },  // Уайдпарк
-        $18_cliff:            { size: 100 }, // Утёс
-        $19_monastery:        { size: 100 }, // Монастырь
-        $23_westfeld:         { size: 100 }, // Вестфилд
-        $28_desert:           { size: 100 }, // Песчаная река
-        $29_el_hallouf:       { size: 100 }, // Эль-Халлуф
-        $31_airfield:         { size: 100 }, // Аэропорт
-        $33_fjord:            { size: 100 }, // Фьорды
-        $34_redshire:         { size: 100 }, // Редшир
-        $35_steppes:          { size: 100 }, // Степи
-        $36_fishing_bay:      { size: 100 }, // Рыбацкая бухта
-        $37_caucasus:         { size: 100 }, // Перевал
-        $38_mannerheim_line:  { size: 100 }, // Заполярье
-        $39_crimea:           { size: 100 }, // Южный берег
-        $42_north_america:    { size: 83 },  // Порт
-        $44_north_america:    { size: 100 }, // Лайв Окс
-        $45_north_america:    { size: 100 }, // Хайвей
-        $47_canada_a:         { size: 100 }, // Тихий берег
-        $51_asia:             { size: 100 }, // Хребет дракона
-        $60_asia_miao:        { size: 100 }, // Жемчужная река
-        $73_asia_korea:       { size: 100 }, // Священная долина
-        $85_winter:           { size: 100 }, // Белогорск-19
+        $01_karelia:          { size: 100 }, // Karelia 
+        $02_malinovka:        { size: 100 }, // Malinovka
+        $03_campania:         { size: 60 },  // Province
+        $04_himmelsdorf:      { size: 70 },  // Himmelsdorf
+        $05_prohorovka:       { size: 100 }, // Prokhorovka
+        $06_ensk:             { size: 60 },  // Ensk
+        $07_lakeville:        { size: 80 },  // Lakeville
+        $08_ruinberg:         { size: 80 },  // Ruinberg
+        $10_hills:            { size: 80 },  // Mines
+        $11_murovanka:        { size: 80 },  // Murovanka
+        $13_erlenberg:        { size: 100 }, // Erlenberg
+        $14_siegfried_line:   { size: 100 }, // Siegfried Line
+        $15_komarin:          { size: 80 },  // Komarin
+        $17_munchen:          { size: 60 },  // Widepark
+        $18_cliff:            { size: 100 }, // Cliff
+        $19_monastery:        { size: 100 }, // Abbey
+        $22_slough:           { size: 100 }, // Swamp
+        $23_westfeld:         { size: 100 }, // Westfield
+        $28_desert:           { size: 100 }, // Sand River
+        $29_el_hallouf:       { size: 100 }, // El Halluf
+        $31_airfield:         { size: 100 }, // Airfield
+        $33_fjord:            { size: 100 }, // Fjords
+        $34_redshire:         { size: 100 }, // Redshire
+        $35_steppes:          { size: 100 }, // Steppes
+        $36_fishing_bay:      { size: 100 }, // Fisherman's Bay
+        $37_caucasus:         { size: 100 }, // Mountain Pass
+        $38_mannerheim_line:  { size: 100 }, // Arctic Region
+        $39_crimea:           { size: 100 }, // South Coast
+        $42_north_america:    { size: 83 },  // Port
+        $44_north_america:    { size: 100 }, // Live Oaks
+        $45_north_america:    { size: 100 }, // Highway
+        $47_canada_a:         { size: 100 }, // Serene Coast
+        $51_asia:             { size: 100 }, // Dragon Ridge
+        $60_asia_miao:        { size: 100 }, // Pearl River
+        $73_asia_korea:       { size: 100 }, // Sacred Valley
+        $85_winter:           { size: 100 }, // Belogorsk-19
         __end__: null
     }
 
