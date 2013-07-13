@@ -6,27 +6,47 @@ import net.wargaming.managers.Localization;
 
 class com.xvm.VehicleInfoDataL10n
 {
-    private static var data:Object;
+    /////////////////////////////////////////////////////////////////
+    // PUBLIC STATIC
 
-    // name = "Об. 907"
+    // localizedName = "Obj. 907"
     // return: "object_907"
-    public static function LocalizedNameToVehicleKey(name:String):String
+    public static function getVehicleName(localizedName:String):String
     {
-        if (data == null)
+        return localizedData[localizedName] || "";
+    }
+
+    // localizedName = "Obj. 907"
+    // return: "ussr_Object_907"
+    public static function getVehicleNationName(localizedName:String):String
+    {
+        if (VehicleInfoData2.data[localizedData[localizedName]].nation != null && VehicleInfoData2.data[localizedData[localizedName]].name != null)
+            return VehicleInfoData2.data[localizedData[localizedName]].nation + "_" + VehicleInfoData2.data[localizedData[localizedName]].name.split("-").join("_");
+        return "";
+    }
+
+    /////////////////////////////////////////////////////////////////
+    // PRIVATE
+
+    private static var _localizedNameList:Object;
+
+    private static function get localizedData():Object
+    {
+        if (_localizedNameList == null) 
             setupData();
-        return data[name] || "";
+        return _localizedNameList;
     }
 
     private static function setupData():Void
     {
-        data = new Object();
+        _localizedNameList = new Object();
 
         // <280ms
         for (var tankKey:String in VehicleInfoData2.data) {
             var nation:String = (VehicleInfoData2.data[tankKey].nation == "uk" ? "gb" : VehicleInfoData2.data[tankKey].nation);
             var tmp:String = Localization.makeString("#" + nation + "_vehicles:" + VehicleInfoData2.data[tankKey].name, { } );
             var tmpShort:String = Localization.makeString("#" + nation + "_vehicles:" + VehicleInfoData2.data[tankKey].name + "_short", { } );
-            data[tmp] = data[tmpShort] = tankKey;
+            _localizedNameList[tmp] = _localizedNameList[tmpShort] = tankKey;
         }
     }
 }

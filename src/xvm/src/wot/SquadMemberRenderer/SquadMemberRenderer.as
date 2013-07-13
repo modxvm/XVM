@@ -155,7 +155,7 @@ class wot.SquadMemberRenderer.SquadMemberRenderer
         if (!Config.s_loaded || !Config.s_config.squad.enabled || !wrapper.data || !vname || vname == "")
             return null;
 
-        var vkey = VehicleInfoDataL10n.LocalizedNameToVehicleKey(vname);
+        var vkey = VehicleInfoDataL10n.getVehicleName(vname);
 
         var vi2 = VehicleInfo.getInfo2("/-" + vkey + ".");
         if (vi2 == null)

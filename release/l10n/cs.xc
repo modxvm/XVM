@@ -1,4 +1,7 @@
-﻿{
+﻿/**
+ * Czech translation file.
+ */
+{
   "locale": {
     "XVM_translator": "Assassik",
 

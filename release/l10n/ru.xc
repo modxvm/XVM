@@ -1,4 +1,7 @@
-﻿{
+﻿/**
+ * Russian translation file.
+ */
+{
   "locale": {
     "XVM_translator": "Maxim Schedriviy",
 

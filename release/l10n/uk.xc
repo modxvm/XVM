@@ -1,4 +1,7 @@
-﻿{
+﻿/**
+ * Ukrainian translation file.
+ */
+{
   "locale": {
     "XVM_translator": "RedMor, <contact@by-reservation.com>",
 

@@ -1,4 +1,7 @@
-﻿{
+﻿/**
+ * Belarusian translation file.
+ */
+{
   "locale": {
     "XVM_translator": "Alexander Shoumsky, <contact@by-reservation.com>",
 
@@ -83,6 +86,5 @@
     "LT": "ЛТ",
     "TD": "СТ-САУ",
     "SPG": "САУ"
-
   }
 }
