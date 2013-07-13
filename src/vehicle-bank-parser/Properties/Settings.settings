@@ -3,13 +3,16 @@
   <Profiles />
   <Settings>
     <Setting Name="EXPORT_FILEPATH" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\home\max\wot-xvm\src\xvm\src\wot\Utils\VehicleInfoData2.as</Value>
+      <Value Profile="(Default)">D:\work\wot-xvm\src\xvm\src\com\xvm\VehicleInfoData2.as</Value>
     </Setting>
     <Setting Name="VEHICLE_DIR_PATH" Type="System.String" Scope="User">
       <Value Profile="(Default)">res\scripts\item_defs\vehicles\</Value>
     </Setting>
     <Setting Name="GAME_PATH" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\home\max\WoT-CT\</Value>
+      <Value Profile="(Default)">D:\work\games\WoT\</Value>
+    </Setting>
+    <Setting Name="EXPORT_FILEPATH_JSON" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\work\wot-xvm\src\xvm-stat\Resources\VehicleInfo.json</Value>
     </Setting>
   </Settings>
 </SettingsFile>

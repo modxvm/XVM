@@ -1,5 +1,12 @@
 ﻿intrinsic class gfx.controls.ButtonBar extends gfx.core.UIComponent
 {
+    /////////////////////////////////////////////////////////////////
+    // XVM
+    var xvm_initialized:Boolean;
+    /////////////////////////////////////////////////////////////////
+
+    var renderers;
+    
     function get dataProvider();
     function set dataProvider(value);
     function get itemRenderer();

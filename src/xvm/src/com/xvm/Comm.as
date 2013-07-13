@@ -130,4 +130,14 @@ class com.xvm.Comm
             return;
         }
     }
+
+    public static function SaveSettings(key:String, value:Object):Void
+    {
+        SyncEncoded(Defines.COMMAND_SAVE_SETTINGS, key + ";" + JSONx.stringify(value, "", true));
+    }
+
+    public static function LoadSettings(key:String, target:Object, callback:Function):Void
+    {
+        SyncEncoded(Defines.COMMAND_LOAD_SETTINGS, key, target, callback);
+    }
 }

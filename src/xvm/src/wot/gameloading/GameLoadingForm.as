@@ -1,8 +1,12 @@
-﻿import com.xvm.Components.PingServers.PingServers;
+﻿/**
+ * GameLoadingForm Worker
+ * @author Maxim Schedriviy <m.schedriviy@gmail.com>
+ */
 import com.xvm.Config;
 import com.xvm.Defines;
 import com.xvm.GlobalEventDispatcher;
 import com.xvm.Utils;
+import com.xvm.Components.PingServers.PingServers;
 
 class wot.gameloading.GameLoadingForm
 {
@@ -47,6 +51,13 @@ class wot.gameloading.GameLoadingForm
     private function onConfigLoaded()
     {
         GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
+
+        // ------------------ DEBUG ------------------
+        //var mc = wrapper.createEmptyMovieClip("widgetsHolder", wrapper.getNextHighestDepth());
+        //com.xvm.Components.Widgets.WidgetsFactory.initialize(mc, "sirmax2",
+        //    [ com.xvm.Components.Widgets.Settings.WidgetsSettingsDialog.DEFAULT_WIDGET_SETTINGS ]);
+        //var wsd = new com.xvm.Components.Widgets.Settings.WidgetsSettingsDialog(_root.header, "sirmax2");
+        // ------------------ DEBUG ------------------
 
         // Send first ping as early as possible, to be ready on login screen.
         if (Config.s_config.login.pingServers.enabled || Config.s_config.hangar.pingServers.enabled);

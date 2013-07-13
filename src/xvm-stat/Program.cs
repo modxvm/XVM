@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Dokan;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Threading;
-using Dokan;
 using wot.Properties;
 
 namespace wot
@@ -28,7 +28,21 @@ namespace wot
 
     static Program()
     {
+      AppDomain.CurrentDomain.AssemblyResolve += Resolver;
       AppDomain.CurrentDomain.UnhandledException += UnhandledException;
+    }
+
+    static Assembly Resolver(object sender, ResolveEventArgs args)
+    {
+      Assembly a1 = Assembly.GetExecutingAssembly();
+      string resName = "";
+      if (args.Name.StartsWith("Community.CsharpSqlite"))
+        resName = "wot.Sqlite.Community.CsharpSqlite.dll";
+      Stream s = a1.GetManifestResourceStream(resName);
+      byte[] block = new byte[s.Length];
+      s.Read(block, 0, block.Length);
+      Assembly a2 = Assembly.Load(block);
+      return a2;
     }
 
     private static void Usage()
@@ -50,7 +64,7 @@ namespace wot
     public static void Log(string message, bool debug = false)
     {
       if (!debug || isDebug)
-      Console.WriteLine((debug ? "DEBUG: " : "") + message);
+        Console.WriteLine((debug ? "DEBUG: " : "") + message);
       if (!Logger.IsActive)
         return;
      
@@ -282,6 +296,12 @@ namespace wot
         string game_dir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
         Debug("Change dir: " + game_dir);
         Directory.SetCurrentDirectory(game_dir);
+
+        // --- DEBUG ----------------------------------------
+        //Dossier.Dossier.Instance.GetDossierInfo("1;sirmax2;1381374000;3600;24;4;battlesCount,wins;;");
+        //Thread.Sleep(1000);
+        //return;
+        // --- DEBUG ----------------------------------------
 
         // Check for another instance started
         bool ok;

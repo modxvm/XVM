@@ -1,10 +1,12 @@
 ﻿using LitJson;
 using System;
 using System.Diagnostics;
-using System.Net;
-using wot.Properties;
 using System.IO;
+using System.Net;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
+using wot.Properties;
 
 namespace wot
 {
@@ -30,7 +32,8 @@ namespace wot
       {
         for (int i = 0; i < path.Length - 1; ++i)
           data = data[path[i]];
-        return data[path[path.Length - 1]].IsInt ? int.Parse(data[path[path.Length - 1]].ToString()) : 0;
+        JsonData jd = data[path[path.Length - 1]];
+        return jd.IsInt ? int.Parse(jd.ToString()) : 0;
       }
       catch
       {
@@ -44,8 +47,9 @@ namespace wot
       {
         for (int i = 0; i < path.Length - 1; ++i)
           data = data[path[i]];
-        return (data[path[path.Length - 1]].IsInt || data[path[path.Length - 1]].IsLong)
-            ? long.Parse(data[path[path.Length - 1]].ToString()) : 0;
+        JsonData jd = data[path[path.Length - 1]];
+        return (jd.IsInt || jd.IsLong)
+            ? long.Parse(jd.ToString()) : 0;
       }
       catch
       {
@@ -59,8 +63,9 @@ namespace wot
       {
         for (int i = 0; i < path.Length - 1; ++i)
           data = data[path[i]];
-        return (data[path[path.Length - 1]].IsDouble || data[path[path.Length - 1]].IsInt) ?
-          double.Parse(data[path[path.Length - 1]].ToString()) : 0;
+        JsonData jd = data[path[path.Length - 1]];
+        return (jd.IsDouble || jd.IsInt || jd.IsLong) ?
+          double.Parse(jd.ToString()) : 0;
       }
       catch
       {
@@ -74,7 +79,7 @@ namespace wot
       {
         for (int i = 0; i < path.Length - 1; ++i)
           data = data[path[i]];
-        return data[path[path.Length - 1]].IsString ? data[path[path.Length - 1]].ToString() : "";
+        return data[path[path.Length - 1]].ToString();
       }
       catch
       {
@@ -160,7 +165,7 @@ namespace wot
       request.Method = "POST";
       request.ContentType = "application/x-javascript";
       request.ContentLength = data.Length;
-      
+
       using (Stream stream = request.GetRequestStream())
         stream.Write(data, 0, data.Length);
 
@@ -168,5 +173,109 @@ namespace wot
     }
     #endregion
 
+    #region Base32 decoder
+
+    /// <summary>
+    /// Converts a Base32-k string into an array of bytes.
+    /// </summary>
+    /// <exception cref="System.ArgumentException">
+    /// Input string <paramref name="s">s</paramref> contains invalid Base32-k characters.
+    /// </exception>
+    public static byte[] FromBase32String(string input)
+    {
+        if (string.IsNullOrEmpty(input))
+            throw new ArgumentNullException("input");
+
+        input = input.TrimEnd('='); //remove padding characters
+        int byteCount = input.Length * 5 / 8; //this must be TRUNCATED
+        byte[] returnArray = new byte[byteCount];
+
+        byte curByte = 0, bitsRemaining = 8;
+        int mask = 0, arrayIndex = 0;
+
+        foreach (char c in input)
+        {
+            int cValue = CharToValue(c);
+
+            if (bitsRemaining > 5)
+            {
+                mask = cValue << (bitsRemaining - 5);
+                curByte = (byte)(curByte | mask);
+                bitsRemaining -= 5;
+            }
+            else
+            {
+                mask = cValue >> (5 - bitsRemaining);
+                curByte = (byte)(curByte | mask);
+                returnArray[arrayIndex++] = curByte;
+                curByte = (byte)(cValue << (3 + bitsRemaining));
+                bitsRemaining += 3;
+            }
+        }
+
+        //if we didn't end with a full byte
+        if (arrayIndex != byteCount)
+            returnArray[arrayIndex] = curByte;
+
+        return returnArray;
+    }
+
+    private static int CharToValue(char c)
+    {
+        int value = (int)c;
+        //65-90 == uppercase letters
+        if (value < 91 && value > 64)
+            return value - 65;
+        //50-55 == numbers 2-7
+        if (value < 56 && value > 49)
+            return value - 24;
+        //97-122 == lowercase letters
+        if (value < 123 && value > 96)
+            return value - 97;
+        throw new ArgumentException("Character is not a Base32 character.", "c");
+    }
+    #endregion
+
+    public static T ReadStruct<T>(byte[] data)
+    {
+      GCHandle handle = GCHandle.Alloc(data, GCHandleType.Pinned);
+      T temp = (T)Marshal.PtrToStructure(handle.AddrOfPinnedObject(), typeof(T));
+      handle.Free();
+      return temp;
+    }
+
+    public static string GetResourceAsString(string resourceName)
+    {
+      var assembly = Assembly.GetExecutingAssembly();
+      
+      using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+      {
+        using (StreamReader reader = new StreamReader(stream))
+          return reader.ReadToEnd();
+      }
+    }
+
+    public static byte[] GetResourceAsBytes(string resourceName)
+    {
+      var assembly = Assembly.GetExecutingAssembly();
+
+      using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+      {
+        using (BinaryReader reader = new BinaryReader(stream))
+          return reader.ReadBytes((int)(stream.Length));
+      }
+    }
+
+    public static int ToUnixTime(this DateTime date)
+    {
+      DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+      return Convert.ToInt32((date - origin).TotalSeconds);
+    }
+
+    public static DateTime ToUnixDateTime(this int timestamp)
+    {
+      DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+      return origin.AddSeconds(timestamp);
+    }
   }
 }

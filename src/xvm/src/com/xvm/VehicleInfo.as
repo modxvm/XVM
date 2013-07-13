@@ -38,15 +38,24 @@ class com.xvm.VehicleInfo
     // icon = "../maps/icons/vehicle/contour/ussr-IS-3.png"
     public static function getInfo2(icon: String): Object
     {
-        var vn = getName2(icon);
+        return _getInfo2(getName2(icon));
+    }
+
+    public static function getInfo2ByVid(vid:Number):Object
+    {
+        return _getInfo2(VehicleInfoData2.vidToVname["_" + vid]);
+    }
+
+    private static function _getInfo2(vn:String):Object
+    {
         var res = VehicleInfoData2.data[vn];
         if (!res)
-            return null
+            return null;
         res.avg = VehicleInfoDataAvg.data[vn] || null;
         res.top = VehicleInfoDataTop.data[vn] || null;
         return res;
     }
-
+    
     public static function getVehicleNamesData():Object
     {
         var result:Object = {};

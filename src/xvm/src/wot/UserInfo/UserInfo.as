@@ -581,7 +581,8 @@ class wot.UserInfo.UserInfo
                         item.level.toString() == filter || Defines.ROMAN_LEVEL[item.level - 1].toLowerCase() == filter || // level
                         UserInfoDataItem.TYPE[item.type].toLowerCase() == filter || UserInfoDataItem.TYPE_RU[item.type].toLowerCase() == filter ||
                         (filter == "--" && item["premium"] != true) || // no prem
-                        (filter == "---" && item["premium"] != true && item.vehicleClass != 4)) // no prem & master
+                        (filter == "---" && item["premium"] != true && item.vehicleClass != 4) || // no prem & master
+                        (filter == "----" && item["premium"] != true && item.vehicleClass != 4 && item.type != 1)) // no prem & master & arty
                         data.push(item);
                 }
             }

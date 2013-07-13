@@ -10,6 +10,9 @@
     // true - Show XWN instead of XEFF in company windows
     // true - показывать XWN вместо XEFF в окнах рот
     "xwnInCompany": true,
+    // true - Enable widgets
+    // true - включить виджеты
+    "widgetsEnabled": true,
     // Ping servers; works only with xvm-stat.exe
     // Пинг серверов; работает только с xvm-stat.exe
     "pingServers": {

@@ -56,6 +56,9 @@
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <DefineConstants>TRACE;DEBUG;NET_35</DefineConstants>
+    <NoWarn>
+    </NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\Release\</OutputPath>
@@ -68,18 +71,53 @@
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <Optimize>true</Optimize>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>NET_35</DefineConstants>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <NoWarn>
+    </NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Community.CsharpSqlite, Version=3.7.7.1, Culture=neutral, PublicKeyToken=98283e89a7914f3d, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>SQLite\Community.CsharpSqlite.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BxmlDecoder\BxmlReader.cs" />
     <Compile Include="BxmlDecoder\Packed_Section.cs" />
+    <Compile Include="Dossier\Dossier.cs" />
+    <Compile Include="Dossier\DossierData.cs" />
+    <Compile Include="Dossier\DossierDB.cs" />
+    <Compile Include="Dossier\DossierFiles.cs" />
+    <Compile Include="Dossier\VehicleInfo.cs" />
+    <Compile Include="DynamicQuery.cs" />
+    <Compile Include="Pickle\InvalidOpcodeException.cs" />
+    <Compile Include="Pickle\IObjectConstructor.cs" />
+    <Compile Include="Pickle\Objects\AnyClassConstructor.cs" />
+    <Compile Include="Pickle\Objects\ArrayConstructor.cs" />
+    <Compile Include="Pickle\Objects\ByteArrayConstructor.cs" />
+    <Compile Include="Pickle\Objects\ClassDictConstructor.cs" />
+    <Compile Include="Pickle\Objects\ComplexNumber.cs" />
+    <Compile Include="Pickle\Objects\DateTimeConstructor.cs" />
+    <Compile Include="Pickle\Objects\DecimalConstructor.cs" />
+    <Compile Include="Pickle\Objects\SetConstructor.cs" />
+    <Compile Include="Pickle\Objects\StringConstructor.cs" />
+    <Compile Include="Pickle\Opcodes.cs" />
+    <Compile Include="Pickle\PickleException.cs" />
+    <Compile Include="Pickle\PickleUtils.cs" />
+    <Compile Include="Pickle\PythonException.cs" />
+    <Compile Include="Pickle\Unpickler.cs" />
+    <Compile Include="Pickle\UnpickleStack.cs" />
+    <Compile Include="Sqlite\SQLiteDatabase.cs" />
+    <Compile Include="Sqlite\SQLiteVdbe.cs" />
     <Compile Include="UpdateStatThread.cs" />
     <Compile Include="Dokan\DokanNet.cs" />
     <Compile Include="Dokan\DokanOperations.cs" />
@@ -112,6 +150,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
+    <EmbeddedResource Include="Resources\VehicleInfo.json" />
     <None Include="xvm-stat.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +163,7 @@
     <Content Include="readme-ru.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="Sqlite\Community.CsharpSqlite.dll" />
     <Content Include="WoT.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +183,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

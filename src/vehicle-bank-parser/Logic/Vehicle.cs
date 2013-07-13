@@ -24,6 +24,8 @@ class Vehicle
     */
     public const short STOCK_TURRET_NO_TOP_GUN = 2;
 
+    public int vid;
+    public int tankId;
     public string name;
     public string nation;
     public int level;
@@ -77,16 +79,33 @@ class Vehicle
         return STOCK_TURRET_NO_TOP_GUN;
     }
 
-    public string ToJsonString()
+    public string ToAS2tring()
     {
-      return (String.Format("{0} {{ {1}{2}{3}{4}turret: {5}, premium: {6}, {7}name: \"{8}\" }}",
+      return (String.Format("{0} {{ {1}{2}{3}{4}{5}turret: {6}, premium: {7}, {8}name: \"{9}\" }}",
         (name.Replace("-", "_").ToLower() + ":").PadRight(27),
+        String.Format("id: {0},", tankId).PadRight(9),
         String.Format("level: {0},", level).PadRight(11),
         String.Format("type: \"{0}\", ", type).PadRight(13),
         String.Format("hpstock: {0}, ", hpstock).PadRight(15),
         String.Format("hptop: {0}, ", hptop).PadRight(13),
         status,
         (premium ? "1" : "0"),
-        String.Format("nation: \"{0}\", ", nation).PadRight(19), name));
+        String.Format("nation: \"{0}\", ", nation).PadRight(19),
+        name));
+    }
+
+    public string ToJsonString()
+    {
+      return (String.Format("{0} {{ {1}{2}{3}{4}{5}{6}{7}{8}{9} }}",
+        String.Format("\"{0}\":", name.Replace("-", "_").ToLower()).PadRight(29),
+        String.Format("\"id\": {0},", tankId).PadRight(11),
+        String.Format("\"level\": {0},", level).PadRight(13),
+        String.Format("\"type\": \"{0}\", ", type).PadRight(15),
+        String.Format("\"hpstock\": {0}, ", hpstock).PadRight(17),
+        String.Format("\"hptop\": {0}, ", hptop).PadRight(15),
+        String.Format("\"turret\": {0}, ", status),
+        String.Format("\"premium\": {0}, ", premium ? "1" : "0"),
+        String.Format("\"nation\": \"{0}\", ", nation).PadRight(21),
+        String.Format("\"name\": \"{0}\"", name)));
     }
 }

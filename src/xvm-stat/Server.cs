@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Dokan;
+using LitJson;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -7,8 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Xml;
-using Dokan;
-using LitJson;
+using wot.Dossier;
 using wot.Properties;
 
 namespace wot
@@ -344,9 +345,6 @@ namespace wot
             parameters = cmd[1];
           }
 
-          if (!command.StartsWith("@LOG") && command != "@SET" && command != "@ADD" && command != "@PING")
-            Log(String.Format("=> {0} {1}", command, parameters));
-
           ProcessCommand(command, parameters);
         }
         catch (Exception ex)
@@ -363,6 +361,10 @@ namespace wot
       }
     }
 
+    #endregion
+
+    #region Process command
+    
     private void ProcessCommand(String command, String parameters)
     {
       switch (command)
@@ -387,15 +389,18 @@ namespace wot
         // Flat
 
         case "@VAR": // args - variable=value
+          Log(String.Format("=> {0} {1}", command, parameters));
           ProcessVarCommand(parameters);
           break;
 
         case "@GET_VERSION":
+          Log(String.Format("=> {0} {1}", command, parameters));
           ProcessGetVersionCommand();
           Debug("_result: " + _result);
           break;
 
         case "@GET_PLAYERS": // no args
+          Log(String.Format("=> {0} {1}", command, parameters));
           ProcessGetPlayersCommand();
           Debug("_result: " + _result);
           break;
@@ -403,11 +408,13 @@ namespace wot
         // ASYNC
 
         case "@GET_ASYNC": // args - resultId requestCount
+          Log(String.Format("=> {0} {1}", command, parameters));
           ProcessGetAsyncCommand(parameters);
           Debug("_result: " + _result);
           break;
 
         case "@INFO_ASYNC": // args - resultId requestCount params
+          Log(String.Format("=> {0} {1}", command, parameters));
           ProcessInfoAsyncCommand(parameters);
           Debug("_result: " + _result);
           break;
@@ -415,6 +422,19 @@ namespace wot
         case "@PING": // no args
           _result = PingWotServers.Instance.Ping();
           //Debug("_result: " + _result);
+          break;
+
+        case "@DOSSIER":
+          _result = Dossier.Dossier.Instance.GetDossierInfo(CollectParts(parameters));
+          Debug("@DOSSIER: _result: " + _result.Length + " bytes");
+          break;
+
+        case "@SAVE_SETTINGS": // args: key;value (encoded)
+          ProcessSaveSettings(parameters);
+          break;
+
+        case "@LOAD_SETTINGS":  // args: key (encoded)
+          ProcessLoadSettings(parameters);
           break;
 
         default:
@@ -509,6 +529,26 @@ namespace wot
                     //Debug("Loaded: " + resultId);
                   }
                 });
+    }
+
+    private void ProcessSaveSettings(string parameters)
+    {
+      string value = CollectParts(parameters);
+      if (String.IsNullOrEmpty(value))
+        return;
+      string[] settings = value.Split(new char[] { ';' }, 2);
+      if (settings.Length == 2)
+        DossierDB.SaveSettings(settings[0], settings[1]);
+    }
+
+    private void ProcessLoadSettings(string parameters)
+    {
+      string value = CollectParts(parameters);
+      if (String.IsNullOrEmpty(value))
+        return;
+      _result = DossierDB.LoadSettings(value);
+      if (string.IsNullOrEmpty(_result))
+        _result = "";
     }
 
     private string _lastReadFileFilenameAndOffset = "";

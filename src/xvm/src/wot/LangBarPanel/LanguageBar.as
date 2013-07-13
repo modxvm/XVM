@@ -1,7 +1,19 @@
-﻿import com.xvm.Components.PingServers.PingServers;
+﻿/**
+ * LanguageBar Worker
+ * @author Maxim Schedriviy <m.schedriviy@gmail.com>
+ */
+import gfx.controls.ButtonBar;
+import com.xvm.Comm;
 import com.xvm.Config;
+import com.xvm.Defines;
 import com.xvm.GlobalEventDispatcher;
+import com.xvm.JSONx;
+import com.xvm.Locale;
+import com.xvm.Logger;
 import com.xvm.Utils;
+import com.xvm.Components.PingServers.PingServers;
+import com.xvm.Components.Widgets.WidgetsFactory;
+import com.xvm.Components.Widgets.Settings.WidgetsSettingsDialog;
 
 class wot.LangBarPanel.LanguageBar
 {
@@ -31,13 +43,16 @@ class wot.LangBarPanel.LanguageBar
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
+    private var playerName:String;
     private var currentLoadingName:String;
-    private var holder:MovieClip;
+    private var mc_ping:MovieClip;
+    private var mc_widgets:MovieClip;
     
     public function LanguageBarCtor()
     {
         currentLoadingName = "";
-        holder = null;
+        mc_ping = null;
+        mc_widgets = null;
 
         GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
         Config.LoadConfig("LanguageBar.as");
@@ -48,11 +63,11 @@ class wot.LangBarPanel.LanguageBar
         GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
 
         var me = this;
-        _global.setInterval(function() { me.pingInitializationTimer.call(me); }, 1000);
-        pingInitializationTimer();
+        _global.setInterval(function() { me.onTimer.call(me); }, 1000);
+        onTimer();
     }
 
-    private function pingInitializationTimer()
+    private function onTimer()
     {
         //Logger.add(_root.loadingName);
         if (currentLoadingName == _root.loadingName)
@@ -61,30 +76,109 @@ class wot.LangBarPanel.LanguageBar
 
         // "startgamevideo", "login", "hangar"
 
-        if (holder != null)
-            holder.removeMovieClip();
-        
-        if (currentLoadingName == "hangar")
+        if (mc_ping != null)
         {
-            var header:MovieClip = _root.header;
-            holder = header.createEmptyMovieClip("pingHolder", header.getNextHighestDepth());
-            PingServers.initFeature(Config.s_config.hangar.pingServers, holder);
+            mc_ping.removeMovieClip();
+            mc_ping = null;
         }
-        else if (currentLoadingName == "startgamevideo" || currentLoadingName == "login")
+        if (mc_widgets != null)
         {
-            var main:MovieClip = _root.contentHolder.main;
-            holder = main.createEmptyMovieClip("pingHolder", main.getNextHighestDepth());
-            // _root.contentHolder.main is fixed size (1024x768), so create holder and place it at the top left corner of screen.
-            holder._x = Math.round((1024 - main.__width) / 2);
-            holder._y = Math.round((768 - main.__height) / 2);
-            //holder._x = 512;
-            //holder._y = 384;
-            PingServers.initFeature(Config.s_config.login.pingServers, holder);
+            mc_widgets.removeMovieClip();
+            mc_widgets = null;
+        }
+        
+        try
+        {
+            if (currentLoadingName == "startgamevideo" || currentLoadingName == "login")
+                initLogin();
+            else if (currentLoadingName == "hangar")
+                initHangar();
+        }
+        catch (e)
+        {
+            Logger.add("ERROR: " + e.message);
         }
     }
     
     function initImpl()
     {
         //Logger.add("LanguageBar.init()");
+    }
+    
+    // PRIVATE
+    
+    private function initLogin()
+    {
+        var main:MovieClip = _root.contentHolder.main;
+
+        // PingServers component
+        mc_ping = main.createEmptyMovieClip("pingHolder", main.getNextHighestDepth());
+        // _root.contentHolder.main is fixed size (1024x768), so create holder and place it at the top left corner of screen.
+        mc_ping._x = Math.round((1024 - main.__width) / 2);
+        mc_ping._y = Math.round((768 - main.__height) / 2);
+        PingServers.initFeature(Config.s_config.login.pingServers, mc_ping);
+
+        // ------------------ DEBUG ------------------
+        //var mc = _root.header.createEmptyMovieClip("widgetsHolder", _root.header.getNextHighestDepth());
+        //com.xvm.Components.Widgets.WidgetsFactory.initialize(mc, "sirmax2",
+        //    [ com.xvm.Components.Widgets.Settings.WidgetsSettingsDialog.DEFAULT_WIDGET_SETTINGS ]);
+        //var wsd = new com.xvm.Components.Widgets.Settings.WidgetsSettingsDialog(_root.header, "sirmax2");
+        // ------------------ DEBUG ------------------
+    }
+    
+    private function initHangar()
+    {
+        var header:MovieClip = _root.header;
+        playerName = _root.header.tankPanel.account_name.text;
+
+        // PingServers component
+        mc_ping = header.createEmptyMovieClip("pingHolder", header.getNextHighestDepth());
+        PingServers.initFeature(Config.s_config.hangar.pingServers, mc_ping);
+        
+        // Widgets
+//        if (Config.s_config.hangar.widgetsEnabled == true)
+//        {
+//            createMenuWidgetsButton();
+//            Comm.LoadSettings(playerName + ":" + Defines.SETTINGS_DOSSIER_WIDGETS, this, onWidgetsLoaded);
+//        }
+    }
+    
+    private function createMenuWidgetsButton()
+    {
+        var bar:ButtonBar = (ButtonBar)(_root.header.buttonsBlock.bar);
+        if (bar.xvm_initialized != true)
+        {
+            bar.xvm_initialized = true;
+            var dp:Array = bar.dataProvider;
+            dp.push({ value: "widget", label: Locale.get("Widgets") });
+            bar.dataProvider = dp;
+            bar.addEventListener("itemClick", this, "menuBarSelectEvent");
+            bar.draw();
+        }
+    }
+    
+    private function onWidgetsLoaded(event:Object)
+    {
+        var widgets = null;
+        try
+        {
+            if (!event || !event.str || event.str == "")
+                return;
+            widgets = (Array)(JSONx.parse(event.str));
+        }
+        catch (e)
+        {
+            Logger.add("Error loading widgets: " + e.message + "\n" + JSONx.stringify(event));
+            widgets = [];
+        }
+
+        mc_widgets = _root.header.createEmptyMovieClip("widgets", _root.header.getNextHighestDepth());
+        WidgetsFactory.initialize(mc_widgets, playerName, widgets);
+    }
+
+    private function menuBarSelectEvent(event)
+    {
+        if (event.item.value == "widget")
+            var wsd = new WidgetsSettingsDialog(_root.header, playerName);
     }
 }

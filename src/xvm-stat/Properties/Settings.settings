@@ -22,5 +22,8 @@
   &lt;string&gt;KR	aHR0cDovL3Byb3h5Mi5idWx5Y2hldi5uZXQvJTE/dG9rZW49JTI=&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
+    <Setting Name="XvmDbFileName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">res_mods\xvm\db\xvm-stat.db</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

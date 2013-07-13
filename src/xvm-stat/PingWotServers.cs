@@ -60,7 +60,8 @@ namespace wot
       Thread thread = new Thread(PingAsync);
       thread.Start();
 
-      return pingResult;
+      lock (pingResultLock)
+        return pingResult;
     }
 
     private void PingAsync()

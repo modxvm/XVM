@@ -45,7 +45,18 @@ class com.xvm.Defines
     public static var COMMAND_GET_VERSION:String = DOKAN_MP + "@GET_VERSION";
     public static var COMMAND_INFO_ASYNC:String = DOKAN_MP + "@INFO_ASYNC";
     public static var COMMAND_PING:String = DOKAN_MP + "@PING";
+    public static var COMMAND_DOSSIER:String = DOKAN_MP + "@DOSSIER";
+    public static var COMMAND_SAVE_SETTINGS:String = DOKAN_MP + "@SAVE_SETTINGS";
+    public static var COMMAND_LOAD_SETTINGS:String = DOKAN_MP + "@LOAD_SETTINGS";
 
+    // Settings keys
+    public static var SETTINGS_WIDGETS:String = "widgets";
+    public static var SETTINGS_WIDGETSSETTINGSDIALOG:String = "widgets.SettingsDialog";
+
+    // Default settings
+    public static  var DEFAULT_SETTINGS_WIDGETS = [];
+    public static  var DEFAULT_SETTINGS_WIDGETSSETTINGSDIALOG = { x: 400, y: 150 };
+    
     // Default path to vehicle icons (relative)
     public static var WG_CONTOUR_ICON_PATH:String = "../maps/icons/vehicle/contour/";
     
@@ -118,7 +129,7 @@ class com.xvm.Defines
 
     // Level in roman numerals
     public static var ROMAN_LEVEL:Array = [ "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" ];
-
+    
     // UI Colors
     public static var UICOLOR_DEFAULT = 0xC9C9B6;
     public static var UICOLOR_DEFAULT2 = 0x969687;

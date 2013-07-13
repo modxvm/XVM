@@ -52,6 +52,9 @@ class Program
                         continue;
                     if (tags.InnerText.Contains("observer"))
                         continue;
+                    XmlNode tankId = node.SelectSingleNode("id");
+                    if (tankId == null)
+                      continue;
                     XmlNode level = node.SelectSingleNode("level");
                     if (level == null)
                         continue;
@@ -66,6 +69,8 @@ class Program
 
                     Vehicle vehicle = new Vehicle(vdata)
                     {
+                        vid = (int.Parse(tankId.InnerText) << 8) + (Array.IndexOf(Defines.COUNTRIES, country) << 4),
+                        tankId = int.Parse(tankId.InnerText),
                         name = node.Name,
                         nation = country,
                         level = int.Parse(level.InnerText),
@@ -82,16 +87,17 @@ class Program
                 var n = a.level - b.level;
                 if (n != 0)
                     return n;
-                n = Defines.TYPES.IndexOf(a.type) - Defines.TYPES.IndexOf(b.type);
+                n = Array.IndexOf(Defines.TYPES_FOR_SORT, a.type) - Array.IndexOf(Defines.TYPES_FOR_SORT, b.type);
                 if (n != 0)
                     return n;
-                n = Defines.COUNTRIES.IndexOf(a.nation) - Defines.COUNTRIES.IndexOf(b.nation);
+                n = Array.IndexOf(Defines.COUNTRIES, a.nation) - Array.IndexOf(Defines.COUNTRIES, b.nation);
                 if (n != 0)
                     return n;
                 return String.Compare(a.name, b.name, true);
             });
 
             Export.generateAS2code(vehicles);
+            Export.generateJSON(vehicles);
         }
         catch (Exception ex)
         {
