@@ -51,10 +51,12 @@ class com.xvm.VehicleInfoData2
         gw_mk_vie:                  { id: 59,  level: 2,  type: "SPG", hpstock: 90,   hptop: 90,   turret: 0, premium: 0, nation: "germany", name: "GW_Mk_VIe" },
         t57:                        { id: 8,   level: 2,  type: "SPG", hpstock: 80,   hptop: 80,   turret: 0, premium: 0, nation: "usa",     name: "T57" },
         renaultbs:                  { id: 3,   level: 2,  type: "SPG", hpstock: 80,   hptop: 80,   turret: 0, premium: 0, nation: "france",  name: "RenaultBS" },
+        gb25_loyd_carrier:          { id: 41,  level: 2,  type: "SPG", hpstock: 80,   hptop: 80,   turret: 0, premium: 0, nation: "uk",      name: "GB25_Loyd_Carrier" },
 
         // level 3
         bt_7:                       { id: 3,   level: 3,  type: "LT",  hpstock: 200,  hptop: 220,  turret: 2, premium: 0, nation: "ussr",    name: "BT-7" },
         bt_sv:                      { id: 204, level: 3,  type: "LT",  hpstock: 240,  hptop: 240,  turret: 0, premium: 1, nation: "ussr",    name: "BT-SV" },
+        ltp:                        { id: 221, level: 3,  type: "LT",  hpstock: 230,  hptop: 230,  turret: 0, premium: 1, nation: "ussr",    name: "LTP" },
         m3_stuart_ll:               { id: 206, level: 3,  type: "LT",  hpstock: 220,  hptop: 220,  turret: 0, premium: 1, nation: "ussr",    name: "M3_Stuart_LL" },
         t_127:                      { id: 209, level: 3,  type: "LT",  hpstock: 250,  hptop: 250,  turret: 0, premium: 1, nation: "ussr",    name: "T-127" },
         t_46:                       { id: 12,  level: 3,  type: "LT",  hpstock: 220,  hptop: 250,  turret: 2, premium: 0, nation: "ussr",    name: "T-46" },
@@ -88,6 +90,7 @@ class com.xvm.VehicleInfoData2
         m7_priest:                  { id: 14,  level: 3,  type: "SPG", hpstock: 140,  hptop: 140,  turret: 0, premium: 0, nation: "usa",     name: "M7_Priest" },
         sexton_i:                   { id: 211, level: 3,  type: "SPG", hpstock: 160,  hptop: 160,  turret: 0, premium: 1, nation: "usa",     name: "Sexton_I" },
         lorraine39_l_am:            { id: 13,  level: 3,  type: "SPG", hpstock: 120,  hptop: 120,  turret: 0, premium: 0, nation: "france",  name: "Lorraine39_L_AM" },
+        gb27_sexton:                { id: 13,  level: 3,  type: "SPG", hpstock: 140,  hptop: 140,  turret: 1, premium: 0, nation: "uk",      name: "GB27_Sexton" },
         gb78_sexton_i:              { id: 213, level: 3,  type: "SPG", hpstock: 140,  hptop: 140,  turret: 0, premium: 1, nation: "uk",      name: "GB78_Sexton_I" },
 
         // level 4
@@ -122,9 +125,10 @@ class com.xvm.VehicleInfoData2
         sturmpanzer_ii:             { id: 18,  level: 4,  type: "SPG", hpstock: 190,  hptop: 190,  turret: 0, premium: 0, nation: "germany", name: "Sturmpanzer_II" },
         m37:                        { id: 18,  level: 4,  type: "SPG", hpstock: 180,  hptop: 180,  turret: 0, premium: 0, nation: "usa",     name: "M37" },
         amx_ob_am105:               { id: 57,  level: 4,  type: "SPG", hpstock: 170,  hptop: 170,  turret: 1, premium: 0, nation: "france",  name: "AMX_Ob_Am105" },
+        gb26_birch_gun:             { id: 42,  level: 4,  type: "SPG", hpstock: 190,  hptop: 190,  turret: 0, premium: 0, nation: "uk",      name: "GB26_Birch_Gun" },
 
         // level 5
-        t_50_2:                     { id: 38,  level: 5,  type: "LT",  hpstock: 500,  hptop: 560,  turret: 2, premium: 0, nation: "ussr",    name: "T_50_2" },
+        t_50_2:                     { id: 38,  level: 5,  type: "LT",  hpstock: 500,  hptop: 560,  turret: 1, premium: 0, nation: "ussr",    name: "T_50_2" },
         vk1602:                     { id: 21,  level: 5,  type: "LT",  hpstock: 440,  hptop: 440,  turret: 0, premium: 0, nation: "germany", name: "VK1602" },
         m24_chaffee:                { id: 38,  level: 5,  type: "LT",  hpstock: 530,  hptop: 580,  turret: 2, premium: 0, nation: "usa",     name: "M24_Chaffee" },
         elc_amx:                    { id: 55,  level: 5,  type: "LT",  hpstock: 400,  hptop: 400,  turret: 0, premium: 0, nation: "france",  name: "ELC_AMX" },
@@ -133,7 +137,7 @@ class com.xvm.VehicleInfoData2
         t_34:                       { id: 0,   level: 5,  type: "MT",  hpstock: 400,  hptop: 450,  turret: 2, premium: 0, nation: "ussr",    name: "T-34" },
         pziii_iv:                   { id: 25,  level: 5,  type: "MT",  hpstock: 380,  hptop: 440,  turret: 1, premium: 0, nation: "germany", name: "PzIII_IV" },
         pziv:                       { id: 0,   level: 5,  type: "MT",  hpstock: 420,  hptop: 460,  turret: 2, premium: 0, nation: "germany", name: "PzIV" },
-        pziv_hydro:                 { id: 215, level: 5,  type: "MT",  hpstock: 580,  hptop: 580,  turret: 0, premium: 1, nation: "germany", name: "PzIV_Hydro" },
+        pziv_hydro:                 { id: 215, level: 5,  type: "MT",  hpstock: 550,  hptop: 550,  turret: 0, premium: 1, nation: "germany", name: "PzIV_Hydro" },
         t_25:                       { id: 213, level: 5,  type: "MT",  hpstock: 610,  hptop: 610,  turret: 0, premium: 1, nation: "germany", name: "T-25" },
         m4_sherman:                 { id: 4,   level: 5,  type: "MT",  hpstock: 400,  hptop: 460,  turret: 2, premium: 0, nation: "usa",     name: "M4_Sherman" },
         m4a2e4:                     { id: 204, level: 5,  type: "MT",  hpstock: 480,  hptop: 480,  turret: 0, premium: 1, nation: "usa",     name: "M4A2E4" },
@@ -163,8 +167,10 @@ class com.xvm.VehicleInfoData2
         m41:                        { id: 16,  level: 5,  type: "SPG", hpstock: 230,  hptop: 230,  turret: 0, premium: 0, nation: "usa",     name: "M41" },
         _105_lefh18b2:              { id: 8,   level: 5,  type: "SPG", hpstock: 260,  hptop: 260,  turret: 0, premium: 1, nation: "france",  name: "_105_leFH18B2" },
         amx_105am:                  { id: 16,  level: 5,  type: "SPG", hpstock: 220,  hptop: 220,  turret: 0, premium: 0, nation: "france",  name: "AMX_105AM" },
+        gb28_bishop:                { id: 43,  level: 5,  type: "SPG", hpstock: 350,  hptop: 350,  turret: 0, premium: 0, nation: "uk",      name: "GB28_Bishop" },
 
         // level 6
+        mt25:                       { id: 65,  level: 6,  type: "LT",  hpstock: 510,  hptop: 570,  turret: 2, premium: 0, nation: "ussr",    name: "MT25" },
         vk2801:                     { id: 39,  level: 6,  type: "LT",  hpstock: 550,  hptop: 610,  turret: 2, premium: 0, nation: "germany", name: "VK2801" },
         t21:                        { id: 59,  level: 6,  type: "LT",  hpstock: 590,  hptop: 590,  turret: 0, premium: 0, nation: "usa",     name: "T21" },
         ch15_59_16:                 { id: 19,  level: 6,  type: "LT",  hpstock: 530,  hptop: 580,  turret: 2, premium: 0, nation: "china",   name: "Ch15_59_16" },
@@ -203,6 +209,7 @@ class com.xvm.VehicleInfoData2
         hummel:                     { id: 1,   level: 6,  type: "SPG", hpstock: 300,  hptop: 300,  turret: 0, premium: 0, nation: "germany", name: "Hummel" },
         m44:                        { id: 64,  level: 6,  type: "SPG", hpstock: 280,  hptop: 280,  turret: 0, premium: 0, nation: "usa",     name: "M44" },
         amx_13f3am:                 { id: 18,  level: 6,  type: "SPG", hpstock: 270,  hptop: 270,  turret: 0, premium: 0, nation: "france",  name: "AMX_13F3AM" },
+        gb77_fv304:                 { id: 46,  level: 6,  type: "SPG", hpstock: 280,  hptop: 280,  turret: 1, premium: 0, nation: "uk",      name: "GB77_FV304" },
 
         // level 7
         auf_panther:                { id: 56,  level: 7,  type: "LT",  hpstock: 850,  hptop: 950,  turret: 2, premium: 0, nation: "germany", name: "Auf_Panther" },
@@ -243,6 +250,7 @@ class com.xvm.VehicleInfoData2
         g_panther:                  { id: 35,  level: 7,  type: "SPG", hpstock: 360,  hptop: 360,  turret: 0, premium: 0, nation: "germany", name: "G_Panther" },
         m12:                        { id: 31,  level: 7,  type: "SPG", hpstock: 350,  hptop: 350,  turret: 0, premium: 0, nation: "usa",     name: "M12" },
         lorraine155_50:             { id: 28,  level: 7,  type: "SPG", hpstock: 340,  hptop: 340,  turret: 0, premium: 0, nation: "france",  name: "Lorraine155_50" },
+        gb29_crusader_5inch:        { id: 44,  level: 7,  type: "SPG", hpstock: 350,  hptop: 350,  turret: 1, premium: 0, nation: "uk",      name: "GB29_Crusader_5inch" },
 
         // level 8
         ch17_wz131_1_wz132:         { id: 15,  level: 8,  type: "LT",  hpstock: 950,  hptop: 1050, turret: 2, premium: 0, nation: "china",   name: "Ch17_WZ131_1_WZ132" },
@@ -257,6 +265,7 @@ class com.xvm.VehicleInfoData2
         ch01_type59:                { id: 0,   level: 8,  type: "MT",  hpstock: 1300, hptop: 1300, turret: 0, premium: 1, nation: "china",   name: "Ch01_Type59" },
         ch01_type59_gold:           { id: 2,   level: 8,  type: "MT",  hpstock: 1300, hptop: 1300, turret: 0, premium: 1, nation: "china",   name: "Ch01_Type59_Gold" },
         ch05_t34_2:                 { id: 6,   level: 8,  type: "MT",  hpstock: 1200, hptop: 1300, turret: 2, premium: 0, nation: "china",   name: "Ch05_T34_2" },
+        ch14_t34_3:                 { id: 250, level: 8,  type: "MT",  hpstock: 1300, hptop: 1300, turret: 0, premium: 1, nation: "china",   name: "Ch14_T34_3" },
         gb23_centurion:             { id: 23,  level: 8,  type: "MT",  hpstock: 1350, hptop: 1450, turret: 1, premium: 0, nation: "uk",      name: "GB23_Centurion" },
         is_3:                       { id: 21,  level: 8,  type: "HT",  hpstock: 1450, hptop: 1500, turret: 1, premium: 0, nation: "ussr",    name: "IS-3" },
         kv4:                        { id: 43,  level: 8,  type: "HT",  hpstock: 1600, hptop: 1650, turret: 1, premium: 0, nation: "ussr",    name: "KV4" },
@@ -271,7 +280,7 @@ class com.xvm.VehicleInfoData2
         t34_hvy:                    { id: 11,  level: 8,  type: "HT",  hpstock: 1500, hptop: 1500, turret: 0, premium: 1, nation: "usa",     name: "T34_hvy" },
         ch03_wz_111:                { id: 3,   level: 8,  type: "HT",  hpstock: 1550, hptop: 1550, turret: 0, premium: 1, nation: "china",   name: "Ch03_WZ-111" },
         ch11_110:                   { id: 11,  level: 8,  type: "HT",  hpstock: 1450, hptop: 1550, turret: 2, premium: 0, nation: "china",   name: "Ch11_110" },
-        ch23_112:                   { id: 252, level: 8,  type: "HT",  hpstock: 1550, hptop: 1550, turret: 0, premium: 1, nation: "china",   name: "Ch23_112" },
+        ch23_112:                   { id: 252, level: 8,  type: "HT",  hpstock: 1500, hptop: 1500, turret: 0, premium: 1, nation: "china",   name: "Ch23_112" },
         amx_50_100:                 { id: 12,  level: 8,  type: "HT",  hpstock: 1400, hptop: 1400, turret: 0, premium: 0, nation: "france",  name: "AMX_50_100" },
         fcm_50t:                    { id: 250, level: 8,  type: "HT",  hpstock: 1500, hptop: 1500, turret: 0, premium: 1, nation: "france",  name: "FCM_50t" },
         gb11_caernarvon:            { id: 15,  level: 8,  type: "HT",  hpstock: 1500, hptop: 1600, turret: 1, premium: 0, nation: "uk",      name: "GB11_Caernarvon" },
@@ -288,6 +297,7 @@ class com.xvm.VehicleInfoData2
         gw_tiger_p:                 { id: 60,  level: 8,  type: "SPG", hpstock: 440,  hptop: 440,  turret: 0, premium: 0, nation: "germany", name: "GW_Tiger_P" },
         m40m43:                     { id: 29,  level: 8,  type: "SPG", hpstock: 400,  hptop: 400,  turret: 0, premium: 0, nation: "usa",     name: "M40M43" },
         lorraine155_51:             { id: 29,  level: 8,  type: "SPG", hpstock: 390,  hptop: 390,  turret: 0, premium: 0, nation: "france",  name: "Lorraine155_51" },
+        gb79_fv206:                 { id: 47,  level: 8,  type: "SPG", hpstock: 430,  hptop: 430,  turret: 0, premium: 0, nation: "uk",      name: "GB79_FV206" },
 
         // level 9
         t_54:                       { id: 31,  level: 9,  type: "MT",  hpstock: 1550, hptop: 1650, turret: 2, premium: 0, nation: "ussr",    name: "T-54" },
@@ -317,6 +327,7 @@ class com.xvm.VehicleInfoData2
         g_tiger:                    { id: 34,  level: 9,  type: "SPG", hpstock: 500,  hptop: 500,  turret: 0, premium: 0, nation: "germany", name: "G_Tiger" },
         m53_55:                     { id: 63,  level: 9,  type: "SPG", hpstock: 450,  hptop: 450,  turret: 0, premium: 0, nation: "usa",     name: "M53_55" },
         bat_chatillon155_55:        { id: 56,  level: 9,  type: "SPG", hpstock: 440,  hptop: 440,  turret: 0, premium: 0, nation: "france",  name: "Bat_Chatillon155_55" },
+        gb30_fv3805:                { id: 45,  level: 9,  type: "SPG", hpstock: 450,  hptop: 450,  turret: 0, premium: 0, nation: "uk",      name: "GB30_FV3805" },
 
         // level 10
         object_907:                 { id: 61,  level: 10, type: "MT",  hpstock: 2000, hptop: 2000, turret: 0, premium: 1, nation: "ussr",    name: "Object_907" },
@@ -349,6 +360,7 @@ class com.xvm.VehicleInfoData2
         g_e:                        { id: 36,  level: 10, type: "SPG", hpstock: 550,  hptop: 550,  turret: 0, premium: 0, nation: "germany", name: "G_E" },
         t92:                        { id: 33,  level: 10, type: "SPG", hpstock: 500,  hptop: 500,  turret: 0, premium: 0, nation: "usa",     name: "T92" },
         bat_chatillon155_58:        { id: 46,  level: 10, type: "SPG", hpstock: 490,  hptop: 490,  turret: 0, premium: 0, nation: "france",  name: "Bat_Chatillon155_58" },
+        gb31_conqueror_gun:         { id: 48,  level: 10, type: "SPG", hpstock: 530,  hptop: 530,  turret: 0, premium: 0, nation: "uk",      name: "GB31_Conqueror_Gun" },
 
         // unknown (FogOfWar)
         unknown: { level: 0, name: "UNKNOWN" }
@@ -388,8 +400,10 @@ class com.xvm.VehicleInfoData2
         _15120: "gw_mk_vie",
         _2080: "t57",
         _832: "renaultbs",
+        _10576: "gb25_loyd_carrier",
         _768: "bt_7",
         _52224: "bt_sv",
+        _56576: "ltp",
         _52736: "m3_stuart_ll",
         _53504: "t_127",
         _3072: "t_46",
@@ -423,6 +437,7 @@ class com.xvm.VehicleInfoData2
         _3616: "m7_priest",
         _54048: "sexton_i",
         _3392: "lorraine39_l_am",
+        _3408: "gb27_sexton",
         _54608: "gb78_sexton_i",
         _2048: "a_20",
         _9472: "t_50",
@@ -455,6 +470,7 @@ class com.xvm.VehicleInfoData2
         _4624: "sturmpanzer_ii",
         _4640: "m37",
         _14656: "amx_ob_am105",
+        _10832: "gb26_birch_gun",
         _9728: "t_50_2",
         _5392: "vk1602",
         _9760: "m24_chaffee",
@@ -494,6 +510,8 @@ class com.xvm.VehicleInfoData2
         _4128: "m41",
         _2112: "_105_lefh18b2",
         _4160: "amx_105am",
+        _11088: "gb28_bishop",
+        _16640: "mt25",
         _10000: "vk2801",
         _15136: "t21",
         _4912: "ch15_59_16",
@@ -532,6 +550,7 @@ class com.xvm.VehicleInfoData2
         _272: "hummel",
         _16416: "m44",
         _4672: "amx_13f3am",
+        _11856: "gb77_fv304",
         _14352: "auf_panther",
         _15648: "t71",
         _304: "ch02_type62",
@@ -570,6 +589,7 @@ class com.xvm.VehicleInfoData2
         _8976: "g_panther",
         _7968: "m12",
         _7232: "lorraine155_50",
+        _11344: "gb29_crusader_5inch",
         _3888: "ch17_wz131_1_wz132",
         _4928: "amx_13_90",
         _4352: "t_44",
@@ -582,6 +602,7 @@ class com.xvm.VehicleInfoData2
         _48: "ch01_type59",
         _560: "ch01_type59_gold",
         _1584: "ch05_t34_2",
+        _64048: "ch14_t34_3",
         _5968: "gb23_centurion",
         _5376: "is_3",
         _11008: "kv4",
@@ -613,6 +634,7 @@ class com.xvm.VehicleInfoData2
         _15376: "gw_tiger_p",
         _7456: "m40m43",
         _7488: "lorraine155_51",
+        _12112: "gb79_fv206",
         _7936: "t_54",
         _10256: "e_50",
         _14864: "pro_ag_a",
@@ -640,6 +662,7 @@ class com.xvm.VehicleInfoData2
         _8720: "g_tiger",
         _16160: "m53_55",
         _14400: "bat_chatillon155_55",
+        _11600: "gb30_fv3805",
         _15616: "object_907",
         _13824: "t62a",
         _12304: "e50_ausf_m",
@@ -670,6 +693,7 @@ class com.xvm.VehicleInfoData2
         _9232: "g_e",
         _8480: "t92",
         _11840: "bat_chatillon155_58",
+        _12368: "gb31_conqueror_gun",
         _stub_: ""
     }
 }
