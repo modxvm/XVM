@@ -64,7 +64,6 @@
     "useStandardMarkers": ${"def.standardMarkers"},
     "clanIconsFolder": "clanicons",
     "elements": ${"sirmax-elements.xc":"."}
-    }
   },
   "rating": {
     "showPlayersStatistics": true,
