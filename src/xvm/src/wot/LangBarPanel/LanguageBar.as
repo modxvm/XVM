@@ -119,10 +119,10 @@ class wot.LangBarPanel.LanguageBar
         PingServers.initFeature(Config.s_config.login.pingServers, mc_ping);
 
         // ------------------ DEBUG ------------------
-        //var mc = _root.header.createEmptyMovieClip("widgetsHolder", _root.header.getNextHighestDepth());
-        //com.xvm.Components.Widgets.WidgetsFactory.initialize(mc, "sirmax2",
+        //var mc = main.createEmptyMovieClip("widgetsHolder", main.getNextHighestDepth());
+        //WidgetsFactory.initialize(mc, "sirmax2",
         //    [ com.xvm.Components.Widgets.Settings.WidgetsSettingsDialog.DEFAULT_WIDGET_SETTINGS ]);
-        //var wsd = new com.xvm.Components.Widgets.Settings.WidgetsSettingsDialog(_root.header, "sirmax2");
+        //var wsd = new com.xvm.Components.Widgets.Settings.WidgetsSettingsDialog(main, "sirmax2");
         // ------------------ DEBUG ------------------
     }
     
@@ -136,11 +136,11 @@ class wot.LangBarPanel.LanguageBar
         PingServers.initFeature(Config.s_config.hangar.pingServers, mc_ping);
         
         // Widgets
-//        if (Config.s_config.hangar.widgetsEnabled == true)
-//        {
-//            createMenuWidgetsButton();
-//            Comm.LoadSettings(playerName + ":" + Defines.SETTINGS_DOSSIER_WIDGETS, this, onWidgetsLoaded);
-//        }
+        if (Config.s_config.hangar.widgetsEnabled == true)
+        {
+            createMenuWidgetsButton();
+            Comm.LoadSettings(playerName + ":" + Defines.SETTINGS_WIDGETS, this, onWidgetsLoaded);
+        }
     }
     
     private function createMenuWidgetsButton()

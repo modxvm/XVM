@@ -65,7 +65,7 @@ class com.xvm.DefaultConfig
             hangar: {
                 hideTutorial: false,
                 xwnInCompany: true,
-                widgetsEnabled: true,
+                widgetsEnabled: false,
                 // Show ping to the servers
                 pingServers: {
                     enabled: false,

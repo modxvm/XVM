@@ -3,7 +3,9 @@
  * @author Maxim Schedriviy <m.schedriviy@gmail.com>
  */
 import com.xvm.Locale;
+import com.xvm.Logger;
 import com.xvm.Components.Widgets.BaseWidget;
+import com.xvm.Components.Widgets.ClockWidgetView;
 
 class com.xvm.Components.Widgets.ClockWidget extends BaseWidget
 {
@@ -13,4 +15,46 @@ class com.xvm.Components.Widgets.ClockWidget extends BaseWidget
     public static var WIDGET_TITLE = Locale.get("Clock");
     public static var WIDGET_NAME = Locale.get("Clock");
     public static var WIDGET_TYPE = "clock";
+    
+    /////////////////////////////////////////////////////////////////
+    // PRIVATE
+
+    var m_timer:Number;
+    
+    /////////////////////////////////////////////////////////////////
+    // IWidget implementation
+
+    // override
+    public function create(holder:MovieClip, settings:Object, playerName:String)
+    {
+        //Logger.addObject(settings, "[CLOCK] create");
+        super.create(holder, settings, playerName);
+        
+        _view = new ClockWidgetView(mc, settings);
+        
+        var me = this;
+        m_timer = _global.setInterval(function() { me.onTimer.call(me) }, 100);
+    }
+
+    // override
+    public function remove()
+    {
+        //Logger.addObject(settings, "[CLOCK] remove");
+        _global.clearInterval(m_timer);
+        super.remove();
+    }
+
+    /////////////////////////////////////////////////////////////////
+    // PRIVATE
+
+    private var _last_sec:Number;
+    private function onTimer()
+    {
+        var now:Date = new Date();
+        var s = now.getSeconds();
+        if (_last_sec == s)
+            return;
+        _last_sec = s;
+        view.update(now);
+    }
 }

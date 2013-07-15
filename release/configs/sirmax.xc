@@ -40,6 +40,7 @@
   },
   "hangar": {
     "hideTutorial": true,
+    "widgetsEnabled": true,
     "pingServers": {
       "$ref": { "path":"def.pingServers" },
       "x": 5

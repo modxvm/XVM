@@ -4,9 +4,12 @@
  */
 import com.xvm.Comm;
 import com.xvm.Defines;
+import com.xvm.GlobalEventDispatcher;
 import com.xvm.Logger;
 import com.xvm.Strings;
 import com.xvm.VehicleInfo;
+import com.xvm.Components.Widgets.IWidget;
+import com.xvm.Components.Widgets.BaseWidget;
 
 class com.xvm.Components.Widgets.WidgetsFactory
 {
@@ -15,10 +18,8 @@ class com.xvm.Components.Widgets.WidgetsFactory
 
     public static function initialize(holder:MovieClip, playerName:String, widgetsSettings:Array)
     {
-        Logger.addObject(widgetsSettings, "", 2);
-
-        if (_instance == null)
-            _instance = new WidgetsFactory(holder, playerName, widgetsSettings);
+        //Logger.addObject(widgetsSettings, "", 2);
+        _instance = new WidgetsFactory(holder, playerName, widgetsSettings);
     }
 
     public static function update(widgetsSettings:Array)
@@ -64,8 +65,38 @@ class com.xvm.Components.Widgets.WidgetsFactory
         m_timer = _global.setInterval(function() { me.idleFunc.call(me) }, 10);
         
         updateWidgets();
+        
+        GlobalEventDispatcher.addEventListener("save_widgets_settings", this, SaveWidgetsSettings);
     }
 
+    private function SaveWidgetsSettings()
+    {
+        Comm.SaveSettings(m_playerName + ":" + Defines.SETTINGS_WIDGETS, m_widgetsSettings);
+    }
+    
+    private function updateWidgets()
+    {
+        //Logger.addObject(m_widgetsSettings, "", 2);
+
+        // remove
+        while (m_widgets.length > 0)
+        {
+            var widget:IWidget = IWidget(m_widgets.pop());
+            widget.remove();
+            delete widget;
+        }
+        
+        // create
+        for (var i = 0; i < m_widgetsSettings.length; ++i)
+        {
+            var widget:IWidget = BaseWidget.CreateWidget(m_holder, m_widgetsSettings[i], m_playerName);
+            if (widget != null)
+                m_widgets.push(widget);
+        }
+    }
+
+    // DOSSIER DATA UPDATE
+    
     private var _lastUpdateDataCall; 
     // called by timer every 10 ms
     private function idleFunc()
@@ -111,7 +142,7 @@ return;
         }
 
         var data = parseAnswer(answer);
-        Logger.addObject(data);
+        //Logger.addObject(data);
     }
     
     private function parseAnswer(answer:String):Object
@@ -126,14 +157,5 @@ return;
             Logger.add(lines[i]);
         }
         return "";
-    }
-
-    private function updateWidgets()
-    {
-        //Logger.addObject(m_widgetsSettings, "", 2);
-        
-        for (var i = 0; i < m_widgets.length; ++i)
-        {
-        }
     }
 }

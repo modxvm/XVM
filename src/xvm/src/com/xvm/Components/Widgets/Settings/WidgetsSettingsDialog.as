@@ -280,7 +280,9 @@ class com.xvm.Components.Widgets.Settings.WidgetsSettingsDialog
                 id:  w.id,
                 type: event.item.value,
                 name: WIDGET_NAMES[event.item.value],
-                enable: w.enable
+                enable: w.enable,
+                x: w.x,
+                y: w.y
             }
             if (event.item.value == ClockWidget.WIDGET_TYPE)
                 widgetsSettings[list.selectedIndex].format = "HH:MM:SS";

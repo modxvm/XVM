@@ -2,7 +2,13 @@
  * Base Widget Implementation (abstract)
  * @author Maxim Schedriviy <m.schedriviy@gmail.com>
  */
+import com.xvm.Logger;
 import com.xvm.Components.Widgets.IWidget;
+import com.xvm.Components.Widgets.SimpleDossierWidget;
+import com.xvm.Components.Widgets.ComplexDossierWidget;
+import com.xvm.Components.Widgets.SwitcherWidget;
+import com.xvm.Components.Widgets.ClockWidget;
+import com.xvm.Components.Widgets.IWidgetView;
 
 class com.xvm.Components.Widgets.BaseWidget implements IWidget
 {
@@ -14,21 +20,81 @@ class com.xvm.Components.Widgets.BaseWidget implements IWidget
     public static var WIDGET_TYPE = "";
 
     /////////////////////////////////////////////////////////////////
-    // .ctor()
+    // PUBLIC STATIC
 
-    public function BaseWidget()
+    public static function CreateWidget(mc:MovieClip, settings:Object, playerName:String):IWidget
     {
-
+        var widget:IWidget;
+        switch (settings.type)
+        {
+            case SimpleDossierWidget.WIDGET_TYPE: widget = new SimpleDossierWidget(); break;
+            case ComplexDossierWidget.WIDGET_TYPE: widget = new ComplexDossierWidget(); break;
+            case SwitcherWidget.WIDGET_TYPE: widget = new SwitcherWidget(); break;
+            case ClockWidget.WIDGET_TYPE: widget = new ClockWidget(); break;
+            default:
+                Logger.add("WARNING: unknown widget type: " + settings.type);
+                return null;
+        }
+        
+        widget.create(mc, settings, playerName);
+        return widget;
     }
-
+    
     /////////////////////////////////////////////////////////////////
     // IWidget implementation
 
+    private var _mc:MovieClip
+    public function get mc():MovieClip
+    {
+        return this._mc;
+    }
+
+    // protected
+    private var _view:IWidgetView;
+    public function get view():IWidgetView
+    {
+        return this._view;
+    }
+
+    // mandatory fields: id, type, name, enable
+    private var _settings:Object;
+    public function get settings():Object
+    {
+        return _settings;
+    }
+
+    private var _playerName:String;
+    public function get playerName():String
+    {
+        return _playerName;
+    }
+
+    // virtual
+    public function create(holder:MovieClip, settings:Object, playerName:String)
+    {
+        //Logger.addObject(settings, "[BASE] create");
+        this._mc = holder.createEmptyMovieClip("xvm_widget_" + settings.type + "_" + settings.id, holder.getNextHighestDepth());
+        this._settings = settings;
+        this._playerName = playerName;
+    }
+
+    // virtual
+    public function remove()
+    {
+        //Logger.addObject(settings, "[BASE] remove");
+        if (this._mc != null)
+        {
+            this._mc.removeMovieClip();
+            this._mc = null;
+        }
+    }
+    
+    /////////////////////////////////////////////////////////////////
+    // PROTECTED
 
 
     /////////////////////////////////////////////////////////////////
     // PRIVATE
-
 
 
 

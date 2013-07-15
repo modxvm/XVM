@@ -25,7 +25,7 @@ FILES="
   XVM.xvmconf"
 
 XVM_FILES="xvm.xc"
-XVM_DIRS="configs"
+XVM_DIRS="configs l10n"
 
 cd $(dirname $(realpath $(cygpath --unix $0)))
 
