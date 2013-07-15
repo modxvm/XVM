@@ -2,7 +2,7 @@
  * Widget Interface
  * @author Maxim Schedriviy <m.schedriviy@gmail.com>
  */
-import com.xvm.Components.Widgets.IWidgetView;
+import com.xvm.Components.Widgets.Views.IWidgetView;
 
 interface com.xvm.Components.Widgets.IWidget 
 {

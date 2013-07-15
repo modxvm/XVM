@@ -135,4 +135,10 @@ class com.xvm.Defines
     public static var UICOLOR_DEFAULT2 = 0x969687;
     public static var UICOLOR_GOLD = 0xFFC133;
     public static var UICOLOR_BLUE = 0x408CCF;
+    
+    // Widgets
+    public static var WIDGET_MODE_HIDE =     0x01;
+    public static var WIDGET_MODE_1 =        0x02;
+    public static var WIDGET_MODE_2 =        0x04;
+    public static var WIDGET_MODE_DETAILED = 0x08;
 }

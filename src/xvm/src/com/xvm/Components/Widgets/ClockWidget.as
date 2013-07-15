@@ -2,10 +2,11 @@
  * Clock Widget
  * @author Maxim Schedriviy <m.schedriviy@gmail.com>
  */
+import com.xvm.Defines;
 import com.xvm.Locale;
 import com.xvm.Logger;
 import com.xvm.Components.Widgets.BaseWidget;
-import com.xvm.Components.Widgets.ClockWidgetView;
+import com.xvm.Components.Widgets.Views.ClockWidgetView;
 
 class com.xvm.Components.Widgets.ClockWidget extends BaseWidget
 {
@@ -15,6 +16,23 @@ class com.xvm.Components.Widgets.ClockWidget extends BaseWidget
     public static var WIDGET_TITLE = Locale.get("Clock");
     public static var WIDGET_NAME = Locale.get("Clock");
     public static var WIDGET_TYPE = "clock";
+    
+    public static function get DEFAULT_SETTINGS()
+    {
+        return {
+            id: (new Date()).getTime(),
+            name: WIDGET_NAME,
+            type: WIDGET_TYPE,
+            format: "HH:MM:SS",
+            modes: Defines.WIDGET_MODE_1 | Defines.WIDGET_MODE_2,
+            x: 0,
+            y: 20,
+            width: 65,
+            height: 30,
+            alpha: 100,
+            pinned: false
+        };
+    }
     
     /////////////////////////////////////////////////////////////////
     // PRIVATE

@@ -8,7 +8,7 @@ import com.xvm.Components.Widgets.SimpleDossierWidget;
 import com.xvm.Components.Widgets.ComplexDossierWidget;
 import com.xvm.Components.Widgets.SwitcherWidget;
 import com.xvm.Components.Widgets.ClockWidget;
-import com.xvm.Components.Widgets.IWidgetView;
+import com.xvm.Components.Widgets.Views.IWidgetView;
 
 class com.xvm.Components.Widgets.BaseWidget implements IWidget
 {

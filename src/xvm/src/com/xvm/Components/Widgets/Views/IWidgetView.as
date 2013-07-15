@@ -3,7 +3,7 @@
  * @author Maxim Schedriviy <m.schedriviy@gmail.com>
  */
 
-interface com.xvm.Components.Widgets.IWidgetView
+interface com.xvm.Components.Widgets.Views.IWidgetView
 {
     public function get panel();
     public function update(data:Object);

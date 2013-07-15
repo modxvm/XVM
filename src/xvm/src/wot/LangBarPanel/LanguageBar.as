@@ -159,21 +159,22 @@ class wot.LangBarPanel.LanguageBar
     
     private function onWidgetsLoaded(event:Object)
     {
-        var widgets = null;
+        var widgetsSettings = null;
         try
         {
             if (!event || !event.str || event.str == "")
                 return;
-            widgets = (Array)(JSONx.parse(event.str));
+            widgetsSettings = (Array)(JSONx.parse(event.str));
         }
         catch (e)
         {
             Logger.add("Error loading widgets: " + e.message + "\n" + JSONx.stringify(event));
-            widgets = [];
+            widgetsSettings = [];
         }
 
-        mc_widgets = _root.header.createEmptyMovieClip("widgets", _root.header.getNextHighestDepth());
-        WidgetsFactory.initialize(mc_widgets, playerName, widgets);
+        var holder = _root.header.buttonsBlock;
+        mc_widgets = holder.createEmptyMovieClip("widgets", holder.getNextHighestDepth());
+        WidgetsFactory.initialize(mc_widgets, playerName, widgetsSettings);
     }
 
     private function menuBarSelectEvent(event)

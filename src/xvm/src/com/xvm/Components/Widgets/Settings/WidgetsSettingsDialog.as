@@ -28,18 +28,11 @@ class com.xvm.Components.Widgets.Settings.WidgetsSettingsDialog
     private static var windowName = "widgets_settings";
     private static var WIDGET_TYPES = { simple: 0, complex: 1, switcher: 2, clock: 3 };
     private static var WIDGET_NAMES = {
-        simple: SimpleDossierWidget.WIDGET_NAME,
-        complex: ComplexDossierWidget.WIDGET_NAME,
-        switcher: SwitcherWidget.WIDGET_NAME,
-        clock: ClockWidget.WIDGET_NAME
-    };
-    public static var DEFAULT_WIDGET_SETTINGS = {
-        id: (new Date()).getTime(),
-        name: ClockWidget.WIDGET_NAME,
-        type: ClockWidget.WIDGET_TYPE,
-        format: "HH:MM:SS",
-        enable: true
-    };
+            simple: SimpleDossierWidget.WIDGET_NAME,
+            complex: ComplexDossierWidget.WIDGET_NAME,
+            switcher: SwitcherWidget.WIDGET_NAME,
+            clock: ClockWidget.WIDGET_NAME
+        };
     
     var savedWidgetsSettings:Array;
     var widgetsSettings:Array;
@@ -250,7 +243,7 @@ class com.xvm.Components.Widgets.Settings.WidgetsSettingsDialog
     
     private function onAdd()
     {
-        var w = DEFAULT_WIDGET_SETTINGS;
+        var w = ClockWidget.DEFAULT_SETTINGS;
         w.id = (new Date()).getTime();
         widgetsSettings.push(JSONx.parse(JSONx.stringify(w)));
         widgetsChanged = true;
@@ -280,7 +273,8 @@ class com.xvm.Components.Widgets.Settings.WidgetsSettingsDialog
                 id:  w.id,
                 type: event.item.value,
                 name: WIDGET_NAMES[event.item.value],
-                enable: w.enable,
+                modes: w.modes,
+                pinned: w.pinned,
                 x: w.x,
                 y: w.y
             }

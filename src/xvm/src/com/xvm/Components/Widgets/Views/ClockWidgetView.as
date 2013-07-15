@@ -11,15 +11,11 @@ import com.xvm.Controls.Chart;
 import com.xvm.Controls.Grid;
 import com.xvm.Controls.Label;
 import com.xvm.Controls.Progress;
-import com.xvm.Components.Widgets.BaseWidgetView;
+import com.xvm.Components.Widgets.ClockWidget;
+import com.xvm.Components.Widgets.Views.BaseWidgetView;
 
-class com.xvm.Components.Widgets.ClockWidgetView extends BaseWidgetView
+class com.xvm.Components.Widgets.Views.ClockWidgetView extends BaseWidgetView
 {
-    /////////////////////////////////////////////////////////////////
-    // CONSTANTS
-    
-    public static var DEFAULT_SETTINGS = { x:400, y:150, width:65, height:30, alpha: 100 };
-
     /////////////////////////////////////////////////////////////////
     // PRIVATE
 
@@ -30,7 +26,7 @@ class com.xvm.Components.Widgets.ClockWidgetView extends BaseWidgetView
 
     public function ClockWidgetView(mc:MovieClip, settings:Object, defaults:Object)
     {
-        super(mc, settings, DEFAULT_SETTINGS);
+        super(mc, settings, ClockWidget.DEFAULT_SETTINGS);
         clock = Label.Create(m_panel.mc, "label", 5, 5, 55, 20, Defines.UICOLOR_DEFAULT2, 100, "$TitleFont", 15, "");
         update(new Date());
     }
