@@ -202,22 +202,22 @@
     // Dynamic color by efficiency (only with xvm-stat).
     // Динамический цвет по эффективности (только с xvm-stat).
     "eff": [
-      { "value": 630,  "color": ${"def.colorRating.very_bad" } },  //    0 - 644  - very bad
-      { "value": 860,  "color": ${"def.colorRating.bad"      } },  //  645 - 874  - bad
-      { "value": 1140, "color": ${"def.colorRating.normal"   } },  //  875 - 1154 - normal
-      { "value": 1460, "color": ${"def.colorRating.good"     } },  // 1155 - 1469 - good
-      { "value": 1735, "color": ${"def.colorRating.very_good"} },  // 1470 - 1739 - very good
-      { "value": 9999, "color": ${"def.colorRating.unique"   } }   // 1740 - *    - unique
+      { "value": 630,  "color": ${"def.colorRating.very_bad" } },  //    0 - 629  - very bad
+      { "value": 860,  "color": ${"def.colorRating.bad"      } },  //  630 - 859  - bad
+      { "value": 1140, "color": ${"def.colorRating.normal"   } },  //  860 - 1139 - normal
+      { "value": 1460, "color": ${"def.colorRating.good"     } },  // 1140 - 1459 - good
+      { "value": 1735, "color": ${"def.colorRating.very_good"} },  // 1460 - 1734 - very good
+      { "value": 9999, "color": ${"def.colorRating.unique"   } }   // 1735 - *    - unique
     ],
     // Dynamic color by WN6 rating (only with xvm-stat).
     // Динамический цвет по рейтингу WN6 (только с xvm-stat).
     "wn": [
-      { "value": 425,  "color": ${"def.colorRating.very_bad" } },  //    0 - 434  - very bad
-      { "value": 795,  "color": ${"def.colorRating.bad"      } },  //  435 - 804  - bad
-      { "value": 1175, "color": ${"def.colorRating.normal"   } },  //  805 - 1199 - normal
-      { "value": 1570, "color": ${"def.colorRating.good"     } },  // 1200 - 1594 - good
-      { "value": 1885, "color": ${"def.colorRating.very_good"} },  // 1595 - 1899 - very good
-      { "value": 9999, "color": ${"def.colorRating.unique"   } }   // 1900 - *    - unique
+      { "value": 425,  "color": ${"def.colorRating.very_bad" } },  //    0 - 424  - very bad
+      { "value": 795,  "color": ${"def.colorRating.bad"      } },  //  425 - 794  - bad
+      { "value": 1175, "color": ${"def.colorRating.normal"   } },  //  795 - 1174 - normal
+      { "value": 1570, "color": ${"def.colorRating.good"     } },  // 1175 - 1569 - good
+      { "value": 1885, "color": ${"def.colorRating.very_good"} },  // 1570 - 1884 - very good
+      { "value": 9999, "color": ${"def.colorRating.unique"   } }   // 1885 - *    - unique
     ],
     // Dynamic color by TEFF (E) rating (only with xvm-stat).
     // Динамический цвет по рейтингу TEFF (E) (только с xvm-stat).
