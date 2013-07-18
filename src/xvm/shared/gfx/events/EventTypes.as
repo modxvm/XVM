@@ -1,0 +1,30 @@
+﻿intrinsic class gfx.events.EventTypes
+{
+    static var CLICK;
+    static var DOUBLE_CLICK;
+    static var ROLL_OVER;
+    static var PRESS;
+    static var ROLL_OUT;
+    static var RELEASE_OUTSIDE;
+    static var ITEM_CLICK;
+    static var ITEM_ROLL_OVER;
+    static var ITEM_PRESS;
+    static var ITEM_ROLL_OUT;
+    static var FOCUS_IN;
+    static var FOCUS_OUT;
+    static var SHOW;
+    static var HIDE;
+    static var INIT;
+    static var CHANGE;
+    static var STATE_CHANGE;
+    static var SELECT;
+    static var IO_ERROR;
+    static var PROGRESS;
+    static var COMPLETE;
+    static var SCROLL;
+    static var TEXT_CHANGE;
+    static var INPUT;
+    static var DRAG_BEGIN;
+    static var DRAG_END;
+    static var DROP;
+}

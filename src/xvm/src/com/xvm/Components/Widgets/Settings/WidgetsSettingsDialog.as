@@ -239,6 +239,7 @@ class com.xvm.Components.Widgets.Settings.WidgetsSettingsDialog
         if (event.index > widgetsSettings.length - 1)
             list.selectedIndex = widgetsSettings.length - 1;
         drawWidgetSettings();
+        showCurrentWidget();
     }
     
     private function onAdd()
@@ -279,7 +280,7 @@ class com.xvm.Components.Widgets.Settings.WidgetsSettingsDialog
                 y: w.y
             }
             if (event.item.value == ClockWidget.WIDGET_TYPE)
-                widgetsSettings[list.selectedIndex].format = "HH:MM:SS";
+                widgetsSettings[list.selectedIndex].format = "H:N:S";
             widgetsChanged = true;
             list.invalidateData();
             drawWidgetSettings();

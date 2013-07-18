@@ -23,7 +23,7 @@
   <build>
     <option verbose="False" />
     <option strict="False" />
-    <option infer="True" />
+    <option infer="False" />
     <option useMain="False" />
     <option useMX="False" />
     <option warnUnusedImports="False" />
@@ -50,12 +50,12 @@
     <compile path="src\wot\TeamMemberRenderer" />
     <compile path="src\wot\TeamRenderer" />
     <compile path="src\wot\UserInfo" />
-    <compile path="src\wot\VehicleMarkersManager" />
     <compile path="src\wot\LangBarPanel" />
     <compile path="src\wot\gameloading" />
     <compile path="src\com\xvm\Wrapper.as" />
     <compile path="src\wot\Minimap\Minimap.as" />
     <compile path="src\wot\Minimap\MinimapEntry.as" />
+    <compile path="src\wot\VehicleMarkersManager" />
   </compileTargets>
   <!-- Assets to embed into the output SWF -->
   <library>

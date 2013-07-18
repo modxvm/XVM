@@ -21,7 +21,6 @@ class com.xvm.Components.Widgets.Views.BaseWidgetView implements IWidgetView
 
     private var mc:MovieClip;
     private var m_settings:Object;
-    private var m_panel:Panel;
     
     /////////////////////////////////////////////////////////////////
     // .ctor()
@@ -47,24 +46,30 @@ class com.xvm.Components.Widgets.Views.BaseWidgetView implements IWidgetView
         mc.onReleaseOutside = function() { me.onRelease.apply(me, arguments); }
         mc.onMouseMove = function()      { me.onMouseMove.apply(me, arguments); }
 
-        m_panel = Panel.Create(mc, "panel", 0, 0,
+        var bgAlpha = settings.bgAlpha != null ? settings.bgAlpha : defaults.bgAlpha != null ? defaults.bgAlpha : 60;
+        _panel = Panel.Create(mc, "panel", 0, 0,
             settings.width || defaults.width || 50,
             settings.height || defaults.height || 50,
-            0x000000, 60, 1, 0xCCCCCC, 50);
+            settings.bgColor != null ? settings.bgColor : defaults.bgColor != null ? defaults.bgColor : 0x000000, bgAlpha,
+            1, 0xCCCCCC, bgAlpha);
     }
     
     /////////////////////////////////////////////////////////////////
     // IWidgetView implementation
 
-    public function get panel()
+    private var _panel:Panel;
+    public function get panel():Panel
     {
-        return m_panel;
+        return _panel;
     }
     
     // virtual abstract
     public function update(data:Object)
     {
-        throw new Error("ERROR: BaseWidgetView::update() is abstract method and must be overriden");
+        if (m_settings.bgAlpha != null && panel.alpha != m_settings.bgAlpha)
+            panel.alpha = m_settings.bgAlpha;
+        if (m_settings.bgColor != null && panel.color != m_settings.bgColor)
+            panel.color = m_settings.bgColor;
     }
 
     // virtual abstract

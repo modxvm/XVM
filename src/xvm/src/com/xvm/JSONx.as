@@ -43,8 +43,6 @@ USAGE:
 
 */
 
-import com.xvm.Logger;
-
 class com.xvm.JSONx {
 
   static var maxDepth: Number = undefined;
@@ -70,7 +68,7 @@ class com.xvm.JSONx {
   switch (typeof arg) {
   case 'movieclip':
   case 'object':
-      if (maxDepth && maxDepth > 0 && curDepth >= maxDepth)
+      if (maxDepth != null && maxDepth > 0 && curDepth >= maxDepth)
         return stringify(arg.toString(), "", compact);
 
       curDepth++;
@@ -152,8 +150,8 @@ class com.xvm.JSONx {
   case 'null':
       return 'null';
   default:
-      if (maxDepth && maxDepth > 0)
-          Logger.add("JSON> " + (typeof arg));
+      //if (maxDepth != null && maxDepth > 0)
+      //    com.xvm.Logger.add("JSON> " + (typeof arg));
       return 'null';
   }
 }
