@@ -9,8 +9,6 @@
     static var STATES: Object;
     static var SQUAD_SIZE: Number;
 
-    var m_state: String;
-    var m_type: String;
     var m_names: TextField;
     var m_frags: TextField;
     var m_vehicles: TextField;
@@ -18,6 +16,11 @@
     var players_bg: MovieClip;
 
     function setData(data, sel, postmortemIndex, isColorBlind, knownPlayersCount);
+    function setPlayerSpeaking(vehicleId, flag);
+    function get type();
+    function set type(type);
+    function get state(); // none, short, medium, medium2, large
+    function set state(state);
     function update();
     function onRecreateDevice(width, height);
     function _setVehiclesStr(data, sel, isColorBlind, knownPlayersCount);

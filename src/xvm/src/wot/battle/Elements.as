@@ -11,25 +11,49 @@ import com.xvm.Strings;
 class wot.battle.Elements
 {
     public static var width, height;
+
+    public static var CMD_LOG:String = "@log";
+    public static var CMD_DELAY:String = "@delay";
+    public static var CMD_INTERVAL:String = "@interval";
+    public static var CMD_TEXT_FORMAT:String = "@textFormat";
     
     public static function SetupElements()
     {
         if (!Config.s_loaded || !width || !height)
             return;
-        apply(_root, Config.s_config.battle.elements, "_root");
+        for (var i = 0; i < Config.s_config.battle.elements.length; ++i)
+            apply(_root, Config.s_config.battle.elements[i], "_root");
     }
 
     private static function apply(obj, opt, name)
     {
         //Logger.add(">> " + name);
+        if (opt[CMD_LOG] != null)
+        {
+            Logger.addObject(obj, name, opt[CMD_LOG]);
+            delete opt[CMD_LOG];
+        }
+
+        if (opt[CMD_DELAY] != null)
+        {
+            _global.setTimeout(function() { Elements.apply(obj, opt, name); }, opt[CMD_DELAY]);
+            delete opt[CMD_DELAY];
+            return;
+        }
+
+        if (opt[CMD_INTERVAL] != null)
+        {
+            _global.setInterval(function() { Elements.apply(obj, opt, name); }, opt[CMD_INTERVAL]);
+            delete opt[CMD_INTERVAL];
+            return;
+        }
+
         for (var key in opt)
         {
             var value = opt[key];
-            if (key == "@log")
-                Logger.addObject(obj, name, value);
-            else if (value == "@log")
+            if (value == CMD_LOG)
                 Logger.addObject(obj[key], name + "." + key, 1);
-            else if (key == "@textFormat" && obj instanceof TextField)
+            else if (key == CMD_TEXT_FORMAT && obj instanceof TextField)
                 applyTextFormat(obj, value, name);
             else if (typeof value == "object" && !value instanceof Array && obj[key] != null)
                 apply(obj[key], value, name + "." + key);
@@ -64,7 +88,7 @@ class wot.battle.Elements
     private static function applyTextFormat(obj:TextField, opt, name)
     {
         var tf:TextFormat = obj.getNewTextFormat();
-        apply(tf, opt, name + "@textFormat");
+        apply(tf, opt, name + CMD_TEXT_FORMAT);
         obj.setNewTextFormat(tf);
     }
 }

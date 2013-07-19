@@ -115,7 +115,7 @@ class com.xvm.DefaultConfig
                 clockFormat: "H:N",
                 clanIconsFolder: "clanicons/",   // Folder with clan icons
                 // Visual elements
-                elements: null
+                elements: []
             },
             rating: {
                 showPlayersStatistics: true,    // Global switch. Handles whole statisctics module.
@@ -136,7 +136,7 @@ class com.xvm.DefaultConfig
                 filterFocused: true,            // Set the default focus to the filter text input
                 inHangarFilterEnabled: false,   // Enable In hangar radio button by default
                 showEColumn: false,             // Show column for per-vehicle efficiency
-                sortColumn: 6                   // Number of column for sorting        
+                sortColumn: 6                   // Number of column for sorting
             },
             fragCorrelation: {
                 hideTeamTextFields: true
@@ -297,31 +297,31 @@ class com.xvm.DefaultConfig
                       deadsquad:      ".mm_ds{font-family:$FieldFont; font-size:8px; color:#997C5C;} .mm_dot{font-family:Arial; font-size:17px; color:#663800;}"
                     },
                     shadow: {
-                      ally: 
+                      ally:
                        { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 4 },
-                      teamkiller: 
+                      teamkiller:
                        { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 4 },
-                      enemy: 
+                      enemy:
                        { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 4 },
-                      squad: 
+                      squad:
                        { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 4 },
-                      oneself: 
+                      oneself:
                        { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 4 },
-                      lostally: 
+                      lostally:
                        { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 6, strength: 4 },
-                      lostteamkiller: 
+                      lostteamkiller:
                        { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 6, strength: 4 },
-                      lost: 
+                      lost:
                        { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 6, strength: 4 },
-                      lostsquad: 
+                      lostsquad:
                        { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 6, strength: 4 },
-                      deadally: 
+                      deadally:
                        { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 3 },
-                      deadteamkiller: 
+                      deadteamkiller:
                        { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 3 },
-                      deadenemy: 
+                      deadenemy:
                        { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 3 },
-                      deadsquad: 
+                      deadsquad:
                        { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 3 }
                     },
                     offset: {

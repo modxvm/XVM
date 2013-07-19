@@ -27,6 +27,10 @@
 
     "__stub__": null
   },
+  "elements": [
+    ${"sirmax-snippet-bt.xc":"."}, // battle timer
+    ${"sirmax-snippet-pp.xc":"."}  // players panels
+  ],
   "definition": {
     "author": "sirmax2",
     "description": "Sirmax's settings for XVM",
@@ -64,7 +68,7 @@
     "highlightVehicleIcon": false,
     "useStandardMarkers": ${"def.standardMarkers"},
     "clanIconsFolder": "clanicons",
-    "elements": ${"sirmax-elements.xc":"."}
+    "elements": ${"elements"}
   },
   "rating": {
     "showPlayersStatistics": true,
@@ -97,6 +101,7 @@
   },
   "playersPanel": {
     "alpha": 50,
+    "initialMode": "short",
     "removeSquadIcon": true,
     "clanIcon": { "show": true, "x": 4, "y": 6, "h": 16, "w": 16, "alpha": 90 },
     "medium": {

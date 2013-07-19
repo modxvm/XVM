@@ -87,7 +87,7 @@ class wot.PlayersPanel.PlayersPanel
     public function PlayersPanelCtor()
     {
         GlobalEventDispatcher.addEventListener("config_loaded", StatLoader.LoadLastStat);
-        GlobalEventDispatcher.addEventListener("config_loaded", this, initEnemySpotterMarkers);
+        GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
         GlobalEventDispatcher.addEventListener("stat_loaded", this, onStatLoaded);
         Config.LoadConfig("PlayersPanel.as");
         
@@ -95,8 +95,9 @@ class wot.PlayersPanel.PlayersPanel
         checkLoading();
     }
 
-    private function initEnemySpotterMarkers(event):Void
+    private function onConfigLoaded(event):Void
     {
+        // init enemy spotter markers
         if (isEnemyPanel && Config.s_config.playersPanel.enemySpottedMarker.enabled && spotStatusModel == null)
         {
             spotStatusModel = new SpotStatusModel();
@@ -183,7 +184,7 @@ class wot.PlayersPanel.PlayersPanel
             wrapper.m_list["invalidateData2"] = wrapper.m_list["invalidateData"];
 
             // Switch players with keys in the postmortem mode. TODO: Cannot be used without holding Ctrl?
-            if (wrapper.m_type == "left")
+            if (wrapper.type == "left")
             {
                 //net.wargaming.managers.BattleInputHandler.instance.addHandler(49, true, this, "selectPlayer"); // Ctrl+1
                 //net.wargaming.managers.BattleInputHandler.instance.addHandler(50, true, this, "selectPlayer"); // Ctrl+2
@@ -203,7 +204,7 @@ class wot.PlayersPanel.PlayersPanel
             for (var i in data)
             {
                 Macros.RegisterPlayerData(Utils.GetNormalizedPlayerName(data[i].label), data[i],
-                    wrapper.m_type == "left" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
+                    wrapper.type == "left" ? Defines.TEAM_ALLY : Defines.TEAM_ENEMY);
             }
         }
 
@@ -224,10 +225,10 @@ class wot.PlayersPanel.PlayersPanel
             XVMAdjustPanelSize();
         }
 
-        if (wrapper.m_state != _lastAdjustedState)
+        if (wrapper.state != _lastAdjustedState)
         {
             XVMAdjustPanelSize();
-            _lastAdjustedState = wrapper.m_state;
+            _lastAdjustedState = wrapper.state;
         }
 
         // FIXIT: this code is not optimal. Find how to set default leading for text fields and remove this code.
@@ -284,32 +285,32 @@ class wot.PlayersPanel.PlayersPanel
             return base._getHTMLText(colorScheme, text);
 
         var format: String = null;
-        switch (wrapper.m_state)
+        switch (wrapper.state)
         {
             case "medium":
                 if (m_fieldType == Defines.FIELDTYPE_VEHICLE)
                     break;
-                format = (wrapper.m_type == "left")
+                format = (wrapper.type == "left")
                     ? Config.s_config.playersPanel.medium.formatLeft
                     : Config.s_config.playersPanel.medium.formatRight;
                 break;
             case "medium2":
                 if (m_fieldType == Defines.FIELDTYPE_NICK)
                     break;
-                format = (wrapper.m_type == "left")
+                format = (wrapper.type == "left")
                     ? Config.s_config.playersPanel.medium2.formatLeft
                     : Config.s_config.playersPanel.medium2.formatRight;
                 break;
             case "large":
                 if (m_fieldType == Defines.FIELDTYPE_NICK)
                 {
-                    format = (wrapper.m_type == "left")
+                    format = (wrapper.type == "left")
                         ? Config.s_config.playersPanel.large.nickFormatLeft
                         : Config.s_config.playersPanel.large.nickFormatRight;
                 }
                 else if (m_fieldType == Defines.FIELDTYPE_VEHICLE)
                 {
-                    format = (wrapper.m_type == "left")
+                    format = (wrapper.type == "left")
                         ? Config.s_config.playersPanel.large.vehicleFormatLeft
                         : Config.s_config.playersPanel.large.vehicleFormatRight;
                 }
@@ -323,7 +324,7 @@ class wot.PlayersPanel.PlayersPanel
             //Logger.add("before: " + text);
             var data = m_data[m_item++];
             var deadState = Strings.endsWith("dead", colorScheme) ? Defines.DEADSTATE_DEAD : Defines.DEADSTATE_ALIVE;
-            var state = wrapper.m_state;
+            var state = wrapper.state;
             var field = state == "medium2" ? wrapper.m_vehicles : wrapper.m_names;
             var pname = Utils.GetNormalizedPlayerName(data.label);
             var key = "PP/" + deadState + "/" + pname + "/" + state + "/" + m_fieldType + "/" +
@@ -419,7 +420,7 @@ class wot.PlayersPanel.PlayersPanel
         var vehiclesWidth = vehiclesWidthDefault;
         var widthDelta = 0;
         var squadSize = 0;
-        switch (wrapper.m_state)
+        switch (wrapper.state)
         {
             case "medium":
                 namesWidth = Math.max(XVMGetMaximumFieldWidth(wrapper.m_names), Config.s_config.playersPanel.medium.width);
@@ -437,9 +438,9 @@ class wot.PlayersPanel.PlayersPanel
                 widthDelta = namesWidthDefault - namesWidth + vehiclesWidthDefault - vehiclesWidth - squadSize + net.wargaming.ingame.PlayersPanel.SQUAD_SIZE;
                 break;
             default:
-                wrapper.m_list._x = wrapper.players_bg._x = (wrapper.m_type == "left")
-                    ? net.wargaming.ingame.PlayersPanel.STATES[wrapper.m_state].bg_x
-                    : wrapper.players_bg._width - net.wargaming.ingame.PlayersPanel.STATES[wrapper.m_state].bg_x;
+                wrapper.m_list._x = wrapper.players_bg._x = (wrapper.type == "left")
+                    ? net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x
+                    : wrapper.players_bg._width - net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x;
                 return;
         }
 
@@ -452,12 +453,12 @@ class wot.PlayersPanel.PlayersPanel
         if (wrapper.m_vehicles && wrapper.m_vehicles._visible)
             leadingVehicles = 29 - XVMGetMaximumFieldHeight(wrapper.m_vehicles);
 
-        if (wrapper.m_type == "left")
+        if (wrapper.type == "left")
         {
             wrapper.m_names._x = squadSize;
             wrapper.m_frags._x = wrapper.m_names._x + wrapper.m_names._width;
             wrapper.m_vehicles._x = wrapper.m_frags._x + wrapper.m_frags._width;
-            wrapper.m_list._x = wrapper.players_bg._x = net.wargaming.ingame.PlayersPanel.STATES[wrapper.m_state].bg_x - widthDelta;
+            wrapper.m_list._x = wrapper.players_bg._x = net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x - widthDelta;
             if (squadSize > 0)
                 wrapper.m_list.updateSquadIconPosition(-wrapper.m_list._x);
         }
@@ -466,7 +467,7 @@ class wot.PlayersPanel.PlayersPanel
             wrapper.m_names._x = wrapper.players_bg._width - wrapper.m_names._width - squadSize;
             wrapper.m_frags._x = wrapper.m_names._x - wrapper.m_frags._width;
             wrapper.m_vehicles._x = wrapper.m_frags._x - wrapper.m_vehicles._width;
-            wrapper.m_list._x = wrapper.players_bg._x = wrapper.players_bg._width - net.wargaming.ingame.PlayersPanel.STATES[wrapper.m_state].bg_x + widthDelta;
+            wrapper.m_list._x = wrapper.players_bg._x = wrapper.players_bg._width - net.wargaming.ingame.PlayersPanel.STATES[wrapper.state].bg_x + widthDelta;
             if (squadSize > 0)
                 wrapper.m_list.updateSquadIconPosition(-440 + wrapper.m_names._width + wrapper.m_frags._width + wrapper.m_vehicles._width + squadSize);
         }
@@ -514,6 +515,6 @@ class wot.PlayersPanel.PlayersPanel
 
     private function get isEnemyPanel():Boolean
     {
-        return wrapper.m_type == "right";
+        return wrapper.type == "right";
     }
 }
