@@ -42,17 +42,17 @@ class com.xvm.Controls.ControlBase extends MovieClip
     {
         super();
         gfx.events.EventDispatcher.initialize(this);
-
+        
         var me = this;
-	onKeyDown = function() { me.onKeyDown(); }
-	onKeyUp = function() { me.onKeyUp(); }
-	onMouseDown = function() { me.onMouseDown(); }
-	onMouseMove = function() { me.onMouseMove(); }
-	onMouseUp = function() { me.onMouseUp(); }
-	onPress = function() { me.onPress(); }
-	onRelease = function() { me.onRelease(); }
-	onReleaseOutside = function() { me.onReleaseOutside(); }
-	onRollOver = function() { me.onRollOver(); }
+        onKeyDown = function() { me.onKeyDown(); }
+        onKeyUp = function() { me.onKeyUp(); }
+        onMouseDown = function() { me.onMouseDown(); }
+        onMouseMove = function() { me.onMouseMove(); }
+        onMouseUp = function() { me.onMouseUp(); }
+        onPress = function() { me.onPress(); }
+        onRelease = function() { me.onRelease(); }
+        onReleaseOutside = function() { me.onReleaseOutside(); }
+        onRollOver = function() { me.onRollOver(); }
         onRollOut = function()  { me.onRollOut(); }
     }
 
@@ -254,6 +254,7 @@ class com.xvm.Controls.ControlBase extends MovieClip
         sizeIsInvalid = false;
     }
     
+    // is required?
     private function onMouseWheel(delta, target)
     {
         if (this.visible && this.hitTest(_root._xmouse, _root._ymouse, true))
