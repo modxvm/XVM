@@ -17,21 +17,9 @@ class com.xvm.Controls.Panel extends ControlBase
     /////////////////////////////////////////////////////////////////
     // PUBLIC STATIC
     
-    public static function Create(context:MovieClip, name:String, x:Number, y:Number, w:Number, h:Number, color:Number, alpha:Number,
-        borderSize:Number, borderColor:Number, borderAlpha:Number):Panel
+    public static function Create(context:MovieClip, name:String, x:Number, y:Number, w:Number, h:Number, initObj:Object):Panel
     {
-        return Panel(createInstance(context, CLASS_NAME, name, context.getNextHighestDepth(),
-        {
-            _x: x,
-            _y: y,
-            __width: w,
-            __height: h,
-            _color: color,
-            __alpha: alpha,
-            borderSize: borderSize,
-            borderColor: borderColor,
-            borderAlpha: borderAlpha
-        }));
+        return Panel(ControlBase.__Create(context, CLASS_NAME, name, x, y, w, h, initObj));
     }
 
     /////////////////////////////////////////////////////////////////

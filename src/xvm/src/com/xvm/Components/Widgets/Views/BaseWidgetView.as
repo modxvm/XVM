@@ -28,6 +28,7 @@ class com.xvm.Components.Widgets.Views.BaseWidgetView implements IWidgetView
 
     public function BaseWidgetView(mc:MovieClip, settings:Object, defaults:Object)
     {
+        //Logger.addObject(settings);
         this.m_settings = settings;
 
         var me = this;
@@ -48,13 +49,15 @@ class com.xvm.Components.Widgets.Views.BaseWidgetView implements IWidgetView
         mc.onMouseMove = function()      { me.onMouseMove.apply(me, arguments); }
 
         Mouse.addListener(this); // catch Mouse.RIGHT
-        
+
         var bgAlpha = settings.bgAlpha != null ? settings.bgAlpha : defaults.bgAlpha != null ? defaults.bgAlpha : 60;
-        _panel = Panel.Create(mc, "panel", 0, 0,
-            settings.width || defaults.width || 50,
-            settings.height || defaults.height || 50,
-            settings.bgColor != null ? settings.bgColor : defaults.bgColor != null ? defaults.bgColor : 0x000000, bgAlpha,
-            1, 0xCCCCCC, bgAlpha);
+        _panel = Panel.Create(mc, "panel", 0, 0, settings.width || defaults.width || 0, settings.height || defaults.height || 0, {
+            color: settings.bgColor != null ? settings.bgColor : defaults.bgColor != null ? defaults.bgColor : 0x000000,
+            alpha: bgAlpha,
+            borderSize: 1,
+            borderColor: 0xCCCCCC,
+            borderAlpha: bgAlpha
+        });
     }
     
     /////////////////////////////////////////////////////////////////

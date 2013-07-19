@@ -27,9 +27,8 @@ class com.xvm.Components.Widgets.ClockWidget extends BaseWidget
             modes: Defines.WIDGET_MODE_1 | Defines.WIDGET_MODE_2,
             x: 0,
             y: 20,
-            width: 30,
-            height: 30,
             alpha: 100,
+            bgColor: 0x000000,
             bgAlpha: 60,
             pinned: false
         };

@@ -19,23 +19,9 @@ class com.xvm.Controls.Label extends ControlBase
     /////////////////////////////////////////////////////////////////
     // PUBLIC STATIC
     
-    public static function Create(context:MovieClip, name:String, x:Number, y:Number, w:Number, h:Number, color:Number, alpha:Number,
-        fontName:String, fontSize:Number, text:String, multiline:Boolean, align:String):Label
+    public static function Create(context:MovieClip, name:String, x:Number, y:Number, w:Number, h:Number, initObj:Object):Label
     {
-        return UIComponent.createInstance(context, CLASS_NAME, name, context.getNextHighestDepth(),
-        {
-            _x: x,
-            _y: y,
-            __width: w,
-            __height: h,
-            _color: color,
-            __alpha: alpha,
-            fontName: fontName,
-            fontSize: fontSize,
-            text: text,
-            multiline: multiline || false,
-            align: align || "left"
-        });
+        return Label(ControlBase.__Create(context, CLASS_NAME, name, x, y, w, h, initObj));
     }
 
     /////////////////////////////////////////////////////////////////
@@ -79,7 +65,8 @@ class com.xvm.Controls.Label extends ControlBase
 
     private var fontName:String;
     private var multiline:Boolean;
-    private var align:Boolean;
+    private var align:String;
+    private var valign:String;
 
     /////////////////////////////////////////////////////////////////
     // OVERRIDES
@@ -94,7 +81,12 @@ class com.xvm.Controls.Label extends ControlBase
         if (textField == null)
         {
             textField = createTextField("textField", 0, 0, 0, width, height);
-            textField.autoSize = align;
+            //textField.border = true;
+            //textField.borderColor = 0xFFFF00;
+            textField.autoSize = align || "left";
+            textField.verticalAutoSize = valign || "top";
+            //textField.align = align || "left";
+            //textField.verticalAlign = valign || "top";
             textField.multiline = multiline;
             textField.wordWrap = multiline;
             textField.antiAliasType = "advanced";

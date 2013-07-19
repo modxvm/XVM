@@ -29,7 +29,15 @@ class com.xvm.Components.Widgets.Views.ClockWidgetView extends BaseWidgetView
     {
         super(mc, settings, ClockWidget.DEFAULT_SETTINGS);
         
-        clock = Label.Create(panel, "label", 2, 2, 20, 20, Defines.UICOLOR_DEFAULT2, 100, "$TitleFont", 15, "", false, "left");
+        clock = Label.Create(panel, "label", 2, 2, 0, 0, {
+            color: Defines.UICOLOR_DEFAULT2,
+            alpha: 100,
+            fontName: "$TitleFont",
+            fontSize: 15,
+            multiline: false,
+            align: "center",
+            valign: "center"
+        });
         
         update(new Date());
     }
@@ -40,13 +48,11 @@ class com.xvm.Components.Widgets.Views.ClockWidgetView extends BaseWidgetView
     public function update(data:Object)
     {
         super.update(data);
-
-        recalculateSize(formatDate(Date(2000)));
-
+        if (!clock.textField)
+            return;
         clock.text = formatDate(Date(data));
-
-        clock._x = (panel.width - clock.textField._width) / 2;
-        clock._y = (panel.height - clock.textField._height) / 2;
+        //Logger.addObject(clock.textField);
+        recalculateSize(formatDate(Date(2000)));
     }
 
     /////////////////////////////////////////////////////////////////
@@ -65,11 +71,8 @@ class com.xvm.Components.Widgets.Views.ClockWidgetView extends BaseWidgetView
     }
 
     private var _sizeTester:TextField;
-    private function recalculateSize(text:String)
+    private function recalculateSize(def:String)
     {
-        if (!clock.textField)
-            return;
-        
         if (!_sizeTester)
         {
             _sizeTester = _root.createTextField("__xvm_clock_widget_sizeTester", _root.getNextHighestDepth(), 0, 0, 1024, 768);
@@ -79,11 +82,13 @@ class com.xvm.Components.Widgets.Views.ClockWidgetView extends BaseWidgetView
             _sizeTester.setNewTextFormat(clock.textField.getNewTextFormat());
         }
         
-        _sizeTester.htmlText = "<span class='tf'><font size='" + clock.fontSize + "'>" + text + "</font></span>";
+        _sizeTester.htmlText = "<span class='tf'><font size='" + clock.fontSize + "'>" + def + "</font></span>";
         var lineMetrics = _sizeTester.getLineMetrics(0);
-        
         var w = lineMetrics.width + 4 + 4;
         var h = lineMetrics.height + 4 + 4;
         panel.setSize(w, h);
+        //clock.setSize(w, h);
+        clock._x = w / 2;
+        clock._y = h / 2;
     }
 }

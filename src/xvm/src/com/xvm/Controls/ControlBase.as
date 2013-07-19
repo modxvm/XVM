@@ -18,6 +18,22 @@ class com.xvm.Controls.ControlBase extends MovieClip
         return mc;
     }
 
+    // protected
+    private static function __Create(context:MovieClip, symbol:String, name:String, x:Number, y:Number, w:Number, h:Number, initObj:Object):ControlBase
+    {
+        if (!initObj)
+            initObj = { };
+        initObj._x = x;
+        initObj._y = y;
+        initObj.__width = w;
+        initObj.__height = h;
+        if (initObj.color != null)
+            initObj._color = initObj.color;
+        if (initObj.alpha != null)
+            initObj.__alpha = initObj.alpha;
+        return ControlBase(createInstance(context, symbol, name, context.getNextHighestDepth(), initObj));
+    }
+    
     /////////////////////////////////////////////////////////////////
     // PRIVATE VARS
 
