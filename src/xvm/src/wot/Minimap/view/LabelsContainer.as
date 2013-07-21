@@ -1,3 +1,4 @@
+import com.xvm.AutoUpdate;
 import com.xvm.GlobalEventDispatcher;
 import flash.geom.Point;
 import wot.Minimap.dataTypes.Player;
@@ -42,7 +43,7 @@ class wot.Minimap.view.LabelsContainer
     {
         var icons:MovieClip = MinimapProxy.wrapper.icons;
         holderMc = icons.createEmptyMovieClip(CONTAINER_NAME, wot.Minimap.Minimap.LABELS);
-        GlobalEventDispatcher.addEventListener(MinimapEvent.TICK, this, onTimerTick);
+        GlobalEventDispatcher.addEventListener(AutoUpdate.UPDATE_BY_TIMER_EVENT, this, onTimerTick);
     }
     
     public function getLabel(uid:Number, entryName:String, vehicleClass:String):MovieClip

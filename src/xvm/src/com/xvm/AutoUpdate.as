@@ -1,5 +1,4 @@
 import com.xvm.GlobalEventDispatcher;
-import wot.Minimap.MinimapEvent;
 import wot.PlayersPanel.PlayersPanelProxy;
 
 /**
@@ -12,6 +11,8 @@ import wot.PlayersPanel.PlayersPanelProxy;
 
 class com.xvm.AutoUpdate
 {
+    public static var UPDATE_BY_TIMER_EVENT:String = "AutoUpdateEvent";
+    
     private static var _instance:AutoUpdate;
     
     private static var TICK_INTERVAL_MS:Number = 300; // 300ms
@@ -55,10 +56,10 @@ class com.xvm.AutoUpdate
     private function update():Void
     {
         checkIfTimerIsObsolete();
-
-        /** Refreshes minimap labels */
-        GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.TICK));
         
+        // GlobalEventDispatcher.addEventListener(AutoUpdate.UPDATE_BY_TIMER_EVENT, this, onTimerTick);
+        GlobalEventDispatcher.dispatchEvent( { type: UPDATE_BY_TIMER_EVENT } );
+
         /** Refreshes enemy spotted feature */
         PlayersPanelProxy.rightPanel.xvm_worker.updateSpotStatusMarkers();
     }
