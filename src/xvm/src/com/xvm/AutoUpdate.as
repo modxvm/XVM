@@ -3,16 +3,24 @@ import wot.Minimap.MinimapEvent;
 import wot.PlayersPanel.PlayersPanelProxy;
 
 /**
- * Minimap icons status tracking by uid.
- * Alive? Dead? Lost?
+ * Shoots custom events by timer.
+ *
+ * Timer is automatically destroyed. Timer lifetime is 16 minutes.
+ * 
+ * Routines invocation by timer can be much easier than by WG\XVM methods.
  */
 
-class wot.Minimap.model.AutoUpdate
+class com.xvm.AutoUpdate
 {
     private static var _instance:AutoUpdate;
     
     private static var TICK_INTERVAL_MS:Number = 300; // 300ms
-    private static var SELF_DESTRUCT_TICKS_THRESHOLD:Number = 16 * 60 * 1000; /** Maximum battle duration */
+    
+    /**
+     * Maximum battle duration in seconds
+     * plus prebattle and postbattle stuff.
+     */
+    private static var SELF_DESTRUCT_TICKS_THRESHOLD:Number = 16 * 60 * 1000;
 
     private var flashTimer;
     private var destructionTimer:Number;
@@ -32,27 +40,31 @@ class wot.Minimap.model.AutoUpdate
         destructionTimer = 0;
     }
     
-    public function start():Void
+    public function startTimer():Void
     {
-        flashTimer = _global.setInterval(this, "update", TICK_INTERVAL_MS);
+        /** Should be invoked each time battle is loaded */
+        if (!flashTimer)
+        {
+            flashTimer = _global.setInterval(this, "update", TICK_INTERVAL_MS);
+        }
     }
 
     // -- Private
 
-    /** Touched by timer */
+    /** Actions performed by timer */
     private function update():Void
     {
-        timeSelfDestruct();
+        checkIfTimerIsObsolete();
 
-        // TODO: why is it here? cut out?
-        /** Refreshes enemy spotted feature */
-        // TODO: translate to Event; move out from Minimap?
+        /** Refreshes minimap labels */
         GlobalEventDispatcher.dispatchEvent(new MinimapEvent(MinimapEvent.TICK));
+        
+        /** Refreshes enemy spotted feature */
         PlayersPanelProxy.rightPanel.xvm_worker.updateSpotStatusMarkers();
     }
 
     /** Selfdestruct if timer have not been used for long time */
-    private function timeSelfDestruct():Void
+    private function checkIfTimerIsObsolete():Void
     {
         destructionTimer += TICK_INTERVAL_MS;
         if (destructionTimer > SELF_DESTRUCT_TICKS_THRESHOLD)

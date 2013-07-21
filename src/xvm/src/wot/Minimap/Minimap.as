@@ -2,7 +2,7 @@ import com.xvm.*;
 import wot.Minimap.*;
 import wot.Minimap.model.externalProxy.MapConfig;
 import wot.Minimap.model.SyncModel;
-import wot.Minimap.model.AutoUpdate;
+import com.xvm.AutoUpdate
 import wot.Minimap.view.*;
 
 /**
@@ -179,7 +179,7 @@ class wot.Minimap.Minimap
         /**
          * Utility model for some features
          */
-        AutoUpdate.instance.start();
+        AutoUpdate.instance.startTimer();
         
         Features.instance.applyMajorMods();
     }
