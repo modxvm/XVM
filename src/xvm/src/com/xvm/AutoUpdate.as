@@ -46,13 +46,14 @@ class com.xvm.AutoUpdate
         /** Should be invoked each time battle is loaded */
         if (!flashTimer)
         {
-            flashTimer = _global.setInterval(this, "update", TICK_INTERVAL_MS);
+            flashTimer = _global.setInterval(this, UPDATE_FUNC_NAME, TICK_INTERVAL_MS);
         }
     }
 
     // -- Private
 
     /** Actions performed by timer */
+    private var UPDATE_FUNC_NAME:String = "update";
     private function update():Void
     {
         checkIfTimerIsObsolete();
