@@ -11,6 +11,7 @@ import com.xvm.StatData;
 import com.xvm.StatLoader;
 import com.xvm.Strings;
 import com.xvm.Utils;
+import com.xvm.AutoUpdate;
 import wot.Minimap.MinimapEvent;
 import wot.PlayersPanel.PlayerListItemRenderer;
 import wot.PlayersPanel.SpotStatusModel;
@@ -89,6 +90,9 @@ class wot.PlayersPanel.PlayersPanel
         GlobalEventDispatcher.addEventListener("config_loaded", StatLoader.LoadLastStat);
         GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
         GlobalEventDispatcher.addEventListener("stat_loaded", this, onStatLoaded);
+        
+        GlobalEventDispatcher.addEventListener(AutoUpdate.UPDATE_BY_TIMER_EVENT, this, updateSpotStatusMarkers);
+        
         Config.LoadConfig("PlayersPanel.as");
         
         /** Minimap needs to know loaded status */
@@ -111,8 +115,8 @@ class wot.PlayersPanel.PlayersPanel
     }
 
     /**
-     * Refreshes Enemy Spotted Marker.
-     * Invoked by Minimap.AutoUpdate each 300ms.
+     * Refreshes Enemy spot status marker.
+     * Invoked by AutoUpdate event each 300ms.
      */
     public function updateSpotStatusMarkers():Void
     {

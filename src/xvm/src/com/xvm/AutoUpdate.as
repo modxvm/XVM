@@ -57,11 +57,11 @@ class com.xvm.AutoUpdate
     {
         checkIfTimerIsObsolete();
         
-        // GlobalEventDispatcher.addEventListener(AutoUpdate.UPDATE_BY_TIMER_EVENT, this, onTimerTick);
+        /**
+         * Listener template:
+         *  GlobalEventDispatcher.addEventListener(AutoUpdate.UPDATE_BY_TIMER_EVENT, this, onTimerTick);
+         */ 
         GlobalEventDispatcher.dispatchEvent( { type: UPDATE_BY_TIMER_EVENT } );
-
-        /** Refreshes enemy spotted feature */
-        PlayersPanelProxy.rightPanel.xvm_worker.updateSpotStatusMarkers();
     }
 
     /** Selfdestruct if timer have not been used for long time */
