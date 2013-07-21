@@ -48,5 +48,17 @@ class wot.Minimap.view.LabelViewBuilder
         }
 
         textField._alpha = MapConfig.unitLabelAlpha(entryName, status);
+        
+        if (!MapConfig.lostEnemyEnabled && status == Player.PLAYER_LOST)
+        {
+            /**
+             * In case user does not want to see labels for lost
+             * just make it fully transparent.
+             * 
+             * Removing text field or label is not suitable
+             * for current label management algorithm.
+             */
+            textField._alpha = 0;
+        }
     }
 }

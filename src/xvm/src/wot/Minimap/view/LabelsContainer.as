@@ -20,8 +20,6 @@ class wot.Minimap.view.LabelsContainer
     public static var ENTRY_NAME_FIELD_NAME:String = "entryName";
     public static var VEHICLE_CLASS_FIELD_NAME:String = "vehicleClass";
     
-    
-    
     private static var CONTAINER_NAME:String = "labelsContainer";
     private static var OFFMAP_COORDINATE:Number = 500;
     private static var DEAD_DEPTH_START:Number = 100;

@@ -87,11 +87,13 @@ class wot.Minimap.Features
     
     public function applyMajorMods():Void
     {
+        /** Utility model for some features */
+        autoUpdate = new AutoUpdate();
+        
         setBGMapImageAlpha();
         setPlayerIconAlpha();
         
         /** With enable switch */
-        lostMarkersFeature();
         zoomFeature();
         /** And dependent on successful map size recognition */
         if (MapSizeModel.instance.getCellSide())
@@ -122,18 +124,6 @@ class wot.Minimap.Features
     {
         var selfIcon:MinimapEntry = IconsProxy.selfEntry;
         selfIcon.wrapper.selfIcon._alpha = MapConfig.selfIconAlpha;
-    }
-    
-    private function lostMarkersFeature():Void
-    {
-        if (MapConfig.lostEnemyEnabled)
-        {
-            /**
-             * Defines lost enemy units and
-             * sends event on lost units change.
-             */
-            autoUpdate = new AutoUpdate();
-        }
     }
     
     private function zoomFeature():Void
