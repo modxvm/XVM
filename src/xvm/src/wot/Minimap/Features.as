@@ -1,5 +1,4 @@
 import wot.Minimap.*;
-import wot.Minimap.model.AutoUpdate;
 import wot.Minimap.model.externalProxy.*;
 import wot.Minimap.model.iconTracker.*;
 import wot.Minimap.model.mapSize.MapSizeModel;
@@ -24,10 +23,6 @@ class wot.Minimap.Features
     private var square:Square;
     private var lines:Lines;
 
-    /** Defines lost enemy positions */
-    // TODO: move out
-    private var autoUpdate:AutoUpdate;
-    
     public static function get instance():Features
     {
         if (!_instance)
@@ -87,9 +82,6 @@ class wot.Minimap.Features
     
     public function applyMajorMods():Void
     {
-        /** Utility model for some features */
-        autoUpdate = new AutoUpdate();
-        
         setBGMapImageAlpha();
         setPlayerIconAlpha();
         

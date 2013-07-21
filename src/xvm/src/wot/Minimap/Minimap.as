@@ -2,6 +2,7 @@ import com.xvm.*;
 import wot.Minimap.*;
 import wot.Minimap.model.externalProxy.MapConfig;
 import wot.Minimap.model.SyncModel;
+import wot.Minimap.model.AutoUpdate;
 import wot.Minimap.view.*;
 
 /**
@@ -15,6 +16,8 @@ class wot.Minimap.Minimap
 
     public var wrapper:net.wargaming.ingame.Minimap;
     public var base:net.wargaming.ingame.Minimap;
+    
+    private var autoUpdate:AutoUpdate;
 
     public function Minimap(wrapper:net.wargaming.ingame.Minimap, base:net.wargaming.ingame.Minimap)
     {
@@ -172,6 +175,11 @@ class wot.Minimap.Minimap
     private function startExtendedProcedure():Void
     {
         SyncModel.instance.updateIconUids();
+        
+        /**
+         * Utility model for some features
+         */
+        autoUpdate = new AutoUpdate();
         
         Features.instance.applyMajorMods();
     }
