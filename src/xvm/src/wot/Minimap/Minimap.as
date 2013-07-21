@@ -179,7 +179,7 @@ class wot.Minimap.Minimap
         /**
          * Utility model for some features
          */
-        autoUpdate = new AutoUpdate();
+        AutoUpdate.instance.start();
         
         Features.instance.applyMajorMods();
     }

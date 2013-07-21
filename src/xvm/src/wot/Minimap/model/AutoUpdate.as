@@ -9,15 +9,31 @@ import wot.PlayersPanel.PlayersPanelProxy;
 
 class wot.Minimap.model.AutoUpdate
 {
+    private static var _instance:AutoUpdate;
+    
     private static var TICK_INTERVAL_MS:Number = 300; // 300ms
     private static var SELF_DESTRUCT_TICKS_THRESHOLD:Number = 16 * 60 * 1000; /** Maximum battle duration */
 
     private var flashTimer;
     private var destructionTimer:Number;
+    
+    public static function get instance():AutoUpdate
+    {
+        if (!_instance)
+        {
+            _instance = new AutoUpdate();
+        }
+        
+        return _instance;
+    }
 
     public function AutoUpdate()
     {
         destructionTimer = 0;
+    }
+    
+    public function start():Void
+    {
         flashTimer = _global.setInterval(this, "update", TICK_INTERVAL_MS);
     }
 
