@@ -458,7 +458,7 @@ namespace wot
           }
           Debug(processInfo);
 
-          if (isLauncher && wotProcess.ExitCode == 0)
+          if (isLauncher)
           {
             Debug("Wait for launcher process to exit");
             wotProcess.WaitForExit();
