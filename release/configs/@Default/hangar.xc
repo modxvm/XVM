@@ -12,7 +12,7 @@
     "xwnInCompany": true,
     // true - Enable widgets
     // true - включить виджеты
-    "widgetsEnabled": true,
+    "widgetsEnabled": false,
     // Ping servers; works only with xvm-stat.exe
     // Пинг серверов; работает только с xvm-stat.exe
     "pingServers": {
