@@ -319,7 +319,7 @@ class com.xvm.Macros
                 if (label == "M_r_A")
                     return "Флаттершай - лучшая пони!";
                 if (label == "XlebniDizele4ku")
-                    return "Кому голды?!!$$";
+                    return "как ник зделал паруски!!!";
                 if (label == "sirmax2" || label == "0x01" || label == "_SirMax_")
                     return "«сэр Макс» (XVM)";
                 break;
