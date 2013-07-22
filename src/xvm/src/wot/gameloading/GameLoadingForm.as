@@ -54,7 +54,7 @@ class wot.gameloading.GameLoadingForm
 
         // ------------------ DEBUG ------------------
         //var mc = wrapper.createEmptyMovieClip("widgetsHolder", wrapper.getNextHighestDepth());
-        //com.xvm.Components.Widgets.WidgetsFactory.initialize(mc, "sirmax2", [ com.xvm.Components.Widgets.ClockWidget.DEFAULT_SETTINGS ]);
+        //com.xvm.Components.Widgets.WidgetsFactory.initialize(mc, "sirmax2", [ com.xvm.Components.Widgets.SwitcherWidget.DEFAULT_SETTINGS ]);
         //var wsd = new com.xvm.Components.Widgets.Settings.WidgetsSettingsDialog(_root.header, "sirmax2");
         // ------------------ DEBUG ------------------
 

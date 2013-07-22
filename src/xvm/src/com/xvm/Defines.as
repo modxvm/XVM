@@ -5,7 +5,7 @@
 class com.xvm.Defines
 {
     // Global versions
-    public static var XVM_VERSION:String = "4.0.1-test-1";
+    public static var XVM_VERSION:String = "4.1.0-test1";
     public static var XVM_INTRO:String = "www.modxvm.com";
     public static var WOT_VERSION:String = "0.8.7.CT2";
     public static var CONFIG_VERSION:String = "4.0.0";
@@ -141,4 +141,5 @@ class com.xvm.Defines
     public static var WIDGET_MODE_1 =        0x02;
     public static var WIDGET_MODE_2 =        0x04;
     public static var WIDGET_MODE_DETAILED = 0x08;
+    public static var WIDGET_MODES_ALL = WIDGET_MODE_HIDE | WIDGET_MODE_1 | WIDGET_MODE_2 | WIDGET_MODE_DETAILED;
 }

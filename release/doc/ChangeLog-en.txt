@@ -1,5 +1,5 @@
-﻿  [NEW FUNCTIONS]
-  * minimap: new label types - wrecks, teamkillers, lost allies
+﻿XVM-4.1.0-test1:
+  [NEW FUNCTIONS]
   * new options:
     login/pingServers/showPingOnGameLoading - show ping during game loading, before login screen
     userInfo/showFilters - show tank filters
@@ -9,8 +9,12 @@
       Sort order: >0 - default, <0 - inverse
     hangar/xwnInCompany - show XWN instead of XEFF in company windows
     language - language used in mod (support translation files in xvm/l10n/)
+    hangar/widgetsEnabled - enable hangar widgets. Currently, only clock is available.
+  * minimap: new label types - wrecks, teamkillers, lost allies
   * localization: XVM now using external files for translation
   * localization: new belarusian, ukranian and czech translations
+  * snippets - extended battle elements settings. battle/elements section was changed.
+    details is here: http://www.koreanrandom.com/forum/topic/1761-snippets/ (Russian)
 
   [FIXES]
   * minimap: label of observer vehicle is no longer rotating with icon

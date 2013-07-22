@@ -2,6 +2,7 @@
  * Switcher Widget Settings
  * @author Maxim Schedriviy <m.schedriviy@gmail.com>
  */
+import flash.geom.Point;
 import gfx.controls.CheckBox;
 import gfx.controls.TextInput;
 import com.xvm.Defines;

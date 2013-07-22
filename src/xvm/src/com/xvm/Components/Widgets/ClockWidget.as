@@ -29,7 +29,7 @@ class com.xvm.Components.Widgets.ClockWidget extends BaseWidget
             y: 20,
             alpha: 100,
             bgColor: 0x000000,
-            bgAlpha: 60,
+            bgAlpha: 0,
             pinned: false
         };
     }

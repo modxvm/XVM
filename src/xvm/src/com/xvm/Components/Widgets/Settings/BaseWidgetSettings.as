@@ -53,6 +53,7 @@ class com.xvm.Components.Widgets.Settings.BaseWidgetSettings
     {
         mc.mode1.selected = (w.modes & Defines.WIDGET_MODE_1);
         mc.mode2.selected = (w.modes & Defines.WIDGET_MODE_2);
+        mc.bgAlpha.value = w.bgAlpha;
     }
     
     /////////////////////////////////////////////////////////////////

@@ -2,11 +2,13 @@
  * Label control
  * @author Maxim Schedriviy <m.schedriviy@gmail.com>
  */
+import flash.geom.Point;
 import gfx.core.UIComponent;
 import com.xvm.Logger;
 import com.xvm.Utils;
 import com.xvm.Controls.IControl;
 import com.xvm.Controls.ControlBase;
+import com.xvm.Components.Widgets.WidgetsEventTypes;
 
 class com.xvm.Controls.Label extends ControlBase
 {
@@ -95,6 +97,8 @@ class com.xvm.Controls.Label extends ControlBase
             textField.styleSheet = Utils.createStyleSheet(Utils.createCSS("tf", color, fontName, fontSize));
             textField._alpha = alpha;
         }
+        
+        dispatchEvent({ type: WidgetsEventTypes.INITIALIZED, target: this });
     }
 
     // override
@@ -110,5 +114,29 @@ class com.xvm.Controls.Label extends ControlBase
     public function draw()
     {
         textField.htmlText = text;
+    }
+    
+    /////////////////////////////////////////////////////////////////
+    // PUBLIC
+    public function getSize(testString:String):Point
+    {
+        if (testString == null)
+            testString = text;
+        
+        var tester = _root["__xvm_widgets_label_sizeTester"];
+        if (!tester)
+        {
+            tester = _root.createTextField("__xvm_widgets_label_sizeTester", 0, 0, 0, 1024, 768);
+            tester.autoSize = false;
+            tester.html = true;
+            tester._visible = false;
+        }
+        
+        tester.setNewTextFormat(textField.getNewTextFormat());
+        tester.htmlText = "<span class='tf'><font size='" + fontSize + "'>" + testString + "</font></span>";
+        var lineMetrics = tester.getLineMetrics(0);
+        var w = lineMetrics.width + 4; // 4 - size of gutters
+        var h = lineMetrics.height + 4;
+        return new Point(w, h);
     }
 }

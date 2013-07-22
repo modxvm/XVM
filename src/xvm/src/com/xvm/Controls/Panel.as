@@ -5,6 +5,7 @@
 import com.xvm.Logger;
 import com.xvm.Controls.IControl;
 import com.xvm.Controls.ControlBase;
+import com.xvm.Components.Widgets.WidgetsEventTypes;
 
 class com.xvm.Controls.Panel extends ControlBase
 {
@@ -31,6 +32,12 @@ class com.xvm.Controls.Panel extends ControlBase
 
     /////////////////////////////////////////////////////////////////
     // OVERRIDES
+
+    // override
+    public function configUI()
+    {
+        dispatchEvent({ type: WidgetsEventTypes.INITIALIZED, target: this });
+    }
 
     // override
     public function draw()
