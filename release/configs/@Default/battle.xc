@@ -24,7 +24,10 @@
     "useStandardMarkers": false,
     // Path to clan icons folder relative to res_mods/xvm/res.
     // Путь к папке иконок кланов относительно res_mods/xvm/res.
-    "clanIconsFolder": "clanicons/"
+    "clanIconsFolder": "clanicons/",
+    // GUI elements settings (experts only)
+    // Настройки графических элементов (только для экспертов!)
+    "elements": ${"elements.xc":"."}
   },
   // Frag counter panel at top side of battle windows interface.
   // Панель счёта в бою.
@@ -42,8 +45,5 @@
     // Panel scaling. Original value was 100.
     // Увеличение панели. 100 в оригинале.
     "scale": 150
-  },
-  // GUI elements settings (experts only)
-  // Настройки графических элементов (только для экспертов!)
-  "elements": ${"elements.xc":"."}
+  }
 }
