@@ -28,6 +28,7 @@
     "__stub__": null
   },
   "elements": [
+    ${"sirmax-snippet-test.xc":"."},
     ${"sirmax-snippet-bt.xc":"."}, // battle timer
     ${"sirmax-snippet-pp.xc":"."}  // players panels
   ],
@@ -138,7 +139,7 @@
     }
   },
   "finalStatistic": {
-    "startPage": 3,
+    "startPage": 1,
     "sortColumn": 6,
     "showChances": true,
     "showChancesExp": true
