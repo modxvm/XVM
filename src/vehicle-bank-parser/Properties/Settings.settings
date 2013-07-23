@@ -12,7 +12,7 @@
       <Value Profile="(Default)">D:\work\games\WoT\</Value>
     </Setting>
     <Setting Name="EXPORT_FILEPATH_JSON" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\work\wot-xvm\src\xvm-stat\Resources\VehicleInfo.json</Value>
+      <Value Profile="(Default)">D:\work\wot-xvm\release\res\VehicleInfo.json</Value>
     </Setting>
   </Settings>
 </SettingsFile>

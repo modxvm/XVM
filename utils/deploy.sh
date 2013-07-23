@@ -1,7 +1,7 @@
 #!/bin/sh
 
-[ "$GAME_VER" = "" ] && GAME_VER="0.8.6"
-#[ "$GAME_VER" = "" ] && GAME_VER="0.8.6 Common Test"
+[ "$GAME_VER" = "" ] && GAME_VER="0.8.7"
+#[ "$GAME_VER" = "" ] && GAME_VER="0.8.8 Common Test"
 [ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/work/games/WoT
 
 FILES="
@@ -24,7 +24,7 @@ FILES="
   VehicleMarkersManager.swf
   XVM.xvmconf"
 
-XVM_FILES="xvm.xc"
+XVM_FILES="xvm.xc res/VehicleInfo.json"
 XVM_DIRS="configs l10n"
 
 cd $(dirname $(realpath $(cygpath --unix $0)))
@@ -49,7 +49,7 @@ copy_xvm_file()
   [ -f "$RES_MODS_DIR/xvm/$1" ] && rm -f "$RES_MODS_DIR/xvm/$1"
   [ -f "../release/$1" ] && {
     echo "=> $1"
-    cp -p "../release/$1" "$RES_MODS_DIR/xvm/${1##*/}"
+    cp -p "../release/$1" "$RES_MODS_DIR/xvm/$1"
   }
 }
 

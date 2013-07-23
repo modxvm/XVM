@@ -29,8 +29,8 @@
   },
   "elements": [
     ${"sirmax-snippet-test.xc":"."},
-    ${"sirmax-snippet-bt.xc":"."}, // battle timer
-    ${"sirmax-snippet-pp.xc":"."}  // players panels
+//    ${"sirmax-snippet-pp.xc":"."},  // players panels
+    ${"sirmax-snippet-bt.xc":"."} // battle timer
   ],
   "definition": {
     "author": "sirmax2",

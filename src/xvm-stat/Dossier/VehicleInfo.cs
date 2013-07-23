@@ -1,6 +1,8 @@
 ﻿using LitJson;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 
 namespace wot.Dossier
 {
@@ -10,24 +12,35 @@ namespace wot.Dossier
 
     static VehicleInfo()
     {
-      JsonData vi = JsonMapper.ToObject(Utils.GetResourceAsString("wot.Resources.VehicleInfo.json"));
       data = new List<VehicleInfoData>();
-      for (int i = 0; i < vi.Count; ++i)
+      try
       {
-        JsonData jd = vi[i];
-        int level = jd.ToInt("level");
-        if (level <= 0)
-          continue;
-        data.Add(new VehicleInfoData()
+        string game_dir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+        string vifn = Path.Combine(game_dir, "res_mods/xvm/res/VehicleInfo.json");
+        if (!File.Exists(vifn))
+          throw new Exception("Resource file not found: res_mods/xvm/res/VehicleInfo.json");
+        JsonData vi = JsonMapper.ToObject(File.ReadAllText(vifn));
+        for (int i = 0; i < vi.Count; ++i)
         {
-          vehicleId = jd.ToInt("id"),
-          vname = jd.ToString("name"),
-          level = level,
-          nation = ToIntNation(jd.ToString("nation")),
-          vclass = ToIntClass(jd.ToString("type")),
-          premium = jd.ToString("premium").ToLower() == "true",
-          hp = jd.ToInt("hptop"),
-        });
+          JsonData jd = vi[i];
+          int level = jd.ToInt("level");
+          if (level <= 0)
+            continue;
+          data.Add(new VehicleInfoData()
+          {
+            vehicleId = jd.ToInt("id"),
+            vname = jd.ToString("name"),
+            level = level,
+            nation = ToIntNation(jd.ToString("nation")),
+            vclass = ToIntClass(jd.ToString("type")),
+            premium = jd.ToString("premium").ToLower() == "true",
+            hp = jd.ToInt("hptop"),
+          });
+        }
+      }
+      catch (Exception ex)
+      {
+        Program.Log(ex.ToString());
       }
     }
 

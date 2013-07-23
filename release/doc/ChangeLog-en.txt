@@ -1,4 +1,4 @@
-﻿XVM-4.1.0-test1:
+﻿XVM-4.1.0:
   [NEW FUNCTIONS]
   * new options:
     login/pingServers/showPingOnGameLoading - show ping during game loading, before login screen
@@ -15,7 +15,7 @@
   * localization: new belarusian, ukranian and czech translations
   * snippets - extended battle elements settings. battle/elements section was changed.
     details is here: http://www.koreanrandom.com/forum/topic/1761-snippets/ (Russian)
-    xvm-stat 1.6.0 or higher required
+    xvm-stat 1.6.1 or higher required
 
   [FIXES]
   * minimap: label of observer vehicle is no longer rotating with icon
