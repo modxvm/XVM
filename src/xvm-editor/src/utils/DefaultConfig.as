@@ -20,6 +20,7 @@ public class DefaultConfig
                 gameVersion: Defines.WOT_VERSION,
                 modMinVersion: Defines.XVM_VERSION
             },
+            language: Defines.LOCALE_AUTO_DETECTION,
             login: {
                 // Show ping to the servers
                 pingServers: {
@@ -63,6 +64,7 @@ public class DefaultConfig
             hangar: {
                 hideTutorial: false,
                 xwnInCompany: true,
+                widgetsEnabled: false,
                 // Show ping to the servers
                 pingServers: {
                     enabled: false,
@@ -110,63 +112,23 @@ public class DefaultConfig
                 // Show the clock on the Debug Panel (near FPS).
                 // Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
                 clockFormat: "H:N",
-                clanIconsFolder: "clanicons/", // Folder with clan icons
+                clanIconsFolder: "clanicons/",   // Folder with clan icons
                 // Visual elements
-                elements: {
-                    // x - X position
-                    // y - Y position
-                    // w - width
-                    // h - height
-                    // a - alpha
-                    // ha - horizontal align
-                    // va - vertical align
-                    // debug - draw border, element name and geometry
-                    // x, y values can be:
-                    //   null - use default client value
-                    //   -xxxx..xxxx
-                    //   xx.xx%
-                    // ha values can be:
-                    //   1 - left
-                    //   2 - right (x = [width .. 0])
-                    // va values can be:
-                    //   1 - top
-                    //   2 - bottom (y = [height .. 0])
-                    minimap:               { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-                    playerMessangersPanel: { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-                    leftPanel:             { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-                    rightPanel:            { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-                    switcher_mc:           { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-                    fragCorrelationBar:    { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-                    debugPanel:            { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-                    battleTimer:           { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-                    damagePanel:           { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-                    sixthSenseIndicator:   { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-                    vehicleErrorsPanel:    { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-                    messenger:             { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-                    damageInfoPanel:       { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-                    timerBig:              { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-                    deathZoneTimer:        { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-                    overturnedTimer:       { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-                    drownTimer:            { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-                    langBarPanel:          { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-                    consumablesPanel:      { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-                    vehicleMessagesPanel:  { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false },
-                    teamBasesPanel:        { x:null, y:null, w:null, h:null, ha:null, va:null, a:null, debug:false }
-                }
+                elements: []
             },
             rating: {
-                showPlayersStatistics: true,	// Global switch. Handles whole statisctics module.
-                loadEnemyStatsInFogOfWar: true,	// Load players data in "fog of war".
-                enableStatisticsLog: false, 	// Enable saving statistics to "xvm-stat.log" file
-                enableUserInfoStatistics: true,	// Enable statistics in the user info window
-                enableCompanyStatistics: true	// Enable statistics in the company window
+                showPlayersStatistics: true,    // Global switch. Handles whole statisctics module.
+                loadEnemyStatsInFogOfWar: true, // Load players data in "fog of war".
+                enableStatisticsLog: false,     // Enable saving statistics to "xvm-stat.log" file
+                enableUserInfoStatistics: true, // Enable statistics in the user info window
+                enableCompanyStatistics: true   // Enable statistics in the company window
             },
             squad: {
-                enabled: false,			// Global switch
-                romanNumbers: true,		// Roman level numbers
-                showClan: true,			// Show player clan
-                leftLvlBorder: "",		// Grille [4
-                rightLvlBorder: ""		// Grille 4]
+                enabled: true,     // Global switch
+                romanNumbers: true, // Roman level numbers
+                showClan: true,     // Show player clan
+                leftLvlBorder: "",  // Grille [4
+                rightLvlBorder: ""  // Grille 4]
             },
             userInfo: {
                 showFilters: true,              // Show tank filters
@@ -292,90 +254,104 @@ public class DefaultConfig
                 labels: {
                   nickShrink: 5,
                   vehicleclassmacro: {
-                    light: "",
-                    medium: "",
-                    heavy: "",
-                    td: "▼",
-                    spg: "■",
-                    superh: ""
+                    light: "\u2022",
+                    medium: "\u2022",
+                    heavy: "\u2022",
+                    td: "\u2022",
+                    spg: "\u25AA",
+                    superh: "\u2022"
                   },
                   units: {
                     revealedEnabled: true,
                     lostEnemyEnabled: true,
                     format: {
-                      ally:  "<span class='mm_a'>{{vehicle-type}}</span>",
-                      enemy: "<span class='mm_e'>{{vehicle-type}}</span>",
-                      squad: "<textformat leading='-1'><span class='mm_s'><i>{{short-nick}}</i>\n{{vehicle-type}}</span><textformat>",
-                      lost:  "<span class='mm_dot'>\u2022</span><span class='mm_l'><i>{{vehicle-type}}</i></span>",
-                      oneself: ""
+                      ally:           "<span class='mm_a'>{{vehicle}}</span>",
+                      teamkiller:     "<span class='mm_t'>{{vehicle}}</span>",
+                      enemy:          "<span class='mm_e'>{{vehicle}}</span>",
+                      squad:          "<textformat leading='-2'><span class='mm_s'><i>{{short-nick}}</i>\n{{vehicle}}</span><textformat>",
+                      oneself:        "",
+                      lostally:       "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_la'><i>{{vehicle}}</i></span>",
+                      lostteamkiller: "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_lt'><i>{{vehicle}}</i></span>",
+                      lost:           "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_l'><i>{{vehicle}}</i></span>",
+                      lostsquad:      "<textformat leading='-4'><span class='mm_dot'>{{vehicle-class}}</span><span class='mm_ls'><i>{{short-nick}}</i>\n   {{vehicle}}</span><textformat>",
+                      deadally:       "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_da'></span>",
+                      deadteamkiller: "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_dt'></span>",
+                      deadenemy:      "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_de'></span>",
+                      deadsquad:      "<span class='mm_dot'>{{vehicle-class}}</span><span class='mm_ds'><i>{{short-nick}}</i></span>"
                     },
                     css: {
-                      ally:  ".mm_a{font-family:$FieldFont; font-size:8px; color:#C8FFA6;}",
-                      enemy: ".mm_e{font-family:$FieldFont; font-size:8px; color:#FCA9A4;}",
-                      squad: ".mm_s{font-family:$FieldFont; font-size:8px; color:#FFC099;}",
-                      lost:  ".mm_l{font-family:$FieldFont; font-size:8px; color:#FCA9A4;} .mm_dot{font-family:Arial; font-size:17px; color:#FCA9A4;}",
-                      oneself: ".mm_o{font-family:$FieldFont; font-size:8px; color:#FFFFFF;}"
+                      ally:            ".mm_a{font-family:$FieldFont; font-size:8px; color:#C8FFA6;}",
+                      teamkiller:      ".mm_t{font-family:$FieldFont; font-size:8px; color:#A6F8FF;}",
+                      enemy:           ".mm_e{font-family:$FieldFont; font-size:8px; color:#FCA9A4;}",
+                      squad:           ".mm_s{font-family:$FieldFont; font-size:8px; color:#FFC099;}",
+                      lost:            ".mm_l{font-family:$FieldFont; font-size:8px; color:#FCA9A4;} .mm_dot{font-family:Arial; font-size:17px; color:#FCA9A4;}",
+                      oneself:         ".mm_o{font-family:$FieldFont; font-size:8px; color:#FFFFFF;}",
+                      lostally:       ".mm_la{font-family:$FieldFont; font-size:8px; color:#C8FFA6;} .mm_dot{font-family:Arial; font-size:17px; color:#B4E595;}",
+                      lostteamkiller: ".mm_lt{font-family:$FieldFont; font-size:8px; color:#A6F8FF;} .mm_dot{font-family:Arial; font-size:17px; color:#00D2E5;}",
+                      lost:            ".mm_l{font-family:$FieldFont; font-size:8px; color:#FCA9A4;} .mm_dot{font-family:Arial; font-size:17px; color:#E59995;}",
+                      lostsquad:      ".mm_ls{font-family:$FieldFont; font-size:8px; color:#FFD099;} .mm_dot{font-family:Arial; font-size:17px; color:#E5BB8A;}",
+                      deadally:       ".mm_da{font-family:$FieldFont; font-size:8px; color:#6E8C5B;} .mm_dot{font-family:Arial; font-size:17px; color:#004D00;}",
+                      deadteamkiller: ".mm_dt{font-family:$FieldFont; font-size:8px; color:#5B898C;} .mm_dot{font-family:Arial; font-size:17px; color:#043A40;}",
+                      deadenemy:      ".mm_de{font-family:$FieldFont; font-size:8px; color:#996763;} .mm_dot{font-family:Arial; font-size:17px; color:#4D0300;}",
+                      deadsquad:      ".mm_ds{font-family:$FieldFont; font-size:8px; color:#997C5C;} .mm_dot{font-family:Arial; font-size:17px; color:#663800;}"
                     },
                     shadow: {
-                      ally: {
-                        enabled: true,
-                        color: "0x000000",
-                        distance: 0,
-                        angle: 0,
-                        alpha: 80,
-                        blur: 3,
-                        strength: 3
-                      },
-                      enemy: {
-                        enabled: true,
-                        color: "0x000000",
-                        distance: 0,
-                        angle: 0,
-                        alpha: 80,
-                        blur: 3,
-                        strength: 3
-                      },
-                      squad: {
-                        enabled: true,
-                        color: "0x000000",
-                        distance: 0,
-                        angle: 0,
-                        alpha: 80,
-                        blur: 3,
-                        strength: 3
-                      },
-                      lost: {
-                        enabled: true,
-                        color: "0x000000",
-                        distance: 0,
-                        angle: 0,
-                        alpha: 80,
-                        blur: 3,
-                        strength: 3
-                      },
-                      oneself: {
-                        enabled: true,
-                        color: "0x000000",
-                        distance: 0,
-                        angle: 0,
-                        alpha: 80,
-                        blur: 3,
-                        strength: 3
-                      }
+                      ally:
+                       { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 4 },
+                      teamkiller:
+                       { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 4 },
+                      enemy:
+                       { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 4 },
+                      squad:
+                       { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 4 },
+                      oneself:
+                       { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 4 },
+                      lostally:
+                       { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 6, strength: 4 },
+                      lostteamkiller:
+                       { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 6, strength: 4 },
+                      lost:
+                       { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 6, strength: 4 },
+                      lostsquad:
+                       { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 6, strength: 4 },
+                      deadally:
+                       { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 3 },
+                      deadteamkiller:
+                       { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 3 },
+                      deadenemy:
+                       { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 3 },
+                      deadsquad:
+                       { enabled: true, color: "0x000000", distance: 0, angle: 45, alpha: 80, blur: 3, strength: 3 }
                     },
                     offset: {
-                      ally:  {x: 3, y: -1},
-                      enemy: {x: 3, y: -1},
-                      squad: {x: 3, y: -2},
-                      lost:  {x: -6, y: -10},
-                      oneself: {x: 0, y: 0}
+                      ally:           {x: 3, y: -1},
+                      teamkiller:     {x: 3, y: -1},
+                      enemy:          {x: 3, y: -1},
+                      squad:          {x: 3, y: -2},
+                      oneself:        {x: 0, y: 0},
+                      lostally:       {x: -5, y: -11},
+                      lostteamkiller: {x: -5, y: -11},
+                      lost:           {x: -5, y: -11},
+                      lostsquad:      {x: -5, y: -11},
+                      deadally:       {x: -5, y: -11},
+                      deadteamkiller: {x: -5, y: -11},
+                      deadenemy:      {x: -5, y: -11},
+                      deadsquad:      {x: -5, y: -11}
                     },
                     alpha : {
-                      ally:  100,
+                      ally: 100,
+                      teamkiller: 100,
                       enemy: 100,
                       squad: 100,
-                      lost:  70,
-                      oneself: 100
+                      oneself: 100,
+                      lostally: 70,
+                      lostteamkiller: 70,
+                      lost: 70,
+                      lostsquad: 70,
+                      deadally: 50,
+                      deadteamkiller: 50,
+                      deadenemy: 0,
+                      deadsquad: 50
                     }
                   },
                   mapSize: {
@@ -402,40 +378,68 @@ public class DefaultConfig
                   enabled: true,
                   major: [
                     { enabled: true, distance: 445, thickness: 0.75, alpha: 45, color: 0xFFCC66 },
-                    { enabled: false, distance: 50, thickness: 2.5, alpha: 100, color: 0xFFFFFF }
+                    { enabled: false, distance: 50, thickness: 1, alpha: 100, color: 0xFFFFFF }
                   ],
                   special: [
-                    { g_e:              { enabled: true, distance: 1172, thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { object_261:       { enabled: true, distance: 1463, thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { bat_chatillon155: { enabled: true, distance: 1296, thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { t92:              { enabled: true, distance: 1248, thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { g_tiger:          { enabled: true, distance: 1172, thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { m40m43:           { enabled: true, distance: 1179, thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { object_212:       { enabled: true, distance: 1229, thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { lorraine155_51:   { enabled: true, distance: 1296, thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { su_14:            { enabled: true, distance: 1229, thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { s_51:             { enabled: true, distance: 1229, thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { lorraine155_50:   { enabled: true, distance: 1202, thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { m12:              { enabled: true, distance: 1316, thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { g_panther:        { enabled: true, distance: 1407, thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { amx_13f3am:       { enabled: true, distance: 1250, thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { su_8:             { enabled: true, distance: 920,  thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { m41:              { enabled: true, distance: 1210, thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { hummel:           { enabled: true, distance: 1264, thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { amx_105am:        { enabled: true, distance: 1000, thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { _105_lefh18b2:    { enabled: true, distance: 1000, thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { su_5:             { enabled: true, distance: 605,  thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { m7_priest:        { enabled: true, distance: 1047, thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { grille:           { enabled: true, distance: 1210, thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { lorraine39_l_am:  { enabled: true, distance: 844,  thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { su_26:            { enabled: true, distance: 578,  thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { wespe:            { enabled: true, distance: 1000, thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { sturmpanzer_ii:   { enabled: true, distance: 605,  thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { m37:              { enabled: true, distance: 969,  thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { renaultbs:        { enabled: true, distance: 450,  thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { su_18:            { enabled: true, distance: 552,  thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { t57:              { enabled: true, distance: 552,  thickness: 1, alpha: 60, color: 0xEE4444 } },
-                    { bison_i:          { enabled: true, distance: 605,  thickness: 1, alpha: 60, color: 0xEE4444 } }
+                    // level 2
+                      { su_18:                {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 500 } },
+                      { gw_mk_vie:            {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 850 } },
+                      { t57:                  {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 553 } },
+                      { renaultbs:            {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 483 } },
+                      { gb25_loyd_carrier:    {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 509 } },
+                    // level 3
+                      { su_26:                {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1218} },
+                      { bison_i:              {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 602 } },
+                      { wespe:                {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 989 } },
+                      { m7_priest:            {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 989 } },
+                      { lorraine39_l_am:      {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 983 } },
+                      { gb27_sexton:          {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1051} },
+                      { gb78_sexton_i:        {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1051} },
+                    // level 4
+                      { su_5:                 {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 613 } },
+                      { sturmpanzer_ii:       {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 602 } },
+                      { pz_sfl_ivb:           {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 989 } },
+                      { m37:                  {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 989 } },
+                      { amx_ob_am105:         {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1288} },
+                      { gb26_birch_gun:       {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1051} },
+                    // level 5
+                      { su122a:               {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1201} },
+                      { grille:               {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 836 } },
+                      { m41:                  {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1294} },
+                      { amx_105am:            {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1288} },
+                      { _105_lefh18b2:        {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1000} },
+                      { gb28_bishop:          {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 500 } },
+                    // level 6
+                      { su_8:                 {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1345} },
+                      { hummel:               {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1260} },
+                      { m44:                  {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1294} },
+                      { amx_13f3am:           {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1381} },
+                      { gb77_fv304:           {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 500 } },
+                    // level 7
+                      { s_51:                 {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1264} },
+                      { su14_1:               {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1264} },
+                      { g_panther:            {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1300} },
+                      { m12:                  {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1413} },
+                      { lorraine155_50:       {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1350} },
+                      { gb29_crusader_5inch:  {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1327} },
+                    // level 8
+                      { su_14:                {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1264} },
+                      { gw_tiger_p:           {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1333} },
+                      { m40m43:               {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1336} },
+                      { lorraine155_51:       {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1368} },
+                      { gb79_fv206:           {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1405} },
+                    // level 9
+                      { object_212:           {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1264} },
+                      { g_tiger:              {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1333} },
+                      { m53_55:               {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1291} },
+                      { bat_chatillon155_55:  {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1413} },
+                      { gb30_fv3805:          {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1354} },
+                    // level 10
+                      { object_261:           {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1470} },
+                      { g_e:                  {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1333} },
+                      { t92:                  {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1411} },
+                      { bat_chatillon155_58:  {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1413} },
+                      { gb31_conqueror_gun:   {enabled: true, thickness: 1, alpha: 60, color: "0xEE4444", distance: 1007} }
                   ]
                 },
                 square: {
@@ -627,104 +631,104 @@ public class DefaultConfig
             },
             colors: {
                 system: {
-                    ally_alive:			"0x96FF00",
-                    ally_dead:			"0x009900",
-                    ally_blowedup:		"0x007700",
-                    squadman_alive:		"0xFFB964",
-                    squadman_dead:		"0xCA7000",
-                    squadman_blowedup:		"0xA45A00",
-                    teamKiller_alive:		"0x00EAFF",
-                    teamKiller_dead:		"0x097783",
-                    teamKiller_blowedup:	"0x096A75",
-                    enemy_alive:		"0xF50800",
-                    enemy_dead:			"0x840500",
-                    enemy_blowedup:		"0x5A0401"
+                    ally_alive:          "0x96FF00",
+                    ally_dead:           "0x009900",
+                    ally_blowedup:       "0x007700",
+                    squadman_alive:      "0xFFB964",
+                    squadman_dead:       "0xCA7000",
+                    squadman_blowedup:   "0xA45A00",
+                    teamKiller_alive:    "0x00EAFF",
+                    teamKiller_dead:     "0x097783",
+                    teamKiller_blowedup: "0x096A75",
+                    enemy_alive:         "0xF50800",
+                    enemy_dead:          "0x840500",
+                    enemy_blowedup:      "0x5A0401"
                 },
                 // src: ally, squadman, enemy, unknown, player
                 // dst: ally, squadman, allytk, enemytk, enemy
                 damage: {
-                    ally_ally_hit:		"0x00EAFF",
-                    ally_ally_kill:		"0x00EAFF",
-                    ally_ally_blowup:		"0x00EAFF",
-                    ally_squadman_hit:		"0x00EAFF",
-                    ally_squadman_kill:		"0x00EAFF",
-                    ally_squadman_blowup:	"0x00EAFF",
-                    ally_enemy_hit:		"0xF50800",
-                    ally_enemy_kill:		"0xF50800",
-                    ally_enemy_blowup:		"0xF50800",
-                    ally_allytk_hit:		"0x00EAFF",
-                    ally_allytk_kill:		"0x00EAFF",
-                    ally_allytk_blowup:		"0x00EAFF",
-                    ally_enemytk_hit:		"0xF50800",
-                    ally_enemytk_kill:		"0xF50800",
-                    ally_enemytk_blowup:	"0xF50800",
-                    squadman_ally_hit:		"0x00EAFF",
-                    squadman_ally_kill:		"0x00EAFF",
-                    squadman_ally_blowup:	"0x00EAFF",
-                    squadman_squadman_hit:	"0x00EAFF",
-                    squadman_squadman_kill:	"0x00EAFF",
-                    squadman_squadman_blowup:	"0x00EAFF",
-                    squadman_enemy_hit:		"0xF50800",
-                    squadman_enemy_kill:	"0xF50800",
-                    squadman_enemy_blowup:	"0xF50800",
-                    squadman_allytk_hit:	"0x00EAFF",
-                    squadman_allytk_kill:	"0x00EAFF",
-                    squadman_allytk_blowup:	"0x00EAFF",
-                    squadman_enemytk_hit:	"0xF50800",
-                    squadman_enemytk_kill:	"0xF50800",
-                    squadman_enemytk_blowup:	"0xF50800",
-                    enemy_ally_hit:		"0x96FF00",
-                    enemy_ally_kill:		"0x96FF00",
-                    enemy_ally_blowup:		"0x96FF00",
-                    enemy_squadman_hit:		"0xFFB964",
-                    enemy_squadman_kill:	"0xFFB964",
-                    enemy_squadman_blowup:	"0xFFB964",
-                    enemy_enemy_hit:		"0xF50800",
-                    enemy_enemy_kill:		"0xF50800",
-                    enemy_enemy_blowup:		"0xF50800",
-                    enemy_allytk_hit:		"0x96FF00",
-                    enemy_allytk_kill:		"0x96FF00",
-                    enemy_allytk_blowup:	"0x96FF00",
-                    enemy_enemytk_hit:		"0xF50800",
-                    enemy_enemytk_kill:		"0xF50800",
-                    enemy_enemytk_blowup:	"0xF50800",
-                    unknown_ally_hit:		"0x96FF00",
-                    unknown_ally_kill:		"0x96FF00",
-                    unknown_ally_blowup:	"0x96FF00",
-                    unknown_squadman_hit:	"0xFFB964",
-                    unknown_squadman_kill:	"0xFFB964",
-                    unknown_squadman_blowup:	"0xFFB964",
-                    unknown_enemy_hit:		"0xF50800",
-                    unknown_enemy_kill:		"0xF50800",
-                    unknown_enemy_blowup:	"0xF50800",
-                    unknown_allytk_hit:		"0x96FF00",
-                    unknown_allytk_kill:	"0x96FF00",
-                    unknown_allytk_blowup:	"0x96FF00",
-                    unknown_enemytk_hit:	"0xF50800",
-                    unknown_enemytk_kill:	"0xF50800",
-                    unknown_enemytk_blowup:	"0xF50800",
-                    player_ally_hit:		"0xFFDD33",
-                    player_ally_kill:		"0xFFDD33",
-                    player_ally_blowup:		"0xFFDD33",
-                    player_squadman_hit:	"0xFFDD33",
-                    player_squadman_kill:	"0xFFDD33",
-                    player_squadman_blowup:	"0xFFDD33",
-                    player_enemy_hit:		"0xFFDD33",
-                    player_enemy_kill:		"0xFFDD33",
-                    player_enemy_blowup:	"0xFFDD33",
-                    player_allytk_hit:		"0xFFDD33",
-                    player_allytk_kill:		"0xFFDD33",
-                    player_allytk_blowup:	"0xFFDD33",
-                    player_enemytk_hit:		"0xFFDD33",
-                    player_enemytk_kill:	"0xFFDD33",
-                    player_enemytk_blowup:	"0xFFDD33"
+                    ally_ally_hit:            "0x00EAFF",
+                    ally_ally_kill:           "0x00EAFF",
+                    ally_ally_blowup:         "0x00EAFF",
+                    ally_squadman_hit:        "0x00EAFF",
+                    ally_squadman_kill:       "0x00EAFF",
+                    ally_squadman_blowup:     "0x00EAFF",
+                    ally_enemy_hit:           "0xF50800",
+                    ally_enemy_kill:          "0xF50800",
+                    ally_enemy_blowup:        "0xF50800",
+                    ally_allytk_hit:          "0x00EAFF",
+                    ally_allytk_kill:         "0x00EAFF",
+                    ally_allytk_blowup:       "0x00EAFF",
+                    ally_enemytk_hit:         "0xF50800",
+                    ally_enemytk_kill:        "0xF50800",
+                    ally_enemytk_blowup:      "0xF50800",
+                    squadman_ally_hit:        "0x00EAFF",
+                    squadman_ally_kill:       "0x00EAFF",
+                    squadman_ally_blowup:     "0x00EAFF",
+                    squadman_squadman_hit:    "0x00EAFF",
+                    squadman_squadman_kill:   "0x00EAFF",
+                    squadman_squadman_blowup: "0x00EAFF",
+                    squadman_enemy_hit:       "0xF50800",
+                    squadman_enemy_kill:      "0xF50800",
+                    squadman_enemy_blowup:    "0xF50800",
+                    squadman_allytk_hit:      "0x00EAFF",
+                    squadman_allytk_kill:     "0x00EAFF",
+                    squadman_allytk_blowup:   "0x00EAFF",
+                    squadman_enemytk_hit:     "0xF50800",
+                    squadman_enemytk_kill:    "0xF50800",
+                    squadman_enemytk_blowup:  "0xF50800",
+                    enemy_ally_hit:           "0x96FF00",
+                    enemy_ally_kill:          "0x96FF00",
+                    enemy_ally_blowup:        "0x96FF00",
+                    enemy_squadman_hit:       "0xFFB964",
+                    enemy_squadman_kill:      "0xFFB964",
+                    enemy_squadman_blowup:    "0xFFB964",
+                    enemy_enemy_hit:          "0xF50800",
+                    enemy_enemy_kill:         "0xF50800",
+                    enemy_enemy_blowup:       "0xF50800",
+                    enemy_allytk_hit:         "0x96FF00",
+                    enemy_allytk_kill:        "0x96FF00",
+                    enemy_allytk_blowup:      "0x96FF00",
+                    enemy_enemytk_hit:        "0xF50800",
+                    enemy_enemytk_kill:       "0xF50800",
+                    enemy_enemytk_blowup:     "0xF50800",
+                    unknown_ally_hit:         "0x96FF00",
+                    unknown_ally_kill:        "0x96FF00",
+                    unknown_ally_blowup:      "0x96FF00",
+                    unknown_squadman_hit:     "0xFFB964",
+                    unknown_squadman_kill:    "0xFFB964",
+                    unknown_squadman_blowup:  "0xFFB964",
+                    unknown_enemy_hit:        "0xF50800",
+                    unknown_enemy_kill:       "0xF50800",
+                    unknown_enemy_blowup:     "0xF50800",
+                    unknown_allytk_hit:       "0x96FF00",
+                    unknown_allytk_kill:      "0x96FF00",
+                    unknown_allytk_blowup:    "0x96FF00",
+                    unknown_enemytk_hit:      "0xF50800",
+                    unknown_enemytk_kill:     "0xF50800",
+                    unknown_enemytk_blowup:   "0xF50800",
+                    player_ally_hit:          "0xFFDD33",
+                    player_ally_kill:         "0xFFDD33",
+                    player_ally_blowup:       "0xFFDD33",
+                    player_squadman_hit:      "0xFFDD33",
+                    player_squadman_kill:     "0xFFDD33",
+                    player_squadman_blowup:   "0xFFDD33",
+                    player_enemy_hit:         "0xFFDD33",
+                    player_enemy_kill:        "0xFFDD33",
+                    player_enemy_blowup:      "0xFFDD33",
+                    player_allytk_hit:        "0xFFDD33",
+                    player_allytk_kill:       "0xFFDD33",
+                    player_allytk_blowup:     "0xFFDD33",
+                    player_enemytk_hit:       "0xFFDD33",
+                    player_enemytk_kill:      "0xFFDD33",
+                    player_enemytk_blowup:    "0xFFDD33"
                 },
                 dmg_kind: {
-                    attack: "0xFFAA55",
-                    fire: "0xFF6655",
-                    ramming: "0x998855",
+                    attack:          "0xFFAA55",
+                    fire:            "0xFF6655",
+                    ramming:         "0x998855",
                     world_collision: "0x998855",
-                    other: "0xCCCCCC"
+                    other:           "0xCCCCCC"
                 },
                 vtype: {
                     LT:  "0xA2FF9A",        // Color for light tanks
@@ -758,19 +762,19 @@ public class DefaultConfig
                     { value: 999, color: ColorPalette.purple }    // 92.5 - XX   - unique     (better then 99.9% of players)
                 ],
                 eff: [
-                    { value: 645,  color: ColorPalette.red },     // very bad
-                    { value: 875,  color: ColorPalette.orange },  // bad
-                    { value: 1155, color: ColorPalette.yellow },  // normal
-                    { value: 1470, color: ColorPalette.green },   // good
-                    { value: 1740, color: ColorPalette.blue },    // very good
+                    { value: 630,  color: ColorPalette.red },     // very bad
+                    { value: 860,  color: ColorPalette.orange },  // bad
+                    { value: 1140, color: ColorPalette.yellow },  // normal
+                    { value: 1460, color: ColorPalette.green },   // good
+                    { value: 1735, color: ColorPalette.blue },    // very good
                     { value: 9999, color: ColorPalette.purple }   // unique
                 ],
                 wn: [
-                    { value: 435,  color: ColorPalette.red },     // very bad
-                    { value: 805,  color: ColorPalette.orange },  // bad
-                    { value: 1200, color: ColorPalette.yellow },  // normal
-                    { value: 1595, color: ColorPalette.green },   // good
-                    { value: 1900, color: ColorPalette.blue },    // very good
+                    { value: 425,  color: ColorPalette.red },     // very bad
+                    { value: 795,  color: ColorPalette.orange },  // bad
+                    { value: 1175, color: ColorPalette.yellow },  // normal
+                    { value: 1570, color: ColorPalette.green },   // good
+                    { value: 1885, color: ColorPalette.blue },    // very good
                     { value: 9999, color: ColorPalette.purple }   // unique
                 ],
                 rating: [
@@ -790,7 +794,6 @@ public class DefaultConfig
                     { value: 101, color: ColorPalette.purple }    // unique
                 ],
                 e: [
-                    { value: 0.1,  color: ColorPalette.white },
                     { value: 2,    color: ColorPalette.red },     // very bad
                     { value: 4,    color: ColorPalette.orange },  // bad
                     { value: 5,    color: ColorPalette.yellow },  // normal
@@ -815,13 +818,11 @@ public class DefaultConfig
                     { value: 99999, color: ColorPalette.purple }
                 ],
                 tdb: [
-                    { value: 1,    color: ColorPalette.white },
                     { value: 500,  color: ColorPalette.red },
                     { value: 1000, color: ColorPalette.yellow },
                     { value: 2000, color: ColorPalette.green }
                 ],
                 tdv: [
-                    { value: 0.1,  color: ColorPalette.white },
                     { value: 0.6,  color: ColorPalette.red },
                     { value: 0.8,  color: ColorPalette.orange },
                     { value: 1.0,  color: ColorPalette.yellow },
@@ -830,7 +831,6 @@ public class DefaultConfig
                     { value: 15,   color: ColorPalette.purple }
                 ],
                 tfb: [
-                    { value: 0.1,  color: ColorPalette.white },
                     { value: 0.6,  color: ColorPalette.red },
                     { value: 0.8,  color: ColorPalette.orange },
                     { value: 1.0,  color: ColorPalette.yellow },
@@ -839,7 +839,6 @@ public class DefaultConfig
                     { value: 15,   color: ColorPalette.purple }
                 ],
                 tsb: [
-                    { value: 0.1,  color: ColorPalette.white },
                     { value: 0.6,  color: ColorPalette.red },
                     { value: 0.8,  color: ColorPalette.orange },
                     { value: 1.0,  color: ColorPalette.yellow },
@@ -869,15 +868,15 @@ public class DefaultConfig
                     { value: 9999, alpha: 40 }
                 ],
                 eff: [
-                    { value: 900,  alpha: 100 },
-                    { value: 1200, alpha: 80 },
-                    { value: 1500, alpha: 60 },
+                    { value: 860,  alpha: 100 },
+                    { value: 1140, alpha: 80 },
+                    { value: 1460, alpha: 60 },
                     { value: 9999, alpha: 40 }
                 ],
                 wn: [
-                    { value: 900,  alpha: 100 },
-                    { value: 1200, alpha: 80 },
-                    { value: 1500, alpha: 60 },
+                    { value: 795,  alpha: 100 },
+                    { value: 1175, alpha: 80 },
+                    { value: 1570, alpha: 60 },
                     { value: 9999, alpha: 40 }
                 ],
                 rating: [

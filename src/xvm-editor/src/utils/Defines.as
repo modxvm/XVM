@@ -8,10 +8,13 @@ package utils
 public final class Defines
 {
     // Global versions
-    public static const XVM_VERSION: String = "4.0.0";
-    public static const WOT_VERSION: String = "0.8.6";
+    public static const XVM_VERSION: String = "4.1.0";
+    public static const WOT_VERSION: String = "0.8.7";
     public static const CONFIG_VERSION: String = "4.0.0";
-    public static const EDITOR_VERSION: String = "0.58";
+    public static const EDITOR_VERSION: String = "0.59";
+
+    // Locale
+    public static var LOCALE_AUTO_DETECTION:String = "auto";
 
     // Dynamic color types
     public static const DYNAMIC_COLOR_EFF: Number = 1;

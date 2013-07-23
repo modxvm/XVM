@@ -86,6 +86,9 @@ private function RefreshCommonPage():void
         this.p_definition.v_gameVersion.value = section.gameVersion;
         this.p_definition.v_modMinVersion.value = section.modMinVersion;
 
+        section = Config.s_config.language;
+        this.p_language.v_language.value = section;
+
         section = Config.s_config.rating;
         this.p_rating.v_showPlayersStatistics.value = section.showPlayersStatistics;
         this.p_rating.v_enableUserInfoStatistics.value = section.enableUserInfoStatistics;
@@ -151,6 +154,7 @@ private function RefreshHangarPage():void
         section = Config.s_config.hangar;
         this.p_hangar.v_hideTutorial.value = section.hideTutorial;
         this.p_hangar.v_xwnInCompany.value = section.xwnInCompany;
+        this.p_hangar.v_widgetsEnabled.value = section.widgetsEnabled;
 
         section = Config.s_config.userInfo;
         this.p_hangar.v_showFilters.value = section.showFilters;

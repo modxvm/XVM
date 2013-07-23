@@ -7,6 +7,7 @@
     title="{_('PHangar')}">
     <c:LabeledCheckBox label="{_('hideTutorial')}" id="v_hideTutorial" config="hangar.hideTutorial" change="onChange(event)"/>
     <c:LabeledCheckBox label="{_('xwnInCompany')}" id="v_xwnInCompany" config="hangar.xwnInCompany" change="onChange(event)"/>
+    <c:LabeledCheckBox label="{_('widgetsEnabled')}" id="v_widgetsEnabled" config="hangar.widgetsEnabled" change="onChange(event)"/>
 
     <s:Label text="{_('UserInfo')}:" width="100%" height="20" fontWeight="bold" paddingLeft="5" verticalAlign="middle" backgroundColor="0xCCCCCC"/>
     <c:LabeledCheckBox label="{_('showFilters')}" id="v_showFilters" config="userInfo.showFilters" change="onChange(event)"/>
