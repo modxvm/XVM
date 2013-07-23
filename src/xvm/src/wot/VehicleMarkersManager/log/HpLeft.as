@@ -136,7 +136,7 @@ class wot.VehicleMarkersManager.log.HpLeft
                 format = formatArr.join(GraphicsUtil.GetDynamicAlphaValue(Defines.DYNAMIC_ALPHA_HP_RATIO,
 										Math.round(player.curHealth / player.maxHealth * 100)).toString());						
 										
-            format = Utils.trim(format);
+            //format = Utils.trim(format);
         }
         catch (e)
         {
