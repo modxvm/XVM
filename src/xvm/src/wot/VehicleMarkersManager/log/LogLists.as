@@ -25,7 +25,7 @@ class wot.VehicleMarkersManager.log.LogLists
         }
         if (cfg.hpLeft)
         {
-            hpLeft = new HpLeft();
+            hpLeft = new HpLeft(cfg);
         }
         updateText();
         GlobalEventDispatcher.addEventListener(VMMEvent.ALT_STATE_INFORM, this, onAltStateInform);
