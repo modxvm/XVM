@@ -11,6 +11,9 @@ class com.xvm.Defines
     public static var CONFIG_VERSION:String = "4.0.0";
     public static var EDITOR_VERSION:String = "0.57";
 
+    // Locale
+    public static var LOCALE_AUTO_DETECTION:String = "auto";
+
     // res_mods/xvm/
     public static var XVM_ROOT:String = "../../../xvm/";
 

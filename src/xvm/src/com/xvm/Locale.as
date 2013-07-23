@@ -15,8 +15,6 @@ import net.wargaming.managers.Localization;
 
 class com.xvm.Locale
 {
-    public static var AUTO_DETECTION:String = "auto";
-
     private static var s_lang:Object;
     private static var s_lang_fallback:Object = {};
     private static var _language:String;
@@ -31,7 +29,7 @@ class com.xvm.Locale
         if (_initialized) return;
         _initialized = true;
 
-        if (Config.s_config.language == AUTO_DETECTION) {
+        if (Config.s_config.language == Defines.LOCALE_AUTO_DETECTION) {
             getLanguageFromGettext();
 
         }else {

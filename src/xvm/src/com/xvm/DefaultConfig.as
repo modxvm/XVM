@@ -21,7 +21,7 @@ class com.xvm.DefaultConfig
                 gameVersion: Defines.WOT_VERSION,
                 modMinVersion: Defines.XVM_VERSION
             },
-            language: Locale.AUTO_DETECTION,
+            language: Defines.LOCALE_AUTO_DETECTION,
             login: {
                 // Show ping to the servers
                 pingServers: {
