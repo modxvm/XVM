@@ -90,6 +90,8 @@ class wot.battle.BattleMain
 
     function showPostmortemTips(movingUpTime, showTime, movingDownTime)
     {
+        GlobalEventDispatcher.dispatchEvent( { type: "self_dead" } );
+
         //Logger.add("Battle::showPostmortemTips");
         if (Config.s_config.battle.showPostmortemTips)
             _root.showPostmortemTips(movingUpTime, showTime, movingDownTime);
