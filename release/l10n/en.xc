@@ -74,7 +74,7 @@
 
     // Squad
     "Vehicle": "Vehicle",
-    "Battle tiers": "Уровень боёв",
+    "Battle tiers": "Battle tiers",
     "ussr": "USSR",
     "germany": "Germany",
     "usa": "USA",
