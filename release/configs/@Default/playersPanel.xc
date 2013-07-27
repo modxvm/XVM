@@ -26,7 +26,9 @@
       "alpha": 90
     },
     // Enemy spotted status marker at right side panel.
+    // This feature depends on enabled XVM minimap mod
     // Маркер статуса засвета в правой боковой панели списка игроков.
+    // Фича зависит от включенного XVM мода миникарты
     "enemySpottedMarker": {
       // false - Disable.
       // false - отключить.
