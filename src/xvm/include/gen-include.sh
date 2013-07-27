@@ -1,3 +1,3 @@
 #!/bin/bash
 
-mono ../../../addons/mono-igen/IGen.exe -clean ../src .
+mono ../../../addons/build-linux/IGen.exe -clean ../src .

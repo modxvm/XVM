@@ -1,6 +1,6 @@
 #!/bin/bash
 
-files=(
+projects=(
         'battle'
         'battleloading'
         'crew'
@@ -16,16 +16,18 @@ files=(
         'TeamRenderer'
 	'UserInfo'
         'VehicleMarkersManager'
+        'xvm'
        )
-mkdir temp
+pushd ../src/xvm/include && ./gen-include.sh 
+popd
+pushd ../src/xvm/swf     && ./1.make-patched-swfs.sh 
+popd
 
-for (( i=0; i<${#files[@]}; i++ ));
+pushd ../src/xvm
+
+for (( i=0; i<${#projects[@]}; i++ ));
   do
-    swfmill swf2xml orig/${files[$i]}.swf temp/${files[$i]}.xml
-    patch temp/${files[$i]}.xml ${files[$i]}.xml.patch
-    swfmill xml2swf temp/${files[$i]}.xml ${files[$i]}.swf
+    mono ../../addons/build-linux/fdbuild.exe ${projects[$i]}.as2proj -version "1.14" -notrace
   done
 
-rm -f *.xml.orig
-cp -f temp/*.rej . 2>/dev/null
-rm -rf temp
+popd
