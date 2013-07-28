@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#XVM .swf patcher for Linux
+#Part of XVM build system
+#Do not change anything in this file if you are not sure
+
 files=(
         'battle'
         'battleloading'
@@ -17,6 +21,8 @@ files=(
 	'UserInfo'
         'VehicleMarkersManager'
        )
+
+pushd ../../../src/xvm/swf/
 mkdir temp
 
 for (( i=0; i<${#files[@]}; i++ ));
@@ -28,4 +34,4 @@ for (( i=0; i<${#files[@]}; i++ ));
 
 rm -f *.xml.orig
 cp -f temp/*.rej . 2>/dev/null
-rm -rf temp
+rm -rf temp/

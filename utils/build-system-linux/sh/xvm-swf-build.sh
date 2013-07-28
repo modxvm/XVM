@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#XVM .swf builder for Linux
+#Part of XVM build system
+#Do not change anything in this file if you are not sure
+
 projects=(
         'battle'
         'battleloading'
@@ -18,16 +22,12 @@ projects=(
         'VehicleMarkersManager'
         'xvm'
        )
-pushd ../src/xvm/include && ./gen-include.sh 
-popd
-pushd ../src/xvm/swf     && ./1.make-patched-swfs.sh 
-popd
 
-pushd ../src/xvm
+pushd ../../../src/xvm/
 
 for (( i=0; i<${#projects[@]}; i++ ));
   do
-    mono ../../addons/build-linux/fdbuild.exe ${projects[$i]}.as2proj -version "1.14" -notrace
+    mono ../../utils/build-system-linux/bin/fdbuild.exe ${projects[$i]}.as2proj -version "1.14" -notrace
   done
 
 popd
