@@ -41,12 +41,14 @@ class com.xvm.VehicleInfoDataL10n
     {
         _localizedNameList = new Object();
 
-        // <280ms
+        // ~30ms
         for (var tankKey:String in VehicleInfoData2.data) {
-            var nation:String = (VehicleInfoData2.data[tankKey].nation == "uk" ? "gb" : VehicleInfoData2.data[tankKey].nation);
-            var tmp:String = Localization.makeString("#" + nation + "_vehicles:" + VehicleInfoData2.data[tankKey].name, { } );
-            var tmpShort:String = Localization.makeString("#" + nation + "_vehicles:" + VehicleInfoData2.data[tankKey].name + "_short", { } );
-            _localizedNameList[tmp] = _localizedNameList[tmpShort] = tankKey;
+            var transKey = VehicleInfoData2.data[tankKey].translationKey;
+            if (transKey == null)
+                continue;
+
+            var name:String = Localization.makeString(transKey, { } );
+            _localizedNameList[name] = tankKey;
         }
     }
 }

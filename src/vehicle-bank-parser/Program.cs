@@ -62,6 +62,14 @@ class Program
                     if (price == null)
                         continue;
 
+                    XmlNode shortUserString = node.SelectSingleNode("shortUserString");
+                    if (shortUserString == null)
+                    {
+                        shortUserString = node.SelectSingleNode("userString");
+                        if (shortUserString == null)
+                            continue;
+                    }
+
                     XmlNode vdata = decode(Path.Combine(Settings.Default.GAME_PATH,
                         Settings.Default.VEHICLE_DIR_PATH, country, node.Name + ".xml"));
                     if (vdata == null)
@@ -76,6 +84,7 @@ class Program
                         level = int.Parse(level.InnerText),
                         type = getVehicleType(tags.InnerText),
                         premium = price.InnerXml.ToLower().Contains("<gold>"),
+                        shortUserString = shortUserString.InnerText,
                     };
                     vehicles.Add(vehicle);
                 }

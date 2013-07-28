@@ -34,6 +34,7 @@ class Vehicle
     public int hpstock;
     public int hptop;
     public short status;
+    public string shortUserString;
 
     /*
      * Tanks are subset of Vehicles.
@@ -81,17 +82,19 @@ class Vehicle
 
     public string ToAS2tring()
     {
-      return (String.Format("{0} {{ {1}{2}{3}{4}{5}turret: {6}, premium: {7}, {8}name: \"{9}\" }}",
+      return (String.Format("{0} {{ {1}{2}{3}{4}{5}{6}{7}{8}{9}{10} }}",
         (name.Replace("-", "_").ToLower() + ":").PadRight(27),
         String.Format("id: {0},", tankId).PadRight(9),
         String.Format("level: {0},", level).PadRight(11),
         String.Format("type: \"{0}\", ", type).PadRight(13),
         String.Format("hpstock: {0}, ", hpstock).PadRight(15),
         String.Format("hptop: {0}, ", hptop).PadRight(13),
-        status,
-        (premium ? "1" : "0"),
+        String.Format("turret: {0}, ", status),
+        String.Format("premium: {0}, ", (premium ? "1" : "0")),
         String.Format("nation: \"{0}\", ", nation).PadRight(19),
-        name));
+        String.Format("name: \"{0}\", ", name).PadRight(37),
+        String.Format("translationKey: \"{0}\"", shortUserString)
+        ));
     }
 
     public string ToJsonString()

@@ -53,7 +53,7 @@ class com.xvm.VehicleInfoData2
     */
 
     public static var data:Object = {
-        //vname: { level, type, hpstock, hptop, turret, premium, nation, name }");
+        //vname: { id, level, type, hpstock, hptop, turret, premium, nation, name, translationKey }");
   }
 
   private static void writeLines(StreamWriter file, List<Vehicle> vehList)
