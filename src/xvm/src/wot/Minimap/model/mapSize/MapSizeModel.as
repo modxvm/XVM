@@ -50,7 +50,7 @@ class wot.Minimap.model.mapSize.MapSizeModel
         if (!cellSide)
         {
             /** This can be seen only when map isn't set in MapInfoData */
-            Logger.add("Minimap ERROR: map no recognized");
+            Logger.add("Minimap ERROR: map not recognized");
         }
     }
 }
