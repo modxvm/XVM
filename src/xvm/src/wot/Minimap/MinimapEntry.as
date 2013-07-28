@@ -28,8 +28,9 @@ class wot.Minimap.MinimapEntry
     /////////////////////////////////////////////////////////////////
     // wrapped methods
     
-    public static var STATIC_ICON_BASE:String = "base"; /** Team colored capture base and a start point */
+    public static var STATIC_ICON_BASE:String = "base"; /** Team colored capture base */
     public static var STATIC_ICON_CONTROL:String = "control"; /** Shared grey capture base */
+    public static var STATIC_ICON_SPAWN:String = "spawn"; /** Spawn point. Diamond shaped with number at center. */
 
     public var wrapper:net.wargaming.ingame.MinimapEntry;
     private var base:net.wargaming.ingame.MinimapEntry;

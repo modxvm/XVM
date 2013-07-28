@@ -66,7 +66,8 @@ class wot.Minimap.view.MarkerScaling
                      * Skip them.
                      */
                     if (entry.entryName != MinimapEntry.STATIC_ICON_BASE &&
-                        entry.entryName != MinimapEntry.STATIC_ICON_CONTROL)
+                        entry.entryName != MinimapEntry.STATIC_ICON_CONTROL &&
+                        entry.entryName != MinimapEntry.STATIC_ICON_SPAWN)
                     {
                         entry._xscale = entry._yscale = scaleFactor;
                     }
