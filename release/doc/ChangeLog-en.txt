@@ -1,4 +1,10 @@
-﻿XVM-4.1.0:
+﻿﻿XVM-dev:
+  [NEW FUNCTIONS]
+  * localization: new Germand and Polish translations
+  [OTHER]
+  * automation: XVM nightly builds.
+
+XVM-4.1.0:
   [NEW FUNCTIONS]
   * new options:
     login/pingServers/showPingOnGameLoading - show ping during game loading, before login screen

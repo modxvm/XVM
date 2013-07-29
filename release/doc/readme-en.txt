@@ -59,6 +59,9 @@
     change the value of the variable "language" from "auto" to the language code.
     The language code must match the name of the file in the \res_mods\xvm\l10n\ (for example, "en").
 
+  4. There is possibility to install nightly builds of XVM.
+    You can download nightly builds on http://wargaming.by-reservation.com/xvm/
+
 -----------------------------------------------------------
 3. UPDATE
 -----------------------------------------------------------
