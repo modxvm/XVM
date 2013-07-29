@@ -6,7 +6,7 @@
 
 #1. Detect revision
 pushd ../../
-revision=$(svn up | tail -1 | sed 's/[A-Za-zА-Яа-я.]*//g' | sed 's/^[ \t]*//g') #locale-independent magic
+revision=$(svnversion | head -c 4)
 popd
 
 #2. Detect WoT version
