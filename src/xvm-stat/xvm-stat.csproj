@@ -116,8 +116,8 @@
     <Compile Include="Pickle\PythonException.cs" />
     <Compile Include="Pickle\Unpickler.cs" />
     <Compile Include="Pickle\UnpickleStack.cs" />
-    <Compile Include="Sqlite\SQLiteDatabase.cs" />
-    <Compile Include="Sqlite\SQLiteVdbe.cs" />
+    <Compile Include="SQLite\SQLiteDatabase.cs" />
+    <Compile Include="SQLite\SQLiteVdbe.cs" />
     <Compile Include="UpdateStatThread.cs" />
     <Compile Include="Dokan\DokanNet.cs" />
     <Compile Include="Dokan\DokanOperations.cs" />
@@ -162,7 +162,7 @@
     <Content Include="readme-ru.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="Sqlite\Community.CsharpSqlite.dll" />
+    <EmbeddedResource Include="SQLite\Community.CsharpSqlite.dll" />
     <Content Include="WoT.ico" />
   </ItemGroup>
   <ItemGroup>
