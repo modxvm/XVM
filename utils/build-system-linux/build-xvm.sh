@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#XVM nightly builder for Linux
+#XVM builder for Linux
 #Part of XVM build system
 #Do not change anything in this file if you are not sure
 
