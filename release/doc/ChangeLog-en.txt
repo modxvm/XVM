@@ -1,6 +1,6 @@
 ﻿﻿XVM-dev:
   [NEW FUNCTIONS]
-  * localization: added German, Hungarian, Korean and Polish translations
+  * localization: added German, Hungarian, Korean, Polish and Spanish translations
   [OTHER]
   * automation: XVM nightly builds.
 
