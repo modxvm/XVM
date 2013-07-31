@@ -24,6 +24,7 @@ projects=(
        )
 
 pushd ../../../src/xvm/
+PATH=$PATH:../../utils/build-system-linux/bin/
 
 for (( i=0; i<${#projects[@]}; i++ ));
   do

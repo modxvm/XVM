@@ -64,7 +64,7 @@
     <hidden path="wrapper\wot\wrapper\VehicleMarkersManager" />
   </hiddenPaths>
   <!-- Executed before build -->
-  <preBuildCommand />
+  <preBuildCommand>IGen.exe -clean src include</preBuildCommand>
   <!-- Executed after build -->
   <postBuildCommand alwaysRun="False" />
   <!-- Other project options -->
