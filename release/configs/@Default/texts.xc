@@ -8,15 +8,15 @@
     // Текст для макроса {{vtype}}.
     "vtype": {
       // Text for light tanks / Текст для легких танков.
-      "LT":  "ЛТ",
+      "LT":  "LT",
       // Text for medium tanks / Текст для средних танков.
-      "MT":  "СТ",
+      "MT":  "MT",
       // Text for heavy tanks / Текст для тяжелых танков.
-      "HT":  "ТТ",
+      "HT":  "HT",
       // Text for arty / Текст для арты.
-      "SPG": "АРТ",
+      "SPG": "SPG",
       // Text for tank destroyers / Текст для ПТ.
-      "TD":  "ПТ"
+      "TD":  "TD"
     }
   }
 }
