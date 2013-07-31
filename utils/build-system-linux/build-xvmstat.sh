@@ -19,10 +19,10 @@ mkdir -p ../../bin
 rm -rf ../../bin/*
 
 #4. Build zips
-pushd ../../src/xvm-stat/bin/Release/ && zip -9 -r "$revision".zip ./ && popd
+pushd ../../src/xvm-stat/bin/Release/ && zip -9 -r "$revision"_xvmstat.zip ./ && popd
 
 #5. Move&Clean
-mv -f ../../src/xvm-stat/bin/Release/"$revision".zip ../../bin/
+mv -f ../../src/xvm-stat/bin/Release/"$revision"_xvmstat.zip ../../bin/
 
 rm -rf ../../src/xvm-stat/bin/*
 rm -rf ../../src/xvm-stat/obj/*
