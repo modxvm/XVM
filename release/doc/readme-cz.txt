@@ -58,6 +58,14 @@
     Pokud budete ručně měnit soubor nastavení, použijte Poznámkový blok,
     NEPOUŽÍVEJTE Word, WordPad ani další podobné editory.
 
+  3. Pokud XVM nerozpozná jazyk vašeho herního klienta,
+    můžete pomocí konfiguračního souboru (by default\res_mods\xvm\configs\@default\@xvm.xc),
+    změnit hodnotu "language" z "auto" na jazykový kód.
+    Jazykový kód se musí shodovat s názvem souboru ve složce \res_mods\xvm\l10n\ (for example, "en").
+
+  4. Je tu možnost používání "nočních" verzí XVM.
+    Tyto verze jsou vytvořeny automaticky z aktuálního zdrojového kódu, nemusí být testovány a mohou obsahovat chyby!
+    Stahovat je můžete ze stránek http://wargaming.by-reservation.com/xvm/
 
 -----------------------------------------------------------
 3. Aktualizace
