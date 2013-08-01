@@ -13,12 +13,12 @@ class wot.VehicleMarkersManager.log.HpLeft
 {
     private var model:Array = [];
     private var formatHpLeft:String;
-	private var defaultHeaderHpLeft:String;
+	private var headerHpLeft:String;
 	
     public function HpLeft(cfg:Object)
     {
-		formatHpLeft = cfg.formatHpLeft;
-		defaultHeaderHpLeft = cfg.defaultHeaderHpLeft;
+		formatHpLeft = cfg.format;
+		headerHpLeft = cfg.header;
 	}		
 	
     public function onNewMarkerCreated(player:Object):Void
@@ -46,7 +46,7 @@ class wot.VehicleMarkersManager.log.HpLeft
     
     public function getText():String
     {
-        var text:String = "<span class='" + HitLog.STYLE_NAME + "'>" + defaultHeaderHpLeft;
+        var text:String = "<span class='" + HitLog.STYLE_NAME + "'>" + headerHpLeft + (headerHpLeft ? "<br/>" : "") ;
         for (var i in model)
         {
             var player = model[i];

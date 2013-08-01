@@ -23,9 +23,9 @@ class wot.VehicleMarkersManager.log.LogLists
         {
             hitLog = new HitLog(cfg);
         }
-        if (cfg.hpLeft)
+        if (cfg.hpLeft.enabled)
         {
-            hpLeft = new HpLeft(cfg);
+            hpLeft = new HpLeft(cfg.hpLeft);
         }
         updateText();
         GlobalEventDispatcher.addEventListener(VMMEvent.ALT_STATE_INFORM, this, onAltStateInform);
@@ -65,7 +65,7 @@ class wot.VehicleMarkersManager.log.LogLists
     /** Show prepared Hitlog or HP log text depending on cfg and Alt button */
     private function updateText():Void
     {
-        if (altPressed && cfg.hpLeft)
+        if (altPressed && cfg.hpLeft.enabled)
         {
             hitLog.setHpText(hpLeft.getText());
         }

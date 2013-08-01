@@ -152,6 +152,23 @@
       {{c:dmg-kind}}  - color depended from damage kind
       {{c:vtype}}     - color depended from vehicle type
 
+    In HP Left:
+      {{nick}}        - player nickname with clan name
+      {{name}}        - player nickname without clan name
+      {{clan}}        - clan name with brackets (empty if no clan)
+      {{clannb}}      - clan name without brackets
+      {{vehicle}}     - vehicle name
+      {{vehiclename}} - internal vehicle name (usa-M24_Chaffee)
+      {{vtype}}       - vehicle type
+      {{level}}       - vehicle level (Arabic numerals)
+      {{rlevel}}      - vehicle level (Roman numerals)
+      {{hp}}          - current health points
+      {{hp-ratio}}    - current health ratio (without '%' sign)
+      {{hp-max}}      - maximum health points
+      {{c:vtype}}     - color depended from vehicle type
+      {{c:hp}}        - color depended from current health points
+      {{c:hp-ratio}}  - color depended from current health ratio
+
     In Capture bar:
       {{points}}      - points already capture
       {{extra}}       - extra text section; is shows only when timeleft and number of capturers was calculated successfully

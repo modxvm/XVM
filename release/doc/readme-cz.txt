@@ -142,7 +142,7 @@
       {{a:hp-ratio}}  - průhlednost závislá na poměru počtu aktuálního počtu životů k celkovému počtu životů (pouze v ikonách tanků)
       + makra statistik (více informací níže)
 
-    Záznam zásahů:
+    Záznam zásahů (hitLog):
       {{n}}           - celkový počet zásahů
       {{n-player}}    - počet zásahů pro každého hráče
       {{dmg}}         - velikost posledního zásahu
@@ -163,7 +163,24 @@
       {{c:dmg-kind}}  - barva závislá na typu poškození
       {{c:vtype}}     - barva závislá na typu vozidla (pouze v ikoně nad vozidlem)
 
-    Panel obsazování základny:
+    Panel zbývajicích HP nepřátel (hpLeft):
+      {{nick}}        - jméno hráče s tagu klanu
+      {{name}}        - jméno hráče bez tagu klanu
+      {{clan}}        - název klanu s tagem (prázdné, pokud není)
+      {{clannb}}      - název klanu bez tagu
+      {{vehicle}}     - název vozidla
+      {{vehiclename}} - interní název vozidla (usa-M24_Chaffee)
+      {{vtype}}       - typ vozidla
+      {{level}}       - úroveň (tier) vozidla (arabskými číslicemi)
+      {{rlevel}}      - úroveň (tier) vozidla (římskými číslicemi)
+      {{hp}}          - aktuální počet životů
+      {{hp-ratio}}    - aktuální počet životů v % (zobrazeno bez '%')
+      {{hp-max}}      - maximální počet životů
+      {{c:vtype}}     - barva závislá na typu vozidla
+      {{c:hp}}        - barva závislá na aktuálním počtu životů
+      {{c:hp-ratio}}  - barva závislá na poměru aktuálního počtu životů k celkovému počtu životů- v %
+
+    Panel obsazování základny (captureBar):
       {{points}}      - obsazené body
       {{extra}}       - zvláštní sekce; zobrazuje se tehdy, pokud byl spočítán zbývající čas a počet obsazujících
       {{tanks}}       - počet obsazujících; nelze určit více jak 3;	 může být použito pouze v sekci extra
