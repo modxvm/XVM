@@ -1,6 +1,11 @@
 ﻿﻿XVM-dev:
   [NEW FUNCTIONS]
   * localization: added German, Hungarian, Korean, Polish and Spanish translations
+
+  [FIXES]
+  * squad window: fixed missing info for some vehicles
+  * squad window: text field with vehicle tier no longer creates artefacts
+
   [OTHER]
   * automation: XVM nightly builds.
 
