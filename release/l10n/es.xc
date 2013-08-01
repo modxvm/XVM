@@ -46,7 +46,7 @@
     "unknown": "desconocido",
     "Avg level": "Nivel promedio",
     "Spotted": "Descubiertos",
-    "Defence": "Defenza",
+    "Defence": "Defensa",
     "Capture": "Captura",
     "player (average / top)": "Jugador (promedio / max.)",
     "Spec dmg": "Daño espec.",
