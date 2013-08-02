@@ -1,0 +1,18 @@
+Index: External/Tools/IGen/IGenMain.cs
+===================================================================
+--- External/Tools/IGen/IGenMain.cs	(revision 2726)
++++ External/Tools/IGen/IGenMain.cs	(working copy)
+@@ -312,13 +312,6 @@
+ 				return 3;
+ 			}
+ 
+-			// done
+-			Console.WriteLine("IGen: "+total+" classes processed");
+-			if (clean)
+-			{
+-				Console.WriteLine("      "+filesCleaned+" classes cleaned");
+-				Console.WriteLine("      "+foldersCleaned+" empty folders removed");
+-			}
+ 			return 0;
+ 		}
+ 	}

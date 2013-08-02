@@ -6,6 +6,6 @@
 
 rm -rf ../../../src/vehicle-bank-parser/builds/*
 
-pushd ../../../src/vehicle-bank-parser/
-xbuild VehicleBankParser.sln /p:Configuration="Release" /p:TargetFrameworkProfile=""
-popd
+pushd ../../../src/vehicle-bank-parser/ > /dev/null
+xbuild VehicleBankParser.sln /p:Configuration="Release" /p:TargetFrameworkProfile="" /verbosity:quiet
+popd > /dev/null

@@ -5,20 +5,20 @@
 #Do not change anything in this file if you are not sure
 
 #1. Detect revision
-pushd ../../
+pushd ../../ > /dev/null
 revision=$(svnversion | head -c 4)
-popd
+popd > /dev/null
 
 #2. Detect WoT version
-pushd config/
+pushd config/ > /dev/null
 wot_version_release=$(cat wot_version_release)
 wot_version_ct=$(cat wot_version_ct)
-popd
+popd > /dev/null
 
 #3. Build XVM
-pushd sh
+pushd sh > /dev/null
 ./xvm-build.sh
-popd
+popd > /dev/null
 
 #4. Make dirs
 mkdir -p ../../temp/rel/"$wot_version_release"/gui/flash
@@ -35,8 +35,8 @@ mv -f ../../temp/rel/xvm/xvm.xc.sample ../../temp/rel/xvm/xvm.xc
 mv -f ../../temp/ct/xvm/xvm.xc.sample ../../temp/ct/xvm/xvm.xc
 
 #6. Build zips
-pushd ../../temp/rel/ && zip -9 -r "$revision"_release.zip ./ && popd
-pushd ../../temp/ct/ && zip -9 -r "$revision"_ct.zip ./ && popd
+pushd ../../temp/rel/ > /dev/null && zip -9 -r -q "$revision"_release.zip ./ && popd > /dev/null
+pushd ../../temp/ct/ > /dev/null && zip -9 -r -q "$revision"_ct.zip ./ && popd > /dev/null
 
 #7. Move&Clean
 rm -rf ../../bin/*

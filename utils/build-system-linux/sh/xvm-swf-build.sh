@@ -23,7 +23,7 @@ projects=(
         'xvm'
        )
 
-pushd ../../../src/xvm/
+pushd ../../../src/xvm/ > /dev/null
 PATH=$PATH:../../utils/build-system-linux/bin/
 
 for (( i=0; i<${#projects[@]}; i++ ));
@@ -31,4 +31,4 @@ for (( i=0; i<${#projects[@]}; i++ ));
     mono ../../utils/build-system-linux/bin/fdbuild.exe ${projects[$i]}.as2proj -version "1.14" -notrace
   done
 
-popd
+popd > /dev/null

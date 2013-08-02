@@ -1,6 +1,56 @@
+Index: External/Tools/FDBuild/Building/ProjectBuilder.cs
+===================================================================
+--- External/Tools/FDBuild/Building/ProjectBuilder.cs	(revision 2726)
++++ External/Tools/FDBuild/Building/ProjectBuilder.cs	(working copy)
+@@ -67,7 +67,7 @@
+             {
+                 if (!noPreBuild && project.PreBuildEvent.Length > 0)
+                 {
+-                    Console.WriteLine("Running Pre-Build Command Line...");
++                    //Console.WriteLine("Running Pre-Build Command Line...");
+                     runner.Run(project.PreBuildEvent, debugMode);
+                 }
+ 
+@@ -76,7 +76,7 @@
+ 
+                 if (!noPostBuild && project.PostBuildEvent.Length > 0)
+                 {
+-                    Console.WriteLine("Running Post-Build Command Line...");
++                    //Console.WriteLine("Running Post-Build Command Line...");
+                     runner.Run(project.PostBuildEvent, debugMode);
+                 }
+             }
+@@ -86,12 +86,12 @@
+                 if (!attempedPostBuildEvent && project.AlwaysRunPostBuild &&
+                     project.PostBuildEvent.Length > 0)
+                 {
+-                    Console.WriteLine("Running Post-Build Command Line...");
++                    //Console.WriteLine("Running Post-Build Command Line...");
+                     runner.Run(project.PostBuildEvent, debugMode);
+                 }
+             }
+ 
+-            Console.WriteLine("Build succeeded");
++            //Console.WriteLine("Build succeeded");
+         }
+ 
+         public void BuildCommand(string[] extraClasspaths, bool noTrace)
+Index: External/Tools/FDBuild/Building/BuildEventRunner.cs
+===================================================================
+--- External/Tools/FDBuild/Building/BuildEventRunner.cs	(revision 2726)
++++ External/Tools/FDBuild/Building/BuildEventRunner.cs	(working copy)
+@@ -74,7 +74,7 @@
+                 // bin/debug output path
+                 line = project.FixDebugReleasePath(line);
+ 
+-                Console.WriteLine("cmd: " + line);
++                //Console.WriteLine("cmd: " + line);
+                 string[] tokens = tokenize(line);
+                 string command = tokens[0];
+                 string args = tokens[1];
 Index: External/Tools/FDBuild/Building/AS2/AS2ProjectBuilder.cs
 ===================================================================
---- External/Tools/FDBuild/Building/AS2/AS2ProjectBuilder.cs	(revision 2725)
+--- External/Tools/FDBuild/Building/AS2/AS2ProjectBuilder.cs	(revision 2726)
 +++ External/Tools/FDBuild/Building/AS2/AS2ProjectBuilder.cs	(working copy)
 @@ -33,7 +33,7 @@
                  if (File.Exists(mtascPath))

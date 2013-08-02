@@ -5,21 +5,21 @@
 #Do not change anything in this file if you are not sure
 
 #1. Detect revision
-pushd ../../
+pushd ../../ > /dev/null
 revision=$(svnversion | head -c 4)
-popd
+popd > /dev/null
 
 #2. Build XVM-stat
-pushd sh
+pushd sh > /dev/null
 ./xvmstat-build.sh
-popd
+popd > /dev/null
 
 #3. Make dirs
 mkdir -p ../../bin
 rm -rf ../../bin/*
 
 #4. Build zips
-pushd ../../src/xvm-stat/bin/Release/ && zip -9 -r "$revision"_xvmstat.zip ./ && popd
+pushd ../../src/xvm-stat/bin/Release/ > /dev/null && zip -9 -r -q "$revision"_xvmstat.zip ./ && popd > /dev/null
 
 #5. Move&Clean
 mv -f ../../src/xvm-stat/bin/Release/"$revision"_xvmstat.zip ../../bin/
