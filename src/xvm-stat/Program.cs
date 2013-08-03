@@ -19,6 +19,7 @@ namespace wot
     private static bool isLauncher = false;
     public static bool isDebug = false;
 
+    public static string priority = null;
     public static string serverVersion = null;
     private static bool isNoAuto = false;
     public static bool isNoProxy = false;
@@ -55,6 +56,7 @@ namespace wot
       Log("  /maximized - maximized game window");
       Log("  /debug - run in debug mode (extended log)");
       Log("  /server=(RU|EU|US|CN|SEA|VTC|KR|CT) - select server (disable autodetection)");
+      Log("  /priority=(Idle|BelowNormal|Normal|AboveNormal|High|RealTime) - set process priority, default is Normal");
       Log("  file.wotreplay - play replay");
       Log("Press any key to exit.");
       Console.ReadKey(true);
@@ -163,6 +165,13 @@ namespace wot
           serverVersion = args[i].Substring(8);
           if (serverVersion.ToUpper() == "CN1")
             serverVersion = "CN";
+          args[i] = "";
+          continue;
+        }
+        
+        if (args[i].StartsWith("/priority=", StringComparison.InvariantCultureIgnoreCase))
+        {
+          priority = args[i].Substring(10).ToLower();
           args[i] = "";
           continue;
         }
@@ -476,7 +485,30 @@ namespace wot
           {
             // start update stats thread
             UpdateStatThread.Instance.Start();
-
+            
+            switch (priority)
+              {
+                case "realtime":
+                  wotProcess.PriorityClass = ProcessPriorityClass.RealTime;
+                  break;
+                case "high":
+                  wotProcess.PriorityClass = ProcessPriorityClass.High;
+                  break;
+                case "abovenormal":
+                  wotProcess.PriorityClass = ProcessPriorityClass.AboveNormal;
+                  break;
+                case "belownormal":
+                  wotProcess.PriorityClass = ProcessPriorityClass.BelowNormal;
+                  break;
+                case "idle":
+                  wotProcess.PriorityClass = ProcessPriorityClass.Idle;
+                  break;
+                default:
+                  wotProcess.PriorityClass = ProcessPriorityClass.Normal;
+                  break;
+               }
+            Debug("Priority set to " + wotProcess.PriorityClass.ToString());
+            
             Debug("Wait for game process to exit");
             wotProcess.WaitForExit();
           }
