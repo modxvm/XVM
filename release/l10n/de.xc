@@ -38,7 +38,7 @@
     "disabled": "deaktiviert",
 
     // UserInfo
-    "UserInfoEHint": "Wertung pro Fahrzeug.\nDie Werte entsprechen dem letzten Update am: %DATE%\nAktuelle Werte werden bei den einzelnen Fahrzeugen angezeigt.\nGenauigkeit abhängig von der Qualität der von Wargaming gelieferten Daten.",
+    "UserInfoEHint": "Wertung pro Fahrzeug.\nDie Werte entsprechen dem letzten Update am: \u0025DATE\u0025\nAktuelle Werte werden bei den einzelnen Fahrzeugen angezeigt.\nGenauigkeit abhängig von der Qualität der von Wargaming gelieferten Daten.",
     "Data was updated at": "Daten zuletzt aktualisiert am",
     " to ": " bis ",
     "EFF": "EFF",

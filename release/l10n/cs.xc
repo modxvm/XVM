@@ -38,9 +38,9 @@
     "disabled": "vypnuto",
 
     // UserInfo
-    "UserInfoEHint": "E - Efektivita hráče s vozidlem.\nHodnota je aktuální k datu: %DATE%\nAktuální hodnotu  najdete v podrobných informacích o vozidle.",
+    "UserInfoEHint": "E - Efektivita hráče s vozidlem.\nHodnota je aktuální k datu: \u0025DATE\u0025\nAktuální hodnotu  najdete v podrobných informacích o vozidle.",
     "Data was updated at": "Data byla aktualzována v",
-    " to ": " do ", // 45 wins to 51,5%
+    " to ": " do ", // 45 wins to 51,5
     "EFF": "EFF",
     "updated": "aktualizováno",
     "unknown": "-",

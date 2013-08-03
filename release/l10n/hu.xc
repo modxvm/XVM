@@ -38,7 +38,7 @@
     "disabled": "letiltva",
 
     // UserInfo
-    "UserInfoEHint": "Járművenkénti hatékonyság.\nA megadott értékek legutóbbi frissítése: %DATE%\nAktuáis adatokért nézd meg a jármű részletes adatait.\nAz oszlopértékek pontossága a legutóbbi adatok frissítésétől függ.",
+    "UserInfoEHint": "Járművenkénti hatékonyság.\nA megadott értékek legutóbbi frissítése: \u0025DATE\u0025\nAktuáis adatokért nézd meg a jármű részletes adatait.\nAz oszlopértékek pontossága a legutóbbi adatok frissítésétől függ.",
     "Data was updated at": "Adatok frissítve",
     " to ": " -> ",
     "EFF": "EFF",

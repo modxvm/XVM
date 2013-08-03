@@ -38,7 +38,7 @@
     "disabled": "wyłączono",
 
     // UserInfo
-    "UserInfoEHint": "Wydajność per-pojazd.\nPokazywane wartości aktualne na dzień: %DATE%\nZobacz aktualne wartości w szczegółach pojazdu.\nDokladnosc statystyk zależy od jakości pobranych danych.",
+    "UserInfoEHint": "Wydajność per-pojazd.\nPokazywane wartości aktualne na dzień: \u0025DATE\u0025\nZobacz aktualne wartości w szczegółach pojazdu.\nDokladnosc statystyk zależy od jakości pobranych danych.",
     "Data was updated at": "Dane zaktualizowano",
     " to ": " do ",
     "EFF": "EFF",

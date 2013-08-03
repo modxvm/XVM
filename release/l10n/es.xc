@@ -38,7 +38,7 @@
     "disabled": "desactivado",
 
     // UserInfo
-    "UserInfoEHint": "Eficiencia por vehiculo.\nLos valores mostrados son los de la última actualización estadística: %DATE%\nVea los valores actuales reales en la información detallada del vehículo.\nLa precisión de los valores de la columna dependen de la calidad de la fuente de los datos.",
+    "UserInfoEHint": "Eficiencia por vehiculo.\nLos valores mostrados son los de la última actualización estadística: \u0025DATE\u0025\nVea los valores actuales reales en la información detallada del vehículo.\nLa precisión de los valores de la columna dependen de la calidad de la fuente de los datos.",
     "Data was updated at": "Ultima actualizacion de datos",
     " to ": " a ",
     "EFF": "EFF",

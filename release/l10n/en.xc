@@ -38,7 +38,7 @@
     "disabled": "disabled",
 
     // UserInfo
-    "UserInfoEHint": "Per-vehicle efficiency.\nThe values shown are as of the last statistics update: %DATE%\nSee actual current values in the detailed vehicle info.\nAccuracy of the column values depends on the quality of the feed data.",
+    "UserInfoEHint": "Per-vehicle efficiency.\nThe values shown are as of the last statistics update: \u0025DATE\u0025\nSee actual current values in the detailed vehicle info.\nAccuracy of the column values depends on the quality of the feed data.",
     "Data was updated at": "Data was updated at",
     " to ": " to ",
     "EFF": "EFF",

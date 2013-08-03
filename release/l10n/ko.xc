@@ -38,7 +38,7 @@
     "disabled": "비활성화",
 
     // UserInfo
-    "UserInfoEHint": "차량당 효율.\n최근에 업데이트된 날짜: %DATE%\n자세한 현재 차량 정보를 보여줍니다.\n정확도는 피드 데이타의 질에 달려 있습니다.",
+    "UserInfoEHint": "차량당 효율.\n최근에 업데이트된 날짜: \u0025DATE\u0025\n자세한 현재 차량 정보를 보여줍니다.\n정확도는 피드 데이타의 질에 달려 있습니다.",
     "Data was updated at": "업데이트된 날짜 :",
     " to ": " to ",
     "EFF": "EFF",
