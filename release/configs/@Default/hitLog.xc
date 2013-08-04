@@ -25,7 +25,7 @@
         "enabled": true,
         // Header, macros ARE NOT allowed.
         // Заголовок, макросы НЕ разрешены.
-        "header": "",
+        "header": "Hitpoints left:",
         // Row in HP list (macros allowed, see readme-en.txt).
         // Строка в списке попаданий (допускаются макроподстановки, см. readme-ru.txt)
         "format": "<font color='#FFFFFF'>{{vehicle}} </font>   <font color='#FF9999'>{{hp}}</font>    <font color='#BBBBBB'>{{nick}}</font>"
