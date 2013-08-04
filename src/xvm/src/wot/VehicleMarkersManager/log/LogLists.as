@@ -25,7 +25,7 @@ class wot.VehicleMarkersManager.log.LogLists
         }
         if (cfg.hpLeft.enabled)
         {
-            hpLeft = new HpLeft(cfg.hpLeft);
+            hpLeft = new HpLeft(cfg);	// hpleft also needs to respect direction, so cannot simply pass in cfg.hpleft
         }
         updateText();
         GlobalEventDispatcher.addEventListener(VMMEvent.ALT_STATE_INFORM, this, onAltStateInform);

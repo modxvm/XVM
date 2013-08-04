@@ -498,9 +498,9 @@ class com.xvm.DefaultConfig
                 visible: true,
                 hpLeft: {
                     enabled: true,
-                    header: "",
+                    header: "Hitpoints left:",
                     format: "<font color='#FFFFFF'>{{vehicle}} </font>   <font color='#FF9999'>{{hp}}</font>    <font color='#BBBBBB'>{{nick}}</font>"
-                },
+                },								               
                 x: 270,
                 y: 5,
                 w: 500,
@@ -515,7 +515,7 @@ class com.xvm.DefaultConfig
                 defaultHeader: "<font color='#FFFFFF'>Hits:</font> <font size='13'>#0</font>",
                 formatHeader:  "<font color='#FFFFFF'>Hits:</font> <font size='13'>#{{n}}</font> <b>{{dmg-total}}</b>  <font color='#FFFFFF'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font>",
                 formatHistory: "<textformat leading='-4' tabstops='[20,50,90,150]'><font size='12'>\u00D7{{n-player}}:</font><tab>{{dmg-player}}<tab>| <font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab>| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>",
-			    shadow: {
+                shadow: {
                   alpha: 100,
                   color: "0x000000",
                   angle: 45,

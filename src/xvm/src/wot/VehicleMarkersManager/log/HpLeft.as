@@ -12,13 +12,15 @@ import wot.VehicleMarkersManager.log.HitLog;
 class wot.VehicleMarkersManager.log.HpLeft
 {
     private var model:Array = [];
-    private var formatHpLeft:String;
-	private var headerHpLeft:String;
+    private var format:String;
+	private var header:String;
+    private var direction:Number;
 	
     public function HpLeft(cfg:Object)
     {
-		formatHpLeft = cfg.format;
-		headerHpLeft = cfg.header;
+		format = cfg.hpLeft.format;
+		header = cfg.hpLeft.header;
+        direction = cfg.direction.toLowerCase() == "up" ? Defines.DIRECTION_UP : Defines.DIRECTION_DOWN;		
 	}		
 	
     public function onNewMarkerCreated(player:Object):Void
@@ -46,7 +48,9 @@ class wot.VehicleMarkersManager.log.HpLeft
     
     public function getText():String
     {
-        var text:String = "<span class='" + HitLog.STYLE_NAME + "'>" + headerHpLeft + (headerHpLeft ? "<br/>" : "") ;
+		var text:String = "<span class='" + HitLog.STYLE_NAME + "'>";		
+		var entries:String = "";
+		
         for (var i in model)
         {
             var player = model[i];
@@ -60,11 +64,13 @@ class wot.VehicleMarkersManager.log.HpLeft
                  */
                 continue;
             }		
-			text += formatText(formatHpLeft, player) + "<br/>";
+			
+			entries += (entries == "" ? "" : "<br/>") + formatText(format, player);
         }
-        text += "</span>";
-        
-        return text;
+      				
+        text += (direction == Defines.DIRECTION_DOWN) ? header + "<br/>" + entries : entries + "<br/>" + header;
+		text += "</span>";
+		return text;
     }
     
     private function formatText(format:String, player:Object):String
