@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading;
@@ -800,12 +801,12 @@ namespace wot
           if (cache.ContainsKey(cacheKey))
             continue;
           Debug(String.Format("Player {0} {1} {2} not in Database", pd.id, pd.v, pd.n));
-          cache[cacheKey] = new Stat()
+          cache[cacheKey] = res.players.SingleOrDefault(s => s.id == pd.id) ?? new Stat()
             {
               id = pd.id,
               vn = pd.v,
               name = pd._label,
-              clan = pd._clan,
+              clan = pd._clan
             };
         };
       }
