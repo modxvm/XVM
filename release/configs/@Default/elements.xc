@@ -14,5 +14,7 @@
  *      Config.s_config,                // config
  *      Defines                         // global defines
  */
-{
-}
+[
+  //${"snippet-1.xc"},
+  //${"snippet-2.xc"}
+]
