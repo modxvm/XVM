@@ -21,6 +21,7 @@ rm -rf ../../bin/*
 #4. Build zips
 rm -rf ../../src/vehicle-bank-parser/builds/Release/obj-VehicleBankParser/
 cp -f ../../src/vehicle-bank-parser/wottools.exe ../../src/vehicle-bank-parser/builds/Release/
+echo "$revision" >> ../../src/vehicle-bank-parser/builds/Release/"$revision"
 pushd ../../src/vehicle-bank-parser/builds/Release/ > /dev/null && zip -9 -r -q "$revision"_xvmvbp.zip ./ && popd > /dev/null
 
 #5. Move&Clean

@@ -35,6 +35,8 @@ mv -f ../../temp/rel/xvm/xvm.xc.sample ../../temp/rel/xvm/xvm.xc
 mv -f ../../temp/ct/xvm/xvm.xc.sample ../../temp/ct/xvm/xvm.xc
 
 #6. Build zips
+echo "$revision" >> ../../temp/rel/"$revision"
+echo "$revision" >> ../../temp/ct/"$revision"
 pushd ../../temp/rel/ > /dev/null && zip -9 -r -q "$revision"_release.zip ./ && popd > /dev/null
 pushd ../../temp/ct/ > /dev/null && zip -9 -r -q "$revision"_ct.zip ./ && popd > /dev/null
 
