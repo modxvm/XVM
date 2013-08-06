@@ -6,7 +6,7 @@
     "XVM_translator": "Mikael Palokangas",
 
     // Win chance
-    "Chance error": "Chance error",
+    "Chance error": "Virhemarginaali",
     "Chance to win": "Voittomahdollisuus",
     "global": "globaali",
     "per-vehicle": "tankkikohtainen",
@@ -44,12 +44,12 @@
     "EFF": "EFF",
     "updated": "päivitetty",
     "unknown": "tietämätön",
-    "Avg level": "Keskiverto leveli",
+    "Avg level": "Keskivertotaso",
     "Spotted": "Huomattu",
     "Defence": "Puolustus",
     "Capture": "Vallata",
     "player (average / top)": "oma (keskiverto / paras)",
-    "Spec dmg": "Spec dmg",
+    "Spec dmg": "Vahinkosuhde",
 
     // UserInfo - filters
     "Filter": "Filtteri",
