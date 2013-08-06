@@ -34,6 +34,5 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 // XVM Stat version
 [assembly: AssemblyVersion("1.6.2.*")]
-[assembly: AssemblyFileVersion("1.6.2.*")]
 // XVM Mod version
-[assembly: AssemblyInformationalVersion("4.0.0")]
+[assembly: AssemblyInformationalVersion("4.1.0")]

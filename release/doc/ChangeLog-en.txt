@@ -2,6 +2,7 @@
   [NEW FUNCTIONS]
   * localization: added German, Hungarian, Korean, Polish and Spanish translations
   * hitlog: rows in HP Left panel can be formatted
+  * xvm-stat: /priority parameter
 
   [FIXES]
   * squad window: fixed missing info for some vehicles
