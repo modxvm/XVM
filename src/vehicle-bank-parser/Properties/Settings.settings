@@ -2,17 +2,11 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="VehicleBankParser.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="EXPORT_FILEPATH" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\work\wot-xvm\src\xvm\src\com\xvm\VehicleInfoData2.as</Value>
-    </Setting>
-    <Setting Name="VEHICLE_DIR_PATH" Type="System.String" Scope="User">
-      <Value Profile="(Default)">res\scripts\item_defs\vehicles\</Value>
-    </Setting>
     <Setting Name="GAME_PATH" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\work\games\WoT\</Value>
+      <Value Profile="(Default)">G:\WoT</Value>
     </Setting>
-    <Setting Name="EXPORT_FILEPATH_JSON" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\work\wot-xvm\release\res\VehicleInfo.json</Value>
+    <Setting Name="XVM_PATH" Type="System.String" Scope="User">
+      <Value Profile="(Default)">G:\xvm</Value>
     </Setting>
   </Settings>
 </SettingsFile>

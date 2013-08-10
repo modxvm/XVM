@@ -13,6 +13,8 @@ class Program
      * Author: ilitvinov87@gmail.com
      */
 
+    private const string VEHICLE_DIR_PATH = "res\\scripts\\item_defs\\vehicles\\";
+
     public static XmlNode decode(string file)
     {
         BxmlReader reader = new BxmlReader(file);
@@ -43,7 +45,7 @@ class Program
             foreach (string country in Defines.COUNTRIES)
             {
                 string fn = Path.Combine(Settings.Default.GAME_PATH,
-                    Settings.Default.VEHICLE_DIR_PATH, country, "list.xml");
+                    VEHICLE_DIR_PATH, country, "list.xml");
                 XmlNodeList nodes = decode(fn).ChildNodes;
                 foreach (XmlNode node in nodes)
                 {
@@ -71,7 +73,7 @@ class Program
                     }
 
                     XmlNode vdata = decode(Path.Combine(Settings.Default.GAME_PATH,
-                        Settings.Default.VEHICLE_DIR_PATH, country, node.Name + ".xml"));
+                        VEHICLE_DIR_PATH, country, node.Name + ".xml"));
                     if (vdata == null)
                         continue;
 

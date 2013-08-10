@@ -7,12 +7,15 @@ using VehicleBankParser.Properties;
 
 static class Export
 {
+  private const string VEHICLE_INFO_DATA_2_PATH = "\\src\\xvm\\src\\com\\xvm\\VehicleInfoData2.as";
+  private const string VEHICLE_JSON_PATH = "\\release\\res\\VehicleInfo.json";
+
   /**
    * Make actionscript 2 code file with predefined array of obtained name\hp\turret data.
    */
   public static void generateAS2code(List<Vehicle> vehList)
   {
-    StreamWriter file = new StreamWriter(Settings.Default.EXPORT_FILEPATH, false, Encoding.UTF8);
+      StreamWriter file = new StreamWriter(Settings.Default.XVM_PATH + VEHICLE_INFO_DATA_2_PATH, false, Encoding.UTF8);
 
     //StreamWriter file = new StreamWriter(EXPORT_FILEPATH);
 
@@ -32,7 +35,7 @@ static class Export
       s += "\n  " + veh.ToJsonString() + ",";
     s += "\n  \"observer\": { \"level\": 0, \"name\": \"Observer\" }," +
          "\n  \"unknown\": { \"level\": 0, \"name\": \"UNKNOWN\" }\n}\n";
-    File.WriteAllText(Settings.Default.EXPORT_FILEPATH_JSON, s);
+    File.WriteAllText(Settings.Default.XVM_PATH + VEHICLE_JSON_PATH, s);
   }
 
   private static void writeHeader(StreamWriter file)
