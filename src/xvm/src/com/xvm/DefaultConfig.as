@@ -799,10 +799,10 @@ class com.xvm.DefaultConfig
                     { value: 101, color: ColorPalette.purple }    // unique
                 ],
                 e: [
-                    { value: 2,    color: ColorPalette.red },     // very bad
-                    { value: 4,    color: ColorPalette.orange },  // bad
-                    { value: 5,    color: ColorPalette.yellow },  // normal
-                    { value: 7,    color: ColorPalette.green },   // good
+                    { value: 3,    color: ColorPalette.red },     // very bad
+                    { value: 6,    color: ColorPalette.orange },  // bad
+                    { value: 7,    color: ColorPalette.yellow },  // normal
+                    { value: 8,    color: ColorPalette.green },   // good
                     { value: 9,    color: ColorPalette.blue },    // very good
                     { value: 20,   color: ColorPalette.purple }   // unique
                 ],

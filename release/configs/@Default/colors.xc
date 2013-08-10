@@ -222,10 +222,10 @@
     // Dynamic color by TEFF (E) rating (only with xvm-stat).
     // Динамический цвет по рейтингу TEFF (E) (только с xvm-stat).
     "e": [
-      { "value": 2,    "color": ${"def.colorRating.very_bad" } },
-      { "value": 4,    "color": ${"def.colorRating.bad"      } },
-      { "value": 5,    "color": ${"def.colorRating.normal"   } },
-      { "value": 7,    "color": ${"def.colorRating.good"     } },
+      { "value": 3,    "color": ${"def.colorRating.very_bad" } },
+      { "value": 6,    "color": ${"def.colorRating.bad"      } },
+      { "value": 7,    "color": ${"def.colorRating.normal"   } },
+      { "value": 8,    "color": ${"def.colorRating.good"     } },
       { "value": 9,    "color": ${"def.colorRating.very_good"} },
       { "value": 20,   "color": ${"def.colorRating.unique"   } }
     ],
