@@ -163,7 +163,7 @@ class com.xvm.Utils
 
     /**
      * Get children MovieClips of MovieClip
-     * FIXIT: skips TextField?
+     * FIXIT: skips TextField? 
      */
     public static function getChildrenOf(target:MovieClip, recursive:Boolean):Array
     {
