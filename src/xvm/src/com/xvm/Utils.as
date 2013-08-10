@@ -159,8 +159,6 @@ class com.xvm.Utils
         _global["_xvm__trace_module_" + moduleName] = 1;
         xvmModules.push(moduleName);
         Logger.add("xvm-> [ \"" + xvmModules.join("\", \"") + "\" ]");
-
-        checkBanList();
     }
 
     /**
@@ -395,48 +393,6 @@ class com.xvm.Utils
                 + 0.07576)
                 - 7.25
             )));
-    }
-
-    /** Restrict XVM mod usage for banned users */
-    public static function checkBanList():Void
-    {
-        /**
-         * User IDs to ban.
-         * Ban by nickname is unreliable due to nickname change WG service.
-         */
-        var banlist:Array = [
-            234332 /** 26 apr 2013 - XD http://goo.gl/4Kamf */
-        ]
-
-        /** Define current user */
-        var allies:Array = _root.leftPanel.m_list._dataProvider;
-        var user:Number;
-        for (var i in allies)
-        {
-            if (allies[i].himself == true)
-            {
-                user = allies[i].uid;
-                break;
-            }
-        }
-
-        /** Check if user is banned */
-        var banned:Boolean = false;
-        for (var i in banlist)
-        {
-            if (banlist[i] == user)
-            {
-                banned = true;
-                break;
-            }
-        }
-
-        /** Apply ban */
-        if (banned)
-        {
-            Logger.add("## BANNED");
-            _root._alpha = 0;
-        }
     }
     
     /** Create DropShadowFilter from config section */
