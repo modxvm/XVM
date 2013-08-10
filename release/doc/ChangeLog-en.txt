@@ -5,6 +5,7 @@
   * xvm-stat: /priority parameter
 
   [FIXES]
+  * stock\top turret marker: removed incorrect markers at some SPGs
   * squad window: fixed missing info for some vehicles
   * squad window: text field with vehicle tier no longer creates artefacts
 

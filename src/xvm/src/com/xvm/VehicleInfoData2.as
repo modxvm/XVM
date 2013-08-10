@@ -90,7 +90,7 @@ class com.xvm.VehicleInfoData2
         m7_priest:                  { id: 14,  level: 3,  type: "SPG", hpstock: 140,  hptop: 140,  turret: 0, premium: 0, nation: "usa",     name: "M7_Priest",                   translationKey: "#usa_vehicles:M7_Priest" },
         sexton_i:                   { id: 211, level: 3,  type: "SPG", hpstock: 160,  hptop: 160,  turret: 0, premium: 1, nation: "usa",     name: "Sexton_I",                    translationKey: "#usa_vehicles:Sexton_I" },
         lorraine39_l_am:            { id: 13,  level: 3,  type: "SPG", hpstock: 120,  hptop: 120,  turret: 0, premium: 0, nation: "france",  name: "Lorraine39_L_AM",             translationKey: "#france_vehicles:Lorraine39_L_AM_short" },
-        gb27_sexton:                { id: 13,  level: 3,  type: "SPG", hpstock: 140,  hptop: 140,  turret: 1, premium: 0, nation: "uk",      name: "GB27_Sexton",                 translationKey: "#gb_vehicles:GB27_Sexton" },
+        gb27_sexton:                { id: 13,  level: 3,  type: "SPG", hpstock: 140,  hptop: 140,  turret: 0, premium: 0, nation: "uk",      name: "GB27_Sexton",                 translationKey: "#gb_vehicles:GB27_Sexton" },
         gb78_sexton_i:              { id: 213, level: 3,  type: "SPG", hpstock: 140,  hptop: 140,  turret: 0, premium: 1, nation: "uk",      name: "GB78_Sexton_I",               translationKey: "#gb_vehicles:GB78_Sexton_I" },
 
         // level 4
@@ -124,7 +124,7 @@ class com.xvm.VehicleInfoData2
         pz_sfl_ivb:                 { id: 61,  level: 4,  type: "SPG", hpstock: 200,  hptop: 200,  turret: 0, premium: 0, nation: "germany", name: "Pz_Sfl_IVb",                  translationKey: "#germany_vehicles:Pz_Sfl_IVb_short" },
         sturmpanzer_ii:             { id: 18,  level: 4,  type: "SPG", hpstock: 190,  hptop: 190,  turret: 0, premium: 0, nation: "germany", name: "Sturmpanzer_II",              translationKey: "#germany_vehicles:Sturmpanzer_II_short" },
         m37:                        { id: 18,  level: 4,  type: "SPG", hpstock: 180,  hptop: 180,  turret: 0, premium: 0, nation: "usa",     name: "M37",                         translationKey: "#usa_vehicles:M37" },
-        amx_ob_am105:               { id: 57,  level: 4,  type: "SPG", hpstock: 170,  hptop: 170,  turret: 1, premium: 0, nation: "france",  name: "AMX_Ob_Am105",                translationKey: "#france_vehicles:AMX_Ob_Am105_short" },
+        amx_ob_am105:               { id: 57,  level: 4,  type: "SPG", hpstock: 170,  hptop: 170,  turret: 0, premium: 0, nation: "france",  name: "AMX_Ob_Am105",                translationKey: "#france_vehicles:AMX_Ob_Am105_short" },
         gb26_birch_gun:             { id: 42,  level: 4,  type: "SPG", hpstock: 190,  hptop: 190,  turret: 0, premium: 0, nation: "uk",      name: "GB26_Birch_Gun",              translationKey: "#gb_vehicles:GB26_Birch_Gun_short" },
 
         // level 5
@@ -209,7 +209,7 @@ class com.xvm.VehicleInfoData2
         hummel:                     { id: 1,   level: 6,  type: "SPG", hpstock: 300,  hptop: 300,  turret: 0, premium: 0, nation: "germany", name: "Hummel",                      translationKey: "#germany_vehicles:Hummel_short" },
         m44:                        { id: 64,  level: 6,  type: "SPG", hpstock: 280,  hptop: 280,  turret: 0, premium: 0, nation: "usa",     name: "M44",                         translationKey: "#usa_vehicles:_M44" },
         amx_13f3am:                 { id: 18,  level: 6,  type: "SPG", hpstock: 270,  hptop: 270,  turret: 0, premium: 0, nation: "france",  name: "AMX_13F3AM",                  translationKey: "#france_vehicles:AMX_13F3AM_short" },
-        gb77_fv304:                 { id: 46,  level: 6,  type: "SPG", hpstock: 280,  hptop: 280,  turret: 1, premium: 0, nation: "uk",      name: "GB77_FV304",                  translationKey: "#gb_vehicles:GB77_FV304_short" },
+        gb77_fv304:                 { id: 46,  level: 6,  type: "SPG", hpstock: 280,  hptop: 280,  turret: 0, premium: 0, nation: "uk",      name: "GB77_FV304",                  translationKey: "#gb_vehicles:GB77_FV304_short" },
 
         // level 7
         auf_panther:                { id: 56,  level: 7,  type: "LT",  hpstock: 850,  hptop: 950,  turret: 2, premium: 0, nation: "germany", name: "Auf_Panther",                 translationKey: "#germany_vehicles:Auf_Panther_short" },
@@ -246,11 +246,11 @@ class com.xvm.VehicleInfoData2
         gb71_at_15a:                { id: 211, level: 7,  type: "TD",  hpstock: 850,  hptop: 850,  turret: 0, premium: 1, nation: "uk",      name: "GB71_AT_15A",                 translationKey: "#gb_vehicles:GB71_AT_15A" },
         gb75_at7:                   { id: 39,  level: 7,  type: "TD",  hpstock: 1250, hptop: 1250, turret: 0, premium: 0, nation: "uk",      name: "GB75_AT7",                    translationKey: "#gb_vehicles:GB75_AT7" },
         s_51:                       { id: 7,   level: 7,  type: "SPG", hpstock: 350,  hptop: 350,  turret: 0, premium: 0, nation: "ussr",    name: "S-51",                        translationKey: "#ussr_vehicles:S-51" },
-        su14_1:                     { id: 63,  level: 7,  type: "SPG", hpstock: 350,  hptop: 350,  turret: 1, premium: 0, nation: "ussr",    name: "SU14_1",                      translationKey: "#ussr_vehicles:SU14_1" },
+        su14_1:                     { id: 63,  level: 7,  type: "SPG", hpstock: 350,  hptop: 350,  turret: 0, premium: 0, nation: "ussr",    name: "SU14_1",                      translationKey: "#ussr_vehicles:SU14_1" },
         g_panther:                  { id: 35,  level: 7,  type: "SPG", hpstock: 360,  hptop: 360,  turret: 0, premium: 0, nation: "germany", name: "G_Panther",                   translationKey: "#germany_vehicles:G_Panther_short" },
         m12:                        { id: 31,  level: 7,  type: "SPG", hpstock: 350,  hptop: 350,  turret: 0, premium: 0, nation: "usa",     name: "M12",                         translationKey: "#usa_vehicles:M12" },
         lorraine155_50:             { id: 28,  level: 7,  type: "SPG", hpstock: 340,  hptop: 340,  turret: 0, premium: 0, nation: "france",  name: "Lorraine155_50",              translationKey: "#france_vehicles:Lorraine155_50_short" },
-        gb29_crusader_5inch:        { id: 44,  level: 7,  type: "SPG", hpstock: 350,  hptop: 350,  turret: 1, premium: 0, nation: "uk",      name: "GB29_Crusader_5inch",         translationKey: "#gb_vehicles:GB29_Crusader_5inch_short" },
+        gb29_crusader_5inch:        { id: 44,  level: 7,  type: "SPG", hpstock: 350,  hptop: 350,  turret: 0, premium: 0, nation: "uk",      name: "GB29_Crusader_5inch",         translationKey: "#gb_vehicles:GB29_Crusader_5inch_short" },
 
         // level 8
         ch17_wz131_1_wz132:         { id: 15,  level: 8,  type: "LT",  hpstock: 950,  hptop: 1050, turret: 2, premium: 0, nation: "china",   name: "Ch17_WZ131_1_WZ132",          translationKey: "#china_vehicles:Ch17_WZ131_1_WZ132" },

@@ -98,6 +98,11 @@ class VehicleXmlParser
     return nodeToInt(hullHpNode) + nodeToInt(topTurretHpNode);
   }
 
+  public bool turretsHasEqualHP()
+  {
+      return getHpTop() == getHpStock();
+  }
+
   public int getChassisCost()
   {
     XmlNodeList firstChassis = rootNode.SelectSingleNode("//chassis").ChildNodes.Item(1).ChildNodes;

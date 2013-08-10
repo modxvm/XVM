@@ -54,6 +54,17 @@ class Vehicle
         if (parser.hasOnlyOneTurret())
             return ONLY_ONE_TURRET;
 
+        /**
+         * Some britain SPGs has absolutely two equal turrets but one of them is not used by WG interface.
+         * WG screwed up again.
+         * Ignore this turret.
+         * 
+         * As for 10 aug 2013 the screwed SPGs are:
+         * gb27_sexton, amx_ob_am105, gb77_fv304, su14_1, gb29_crusader_5inch
+         */
+        if (parser.turretsHasEqualHP())
+            return ONLY_ONE_TURRET;
+
         if (parser.turretUnlocksSomething())
         {
             XmlNodeList unlocks = parser.getSecondTurretUnlocks();
