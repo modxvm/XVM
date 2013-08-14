@@ -22,7 +22,7 @@
     "<font size='17' color='#FFCC66'>Enemy base captured!</font>": "<font size='17' color='#FFCC66'>Base enemiga capturada!</font>",
     "<font size='15' color='#FFFFFF'>Ally base capture! {{extra}}</font>": "<font size='15' color='#FFFFFF'>Estan capturando la base aliada! {{extra}}</font>",
     "<font size='17' color='#FFCC66'>Ally base captured!</font>": "<font size='17' color='#FFCC66'>Base aliada capturada!</font>",
-    "Capturando: <b><font color='#FFCC66'>{{tanks}}</font></b> Tiempo restante: <b><font color='#FFCC66'>{{time}}</font><b>": "Capturando: <b><font color='#FFCC66'>{{tanks}}</font></b> Tiempo restante: <b><font color='#FFCC66'>{{time}}</font><b>",
+    "Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>": "Capturando: <b><font color='#FFCC66'>{{tanks}}</font></b> Tiempo restante: <b><font color='#FFCC66'>{{time}}</font><b>",
 
     // FinalStatistics
     "Hit percent": "Tasa de impactos",

@@ -18,11 +18,11 @@
     "world_collision": "upadek",
 
     // Capture
-    "<font size='15' color='#FFFFFF'>Opanowanie bazy przeciwnika! {{extra}}</font>": "<font size='15' color='#FFFFFF'>Opanowanie bazy przeciwnika! {{extra}}</font>",
-    "<font size='17' color='#FFCC66'>Baza przeciwnika opanowana!</font>": "<font size='17' color='#FFCC66'>Baza przeciwnika opanowana!</font>",
-    "<font size='15' color='#FFFFFF'>Okupacja naszej bazy! {{extra}}</font>": "<font size='15' color='#FFFFFF'>Okupacja naszej bazy! {{extra}}</font>",
-    "<font size='17' color='#FFCC66'>Zdobyto naszą bazę!</font>": "<font size='17' color='#FFCC66'>Zdobyto naszą bazę!</font>",
-    "Okupantów: <b><font color='#FFCC66'>{{tanks}}</font></b> Pozostało: <b><font color='#FFCC66'>{{time}}</font><b>": "Okupantów: <b><font color='#FFCC66'>{{tanks}}</font></b> Pozostało: <b><font color='#FFCC66'>{{time}}</font><b>",
+    "<font size='15' color='#FFFFFF'>Enemy base capture! {{extra}}</font>": "<font size='15' color='#FFFFFF'>Opanowanie bazy przeciwnika! {{extra}}</font>",
+    "<font size='17' color='#FFCC66'>Enemy base captured!</font>": "<font size='17' color='#FFCC66'>Baza przeciwnika opanowana!</font>",
+    "<font size='15' color='#FFFFFF'>Ally base capture! {{extra}}</font>": "<font size='15' color='#FFFFFF'>Okupacja naszej bazy! {{extra}}</font>",
+    "<font size='17' color='#FFCC66'>Ally base captured!</font>": "<font size='17' color='#FFCC66'>Zdobyto naszą bazę!</font>",
+    "Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>": "Okupantów: <b><font color='#FFCC66'>{{tanks}}</font></b> Pozostało: <b><font color='#FFCC66'>{{time}}</font><b>",
 
     // FinalStatistics
     "Hit percent": "Procent trafień",
