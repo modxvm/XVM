@@ -31,7 +31,7 @@ from xvm_utils import locate_file, configureLoggers, CollectParts
 # Based on XVM 4.0.0, SVN rev. 2046
 # Last change of xvm-stat: SVN rev. 2046
 
-XVMFS_VERSION = '0.4.0'
+XVMFS_VERSION = '0.4.1'
 fuse.fuse_python_api = (0, 2)
 
 # Settings that can be changed at startup. Values may be read from several
@@ -686,16 +686,14 @@ class XvmFS(Fuse):
 
                 Log.debug("Player %(id)s %(v)s %(n)s not in Database" % pd)
 
-				partial = next((x for x in res['players'] if x['id'] == stat['id']), None)
-                if partial is not None:
-					self.cache[cacheKey] = partial
-				else:				
-					self.cache[cacheKey] = dict(
-							id=pd['id']
-							, vn=pd['v']
-							, name=pd['_label']
-							, clan=pd['_clan']
-					)				
+                self.cache[cacheKey] = next((x for x in res['players'] if x['id'] == pd['id']),
+                    dict(
+                        id=pd['id']
+                        , vn=pd['v']
+                        , name=pd['_label']
+                        , clan=pd['_clan']
+                    )
+                )
 
         except Exception, ex:
             Log.error('PrepareStat exception: ' + str(ex))
