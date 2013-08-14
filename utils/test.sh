@@ -13,7 +13,7 @@ CURRENT_DIRECTORY=`pwd`
 #SAMPLE_REPLAY=domination.wotreplay
 #SAMPLE_REPLAY=tk.wotreplay
 #SAMPLE_REPLAY=markers.wotreplay
-#SAMPLE_REPLAY=test.wotreplay
+SAMPLE_REPLAY=test.wotreplay
 #SAMPLE_REPLAY=ramming.wotreplay
 #SAMPLE_REPLAY=train.wotreplay
 
