@@ -279,6 +279,51 @@ namespace wot
       }
     }
 
+    private static bool CheckFolderWritable(string path)
+    {
+        string filename = Path.Combine(path, ".xvmtest");
+        try
+        {
+            StreamWriter writer = File.CreateText(filename);
+            writer.Close();
+            File.Delete(filename);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    private static bool Elevate(string[] args)
+    {
+        
+        System.Security.Principal.WindowsIdentity id = System.Security.Principal.WindowsIdentity.GetCurrent();
+        System.Security.Principal.WindowsPrincipal principal = new System.Security.Principal.WindowsPrincipal(id);
+        if (principal.IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator))
+            return true;
+
+        ProcessStartInfo proc = new ProcessStartInfo
+        {
+            UseShellExecute = true,
+            WorkingDirectory = Environment.CurrentDirectory,
+            FileName = Assembly.GetExecutingAssembly().Location,
+            Verb = "runas",
+            Arguments = String.Join(" ", args),
+        };
+
+        try
+        {
+            Process.Start(proc);
+        }
+        catch
+        {
+            throw new Exception("Administrative privileges required to run from this folder.");
+        }
+
+        return false;
+    }
+
     private static void Main(string[] args)
     {
       try
@@ -298,6 +343,7 @@ namespace wot
         Log(Console.Title);
 
         // Check args
+        string[] originalArgs = (string[])args.Clone();
         if (!CheckArgs(args))
           return;
 
@@ -323,6 +369,10 @@ namespace wot
         Debug("Check start file exists: " + wotExeFileName);
         if (!File.Exists(wotExeFileName))
           throw new Exception("Game start file not found: " + wotExeFileName);
+
+        // Check write permissions and elevate if needed. In this case, exit immediately as elevated process will be started
+        if (!CheckFolderWritable(game_dir) && !Elevate(originalArgs))
+          return;
 
         // Clear log file
         ClearLogFile();
