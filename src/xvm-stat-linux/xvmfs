@@ -143,8 +143,7 @@ class XvmFS(Fuse):
         Log.debug('wot_cfg is ' + str(self.wot_cfg))
         Log.debug('game_dir is ' + str(self.game_dir))
         Log.debug('res_mods is %s' % str(self.res_mods))
-        Log.debug('mount point is %s' % self.fuse_args.mountpoint
-            if self.fuse_args.mountpoint is not None else 'None')
+        Log.debug('mount point is %s' % (self.fuse_args.mountpoint or 'not specified'))
         if self.fuse_args.mountpoint != self.config_mnt:
             Log.warning("Verify mount point: according to '%s'," % self.xvm_cfg)
             Log.warning(" mount is expected at '%s'" % self.config_mnt)
@@ -221,73 +220,33 @@ class XvmFS(Fuse):
                 self.result = BAD_REQUEST_RESULT
                 return
 
-            if command not in ['@LOG', '@LOGSTAT', '@SET', '@ADD']:
+            if command not in ['@LOG', '@LOGSTAT', '@SET', '@ADD', '@PING']:
                 Log.info("=> %s %s" % (command, parameters))
 
             try:
                 if command == '@LOG':
                     self.ProcessLog(parameters, Log)
+
                 elif command == '@LOGSTAT':
                     self.ProcessLog(parameters, LogStat)
 
                 elif command in ['@SET', '@ADD']:
-                    value = CollectParts(parameters)
-                    if value:
-                        Log.debug('%s %s' % (command, value))
-                        if command == '@SET':
-                            with lockResults:
-                                self.results.append(dict(result=None, thread=None, players=[]))
-                        self.AddPendingPlayers(value)
-                    self.result = '{"resultId":%d}' % (len(self.results) - 1)
+                    self.ProcessSetAddCommand(command, parameters)
 
                 elif command == '@VAR':
-                    v = parameters.split('=', 1)
-                    if len(v) < 2:
-                        raise Exception('Bad variable received: ' + parameters)
-                    Log.info("SET VAR: " + parameters)
-                    self.vars[v[0].strip()] = v[1]
+                    self.ProcessVarCommand(parameters)
 
                 elif command == '@GET_VERSION':
-                    result = [self.version, self.game_dir]
-                    result = result + ["%s=%s" % (key, value)
-                            for (key, value) in self.vars.items()]
-                    self.result = '\n'.join(result)
-                    Log.debug('result: ' + str(self.result))
+                    self.ProcessGetVersionCommand()
 
                 elif command == '@GET_PLAYERS':
-                    if len(self.results) <= 0:
-                        raise Exception('No last result: -1')
-                    with lockResults:
-                        if self.results[-1]['players'] is None:
-                            raise Exception('No players: %d' + len(self.results))
-                        self.result = json.dumps(self.results[-1]['players'])
-                    Log.debug('result: ' + str(self.result))
+                    self.ProcessGetPlayersCommand()
 
                 elif command == '@GET_ASYNC':
-                    def target(resultId, arg):
-                        with lockNetwork:
-                            with lockResults:
-                                r = self.results[resultId]
-                            res = self.GetStat(r)
-                            with lockResults:
-                                if not res:
-                                    res = '{"status":"ERROR","error":"no result: %d"}' % (resultId)
-                                self.results[resultId]['result'] = res
-                                self.results[resultId]['thread'] = None
-                    self.result = self.AsyncWrapper(parameters, target)
-                    Log.debug('result: ' + str(self.result))
+                    self.ProcessGetAsyncCommand(parameters)
 
                 elif command == '@INFO_ASYNC':
-                    def target(resultId, arg):
-                        with lockNetwork:
-                            res = self.GetInfo(arg)
-                            with lockResults:
-                                if not res:
-                                    res = '{"status":"ERROR","error":"no result: %d"}' % (resultId)
-                                self.results[resultId]['result'] = res
-                                self.results[resultId]['thread'] = None
-                    self.result = self.AsyncWrapper(parameters, target)
-                    Log.debug('result: ' + str(self.result))
+                    self.ProcessInfoAsyncCommand(parameters)
 
                 elif command == '@PING':
                     self.result = self.PingWotServers()
@@ -298,6 +257,65 @@ class XvmFS(Fuse):
             except Exception, ex:
                 Log.error("Exception during %s: %s" % (str(command), str(ex)))
                 Log.debug('\n' + traceback.format_exc(ex))
+
+    def ProcessSetAddCommand(self, command, parameters):
+        value = CollectParts(parameters)
+        if value:
+            Log.debug('%s %s' % (command, value))
+            if command == '@SET':
+                with lockResults:
+                    self.results.append(dict(result=None, thread=None, players=[]))
+            self.AddPendingPlayers(value)
+        self.result = '{"resultId":%d}' % (len(self.results) - 1)
+
+    def ProcessVarCommand(self, parameters):
+        v = parameters.split('=', 1)
+        if len(v) < 2:
+            raise Exception('Bad variable received: ' + parameters)
+        Log.info("SET VAR: " + parameters)
+        self.vars[v[0].strip()] = v[1]
+
+    def ProcessGetVersionCommand(self):
+        result = [self.version, self.game_dir]
+        result = result + ["%s=%s" % (key, value)
+                for (key, value) in self.vars.items()]
+        self.result = '\n'.join(result)
+        Log.debug('result: ' + str(self.result))
+
+    def ProcessGetPlayersCommand(self):
+        if len(self.results) <= 0:
+            raise Exception('No last result: -1')
+        with lockResults:
+            if self.results[-1]['players'] is None:
+                raise Exception('No players: %d' + len(self.results))
+            self.result = json.dumps(self.results[-1]['players'])
+        Log.debug('result: ' + str(self.result))
+
+    def ProcessGetAsyncCommand(self, parameters):
+        def target(resultId, arg):
+            with lockNetwork:
+                with lockResults:
+                    r = self.results[resultId]
+                res = self.GetStat(r)
+                with lockResults:
+                    if not res:
+                        res = '{"status":"ERROR","error":"no result: %d"}' % (resultId)
+                    self.results[resultId]['result'] = res
+                    self.results[resultId]['thread'] = None
+        self.result = self.AsyncWrapper(parameters, target)
+        Log.debug('result: ' + str(self.result))
+
+    def ProcessInfoAsyncCommand(self, parameters):
+        def target(resultId, arg):
+            with lockNetwork:
+                res = self.GetInfo(arg)
+                with lockResults:
+                    if not res:
+                        res = '{"status":"ERROR","error":"no result: %d"}' % (resultId)
+                    self.results[resultId]['result'] = res
+                    self.results[resultId]['thread'] = None
+        self.result = self.AsyncWrapper(parameters, target)
+        Log.debug('result: ' + str(self.result))
 
     def AsyncWrapper(self, parameters, target):
         if parameters in ['', None]:
@@ -467,7 +485,7 @@ class XvmFS(Fuse):
         except Exception, ex:
             Log.error('loadUrl failed: ' + str(ex))
         finally:
-            if response != None:
+            if response is not None:
                 response.close()
 
         elapsed = datetime.now() - startTime
@@ -564,7 +582,7 @@ class XvmFS(Fuse):
         for pd in req['players']:
             cacheKey = "%d=%s" % (pd['id'], pd['v'])
 
-            if self.cache.has_key(cacheKey):
+            if cacheKey in self.cache:
                 item = self.cache[cacheKey]
                 item['name'] = pd['_label']
                 res['players'].append(item)
@@ -577,7 +595,7 @@ class XvmFS(Fuse):
         for pd in req['players']:
             cacheKey = "%(id)d=%(v)s" % pd
 
-            if self.cache.has_key(cacheKey):
+            if cacheKey in self.cache:
                 continue
 
             if pd['v'] in [None, '']:
@@ -615,11 +633,11 @@ class XvmFS(Fuse):
                         Log.error('Failed to parse stat data')
                         return
 
-            if not data.has_key('players'):
+            if 'players' not in data:
                 Log.warning('Stat request failed: ' + str(responseFromServer))
                 return
 
-            info = data['info'][self.version] if data.has_key('info') else None
+            info = data['info'][self.version] if 'info' in data else None
             res = dict(players=data['players'], info=None)
 
             if info is not None:
@@ -657,17 +675,17 @@ class XvmFS(Fuse):
             )
 
             for stat in data['players']:
-                if not stat.has_key('name') or len(stat['name']) <= 0:
+                if 'name' not in stat or len(stat['name']) <= 0:
                     continue
-                if not stat.has_key('v'):
+                if 'v' not in stat:
                     stat['v'] = stat_v_stub
 
                 """ Convert Json data tree to one-dimensional dictionary.
                     The same job does 'JsonDataToResponse' method in original XVM.
                 """
-                stat = dict([(y, stat[x]) if stat.has_key(x) else (y, z)
+                stat = dict([(y, stat[x]) if x in stat else (y, z)
                                 for (x,y,z) in keys1]
-                    + [(y, stat['v'][x]) if stat['v'].has_key(x) else (y, z)
+                    + [(y, stat['v'][x]) if x in stat['v'] else (y, z)
                                 for (x,y,z) in keys2])
 
                 cacheKey = "%d=%s" % (stat['id'], stat['vn'] or '')
@@ -681,7 +699,7 @@ class XvmFS(Fuse):
 
             for pd in req['players']:
                 cacheKey = "%(id)d=%(v)s" % pd
-                if self.cache.has_key(cacheKey):
+                if cacheKey in self.cache:
                     continue
 
                 Log.debug("Player %(id)s %(v)s %(n)s not in Database" % pd)
@@ -716,7 +734,7 @@ class XvmFS(Fuse):
             s = sa[1] + '/' + sa[0]
 
         key = "@INFO/" + s
-        if self.infocache.has_key(key):
+        if key in self.infocache:
             return self.infocache[key]
 
         request = "INFO/" + s.replace('?', '%3F')
@@ -783,7 +801,6 @@ class XvmFS(Fuse):
         if self.fuse_args.mountpoint is None:
             self.fuse_args.mountpoint = self.config_mnt
 
-
 """ Entry point
 """
 def main():
@@ -815,8 +832,8 @@ def main():
     server.parser.add_option(mountopt='debug', action='store_true',
             help='Enable detailed logging')
 
-    server.parse(values=server, errex=1)
     server.debug = DEFAULT['debug']
+    server.parse(values=server, errex=1)
 
     if server.fuse_args.mount_expected():
         configureLoggers(server.log_dir,
@@ -850,7 +867,7 @@ def get_current_options():
             line = line.strip()
             if not line or line.startswith('#'):
                 continue
-            
+
             found = re.match('(\w+).*?=\s*(.*)', line)
             if not found:
                 continue

@@ -99,21 +99,23 @@ class BxmlDecoder:
 
     def readData(self, node, offset, dataDesc):
         lengthInBytes = dataDesc['end'] - offset
-        if dataDesc['type'] == 0x0:
+        typeId = dataDesc['type']
+
+        if typeId == 0x0:
             # Element
             self.readElement(node)
 
-        elif dataDesc['type'] == 0x1:
+        elif typeId == 0x1:
             # String
             string = self.stream.read(lengthInBytes)
             node.appendChild(self.doc.createTextNode(string))
 
-        elif dataDesc['type'] == 0x2:
+        elif typeId == 0x2:
             # Integer
             string = self.readNumber(lengthInBytes)
             node.appendChild(self.doc.createTextNode("\t%s\t" % string))
 
-        elif dataDesc['type'] == 0x3:
+        elif typeId == 0x3:
             # Floats
             arr = self.readFloats(lengthInBytes)
             if len(arr) != 12:
@@ -134,18 +136,19 @@ class BxmlDecoder:
                 node.appendChild(row2)
                 node.appendChild(row3)
 
-        elif dataDesc['type'] == 0x4:
+        elif typeId == 0x4:
             # Boolean
             node.appendChild(self.doc.createTextNode("\t%s\t" %
                 str(self.readBoolean(lengthInBytes)).lower()))
 
-        elif dataDesc['type'] == 0x5:
+        elif typeId == 0x5:
             # Base64
             string = self.readBase64(lengthInBytes)
             node.appendChild(self.doc.createTextNode("\t%s\t" % string))
+
         else:
             raise ValueError('Unknown type 0x%x in descriptor %s' %
-                (dataDesc['type'], str(dataDesc)))
+                (typeId, str(dataDesc)))
 
         return dataDesc['end']
 

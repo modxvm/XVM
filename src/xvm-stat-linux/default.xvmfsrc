@@ -22,6 +22,6 @@ game_dir = C:\Games\World_of_Tanks
 # for logging. Disabled by default.
 #debug = true
 
-# The threshold value used to choose some fast proxies from available 
+# The threshold value used to choose some fast proxies from available
 # proxy pool. For now several proxies are available for China only.
 #ping_threshold = 500

@@ -43,13 +43,12 @@ def configureLoggers(logDir, level):
 
 def locate_file(filename):
     # Check if exact file exists
-
     absname = os.path.abspath(filename)
     if os.path.exists(absname):
         return absname
 
     fdir, fname = os.path.split(absname)
-    
+
     if not os.path.isdir(fdir):
         # Directory does not exist or have name in other case
         fdir = locate_file(fdir)
@@ -111,7 +110,7 @@ def CollectParts(parameters):
         return None
     if cmdId[0] == '_':
         Log.warning('Unknown SWF sandbox ' + cmdId)
-    if not parts.has_key(cmdId):
+    if cmdId not in parts:
         parts[cmdId] = Parts()
 
     part = parts[cmdId]
