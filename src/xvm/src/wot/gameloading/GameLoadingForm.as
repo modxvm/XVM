@@ -57,6 +57,28 @@ class wot.gameloading.GameLoadingForm
         //com.xvm.Components.Widgets.WidgetsFactory.initialize(mc, "sirmax2", [ com.xvm.Components.Widgets.SwitcherWidget.DEFAULT_SETTINGS ]);
         //var wsd = new com.xvm.Components.Widgets.Settings.WidgetsSettingsDialog(_root.header, "sirmax2");
         // ------------------ DEBUG ------------------
+
+        // Send first ping as early as possible, to be ready on login screen.
+        if (Config.s_config.login.pingServers.enabled || Config.s_config.hangar.pingServers.enabled);
+            PingServers.sendPing();
+
+        if (Config.s_config.login.pingServers.showPingOnGameLoading != true)
+            return;
+
+        var me = this;
+        _global.setInterval(function() { me.pingInitializationTimer.call(me); }, 1000);
+    }
+
+    private function pingInitializationTimer()
+    {
+        var main:MovieClip = wrapper;
+        var holder = main.createEmptyMovieClip("pingHolder", main.getNextHighestDepth());
+        // _root.contentHolder.main is fixed size (1024x768), so create holder and place it at the top left corner of screen.
+        holder._x = Math.round((1024 - main.__width) / 2);
+        holder._y = Math.round((768 - main.__height) / 2);
+        //holder._x = 512;
+        //holder._y = 384;
+        PingServers.initFeature(Config.s_config.login.pingServers, holder);
     }
 
     function setVersionImpl(value)

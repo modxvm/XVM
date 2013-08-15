@@ -11,7 +11,6 @@
 
   [OTHER]
   * automation: XVM nightly builds.
-  * removed option login/pingServers/showPingOnGameLoading
 
 XVM-4.1.0:
   [NEW FUNCTIONS]

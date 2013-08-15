@@ -1,4 +1,4 @@
-import com.xvm.Cmd;
+import com.xvm.Comm;
 import com.xvm.Config;
 import com.xvm.Defines;
 import com.xvm.JSONx;
@@ -35,6 +35,11 @@ class com.xvm.Components.PingServers.PingServers
         _global.setTimeout(function() { PingServers.instance.showPing.call(PingServers.instance) }, 5000);
     }
 
+    public static function sendPing()
+    {
+        Comm.Sync(Defines.COMMAND_PING, "0");
+    }
+
     public function PingServers()
     {
         pingCommandCounter = 0;
@@ -42,13 +47,15 @@ class com.xvm.Components.PingServers.PingServers
 
     private function showPing()
     {
-        Cmd.ping(this, "answerCallback");
+        Comm.Sync(Defines.COMMAND_PING, String(pingCommandCounter++), this, answerCallback);
     }
     
-    private function answerCallback(answer):Void
+    private function answerCallback(event):Void
     {
+        var answer:String = event.str;
         if (answer == null || answer == "")
             return;
+            
         view.update(parseAnswer(answer));
     }
     
