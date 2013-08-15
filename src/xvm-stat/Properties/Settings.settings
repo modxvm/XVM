@@ -6,7 +6,7 @@
       <Value Profile="(Default)">res_mods\xvm\.xvmfs</Value>
     </Setting>
     <Setting Name="Timeout" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">10000</Value>
+      <Value Profile="(Default)">30000</Value>
     </Setting>
     <Setting Name="ProxyServers" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
