@@ -186,6 +186,7 @@
       {{cellsize}}     - minimap cell side size
       {{vehicle-name}} - returns vehicle system name - usa-M24_Chaffee
       {{vehiclename}}  - returns vehicle system name - usa-M24_Chaffee
+      {{vehicle-short}}  - shortened vehicle type
 
     Statistics macros ('rating/showPlayersStatistics' must be anabled):
       {{avglvl}}      - average level (tier) of tanks
