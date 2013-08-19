@@ -3,6 +3,7 @@
   * localization: added German, Hungarian, Korean, Polish and Spanish translations
   * hitlog: rows in HP Left panel can be formatted
   * xvm-stat: /priority parameter
+  * minimap: short vehicle names from vehicleNames.xc
 
   [FIXES]
   * minimap: fixed labels for asian region
@@ -11,7 +12,7 @@
   * squad window: text field with vehicle tier no longer creates artefacts
 
   [OTHER]
-  * automation: XVM nightly builds.
+  * automation: XVM nightly builds
 
 XVM-4.1.0:
   [NEW FUNCTIONS]

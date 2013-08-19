@@ -76,6 +76,18 @@ class com.xvm.VehicleInfo
         }
     }
 
+    public static function mapVehicleShortName(vehicleShortName:String,originalName:String):String
+    {
+        try
+        {
+            return Config.s_config.vehicleNames[vehicleShortName].short || VehicleInfoData.data[vehicleShortName].short || originalName;
+        }
+        catch (ex:Error)
+        {
+            return originalName;
+        }
+    }
+
     public static function GetVTypeValue(iconSource:String): String
     {
         var vi2 = com.xvm.VehicleInfo.getInfo2(iconSource);
