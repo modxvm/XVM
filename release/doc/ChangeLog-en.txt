@@ -1,6 +1,6 @@
 ﻿﻿XVM-4.1.1:
   [NEW FUNCTIONS]
-  * localization: added German, Hungarian, Korean, Polish and Spanish translations
+  * localization: added Finnish, French, German, Hungarian, Korean, Polish and Spanish translations
   * hitlog: rows in HP Left panel can be formatted
   * xvm-stat: /priority parameter
   * minimap: support vehicle names from vehicleNames.xc
@@ -13,7 +13,7 @@
   * squad window: text field with vehicle tier no longer creates artefacts
 
   [OTHER]
-  * automation: XVM nightly builds
+  * automation: XVM nightly builds http://wargaming.by-reservation.com/xvm/
 
 XVM-4.1.0:
   [NEW FUNCTIONS]
@@ -29,7 +29,7 @@ XVM-4.1.0:
     hangar/widgetsEnabled - enable hangar widgets. Currently, only clock is available.
   * minimap: new label types - wrecks, teamkillers, lost allies
   * localization: XVM now using external files for translation
-  * localization: new belarusian, ukranian and czech translations
+  * localization: added Belarusian, Ukranian and Czech translations
   * snippets - extended battle elements settings. battle/elements section was changed.
     details is here: http://www.koreanrandom.com/forum/topic/1761-snippets/ (Russian)
     xvm-stat 1.6.1 or higher required
