@@ -75,6 +75,11 @@ class com.xvm.VehicleInfo
             return originalName;
         }
     }
+    
+    public static function mapVehicleName2(tankName:String, originalName:String):String
+    {
+            return Config.s_config.vehicleNames[tankName].name || originalName;
+    }
 
     public static function mapVehicleShortName(vehicleShortName:String,originalName:String):String
     {

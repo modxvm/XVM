@@ -3,6 +3,7 @@
   * localization: added German, Hungarian, Korean, Polish and Spanish translations
   * hitlog: rows in HP Left panel can be formatted
   * xvm-stat: /priority parameter
+  * minimap: support vehicle names from vehicleNames.xc
   * minimap: short vehicle names from vehicleNames.xc
 
   [FIXES]

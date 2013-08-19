@@ -47,8 +47,13 @@ class com.xvm.VehicleInfoDataL10n
             if (transKey == null)
                 continue;
 
-            var name:String = Localization.makeString(transKey, { } );
-            _localizedNameList[name] = tankKey;
+            if transKey.lastIndexOf("_short") > -1
+            {
+                var name:String = Localization.makeString(transKey.slice(0, -6), { } );
+                _localizedNameList[name] = tankKey;
+            }
+            var shortName:String = Localization.makeString(transKey, { } );
+            _localizedNameList[shortName] = tankKey;
         }
     }
 }

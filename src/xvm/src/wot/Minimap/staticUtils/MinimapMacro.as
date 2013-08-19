@@ -1,5 +1,6 @@
 import com.xvm.Utils;
 import com.xvm.VehicleInfo;
+import com.xvm.VehicleInfoDataL10n;
 import wot.Minimap.dataTypes.Player;
 import wot.Minimap.model.externalProxy.MapConfig;
 
@@ -59,13 +60,13 @@ class wot.Minimap.staticUtils.MinimapMacro
         if (formatArr.length > 1)
             format = formatArr.join(systemVehName);
 
-        /** Vehicle type readable - ×àôôè */
+        /** Vehicle type readable - Chaffee */
         formatArr = format.split(VEH_MACRO);
         if (formatArr.length > 1)
-            format = formatArr.join(player.vehicle);
+            format = formatArr.join(VehicleInfo.mapVehicleName2(VehicleInfoDataL10n.getVehicleNationName(player.vehicle), player.vehicle));
         formatArr = format.split(VEH_MACRO_ALT);
         if (formatArr.length > 1)
-            format = formatArr.join(player.vehicle);
+            format = formatArr.join(VehicleInfo.mapVehicleName2(VehicleInfoDataL10n.getVehicleNationName(player.vehicle), player.vehicle));
 
 
 
