@@ -1,4 +1,4 @@
-﻿﻿XVM-dev:
+﻿﻿XVM-4.1.1:
   [NEW FUNCTIONS]
   * localization: added German, Hungarian, Korean, Polish and Spanish translations
   * hitlog: rows in HP Left panel can be formatted
