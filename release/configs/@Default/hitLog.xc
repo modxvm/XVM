@@ -25,10 +25,10 @@
         "enabled": true,
         // Header, macros ARE NOT allowed.
         // Заголовок, макросы НЕ разрешены.
-        "header": "Hitpoints left:",
+        "header": "<font color='#FFFFFF'>Hitpoints left:</font>",
         // Row in HP list (macros allowed, see readme-en.txt).
         // Строка в списке попаданий (допускаются макроподстановки, см. readme-ru.txt)
-        "format": "<font color='#FFFFFF'>{{vehicle}} </font>   <font color='#FF9999'>{{hp}}</font>    <font color='#BBBBBB'>{{nick}}</font>"
+        "format": "<textformat leading='-4' tabstops='[50,90,180]'><font color='{{c:hp-ratio}}'>     {{hp}}</font><tab><font color='#FFFFFF'>/ </font>{{hp-max}}<tab><font color='#FFFFFF'>|</font><font color='{{c:vtype}}'>{{vehicle}}</font><tab><font color='#FFFFFF'>|{{nick}}</font></textformat>"
     },
     
     // X position (negative values - bind to right side of screen).
@@ -64,10 +64,10 @@
     "defaultHeader":  "<font color='#FFFFFF'>Hits:</font> <font size='13'>#0</font>",
     // Hits header format, including last hit (macros allowed, see readme-en.txt).
     // Формат заголовка (допускаются макроподстановки, см. readme-ru.txt).
-    "formatHeader":  "<font color='#FFFFFF'>Hits:</font> <font size='13'>#{{n}}</font> <b>{{dmg-total}}</b>  <font color='#FFFFFF'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font>",
+    "formatHeader":  "<font color='#FFFFFF'>Hits:</font> <font size='13'>#{{n}}</font> <font color='#FFFFFF'>Total: </font><b>{{dmg-total}}</b>  <font color='#FFFFFF'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font>",
     // List of hits format (macros allowed, see readme-en.txt).
     // Формат лога попаданий (допускаются макроподстановки, см. readme-ru.txt)
-    "formatHistory": "<textformat leading='-4' tabstops='[20,50,90,150]'><font size='12'>\u00D7{{n-player}}:</font><tab>{{dmg-player}}<tab>| <font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| <font color='{{c:dmg-kind}}'>{{dmg-kind}}</font><tab>| <font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font></textformat>",
+    "formatHistory": "<textformat leading='-4' tabstops='[20,50,90,180]'><font size='12'>\u00D7{{n-player}}:</font><tab><font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| {{dmg-player}}<tab>|<font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font><tab><font color='#FFFFFF'>|{{nick}}</font></textformat>",
     // Shadow options.
     // Параметры тени.
     "shadow": {

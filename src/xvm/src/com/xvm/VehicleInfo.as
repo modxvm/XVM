@@ -104,6 +104,17 @@ class com.xvm.VehicleInfo
         return Config.s_config.texts.vtype[vtype];
     }
     
+    public static function GetVTypeValue2(iconSource:String): String
+    {
+        var vi2 = com.xvm.VehicleInfo.getInfo2(iconSource);
+        if (vi2 == null)
+            return "";
+        var vtype = vi2.type;
+        if (!vtype)
+            return "";
+        return vtype;
+    }
+    
     // icon = "../maps/icons/vehicle/contour/ussr-IS-3.png"
     // return: "is_3"
     public static function getName2(icon: String): String

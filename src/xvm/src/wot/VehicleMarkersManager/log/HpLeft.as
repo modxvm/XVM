@@ -110,7 +110,7 @@ class wot.VehicleMarkersManager.log.HpLeft
                 format = formatArr.join(VehicleInfo.GetVTypeValue(player.vIconSource));
             formatArr = format.split("{{c:vtype}}");						
             if (formatArr.length > 1)
-                format = formatArr.join(GraphicsUtil.GetVTypeColorValue(player.vIconSource, VehicleInfo.GetVTypeValue(player.vIconSource)));				
+                format = formatArr.join(GraphicsUtil.GetVTypeColorValue(player.vIconSource, VehicleInfo.GetVTypeValue2(player.vIconSource)));				
             formatArr = format.split("{{level}}");
             if (formatArr.length > 1)
                 format = formatArr.join(player.vLevel);
