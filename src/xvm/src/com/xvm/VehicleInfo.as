@@ -60,7 +60,7 @@ class com.xvm.VehicleInfo
     {
         var result:Object = {};
         for (var vname:String in VehicleInfoData.data)
-            result[vname] = VehicleInfoData.data[vname].name;
+            result[vname] = {name:VehicleInfoData.data[vname].name, short:VehicleInfoData.data[vname].short};
         return result;
     }
 
@@ -68,7 +68,7 @@ class com.xvm.VehicleInfo
     {
         try
         {
-            return Config.s_config.vehicleNames[getName1(iconSource)] || originalName;
+            return Config.s_config.vehicleNames[getName1(iconSource)].name || originalName;
         }
         catch (ex:Error)
         {
