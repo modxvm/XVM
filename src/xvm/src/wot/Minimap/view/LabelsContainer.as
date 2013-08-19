@@ -1,3 +1,4 @@
+import com.xvm.Logger;
 import com.xvm.AutoUpdate;
 import com.xvm.GlobalEventDispatcher;
 import flash.geom.Point;
@@ -109,7 +110,7 @@ class wot.Minimap.view.LabelsContainer
     {
         for (var uidStr:String in holderMc)
         {
-            var uid:Number = parseInt(uidStr);
+            var uid:Number = Number(uidStr);
             /**
              * Have to check for uid value consistency
              * because we are iterating through MovieClip props not Array.
@@ -119,10 +120,9 @@ class wot.Minimap.view.LabelsContainer
             if (uid)
             {
                 var labelMc:MovieClip = holderMc[uidStr];
-                
                 var previousStatus:Number = labelMc[STATUS_FIELD_NAME];
                 var actualStatus:Number = getPresenceStatus(uid);
-                
+				
                 if (previousStatus != actualStatus)
                 {
                     labelMc[STATUS_FIELD_NAME] = actualStatus;
@@ -159,7 +159,7 @@ class wot.Minimap.view.LabelsContainer
     }
     
     private function getPresenceStatus(uid:Number):Number
-    {
+    {	
         var status:Number;
         
         if (IconsProxy.isIconIsPresentAtMinimap(uid))
@@ -192,7 +192,7 @@ class wot.Minimap.view.LabelsContainer
              */
             status *= Player.TEAM_KILLER_FLAG;
         }
-        
+		
         return status;
     }
 }
