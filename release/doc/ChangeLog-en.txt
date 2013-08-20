@@ -1,6 +1,7 @@
-﻿﻿XVM-4.1.1:
+﻿XVM-4.1.1:
   [NEW FUNCTIONS]
   * localization: added Finnish, French, German, Hungarian, Korean, Polish, Spanish and Vietnamese translations
+  * localization: macros for translating text in config, removed language dependency from config
   * hitlog: rows in HP Left panel can be formatted
   * xvm-stat: /priority parameter
   * minimap: support vehicle names from vehicleNames.xc
@@ -63,7 +64,7 @@ XVM-4.0.0:
   * expertPanel mod; see battle.xc
   * cluster responce time table at login and hangar (ping);
     "pingServers" section at login.xc and  hangar.xc config files
-  * hitlog: shows enemy HP left (markers which were visible) on Alt press; 
+  * hitlog: shows enemy HP left (markers which were visible) on Alt press;
     hitlog.xc: "hpLeft": "true"
   * show ping at the game loading screen; login.xc/pingServers
 

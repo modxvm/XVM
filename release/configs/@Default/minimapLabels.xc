@@ -93,31 +93,31 @@
         // Тени полей.
         // "distance"- дистанция тени относительно поля, "angle"- угол тени при дистанции > 0, "alpha"- прозрачность, "blur"- размытие, "strength'- сила.
         "shadow": {
-          "ally": 
+          "ally":
            { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 3, "strength": 4 },
-          "teamkiller": 
+          "teamkiller":
            { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 3, "strength": 4 },
-          "enemy": 
+          "enemy":
            { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 3, "strength": 4 },
-          "squad": 
+          "squad":
            { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 3, "strength": 4 },
-          "oneself": 
+          "oneself":
            { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 3, "strength": 4 },
-          "lostally": 
+          "lostally":
            { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 6, "strength": 4 },
-          "lostteamkiller": 
+          "lostteamkiller":
            { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 6, "strength": 4 },
-          "lost": 
+          "lost":
            { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 6, "strength": 4 },
-          "lostsquad": 
+          "lostsquad":
            { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 6, "strength": 4 },
-          "deadally": 
+          "deadally":
            { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 3, "strength": 3 },
-          "deadteamkiller": 
+          "deadteamkiller":
            { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 3, "strength": 3 },
-          "deadenemy": 
+          "deadenemy":
            { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 3, "strength": 3 },
-          "deadsquad": 
+          "deadsquad":
            { "enabled": true, "color": "0x000000", "distance": 0, "angle": 45, "alpha": 80, "blur": 3, "strength": 3 }
         },
         // Field offset ralative to current icon (except lost - relative to enemy last seen position).
@@ -158,7 +158,7 @@
       // Поле размера стороны карты. Например, 1000м, 700м, 600м.
       "mapSize": {
         "enabled": true,
-        "format": "<b>{{cellsize}}0 м</b>",
+        "format": "<b>{{cellsize}}0 {{l10n:metersSymbol}}</b>",
         "css": "font-size:10px; color:#FFCC66;",
         "alpha": 80,
         "offsetX": 0,

@@ -6,7 +6,6 @@ import com.xvm.Config;
 import com.xvm.Defines;
 import com.xvm.GraphicsUtil;
 import com.xvm.Locale;
-import com.xvm.Logger;
 import com.xvm.Strings;
 import com.xvm.Utils;
 import com.xvm.VehicleInfo;
@@ -14,7 +13,7 @@ import com.xvm.VehicleInfo;
 class wot.VehicleMarkersManager.log.HitLog
 {
     public static var STYLE_NAME:String = "xvm_hitlog";
-    
+
     private static var groupHitsByPlayer:Boolean = false;
 
     private var x:Number;
@@ -34,7 +33,7 @@ class wot.VehicleMarkersManager.log.HitLog
     private var total:Number;
     private var players:Object;
     private var hits:Array;
-    
+
     private var text:String;
 
     public function HitLog(cfg:Object)
@@ -47,9 +46,9 @@ class wot.VehicleMarkersManager.log.HitLog
         direction = cfg.direction.toLowerCase() == "up" ? Defines.DIRECTION_UP : Defines.DIRECTION_DOWN;
         insertOrder = cfg.insertOrder.toLowerCase() == "begin" ? Defines.INSERTORDER_BEGIN : Defines.INSERTORDER_END;
         groupHitsByPlayer = cfg.groupHitsByPlayer == true;
-        defaultHeader = cfg.defaultHeader;
-        formatHeader = cfg.formatHeader;
-        formatHistory = cfg.formatHistory;
+        defaultHeader = Locale.formatMacros(cfg.defaultHeader);
+        formatHeader = Locale.formatMacros(cfg.formatHeader);
+        formatHistory = Locale.formatMacros(cfg.formatHistory);
         shadow = cfg.shadow;
 
         total = 0;
@@ -67,13 +66,13 @@ class wot.VehicleMarkersManager.log.HitLog
     {
         this.text = text;
     }
-    
+
     /** Invoked by LogLists */
     public function setHpText(text:String):Void
     {
         textField.htmlText = text;
     }
-    
+
     /** Invoked by LogLists */
     public function setHitText():Void
     {

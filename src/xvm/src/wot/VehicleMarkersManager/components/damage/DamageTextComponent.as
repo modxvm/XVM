@@ -1,9 +1,10 @@
 import com.xvm.ColorsManager;
 import com.xvm.GraphicsUtil;
+import com.xvm.Locale;
 import com.xvm.Macros;
 import com.xvm.Utils;
-import wot.VehicleMarkersManager.components.damage.DamageTextProxy;
 import wot.VehicleMarkersManager.components.damage.DamageTextAnimation;
+import wot.VehicleMarkersManager.components.damage.DamageTextProxy;
 
 class wot.VehicleMarkersManager.components.damage.DamageTextComponent
 {
@@ -49,7 +50,7 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
         {
             color = proxy.formatDynamicColor(proxy.formatStaticColorText(cfg.color), delta, flag, damageType);
         }
-        
+
         var shadowColor:Number;
         if (cfg.shadow.color == null)
         {
@@ -116,7 +117,7 @@ class wot.VehicleMarkersManager.components.damage.DamageTextComponent
 
     private function defineText(newHealth:Number, delta:Number, damageFlag:Number, damageType:String):String
     {
-        var msg = (newHealth < 0) ? cfg.blowupMessage : cfg.damageMessage;
+        var msg = (newHealth < 0) ? Locale.formatMacros(cfg.blowupMessage) : cfg.damageMessage;
         var text = proxy.formatDynamicText(proxy.formatStaticText(msg), newHealth, delta, damageFlag, damageType);
         // For some reason, DropShadowFilter is not rendered when textfield contains only one character,
         // so we're appending empty prefix and suffix to bypass this unexpected behavior

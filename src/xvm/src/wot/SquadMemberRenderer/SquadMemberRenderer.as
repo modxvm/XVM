@@ -1,6 +1,6 @@
 /**
  * @author Mr.A
- * @author Assassik
+ * @author Pavel Máca
  */
 import com.xvm.Config;
 import com.xvm.Defines;

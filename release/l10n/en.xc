@@ -3,6 +3,7 @@
  */
 {
   "locale": {
+    // Author of translation
     "XVM_translator": "Maxim Schedriviy",
 
     // Win chance
@@ -16,13 +17,20 @@
     "fire": "fire",
     "ramming": "ramming",
     "world_collision": "falling",
+    "Hits": "Hits",
+    "Total": "Total",
+    "Last": "Last",
+
+    // Hp Left
+    "hpLeftTitle": "Hitpoints left:",
 
     // Capture
-    "<font size='15' color='#FFFFFF'>Enemy base capture! {{extra}}</font>": "<font size='15' color='#FFFFFF'>Enemy base capture! {{extra}}</font>",
-    "<font size='17' color='#FFCC66'>Enemy base captured!</font>": "<font size='17' color='#FFCC66'>Enemy base captured!</font>",
-    "<font size='15' color='#FFFFFF'>Ally base capture! {{extra}}</font>": "<font size='15' color='#FFFFFF'>Ally base capture! {{extra}}</font>",
-    "<font size='17' color='#FFCC66'>Ally base captured!</font>": "<font size='17' color='#FFCC66'>Ally base captured!</font>",
-    "Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>": "Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>",
+    "enemyBaseCapture": "Enemy base capture!",
+    "enemyBaseCaptured": "Enemy base captured!",
+    "allyBaseCapture": "Ally base capture!",
+    "allyBaseCaptured": "Ally base captured!",
+    "Timeleft": "Timeleft",
+    "Capturers": "Capturers",
 
     // FinalStatistics
     "Hit percent": "Hit percent",
@@ -85,6 +93,12 @@
     "MT": "MT",
     "LT": "LT",
     "TD": "TD",
-    "SPG": "SPG"
+    "SPG": "SPG",
+
+    // VehicleMarkersManager
+    "blownUp": "Blown-up!",
+
+    // Minimap
+    "metersSymbol": "m"
   }
 }

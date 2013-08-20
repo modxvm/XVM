@@ -356,7 +356,7 @@ class com.xvm.DefaultConfig
                   },
                   mapSize: {
                     enabled: true,
-                    format: "<b>{{cellsize}}0 m</b>",
+                    format: "<b>{{cellsize}}0 {{l10n:metersSymbol}}</b>",
                     css: "font-size:10px; color:#FFCC66;",
                     alpha: 80,
                     offsetX: 0,
@@ -469,10 +469,10 @@ class com.xvm.DefaultConfig
                 primaryTitleOffset: 7,
                 appendPlus: true,
                 enemy: {
-                    primaryTitleFormat:   "<font size='15' color='#FFFFFF'>Enemy base capture! {{extra}}</font>",
+                    primaryTitleFormat:   "<font size='15' color='#FFFFFF'>{{l10n:enemyBaseCapture}} {{extra}}</font>",
                     secondaryTitleFormat: "<font size='15' color='#FFFFFF'>{{points}}</font>",
-                    captureDoneFormat:    "<font size='17' color='#FFCC66'>Enemy base captured!</font>",
-                    extra: "Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>",
+                    captureDoneFormat:    "<font size='17' color='#FFCC66'>{{l10n:enemyBaseCaptured}}</font>",
+                    extra: "{{l10n:Capturers}}: <b><font color='#FFCC66'>{{tanks}}</font></b> {{l10n:Timeleft}}: <b><font color='#FFCC66'>{{time}}</font><b>",
                     shadow: {
                         color: "0x000000",
                         alpha: 50,
@@ -481,10 +481,10 @@ class com.xvm.DefaultConfig
                     }
                 },
                 ally: {
-                    primaryTitleFormat:   "<font size='15' color='#FFFFFF'>Ally base capture! {{extra}}</font>",
+                    primaryTitleFormat:   "<font size='15' color='#FFFFFF'>{{l10n:allyBaseCapture}} {{extra}}</font>",
                     secondaryTitleFormat: "<font size='15' color='#FFFFFF'>{{points}}</font>",
-                    captureDoneFormat:    "<font size='17' color='#FFCC66'>Ally base captured!</font>",
-                    extra: "Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>",
+                    captureDoneFormat:    "<font size='17' color='#FFCC66'>{{l10n:allyBaseCaptured}}</font>",
+                    extra: "{{l10n:Capturers}}: <b><font color='#FFCC66'>{{tanks}}</font></b> {{l10n:Timeleft}}: <b><font color='#FFCC66'>{{time}}</font><b>",
                     shadow: {
                         color: "0x000000",
                         alpha: 50,
@@ -497,9 +497,9 @@ class com.xvm.DefaultConfig
                 visible: true,
                 hpLeft: {
                     enabled: true,
-                    header: "<font color='#FFFFFF'>Hitpoints left:</font>",
+                    header: "<font color='#FFFFFF'>{{l10n:hpLeftTitle}}</font>",
                     format: "<textformat leading='-4' tabstops='[50,90,180]'><font color='{{c:hp-ratio}}'>     {{hp}}</font><tab><font color='#FFFFFF'>/ </font>{{hp-max}}<tab><font color='#FFFFFF'>|</font><font color='{{c:vtype}}'>{{vehicle}}</font><tab><font color='#FFFFFF'>|{{nick}}</font></textformat>"
-                },								               
+                },
                 x: 270,
                 y: 5,
                 w: 500,
@@ -511,8 +511,8 @@ class com.xvm.DefaultConfig
                 // Substitution for {{dead}} macro when player is dead
                 deadMarker:   "<font face='Wingdings'>N</font>",
                 blowupMarker: "<font face='Wingdings'>M</font>",
-                defaultHeader: "<font color='#FFFFFF'>Hits:</font> <font size='13'>#0</font>",
-                formatHeader:  "<font color='#FFFFFF'>Hits:</font> <font size='13'>#{{n}}</font> <font color='#FFFFFF'>Total: </font><b>{{dmg-total}}</b>  <font color='#FFFFFF'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font>",
+                defaultHeader: "<font color='#FFFFFF'>{{l10n:Hits}}:</font> <font size='13'>#0</font>",
+                formatHeader:  "<font color='#FFFFFF'>{{l10n:Hits}}:</font> <font size='13'>#{{n}}</font> <font color='#FFFFFF'>{{l10n:Total}}: </font><b>{{dmg-total}}</b>  <font color='#FFFFFF'>{{l10n:Last}}:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font>",
                 formatHistory: "<textformat leading='-4' tabstops='[20,50,90,180]'><font size='12'>\u00D7{{n-player}}:</font><tab><font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| {{dmg-player}}<tab>|<font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font><tab><font color='#FFFFFF'>|{{nick}}</font></textformat>",
                 shadow: {
                   alpha: 100,
@@ -1094,7 +1094,7 @@ class com.xvm.DefaultConfig
             speed: 2,
             maxRange: 40,
             damageMessage: "{{dmg}}",
-            blowupMessage: "Blown-up!"
+            blowupMessage: "{{l10n:blownUp}}"
         }
     }
 

@@ -1,6 +1,6 @@
 /**
  * @author ilitvinov87@gmail.com
- * @author Assassik
+ * @author Pavel Máca
  * @author Mr.A
  * @author Maxim Schedriviy <m.schedriviy@gmail.com>
  */
@@ -22,11 +22,11 @@ class wot.Minimap.model.mapSize.MapInfoData
 
     /////////////////////////////////////////////////////////////////
     // PRIVATE
-    
-    private static var _systemMapnameList:Object = 
+
+    private static var _systemMapnameList:Object =
     {
         //$00_tank_tutorial
-        $01_karelia:          { size: 100 }, // Karelia 
+        $01_karelia:          { size: 100 }, // Karelia
         $02_malinovka:        { size: 100 }, // Malinovka
         $03_campania:         { size: 60 },  // Province
         $04_himmelsdorf:      { size: 70 },  // Himmelsdorf
@@ -66,10 +66,10 @@ class wot.Minimap.model.mapSize.MapInfoData
     }
 
     private static var _localizedMapnameList:Object;
-    
+
     private static function get localizedData():Object
     {
-        if (_localizedMapnameList == null) 
+        if (_localizedMapnameList == null)
             setupData();
         return _localizedMapnameList;
     }

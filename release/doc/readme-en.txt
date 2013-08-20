@@ -84,7 +84,7 @@
   All possible config options you can see in this file:
     \res_mods\xvm\configs\@Default\
 
-    
+
   Supported HTML tags:
     http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html#htmlText
 
@@ -129,6 +129,7 @@
       {{c:system}}    - system color (disable override color)
       {{a:hp}}        - transparency depended from current health points (only in vehicle markers)
       {{a:hp-ratio}}  - transparency depended from current health ratio (only in vehicle markers)
+      {{l10n:blownUp}}  - localizated text "Blown-up!", only in "blowupMessage"
       + statistics macros (see below)
 
     In Hits Log:
@@ -151,6 +152,9 @@
       {{dmg-kind}}    - damage kind (attack, fire, ramming, ...)
       {{c:dmg-kind}}  - color depended from damage kind
       {{c:vtype}}     - color depended from vehicle type
+      {{l10n:Hits}}   - localizated text "Hits"
+      {{l10n:Total}}  - localizated text "Total"
+      {{l10n:Last}}   - localizated text "Last"
 
     In HP Left:
       {{nick}}        - player nickname with clan name
@@ -168,6 +172,7 @@
       {{c:vtype}}     - color depended from vehicle type
       {{c:hp}}        - color depended from current health points
       {{c:hp-ratio}}  - color depended from current health ratio
+      {{l10n:hpLeftTitle}}  - localizated text "Hitpoints left:", only in "header"
 
     In Capture bar:
       {{points}}      - points already capture
@@ -176,6 +181,12 @@
       {{time}}        - time left to full capture; minutes and seconds;  can be placed only inside extra section
       {{time-sec}}    - time left to full capture; seconds only;         can be placed only inside extra section
       {{speed}}       - capture speed in points per second;              can be placed only inside extra section
+      {{l10n:enemyBaseCapture}}     - localizated text "Enemy base capture!"
+      {{l10n:enemyBaseCaptured}}    - localizated text "Enemy base captured!"
+      {{l10n:allyBaseCapture}}      - localizated text "Ally base capture!"
+      {{l10n:allyBaseCaptured}}     - localizated text "Ally base captured!"
+      {{l10n:Timeleft}}             - localizated text "Timeleft"
+      {{l10n:Capturers}}            - localizated text "Capturers"
 
     In Minimap:
       {{level}}        - subject level
@@ -186,7 +197,8 @@
       {{cellsize}}     - minimap cell side size
       {{vehicle-name}} - returns vehicle system name - usa-M24_Chaffee
       {{vehiclename}}  - returns vehicle system name - usa-M24_Chaffee
-      {{vehicle-short}}  - shortened vehicle type
+      {{vehicle-short}}  - shortened vehicle name
+      {l10n:metersSymbol}}  - localizated symbol "m", only in minimap.labels.mapSize.format field
 
     Statistics macros ('rating/showPlayersStatistics' must be anabled):
       {{avglvl}}      - average level (tier) of tanks
@@ -230,6 +242,20 @@
       {{c:t-battles}} - color depended from current vehicle battles
       Any color macro you can change to transparency macro ({{a: tdb}}).
 
+    Localization macros usage - {{l10n:localizationKey}}
+      Macros are just links to translations in file res_mods/xvm/l10n/XX.xc file (XX means language code).
+      If translate is not found, "localizationKey" is displayed.
+
+      Capture bar example
+        /l10n/en.xc
+          "enemyBaseCaptured": "Enemy base captured!"
+        captureBar.xc
+          "captureDoneFormat":    "<font size='17' color='#FFCC66'>{{l10n:enemyBaseCaptured}}</font>"
+
+        formated: "<font size='17' color='#FFCC66'>Enemy base captured!</font>"
+
+      More about localization at wiki: https://code.google.com/p/wot-xvm/wiki/LocalizingXVM
+
   "format" field examples:
     1. Show number of kilo-battles, efficiency and GWR without changing a color:
       "{{kb}} {{xwn}} {{rating}}"
@@ -246,9 +272,9 @@
 
   Clan and players icons.
   Config parameter battle/clanIconsFolder set path to clan icons root folder.
-  
+
   All icons are loading automatically from game region subfolder (RU/EU/US/...).
-  
+
   To add your clan or player icon, just copy icon file to:
     \res_mods\xvm\res\clanicons\[REGION]\clan\ (for clan)
     \res_mods\xvm\res\clanicons\[REGION]\nick\ (for single player)
@@ -265,7 +291,7 @@
 
   6-th sence image.
   To change sixth sense indicator place alternative PNG image to
-   \res_mods\xvm\res\SixthSense.png. 
+   \res_mods\xvm\res\SixthSense.png.
 
   Hit Log.
   Negative x, y values allow to bind the text to the right and bottom edges for

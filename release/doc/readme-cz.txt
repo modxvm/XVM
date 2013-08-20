@@ -28,7 +28,7 @@
 
 
   Stránky projektu:             http://www.modxvm.com/
-  
+
   Podpora (EN):                 http://www.koreanrandom.com/forum/topic/1383-xvm
   Nejčastější dotazy (EN):      http://www.modxvm.com/en/faq/
   Různá již připravená nastavení (RU): http://www.koreanrandom.com/forum/forum/50-custom-configurations
@@ -84,10 +84,10 @@
 
   Soubory s nastavením:
     "\res_mods\xvm\configs\@Default\"
-    
+
   Můžete použít některé z připravených souborů s nastavením ze složky:
     "\res_mods\xvm\configs\user configs\"
-    
+
   Můžete si vytvořit vlastní nastavení v online editoru:
     http://www.koreanrandom.com/forum/topic/1422-/#entry11316
 
@@ -136,10 +136,11 @@
       {{c:hp}}        - barva závislá na aktuálním počtu životů (pouze v ikoně nad vozidlem)
       {{c:hp-ratio}}  - barva závislá na poměru aktuálního počtu životů k celkovému počtu životů- v % (pouze v ikoně nad vozidlem)
       {{c:dmg-kind}}  - barva závislá na typu poškození
-      {{c:vtype}}	- barva závislá na typu vozidla (pouze v ikoně nad vozidlem)
+      {{c:vtype}}	  - barva závislá na typu vozidla (pouze v ikoně nad vozidlem)
       {{c:system}}    - systémová barva (zakáže změnu barvy)
       {{a:hp}}        - průhlednost závislá na aktuálním počtu životů (pouze v ikonách tanků)
       {{a:hp-ratio}}  - průhlednost závislá na poměru počtu aktuálního počtu životů k celkovému počtu životů (pouze v ikonách tanků)
+      {{l10n:blownUp}}  - přeložený text "Blown-up!", jen v "blowupMessage"
       + makra statistik (více informací níže)
 
     Záznam zásahů (hitLog):
@@ -162,6 +163,9 @@
       {{dmg-kind}}    - typ poškození (útok, oheň, náraz, ...)
       {{c:dmg-kind}}  - barva závislá na typu poškození
       {{c:vtype}}     - barva závislá na typu vozidla (pouze v ikoně nad vozidlem)
+      {{l10n:Hits}}   - přeložený text "Hits"
+      {{l10n:Total}}  - přeložený text "Total"
+      {{l10n:Last}}   - přeložený text "Last"
 
     Panel zbývajicích HP nepřátel (hpLeft):
       {{nick}}        - jméno hráče s tagu klanu
@@ -179,6 +183,7 @@
       {{c:vtype}}     - barva závislá na typu vozidla
       {{c:hp}}        - barva závislá na aktuálním počtu životů
       {{c:hp-ratio}}  - barva závislá na poměru aktuálního počtu životů k celkovému počtu životů- v %
+      {{l10n:hpLeftTitle}}  - přeložený text "Hitpoints left:", pouze v "header"
 
     Panel obsazování základny (captureBar):
       {{points}}      - obsazené body
@@ -187,6 +192,13 @@
       {{time}}        - zbývající čas do obsazení; minuty a sekundy;     může být použito pouze v sekci extra
       {{time-sec}}    - zbývající čas do obsazení; v sekundách;          může být použito pouze v sekci extra
       {{speed}}       - rychlost obsazování v bodech za sekundu;         může být použito pouze v sekci extra
+      {{l10n:enemyBaseCapture}}     - přeložený text "Enemy base capture!"
+      {{l10n:enemyBaseCaptured}}    - přeložený text "Enemy base captured!"
+      {{l10n:allyBaseCapture}}      - přeložený text "Ally base capture!"
+      {{l10n:allyBaseCaptured}}     - přeložený text "Ally base captured!"
+      {{l10n:Timeleft}}             - přeložený text "Timeleft"
+      {{l10n:Capturers}}            - přeložený text "Capturers"
+
 
     Minimapa:
       {{level}}         - úroveň (tier) vozidla
@@ -194,13 +206,15 @@
       {{vehicle}}       - název vozidla
       {{vehicle-type}}  - název vozidla
       {{vehicle-class}} - umístí zvláštní symbol podle typu vozidla
-      {{cellsize}}      - délka strany buňky (např. A1) na minimapě 
+      {{cellsize}}      - délka strany buňky (např. A1) na minimapě
       {{vehicle-name}}  - vrátí systémoví název vozidla - usa-M24_Chaffee
       {{vehiclename}}   - vrátí systémoví název vozidla - usa-M24_Chaffee
-    
+      {{vehicle-short}} - zkrácený název vozydla
+      {l10n:metersSymbol}}  - symbol pro metry "m", puze v poli minimap.labels.mapSize.format
+
     Statistická makra:
       V souboru s nastavení (\res_mods\xvm\configs\@Default\rating.xc) musí být povoleno "rating/showPlayersStatistics".
-    
+
       {{avglvl}}      - průměrná úroveň (tier) vozidel
       {{eff}}         - efektivita hráče: http://wot-news.com/index.php/stat/calc/en/
       {{eff:4}}       - efektivita hráče, zaokrouhlená na 4 místa zleva
@@ -242,6 +256,22 @@
       {{c:t-battles}} - barva závislá na počtu bitev daného vozidla
       Jakékoli barevné makro můžete změnit na makro průhlednosti (př. {{a: tdb}} ).
 
+    Použití překladových maker - {{l10n:localizationKey}}
+      Slouží pro překlady popisků v XVM, kterou jsou v základní konfiguraci.
+      Využívají soubory res_mods/xvm/l10n/XX.xc, kde XX znamemá kód jazyka.
+
+      Pokud není překlad nalezen zobrazí se "localizationKey".
+
+      Příklad s panelem obsazování základny:
+        /l10n/en.xc
+          "enemyBaseCaptured": "Enemy base captured!"
+        captureBar.xc
+          "captureDoneFormat":    "<font size='17' color='#FFCC66'>{{l10n:enemyBaseCaptured}}</font>"
+
+        přeformátuje na: "<font size='17' color='#FFCC66'>Enemy base captured!</font>"
+
+      Více o překladech na wiki: https://code.google.com/p/wot-xvm/wiki/LocalizingXVM
+
   Příklady:
 
     a.  Zobrazení počtu bitev v tisících, efektivity hráče a celkového poměru výher bez změny barev:
@@ -267,8 +297,8 @@
       Všechny ikony se automaticky načtou ze složky příslušného regionu (RU/EN/US...).
 
       Pro zobrazení své vlastní ikony ve hře stačí vložit vlastní ikonu do příslušné složky:
-        \res_mods\xvm\res\clanicons\[REGION]\clan\ (pro klanovou ikonu) 
-          
+        \res_mods\xvm\res\clanicons\[REGION]\clan\ (pro klanovou ikonu)
+
         \res_mods\xvm\res\clanicons\[REGION]\nick\ (pro ikonu hráče)
 
       Můžete vytvořit výchozí ikonu klanu/hráče:
@@ -292,7 +322,7 @@
 
   Hit Log.
     Záporné hodnoty x, y umístí text k pravé dolní hranici
-    
+
   Hodiny v bitvě a při načítání bitvy.
     Formát: Y:rok, M:měsích, D:den, H:hodina, N:minuta, S:sekunda. "" - odstraní hodiny.
     Příklady:

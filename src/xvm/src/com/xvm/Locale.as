@@ -17,6 +17,7 @@ class com.xvm.Locale
 {
     public static var EVENT_LOADED:String = "locale_loaded";
 
+    private static var MACRO_PREFIX:String = "l10n";
     private static var _initialized:Boolean = false;
     private static var _language:String;
     private static var _loaded:Boolean = false;
@@ -46,6 +47,36 @@ class com.xvm.Locale
     {
         //Logger.add("Locale[get]: string: " + text + " | string: " + s_lang.locale[text] + " | fallback string: " + s_lang_fallback[text] + " | language: " + _language );
         return s_lang.locale[text] || s_lang_fallback[text] || text;
+    }
+
+    public static function formatMacros(format:String):String
+    {
+        /** each item in array begin with macro */
+        var formatParts:Array = format.split("{{" + MACRO_PREFIX + ":");
+
+        /** begin part until first macro start */
+        var res = formatParts.shift();
+
+        for (var i = 0; i < formatParts.length; ++i)
+        {
+            /** "macro}} rest of text" */
+            var part:String = formatParts[i];
+
+            /** find macro end & make sure it contains at least 1 symbol */
+            var macroEnd:Number = part.indexOf("}}", 1);
+            if (macroEnd == -1) {
+                /** no end chars => write everythink back */
+                res += "{{" + MACRO_PREFIX + ":" + part;
+                continue;
+            }
+
+            var macro:String = part.slice(0, macroEnd);
+            res += Locale.get(macro);
+
+            /** write rest of text after macro, without }} */
+            res += part.slice(macroEnd + 2, part.length);
+        }
+        return res;
     }
 
     public static function isLoaded():Boolean
@@ -98,18 +129,20 @@ class com.xvm.Locale
             tr["fire"] = "пожар";
             tr["ramming"] = "таран";
             tr["world_collision"] = "падение";
+            tr["Hits"] = "Пробитий";
+            tr["Total"] = "Всего";
+            tr["Last"] = "Последний";
+
+            // Hp Left
+            tr["hpLeftTitle"] = "Осталось HP:";
 
             // Capture
-            tr["<font size='15' color='#FFFFFF'>Enemy base capture! {{extra}}</font>"] =
-                "<font size='15' color='#FFFFFF'>Захват вражеской базы! {{extra}}</font>";
-            tr["<font size='17' color='#FFCC66'>Enemy base captured!</font>"] =
-                "<font size='17' color='#FFCC66'>Вражеская база захвачена!</font>";
-            tr["<font size='15' color='#FFFFFF'>Ally base capture! {{extra}}</font>"] =
-                "<font size='15' color='#FFFFFF'>Захват нашей базы! {{extra}}</font>";
-            tr["<font size='17' color='#FFCC66'>Ally base captured!</font>"] =
-                "<font size='17' color='#FFCC66'>Наша база захвачена!</font>";
-            tr["Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>"] =
-                "Захватчиков: <b><font color='#FFCC66'>{{tanks}}</font></b> Осталось: <b><font color='#FFCC66'>{{time}}</font><b>";
+            tr["enemyBaseCapture"] = "Захват вражеской базы!";
+            tr["enemyBaseCaptured"] = "Вражеская база захвачена!";
+            tr["allyBaseCapture"] = "Захват нашей базы!";
+            tr["allyBaseCaptured"] = "Наша база захвачена!";
+            tr["Timeleft"] = "Осталось";
+            tr["Capturers"] = "Захватчиков";
 
             // FinalStatistics
             tr["Hit percent"] = "Процент попаданий";
@@ -179,6 +212,12 @@ class com.xvm.Locale
             tr["LT"] = "ЛТ";
             tr["TD"] = "ПТ";
             tr["SPG"] = "САУ";
+
+            // VehicleMarkersManager
+            tr["blownUp"] = "Взрыв БК!";
+
+            // Minimap
+            tr["metersSymbol"] = "м";
         }
         else
         {
@@ -187,6 +226,15 @@ class com.xvm.Locale
 
             // Hitlog
             tr["world_collision"] = "falling";
+
+            // Hp Left
+            tr["hpLeftTitle"] = "Hitpoints left:";
+
+                // Capture
+            tr["enemyBaseCapture"] = "Enemy base capture!";
+            tr["enemyBaseCaptured"] = "Enemy base captured!";
+            tr["allyBaseCapture"] = "Ally base capture!";
+            tr["allyBaseCaptured"] = "Ally base captured!";
 
             // UserInfo
             tr["UserInfoEHint"] =
@@ -211,6 +259,12 @@ class com.xvm.Locale
             tr["france"] = "France";
             tr["uk"] = "UK";
             tr["china"] = "China";
+
+            // VehicleMarkersManager
+            tr["blownUp"] = "Blown-up!";
+
+            // Minimap
+            tr["metersSymbol"] = "m";
         }
     }
 

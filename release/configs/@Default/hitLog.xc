@@ -7,13 +7,13 @@
     // false - Disable.
     // false - отключить.
     "visible": true,
-    
+
     // Show enemy HP left by Alt press
     // Destroyed enemies and enemies HP gets updated only when it markers become visible.
     // Markers are visible only inside 1000m side square.
     // Square with 1000 meters side is game engine restriction. Maximum marker show distance.
     // Particular enemy data will not be updated while you cant see this enemy marker or its wreck.
-    
+
     // Показывать оставшееся HP врагов по нажатию Alt
     // Уничтоженные враги и вражеское HP обновляется только, когда маркеры становятся видимыми.
     // Маркеры видимы только в квадрате со стороной в 1000м.
@@ -23,14 +23,14 @@
         // false - Disable.
         // false - отключить.
         "enabled": true,
-        // Header, macros ARE NOT allowed.
-        // Заголовок, макросы НЕ разрешены.
-        "header": "<font color='#FFFFFF'>Hitpoints left:</font>",
+        // Header - Only localization macros are allowed, see readme-en.txt.
+        // TODO: translate to RU
+        "header": "<font color='#FFFFFF'>{{l10n:hpLeftTitle}}</font>",
         // Row in HP list (macros allowed, see readme-en.txt).
         // Строка в списке попаданий (допускаются макроподстановки, см. readme-ru.txt)
         "format": "<textformat leading='-4' tabstops='[50,90,180]'><font color='{{c:hp-ratio}}'>     {{hp}}</font><tab><font color='#FFFFFF'>/ </font>{{hp-max}}<tab><font color='#FFFFFF'>|</font><font color='{{c:vtype}}'>{{vehicle}}</font><tab><font color='#FFFFFF'>|{{nick}}</font></textformat>"
     },
-    
+
     // X position (negative values - bind to right side of screen).
     // Позиция X (отрицательные значения - привязать к правой стороне экрана).
     "x": 270,
@@ -59,12 +59,12 @@
     // Подстановка для макроса {{dead}}, когда танк умирает.
     "deadMarker": "<font face='Wingdings'>N</font>",
     "blowupMarker": "<font face='Wingdings'>M</font>",
-    // Default header format (before first hit). Macros ARE NOT allowed.
+    // Default header format (before first hit). Only localization macros are allowed, see readme-en.txt.
     // Формат заголовка по умолчанию (до первого попадания). Макросы НЕ допускаются.
-    "defaultHeader":  "<font color='#FFFFFF'>Hits:</font> <font size='13'>#0</font>",
+    "defaultHeader":  "<font color='#FFFFFF'>{{l10n:Hits}}:</font> <font size='13'>#0</font>",
     // Hits header format, including last hit (macros allowed, see readme-en.txt).
     // Формат заголовка (допускаются макроподстановки, см. readme-ru.txt).
-    "formatHeader":  "<font color='#FFFFFF'>Hits:</font> <font size='13'>#{{n}}</font> <font color='#FFFFFF'>Total: </font><b>{{dmg-total}}</b>  <font color='#FFFFFF'>Last:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font>",
+    "formatHeader":  "<font color='#FFFFFF'>{{l10n:Hits}}:</font> <font size='13'>#{{n}}</font> <font color='#FFFFFF'>{{l10n:Total}}: </font><b>{{dmg-total}}</b>  <font color='#FFFFFF'>{{l10n:Last}}:</font> <font color='{{c:dmg-kind}}'><b>{{dmg}}</b> {{dead}}</font>",
     // List of hits format (macros allowed, see readme-en.txt).
     // Формат лога попаданий (допускаются макроподстановки, см. readme-ru.txt)
     "formatHistory": "<textformat leading='-4' tabstops='[20,50,90,180]'><font size='12'>\u00D7{{n-player}}:</font><tab><font color='{{c:dmg-kind}}'>{{dmg}}</font><tab>| {{dmg-player}}<tab>|<font color='{{c:vtype}}'>{{vehicle}} {{dead}}</font><tab><font color='#FFFFFF'>|{{nick}}</font></textformat>",

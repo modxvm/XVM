@@ -36,10 +36,10 @@ class wot.TeamBasesPanel.Macro
         m_points = startingPoints.toString();
         m_capColor = capColor;
 
-        m_primaryTitleFormat = Locale.get(CapConfig.primaryTitleFormat(m_capColor));
-        m_secondaryTitleFormat = Locale.get(CapConfig.secondaryTitleFormat(m_capColor));
-        m_captureDoneFormat = Locale.get(CapConfig.captureDoneFormat(m_capColor));
-        m_extra = Locale.get(CapConfig.extra(m_capColor));
+        m_primaryTitleFormat = Locale.formatMacros(CapConfig.primaryTitleFormat(m_capColor));
+        m_secondaryTitleFormat = Locale.formatMacros(CapConfig.secondaryTitleFormat(m_capColor));
+        m_captureDoneFormat = Locale.formatMacros(CapConfig.captureDoneFormat(m_capColor));
+        m_extra = Locale.formatMacros(CapConfig.extra(m_capColor));
     }
 
     public function update(isSituationNormal:Boolean, timeLeftSec:Number, timeLeftMinSec:String,

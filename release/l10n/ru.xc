@@ -3,6 +3,7 @@
  */
 {
   "locale": {
+    // Author of translation
     "XVM_translator": "Maxim Schedriviy",
 
     // Win chance
@@ -16,13 +17,20 @@
     "fire": "пожар",
     "ramming": "таран",
     "world_collision": "падение",
+    "Hits": "Пробитий",
+    "Total": "Всего",
+    "Last": "Последний",
+
+    // Hp Left
+    "hpLeftTitle": "Осталось HP:",
 
     // Capture
-    "<font size='15' color='#FFFFFF'>Enemy base capture! {{extra}}</font>": "<font size='15' color='#FFFFFF'>Захват вражеской базы! {{extra}}</font>",
-    "<font size='17' color='#FFCC66'>Enemy base captured!</font>": "<font size='17' color='#FFCC66'>Вражеская база захвачена!</font>",
-    "<font size='15' color='#FFFFFF'>Ally base capture! {{extra}}</font>": "<font size='15' color='#FFFFFF'>Захват нашей базы! {{extra}}</font>",
-    "<font size='17' color='#FFCC66'>Ally base captured!</font>": "<font size='17' color='#FFCC66'>Наша база захвачена!</font>",
-    "Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>": "Захватчиков: <b><font color='#FFCC66'>{{tanks}}</font></b> Осталось: <b><font color='#FFCC66'>{{time}}</font><b>",
+    "enemyBaseCapture": "Захват вражеской базы!",
+    "enemyBaseCaptured": "Вражеская база захвачена!",
+    "allyBaseCapture": "Захват нашей базы!",
+    "allyBaseCaptured": "Наша база захвачена!",
+    "Timeleft": "Осталось",
+    "Capturers": "Захватчиков",
 
     // FinalStatistics
     "Hit percent": "Процент попаданий",
@@ -85,6 +93,12 @@
     "MT": "СТ",
     "LT": "ЛТ",
     "TD": "ПТ",
-    "SPG": "САУ"
+    "SPG": "САУ",
+
+    // VehicleMarkersManager
+    "blownUp": "Взрыв БК!",
+
+    // Minimap
+    "metersSymbol": "м"
   }
 }

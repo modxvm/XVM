@@ -46,7 +46,7 @@
     "damageMessage": "{{dmg}}",
     // Text for ammo rack explosion (see description of macros in the readme-en.txt).
     // Текст при взрыве боеукладки (см. описание макросов в readme-ru.txt).
-    "blowupMessage": "Blown-up!"
+    "blowupMessage": "{{l10n:blownUp}}"
   },
   // Настройки для союзников.
   "ally": {
