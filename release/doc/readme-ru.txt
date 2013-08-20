@@ -129,7 +129,7 @@
       {{c:system}}    - системный цвет (отменяет переопределенный цвет)
       {{a:hp}}        - прозрачность в зависимости от текущего здоровья
       {{a:hp-ratio}}  - прозрачность в зависимости от процента текущего здоровья
-      {{l10n:blownUp}}  - localizated text "Blown-up!", only in "blowupMessage" // TODO: translate
+      {{l10n:blownUp}}  - перевод текста "Blown-up!", только в "blowupMessage"
       + макросы статистики (см. ниже)
 
     В логе попаданий (hitlog):
@@ -152,10 +152,9 @@
       {{dmg-kind}}    - вид урона (атака, пожар, таран и т.д.)
       {{c:dmg-kind}}  - цвет в зависимости от вида урона
       {{c:vtype}}     - цвет в зависимости от типа техники
-      // TODO: translate
-      {{l10n:Hits}}   - localizated text "Hits"
-      {{l10n:Total}}  - localizated text "Total"
-      {{l10n:Last}}   - localizated text "Last"
+      {{l10n:Hits}}   - перевод текста "Hits"
+      {{l10n:Total}}  - перевод текста "Total"
+      {{l10n:Last}}   - перевод текста "Last"
 
     Панель здоровья игроков (hpLeft):
       {{nick}}        - ник игрока с названием клана
@@ -173,7 +172,7 @@
       {{c:vtype}}     - цвет в зависимости от типа техники
       {{c:hp}}        - цвет в зависимости от текущего здоровья
       {{c:hp-ratio}}  - цвет в зависимости от процента текущего здоровья
-      {{l10n:hpLeftTitle}}  - localizated text "Hitpoints left:", only in "header"  // TODO: translate
+      {{l10n:hpLeftTitle}}  - перевод текста "Hitpoints left:", только в "header"
 
     В полосе захвата:
       {{points}}      - кол-во уже захваченных точек
@@ -182,13 +181,12 @@
       {{time}}        - оставшееся время захвата; минуты и секунды;      может быть помещён только в дополнительную текстовую секцию
       {{time-sec}}    - оставшееся время захвата; только секунды;        может быть помещён только в дополнительную текстовую секцию
       {{speed}}       - скорость захвата; очков в секунду;               может быть помещён только в дополнительную текстовую секцию
-      // TODO: translate
-      {{l10n:enemyBaseCapture}}     - localizated text "Enemy base capture!"
-      {{l10n:enemyBaseCaptured}}    - localizated text "Enemy base captured!"
-      {{l10n:allyBaseCapture}}      - localizated text "Ally base capture!"
-      {{l10n:allyBaseCaptured}}     - localizated text "Ally base captured!"
-      {{l10n:Timeleft}}             - localizated text "Timeleft"
-      {{l10n:Capturers}}            - localizated text "Capturers"
+      {{l10n:enemyBaseCapture}}     - перевод текста "Enemy base capture!"
+      {{l10n:enemyBaseCaptured}}    - перевод текста "Enemy base captured!"
+      {{l10n:allyBaseCapture}}      - перевод текста "Ally base capture!"
+      {{l10n:allyBaseCaptured}}     - перевод текста "Ally base captured!"
+      {{l10n:Timeleft}}             - перевод текста "Timeleft"
+      {{l10n:Capturers}}            - перевод текста "Capturers"
 
     В миникарте:
       {{level}}       - уровень
@@ -200,7 +198,7 @@
       {{vehicle-name}} - возвращает системное название танка - usa-M24_Chaffee
       {{vehiclename}}  - возвращает системное название танка - usa-M24_Chaffee
       {{vehicle-short}}  - короткое название типа техники
-      {l10n:metersSymbol}}  - localizated symbol "m", only in minimap.labels.mapSize.format field   // TODO: translate
+      {l10n:metersSymbol}}  - перевод символа "m", только в поле minimap.labels.mapSize.format
 
     Макроподстановки статистики (необходимо включить rating/showPlayersStatistics):
       {{avglvl}}      - средний уровень танков игрока
@@ -244,20 +242,19 @@
       {{c:t-battles}} - цвет в зависимости от количества боев на текущем танке
       Любой макрос цвета можно изменить в макрос прозрачности ({{a:tdb}}).
 
-    // TODO: translate
-    Localization macros usage - {{l10n:localizationKey}}
-      Macros are just links to translations in file res_mods/xvm/l10n/XX.xc file (XX means language code).
-      If translate is not found, "localizationKey" is displayed.
+    Использование макросов перевода - {{l10n:localizationKey}}
+      Макросы представляют собой ссылки на перевод в файлах res_mods/xvm/l10n/XX.xc file (XX означает код языка).
+      Если перевод не найден, отображается "localizationKey".
 
-      Capture bar example
+      Пример с полосой захвата, используется язык en:
         /l10n/en.xc
           "enemyBaseCaptured": "Enemy base captured!"
         captureBar.xc
           "captureDoneFormat":    "<font size='17' color='#FFCC66'>{{l10n:enemyBaseCaptured}}</font>"
 
-        formated: "<font size='17' color='#FFCC66'>Enemy base captured!</font>"
+        Как будет отображаться: "<font size='17' color='#FFCC66'>Enemy base captured!</font>"
 
-      More about localization at wiki: https://code.google.com/p/wot-xvm/wiki/LocalizingXVM
+      Узнать больше о переводах: https://code.google.com/p/wot-xvm/wiki/LocalizingXVM
 
   Примеры поля "format":
     1. Отобразить количество кило-боев, эффективность и процент побед без изменения цвета:
