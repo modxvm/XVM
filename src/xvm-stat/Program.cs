@@ -349,6 +349,8 @@ namespace wot
 
         // CD to game dir
         string game_dir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+        if (String.IsNullOrEmpty(game_dir))
+		  game_dir=Environment.CurrentDirectory;
         Debug("Change dir: " + game_dir);
         Directory.SetCurrentDirectory(game_dir);
 
