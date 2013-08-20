@@ -28,9 +28,6 @@ class wot.StatisticForm.BattleStatItemRenderer
     {
         this.wrapper = wrapper;
         this.base = base;
-
-        Utils.TraceXvmModule("SF");
-
         BattleStatItemRendererCtor();
     }
 
@@ -57,6 +54,8 @@ class wot.StatisticForm.BattleStatItemRenderer
 
     public function BattleStatItemRendererCtor()
     {
+        Utils.TraceXvmModule("StatisticForm");
+
         if (s_winChances == null)
             s_winChances = new WinChances();
 
@@ -66,11 +65,11 @@ class wot.StatisticForm.BattleStatItemRenderer
         wrapper.col3.verticalAlign = "center";
         wrapper.col3.verticalAutoSize = true;
 
-        GlobalEventDispatcher.addEventListener("config_loaded", StatLoader.LoadLastStat);
-        GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
-        GlobalEventDispatcher.addEventListener("stat_loaded", wrapper, updateData);
+        GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, StatLoader.instance, StatLoader.instance.LoadLastStat);
+        GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
+        GlobalEventDispatcher.addEventListener(StatData.E_STAT_LOADED, wrapper, updateData);
 
-        Config.LoadConfig("BattleStatItemRenderer.as");
+        Config.LoadConfig();
     }
 
     private function get team(): Number
@@ -103,7 +102,7 @@ class wot.StatisticForm.BattleStatItemRenderer
 
     public function onConfigLoaded(event)
     {
-        GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
+        GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
 
         s_winChances.showChances = Config.s_config.statisticForm.showChances;
         s_winChances.showExp = Config.s_config.statisticForm.showChancesExp;
@@ -136,7 +135,7 @@ class wot.StatisticForm.BattleStatItemRenderer
         //Logger.addObject(data);
         if (Config.s_config.rating.showPlayersStatistics) {
             if (!StatData.s_data[pname] || !StatData.s_data[pname].playerId)
-                StatLoader.AddPlayerData(wrapper.data, team);
+                StatLoader.instance.AddPlayerData(wrapper.data, team);
             else
                 StatData.s_data[pname].vehicleState = wrapper.data.vehicleState;
         }

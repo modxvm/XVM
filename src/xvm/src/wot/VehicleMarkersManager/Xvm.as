@@ -150,8 +150,8 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
         // Load stat
         if (Config.s_config.rating.showPlayersStatistics && !StatData.s_loaded)
         {
-            GlobalEventDispatcher.addEventListener("stat_loaded", this, onStatLoaded);
-            StatLoader.LoadLastStat();
+            GlobalEventDispatcher.addEventListener(StatData.E_STAT_LOADED, this, onStatLoaded);
+            StatLoader.instance.LoadLastStat();
         }
     }
 
@@ -351,7 +351,7 @@ class wot.VehicleMarkersManager.Xvm extends XvmBase implements wot.VehicleMarker
     {
         //trace("Xvm::onStatLoaded()");
         if (event)
-            GlobalEventDispatcher.removeEventListener("stat_loaded", this, onStatLoaded);
+            GlobalEventDispatcher.removeEventListener(StatData.E_STAT_LOADED, this, onStatLoaded);
 
         initializeTextFields();
         XVMUpdateStyle();

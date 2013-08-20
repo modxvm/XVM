@@ -15,9 +15,6 @@ class wot.FinalStatistic.DetailsBlock
     {
         this.wrapper = wrapper;
         this.base = base;
-
-        Utils.TraceXvmModule("FS");
-
         DetailsBlockCtor();
     }
 
@@ -39,8 +36,10 @@ class wot.FinalStatistic.DetailsBlock
 
     private function DetailsBlockCtor()
     {
-        GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
-        Config.LoadConfig("DetailsBlock.as");
+        Utils.TraceXvmModule("FinalStatistic");
+
+        GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
+        Config.LoadConfig();
 
         var h = wrapper.xpTitleLbl._height;
         var y = h + 60;
@@ -55,7 +54,7 @@ class wot.FinalStatistic.DetailsBlock
 
     private function onConfigLoaded()
     {
-        GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
+        GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
         // currently for locale, and other options in the future
     }
 

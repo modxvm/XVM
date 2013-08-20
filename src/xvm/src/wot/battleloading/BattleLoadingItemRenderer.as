@@ -27,9 +27,6 @@ class wot.battleloading.BattleLoadingItemRenderer
     {
         this.wrapper = wrapper;
         this.base = base;
-
-        Utils.TraceXvmModule("BL");
-
         BattleLoadingItemRendererCtor();
     }
 
@@ -57,6 +54,8 @@ class wot.battleloading.BattleLoadingItemRenderer
 
     private function BattleLoadingItemRendererCtor()
     {
+        Utils.TraceXvmModule("battleloading");
+
         wrapper.vehicleField.html = true;
         wrapper.vehicleField.verticalAlign = "center";
         wrapper.vehicleField.verticalAutoSize = true;
@@ -85,8 +84,8 @@ class wot.battleloading.BattleLoadingItemRenderer
         if (!Config.s_config.rating.showPlayersStatistics)
             return;
 
-        StatLoader.AddPlayerData(data, team);
-        GlobalEventDispatcher.addEventListener("stat_loaded", this, StatLoadedCallback);
+        StatLoader.instance.AddPlayerData(data, team);
+        GlobalEventDispatcher.addEventListener(StatData.E_STAT_LOADED, this, StatLoadedCallback);
     }
 
     function attachClanIconToPlayer(data)
@@ -202,7 +201,7 @@ class wot.battleloading.BattleLoadingItemRenderer
     {
         //Logger.add("StatLoaded(): " + data.label);
 
-        GlobalEventDispatcher.removeEventListener("stat_loaded", this, StatLoadedCallback);
+        GlobalEventDispatcher.removeEventListener(StatData.E_STAT_LOADED, this, StatLoadedCallback);
 
         var label = wrapper.data.label;
         var team = this.team;

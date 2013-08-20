@@ -29,9 +29,6 @@ class wot.PlayersPanel.PlayersPanel
         this.wrapper = wrapper;
         this.base = base;
         wrapper.xvm_worker = this;
-        
-        Utils.TraceXvmModule("PP");
-        
         PlayersPanelCtor();
     }
     
@@ -87,13 +84,15 @@ class wot.PlayersPanel.PlayersPanel
 
     public function PlayersPanelCtor()
     {
-        GlobalEventDispatcher.addEventListener("config_loaded", StatLoader.LoadLastStat);
-        GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
-        GlobalEventDispatcher.addEventListener("stat_loaded", this, onStatLoaded);
+        Utils.TraceXvmModule("PlayersPanel");
+
+        GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, StatLoader.instance, StatLoader.instance.LoadLastStat);
+        GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
+        GlobalEventDispatcher.addEventListener(StatData.E_STAT_LOADED, this, onStatLoaded);
         
         GlobalEventDispatcher.addEventListener(AutoUpdate.UPDATE_BY_TIMER_EVENT, this, updateSpotStatusMarkers);
         
-        Config.LoadConfig("PlayersPanel.as");
+        Config.LoadConfig();
         
         /** Minimap needs to know loaded status */
         checkLoading();
@@ -186,21 +185,6 @@ class wot.PlayersPanel.PlayersPanel
 
             // [1/3] fix WG bug - this function is slow, don't call it if not required.
             wrapper.m_list["invalidateData2"] = wrapper.m_list["invalidateData"];
-
-            // Switch players with keys in the postmortem mode. TODO: Cannot be used without holding Ctrl?
-            if (wrapper.type == "left")
-            {
-                //net.wargaming.managers.BattleInputHandler.instance.addHandler(49, true, this, "selectPlayer"); // Ctrl+1
-                //net.wargaming.managers.BattleInputHandler.instance.addHandler(50, true, this, "selectPlayer"); // Ctrl+2
-                //net.wargaming.managers.BattleInputHandler.instance.addHandler(51, true, this, "selectPlayer"); // Ctrl+3
-                //net.wargaming.managers.BattleInputHandler.instance.addHandler(52, true, this, "selectPlayer"); // Ctrl+4
-                //net.wargaming.managers.BattleInputHandler.instance.addHandler(53, true, this, "selectPlayer"); // Ctrl+5
-                //net.wargaming.managers.BattleInputHandler.instance.addHandler(54, true, this, "selectPlayer"); // Ctrl+6
-                //net.wargaming.managers.BattleInputHandler.instance.addHandler(55, true, this, "selectPlayer"); // Ctrl+7
-                //net.wargaming.managers.BattleInputHandler.instance.addHandler(56, true, this, "selectPlayer"); // Ctrl+8
-                //net.wargaming.managers.BattleInputHandler.instance.addHandler(57, true, this, "selectPlayer"); // Ctrl+9
-                //net.wargaming.managers.BattleInputHandler.instance.addHandler(48, true, this, "selectPlayer"); // Ctrl+0
-            }
         }
 
         if (data)

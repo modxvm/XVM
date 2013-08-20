@@ -5,6 +5,7 @@
 import com.xvm.Comm;
 import com.xvm.Config;
 import com.xvm.ConfigUtils;
+import com.xvm.DefaultConfig;
 import com.xvm.Defines;
 import com.xvm.GlobalEventDispatcher;
 import com.xvm.JSONxLoader;
@@ -16,13 +17,15 @@ class com.xvm.ConfigLoader
 {
     // Private vars
     private static var s_loading:Boolean = false;
-    private static var s_src:String = "";
     private static var info_event:Object = null;
 
+    // instance
+    private static var instance:ConfigLoader = null;
+    
     // Load XVM mod config; config data is shared between all marker instances, so
     // it should be loaded only once per session. s_loaded flag indicates that
     // we've already initialized config loading process.
-    public static function LoadConfig(src: String)
+    public static function LoadConfig()
     {
         //Logger.add("TRACE: LoadConfig()");
         if (Config.s_loaded)
@@ -32,26 +35,26 @@ class com.xvm.ConfigLoader
                 // Use set timeout to avoid overriding by default value
                 _global.setTimeout(function() { GlobalEventDispatcher.dispatchEvent(ConfigLoader.info_event); }, 1);
             }
-            GlobalEventDispatcher.dispatchEvent({type: "config_loaded"});
+            GlobalEventDispatcher.dispatchEvent({type: Config.E_CONFIG_LOADED});
             return;
         }
-        s_src = src || "";
-        ReloadConfig();
+
+        if (instance == null)
+            instance = new ConfigLoader();
+        instance.ReloadConfig();
     }
 
-    private static function ReloadConfig()
+    private function ReloadConfig()
     {
-        //Logger.add("TRACE: Config.ReloadConfig()");
-        if (s_loading)
+        //Logger.add("TRACE: ReloadConfig()");
+        if (ConfigLoader.s_loading)
             return;
-        s_loading = true;
-
-        Config.s_config = com.xvm.DefaultConfig.config;
-
-        JSONxLoader.LoadAndParse(Defines.XVM_ROOT + Defines.CONFIG_FILE_NAME, null, ReloadConfigCallback);
+        ConfigLoader.s_loading = true;
+        Config.s_config = DefaultConfig.config;
+        JSONxLoader.LoadAndParse(Defines.XVM_ROOT + Defines.CONFIG_FILE_NAME, this, ReloadConfigCallback);
     }
 
-    private static function ReloadConfigCallback(event)
+    private function ReloadConfigCallback(event)
     {
         //Logger.add("TRACE: ReloadConfigCallback(): start");
         if (event.error != null && event.error.type == "NO_FILE")
@@ -59,15 +62,15 @@ class com.xvm.ConfigLoader
             if (event.filename == Defines.CONFIG_FILE_NAME)
             {
                 // xvm.xc not found, try to load legacy config XVM.xvmconf
-                JSONxLoader.LoadAndParse(Defines.CONFIG_FILE_NAME_XVMCONF, null, ReloadConfigCallback);
+                JSONxLoader.LoadAndParse(Defines.CONFIG_FILE_NAME_XVMCONF, this, ReloadConfigCallback);
                 return;
             }
         }
 
-        var finallyBugWorkaround: Boolean = false; // Workaround: finally block have a bug - it can be called twice times.
+        var finallyBugWorkaround: Boolean = false; // Workaround: finally block have a bug - it can be called twice.
         try
         {
-            ConfigLoader.ProcessConfig(event);
+            ProcessConfig(event);
             ConfigUtils.TuneupConfig();
         }
         finally
@@ -76,18 +79,18 @@ class com.xvm.ConfigLoader
             if (finallyBugWorkaround)
                 return;
             finallyBugWorkaround = true;
-            ConfigLoader.ReloadGameRegion();
+            ReloadGameRegion();
             Locale.loadLocale();
             //Logger.add("TRACE: ReloadConfigCallback(): finally::end");
         }
         //Logger.add("TRACE: ReloadConfigCallback(): end");
     }
 
-    private static function ProcessConfig(event)
+    private function ProcessConfig(event)
     {
         if (event.error != null && event.error.type == "NO_FILE")
         {
-            info_event = { type: "set_info", warning: "" };
+            info_event = { type: Config.E_SET_INFO, warning: "" };
             GlobalEventDispatcher.dispatchEvent(info_event);
             return;
         }
@@ -99,7 +102,7 @@ class com.xvm.ConfigLoader
             var text:String = "Error loading config file '" + event.filename + "': ";
             text += ConfigUtils.parseErrorEvent(event);
 
-            info_event = { type: "set_info", error: text };
+            info_event = { type: Config.E_SET_INFO, error: text };
             GlobalEventDispatcher.dispatchEvent(info_event);
             Logger.add(String(text).substr(0, 200));
             return;
@@ -108,21 +111,21 @@ class com.xvm.ConfigLoader
         Config.s_config = ConfigUtils.MergeConfigs(ConfigUtils.FixConfig(event.data), Config.s_config);
         //Logger.addObject(Config.s_config, "config", 2);
         //Logger.addObject(Config.s_config.markers.enemy.alive.normal, "", 3);
-        info_event = { type: "set_info" };
+        info_event = { type: Config.E_SET_INFO };
         GlobalEventDispatcher.dispatchEvent(info_event); // Just show version
     }
 
-    private static function ReloadGameRegion()
+    private function ReloadGameRegion()
     {
         //Logger.add("TRACE: Config.ReloadGameRegion()");
         Comm.Sync(Defines.COMMAND_GET_VERSION, null, null, function(event) {
             if (!event.str) // proxy is not running
             {
-                ConfigLoader.GetGameRegionFromWOTLauncherCfg();
+                ConfigLoader.instance.GetGameRegionFromWOTLauncherCfg();
                 return;
             }
 
-            var finallyBugWorkaround: Boolean = false; // Workaround: finally block have a bug - it can be called twice times. Why? How? F*ck!
+            var finallyBugWorkaround: Boolean = false; // Workaround: finally block have a bug - it can be called twice.
             try
             {
                 var a: Array = event.str.split("\n");
@@ -158,12 +161,12 @@ class com.xvm.ConfigLoader
                 if (finallyBugWorkaround)
                     return;
                 finallyBugWorkaround = true;
-                ConfigLoader.SetConfigLoaded();
+                ConfigLoader.instance.SetConfigLoaded();
             }
         });
     }
 
-    private static function GetGameRegionFromWOTLauncherCfg()
+    private function GetGameRegionFromWOTLauncherCfg()
     {
         //Logger.add("TRACE: Config.GetGameRegionFromWOTLauncherCfg()");
 
@@ -205,19 +208,18 @@ class com.xvm.ConfigLoader
                 if (finallyBugWorkaround)
                     return;
                 finallyBugWorkaround = true;
-                ConfigLoader.SetConfigLoaded();
+                ConfigLoader.instance.SetConfigLoaded();
             }
         };
 
         xml.load("../../../../WOTLauncher.cfg");
     }
 
-    private static function SetConfigLoaded()
+    private function SetConfigLoaded()
     {
-        Logger.add("Config: Loaded (" + s_src + ")");
+        //Logger.add("Config: Loaded");
         Config.s_loaded = true;
-        s_loading = false;
-        GlobalEventDispatcher.dispatchEvent({type: "config_loaded"});
+        ConfigLoader.s_loading = false;
+        GlobalEventDispatcher.dispatchEvent({type: Config.E_CONFIG_LOADED});
     }
-
 }

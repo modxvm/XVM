@@ -21,8 +21,7 @@ class wot.TeamBasesPanel.TeamBasesPanel
     {
         this.wrapper = wrapper;
         this.base = base;
-
-        Utils.TraceXvmModule("TeamBasesPanel");
+        TeamBasesPanelCtor();
     }
 
     function add()
@@ -33,6 +32,11 @@ class wot.TeamBasesPanel.TeamBasesPanel
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
+    function TeamBasesPanelCtor()
+    {
+        Utils.TraceXvmModule("TeamBasesPanel");
+    }
+    
     function addImpl(id, sortWeight, capColor, title, points)
     {
         if (CapConfig.enabled)

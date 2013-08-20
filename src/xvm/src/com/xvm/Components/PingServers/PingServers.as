@@ -55,7 +55,6 @@ class com.xvm.Components.PingServers.PingServers
         var answer:String = event.str;
         if (answer == null || answer == "")
             return;
-            
         view.update(parseAnswer(answer));
     }
     

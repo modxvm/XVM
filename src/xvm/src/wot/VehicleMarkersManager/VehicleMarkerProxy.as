@@ -35,9 +35,6 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     {
         this.wrapper = wrapper;
         this.base = base;
-
-        Utils.TraceXvmModule("VMM");
-
         VehicleMarkerProxyCtor();
     }
 
@@ -72,6 +69,8 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     var start;
     private function VehicleMarkerProxyCtor()
     {
+        Utils.TraceXvmModule("VehicleMarkersManager");
+
         start = new Date();
         //trace("VehicleMarkerProxy::ctor()");
 
@@ -92,9 +91,9 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
             wrapper.bgShadow._visible = false;
             wrapper.vNameField.text = "Loading...";
             //   register config load complete event
-            GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
+            GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
             //   start config loading
-            Config.LoadConfig("VehicleMarkerProxy.as");
+            Config.LoadConfig();
         }
         else
         {
@@ -111,7 +110,7 @@ class wot.VehicleMarkersManager.VehicleMarkerProxy implements IVehicleMarker
     {
         //trace("onConfigLoaded()");
 
-        GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
+        GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
 
         //Config.s_config.battle.useStandardMarkers = true;
         

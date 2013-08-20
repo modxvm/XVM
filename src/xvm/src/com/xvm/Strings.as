@@ -2,10 +2,6 @@
  * ...
  * @author sirmax2
  */
-import com.xvm.Defines;
-import com.xvm.Logger;
-import flash.filters.DropShadowFilter;
-
 class com.xvm.Strings
 {
     public static function startsWith(substr:String, str:String):Boolean

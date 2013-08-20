@@ -12,8 +12,7 @@ class wot.FinalStatistic.EfficiencyRenderer
     {
         this.wrapper = wrapper;
         this.base = base;
-
-        Utils.TraceXvmModule("FS");
+        EfficiencyRendererCtor();
     }
 
     function draw()
@@ -24,6 +23,11 @@ class wot.FinalStatistic.EfficiencyRenderer
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
+    function EfficiencyRendererCtor()
+    {
+        Utils.TraceXvmModule("FinalStatistic");
+    }
+    
     function drawImpl()
     {
         var dirty = wrapper._dataDirty;

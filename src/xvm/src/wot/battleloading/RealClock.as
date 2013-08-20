@@ -9,12 +9,12 @@ class wot.battleloading.RealClock
     public function RealClock(form_mc)
     {
         this.form_mc = form_mc;
-        GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
+        GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
     }
 
     private function onConfigLoaded()
     {
-        GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
+        GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
         showClock(Config.s_config.battleLoading.clockFormat);
     }
 

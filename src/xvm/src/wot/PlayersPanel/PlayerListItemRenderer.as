@@ -22,9 +22,6 @@ class wot.PlayersPanel.PlayerListItemRenderer
         this.wrapper = wrapper;
         this.base = base;
         wrapper.xvm_worker = this;
-
-        Utils.TraceXvmModule("PP");
-
         PlayerListItemRendererCtor();
     }
 
@@ -51,6 +48,8 @@ class wot.PlayersPanel.PlayerListItemRenderer
 
     public function PlayerListItemRendererCtor()
     {
+        Utils.TraceXvmModule("PlayersPanel");
+
         spotStatusView = new SpotStatusView(this);
     }
 

@@ -9,6 +9,7 @@ import com.xvm.StatData;
 import com.xvm.Strings;
 import com.xvm.Utils;
 import com.xvm.VehicleInfo;
+import com.xvm.DataTypes.Stat;
 
 class com.xvm.Macros
 {
@@ -60,7 +61,7 @@ class com.xvm.Macros
                 data.uid = StatData.s_data[pname].playerId;
             var pdata = StatData.s_data[pname];
             //Logger.addObject(pdata);
-            //Logger.add("pname=" + pname + " uid=" + data.uid + " r=" + stat.r + " e=" + stat.e);
+            //Logger.add("pname=" + pname + " uid=" + data.uid + " r=" + stat.r + " eff=" + stat.eff);
             if ((!pdata || (!pdata.stat && pdata.loadstate == Defines.LOADSTATE_NONE)) ||
                 (StatData.s_data[pname].loadstate == Defines.LOADSTATE_UNKNOWN && VehicleInfo.getInfo2(data.icon).name != "UNKNOWN"))
             {
@@ -154,7 +155,7 @@ class com.xvm.Macros
         });
     }
 
-    public static function RegisterStatMacros(playerName:String, stat:Object)
+    public static function RegisterStatMacros(playerName:String, stat:Stat)
     {
         if (!stat)
             return;
@@ -192,8 +193,8 @@ class com.xvm.Macros
         pdata["e"] = stat.te == null ? "-" : stat.te >= 10 ? "E" : String(stat.te);
         // {{teff}}
         pdata["teff"] = stat.teff == null ? "----" : Strings.padLeft(String(stat.teff), 4);
-        // {{teff2}}
-        pdata["teff2"] = stat.teff2 == null ? "----" : Strings.padLeft(String(stat.teff2), 4);
+        //// {{teff2}}
+        //pdata["teff2"] = stat.teff2 == null ? "----" : Strings.padLeft(String(stat.teff2), 4);
 
         // {{rating}}, {{rating:3}}
         pdata["rating"] = r <= 0 ? "--%" : String(r) + "%";
@@ -233,10 +234,10 @@ class com.xvm.Macros
 
         // Dynamic colors
         // {{c:xeff}}
-        pdata["c:xeff"] = isNaN(parseInt(stat.xeff)) ? ""
+        pdata["c:xeff"] = stat.xeff == null ? ""
             : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xeff, "#", o.darken); }
         // {{c:xwn}}
-        pdata["c:xwn"] = isNaN(parseInt(stat.xwn)) ? ""
+        pdata["c:xwn"] = stat.xwn == null ? ""
             : function(o) { return GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, stat.xwn, "#", o.darken); }
         // {{c:eff}}
         pdata["c:eff"] = eff <= 0 ? ""

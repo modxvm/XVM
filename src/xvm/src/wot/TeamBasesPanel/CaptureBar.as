@@ -47,9 +47,6 @@ class wot.TeamBasesPanel.CaptureBar
         this.wrapper = wrapper;
         this.base = base;
         wrapper.xvm_worker = this;
-
-        Utils.TraceXvmModule("TeamBasesPanel");
-
         CaptureBarCtor();
     }
 
@@ -81,6 +78,8 @@ class wot.TeamBasesPanel.CaptureBar
     */
     public function CaptureBarCtor()
     {
+        Utils.TraceXvmModule("TeamBasesPanel");
+
         m_oneTankSpeed = new OneTankSpeed();
     }
 

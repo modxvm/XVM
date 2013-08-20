@@ -13,8 +13,7 @@ class wot.FinalStatistic.TeamStats
     {
         this.wrapper = wrapper;
         this.base = base;
-
-        Utils.TraceXvmModule("FS");
+        TeamStatsCtor();
     }
 
     function configUI()
@@ -25,6 +24,11 @@ class wot.FinalStatistic.TeamStats
     // wrapped methods
     /////////////////////////////////////////////////////////////////
 
+    function TeamStatsCtor()
+    {
+        Utils.TraceXvmModule("FinalStatistic");
+    }
+    
     function configUIImpl()
     {
         base.configUI();

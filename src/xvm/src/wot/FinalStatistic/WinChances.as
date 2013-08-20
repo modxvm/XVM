@@ -1,6 +1,7 @@
 import com.xvm.Chance;
 import com.xvm.Config;
 import com.xvm.GlobalEventDispatcher;
+import com.xvm.StatData;
 
 class wot.FinalStatistic.WinChances
 {
@@ -9,12 +10,12 @@ class wot.FinalStatistic.WinChances
     public function WinChances(form_mc:MovieClip)
     {
         this.form_mc = form_mc;
-        GlobalEventDispatcher.addEventListener("stat_loaded", this, onStatLoaded);
+        GlobalEventDispatcher.addEventListener(StatData.E_STAT_LOADED, this, onStatLoaded);
     }
 
     private function onStatLoaded()
     {
-        GlobalEventDispatcher.removeEventListener("stat_loaded", this, onStatLoaded);
+        GlobalEventDispatcher.removeEventListener(StatData.E_STAT_LOADED, this, onStatLoaded);
 
         if (Config.s_config.finalStatistic.showChances)
             showWinChances();

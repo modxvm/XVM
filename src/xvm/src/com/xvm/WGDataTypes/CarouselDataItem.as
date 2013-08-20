@@ -22,7 +22,7 @@
   "compactDescr": 1057
 }
  */
-class wot.WGDataTypes.CarouselDataItem
+class com.xvm.WGDataTypes.CarouselDataItem
 {
     var level;
     var nation;

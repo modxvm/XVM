@@ -20,12 +20,7 @@ class wot.gameloading.GameLoadingForm
     {
         this.wrapper = wrapper;
         this.base = base;
-
-        Utils.TraceXvmModule("gameloading");
-
         GameLoadingFormCtor();
-
-        //Logger.addObject(_root);
     }
 
     function setVersion()
@@ -39,18 +34,20 @@ class wot.gameloading.GameLoadingForm
     private var currentLoadingName:String;
     private var holder:MovieClip;
 
-    public function GameLoadingFormCtor()
+    private function GameLoadingFormCtor()
     {
+        Utils.TraceXvmModule("gameloading");
+        //Logger.addObject(_root);
         currentLoadingName = "";
         holder = null;
 
-        GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
-        Config.LoadConfig("GameLoadingForm.as");
+        GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
+        Config.LoadConfig();
     }
 
     private function onConfigLoaded()
     {
-        GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
+        GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
 
         // ------------------ DEBUG ------------------
         //var mc = wrapper.createEmptyMovieClip("widgetsHolder", wrapper.getNextHighestDepth());

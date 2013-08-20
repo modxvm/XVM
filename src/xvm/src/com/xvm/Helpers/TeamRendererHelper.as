@@ -9,6 +9,7 @@ import com.xvm.Defines;
 import com.xvm.GraphicsUtil;
 import com.xvm.Locale;
 import com.xvm.Utils;
+import com.xvm.DataTypes.Stat;
 
 class com.xvm.Helpers.TeamRendererHelper
 {
@@ -48,7 +49,7 @@ class com.xvm.Helpers.TeamRendererHelper
         return res;
     }
 
-    public static function GetToolTipData(data, stat)
+    public static function GetToolTipData(data, stat:Stat)
     {
         var prefix =
             MessengerUtils.isFriend(data) ? '<font color="#66FF66">' + Locale.get("Friend") + '</font><br>' :

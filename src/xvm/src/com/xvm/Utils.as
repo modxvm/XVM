@@ -41,6 +41,16 @@ class com.xvm.Utils
         return defaultValue ? value != "false" : value == "true";
     }
 
+    public static function Timeout(target:Object, callback:Function, timeout:Number)
+    {
+        return _global.setTimeout(function() { callback.call(target) }, timeout);
+    }
+    
+    public static function Interval(target:Object, callback:Function, timeout:Number)
+    {
+        return _global.setInterval(function() { callback.call(target) }, timeout);
+    }
+    
     public static function elapsedMSec(start:Date, end:Date):Number
     {
         return end.getTime() - start.getTime();
@@ -158,7 +168,7 @@ class com.xvm.Utils
             return;
         _global["_xvm__trace_module_" + moduleName] = 1;
         xvmModules.push(moduleName);
-        Logger.add("xvm-> [ \"" + xvmModules.join("\", \"") + "\" ]");
+        Logger.add("xvm -> [\"" + xvmModules.join("\", \"") + "\"]");
     }
 
     /**

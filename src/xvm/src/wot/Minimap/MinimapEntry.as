@@ -2,7 +2,6 @@ import com.xvm.GlobalEventDispatcher;
 import com.xvm.Logger;
 import com.xvm.Utils;
 import wot.Minimap.dataTypes.Player;
-import wot.Minimap.MinimapEntry;
 import wot.Minimap.MinimapEvent;
 import wot.Minimap.model.externalProxy.MapConfig;
 import wot.Minimap.model.SyncModel;
@@ -40,8 +39,7 @@ class wot.Minimap.MinimapEntry
         this.wrapper = wrapper;
         this.base = base;
         wrapper.xvm_worker = this;
-
-        Utils.TraceXvmModule("MM");
+        MinimapEntryCtor();
     }
 
     function lightPlayer()
@@ -88,6 +86,11 @@ class wot.Minimap.MinimapEntry
 
     public var labelMc:MovieClip;
 
+    function MinimapEntryCtor()
+    {
+        Utils.TraceXvmModule("Minimap");
+    }
+    
     /**
      * All attachments container: TextFiels(Labels), Shapes.
      */

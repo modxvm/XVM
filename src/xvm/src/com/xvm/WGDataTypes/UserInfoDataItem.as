@@ -29,7 +29,7 @@
   "e": 7
 },
  */
-class wot.WGDataTypes.UserInfoDataItem
+class com.xvm.WGDataTypes.UserInfoDataItem
 {
     var icon:String;
     var name:String;

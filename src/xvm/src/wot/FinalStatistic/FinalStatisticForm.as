@@ -19,9 +19,6 @@ class wot.FinalStatistic.FinalStatisticForm
     {
         this.wrapper = wrapper;
         this.base = base;
-
-        Utils.TraceXvmModule("FS");
-
         FinalStatisticFormCtor();
     }
 
@@ -40,19 +37,21 @@ class wot.FinalStatistic.FinalStatisticForm
 
     private function FinalStatisticFormCtor()
     {
+        Utils.TraceXvmModule("FinalStatistic");
+
         save_data_pending = false;
 
         StatData.s_loaded = false;
         StatData.s_data = {};
 
         winChances = new WinChances(wrapper);
-        GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
-        Config.LoadConfig("FinalStatisticForm.as");
+        GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
+        Config.LoadConfig();
     }
 
     private function onConfigLoaded()
     {
-        GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
+        GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
         processData();
     }
 
@@ -72,17 +71,17 @@ class wot.FinalStatistic.FinalStatisticForm
             for (var i = 0; i < len; ++i)
             {
                 var d = wrapper.data.team1[i];
-                StatLoader.AddPlayerData(d, Defines.TEAM_ALLY);
+                StatLoader.instance.AddPlayerData(d, Defines.TEAM_ALLY);
             }
 
             len = wrapper.data.team2.length;
             for (var i = 0; i < len; ++i)
             {
                 var d = wrapper.data.team2[i];
-                StatLoader.AddPlayerData(d, Defines.TEAM_ENEMY);
+                StatLoader.instance.AddPlayerData(d, Defines.TEAM_ENEMY);
             }
 
-            StatLoader.StartLoadData();
+            StatLoader.instance.StartLoadData();
         }
     }
 

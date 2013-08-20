@@ -14,6 +14,7 @@ import com.xvm.Utils;
 import com.xvm.Components.PingServers.PingServers;
 import com.xvm.Components.Widgets.WidgetsFactory;
 import com.xvm.Components.Widgets.Settings.WidgetsSettingsDialog;
+import com.xvm.Components.WGComponents;
 
 class wot.LangBarPanel.LanguageBar
 {
@@ -27,17 +28,7 @@ class wot.LangBarPanel.LanguageBar
     {
         this.wrapper = wrapper;
         this.base = base;
-
-        Utils.TraceXvmModule("LangBarPanel");
-
         LanguageBarCtor();
-
-        //Logger.addObject(_root);
-    }
-
-    function init()
-    {
-        return this.initImpl.apply(this, arguments);
     }
 
     // wrapped methods
@@ -48,31 +39,41 @@ class wot.LangBarPanel.LanguageBar
     private var mc_ping:MovieClip;
     private var mc_widgets:MovieClip;
     
-    public function LanguageBarCtor()
+    private function LanguageBarCtor()
     {
+        Utils.TraceXvmModule("LangBarPanel");
+        //Logger.addObject(_root);
+        
         currentLoadingName = "";
         mc_ping = null;
         mc_widgets = null;
 
-        GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
-        Config.LoadConfig("LanguageBar.as");
+        GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
+        Config.LoadConfig();
     }
 
     private function onConfigLoaded()
     {
-        GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
-
-        var me = this;
-        _global.setInterval(function() { me.onTimer.call(me); }, 1000);
+        GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
+        Utils.Interval(this, onTimer, 1000);
         onTimer();
     }
 
     private function onTimer()
     {
+        // save carousel tanks in _global to be available from the Achievements dialog.
+        // FIXIT: dirty hack, find the best place to initialize carousel without timer
+        if (WGComponents.carousel != null && WGComponents.carousel.dataProvider != null)
+        {
+            if (_global._xvm_carousel_dataProvider == null || _global._xvm_carousel_dataProvider.length != WGComponents.carousel.dataProvider.length)
+                _global._xvm_carousel_dataProvider = WGComponents.carousel.dataProvider;
+        }
+
         //Logger.add(_root.loadingName);
         if (currentLoadingName == _root.loadingName)
             return;
         currentLoadingName = _root.loadingName;
+        //Logger.add(currentLoadingName);
 
         // "startgamevideo", "login", "hangar"
 
@@ -94,15 +95,10 @@ class wot.LangBarPanel.LanguageBar
             else if (currentLoadingName == "hangar")
                 initHangar();
         }
-        catch (e)
+        catch (e:Error)
         {
             Logger.add("ERROR: " + e.message);
         }
-    }
-    
-    function initImpl()
-    {
-        //Logger.add("LanguageBar.init()");
     }
     
     // PRIVATE
@@ -131,6 +127,10 @@ class wot.LangBarPanel.LanguageBar
         var header:MovieClip = _root.header;
         playerName = _root.header.tankPanel.account_name.text;
 
+        // Hide tutorial
+        if (Config.s_config.hangar.hideTutorial == true)
+            _root.header.tutorialDispatcher._visible = false;
+
         // PingServers component
         mc_ping = header.createEmptyMovieClip("pingHolder", header.getNextHighestDepth());
         PingServers.initFeature(Config.s_config.hangar.pingServers, mc_ping);
@@ -145,7 +145,7 @@ class wot.LangBarPanel.LanguageBar
     
     private function createMenuWidgetsButton()
     {
-        var bar:ButtonBar = (ButtonBar)(_root.header.buttonsBlock.bar);
+        var bar:ButtonBar = WGComponents.headerButtons;
         if (bar.xvm_initialized != true)
         {
             bar.xvm_initialized = true;

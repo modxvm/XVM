@@ -1,6 +1,5 @@
 ﻿import com.xvm.ColorPalette;
 import com.xvm.Defines;
-import com.xvm.Locale;
 import com.xvm.VehicleInfo;
 
 class com.xvm.DefaultConfig
@@ -47,7 +46,7 @@ class com.xvm.DefaultConfig
                         }
                     },
                     threshold: {
-                        great: 30,
+                        great: 35,
                         good: 60,
                         poor: 100
                     },
@@ -89,7 +88,7 @@ class com.xvm.DefaultConfig
                         }
                     },
                     threshold: {
-                        great: 30,
+                        great: 35,
                         good: 60,
                         poor: 100
                     },

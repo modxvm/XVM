@@ -2,8 +2,7 @@ import com.xvm.*;
 import wot.Minimap.*;
 import wot.Minimap.model.externalProxy.MapConfig;
 import wot.Minimap.model.SyncModel;
-import com.xvm.AutoUpdate
-import wot.Minimap.view.*;
+import com.xvm.AutoUpdate;
 
 /**
  * @author ilitvinov87@gmail.com
@@ -24,11 +23,7 @@ class wot.Minimap.Minimap
         this.wrapper = wrapper;
         this.base = base;
         MinimapProxy.setReferences(base, wrapper);
-        
         wrapper.xvm_worker = this;
-
-        Utils.TraceXvmModule("MM");
-
         MinimapCtor();
     }
 
@@ -57,6 +52,8 @@ class wot.Minimap.Minimap
 
     public function MinimapCtor()
     {
+        Utils.TraceXvmModule("Minimap");
+
         GlobalEventDispatcher.addEventListener(MinimapEvent.MINIMAP_READY, this, onReady);
         GlobalEventDispatcher.addEventListener(MinimapEvent.PANEL_READY, this, onReady);
 

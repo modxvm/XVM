@@ -1,5 +1,6 @@
 import com.xvm.Chance;
 import com.xvm.GlobalEventDispatcher;
+import com.xvm.StatData;
 import com.xvm.StatsLogger;
 import com.xvm.Utils;
 
@@ -16,12 +17,12 @@ class wot.battleloading.WinChances
     public function WinChances(form_mc)
     {
         this.form_mc = form_mc;
-        GlobalEventDispatcher.addEventListener("stat_loaded", this, onStatLoaded);
+        GlobalEventDispatcher.addEventListener(StatData.E_STAT_LOADED, this, onStatLoaded);
     }
 
     private function onStatLoaded()
     {
-        GlobalEventDispatcher.removeEventListener("stat_loaded", this, onStatLoaded);
+        GlobalEventDispatcher.removeEventListener(StatData.E_STAT_LOADED, this, onStatLoaded);
 
         if (showChances)
             showWinChances();

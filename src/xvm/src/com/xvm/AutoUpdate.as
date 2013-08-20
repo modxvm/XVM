@@ -1,5 +1,4 @@
 import com.xvm.GlobalEventDispatcher;
-import wot.PlayersPanel.PlayersPanelProxy;
 
 /**
  * Shoots custom events by timer.

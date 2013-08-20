@@ -10,8 +10,10 @@ import com.xvm.StatLoader;
 import com.xvm.Strings;
 import com.xvm.Utils;
 import com.xvm.VehicleInfo;
-import wot.WGDataTypes.CarouselDataItem;
-import wot.WGDataTypes.UserInfoDataItem;
+import com.xvm.Components.WGComponents;
+import com.xvm.DataTypes.Stat;
+import com.xvm.WGDataTypes.CarouselDataItem;
+import com.xvm.WGDataTypes.UserInfoDataItem;
 
 class wot.UserInfo.UserInfo
 {
@@ -25,9 +27,6 @@ class wot.UserInfo.UserInfo
     {
         this.wrapper = wrapper;
         this.base = base;
-
-        Utils.TraceXvmModule("UserInfo");
-
         UserInfoCtor();
     }
 
@@ -55,7 +54,7 @@ class wot.UserInfo.UserInfo
     var m_statisticsField2:TextField;
     var m_statisticsHeaderField:TextField;
     var m_name:String;
-    var m_userData:Object;
+    var m_userData:Stat;
     var m_rbAll:gfx.controls.RadioButton;
     var m_rbFull:gfx.controls.RadioButton;
     var m_rbOwn:gfx.controls.RadioButton;
@@ -70,17 +69,19 @@ class wot.UserInfo.UserInfo
 
     public function UserInfoCtor()
     {
+        Utils.TraceXvmModule("UserInfo");
+
         m_name = null;
         m_userData = null;
         m_dataLoaded = false;
 
-        GlobalEventDispatcher.addEventListener("config_loaded", this, onConfigLoaded);
-        Config.LoadConfig("UserInfo.as");
+        GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
+        Config.LoadConfig();
     }
 
     private function onConfigLoaded()
     {
-        GlobalEventDispatcher.removeEventListener("config_loaded", this, onConfigLoaded);
+        GlobalEventDispatcher.removeEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
         loadData();
     }
 
@@ -111,7 +112,7 @@ class wot.UserInfo.UserInfo
         if (Cache.Exist("INFO@" + m_name))
             onUserDataLoaded();
         else {
-            GlobalEventDispatcher.addEventListener("userdata_cached", this, onUserDataLoaded);
+            GlobalEventDispatcher.addEventListener(UserDataLoaderHelper.E_USERDATACACHED, this, onUserDataLoaded);
             UserDataLoaderHelper.LoadUserData(m_name, false);
         }
     }
@@ -261,10 +262,11 @@ class wot.UserInfo.UserInfo
         if (!Cache.Exist(key))
             return;
 
-        GlobalEventDispatcher.removeEventListener("userdata_cached", this, onUserDataLoaded);
+        GlobalEventDispatcher.removeEventListener(UserDataLoaderHelper.E_USERDATACACHED, this, onUserDataLoaded);
 
         m_userData = Cache.Get(key);
-
+        //com.xvm.Logger.addObject(m_userData);
+        
         if (!m_button5.disabled)
         {
             var dt = m_userData.dt.split("T").join(" ").substr(0, 10);
@@ -363,7 +365,7 @@ class wot.UserInfo.UserInfo
             tf: tf,
             ts: data.ts
         };
-        stat = StatLoader.CalculateStatValues(stat, true);
+        stat = StatLoader.instance.CalculateStatValues(stat, true);
         //Logger.addObject(stat);
 
         var s2 = "";
@@ -460,7 +462,7 @@ class wot.UserInfo.UserInfo
         fixList(m_allDataProvider);
 
         // Hangar
-        var carouselData:Array = wot.RootComponents.carousel.dataProvider || _global._xvm_carousel_dataProvider;
+        var carouselData:Array = WGComponents.carousel.dataProvider || _global._xvm_carousel_dataProvider;
         if (!carouselData)
         {
             m_hangarDataProvider = null;
@@ -479,7 +481,7 @@ class wot.UserInfo.UserInfo
 
             for (var i:Number = 0; i < ulen; ++i)
             {
-                var ui:wot.WGDataTypes.UserInfoDataItem = m_allDataProvider[i];
+                var ui:UserInfoDataItem = m_allDataProvider[i];
                 //Logger.add(ci.label + ", " + ui.name + ", " + VehicleInfo.getVName(ci.image));
                 if (VehicleInfo.getVName(ci.image) == ui.name)
                     ui.name = ci.label;
@@ -544,7 +546,7 @@ class wot.UserInfo.UserInfo
                         tf: vdata.f,
                         ts: vdata.s
                     };
-                    stat = StatLoader.CalculateStatValues(stat);
+                    stat = StatLoader.instance.CalculateStatValues(stat);
                 }
                 data[i].tsb = stat.ts / stat.tb || 0;
                 data[i].ts = stat.ts || 0;
