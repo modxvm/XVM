@@ -3,6 +3,7 @@
  */
 {
   "locale": {
+    // Author of translation
     "XVM_translator": "yhpdoit",
 
     // Win chance
@@ -16,13 +17,20 @@
     "fire": "화재",
     "ramming": "충돌",
     "world_collision": "추락",
+    "Hits": "Hits",
+    "Total": "Total",
+    "Last": "Last",
+
+    // Hp Left
+    "hpLeftTitle": "Hitpoints left:",
 
     // Capture
-    "<font size='15' color='#FFFFFF'>Enemy base capture! {{extra}}</font>": "<font size='15' color='#FFFFFF'>적 기지 점령 중! {{extra}}</font>",
-    "<font size='17' color='#FFCC66'>Enemy base captured!</font>": "<font size='17' color='#FFCC66'>적 기지가 점령되었습니다!</font>",
-    "<font size='15' color='#FFFFFF'>Ally base capture! {{extra}}</font>": "<font size='15' color='#FFFFFF'>아군 기지가 공격당하는 중! {{extra}}</font>",
-    "<font size='17' color='#FFCC66'>Ally base captured!</font>": "<font size='17' color='#FFCC66'>아군 기지가 점령되었습니다!</font>",
-    "Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>": "점령자 수 : <b><font color='#FFCC66'>{{tanks}}</font></b> 남은 시간: <b><font color='#FFCC66'>{{time}}</font><b>",
+    "enemyBaseCapture": "적 기지 점령 중!",
+    "enemyBaseCaptured": "적 기지가 점령되었습니다!",
+    "allyBaseCapture": "아군 기지가 공격당하는 중!",
+    "allyBaseCaptured": "아군 기지가 점령되었습니다!",
+    "Timeleft": "남은 시간",
+    "Capturers": "점령자 수",
 
     // FinalStatistics
     "Hit percent": "명중률",
@@ -85,6 +93,12 @@
     "MT": "미듐전차",
     "LT": "경전차",
     "TD": "구축전차",
-    "SPG": "자주포"
+    "SPG": "자주포",
+
+    // VehicleMarkersManager
+    "blownUp": "Blown-up!",
+
+    // Minimap
+    "metersSymbol": "m"
   }
 }

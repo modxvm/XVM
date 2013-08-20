@@ -3,6 +3,7 @@
  */
 {
   "locale": {
+    // Author of translation
     "XVM_translator": "Alexander Shoumsky, <contact@by-reservation.com>",
 
     // Win chance
@@ -12,17 +13,24 @@
     "per-vehicle": "паводле тэхнікі",
 
     // Hitlog
-    "attack": "атака",
+    "attack": "стральба",
     "fire": "пажар",
     "ramming": "таран",
     "world_collision": "падзенне",
+    "Hits": "Прабіцці",
+    "Total": "Агулам",
+    "Last": "Апошняе",
+
+    // Hp Left
+    "hpLeftTitle": "Засталося HP:",
 
     // Capture
-    "<font size='15' color='#FFFFFF'>Enemy base capture! {{extra}}</font>": "<font size='15' color='#FFFFFF'>Захоп варожай базы! {{extra}}</font>",
-    "<font size='17' color='#FFCC66'>Enemy base captured!</font>": "<font size='17' color='#FFCC66'>Варожая база захоплена!</font>",
-    "<font size='15' color='#FFFFFF'>Ally base capture! {{extra}}</font>": "<font size='15' color='#FFFFFF'>Захоп нашай базы! {{extra}}</font>",
-    "<font size='17' color='#FFCC66'>Ally base captured!</font>": "<font size='17' color='#FFCC66'>Нашую базу захапілі!</font>",
-    "Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>": "Захопнікаў: <b><font color='#FFCC66'>{{tanks}}</font></b> Засталося: <b><font color='#FFCC66'>{{time}}</font><b>",
+    "enemyBaseCapture": "Захоп варожай базы!",
+    "enemyBaseCaptured": "Варожая база захоплена!",
+    "allyBaseCapture": "Захоп нашай базы!",
+    "allyBaseCaptured": "Нашую базу захапілі!",
+    "Timeleft": "Засталося часу",
+    "Capturers": "Захопнікаў"
 
     // FinalStatistics
     "Hit percent": "Выніковасць стральбы",
@@ -85,6 +93,12 @@
     "MT": "СТ",
     "LT": "ЛТ",
     "TD": "СТ-САУ",
-    "SPG": "САУ"
+    "SPG": "САУ",
+
+    // VehicleMarkersManager
+    "blownUp": "Выбух ладунку!",
+
+    // Minimap
+    "metersSymbol": "м"
   }
 }

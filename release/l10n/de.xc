@@ -3,6 +3,7 @@
  */
 {
   "locale": {
+    // Author of translation
     "XVM_translator": "diclovit",
 
     // Win chance
@@ -16,13 +17,20 @@
     "fire": "Feuer",
     "ramming": "Rammen",
     "world_collision": "Fallschaden",
+    "Hits": "Hits",
+    "Total": "Total",
+    "Last": "Last",
+
+    // Hp Left
+    "hpLeftTitle": "Hitpoints left:",
 
     // Capture
-    "<font size='15' color='#FFFFFF'>Enemy base capture! {{extra}}</font>": "<font size='15' color='#FFFFFF'>Gegnerische Basis wird erobert! {{extra}}</font>",
-    "<font size='17' color='#FFCC66'>Enemy base captured!</font>": "<font size='17' color='#FFCC66'>Gegnerische Basis erobert!</font>",
-    "<font size='15' color='#FFFFFF'>Ally base capture! {{extra}}</font>": "<font size='15' color='#FFFFFF'>Alliierte Basis wird eingenommen! {{extra}}</font>",
-    "<font size='17' color='#FFCC66'>Ally base captured!</font>": "<font size='17' color='#FFCC66'>Alliierte Basis verloren!</font>",
-    "Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>": "Panzer: <b><font color='#FFCC66'>{{tanks}}</font></b> Verbleibende Zeit: <b><font color='#FFCC66'>{{time}}</font><b>",
+    "enemyBaseCapture": "Gegnerische Basis wird erobert!",
+    "enemyBaseCaptured": "Gegnerische Basis erobert!",
+    "allyBaseCapture": "Alliierte Basis wird eingenommen!",
+    "allyBaseCaptured": "Alliierte Basis verloren!",
+    "Timeleft": "Verbleibende Zeit",
+    "Capturers": "Panzer",
 
     // FinalStatistics
     "Hit percent": "Treffergenauigkeit:",
@@ -85,6 +93,12 @@
     "MT": "MT",
     "LT": "LT",
     "TD": "TD",
-    "SPG": "SPG"
+    "SPG": "SPG",
+
+    // VehicleMarkersManager
+    "blownUp": "Blown-up!",
+
+    // Minimap
+    "metersSymbol": "m"
   }
 }

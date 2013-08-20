@@ -3,6 +3,7 @@
  */
 {
   "locale": {
+    // Author of translation
     "XVM_translator": "wRR",
 
     // Win chance
@@ -16,13 +17,20 @@
     "fire": "pożar",
     "ramming": "taranowanie",
     "world_collision": "upadek",
+    "Hits": "Hits",
+    "Total": "Total",
+    "Last": "Last",
+
+    // Hp Left
+    "hpLeftTitle": "Hitpoints left:",
 
     // Capture
-    "<font size='15' color='#FFFFFF'>Enemy base capture! {{extra}}</font>": "<font size='15' color='#FFFFFF'>Opanowanie bazy przeciwnika! {{extra}}</font>",
-    "<font size='17' color='#FFCC66'>Enemy base captured!</font>": "<font size='17' color='#FFCC66'>Baza przeciwnika opanowana!</font>",
-    "<font size='15' color='#FFFFFF'>Ally base capture! {{extra}}</font>": "<font size='15' color='#FFFFFF'>Okupacja naszej bazy! {{extra}}</font>",
-    "<font size='17' color='#FFCC66'>Ally base captured!</font>": "<font size='17' color='#FFCC66'>Zdobyto naszą bazę!</font>",
-    "Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>": "Okupantów: <b><font color='#FFCC66'>{{tanks}}</font></b> Pozostało: <b><font color='#FFCC66'>{{time}}</font><b>",
+    "enemyBaseCapture": "Opanowanie bazy przeciwnika!",
+    "enemyBaseCaptured": "Baza przeciwnika opanowana!",
+    "allyBaseCapture": "Okupacja naszej bazy!",
+    "allyBaseCaptured": "Zdobyto naszą bazę!",
+    "Timeleft": "Pozostało",
+    "Capturers": "Okupantów",
 
     // FinalStatistics
     "Hit percent": "Procent trafień",
@@ -85,6 +93,12 @@
     "MT": "MT",
     "LT": "LT",
     "TD": "TD",
-    "SPG": "SPG"
+    "SPG": "SPG",
+
+    // VehicleMarkersManager
+    "blownUp": "Blown-up!",
+
+    // Minimap
+    "metersSymbol": "m"
   }
 }

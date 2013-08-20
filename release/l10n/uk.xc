@@ -3,6 +3,7 @@
  */
 {
   "locale": {
+    // Author of translation
     "XVM_translator": "RedMor, <contact@by-reservation.com>",
 
     // Win chance
@@ -16,13 +17,20 @@
     "fire": "пожежа",
     "ramming": "таран",
     "world_collision": "падіння",
+    "Hits": "Hits",
+    "Total": "Total",
+    "Last": "Last",
+
+    // Hp Left
+    "hpLeftTitle": "Hitpoints left:",
 
     // Capture
-    "<font size='15' color='#FFFFFF'>Enemy base capture! {{extra}}</font>": "<font size='15' color='#FFFFFF'>Захоплення ворожої бази! {{extra}}</font>",
-    "<font size='17' color='#FFCC66'>Enemy base captured!</font>": "<font size='17' color='#FFCC66'>Ворожа база захоплена!</font>",
-    "<font size='15' color='#FFFFFF'>Ally base capture! {{extra}}</font>": "<font size='15' color='#FFFFFF'>Захоплення нашої бази! {{extra}}</font>",
-    "<font size='17' color='#FFCC66'>Ally base captured!</font>": "<font size='17' color='#FFCC66'>Наша база захоплена!</font>",
-    "Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>": "Загарбників: <b><font color='#FFCC66'>{{tanks}}</font></b> Залишилось: <b><font color='#FFCC66'>{{time}}</font><b>",
+    "enemyBaseCapture": "Захоплення ворожої бази!",
+    "enemyBaseCaptured": "Ворожа база захоплена!",
+    "allyBaseCapture": "Захоплення нашої бази!",
+    "allyBaseCaptured": "Наша база захоплена!",
+    "Timeleft": "Залишилось",
+    "Capturers": "Загарбників",
 
     // FinalStatistics
     "Hit percent": "Відсоток влучень",
@@ -85,6 +93,12 @@
     "MT": "СТ",
     "LT": "ЛТ",
     "TD": "ПТ",
-    "SPG": "САУ"
+    "SPG": "САУ",
+
+    // VehicleMarkersManager
+    "blownUp": "Blown-up!",
+
+    // Minimap
+    "metersSymbol": "м"
   }
 }

@@ -3,6 +3,7 @@
  */
 {
   "locale": {
+    // Author of translation
     "XVM_translator": "u u cac cac",
 
     // Win chance
@@ -16,13 +17,20 @@
     "fire": "nổ",
     "ramming": "đâm",
     "world_collision": "rơi",
+    "Hits": "Hits",
+    "Total": "Total",
+    "Last": "Last",
+
+    // Hp Left
+    "hpLeftTitle": "Hitpoints left:",
 
     // Capture
-    "<font size='15' color='#FFFFFF'>Enemy base capture! {{extra}}</font>": "<font size='15' color='#FFFFFF'>Đang chiếm căn cứ đối phương! {{extra}}</font>",
-    "<font size='17' color='#FFCC66'>Enemy base captured!</font>": "<font size='17' color='#FFCC66'>Căn cứ đối phương đã bị chiếm!</font>",
-    "<font size='15' color='#FFFFFF'>Ally base capture! {{extra}}</font>": "<font size='15' color='#FFFFFF'>Căn cứ bên ta đang bị chiếm! {{extra}}</font>",
-    "<font size='17' color='#FFCC66'>Ally base captured!</font>": "<font size='17' color='#FFCC66'>Căn cứ bên ta đã bị chiếm!</font>",
-    "Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>": "Xe đang chiếm: <b><font color='#FFCC66'>{{tanks}}</font></b> Còn lại: <b><font color='#FFCC66'>{{time}}</font><b>",
+    "enemyBaseCapture": "Đang chiếm căn cứ đối phương!",
+    "enemyBaseCaptured": "Căn cứ đối phương đã bị chiếm!",
+    "allyBaseCapture": "Căn cứ bên ta đang bị chiếm!",
+    "allyBaseCaptured": "Căn cứ bên ta đã bị chiếm!",
+    "Timeleft": "Còn lại",
+    "Capturers": "Xe đang chiếm",
 
     // FinalStatistics
     "Hit percent": "Tỉ lệ trúng",
@@ -85,6 +93,12 @@
     "MT": "Hạng Trung",
     "LT": "Hạng Nhẹ",
     "TD": "Chống Tank",
-    "SPG": "Pháo Tự Hành"
+    "SPG": "Pháo Tự Hành",
+
+    // VehicleMarkersManager
+    "blownUp": "Blown-up!",
+
+    // Minimap
+    "metersSymbol": "m"
   }
 }

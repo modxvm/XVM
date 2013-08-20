@@ -3,6 +3,7 @@
  */
 {
   "locale": {
+    // Author of translation
     "XVM_translator": "Edgar 'LaCourgette' Fournival",
 
     // Win chance
@@ -16,13 +17,20 @@
     "fire": "feu",
     "ramming": "ramming",
     "world_collision": "chute",
+    "Hits": "Hits",
+    "Total": "Total",
+    "Last": "Last",
+
+    // Hp Left
+    "hpLeftTitle": "Hitpoints left:",
 
     // Capture
-    "<font size='15' color='#FFFFFF'>Enemy base capture! {{extra}}</font>": "<font size='15' color='#FFFFFF'>Capture de la base ennemie ! {{extra}}</font>",
-    "<font size='17' color='#FFCC66'>Enemy base captured!</font>": "<font size='17' color='#FFCC66'>Base ennemie capturée !</font>",
-    "<font size='15' color='#FFFFFF'>Ally base capture! {{extra}}</font>": "<font size='15' color='#FFFFFF'>Capture de la base alliée ! {{extra}}</font>",
-    "<font size='17' color='#FFCC66'>Ally base captured!</font>": "<font size='17' color='#FFCC66'>Base alliée capturée !</font>",
-    "Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>": "Capeurs : <b><font color='#FFCC66'>{{tanks}}</font></b> Temps restant : <b><font color='#FFCC66'>{{time}}</font><b>",
+    "enemyBaseCapture": "Capture de la base ennemie !",
+    "enemyBaseCaptured": "Base ennemie capturée !",
+    "allyBaseCapture": "Capture de la base alliée !",
+    "allyBaseCaptured": "Base alliée capturée !",
+    "Timeleft": "Temps restant",
+    "Capturers": "Capeurs",
 
     // FinalStatistics
     "Hit percent": "% de tirs au but",
@@ -85,6 +93,12 @@
     "MT": "MT",
     "LT": "LT",
     "TD": "TD",
-    "SPG": "SPG"
+    "SPG": "SPG",
+
+    // VehicleMarkersManager
+    "blownUp": "Blown-up!",
+
+    // Minimap
+    "metersSymbol": "m"
   }
 }

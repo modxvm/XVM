@@ -3,6 +3,7 @@
  */
 {
   "locale": {
+    // Author of translation
     "XVM_translator": "Mikael Palokangas and Seula",
 
     // Win chance
@@ -16,13 +17,20 @@
     "fire": "sytytetty tuleen",
     "ramming": "törmätty",
     "world_collision": "putoaminen",
+    "Hits": "Hits",
+    "Total": "Total",
+    "Last": "Last",
+
+    // Hp Left
+    "hpLeftTitle": "Hitpoints left:",
 
     // Capture
-    "<font size='15' color='#FFFFFF'>Enemy base capture! {{extra}}</font>": "<font size='15' color='#FFFFFF'>Vihollisten tukikohtaa vallataan! {{extra}}</font>",
-    "<font size='17' color='#FFCC66'>Enemy base captured!</font>": "<font size='17' color='#FFCC66'>Vihollisten tukikohta vallattu!</font>",
-    "<font size='15' color='#FFFFFF'>Ally base capture! {{extra}}</font>": "<font size='15' color='#FFFFFF'>Omaa tukikohtaa vallataan! {{extra}}</font>",
-    "<font size='17' color='#FFCC66'>Ally base captured!</font>": "<font size='17' color='#FFCC66'>Oma tukikohta vallattu!</font>",
-    "Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>": "Valtaajia: <b><font color='#FFCC66'>{{tanks}}</font></b> Aikaa jäljellä: <b><font color='#FFCC66'>{{time}}</font><b>",
+    "enemyBaseCapture": "Vihollisten tukikohtaa vallataan!",
+    "enemyBaseCaptured": "Vihollisten tukikohta vallattu!",
+    "allyBaseCapture": "Omaa tukikohtaa vallataan!",
+    "allyBaseCaptured": "Oma tukikohta vallattu!",
+    "Timeleft": "Aikaa jäljellä",
+    "Capturers": "Valtaajia",
 
     // FinalStatistics
     "Hit percent": "Osumaprosentti",
@@ -85,6 +93,12 @@
     "MT": "MT",
     "LT": "LT",
     "TD": "TD",
-    "SPG": "Arty"
+    "SPG": "Arty",
+
+    // VehicleMarkersManager
+    "blownUp": "Blown-up!",
+
+    // Minimap
+    "metersSymbol": "m"
   }
 }

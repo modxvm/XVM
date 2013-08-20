@@ -3,6 +3,7 @@
  */
 {
   "locale": {
+    // Author of translation
     "XVM_translator": "drhideg",
 
     // Win chance
@@ -16,13 +17,20 @@
     "fire": "tűz",
     "ramming": "ütközés",
     "world_collision": "zuhanás",
+    "Hits": "Hits",
+    "Total": "Total",
+    "Last": "Last",
+
+    // Hp Left
+    "hpLeftTitle": "Hitpoints left:",
 
     // Capture
-    "<font size='15' color='#FFFFFF'>Enemy base capture! {{extra}}</font>": "<font size='15' color='#FFFFFF'>Ellenséges bázis foglalva! {{extra}}</font>",
-    "<font size='17' color='#FFCC66'>Enemy base captured!</font>": "<font size='17' color='#FFCC66'>Ellenséges bázis elfoglalva!</font>",
-    "<font size='15' color='#FFFFFF'>Ally base capture! {{extra}}</font>": "<font size='15' color='#FFFFFF'>Szövetséges bázis foglalva! {{extra}}</font>",
-    "<font size='17' color='#FFCC66'>Ally base captured!</font>": "<font size='17' color='#FFCC66'>Szövetséges bázis elfoglalva!</font>",
-    "Capturers: <b><font color='#FFCC66'>{{tanks}}</font></b> Timeleft: <b><font color='#FFCC66'>{{time}}</font><b>": "Foglalók: <b><font color='#FFCC66'>{{tanks}}</font></b> Hátralévő idő: <b><font color='#FFCC66'>{{time}}</font><b>",
+    "enemyBaseCapture": "Ellenséges bázis foglalva!",
+    "enemyBaseCaptured": "Ellenséges bázis elfoglalva!",
+    "allyBaseCapture": "Szövetséges bázis foglalva!",
+    "allyBaseCaptured": "Szövetséges bázis elfoglalva!",
+    "Timeleft": "Hátralévő idő",
+    "Capturers": "Foglalók",
 
     // FinalStatistics
     "Hit percent": "Találati arány",
@@ -30,7 +38,7 @@
     "Damage dealt": "Sebzés",
 
     // TeamRenderers
-    "TeamRenderersHeaderTip": "Xwn (vagy XEff) értékelés.\nRészletes információkért, helyezze a kurzort a játékos minősítésének értéke fölé.",	
+    "TeamRenderersHeaderTip": "Xwn (vagy XEff) értékelés.\nRészletes információkért, helyezze a kurzort a játékos minősítésének értéke fölé.",  
     "Friend": "Barát",
     "Ignored": "Tiltott",
     "Load statistics": "Statisztika betöltése",
@@ -85,6 +93,12 @@
     "MT": "MT",
     "LT": "LT",
     "TD": "TD",
-    "SPG": "SPG"
+    "SPG": "SPG",
+
+    // VehicleMarkersManager
+    "blownUp": "Blown-up!",
+
+    // Minimap
+    "metersSymbol": "m"
   }
 }
