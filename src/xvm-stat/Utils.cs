@@ -113,7 +113,13 @@ namespace wot
       sw.Start();
 
       HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-      request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+
+      //HACK: mkbundle conflicts with WG.net old zlib library.
+      if (Program.isMkbundle) 
+        request.AutomaticDecompression = DecompressionMethods.None;
+      else
+        request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+
       request.Credentials = CredentialCache.DefaultCredentials;
       if (!Program.isNoProxy)
         request.Proxy.Credentials = CredentialCache.DefaultCredentials;
