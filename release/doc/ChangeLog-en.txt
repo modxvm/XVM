@@ -1,6 +1,6 @@
 ﻿﻿XVM-4.1.1:
   [NEW FUNCTIONS]
-  * localization: added Finnish, French, German, Hungarian, Korean, Polish and Spanish translations
+  * localization: added Finnish, French, German, Hungarian, Korean, Polish, Spanish and Vietnamese translations
   * hitlog: rows in HP Left panel can be formatted
   * xvm-stat: /priority parameter
   * minimap: support vehicle names from vehicleNames.xc
