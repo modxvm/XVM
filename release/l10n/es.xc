@@ -17,15 +17,15 @@
     "fire": "fuego",
     "ramming": "choque",
     "world_collision": "caida",
-    "Hits": "Hits",
+    "Hits": "Impactos",
     "Total": "Total",
-    "Last": "Last",
+    "Last": "Ultimo",
 
     // Hp Left
-    "hpLeftTitle": "Hitpoints left:",
+    "hpLeftTitle": "Puntos de Impacto Restante:",
 
     // Capture
-    "enemyBaseCapture": "Capturando Base enemiga!",
+    "enemyBaseCapture": "Capturando base enemiga!",
     "enemyBaseCaptured": "Base enemiga capturada!",
     "allyBaseCapture": "Estan capturando la base aliada!",
     "allyBaseCaptured": "Base aliada capturada!",
@@ -96,7 +96,7 @@
     "SPG": "AAP",
 
     // VehicleMarkersManager
-    "blownUp": "Blown-up!",
+    "blownUp": "Detonado!",
 
     // Minimap
     "metersSymbol": "m"
