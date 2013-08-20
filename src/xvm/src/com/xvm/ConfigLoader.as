@@ -18,10 +18,11 @@ class com.xvm.ConfigLoader
     // Private vars
     private static var s_loading:Boolean = false;
     private static var info_event:Object = null;
+    private static var _region_loaded = false;
 
     // instance
     private static var instance:ConfigLoader = null;
-    
+
     // Load XVM mod config; config data is shared between all marker instances, so
     // it should be loaded only once per session. s_loaded flag indicates that
     // we've already initialized config loading process.
@@ -80,6 +81,9 @@ class com.xvm.ConfigLoader
                 return;
             finallyBugWorkaround = true;
             ReloadGameRegion();
+
+            /** Load localization files */
+            GlobalEventDispatcher.addEventListener(Locale.EVENT_LOADED, ConfigLoader.instance.SetConfigLoaded);
             Locale.loadLocale();
             //Logger.add("TRACE: ReloadConfigCallback(): finally::end");
         }
@@ -161,6 +165,7 @@ class com.xvm.ConfigLoader
                 if (finallyBugWorkaround)
                     return;
                 finallyBugWorkaround = true;
+                ConfigLoader._region_loaded = true;
                 ConfigLoader.instance.SetConfigLoaded();
             }
         });
@@ -208,6 +213,7 @@ class com.xvm.ConfigLoader
                 if (finallyBugWorkaround)
                     return;
                 finallyBugWorkaround = true;
+                ConfigLoader._region_loaded = true;
                 ConfigLoader.instance.SetConfigLoaded();
             }
         };
@@ -217,9 +223,16 @@ class com.xvm.ConfigLoader
 
     private function SetConfigLoaded()
     {
-        //Logger.add("Config: Loaded");
-        Config.s_loaded = true;
-        ConfigLoader.s_loading = false;
-        GlobalEventDispatcher.dispatchEvent({type: Config.E_CONFIG_LOADED});
+        /** prevent firing config loaded event before Locale files are loaded */
+        if (Locale.isLoaded()){
+            GlobalEventDispatcher.removeEventListener(Locale.EVENT_LOADED);
+
+            if (_region_loaded) {
+                //Logger.add("Config: Loaded");
+                Config.s_loaded = true;
+                ConfigLoader.s_loading = false;
+                GlobalEventDispatcher.dispatchEvent({type: Config.E_CONFIG_LOADED});
+            }
+        }
     }
 }
