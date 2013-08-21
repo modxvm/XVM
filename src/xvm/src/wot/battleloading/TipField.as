@@ -1,3 +1,4 @@
+import com.xvm.Config;
 import com.xvm.Defines;
 import com.xvm.GlobalEventDispatcher;
 import com.xvm.Utils;
@@ -9,7 +10,7 @@ class wot.battleloading.TipField
     public function TipField(form_mc:MovieClip)
     {
         this.form_mc = form_mc;
-        GlobalEventDispatcher.addEventListener("set_info", this, setInfoFieldData);
+        GlobalEventDispatcher.addEventListener(Config.E_SET_INFO, this, setInfoFieldData);
         setInfoFieldData( { } );
     }
 

@@ -8,7 +8,6 @@ import com.xvm.Macros;
 import com.xvm.StatData;
 import com.xvm.Utils;
 import com.xvm.VehicleInfo;
-import com.xvm.DataTypes.Stat;
 
 class com.xvm.StatLoader
 {
@@ -69,7 +68,7 @@ class com.xvm.StatLoader
             vehicleKey: VehicleInfo.getInfo2(icon).name.toUpperCase(),
             icon: icon,
             team: team,
-      	    vehicleId: vehId,
+            vehicleId: vehId,
             vehicleState: vehicleState,
             selected: data.himself,
             loadstate: !StatData.s_data[pname].loadstate ? Defines.LOADSTATE_NONE : StatData.s_data[pname].loadstate,
@@ -139,7 +138,7 @@ class com.xvm.StatLoader
             var response = JSONx.parse(event.str);
 
             if (response.info && response.info.xvm)
-                GlobalEventDispatcher.dispatchEvent({ type: "set_info", ver: response.info.xvm.ver, message: response.info.xvm.message });
+                GlobalEventDispatcher.dispatchEvent({ type: Config.E_SET_INFO, ver: response.info.xvm.ver, message: response.info.xvm.message });
 
             if (response.players)
             {

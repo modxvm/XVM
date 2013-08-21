@@ -229,6 +229,7 @@ class com.xvm.ConfigLoader
 
             if (_region_loaded) {
                 //Logger.add("Config: Loaded");
+                GlobalEventDispatcher.dispatchEvent(ConfigLoader.info_event);
                 Config.s_loaded = true;
                 ConfigLoader.s_loading = false;
                 GlobalEventDispatcher.dispatchEvent({type: Config.E_CONFIG_LOADED});
