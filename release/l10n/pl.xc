@@ -89,6 +89,8 @@
     "france": "Francja",
     "uk": "Wielka Brytania",
     "china": "Chiny",
+
+    // Vehicle type substitutions, used in {{vtype}} macro
     "HT": "HT",
     "MT": "MT",
     "LT": "LT",

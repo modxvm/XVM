@@ -84,7 +84,7 @@
   // Frag counter panel.
   // Панель счёта в бою.
   "fragCorrelation": ${"battle.xc":"fragCorrelation"},
-  
+
   // Ingame crits panel by "expert" skill.
   // Внутриигровая панель критов от навыка "экспет".
   "expertPanel": ${"battle.xc":"expertPanel"},
@@ -144,10 +144,6 @@
   // Options for dynamic transparency.
   // Настройки динамической прозрачности.
   "alpha": ${"alpha.xc":"alpha"},
-
-  // Text substitutions.
-  // Текстовые подстановки.
-  "texts": ${"texts.xc":"texts"},
 
   // Icon sets.
   // Наборы иконок.

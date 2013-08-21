@@ -89,6 +89,8 @@
     "france": "프랑스",
     "uk": "영국",
     "china": "중국",
+
+    // Vehicle type substitutions, used in {{vtype}} macro
     "HT": "헤비전차",
     "MT": "미듐전차",
     "LT": "경전차",

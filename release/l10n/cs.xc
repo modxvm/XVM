@@ -89,6 +89,8 @@
     "france": "Francie",
     "uk": "Británie",
     "china": "Čína",
+
+    // Vehicle type substitutions, used in {{vtype}} macro
     "HT": "Těžký tank",
     "MT": "Střední tank",
     "LT": "Lehký tank",
