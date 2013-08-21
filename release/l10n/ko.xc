@@ -96,9 +96,6 @@
     "SPG": "자주포",
 
     // VehicleMarkersManager
-    "blownUp": "Blown-up!",
-
-    // Minimap
-    "metersSymbol": "m"
+    "blownUp": "Blown-up!"
   }
 }

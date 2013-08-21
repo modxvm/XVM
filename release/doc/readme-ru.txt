@@ -198,7 +198,6 @@
       {{vehicle-name}} - возвращает системное название танка - usa-M24_Chaffee
       {{vehiclename}}  - возвращает системное название танка - usa-M24_Chaffee
       {{vehicle-short}}  - короткое название типа техники
-      {l10n:metersSymbol}}  - перевод символа "m", только в поле minimap.labels.mapSize.format
 
     Макроподстановки статистики (необходимо включить rating/showPlayersStatistics):
       {{avglvl}}      - средний уровень танков игрока

@@ -38,7 +38,7 @@
     "Damage dealt": "Sebzés",
 
     // TeamRenderers
-    "TeamRenderersHeaderTip": "Xwn (vagy XEff) értékelés.\nRészletes információkért, helyezze a kurzort a játékos minősítésének értéke fölé.",  
+    "TeamRenderersHeaderTip": "Xwn (vagy XEff) értékelés.\nRészletes információkért, helyezze a kurzort a játékos minősítésének értéke fölé.",
     "Friend": "Barát",
     "Ignored": "Tiltott",
     "Load statistics": "Statisztika betöltése",
@@ -96,9 +96,6 @@
     "SPG": "SPG",
 
     // VehicleMarkersManager
-    "blownUp": "Blown-up!",
-
-    // Minimap
-    "metersSymbol": "m"
+    "blownUp": "Blown-up!"
   }
 }

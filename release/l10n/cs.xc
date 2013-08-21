@@ -96,9 +96,6 @@
     "SPG": "Dělostřelectvo",
 
     // VehicleMarkersManager
-    "blownUp": "Munice!",
-
-    // Minimap
-    "metersSymbol": "m"
+    "blownUp": "Munice!"
   }
 }

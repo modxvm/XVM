@@ -96,9 +96,6 @@
     "SPG": "AAP",
 
     // VehicleMarkersManager
-    "blownUp": "Detonado!",
-
-    // Minimap
-    "metersSymbol": "m"
+    "blownUp": "Detonado!"
   }
 }

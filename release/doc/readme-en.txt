@@ -198,7 +198,6 @@
       {{vehicle-name}} - returns vehicle system name - usa-M24_Chaffee
       {{vehiclename}}  - returns vehicle system name - usa-M24_Chaffee
       {{vehicle-short}}  - shortened vehicle name
-      {l10n:metersSymbol}}  - localizated symbol "m", only in minimap.labels.mapSize.format field
 
     Statistics macros ('rating/showPlayersStatistics' must be anabled):
       {{avglvl}}      - average level (tier) of tanks

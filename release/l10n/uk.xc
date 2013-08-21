@@ -96,9 +96,6 @@
     "SPG": "САУ",
 
     // VehicleMarkersManager
-    "blownUp": "Blown-up!",
-
-    // Minimap
-    "metersSymbol": "м"
+    "blownUp": "Blown-up!"
   }
 }

@@ -215,9 +215,6 @@ class com.xvm.Locale
 
             // VehicleMarkersManager
             tr["blownUp"] = "Взрыв БК!";
-
-            // Minimap
-            tr["metersSymbol"] = "м";
         }
         else
         {
@@ -262,9 +259,6 @@ class com.xvm.Locale
 
             // VehicleMarkersManager
             tr["blownUp"] = "Blown-up!";
-
-            // Minimap
-            tr["metersSymbol"] = "m";
         }
     }
 

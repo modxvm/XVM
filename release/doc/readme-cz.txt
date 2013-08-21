@@ -210,7 +210,6 @@
       {{vehicle-name}}  - vrátí systémoví název vozidla - usa-M24_Chaffee
       {{vehiclename}}   - vrátí systémoví název vozidla - usa-M24_Chaffee
       {{vehicle-short}} - zkrácený název vozydla
-      {l10n:metersSymbol}}  - symbol pro metry "m", puze v poli minimap.labels.mapSize.format
 
     Statistická makra:
       V souboru s nastavení (\res_mods\xvm\configs\@Default\rating.xc) musí být povoleno "rating/showPlayersStatistics".

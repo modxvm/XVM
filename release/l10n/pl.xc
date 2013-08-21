@@ -96,9 +96,6 @@
     "SPG": "SPG",
 
     // VehicleMarkersManager
-    "blownUp": "Blown-up!",
-
-    // Minimap
-    "metersSymbol": "m"
+    "blownUp": "Blown-up!"
   }
 }
