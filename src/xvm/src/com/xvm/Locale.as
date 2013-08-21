@@ -207,8 +207,6 @@ class com.xvm.Locale
             tr["france"] = "Франция";
             tr["uk"] = "Великобритания";
             tr["china"] = "Китай";
-
-            // Vehicle type substitutions, used in {{vtype}} macro
             tr["HT"] = "ТТ";
             tr["MT"] = "СТ";
             tr["LT"] = "ЛТ";

@@ -1,7 +1,6 @@
 import com.natecook.Sprintf;
 import com.xvm.Cache;
 import com.xvm.Config;
-import com.xvm.DataTypes.Stat;
 import com.xvm.Defines;
 import com.xvm.GlobalEventDispatcher;
 import com.xvm.GraphicsUtil;
@@ -10,6 +9,7 @@ import com.xvm.StatData;
 import com.xvm.Strings;
 import com.xvm.Utils;
 import com.xvm.VehicleInfo;
+import com.xvm.DataTypes.Stat;
 
 class com.xvm.Macros
 {
@@ -95,7 +95,7 @@ class com.xvm.Macros
             // {{vehiclename}} - usa-M24_Chaffee
             pdata["vehiclename"] = VehicleInfo.getVehicleName(data.icon);
             // {{vtype}}
-            pdata["vtype"] = Locale.get(VehicleInfo.GetVTypeValue(data.icon));
+            pdata["vtype"] = VehicleInfo.GetVTypeValue(data.icon);
             // {{c:vtype}}
             pdata["c:vtype"] = GraphicsUtil.GetVTypeColorValue(data.icon, data.vtype);
 

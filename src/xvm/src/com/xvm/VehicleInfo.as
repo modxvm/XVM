@@ -28,7 +28,7 @@ class com.xvm.VehicleInfo
         icon = Strings.trim(icon);
         return icon;
     }
-
+    
     // icon = "../maps/icons/vehicle/contour/ussr-IS-3.png"
     public static function getInfo1(icon: String): Object
     {
@@ -55,7 +55,7 @@ class com.xvm.VehicleInfo
         res.top = VehicleInfoDataTop.data[vn] || null;
         return res;
     }
-
+    
     public static function getVehicleNamesData():Object
     {
         var result:Object = {};
@@ -75,7 +75,7 @@ class com.xvm.VehicleInfo
             return originalName;
         }
     }
-
+    
     public static function mapVehicleName2(tankName:String, originalName:String):String
     {
             return Config.s_config.vehicleNames[tankName].name || originalName;
@@ -95,12 +95,26 @@ class com.xvm.VehicleInfo
 
     public static function GetVTypeValue(iconSource:String): String
     {
-        var vi2 = getInfo2(iconSource);
-        if (vi2 == null || !vi2.type);
+        var vi2 = com.xvm.VehicleInfo.getInfo2(iconSource);
+        if (vi2 == null)
             return "";
-        return vi2.type;
+        var vtype = vi2.type;
+        if (!vtype || !Config.s_config.texts.vtype[vtype])
+            return "";
+        return Config.s_config.texts.vtype[vtype];
     }
-
+    
+    public static function GetVTypeValue2(iconSource:String): String
+    {
+        var vi2 = com.xvm.VehicleInfo.getInfo2(iconSource);
+        if (vi2 == null)
+            return "";
+        var vtype = vi2.type;
+        if (!vtype)
+            return "";
+        return vtype;
+    }
+    
     // icon = "../maps/icons/vehicle/contour/ussr-IS-3.png"
     // return: "is_3"
     public static function getName2(icon: String): String
@@ -122,3 +136,4 @@ class com.xvm.VehicleInfo
         return icon;
     }
 }
+

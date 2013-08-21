@@ -89,13 +89,11 @@
     "france": "France",
     "uk": "UK",
     "china": "China",
-
-    // Vehicle type substitutions, used in {{vtype}} macro
-    "HT": "HT",         // Text for light tanks
-    "MT": "MT",         // Text for medium tanks
-    "LT": "LT",         // Text for heavy tanks
-    "TD": "TD",         // Text for arty
-    "SPG": "SPG",       // Text for tank destroyers
+    "HT": "HT",
+    "MT": "MT",
+    "LT": "LT",
+    "TD": "TD",
+    "SPG": "SPG",
 
     // VehicleMarkersManager
     "blownUp": "Blown-up!"

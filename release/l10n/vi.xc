@@ -89,8 +89,6 @@
     "france": "Pháp",
     "uk": "Anh",
     "china": "Tàu",
-
-    // Vehicle type substitutions, used in {{vtype}} macro
     "HT": "Hạng Nặng",
     "MT": "Hạng Trung",
     "LT": "Hạng Nhẹ",

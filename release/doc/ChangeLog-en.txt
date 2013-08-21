@@ -6,7 +6,6 @@
   * xvm-stat: /priority parameter
   * minimap: support vehicle names from vehicleNames.xc
   * minimap: short vehicle names from vehicleNames.xc
-  * config: removed texts.xc, use localization files instead
 
   [FIXES]
   * minimap: fixed labels for asian region

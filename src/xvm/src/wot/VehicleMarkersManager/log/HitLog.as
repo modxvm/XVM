@@ -260,7 +260,7 @@ class wot.VehicleMarkersManager.log.HitLog
                 format = formatArr.join(VehicleInfo.getVehicleName(data.icon));
             formatArr = format.split("{{vtype}}");
             if (formatArr.length > 1)
-                format = formatArr.join(Locale.get(data.vtype));
+                format = formatArr.join(data.vtype);
             formatArr = format.split("{{level}}");
             if (formatArr.length > 1)
                 format = formatArr.join(data.level);
