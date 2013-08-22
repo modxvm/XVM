@@ -117,7 +117,7 @@ class wot.PlayersPanel.PlayersPanel
      * Refreshes Enemy spot status marker.
      * Invoked by AutoUpdate event each 300ms.
      */
-    public function updateSpotStatusMarkers():Void
+    private function updateSpotStatusMarkers():Void
     {
         if (!isEnemyPanel || !Config.s_config.playersPanel.enemySpottedMarker.enabled)
             return;
