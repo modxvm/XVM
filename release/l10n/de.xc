@@ -7,7 +7,7 @@
     "XVM_translator": "diclovit",
 
     // Win chance
-    "Chance error": "Fehlerchance",
+    "Chance error": "Fehler bei Berechnung der Siegchance",
     "Chance to win": "Siegchance",
     "global": "Global",
     "per-vehicle": "pro Fahrzeug",
@@ -16,29 +16,29 @@
     "attack": "Angriff",
     "fire": "Feuer",
     "ramming": "Rammen",
-    "world_collision": "Fallschaden",
-    "Hits": "Hits",
-    "Total": "Total",
-    "Last": "Last",
+    "world_collision": "Aufprall",
+    "Hits": "Treffer",
+    "Total": "Gesamt",
+    "Last": "Zuletzt",
 
     // Hp Left
-    "hpLeftTitle": "Hitpoints left:",
+    "hpLeftTitle": "Verbleibende Trefferpunkte:",
 
     // Capture
-    "enemyBaseCapture": "Gegnerische Basis wird erobert!",
-    "enemyBaseCaptured": "Gegnerische Basis erobert!",
-    "allyBaseCapture": "Alliierte Basis wird eingenommen!",
-    "allyBaseCaptured": "Alliierte Basis verloren!",
+    "enemyBaseCapture": "Feindliche Basis wird erobert!",
+    "enemyBaseCaptured": "Feindliche Basis wurde erobert!",
+    "allyBaseCapture": "Eigene Basis wird eingenommen!",
+    "allyBaseCaptured": "Eigene Basis verloren!",
     "Timeleft": "Verbleibende Zeit",
     "Capturers": "Panzer",
 
     // FinalStatistics
-    "Hit percent": "Treffergenauigkeit:",
-    "Damage upon detecting": "Schaden durch eigene Aufklärung:",
-    "Damage dealt": "Schaden verursacht:",
+    "Hit percent": "Treffergenauigkeit",
+    "Damage upon detecting": "Schaden durch eigene Aufklärung/Kettenabschuss",
+    "Damage dealt": "Schaden verursacht",
 
     // TeamRenderers
-    "TeamRenderersHeaderTip": "XWN (oder XEFF) Wertung.\nFür genauere Informationen fahre mit der Maus über einen Spielernamen.",
+    "TeamRenderersHeaderTip": "XWN (oder XEFF) Wertung.\nFür genauere Informationen fahre mit der Maus über den Spielernamen.",
     "Friend": "Freund",
     "Ignored": "Ignoriert",
     "Load statistics": "Lade Statistiken",
@@ -46,18 +46,18 @@
     "disabled": "deaktiviert",
 
     // UserInfo
-    "UserInfoEHint": "Wertung pro Fahrzeug.\nDie Werte entsprechen dem letzten Update am: \u0025DATE\u0025\nAktuelle Werte werden bei den einzelnen Fahrzeugen angezeigt.\nGenauigkeit abhängig von der Qualität der von Wargaming gelieferten Daten.",
-    "Data was updated at": "Daten zuletzt aktualisiert am",
-    " to ": " bis ",
+    "UserInfoEHint": "Wertung pro Fahrzeug.\nDie Werte entsprechen der letzten Aktualisierung am: \u0025DATE\u0025\nAktuelle Werte werden bei den einzelnen Fahrzeugen angezeigt.\nGenauigkeit abhängig von der Qualität der zur Verfügung stehenden Daten.",
+    "Data was updated at": "Daten aktualisiert am",
+    " to ": " zu ",
     "EFF": "EFF",
     "updated": "aktualisiert",
     "unknown": "unbekannt",
-    "Avg level": "Durchschn. Stufe",
+    "Avg level": "Ø Stufe",
     "Spotted": "Aufgedeckt",
     "Defence": "Verteidigung",
     "Capture": "Eroberung",
-    "player (average / top)": "Spieler (Durchsch. / Max.)",
-    "Spec dmg": "Schaden/Leben",
+    "player (average / top)": "Spieler (Ø / Bestwert)",
+    "Spec dmg": "Spez. Schaden",
 
     // UserInfo - filters
     "Filter": "Filter",
@@ -77,8 +77,8 @@
     "Wins": "Siege",
 
     // Crew
-    "PutOwnCrew": "Eigene Mannschaft einsetzen",
-    "PutBestCrew": "Beste Mannschaft einsetzen",
+    "PutOwnCrew": "Eingewiesene Besatzung einsetzen",
+    "PutBestCrew": "Beste Besatzung einsetzen",
 
     // Squad
     "Vehicle": "Fahrzeug",
@@ -89,13 +89,13 @@
     "france": "Frankreich",
     "uk": "Großbritannien",
     "china": "China",
-    "HT": "HT",
-    "MT": "MT",
-    "LT": "LT",
-    "TD": "TD",
-    "SPG": "SPG",
+    "HT": "SP",
+    "MT": "MP",
+    "LT": "LP",
+    "TD": "JP",
+    "SPG": "SFL",
 
     // VehicleMarkersManager
-    "blownUp": "Blown-up!"
+    "blownUp": "Munitionsexplosion!"
   }
 }
