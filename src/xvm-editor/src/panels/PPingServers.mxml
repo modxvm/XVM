@@ -13,7 +13,6 @@
     </fx:Script>
 
     <c:LabeledCheckBox label="{_('Enabled')}" labelWidth="180" id="v_enabled" config="{rootElementName}.pingServers.enabled" change="onChange(event)"/>
-    <c:LabeledCheckBox label="{_('showPingOnGameLoading')}" id="v_showPingOnGameLoading" config="{rootElementName}.pingServers.showPingOnGameLoading" change="onChange(event)" height="{rootElementName == 'login' ? 20 : 0}"/>
     <c:LabeledNumberSelector label="{_('updateInterval')}" labelWidth="160" id="v_updateInterval" config="{rootElementName}.pingServers.updateInterval" minimum="100" maximum="60000" stepSize="100" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{_('XPosition')}" labelWidth="160" id="v_x" config="{rootElementName}.pingServers.x" minimum="-999" maximum="2999" sliderVisible="false" change="onChange(event)"/>
     <c:LabeledNumberSelector label="{_('YPosition')}" labelWidth="160" id="v_y" config="{rootElementName}.pingServers.y" minimum="-999" maximum="2999" sliderVisible="false" change="onChange(event)"/>

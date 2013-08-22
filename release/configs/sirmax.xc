@@ -13,7 +13,7 @@
     "damageMessageAllyDead": "({{dmg}})",
     "damageMessageEnemyDead": "<textformat leading='-5'>({{dmg}})<br>{{vehicle}}</textformat>",
 
-    "pingServers": { "enabled": true },
+    "pingServers": { "enabled": true, "updateInterval": 5000 },
 
     "markers": {
       "vehicleIconColor": null,

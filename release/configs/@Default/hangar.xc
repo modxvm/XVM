@@ -61,7 +61,7 @@
       "threshold": {
         // Below this value responce is great
         // До этого значения отклик отличный
-        "great": 30,
+        "great": 35,
         // Below this value responce is good
         // До этого значения отклик хороший
         "good": 60,
