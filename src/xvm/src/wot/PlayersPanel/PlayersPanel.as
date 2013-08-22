@@ -127,9 +127,9 @@ class wot.PlayersPanel.PlayersPanel
         {
             var renderer:PlayerListItemRenderer = net.wargaming.ingame.PlayerListItemRenderer(wrapper.m_list.renderers[i]).xvm_worker;
             var uid:Number = renderer.wrapper.data.uid;
-            //var status:Number = spotStatusModel.defineStatus(uid, renderer.wrapper.data.vehicleState);
-            //var subjectIsArtillery:Boolean = spotStatusModel.isArty(uid);
-            //renderer.spotStatusView.update(status, subjectIsArtillery);
+            var status:Number = spotStatusModel.defineStatus(uid, renderer.wrapper.data.vehicleState);
+            var subjectIsArtillery:Boolean = spotStatusModel.isArty(uid);
+            renderer.spotStatusView.update(status, subjectIsArtillery);
         }
     }
 
