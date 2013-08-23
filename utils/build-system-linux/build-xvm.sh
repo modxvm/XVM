@@ -22,11 +22,11 @@ popd > /dev/null
 
 #4. Make dirs
 mkdir -p ../../temp/rel/"$wot_version_release"/gui/flash
-mkdir -p ../../temp/ct/"$wot_version_ct"/gui/flash
+mkdir -p ../../temp/ct/"$wot_version_ct"/gui/scaleform
 
 #5. Copy swfs,config,l10n,docs etc.
 cp -rf ../../bin/* ../../temp/rel/"$wot_version_release"/gui/flash/
-cp -rf ../../bin/* ../../temp/ct/"$wot_version_ct"/gui/flash/
+cp -rf ../../bin/* ../../temp/ct/"$wot_version_ct"/gui/scaleform/
 
 cp -rf ../../release/ ../../temp/rel/xvm/
 cp -rf ../../release/ ../../temp/ct/xvm/
