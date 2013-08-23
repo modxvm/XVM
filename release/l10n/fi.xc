@@ -1,4 +1,4 @@
-﻿﻿/**
+﻿/**
  * Finnish translation file.
  */
 {
@@ -17,12 +17,12 @@
     "fire": "sytytetty tuleen",
     "ramming": "törmätty",
     "world_collision": "putoaminen",
-    "Hits": "Hits",
-    "Total": "Total",
-    "Last": "Last",
+    "Hits": "Osumia",
+    "Total": "Kokonais",
+    "Last": "Viimeisin",
 
     // Hp Left
-    "hpLeftTitle": "Hitpoints left:",
+    "hpLeftTitle": "HP:tä jäljellä:",
 
     // Capture
     "enemyBaseCapture": "Vihollisten tukikohtaa vallataan!",
@@ -96,6 +96,6 @@
     "SPG": "Arty",
 
     // VehicleMarkersManager
-    "blownUp": "Blown-up!"
+    "blownUp": "Räjähti!"
   }
 }
