@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using VehicleBankParser.Properties;
+using VehicleBankParser.Renderers;
+using System.Globalization;
+using VehicleBankParser.Utils;
 
 class Program
 {
@@ -11,108 +14,40 @@ class Program
      *  Get vehicleList xmlNodeVehicleList with secondary turret modules equippable and corresponding HP.
      *  List is then used in XVM to add stock\top turret tank marker.
      * Author: ilitvinov87@gmail.com
+     * Author: maca.pavel@gmail.com
      */
 
     private const string VEHICLE_DIR_PATH = "res\\scripts\\item_defs\\vehicles\\";
-
-    public static XmlNode decode(string file)
-    {
-        BxmlReader reader = new BxmlReader(file);
-        return reader.getFile().DocumentElement;
-    }
-
-    private static string getVehicleType(string tags)
-    {
-        List<string> t = new List<string>(tags.Split(new char[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries));
-        if (t.Contains("lightTank"))
-            return "LT";
-        if (t.Contains("mediumTank"))
-            return "MT";
-        if (t.Contains("heavyTank"))
-            return "HT";
-        if (t.Contains("AT-SPG"))
-            return "TD";
-        if (t.Contains("SPG"))
-            return "SPG";
-        throw new Exception("Cannot find vehicle class:\n  " + tags);
-    }
 
     static void Main()
     {
         try
         {
+            if (!Directory.Exists(Settings.Default.GAME_PATH))
+            {
+                throw new FileNotFoundException("Specify correct WoT root folder");
+            }
+
             List<Vehicle> vehicles = new List<Vehicle>();
             foreach (string country in Defines.COUNTRIES)
             {
-                string fn = Path.Combine(Settings.Default.GAME_PATH,
-                    VEHICLE_DIR_PATH, country, "list.xml");
-                XmlNodeList nodes = decode(fn).ChildNodes;
-                foreach (XmlNode node in nodes)
-                {
-                    XmlNode tags = node.SelectSingleNode("tags");
-                    if (tags == null)
-                        continue;
-                    if (tags.InnerText.Contains("observer"))
-                        continue;
-                    XmlNode tankId = node.SelectSingleNode("id");
-                    if (tankId == null)
-                      continue;
-                    XmlNode level = node.SelectSingleNode("level");
-                    if (level == null)
-                        continue;
-                    XmlNode price = node.SelectSingleNode("price");
-                    if (price == null)
-                        continue;
-
-                    XmlNode shortUserString = node.SelectSingleNode("shortUserString");
-                    if (shortUserString == null)
-                    {
-                        shortUserString = node.SelectSingleNode("userString");
-                        if (shortUserString == null)
-                            continue;
-                    }
-
-                    XmlNode vdata = decode(Path.Combine(Settings.Default.GAME_PATH,
-                        VEHICLE_DIR_PATH, country, node.Name + ".xml"));
-                    if (vdata == null)
-                        continue;
-
-                    Vehicle vehicle = new Vehicle(vdata)
-                    {
-                        vid = (int.Parse(tankId.InnerText) << 8) + (Array.IndexOf(Defines.COUNTRIES, country) << 4),
-                        tankId = int.Parse(tankId.InnerText),
-                        name = node.Name,
-                        nation = country,
-                        level = int.Parse(level.InnerText),
-                        type = getVehicleType(tags.InnerText),
-                        premium = price.InnerXml.ToLower().Contains("<gold>"),
-                        shortUserString = shortUserString.InnerText,
-                    };
-                    vehicles.Add(vehicle);
-                }
+                vehicles.AddRange(ListXmlParser.getVehicleByNation(country));
             }
 
-            // sort order: level -> type -> nation -> name
-            vehicles.Sort((a, b) =>
-            {
-                var n = a.level - b.level;
-                if (n != 0)
-                    return n;
-                n = Array.IndexOf(Defines.TYPES_FOR_SORT, a.type) - Array.IndexOf(Defines.TYPES_FOR_SORT, b.type);
-                if (n != 0)
-                    return n;
-                n = Array.IndexOf(Defines.COUNTRIES, a.nation) - Array.IndexOf(Defines.COUNTRIES, b.nation);
-                if (n != 0)
-                    return n;
-                return String.Compare(a.name, b.name, true);
-            });
-
-            Export.generateAS2code(vehicles);
-            Export.generateJSON(vehicles);
+            Export exporter = new Export(vehicles);
+            exporter.genVehicleInfoData2();
+            exporter.genVehicleNames();
+            exporter.genVehicleInfo();
+            //exporter.genVehicleInfoData(); need resolve sortNames & special matchmaking definition
         }
         catch (Exception ex)
         {
             Console.WriteLine("Error:\n" + ex);
         }
+
+        #if DEBUG
+                Console.WriteLine("Press any key to close...");
+                Console.ReadKey();
+        #endif
     }
 }

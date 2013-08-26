@@ -1,35 +1,41 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Xml;
-using System;
 
 class Vehicle
 {
-   /**
-    * Can not define rootNode modules vulnerability status.
-    * This type of vehicles are not a subject of interest.
-    */
+    /**
+     * Can not define rootNode modules vulnerability status.
+     * This type of vehicles are not a subject of interest.
+     */
     public const short ONLY_ONE_TURRET = 0;
 
-   /**
-    * Top turret does not unlock new gun.
-    * Player with stock turret can mount top gun.
-    * Low vulnerability.
-    */
+    /**
+     * Top turret does not unlock new gun.
+     * Player with stock turret can mount top gun.
+     * Low vulnerability.
+     */
     public const short STOCK_TURRET_TOP_GUN_POSSIBLE = 1;
 
-   /**
-    * Top turret secondChassis new gun.
-    * Player with stock turret can not mount top gun.
-    * High vulnerability.
-    */
+    /**
+     * Top turret secondChassis new gun.
+     * Player with stock turret can not mount top gun.
+     * High vulnerability.
+     */
     public const short STOCK_TURRET_NO_TOP_GUN = 2;
+
+    public const String TYPE_LT = "LT";
+    public const String TYPE_MT = "MT";
+    public const String TYPE_HT = "HT";
+    public const String TYPE_TD = "TD";
+    public const String TYPE_SPG = "SPG";
 
     public int vid;
     public int tankId;
     public string name;
     public string nation;
     public int level;
-    public string type;
+    private string type;
     public bool premium;
     public int hpstock;
     public int hptop;
@@ -47,6 +53,28 @@ class Vehicle
         hpstock = parser.getHpStock();
         hptop = parser.getHpTop();
         status = defineStatus(parser);
+    }
+
+    public void setType(string tags)
+    {
+        List<string> t = new List<string>(tags.Split(new char[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries));
+
+        if (t.Contains("lightTank"))
+            type = TYPE_LT;
+        else if (t.Contains("mediumTank"))
+            type = TYPE_MT;
+        else if (t.Contains("heavyTank"))
+            type = TYPE_HT;
+        else if (t.Contains("AT-SPG"))
+            type = TYPE_TD;
+        else if (t.Contains("SPG"))
+            type = TYPE_SPG;
+        else throw new Exception("Cannot find vehicle class:\n  " + tags);
+    }
+
+    public String getType()
+    {
+        return type;
     }
 
     private short defineStatus(VehicleXmlParser parser)
@@ -89,37 +117,5 @@ class Vehicle
             return STOCK_TURRET_TOP_GUN_POSSIBLE;
 
         return STOCK_TURRET_NO_TOP_GUN;
-    }
-
-    public string ToAS2tring()
-    {
-      return (String.Format("{0} {{ {1}{2}{3}{4}{5}{6}{7}{8}{9}{10} }}",
-        (name.Replace("-", "_").ToLower() + ":").PadRight(27),
-        String.Format("id: {0},", tankId).PadRight(9),
-        String.Format("level: {0},", level).PadRight(11),
-        String.Format("type: \"{0}\", ", type).PadRight(13),
-        String.Format("hpstock: {0}, ", hpstock).PadRight(15),
-        String.Format("hptop: {0}, ", hptop).PadRight(13),
-        String.Format("turret: {0}, ", status),
-        String.Format("premium: {0}, ", (premium ? "1" : "0")),
-        String.Format("nation: \"{0}\", ", nation).PadRight(19),
-        String.Format("name: \"{0}\", ", name).PadRight(37),
-        String.Format("translationKey: \"{0}\"", shortUserString)
-        ));
-    }
-
-    public string ToJsonString()
-    {
-      return (String.Format("{0} {{ {1}{2}{3}{4}{5}{6}{7}{8}{9} }}",
-        String.Format("\"{0}\":", name.Replace("-", "_").ToLower()).PadRight(29),
-        String.Format("\"id\": {0},", tankId).PadRight(11),
-        String.Format("\"level\": {0},", level).PadRight(13),
-        String.Format("\"type\": \"{0}\", ", type).PadRight(15),
-        String.Format("\"hpstock\": {0}, ", hpstock).PadRight(17),
-        String.Format("\"hptop\": {0}, ", hptop).PadRight(15),
-        String.Format("\"turret\": {0}, ", status),
-        String.Format("\"premium\": {0}, ", premium ? "1" : "0"),
-        String.Format("\"nation\": \"{0}\", ", nation).PadRight(21),
-        String.Format("\"name\": \"{0}\"", name)));
     }
 }

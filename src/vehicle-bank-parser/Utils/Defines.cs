@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 static class Defines
 {
     // List of all counties (don't change the order)
