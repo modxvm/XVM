@@ -17,12 +17,12 @@
     "fire": "tűz",
     "ramming": "ütközés",
     "world_collision": "zuhanás",
-    "Hits": "Hits",
-    "Total": "Total",
-    "Last": "Last",
+    "Hits": "Találatok",
+    "Total": "Összesen",
+    "Last": "Utoljára",
 
     // Hp Left
-    "hpLeftTitle": "Hitpoints left:",
+    "hpLeftTitle": "Maradék életerő:",
 
     // Capture
     "enemyBaseCapture": "Ellenséges bázis foglalva!",
@@ -96,6 +96,6 @@
     "SPG": "SPG",
 
     // VehicleMarkersManager
-    "blownUp": "Blown-up!"
+    "blownUp": "Felrobbant!"
   }
 }
