@@ -7,22 +7,22 @@
     "XVM_translator": "Edgar 'LaCourgette' Fournival",
 
     // Win chance
-    "Chance error": "Erreur de calcul",
+    "Chance error": "Erreur lors du calcul des chances",
     "Chance to win": "Chances de victoire",
-    "global": "global",
-    "per-vehicle": "par-véhicule",
+    "global": "globales",
+    "per-vehicle": "par véhicule",
 
     // Hitlog
     "attack": "attaque",
-    "fire": "feu",
-    "ramming": "ramming",
-    "world_collision": "chute",
-    "Hits": "Hits",
+    "fire": "incendie",
+    "ramming": "collision",
+    "world_collision": "chûte",
+    "Hits": "Tirs",
     "Total": "Total",
-    "Last": "Last",
+    "Last": "Dernier",
 
     // Hp Left
-    "hpLeftTitle": "Hitpoints left:",
+    "hpLeftTitle": "Points de vie restants :",
 
     // Capture
     "enemyBaseCapture": "Capture de la base ennemie !",
@@ -30,24 +30,24 @@
     "allyBaseCapture": "Capture de la base alliée !",
     "allyBaseCaptured": "Base alliée capturée !",
     "Timeleft": "Temps restant",
-    "Capturers": "Capeurs",
+    "Capturers": "Nb. de tanks capturant la base",
 
     // FinalStatistics
-    "Hit percent": "% de tirs au but",
+    "Hit percent": "Tirs au but",
     "Damage upon detecting": "Dégâts par détection",
     "Damage dealt": "Dégâts",
 
     // TeamRenderers
     "TeamRenderersHeaderTip": "Classement xWN (ou xEff).\nPour plus d'informations, déplacez votre curseur sur le nom du joueur.",
-    "Friend": "Amis",
+    "Friend": "Ami",
     "Ignored": "Ignoré",
-    "Load statistics": "Chargement des statistiques",
+    "Load statistics": "Charger les statistiques",
     "enabled": "activé",
     "disabled": "désactivé",
 
     // UserInfo
-    "UserInfoEHint": "Efficacité par-véhicule.\nLes valeurs affichées sont basées sur la dernière mise à jour des statistiques : %DATE%\nLes valeurs actuelles sont visibles dans les infos détaillées sur le véhicule.\nLa précision des valeurs dans les colonnes dépend de la qualité des données.",
-    "Data was updated at": "Les données ont été mises à jour à",
+    "UserInfoEHint": "Efficacité par véhicule.\nLes valeurs affichées sont basées sur la dernière mise à jour des stats : \u0025DATE\u0025\nLes valeurs actuelles sont visibles dans les infos détaillées du char.\nLa précision des valeurs dans les colonnes dépend de la qualité des données.",
+    "Data was updated at": "Data was updated at",
     " to ": " à ",
     "EFF": "EFF",
     "updated": "mis-à-jour",
@@ -56,17 +56,17 @@
     "Spotted": "Détecté",
     "Defence": "Defense",
     "Capture": "Capture",
-    "player (average / top)": "Joueur (moyenne / top)",
-    "Spec dmg": "Dégâts spec.",
+    "player (average / top)": "joueur (moyenne / top)",
+    "Spec dmg": "Ratio dmg. effectué/reçu",
 
     // UserInfo - filters
     "Filter": "Filtre",
-    "All tanks": "Tous les chars",
-    "Show all tanks in the game": "Afficher tous les chars du jeu",
-    "Player tanks": "Chars du joueur",
-    "Show all tanks played": "Afficher tous les chars joués",
+    "All tanks": "Tous les tanks",
+    "Show all tanks in the game": "Montrer tous les tanks du jeu",
+    "Player tanks": "Tanks du joueur",
+    "Show all tanks played": "Montrer tous les tanks joués",
     "In hangar": "Dans le hangar",
-    "Show only tanks in own hangar": "Afficher uniquement les tanks présents dans le hangar",
+    "Show only tanks in own hangar": "Montrer seulement les tanks du garage",
 
     // UserInfo - buttons
     "Level": "Tier",
@@ -77,12 +77,12 @@
     "Wins": "Victoires",
 
     // Crew
-    "PutOwnCrew": "Mettre l'équipage du tank",
-    "PutBestCrew": "Mettre le meilleur équipage disponible",
+    "PutOwnCrew": "Mettre l'équipage adéquat",
+    "PutBestCrew": "Mettre le meilleur équipage",
 
     // Squad
     "Vehicle": "Véhicule",
-    "Battle tiers": "Tiers de combat",
+    "Battle tiers": "Tier de combat",
     "ussr": "URSS",
     "germany": "Allemagne",
     "usa": "USA",
@@ -96,6 +96,6 @@
     "SPG": "SPG",
 
     // VehicleMarkersManager
-    "blownUp": "Blown-up!"
+    "blownUp": "Explosé !"
   }
 }
