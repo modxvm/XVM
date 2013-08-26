@@ -4,7 +4,7 @@
 {
   "locale": {
     // Author of translation
-    "XVM_translator": "RedMor, <contact@by-reservation.com>",
+    "XVM_translator": "RedMor <contact@by-reservation.com>, Vlad VirusX",
 
     // Win chance
     "Chance error": "Помилка розрахунку шансів",
@@ -17,12 +17,12 @@
     "fire": "пожежа",
     "ramming": "таран",
     "world_collision": "падіння",
-    "Hits": "Hits",
-    "Total": "Total",
-    "Last": "Last",
+    "Hits": "Пробито",
+    "Total": "Всього",
+    "Last": "Останній",
 
     // Hp Left
-    "hpLeftTitle": "Hitpoints left:",
+    "hpLeftTitle": "Залишилося HP:",
 
     // Capture
     "enemyBaseCapture": "Захоплення ворожої бази!",
@@ -96,6 +96,6 @@
     "SPG": "САУ",
 
     // VehicleMarkersManager
-    "blownUp": "Blown-up!"
+    "blownUp": "Вибух БК!"
   }
 }
