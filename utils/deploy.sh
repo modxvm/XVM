@@ -9,18 +9,9 @@ FILES="
   battle.swf
   battleloading.swf
   crew.swf
-  FinalStatistic.swf
-  gameloading.swf
-  LangBarPanel.swf
-  lobby_messenger.swf
   Minimap.swf
   PlayersPanel.swf
-  SquadMemberRenderer.swf
-  StatisticForm.swf
   TeamBasesPanel.swf
-  TeamMemberRenderer.swf
-  TeamRenderer.swf
-  UserInfo.swf
   VehicleMarkersManager.swf
   XVM.xvmconf"
 
@@ -30,7 +21,7 @@ XVM_DIRS="configs l10n"
 cd $(dirname $(realpath $(cygpath --unix $0)))
 
 RES_MODS_DIR="$WOT_DIRECTORY/res_mods"
-SWF_DIR="$RES_MODS_DIR/$GAME_VER/gui/flash"
+SWF_DIR="$RES_MODS_DIR/$GAME_VER/gui/scaleform"
 
 mkdir -p "$SWF_DIR"
 mkdir -p "$RES_MODS_DIR/xvm"
