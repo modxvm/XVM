@@ -7,18 +7,9 @@
 files=(
         'battle'
         'battleloading'
-        'crew'
-        'FinalStatistic'
-        'gameloading'
-        'LangBarPanel'
         'Minimap'
         'PlayersPanel'
-        'SquadMemberRenderer'
-        'StatisticForm'
         'TeamBasesPanel'
-        'TeamMemberRenderer'
-        'TeamRenderer'
-	'UserInfo'
         'VehicleMarkersManager'
        )
 
