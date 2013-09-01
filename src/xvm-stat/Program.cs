@@ -24,7 +24,7 @@ namespace wot
     private static bool isNoAuto = false;
     public static bool isNoProxy = false;
     public static bool isMaximized = false;
-    public static bool isMkbundle = false;
+    public static bool isBundled = (typeof(int).Assembly.Location == "mscorlib.dll");
 
     private static Process wotProcess = null;
 
@@ -158,6 +158,7 @@ namespace wot
           isDebug = true;
           Console.Title += " (DEBUG MODE)";
           Log("DEBUG MODE: ON");
+          Log("BUNDLED: "+isBundled);
           continue;
         }
 
@@ -350,11 +351,8 @@ namespace wot
 
         // CD to game dir
         string game_dir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-        if (String.IsNullOrEmpty(game_dir)) //HACK: workaround against mkbundle behavior and bugs 
-        {
+        if (Program.isBundled) //NOTE: Assembly.GetEntryAssembly doesn't work for bundled executables
           game_dir=Environment.CurrentDirectory;
-          isMkbundle = true;
-        }
 
         Debug("Change dir: " + game_dir);
         Directory.SetCurrentDirectory(game_dir);
@@ -367,7 +365,7 @@ namespace wot
 
         // Check for another instance started
         bool ok;
-        Mutex m = new Mutex(true, "xvm-stat", out ok);
+        Mutex m = new Mutex(true, System.Diagnostics.Process.GetCurrentProcess().ProcessName, out ok);
         if (!ok)
           throw new Exception("Another proxy instance is already running.");
         GC.KeepAlive(m);
@@ -508,21 +506,24 @@ namespace wot
             throw new Exception("Cannot start game: " + wotExeFileName);
 
           // Waiting process info 20 sec
-          string processInfo = "";
-          for (int i = 0; i < 20; ++i)
-          {
-            Thread.Sleep(1000);
-            try
+          if(!isBundled) //HACK: bundled executable sometimes crashes on logging process info 
             {
-              processInfo = "wotProcess: \n" + wotProcess.MainModule.FileVersionInfo;
-              break;
+              string processInfo = "";
+              for (int i = 0; i < 20; ++i)
+              {
+                Thread.Sleep(1000);
+                try
+                {
+                  processInfo = "wotProcess: \n" + wotProcess.MainModule.FileVersionInfo;
+                  break;
+                }
+                catch (Exception ex)
+                {
+                  processInfo = "wotProcess: Error: " + ex;
+                }
+              }
+              Debug(processInfo);
             }
-            catch (Exception ex)
-            {
-              processInfo = "wotProcess: Error: " + ex;
-            }
-          }
-          Debug(processInfo);
 
           if (isLauncher)
           {

@@ -114,8 +114,8 @@ namespace wot
 
       HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
 
-      //HACK: mkbundle conflicts with WG.net old zlib library.
-      if (Program.isMkbundle) 
+      //NOTE: mono conflicts with Wargaming.net old zlib library, which used in DecompressionMethods implementation.
+      if (Program.isBundled) 
         request.AutomaticDecompression = DecompressionMethods.None;
       else
         request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
