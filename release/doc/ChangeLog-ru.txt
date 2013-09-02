@@ -1,4 +1,5 @@
-﻿  * удалена опция login/showPingOnGameLoading
+﻿  * добавлены иконки топ-150 кланов NA кластера
+  * удалена опция login/showPingOnGameLoading
 
 XVM-4.1.1:
   [НОВЫЕ ФУНКЦИИ]

@@ -1,4 +1,5 @@
-﻿  * removed option login/showPingOnGameLoading
+﻿  * added icons top-150 clans of NA cluster
+  * removed option login/showPingOnGameLoading
 
 XVM-4.1.1:
   [NEW FUNCTIONS]
