@@ -6,7 +6,7 @@
 
 #0. Define Flex SDK path
 export FLEXSDK="/opt/apache-flex-4.10"
-archive_postfix=""
+archive_postfix="_flex4.10"
 
 #1. Detect revision
 pushd ../../ > /dev/null
