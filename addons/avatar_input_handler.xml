@@ -98,6 +98,8 @@
       <scrollSensitivity>	15	</scrollSensitivity>
       <angleRange>10 110</angleRange>
       <distRange>2 500</distRange>
+      <minStartDist>	15	</minStartDist>
+      <optimalStartDist>	20	</optimalStartDist>
       <dynamics>
         <impulseOscillator>
           <mass>1.0</mass>
