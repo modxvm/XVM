@@ -133,9 +133,15 @@ package com.xvm.misc
                 if (s != null)
                 {
                     if (s.formatLeft != null && s.formatLeftVehicle == null)
+                    {
                         s.formatLeftVehicle = s.formatLeft;
+                        delete s.formatLeft;
+                    }
                     if (s.formatRight != null && s.formatRightVehicle == null)
+                    {
                         s.formatRightVehicle = s.formatRight;
+                        delete s.formatRight;
+                    }
                 }
                 s = config.statisticForm;
                 if (s != null)

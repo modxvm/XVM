@@ -316,12 +316,24 @@ class com.xvm.ConfigUtils
             v = "4.0.0";
         }
 
-/*
-        if (v == "4.x.x")
+        if (v == "4.0.0")
         {
-            v = "4.y.y";
+            v = "5.0.0";
+            if (config.statisticForm != null)
+            {
+                if (config.statisticForm.formatLeft != null && config.statisticForm.formatLeftVehicle == null)
+                {
+                    config.statisticForm.formatLeftVehicle = config.statisticForm.formatLeft;
+                    delete config.statisticForm.formatLeft;
+                }
+                if (config.statisticForm.formatRight != null && config.statisticForm.formatRightVehicle == null)
+                {
+                    config.statisticForm.formatRightVehicle = config.statisticForm.formatRight;
+                    delete config.statisticForm.formatRight;
+                }
+            }
         }
-*/
+
 
         config.configVersion = v;
         return config;
