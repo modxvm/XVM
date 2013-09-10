@@ -84,7 +84,8 @@ class com.xvm.Macros
             // {{nick}}
             pdata["nick"] = nick;
             // {{name}}
-            pdata["name"] = Utils.GetPlayerName(nick);
+            var nm:String = Utils.GetPlayerName(nick);
+            pdata["name"] = (nm.length < 16 ? nm : nm.substr(0, 14) + "..");
             // {{clan}}
             pdata["clan"] = Utils.GetClanNameWithBrackets(nick);
             // {{clannb}}
@@ -170,8 +171,8 @@ class com.xvm.Macros
         var b:Number = Utils.toInt(stat.b, 0);
         var w:Number = Utils.toInt(stat.w, 0);
         var tr:Number = Utils.toInt(stat.tr, 0);
-        var tb:Number = Utils.toInt(stat.tb, 0);
-        var tw:Number = Utils.toInt(stat.tw, 0);
+        var tb:Number = Utils.toInt(stat.v.b, 0);
+        var tw:Number = Utils.toInt(stat.v.w, 0);
         var tbK:Number = Math.round(tb / 100) / 10;
 
         // {{avglvl}}
