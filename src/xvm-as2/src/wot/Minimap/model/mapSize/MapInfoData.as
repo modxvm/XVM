@@ -60,6 +60,7 @@ class wot.Minimap.model.mapSize.MapInfoData
         $47_canada_a:         { size: 100 }, // Serene Coast
         $51_asia:             { size: 100 }, // Dragon Ridge
         $60_asia_miao:        { size: 100 }, // Pearl River
+        $63_tundra:           { size: 80 },  // Tundra
         $73_asia_korea:       { size: 100 }, // Sacred Valley
         $85_winter:           { size: 100 }, // Belogorsk-19
         __end__: null
