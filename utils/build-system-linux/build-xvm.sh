@@ -38,7 +38,7 @@ rm -rf ../../release/*.swf
 rm -rf ../../bin/*
 
 #5. Build xvm-py
-pushd ../../src/xvm-py/ > /dev/null
+pushd ../../src/xpm/ > /dev/null
 ./build-all.sh
 popd > /dev/null
 
