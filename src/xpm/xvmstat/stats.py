@@ -287,7 +287,8 @@ class _Stat(object):
         return responseFromServer, duration
 
     def _fix(self, stat):
-        del stat['twr']
+        if 'twr' in stat:
+            del stat['twr']
         self._r(stat, 'id', '_id')
         self._r(stat, 'name', 'nm')
         self._r(stat, 'date', 'dt')
