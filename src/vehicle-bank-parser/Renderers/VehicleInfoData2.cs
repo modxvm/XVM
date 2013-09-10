@@ -7,7 +7,7 @@ namespace VehicleBankParser.Renderers
     {
         public VehicleInfoData2()
         {
-            OUTPUT_FILE = "src\\xvm\\src\\com\\xvm\\VehicleInfoData2.as";
+            OUTPUT_FILE = "src\\xvm-as2\\src\\com\\xvm\\VehicleInfoData2.as";
         }
 
         protected override String getHeader()

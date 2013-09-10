@@ -10,7 +10,7 @@ namespace VehicleBankParser.Renderers
 
         public VehicleInfoData()
         {
-            OUTPUT_FILE = "src\\xvm\\src\\com\\xvm\\VehicleInfoData.as";
+            OUTPUT_FILE = "src\\xvm-as2\\src\\com\\xvm\\VehicleInfoData.as";
             mmTable = buildMMTable();
         }
 
