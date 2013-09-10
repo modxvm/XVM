@@ -36,6 +36,7 @@ class Program
 
             Export exporter = new Export(vehicles);
             exporter.genVehicleInfoData2();
+            exporter.genVehicleInfoData2AS3();
             exporter.genVehicleNames();
             exporter.genVehicleInfo();
             //exporter.genVehicleInfoData(); need resolve sortNames & special matchmaking definition

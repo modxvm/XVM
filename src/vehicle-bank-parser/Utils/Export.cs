@@ -20,6 +20,13 @@ class Export
         renderer.buildFile(vehicles);
     }
 
+    public void genVehicleInfoData2AS3()
+    {
+        sortByLevelTypeNationName();
+        renderer = new VehicleInfoData2AS3();
+        renderer.buildFile(vehicles);
+    }
+
     public void genVehicleInfo()
     {
         sortByLevelTypeNationName();

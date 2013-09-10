@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Renderers\VehicleInfoData2AS3.cs" />
     <Compile Include="Utils\Export.cs" />
     <Compile Include="Renderers\VehicleInfoData.cs" />
     <Compile Include="Renderers\VehicleNames.cs" />
