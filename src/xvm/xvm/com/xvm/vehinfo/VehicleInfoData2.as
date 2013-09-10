@@ -137,6 +137,7 @@ package com.xvm.vehinfo
             d["m3_grant"] =                   { id: 12,  level: 4,  type: "MT",  hpstock: 310,  hptop: 310,  turret: 0, premium: 0, nation: "usa",     name: "M3_Grant",                    translationKey: "#usa_vehicles:M3_Grant" };
             d["gb07_matilda"] =               { id: 3,   level: 4,  type: "MT",  hpstock: 340,  hptop: 370,  turret: 1, premium: 0, nation: "uk",      name: "GB07_Matilda",                translationKey: "#gb_vehicles:GB07_Matilda_short" };
             d["b_1bis_captured"] =            { id: 204, level: 4,  type: "HT",  hpstock: 400,  hptop: 400,  turret: 0, premium: 1, nation: "germany", name: "B-1bis_captured",             translationKey: "#germany_vehicles:B-1bis_captured_short" };
+            d["dw_ii"] =                      { id: 52,  level: 4,  type: "HT",  hpstock: 380,  hptop: 420,  turret: 1, premium: 0, nation: "germany", name: "DW_II",                       translationKey: "#germany_vehicles:DW_II_short" };
             d["b1"] =                         { id: 4,   level: 4,  type: "HT",  hpstock: 380,  hptop: 420,  turret: 2, premium: 0, nation: "france",  name: "B1",                          translationKey: "#france_vehicles:B1_short" };
             d["gaz_74b"] =                    { id: 27,  level: 4,  type: "TD",  hpstock: 260,  hptop: 260,  turret: 0, premium: 0, nation: "ussr",    name: "GAZ-74b",                     translationKey: "#ussr_vehicles:GAZ-74b" };
             d["hetzer"] =                     { id: 7,   level: 4,  type: "TD",  hpstock: 270,  hptop: 270,  turret: 0, premium: 0, nation: "germany", name: "Hetzer",                      translationKey: "#germany_vehicles:Hetzer_short" };
@@ -174,6 +175,7 @@ package com.xvm.vehinfo
             d["kv1"] =                        { id: 46,  level: 5,  type: "HT",  hpstock: 590,  hptop: 640,  turret: 2, premium: 0, nation: "ussr",    name: "KV1",                         translationKey: "#ussr_vehicles:KV1" };
             d["kv_220"] =                     { id: 200, level: 5,  type: "HT",  hpstock: 690,  hptop: 690,  turret: 0, premium: 1, nation: "ussr",    name: "KV-220",                      translationKey: "#ussr_vehicles:KV-220_test_short" };
             d["kv_220_action"] =              { id: 211, level: 5,  type: "HT",  hpstock: 690,  hptop: 690,  turret: 0, premium: 1, nation: "ussr",    name: "KV-220_action",               translationKey: "#ussr_vehicles:KV-220" };
+            d["vk3001h"] =                    { id: 10,  level: 5,  type: "HT",  hpstock: 600,  hptop: 660,  turret: 2, premium: 0, nation: "germany", name: "VK3001H",                     translationKey: "#germany_vehicles:VK3001H_short" };
             d["t1_hvy"] =                     { id: 13,  level: 5,  type: "HT",  hpstock: 600,  hptop: 660,  turret: 2, premium: 0, nation: "usa",     name: "T1_hvy",                      translationKey: "#usa_vehicles:T1_hvy_short" };
             d["t14"] =                        { id: 0,   level: 5,  type: "HT",  hpstock: 690,  hptop: 690,  turret: 0, premium: 1, nation: "usa",     name: "T14",                         translationKey: "#usa_vehicles:T14" };
             d["bdr_g1b"] =                    { id: 26,  level: 5,  type: "HT",  hpstock: 600,  hptop: 650,  turret: 2, premium: 0, nation: "france",  name: "BDR_G1B",                     translationKey: "#france_vehicles:BDR_G1B_short" };
@@ -198,16 +200,17 @@ package com.xvm.vehinfo
             d["vk2801"] =                     { id: 39,  level: 6,  type: "LT",  hpstock: 550,  hptop: 610,  turret: 2, premium: 0, nation: "germany", name: "VK2801",                      translationKey: "#germany_vehicles:VK2801_short" };
             d["t21"] =                        { id: 59,  level: 6,  type: "LT",  hpstock: 590,  hptop: 590,  turret: 0, premium: 0, nation: "usa",     name: "T21",                         translationKey: "#usa_vehicles:T21" };
             d["ch15_59_16"] =                 { id: 19,  level: 6,  type: "LT",  hpstock: 530,  hptop: 580,  turret: 2, premium: 0, nation: "china",   name: "Ch15_59_16",                  translationKey: "#china_vehicles:Ch15_59_16" };
+            d["ch24_type64"] =                { id: 253, level: 6,  type: "LT",  hpstock: 580,  hptop: 580,  turret: 0, premium: 1, nation: "china",   name: "Ch24_Type64",                 translationKey: "#china_vehicles:Ch24_Type64" };
             d["amx_12t"] =                    { id: 25,  level: 6,  type: "LT",  hpstock: 600,  hptop: 600,  turret: 0, premium: 0, nation: "france",  name: "AMX_12t",                     translationKey: "#france_vehicles:AMX_12t_short" };
+            d["a43"] =                        { id: 48,  level: 6,  type: "MT",  hpstock: 660,  hptop: 730,  turret: 1, premium: 0, nation: "ussr",    name: "A43",                         translationKey: "#ussr_vehicles:A43" };
             d["t_34_85"] =                    { id: 10,  level: 6,  type: "MT",  hpstock: 670,  hptop: 720,  turret: 2, premium: 0, nation: "ussr",    name: "T-34-85",                     translationKey: "#ussr_vehicles:T-34-85" };
             d["t_34_85_training"] =           { id: 220, level: 6,  type: "MT",  hpstock: 720,  hptop: 720,  turret: 0, premium: 0, nation: "ussr",    name: "T-34-85_training",            translationKey: "#ussr_vehicles:T-34-85" };
             d["pziv_schmalturm"] =            { id: 224, level: 6,  type: "MT",  hpstock: 730,  hptop: 730,  turret: 0, premium: 1, nation: "germany", name: "PzIV_schmalturm",             translationKey: "#germany_vehicles:PzIV_schmalturm_short" };
             d["pzv_pziv"] =                   { id: 201, level: 6,  type: "MT",  hpstock: 870,  hptop: 870,  turret: 0, premium: 1, nation: "germany", name: "PzV_PzIV",                    translationKey: "#germany_vehicles:PzV_PzIV_short" };
             d["pzv_pziv_ausf_alfa"] =         { id: 211, level: 6,  type: "MT",  hpstock: 870,  hptop: 870,  turret: 0, premium: 1, nation: "germany", name: "PzV_PzIV_ausf_Alfa",          translationKey: "#germany_vehicles:PzV_PzIV_ausf_Alfa_short" };
-            d["vk3001h"] =                    { id: 10,  level: 6,  type: "MT",  hpstock: 670,  hptop: 750,  turret: 2, premium: 0, nation: "germany", name: "VK3001H",                     translationKey: "#germany_vehicles:VK3001H_short" };
             d["vk3001p"] =                    { id: 28,  level: 6,  type: "MT",  hpstock: 610,  hptop: 710,  turret: 2, premium: 0, nation: "germany", name: "VK3001P",                     translationKey: "#germany_vehicles:VK3001P_short" };
             d["vk3002db_v1"] =                { id: 55,  level: 6,  type: "MT",  hpstock: 700,  hptop: 770,  turret: 2, premium: 0, nation: "germany", name: "VK3002DB_V1",                 translationKey: "#germany_vehicles:VK3002DB_V1_short" };
-            d["vk3601h"] =                    { id: 9,   level: 6,  type: "MT",  hpstock: 760,  hptop: 850,  turret: 2, premium: 0, nation: "germany", name: "VK3601H",                     translationKey: "#germany_vehicles:VK3601H_short" };
+            d["vk3002m"] =                    { id: 62,  level: 6,  type: "MT",  hpstock: 760,  hptop: 840,  turret: 1, premium: 0, nation: "germany", name: "VK3002M",                     translationKey: "#germany_vehicles:VK3002M_short" };
             d["m4a3e8_sherman"] =             { id: 5,   level: 6,  type: "MT",  hpstock: 720,  hptop: 750,  turret: 2, premium: 0, nation: "usa",     name: "M4A3E8_Sherman",              translationKey: "#usa_vehicles:M4A3E8_Sherman_short" };
             d["m4a3e8_sherman_training"] =    { id: 212, level: 6,  type: "MT",  hpstock: 830,  hptop: 830,  turret: 0, premium: 0, nation: "usa",     name: "M4A3E8_Sherman_training",     translationKey: "#usa_vehicles:M4A3E8_Sherman_short" };
             d["sherman_jumbo"] =              { id: 39,  level: 6,  type: "MT",  hpstock: 730,  hptop: 760,  turret: 2, premium: 0, nation: "usa",     name: "Sherman_Jumbo",               translationKey: "#usa_vehicles:Sherman_Jumbo_short" };
@@ -216,6 +219,7 @@ package com.xvm.vehinfo
             d["kv_1s"] =                      { id: 11,  level: 6,  type: "HT",  hpstock: 760,  hptop: 810,  turret: 2, premium: 0, nation: "ussr",    name: "KV-1s",                       translationKey: "#ussr_vehicles:KV-1s" };
             d["kv2"] =                        { id: 41,  level: 6,  type: "HT",  hpstock: 810,  hptop: 860,  turret: 1, premium: 0, nation: "ussr",    name: "KV2",                         translationKey: "#ussr_vehicles:KV2" };
             d["t150"] =                       { id: 44,  level: 6,  type: "HT",  hpstock: 830,  hptop: 880,  turret: 2, premium: 0, nation: "ussr",    name: "T150",                        translationKey: "#ussr_vehicles:T150" };
+            d["vk3601h"] =                    { id: 9,   level: 6,  type: "HT",  hpstock: 850,  hptop: 950,  turret: 2, premium: 0, nation: "germany", name: "VK3601H",                     translationKey: "#germany_vehicles:VK3601H_short" };
             d["m6"] =                         { id: 3,   level: 6,  type: "HT",  hpstock: 840,  hptop: 870,  turret: 2, premium: 0, nation: "usa",     name: "M6",                          translationKey: "#usa_vehicles:M6" };
             d["arl_44"] =                     { id: 10,  level: 6,  type: "HT",  hpstock: 780,  hptop: 820,  turret: 2, premium: 0, nation: "france",  name: "ARL_44",                      translationKey: "#france_vehicles:ARL_44_short" };
             d["gb09_churchill_vii"] =         { id: 18,  level: 6,  type: "HT",  hpstock: 800,  hptop: 880,  turret: 2, premium: 0, nation: "uk",      name: "GB09_Churchill_VII",          translationKey: "#gb_vehicles:GB09_Churchill_VII" };
@@ -241,10 +245,13 @@ package com.xvm.vehinfo
             d["ch02_type62"] =                { id: 1,   level: 7,  type: "LT",  hpstock: 880,  hptop: 880,  turret: 0, premium: 1, nation: "china",   name: "Ch02_Type62",                 translationKey: "#china_vehicles:Ch02_Type62" };
             d["ch16_wz_131"] =                { id: 13,  level: 7,  type: "LT",  hpstock: 800,  hptop: 880,  turret: 2, premium: 0, nation: "china",   name: "Ch16_WZ_131",                 translationKey: "#china_vehicles:Ch16_WZ_131" };
             d["amx_13_75"] =                  { id: 20,  level: 7,  type: "LT",  hpstock: 900,  hptop: 900,  turret: 0, premium: 0, nation: "france",  name: "AMX_13_75",                   translationKey: "#france_vehicles:AMX_13_75_short" };
+            d["a44"] =                        { id: 49,  level: 7,  type: "MT",  hpstock: 1000, hptop: 1100, turret: 1, premium: 0, nation: "ussr",    name: "A44",                         translationKey: "#ussr_vehicles:A44" };
             d["kv_13"] =                      { id: 35,  level: 7,  type: "MT",  hpstock: 1020, hptop: 1120, turret: 2, premium: 0, nation: "ussr",    name: "KV-13",                       translationKey: "#ussr_vehicles:KV-13" };
             d["t_43"] =                       { id: 26,  level: 7,  type: "MT",  hpstock: 1000, hptop: 1100, turret: 2, premium: 0, nation: "ussr",    name: "T-43",                        translationKey: "#ussr_vehicles:T-43" };
+            d["t44_122"] =                    { id: 222, level: 7,  type: "MT",  hpstock: 1100, hptop: 1100, turret: 0, premium: 1, nation: "ussr",    name: "T44_122",                     translationKey: "#ussr_vehicles:T44_122" };
+            d["t44_85"] =                     { id: 223, level: 7,  type: "MT",  hpstock: 1150, hptop: 1150, turret: 0, premium: 1, nation: "ussr",    name: "T44_85",                      translationKey: "#ussr_vehicles:T44_85" };
             d["panther_m10"] =                { id: 225, level: 7,  type: "MT",  hpstock: 1300, hptop: 1300, turret: 0, premium: 1, nation: "germany", name: "Panther_M10",                 translationKey: "#germany_vehicles:Panther_M10_short" };
-            d["pzv"] =                        { id: 5,   level: 7,  type: "MT",  hpstock: 1200, hptop: 1270, turret: 2, premium: 0, nation: "germany", name: "PzV",                         translationKey: "#germany_vehicles:PzV_short" };
+            d["pzv"] =                        { id: 5,   level: 7,  type: "MT",  hpstock: 1200, hptop: 1300, turret: 1, premium: 0, nation: "germany", name: "PzV",                         translationKey: "#germany_vehicles:PzV_short" };
             d["pzv_training"] =               { id: 228, level: 7,  type: "MT",  hpstock: 480,  hptop: 480,  turret: 0, premium: 0, nation: "germany", name: "PzV_training",                translationKey: "#germany_vehicles:PzV_short" };
             d["vk3002db"] =                   { id: 16,  level: 7,  type: "MT",  hpstock: 1150, hptop: 1250, turret: 2, premium: 0, nation: "germany", name: "VK3002DB",                    translationKey: "#germany_vehicles:VK3002DB_short" };
             d["t20"] =                        { id: 6,   level: 7,  type: "MT",  hpstock: 1000, hptop: 1100, turret: 2, premium: 0, nation: "usa",     name: "T20",                         translationKey: "#usa_vehicles:T20" };
@@ -253,7 +260,7 @@ package com.xvm.vehinfo
             d["gb22_comet"] =                 { id: 21,  level: 7,  type: "MT",  hpstock: 1050, hptop: 1150, turret: 2, premium: 0, nation: "uk",      name: "GB22_Comet",                  translationKey: "#gb_vehicles:GB22_Comet_short" };
             d["is"] =                         { id: 2,   level: 7,  type: "HT",  hpstock: 1130, hptop: 1230, turret: 2, premium: 0, nation: "ussr",    name: "IS",                          translationKey: "#ussr_vehicles:IS" };
             d["kv_3"] =                       { id: 23,  level: 7,  type: "HT",  hpstock: 1300, hptop: 1400, turret: 2, premium: 0, nation: "ussr",    name: "KV-3",                        translationKey: "#ussr_vehicles:KV-3" };
-            d["pzvi"] =                       { id: 2,   level: 7,  type: "HT",  hpstock: 1350, hptop: 1450, turret: 2, premium: 0, nation: "germany", name: "PzVI",                        translationKey: "#germany_vehicles:Tiger_short" };
+            d["pzvi"] =                       { id: 2,   level: 7,  type: "HT",  hpstock: 1400, hptop: 1500, turret: 2, premium: 0, nation: "germany", name: "PzVI",                        translationKey: "#germany_vehicles:Tiger_short" };
             d["pzvi_tiger_p"] =               { id: 42,  level: 7,  type: "HT",  hpstock: 1350, hptop: 1450, turret: 1, premium: 0, nation: "germany", name: "PzVI_Tiger_P",                translationKey: "#germany_vehicles:PzVI_Tiger_P_short" };
             d["t29"] =                        { id: 15,  level: 7,  type: "HT",  hpstock: 1150, hptop: 1250, turret: 1, premium: 0, nation: "usa",     name: "T29",                         translationKey: "#usa_vehicles:T29" };
             d["ch10_is2"] =                   { id: 14,  level: 7,  type: "HT",  hpstock: 1230, hptop: 1280, turret: 1, premium: 0, nation: "china",   name: "Ch10_IS2",                    translationKey: "#china_vehicles:Ch10_IS2" };
@@ -279,12 +286,13 @@ package com.xvm.vehinfo
             // level 8
             d["ch17_wz131_1_wz132"] =         { id: 15,  level: 8,  type: "LT",  hpstock: 950,  hptop: 1050, turret: 2, premium: 0, nation: "china",   name: "Ch17_WZ131_1_WZ132",          translationKey: "#china_vehicles:Ch17_WZ131_1_WZ132" };
             d["amx_13_90"] =                  { id: 19,  level: 8,  type: "LT",  hpstock: 1100, hptop: 1100, turret: 0, premium: 0, nation: "france",  name: "AMX_13_90",                   translationKey: "#france_vehicles:AMX_13_90_short" };
+            d["object416"] =                  { id: 52,  level: 8,  type: "MT",  hpstock: 1100, hptop: 1200, turret: 1, premium: 0, nation: "ussr",    name: "Object416",                   translationKey: "#ussr_vehicles:Object416_short" };
             d["t_44"] =                       { id: 17,  level: 8,  type: "MT",  hpstock: 1200, hptop: 1300, turret: 2, premium: 0, nation: "ussr",    name: "T-44",                        translationKey: "#ussr_vehicles:T-44" };
             d["indien_panzer"] =              { id: 54,  level: 8,  type: "MT",  hpstock: 1300, hptop: 1300, turret: 0, premium: 0, nation: "germany", name: "Indien_Panzer",               translationKey: "#germany_vehicles:Indien_Panzer_short" };
-            d["panther_ii"] =                 { id: 33,  level: 8,  type: "MT",  hpstock: 1350, hptop: 1450, turret: 2, premium: 0, nation: "germany", name: "Panther_II",                  translationKey: "#germany_vehicles:Panther_II_short" };
+            d["panther_ii"] =                 { id: 33,  level: 8,  type: "MT",  hpstock: 1400, hptop: 1500, turret: 2, premium: 0, nation: "germany", name: "Panther_II",                  translationKey: "#germany_vehicles:Panther_II_short" };
             d["pershing"] =                   { id: 23,  level: 8,  type: "MT",  hpstock: 1350, hptop: 1440, turret: 1, premium: 0, nation: "usa",     name: "Pershing",                    translationKey: "#usa_vehicles:Pershing_short" };
             d["t23"] =                        { id: 9,   level: 8,  type: "MT",  hpstock: 1310, hptop: 1440, turret: 1, premium: 0, nation: "usa",     name: "T23",                         translationKey: "#usa_vehicles:T23" };
-            d["t26_e4_superpershing"] =       { id: 52,  level: 8,  type: "MT",  hpstock: 1450, hptop: 1450, turret: 0, premium: 1, nation: "usa",     name: "T26_E4_SuperPershing",        translationKey: "#usa_vehicles:T26_E4_SuperPershing_short" };
+            d["t26_e4_superpershing"] =       { id: 52,  level: 8,  type: "MT",  hpstock: 1500, hptop: 1500, turret: 0, premium: 1, nation: "usa",     name: "T26_E4_SuperPershing",        translationKey: "#usa_vehicles:T26_E4_SuperPershing_short" };
             d["t69"] =                        { id: 57,  level: 8,  type: "MT",  hpstock: 1350, hptop: 1350, turret: 0, premium: 0, nation: "usa",     name: "T69",                         translationKey: "#usa_vehicles:T69_short" };
             d["ch01_type59"] =                { id: 0,   level: 8,  type: "MT",  hpstock: 1300, hptop: 1300, turret: 0, premium: 1, nation: "china",   name: "Ch01_Type59",                 translationKey: "#china_vehicles:Ch01_Type59" };
             d["ch01_type59_gold"] =           { id: 2,   level: 8,  type: "MT",  hpstock: 1300, hptop: 1300, turret: 0, premium: 1, nation: "china",   name: "Ch01_Type59_Gold",            translationKey: "#china_vehicles:Type59_gold" };
@@ -354,6 +362,7 @@ package com.xvm.vehinfo
             d["gb30_fv3805"] =                { id: 45,  level: 9,  type: "SPG", hpstock: 450,  hptop: 450,  turret: 0, premium: 0, nation: "uk",      name: "GB30_FV3805",                 translationKey: "#gb_vehicles:GB30_FV3805_short" };
 
             // level 10
+            d["object_140"] =                 { id: 66,  level: 10, type: "MT",  hpstock: 1900, hptop: 1900, turret: 0, premium: 0, nation: "ussr",    name: "Object_140",                  translationKey: "#ussr_vehicles:Object_140_short" };
             d["object_907"] =                 { id: 61,  level: 10, type: "MT",  hpstock: 2000, hptop: 2000, turret: 0, premium: 1, nation: "ussr",    name: "Object_907",                  translationKey: "#ussr_vehicles:Object_907_short" };
             d["t62a"] =                       { id: 54,  level: 10, type: "MT",  hpstock: 1950, hptop: 1950, turret: 0, premium: 0, nation: "ussr",    name: "T62A",                        translationKey: "#ussr_vehicles:T62A" };
             d["e50_ausf_m"] =                 { id: 48,  level: 10, type: "MT",  hpstock: 2050, hptop: 2050, turret: 0, premium: 0, nation: "germany", name: "E50_Ausf_M",                  translationKey: "#germany_vehicles:E50_Ausf_M_short" };
@@ -387,7 +396,7 @@ package com.xvm.vehinfo
             d["gb31_conqueror_gun"] =         { id: 48,  level: 10, type: "SPG", hpstock: 530,  hptop: 530,  turret: 0, premium: 0, nation: "uk",      name: "GB31_Conqueror_Gun",          translationKey: "#gb_vehicles:GB31_Conqueror_Gun_short" };
 
             // unknown (FogOfWar)
-            d["unknown"] = { level: 0, name: "UNKNOWN" };
+            d['unknown'] = { level: 0, name: 'UNKNOWN' };
 
             return d;
         }
@@ -487,6 +496,7 @@ package com.xvm.vehinfo
             a[3104] = "m3_grant";
             a[848] = "gb07_matilda";
             a[52240] = "b_1bis_captured";
+            a[13328] = "dw_ii";
             a[1088] = "b1";
             a[6912] = "gaz_74b";
             a[1808] = "hetzer";
@@ -522,6 +532,7 @@ package com.xvm.vehinfo
             a[11776] = "kv1";
             a[51200] = "kv_220";
             a[54016] = "kv_220_action";
+            a[2576] = "vk3001h";
             a[3360] = "t1_hvy";
             a[32] = "t14";
             a[6720] = "bdr_g1b";
@@ -544,16 +555,17 @@ package com.xvm.vehinfo
             a[10000] = "vk2801";
             a[15136] = "t21";
             a[4912] = "ch15_59_16";
+            a[64816] = "ch24_type64";
             a[6464] = "amx_12t";
+            a[12288] = "a43";
             a[2560] = "t_34_85";
             a[56320] = "t_34_85_training";
             a[57360] = "pziv_schmalturm";
             a[51472] = "pzv_pziv";
             a[54032] = "pzv_pziv_ausf_alfa";
-            a[2576] = "vk3001h";
             a[7184] = "vk3001p";
             a[14096] = "vk3002db_v1";
-            a[2320] = "vk3601h";
+            a[15888] = "vk3002m";
             a[1312] = "m4a3e8_sherman";
             a[54304] = "m4a3e8_sherman_training";
             a[10016] = "sherman_jumbo";
@@ -562,6 +574,7 @@ package com.xvm.vehinfo
             a[2816] = "kv_1s";
             a[10496] = "kv2";
             a[11264] = "t150";
+            a[2320] = "vk3601h";
             a[800] = "m6";
             a[2624] = "arl_44";
             a[4688] = "gb09_churchill_vii";
@@ -585,8 +598,11 @@ package com.xvm.vehinfo
             a[304] = "ch02_type62";
             a[3376] = "ch16_wz_131";
             a[5184] = "amx_13_75";
+            a[12544] = "a44";
             a[8960] = "kv_13";
             a[6656] = "t_43";
+            a[56832] = "t44_122";
+            a[57088] = "t44_85";
             a[57616] = "panther_m10";
             a[1296] = "pzv";
             a[58384] = "pzv_training";
@@ -621,6 +637,7 @@ package com.xvm.vehinfo
             a[11344] = "gb29_crusader_5inch";
             a[3888] = "ch17_wz131_1_wz132";
             a[4928] = "amx_13_90";
+            a[13312] = "object416";
             a[4352] = "t_44";
             a[13840] = "indien_panzer";
             a[8464] = "panther_ii";
@@ -692,6 +709,7 @@ package com.xvm.vehinfo
             a[16160] = "m53_55";
             a[14400] = "bat_chatillon155_55";
             a[11600] = "gb30_fv3805";
+            a[16896] = "object_140";
             a[15616] = "object_907";
             a[13824] = "t62a";
             a[12304] = "e50_ausf_m";
