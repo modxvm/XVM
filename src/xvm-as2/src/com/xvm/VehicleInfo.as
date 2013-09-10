@@ -14,7 +14,12 @@ class com.xvm.VehicleInfo
     // return: "ussr-IS-3"
     public static function getVehicleName(icon: String): String
     {
-        icon = icon.slice(icon.lastIndexOf("/") + 1, icon.lastIndexOf("."));
+        var i = icon.lastIndexOf("/");
+        if (i >= 0)
+            icon = icon.slice(icon.lastIndexOf("/") + 1);
+        i = icon.lastIndexOf(".");
+        if (i >= 0)
+            icon = icon.slice(0, icon.lastIndexOf("."));
         icon = Strings.trim(icon);
         return icon;
     }
@@ -28,7 +33,7 @@ class com.xvm.VehicleInfo
         icon = Strings.trim(icon);
         return icon;
     }
-    
+
     // icon = "../maps/icons/vehicle/contour/ussr-IS-3.png"
     public static function getInfo1(icon: String): Object
     {
@@ -55,7 +60,7 @@ class com.xvm.VehicleInfo
         res.top = VehicleInfoDataTop.data[vn] || null;
         return res;
     }
-    
+
     public static function getVehicleNamesData():Object
     {
         var result:Object = {};
@@ -75,7 +80,7 @@ class com.xvm.VehicleInfo
             return originalName;
         }
     }
-    
+
     public static function mapVehicleName2(tankName:String, originalName:String):String
     {
             return Config.s_config.vehicleNames[tankName].name || originalName;
@@ -103,7 +108,7 @@ class com.xvm.VehicleInfo
             return "";
         return Config.s_config.texts.vtype[vtype];
     }
-    
+
     public static function GetVTypeValue2(iconSource:String): String
     {
         var vi2 = com.xvm.VehicleInfo.getInfo2(iconSource);
@@ -114,12 +119,17 @@ class com.xvm.VehicleInfo
             return "";
         return vtype;
     }
-    
+
     // icon = "../maps/icons/vehicle/contour/ussr-IS-3.png"
     // return: "is_3"
     public static function getName2(icon: String): String
     {
-        icon = icon.slice(icon.lastIndexOf("/") + 1, icon.lastIndexOf("."));
+        var i = icon.lastIndexOf("/");
+        if (i >= 0)
+            icon = icon.slice(icon.lastIndexOf("/") + 1);
+        i = icon.lastIndexOf(".");
+        if (i >= 0)
+            icon = icon.slice(0, icon.lastIndexOf("."));
         icon = icon.slice(icon.indexOf("-") + 1);
         icon = Strings.trim(icon);
         icon = icon.split("-").join("_").toLowerCase();
@@ -130,7 +140,12 @@ class com.xvm.VehicleInfo
     // return: "ussr_IS_3"
     public static function getName1(icon: String): String
     {
-        icon = icon.slice(icon.lastIndexOf("/") + 1, icon.lastIndexOf("."));
+        var i = icon.lastIndexOf("/");
+        if (i >= 0)
+            icon = icon.slice(icon.lastIndexOf("/") + 1);
+        i = icon.lastIndexOf(".");
+        if (i >= 0)
+            icon = icon.slice(0, icon.lastIndexOf("."));
         icon = icon.split("-").join("_");
         icon = Strings.trim(icon);
         return icon;

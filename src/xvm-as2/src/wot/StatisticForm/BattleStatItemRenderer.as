@@ -141,7 +141,7 @@ class wot.StatisticForm.BattleStatItemRenderer
         //Logger.addObject(data);
         if (Config.s_config.rating.showPlayersStatistics) {
             if (StatData.s_data[pname])
-                StatData.s_data[pname].vehicleState = wrapper.data.vehicleState;
+                StatData.s_data[pname].stat.alive = (wrapper.data.vehicleState & 1) != 0;
         }
         // Chance
         if (!StatData.s_empty && Config.s_config.statisticForm.showChances && wrapper.selected == true)

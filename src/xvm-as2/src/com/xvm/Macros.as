@@ -56,9 +56,9 @@ class com.xvm.Macros
         // Load stat in FogOfWar
         if (StatData.s_loaded && Config.s_config.rating.loadEnemyStatsInFogOfWar)
         {
+            var pdata = StatData.s_data[pname].stat;
             if (!data.uid)
-                data.uid = StatData.s_data[pname].playerId;
-            var pdata = StatData.s_data[pname];
+                data.uid = pdata.playerId;
             //Logger.addObject(pdata);
             //Logger.add("pname=" + pname + " uid=" + data.uid + " r=" + stat.r + " eff=" + stat.e);
             if ((!pdata || (!pdata.stat && pdata.loadstate == Defines.LOADSTATE_NONE)) ||

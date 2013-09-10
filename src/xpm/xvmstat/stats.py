@@ -304,6 +304,9 @@ class _Stat(object):
             if pl.playerId == stat['_id']:
                 stat['clan'] = pl.clan
                 stat['name'] = pl.name
+                stat['team'] = pl.team
+                stat['alive'] = pl.alive
+                stat['ready'] = pl.ready
                 if pl.vn == stat['vn'].upper():
                     stat['vname'] = pl.vName
                     stat['icon'] = pl.vIcon
@@ -324,7 +327,7 @@ class _Stat(object):
         self.vn = vData['vehicleType'].type.name
         self.vn = self.vn[self.vn.find(':')+1:].upper()
         self.vType = set(VEHICLE_CLASS_TAGS.intersection(vData['vehicleType'].type.tags)).pop()
-        self.team = vData['team'] - 1
+        self.team = vData['team']
 
 
         return stat
@@ -360,7 +363,9 @@ class _Player(object):
         self.vn = vData['vehicleType'].type.name
         self.vn = self.vn[self.vn.find(':')+1:].upper()
         self.vType = set(VEHICLE_CLASS_TAGS.intersection(vData['vehicleType'].type.tags)).pop()
-        self.team = vData['team'] - 1
+        self.team = vData['team']
+        self.alive = vData['isAlive']
+        self.ready = vData['isAvatarReady']
 
 
 _stat = _Stat()

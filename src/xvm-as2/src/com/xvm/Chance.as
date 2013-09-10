@@ -6,6 +6,7 @@ import com.xvm.Config;
 import com.xvm.Defines;
 import com.xvm.GraphicsUtil;
 import com.xvm.Locale;
+import com.xvm.Logger;
 import com.xvm.StatData;
 import com.xvm.VehicleInfo;
 
@@ -35,11 +36,11 @@ class com.xvm.Chance
     {
         var teamsCount:Object = CalculateTeamPlayersCount();
         //Logger.addObject(teamsCount);
-        // only equal and non empty team supported
+        // only non empty team supported
         if (teamsCount.ally == 0 || teamsCount.enemy == 0)
             return "";
-        if (Math.abs(teamsCount.ally - teamsCount.enemy) > 2)
-            return "";
+        //if (Math.abs(teamsCount.ally - teamsCount.enemy) > 2)
+        //    return "";
 
         Chance.battleTier = Chance.GuessBattleTier();
 
@@ -50,7 +51,7 @@ class com.xvm.Chance
 
         if (chG.error)
             return ChanceError("[G] " + chG.error);
-        
+
         if (chT.error)
             return ChanceError("[T] " + chT.error);
 
@@ -78,7 +79,7 @@ class com.xvm.Chance
         var Ke = 0;
         for (var pname in StatData.s_data)
         {
-            var pdata = StatData.s_data[pname];
+            var pdata = StatData.s_data[pname].stat;
 
             var vi1 = VehicleInfo.getInfo1(pdata.icon);
             if (!vi1) {
@@ -92,7 +93,8 @@ class com.xvm.Chance
             if (!vi2)
                 return { error: "[2] No data for: " + VehicleInfo.getVehicleName(pdata.icon) };
 
-            var K = chanceFunc(vi1, vi2, pdata.team, pdata.stat, (pdata.vehicleState & 1) == 0);
+            //Logger.add(pdata.vehicleState);
+            var K = chanceFunc(vi1, vi2, pdata);
 
             Ka += (pdata.team == Defines.TEAM_ALLY) ? K : 0;
             Ke += (pdata.team == Defines.TEAM_ENEMY) ? K : 0;
@@ -119,7 +121,7 @@ class com.xvm.Chance
     }
 
     // http://www.koreanrandom.com/forum/topic/2598-/#entry31429
-    private static function ChanceFuncG(vi1, vi2, team, stat, dead): Number
+    private static function ChanceFuncG(vi1, vi2, stat): Number
     {
         var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
 
@@ -151,7 +153,7 @@ class com.xvm.Chance
         return Math.max(0, Math.min(Config.s_config.consts.MAX_EBN, Eb));
     }
 
-    private static function ChanceFuncT(vi1, vi2, team, stat, dead): Number
+    private static function ChanceFuncT(vi1, vi2, stat): Number
     {
         var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
 
@@ -196,9 +198,9 @@ class com.xvm.Chance
         return Math.max(0, Math.min(Config.s_config.consts.MAX_EBN, Eb));
     }
 
-    private static function ChanceFuncX1(vi1, vi2, team, stat, dead): Number
+    private static function ChanceFuncX1(vi1, vi2, stat): Number
     {
-        if (dead)
+        if (stat.alive == false)
             return 0;
 
         var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
@@ -231,9 +233,9 @@ class com.xvm.Chance
         return Math.max(0, Math.min(Config.s_config.consts.MAX_EBN, Eb));
     }
 
-    private static function ChanceFuncX2(vi1, vi2, team, stat, dead): Number
+    private static function ChanceFuncX2(vi1, vi2, stat): Number
     {
-        if (dead)
+        if (stat.alive == false)
             return 0;
 
         var Td = (vi1.tiers[0] + vi1.tiers[1]) / 2.0 - battleTier;
@@ -286,9 +288,10 @@ class com.xvm.Chance
         var nenemy = 0;
         for (var pname in StatData.s_data)
         {
-            var pdata = StatData.s_data[pname];
+            var pdata = StatData.s_data[pname].stat;
             if (pdata.vehicleKey == "UNKNOWN" || pdata.vehicleKey == "OBSERVER") // skip unknown tanks in Fog of War mode and observer
                 continue;
+            //Logger.addObject(pdata);
             if (pdata.team == Defines.TEAM_ALLY) ++nally else ++nenemy;
         }
         return { ally: nally, enemy: nenemy };
@@ -317,7 +320,7 @@ class com.xvm.Chance
         var vis: Array = [];
         for (var pname in StatData.s_data)
         {
-            var pdata = StatData.s_data[pname];
+            var pdata = StatData.s_data[pname].stat;
             var vi1 = VehicleInfo.getInfo1(pdata.icon);
             if (!vi1) {
                 var vn = VehicleInfo.getVehicleName(pdata.icon);

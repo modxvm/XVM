@@ -40,4 +40,7 @@ class com.xvm.DataTypes.Stat
 
     public var tb;
     public var tw;
+
+    public var alive;
+    public var ready;
 }
