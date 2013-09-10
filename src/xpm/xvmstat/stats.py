@@ -3,25 +3,21 @@
 #############################
 # Command
 
-def getBattleStat(proxy, id, args):
+def getBattleStat(proxy, args):
     _stat.queue.put({
         'func':_stat.getBattleStat,
         'proxy':proxy,
-        'id':id,
         'method':RESPOND_STATDATA,
         'args':args})
     _stat.processQueue()
-    pass
 
-def getUserData(proxy, id, args):
+def getUserData(proxy, args):
     _stat.queue.put({
         'func':_stat.getUserStat,
         'proxy':proxy,
-        'id':id,
         'method':RESPOND_USERDATA,
         'args':args})
     _stat.processQueue()
-    pass
 
 
 #############################
@@ -50,6 +46,7 @@ from gameregion import region
 _PUBLIC_TOKEN = 'xpm'
 
 class _Stat(object):
+
     def __init__(self):
         player = BigWorld.player()
         self.queue = Queue()
@@ -65,7 +62,6 @@ class _Stat(object):
         self.info = None
         self.servers = [ "http://proxy2.bulychev.net/%1" ] # TODO
         self.timeout = 30000
-        pass
 
     def __del__(self):
         pass
@@ -87,21 +83,21 @@ class _Stat(object):
     def _checkResult(self):
         with self.lock:
             #debug("checkResult: " + ("no" if self.resp is None else "yes"))
+            if self.resp is None:
+                BigWorld.callback(0.05, self._checkResult)
+                return
             try:
-                if self.resp is None:
-                    BigWorld.callback(0.05, self._checkResult)
-                    return
-                self._respond(self.resp)
+                self._respond()
             except Exception, ex:
                 err('_checkResult() exception: ' + traceback.format_exc(ex))
             finally:
                 self.thread = None
                 self.processQueue()
 
-    def _respond(self, data):
-        debug("respond: " + self.req['method'])
+    def _respond(self):
+        #debug("respond: " + self.req['method'])
         if self.req['proxy'] and self.req['proxy'].component and self.req['proxy'].movie:
-            strdata = json.dumps(data)
+            strdata = json.dumps(self.resp)
             self.req['proxy'].movie.invoke((self.req['method'], [strdata]))
 
     # Threaded

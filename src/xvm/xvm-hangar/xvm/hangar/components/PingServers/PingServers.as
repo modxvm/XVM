@@ -2,6 +2,7 @@ package xvm.hangar.components.PingServers
 {
     import flash.events.*;
     import flash.utils.*;
+    import flash.external.ExternalInterface;
     import org.idmedia.as3commons.util.StringUtils;
     import com.xvm.types.cfg.*;
     import com.xvm.*;
@@ -21,7 +22,7 @@ package xvm.hangar.components.PingServers
         private var pingTimer:uint;
         private var pingTimeouts:Array;
 
-        public static function initFeature(cfg:CPingServers):void
+        public static function initFeature(enabled:Boolean, interval:Number = 0):void
         {
             if (instance.pingTimer > 0)
             {
@@ -36,19 +37,24 @@ package xvm.hangar.components.PingServers
                 instance.pingTimeouts = null;
             }
 
-            if (cfg.enabled == false)
+            if (!enabled)
                 return;
-
-            instance.pingTimer = setInterval(instance.ping, cfg.updateInterval);
 
             // immediately
             instance.ping();
-            // after 1, 3, 5 sec
-            instance.pingTimeouts = [
-                setTimeout(instance.ping, 1000),
-                setTimeout(instance.ping, 3000),
-                setTimeout(instance.ping, 5000)
-            ];
+            // after 1, 3, 5, 7 sec
+            //instance.pingTimeouts = [
+                //setTimeout(instance.ping, 1000),
+                //setTimeout(instance.ping, 3000),
+                //setTimeout(instance.ping, 5000),
+                //setTimeout(instance.ping, 7000)
+            //];
+
+            if (interval > 0)
+            {
+                // periodically
+                instance.pingTimer = setInterval(instance.ping, interval);
+            }
         }
 
         public static function addListener(listener:Function):void
@@ -60,17 +66,20 @@ package xvm.hangar.components.PingServers
 
         function PingServers()
         {
+            ExternalInterface.addCallback(Cmd.RESPOND_PINGDATA, pingCallback);
             pingTimer = 0;
             pingTimeouts = null;
         }
 
         private function ping():void
         {
-            Cmd.ping(this, pingCallback);
+            //Logger.add("ping");
+            Cmd.ping();
         }
 
         private function pingCallback(answer:String):void
         {
+            //Logger.add("pingCallback:" + arguments.toString());
             if (answer == null || answer == "")
                 return;
 

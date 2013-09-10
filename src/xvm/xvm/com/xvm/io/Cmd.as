@@ -23,6 +23,7 @@ package com.xvm.io
         private static const COMMAND_SAVE_SETTINGS:String = "save_settings";
         private static const COMMAND_LOAD_SETTINGS:String = "load_settings";
 
+        public static const RESPOND_PINGDATA:String = "xvm.pingdata";
         public static const RESPOND_STATDATA:String = "xvm.statdata";
         public static const RESPOND_USERDATA:String = "xvm.userdata";
 
@@ -31,9 +32,9 @@ package com.xvm.io
             _call(null, null, [COMMAND_LOG, str]);
         }
 
-        public static function ping(target:Object, callback:Function):void
+        public static function ping():void
         {
-            _call(target, callback, [COMMAND_PING]);
+            _call(null, null, [COMMAND_PING]);
         }
 
         public static function getScreenSize(target:Object, callback:Function):void

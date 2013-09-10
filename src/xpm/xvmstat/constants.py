@@ -11,6 +11,7 @@ COMMAND_LOADUSERDATA = "loadUserData"
 COMMAND_LOAD_SETTINGS = "load_settings"
 COMMAND_SAVE_SETTINGS = "save_settings"
 
+RESPOND_PINGDATA = "xvm.pingdata"
 RESPOND_STATDATA = "xvm.statdata"
 RESPOND_USERDATA = "xvm.userdata"
 

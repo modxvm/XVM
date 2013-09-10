@@ -33,12 +33,19 @@ package xvm.hangar.components.PingServers
 
         private function update(e:ObjectEvent):void
         {
-            var responceTimeList:Array = e.result as Array;
-            if (responceTimeList.length == 0)
-                return;
-            clearAllFields();
-            for (var i:int = 0; i < responceTimeList.length; ++i)
-                appendRowToFields(makeStyledRow(responceTimeList[i]));
+            try
+            {
+                var responceTimeList:Array = e.result as Array;
+                if (responceTimeList.length == 0)
+                    return;
+                clearAllFields();
+                for (var i:int = 0; i < responceTimeList.length; ++i)
+                    appendRowToFields(makeStyledRow(responceTimeList[i]));
+            }
+            catch (ex:Error)
+            {
+                Logger.add(ex.getStackTrace());
+            }
         }
 
         /**
@@ -53,17 +60,15 @@ package xvm.hangar.components.PingServers
 
         private function appendRowToFields(row:String):void
         {
-            var receiverTf:TextField = getReceiverField();
-            if (receiverTf.htmlText != "")
-                receiverTf.htmlText += "\n";
-            receiverTf.htmlText += row;
+            var tf:TextField = getReceiverField();
+            tf.htmlText += row;
             alignFields();
         }
 
         private function makeStyledRow(pingObj:Object):String
         {
-            var time:String = pingObj.time;
             var cluster:String = pingObj.cluster;
+            var time:String = pingObj.time;
             var raw:String = cluster + cfg.delimiter + time;
             return "<span class='" + STYLE_NAME_PREFIX + defineQuality(time) + "'>" + raw + "</span>";
         }
@@ -97,7 +102,7 @@ package xvm.hangar.components.PingServers
          */
         public function alignFields():void
         {
-            for (var i:Number = 1; i < fields.length; i++)
+            for (var i:int = 1; i < fields.length; i++)
             {
                 var currentField:TextField = fields[i];
                 var prevField:TextField = fields[i - 1];
@@ -112,7 +117,7 @@ package xvm.hangar.components.PingServers
             for (var i:int = 0; i < fields.length; i++)
             {
                 var field:TextField = fields[i];
-                if (field.htmlText == "" || field.scrollRect.bottom < cfg.maxRows)
+                if (field.htmlText == "" || field.numLines < cfg.maxRows)
                 {
                     return field;
                 }
@@ -123,6 +128,7 @@ package xvm.hangar.components.PingServers
 
         private function createNewField():TextField
         {
+            //Logger.add("createNewField()");
             var newFieldNum:int = fields.length + 1;
             var newField:TextField = createField(newFieldNum);
             fields.push(newField);
@@ -139,6 +145,7 @@ package xvm.hangar.components.PingServers
             tf.height = 200;
             tf.autoSize = TextFieldAutoSize.LEFT;
             tf.multiline = true;
+            tf.wordWrap = false;
             tf.selectable = false;
             tf.styleSheet = Utils.createStyleSheet(createCss());
             tf.alpha = cfg.alpha / 100.0;

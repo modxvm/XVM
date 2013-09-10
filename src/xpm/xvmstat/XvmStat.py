@@ -38,7 +38,7 @@ class XvmStat(object):
             if cmd == COMMAND_LOG:
                 log(*args)
             elif cmd == COMMAND_PING:
-                res = json.dumps(ping())
+                ping(proxy)
             elif cmd == COMMAND_GETMODS:
                 res = self.getMods()
             elif cmd == COMMAND_GETSCREENSIZE:
@@ -48,9 +48,9 @@ class XvmStat(object):
             elif cmd == COMMAND_GETLANGUAGE:
                 res = language
             elif cmd == COMMAND_LOADBATTLESTAT:
-                getBattleStat(proxy, id, args)
+                getBattleStat(proxy, args)
             elif cmd == COMMAND_LOADUSERDATA:
-                getUserData(proxy, *args)
+                getUserData(proxy, args)
             elif cmd == COMMAND_LOAD_SETTINGS:
                 pass # TODO
             elif cmd == COMMAND_SAVE_SETTINGS:

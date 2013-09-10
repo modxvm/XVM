@@ -42,7 +42,7 @@ package xvm.hangar
         private function initPing():void
         {
             var cfg:CPingServers = Config.config.hangar.pingServers;
-            PingServers.initFeature(cfg);
+            PingServers.initFeature(cfg.enabled, cfg.updateInterval);
             if (cfg.enabled)
                 page.addChild(new PingServersView(cfg));
         }

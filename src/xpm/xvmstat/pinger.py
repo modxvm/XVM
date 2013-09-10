@@ -1,101 +1,123 @@
 """ xvm-stat (c) sirmax 2013 """
 
+#############################
+# Command
+
+def ping(proxy):
+    _ping.ping(proxy)
+
+#############################
+# Private
+
 import traceback
 import threading
 import os
 import re
 from subprocess import Popen, PIPE, STARTUPINFO, STARTF_USESHOWWINDOW, SW_HIDE
+from Queue import Queue
 
 import BigWorld
 from predefined_hosts import g_preDefinedHosts
 
 from logger import *
+from constants import *
 
 #############################
-
-_lockPing = threading.RLock()
-_thread = None
-_pingResults = None
-
-#############################
-# Command
 
 """
-BigWorld.WGPinger can crash client, and it is blocking operation. Don't use it.
-ICMP requires root privileges. Don't use it.
+NOTE: BigWorld.WGPinger can crash client, and it is blocking operation. Don't use it.
+NOTE: ICMP requires root privileges. Don't use it.
 """
-def ping():
-    try:
-        g_preDefinedHosts._PreDefinedHostList__ping()
-        hosts = g_preDefinedHosts._hosts;
-        pings = g_preDefinedHosts._PreDefinedHostList__pingResult
-        if pings:
-            return dict(map(lambda x: (x.name, pings[x.url] if x.url in pings else "?"), hosts))
+class _Ping(object):
 
-        # Fallback to subprocess
-        global _thread
-        if _thread is None:
-            _thread = threading.Thread(target=_pingAsync)
-            _thread.daemon = True
-            _thread.start()
+    def __init__(self):
+        self.listeners = []
+        self.lock = threading.RLock()
+        self.thread = None
+        self.resp = None
+        pass
 
-        global _pingResults
-        with _lockPing:
-            ret = _pingResults
 
-        return ret
+    def ping(self, proxy):
+        if proxy not in self.listeners:
+            self.listeners.append(proxy)
+        with self.lock:
+            if self.thread is not None:
+                return
+        self.thread = threading.Thread(target=self._pingAsync)
+        self.thread.daemon = True
+        self.thread.start()
+        BigWorld.callback(0.05, self._checkResult)
 
-    except Exception, ex:
-        err('ping() exception: ' + traceback.format_exc(ex))
-        return None
+    def _checkResult(self):
+        with self.lock:
+            #debug("checkResult: " + ("no" if self.resp is None else "yes"))
+            if self.resp is None:
+                BigWorld.callback(0.05, self._checkResult)
+                return
+            try:
+                self._respond()
+            except Exception, ex:
+                err('_checkResult() exception: ' + traceback.format_exc(ex))
+            finally:
+                self.thread = None
 
-#############################
-# Private
+    def _respond(self):
+        #debug("respond: " + data)
+        try:
+            strdata = json.dumps(self.resp)
+            for proxy in self.listeners:
+                if proxy and proxy.component and proxy.movie:
+                    proxy.movie.invoke((RESPOND_PINGDATA, [strdata]))
+        finally:
+            self.listeners = []
 
-def _pingAsync():
-    try:
-        if os.name == 'nt':
-            args = 'ping -n 1 -w 1000 '
-            # Ответ от 178.20.235.151: число байт=32 время=23мс TTL=58
-            pattern = '.*=.*=(\d+)[^\s].*=.*'
-            env = None
-            si = STARTUPINFO()
-            si.dwFlags = STARTF_USESHOWWINDOW
-            si.wShowWindow = SW_HIDE
-        else:
-            args = 'ping -c 1 -n -q '
-            pattern = '[\d.]+/([\d.]+)(?:/[\d.]+){2}'
-            env = dict(LANG='C')
-            si = None
-        res = {}
-        processes = {}
+    # Threaded
 
-        # Ping all servers in parallel
-        for x in g_preDefinedHosts._hosts:
-            processes[x.name] = Popen(args + x.url.split(':')[0], stdout=PIPE, env=env, startupinfo=si)
+    def _pingAsync(self):
+        try:
+            if os.name == 'nt':
+                args = 'ping -n 1 -w 1000 '
+                # Ответ от 178.20.235.151: число байт=32 время=23мс TTL=58
+                pattern = '.*=.*=(\d+)[^\s].*=.*'
+                env = None
+                si = STARTUPINFO()
+                si.dwFlags = STARTF_USESHOWWINDOW
+                si.wShowWindow = SW_HIDE
+            else:
+                args = 'ping -c 1 -n -q '
+                pattern = '[\d.]+/([\d.]+)(?:/[\d.]+){2}'
+                env = dict(LANG='C')
+                si = None
+            res = {}
+            processes = {}
 
-        # Parse ping output
-        for x in g_preDefinedHosts._hosts:
-            proc = processes[x.name]
+            # Ping all servers in parallel
+            for x in g_preDefinedHosts._hosts:
+                processes[x.name] = Popen(args + x.url.split(':')[0], stdout=PIPE, env=env, startupinfo=si)
 
-            out, err = proc.communicate()
-            errCode = proc.wait()
-            if errCode != 0:
-                res[x.name] = 'E:' + str(errCode)
-                continue
+            # Parse ping output
+            for x in g_preDefinedHosts._hosts:
+                proc = processes[x.name]
 
-            found = re.search(pattern, out)
-            if not found:
-                res[x.name] = '?'
-                err('Ping regexp not found in %s' % out.replace('\n', '\\n'))
-                continue
+                out, err = proc.communicate()
+                errCode = proc.wait()
+                if errCode != 0:
+                    res[x.name] = 'E:' + str(errCode)
+                    continue
 
-            res[x.name] = found.group(1)
+                found = re.search(pattern, out)
+                if not found:
+                    res[x.name] = '?'
+                    err('Ping regexp not found in %s' % out.replace('\n', '\\n'))
+                    continue
 
-        global _pingResults
-        with _lockPing:
-            _pingResults = res #json.dumps(res)
-            #log('Async PING results: %s' % _pingResults)
-    finally:
-        global _thread
-        _thread = None
+                res[x.name] = found.group(1)
+
+            with self.lock:
+                self.resp = res
+        except:
+            with self.lock:
+                self.resp = {"Error":""}
+
+_ping = _Ping()
