@@ -85,7 +85,7 @@ class com.xvm.Macros
             pdata["nick"] = nick;
             // {{name}}
             var nm:String = Utils.GetPlayerName(nick);
-            pdata["name"] = (nm.length < 16 ? nm : nm.substr(0, 14) + "..");
+            pdata["name"] = (nm.length <= 16 ? nm : nm.substr(0, 14) + "..");
             // {{clan}}
             pdata["clan"] = Utils.GetClanNameWithBrackets(nick);
             // {{clannb}}

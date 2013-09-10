@@ -80,7 +80,7 @@ package com.xvm.utils
             // {{nick}}
             pdata["nick"] = nick + clanWithBrackets;
             // {{name}}
-            pdata["name"] = (nick.length < 16 ? nick : StringUtils.left(nick, 14) + "..");
+            pdata["name"] = (nick.length <= 16 ? nick : StringUtils.left(nick, 14) + "..");
             // {{clan}}
             pdata["clan"] = clanWithBrackets;
             // {{clannb}}
