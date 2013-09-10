@@ -109,8 +109,7 @@ public class DefaultConfig
                 highlightVehicleIcon: true,      // False - disable highlighting of selected vehicle icon and squad.
                 useStandardMarkers: false,       // Use original wot markers.
                 // Show the clock on the Debug Panel (near FPS).
-                // Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
-                clockFormat: "H:N",
+                clockFormat: "H:i",              // Format: http://php.net/date
                 clanIconsFolder: "clanicons/",   // Folder with clan icons
                 // Visual elements
                 elements: []
@@ -154,8 +153,7 @@ public class DefaultConfig
                 // ### Is there a clock:on\off switch variable supposed to be? ###
                 // A: No, it is possible to set clockFormat: "" to disable clock.
 
-                // Format: Y:year, M:month, D:day, H:hour, N:minutes, S:seconds.
-                clockFormat: "H:N:S",
+                clockFormat: "H:i:s",   // Format: http://php.net/date
                 showChances: false,     // Show game round win chances percentage.
                 showChancesExp: false,  // Show experimental "chance to win" formula.
                 removeSquadIcon: false, // Hide squad icon.
@@ -784,14 +782,6 @@ public class DefaultConfig
                     { value: 64,  color: ColorPalette.blue },     // very good
                     { value: 101, color: ColorPalette.purple }    // unique
                 ],
-                twr: [
-                    { value: 47,  color: ColorPalette.red },      // very bad
-                    { value: 49,  color: ColorPalette.orange },   // bad
-                    { value: 52,  color: ColorPalette.yellow },   // normal
-                    { value: 57,  color: ColorPalette.green },    // good
-                    { value: 62,  color: ColorPalette.blue },     // very good
-                    { value: 101, color: ColorPalette.purple }    // unique
-                ],
                 e: [
                     { value: 2,    color: ColorPalette.red },     // very bad
                     { value: 4,    color: ColorPalette.orange },  // bad
@@ -879,12 +869,6 @@ public class DefaultConfig
                     { value: 9999, alpha: 40 }
                 ],
                 rating: [
-                    { value: 49,  alpha: 100 },
-                    { value: 53,  alpha: 80 },
-                    { value: 60,  alpha: 60 },
-                    { value: 101, alpha: 40 }
-                ],
-                twr: [
                     { value: 49,  alpha: 100 },
                     { value: 53,  alpha: 80 },
                     { value: 60,  alpha: 60 },

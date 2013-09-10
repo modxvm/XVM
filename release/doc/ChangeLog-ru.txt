@@ -1,5 +1,6 @@
-﻿  * добавлены иконки топ-150 кланов NA кластера
-  * удалена опция login/showPingOnGameLoading
+﻿  * удалена опция login/showPingOnGameLoading
+  * удален рейтинг TWR
+  * добавлены макросы {{c:avglvl}}, {{a:avglvl}}
 
 XVM-4.1.1:
   [НОВЫЕ ФУНКЦИИ]

@@ -1,0 +1,13 @@
+diff -Naur Application-0.orig/net/wg/app/impl/Application.class.asasm Application-0/net/wg/app/impl/Application.class.asasm
+--- Application-0.orig/net/wg/app/impl/Application.class.asasm	2013-08-25 21:14:28.706086100 +0300
++++ Application-0/net/wg/app/impl/Application.class.asasm	2013-08-27 22:06:36.712378900 +0300
+@@ -28,7 +28,8 @@
+      getglobalscope
+      pushstring          "windows.swf"
+      pushstring          "toolTips.swf"
+-     newarray            2
++     pushstring          "../../../xvm/xvm.swf"
++     newarray            3
+      call                1
+      initproperty        QName(PrivateNamespace(null, "net.wg.app.impl:Application/instance#0"), "_librariesList")
+ 

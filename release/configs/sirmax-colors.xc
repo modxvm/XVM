@@ -232,16 +232,6 @@
       { "value": 64,  "color": ${"colorRating.very_good"} },   // 56.5 - 63.5  - very good
       { "value": 101, "color": ${"colorRating.unique"   } }    // 63.5 - 100   - unique
     ],
-    // Dynamic color by TWR (T-Calc) (only with xvm-stat).
-    // Динамический цвет по TWR (T-Calc) (только с xvm-stat).
-    "twr": [
-      { "value": 47,  "color": ${"colorRating.very_bad" } },   //  0   - 46.5  - very bad
-      { "value": 49,  "color": ${"colorRating.bad"      } },   // 46.5 - 48.5  - bad
-      { "value": 52,  "color": ${"colorRating.normal"   } },   // 48.5 - 51.5  - normal
-      { "value": 57,  "color": ${"colorRating.good"     } },   // 51.5 - 56.5  - good
-      { "value": 62,  "color": ${"colorRating.very_good"} },   // 56.5 - 61.5  - very good
-      { "value": 101, "color": ${"colorRating.unique"   } }    // 61.5 - 100   - unique
-    ],
     // Dynamic color by kilo-battles (only with xvm-stat).
     // Динамический цвет по количеству кило-боев (только с xvm-stat).
     "kb": [

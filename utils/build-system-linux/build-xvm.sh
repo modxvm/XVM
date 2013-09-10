@@ -4,6 +4,10 @@
 #Part of XVM build system
 #Do not change anything in this file if you are not sure
 
+#0. Define Flex SDK path
+export FLEXSDK="/opt/apache-flex-4.10"
+archive_postfix=""
+
 #1. Detect revision
 pushd ../../ > /dev/null
 revision=$(svnversion | head -c 4)
@@ -11,38 +15,42 @@ popd > /dev/null
 
 #2. Detect WoT version
 pushd config/ > /dev/null
-wot_version_release=$(cat wot_version_release)
-wot_version_ct=$(cat wot_version_ct)
+wot_version=$(cat wot_version)
 popd > /dev/null
 
-#3. Build XVM
+#3. Build
 pushd sh > /dev/null
 ./xvm-build.sh
 popd > /dev/null
 
-#4. Make dirs
-mkdir -p ../../temp/rel/"$wot_version_release"/gui/flash
-mkdir -p ../../temp/ct/"$wot_version_ct"/gui/scaleform
+#4. Copy swfs,config,l10n,docs etc.
+mkdir -p ../../temp/"$wot_version"/gui/flash
+mkdir -p ../../temp/"$wot_version"/gui/scaleform
 
-#5. Copy swfs,config,l10n,docs etc.
-cp -rf ../../bin/* ../../temp/rel/"$wot_version_release"/gui/flash/
-cp -rf ../../bin/* ../../temp/ct/"$wot_version_ct"/gui/scaleform/
+cp -f ../../bin/as3/*.swf ../../temp/"$wot_version"/gui/flash/
+rm -rf ../../bin/as3/
 
-cp -rf ../../release/ ../../temp/rel/xvm/
-cp -rf ../../release/ ../../temp/ct/xvm/
+cp -rf ../../bin/* ../../temp/"$wot_version"/gui/scaleform/
 
-mv -f ../../temp/rel/xvm/xvm.xc.sample ../../temp/rel/xvm/xvm.xc
-mv -f ../../temp/ct/xvm/xvm.xc.sample ../../temp/ct/xvm/xvm.xc
+cp -rf ../../release/ ../../temp/xvm/
+rm -rf ../../release/*.swf
 
-#6. Build zips
-echo "$revision" >> ../../temp/rel/"$revision"
-echo "$revision" >> ../../temp/ct/"$revision"
-pushd ../../temp/rel/ > /dev/null && zip -9 -r -q "$revision"_release.zip ./ && popd > /dev/null
-pushd ../../temp/ct/ > /dev/null && zip -9 -r -q "$revision"_ct.zip ./ && popd > /dev/null
-
-#7. Move&Clean
 rm -rf ../../bin/*
-mv -f ../../temp/rel/"$revision"_release.zip ../../bin/
-mv -f ../../temp/ct/"$revision"_ct.zip ../../bin/
-rm -rf ../../temp/
 
+#5. Build xvm-py
+pushd ../../src/xvm-py/ > /dev/null
+./build-all.sh
+popd > /dev/null
+
+cp -rf ../../bin/xpm/* ../../temp/"$wot_version"/
+rm -rf ../../bin/*
+
+#del testmod
+rm -rf ../../temp/xvm/mods/testmod.swf
+
+#6. Build archive
+echo "$revision" >> ../../temp/"$revision"
+pushd ../../temp/ > /dev/null && zip -9 -r -q "$revision"_xvm"$archive_postfix".zip ./ && popd > /dev/null
+
+mv -f ../../temp/"$revision"_xvm"$archive_postfix".zip ../../bin/
+rm -rf ../../temp/

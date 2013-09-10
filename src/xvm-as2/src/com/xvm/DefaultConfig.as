@@ -116,7 +116,7 @@ class com.xvm.DefaultConfig
                 elements: []
             },
             rating: {
-                showPlayersStatistics: true,    // Global switch. Handles whole statisctics module.
+                showPlayersStatistics: false,   // Global switch. Handles whole statisctics module.
                 loadEnemyStatsInFogOfWar: true, // Load players data in "fog of war".
                 enableStatisticsLog: false,     // Enable saving statistics to "xvm-stat.log" file
                 enableUserInfoStatistics: true, // Enable statistics in the user info window
@@ -788,14 +788,6 @@ class com.xvm.DefaultConfig
                     { value: 64,  color: ColorPalette.blue },     // very good
                     { value: 101, color: ColorPalette.purple }    // unique
                 ],
-                twr: [
-                    { value: 47,  color: ColorPalette.red },      // very bad
-                    { value: 49,  color: ColorPalette.orange },   // bad
-                    { value: 52,  color: ColorPalette.yellow },   // normal
-                    { value: 57,  color: ColorPalette.green },    // good
-                    { value: 62,  color: ColorPalette.blue },     // very good
-                    { value: 101, color: ColorPalette.purple }    // unique
-                ],
                 e: [
                     { value: 3,    color: ColorPalette.red },     // very bad
                     { value: 6,    color: ColorPalette.orange },  // bad
@@ -883,12 +875,6 @@ class com.xvm.DefaultConfig
                     { value: 9999, alpha: 40 }
                 ],
                 rating: [
-                    { value: 49,  alpha: 100 },
-                    { value: 53,  alpha: 80 },
-                    { value: 60,  alpha: 60 },
-                    { value: 101, alpha: 40 }
-                ],
-                twr: [
                     { value: 49,  alpha: 100 },
                     { value: 53,  alpha: 80 },
                     { value: 60,  alpha: 60 },

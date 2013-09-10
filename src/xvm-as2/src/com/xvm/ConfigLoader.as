@@ -2,7 +2,7 @@
  * ...
  * @author sirmax2
  */
-import com.xvm.Comm;
+import com.xvm.Cmd;
 import com.xvm.Config;
 import com.xvm.ConfigUtils;
 import com.xvm.DefaultConfig;
@@ -11,14 +11,12 @@ import com.xvm.GlobalEventDispatcher;
 import com.xvm.JSONxLoader;
 import com.xvm.Locale;
 import com.xvm.Logger;
-import com.xvm.Strings;
 
 class com.xvm.ConfigLoader
 {
     // Private vars
     private static var s_loading:Boolean = false;
     private static var info_event:Object = null;
-    private static var _region_loaded = false;
 
     // instance
     private static var instance:ConfigLoader = null;
@@ -80,10 +78,7 @@ class com.xvm.ConfigLoader
             if (finallyBugWorkaround)
                 return;
             finallyBugWorkaround = true;
-            ReloadGameRegion();
-
-            /** Load localization files */
-            GlobalEventDispatcher.addEventListener(Locale.EVENT_LOADED, ConfigLoader.instance.SetConfigLoaded);
+            Cmd.getGameRegion(this, OnGameRegionReceived);
             Locale.loadLocale();
             //Logger.add("TRACE: ReloadConfigCallback(): finally::end");
         }
@@ -119,121 +114,17 @@ class com.xvm.ConfigLoader
         GlobalEventDispatcher.dispatchEvent(info_event); // Just show version
     }
 
-    private function ReloadGameRegion()
+    private function OnGameRegionReceived(region)
     {
-        //Logger.add("TRACE: Config.ReloadGameRegion()");
-        Comm.Sync(Defines.COMMAND_GET_VERSION, null, null, function(event) {
-            if (!event.str) // proxy is not running
-            {
-                ConfigLoader.instance.GetGameRegionFromWOTLauncherCfg();
-                return;
-            }
-
-            var finallyBugWorkaround: Boolean = false; // Workaround: finally block have a bug - it can be called twice.
-            try
-            {
-                var a: Array = event.str.split("\n");
-                Config.s_game_region = a[0].toUpperCase();
-
-                // MAX_PATH is 259 on NTFS
-                // WARNING: What if MAX_PATH less then 50?
-                //   259 - "\res_mods\xvm\.xvmfs\".length - 1 = 237
-                // 199 - ?
-                Defines.MAX_PATH = Math.min(199, Math.max(50, 237 - a[1].length));
-
-                for (var i = 2; i < a.length; ++i)
-                {
-                    try
-                    {
-                        var v = a[i].split("=");
-                        switch (v[0].toLowerCase())
-                        {
-                            case "window_size":
-                                var sz = v[1].split(",");
-                                Config.s_vars.window_size = [ Math.max(800, parseInt(sz[0])), Math.max(600, parseInt(sz[1])) ];
-                                break;
-                        }
-                    }
-                    catch (e)
-                    {
-                        Logger.add("Invalid variable received: " + a[i] + "\n" + e);
-                    }
-                }
-            }
-            finally
-            {
-                if (finallyBugWorkaround)
-                    return;
-                finallyBugWorkaround = true;
-                ConfigLoader._region_loaded = true;
-                ConfigLoader.instance.SetConfigLoaded();
-            }
-        });
-    }
-
-    private function GetGameRegionFromWOTLauncherCfg()
-    {
-        //Logger.add("TRACE: Config.GetGameRegionFromWOTLauncherCfg()");
-
-        var xml:XML = new XML();
-        xml.ignoreWhite = true;
-        xml.onLoad = function(success: Boolean)
-        {
-            var finallyBugWorkaround: Boolean = false; // Workaround: finally block have a bug - it can be called twice. Why? How? F*ck!
-            try
-            {
-                if (!success)
-                    return;
-                var cfg = com.produxion.util.XML2Object.deserialize(xml);
-                var items = cfg["wotlauncher.cfg"]["patch_info_urls"]["item"];
-                if (!(items instanceof Array))
-                    items = [ items ];
-                for (var i = 0; i < items.length; ++i)
-                {
-                    var url:String = Strings.trim(items[i]["data"]).toLowerCase();
-                    //Logger.add("url: " + url);
-                    if (url.indexOf("http://update.wot.ru.wargaming.net") > -1 || url.indexOf("http://update.worldoftanks.ru") > -1)
-                        Config.s_game_region = "RU";
-                    else if (url.indexOf("http://update.worldoftanks.eu") > -1)
-                        Config.s_game_region = "EU";
-                    else if (url.indexOf("http://update.worldoftanks.com") > -1)
-                        Config.s_game_region = "US";
-                    else if (url.indexOf("http://update-ct.wargaming.net") > -1)
-                        Config.s_game_region = "CT";
-                    else if (url.indexOf("http://update.worldoftanks.cn") > -1)
-                        Config.s_game_region = "CN";
-                    else if (url.indexOf("http://update.worldoftanks-sea.com") > -1)
-                        Config.s_game_region = "SEA";
-                    else if (url.indexOf("http://update.worldoftanks.vn") > -1)
-                        Config.s_game_region = "VTC";
-                }
-            }
-            finally
-            {
-                if (finallyBugWorkaround)
-                    return;
-                finallyBugWorkaround = true;
-                ConfigLoader._region_loaded = true;
-                ConfigLoader.instance.SetConfigLoaded();
-            }
-        };
-
-        xml.load("../../../../WOTLauncher.cfg");
+        Config.s_game_region = region;
+        SetConfigLoaded();
     }
 
     private function SetConfigLoaded()
     {
-        /** prevent firing config loaded event before Locale files are loaded */
-        if (Locale.isLoaded()){
-            GlobalEventDispatcher.removeEventListener(Locale.EVENT_LOADED);
-
-            if (_region_loaded) {
-                //Logger.add("Config: Loaded");
-                GlobalEventDispatcher.dispatchEvent(ConfigLoader.info_event);
-                Config.s_loaded = true;
-                ConfigLoader.s_loading = false;
-                GlobalEventDispatcher.dispatchEvent({type: Config.E_CONFIG_LOADED});
-            }
-        }
+        //Logger.add("Config: Loaded");
+        Config.s_loaded = true;
+        ConfigLoader.s_loading = false;
+        GlobalEventDispatcher.dispatchEvent({type: Config.E_CONFIG_LOADED});
     }
 }

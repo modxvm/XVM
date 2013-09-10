@@ -228,7 +228,7 @@ public class ConfigUtils
             {
                 if (config.battleLoading.showClock != null)
                 {
-                    config.battleLoading.clockFormat = config.battleLoading.showClock == true ? "H:N:S" : "";
+                    config.battleLoading.clockFormat = config.battleLoading.showClock == true ? "hh:mm:ss" : "";
                     delete config.battleLoading.showClock;
                 }
                 if (config.battleLoading.formatLeft != null)

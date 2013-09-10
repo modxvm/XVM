@@ -1,4 +1,3 @@
-import com.xvm.Locale;
 import flash.geom.Point;
 import wot.Minimap.MinimapProxy;
 import wot.Minimap.model.externalProxy.MapConfig;
@@ -36,7 +35,6 @@ class wot.Minimap.view.MapSizeLabel
 
     private function defineLabelText(format:String):String
     {
-        format = Locale.formatMacros(format);
         var formatArr:Array = format.split(CELLSIZE_MACRO);
         if (formatArr.length > 1)
         {
@@ -45,12 +43,12 @@ class wot.Minimap.view.MapSizeLabel
 
         return format;
     }
-
+    
     private function get bg():MovieClip
     {
         return MinimapProxy.wrapper.backgrnd;
     }
-
+    
     private function get cellSize():Number
     {
         return MapSizeModel.instance.getCellSide();

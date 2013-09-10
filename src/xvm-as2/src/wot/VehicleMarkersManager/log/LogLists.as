@@ -19,6 +19,14 @@ class wot.VehicleMarkersManager.log.LogLists
     public function LogLists(cfg:Object) 
     {
         this.cfg = cfg;
+
+        // Delayed initialization
+        var me = this;
+        _global.setTimeout(function() { me._initialize(); }, 1);
+    }
+
+    private function _initialize()
+    {
         if (cfg.visible)
         {
             hitLog = new HitLog(cfg);

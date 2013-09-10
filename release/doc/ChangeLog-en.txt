@@ -1,5 +1,6 @@
-﻿  * added icons top-150 clans of NA cluster
-  * removed option login/showPingOnGameLoading
+﻿  * removed option login/showPingOnGameLoading
+  * removed TWR rating
+  * added macros {{c:avglvl}}, {{a:avglvl}}
 
 XVM-4.1.1:
   [NEW FUNCTIONS]

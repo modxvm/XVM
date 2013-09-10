@@ -1,4 +1,4 @@
-import com.xvm.Comm;
+import com.xvm.Cmd;
 import com.xvm.Config;
 import com.xvm.Defines;
 import com.xvm.JSONx;
@@ -8,7 +8,7 @@ import com.xvm.Components.PingServers.PingServersView;
 class com.xvm.Components.PingServers.PingServers
 {
     public static var instance:PingServers = null;
-    
+
     private var view:PingServersView;
     private var pingCommandCounter:Number;
     private var pingTimer:Function;
@@ -35,11 +35,6 @@ class com.xvm.Components.PingServers.PingServers
         _global.setTimeout(function() { PingServers.instance.showPing.call(PingServers.instance) }, 5000);
     }
 
-    public static function sendPing()
-    {
-        Comm.Sync(Defines.COMMAND_PING, "0");
-    }
-
     public function PingServers()
     {
         pingCommandCounter = 0;
@@ -47,17 +42,16 @@ class com.xvm.Components.PingServers.PingServers
 
     private function showPing()
     {
-        Comm.Sync(Defines.COMMAND_PING, String(pingCommandCounter++), this, answerCallback);
+        Cmd.ping(this, answerCallback);
     }
-    
-    private function answerCallback(event):Void
+
+    private function answerCallback(answer):Void
     {
-        var answer:String = event.str;
         if (answer == null || answer == "")
             return;
         view.update(parseAnswer(answer));
     }
-    
+
     private function parseAnswer(answer:String):Array
     {
         var parsedAnswerObj:Object = JSONx.parse(answer);
@@ -68,7 +62,7 @@ class com.xvm.Components.PingServers.PingServers
             responceTimeList.push({ cluster: cluster, time: parsedAnswerObj[i] });
         }
         responceTimeList.sortOn(["cluster"]);
-        
+
         return responceTimeList;
     }
 }

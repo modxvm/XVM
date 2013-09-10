@@ -71,7 +71,7 @@ class com.xvm.Components.Widgets.WidgetsFactory
 
     private function SaveWidgetsSettings()
     {
-        Comm.SaveSettings(m_playerName + ":" + Defines.SETTINGS_WIDGETS, m_widgetsSettings);
+        // TODO Comm.SaveSettings(m_playerName + ":" + Defines.SETTINGS_WIDGETS, m_widgetsSettings);
     }
     
     private function updateWidgets()
@@ -117,17 +117,17 @@ return;
     
     private function updateData()
     {
-        Comm.SyncEncoded(Defines.COMMAND_DOSSIER,
-            String(m_commandCounter++) + ";" +
-            m_playerName + ";" +        // player name
-            1372938628 + ";" +        // end
-            (15 * 60) + ";" +         // interval(sec)
-            100 + ";" +               // count
-            "2;" +                    // 1 - per vehicle, 2 - summary
-            "battlesCount,wins;" +    // data fields
-            ";" +                     // company fields
-            "",                       // clan fields
-            this, answerCallback);
+        // TODO Comm.SyncEncoded(Defines.COMMAND_DOSSIER,
+        //    String(m_commandCounter++) + ";" +
+        //    m_playerName + ";" +        // player name
+        //    1372938628 + ";" +        // end
+        //    (15 * 60) + ";" +         // interval(sec)
+        //    100 + ";" +               // count
+        //    "2;" +                    // 1 - per vehicle, 2 - summary
+        //    "battlesCount,wins;" +    // data fields
+        //    ";" +                     // company fields
+        //    "",                       // clan fields
+        //    this, answerCallback);
     }
     
     private function answerCallback(event):Void

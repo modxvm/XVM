@@ -5,7 +5,7 @@
 class com.xvm.Defines
 {
     // Global versions
-    public static var XVM_VERSION:String = "4.1.1-dev";
+    public static var XVM_VERSION:String = "4.1.1-xpm";
     public static var XVM_INTRO:String = "www.modxvm.com";
     public static var WOT_VERSION:String = "0.8.7";
     public static var CONFIG_VERSION:String = "4.0.0";
@@ -16,9 +16,6 @@ class com.xvm.Defines
 
     // res_mods/xvm/
     public static var XVM_ROOT:String = "../../../xvm/";
-
-    // Path to Dokan MountPoint
-    public static var DOKAN_MP:String = XVM_ROOT + ".xvmfs/";
 
     // res_mods/xvm/res/
     public static var XVMRES_ROOT:String = XVM_ROOT + "res/";
@@ -33,24 +30,6 @@ class com.xvm.Defines
     public static var CONFIG_FILE_NAME:String = "xvm.xc";
     // res_mods/x.x.x/gui/flash/XVM.xvmconf
     public static var CONFIG_FILE_NAME_XVMCONF:String = "XVM.xvmconf";
-
-    // MAX_PATH is 259 on NTFS
-    public static var MAX_PATH:Number = 100;
-
-    // WebDav commands
-    public static var COMMAND_LOG:String = DOKAN_MP + "@LOG";
-    public static var COMMAND_SET:String = DOKAN_MP + "@SET";
-    public static var COMMAND_ADD:String = DOKAN_MP + "@ADD";
-    public static var COMMAND_VAR:String = DOKAN_MP + "@VAR";
-    public static var COMMAND_LOGSTAT:String = DOKAN_MP + "@LOGSTAT";
-    public static var COMMAND_GET_ASYNC:String = DOKAN_MP + "@GET_ASYNC";
-    public static var COMMAND_GET_PLAYERS:String = DOKAN_MP + "@GET_PLAYERS";
-    public static var COMMAND_GET_VERSION:String = DOKAN_MP + "@GET_VERSION";
-    public static var COMMAND_INFO_ASYNC:String = DOKAN_MP + "@INFO_ASYNC";
-    public static var COMMAND_PING:String = DOKAN_MP + "@PING";
-    public static var COMMAND_DOSSIER:String = DOKAN_MP + "@DOSSIER";
-    public static var COMMAND_SAVE_SETTINGS:String = DOKAN_MP + "@SAVE_SETTINGS";
-    public static var COMMAND_LOAD_SETTINGS:String = DOKAN_MP + "@LOAD_SETTINGS";
 
     // Settings keys
     public static var SETTINGS_WIDGETS:String = "widgets";
@@ -89,7 +68,6 @@ class com.xvm.Defines
     public static var DYNAMIC_COLOR_TFB:Number = 9;
     public static var DYNAMIC_COLOR_TSB:Number = 10;
     public static var DYNAMIC_COLOR_E:Number = 11;
-    public static var DYNAMIC_COLOR_TWR:Number = 12;
     public static var DYNAMIC_COLOR_WN:Number = 13;
     public static var DYNAMIC_COLOR_X:Number = 14;
 
@@ -105,7 +83,6 @@ class com.xvm.Defines
     public static var DYNAMIC_ALPHA_TFB:Number = 9;
     public static var DYNAMIC_ALPHA_TSB:Number = 10;
     public static var DYNAMIC_ALPHA_E:Number = 11;
-    public static var DYNAMIC_ALPHA_TWR:Number = 12;
     public static var DYNAMIC_ALPHA_WN:Number = 13;
     public static var DYNAMIC_ALPHA_X:Number = 14;
 

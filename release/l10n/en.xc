@@ -4,7 +4,7 @@
 {
   "locale": {
     // Author of translation
-    "XVM_translator": "Maxim Schedriviy",
+    "XVM_translator": "XVM Team",
 
     // Win chance
     "Chance error": "Chance error",

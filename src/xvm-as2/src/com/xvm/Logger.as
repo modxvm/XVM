@@ -1,6 +1,5 @@
-﻿import com.xvm.Comm;
+﻿import com.xvm.Cmd;
 import com.xvm.JSONx;
-import com.xvm.Defines;
 import com.xvm.Sandbox;
 import com.xvm.Strings;
 
@@ -12,7 +11,7 @@ class com.xvm.Logger
     {
         try
         {
-            Comm.SyncEncoded(Defines.COMMAND_LOG, "[" + Sandbox.GetCurrentSandboxPrefix() + ":" + Strings.padLeft(String(counter++), 3, '0') + "] " + str);
+            Cmd.log("[" + Sandbox.GetCurrentSandboxPrefix() + ":" + Strings.padLeft(String(counter++), 3, '0') + "] " + str);
         }
         catch (e)
         {

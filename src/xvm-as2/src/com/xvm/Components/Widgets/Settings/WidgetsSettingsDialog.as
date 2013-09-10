@@ -94,7 +94,7 @@ class com.xvm.Components.Widgets.Settings.WidgetsSettingsDialog
         
         WidgetsFactory.update([]);
         _widgetsChanged = false;
-        Comm.LoadSettings(playerName + ":" + Defines.SETTINGS_WIDGETSSETTINGSDIALOG, this, onSettingsLoaded);
+        // TODO Comm.LoadSettings(playerName + ":" + Defines.SETTINGS_WIDGETSSETTINGSDIALOG, this, onSettingsLoaded);
     }
     
     public function onSettingsLoaded(event:Object)
@@ -190,8 +190,8 @@ class com.xvm.Components.Widgets.Settings.WidgetsSettingsDialog
     
     private function onClose()
     {
-        if (dialogSettings.x != wnd._x || dialogSettings.y != wnd._y)
-            Comm.SaveSettings(playerName + ":" + Defines.SETTINGS_WIDGETSSETTINGSDIALOG, { x: wnd._x, y: wnd._y } );
+        // TODO if (dialogSettings.x != wnd._x || dialogSettings.y != wnd._y)
+        // TODO     Comm.SaveSettings(playerName + ":" + Defines.SETTINGS_WIDGETSSETTINGSDIALOG, { x: wnd._x, y: wnd._y } );
 
         wnd.removeMovieClip();
         wnd = null;
@@ -227,7 +227,7 @@ class com.xvm.Components.Widgets.Settings.WidgetsSettingsDialog
         {
             savedWidgetsSettings = (Array)(JSONx.parse(JSONx.stringify(widgetsSettings)));
             widgetsChanged = false;
-            Comm.SaveSettings(playerName + ":" + Defines.SETTINGS_WIDGETS, widgetsSettings);
+            // TODO Comm.SaveSettings(playerName + ":" + Defines.SETTINGS_WIDGETS, widgetsSettings);
         }
 
         if (close)

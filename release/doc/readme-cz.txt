@@ -218,7 +218,6 @@
       {{eff}}         - efektivita hráče: http://wot-news.com/index.php/stat/calc/en/
       {{eff:4}}       - efektivita hráče, zaokrouhlená na 4 místa zleva
       {{teff}}, {{e}} - efektivita hráče, dle vozidel: http://www.koreanrandom.com/forum/topic/1643-
-      {{twr}}         - TWR (T-Calc): http://www.koreanrandom.com/forum/topic/2389-
       {{wn}}          - WN6 hodnocení: http://www.koreanrandom.com/forum/topic/2575-
       {{xeff}}        - XVM rozsah pro efektivitu (hodnoty 00-99, XX pro nejlepší)
       {{xwn}}         - XVM rozsah pro WN6 (hodnoty 00-99, XX pro nejlepší)
@@ -245,7 +244,6 @@
       {{c:tdb}}, {{c:tdv}}, {{c:tfb}}, {{c:tsb}} - dynamické barvy pro makra
       {{c:eff}}       - barva závislá na efektivitě hráče
       {{c:e}}         - barva závislá na efektivitě hráče, dle vozidel
-      {{c:twr}}       - barva závislá na TWR (T-Calc)
       {{c:wn}}        - barva závislá na WN6 hodnocení
       {{c:xeff}}      - barva závislá na XVM rozsah pro efektivitu
       {{c:xwn}}       - barva závislá na XVM rozsah pro WN6
@@ -323,11 +321,10 @@
     Záporné hodnoty x, y umístí text k pravé dolní hranici
 
   Hodiny v bitvě a při načítání bitvy.
-    Formát: Y:rok, M:měsích, D:den, H:hodina, N:minuta, S:sekunda. "" - odstraní hodiny.
+    Formát: PHP Date: http://php.net/date
     Příklady:
-      "clockFormat": "H:N"          => 01:23
-      "clockFormat": "Y.M.D H:N:S"  => 2013.05.20 01:23:45
-    Je možné použít HTML pro hodiny v bitvě.
+      "clockFormat": "H:i"          => 01:23
+      "clockFormat": "Y.m.d H:i:s"  => 2013.05.20 01:23:45
 
   Rozsahy pro efektivitu {{teff}}, {{e}}.
     TEFF       E

@@ -88,16 +88,6 @@
       { "value": 64,  "alpha": ${"alphaRating.very_good"} },
       { "value": 101, "alpha": ${"alphaRating.unique"   } }
     ],
-    // Dynamic transparency by TWR (T-Calc) (only with xvm-stat).
-    // Динамическая прозрачность по TWR (T-Calc) (только с xvm-stat).
-    "twr": [
-      { "value": 47,  "alpha": ${"alphaRating.very_bad" } },
-      { "value": 49,  "alpha": ${"alphaRating.bad"      } },
-      { "value": 52,  "alpha": ${"alphaRating.normal"   } },
-      { "value": 57,  "alpha": ${"alphaRating.good"     } },
-      { "value": 62,  "alpha": ${"alphaRating.very_good"} },
-      { "value": 101, "alpha": ${"alphaRating.unique"   } }
-    ],
     // Dynamic transparency by kilo-battles (only with xvm-stat).
     // Динамическая прозрачность по количеству кило-боев (только с xvm-stat).
     "kb": [

@@ -77,8 +77,6 @@ class com.xvm.Helpers.TeamRendererHelper
             "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, stat.b / 1000) + "'>" + stat.b + "</font>") + " ";
         s += Locale.get("Wins") + ": " + (!stat.r ? "-" :
             "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, stat.r) + "'>" + stat.r + "%</font>") + " ";
-        s += "TWR: " + (!stat.twr ? "-" :
-            "<font color='" + GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TWR, stat.twr) + "'>" + stat.twr + "%</font>");
         s += "<br>";
         // line 4
         s += Locale.get("Data was updated at") + ": <font color='#CCCCCC'>" + dt + "</font>";

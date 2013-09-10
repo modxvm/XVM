@@ -79,7 +79,7 @@ package utils
             format = format.split("{{c:system}}").join("#FBFBFB");
 
             // Transparency
-            format = format.split("{{a:hp}}").join(alphaHpRatio);
+            format = format.split("{{a:hp}}").join(alphaHp);
             format = format.split("{{a:hp-ratio}}").join(alphaHpRatio);
 
             // Statistics
@@ -90,7 +90,6 @@ package utils
             format = format.split("{{wn}}").join("1600");
             format = format.split("{{e}}").join("5");
             format = format.split("{{rating}}").join("66%");
-            format = format.split("{{twr}}").join("61%");
             format = format.split("{{teff}}").join("1024");
             format = format.split("{{tdb}}").join("1010");
             format = format.split("{{tdb:4}}").join("1010");
@@ -102,7 +101,7 @@ package utils
             format = format.split("{{wins}}").join("7260");
             format = format.split("{{rating:3}}").join("66%");
             format = format.split("{{eff:4}}").join("1800");
-            format = format.split("{{kb:3}}").join(" 11k");
+            format = format.split("{{kb:3}}").join("11k");
             format = format.split("{{t-rating}}").join("55%");
             format = format.split("{{t-kb}}").join(".5k");
             format = format.split("{{t-kb-0}}").join("0.5k");
@@ -117,7 +116,6 @@ package utils
             format = format.split("{{c:xwn}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_X, 77));
             format = format.split("{{c:eff}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_EFF, 1800));
             format = format.split("{{c:wn}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_WN, 1600));
-            format = format.split("{{c:twr}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_TWR, 61));
             format = format.split("{{c:rating}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_RATING, 66));
             format = format.split("{{c:kb}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_KB, 11));
             format = format.split("{{c:e}}").join(GraphicsUtil.GetDynamicColorValue(Defines.DYNAMIC_COLOR_E, 5));
@@ -242,7 +240,6 @@ package utils
             stats: [
                 { value: "{{avglvl}}", label: "avglvl", icon: Embed.avglvl },
                 { value: "{{rating}}", label: "rating", icon: Embed.rating },
-                { value: "{{twr}}", label: "twr", icon: Embed.twr },
                 { value: "{{xeff}}", label: "xeff", icon: Embed.xeff },
                 { value: "{{xwn}}", label: "xwn", icon: Embed.xwn },
                 { value: "{{eff}}", label: "eff", icon: Embed.eff },
@@ -277,7 +274,6 @@ package utils
                 { value: "{{c:wn}}", label: "c_wn", icon: Embed.c_wn },
                 { value: "{{c:e}}", label: "c_e", icon: Embed.c_e },
                 { value: "{{c:rating}}", label: "c_rating", icon: Embed.c_rating },
-                { value: "{{c:twr}}", label: "c_twr", icon: Embed.c_twr },
                 { value: "{{c:t-rating}}", label: "c_t_rating", icon: Embed.c_t_rating },
                 { value: "{{c:t-battles}}", label: "c_t_battles", icon: Embed.c_t_battles },
                 { value: "{{c:tdb}}", label: "c_tdb", icon: Embed.c_tdb },

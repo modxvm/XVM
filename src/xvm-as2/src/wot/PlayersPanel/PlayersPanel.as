@@ -31,7 +31,7 @@ class wot.PlayersPanel.PlayersPanel
         wrapper.xvm_worker = this;
         PlayersPanelCtor();
     }
-    
+
     function setData()
     {
         return this.setDataImpl.apply(this, arguments);
@@ -86,14 +86,14 @@ class wot.PlayersPanel.PlayersPanel
     {
         Utils.TraceXvmModule("PlayersPanel");
 
-        GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, StatLoader.instance, StatLoader.instance.LoadLastStat);
+        GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, StatLoader.LoadData);
         GlobalEventDispatcher.addEventListener(Config.E_CONFIG_LOADED, this, onConfigLoaded);
         GlobalEventDispatcher.addEventListener(StatData.E_STAT_LOADED, this, onStatLoaded);
-        
+
         GlobalEventDispatcher.addEventListener(AutoUpdate.UPDATE_BY_TIMER_EVENT, this, updateSpotStatusMarkers);
-        
+
         Config.LoadConfig();
-        
+
         /** Minimap needs to know loaded status */
         checkLoading();
     }
@@ -117,7 +117,7 @@ class wot.PlayersPanel.PlayersPanel
      * Refreshes Enemy spot status marker.
      * Invoked by AutoUpdate event each 300ms.
      */
-    private function updateSpotStatusMarkers():Void
+    public function updateSpotStatusMarkers():Void
     {
         if (!isEnemyPanel || !Config.s_config.playersPanel.enemySpottedMarker.enabled)
             return;
@@ -162,10 +162,12 @@ class wot.PlayersPanel.PlayersPanel
             return;
         var pos:Number = event.details.code == 48 ? 9 : event.details.code - 49;
         if (pos < m_data.length)
+        {
             Logger.add("selectPlayer: " + m_data[pos].vehId);
             gfx.io.GameDelegate.call("Battle.selectPlayer", [m_data[pos].vehId]);
+        }
     }
-    
+
     private function setData2(data, sel, postmortemIndex, isColorBlind, knownPlayersCount)
     {
         //Logger.add("PlayersPanel.setData2()");
@@ -314,9 +316,9 @@ class wot.PlayersPanel.PlayersPanel
             var deadState = Strings.endsWith("dead", colorScheme) ? Defines.DEADSTATE_DEAD : Defines.DEADSTATE_ALIVE;
             var state = wrapper.state;
             var field = state == "medium2" ? wrapper.m_vehicles : wrapper.m_names;
-            var pname = Utils.GetNormalizedPlayerName(data.label);
-            var key = "PP/" + deadState + "/" + pname + "/" + state + "/" + m_fieldType + "/" +
-                (StatData.s_data[pname] ? StatData.s_data[pname].loadstate : "0");
+            var nm = Utils.GetPlayerName(data.label);
+            var key = "PP/" + deadState + "/" + nm + "/" + state + "/" + m_fieldType + "/" +
+                (StatData.s_data[nm] ? StatData.s_data[nm].loadstate : "0");
             //Logger.add(key);
             text = Cache.Get(key, function()
             {

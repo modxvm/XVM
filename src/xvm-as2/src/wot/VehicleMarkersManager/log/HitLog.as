@@ -2,10 +2,13 @@
  * ...
  * @author Maxim Schedriviy
  */
+import com.xvm.Cmd;
 import com.xvm.Config;
 import com.xvm.Defines;
 import com.xvm.GraphicsUtil;
+import com.xvm.JSONx;
 import com.xvm.Locale;
+import com.xvm.Logger;
 import com.xvm.Strings;
 import com.xvm.Utils;
 import com.xvm.VehicleInfo;
@@ -152,9 +155,15 @@ class wot.VehicleMarkersManager.log.HitLog
     private function createControl()
     {
         //Logger.add("HitLog::createControl()");
-        var x = this.x >= 0 ? this.x : Config.s_vars.window_size[0] + this.x;
-        var y = this.y >= 0 ? this.y : Config.s_vars.window_size[1] + this.y;
-        //Logger.addObject(Config.s_vars);
+        Cmd.getScreenSize(this, createControl2);
+    }
+
+    private function createControl2(size)
+    {
+        //Logger.add("HitLog::createControl2()");
+        var sz = JSONx.parse(size);
+        var x = this.x >= 0 ? this.x : sz[0] + this.x;
+        var y = this.y >= 0 ? this.y : sz[1] + this.y;
 
         textField = _root.createTextField("xvmHitLog", _root.getNextHighestDepth(), x, y, w, h);
         //textField.border = true;

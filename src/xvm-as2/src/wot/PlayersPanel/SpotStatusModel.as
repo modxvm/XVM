@@ -41,13 +41,6 @@ class wot.PlayersPanel.SpotStatusModel
     }
 
     // -- Private
-	
-	private function onRevealed(mmevent:MinimapEvent)
-    {
-        /** Save a guy to revealed enemies list */
-        var uid:Number = Number(mmevent.payload);
-        seen.push(uid);
-    }
 
     private function isRevealedRightNow(subjUid):Boolean
     {
@@ -58,6 +51,13 @@ class wot.PlayersPanel.SpotStatusModel
                 return true;
         }
         return false;
+    }
+
+    private function onRevealed(mmevent:MinimapEvent)
+    {
+        /** Save a guy to revealed enemies list */
+        var uid:Number = Number(mmevent.payload);
+        seen.push(uid);
     }
 
     private function wasSeen(uid:Number):Boolean

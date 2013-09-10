@@ -42,7 +42,7 @@ class com.xvm.Helpers.UserDataLoaderHelper
         var item = queue.shift();
         //com.xvm.Logger.add("process queue: " + item.value);
         GlobalEventDispatcher.addEventListener(StatData.E_USERDATA_LOADED,  onUserDataLoaded);
-        StatLoader.instance.LoadUserData(item.value, item.isId);
+        StatLoader.LoadUserData(item.value, item.isId);
     }
 
     private static function onUserDataLoaded(event)

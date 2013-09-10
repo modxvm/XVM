@@ -745,8 +745,6 @@ private function RefreshColorsPage2():void
             p_colors_wn.RefreshSource();
         else if (accColors2.selectedChild == nc_colors_rating && p_colors_rating != null)
             p_colors_rating.RefreshSource();
-        else if (accColors2.selectedChild == nc_colors_twr && p_colors_twr != null)
-            p_colors_twr.RefreshSource();
         else if (accColors2.selectedChild == nc_colors_kb && p_colors_kb != null)
             p_colors_kb.RefreshSource();
         else if (accColors2.selectedChild == nc_colors_tbattles && p_colors_tbattles != null)
@@ -785,8 +783,6 @@ private function RefreshTransparencyPage():void
             p_alpha_wn.RefreshSource();
         else if (accTransparency.selectedChild == nc_alpha_rating && p_alpha_rating != null)
             p_alpha_rating.RefreshSource();
-        else if (accTransparency.selectedChild == nc_alpha_twr && p_alpha_twr != null)
-            p_alpha_twr.RefreshSource();
         else if (accTransparency.selectedChild == nc_alpha_kb && p_alpha_kb != null)
             p_alpha_kb.RefreshSource();
         else if (accTransparency.selectedChild == nc_alpha_tbattles && p_alpha_tbattles != null)

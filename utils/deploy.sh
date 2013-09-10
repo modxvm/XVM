@@ -1,37 +1,53 @@
 #!/bin/sh
 
-[ "$GAME_VER" = "" ] && GAME_VER="0.8.7"
-#[ "$GAME_VER" = "" ] && GAME_VER="0.8.8 Common Test"
-[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/work/games/WoT
+# TODO - refactor
 
-FILES="
-  xvm.swf
+#[ "$GAME_VER" = "" ] && GAME_VER="0.8.7"
+[ "$GAME_VER" = "" ] && GAME_VER="0.8.8 Common Test"
+[ "$WOT_DIRECTORY" = "" ] && WOT_DIRECTORY=/cygdrive/d/work/games/WoT-CT
+
+FILES_FLASH="
+  Application.swf
+"
+
+FILES_SCALEFORM="
   battle.swf
   battleloading.swf
-  crew.swf
+  LangBarPanel.swf
   Minimap.swf
   PlayersPanel.swf
+  StatisticForm.swf
   TeamBasesPanel.swf
   VehicleMarkersManager.swf
-  XVM.xvmconf"
+  xvm.swf"
 
-XVM_FILES="xvm.xc res/VehicleInfo.json"
-XVM_DIRS="configs l10n"
+XVM_FILES="xvm.xc xvm.swf res/VehicleInfo.json"
+XVM_DIRS="configs l10n mods"
 
 cd $(dirname $(realpath $(cygpath --unix $0)))
 
 RES_MODS_DIR="$WOT_DIRECTORY/res_mods"
-SWF_DIR="$RES_MODS_DIR/$GAME_VER/gui/scaleform"
+SWF_DIR="$RES_MODS_DIR/$GAME_VER/gui"
 
-mkdir -p "$SWF_DIR"
-mkdir -p "$RES_MODS_DIR/xvm"
+mkdir -p "$RES_MODS_DIR/xvm/res"
 
-copy_file()
+copy_file_flash()
 {
-  [ -f "$SWF_DIR/$1" ] && rm -f "$SWF_DIR/$1"
+  [ -f "$SWF_DIR/flash/$1" ] && rm -f "$SWF_DIR/flash/$1"
+  [ -f "../src/xvm/swf/$1" ] && {
+    echo "=> $1"
+    mkdir -p "$SWF_DIR/flash"
+    cp -p "../src/xvm/swf/$1" "$SWF_DIR/flash/${1##*/}"
+  }
+}
+
+copy_file_scaleform()
+{
+  [ -f "$SWF_DIR/scaleform/$1" ] && rm -f "$SWF_DIR/scaleform/$1"
   [ -f "../bin/$1" ] && {
     echo "=> $1"
-    cp -p "../bin/$1" "$SWF_DIR/${1##*/}"
+    mkdir -p "$SWF_DIR/scaleform"
+    cp -p "../bin/$1" "$SWF_DIR/scaleform/${1##*/}"
   }
 }
 
@@ -53,8 +69,12 @@ copy_xvm_dir()
   }
 }
 
-for n in $FILES; do
-  copy_file $n
+for n in $FILES_FLASH; do
+  copy_file_flash $n
+done
+
+for n in $FILES_SCALEFORM; do
+  copy_file_scaleform $n
 done
 
 for n in $XVM_FILES; do
